@@ -18,12 +18,24 @@ property    = [ "!" ] , property-name ;
 `,` is disjunction, `+` is conjunction. `Instant.YouCtrl,Sorcery.YouCtrl` means _(instant you control) or (sorcery you
 control)_ — the property list does **not** distribute across alternatives.
 
+## Which keys hold one
+
+Seventy param keys start with `Valid`, and the prefix does not say what the value is. Fourteen of them hold something
+else entirely — `ValidZone$ Hand`, `ValidCounterType$ ENERGY`, `ValidKeyword$ Landwalk:Swamp`, `ValidResult$ EQ6` — and
+the `...Desc`, `...Des` and `...Message` suffixes mark prose. `Affected$` is the one valid-typed key without the prefix.
+
+So the rule is a prefix minus a named exception list
+([`internal/carddb/vocab`](../../../crucible/internal/carddb/vocab)), not a list of the keys that do hold one: upstream
+adds `Valid` keys, and a missing entry on the exception list shows up as a zone name in the base vocabulary rather than
+as silence.
+
+`ValidTgtsDes$` and `ValidTgtsDesc$` both appear. Nothing parses either, which is why the typo survived.
+
 ## Measurements
 
-44,051 valid strings extracted from `ValidTgts$`, `ValidCard$`, `Valid$`, `ValidSource$`, `ValidTarget$`, `Affected$`,
-`ValidPlayer$`, `ValidActivator$`.
+56,224 valid strings across every valid-typed key and the `Count$Valid` family.
 
-**Alternation is shallow:**
+**Alternation is shallow**, over the 44,051 strings in the eight most common valid-typed keys:
 
 | Alternatives | Occurrences | Share |
 | -----------: | ----------: | ----: |
@@ -34,13 +46,13 @@ control)_ — the property list does **not** distribute across alternatives.
 |            5 |           8 |       |
 |            6 |           1 |       |
 
-**226 distinct base tokens.** Most common: `Card`, `Creature`, `You`, `Player`, `Permanent`, `Artifact`, `Land`,
+**252 distinct base tokens.** Most common: `Card`, `Creature`, `You`, `Player`, `Permanent`, `Artifact`, `Land`,
 `Opponent`, `Any`, `Sorcery`, `Instant`, `Planeswalker`, `Enchantment`, `Spell`, `Emblem`.
 
 A base is a card type, a supertype, a specific card name, or a player selector. Card names appear verbatim, which means
 **a base token can contain spaces and punctuation** and cannot be lexed as an identifier.
 
-**923 distinct property tokens.** Most common: `Self`, `YouCtrl`, `Other`, `EnchantedBy`, `YouOwn`, `OppCtrl`,
+**1,257 distinct property tokens.** Most common: `Self`, `YouCtrl`, `Other`, `EnchantedBy`, `YouOwn`, `OppCtrl`,
 `IsRemembered`, `EquippedBy`, `nonLand`, `attacking`, `nonCreature`, `!token`, `AttachedBy`, `YouDontCtrl`,
 `inZoneBattlefield`.
 
@@ -58,7 +70,7 @@ operator would produce different results for properties where Java defines only 
 
 ## Property families
 
-The 923 properties group into recognisable families, which is how the Go port subdivides an otherwise flat 2,135-line
+The properties group into recognisable families, which is how the Go port subdivides an otherwise flat 2,135-line
 switch:
 
 | Family                | Examples                                                          |

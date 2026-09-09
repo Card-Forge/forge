@@ -8,30 +8,41 @@ Numeric expressions. Wherever an ability needs a number that is not a literal �
 ## Grammar
 
 ```ebnf
-count-expr  = "Count$" , head , { "/" , operator , [ "." , operand ] } ;
+count-expr  = "Count$" , [ " " ] , head , { "/" , operator , [ "." , operand ] } ;
 head        = simple-head
-            | "Valid" , " " , valid-string ;    (* NOTE the space, and the embedded grammar *)
+            | valid-head , " " , valid-string     (* NOTE the space, and the embedded grammar *)
+            | name , " " , argument ;
 simple-head = name , { "." , parameter } ;
-operator    = "Plus" | "Minus" | "Times" | "Twice" | "Thrice"
-            | "HalfUp" | "HalfDown" | "LimitMax" | "LimitMin"
-            | "NMinus" | "Abs" | "DivideEvenlyDown" ;
+valid-head  = "Valid" | "ValidHand" | "ValidGraveyard" | "ValidLibrary" | "ValidExile" | ... ;
+operator    = "Plus" | "Minus" | "Times" | "Twice" | "Thrice" | "HalfUp" | "HalfDown"
+            | "LimitMax" | "LimitMin" | "NMinus" | "Abs" | "ThirdUp" | "Mod" | "Negative"
+            | "Pow" | "DivideEvenlyDown" | "DivideEvenlyUp" ;
 operand     = integer | svar-name ;
 ```
 
+**268 distinct heads**, and the same arithmetic applies to the amount expressions of [02](02-param-map-grammar.md) —
+`Remembered$CardPower/Minus.1` is the same grammar with a different head.
+
 ## The finding that matters most
 
-**A count expression can embed a whole valid string, separated by a space.**
+**A head can take a space-separated argument, and for the whole `Valid` family that argument is a valid string.** 172
+heads in the corpus take one.
 
 ```text
 Count$Valid Creature.YouCtrl+powerGE1/LimitMax.1
-Count$Valid Creature.OppCtrl+powerGE2/LimitMax.1
 Count$Valid Creature.IsRemembered/Times.2
+Count$ValidGraveyard Creature.YouOwn/Twice
+Count$ValidHand Card
+Count$Compare Y GE1
 ```
 
 So a count expression **is not a token and cannot be lexed as one.** A tokenizer that splits on whitespace, or that
-treats the value after `Count$` as opaque up to the next delimiter, breaks on every one of these. The parser must
-recognise the `Valid` head, consume the space after it, and hand the remainder to the valid-string parser
-([03](03-valid-string-grammar.md)) before looking for `/` operators.
+treats the value after `Count$` as opaque up to the next delimiter, breaks on every one of these. The parser must cut
+the head at the first space, hand the remainder to the valid-string parser ([03](03-valid-string-grammar.md)) when the
+head starts with `Valid`, and only then look for `/` operators. `Compare` shows why the rule is about the space rather
+than about `Valid`: its argument is a comparison, not a valid string.
+
+Thirty values write a space **before** the head — `Count$ 2`, `Count$ X` — so the head is what follows it.
 
 This is also why `Count$` values cannot be validated by regex during the vocabulary scan — they need the real parser.
 
@@ -39,29 +50,32 @@ This is also why `Count$` values cannot be validated by regex during the vocabul
 
 Operators are suffixes introduced by `/`, optionally taking an operand after `.`:
 
-```console
-$ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
-    | grep -oE '(Count|SVar)\$[A-Za-z0-9_.]+/[A-Za-z]+' \
-    | sed 's|.*/||' | sort | uniq -c | sort -rn | head -3
-    191 Plus
-    117 Twice
-     76 Times
+```bash
+cd crucible && go run ./tools/vocabscan -kind countOperator
 ```
 
-| Operator           | Uses | Meaning          |
-| ------------------ | ---: | ---------------- |
-| `Plus`             |  191 | Add operand      |
-| `Twice`            |  117 | ×2, no operand   |
-| `Times`            |   76 | × operand        |
-| `Minus`            |   52 | Subtract operand |
-| `LimitMax`         |   28 | Clamp above      |
-| `HalfDown`         |   17 | ÷2, round down   |
-| `HalfUp`           |   16 | ÷2, round up     |
-| `Thrice`           |    8 | ×3, no operand   |
-| `LimitMin`         |    8 | Clamp below      |
-| `NMinus`           |    6 | operand − value  |
-| `Abs`              |    6 | Absolute value   |
-| `DivideEvenlyDown` |    4 | Integer division |
+**Seventeen operators**, not the twelve a `grep` for `/[A-Za-z]+` finds: that pattern misses every operator on an amount
+expression whose head is not `Count`.
+
+| Operator           | Uses | Meaning              |
+| ------------------ | ---: | -------------------- |
+| `Plus`             |  329 | Add operand          |
+| `Times`            |  180 | Multiply by operand  |
+| `Twice`            |  169 | ×2, no operand       |
+| `Minus`            |  116 | Subtract operand     |
+| `LimitMax`         |   84 | Clamp above          |
+| `HalfUp`           |   59 | ÷2, round up         |
+| `HalfDown`         |   42 | ÷2, round down       |
+| `NMinus`           |   14 | Operand minus value  |
+| `LimitMin`         |   10 | Clamp below          |
+| `Thrice`           |    9 | ×3, no operand       |
+| `Abs`              |    6 | Absolute value       |
+| `DivideEvenlyDown` |    6 | Divide, round down   |
+| `ThirdUp`          |    5 | ÷3, round up         |
+| `Mod`              |    3 | Remainder            |
+| `DivideEvenlyUp`   |    1 | Divide, round up     |
+| `Negative`         |    1 | Sign flip            |
+| `Pow`              |    1 | Raise to the operand |
 
 `Twice`, `Thrice` and `Abs` take no operand; the rest do. `NMinus` reverses the operands relative to `Minus`, which is
 the one asymmetry worth a test of its own.

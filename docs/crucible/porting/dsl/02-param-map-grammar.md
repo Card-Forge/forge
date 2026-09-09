@@ -31,31 +31,32 @@ The first key selects the record type and, with it, how the rest of the map is i
 
 ## Vocabulary
 
-**1,210 distinct param keys** across the corpus:
+**1,197 distinct param keys** across the corpus, measured by the scanner that has to compile them:
 
 ```console
-$ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
-    | grep -E '^(A|T|S|R|SVar):' \
-    | grep -oE '(^|\| *)[A-Za-z0-9_]+\$' | grep -oE '[A-Za-z0-9_]+' \
-    | sort -u | wc -l
-1210
+$ cd crucible && go run ./tools/vocabscan
+paramKey  1197 distinct  440014 occurrences
 ```
+
+Three vocabularies sit next to it and are counted apart, because each closes at a different milestone: **192 APIs** (the
+value of `SP$`/`AB$`/`DB$`/`ST$`/`RE$`), **29 AI-hint keys** (`AI`-prefixed SVar bodies, M7), and the **87 SVar heads**
+below.
 
 Distribution is steep, and this is the number that sizes the generated param structs
 ([ADR-0007](../../adr/0007-card-dsl-representation.md)):
 
 |      Keys | Share of param occurrences |
 | --------: | -------------------------: |
-|    top 25 |                      66.5% |
-|    top 50 |                      80.4% |
-|   top 100 |                      90.6% |
-|   top 200 |                      96.3% |
-|   top 400 |                      98.9% |
+|    top 25 |                      70.5% |
+|    top 50 |                      83.0% |
+|   top 100 |                      92.1% |
+|   top 200 |                      97.0% |
+|   top 400 |                      99.2% |
 |   top 800 |                      99.9% |
-| all 1,210 |                       100% |
+| all 1,197 |                       100% |
 
 **The tail is not optional.** A key used by one card is still a key that card needs, and the corpus gate
-([ADR-0011](../../adr/0011-card-corpus-scoping.md)) is scoped by deck, not by frequency — so which of the 1,210 matter
+([ADR-0011](../../adr/0011-card-corpus-scoping.md)) is scoped by deck, not by frequency — so which of the 1,197 matter
 depends on the gauntlet, not on this curve.
 
 ## Value types
@@ -75,6 +76,23 @@ A param's value is one of a small set, decided per key by the generator's vocabu
 
 Free-text values are the reason the split is on the **first** `$` and the value is otherwise opaque: descriptions
 contain arbitrary punctuation.
+
+## SVar bodies are three different things
+
+An `SVar:` body is a param map only when a record key leads it. The parser has to branch before it splits:
+
+| Body                                                            | Form              | Example                                                                  |
+| --------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------ |
+| Leads with `DB$`, `AB$`, `Mode$`, `Event$`, `SP$`, `ST$`, `RE$` | Param map         | `SVar:TrigDraw:DB$ Draw \| NumCards$ 1`                                  |
+| Leads with any other `Head$`                                    | Amount expression | `SVar:X:Count$CardsInYourHand`, `SVar:Y:Enchanted$CardToughness/Minus.1` |
+| No `$` at all                                                   | Literal           | `SVar:X:5`                                                               |
+
+**87 distinct amount-expression heads.** `Count$` is the common one at 6,186 uses, and `Remembered$`, `TriggerCount$`,
+`Targeted$`, `Sacrificed$`, `Number$`, `SVar$` and eighty more take the same shape: a head, a property, and the
+`/Operator.operand` arithmetic of [04](04-count-expression-grammar.md).
+
+Treating those heads as param keys is the mistake this table exists to prevent — `Enchanted` is not a key any ability
+accepts.
 
 ## Compile-time resolution
 

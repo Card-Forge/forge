@@ -54,14 +54,15 @@ problem exists at all.
 
 ## Cost parts
 
-**637 distinct token shapes** after normalising `<...>` bodies:
+**88 distinct part shapes** after normalising `<...>` bodies:
 
 ```console
-$ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
-    | grep -oE 'Cost\$ [^|]+' | tr ' ' '\n' | sed 's/<[^>]*>/<>/' \
-    | sort -u | wc -l
-637
+$ cd crucible && go run ./tools/vocabscan -kind costPart | wc -l
+88
 ```
+
+A shell pipeline that splits on whitespace before normalising reports 637 instead, and the extra 549 are fragments of
+the bodies it tore in half — the same trap as above, in the tool used to measure it.
 
 | Part                           | Shape     | Meaning              |
 | ------------------------------ | --------- | -------------------- |

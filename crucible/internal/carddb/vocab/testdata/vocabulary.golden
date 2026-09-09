@@ -1,0 +1,4298 @@
+paramKey	AB
+paramKey	AIActivateLast
+paramKey	AIBidMax
+paramKey	AICheckSVar
+paramKey	AIExpectAmount
+paramKey	AILifeThreshold
+paramKey	AILogic
+paramKey	AIManaPref
+paramKey	AIMinTgts
+paramKey	AINoRecursiveCheck
+paramKey	AIPhyrexianPayment
+paramKey	AIRespondsToOwnAbility
+paramKey	AISVarCompare
+paramKey	AISearchGoal
+paramKey	AITgtOwnCards
+paramKey	AITgts
+paramKey	AITgtsStrict
+paramKey	AIXMax
+paramKey	APlayerHasMoreLifeThanEachOther
+paramKey	APlayerHasMostCardsInHand
+paramKey	Abilities
+paramKey	AbilityCount
+paramKey	Activate
+paramKey	Activation
+paramKey	ActivationAfterBlockers
+paramKey	ActivationFirstCombat
+paramKey	ActivationGameTypes
+paramKey	ActivationLimit
+paramKey	ActivationPhases
+paramKey	ActivationZone
+paramKey	Activator
+paramKey	ActivatorThisTurnCast
+paramKey	ActivatorThisTurnCastEach
+paramKey	ActivePhases
+paramKey	ActiveZones
+paramKey	Adamant
+paramKey	Adapt
+paramKey	AddAbilities
+paramKey	AddAbility
+paramKey	AddAllCreatureTypes
+paramKey	AddColor
+paramKey	AddColors
+paramKey	AddHiddenKeyword
+paramKey	AddKWs
+paramKey	AddKeyword
+paramKey	AddKeywords
+paramKey	AddNames
+paramKey	AddPower
+paramKey	AddReplacementEffect
+paramKey	AddSVar
+paramKey	AddSVars
+paramKey	AddStaticAbilities
+paramKey	AddStaticAbility
+paramKey	AddToughness
+paramKey	AddTrigger
+paramKey	AddTriggers
+paramKey	AddTriggersFrom
+paramKey	AddType
+paramKey	AddTypes
+paramKey	Additional
+paramKey	AdditionalActivationZone
+paramKey	AdditionalDesc
+paramKey	AdditionalDescription
+paramKey	AdditionalOptionalVote
+paramKey	AdditionalVillainousChoice
+paramKey	AdditionalVote
+paramKey	AddsCounters
+paramKey	AddsKeywords
+paramKey	AddsKeywordsUntil
+paramKey	AddsKeywordsValid
+paramKey	AddsNoCounter
+paramKey	AdjustLandPlays
+paramKey	Affected
+paramKey	AffectedDefined
+paramKey	AffectedZone
+paramKey	AfterPhase
+paramKey	AfterReplacement
+paramKey	Again
+paramKey	AiChoiceLogic
+paramKey	AllCards
+paramKey	AllCounterTypes
+paramKey	AllCounters
+paramKey	AllDefined
+paramKey	AllSuffixKeywords
+paramKey	AllValid
+paramKey	AllowRepeats
+paramKey	Alone
+paramKey	AlreadyRevealed
+paramKey	AltChoiceForEach
+paramKey	AlternateCost
+paramKey	AlternativeDecider
+paramKey	AlternativeMessage
+paramKey	AlwaysRemember
+paramKey	AlwaysReplace
+paramKey	Amount
+paramKey	AmountByChosenMap
+paramKey	AmountDesc
+paramKey	AmountFromVotes
+paramKey	Announce
+paramKey	AnnounceMax
+paramKey	AnnounceTitle
+paramKey	AnnounceType
+paramKey	AnyNumber
+paramKey	AnySupportedCard
+paramKey	AtEOT
+paramKey	AtEOTCondition
+paramKey	AtEOTDesc
+paramKey	AtEOTTrig
+paramKey	AtLeastOneInstance
+paramKey	AtRandom
+paramKey	AttachAfter
+paramKey	AttachedTo
+paramKey	AttachedToPlayer
+paramKey	AttackDifferentPlayers
+paramKey	Attacked
+paramKey	AttackedTarget
+paramKey	Attacker
+paramKey	Attacking
+paramKey	AttackingPlayer
+paramKey	Attributes
+paramKey	BasePower
+paramKey	BecomeStartingPlayer
+paramKey	BeforeFirstPostCombatMainEnd
+paramKey	BeginTurn
+paramKey	BidSubAbility
+paramKey	Blessing
+paramKey	BlockAllDefined
+paramKey	Blocking
+paramKey	Boast
+paramKey	Bolster
+paramKey	Boon
+paramKey	BoonAmount
+paramKey	Booster
+paramKey	BranchConditionSVar
+paramKey	BranchConditionSVarCompare
+paramKey	CalcKeywordN
+paramKey	CanBlockAmount
+paramKey	CanBlockAny
+paramKey	CanRepeatModes
+paramKey	CanTargetOtherCondition
+paramKey	CantChooseSubAbility
+paramKey	CantCopy
+paramKey	CantFizzle
+paramKey	CantHaveKeyword
+paramKey	CardChoices
+paramKey	CastFaceDown
+paramKey	Caster
+paramKey	CauseIsSource
+paramKey	ChangeColorWord
+paramKey	ChangeColorWordsTo
+paramKey	ChangeController
+paramKey	ChangeLater
+paramKey	ChangeNum
+paramKey	ChangeNumDesc
+paramKey	ChangeSingleTarget
+paramKey	ChangeType
+paramKey	ChangeTypeDesc
+paramKey	ChangeTypeWord
+paramKey	ChangeValid
+paramKey	ChangeValidDesc
+paramKey	ChangeZoneTable
+paramKey	CharacteristicDefining
+paramKey	CharmNum
+paramKey	CheckDefinedPlayer
+paramKey	CheckFourthSVar
+paramKey	CheckOnTriggeredCard
+paramKey	CheckSVar
+paramKey	CheckSecondSVar
+paramKey	CheckThirdSVar
+paramKey	ChoiceAmount
+paramKey	ChoiceDesc
+paramKey	ChoiceNum
+paramKey	ChoiceOptional
+paramKey	ChoicePrompt
+paramKey	ChoiceRestriction
+paramKey	ChoiceTitle
+paramKey	ChoiceTitleAppend
+paramKey	ChoiceZone
+paramKey	Choices
+paramKey	ChoicesDesc
+paramKey	ChooseAmount
+paramKey	ChooseAnyNumber
+paramKey	ChooseCounter
+paramKey	ChooseDifferent
+paramKey	ChooseEach
+paramKey	ChooseFromDefined
+paramKey	ChooseFromDefinedCards
+paramKey	ChooseFromList
+paramKey	ChooseNoted
+paramKey	ChooseNumberSubAbility
+paramKey	ChooseOnlyOne
+paramKey	ChooseOrder
+paramKey	ChooseSubAbility
+paramKey	ChooseType2
+paramKey	Chooser
+paramKey	ChosenMap
+paramKey	ChosenMapIndex
+paramKey	ChosenPile
+paramKey	ChosenSVar
+paramKey	ChosenZone
+paramKey	Choser
+paramKey	ClassLevel
+paramKey	ClearChosenCard
+paramKey	ClearChosenColor
+paramKey	ClearChosenPlayer
+paramKey	ClearChosenType
+paramKey	ClearCoinFlips
+paramKey	ClearImprinted
+paramKey	ClearNamedCard
+paramKey	ClearNotedCardsFor
+paramKey	ClearRemembered
+paramKey	ClearRememberedBeforeLoop
+paramKey	ClearTriggered
+paramKey	Clone
+paramKey	CloneTarget
+paramKey	CloneZone
+paramKey	Color
+paramKey	ColorOrType
+paramKey	Colors
+paramKey	ColorsFrom
+paramKey	Combat
+paramKey	CombatDamage
+paramKey	CombatMana
+paramKey	Condition
+paramKey	ConditionActivationLimit
+paramKey	ConditionCheckSVar
+paramKey	ConditionChosenColor
+paramKey	ConditionCompare
+paramKey	ConditionDefined
+paramKey	ConditionDescription
+paramKey	ConditionFirstCombat
+paramKey	ConditionGameTypes
+paramKey	ConditionLifeAmount
+paramKey	ConditionLifeTotal
+paramKey	ConditionManaNotSpent
+paramKey	ConditionManaSpent
+paramKey	ConditionNoDifferentColors
+paramKey	ConditionNotPresent
+paramKey	ConditionOpponentTurn
+paramKey	ConditionOptionalPaid
+paramKey	ConditionPhases
+paramKey	ConditionPlayerContains
+paramKey	ConditionPlayerDefined
+paramKey	ConditionPlayerTurn
+paramKey	ConditionPresent
+paramKey	ConditionPresent2
+paramKey	ConditionPresentCompare
+paramKey	ConditionSVarCompare
+paramKey	ConditionTargetValidTargeting
+paramKey	ConditionTargetsSingleTarget
+paramKey	ConditionWouldDestroy
+paramKey	ConditionYouCastThisTurn
+paramKey	ConditionZone
+paramKey	Conjure
+paramKey	ConniveNum
+paramKey	ControlAndNot
+paramKey	ControlOpponentsSearchingLibrary
+paramKey	ControlVote
+paramKey	ControlledByPlayer
+paramKey	Controller
+paramKey	ControllerUntaps
+paramKey	CopyCard
+paramKey	CopyForEachCanTarget
+paramKey	CopyFromChosenName
+paramKey	CopyTriggeringObjects
+paramKey	Cost
+paramKey	CostDesc
+paramKey	CounterAmount
+paramKey	CounterMapValues
+paramKey	CounterNum
+paramKey	CounterNum2
+paramKey	CounterNumPerDefined
+paramKey	CounterNumShared
+paramKey	CounterType
+paramKey	CounterType2
+paramKey	CounterTypePerDefined
+paramKey	CounterTypes
+paramKey	Cycling
+paramKey	DB
+paramKey	DamageAmount
+paramKey	DamageDesc
+paramKey	DamageMap
+paramKey	DamageSource
+paramKey	DamageTarget
+paramKey	DayTime
+paramKey	DeclaresAttackers
+paramKey	DeclaresBlockers
+paramKey	Defender
+paramKey	DefenderNotNearestToYouInChosenDirection
+paramKey	DefendingPlayerPoisoned
+paramKey	Defined
+paramKey	DefinedAssembler
+paramKey	DefinedAttacker
+paramKey	DefinedBlocker
+paramKey	DefinedCards
+paramKey	DefinedContraption
+paramKey	DefinedDamagers
+paramKey	DefinedDesc
+paramKey	DefinedExiler
+paramKey	DefinedKW
+paramKey	DefinedLandwalk
+paramKey	DefinedMagnet
+paramKey	DefinedName
+paramKey	DefinedPiles
+paramKey	DefinedPlayer
+paramKey	DefinedTarget
+paramKey	DelayedTriggerDefinedPlayer
+paramKey	Delirium
+paramKey	Description
+paramKey	DescriptionFromChosenName
+paramKey	DestAltSVar
+paramKey	DestAltSVarCompare
+paramKey	DestZone2Optional
+paramKey	Destination
+paramKey	DestinationAlternative
+paramKey	DestinationChoice
+paramKey	DestinationZone
+paramKey	DestinationZone2
+paramKey	Destroy
+paramKey	DestroyPermanent
+paramKey	DifferentCMC
+paramKey	DifferentNames
+paramKey	DifferentPower
+paramKey	DifferentResults
+paramKey	DigNum
+paramKey	DigZone
+paramKey	Discard
+paramKey	DiscardMessage
+paramKey	DiscardValid
+paramKey	DiscardValidDesc
+paramKey	DivideEvenly
+paramKey	DivideShield
+paramKey	DividedAsYouChoose
+paramKey	DividedRandomly
+paramKey	DividedUpTo
+paramKey	DividerOnResolution
+paramKey	DoesntHaveThisAbility
+paramKey	DontNotify
+paramKey	DontPlaneswalkAway
+paramKey	DraftNum
+paramKey	DrainMana
+paramKey	DrawLimit
+paramKey	Duration
+paramKey	ETB
+paramKey	Each
+paramKey	EachBasicType
+paramKey	EachDifferentPower
+paramKey	EachExistingCounter
+paramKey	EachFromSource
+paramKey	EachToItself
+paramKey	EachVote
+paramKey	EffectOnly
+paramKey	EffectOwner
+paramKey	EffectZone
+paramKey	Embalm
+paramKey	EnduringStory
+paramKey	EvenOddResults
+paramKey	Event
+paramKey	Exactly
+paramKey	ExcessDamage
+paramKey	ExcessDamageCondition
+paramKey	ExcessSVar
+paramKey	ExcessSVarCondition
+paramKey	Exclude
+paramKey	ExcludeChosen
+paramKey	ExcludeDestination
+paramKey	ExcludeZone
+paramKey	ExcludedDestinations
+paramKey	ExcludedOrigins
+paramKey	Execute
+paramKey	ExecuteMode
+paramKey	Exhaust
+paramKey	ExileFaceDown
+paramKey	ExileOnLost
+paramKey	ExileOnMoved
+paramKey	ExileWithCounters
+paramKey	ExiledWithEffectSource
+paramKey	Expression
+paramKey	ExtraPhase
+paramKey	ExtraPhaseDelayedTrigger
+paramKey	ExtraPhaseDelayedTriggerExcute
+paramKey	ExtraTurn
+paramKey	ExtraTurnDelayedTrigger
+paramKey	ExtraTurnDelayedTriggerExecute
+paramKey	FaceDown
+paramKey	FaceDownPower
+paramKey	FaceDownSetType
+paramKey	FaceDownToughness
+paramKey	FallbackAbility
+paramKey	FalseSubAbility
+paramKey	Filter
+paramKey	FirstAttack
+paramKey	FirstCardInDrawStep
+paramKey	FirstCombat
+paramKey	FirstExtraCardDrawnThisTurn
+paramKey	FirstForetell
+paramKey	FirstTime
+paramKey	FirstTimeCrewed
+paramKey	FirstTimeSaddled
+paramKey	FirstUpkeep
+paramKey	FirstUpkeepThisGame
+paramKey	Fizzle
+paramKey	FlipUntilYouLose
+paramKey	Flipper
+paramKey	FollowedBy
+paramKey	ForColor
+paramKey	ForCost
+paramKey	ForEachColorPair
+paramKey	ForEachPlayer
+paramKey	ForEachShard
+paramKey	ForReveal
+paramKey	ForbiddenNewTypes
+paramKey	ForceReveal
+paramKey	ForceRevealToController
+paramKey	Forecast
+paramKey	Foretold
+paramKey	ForetoldCost
+paramKey	ForgetChanged
+paramKey	ForgetChosen
+paramKey	ForgetCounter
+paramKey	ForgetDefined
+paramKey	ForgetImprinted
+paramKey	ForgetObjects
+paramKey	ForgetOnCast
+paramKey	ForgetOnMoved
+paramKey	ForgetOnPhasedIn
+paramKey	ForgetOtherRemembered
+paramKey	ForgetOtherTargets
+paramKey	ForgetPlayed
+paramKey	ForgetRemembered
+paramKey	FoundDestination
+paramKey	FoundLibraryPosition
+paramKey	FoundSearchingLibrary
+paramKey	FromBottom
+paramKey	FromDesc
+paramKey	FromDraftNotes
+paramKey	GainControl
+paramKey	GainTextAbilities
+paramKey	GainTextOf
+paramKey	GainThisAbility
+paramKey	Gains
+paramKey	GainsAbilitiesLimitPerTurn
+paramKey	GainsAbilitiesOf
+paramKey	GainsAbilitiesOfDefined
+paramKey	GainsAbilitiesOfZones
+paramKey	GainsTriggerAbsOf
+paramKey	GainsValidAbilities
+paramKey	GameActivationLimit
+paramKey	GameStage
+paramKey	GiftDescription
+paramKey	Goad
+paramKey	Guess
+paramKey	GuessCorrect
+paramKey	GuessWrong
+paramKey	Guesser
+paramKey	HasXManaCost
+paramKey	HeadsSubAbility
+paramKey	Hellbent
+paramKey	Hidden
+paramKey	HiddenKeywords
+paramKey	Highest
+paramKey	Host
+paramKey	IfDesc
+paramKey	IgnoreEffectCost
+paramKey	IgnoreFreeze
+paramKey	IgnoreGeneric
+paramKey	IgnoreLower
+paramKey	Image
+paramKey	Imprint
+paramKey	ImprintCards
+paramKey	ImprintChosen
+paramKey	ImprintFound
+paramKey	ImprintLast
+paramKey	ImprintMade
+paramKey	ImprintOnHost
+paramKey	ImprintPlayed
+paramKey	ImprintRememberedNoCleanup
+paramKey	ImprintRest
+paramKey	ImprintRevealed
+paramKey	ImprintSacrificed
+paramKey	ImprintTokens
+paramKey	IncludeAllComponentCards
+paramKey	IncludeSideboard
+paramKey	IncludeSpellsOnStack
+paramKey	Incorporate
+paramKey	InstantSpeed
+paramKey	IntoPlayTapped
+paramKey	InvalidTypes
+paramKey	InvertValidCause
+paramKey	InvertValidSource
+paramKey	IsCombat
+paramKey	IsCurse
+paramKey	IsDamage
+paramKey	IsPresent
+paramKey	IsPresent2
+paramKey	IsSingleTarget
+paramKey	KW
+paramKey	KWChoice
+paramKey	KeepName
+paramKey	KeepRemembered
+paramKey	KeepSecret
+paramKey	KeywordDefined
+paramKey	Keywords
+paramKey	Layer
+paramKey	LeaveBattlefield
+paramKey	LeftRightPile
+paramKey	LethalDamageByPower
+paramKey	LibraryPosition
+paramKey	LibraryPosition2
+paramKey	LibraryPositionAlternative
+paramKey	LifeAmount
+paramKey	LifeTotal
+paramKey	List
+paramKey	ListTitle
+paramKey	LockInText
+paramKey	LockTokenScript
+paramKey	Log
+paramKey	LogMessage
+paramKey	Look
+paramKey	LoseControl
+paramKey	LoseLifeMap
+paramKey	LoseSubAbility
+paramKey	Lowest
+paramKey	ManaAbility
+paramKey	ManaAmount
+paramKey	ManaConversion
+paramKey	ManaCost
+paramKey	ManaNotSpent
+paramKey	ManaRestriction
+paramKey	ManaSpent
+paramKey	ManaType
+paramKey	Mandatory
+paramKey	MatchedAbility
+paramKey	Max
+paramKey	MaxAttackers
+paramKey	MaxBlockers
+paramKey	MaxFromEffect
+paramKey	MaxNum
+paramKey	MaxRepeat
+paramKey	MaxRevealed
+paramKey	MaxRollsResults
+paramKey	MaxSpeed
+paramKey	MaxTotalTargetCMC
+paramKey	MaxTotalTargetPower
+paramKey	MayChooseTarget
+paramKey	MayLookAt
+paramKey	MayPlay
+paramKey	MayPlayAltManaCost
+paramKey	MayPlayDontGrantZonePermissions
+paramKey	MayPlayIgnoreColor
+paramKey	MayPlayIgnoreType
+paramKey	MayPlayLimit
+paramKey	MayPlayPlayer
+paramKey	MayPlaySnowIgnoreColor
+paramKey	MayPlayText
+paramKey	MayPlayWithFlash
+paramKey	MayPlayWithoutManaCost
+paramKey	MayShuffle
+paramKey	Metalcraft
+paramKey	Min
+paramKey	MinAmount
+paramKey	MinCharmNum
+paramKey	MinChoiceAmount
+paramKey	MinLimit
+paramKey	MinMana
+paramKey	MinTotalCMC
+paramKey	Mode
+paramKey	ModeCost
+paramKey	Modifier
+paramKey	Monarch
+paramKey	Monstrosity
+paramKey	MostPrevalentInDefinedZone
+paramKey	Move
+paramKey	Multiplier
+paramKey	MustAttack
+paramKey	Name
+paramKey	Names
+paramKey	Natural
+paramKey	NewController
+paramKey	NewCounterAmount
+paramKey	NewName
+paramKey	NewState
+paramKey	NewTime
+paramKey	NextTurn
+paramKey	NextTurnForEachPlayer
+paramKey	NoCall
+paramKey	NoColoredMana
+paramKey	NoLonger
+paramKey	NoLooking
+paramKey	NoMoveFound
+paramKey	NoMoveRevealed
+paramKey	NoPeek
+paramKey	NoPrevention
+paramKey	NoPutDesc
+paramKey	NoRedirection
+paramKey	NoRegen
+paramKey	NoRegenValid
+paramKey	NoRepetition
+paramKey	NoResolvingCheck
+paramKey	NoReveal
+paramKey	NoSchemes
+paramKey	NoShuffle
+paramKey	NonBasicSpell
+paramKey	NonLegendary
+paramKey	NonZero
+paramKey	NoneFoundDestination
+paramKey	NoneFoundLibraryPosition
+paramKey	NotFirstCardInDrawStep
+paramKey	NotFirstLand
+paramKey	NotLowest
+paramKey	NotPlayerTurn
+paramKey	NotThisAbility
+paramKey	Note
+paramKey	NoteCards
+paramKey	NoteCardsFor
+paramKey	NoteCounterDefined
+paramKey	NoteDoubles
+paramKey	NoteNumber
+paramKey	Notify
+paramKey	Num
+paramKey	NumAtt
+paramKey	NumCards
+paramKey	NumCardsDesc
+paramKey	NumCopies
+paramKey	NumDef
+paramKey	NumDmg
+paramKey	NumLimitEachTurn
+paramKey	NumPhases
+paramKey	NumRandomChoices
+paramKey	NumTurns
+paramKey	Number
+paramKey	Object
+paramKey	OneOff
+paramKey	OnlyFirst
+paramKey	OnlyFirstSpell
+paramKey	OnlyNewKind
+paramKey	OnlySorcerySpeed
+paramKey	OnlySourceAbs
+paramKey	OpponentTurn
+paramKey	OptionPrompt
+paramKey	OptionQuestion
+paramKey	Optional
+paramKey	OptionalAbilityPrompt
+paramKey	OptionalDecider
+paramKey	OptionalFoundMove
+paramKey	OptionalNoDestination
+paramKey	OptionalPrompt
+paramKey	OrColors
+paramKey	OrOtherConditionSVarCompare
+paramKey	OrString
+paramKey	OrderDuplicates
+paramKey	Origin
+paramKey	OriginAlternative
+paramKey	OtherBidder
+paramKey	OtherSVar
+paramKey	OtherwiseSubAbility
+paramKey	OverwriteColors
+paramKey	OverwriteSpells
+paramKey	Paid
+paramKey	Pawprint
+paramKey	PeekAmount
+paramKey	PeekNum
+paramKey	PersistentMana
+paramKey	Phase
+paramKey	PhaseCount
+paramKey	PhaseInOrOut
+paramKey	Phases
+paramKey	Piles
+paramKey	Placer
+paramKey	Planeswalker
+paramKey	PlayCost
+paramKey	PlayRaiseCost
+paramKey	PlayReduceCost
+paramKey	Player
+paramKey	PlayerChoices
+paramKey	PlayerTurn
+paramKey	Populate
+paramKey	Power
+paramKey	PowerUp
+paramKey	PreCostDesc
+paramKey	PrecostDesc
+paramKey	PresentCompare
+paramKey	PresentCompare2
+paramKey	PresentDefined
+paramKey	PresentPlayer
+paramKey	PresentPlayer2
+paramKey	PresentZone
+paramKey	PresentZone2
+paramKey	Prevent
+paramKey	PreventionEffect
+paramKey	PreventionSubAbility
+paramKey	Primary
+paramKey	PrimaryPrompt
+paramKey	Produced
+paramKey	PromptToSkipOptionalAbility
+paramKey	PumpDuration
+paramKey	PumpKeywords
+paramKey	PumpZone
+paramKey	PutOnDefined
+paramKey	PutOnEachOther
+paramKey	QuasiLibrarySearch
+paramKey	Radiance
+paramKey	RaiseCost
+paramKey	RaiseMaxHandSize
+paramKey	RaiseTo
+paramKey	Random
+paramKey	RandomChange
+paramKey	RandomChosen
+paramKey	RandomCompare
+paramKey	RandomCompareSVar
+paramKey	RandomCopied
+paramKey	RandomKWNum
+paramKey	RandomKeyword
+paramKey	RandomNum
+paramKey	RandomNumTargets
+paramKey	RandomOrder
+paramKey	RandomTarget
+paramKey	RandomTargetRestriction
+paramKey	RandomType
+paramKey	RearrangePlayer
+paramKey	Reassemble
+paramKey	Redistribute
+paramKey	ReduceAmount
+paramKey	ReduceColor
+paramKey	ReduceCost
+paramKey	ReflectProperty
+paramKey	Regeneration
+paramKey	RegenerationAbility
+paramKey	Relative
+paramKey	RelativeTarget
+paramKey	RelativeToSource
+paramKey	Remember
+paramKey	RememberAbandoned
+paramKey	RememberAffected
+paramKey	RememberAllObjects
+paramKey	RememberAltered
+paramKey	RememberAmass
+paramKey	RememberAmount
+paramKey	RememberAnimated
+paramKey	RememberAttached
+paramKey	RememberCards
+paramKey	RememberChanged
+paramKey	RememberChosen
+paramKey	RememberClasher
+paramKey	RememberCloaked
+paramKey	RememberCloneOrigin
+paramKey	RememberControlled
+paramKey	RememberCopies
+paramKey	RememberCostMana
+paramKey	RememberCountered
+paramKey	RememberCounteredCMC
+paramKey	RememberCounteredSA
+paramKey	RememberDamaged
+paramKey	RememberDestroyed
+paramKey	RememberDifference
+paramKey	RememberDiscarded
+paramKey	RememberDiscardingPlayers
+paramKey	RememberDiscovered
+paramKey	RememberDrafted
+paramKey	RememberDrainedMana
+paramKey	RememberDrawn
+paramKey	RememberEach
+paramKey	RememberExchanged
+paramKey	RememberForCounter
+paramKey	RememberFound
+paramKey	RememberGoaded
+paramKey	RememberHighest
+paramKey	RememberHighestPlayer
+paramKey	RememberInvestigatingPlayers
+paramKey	RememberKept
+paramKey	RememberLKI
+paramKey	RememberLoser
+paramKey	RememberMade
+paramKey	RememberManifested
+paramKey	RememberMilled
+paramKey	RememberMoved
+paramKey	RememberMovedToZone
+paramKey	RememberNewCard
+paramKey	RememberNumber
+paramKey	RememberObjects
+paramKey	RememberOriginalTokens
+paramKey	RememberOwnLoss
+paramKey	RememberPeeked
+paramKey	RememberPlayed
+paramKey	RememberPlayers
+paramKey	RememberPumped
+paramKey	RememberPut
+paramKey	RememberRandomChoice
+paramKey	RememberRedirectedExcess
+paramKey	RememberRemoved
+paramKey	RememberRemovedCards
+paramKey	RememberRemovedFromCombat
+paramKey	RememberResult
+paramKey	RememberRevealed
+paramKey	RememberRevealedPlayer
+paramKey	RememberSVarAmount
+paramKey	RememberSacrificed
+paramKey	RememberSearched
+paramKey	RememberSource
+paramKey	RememberSpell
+paramKey	RememberSplicedOntoCounteredSpell
+paramKey	RememberTapped
+paramKey	RememberTargets
+paramKey	RememberTokens
+paramKey	RememberUntapped
+paramKey	RememberValids
+paramKey	RememberVotedObjects
+paramKey	RememberingAttacker
+paramKey	RemoveAllAbilities
+paramKey	RemoveArtifactTypes
+paramKey	RemoveCardTypes
+paramKey	RemoveChoices
+paramKey	RemoveConditionSVar
+paramKey	RemoveCost
+paramKey	RemoveCreatureTypes
+paramKey	RemoveEnchantmentTypes
+paramKey	RemoveFromCombat
+paramKey	RemoveFromInventory
+paramKey	RemoveKeyword
+paramKey	RemoveKeywords
+paramKey	RemoveLandTypes
+paramKey	RemoveNonManaAbilities
+paramKey	RemovePhase
+paramKey	RemoveSubTypes
+paramKey	RemoveThisAbility
+paramKey	RemoveType
+paramKey	RemoveTypes
+paramKey	Reorder
+paramKey	RepeatCards
+paramKey	RepeatCheckSVar
+paramKey	RepeatCompare
+paramKey	RepeatDefined
+paramKey	RepeatNum
+paramKey	RepeatOptional
+paramKey	RepeatOptionalDecider
+paramKey	RepeatOptionalForEachPlayer
+paramKey	RepeatOptionalMessage
+paramKey	RepeatPlayers
+paramKey	RepeatPresent
+paramKey	RepeatSVarCompare
+paramKey	RepeatSpellAbilities
+paramKey	RepeatSubAbility
+paramKey	RepeatTargeted
+paramKey	RepeatTypesFrom
+paramKey	ReplaceAmount
+paramKey	ReplaceColor
+paramKey	ReplaceDyingCondition
+paramKey	ReplaceDyingDefined
+paramKey	ReplaceDyingExiledWith
+paramKey	ReplaceGraveyard
+paramKey	ReplaceGraveyardValid
+paramKey	ReplaceIlluMask
+paramKey	ReplaceMana
+paramKey	ReplaceOnly
+paramKey	ReplaceType
+paramKey	ReplaceWith
+paramKey	ReplacementEffects
+paramKey	ReplacementResult
+paramKey	Replacements
+paramKey	RerollResults
+paramKey	ResolvedLimit
+paramKey	ResolvingCheck
+paramKey	RestRandomOrder
+paramKey	RestrictFromValid
+paramKey	RestrictFromZone
+paramKey	RestrictValid
+paramKey	Result
+paramKey	ResultSVar
+paramKey	ResultSubAbilities
+paramKey	ReturnAbility
+paramKey	ReturnValid
+paramKey	Reveal
+paramKey	RevealAllValid
+paramKey	RevealDefined
+paramKey	RevealFirst
+paramKey	RevealNumber
+paramKey	RevealOptional
+paramKey	RevealRandomOrder
+paramKey	RevealTitle
+paramKey	RevealToAll
+paramKey	RevealType
+paramKey	RevealValid
+paramKey	RevealedDestination
+paramKey	RevealedLibraryPosition
+paramKey	RevertCost
+paramKey	Revolt
+paramKey	RolledToVisitAttractions
+paramKey	SP
+paramKey	ST
+paramKey	SVar
+paramKey	SVarCompare
+paramKey	SVars
+paramKey	SacEachValid
+paramKey	SacMessage
+paramKey	SacValid
+paramKey	ScryNum
+paramKey	SearchOwnLibrary
+paramKey	Searched
+paramKey	SecondSVarCompare
+paramKey	Secondary
+paramKey	SecondaryType
+paramKey	Secret
+paramKey	Secretly
+paramKey	SelectPrompt
+paramKey	Separator
+paramKey	SetChosenMode
+paramKey	SetChosenNumber
+paramKey	SetChosenPlayer
+paramKey	SetColor
+paramKey	SetCreatureTypes
+paramKey	SetLoyalty
+paramKey	SetMaxHandSize
+paramKey	SetName
+paramKey	SetPower
+paramKey	SetToughness
+paramKey	ShareLandType
+paramKey	SharedKeywords
+paramKey	SharedKeywordsDefined
+paramKey	SharedKeywordsZone
+paramKey	SharedRestrictions
+paramKey	ShieldEffectTarget
+paramKey	ShowCardToActivator
+paramKey	ShowCards
+paramKey	ShowChoice
+paramKey	ShowCurrentCard
+paramKey	ShowMessage
+paramKey	ShowMilledCards
+paramKey	ShowSacrificedCards
+paramKey	Shuffle
+paramKey	ShuffleBySelfControlled
+paramKey	ShuffleChangedPile
+paramKey	ShuffleCondition
+paramKey	ShuffleFromEffect
+paramKey	ShuffleNonMandatory
+paramKey	Sides
+paramKey	Skip
+paramKey	SkipReorder
+paramKey	SkipUntap
+paramKey	SnowSpentForCardsColor
+paramKey	SorcerySpeed
+paramKey	Source
+paramKey	SourceCanOnlyTarget
+paramKey	SourceController
+paramKey	SourceZone
+paramKey	SpeTgtPrompt
+paramKey	SpecifyCounter
+paramKey	Spell
+paramKey	SpellDescription
+paramKey	Spellbook
+paramKey	SpellbookAmount
+paramKey	SpellbookName
+paramKey	SplitAmount
+paramKey	StackDescription
+paramKey	Stackable
+paramKey	Start
+paramKey	StartBidding
+paramKey	StartingLife
+paramKey	StartingWith
+paramKey	Static
+paramKey	StaticAbilities
+paramKey	StaticCommandCheckSVar
+paramKey	StaticCommandSVarCompare
+paramKey	StaticEffect
+paramKey	StaticEffectCheckSVar
+paramKey	StaticEffectSVarCompare
+paramKey	Step
+paramKey	StoreResults
+paramKey	StoreVoteNum
+paramKey	StrictAmount
+paramKey	SubABility
+paramKey	SubAbility
+paramKey	SubsForEach
+paramKey	Support
+paramKey	TailsSubAbility
+paramKey	TapCreaturesForMana
+paramKey	Tapped
+paramKey	Tapper
+paramKey	TapperController
+paramKey	Target
+paramKey	TargetControls
+paramKey	TargetMax
+paramKey	TargetMin
+paramKey	TargetRelativeToCause
+paramKey	TargetRelativeToSource
+paramKey	TargetRestriction
+paramKey	TargetType
+paramKey	TargetUnique
+paramKey	TargetValidTargeting
+paramKey	TargetingPlayer
+paramKey	TargetingPlayerControls
+paramKey	TargetsAtRandom
+paramKey	TargetsForEachPlayer
+paramKey	TargetsValid
+paramKey	TargetsWithControllerProperty
+paramKey	TargetsWithDefinedController
+paramKey	TargetsWithDifferentCMC
+paramKey	TargetsWithDifferentControllers
+paramKey	TargetsWithDifferentNames
+paramKey	TargetsWithEqualToughness
+paramKey	TargetsWithRelatedProperty
+paramKey	TargetsWithSameCardType
+paramKey	TargetsWithSameController
+paramKey	TargetsWithSameCreatureType
+paramKey	TargetsWithSharedCardType
+paramKey	TargetsWithSharedTypes
+paramKey	TargetsWithoutSameCreatureType
+paramKey	Teamwork
+paramKey	TempRemember
+paramKey	TgtPrompt
+paramKey	TgtZone
+paramKey	ThisDefinedAndTgts
+paramKey	ThisDoor
+paramKey	ThisTurn
+paramKey	Threshold
+paramKey	Times
+paramKey	ToBottom
+paramKey	ToEachOther
+paramKey	ToVisitYourAttractions
+paramKey	TokenAmount
+paramKey	TokenAttacking
+paramKey	TokenBlocking
+paramKey	TokenCard
+paramKey	TokenColors
+paramKey	TokenController
+paramKey	TokenOwner
+paramKey	TokenPower
+paramKey	TokenRemembered
+paramKey	TokenScript
+paramKey	TokenTapped
+paramKey	TokenToughness
+paramKey	TokenTypes
+paramKey	TopCardOfLibraryIs
+paramKey	Toughness
+paramKey	TransferActivator
+paramKey	Transformed
+paramKey	TrigDescReminderDefined
+paramKey	Trigger
+paramKey	TriggerAmount
+paramKey	TriggerController
+paramKey	TriggerDescription
+paramKey	TriggerZone
+paramKey	TriggerZones
+paramKey	TriggeredCounterMap
+paramKey	TriggeredOwnAbility
+paramKey	Triggers
+paramKey	TriggersWhenSpent
+paramKey	TrueSubAbility
+paramKey	Twice
+paramKey	TwoColors
+paramKey	Type
+paramKey	TypeLimit
+paramKey	TypeList
+paramKey	Types
+paramKey	TypesFromDefined
+paramKey	Ultimate
+paramKey	UnblockCreaturesBlockedOnlyBy
+paramKey	UnchosenPile
+paramKey	Unimprint
+paramKey	Unique
+paramKey	UniqueType
+paramKey	UnlessAI
+paramKey	UnlessColor
+paramKey	UnlessCost
+paramKey	UnlessDefender
+paramKey	UnlessPayer
+paramKey	UnlessResolveSubs
+paramKey	UnlessSwitched
+paramKey	UnlessType
+paramKey	UnlessValidTarget
+paramKey	UnmatchedAbility
+paramKey	Untap
+paramKey	UntapExactly
+paramKey	UntapType
+paramKey	UntapUpTo
+paramKey	UpTo
+paramKey	UpcomingTurn
+paramKey	Upto
+paramKey	UseAllOriginZones
+paramKey	UseDifferenceBetweenRolls
+paramKey	UseHighestRoll
+paramKey	UseImprinted
+paramKey	UseOriginalHost
+paramKey	Valiant
+paramKey	Valid
+paramKey	ValidActivatingPlayer
+paramKey	ValidActivator
+paramKey	ValidAfterStack
+paramKey	ValidAmountEach
+paramKey	ValidAttachment
+paramKey	ValidAttacked
+paramKey	ValidAttacker
+paramKey	ValidAttackerRelative
+paramKey	ValidAttackers
+paramKey	ValidAttackersAmount
+paramKey	ValidAttackingPlayer
+paramKey	ValidBlocked
+paramKey	ValidBlocker
+paramKey	ValidBlockerAmount
+paramKey	ValidBlockerRelative
+paramKey	ValidCard
+paramKey	ValidCardToTarget
+paramKey	ValidCards
+paramKey	ValidCards2
+paramKey	ValidCardsDesc
+paramKey	ValidCause
+paramKey	ValidCauser
+paramKey	ValidChoices
+paramKey	ValidConniver
+paramKey	ValidCounterType
+paramKey	ValidCreature
+paramKey	ValidCrew
+paramKey	ValidCrewAmount
+paramKey	ValidDefender
+paramKey	ValidDefenders
+paramKey	ValidDefined
+paramKey	ValidDescription
+paramKey	ValidDestination
+paramKey	ValidDevoured
+paramKey	ValidEnlisted
+paramKey	ValidEntity
+paramKey	ValidExchange
+paramKey	ValidExplored
+paramKey	ValidExplorer
+paramKey	ValidKeyword
+paramKey	ValidLKI
+paramKey	ValidLoseReason
+paramKey	ValidMessage
+paramKey	ValidMode
+paramKey	ValidNewFace
+paramKey	ValidObject
+paramKey	ValidObjectToSource
+paramKey	ValidOriginalController
+paramKey	ValidPlayer
+paramKey	ValidPlayers
+paramKey	ValidResult
+paramKey	ValidRoll
+paramKey	ValidSA
+paramKey	ValidSAonCard
+paramKey	ValidSaddled
+paramKey	ValidSides
+paramKey	ValidSource
+paramKey	ValidSpell
+paramKey	ValidSpellAbility
+paramKey	ValidStepTurnToController
+paramKey	ValidSupportedCopy
+paramKey	ValidTarget
+paramKey	ValidTgtDesc
+paramKey	ValidTgts
+paramKey	ValidTgtsDes
+paramKey	ValidTgtsDesc
+paramKey	ValidToken
+paramKey	ValidTrigger
+paramKey	ValidTurned
+paramKey	ValidTypes
+paramKey	ValidZone
+paramKey	Value
+paramKey	VarKey
+paramKey	VarName
+paramKey	VarType
+paramKey	VarValue
+paramKey	VoteCard
+paramKey	VoteMessage
+paramKey	VotePlayer
+paramKey	VoteSubAbility
+paramKey	VoteTiedAbility
+paramKey	WerewolfTransformCondition
+paramKey	WerewolfUntransformCondition
+paramKey	WhileKeyword
+paramKey	WinSubAbility
+paramKey	WithCounter
+paramKey	WithCounterNum
+paramKey	WithCounters
+paramKey	WithCountersAmount
+paramKey	WithCountersPlacer
+paramKey	WithCountersType
+paramKey	WithDifferentNames
+paramKey	WithDifferentPowers
+paramKey	WithMayLook
+paramKey	WithNotedCounters
+paramKey	WithTotalCMC
+paramKey	WithTotalCardTypes
+paramKey	WithTotalPower
+paramKey	WithoutManaCost
+paramKey	Won
+paramKey	WontPhaseInNormal
+paramKey	XAlternative
+paramKey	XAnnounceTitle
+paramKey	XColor
+paramKey	XMax
+paramKey	XMin
+paramKey	Zone
+paramKey	Zone1
+paramKey	Zone2
+paramKey	ZoneRegardless
+paramKey	cmcGT
+paramKey	sVars
+paramKey	staticAbilities
+api	Abandon
+api	ActivateAbility
+api	AddOrRemoveCounter
+api	AddPhase
+api	AddTurn
+api	AdvanceCrank
+api	Airbend
+api	AlterAttribute
+api	Amass
+api	Animate
+api	AnimateAll
+api	AssembleContraption
+api	AssignGroup
+api	Attach
+api	Balance
+api	BecomeMonarch
+api	BecomesBlocked
+api	BidLife
+api	BlankLine
+api	Blight
+api	Block
+api	Branch
+api	Camouflage
+api	ChangeCombatants
+api	ChangeSpeed
+api	ChangeTargets
+api	ChangeText
+api	ChangeX
+api	ChangeZone
+api	ChangeZoneAll
+api	ChaosEnsues
+api	Charm
+api	ChooseCard
+api	ChooseColor
+api	ChooseDirection
+api	ChooseEvenOdd
+api	ChooseNumber
+api	ChoosePlayer
+api	ChooseSector
+api	ChooseSource
+api	ChooseType
+api	ClaimThePrize
+api	Clash
+api	Cleanup
+api	Cloak
+api	Clone
+api	Connive
+api	ControlPlayer
+api	ControlSpell
+api	CopyPermanent
+api	CopySpellAbility
+api	Counter
+api	DamageAll
+api	DamageResolve
+api	DayTime
+api	DealDamage
+api	Debuff
+api	DelayedTrigger
+api	Destroy
+api	DestroyAll
+api	Detain
+api	Dig
+api	DigMultiple
+api	DigUntil
+api	Discard
+api	Discover
+api	Draft
+api	DrainMana
+api	Draw
+api	EachDamage
+api	Earthbend
+api	Effect
+api	EndCombatPhase
+api	EndTurn
+api	Endure
+api	ExchangeControl
+api	ExchangeControlVariant
+api	ExchangeLife
+api	ExchangeLifeVariant
+api	ExchangePower
+api	ExchangeTextBox
+api	ExchangeZone
+api	Explore
+api	Fight
+api	FlipCoin
+api	FlipOntoBattlefield
+api	Fog
+api	GainControl
+api	GainControlVariant
+api	GainLife
+api	GainOwnership
+api	GameDrawn
+api	GenericChoice
+api	Goad
+api	HealDamage
+api	Heist
+api	ImmediateTrigger
+api	Incubate
+api	Intensify
+api	Investigate
+api	Learn
+api	LookAt
+api	LoseLife
+api	LosePerpetual
+api	LosesGame
+api	MakeCard
+api	Mana
+api	ManaReflected
+api	Manifest
+api	ManifestDread
+api	Meld
+api	Mill
+api	MoveCounter
+api	MultiplePiles
+api	MultiplyCounter
+api	MustBlock
+api	NameCard
+api	OpenAttraction
+api	PeekAndReveal
+api	PermanentCreature
+api	PermanentNoncreature
+api	Phases
+api	Planeswalk
+api	Play
+api	PlayLandVariant
+api	Poison
+api	PreventDamage
+api	Proliferate
+api	Protection
+api	ProtectionAll
+api	Pump
+api	PumpAll
+api	PutCounter
+api	PutCounterAll
+api	Radiation
+api	RearrangeTopOfLibrary
+api	Recruit
+api	Regenerate
+api	Regeneration
+api	RemoveCounter
+api	RemoveCounterAll
+api	RemoveFromCombat
+api	RemoveFromGame
+api	RemoveFromMatch
+api	ReorderZone
+api	Repeat
+api	RepeatEach
+api	ReplaceCounter
+api	ReplaceDamage
+api	ReplaceEffect
+api	ReplaceMana
+api	ReplaceSplitDamage
+api	ReplaceToken
+api	RestartGame
+api	Reveal
+api	RevealHand
+api	ReverseTurnOrder
+api	RingTemptsYou
+api	RollDice
+api	RollPlanarDice
+api	RunChaos
+api	Sacrifice
+api	SacrificeAll
+api	Scry
+api	Seek
+api	SetInMotion
+api	SetLife
+api	SetState
+api	Shuffle
+api	SkipPhase
+api	SkipTurn
+api	StoreSVar
+api	Subgame
+api	Surveil
+api	SwitchBlock
+api	TakeInitiative
+api	Tap
+api	TapAll
+api	TapOrUntap
+api	TapOrUntapAll
+api	TaporUntapAll
+api	TimeTravel
+api	Token
+api	TwoPiles
+api	Unattach
+api	UnlockDoor
+api	Untap
+api	UntapAll
+api	Venture
+api	VillainousChoice
+api	Vote
+api	WinsGame
+mode	Abandoned
+mode	AbilityCast
+mode	AbilityResolves
+mode	AbilityTriggered
+mode	ActivateAbilityAsIfHaste
+mode	Activations
+mode	Adapt
+mode	AlternativeCost
+mode	Always
+mode	AssignCombatDamageAsUnblocked
+mode	AssignNoCombatDamage
+mode	Attached
+mode	AttackRequirement
+mode	AttackRestrict
+mode	AttackVigilance
+mode	AttackerBlocked
+mode	AttackerBlockedByCreature
+mode	AttackerBlockedOnce
+mode	AttackerUnblocked
+mode	AttackerUnblockedOnce
+mode	AttackersDeclared
+mode	AttackersDeclaredOneTarget
+mode	Attacks
+mode	BecomeMonarch
+mode	BecomeMonstrous
+mode	BecomeRenowned
+mode	BecomesCrewed
+mode	BecomesPlotted
+mode	BecomesSaddled
+mode	BecomesTarget
+mode	BecomesTargetOnce
+mode	BlockRestrict
+mode	BlockTapped
+mode	BlockersDeclared
+mode	Blocks
+mode	CanAdapt
+mode	CanAttackDefender
+mode	CanAttackIfHaste
+mode	CanBlockIfReach
+mode	CantAttach
+mode	CantAttack
+mode	CantAttack,CantBlock
+mode	CantAttack,CantBlock,CantBeActivated
+mode	CantAttack,CantBlock,CantCrew
+mode	CantAttack,CantBlock,CantCrew,CantBeActivated
+mode	CantAttack,CantBlock,CantTransform
+mode	CantAttackUnless
+mode	CantBeActivated
+mode	CantBeBeamedUp
+mode	CantBeCast
+mode	CantBeCopied
+mode	CantBeSuspected
+mode	CantBecomeMonarch
+mode	CantBlock
+mode	CantBlockBy
+mode	CantBlockUnless
+mode	CantChangeDayTime
+mode	CantChangeLife
+mode	CantDiscard
+mode	CantDraw
+mode	CantExile
+mode	CantGainControl
+mode	CantGainLife
+mode	CantLoseLife
+mode	CantPayLife
+mode	CantPhaseIn
+mode	CantPhaseOut
+mode	CantPlayLand
+mode	CantPreventDamage
+mode	CantPutCounter
+mode	CantRegenerate
+mode	CantSacrifice
+mode	CantTarget
+mode	CantTransform
+mode	CantVenture
+mode	CaseSolved
+mode	CastWithFlash
+mode	Championed
+mode	ChangesController
+mode	ChangesZone
+mode	ChangesZoneAll
+mode	ChaosEnsues
+mode	ClaimPrize
+mode	Clashed
+mode	ClassLevelGained
+mode	CollectEvidence
+mode	ColorlessDamageSource
+mode	CombatDamageToughness
+mode	CommitCrime
+mode	ConjureAll
+mode	Connives
+mode	Continuous
+mode	Continuous,CantAttack,CantBlock,CantBeActivated
+mode	Continuous,CantPlayLand,CantBeCast
+mode	CounterAdded
+mode	CounterAddedAll
+mode	CounterAddedOnce
+mode	CounterPlayerAddedAll
+mode	CounterRemoved
+mode	CounterRemovedOnce
+mode	CounterTypeAddedAll
+mode	Countered
+mode	CountersRemain
+mode	CrankContraption
+mode	Crewed
+mode	Cycled
+mode	DamageAll
+mode	DamageDealtOnce
+mode	DamageDone
+mode	DamageDoneOnce
+mode	DamagePreventedOnce
+mode	DayTimeChanges
+mode	Decrease
+mode	Defined
+mode	Destroyed
+mode	Devotion
+mode	Devoured
+mode	DisableTriggers
+mode	Discarded
+mode	DiscardedAll
+mode	Discover
+mode	Drawn
+mode	DungeonCompleted
+mode	ElementalBend
+mode	Enlisted
+mode	Evolved
+mode	ExcessDamage
+mode	ExcessDamageAll
+mode	Exchange
+mode	Exerted
+mode	Exiled
+mode	Exploited
+mode	Explores
+mode	FacesDilemma
+mode	Fight
+mode	FightOnce
+mode	Flip
+mode	FlipCoinDoubler
+mode	FlipCoinMod
+mode	FlippedCoin
+mode	FlippedCoinOnce
+mode	Forage
+mode	Foretell
+mode	FullyUnlock
+mode	Gain
+mode	GainLifeRadiation
+mode	GiveGift
+mode	Hand
+mode	IgnoreHexproof
+mode	IgnoreLandWalk
+mode	IgnoreLegendRule
+mode	IgnoreShroud
+mode	InfectDamage
+mode	Investigated
+mode	LandPlayed
+mode	LifeGained
+mode	LifeLost
+mode	LifeLostAll
+mode	LockOrUnlock
+mode	LookYouChoose
+mode	LosesGame
+mode	ManaAdded
+mode	ManaBurn
+mode	ManaConvert
+mode	ManaExpend
+mode	ManaRestriction
+mode	ManifestDread
+mode	MaxCounter
+mode	Mentored
+mode	Milled
+mode	MilledAll
+mode	MilledOnce
+mode	MinMaxBlocker
+mode	MustAttack
+mode	MustBlock
+mode	MustTarget
+mode	Mutates
+mode	NewGame
+mode	NoCleanupDamage
+mode	NumLoyaltyAct
+mode	OptionalAttackCost
+mode	OptionalCost
+mode	Panharmonicon
+mode	PayCumulativeUpkeep
+mode	PayEcho
+mode	PayLife
+mode	Phase
+mode	PhaseIn
+mode	PhaseOut
+mode	PhaseOutAll
+mode	PhaseReversed
+mode	PlanarDice
+mode	PlaneswalkedFrom
+mode	PlaneswalkedTo
+mode	PlayerMustAttack
+mode	PlotZone
+mode	Power
+mode	Proliferate
+mode	RaiseCost
+mode	Random
+mode	ReduceCost
+mode	RevealDiscardAll
+mode	RevealTgtChoose
+mode	RevealYouChoose
+mode	RingTemptsYou
+mode	RolledDie
+mode	RolledDieOnce
+mode	Sacrificed
+mode	SacrificedOnce
+mode	Saddled
+mode	Scry
+mode	SearchedLibrary
+mode	SeekAll
+mode	SetCost
+mode	SetInMotion
+mode	Shuffled
+mode	Specializes
+mode	SpellAbilityCast
+mode	SpellAbilityCopy
+mode	SpellCast
+mode	SpellCastOrCopy
+mode	SpellCopy
+mode	Stationed
+mode	Surveil
+mode	SurveilNum
+mode	TapAll
+mode	TapPowerValue
+mode	Taps
+mode	TapsForMana
+mode	TgtChoose
+mode	TokenCreated
+mode	TokenCreatedOnce
+mode	Toughness
+mode	Trains
+mode	Transform
+mode	Transformed
+mode	TurnBegin
+mode	TurnFaceDown
+mode	TurnFaceUp
+mode	TurnReversed
+mode	Unattached
+mode	Unlock
+mode	UnlockDoor
+mode	Unspecialize
+mode	UnspentMana
+mode	UntapAll
+mode	UntapOtherPlayer
+mode	Untaps
+mode	VisitAttraction
+mode	Vote
+mode	WitherDamage
+mode	YouChoose
+replacementEvent	AddCounter
+replacementEvent	AssembleContraption
+replacementEvent	Attached
+replacementEvent	BeginPhase
+replacementEvent	BeginTurn
+replacementEvent	Cascade
+replacementEvent	Connive
+replacementEvent	CopySpell
+replacementEvent	Counter
+replacementEvent	CreateToken
+replacementEvent	DamageDone
+replacementEvent	DeclareBlocker
+replacementEvent	Destroy
+replacementEvent	Draw
+replacementEvent	DrawCards
+replacementEvent	Explore
+replacementEvent	GainLife
+replacementEvent	GameLoss
+replacementEvent	GameWin
+replacementEvent	Learn
+replacementEvent	LifeReduced
+replacementEvent	LoseMana
+replacementEvent	Mill
+replacementEvent	Moved
+replacementEvent	PayLife
+replacementEvent	PlanarDiceResult
+replacementEvent	Planeswalk
+replacementEvent	ProduceMana
+replacementEvent	Proliferate
+replacementEvent	RemoveCounter
+replacementEvent	RollDice
+replacementEvent	RollPlanarDice
+replacementEvent	Scry
+replacementEvent	SetInMotion
+replacementEvent	Tap
+replacementEvent	Transform
+replacementEvent	TurnFaceUp
+replacementEvent	Untap
+countHead	2
+countHead	AbilityYouCtrl
+countHead	ActivatedThisGame
+countHead	Adamant
+countHead	Adamant_1.Colorless.0.1
+countHead	Adamant_1.Colorless.1.0
+countHead	Adamant_2.Black.2.0
+countHead	Adamant_2.Blue.2.0
+countHead	Adamant_2.Green.2.0
+countHead	Adamant_2.Red.2.0
+countHead	Adamant_2.White.2.0
+countHead	Adamant_7
+countHead	AllFourBend
+countHead	AltCost
+countHead	Amount
+countHead	AttackersDeclared
+countHead	Bargain
+countHead	Bargained
+countHead	Blessing
+countHead	BloodthirstAmount
+countHead	CardBasePower
+countHead	CardCounters
+countHead	CardCounters.ALL
+countHead	CardCounters.BORE
+countHead	CardCounters.P1P1
+countHead	CardCounters.PROMOTION
+countHead	CardCounters.TIME
+countHead	CardManaCost
+countHead	CardNumAttacksThisGame
+countHead	CardNumAttacksThisTurn
+countHead	CardNumColors
+countHead	CardPower
+countHead	CardToughness
+countHead	CardsInYourHand
+countHead	CastSinceBeginningOfYourLastTurn_Card
+countHead	CastTotalManaSpent
+countHead	ChosenNumber
+countHead	ChosenSize
+countHead	Chroma
+countHead	ChromaInGrave
+countHead	ChromaSource
+countHead	ColorsColorIdentity
+countHead	CommanderCastFromCommandZone
+countHead	CommittedCrimeThisTurn.1.0
+countHead	CommittedCrimeThisTurn.1.2
+countHead	Compare
+countHead	Converge
+countHead	CounterNum
+countHead	CountersAddedThisTurn
+countHead	CountersRemovedThisTurn
+countHead	CreaturesAttackedThisTurn
+countHead	CrewSize
+countHead	DamageAmount
+countHead	DamageThisTurn
+countHead	Delirium
+countHead	Delirium.3.1
+countHead	Devotion
+countHead	DevotionDual
+countHead	Devoured
+countHead	DifferentCounterKinds_Card
+countHead	DifferentCounterKinds_Creature
+countHead	DifferentCounterKinds_Permanent
+countHead	DistinctUnlockedDoors
+countHead	Domain
+countHead	DomainActivePlayer
+countHead	DraftNotesCount.Cogwork
+countHead	DraftNotesHighest.Custodi
+countHead	DraftNotesHighest.Garbage
+countHead	DraftNotesHighest.Lurking
+countHead	DraftNotesHighest.Pyretic
+countHead	EachSpentToCast
+countHead	Emerged
+countHead	EnchantedControllerCreatures
+countHead	Escaped
+countHead	ExactManaCostGraveyard
+countHead	FatefulHour
+countHead	FinishedEndOfTurnsThisTurn
+countHead	FinishedUpkeepsThisTurn
+countHead	Foretold
+countHead	Freerunning
+countHead	HasNumChosenColors
+countHead	Hellbent
+countHead	Hellbent.3.1
+countHead	IfCastInOwnMainPhase
+countHead	Ignore
+countHead	ImprintedCardManaCost
+countHead	ImprintedSize
+countHead	InOwnMainPhase
+countHead	Initiative
+countHead	Intensity
+countHead	IsPrime
+countHead	Kicked
+countHead	Kicked.2.1
+countHead	Landfall
+countHead	LastStateBattlefield
+countHead	LastStateBattlefieldWithFallback
+countHead	LastStateGraveyard
+countHead	LastStateGraveyardWithFallback
+countHead	LastTurnEntered_Battlefield_Creature
+countHead	LeftBattlefieldThisTurn
+countHead	LeftGraveyardThisTurn
+countHead	LifeAmount
+countHead	LifeOppsLostThisTurn
+countHead	LifeYouGainedThisTurn
+countHead	LifeYouLostThisTurn
+countHead	LifeYourTeamGainedThisTurn
+countHead	Madness
+countHead	ManaColorsPaid
+countHead	ManaPool:All
+countHead	ManaPool:green
+countHead	MaxCombatDamageThisTurn
+countHead	MaxDistinctOnStack
+countHead	MaxOppDamageThisTurn
+countHead	MaxSameStoredRolls
+countHead	MaxSpeed
+countHead	Metalcraft
+countHead	Monarch
+countHead	Morbid
+countHead	MostCardName
+countHead	MostProminentCreatureType
+countHead	Night
+countHead	NonCombatDamageThisTurn
+countHead	NotedNumber
+countHead	Num
+countHead	NumCombatDamageThisTurn
+countHead	NumDamageThisTurn
+countHead	NumInAllHands
+countHead	NumPiledGuessedSA
+countHead	Number
+countHead	OppGreatestLifeTotal
+countHead	OptionalGenericCostPaid
+countHead	OptionalGenericCostPaid.1.0
+countHead	Party
+countHead	Presence_Dragon
+countHead	Presence_Dragon.1.0
+countHead	PromisedGift
+countHead	Random
+countHead	Random.0.15
+countHead	Random.0.4
+countHead	Random.0.5
+countHead	Random.0.6
+countHead	Random.0.8
+countHead	RegeneratedThisTurn
+countHead	RememberedNumber
+countHead	RememberedSize
+countHead	RememberedWithSharedCardType
+countHead	ResolvedThisTurn
+countHead	Result
+countHead	Revolt
+countHead	SearchedLibrary
+countHead	SecondMostProminentColor
+countHead	SingleMaxDamageThisTurn
+countHead	StartingPlayer
+countHead	Teamwork
+countHead	ThisTurnActivated_Activated
+countHead	ThisTurnActivated_Activated.YouCtrl+IsTargeting
+countHead	ThisTurnCast_Artifact
+countHead	ThisTurnCast_Card
+countHead	ThisTurnCast_Card.ControlledBy
+countHead	ThisTurnCast_Card.RememberedPlayerCtrl+sharesNameWith
+countHead	ThisTurnCast_Card.YouCtrl
+countHead	ThisTurnCast_Card.YouCtrl+CastSa
+countHead	ThisTurnCast_Card.YouCtrl+namedPeer
+countHead	ThisTurnCast_Card.YouCtrl+namedReach
+countHead	ThisTurnCast_Card.nonCreature+ControlledBy
+countHead	ThisTurnCast_Creature
+countHead	ThisTurnCast_Instant
+countHead	ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+countHead	ThisTurnCast_Merfolk
+countHead	ThisTurnEntered_Battlefield_Angel
+countHead	ThisTurnEntered_Battlefield_Artifact
+countHead	ThisTurnEntered_Battlefield_Card
+countHead	ThisTurnEntered_Battlefield_Card.Self+YouCtrl,Artifact.YouCtrl+Other
+countHead	ThisTurnEntered_Battlefield_Cleric
+countHead	ThisTurnEntered_Battlefield_Creature
+countHead	ThisTurnEntered_Battlefield_Food
+countHead	ThisTurnEntered_Battlefield_Frog
+countHead	ThisTurnEntered_Battlefield_Goblin
+countHead	ThisTurnEntered_Battlefield_Hero
+countHead	ThisTurnEntered_Battlefield_Land
+countHead	ThisTurnEntered_Battlefield_Land.ControlledBy
+countHead	ThisTurnEntered_Battlefield_Mount.YouCtrl,Vehicle.YouCtrl
+countHead	ThisTurnEntered_Battlefield_Permanent
+countHead	ThisTurnEntered_Battlefield_Planeswalker
+countHead	ThisTurnEntered_Battlefield_Zombie
+countHead	ThisTurnEntered_Exile_Card
+countHead	ThisTurnEntered_Exile_from_Battlefield_Creature
+countHead	ThisTurnEntered_Graveyard_Card
+countHead	ThisTurnEntered_Graveyard_Creature
+countHead	ThisTurnEntered_Graveyard_Creature.!token
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Artifact
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Card
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Creature
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Creature,Artifact
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Creature.!namedEbondeath;
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Dalek$CardPower
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Enchantment
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Human
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Land
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Permanent
+countHead	ThisTurnEntered_Graveyard_from_Battlefield_Phyrexian
+countHead	ThisTurnEntered_Graveyard_from_Hand_Card
+countHead	ThisTurnEntered_Graveyard_from_Library_Card
+countHead	ThisTurnEntered_Hand_from_Battlefield_Permanent
+countHead	Threshold
+countHead	TimesKicked
+countHead	TimesMutated
+countHead	TopOfLibraryCMC
+countHead	TotalCommanderCastFromCommandZone
+countHead	TotalDamageDoneByThisTurn
+countHead	TotalDamageReceivedThisTurn
+countHead	TotalDamageThisTurn
+countHead	TotalManaSpent
+countHead	TotalOppPoisonCounters
+countHead	TotalTurns
+countHead	TotalValue
+countHead	TriggerRememberAmount
+countHead	TriggeredCardManaCost
+countHead	TriggeredManaCostDevotion
+countHead	TriggeredPayingMana
+countHead	TypesSharedWith
+countHead	UniqueManaColorsProduced
+countHead	UnlockedDoors
+countHead	UrzaLands
+countHead	Valid
+countHead	ValidAll
+countHead	ValidBattlefield,Command
+countHead	ValidBattlefield,Graveyard
+countHead	ValidBattlefield,Hand
+countHead	ValidCommand
+countHead	ValidExile
+countHead	ValidExile,Graveyard
+countHead	ValidGraveyard
+countHead	ValidGraveyard,Battlefield
+countHead	ValidGraveyard,Exile
+countHead	ValidGraveyard,Hand,Library
+countHead	ValidGraveyard,Library,Hand
+countHead	ValidHand
+countHead	ValidHand,Graveyard
+countHead	ValidLibrary
+countHead	ValidSelf
+countHead	ValidSideboard
+countHead	ValidStack
+countHead	Void
+countHead	X
+countHead	YouCastThisGame
+countHead	YouDescendedThisTurn
+countHead	YouDrewLastTurn
+countHead	YouDrewThisTurn
+countHead	YouFlipThisTurn
+countHead	YouRollThisTurn
+countHead	YouRolledThisTurn6
+countHead	YouSurveilThisTurn
+countHead	YourCountersEnergy
+countHead	YourCountersExperience
+countHead	YourCountersRAD
+countHead	YourLifeTotal
+countHead	YourSpeed
+countHead	YourStartingLibrarySize
+countHead	YourStartingLife
+countHead	YourTurns
+countHead	wasCastFromExile
+countHead	wasCastFromGraveyard
+countHead	wasCastFromYourHand
+countHead	wasCastFromYourHandByYou
+countHead	wasCastFromYourLibrary
+countHead	xColorPaid
+countHead	xPaid
+countOperator	Abs
+countOperator	DivideEvenlyDown
+countOperator	DivideEvenlyUp
+countOperator	HalfDown
+countOperator	HalfUp
+countOperator	LimitMax
+countOperator	LimitMin
+countOperator	Minus
+countOperator	Mod
+countOperator	NMinus
+countOperator	Negative
+countOperator	Plus
+countOperator	Pow
+countOperator	ThirdUp
+countOperator	Thrice
+countOperator	Times
+countOperator	Twice
+costPart	0
+costPart	1
+costPart	10
+costPart	15
+costPart	2
+costPart	20
+costPart	2B
+costPart	2G
+costPart	2R
+costPart	2U
+costPart	3
+costPart	4
+costPart	5
+costPart	6
+costPart	7
+costPart	8
+costPart	9
+costPart	AddCounter<>
+costPart	B
+costPart	BG
+costPart	BP
+costPart	BR
+costPart	Behold<>
+costPart	BeholdExile<>
+costPart	Blight<>
+costPart	C
+costPart	ChooseCard<>
+costPart	ChooseCreatureType<>
+costPart	CollectEvidence<>
+costPart	Discard<>
+costPart	Draw<>
+costPart	Exert<>
+costPart	Exile<>
+costPart	ExileAnyGrave<>
+costPart	ExileCtrlOrGrave<>
+costPart	ExileFromGrave<>
+costPart	ExileFromHand<>
+costPart	ExileFromStack<>
+costPart	ExileFromTop<>
+costPart	ExileSameGrave<>
+costPart	ExiledMoveToGrave<>
+costPart	Forage
+costPart	G
+costPart	GP
+costPart	GU
+costPart	GW
+costPart	GainLife<>
+costPart	Mana<>
+costPart	Mandatory
+costPart	Mill<>
+costPart	PayEnergy<>
+costPart	PayLife<>
+costPart	PutCardToLibFromBattlefield<>
+costPart	PutCardToLibFromGrave<>
+costPart	PutCardToLibFromHand<>
+costPart	Q
+costPart	R
+costPart	RG
+costPart	RP
+costPart	RW
+costPart	RemoveAnyCounter<>
+costPart	Return<>
+costPart	Reveal<>
+costPart	RevealChosen<>
+costPart	RevealFromExile<>
+costPart	RevealOrChoose<>
+costPart	RollDice<>
+costPart	S
+costPart	Sac<>
+costPart	SubCounter<>
+costPart	T
+costPart	U
+costPart	UB
+costPart	UP
+costPart	UR
+costPart	Unattach<>
+costPart	W
+costPart	WB
+costPart	WP
+costPart	WU
+costPart	Waterbend<>
+costPart	WhipgrassClericNum
+costPart	X
+costPart	XChosen
+costPart	XMin1
+costPart	Y
+costPart	tapXType<>
+costPart	untapYType<>
+validBase	Ability
+validBase	Activated
+validBase	Advisor
+validBase	Aetherborn
+validBase	Ally
+validBase	Angel
+validBase	Any
+validBase	Arcane
+validBase	Archer
+validBase	Army
+validBase	Artifact
+validBase	Artificer
+validBase	Assassin
+validBase	Assembly-Worker
+validBase	Attraction
+validBase	Aura
+validBase	Aurochs
+validBase	Bard
+validBase	Basic
+validBase	Bat
+validBase	Battle
+validBase	Bear
+validBase	Beast
+validBase	Beeble
+validBase	Berserker
+validBase	Bird
+validBase	Blood
+validBase	Boar
+validBase	Bobblehead
+validBase	Bolas
+validBase	Camarid
+validBase	Camel
+validBase	Card
+validBase	Card$CardTypes
+validBase	Card$CreatureType
+validBase	Card$GreatestCardManaCost
+validBase	Cartouche
+validBase	Case
+validBase	Cat
+validBase	Cave
+validBase	Cleric
+validBase	Clue
+validBase	Construct
+validBase	Contraption
+validBase	Coward
+validBase	Crab
+validBase	Creature
+validBase	Creature NumAtt$ +3
+validBase	Creature$DifferentCardPower
+validBase	Creature$GreatestCardPower
+validBase	Curse
+validBase	Dalek
+validBase	Defined
+validBase	Demon
+validBase	Desert
+validBase	Detective
+validBase	Devil
+validBase	Dinosaur
+validBase	Djinn
+validBase	Doctor
+validBase	Dog
+validBase	Dragon
+validBase	Drake
+validBase	Druid
+validBase	Dungeon
+validBase	Dwarf
+validBase	Effect
+validBase	Efreet
+validBase	Egg
+validBase	Eldrazi
+validBase	Elemental
+validBase	Elephant
+validBase	Elf
+validBase	Emblem
+validBase	Employee
+validBase	Enchantment
+validBase	Equipment
+validBase	Faerie
+validBase	Fish
+validBase	Flagbearer
+validBase	FlippedTails
+validBase	Food
+validBase	Forest
+validBase	Fractal
+validBase	Frog
+validBase	Fungus
+validBase	Gamma
+validBase	Gate
+validBase	Giant
+validBase	Goat
+validBase	Goblin
+validBase	God
+validBase	Golem
+validBase	Gremlin
+validBase	Griffin
+validBase	Halfling
+validBase	Hamster
+validBase	Hero
+validBase	Homarid
+validBase	Horror
+validBase	Horse
+validBase	Host
+validBase	Human
+validBase	Hydra
+validBase	Illusion
+validBase	Imp
+validBase	Incubator
+validBase	Insect
+validBase	Instant
+validBase	Island
+validBase	Jackal
+validBase	Juggernaut
+validBase	Junk
+validBase	Kavu
+validBase	Kindred
+validBase	Kithkin
+validBase	Klingon
+validBase	Knight
+validBase	Kobold
+validBase	Kraken
+validBase	Land
+validBase	LandAbility
+validBase	Leech
+validBase	Legendary
+validBase	LessPowerThanAttacker
+validBase	LessPowerThanBlocker
+validBase	Lesson
+validBase	Leviathan
+validBase	Lizard
+validBase	Lobster
+validBase	Locus
+validBase	Mercenary
+validBase	Merfolk
+validBase	Minotaur
+validBase	Monk
+validBase	Moogle
+validBase	Mount
+validBase	Mountain
+validBase	Mouse
+validBase	Mutant
+validBase	Myr
+validBase	Nautilid
+validBase	Nautilus
+validBase	Nephilim
+validBase	Nightmare
+validBase	Ninja
+validBase	Octopus
+validBase	Omen
+validBase	Ooze
+validBase	OppNonTriggeredTarget
+validBase	Opponent
+validBase	Orc
+validBase	Otter
+validBase	Ox
+validBase	Pegasus
+validBase	Permanent
+validBase	Pest
+validBase	Phoenix
+validBase	Phyrexian
+validBase	Pirate
+validBase	Plains
+validBase	PlanarDie
+validBase	Plane
+validBase	Planeswalker
+validBase	Planet
+validBase	Plant
+validBase	Player
+validBase	Powerstone
+validBase	Praetor
+validBase	Rabbit
+validBase	Raccoon
+validBase	Rat
+validBase	Rebel
+validBase	Reflection
+validBase	Remembered
+validBase	Rhino
+validBase	Rigger
+validBase	Robot
+validBase	Rogue
+validBase	Room
+validBase	Saga
+validBase	Salamander
+validBase	Samurai
+validBase	Saproling
+validBase	Scarecrow
+validBase	Scion
+validBase	Scout
+validBase	Sculpture
+validBase	Self
+validBase	Serpent
+validBase	Shade
+validBase	Shaman
+validBase	Shapeshifter
+validBase	Shark
+validBase	Shrine
+validBase	Skeleton
+validBase	Sliver
+validBase	Slug
+validBase	Snail
+validBase	Snake
+validBase	Snow
+validBase	Soldier
+validBase	Sorcery
+validBase	Spacecraft
+validBase	Spawn
+validBase	Specter
+validBase	Spell
+validBase	SpellAbility
+validBase	Sphere
+validBase	Sphinx
+validBase	Spider
+validBase	Spirit
+validBase	Squirrel
+validBase	Starfish
+validBase	Static
+validBase	Survivor
+validBase	Swamp
+validBase	Symbiote
+validBase	Targeted
+validBase	TargetedCard
+validBase	TargetedController
+validBase	Tentacle
+validBase	Thopter
+validBase	Thrull
+validBase	Tiefling
+validBase	Time Lord
+validBase	Town
+validBase	Treasure
+validBase	Treefolk
+validBase	Triggered
+validBase	TriggeredAttacker
+validBase	TriggeredCard
+validBase	Trilobite
+validBase	Turtle
+validBase	Tyranid
+validBase	Tyvar
+validBase	Unicorn
+validBase	Urza's
+validBase	Vampire
+validBase	Vehicle
+validBase	Villain
+validBase	Wall
+validBase	Warlock
+validBase	Warrior
+validBase	Werewolf
+validBase	Wizard
+validBase	Wolf
+validBase	Worm
+validBase	Wraith
+validBase	Wurm
+validBase	You
+validBase	Zombie
+validProperty	!AllColors
+validProperty	!Attached
+validProperty	!CardOwner
+validProperty	!CastSaSource
+validProperty	!ChosenCard
+validProperty	!ChosenCardStrict
+validProperty	!ControlledBy EnchantedOwner
+validProperty	!Dinosaur
+validProperty	!Dragon
+validProperty	!EnchantedBy
+validProperty	!EnchantedBy$CardCounters.P1P1
+validProperty	!EquippedBy
+validProperty	!HasCounters
+validProperty	!IsCommander
+validProperty	!IsImprinted
+validProperty	!IsPrepared
+validProperty	!IsRemembered
+validProperty	!Loyalty
+validProperty	!ManaAbility
+validProperty	!NoAbilities
+validProperty	!OnGoing
+validProperty	!Outlaw
+validProperty	!OwnedBy ActivePlayer
+validProperty	!RememberedPlayerCtrl
+validProperty	!RememberedPlayerCtrl$CardManaCost
+validProperty	!RememberedPlayerOwn$CardManaCost
+validProperty	!SharesColorWith Valid Creature.YouCtrl
+validProperty	!ThisTurnEntered
+validProperty	!ThisTurnEnteredFrom_Battlefield
+validProperty	!Toy
+validProperty	!TriggeredActivator
+validProperty	!TriggeredAttacker
+validProperty	!TriggeredCard
+validProperty	!TriggeredCardController
+validProperty	!TriggeredNewCard
+validProperty	!TriggeredTarget
+validProperty	!attackedOrBlockedSinceYourLastUpkeep
+validProperty	!attackedThisTurn
+validProperty	!attacking
+validProperty	!blockedThisTurn
+validProperty	!blocking
+validProperty	!copiedSpell
+validProperty	!dealtDamagetoAny
+validProperty	!enchanted
+validProperty	!equalPT
+validProperty	!equipped
+validProperty	!firstTurnControlled
+validProperty	!hasKeywordLandwalk:Island
+validProperty	!hasManaAbility
+validProperty	!hasTapCost
+validProperty	!inZoneBattlefield
+validProperty	!inZoneStack
+validProperty	!namedA-Earthquake Dragon
+validProperty	!namedAkron Legionnaire
+validProperty	!namedClever Conjurer
+validProperty	!namedDetention Sphere
+validProperty	!namedDutiful Replicator
+validProperty	!namedEarthquake Dragon
+validProperty	!namedPhyrexian Dreadnought$CardPower
+validProperty	!namedPsychic Battle
+validProperty	!namedStaff of Eden; Vault's Key
+validProperty	!namedWheel of Fortune
+validProperty	!numColorsEQ2
+validProperty	!sharesCreatureTypeWith Valid Creature.YouCtrl
+validProperty	!sharesCreatureTypeWith ValidGraveyard Creature.YouOwn
+validProperty	!sharesCreatureTypeWith ValidLibrary Creature.YouOwn
+validProperty	!targetedBy
+validProperty	!token
+validProperty	!wasCast
+validProperty	!wasCastFromExile
+validProperty	!wasCastFromTheirHand
+validProperty	!wasCastFromYourHand
+validProperty	!wasCastFromYourHandByYou
+validProperty	Activator
+validProperty	Active
+validProperty	ActivePlayerCtrl
+validProperty	Adventure
+validProperty	AdventureCard
+validProperty	Ally
+validProperty	Angel
+validProperty	AnyChosenColor
+validProperty	Ape
+validProperty	Arcane
+validProperty	Archer
+validProperty	Artifact
+validProperty	Artificer
+validProperty	Assassin
+validProperty	Assembly-Worker
+validProperty	Attached
+validProperty	Attached$GreatestCardManaCost
+validProperty	AttachedBy
+validProperty	AttachedTo Card
+validProperty	AttachedTo Card.IsRemembered
+validProperty	AttachedTo Card.Self
+validProperty	AttachedTo Creature
+validProperty	AttachedTo Creature.EnchantedBy
+validProperty	AttachedTo Creature.EquippedBy
+validProperty	AttachedTo Creature.IsImprinted
+validProperty	AttachedTo Creature.IsRemembered
+validProperty	AttachedTo Creature.YouCtrl
+validProperty	AttachedTo Creature.attacking
+validProperty	AttachedTo Land
+validProperty	AttachedTo ParentTarget
+validProperty	AttachedTo Permanent
+validProperty	AttachedTo Permanent.YouCtrl
+validProperty	AttachedTo Player.EnchantedBy
+validProperty	AttachedTo Targeted
+validProperty	AttachedTo You
+validProperty	Attraction
+validProperty	Aura
+validProperty	Aurochs
+validProperty	Backup
+validProperty	Barbarian
+validProperty	Bargain
+validProperty	Basic
+validProperty	Beast
+validProperty	Berserker
+validProperty	Bestow
+validProperty	Bird
+validProperty	Black
+validProperty	BlackSource
+validProperty	Blinkmoth
+validProperty	Blitz
+validProperty	Blue
+validProperty	BlueSource
+validProperty	Boast
+validProperty	Bobblehead
+validProperty	Bolas
+validProperty	BorderColorBlack
+validProperty	BorderColorSilver
+validProperty	BorderColorWhite
+validProperty	Buyback
+validProperty	CanBeTargetedByTriggeredSpellAbility
+validProperty	CanEnchantEquippedBy
+validProperty	CanEnchantSource
+validProperty	CanPayManaCost
+validProperty	CanTransform
+validProperty	CardOwner
+validProperty	CastSa Spell.ManaFromArtifact
+validProperty	CastSa Spell.ManaFromTreasure
+validProperty	CastSa Spell.ManaSpent EQ0
+validProperty	CastSa Spell.MayPlaySource
+validProperty	CastSa Spell.OppCtrl
+validProperty	Cat
+validProperty	Centaur
+validProperty	Chandra
+validProperty	Chimera
+validProperty	Chosen
+validProperty	ChosenCard
+validProperty	ChosenCard$GreatestCardPower
+validProperty	ChosenCard$LeastCardPower
+validProperty	ChosenCardStrict
+validProperty	ChosenColor
+validProperty	ChosenColorSource
+validProperty	ChosenCtrl
+validProperty	ChosenModeAbzan
+validProperty	ChosenModeBelieve
+validProperty	ChosenModeBrotherhood
+validProperty	ChosenModeCosplay
+validProperty	ChosenModeDoubt
+validProperty	ChosenModeDragons
+validProperty	ChosenModeEnclave
+validProperty	ChosenModeJeskai
+validProperty	ChosenModeKhans
+validProperty	ChosenModeLegion
+validProperty	ChosenModeMardu
+validProperty	ChosenModeMirran
+validProperty	ChosenModeNCR
+validProperty	ChosenModePhyrexian
+validProperty	ChosenModeScience
+validProperty	ChosenModeSultai
+validProperty	ChosenModeTemur
+validProperty	ChosenSector
+validProperty	ChosenType
+validProperty	Citizen
+validProperty	Cleric
+validProperty	Colorless
+validProperty	ColorlessSource
+validProperty	Condition Counters.RAD
+validProperty	ControlledBy AttackingPlayer
+validProperty	ControlledBy ChoosingPlayer
+validProperty	ControlledBy DelayTriggerRemembered
+validProperty	ControlledBy EnchantedController.!isMonarch
+validProperty	ControlledBy NextOpponentToYourLeft
+validProperty	ControlledBy NextPlayerToYourLeft
+validProperty	ControlledBy Opponent.IsCorrupted
+validProperty	ControlledBy Opponent.castSpellThisTurn
+validProperty	ControlledBy ParentTarget
+validProperty	ControlledBy ParentTargetedController
+validProperty	ControlledBy ParentTargetedController$GreatestCardManaCost
+validProperty	ControlledBy Player.Active
+validProperty	ControlledBy Player.EnchantedController
+validProperty	ControlledBy Player.IsRemembered
+validProperty	ControlledBy Player.NotedForPeace
+validProperty	ControlledBy Player.NotedForRedWaterfall
+validProperty	ControlledBy Player.NotedForWar
+validProperty	ControlledBy Player.OpponentOf ParentTarget
+validProperty	ControlledBy Player.Other
+validProperty	ControlledBy Player.isMonarch
+validProperty	ControlledBy Player.targetedBy
+validProperty	ControlledBy Player.wasDealtCombatDamageThisCombatBy ParentTarget
+validProperty	ControlledBy Player.wasDealtCombatDamageThisTurnBy Creature.Pirate GE3
+validProperty	ControlledBy RememberedController
+validProperty	ControlledBy Spawner>TriggeredDefendingPlayer
+validProperty	ControlledBy Spawner>TriggeredTarget
+validProperty	ControlledBy TargetedController
+validProperty	ControlledBy TargetedOrController
+validProperty	ControlledBy TargetedPlayer
+validProperty	ControlledBy TargetedPlayer$CardCounters.ALL
+validProperty	ControlledBy TriggeredDefendingPlayer
+validProperty	ControlledBy TriggeredPlayer
+validProperty	ControlledBy TriggeredSourceSAController
+validProperty	ControlledBy TriggeredTarget
+validProperty	ControlledBy TriggeredTargetController
+validProperty	ControlledBy You.castSpellThisTurn
+validProperty	ControllerControlsAtLeastAsManyLand
+validProperty	ControllerControlsIsland
+validProperty	ControllerControlsLand_LE3
+validProperty	ControllerControlsMoreLand
+validProperty	CostsPhyrexianMana
+validProperty	CouldCastTiming
+validProperty	Coward
+validProperty	Creature
+validProperty	Crew
+validProperty	CrewedBySourceThisTurn
+validProperty	CrewedThisTurn
+validProperty	Cycling
+validProperty	Dalek
+validProperty	Damaged
+validProperty	DamagedBy
+validProperty	DamagedBy Enchanted
+validProperty	DamagedBy Equipped
+validProperty	DamagedBy Remembered
+validProperty	DamagedBy RememberedLKI
+validProperty	DamagedByCard.YouCtrl;Emblem.YouCtrl
+validProperty	DamagedByGiant.YouCtrl;Wizard.YouCtrl;Spell.YouCtrl
+validProperty	DamagedBySpider.YouCtrl
+validProperty	Dash
+validProperty	Davriel
+validProperty	DefenderCtrl
+validProperty	DefenderCtrlForRemembered
+validProperty	DefendingPlayerCtrl
+validProperty	Demon
+validProperty	Detective
+validProperty	DifferentSector
+validProperty	Dinosaur
+validProperty	DiscardedThisTurn
+validProperty	DoubleFaced
+validProperty	Dragon
+validProperty	DrawnThisTurn
+validProperty	Dwarf
+validProperty	EffectSource
+validProperty	Elder
+validProperty	Eldrazi
+validProperty	Elemental
+validProperty	Elf
+validProperty	Embalm
+validProperty	EnchantedBy
+validProperty	EnchantedBy Aura.Other
+validProperty	EnchantedBy Aura.YouCtrl
+validProperty	EnchantedBy$CardCounters.P1P0
+validProperty	EnchantedController
+validProperty	EnchantedControllerCtrl
+validProperty	EnchantedPlayerCtr
+validProperty	EnchantedPlayerCtrl
+validProperty	Enchantment
+validProperty	EnteredSinceYourLastTurn
+validProperty	EnteredUnder You
+validProperty	Equip
+validProperty	Equipment
+validProperty	EquippedBy
+validProperty	EquippedByTargeted
+validProperty	EquippedByValid Equipment.Legendary
+validProperty	Eternalize
+validProperty	Exhaust
+validProperty	ExiledByYou
+validProperty	ExiledWith
+validProperty	ExiledWithEffectSource
+validProperty	ExiledWithSource
+validProperty	ExiledWithSource$CardManaCost
+validProperty	ExiledWithSource$CardPower
+validProperty	ExiledWithSource$CardTypes
+validProperty	ExiledWithSourceLKI
+validProperty	Faerie
+validProperty	Flashback
+validProperty	Food
+validProperty	Foretelling
+validProperty	FortifiedBy
+validProperty	Fungus
+validProperty	Gate
+validProperty	Giant
+validProperty	Gideon
+validProperty	Glimmer
+validProperty	Goblin
+validProperty	Golem
+validProperty	Gorgon
+validProperty	Green
+validProperty	GreenSource
+validProperty	Halfling
+validProperty	HasCounters
+validProperty	HasDevoured
+validProperty	Hero
+validProperty	Historic
+validProperty	Horror
+validProperty	Horse
+validProperty	Huatli
+validProperty	Human
+validProperty	Hydra
+validProperty	Illusion
+validProperty	Imprinted
+validProperty	Inkling
+validProperty	Insect
+validProperty	Instant
+validProperty	IsCommander
+validProperty	IsGoaded
+validProperty	IsImprinted
+validProperty	IsMonstrous
+validProperty	IsNotChosenType
+validProperty	IsRemembered
+validProperty	IsRemembered$CardManaCost
+validProperty	IsRemembered$GreatestCardPower
+validProperty	IsRenowned
+validProperty	IsRingbearer
+validProperty	IsRingbearer$CardPower
+validProperty	IsSaddled
+validProperty	IsSolved
+validProperty	IsSuspected
+validProperty	IsTargeting Player.HasCardsInGraveyard_Creature_LEY
+validProperty	IsTargeting Player.HasCardsInHand_Card_GEY
+validProperty	IsTargeting Player.hasMoreLife
+validProperty	IsTargeting Player.withMoreCreaturesThanYou
+validProperty	IsTargeting Remembered
+validProperty	IsTargeting Self
+validProperty	IsTargeting Valid Card.IsCommander
+validProperty	IsTargeting Valid Creature
+validProperty	IsTargeting Valid Permanent.YouCtrl
+validProperty	IsTriggerRemembered
+validProperty	IsUnearthed
+validProperty	Island
+validProperty	Jace
+validProperty	Kavu
+validProperty	Kicked
+validProperty	Kithkin
+validProperty	Knight
+validProperty	Kobold
+validProperty	Kor
+validProperty	Kraken
+validProperty	Land
+validProperty	LastChapter
+validProperty	Legendary
+validProperty	Legendary$Colors
+validProperty	Leviathan
+validProperty	Lhurgoyf
+validProperty	LostLifeThisTurn
+validProperty	Loyalty
+validProperty	ManaAbility
+validProperty	ManaAbilityCantPaidFor
+validProperty	ManaCost=Equipped
+validProperty	ManaCost=Imprinted
+validProperty	ManaCostPartialBlue
+validProperty	ManaFromCard.StrictlySelf
+validProperty	ManaFromCreature_3
+validProperty	ManaFromTreasure
+validProperty	ManaSpent EQ0
+validProperty	ManaSpent GE4
+validProperty	ManaSpent GE7
+validProperty	ManaSpent GE8
+validProperty	ManaSpent GTX
+validProperty	ManaSpent LTX
+validProperty	ManaSpentBy Player.Other
+validProperty	MayPlaySource
+validProperty	Mercenary
+validProperty	Merfolk
+validProperty	Minion
+validProperty	Minotaur
+validProperty	Modal
+validProperty	Modular
+validProperty	Monkey
+validProperty	MonoColor
+validProperty	MorphUp
+validProperty	MostProminentColor black
+validProperty	MostProminentColor blue
+validProperty	MostProminentColor green
+validProperty	MostProminentColor red
+validProperty	MostProminentColor white
+validProperty	Mount
+validProperty	Mouse
+validProperty	MultiColor
+validProperty	Mutant
+validProperty	Mutant$GreatestCardPower
+validProperty	Mutate
+validProperty	Myr
+validProperty	NamedCard
+validProperty	NamedSpell
+validProperty	Nightmare
+validProperty	Ninja
+validProperty	Ninjutsu
+validProperty	NoAbilities
+validProperty	Noble
+validProperty	NonActive
+validProperty	NotDefinedOriginalHost
+validProperty	NotDefinedParentTarget
+validProperty	NotDefinedReplacedSimultaneousETB
+validProperty	NotDefinedTargeted
+validProperty	NotDefinedTriggeredCard
+validProperty	NotDefinedTriggeredTarget
+validProperty	NotedColor
+validProperty	NotedDefender
+validProperty	NotedForArcaneSavant
+validProperty	NotedForGreenAnchor
+validProperty	NotedGuessPhantasm
+validProperty	NotedNameNobleBanneret
+validProperty	NotedType
+validProperty	NotedTypes
+validProperty	Octopus
+validProperty	OppCtrl
+validProperty	OppCtrl$CardPower
+validProperty	OppCtrl$GreatestCardPower
+validProperty	OppOwn
+validProperty	OppOwn$CardTypes
+validProperty	OppProtect
+validProperty	Opponent
+validProperty	OpponentOf Remembered
+validProperty	OpponentToActive
+validProperty	Orc
+validProperty	OriginalHostRemembered
+validProperty	Other
+validProperty	Other$CardCounters.P1P1
+validProperty	Other$CardCounters.SHIELD
+validProperty	Other$CardManaCost
+validProperty	Other$GreatestCardManaCost
+validProperty	Other$GreatestCardPower
+validProperty	Other$GreatestCardToughness
+validProperty	Other.YouOwn
+validProperty	Otter
+validProperty	Outlast
+validProperty	Outlaw
+validProperty	OwnedBy EnchantedController
+validProperty	OwnedBy Opponent.NonActive
+validProperty	OwnedBy Player.Chosen
+validProperty	OwnedBy Player.EnchantedBy
+validProperty	OwnedBy Player.IsRemembered
+validProperty	OwnedBy Player.Opponent
+validProperty	OwnedBy Player.TriggeredTarget
+validProperty	OwnedBy Remembered$CardManaCost
+validProperty	OwnedBy Spawner>TriggeredDefendingPlayer
+validProperty	OwnedBy Spawner>TriggeredTarget
+validProperty	OwnedBy TargetedController
+validProperty	OwnedBy TargetedPlayer
+validProperty	OwnedBy TriggeredAttackingPlayer
+validProperty	OwnedBy TriggeredDefendingPlayer
+validProperty	OwnedBy TriggeredTarget
+validProperty	Ox
+validProperty	Paired
+validProperty	PairedWith
+validProperty	Party
+validProperty	Pegasus
+validProperty	Permanent
+validProperty	Permanent$CardCounters.ALL
+validProperty	Phyrexian
+validProperty	Pirate
+validProperty	Plains
+validProperty	Planeswalker
+validProperty	Plant
+validProperty	Plotting
+validProperty	PowerGE3
+validProperty	PowerUp
+validProperty	PromisedGift
+validProperty	ProtectedBy TriggeredTarget
+validProperty	Rabbit
+validProperty	Rat
+validProperty	Rebel
+validProperty	Red
+validProperty	RedSource
+validProperty	RememberedPlayerCtrl
+validProperty	RememberedPlayerCtrl$GreatestCardManaCost
+validProperty	RememberedPlayerOwn
+validProperty	RememberedPlayerOwn$GreatestCardManaCost
+validProperty	Rigger
+validProperty	Robot
+validProperty	Rogue
+validProperty	Room
+validProperty	Rune
+validProperty	Sacrificed
+validProperty	Saddle
+validProperty	SaddledThisTurn
+validProperty	Samurai
+validProperty	Saproling
+validProperty	Sarkhan
+validProperty	Satyr
+validProperty	Scarecrow
+validProperty	Scion
+validProperty	SecondSpellCastThisTurn
+validProperty	Self
+validProperty	Serpent
+validProperty	Servo
+validProperty	Shaman
+validProperty	Shapeshifter
+validProperty	SharesCMCWith Imprinted.ExiledWithSource
+validProperty	SharesCMCWith TriggeredCard
+validProperty	SharesColorWith
+validProperty	SharesColorWith Equipped
+validProperty	SharesColorWith Imprinted.ExiledWithSource
+validProperty	SharesColorWith LastCastThisTurn
+validProperty	SharesColorWith MostProminentColor
+validProperty	SharesColorWith TopOfLibrary
+validProperty	Skeleton
+validProperty	Sliver
+validProperty	Snake
+validProperty	Sneak
+validProperty	Snow
+validProperty	Soldier
+validProperty	Sorcery
+validProperty	Spacecraft
+validProperty	Spawn
+validProperty	Sphinx
+validProperty	Spider
+validProperty	Spirit
+validProperty	Squirrel
+validProperty	Station
+validProperty	StrictlyOther
+validProperty	StrictlySelf
+validProperty	Survivor
+validProperty	Swamp
+validProperty	Tamiyo
+validProperty	TargetedPlayerCtrl
+validProperty	TargetedPlayerCtrl$GreatestCardManaCost
+validProperty	TargetedPlayerCtrl$GreatestCardPower
+validProperty	TargetedPlayerOwn
+validProperty	TargetedPlayerOwn$GreatestCardManaCost
+validProperty	Teamwork
+validProperty	Tezzeret
+validProperty	ThisTurnCast
+validProperty	ThisTurnEntered
+validProperty	ThisTurnEntered$GreatestCardPower
+validProperty	ThisTurnEnteredFrom_Battlefield
+validProperty	ThisTurnEnteredFrom_Exile
+validProperty	ThisTurnEnteredFrom_Graveyard
+validProperty	ThisTurnEnteredFrom_Library
+validProperty	ThisTurnEnteredYourHand
+validProperty	Thopter
+validProperty	Thrull
+validProperty	Time Lord
+validProperty	TopGraveyard
+validProperty	TopGraveyard2
+validProperty	TopLibrary
+validProperty	Transformed
+validProperty	Treasure
+validProperty	Treefolk
+validProperty	TriggeredAttacker
+validProperty	TriggeredAttackers
+validProperty	TriggeredCard
+validProperty	TriggeredCrew
+validProperty	TriggeredDefendingPlayer
+validProperty	Ugin
+validProperty	Unearth
+validProperty	Unicorn
+validProperty	Unlock
+validProperty	Untapped
+validProperty	ValidGraveyard Card.YouOwn
+validProperty	ValidGraveyard Creature.Legendary
+validProperty	Vampire
+validProperty	Vehicle
+validProperty	VenturedThisTurn
+validProperty	Villain
+validProperty	Wall
+validProperty	Ward
+validProperty	Warp
+validProperty	Warrior
+validProperty	Werewolf
+validProperty	White
+validProperty	WhiteSource
+validProperty	Wizard
+validProperty	Wolf
+validProperty	Wraith
+validProperty	XCostLE3
+validProperty	YouCtrl
+validProperty	YouCtrl$CardCounters.ALL
+validProperty	YouCtrl$CardCounters.LORE
+validProperty	YouCtrl$CardCounters.LOYALTY
+validProperty	YouCtrl$CardCounters.P1P1
+validProperty	YouCtrl$CardCounters.TIME
+validProperty	YouCtrl$CardManaCost
+validProperty	YouCtrl$CardPower
+validProperty	YouCtrl$CardToughness
+validProperty	YouCtrl$CardTypes
+validProperty	YouCtrl$Colors
+validProperty	YouCtrl$CreatureType
+validProperty	YouCtrl$DifferentCardNames
+validProperty	YouCtrl$DifferentCardPower
+validProperty	YouCtrl$DifferentColorPair
+validProperty	YouCtrl$GreatestCardManaCost
+validProperty	YouCtrl$GreatestCardPower
+validProperty	YouCtrl$GreatestCardToughness
+validProperty	YouDontCtrl
+validProperty	YouDontCtrl$GreatestCardPower
+validProperty	YouDontCtrl$GreatestCardToughness
+validProperty	YouDontOwn
+validProperty	YouOwn
+validProperty	YouOwn$CardManaCost
+validProperty	YouOwn$CardTypes
+validProperty	YouOwn$CardTypesPermanent
+validProperty	YouOwn$DifferentCardManaCost
+validProperty	YouOwn$DifferentCardNames
+validProperty	YouOwn$GreatestCardManaCost
+validProperty	YouOwn$GreatestCardPower
+validProperty	YourTeamCtrl
+validProperty	Zombie
+validProperty	activated
+validProperty	attackedBattleThisTurn
+validProperty	attackedLastTurn
+validProperty	attackedThisTurn
+validProperty	attackedWithCreaturesThisTurn
+validProperty	attackedYouTheirLastTurn
+validProperty	attackedYouThisTurn
+validProperty	attackersBandedWith
+validProperty	attacking
+validProperty	attacking ChosenPlayer
+validProperty	attacking EnchantedPlayer
+validProperty	attacking Opponent
+validProperty	attacking RememberedPlayer
+validProperty	attacking TriggeredAttackedTarget
+validProperty	attacking TriggeredDefender
+validProperty	attacking Valid Planeswalker.OppCtrl
+validProperty	attacking$CardPower
+validProperty	attacking$GreatestCardPower
+validProperty	attackingAlone
+validProperty	attackingSame
+validProperty	attackingYou
+validProperty	attackingYouOrYourPW
+validProperty	attackingYouOrYourPWLKI
+validProperty	bargained
+validProperty	basePowerEQ0
+validProperty	basePowerEQ1
+validProperty	basePowerEQ2
+validProperty	basePowerEQ4
+validProperty	basePowerLE1
+validProperty	baseToughnessEQ1
+validProperty	baseToughnessEQ2
+validProperty	baseToughnessEQ3
+validProperty	baseToughnessLE1
+validProperty	blocked
+validProperty	blockedByRemembered
+validProperty	blockedBySource
+validProperty	blockedBySourceLKI
+validProperty	blockedBySourceThisTurn
+validProperty	blockedByThisTurn
+validProperty	blockedByValidThisTurn Creature.Legendary
+validProperty	blockedByValidThisTurn ParentTarget
+validProperty	blockedByValidThisTurn Targeted
+validProperty	blockedByValidThisTurn Zombie
+validProperty	blockedRemembered
+validProperty	blockedThisTurn
+validProperty	blockedValidThisTurn Card.StrictlySelf
+validProperty	blockedValidThisTurn Creature.Legendary
+validProperty	blockedValidThisTurn Zombie
+validProperty	blocking
+validProperty	blockingAlone
+validProperty	blockingCreatureYouCtrl
+validProperty	blockingEnchanted
+validProperty	blockingEquipped
+validProperty	blockingRemembered
+validProperty	blockingSelf
+validProperty	blockingSource
+validProperty	blockingTriggeredAttacker
+validProperty	canProduceMana
+validProperty	canProduceManaColor Black
+validProperty	canProduceManaColor Colorless
+validProperty	canProduceManaColor White
+validProperty	canProduceSameManaTypeWith
+validProperty	cmcChosenEvenOdd
+validProperty	cmcEQ1
+validProperty	cmcEQ2
+validProperty	cmcEQ3
+validProperty	cmcEQ4
+validProperty	cmcEQ5
+validProperty	cmcEQ6
+validProperty	cmcEQ9
+validProperty	cmcEQChosen
+validProperty	cmcEQCount$ChosenNumber
+validProperty	cmcEQM
+validProperty	cmcEQX
+validProperty	cmcEQY
+validProperty	cmcEven
+validProperty	cmcGE1
+validProperty	cmcGE2
+validProperty	cmcGE3
+validProperty	cmcGE4
+validProperty	cmcGE5
+validProperty	cmcGE6
+validProperty	cmcGE7
+validProperty	cmcGEX
+validProperty	cmcGTX
+validProperty	cmcGTY
+validProperty	cmcLE1
+validProperty	cmcLE10
+validProperty	cmcLE2
+validProperty	cmcLE3
+validProperty	cmcLE4
+validProperty	cmcLE5
+validProperty	cmcLE6
+validProperty	cmcLE8
+validProperty	cmcLEX
+validProperty	cmcLEX$GreatestCardManaCost
+validProperty	cmcLEY
+validProperty	cmcLEZ
+validProperty	cmcLTX
+validProperty	cmcLTY
+validProperty	cmcM21
+validProperty	cmcNotChosenEvenOdd
+validProperty	cmcOdd
+validProperty	controllerWasDealtCombatDamageByThisTurn
+validProperty	controlsArtifact.namedWedding Ring
+validProperty	controlsCard.IsRemembered
+validProperty	controlsCard.IsTriggerRemembered
+validProperty	controlsCreature.IsRemembered_GE1
+validProperty	controlsCreature.White_GE1
+validProperty	controlsLand.counters\_GE1\_CONTESTED
+validProperty	couldAttackButNotAttacking
+validProperty	countersReceivedThisTurn_GE1_P1P1_You
+validProperty	counters_EQ0_BLAZE
+validProperty	counters_EQ0_Contract
+validProperty	counters_EQ0_DEATH
+validProperty	counters_EQ0_EGG
+validProperty	counters_EQ0_Indestructible
+validProperty	counters_EQ0_ODOR
+validProperty	counters_EQ0_OIL
+validProperty	counters_EQ0_P1P1
+validProperty	counters_EQ0_SHELL
+validProperty	counters_EQ0_TIME
+validProperty	counters_EQ1_TIDE
+validProperty	counters_EQ3_TIDE
+validProperty	counters_GE10_CHARGE
+validProperty	counters_GE10_P1P1
+validProperty	counters_GE12_CHARGE
+validProperty	counters_GE1_BOUNTY
+validProperty	counters_GE1_BRIBERY
+validProperty	counters_GE1_CHARGE
+validProperty	counters_GE1_COIN
+validProperty	counters_GE1_COLLECTION
+validProperty	counters_GE1_CROAK
+validProperty	counters_GE1_DEATH
+validProperty	counters_GE1_DEPLETION
+validProperty	counters_GE1_DISCOVERY
+validProperty	counters_GE1_DIVINITY
+validProperty	counters_GE1_DOOM
+validProperty	counters_GE1_DREAM
+validProperty	counters_GE1_EGG
+validProperty	counters_GE1_EVERYTHING
+validProperty	counters_GE1_FATE
+validProperty	counters_GE1_FETCH
+validProperty	counters_GE1_FLOOD
+validProperty	counters_GE1_FUNGUS
+validProperty	counters_GE1_FUSE
+validProperty	counters_GE1_GLYPH
+validProperty	counters_GE1_GOLD
+validProperty	counters_GE1_HATCHING
+validProperty	counters_GE1_HIT
+validProperty	counters_GE1_HOURGLASS
+validProperty	counters_GE1_ICE
+validProperty	counters_GE1_IMPOSTOR
+validProperty	counters_GE1_INFECTION
+validProperty	counters_GE1_KICK
+validProperty	counters_GE1_LEVEL
+validProperty	counters_GE1_LOYALTY
+validProperty	counters_GE1_M1M1
+validProperty	counters_GE1_MAGNET
+validProperty	counters_GE1_MEMORY
+validProperty	counters_GE1_MINE
+validProperty	counters_GE1_OIL
+validProperty	counters_GE1_P1P1
+validProperty	counters_GE1_PAGE
+validProperty	counters_GE1_PREY
+validProperty	counters_GE1_REJECTION
+validProperty	counters_GE1_REVIVAL
+validProperty	counters_GE1_SHIELD
+validProperty	counters_GE1_SLEEP
+validProperty	counters_GE1_SLIME
+validProperty	counters_GE1_SLUMBER
+validProperty	counters_GE1_STASH
+validProperty	counters_GE1_STUDY$DifferentCardManaCost
+validProperty	counters_GE1_STUN
+validProperty	counters_GE1_TIME
+validProperty	counters_GE1_WIND
+validProperty	counters_GE20_CHARGE
+validProperty	counters_GE2_CHARGE
+validProperty	counters_GE2_P1P1
+validProperty	counters_GE3_CHARGE
+validProperty	counters_GE3_DEPLETION
+validProperty	counters_GE3_FIRE
+validProperty	counters_GE3_FLAME
+validProperty	counters_GE3_JUDGMENT
+validProperty	counters_GE3_LANDMARK
+validProperty	counters_GE3_OIL
+validProperty	counters_GE3_P1P1
+validProperty	counters_GE3_RITUAL
+validProperty	counters_GE3_SOUL
+validProperty	counters_GE4_CHARGE
+validProperty	counters_GE4_OIL
+validProperty	counters_GE4_P1P1
+validProperty	counters_GE4_PHYRESIS
+validProperty	counters_GE5_CHARGE
+validProperty	counters_GE5_HATCHLING
+validProperty	counters_GE5_P1P1
+validProperty	counters_GE6_CHARGE
+validProperty	counters_GE7_CHARGE
+validProperty	counters_GE7_EMBER
+validProperty	counters_GE8_CHARGE
+validProperty	counters_GE8_NIGHT
+validProperty	counters_GE8_P1P1
+validProperty	counters_GE9_CHARGE
+validProperty	counters_GE_M1M1
+validProperty	counters_GT2_OIL
+validProperty	counters_GT9_P1P1
+validProperty	counters_LE2_OIL
+validProperty	counters_LT1_FATE
+validProperty	counters_LT1_P1P1
+validProperty	counters_LTX_P1P1
+validProperty	dealtCombatDamageThisCombat
+validProperty	dealtCombatDamageThisTurn Player
+validProperty	dealtDamageThisTurn
+validProperty	dealtDamageToYouThisTurn
+validProperty	descended
+validProperty	doesNotShareNameWith Card.token
+validProperty	doesNotShareNameWith OtherYourBattlefield
+validProperty	doesNotShareNameWith Remembered
+validProperty	doesNotShareNameWith YourGraveyard
+validProperty	enchanted
+validProperty	enlistedThisCombat
+validProperty	equalPT
+validProperty	equipped
+validProperty	escaped
+validProperty	faceDown
+validProperty	faceUp
+validProperty	foretold
+validProperty	gotBlockedThisTurn
+validProperty	greatestCMC_Artifact
+validProperty	greatestCMC_Creature
+validProperty	greatestPower
+validProperty	greatestPowerControlledByCardController
+validProperty	greatestPowerControlledByYou
+validProperty	hadToAttackThisCombat
+validProperty	hasAbility Activated.Exhaust
+validProperty	hasAbility Activated.hasTapCost
+validProperty	hasFewerCreaturesInYardThanActive
+validProperty	hasKeywordCARDNAME count as Flame Burst.
+validProperty	hasKeywordCARDNAME count as Muscle Burst.
+validProperty	hasKeywordConvoke
+validProperty	hasKeywordEnchant:Creature
+validProperty	hasKeywordFlash
+validProperty	hasKeywordLandwalk:Island
+validProperty	hasManaAbility
+validProperty	hasMoreCardsInHandThanActive
+validProperty	hasMoreLifeThanActive
+validProperty	hasNonManaActivatedAbility
+validProperty	hasTapCost
+validProperty	hasXCost
+validProperty	inRealZoneBattlefield
+validProperty	inZoneBattlefield
+validProperty	inZoneExile
+validProperty	inZoneGraveyard
+validProperty	inZoneStack
+validProperty	isCastFaceDown
+validProperty	isMonarch
+validProperty	isTurnFaceUp
+validProperty	kicked
+validProperty	kicked 1
+validProperty	kicked 2
+validProperty	lifeGE1
+validProperty	lifeGE7
+validProperty	lowestCMC
+validProperty	madness
+validProperty	milledThisTurn
+validProperty	modified
+validProperty	namedAccumulated Knowledge
+validProperty	namedAncestral Anger
+validProperty	namedApproach of the Second Sun
+validProperty	namedApproachingSuns
+validProperty	namedArguel's Blood Fast
+validProperty	namedBaloth Packhunter
+validProperty	namedBattalion Foot Soldier
+validProperty	namedBogbrew Witch
+validProperty	namedBrothers Yamazaki
+validProperty	namedCalim; Djinn Emperor
+validProperty	namedCardboard Carapace
+validProperty	namedCharmed Stray
+validProperty	namedChitterspitter
+validProperty	namedCleric of the Forward Order
+validProperty	namedCompound Fracture
+validProperty	namedCoolness Badge
+validProperty	namedCrown of Empires
+validProperty	namedEight-and-a-Half-Tails
+validProperty	namedFeast of Flesh
+validProperty	namedFenric
+validProperty	namedFlame Burst
+validProperty	namedFood Fight
+validProperty	namedFrantic Inventory
+validProperty	namedGalvanic Bombardment
+validProperty	namedGary Clone
+validProperty	namedGathering Throng
+validProperty	namedGenasi Enforcers
+validProperty	namedGenasi Rabble-Rouser
+validProperty	namedGladewalker Ritualist
+validProperty	namedGoblin Artisans
+validProperty	namedGoblin Gathering
+validProperty	namedGollum; Obsessed Stalker
+validProperty	namedGroffskithur
+validProperty	namedGrowth Cycle
+validProperty	namedGruff_Triplets
+validProperty	namedGuan Yu; Sainted Warrior
+validProperty	namedHanweir Garrison
+validProperty	namedHare Apparent
+validProperty	namedHedron Alignment
+validProperty	namedHelm of Kaldra
+validProperty	namedIvory Guardians
+validProperty	namedKarlov's Crossbow
+validProperty	namedKindle
+validProperty	namedKjeldoran War Cry
+validProperty	namedKobolds of Kher Keep
+validProperty	namedLabyrinth of Skophos
+validProperty	namedLegion Conquistador
+validProperty	namedLeitmotif Composer
+validProperty	namedLife Burst
+validProperty	namedLightning Rager
+validProperty	namedMidnight Clock
+validProperty	namedMind Burst
+validProperty	namedMine Worker
+validProperty	namedMirror-Mad Phantasm
+validProperty	namedMount Keralia
+validProperty	namedMuscle Burst
+validProperty	namedPack Mastiff
+validProperty	namedPaper Tiger
+validProperty	namedPass the Torch
+validProperty	namedPhyrexian Dragon Engine
+validProperty	namedPlague Rats
+validProperty	namedPower Plant Worker
+validProperty	namedPowerstone Shard
+validProperty	namedRelentless Rats
+validProperty	namedRite of Flame
+validProperty	namedRock Lobster
+validProperty	namedRune Snag
+validProperty	namedScepter of Empires
+validProperty	namedScissors Lizard
+validProperty	namedSeven Dwarves
+validProperty	namedSheltered Valley
+validProperty	namedShield of Kaldra
+validProperty	namedSlime Against Humanity
+validProperty	namedSword of Kaldra
+validProperty	namedSyr Joshua and Syr Saxon
+validProperty	namedTake Inventory
+validProperty	namedTemple of Aclazotz
+validProperty	namedThe Mightstone and Weakstone
+validProperty	namedThrone of Empires
+validProperty	namedTimberpack Wolf
+validProperty	namedTower Worker
+validProperty	namedUnbreakable Remnant
+validProperty	namedUndead Servant
+validProperty	namedVerdant Dread
+validProperty	namedVolo's Journal
+validProperty	namedWandering Effect
+validProperty	namedWastes
+validProperty	namedWirefly
+validProperty	namedZhang Fei; Fierce Warrior
+validProperty	noName
+validProperty	nonAngel
+validProperty	nonArchon
+validProperty	nonArmy
+validProperty	nonArtifact
+validProperty	nonAssassin
+validProperty	nonAura
+validProperty	nonBasic
+validProperty	nonBattle
+validProperty	nonBear
+validProperty	nonBlack
+validProperty	nonBlue
+validProperty	nonBolas
+validProperty	nonBorg
+validProperty	nonBrushwagg
+validProperty	nonCat
+validProperty	nonChosenCard
+validProperty	nonColorless
+validProperty	nonCopiedSpell
+validProperty	nonCreature
+validProperty	nonDalek
+validProperty	nonDemon
+validProperty	nonDetective
+validProperty	nonDevil
+validProperty	nonDinosaur
+validProperty	nonDragon
+validProperty	nonElemental
+validProperty	nonElf
+validProperty	nonEnchantment
+validProperty	nonEquipment
+validProperty	nonEye
+validProperty	nonFaerie
+validProperty	nonFox
+validProperty	nonFrog
+validProperty	nonGiant
+validProperty	nonGideon
+validProperty	nonGnome
+validProperty	nonGoat
+validProperty	nonGod
+validProperty	nonGorgon
+validProperty	nonGreen
+validProperty	nonHorror
+validProperty	nonHuman
+validProperty	nonHuman$GreatestCardPower
+validProperty	nonHydra
+validProperty	nonInsect
+validProperty	nonIsland
+validProperty	nonKraken
+validProperty	nonKree
+validProperty	nonLand
+validProperty	nonLand$CardManaCost
+validProperty	nonLand$DifferentCardManaCost
+validProperty	nonLegendary
+validProperty	nonLemur
+validProperty	nonLesson
+validProperty	nonLeviathan
+validProperty	nonMerfolk
+validProperty	nonMount
+validProperty	nonMutant
+validProperty	nonOctopus
+validProperty	nonOgre
+validProperty	nonOoze
+validProperty	nonPhyrexian
+validProperty	nonPilot
+validProperty	nonPirate
+validProperty	nonRat
+validProperty	nonRed
+validProperty	nonRogue
+validProperty	nonSaga
+validProperty	nonSalamander
+validProperty	nonSerpent
+validProperty	nonShapeshifter
+validProperty	nonSliver
+validProperty	nonSnow
+validProperty	nonSoldier
+validProperty	nonSpacecraft
+validProperty	nonSpider
+validProperty	nonSpirit
+validProperty	nonSquirrel
+validProperty	nonSwamp
+validProperty	nonVampire
+validProperty	nonVehicle
+validProperty	nonVillain
+validProperty	nonWall
+validProperty	nonWarrior
+validProperty	nonWerewolf
+validProperty	nonWhite
+validProperty	nonWolf
+validProperty	nonZombie
+validProperty	numColorsEQ2
+validProperty	numColorsEQ3
+validProperty	numTargets EQ1
+validProperty	numTargets GE1
+validProperty	numTypesGE2
+validProperty	phasedOutIsRemembered
+validProperty	phasedOutOther
+validProperty	phasedOutPermanent
+validProperty	phasedOutSelf
+validProperty	powerEQ1
+validProperty	powerEQ4
+validProperty	powerEQChosen
+validProperty	powerEQX
+validProperty	powerGE1
+validProperty	powerGE2
+validProperty	powerGE3
+validProperty	powerGE4
+validProperty	powerGE5
+validProperty	powerGE6
+validProperty	powerGE7
+validProperty	powerGEIronclawX
+validProperty	powerGEX
+validProperty	powerGT4
+validProperty	powerGTX
+validProperty	powerGTY
+validProperty	powerGTbasePower
+validProperty	powerLE1
+validProperty	powerLE2
+validProperty	powerLE3
+validProperty	powerLE4
+validProperty	powerLE6
+validProperty	powerLE8
+validProperty	powerLEX
+validProperty	powerLT0
+validProperty	powerLT6
+validProperty	powerLTCount$CardPower
+validProperty	powerLTTriggeredCard$CardPower
+validProperty	powerLTX
+validProperty	powerLTY
+validProperty	powerLTZ
+validProperty	powerLTtoughness
+validProperty	powerNOTbasePower
+validProperty	prowled
+validProperty	sameName
+validProperty	setARN
+validProperty	setATQ
+validProperty	setHML
+validProperty	sharesCardTypeWith
+validProperty	sharesCardTypeWith EachTopLibrary
+validProperty	sharesCardTypeWith Imprinted
+validProperty	sharesCardTypeWith Imprinted.ExiledWithSource
+validProperty	sharesCardTypeWith Remembered
+validProperty	sharesCardTypeWith RememberedLKI
+validProperty	sharesCardTypeWith ReplacedSource
+validProperty	sharesCardTypeWith TriggeredCard
+validProperty	sharesCardTypeWith TriggeredCardLKICopy
+validProperty	sharesCardTypeWith ValidExile Card.ExiledWithSource
+validProperty	sharesControllerWith
+validProperty	sharesCreatureTypeWith
+validProperty	sharesCreatureTypeWith Commander
+validProperty	sharesCreatureTypeWith Equipped
+validProperty	sharesCreatureTypeWith Remembered
+validProperty	sharesCreatureTypeWith Sacrificed
+validProperty	sharesCreatureTypeWith Targeted
+validProperty	sharesCreatureTypeWith TriggeredAttacker
+validProperty	sharesCreatureTypeWith TriggeredAttackerLKICopy
+validProperty	sharesCreatureTypeWith TriggeredCard
+validProperty	sharesCreatureTypeWith TriggeredCardLKICopy
+validProperty	sharesNameWith
+validProperty	sharesNameWith Equipped
+validProperty	sharesNameWith ExiledWith
+validProperty	sharesNameWith Imprinted
+validProperty	sharesNameWith NonToken
+validProperty	sharesNameWith Remembered
+validProperty	sharesNameWith Remembered.ExiledWithSource
+validProperty	sharesNameWith RememberedLKI
+validProperty	sharesNameWith Targeted
+validProperty	sharesNameWith ThisTurnCast
+validProperty	sharesNameWith TriggeredCard
+validProperty	sharesNameWith ValidExile Card.ExiledWithSource
+validProperty	sharesNameWith YourGraveyard
+validProperty	singleTarget
+validProperty	sneaked
+validProperty	spectacle
+validProperty	surged
+validProperty	surveilledThisTurn
+validProperty	suspended
+validProperty	tapped
+validProperty	targetedBy
+validProperty	token
+validProperty	token$DifferentCardNames
+validProperty	totalPT_GE5
+validProperty	totalPT_GE9
+validProperty	totalPT_LE4
+validProperty	totalPT_LE5
+validProperty	totalPT_LE8
+validProperty	toughnessEQ1
+validProperty	toughnessEQ4
+validProperty	toughnessEQChosen
+validProperty	toughnessGE2
+validProperty	toughnessGE3
+validProperty	toughnessGE4
+validProperty	toughnessGT4
+validProperty	toughnessGTZ
+validProperty	toughnessLE1
+validProperty	toughnessLE2
+validProperty	toughnessLE3
+validProperty	toughnessLE5
+validProperty	toughnessLEX
+validProperty	toughnessLT1
+validProperty	toughnessLTX
+validProperty	turnedFaceUpThisTurn
+validProperty	unblocked
+validProperty	untapped
+validProperty	wasAttackedThisTurnBy Assassin.YouCtrl
+validProperty	wasCast
+validProperty	wasCastByYou
+validProperty	wasCastFromCommand
+validProperty	wasCastFromExile
+validProperty	wasCastFromGraveyard
+validProperty	wasCastFromGraveyardByYou
+validProperty	wasCastFromHand
+validProperty	wasCastFromTheirHand
+validProperty	wasCastFromYourGraveyard
+validProperty	wasCastFromYourGraveyardByYou
+validProperty	wasCastFromYourHand
+validProperty	wasCastFromYourHandByYou
+validProperty	wasCastFromYourLibrary
+validProperty	wasDealtCombatDamageThisTurnBySource
+validProperty	wasDealtCombatDamageThisTurnBySourceTimes EQ1
+validProperty	wasDealtDamageByThisGame
+validProperty	wasDealtDamageThisGameBy Self
+validProperty	wasDealtDamageThisTurn
+validProperty	wasDealtDamageThisTurnBySource
+validProperty	wasDealtDamageThisTurnBySource GE10
+validProperty	wasDealtExcessDamageThisTurn
+validProperty	webSlinged
+validProperty	withAugment
+validProperty	withAwaken
+validProperty	withCascade
+validProperty	withConvoke
+validProperty	withCycling
+validProperty	withDeathtouch
+validProperty	withDefender
+validProperty	withDisguise
+validProperty	withDisturb
+validProperty	withDoctor's companion
+validProperty	withDouble Strike
+validProperty	withFading
+validProperty	withFirst Strike
+validProperty	withFlanking
+validProperty	withFlash
+validProperty	withFlashback
+validProperty	withFlying
+validProperty	withFlying$CardPower
+validProperty	withForetell
+validProperty	withFreerunning
+validProperty	withHaste
+validProperty	withHexproof
+validProperty	withHorsemanship
+validProperty	withIndestructible
+validProperty	withInfect
+validProperty	withKicker
+validProperty	withLevel up
+validProperty	withLifelink
+validProperty	withMadness
+validProperty	withMegamorph
+validProperty	withMenace
+validProperty	withModular
+validProperty	withMoreCreaturesThanActive
+validProperty	withMoreLandsThanActive
+validProperty	withMoreLandsThanYou
+validProperty	withMorph
+validProperty	withMostPermanentInPlay
+validProperty	withMultikicker
+validProperty	withMutate
+validProperty	withPartner
+validProperty	withPersist
+validProperty	withProtection
+validProperty	withReach
+validProperty	withShadow
+validProperty	withSkulk
+validProperty	withSuspend
+validProperty	withToxic
+validProperty	withTrample
+validProperty	withTypeCycling
+validProperty	withVigilance
+validProperty	withWarp
+validProperty	withoutCumulative upkeep
+validProperty	withoutDecayed
+validProperty	withoutDefender
+validProperty	withoutDouble Strike
+validProperty	withoutFirst Strike
+validProperty	withoutFlanking
+validProperty	withoutFlying
+validProperty	withoutForetell
+validProperty	withoutHaste
+validProperty	withoutHorsemanship
+validProperty	withoutReach
+validProperty	withoutShadow
+validProperty	withoutSuspend
+validProperty	withoutTrample
+validProperty	withoutUnearth
+validProperty	withoutVigilance
+validProperty	youCtrl
+keywordHead	A deck can have any number of cards named CARDNAME.
+keywordHead	Affinity
+keywordHead	Afflict
+keywordHead	After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.
+keywordHead	After you roll a die, you may remove a +1/+1 counter from Xenosquirrels. If you do, increase or decrease the result by 1.
+keywordHead	Afterlife
+keywordHead	Aftermath
+keywordHead	All creatures able to block CARDNAME do so.
+keywordHead	AlternateAdditionalCost
+keywordHead	Amplify
+keywordHead	Annihilator
+keywordHead	As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters with that many additional +1/+1 counters on it.
+keywordHead	Ascend
+keywordHead	Assist
+keywordHead	Aura swap
+keywordHead	Awaken
+keywordHead	Backup
+keywordHead	Banding
+keywordHead	Bands with other
+keywordHead	Bargain
+keywordHead	Battle cry
+keywordHead	Beam me up
+keywordHead	Before drawing your opening hand, choose 1, 2, or 3.
+keywordHead	Bestow
+keywordHead	Blitz
+keywordHead	Bloodthirst
+keywordHead	Bushido
+keywordHead	Buyback
+keywordHead	CARDNAME can be your commander.
+keywordHead	CARDNAME can block creatures with shadow as though they didn't have shadow.
+keywordHead	CARDNAME can only attack alone.
+keywordHead	CARDNAME can't attack alone.
+keywordHead	CARDNAME can't attack or block alone.
+keywordHead	CARDNAME can't attack or block.
+keywordHead	CARDNAME can't attack unless a black or green creature also attacks.
+keywordHead	CARDNAME can't attack unless a creature with greater power also attacks.
+keywordHead	CARDNAME can't attack unless at least two other creatures attack.
+keywordHead	CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.
+keywordHead	CARDNAME can't block alone.
+keywordHead	CARDNAME can't block unless a creature with greater power also blocks.
+keywordHead	CARDNAME can't block unless at least two other creatures block.
+keywordHead	CARDNAME must be blocked by exactly one creature if able.
+keywordHead	CARDNAME must be blocked by two or more creatures if able.
+keywordHead	CARDNAME must be blocked if able.
+keywordHead	Cascade
+keywordHead	Casualty
+keywordHead	Champion
+keywordHead	Changeling
+keywordHead	Chapter
+keywordHead	Choose a Background
+keywordHead	Cipher
+keywordHead	Class
+keywordHead	Companion
+keywordHead	Compleated
+keywordHead	Conspire
+keywordHead	Convoke
+keywordHead	Craft
+keywordHead	Crew
+keywordHead	Cumulative upkeep
+keywordHead	Cycling
+keywordHead	Dash
+keywordHead	Daybound
+keywordHead	Deathtouch
+keywordHead	Decayed
+keywordHead	DeckLimit
+keywordHead	Defender
+keywordHead	Delve
+keywordHead	Demonstrate
+keywordHead	Dethrone
+keywordHead	Devoid
+keywordHead	Devour
+keywordHead	Disguise
+keywordHead	Disturb
+keywordHead	Doctor's companion
+keywordHead	Double Strike
+keywordHead	Double agenda
+keywordHead	Double team
+keywordHead	Dredge
+keywordHead	ETBReplacement
+keywordHead	Echo
+keywordHead	Embalm
+keywordHead	Emerge
+keywordHead	Enchant
+keywordHead	Encore
+keywordHead	Enlist
+keywordHead	Entwine
+keywordHead	Epic
+keywordHead	Equip
+keywordHead	Escalate
+keywordHead	Escape
+keywordHead	Eternalize
+keywordHead	Evoke
+keywordHead	Evolve
+keywordHead	Exalted
+keywordHead	Exploit
+keywordHead	Extort
+keywordHead	Fabricate
+keywordHead	Fading
+keywordHead	Fear
+keywordHead	Firebending
+keywordHead	First Strike
+keywordHead	Flanking
+keywordHead	Flash
+keywordHead	Flashback
+keywordHead	Flying
+keywordHead	For Mirrodin
+keywordHead	Foretell
+keywordHead	Fortify
+keywordHead	Freerunning
+keywordHead	Fuse
+keywordHead	Gift
+keywordHead	Graft
+keywordHead	Gravestorm
+keywordHead	Harmonize
+keywordHead	Haste
+keywordHead	Haunt
+keywordHead	Hexproof
+keywordHead	Hidden agenda
+keywordHead	Hideaway
+keywordHead	Horsemanship
+keywordHead	If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
+keywordHead	Impending
+keywordHead	Improvise
+keywordHead	Increment
+keywordHead	Indestructible
+keywordHead	Infect
+keywordHead	Ingest
+keywordHead	Intimidate
+keywordHead	Job select
+keywordHead	Jump-start
+keywordHead	Kicker
+keywordHead	Landwalk
+keywordHead	Level up
+keywordHead	Lifelink
+keywordHead	Living Weapon
+keywordHead	Living metal
+keywordHead	Madness
+keywordHead	MayEffectFromOpeningDeck
+keywordHead	MayEffectFromOpeningHand
+keywordHead	MayFlashCost
+keywordHead	MayFlashSac
+keywordHead	Mayhem
+keywordHead	Megamorph
+keywordHead	Melee
+keywordHead	Menace
+keywordHead	Mentor
+keywordHead	Miracle
+keywordHead	Mobilize
+keywordHead	Modular
+keywordHead	More Than Meets the Eye
+keywordHead	Morph
+keywordHead	Multikicker
+keywordHead	MustBeBlockedByAll
+keywordHead	Mutate
+keywordHead	Myriad
+keywordHead	Nightbound
+keywordHead	Ninjutsu
+keywordHead	Offering
+keywordHead	Offspring
+keywordHead	Once each turn, you may pay {1} to reroll one or more dice you rolled.
+keywordHead	Outlast
+keywordHead	Overload
+keywordHead	Paradigm
+keywordHead	Partner
+keywordHead	Partner with
+keywordHead	Persist
+keywordHead	Phasing
+keywordHead	Plot
+keywordHead	Prevent all combat damage that would be dealt to CARDNAME.
+keywordHead	Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+keywordHead	Prevent all damage that would be dealt to CARDNAME.
+keywordHead	Prize
+keywordHead	Protection
+keywordHead	Protection from black
+keywordHead	Protection from blue
+keywordHead	Protection from each color
+keywordHead	Protection from everything
+keywordHead	Protection from green
+keywordHead	Protection from red
+keywordHead	Protection from white
+keywordHead	Prototype
+keywordHead	Provoke
+keywordHead	Prowess
+keywordHead	Prowl
+keywordHead	Rampage
+keywordHead	Ravenous
+keywordHead	Reach
+keywordHead	Read ahead
+keywordHead	Rebound
+keywordHead	Reconfigure
+keywordHead	Recover
+keywordHead	Reflect
+keywordHead	Reinforce
+keywordHead	Remove CARDNAME from your deck before playing if you're not playing for ante.
+keywordHead	Renown
+keywordHead	Replicate
+keywordHead	Retrace
+keywordHead	Riot
+keywordHead	Ripple
+keywordHead	Saddle
+keywordHead	Scavenge
+keywordHead	Shadow
+keywordHead	Shroud
+keywordHead	Skulk
+keywordHead	Sneak
+keywordHead	Soulbond
+keywordHead	Soulshift
+keywordHead	Space sculptor
+keywordHead	Specialize
+keywordHead	Spectacle
+keywordHead	Spend only colored mana on X. No more than one mana of each color may be spent this way.
+keywordHead	Splice
+keywordHead	Split second
+keywordHead	Spree
+keywordHead	Squad
+keywordHead	Start your engines
+keywordHead	Starting intensity
+keywordHead	Station
+keywordHead	Storied
+keywordHead	Storm
+keywordHead	Strive
+keywordHead	Sunburst
+keywordHead	Surge
+keywordHead	Suspend
+keywordHead	Teamwork
+keywordHead	The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.
+keywordHead	Tiered
+keywordHead	Toxic
+keywordHead	Training
+keywordHead	Trample
+keywordHead	Transfigure
+keywordHead	Transmute
+keywordHead	Tribute
+keywordHead	TypeCycling
+keywordHead	Umbra armor
+keywordHead	Undaunted
+keywordHead	Undying
+keywordHead	Unearth
+keywordHead	Unleash
+keywordHead	Vanishing
+keywordHead	Vigilance
+keywordHead	Visit
+keywordHead	Ward
+keywordHead	Warp
+keywordHead	Web-slinging
+keywordHead	While you're searching your library, you may cast CARDNAME from your library.
+keywordHead	Wither
+keywordHead	You may assign CARDNAME's combat damage divided as you choose among defending player and/or any number of creatures they control.
+keywordHead	You may choose not to untap CARDNAME during your untap step.
+keywordHead	Your deck can't have basic land cards.
+keywordHead	Your minimum deck size is reduced by five.
+keywordHead	Your starting hand size is five.
+keywordHead	etbCounter
+svarHead	AITgts
+svarHead	AllTargeted
+svarHead	ChosenCard
+svarHead	Collected
+svarHead	Convoked
+svarHead	Count
+svarHead	Crewed
+svarHead	Discarded
+svarHead	DungeonsCompleted
+svarHead	Emerged
+svarHead	Enchanted
+svarHead	Equipped
+svarHead	Exiled
+svarHead	ExiledCards
+svarHead	ExiledWith
+svarHead	Imprinted
+svarHead	ImprintedLKI
+svarHead	Number
+svarHead	OriginalHost
+svarHead	ParentTargeted
+svarHead	PlayerCount
+svarHead	PlayerCountDefinedActivePlayer
+svarHead	PlayerCountDefinedNonTriggeredTarget
+svarHead	PlayerCountDefinedRegistered
+svarHead	PlayerCountDefinedRememberedOwner
+svarHead	PlayerCountDefinedTriggeredAttackedTargetAndYou
+svarHead	PlayerCountDefinedTriggeredCardOwner
+svarHead	PlayerCountDefinedTriggeredPlayer
+svarHead	PlayerCountDefinedTriggeredSourceController
+svarHead	PlayerCountHasLost
+svarHead	PlayerCountNonActive
+svarHead	PlayerCountOpponents
+svarHead	PlayerCountOther
+svarHead	PlayerCountPlayers
+svarHead	PlayerCountPropertyYou
+svarHead	PlayerCountPropertywithAtLeast1MoreLandsThanYou
+svarHead	PlayerCountPropertywithAtLeast2MoreLandsThanYou
+svarHead	PlayerCountRegisteredOpponents
+svarHead	PlayerCountRemembered
+svarHead	PlayerCountRememberedController
+svarHead	PlayerCountRememberedOwner
+svarHead	PlayerCountRememberedPlayer
+svarHead	Remembered
+svarHead	RememberedLKI
+svarHead	ReplaceCount
+svarHead	ReplacedCard
+svarHead	ReplacedCardLKI
+svarHead	ReplacedSource
+svarHead	Revealed
+svarHead	SVar
+svarHead	Sacrificed
+svarHead	SpellTargeted
+svarHead	Tapped
+svarHead	Targeted
+svarHead	TargetedByTarget
+svarHead	TargetedController
+svarHead	TargetedObjects
+svarHead	TargetedObjectsDistinct
+svarHead	TargetedPlayer
+svarHead	ThisTargetedPlayer
+svarHead	ThisTurn
+svarHead	TriggerCount
+svarHead	TriggerCountMax
+svarHead	TriggerObjectsAttackers
+svarHead	TriggerObjectsCards
+svarHead	TriggerObjectsCurrentCastSpells
+svarHead	TriggerObjectsSpellAbilityTargets
+svarHead	TriggerRemembered
+svarHead	TriggeredActivator
+svarHead	TriggeredAttacker
+svarHead	TriggeredBlocker
+svarHead	TriggeredCard
+svarHead	TriggeredCardController
+svarHead	TriggeredCardLKI
+svarHead	TriggeredDefendingPlayer
+svarHead	TriggeredDevoured
+svarHead	TriggeredExploited
+svarHead	TriggeredObject
+svarHead	TriggeredPlayer
+svarHead	TriggeredPlayersAttackedTarget
+svarHead	TriggeredPlayersDefenders
+svarHead	TriggeredPlayersOpponentVotedDiff
+svarHead	TriggeredPlayersTargets
+svarHead	TriggeredSource
+svarHead	TriggeredSpellAbility
+svarHead	TriggeredTarget
+svarHead	Type
+svarProperty	0
+svarProperty	1
+svarProperty	10
+svarProperty	2
+svarProperty	20
+svarProperty	3
+svarProperty	4
+svarProperty	5
+svarProperty	7
+svarProperty	8
+svarProperty	9
+svarProperty	A
+svarProperty	Active
+svarProperty	AllTypes
+svarProperty	AltCostPaid
+svarProperty	Amount
+svarProperty	AmountManaProduced
+svarProperty	AttachedTo Aura.YouCtrl
+svarProperty	AttackersDeclared
+svarProperty	AttractionsVisitedThisTurn
+svarProperty	B
+svarProperty	B2
+svarProperty	BManaPaid
+svarProperty	BP
+svarProperty	BeenDealtCombatDamageSinceLastTurn
+svarProperty	BreakthroughY
+svarProperty	C
+svarProperty	C2
+svarProperty	Card.Red,Card.Legendary
+svarProperty	Card.nonColorless
+svarProperty	Card.withDefender
+svarProperty	CardCounters.AGE
+svarProperty	CardCounters.ALL
+svarProperty	CardCounters.ARROW
+svarProperty	CardCounters.CHARGE
+svarProperty	CardCounters.FUNGUS
+svarProperty	CardCounters.LOYALTY
+svarProperty	CardCounters.M1M1
+svarProperty	CardCounters.OIL
+svarProperty	CardCounters.P1P1
+svarProperty	CardCounters.PRESSURE
+svarProperty	CardCounters.QUEST
+svarProperty	CardCounters.RUST
+svarProperty	CardCounters.VOYAGE
+svarProperty	CardManaCost
+svarProperty	CardManaCostLKI
+svarProperty	CardMulticolor.4.2
+svarProperty	CardNumColors
+svarProperty	CardNumNotedTypes
+svarProperty	CardPower
+svarProperty	CardSumPT
+svarProperty	CardToughness
+svarProperty	CardTypes
+svarProperty	CardsDiscardedThisTurn
+svarProperty	CardsDrawn
+svarProperty	CardsInGraveyard
+svarProperty	CardsInHand
+svarProperty	CardsInLibrary
+svarProperty	CastTotalManaSpent
+svarProperty	CastTotalManaSpent Artifact
+svarProperty	CastTotalManaSpent Treasure
+svarProperty	CheckRemem
+svarProperty	ChoiceNum
+svarProperty	ChromaSource
+svarProperty	ChromaSource.Blue
+svarProperty	ChromaSource.Green
+svarProperty	ChromaSource.Red
+svarProperty	Colors
+svarProperty	CommanderCastFromCommandZone
+svarProperty	ConditionGE1 CardsDiscardedThisTurn
+svarProperty	ConditionGE2 CardsDrawn
+svarProperty	ConditionGE2 SpellsCastThisTurn
+svarProperty	ConditionGE2 ThisTurnEntered_Battlefield_Creature.YouCtrl
+svarProperty	ConditionGE2 ThisTurnEntered_Battlefield_Land.YouCtrl
+svarProperty	ConditionGE3 SpellsCastThisTurn
+svarProperty	ConditionGE3 ThisTurnEntered_Graveyard_Card.YouOwn+!token
+svarProperty	ConditionLEY LifeTotal
+svarProperty	ConditionLTZ LifeTotal
+svarProperty	Converge
+svarProperty	CostCountersRemoved
+svarProperty	CounterNum
+svarProperty	Counters.ALL
+svarProperty	Counters.Poison
+svarProperty	Counters.RAD
+svarProperty	Creature.Black
+svarProperty	Creature.Blue
+svarProperty	Creature.Green
+svarProperty	Creature.Red
+svarProperty	Creature.White
+svarProperty	CreaturesInPlay
+svarProperty	DamageAmount
+svarProperty	DamageThisTurn
+svarProperty	DamageToOppsThisTurn
+svarProperty	DifferentCardManaCost
+svarProperty	DifferentCardNames
+svarProperty	DomainPlayer
+svarProperty	EnchantedDef
+svarProperty	EnchantedY
+svarProperty	Enchantment
+svarProperty	EvenResults
+svarProperty	ExcessArtifact
+svarProperty	ExcessCreature
+svarProperty	ExcessLand
+svarProperty	Exiled
+svarProperty	G
+svarProperty	G2
+svarProperty	GG
+svarProperty	GP
+svarProperty	Goblin
+svarProperty	GraveCount
+svarProperty	GreatestCardManaCost
+svarProperty	GreatestCardPower
+svarProperty	HasPropertyActive
+svarProperty	HasPropertyBeenAttackedThisCombat
+svarProperty	HasPropertyDefending
+svarProperty	HasPropertyHasCardsInGraveyard_Card_GE7
+svarProperty	HasPropertyHasCardsInGraveyard_Instant,Sorcery_GE1
+svarProperty	HasPropertyHasCardsInHand_Card_GE2
+svarProperty	HasPropertyHasCardsInHand_Card_GE4
+svarProperty	HasPropertyHasCardsInHand_Card_GTY
+svarProperty	HasPropertyHasCardsInHand_Card_LE1
+svarProperty	HasPropertyHasCardsInHand_Card_LE5
+svarProperty	HasPropertyIsCorrupted
+svarProperty	HasPropertyIsRememberedOrController
+svarProperty	HasPropertyLostLifeThisTurn
+svarProperty	HasPropertyNotedForIntelligence
+svarProperty	HasPropertyOpponent
+svarProperty	HasPropertyattackedYouTheirCurrentTurn
+svarProperty	HasPropertyattackedYouTheirLastTurn
+svarProperty	HasPropertycontrolsPermanent.IsRemembered
+svarProperty	HasPropertyhasFewerCreaturesInPlayThanYou
+svarProperty	HasPropertyhasInitiative
+svarProperty	HasPropertyisMonarch
+svarProperty	HasPropertylifeLTCount$YourLifeTotal
+svarProperty	HasPropertywasDealtCombatDamageThisTurn
+svarProperty	HasPropertywasDealtCombatDamageThisTurnBy Card.Self,Dragon GE1
+svarProperty	HasPropertywasDealtCombatDamageThisTurnBy Creature.Legendary GE1
+svarProperty	HasPropertywasDealtCombatDamageThisTurnBy Zombie GE1
+svarProperty	HasPropertywasDealtDamageThisTurn
+svarProperty	HasPropertywithMoreCreaturesThanYou
+svarProperty	HasPropertywithMoreLandsThanYou
+svarProperty	Helm
+svarProperty	HighestCardsDrawn
+svarProperty	HighestCardsInGraveyard
+svarProperty	HighestCardsInHand
+svarProperty	HighestCounters.Poison
+svarProperty	HighestLifeLostThisTurn
+svarProperty	HighestLifeTotal
+svarProperty	HighestValid Artifact.YouCtrl
+svarProperty	HighestValid Creature.ChosenType+YouCtrl
+svarProperty	HighestValid Creature.YouCtrl
+svarProperty	HighestValid Land.YouCtrl
+svarProperty	HighestValid Land.nonBasic+YouCtrl
+svarProperty	HighestValid Permanent.nonLand+YouCtrl+tapped
+svarProperty	HighestValidGraveyard Card.YouOwn
+svarProperty	HighestValidGraveyard Creature.YouOwn
+svarProperty	HighestValidGraveyard,Library,Exile Card.IsRemembered+YouOwn
+svarProperty	JaddiLifestriderY
+svarProperty	LandsControlled
+svarProperty	LandsInGraveyard
+svarProperty	LandsPlayed
+svarProperty	LibNum1
+svarProperty	LifeAmount
+svarProperty	LifeGained
+svarProperty	LifeGainedThisTurn
+svarProperty	LifeLostLastTurn
+svarProperty	LifeLostThisTurn
+svarProperty	LifeStartedThisTurnWith
+svarProperty	LifeTotal
+svarProperty	Losses
+svarProperty	LowestCardsInHand
+svarProperty	LowestLifeTotal
+svarProperty	LowestValid Creature.YouCtrl
+svarProperty	LowestValid Land.Basic+YouCtrl
+svarProperty	LowestValidHand Card.YouOwn
+svarProperty	LowestValidLibrary Card.YouOwn
+svarProperty	MaxPlayers
+svarProperty	Me
+svarProperty	NonCombatDamageDealtThisTurn
+svarProperty	Num
+svarProperty	NumDmg
+svarProperty	NumPowerSurgeLands
+svarProperty	NumTimesChoseMode
+svarProperty	Number
+svarProperty	OppArtifact
+svarProperty	OppCreature
+svarProperty	OppLand
+svarProperty	OppLilW
+svarProperty	OpponentsAttackedThisCombat
+svarProperty	OpponentsAttackedThisTurn
+svarProperty	Peer
+svarProperty	PlaneswalkedToThisTurn Unyaro
+svarProperty	PseudoKicker
+svarProperty	R2
+svarProperty	RP
+svarProperty	Result
+svarProperty	RingTemptedYou
+svarProperty	SVarAmount
+svarProperty	SacrificedPermanentTypesThisTurn
+svarProperty	SacrificedThisTurn Artifact
+svarProperty	SacrificedThisTurn Artifact,Creature
+svarProperty	SacrificedThisTurn Card.StrictlySelf
+svarProperty	SacrificedThisTurn Clue
+svarProperty	SacrificedThisTurn Food
+svarProperty	SacrificedThisTurn Permanent
+svarProperty	SacrificedThisTurn Permanent.!token
+svarProperty	ScryBottom
+svarProperty	ScryNum
+svarProperty	SpellsCastThisTurn
+svarProperty	StartingLife
+svarProperty	Sum
+svarProperty	TgtNum
+svarProperty	TiedForHighestLife
+svarProperty	TimesKicked
+svarProperty	TotalCommanderCastFromCommandZone
+svarProperty	TotalDamageDoneByThisTurn
+svarProperty	TotalDamageReceivedThisTurn
+svarProperty	TotalDamageThisTurn Card.RememberedPlayerCtrl
+svarProperty	TotalValue Toxic
+svarProperty	True
+svarProperty	U2
+svarProperty	UP
+svarProperty	Valid Artifact
+svarProperty	Valid Artifact,Creature
+svarProperty	Valid Artifact.YouCtrl
+svarProperty	Valid Artifact.sharesControllerWith Imprinted
+svarProperty	Valid Artifact.sharesControllerWith Remembered
+svarProperty	Valid Artifact.tapped+YouCtrl
+svarProperty	Valid Assassin
+svarProperty	Valid Battle
+svarProperty	Valid Card
+svarProperty	Valid Card.!ThisTurnEntered
+svarProperty	Valid Card.!token
+svarProperty	Valid Card.!token+YouCtrl
+svarProperty	Valid Card.Angel
+svarProperty	Valid Card.BlackSource
+svarProperty	Valid Card.BlackSource,Card.RedSource
+svarProperty	Valid Card.Blue
+svarProperty	Valid Card.ChosenColor
+svarProperty	Valid Card.ChosenType
+svarProperty	Valid Card.Creature
+svarProperty	Valid Card.Green
+svarProperty	Valid Card.Insect
+svarProperty	Valid Card.IsCommander+YouCtrl+inZoneBattlefield
+svarProperty	Valid Card.IsSuspected
+svarProperty	Valid Card.Land
+svarProperty	Valid Card.Legendary
+svarProperty	Valid Card.Mountain
+svarProperty	Valid Card.NamedCard
+svarProperty	Valid Card.Red
+svarProperty	Valid Card.RememberedPlayerCtrl
+svarProperty	Valid Card.RememberedPlayerCtrl$CardManaCost
+svarProperty	Valid Card.RememberedPlayerCtrl$CardPower
+svarProperty	Valid Card.RememberedPlayerOwn
+svarProperty	Valid Card.SharesColorWith MostProminentColor
+svarProperty	Valid Card.SharesColorWithOther Remembered
+svarProperty	Valid Card.Unicorn
+svarProperty	Valid Card.White
+svarProperty	Valid Card.YouCtrl
+svarProperty	Valid Card.YouCtrl$CardToughness
+svarProperty	Valid Card.YouOwn
+svarProperty	Valid Card.Zombie
+svarProperty	Valid Card.attackingBattle
+svarProperty	Valid Card.cmcLEY
+svarProperty	Valid Card.doesNotShareNameWith YourGraveyard+doesNotShareNameWith OtherYourBattlefield
+svarProperty	Valid Card.enchanted
+svarProperty	Valid Card.equipped
+svarProperty	Valid Card.greatestPower
+svarProperty	Valid Card.inZoneGraveyard
+svarProperty	Valid Card.inZoneLibrary
+svarProperty	Valid Card.namedTomb of Annihilation
+svarProperty	Valid Card.nonCreature
+svarProperty	Valid Card.nonLand
+svarProperty	Valid Card.nonLand+RememberedPlayerOwn
+svarProperty	Valid Card.nonLand+SharesColorWithOther Remembered
+svarProperty	Valid Card.powerGE7+YouCtrl
+svarProperty	Valid Card.sharesAllCardTypesWithOther Remembered
+svarProperty	Valid Card.sharesCardTypeWithOther Remembered
+svarProperty	Valid Card.sharesNameWith Graveyard
+svarProperty	Valid Card.sharesNameWith MovedToGrave
+svarProperty	Valid Card.sharesNameWith NonToken
+svarProperty	Valid Card.sharesNameWith Remembered
+svarProperty	Valid Card.wasDealtNonCombatDamageThisTurn
+svarProperty	Valid Card.withFlying
+svarProperty	Valid Creature
+svarProperty	Valid Creature,Planeswalker
+svarProperty	Valid Creature.!token
+svarProperty	Valid Creature.Artifact
+svarProperty	Valid Creature.Demon
+svarProperty	Valid Creature.Enchantment,Creature.Legendary
+svarProperty	Valid Creature.Green
+svarProperty	Valid Creature.Human
+svarProperty	Valid Creature.Orc,Creature.Goblin
+svarProperty	Valid Creature.Other+Hero
+svarProperty	Valid Creature.Red
+svarProperty	Valid Creature.RememberedPlayerCtrl
+svarProperty	Valid Creature.SharesColorWith MostProminentColor
+svarProperty	Valid Creature.White
+svarProperty	Valid Creature.White,Creature.Blue
+svarProperty	Valid Creature.White,Creature.Blue,Planeswalker.White,Planeswalker.Blue
+svarProperty	Valid Creature.YouCtrl
+svarProperty	Valid Creature.YouCtrl+ChosenType
+svarProperty	Valid Creature.YouCtrl+attacking
+svarProperty	Valid Creature.YouCtrl,Vehicle.YouCtrl
+svarProperty	Valid Creature.Zombie
+svarProperty	Valid Creature.attacking
+svarProperty	Valid Creature.blocking
+svarProperty	Valid Creature.counters_GE1_P1P1
+svarProperty	Valid Creature.inZoneBattlefield
+svarProperty	Valid Creature.inZoneGraveyard
+svarProperty	Valid Creature.powerGTY,Creature.toughnessGTZ
+svarProperty	Valid Creature.powerLE0
+svarProperty	Valid Creature.powerLE3
+svarProperty	Valid Creature.powerLEY
+svarProperty	Valid Creature.powerLTY
+svarProperty	Valid Creature.toughnessGE4
+svarProperty	Valid Creature.toughnessLEY
+svarProperty	Valid Creature.withFlying
+svarProperty	Valid Creature.withToxic
+svarProperty	Valid Elf
+svarProperty	Valid Enchantment
+svarProperty	Valid Forest
+svarProperty	Valid Human
+svarProperty	Valid Instant
+svarProperty	Valid Instant,Sorcery
+svarProperty	Valid Kindred
+svarProperty	Valid Kraken,Leviathan,Octopus,Serpent
+svarProperty	Valid Kree
+svarProperty	Valid Land
+svarProperty	Valid Land,Artifact
+svarProperty	Valid Land.RememberedPlayerCtrl
+svarProperty	Valid Land.Snow
+svarProperty	Valid Land.YouCtrl
+svarProperty	Valid Mountain
+svarProperty	Valid Permanent
+svarProperty	Valid Permanent.RememberedPlayerCtrl
+svarProperty	Valid Permanent.YouCtrl
+svarProperty	Valid Permanent.nonDemon+YouCtrl
+svarProperty	Valid Permanent.withUnearth
+svarProperty	Valid Planeswalker
+svarProperty	Valid Sorcery
+svarProperty	Valid Sorcery,Instant
+svarProperty	Valid Sorcery.YouCtrl,Instant.YouCtrl
+svarProperty	Valid Spirit
+svarProperty	Valid Squirrel
+svarProperty	Valid Swamp
+svarProperty	Valid Thrull
+svarProperty	Valid Treasure
+svarProperty	ValidExile Card.YouOwn+counters_GE1_HIT
+svarProperty	ValidGraveyard Creature.YouOwn
+svarProperty	ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+svarProperty	ValidGraveyard Permanent.YouOwn+withCycling,Permanent.YouOwn+withTypeCycling
+svarProperty	ValidGraveyard Spirit.YouCtrl
+svarProperty	VoteNum
+svarProperty	W
+svarProperty	W2
+svarProperty	WP
+svarProperty	WU
+svarProperty	WUBR
+svarProperty	Wins
+svarProperty	X
+svarProperty	Y
+svarProperty	Y1
+svarProperty	Y2
+svarProperty	YouChose
+svarProperty	YouLilW
+svarProperty	Z
+svarProperty	Z1
+aiHintKey	AlwaysCastIfLifeBelow
+aiHintKey	CardsInGraveyardGE
+aiHintKey	CardsInHandGE
+aiHintKey	CardsInHandLE
+aiHintKey	Chance
+aiHintKey	Count
+aiHintKey	CreatureEvalThreshold
+aiHintKey	DiscardCost
+aiHintKey	HasColorCreatureInPlay
+aiHintKey	HasColorInGraveyard
+aiHintKey	HasCreatureInPlay
+aiHintKey	LowPriority
+aiHintKey	ManaFrom
+aiHintKey	MaxControlled
+aiHintKey	MaxControlledGlobally
+aiHintKey	MaxRollsPerTurn
+aiHintKey	MinCreaturesBelowThreshold
+aiHintKey	MinTurn
+aiHintKey	Mode
+aiHintKey	MustHaveInHand
+aiHintKey	NeverCastIfLifeAbove
+aiHintKey	NeverCastIfLifeBelow
+aiHintKey	NumManaSourcesNextTurn
+aiHintKey	OppHasCreatureInPlay
+aiHintKey	PlayerCountPropertyYou
+aiHintKey	RollInMain1
+aiHintKey	SVar
+aiHintKey	SacCost
+aiHintKey	SoulBond
