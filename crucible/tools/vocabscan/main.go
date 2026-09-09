@@ -45,14 +45,15 @@ func run(corpus, types, kind string, names bool) error {
 		return err
 	}
 
+	// bufio.Writer keeps the first write error and returns it from Flush, so
+	// the per-line results are dropped and the flush is what reports.
 	out := bufio.NewWriterSize(os.Stdout, 1<<20)
-	defer func() { _ = out.Flush() }()
 
 	switch {
 	case names:
 		for _, k := range vocab.Kinds() {
 			for _, name := range v.Names(k) {
-				fmt.Fprintf(out, "%s\t%s\n", k, name)
+				_, _ = fmt.Fprintf(out, "%s\t%s\n", k, name)
 			}
 		}
 	case kind != "":
@@ -61,15 +62,15 @@ func run(corpus, types, kind string, names bool) error {
 			return fmt.Errorf("unknown vocabulary %q; have %s", kind, strings.Join(kindNames(), ", "))
 		}
 		for _, name := range byFrequency(v, k) {
-			fmt.Fprintf(out, "%8d\t%s\n", v.Count(k, name), name)
+			_, _ = fmt.Fprintf(out, "%8d\t%s\n", v.Count(k, name), name)
 		}
 	default:
-		fmt.Fprintf(out, "%d cards\n\n%-18s %8s %14s\n", cards, "vocabulary", "distinct", "occurrences")
+		_, _ = fmt.Fprintf(out, "%d cards\n\n%-18s %8s %14s\n", cards, "vocabulary", "distinct", "occurrences")
 		for _, k := range vocab.Kinds() {
-			fmt.Fprintf(out, "%-18s %8d %14d\n", k, v.Distinct(k), v.Occurrences(k))
+			_, _ = fmt.Fprintf(out, "%-18s %8d %14d\n", k, v.Distinct(k), v.Occurrences(k))
 		}
 	}
-	return nil
+	return out.Flush()
 }
 
 // scan parses the whole corpus and folds it into one vocabulary.
