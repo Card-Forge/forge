@@ -14,17 +14,17 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `the_dawning_archaic`    | `ODeckHints:` for `DeckHints:`                              | Unknown-key rejection  | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
 | `spirit_of_resilience`   | `DBCleanup:` for `SVar:DBCleanup:`                          | Unknown-key rejection  | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
 | `favor_of_jukai`         | Missing `\|` fuses `ValidTgts$` and `NumAtt$`               | Valid-base vocabulary  | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
-| `casey_raph_hotheads`    | `SVar:DBCleanup` never written                              | Sub-ability resolution | Open, carried                                                    |
-| `circadian_struggle`     | Cleanup chains to a `DBEffect` that does not exist          | Sub-ability resolution | Open, carried                                                    |
-| `withering_curse`        | Chains to a `DBPutCounter` that does not exist              | Sub-ability resolution | Open, carried                                                    |
-| `worzel_the_protector`   | Chains to a `DBAttach` that does not exist                  | Sub-ability resolution | Open, carried                                                    |
-| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist                   | Sub-ability resolution | Open, carried                                                    |
-| `goblin_razerunners`     | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing   | Open, carried                                                    |
-| `flamewave_invoker`      | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing   | Open, carried                                                    |
+| `casey_raph_hotheads`    | `SVar:DBCleanup` never written                              | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `circadian_struggle`     | Cleanup chains to a `DBEffect` that does not exist          | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `withering_curse`        | Chains to a `DBPutCounter` that does not exist              | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `worzel_the_protector`   | Chains to a `DBAttach` that does not exist                  | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist                   | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `goblin_razerunners`     | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing   | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
+| `flamewave_invoker`      | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing   | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
 
-An **open, carried** fix is applied to Crucible's corpus while its pull request waits, logged in
-[`upstream-patches.md`](upstream-patches.md) with the condition that deletes it. All five are carried, so
-`internal/carddb/compile` compiles the whole corpus with no exemption of any kind.
+Every one is merged upstream, so the fork carries no card-script divergence:
+`git diff upstream/master -- forge-gui/res/cardsfolder` is empty. `internal/carddb/compile` compiles the whole corpus
+with no exemption of any kind, and `internal/valid` parses all 49,615 valid strings with no padded base.
 
 Two more are known and deliberately unreported: `the_eagles_are_coming` writes `SubAbility$` twice on one line, where
 Java's param map keeps only the last, and `worzel_the_protector`'s `Oracle:` line spells "Faerie ceratures". Neither

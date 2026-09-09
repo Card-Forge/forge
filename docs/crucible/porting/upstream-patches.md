@@ -53,16 +53,13 @@ empties itself is not the list that makes a fork unmergeable.
 
 ### Pending upstream fixes
 
-An edit whose whole purpose is to disappear: the same change open as a pull request against
+**None.** An edit whose whole purpose is to disappear goes here: the same change open as a pull request against
 [Card-Forge/forge](https://github.com/Card-Forge/forge), with the row and the local edit both deleted once upstream
 merges it and a sync brings the identical content back.
 
-| Date       | Path                                                                                                                                                       | Change                                                               | Upstream |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------- |
-| 2026-09-09 | `cardsfolder/c/casey_raph_hotheads.txt`, `c/circadian_struggle.txt`, `w/withering_curse.txt`, `w/worzel_the_protector.txt`, `t/typhoid_mary_fractured.txt` | Five dangling `SubAbility$` references: one SVar added, four removed | Open     |
-| 2026-09-09 | `cardsfolder/g/goblin_razerunners.txt`, `f/flamewave_invoker.txt`                                                                                          | `ValidTgts$ Player, Planeswalker` loses the space after the comma    | Open     |
-
-Detail per card, with the printed text each was checked against, in [`card-script-defects.md`](card-script-defects.md).
+| Date | Path | Change | Upstream |
+| ---- | ---- | ------ | -------- |
+| —    | —    | none   | —        |
 
 **Conflict rule while one is open: always take upstream.** If upstream applies the identical change, git merges both
 sides silently and there is nothing to resolve. If upstream fixes it differently, upstream's version wins without
