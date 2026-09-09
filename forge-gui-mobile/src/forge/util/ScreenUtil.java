@@ -96,9 +96,11 @@ public class ScreenUtil implements Disposable {
             startX, startY, cropWidth, cropHeight,
             0, 0, targetWidth, targetHeight);
 
-        if (Forge.lastPreview != null)
-            Forge.lastPreview.dispose();
-        Forge.lastPreview = new Texture(smallPixmap);
+        if (Forge.lastPreview == null) {
+            Forge.lastPreview = new Texture(smallPixmap);
+        } else {
+            Forge.lastPreview.draw(smallPixmap, 0, 0);
+        }
         Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         smallPixmap.dispose();
     }
