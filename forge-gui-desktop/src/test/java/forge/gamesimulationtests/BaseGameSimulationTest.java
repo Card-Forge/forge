@@ -1,44 +1,43 @@
 package forge.gamesimulationtests;
 
-import forge.ImageCache;
-import forge.ImageKeys;
-import forge.Singletons;
 import forge.card.CardMockTestCase;
 import forge.game.GameLogFormatter;
 import forge.gamesimulationtests.util.GameWrapper;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.testactions.AssertAction;
-import forge.localinstance.properties.ForgeConstants;
-import forge.model.FModel;
-import forge.util.Lang;
-import forge.util.Localizer;
 import io.sentry.Sentry;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import javax.imageio.ImageIO;
-import java.util.ResourceBundle;
-
-@PrepareForTest(value = { FModel.class, Singletons.class, ResourceBundle.class, ImageCache.class, ImageIO.class,
-        ImageKeys.class, ForgeConstants.class, Localizer.class, Sentry.class, GameLogFormatter.class })
-@SuppressStaticInitializationFor({ "forge.ImageCache", "forge.localinstance.properties.ForgeConstants" })
-@PowerMockIgnore({ "javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",
-        "org.springframework.context.*", "org.apache.log4j.*" })
 public class BaseGameSimulationTest extends CardMockTestCase {
+
+    private MockedStatic<Sentry> sentryMock;
+    private MockedStatic<GameLogFormatter> gameLogFormatterMock;
 
     @BeforeMethod
     @Override
-    protected void initMocks() throws Exception {
+    public void initMocks() throws Exception {
         super.initMocks();
-        PowerMockito.mockStatic(Sentry.class);
-        PowerMockito.mockStatic(GameLogFormatter.class);
-        // PowerMockito.when(Sentry.getContext()).thenReturn(new Context());
-        Lang.createInstance("en-US");
+        sentryMock = Mockito.mockStatic(Sentry.class);
+        gameLogFormatterMock = Mockito.mockStatic(GameLogFormatter.class);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    @Override
+    public void releaseMocks() {
+        if (gameLogFormatterMock != null) {
+            gameLogFormatterMock.close();
+            gameLogFormatterMock = null;
+        }
+        if (sentryMock != null) {
+            sentryMock.close();
+            sentryMock = null;
+        }
+        super.releaseMocks();
     }
 
     protected void runGame(GameWrapper game, PlayerSpecification expectedWinner, int finalTurn,
