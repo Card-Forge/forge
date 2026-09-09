@@ -2,8 +2,8 @@ Name:Ghalta the Immovable
 ManaCost:8 W
 Types:Legendary Creature Elder Dinosaur
 PT:0/7
-S:Mode$ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total toughness of creatures you control.
-S:Mode$CanAttackDefender | ValidCard$ Creature.YouCtrl | Description$ Creatures you control can attack as though they didn’t have defender.
-S:Mode$CombatDamageToughness | ValidCard$ Creature.powerLTtoughness+YouCtrl | Description$ Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
-SVar:X:Count$Valid Creature.YouCtrl$GreatestCardToughness
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the greatest toughness among creatures you control.
+S:Mode$ CanAttackDefender | ValidCard$ Creature.YouCtrl | Description$ Creatures you control can attack as though they didn’t have defender.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.powerLTtoughness+YouCtrl | Description$ Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
+SVar:X:Count$Valid Creature.YouCtrl$CardToughness
 Oracle:This spell costs {X} less to cast, where X is the greatest toughness among creatures you control.\n Creatures you control can attack as though they didn’t have defender.\n Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
