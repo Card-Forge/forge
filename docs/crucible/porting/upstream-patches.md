@@ -60,6 +60,7 @@ merges it and a sync brings the identical content back.
 | Date       | Path                                                                                                                                                       | Change                                                               | Upstream |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------- |
 | 2026-09-09 | `cardsfolder/c/casey_raph_hotheads.txt`, `c/circadian_struggle.txt`, `w/withering_curse.txt`, `w/worzel_the_protector.txt`, `t/typhoid_mary_fractured.txt` | Five dangling `SubAbility$` references: one SVar added, four removed | Open     |
+| 2026-09-09 | `cardsfolder/g/goblin_razerunners.txt`, `f/flamewave_invoker.txt`                                                                                          | `ValidTgts$ Player, Planeswalker` loses the space after the comma    | Open     |
 
 Detail per card, with the printed text each was checked against, in [`card-script-defects.md`](card-script-defects.md).
 
