@@ -18,14 +18,13 @@ as the change.
 
 ## Log
 
-| Date       | Kind | Path                                       | Why                                                                                                                                                            | Commit        |
-| ---------- | ---- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 2026-09-06 | add  | `.github/workflows/claude.yml`             | GitHub Actions only reads workflows from `.github/workflows/`. No alternative location exists. Created by `/install-github-app`                                | `9f0d3ad315d` |
-| 2026-09-06 | add  | `.github/workflows/claude-code-review.yml` | Same. Scoped with a `paths:` filter so an upstream sync merge does not trigger a review of a 500-file Java diff                                                | `ca4135a3f1e` |
-| 2026-09-06 | add  | `.prettierrc`, `.prettierignore`           | Prettier resolves config from the repo root only. `.prettierignore` is what keeps every upstream file unformatted (DOC-14)                                     | `ff8c555fdf0` |
-| 2026-09-06 | add  | `.markdownlint-cli2.jsonc`                 | Same root-only resolution, and the VSCode extension reads the same file so editor and CI agree (DOC-15)                                                        | `ff8c555fdf0` |
-| 2026-09-06 | add  | `CLAUDE.md`                                | Claude Code reads it from the repo root only                                                                                                                   | `ff8c555fdf0` |
-| 2026-09-06 | add  | `.github/dependabot.yml`                   | Dependabot reads config from `.github/` only. Scoped to `github-actions`; a `maven` entry at the root would auto-generate PRs editing upstream `pom.xml` files | `pending`     |
+| Date       | Kind | Path                             | Why                                                                                                                                                            | Commit        |
+| ---------- | ---- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 2026-09-06 | add  | `.github/workflows/claude.yml`   | GitHub Actions only reads workflows from `.github/workflows/`. No alternative location exists. Created by `/install-github-app`                                | `9f0d3ad315d` |
+| 2026-09-06 | add  | `.prettierrc`, `.prettierignore` | Prettier resolves config from the repo root only. `.prettierignore` is what keeps every upstream file unformatted (DOC-14)                                     | `ff8c555fdf0` |
+| 2026-09-06 | add  | `.markdownlint-cli2.jsonc`       | Same root-only resolution, and the VSCode extension reads the same file so editor and CI agree (DOC-15)                                                        | `ff8c555fdf0` |
+| 2026-09-06 | add  | `CLAUDE.md`                      | Claude Code reads it from the repo root only                                                                                                                   | `ff8c555fdf0` |
+| 2026-09-06 | add  | `.github/dependabot.yml`         | Dependabot reads config from `.github/` only. Scoped to `github-actions`; a `maven` entry at the root would auto-generate PRs editing upstream `pom.xml` files | `pending`     |
 
 ### Edits
 

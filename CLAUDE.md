@@ -147,6 +147,12 @@ mvn -U -B clean test          # CI runs this under Xvfb
 
 M0 done — 16 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
 
-M1 done — `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `internal/mana`,
-`internal/cardtype` (both round-trip the whole card corpus), `tools/javacycles`, `tools/enginelint`, `tools/docgate`,
-`oracle-java`. Next: M2, `internal/carddb`. (Plan §5)
+M1 done — `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `internal/mana` (round-trips every
+cost in the corpus), `internal/cardtype`, `tools/javacycles`, `tools/enginelint`, `tools/docgate`, `tools/covergate`,
+`oracle-java`.
+
+M2 done — `internal/carddb`, `internal/deck`, `tools/carddump`, `crucible corpus-coverage`. P1 gate green: the canonical
+dump is byte-identical to Forge's own `CardRules.Reader` across the whole corpus, and no script key is exempt from the
+parser.
+
+Next: M3, `internal/carddb/compile` — DSL to typed AST, P2 gates. (Plan §5)
