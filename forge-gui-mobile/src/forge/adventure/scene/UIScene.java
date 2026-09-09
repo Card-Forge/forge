@@ -4,13 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -652,37 +650,25 @@ public class UIScene extends Scene {
     public void enter() {
         if (screenImage != null) {
             try {
-                // Set the backgroundTexture from lastPreview generated from WorldSaveHeader
-                backgroundTexture = new TextureRegion(Forge.lastPreview);
-                screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
-                // Get the lastPreview drawable
-                Drawable lastPreview = screenImage.getDrawable();
-                // Create a BaseDrawable with the custom shader
-                Drawable previewWithShader = new BaseDrawable() {
-                    @Override
-                    public void draw(Batch batch, float x, float y, float width, float height) {
-                        try {
-                            batch.end();
-                            float mul = 1.2f;
-                            float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
-                            ShaderUtil.getInstance().getShaderPix().bind();
-                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_resolution", width, height);
-                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize);
-                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_bias", 0.8f);
-                            batch.setShader(ShaderUtil.getInstance().getShaderPix());
-                            batch.begin();
-                            // Simulate the blurred pixelated render using custom shader like the old renders of BlurUtils
-                            lastPreview.draw(batch, x, y, width, height);
-                            batch.end();
-                            batch.setShader(null);
-                            batch.begin();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                // Set the previewWithShader as drawable for the ScreenImage
-                screenImage.setDrawable(previewWithShader);
+                if (Forge.lastPreview != null) {
+                    // Set backgroundTexture from last screen capture "lastPreview"
+                    backgroundTexture = new TextureRegion(Forge.lastPreview);
+                    float mul = 1.2f;
+                    float width = getIntendedWidth();
+                    float height = getIntendedHeight();
+                    float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
+                    // Set ShaderDrawable with parameters
+                    ShaderDrawable shaderDrawable = new ShaderDrawable(ShaderUtil.getInstance().getShaderPix());
+                    shaderDrawable.setUniformSetter(shader -> {
+                        shader.setUniformf("u_resolution", width, height);
+                        shader.setUniformf("u_pixelSize", pixelSize);
+                        shader.setUniformf("u_bias", 0.8f);
+                    });
+                    // set backgroundTexture to shaderDrawable
+                    shaderDrawable.setRegion(backgroundTexture);
+                    // set shaderDrawable to screenImage
+                    screenImage.setDrawable(shaderDrawable);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
