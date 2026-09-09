@@ -45,7 +45,7 @@ public class FCollectionTest {
      * from the collection while looping over it neither throws nor skips an element.
      */
     @Test
-    void testRemoveWhileIterating() {
+    public void testRemoveWhileIterating() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i < 5; i++)
             cards.add(new Card(i, null));

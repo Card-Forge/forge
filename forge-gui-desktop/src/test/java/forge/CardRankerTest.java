@@ -40,7 +40,7 @@ public class CardRankerTest {
     }
 
     @Test(timeOut = 1000, enabled = true)
-    void testRank() {
+    public void testRank() {
         List<PaperCard> list = new ArrayList<>();
         PaperCard c0 = readCard("makindi_patrol.txt");
         list.add(c0);
