@@ -189,6 +189,13 @@ func ParseValid(value string) []ValidAlt {
 			continue
 		}
 		base, rest, hasProps := strings.Cut(alt, ".")
+		// A base can be negated too, not only a property: `ValidCard$ !Ongoing`
+		// means "not an Ongoing scheme", and Java consumes the sign before it
+		// looks the base up (Card.java:5703). Recording the sign as part of the
+		// name would make `!Ongoing` and `Ongoing` different bases.
+		if negated, ok := strings.CutPrefix(base, "!"); ok {
+			base = negated
+		}
 		v := ValidAlt{Base: base}
 		if hasProps {
 			for _, property := range strings.Split(rest, "+") {

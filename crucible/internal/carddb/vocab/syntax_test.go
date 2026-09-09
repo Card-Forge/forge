@@ -244,6 +244,20 @@ func TestParseKeyword(t *testing.T) {
 	}
 }
 
+// A base carries its own negation, and the sign is not part of the name: Java
+// consumes it before the lookup, so `!Ongoing` and `Ongoing` are one base.
+func TestParseValidNegatedBase(t *testing.T) {
+	t.Parallel()
+
+	got := vocab.ParseValid("!Ongoing")
+	if len(got) != 1 {
+		t.Fatalf("ParseValid returned %d alternatives, want 1: %+v", len(got), got)
+	}
+	if got[0].Base != "Ongoing" {
+		t.Errorf("Base = %q, want %q", got[0].Base, "Ongoing")
+	}
+}
+
 func diffStrings(got, want []string) string {
 	if len(got) == len(want) {
 		same := true

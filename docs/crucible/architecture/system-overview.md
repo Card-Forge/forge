@@ -64,7 +64,7 @@ And what it is built on, inherited from upstream Forge:
 
 | Input               |          Size | Command                                                                                       |
 | ------------------- | ------------: | --------------------------------------------------------------------------------------------- |
-| Card scripts        |  33,686 files | `find forge-gui/res/cardsfolder -name '*.txt' \| wc -l`                                       |
+| Card scripts        |  33,689 files | `find forge-gui/res/cardsfolder -name '*.txt' \| wc -l`                                       |
 | Card script lines   |       302,749 | `find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \| wc -l`                        |
 | Java port surface   | 210,501 lines | `find forge-{core,game,ai}/src/main/java -name '*.java' -exec cat {} + \| wc -l`              |
 | Java tree, total    | 521,958 lines | `find . -name '*.java' -not -path '*/target/*' -exec cat {} + \| wc -l`                       |

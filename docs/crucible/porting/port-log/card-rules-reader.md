@@ -3,7 +3,7 @@
 - **Java source:** `forge-core/src/main/java/forge/card/CardRules.java` (943, of which `Reader` is roughly the last
   third), `CardFace.java` (279), `CardSplitType.java` (49)
 - **Go target:** `crucible/internal/carddb`
-- **Status:** Done — M2. The P1 gate is green: the canonical dump is byte-identical to Forge's across all 33,686 cards
+- **Status:** Done — M2. The P1 gate is green: the canonical dump is byte-identical to Forge's across all 33,689 cards
 
 ## What it does
 

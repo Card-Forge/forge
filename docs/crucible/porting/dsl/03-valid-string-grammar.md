@@ -11,7 +11,7 @@ Predicates over game objects. The largest and most error-prone unit in the port 
 ```ebnf
 valid       = alternative , { "," , alternative } ;      (* "," is OR *)
 alternative = base , [ "." , property , { "+" , property } ] ;   (* "+" is AND *)
-base        = card-type | card-name | "Any" | "You" | "Opponent" | "Player" | ... ;
+base        = [ "!" ] , ( card-type | card-name | "Any" | "You" | "Opponent" | "Player" | ... ) ;
 property    = [ "!" ] , property-name ;
 ```
 
@@ -64,6 +64,10 @@ They are not interchangeable:
 | ------------------------- | ----: | ------------------- | ----------------------------------- |
 | `!` prefix on a property  |   459 | `Card.!token`       | Negates that property               |
 | `non` baked into the name | 1,424 | `Permanent.nonLand` | A distinct property in Java's table |
+
+The `!` prefix also applies to a **base** — `ValidCard$ !Ongoing` is "not an Ongoing scheme". Java consumes the sign
+before it looks the base up (`Card.java:5703`), so the sign is not part of the token and `!Ongoing` and `Ongoing` are
+one base.
 
 `nonLand` is not parsed as `non` + `Land`; it is its own entry in `CardProperty`. Treating the `non` prefix as an
 operator would produce different results for properties where Java defines only one of the pair.

@@ -14,7 +14,7 @@ type for, and the full token lists are pinned in `internal/carddb/vocab/testdata
 
 | Kind                    | Defined in Java | Used in scripts | Supported in Go |
 | ----------------------- | --------------: | --------------: | --------------: |
-| Ability API (`ApiType`) |             203 |             192 |               0 |
+| Ability API (`ApiType`) |             204 |             193 |               0 |
 | Ability param key       |               — |           1,197 |               0 |
 | Keyword head            |             203 |             253 |               0 |
 | Trigger and static mode |             153 |             252 |               0 |

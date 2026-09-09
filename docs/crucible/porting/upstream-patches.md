@@ -53,27 +53,19 @@ empties itself is not the list that makes a fork unmergeable.
 
 ### Pending upstream fixes
 
-Edits whose whole purpose is to disappear. The same change is open as a pull request against
-[Card-Forge/forge](https://github.com/Card-Forge/forge); when upstream merges it, the next sync brings the identical
-content back and the row is deleted along with the local edit.
+**None.** An edit whose whole purpose is to disappear goes here: the same change open as a pull request against
+[Card-Forge/forge](https://github.com/Card-Forge/forge), with the row and the local edit both deleted once upstream
+merges it and a sync brings the identical content back.
 
-| Date       | Path                                                                                    | Change                                                                  | Upstream                                                                                                                   |
-| ---------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| 2026-09-09 | `forge-gui/res/cardsfolder/s/spirit_of_resilience.txt`, `.../t/the_dawning_archaic.txt` | `DBCleanup:` to `SVar:DBCleanup:`, `ODeckHints:` to `DeckHints:`        | [#11831](https://github.com/Card-Forge/forge/pull/11831), **merged** — delete this row and the local edit on the next sync |
-| 2026-09-09 | `forge-gui/res/cardsfolder/f/favor_of_jukai.txt`                                        | `ValidTgts$ Creature NumAtt$ +3` to `ValidTgts$ Creature \| NumAtt$ +3` | [#11836](https://github.com/Card-Forge/forge/pull/11836), open                                                             |
+| Date | Path | Change | Upstream |
+| ---- | ---- | ------ | -------- |
+| —    | —    | none   | —        |
 
-**Conflict rule: always take upstream.** If upstream applies the identical change, git merges both sides silently and
-there is nothing to resolve. If upstream fixes it differently, upstream's version wins without discussion — the point of
-the edit was the fix, not the wording.
+**Conflict rule while one is open: always take upstream.** If upstream applies the identical change, git merges both
+sides silently and there is nothing to resolve. If upstream fixes it differently, upstream's version wins without
+discussion — the point of the edit was the fix, not the wording.
 
-Why the edits exist at all rather than waiting: each is a card whose script does not say what the card does, and the
-corpus is Crucible's input. The malformed keys matched no case in Forge's parser, so `spirit_of_resilience` never
-cleared its chosen card and `the_dawning_archaic` lost its deck hint; carrying that fix is what lets `internal/carddb`
-run with no key exemptions at all. `favor_of_jukai` fuses two params into one, leaving its Channel ability with no legal
-target and, if it could resolve, +0/+3 instead of +3/+3.
-
-If upstream rejects the pull request, this stops being pending: the rows move up into **Edits**, and by the rule above
-that needs an ADR.
+A rejected pull request stops being pending: the row moves up into **Edits**, and by the rule above that needs an ADR.
 
 ## Not logged here
 

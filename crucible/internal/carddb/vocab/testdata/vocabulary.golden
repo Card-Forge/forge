@@ -1267,6 +1267,7 @@ api	Draw
 api	EachDamage
 api	Earthbend
 api	Effect
+api	Empower
 api	EndCombatPhase
 api	EndTurn
 api	Endure
@@ -2197,6 +2198,7 @@ validBase	Nightmare
 validBase	Ninja
 validBase	Octopus
 validBase	Omen
+validBase	Ongoing
 validBase	Ooze
 validBase	OppNonTriggeredTarget
 validBase	Opponent
@@ -2321,7 +2323,6 @@ validProperty	!IsRemembered
 validProperty	!Loyalty
 validProperty	!ManaAbility
 validProperty	!NoAbilities
-validProperty	!OnGoing
 validProperty	!Outlaw
 validProperty	!OwnedBy ActivePlayer
 validProperty	!RememberedPlayerCtrl
