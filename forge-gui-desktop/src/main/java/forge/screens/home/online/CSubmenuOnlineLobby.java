@@ -86,13 +86,23 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
                 VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
             }
-            showServerAddressesDialog();
         });
+
+        showServerAddressesDialog();
     }
 
     static void showServerAddressesDialog() {
-        final Localizer localizer = Localizer.getInstance();
+        if (FThreads.isGuiThread()) {
+            // Collecting the addresses queries the external IP over the network, so it can't run on the EDT.
+            FThreads.invokeInBackgroundThread(CSubmenuOnlineLobby::showServerAddressesDialog);
+            return;
+        }
         final NetConnectUtil.ServerAddressList addresses = NetConnectUtil.collectHostedServerAddresses();
+        SwingUtilities.invokeLater(() -> showServerAddressesDialog(addresses));
+    }
+
+    private static void showServerAddressesDialog(final NetConnectUtil.ServerAddressList addresses) {
+        final Localizer localizer = Localizer.getInstance();
 
         if (addresses.starIndex >= 0) {
             copyToClipboard(addresses.urls.get(addresses.starIndex));

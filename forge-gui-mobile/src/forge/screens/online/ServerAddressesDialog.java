@@ -8,6 +8,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.gamemodes.net.NetConnectUtil;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
@@ -33,8 +34,17 @@ public final class ServerAddressesDialog {
     private static final float COPY_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.9f;
 
     public static void show() {
-        final Localizer localizer = Localizer.getInstance();
+        if (FThreads.isGuiThread()) {
+            // Collecting the addresses queries the external IP over the network, so it can't run on the render thread.
+            FThreads.invokeInBackgroundThread(ServerAddressesDialog::show);
+            return;
+        }
         final NetConnectUtil.ServerAddressList addresses = NetConnectUtil.collectHostedServerAddresses();
+        FThreads.invokeInEdtLater(() -> display(addresses));
+    }
+
+    private static void display(final NetConnectUtil.ServerAddressList addresses) {
+        final Localizer localizer = Localizer.getInstance();
         if (addresses.starIndex >= 0) {
             GuiBase.getInterface().copyToClipboard(addresses.urls.get(addresses.starIndex));
         }

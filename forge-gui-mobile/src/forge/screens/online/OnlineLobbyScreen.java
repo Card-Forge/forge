@@ -203,10 +203,8 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             FThreads.invokeInBackgroundThread(() -> {
                 result[0] = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
                 chatInterface.addMessage(result[0]);
-                FThreads.invokeInEdtLater(() -> {
-                    OnlineScreen.Lobby.update();
-                    ServerAddressesDialog.show();
-                });
+                FThreads.invokeInEdtLater(OnlineScreen.Lobby::update);
+                ServerAddressesDialog.show();
             });
             OnlineScreen.Lobby.update();
         });
