@@ -2097,7 +2097,6 @@ validBase	Contraption
 validBase	Coward
 validBase	Crab
 validBase	Creature
-validBase	Creature NumAtt$ +3
 validBase	Creature$DifferentCardPower
 validBase	Creature$GreatestCardPower
 validBase	Curse
