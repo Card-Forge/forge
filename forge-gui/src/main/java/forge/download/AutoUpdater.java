@@ -255,6 +255,11 @@ public class AutoUpdater {
         }
 
         if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, List.of(localizer.getMessage("lblOK")), 0) == 0) {
+            // still point the installer at this installation, so clicking through it updates
+            // Forge instead of installing a second copy somewhere else
+            if (UpdateInstaller.openInstaller(downloaded)) {
+                System.exit(0);
+            }
             final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             if (desktop != null) {
                 try {

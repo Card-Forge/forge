@@ -31,8 +31,6 @@ import java.util.zip.ZipEntry;
  * starts Forge again.
  */
 public final class UpdateInstaller {
-    /** IzPack writes this into every install directory. */
-    private static final String IZPACK_MARKER = ".installationinformation";
     /** Automation script carried by installers that know about unattended updates. */
     private static final String SCRIPT_RESOURCE = "resources/auto-install.xml";
     private static final String INSTALL_PATH_TOKEN = "@INSTALL_PATH@";
@@ -63,9 +61,8 @@ public final class UpdateInstaller {
     }
 
     /**
-     * The installation Forge is running from, or null if it isn't running from one we can
-     * write to (a source checkout, a read-only directory, a manually unpacked copy without
-     * launchers).
+     * The installation Forge is running from, or null if it isn't running from one (a source
+     * checkout, a manually unpacked copy without launchers).
      */
     public static synchronized File getInstallDir() {
         if (!installDirChecked) {
@@ -77,9 +74,39 @@ public final class UpdateInstaller {
 
     /** Whether an update can be installed without asking the user where it should go. */
     public static boolean isSupported(File installerPackage) {
-        return getInstallDir() != null && getJavaExecutable() != null
+        File dir = getInstallDir();
+        return dir != null && isWritable(dir) && getJavaExecutable() != null
                 && installerPackage != null && installerPackage.isFile()
                 && installerPackage.getName().endsWith(".jar");
+    }
+
+    /**
+     * Starts the package's own installer UI on the installation Forge is running from, for when
+     * the update cannot be installed unattended - one that needs elevated rights, say. IzPack
+     * takes its target directory from the INSTALL_PATH variable, so the existing installation is
+     * filled in instead of the installer's default, which is a directory named after the package
+     * and would leave a second copy of Forge behind.
+     * <p>
+     * Returns false if there is nothing to point it at, leaving the caller to open the package
+     * however the desktop would.
+     */
+    public static boolean openInstaller(File installerPackage) {
+        File dir = getInstallDir();
+        File java = getJavaExecutable();
+        if (dir == null || java == null || installerPackage == null || !installerPackage.isFile()
+                || !installerPackage.getName().endsWith(".jar")) {
+            return false;
+        }
+        try {
+            new ProcessBuilder(java.getAbsolutePath(),
+                    "-DINSTALL_PATH=" + dir.getAbsolutePath().replace('\\', '/'),
+                    "-jar", installerPackage.getAbsolutePath())
+                    .directory(dir).start();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -138,12 +165,10 @@ public final class UpdateInstaller {
         if (dir == null || !dir.isDirectory()) {
             return false;
         }
-        // res and a launcher script mean this is an unpacked Forge; the IzPack marker is only
-        // there if it was installed rather than extracted from the archive by hand.
-        if (!new File(dir, "res").isDirectory() || getLauncher(dir) == null) {
-            return false;
-        }
-        return isWritable(dir);
+        // res and a launcher script mean this is an unpacked Forge. IzPack's own
+        // .installationinformation is deliberately not required: it is missing when the release
+        // archive was extracted by hand, and installing over that is still the right thing.
+        return new File(dir, "res").isDirectory() && getLauncher(dir) != null;
     }
 
     /** File.canWrite lies about directories on Windows, so actually try to write one. */
