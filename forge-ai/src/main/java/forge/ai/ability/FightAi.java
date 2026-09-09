@@ -209,11 +209,11 @@ public class FightAi extends SpellAbilityAi {
             aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
             humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
         }
-        ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
-        ComputerUtilCard.sortByEvaluateCreature(humCreatures);
         if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
+        ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
+        ComputerUtilCard.sortByEvaluateCreature(humCreatures);
         // Evaluate creature pairs
         for (Card humanCreature : humCreatures) {
             for (Card aiCreature : aiCreatures) {
@@ -228,6 +228,7 @@ public class FightAi extends SpellAbilityAi {
                         // TODO: Generalize this so that other TargetMax values can be properly accounted for
                         CardCollection aiCreaturesByPower = new CardCollection(aiCreatures);
                         CardLists.sortByPowerDesc(aiCreaturesByPower);
+                        // try to prefer any creatures with deals damage triggers?
                         Card maxPower = aiCreaturesByPower.getFirst();
                         if (maxPower != aiCreature) {
                             power += maxPower.getNetPower(); // potential bonus from adding a second target
@@ -244,29 +245,24 @@ public class FightAi extends SpellAbilityAi {
                             }
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
-                    } else {
-                        // Other cards that use AILogic PowerDmg and a single target
-                        if (canKill(aiCreature, humanCreature, power)) {
-                            sa.getTargets().add(aiCreature);
-                            if (!isChandrasIgnition) {
-                                tgtFight.resetTargets();
-                                tgtFight.getTargets().add(humanCreature);
-                            }
-                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        }
-                    }
-                } else {
-                    if (shouldFight(aiCreature, humanCreature, power, toughness)) {
-                    	if ("Time to Feed".equals(sourceName)) { // flip targets
-                    		final Card tmp = aiCreature;
-                    		aiCreature = humanCreature;
-                    		humanCreature = tmp;
-                    	}
+                    } else if (canKill(aiCreature, humanCreature, power)) {
                         sa.getTargets().add(aiCreature);
-                        tgtFight.resetTargets();
-                        tgtFight.getTargets().add(humanCreature);
+                        if (!isChandrasIgnition) {
+                            tgtFight.resetTargets();
+                            tgtFight.getTargets().add(humanCreature);
+                        }
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
+                } else if (shouldFight(aiCreature, humanCreature, power, toughness)) {
+                    if ("Time to Feed".equals(sourceName)) { // flip targets
+                        final Card tmp = aiCreature;
+                        aiCreature = humanCreature;
+                        humanCreature = tmp;
+                    }
+                    sa.getTargets().add(aiCreature);
+                    tgtFight.resetTargets();
+                    tgtFight.getTargets().add(humanCreature);
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         }

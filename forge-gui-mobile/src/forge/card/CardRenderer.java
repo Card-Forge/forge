@@ -666,15 +666,24 @@ public class CardRenderer {
         }
     }
 
+    //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
+    public static int getCrackOverlay(int damage) {
+        return switch (damage) {
+            case 0,1,2 -> 0;
+            case 3,4 -> 1;
+            case 5,6 -> 2;
+            default -> 3;
+        };
+    }
+
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
         drawCard(g, card, x, y, w, h, pos, rotate, false, false, false);
     }
-
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList, boolean magnify) {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage(showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
-        TextureRegion crack_overlay = FSkin.getCracks().get(card.getCrackOverlayInt());
+        TextureRegion crack_overlay = FSkin.getCracks().get(getCrackOverlay(card.getDamage()));
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;

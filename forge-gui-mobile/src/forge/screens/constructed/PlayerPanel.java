@@ -1107,7 +1107,9 @@ public class PlayerPanel extends FContainer {
     }
 
     public int getTeam() {
-        return cbTeam.getSelectedIndex();
+        return screen.hasVariant(GameType.Archenemy)
+                ? cbArchenemyTeam.getSelectedIndex()
+                : cbTeam.getSelectedIndex();
     }
     public void setTeam(int team0) {
         applyingTeamFromNetwork = true;
