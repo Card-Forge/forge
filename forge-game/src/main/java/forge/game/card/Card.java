@@ -2904,8 +2904,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
 
         // DeckRule descriptions (e.g. Rulebreaker) print alongside the card's other rules text.
-        if (getRules() != null) {
-            for (final DeckRule rule : DeckRule.parseAll(getRules().getDeckRules(), getRules().getName())) {
+        final IPaperCard pc = getPaperCard();
+        if (pc != null) {
+            for (final DeckRule rule : pc.getDeckRuleList()) {
                 final String desc = rule.getDescription();
                 if (!desc.isEmpty()) {
                     sb.append(desc).append(linebreak);
@@ -3292,8 +3293,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // DeckRule descriptions (e.g. Copies limits) print alongside the card's other rules text.
-        if (getRules() != null) {
-            for (final DeckRule rule : DeckRule.parseAll(getRules().getDeckRules(), getRules().getName())) {
+        final IPaperCard pc = getPaperCard();
+        if (pc != null) {
+            for (final DeckRule rule : pc.getDeckRuleList()) {
                 final String desc = rule.getDescription();
                 if (!desc.isEmpty()) {
                     sbBefore.append(desc).append("\r\n");

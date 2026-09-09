@@ -2,7 +2,7 @@ Name:Persistent Petitioners
 ManaCost:1 U
 Types:Creature Human Advisor
 PT:1/3
-DeckRule:Copies:Limit$ Unlimited | Affected$ Name:CARDNAME | Description$ A deck can have any number of cards named CARDNAME.
+DeckRule:Copies:Limit$ Unlimited | Affected$ namedCARDNAME | Description$ A deck can have any number of cards named CARDNAME.
 A:AB$ Mill | Cost$ 1 T | NumCards$ 1 | ValidTgts$ Player | SpellDescription$ Target player mills a card.
 A:AB$ Mill | Cost$ tapXType<4/Advisor> | NumCards$ 12 | ValidTgts$ Player | SpellDescription$ Target player mills twelve cards.
 SVar:BuffedBy:Creature.namedPersistent Petitioners

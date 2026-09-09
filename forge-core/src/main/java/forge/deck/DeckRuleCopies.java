@@ -22,12 +22,11 @@ import java.util.function.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.util.PredicateString.StringOp;
 
 /**
  * {@code DeckRule:Copies:Limit$ <Unlimited|n> | Affected$ <branches>} - overrides the format's
- * max-copies limit for matching cards. Branch grammar: {@link CardRulesPredicates#restrictionList},
- * plus {@code Name:<card name>} ({@code CARDNAME} for this rule's own bearing card).
+ * max-copies limit for matching cards. Branch grammar: {@link CardRulesPredicates#restrictionBranch}
+ * (comma-separated, OR'd), typically {@code namedCARDNAME} for this rule's own bearing card.
  */
 public class DeckRuleCopies extends DeckRule {
     private static final String UNLIMITED = "Unlimited";
@@ -45,7 +44,7 @@ public class DeckRuleCopies extends DeckRule {
         limit = !unlimited && limitParam != null ? Integer.parseInt(limitParam.trim()) : 0;
     }
 
-    /** Splits on commas before resolving Name:CARDNAME, so a comma in the resolved name (e.g. "Vazal, the Compleat") isn't mistaken for another branch. */
+    /** Resolves each branch's own CARDNAME before parsing it, so a comma in the resolved name (e.g. "Vazal, the Compleat") can't be mistaken for another branch. */
     private static Predicate<CardRules> parseAffected(final String rawValue, final String ownerName) {
         if (rawValue == null) {
             return card -> false;
@@ -56,14 +55,7 @@ public class DeckRuleCopies extends DeckRule {
             if (trimmed.isEmpty()) {
                 continue;
             }
-            final Predicate<CardRules> branch;
-            if (trimmed.startsWith("Name:")) {
-                final String rawName = trimmed.substring("Name:".length());
-                final String resolvedName = SELF_NAME.equals(rawName) ? ownerName : rawName;
-                branch = CardRulesPredicates.name(StringOp.EQUALS, resolvedName);
-            } else {
-                branch = CardRulesPredicates.restrictionList(trimmed);
-            }
+            final Predicate<CardRules> branch = CardRulesPredicates.restrictionBranch(trimmed.replace(SELF_NAME, ownerName));
             result = result == null ? branch : result.or(branch);
         }
         return result == null ? card -> false : result;

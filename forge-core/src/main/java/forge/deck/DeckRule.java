@@ -62,24 +62,15 @@ public abstract class DeckRule {
         return description;
     }
 
-    /** Parses every {@code DeckRule:} line on the given card into typed rule objects (also picks up its marked colors for AllowedAdditionalColor$, and its own name for Copies' CARDNAME). */
+    /** Parses every {@code DeckRule:} line on the given card into typed rule objects (also picks up its marked colors for AllowedAdditionalColor$, and its own name for Copies' CARDNAME resolution). Cached on {@code PaperCard} - call {@code card.getDeckRuleList()} instead of this directly. */
     public static List<DeckRule> parseAll(final IPaperCard card) {
         final CardRules rules = card.getRules();
         if (rules == null) {
             return new ArrayList<>();
         }
         final byte chosenAdditionalColors = card.getMarkedColors() != null ? card.getMarkedColors().getColor() : 0;
-        return parseAll(rules.getDeckRules(), chosenAdditionalColors, rules.getName());
-    }
-
-    /** Parses a card face's raw {@code DeckRule:} line values (see {@link #parseAll(IPaperCard)}). */
-    public static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines, final String ownerName) {
-        return parseAll(rawDeckRuleLines, (byte) 0, ownerName);
-    }
-
-    private static List<DeckRule> parseAll(final Iterable<String> rawDeckRuleLines, final byte chosenAdditionalColors, final String ownerName) {
         final List<DeckRule> result = new ArrayList<>();
-        for (final String raw : rawDeckRuleLines) {
+        for (final String raw : rules.getDeckRules()) {
             final int colonPos = raw.indexOf(':');
             final String ruleClass = colonPos > 0 ? raw.substring(0, colonPos) : raw;
             final String rest = colonPos > 0 ? raw.substring(colonPos + 1) : "";
@@ -92,7 +83,7 @@ public abstract class DeckRule {
                     result.add(new DeckRuleSize(params));
                     break;
                 case "Copies":
-                    result.add(new DeckRuleCopies(params, ownerName));
+                    result.add(new DeckRuleCopies(params, rules.getName()));
                     break;
                 default:
                     break; // unrecognized rule class - ignore

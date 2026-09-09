@@ -2,8 +2,8 @@ Name:Nazgûl
 ManaCost:2 B
 Types:Creature Wraith Knight
 PT:1/2
+DeckRule:Copies:Limit$ 9 | Affected$ namedCARDNAME | Description$ A deck can have up to nine cards named CARDNAME.
 K:Deathtouch
-DeckRule:Copies:Limit$ 9 | Affected$ Name:CARDNAME | Description$ A deck can have up to nine cards named CARDNAME.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters, the Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
 T:Mode$ RingTemptsYou | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Whenever the Ring tempts you, put a +1/+1 counter on each Wraith you control.
