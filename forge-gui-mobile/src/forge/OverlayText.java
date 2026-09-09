@@ -2,7 +2,6 @@ package forge;
 
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.scene.GameScene;
-import forge.adventure.scene.TileMapScene;
 import org.apache.commons.lang3.StringUtils;
 
 import static forge.adventure.util.Controls.newTypingLabel;
