@@ -218,9 +218,9 @@ public class WorldSave {
         return true;
     }
 
-    private void finish(String message) {
-        if (message != null)
-            announceError(message);
+    private void finish(String errors) {
+        if (errors != null)
+            announceError(errors);
         Gdx.app.postRunnable(() -> {
             OverlayText.getInstance().update("");
         });

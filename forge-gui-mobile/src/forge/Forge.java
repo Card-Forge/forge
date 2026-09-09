@@ -143,6 +143,7 @@ public class Forge implements ApplicationListener {
     private static boolean desktopAutoOrientation = true;
     public static final int LOW_SPRITES_CAP = 30; // max capacity for transition, generated image renders
     public static final int HIGH_SPRITES_CAP = 800; // max sprite capacity for adventure, classic renders
+    private static boolean isDisposed = false;
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -312,6 +313,9 @@ public class Forge implements ApplicationListener {
 
     private static void haltControllerInput() {
         if (!isMobileAdventureMode) {
+            return;
+        }
+        if (isDisposed) {
             return;
         }
         WorldStage.getInstance().stop();
@@ -1044,6 +1048,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void dispose() {
+        isDisposed = true;
         if (currentScreen != null) {
             currentScreen.onClose(null);
             currentScreen = null;

@@ -1,4 +1,4 @@
-package forge.adventure.scene;
+package forge.adventure.util;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

@@ -67,10 +67,11 @@ public class Graphics implements Disposable {
 
     @Override
     public void dispose() {
-        if (!isDisposed) {
-            isDisposed = true;
-            Forge.safeDispose(batch, shapeRenderer);
+        if (isDisposed) {
+            return;
         }
+        isDisposed = true;
+        Forge.safeDispose(batch, shapeRenderer);
     }
 
     public SpriteBatch getBatch() {

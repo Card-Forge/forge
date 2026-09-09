@@ -18,7 +18,6 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.UIData;
-import forge.adventure.scene.ShaderDrawable;
 import forge.adventure.scene.UIScene;
 import forge.util.ShaderUtil;
 
