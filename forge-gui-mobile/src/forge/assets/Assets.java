@@ -102,11 +102,12 @@ public class Assets implements Disposable {
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
-    private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
+    private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
     private Graphics assetGraphics;
     private boolean isDisposed = false;
+    private int miniMapID;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -156,7 +157,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics, miniMapTexture);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -470,6 +471,29 @@ public class Assets implements Disposable {
         }
         return holofoil;
     }
+
+    public Texture getNewMiniMapTexture(Pixmap pixmap) {
+        if (pixmap == null)
+            return null;
+        if (miniMapID == pixmap.hashCode())
+            return miniMapTexture;
+        try {
+            // try to reuse existing texture to save VRAM init and overwrite the pixeldata
+            if (miniMapTexture != null) {
+                miniMapTexture.draw(pixmap, 0, 0);
+            } else {
+                miniMapTexture = new Texture(pixmap);
+            }
+        } catch (Exception e) {
+            // if somehow we can't reuse the existing texture then dispose and initialize a new one
+            if (miniMapTexture != null)
+                miniMapTexture.dispose();
+            miniMapTexture = new Texture(pixmap);
+        }
+        miniMapID = pixmap.hashCode();
+        return miniMapTexture;
+    }
+
     public Font getTextraFont(BitmapFont bitmapFont, TextureAtlas item_atlas, TextureAtlas pixelmana_atlas) {
         if (textrafonts == null)
             textrafonts = new ObjectMap<>();
