@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ShaderDrawable implements Drawable {
     private ShaderProgram shader;
     private TextureRegion region;
     private Consumer<ShaderProgram> uniformSetter;
+    private Supplier<Boolean> condition;
 
     public ShaderDrawable(ShaderProgram shader) {
         this.shader = shader;
@@ -18,6 +20,11 @@ public class ShaderDrawable implements Drawable {
 
     public void setRegion(TextureRegion region) {
         this.region = region;
+    }
+
+    // Register a condition that decides whether to use the shader
+    public void setCondition(Supplier<Boolean> condition) {
+        this.condition = condition;
     }
 
     // Register a callback for uniforms
@@ -29,17 +36,22 @@ public class ShaderDrawable implements Drawable {
     public void draw(Batch batch, float x, float y, float width, float height) {
         if (region == null) return;
 
-        ShaderProgram oldShader = batch.getShader();
-        batch.setShader(shader);
+        // Default: true if no condition set
+        boolean useShader = (condition == null) || condition.get();
 
-        // Apply uniforms if provided
-        if (uniformSetter != null) {
-            uniformSetter.accept(shader);
+        ShaderProgram oldShader = batch.getShader();
+        if (useShader) {
+            batch.setShader(shader);
+            if (uniformSetter != null) {
+                uniformSetter.accept(shader);
+            }
         }
 
         batch.draw(region, x, y, width, height);
 
-        batch.setShader(oldShader);
+        if (useShader) {
+            batch.setShader(oldShader);
+        }
     }
 
     // Implement the other Drawable methods (same as before)
