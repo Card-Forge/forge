@@ -4,7 +4,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
-import org.powermock.api.mockito.PowerMockito;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -25,8 +24,11 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
     @Override
     protected void initializeStaticData() {
-        StaticData data = CardDatabaseHelper.getStaticDataToPopulateOtherMocks(true);
-        PowerMockito.when(FModel.getMagicDb()).thenReturn(data);
+        // A database of this class's own, loaded lazily. The process-wide one may already
+        // have been built eagerly by whichever test class ran first, which would make every
+        // assertNull below fail.
+        StaticData data = CardDatabaseHelper.createStaticData("CardDbLazyCardLoadingCardMockTestCase", true);
+        fModelMock.when(FModel::getMagicDb).thenReturn(data);
     }
 
     @Test
@@ -75,7 +77,12 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
         assertEquals(borrowingCard.getName(), expectedCardName);
         assertEquals(borrowingCard.getEdition(), setCode);
 
-        assertNull(this.cardDb.getCard(cardName, "IMA")); // not added yet
+        // The card is now in the DB so we can update this test
+        CardEdition ima = FModel.getMagicDb().getCardEdition("IMA");
+        assertNotNull(ima);
+        assertNull(this.cardDb.getCardFromSet(expectedCardName, ima, false));
+        // And the lenient call falls back to the one printing that was loaded.
+        assertEquals(this.cardDb.getCard(cardName, "IMA").getEdition(), setCode);
     }
 
     @Test
