@@ -138,6 +138,8 @@ public class VLobby implements ILobbyView {
     private final FLabel lblEventStatus = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC).build();
     private final FLabel lblEventFormatCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormat")).fontSize(13).build();
     private final FLabel lblEventProductCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblProduct")).fontSize(13).build();
+    private final FLabel lblEventPodCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkEventPodCaption")).fontSize(13).build();
+    private final FLabel lblEventPod = new FLabel.Builder().text("—").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
     private final FLabel lblEventPickTimerCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkPickTimerCaption")).fontSize(13).build();
     private final FLabel lblEventDateCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblEventDate")).fontSize(13).build();
     private final FLabel lblEventDate = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
@@ -185,6 +187,7 @@ public class VLobby implements ILobbyView {
             java.awt.Color captionColor = FSkin.getColor(FSkin.Colors.CLR_TEXT).stepColor(-80).getColor();
             lblEventFormatCaption.setForeground(captionColor);
             lblEventProductCaption.setForeground(captionColor);
+            lblEventPodCaption.setForeground(captionColor);
             lblEventPickTimerCaption.setForeground(captionColor);
             lblEventDateCaption.setForeground(captionColor);
             lblEventStatus.setForeground(captionColor);
@@ -208,6 +211,8 @@ public class VLobby implements ILobbyView {
             eventConfigPanel.add(lblEventFormat, "wrap");
             eventConfigPanel.add(lblEventProductCaption);
             eventConfigPanel.add(lblEventProduct, "wrap");
+            eventConfigPanel.add(lblEventPodCaption);
+            eventConfigPanel.add(lblEventPod, "wrap");
             eventConfigPanel.add(lblEventPickTimerCaption);
             eventConfigPanel.add(lblEventPickTimer, "wrap");
             eventConfigPanel.add(lblEventDateCaption);
@@ -375,7 +380,7 @@ public class VLobby implements ILobbyView {
 
     private void updateImpl(final boolean fullUpdate) {
         activePlayersNum = lobby.getNumberOfSlots();
-        addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
+        addPlayerBtn.setEnabled(activePlayersNum < lobby.getSlotLimit());
 
         controller.syncModeFromHost();
         controller.onLobbyDataChanged();
@@ -950,12 +955,16 @@ public class VLobby implements ILobbyView {
 
     /** Render the event panel from pre-computed contents. No decisions live here. */
     void setEventPanelContents(CLobby.EventPanelContents c) {
-        lblEventStatus.setText(c.statusText());
-        lblEventStatus.setVisible(!c.statusText().isEmpty());
-        lblEventFormat.setText(c.formatText());
-        lblEventProduct.setText(c.productText());
-        lblEventPickTimer.setText(c.timerText());
-        lblEventDate.setText(c.dateText());
+        NetworkEvent.EventPanelText text = c.text();
+        lblEventStatus.setText(text.statusText());
+        lblEventStatus.setVisible(!text.statusText().isEmpty());
+        lblEventFormat.setText(text.formatText());
+        lblEventProduct.setText(text.productText());
+        lblEventPod.setText(text.podText());
+        lblEventPodCaption.setVisible(!text.podText().isEmpty());
+        lblEventPod.setVisible(!text.podText().isEmpty());
+        lblEventPickTimer.setText(text.timerText());
+        lblEventDate.setText(text.dateText());
         if (lobby.hasControl()) {
             btnDismissEvent.setVisible(c.showDismissX());
         }
