@@ -161,6 +161,27 @@ you lose the only signal you have.
 
 ---
 
+## PORT-8 — An upstream bug is reported, never worked around
+
+A defect in Forge — a malformed card script, a param that never reaches its effect, a method that cannot do what its
+name says — is fixed **upstream**, not absorbed into Crucible.
+
+Procedure:
+
+1. **Stop and say so.** Name the file and line, what the code does, and what it should do.
+2. **Fix it upstream.** Branch off `upstream/master`, one change, pull request to `Card-Forge/forge`.
+3. **Carry it meanwhile** if Crucible needs the fix now: cherry-pick onto a Crucible branch and log the row in
+   `porting/upstream-patches.md` with the condition that deletes it (ADR-0001, REV-1).
+
+Never write Go that compensates for it. A workaround makes Crucible disagree with the oracle for a reason no diff can
+explain, and the P1/P2 gates lose the property that a difference means a port error.
+
+**This is not PORT-7.** A quirk is behavior Go reproduces because parity depends on it; a bug is behavior that makes the
+card wrong, and reproducing it faithfully is still correct until upstream merges the fix. Both are pinned; only the bug
+gets a pull request.
+
+---
+
 ## Related
 
 - [01-go-coding-standards](01-go-coding-standards.md)

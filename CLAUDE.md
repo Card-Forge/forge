@@ -64,6 +64,11 @@ Violated most often. Full reasoning in the guideline files.
    `porting/port-log/<unit>.md` note. ADR merges _before_ its implementing PR. (DOC-12, ADRP-4)
 10. **Near-zero dependencies.** Non-stdlib import needs an ADR. Currently allowed: `github.com/google/go-cmp`, tests
     only. (GO-14)
+11. **A Forge bug is reported, never worked around.** Malformed script, param that never reaches its effect, method that
+    cannot do what its name says → stop, name the file and line, fix it upstream. Carry the fix on a branch and log it
+    in `porting/upstream-patches.md` if Crucible needs it now. Never Go code that compensates. Reason: a workaround
+    makes Crucible disagree with the oracle for a reason no diff can explain. Distinct from PORT-7, where a quirk is
+    reproduced because parity depends on it. (PORT-8)
 
 ---
 
