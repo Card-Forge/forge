@@ -1,6 +1,7 @@
 package forge.card;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
@@ -24,10 +25,14 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
     @Override
     protected void initializeStaticData() {
-        // A database of this class's own, loaded lazily. The process-wide one may already
-        // have been built eagerly by whichever test class ran first, which would make every
-        // assertNull below fail.
-        StaticData data = CardDatabaseHelper.createStaticData("CardDbLazyCardLoadingCardMockTestCase", true);
+        // A database of this class's own, loaded lazily, and a fresh one for every method.
+        //
+        // Every test here asserts a card is not yet loaded, loads it, then asserts it is, so a
+        // database shared between methods stops being pristine as soon as the first one runs.
+        // This deliberately does not use the keyed cache CardDatabaseHelper offers the other
+        // CardDb test classes: lazy loading only indexes card names rather than parsing all
+        // 33,000 card scripts, so rebuilding it per method costs well under a second.
+        StaticData data = CardDatabaseHelper.createStaticData(true);
         fModelMock.when(FModel::getMagicDb).thenReturn(data);
     }
 
@@ -38,13 +43,15 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        PaperCard borrowingCard = this.cardDb.getCard(cardName);
-        assertNull(borrowingCard);
+        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
+        // reports whether a card has been loaded yet. contains() reads the loaded-card index
+        // without triggering a load, which is what this pre-condition has always meant.
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName);
 
-        borrowingCard = this.cardDb.getCard(cardName);
+        PaperCard borrowingCard = this.cardDb.getCard(cardName);
         assertNotNull(borrowingCard);
         assertEquals(borrowingCard.getName(), cardName);
         assertEquals(borrowingCard.getEdition(), "PLST");
@@ -66,13 +73,15 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        PaperCard borrowingCard = this.cardDb.getCard(cardName);
-        assertNull(borrowingCard);
+        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
+        // reports whether a card has been loaded yet. contains() reads the loaded-card index
+        // without triggering a load, which is what this pre-condition has always meant.
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName, setCode);
 
-        borrowingCard = this.cardDb.getCard(cardName);
+        PaperCard borrowingCard = this.cardDb.getCard(cardName);
         assertNotNull(borrowingCard);
         assertEquals(borrowingCard.getName(), expectedCardName);
         assertEquals(borrowingCard.getEdition(), setCode);
@@ -89,13 +98,15 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
     public void tesLoadAndGetAetherVialWithWrongCase() {
         String cardName = "AEther vial"; // wrong case
         String expectedCardName = "Aether Vial";
-        PaperCard aetherVialCard = this.cardDb.getCard(cardName);
-        assertNull(aetherVialCard);
+        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
+        // reports whether a card has been loaded yet. contains() reads the loaded-card index
+        // without triggering a load, which is what this pre-condition has always meant.
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName);
 
-        aetherVialCard = this.cardDb.getCard(cardName);
+        PaperCard aetherVialCard = this.cardDb.getCard(cardName);
         assertNotNull(aetherVialCard);
         assertEquals(aetherVialCard.getName(), expectedCardName);
     }
@@ -107,13 +118,15 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
         String expectedSetCode = "EXO"; // Exodus
         CardRarity expectedCardRarity = CardRarity.Rare;
 
-        PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);
-        assertNull(dominatingLycidCard);
+        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
+        // reports whether a card has been loaded yet. contains() reads the loaded-card index
+        // without triggering a load, which is what this pre-condition has always meant.
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName, wrongSetCode);
 
-        dominatingLycidCard = this.cardDb.getCard(cardName);
+        PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);
         assertNotNull(dominatingLycidCard);
         assertEquals(dominatingLycidCard.getName(), cardName);
         assertEquals(dominatingLycidCard.getEdition(), expectedSetCode);
