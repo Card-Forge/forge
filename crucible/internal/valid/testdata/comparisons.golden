@@ -1,0 +1,36 @@
+field	basePower	6
+field	baseToughness	4
+field	cmc	619
+field	numColors	6
+field	numTypes	2
+field	power	387
+field	totalPT	5
+field	toughness	52
+operator	EQ	155
+operator	GE	249
+operator	GT	19
+operator	LE	594
+operator	LT	63
+operator	M2	1
+operand	0
+operand	1
+operand	10
+operand	2
+operand	3
+operand	4
+operand	5
+operand	6
+operand	7
+operand	8
+operand	9
+operand	Chosen
+operand	Count$CardPower
+operand	Count$ChosenNumber
+operand	IronclawX
+operand	M
+operand	TriggeredCard$CardPower
+operand	X
+operand	Y
+operand	Z
+operand	basePower
+operand	toughness

@@ -243,7 +243,7 @@ func (v *Vocabulary) addParamMap(value string) {
 				v.Add(CostPart, CostPartName(part))
 			}
 		}
-		if isValidKey(p.Key) {
+		if IsValidKey(p.Key) {
 			for _, alt := range ParseValid(p.Value) {
 				v.Add(ValidBase, alt.Base)
 				for _, property := range alt.Properties {
@@ -289,7 +289,7 @@ var notValidStrings = map[string]bool{
 	"ValidZone":            true,
 }
 
-// isValidKey reports whether a param key's value is a valid string.
+// IsValidKey reports whether a param key's value is a valid string.
 //
 // A prefix rule with exceptions rather than a fixed list of the keys that are:
 // 70 keys start with `Valid`, upstream adds more, and a list of the ones that
@@ -299,7 +299,7 @@ var notValidStrings = map[string]bool{
 // Description keys are excluded by suffix. `ValidTgtsDesc$` holds prose, and so
 // does `ValidTgtsDes$` -- the corpus carries both spellings, one of them a typo
 // nobody noticed because nothing parses either.
-func isValidKey(key string) bool {
+func IsValidKey(key string) bool {
 	if !strings.HasPrefix(key, "Valid") && key != "Affected" {
 		return false
 	}

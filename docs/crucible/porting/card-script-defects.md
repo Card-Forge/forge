@@ -9,16 +9,18 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 
 ## Status
 
-| Card                     | Defect                                             | Found by               | Upstream                                                         |
-| ------------------------ | -------------------------------------------------- | ---------------------- | ---------------------------------------------------------------- |
-| `the_dawning_archaic`    | `ODeckHints:` for `DeckHints:`                     | Unknown-key rejection  | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
-| `spirit_of_resilience`   | `DBCleanup:` for `SVar:DBCleanup:`                 | Unknown-key rejection  | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
-| `favor_of_jukai`         | Missing `\|` fuses `ValidTgts$` and `NumAtt$`      | Valid-base vocabulary  | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
-| `casey_raph_hotheads`    | `SVar:DBCleanup` never written                     | Sub-ability resolution | Open, carried                                                    |
-| `circadian_struggle`     | Cleanup chains to a `DBEffect` that does not exist | Sub-ability resolution | Open, carried                                                    |
-| `withering_curse`        | Chains to a `DBPutCounter` that does not exist     | Sub-ability resolution | Open, carried                                                    |
-| `worzel_the_protector`   | Chains to a `DBAttach` that does not exist         | Sub-ability resolution | Open, carried                                                    |
-| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist          | Sub-ability resolution | Open, carried                                                    |
+| Card                     | Defect                                                      | Found by               | Upstream                                                         |
+| ------------------------ | ----------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------- |
+| `the_dawning_archaic`    | `ODeckHints:` for `DeckHints:`                              | Unknown-key rejection  | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
+| `spirit_of_resilience`   | `DBCleanup:` for `SVar:DBCleanup:`                          | Unknown-key rejection  | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
+| `favor_of_jukai`         | Missing `\|` fuses `ValidTgts$` and `NumAtt$`               | Valid-base vocabulary  | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
+| `casey_raph_hotheads`    | `SVar:DBCleanup` never written                              | Sub-ability resolution | Open, carried                                                    |
+| `circadian_struggle`     | Cleanup chains to a `DBEffect` that does not exist          | Sub-ability resolution | Open, carried                                                    |
+| `withering_curse`        | Chains to a `DBPutCounter` that does not exist              | Sub-ability resolution | Open, carried                                                    |
+| `worzel_the_protector`   | Chains to a `DBAttach` that does not exist                  | Sub-ability resolution | Open, carried                                                    |
+| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist                   | Sub-ability resolution | Open, carried                                                    |
+| `goblin_razerunners`     | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing   | Open, carried                                                    |
+| `flamewave_invoker`      | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing   | Open, carried                                                    |
 
 An **open, carried** fix is applied to Crucible's corpus while its pull request waits, logged in
 [`upstream-patches.md`](upstream-patches.md) with the condition that deletes it. All five are carried, so
@@ -148,3 +150,32 @@ So `DBCharm` is a leftover of the same kind as the other three, not a missing fe
 card offer two modes, which its text does not say.
 
 Fix: drop `| SubAbility$ DBCharm`.
+
+## Goblin Razerunners and Flamewave Invoker
+
+{2}{R}{R} Creature — Goblin Warrior, 3/4, Neon Dynasty Commander (`nec`), and {2}{R} Creature — Goblin Mutant, 2/2,
+Battlebond (`bbd`).
+
+```text
+{1}{R}, Sacrifice a land: Put a +1/+1 counter on this creature.
+At the beginning of your end step, you may have this creature deal damage equal to the number of +1/+1 counters
+on it to target player or planeswalker.
+```
+
+```text
+{7}{R}: This creature deals 5 damage to target player or planeswalker.
+```
+
+Both write `ValidTgts$ Player, Planeswalker`. `CardTraitBase.java:261` splits the param with a plain `split(",")`, so
+the second alternative is `" Planeswalker"`, and `CardType.hasStringType` rejects it: no subtype is spelled with a
+leading space, `StringUtils.capitalize` leaves one untouched, and `CoreType.getEnum` and `Supertype.getEnum` are exact
+lookups (`forge-core/src/main/java/forge/card/CardType.java:347`).
+
+So the alternative matches nothing and both abilities can only target players, against their own text. 136 other cards
+write `ValidTgts$ Player,Planeswalker` with no space.
+
+Fix: delete one space each.
+
+`internal/valid` parses without trimming for exactly this reason. The vocabulary scanner trims each alternative before
+counting, which collapsed `" Planeswalker"` and `"Planeswalker"` into one token and hid the defect; a parser that tidies
+its input cannot find the bugs that tidying would fix.
