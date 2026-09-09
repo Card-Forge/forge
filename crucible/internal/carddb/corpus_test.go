@@ -220,3 +220,78 @@ func repoRoot(t *testing.T) string {
 	// crucible/internal/carddb/<file> -> repository root.
 	return filepath.Join(filepath.Dir(file), "..", "..", "..")
 }
+
+// TestIgnoredKeysStillOccur is the allowlist's rot guard.
+//
+// Each exemption exists for one card. An upstream sync that fixes the typo, or
+// deletes the card, would leave an exemption behind that silently swallows the
+// next real unknown key -- which is the failure the allowlist exists to
+// prevent. Upstream spreading a defect to a second card matters for the same
+// reason, so the card list is compared whole rather than searched.
+func TestIgnoredKeysStillOccur(t *testing.T) {
+	t.Parallel()
+
+	carrying := map[string][]string{}
+	forEachScript(t, func(name string, raw []byte) {
+		for _, line := range strings.Split(string(raw), "\n") {
+			key := scriptKey(line)
+			if _, ok := carddb.IgnoredScriptKeys()[key]; ok {
+				carrying[key] = append(carrying[key], name)
+			}
+		}
+	})
+
+	for key, entry := range carddb.IgnoredScriptKeys() {
+		cards := carrying[key]
+		sort.Strings(cards)
+		switch {
+		case len(cards) == 0:
+			t.Errorf("%q occurs on no card any more (%s) -- delete the exemption, it now hides real errors",
+				key, entry.Why)
+		case len(cards) != 1 || cards[0] != entry.Card:
+			t.Errorf("%q occurs on %v, allowlisted for %q -- re-check the defect before widening the exemption",
+				key, cards, entry.Card)
+		}
+	}
+}
+
+// scriptKey is the key Java's parseLine reads off a line: everything before the
+// first colon, or the whole line when there is none.
+func scriptKey(line string) string {
+	if line == "" || line[0] == '#' {
+		return ""
+	}
+	if at := strings.Index(line, ":"); at > 0 {
+		return line[:at]
+	}
+	return line
+}
+
+// forEachScript hands every card script to fn as raw bytes, unparsed.
+func forEachScript(t *testing.T, fn func(name string, raw []byte)) {
+	t.Helper()
+
+	root := filepath.Join(repoRoot(t), "forge-gui", "res", "cardsfolder")
+	seen := 0
+	err := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() || filepath.Ext(path) != ".txt" {
+			return nil
+		}
+		raw, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+		seen++
+		fn(strings.TrimSuffix(filepath.Base(path), ".txt"), raw)
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("walk %s: %v", root, err)
+	}
+	if seen < 30000 {
+		t.Fatalf("read %d scripts from %s, want at least 30000", seen, root)
+	}
+}

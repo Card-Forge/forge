@@ -24,12 +24,35 @@ const alternateKey = "ALTERNATE"
 // value.
 const tokenMarker = "TokenScript$"
 
-// ignoredKeys are corpus defects Forge silently drops, listed here so the
-// corpus still loads while a third one is an error rather than a shrug. Each
-// names the card it appears on, so the list can be re-checked after a sync.
-var ignoredKeys = map[string]string{
-	"ODeckHints": "spirit_of_resilience: DeckHints, mistyped",
-	"DBCleanup":  "the_dawning_archaic: an SVar body that lost its SVar: prefix",
+// IgnoredKey is a corpus defect the parser drops on purpose: a key Forge's
+// switch matches nothing for, and so ignores without complaint.
+type IgnoredKey struct {
+	// Card is the script carrying it, without directory or extension.
+	Card string
+	// Why says what the line was meant to be.
+	Why string
+}
+
+// ignoredKeys are those defects, listed so the corpus still loads while a third
+// one is an error rather than a shrug.
+var ignoredKeys = map[string]IgnoredKey{
+	"ODeckHints": {Card: "the_dawning_archaic", Why: "DeckHints, mistyped"},
+	"DBCleanup":  {Card: "spirit_of_resilience", Why: "an SVar body that lost its SVar: prefix"},
+}
+
+// IgnoredScriptKeys returns the allowlist: which keys are dropped, and which
+// card each was found on.
+//
+// Exported because an allowlist nobody can read is an allowlist that rots. The
+// corpus test checks every entry still occurs on the card named, so an upstream
+// sync that fixes a typo -- or spreads it to a second card -- fails the build
+// instead of leaving a dead exemption behind (PORT-7).
+func IgnoredScriptKeys() map[string]IgnoredKey {
+	out := make(map[string]IgnoredKey, len(ignoredKeys))
+	for key, entry := range ignoredKeys {
+		out[key] = entry
+	}
+	return out
 }
 
 // specializeFaces maps a SPECIALIZE colour to the face it switches to.

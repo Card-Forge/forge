@@ -89,12 +89,16 @@ naming the card, which is Java throwing out of `setPtText`; no corpus card does 
 Tokens are dumped on the card rather than a face: Java harvests every `TokenScript$` on the Reader itself, whichever
 face's line carried it, and keeps them in script order.
 
-## Open questions
+## Decided, not open
 
-- **Whether to reproduce the ignore-unknown-keys behaviour.** Erroring is the P2 vocabulary gate's whole premise, and
-  Forge tolerating a typo is not a licence to. The allowlist keeps the two known defects loading while making a third
-  one loud, which is the same shape as `internal/cardtype`'s `UnknownTypes`.
-- **What the canonical dump leaves out:** `DeckHints`, `DeckNeeds` and `DeckHas`. Java parses each into a
-  `Map<Type, List<String>>` with no `toString`, so comparing them means porting that parser and writing a renderer on
-  the Java side. All three are parsed and kept by `internal/carddb`; none is compared, so a divergence in them would be
-  invisible.
+**An unknown key is an error.** Forge ignoring one is behaviour, not permission: P2's vocabulary gate has to enumerate
+every key a script may carry, and a parser that shrugs at an unrecognised one cannot produce that list. The two corpus
+defects are exempted by name in `IgnoredScriptKeys`, each carrying the card it was found on, and the corpus test fails
+when an exemption no longer matches exactly that card. A sync that fixes the typo therefore deletes the exemption
+instead of leaving a dead one behind to swallow the next real unknown key.
+
+**`DeckHints`, `DeckNeeds` and `DeckHas` are never dumped.** Java parses each into a `Map<Type, List<String>>` and
+`DeckHints.java` (239) has no `toString`, so comparing them means porting that parser and writing a renderer on the Java
+side -- for data nothing in Crucible reads. The gauntlet is fixed decklists (ADR-0011) and the deck generator is out of
+scope (PORT-6). All three are parsed and kept on `Card`; a divergence in them would be invisible, and that is accepted.
+A future generator pays for the parser when it wants them.

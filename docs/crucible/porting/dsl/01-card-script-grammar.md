@@ -84,8 +84,8 @@ matches the whole key, and neither matches anything:
 
 | Key           | Card                   | What it looks like it meant |
 | ------------- | ---------------------- | --------------------------- |
-| `ODeckHints:` | `spirit_of_resilience` | `DeckHints:`, mistyped      |
-| `DBCleanup:`  | `the_dawning_archaic`  | An `SVar:` body, unprefixed |
+| `ODeckHints:` | `the_dawning_archaic`  | `DeckHints:`, mistyped      |
+| `DBCleanup:`  | `spirit_of_resilience` | An `SVar:` body, unprefixed |
 
 Both are corpus defects rather than vocabulary. A strict parser has to decide about them explicitly — Crucible's does,
 in the port log — because "Forge ignores it" is behaviour, not permission.
