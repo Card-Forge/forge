@@ -526,15 +526,16 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 else
                     deck.setName(currentDeckName);
             }
+            final boolean substituteCurrentDeck = controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE;
             // Route to the editor implied by the selected legality format; unticking the format
             // checkbox bypasses this and loads into the host editor as before
             final GameType targetGameType = getSelectedFormatGameType();
             if (targetGameType != null && targetGameType != host.getGameType()) {
                 CDeckEditorUI.SINGLETON_INSTANCE.changeFormat(targetGameType);
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
-                        .getDeckController().loadDeck(deck, true);
+                        .getDeckController().loadDeck(deck, substituteCurrentDeck);
             } else {
-                host.getDeckController().loadDeck(deck, controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE);
+                host.getDeckController().loadDeck(deck, substituteCurrentDeck);
             }
             processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
         });

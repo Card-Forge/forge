@@ -484,6 +484,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private static void placeSelectedAsCommander(PaperCard card, boolean isAdd) {
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (!(editor instanceof CEditorConstructed ce)) { return; }
+        if (ce.controller.getModel().getOrCreate(DeckSection.Commander).countByName(card) > 0) { return; }
         if (!isAdd) {
             ce.deckManager.removeItem(card, 1);
         }
@@ -509,9 +510,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                     && card.getRules().canBePartnerCommander()
                     && existing.get(0).getRules().canBePartnerCommanders(card.getRules());
             if (!keepAsPartner) {
-                for (PaperCard ex : existing) {
-                    deck.getMain().add(ex, dest.count(ex));
-                }
+                deck.getMain().addAll(dest);
                 dest.clear();
             }
         }

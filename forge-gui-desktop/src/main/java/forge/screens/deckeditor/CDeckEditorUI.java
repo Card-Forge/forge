@@ -163,7 +163,7 @@ public enum CDeckEditorUI implements ICDoc {
 
         final CEditorConstructed newEditor = new CEditorConstructed(cDetailPicture, target);
         setEditorController(newEditor);
-        newEditor.getDeckController().loadDeck(snapshot);
+        newEditor.getDeckController().setModel(snapshot);
     }
 
     private static boolean isFormatDropdownGameType(final GameType gt) {
