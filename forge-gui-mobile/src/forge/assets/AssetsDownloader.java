@@ -161,7 +161,7 @@ public class AssetsDownloader {
                 return;
             }
         }
-        // non android don't have seperate package to check
+        // non android don't have separate package to check
         if (!GuiBase.isAndroid()) {
             run(runnable);
             return;
