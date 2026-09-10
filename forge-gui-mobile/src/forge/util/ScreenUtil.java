@@ -89,19 +89,24 @@ public class ScreenUtil implements Disposable {
 
         // Create a small, lightweight Pixmap
         Pixmap smallPixmap = new Pixmap(targetWidth, targetHeight, original.getFormat());
-
-        // Draw full-res Pixmap into the small Pixmap (CPU hardware downsampling)
+        // BiLinear filter is used to achieve a cheap blur on smallPixmap
         smallPixmap.setFilter(Pixmap.Filter.BiLinear);
+        // Draw cropped Pixmap into the small Pixmap (CPU hardware downsampling)
         smallPixmap.drawPixmap(original,
             startX, startY, cropWidth, cropHeight,
             0, 0, targetWidth, targetHeight);
 
-        if (Forge.lastPreview == null) {
+        try { // try to reuse lastPreview texture and draw the smallPixmap to save texture VRAM
+            if (Forge.lastPreview != null)
+                Forge.lastPreview.draw(smallPixmap, 0, 0);
+            else
+                Forge.lastPreview = new Texture(smallPixmap);
+        } catch (Exception e) {
+            // fallback if you can't draw the smallPixmap
             Forge.lastPreview = new Texture(smallPixmap);
-        } else {
-            Forge.lastPreview.draw(smallPixmap, 0, 0);
+        } finally {
+            Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
-        Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         smallPixmap.dispose();
     }
 

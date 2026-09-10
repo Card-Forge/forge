@@ -22,7 +22,6 @@ import forge.Forge;
 import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
-import forge.util.ShaderUtil;
 
 import java.time.LocalTime;
 
@@ -637,7 +636,6 @@ public class UIScene extends Scene {
     }
 
     Image screenImage;
-    TextureRegion backgroundTexture;
 
     @Override
     public boolean leave() {
@@ -651,23 +649,8 @@ public class UIScene extends Scene {
         if (screenImage != null) {
             try {
                 if (Forge.lastPreview != null) {
-                    // Set backgroundTexture from last screen capture "lastPreview"
-                    backgroundTexture = new TextureRegion(Forge.lastPreview);
-                    float mul = 1.2f;
-                    float width = getIntendedWidth();
-                    float height = getIntendedHeight();
-                    float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
-                    // Set ShaderDrawable with parameters
-                    ShaderDrawable shaderDrawable = new ShaderDrawable(ShaderUtil.getInstance().getShaderPix());
-                    shaderDrawable.setUniformSetter(shader -> {
-                        shader.setUniformf("u_resolution", width, height);
-                        shader.setUniformf("u_pixelSize", pixelSize);
-                        shader.setUniformf("u_bias", 0.8f);
-                    });
-                    // set backgroundTexture to shaderDrawable
-                    shaderDrawable.setRegion(backgroundTexture);
                     // set shaderDrawable to screenImage
-                    screenImage.setDrawable(shaderDrawable);
+                    screenImage.setDrawable(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
