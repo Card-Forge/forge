@@ -12,4 +12,4 @@ SVar:DBPutAll:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Ex
 SVar:DBSacrifice:DB$ Sacrifice | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHas:Ability$Token|Counters|Sacrifice & Type$Wolf
-Oracle:At the beginning of your upkeep, exile the top four cards of your library, then roll a d20.\n1—9 | You may put a land card from among those cards onto the battlefield.\n10—19 | Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.\n20 | Put all permanent cards exiled with Journey to the Lost City onto the battlefield, then sacrifice it.
+Oracle:At the beginning of your upkeep, exile the top four cards of your library, then roll a d20.\n1—9 | You may put a land card from among those cards onto the battlefield.\n10—19 | Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.\n20 | Put all permanent cards exiled with this enchantment onto the battlefield, then sacrifice it.

@@ -2,7 +2,7 @@ Name:Jadzi, Oracle of Arcavios
 ManaCost:6 U U
 Types:Legendary Creature Human Wizard
 PT:5/5
-A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return NICKNAME to its owner's hand.
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, reveal the top card of your library. If it's a nonland card, you may cast it by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield.
 SVar:TrigDig:DB$ PeekAndReveal | RememberRevealed$ True | NoPeek$ True | SubAbility$ CastCard
 SVar:CastCard:DB$ Play | Defined$ Remembered | PlayCost$ 1 | ValidSA$ Spell | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | SubAbility$ MoveLand
@@ -12,7 +12,7 @@ SVar:PlayMain1:TRUE
 DeckHas:Ability$Discard
 DeckNeeds:Type$Instant|Sorcery
 AlternateMode:Modal
-Oracle:Discard a card: Return Jadzi, Oracle of Arcavios to its owner's hand.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, reveal the top card of your library. If it's a nonland card, you may cast it by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield.
+Oracle:Discard a card: Return Jadzi to its owner's hand.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, reveal the top card of your library. If it's a nonland card, you may cast it by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield.
 
 ALTERNATE
 

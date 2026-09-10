@@ -1,10 +1,10 @@
 Name:Justice
 ManaCost:2 W W
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {W}{W}.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice this enchantment unless you pay {W}{W}.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ W W
-T:Mode$ DamageDealtOnce | ValidSource$ Instant.Red,Sorcery.Red,Creature.Red+inZoneBattlefield | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a red creature or spell deals damage, CARDNAME deals that much damage to that creature's or spell's controller.
+T:Mode$ DamageDealtOnce | ValidSource$ Instant.Red,Sorcery.Red,Creature.Red+inZoneBattlefield | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a red creature or spell deals damage, this enchantment deals that much damage to that creature's or spell's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:Random
-Oracle:At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.\nWhenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
+Oracle:At the beginning of your upkeep, sacrifice this enchantment unless you pay {W}{W}.\nWhenever a red creature or spell deals damage, this enchantment deals that much damage to that creature's or spell's controller.

@@ -2,5 +2,5 @@ Name:Jousting Dummy
 ManaCost:2
 Types:Artifact Creature Scarecrow Knight
 PT:2/1
-A:AB$ Pump | Cost$ 3 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-Oracle:{3}: Jousting Dummy gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ 3 | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+Oracle:{3}: This creature gets +1/+0 until end of turn.

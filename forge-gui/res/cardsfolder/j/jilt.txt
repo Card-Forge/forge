@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 K:Kicker:1 R
 A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature to bounce | TargetUnique$ True | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDamage | SpellDescription$ Return target creature to its owner's hand.
-SVar:DBDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select another target creature to deal 2 damage | TargetUnique$ True | NumDmg$ 2 | TargetMin$ X | TargetMax$ X | SpellDescription$ If CARDNAME was kicked, it deals 2 damage to another target creature.
+SVar:DBDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select another target creature to deal 2 damage | TargetUnique$ True | NumDmg$ 2 | TargetMin$ X | TargetMax$ X | SpellDescription$ If this spell was kicked, it deals 2 damage to another target creature.
 SVar:X:Count$Kicked.1.0
 SVar:NeedsToPlayKickedVar:Z GE2
 SVar:Z:Count$Valid Creature.OppCtrl
