@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CardTranslation {
 
@@ -16,6 +17,7 @@ public class CardTranslation {
     private static Map <String, String> translatedoracles;
     private static Map <String, List <Pair <String, String> > > oracleMappings;
     private static Map <String, Map <String, String> > translatedCaches;
+    private static Map <String, String> sharedCache;
     private static Map <String, String> translatedEffectNames;
     private static Map <String, String> translatedTokenNames;
     private static final List <String> knownEffectNames = Arrays.asList("The Ring", "The Monarch", "The Initiative", "City's Blessing", "Keyword Effects");
@@ -274,7 +276,10 @@ public class CardTranslation {
             translatedtypes = new HashMap<>();
             translatedoracles = new HashMap<>();
             oracleMappings = new HashMap<>();
-            translatedCaches = new HashMap<>();
+            // read from the game thread and the EDT both, and computeIfAbsent on a plain
+            // HashMap is not safe under that
+            translatedCaches = new ConcurrentHashMap<>();
+            sharedCache = new ConcurrentHashMap<>();
             readTranslationFile(languageSelected, languagesDirectory);
         }
     }
@@ -303,58 +308,21 @@ public class CardTranslation {
         String [] splitOracleText = oracleText.split("\\\\n");
         String [] splitTranslatedText = translatedText.split("\r\n\r\n");
 
-        for (int i = 0; i < splitOracleText.length && i < splitTranslatedText.length; i++) {
+        for (int i = 0; i < splitOracleText.length; i++) {
             String toracle = replaceCardName("en-US", faceName, splitOracleText[i]);
-            String ttranslated = replaceCardName(languageSelected, translatedName, splitTranslatedText[i]);
             // Remove reminder text in English oracle text unless entire line is reminder text
             if (!toracle.startsWith("(")) {
                 toracle = toracle.replaceAll("\\(.*\\)", "");
             }
+            // A translated oracle can have fewer lines than the English one. Give the uncovered
+            // lines an entry of their own anyway, with no translation - otherwise they match some
+            // other line's entry and two abilities display the same text.
+            String ttranslated = i < splitTranslatedText.length
+                    ? replaceCardName(languageSelected, translatedName, splitTranslatedText[i])
+                    : null;
             mapping.add(Pair.of(toracle, ttranslated));
         }
-        dropAmbiguousEntries(mapping, splitOracleText, faceName);
         oracleMappings.put(translationKey, mapping);
-    }
-
-    /**
-     * The lines above are paired by position, so a translated oracle with fewer lines than the
-     * English one pairs each line with its neighbour's translation. Ability text is then matched
-     * back by edit distance, which lets two different abilities land on the same translated line
-     * - a card whose abilities read identically cannot be played. Drop any entry that more than
-     * one oracle line lays claim to; those lines fall back to English, which is at least unique.
-     */
-    private static void dropAmbiguousEntries(List <Pair <String, String> > mapping,
-            String [] splitOracleText, String faceName) {
-        if (mapping.size() >= splitOracleText.length) {
-            return; // every line has its own entry, so no two can share one
-        }
-        List <String> oracleLines = new ArrayList<>();
-        for (String line : splitOracleText) {
-            String toracle = replaceCardName("en-US", faceName, line);
-            if (!toracle.startsWith("(")) {
-                toracle = toracle.replaceAll("\\(.*\\)", "");
-            }
-            oracleLines.add(toracle);
-        }
-        while (!mapping.isEmpty()) {
-            Map <String, String> claimedBy = new HashMap<>();
-            Set <String> ambiguous = new HashSet<>();
-            for (String line : oracleLines) {
-                int index = matchingEntry(line, mapping);
-                if (index == mapping.size()) {
-                    continue;
-                }
-                String translated = mapping.get(index).getRight();
-                String previous = claimedBy.put(translated, line);
-                if (previous != null && !previous.equals(line)) {
-                    ambiguous.add(translated);
-                }
-            }
-            if (ambiguous.isEmpty()) {
-                return;
-            }
-            mapping.removeIf(entry -> ambiguous.contains(entry.getRight()));
-        }
     }
 
     public static String translateMultipleDescriptionText(String descText, ITranslatable card) {
@@ -389,17 +357,24 @@ public class CardTranslation {
         if (!needsTranslation()) return descText;
         // the answer comes out of one card's oracle mapping, so it can only be reused for that
         // card - two cards sharing an ability need not word its translation the same way
-        Map <String, String> cardCache =
-                translatedCaches.computeIfAbsent(card.getTranslationKey(), k -> new HashMap<>());
+        String key = card.getTranslationKey();
+        Map <String, String> cardCache = translatedCaches.computeIfAbsent(key, k -> new ConcurrentHashMap<>());
         if (cardCache.containsKey(descText)) return cardCache.get(descText);
 
-        List <Pair <String, String> > mapping = oracleMappings.get(card.getTranslationKey());
-        if (mapping == null) return descText;
+        List <Pair <String, String> > mapping = oracleMappings.get(key);
+        if (mapping == null) {
+            // no mapping of its own - a clone that took a different name, say - so fall back to
+            // whatever another card already worked out for this exact text
+            return sharedCache.getOrDefault(descText, descText);
+        }
         String result = descText;
         if (!mapping.isEmpty()) {
             result = translateSingleIngameText(descText, mapping);
         }
         cardCache.put(descText, result);
+        if (!result.equals(descText)) {
+            sharedCache.putIfAbsent(descText, result);
+        }
         return result;
     }
 
@@ -407,7 +382,9 @@ public class CardTranslation {
         int candidateIndex = matchingEntry(descText, mapping);
 
         if (candidateIndex < mapping.size()) {
-            return mapping.get(candidateIndex).getRight();
+            String translated = mapping.get(candidateIndex).getRight();
+            // an oracle line the translation does not cover carries no text of its own
+            return translated == null ? descText : translated;
         }
 
         return descText;

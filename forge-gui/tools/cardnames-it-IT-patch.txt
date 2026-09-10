@@ -1,0 +1,1 @@
+Freed from the Real|Libero dalla Realtà|Incanta Creatura|Incanta creatura\n{U}: TAPpa la creatura incantata.\n{U}: STAPpa la creatura incantata.
