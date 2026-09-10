@@ -790,7 +790,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             renderedCount++;
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
             assetGraphics.begin(preview_w, preview_h);
-            CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
+            CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
             assetGraphics.end();
         }
         Matrix4 m = new Matrix4();
@@ -801,7 +801,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         assetGraphics.begin(preview_w, preview_h);
         assetGraphics.setProjectionMatrix(m);
         assetGraphics.startClip();
-        CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
+        CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
         assetGraphics.end();
         assetGraphics.endClip();
         frameBuffer.end();

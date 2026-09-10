@@ -203,7 +203,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // the new target - that's fine for "did You cause this" checks (ValidCause$
                 // Card.YouCtrl) as long as Chooser$ (a different player making the actual choice)
                 // is never combined with random retargeting; it isn't today.
-                runParams.put(AbilityKey.Cause, sa);
+                runParams.put(AbilityKey.Cause, sa.getHostCard());
                 if (random) {
                     runParams.put(AbilityKey.Random, true);
                 }

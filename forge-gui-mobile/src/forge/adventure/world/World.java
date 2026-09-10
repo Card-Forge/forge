@@ -99,8 +99,10 @@ public class World implements Disposable, SaveFileContent {
     @Override
     public void load(SaveFileData saveFileData) {
 
-        if (biomeImage != null)
+        if (biomeImage != null) {
             biomeImage.dispose();
+            biomeImage = null;
+        }
 
         loadWorldData();
 
@@ -941,8 +943,7 @@ public class World implements Disposable, SaveFileContent {
     }
 
     public void dispose() {
-
-        if (biomeImage != null) biomeImage.dispose();
+        Forge.safeDispose(biomeImage);
     }
 
     public void setSeed(long seedOffset) {
