@@ -3247,9 +3247,10 @@ public class ComputerUtil {
             return false; // no use in sacrificing a card in an attempt to regenerate it
         }
         Combat combat = ai.getGame().getCombat();
-        boolean isThreatened = (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
+        // The payoff does not save the sacrificed card, so assess the pending threat on its own.
+        boolean isThreatened = (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, null, false)
                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat))
-                || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
+                || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, null).contains(c));
         return isThreatened;
     }
 
