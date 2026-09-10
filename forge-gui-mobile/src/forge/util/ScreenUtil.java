@@ -103,6 +103,8 @@ public class ScreenUtil implements Disposable {
                 Forge.lastPreview = new Texture(smallPixmap);
         } catch (Exception e) {
             // fallback if you can't draw the smallPixmap
+            if (Forge.lastPreview != null)
+                Forge.lastPreview.dispose();
             Forge.lastPreview = new Texture(smallPixmap);
         } finally {
             Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
