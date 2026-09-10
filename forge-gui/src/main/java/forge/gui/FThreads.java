@@ -1,5 +1,6 @@
 package forge.gui;
 
+import forge.game.EngineOwner;
 import forge.util.ThreadUtil;
 
 public class FThreads {
@@ -48,7 +49,13 @@ public class FThreads {
      * @see fgd.SwingUtilities#invokeLater(Runnable)
      */
     public static void invokeInEdtAndWait(final Runnable proc) {
-        GuiBase.getInterface().invokeInEdtAndWait(proc);
+        // Blocking on the EDT while owning the game would stop anything else reaching it
+        final int held = EngineOwner.parkCurrent();
+        try {
+            GuiBase.getInterface().invokeInEdtAndWait(proc);
+        } finally {
+            EngineOwner.unparkCurrent(held, "FThreads.invokeInEdtAndWait");
+        }
     }
 
     private static int backgroundThreadCount;

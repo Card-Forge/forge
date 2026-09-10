@@ -3,6 +3,7 @@ package forge.gamemodes.net.server;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
+import forge.game.EngineOwner;
 import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
@@ -133,7 +134,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
         final ByteBuf encoded = encodeOnCallingThread(event);
         if (encoded == null) {
             replies.complete(event.getId(), null);
-            return replies.get(event.getId());
+            return awaitReply(event.getId());
         }
         ch.writeAndFlush(encoded).addListener(f -> {
             if (!f.isSuccess()) {
@@ -148,7 +149,17 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
                 replies.complete(event.getId(), null);
             }
         });
-        return replies.get(event.getId());
+        return awaitReply(event.getId());
+    }
+
+    /** A client can take as long as it likes to answer, so let go of the game while we wait. */
+    private Object awaitReply(final int eventId) {
+        final int held = EngineOwner.parkCurrent();
+        try {
+            return replies.get(eventId);
+        } finally {
+            EngineOwner.unparkCurrent(held, "RemoteClient.sendAndWait");
+        }
     }
 
     public String getUsername() {

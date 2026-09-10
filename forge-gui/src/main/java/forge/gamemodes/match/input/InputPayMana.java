@@ -369,7 +369,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     protected void runAsAi(Runnable proc) {
-        player.runWithController(proc, new PlayerControllerAi(game, player, player.getOriginalLobbyPlayer()));
+        // Reached from the EDT when rendering the autotap message, and the controller swap mutates
+        game.getTracker().getEngineOwner().run(
+                () -> player.runWithController(proc, new PlayerControllerAi(game, player, player.getOriginalLobbyPlayer())));
     }
 
     @Override

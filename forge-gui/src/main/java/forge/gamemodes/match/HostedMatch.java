@@ -295,6 +295,7 @@ public class HostedMatch {
             }
             // Actually start the game!
             match.startGame(currentGame, startGameHook);
+            currentGame.getTracker().getEngineOwner().shutdown();
             // this function waits?
             if (endGameHook != null){
                 endGameHook.run();

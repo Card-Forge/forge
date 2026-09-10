@@ -9,6 +9,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 
+import forge.game.EngineOwner;
 import forge.trackable.TrackableTypes.TrackableType;
 
 /**
@@ -33,6 +34,13 @@ import forge.trackable.TrackableTypes.TrackableType;
 public class Tracker {
     private int freezeCounter = 0;
     private final List<DelayedPropChange> delayedPropChanges = Lists.newArrayList();
+
+    // Here because Tracker is already one-per-game and reachable from every TrackableObject
+    private final EngineOwner engineOwner = new EngineOwner();
+
+    public EngineOwner getEngineOwner() {
+        return engineOwner;
+    }
 
     private final Table<TrackableType<?>, Integer, Object> objLookups = HashBasedTable.create();
 

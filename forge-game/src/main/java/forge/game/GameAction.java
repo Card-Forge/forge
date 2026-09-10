@@ -2527,9 +2527,23 @@ public class GameAction {
     // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
     public void invoke(final Runnable proc) {
         if (ThreadUtil.isGameThread()) {
-            proc.run();
+            final EngineOwner owner = game.getTracker().getEngineOwner();
+            owner.enter("GameAction.invoke");
+            try {
+                proc.run();
+            } finally {
+                owner.exit();
+            }
         } else {
-            ThreadUtil.invokeInGameThread(proc);
+            ThreadUtil.invokeInGameThread(() -> {
+                final EngineOwner owner = game.getTracker().getEngineOwner();
+                owner.enter("GameAction.invoke/dispatched");
+                try {
+                    proc.run();
+                } finally {
+                    owner.exit();
+                }
+            });
         }
     }
 

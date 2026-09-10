@@ -2,6 +2,7 @@ package forge.gamemodes.net;
 
 import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gamemodes.net.event.ReplyEvent;
+import forge.game.EngineOwner;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.skin.FSkinProp;
@@ -25,6 +26,11 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     protected abstract IRemote getRemote(ChannelHandlerContext ctx);
 
     protected abstract T getToInvoke(ChannelHandlerContext ctx);
+
+    /** The game this dispatch runs engine code for, or null when it does not (client side). */
+    protected EngineOwner ownerFor(final Object toInvoke) {
+        return null;
+    }
     protected abstract void beforeCall(ChannelHandlerContext ctx, ProtocolMethod protocolMethod, Object[] args);
 
     protected boolean shouldDispatchToGuiThread(final ProtocolMethod protocolMethod) {
@@ -114,10 +120,20 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 }
             };
 
+            final EngineOwner owner = ownerFor(toInvoke);
+            final Runnable dispatch = owner == null ? toRun : () -> {
+                owner.enter("protocol/" + methodName);
+                try {
+                    toRun.run();
+                } finally {
+                    owner.exit();
+                }
+            };
+
             if (shouldDispatchToGuiThread(protocolMethod)) {
-                FThreads.invokeInEdtNowOrLater(toRun);
+                FThreads.invokeInEdtNowOrLater(dispatch);
             } else {
-                FThreads.invokeInBackgroundThread(toRun);
+                FThreads.invokeInBackgroundThread(dispatch);
             }
         }
     }

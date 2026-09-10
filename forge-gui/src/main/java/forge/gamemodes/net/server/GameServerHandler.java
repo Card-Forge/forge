@@ -7,6 +7,8 @@ import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
+import forge.game.EngineOwner;
+import forge.game.player.PlayerController;
 import io.netty.channel.ChannelHandlerContext;
 
 final class GameServerHandler extends GameProtocolHandler<IGameController> implements IHasForgeLog {
@@ -35,6 +37,14 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
     protected IGameController getToInvoke(final ChannelHandlerContext ctx) {
         final RemoteClient client = getClient(ctx);
         return client != null ? server.getController(client.getIndex()) : null;
+    }
+
+    @Override
+    protected EngineOwner ownerFor(final Object toInvoke) {
+        if (!(toInvoke instanceof PlayerController controller) || controller.getGame() == null) {
+            return null;
+        }
+        return controller.getGame().getTracker().getEngineOwner();
     }
 
     @Override
