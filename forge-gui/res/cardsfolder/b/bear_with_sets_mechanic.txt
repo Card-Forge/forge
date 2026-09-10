@@ -1,0 +1,7 @@
+Name:Bear with Set's Mechanic
+ManaCost:1 G
+Types:Creature Bear
+PT:2/2
+K:Vigilance
+K:Aggressive
+Oracle:Vigilance\nAggressive (During your turn, there is an additional combat phase after the first, and only creatures with aggressive may attack during it.)
