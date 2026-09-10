@@ -5,7 +5,6 @@ import java.util.Map;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
-import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -46,13 +45,10 @@ public class BecomeMonarchAi extends SpellAbilityAi {
             return false;
         }
         boolean anyAffected = false;
-        // mirrors how SpellAbilityEffect resolves "Defined" for this effect
-        for (String def : sa.getParamOrDefault("Defined", "You").split(" & ")) {
-            for (Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), def, sa)) {
-                anyAffected = true;
-                if (!monarch.equals(p)) {
-                    return false;
-                }
+        for (Player p : getTargetPlayers(sa)) {
+            anyAffected = true;
+            if (!monarch.equals(p)) {
+                return false;
             }
         }
         return anyAffected;

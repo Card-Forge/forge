@@ -672,7 +672,6 @@ public class PlaySpellAbility {
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
-
         boolean preCostRequisites = announceType() && announceValuesLikeX() &&
             ability.checkRestrictions(player) &&
             (!mayChooseTargets || ability.setupTargets()) &&
@@ -680,7 +679,7 @@ public class PlaySpellAbility {
             ability.isLegalAfterStack();
 
         // Freeze the stack just before we start paying costs but after the ability is fully set up
-        game.getStack().freezeStack(ability);
+        game.getStack().freezeStack(skipStack ? null : ability);
         final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(controller.getCostDecisionMaker(player, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);

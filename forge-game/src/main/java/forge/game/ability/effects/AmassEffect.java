@@ -40,7 +40,7 @@ public class AmassEffect extends TokenEffectBase {
         sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
 
         // TODO fix reminder after CR
-        sb.append("on an Army you control. If you don't control one, create a 0/0 black " + type + " Army creature token first.)");
+        sb.append(" on an Army you control. If you don't control one, create a 0/0 black " + type + " Army creature token first.)");
 
         return sb.toString();
     }

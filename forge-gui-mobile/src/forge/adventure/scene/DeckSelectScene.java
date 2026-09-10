@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -238,7 +239,12 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        DeckEditScene editScene = DeckEditScene.getInstance();
+        TextureRegion textureRegion;
+        if (Forge.lastPreview != null)
+            textureRegion = new TextureRegion(Forge.lastPreview);
+        else
+            textureRegion = getUIBackground();
+        DeckEditScene editScene = DeckEditScene.getInstance(textureRegion);
         editScene.loadEvent(null);
         Forge.switchScene(editScene);
     }

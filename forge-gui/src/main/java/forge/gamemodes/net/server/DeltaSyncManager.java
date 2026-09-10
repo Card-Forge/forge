@@ -23,6 +23,7 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ public class DeltaSyncManager implements IHasForgeLog {
     private static final int MIN_CHECKSUM_INTERVAL = 5;
     private static final int CLEAN_STREAK_TO_RESTORE = 10;
     private static final int SAMPLE_SIZE = 15;
+    private static final int MAX_WALK_ATTEMPTS = 3;
 
     // Sentinel for properties that should be skipped in network transport
     static final Object SKIP_MARKER = new Object();
@@ -101,27 +103,47 @@ public class DeltaSyncManager implements IHasForgeLog {
      * New objects are registered with this consumer and sent in full.
      * Existing objects only send properties dirty for THIS consumer.
      *
-     * <p>Must be called on the game thread. All delta collection and checksum
-     * computation runs single-threaded — no locks, snapshots, or volatile
-     * barriers needed.
+     * <p>Another thread can change the graph while this runs, so a walk that throws is tried
+     * again. If none of the attempts get through, the packet ships with whatever was collected
+     * rather than letting the exception reach the caller — on the game thread that would end
+     * the game loop and leave the match unable to continue.
      */
     public DeltaPacket collectDeltas(GameView gameView) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
         // need parent-before-child insertion order
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();
-        Set<Integer> currentObjectIds = new HashSet<>();
+        Set<Integer> currentObjectIds = null;
 
-        authoritativeInstances.clear();
-        preScanZoneCollections(gameView);
-        walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
+        // A fresh visited set per attempt: reusing it would make walkAndCollect return at the
+        // root and collect nothing. Deltas already gathered are kept, because the dirty flags
+        // behind them have been cleared and no later walk would find them again.
+        for (int attempt = 1; attempt <= MAX_WALK_ATTEMPTS; attempt++) {
+            Set<Integer> visited = new HashSet<>();
+            try {
+                authoritativeInstances.clear();
+                preScanZoneCollections(gameView);
+                walkAndCollect(gameView, objectDeltas, newObjects, visited);
+                currentObjectIds = visited;
+                break;
+            } catch (ConcurrentModificationException e) {
+                netLog.warn(e, "[DeltaSync] Walk attempt {} of {} failed", attempt, MAX_WALK_ATTEMPTS);
+            }
+        }
+        if (currentObjectIds == null) {
+            netLog.error("[DeltaSync] Walk failed {} times, shipping what was collected", MAX_WALK_ATTEMPTS);
+        }
 
-        // Prune registrations for objects no longer in the graph
-        Iterator<Map.Entry<Integer, TrackableObject>> regIt = registeredByKey.entrySet().iterator();
-        while (regIt.hasNext()) {
-            Map.Entry<Integer, TrackableObject> entry = regIt.next();
-            if (!currentObjectIds.contains(entry.getKey())) {
-                entry.getValue().unregisterConsumer(consumerId);
-                regIt.remove();
+        // Only after a complete walk: an unfinished one never reached every object, so its
+        // visited set would unregister objects that are still in the graph
+        if (currentObjectIds != null) {
+            // Prune registrations for objects no longer in the graph
+            Iterator<Map.Entry<Integer, TrackableObject>> regIt = registeredByKey.entrySet().iterator();
+            while (regIt.hasNext()) {
+                Map.Entry<Integer, TrackableObject> entry = regIt.next();
+                if (!currentObjectIds.contains(entry.getKey())) {
+                    entry.getValue().unregisterConsumer(consumerId);
+                    regIt.remove();
+                }
             }
         }
 
@@ -139,7 +161,8 @@ public class DeltaSyncManager implements IHasForgeLog {
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
         packetsSinceLastChecksum++;
-        if (packetsSinceLastChecksum >= checksumInterval) {
+        // Skipped after an unfinished walk: the client cannot match a checksum over state the packet did not carry
+        if (currentObjectIds != null && packetsSinceLastChecksum >= checksumInterval) {
             checksumPropertyOrdinals = selectChecksumProperties();
             List<String> detail = new ArrayList<>();
             checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, detail);
@@ -230,7 +253,13 @@ public class DeltaSyncManager implements IHasForgeLog {
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
             if (!delta.isEmpty()) {
-                objectDeltas.put(deltaKey, delta);
+                // Merged, not replaced: a retried walk must not drop props an earlier attempt took
+                Map<TrackableProperty, Object> collected = objectDeltas.get(deltaKey);
+                if (collected != null) {
+                    collected.putAll(delta);
+                } else {
+                    objectDeltas.put(deltaKey, delta);
+                }
                 netLog.trace("[DeltaSync] Delta: key={} id={}, props={}",
                         String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
             }
@@ -239,6 +268,9 @@ public class DeltaSyncManager implements IHasForgeLog {
 
         // New or replacement — send full state via newObjects so the client
         // clears stale properties before applying
+        // Built before registering: if this throws, the object stays unregistered and a later
+        // walk retries it, instead of being on the books as sent when it never was
+        Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
         if (old != null) {
             old.unregisterConsumer(consumerId);
             objectDeltas.remove(deltaKey);
@@ -246,7 +278,6 @@ public class DeltaSyncManager implements IHasForgeLog {
         obj.registerConsumer(consumerId);
         obj.getAndClearDirtyProps(consumerId);
         registeredByKey.put(deltaKey, obj);
-        Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
         if (!allProps.isEmpty()) {
             newObjects.put(deltaKey, allProps);
             netLog.trace("[DeltaSync] {}: key={} id={}, {} props",

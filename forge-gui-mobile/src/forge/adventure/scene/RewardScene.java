@@ -30,14 +30,16 @@ import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ItemPool;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Displays the rewards of a fight or a treasure
  */
 public class RewardScene extends UIScene {
     private TextraButton doneButton, detailButton, restockButton;
-    private TextraLabel playerGold, playerShards, tooltipInfo;
+    private TextraLabel playerGold, playerShards;
     private TypingLabel headerLabel;
     private Vector2 headerLabelOrigPos;
     private boolean autoSell;
@@ -82,8 +84,6 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
-        tooltipInfo = Controls.newTextraLabel("");
-        tooltipInfo.setVisible(false);
     }
 
     @Override
@@ -108,19 +108,15 @@ public class RewardScene extends UIScene {
         if (selectable == null)
             return;
         RewardActor actor;
-        if (selectable.actor instanceof BuyButton) {
-            actor = ((BuyButton) selectable.actor).rewardActor;
+        if (selectable.actor instanceof BuyButton buyButton) {
+            actor = buyButton.rewardActor;
         } else if (selectable.actor instanceof RewardActor) {
             actor = (RewardActor) selectable.actor;
         } else {
             return;
         }
-        if (actor.toolTipIsVisible()) {
-            actor.hideTooltip();
-        } else {
-            if (!actor.isFlipped())
-                actor.showTooltip();
-        }
+        if (!actor.isFlipped())
+            performTouch(actor);
 
     }
 
@@ -130,11 +126,10 @@ public class RewardScene extends UIScene {
 
     public void quitScene() {
         //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
-        for (Actor A : new Array.ArrayIterator<>(generated)) {
-            if (A instanceof RewardActor) {
-                ((RewardActor) A).removeTooltip();
-                ((RewardActor) A).dispose();
-                A.remove();
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (actor instanceof RewardActor rewardActor) {
+                rewardActor.removeTooltip();
+                actor.remove();
             }
         }
         //save RAM
@@ -178,20 +173,32 @@ public class RewardScene extends UIScene {
 
     void clearGenerated() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
             if (type == Type.Loot)
-                AdventurePlayer.current().addReward(reward.getReward());
+                AdventurePlayer.current().addReward(rewardActor.getReward());
             if (type == Type.QuestReward)
-                AdventurePlayer.current().addReward(reward.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
-            reward.clearHoldToolTip();
+                AdventurePlayer.current().addReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
+            rewardActor.clearLabel();
             try {
-                stage.getActors().removeValue(reward, true);
+                stage.getActors().removeValue(rewardActor, true);
             } catch (Exception e) {
             }
         }
+    }
+
+    public List<RewardActor> getGeneratedRewards() {
+        List<RewardActor> rewards = new ArrayList<>();
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
+                continue;
+            }
+            if (!rewardActor.frontSideUp())
+                continue;
+            rewards.add(rewardActor);
+        }
+        return rewards;
     }
 
     @Override
@@ -217,26 +224,13 @@ public class RewardScene extends UIScene {
         super.enter();
     }
 
-    public void showTooltipInfo(String message, boolean visible) {
-        tooltipInfo.setText(message);
-        float w = tooltipInfo.getPrefWidth();
-        float h = tooltipInfo.getPrefHeight();
-        tooltipInfo.setBounds((Scene.getIntendedWidth() / 2f) - (w / 2f), 0, Scene.getIntendedWidth(), h);
-        tooltipInfo.setVisible(visible);
-        if (visible)
-            ui.addActor(tooltipInfo);
-        else
-            ui.removeActor(tooltipInfo);
-    }
-
     private void showLootOrDone() {
         boolean exit = true;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
-            if (!reward.isFlipped()) {
+            if (!rewardActor.isFlipped()) {
                 exit = false;
                 break;
             }
@@ -248,15 +242,14 @@ public class RewardScene extends UIScene {
             float delay = 0.09f;
             generated.shuffle();
             for (Actor actor : new Array.ArrayIterator<>(generated)) {
-                if (!(actor instanceof RewardActor)) {
+                if (!(actor instanceof RewardActor rewardActor)) {
                     continue;
                 }
-                RewardActor reward = (RewardActor) actor;
-                if (!reward.isFlipped()) {
+                if (!rewardActor.isFlipped()) {
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
-                            reward.flip();
+                            rewardActor.flip();
                         }
                     }, delay);
                     delay += 0.12f;
@@ -382,8 +375,8 @@ public class RewardScene extends UIScene {
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
-            if (actor instanceof RewardActor) {
-                ((RewardActor) actor).dispose();
+            if (actor instanceof RewardActor rewardActor) {
+                rewardActor.dispose();
             }
         }
         addToSelectable(doneButton);
@@ -399,9 +392,9 @@ public class RewardScene extends UIScene {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
-                    for (Actor A : new Array.ArrayIterator<>(generated)) {
-                        if (A instanceof RewardActor) {
-                            ((RewardActor) A).setAutoSell(autoSell);
+                    for (Actor actor : new Array.ArrayIterator<>(generated)) {
+                        if (actor instanceof RewardActor rewardActor) {
+                            rewardActor.setAutoSell(autoSell);
                         }
                     }
                 }
@@ -584,16 +577,16 @@ public class RewardScene extends UIScene {
 
     private void updateBuyButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (actor instanceof BuyButton) {
-                ((BuyButton) actor).update();
+            if (actor instanceof BuyButton buyButton) {
+                buyButton.update();
             }
         }
     }
 
     private void updateChooseRewardButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (actor instanceof ChooseRewardButton) {
-                ((ChooseRewardButton) actor).update();
+            if (actor instanceof ChooseRewardButton chooseRewardButton) {
+                chooseRewardButton.update();
             }
         }
     }

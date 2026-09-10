@@ -29,6 +29,7 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IllegalAbilityException;
 import forge.game.cost.*;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardForetold;
@@ -480,7 +481,7 @@ public class CardFactoryUtil {
                 Sentry.addBreadcrumb(bread);
 
                 // rethrow the exception with card Name for the user
-                throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
+                throw new IllegalAbilityException("crash in raw Ability, check card script of " + card.getName(), e, card.getRules() != null && card.getRules().isCustom());
             }
         }
     }
@@ -633,34 +634,19 @@ public class CardFactoryUtil {
                         + " | Secondary$ True | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10"
                         + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
 
-                final String effect = "DB$ Ascend | Defined$ You";
-
                 final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
-                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-
-                inst.addTrigger(trigger);
-            }
-        } else if (keyword.equals("Storied")) {
-            // Storied trigger only for Permanent, as with Ascend
-            if (card.isPermanent()) {
-                final String trig = "Mode$ Always | TriggerZones$ Battlefield"
-                        + " | Secondary$ True | Static$ True | EnduringStory$ False"
-                        + " | IsPresent$ Permanent.YouCtrl+Historic | PresentCompare$ GE3"
-                        + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
-
-                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
-                final SpellAbility gainStory = new AbilityStatic(card, Cost.Zero, null) {
+                final SpellAbility ascend = new AbilityStatic(card, Cost.Zero, null) {
                     @Override
                     public void resolve() {
                         final Player p = getActivatingPlayer();
                         if (p != null && p.isInGame()) {
-                            p.setEnduringStory(true, getOriginalHost().getSetCode());
+                            p.setBlessing(true, getOriginalHost().getSetCode());
                         }
                     }
                 };
                 // as AbilityFactory would have done, so getOriginalHost resolves on a copied trait
-                gainStory.setCardState(card.getCurrentState());
-                trigger.setOverridingAbility(gainStory);
+                ascend.setCardState(card.getCurrentState());
+                trigger.setOverridingAbility(ascend);
 
                 inst.addTrigger(trigger);
             }
@@ -1463,8 +1449,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
-                    + " | MiracleCost$ " + manacost;
+            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self";
             String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
             if (k.length > 2) {
                 abStrPlay += " | PlayReduceCost$ " + k[2];
@@ -1802,6 +1787,30 @@ public class CardFactoryUtil {
             squadTrigger.setOverridingAbility(squadAbility);
             squadTrigger.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(squadTrigger);
+        } else if (keyword.equals("Storied")) {
+            // Storied trigger only for Permanent, as with Ascend
+            if (card.isPermanent()) {
+                final String trig = "Mode$ Always | TriggerZones$ Battlefield"
+                        + " | Secondary$ True | Static$ True | EnduringStory$ False"
+                        + " | IsPresent$ Permanent.YouCtrl+Historic | PresentCompare$ GE3"
+                        + " | TriggerDescription$ Storied (" + inst.getReminderText() + ")";
+
+                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+                final SpellAbility gainStory = new AbilityStatic(card, Cost.Zero, null) {
+                    @Override
+                    public void resolve() {
+                        final Player p = getActivatingPlayer();
+                        if (p != null && p.isInGame()) {
+                            p.setEnduringStory(true, getOriginalHost().getSetCode());
+                        }
+                    }
+                };
+                // as AbilityFactory would have done, so getOriginalHost resolves on a copied trait
+                gainStory.setCardState(card.getCurrentState());
+                trigger.setOverridingAbility(gainStory);
+
+                inst.addTrigger(trigger);
+            }
         } else if (keyword.equals("Storm")) {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";

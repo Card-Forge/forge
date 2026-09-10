@@ -6,10 +6,14 @@ import forge.util.IterableUtil;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with
@@ -307,6 +311,106 @@ public final class CardRulesPredicates {
         return rules -> rules.canBePartnerCommanders(commander);
     }
 
+    private static final Pattern RESTRICTION_STAT_FILTER =
+            Pattern.compile("^(power|toughness|cmc)(EQ|NE|GT|LT|GE|LE)(\\d+)$");
+
+    /** Parses a {@code Branch1,Branch2,...} restriction list (as in {@code DeckRule:ColorIdentity}'s {@code Exempt$}) into a predicate matching any branch. */
+    public static Predicate<CardRules> restrictionList(final String rawValue) {
+        Predicate<CardRules> result = null;
+        final String body = rawValue.trim();
+        for (final String rawBranch : body.split(",")) {
+            final String trimmed = rawBranch.trim();
+            if (!trimmed.isEmpty()) {
+                final Predicate<CardRules> branch = restrictionBranch(trimmed);
+                result = result == null ? branch : result.or(branch);
+            }
+        }
+        return result == null ? card -> false : result;
+    }
+
+    /** Tokenizes dot-then-plus, matching {@code Card.isValid()}'s own restriction-string split. */
+    private static Predicate<CardRules> restrictionBranch(final String rawBranch) {
+        final List<String> typeWords = new ArrayList<>();
+        final String[] firstSplit = rawBranch.split("\\.", 2);
+        final List<String> tokens = new ArrayList<>();
+        tokens.add(firstSplit[0]);
+        if (firstSplit.length > 1) {
+            Collections.addAll(tokens, firstSplit[1].split("\\+"));
+        }
+        Predicate<CardRules> branch = null;
+        for (final String token : tokens) {
+            if (token.isEmpty()) {
+                continue;
+            }
+            final Matcher m = RESTRICTION_STAT_FILTER.matcher(token);
+            if (m.matches()) {
+                final Predicate<CardRules> statFilter =
+                        restrictionStatFilter(m.group(1), m.group(2), Integer.parseInt(m.group(3)));
+                branch = branch == null ? statFilter : branch.and(statFilter);
+            } else if (token.equals("Permanent")) {
+                branch = branch == null ? IS_PERMANENT : branch.and(IS_PERMANENT);
+            } else {
+                typeWords.add(token);
+            }
+        }
+        if (!typeWords.isEmpty()) {
+            final Predicate<CardRules> typePredicate = restrictionTypeWords(typeWords);
+            branch = branch == null ? typePredicate : branch.and(typePredicate);
+        }
+        return branch == null ? card -> true : branch;
+    }
+
+    /** Builds a predicate from a branch's type/supertype/subtype words, via {@link CardType#parse}. */
+    private static Predicate<CardRules> restrictionTypeWords(final List<String> typeWords) {
+        final CardType typeSpec = CardType.parse(String.join(" ", typeWords), true);
+        return card -> {
+            final CardType candidateType = card.getType();
+            for (final CardType.CoreType ct : typeSpec.getCoreTypes()) {
+                if (!candidateType.hasType(ct)) {
+                    return false;
+                }
+            }
+            for (final CardType.Supertype st : typeSpec.getSupertypes()) {
+                if (!candidateType.hasSupertype(st)) {
+                    return false;
+                }
+            }
+            for (final String sub : typeSpec.getSubtypes()) {
+                if (!candidateType.hasSubtype(sub) && !(CardType.isACreatureType(sub) && hasChangeling(card))) {
+                    return false;
+                }
+            }
+            return true;
+        };
+    }
+
+    private static Predicate<CardRules> restrictionStatFilter(final String fieldWord, final String opCode, final int value) {
+        final ComparableOp op = restrictionOp(opCode);
+        switch (fieldWord) {
+            case "power": return power(op, value);
+            case "toughness": return toughness(op, value);
+            case "cmc": return cmc(op, value);
+            default: throw new IllegalArgumentException("Unrecognized restriction-list stat field: " + fieldWord);
+        }
+    }
+
+    private static ComparableOp restrictionOp(final String code) {
+        switch (code) {
+            case "EQ": return ComparableOp.EQUALS;
+            case "NE": return ComparableOp.NOT_EQUALS;
+            case "GT": return ComparableOp.GREATER_THAN;
+            case "LT": return ComparableOp.LESS_THAN;
+            case "GE": return ComparableOp.GT_OR_EQUAL;
+            case "LE": return ComparableOp.LT_OR_EQUAL;
+            default: throw new IllegalArgumentException("Unrecognized restriction-list comparator: " + code);
+        }
+    }
+
+    /** Changeling counts as every creature type (rule 702.73a), mirroring {@link DeckHints}. */
+    private static boolean hasChangeling(final CardRules card) {
+        return hasKeyword("Changeling").test(card);
+    }
+
     private static class LeafString extends PredicateString<CardRules> {
         public enum CardField {
             ORACLE_TEXT, NAME, SUBTYPE, JOINED_TYPE, COST
@@ -484,55 +588,37 @@ public final class CardRulesPredicates {
             int value;
             switch (this.field) {
             case CMC:
-                return this.op(card.getManaCost().getCMC(), this.operand);
+                return this.operator.apply(card.getManaCost().getCMC(), this.operand);
             case GENERIC_COST:
-                return this.op(card.getManaCost().getGenericCost(), this.operand);
+                return this.operator.apply(card.getManaCost().getGenericCost(), this.operand);
             case LOYALTY:
                 String sLoyalty = card.getInitialLoyalty();
                 if (StringUtils.isBlank(sLoyalty) || !sLoyalty.matches("\\d+")) {
                     return false;
                 }
                 try {
-                    value = Integer.parseInt(sLoyalty) ;
+                    value = Integer.parseInt(sLoyalty);
                 }
                 catch (NumberFormatException ignored) {
                     return false;
                 }
-                return this.op(value, this.operand);
+                return this.operator.apply(value, this.operand);
             case POWER:
                 value = card.getIntPower();
-                return value != Integer.MAX_VALUE && this.op(value, this.operand);
+                return value != Integer.MAX_VALUE && this.operator.apply(value, this.operand);
             case TOUGHNESS:
                 value = card.getIntToughness();
-                return value != Integer.MAX_VALUE && this.op(value, this.operand);
+                return value != Integer.MAX_VALUE && this.operator.apply(value, this.operand);
             case PT:
                 value = card.getIntPower() + card.getIntToughness();
-                return value != Integer.MAX_VALUE && this.op(value, this.operand);
-            default:
-                return false;
-            }
-        }
-
-        private boolean op(final int op1, final int op2) {
-            switch (this.operator) {
-            case EQUALS:
-                return op1 == op2;
-            case GREATER_THAN:
-                return op1 > op2;
-            case GT_OR_EQUAL:
-                return op1 >= op2;
-            case LESS_THAN:
-                return op1 < op2;
-            case LT_OR_EQUAL:
-                return op1 <= op2;
-            case NOT_EQUALS:
-                return op1 != op2;
+                return value != Integer.MAX_VALUE && this.operator.apply(value, this.operand);
             default:
                 return false;
             }
         }
     }
 
+    public static final Predicate<CardRules> IS_PERMANENT = card -> card.getType().isPermanent();
     public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates.coreType(CardType.CoreType.Creature);
     public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates.superType(CardType.Supertype.Legendary);
     public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates.coreType(CardType.CoreType.Artifact);

@@ -56,6 +56,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.CoverScreen;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -204,7 +205,7 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        if (cardArt != null) {
+        if (cardArt != null && cardArt.getTextureRegion() != null) {
             TextureRegion textureRegion = cardArt.getTextureRegion();
             if (CardImageRenderer.forgeArt == cardArt)
                 textureRegion.flip(false, true); // fix inverted
@@ -704,8 +705,10 @@ public abstract class GameStage extends Stage {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
             Forge.advFreezePlayerControls = true;
-            getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Death);
-            getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            PlayerSprite playerSprite = getPlayerSprite();
+            playerSprite.setAnimation(CharacterSprite.AnimationTypes.Death);
+            playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            float deathDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 1f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -716,9 +719,9 @@ public abstract class GameStage extends Stage {
                         WorldStage.getInstance().loadPOI(poi);
                         WorldSave.getCurrentSave().autoSave();
                         Forge.clearTransitionScreen();
-                    }, Forge.takeScreenshot()))));
+                    }, ScreenUtil.getInstance().takeScreenshot()))));
                 }
-            }, 1f);
+            }, deathDuration);
         }//Spawn shouldn't be null
     }
 
@@ -726,14 +729,16 @@ public abstract class GameStage extends Stage {
         if (!Current.player().hasEquippedItem())
             return;
         Forge.advFreezePlayerControls = true;
-        getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Hit);
-        getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        PlayerSprite playerSprite = getPlayerSprite();
+        playerSprite.setAnimation(CharacterSprite.AnimationTypes.Hit);
+        playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        float hitDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 1f);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 showImageDialog(Current.generateDefeatMessage(false), getDefeatBadge(), () -> Forge.advFreezePlayerControls = false);
             }
-        }, 1f);
+        }, hitDuration);
     }
 
     private FBufferedImage getDefeatBadge() {

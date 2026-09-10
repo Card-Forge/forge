@@ -98,6 +98,9 @@ public enum StaticAbilityMode {
     // StaticAbilityCantBecomeMonarch
     CantBecomeMonarch,
 
+    // StaticAbilityCantGainControl
+    CantGainControl,
+
     // StaticAbilityCantAttach
     CantAttach,
 
@@ -203,6 +206,9 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCountersRemain
     CountersRemain,
+
+    // StaticAbilityManaRestriction
+    ManaRestriction,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

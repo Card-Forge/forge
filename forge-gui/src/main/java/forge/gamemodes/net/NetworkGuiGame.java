@@ -9,6 +9,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.client.NetGameController;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -613,10 +614,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         for (final PlayerView p : getGameView().getPlayers()) {
             if (!p.equals(player) && !player.equals(p.getMindSlaveMaster())) continue;
             final boolean shouldSkip = isUiSetToSkipPhase(p, phase);
+            // Only the host's proxy for a remote player reads the value; a local controller answers from
+            // the label. Sent to both so either re-checks the prompt it is sitting on
             for (final IGameController c : getOriginalGameControllers()) {
-                if (c instanceof NetGameController nc) {
-                    nc.setUiShouldSkipPhase(p, phase, shouldSkip);
-                }
+                c.sendYieldUpdate(new YieldUpdate.SkipPhase(p, phase, shouldSkip));
             }
         }
     }

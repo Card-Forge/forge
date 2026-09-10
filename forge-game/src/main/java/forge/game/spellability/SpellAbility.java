@@ -59,6 +59,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityManaRestriction;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -408,14 +409,33 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
+        // CR 605.1a: not a mana ability if paying for it moves a card to or from a library.
+        // Only the root ability's cost is inspected because sub-abilities carry no cost of their
+        // own, an assumption the engine makes elsewhere too, see getCostDescription().
+        final Cost cost = getPayCosts();
+        if (cost != null && cost.movesCardToOrFromLibrary()) {
+            return false;
+        }
+
+        // The whole chain is walked even after a mana part turns up, because CR 605.1a also
+        // disqualifies the ability when a later sub-ability moves a card to or from a library.
+        // Chromatic Sphere is the example: the mana part is on the root, the draw is a sub-ability.
+        //
+        // What each effect answers is fixed by the card script, not by the current board. That is
+        // deliberate: CR 605.1a says to disregard replacement effects other than self-replacement
+        // effects, so whether an ability is a mana ability must not change from turn to turn.
+        boolean addsMana = false;
         SpellAbility tail = this;
         while (tail != null) {
             if (tail.manaPart != null) {
-                return true;
+                addsMana = true;
+            }
+            if (tail.getApi() != null && tail.getApi().getSpellEffect().movesCardToOrFromLibrary(tail)) {
+                return false;
             }
             tail = tail.getSubAbility();
         }
-        return false;
+        return addsMana;
     }
 
     public final void setManaPart(AbilityManaPart manaPart0) {
@@ -423,11 +443,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean allowsPayingWithShard(Card src, byte shard) {
-        if (!hasParam("ManaRestriction")) { return true; }
-        String res = getParam("ManaRestriction");
-        if (res.equals("None")) {
+        if (StaticAbilityManaRestriction.manaRestriction(this, src)) {
             return false;
         }
+        if (!hasParam("ManaRestriction")) { return true; }
+        String res = getParam("ManaRestriction");
         if (res.equals("ChosenColor")) {
             return this.getHostCard().hasChosenColor() && shard == ManaAtom.fromName(this.getHostCard().getChosenColor());
         }

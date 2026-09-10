@@ -906,7 +906,9 @@ public class PlayerPanel extends FPanel {
     }
 
     public int getTeam() {
-        return teamComboBox.getSelectedIndex();
+        return lobby.hasVariant(GameType.Archenemy)
+                ? aeTeamComboBox.getSelectedIndex()
+                : teamComboBox.getSelectedIndex();
     }
     public void setTeam(final int team) {
         teamComboBox.suppressActionListeners();

@@ -414,7 +414,74 @@ public class ComputerUtilMana {
         return null;
     }
 
-    public static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
+    public static String predictMana(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
+        Card hostCard = saPayment.getHostCard();
+
+        StringBuilder manaProduced = new StringBuilder(predictManaReplacement(saPayment, ai, toPay));
+        String originalProduced = manaProduced.toString();
+
+        if (originalProduced.isEmpty()) {
+            return originalProduced;
+        }
+
+        // Run triggers like Nissa
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
+        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
+        runParams.put(AbilityKey.AbilityMana, saPayment);
+        runParams.put(AbilityKey.Produced, originalProduced);
+        for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
+            SpellAbility trSA = tr.ensureAbility();
+            if (trSA == null) {
+                continue;
+            }
+            if (ApiType.Mana.equals(trSA.getApi())) {
+                int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount", "1"), trSA);
+                String produced = trSA.getParam("Produced");
+                if (produced.equals("Chosen")) {
+                    produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
+                }
+                manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
+            } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
+                final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
+                // currently Color or Type, Type is colors + colorless
+                final String reflectProperty = trSA.getParam("ReflectProperty");
+
+                if (reflectProperty.equals("Produced") && !originalProduced.isEmpty()) {
+                    // check if a colorless shard can be paid from the trigger
+                    if (toPay.equals(ManaCostShard.COLORLESS) && colorOrType.equals("Type") && originalProduced.contains("C")) {
+                        manaProduced.append(" " + "C");
+                    } else if (originalProduced.length() == 1) {
+                        // if length is only one, and it either is equal C == Type
+                        if (colorOrType.equals("Type") || !originalProduced.equals("C")) {
+                            manaProduced.append(" ").append(originalProduced);
+                        }
+                    } else {
+                        // should it look for other shards too?
+                        boolean found = false;
+                        for (String s : originalProduced.split(" ")) {
+                            if (colorOrType.equals("Type") || !s.equals("C") && toPay.canBePaidWithManaOfColor(MagicColor.fromName(s))) {
+                                found = true;
+                                manaProduced.append(" ").append(s);
+                                break;
+                            }
+                        }
+                        // no good mana found? just add the first generated color
+                        if (!found) {
+                            for (String s : originalProduced.split(" ")) {
+                                if (colorOrType.equals("Type") || !s.equals("C")) {
+                                    manaProduced.append(" ").append(s);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return manaProduced.toString();
+    }
+
+    private static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
         Game game = hostCard.getGame();
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
@@ -525,73 +592,6 @@ public class ComputerUtilMana {
         }
 
         return manaProduced;
-    }
-
-    public static String predictManafromSpellAbility(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
-        Card hostCard = saPayment.getHostCard();
-
-        StringBuilder manaProduced = new StringBuilder(predictManaReplacement(saPayment, ai, toPay));
-        String originalProduced = manaProduced.toString();
-
-        if (originalProduced.isEmpty()) {
-            return originalProduced;
-        }
-
-        // Run triggers like Nissa
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
-        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
-        runParams.put(AbilityKey.AbilityMana, saPayment);
-        runParams.put(AbilityKey.Produced, originalProduced);
-        for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
-            SpellAbility trSA = tr.ensureAbility();
-            if (trSA == null) {
-                continue;
-            }
-            if (ApiType.Mana.equals(trSA.getApi())) {
-                int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount", "1"), trSA);
-                String produced = trSA.getParam("Produced");
-                if (produced.equals("Chosen")) {
-                    produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
-                }
-                manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
-            } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
-                final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
-                // currently Color or Type, Type is colors + colorless
-                final String reflectProperty = trSA.getParam("ReflectProperty");
-
-                if (reflectProperty.equals("Produced") && !originalProduced.isEmpty()) {
-                    // check if a colorless shard can be paid from the trigger
-                    if (toPay.equals(ManaCostShard.COLORLESS) && colorOrType.equals("Type") && originalProduced.contains("C")) {
-                        manaProduced.append(" " + "C");
-                    } else if (originalProduced.length() == 1) {
-                        // if length is only one, and it either is equal C == Type
-                        if (colorOrType.equals("Type") || !originalProduced.equals("C")) {
-                            manaProduced.append(" ").append(originalProduced);
-                        }
-                    } else {
-                        // should it look for other shards too?
-                        boolean found = false;
-                        for (String s : originalProduced.split(" ")) {
-                            if (colorOrType.equals("Type") || !s.equals("C") && toPay.canBePaidWithManaOfColor(MagicColor.fromName(s))) {
-                                found = true;
-                                manaProduced.append(" ").append(s);
-                                break;
-                            }
-                        }
-                        // no good mana found? just add the first generated color
-                        if (!found) {
-                            for (String s : originalProduced.split(" ")) {
-                                if (colorOrType.equals("Type") || !s.equals("C")) {
-                                    manaProduced.append(" ").append(s);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return manaProduced.toString();
     }
 
     // returns null if unpayable
@@ -761,7 +761,7 @@ public class ComputerUtilMana {
                     }
                 }
 
-                String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
+                String manaProduced = predictMana(saPayment, ai, toPay);
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove to prevent re-usage since resources don't get consumed
@@ -801,6 +801,12 @@ public class ComputerUtilMana {
             manapool.refundMana(manaSpentToPay);
             if (test) {
                 resetPayment(paymentList);
+                // TODO should probably only record when canPlayAndPayFor
+                // TODO doesn't count multiple copies filtered by dedupeCards
+                Set<ManaCostBeingPaid> unpaid = AiCardMemory.getMemorySet(ai, AiCardMemory.MemorySetMana.UNPAID_COSTS);
+                if (unpaid != null) {
+                    unpaid.add(cost);
+                }
             } else {
                 System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
                 sa.setSkip(true);

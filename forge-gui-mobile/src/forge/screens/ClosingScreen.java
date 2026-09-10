@@ -18,6 +18,7 @@ public class ClosingScreen extends FContainer {
     private BGAnimation bgAnimation;
     private StaticAnimation staticAnimation;
     private boolean restart = false;
+    private boolean ended = false;
     private boolean drawStatic = false;
     private FileHandle adv_logo = getSkinFile("adv_logo.png");
     private FileHandle existingLogo = adv_logo.exists() ? adv_logo : getDefaultSkinFile("adv_logo.png");
@@ -73,6 +74,7 @@ public class ClosingScreen extends FContainer {
 
         @Override
         protected void onEnd(boolean endingAll) {
+            ended = true;
             if (restart)
                 Forge.getDeviceAdapter().restart();
             else
@@ -98,8 +100,9 @@ public class ClosingScreen extends FContainer {
             g.setAlphaComposite(oldAlpha);
             float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
             xmod *= 21-(20*percentage);
+            float ymod = Forge.isMobileAdventureMode && Forge.isLandscapeMode() ? 0.85f : 1f;
             if (logo != null) {
-                g.drawImage(logo, Forge.getScreenWidth()/2 - (logo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (logo.getHeight()*xmod)/2, logo.getWidth()*xmod, logo.getHeight()*xmod);
+                g.drawImage(logo, Forge.getScreenWidth()/2 - (logo.getWidth()*xmod)/2, (Forge.getScreenHeight()/2 - (logo.getHeight()*xmod)/2) * ymod, logo.getWidth()*xmod, logo.getHeight()*xmod);
             } else {
                 g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
             }
@@ -119,6 +122,8 @@ public class ClosingScreen extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (ended)
+            return;
         //fix overlay showing on closing screen animation
         FOverlay.hideAll();
         if (drawStatic) {
