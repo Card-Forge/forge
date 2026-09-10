@@ -721,15 +721,39 @@ public class UIScene extends Scene {
 
     public TextureRegion getUIBackground() {
         try {
-            Actor a = ui.getChild(0);
-            if (a instanceof Image) {
-                Drawable d = ((Image) a).getDrawable();
-                if (d instanceof TextureRegionDrawable) {
-                    return ((TextureRegionDrawable) d).getRegion();
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                if (originalDrawable instanceof TextureRegionDrawable textureRegionDrawable) {
+                    return textureRegionDrawable.getRegion();
                 }
             }
         } catch (Exception e) {
             return null;
+        }
+        return null;
+    }
+
+    public void setUIBackground(Drawable drawable) {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                image.setDrawable(drawable);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Drawable getBGDrawable() {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                return image.getDrawable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

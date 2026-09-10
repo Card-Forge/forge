@@ -350,7 +350,6 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
-
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);
     }
@@ -360,6 +359,8 @@ public class Assets implements Disposable {
     }
 
     public Texture getTexture(FileHandle file, boolean is2D, boolean required) {
+        if (isDisposed)
+            return null;
         if (file == null || !file.exists()) {
             if (!required)
                 return null;
