@@ -3,6 +3,7 @@ package forge.assets;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -435,7 +436,7 @@ public class FSkinFont {
         //not found generate
         if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             String ttfName = Forge.CJK_Font;
-            FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+            FileHandle ttfFile = resolveCjkFontFile(ttfName);
             if (ttfFile != null && ttfFile.exists()) {
                 generateFont(ttfFile, fontName, fontSize);
             }
@@ -521,13 +522,32 @@ public class FSkinFont {
         final Array<String> allCJKFonts = new Array<>();
 
         allCJKFonts.add("None");
-        final FileHandle dir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
-        for (FileHandle fontFile : dir.list()) {
-            String fontName = fontFile.name();
-            if (!fontName.endsWith(".ttf")) { continue; }
-            allCJKFonts.add(fontName.replace(".ttf", ""));
+
+        final List<String> fonts = List.of(
+                ForgeConstants.FONTS_DIR,
+                ForgeConstants.COMMON_FONTS_DIR
+        );
+
+        for (String dirPath : fonts) {
+            final FileHandle dir = Gdx.files.absolute(dirPath);
+            for (FileHandle fontFile : dir.list()) {
+                String fontName = fontFile.name();
+                if (!fontName.endsWith(".ttf")) { continue; }
+                fontName = fontName.replace(".ttf", "");
+                if (!allCJKFonts.contains(fontName, false)) {
+                    allCJKFonts.add(fontName);
+                }
+            }
         }
 
         return allCJKFonts;
+    }
+
+    //fall back to COMMON_FONTS_DIR for fonts bundled with the app (e.g. Roboto-Bold for Russian),
+    //vs FONTS_DIR for user-downloaded CJK fonts
+    public static FileHandle resolveCjkFontFile(String ttfName) {
+        FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+        if (ttfFile.exists()) { return ttfFile; }
+        return Gdx.files.absolute(ForgeConstants.COMMON_FONTS_DIR + ttfName + ".ttf");
     }
 }

@@ -37,4 +37,11 @@ public class LangRussian extends Lang {
         return "Roboto-Bold";
     }
 
+    // desktop's font1.ttf-can-render-script probe (GuiUtils.newFont); unset here like
+    // the CJK langs, it silently passed and left Cyrillic UI text unreadable
+    @Override
+    public char canDisplayCheck() {
+        return 'Р';
+    }
+
 }
