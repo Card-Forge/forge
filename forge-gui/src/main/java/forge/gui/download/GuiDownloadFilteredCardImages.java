@@ -8,6 +8,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import forge.util.ScryfallRateLimiter;
 import forge.util.TextUtil;
@@ -163,11 +164,11 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
             if (cdnUrl != null) return cdnUrl;
         }
 
-        // 2. Scryfall API
+        // 2. Scryfall / alternate card art API
         if (hasCollectorNum && edition != null && hasScryfallCode) {
             String apiPath = ImageUtil.getScryfallDownloadUrl(
                     c, face, scryfallCode, langCode, false);
-            if (apiPath != null) return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + apiPath;
+            if (apiPath != null) return ImageFetcher.buildCardArtApiUrl(apiPath);
         }
 
         // 3. Cardforge

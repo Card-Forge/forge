@@ -348,6 +348,9 @@ public final class ForgeConstants {
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
     public static final String URL_SCRYFALL_CDN = "https://cards.scryfall.io/";
+    // Alternate card image API (mirrors Scryfall data, always serves images)
+    private static final String URL_CARDFORGE_NET_API = "https://card-forge.net/api/v1";
+    public static final String URL_PIC_CARDFORGE_NET_API_DOWNLOAD = URL_CARDFORGE_NET_API + "/cards/";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
