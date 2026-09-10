@@ -6374,8 +6374,7 @@
     "name": "Bandit Slingshot",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditslingshot.atlas",
     "deck": [
-      "decks/standard/banditslingshot_flyers.dck",
-      "decks/standard/banditslingshot_vehicles.dck"
+      "decks/standard/banditslingshot_flyers.dck"
     ],
     "ai": "reckless",
     "randomizeDeck": true,
