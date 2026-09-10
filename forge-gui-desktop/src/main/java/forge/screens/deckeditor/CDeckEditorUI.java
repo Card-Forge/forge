@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
+import forge.game.GameType;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -63,10 +64,6 @@ public enum CDeckEditorUI implements ICDoc {
     private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
     private final CDetailPicture cDetailPicture;
     private final VAllDecks vAllDecks;
-    private final VCommanderDecks vCommanderDecks;
-    private final VOathbreakerDecks vOathbreakerDecks;
-    private final VBrawlDecks vBrawlDecks;
-    private final VTinyLeadersDecks vTinyLeadersDecks;
     private final VEditorLog vEditorLog;
 
     CDeckEditorUI() {
@@ -74,19 +71,32 @@ public enum CDeckEditorUI implements ICDoc {
         this.cDetailPicture = new CDetailPicture();
         this.vAllDecks = VAllDecks.SINGLETON_INSTANCE;
         this.vAllDecks.setCDetailPicture(cDetailPicture);
-        this.vCommanderDecks = VCommanderDecks.SINGLETON_INSTANCE;
-        this.vCommanderDecks.setCDetailPicture(cDetailPicture);
-        this.vOathbreakerDecks = VOathbreakerDecks.SINGLETON_INSTANCE;
-        this.vOathbreakerDecks.setCDetailPicture(cDetailPicture);
-        this.vBrawlDecks = VBrawlDecks.SINGLETON_INSTANCE;
-        this.vBrawlDecks.setCDetailPicture(cDetailPicture);
-        this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;
-        this.vTinyLeadersDecks.setCDetailPicture(cDetailPicture);
         this.vEditorLog = VEditorLog.SINGLETON_INSTANCE;
     }
 
     public CDetailPicture getCDetailPicture() {
         return cDetailPicture;
+    }
+
+    public void prepareForNewDeck() {
+        final GameType gameType = vAllDecks.getEditorGameTypeForCurrentFolder();
+        if (gameType == null) {
+            return;
+        }
+        if (childController == null || childController.getGameType() != gameType) {
+            setEditorController(new CEditorConstructed(cDetailPicture, gameType));
+        }
+        vAllDecks.applyEditorSaveTarget();
+    }
+
+    public void updatePristineDeckGameType(final GameType gameType) {
+        if (gameType == null || childController == null || childController.getGameType() == gameType) {
+            return;
+        }
+        final DeckController<?> controller = childController.getDeckController();
+        if (controller != null && controller.isPristine()) {
+            setEditorController(new CEditorConstructed(cDetailPicture, gameType));
+        }
     }
 
     /**

@@ -66,10 +66,11 @@ public class FDeckViewer extends FDialog {
 
     private FDeckViewer(final Deck deck0, final boolean showCommanderBracket) {
         this.deck = deck0;
+        final boolean hasCommanderSection = !deck.getCommanders().isEmpty();
         this.setTitle(deck.getName());
         this.cardManager = new CardManager(null, false, false, false) {
             {
-                if (showCommanderBracket) {
+                if (showCommanderBracket && hasCommanderSection) {
                     addView(new CommanderBracketDeckView(this, getModel(), FDeckViewer.this.deck));
                 }
             }

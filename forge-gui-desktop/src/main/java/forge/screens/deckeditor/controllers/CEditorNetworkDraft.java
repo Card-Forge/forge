@@ -13,14 +13,10 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
-import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.deckeditor.views.VEditorLog;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
@@ -55,10 +51,6 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     private String ccAddLabel;
     private DragCell constructedDecksParent;
-    private DragCell commanderDecksParent;
-    private DragCell oathbreakerDecksParent;
-    private DragCell brawlDecksParent;
-    private DragCell tinyLeadersDecksParent;
     private DragCell deckGenParent;
 
     /**
@@ -232,10 +224,6 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
-        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
-        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
-        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         // One pick per click — draft flow doesn't support group-picking
         getCatalogManager().setAllowMultipleSelections(false);
@@ -270,18 +258,6 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
         }
         if (constructedDecksParent != null) {
             constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (commanderDecksParent != null) {
-            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
-        }
-        if (oathbreakerDecksParent != null) {
-            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
-        }
-        if (brawlDecksParent != null) {
-            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
-        }
-        if (tinyLeadersDecksParent != null) {
-            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
 
         getCatalogManager().setAllowMultipleSelections(true);
