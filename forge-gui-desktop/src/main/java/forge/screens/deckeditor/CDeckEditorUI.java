@@ -166,7 +166,7 @@ public enum CDeckEditorUI implements ICDoc {
         newEditor.getDeckController().setModel(snapshot);
     }
 
-    private static boolean isFormatDropdownGameType(final GameType gt) {
+    static boolean isFormatDropdownGameType(final GameType gt) {
         return gt == GameType.Constructed || gt == GameType.Commander
                 || gt == GameType.Oathbreaker || gt == GameType.Brawl
                 || gt == GameType.TinyLeaders;

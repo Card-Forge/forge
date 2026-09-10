@@ -7,6 +7,7 @@ import forge.deck.DeckRecognizer.Token;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gui.GuiBase;
 import forge.gui.interfaces.ICheckBox;
 import forge.gui.interfaces.IComboBox;
 import forge.gui.util.SOptionPane;
@@ -202,10 +203,15 @@ public class DeckImportController {
     public List<Token> parseInput(String input) {
         tokens.clear();
         cardsInTokens.clear();
+        // Drop the previous parse's auto-added section so it tracks the current text
+        if (commanderAutoDetected) {
+            this.allowedSections.remove(DeckSection.Commander);
+        }
         commanderAutoDetected = false;
 
-        // Allow the Commander section when an explicit header is present so its cards aren't dropped
-        if (!this.allowedSections.contains(DeckSection.Commander)
+        // Lets desktop route an explicit Commander list to a commander editor; mobile has no routing, so its editors would drop the section
+        if (!GuiBase.getInterface().isLibgdxPort()
+                && !this.allowedSections.contains(DeckSection.Commander)
                 && inputContainsCommanderSection(input)) {
             this.allowedSections.add(DeckSection.Commander);
             commanderAutoDetected = true;

@@ -527,14 +527,17 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                     deck.setName(currentDeckName);
             }
             final boolean substituteCurrentDeck = controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE;
-            // Route to the editor implied by the selected legality format; unticking the format
-            // checkbox bypasses this and loads into the host editor as before
+            // Route to the commander editor implied by the selected format; otherwise load into the host editor
             final GameType targetGameType = getSelectedFormatGameType();
             if (targetGameType != null && targetGameType != host.getGameType()) {
                 CDeckEditorUI.SINGLETON_INSTANCE.changeFormat(targetGameType);
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
                         .getDeckController().loadDeck(deck, substituteCurrentDeck);
             } else {
+                // loadDeck drops sections the host can't show, so keep a detected commander in Main
+                if (!host.isSectionImportable(DeckSection.Commander) && deck.has(DeckSection.Commander)) {
+                    deck.getMain().addAll(deck.get(DeckSection.Commander));
+                }
                 host.getDeckController().loadDeck(deck, substituteCurrentDeck);
             }
             processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
@@ -687,6 +690,8 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     }
 
     private void selectCommanderFormat() {
+        // Ticked first so the dropdown's listener applies the format and reparses
+        formatSelectionCheck.setSelected(true);
         for (int i = 0; i < formatDropdown.getItemCount(); i++) {
             GameFormat format = formatDropdown.getItemAt(i);
             if (format != null && "Commander".equalsIgnoreCase(format.getName())) {
@@ -694,21 +699,15 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 break;
             }
         }
-        formatSelectionCheck.setSelected(true);
-        formatDropdown.setEnabled(true);
-        GameFormat selected = formatDropdown.getSelectedItem();
-        if (selected != null) {
-            controller.setCurrentGameFormat(selected);
-        }
         if (optionsPanel != null && closedOptsPanel != null) {
             optionsPanel.setVisible(true);
             closedOptsPanel.setVisible(false);
         }
     }
 
-    /** Returns null only when the format checkbox is unticked, signalling no routing should happen */
+    /** Returns the commander game type to route the import to, or null to load into the host editor */
     private GameType getSelectedFormatGameType() {
-        if (!formatSelectionCheck.isSelected()) {
+        if (!formatSelectionCheck.isSelected() || !CDeckEditorUI.isFormatDropdownGameType(host.getGameType())) {
             return null;
         }
         GameFormat selected = formatDropdown.getSelectedItem();
@@ -716,7 +715,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             return null;
         }
         GameType gt = GameType.smartValueOf(selected.getName());
-        return (gt != null && gt.getDeckFormat().hasCommander()) ? gt : GameType.Constructed;
+        return (gt != null && gt.getDeckFormat().hasCommander()) ? gt : null;
     }
 
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {

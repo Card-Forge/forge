@@ -502,6 +502,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             boolean newIsOathbreaker = card.getRules().canBeOathbreaker();
             PaperCard sameSlot = dest.find(c -> c.getRules().canBeOathbreaker() == newIsOathbreaker);
             if (sameSlot != null) {
+                deck.getMain().add(sameSlot, dest.count(sameSlot));
                 dest.remove(sameSlot, dest.count(sameSlot));
             }
         } else if (dest.countAll() > 0) {
