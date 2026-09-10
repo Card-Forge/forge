@@ -75,15 +75,55 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Return the number of colors used for payment for Converge
+     * Return the colors that would be used for payment, as a color mask.
      */
-    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
+    public static byte getConvergeColors(final SpellAbility sa, final Player ai) {
         ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
         if (payManaCost(cost, sa, ai, true, true, false) != null) {
-            return cost.getSunburst();
+            return cost.getColorsPaid();
         }
         // TODO return -1 so API can bail out since it's unpayable
         return 0;
+    }
+
+    /**
+     * Announce X on a converge or sunburst card, where its only job is to buy colors: the least X
+     * that still reaches the most of them. Returns the colors the announced X buys.
+     */
+    public static byte setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        final AiController aic = aiControllerOf(ai);
+        if (aic != null && aic.reapplyConvergeX(sa)) {
+            // the same spell is searched again on the way down to its API logic, and each step of
+            // the walk is a full payment solve - the answer from the first walk still holds
+            return aic.getExpectedPayingColors(sa);
+        }
+
+        int bestX = 0;
+        int bestCount = 0;
+        byte bestColors = 0;
+        for (int i = 0; i <= maxX; i++) {
+            sa.setXManaCostPaid(i);
+            byte colors = getConvergeColors(sa, ai);
+            int count = ColorSet.fromMask(colors).countColors();
+            if (count > bestCount) {
+                bestCount = count;
+                bestColors = colors;
+                bestX = i;
+                if (bestCount == MagicColor.WUBRG.length) {
+                    break; // nothing above this can buy a sixth color
+                }
+            }
+        }
+        sa.setXManaCostPaid(bestX);
+        if (aic != null) {
+            aic.rememberConvergeX(sa, bestX, bestColors);
+        }
+        return bestColors;
+    }
+
+    private static AiController aiControllerOf(final Player ai) {
+        return ai != null && ai.getController() instanceof PlayerControllerAi controller
+                ? controller.getAi() : null;
     }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.

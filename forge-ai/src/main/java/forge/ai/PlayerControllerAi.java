@@ -86,6 +86,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public byte getExpectedPayingColors(SpellAbility sa) {
+        return brains.getExpectedPayingColors(sa);
+    }
+
+    @Override
     public boolean isAI() {
         return true;
     }

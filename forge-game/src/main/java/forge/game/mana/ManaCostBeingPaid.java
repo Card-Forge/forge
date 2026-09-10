@@ -152,10 +152,6 @@ public class ManaCostBeingPaid {
         return xManaCostPaidByColor;
     }
 
-    public final int getSunburst() {
-        return ColorSet.fromMask(sunburstMap).countColors();
-    }
-
     public final byte getColorsPaid() {
         return sunburstMap;
     }
