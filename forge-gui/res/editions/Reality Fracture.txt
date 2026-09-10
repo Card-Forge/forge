@@ -12,6 +12,7 @@ ScryfallCode=FRA
 8 U Generous Revival @Alessandra Pisano
 14 R Loyal Tutor @Darren Tan
 15 C Memory Trap @Ekaterina Burmak
+17 U Prophesied End @A. M. Sartor
 19 R Repurposed Enforcer @Chris Rallis
 20 M Return to the Light Realms @Anna Steinbauer
 25 U Countersculpt @Anna Podedworna
@@ -24,18 +25,23 @@ ScryfallCode=FRA
 44 R Theorist's Proxy @Matt Stewart
 49 M Bloodline Recollector @Cynthia Sheppard
 51 C Cast Away Doubt @Zara Alfonso
+59 M Overwrite the Multiverse @Ryan Pancoast
 62 U Rewrite Regrets @Matt Stewart
 67 C Solve for Disappointment @Eli Minaya
 78 M Craterclaw Colossus @Mark Zug
+81 C Eardrum Rattler @Javier Charro
 89 C No Admittance @Serena Malyon
 90 R Pompous Battlemage @Justin Gerard
 93 M Stingcaster Mage @Matt Stewart
 97 C Arcane Amphisbaena @Jason Mowry
+99 C Budding Insurgent @Jeff Miracola
 101 C Compel Brutality @Danny Schwartz
+104 C Greenhouse Propagator @Ekaterina Burmak
 106 M Hexhaven Invigorator @Olivier Bernard
 109 C Inspired Tethermage @Cristi Balanescu
 112 U Restore with Empathy @Eelis Kyttanen
 114 C Something Worth Saving @PINDURSKI
+117 C Tethermage's Advantage @Javier Charro
 121 M Aerid Konstrari @Chris Rahn
 122 M Avatar of Burgeoning Echoes @Eli Minaya
 125 C Charge the Sanctum @Néstor Ossandón Leal
@@ -50,6 +56,7 @@ ScryfallCode=FRA
 153 C Tam's Resistance @Samuel Perin
 159 M Uldaros Theorix @Alexander Mokhov
 161 U Vigorbloom Vanguard @Denman Rooke
+163 U Warrior's Blades @Richard Kane Ferguson
 165 U Woodwork Prodigy @Lius Lasahido
 171 C Keeper of the Quiet Hour @John Tedrick
 176 R Deserted Beach @Sarah Finnigan
@@ -59,12 +66,16 @@ ScryfallCode=FRA
 189 R Shipwreck Marsh @Darren Tan
 191 R Theorist's Sanctum @Adam Paquette
 195 M Ajani Resolute @Tyler Jacobson
+196 U Danitha, Sword of Hope @Bryan Sola
 197 U Ghalta the Immovable @Antonio José Manzanedo
 200 R Liliana the Faultless @Marta Nael
 212 M Chandra, Chill of Compliance @Kieran Yanner
+218 U Proft, Consulting Detective @Lindsey Look
 223 U Way of the Cryomancer @Andrey Kuzinskiy
+227 U Danitha, Spear of Agony @Bryan Sola
 229 M Garruk, Veiled Butcher @Victor Adame Minguez
 231 R Liliana the Repentant @Marta Nael
+235 U Proft, Sinister Mastermind @Lindsey Look
 237 U Tinybones, Pocket Nuisance @Jesper Ejsing
 242 M Ajani Unrelenting @Tyler Jacobson
 244 M Chandra, Torch of Defiance @Kieran Yanner
@@ -81,8 +92,10 @@ ScryfallCode=FRA
 297 M Chandra, Chill of Compliance @Aleksi Briclot
 303 M Garruk, Veiled Butcher @Aleksi Briclot
 305 R Liliana the Repentant @Aleksi Briclot
+307 U Winter, Tormented Loner @Miranda Meeks
 308 M Ajani Unrelenting @Aleksi Briclot
 309 M Chandra, Torch of Defiance @Aleksi Briclot
+312 U Winter, Team Player @Miranda Meeks
 314 M Garruk, Curse Breaker @Aleksi Briclot
 316 R Karn, Gilded Guardian @Billy Christian
 320 R Karn, Argent Defender @Billy Christian
@@ -94,6 +107,7 @@ ScryfallCode=FRA
 335 R Repurposed Enforcer @Vlad Petruchik
 337 R Jace's Machinations @Rimas Valeikis
 339 R Theorist's Proxy @Camille Alquier
+341 M Overwrite the Multiverse @Bengt Hampus Viklander
 347 M Aerid Konstrari @Julia Vasilyeva
 348 M Avatar of Burgeoning Echoes @Francis Tneh
 349 M Denzilore Fatehold @Gintas Galvanauskas
@@ -145,6 +159,7 @@ ScryfallCode=FRA
 439 M Enlightened Confidant @James Martin
 440 M Return to the Light Realms @Heikala
 443 M The Theorist, Jace Beleren @ONIKU kuitai
+445 M Overwrite the Multiverse @Pedro Correa
 446 M Craterclaw Colossus @Desmuncubic
 447 M Stingcaster Mage @Ricardo Diseño
 449 M Enlightened Confidant @Jabari Weathers
