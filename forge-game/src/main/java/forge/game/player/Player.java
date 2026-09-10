@@ -100,6 +100,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numForetoldThisTurn;
     private int landsPlayedThisTurn;
     private int landsPlayedLastTurn;
+    private final CardCollection landsPlayedThisTurnCards = new CardCollection(); //Used for Coststorm. Needed because a land's mana value isn't always 0 (Glade of the Pump Spells)
     private int numPowerSurgeLands;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
@@ -1643,6 +1644,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
+        landsPlayedThisTurnCards.add(c);
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(PlayerView.get(this), CardView.get(c)));
@@ -2227,6 +2229,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getLandsPlayedLastTurn() {
         return landsPlayedLastTurn;
     }
+    public final List<Card> getLandsPlayedThisTurnCards() {
+        return landsPlayedThisTurnCards;
+    }
     public final void addLandPlayedThisTurn() {
         landsPlayedThisTurn++;
         achievementTracker.landsPlayed++;
@@ -2471,6 +2476,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setTappedLandForManaThisTurn(false);
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
         resetLandsPlayedThisTurn();
+        landsPlayedThisTurnCards.clear();
         resetInvestigatedThisTurn();
         resetSurveilThisTurn();
         resetDiscardedThisTurn();
