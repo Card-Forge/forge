@@ -997,7 +997,8 @@ public final class FServerManager implements IHasForgeLog {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             if (msg instanceof HeartbeatEvent) {
-                return; // Consumed — arrival resets IdleStateHandler read timer
+                ctx.writeAndFlush(new HeartbeatEvent());
+                return;
             }
             if (msg instanceof MessageEvent) {
                 final String raw = ((MessageEvent) msg).getMessage();
@@ -1113,6 +1114,16 @@ public final class FServerManager implements IHasForgeLog {
                         broadcast(new MessageEvent(String.format("%s has reconnected.", username)));
                     }
                     netLog.info("[Reconnect] Player reconnected: {}", username);
+                } else if (isMatchActive()) {
+                    // Match is in progress and this user isn't on the disconnected list —
+                    // either their reconnect window expired, or they were never in this match.
+                    // Tell them explicitly so the client surfaces the seat-lost modal instead
+                    // of inferring it from a lobby update.
+                    netLog.info("[Reconnect] LoginEvent for {} during active match - seat unavailable", username);
+                    if (client != null) {
+                        broadcastTo(new SeatLostEvent(), client);
+                    }
+                    ctx.close();
                 } else {
                     // Normal login flow
                     final int index = localLobby.connectPlayer(username, event.getAvatarIndex(), event.getSleeveIndex());
