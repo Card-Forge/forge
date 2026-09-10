@@ -6,7 +6,6 @@ import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
-import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -46,7 +45,7 @@ public class GameSimulator {
         copier = new GameCopier(origGame);
         simGame = copier.makeCopy(advanceToPhase, origAiPlayer);
 
-        aiPlayer = (Player) copier.find(origAiPlayer);
+        aiPlayer = copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
 
         origLines = new ArrayList<>();
@@ -143,16 +142,15 @@ public class GameSimulator {
             return sa;
         }
         Card origHostCard = sa.getHostCard();
-        Card hostCard = (Card) copier.find(origHostCard);
+        Card hostCard = copier.find(origHostCard);
         String desc = sa.getDescription();
+        // TODO tests fail if this isn't checked first
         FCollectionView<SpellAbility> candidates = hostCard.getSpellAbilities();
 
         SpellAbility result = saMatcher(candidates, desc);
-        for (SpellAbility cSa : candidates) {
-            if (result != null) {
-                break;
-            }
-            result = saMatcher(GameActionUtil.getAlternativeCosts(cSa, aiPlayer, true), desc);
+        if (result == null) {
+            // could try and reimplement this so a quick match doesn't require building the rest first
+            result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
         }
 
         if (result != null) {

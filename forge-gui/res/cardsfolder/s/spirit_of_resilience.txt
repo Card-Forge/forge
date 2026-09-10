@@ -6,6 +6,6 @@ T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destinati
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | DefinedCards$ TriggeredCards.Artifact,Creature | SubAbility$ DBClone | Optional$ True
 SVar:DBClone:DB$ Clone | Defined$ ChosenCard | Duration$ UntilEndOfTurn | SubAbility$ DBCleanup
-DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckHas:Ability$Graveyard
 Oracle:Whenever one or more cards leave your graveyard, put a +1/+1 counter on this creature, then you may have this creature become a copy of an artifact or creature card from among those cards until end of turn.

@@ -86,11 +86,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void passPriority() {
-        send(ProtocolMethod.passPriority);
-    }
-
-    @Override
     public void nextGameDecision(final NextGameDecision decision) {
         send(ProtocolMethod.nextGameDecision, decision);
     }
@@ -146,7 +141,7 @@ public class NetGameController implements IGameController {
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield));
     }
 
     @Override
@@ -158,17 +153,13 @@ public class NetGameController implements IGameController {
     @Override
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision, isAbilityScope));
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision));
     }
 
     @Override
     public void setDisableAutoTriggers(final boolean disable) {
         yieldController.setDisableAutoTriggers(disable);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableTriggers(disable));
-    }
-
-    public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SkipPhase(turnPlayer, phase, shouldSkip));
     }
 
     @Override

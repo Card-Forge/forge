@@ -2,11 +2,13 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -17,6 +19,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -349,14 +352,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 });
             }
             // TODO: prevent ai searching its own library when Ob Nixilis, Unshackled is in play
-            if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
+            else if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
                 // FIXME: make this properly interact with several origin zones
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
-            if (!activateForCost && list.isEmpty()) {
+            if (!activateForCost &&
+                    (p == ai || !canIgnoreEmptyDefinedPlayers(ai, sa, origin, destination, pDefined)) &&
+                    (list.isEmpty() || ("Battlefield".equals(destination) && Iterables.any(list, card -> ComputerUtil.isETBprevented(card))))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+
             if ("Atarka's Command".equals(sourceName)
                     && (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
                 // be strict on playing lands off charms
@@ -423,6 +429,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    private static boolean canIgnoreEmptyDefinedPlayers(final Player ai, final SpellAbility sa,
+            final List<ZoneType> origin, final String destination, final Iterable<Player> pDefined) {
+        return !sa.usesTargeting() && !sa.isCurse() && Iterables.contains(pDefined, ai)
+                && ("Hand".equals(destination) || "Battlefield".equals(destination))
+                && origin != null && origin.size() == 1
+                && (origin.get(0) == ZoneType.Library || origin.get(0) == ZoneType.Graveyard);
+    }
+
     /**
      * <p>
      * changeHiddenOriginPlayDrawbackAI.
@@ -463,9 +477,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static AiAbilityDecision hiddenTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        // Fetching should occur fairly often as it helps cast more spells, and
-        // have access to more mana
-
         List<ZoneType> origin = new ArrayList<>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
@@ -548,13 +559,33 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
+        // check if any SA we wanted to pay for had missing shards
+        Set<ManaCostBeingPaid> unpaid = AiCardMemory.getMemorySet(ai, AiCardMemory.MemorySetMana.UNPAID_COSTS);
+        Map<String, Integer> basicTypes = Maps.newHashMap();
+        if (unpaid != null) {
+            for (ManaCostBeingPaid cost : unpaid) {
+                for (ManaCostShard shard : cost.getUnpaidShards()) {
+                    for (MagicColor.Color col : shard.getColor()) {
+                        if (col == MagicColor.Color.COLORLESS) {
+                            continue;
+                        }
+                        basicTypes.merge(col.getBasicLandType(), 1, Integer::sum);
+                    }
+                }
+            }
+        }
+
         // Which basic land is least available from hand and play, that I still
         // have in my deck
         int minSize = Integer.MAX_VALUE;
         String minType = null;
 
         for (String b : basics) {
-            final int num = CardLists.getType(combined, b).size();
+            // average between well rounded mana base and shards that were missing
+            int num = CardLists.getType(combined, b).size();
+            if (!basicTypes.isEmpty()) {
+                num /= basicTypes.getOrDefault(b, 0) + 1;
+            }
             if (num < minSize) {
                 minType = b;
                 minSize = num;
@@ -1115,6 +1146,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Check if the opponent can save a creature from bounce/blink/whatever by paying
         // the Unless cost (for example, Erratic Portal)
         list.removeAll(getSafeTargetsIfUnlessCostPaid(ai, sa, list));
+
+        // X was sized against every legal target, but the list has since been narrowed to the ones
+        // the AI actually wants - usually just the opponents' permanents. Bring X down to match
+        // before the check below, otherwise controlling a single targetable permanent of its own is
+        // enough to make the AI refuse a spell it would happily cast for less.
+        if (!mandatory && "X".equals(sa.getTargetRestrictions().getMinTargets())
+                && "Count$xPaid".equals(sa.getSVar("X"))
+                && sa.getXManaCostPaid() != null && sa.getXManaCostPaid() > list.size()) {
+            sa.setXManaCostPaid(list.size());
+        }
 
         if (!mandatory && list.size() < sa.getMinTargets()) {
             return false;

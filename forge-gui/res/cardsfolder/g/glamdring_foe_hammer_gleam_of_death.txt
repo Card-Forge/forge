@@ -1,6 +1,6 @@
 Name:Glamdring, Foe-hammer
 ManaCost:2
-Types:Artifact Equipment
+Types:Legendary Artifact Equipment
 S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power.
 K:Equip:2
 AlternateMode:Adventure

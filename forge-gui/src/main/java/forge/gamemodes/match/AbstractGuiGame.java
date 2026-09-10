@@ -305,11 +305,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Backside:
                 return true;
             case Secondary:
-            case PreparedSpell:
                 if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
                 }
                 return false;
+            case PreparedSpell:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return cv.useCardArt();
             default:
                 return false;
         }
@@ -555,7 +559,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             String name = "?";
             if (this.currentPlayer != null)
                 name = this.currentPlayer.getLobbyPlayerName();
-            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name, true);
         }
     }
 
@@ -733,10 +737,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (clickedSameLabel) {
             controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
         } else {
-            markLabelStopsAtPhase.run();
+            // Read the phase before un-skipping: that push can pass priority and move the game on
             boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            markLabelStopsAtPhase.run();
             controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
-            controller.selectButtonOk();   // Pass current priority so the marker takes effect immediately.
         }
         refreshYieldUi(local);
     }

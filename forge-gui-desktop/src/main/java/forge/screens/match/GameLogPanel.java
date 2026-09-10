@@ -290,7 +290,6 @@ public class GameLogPanel extends JPanel {
 
         @Override
         protected void processMouseEvent(final MouseEvent e, final JLayer<? extends FScrollPane> l) {
-
             final boolean isScrollBarRequired = scrollPane.getVerticalScrollBar().getMaximum() > getHeight();
             final boolean isHoveringOverLogEntry = e.getSource() instanceof JTextArea;
 

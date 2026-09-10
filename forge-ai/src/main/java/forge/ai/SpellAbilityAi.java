@@ -11,7 +11,9 @@ import com.google.common.collect.Lists;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCopyService;
 import forge.game.card.CardState;
 import forge.game.card.CounterType;
@@ -36,7 +38,7 @@ import forge.util.collect.FCollectionView;
  * <p>
  * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
  */
-public abstract class SpellAbilityAi {
+public abstract class SpellAbilityAi extends SpellAbilityEffect {
 
     public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
         if (c.isCreature()) {
@@ -119,14 +121,15 @@ public abstract class SpellAbilityAi {
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa) {
-        // copy it to disable some checks that the AI need to check extra
-        SpellAbilityCondition con = (SpellAbilityCondition) sa.getConditions().copy();
+        SpellAbilityCondition con = sa.getConditions();
 
         // if manaspent, check if AI can pay the colored mana as cost
         if (!con.getManaSpent().isEmpty()) {
             // need to use ManaCostBeingPaid check, can't use Cost#canPay
             ManaCostBeingPaid paid = new ManaCostBeingPaid(new ManaCost(con.getManaSpent()));
             if (ComputerUtilMana.canPayManaCost(paid, sa, ai, sa.isTrigger())) {
+                // copy it to disable some checks that the AI need to check extra
+                con = (SpellAbilityCondition) con.copy();
                 con.setManaSpent("");
             }
         }
@@ -155,7 +158,8 @@ public abstract class SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("Never".equals(aiLogic)) {
             return false;
-        } else if ("Once".equals(aiLogic)) {
+        }
+        if ("Once".equals(aiLogic)) {
             return !sa.getHostCard().getAbilityActivatedThisTurn().getActivators(sa).contains(ai);
         }
         return true;
@@ -270,6 +274,7 @@ public abstract class SpellAbilityAi {
         }
 
         if (subAb == null) {
+            // TODO this should result in the average rating of each decision
             return decision;
         }
 
@@ -500,5 +505,22 @@ public abstract class SpellAbilityAi {
         }
 
         return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
+    }
+
+    protected boolean setAiEvaluationHost(final SpellAbility sa, final CardCollection remember) {
+        if (sa.isTrigger() || sa.isCastFromPlayEffect()) {
+            // reset not supported yet
+            return false;
+        }
+        Card host = sa.getHostCard();
+        if (!host.isLKI()) {
+            host = CardCopyService.getLKICopy(host);
+            sa.getRootAbility().setHostCard(host);
+        }
+        if (remember != null) {
+            host.addRemembered(remember);
+        }
+        // TODO addChangedSVars if Remembered is simply used to substitute some other non-Card field
+        return true;
     }
 }

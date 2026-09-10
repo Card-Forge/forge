@@ -3,10 +3,13 @@ package forge.adventure.scene;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 import forge.adventure.util.Config;
+import forge.adventure.util.ShaderDrawable;
 import forge.sound.SoundSystem;
+import forge.util.ShaderUtil;
 
 /**
  * Base class for all rendered scenes
@@ -119,5 +122,24 @@ public abstract class Scene implements Disposable {
 
     }
 
-
+    private ShaderDrawable lastPreviewDrawable;
+    // move here so Scene can access it
+    public ShaderDrawable getLastPreviewDrawable(TextureRegion region) {
+        if (lastPreviewDrawable == null) {
+            // initialize
+            float mul = 1.2f;
+            float width = getIntendedWidth();
+            float height = getIntendedHeight();
+            float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
+            // set default shader parameters
+            lastPreviewDrawable = new ShaderDrawable(ShaderUtil.getInstance().getShaderPix());
+            lastPreviewDrawable.setUniformSetter(shader -> {
+                shader.setUniformf("u_resolution", width, height);
+                shader.setUniformf("u_pixelSize", pixelSize);
+                shader.setUniformf("u_bias", 0.8f);
+            });
+        }
+        lastPreviewDrawable.setRegion(region);
+        return lastPreviewDrawable;
+    }
 }

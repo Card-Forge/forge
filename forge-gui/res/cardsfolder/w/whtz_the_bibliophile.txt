@@ -1,0 +1,10 @@
+Name:Whtz, the Bibliophile
+ManaCost:1 W U
+Types:Legendary Creature Homunculus
+PT:1/3
+DeckRule:Size:AdjustMax$ Unlimited | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander has no maximum deck size.
+A:AB$ Draw | Cost$ 3 T | ReduceCost$ X | NumCards$ 1 | SubAbility$ DBGainLife | SpellDescription$ You draw a card and gain 1 life. This ability costs {3} less to activate if you had 200 or more cards in your starting deck.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$Compare StartingSize GE200.3.0
+SVar:StartingSize:Count$YourStartingLibrarySize
+Oracle:Rulebreaker — A deck with this commander has no maximum deck size.\n{3}, {T}: You draw a card and gain 1 life. This ability costs {3} less to activate if you had 200 or more cards in your starting deck.

@@ -83,6 +83,8 @@ public class ReplacementHandler {
 
             // CR 614.12 ETB replacements look at what the card would be on the battlefield
             affectedCard = (Card) runParams.get(AbilityKey.Affected);
+            // must force cache the CardState ETB replacements so the LKI copies them
+            affectedCard.getReplacementEffects();
             affectedLKI = CardCopyService.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
 

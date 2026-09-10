@@ -136,10 +136,10 @@ ASM="$M2/org/ow2/asm/asm/$ASM_VER/asm-$ASM_VER.jar"
 ASMC="$M2/org/ow2/asm/asm-commons/$ASM_VER/asm-commons-$ASM_VER.jar"
 TOOLS_CP="$ASM:$ASMC:$JV/tools"
 
-RT="$M2/com/mobidevelop/robovm/robovm-rt/2.3.23/robovm-rt-2.3.23.jar"
-ROBOVM_OBJC="$M2/com/mobidevelop/robovm/robovm-objc/2.3.23/robovm-objc-2.3.23.jar"
-ROBOVM_CT="$M2/com/mobidevelop/robovm/robovm-cocoatouch/2.3.23/robovm-cocoatouch-2.3.23.jar"
-GDXB="$M2/com/badlogicgames/gdx/gdx-backend-robovm/1.13.5/gdx-backend-robovm-1.13.5.jar"
+RT="$M2/com/mobidevelop/robovm/robovm-rt/2.3.24/robovm-rt-2.3.24.jar"
+ROBOVM_OBJC="$M2/com/mobidevelop/robovm/robovm-objc/2.3.24/robovm-objc-2.3.24.jar"
+ROBOVM_CT="$M2/com/mobidevelop/robovm/robovm-cocoatouch/2.3.24/robovm-cocoatouch-2.3.24.jar"
+GDXB="$M2/com/badlogicgames/gdx/gdx-backend-robovm/1.14.2/gdx-backend-robovm-1.14.2.jar"
 
 # ---------------------------------------------------------------- bootstrap
 bootstrap() {
@@ -429,10 +429,10 @@ assemble_arm64_sim_app() {
 
     # 4. swap device framework slices -> simulator slices
     local GDX="$CLONE/com/badlogicgames/gdx"
-    _swap_sim_framework gdx          "$GDX/gdx-platform/1.13.5/gdx-platform-1.13.5-natives-ios.jar"                   "$APP"
-    _swap_sim_framework ObjectAL     "$GDX/gdx-platform/1.13.5/gdx-platform-1.13.5-natives-ios.jar"                   "$APP"
-    _swap_sim_framework gdx-freetype "$GDX/gdx-freetype-platform/1.13.5/gdx-freetype-platform-1.13.5-natives-ios.jar" "$APP"
-    _swap_sim_framework gdx-box2d    "$GDX/gdx-box2d-platform/1.13.5/gdx-box2d-platform-1.13.5-natives-ios.jar"       "$APP"
+    _swap_sim_framework gdx          "$GDX/gdx-platform/1.14.2/gdx-platform-1.14.2-natives-ios.jar"                   "$APP"
+    _swap_sim_framework ObjectAL     "$GDX/gdx-platform/1.14.2/gdx-platform-1.14.2-natives-ios.jar"                   "$APP"
+    _swap_sim_framework gdx-freetype "$GDX/gdx-freetype-platform/1.14.2/gdx-freetype-platform-1.14.2-natives-ios.jar" "$APP"
+    _swap_sim_framework gdx-box2d    "$GDX/gdx-box2d-platform/1.14.2/gdx-box2d-platform-1.14.2-natives-ios.jar"       "$APP"
 
     # 5. ad-hoc sign (the simulator refuses to launch an unsigned bundle)
     local f
