@@ -13,7 +13,14 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
 
-/** Generates legal Pauper Commander (PDH) starter decks from Forge's real common pool. */
+/**
+ * Generates legal Pauper Commander (PDH) starter decks from Forge's real common pool, writing them
+ * to pdh-decks/. Run from forge-gui, which is where the res/ and output paths below resolve from:
+ * <pre>
+ * javac -cp &lt;forge-gui-desktop-jar-with-dependencies&gt; -d tools/java tools/java/PdhDeckGen.java
+ * java -cp "&lt;forge-gui-desktop-jar-with-dependencies&gt;;tools/java" PdhDeckGen
+ * </pre>
+ */
 public class PdhDeckGen {
     public static void main(String[] args) throws Exception {
         forge.util.Lang.createInstance("en-US");
