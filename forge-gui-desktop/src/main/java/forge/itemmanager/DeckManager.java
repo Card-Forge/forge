@@ -8,16 +8,20 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 import forge.itemmanager.filters.*;
 import forge.itemmanager.views.CommanderBracketView;
+import forge.itemmanager.views.ItemView;
 import forge.localinstance.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.deck.CommanderBracketService;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
@@ -63,6 +67,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     //private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
 
     private final GameType gameType;
+    private final Consumer<DeckProxy> commanderBracketUpdateListener = deck -> SwingUtilities.invokeLater(() -> updateCommanderBracketView(deck));
     private UiCommand cmdDelete, cmdSelect;
 
     /**
@@ -78,6 +83,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (gt.getDeckFormat() == DeckFormat.Commander) {
             this.addView(new CommanderBracketView(this));
         }
+        CommanderBracketService.addUpdateListener(commanderBracketUpdateListener);
 
         this.addSelectionListener(e -> {
             if (cmdSelect != null) {
@@ -86,6 +92,60 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
 
         this.setItemActivateCommand((UiCommand) () -> editDeck(getSelectedItem()));
+    }
+
+    private void updateCommanderBracketView(final DeckProxy updatedDeck) {
+        if (updatedDeck == null || this.getPool() == null || this.getPool().countAll() == 0) {
+            return;
+        }
+
+        final ItemView<DeckProxy> currentView = this.getCurrentView();
+        final boolean bracketViewActive = currentView instanceof CommanderBracketView;
+        if (!bracketViewActive && !hasCommanderBracketColumn()) {
+            return;
+        }
+
+        if (!containsDeckProxy(updatedDeck)) {
+            return;
+        }
+
+        if (isCommanderBracketSortActive()) {
+            // The result can move a row when this column controls ordering, so repainting alone is insufficient.
+            this.refresh();
+            return;
+        }
+
+        if (bracketViewActive) {
+            if (!isSameDeckProxy(this.getSelectedItem(), updatedDeck)) {
+                return;
+            }
+            currentView.refresh(this.getSelectedItems(), this.getSelectedIndex(), currentView.getScrollValue());
+        }
+        else {
+            // Preserve selection and scroll state when only a visible cell value changed.
+            currentView.getComponent().repaint();
+        }
+    }
+
+    private boolean isCommanderBracketSortActive() {
+        return hasCommanderBracketColumn() && this.getConfig().getCols().get(ColumnDef.DECK_BRACKET).getSortPriority() > 0;
+    }
+
+    private boolean hasCommanderBracketColumn() {
+        return this.getConfig() != null && this.getConfig().getCols().containsKey(ColumnDef.DECK_BRACKET);
+    }
+
+    private boolean containsDeckProxy(final DeckProxy deckProxy) {
+        for (final Entry<DeckProxy, Integer> entry : this.getPool()) {
+            if (isSameDeckProxy(entry.getKey(), deckProxy)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isSameDeckProxy(final DeckProxy left, final DeckProxy right) {
+        return left == right || left != null && right != null && left.getUniqueKey().equals(right.getUniqueKey());
     }
 
     @Override

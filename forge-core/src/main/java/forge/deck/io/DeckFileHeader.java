@@ -45,6 +45,8 @@ public class DeckFileHeader {
     public static final String TAGS_SEPARATOR = ",";
     public static final String DRAFT_NOTES = "DraftNotes";
     public static final String KEY_CARDS = "KeyCards";
+    public static final String DECK_HASH = "DeckHash";
+    public static final String COMMANDER_BRACKET = "CommanderBracket";
     public static final String SLEEVE_ART = "SleeveArt";
     public static final String SLEEVE_OFFSET = "SleeveOffset";
 
@@ -65,6 +67,8 @@ public class DeckFileHeader {
     private final Set<String> tags;
     private final HashMap<String, String> draftNotes;
     private final List<String> keyCards;
+    private final String deckHash;
+    private final Integer commanderBracket;
 
     private final boolean intendedForAi;
     private final String aiHints;
@@ -88,6 +92,8 @@ public class DeckFileHeader {
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
         this.intendedForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
         this.aiHints = kvPairs.get(DeckFileHeader.AI_HINTS);
+        this.deckHash = kvPairs.get(DeckFileHeader.DECK_HASH);
+        this.commanderBracket = parseCommanderBracket(kvPairs.get(DeckFileHeader.COMMANDER_BRACKET));
         this.sleeveArtKey = kvPairs.get(DeckFileHeader.SLEEVE_ART);
         this.sleeveArtOffset = kvPairs.getInt(DeckFileHeader.SLEEVE_OFFSET, Deck.DEFAULT_SLEEVE_OFFSET);
 
@@ -108,6 +114,19 @@ public class DeckFileHeader {
             for (String k: rawKeyCards.split(";"))
                 if (StringUtils.isNotBlank(k))
                     keyCards.add(k.trim());
+        }
+    }
+
+    private static Integer parseCommanderBracket(final String rawBracket) {
+        if (StringUtils.isBlank(rawBracket)) {
+            return null;
+        }
+        try {
+            final int bracket = Integer.parseInt(rawBracket.trim());
+            return bracket >= 1 && bracket <= 5 ? bracket : null;
+        }
+        catch (final NumberFormatException e) {
+            return null;
         }
     }
 
@@ -161,6 +180,14 @@ public class DeckFileHeader {
 
     public final List<String> getKeyCards() {
         return keyCards;
+    }
+
+    public final String getDeckHash() {
+        return deckHash;
+    }
+
+    public final Integer getCommanderBracket() {
+        return commanderBracket;
     }
 
     public final String getSleeveArtKey() {

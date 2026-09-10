@@ -42,7 +42,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
-import forge.deck.CommanderBracketCalculator;
+import forge.deck.CommanderBracketService;
 
 public enum ColumnDef {
     /**
@@ -327,11 +327,11 @@ public enum ColumnDef {
     DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
             from -> {
                 DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? 1 : CommanderBracketCalculator.getBracket(deck.getDeck());
+                return deck == null || !deck.isCommanderDeck() ? 6 : CommanderBracketService.getBracket(deck);
             },
             from -> {
                 DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? "" : CommanderBracketCalculator.getBracket(deck.getDeck());
+                return deck == null || !deck.isCommanderDeck() ? "" : CommanderBracketService.getBracketDisplay(deck);
             }),
     /**
      * The main library size column.
