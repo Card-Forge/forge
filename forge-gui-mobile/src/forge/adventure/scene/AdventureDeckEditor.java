@@ -1,7 +1,6 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -313,7 +312,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -420,7 +419,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -555,7 +554,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -641,7 +640,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -1089,7 +1088,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), HEADER_HEIGHT);
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), HEADER_HEIGHT);
         }
     }
 
@@ -1100,7 +1099,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -1112,7 +1111,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(FSkinColor.alphaColor(Color.BLACK, 0.3f), 0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), getHeight());
         }
     }
 
