@@ -538,20 +538,15 @@ public class CardImageRenderer {
                 float iconSize = h * 0.9f;
                 float iconPadding = (h - iconSize) / 2;
                 w -= iconSize + iconPadding * 2;
-                //g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                if (state.getRarity() == null) {
-                    g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                } else if (state.getRarity() == CardRarity.Special) {
-                    g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                } else if (state.getRarity() == CardRarity.MythicRare) {
-                    g.drawImage(FSkinImage.SET_MYTHIC, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                } else if (state.getRarity() == CardRarity.Rare) {
-                    g.drawImage(FSkinImage.SET_RARE, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                } else if (state.getRarity() == CardRarity.Uncommon) {
-                    g.drawImage(FSkinImage.SET_UNCOMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                } else {
-                    g.drawImage(FSkinImage.SET_COMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
-                }
+                CardRarity rarity = state.getRarity();
+                FSkinImage image = rarity == null ? FSkinImage.SET_SPECIAL : switch (rarity) {
+                    case Special -> FSkinImage.SET_SPECIAL;
+                    case MythicRare -> FSkinImage.SET_MYTHIC;
+                    case Rare -> FSkinImage.SET_RARE;
+                    case Uncommon -> FSkinImage.SET_UNCOMMON;
+                    default -> FSkinImage.SET_COMMON;
+                };
+                g.drawImage(image, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
             }
         }
 
