@@ -44,6 +44,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
@@ -486,6 +487,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (!(editor instanceof CEditorConstructed ce)) { return; }
         if (ce.controller.getModel().getOrCreate(DeckSection.Commander).countByName(card) > 0) { return; }
+        // A catalog add obeys the same copy limit as a normal add
+        if (isAdd && ce.getAllowedAdditions(Collections.singletonMap(card, 1).entrySet()).isEmpty()) { return; }
         if (!isAdd) {
             ce.deckManager.removeItem(card, 1);
         }
