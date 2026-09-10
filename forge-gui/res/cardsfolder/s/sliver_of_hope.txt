@@ -1,0 +1,6 @@
+Name:Sliver of Hope
+ManaCost:3 W
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Sliver.YouCtrl | AddKeyword$ Hope | Description$ Slivers you control have hope.
+Oracle:Slivers you control have hope. (Prevent all damage that would be dealt to attacking creatures with hope.)
