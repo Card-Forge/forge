@@ -113,14 +113,10 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return rules;
     }
 
-    private transient List<DeckRule> deckRuleList = null;
-
+    /** The complete, assembled list across every face (see {@code ICardFace.getTokenizedDeckRules()} - each face caches its own parsing, shared across every printing, so this stays cheap). */
     @Override
     public List<DeckRule> getDeckRuleList() {
-        if (deckRuleList == null) {
-            deckRuleList = DeckRule.parseAll(this);
-        }
-        return deckRuleList;
+        return DeckRule.parseAll(this);
     }
 
     @Override

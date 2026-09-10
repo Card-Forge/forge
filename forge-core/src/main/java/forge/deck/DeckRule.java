@@ -18,11 +18,11 @@
 package forge.deck;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.card.CardRules;
+import forge.card.DeckRuleLine;
+import forge.card.ICardFace;
 import forge.item.IPaperCard;
 
 /**
@@ -62,52 +62,30 @@ public abstract class DeckRule {
         return description;
     }
 
-    /** Parses every {@code DeckRule:} line on the given card into typed rule objects (also picks up its marked colors for AllowedAdditionalColor$, and its own name for Copies' CARDNAME resolution). Cached on {@code PaperCard} - call {@code card.getDeckRuleList()} instead of this directly. */
+    /** Assembles every {@code DeckRule:} line across every face of the given card into typed rule objects (also picks up its marked colors for AllowedAdditionalColor$, and each face's own name for Copies' CARDNAME resolution). The expensive per-line tokenizing is cached per {@code CardFace} (shared across every printing); call {@code card.getDeckRuleList()} instead of this directly. */
     public static List<DeckRule> parseAll(final IPaperCard card) {
-        final CardRules rules = card.getRules();
-        if (rules == null) {
+        if (card.getRules() == null) {
             return new ArrayList<>();
         }
         final byte chosenAdditionalColors = card.getMarkedColors() != null ? card.getMarkedColors().getColor() : 0;
         final List<DeckRule> result = new ArrayList<>();
-        for (final String raw : rules.getDeckRules()) {
-            final int colonPos = raw.indexOf(':');
-            final String ruleClass = colonPos > 0 ? raw.substring(0, colonPos) : raw;
-            final String rest = colonPos > 0 ? raw.substring(colonPos + 1) : "";
-            final Map<String, String> params = parseParams(rest);
-            switch (ruleClass) {
-                case "ColorIdentity":
-                    result.add(new DeckRuleColorIdentity(params, chosenAdditionalColors));
-                    break;
-                case "Size":
-                    result.add(new DeckRuleSize(params));
-                    break;
-                case "Copies":
-                    result.add(new DeckRuleCopies(params, rules.getName()));
-                    break;
-                default:
-                    break; // unrecognized rule class - ignore
+        for (final ICardFace face : card.getAllFaces()) {
+            for (final DeckRuleLine line : face.getTokenizedDeckRules()) {
+                switch (line.getRuleClass()) {
+                    case "ColorIdentity":
+                        result.add(new DeckRuleColorIdentity(line.getParams(), chosenAdditionalColors));
+                        break;
+                    case "Size":
+                        result.add(new DeckRuleSize(line.getParams()));
+                        break;
+                    case "Copies":
+                        result.add(new DeckRuleCopies(line.getParams(), face.getName()));
+                        break;
+                    default:
+                        break; // unrecognized rule class - ignore
+                }
             }
         }
         return result;
-    }
-
-    /** Splits a {@code Key$ Value | Key2$ Value2} parameter string. */
-    protected static Map<String, String> parseParams(final String rest) {
-        final Map<String, String> params = new LinkedHashMap<>();
-        for (final String piece : rest.split("\\|")) {
-            final String trimmed = piece.trim();
-            if (trimmed.isEmpty()) {
-                continue;
-            }
-            final int dollarPos = trimmed.indexOf('$');
-            if (dollarPos < 0) {
-                continue;
-            }
-            final String key = trimmed.substring(0, dollarPos).trim();
-            final String value = trimmed.substring(dollarPos + 1).trim();
-            params.put(key, value);
-        }
-        return params;
     }
 }
