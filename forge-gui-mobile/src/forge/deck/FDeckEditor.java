@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
     public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
-    private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     //Toggle that suppresses most conformity logic in the editor.
     public static final String DECK_TAG_SUPPRESS_CONFORMITY = "noEditorConformity";
