@@ -25,8 +25,11 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +53,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.SleeveArt;
 import forge.localinstance.properties.ForgePreferences;
@@ -80,10 +84,23 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> _missingIconKeys = new HashSet<>();
+    // A single large zone view needs two entries per card - the decoded original and the
+    // scaled copy the panel paints - so 400 cannot hold even one. Treat that long-standing
+    // default as unset; any other value is one somebody chose.
+    private static final int LEGACY_DEFAULT_CACHE_SIZE = 400;
+    private static final int DEFAULT_CACHE_SIZE = 1500;
+    private static int preloadGeneration = 0;
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder()
-            .maximumSize(FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM))
+            .maximumSize(cacheSize())
+            // soft values so memory pressure, not entry count, is what ultimately evicts
+            .softValues()
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .build(new ImageLoader());
+
+    private static int cacheSize() {
+        final int configured = FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM);
+        return configured == LEGACY_DEFAULT_CACHE_SIZE ? DEFAULT_CACHE_SIZE : configured;
+    }
     private static final BufferedImage _defaultImage;
     private static final BufferedImage _stars;
     private static final BufferedImage _inv_stars;
@@ -134,7 +151,31 @@ public class ImageCache {
         }
     }
 
+    /**
+     * Decode the originals for these cards one per EDT event, so a view that later shows many
+     * cards at once does not decode them all at the moment it opens. Only what is already on
+     * disk: useDefaultIfNotFound is false, so a card with no local image costs a failed file
+     * lookup and is skipped rather than rendered or downloaded.
+     * <p>
+     * Originals only. They are what the decode cost buys and they do not depend on the size the
+     * view eventually asks for, so this needs no advance knowledge of that size.
+     */
+    public static void preloadOriginals(final Collection<PaperCard> cards) {
+        FThreads.assertExecutedByEdt(true);
+        preloadNext(new ArrayList<>(cards).iterator(), ++preloadGeneration);
+    }
+
+    private static void preloadNext(final Iterator<PaperCard> cards, final int generation) {
+        // a cleared cache means the warmed originals are gone and the screen has moved on
+        if (generation != preloadGeneration || !cards.hasNext()) {
+            return;
+        }
+        getOriginalImage(cards.next().getCardImageKey(), false, null);
+        SwingUtilities.invokeLater(() -> preloadNext(cards, generation));
+    }
+
     public static void clear() {
+        preloadGeneration++;
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
         ImageKeys.clearMissingCards();
