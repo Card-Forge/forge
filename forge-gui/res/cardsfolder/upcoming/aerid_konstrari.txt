@@ -1,0 +1,12 @@
+Name:Aerid Konstrari
+ManaCost:1 R G G
+Types:Legendary Creature Elder Sphinx
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters or dies, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters or dies, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+SVar:TrigToken:DB$ Token | TokenScript$ rg_a_heartwood | TokenOwner$ TriggeredCardController
+A:AB$ Token | Cost$ 6 | TokenScript$ rg_a_heartwood | TokenOwner$ You | SubAbility$ DBPump | SpellDescription$ Create a Heartwood token. Then CARDNAME gets +X/+0 until end of turn, where X is the number of artifacts you control.
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:Flying\nWhen Aerid Konstrari enters or dies, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")\n{6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.
