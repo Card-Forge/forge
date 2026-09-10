@@ -1,0 +1,7 @@
+Name:Through the Forest Gate
+ManaCost:6 G G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 20 | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | ChangeNum$ Any | SkipReorder$ True | SubAbility$ DBShuffle | SpellDescription$ Look at the top twenty cards of your library, put any number of land cards from among them onto the battlefield tapped, then shuffle. You gain 8 life.
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 8
+Oracle:Look at the top twenty cards of your library, put any number of land cards from among them onto the battlefield tapped, then shuffle. You gain 8 life.

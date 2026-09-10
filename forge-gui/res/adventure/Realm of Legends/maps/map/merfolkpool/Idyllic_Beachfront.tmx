@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="112">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Bubble Matrix&quot;, &quot;Idyllic Beachfront&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJgDAMheFcRBxAdCLHaLcRnEAn6lxFaC9Va0oDofoO36GCMX/RdUQOAAAAACCxDfo7SHVE2rtIdbTcc9fRYk+uo6UeTodEz9jr7x+tAber9N2z9a03nVPbsRuiw1z34t5B6T9QO+fJZIlmKzcPAP5rCbjPpb+dO6Pj+x0eRL8hLA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlN1KxDAQhQN6kfROwZ8nEGH9e6Lu2wh7U3VBV3xEEex2vdErM+weMk2TNN1GpJCBgYVtZuY7ORMhcuTIkSNHjhw5cqSMt8P/niBN3Cshvg+mz0McyCnzcA6bZ0pMLo4p3pFr9spK8IyJv9ICvgnN72LBuZi58N3PToM+v8bU5f2pru8OGinEVWHyS5r/VqUQr2V4j3w9nvS5pecsZ/Xx4ptnXeOl9O8BGK6LNv+MsZzNhTif+/fIpQ/ySJ879pzt209e90TXOPXUgd4Pqs3wqee/1Rx3hfFWygz5eGg/7id+F8SA+e26KXpXqutl7uGhtWMYUmtpf/uojIeJ50P3f9e5kW22vpqoE8vA+dGnkV09Y+/C3kkeywF+uCm2e1AHvOSahfYJGtIs9DtGQ8y/8TCQlrU08zTS1HLN34z0I/GvZXeOmcPrIQ/wN8We3a6BuRdqm9Bw33eoCrAsVJfFpcGlzoui/Sb26QgNwIFI8Wba7zXqu7yd4o0gDcABDfflsO+k3vliLQ0Hv5MxfUL86P0LyUVUbw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlc1OwkAQx+dsQvDgReVD36YnPfjBjVN7lBP4CsANEmJiKaDPgyYmor6O/yZs0gzb7XS7wGV/yaTNsrPz8d8pRB6Px+PxeDyeffE6JIphc1gyPFzcZES0gC1Hcp8V9r7B3jU+51i7gF3CGiXOrEpjTNSEtcZynzb2XsGumc9jl6jTdZvfIQm2z1/U8Geow0Z7W39+vxewJWzl4K6btJfELXN3+P1uwlqwtrCHzzXZPldxTbMq5R536OHI85A3q2XYoIYfYR39rU61hOhsbhfvBn5TS98stzijXvGcWUw0ie18T9GDTwd1fCF+PZHtfTohWodEH2H1uGXos/ksmtdB5neVL3+q9yJsvg1pn2zoafxU7boa1qEbPV461fzz0NWjsNUjyLwPLLRR/eS+we5W0TlFetjkqKMoP1OvTfu4DgqpHvvmLsJ/XbQ7U2pdwXVI6bHvlUkLfn6qL++VtMc6vpHrJpKtZ3MuOx86iurQ1ZX33eN9N61nc3Zxn46hxz9COKxt
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="681.833" y="344.497">
+   <properties>
+    <property name="enemy" value="Grandmother Goby"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="344.379" y="439.75" width="61.2424" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Sounds of laughing and playing can be heard ahead over the gentle crash of waves on the seashore. A group of merfolk and other beachgoers gather about, relaxing for a brief moment before the curse of violence grips them once more.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/entry_up.tx" x="353" y="483" width="48" height="23">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/treasure.tx" x="694.833" y="460.167">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Homarid Shaman&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Homarid&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Homarid Spawning Bed&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Homarid Warrior&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Deep Spawn&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Homarid Explorer&quot;
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="6.83333" y="240.833"/>
+  <object id="90" template="../../../../common/maps/obj/waypoint.tx" x="626.833" y="343.333"/>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="368" y="389.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;BEACH RULES
+NO CHOKING
+NO PYROBLASTING
+ALL SUMMERS MUST BE VEILED&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/scroll.tx" x="742.333" y="334.833">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bubble Matrix&quot;, &quot;editions&quot;: [ &quot;WTH&quot; ], &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/scroll.tx" x="451.5" y="320">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Guard Gomazoa&quot;, &quot;editions&quot;: [ &quot;ROE&quot; ], &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/scroll.tx" x="156" y="308.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Deserted Beach&quot;, &quot;editions&quot;: [ &quot;MID&quot; ], &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="63.1667" y="406.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Spiny Starfish&quot;, &quot;Sigiled Starfish&quot;]}"/>
+    <property name="enemy" value="Plagon"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="697.833" y="428">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Homarid&quot;, &quot;Tidal Influence&quot;, &quot;Homarid Warrior&quot;]}"/>
+    <property name="enemy" value="Rikala"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/waypoint.tx" x="504" y="332.667"/>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="567.333" y="335.333">
+   <properties>
+    <property name="enemy" value="Kitsa"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="90,99"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="389.333" y="329.333">
+   <properties>
+    <property name="enemy" value="Cynette"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/gold.tx" x="721.333" y="459.333"/>
+  <object id="104" template="../../../../common/maps/obj/gold.tx" x="672.667" y="460.667"/>
+  <object id="105" template="../../../../common/maps/obj/waypoint.tx" x="131.333" y="370"/>
+  <object id="106" template="../../../../common/maps/obj/waypoint.tx" x="36" y="274.667"/>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="82" y="312">
+   <properties>
+    <property name="enemy" value="Mu Yanling"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="105,106"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="218.667" y="329.333">
+   <properties>
+    <property name="enemy" value="Neerdiv"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/treasure.tx" x="49.3333" y="463.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Sigiled Starfish&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Spiny Starfish&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;High Alert&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;TDC&quot; ],
+    &quot;cardName&quot;: &quot;Baldin, Century Herdmaster&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Walking Bulwark&quot;
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/scroll.tx" x="7" y="260.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Idyllic Beachfront&quot;, &quot;editions&quot;: [ &quot;DMU&quot; ], &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

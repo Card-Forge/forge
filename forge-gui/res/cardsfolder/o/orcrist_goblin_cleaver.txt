@@ -1,0 +1,10 @@
+Name:Orcrist, Goblin-cleaver
+ManaCost:3
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Equipped creature gets +2/+2 and has trample.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChooseType | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, choose a creature type. Create a Treasure token for each creature you control of that type.
+SVar:TrigChooseType:DB$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBToken | AILogic$ MostProminentComputerControls
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:Count$Valid Creature.ChosenType+YouCtrl
+K:Equip:3
+Oracle:Equipped creature gets +2/+2 and has trample.\nWhenever equipped creature deals combat damage to a player, choose a creature type. Create a Treasure token for each creature you control of that type.\nEquip {3}

@@ -61,23 +61,16 @@ public final class CardOverlaysMenu {
     }
 
     private void toggleCardOverlayDisplay(JMenuItem showMenu) {
-        toggleShowOverlaySetting();
+        toggleOverlaySetting(FPref.UI_SHOW_CARD_OVERLAYS);
         repaintCardOverlays();
         // Enable/disable overlay menu items based on state of "Show" menu.
         for (Component c : showMenu.getParent().getComponents()) {
-            if (c instanceof JMenuItem) {
-                JMenuItem m = (JMenuItem)c;
-                if (m != showMenu) {
-                    m.setEnabled(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
+            if (c instanceof JMenuItem jmu) {
+                if (jmu != showMenu) {
+                    jmu.setEnabled(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
                 }
             }
         }
-    }
-
-    private static void toggleShowOverlaySetting() {
-        boolean isOverlayEnabled = !prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
-        prefs.setPref(FPref.UI_SHOW_CARD_OVERLAYS, isOverlayEnabled);
-        prefs.save();
     }
 
     private ActionListener getCardOverlaysAction(final FPref overlaySetting) {

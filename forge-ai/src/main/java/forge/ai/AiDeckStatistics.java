@@ -1,5 +1,6 @@
 package forge.ai;
 
+import com.google.common.collect.Lists;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.deck.CardPool;
@@ -26,6 +27,7 @@ public class AiDeckStatistics {
     public int[] maxPips = null;
     // public int[] numSources = new int[6];
     public int numLands = 0;
+
     public AiDeckStatistics(float averageCMC, float stddevCMC, int maxCost, int maxColoredCost, int[] maxPips, int numLands) {
         this.averageCMC = averageCMC;
         this.stddevCMC = stddevCMC;
@@ -36,18 +38,25 @@ public class AiDeckStatistics {
     }
 
     public static AiDeckStatistics fromCards(Iterable<Card> cards) {
+        List<CardRules> rules = Lists.newArrayList();
+        for (Card c : cards) {
+            if (c.getRules() == null) {
+                System.err.println(c + " CardRules is null" + (c.isToken() ? "/token" : "."));
+                continue;
+            }
+            rules.add(c.getRules());
+        }
+        return fromRules(rules);
+    }
+
+    public static AiDeckStatistics fromRules(Iterable<CardRules> cards) {
         int totalCMC = 0;
         int totalCount = 0;
         int numLands = 0;
         int maxCost = 0;
         int[] maxPips = new int[6];
         int maxColoredCost = 0;
-        for (Card c : cards) {
-            CardRules rules = c.getRules();
-            if (rules == null) {
-                System.err.println(c + " CardRules is null" + (c.isToken() ? "/token" : "."));
-                continue;
-            }
+        for (CardRules rules : cards) {
             CardType type = rules.getType();
             if (type.isLand()) {
                 numLands += 1;
@@ -83,15 +92,16 @@ public class AiDeckStatistics {
                 );
     }
 
-    public static AiDeckStatistics fromDeck(Deck deck, Player player) {
-        List<Card> cardlist = new ArrayList<>();
+    public static AiDeckStatistics fromDeck(Deck deck) {
+        List<CardRules> cardlist = new ArrayList<>();
         for (final Map.Entry<DeckSection, CardPool> deckEntry : deck) {
             switch (deckEntry.getKey()) {
                 case Main:
                 case Commander:
                     for (final Map.Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        Card card = Card.fromPaperCard(poolEntry.getKey(), player);
-                        cardlist.add(card);
+                        for (int i = 0; i < poolEntry.getValue(); i++) {
+                            cardlist.add(poolEntry.getKey().getRules());
+                        }
                     }
                     break;
                 default:
@@ -99,7 +109,7 @@ public class AiDeckStatistics {
             }
         }
 
-        return fromCards(cardlist);
+        return fromRules(cardlist);
     }
 
     public static AiDeckStatistics fromPlayer(Player player) {
@@ -117,7 +127,11 @@ public class AiDeckStatistics {
             return fromCards(cardlist);
         }
 
-        return fromDeck(deck, player);
+        // These statistics are a pure function of the decklist, which doesn't change during a game.
+        // Simulation copies share the same Deck instance (see GameCopier.clonePlayer), so caching on
+        // it also avoids rebuilding every card of the deck for each simulated state that gets scored.
+        return AiCache.getCached("aiDeckStatistics", () -> fromDeck(deck),
+                List.of(AiCache::identity), deck);
     }
 
 }

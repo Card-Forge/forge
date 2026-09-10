@@ -1,0 +1,8 @@
+Name:Elda, Conjurer of Spectacle
+ManaCost:2 G W
+Types:Legendary Creature Human Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+nonLegendary | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Demonstrate | Description$ The first nonlegendary creature spell you cast each turn has demonstrate. (When you cast that spell, you may copy it. If you do, choose an opponent to also copy it. Each copy becomes a token.)
+SVar:X:Count$ThisTurnCast_Creature.YouCtrl+nonLegendary
+DeckHas:Ability$Counters
+Oracle:The first nonlegendary creature spell you cast each turn has demonstrate. (When you cast that spell, you may copy it. If you do, choose an opponent to also copy it. Each copy becomes a token.)

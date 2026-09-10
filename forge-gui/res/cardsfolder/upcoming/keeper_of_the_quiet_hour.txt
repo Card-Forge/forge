@@ -1,0 +1,7 @@
+Name:Keeper of the Quiet Hour
+ManaCost:3
+Types:Artifact Creature Chimera
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card")
+SVar:DBToken:DB$ Empower | Type$ Jace | Num$ 2
+Oracle:When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card")

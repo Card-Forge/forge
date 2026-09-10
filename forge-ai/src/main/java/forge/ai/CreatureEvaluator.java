@@ -242,6 +242,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(50, "eot-leaves");
         } else {
             for (Trigger t : c.getTriggers()) {
+                if (t.getParamOrDefault("TriggerDescription", "").startsWith("Landfall")) {
+                    value += addValue(10, "landfall");
+                }
+
                 if (!TriggerType.Phase.equals(t.getMode())) {
                     continue;
                 }
@@ -290,7 +294,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     }
 
     private int evaluateSpellAbility(SpellAbility sa) {
-        // Pump abilities
         if (sa.getApi() == ApiType.Pump) {
             // Pump abilities that grant +X/+X to the card
             if ("+X".equals(sa.getParam("NumAtt"))

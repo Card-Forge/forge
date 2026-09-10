@@ -3,9 +3,13 @@ package forge.adventure.scene;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 import forge.adventure.util.Config;
+import forge.adventure.util.ShaderDrawable;
+import forge.sound.SoundSystem;
+import forge.util.ShaderUtil;
 
 /**
  * Base class for all rendered scenes
@@ -13,30 +17,51 @@ import forge.adventure.util.Config;
 public abstract class Scene implements Disposable {
 
     static class SceneControllerListener implements ControllerListener {
+        // On iOS, IosControllerManager fires connected() during Controllers
+        // initialization for already-present controllers — before any scene
+        // exists, so Forge.getCurrentScene() can still be null here.
 
         @Override
         public void connected(Controller controller) {
-            Forge.getCurrentScene().connected(controller);
+            Scene scene = Forge.getCurrentScene();
+            if (scene != null) {
+                scene.connected(controller);
+            }
         }
 
         @Override
         public void disconnected(Controller controller) {
-            Forge.getCurrentScene().disconnected(controller);
+            Scene scene = Forge.getCurrentScene();
+            if (scene != null) {
+                scene.disconnected(controller);
+            }
         }
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
-            return Forge.getCurrentScene().buttonDown(controller, i);
+            if (!SoundSystem.instance.hasWindowFocus()) {
+                return false;
+            }
+            Scene scene = Forge.getCurrentScene();
+            return scene != null && scene.buttonDown(controller, i);
         }
 
         @Override
         public boolean buttonUp(Controller controller, int i) {
-            return Forge.getCurrentScene().buttonUp(controller, i);
+            if (!SoundSystem.instance.hasWindowFocus()) {
+                return false;
+            }
+            Scene scene = Forge.getCurrentScene();
+            return scene != null && scene.buttonUp(controller, i);
         }
 
         @Override
         public boolean axisMoved(Controller controller, int i, float v) {
-            return Forge.getCurrentScene().axisMoved(controller, i, v);
+            if (!SoundSystem.instance.hasWindowFocus()) {
+                return false;
+            }
+            Scene scene = Forge.getCurrentScene();
+            return scene != null && scene.axisMoved(controller, i, v);
         }
     }
 
@@ -97,5 +122,24 @@ public abstract class Scene implements Disposable {
 
     }
 
-
+    private ShaderDrawable lastPreviewDrawable;
+    // move here so Scene can access it
+    public ShaderDrawable getLastPreviewDrawable(TextureRegion region) {
+        if (lastPreviewDrawable == null) {
+            // initialize
+            float mul = 1.2f;
+            float width = getIntendedWidth();
+            float height = getIntendedHeight();
+            float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
+            // set default shader parameters
+            lastPreviewDrawable = new ShaderDrawable(ShaderUtil.getInstance().getShaderPix());
+            lastPreviewDrawable.setUniformSetter(shader -> {
+                shader.setUniformf("u_resolution", width, height);
+                shader.setUniformf("u_pixelSize", pixelSize);
+                shader.setUniformf("u_bias", 0.8f);
+            });
+        }
+        lastPreviewDrawable.setRegion(region);
+        return lastPreviewDrawable;
+    }
 }

@@ -10,4 +10,4 @@ SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+!IsImprinted | 
 SVar:DBPlay:DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | ValidSA$ Instant,Sorcery | Optional$ True | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Number$0
-Oracle:{4}, {T}: Roll a d20. Each opponent exiles cards from the top of their library until they exile an instant or sorcery card, then shuffles the rest into their library. You may cast up to X instant and/or sorcery spells from among cards exiled this way without paying their mana costs.\n19 | X is one.\n10-19 | X is two.\n20 | X is three.
+Oracle:{4}, {T}: Roll a d20. Each opponent exiles cards from the top of their library until they exile an instant or sorcery card, then shuffles the rest into their library. You may cast up to X instant and/or sorcery spells from among cards exiled this way without paying their mana costs.\n1—9 | X is one.\n10—19 | X is two.\n20 | X is three.

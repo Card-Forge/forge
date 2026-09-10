@@ -37,7 +37,7 @@ public class Ward extends KeywordWithCost {
     @Override
     public String getTitleCost() {
         if (costs == null) {
-            return super.getTitleCost();
+            return super.getTitleCost() + (!cost.isOnlyManaCost() ? "." : "");
         }
 
         return Lang.joinHomogenous(costs.values(), c -> (c.isOnlyManaCost() ? "pay " : "") + c.toSimpleString(), "or");
@@ -55,7 +55,7 @@ public class Ward extends KeywordWithCost {
     protected String costToReminderDesc(Cost c) {
         String costString = c.toSimpleString();
         if (costString.startsWith("Pay ")) {
-            costString = costString.replace("Pay ", "pays");
+            costString = costString.replace("Pay ", "pays ");
         } else if (costString.startsWith("Discard ")) {
             costString = costString.replace("Discard", "discards");
         } else if (c.isOnlyManaCost()) {

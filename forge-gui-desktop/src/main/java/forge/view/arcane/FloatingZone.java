@@ -288,6 +288,7 @@ public class FloatingZone extends FloatingCardArea {
     public static void closeAll() {
         for (final FloatingZone cardArea : floatingAreas.values()) {
             cardArea.window.setVisible(false);
+            cardArea.window.dispose(); // release the native window; on macOS setVisible(false) alone can leave it lingering behind the main frame
         }
         floatingAreas.clear();
 

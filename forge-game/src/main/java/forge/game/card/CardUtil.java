@@ -126,7 +126,7 @@ public final class CardUtil {
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, controller, src, ctb);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellCardsCastThisTurn(), valid, controller, src, ctb);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {

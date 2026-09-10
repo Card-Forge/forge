@@ -1,0 +1,11 @@
+Name:Nephilim Epochal
+ManaCost:UR RG GW WB
+Types:Legendary Creature Elder Nephilim
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters, search your library for a Nephilim card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Nephilim | ChangeNum$ 1
+S:Mode$ Continuous | Affected$ Nephilim.YouCtrl | AddPower$ X | AddToughness$ X | Description$ Nephilim you control get +1/+1 for each other Nephilim you control and can't be blocked by monocolored creatures.
+S:Mode$ CantBlockBy | ValidAttacker$ Nephilim.YouCtrl | ValidBlocker$ Creature.MonoColor | Secondary$ True | Description$ Nephilim you control get +1/+1 for each other Nephilim you control and can't be blocked by monocolored creatures.
+SVar:X:Count$Valid Nephilim.YouCtrl/Minus.1
+DeckHints:Type$Nephilim
+Oracle:When Nephilim Epochal enters, search your library for a Nephilim card, reveal it, put it into your hand, then shuffle.\nNephilim you control get +1/+1 for each other Nephilim you control and can't be blocked by monocolored creatures.

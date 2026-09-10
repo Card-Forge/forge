@@ -6,7 +6,7 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:You may choose not to untap CARDNAME during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | Execute$ TrigStore | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is tapped, put a storage counter on it.
 SVar:TrigStore:DB$ PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1
-A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ W | Amount$ X | AILogic$ ManaRitualBattery | SpellDescription$ Add {W} for each storage counter removed this way.
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ W | Amount$ X | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {W} for each storage counter removed this way.
 SVar:X:Count$xPaid
-AI:RemoveDeck:All
+SVar:AIUntapPreference:StorageLand
 Oracle:Icatian Store enters tapped.\nYou may choose not to untap Icatian Store during your untap step.\nAt the beginning of your upkeep, if Icatian Store is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Icatian Store: Add {W} for each storage counter removed this way.

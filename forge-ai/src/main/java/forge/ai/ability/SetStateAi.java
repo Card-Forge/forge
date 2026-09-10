@@ -129,7 +129,7 @@ public class SetStateAi extends SpellAbilityAi {
         return compareCards(card, transformed, ai, ph);
     }
 
-    private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph, String mode) {
+    private boolean shouldTurnFace(Card card, final Player ai, PhaseHandler ph, String mode) {
         if (card.isFaceDown()) {
             if ("TurnFaceDown".equals(mode)) {
                 return false;
@@ -137,13 +137,8 @@ public class SetStateAi extends SpellAbilityAi {
             // hidden agenda
             if (card.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)
                     && card.isInZone(ZoneType.Command)) {
-                String chosenName = card.getNamedCard();
-                for (Card cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
-                    if (cast.getController() == ai && cast.getName().equals(chosenName)) {
-                        return true;
-                    }
-                }
-                return false;
+                final String chosenName = card.getNamedCard();
+                return ai.getGame().getStack().getSpellsCastThisTurn().stream().anyMatch(sp -> ai.equals(sp.getActivatingPlayer()) && sp.getHostCard().getName().equals(chosenName));
             }
 
             // non-permanent facedown can't be turned face up

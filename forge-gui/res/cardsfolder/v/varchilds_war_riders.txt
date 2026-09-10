@@ -9,7 +9,7 @@ SVar:TrigCumUpkeep:DB$ Charm | Choices$ TrigAgeSurvivor,TrigAgeSacrifice
 SVar:TrigAgeSurvivor:DB$ PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ SurvivorDistribution
 SVar:SurvivorDistribution:DB$ Repeat | RepeatSubAbility$ SurvivorRecipient | MaxRepeat$ X | SpellDescription$ Have an opponent create a 1/1 red Survivor creature token for each Age Counter on CARDNAME.
 SVar:SurvivorRecipient:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to create a 1/1 red Survivor creature token. | SubAbility$ Survivor
-SVar:Survivor:DB$ Token | TokenScript$ r_1_1_survivor | TokenOwner$ ChosenPlayer 
+SVar:Survivor:DB$ Token | TokenScript$ r_1_1_survivor | TokenOwner$ ChosenPlayer
 SVar:X:Count$CardCounters.AGE
 SVar:TrigAgeSacrifice:DB$ PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ Sacrifice
 SVar:Sacrifice:DB$ Sacrifice | Defined$ Self | SpellDescription$ Sacrifice CARDNAME.

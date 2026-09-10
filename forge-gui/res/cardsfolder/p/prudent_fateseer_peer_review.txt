@@ -1,0 +1,20 @@
+Name:Prudent Fateseer
+ManaCost:1 WU WU
+Types:Creature Dwarf Wizard
+PT:1/4
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared.
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | ActivationLimit$ 1 | TriggerDescription$ Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | ActivationLimit$ 1 | Secondary$ True | TriggerDescription$ Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+AlternateMode:Prepare
+Oracle:This creature enters prepared.\nWhenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
+
+ALTERNATE
+
+Name:Peer Review
+ManaCost:2 WU
+Types:Sorcery
+A:SP$ Token | TokenScript$ cadet | SubAbility$ DBSurveil | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1.
+Oracle:Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.

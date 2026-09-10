@@ -1,0 +1,8 @@
+Name:Reverent Howl
+ManaCost:2 B
+Types:Instant
+A:SP$ Charm | Choices$ DBDraw,DBPump
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Lifelink | SpellDescription$ Target creature gets +2/+2 and gains lifelink until end of turn.
+Oracle:Choose one —\n• Target player draws two cards and loses 2 life.\n• Target creature gets +2/+2 and gains lifelink until end of turn.

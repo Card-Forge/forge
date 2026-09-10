@@ -1,0 +1,10 @@
+Name:Chief of the Wilds
+ManaCost:2 B G
+Types:Legendary Creature Wolf
+PT:4/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Wolf.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Wolf you control enters, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+S:Mode$ Panharmonicon | ValidCard$ Wolf.Other+YouCtrl,Battle.Other+YouCtrl | Description$ If an ability of another Wolf or battle you control triggers, that ability triggers an additional time.
+DeckHints:Type$Wolf|Battle
+Oracle:Menace\nWhenever another Wolf you control enters, put two +1/+1 counters on Chief of the Wilds.\nIf an ability of another Wolf or battle you control triggers, that ability triggers an additional time.

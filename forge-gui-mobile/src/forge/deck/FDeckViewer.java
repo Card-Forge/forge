@@ -76,7 +76,7 @@ public class FDeckViewer extends FScreen {
     public static void show(final Deck deck0, boolean noPreload, boolean showRanking) {
         if (deck0 == null) { return; }
 
-        if (!noPreload){
+        if (!noPreload) {
             /*preload deck to cache*/
             ImageCache.getInstance().preloadCache(deck0);
         }

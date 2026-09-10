@@ -966,7 +966,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/standard/bluedragon.dck"
+      "decks/miniboss/bluedragon.dck"
     ],
     "ai": "",
     "boss": true,
@@ -5195,7 +5195,7 @@
     "name": "Chandra",
     "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
-      "decks/boss/Fire of Kaladesh.dck"
+      "decks/miniboss/Fire of Kaladesh.dck"
     ],
     "ai": "",
     "boss": true,
@@ -6456,7 +6456,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/conjurer.atlas",
     "deck": [
-      "decks/boss/conjure.dck"
+      "decks/miniboss/conjure.dck"
     ],
     "ai": "",
     "boss": true,
@@ -6642,7 +6642,7 @@
     "name": "Copper Host Brutalizer",
     "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -7371,7 +7371,7 @@
     "name": "Dark Enchanter",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker.atlas",
     "deck": [
-      "decks/standard/darkenchanter.dck"
+      "decks/miniboss/darkenchanter.dck"
     ],
     "ai": "",
     "boss": true,
@@ -9971,7 +9971,7 @@
     "name": "Elesh Norn",
     "sprite": "sprites/enemy/aberration/phyrexian/eleshnorn.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "boss": true,
@@ -12511,7 +12511,7 @@
     "name": "Garruk",
     "sprite": "sprites/enemy/humanoid/human/shaman/garruk.atlas",
     "deck": [
-      "decks/boss/garruk.dck"
+      "decks/miniboss/garruk.dck"
     ],
     "ai": "",
     "boss": true,
@@ -15257,7 +15257,7 @@
     "name": "Grolnok",
     "sprite": "sprites/enemy/aberration/gianttoad.atlas",
     "deck": [
-      "decks/boss/frogboss.dck"
+      "decks/miniboss/frogboss.dck"
     ],
     "ai": "",
     "boss": true,
@@ -15360,9 +15360,10 @@
     "name": "Guardian Angel",
     "sprite": "sprites/enemy/celestial/akroma.atlas",
     "deck": [
-      "decks/boss/angel_rainbow_encounter.dck"
+      "decks/miniboss/angel_rainbow_encounter.dck"
     ],
     "ai": "",
+    "boss": true,
     "difficulty": 0.2,
     "speed": 20,
     "life": 50,
@@ -17500,7 +17501,7 @@
     "name": "Jace",
     "sprite": "sprites/enemy/humanoid/human/wizard/jace.atlas",
     "deck": [
-      "decks/boss/jace.dck"
+      "decks/miniboss/jace.dck"
     ],
     "ai": "",
     "boss": true,
@@ -17645,7 +17646,7 @@
     "name": "Jin-Gitaxias",
     "sprite": "sprites/enemy/aberration/phyrexian/jin-gitaxias.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -18033,7 +18034,7 @@
     "name": "Kiora",
     "sprite": "sprites/enemy/humanoid/merfolk/kiora.atlas",
     "deck": [
-      "decks/boss/kiora.dck"
+      "decks/miniboss/kiora.dck"
     ],
     "ai": "",
     "boss": true,
@@ -18788,7 +18789,7 @@
     "name": "Kozilek",
     "sprite": "sprites/enemy/aberration/eldrazi/kozilek.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -19301,7 +19302,7 @@
     "name": "Liliana",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/boss/liliana_zombies.dck"
+      "decks/miniboss/liliana_zombies.dck"
     ],
     "ai": "",
     "boss": true,
@@ -21659,7 +21660,7 @@
     "name": "Myr Superion",
     "sprite": "sprites/enemy/construct/myr.atlas",
     "deck": [
-      "decks/boss/myr_superion.dck"
+      "decks/miniboss/myr_superion.dck"
     ],
     "ai": "",
     "boss": true,
@@ -21798,9 +21799,10 @@
     "name": "Nahiri",
     "sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
     "deck": [
-      "decks/boss/nahiri.dck"
+      "decks/miniboss/nahiri.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -22343,7 +22345,7 @@
     "name": "Nissa",
     "sprite": "sprites/enemy/humanoid/elf/nissa.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -22558,7 +22560,7 @@
     "name": "Ooze Boss",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/boss/ooze_boss.dck"
+      "decks/miniboss/ooze_boss.dck"
     ],
     "ai": "",
     "boss": true,
@@ -25598,7 +25600,7 @@
     "name": "Scarecrow Captain",
     "sprite": "sprites/enemy/construct/scarecrow.atlas",
     "deck": [
-      "decks/standard/scarecrowcaptain.dck"
+      "decks/miniboss/scarecrowcaptain.dck"
     ],
     "ai": "",
     "boss": true,
@@ -26318,7 +26320,7 @@
     "nameOverride": "Fungus of Slimefoot",
     "sprite": "sprites/enemy/plant/slimefoot.atlas",
     "deck": [
-      "decks/boss/slimefoot.dck"
+      "decks/miniboss/slimefoot.dck"
     ],
     "ai": "",
     "boss": true,
@@ -26499,7 +26501,7 @@
     "name": "Sliver Queen",
     "sprite": "sprites/enemy/aberration/sliver_queen.atlas",
     "deck": [
-      "decks/boss/sliver_queen.dck"
+      "decks/miniboss/sliver_queen.dck"
     ],
     "ai": "",
     "boss": true,
@@ -26830,7 +26832,7 @@
     "name": "Slobad",
     "sprite": "sprites/enemy/humanoid/goblin/slobad.atlas",
     "deck": [
-      "decks/boss/slobad.dck"
+      "decks/miniboss/slobad.dck"
     ],
     "ai": "",
     "boss": true,
@@ -27110,7 +27112,7 @@
     "name": "Sorin",
     "sprite": "sprites/enemy/undead/sorin.atlas",
     "deck": [
-      "decks/boss/sorin.dck"
+      "decks/miniboss/sorin.dck"
     ],
     "ai": "",
     "boss": true,
@@ -28113,9 +28115,10 @@
     "name": "Teferi",
     "sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
     "deck": [
-      "decks/boss/teferi_boss.dck"
+      "decks/miniboss/teferi_boss.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 31,
@@ -28200,7 +28203,7 @@
     "nameOverride": "Zedruu's Cook",
     "sprite": "sprites/enemy/humanoid/halfling/korred.atlas",
     "deck": [
-      "decks/boss/thecheff.dck"
+      "decks/miniboss/thecheff.dck"
     ],
     "ai": "",
     "boss": true,
@@ -28325,7 +28328,7 @@
     "name": "The Hydra of Shandalaar",
     "sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
     "deck": [
-      "decks/standard/hydraboss.dck"
+      "decks/miniboss/hydraboss.dck"
     ],
     "ai": "",
     "boss": true,
@@ -28371,7 +28374,7 @@
     "name": "Tibalt",
     "sprite": "sprites/enemy/fiend/tibalt.atlas",
     "deck": [
-      "decks/boss/tibalt.dck"
+      "decks/miniboss/tibalt.dck"
     ],
     "ai": "",
     "boss": true,
@@ -28615,9 +28618,10 @@
     "name": "Torturer",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandittorturer.atlas",
     "deck": [
-      "decks/boss/torturer.dck"
+      "decks/miniboss/torturer.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 20,
@@ -29504,7 +29508,7 @@
     "name": "Urabrask",
     "sprite": "sprites/enemy/aberration/phyrexian/urabrask.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "boss": true,
@@ -29587,9 +29591,10 @@
     "name": "Valyx Feaster of Torment",
     "sprite": "sprites/enemy/fiend/valyx.atlas",
     "deck": [
-      "decks/boss/valyx.dck"
+      "decks/miniboss/valyx.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -30052,7 +30057,7 @@
     "name": "Vorinclex",
     "sprite": "sprites/enemy/aberration/phyrexian/vorinclex.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -30256,7 +30261,7 @@
     "name": "Walter, the Stray Camel",
     "sprite": "sprites/enemy/beast/largemammals/camel.atlas",
     "deck": [
-      "decks/boss/walter.dck"
+      "decks/miniboss/walter.dck"
     ],
     "ai": "",
     "boss": true,
@@ -31315,7 +31320,7 @@
     "name": "Xira",
     "sprite": "sprites/enemy/fey/xira.atlas",
     "deck": [
-      "decks/boss/xira.dck"
+      "decks/miniboss/xira.dck"
     ],
     "ai": "",
     "boss": true,
@@ -31502,7 +31507,7 @@
     "name": "Zedruu",
     "sprite": "sprites/enemy/humanoid/minotaur/zedru.atlas",
     "deck": [
-      "decks/boss/zedruubis.dck"
+      "decks/miniboss/zedruubis.dck"
     ],
     "ai": "",
     "boss": true,

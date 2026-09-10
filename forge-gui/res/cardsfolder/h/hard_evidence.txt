@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Token | TokenScript$ u_0_3_crab | TokenOwner$ You | SubAbility$ DBInvestigate | SpellDescription$ Create a 0/3 blue Crab creature token.
 SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate.
 DeckHas:Ability$Investigate|Token
-Oracle:Create a 0/3 blue Crab creature token.\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+Oracle:Create a 0/3 blue Crab creature token.\nInvestigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

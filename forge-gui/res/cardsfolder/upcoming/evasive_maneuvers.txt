@@ -1,0 +1,7 @@
+Name:Evasive Maneuvers
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.blocking | ValidTgtsDesc$ blocking creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBDraw | SpellDescription$ Target blocking creature you control gets +2/+2 until end of turn.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:Target blocking creature you control gets +2/+2 until end of turn.\nDraw a card.

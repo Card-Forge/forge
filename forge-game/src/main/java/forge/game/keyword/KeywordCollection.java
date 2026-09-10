@@ -218,7 +218,7 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
         return result;
     }
 
-    public void applyChanges(Iterable<IKeywordsChange> changes) {
+    public void applyChanges(Iterable<? extends IKeywordsChange> changes) {
         for (final IKeywordsChange ck : changes) {
             ck.applyKeywords(this);
         }

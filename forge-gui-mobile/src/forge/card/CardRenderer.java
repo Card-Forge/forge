@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.Multiset;
 
 import forge.CachedCardImage;
 import forge.Forge;
@@ -83,6 +84,16 @@ public class CardRenderer {
         int g = Integer.parseInt(s.substring(2, 4), 16);
         int b = Integer.parseInt(s.substring(4, 6), 16);
         return FSkinColor.fromRGB(r, g, b);
+    }
+
+    /** Outset-only rings so the actionable border on the card edge stays visible underneath. */
+    private static void drawAutoTapGlow(Graphics g, float cx, float cy, float cw, float ch) {
+        final float outer = Utils.scale(3f);
+        final float inner = Utils.scale(1.5f);
+        g.drawRect(BORDER_THICKNESS, FSkinColor.alphaColor(Color.YELLOW, 0.30f),
+                cx - outer, cy - outer, cw + outer * 2, ch + outer * 2);
+        g.drawRect(BORDER_THICKNESS, FSkinColor.alphaColor(Color.YELLOW, 0.55f),
+                cx - inner, cy - inner, cw + inner * 2, ch + inner * 2);
     }
 
     // class that simplifies the callback logic of CachedCardImage
@@ -631,8 +642,8 @@ public class CardRenderer {
             }
         }
         if (image != null) {
-            if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) {
-                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
+            if (image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") || card.useCardArt())) {
+                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.getInstance().isFullBorder(image))
@@ -655,15 +666,24 @@ public class CardRenderer {
         }
     }
 
+    //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
+    public static int getCrackOverlay(int damage) {
+        return switch (damage) {
+            case 0,1,2 -> 0;
+            case 3,4 -> 1;
+            case 5,6 -> 2;
+            default -> 3;
+        };
+    }
+
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
         drawCard(g, card, x, y, w, h, pos, rotate, false, false, false);
     }
-
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList, boolean magnify) {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage(showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
-        TextureRegion crack_overlay = FSkin.getCracks().get(card.getCrackOverlayInt());
+        TextureRegion crack_overlay = FSkin.getCracks().get(getCrackOverlay(card.getDamage()));
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
@@ -675,7 +695,7 @@ public class CardRenderer {
         }
         if (image != null) {
             float cardR = ImageCache.getInstance().getRadius(image);
-            if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) {
+            if (image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") ||card.useCardArt())) {
                 CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !CardRendererUtils.showCardIdOverlay(card));
             } else if (showsleeves) {
                 if (!card.isForeTold())
@@ -832,9 +852,15 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
-        } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
-                && MatchController.instance.isWeaklySelectable(card)) {
-            g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
+        } else {
+            if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
+                    && MatchController.instance.isWeaklySelectable(card)) {
+                g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
+            }
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW)
+                    && MatchController.instance.getWeakSelectableStrength(card) >= 2) {
+                drawAutoTapGlow(g, cx, cy, cw, ch);
+            }
         }
         //Ability Icons
         if (unselectable) {
@@ -956,10 +982,7 @@ public class CardRenderer {
         int currentCounter = 0;
 
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
-            int maxCounters = 0;
-            for (Integer numberOfCounters : card.getCounters().values()) {
-                maxCounters = Math.max(maxCounters, numberOfCounters);
-            }
+            int maxCounters = card.getCounters().entrySet().stream().mapToInt(Multiset.Entry::getCount).max().orElse(0);
 
             //if (counterBoxBaseWidth + font.getBounds(String.valueOf(maxCounters)).width > w) {
             if (font != null && !String.valueOf(maxCounters).isEmpty()) {
@@ -971,9 +994,9 @@ public class CardRenderer {
             }
         }
         int c = 0;
-        for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
-            final CounterType counter = counterEntry.getKey();
-            final int numberOfCounters = counterEntry.getValue();
+        for (Multiset.Entry<CounterType> counterEntry : card.getCounters().entrySet()) {
+            final CounterType counter = counterEntry.getElement();
+            final int numberOfCounters = counterEntry.getCount();
             //final float counterBoxRealWidth = counterBoxBaseWidth + font.getBounds(String.valueOf(numberOfCounters)).width + 4;
             if (font != null && !String.valueOf(numberOfCounters).isEmpty()) {
                 layout.setText(font, String.valueOf(numberOfCounters));
@@ -1024,9 +1047,7 @@ public class CardRenderer {
     private static void drawCounterImage(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
         int number = 0;
         if (card.getCounters() != null) {
-            for (final Integer i : card.getCounters().values()) {
-                number += i;
-            }
+            number = card.getCounters().size();
         }
 
         final int counters = number;

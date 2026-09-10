@@ -1,0 +1,19 @@
+Name:Thranduil, Sindarin Liege
+ManaCost:2 GU GU
+Types:Legendary Creature Elf Noble
+PT:2/3
+S:Mode$ Continuous | Affected$ Elf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 1/1 green Elf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_elf | TokenOwner$ You
+AlternateMode:Adventure
+Oracle:Other Elves you control get +1/+1.\nLandfall — Whenever a land you control enters, create a 1/1 green Elf creature token.
+
+ALTERNATE
+
+Name:Silvan Rally
+ManaCost:1 GU GU
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill four cards, then put up to two land cards from among them into your hand. (Then exile this card. You may cast the creature later from exile.)
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | Hidden$ True | ChangeType$ Land.IsRemembered | ChangeNum$ 2 | SelectPrompt$ You may choose a land card milled this way | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill four cards, then put up to two land cards from among them into your hand. (Then exile this card. You may cast the creature later from exile.)

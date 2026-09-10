@@ -252,7 +252,7 @@ public class GameAction {
 
             // need to copy counters when card enters another zone than hand or library
             if (StaticAbilityCountersRemain.countersRemain(lastKnownInfo, zoneTo)) {
-                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
+                copied.setCounters(HashMultiset.create(lastKnownInfo.getCounters()));
             }
 
             // perpetual stuff
@@ -699,11 +699,11 @@ public class GameAction {
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
             // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "All");
-            SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
             eff.getOwner().getZone(ZoneType.Command).add(eff);
         }
 
         eff.addRemembered(copied);
+        copied.addLeavesPlayCommand(() -> cleanStaticEffect(eff, copied));
         // refresh needed for canEnchant checks
         checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
         return eff;
@@ -1095,26 +1095,23 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        game.forEachCardInGame(new Visitor<>() {
-            @Override
-            public boolean visit(final Card c) {
-                // need to get Card from preList if able
-                final Card co = preList.get(c);
-                for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
-                        staticAbilities.add(stAb);
-                    }
+        game.forEachCardInGame(c -> {
+            // need to get Card from preList if able
+            final Card co = preList.get(c);
+            for (StaticAbility stAb : co.getStaticAbilities()) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                    staticAbilities.add(stAb);
                 }
-                if (!co.getStaticCommandList().isEmpty()) {
-                    staticList.add(co);
-                }
-                for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
-                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
-                        staticAbilities.add(stAb);
-                    }
-                }
-                return true;
             }
+            if (!co.getStaticCommandList().isEmpty()) {
+                staticList.add(co);
+            }
+            for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                    staticAbilities.add(stAb);
+                }
+            }
+            return true;
         }, true);
 
         staticAbilities.sort(effectOrder);
@@ -2282,7 +2279,7 @@ public class GameAction {
 
         //shuffle
         List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        Collections.shuffle(shuffledCards);
+        Collections.shuffle(shuffledCards, MyRandom.getRandom());
 
         //check a second hand
         List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());

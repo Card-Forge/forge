@@ -1,0 +1,12 @@
+Name:Meatsqueak, Hoard Lord
+ManaCost:2 G
+Types:Legendary Creature Squirrel
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever another creature dies, create a Food token. This ability triggers only once each turn. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Squirrel.YouCtrl | AddPower$ X | AddToughness$ X | Description$ For every seven Foods you control, Squirrels you control get +3/+3.
+SVar:X:SVar$Y/Times.3
+SVar:Y:Count$Valid Food.YouCtrl/DivideEvenlyDown.7
+DeckHas:Ability$Token
+DeckHints:Type$Squirrel
+Oracle:Whenever another creature dies, create a Food token. This ability triggers only once each turn. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\nFor every seven Foods you control, Squirrels you control get +3/+3.

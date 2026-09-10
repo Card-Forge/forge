@@ -104,7 +104,7 @@ public final class GameActionUtil {
                 lkicheck = true;
             }
 
-            // 601.3e
+            // CR 601.3e
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
@@ -167,6 +167,19 @@ public final class GameActionUtil {
                         newSA.setIntrinsic(inst.isIntrinsic());
 
                         alternatives.add(newSA);
+                    } else if (keyword.startsWith("Beam me up")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
+                        final SpellAbility beamSA = getGraveyardSpellByKeyword(inst, sa, activator,
+                                AlternativeCost.BeamMeUp);
+                        // "if you also return a creature you control to its owner's hand" is an
+                        // additional cost, so with nothing to return the spell is simply not castable
+                        beamSA.getPayCosts().add(new Cost(
+                                "Return<1/Creature.YouCtrl+canBeBeamedUp/creature you control>", false));
+
+                        alternatives.add(beamSA);
                     } else if (keyword.startsWith("Flashback")) {
                         if (!source.isInZone(ZoneType.Graveyard)) {
                             continue;
@@ -341,8 +354,7 @@ public final class GameActionUtil {
             }
             final Card host = o.getHost();
 
-            SpellAbility newSA = null;
-
+            SpellAbility newSA;
             if (o.getPayManaCost() == PayManaCost.NO) {
                 newSA = sa.copyWithNoManaCost(activator);
                 newSA.setBasicSpell(false);
@@ -412,7 +424,7 @@ public final class GameActionUtil {
             lkicheck = true;
         }
 
-        // 601.3e
+        // CR 601.3e
         if (lkicheck) {
             // double freeze tracker, so it doesn't update view
             game.getTracker().freeze();
@@ -480,11 +492,9 @@ public final class GameActionUtil {
               costs.add(new OptionalCostValue(OptionalCost.PromiseGift, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-                int numKickers = sCosts.length;
-                for (int j = 0; j < numKickers; j++) {
+                for (int j = 0; j < sCosts.length; j++) {
                     final Cost cost = new Cost(sCosts[j], false);
-                    OptionalCost type = null;
-                    type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
+                    OptionalCost type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
                     costs.add(new OptionalCostValue(type, cost));
                 }
             } else if (keyword.equals("Retrace")) {

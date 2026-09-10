@@ -1,8 +1,7 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
-
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -62,8 +61,8 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
-                for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
-                    numberRemoved += tgtCard.subtractCounter(e.getKey(), e.getValue(), sa.getActivatingPlayer());
+                for (Multiset.Entry<CounterType> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
+                    numberRemoved += tgtCard.subtractCounter(e.getElement(), e.getCount(), sa.getActivatingPlayer());
                 }
                 //tgtCard.getCounters().clear();
                 continue;

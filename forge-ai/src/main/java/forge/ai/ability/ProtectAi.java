@@ -19,12 +19,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        final List<String> onlyColors = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+        final List<String> onlyColors = MagicColor.Constant.ONLY_COLORS;
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {
@@ -32,7 +31,6 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         final String protection = "Protection from " + color;
-
         return card.hasKeyword(protection);
     }
 

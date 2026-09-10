@@ -9,7 +9,7 @@ Forge is open source software released under the GNU Public License.
 
 Up to 8 players are supported, with each assigned to human or AI control. Player decks can be imported, user-created with the Deck Editor, or automatically generated. Over [99%](Missing-Cards-in-Forge.md) (and counting) of all cards in Magic's existence are available, with the missing ones mostly being pointless to implement in the context (e.g. the notorious *Chaos Orb*) or impossible. That's more than the official Magic Online!
 
-Forge creates a unique experience by combining this enormous card library with some RPG elements in [**Quest mode**](https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258) on the desktop version, and **Planar Conquest** on the mobile version.
+Forge creates a unique experience by combining this enormous card library with some RPG elements in [**Quest mode**](https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258), and **Planar Conquest** on the mobile version.
 
 Forge also features a wide variety of puzzles. For more details and features see the other pages in this wiki.
 

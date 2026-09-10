@@ -1,0 +1,9 @@
+Name:Bolg's Company
+ManaCost:B R
+Types:Creature Goblin Soldier
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Goblin.Other+YouCtrl | Description$ This creature has haste as long as you control another Goblin.
+A:AB$ Mana | Cost$ T Sac<1/Goblin.Other/another Goblin> | Produced$ B R | SpellDescription$ Add {B}{R}.
+SVar:PlayMain1:TRUE
+SVar:DeckHints:Type$Goblin
+Oracle:This creature has haste as long as you control another Goblin.\n{T}, Sacrifice another Goblin: Add {B}{R}.

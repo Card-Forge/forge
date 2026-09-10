@@ -281,14 +281,20 @@ public class HostedMatch {
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
         game.getAction().invoke(() -> {
+            // Capture the current game in a local so this lambda keeps operating on the
+            // game it started even if another thread (e.g. the EDT handling a player's
+            // "quit"/"continue" decision via addNextGameDecision -> endCurrentGame())
+            // concurrently clears the `game` field while match.startGame() is wrapping up.
+            final Game currentGame = game;
+
             if (humanCount == 0) {
                 // Create FControlGamePlayback in game thread to allow pausing
                 playbackControl = new FControlGamePlayback(humanControllers.get(0));
-                playbackControl.setGame(game);
-                game.subscribeToEvents(playbackControl);
+                playbackControl.setGame(currentGame);
+                currentGame.subscribeToEvents(playbackControl);
             }
             // Actually start the game!
-            match.startGame(game, startGameHook);
+            match.startGame(currentGame, startGameHook);
             // this function waits?
             if (endGameHook != null){
                 endGameHook.run();
@@ -309,7 +315,7 @@ public class HostedMatch {
             isMatchOver = match.isMatchOver();
             if (humanCount == 0) {
                 // ... if no human players, let AI decide next game
-                if (game.getRules().getGameType() == GameType.Constructed) {
+                if (currentGame.getRules().getGameType() == GameType.Constructed) {
                     // Dramatic interlude to signal end of game.
                     FThreads.delayInEDT(3000, () -> {
                         if (isMatchOver) {
@@ -386,6 +392,18 @@ public class HostedMatch {
             humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();
+
+        // Force GC here rather than in Match.startGame so it runs ONLY for
+        // GUI-hosted matches — headless AI sims (DeckBattler, SimulateMatch,
+        // quest-draft bracket) build Match directly and bypass HostedMatch.
+        // Runs after game=null + afterGameEnd above, so the finished game's
+        // whole object graph is collectible (more than a gc while it's still
+        // referenced). iOS only: it keeps the iPad under its jetsam ceiling
+        // across the games of a multi-game Commander match; other platforms
+        // don't need it and shouldn't pay the GC stall.
+        if (GuiBase.isIOS()) {
+            System.gc();
+        }
     }
 
     public void pause() {

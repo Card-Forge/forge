@@ -9,6 +9,8 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
+import forge.game.card.CardView;
+import forge.game.card.CardCollection;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
@@ -42,7 +44,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     private final Queue<Card> delaySelectCards = new LinkedList<>();
 
     private boolean bPaid = false;
-    protected Boolean canPayManaCost = null;
+    /** null = not yet evaluated, or not payable; otherwise cards Auto would tap */
+    private CardCollection autoPayManaSources = null;
+    private boolean autoPayManaSourcesKnown = false;
 
     private boolean locked = false;
 
@@ -92,19 +96,18 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 return true;
             }
             return activateDelayedCard();
-        } else {
-            List<SpellAbility> manaAbilities = getAllManaAbilities(card);
-            // Desktop Forge floating menu functionality
-            if (manaAbilities.size() == 1) {
-                return activateManaAbility(card, manaAbilities.get(0));
-            } else {
-                SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
-                if (spellAbility != null) {
-                    return activateManaAbility(card, spellAbility);
-                }
-            }
-            return false;
         }
+
+        List<SpellAbility> manaAbilities = getAllManaAbilities(card);
+        // Desktop Forge floating menu functionality
+        if (manaAbilities.size() == 1) {
+            return activateManaAbility(card, manaAbilities.get(0));
+        }
+        SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
+        if (spellAbility != null) {
+            return activateManaAbility(card, spellAbility);
+        }
+        return true;
     }
 
     protected List<SpellAbility> getAllManaAbilities(Card card) {
@@ -116,8 +119,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
         for (final SpellAbility sa : result) {
             sa.setActivatingPlayer(player);
-            // fix things like retrace
-            // check only if SA can't be cast normally
             if (sa.canPlay(true)) {
                 continue;
             }
@@ -198,7 +199,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
             // Record paying mana from pool here
             getController().macros().addRememberedAction(new PayManaFromPoolAction(colorCode));
-            onManaAbilityPaid();
             showMessage();
         }
     }
@@ -323,9 +323,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 producedColorMask |= color;
             }
         }
-        ColorSet producedAndNeededColors = ColorSet.fromMask(producedColorMask);
 
-        chosen.setManaExpressChoice(producedAndNeededColors);
+        chosen.setManaExpressChoice(ColorSet.fromMask(producedColorMask));
 
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
 
@@ -348,9 +347,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
                     // force refresh in case too much mana got spent
                     updateButtons();
-                    canPayManaCost = null;
+                    invalidateAutoPayManaSources();
                 }
-                onManaAbilityPaid();
             }
             // Need to call this to unlock
             onStateChanged();
@@ -401,24 +399,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (activateDelayedCard()) {
             return;
         }
-        // Drop just-tapped sources from the highlight set.
-        getController().pushActionableCards(true);
         if (supportAutoPay()) {
-            if (canPayManaCost == null) {
-                //use AI utility to determine if mana cost can be paid if that hasn't been determined yet
-                Evaluator<Boolean> proc = new Evaluator<Boolean>() {
-                    @Override
-                    public Boolean evaluate() {
-                        return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player, effect);
-                    }
-                };
-                runAsAi(proc);
-                canPayManaCost = proc.getResult();
-            }
-            if (canPayManaCost) { //enabled Auto button if mana cost can be paid
+            ensureAutoPayManaSources();
+            if (autoPayManaSources != null) { //enabled Auto button if mana cost can be paid
                 getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
+        // Drop just-tapped sources from the highlight set; emphasize the AI's auto-tap plan.
+        getController().pushActionableCards(true, getAutoTapPreviewViews());
         showMessage(getMessage(), saPaidFor.getView());
     }
 
@@ -439,9 +427,42 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
     }
 
-    protected void onManaAbilityPaid() {} // some inputs overload it
     protected abstract void done();
     protected abstract String getMessage();
+
+    private void invalidateAutoPayManaSources() {
+        autoPayManaSourcesKnown = false;
+        autoPayManaSources = null;
+    }
+
+    private void ensureAutoPayManaSources() {
+        if (autoPayManaSourcesKnown) {
+            return;
+        }
+        final ManaCostBeingPaid costCopy = new ManaCostBeingPaid(manaCost);
+        Evaluator<CardCollection> proc = new Evaluator<>() {
+            @Override
+            public CardCollection evaluate() {
+                return ComputerUtilMana.getManaSourcesToPayCost(costCopy, saPaidFor, player, effect);
+            }
+        };
+        runAsAi(proc);
+        autoPayManaSources = proc.getResult();
+        autoPayManaSourcesKnown = true;
+    }
+
+    /** Cards the Auto button would tap, for emphasized highlighting; null when unavailable. */
+    private Iterable<CardView> getAutoTapPreviewViews() {
+        if (!supportAutoPay() || manaCost == null || manaCost.isPaid()
+                || !autoPayManaSourcesKnown || autoPayManaSources == null) {
+            return null;
+        }
+        final Set<CardView> views = new HashSet<>();
+        for (Card c : autoPayManaSources) {
+            views.add(c.getView());
+        }
+        return views;
+    }
 
     @Override
     public String toString() {

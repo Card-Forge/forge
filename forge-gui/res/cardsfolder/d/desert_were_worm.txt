@@ -1,0 +1,15 @@
+Name:Desert Were-Worm
+ManaCost:4 R R
+Types:Creature Dragon Wurm
+PT:0/5
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +2/+0 for each Mountain you control.
+SVar:X:Count$Valid Mountain.YouCtrl/Times.2
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE12 | NoResolvingCheck$ True | TriggerDescription$ Whenever you attack with creatures with total power 12 or greater for the first time each turn, untap all attacking creatures. After this phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl+attacking | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | SubAbility$ DBStore
+SVar:DBStore:DB$ StoreSVar | SVar$ TrigSwitch | Type$ Number | Expression$ 0
+SVar:PackTactics:Count$Valid Creature.attacking$CardPower/Times.TrigSwitch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
+T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ TrigSwitch | Type$ Number | Expression$ 1
+Oracle:This creature gets +2/+0 for each Mountain you control.\nWhenever you attack with creatures with total power 12 or greater for the first time each turn, untap all attacking creatures. After this phase, there is an additional combat phase.

@@ -345,7 +345,7 @@ ScryfallCode=MSC
 337 R Spark Double @Immanuela Crovius ${"flavorName": "Loki's Double"}
 338 R Professor Hulk @Leroy Steinmann
 339 R Quantum Misalignment @Alexander Skripnikov
-340 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise the Repulsor Shields"}
+340 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise Repulsor Shields"}
 341 R Recurring Insight @Gintas Galvanauskas
 342 R Valeria Richards, Precocious @Justyna Dura
 343 R The Wasp, Winsome Avenger @Raoul Vitale
