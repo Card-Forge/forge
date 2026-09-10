@@ -113,3 +113,7 @@ ScryfallCode=PMEI
 2026-19 R Avengers Tower @Arthur Yuan
 2026-20 R Frantic Search @Jeff Miracola
 2026-21 R Worn Powerstone @Henry G. Higginbotham
+2026-22 M Picard, Steadfast Captain @Mark Spears
+2026-23 M Spock, Logical Choice @Bastien Jez
+2026-24 M Benjamin Sisko, Besieged @Josu Hernaiz
+2027-1 M Final Showdown @Tetsuya Nomura

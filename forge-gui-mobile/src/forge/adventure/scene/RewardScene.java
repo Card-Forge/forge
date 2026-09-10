@@ -108,8 +108,8 @@ public class RewardScene extends UIScene {
         if (selectable == null)
             return;
         RewardActor actor;
-        if (selectable.actor instanceof BuyButton) {
-            actor = ((BuyButton) selectable.actor).rewardActor;
+        if (selectable.actor instanceof BuyButton buyButton) {
+            actor = buyButton.rewardActor;
         } else if (selectable.actor instanceof RewardActor) {
             actor = (RewardActor) selectable.actor;
         } else {
@@ -126,11 +126,10 @@ public class RewardScene extends UIScene {
 
     public void quitScene() {
         //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
-        for (Actor A : new Array.ArrayIterator<>(generated)) {
-            if (A instanceof RewardActor) {
-                ((RewardActor) A).removeTooltip();
-                ((RewardActor) A).dispose();
-                A.remove();
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (actor instanceof RewardActor rewardActor) {
+                rewardActor.removeTooltip();
+                actor.remove();
             }
         }
         //save RAM
@@ -174,17 +173,16 @@ public class RewardScene extends UIScene {
 
     void clearGenerated() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
             if (type == Type.Loot)
-                AdventurePlayer.current().addReward(reward.getReward());
+                AdventurePlayer.current().addReward(rewardActor.getReward());
             if (type == Type.QuestReward)
-                AdventurePlayer.current().addReward(reward.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
-            reward.clearHoldToolTip();
+                AdventurePlayer.current().addReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
+            rewardActor.clearLabel();
             try {
-                stage.getActors().removeValue(reward, true);
+                stage.getActors().removeValue(rewardActor, true);
             } catch (Exception e) {
             }
         }
@@ -193,13 +191,12 @@ public class RewardScene extends UIScene {
     public List<RewardActor> getGeneratedRewards() {
         List<RewardActor> rewards = new ArrayList<>();
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
-            if (!reward.frontSideUp())
+            if (!rewardActor.frontSideUp())
                 continue;
-            rewards.add(reward);
+            rewards.add(rewardActor);
         }
         return rewards;
     }
@@ -230,11 +227,10 @@ public class RewardScene extends UIScene {
     private void showLootOrDone() {
         boolean exit = true;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (!(actor instanceof RewardActor)) {
+            if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            RewardActor reward = (RewardActor) actor;
-            if (!reward.isFlipped()) {
+            if (!rewardActor.isFlipped()) {
                 exit = false;
                 break;
             }
@@ -246,15 +242,14 @@ public class RewardScene extends UIScene {
             float delay = 0.09f;
             generated.shuffle();
             for (Actor actor : new Array.ArrayIterator<>(generated)) {
-                if (!(actor instanceof RewardActor)) {
+                if (!(actor instanceof RewardActor rewardActor)) {
                     continue;
                 }
-                RewardActor reward = (RewardActor) actor;
-                if (!reward.isFlipped()) {
+                if (!rewardActor.isFlipped()) {
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
-                            reward.flip();
+                            rewardActor.flip();
                         }
                     }, delay);
                     delay += 0.12f;
@@ -380,8 +375,8 @@ public class RewardScene extends UIScene {
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
-            if (actor instanceof RewardActor) {
-                ((RewardActor) actor).dispose();
+            if (actor instanceof RewardActor rewardActor) {
+                rewardActor.dispose();
             }
         }
         addToSelectable(doneButton);
@@ -397,9 +392,9 @@ public class RewardScene extends UIScene {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
-                    for (Actor A : new Array.ArrayIterator<>(generated)) {
-                        if (A instanceof RewardActor) {
-                            ((RewardActor) A).setAutoSell(autoSell);
+                    for (Actor actor : new Array.ArrayIterator<>(generated)) {
+                        if (actor instanceof RewardActor rewardActor) {
+                            rewardActor.setAutoSell(autoSell);
                         }
                     }
                 }
@@ -582,16 +577,16 @@ public class RewardScene extends UIScene {
 
     private void updateBuyButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (actor instanceof BuyButton) {
-                ((BuyButton) actor).update();
+            if (actor instanceof BuyButton buyButton) {
+                buyButton.update();
             }
         }
     }
 
     private void updateChooseRewardButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
-            if (actor instanceof ChooseRewardButton) {
-                ((ChooseRewardButton) actor).update();
+            if (actor instanceof ChooseRewardButton chooseRewardButton) {
+                chooseRewardButton.update();
             }
         }
     }

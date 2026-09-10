@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
+import forge.Adventure;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
@@ -189,6 +190,7 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public void enter() {
+        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
         GameHUD.getInstance().updateBGM();
         achievementContainer.clear();
@@ -304,6 +306,7 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public boolean back(){
+        Adventure.getInstance().renderTransitionScreen = true;
         Forge.switchScene(lastGameScene==null?GameScene.instance():lastGameScene);
         return true;
     }

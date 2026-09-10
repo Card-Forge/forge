@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Adventure;
 import forge.Forge;
+import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 
@@ -195,7 +196,7 @@ public class UIScene extends Scene {
     public UIScene(String uiFilePath) {
         textboxOpen = false;
         uiFile = uiFilePath;
-        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Adventure.getInstance().getAdventureBatch()) {
+        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Adventure.getInstance().getUiBatch()) {
             @Override
             public boolean keyUp(int keycode) {
                 keyReleased(keycode);
@@ -302,6 +303,7 @@ public class UIScene extends Scene {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+        FrameRate.getInstance().sampleAdventure(stage.getBatch(), Forge.showFPS);
     }
 
     public UIActor getUI() {
@@ -634,7 +636,6 @@ public class UIScene extends Scene {
     }
 
     Image screenImage;
-    TextureRegion backgroundTexture;
 
     @Override
     public boolean leave() {
@@ -646,11 +647,11 @@ public class UIScene extends Scene {
     @Override
     public void enter() {
         if (screenImage != null) {
-            //create from lastPreview from header...
             try {
-                backgroundTexture = new TextureRegion(Forge.lastPreview);
-                backgroundTexture.flip(false, true);
-                screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
+                if (Forge.lastPreview != null) {
+                    // set shaderDrawable to screenImage
+                    screenImage.setDrawable(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -720,15 +721,39 @@ public class UIScene extends Scene {
 
     public TextureRegion getUIBackground() {
         try {
-            Actor a = ui.getChild(0);
-            if (a instanceof Image) {
-                Drawable d = ((Image) a).getDrawable();
-                if (d instanceof TextureRegionDrawable) {
-                    return ((TextureRegionDrawable) d).getRegion();
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                if (originalDrawable instanceof TextureRegionDrawable textureRegionDrawable) {
+                    return textureRegionDrawable.getRegion();
                 }
             }
         } catch (Exception e) {
             return null;
+        }
+        return null;
+    }
+
+    public void setUIBackground(Drawable drawable) {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                image.setDrawable(drawable);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Drawable getBGDrawable() {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                return image.getDrawable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

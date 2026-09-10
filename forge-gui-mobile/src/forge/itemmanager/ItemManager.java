@@ -81,7 +81,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).selectable().build();
     private final FLabel btnView = new FLabel.ButtonBuilder()
             .iconScaleFactor(0.9f).selectable().build(); //icon set later
-    private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
+    private final FLabel btnAdvancedSearchOptions = new FLabel.ButtonBuilder()
             .selectable(true).align(Align.center)
             .icon(Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS).iconScaleFactor(0.9f)
             .build();

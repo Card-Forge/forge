@@ -43,7 +43,7 @@ public class CardRendererUtils {
         boolean showAlt = false;
         if (card.hasAlternateState()) {
             if (card.hasBackSide())
-                showAlt = reference.contains(card.getBackSideName()) || card.getAlternateState().getAbilityText().contains(reference);
+                showAlt = reference.contains(card.getAlternateState().getName()) || card.getAlternateState().getAbilityText().contains(reference);
             else if (card.hasSecondaryState())
                 showAlt = reference.equals(card.getAlternateState().getAbilityText());
             else if (card.isSplitCard()) {

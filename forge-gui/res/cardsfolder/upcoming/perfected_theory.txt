@@ -2,6 +2,6 @@ Name:Perfected Theory
 ManaCost:U
 Types:Instant
 A:SP$ Charm | Choices$ DBAnimate1,DBAnimate2
-SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | Power$ 1 | Toughness$ 1 | IsCurse$ True | SpellDescription$ Target creature has base power and toughness 1/1 until end of turn.
-SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | Power$ 4 | Toughness$ 5 | SpellDescription$ Target creature has base power and toughness 4/5 until end of turn.
+SVar:DBAnimate1:DB$ Animate | ValidTgts$ Creature | Power$ 1 | Toughness$ 1 | IsCurse$ True | SpellDescription$ Target creature has base power and toughness 1/1 until end of turn.
+SVar:DBAnimate2:DB$ Animate | ValidTgts$ Creature | Power$ 4 | Toughness$ 5 | SpellDescription$ Target creature has base power and toughness 4/5 until end of turn.
 Oracle:Choose one —\n• Target creature has base power and toughness 1/1 until end of turn.\n• Target creature has base power and toughness 4/5 until end of turn.

@@ -43,6 +43,13 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
 public class PlayEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        // cards are played from hand unless ValidZone says otherwise
+        return zoneParamIsLibrary(sa, "ValidZone");
+    }
+
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -117,9 +124,11 @@ public class PlayEffect extends SpellAbilityEffect {
                         .map(name -> name.replace(";", ","))
                         .map(cardDb::getUniqueByName);
             } else if (valid.equalsIgnoreCase("sorcery")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 cards = cardDb.streamUniqueCards()
                         .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY));
             } else if (valid.equalsIgnoreCase("instant")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 cards = cardDb.streamUniqueCards()
                         .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT));
             } else {

@@ -180,6 +180,8 @@ Creatures with "Multiple" in this SVar will always be preferred when the AI ench
 * `EquipMe:{Multiple/Once>}`
 Creatures with "Multiple" in this SVar will always be preferred when the AI equips, creatures with "Once" only if they are not equipped already.
 
+* `DonateMe`
+
 * `DoNotDiscardIfAble`
 * `DiscardMe`
 

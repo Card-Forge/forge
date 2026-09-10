@@ -226,7 +226,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         continue;
                     }
                     // The loadPOI generates booster and other things that may take time to load, so show a little loading text.
-                    OverlayText.getInstance().update("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} L O A D I N G ");
+                    OverlayText.getInstance().update("[%240]" + GameScene.instance().getLocationColorID() + "{CAROUSEL} A U T O S A V E ");
                     startPause(1f, ()-> {
                         WorldSave.getCurrentSave().autoSave();
                         loadPOI(point.getPointOfInterest());
