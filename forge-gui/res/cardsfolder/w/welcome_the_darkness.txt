@@ -1,7 +1,7 @@
 Name:Welcome the Darkness
 ManaCost:X B
 Types:Instant
-A:SP$ Draw | Cost$ XMin1 X B | NumCards$ X | SubAbility$ DBToken
+A:SP$ Draw | Cost$ XMin1 X B | NumCards$ X | SubAbility$ DBToken | AILogic$ WelcomeTheDarkness
 SVar:DBToken:DB$ Token | TokenScript$ b_x_x_demon_flying | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBSetLife | SpellDescription$ X can't be 0. Draw X cards. Create an X/X black Demon creature token with flying. Your life total becomes X. You can't gain life for the rest of the game.
 SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantGainLife | Duration$ Permanent
