@@ -156,7 +156,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                             pc = StaticData.instance().getCommonCards().getCard(name, editionCode);
                         }
                         Card card = Card.fromPaperCard(pc, player);
-
+                        CardUtil.turnToRightFace(name, card);
                         if (sa.hasParam("TokenCard")) {
                             card.setTokenCard(true);
                         }

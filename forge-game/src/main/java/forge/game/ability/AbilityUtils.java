@@ -3726,6 +3726,15 @@ public class AbilityUtils {
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
+        if (def.startsWith("PlaneswalkerType")) {
+            final Set<String> walkerTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                walkerTypes.addAll(card.getType().getPlaneswalkerTypes());
+            }
+
+            return doXMath(walkerTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         //Per request for custom cards.
         if (def.startsWith("LandType")) {
             final Set<String> landTypes = Sets.newHashSet();

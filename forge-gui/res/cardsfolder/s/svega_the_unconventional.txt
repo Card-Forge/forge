@@ -1,0 +1,19 @@
+Name:Svega, the Unconventional
+ManaCost:1 G W U
+Types:Legendary Planeswalker Svega
+Loyalty:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land enters under your control, put a loyalty counter on target planeswalker.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Planeswalker | CounterType$ LOYALTY | CounterNum$ 1 | TgtPrompt$ Select target Planeswalker
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ all_1_1_attendee | TokenAmount$ Y | SpellDescription$ For each planeswalker type among planeswalkers you control, create a 1/1 Attendee creature token that’s all colors.
+A:AB$ NameCard | Defined$ You | ValidCards$ Planeswalker.Elspeth+cmcEQX,Planeswalker.Teferi+cmcEQX,Planeswalker.Liliana+cmcEQX,Planeswalker.Chandra+cmcEQX,Planeswalker.Garruk+cmcEQX | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | SubAbility$ DBMake | StackDescription$ SpellDescription | SpellDescription$ Choose an Elspeth, Teferi, Liliana, Chandra, or Garruk planeswalker card name with mana value X. Create a copy of the card with the chosen name. You may cast the copy without paying its mana cost.
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ None | WithoutManaCost$ True | Amount$ All | CopyCard$ True | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$Valid Planeswalker.YouCtrl$PlaneswalkerType
+SVar:BuffedBy:Land,Planeswalker
+DeckHints:Type$Planeswalker
+Text:CARDNAME can be your commander.
+AI:RemoveDeck:Random
+DeckHas:Ability$Token
+Oracle:Landfall — Whenever a land enters under your control, put a loyalty counter on target planeswalker.\n[−2]: For each planeswalker type among planeswalkers you control, create a 1/1 Attendee creature token that’s all colors.\n[−X]: Choose an Elspeth, Teferi, Liliana, Chandra, or Garruk planeswalker card name with mana value X. Create a copy of the card with the chosen name. You may cast the copy without paying its mana cost.\nSvega can be your commander.

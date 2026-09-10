@@ -1,0 +1,13 @@
+Name:The Disciple of Nissa
+ManaCost:2 G
+Types:Legendary Creature Elf Wizard
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever the Disciple of Nissa attacks, you may pay {X}{X}{X}{G}{G}. When you do, create X tokens that are copies of different Nissa planeswalkers chosen at random. They each enter with an additional loyalty counter. (There are currently eleven. Yes, Nissa, Sage Animist counts. Perhaps look up the list and roll a D20?)
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X X X G G | Execute$ RepeatCopy | TriggerDescription$ When you do, create X tokens that are copies of different Nissa planeswalkers chosen at random.
+SVar:RepeatCopy: DB$ Repeat | MaxRepeat$ X | RepeatSubAbility$ ChooseCard | AILogic$ MaxX | SubAbility$ DBMake | StackDescription$ SpellDescription
+SVar:ChooseCard:DB$ NameCard | Defined$ You | ValidCards$ Planeswalker.Nissa| AtRandom$ True | ExcludeChosen$ True
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | WithCountersType$ LOYALTY | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+SVar:X:Count$xPaid
+Oracle:Whenever the Disciple of Nissa attacks, you may pay {X}{X}{X}{G}{G}. When you do, create X tokens that are copies of different Nissa planeswalkers chosen at random. They each enter with an additional loyalty counter. (There are currently eleven. Yes, Nissa, Sage Animist counts. Perhaps look up the list and roll a D20?)

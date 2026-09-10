@@ -2037,6 +2037,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 .map(CardFaceView::new)
                 .sorted()
                 .collect(Collectors.toList());
+        if (choices.isEmpty())
+            return null;
         CardFaceView cardFaceView = getGui().one(message, choices);
         return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
@@ -2666,13 +2668,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                  final String message) {
         while (true) {
             final ICardFace cardFace = chooseSingleCardFace(sa, message, cpp, sa.getHostCard().getName());
+            if (cardFace == null)
+                return "";
             final PaperCard cp = FModel.getMagicDb().getCommonCards().getCard(cardFace.getName());
             // the Card instance for test needs a game to be tested
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
+            CardUtil.turnToRightFace(cardFace.getName(), instanceForPlayer);
             // TODO need the valid check be done against the CardFace?
-            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
-                // it need to return name for card face
-                return cardFace.getName();
+            for (String v : valid.split(",")) {
+                if (instanceForPlayer.isValid(v, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
+                    // it need to return name for card face
+                    return cardFace.getName();
+                }
             }
         }
     }
@@ -3376,21 +3383,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
                     if (targetZone == ZoneType.Battlefield) {
-                        if (!forgeCard.getName().equals(f.getName())) {
-                            if (forgeCard.getRules().getSplitType().equals(CardSplitType.Specialize)) {
-                                for (Map.Entry<CardStateName, ICardFace> e : forgeCard.getRules().getSpecializeParts().entrySet()) {
-                                    if (f.getName().equals(e.getValue().getName())) {
-                                        forgeCard.changeToState(e.getKey());
-                                        break;
-                                    }
-                                }
-                            } else {
-                                forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
-                                if (forgeCard.getCurrentStateName().equals(CardStateName.Backside)) {
-                                    forgeCard.setBackSide(true);
-                                }
-                            }
-                        }
+                        CardUtil.turnToRightFace(f.getName(), forgeCard);
 
                         if (noTriggers) {
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {

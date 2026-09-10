@@ -93,22 +93,30 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             } else {
                 // use CardFace because you might name a alternate names
                 Predicate<ICardFace> cpp = x -> true;
+                List<Predicate<ICardFace>> conditions = new ArrayList<>();
                 if (sa.hasParam("ValidCards")) {
-                    //Calculating/replacing this must happen before running valid in CardFacePredicates
-                    if (valid.contains("cmcEQ") && !StringUtils.isNumeric(valid.split("cmcEQ")[1])) {
-                        String s = valid.split("cmcEQ")[1];
-                        valid = valid.replace(s, String.valueOf(AbilityUtils.calculateAmount(host, s, sa)));
-                    }
-                    if (valid.contains("ManaCost=")) {
-                        if (valid.contains("ManaCost=Equipped")) {
-                            String s = host.getEquipping().getManaCost().getShortString();
-                            valid = valid.replace("=Equipped", s);
-                        } else if (valid.contains("ManaCost=Imprinted")) {
-                            String s = host.getImprintedCards().getFirst().getManaCost().getShortString();
-                            valid = valid.replace("=Imprinted", s);
+                    for(String v: valid.split(",")) {
+                        //Calculating/replacing this must happen before running valid in CardFacePredicates
+                        if (v.contains("cmcEQ") && !StringUtils.isNumeric(v.split("cmcEQ")[1])) {
+                            String s = v.split("cmcEQ")[1];
+                            v = v.replace(s, String.valueOf(AbilityUtils.calculateAmount(host, s, sa)));
                         }
+                        if (v.contains("ManaCost=")) {
+                            if (v.contains("ManaCost=Equipped")) {
+                                String s = host.getEquipping().getManaCost().getShortString();
+                                v = v.replace("=Equipped", s);
+                            } else if (v.contains("ManaCost=Imprinted")) {
+                                String s = host.getImprintedCards().getFirst().getManaCost().getShortString();
+                                v = v.replace("=Imprinted", s);
+                            }
+                        }
+                        conditions.add(CardFacePredicates.valid(v));
                     }
-                    cpp = CardFacePredicates.valid(valid);
+                    cpp = IterableUtil.or(conditions);
+                    if (sa.hasParam("ExcludeChosen")) {
+                        final Predicate<ICardFace> innerCpp = cpp;
+                        cpp = face -> innerCpp.test(face) && !host.getNamedCards().contains(face.getName());
+                    }
                 }
                 if (randomChoice) {
                     chosen = StaticData.instance().getCommonCards().streamAllFaces()
