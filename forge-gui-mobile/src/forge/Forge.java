@@ -946,6 +946,9 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void render() {
+        // prevent render if isDisposed
+        if (isDisposed)
+            return;
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 

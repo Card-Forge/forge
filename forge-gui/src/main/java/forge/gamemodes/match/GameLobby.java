@@ -166,6 +166,10 @@ public abstract class GameLobby implements IHasGameType {
     protected abstract IGuiGame getGui(int index);
     protected abstract void onGameStarted();
 
+    /** Largest number of slots this lobby may hold. Subclasses may narrow it. */
+    public int getSlotLimit() {
+        return MAX_PLAYERS;
+    }
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
         final LobbySlotType type = isAllowNetworking() ? LobbySlotType.OPEN : LobbySlotType.AI;
@@ -175,7 +179,7 @@ public abstract class GameLobby implements IHasGameType {
         if (slot == null) {
             throw new NullPointerException();
         }
-        if (data.slots.size() >= MAX_PLAYERS) {
+        if (data.slots.size() >= getSlotLimit()) {
             return;
         }
 

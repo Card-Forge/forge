@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.card.DraftOptions;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
@@ -271,7 +272,36 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             int graceSeconds = event.getDisconnectGraceSeconds();
 
             if (isDraft) {
-                String timersTitle = Forge.getLocalizer().getMessage("lblNetworkDraftTimersTitle");
+                int floor = Math.max(2, sgl.getNumberOfSlots());
+                if (floor > BoosterDraft.N_PLAYERS) return;
+                int recommendedPod = draft.getPodSize();
+
+                List<Integer> podSizes = new ArrayList<>();
+                for (int n = floor; n <= BoosterDraft.N_PLAYERS; n++) {
+                    podSizes.add(n);
+                }
+                Integer chosenPod = SGuiChoose.oneOrNone(
+                        Forge.getLocalizer().getMessage("lblNetworkPodSizePrompt"), podSizes,
+                        podSizes.contains(recommendedPod) ? recommendedPod : podSizes.get(0),
+                        n -> NetworkEvent.markSetDefault(
+                                NetworkEvent.podSizeLabel(n), n == recommendedPod));
+                if (chosenPod == null) return;
+                draft.setPodSize(chosenPod);
+
+                DraftOptions.DoublePick defaultPicks = NetworkEvent.defaultPicksFor(draft, chosenPod);
+                List<DraftOptions.DoublePick> pickRules = Arrays.asList(
+                        DraftOptions.DoublePick.NEVER,
+                        DraftOptions.DoublePick.FIRST_PICK,
+                        DraftOptions.DoublePick.ALWAYS);
+                DraftOptions.DoublePick chosenPicks = SGuiChoose.oneOrNone(
+                        Forge.getLocalizer().getMessage("lblNetworkPicksPrompt"), pickRules,
+                        defaultPicks,
+                        rule -> NetworkEvent.markSetDefault(
+                                NetworkEvent.picksLabel(rule), rule == defaultPicks));
+                if (chosenPicks == null) return;
+                draft.setDoublePick(chosenPicks);
+
+                String timersTitle = Forge.getLocalizer().getMessage("lblNetworkDraftSettingsTitle");
                 String pickStr = SOptionPane.showInputDialog(
                         Forge.getLocalizer().getMessage("lblNetworkPickTimerPrompt"),
                         timersTitle, null, String.valueOf(timerSeconds), null, true);
@@ -748,6 +778,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
         StringBuilder sb = new StringBuilder();
         if (!text.formatText().isEmpty()) sb.append(text.formatText()).append('\n');
         if (!text.productText().isEmpty()) sb.append(text.productText()).append('\n');
+        if (!text.podText().isEmpty()) sb.append(text.podText()).append('\n');
         if (!text.timerText().isEmpty()) sb.append(text.timerText()).append('\n');
         if (!text.dateText().isEmpty()) sb.append(text.dateText()).append('\n');
         if (!text.statusText().isEmpty()) sb.append(text.statusText());
