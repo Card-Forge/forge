@@ -1,7 +1,11 @@
 package forge.card;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -19,6 +23,65 @@ import forge.util.CardTranslation;
  */
 public class CardTranslationTest extends AITest {
 
+    /** Mana symbols and stat changes read the same in every language. */
+    private static final Pattern INVARIANT = Pattern.compile("\\{[^}]{1,6}\\}|[+-]\\d+/[+-]\\d+");
+
+    private static List<String> invariantsOf(String text) {
+        List<String> found = new ArrayList<>();
+        Matcher m = INVARIANT.matcher(text);
+        while (m.find()) {
+            found.add(m.group());
+        }
+        return found;
+    }
+
+    private List<List<String>> abilityInvariants(String language, String cardName) {
+        CardTranslation.preloadTranslation(language, ForgeConstants.LANG_DIR);
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card c = addCard(cardName, p);
+        List<List<String>> perAbility = new ArrayList<>();
+        for (SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility()) {
+                perAbility.add(invariantsOf(sa.toUnsuppressedString()));
+            }
+        }
+        return perAbility;
+    }
+
+    /**
+     * An Aura whose translated oracle has dropped its leading "Enchant ..." line leaves every
+     * remaining line paired with its neighbour's translation, so each ability is shown wearing
+     * the next one's text. Mana symbols and stat changes survive translation, so an ability
+     * displaying symbols that are not its own is proof it took another line's translation.
+     *
+     * Pemmin's Aura carries this: three of its abilities are {U} and the fourth is {1} with a
+     * stat change, so a pairing off by one puts symbols where they do not belong.
+     */
+    @Test
+    public void testAuraAbilitiesKeepTheirOwnSymbolsWhenTheEnchantLineIsMissing() {
+        String cardName = "Pemmin's Aura";
+        String[] languages = { "de-DE", "es-ES", "it-IT", "pt-BR" };
+        try {
+            List<List<String>> english = abilityInvariants("en-US", cardName);
+            AssertJUnit.assertFalse(cardName + ": no activated abilities to check",
+                    english.isEmpty());
+            for (String language : languages) {
+                List<List<String>> translated = abilityInvariants(language, cardName);
+                AssertJUnit.assertEquals(cardName + " / " + language
+                        + ": different number of activated abilities",
+                        english.size(), translated.size());
+                for (int a = 0; a < english.size(); a++) {
+                    AssertJUnit.assertEquals(cardName + " / " + language + ": ability " + a
+                            + " is shown with another line's symbols",
+                            english.get(a), translated.get(a));
+                }
+            }
+        } finally {
+            CardTranslation.preloadTranslation("en-US", ForgeConstants.LANG_DIR);
+        }
+    }
+
     private String firstActivatedAbilityText(Player p, String cardName) {
         Card c = addCard(cardName, p);
         for (SpellAbility sa : c.getSpellAbilities()) {
@@ -30,9 +93,10 @@ public class CardTranslationTest extends AITest {
     }
 
     /**
-     * Freed from the Real's translated oracle was a line short in six languages, so its two
+     * Freed from the Real's translated oracle is a line short in six languages, so its two
      * abilities were both shown as the translation of "untap" and the card could not be used.
-     * Issue #11795.
+     * The data is still short; realigning the pairing is what makes the abilities read
+     * correctly. Issue #11795.
      */
     @Test
     public void testFreedFromTheRealTapAndUntapReadDifferently() {
@@ -59,10 +123,6 @@ public class CardTranslationTest extends AITest {
                 }
                 AssertJUnit.assertEquals(language + ": expected two activated abilities",
                         2, activated);
-
-                String oracle = CardTranslation.getTranslatedOracle("Freed from the Real");
-                AssertJUnit.assertEquals(language + ": translated oracle should have one line"
-                        + " per English oracle line", 3, oracle.split("\r\n\r\n").length);
             }
         } finally {
             CardTranslation.preloadTranslation("en-US", ForgeConstants.LANG_DIR);

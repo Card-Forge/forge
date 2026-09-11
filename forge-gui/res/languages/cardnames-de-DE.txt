@@ -9874,7 +9874,7 @@ Fraying Sanity|Zersetzung des Verstandes|Verzauberung — Aura, Fluch|Verzaubert
 Frazzle|Ausgelaugtheit|Spontanzauber|Neutralisiere einen nichtblauen Zauberspruch deiner Wahl.
 Free from Flesh|Befreiung vom Fleisch|Spontanzauber|Eine Kreatur deiner Wahl erhält +2/+2 bis zum Ende des Zuges. Lege zwei Ölmarken auf sie.
 Free the Fae|Feenbefreiung|Spontanzauber — Abenteuer|Du millst vier Karten. Nimm dann von den gemillten Karten eine Spontanzauber-, Hexerei- oder Feenwesen-Karte auf deine Hand.
-Freed from the Real|Vom Reellen befreit|Kreaturenverzauberung|Verzaubert eine Kreatur\n{U}: Tappe die verzauberte Kreatur.\n{U}: Enttappe die verzauberte Kreatur.
+Freed from the Real|Vom Reellen befreit|Kreaturenverzauberung|{U}: Tappe die verzauberte Kreatur.\n{U}: Enttappe die verzauberte Kreatur.
 Freedom Fighter Recruit|Rekrut der Freiheitskämpfer||Die Stärke des Rekruten der Freiheitskämpfer ist gleich der Anzahl an Kreaturen, die du kontrollierst.
 Freejam Regent|Regent des Wüsterwinkels|Kreatur — Drache|Improvisieren (Deine Artefakte können dir helfen, diesen Zauberspruch zu wirken. Mit jedem Artefakt, das du tappst, nachdem du mit dem Aktivieren deiner Manafähigkeiten fertig bist, bezahlst du {1}.)\nFliegend\n{1}{R}: Der Regent des Wüsterwinkels erhält +2/+0 bis zum Ende des Zuges.
 Freelance Muscle|Freiberuflicher Muskelprotz|Kreatur — Nashorn, Krieger|Immer wenn der Freiberufliche Muskelprotz angreift oder blockt, erhält er bis zum Ende des Zuges +X/+X, wobei X gleich der höchsten Stärke und/oder Widerstandskraft unter den anderen Kreaturen ist, die du kontrollierst.

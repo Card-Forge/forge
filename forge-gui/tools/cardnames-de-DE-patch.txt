@@ -1,1 +1,0 @@
-Freed from the Real|Vom Reellen befreit|Kreaturenverzauberung|Verzaubert eine Kreatur\n{U}: Tappe die verzauberte Kreatur.\n{U}: Enttappe die verzauberte Kreatur.

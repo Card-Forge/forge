@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CardTranslation {
 
@@ -21,6 +23,7 @@ public class CardTranslation {
     private static Map <String, String> translatedEffectNames;
     private static Map <String, String> translatedTokenNames;
     private static final List <String> knownEffectNames = Arrays.asList("The Ring", "The Monarch", "The Initiative", "City's Blessing", "Keyword Effects");
+    private static final Pattern TRANSLATION_INVARIANT = Pattern.compile("\\{[^}]{1,6}\\}|[+-]\\d+/[+-]\\d+");
     private static String languageSelected = "en-US";
 
     private static void readTranslationFile(String language, String languagesDirectory) {
@@ -308,6 +311,8 @@ public class CardTranslation {
         String [] splitOracleText = oracleText.split("\\\\n");
         String [] splitTranslatedText = translatedText.split("\r\n\r\n");
 
+        int offset = leadingLineOffset(splitOracleText, splitTranslatedText);
+
         for (int i = 0; i < splitOracleText.length; i++) {
             String toracle = replaceCardName("en-US", faceName, splitOracleText[i]);
             // Remove reminder text in English oracle text unless entire line is reminder text
@@ -317,12 +322,51 @@ public class CardTranslation {
             // A translated oracle can have fewer lines than the English one. Give the uncovered
             // lines an entry of their own anyway, with no translation - otherwise they match some
             // other line's entry and two abilities display the same text.
-            String ttranslated = i < splitTranslatedText.length
-                    ? replaceCardName(languageSelected, translatedName, splitTranslatedText[i])
+            int t = i - offset;
+            String ttranslated = t >= 0 && t < splitTranslatedText.length
+                    ? replaceCardName(languageSelected, translatedName, splitTranslatedText[t])
                     : null;
             mapping.add(Pair.of(toracle, ttranslated));
         }
         oracleMappings.put(translationKey, mapping);
+    }
+
+    /**
+     * Aura oracles routinely reach us a line short, having dropped the leading "Enchant ..."
+     * line, which leaves every remaining line paired with its neighbour's translation. Mana
+     * symbols and stat changes survive translation unaltered, so where a line carries one they
+     * say which pairing is right; where none does, the leading line is the one usually missing.
+     *
+     * @return how far the translated lines have slipped against the English ones, 0 or 1
+     */
+    private static int leadingLineOffset(String [] oracle, String [] translated) {
+        if (oracle.length - translated.length != 1 || !oracle[0].startsWith("Enchant ")) {
+            return 0;
+        }
+        int asIs = 0, slipped = 0;
+        for (int i = 1; i < oracle.length; i++) {
+            List <String> marks = translationInvariants(oracle[i]);
+            if (marks.isEmpty()) {
+                continue;
+            }
+            if (i < translated.length && marks.equals(translationInvariants(translated[i]))) {
+                asIs++;
+            }
+            if (marks.equals(translationInvariants(translated[i - 1]))) {
+                slipped++;
+            }
+        }
+        return asIs > slipped ? 0 : 1;
+    }
+
+    /** The parts of an oracle line that read the same in every language. */
+    private static List <String> translationInvariants(String line) {
+        List <String> found = new ArrayList<>();
+        Matcher m = TRANSLATION_INVARIANT.matcher(line);
+        while (m.find()) {
+            found.add(m.group());
+        }
+        return found;
     }
 
     public static String translateMultipleDescriptionText(String descText, ITranslatable card) {

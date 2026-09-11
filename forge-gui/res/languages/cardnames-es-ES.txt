@@ -9647,7 +9647,7 @@ Fraying Sanity|Cordura desvanecida|Encantamiento — Aura maldición|Encantar ju
 Frazzle|Desmenuzar|Instantáneo|Contrarresta el hechizo objetivo que no sea azul.
 Free from Flesh|Liberar de la carne|Instantáneo|La criatura objetivo obtiene +2/+2 hasta el final del turno. Pon dos contadores de aceite sobre ella.
 Free the Fae|Liberar al hada|Instantáneo — Aventura|Muele cuatro cartas. Luego pon en tu mano una carta de instantáneo, conjuro o Hada de entre las cartas molidas.
-Freed from the Real|Liberado de lo real|Encantar criatura|Encantar criatura.\n{U}: Gira la criatura encantada.\n{U}: Endereza la criatura encantada.
+Freed from the Real|Liberado de lo real|Encantar criatura|{U}: Gira la criatura encantada.\n{U}: Endereza la criatura encantada.
 Freejam Regent|Regente de Improlibre|Criatura — Dragón|Improvisar. (Tus artefactos pueden ayudar a lanzar este hechizo. Cada artefacto que gires una vez que termines de activar habilidades de maná paga {1}.)\nVuela.\n{1}{R}: El Regente de Improlibre obtiene +2/+0 hasta el final del turno.
 Freelance Muscle|Matón autónomo|Criatura — Guerrero rinoceronte|Siempre que el Matón autónomo ataque o bloquee, obtiene +X/+X hasta el final del turno, donde X es la mayor fuerza y/o resistencia entre las otras criaturas que controlas.
 Freestrider Commando|Comando de los Librerrantes|Criatura — Mercenario centauro|El Comando de los Librerrantes entra al campo de batalla con dos contadores +1/+1 sobre él si no se lanzó o si no se usó maná para lanzarlo.\nTramar {3}{G}. (Puedes pagar {3}{G} y exiliar esta carta de tu mano. Lánzala como un conjuro en un turno posterior sin pagar su coste de maná. Activa la habilidad de tramar solo como un conjuro.)

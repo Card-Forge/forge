@@ -3986,4 +3986,3 @@ Zuberi, Golden Feather|Zuberi, Pluma Dorada|Criatura Legendaria - Grifo|Vuela\nT
 Zuran Enchanter|Encantador zurano|Criatura - Hechicero Humano|{2}{B}, {T}: el jugador objetivo se descarta de una carta de su mano. Juega esta habilidad sólo durante tu turno.
 Zuran Orb|Orbe zurano|Artefacto|Sacrificar una tierra: ganas 2 vidas.
 Zuran Spellcaster|Taumaturgo zurano|Criatura - Hechicero Humano|{T}: El Taumaturgo Zurano hace 1 punto de daño al jugador o criatura objetivo.
-Freed from the Real|Liberado de lo real|Encantar criatura|Encantar criatura.\n{U}: Gira la criatura encantada.\n{U}: Endereza la criatura encantada.
