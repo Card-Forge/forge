@@ -31,6 +31,8 @@ import java.util.zip.ZipEntry;
  * starts Forge again.
  */
 public final class UpdateInstaller {
+    /** Written by IzPack into every installation, and removed again by its uninstaller. */
+    private static final String IZPACK_MARKER = ".installationinformation";
     /** Automation script carried by installers that know about unattended updates. */
     private static final String SCRIPT_RESOURCE = "resources/auto-install.xml";
     private static final String INSTALL_PATH_TOKEN = "@INSTALL_PATH@";
@@ -72,12 +74,22 @@ public final class UpdateInstaller {
         return installDir;
     }
 
-    /** Whether an update can be installed without asking the user where it should go. */
+    /**
+     * Whether an update can be installed without asking the user where it should go. Besides a
+     * writable installation this needs the previous version's uninstaller, so the update can
+     * remove what that version installed before installing over it - a copy extracted from the
+     * release archive by hand has none, and just overwriting it could leave stale files behind.
+     */
     public static boolean isSupported(File installerPackage) {
         File dir = getInstallDir();
-        return dir != null && isWritable(dir) && getJavaExecutable() != null
+        return dir != null && isWritable(dir) && getUninstaller(dir).isFile() && getJavaExecutable() != null
                 && installerPackage != null && installerPackage.isFile()
                 && installerPackage.getName().endsWith(".jar");
+    }
+
+    /** IzPack leaves this next to every installation; it knows exactly which files it installed. */
+    private static File getUninstaller(File dir) {
+        return new File(new File(dir, "Uninstaller"), "uninstaller.jar");
     }
 
     /**
@@ -235,14 +247,36 @@ public final class UpdateInstaller {
         return script.replace(INSTALL_PATH_TOKEN, path);
     }
 
+    /**
+     * The helper first runs the previous version's uninstaller, so that nothing that version
+     * installed - stale card scripts, say - survives into the new one, while files the user put
+     * there themselves are untouched. IzPack's uninstaller copies itself to a temp directory and
+     * re-launches from there (so it can delete its own jar), returning at once; the helper has to
+     * wait for those re-launched JVMs, recognizable by the -Dself.mod.* properties on their
+     * command line, to finish before it may install.
+     */
     private static File writeHelper(File workDir, File installerPackage, File script, File log, File dir)
             throws IOException {
         long pid = ProcessHandle.current().pid();
         String java = getJavaExecutable().getAbsolutePath();
         String installer = installerPackage.getAbsolutePath();
+        String uninstaller = getUninstaller(dir).getAbsolutePath();
+        String marker = new File(dir, IZPACK_MARKER).getAbsolutePath();
         File helper;
         String contents;
         if (OperatingSystem.isWindows()) {
+            File waiter = new File(workDir, "wait-uninstall.ps1");
+            Files.write(waiter.toPath(), (""
+                    + "$deadline = (Get-Date).AddMinutes(10)\r\n"
+                    + "Start-Sleep -Seconds 3\r\n"
+                    + "while ((Get-Date) -lt $deadline) {\r\n"
+                    + "  $running = Get-CimInstance Win32_Process -Filter \"Name='java.exe' OR Name='javaw.exe'\" |\r\n"
+                    + "    Where-Object { $_.CommandLine -like '*self.mod.*' }\r\n"
+                    + "  if (-not $running) { exit 0 }\r\n"
+                    + "  Start-Sleep -Seconds 2\r\n"
+                    + "}\r\n"
+                    + "exit 1\r\n").getBytes(StandardCharsets.UTF_8));
+
             helper = new File(workDir, "install.cmd");
             contents = "@echo off\r\n"
                     + "title Forge Update\r\n"
@@ -253,9 +287,14 @@ public final class UpdateInstaller {
                     + "  ping -n 2 127.0.0.1 >nul\r\n"
                     + "  goto wait\r\n"
                     + ")\r\n"
+                    + "echo Removing the previous version (files you added yourself are kept)...\r\n"
+                    + "\"" + java + "\" -jar \"" + uninstaller + "\" -c > \"" + log.getAbsolutePath() + "\" 2>&1\r\n"
+                    + "powershell -NoProfile -ExecutionPolicy Bypass -File \"" + waiter.getAbsolutePath() + "\"\r\n"
+                    + "if errorlevel 1 goto failed\r\n"
+                    + "if exist \"" + marker + "\" goto failed\r\n"
                     + "echo Installing the update, this takes a minute...\r\n"
                     + "\"" + java + "\" -jar \"" + installer + "\" \"" + script.getAbsolutePath() + "\""
-                    + " > \"" + log.getAbsolutePath() + "\" 2>&1\r\n"
+                    + " >> \"" + log.getAbsolutePath() + "\" 2>&1\r\n"
                     + "findstr /C:\"" + SUCCESS_MARKER + "\" \"" + log.getAbsolutePath() + "\" >nul\r\n"
                     + "if errorlevel 1 goto failed\r\n"
                     + "echo Done, starting Forge...\r\n"
@@ -272,10 +311,17 @@ public final class UpdateInstaller {
             helper = new File(workDir, "install.sh");
             contents = "#!/bin/sh\n"
                     + "while kill -0 " + pid + " 2>/dev/null; do sleep 1; done\n"
-                    + "\"" + java + "\" -jar \"" + installer + "\" \"" + script.getAbsolutePath() + "\""
-                    + " > \"" + log.getAbsolutePath() + "\" 2>&1\n"
-                    + "if grep -q \"" + SUCCESS_MARKER + "\" \"" + log.getAbsolutePath() + "\"; then\n"
-                    + "  cd \"" + dir.getAbsolutePath() + "\" && exec \"" + getLauncher(dir).getAbsolutePath() + "\"\n"
+                    + "\"" + java + "\" -jar \"" + uninstaller + "\" -c > \"" + log.getAbsolutePath() + "\" 2>&1\n"
+                    + "sleep 3; i=0\n"
+                    + "while pgrep -f 'self\\.mod\\.' >/dev/null 2>&1; do\n"
+                    + "  i=$((i+1)); [ $i -ge 300 ] && break; sleep 2\n"
+                    + "done\n"
+                    + "if [ ! -e \"" + marker + "\" ]; then\n"
+                    + "  \"" + java + "\" -jar \"" + installer + "\" \"" + script.getAbsolutePath() + "\""
+                    + " >> \"" + log.getAbsolutePath() + "\" 2>&1\n"
+                    + "  if grep -q \"" + SUCCESS_MARKER + "\" \"" + log.getAbsolutePath() + "\"; then\n"
+                    + "    cd \"" + dir.getAbsolutePath() + "\" && exec \"" + getLauncher(dir).getAbsolutePath() + "\"\n"
+                    + "  fi\n"
                     + "fi\n"
                     + "echo \"Forge could not install the update automatically, see " + log.getAbsolutePath() + "\" >&2\n"
                     + "exit 1\n";
