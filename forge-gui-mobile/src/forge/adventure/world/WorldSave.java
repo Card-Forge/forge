@@ -62,7 +62,7 @@ public class WorldSave {
     }
 
     static public boolean load(int currentSlot) {
-
+        Forge.invokeWorldSave = true; // This is for dispose method check
         String fileName = WorldSave.getSaveFile(currentSlot);
         if (!new File(fileName).exists())
             return false;
