@@ -1,0 +1,10 @@
+Name:Winter, Tormented Loner
+ManaCost:2 B
+Types:Legendary Creature Human Warlock
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When NICKNAME enters, you may sacrifice a creature or planeswalker. When you do, each opponent sacrifices a creature of their choice.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Creature;Planeswalker/creature or planeswalker> | Execute$ TrigSac | TriggerDescription$ When you do, each opponent sacrifices a creature of their choice.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ NICKNAME gets +1/+0 for each creature and planeswalker card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn,Planeswalker.YouOwn
+Oracle:When Winter enters, you may sacrifice a creature or planeswalker. When you do, each opponent sacrifices a creature of their choice.\nWinter gets +1/+0 for each creature and planeswalker card in your graveyard.
