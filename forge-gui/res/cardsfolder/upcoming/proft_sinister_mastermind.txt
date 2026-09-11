@@ -2,7 +2,8 @@ Name:Proft, Sinister Mastermind
 ManaCost:2 B
 Types:Legendary Creature Human Rogue
 PT:5/5
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | Condition$ Threshold | Description$ Threshold — You can't cast this spell unless there are seven or more cards in your graveyard.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LT7 | Description$ Threshold — You can't cast this spell unless there are seven or more cards in your graveyard.
 K:Menace
 A:AB$ Pump | Cost$ B Discard<1/CARDNAME/this card> | ActivationZone$ Hand | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -3/-1 until end of turn.
+SVar:X:Count$ValidGraveyard Card.YouOwn
 Oracle:Threshold — You can't cast this spell unless there are seven or more cards in your graveyard.\nMenace\n{B}, Discard this card: Target creature gets -3/-1 until end of turn.
