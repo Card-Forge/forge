@@ -1077,7 +1077,7 @@ public class Forge implements ApplicationListener {
             safeDispose(scene);
         }*/
         // biomeImage (WorldMap) should be disposed
-        safeDispose(WorldSave.getCurrentSave().getWorld());
+        WorldSave.dispose();
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {
