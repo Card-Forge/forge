@@ -13,7 +13,9 @@ public class ThreadUtil {public static final AtomicReference<Thread> AIExecThrea
                 t.setDaemon(true);
                 AIExecThread.set(t);
                 return t;
-            }
+            },
+            // Dropped tasks disappear safely
+            new ThreadPoolExecutor.DiscardPolicy()
     );
     static {
         System.out.printf("(ThreadUtil first call): Running with priority %d%n", Thread.currentThread().getPriority());
