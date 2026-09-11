@@ -20,6 +20,7 @@ package forge.item;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
+import forge.deck.DeckRule;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -110,6 +111,12 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public CardRules getRules() {
         return rules;
+    }
+
+    /** The complete, assembled list across every face (see {@code ICardFace.getTokenizedDeckRules()} - each face caches its own parsing, shared across every printing, so this stays cheap). */
+    @Override
+    public List<DeckRule> getDeckRuleList() {
+        return DeckRule.parseAll(this);
     }
 
     @Override

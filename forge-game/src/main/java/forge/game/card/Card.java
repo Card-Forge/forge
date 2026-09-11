@@ -2465,9 +2465,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         s.append(" on it.");
                     }
                     sbLong.append(s).append("\r\n");
-                } else if (keyword.startsWith("DeckLimit")) {
-                    final String[] k = keyword.split(":");
-                    sbLong.append(k[2]).append("\r\n");
                 } else if (keyword.startsWith("Enchant") && inst instanceof KeywordWithType kwt) {
                     String desc = kwt.getTypeDescription();
                     sbLong.append("Enchant ").append(desc).append("\r\n");
@@ -2909,8 +2906,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
 
         // DeckRule descriptions (e.g. Rulebreaker) print alongside the card's other rules text.
-        if (getRules() != null) {
-            for (final DeckRule rule : DeckRule.parseAll(getRules().getDeckRules())) {
+        final IPaperCard pc = getPaperCard();
+        if (pc != null) {
+            for (final DeckRule rule : pc.getDeckRuleList()) {
                 final String desc = rule.getDescription();
                 if (!desc.isEmpty()) {
                     sb.append(desc).append(linebreak);
@@ -3266,9 +3264,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     append(String.format(inst.getReminderText(), "{" + getManaCost().getGenericCost() + "}"))
                     .append(")");
                     sbBefore.append("\r\n\r\n");
-                } else if (keyword.startsWith("DeckLimit")) {
-                    final String[] k = keyword.split(":");
-                    sbBefore.append(k[2]).append("\r\n");
                 }
             } catch (Exception e) {
                 String msg = "Card:abilityTextInstantSorcery: crash in Keyword parsing";
@@ -3279,6 +3274,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 Sentry.addBreadcrumb(bread);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
+            }
+        }
+
+        // DeckRule descriptions (e.g. Copies limits) print alongside the card's other rules text.
+        final IPaperCard pc = getPaperCard();
+        if (pc != null) {
+            for (final DeckRule rule : pc.getDeckRuleList()) {
+                final String desc = rule.getDescription();
+                if (!desc.isEmpty()) {
+                    sbBefore.append(desc).append("\r\n");
+                }
             }
         }
 

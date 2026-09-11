@@ -1712,7 +1712,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return rules;
             }
             for (final PaperCard p : deck.getCommanders()) {
-                for (final DeckRule rule : DeckRule.parseAll(p)) {
+                for (final DeckRule rule : p.getDeckRuleList()) {
                     if (rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander)) {
                         rules.add((DeckRuleColorIdentity) rule);
                     }
@@ -2195,7 +2195,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
 
             if (currentDeck != null && deckSection == DeckSection.Commander) {
-                for (final DeckRule rule : DeckRule.parseAll(card)) {
+                for (final DeckRule rule : card.getDeckRuleList()) {
                     if (!(rule instanceof DeckRuleColorIdentity) || !rule.isActiveFor(DeckSection.Commander)) {
                         continue;
                     }
