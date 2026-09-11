@@ -77,7 +77,6 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
-    private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
      * <p>
@@ -874,20 +873,19 @@ public class AiAttackController {
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
-            ExecutorService aiExecutor = Executors.newFixedThreadPool(
+            ExecutorService executor = Executors.newFixedThreadPool(
                 Runtime.getRuntime().availableProcessors(), r -> {
                     Thread t = Executors.defaultThreadFactory().newThread(r);
                     t.setDaemon(true);
                     return t;
                 }
             );
-            List<Callable<Void>> tasks = new ArrayList<>();
+            List<Callable<Integer>> tasks = new ArrayList<>();
 
             for (final Card attacker : this.attackers) {
                 final GameEntity finalDefender = defender;
                 tasks.add(() -> {
                     GameEntity mustAttackDef = null;
-
                     if (attacker.getSVar("MustAttack").equals("True")) {
                         mustAttackDef = finalDefender;
                     } else if (attacker.hasSVar("EndOfTurnLeavePlay")
@@ -897,45 +895,42 @@ public class AiAttackController {
                         //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                         mustAttackDef = finalDefender;
                     } else {
-                        var reqs = combat.getAttackConstraints().getRequirements().get(attacker);
-                        if (reqs != null) {
-                            List<Pair<GameEntity, Integer>> sortedReqs = reqs.getSortedRequirements();
-                            final GameEntity def = finalDefender;
-                            sortedReqs.sort((r1, r2) -> {
-                                if (r1.getValue() == r2.getValue()) {
-                                    // try to attack the designated defender
-                                    if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
-                                        return -1;
-                                    }
-                                    if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
-                                        return 1;
-                                    }
-                                    // otherwise PW
-                                    if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                        return -1;
-                                    }
-                                    if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                        return 1;
-                                    }
-                                    // or weakest player
-                                    if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
-                                        return p1.getLife() - p2.getLife();
-                                    }
+                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
+                        // check defenders in order of maximum requirements
+                        List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                        final GameEntity def = finalDefender;
+                        reqs.sort((r1, r2) -> {
+                            if (r1.getValue() == r2.getValue()) {
+                                // try to attack the designated defender
+                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
+                                    return -1;
                                 }
-                                return r2.getValue() - r1.getValue();
-                            });
-                            for (Pair<GameEntity, Integer> e : sortedReqs) {
-                                if (e.getRight() == 0) continue;
-                                GameEntity candidate = e.getLeft();
-                                if (canAttackWrapper(attacker, candidate) &&
-                                        CombatUtil.getAttackCost(ai.getGame(), attacker, candidate) == null) {
-                                    mustAttackDef = candidate;
-                                    break;
+                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
+                                    return 1;
                                 }
+                                // otherwise PW
+                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                                    return -1;
+                                }
+                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                                    return 1;
+                                }
+                                // or weakest player
+                                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                                    return p1.getLife() - p2.getLife();
+                                }
+                            }
+                            return r2.getValue() - r1.getValue();
+                        });
+                        for (Pair<GameEntity, Integer> e : reqs) {
+                            if (e.getRight() == 0) continue;
+                            GameEntity mustAttackDefMaybe = e.getLeft();
+                            if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                                mustAttackDef = mustAttackDefMaybe;
+                                break;
                             }
                         }
                     }
-
                     if (mustAttackDef != null) {
                         // combat is shared across these parallel futures and its attacker
                         // multimap is not thread-safe; unsynchronized addAttacker calls
@@ -946,16 +941,16 @@ public class AiAttackController {
                         attackersLeft.remove(attacker);
                         numForcedAttackers.incrementAndGet();
                     }
-                    return null;
+                    return 0;
                 });
             }
 
             try {
-                aiExecutor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+                executor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             } finally {
-                aiExecutor.shutdownNow();
+                executor.shutdownNow();
             }
 
             if (attackersLeft.isEmpty()) {
