@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Legendary Creature Human Berserker
 PT:4/4
 K:Menace
-T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | ValidAttackersAmount$ EQ1 | NoResolvingCheck$ True | TriggerDescription$ Whenever a creature you control attacks a player alone, discard a card, then draw a card. Then put a +1/+1 counter on that creature for each card you've discarded this turn.
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | ValidAttackersAmount$ EQ1 | TriggerDescription$ Whenever a creature you control attacks a player alone, discard a card, then draw a card. Then put a +1/+1 counter on that creature for each card you've discarded this turn.
 SVar:TrigDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredAttackers | CounterType$ P1P1 | CounterNum$ X
