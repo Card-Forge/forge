@@ -36,10 +36,10 @@ public sealed interface YieldUpdate extends Serializable
 
     record SetAutoPassUntilEndOfTurn(PlayerView player, boolean active) implements YieldUpdate {}
 
-    record CardAutoYield(String cardKey, boolean active, boolean abilityScope) implements YieldUpdate {}
+    record CardAutoYield(String cardKey, boolean active) implements YieldUpdate {}
 
-    /** Param order mirrors {@link CardAutoYield} (key, value, scope). */
-    record TriggerDecision(String storageKey, AutoYieldStore.TriggerDecision decision, boolean abilityScope) implements YieldUpdate {}
+    /** Param order mirrors {@link CardAutoYield} (key, value). */
+    record TriggerDecision(String storageKey, AutoYieldStore.TriggerDecision decision) implements YieldUpdate {}
 
     /** Runtime toggle of the global auto-yield disable flag — host applies to its remote-cache, client to its local controller. */
     record SetDisableYields(boolean disabled) implements YieldUpdate {}

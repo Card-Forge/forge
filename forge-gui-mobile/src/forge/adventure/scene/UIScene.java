@@ -4,13 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -24,7 +22,6 @@ import forge.Forge;
 import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
-import forge.util.ShaderUtil;
 
 import java.time.LocalTime;
 
@@ -639,7 +636,6 @@ public class UIScene extends Scene {
     }
 
     Image screenImage;
-    TextureRegion backgroundTexture;
 
     @Override
     public boolean leave() {
@@ -652,36 +648,10 @@ public class UIScene extends Scene {
     public void enter() {
         if (screenImage != null) {
             try {
-                // Set the backgroundTexture from lastPreview generated from WorldSaveHeader
-                backgroundTexture = new TextureRegion(Forge.lastPreview);
-                screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
-                // Get the lastPreview drawable
-                Drawable lastPreview = screenImage.getDrawable();
-                // Create a BaseDrawable with the custom shader
-                Drawable previewWithShader = new BaseDrawable() {
-                    @Override
-                    public void draw(Batch batch, float x, float y, float width, float height) {
-                        try {
-                            batch.end();
-                            float mul = 1.2f;
-                            float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
-                            ShaderUtil.getInstance().getShaderPix().bind();
-                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_resolution", width, height);
-                            ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize);
-                            batch.setShader(ShaderUtil.getInstance().getShaderPix());
-                            batch.begin();
-                            // Simulate the blurred pixelated render using custom shader like the old renders of BlurUtils
-                            lastPreview.draw(batch, x, y, width, height);
-                            batch.end();
-                            batch.setShader(null);
-                            batch.begin();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                // Set the previewWithShader as drawable for the ScreenImage
-                screenImage.setDrawable(previewWithShader);
+                if (Forge.lastPreview != null) {
+                    // set shaderDrawable to screenImage
+                    screenImage.setDrawable(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -751,15 +721,39 @@ public class UIScene extends Scene {
 
     public TextureRegion getUIBackground() {
         try {
-            Actor a = ui.getChild(0);
-            if (a instanceof Image) {
-                Drawable d = ((Image) a).getDrawable();
-                if (d instanceof TextureRegionDrawable) {
-                    return ((TextureRegionDrawable) d).getRegion();
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                if (originalDrawable instanceof TextureRegionDrawable textureRegionDrawable) {
+                    return textureRegionDrawable.getRegion();
                 }
             }
         } catch (Exception e) {
             return null;
+        }
+        return null;
+    }
+
+    public void setUIBackground(Drawable drawable) {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                image.setDrawable(drawable);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Drawable getBGDrawable() {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                return image.getDrawable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

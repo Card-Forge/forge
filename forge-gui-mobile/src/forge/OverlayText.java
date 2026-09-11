@@ -2,7 +2,6 @@ package forge;
 
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.scene.GameScene;
-import forge.adventure.scene.TileMapScene;
 import org.apache.commons.lang3.StringUtils;
 
 import static forge.adventure.util.Controls.newTypingLabel;
@@ -36,11 +35,6 @@ public class OverlayText {
     void render(float delta) {
         if (!render)
             return;
-        //TODO: Add detection check to be used on other needed scenes..
-        if (Forge.currentScene instanceof TileMapScene) {
-            update("");
-            return;
-        }
         // render only on GameScenes
         if (Forge.currentScene instanceof GameScene) {
             alpha = Math.min(alpha + delta * 0.75f, 1f);
