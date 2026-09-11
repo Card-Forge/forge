@@ -1,0 +1,8 @@
+Name:The Covert Blue Mage
+ManaCost:2 U
+Types:Legendary Creature Human Rogue
+PT:1/1
+DeckRule:Size:AdjustMax$ Unlimited | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander has no maximum deck size.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this card create a colorless Equipment artifact token named Covert Sunglasses. It has “Equipped creature can’t be blocked” and equip {2}{W/U}
+SVar:TrigToken:DB$ Token | TokenScript$ covert_sunglasses | TokenOwner$ You
+Oracle:If The Covert Blue Mage is your commander, your starting deck can contain any number of cards beyond the maximum deck size. (For example, your deck can be 120 cards.)\nWhen The Covert Blue Mage enters, create a colorless Equipment artifact token named Covert Sunglasses. It has “Equipped creature can’t be blocked” and equip {2}{W/U}.
