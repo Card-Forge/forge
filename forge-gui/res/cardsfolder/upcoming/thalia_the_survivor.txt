@@ -3,5 +3,5 @@ ManaCost:3 W
 Types:Legendary Creature Human Soldier
 PT:3/4
 K:Lifelink
-S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell.nonCreature | Amount$ 1 | Description$ Noncreature spells your opponents cast cost {1} more to cast.
+S:Mode$ RaiseCost | Activator$ Opponent | Type$ ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells your opponents cast cost {1} more to cast.
 Oracle:Lifelink\nNoncreature spells your opponents cast cost {1} more to cast.
