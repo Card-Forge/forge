@@ -17,7 +17,7 @@ import forge.item.PaperCard;
 public interface IDraftEventHandler {
     void draftPackArrived(int seatIndex, List<PaperCard> pack,
             int packNumber, int pickNumber, int timerDurationSeconds, int seq, int hiddenCount);
-    void draftSeatPicked(int seatIndex, int[] seatQueueDepths);
+    void draftSeatPicked(int seatIndex, int[] seatQueueDepths, List<List<PaperCard>> faceUpBySeat);
     void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack);
     void receiveEventPool(String eventId, Deck pool);
     void draftSeatState(DraftSeatStateEvent event);
@@ -32,7 +32,7 @@ public interface IDraftEventHandler {
                     e.getSeq(), e.getHiddenCount());
             return true;
         } else if (event instanceof DraftSeatPickedEvent e) {
-            draftSeatPicked(e.getSeatIndex(), e.getSeatQueueDepths());
+            draftSeatPicked(e.getSeatIndex(), e.getSeatQueueDepths(), e.getFaceUpBySeat());
             return true;
         } else if (event instanceof DraftAutoPickedEvent e) {
             draftAutoPicked(e.getSeatIndex(), e.getCard(),

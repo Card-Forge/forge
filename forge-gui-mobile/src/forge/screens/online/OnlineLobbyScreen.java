@@ -512,10 +512,10 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
     }
 
     @Override
-    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
+    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths, List<List<PaperCard>> faceUpBySeat) {
         FThreads.invokeInEdtLater(() -> {
             if (activeDraftScreen != null) {
-                activeDraftScreen.onSeatPicked(seatIndex, seatQueueDepths);
+                activeDraftScreen.onSeatPicked(seatIndex, seatQueueDepths, faceUpBySeat);
             }
         });
     }

@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -21,6 +23,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import forge.Singletons;
+import forge.item.PaperCard;
 import forge.screens.home.online.OnlineMenu;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
@@ -54,8 +57,8 @@ public enum FDraftOverlay {
     private final FSkin.SkinnedLabel lblAllSeats  = makeTextLabel("");
     private final DraftTimerRope     rope         = new DraftTimerRope();
     private final JPanel pnlNeighbors = new JPanel(new FlowLayout(FlowLayout.CENTER, 4, 0));
-    private final JPanel pnlSeatTable = new JPanel(new MigLayout("insets 4 0 4 0, gap 0, wrap 3",
-            "[][grow,sizegroup tcol][grow,sizegroup tcol]", ""));
+    private final JPanel pnlSeatTable = new JPanel(new MigLayout("insets 4 0 4 0, gap 0, wrap 4",
+            "[][grow,sizegroup tcol][grow,sizegroup tcol][]", ""));
 
     private static ImageIcon cardBackIcon;
     private static ImageIcon tableCardBackIcon;
@@ -69,6 +72,7 @@ public enum FDraftOverlay {
     private int[]    queueDepths = new int[0];
     private String[] allNames = new String[0];
     private boolean[] allAI   = new boolean[0];
+    private List<List<PaperCard>> faceUpBySeat = List.of();
     private boolean  expanded;
 
     /** Countdown timer (client-side fire-and-forget). */
@@ -197,12 +201,14 @@ public enum FDraftOverlay {
      * Called when any seat in the pod picks a card.
      *
      * @param newDepths updated queue-depth array (one entry per seat)
+     * @param faceUp    every seat's face-up cards, by seat
      */
-    public void onSeatPicked(int[] newDepths) {
+    public void onSeatPicked(int[] newDepths, List<List<PaperCard>> faceUp) {
         SwingUtilities.invokeLater(() -> {
             if (newDepths != null && newDepths.length == queueDepths.length) {
                 System.arraycopy(newDepths, 0, queueDepths, 0, newDepths.length);
             }
+            faceUpBySeat = faceUp;
             updateDisplay();
             if (expanded) {
                 buildSeatTable();
@@ -234,6 +240,7 @@ public enum FDraftOverlay {
             queueDepths = new int[0];
             allNames = new String[0];
             allAI = new boolean[0];
+            faceUpBySeat = List.of();
             waitingForPack = false;
             expanded = false;
             lblPackInfo.setText("");
@@ -460,7 +467,7 @@ public enum FDraftOverlay {
         }
     }
 
-    /** Rebuilds the per-seat table: every seat in pod order on the left, its current pack count on the right. */
+    /** Rebuilds the per-seat table: every seat in pod order, its current pack count, and how many cards it has face up. */
     private void buildSeatTable() {
         pnlSeatTable.removeAll();
         final Localizer localizer = Localizer.getInstance();
@@ -468,6 +475,7 @@ public enum FDraftOverlay {
         pnlSeatTable.add(makeTableLabel(localizer.getMessage("lblDraftOverlaySeat")), "gapleft 8, gapbottom 4");
         pnlSeatTable.add(makeTableLabel(localizer.getMessage("lblPlayer")), "growx, gapleft 14, gapbottom 4");
         pnlSeatTable.add(makePacksCell(localizer.getMessage("lblDraftOverlayPacks"), -1, null, null), "growx, gapbottom 4");
+        pnlSeatTable.add(makeTableLabel(localizer.getMessage("lblDraftOverlayFaceUp")), "gapleft 8, gapright 8, gapbottom 4");
 
         String aiSuffix = " (" + localizer.getMessage("lblAI") + ")";
         Color zebra  = FSkin.getColor(FSkin.Colors.CLR_ZEBRA).getColor();
@@ -487,6 +495,12 @@ public enum FDraftOverlay {
             pnlSeatTable.add(makeRowLabel(String.valueOf(i + 1), bg, fg, 8), rowCon);
             pnlSeatTable.add(makeRowLabel(name, bg, fg, 14), rowCon);
             pnlSeatTable.add(makePacksCell(null, depth, bg, fg), rowCon);
+            List<PaperCard> seatFaceUp = i < faceUpBySeat.size() ? faceUpBySeat.get(i) : List.of();
+            FSkin.SkinnedLabel faceUpCell = makeRowLabel(String.valueOf(seatFaceUp.size()), bg, fg, 8);
+            if (!seatFaceUp.isEmpty()) {
+                faceUpCell.setToolTipText(seatFaceUp.stream().map(PaperCard::getName).collect(Collectors.joining(", ")));
+            }
+            pnlSeatTable.add(faceUpCell, rowCon);
         }
         pnlSeatTable.revalidate();
         pnlSeatTable.repaint();

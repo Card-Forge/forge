@@ -39,6 +39,7 @@ import forge.toolbox.DraftTimerRope;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
 import forge.util.Utils;
 
 /**
@@ -72,6 +73,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
     private boolean hiddenPack;
     private boolean draftComplete;
     private int[] lastQueueDepths;
+    private List<List<PaperCard>> lastFaceUp = List.of();
 
     public NetworkDraftingProcessScreen(int seatIndex, List<EventParticipant> participants,
             Consumer<NetEvent> pickSender, Runnable onLeave) {
@@ -97,6 +99,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
             }
         }
         networkPackPage.setPickHandler(this::submitPick);
+        networkPackPage.setOnStripTap(this::showFaceUpCards);
     }
 
     @Override
@@ -142,11 +145,25 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         pickSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : picked, variant));
     }
 
-    public void onSeatPicked(int seat, int[] queueDepths) {
+    public void onSeatPicked(int seat, int[] queueDepths, List<List<PaperCard>> faceUp) {
         draftLog.recordSeatPicked(seat, queueDepths, participants);
         lastQueueDepths = queueDepths.clone();
+        lastFaceUp = faceUp;
         networkPackPage.updateDirection(seatIndex, participants,
                 lastQueueDepths, isPassingRight(currentPackNumber));
+    }
+
+    private void showFaceUpCards() {
+        List<String> lines = new ArrayList<>();
+        for (int seat = 0; seat < lastFaceUp.size(); seat++) {
+            String name = EventParticipant.resolveName(seat, participants, null);
+            for (PaperCard card : lastFaceUp.get(seat)) {
+                lines.add(name + ": " + card.getName());
+            }
+        }
+        if (!lines.isEmpty()) {
+            GuiChoose.reveal(Forge.getLocalizer().getMessage("lblFaceUpCards"), lines);
+        }
     }
 
     /** Odd packs pass right, even packs pass left (conventional booster draft). */
@@ -246,6 +263,10 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
             directionStrip.update(mySeat, participants, depths, passingRight);
         }
 
+        void setOnStripTap(Runnable onTap) {
+            directionStrip.setOnTap(onTap);
+        }
+
         void setPickHandler(BiConsumer<PaperCard, DraftAction> handler) {
             this.pickHandler = handler;
             cardManager.setItemActivateHandler(e -> {
@@ -338,6 +359,18 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         private float[] widths = new float[0];
         private float totalWidth;
         private boolean hasData;
+        private Runnable onTap;
+
+        void setOnTap(Runnable onTap) {
+            this.onTap = onTap;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (onTap == null) return false;
+            onTap.run();
+            return true;
+        }
 
         /** One drawable element: a name run, a stack of {@code depth} pack icons, or a direction arrow. */
         private static final class Item {

@@ -544,9 +544,9 @@ public class CLobby implements IDraftEventHandler {
     }
 
     @Override
-    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
+    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths, List<List<PaperCard>> faceUpBySeat) {
         SwingUtilities.invokeLater(() -> {
-            FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths);
+            FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths, faceUpBySeat);
 
             int depth = (seatIndex >= 0 && seatIndex < seatQueueDepths.length) ? seatQueueDepths[seatIndex] : 0;
             if (seatIndex == mySeatIndex) {

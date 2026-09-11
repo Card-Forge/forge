@@ -8,7 +8,9 @@ import forge.gamemodes.net.event.DraftLogEvent;
 import forge.gamemodes.net.event.DraftPickEvent;
 import forge.gamemodes.net.event.DraftPromptEvent;
 import forge.gamemodes.net.event.DraftPromptResponseEvent;
+import forge.gamemodes.net.event.DraftSeatPickedEvent;
 import forge.gamemodes.net.event.DraftSeatStateEvent;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.net.TestUtils;
 import io.netty.handler.codec.serialization.ClassResolvers;
@@ -103,6 +105,9 @@ public class WireDeserializationTest {
                 new DraftPromptResponseEvent(2, 5, List.of(1))))).getChosen(), List.of(1));
         Assert.assertEquals(((DraftLogEvent) decode(encode(new DraftLogEvent(-1, "hello")))).getMessage(), "hello");
         Assert.assertEquals(((DraftActivateEvent) decode(encode(new DraftActivateEvent(2, variant)))).getAction(), variant);
+        List<List<PaperCard>> faceUp = List.of(List.of(cards.getCard("Canal Dredger")));
+        Assert.assertEquals(((DraftSeatPickedEvent) decode(encode(
+                new DraftSeatPickedEvent(0, new int[] {1}, faceUp)))).getFaceUpBySeat(), faceUp);
     }
 
     /**

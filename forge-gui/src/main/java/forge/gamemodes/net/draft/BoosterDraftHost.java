@@ -36,6 +36,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Server-side adapter that wraps {@link BoosterDraft} for network play.
@@ -493,8 +494,9 @@ public final class BoosterDraftHost implements IHasForgeLog {
 
     private void addBroadcastSeatPicked(int seatIndex) {
         int[] queueDepths = computeQueueDepths();
-        step.add(() -> FServerManager.getInstance().broadcast(
-                new DraftSeatPickedEvent(seatIndex, queueDepths)));
+        DraftSeatPickedEvent picked = new DraftSeatPickedEvent(seatIndex, queueDepths, draft.getAllPlayers().stream()
+                .map(LimitedPlayer::getFaceUp).collect(Collectors.toList()));
+        step.add(() -> FServerManager.getInstance().broadcast(picked));
     }
 
     private int computePickInPack(int seatPickCount) {
