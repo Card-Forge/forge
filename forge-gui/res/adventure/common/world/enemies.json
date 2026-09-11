@@ -20191,7 +20191,7 @@
     "sprite": "sprites/enemy/humanoid/human/wizard/mage_2.atlas",
     "deck": [
       "decks/standard/bluewizard_hard_control.dck",
-      "decks/standard/bluewizard_hard_control2.dck",
+      "decks/standard/bluewizard_hard_tempo.dck",
       "decks/standard/bluewizard_hard_artifact.dck",
       "decks/standard/bluewizard_hard_bounce.dck"
     ],
