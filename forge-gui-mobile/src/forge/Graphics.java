@@ -57,6 +57,9 @@ public class Graphics implements Disposable {
     }
 
     public void end() {
+        // GdxRuntimeException: No buffer allocated! is thrown when when batch is already disposed
+        if (isDisposed)
+            return;
         if (batch.isDrawing()) {
             batch.end();
         }

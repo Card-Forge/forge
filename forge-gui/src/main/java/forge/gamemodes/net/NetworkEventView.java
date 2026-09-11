@@ -1,5 +1,7 @@
 package forge.gamemodes.net;
 
+import forge.card.DraftOptions;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,10 +20,13 @@ public final class NetworkEventView implements Serializable {
     private final int pickTimerSeconds;
     private final String productDescription;
     private final int numRounds;
+    private final int podSize;
+    private final DraftOptions.DoublePick doublePick;
 
     public NetworkEventView(String eventId, EventFormat format, EventPhase phase,
                             List<EventParticipant> participants, int pickTimerSeconds,
-                            String productDescription, int numRounds) {
+                            String productDescription, int numRounds,
+                            int podSize, DraftOptions.DoublePick doublePick) {
         this.eventId = eventId;
         this.format = format;
         this.phase = phase;
@@ -29,6 +34,8 @@ public final class NetworkEventView implements Serializable {
         this.pickTimerSeconds = pickTimerSeconds;
         this.productDescription = productDescription;
         this.numRounds = numRounds;
+        this.podSize = podSize;
+        this.doublePick = doublePick;
     }
 
     public String getEventId() { return eventId; }
@@ -38,4 +45,6 @@ public final class NetworkEventView implements Serializable {
     public int getPickTimerSeconds() { return pickTimerSeconds; }
     public String getProductDescription() { return productDescription; }
     public int getNumRounds() { return numRounds; }
+    public int getPodSize() { return podSize; }
+    public DraftOptions.DoublePick getDoublePick() { return doublePick; }
 }

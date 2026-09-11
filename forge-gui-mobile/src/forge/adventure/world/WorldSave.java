@@ -1,6 +1,7 @@
 package forge.adventure.world;
 
 import com.badlogic.gdx.Gdx;
+import forge.Forge;
 import forge.OverlayText;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
@@ -61,7 +62,7 @@ public class WorldSave {
     }
 
     static public boolean load(int currentSlot) {
-
+        Forge.invokeWorldSave = true; // This is for dispose method check
         String fileName = WorldSave.getSaveFile(currentSlot);
         if (!new File(fileName).exists())
             return false;
@@ -271,4 +272,7 @@ public class WorldSave {
         MapViewScene.instance().clearBookMarks();
     }
 
+    public static void dispose() {
+        Forge.safeDispose(currentSave.world);
+    }
 }
