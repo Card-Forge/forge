@@ -70,7 +70,6 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -97,24 +96,7 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
-    private static final AtomicReference<Thread> execRef = new AtomicReference<>();
-    private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(
-            0,                           // Core pool: 0 threads when idle (saves Android memory)
-            1,                           // Max pool: Only 1 thread max running at a time
-            1L, TimeUnit.MILLISECONDS, // Kill the underlying thread 1ms after it becomes idle
-            new SynchronousQueue<>(),    // Hand off tasks directly to the thread with zero queue latency
-            r -> {
-                Thread t = new Thread(r, "AI ChooseSpell");
-                t.setDaemon(true);
-                execRef.set(t);
-                return t;
-            },
-            new ThreadPoolExecutor.CallerRunsPolicy() // Runs on main thread if the pool is somehow saturated
-    );
-    static {
-        // Allow core threads to die when they have no work
-        executor.allowCoreThreadTimeOut(true);
-    }
+
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
@@ -1614,7 +1596,7 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        Future<SpellAbility> future = executor.submit(() -> {
+        Future<SpellAbility> future = ThreadUtil.AIExecutor.submit(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1702,7 +1684,7 @@ public class AiController {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
-            Thread t = execRef.get();
+            Thread t = ThreadUtil.AIExecThread.get();
             if (e instanceof TimeoutException) {
                 // log where the eval thread currently is - each timeout doubles as a
                 // profiler sample for diagnosing remaining AI slowdowns from user logs

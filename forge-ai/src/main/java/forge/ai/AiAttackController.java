@@ -77,21 +77,6 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
-    private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(
-        0, Runtime.getRuntime().availableProcessors(),
-        1L, TimeUnit.MILLISECONDS,
-        new SynchronousQueue<>(),
-        r -> {
-            Thread t = new Thread(r, "AI DeclareAttack");
-            t.setDaemon(true);
-            return t;
-        },
-        new ThreadPoolExecutor.CallerRunsPolicy()
-    );
-    static {
-        // Allow core threads to die when they have no work
-        executor.allowCoreThreadTimeOut(true);
-    }
 
     /**
      * <p>
@@ -953,7 +938,7 @@ public class AiAttackController {
             }
 
             try {
-                executor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+                ThreadUtil.AIExecutor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

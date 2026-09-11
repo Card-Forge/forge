@@ -1,10 +1,25 @@
 package forge.util;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class ThreadUtil {
+public class ThreadUtil {public static final AtomicReference<Thread> AIExecThread = new AtomicReference<>();
+    public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
+            0, Runtime.getRuntime().availableProcessors(),
+            1L, TimeUnit.MILLISECONDS, // Kill the underlying thread 1ms after it becomes idle
+            new SynchronousQueue<>(),  // Hand off tasks directly to the thread with zero queue latency
+            r -> {
+                Thread t = new Thread(r, "AI ThreadPool");
+                t.setDaemon(true);
+                AIExecThread.set(t);
+                return t;
+            },
+            new ThreadPoolExecutor.CallerRunsPolicy() // Runs on main thread if the pool is somehow saturated
+    );
     static {
         System.out.printf("(ThreadUtil first call): Running with priority %d%n", Thread.currentThread().getPriority());
+        // Allow core threads to die when they have no work
+        AIExecutor.allowCoreThreadTimeOut(true);
     }
 
     private static class WorkerThreadFactory implements ThreadFactory {
