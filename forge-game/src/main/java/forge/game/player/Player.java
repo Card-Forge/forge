@@ -1192,7 +1192,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!library.isEmpty()) {
             Card c;
 
-            if (hasKeyword("You draw cards from the bottom of your library instead of the top of your library.")) {
+            if (drawsFromBottom()) {
                 c = library.get(library.size() - 1);
             } else {
                 c = library.get(0);
@@ -2451,6 +2451,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public boolean isPhasesReversed() {
         return StaticAbilityTurnPhaseReversed.isPhaseReversed(this);
+    }
+
+    public boolean drawsFromBottom() {
+        return StaticAbilityDrawFromBottom.drawsFromBottom(this);
     }
 
     public void onCleanupPhase() {
