@@ -70,6 +70,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -97,6 +98,7 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     private volatile boolean timeoutReached;
+    private AtomicReference<Thread> threadReference = new AtomicReference<>();
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1603,6 +1605,7 @@ public class AiController {
         ExecutorService executor = Executors.newSingleThreadExecutor(r -> {
             Thread t = new Thread(r, "Game AI Eval");
             t.setDaemon(true);
+            threadReference.set(t);
             return t;
         });
 
@@ -1673,11 +1676,12 @@ public class AiController {
                     sa.setLastStateGraveyard(game.getLastStateGraveyard());
                 }
                 //override decision for living end player
-                AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision)
-                    ? aiPlayDecision : canPlayAndPayFor(sa);
+                AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
 
                 // reset LastStateBattlefield
                 sa.clearLastState();
+                // PhaseHandler ph = game.getPhaseHandler();
+                // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
                 if (opinion != AiPlayDecision.WillPlay) {
                     continue;
@@ -1710,10 +1714,26 @@ public class AiController {
             timeoutReached = true;
             future.cancel(true); // cooperative interrupt
             executor.shutdownNow(); // ensures thread is interrupted
+            // get the reference and process to stop if it's still alive
+            Thread t = threadReference.get();
+            try {
+                t.join(2000); //2 seconds wait
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            if (t.isAlive()) {
+                // last resort, see #8302: the eval thread may be stuck inside a single
+                // evaluation or an infinite loop and never reach the cooperative exit
+                try {
+                    t.stop();
+                } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                    // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                }
+            }
+            // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         }
     }
-
 
     public CardCollection chooseCardsToDelve(int genericCost, CardCollection grave) {
         CardCollection toExile = new CardCollection();
