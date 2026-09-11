@@ -4,6 +4,6 @@ Types:Legendary Creature Gorgon Assassin
 PT:4/4
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Land.YouCtrl | PresentCompare$ GE6 | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, if you control six or more lands, destroy target permanent an opponent controls. They create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl | ValidTgtsDesc$ permanent an opponent controls | SubAbility$ DBToken
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl | ValidTgtsDesc$ permanent an opponent controls | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ TargetedController
 Oracle:Deathtouch\nWhen Vraska enters, if you control six or more lands, destroy target permanent an opponent controls. They create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
