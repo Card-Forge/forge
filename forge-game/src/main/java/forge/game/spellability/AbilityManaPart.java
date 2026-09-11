@@ -419,35 +419,21 @@ public class AbilityManaPart implements java.io.Serializable {
                 return true;
             }
 
-            
-            if (restriction.startsWith("CantCast ")) {
+            // "can't" zone restriction – shouldn't be mixed with other restrictions
+            // e.g. RestrictValid$ CantCast FromHand
+            if (restriction.startsWith("CantCast From")) {
                 if (!sa.isSpell()) {
                     return true;
                 }
-
-                 final String subRestriction = restriction.substring(9);
-
-                // "can't" zone restriction
-                if (subRestriction.startsWith("From")) {
-                    final ZoneType badZone = ZoneType.smartValueOf(subRestriction.substring(4));
-                    final Card host = sa.getHostCard();
-                    final Zone castFrom = host.getCastFrom();
-                    //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
-                    final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
-                    if (!badZone.equals(zone)) {
-                        return true;
-                    }
-
-                    continue;
+                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(13));
+                final Card host = sa.getHostCard();
+                final Zone castFrom = host.getCastFrom();
+                //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
+                final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
+                if (!badZone.equals(zone)) {
+                    return true;
                 }
-
-                // If the spell matches the restriction filter (e.g. "Spell.!Artifact"), 
-                // then it is explicitly forbidden from using this mana.
-                if (sa.isValid(subRestriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
-                    return false;
-                }
-
-                return true;
+                continue;
             }
 
             // TODO refactor to differ between ForCost and ForEffect
