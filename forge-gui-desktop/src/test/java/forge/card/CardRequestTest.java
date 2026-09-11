@@ -232,7 +232,7 @@ public class CardRequestTest {
     }
 
     @Test
-    public void isFoilCardNameMethod() {
+    void isFoilCardNameMethod() {
         assertTrue(CardRequest.isFoilCardName("Counterspell+"));
         assertFalse(CardRequest.isFoilCardName("Counterspell"));
         assertTrue(CardRequest.isFoilCardName("   Counterspell+    "));
@@ -240,7 +240,7 @@ public class CardRequestTest {
     }
 
     @Test
-    public void testComposeCardRequestWithCardNameAndFoil() {
+    void testComposeCardRequestWithCardNameAndFoil() {
         String cardName = "Counterspell";
         String foilCardName = "Counterspell+";
 

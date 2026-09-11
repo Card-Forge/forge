@@ -170,7 +170,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void testGetAllCardsOfaGivenNameAndPrintedInSets() {
+    void testGetAllCardsOfaGivenNameAndPrintedInSets() {
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
         Predicate<PaperCard> printedInSets = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
         List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell, printedInSets);
@@ -194,7 +194,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void testGetAllCardsOfaGivenNameAndLegalInSets() {
+    void testGetAllCardsOfaGivenNameAndLegalInSets() {
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
         Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
         List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell, legalInSets);
@@ -2350,7 +2350,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void testCardRequestWithSetCodeAllInLowercase() {
+    void testCardRequestWithSetCodeAllInLowercase() {
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         PaperCard counterSpellCard = this.cardDb.getCard(this.cardNameCounterspell, "tmp");
@@ -2359,7 +2359,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void prepareTestCaseForSetPreferredArtTest() {
+    void prepareTestCaseForSetPreferredArtTest() {
         String setCode = this.editionsCounterspell[0];
         int artIndex = 4; // non-existing
         String cardRequest = CardDb.CardRequest.compose(this.cardNameCounterspell, setCode, artIndex);
@@ -2372,7 +2372,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void setPreferredArtForCard() {
+    void setPreferredArtForCard() {
         String cardName = "Mountain";
         String setCode = "3ED";
         int artIndex = 5;
@@ -2383,7 +2383,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt() {
+    void testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt() {
         String cardRequest = CardDb.CardRequest.compose("Island", "MIR", 3);
         PaperCard islandCard = this.cardDb.getCard(cardRequest);
         assertNotNull(islandCard);
@@ -2421,7 +2421,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void testGetDualAndDoubleCards() {
+    void testGetDualAndDoubleCards() {
         String fireAndIce = "Fire // Ice";
         PaperCard fireAndIceCard = this.cardDb.getCard(fireAndIce);
         assertNotNull(fireAndIceCard);

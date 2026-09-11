@@ -69,7 +69,7 @@ public class CardMockTestCase {
     private static Localizer localizerBeforeMocking;
 
     @BeforeMethod
-    public void initMocks() throws Exception {
+    protected void initMocks() throws Exception {
         // BaseGameSimulationTest.runGame() calls this again part-way through a test, and
         // Mockito refuses to open a second static mock for a class that already has one.
         releaseMocks();
@@ -80,7 +80,7 @@ public class CardMockTestCase {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void releaseMocks() {
+    protected void releaseMocks() {
         if (imageKeysMock != null) {
             imageKeysMock.close();
             imageKeysMock = null;

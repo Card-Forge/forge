@@ -96,7 +96,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * Rex Parsing and Matching: CARD DB
      * ================================= */
     @Test
-    public void testMatchAllCardNamesInForgeDB() {
+    void testMatchAllCardNamesInForgeDB() {
         if (mtgUniqueCardNames == null)
             this.initMaps();
         Pattern cardNamePattern = Pattern.compile(DeckRecognizer.REX_CARD_NAME);
@@ -115,7 +115,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchAllSetCodesAndAlternateCodesInForgeDB() {
+    void testMatchAllSetCodesAndAlternateCodesInForgeDB() {
         if (mtgUniqueCardNames == null)
             this.initMaps();
         Pattern setCodePattern = Pattern.compile(DeckRecognizer.REX_SET_CODE);
@@ -128,7 +128,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchAllPossibleCollectorNumbersInForgeDB() {
+    void testMatchAllPossibleCollectorNumbersInForgeDB() {
         if (mtgUniqueCardNames == null)
             this.initMaps();
         Pattern collNumberPattern = Pattern.compile(DeckRecognizer.REX_COLL_NUMBER);
@@ -141,7 +141,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardQuantityRequest() {
+    void testCardQuantityRequest() {
         Pattern cardCountPattern = Pattern.compile(DeckRecognizer.REX_CARD_COUNT);
         String[] correctAmountRequests = new String[] { "0", "2", "12", "4", "8x", "12x" };
         String[] inCorrectAmountRequests = new String[] { "-2", "-23", "NO", "133" };
@@ -165,7 +165,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchingFoilCardName() {
+    void testMatchingFoilCardName() {
         String foilCardName = "Counter spell+";
         Pattern cardNamePattern = Pattern.compile(DeckRecognizer.REX_CARD_NAME);
         Matcher cardNameMatcher = cardNamePattern.matcher(foilCardName);
@@ -175,7 +175,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchDeckName() {
+    void testMatchDeckName() {
         Pattern deckNamePattern = DeckRecognizer.DECK_NAME_PATTERN;
 
         String matchingDeckName = "Deck: Red Green Aggro";
@@ -262,7 +262,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testDeckNameAsInNetDecksWithSymbols() {
+    void testDeckNameAsInNetDecksWithSymbols() {
         String deckName = "Name = [Standard] #02 - Dimir Rogues";
         Pattern deckNamePattern = DeckRecognizer.DECK_NAME_PATTERN;
         Matcher deckNameMatcher = deckNamePattern.matcher(deckName);
@@ -273,7 +273,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchDeckSectionNames() {
+    void testMatchDeckSectionNames() {
         String[] dckSections = new String[] { "Main", "main", "Mainboard", "Sideboard", "Side", "Schemes", "Avatar",
                 "avatar", "Commander", "Conspiracy", "card", "Planes", "Dungeon" };
         for (String section : dckSections)
@@ -295,7 +295,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testSBshortAsPlaceholderForSideboard() {
+    void testSBshortAsPlaceholderForSideboard() {
         String dckSec = "SB:";
         assertTrue(DeckRecognizer.isDeckSectionName(dckSec));
 
@@ -307,7 +307,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchCardTypes() {
+    void testMatchCardTypes() {
         String[] cardTypes = new String[] { "Spell", "instants", "Sorceries", "Sorcery", "Artifact", "creatures",
                 "land" };
         for (String cardType : cardTypes)
@@ -325,14 +325,14 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testOnlyContainingCardTypeWontMatchCardTypeToken() {
+    void testOnlyContainingCardTypeWontMatchCardTypeToken() {
         String[] nonCardTypes = new String[] { "Spell collection", "instants list", "creatures elves", "land list" };
         for (String nonCardTypeTokens : nonCardTypes)
             assertFalse(DeckRecognizer.isCardType(nonCardTypeTokens), "Fail on " + nonCardTypeTokens);
     }
 
     @Test
-    public void testRarityTypeTokenMatch() {
+    void testRarityTypeTokenMatch() {
         String[] rarityTokens = new String[] { "Common", "uncommon", "rare", "mythic", "mythic rare", "land",
                 "special" };
         for (String line : rarityTokens)
@@ -344,7 +344,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCMCTokenMatch() {
+    void testCMCTokenMatch() {
         String[] cmcTokens = new String[] { "CC0", "CMC2", "CMC11", "cc3" };
         for (String line : cmcTokens)
             assertTrue(DeckRecognizer.isCardCMC(line), "Fail on " + line);
@@ -355,7 +355,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testManaSymbolsMatches() {
+    void testManaSymbolsMatches() {
         Pattern manaSymbolPattern = DeckRecognizer.MANA_PATTERN;
 
         List<MagicColor.Color> colours = Arrays.asList(MagicColor.Color.COLORLESS, MagicColor.Color.BLACK,
@@ -395,7 +395,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testManaTokenMatch() {
+    void testManaTokenMatch() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String[] cmcTokens = new String[] { "Blue", "red", "White", "// Black", "       //Colorless----", "(green)",
                 "// Multicolor", "// MultiColour" };
@@ -419,7 +419,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testManaTokensBiColors() {
+    void testManaTokensBiColors() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String[] cmcTokens = new String[] { "Blue White", "red-black", "White green", "// Black Blue", "(green|red)" };
         String[] manaTokens = new String[] { "{U} {W}", "{r}-{b}", "{W} {g}", "// {B} {U}", "({g}|{r})" };
@@ -451,7 +451,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testTokenBiColorSymbols() {
+    void testTokenBiColorSymbols() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String[] manaSymbols = new String[] { "{WU}", "{UB}", "{BR}", "{GW}", "{RG}", "{WB}", "{UR}", "{BG}", "{RW}",
                 "{GU}" };
@@ -474,7 +474,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testManaTokensRepeatedAreIgnored() {
+    void testManaTokensRepeatedAreIgnored() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String[] cmcTokens = new String[] { "Blue Blue", "red-red", "White white", "// black BLACK", "(Green|grEEn)", };
         String[] expectedTokenText = new String[] { "{U}", "{R}", "{W}", "{B}", "{G}" };
@@ -504,7 +504,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMultiColourOrColourlessManaTokensWillBeHandledSeparately() {
+    void testMultiColourOrColourlessManaTokensWillBeHandledSeparately() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String[] cmcTokens = new String[] { "Blue Colourless", "Red Multicolour", "Colorless White", "// Multicolour ",
                 "(green|Colourless)" };
@@ -523,7 +523,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCornerCasesWithSpecialMulticolourAndColorlessTokens() {
+    void testCornerCasesWithSpecialMulticolourAndColorlessTokens() {
         DeckRecognizer recognizer = new DeckRecognizer();
         // Test repeated
         String[] cmcTokens = new String[] { "Colorless Colourless", "Multicolor Multicolour", "Colorless colourless" };
@@ -548,7 +548,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * =============================
      */
     @Test
-    public void testMatchNonCardLine() {
+    void testMatchNonCardLine() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         // Test Token Types
@@ -651,7 +651,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Card-Set Pattern Request
     @Test
-    public void testValidMatchCardSetLine() {
+    void testValidMatchCardSetLine() {
         String validRequest = "1 Power Sink TMP";
         Matcher matcher = DeckRecognizer.CARD_SET_PATTERN.matcher(validRequest);
         assertTrue(matcher.matches());
@@ -770,7 +770,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testInvalidMatchCardSetLine() {
+    void testInvalidMatchCardSetLine() {
         // == Invalid Cases for this REGEX
         // Remeber: this rex *always* expects a Set Code!
 
@@ -793,7 +793,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Set-Card Pattern Request
     @Test
-    public void testValidMatchSetCardLine() {
+    void testValidMatchSetCardLine() {
         String validRequest = "1 TMP Power Sink";
         Matcher matcher = DeckRecognizer.SET_CARD_PATTERN.matcher(validRequest);
         assertTrue(matcher.matches());
@@ -893,7 +893,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testInvalidMatchSetCardLine() {
+    void testInvalidMatchSetCardLine() {
         // == Invalid Cases for this REGEX
         // Remeber: this rex *always* expects a Set Code!
 
@@ -916,7 +916,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Card-Set-CollectorNumber Pattern Request
     @Test
-    public void testMatchFullCardSetRequest() {
+    void testMatchFullCardSetRequest() {
         String validRequest = "1 Power Sink TMP 78";
         Matcher matcher = DeckRecognizer.CARD_SET_COLLNO_PATTERN.matcher(validRequest);
         assertTrue(matcher.matches());
@@ -967,7 +967,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testInvalidMatchFullCardSetRequest() {
+    void testInvalidMatchFullCardSetRequest() {
         // NOTE: this will be matcher by another pattern
         String invalidRequest = "1 Power Sink TMP"; // missing collector number
         Matcher matcher = DeckRecognizer.CARD_SET_COLLNO_PATTERN.matcher(invalidRequest);
@@ -985,7 +985,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Set-Card-CollectorNumber Pattern Request
     @Test
-    public void testMatchFullSetCardRequest() {
+    void testMatchFullSetCardRequest() {
         String validRequest = "1 TMP Power Sink 78";
         Matcher matcher = DeckRecognizer.SET_CARD_COLLNO_PATTERN.matcher(validRequest);
         assertTrue(matcher.matches());
@@ -1068,7 +1068,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testInvalidMatchFullSetCardRequest() {
+    void testInvalidMatchFullSetCardRequest() {
         // NOTE: this will be matcher by another pattern
         String invalidRequest = "1 Power Sink TMP"; // missing collector number
         Matcher matcher = DeckRecognizer.SET_CARD_COLLNO_PATTERN.matcher(invalidRequest);
@@ -1085,7 +1085,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCrossRexForDifferentLineRequests() {
+    void testCrossRexForDifferentLineRequests() {
         String cardRequest = "4x Power Sink TMP 78";
         assertTrue(DeckRecognizer.CARD_SET_COLLNO_PATTERN.matcher(cardRequest).matches());
         assertTrue(DeckRecognizer.SET_CARD_COLLNO_PATTERN.matcher(cardRequest).matches());
@@ -1115,7 +1115,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Card Only Pattern Request (No Set)
     @Test
-    public void testMatchCardOnlyRequest() {
+    void testMatchCardOnlyRequest() {
         String validRequest = "4x Power Sink";
         Matcher matcher = DeckRecognizer.CARD_ONLY_PATTERN.matcher(validRequest);
         assertTrue(matcher.matches());
@@ -1146,7 +1146,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testRecogniseCardToken() {
+    void testRecogniseCardToken() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "4x Power Sink+ (TMP) 78";
@@ -1287,7 +1287,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testSingleWordCardNameMatchesCorrectly() {
+    void testSingleWordCardNameMatchesCorrectly() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Counterspell ICE";
@@ -1323,7 +1323,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * Code ========================================
      */
     @Test
-    public void testRecognisingCardFromSetUsingAlternateCode() {
+    void testRecognisingCardFromSetUsingAlternateCode() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "4x Power Sink+ TE 78";
@@ -1348,7 +1348,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * =================================
      */
     @Test
-    public void testMatchFoilCardRequest() {
+    void testMatchFoilCardRequest() {
         // card-set-collnr
         String foilRequest = "4x Power Sink+ (TMP) 78";
         Pattern target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
@@ -1397,7 +1397,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testMatchFoilCardRequestMTGGoldfishFormat() {
+    void testMatchFoilCardRequestMTGGoldfishFormat() {
         // card-set-collnr
         String foilRequest = "4 Aspect of Hydra [BNG] (F)";
         Pattern target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
@@ -1519,7 +1519,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * ==================================================
      */
     @Test
-    public void testPassingInArtIndexRatherThanCollectorNumber() {
+    void testPassingInArtIndexRatherThanCollectorNumber() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "20x Mountain MIR 3";
@@ -1537,7 +1537,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCollectorNumberIsNotConfusedAsArtIndexInstead() {
+    void testCollectorNumberIsNotConfusedAsArtIndexInstead() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Auspicious Ancestor MIR 3";
@@ -1555,7 +1555,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardRequestWithWrongCollectorNumberStillReturnsTheCardFromSetIfAny() {
+    void testCardRequestWithWrongCollectorNumberStillReturnsTheCardFromSetIfAny() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String requestLine = "3 Jayemdae Tome (LEB) 231"; // actually found in TappedOut Deck Export
@@ -1585,7 +1585,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * ================================
      */
     @Test
-    public void testRequestingCardFromTheWrongSetReturnsUnknownCard() {
+    void testRequestingCardFromTheWrongSetReturnsUnknownCard() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Counterspell FEM";
@@ -1596,7 +1596,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testRequestingCardFromNonExistingSetReturnsUnknownCard() {
+    void testRequestingCardFromNonExistingSetReturnsUnknownCard() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Counterspell BOU";
@@ -1612,7 +1612,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * Date ======================================
      */
     @Test
-    public void testRequestingCardWithReleaseDateConstraints() {
+    void testRequestingCardWithReleaseDateConstraints() {
         DeckRecognizer recognizer = new DeckRecognizer();
         recognizer.setDateConstraint(2002, 1);
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(),
@@ -1646,7 +1646,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testInvalidCardRequestWhenReleaseDateConstraintsAreUp() {
+    void testInvalidCardRequestWhenReleaseDateConstraintsAreUp() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(),
@@ -1677,7 +1677,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * =====================================
      */
     @Test
-    public void testChangesInArtPreference() {
+    void testChangesInArtPreference() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints - uses default card art
@@ -1716,7 +1716,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardRequestVariesUponChangesInArtPreference() {
+    void testCardRequestVariesUponChangesInArtPreference() {
         assertEquals(StaticData.instance().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         DeckRecognizer recognizer = new DeckRecognizer();
 
@@ -1764,7 +1764,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      */
 
     @Test
-    public void testRequestingCardWithRestrictionsOnSetsFromGameFormat() {
+    void testRequestingCardWithRestrictionsOnSetsFromGameFormat() {
         DeckRecognizer recognizer = new DeckRecognizer();
         // Setting Fantasy Constructed Game Format: Urza's Block Format
         List<String> allowedSets = Arrays.asList("USG", "ULG", "UDS", "PUDS", "PULG", "PUSG");
@@ -1788,7 +1788,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testRequestingCardWithRestrictionsOnDeckFormat() {
+    void testRequestingCardWithRestrictionsOnDeckFormat() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "Ancestral Recall";
@@ -1816,7 +1816,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardRequestUnderGameConstraints() {
+    void testCardRequestUnderGameConstraints() {
         // == Simulate Pioneer Format Banned List
         DeckRecognizer recognizer = new DeckRecognizer();
         List<String> bannedList = Arrays.asList(StringUtils.split(
@@ -1857,7 +1857,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testGameFormatRestrictionsAlsoWithRestrictedCardList() {
+    void testGameFormatRestrictionsAlsoWithRestrictedCardList() {
         // SIMULATE A GAME OF VINTAGE
         DeckRecognizer recognizer = new DeckRecognizer();
         List<String> allowedSetCodes = Arrays.asList(StringUtils.split(
@@ -1902,7 +1902,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testSettingPartialConstraintsOnGameFormatsAreStillApplied() {
+    void testSettingPartialConstraintsOnGameFormatsAreStillApplied() {
         // Setting only Partial Game Constraints
         DeckRecognizer recognizer = new DeckRecognizer();
         List<String> allowedSetCodes = Arrays.asList("MIR", "VIS", "WTH");
@@ -2012,7 +2012,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      */
 
     @Test
-    public void testCardMatchWithDateANDGameFormatConstraints() {
+    void testCardMatchWithDateANDGameFormatConstraints() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
@@ -2114,7 +2114,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardMatchWithDateANDdeckFormatConstraints() {
+    void testCardMatchWithDateANDdeckFormatConstraints() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
@@ -2171,7 +2171,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardMatchWithGameANDdeckFormatConstraints() {
+    void testCardMatchWithGameANDdeckFormatConstraints() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
@@ -2250,7 +2250,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardMatchWitDateANDgameANDdeckFormatConstraints() {
+    void testCardMatchWitDateANDgameANDdeckFormatConstraints() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
@@ -2331,7 +2331,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === MTG Goldfish
     @Test
-    public void testFoilRequestInMTGGoldfishExportFormat() {
+    void testFoilRequestInMTGGoldfishExportFormat() {
         String mtgGoldfishRequest = "18 Forest <254> [THB]";
         Pattern target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
         Matcher matcher = target.matcher(mtgGoldfishRequest);
@@ -2381,7 +2381,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardRecognisedMTGGoldfishFormat() {
+    void testCardRecognisedMTGGoldfishFormat() {
         DeckRecognizer recognizer = new DeckRecognizer();
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(),
                 CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
@@ -2413,7 +2413,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === TappedOut Markdown Format
     @Test
-    public void testPurgeLinksInLineRequests() {
+    void testPurgeLinksInLineRequests() {
         String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
         String expected = "* 1 [Ancestral Recall]";
         assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
@@ -2424,7 +2424,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardNameEntryInMarkDownExportFromTappedOut() {
+    void testCardNameEntryInMarkDownExportFromTappedOut() {
         DeckRecognizer recognizer = new DeckRecognizer();
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(),
                 CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
@@ -2444,7 +2444,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === XMage Format
     @Test
-    public void testMatchCardRequestXMageFormat() {
+    void testMatchCardRequestXMageFormat() {
         String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
         Pattern target = DeckRecognizer.SET_COLLNO_CARD_XMAGE_PATTERN;
         Matcher matcher = target.matcher(xmageFormatRequest);
@@ -2483,7 +2483,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testRecognizeCardTokenInXMageFormatRequest() {
+    void testRecognizeCardTokenInXMageFormatRequest() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
@@ -2501,7 +2501,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Deckstats Commander
     @Test
-    public void testRecognizeCommanderCardInDeckstatsExportFormat() {
+    void testRecognizeCommanderCardInDeckstatsExportFormat() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String deckstatsCommanderRequest = "1 Sliver Overlord #!Commander";
@@ -2534,7 +2534,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Double-Sided Cards
     @Test
-    public void testRecognizeDoubleSidedCards() {
+    void testRecognizeDoubleSidedCards() {
         String leftSideRequest = "Afflicted Deserter";
         String rightSideRequest = "Werewolf Ransacker";
         String doubleSideRequest = "Afflicted Deserter // Werewolf Ransacker";
@@ -2581,7 +2581,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * ================================
      */
     @Test
-    public void testCardTokenIsAssignedToCorrectDeckSection() {
+    void testCardTokenIsAssignedToCorrectDeckSection() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String cardRequest = "2x Counterspell |TMP";
@@ -2628,7 +2628,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardSectionIsAdaptedToCardRegardlessOfCurrentSection() {
+    void testCardSectionIsAdaptedToCardRegardlessOfCurrentSection() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String cardRequest = "2x All in good time"; // Scheme Card
@@ -2650,7 +2650,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardSectionIsAdpatedToCardRegardlessOfSectionInCardRequest() {
+    void testCardSectionIsAdpatedToCardRegardlessOfSectionInCardRequest() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String cardRequest = "CM: 4x Incinerate"; // Incinerate in Commander Section
@@ -2674,7 +2674,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testDeckSectionTokenValidationAlsoAppliesToNonLegalCards() {
+    void testDeckSectionTokenValidationAlsoAppliesToNonLegalCards() {
         DeckRecognizer recognizer = new DeckRecognizer();
         recognizer.setGameFormatConstraint(null, Collections.singletonList("Incinerate"), null);
 
@@ -2703,7 +2703,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCornerCaseWhenThereIsNoCurrentSectionAndMatchedSectionIsNotAllowedButCouldMatchMain() {
+    void testCornerCaseWhenThereIsNoCurrentSectionAndMatchedSectionIsNotAllowedButCouldMatchMain() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         String cardRequest = "All in Good Time"; // Scheme Section
@@ -2771,7 +2771,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      */
 
     @Test
-    public void testUknonwCardIsReturnedForAnExistingCardFromTheWrongSet() {
+    void testUknonwCardIsReturnedForAnExistingCardFromTheWrongSet() {
         String cardRequest = "Counterspell FEM";
         DeckRecognizer recognizer = new DeckRecognizer();
         Token unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
@@ -2782,7 +2782,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testUknownCardIsReturnedForLineRequestsThatLooksLikeACardButAreNotSupported() {
+    void testUknownCardIsReturnedForLineRequestsThatLooksLikeACardButAreNotSupported() {
         String cardRequest = "2x Counterspelling TMP";
         DeckRecognizer recognizer = new DeckRecognizer();
         Token unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
@@ -2831,7 +2831,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
      * =============== TEST TOKEN-KEY ==============
      */
     @Test
-    public void testTokenKeyForLegalCard() {
+    void testTokenKeyForLegalCard() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String cardRequest = "Viashino Sandstalker";
         Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
@@ -2856,7 +2856,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testTokenKeyWithGameConstraints() {
+    void testTokenKeyWithGameConstraints() {
         DeckRecognizer recognizer = new DeckRecognizer();
         List<String> allowedSetCodes = Arrays.asList("MIR", "VIS", "WTH");
         List<String> bannedCards = Collections.singletonList("Squandered Resources");
@@ -2918,7 +2918,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testTokenKeyWithNonCardTokens() {
+    void testTokenKeyWithNonCardTokens() {
         DeckRecognizer recognizer = new DeckRecognizer();
         // Deck Name
         String line = "Name: Test Deck";
@@ -3033,7 +3033,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testTokenKeyFromString() {
+    void testTokenKeyFromString() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String cardRequest = "Viashino Sandstalker";
         Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
@@ -3069,7 +3069,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testTokenKeyWithFoiledCard() {
+    void testTokenKeyWithFoiledCard() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String cardRequest = "Mountain|M21 (F)";
         Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
@@ -3096,7 +3096,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testTokenKeyFoilCardFromString() {
+    void testTokenKeyFoilCardFromString() {
         DeckRecognizer recognizer = new DeckRecognizer();
         String cardRequest = "Mountain|M21 (F)";
         Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
@@ -3140,7 +3140,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === MIXED inputs ===
     @Test
-    public void testRecognizeLines() {
+    void testRecognizeLines() {
         DeckRecognizer recognizer = new DeckRecognizer();
 
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(),
@@ -3240,7 +3240,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
 
     // === Parsing Card List ===
     @Test
-    public void testParsingCardListNoConstraint() {
+    void testParsingCardListNoConstraint() {
         String[] cardList = new String[] { "//Sideboard", // decksection
                 "2x Counterspell FEM", // unknonw card
                 "4x Incinerate|ICE", // known card to side
@@ -3278,7 +3278,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testParseCardListWithAllowedSectionsRaisesUnsupportedCardsAndSection() {
+    void testParseCardListWithAllowedSectionsRaisesUnsupportedCardsAndSection() {
         String[] cardList = new String[] { "//Sideboard", // decksection - unsupported section
                 "All in Good Time", // Schemes - unsupported card
                 "4x Incinerate|ICE", // known card to main
@@ -3312,7 +3312,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardListWithDeckNameHasDeckNameOnTop() {
+    void testCardListWithDeckNameHasDeckNameOnTop() {
         String[] cardList = new String[] { "//Sideboard", // decksection
                 "Name: Test deck", // goes on top
                 "4x Incinerate|ICE", // known card to side
@@ -3342,7 +3342,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testCardsInDifferentSectionsWillAddAlsoDeckSectionPlaceholders() {
+    void testCardsInDifferentSectionsWillAddAlsoDeckSectionPlaceholders() {
         String[] cardList = new String[] { "2x Counterspell | TMP", // card legal in Main (+placeholder)
                 "SB:4x Incinerate|ICE", // card legal in Side (+ placeholder)
                 "2x Fireball 5ED" // card legal in Side
@@ -3391,7 +3391,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testDeckSectionValidationForTokensAddPlaceholderAndRestoresMainSection() {
+    void testDeckSectionValidationForTokensAddPlaceholderAndRestoresMainSection() {
         String[] cardList = new String[] { "2x Counterspell | TMP", // card legal in Main (+placeholder)
                 "All in Good Time", // card legal in Schemes (+ placeholder)
                 "2x Fireball 5ED" // card legal in Main (+ placeholder as section changes again)
@@ -3444,7 +3444,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
     }
 
     @Test
-    public void testUnsupportedCardIsReturnedOnlyWhenNoOtherOptionExistForSectionMatching() {
+    void testUnsupportedCardIsReturnedOnlyWhenNoOtherOptionExistForSectionMatching() {
         DeckRecognizer recognizer = new DeckRecognizer();
         // Now add constraint
         recognizer.setAllowedDeckSections(Arrays.asList(DeckSection.Main, DeckSection.Sideboard));

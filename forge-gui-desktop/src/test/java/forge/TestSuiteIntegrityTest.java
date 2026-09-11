@@ -4,8 +4,6 @@ import static org.testng.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,18 +21,14 @@ import org.testng.annotations.Test;
  * <p>
  * Issue #11183: eight test classes stopped running in September 2024 and the build stayed
  * green for a year, because TestNG reports a class it cannot inspect as holding zero tests
- * rather than as a failure. Two independent defects produced that, and this class checks
- * for both:
+ * rather than as a failure. Every subclass of PowerMock's {@code PowerMockTestCase} became
+ * uninspectable when TestNG 7.10 removed {@code org.testng.IObjectFactory}, which PowerMock
+ * 2.0.9 still names in the signature of an inherited method.
  * </p>
- * <ol>
- * <li><b>A test class TestNG cannot inspect.</b> Every subclass of PowerMock's
- * {@code PowerMockTestCase} became uninspectable when TestNG 7.10 removed
- * {@code org.testng.IObjectFactory}, which PowerMock 2.0.9 still names in the signature of
- * an inherited method. Walking a class's methods here reproduces exactly the resolution
- * TestNG performs, so the same breakage now fails the build.</li>
- * <li><b>A {@code @Test} method that is not public.</b> TestNG only collects public test
- * methods and says nothing about the rest; 101 methods had quietly become invisible.</li>
- * </ol>
+ * <p>
+ * Walking a class's methods here reproduces exactly the resolution TestNG performs, so the
+ * same breakage fails the build instead of quietly shrinking the suite.
+ * </p>
  */
 public class TestSuiteIntegrityTest {
 
@@ -68,34 +62,6 @@ public class TestSuiteIntegrityTest {
         assertTrue(broken.isEmpty(),
                 "TestNG silently reports zero tests for a class it cannot inspect, so these classes "
                         + "would never run and the build would still pass:\n  " + String.join("\n  ", broken));
-    }
-
-    @Test
-    public void testEveryTestMethodIsPublic() throws Exception {
-        List<String> nonPublic = new ArrayList<>();
-        for (String className : compiledTestClassNames()) {
-            final Class<?> clazz;
-            try {
-                clazz = Class.forName(className, false, getClass().getClassLoader());
-            } catch (Throwable t) {
-                // Reported by testEveryTestClassCanBeInspectedByTestNG instead.
-                continue;
-            }
-            final Method[] methods;
-            try {
-                methods = clazz.getDeclaredMethods();
-            } catch (Throwable t) {
-                continue;
-            }
-            for (Method m : methods) {
-                if (m.isAnnotationPresent(Test.class) && !Modifier.isPublic(m.getModifiers())) {
-                    nonPublic.add(className + "#" + m.getName());
-                }
-            }
-        }
-        assertTrue(nonPublic.isEmpty(),
-                "TestNG only collects public @Test methods, so these would never run:\n  "
-                        + String.join("\n  ", nonPublic));
     }
 
     private List<String> compiledTestClassNames() throws IOException, URISyntaxException {

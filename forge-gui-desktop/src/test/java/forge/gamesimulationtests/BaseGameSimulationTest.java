@@ -20,7 +20,7 @@ public class BaseGameSimulationTest extends CardMockTestCase {
 
     @BeforeMethod
     @Override
-    public void initMocks() throws Exception {
+    protected void initMocks() throws Exception {
         super.initMocks();
         sentryMock = Mockito.mockStatic(Sentry.class);
         gameLogFormatterMock = Mockito.mockStatic(GameLogFormatter.class);
@@ -28,7 +28,7 @@ public class BaseGameSimulationTest extends CardMockTestCase {
 
     @AfterMethod(alwaysRun = true)
     @Override
-    public void releaseMocks() {
+    protected void releaseMocks() {
         if (gameLogFormatterMock != null) {
             gameLogFormatterMock.close();
             gameLogFormatterMock = null;

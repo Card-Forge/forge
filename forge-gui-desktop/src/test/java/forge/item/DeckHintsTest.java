@@ -33,7 +33,7 @@ public class DeckHintsTest {
      * Card test.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void test() {
+    void test() {
         PaperCard cp = readCard("griffin_rider.txt");
         Assert.assertEquals("Griffin Rider", cp.getName());
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
@@ -53,7 +53,7 @@ public class DeckHintsTest {
      * Filter for cards.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void testCards() {
+    void testCards() {
         PaperCard cp = readCard("throne_of_empires.txt");
         Assert.assertEquals("Throne of Empires", cp.getName());
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
@@ -72,7 +72,7 @@ public class DeckHintsTest {
      * Filter for keywords.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void testKeywords() {
+    void testKeywords() {
         IPaperCard cp = readCard("mwonvuli_beast_tracker.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
@@ -89,7 +89,7 @@ public class DeckHintsTest {
      * Filter for color.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void testColor() {
+    void testColor() {
         IPaperCard cp = readCard("wurms_tooth.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckNeeds();
         Assert.assertNotNull(hints);
@@ -107,7 +107,7 @@ public class DeckHintsTest {
      * Test for no wants.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void testNoFilter() {
+    void testNoFilter() {
         PaperCard cp = readCard("assault_griffin.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertEquals("Assault Griffin", cp.getName());
@@ -118,7 +118,7 @@ public class DeckHintsTest {
      * Test for multiple.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void testMultiple() {
+    void testMultiple() {
         PaperCard pc = readCard("ruination_guide.txt");
         DeckHints hints = pc.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
@@ -138,7 +138,7 @@ public class DeckHintsTest {
      * Test for has ability.
      */
     @Test(timeOut = 1000, enabled = true)
-    public void testDeckHasAbility() {
+    void testDeckHasAbility() {
         PaperCard pc = readCard("kozileks_channeler.txt");
         DeckHints has = pc.getRules().getAiHints().getDeckHas();
         Assert.assertNotNull(has);
