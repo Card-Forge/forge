@@ -117,7 +117,9 @@ public class DeckImportController {
 
     public String getCurrentGameFormatName(){
         if (this.currentGameFormat == null)
-            return "";
+            // Formats defined only as a DeckFormat (e.g. Pauper Commander) have no named GameFormat;
+            // fall back to the game type's display name so messages don't read "''".
+            return this.currentGameType == null ? "" : this.currentGameType.toString();
         return this.currentGameFormat.getName();
     }
 
@@ -325,10 +327,23 @@ public class DeckImportController {
         for (Pair<Integer, Token> secTokenPair : sectionTokenPairs){
             Token secToken = secTokenPair.getRight();
             PaperCard card = secToken.getCard();
-            if (card != null && DeckSection.Commander.validate(card))
+            if (card != null && isCommanderSectionCard(card))
                 candidateCommandersInSide.add(secTokenPair);
         }
         return candidateCommandersInSide;
+    }
+
+    private boolean isCommanderSectionCard(PaperCard card) {
+        // Prefer the target format's own commander rule when known. The generic
+        // DeckSection.Commander.validate() also counts signature spells (any instant/sorcery,
+        // for Oathbreaker), which wrongly flags every spell in a Pauper Commander deck as a
+        // potential commander. Only fall back to it when no deck format is set.
+        if (this.currentDeckFormat != null) {
+            if (this.currentDeckFormat.isLegalCommander(card))
+                return true;
+            return this.currentDeckFormat.hasSignatureSpell() && card.getRules().canBeSignatureSpell();
+        }
+        return DeckSection.Commander.validate(card);
     }
 
     private List<Pair<Integer, Token>> getTokensInSection(DeckSection section) {

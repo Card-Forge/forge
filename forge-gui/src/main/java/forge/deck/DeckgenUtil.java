@@ -6,6 +6,7 @@ import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.generation.*;
@@ -655,6 +656,11 @@ public class DeckgenUtil {
 
     /** Generate a random Commander deck with an optional maximum bracket. */
     public static Deck generateRandomCommanderDeck(PaperCard commander, DeckFormat format, boolean forAi, boolean isCardGen, int maxBracket) {
+        if (format == DeckFormat.PauperCommander) {
+            // The generic commander/matrix builders pull lands and filler from the full (non-common)
+            // card pool and have no LDA matrix for PDH, so use a dedicated commons-only builder.
+            return generatePauperCommanderDeck(commander, forAi);
+        }
         final Deck deck;
         PaperCard selectedPartner = null;
         List<PaperCard> preSelectedCards = new ArrayList<>();
@@ -772,6 +778,79 @@ public class DeckgenUtil {
             deck.get(DeckSection.Commander).add(selectedPartner);
         }
 
+        return deck;
+    }
+
+    /**
+     * Build a legal Pauper Commander (PDH) deck: the given uncommon commander plus 99 commons
+     * within its colour identity, filled out with basic lands. Legal by construction — only cards
+     * that pass the PauperCommander format's isLegalCard are used, so no banned/non-common cards.
+     */
+    public static Deck generatePauperCommanderDeck(final PaperCard commander, final boolean forAi) {
+        final DeckFormat format = DeckFormat.PauperCommander;
+        final byte ci = commander.getRules().getColorIdentity().getColor();
+        final Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
+
+        // Legal, non-land commons within the commander's colour identity (colourless allowed), singleton by name.
+        final List<PaperCard> creatures = new ArrayList<>();
+        final List<PaperCard> spells = new ArrayList<>();
+        final Set<String> seen = new HashSet<>();
+        seen.add(commander.getName());
+        for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards(
+                format.isLegalCardPredicate().and(PaperCardPredicates.fromRules(canPlay)))) {
+            final CardRules r = c.getRules();
+            if (r.getType().isLand()) {
+                continue; // mana base is handled with basics below
+            }
+            if (!r.getColorIdentity().hasNoColorsExcept(ci)) {
+                continue; // stay within the commander's colour identity
+            }
+            if (!seen.add(c.getName())) {
+                continue; // singleton
+            }
+            if (r.getType().isCreature()) {
+                creatures.add(c);
+            } else {
+                spells.add(c);
+            }
+        }
+        Collections.shuffle(creatures, MyRandom.getRandom());
+        Collections.shuffle(spells, MyRandom.getRandom());
+
+        // Creature-heavy 99: aim for ~62 non-land cards, then fill the rest with basics.
+        final int nonLandTarget = 62;
+        final List<PaperCard> nonland = new ArrayList<>();
+        final Set<String> added = new HashSet<>();
+        for (final PaperCard c : creatures) { if (nonland.size() >= 42) break; if (added.add(c.getName())) nonland.add(c); }
+        for (final PaperCard c : spells)    { if (nonland.size() >= nonLandTarget) break; if (added.add(c.getName())) nonland.add(c); }
+        for (final PaperCard c : creatures) { if (nonland.size() >= nonLandTarget) break; if (added.add(c.getName())) nonland.add(c); }
+
+        final Deck deck = new Deck("Generated Pauper Commander deck (" + commander.getName() + ")");
+        deck.setDirectory("generated/commander");
+        for (final PaperCard c : nonland) {
+            deck.getMain().add(c, 1);
+        }
+
+        // Basic lands, one type per colour in the commander's identity (Wastes if colourless).
+        final List<String> basics = new ArrayList<>();
+        if ((ci & MagicColor.WHITE) != 0) basics.add("Plains");
+        if ((ci & MagicColor.BLUE)  != 0) basics.add("Island");
+        if ((ci & MagicColor.BLACK) != 0) basics.add("Swamp");
+        if ((ci & MagicColor.RED)   != 0) basics.add("Mountain");
+        if ((ci & MagicColor.GREEN) != 0) basics.add("Forest");
+        if (basics.isEmpty()) basics.add("Wastes");
+
+        final int landCount = Math.max(0, format.getMainRange().getMaximum() - nonland.size()); // 99 - nonland
+        final int per = landCount / basics.size();
+        final int rem = landCount % basics.size();
+        for (int i = 0; i < basics.size(); i++) {
+            final int cnt = per + (i < rem ? 1 : 0);
+            if (cnt > 0) {
+                deck.getMain().add(FModel.getMagicDb().getCommonCards().getCard(basics.get(i)), cnt);
+            }
+        }
+
+        deck.getOrCreate(DeckSection.Commander).add(commander, 1);
         return deck;
     }
 
