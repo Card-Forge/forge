@@ -433,6 +433,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.lblCaption.setLabelFor(this.listView.getTable());
     }
 
+    private Predicate<? super T> markerPredicate;
+
+    public void setMarkerPredicate(Predicate<? super T> predicate) {
+        this.markerPredicate = predicate;
+        repaint();
+    }
+
+    public boolean isMarked(T item) {
+        return markerPredicate != null && markerPredicate.test(item);
+    }
+
     /**
      *
      * Gets the item pool.

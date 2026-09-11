@@ -848,7 +848,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         packPage.cardManager.setEnabled(false);
         FThreads.invokeInBackgroundThread(() -> {
             draft.getHumanPlayer().activate(action);
-            FThreads.invokeInEdtLater(() -> packPage.cardManager.setEnabled(true));
+            FThreads.invokeInEdtLater(() -> {
+                packPage.cardManager.setEnabled(true);
+                updateAbilityHints();
+            });
         });
     }
 
@@ -858,6 +861,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (page instanceof DeckSectionPage sectionPage) {
                 sectionPage.cardManager.refresh();
                 sectionPage.updateCaption();
+            }
+        }
+        updateAbilityHints();
+    }
+
+    protected void updateAbilityHints() {
+        List<DraftAction> actions = getDraftActions();
+        for (TabPage<FDeckEditor> page : tabPages) {
+            if (page instanceof DraftPackPage packPage) {
+                packPage.showHints(actions);
+            } else if (page instanceof DeckSectionPage sectionPage) {
+                sectionPage.showHints(actions);
             }
         }
     }
@@ -2083,6 +2098,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             cardManager.setPool(newDeck.getOrCreate(deckSection));
         }
 
+        void showHints(List<DraftAction> actions) {
+            boolean hasPool = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.POOL);
+            cardManager.setMarkerPredicate(c -> actions.stream().anyMatch(a -> a.isPoolActionFor(c)));
+            cardManager.setCaption(captionPrefix + (hasPool
+                    ? " - " + Forge.getLocalizer().getMessage("lblDraftAbilitiesInPoolMenu") : ""));
+        }
+
         @Override
         protected void updateCaption() {
             if (deckSection == DeckSection.Commander || parentScreen.getDeck() == null) {
@@ -2429,6 +2451,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             this.updateCaption();
             cardManager.setEnabled(true);
+            FThreads.invokeInEdtLater(parentScreen::updateAbilityHints);
+        }
+
+        void showHints(List<DraftAction> actions) {
+            boolean hasPick = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.PICK);
+            cardManager.setMarkerPredicate(c -> actions.stream().anyMatch(a -> a.isPickFor(c)));
+            cardManager.setCaption(caption + (hasPick
+                    ? " - " + Forge.getLocalizer().getMessage("lblDraftAbilitiesInPackMenu") : ""));
         }
 
         @Override

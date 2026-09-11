@@ -134,6 +134,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         networkPackPage.updateDirection(seatIndex, participants,
                 lastQueueDepths, isPassingRight(packNumber));
         setSelectedPage(networkPackPage);
+        updateAbilityHints();
     }
 
     void submitPick(PaperCard picked, DraftAction variant) {
@@ -197,6 +198,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
             }
         }
         actions = state.getActions();
+        updateAbilityHints();
     }
 
     public void onLogEvent(DraftLogEvent event) {

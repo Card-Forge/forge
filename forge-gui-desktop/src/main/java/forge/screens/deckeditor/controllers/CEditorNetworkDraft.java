@@ -55,6 +55,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
     private int currentSeq;
     private List<DraftAction> actions = List.of();
     private boolean hiddenPack;
+    private String packCaption = "";
     private boolean draftComplete;
 
     private record PendingSelfPick(String cardName, int packNumber, int pickInPack, boolean auto) { }
@@ -131,9 +132,10 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
             }
         }
 
-        this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
+        packCaption = localizer.getMessage("lblPackNCards", String.valueOf(packNumber));
         this.getCatalogManager().setPool(pool);
         this.getCatalogManager().refresh();
+        showAbilityHints(actions, packCaption);
     }
 
     @Override
@@ -174,6 +176,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
             state.getPoolRemoved().forEach(c -> getDeckManager().removeItem(c, 1));
         }
         actions = state.getActions();
+        showAbilityHints(actions, packCaption);
     }
 
     public void flushSelfPickLog(int queueDepth) {

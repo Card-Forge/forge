@@ -160,7 +160,11 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addDraftActionItems(currentActions(), action -> boosterDraft.getHumanPlayer().activate(action));
+        cmb.addDraftActionItems(currentActions(), action -> {
+            boosterDraft.getHumanPlayer().activate(action);
+            // The activated card turns face down, so its marker and the hints change
+            showChoices(getCatalogManager().getPool());
+        });
     }
 
     private List<DraftAction> currentActions() {
@@ -179,7 +183,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        this.getCatalogManager().setCaption(Localizer.getInstance().getMessage("lblPackNCards", String.valueOf(packNumber)));
+        String packCaption = Localizer.getInstance().getMessage("lblPackNCards", String.valueOf(packNumber));
         if (boosterDraft.getHumanPlayer().isPackHidden()) {
             ItemPool<PaperCard> placeholders = new ItemPool<>(PaperCard.class);
             placeholders.add(PaperCard.FAKE_CARD, list.countAll());
@@ -187,6 +191,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         } else {
             getCatalogManager().setPool(list);
         }
+        showAbilityHints(currentActions(), packCaption);
     } // showChoices()
 
     /**

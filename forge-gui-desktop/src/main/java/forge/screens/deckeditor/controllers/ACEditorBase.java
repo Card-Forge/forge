@@ -416,6 +416,19 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
     public FComboBox getCbxSection() { return deckManager.getCbxSection(); }
 
+    /** Marks the cards that have draft abilities and adds a hint to each caption while an offer exists. */
+    protected void showAbilityHints(List<DraftAction> actions, String packCaption) {
+        boolean hasPick = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.PICK);
+        boolean hasPool = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.POOL);
+        catalogManager.setMarkerPredicate(item -> item instanceof PaperCard card
+                && actions.stream().anyMatch(a -> a.isPickFor(card)));
+        deckManager.setMarkerPredicate(item -> item instanceof PaperCard card
+                && actions.stream().anyMatch(a -> a.isPoolActionFor(card)));
+        catalogManager.setCaption(packCaption + (hasPick ? " - " + localizer.getMessage("lblDraftAbilitiesInPackMenu") : ""));
+        deckManager.setCaption(localizer.getMessage("lblDraftPicks")
+                + (hasPool ? " - " + localizer.getMessage("lblDraftAbilitiesInPoolMenu") : ""));
+    }
+
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);
     }

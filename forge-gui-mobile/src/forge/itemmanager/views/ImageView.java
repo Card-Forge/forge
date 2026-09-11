@@ -62,6 +62,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scale(6);
     private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scale(1);
     private static final float SEL_BORDER_SIZE = Utils.scale(1);
+    private static final Color ABILITY_MARKER = new Color(0.925f, 0.84f, 0.55f, 1f);
     private static final int MIN_COLUMN_COUNT = Forge.isLandscapeMode() ? 2 : 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
@@ -1214,6 +1215,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         g.drawRoundRect(1f, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
                     } else //default rectangle highlight
                         g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                }
+            } else if (!deckSelectMode && itemManager.isMarked(item)) {
+                // Three times the selection width, so the two states differ without relying on colour
+                float mark = 3 * SEL_BORDER_SIZE;
+                if (Forge.enableUIMask.equals("Full")) {
+                    g.fillRoundRect(ABILITY_MARKER, x - mark, y - mark, w + 2 * mark, h + 2 * mark, (h - w) / 10);
+                } else {
+                    g.fillRect(ABILITY_MARKER, x - mark, y - mark, w + 2 * mark, h + 2 * mark);
                 }
             }
 
