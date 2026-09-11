@@ -96,7 +96,6 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
-    private volatile boolean timeoutReached;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1597,15 +1596,11 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        // in case of infinite loop reset below would not be reached
-        timeoutReached = false;
-
         FutureTask<SpellAbility> future = new FutureTask<>(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                if (timeoutReached || Thread.currentThread().isInterrupted()) {
-                    timeoutReached = false;
+                if (Thread.currentThread().isInterrupted()) {
                     break;
                 }
 
@@ -1701,7 +1696,6 @@ public class AiController {
                 }
                 System.out.println(sb);
             }
-            timeoutReached = true;
             // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         } finally {
