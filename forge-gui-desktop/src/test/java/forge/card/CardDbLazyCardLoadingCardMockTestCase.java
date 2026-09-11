@@ -5,7 +5,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import forge.StaticData;
@@ -13,27 +12,27 @@ import forge.gamesimulationtests.util.CardDatabaseHelper;
 import forge.item.PaperCard;
 import forge.model.FModel;
 
+/**
+ * Every test here checks a card is not loaded yet, loads it, then checks it arrived.
+ *
+ * <p>
+ * The first check uses {@code contains()} rather than {@code getCard()}: since #11763 a lookup
+ * loads the card on demand, so asking {@code getCard()} whether a card is present puts it there.
+ * {@code contains()} reads the loaded-card index without loading anything.
+ * </p>
+ */
 public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
     protected CardDb cardDb;
 
-    @BeforeMethod
-    public void setup() {
-        StaticData data = FModel.getMagicDb();
-        this.cardDb = data.getCommonCards();
-    }
-
     @Override
     protected void initializeStaticData() {
-        // A database of this class's own, loaded lazily, and a fresh one for every method.
-        //
-        // Every test here asserts a card is not yet loaded, loads it, then asserts it is, so a
-        // database shared between methods stops being pristine as soon as the first one runs.
-        // This deliberately does not use the keyed cache CardDatabaseHelper offers the other
-        // CardDb test classes: lazy loading only indexes card names rather than parsing all
-        // 33,000 card scripts, so rebuilding it per method costs well under a second.
-        StaticData data = CardDatabaseHelper.createStaticData(true);
+        // One lazily loaded database of this class's own, indexed once and emptied again before
+        // each test, since the checks above need it to start with nothing loaded.
+        StaticData data = CardDatabaseHelper.createStaticData("CardDbLazyCardLoadingCardMockTestCase", true);
+        data.resetLazyLoadedCards();
         fModelMock.when(FModel::getMagicDb).thenReturn(data);
+        this.cardDb = data.getCommonCards();
     }
 
     @Test
@@ -43,9 +42,6 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
-        // reports whether a card has been loaded yet. contains() reads the loaded-card index
-        // without triggering a load, which is what this pre-condition has always meant.
         assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
@@ -73,9 +69,6 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
-        // reports whether a card has been loaded yet. contains() reads the loaded-card index
-        // without triggering a load, which is what this pre-condition has always meant.
         assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
@@ -98,9 +91,6 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
     public void tesLoadAndGetAetherVialWithWrongCase() {
         String cardName = "AEther vial"; // wrong case
         String expectedCardName = "Aether Vial";
-        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
-        // reports whether a card has been loaded yet. contains() reads the loaded-card index
-        // without triggering a load, which is what this pre-condition has always meant.
         assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
@@ -118,9 +108,6 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
         String expectedSetCode = "EXO"; // Exodus
         CardRarity expectedCardRarity = CardRarity.Rare;
 
-        // #11763 made every CardDb lookup load the card on demand, so getCard() no longer
-        // reports whether a card has been loaded yet. contains() reads the loaded-card index
-        // without triggering a load, which is what this pre-condition has always meant.
         assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
