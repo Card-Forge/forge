@@ -1,7 +1,6 @@
 package forge.gamemodes.net.event;
 
 import forge.gamemodes.limited.DraftAction;
-import forge.gamemodes.net.server.RemoteClient;
 
 /** Client -> server: use the draft ability of a face-up card in the seat's pool. */
 public final class DraftActivateEvent implements NetEvent {
@@ -16,7 +15,4 @@ public final class DraftActivateEvent implements NetEvent {
 
     public int getSeatIndex() { return seatIndex; }
     public DraftAction getAction() { return action; }
-
-    @Override
-    public void updateForClient(RemoteClient client) { }
 }

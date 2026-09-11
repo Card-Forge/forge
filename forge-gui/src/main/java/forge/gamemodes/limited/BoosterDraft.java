@@ -785,26 +785,18 @@ public class BoosterDraft implements IBoosterDraft {
 
     /** Sets the pack's Canal Dredger recipient, asking the passer when several seats qualify. */
     public void routeLastCard(LimitedPlayer passer, DraftPack pack) {
-        if (pack.getDestination() != null) {
+        if (pack.getDestination() != null || pack.size() != 1) {
             return;
         }
-        List<LimitedPlayer> eligible = eligibleDredgers(pack);
+        List<LimitedPlayer> eligible = players.stream()
+                .filter(p -> p.hasFaceUp(LimitedPlayer.Effect.LAST_CARD) && !p.shouldSkipThisPick())
+                .collect(Collectors.toList());
         if (eligible.size() == 1) {
             pack.setDestination(eligible.get(0));
         } else if (eligible.size() > 1) {
             passer.chooseDredgerSeat(eligible, pack, pack::setDestination);
         }
     }
-
-    private List<LimitedPlayer> eligibleDredgers(DraftPack pack) {
-        if (pack.size() != 1) {
-            return List.of();
-        }
-        return players.stream()
-                .filter(p -> p.hasFaceUp(LimitedPlayer.Effect.LAST_CARD) && !p.shouldSkipThisPick())
-                .collect(Collectors.toList());
-    }
-
     @Override
     public void addPrivateLog(LimitedPlayer seat, String message, PaperCard card) {
         if (draftLog == null) {

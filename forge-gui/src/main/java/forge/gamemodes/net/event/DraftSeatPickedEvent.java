@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Server -> all clients: a seat has made their pick.
- * No card name revealed. Includes per-seat queue depths for the picker window,
+ * The picked card is not revealed. Includes per-seat queue depths for the picker window,
  * and every seat's face-up cards, which are public.
  */
 public final class DraftSeatPickedEvent implements NetEvent {

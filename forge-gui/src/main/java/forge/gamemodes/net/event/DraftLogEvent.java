@@ -1,6 +1,5 @@
 package forge.gamemodes.net.event;
 
-import forge.gamemodes.net.server.RemoteClient;
 import forge.item.PaperCard;
 
 /** Server -> every seat when {@code seatIndex} is -1, otherwise to that seat only: one draft log line. */
@@ -20,7 +19,4 @@ public final class DraftLogEvent implements NetEvent {
     public int getSeatIndex() { return seatIndex; }
     public String getMessage() { return message; }
     public PaperCard getCard() { return card; }
-
-    @Override
-    public void updateForClient(RemoteClient client) { }
 }

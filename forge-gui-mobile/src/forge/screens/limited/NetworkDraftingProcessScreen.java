@@ -56,7 +56,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
     // Pod seats for the direction strip and log; from the host's NetworkEvent or, on a
     // client, the broadcast NetworkEventView (a client has no NetworkEvent).
     private final List<EventParticipant> participants;
-    private final Consumer<NetEvent> pickSender;
+    private final Consumer<NetEvent> draftSender;
     private final Runnable onLeave;
     private final NetworkDraftLog draftLog;
 
@@ -76,12 +76,12 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
     private List<List<PaperCard>> lastFaceUp = List.of();
 
     public NetworkDraftingProcessScreen(int seatIndex, List<EventParticipant> participants,
-            Consumer<NetEvent> pickSender, Runnable onLeave) {
+            Consumer<NetEvent> draftSender, Runnable onLeave) {
         super(new NetworkDraftEditorConfig(), new PicksDeckController(new Deck()));
 
         this.seatIndex  = seatIndex;
         this.participants = participants;
-        this.pickSender = pickSender;
+        this.draftSender = draftSender;
         this.onLeave    = onLeave;
         this.draftLog   = new NetworkDraftLog(seatIndex);
 
@@ -143,7 +143,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
                 currentPackNumber, currentPickNumber);
         networkPackPage.clearPack();
         // The host draws a hidden pick itself, so no card is sent
-        pickSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : picked, variant));
+        draftSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : picked, variant));
     }
 
     public void onSeatPicked(int seat, int[] queueDepths, List<List<PaperCard>> faceUp) {
@@ -203,7 +203,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
 
     public void onLogEvent(DraftLogEvent event) {
         if (event.getSeatIndex() < 0 || event.getSeatIndex() == seatIndex) {
-            draftLog.recordLogEvent(event.getMessage());
+            draftLog.log(event.getMessage());
         }
     }
 
@@ -214,7 +214,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
 
     @Override
     public void activateDraftAction(DraftAction action) {
-        pickSender.accept(new DraftActivateEvent(seatIndex, action));
+        draftSender.accept(new DraftActivateEvent(seatIndex, action));
     }
 
     @Override

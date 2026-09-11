@@ -1,7 +1,6 @@
 package forge.gamemodes.net.event;
 
 import forge.gamemodes.limited.DraftAction;
-import forge.gamemodes.net.server.RemoteClient;
 import forge.item.PaperCard;
 
 import java.util.List;
@@ -32,7 +31,4 @@ public final class DraftSeatStateEvent implements NetEvent {
     public List<PaperCard> getPoolAdded() { return poolAdded; }
     public List<PaperCard> getPoolRemoved() { return poolRemoved; }
     public List<DraftAction> getActions() { return actions; }
-
-    @Override
-    public void updateForClient(RemoteClient client) { }
 }

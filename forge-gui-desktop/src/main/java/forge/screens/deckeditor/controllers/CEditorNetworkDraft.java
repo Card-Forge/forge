@@ -46,7 +46,7 @@ import java.util.function.Consumer;
 public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     private final int seatIndex;
-    private final Consumer<NetEvent> pickSender;
+    private final Consumer<NetEvent> draftSender;
     private final Runnable onLeave;
     private final Localizer localizer = Localizer.getInstance();
 
@@ -71,7 +71,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     /**
      * @param seatIndex   this player's seat in the draft pod
-     * @param pickSender  callback to send draft events; for the host this calls
+     * @param draftSender callback to send draft events; for the host this calls
      *                    ServerGameLobby.routeDraftEvent directly, for
      *                    clients it sends via FGameClient
      * @param onLeave     callback fired when the user confirms "Leave" on the
@@ -80,12 +80,12 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
      * @param cDetailPicture0 the shared detail picture controller
      */
     public CEditorNetworkDraft(int seatIndex,
-            Consumer<NetEvent> pickSender, Runnable onLeave,
+            Consumer<NetEvent> draftSender, Runnable onLeave,
             CDetailPicture cDetailPicture0) {
         super(FScreen.DRAFTING_PROCESS, cDetailPicture0, GameType.Draft);
 
         this.seatIndex = seatIndex;
-        this.pickSender = pickSender;
+        this.draftSender = draftSender;
         this.onLeave = onLeave;
 
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, false, true);
@@ -152,7 +152,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     private void submitPick(PaperCard card, DraftAction variant) {
         // The host draws a hidden pick itself, so no card is sent
-        pickSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : card, variant));
+        draftSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : card, variant));
 
         // Deferred log: flushed on the server's SeatPicked echo so queue-depth data is authoritative
         String name = hiddenPack ? localizer.getMessage("lblFaceDownCard") : card.getName();
@@ -202,7 +202,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         if (!draftComplete) {
-            cmb.addDraftActionItems(actions, action -> pickSender.accept(new DraftActivateEvent(seatIndex, action)));
+            cmb.addDraftActionItems(actions, action -> draftSender.accept(new DraftActivateEvent(seatIndex, action)));
         }
     }
 

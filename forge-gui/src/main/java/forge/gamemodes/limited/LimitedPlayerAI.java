@@ -29,8 +29,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         deckCols = new DeckColors();
     }
 
-    @Override
-    public PaperCard chooseCard() {
+    private PaperCard chooseCard() {
         if (packQueue.isEmpty()) {
             return null;
         }
@@ -64,7 +63,9 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return bestPick;
     }
 
-    private List<DraftAction> chooseVariants(PaperCard pick, List<DraftAction> offers) {
+    @Override
+    protected void chooseAbilities(PaperCard pick, List<DraftAction> offers, boolean random, DraftPack pack,
+                                   Consumer<List<DraftAction>> then) {
         List<DraftAction> chosen = new ArrayList<>();
         for (DraftAction offer : offers) {
             boolean take = switch (abilityEffect(offer.source())) {
@@ -85,7 +86,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
                 }
             }
         }
-        return chosen;
+        then.accept(chosen);
     }
 
     public Boolean draftNext() {
@@ -95,13 +96,6 @@ public class LimitedPlayerAI extends LimitedPlayer {
         }
         return draftCard(pick, DeckSection.Sideboard, DraftAction.choose(pick));
     }
-
-    @Override
-    protected void chooseAbilities(PaperCard pick, List<DraftAction> offers, boolean random, DraftPack pack,
-                                   Consumer<List<DraftAction>> then) {
-        then.accept(chooseVariants(pick, offers));
-    }
-
     public Deck buildDeck(String landSetCode) {
         CardPool section = deck.getOrCreate(DeckSection.Sideboard);
         return new BoosterDeckBuilder(section.toFlatList(), deckCols).buildDeck(landSetCode);

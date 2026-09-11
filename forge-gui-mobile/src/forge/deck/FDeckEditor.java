@@ -2508,7 +2508,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
 
                 parentScreen.getDeckController().notifyModelChanged();
-                // A variant can remove cards from any section, such as the returned Cogwork Librarian
+                // A variant can remove cards from any section
                 FThreads.invokeInEdtLater(parentScreen::refreshDraftPages);
             });
         }

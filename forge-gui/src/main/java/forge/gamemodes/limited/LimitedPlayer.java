@@ -119,12 +119,7 @@ public class LimitedPlayer {
 
     /** The pick variant or pool action a face-up source offers, or null. */
     protected static Effect abilityEffect(PaperCard source) {
-        for (Effect e : Effect.of(source)) {
-            if (ABILITIES.contains(e)) {
-                return e;
-            }
-        }
-        return null;
+        return Effect.of(source).stream().filter(ABILITIES::contains).findFirst().orElse(null);
     }
 
     public LimitedPlayer(int seatingOrder, IBoosterDraft draft) {
@@ -234,11 +229,6 @@ public class LimitedPlayer {
 
     private void note(String key, String value) {
         noted.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
-    }
-
-    public PaperCard chooseCard() {
-        // A non-AI LimitedPlayer chooses cards via the UI instead of this function
-        return null;
     }
 
     public List<DraftAction> getActions(DraftPack head) {
@@ -635,7 +625,7 @@ public class LimitedPlayer {
         List<String> labels = new ArrayList<>();
         collectPeekablePacks(eligible, labels);
         if (eligible.stream().anyMatch(p -> p == chosen)) {
-            show(DraftPrompt.info(order, "Booster pack seen with " + source.getName(), chosen));
+            ask(DraftPrompt.info(order, "Booster pack seen with " + source.getName(), chosen), false, null, answer -> { });
         } else if (eligible.isEmpty()) {
             draft.addPrivateLog(this, "No booster pack is available to look at with " + source.getName() + ".", null);
         } else {
@@ -711,7 +701,7 @@ public class LimitedPlayer {
      * {@code heldPack} stays in the seat's queue if the answer does not arrive at once.
      */
     protected void ask(DraftPrompt prompt, boolean blocking, DraftPack heldPack, Consumer<List<Integer>> onAnswer) {
-        // A mandatory prompt with one option is answered at once, as SGuiChoose.one did
+        // A mandatory prompt with one option needs no answer
         if (prompt.min() == 1 && prompt.options().size() == 1) {
             onAnswer.accept(List.of(0));
             return;
@@ -734,14 +724,6 @@ public class LimitedPlayer {
         }
         if (!answered[0] && heldPack != null) {
             promptHeldPacks.add(heldPack);
-        }
-    }
-
-    protected void show(DraftPrompt info) {
-        if (promptSink != null) {
-            promptSink.ask(info, false, answer -> { });
-        } else {
-            info.answerLocally();
         }
     }
 
@@ -769,11 +751,8 @@ public class LimitedPlayer {
             return List.of();
         }
         Map<String, PaperCard> byName = new TreeMap<>();
-        for (CardEdition.EditionEntry entry : edition.getAllCardsInSet()) {
-            PaperCard card = FModel.getMagicDb().getCommonCards().getCard(entry.name(), edition.getCode());
-            if (card != null) {
-                byName.putIfAbsent(entry.name(), card);
-            }
+        for (PaperCard card : FModel.getMagicDb().getCommonCards().getAllCards(edition)) {
+            byName.putIfAbsent(card.getName(), card);
         }
         return new ArrayList<>(byName.values());
     }
@@ -944,20 +923,8 @@ public class LimitedPlayer {
     protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {
         addLog(name() + " accepted the offer of " + exchangeCard + " for " + offer + " from " + player.name() + ".", offer);
 
-        PaperCard given = player.getDeck().removeCardName(offer.getName());
-        player.getDeck().get(DeckSection.Sideboard).add(exchangeCard);
-        PaperCard traded = deck.removeCardName(exchangeCard.getName());
-        deck.get(DeckSection.Sideboard).add(offer);
-        if (traded != null) {
-            poolRemoved.add(traded);
-        }
-        poolAdded.add(offer);
-        stateChanged = true;
-        if (given != null) {
-            player.poolRemoved.add(given);
-        }
-        player.poolAdded.add(exchangeCard);
-        player.stateChanged = true;
+        player.swapPoolCard(offer, exchangeCard);
+        swapPoolCard(exchangeCard, offer);
 
         // Exchange noted information
         player.getDraftNotes().getOrDefault(offer.getName(), Lists.newArrayList()).forEach(note -> {
@@ -977,6 +944,16 @@ public class LimitedPlayer {
         if (deck.countByName(exchangeCard.getName()) == 0) {
             noted.remove(exchangeCard.getName());
         }
+    }
+
+    private void swapPoolCard(PaperCard given, PaperCard received) {
+        PaperCard removed = deck.removeCardName(given.getName());
+        deck.get(DeckSection.Sideboard).add(received);
+        if (removed != null) {
+            poolRemoved.add(removed);
+        }
+        poolAdded.add(received);
+        stateChanged = true;
     }
 
     public void debugPrint(String text) {

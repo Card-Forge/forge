@@ -1,6 +1,7 @@
 package forge.screens.match;
 
 import java.awt.AWTEvent;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -147,22 +148,15 @@ public class GameLogPanel extends JPanel {
         addLogEntry(text, (CardView) null, null);
     }
 
-    public void addLogEntry(final String text, final java.awt.Color foreground) {
-        addLogEntry(text, foreground, null);
-    }
-
-    public void addLogEntry(final String text, final java.awt.Color foreground, final PaperCard card) {
+    public void addLogEntry(final String text, final Color foreground, final PaperCard card) {
         final boolean useAlternateBackColor = (scrollablePanel.getComponents().length % 2 == 0);
         final JTextArea tar = card != null && FModel.getPreferences().getPrefBoolean(FPref.UI_LOG_SHOW_CARD_IMAGES)
                 ? new LogEntryTextArea(text, useAlternateBackColor, card)
                 : createNewLogEntryJTextArea(text, useAlternateBackColor);
-        if (card != null) {
-            tar.putClientProperty(CARD_KEY, card);
-        }
         if (foreground != null) {
             tar.setForeground(foreground);
         }
-        addEntry(tar);
+        addEntry(tar, card);
     }
 
     public void addLogEntry(final String text, final CardView card, final Iterable<PlayerView> viewers) {
@@ -176,13 +170,13 @@ public class GameLogPanel extends JPanel {
             tar = createNewLogEntryJTextArea(text, useAlternateBackColor);
         }
 
+        addEntry(tar, card);
+    }
+
+    private void addEntry(final JTextArea tar, final Object card) {
         if (card != null) {
             tar.putClientProperty(CARD_KEY, card);
         }
-        addEntry(tar);
-    }
-
-    private void addEntry(final JTextArea tar) {
         // If the minimum is not specified then the JTextArea will
         // not be sized correctly using MigLayout.
         // (http://stackoverflow.com/questions/6023145/line-wrap-in-a-jtextarea-causes-jscrollpane-to-missbehave-with-miglayout)

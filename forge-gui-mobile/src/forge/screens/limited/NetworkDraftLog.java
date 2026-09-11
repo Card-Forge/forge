@@ -73,16 +73,12 @@ public final class NetworkDraftLog {
         log(msg + waitingSuffix(queueDepth));
     }
 
-    public void recordLogEvent(String message) {
-        log(message);
-    }
-
     private static String waitingSuffix(int depth) {
         if (depth <= 0) return "";
         return " " + localizer.getMessage("lblDraftLogWaiting", String.valueOf(depth));
     }
 
-    private void log(String message) {
+    void log(String message) {
         if (sink != null) {
             sink.addLogEntry(message);
         }

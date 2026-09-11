@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Set;
 
 public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
-    /** The host always occupies lobby slot 0. */
     public static final int HOST_LOBBY_SLOT = 0;
 
     /** Returned by {@link #startDraftEvent} with the info the UI needs for overlay/log setup. */

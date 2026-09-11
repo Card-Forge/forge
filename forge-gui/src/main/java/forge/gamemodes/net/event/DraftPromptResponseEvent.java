@@ -1,7 +1,5 @@
 package forge.gamemodes.net.event;
 
-import forge.gamemodes.net.server.RemoteClient;
-
 import java.util.List;
 
 /** Client -> server: the option indices a seat chose for a draft prompt. */
@@ -20,7 +18,4 @@ public final class DraftPromptResponseEvent implements NetEvent {
     public int getSeatIndex() { return seatIndex; }
     public int getPromptId() { return promptId; }
     public List<Integer> getChosen() { return chosen; }
-
-    @Override
-    public void updateForClient(RemoteClient client) { }
 }

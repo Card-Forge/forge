@@ -442,10 +442,9 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
     @Override
     public void draftPackArrived(int seatIndex, List<PaperCard> pack,
             int packNumber, int pickNumber, int timerDurationSeconds, int seq, int hiddenCount) {
-        Consumer<NetEvent> sender = draftSender();
         // Always posted, because the mobile host's own pick runs a host step on this thread
         FThreads.invokeInEdtLater(() -> {
-            NetworkDraftingProcessScreen screen = ensureDraftScreen(seatIndex, sender);
+            NetworkDraftingProcessScreen screen = ensureDraftScreen(seatIndex);
             if (seatIndex == screen.getSeatIndex()) {
                 screen.onPackArrived(pack, packNumber, pickNumber, timerDurationSeconds, seq, hiddenCount);
             }
@@ -454,8 +453,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
 
     @Override
     public void draftSeatState(DraftSeatStateEvent event) {
-        Consumer<NetEvent> sender = draftSender();
-        FThreads.invokeInEdtLater(() -> ensureDraftScreen(event.getSeatIndex(), sender).applySeatState(event));
+        FThreads.invokeInEdtLater(() -> ensureDraftScreen(event.getSeatIndex()).applySeatState(event));
     }
 
     @Override
@@ -469,7 +467,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
 
     @Override
     public void draftPrompt(DraftPrompt prompt) {
-        Consumer<NetEvent> sender = draftSender();
         FThreads.invokeInEdtLater(() -> {
             NetworkDraftingProcessScreen screen = activeDraftScreen;
             if (screen == null || prompt.seatIndex() != screen.getSeatIndex()) return;
@@ -479,18 +476,18 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             }
             // Callback form: libGDX dialogs cannot block the render thread
             GuiChoose.getChoices(prompt.message(), prompt.min(), prompt.max(), prompt.options(), chosen ->
-                    sender.accept(new DraftPromptResponseEvent(screen.getSeatIndex(),
+                    draftSender().accept(new DraftPromptResponseEvent(screen.getSeatIndex(),
                             prompt.promptId(), DraftPrompt.indicesOf(prompt.options(), chosen))));
         });
     }
 
-    private NetworkDraftingProcessScreen ensureDraftScreen(int seatIndex, Consumer<NetEvent> sender) {
+    private NetworkDraftingProcessScreen ensureDraftScreen(int seatIndex) {
         if (activeDraftScreen == null) {
             // Host has the full NetworkEvent; a client only ever has the broadcast view
             List<EventParticipant> participants = currentEvent != null
                     ? currentEvent.getParticipants()
                     : (lastEventView != null ? lastEventView.getParticipants() : List.of());
-            activeDraftScreen = new NetworkDraftingProcessScreen(seatIndex, participants, sender, () -> {
+            activeDraftScreen = new NetworkDraftingProcessScreen(seatIndex, participants, draftSender(), () -> {
                 activeDraftScreen = null;
                 closeConn("");
             });

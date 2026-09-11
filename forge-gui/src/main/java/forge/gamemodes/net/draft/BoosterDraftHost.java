@@ -97,7 +97,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
         return t;
     });
 
-    private final int[] seq;
     /** The arrival number of each seat's pack in flight; a pick must echo it. */
     private final int[] inFlightSeq;
     private final List<List<NetEvent>> queuedPrivate = new ArrayList<>();
@@ -122,7 +121,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
         this.picksMadePerSeat = new int[podSize];
         this.seatState = new SeatConnectionState[podSize];
         Arrays.fill(this.seatState, SeatConnectionState.LIVE);
-        this.seq = new int[podSize];
         this.inFlightSeq = new int[podSize];
         List<LimitedPlayer> players = draft.getAllPlayers();
         for (int i = 0; i < podSize; i++) {
@@ -342,7 +340,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
             }
             Boolean passed = ai.draftNext();
             if (passed == null) continue;
-            picksMadePerSeat[i]++;
             if (passed) {
                 passUnlessKept(i);
             }
@@ -352,11 +349,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
         return false;
     }
 
-    /**
-     * The one decision point for each human seat: a blocked seat waits, a skipping seat
-     * passes, a seat past grace auto-picks, and a live seat is sent its head pack.
-     * Seats in IN_GRACE hold their packs silently until they reconnect or grace expires.
-     */
+    /** Seats in IN_GRACE hold their packs silently until they reconnect or grace expires. */
     private boolean stepHumanSeats() {
         List<LimitedPlayer> players = draft.getAllPlayers();
         for (int i = 0; i < players.size(); i++) {
@@ -380,7 +373,9 @@ public final class BoosterDraftHost implements IHasForgeLog {
                     return true;
                 }
                 case LIVE -> {
-                    addSendPackToHuman(i, head);
+                    addSendToSeat(i, deltaState(i, head));
+                    inFlightSeq[i]++;
+                    addSendPack(i, head);
                     inFlight[i] = true;
                     startSeatTimer(i);
                 }
@@ -399,10 +394,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
         }
     }
 
-    /**
-     * Pass the seat's head pack in the current direction (odd packs go right, even
-     * packs go left), routing a last card to a Canal Dredger seat.
-     */
+    /** Pass the seat's head pack in the current round's direction, routing a last card to a Canal Dredger seat. */
     private void passHead(int seatIndex) {
         LimitedPlayer player = draft.getAllPlayers().get(seatIndex);
         DraftPack head = player.nextChoice();
@@ -484,16 +476,9 @@ public final class BoosterDraftHost implements IHasForgeLog {
         return new DraftSeatStateEvent(seatIndex, false, delta.added(), delta.removed(), actionsFor(seatIndex, shown));
     }
 
-    private void addSendPackToHuman(int seatIndex, DraftPack pack) {
-        addSendToSeat(seatIndex, deltaState(seatIndex, pack));
-        inFlightSeq[seatIndex] = ++seq[seatIndex];
-        addSendPack(seatIndex, pack);
-    }
-
     private void addSendPack(int seatIndex, DraftPack pack) {
         boolean hidden = draft.getAllPlayers().get(seatIndex).isPackHidden();
-        List<PaperCard> cards = hidden ? List.of() : new ArrayList<>(pack);
-        addSendToSeat(seatIndex, new DraftPackArrivedEvent(seatIndex, cards, currentPackNumber,
+        addSendToSeat(seatIndex, new DraftPackArrivedEvent(seatIndex, hidden ? List.of() : pack, currentPackNumber,
                 pickNumberFor(pack), event.getPickTimerSeconds(), inFlightSeq[seatIndex], hidden ? pack.size() : 0));
     }
 
@@ -545,7 +530,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
         int seconds = event.getPickTimerSeconds();
         if (seconds <= 0) return;
         int promptId = pending.prompt().promptId();
-        cancelPromptTimer(promptId);
         promptTimers.put(promptId, timerExecutor.schedule(() -> onPromptTimerExpired(promptId), seconds, TimeUnit.SECONDS));
     }
 
@@ -554,12 +538,12 @@ public final class BoosterDraftHost implements IHasForgeLog {
         if (f != null) f.cancel(false);
     }
 
+    private List<PendingPrompt> promptsFor(int seatIndex) {
+        return pendingPrompts.values().stream().filter(p -> p.seat() == seatIndex).collect(Collectors.toList());
+    }
+
     private void resolvePromptsFor(int seatIndex) {
-        for (PendingPrompt pending : new ArrayList<>(pendingPrompts.values())) {
-            if (pending.seat() == seatIndex) {
-                resolvePrompt(pending, pending.prompt().defaultAnswer());
-            }
-        }
+        promptsFor(seatIndex).forEach(p -> resolvePrompt(p, p.prompt().defaultAnswer()));
     }
 
     private void onPromptTimerExpired(int promptId) {
@@ -667,8 +651,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
 
             beginStep();
             cancelSeatTimer(seatIndex);
-            pendingPrompts.values().stream().filter(p -> p.seat() == seatIndex)
-                    .forEach(p -> cancelPromptTimer(p.prompt().promptId()));
+            promptsFor(seatIndex).forEach(p -> cancelPromptTimer(p.prompt().promptId()));
             // Clear inFlight so the live-pack-distribution loop in advanceDraft
             // will re-send the current pack if the player reconnects before grace.
             inFlight[seatIndex] = false;
@@ -709,11 +692,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
                 addSendToSeat(seatIndex, queued);
             }
             queuedPrivate.get(seatIndex).clear();
-            for (PendingPrompt pending : pendingPrompts.values()) {
-                if (pending.seat() == seatIndex) {
-                    sendPrompt(pending);
-                }
-            }
+            promptsFor(seatIndex).forEach(this::sendPrompt);
             addBroadcastReconnect(seatIndex);
             netLog.info("Seat {} reconnected", seatIndex);
             advanceDraft();
