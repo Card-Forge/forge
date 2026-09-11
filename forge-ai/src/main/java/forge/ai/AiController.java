@@ -1613,14 +1613,14 @@ public class AiController {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                // Don't add Counterspells to the "normal" playcard lookups
-                if (skipCounter && sa.getApi() == ApiType.Counter) {
-                    continue;
-                }
-
                 if (timeoutReached || Thread.currentThread().isInterrupted()) {
                     timeoutReached = false;
                     break;
+                }
+
+                // Don't add Counterspells to the "normal" playcard lookups
+                if (skipCounter && sa.getApi() == ApiType.Counter) {
+                    continue;
                 }
 
                 if (sa.getHostCard().hasKeyword(Keyword.STORM)
@@ -1712,6 +1712,9 @@ public class AiController {
                 }
             }
             timeoutReached = true;
+            // TODO mark some as skipped to increase chance to find something playable next priority
+            return null;
+        } finally {
             future.cancel(true); // cooperative interrupt
             executor.shutdownNow(); // ensures thread is interrupted
             // get the reference and process to stop if it's still alive
@@ -1730,8 +1733,6 @@ public class AiController {
                     // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
                 }
             }
-            // TODO mark some as skipped to increase chance to find something playable next priority
-            return null;
         }
     }
 
