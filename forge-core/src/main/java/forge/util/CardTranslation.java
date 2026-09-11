@@ -423,18 +423,6 @@ public class CardTranslation {
     }
 
     private static String translateSingleIngameText(String descText, List <Pair <String, String> > mapping) {
-        int candidateIndex = matchingEntry(descText, mapping);
-
-        if (candidateIndex < mapping.size()) {
-            String translated = mapping.get(candidateIndex).getRight();
-            // an oracle line the translation does not cover carries no text of its own
-            return translated == null ? descText : translated;
-        }
-
-        return descText;
-    }
-
-    private static int matchingEntry(String descText, List <Pair <String, String> > mapping) {
         String tcompare = descText.startsWith("(") ? descText : descText.replaceAll("\\(.*\\)", "");
 
         // Use Levenshtein Distance to find matching oracle text and replace it with translated text
@@ -450,7 +438,13 @@ public class CardTranslation {
             }
         }
 
-        return candidateIndex;
+        if (candidateIndex < mapping.size()) {
+            String translated = mapping.get(candidateIndex).getRight();
+            // an oracle line the translation does not cover carries no text of its own
+            return translated == null ? descText : translated;
+        }
+
+        return descText;
     }
 
 }
