@@ -1,0 +1,8 @@
+Name:Stingerquill Charm
+ManaCost:B R
+Types:Instant
+A:SP$ Charm | Choices$ DBDamage,DBPump.DBToken
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ First Strike & Deathtouch | SpellDescription$ Target creature gains first strike and deathtouch until end of turn.
+SVar:DBToken:DB$ Token | TokenScript$ cadet | TokenOwner$ You | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet. It gains haste until end of turn.
+Oracle:Choose one —\n• Stingerquill Charm deals 3 damage to any target.\n• Target creature gains first strike and deathtouch until end of turn.\n• Create a 2/2 colorless Wizard Soldier creature token named Cadet. It gains haste until end of turn.
