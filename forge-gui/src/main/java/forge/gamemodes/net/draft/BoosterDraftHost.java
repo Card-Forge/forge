@@ -139,12 +139,17 @@ public final class BoosterDraftHost implements IHasForgeLog {
         draft.setLogEntry(new IDraftLog() {
             @Override
             public void addLogEntry(String message) {
-                step.add(() -> FServerManager.getInstance().broadcast(new DraftLogEvent(-1, message)));
+                addLogEntry(message, null);
             }
 
             @Override
-            public void addPrivateLogEntry(int seatIndex, String message) {
-                addSendToSeat(seatIndex, new DraftLogEvent(seatIndex, message));
+            public void addLogEntry(String message, PaperCard card) {
+                step.add(() -> FServerManager.getInstance().broadcast(new DraftLogEvent(-1, message, card)));
+            }
+
+            @Override
+            public void addPrivateLogEntry(int seatIndex, String message, PaperCard card) {
+                addSendToSeat(seatIndex, new DraftLogEvent(seatIndex, message, card));
             }
         });
     }
@@ -564,7 +569,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
             if (pending == null || seatState[pending.seat()] != SeatConnectionState.LIVE) return;
             beginStep();
             addSendToSeat(pending.seat(), new DraftLogEvent(pending.seat(),
-                    "Time ran out; the default was chosen for: " + pending.prompt().message()));
+                    "Time ran out; the default was chosen for: " + pending.prompt().message(), null));
             resolvePrompt(pending, pending.prompt().defaultAnswer());
             advanceDraft();
             endStepAndDispatch();

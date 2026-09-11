@@ -73,8 +73,8 @@ public interface IBoosterDraft {
     void setLogEntry(IDraftLog draftingProcess);
     IDraftLog getDraftLog();
     boolean shouldShowDraftLog();
-    void addLog(String message);
-    void addPrivateLog(LimitedPlayer seat, String message);
+    void addLog(String message, PaperCard card);
+    void addPrivateLog(LimitedPlayer seat, String message, PaperCard card);
     void postDraftActions();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
     LimitedPlayer getPlayer(int i);

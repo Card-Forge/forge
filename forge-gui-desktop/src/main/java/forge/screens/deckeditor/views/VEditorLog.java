@@ -5,6 +5,8 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.item.PaperCard;
+import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorLog;
 import forge.screens.match.GameLogPanel;
 import forge.toolbox.FScrollPane;
@@ -35,7 +37,7 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
     private final FScrollPane scroller = new FScrollPane(pnlContent, false);
 
 
-    private record LogEntry(String text, Color color) { }
+    private record LogEntry(String text, Color color, PaperCard card) { }
     private final List<LogEntry> entries = Lists.newArrayList();
     private boolean draftLogVisible = true;
 
@@ -44,6 +46,7 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
         scroller.getViewport().setBorder(null);
 
         this.gameLog = new GameLogPanel();
+        gameLog.setOnItemHover(card -> CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture().showItem(card));
     }
 
     //========== Overridden from IVDoc
@@ -101,9 +104,13 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
     }
 
     public void addLogEntry(String entry, Color foreground) {
-        entries.add(new LogEntry(entry, foreground));
+        addLogEntry(entry, foreground, null);
+    }
+
+    public void addLogEntry(String entry, Color foreground, PaperCard card) {
+        entries.add(new LogEntry(entry, foreground, card));
         if (draftLogVisible) {
-            gameLog.addLogEntry(entry, foreground);
+            gameLog.addLogEntry(entry, foreground, card);
         }
     }
 
@@ -112,7 +119,7 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
         draftLogVisible = visible;
         gameLog.reset();
         if (visible) {
-            for (LogEntry e : entries) gameLog.addLogEntry(e.text, e.color);
+            for (LogEntry e : entries) gameLog.addLogEntry(e.text, e.color, e.card);
         }
     }
 }

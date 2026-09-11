@@ -120,10 +120,10 @@ public class BoosterDraftTest implements IBoosterDraft {
     }
 
     @Override
-    public void addLog(String message) {}
+    public void addLog(String message, PaperCard card) {}
 
     @Override
-    public void addPrivateLog(LimitedPlayer seat, String message) {}
+    public void addPrivateLog(LimitedPlayer seat, String message, PaperCard card) {}
 
     @Override
     public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {

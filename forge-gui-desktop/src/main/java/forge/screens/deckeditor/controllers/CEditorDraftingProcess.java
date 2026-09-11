@@ -106,6 +106,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         CEditorLog.SINGLETON_INSTANCE.addLogEntry(message);
     }
 
+    @Override
+    public void addLogEntry(String message, PaperCard card) {
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message, null, card);
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */

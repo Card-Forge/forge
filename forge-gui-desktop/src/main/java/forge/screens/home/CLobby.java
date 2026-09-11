@@ -585,7 +585,7 @@ public class CLobby implements IDraftEventHandler {
     public void draftLog(DraftLogEvent event) {
         SwingUtilities.invokeLater(() -> {
             if (event.getSeatIndex() < 0 || event.getSeatIndex() == mySeatIndex) {
-                NetworkDraftLog.logDraftEvent(event.getMessage());
+                NetworkDraftLog.logDraftEvent(event.getMessage(), event.getCard());
             }
         });
     }

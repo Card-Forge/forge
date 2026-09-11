@@ -228,7 +228,7 @@ public class LimitedPlayer {
     private void turnFaceDown(PaperCard copy) {
         if (copy != null && faceUp.remove(copy)) {
             stateChanged = true;
-            addLog(name() + " turned " + copy.getDisplayName() + " face down.");
+            addLog(name() + " turned " + copy.getDisplayName() + " face down.", copy);
         }
     }
 
@@ -381,7 +381,7 @@ public class LimitedPlayer {
             switch (effect) {
                 case NOTE_CREATURE_NAME, NOTE_CARD_NAME -> {
                     note(source.getName(), pick.getName());
-                    addLog(name() + " revealed " + pick.getDisplayName() + " and noted its name for " + source.getName() + ".");
+                    addLog(name() + " revealed " + pick.getDisplayName() + " and noted its name for " + source.getName() + ".", pick);
                     revealed = true;
                     turnFaceDown(source);
                 }
@@ -391,7 +391,7 @@ public class LimitedPlayer {
                         note(source.getName(), type);
                     }
                     addLog(name() + " revealed " + pick.getDisplayName() + " and noted " + TextUtil.join(types, ",")
-                            + " for " + source.getName() + ".");
+                            + " for " + source.getName() + ".", pick);
                     revealed = true;
                     turnFaceDown(source);
                 }
@@ -403,7 +403,7 @@ public class LimitedPlayer {
                 case DRAFT_WHOLE_PACK -> {
                     turnFaceDown(source);
                     draftingWholePack = true;
-                    addLog(name() + " is drafting the rest of the pack with " + source.getName() + ".");
+                    addLog(name() + " is drafting the rest of the pack with " + source.getName() + ".", source);
                 }
                 default -> { }
             }
@@ -436,7 +436,7 @@ public class LimitedPlayer {
         if (own.contains(Effect.GUESS_NEXT) && !pack.isEmpty()) {
             guessCard(pack, pick, guess -> {
                 pack.setAwaitingGuess(this, guess);
-                addLog(name() + " made a guess for Spire Phantasm.");
+                addLog(name() + " made a guess for Spire Phantasm.", pick);
             });
         }
         return passesPack(pack);
@@ -448,11 +448,11 @@ public class LimitedPlayer {
         LimitedPlayer spy = pack.getSpyWatcher();
         if (spy != null) {
             draft.addPrivateLog(spy, name() + " drafted " + pick.getDisplayName()
-                    + " from the booster pack you watched with Cogwork Spy.");
+                    + " from the booster pack you watched with Cogwork Spy.", pick);
             pack.setSpyWatcher(null);
         }
         for (LimitedPlayer watcher : informantWatchers) {
-            draft.addPrivateLog(watcher, name() + " drafted " + pick.getDisplayName() + " (Illusionary Informant).");
+            draft.addPrivateLog(watcher, name() + " drafted " + pick.getDisplayName() + " (Illusionary Informant).", pick);
         }
         informantWatchers.clear();
         if (pack.getAwaitingGuess() != null) {
@@ -462,7 +462,7 @@ public class LimitedPlayer {
         if (notesOwedOnNextPick > 0) {
             notesOwedOnNextPick--;
             note("Aether Searcher", pick.getName());
-            addLog(name() + " revealed " + pick.getDisplayName() + " for Aether Searcher.");
+            addLog(name() + " revealed " + pick.getDisplayName() + " for Aether Searcher.", pick);
             revealed = true;
         }
         return revealed;
@@ -470,7 +470,7 @@ public class LimitedPlayer {
 
     private void applyOwnEffects(PaperCard pick, DraftPack pack, EnumSet<Effect> own, boolean removed, boolean revealed) {
         if (own.contains(Effect.REVEAL) && !revealed) {
-            addLog(name() + " revealed " + pick.getDisplayName() + " as they drafted it.");
+            addLog(name() + " revealed " + pick.getDisplayName() + " as they drafted it.", pick);
         }
         if (own.contains(Effect.FACE_UP) && !removed) {
             faceUp.add(pick);
@@ -478,15 +478,15 @@ public class LimitedPlayer {
             if (own.contains(Effect.RANDOM_PICKS)) {
                 archdemonFavors.add(3);
             }
-            addLog(name() + " drafted " + pick.getDisplayName() + " face up.");
+            addLog(name() + " drafted " + pick.getDisplayName() + " face up.", pick);
         }
         if (own.contains(Effect.NOTE_COUNT)) {
             note(pick.getName(), String.valueOf(draftedThisRound));
-            addLog(name() + " noted " + draftedThisRound + " cards drafted this round for " + pick.getDisplayName() + ".");
+            addLog(name() + " noted " + draftedThisRound + " cards drafted this round for " + pick.getDisplayName() + ".", pick);
         }
         if (own.contains(Effect.NOTE_PASSER) && pack.getPassedFrom() != null) {
             note(pick.getName(), String.valueOf(pack.getPassedFrom().order));
-            addLog(name() + " noted that " + pack.getPassedFrom().name() + " passed " + pick.getDisplayName() + ".");
+            addLog(name() + " noted that " + pack.getPassedFrom().name() + " passed " + pick.getDisplayName() + ".", pick);
         }
         if (own.contains(Effect.SPY)) {
             pack.setSpyWatcher(this);
@@ -505,10 +505,10 @@ public class LimitedPlayer {
     private void logRemoval(PaperCard pick, PaperCard source, Effect effect, EnumSet<Effect> own, boolean revealed) {
         boolean isPublic = effect == Effect.REMOVE_FACE_UP || revealed || own.contains(Effect.REVEAL) || own.contains(Effect.FACE_UP);
         if (isPublic) {
-            addLog(name() + " removed " + pick.getDisplayName() + " from the draft with " + source.getName() + ".");
+            addLog(name() + " removed " + pick.getDisplayName() + " from the draft with " + source.getName() + ".", pick);
         } else {
             addLog(name() + " removed a card face down from the draft with " + source.getName() + ".");
-            draft.addPrivateLog(this, "You removed " + pick.getDisplayName() + " from the draft with " + source.getName() + ".");
+            draft.addPrivateLog(this, "You removed " + pick.getDisplayName() + " from the draft with " + source.getName() + ".", pick);
         }
     }
 
@@ -537,7 +537,7 @@ public class LimitedPlayer {
             // By name, because a chained use can record one printing for two different copies
             turnFaceDown(faceUpCopy(source));
             packsToSkip++;
-            addLog(name() + " will pass their next booster pack with " + source.getDisplayName() + ".");
+            addLog(name() + " will pass their next booster pack with " + source.getDisplayName() + ".", source);
         }
     }
 
@@ -551,7 +551,7 @@ public class LimitedPlayer {
                 poolRemoved.add(returned);
             }
             stateChanged = true;
-            addLog(name() + " returned " + source.getDisplayName() + " to the pack.");
+            addLog(name() + " returned " + source.getDisplayName() + " to the pack.", source);
         }
         librariansToReturn.clear();
     }
@@ -571,7 +571,12 @@ public class LimitedPlayer {
     }
 
     public void addLog(String message) {
-        this.draft.addLog(message);
+        addLog(message, null);
+    }
+
+    // Only a card the message already names, so its image reveals nothing more
+    private void addLog(String message, PaperCard card) {
+        draft.addLog(message, card);
     }
 
     public DraftPack nextChoice() {
@@ -617,7 +622,7 @@ public class LimitedPlayer {
         List<String> labels = new ArrayList<>();
         collectPeekablePacks(eligible, labels);
         if (eligible.isEmpty()) {
-            draft.addPrivateLog(this, "No booster pack is available to look at with " + source.getName() + ".");
+            draft.addPrivateLog(this, "No booster pack is available to look at with " + source.getName() + ".", null);
             return;
         }
         turnFaceDown(source);
@@ -632,7 +637,7 @@ public class LimitedPlayer {
         if (eligible.stream().anyMatch(p -> p == chosen)) {
             show(DraftPrompt.info(order, "Booster pack seen with " + source.getName(), chosen));
         } else if (eligible.isEmpty()) {
-            draft.addPrivateLog(this, "No booster pack is available to look at with " + source.getName() + ".");
+            draft.addPrivateLog(this, "No booster pack is available to look at with " + source.getName() + ".", null);
         } else {
             choosePeekPack(eligible, labels, source, again -> showPeekedPack(source, again));
         }
@@ -662,7 +667,7 @@ public class LimitedPlayer {
         turnFaceDown(source);
         choosePeekSeat(others, source, target -> {
             target.informantWatchers.add(this);
-            draft.addPrivateLog(this, "You will see the next card " + target.getName() + " drafts.");
+            draft.addPrivateLog(this, "You will see the next card " + target.getName() + " drafts.", null);
         });
     }
 
@@ -673,7 +678,7 @@ public class LimitedPlayer {
         }
         if (skipped != null && !skipped.isEmpty() && !isPackHidden()) {
             draft.addPrivateLog(this, "You passed a booster pack without drafting: "
-                    + skipped.stream().map(PaperCard::getDisplayName).collect(Collectors.joining(", ")));
+                    + skipped.stream().map(PaperCard::getDisplayName).collect(Collectors.joining(", ")), null);
         }
     }
 
@@ -785,7 +790,7 @@ public class LimitedPlayer {
                 return;
             }
             draft.addPrivateLog(this, "A card can be removed only once, and only one of Cogwork Librarian,"
-                    + " Leovold's Operative or Agent of Acquisitions applies to it.");
+                    + " Leovold's Operative or Agent of Acquisitions applies to it.", null);
             chooseAbilities(pick, offers, random, pack, then);
         });
     }
@@ -843,12 +848,12 @@ public class LimitedPlayer {
         LimitedPlayer guesser = pack.getAwaitingGuess().getKey();
         PaperCard guess = pack.getAwaitingGuess().getValue();
 
-        addLog(name() + " reveals " + drafted.getDisplayName() + " from " + guesser.name() + "'s guess of " + guess.getDisplayName() + " with Spire Phantasm.");
+        addLog(name() + " reveals " + drafted.getDisplayName() + " from " + guesser.name() + "'s guess of " + guess.getDisplayName() + " with Spire Phantasm.", drafted);
         if (guess.getName().equals(drafted.getName())) {
-            addLog(guesser.name() + " correctly guessed " + guess.getDisplayName() + " with Spire Phantasm.");
+            addLog(guesser.name() + " correctly guessed " + guess.getDisplayName() + " with Spire Phantasm.", guess);
             guesser.getDraftNotes().computeIfAbsent("Spire Phantasm", k -> Lists.newArrayList()).add(guess.getName());
         } else {
-            addLog(guesser.name() + " incorrectly guessed " + guess.getDisplayName() + " with Spire Phantasm.");
+            addLog(guesser.name() + " incorrectly guessed " + guess.getDisplayName() + " with Spire Phantasm.", guess);
         }
 
         pack.resetAwaitingGuess();
@@ -869,7 +874,7 @@ public class LimitedPlayer {
                     chosen.add(third);
                     String colors = String.join(",", chosen);
                     note(pick.getName(), colors);
-                    addLog(name() + " revealed " + pick.getDisplayName() + " and noted " + colors + " chosen colors.");
+                    addLog(name() + " revealed " + pick.getDisplayName() + " and noted " + colors + " chosen colors.", pick);
                 });
             });
         });
@@ -902,14 +907,14 @@ public class LimitedPlayer {
                 activateBrokers(players, remaining - 1, done);
                 return;
             }
-            addLog(name() + " revealed " + exchangeCard.getDisplayName() + " for Deal Broker.");
+            addLog(name() + " revealed " + exchangeCard.getDisplayName() + " for Deal Broker.", exchangeCard);
             List<LimitedPlayer> others = players.stream().filter(p -> p != this).collect(Collectors.toList());
             List<Pair<PaperCard, LimitedPlayer>> offers = new ArrayList<>();
             int[] waiting = {others.size()};
             // Offers are revealed together, so nothing is logged until every seat has answered
             Runnable afterOffers = () -> {
                 offers.forEach(o -> addLog(o.getValue().name() + " offered " + o.getKey().getDisplayName()
-                        + " for " + exchangeCard.getDisplayName() + "."));
+                        + " for " + exchangeCard.getDisplayName() + ".", o.getKey()));
                 chooseCardToExchange(exchangeCard, offers, accepted -> {
                     if (accepted == null) {
                         addLog(name() + " chose not to accept any offers.");
@@ -937,7 +942,7 @@ public class LimitedPlayer {
     }
 
     protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {
-        addLog(name() + " accepted the offer of " + exchangeCard + " for " + offer + " from " + player.name() + ".");
+        addLog(name() + " accepted the offer of " + exchangeCard + " for " + offer + " from " + player.name() + ".", offer);
 
         PaperCard given = player.getDeck().removeCardName(offer.getName());
         player.getDeck().get(DeckSection.Sideboard).add(exchangeCard);

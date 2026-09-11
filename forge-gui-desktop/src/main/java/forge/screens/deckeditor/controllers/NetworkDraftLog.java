@@ -1,6 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.gamemodes.net.EventParticipant;
+import forge.item.PaperCard;
 import forge.util.Localizer;
 
 import java.awt.Color;
@@ -69,8 +70,8 @@ public final class NetworkDraftLog {
         log(base + waitingSuffix(queueDepth), auto ? COLOR_MY_PICK_AUTO : COLOR_MY_PICK);
     }
 
-    public static void logDraftEvent(String message) {
-        log(message, COLOR_DRAFT_EVENT);
+    public static void logDraftEvent(String message, PaperCard card) {
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message, COLOR_DRAFT_EVENT, card);
     }
 
     private static String waitingSuffix(int queueDepth) {

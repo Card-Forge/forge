@@ -103,7 +103,9 @@ public class WireDeserializationTest {
         Assert.assertEquals(((DraftPromptEvent) decode(encode(new DraftPromptEvent(prompt)))).getPrompt(), prompt);
         Assert.assertEquals(((DraftPromptResponseEvent) decode(encode(
                 new DraftPromptResponseEvent(2, 5, List.of(1))))).getChosen(), List.of(1));
-        Assert.assertEquals(((DraftLogEvent) decode(encode(new DraftLogEvent(-1, "hello")))).getMessage(), "hello");
+        DraftLogEvent logBack = (DraftLogEvent) decode(encode(new DraftLogEvent(-1, "hello", cards.getCard("Shock"))));
+        Assert.assertEquals(logBack.getMessage(), "hello");
+        Assert.assertEquals(logBack.getCard(), cards.getCard("Shock"));
         Assert.assertEquals(((DraftActivateEvent) decode(encode(new DraftActivateEvent(2, variant)))).getAction(), variant);
         List<List<PaperCard>> faceUp = List.of(List.of(cards.getCard("Canal Dredger")));
         Assert.assertEquals(((DraftSeatPickedEvent) decode(encode(

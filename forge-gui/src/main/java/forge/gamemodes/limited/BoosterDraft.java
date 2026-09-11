@@ -607,7 +607,7 @@ public class BoosterDraft implements IBoosterDraft {
             pl.newPack();
         }
         if (this.getDraftLog() != null) {
-            this.addLog("Round " + this.nextBoosterGroup + " is starting...");
+            this.addLog("Round " + this.nextBoosterGroup + " is starting...", null);
         }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
         return true;
@@ -806,14 +806,14 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     @Override
-    public void addPrivateLog(LimitedPlayer seat, String message) {
+    public void addPrivateLog(LimitedPlayer seat, String message, PaperCard card) {
         if (draftLog == null) {
             return;
         }
         if (forNetwork) {
-            draftLog.addPrivateLogEntry(seat.order, message);
+            draftLog.addPrivateLogEntry(seat.order, message, card);
         } else if (seat == localPlayer) {
-            draftLog.addLogEntry(message);
+            draftLog.addLogEntry(message, card);
         }
     }
 
@@ -926,9 +926,9 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     @Override
-    public void addLog(String message) {
+    public void addLog(String message, PaperCard card) {
         if (this.getDraftLog() != null) {
-            this.getDraftLog().addLogEntry(message);
+            this.getDraftLog().addLogEntry(message, card);
         }
         System.out.println("[DRAFT] " + message);
     }
