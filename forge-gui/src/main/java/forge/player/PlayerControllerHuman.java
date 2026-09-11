@@ -2046,6 +2046,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
         Map<CardFaceView, ICardFace> mapped = faces.stream().collect(Collectors.toMap(CardFaceView::new, Function.identity(), (a, b) -> a, TreeMap::new));
+        if (mapped.isEmpty())
+            return null;
         CardFaceView chosen = getGui().one(message, Lists.newArrayList(mapped.keySet()));
         return mapped.get(chosen);
     }

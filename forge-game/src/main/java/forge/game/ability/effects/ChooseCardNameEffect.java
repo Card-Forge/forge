@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import forge.StaticData;
 import forge.card.CardFacePredicates;
@@ -122,7 +123,8 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     chosen = StaticData.instance().getCommonCards().streamAllFaces()
                             .filter(cpp).collect(StreamUtil.random()).map(ICardFace::getName).orElse("");
                 } else {
-                    chosen = p.getController().chooseCardName(sa, cpp, valid, message);
+                    chosen = p.getController().chooseCardName(sa, StaticData.instance().getCommonCards()
+                            .streamAllFaces().filter(cpp).sorted().collect(Collectors.toList()), message);
                 }
             }
 
