@@ -53,7 +53,7 @@ import java.util.stream.Collectors;
 public class BoosterDraft implements IBoosterDraft {
 
     private int nextId = 0;
-    private static final int N_PLAYERS = 8;
+    public static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
 
     int podSize;
@@ -193,7 +193,7 @@ public class BoosterDraft implements IBoosterDraft {
                             // Auto choosing recommended pod size. In the future we may want to allow user to choose
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
-                        doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
+                        doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
                     }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
@@ -321,7 +321,7 @@ public class BoosterDraft implements IBoosterDraft {
             if (newPodSize != draft.getPodSize()) {
                 draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
             }
-            draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
+            draft.doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
         }
 
         for (String booster : boosters) {
@@ -419,6 +419,32 @@ public class BoosterDraft implements IBoosterDraft {
 
     public int getPodSize() {
         return this.podSize;
+    }
+
+    public void setDoublePick(DraftOptions.DoublePick doublePick) {
+        this.doublePickDuringDraft = doublePick;
+    }
+
+    /** The pick rule as the set declared it, before resolving against a pod size. */
+    public DraftOptions.DoublePick getDoublePick() {
+        return this.doublePickDuringDraft;
+    }
+
+    /**
+     * True when the pick rule gives this player another card from the pack they just
+     * picked from. Call after {@link LimitedPlayer#draftCard} has counted the pick.
+     * Keyed on the player's own count so the network host, where seats do not pick in
+     * lockstep, gets the same answer as offline play.
+     */
+    public boolean keepsPackAfterPick(LimitedPlayer player) {
+        DraftOptions.DoublePick rule = this.doublePickDuringDraft == null
+                ? DraftOptions.DoublePick.NEVER
+                : this.doublePickDuringDraft.resolve(this.podSize);
+        return switch (rule) {
+            case FIRST_PICK -> player.draftedThisRound == 1;
+            case ALWAYS -> player.draftedThisRound % 2 == 1;
+            default -> false;
+        };
     }
 
     @Override
@@ -580,7 +606,6 @@ public class BoosterDraft implements IBoosterDraft {
         if (firstPlayer.unopenedPacks.isEmpty()) {
             return false;
         }
-        // todo set pick two logic  for this booster group
 
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
@@ -628,13 +653,6 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
-        if (DraftOptions.DoublePick.FIRST_PICK.equals(this.doublePickDuringDraft) && currentBoosterPick == 0) {
-            adjust = 0;
-        } else if (currentBoosterPick % 2 == 0 && DraftOptions.DoublePick.ALWAYS.equals(this.doublePickDuringDraft)) {
-            // This may not work with Conspiracy cards that mess with the draft
-            // But it probably doesn't matter since Conspiracy doesn't have double pick?
-            adjust = 0;
-        }
 
         // Do any players have a Canal Dredger?
         List<LimitedPlayer> dredgers = new ArrayList<>();
@@ -682,7 +700,9 @@ public class BoosterDraft implements IBoosterDraft {
             }
 
             if (passToPlayer == null) {
-                passToPlayer = this.players.get((i + adjust + this.podSize) % this.podSize);
+                passToPlayer = keepsPackAfterPick(pl)
+                        ? pl
+                        : this.players.get((i + adjust + this.podSize) % this.podSize);
             }
 
             assert(!toPass.containsKey(passingPack));
