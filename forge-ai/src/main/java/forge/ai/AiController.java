@@ -70,7 +70,6 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -98,7 +97,6 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     private volatile boolean timeoutReached;
-    private AtomicReference<Thread> threadReference = new AtomicReference<>();
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1602,14 +1600,7 @@ public class AiController {
         // in case of infinite loop reset below would not be reached
         timeoutReached = false;
 
-        ExecutorService executor = Executors.newSingleThreadExecutor(r -> {
-            Thread t = new Thread(r, "Game AI Eval");
-            t.setDaemon(true);
-            threadReference.set(t);
-            return t;
-        });
-
-        Future<SpellAbility> future = executor.submit(() -> {
+        FutureTask<SpellAbility> future = new FutureTask<>(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1693,32 +1684,28 @@ public class AiController {
 
             return null;
         });
-
+        Thread t = new Thread(future, "Game AI Eval");
+        t.setDaemon(true);
+        t.start();
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
             if (e instanceof TimeoutException) {
-                // log stack trace of the eval thread
-                for (Thread t : Thread.getAllStackTraces().keySet()) {
-                    if ("Game AI Eval".equals(t.getName())) {
-                        StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
-                        StackTraceElement[] evalStack = t.getStackTrace();
-                        for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                            sb.append("\n\tat ").append(evalStack[i]);
-                        }
-                        System.out.println(sb);
-                    }
+                // log where the eval thread currently is - each timeout doubles as a
+                // profiler sample for diagnosing remaining AI slowdowns from user logs
+                StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
+                StackTraceElement[] evalStack = t.getStackTrace();
+                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                    sb.append("\n\tat ").append(evalStack[i]);
                 }
+                System.out.println(sb);
             }
             timeoutReached = true;
             // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         } finally {
             future.cancel(true); // cooperative interrupt
-            executor.shutdownNow(); // ensures thread is interrupted
-            // get the reference and process to stop if it's still alive
-            Thread t = threadReference.get();
             try {
                 t.join(2000); //2 seconds wait
             } catch (InterruptedException ie) {
