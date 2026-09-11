@@ -13,8 +13,7 @@ public class ThreadUtil {public static final AtomicReference<Thread> AIExecThrea
                 t.setDaemon(true);
                 AIExecThread.set(t);
                 return t;
-            },
-            new ThreadPoolExecutor.CallerRunsPolicy() // Runs on main thread if the pool is somehow saturated
+            }
     );
     static {
         System.out.printf("(ThreadUtil first call): Running with priority %d%n", Thread.currentThread().getPriority());
