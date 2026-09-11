@@ -3,7 +3,11 @@ package forge.screens.deckeditor.controllers;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.gamemodes.limited.DraftAction;
+import forge.gamemodes.net.event.DraftActivateEvent;
 import forge.gamemodes.net.event.DraftPickEvent;
+import forge.gamemodes.net.event.DraftSeatStateEvent;
+import forge.gamemodes.net.event.NetEvent;
 import forge.gui.FDraftOverlay;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -42,12 +46,15 @@ import java.util.function.Consumer;
 public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     private final int seatIndex;
-    private final Consumer<DraftPickEvent> pickSender;
+    private final Consumer<NetEvent> pickSender;
     private final Runnable onLeave;
     private final Localizer localizer = Localizer.getInstance();
 
     private int currentPackNumber;
     private int currentPickNumber;
+    private int currentSeq;
+    private List<DraftAction> actions = List.of();
+    private boolean hiddenPack;
     private boolean draftComplete;
 
     private record PendingSelfPick(String cardName, int packNumber, int pickInPack, boolean auto) { }
@@ -63,8 +70,8 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     /**
      * @param seatIndex   this player's seat in the draft pod
-     * @param pickSender  callback to send picks; for the host this calls
-     *                    ServerGameLobby.handleDraftPick directly, for
+     * @param pickSender  callback to send draft events; for the host this calls
+     *                    ServerGameLobby.routeDraftEvent directly, for
      *                    clients it sends via FGameClient
      * @param onLeave     callback fired when the user confirms "Leave" on the
      *                    mid-draft exit prompt — lets the lobby drop its
@@ -72,7 +79,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
      * @param cDetailPicture0 the shared detail picture controller
      */
     public CEditorNetworkDraft(int seatIndex,
-            Consumer<DraftPickEvent> pickSender, Runnable onLeave,
+            Consumer<NetEvent> pickSender, Runnable onLeave,
             CDetailPicture cDetailPicture0) {
         super(FScreen.DRAFTING_PROCESS, cDetailPicture0, GameType.Draft);
 
@@ -106,14 +113,22 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
      * @param pack       the cards in the pack
      * @param packNumber 1-based pack number
      * @param pickNumber 0-based pick number within the pack round
+     * @param seq        the arrival number the pick must echo
+     * @param hiddenCount when above zero, the pack is hidden and shows this many face-down cards
      */
-    public void showPack(List<PaperCard> pack, int packNumber, int pickNumber) {
+    public void showPack(List<PaperCard> pack, int packNumber, int pickNumber, int seq, int hiddenCount) {
         this.currentPackNumber = packNumber;
         this.currentPickNumber = pickNumber;
+        this.currentSeq = seq;
+        this.hiddenPack = hiddenCount > 0;
 
         ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
-        for (PaperCard card : pack) {
-            pool.add(card, 1);
+        if (hiddenPack) {
+            pool.add(PaperCard.FAKE_CARD, hiddenCount);
+        } else {
+            for (PaperCard card : pack) {
+                pool.add(card, 1);
+            }
         }
 
         this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
@@ -130,23 +145,35 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
         // Only one card per invocation — draft flow picks single cards, not groups
         Iterator<Entry<PaperCard, Integer>> it = items.iterator();
         if (!it.hasNext()) return;
-        PaperCard card = it.next().getKey();
+        submitPick(it.next().getKey(), null);
+    }
 
-        this.getDeckManager().addItem(card, 1);
-        pickSender.accept(new DraftPickEvent(seatIndex, card));
+    private void submitPick(PaperCard card, DraftAction variant) {
+        // The host draws a hidden pick itself, so no card is sent
+        pickSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : card, variant));
 
         // Deferred log: flushed on the server's SeatPicked echo so queue-depth data is authoritative
-        pendingSelfPick = new PendingSelfPick(card.getName(),
-                currentPackNumber, currentPickNumber + 1, false);
+        String name = hiddenPack ? localizer.getMessage("lblFaceDownCard") : card.getName();
+        pendingSelfPick = new PendingSelfPick(name, currentPackNumber, currentPickNumber + 1, false);
 
         this.getCatalogManager().setPool(Collections.<PaperCard>emptyList());
         FDraftOverlay.SINGLETON_INSTANCE.onPickSubmitted();
     }
 
     public void addAutoPickedCard(PaperCard card, int packNumber, int pickInPack) {
-        this.getDeckManager().addItem(card, 1);
         pendingSelfPick = new PendingSelfPick(card.getName(), packNumber, pickInPack, true);
         FDraftOverlay.SINGLETON_INSTANCE.onPickSubmitted();
+    }
+
+    /** The host owns the pool: picks, removals, returns and trades all arrive here. */
+    public void applySeatState(DraftSeatStateEvent state) {
+        if (state.isFull()) {
+            getDeckManager().setPool(state.getPoolAdded());
+        } else {
+            state.getPoolAdded().forEach(c -> getDeckManager().addItem(c, 1));
+            state.getPoolRemoved().forEach(c -> getDeckManager().removeItem(c, 1));
+        }
+        actions = state.getActions();
     }
 
     public void flushSelfPickLog(int queueDepth) {
@@ -164,11 +191,16 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
+        if (!draftComplete) {
+            cmb.addDraftActionItems(actions, action -> submitPick(action.target(), action));
+        }
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        // No valid remove options during draft
+        if (!draftComplete) {
+            cmb.addDraftActionItems(actions, action -> pickSender.accept(new DraftActivateEvent(seatIndex, action)));
+        }
     }
 
     /**

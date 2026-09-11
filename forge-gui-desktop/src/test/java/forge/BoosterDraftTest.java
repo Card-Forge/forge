@@ -5,6 +5,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.card.Card;
+import forge.gamemodes.limited.DraftAction;
 import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
@@ -67,7 +68,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * @return
      */
     @Override
-    public boolean setChoice(final PaperCard c, DeckSection section) {
+    public boolean setChoice(final PaperCard c, DeckSection section, DraftAction variant) {
         System.out.println(c.getName());
         return false;
     }
@@ -120,6 +121,9 @@ public class BoosterDraftTest implements IBoosterDraft {
 
     @Override
     public void addLog(String message) {}
+
+    @Override
+    public void addPrivateLog(LimitedPlayer seat, String message) {}
 
     @Override
     public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {

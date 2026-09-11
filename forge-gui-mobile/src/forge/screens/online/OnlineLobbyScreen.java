@@ -13,6 +13,7 @@ import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftPrompt;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
@@ -26,7 +27,10 @@ import forge.gamemodes.net.NetworkEvent;
 import forge.gamemodes.net.NetworkEventView;
 import forge.gamemodes.net.OfflineLobby;
 import forge.gamemodes.net.client.FGameClient;
-import forge.gamemodes.net.event.DraftPickEvent;
+import forge.gamemodes.net.event.DraftLogEvent;
+import forge.gamemodes.net.event.DraftPromptResponseEvent;
+import forge.gamemodes.net.event.DraftSeatStateEvent;
+import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.FThreads;
@@ -50,6 +54,7 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
+import forge.toolbox.GuiChoose;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -436,43 +441,79 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
 
     @Override
     public void draftPackArrived(int seatIndex, List<PaperCard> pack,
-            int packNumber, int pickNumber, int timerDurationSeconds) {
-        // Host routes picks directly; client sends via network
-        Consumer<DraftPickEvent> pickSender;
-        if (getLobby() instanceof ServerGameLobby sgl) {
-            pickSender = ev -> sgl.handleDraftPick(ev, -1);
-        } else {
-            pickSender = ev -> {
-                if (getfGameClient() != null) {
-                    getfGameClient().send(ev);
-                }
-            };
-        }
-        final Consumer<DraftPickEvent> finalPickSender = pickSender;
-
-        // This runs on a Netty thread; activeDraftScreen and the event fields are EDT-owned
-        FThreads.invokeInEdtNowOrLater(() -> {
-            if (activeDraftScreen == null) {
-                // Host has the full NetworkEvent; a client only ever has the broadcast view
-                List<EventParticipant> participants = currentEvent != null
-                        ? currentEvent.getParticipants()
-                        : (lastEventView != null ? lastEventView.getParticipants() : List.of());
-                activeDraftScreen = new NetworkDraftingProcessScreen(
-                        seatIndex, participants,
-                        finalPickSender,
-                        () -> {
-                            activeDraftScreen = null;
-                            closeConn("");
-                        });
-                Forge.openScreen(activeDraftScreen);
+            int packNumber, int pickNumber, int timerDurationSeconds, int seq, int hiddenCount) {
+        Consumer<NetEvent> sender = draftSender();
+        // Always posted, because the mobile host's own pick runs a host step on this thread
+        FThreads.invokeInEdtLater(() -> {
+            NetworkDraftingProcessScreen screen = ensureDraftScreen(seatIndex, sender);
+            if (seatIndex == screen.getSeatIndex()) {
+                screen.onPackArrived(pack, packNumber, pickNumber, timerDurationSeconds, seq, hiddenCount);
             }
-            activeDraftScreen.onPackArrived(pack, packNumber, pickNumber, timerDurationSeconds);
         });
     }
 
     @Override
+    public void draftSeatState(DraftSeatStateEvent event) {
+        Consumer<NetEvent> sender = draftSender();
+        FThreads.invokeInEdtLater(() -> ensureDraftScreen(event.getSeatIndex(), sender).applySeatState(event));
+    }
+
+    @Override
+    public void draftLog(DraftLogEvent event) {
+        FThreads.invokeInEdtLater(() -> {
+            if (activeDraftScreen != null) {
+                activeDraftScreen.onLogEvent(event);
+            }
+        });
+    }
+
+    @Override
+    public void draftPrompt(DraftPrompt prompt) {
+        Consumer<NetEvent> sender = draftSender();
+        FThreads.invokeInEdtLater(() -> {
+            NetworkDraftingProcessScreen screen = activeDraftScreen;
+            if (screen == null || prompt.seatIndex() != screen.getSeatIndex()) return;
+            if (prompt.isInfoOnly()) {
+                GuiChoose.reveal(prompt.message(), prompt.options());
+                return;
+            }
+            // Callback form: libGDX dialogs cannot block the render thread
+            GuiChoose.getChoices(prompt.message(), prompt.min(), prompt.max(), prompt.options(), chosen ->
+                    sender.accept(new DraftPromptResponseEvent(screen.getSeatIndex(),
+                            prompt.promptId(), DraftPrompt.indicesOf(prompt.options(), chosen))));
+        });
+    }
+
+    private NetworkDraftingProcessScreen ensureDraftScreen(int seatIndex, Consumer<NetEvent> sender) {
+        if (activeDraftScreen == null) {
+            // Host has the full NetworkEvent; a client only ever has the broadcast view
+            List<EventParticipant> participants = currentEvent != null
+                    ? currentEvent.getParticipants()
+                    : (lastEventView != null ? lastEventView.getParticipants() : List.of());
+            activeDraftScreen = new NetworkDraftingProcessScreen(seatIndex, participants, sender, () -> {
+                activeDraftScreen = null;
+                closeConn("");
+            });
+            Forge.openScreen(activeDraftScreen);
+        }
+        return activeDraftScreen;
+    }
+
+    // Host routes draft events directly; a client sends them over the network
+    private Consumer<NetEvent> draftSender() {
+        if (getLobby() instanceof ServerGameLobby sgl) {
+            return ev -> sgl.routeDraftEvent(ev, ServerGameLobby.HOST_LOBBY_SLOT);
+        }
+        return ev -> {
+            if (getfGameClient() != null) {
+                getfGameClient().send(ev);
+            }
+        };
+    }
+
+    @Override
     public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
-        FThreads.invokeInEdtNowOrLater(() -> {
+        FThreads.invokeInEdtLater(() -> {
             if (activeDraftScreen != null) {
                 activeDraftScreen.onSeatPicked(seatIndex, seatQueueDepths);
             }
@@ -481,7 +522,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
 
     @Override
     public void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
-        FThreads.invokeInEdtNowOrLater(() -> {
+        FThreads.invokeInEdtLater(() -> {
             if (activeDraftScreen != null) {
                 activeDraftScreen.onAutoPicked(seatIndex, card, packNumber, pickInPack);
             }
@@ -490,7 +531,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
 
     @Override
     public void receiveEventPool(String eventId, Deck pool) {
-        FThreads.invokeInEdtNowOrLater(() -> {
+        FThreads.invokeInEdtLater(() -> {
             if (currentEvent != null && DeckProxy.getEventTag(pool, "eventId") == null) {
                 NetworkEvent.setEventTags(pool, currentEvent);
             }

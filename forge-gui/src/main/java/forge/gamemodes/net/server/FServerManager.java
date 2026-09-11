@@ -178,6 +178,8 @@ public final class FServerManager implements IHasForgeLog {
 
     /** O(n) scan — pod size is capped at 8, so the map keyed by Channel stays the source of truth. */
     public RemoteClient getClientBySlotIndex(int slotIndex) {
+        // A peer that has not logged in has slot -1 and must never match
+        if (slotIndex < 0) return null;
         for (RemoteClient client : clients.values()) {
             if (client.getIndex() == slotIndex) {
                 return client;
@@ -187,16 +189,17 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     /**
-     * Send an event to the given slot. If the slot is a remote client, sends
-     * the NetEvent over the wire; otherwise dispatches it to the local lobby
-     * listener (the host's own path) via {@link #dispatchToLocalListener}.
+     * Send an event to the given slot. The host's own slot goes to the local listener,
+     * a remote slot to its client, and a slot with no connected client drops the event.
      */
     public void sendToSlot(int slotIndex, NetEvent remoteEvent) {
+        if (slotIndex == ServerGameLobby.HOST_LOBBY_SLOT) {
+            dispatchToLocalListener(remoteEvent);
+            return;
+        }
         RemoteClient client = getClientBySlotIndex(slotIndex);
         if (client != null) {
             client.send(remoteEvent);
-        } else {
-            dispatchToLocalListener(remoteEvent);
         }
     }
 
@@ -1121,6 +1124,8 @@ public final class FServerManager implements IHasForgeLog {
                         final int seat = localLobby.findSeatForLobbySlot(disconnected.getIndex());
                         final BoosterDraftHost host = localLobby.getDraftHost();
                         if (seat >= 0 && host != null) {
+                            // A restarted client needs the event view and seat names before its draft events
+                            updateLobbyState();
                             host.onSeatReconnected(seat);
                         }
                     } else {
@@ -1189,9 +1194,11 @@ public final class FServerManager implements IHasForgeLog {
                     broadcastReadyState(client.getUsername(), event.getReady());
                 }
                 return;
-            } else if (msg instanceof DraftPickEvent pickEvent) {
+            } else if (msg instanceof DraftPickEvent || msg instanceof DraftActivateEvent
+                    || msg instanceof DraftPromptResponseEvent) {
                 if (localLobby != null) {
-                    localLobby.handleDraftPick(pickEvent, client.getIndex());
+                    // A peer that has not logged in has slot -1, which routeDraftEvent rejects
+                    localLobby.routeDraftEvent((NetEvent) msg, client.getIndex());
                 }
                 return;
             }

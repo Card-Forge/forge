@@ -22,7 +22,9 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftAction;
 import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -36,6 +38,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 
+import java.util.List;
 import java.util.Map.Entry;
 
 /**
@@ -108,25 +111,38 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         if (toAlternate) { return; }
 
         // can only draft one at a time, regardless of the requested quantity
-        PaperCard card = items.iterator().next().getKey();
-        getDeckManager().addItem(card, 1);
+        draftCard(items.iterator().next().getKey(), null);
+    }
 
-        // get next booster pack
-        boosterDraft.setChoice(card);
+    // The pick flow and ability menus mirror CEditorDraftingProcess; the editors differ in how they show packs and save
+    private void draftCard(PaperCard card, DraftAction variant) {
+        boosterDraft.setChoice(card, DeckSection.Sideboard, variant);
+        applyPoolDelta();
+        showPackToDraft();
+    }
 
-        boolean nextChoice = this.boosterDraft.hasNextChoice();
-        ItemPool<PaperCard> pool = null;
-        if (nextChoice) {
-            pool = this.boosterDraft.nextChoice();
-            nextChoice = !pool.isEmpty();
-        }
+    private void applyPoolDelta() {
+        LimitedPlayer.PoolDelta delta = boosterDraft.getHumanPlayer().drainPoolDelta();
+        delta.added().forEach(c -> getDeckManager().addItem(c, 1));
+        delta.removed().forEach(c -> getDeckManager().removeItem(c, 1));
+    }
 
-        if (nextChoice) {
-            this.showChoices(pool);
+    private void showPackToDraft() {
+        while (boosterDraft.hasNextChoice()) {
+            ItemPool<PaperCard> pool = boosterDraft.nextChoice();
+            if (pool == null || pool.isEmpty()) {
+                break;
+            }
+            if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
+                boosterDraft.skipChoice();
+                continue;
+            }
+            showChoices(pool);
+            return;
         }
-        else {
-            this.saveDraft();
-        }
+        boosterDraft.postDraftActions();
+        applyPoolDelta();
+        saveDraft();
     }
 
     /* (non-Javadoc)
@@ -139,11 +155,17 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(Localizer.getInstance().getMessage("lblDraft"), null);
+        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), action));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        // no valid remove options
+        cmb.addDraftActionItems(currentActions(), action -> boosterDraft.getHumanPlayer().activate(action));
+    }
+
+    private List<DraftAction> currentActions() {
+        LimitedPlayer me = boosterDraft.getHumanPlayer();
+        return me.getActions(me.nextChoice());
     }
 
     /**
@@ -158,7 +180,13 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
         this.getCatalogManager().setCaption(Localizer.getInstance().getMessage("lblPackNCards", String.valueOf(packNumber)));
-        getCatalogManager().setPool(list);
+        if (boosterDraft.getHumanPlayer().isPackHidden()) {
+            ItemPool<PaperCard> placeholders = new ItemPool<>(PaperCard.class);
+            placeholders.add(PaperCard.FAKE_CARD, list.countAll());
+            getCatalogManager().setPool(placeholders);
+        } else {
+            getCatalogManager().setPool(list);
+        }
     } // showChoices()
 
     /**

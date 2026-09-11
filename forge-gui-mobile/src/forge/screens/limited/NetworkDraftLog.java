@@ -59,8 +59,8 @@ public final class NetworkDraftLog {
      * Caches a pending entry for a manual pick by the local player. Flushed when
      * the server's DraftSeatPickedEvent echoes our seat back with queue-depth data.
      */
-    public void recordPendingSelfPick(PaperCard card, int packNumber, int pickInPack) {
-        pending = new PendingSelfPick(card.getName(), packNumber, pickInPack, false);
+    public void recordPendingSelfPick(String cardName, int packNumber, int pickInPack) {
+        pending = new PendingSelfPick(cardName, packNumber, pickInPack, false);
     }
 
     private void flushPending(int queueDepth) {
@@ -71,6 +71,10 @@ public final class NetworkDraftLog {
         String msg = localizer.getMessage("lblDraftLogMyPick", displayName,
                 String.valueOf(p.packNumber), String.valueOf(p.pickInPack));
         log(msg + waitingSuffix(queueDepth));
+    }
+
+    public void recordLogEvent(String message) {
+        log(message);
     }
 
     private static String waitingSuffix(int depth) {
