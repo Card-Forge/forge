@@ -56,8 +56,13 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
             matches.add(c);
             CardEdition edition = StaticData.instance().getEditions().get(setCode3);
-            if (edition != null && !StringUtils.isBlank(edition.getScryfallCode())) {
-                scryfallSetCodes.add(edition.getScryfallCode());
+            if (edition != null) {
+                if (!StringUtils.isBlank(edition.getScryfallCode())) {
+                    scryfallSetCodes.add(edition.getScryfallCode());
+                }
+                if (!StringUtils.isBlank(edition.getTokensCode())) {
+                    scryfallSetCodes.add(edition.getTokensCode());
+                }
             }
         }
 
