@@ -18,8 +18,25 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
 
+    /**
+     * Token-bucket allowance for chat, sized for a person typing rather than a
+     * script holding the key down. Read per call rather than into static final
+     * fields, because Integer.getInteger in a static initialiser is fixed at
+     * class-load and surefire shares one JVM, so a test could not vary them.
+     * A burst of zero or less switches the limit off.
+     */
+    private static int chatBurst() {
+        return Integer.getInteger("forge.net.chatBurst", 10);
+    }
+
+    private static int chatRefillMillis() {
+        return Integer.getInteger("forge.net.chatRefillMillis", 1000);
+    }
+
     private volatile Channel channel;
     private String username;
+    private double chatTokens = chatBurst();
+    private long chatLastRefill = System.currentTimeMillis();
     private int index = UNASSIGNED_SLOT;
     private boolean libgdx;
     private volatile ReplyPool replies = new ReplyPool();
@@ -65,6 +82,29 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     public SocketAddress getRemoteAddress() {
         final Channel ch = channel;
         return ch == null ? null : ch.remoteAddress();
+    }
+
+    /**
+     * Consume one chat allowance; false when the peer is over its rate.
+     * Always true when the limit is switched off.
+     */
+    public synchronized boolean allowChatMessage() {
+        final int burst = chatBurst();
+        if (burst <= 0) {
+            return true;
+        }
+        final long refill = Math.max(1, chatRefillMillis());
+        final long now = System.currentTimeMillis();
+        final long elapsed = now - chatLastRefill;
+        if (elapsed > 0) {
+            chatTokens = Math.min(burst, chatTokens + (double) elapsed / refill);
+            chatLastRefill = now;
+        }
+        if (chatTokens < 1) {
+            return false;
+        }
+        chatTokens -= 1;
+        return true;
     }
 
     /** Encodes synchronously on the caller's thread. Returns null on failure (logged). */
