@@ -200,7 +200,14 @@ public class Match {
     private static void preparePlayerZone(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<>();
-        for (final Entry<PaperCard, Integer> stackOfCards : section) {
+        // Iterate the deck section in sorted order: CardPool's backing map
+        // does not guarantee iteration order, so for a fixed seed the
+        // pre-shuffle library order, the random-foil roll sequence, and the
+        // card id assignment order could all vary across JVMs. Sorted
+        // iteration makes zone preparation a pure function of (deck, seed).
+        List<Entry<PaperCard, Integer>> ordered = Lists.newArrayList(section);
+        ordered.sort(Entry.comparingByKey());
+        for (final Entry<PaperCard, Integer> stackOfCards : ordered) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
                 final Card card = Card.fromPaperCard(cp, player);
