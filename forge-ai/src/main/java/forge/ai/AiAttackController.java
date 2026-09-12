@@ -941,6 +941,8 @@ public class AiAttackController {
                 ThreadUtil.AIExecutor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+            } finally {
+                ThreadUtil.cleanAIThread();
             }
 
             if (attackersLeft.isEmpty()) {

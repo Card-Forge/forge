@@ -6,7 +6,7 @@ public class ThreadUtil {
     public static final ConcurrentHashMap<Thread, Boolean> activeAIThreads = new ConcurrentHashMap<>();
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
             0, Runtime.getRuntime().availableProcessors(),
-            1L, TimeUnit.MILLISECONDS, // Kill the underlying thread 1ms after it becomes idle
+            1L, TimeUnit.SECONDS, // Kill the underlying thread 1s after it becomes idle
             new SynchronousQueue<>(),  // Hand off tasks directly to the thread with zero queue latency
             r -> {
                 Thread t = new Thread(r, "AI ThreadPool");
@@ -17,6 +17,11 @@ public class ThreadUtil {
             // Dropped tasks disappear safely
             new ThreadPoolExecutor.DiscardPolicy()
     );
+
+    public static void cleanAIThread() {
+        activeAIThreads.keySet().removeIf(thread -> !thread.isAlive());
+    }
+
     static {
         System.out.printf("(ThreadUtil first call): Running with priority %d%n", Thread.currentThread().getPriority());
         // Allow core threads to die when they have no work
