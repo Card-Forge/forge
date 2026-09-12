@@ -33,7 +33,7 @@ public class Match {
     private List<PaperCard> removedCards = Lists.newArrayList();
     private final List<RegisteredPlayer> players;
     private final GameRules rules;
-    private final String title;
+    private String title;
 
     private final EventBus events = new EventBus("match events");
     private final Map<Integer, GameOutcome> gameOutcomes = Maps.newHashMap();
@@ -48,6 +48,9 @@ public class Match {
 
     public GameRules getRules() {
         return rules;
+    }
+    public void setTitle(final String title) {
+        this.title = title;
     }
     String getTitle() {
         final Multiset<RegisteredPlayer> wins = getGamesWon();
