@@ -4,7 +4,7 @@
 
     <uses-sdk
         android:minSdkVersion="26"
-        android:targetSdkVersion="35" />
+        android:targetSdkVersion="29" />
     <!-- When your app targets Android 11 or higher and it declares the MANAGE_EXTERNAL_STORAGE permission,
          Android Studio shows the lint warning. This warning reminds you that the Google Play store has a policy
          that limits usage of the permission. -->
@@ -30,6 +30,7 @@
 
     <application
         android:allowBackup="true"
+        android:requestLegacyExternalStorage="true"
         android:isGame="true"
         android:appCategory="game"
         android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
