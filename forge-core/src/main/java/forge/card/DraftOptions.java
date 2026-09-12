@@ -5,7 +5,12 @@ public class DraftOptions {
         NEVER,
         FIRST_PICK, // only first pick each pack
         WHEN_POD_SIZE_IS_4, // only when pod size is 4, so you can pick two cards each time
-        ALWAYS // each time you receive a pack, you can pick two cards
+        ALWAYS; // each time you receive a pack, you can pick two cards
+
+        /** Resolve the pod-size-conditional rule against an actual pod size. */
+        public DoublePick resolve(int podSize) {
+            return this == WHEN_POD_SIZE_IS_4 ? (podSize == 4 ? ALWAYS : NEVER) : this;
+        }
     };
     public enum DeckType {
         Normal, // Standard deck, usually 40 cards
@@ -51,15 +56,7 @@ public class DraftOptions {
     }
 
     public DoublePick isDoublePick(int podSize) {
-        if (doublePick == DoublePick.WHEN_POD_SIZE_IS_4) {
-            if (podSize != 4) {
-                return DoublePick.NEVER;
-            }
-            // only when pod size is 4, so you can pick two cards each time
-            return DoublePick.ALWAYS;
-        }
-
-        return doublePick;
+        return doublePick.resolve(podSize);
     }
 
 

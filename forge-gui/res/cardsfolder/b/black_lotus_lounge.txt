@@ -1,0 +1,11 @@
+Name:Black Lotus Lounge
+ManaCost:no cost
+Types:Plane MagicCon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you planeswalk here and at the beginning of your upkeep, create a Black Lotus artifact token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When you planeswalk here and at the beginning of your upkeep, create a Black Lotus artifact token.
+SVar:TrigToken:DB$ CopyPermanent | DefinedName$ Black Lotus
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigRepeat | TriggerDescription$ Whenever Chaos ensues, each player draws a card for each artifact token they control.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
+SVar:X:Count$Valid Artifact.token+RememberedPlayerCtrl
+Oracle:When you planeswalk here and at the beginning of your upkeep, create a Black Lotus artifact token.\nWhenever Chaos ensues, each player draws a card for each artifact token they control.
