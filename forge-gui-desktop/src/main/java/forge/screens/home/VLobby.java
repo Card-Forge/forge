@@ -659,7 +659,9 @@ public class VLobby implements ILobbyView {
         if (selected instanceof String) {
             String sel = (String) selected;
             if (sel.contains("Use deck's scheme section")) {
-                if (deck.has(DeckSection.Schemes)) {
+                // deck is null until the player has a deck for the current game format,
+                // so a format with no decks yet falls through to Random rather than NPE.
+                if (deck != null && deck.has(DeckSection.Schemes)) {
                     schemePool = deck.get(DeckSection.Schemes);
                 } else {
                     sel = "Random";
@@ -690,7 +692,8 @@ public class VLobby implements ILobbyView {
         if (selected instanceof String) {
             String sel = (String) selected;
             if (sel.contains("Use deck's planes section")) {
-                if (deck.has(DeckSection.Planes)) {
+                // Same null case as selectSchemeDeck: no deck yet for this game format.
+                if (deck != null && deck.has(DeckSection.Planes)) {
                     planePool = deck.get(DeckSection.Planes);
                 } else {
                     sel = "Random";
