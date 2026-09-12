@@ -1,0 +1,16 @@
+Name:Gallery of Legends
+ManaCost:no cost
+Types:Artifact Attraction
+K:Visit:TrigDigUntil
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | SubAbility$ ChooseCard | SpellDescription$ Visit — Exile cards from the top of your library until you exile a nonland card, then choose a legendary creature card name with the same mana value as that card. Create a token that’s a copy of the card with the chosen name. That token gains haste. Exile it at the beginning of the next end step.
+SVar:ChooseCard:DB$ NameCard | Defined$ You | ValidCards$ Creature.Legendary+cmcEQX | SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | PumpKeywords$ Haste | AtEOT$ Exile | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost
+Oracle:Visit — Exile cards from the top of your library until you exile a nonland card, then choose a legendary creature card name with the same mana value as that card. Create a token that’s a copy of the card with the chosen name. That token gains haste. Exile it at the beginning of the next end step.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:5 6
