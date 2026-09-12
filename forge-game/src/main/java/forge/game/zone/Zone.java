@@ -19,6 +19,7 @@ package forge.game.zone;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -212,6 +213,13 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public CardCollectionView getCards(final boolean filter) {
         return cardList; // Non-Battlefield PlayerZones don't care about the filter
+    }
+
+    public final Stream<Card> streamCards() {
+        return streamCards(true);
+    }
+    public Stream<Card> streamCards(final boolean filter) {
+        return cardList.stream();
     }
 
     public final boolean isEmpty() {
