@@ -3991,6 +3991,14 @@ public class CardFactoryUtil {
             String effect = "Mode$ DisableTriggers | ValidCard$ Card.Self+ThisTurnEntered | ValidTrigger$ Triggered.ChapterNotLore | Secondary$ True" +
                     " | Description$ Chapter abilities of this Saga can't trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Shadow")) {
+            String desc = "Shadow (" + inst.getReminderText() + ")";
+            String effect1 = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutShadow | Secondary$ True" +
+                    " | Description$ " + desc;
+            String effect2 = "Mode$ CantBlockBy | ValidAttacker$ Creature.withoutShadow | ValidBlocker$ Creature.Self | Secondary$ True" +
+                    " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect1, state.getCard(), state, intrinsic));
+            inst.addStaticAbility(StaticAbility.create(effect2, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | ValidTarget$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
