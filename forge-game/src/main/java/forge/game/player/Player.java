@@ -1097,6 +1097,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public int getScryThisTurn() {
         return scryThisTurn;
     }
+    public void incScryThisTurn() {
+        scryThisTurn++;
+    }
 
     public boolean canMulligan() {
         return !getZone(ZoneType.Hand).isEmpty();
