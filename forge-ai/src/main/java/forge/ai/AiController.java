@@ -1702,25 +1702,21 @@ public class AiController {
                         System.out.println(sb);
                 }
 
+                try {
+                    t.join(500);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
                 if (t.isAlive()) {
+                    // last resort, see #8302: the eval thread may be stuck inside a single
+                    // evaluation or an infinite loop and never reach the cooperative exit
                     try {
-                        t.join(500);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
+                        t.stop();
+                    } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                        // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                    } catch (ThreadDeath td) {
+                        throw td; // ThreadDeath is thrown on thread.stop une
                     }
-                    if (t.isAlive()) {
-                        // last resort, see #8302: the eval thread may be stuck inside a single
-                        // evaluation or an infinite loop and never reach the cooperative exit
-                        try {
-                            t.stop();
-                        } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                            // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
-                        } catch (ThreadDeath td) {
-                            throw td;
-                        }
-                    }
-                } else {
-                    ThreadUtil.activeAIThreads.remove(t);
                 }
             });
             ThreadUtil.cleanAIThread();
