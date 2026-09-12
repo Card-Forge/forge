@@ -1601,7 +1601,7 @@ public class AiController {
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
                 if (Thread.currentThread().isInterrupted()) {
-                    break;
+                    throw new InterruptedException("AI evaluation interrupted");
                 }
 
                 // Don't add Counterspells to the "normal" playcard lookups
@@ -1682,46 +1682,34 @@ public class AiController {
 
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+        } catch (TimeoutException e) {
             e.printStackTrace();
-            // ask the eval thread to exit at the next SpellAbility check first: a brutal
-            // Thread.stop() mid-evaluation can leave partially mutated shared state behind
             future.cancel(true);
-            ThreadUtil.activeAIThreads.keySet().forEach(t -> {
-                if (e instanceof TimeoutException) {
-                    // log where the eval thread currently is - each timeout doubles as a
-                    // profiler sample for diagnosing remaining AI slowdowns from user logs
-                    StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
-                    int sbInitLength = sb.length();
-                    StackTraceElement[] evalStack = t.getStackTrace();
-                    for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                        sb.append("\n\tat ").append(evalStack[i]);
-                    }
-                    // prints non empty stack trace since the thread may be already discarded by the executor policy
-                    if (sb.length() > sbInitLength)
-                        System.out.println(sb);
-                }
 
-                try {
-                    t.join(500);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
+            // Log stack traces for profiling
+            ThreadUtil.activeAIThreads.keySet().forEach(t -> {
+                StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
+                int sbInitLength = sb.length();
+                StackTraceElement[] evalStack = t.getStackTrace();
+                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                    sb.append("\n\tat ").append(evalStack[i]);
                 }
-                if (t.isAlive()) {
-                    // last resort, see #8302: the eval thread may be stuck inside a single
-                    // evaluation or an infinite loop and never reach the cooperative exit
-                    try {
-                        t.stop();
-                    } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                        // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
-                    } catch (ThreadDeath td) {
-                        throw td; // ThreadDeath is thrown on thread.stop une
-                    }
+                if (sb.length() > sbInitLength) {
+                    System.out.println(sb);
                 }
             });
-            ThreadUtil.cleanAIThread();
-            // TODO mark some as skipped to increase chance to find something playable next priority
+
+            ThreadUtil.killAIThreads();
             return null;
+
+        } catch (ExecutionException | InterruptedException ie) {
+            // Preserve interrupt status
+            if (ie instanceof InterruptedException)
+                Thread.currentThread().interrupt();
+            future.cancel(true);
+            ThreadUtil.killAIThreads();
+            return null;
+
         }
     }
 

@@ -18,6 +18,21 @@ public class ThreadUtil {
             new ThreadPoolExecutor.DiscardPolicy()
     );
 
+    public static void killAIThreads() {
+        activeAIThreads.keySet().forEach(t -> {
+            if (t.isAlive()) {
+                // Ask it to stop cooperatively
+                t.interrupt();
+                try {
+                    t.join(1000); // give it up to 1s to exit
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        cleanAIThread(); // remove dead ones from the map
+    }
+
     public static void cleanAIThread() {
         activeAIThreads.keySet().removeIf(thread -> !thread.isAlive());
     }

@@ -942,7 +942,7 @@ public class AiAttackController {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             } finally {
-                ThreadUtil.cleanAIThread();
+                ThreadUtil.killAIThreads();
             }
 
             if (attackersLeft.isEmpty()) {
