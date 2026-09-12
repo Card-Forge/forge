@@ -1,0 +1,8 @@
+Name:Mabel, Bitter Recluse
+ManaCost:B
+Types:Legendary Creature Mouse Warlock
+PT:1/1
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ When CARDNAME enters, remove up to three counters from another target creature or planeswalker.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Creature.Other,Planeswalker.Other | ValidTgtsDesc$ another creature or planeswalker | CounterType$ Any | CounterNum$ 3 | UpTo$ True
+Oracle:Deathtouch\nWhen Mabel enters, remove up to three counters from another target creature or planeswalker.
