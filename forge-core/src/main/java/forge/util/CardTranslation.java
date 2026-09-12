@@ -8,6 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CardTranslation {
 
@@ -15,10 +18,12 @@ public class CardTranslation {
     private static Map <String, String> translatedtypes;
     private static Map <String, String> translatedoracles;
     private static Map <String, List <Pair <String, String> > > oracleMappings;
-    private static Map <String, String> translatedCaches;
+    private static Map <String, Map <String, String> > translatedCaches;
+    private static Map <String, String> sharedCache;
     private static Map <String, String> translatedEffectNames;
     private static Map <String, String> translatedTokenNames;
     private static final List <String> knownEffectNames = Arrays.asList("The Ring", "The Monarch", "The Initiative", "City's Blessing", "Keyword Effects");
+    private static final Pattern TRANSLATION_INVARIANT = Pattern.compile("\\{[^}]{1,6}\\}|[+-]\\d+/[+-]\\d+");
     private static String languageSelected = "en-US";
 
     private static void readTranslationFile(String language, String languagesDirectory) {
@@ -274,7 +279,10 @@ public class CardTranslation {
             translatedtypes = new HashMap<>();
             translatedoracles = new HashMap<>();
             oracleMappings = new HashMap<>();
-            translatedCaches = new HashMap<>();
+            // read from the game thread and the EDT both, and computeIfAbsent on a plain
+            // HashMap is not safe under that
+            translatedCaches = new ConcurrentHashMap<>();
+            sharedCache = new ConcurrentHashMap<>();
             readTranslationFile(languageSelected, languagesDirectory);
         }
     }
@@ -303,16 +311,87 @@ public class CardTranslation {
         String [] splitOracleText = oracleText.split("\\\\n");
         String [] splitTranslatedText = translatedText.split("\r\n\r\n");
 
-        for (int i = 0; i < splitOracleText.length && i < splitTranslatedText.length; i++) {
+        int offset = leadingLineOffset(splitOracleText, splitTranslatedText);
+
+        for (int i = 0; i < splitOracleText.length; i++) {
             String toracle = replaceCardName("en-US", faceName, splitOracleText[i]);
-            String ttranslated = replaceCardName(languageSelected, translatedName, splitTranslatedText[i]);
             // Remove reminder text in English oracle text unless entire line is reminder text
             if (!toracle.startsWith("(")) {
                 toracle = toracle.replaceAll("\\(.*\\)", "");
             }
+            // A translated oracle can have fewer lines than the English one. Give the uncovered
+            // lines an entry of their own anyway, with no translation - otherwise they match some
+            // other line's entry and two abilities display the same text.
+            int t = i - offset;
+            String ttranslated = t >= 0 && t < splitTranslatedText.length
+                    ? replaceCardName(languageSelected, translatedName, splitTranslatedText[t])
+                    : null;
             mapping.add(Pair.of(toracle, ttranslated));
         }
         oracleMappings.put(translationKey, mapping);
+    }
+
+    /**
+     * Translated oracles routinely reach us a line short, having folded a leading keyword line
+     * - "Enchant creature", "Flying", "Devoid (...)" - into the line below it, which leaves
+     * every remaining line paired with its neighbour's translation. Mana symbols and stat
+     * changes survive translation unaltered, so where a line carries one they say which pairing
+     * is right; where none does, the leading line is the one usually folded away.
+     *
+     * @return how far the translated lines have slipped against the English ones, 0 or 1
+     */
+    private static int leadingLineOffset(String [] oracle, String [] translated) {
+        if (oracle.length - translated.length != 1
+                || !(oracle[0].startsWith("Enchant ") || isKeywordLine(oracle[0]))) {
+            return 0;
+        }
+        // leaving the last line unmatched is the same thing as pairing from the top
+        return pairingScore(oracle, translated, oracle.length - 1)
+                > pairingScore(oracle, translated, 0) ? 0 : 1;
+    }
+
+    /**
+     * How well the translated lines line up with the English ones when {@code unmatched} is the
+     * English line left without a translation: agreements less disagreements, over the lines
+     * carrying something translation does not alter.
+     */
+    private static int pairingScore(String [] oracle, String [] translated, int unmatched) {
+        int score = 0;
+        for (int i = 0, t = 0; i < oracle.length; i++) {
+            if (i == unmatched) {
+                continue;
+            }
+            List <String> marks = translationInvariants(oracle[i]);
+            List <String> theirs = translationInvariants(translated[t]);
+            // a translated line carrying none of its own says nothing either way: plenty of
+            // translations write a cost out in words where the English uses a symbol
+            if (!marks.isEmpty() && !theirs.isEmpty()) {
+                score += marks.equals(theirs) ? 1 : -1;
+            }
+            t++;
+        }
+        return score;
+    }
+
+    /**
+     * Whether a line is a keyword line - "Flying", "Devoid (...)", "Enchant creature",
+     * "Renown 1 (...)" - rather than a sentence. This is the line translations fold into the
+     * one below it. They fold sentences too, but keep those at the front, so for a sentence
+     * the lines still pair from the top and there is nothing to realign.
+     */
+    private static boolean isKeywordLine(String line) {
+        String bare = line.replaceAll("\\([^()]*\\)", "").trim();
+        return bare.isEmpty() || (!bare.endsWith(".") && bare.split("\\s+").length <= 5);
+    }
+
+    /** The parts of an oracle line that read the same in every language. */
+    private static List <String> translationInvariants(String line) {
+        List <String> found = new ArrayList<>();
+        Matcher m = TRANSLATION_INVARIANT.matcher(line);
+        while (m.find()) {
+            found.add(m.group());
+        }
+        return found;
     }
 
     public static String translateMultipleDescriptionText(String descText, ITranslatable card) {
@@ -345,15 +424,26 @@ public class CardTranslation {
         if (descText == null)
             return "";
         if (!needsTranslation()) return descText;
-        if (translatedCaches.containsKey(descText)) return translatedCaches.get(descText);
+        // the answer comes out of one card's oracle mapping, so it can only be reused for that
+        // card - two cards sharing an ability need not word its translation the same way
+        String key = card.getTranslationKey();
+        Map <String, String> cardCache = translatedCaches.computeIfAbsent(key, k -> new ConcurrentHashMap<>());
+        if (cardCache.containsKey(descText)) return cardCache.get(descText);
 
-        List <Pair <String, String> > mapping = oracleMappings.get(card.getTranslationKey());
-        if (mapping == null) return descText;
+        List <Pair <String, String> > mapping = oracleMappings.get(key);
+        if (mapping == null) {
+            // no mapping of its own - a clone that took a different name, say - so fall back to
+            // whatever another card already worked out for this exact text
+            return sharedCache.getOrDefault(descText, descText);
+        }
         String result = descText;
         if (!mapping.isEmpty()) {
             result = translateSingleIngameText(descText, mapping);
         }
-        translatedCaches.put(descText, result);
+        cardCache.put(descText, result);
+        if (!result.equals(descText)) {
+            sharedCache.putIfAbsent(descText, result);
+        }
         return result;
     }
 
@@ -374,7 +464,9 @@ public class CardTranslation {
         }
 
         if (candidateIndex < mapping.size()) {
-            return mapping.get(candidateIndex).getRight();
+            String translated = mapping.get(candidateIndex).getRight();
+            // an oracle line the translation does not cover carries no text of its own
+            return translated == null ? descText : translated;
         }
 
         return descText;
