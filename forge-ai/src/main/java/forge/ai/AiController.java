@@ -1715,6 +1715,8 @@ public class AiController {
                             t.stop();
                         } catch (UnsupportedOperationException | NoSuchMethodError ex) {
                             // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                        } catch (ThreadDeath td) {
+                            throw td;
                         }
                     }
                 } else {
