@@ -37,6 +37,7 @@ public enum StaticAbilityMode {
     CantBlockBy,
     CanAttackIfHaste,
     CanBlockIfReach,
+    CanBlockIfShadow,
     MinMaxBlocker,
     BlockTapped,
     AttackVigilance,
