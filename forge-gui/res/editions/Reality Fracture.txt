@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=FRA
 
 [cards]
+1 M Emrakul, the Exigent Doom @Cristi Balanescu
 2 C Academic Ascent @Randy Gallegos
 4 C Campus Crier @Johan Grenier
 5 M Enlightened Confidant @Denman Rooke
@@ -16,47 +17,74 @@ ScryfallCode=FRA
 19 R Repurposed Enforcer @Chris Rallis
 20 M Return to the Light Realms @Anna Steinbauer
 25 U Countersculpt @Anna Podedworna
+26 R Cruel Calculations @Lindsey Look
 28 R Diviner of Victory @Justyna Dura
 30 C Icy Reception @Borja Pindado
+31 C Infinite Coursework @Randy Vargas
 32 R Jace's Machinations @Serena Malyon
 34 U Perfected Theory @Marta Nael
 37 C Protege's Awakening @Cynthia Sheppard
+39 C Semester Foreseer @Alix Branwyn
 43 M The Theorist, Jace Beleren @Ekaterina Burmak
 44 R Theorist's Proxy @Matt Stewart
 49 M Bloodline Recollector @Cynthia Sheppard
 51 C Cast Away Doubt @Zara Alfonso
+56 C Last Gasp @Jabari Weathers
 59 M Overwrite the Multiverse @Ryan Pancoast
+60 C Rampart Hunter @Néstor Ossandón Leal
 62 U Rewrite Regrets @Matt Stewart
 67 C Solve for Disappointment @Eli Minaya
+75 C Blazing Crescendo @Billy Christian
 78 M Craterclaw Colossus @Mark Zug
 81 C Eardrum Rattler @Javier Charro
+83 R Face Yourself @Ekaterina Burmak
+85 C Hallway Heckler @Gustavo Pelissari
+88 R Master of Barbs @Aldo Domínguez
 89 C No Admittance @Serena Malyon
 90 R Pompous Battlemage @Justin Gerard
 93 M Stingcaster Mage @Matt Stewart
+95 U Violent Echoes @Andrea Piparo
 97 C Arcane Amphisbaena @Jason Mowry
+98 C Bestial Incursion @Justin Gerard
 99 C Budding Insurgent @Jeff Miracola
 101 C Compel Brutality @Danny Schwartz
 104 C Greenhouse Propagator @Ekaterina Burmak
+105 U Heartwood Crafter @Anastasia Ovchinnikova
 106 M Hexhaven Invigorator @Olivier Bernard
+107 R Hungering Puppetbeast @Simon Dominic
 109 C Inspired Tethermage @Cristi Balanescu
 112 U Restore with Empathy @Eelis Kyttanen
 114 C Something Worth Saving @PINDURSKI
+116 M Tarmogoyf @Lucas Graciano
 117 C Tethermage's Advantage @Javier Charro
+120 C Wrecking Gecko @Raph Lomotan
 121 M Aerid Konstrari @Chris Rahn
 122 M Avatar of Burgeoning Echoes @Eli Minaya
 125 C Charge the Sanctum @Néstor Ossandón Leal
 126 U Clash of Elements @Anna Pavleeva
 128 M Denzilore Fatehold @Dmitry Burmak
+130 C Emergency Phytomedic @Dmitry Burmak
+132 U Fatehold Charm @Rovina Cai
+133 C Fatehold Chronologist @Alexander Mokhov
 137 M Ingris Stingerquill @Chase Stone
+138 U Konstrari Charm @Matheus Graef
 140 M Kwia Vigorbloom @Ryan Pancoast
+142 R Null Summoner @Magali Villeneuve
 143 U Paradox Shaper @Mark Zug
+145 R Proctor of Potential @Andrey Kuzinskiy
 146 U Prudent Fateseer @Gustavo Pelissari
+148 R Solarium Sentry @Chris Rallis
 149 R Solitary Cell @Andrea Piparo
+150 U Stingerquill Charm @Danny Schwartz
 151 U Stingerquill Voxmancer @Igor Grechanyi
 153 C Tam's Resistance @Samuel Perin
+155 U Theorix Charm @Elliot Lang
 159 M Uldaros Theorix @Alexander Mokhov
+160 U Vigorbloom Charm @Kaitlyn McCulley
 161 U Vigorbloom Vanguard @Denman Rooke
+162 R Vindictive Triumph @Johan Grenier
 163 U Warrior's Blades @Richard Kane Ferguson
+164 C Whiplash Wordsmith @Anastasia Ovchinnikova
 165 U Woodwork Prodigy @Lius Lasahido
 171 C Keeper of the Quiet Hour @John Tedrick
 176 R Deserted Beach @Sarah Finnigan
@@ -68,36 +96,76 @@ ScryfallCode=FRA
 195 M Ajani Resolute @Tyler Jacobson
 196 U Danitha, Sword of Hope @Bryan Sola
 197 U Ghalta the Immovable @Antonio José Manzanedo
+198 R Gideon's Memorial @Manuel Castañón
 200 R Liliana the Faultless @Marta Nael
+201 R Lyra, Archangel of Dawn @Victor Adame Minguez
+205 U Thalia, the Survivor @Ryan Pancoast
+207 U Way of the Healer @Pauline Voss
+210 U Yuriko, Blade of the Mighty @Lie Setiawan
 212 M Chandra, Chill of Compliance @Kieran Yanner
+213 U Fblthp, Impossibly Lost @Simon Dominic
+214 U Geist of Saint Thalia @Ryan Pancoast
+217 R Lyra, Tolarian Archangel @Victor Adame Minguez
 218 U Proft, Consulting Detective @Lindsey Look
+219 U Ruric Thar, Biomagus @Olivier Bernard
+221 U Tetsuko Umezawa, Fugitive @Tuan Duong Chu
 223 U Way of the Cryomancer @Andrey Kuzinskiy
+225 U Yargle, Goliath of Otaria @Jehan Choo
+226 U Yuriko, Hope from the Shadows @Lie Setiawan
 227 U Danitha, Spear of Agony @Bryan Sola
 229 M Garruk, Veiled Butcher @Victor Adame Minguez
+230 R Gideon the Oathless @Manuel Castañón
 231 R Liliana the Repentant @Marta Nael
+233 U Mabel, Bitter Recluse @Matt Stewart
 235 U Proft, Sinister Mastermind @Lindsey Look
 237 U Tinybones, Pocket Nuisance @Jesper Ejsing
+238 U Way of the Deathbringer @Joshua Raphael
+239 U Way of the Necromancer @Pauline Voss
+240 U Winter, Tormented Loner @Aurore Folny
+241 U Yargle, Glutton of Urborg @Jehan Choo
 242 M Ajani Unrelenting @Tyler Jacobson
 244 M Chandra, Torch of Defiance @Kieran Yanner
 246 U Jiang Yanggu, Alone @Dmitry Burmak
+247 U Kiora of Fire and Ashes @Chris Rahn
+252 U Tetsuko Umezawa, Pursuer @Tuan Duong Chu
 254 U Way of the Pyromancer @Andrey Kuzinskiy
+256 U Winter, Team Player @Aurore Folny
+257 U Edgar, Moonlit Sovereign @Joshua Raphael
+258 U Fblthp, Knows the Way @Simon Dominic
 259 M Garruk, Curse Breaker @Victor Adame Minguez
 260 U Ghalta the Unstoppable @Antonio José Manzanedo
 261 U Jiang Yanggu, Never Alone @Dmitry Burmak
+265 U Ruric Thar, Magecrusher @Olivier Bernard
 266 U Titanbones, Towering Heart @Jesper Ejsing
+268 U Way of the Wildspeaker @Joshua Raphael
+270 U Edgar, Ancient Bloodlord @Joshua Raphael
 272 R Karn, Gilded Guardian @Scott M. Fischer
+273 U Kiora of Salt and Sand @Chris Rahn
+274 U Mabel, Valley Hero @Matt Stewart
+277 R Vraska, Soul of Stone @Kieran Yanner
+278 R Vraska, the Cutting Glare @Kieran Yanner
 279 R Karn, Argent Defender @Scott M. Fischer
 291 M Ajani Resolute @Aleksi Briclot
+292 R Gideon's Memorial @Lius Lasahido
 293 R Liliana the Faultless @Aleksi Briclot
+294 R Lyra, Archangel of Dawn @Aaron Miller
+296 U Thalia, the Survivor @Luisa J. Preissler
 297 M Chandra, Chill of Compliance @Aleksi Briclot
+298 U Fblthp, Impossibly Lost @Tomek Larek
+299 U Geist of Saint Thalia @Luisa J. Preissler
+301 R Lyra, Tolarian Archangel @Aaron Miller
 303 M Garruk, Veiled Butcher @Aleksi Briclot
+304 R Gideon the Oathless @Lius Lasahido
 305 R Liliana the Repentant @Aleksi Briclot
 307 U Winter, Tormented Loner @Miranda Meeks
 308 M Ajani Unrelenting @Aleksi Briclot
 309 M Chandra, Torch of Defiance @Aleksi Briclot
 312 U Winter, Team Player @Miranda Meeks
+313 U Fblthp, Knows the Way @Tomek Larek
 314 M Garruk, Curse Breaker @Aleksi Briclot
 316 R Karn, Gilded Guardian @Billy Christian
+318 R Vraska, Soul of Stone @Syd Mills
+319 R Vraska, the Cutting Glare @Syd Mills
 320 R Karn, Argent Defender @Billy Christian
 321 M Enlightened Confidant @Jabari Weathers
 323 M Return to the Light Realms @Magali Villeneuve
@@ -105,17 +173,26 @@ ScryfallCode=FRA
 329 M Stingcaster Mage @Gal Or
 330 M Hexhaven Invigorator @David Auden Nash
 335 R Repurposed Enforcer @Vlad Petruchik
+336 R Cruel Calculations @Francis Tneh
 337 R Jace's Machinations @Rimas Valeikis
 339 R Theorist's Proxy @Camille Alquier
 341 M Overwrite the Multiverse @Bengt Hampus Viklander
+344 R Master of Barbs @Guglielmo Bonis
+346 R Hungering Puppetbeast @Kevin Glint
 347 M Aerid Konstrari @Julia Vasilyeva
 348 M Avatar of Burgeoning Echoes @Francis Tneh
 349 M Denzilore Fatehold @Gintas Galvanauskas
 351 M Ingris Stingerquill @Ovidio Cartagena
 352 M Kwia Vigorbloom @Eglė Mosakaitė
+353 R Null Summoner @Kevin Glint
+354 R Proctor of Potential @Arif Wijaya
 355 R Solitary Cell @Arif Wijaya
 358 M Uldaros Theorix @Eugene Maslovski
 363 M The Theorist, Jace Beleren @Miles Johnston
+370 R Face Yourself @Jack Hughes
+374 M Tarmogoyf @Micha Huigen
+376 R Solarium Sentry @Micha Huigen
+377 R Vindictive Triumph @Elena Masci
 381 R Theorist's Sanctum @Jaime A. Zuverza
 382 L Plains @Alayna Danner
 383 L Plains @Alayna Danner
@@ -138,6 +215,7 @@ ScryfallCode=FRA
 400 R Rockfall Vale @Piotr Dura
 401 R Shipwreck Marsh @Piotr Dura
 402 M Bloodline Recollector @Mark Poole
+403 M Emrakul, the Exigent Doom @Ikumi Nakamura
 404 M Loyal Tutor @NAJI YANAGIDA
 405 M The Theorist, Jace Beleren @Yukie Tajima
 407 M Aerid Konstrari @NgN
@@ -145,6 +223,7 @@ ScryfallCode=FRA
 409 M Ingris Stingerquill @AKAGI
 410 M Kwia Vigorbloom @Haru Akasaka
 411 M Uldaros Theorix @SUSHIZAWA
+413 M Emrakul, the Exigent Doom @Ikumi Nakamura
 414 M Loyal Tutor @NAJI YANAGIDA
 415 M The Theorist, Jace Beleren @Yukie Tajima
 417 M Aerid Konstrari @NgN
@@ -152,10 +231,18 @@ ScryfallCode=FRA
 419 M Ingris Stingerquill @AKAGI
 420 M Kwia Vigorbloom @Haru Akasaka
 421 M Uldaros Theorix @SUSHIZAWA
+423 M Emrakul, the Exigent Doom @Cristi Balanescu
 424 R Loyal Tutor @Darren Tan
 425 R Diviner of Victory @Justyna Dura
 427 M Bloodline Recollector @Cynthia Sheppard
 428 R Pompous Battlemage @Justin Gerard
+432 U Fatehold Charm @Rovina Cai
+433 U Konstrari Charm @Matheus Graef
+434 U Stingerquill Charm @Danny Schwartz
+435 U Theorix Charm @Elliot Lang
+436 U Vigorbloom Charm @Kaitlyn McCulley
+437 R Carnivorous Cultivator @Filip Burburan
+438 M Emrakul, the Exigent Doom @Princess Hidir
 439 M Enlightened Confidant @James Martin
 440 M Return to the Light Realms @Heikala
 443 M The Theorist, Jace Beleren @ONIKU kuitai
@@ -170,3 +257,4 @@ ScryfallCode=FRA
 
 [tokens]
 4 u_1_1_illusion @Daniel Cotter
+11 rg_a_heartwood @Tianxing Xu
