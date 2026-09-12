@@ -82,6 +82,36 @@ public class CardTranslationTest extends AITest {
         }
     }
 
+    /**
+     * "Enchant ..." is one member of a larger class: any leading keyword line can be folded
+     * into the line below it, and then every later line wears the wrong translation. Opal-Eye,
+     * Konda's Yojimbo is no Aura - German folds its Defender line into Bushido - so its {T}
+     * ability was shown the {1}{W} ability's text.
+     */
+    @Test
+    public void testAbilitiesKeepTheirOwnSymbolsWhenANonAuraKeywordLineIsMerged() {
+        String cardName = "Opal-Eye, Konda's Yojimbo";
+        String[] languages = { "de-DE", "es-ES", "fr-FR", "it-IT", "pt-BR", "zh-CN" };
+        try {
+            List<List<String>> english = abilityInvariants("en-US", cardName);
+            AssertJUnit.assertFalse(cardName + ": no activated abilities to check",
+                    english.isEmpty());
+            for (String language : languages) {
+                List<List<String>> translated = abilityInvariants(language, cardName);
+                AssertJUnit.assertEquals(cardName + " / " + language
+                        + ": different number of activated abilities",
+                        english.size(), translated.size());
+                for (int a = 0; a < english.size(); a++) {
+                    AssertJUnit.assertEquals(cardName + " / " + language + ": ability " + a
+                            + " is shown with another line's symbols",
+                            english.get(a), translated.get(a));
+                }
+            }
+        } finally {
+            CardTranslation.preloadTranslation("en-US", ForgeConstants.LANG_DIR);
+        }
+    }
+
     private String firstActivatedAbilityText(Player p, String cardName) {
         Card c = addCard(cardName, p);
         for (SpellAbility sa : c.getSpellAbilities()) {

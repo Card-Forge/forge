@@ -332,31 +332,56 @@ public class CardTranslation {
     }
 
     /**
-     * Aura oracles routinely reach us a line short, having dropped the leading "Enchant ..."
-     * line, which leaves every remaining line paired with its neighbour's translation. Mana
-     * symbols and stat changes survive translation unaltered, so where a line carries one they
-     * say which pairing is right; where none does, the leading line is the one usually missing.
+     * Translated oracles routinely reach us a line short, having folded a leading keyword line
+     * - "Enchant creature", "Flying", "Devoid (...)" - into the line below it, which leaves
+     * every remaining line paired with its neighbour's translation. Mana symbols and stat
+     * changes survive translation unaltered, so where a line carries one they say which pairing
+     * is right; where none does, the leading line is the one usually folded away.
      *
      * @return how far the translated lines have slipped against the English ones, 0 or 1
      */
     private static int leadingLineOffset(String [] oracle, String [] translated) {
-        if (oracle.length - translated.length != 1 || !oracle[0].startsWith("Enchant ")) {
+        if (oracle.length - translated.length != 1
+                || !(oracle[0].startsWith("Enchant ") || isKeywordLine(oracle[0]))) {
             return 0;
         }
-        int asIs = 0, slipped = 0;
-        for (int i = 1; i < oracle.length; i++) {
-            List <String> marks = translationInvariants(oracle[i]);
-            if (marks.isEmpty()) {
+        // leaving the last line unmatched is the same thing as pairing from the top
+        return pairingScore(oracle, translated, oracle.length - 1)
+                > pairingScore(oracle, translated, 0) ? 0 : 1;
+    }
+
+    /**
+     * How well the translated lines line up with the English ones when {@code unmatched} is the
+     * English line left without a translation: agreements less disagreements, over the lines
+     * carrying something translation does not alter.
+     */
+    private static int pairingScore(String [] oracle, String [] translated, int unmatched) {
+        int score = 0;
+        for (int i = 0, t = 0; i < oracle.length; i++) {
+            if (i == unmatched) {
                 continue;
             }
-            if (i < translated.length && marks.equals(translationInvariants(translated[i]))) {
-                asIs++;
+            List <String> marks = translationInvariants(oracle[i]);
+            List <String> theirs = translationInvariants(translated[t]);
+            // a translated line carrying none of its own says nothing either way: plenty of
+            // translations write a cost out in words where the English uses a symbol
+            if (!marks.isEmpty() && !theirs.isEmpty()) {
+                score += marks.equals(theirs) ? 1 : -1;
             }
-            if (marks.equals(translationInvariants(translated[i - 1]))) {
-                slipped++;
-            }
+            t++;
         }
-        return asIs > slipped ? 0 : 1;
+        return score;
+    }
+
+    /**
+     * Whether a line is a keyword line - "Flying", "Devoid (...)", "Enchant creature",
+     * "Renown 1 (...)" - rather than a sentence. This is the line translations fold into the
+     * one below it. They fold sentences too, but keep those at the front, so for a sentence
+     * the lines still pair from the top and there is nothing to realign.
+     */
+    private static boolean isKeywordLine(String line) {
+        String bare = line.replaceAll("\\([^()]*\\)", "").trim();
+        return bare.isEmpty() || (!bare.endsWith(".") && bare.split("\\s+").length <= 5);
     }
 
     /** The parts of an oracle line that read the same in every language. */
