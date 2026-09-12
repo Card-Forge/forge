@@ -44,7 +44,9 @@ public enum VSubmenuOnlineDecks implements IVSubmenu<CSubmenuOnlineDecks> {
 
     @Override
     public String getMenuTitle() {
-        return Localizer.getInstance().getMessage("lblNetEventDecks");
+        // The home menu column is a hard 205px and LblMenuItem clips without an
+        // ellipsis, so the menu gets the short form; the header keeps the long one.
+        return Localizer.getInstance().getMessage("lblNetEventDecksMenu");
     }
 
     @Override

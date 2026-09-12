@@ -95,7 +95,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle")).fontSize(14).build();
 
-    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblFormat") + ":").fontSize(12).build();
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblGameFormat") + ":").fontSize(12).build();
 
     private final FComboBox<GameType> cbFormat = createFormatCombo();
 

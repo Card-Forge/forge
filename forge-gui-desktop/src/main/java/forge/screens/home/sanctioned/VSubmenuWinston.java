@@ -41,7 +41,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
     private final DragTab tab = new DragTab("Winston Draft");
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Winston Draft");
+    private final LblHeader lblTitle = new LblHeader("Play Mode: Winston Draft");
 
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
