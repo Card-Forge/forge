@@ -1000,6 +1000,16 @@ public class ComputerUtil {
                     continue; // Not a Regenerate ability
                 }
                 sa.setActivatingPlayer(controller);
+                // Combat prediction asks this for many creatures. Rule out
+                // unrelated regeneration abilities before evaluating their costs.
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
+                if (tgt != null) {
+                    if (!CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
+                        continue;
+                    }
+                } else if (!AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
+                    continue;
+                }
                 if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
                     continue; // Can't play ability
                 }
@@ -1018,14 +1028,7 @@ public class ComputerUtil {
                     }
                 }
 
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
-                if (tgt != null) {
-                    if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
-                        return true;
-                    }
-                } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
-                    return true;
-                }
+                return true;
             }
         }
 
