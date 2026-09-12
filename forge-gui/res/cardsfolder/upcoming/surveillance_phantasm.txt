@@ -1,0 +1,12 @@
+Name:Surveillance Phantasm
+ManaCost:1 U
+Types:Creature Bird Illusion
+PT:2/3
+K:Defender
+K:Flying
+K:Vigilance
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | Description$ As long as you've scried or surveilled this turn, this creature can attack as though it didn't have defender.
+A:AB$ Surveil | Cost$ 3 U | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:X:Count$YouScriedThisTurn/Plus.Y
+SVar:Y:Count$YouSurveilledThisTurn
+Oracle:Defender, flying, vigilance\nAs long as you've scried or surveilled this turn, this creature can attack as though it didn't have defender.\n{3}{U}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
