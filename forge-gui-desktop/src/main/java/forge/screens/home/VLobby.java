@@ -132,10 +132,10 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> humanListData = new Vector<>();
     private final Vector<Object> aiListData = new Vector<>();
 
-    // Mode selector (network only). Mode state lives in CLobby; this combo is the widget.
-    private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblMode"),
-            ImmutableList.of(Localizer.getInstance().getMessage("lblConstructed"),
-                    Localizer.getInstance().getMessage("lblLimited")));
+    // Play Type selector (network only). Mode state lives in CLobby; this combo is the widget.
+    private final FComboBoxPanel<CLobby.LobbyMode> cboModePanel =
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblPlayType"),
+                    ImmutableList.copyOf(CLobby.LobbyMode.values()));
 
     // Event config panel (top of right panel in Draft/Sealed mode)
     private final FPanel eventConfigPanel = new FPanel(new MigLayout("insets 5 10 15 10, gap 2, wrap"));
@@ -504,15 +504,11 @@ public class VLobby implements ILobbyView {
         return lobby;
     }
 
-    String getCurrentModeSelection() {
+    CLobby.LobbyMode getCurrentMode() {
         return cboModePanel.getSelectedItem();
     }
-
-    int getCurrentModeIndex() {
-        return cboModePanel.getSelectedIndex();
-    }
-    void setCurrentModeIndex(int idx) {
-        cboModePanel.setSelectedIndex(idx);
+    void setCurrentMode(final CLobby.LobbyMode mode) {
+        cboModePanel.setSelectedItem(mode);
     }
 
     void refreshConstructedFrame() {
