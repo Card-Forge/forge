@@ -3,7 +3,8 @@ package forge.util;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class ThreadUtil {public static final AtomicReference<Thread> AIExecThread = new AtomicReference<>();
+public class ThreadUtil {
+    public static final AtomicReference<Thread> AIExecThread = new AtomicReference<>();
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
             0, Runtime.getRuntime().availableProcessors(),
             1L, TimeUnit.MILLISECONDS, // Kill the underlying thread 1ms after it becomes idle
