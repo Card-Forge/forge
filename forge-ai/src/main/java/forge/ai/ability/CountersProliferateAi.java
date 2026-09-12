@@ -62,7 +62,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
 
         for (final Player o : ai.getOpponents()) {
             // Lethal poison - proliferating would win the game
-            if (o.getPoisonCounters() >= 9 && o.canReceiveCounters(CounterEnumType.POISON)
+            if (o.getPoisonCounters() >= o.getPoisonCounterThreshold() - 1 && o.canReceiveCounters(CounterEnumType.POISON)
                     && !o.cantLoseCheck(GameLossReason.Poisoned)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
