@@ -1,0 +1,8 @@
+Name:Squirrel-Powered Scheme
+ManaCost: 2 B
+Types: Enchantment
+R:Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ResultPlus2
+SVar:ResultPlus2: DB$ ReplaceEffect | VarName$ DiceResultModifier | VarValue$ X | Description$ Increase the result of each die you roll by 2.
+SVar:X:ReplaceCount$DiceResultModifier/Plus.2
+AI:RemoveDeck:All
+Oracle:Increase the result of each die you roll by 2.
