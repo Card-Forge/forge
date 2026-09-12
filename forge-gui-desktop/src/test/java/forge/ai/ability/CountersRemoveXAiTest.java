@@ -1,0 +1,136 @@
+package forge.ai.ability;
+
+import org.testng.annotations.Test;
+
+import forge.ai.AITest;
+import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
+
+import static junit.framework.Assert.assertEquals;
+
+/**
+ * Hex Parasite pays X for its counters, so every target rule below the Dark Depths and
+ * planeswalker cases was gated on the amount not being an X cost, and never ran.
+ */
+public class CountersRemoveXAiTest extends AITest {
+
+    @Test
+    public void stripsCountersFromAnOpposingCreature() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = withParasite(game, ai);
+        Card courser = addCard("Centaur Courser", opp);
+        courser.setCounters(CounterEnumType.P1P1, 3);
+
+        runMain2(game, ai);
+
+        assertEquals(0, courser.getCounters(CounterEnumType.P1P1));
+        assertEquals(4, parasite.getNetPower()); // 1/1 plus one per counter removed
+    }
+
+    @Test
+    public void clearsItsOwnPersistCreature() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card parasite = withParasite(game, ai);
+        Card finks = addCard("Kitchen Finks", ai);
+        finks.setCounters(CounterEnumType.M1M1, 1);
+
+        runMain2(game, ai);
+
+        assertEquals(0, finks.getCounters(CounterEnumType.M1M1));
+        assertEquals(2, parasite.getNetPower());
+    }
+
+    @Test
+    public void holdsWithNothingWorthRemoving() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = withParasite(game, ai);
+        addCard("Centaur Courser", opp); // no counters anywhere
+
+        runMain2(game, ai);
+
+        assertEquals(1, parasite.getNetPower());
+    }
+
+    @Test
+    public void willNotSpendItsLastLifeOnTheActivation() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = addCard("Hex Parasite", ai);
+        addCards("Mountain", 3, ai); // no black source, so {B/P} would cost 2 life
+        Card courser = addCard("Centaur Courser", opp);
+        courser.setCounters(CounterEnumType.P1P1, 1);
+        ai.setLife(5, null); // paying would leave 3, under the floor the AI keeps for life costs
+
+        runMain2(game, ai);
+
+        assertEquals(5, ai.getLife());
+        assertEquals(1, courser.getCounters(CounterEnumType.P1P1));
+        assertEquals(1, parasite.getNetPower());
+    }
+
+    @Test
+    public void paysTheLifeWhenItCanAffordTo() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = addCard("Hex Parasite", ai);
+        addCards("Mountain", 3, ai); // still no black source
+        Card jace = addCard("Jace Beleren", opp);
+        jace.setCounters(CounterEnumType.LOYALTY, 3);
+        ai.setLife(20, null);
+
+        runMain2(game, ai);
+
+        assertEquals(18, ai.getLife());
+        assertEquals(0, countCardsWithName(game, "Jace Beleren", ZoneType.Battlefield));
+        assertEquals(4, parasite.getNetPower());
+    }
+
+    @Test
+    public void looksPastAnOpponentsBestCardWhenItsCountersAreOnesWeWouldLeave() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        Card parasite = withParasite(game, ai);
+        // the best opposing permanent carries only a counter we would rather leave on it
+        Card dreadmaw = addCard("Colossal Dreadmaw", opp);
+        dreadmaw.setCounters(CounterEnumType.M1M1, 1);
+        Card chalice = addCard("Chalice of the Void", opp);
+        chalice.setCounters(CounterType.getType("CHARGE"), 2);
+
+        runMain2(game, ai);
+
+        assertEquals("its -1/-1 counter is left where it is", 1, dreadmaw.getCounters(CounterEnumType.M1M1));
+        assertEquals(0, chalice.getCounters(CounterType.getType("CHARGE")));
+        assertEquals(3, parasite.getNetPower());
+    }
+
+    private Card withParasite(Game game, Player ai) {
+        Card parasite = addCard("Hex Parasite", ai);
+        addCards("Swamp", 6, ai);
+        return parasite;
+    }
+
+    private void runMain2(Game game, Player ai) {
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        gameLoopUntilNextPhase(game);
+    }
+}
