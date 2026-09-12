@@ -1,10 +1,9 @@
 package forge.util;
 
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ThreadUtil {
-    public static final AtomicReference<Thread> AIExecThread = new AtomicReference<>();
+    public static final ConcurrentHashMap<Thread, Boolean> activeAIThreads = new ConcurrentHashMap<>();
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
             0, Runtime.getRuntime().availableProcessors(),
             1L, TimeUnit.MILLISECONDS, // Kill the underlying thread 1ms after it becomes idle
@@ -12,7 +11,7 @@ public class ThreadUtil {
             r -> {
                 Thread t = new Thread(r, "AI ThreadPool");
                 t.setDaemon(true);
-                AIExecThread.set(t);
+                activeAIThreads.put(t, Boolean.TRUE);
                 return t;
             },
             // Dropped tasks disappear safely

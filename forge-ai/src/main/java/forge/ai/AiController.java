@@ -1684,34 +1684,42 @@ public class AiController {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
-            Thread t = ThreadUtil.AIExecThread.get();
             if (e instanceof TimeoutException) {
                 // log where the eval thread currently is - each timeout doubles as a
                 // profiler sample for diagnosing remaining AI slowdowns from user logs
                 StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
-                StackTraceElement[] evalStack = t.getStackTrace();
-                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                    sb.append("\n\tat ").append(evalStack[i]);
-                }
-                System.out.println(sb);
+                ThreadUtil.activeAIThreads.keySet().forEach(t -> {
+                    StackTraceElement[] evalStack = t.getStackTrace();
+                    for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                        sb.append("\n\tat ").append(evalStack[i]);
+                    }
+                    System.out.println(sb);
+                });
             }
             // ask the eval thread to exit at the next SpellAbility check first: a brutal
             // Thread.stop() mid-evaluation can leave partially mutated shared state behind
             future.cancel(true);
-            try {
-                t.join(500);
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-            }
-            if (t.isAlive()) {
-                // last resort, see #8302: the eval thread may be stuck inside a single
-                // evaluation or an infinite loop and never reach the cooperative exit
-                try {
-                    t.stop();
-                } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                    // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+
+            ThreadUtil.activeAIThreads.keySet().forEach(t -> {
+                if (t.isAlive()) {
+                    try {
+                        t.join(500);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                    }
+                    if (t.isAlive()) {
+                        // last resort, see #8302: the eval thread may be stuck inside a single
+                        // evaluation or an infinite loop and never reach the cooperative exit
+                        try {
+                            t.stop();
+                        } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                            // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                        }
+                    }
+                } else {
+                    ThreadUtil.activeAIThreads.remove(t);
                 }
-            }
+            });
             // TODO mark some as skipped to increase chance to find something playable next priority
             return null;
         }
