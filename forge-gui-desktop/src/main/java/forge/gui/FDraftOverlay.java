@@ -212,6 +212,8 @@ public enum FDraftOverlay {
             updateDisplay();
             if (expanded) {
                 buildSeatTable();
+                // A seat's first face-up card widens the table, so the window has to re-fit
+                sizeToContent();
             }
         });
     }
@@ -417,16 +419,16 @@ public enum FDraftOverlay {
     }
 
     /**
-     * Fits the window height to its laid-out content, keeping the fixed width and current location.
-     * {@code pack()} measures the title bar (a JMenuBar), contents, and border insets, and the seat
-     * table is {@code hidemode 3} so it adds nothing while collapsed — so this stays correct across
-     * skins and font scales without a hardcoded height.
+     * Fits the window to its laid-out content at the current location, never narrower than
+     * {@code DEFAULT_WIDTH}. {@code pack()} measures the title bar (a JMenuBar), contents, and
+     * border insets, and the seat table is {@code hidemode 3} so it adds nothing while collapsed —
+     * so this stays correct across skins and font scales without a hardcoded size.
      */
     private void sizeToContent() {
         int x = window.getX();
         int y = window.getY();
         window.pack();
-        window.setBounds(x, y, DEFAULT_WIDTH, window.getHeight());
+        window.setBounds(x, y, Math.max(DEFAULT_WIDTH, window.getWidth()), window.getHeight());
     }
 
     private void updateAllSeatsLabel() {

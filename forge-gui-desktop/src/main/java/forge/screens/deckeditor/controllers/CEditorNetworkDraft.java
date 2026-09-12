@@ -253,6 +253,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
             VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
             VEditorLog.SINGLETON_INSTANCE.showView();
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(true);
 
         ccAddLabel = this.getBtnAdd().getText();
 
@@ -299,6 +300,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VEditorLog.SINGLETON_INSTANCE.getParentCell().setVisible(true);
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(false);
 
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);

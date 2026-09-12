@@ -43,7 +43,6 @@ import java.util.stream.IntStream;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
-    private static final Color ABILITY_MARKER = new Color(236, 214, 140);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final SkinColor GROUP_HEADER_FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final SkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(120);
@@ -1152,12 +1151,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         bounds.width + 2 * selBorderSize, bounds.height + 2 * selBorderSize,
                         cornerSize + selBorderSize, cornerSize + selBorderSize);
             } else if (itemManager.isMarked(itemInfo.item)) {
-                // Three times the selection width, so the two states differ without relying on colour
-                int markSize = 3 * selBorderSize;
-                g.setColor(ABILITY_MARKER);
-                g.fillRoundRect(bounds.x - markSize, bounds.y - markSize,
-                        bounds.width + 2 * markSize, bounds.height + 2 * markSize,
-                        cornerSize + markSize, cornerSize + markSize);
+                // The match screen's actionable colour, always shown: it is the only cue for a draft ability
+                g.setColor(CardPanel.parseActionableHighlightColor());
+                g.fillRoundRect(bounds.x - selBorderSize, bounds.y - selBorderSize,
+                        bounds.width + 2 * selBorderSize, bounds.height + 2 * selBorderSize,
+                        cornerSize + selBorderSize, cornerSize + selBorderSize);
             }
 
             g.setColor(Color.black);

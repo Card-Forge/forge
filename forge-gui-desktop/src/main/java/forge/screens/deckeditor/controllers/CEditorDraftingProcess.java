@@ -339,6 +339,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
             VEditorLog.SINGLETON_INSTANCE.showView();
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(true);
 
         ccAddLabel = this.getBtnAdd().getText();
 
@@ -421,6 +422,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(false);
         if (draftLogParent != null) {
             draftLogParent.addDoc(VEditorLog.SINGLETON_INSTANCE);
         }

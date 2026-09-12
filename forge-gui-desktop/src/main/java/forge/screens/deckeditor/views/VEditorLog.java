@@ -67,6 +67,12 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
         pnlContent.setVisible(true);
     }
 
+    /** Only a draft fills this panel, but its tab can be dragged into another editor's layout afterwards. */
+    public void setDraftMode(boolean draft) {
+        tab.setText(localizer.getMessage(draft ? "lblDraftLog" : "lblEditorLog"));
+        tab.repaintSelf();
+    }
+
     @Override
     public CEditorLog getLayoutControl() {
         return CEditorLog.SINGLETON_INSTANCE;
