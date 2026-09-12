@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Alan12_-_Mono-Red_Aggro_(Standard,_#2073886).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodthirsty Adversary
+4 Charming Scoundrel
+2 Feldon, Ronom Excavator
+1 Goddric, Cloaked Reveler
+4 Monastery Swiftspear
+4 Kumano Faces Kakkazan
+4 Urabrask's Forge
+3 Lightning Strike
+3 Play with Fire
+2 Witchstalker Frenzy
+3 Obliterating Bolt
+3 Scorching Shot
+1 Sokenzan, Crucible of Defiance
+1 Mirrex
+4 Mishra's Foundry
+17 Mountain
+[Sideboard]
+2 Unlicensed Hearse
+2 The Elder Dragon War
+2 End the Festivities
+2 Lithomantic Barrage
+2 Koth, Fire of Resistance
+2 Chandra, Dressed to Kill
+3 Cemetery Gatekeeper

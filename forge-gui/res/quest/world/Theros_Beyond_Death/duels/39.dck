@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Andrew_Oakes_-_Esper_Midrange_(Standard,_#947942).dck
+Deck Type=constructed
+
+[Main]
+3 Elite Guardmage
+3 Dream Trawler
+4 Hero of Precinct One
+2 Despark
+3 Tyrant's Scorn
+3 Time Wipe
+4 Thought Erasure
+2 Elspeth Conquers Death
+3 Oath of Kaya
+3 Kaya, Orzhov Usurper
+4 Teferi, Time Raveler
+1 Island
+1 Plains
+1 Swamp
+1 Fabled Passage
+2 Temple of Silence
+4 Watery Grave
+4 Godless Shrine
+4 Hallowed Fountain
+4 Temple of Enlightenment
+4 Temple of Deceit
+[Sideboard]
+3 Ashiok, Dream Render
+3 Dovin's Veto
+3 Mystical Dispute
+3 Aether Gust
+3 Glass Casket

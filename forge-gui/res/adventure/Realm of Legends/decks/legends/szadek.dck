@@ -35,7 +35,7 @@ Name=Szadek, Lord of Secrets
 1 Fraying Sanity|HOU
 1 Glimmer of Genius|KLD
 1 Infernal Grasp|MID
-12 Island|GK1
+12 Island|GK1|[24]
 1 Jwar Isle Refuge|ZNC
 1 Maddening Cacophony|ZNR
 1 Manic Scribe|SOI
@@ -58,7 +58,6 @@ Name=Szadek, Lord of Secrets
 1 Psychic Corrosion|M19
 1 Ravenform|KHM
 1 Resculpt|STX
-1 Rogue's Passage|UMA
 1 Ruin Crab|ZNR
 1 Scheming Symmetry|M20
 1 Sky Diamond|MIR
@@ -66,7 +65,7 @@ Name=Szadek, Lord of Secrets
 1 Sphinx's Tutelage|ORI
 1 Thran Dynamo|C14
 1 Submerged Boneyard|C18
-11 Swamp|GK1
+12 Swamp|GK1|[25]
 1 Swiftfoot Boots|C18
 1 Syr Konrad, the Grim|ZNC
 1 Teferi's Tutelage|M21

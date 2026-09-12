@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/BotaNivea_-_Golgari_Demons_(Standard,_#2281828).dck
+Deck Type=constructed
+
+[Main]
+4 Archfiend of the Dross
+3 Glissa Sunslayer
+4 Mosswood Dreadknight
+1 Sentinel of the Nameless City
+3 Anoint with Affliction
+2 Cut Down
+4 Go for the Throat
+3 Duress
+1 Dreams of Steel and Oil
+4 Unholy Annex // Ritual Chamber
+3 Liliana of the Veil
+4 Blooming Marsh
+4 Forest
+4 Restless Cottage
+8 Swamp
+4 Soulstone Sanctuary
+4 Llanowar Wastes
+[Sideboard]
+2 Choking Miasma
+2 Tear Asunder
+2 Tranquil Frillback
+2 Breach the Multiverse
+1 Duress
+2 Vivien Reid
+2 Ghost Vacuum
+2 Cut Down

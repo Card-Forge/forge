@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Beast2
+Title=Beast2
+Icon=Beast2.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/MBrewlab_-_Mono-Green_Artifacts_BrewLab_(Standard,_#1742503).dck
+Deck Type=constructed
+
+[Main]
+4 Iron Apprentice
+4 Gingerbrute
+4 Teething Wurmlet
+4 Patchwork Automaton
+4 Tough Cookie
+4 Elvish Archivist
+3 Syr Ginger, the Meal Ender
+2 Ozolith, the Shattered Spire
+2 Agatha's Soul Cauldron
+3 Audacity
+4 Welcome to Sweettooth
+13 Forest
+4 Roadside Reliquary
+4 Mirrex
+1 Boseiju, Who Endures
+[Sideboard]

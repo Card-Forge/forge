@@ -211,18 +211,17 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         Player controller = srcCard.getController();
-        if (this instanceof Trigger) {
+        if (this instanceof Trigger t) {
             // check for delayed trigger
-            if (((Trigger) this).getSpawningAbility() != null) {
-                controller = ((Trigger) this).getSpawningAbility().getActivatingPlayer();
+            if (t.getSpawningAbility() != null) {
+                controller = t.getSpawningAbility().getActivatingPlayer();
             }
         }
         return matchesValid(o, valids, srcCard, controller);
     }
 
     public boolean matchesValid(final Object o, final String[] valids, final Card srcCard, final Player srcPlayer) {
-        if (o instanceof GameObject) {
-            final GameObject c = (GameObject) o;
+        if (o instanceof GameObject c) {
             return c.isValid(valids, srcPlayer, srcCard, this);
         } else if (o instanceof Iterable<?>) {
             for (Object o2 : (Iterable<?>)o) {
@@ -234,17 +233,17 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if (ArrayUtils.contains(valids, o)) {
                 return true;
             }
-        } else if (o instanceof PlanarDice) {
+        } else if (o instanceof PlanarDice pd) {
             for (String s : valids) {
                 PlanarDice valid = PlanarDice.smartValueOf(s);
-                if (((PlanarDice) o).name().equals(valid.name())) {
+                if (pd.name().equals(valid.name())) {
                     return true;
                 }
             }
-        } else if (o instanceof GameLossReason) {
+        } else if (o instanceof GameLossReason glr) {
             for (String s : valids) {
                 GameLossReason valid = GameLossReason.smartValueOf(s);
-                if (((GameLossReason) o).name().equals(valid.name())) {
+                if (glr.name().equals(valid.name())) {
                     return true;
                 }
             }
@@ -324,23 +323,17 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         if (params.containsKey("Revolt")) {
             if ("True".equalsIgnoreCase(params.get("Revolt")) != hostController.hasRevolt()) return false;
             else if ("None".equalsIgnoreCase(params.get("Revolt"))) {
-                boolean none = true;
-                for (Player p : game.getRegisteredPlayers()) {
-                    if (p.hasRevolt()) {
-                        none = false;
-                        break;
-                    }
-                }
-                if (!none) {
+                if (!game.getRegisteredPlayers().stream().noneMatch(Player::hasRevolt)) {
                     return false;
                 }
             }
         }
-        if (params.containsKey("Desert")) {
-            if ("True".equalsIgnoreCase(params.get("Desert")) != hostController.hasDesert()) return false;
-        }
         if (params.containsKey("Blessing")) {
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
+        }
+
+        if (params.containsKey("EnduringStory")) {
+            if ("True".equalsIgnoreCase(params.get("EnduringStory")) != hostController.hasEnduringStory()) return false;
         }
 
         if (params.containsKey("DayTime")) {
@@ -411,23 +404,20 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             final String sIsPresent = params.get("IsPresent");
             final String presentCompare = getParamOrDefault("PresentCompare", "GE1");
             final String presentPlayer = getParamOrDefault("PresentPlayer", "Any");
-            ZoneType presentZone = ZoneType.Battlefield;
-            if (params.containsKey("PresentZone")) {
-                presentZone = ZoneType.smartValueOf(params.get("PresentZone"));
-            }
             CardCollection list;
             if (params.containsKey("PresentDefined")) {
                 list = AbilityUtils.getDefinedCards(getHostCard(), params.get("PresentDefined"), this);
             } else {
+                List<ZoneType> presentZones = params.containsKey("PresentZone") ? ZoneType.listValueOf(params.get("PresentZone")) : List.of(ZoneType.Battlefield);
                 list = new CardCollection();
                 if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                    list.addAll(hostController.getCardsIn(presentZone));
+                    list.addAll(hostController.getCardsIn(presentZones));
                 }
                 if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                    list.addAll(hostController.getOpponents().getCardsIn(presentZone));
+                    list.addAll(hostController.getOpponents().getCardsIn(presentZones));
                 }
                 if (presentPlayer.equals("Any")) {
-                    list.addAll(hostController.getAllies().getCardsIn(presentZone));
+                    list.addAll(hostController.getAllies().getCardsIn(presentZones));
                 }
             }
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
@@ -445,16 +435,13 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             final String sIsPresent = params.get("IsPresent2");
             final String presentCompare = getParamOrDefault("PresentCompare2", "GE1");
             final String presentPlayer = getParamOrDefault("PresentPlayer2", "Any");
-            ZoneType presentZone = ZoneType.Battlefield;
-            if (params.containsKey("PresentZone2")) {
-                presentZone = ZoneType.smartValueOf(params.get("PresentZone2"));
-            }
+            List<ZoneType> presentZones = params.containsKey("PresentZone2") ? ZoneType.listValueOf(params.get("PresentZone2")) : List.of(ZoneType.Battlefield);
             CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(hostController.getCardsIn(presentZone));
+                list.addAll(hostController.getCardsIn(presentZones));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(hostController.getOpponents().getCardsIn(presentZone));
+                list.addAll(hostController.getOpponents().getCardsIn(presentZones));
             }
 
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
@@ -526,15 +513,8 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         if (params.containsKey("WerewolfUntransformCondition")) {
-            List<Card> casted = game.getStack().getSpellsCastLastTurn();
-            boolean conditionMet = false;
-            for (Player p : game.getPlayers()) {
-                if (CardLists.count(casted, CardPredicates.isController(p)) > 1) {
-                    conditionMet = true;
-                    break;
-                }
-            }
-            if (!conditionMet) {
+            final List<Card> casted = game.getStack().getSpellsCastLastTurn();
+            if (game.getPlayers().stream().noneMatch(p -> CardLists.count(casted, CardPredicates.isController(p)) > 1)) {
                 return false;
             }
         }
@@ -753,7 +733,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         if (this instanceof Trigger trig) {
             return trig.getTriggerRemembered();
         }
-        return ImmutableList.of();
+        return List.of();
     }
 
 }

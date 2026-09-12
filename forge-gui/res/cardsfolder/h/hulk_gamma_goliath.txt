@@ -1,0 +1,9 @@
+Name:Hulk, Gamma Goliath
+ManaCost:3 R G
+Types:Legendary Creature Gamma Berserker Hero
+PT:6/5
+K:Reach
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Creature.Other+YouCtrl | ValidSpell$ Activated.PowerUp | Amount$ 3 | AffectedZone$ Battlefield | Description$ Power-up abilities of other creatures you control cost {3} less to activate.
+A:AB$ PutCounter | Cost$ 6 R G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 5 | PowerUp$ True | SpellDescription$ Put five +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+Oracle:Reach, trample\nPower-up abilities of other creatures you control cost {3} less to activate.\nPower-up — {6}{R}{G}: Put five +1/+1 counters on Hulk. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

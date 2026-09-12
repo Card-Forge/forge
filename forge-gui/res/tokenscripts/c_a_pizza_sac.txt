@@ -1,0 +1,5 @@
+Name:Pizza Token
+ManaCost:no cost
+Types:Artifact Food
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this token> | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+Oracle:{2}, {T}, Sacrifice this token: You gain 6 life.

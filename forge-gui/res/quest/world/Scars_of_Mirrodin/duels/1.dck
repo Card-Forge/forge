@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_New_Jersey/Ty_Holden_-_Valakut_Ramp_(Standard,_#7682).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avenger of Zendikar
+4 Oracle of Mul Daya
+4 Primeval Titan
+3 Terastodon
+2 Wurmcoil Engine
+4 Summoning Trap
+4 Cultivate
+4 Explore
+4 Khalni Heart Expedition
+3 Evolving Wilds
+5 Forest
+12 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+1 Comet Storm
+4 Lightning Bolt
+3 Memoricide
+4 Pyroclasm
+1 Rampaging Baloths
+1 Swamp

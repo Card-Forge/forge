@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Alice in Wonderland
+Title=Alice in Wonderland
+Icon=Alice in Wonderland.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Aardos_-_Mono_White_Yorion_(Standard,_#1185271).dck
+Deck Type=constructed
+
+[Main]
+2 Arcanist's Owl
+3 Yorion, Sky Nomad
+4 Charming Prince
+4 Loyal Warhound
+4 Priest of Ancient Lore
+4 Skyclave Apparition
+1 Eye of Vecna
+3 The Book of Exalted Deeds
+4 Portable Hole
+4 Glass Casket
+4 Search for Glory
+4 Faith's Fetters
+4 Elspeth Conquers Death
+1 Ugin, the Spirit Dragon
+4 Field of Ruin
+4 Faceless Haven
+26 Snow-Covered Plains
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Reidane, God of the Worthy
+2 Baneslayer Angel
+2 Archon of Absolution
+4 Doomskar
+4 Soul-Guide Lantern

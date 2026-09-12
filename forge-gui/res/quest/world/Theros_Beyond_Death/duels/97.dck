@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/CharLy_-_UW_Stoneforge_(Modern,_#925975).dck
+Deck Type=constructed
+
+[Main]
+3 Spell Queller
+4 Snapcaster Mage
+4 Stoneforge Mystic
+1 Batterskull
+1 Sword of Feast and Famine
+1 Deprive
+2 Cryptic Command
+2 Force of Negation
+2 Mana Leak
+2 Spell Snare
+4 Path to Exile
+4 Opt
+2 Serum Visions
+2 Teferi, Time Raveler
+3 Jace, the Mind Sculptor
+1 Misty Rainforest
+1 Prairie Stream
+1 Polluted Delta
+1 Scalding Tarn
+2 Mystic Sanctuary
+2 Snow-Covered Plains
+2 Hallowed Fountain
+3 Field of Ruin
+4 Flooded Strand
+6 Snow-Covered Island
+[Sideboard]
+1 Aether Gust
+1 Disdainful Stroke
+1 Elspeth, Sun's Nemesis
+1 Rest in Peace
+1 Vendilion Clique
+2 Ashiok, Dream Render
+2 Celestial Purge
+2 Mystical Dispute
+2 Timely Reinforcements
+2 Winds of Abandon

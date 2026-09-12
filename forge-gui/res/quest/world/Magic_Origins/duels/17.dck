@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Medium
+Description=Magic_Origins/PPTQ_Galaxy_Comics_-_Vercelli,_Italy/Giacomo_Grangia_-_Red_Deck_Wins_(Standard,_#327172).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Eidolon of the Great Revel
+1 Goblin Heelcutter
+3 Lightning Berserker
+4 Monastery Swiftspear
+3 Zurgo Bellstriker
+4 Lightning Strike
+4 Searing Blood
+4 Stoke the Flames
+1 Titan's Strength
+4 Wild Slash
+4 Exquisite Firecraft
+20 Mountain
+[Sideboard]
+2 Magma Spray
+3 Outpost Siege
+4 Roast
+2 Scab-Clan Berserker
+2 Smash to Smithereens

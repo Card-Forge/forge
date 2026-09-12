@@ -91,21 +91,23 @@ public final class AbilityFactory {
         }
 
         public ApiType getApiTypeOf(Map<String, String> abParams) {
-            return ApiType.smartValueOf(abParams.get(this.getPrefix()));
+            return ApiType.smartValueOf(abParams.get(getPrefix()));
         }
 
         public static AbilityRecordType getRecordType(Map<String, String> abParams) {
             if (abParams.containsKey(AbilityRecordType.Ability.getPrefix())) {
                 return AbilityRecordType.Ability;
-            } else if (abParams.containsKey(AbilityRecordType.Spell.getPrefix())) {
-                return AbilityRecordType.Spell;
-            } else if (abParams.containsKey(AbilityRecordType.StaticAbility.getPrefix())) {
-                return AbilityRecordType.StaticAbility;
-            } else if (abParams.containsKey(AbilityRecordType.SubAbility.getPrefix())) {
-                return AbilityRecordType.SubAbility;
-            } else {
-                return null;
             }
+            if (abParams.containsKey(AbilityRecordType.Spell.getPrefix())) {
+                return AbilityRecordType.Spell;
+            }
+            if (abParams.containsKey(AbilityRecordType.StaticAbility.getPrefix())) {
+                return AbilityRecordType.StaticAbility;
+            }
+            if (abParams.containsKey(AbilityRecordType.SubAbility.getPrefix())) {
+                return AbilityRecordType.SubAbility;
+            }
+            return null;
         }
     }
 
@@ -148,11 +150,11 @@ public final class AbilityFactory {
             return getAbility(mapParams, type, state, sVarHolder);
         } catch (Error | Exception ex) {
             String msg = "AbilityFactory:getAbility: crash when trying to create ability ";
-            
+
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", state.getName());
             bread.setData("Ability", abString);
-            
+
             Sentry.addBreadcrumb(bread);
             throw new RuntimeException(msg + " of card: " + state.getName(), ex);
         }

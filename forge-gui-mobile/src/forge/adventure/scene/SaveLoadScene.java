@@ -430,8 +430,10 @@ public class SaveLoadScene extends UIScene {
     @Override
     public void enter() {
         unselectActors();
-        select(lastSelectedSlot);
         updateFiles();
+        select(lastSelectedSlot);
+        scrollPane.setScrollY(0);
+        scrollPane.updateVisualScroll();
         autoSave.actor.setText(Forge.getLocalizer().getMessage("lblAutoSave"));
         quickSave.actor.setText(Forge.getLocalizer().getMessage("lblQuickSave"));
         if (mode == Modes.NewGamePlus) {
@@ -446,6 +448,16 @@ public class SaveLoadScene extends UIScene {
         }
         performTouch(scrollPane); //can use mouse wheel if available to scroll
         super.enter();
+    }
+
+    public void showMessage(String title, String message) {
+        showDialog(createGenericDialog(title, message,
+            Forge.getLocalizer().getMessage("lblOK"),
+            Forge.getLocalizer().getMessage("lblCancel"),
+            () -> {
+                Forge.switchScene(StartScene.instance());
+                removeDialog();
+            }, this::removeDialog));
     }
 
     public String getSaveFileSuffix() {

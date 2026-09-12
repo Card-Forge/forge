@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Andrea_Giugno_-_Grixis_Control_(Yorion)_(Standard,_#1189830).dck
+Deck Type=constructed
+
+[Main]
+1 Lochmere Serpent
+1 Kaervek, the Spiteful
+2 Mazemind Tome
+2 Behold the Multiverse
+2 Erebos's Intervention
+3 Disdainful Stroke
+3 Essence Scatter
+3 Heartless Act
+3 Prismari Command
+4 Power Word Kill
+4 Saw It Coming
+4 Cinderclasm
+2 Shadows' Verdict
+3 Extinction Event
+2 Shark Typhoon
+4 Omen of the Sea
+2 Ashiok, Nightmare Muse
+1 Mountain
+1 Temple of Malice
+1 Raugrin Triome
+1 Temple of Deceit
+2 Hall of Storm Giants
+2 Zagoth Triome
+2 Field of Ruin
+2 Temple of Epiphany
+3 Island
+4 Swamp
+4 Clearwater Pathway
+4 Blightstep Pathway
+4 Fabled Passage
+4 Riverglide Pathway
+[Sideboard]
+1 Ox of Agonas
+1 Yorion, Sky Nomad
+1 Kaervek, the Spiteful
+2 Test of Talents
+2 Cling to Dust
+2 Kroxa, Titan of Death's Hunger
+3 Duress
+3 Mystical Dispute

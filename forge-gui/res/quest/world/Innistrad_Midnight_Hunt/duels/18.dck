@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Kyouko Kasodani
+Title=Kyouko Kasodani
+Icon=Kyouko Kasodani.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Add1ct3d_-_Jund_Treasures_(Standard,_#1229862).dck
+Deck Type=constructed
+
+[Main]
+3 Valki, God of Lies
+3 Reckless Stormseeker
+4 Goldspan Dragon
+4 Immersturm Predator
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+4 Prosperous Innkeeper
+4 Esika's Chariot
+2 Infernal Grasp
+4 Shatterskull Smashing
+1 Lolth, Spider Queen
+2 Lair of the Hydra
+2 Rockfall Vale
+3 Forest
+4 Haunted Ridge
+4 Darkbore Pathway
+4 Blightstep Pathway
+4 Cragcrown Pathway
+[Sideboard]
+1 Inscription of Ruin
+2 Check for Traps
+2 Go Blank
+3 Power Word Kill
+3 Ray of Enfeeblement
+4 Duress

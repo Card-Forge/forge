@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Temple/Carl_Hendrix_-_GW_Aggro_(Standard,_#517193).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avatar of the Resolute
+4 Deathmist Raptor
+4 Den Protector
+4 Hangarback Walker
+1 Nissa, Vastwood Seer
+4 Warden of the First Tree
+3 Wingmate Roc
+4 Dromoka's Command
+3 Silkwrap
+4 Gideon, Ally of Zendikar
+3 Canopy Vista
+4 Flooded Strand
+7 Forest
+3 Plains
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Arashin Cleric
+2 Hidden Dragonslayer
+2 Mastery of the Unseen
+2 Stasis Snare
+3 Surge of Righteousness
+1 Valorous Stance
+2 Whisperwood Elemental

@@ -1,0 +1,9 @@
+Name:Quandrix, the Proof
+ManaCost:4 G U
+Types:Legendary Creature Elder Dragon
+PT:6/6
+K:Flying
+K:Trample
+K:Cascade
+S:Mode$ Continuous | Affected$ Instant.wasCastByYou+wasCastFromYourHand,Sorcery.wasCastByYou+wasCastFromYourHand | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ Instant and sorcery spells you cast from your hand have cascade.
+Oracle:Flying, trample\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nInstant and sorcery spells you cast from your hand have cascade.

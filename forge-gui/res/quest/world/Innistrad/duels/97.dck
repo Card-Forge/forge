@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Modern_Turniers_vom_15.11.2011/Roman_Gavronski_-_Infect_(Modern,_#22654).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+4 Phyrexian Crusader
+4 Plague Stinger
+3 Livewire Lash
+4 Dismember
+4 Doom Blade
+4 Giant Growth
+4 Vampire's Bite
+4 Vines of Vastwood
+4 Virulent Swipe
+5 Forest
+4 Inkmoth Nexus
+1 Llanowar Wastes
+8 Swamp
+3 Woodland Cemetery
+[Sideboard]
+4 Harrow
+2 Ichorclaw Myr
+3 Plague Myr
+3 Rot Wolf
+3 Unnatural Predation

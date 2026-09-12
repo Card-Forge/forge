@@ -12,8 +12,10 @@ public class GameRules {
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
     private boolean matchAnteRarity = false;
+    private boolean anteIncludeBasicLands = false;
     private boolean AISideboardingEnabled = false;
     private boolean sideboardForAI = false;
+    private boolean allowCheatShuffle = false;
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
     private int simTimeout = 120;
 
@@ -74,6 +76,13 @@ public class GameRules {
         matchAnteRarity = matchRarity;
     }
 
+    public boolean getAnteIncludeBasicLands() {
+        return anteIncludeBasicLands;
+    }
+    public void setAnteIncludeBasicLands(final boolean includeBasicLands) {
+        anteIncludeBasicLands = includeBasicLands;
+    }
+
     public boolean getSideboardForAI() {
         return sideboardForAI;
     }
@@ -86,6 +95,13 @@ public class GameRules {
     }
     public void setAISideboardingEnabled(final boolean aiSideboarding) {
         AISideboardingEnabled = aiSideboarding;
+    }
+
+    public boolean isAllowCheatShuffle() {
+        return allowCheatShuffle;
+    }
+    public void setAllowCheatShuffle(boolean allowCheatShuffle) {
+        this.allowCheatShuffle = allowCheatShuffle;
     }
 
     public int getGamesToWinMatch() {

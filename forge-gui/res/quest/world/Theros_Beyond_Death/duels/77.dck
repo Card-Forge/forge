@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Darrin Stephens
+Title=Darrin Stephens
+Icon=Darrin Stephens.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Benburr_-_Rakdos_Dreadhorde_(Modern,_#928341).dck
+Deck Type=constructed
+
+[Main]
+1 Dark Confidant
+3 Dreadhorde Arcanist
+3 Seasoned Pyromancer
+4 Kroxa, Titan of Death's Hunger
+4 Lightning Skelemental
+2 Kolaghan's Command
+3 Fatal Push
+4 Lightning Bolt
+2 Thoughtseize
+4 Inquisition of Kozilek
+4 Unearth
+3 Liliana of the Veil
+1 Castle Locthwain
+2 Dragonskull Summit
+4 Bloodstained Mire
+4 Swamp
+4 Mountain
+4 Blackcleave Cliffs
+4 Blood Crypt
+[Sideboard]
+1 Surgical Extraction
+1 Kalitas, Traitor of Ghet
+2 Nihil Spellbomb
+2 Ashiok, Dream Render
+2 Blood Moon
+2 Plague Engineer
+2 Collective Brutality
+3 Fulminator Mage

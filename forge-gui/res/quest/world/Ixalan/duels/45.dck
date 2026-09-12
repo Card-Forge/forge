@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Robot45
+Title=Robot45
+Icon=Bugs Bunny.jpg
+Difficulty=Easy
+Description=Temur Energy 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+3 Glorybringer
+3 Longtusk Cub
+1 Rhonas the Indomitable
+3 Rogue Refiner
+4 Servant of the Conduit
+2 The Scarab God
+4 Whirler Virtuoso
+1 Abrade
+2 Essence Scatter
+4 Harnessed Lightning
+2 Magma Spray
+4 Attune with Aether
+1 Vraska, Relic Seeker
+4 Aether Hub
+1 Blooming Marsh
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+3 Rootbound Crag
+2 Spirebluff Canal
+1 Swamp
+[Sideboard]
+2 Appetite for the Unnatural
+2 Cartouche of Ambition
+2 Chandra's Defeat
+1 Confiscation Coup
+1 Glimmer of Genius
+4 Negate
+1 Supreme Will
+2 Torrential Gearhulk

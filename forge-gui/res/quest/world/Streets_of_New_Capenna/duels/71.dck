@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Darren_Magnotti_-_Jund_Zombies_(Modern,_#1497010)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Blood Artist
+3 Gravecrawler
+3 Dreadhorde Butcher
+3 Mayhem Devil
+4 Grief
+4 Fury
+4 Undead Augur
+2 Feign Death
+3 Undying Malice
+3 Lightning Bolt
+3 Goblin Bombardment
+2 Ob Nixilis, the Adversary
+4 Grist, the Hunger Tide
+1 Stomping Ground
+1 Ziatora's Proving Ground
+1 Wooded Foothills
+1 Overgrown Tomb
+1 Mountain
+1 Den of the Bugbear
+1 Marsh Flats
+3 Blood Crypt
+3 Verdant Catacombs
+3 Swamp
+4 Bloodstained Mire
+[Sideboard]
+1 Unlicensed Hearse
+1 Terminate
+1 Outland Liberator
+1 Go Blank
+1 Flame Blitz
+1 Ensnaring Bridge
+1 Engineered Explosives
+2 Necromentia
+2 Kolaghan's Command
+2 Chalice of the Void
+2 Blood Moon

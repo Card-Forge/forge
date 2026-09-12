@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Cristian_Stone_-_Mono-Black_Planeswalkers_(Standard,_#1198003).dck
+Deck Type=constructed
+
+[Main]
+4 Solemn Simulacrum
+4 Mazemind Tome
+1 Eat to Extinction
+1 Power Word Kill
+2 Eliminate
+2 Heartless Act
+2 Soul Shatter
+2 Baleful Mastery
+2 Erebos's Intervention
+2 Hagra Mauling
+2 Bloodchief's Thirst
+3 Shadows' Verdict
+4 Extinction Event
+4 Ugin, the Spirit Dragon
+2 Castle Locthwain
+2 Crawling Barrens
+2 Field of Ruin
+4 Clearwater Pathway
+15 Swamp
+[Sideboard]
+2 Cling to Dust
+3 Elspeth's Nightmare
+3 Necromentia
+3 Midnight Clock
+4 Agonizing Remorse

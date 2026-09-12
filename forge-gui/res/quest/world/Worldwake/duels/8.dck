@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Jesse James
+Title=Jesse James
+Icon=Jesse James.jpg
+Difficulty=Medium
+Description=Worldwake/Grand_Prix_Kuala_Lumpur_2010_-_Top8_Decks/Ding_Yuan_Leong_-_Mono_Red_Aggro_(Standard,_#2346).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+3 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Blightning
+3 Earthquake
+2 Quenchable Fire
+4 Arid Mesa
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+8 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Deathmark
+2 Doom Blade
+4 Goblin Ruinblaster
+3 Manabarbs

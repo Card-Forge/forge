@@ -106,7 +106,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         return this.typeDescription;
     }
 
-    public final String getDescriptiveType() {
+    public String getDescriptiveType() {
         String typeDesc = this.getTypeDescription();
         if (typeDesc == null) {
             String typeS = this.getType();

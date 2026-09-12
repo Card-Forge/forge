@@ -1,0 +1,6 @@
+Name:Vicious Rivalry
+ManaCost:2 B G
+Types:Sorcery
+A:SP$ DestroyAll | Cost$ 2 B G PayLife<X> | ValidCards$ Artifact.cmcLEX,Creature.cmcLEX | SpellDescription$ Destroy all artifacts and creatures with mana value X or less.
+SVar:X:Count$xPaid
+Oracle:As an additional cost to cast this spell, pay X life.\nDestroy all artifacts and creatures with mana value X or less.

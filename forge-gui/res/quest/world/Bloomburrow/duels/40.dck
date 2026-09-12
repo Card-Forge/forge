@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/GatoPelon_-_Azorius_Convoke_(Standard,_#2167773).dck
+Deck Type=constructed
+
+[Main]
+4 Valiant Veteran
+4 Warden of the Inner Sky
+4 Flowerfoot Swordmaster
+3 Knight-Errant of Eos
+3 Harbin, Vanguard Aviator
+4 Recruitment Officer
+4 Resolute Reinforcements
+2 Yotian Frontliner
+4 Zephyr Sentinel
+2 Werefox Bodyguard
+4 Protect the Negotiators
+4 Adarkar Wastes
+4 Fortified Beachhead
+1 Island
+2 Mirrex
+5 Plains
+4 Seachrome Coast
+2 Cavern of Souls
+[Sideboard]
+2 Archangel Elspeth
+2 Elspeth's Smite
+2 Anointed Peacekeeper
+2 Kutzil's Flanker
+2 Loran of the Third Path
+2 Tocasia's Welcome
+3 Nettle Guard

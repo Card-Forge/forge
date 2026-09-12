@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Kent/Justin_Barkey_-_Abzan_Control_(Standard,_#318483).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Den Protector
+2 Nissa, Vastwood Seer
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+1 Whip of Erebos
+4 Abzan Charm
+2 Bile Blight
+3 Hero's Downfall
+1 Ultimate Price
+2 Languish
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+2 Caves of Koilos
+4 Forest
+3 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+2 Anafenza, the Foremost
+3 Arashin Cleric
+1 Dromoka's Command
+1 End Hostilities
+4 Fleecemane Lion
+1 Tragic Arrogance
+1 Ugin, the Spirit Dragon
+1 Unravel the AEther

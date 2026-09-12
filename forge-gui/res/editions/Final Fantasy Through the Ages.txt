@@ -48,7 +48,7 @@ ScryfallCode=FCA
 40 U Lightning Bolt @Toshitaka Matsuda ${"flavorName": "Thrum of the Vestige"}
 41 R Mizzix's Mastery @Toshitaka Matsuda ${"flavorName": "Dawn Warriors' Legacy"}
 42 M Najeela, the Blade-Blossom @Tetsuya Nomura ${"flavorName": "Cloud Strife"}
-43 M Ragavan, Nimble Pilferer @SHUKO MURASE ${"flavorName": "Zidane Tribal"}
+43 M Ragavan, Nimble Pilferer @Shuko Murase ${"flavorName": "Zidane Tribal"}
 44 R Carpet of Flowers @ISAMU KAMIKOKURYO ${"flavorName": "Fal'Cie Paradise"}
 45 U Farseek @Yusuke Mogi ${"flavorName": "Newfound Adventure"}
 46 U Fynn, the Fangbearer @Square Enix ${"flavorName": "Vayne Carudas Solidor"}
@@ -68,7 +68,7 @@ ScryfallCode=FCA
 60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura ${"flavorName": "Yuffie Kisaragi"}
 61 R Chromatic Lantern @Kiyoshi Arai ${"flavorName": "Crystal of Altar Cave"}
 62 R Smuggler's Copter @Square Enix ${"flavorName": "The Strahl"}
-63 U Strixhaven Stadium @Square Enix ${"flavorName": "Luka Stadium"}
+63 U Strixhaven Stadium @Square Enix ${"flavorName": "Luca Stadium"}
 64 R Command Beacon @Square Enix ${"flavorName": "Balamb Garden"}
 
 [rebalanced]

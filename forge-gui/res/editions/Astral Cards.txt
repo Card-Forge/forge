@@ -4,6 +4,7 @@ Date=1997-04-01
 Name=Astral Cards
 Type=Funny
 ScryfallCode=PAST
+TokensCode=PAST
 
 [cards]
 1 C Aswan Jaguar @Pat Lewis
@@ -18,3 +19,11 @@ ScryfallCode=PAST
 10 C Whimsy @Anson Maddocks
 11 C Pandora's Box @Amy Weber
 12 C Gem Bazaar @Liz Danforth
+
+[tokens]
+13 wasp @Sandra Everingham
+14 c_5_5_a_djinn_flying @Randy Gallegos
+15 c_1_1_a_tetravite_flying_noenchant @Mark Tedin
+16 c_1_1_a_snake_poison @Mark Tedin
+17 spawn_of_azar @Randy Gallegos
+18 r_4_4_bird_flying @Christopher Rush

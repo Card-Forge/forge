@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Shawman_-_Mono_Black_Burn_(Modern,_#1748192).dck
+Deck Type=constructed
+
+[Main]
+4 Sleeper Agent
+4 Chancellor of the Dross
+4 Okiba Reckoner Raid
+4 Orcish Bowmasters
+4 Soul Spike
+4 Soul Reap
+4 Bump in the Night
+2 Sword-Point Diplomacy
+4 Witherbloom Command
+4 Gonti's Machinations
+4 Hopeless Nightmare
+1 Blood Crypt
+1 Leechridden Swamp
+1 Overgrown Tomb
+3 Bloodstained Mire
+4 Nurturing Peatland
+4 Marsh Flats
+3 Swamp
+1 Swamp
+[Sideboard]
+3 Rain of Gore
+3 Relic of Progenitus
+3 Contaminated Ground
+3 Natural State
+3 Collector Ouphe

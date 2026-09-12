@@ -1,6 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.deck.DeckBase;
+import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
@@ -51,7 +52,10 @@ public enum CAllDecks implements ICDoc {
     }
 
     public static void updateDeckManager(DeckManager dm){
-        dm.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        final ItemManagerConfig config = dm.getGameType().getDeckFormat() == DeckFormat.Commander
+                ? ItemManagerConfig.COMMANDER_DECKS
+                : ItemManagerConfig.CONSTRUCTED_DECKS;
+        dm.setup(config);
         if (dm.getSelectedIndex() == 0) {
             // This may be default and so requiring potential update!
             ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl =

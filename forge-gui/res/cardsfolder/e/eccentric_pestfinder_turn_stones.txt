@@ -1,0 +1,20 @@
+Name:Eccentric Pestfinder
+ManaCost:2 B G
+Types:Creature Troll Druid
+PT:5/5
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | Execute$ TrigPrepare | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each end step, if you gained life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+SVar:X:Count$LifeYouGainedThisTurn
+AlternateMode:Prepare
+Oracle:Trample\nAt the beginning of each end step, if you gained life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Turn Stones
+ManaCost:B G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ bg_1_1_pest_lifegain | SpellDescription$ For each opponent, you create a 1/1 black and green Pest creature token with "When this token dies, you gain 1 life."
+SVar:X:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:For each opponent, you create a 1/1 black and green Pest creature token with "When this token dies, you gain 1 life."

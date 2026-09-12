@@ -27,14 +27,12 @@ public class DelayedTriggerAi extends SpellAbilityAi {
 
         if (trigsa instanceof AbilitySub) {
             return SpellApiToAi.Converter.get(trigsa).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
-        } else {
-            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
-            if (decision == AiPlayDecision.WillPlay) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
+        AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+        if (decision == AiPlayDecision.WillPlay) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -51,16 +49,13 @@ public class DelayedTriggerAi extends SpellAbilityAi {
             if (aic.doTrigger(trigsa, true)) {
                 // If the trigger is mandatory, we can play it
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-        } else {
-            if (aic.doTrigger(trigsa, !sa.getParam("OptionalDecider").equals("You"))) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        if (aic.doTrigger(trigsa, !sa.getParam("OptionalDecider").equals("You"))) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -171,9 +166,8 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
         if (decision == AiPlayDecision.WillPlay) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
 }

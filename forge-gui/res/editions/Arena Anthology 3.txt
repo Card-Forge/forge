@@ -18,7 +18,7 @@ ScryfallCode=AA3
 10 C Assault Strobe @Kev Walker
 11 R Broadside Bombardiers @Tomek Larek
 12 C Chain Lightning @Christopher Moeller
-13 U Gut, True Soul Zealot @Wayne Reynolds
+13 U Gut, True Soul Zealot @Pedro Potier
 14 U Oxidda Scrapmelter @Igor Kieryluk
 15 C Ambush Viper @Alan Pollack
 16 C Crop Rotation @DiTerlizzi

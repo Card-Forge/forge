@@ -125,7 +125,6 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean canAttackDefender(final Card card, final GameEntity target) {
-        // CanAttack static abilities
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CanAttackDefender)) {
@@ -157,9 +156,8 @@ public class StaticAbilityCantAttackBlock {
             return true;
         }
 
-        CardCollection list = new CardCollection(blocker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        // add blocker in case of LKI
-        list.add(blocker);
+        CardCollection list = new CardCollection(blocker);
+        list.addAll(blocker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantBlock)) {
@@ -207,12 +205,12 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean cantBlockBy(final Card attacker, final Card blocker) {
-        CardCollection list = new CardCollection(attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        // add attacker and blocker in case of LKI
-        list.add(attacker);
+        // add attacker and blocker first in case of LKI
+        CardCollection list = new CardCollection(attacker);
         if (blocker != null) {
             list.add(blocker);
         }
+        list.addAll(attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantBlockBy)) {

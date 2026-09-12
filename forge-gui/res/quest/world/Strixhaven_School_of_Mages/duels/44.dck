@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Andy_Monsalve_-_Naya_Adventures_(Standard,_#1163814).dck
+Deck Type=constructed
+
+[Main]
+2 Toski, Bearer of Secrets
+2 Drannith Magistrate
+3 Elite Spellbinder
+4 Giant Killer
+4 Clarion Spirit
+4 Jaspera Sentinel
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Bonecrusher Giant
+2 Kabira Takedown
+4 Showdown of the Skalds
+2 Mountain
+2 Plains
+3 Fabled Passage
+4 Needleverge Pathway
+4 Forest
+4 Branchloft Pathway
+4 Cragcrown Pathway
+[Sideboard]
+1 Jegantha, the Wellspring
+2 Klothys, God of Destiny
+2 Reidane, God of the Worthy
+2 Chainweb Aracnir
+2 Redcap Melee
+3 Roiling Vortex
+3 Glass Casket

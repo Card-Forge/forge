@@ -1,0 +1,7 @@
+Name:The Whizzer, Classic Speedster
+ManaCost:3 R
+Types:Legendary Creature Human Hero
+PT:3/3
+K:First Strike
+K:Haste
+Oracle:First strike, haste

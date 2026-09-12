@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ikenga
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Conner_Hursh_-_Dimir_Midrange_(Standard,_#2200027).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+4 Faerie Mastermind
+3 Gix, Yawgmoth Praetor
+1 Plumecreed Escort
+2 Sheoldred, the Apocalypse
+2 Spyglass Siren
+1 Preacher of the Schism
+3 Tishana's Tidebinder
+3 Cut Down
+2 Three Steps Ahead
+2 Phantom Interference
+4 Go for the Throat
+1 Gix's Command
+1 Duress
+2 Fabled Passage
+4 Restless Reef
+4 Island
+3 Mirrex
+4 Underground River
+4 Swamp
+4 Darkslick Shores
+[Sideboard]
+1 Cut Down
+1 Gix's Command
+2 Duress
+1 Aclazotz, Deepest Betrayal
+2 Disdainful Stroke
+2 Malicious Eclipse
+2 Negate
+1 Harvester of Misery
+1 Virtue of Persistence
+2 Liliana of the Veil

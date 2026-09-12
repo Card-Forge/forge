@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Prince Valiant
+Title=Prince Valiant
+Icon=Prince Valiant.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Dennis_Königsmark_-_Golgari_Reanimator_(Modern,_#1606340).dck
+Deck Type=constructed
+
+[Main]
+3 Asmoranomardicadaistinaculdacar
+4 Atraxa, Grand Unifier
+3 Emrakul, the Aeons Torn
+3 Ovalchase Daredevil
+2 Blood Fountain
+1 Brainstone
+3 The Underworld Cookbook
+1 Wishclaw Talisman
+4 Goryo's Vengeance
+2 Bone Shards
+2 Collective Brutality
+2 Inquisition of Kozilek
+4 Profane Tutor
+4 Thoughtseize
+4 Urza's Saga
+2 Bloodstained Mire
+2 Blooming Marsh
+1 Forest
+2 Nurturing Peatland
+1 Overgrown Tomb
+4 Swamp
+1 Takenuma, Abandoned Mire
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+[Sideboard]
+1 Haywire Mite
+1 Jegantha, the Wellspring
+2 Orvar, the All-Form
+1 Nihil Spellbomb
+1 Pithing Needle
+1 Shadowspear
+1 Abrupt Decay
+2 Fatal Push
+2 Tear Asunder
+3 Veil of Summer

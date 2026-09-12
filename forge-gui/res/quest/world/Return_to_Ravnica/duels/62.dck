@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Modern_Turniers_vom_12.03.2013/Dustin_Hanke_-_Solar_Flare_(Modern,_#48108).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+1 Elesh Norn, Grand Cenobite
+1 Eternal Witness
+1 Iona, Shield of Emeria
+4 Knight of the Reliquary
+3 Noble Hierarch
+3 Rhox War Monk
+4 Tarmogoyf
+3 Abrupt Decay
+4 Gifts Ungiven
+3 Path to Exile
+2 Lingering Souls
+1 Raven's Crime
+1 Unburial Rites
+1 Breeding Pool
+2 Forest
+1 Gavony Township
+1 Ghost Quarter
+1 Godless Shrine
+1 Hallowed Fountain
+1 Island
+4 Misty Rainforest
+2 Overgrown Tomb
+1 Swamp
+2 Temple Garden
+1 Treetop Village
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+1 Bojuka Bog
+1 Creeping Corrosion
+1 Darkblast
+1 Jace, Architect of Thought
+1 Seal of Primordium
+2 Stony Silence
+2 Thragtusk
+2 Thrun, the Last Troll
+1 Wurmcoil Engine

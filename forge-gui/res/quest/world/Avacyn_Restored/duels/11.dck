@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/GP_Minneapolis_2012_-_Grinders_Winners/Matthew_Simpson_-_Birthing_Pod_(Standard,_#31106).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+1 Fiend Hunter
+1 Hero of Oxid Ridge
+3 Huntmaster of the Fells
+1 Inferno Titan
+3 Restoration Angel
+2 Silverblade Paladin
+4 Strangleroot Geist
+2 Thalia, Guardian of Thraben
+1 Wolfir Silverheart
+2 Zealous Conscripts
+2 Birthing Pod
+2 Oblivion Ring
+3 Cavern of Souls
+4 Copperline Gorge
+6 Forest
+2 Gavony Township
+4 Razorverge Thicket
+2 Rootbound Crag
+3 Sunpetal Grove
+[Sideboard]
+1 Acidic Slime
+2 Ancient Grudge
+1 Bonfire of the Damned
+2 Celestial Purge
+1 Combust
+2 Hero of Bladehold
+2 Incinerate
+1 Ray of Revelation

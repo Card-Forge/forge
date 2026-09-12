@@ -73,7 +73,6 @@ public class PointOfInterestMap implements SaveFileContent {
         return mapObjects[chunkX][chunkY];
     }
 
-
     @Override
     public void load(SaveFileData data) {
         numberOfChunksX=data.readInt("numberOfChunksX");

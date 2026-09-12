@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Hisamichi_Yoshigoe_-_Jeskai_Tempo_(Standard,_#1577026).dck
+Deck Type=constructed
+
+[Main]
+3 Steel Seraph
+4 Fable of the Mirror-Breaker
+2 Michiko's Reign of Truth
+3 Reckoner Bankbuster
+2 Make Disappear
+2 Disruption Protocol
+3 Voltage Surge
+1 Spell Pierce
+1 Destroy Evil
+1 Abrade
+4 Skrelv's Hive
+4 Wedding Announcement
+1 Borrowed Time
+2 Saheeli, Filigree Master
+2 The Wandering Emperor
+1 Adarkar Wastes
+4 Seachrome Coast
+3 Deserted Beach
+1 Roadside Reliquary
+4 Battlefield Forge
+2 Stormcarved Coast
+4 Shivan Reef
+4 Sundown Pass
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+1 Destroy Evil
+2 Circle of Confinement
+1 Flame-Blessed Bolt
+1 Voltage Surge
+1 Abrade
+1 Obliterating Bolt
+1 Danitha, Benalia's Hope
+1 Archangel of Wrath
+2 Disdainful Stroke
+2 Dennick, Pious Apprentice
+2 Vanquish the Horde

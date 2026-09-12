@@ -115,7 +115,7 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
         final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
         QuestEventDifficulty randomDuelDifficulty = QuestEventDifficulty.EASY;
-        
+
         double randomDouble = MyRandom.getRandom().nextDouble();
 
         if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
@@ -169,7 +169,6 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
                     randomDuelDifficulty = QuestEventDifficulty.EXPERT;
                 }                
             }
-            
         }
 
         if (moreDuelChoices) {
@@ -184,7 +183,7 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
                 addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
             }
         }
-        
+
         // Now to add the wild opponents
         addDuel(duelOpponents, QuestEventDifficulty.WILD, FModel.getQuestPreferences().getPrefInt(QPref.WILD_OPPONENTS_NUMBER));        
 
@@ -198,10 +197,9 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
     }
 
     private boolean areWildDecksWanted() {
-        int wildOpponentsPreference = FModel.getQuestPreferences().getPrefInt(QPref.WILD_OPPONENTS_NUMBER);
-        return wildOpponentsPreference > 0;
+        return FModel.getQuestPreferences().getPrefInt(QPref.WILD_OPPONENTS_NUMBER) > 0;
     }
-    
+
     private boolean isWildDeckAvailable() {
         return !sortedDuels.get(QuestEventDifficulty.WILD).isEmpty();
     }
@@ -213,5 +211,5 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
             Collections.shuffle(list, MyRandom.getRandom());
         }
     }
-    
+
 }

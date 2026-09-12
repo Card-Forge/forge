@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Waffze_-_Mono-Black_Control_(Modern,_#2005123).dck
+Deck Type=constructed
+
+[Main]
+3 Sheoldred, the Apocalypse
+4 Grief
+4 Dauthi Voidwalker
+2 Orcish Bowmasters
+4 The One Ring
+4 Fatal Push
+4 Sheoldred's Edict
+4 Not Dead After All
+1 March of Wretched Sorrow
+4 Thoughtseize
+2 Liliana of the Veil
+10 Swamp
+4 Demolition Field
+4 Field of Ruin
+3 Sunken Citadel
+3 Castle Locthwain
+[Sideboard]
+2 Ashiok, Dream Render
+2 Surgical Extraction
+1 Path of Peril
+2 Necromentia
+1 Stone of Erech
+1 Pithing Needle
+1 Unlicensed Hearse
+1 Engineered Explosives
+1 Legion's End
+2 Damnation
+1 Cursed Totem

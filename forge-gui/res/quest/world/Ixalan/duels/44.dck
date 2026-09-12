@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Robot44
+Title=Robot44
+Icon=Nibbler.jpg
+Difficulty=Easy
+Description=Red Deck Wins 
+Deck Type=constructed
+
+[Main]
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+4 Soul-Scar Mage
+4 Abrade
+4 Lightning Strike
+4 Shock
+1 Chandra, Torch of Defiance
+15 Mountain
+4 Ramunap Ruins
+1 Scavenger Grounds
+4 Sunscorched Desert
+[Sideboard]
+1 Aethersphere Harvester
+2 Chandra's Defeat
+2 Chandra, Torch of Defiance
+3 Glorybringer
+3 Pia Nalaar
+4 Rampaging Ferocidon

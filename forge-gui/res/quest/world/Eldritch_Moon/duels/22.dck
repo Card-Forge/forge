@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/littledarwin_-_Bant_Company_(Standard,_#635541).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Duskwatch Recruiter
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+2 Thalia, Heretic Cathar
+4 Tireless Tracker
+4 Collected Company
+3 Canopy Vista
+4 Evolving Wilds
+4 Forest
+1 Island
+2 Lumbering Falls
+5 Plains
+4 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+1 Aerial Volley
+3 Declaration in Stone
+1 Dragonlord Dromoka
+2 Elder Deep-Fiend
+3 Gnarlwood Dryad
+2 Negate
+1 Ojutai's Command
+1 Subjugator Angel

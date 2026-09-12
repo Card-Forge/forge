@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Aureban_-_Dimir_Murktide_(Modern,_#2231100).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+2 Harbinger of the Seas
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Murktide Regent
+2 Sink into Stupor
+2 Spell Snare
+4 Fatal Push
+4 Thought Scour
+2 Force of Negation
+3 Consider
+4 Counterspell
+4 Unearth
+3 Island
+1 Swamp
+2 Undercity Sewers
+2 Gloomlake Verge
+3 Watery Grave
+4 Flooded Strand
+4 Polluted Delta
+[Sideboard]
+2 Glistening Deluge
+2 Stern Scolding
+3 Consign to Memory
+1 Harbinger of the Seas
+2 Nihil Spellbomb
+3 Phyrexian Crusader
+1 Force of Negation
+1 Break the Ice

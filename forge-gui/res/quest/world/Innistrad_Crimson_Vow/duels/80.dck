@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/jontet_-_Izzet_Affinity_(Modern,_#1382128)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+3 Signal Pest
+4 Thought Monitor
+4 Sojourner's Companion
+4 Ornithopter
+4 Memnite
+4 Frogmite
+1 Welding Jar
+1 Shadowspear
+1 Pithing Needle
+1 Lantern of the Lost
+2 Nettlecyst
+2 Cranial Plating
+4 Springleaf Drum
+2 Galvanic Blast
+4 Thoughtcast
+4 Urza's Saga
+1 Island
+1 Glimmervoid
+4 Treasure Vault
+4 Spire of Industry
+4 Darksteel Citadel
+[Sideboard]
+1 Jegantha, the Wellspring
+1 Ancient Grudge
+1 Etched Champion
+1 Grafdigger's Cage
+1 Lantern of the Lost
+1 Portable Hole
+1 Test of Talents
+2 Stubborn Denial
+2 Experimental Frenzy
+2 Dispatch
+2 Alpine Moon

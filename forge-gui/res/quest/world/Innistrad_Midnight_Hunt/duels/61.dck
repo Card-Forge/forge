@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/IntrepidZero_-_White_Weenie_(Modern,_#1216728).dck
+Deck Type=constructed
+
+[Main]
+3 Thraben Inspector
+4 Esper Sentinel
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Thalia, Guardian of Thraben
+4 Thalia's Lieutenant
+4 Champion of the Parish
+1 Shadowspear
+4 Aether Vial
+4 Path to Exile
+4 Urza's Saga
+4 Mutavault
+4 Horizon Canopy
+4 Cavern of Souls
+8 Plains
+[Sideboard]
+1 Soul-Guide Lantern
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+2 Burrenton Forge-Tender
+3 Cathar Commando
+3 Drannith Magistrate
+4 Sanctifier en-Vec

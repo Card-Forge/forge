@@ -10,4 +10,5 @@ SVar:TrigImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigPutCounterP1P1 | Trig
 SVar:TrigPutCounterP1P1:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Trample
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MaxQuestEffect:4
 Oracle:When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nLandfall — Whenever a land you control enters, put a quest counter on this enchantment. When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.

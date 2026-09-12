@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Invisible Man
+Title=Invisible Man
+Icon=Invisible Man.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Brennan_Roy_-_Azorius_Control_(Standard,_#1967672).dck
+Deck Type=constructed
+
+[Main]
+4 Get Lost
+4 Memory Deluge
+4 March of Otherworldly Light
+4 No More Lies
+4 Quick Study
+4 Sunfall
+1 Farewell
+4 Temporary Lockdown
+4 The Wandering Emperor
+4 Field of Ruin
+4 Adarkar Wastes
+4 Deserted Beach
+4 Plains
+4 Island
+4 Restless Anchorage
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+1 Mirrex
+[Sideboard]
+4 Knockout Blow
+4 Tishana's Tidebinder
+3 Chrome Host Seedshark
+3 Negate
+1 Cryptic Coat

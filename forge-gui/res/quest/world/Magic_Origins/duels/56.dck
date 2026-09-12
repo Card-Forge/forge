@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/Grand_Prix_Oklahoma_City_2015_-_Trial_Winners/Chris_Graves_-_Red_Deck_Wins_(Modern,_#324355).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+2 Searing Blaze
+4 Skullcrack
+2 Exquisite Firecraft
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+1 Scalding Tarn
+2 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+2 Blood Moon
+2 Deflecting Palm
+3 Destructive Revelry
+3 Kor Firewalker
+2 Path to Exile
+2 Rest in Peace

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Very Hard
+Description=../Modern/Avacyn_Restored/PPTQ_La_Salamanga_-_Siracusa,_Italy/Carmelo_Blundo_-_Infect_(Modern,_#308605).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+2 Spellskite
+3 Apostle's Blessing
+1 Dismember
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+3 Ranger's Guile
+4 Vines of Vastwood
+1 Distortion Strike
+2 Rancor
+1 Wild Defiance
+2 Breeding Pool
+3 Forest
+4 Inkmoth Nexus
+3 Misty Rainforest
+2 Pendelhaven
+3 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Dispel
+1 Dryad Arbor
+4 Nature's Claim
+2 Relic of Progenitus
+2 Spell Pierce

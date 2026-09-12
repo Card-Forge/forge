@@ -93,7 +93,7 @@ public class CostTapType extends CostPartWithList {
         if (type.contains("+withTotalPowerGE")) {
             String num = type.split("\\+withTotalPowerGE")[1];
             sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power ");
-            sb.append(num).append("or greater");
+            sb.append(num).append(" or greater");
             return sb.toString();
         }
 

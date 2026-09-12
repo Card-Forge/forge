@@ -32,14 +32,33 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     /**
-     * The {@link Set} representation of this collection.
+     * Size at which uniqueness starts being enforced with a hash set rather than by scanning the
+     * list. Below it the scan is cheaper than the set costs to build, and the great majority of
+     * these collections - trait rebuilds create tens of millions of one- and two-element ones per
+     * game - never grow past a handful of entries or get looked up by value at all.
      */
-    private final Set<T> set = new HashSet<>();
+    private static final int HASH_THRESHOLD = 8;
+
+    /**
+     * The {@link Set} representation of this collection. Materialized on demand; while it is
+     * {@code null} the list alone is authoritative.
+     */
+    private transient Set<T> set;
 
     /**
      * The {@link List} representation of this collection.
      */
     private final List<T> list = new ArrayList<>();
+
+    /**
+     * Build the {@link Set} representation, if it isn't built already.
+     */
+    private Set<T> hashed() {
+        if (set == null) {
+            set = new HashSet<>(list);
+        }
+        return set;
+    }
 
     /**
      * Create an empty {@link FCollection}.
@@ -75,6 +94,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      *            creation.
      */
     public FCollection(final Iterable<? extends T> i) {
+        if (i instanceof FCollection) {
+            // The source already enforces uniqueness, so there is nothing for a dedup pass to
+            // find - copy the backing list straight across.
+            list.addAll(((FCollection<? extends T>) i).list);
+            return;
+        }
         this.addAll(i);
     }
 
@@ -172,7 +197,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int size() {
-        return set.size();
+        return list.size();
     }
 
     /**
@@ -180,11 +205,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean isEmpty() {
-        return set.isEmpty();
+        return list.isEmpty();
     }
 
     public Set<T> asSet() {
-        return set;
+        return hashed();
     }
 
     /**
@@ -196,7 +221,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean contains(final Object o) {
         if (o == null)
             return false;
-        return set.contains(o);
+        return set == null ? list.contains(o) : set.contains(o);
     }
 
     /**
@@ -235,6 +260,16 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean add(final T e) {
         if (e == null)
             return false;
+        if (set == null) {
+            if (list.contains(e)) {
+                return false;
+            }
+            list.add(e);
+            if (list.size() > HASH_THRESHOLD) {
+                hashed();
+            }
+            return true;
+        }
         if (set.add(e)) {
             list.add(e);
             return true;
@@ -253,6 +288,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean remove(final Object o) {
         if (o == null)
             return false;
+        if (set == null) {
+            return list.remove(o);
+        }
         if (set.remove(o)) {
             list.remove(o);
             return true;
@@ -263,7 +301,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     public boolean removeIf(Predicate<? super T> filter) {
         if (list.removeIf(filter)) {
-            set.removeIf(filter);
+            if (set != null) {
+                set.removeIf(filter);
+            }
             return true;
         }
         return false;
@@ -274,7 +314,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean containsAll(final Collection<?> c) {
-        return set.containsAll(c);
+        return set == null ? list.containsAll(c) : set.containsAll(c);
     }
 
     /**
@@ -297,6 +337,10 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean addAll(final Iterable<? extends T> i) {
         boolean changed = false;
         if (i == null)
+            return false;
+        // Trait rebuilds pour a lot of empty collections into these; skip allocating an iterator
+        // just to discover there is nothing to add.
+        if (i instanceof Collection && ((Collection<?>) i).isEmpty())
             return false;
         for (final T e : i) {
             changed |= add(e);
@@ -374,8 +418,10 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean retainAll(final Collection<?> c) {
-        if (set.retainAll(c)) {
-            list.retainAll(c);
+        if (list.retainAll(c)) {
+            if (set != null) {
+                set.retainAll(c);
+            }
             return true;
         }
         return false;
@@ -386,8 +432,10 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public void clear() {
-        if (set.isEmpty()) { return; }
-        set.clear();
+        if (list.isEmpty()) { return; }
+        if (set != null) {
+            set.clear();
+        }
         list.clear();
     }
 
@@ -410,6 +458,20 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     /**
+     * Replace the element at the specified position, updating both the
+     * internal list and set. Unlike {@link #set}, this keeps set membership
+     * in sync with the list.
+     */
+    public T replace(final int index, final T element) {
+        final T old = list.set(index, element);
+        if (old != element && set != null) {
+            set.remove(old);
+            set.add(element);
+        }
+        return old;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -427,8 +489,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * @return whether this collection changed as a result of this method call.
      */
     private boolean insert(int index, final T element) {
-        if (set.add(element)) {
+        if (set == null ? !list.contains(element) : set.add(element)) {
             list.add(index, element);
+            if (set == null && list.size() > HASH_THRESHOLD) {
+                hashed();
+            }
             return true;
         }
         //re-position in list if needed
@@ -451,7 +516,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     public T remove(final int index) {
         final T removedItem = list.remove(index);
-        if (removedItem != null) {
+        if (removedItem != null && set != null) {
             set.remove(removedItem);
         }
         return removedItem;
@@ -554,12 +619,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
 
     @Override
     public boolean anyMatch(Predicate<? super T> test) {
-        return set.stream().anyMatch(test);
+        return list.stream().anyMatch(test);
     }
 
     @Override
     public boolean allMatch(Predicate<? super T> test) {
-        return set.stream().allMatch(test);
+        return list.stream().allMatch(test);
     }
 
     /**

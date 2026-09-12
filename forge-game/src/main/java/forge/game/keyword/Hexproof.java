@@ -1,5 +1,7 @@
 package forge.game.keyword;
 
+import forge.card.CardType;
+
 public class Hexproof extends KeywordWithType {
 
     @Override
@@ -8,6 +10,14 @@ public class Hexproof extends KeywordWithType {
             return "Hexproof";
         }
         return "Hexproof from " + this.getTypeDescription();
+    }
+
+    @Override
+    public String getTypeDescription() {
+        if (CardType.isACardType(type)) {
+            return CardType.getPluralType(type);
+        }
+        return super.getTypeDescription();
     }
 
     @Override

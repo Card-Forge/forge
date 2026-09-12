@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Beast2
+Title=Beast2
+Icon=Beast2.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Eternal523_-_Humans_(Modern,_#1610674).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+3 Reflector Mage
+4 Thalia's Lieutenant
+2 Thalia, Heretic Cathar
+4 Unsettled Mariner
+1 Charming Prince
+4 Luminarch Aspirant
+4 Esper Sentinel
+3 Adeline, Resplendent Cathar
+2 Extraction Specialist
+1 Elesh Norn, Mother of Machines
+4 Aether Vial
+4 Ephemerate
+1 Eiganjo Castle
+1 Unclaimed Territory
+3 Silent Clearing
+4 Secluded Courtyard
+3 Eiganjo, Seat of the Empire
+4 Cavern of Souls
+4 Plains
+[Sideboard]
+2 Auriok Champion
+2 Kambal, Consul of Allocation
+2 Lavinia, Azorius Renegade
+2 Orvar, the All-Form
+2 Sanctifier en-Vec
+3 Solitude
+2 Cathar Commando

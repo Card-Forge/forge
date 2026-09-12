@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/AbelMolto_-_Naya_Aggro_(Modern,_#794853).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Grim Lavamancer
+1 Knight of Autumn
+3 Magus of the Moon
+4 Narnam Renegade
+4 Tarmogoyf
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+4 Searing Blaze
+2 Arid Mesa
+2 Bloodstained Mire
+1 Forest
+2 Mountain
+2 Sacred Foundry
+1 Scalding Tarn
+2 Stomping Ground
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+4 Destructive Revelry
+2 Gaddock Teeg
+2 Path to Exile
+1 Pulse of Murasa
+2 Relic of Progenitus
+3 Rest in Peace

@@ -1,0 +1,8 @@
+Name:Tidings of War
+ManaCost:R
+Types:Sorcery
+A:SP$ Amass | Type$ Goblin | Num$ X | SpellDescription$ Amass Goblins 1. If this spell was cast from a graveyard, amass Goblins 3 instead.\n(To amass Goblins X, put X +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+K:Flashback:3 R
+SVar:X:Count$wasCastFromGraveyard.3.1
+DeckHas:Ability$Token|Counters
+Oracle:Amass Goblins 1. If this spell was cast from a graveyard, amass Goblins 3 instead.\n(To amass Goblins X, put X +1/+1 counters on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

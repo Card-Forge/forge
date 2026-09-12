@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Modern_Constructed_League/Demannic_-_Rogue_(Modern,_#607330).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Abbot of Keral Keep
+4 Dark Confidant
+1 Fulminator Mage
+1 Grim Lavamancer
+4 Young Pyromancer
+1 Kolaghan's Command
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+2 Terminate
+4 Inquisition of Kozilek
+4 Lingering Souls
+3 Thoughtseize
+3 Arid Mesa
+2 Blackcleave Cliffs
+2 Blood Crypt
+3 Bloodstained Mire
+1 Ghost Quarter
+1 Godless Shrine
+1 Lavaclaw Reaches
+2 Marsh Flats
+1 Mountain
+1 Plains
+1 Sacred Foundry
+4 Shambling Vent
+1 Swamp
+[Sideboard]
+1 Crumble to Dust
+1 Rakdos Charm
+2 Rest in Peace
+2 Stony Silence
+1 Timely Reinforcements
+1 Wear // Tear
+1 Zealous Persecution

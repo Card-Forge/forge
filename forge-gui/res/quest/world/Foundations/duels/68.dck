@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/medimga_-_Boros_Hammer_(Modern,_#2275717).dck
+Deck Type=constructed
+
+[Main]
+4 Fervent Champion
+3 Ragavan, Nimble Pilferer
+2 Esper Sentinel
+4 Puresteel Paladin
+4 Stoneforge Mystic
+2 Phlage, Titan of Fire's Fury
+2 Kassandra, Eagle Bearer
+4 Colossus Hammer
+4 Leyline Axe
+1 The Spear of Leonidas
+1 Sword of Fire and Ice
+1 Shadowspear
+1 Kaldra Compleat
+2 Steelshaper's Gift
+4 Sigarda's Aid
+3 Snow-Covered Plains
+1 Snow-Covered Mountain
+3 Sacred Foundry
+1 Elegant Parlor
+4 Arid Mesa
+3 Flooded Strand
+1 Sokenzan, Crucible of Defiance
+2 Inspiring Vantage
+1 Arena of Glory
+1 Eiganjo, Seat of the Empire
+1 Sunbaked Canyon
+[Sideboard]
+1 Lion Sash
+3 Blood Moon
+2 Rest in Peace
+1 Phlage, Titan of Fire's Fury
+2 Skyclave Apparition
+2 Solitude
+2 Crystal Barricade
+2 Wear // Tear

@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Brekyirihunuade
+Title=Brekyirihunuade
+Icon=Brekyirihunuade.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/manacymbal_-_Modern_-_STorm_the_Festival_(Modern,_#1222561).dck
+Deck Type=constructed
+
+[Main]
+4 Felidar Guardian
+4 Fury
+4 Omnath, Locus of Creation
+4 Wall of Omens
+4 Solitude
+2 Coalition Relic
+4 Ephemerate
+4 Storm the Festival
+4 Explore
+3 Fires of Invention
+3 Teferi, Time Raveler
+4 Saheeli Rai
+4 Wrenn and Six
+1 Lair of the Hydra
+1 Plains
+1 Raging Ravine
+1 Raugrin Triome
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Ketria Triome
+1 Island
+1 Forest
+2 Breeding Pool
+2 Temple Garden
+3 Wooded Foothills
+3 Arid Mesa
+4 Flooded Strand
+4 Misty Rainforest
+4 Windswept Heath
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Engineered Explosives
+1 Alpine Moon
+1 Wear // Tear
+1 Thragtusk
+2 Sunset Revelry
+2 Rest in Peace
+2 Prismatic Ending
+2 Chalice of the Void
+2 Obsidian Charmaw

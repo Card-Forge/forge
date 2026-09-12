@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Medium
+Description=Kaladesh/Competitive_Standard_Constructed_League/Pasiu_-_Mardu_Vehicles_(Standard,_#644837).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Depala, Pilot Exemplar
+1 Pia Nalaar
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Cultivator's Caravan
+1 Skysovereign, Consul Flagship
+4 Smuggler's Copter
+3 Harnessed Lightning
+3 Unlicensed Disintegration
+2 Gideon, Ally of Zendikar
+4 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Mountain
+4 Needle Spires
+5 Plains
+[Sideboard]
+1 Chandra, Torch of Defiance
+2 Declaration in Stone
+3 Fragmentize
+4 Galvanic Bombardment
+2 Selfless Spirit
+1 To the Slaughter
+2 Weaver of Lightning

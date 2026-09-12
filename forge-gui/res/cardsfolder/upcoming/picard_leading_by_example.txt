@@ -1,0 +1,7 @@
+Name:Picard, Leading by Example
+ManaCost:1 W
+Types:Legendary Creature Human Officer
+PT:2/2
+A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature.Other | ValidTgtsDesc$ another creature | NumAtt$ +X | NumDef$ +X | SorcerySpeed$ True | SpellDescription$ Another target creature gets +X/+X until end of turn, where X is NICKNAME's power. Activate only as a sorcery.
+SVar:X:Count$CardPower
+Oracle:{1}, {T}: Another target creature gets +X/+X until end of turn, where X is Picard's power. Activate only as a sorcery.

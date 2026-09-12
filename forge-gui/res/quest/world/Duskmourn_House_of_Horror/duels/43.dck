@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Amy_James_-_Gruul_Aggro_(Standard,_#2276080).dck
+Deck Type=constructed
+
+[Main]
+4 Screaming Nemesis
+4 Monastery Swiftspear
+4 Heartfire Hero
+4 Emberheart Challenger
+4 Manifold Mouse
+2 Questing Druid
+2 Might of the Meek
+4 Monstrous Rage
+2 Snakeskin Veil
+4 Burst Lightning
+4 Lightning Strike
+2 Bushwhack
+5 Mountain
+4 Copperline Gorge
+4 Karplusan Forest
+1 Restless Ridgeline
+2 Rockface Village
+4 Thornspire Verge
+[Sideboard]
+2 Questing Druid
+1 Snakeskin Veil
+2 Pick Your Poison
+3 Torch the Tower
+1 Obliterating Bolt
+2 Pawpatch Formation
+2 Innkeeper's Talent
+2 Witchstalker Frenzy

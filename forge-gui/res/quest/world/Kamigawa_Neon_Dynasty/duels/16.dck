@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Aenea_Endymion_-_Azorius_Tempo_(Standard,_#1296520).dck
+Deck Type=constructed
+
+[Main]
+2 Legion Angel
+3 Adeline, Resplendent Cathar
+4 Luminarch Aspirant
+4 Skyclave Apparition
+4 Elite Spellbinder
+4 Spectral Adversary
+3 Reckoner Bankbuster
+2 Spell Pierce
+2 Valorous Stance
+2 Fading Hope
+3 Jwari Disruption
+3 The Wandering Emperor
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+2 Eiganjo, Seat of the Empire
+2 Cave of the Frost Dragon
+4 Deserted Beach
+4 Hengegate Pathway
+5 Island
+5 Plains
+[Sideboard]
+1 Pithing Needle
+2 Test of Talents
+2 Disdainful Stroke
+2 Mystic Reflection
+2 Negate
+2 Fateful Absence
+2 Legion Angel
+2 Portable Hole

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Omaha,_Nebraska/John_Buss_in_PTQ_Barcelona_-_Esper_Control_(Modern,_#27349).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Delver of Secrets
+1 Sword of Feast and Famine
+1 Sword of Fire and Ice
+1 Sword of War and Peace
+4 Cryptic Command
+4 Mana Leak
+4 Path to Exile
+4 Remand
+4 Rune Snag
+3 Lingering Souls
+2 Oblivion Ring
+1 Elspeth, Knight-Errant
+2 Jace Beleren
+1 Sorin, Lord of Innistrad
+1 Celestial Colonnade
+3 Creeping Tar Pit
+4 Drowned Catacomb
+4 Glacial Fortress
+3 Godless Shrine
+2 Hallowed Fountain
+1 Island
+3 Marsh Flats
+1 Plains
+1 Swamp
+2 Watery Grave
+[Sideboard]
+3 Aven Mindcensor
+2 Black Sun's Zenith
+2 Damnation
+2 Grafdigger's Cage
+3 Mortify
+1 Wrath of God

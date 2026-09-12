@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/Modern_Festival_Prelim_#8418432/BERNASTORRES_-_Abzan_Aggro_(Modern,_#278540).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Dark Confidant
+2 Kitchen Finks
+4 Knight of the Reliquary
+4 Loxodon Smiter
+2 Scavenging Ooze
+4 Siege Rhino
+3 Tarmogoyf
+1 Tasigur, the Golden Fang
+3 Wilt-Leaf Liege
+2 Abrupt Decay
+3 Path to Exile
+3 Lingering Souls
+1 Maelstrom Pulse
+3 Thoughtseize
+2 Forest
+2 Gavony Township
+1 Godless Shrine
+1 Marsh Flats
+1 Overgrown Tomb
+1 Plains
+3 Razorverge Thicket
+2 Swamp
+1 Temple Garden
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+2 Creeping Corrosion
+2 Feed the Clan
+1 Fulminator Mage
+3 Inquisition of Kozilek
+2 Stony Silence

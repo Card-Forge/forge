@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/S&atilde;o_Paulo,_Brazil/Savio_Freixela_in_PTQ_Barcelona_-_Red_Deck_Wins_(Modern,_#27551).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Grim Lavamancer
+4 Keldon Marauders
+4 Spark Elemental
+2 Flames of the Blood Hand
+4 Lightning Bolt
+4 Shard Volley
+3 Volcanic Fallout
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+4 Mountain
+2 Mutavault
+1 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+3 Disenchant
+1 Ethersworn Canonist
+2 Go for the Throat
+1 Path to Exile
+2 Rule of Law
+1 Shattering Spree
+1 Torpor Orb

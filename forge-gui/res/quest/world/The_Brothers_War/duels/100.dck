@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Mark_Koenig_-_Mono-White_(Modern,_#1547997)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Ingenious Smith
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 The Restoration of Eiganjo
+1 Soul-Guide Lantern
+1 Shadowspear
+1 Kaldra Compleat
+1 Pithing Needle
+1 Lightning Greaves
+2 Springleaf Drum
+2 Nettlecyst
+3 Portable Hole
+4 Power Conduit
+2 Blacksmith's Skill
+3 Dispatch
+4 Urza's Saga
+1 Eiganjo, Seat of the Empire
+1 Castle Ardenvale
+3 Treasure Vault
+4 Darksteel Citadel
+10 Plains
+[Sideboard]
+1 Sanctifier en-Vec
+1 Void Mirror
+1 Torpor Orb
+1 Soul-Guide Lantern
+1 Seal of Cleansing
+1 Portable Hole
+1 Pithing Needle
+1 Orvar, the All-Form
+1 Dispatch
+1 Citizen's Crowbar
+1 Blacksmith's Skill
+2 The Stone Brain
+2 Rest in Peace

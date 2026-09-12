@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/BimBam1342_-_Belcher_(Modern,_#1715976).dck
+Deck Type=constructed
+
+[Main]
+1 Fury
+1 Engineered Explosives
+4 Goblin Charbelcher
+4 Desperate Ritual
+4 Pact of Negation
+4 Manamorphose
+4 Pyretic Ritual
+4 Spikefield Hazard
+4 Valakut Awakening
+1 An Offer You Can't Refuse
+4 Recross the Paths
+1 Reforge the Soul
+3 Irencrag Feat
+4 Sea Gate Restoration
+4 Shatterskull Smashing
+1 Song-Mad Treachery
+3 Bala Ged Recovery
+4 Turntimber Symbiosis
+4 Strike It Rich
+1 Reckless Handling
+[Sideboard]
+2 Blood Moon
+1 Pyromancer Ascension
+4 Leyline of Sanctity
+2 Force of Vigor
+2 Veil of Summer
+2 Magus of the Moon
+1 Fury

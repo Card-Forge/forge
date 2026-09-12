@@ -1,0 +1,8 @@
+Name:Topiary Lecturer
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:1/2
+K:Increment
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of {G} equal to this creature's power.
+SVar:X:Count$CardPower
+Oracle:Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)\n{T}: Add an amount of {G} equal to this creature's power.

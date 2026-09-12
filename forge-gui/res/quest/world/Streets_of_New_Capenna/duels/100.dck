@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Hugo Drax
+Title=Hugo Drax
+Icon=Hugo Drax.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Dan_Lembke_-_Jund_Aggro_(Modern,_#1486561).dck
+Deck Type=constructed
+
+[Main]
+1 Eternal Witness
+2 Bloodbraid Elf
+2 Kroxa, Titan of Death's Hunger
+2 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+4 Lightning Skelemental
+4 Ignoble Hierarch
+2 Abrupt Decay
+4 Lightning Bolt
+4 Collected Company
+4 Unearth
+2 Wrenn and Six
+4 Grist, the Hunger Tide
+1 Swamp
+1 Ziatora's Proving Ground
+1 Forest
+2 Stomping Ground
+2 Overgrown Tomb
+2 Blood Crypt
+4 Verdant Catacombs
+4 Bloodstained Mire
+4 Wooded Foothills
+[Sideboard]
+2 Culling Ritual
+2 Assassin's Trophy
+2 Shatterstorm
+3 Reclamation Sage
+3 Magus of the Moon
+3 Leyline of the Void

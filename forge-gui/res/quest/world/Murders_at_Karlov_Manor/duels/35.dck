@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Nekusar the Mindrazer
+Title=Nekusar the Mindrazer
+Icon=Nekusar the Mindrazer.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/DarthStone_-_Sultai_Emergence_(Standard,_#1979918).dck
+Deck Type=constructed
+
+[Main]
+3 Atraxa, Grand Unifier
+4 Picklock Prankster
+2 Sheoldred, the Apocalypse
+4 Ledger Shredder
+3 Steamcore Scholar
+2 Titan of Industry
+1 Bitter Triumph
+4 Consider
+2 Wail of the Forgotten
+1 Terror Tide
+4 Squirming Emergence
+4 Founding the Third Path
+2 The Cruelty of Gix
+2 Underground River
+3 Dreamroot Cascade
+1 Hedge Maze
+1 Otawara, Soaring City
+2 Llanowar Wastes
+1 Shipwreck Marsh
+2 Island
+2 Undercity Sewers
+2 Underground Mortuary
+3 Deathcap Glade
+4 Darkslick Shores
+1 Yavimaya Coast
+[Sideboard]
+1 Bitter Triumph
+1 Terror Tide
+2 Long Goodbye
+2 Malicious Eclipse
+2 Negate
+3 Pick Your Poison
+2 Spell Pierce
+2 Duress

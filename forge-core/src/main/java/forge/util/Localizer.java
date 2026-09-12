@@ -147,7 +147,6 @@ public class Localizer {
 
         //Don't reload the language if nothing changed
         if (oldLocale == null || !oldLocale.equals(locale)) {
-
             File file = new File(languagesDirectory);
             URL[] urls = null;
 
@@ -160,24 +159,18 @@ public class Localizer {
             ClassLoader loader = new URLClassLoader(urls);
 
             try {
-                resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]), loader);
                 englishBundle = ResourceBundle.getBundle("en-US", new Locale("en", "US"), loader);
+                resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]), loader);
             } catch (NullPointerException | MissingResourceException e) {
                 //If the language can't be loaded, default to US English
-                resourceBundle = ResourceBundle.getBundle("en-US", new Locale("en_US"), loader);
+                resourceBundle = englishBundle;
                 e.printStackTrace();
             }
 
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
 
             notifyObservers();
-
         }
-    }
-
-    public List<Language> getLanguages() {
-        //TODO List all languages by getting their files
-        return null;
     }
 
     public void registerObserver(LocalizationChangeObserver observer) {
@@ -188,11 +181,6 @@ public class Localizer {
         for (LocalizationChangeObserver observer : observers) {
             observer.localizationChanged();
         }
-    }
-
-    public static class Language {
-        public String languageName;
-        public String languageID;
     }
 
 }

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Spiderman
+Title=Spiderman
+Icon=Spiderman.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/BluePlasma_-_Budget_Burn_(Modern,_#1055536).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Skullcrack
+4 Searing Blaze
+4 Lightning Helix
+4 Lightning Bolt
+4 Lava Spike
+4 Skewer the Critics
+4 Rift Bolt
+3 Battlefield Forge
+4 Clifftop Retreat
+4 Inspiring Vantage
+4 Sacred Foundry
+5 Mountain
+[Sideboard]
+2 Roiling Vortex
+3 Path to Exile
+3 Kor Firewalker
+3 Tormod's Crypt
+4 Smash to Smithereens

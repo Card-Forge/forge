@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/togoresmtg_-_Cecil_Domain_Zoo_(Modern,_#2524469).dck
+Deck Type=constructed
+
+[Main]
+3 Cecil, Dark Knight
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+4 Lightning Bolt
+2 Spectral Denial
+2 Stubborn Denial
+4 Thoughtseize
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Blood Crypt
+1 Breeding Pool
+1 Godless Shrine
+1 Mountain
+1 Overgrown Tomb
+4 Polluted Delta
+1 Raucous Theater
+4 Scalding Tarn
+1 Spara's Headquarters
+1 Steam Vents
+1 Thundering Falls
+4 Wooded Foothills
+[Sideboard]
+2 Clarion Conqueror
+4 Consign to Memory
+2 High Noon
+2 Pyroclasm
+1 Stubborn Denial
+2 Wear // Tear
+2 Wrath of the Skies

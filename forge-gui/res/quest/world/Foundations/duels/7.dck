@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/HelpfulHobo_-_Azorius_Tempo_(Standard,_#2280231).dck
+Deck Type=constructed
+
+[Main]
+4 Picklock Prankster
+4 Abhorrent Oculus
+3 Kiora, the Rising Tide
+4 Haughty Djinn
+2 Get Lost
+2 Phantom Interference
+2 Elspeth's Smite
+4 Opt
+2 Chart a Course
+4 Helping Hand
+4 Sleight of Hand
+1 Recommission
+4 Founding the Third Path
+1 Plains
+4 Floodfarm Verge
+3 Island
+4 Meticulous Archive
+4 Adarkar Wastes
+4 Seachrome Coast
+[Sideboard]
+2 Negate
+1 Disdainful Stroke
+2 Elspeth's Smite
+4 Exorcise
+2 Ghost Vacuum
+2 Into the Flood Maw
+1 Phantom Interference

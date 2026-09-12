@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Adam_Wallace_-_Four-color_Ramp_(Modern,_#1062003).dck
+Deck Type=constructed
+
+[Main]
+3 Uro, Titan of Nature's Wrath
+4 Omnath, Locus of Creation
+2 Cryptic Command
+2 Lightning Bolt
+2 Mana Leak
+4 Path to Exile
+4 Growth Spiral
+3 Time Warp
+2 Teferi, Time Raveler
+2 Teferi, Hero of Dominaria
+4 Wrenn and Six
+1 Snow-Covered Forest
+1 Snow-Covered Island
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+1 Steam Vents
+1 Temple Garden
+1 Raugrin Triome
+1 Island
+1 Hallowed Fountain
+1 Ketria Triome
+2 Field of the Dead
+2 Breeding Pool
+3 Mystic Sanctuary
+3 Scalding Tarn
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+1 Fiery Justice
+1 Force of Vigor
+1 Engineered Explosives
+1 Supreme Verdict
+2 Cleansing Wildfire
+2 Celestial Purge
+2 Mystical Dispute
+2 Veil of Summer
+3 Aether Gust

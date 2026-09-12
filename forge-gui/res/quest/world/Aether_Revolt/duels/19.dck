@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Harane,_Kenta_-_Mardu_Vehicles_(Standard,_#666446).dck
+Deck Type=constructed
+
+[Main]
+3 Pia Nalaar
+4 Scrapheap Scrounger
+3 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+2 Walking Ballista
+4 Heart of Kiran
+4 Fatal Push
+4 Unlicensed Disintegration
+4 Gideon, Ally of Zendikar
+4 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Plains
+4 Spire of Industry
+4 Spirebluff Canal
+1 Swamp
+[Sideboard]
+2 Chandra, Torch of Defiance
+4 Fevered Visions
+1 Fragmentize
+1 Harnessed Lightning
+4 Metallic Rebuke
+1 Shock
+2 Skywhaler's Shot

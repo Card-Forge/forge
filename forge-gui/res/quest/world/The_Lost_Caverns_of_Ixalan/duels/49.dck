@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=King Edward
+Title=King Edward
+Icon=King Edward.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Julien_N'guyen_-_Grixis_Aggro_(Standard,_#1972283).dck
+Deck Type=constructed
+
+[Main]
+2 Aclazotz, Deepest Betrayal
+4 Corpse Appraiser
+4 Faerie Mastermind
+2 Malcolm, Alluring Scoundrel
+4 Riveteers Requisitioner
+4 Wandering Mind
+3 Go for the Throat
+2 Lightning Strike
+4 Play with Fire
+2 Gix's Command
+4 Invasion of Amonkhet
+4 Blackcleave Cliffs
+4 Darkslick Shores
+1 Haunted Ridge
+2 Island
+1 Restless Reef
+4 Shivan Reef
+1 Sokenzan, Crucible of Defiance
+1 Stormcarved Coast
+3 Sulfurous Springs
+4 Xander's Lounge
+[Sideboard]
+1 Aclazotz, Deepest Betrayal
+1 Agatha's Soul Cauldron
+3 Brotherhood's End
+1 Disdainful Stroke
+3 March of Wretched Sorrow
+2 Negate
+2 Spell Pierce
+2 Unlicensed Hearse

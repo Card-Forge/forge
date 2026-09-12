@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/GregorV_-_Azorius_Flash_(Standard,_#2918063).dck
+Deck Type=constructed
+
+[Main]
+4 Floodpits Drowner
+4 Aven Interrupter
+4 Skycoach Conductor
+4 Voice of Victory
+3 Quantum Riddler
+1 Beza, the Bounding Spring
+4 Aang, Swift Savior
+2 Get Lost
+2 Spell Snare
+2 Avatar's Wrath
+4 High Noon
+1 Airbender Ascension
+1 Restless Anchorage
+4 Starting Town
+4 Hallowed Fountain
+4 Floodfarm Verge
+4 Island
+2 Multiversal Passage
+2 Abandoned Air Temple
+4 Plains
+[Sideboard]
+2 Annul
+2 Seam Rip
+1 Pyrrhic Strike
+2 Ghost Vacuum
+1 Beza, the Bounding Spring
+1 Spectacular Tactics
+2 Flashfreeze
+1 Quantum Riddler
+1 Petrified Hamlet
+2 Disdainful Stroke

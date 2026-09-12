@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adrian_Barnello_-_Mono_Blue_(Standard,_#772805).dck
+Deck Type=constructed
+
+[Main]
+1 Exclusion Mage
+4 Merfolk Trickster
+4 Mist-Cloaked Herald
+4 Siren Stormtamer
+4 Tempest Djinn
+3 Warkite Marauder
+4 Dive Down
+1 Essence Scatter
+4 Opt
+2 Spell Pierce
+4 Wizard's Retort
+1 Sleep
+4 Curious Obsession
+20 Island
+[Sideboard]
+3 Diamond Mare
+2 Disdainful Stroke
+1 Essence Scatter
+1 Exclusion Mage
+1 Jace, Cunning Castaway
+1 Karn, Scion of Urza
+1 Negate
+1 Selective Snare
+1 Sleep
+1 Warkite Marauder
+2 Whisper Agent

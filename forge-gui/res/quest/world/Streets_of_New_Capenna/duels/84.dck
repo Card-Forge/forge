@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Jason_Kim_-_Dimir_Death’s_Shadow_(Modern,_#1417612).dck
+Deck Type=constructed
+
+[Main]
+1 Gurmag Angler
+4 Murktide Regent
+4 Death's Shadow
+4 Street Wraith
+1 Stubborn Denial
+2 Thought Scour
+3 Archmage's Charm
+3 Consider
+4 Tainted Indulgence
+4 Fatal Push
+4 Counterspell
+4 Drown in the Loch
+4 Thoughtseize
+2 Island
+4 Scalding Tarn
+4 Watery Grave
+4 Polluted Delta
+4 Flooded Strand
+[Sideboard]
+1 Chalice of the Void
+1 Engineered Explosives
+1 Flusterstorm
+1 Kaito Shizuki
+1 Infernal Grasp
+1 Bloodchief's Thirst
+1 Tourach, Dread Cantor
+2 Dress Down
+2 Spell Pierce
+2 Mystical Dispute
+2 Unlicensed Hearse

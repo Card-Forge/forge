@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Ike7_-_Blue_Moon_(Modern,_#1220491).dck
+Deck Type=constructed
+
+[Main]
+2 Fury
+3 Snapcaster Mage
+4 Dragon's Rage Channeler
+3 Unholy Heat
+4 Lightning Bolt
+4 Counterspell
+4 Archmage's Charm
+4 Serum Visions
+4 Expressive Iteration
+2 Blood Moon
+3 Shark Typhoon
+1 Hall of Storm Giants
+2 Sulfur Falls
+2 Spirebluff Canal
+3 Steam Vents
+4 Scalding Tarn
+4 Flooded Strand
+7 Island
+[Sideboard]
+1 Fury
+1 Dragon's Claw
+1 Engineered Explosives
+1 Mystical Dispute
+2 Ragavan, Nimble Pilferer
+2 Flusterstorm
+2 Obsidian Charmaw
+2 Prismari Command
+3 Soul-Guide Lantern

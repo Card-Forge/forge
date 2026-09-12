@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mister Fantastic
+Title=Mister Fantastic
+Icon=Mister Fantastic.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Rochester/Dan_MacDonald_in_PTQ_Philadelphia_-_Valakut_Ramp_(Standard,_#17662).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Pelakka Wurm
+4 Primeval Titan
+4 Solemn Simulacrum
+1 Urabrask the Hidden
+1 Wurmcoil Engine
+2 Dismember
+2 Harrow
+1 Lightning Bolt
+3 Summoning Trap
+4 Explore
+3 Pyroclasm
+4 Rampant Growth
+2 Khalni Heart Expedition
+3 Evolving Wilds
+5 Forest
+10 Mountain
+3 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+2 Combust
+3 Memoricide
+4 Nature's Claim
+3 Obstinate Baloth
+1 Swamp

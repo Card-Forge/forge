@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/SCG.com_Invitational_Qualifier_Tuscaloosa/Caleb_Crotts_-_Naya_Aggro_(Standard,_#13550).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+2 Cunning Sparkmage
+4 Fauna Shaman
+1 Inferno Titan
+4 Mirran Crusader
+4 Squadron Hawk
+3 Stoneforge Mystic
+2 Sun Titan
+4 Vengevine
+1 Basilisk Collar
+1 Sword of Body and Mind
+1 Sword of Feast and Famine
+4 Lightning Bolt
+3 Arid Mesa
+4 Copperline Gorge
+5 Forest
+1 Mountain
+3 Plains
+4 Raging Ravine
+4 Razorverge Thicket
+1 Stirring Wildwood
+[Sideboard]
+3 Acidic Slime
+1 Baneslayer Angel
+3 Goblin Ruinblaster
+3 Kor Firewalker
+1 Mortarpod
+2 Obstinate Baloth
+2 Viridian Corrupter

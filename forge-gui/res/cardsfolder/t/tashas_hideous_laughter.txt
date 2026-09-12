@@ -1,5 +1,5 @@
 Name:Tasha's Hideous Laughter
 ManaCost:1 U U
 Types:Sorcery
-A:SP$ DigUntil | FoundDestination$ Exile | RevealedDestination$ Exile | MinTotalCMC$ 20 | StackDescription$ SpellDescription | SpellDescription$ Each opponent exiles cards from the top of their library until that player has exiled cards with total mana value 20 or more.
+A:SP$ DigUntil | FoundDestination$ Exile | Defined$ Opponent | RevealedDestination$ Exile | MinTotalCMC$ 20 | StackDescription$ SpellDescription | SpellDescription$ Each opponent exiles cards from the top of their library until that player has exiled cards with total mana value 20 or more.
 Oracle:Each opponent exiles cards from the top of their library until that player has exiled cards with total mana value 20 or more.

@@ -32,16 +32,16 @@ ScryfallCode=UNH
 20 C Standing Army @Randy Gallegos
 21 R Staying Power @Richard Sardinha
 22 C Wordmail @Ron Spencer
-23 U _ @Ron Spears
+23 U _____ @Ron Spears
 24 R Ambiguity @Stephen Daniele
 25 C Artful Looter @Heather "Erica Gassalasca-Jape" Hudson
 26 R Avatar of Me @Greg Hildebrandt
 27 C Brushstroke Paintermage @Ron "Don't You Dare Change Me" Spears
 28 C Bursting Beebles @David "Beeblemania" Martin
-29 C Carnivorous Death-Parrot @Tim Hildebrandt
+29 C Carnivorous Death-Parrot @Greg Hildebrandt
 30 U Cheatyface @Doug Chaffee
 31 C Double Header @Richard Sardinha
-32 C Flaccify @Tim Hildebrandt
+32 C Flaccify @Greg Hildebrandt
 33 C Framed! @Alan "Don't Feel Like You Have to Pick Me" Pollack
 34 R Greater Morphling @Greg "Six-Pack" Staples
 35 R Johnny, Combo Player @Kensuke Okabayashi
@@ -97,7 +97,7 @@ ScryfallCode=UNH
 85 U Pygmy Giant @Eric Deschamps
 86 C Red-Hot Hottie @Jeremy Jarvis
 87 U Rocket-Powered Turbo Slug @Franz Vohwinkel
-88 C Saute @Jeff Miracola
+88 C Sauté @Jeff Miracola
 89 U Six-y Beast @Anson Maddocks
 90 C Touch and Go @Ben Thompson
 91 R Yet Another Aether Vortex @David Day

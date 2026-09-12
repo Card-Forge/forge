@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Ichibahn_-_Golgari_Yawgmoth_(Modern,_#2800466).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+1 Strangleroot Geist
+3 Yawgmoth, Thran Physician
+2 Walking Ballista
+4 Young Wolf
+1 Endurance
+2 Formidable Speaker
+4 Delighted Halfling
+1 Sephiroth, Fabled SOLDIER
+1 Ouroboroid
+2 Orcish Bowmasters
+4 Agatha's Soul Cauldron
+4 Malevolent Rumble
+3 Green Sun's Zenith
+2 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Swamp
+2 Boseiju, Who Endures
+1 Dryad Arbor
+1 Underground Mortuary
+4 Verdant Catacombs
+2 Forest
+4 Windswept Heath
+2 Overgrown Tomb
+3 Spymaster's Vault
+1 Ba Sing Se
+[Sideboard]
+2 Abrupt Decay
+1 Scavenging Ooze
+1 Outland Liberator
+1 Force of Vigor
+1 Grist, the Hunger Tide
+3 Thoughtseize
+2 Fulminator Mage
+3 Fatal Push
+1 Mai, Scornful Striker

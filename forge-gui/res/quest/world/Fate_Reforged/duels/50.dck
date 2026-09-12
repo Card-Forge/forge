@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Medium
+Description=Fate_Reforged/Standard_Champs_#8046239/Baba_Booey_-_Abzan_Midrange_(Standard,_#191042).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Siege Rhino
+2 Tasigur, the Golden Fang
+4 Abzan Charm
+4 Bile Blight
+4 Hero's Downfall
+2 Utter End
+1 End Hostilities
+1 Read the Bones
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+1 Garruk, Apex Predator
+3 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Drown in Sorrow
+1 Erase
+4 Fleecemane Lion
+2 Glare of Heresy
+2 Mastery of the Unseen
+2 Sorin, Solemn Visitor

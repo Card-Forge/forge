@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Csanád_Sölétormos_-_Gruul_Werewolves❄_(Standard,_#1236066).dck
+Deck Type=constructed
+
+[Main]
+1 Howlpack Piper
+3 Cemetery Prowler
+3 Jaspera Sentinel
+4 Kessig Naturalist
+4 Tovolar, Dire Overlord
+4 Reckless Stormseeker
+4 Werewolf Pack Leader
+4 Ascendant Packleader
+4 Frost Bite
+2 Blizzard Brawl
+2 Ranger Class
+4 Rockfall Vale
+4 Cragcrown Pathway
+6 Snow-Covered Mountain
+12 Snow-Covered Forest
+[Sideboard]
+1 Avabruck Caretaker
+2 Witch's Web
+2 Blizzard Brawl
+2 Ill-Tempered Loner
+2 Outland Liberator
+3 Pithing Needle
+3 Snakeskin Veil

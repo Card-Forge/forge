@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/PTQ_Journey_Into_Nyx_-_Napoli,_Italy/Federico_Del_Basso_-_Esper_Control_(Standard,_#67659).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+2 Azorius Charm
+4 Dissolve
+2 Doom Blade
+1 Last Breath
+4 Sphinx's Revelation
+2 Syncopate
+4 Supreme Verdict
+2 Thoughtseize
+4 Detention Sphere
+3 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+1 Godless Shrine
+4 Hallowed Fountain
+4 Island
+2 Mutavault
+4 Plains
+4 Temple of Deceit
+4 Temple of Enlightenment
+4 Temple of Silence
+[Sideboard]
+1 Archangel of Thune
+3 Blood Baron of Vizkopa
+1 Fated Retribution
+2 Gainsay
+1 Negate
+1 Revoke Existence
+2 Ultimate Price

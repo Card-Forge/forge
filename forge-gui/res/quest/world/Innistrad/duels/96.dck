@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Arcore_(MI)_#11/Longhi_Federico_-_Faeries_(Modern,_#27507).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+1 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+1 Dispel
+2 Lightning Bolt
+3 Mana Leak
+3 Remand
+1 Spell Snare
+4 Banefire
+2 Faerie Conclave
+11 Island
+1 Mountain
+4 Mutavault
+2 Scalding Tarn
+2 Sulfur Falls
+2 Tectonic Edge
+[Sideboard]
+2 Familiar's Ruse
+3 Hurkyl's Recall
+1 Mirrorweave
+1 Sower of Temptation
+3 Surgical Extraction
+1 Sword of Feast and Famine
+1 Wipe Away
+1 Wurmcoil Engine

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/Standard_Platinum_TCQ_-_Lowell,_MA_-_10-20-12/EricaVerville_-_BR_Zombies_(Standard,_#39343).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+1 Bloodthrone Vampire
+4 Diregraf Ghoul
+3 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Rakdos Cackler
+3 Brimstone Volley
+4 Searing Spear
+4 Bump in the Night
+3 Pillar of Flame
+3 Blood Crypt
+1 Cavern of Souls
+4 Dragonskull Summit
+4 Rakdos Guildgate
+10 Swamp
+[Sideboard]
+1 Dreadbore
+3 Duress
+3 Flames of the Firebrand
+2 Rakdos Charm
+2 Rakdos, Lord of Riots
+2 Traitorous Blood
+2 Underworld Connections

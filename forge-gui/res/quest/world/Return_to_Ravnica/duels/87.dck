@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/Pauper_Constructed_League/MagicPlayer28_-_MagicPlayer28_(5-0)_(Modern,_#518372).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Keldon Marauders
+3 Kiln Fiend
+4 Fireblast
+4 Incinerate
+4 Lightning Bolt
+3 Needle Drop
+4 Searing Blaze
+4 Chain Lightning
+4 Lava Spike
+4 Rift Bolt
+4 Curse of the Pierced Heart
+3 Forgotten Cave
+15 Mountain
+[Sideboard]
+1 Electrickery
+4 Fireslinger
+2 Golden Urn
+2 Martyr of Ashes
+2 Molten Rain
+4 Smash to Smithereens

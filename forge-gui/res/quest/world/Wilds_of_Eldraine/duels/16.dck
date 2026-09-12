@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Kuroda_Masashiro_-_WUB_Junk_(Standard,_#1745044).dck
+Deck Type=constructed
+
+[Main]
+4 Dennick, Pious Apprentice
+2 Tenacious Underdog
+4 Raffine, Scheming Seer
+3 Sheoldred, the Apocalypse
+3 Faerie Mastermind
+3 Go for the Throat
+3 Make Disappear
+3 Cut Down
+4 Wedding Announcement
+3 The Wandering Emperor
+2 Kaito Shizuki
+1 Island
+2 Caves of Koilos
+2 Adarkar Wastes
+1 Underground River
+4 Darkslick Shores
+2 Seachrome Coast
+2 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Raffine's Tower
+3 Plaza of Heroes
+2 Restless Fortress
+[Sideboard]
+2 Negate
+2 Duress
+2 Disdainful Stroke
+2 Siphon Insight
+1 Farewell
+2 Void Rend
+1 Cut Down
+1 Ashiok, Wicked Manipulator
+2 Virtue of Persistence

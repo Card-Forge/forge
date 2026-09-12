@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Easy
+Description=Innistrad/FNM_CoolStuffGames/Cory_Sterrett_-_The_Real_Tokens_(Standard,_#24596).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Blade Splicer
+2 Doomed Traveler
+2 Hero of Bladehold
+4 Shrine of Loyal Legions
+2 Dismember
+3 Midnight Haunting
+2 Day of Judgment
+3 Timely Reinforcements
+3 Honor of the Pure
+3 Oblivion Ring
+4 Elspeth Tirel
+2 Garruk Relentless
+2 Forest
+4 Gavony Township
+10 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+3 Beast Within
+3 Marrow Shards
+4 Naturalize
+2 Purify the Grave

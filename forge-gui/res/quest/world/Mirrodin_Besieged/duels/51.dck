@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Hard
+Description=../Modern/Mirrodin_Besieged/Modern_Turniers_vom_18.09.2011/Sebastian_K├ñlble_-_Big_Red_(Modern,_#19862).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Demigod of Revenge
+4 Deus of Calamity
+4 Magus of the Moon
+4 Simian Spirit Guide
+4 Desperate Ritual
+4 Pyretic Ritual
+4 Seething Song
+4 Empty the Warrens
+4 Rite of Flame
+4 Blood Moon
+20 Mountain
+[Sideboard]
+4 Combust
+3 Shattering Spree
+4 Slagstorm
+4 Trinisphere

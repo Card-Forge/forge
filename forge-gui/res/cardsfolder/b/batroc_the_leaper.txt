@@ -1,0 +1,12 @@
+Name:Batroc the Leaper
+ManaCost:1 R
+Types:Legendary Creature Human Villain
+PT:2/2
+K:Multikicker:2
+K:etbCounter:P1P1:X:no Condition:NICKNAME enters with a +1/+1 counter on him for each time he was kicked.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When NICKNAME enters, he deals damage equal to his power to each of up to X targets, where X is the number of times he was kicked.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ X | NumDmg$ Y
+SVar:X:Count$TimesKicked
+SVar:Y:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nBatroc enters with a +1/+1 counter on him for each time he was kicked.\nWhen Batroc enters, he deals damage equal to his power to each of up to X targets, where X is the number of times he was kicked.

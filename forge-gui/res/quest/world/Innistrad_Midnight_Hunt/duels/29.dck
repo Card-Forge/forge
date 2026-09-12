@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Lordhebus_-_Gruul_Werewolves_(Standard,_#1217025).dck
+Deck Type=constructed
+
+[Main]
+2 Goldspan Dragon
+3 Tovolar, Dire Overlord
+4 Kessig Naturalist
+4 Reckless Stormseeker
+4 Werewolf Pack Leader
+4 Jaspera Sentinel
+4 Esika's Chariot
+1 Kazuul's Fury
+2 Negate
+2 Cinderclasm
+2 Shatterskull Smashing
+4 Ranger Class
+2 Wrenn and Seven
+2 Lair of the Hydra
+4 Rockfall Vale
+4 Riverglide Pathway
+4 Forest
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+[Sideboard]
+1 Wrenn and Seven
+2 Unnatural Moonrise
+2 Toski, Bearer of Secrets
+2 Outland Liberator
+2 Test of Talents
+3 Heated Debate
+3 Burning Hands

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Daniel_Paolo_David_-_Five-color_Humans_(Modern,_#1433322).dck
+Deck Type=constructed
+
+[Main]
+1 Tourach, Dread Cantor
+1 Lavinia, Azorius Renegade
+2 Charming Prince
+2 Imperial Recruiter
+2 Kitesail Freebooter
+3 Extraction Specialist
+3 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+4 Thalia's Lieutenant
+4 Reflector Mage
+4 Noble Hierarch
+4 Meddling Mage
+4 Champion of the Parish
+4 Aether Vial
+2 Plains
+2 Ancient Ziggurat
+3 Unclaimed Territory
+4 Secluded Courtyard
+4 Silent Clearing
+4 Cavern of Souls
+[Sideboard]
+1 Kataki, War's Wage
+1 Burrenton Forge-Tender
+1 Kambal, Consul of Allocation
+1 Tourach, Dread Cantor
+2 Magus of the Moon
+2 Dismember
+2 Deputy of Detention
+2 Chalice of the Void
+3 Sanctifier en-Vec

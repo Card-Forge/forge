@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Brian_Luna_-_Red_Deck_Wins_(Standard,_#2452725).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+2 Monastery Swiftspear
+4 Screaming Nemesis
+2 Tersa Lightshatter
+4 Burst Lightning
+4 Lightning Strike
+4 Monstrous Rage
+1 Witchstalker Frenzy
+16 Mountain
+4 Rockface Village
+3 Soulstone Sanctuary
+[Sideboard]
+2 Case of the Crimson Pulse
+2 Ghost Vacuum
+2 Lithomantic Barrage
+4 Sunspine Lynx
+4 Torch the Tower
+1 Witchstalker Frenzy

@@ -235,8 +235,7 @@ public class SpellAbilityChoicesIterator {
         // TODO this should also iterate over all possible values
         // (currently no additional complexity to keep performance reasonable)
         if (sa.costHasManaX()) {
-            Integer x = ComputerUtilCost.getMaxXValue(sa, sa.getActivatingPlayer(), sa.isTrigger());
-            sa.setXManaCostPaid(x);
+            Integer x = ComputerUtilCost.setMaxXValue(sa, sa.getActivatingPlayer(), sa.isTrigger());
             controller.getLastDecision().xMana = x;
         }
     }

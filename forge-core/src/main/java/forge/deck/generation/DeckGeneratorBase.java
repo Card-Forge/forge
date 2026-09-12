@@ -182,10 +182,9 @@ public abstract class DeckGeneratorBase {
     protected void addBasicLand(int cnt) {
     	addBasicLand(cnt, null);
     }
-
     protected void addBasicLand(int cnt, String edition) {
         trace.append(cnt).append(" basic lands remain").append("\n");
-        
+
         // attempt to optimize basic land counts according to colors of picked cards
         final Map<String, Integer> clrCnts = countLands(tDeck);
 
@@ -234,7 +233,6 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 List<PaperCard> toRemove = tDeck.toFlatList().stream()
                         .filter(PaperCardPredicates.NOT_BASIC_LAND)
@@ -263,7 +261,7 @@ public abstract class DeckGeneratorBase {
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
             Iterable<PaperCard> matchingCards = IterableUtil.filter(source, PaperCardPredicates.fromRules(pair.getLeft()));
             int cmcCountForPool = (int) Math.ceil(pair.getRight() * desiredOverTotal);
-            
+
             int addOfThisCmc = Math.round(pair.getRight() * requestedOverTotal);
             trace.append(String.format("Adding %d cards for cmc range from a pool with %d cards:%n", addOfThisCmc, cmcCountForPool));
 
@@ -283,10 +281,7 @@ public abstract class DeckGeneratorBase {
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
-        Predicate<CardRules> canUseInFormat = c -> {
-            // FIXME: should this be limited to AI only (!forAi) or should it be generally applied to all random generated decks?
-            return !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
-        };
+        Predicate<CardRules> canUseInFormat = c -> !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
 
         if (useArtifacts) {
             hasColor = hasColor.or(COLORLESS_CARDS);
@@ -323,8 +318,7 @@ public abstract class DeckGeneratorBase {
     }
 
     protected static void increment(Map<String, Integer> map, String key, int delta) {
-        final Integer boxed = map.get(key);
-        map.put(key, boxed == null ? delta : boxed + delta);
+        map.merge(key, delta, Integer::sum);
     }
 
     public static final Predicate<CardRules> AI_CAN_PLAY = CardRulesPredicates.IS_KEPT_IN_AI_DECKS.and(CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);

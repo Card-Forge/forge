@@ -1,0 +1,7 @@
+Name:Eager Glyphmage
+ManaCost:3 W
+Types:Creature Cat Cleric
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 white and black Inkling creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_1_1_inkling_flying | TokenOwner$ You
+Oracle:When this creature enters, create a 1/1 white and black Inkling creature token with flying.

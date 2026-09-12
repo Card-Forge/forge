@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Abe_Koudai_-_Mono_White_(Standard,_#1047798).dck
+Deck Type=constructed
+
+[Main]
+1 Shepherd of the Flock
+1 Kitesail Cleric
+2 Taranika, Akroan Veteran
+2 Legion Angel
+3 Giant Killer
+4 Venerable Knight
+4 Selfless Savior
+4 Luminarch Aspirant
+4 Seasoned Hallowblade
+4 Skyclave Apparition
+3 Glass Casket
+4 Maul of the Skyclaves
+2 Kabira Takedown
+1 Emeria's Call
+2 Castle Ardenvale
+19 Plains
+[Sideboard]
+1 Baneslayer Angel
+1 Glass Casket
+1 Giant Killer
+1 Elspeth, Sun's Nemesis
+2 Containment Priest
+2 Legion Angel
+2 Idol of Endurance
+2 Skyclave Cleric
+3 Lavabrink Venturer

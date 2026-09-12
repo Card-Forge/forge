@@ -1,0 +1,10 @@
+Name:Hyperion, Supreme Hero
+ManaCost:4 W W W
+Types:Legendary Creature Eternal Hero
+PT:7/7
+K:Flash
+K:Flying
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Hero.YouCtrl | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to you or a Hero you control, prevent all but 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount
+SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
+Oracle:Flash\nFlying\nIf a source would deal damage to you or a Hero you control, prevent all but 1 of that damage.

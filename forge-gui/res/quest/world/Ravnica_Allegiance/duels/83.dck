@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Wyatt Earp
+Title=Wyatt Earp
+Icon=Wyatt Earp.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Dario_Gosalbez_Borraz_-_Goblins_(Modern,_#792398).dck
+Deck Type=constructed
+
+[Main]
+1 Goblin Instigator
+4 Mogg Fanatic
+4 Fanatical Firebrand
+4 Goblin Bushwhacker
+4 Goblin Wardriver
+1 Goblin King
+4 Burning-Tree Emissary
+1 Goblin Chieftain
+4 Foundry Street Denizen
+4 Reckless Bushwhacker
+4 Lightning Bolt
+2 Light Up the Stage
+1 Dragon Fodder
+4 Goblin Grenade
+18 Mountain
+[Sideboard]
+4 Skullcrack
+3 Boiling Seas
+3 Ingot Chewer
+2 Stone Rain
+3 Dead // Gone

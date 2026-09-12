@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dont Play With Matches
+Title=Dont Play With Matches
+Icon=Dont Play With Matches.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Alexander_Brooks_-_Izzet_Lessons_(Standard,_#2940575).dck
+Deck Type=constructed
+
+[Main]
+4 Gran-Gran
+4 Monument to Endurance
+4 Abandon Attachments
+4 Accumulate Wisdom
+4 Combustion Technique
+4 Firebending Lesson
+2 Consult the Star Charts
+2 It'll Quench Ya!
+1 Flashback
+1 Spell Pierce
+1 Three Steps Ahead
+2 Boomerang Basics
+2 Iroh's Demonstration
+4 Artist's Talent
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Agna Qel'a
+1 Mountain
+[Sideboard]
+2 Flashfreeze
+2 Ral, Crackling Wit
+2 Slagstorm
+2 Soul-Guide Lantern
+2 Spell Snare
+2 Stormchaser's Talent
+1 Broadside Barrage
+1 Ghost Vacuum
+1 Quantum Riddler

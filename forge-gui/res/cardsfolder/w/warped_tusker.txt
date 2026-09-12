@@ -1,6 +1,6 @@
 Name:Warped Tusker
 ManaCost:7
-Types:Creature Eldrazi Trilobite
+Types:Creature Eldrazi Boar Beast
 PT:6/8
 K:Reach
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Abe_Corrigan_-_Esper_(Standard,_#780366).dck
+Deck Type=constructed
+
+[Main]
+1 Chromium, the Mutable
+4 Absorb
+1 Cast Down
+3 Chemister's Insight
+2 Moment of Craving
+3 Mortify
+2 Negate
+1 Precognitive Perception
+3 Vraska's Contempt
+4 Kaya's Wrath
+4 Thought Erasure
+2 Search for Azcanta
+4 Teferi, Hero of Dominaria
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+1 Island
+4 Isolated Chapel
+1 Swamp
+4 Watery Grave
+[Sideboard]
+3 Basilica Bell-Haunt
+2 Duress
+2 Hostage Taker
+2 Moment of Craving
+1 Negate
+1 Plaguecrafter
+4 Thief of Sanity

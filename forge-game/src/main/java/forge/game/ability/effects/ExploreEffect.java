@@ -26,6 +26,11 @@ import java.util.Map;
 
 public class ExploreEffect extends SpellAbilityEffect {
 
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      */
@@ -99,7 +104,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                 if (!top.isEmpty()) runParams.put(AbilityKey.Explored, top.getFirst());
                 game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
-                table.replaceCounterEffect(game, sa, true);
+                table.replaceCounterEffect(game, sa);
                 triggerList.triggerChangesZoneAll(game, sa);
             }
         }

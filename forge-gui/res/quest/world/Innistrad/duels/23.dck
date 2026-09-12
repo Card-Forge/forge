@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Easy
+Description=Innistrad/Worlds_2011_-_4-2_or_Better_Record/Gorka_Fernandez_ÔÇô_12_points_-_Red_Deck_Wins_(Standard,_#22323).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Grim Lavamancer
+2 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+3 Galvanic Blast
+4 Gut Shot
+3 Incinerate
+3 Volt Charge
+2 Arc Trail
+3 Koth of the Hammer
+22 Mountain
+[Sideboard]
+3 Combust
+2 Hero of Oxid Ridge
+3 Manic Vandal
+1 Traitorous Blood
+4 Vulshok Refugee

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/Fujino_Yoshitaka_-_Izzet_Aggro_(Standard,_#2729996).dck
+Deck Type=constructed
+
+[Main]
+4 Gran-Gran
+3 Monument to Endurance
+4 Accumulate Wisdom
+2 It'll Quench Ya!
+4 Combustion Technique
+4 Firebending Lesson
+3 Abandon Attachments
+4 Boomerang Basics
+2 Iroh's Demonstration
+4 Stormchaser's Talent
+4 Artist's Talent
+7 Island
+2 Mountain
+4 Spirebluff Canal
+4 Riverpyre Verge
+4 Multiversal Passage
+1 Agna Qel'a
+[Sideboard]
+2 Negate
+1 Spell Pierce
+2 Abrade
+1 Annul
+2 Torpor Orb
+2 Soul-Guide Lantern
+1 Fire Magic
+2 Quantum Riddler
+1 The Unagi of Kyoshi Island
+1 Iroh's Demonstration

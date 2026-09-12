@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Alex_Gimmi_-_Golgari_Yawgmoth_(Modern,_#2819599).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Delighted Halfling
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+3 Walking Ballista
+2 Formidable Speaker
+1 Endurance
+1 Ignoble Hierarch
+1 Strangleroot Geist
+4 Agatha's Soul Cauldron
+4 Malevolent Rumble
+3 Green Sun's Zenith
+3 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Dryad Arbor
+4 Verdant Catacombs
+4 Windswept Heath
+3 Spymaster's Vault
+2 Boseiju, Who Endures
+2 Forest
+2 Overgrown Tomb
+2 Underground Mortuary
+1 Swamp
+[Sideboard]
+3 Fatal Push
+2 Thoughtseize
+1 Force of Vigor
+1 Fulminator Mage
+1 Grist, the Hunger Tide
+1 Kraul Harpooner
+1 Murderous Cut
+1 Outland Liberator
+1 Scavenging Ooze
+1 Soulless Jailer
+1 Tamiyo's Safekeeping
+1 Vexing Bauble

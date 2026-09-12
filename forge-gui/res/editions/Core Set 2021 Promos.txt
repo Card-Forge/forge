@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PM21
 
 [cards]
-127★ Vito, Thorn of the Dusk Rose @Lie Setiawan
+127★ R Vito, Thorn of the Dusk Rose @Lie Setiawan

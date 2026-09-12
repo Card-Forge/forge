@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dont Play With Matches
+Title=Dont Play With Matches
+Icon=Dont Play With Matches.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/2014_Modern_State_Championships_-_Vermont/Dan_Paulsen_-_Faeries_(Modern,_#82575).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+2 Scion of Oona
+4 Spellstutter Sprite
+3 Vendilion Clique
+4 Cryptic Command
+2 Dismember
+1 Doom Blade
+1 Go for the Throat
+3 Mana Leak
+1 Smother
+2 Spell Snare
+2 Inquisition of Kozilek
+3 Thoughtseize
+4 Bitterblossom
+2 Creeping Tar Pit
+4 Darkslick Shores
+4 Island
+4 Mutavault
+4 River of Tears
+4 Secluded Glen
+1 Swamp
+1 Underground River
+[Sideboard]
+1 Batterskull
+1 Darkblast
+2 Grafdigger's Cage
+2 Hurkyl's Recall
+2 Negate
+1 Pithing Needle
+2 Ratchet Bomb
+1 Sower of Temptation
+2 Spellskite
+1 Threads of Disloyalty

@@ -1,153 +1,152 @@
 package forge.card;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
-
-import org.apache.commons.lang3.StringUtils;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
-import org.powermock.modules.testng.PowerMockTestCase;
-//import org.testng.IObjectFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-//import org.testng.annotations.ObjectFactory;
 
-import forge.ImageCache;
+import forge.GuiDesktop;
 import forge.ImageKeys;
-import forge.Singletons;
 import forge.StaticData;
 import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.gui.GuiBase;
 import forge.item.PaperCard;
-import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.TextUtil;
 
-@PrepareForTest(value = { FModel.class, Singletons.class, ResourceBundle.class, ImageCache.class, ImageIO.class,
-        ImageKeys.class, ForgeConstants.class, Localizer.class })
-@SuppressStaticInitializationFor({ "forge.ImageCache", "forge.localinstance.properties.ForgeConstants" })
-@PowerMockIgnore({ "javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",
-        "org.springframework.context.*", "org.apache.log4j.*", "jdk.internal.reflect.*", "javax.imageio.*" })
-public class CardMockTestCase extends PowerMockTestCase {
+/**
+ * Base class for tests that need a populated card database but no running game.
+ *
+ * <p>
+ * This used to extend PowerMock's {@code PowerMockTestCase}. PowerMock 2.0.9 is not
+ * usable with TestNG 7.10: it declares {@code @ObjectFactory IObjectFactory
+ * create(ITestContext)}, and {@code org.testng.IObjectFactory} was removed in TestNG
+ * 7.10. Resolving that method throws {@link NoClassDefFoundError} while TestNG scans the
+ * class for annotations, and TestNG reports the class as holding zero tests instead of
+ * failing, so every subclass silently stopped running. See issue #11183.
+ * </p>
+ *
+ * <p>
+ * Static mocking is now Mockito's own {@link Mockito#mockStatic}, available since the
+ * inline mock maker became the default in Mockito 5. Two consequences of losing
+ * PowerMock's per-class classloader are handled deliberately:
+ * </p>
+ * <ul>
+ * <li>Static state is no longer isolated per test class, so {@link #releaseMocks()} closes
+ * every static mock and clears the {@link Localizer} singleton after each method.</li>
+ * <li>{@link PaperCard} caches its {@code hasImage} answer, and the cards come from a
+ * process-wide {@link StaticData}. A test class that needs a different answer, or a
+ * differently loaded database, must build its own via
+ * {@link CardDatabaseHelper#createStaticData(boolean)} rather than share the cached one.</li>
+ * </ul>
+ */
+public class CardMockTestCase {
 
     public static final String MOCKED_LOCALISED_STRING = "any localised string";
 
-    protected static String getUserDir() {
-        // Adapted - reduced version from ForgeProfileProperties (which is private)
-        final String osName = System.getProperty("os.name");
-        final String homeDir = System.getProperty("user.home");
+    protected MockedStatic<FModel> fModelMock;
+    protected MockedStatic<ImageKeys> imageKeysMock;
 
-        if (StringUtils.isEmpty(osName) || StringUtils.isEmpty(homeDir)) {
-            throw new RuntimeException("cannot determine OS and user home directory");
-        }
+    /**
+     * The {@link Localizer} that was installed when this class last replaced it with a mock,
+     * put back after every method.
+     *
+     * <p>
+     * Clearing the singleton instead breaks every AITest-based class that runs later in the
+     * same JVM: those initialise the Localizer through {@code FModel.initialize()} exactly
+     * once, behind a static {@code initialized} flag, and once the singleton is null
+     * {@code Localizer.getInstance()} silently hands out a bare instance whose resourceBundle
+     * is null.
+     * </p>
+     */
+    private static Localizer localizerBeforeMocking;
 
-        final String fallbackDataDir = TextUtil.concatNoSpace(homeDir, "/.forge/");
-
-        if (StringUtils.containsIgnoreCase(osName, "windows")) {
-            String appRoot = System.getenv().get("APPDATA");
-            if (StringUtils.isEmpty(appRoot)) {
-                appRoot = fallbackDataDir;
-            }
-            return appRoot + File.separator + "Forge" + File.separator;
-        } else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
-            return TextUtil.concatNoSpace(homeDir, "/Library/Application Support/Forge/");
-        }
-        // Linux and everything else
-        return fallbackDataDir;
+    @BeforeMethod
+    protected void initMocks() throws Exception {
+        // BaseGameSimulationTest.runGame() calls this again part-way through a test, and
+        // Mockito refuses to open a second static mock for a class that already has one.
+        releaseMocks();
+        initForgeSingletons();
+        initCardImageMocks();
+        initForgePreferences();
+        initializeStaticData();
     }
 
-    protected void initForgeConstants() throws IllegalAccessException {
-        PowerMockito.mockStatic(ForgeConstants.class);
-        // Path Sep
-        Field fPathSep = PowerMockito.field(ForgeConstants.class, "PATH_SEPARATOR");
-        fPathSep.set(ForgeConstants.class, File.separator);
-        // Assets Dir
-        String assetDir = "../forge-gui/";
-        Field fAssetsDir = PowerMockito.field(ForgeConstants.class, "ASSETS_DIR");
-        fAssetsDir.set(ForgeConstants.class, assetDir);
-        // User Dir
-        String homeDir = CardMockTestCase.getUserDir();
-        Field fUserDir = PowerMockito.field(ForgeConstants.class, "USER_DIR");
-        fUserDir.set(ForgeConstants.class, homeDir);
-        // User Pref Dir
-        String prefDir = homeDir + "preferences" + File.separator;
-        Field fUserPrefsDir = PowerMockito.field(ForgeConstants.class, "USER_PREFS_DIR");
-        fUserPrefsDir.set(ForgeConstants.class, prefDir);
-        // Main Pref File
-        String mainPrefFile = prefDir + "forge.preferences";
-        Field fMainPrefFile = PowerMockito.field(ForgeConstants.class, "MAIN_PREFS_FILE");
-        fMainPrefFile.set(ForgeConstants.class, mainPrefFile);
-        // Res Dir
-        String resDir = assetDir + "res" + File.separator;
-        Field fResDir = PowerMockito.field(ForgeConstants.class, "RES_DIR");
-        fResDir.set(ForgeConstants.class, resDir);
-        // Card Data Dir
-        String cardDir = resDir + "cardsfolder" + File.separator;
-        Field fCardDataDir = PowerMockito.field(ForgeConstants.class, "CARD_DATA_DIR");
-        fCardDataDir.set(ForgeConstants.class, cardDir);
-        // Editions Dir
-        String editionsDir = resDir + "editions" + File.separator;
-        Field fEditionsDir = PowerMockito.field(ForgeConstants.class, "EDITIONS_DIR");
-        fEditionsDir.set(ForgeConstants.class, editionsDir);
-        // Block Data Dir
-        String blockDataDir = resDir + "blockdata" + File.separator;
-        Field fBlockData = PowerMockito.field(ForgeConstants.class, "BLOCK_DATA_DIR");
-        fBlockData.set(ForgeConstants.class, blockDataDir);
-        // User Custom Dir
-        String userCustomDir = homeDir + "custom" + File.separator;
-        Field fUserCustomDir = PowerMockito.field(ForgeConstants.class, "USER_CUSTOM_DIR");
-        fUserCustomDir.set(ForgeConstants.class, userCustomDir);
-        // User Custom card Dir
-        String userCustomCardDir = userCustomDir + "cards" + File.separator;
-        Field fUserCustoCardDir = PowerMockito.field(ForgeConstants.class, "USER_CUSTOM_CARDS_DIR");
-        fUserCustoCardDir.set(ForgeConstants.class, userCustomCardDir);
-        // User Custom Edition Dir
-        String userCustomEditionDir = userCustomDir + "editions" + File.separator;
-        Field fUserCustomEditionDir = PowerMockito.field(ForgeConstants.class, "USER_CUSTOM_EDITIONS_DIR");
-        fUserCustomEditionDir.set(ForgeConstants.class, userCustomEditionDir);
-        // Lang Dir
-        String langDir = resDir + "languages" + File.separator;
-        Field fLangDir = PowerMockito.field(ForgeConstants.class, "LANG_DIR");
-        fLangDir.set(ForgeConstants.class, langDir);
+    @AfterMethod(alwaysRun = true)
+    protected void releaseMocks() {
+        if (imageKeysMock != null) {
+            imageKeysMock.close();
+            imageKeysMock = null;
+        }
+        if (fModelMock != null) {
+            fModelMock.close();
+            fModelMock = null;
+        }
+        // Undo our own mock and nothing else. Leaving the mock in place, or clearing the
+        // singleton outright, breaks every AITest-based class that runs later in this JVM.
+        Localizer current = getLocalizerInstance();
+        if (current != null && Mockito.mockingDetails(current).isMock()) {
+            setLocalizerInstance(localizerBeforeMocking);
+        }
+    }
+
+    /**
+     * {@code ForgeConstants.ASSETS_DIR} is read from {@code GuiBase.getInterface()}, and
+     * every other path constant is derived from it, so installing the desktop
+     * implementation before the class is first touched gives the real constants their real
+     * values. This replaces the old {@code @SuppressStaticInitializationFor} plus
+     * reflective assignment of {@code static final} fields, which no plain-reflection
+     * approach can do on JDK 17.
+     */
+    protected void initForgeSingletons() {
+        if (GuiBase.getInterface() == null) {
+            GuiBase.setInterface(new GuiDesktop());
+        }
+        // FModel.initialize() normally creates the Lang instance, and it is mocked away
+        // here. Without it the card loader dies: CardFace.assignMissingFieldsToVariant
+        // calls Lang.getInstance().getNickName() for every card with a flavor-name
+        // variant, and one NPE there aborts the whole parallel load batch, leaving a
+        // partially populated database that reports most cards as unknown.
+        Lang.createInstance("en-US");
     }
 
     protected void setMock(Localizer mock) {
+        Localizer current = getLocalizerInstance();
+        if (current == null || !Mockito.mockingDetails(current).isMock()) {
+            localizerBeforeMocking = current;
+        }
+        setLocalizerInstance(mock);
+    }
+
+    private static Localizer getLocalizerInstance() {
         try {
             Field instance = Localizer.class.getDeclaredField("instance");
             instance.setAccessible(true);
-            instance.set(instance, mock);
+            return (Localizer) instance.get(null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @BeforeMethod
-    protected void initMocks() throws Exception {
-        // Loading a card also automatically loads the image, which we do not want (even
-        // if it wouldn't cause exceptions).
-        // The static initializer block in ImageCache can't fully be mocked
-        // (https://code.google.com/p/powermock/issues/detail?id=256), so we also need
-        // to mess with ImageIO...
-        initCardImageMocks();
-        initForgeConstants();
-        // Mocking some more static stuff
-        initForgePreferences();
-        initializeStaticData();
+    private static void setLocalizerInstance(Localizer mock) {
+        try {
+            Field instance = Localizer.class.getDeclaredField("instance");
+            instance.setAccessible(true);
+            instance.set(null, mock);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected void initForgePreferences() throws IllegalAccessException {
-        PowerMockito.mockStatic(Singletons.class);
-        PowerMockito.mockStatic(FModel.class);
-        ForgePreferences forgePreferences = new ForgePreferences();
+        fModelMock = Mockito.mockStatic(FModel.class);
 
         ResourceBundle dummyResourceBundle = new ResourceBundle() {
             @Override
@@ -161,31 +160,39 @@ public class CardMockTestCase extends PowerMockTestCase {
             }
         };
 
-        PowerMockito.mockStatic(ResourceBundle.class);
-        PowerMockito.when(ResourceBundle.getBundle("en-US", Locale.ENGLISH)).thenReturn(dummyResourceBundle);
-        Localizer localizerMock = PowerMockito.mock(Localizer.class);
+        Localizer localizerMock = Mockito.mock(Localizer.class);
         setMock(localizerMock);
-        PowerMockito.field(Localizer.class, "resourceBundle").set(localizerMock, dummyResourceBundle);
-        PowerMockito.when(localizerMock.getMessage(Mockito.anyString())).thenReturn(MOCKED_LOCALISED_STRING);
-        PowerMockito.when(FModel.getPreferences()).thenReturn(forgePreferences);
+        setLocalizerResourceBundle(localizerMock, dummyResourceBundle);
+        Mockito.when(localizerMock.getMessage(Mockito.anyString())).thenReturn(MOCKED_LOCALISED_STRING);
+
+        ForgePreferences forgePreferences = new ForgePreferences();
+        fModelMock.when(FModel::getPreferences).thenReturn(forgePreferences);
     }
 
+    private static void setLocalizerResourceBundle(Localizer target, ResourceBundle bundle) {
+        try {
+            Field resourceBundle = Localizer.class.getDeclaredField("resourceBundle");
+            resourceBundle.setAccessible(true);
+            resourceBundle.set(target, bundle);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Card images are only loaded in a GUI environment, so nothing here needs
+     * {@code ImageIO} or {@code ImageCache} stubbed. {@code ImageKeys.hasImage} does need
+     * stubbing: {@code CardDb} consults it when picking between reprints, so the art
+     * preference assertions depend on the answer.
+     */
     protected void initCardImageMocks() {
-        // make sure that loading images only happens in a GUI environment, so we no
-        // longer need to mock this
-        PowerMockito.mockStatic(ImageIO.class);
-        PowerMockito.mockStatic(ImageCache.class);
-        PowerMockito.mockStatic(ImageKeys.class);
-        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean())).thenReturn(true);
+        imageKeysMock = Mockito.mockStatic(ImageKeys.class);
+        imageKeysMock.when(() -> ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean()))
+                .thenReturn(true);
     }
 
     protected void initializeStaticData() {
         StaticData data = CardDatabaseHelper.getStaticDataToPopulateOtherMocks();
-        PowerMockito.when(FModel.getMagicDb()).thenReturn(data);
+        fModelMock.when(FModel::getMagicDb).thenReturn(data);
     }
-
-    /*@ObjectFactory
-    public IObjectFactory getObjectFactory() {
-        return new org.powermock.modules.testng.PowerMockObjectFactory();
-    }*/
 }

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/2015_Modern_State_Championships_-_South_Carolina/Nick_Newman_-_Monogreen_Aggro_(Modern,_#222233).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+2 Dungrove Elder
+4 Experiment One
+4 Kalonian Tusker
+4 Leatherback Baloth
+3 Scavenging Ooze
+4 Strangleroot Geist
+2 Aspect of Hydra
+2 Dismember
+1 Gather Courage
+4 Vines of Vastwood
+4 Rancor
+20 Forest
+2 Treetop Village
+[Sideboard]
+1 Beast Within
+2 Choke
+2 Creeping Corrosion
+1 Hurricane
+1 Pithing Needle
+1 Setessan Tactics
+2 Skylasher
+2 Spellskite
+2 Torpor Orb
+1 Unravel the AEther

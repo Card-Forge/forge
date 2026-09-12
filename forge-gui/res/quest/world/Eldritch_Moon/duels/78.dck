@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Sus Antigoon
+Title=Sus Antigoon
+Icon=Sus Antigoon.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_Lexington/Robert_Mania_-_Mardu_(Modern,_#659634).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+1 Gurmag Angler
+1 Kalitas, Traitor of Ghet
+1 Crackling Doom
+1 Kolaghan's Command
+4 Lightning Bolt
+2 Lightning Helix
+2 Path to Exile
+2 Terminate
+2 Anger of the Gods
+2 Dreadbore
+4 Inquisition of Kozilek
+4 Lingering Souls
+1 Painful Truths
+2 Thoughtseize
+1 Wrath of God
+4 Nahiri, the Harbinger
+1 Sorin, Solemn Visitor
+2 Arid Mesa
+1 Blood Crypt
+4 Bloodstained Mire
+1 Godless Shrine
+1 Lavaclaw Reaches
+4 Marsh Flats
+1 Mountain
+1 Needle Spires
+2 Plains
+2 Sacred Foundry
+2 Shambling Vent
+1 Smoldering Marsh
+2 Swamp
+[Sideboard]
+1 Blessed Alliance
+2 Duress
+1 Kolaghan's Command
+2 Rest in Peace
+2 Slaughter Games
+2 Stony Silence
+2 Surgical Extraction
+1 Timely Reinforcements
+1 Wrath of God
+1 Zealous Persecution

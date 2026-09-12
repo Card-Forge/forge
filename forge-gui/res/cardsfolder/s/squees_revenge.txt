@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ ChooseNumber | SubAbility$ RepeatFlip | SpellDescription$ Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.
 # Repeat flip
 SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | ConditionCheckSVar$ TimesToFlip | ConditionSVarCompare$ GT0 | RepeatCheckSVar$ FlipsDone | RepeatSVarCompare$ LTTimesToFlip | SubAbility$ DrawIfWin
-SVar:FlipAgain:DB$ FlipACoin | WinSubAbility$ IncrementFlips | LoseSubAbility$ IncrementLoss
+SVar:FlipAgain:DB$ FlipCoin | WinSubAbility$ IncrementFlips | LoseSubAbility$ IncrementLoss
 SVar:IncrementFlips:DB$ StoreSVar | SVar$ FlipsDone | Type$ CountSVar | Expression$ FlipsDone/Plus.1
 SVar:IncrementLoss:DB$ StoreSVar | SVar$ Loss | Type$ CountSVar | Expression$ Loss/Plus.1 | SubAbility$ SetFlipsDone
 SVar:SetFlipsDone:DB$ StoreSVar | SVar$ FlipsDone | Type$ CountSVar | Expression$ TimesToFlip

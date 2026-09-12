@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/Modern_Daily_#8046430/mrgreed_-_mrgreed_(3-1)_(Modern,_#193911).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ajani's Pridemate
+4 Auriok Champion
+2 Champion of the Parish
+1 Legion Loyalist
+2 Mentor of the Meek
+3 Norin the Wary
+2 Purphoros, God of the Forge
+4 Ranger of Eos
+2 Soul's Attendant
+4 Genesis Chamber
+4 Path to Exile
+2 Banishing Light
+2 Outpost Siege
+4 Arid Mesa
+1 Battlefield Forge
+4 Cavern of Souls
+4 Marsh Flats
+4 Plains
+4 Sacred Foundry
+3 Tectonic Edge
+[Sideboard]
+3 Blood Moon
+4 Leyline of Sanctity
+2 Rest in Peace
+3 Stony Silence
+3 Wear // Tear

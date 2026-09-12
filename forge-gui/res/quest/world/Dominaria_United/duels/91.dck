@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Clockwork_Dean_-_Esper_Reanimator_(Modern,_#1463432).dck
+Deck Type=constructed
+
+[Main]
+2 Obzedat, Ghost Council
+4 Grief
+4 Solitude
+4 Priest of Fell Rites
+4 Griselbrand
+3 Tainted Indulgence
+3 Faithful Mending
+4 Shadow Prophecy
+4 Goryo's Vengeance
+4 Ephemerate
+4 Leyline Binding
+1 Polluted Delta
+1 Plains
+1 Raffine's Tower
+1 Jetmir's Garden
+1 Hallowed Fountain
+1 Island
+2 Watery Grave
+2 Swamp
+2 Godless Shrine
+4 Marsh Flats
+4 Flooded Strand
+[Sideboard]
+2 Stony Silence
+2 Prismatic Ending
+2 Flusterstorm
+2 Ashiok, Dream Render
+3 Teferi, Time Raveler
+4 Thoughtseize

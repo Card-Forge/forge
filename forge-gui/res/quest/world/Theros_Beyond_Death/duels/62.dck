@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Kasagawa_Yousuke_-_White_Weenie_(Modern,_#1025686).dck
+Deck Type=constructed
+
+[Main]
+1 Stonecoil Serpent
+2 Daxos, Blessed by the Sun
+2 Anafenza, Kin-Tree Spirit
+2 Tomik, Distinguished Advokist
+3 Kytheon, Hero of Akros
+3 Isamaru, Hound of Konda
+4 Heliod, Sun-Crowned
+4 Ranger-Captain of Eos
+4 Giver of Runes
+4 Walking Ballista
+4 Mox Amber
+2 Legion's Landing
+4 On Thin Ice
+1 Eiganjo Castle
+4 Castle Ardenvale
+16 Snow-Covered Plains
+[Sideboard]
+1 Burrenton Forge-Tender
+1 Runed Halo
+2 Remorseful Cleric
+2 Grand Abolisher
+2 Disenchant
+2 Winds of Abandon
+2 Worship
+3 Damping Sphere

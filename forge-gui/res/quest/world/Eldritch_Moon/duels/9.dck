@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/m3l0q_-_Abzan_Midrange_(Standard,_#639326).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Sylvan Advocate
+4 Tireless Tracker
+4 Grasp of Darkness
+2 Ultimate Price
+3 Transgress the Mind
+3 Oath of Liliana
+4 Oath of Nissa
+4 Gideon, Ally of Zendikar
+3 Liliana, the Last Hope
+2 Ob Nixilis Reignited
+1 Sorin, Grim Nemesis
+3 Caves of Koilos
+4 Evolving Wilds
+3 Forest
+4 Hissing Quagmire
+4 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+2 Swamp
+[Sideboard]
+2 Caustic Caterpillar
+2 Den Protector
+1 Gilt-Leaf Winnower
+2 Infinite Obliteration
+3 Languish
+2 Ruinous Path

@@ -1,6 +1,6 @@
 Name:Marina Vendrell's Grimoire
 ManaCost:5 U
-Types:Legendary Artifact
+Types:Legendary Artifact Book
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigDraw1 | TriggerDescription$ When CARDNAME enters, if you cast it, draw five cards.
 SVar:TrigDraw1:DB$ Draw | NumCards$ 5
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size and don't lose the game for having 0 or less life.

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Francesco_Pacenza_-_Wx_Humans_(Standard,_#665717).dck
+Deck Type=constructed
+
+[Main]
+3 Hanweir Garrison
+4 Inventor's Apprentice
+3 Kari Zev, Skyship Raider
+4 Metallic Mimic
+2 Pia Nalaar
+4 Thalia's Lieutenant
+1 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Town Gossipmonger
+2 Aethersphere Harvester
+4 Harnessed Lightning
+2 Declaration in Stone
+2 Always Watching
+4 Aether Hub
+4 Inspiring Vantage
+5 Mountain
+8 Plains
+[Sideboard]
+2 Authority of the Consuls
+2 Fragmentize
+2 Gideon, Ally of Zendikar
+2 Repel the Abominable
+4 Shock
+2 Tears of Valakut
+1 Thalia, Heretic Cathar

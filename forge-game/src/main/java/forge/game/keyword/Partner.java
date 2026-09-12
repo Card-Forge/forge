@@ -14,7 +14,7 @@ public class Partner extends SimpleKeyword {
 
     @Override
     protected void parse(String details) {
-        with = details;
+        with = details.isEmpty() ? null : details;
     }
 
     @Override

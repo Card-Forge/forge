@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/John_McCarroll_-_Gruul_Eldrazi_(Modern,_#785782).dck
+Deck Type=constructed
+
+[Main]
+1 Birds of Paradise
+4 Bloodbraid Elf
+4 Eldrazi Obligator
+4 Gruul Spellbreaker
+4 Noble Hierarch
+4 Reality Smasher
+3 Scavenging Ooze
+4 Thought-Knot Seer
+1 Boreal Druid
+4 Lightning Bolt
+4 Ancient Stirrings
+3 Forest
+1 Mountain
+4 Cavern of Souls
+2 Copperline Gorge
+4 Eldrazi Temple
+4 Grove of the Burnwillows
+4 Karplusan Forest
+1 Kessig Wolf Run
+[Sideboard]
+2 Engineered Explosives
+2 Pithing Needle
+3 Relic of Progenitus
+2 Alpine Moon
+2 Ancient Grudge
+2 Dismember
+1 Surgical Extraction
+1 Domri, Chaos Bringer

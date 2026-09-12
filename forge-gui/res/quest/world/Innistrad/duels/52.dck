@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Les_Hordes_de_Maltus/Thomas_LITZELMANN_-_Vampire_(Modern,_#22909).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+2 Bloodline Keeper
+1 Captivating Vampire
+4 Gatekeeper of Malakir
+4 Guul Draz Vampire
+2 Kalastria Highborn
+1 Phyrexian Obliterator
+4 Vampire Nighthawk
+3 Vampire Nocturnus
+2 Sword of Feast and Famine
+2 Dismember
+2 Doom Blade
+2 Duress
+2 Inquisition of Kozilek
+4 Sign in Blood
+22 Swamp
+[Sideboard]
+2 Black Sun's Zenith
+2 Deathmark
+2 Despise
+1 Go for the Throat
+2 Marsh Casualties
+1 Memoricide
+1 Sword of Body and Mind
+1 Sword of War and Peace
+3 Vampire Hexmage

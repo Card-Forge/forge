@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Alberto_Porras_López_-_Jund_Control_(Standard,_#1455583).dck
+Deck Type=constructed
+
+[Main]
+2 Voldaren Epicure
+3 Workshop Warchief
+4 Soul of Windgrace
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+4 Titan of Industry
+2 Unleash the Inferno
+2 Riveteers Charm
+2 Infernal Grasp
+4 Cut Down
+3 Diregraf Rebirth
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Mountain
+1 Boseiju, Who Endures
+2 Sulfurous Springs
+4 Rockfall Vale
+4 Ziatora's Proving Ground
+4 Karplusan Forest
+4 Haunted Ridge
+4 Deathcap Glade
+[Sideboard]
+1 Infernal Grasp
+1 Riveteers Charm
+1 Unleash the Inferno
+1 Tear Asunder
+2 Toxrill, the Corrosive
+3 Llanowar Loamspeaker
+3 Duress
+3 Abrade

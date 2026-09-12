@@ -1,0 +1,9 @@
+Name:Moloid
+ManaCost:no cost
+Colors:green
+Types:Creature Minion
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this token attacks, you may mill a card.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | Optional$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this token attacks, you may mill a card.

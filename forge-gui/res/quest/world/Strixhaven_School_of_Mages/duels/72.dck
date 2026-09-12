@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Adralak_-_Golgari_Evolution_(Modern,_#1182350)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Reclamation Sage
+1 Hapatra, Vizier of Poisons
+1 Essence Warden
+1 Birds of Paradise
+1 Zulaport Cutthroat
+4 Geralf's Messenger
+4 Ignoble Hierarch
+4 Strangleroot Geist
+4 Wall of Roots
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+4 Chord of Calling
+4 Eldritch Evolution
+1 Grist, the Hunger Tide
+1 Yavimaya, Cradle of Growth
+1 Urborg, Tomb of Yawgmoth
+1 Dryad Arbor
+1 Swamp
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Forest
+4 Twilight Mire
+4 Verdant Catacombs
+4 Blooming Marsh
+[Sideboard]
+1 Kitchen Finks
+2 Culling Ritual
+2 Endurance
+2 Fatal Push
+2 Force of Vigor
+2 Necromentia
+2 Thoughtseize
+2 Veil of Summer

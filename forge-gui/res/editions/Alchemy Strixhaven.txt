@@ -1,0 +1,38 @@
+[metadata]
+Code=YSOS
+Date=2026-05-19
+Name=Alchemy: Strixhaven
+Type=Online
+ScryfallCode=YSOS
+
+[cards]
+1 R Honor the Past @Jason A. Engle
+2 U Unbreakable Remnant @Taras Susak
+3 R Galathul Galecaller @Justine Cruz
+4 U Interdisciplinary Studies @Fariba Khamseh
+5 M Corpseweaver Prodigy @Filip Burburan
+6 R Feed the Bog @Igor Grechanyi
+7 U Impose Hierarchy @Elizabeth Peiró
+8 R Consumed by History @Elizabeth Peiró
+9 U Crescendo Conductor @Pascal Quidault
+10 U Algorithmic Ferocity @Andrey Kuzinskiy
+11 M Ursine Guide @Tomas Duchek
+12 R Variable Solutions @Anastasia Ovchinnikova
+13 R Advanced Floral Invocations @Filip Burburan
+14 R Anina, Natural Parallelist @Anna Steinbauer
+15 U Archaeomancer's Spade @Tomas Duchek
+16 R Blood Age Muster @Antonio José Manzanedo
+17 R Distracted Botanist @Michele Giorgi
+18 R Expansive Reapplication @Chris Seaman
+19 R Glorifying Verse @Jessica Liu
+20 U Grave Studies @Abz J Harding
+21 R Head of the Class @Nia Kovalevski
+22 U Inspiring Easel @Craig J Spearing
+23 M Paradigm Shifter @Jessica Liu
+24 R Phoenix of Iteration @Andrey Kuzinskiy
+25 U Scalar Scholar @Craig J Spearing
+26 U Scintillating Encore @Justine Cruz
+27 R Soovril, Patient Antiquarian @Andrey Kuzinskiy
+28 R Summitfest Closing Ceremony @Anastasia Ovchinnikova
+29 M Sundering Sentinel @Jason A. Engle
+30 M The Mystical Archive @Pascal Quidault

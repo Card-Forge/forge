@@ -104,7 +104,7 @@ public class TargetSelection {
             return chooseCardFromStack(mandatory, numTargets);
         }
 
-        List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
+        List<GameEntity> candidates = tgt.getAllCandidates(this.ability);
         boolean hasEnoughCandidates = candidates.size() >= minTargets;
         if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             PlayerCollection controllers = new PlayerCollection();
@@ -157,7 +157,7 @@ public class TargetSelection {
             //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
             //note that we don't handle auto-targeting cards this way since it's possible that the result will be undesirable
             if (minTargets != 0) {
-                List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true, true);
+                List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true);
                 if (nonCardTargets.size() == 1) {
                     return ability.getTargets().add(nonCardTargets.get(0));
                 }

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Blue Devil
+Title=Blue Devil
+Icon=Blue Devil.jpg
+Difficulty=Medium
+Description=Worldwake/Armada_Games_$2K_Standard/David_Sharfman_-_Jund_(Standard,_#2362).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Gatekeeper of Malakir
+4 Malakir Bloodwitch
+3 Sprouting Thrinax
+3 Vampire Nighthawk
+2 Bituminous Blast
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+3 Maelstrom Pulse
+4 Dragonskull Summit
+1 Forest
+1 Lavaclaw Reaches
+1 Mountain
+4 Raging Ravine
+4 Savage Lands
+7 Swamp
+4 Verdant Catacombs
+[Sideboard]
+3 Chain Reaction
+3 Duress
+2 Grim Discovery
+2 Magma Spray
+2 Mind Rot
+1 Smother

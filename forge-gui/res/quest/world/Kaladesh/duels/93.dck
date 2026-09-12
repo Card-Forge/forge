@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Cow
+Title=Cow
+Icon=Cow.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/SCG_Invitational_Qualifier_-_Bernardsville,_NJ/Gerard_Fabiano_-_Burn_(Modern,_#658205).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+2 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+3 Bloodstained Mire
+4 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Chandra, Torch of Defiance
+2 Destructive Revelry
+2 Ensnaring Bridge
+4 Molten Rain
+2 Path to Exile
+2 Rest in Peace
+1 Stony Silence

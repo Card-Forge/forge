@@ -2,6 +2,6 @@ Name:Vampire Warlord
 ManaCost:4 B
 Types:Creature Vampire Warrior
 PT:4/2
-A:AB$ Regenerate | Cost$ Sac<1/Creature.Other/another creature> | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ Sac<1/Creature.Other/another creature> | SpellDescription$ Regenerate CARDNAME. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)
 AI:RemoveDeck:All
-Oracle:Sacrifice another creature: Regenerate Vampire Warlord. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
+Oracle:Sacrifice another creature: Regenerate Vampire Warlord. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)

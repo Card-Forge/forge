@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Andrew_Dowd_-_Monored_Frenzy_(Standard,_#765916).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+2 Risk Factor
+4 Shock
+4 Wizard's Lightning
+3 Experimental Frenzy
+23 Mountain
+[Sideboard]
+2 Dire Fleet Daredevil
+1 Experimental Frenzy
+2 Fiery Cannonade
+3 Fight with Fire
+3 Lava Coil
+4 Rekindling Phoenix

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Cow
+Title=Cow
+Icon=Cow.jpg
+Difficulty=Easy
+Description=Kaladesh/Standard_PTQ_#10149377/Zonast_-_BG_Delirium_(Standard,_#642336).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gnarlwood Dryad
+4 Grim Flayer
+1 Ishkanah, Grafwidow
+1 Kalitas, Traitor of Ghet
+1 Mindwrack Demon
+1 Noxious Gearhulk
+3 Sylvan Advocate
+2 Tireless Tracker
+2 Verdurous Gearhulk
+4 Smuggler's Copter
+3 Grapple with the Past
+4 Grasp of Darkness
+4 Traverse the Ulvenwald
+3 Liliana, the Last Hope
+4 Blooming Marsh
+7 Forest
+4 Hissing Quagmire
+8 Swamp
+[Sideboard]
+2 Appetite for the Unnatural
+3 Dead Weight
+1 Distended Mindbender
+1 Natural State
+2 Nissa, Vital Force
+2 To the Slaughter
+4 Transgress the Mind

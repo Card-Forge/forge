@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Lucas_Delaveau_-_Rakdos_Scam_(Modern,_#1747623).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Fury
+4 Grief
+1 Kroxa, Titan of Death's Hunger
+4 Orcish Bowmasters
+4 Ragavan, Nimble Pilferer
+1 Seasoned Pyromancer
+4 Fable of the Mirror-Breaker
+2 Fatal Push
+4 Not Dead After All
+2 Terminate
+2 Undying Malice
+4 Thoughtseize
+3 Blackcleave Cliffs
+4 Blood Crypt
+2 Bloodstained Mire
+1 Marsh Flats
+3 Polluted Delta
+3 Swamp
+1 Takenuma, Abandoned Mire
+3 Verdant Catacombs
+[Sideboard]
+2 Blood Moon
+2 Chalice of the Void
+2 Engineered Explosives
+1 Fatal Push
+1 Kolaghan's Command
+1 Lightning Bolt
+1 Pithing Needle
+2 Sheoldred, the Apocalypse
+1 Terminate
+2 Unlicensed Hearse

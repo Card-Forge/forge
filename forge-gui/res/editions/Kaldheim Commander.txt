@@ -9,7 +9,7 @@ ScryfallCode=KHC
 1 M Lathril, Blade of the Elves @Caroline Gariba
 2 M Ranar the Ever-Watchful @Kieran Yanner
 3 R Cosmic Intervention @Alexander Mokhov
-4 R Hero of Bretagard @Heonhwa Choe
+4 R Hero of Bretagard @Heonhwa
 5 R Stoic Farmer @Svetlin Velinov
 6 R Sage of the Beyond @Cristi Balanescu
 7 R Spectral Deluge @Kieran Yanner

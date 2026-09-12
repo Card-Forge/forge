@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Black
+Title=Dungeon Crawling Black
+Icon=Dungeon Crawling Black.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Bubuchi_Naila_-_Naya_Midrange_(Standard,_#1407299).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 Rocco, Cabaretti Caterer
+3 Sanctuary Warden
+4 Titan of Industry
+4 Workshop Warchief
+4 Fleetfoot Dancer
+4 Fable of the Mirror-Breaker
+4 Esika's Chariot
+4 Play with Fire
+4 Emeria's Call
+4 Incandescent Aria
+2 Overgrown Farmland
+2 Forest
+2 Plains
+3 Sundown Pass
+3 Needleverge Pathway
+3 Branchloft Pathway
+3 Mountain
+4 Jetmir's Garden
+[Sideboard]
+1 Reduce to Memory
+1 Containment Breach
+2 Environmental Sciences
+3 Legion Angel

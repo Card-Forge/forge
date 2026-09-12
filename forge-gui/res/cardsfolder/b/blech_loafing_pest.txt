@@ -1,0 +1,9 @@
+Name:Blech, Loafing Pest
+ManaCost:1 B G
+Types:Legendary Creature Pest
+PT:3/4
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on each Pest, Bat, Insect, Snake, and Spider you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Pest.YouCtrl,Bat.YouCtrl,Insect.YouCtrl,Snake.YouCtrl,Spider.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, put a +1/+1 counter on each Pest, Bat, Insect, Snake, and Spider you control.

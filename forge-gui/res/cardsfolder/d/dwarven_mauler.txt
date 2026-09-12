@@ -1,0 +1,6 @@
+Name:Dwarven Mauler
+ManaCost:R
+Types:Creature Dwarf Warrior
+PT:2/1
+S:Mode$ ReduceCost | ValidTarget$ Card.Self | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 2 | Description$ Equip abilities you activate that target this creature cost {2} less to activate.
+Oracle:Equip abilities you activate that target this creature cost {2} less to activate.

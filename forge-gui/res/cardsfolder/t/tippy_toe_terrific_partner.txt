@@ -1,0 +1,12 @@
+Name:Tippy-Toe, Terrific Partner
+ManaCost:3 G
+Types:Legendary Creature Squirrel Hero
+PT:2/4
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DBReplace | Description$ If you would create one or more tokens, instead create those tokens plus an additional Food token.
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | TokenScript$ c_a_food_sac
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you gained life this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$Sacrifice|Token & Type$Food
+DeckHints:Ability$LifeGain
+Oracle:If you would create one or more tokens, instead create those tokens plus an additional Food token.\nAt the beginning of your end step, if you gained life this turn, draw a card.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/whitefangshinobi_-_Mill_(Modern,_#991657).dck
+Deck Type=constructed
+
+[Main]
+1 Jace, Vryn's Prodigy
+2 Snapcaster Mage
+4 Jace's Phantasm
+4 Hedron Crab
+4 Mesmeric Orb
+2 Drown in the Loch
+3 Surgical Extraction
+3 Fatal Push
+4 Archive Trap
+4 Visions of Beyond
+3 Inquisition of Kozilek
+4 Glimpse the Unthinkable
+1 Shelldock Isle
+1 Oboro, Palace in the Clouds
+1 Darkslick Shores
+2 Watery Grave
+2 Snow-Covered Swamp
+3 Field of Ruin
+4 Snow-Covered Island
+4 Polluted Delta
+4 Flooded Strand
+[Sideboard]
+1 Unmoored Ego
+1 Torpor Orb
+1 Set Adrift
+1 Lurrus of the Dream-Den
+2 Collective Brutality
+2 Damnation
+2 Echoing Truth
+2 Drown in the Loch
+3 Crypt Incursion

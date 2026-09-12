@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Kings Contest
+Title=The Kings Contest
+Icon=The Kings Contest.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Alex_Keng_-_Selesnya_Bogles_(Standard,_#947589).dck
+Deck Type=constructed
+
+[Main]
+3 Hunted Witness
+4 Alseid of Life's Bounty
+4 Paradise Druid
+4 Setessan Champion
+4 Karametra's Blessing
+1 Sentinel's Mark
+2 Warbriar Blessing
+2 Angelic Gift
+3 Season of Growth
+4 Sentinel's Eyes
+4 All That Glitters
+4 Setessan Training
+2 Blossoming Sands
+4 Temple Garden
+7 Forest
+8 Plains
+[Sideboard]
+1 Sentinel's Mark
+1 Return to Nature
+1 Knight of Autumn
+1 Apostle of Purifying Light
+1 Ravnica at War
+1 Devout Decree
+1 Revoke Existence
+2 Pacifism
+2 Banishing Light
+2 Siona, Captain of the Pyleas
+2 Destiny Spinner

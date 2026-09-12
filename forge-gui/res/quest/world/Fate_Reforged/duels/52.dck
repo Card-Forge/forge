@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/PPTQ_Artecolor_&_Modellismo_-_Voghera,_Italy/Michele_Ruffinazzi_-_Red_Deck_Wins_(Modern,_#220105).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+2 Searing Blaze
+1 Shard Volley
+3 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Blackcleave Cliffs
+1 Blood Crypt
+4 Bloodstained Mire
+1 Clifftop Retreat
+4 Mountain
+2 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+1 Combust
+2 Deflecting Palm
+1 Kolaghan, the Storm's Fury
+3 Molten Rain
+2 Rakdos Charm
+2 Smash to Smithereens
+2 Wear // Tear

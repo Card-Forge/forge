@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/Andre_Amaro_-_Sultai_Oculus_(Modern,_#2626406).dck
+Deck Type=constructed
+
+[Main]
+4 Cosmogoyf
+4 Psychic Frog
+3 Abhorrent Oculus
+3 Murktide Regent
+4 Fatal Push
+4 Thought Scour
+2 Sheoldred's Edict
+3 Rakshasa's Bargain
+2 Become Immense
+4 Thoughtseize
+3 Inquisition of Kozilek
+4 Malevolent Rumble
+2 Boseiju, Who Endures
+1 Breeding Pool
+4 Polluted Delta
+1 Undercity Sewers
+1 Island
+1 Hedge Maze
+2 Scalding Tarn
+3 Bloodstained Mire
+1 Underground Mortuary
+1 Swamp
+2 Watery Grave
+1 Overgrown Tomb
+[Sideboard]
+3 Consign to Memory
+2 Surgical Extraction
+3 Illness in the Ranks
+2 Toxic Deluge
+2 Force of Negation
+1 Force of Despair
+2 Subtlety

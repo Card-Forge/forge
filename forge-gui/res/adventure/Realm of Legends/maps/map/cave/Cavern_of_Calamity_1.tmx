@@ -11,12 +11,12 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt18EKgCAMBmBvEUU33yh6lPBBOvcuvWF4CGLodLbNkg7/dZ+DOdSNxjim7H06nLUo0fZyXCkzZkt70NXy7q62WerOwzfcbeJz14cuFtuVJeRCGzsLl0vtX9Kt0e9lx/aVpIvt599t09WYK2hrzXONvfEmd0lE0j1sOC24cJYlXHhXUu9nWI/icv17fHJMTo9iU2qdhzaEwg==
+   eJzL4GFgyKAS7uMkjKlpFimY3vYRYy+t7MRlN63tQ7eXXvYh20tvO8m19xHj0LC3hW/w2IsPi7LjxvjksdmLbjc+t+Czl5CbKPE/Le0dCP/C7MZVXtHSXnzl86i9w9NeeqQrdLvplZ4HotwYTPa6EcC0tHejKHY8HOxFT8u0sBc9rxBqP6ObR4q91Or3gDAxdlLTPlLsJsUsAAH+hyE=
   </data>
  </layer>
  <layer id="6" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYKAfeMpImvo0TuKwEzf13OjCjd8uZLfRAgyUvbjsRhbHB0BxS2r8ErKbln5FtxeZTw8wkPbi4yODn6oMDL/Q8G9Vyu0lFLfT1RgYJuPA5NhLbHoiZK8rEwODGxC7M5HuDnSwnoOB4T3QPRs4CNv7GGjfEyB+SgV7XwPtfAPFhOxtZGZgaALiZmbK7UUG1IxfathLCGzkGBh731JYJpiqMzCYYcGjgDogFpgf4/DgP1TIr9jAb6jZ+PBItleUHT+mpb3+YtjxQNpLrN2E7EUH1LJ3JjN56YlSe6kNBspeagIAqLSblQ==
+   eJxjYKAfeMpImvo0TuKwEzf13OjCjd8uZLfRAgyUvbjsRhbHB0BxS2r8ErKbln5FtxeZTw8wkPbi4yODn6oMDL/Q8G9V8u0lNj1NV2NgmIwDk2svMemJkL2uTAwMbkDszkS6O9DBeg4GhvdA92zgIGzvY6B9T4D4KRXsfQ208w0UE7K3kZmBoQmIm5kptxcZUDN+qWEvIbCRY2DsfUthmWCqzsBghgWPAuqAWGB+jMOD/1Ahv2IDv6Fm48Mj2V5RdvyYlvb6i2HHA2kvsXYTshcdUMvemczkpSdK7aU2GCh7qQkA1wOcBA==
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="30">
@@ -29,12 +29,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYMAN3DhJw4TAU0b8akkxixDwBeLXUBrZbFx2kgOcuAmrISW8lnFRz15sdqODOl7S7CZkL6GwxgWWAu12AZp9noOB4QIQX+RAZZPiX1IByN5coL48IM7nRGXT2l5uoL95gJiXC5VNqr2++JVh2IsLEGOvK1rcvqaTvY/JzKMge7Gl7SVE5jVKAChdo+NRQBiQWn7M4iHfLi8ku7CVlxa8uPVSArxw+JEadd9gs3cmD3Z7qVXXEwLIdtDLTnT76W3ncAZ1NMqT5AJi68ChDohpn1MaN+jmk9vfmImjTjBHch85fRpy+z7k2kfIDGoDAKI+POM=
+   eJztl0sOgjAQQMuOX8+ja6MuSDiKegPugWv1OuoVNK64hEPUpFSG6QyFqPElE7po59GWtlQpnGXEC4pb0F2Xk4sih6ieTzM35pQwS+g6nPE6xP68bW6bQvPclJcaa4w9uOeQ+xgqdYI4h80yp79cau8K2q0hNlGzPLQ3gX6nEDpulrnevLvamxfDxbuw5rZieC/BIyTeq3CNvrw2O8e11of6u7bjDw13/9imcldmuNr2y6nG2/YhQ/ro4+z7NG+Ztnt9nfUUpmMsp+0f2/nLFAOtSSmuZ+C34/J/3ndu7PzS+0aJnAkT4/0kdxrp3Ufqo3L45g6Mcj7c
   </data>
  </layer>
  <layer id="9" name="Clutter" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6KDdCBNjk6OX3bjcQi5wZWJgcANidyZUNq3tfQy04wkQP2VCZdMCIPurkZmBoQmIm5lR2bQA2Py1ghOCkd1EbYDNXzB7aR3W6ABmL7qb7LnpYz86wGbvVzYGBic6u8dBmYFhKRdlZtAyDeEDyGmInm5ATkPEpGNQGNPSDaNgFIyCwQ2ERBkYhIFYBEojY5AYPYG/GARvoqO9MDtHir3IdtPb3uEGAMQVQG4=
+   eJxjYBgF6KDdCBNjk6OX3bjcQi5wZWJgcANidyZUNq3tfQy04wkQP2VCZdMCIPurkZmBoQmIm5lR2bQA2Py1ghOCkd1EbYDNXzB7aR3W6ABmL7qbHjHSx350gM3er2wMDE7c9HWHgzIDw1IuysygZRrCB5DTED3dgJyGiEnHoDCmpRtGwSgYBYMbCIkyMAgDsQiURsYgMXoCfzEI3kRHe2F2jhR7ke2mt73DDQAAAy1BoA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Niv Mizzet
+Title=Niv Mizzet
+Icon=Niv Mizzet.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/GPT_Madrid_-_Evolution_Madrid_Norte/Alejandro_Hevia_-_Red_Deck_Wins_(Modern,_#92372).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Combust
+3 Destructive Revelry
+2 Dragon's Claw
+1 Lightning Helix
+2 Molten Rain
+3 Relic of Progenitus
+2 Searing Blood

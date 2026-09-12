@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -29,13 +28,13 @@ import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityAdditionalActivations;
 import forge.game.staticability.StaticAbilityCastWithFlash;
-import forge.game.staticability.StaticAbilityExhaust;
 import forge.game.staticability.StaticAbilityNumLoyaltyAct;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -88,9 +87,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
-            }
-            if (value.equals("Desert")) {
-                this.setDesert(true);
             }
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
@@ -148,20 +144,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
 
-        if (params.containsKey("ActivationCardsInHand")) {
-            this.setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
-        }
-        if (params.containsKey("OrActivationCardsInHand")) {
-            this.setActivateCardsInHand2(Integer.parseInt(params.get("OrActivationCardsInHand")));
-        }
-
         if (params.containsKey("IsPresent")) {
             this.setIsPresent(params.get("IsPresent"));
             if (params.containsKey("PresentCompare")) {
                 this.setPresentCompare(params.get("PresentCompare"));
             }
             if (params.containsKey("PresentZone")) {
-                this.setPresentZone(ZoneType.smartValueOf(params.get("PresentZone")));
+                this.setPresentZones(ZoneType.listValueOf(params.get("PresentZone")));
             }
         }
 
@@ -219,7 +208,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     cp = CardCopyService.getLKICopy(c);
                 }
 
-                cp.animateBestow(!cp.isLKI());
+                cp.animateBestow(false);
             }
         }
 
@@ -240,53 +229,40 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
             if (sa.isSpell()) {
-                final CardPlayOption o = c.mayPlay(sa.getMayPlay());
+                final CardPlayOption o = sa.getMayPlayOption();
                 if (o == null || sa.isCastFromPlayEffect()) {
                     return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
                 } else if (o.getPlayer() == activator) {
-                    Map<String,String> params = sa.getMayPlay().getMapParams();
-
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
-                        final List<CardPlayOption> opts = c.mayPlay(activator);
-                        boolean hasOtherGrantor = false;
-                        for (CardPlayOption opt : opts) {
-                            if (opt.grantsZonePermissions()) {
-                                hasOtherGrantor = true;
-                                break;
-                            }
-                        }
-                        if (cardZone.is(ZoneType.Graveyard) && sa.isAftermath()) {
-                            // Special exclusion for Aftermath, useful for e.g. As Foretold
-                            return true;
-                        }
-                        if (!hasOtherGrantor) {
-                            return false;
-                        }
+                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
+                            && !c.mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
+                        return false;
                     }
 
+                    Map<String,String> params = sa.getMayPlay().getMapParams();
                     if (params.containsKey("Affected")) {
                         if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
-
                     if (params.containsKey("ValidSA")) {
                         if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
-
-                    // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
-                        return false;
-                    }
-
                     return true;
                 }
             }
+            return false;
+        }
+
+        // Reaching here means the card is in a zone of the restricted type, and that has to be
+        // the activator's own. CR 109.5: a card outside the battlefield has no controller, so the
+        // "you" in "your graveyard" is its owner. Shaman's Trance makes every graveyard theirs.
+        if (sa.isSpell() && activator != c.getOwner()
+                && !(this.getZone() == ZoneType.Graveyard && activator.hasKeyword("Shaman's Trance"))) {
             return false;
         }
 
@@ -389,17 +365,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (getCardsInHand() != -1) {
-            int h = activator.getCardsIn(ZoneType.Hand).size();
-            if (getCardsInHand2() != -1) {
-                if (h != getCardsInHand() && h != getCardsInHand2()) {
-                    return false;
-                }
-            } else if (h != getCardsInHand()) {
-                return false;
-            }
-        }
-
         if (isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
@@ -430,11 +395,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (isDesert()) {
-            if (!activator.hasDesert()) {
-                return false;
-            }
-        }
         if (isBlessing()) {
             if (!activator.hasBlessing()) {
                 return false;
@@ -455,12 +415,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.getIsPresent() != null) {
+        if (getIsPresent() != null) {
             FCollection<GameObject> list;
             if (getPresentDefined() != null) {
                 list = AbilityUtils.getDefinedObjects(sa.getHostCard(), getPresentDefined(), sa);
             } else {
-                list = new FCollection<>(game.getCardsIn(getPresentZone()));
+                list = new FCollection<>(game.getCardsIn(getPresentZones()));
             }
 
             Predicate<GameObject> restriction = GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa);
@@ -498,6 +458,14 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     return false;
                 }
             }
+        } else if (sa.isBoast()) {
+            if (sa.getActivationsThisTurn() >= StaticAbilityAdditionalActivations.getLimit(c, sa, activator)) {
+                return false;
+            }
+        } else if (sa.isExhaust() || sa.isPowerUp()) {
+            if (sa.getActivationsThisGame() >= StaticAbilityAdditionalActivations.getLimit(c, sa, activator)) {
+                return false;
+            }
         }
 
         // CR 702.37e / 702.168b
@@ -528,25 +496,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
-        if (sa.isBoast()) {
-            int limit = activator.hasKeyword("Creatures you control can boast twice during each of your turns rather than once.") ? 2 : 1;
-            if (limit <= sa.getActivationsThisTurn()) {
-                return false;
-            }
-        } else if (sa.isExhaust()) {
-            if (sa.getActivationsThisGame() > 0 && !StaticAbilityExhaust.anyWithExhaust(activator)) {
-                return false;
-            }
-        } else if (sa.isPowerUp()) {
-            if (sa.getActivationsThisGame() > 0) {
-                return false;
-            }
-        }
-
         // Rule 605.3c about Mana Abilities
         if (sa.isManaAbility()) {
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                if (i.getPayment().getAbility().equals(sa)) {
+            for (CostPaymentStack.Entry i : game.costPaymentStack) {
+                if (i.payment().getAbility().equals(sa)) {
                     return false;
                 }
             }

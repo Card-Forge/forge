@@ -15,7 +15,7 @@ ScryfallCode=NEO
 3 U Banishing Slash @Josu Hernaiz
 4 C Befriending the Moths @Matt Stewart
 5 U Blade-Blizzard Kitsune @Andrew Mar
-6 U Born to Drive @Heonhwa Choe
+6 U Born to Drive @Heonhwa
 7 R Brilliant Restoration @Wylie Beckert
 8 R Cloudsteel Kirin @Jonathan Kuo
 9 C Dragonfly Suit @Darren Tan
@@ -96,7 +96,7 @@ ScryfallCode=NEO
 84 M Tezzeret, Betrayer of Flesh @Bryan Sola
 85 U Thirst for Knowledge @Anna Pavleeva
 86 R Thousand-Faced Shadow @Ekaterina Burmak
-87 U Assassin's Ink @Heonhwa Choe
+87 U Assassin's Ink @Heonhwa
 88 R Biting-Palm Ninja @Andreas Zafiratos
 89 M Blade of the Oni @Jason A. Engle
 90 C Chainflail Centipede @Viko Menezes
@@ -241,7 +241,7 @@ ScryfallCode=NEO
 229 U Naomi, Pillar of Order @Joshua Raphael
 230 U Oni-Cult Anvil @Yeong-Hao Han
 231 U Prodigy's Prototype @Ryan Pancoast
-232 R Raiyuu, Storm's Edge @Heonhwa Choe
+232 R Raiyuu, Storm's Edge @Heonhwa
 233 R Risona, Asari Commander @Ekaterina Burmak
 234 R Satoru Umezawa @Anna Pavleeva
 235 R Satsuki, the Living Lore @Ryan Pancoast
@@ -322,7 +322,7 @@ ScryfallCode=NEO
 407 R Kyodai, Soul of Kamigawa @Yukihiro Maruo
 408 M Kairi, the Swirling Sky @Yoshiya
 409 M Junji, the Midnight Sky @Satoru Senda
-410 M Atsushi, the Blazing Sky @Toshiaki Takayama
+410 M Atsushi, the Blazing Sky @Takayama Toshiaki
 411 M Kura, the Boundless Sky @Satoru Senda
 412 R Boseiju, Who Endures @Esuthio
 413 R Eiganjo, Seat of the Empire @ZOUNOSE
@@ -343,7 +343,7 @@ ScryfallCode=NEO
 316 M The Wandering Emperor @Hisashi Momose
 317 C Guardians of Oboro @Domco.
 318 C Nezumi Bladeblesser @Kemonomichi
-319 C Akki Ronin @Nijimaarc
+319 C Akki Ronin @NIJIMAARC
 320 R Goro-Goro, Disciple of Ryusei @Rorubei
 321 U Heiko Yamazaki, the General @Xiaji & Yangyang
 322 C Peerless Samurai @Yosuke Adachi
@@ -375,7 +375,7 @@ ScryfallCode=NEO
 348 U Kappa Tech-Wrecker @Yoshiro Ambe
 349 R Spring-Leaf Avenger @Hirokorin
 350 M Kaito Shizuki @Hagiya Kaoru
-351 R Kotose, the Silent Spider @PE-nekoR
+351 R Kotose, the Silent Spider @Penekor
 352 R Satoru Umezawa @Raita Kazama
 353 U Silver-Fur Master @Fukuzo Katsura
 354 R The Restoration of Eiganjo @yo-ne
@@ -391,7 +391,7 @@ ScryfallCode=NEO
 364 R Cloudsteel Kirin @Moopic
 365 R Farewell @Fuzichoco
 366 R Invoke Justice @TODEE
-367 R Light-Paws, Emperor's Voice @Nijimaarc
+367 R Light-Paws, Emperor's Voice @NIJIMAARC
 368 R Lion Sash @TODEE
 369 R March of Otherworldly Light @Gozz
 370 R Invoke the Winds @Nakamura8
@@ -409,7 +409,7 @@ ScryfallCode=NEO
 382 R Soul Transfer @Dai-XT
 383 M Explosive Singularity @Ari
 384 R Invoke Calamity @ZOUNOSE
-385 R Lizard Blades @PE-nekoR
+385 R Lizard Blades @Penekor
 386 R March of Reckless Joy @Miyaki Hajime
 387 R Ogre-Head Helm @Dai-XT
 388 R Scrap Welder @Areku Nishiki
@@ -508,7 +508,7 @@ ScryfallCode=NEO
 488 R Isshin, Two Heavens as One @Ryan Pancoast
 489 M The Kami War @Kieran Yanner
 490 R Kotose, the Silent Spider @Marta Nael
-491 R Raiyuu, Storm's Edge @Heonhwa Choe
+491 R Raiyuu, Storm's Edge @Heonhwa
 492 R Risona, Asari Commander @Ekaterina Burmak
 493 R Satoru Umezawa @Anna Pavleeva
 494 R Satsuki, the Living Lore @Ryan Pancoast
@@ -551,7 +551,7 @@ A-116 U A-Nezumi Prowler @Joseph Weston
 A-131 C A-Akki Ronin @Olivier Bernard
 A-156 C A-Peerless Samurai @Micah Epstein
 A-215 U A-Asari Captain @Donato Giancola
-A-232 R A-Raiyuu, Storm's Edge @Heonhwa Choe
+A-232 R A-Raiyuu, Storm's Edge @Heonhwa
 A-234 R A-Satoru Umezawa @Anna Pavleeva
 A-236 U A-Silver-Fur Master @Carl Critchlow
 A-242 U A-Circuit Mender @Hector Ortiz

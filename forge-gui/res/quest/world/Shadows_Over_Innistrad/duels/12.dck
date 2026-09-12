@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/SCG_States_Honolulu/Matthew_Nohara_-_Abzan_(Standard,_#619416).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Duskwatch Recruiter
+3 Eldrazi Displacer
+2 Kalitas, Traitor of Ghet
+2 Priest of the Blood Rite
+4 Sylvan Advocate
+4 Thought-Knot Seer
+3 Tireless Tracker
+2 Anguished Unmaking
+3 Dromoka's Command
+2 Ultimate Price
+3 Declaration in Stone
+1 Sorin, Grim Nemesis
+1 Canopy Vista
+4 Caves of Koilos
+3 Evolving Wilds
+3 Forest
+2 Fortified Village
+3 Hissing Quagmire
+4 Llanowar Wastes
+1 Plains
+3 Shambling Vent
+1 Swamp
+1 Wastes
+[Sideboard]
+2 Den Protector
+2 Hallowed Moonlight
+3 Languish
+4 Transgress the Mind
+2 Virulent Plague

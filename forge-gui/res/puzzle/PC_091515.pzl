@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 091515 - The Bigger They Are
 URL:http://www.gatheringmagic.com/seanuy-091515-the-bigger-they-are/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.  Forest is on top of your library.
 [state]
 ActivePlayer=human

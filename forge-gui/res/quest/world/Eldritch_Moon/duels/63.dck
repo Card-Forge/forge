@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/anarkist_-_Eldrazi_(Modern,_#656663).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Endbringer
+4 Eternal Scourge
+1 Kozilek, the Great Distortion
+4 Matter Reshaper
+4 Reality Smasher
+2 Spellskite
+4 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+2 Batterskull
+4 Expedition Map
+3 Dismember
+3 Warping Wail
+1 All Is Dust
+1 Cavern of Souls
+4 Eldrazi Temple
+2 Ghost Quarter
+1 Sanctum of Ugin
+1 Sea Gate Wreckage
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+3 Wastes
+[Sideboard]
+2 All Is Dust
+1 Basilisk Collar
+3 Pithing Needle
+2 Ratchet Bomb
+4 Relic of Progenitus
+3 Spatial Contortion

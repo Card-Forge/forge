@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Fluorspar_-_White_Weenie_(Modern,_#1648592).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+1 Kytheon, Hero of Akros
+4 Thalia's Lieutenant
+3 Thalia, Guardian of Thraben
+4 Dauntless Bodyguard
+4 Esper Sentinel
+4 Solitude
+4 Adeline, Resplendent Cathar
+4 Coppercoat Vanguard
+4 Shining Shoal
+4 Emeria's Call
+2 Force of Virtue
+1 Eiganjo Castle
+4 Mutavault
+4 Cavern of Souls
+8 Plains
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Chalice of the Void
+4 Drannith Magistrate
+4 Sanctifier en-Vec
+1 Cathar Commando
+4 March of Otherworldly Light

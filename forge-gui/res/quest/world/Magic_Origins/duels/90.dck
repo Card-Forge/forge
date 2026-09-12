@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Kings Contest
+Title=The Kings Contest
+Icon=The Kings Contest.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Classic_Orlando/Lance_Austin_-_Rogue_(Modern,_#627443).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Geist of Saint Traft
+4 Jace, Vryn's Prodigy
+4 Zur the Enchanter
+2 Negate
+4 Path to Exile
+4 Inquisition of Kozilek
+4 Lingering Souls
+3 Thoughtseize
+3 Detention Sphere
+1 Ghostly Prison
+2 Spreading Seas
+1 Steel of the Godhead
+3 Creeping Tar Pit
+2 Darkslick Shores
+1 Eiganjo Castle
+2 Flooded Strand
+2 Godless Shrine
+1 Hallowed Fountain
+2 Island
+3 Marsh Flats
+1 Plains
+4 Polluted Delta
+1 River of Tears
+1 Swamp
+1 Watery Grave
+[Sideboard]
+2 Engineered Explosives
+3 Leyline of Sanctity
+1 Night of Souls' Betrayal
+2 Rest in Peace
+3 Stony Silence
+3 Timely Reinforcements

@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 090115 - The Writing on the Wall
 URL:http://www.gatheringmagic.com/seanuy-090115-the-writing-on-the-wall/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn. Opponent has Nivix Barrier in hand. All library cards are useless.
 [state]
 ActivePlayer=human

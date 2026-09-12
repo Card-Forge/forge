@@ -38,9 +38,7 @@ public class LifeLoseAi extends SpellAbilityAi {
                 amount = root.getXManaCostPaid();
             } else if (root.getPayCosts() != null && root.getPayCosts().hasXInAnyCostPart()) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(xPay);
-                amount = xPay;
+                amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             }
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
@@ -69,8 +67,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         int amount = 0;
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, payer, sa.isTrigger());
+            amount = ComputerUtilCost.setMaxXValue(sa, payer, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -104,9 +101,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(amount);
+            amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -173,10 +168,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         int amount;
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(xPay);
-            amount = xPay;
+            amount = ComputerUtilCost.setMaxXValue(sa, ai, true);
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Ana_Cariane_Grion_-_Five-color_Humans_(Modern,_#977106).dck
+Deck Type=constructed
+
+[Main]
+1 Deputy of Detention
+2 General Kudro of Drannith
+3 Kitesail Freebooter
+3 Phantasmal Image
+4 Thalia, Guardian of Thraben
+4 Champion of the Parish
+4 Mantis Rider
+4 Meddling Mage
+4 Noble Hierarch
+4 Reflector Mage
+4 Thalia's Lieutenant
+4 Aether Vial
+1 Silent Clearing
+1 Plains
+1 Island
+2 Waterlogged Grove
+2 Horizon Canopy
+4 Unclaimed Territory
+4 Ancient Ziggurat
+4 Cavern of Souls
+[Sideboard]
+1 Lavabrink Venturer
+1 Jegantha, the Wellspring
+1 Collector Ouphe
+2 Chalice of the Void
+2 Dire Fleet Daredevil
+2 Drannith Magistrate
+2 Kambal, Consul of Allocation
+4 Auriok Champion

@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 100615 - Lost in the Crowd
 URL:http://www.gatheringmagic.com/seanuy-100615-lost-in-the-crowd/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn.
 [state]
 ActivePlayer=human

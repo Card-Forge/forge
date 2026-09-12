@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jengu
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=Medium
+Description=Gatecrash/SCG_Invitational_Qualifier_Fountain/Daniel_Skinner_-_Reanimator_(Standard,_#49880).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Angel of Serenity
+4 Avacyn's Pilgrim
+3 Centaur Healer
+2 Craterhoof Behemoth
+2 Deathrite Shaman
+2 Lotleth Troll
+2 Restoration Angel
+2 Somberwald Sage
+4 Thragtusk
+4 Grisly Salvage
+2 Lingering Souls
+3 Mulch
+4 Unburial Rites
+3 Forest
+1 Gavony Township
+4 Godless Shrine
+4 Isolated Chapel
+4 Overgrown Tomb
+1 Plains
+1 Vault of the Archangel
+4 Woodland Cemetery
+[Sideboard]
+2 Abrupt Decay
+2 Acidic Slime
+1 Jarad, Golgari Lich Lord
+1 Obzedat, Ghost Council
+2 Rhox Faithmender
+2 Sever the Bloodline
+1 Sigarda, Host of Herons
+3 Tragic Slip

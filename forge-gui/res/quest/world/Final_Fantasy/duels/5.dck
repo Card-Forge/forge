@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/DoombeaR_-_Mono-Red_Mice_(Standard,_#2535430).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Twinmaw Stormbrood
+3 Magebane Lizard
+1 Tersa Lightshatter
+4 Burst Lightning
+4 Monstrous Rage
+1 Lightning Strike
+1 Self-Destruct
+16 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+3 Sunspine Lynx
+2 Case of the Crimson Pulse
+2 Lithomantic Barrage
+2 Soul-Guide Lantern
+2 Suplex
+2 Torch the Tower
+1 Magebane Lizard
+1 Obliterating Bolt

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Lisa Simpson
+Title=Lisa Simpson
+Icon=Lisa Simpson.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Mukai_Yuki_-_Cascade_Crash_(Modern,_#1999239).dck
+Deck Type=constructed
+
+[Main]
+4 Shardless Agent
+4 Brazen Borrower
+4 Subtlety
+4 Fire // Ice
+4 Dead // Gone
+4 Force of Negation
+2 Valakut Awakening
+4 Crashing Footfalls
+4 Ardent Plea
+4 Leyline Binding
+1 Island
+1 Forest
+1 Breeding Pool
+1 Hallowed Fountain
+1 Stomping Ground
+1 Watery Grave
+1 Steam Vents
+4 Flooded Strand
+2 Wooded Foothills
+4 Misty Rainforest
+1 Temple Garden
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Jetmir's Garden
+1 Xander's Lounge
+[Sideboard]
+1 Supreme Verdict
+2 Force of Vigor
+3 Mystical Dispute
+4 Endurance
+1 Elesh Norn, Mother of Machines
+4 Tishana's Tidebinder

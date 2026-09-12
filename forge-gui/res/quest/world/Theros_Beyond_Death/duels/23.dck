@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sus Antigoon
+Title=Sus Antigoon
+Icon=Sus Antigoon.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Alphaman_-_Selesnya_Enchantments_(Standard,_#945093).dck
+Deck Type=constructed
+
+[Main]
+1 Destiny Spinner
+2 Transcendent Envoy
+3 Archon of Sun's Grace
+3 Paradise Druid
+4 Setessan Champion
+4 Alseid of Life's Bounty
+4 Karametra's Blessing
+1 Warbriar Blessing
+1 Angelic Gift
+2 Banishing Light
+3 Setessan Training
+3 Sentinel's Eyes
+3 Season of Growth
+3 All That Glitters
+3 Temple of Plenty
+4 Temple Garden
+6 Forest
+10 Plains
+[Sideboard]
+2 Banishing Light
+2 Destiny Spinner
+2 Grafdigger's Cage
+2 Heliod's Intervention
+2 Hushbringer
+2 Thrashing Brontodon
+3 Shifting Ceratops

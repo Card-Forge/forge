@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Constructed_League/Fastfake_-_UB_Eldrazi_(Modern,_#520727).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blight Herder
+4 Drowner of Hope
+4 Eldrazi Mimic
+4 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+4 Wasteland Strangler
+4 Relic of Progenitus
+2 Scrabbling Claws
+1 Spatial Contortion
+4 Cavern of Souls
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Ghost Quarter
+1 Island
+1 Swamp
+4 Underground River
+3 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 All Is Dust
+2 Ratchet Bomb
+2 Spellskite
+2 Sun Droplet
+2 Surgical Extraction
+1 Ulamog, the Ceaseless Hunger
+2 Warping Wail

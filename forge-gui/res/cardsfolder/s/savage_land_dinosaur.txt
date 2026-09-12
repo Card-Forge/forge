@@ -1,0 +1,7 @@
+Name:Savage Land Dinosaur
+ManaCost:4 G G
+Types:Creature Dinosaur
+PT:7/6
+K:Trample
+K:TypeCycling:Basic:2
+Oracle:Trample\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

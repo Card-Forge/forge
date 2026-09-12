@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Nakamura_Kouki_-_BR_Atraxa_(Standard,_#1632628).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+1 Atraxa, Grand Unifier
+2 Etali, Primal Conqueror
+1 Reckoner Bankbuster
+2 Abrade
+3 Go for the Throat
+3 Cut Down
+2 Sheoldred's Edict
+1 Duress
+1 Brotherhood's End
+4 The Cruelty of Gix
+4 The Elder Dragon War
+1 Bitter Reunion
+4 Swamp
+4 Mountain
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+4 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Xander's Lounge
+2 Ziatora's Proving Ground
+2 Mirrex
+[Sideboard]
+3 Duress
+1 Abrade
+1 Go for the Throat
+2 Reckoner Bankbuster
+2 Unlicensed Hearse
+1 Cut Down
+3 Sheoldred, the Apocalypse
+2 Brotherhood's End

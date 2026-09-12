@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/PTQ_Amsterdam_2010_-_Porto_-_Portugal/Leandro_Oliveira_-_Next_Level_Bant_(Standard,_#1045).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Baneslayer Angel
+2 Birds of Paradise
+4 Noble Hierarch
+2 Ranger of Eos
+1 Scute Mob
+3 Sea Gate Oracle
+2 Sphinx of Lost Truths
+4 Vengevine
+4 Wall of Omens
+1 Bant Charm
+2 Path to Exile
+3 Oblivion Ring
+3 Elspeth, Knight-Errant
+3 Jace, the Mind Sculptor
+3 Celestial Colonnade
+5 Forest
+2 Island
+4 Misty Rainforest
+1 Plains
+4 Seaside Citadel
+1 Stirring Wildwood
+4 Sunpetal Grove
+[Sideboard]
+1 Behemoth Sledge
+2 Celestial Purge
+2 Deprive
+1 Martial Coup
+2 Negate
+2 Oust
+2 Qasali Pridemage
+1 Sphinx of Jwar Isle

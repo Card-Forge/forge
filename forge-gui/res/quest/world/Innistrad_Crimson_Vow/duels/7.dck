@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Caprio
+Title=Caprio
+Icon=Caprio.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Gonzalo_Santiago_-_Orzhov_Tempo_(Standard,_#1291036).dck
+Deck Type=constructed
+
+[Main]
+3 Edgar, Charmed Groom
+4 Shambling Ghast
+4 Eyetwitch
+4 Professor of Symbology
+3 Deadly Dispute
+4 Vanishing Verse
+2 Rite of Oblivion
+3 Blood on the Snow
+2 Wedding Announcement
+4 The Meathook Massacre
+4 Lolth, Spider Queen
+2 Field of Ruin
+4 Brightclimb Pathway
+4 Snowfield Sinkhole
+6 Snow-Covered Plains
+7 Snow-Covered Swamp
+[Sideboard]
+1 Necrotic Fumes
+1 Mascot Exhibition
+2 Tainted Adversary
+2 Duress
+2 Ray of Enfeeblement
+2 Infernal Grasp
+2 Environmental Sciences
+3 Go Blank

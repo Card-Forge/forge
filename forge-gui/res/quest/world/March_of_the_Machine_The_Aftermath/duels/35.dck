@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Amagai_Masahiro_-_White_Aggro_(Standard,_#1648097).dck
+Deck Type=constructed
+
+[Main]
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+4 Brutal Cathar
+4 Intrepid Adversary
+4 Hopeful Initiate
+4 Anointed Peacekeeper
+4 Guardian of New Benalia
+4 Recruitment Officer
+4 Coppercoat Vanguard
+3 Lay Down Arms
+18 Plains
+1 Eiganjo, Seat of the Empire
+4 Mishra's Foundry
+[Sideboard]
+2 Cemetery Protector
+4 Wedding Announcement
+3 Destroy Evil
+3 Invasion of Gobakhan
+3 Surge of Salvation

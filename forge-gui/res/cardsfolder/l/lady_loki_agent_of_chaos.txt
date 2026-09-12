@@ -1,0 +1,15 @@
+Name:Lady Loki, Agent of Chaos
+ManaCost:5 R
+Types:Legendary Creature God Sorcerer Villain
+PT:5/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Villain | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first instant, sorcery, or Villain spell each turn, exile it, then exile cards from the top of your library until you exile a nonland card. NICKNAME deals damage to each opponent equal to the difference between that spell's mana value and that nonland card's mana value. You may cast that card without paying its mana cost.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Stack | Destination$ Exile | SubAbility$ DBDig
+SVar:DBDig:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBDamageAll
+SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ X | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:SVar$Y/Abs
+SVar:Y:TriggeredCard$CardManaCost/Minus.Z
+SVar:Z:Remembered$CardManaCost
+DeckHints:Type$Instant|Sorcery|Villain
+Oracle:Whenever you cast your first instant, sorcery, or Villain spell each turn, exile it, then exile cards from the top of your library until you exile a nonland card. Lady Loki deals damage to each opponent equal to the difference between that spell's mana value and that nonland card's mana value. You may cast that card without paying its mana cost.

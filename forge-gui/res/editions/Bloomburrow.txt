@@ -122,7 +122,7 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 86 R Coiling Rebirth @Rovina Cai
 87 U Consumed by Greed @Mathias Kollros
 88 R Cruelclaw's Heist @Brian Valeza
-89 C Daggerfang Duo @Marzena Nereida Piwowar
+89 C Daggerfang Duo @Nereida
 90 R Darkstar Augur @Aurore Folny
 91 C Diresight @Alix Branwyn
 92 U Downwind Ambusher @Aaron Miller

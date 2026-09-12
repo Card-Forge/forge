@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/SCG_Classic_Atlanta/Christopher_Johnson_-_W-R_Control_(Modern,_#656919).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+2 Kiki-Jiki, Mirror Breaker
+4 Restoration Angel
+4 Wall of Omens
+2 Blessed Alliance
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+2 Anger of the Gods
+4 Blood Moon
+1 Ajani Vengeant
+2 Chandra, Torch of Defiance
+4 Nahiri, the Harbinger
+4 Arid Mesa
+1 Ghost Quarter
+3 Marsh Flats
+1 Mountain
+1 Needle Spires
+5 Plains
+4 Sacred Foundry
+4 Temple of Triumph
+[Sideboard]
+1 Anger of the Gods
+1 Batterskull
+1 Elspeth, Sun's Champion
+3 Leyline of Sanctity
+2 Pithing Needle
+2 Rest in Peace
+2 Spellskite
+2 Stony Silence
+1 Wrath of God

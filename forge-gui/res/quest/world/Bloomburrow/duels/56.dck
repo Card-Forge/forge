@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sus Antigoon
+Title=Sus Antigoon
+Icon=Sus Antigoon.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/EitanTreiger_-_Izzet_Control_(Modern,_#2227758).dck
+Deck Type=constructed
+
+[Main]
+3 Tamiyo, Inquisitive Student
+4 Snapcaster Mage
+1 Murktide Regent
+2 Crackling Drake
+3 Thundertrap Trainer
+2 Spell Snare
+4 Counterspell
+4 Flame of Anor
+4 Lightning Bolt
+1 Sink into Stupor
+3 Galvanic Discharge
+2 Invert Polarity
+2 Flare of Denial
+4 Preordain
+3 Steam Vents
+1 Mountain
+2 Thundering Falls
+4 Island
+1 Hall of Storm Giants
+3 Misty Rainforest
+1 Otawara, Soaring City
+1 Spirebluff Canal
+1 Arena of Glory
+4 Scalding Tarn
+[Sideboard]
+1 Surgical Extraction
+2 Harbinger of the Seas
+3 Obsidian Charmaw
+2 Consign to Memory
+1 Force of Negation
+3 Pyroclasm
+1 Tishana's Tidebinder
+2 Stern Scolding

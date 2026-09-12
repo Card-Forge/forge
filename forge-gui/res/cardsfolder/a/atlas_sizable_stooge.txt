@@ -1,0 +1,13 @@
+Name:Atlas, Sizable Stooge
+ManaCost:2 BG BG
+Types:Legendary Creature Human Villain
+PT:5/4
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever NICKNAME attacks or blocks, you gain 1 life for each creature you control with power 4 or greater.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ Whenever NICKNAME attacks or blocks, you gain 1 life for each creature you control with power 4 or greater.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$Valid Creature.powerGE4+YouCtrl
+SVar:HasAttackEffect:TRUE
+SVar:HasBlockEffect:TRUE
+DeckHas:Ability$LifeGain
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever Atlas attacks or blocks, you gain 1 life for each creature you control with power 4 or greater.

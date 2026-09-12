@@ -36,12 +36,8 @@ public class LifeSetAi extends SpellAbilityAi {
 
         // TODO handle proper calculation of X values based on Cost and what would be paid
         int amount;
-        // we shouldn't have to worry too much about PayX for SetLife
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
-            amount = xPay;
+            amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
@@ -110,10 +106,7 @@ public class LifeSetAi extends SpellAbilityAi {
 
         int amount;
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(xPay);
-            amount = xPay;
+            amount = ComputerUtilCost.setMaxXValue(sa, ai, true);
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }

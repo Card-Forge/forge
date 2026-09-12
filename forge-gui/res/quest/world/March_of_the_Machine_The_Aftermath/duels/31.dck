@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Ito_Takeshi_-_UBR_Junk_(Standard,_#1654143).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Reckoner Bankbuster
+3 Negate
+2 Abrade
+4 Go for the Throat
+1 Make Disappear
+2 Duress
+4 Invoke Despair
+2 Chandra, Hope's Beacon
+1 Swamp
+1 Shivan Reef
+3 Sulfurous Springs
+2 Underground River
+4 Blackcleave Cliffs
+3 Darkslick Shores
+4 Haunted Ridge
+3 Shipwreck Marsh
+1 Takenuma, Abandoned Mire
+4 Xander's Lounge
+[Sideboard]
+2 Duress
+1 Disdainful Stroke
+1 Flame-Blessed Bolt
+1 Cut Down
+2 Sheoldred, the Apocalypse
+1 Razorlash Transmogrant
+1 Brotherhood's End
+1 Obliterating Bolt
+2 Breach the Multiverse
+2 Lithomantic Barrage
+1 Blot Out

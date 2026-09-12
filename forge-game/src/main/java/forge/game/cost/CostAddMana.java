@@ -94,7 +94,7 @@ public class CostAddMana extends CostPart {
                 manaProduced.add(new Mana(attemptedMana, source, null, ai));
             }
         }
-        ai.getManaPool().add(manaProduced);
+        ai.getManaPool().addMana(manaProduced);
         return true;
     }
 

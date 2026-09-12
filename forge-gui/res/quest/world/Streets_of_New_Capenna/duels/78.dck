@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/BurntSpirit_-_Glimpse_Cascade_(Modern,_#1443634).dck
+Deck Type=constructed
+
+[Main]
+4 Endurance
+4 Fury
+4 Omnath, Locus of Creation
+4 Risen Reef
+4 Shardless Agent
+4 Solitude
+4 Wavesifter
+4 Fable of the Mirror-Breaker
+4 Violent Outburst
+3 Glimpse of Tomorrow
+4 Ardent Plea
+4 Teferi, Time Raveler
+1 Ketria Triome
+1 Windswept Heath
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Spara's Headquarters
+1 Sacred Foundry
+1 Raugrin Triome
+1 Plains
+1 Mountain
+1 Island
+1 Hallowed Fountain
+1 Forest
+1 Flooded Strand
+1 Breeding Pool
+3 Khalni Garden
+3 Scalding Tarn
+4 Wooded Foothills
+4 Misty Rainforest
+4 Cavern of Souls
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Subtlety
+4 Obsidian Charmaw
+4 Mystical Dispute
+4 Foundation Breaker

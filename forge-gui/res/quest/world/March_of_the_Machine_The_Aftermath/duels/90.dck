@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Nakamura_Yuuya_-_Human_Aggro_(Modern,_#1657224).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+3 Thalia, Guardian of Thraben
+4 Champion of the Parish
+4 Reflector Mage
+4 Thalia's Lieutenant
+2 General Kudro of Drannith
+4 Esper Sentinel
+3 Adeline, Resplendent Cathar
+4 Knight-Errant of Eos
+3 Coppercoat Vanguard
+2 Jirina, Dauntless General
+4 Aether Vial
+1 Plains
+1 Island
+4 Unclaimed Territory
+4 Cavern of Souls
+4 Horizon Canopy
+1 Seachrome Coast
+4 Secluded Courtyard
+[Sideboard]
+2 Sanctum Prelate
+2 Lavinia, Azorius Renegade
+2 Drannith Magistrate
+1 Realmwalker
+4 Sanctifier en-Vec
+1 Solitude
+2 Outland Liberator
+1 Loran of the Third Path

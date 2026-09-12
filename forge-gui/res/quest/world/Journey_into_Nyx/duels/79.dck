@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/SCG_Invitational_Qualifier_Littleton/Sam_Tallent_-_Red_Deck_Wins_(Modern,_#88165).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+2 Pillar of Flame
+4 Rift Bolt
+4 Arid Mesa
+3 Blackcleave Cliffs
+1 Blood Crypt
+4 Bloodstained Mire
+5 Mountain
+2 Sacred Foundry
+1 Scalding Tarn
+[Sideboard]
+2 Combust
+1 Flames of the Blood Hand
+2 Rakdos Charm
+2 Relic of Progenitus
+2 Searing Blood
+2 Shattering Spree
+2 Spellskite
+2 Wear // Tear

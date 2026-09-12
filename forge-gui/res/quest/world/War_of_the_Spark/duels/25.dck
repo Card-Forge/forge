@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Sakpata
+Title=Sakpata
+Icon=Sakpata.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Anthony_Marino_-_Selesnya_Tokens_(Standard,_#798887).dck
+Deck Type=constructed
+
+[Main]
+3 Tithe Taker
+3 Trostani Discordant
+4 Venerated Loxodon
+3 Emmara, Soul of the Accord
+4 March of the Multitudes
+4 Saproling Migration
+4 Flower // Flourish
+3 Legion's Landing
+4 Conclave Tribunal
+4 History of Benalia
+3 Gideon Blackblade
+4 Temple Garden
+4 Sunpetal Grove
+9 Plains
+4 Forest
+[Sideboard]
+2 Return to Nature
+2 Ajani, Adversary of Tyrants
+2 Baffling End
+2 Knight of Autumn
+2 Kraul Harpooner
+2 Prison Realm
+1 Vivien Reid
+2 Unbreakable Formation

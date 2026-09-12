@@ -1,7 +1,7 @@
 [metadata]
 Code=THB
 Date=2020-01-24
-Name=Theros: Beyond Death
+Name=Theros Beyond Death
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("THB Commons"), 3 Uncommon:fromSheet("THB Uncommons"), 1 RareMythic:fromSheet("THB RareMythics"), 1 BasicLand
@@ -368,7 +368,7 @@ ScryfallCode=THB
 344 R Nyx Lotus @Raoul Vitale
 345 R Shadowspear @Yeong-Hao Han
 346 R Labyrinth of Skophos @Jonas De Ro
-347 R Temple of Abandon @Adam Paquette
+347★ R Temple of Abandon @Adam Paquette
 348 R Temple of Deceit @Jonas De Ro
 349 R Temple of Enlightenment @Piotr Dura
 350 R Temple of Malice @Jonas De Ro

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/AFitzsimmons_-_Azorius_Control_(Standard,_#2577025).dck
+Deck Type=constructed
+
+[Main]
+1 Horned Loch-Whale
+3 Marang River Regent
+3 Overlord of the Mistmoors
+3 Pinnacle Starcage
+2 Consult the Star Charts
+4 Get Lost
+4 No More Lies
+3 Three Steps Ahead
+2 Day of Judgment
+4 Stock Up
+2 Seam Rip
+2 Elspeth, Storm Slayer
+4 Meticulous Archive
+4 Floodfarm Verge
+4 Fountainport
+6 Island
+3 Restless Anchorage
+6 Plains
+[Sideboard]
+2 Tishana's Tidebinder
+2 Clarion Conqueror
+2 Exorcise
+2 Rest in Peace
+1 Kutzil's Flanker
+1 Flashfreeze
+1 Seam Rip
+2 Beza, the Bounding Spring
+2 Voice of Victory

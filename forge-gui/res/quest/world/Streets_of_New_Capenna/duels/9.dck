@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Aitor_Aberasturi_-_Mono-Blue_Tempo_(Standard,_#1423826).dck
+Deck Type=constructed
+
+[Main]
+4 Delver of Secrets
+4 Dreamshackle Geist
+4 Spectral Adversary
+4 Ascendant Spirit
+2 Slip Out the Back
+2 Geistlight Snare
+2 You See a Guard Approach
+3 Thirst for Discovery
+3 Spell Pierce
+4 Essence Capture
+4 Jwari Disruption
+4 Fading Hope
+1 Otawara, Soaring City
+19 Snow-Covered Island
+[Sideboard]
+1 Unlicensed Hearse
+1 Test of Talents
+2 Disdainful Stroke
+2 Negate
+2 You See a Guard Approach
+2 Slip Out the Back
+2 Malevolent Hermit
+3 Out of the Way

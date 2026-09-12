@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Dinijo_-_Jund_Midrange_(Standard,_#2615918).dck
+Deck Type=constructed
+
+[Main]
+4 Icetill Explorer
+4 Town Greeter
+4 Esper Origins
+1 Diamond Weapon
+3 Disruptive Stormbrood
+4 Molt Tender
+4 Overlord of the Balemurk
+4 Insidious Fungus
+4 Llanowar Elves
+1 Sorceress's Schemes
+4 Season of Loss
+2 Swamp
+4 Wastewood Verge
+3 Conduit Pylons
+4 Fabled Passage
+4 Blooming Marsh
+5 Forest
+1 Stomping Ground
+[Sideboard]
+1 Disruptive Stormbrood
+1 Strategic Betrayal
+1 Stab
+1 Balustrade Wurm
+1 Harvester of Misery
+2 Hollow Marauder
+1 Outrageous Robbery
+1 Chupacabra Echo
+2 Bitter Triumph
+2 Duress
+2 Reclamation Sage

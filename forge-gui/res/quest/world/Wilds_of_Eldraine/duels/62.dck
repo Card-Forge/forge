@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/kanaura_kazuki_-_Grixis_Shadow_(Modern,_#1750523).dck
+Deck Type=constructed
+
+[Main]
+4 Death's Shadow
+2 Murktide Regent
+4 Grief
+3 Fury
+3 Ragavan, Nimble Pilferer
+2 Orcish Bowmasters
+2 Troll of Khazad-dum
+2 Fatal Push
+1 Terminate
+3 Counterspell
+2 Lightning Bolt
+2 Drown in the Loch
+1 Unholy Heat
+3 Feign Death
+1 The End
+4 Thoughtseize
+1 Dreadbore
+4 Expressive Iteration
+2 Island
+1 Swamp
+1 Blood Crypt
+2 Watery Grave
+2 Steam Vents
+4 Bloodstained Mire
+3 Polluted Delta
+1 Scalding Tarn
+[Sideboard]
+1 Terminate
+2 Engineered Explosives
+1 Chalice of the Void
+1 Alpine Moon
+1 Flusterstorm
+1 Unmoored Ego
+2 Subtlety
+1 Tourach, Dread Cantor
+2 Obsidian Charmaw
+1 Brotherhood's End
+1 Cast into the Fire
+1 Stone of Erech

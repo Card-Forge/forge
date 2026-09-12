@@ -3,8 +3,6 @@ package forge.screens.home.settings;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -13,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import forge.StaticData;
+import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
@@ -56,6 +55,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
     private final FLabel btnCheckForUpdates           = _makeButton(localizer.getMessage("btnCheckForUpdates"));
+    private final FLabel btnDownloadCardImages        = _makeButton(localizer.getMessage("btnDownloadCardImages"));
     private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
     private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
     private final FLabel btnDownloadPicsHQ            = _makeButton(localizer.getMessage("btnDownloadPicsHQ"));
@@ -85,6 +85,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         // Github actions now uploading the latest version predictably. So we should be able to use this again.
         pnlContent.add(btnCheckForUpdates, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
+
+        pnlContent.add(btnDownloadCardImages, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("btnDownloadCardImages")), constraintsLBL);
 
 //        pnlContent.add(btnDownloadPics, constraintsBTN);
 //        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
@@ -146,6 +149,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     }
 
     public void setCheckForUpdatesCommand(UiCommand command)           { btnCheckForUpdates.setCommand(command);     }
+    public void setDownloadCardImagesCommand(UiCommand command)        { btnDownloadCardImages.setCommand(command);  }
     public void setDownloadPicsCommand(UiCommand command)              { btnDownloadPics.setCommand(command);        }
     public void setDownloadPicsHQCommand(UiCommand command)            { btnDownloadPicsHQ.setCommand(command);      }
     public void setDownloadSetPicsCommand(UiCommand command)           { btnDownloadSetPics.setCommand(command);     }
@@ -204,7 +208,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         
         final FButton btnClipboardCopy = new FButton(localizer.getMessage("btnCopyToClipboard"));
         btnClipboardCopy.addActionListener(arg0 -> {
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(nifSB.toString()), null);
+            GuiBase.getInterface().copyToClipboard(nifSB.toString());
             SOverlayUtils.hideOverlay();
         });
         scr.getParent().add(btnClipboardCopy, "w 200!, h pref+12!, center, gaptop 10");

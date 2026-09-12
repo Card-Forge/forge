@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Jordan_Mahr_-_Golgari_Midrange_(Modern,_#2370140).dck
+Deck Type=constructed
+
+[Main]
+4 Delighted Halfling
+2 Scavenging Ooze
+1 The Swarmweaver
+1 Ishkanah, Grafwidow
+1 Satyr Wayfinder
+1 Masked Vandal
+3 Webstrike Elite
+2 Haywire Mite
+2 Nihil Spellbomb
+4 Agatha's Soul Cauldron
+4 Fatal Push
+4 Green Sun's Zenith
+2 Malevolent Rumble
+3 Insidious Roots
+3 Urza's Saga
+4 Grist, the Hunger Tide
+2 Underground Mortuary
+4 Verdant Catacombs
+4 Windswept Heath
+2 Overgrown Tomb
+1 Dryad Arbor
+1 Shifting Woodland
+3 Forest
+1 Swamp
+2 Boseiju, Who Endures
+[Sideboard]
+1 Force of Vigor
+1 Endurance
+1 Masked Vandal
+1 Pithing Needle
+1 Vexing Bauble
+1 Caustic Caterpillar
+3 Stillmoon Cavalier
+3 Fulminator Mage
+3 Thoughtseize

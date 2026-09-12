@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/AlpInco_-_Dredgeless_Dredge_(Modern,_#1058930).dck
+Deck Type=constructed
+
+[Main]
+1 Phantasmagorian
+1 Salvage Titan
+2 Narcomoeba
+4 Balustrade Spy
+4 Vengevine
+4 Undercity Informer
+4 Simian Spirit Guide
+3 Sword of the Meek
+4 Talisman of Resilience
+4 Pentad Prism
+1 Nexus of Fate
+3 Hagra Mauling
+1 Shatterskull Smashing
+4 Turntimber Symbiosis
+4 Sea Gate Restoration
+4 Emeria's Call
+4 Creeping Chill
+4 Agadeem's Awakening
+4 Leyline of Sanctity
+[Sideboard]
+1 Slaughter Pact
+1 Duress
+3 Goblin Charbelcher
+3 Nature's Claim
+3 Ratchet Bomb
+4 Thoughtseize

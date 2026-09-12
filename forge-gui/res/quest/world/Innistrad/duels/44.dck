@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Easy
+Description=Innistrad/SCG_Invitational_Qualifier_-_Tuscaloosa,_Alabama/Joshua_Saylor_-_Mono-Black_Infect_(Standard,_#23975).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Phyrexian Crusader
+4 Plague Stinger
+2 Skithiryx, the Blight Dragon
+4 Whispering Specter
+4 Lashwrithe
+2 Sword of Feast and Famine
+4 Victim of Night
+4 Virulent Wound
+4 Distress
+3 Tezzeret's Gambit
+4 Inkmoth Nexus
+21 Swamp
+[Sideboard]
+3 Black Sun's Zenith
+3 Liliana of the Veil
+3 Phyrexian Vatmother
+3 Spellskite
+3 Surgical Extraction

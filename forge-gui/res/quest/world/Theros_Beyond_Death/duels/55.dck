@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Busterbrown52_-_Elementals_(Modern,_#996574).dck
+Deck Type=constructed
+
+[Main]
+1 Spitebellows
+1 Smokebraider
+1 Shriekmaw
+1 Omnath, Locus of the Roil
+2 Vesperlark
+2 Flickerwisp
+4 Lightning Skelemental
+4 Phantasmal Image
+4 Risen Reef
+4 Thunderkin Awakener
+4 Unsettled Mariner
+4 Voice of Resurgence
+4 Flamekin Harbinger
+4 Aether Vial
+1 Mountain
+1 Fiery Islet
+2 Sunbaked Canyon
+4 Unclaimed Territory
+4 Primal Beyond
+4 Cavern of Souls
+4 Ancient Ziggurat
+[Sideboard]
+1 Shriekmaw
+1 Fulminator Mage
+1 Ingot Chewer
+2 Collector Ouphe
+2 Damping Sphere
+2 Soul-Guide Lantern
+3 Healer of the Glade
+3 Dismember

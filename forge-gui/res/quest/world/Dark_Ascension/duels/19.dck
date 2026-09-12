@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Medium
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Saddle_Brook,_New_Jersey/Joseph_Piro_-_Mono_Green_(Standard,_#26416).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+1 Bellowing Tanglewurm
+4 Birds of Paradise
+4 Dungrove Elder
+4 Llanowar Elves
+3 Phyrexian Metamorph
+4 Strangleroot Geist
+2 Thrun, the Last Troll
+4 Sword of War and Peace
+4 Green Sun's Zenith
+1 Overrun
+1 Garruk Relentless
+3 Garruk, Primal Hunter
+24 Forest
+[Sideboard]
+1 Batterskull
+2 Creeping Corrosion
+1 Glissa, the Traitor
+2 Gut Shot
+2 Mutagenic Growth
+2 Naturalize
+2 Ratchet Bomb
+2 Surgical Extraction
+1 Tree of Redemption

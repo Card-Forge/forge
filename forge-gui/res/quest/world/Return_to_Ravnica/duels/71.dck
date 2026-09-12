@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Hugo Drax
+Title=Hugo Drax
+Icon=Hugo Drax.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Topdeck_P.S.E._Modern/Bernabei_Francesco_-_RW_Twin_(Modern,_#63139).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blade Splicer
+2 Kiki-Jiki, Mirror Breaker
+4 Restoration Angel
+4 Village Bell-Ringer
+4 Wall of Omens
+1 Relic of Progenitus
+4 Lightning Bolt
+2 Magma Jet
+4 Path to Exile
+3 Blood Moon
+4 Splinter Twin
+4 Arid Mesa
+4 Clifftop Retreat
+5 Mountain
+5 Plains
+4 Sacred Foundry
+2 Tectonic Edge
+[Sideboard]
+2 Boil
+2 Disenchant
+1 Grafdigger's Cage
+1 Leyline of Sanctity
+2 Pyroclasm
+1 Rest in Peace
+2 Sowing Salt
+2 Spellskite
+2 Stony Silence

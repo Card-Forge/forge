@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Hellboy
+Title=Hellboy
+Icon=Hellboy.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Jeffrey_McCoy_-_Orzhov_Self-Bounce_(Standard,_#2597410).dck
+Deck Type=constructed
+
+[Main]
+4 Dark Confidant
+4 Nurturing Pixie
+4 Sunpearl Kirin
+2 Cecil, Dark Knight
+2 Voice of Victory
+2 Haliya, Guided by Light
+3 Enduring Innocence
+3 Cosmogrand Zenith
+1 Ambrosia Whiteheart
+4 Tinybones Joins Up
+4 Momentum Breaker
+2 Nowhere to Run
+3 Seam Rip
+4 Concealed Courtyard
+4 Bleachbone Verge
+4 Starting Town
+4 Godless Shrine
+3 Plains
+3 Swamp
+[Sideboard]
+3 Duress
+3 Rest in Peace
+2 Aven Interrupter
+2 Sheltered by Ghosts
+2 Intimidation Tactics
+2 Clarion Conqueror
+1 Elegy Acolyte

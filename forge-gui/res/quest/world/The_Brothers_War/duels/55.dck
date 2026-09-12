@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Bep
+Title=Bep
+Icon=Bep.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/James_Ashworth_-_Azorius_Hammer_(Modern,_#1520152)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Giver of Runes
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Ornithopter
+1 Kaldra Compleat
+1 Shadowspear
+1 Nettlecyst
+1 Paradise Mantle
+2 Springleaf Drum
+4 Colossus Hammer
+2 Spell Pierce
+2 Blacksmith's Skill
+1 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+1 Horizon Canopy
+1 Temple Garden
+1 Arid Mesa
+2 Seachrome Coast
+2 Flooded Strand
+2 Marsh Flats
+2 Hallowed Fountain
+3 Blinkmoth Nexus
+4 Plains
+[Sideboard]
+1 Haywire Mite
+1 Relic of Progenitus
+1 Drannith Magistrate
+1 Spell Pierce
+1 Blacksmith's Skill
+1 Pithing Needle
+2 March of Otherworldly Light
+2 Lavinia, Azorius Renegade
+2 Mana Leak
+3 Sanctifier en-Vec

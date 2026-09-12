@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/DiosdiC_-_Selesnya_Enchantments_(Standard,_#1734327).dck
+Deck Type=constructed
+
+[Main]
+3 Katilda, Dawnhart Martyr
+2 The Restoration of Eiganjo
+4 Spirited Companion
+4 Generous Visitor
+4 Kami of Transience
+4 Teachings of the Kirin
+4 Jukai Naturalist
+4 Calix, Guided by Fate
+4 Audacity
+4 Ossification
+4 Brushland
+2 Overgrown Farmland
+6 Plains
+5 Forest
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+4 Razorverge Thicket
+[Sideboard]
+3 Borrowed Time
+2 Rite of Harmony
+3 Circle of Confinement
+2 Hallowed Haunting
+2 Touch the Spirit Realm
+1 Boseiju, Who Endures
+2 The Stone Brain

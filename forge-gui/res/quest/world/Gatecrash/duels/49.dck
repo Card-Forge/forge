@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Medium
+Description=Gatecrash/Magic-League_Standard_Trial_02-02-2013/Khim_-_Rakdos_Aggro_(Standard,_#44898).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Knight of Infamy
+4 Rakdos Cackler
+3 Searing Spear
+1 Flames of the Firebrand
+2 Mark of Mutiny
+4 Pillar of Flame
+4 Blood Crypt
+2 Cavern of Souls
+4 Dragonskull Summit
+2 Overgrown Tomb
+4 Rakdos Guildgate
+6 Swamp
+[Sideboard]
+3 Crippling Blight
+3 Deathrite Shaman
+2 Rakdos Charm
+3 Skullcrack
+3 Vampire Nighthawk

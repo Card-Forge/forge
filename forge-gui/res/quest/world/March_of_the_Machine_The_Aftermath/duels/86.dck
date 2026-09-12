@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Optimus Prime
+Title=Optimus Prime
+Icon=Optimus Prime.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Donny_Saltou_-_Mono-White_Humans_(Modern,_#1650272).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+2 Esper Sentinel
+2 Brutal Cathar
+4 Coppercoat Vanguard
+3 Thalia, Guardian of Thraben
+2 Aven Mindcensor
+4 Thalia's Lieutenant
+4 Luminarch Aspirant
+4 Adeline, Resplendent Cathar
+3 Solitude
+3 Hopeful Initiate
+3 Shining Shoal
+3 Emeria's Call
+2 Force of Virtue
+4 Mutavault
+7 Plains
+2 Cavern of Souls
+2 Unclaimed Territory
+1 Castle Ardenvale
+1 Eiganjo Castle
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+3 Sanctifier en-Vec
+2 Weathered Runestone
+2 Loran of the Third Path
+2 Lay Down Arms
+2 Drannith Magistrate
+2 The Stone Brain
+2 Rest in Peace

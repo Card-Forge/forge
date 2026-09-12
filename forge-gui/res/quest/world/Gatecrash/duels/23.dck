@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Easy
+Description=Gatecrash/WMCQ_2013_-_Bogota,_Colombia/Diego_Celeita_-_Humans_(Standard,_#50515).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Elite
+4 Burning-Tree Emissary
+4 Champion of the Parish
+4 Experiment One
+4 Flinthoof Boar
+1 Ghor-Clan Rampager
+4 Lightning Mauler
+4 Mayor of Avabruck
+4 Boros Charm
+3 Giant Growth
+4 Searing Spear
+4 Cavern of Souls
+3 Clifftop Retreat
+4 Sacred Foundry
+3 Stomping Ground
+2 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Boros Reckoner
+2 Domri Rade
+2 Gruul Charm
+2 Pacifism
+2 Rest in Peace
+3 Thalia, Guardian of Thraben
+2 Traitorous Blood

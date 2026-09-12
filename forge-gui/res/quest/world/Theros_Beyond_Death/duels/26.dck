@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Alex_Almeida_-_Gruul_Aggro_(Standard,_#950543).dck
+Deck Type=constructed
+
+[Main]
+4 Wildborn Preserver
+4 Gruul Spellbreaker
+4 Bonecrusher Giant
+4 Paradise Druid
+4 Robber of the Rich
+4 Shifting Ceratops
+4 Questing Beast
+4 Legion Warboss
+4 Domri's Ambush
+1 Domri, Anarch of Bolas
+4 Stomping Ground
+4 Temple of Abandon
+7 Mountain
+8 Forest
+[Sideboard]
+2 Klothys, God of Destiny
+2 Claim the Firstborn
+3 Return to Nature
+4 Redcap Melee
+4 Scorching Dragonfire

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_League_2016-01-17/525009163_-_Abzan_Aggro_(5-0)_(Standard,_#517682).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+3 Heir of the Wilds
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+1 Murderous Cut
+4 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Duress
+2 Infinite Obliteration
+1 Ob Nixilis Reignited
+1 Self-Inflicted Wound
+2 Silkwrap
+1 Tasigur, the Golden Fang
+3 Transgress the Mind
+1 Ultimate Price
+1 Virulent Plague

@@ -32,6 +32,28 @@ import forge.util.TextUtil;
 
 public class ComputerUtilCost {
 
+    public static boolean checkExileFromGraveCost(final Cost cost, final Player payer, final SpellAbility sa) {
+        CardCollection payingCards = new CardCollection();
+        int needed = 0;
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostExile) {
+                if (part.payCostFromSource()) {
+                    continue;
+                }
+                int amt = part.getAbilityAmount(sa);
+                needed += amt;
+                CardCollection toAdd = ComputerUtil.chooseExileFrom(payer, (CostExile) part, sa.getHostCard(), amt, sa, true);
+                if (toAdd != null) {
+                    payingCards.addAll(toAdd);
+                }
+            }
+        }
+        if (payingCards.size() < needed) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Check add m1 m1 counter cost.
      *
@@ -363,7 +385,9 @@ public class ComputerUtilCost {
 
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
                 if (differentNames) {
-                    final Set<Card> uniqueNameCards = Sets.newHashSet();
+                    // drives which cards get sacrificed on a scoring tie, so its order must not depend on Card
+                    // identity hashCode (which varies per JVM run)
+                    final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
                     for (final Card card : typeList) {
                         // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                         if (!card.hasNoName()) {
@@ -644,12 +668,13 @@ public class ComputerUtilCost {
         return false;
     }
 
-    public static int getMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
+    public static int setMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
         final Card source = sa.getHostCard();
         SpellAbility root = sa.getRootAbility();
         final Cost abCost = root.getPayCosts();
 
-        if (abCost == null || !abCost.hasXInAnyCostPart()) {
+        // check that X is really free choice
+        if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
         }
 
@@ -657,18 +682,18 @@ public class ComputerUtilCost {
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
+            // TODO find a way to consider lower value due to Ward
+            if (sa.hasParam("AIXMax")) {
+                root.setXManaCostPaid(val);
+                int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);
+                val = Math.min(val, calculated);
+            }
         }
 
         if (sa.usesTargeting()) {
             // if announce is used as min targets, check what the max possible number would be
             if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
                 val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa).size());
-            }
-
-            if (sa.hasParam("AIMaxTgtsCount")) {
-                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
-                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(source, "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
             }
         }
 
@@ -700,7 +725,10 @@ public class ComputerUtilCost {
                 }
             }
         }
-        return ObjectUtils.defaultIfNull(val, 0);
+
+        int x = ObjectUtils.getIfNull(val, 0);
+        root.setXManaCostPaid(x);
+        return x;
     }
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {

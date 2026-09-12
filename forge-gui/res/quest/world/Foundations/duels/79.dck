@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Neith
+Title=Neith
+Icon=Neith.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Luis_Martinez_Gonzalez_-_Dimir_Murktide_(Modern,_#2286476).dck
+Deck Type=constructed
+
+[Main]
+2 Kiora, the Rising Tide
+1 Harbinger of the Seas
+4 Psychic Frog
+4 Abhorrent Oculus
+3 Orcish Bowmasters
+2 Spell Snare
+2 Sink into Stupor
+1 Bitter Triumph
+1 Cling to Dust
+4 Counterspell
+4 Thought Scour
+4 Fatal Push
+3 Force of Negation
+4 Unearth
+3 Preordain
+2 Island
+2 Undercity Sewers
+1 Swamp
+1 Scalding Tarn
+1 Misty Rainforest
+1 Gloomlake Verge
+4 Polluted Delta
+3 Watery Grave
+3 Flooded Strand
+[Sideboard]
+2 Toxic Deluge
+2 Graveyard Trespasser
+2 Surgical Extraction
+2 Harbinger of the Seas
+1 The Meathook Massacre
+3 Stern Scolding
+3 Consign to Memory

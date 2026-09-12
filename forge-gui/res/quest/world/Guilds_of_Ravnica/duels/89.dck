@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Benjamin_Van_Koekenbeek_-_Bant_Eldrazi_(Modern,_#765104).dck
+Deck Type=constructed
+
+[Main]
+1 Birds of Paradise
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Matter Reshaper
+4 Noble Hierarch
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Tireless Tracker
+1 Dismember
+4 Path to Exile
+4 Ancient Stirrings
+1 Breeding Pool
+3 Brushland
+3 Cavern of Souls
+4 Eldrazi Temple
+2 Forest
+1 Hallowed Fountain
+1 Plains
+1 Temple Garden
+1 Wastes
+4 Windswept Heath
+3 Yavimaya Coast
+[Sideboard]
+2 Disdainful Stroke
+4 Knight of Autumn
+3 Rest in Peace
+3 Stony Silence
+3 Stubborn Denial

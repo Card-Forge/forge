@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Joshi_Avichal_-_Golgari_Yawgmoth_(Modern,_#1634410)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Endurance
+1 Hapatra, Vizier of Poisons
+1 Prosperous Innkeeper
+4 Strangleroot Geist
+4 Ignoble Hierarch
+2 Birds of Paradise
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+4 Wall of Roots
+1 Blood Artist
+4 Chord of Calling
+3 Eldritch Evolution
+4 Grist, the Hunger Tide
+4 Verdant Catacombs
+2 Blooming Marsh
+2 Boseiju, Who Endures
+1 Dryad Arbor
+2 Twilight Mire
+1 Swamp
+1 Misty Rainforest
+3 Nurturing Peatland
+2 Overgrown Tomb
+3 Forest
+1 Yavimaya, Cradle of Growth
+[Sideboard]
+2 Endurance
+1 Fatal Push
+3 Force of Vigor
+3 Thoughtseize
+1 Haywire Mite
+1 Sheoldred, the Apocalypse
+1 The Filigree Sylex
+1 Go for the Throat
+1 Veil of Summer
+1 Pile On

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Cow
+Title=Cow
+Icon=Cow.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine_The_Aftermath/2dbbc5dfde3449984ac537401670c94c_-_Mono_Black_midrange_(Standard,_#1680057).dck
+Deck Type=constructed
+
+[Main]
+3 Phyrexian Obliterator
+2 Phyrexian Fleshgorger
+2 Concealing Curtains
+3 Sheoldred, the Apocalypse
+1 Misery's Shadow
+3 Tenacious Underdog
+2 Graveyard Trespasser
+2 Urborg Scavengers
+2 Evolved Sleeper
+2 Sheoldred's Edict
+1 Infernal Grasp
+3 Go for the Throat
+3 Cut Down
+1 Gix's Command
+2 Duress
+2 Phyrexian Arena
+2 Liliana of the Veil
+1 Vraska, Betrayal's Sting
+2 Mishra's Foundry
+2 Mirrex
+2 Takenuma, Abandoned Mire
+18 Swamp
+[Sideboard]
+1 The Stone Brain
+2 Duress
+1 Gix's Command
+1 Cut Down
+2 Parasitic Grasp
+1 Corrupt
+2 Glistening Deluge
+1 Path of Peril
+2 Extract the Truth
+4 Razorlash Transmogrant

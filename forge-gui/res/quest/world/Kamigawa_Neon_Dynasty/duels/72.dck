@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Brandon_McCullough_-_Sultai_Infect_(Modern,_#1442288).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+4 Glistener Elf
+4 Blighted Agent
+4 Ignoble Hierarch
+4 Phyrexian Crusader
+2 Blossoming Defense
+2 Become Immense
+4 Might of Old Krosa
+4 Vines of Vastwood
+4 Mutagenic Growth
+4 Scale Up
+1 Urborg, Tomb of Yawgmoth
+1 Yavimaya, Cradle of Growth
+1 Boseiju, Who Endures
+1 Forest
+1 Windswept Heath
+2 Overgrown Tomb
+2 Breeding Pool
+3 Misty Rainforest
+4 Inkmoth Nexus
+4 Verdant Catacombs
+[Sideboard]
+2 Ashiok, Dream Render
+2 Void Mirror
+3 Dismember
+4 Force of Vigor
+4 Endurance

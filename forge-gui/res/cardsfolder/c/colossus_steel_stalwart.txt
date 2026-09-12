@@ -1,0 +1,8 @@
+Name:Colossus, Steel Stalwart
+ManaCost:4 G
+Types:Legendary Creature Mutant Hero
+PT:4/5
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has indestructible.
+S:Mode$ Continuous | Affected$ Mutant.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Mutants you control get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:During your turn, Colossus has indestructible. (Damage and effects that say "destroy" don't destroy him.)\nOther Mutants you control get +1/+1.

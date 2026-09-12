@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/David_Vo_-_Mono-Black_Aggro_(Modern,_#2003201).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+2 Kaervek, the Punisher
+2 Kalitas, Traitor of Ghet
+4 Orcish Bowmasters
+3 Sheoldred, the Apocalypse
+3 The One Ring
+4 Fatal Push
+3 Sheoldred's Edict
+4 Thoughtseize
+4 Waste Not
+3 Liliana of the Veil
+2 Bloodstained Mire
+2 Castle Locthwain
+4 Field of Ruin
+1 Geier Reach Sanitarium
+2 Marsh Flats
+2 Sunken Citadel
+8 Swamp
+1 Takenuma, Abandoned Mire
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Cursed Totem
+3 Damping Sphere
+1 Duress
+4 Leyline of the Void
+1 Pithing Needle
+1 Sheoldred's Edict
+3 Tourach, Dread Cantor

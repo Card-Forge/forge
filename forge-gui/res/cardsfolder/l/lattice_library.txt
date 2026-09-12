@@ -1,0 +1,13 @@
+Name:Lattice Library
+ManaCost:X G G
+Types:Enchantment
+K:etbCounter:STUDY:X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters and whenever you cast your first spell with {X} in its mana cost each turn, create a 0/0 green and blue Fractal creature token. Put a number of +1/+1 counters on it equal to the number of study counters on this enchantment.
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When this enchantment enters and whenever you cast your first spell with {X} in its mana cost each turn, create a 0/0 green and blue Fractal creature token. Put a number of +1/+1 counters on it equal to the number of study counters on this enchantment.
+SVar:TrigToken:DB$ Token | TokenScript$ gu_0_0_fractal | TokenOwner$ You | SubAbility$ DBPutCounter | RememberTokens$ True
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$CardCounters.STUDY
+DeckHas:Ability$Counters|Token
+Oracle:This enchantment enters with X study counters on it.\nWhen this enchantment enters and whenever you cast your first spell with {X} in its mana cost each turn, create a 0/0 green and blue Fractal creature token. Put a number of +1/+1 counters on it equal to the number of study counters on this enchantment.

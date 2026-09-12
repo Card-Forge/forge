@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Joshua_Obreza_-_Jund_Unearth_(Modern,_#1409392)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Blood Artist
+1 Klothys, God of Destiny
+2 Kroxa, Titan of Death's Hunger
+3 Ragavan, Nimble Pilferer
+4 Bloodghast
+4 Mayhem Devil
+4 Seasoned Pyromancer
+4 Ignoble Hierarch
+4 Collected Company
+2 Unearth
+4 Goblin Bombardment
+1 Wrenn and Six
+4 Grist, the Hunger Tide
+1 Stomping Ground
+1 Ziatora's Proving Ground
+1 Sokenzan, Crucible of Defiance
+1 Mountain
+1 Swamp
+1 Forest
+2 Overgrown Tomb
+2 Blood Crypt
+2 Blackcleave Cliffs
+2 Wooded Foothills
+2 Copperline Gorge
+3 Bloodstained Mire
+3 Verdant Catacombs
+[Sideboard]
+1 Pyrite Spellbomb
+1 Engineered Explosives
+1 Boil
+1 Kitchen Finks
+1 Viscera Seer
+2 Outland Liberator
+2 Ob Nixilis, the Adversary
+3 Fulminator Mage
+3 Endurance

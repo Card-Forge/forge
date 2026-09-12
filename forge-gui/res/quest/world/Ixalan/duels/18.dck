@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot18
+Title=Robot18
+Icon=Impundulu.jpg
+Difficulty=Very Hard
+Description=Mardu Vehicles 
+Deck Type=constructed
+
+[Main]
+1 Ahn-Crop Crasher
+4 Bomat Courier
+3 Hazoret the Fervent
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+4 Veteran Motorist
+1 Aethersphere Harvester
+4 Heart of Kiran
+2 Lightning Strike
+2 Shock
+4 Unlicensed Disintegration
+2 Legion's Landing
+4 Concealed Courtyard
+2 Dragonskull Summit
+4 Inspiring Vantage
+4 Mountain
+5 Plains
+4 Spire of Industry
+[Sideboard]
+2 Aethersphere Harvester
+3 Chandra, Torch of Defiance
+2 Duress
+2 Glorybringer
+2 Pia Nalaar
+3 Rampaging Ferocidon
+1 Shock

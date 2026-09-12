@@ -12,6 +12,7 @@
    <property name="spawn.Easy" type="bool" value="true"/>
    <property name="spawn.Hard" type="bool" value="true"/>
    <property name="spawn.Normal" type="bool" value="true"/>
+   <property name="spawn.Insane" type="bool" value="true"/>
    <property name="speedModifier" type="float" value="0"/>
    <property name="threatRange" type="int" value="0"/>
    <property name="waypoints" value=""/>

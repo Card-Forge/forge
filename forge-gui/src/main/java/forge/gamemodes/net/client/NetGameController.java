@@ -1,24 +1,41 @@
 package forge.gamemodes.net.client;
 
 import forge.game.card.CardView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.player.AutoYieldStore;
 import forge.util.ITriggerEvent;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
+
+    /** Source of truth for this client's yield state (auto-yields, trigger decisions, markers, skip-phase, etc.). */
+    private final YieldController yieldController = new YieldController(null);
+
     public NetGameController(final IToServer server) {
-        this.sender = new GameProtocolSender(server);
+        sender = new GameProtocolSender(server);
+    }
+
+    @Override
+    public YieldController getYieldController() {
+        return yieldController;
     }
 
     private void send(final ProtocolMethod method, final Object... args) {
@@ -69,16 +86,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void passPriorityUntilEndOfTurn() {
-        send(ProtocolMethod.passPriorityUntilEndOfTurn);
-    }
-
-    @Override
-    public void passPriority() {
-        send(ProtocolMethod.passPriority);
-    }
-
-    @Override
     public void nextGameDecision(final NextGameDecision decision) {
         send(ProtocolMethod.nextGameDecision, decision);
     }
@@ -97,6 +104,11 @@ public class NetGameController implements IGameController {
     @Override
     public void concede() {
         send(ProtocolMethod.concede);
+    }
+
+    @Override
+    public void drawOfferAction(final DrawOfferMessage.Action action) {
+        send(ProtocolMethod.drawOfferAction, action);
     }
 
     @Override
@@ -121,6 +133,64 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.reorderHand, card, index);
     }
 
+    @Override
+    public void requestResync() {
+        send(ProtocolMethod.requestResync);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield));
+    }
+
+    @Override
+    public void setDisableAutoYields(final boolean disable) {
+        yieldController.setDisableAutoYields(disable);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableYields(disable));
+    }
+
+    @Override
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision));
+    }
+
+    @Override
+    public void setDisableAutoTriggers(final boolean disable) {
+        yieldController.setDisableAutoTriggers(disable);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableTriggers(disable));
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        yieldController.apply(update);
+    }
+
+    /**
+     * Remote client's outbound path for user-initiated yield actions (right-click
+     * marker, ESC, "yield to entire stack" menu): mutate local cache for immediate
+     * UI response and ship to host.
+     */
+    @Override
+    public void sendYieldUpdate(final YieldUpdate update) {
+        applyYieldUpdate(update);
+        send(ProtocolMethod.sendYieldUpdate, update);
+    }
+
+    /**
+     * Build a YieldStateSnapshot from the local persistent yield state plus the
+     * GUI-loaded skip-phase prefs and ship it to the host in one wire message.
+     */
+    public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
+    }
+
+    @Override
+    public void setYieldPref(final FPref pref, final String value) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldPref(pref, value));
+    }
+
     private IMacroSystem macros;
     @Override
     public IMacroSystem macros() {
@@ -143,11 +213,6 @@ public class NetGameController implements IGameController {
         @Override
         public void nextRememberedAction() {
             send(ProtocolMethod.nextRememberedAction);
-        }
-
-        @Override
-        public boolean isRecording() {
-            return false;
         }
 
         @Override

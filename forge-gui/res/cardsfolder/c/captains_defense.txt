@@ -1,0 +1,6 @@
+Name:Captain's Defense
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.blocking | NumAtt$ +2 | NumDef$ +2 | TgtPrompt$ Select target blocking creature | SubAbility$ DBDraw | SpellDescription$ Target blocking creature gets +2/+2 until end of turn.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Target blocking creature gets +2/+2 until end of turn.\nDraw a card.

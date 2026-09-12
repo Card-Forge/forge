@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/#2_Modern__Els_Clots_/Jandroche_Ballester_-_RB_Burn_(Modern,_#25826).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Keldon Marauders
+3 Flames of the Blood Hand
+4 Incinerate
+4 Lightning Bolt
+2 Magma Jet
+3 Searing Blaze
+3 Shard Volley
+2 Blightning
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+1 Blackcleave Cliffs
+2 Blood Crypt
+1 Dragonskull Summit
+7 Mountain
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Back to Nature
+2 Combust
+2 Flamebreak
+3 Rain of Gore
+2 Relic of Progenitus
+1 Seal of Primordium
+2 Shattering Spree

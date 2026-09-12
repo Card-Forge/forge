@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/WPN_Qualifier_Modern_Turniers_vom_28.02.2012/Hausmann_Sebastian_-_Red_Deck_Wins_(Modern,_#27193).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Grim Lavamancer
+4 Keldon Marauders
+4 Kird Ape
+4 Mogg Fanatic
+4 Tarmogoyf
+4 Brimstone Volley
+4 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+1 Browbeat
+4 Rift Bolt
+4 Arid Mesa
+1 Forest
+6 Mountain
+4 Scalding Tarn
+4 Stomping Ground
+[Sideboard]
+3 Ancient Grudge
+3 Molten Rain
+2 Sowing Salt
+4 Sulfur Elemental
+3 Surgical Extraction

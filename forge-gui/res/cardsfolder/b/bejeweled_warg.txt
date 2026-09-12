@@ -1,0 +1,11 @@
+Name:Bejeweled Warg
+ManaCost:1 G
+Types:Creature Wolf
+PT:3/2
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBToken
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Wolf.YouCtrl | ValidTgtsDesc$ Wolf you control | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on target Wolf you control.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+DeckHints:Type$Wolf
+Oracle:Trample\nWhenever this creature deals combat damage to a player, choose one —\n• Put a +1/+1 counter on target Wolf you control.\n• Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

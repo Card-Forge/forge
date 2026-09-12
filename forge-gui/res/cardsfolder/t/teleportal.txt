@@ -6,4 +6,4 @@ SVar:DBUnblockable:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Bat
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Overload:3 U R
-Oracle:Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.\nOverload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.\nOverload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

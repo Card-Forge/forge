@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Awesome7574_-_Snow_Control_(Modern,_#1047533).dck
+Deck Type=constructed
+
+[Main]
+4 Ice-Fang Coatl
+4 Birds of Paradise
+4 Noble Hierarch
+4 Stoneforge Mystic
+4 Uro, Titan of Nature's Wrath
+1 Sword of Feast and Famine
+1 Batterskull
+2 Cryptic Command
+2 Archmage's Charm
+3 Force of Negation
+4 Path to Exile
+4 Mana Leak
+4 Confounding Conundrum
+4 Abundant Growth
+2 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+1 Mystic Sanctuary
+1 Snow-Covered Plains
+1 Temple Garden
+2 Snow-Covered Island
+2 Hallowed Fountain
+2 Field of Ruin
+4 Windswept Heath
+4 Snow-Covered Forest
+4 Misty Rainforest
+4 Flooded Strand
+4 Breeding Pool
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Aether Gust
+2 Celestial Purge
+3 Ashiok, Dream Render
+3 Knight of Autumn
+4 Veil of Summer

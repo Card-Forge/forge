@@ -1,0 +1,8 @@
+Name:Storm, Shaker of Skies
+ManaCost:4 G G
+Types:Legendary Creature Mutant Hero
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy up to one target artifact, enchantment, or creature with flying.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact, enchantment, or creature with flying
+Oracle:Flying\nWhen Storm enters, destroy up to one target artifact, enchantment, or creature with flying.

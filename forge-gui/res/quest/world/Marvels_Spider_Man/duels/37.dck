@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/Benjamin_Lowe_-_Dimir_Midrange_(Standard,_#2675951).dck
+Deck Type=constructed
+
+[Main]
+4 Quantum Riddler
+4 Spyglass Siren
+3 Enduring Curiosity
+3 Floodpits Drowner
+3 Thundertrap Trainer
+2 Bitter Triumph
+2 Faebloom Trick
+1 Phantom Interference
+1 Shoot the Sheriff
+1 Three Steps Ahead
+4 Splash Portal
+4 Tragic Trajectory
+4 Kaito, Bane of Nightmares
+7 Island
+5 Swamp
+4 Gloomlake Verge
+4 Watery Grave
+3 Restless Reef
+1 Multiversal Passage
+[Sideboard]
+3 Duress
+3 Preacher of the Schism
+3 Tishana's Tidebinder
+2 Ghost Vacuum
+1 Negate
+1 Shoot the Sheriff
+1 Spider-Sense
+1 Strategic Betrayal

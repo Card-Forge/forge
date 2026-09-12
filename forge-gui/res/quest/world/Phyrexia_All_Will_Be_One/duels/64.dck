@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Ethan_Stensrud_-_Mono-White_Hammer_(Modern,_#1604297)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Ornithopter
+1 Memnite
+4 Esper Sentinel
+2 Giver of Runes
+1 Gingerbrute
+1 Skrelv, Defector Mite
+4 Stoneforge Mystic
+4 Puresteel Paladin
+3 Solitude
+1 Paradise Mantle
+4 Colossus Hammer
+1 Shadowspear
+1 Kaldra Compleat
+2 Springleaf Drum
+3 Blacksmith's Skill
+3 Emeria's Call
+4 Sigarda's Aid
+4 Urza's Saga
+3 Inkmoth Nexus
+1 Horizon Canopy
+1 Silent Clearing
+1 Sunbaked Canyon
+1 Eiganjo, Seat of the Empire
+8 Plains
+[Sideboard]
+2 Hushbringer
+2 Sanctifier en-Vec
+2 Drannith Magistrate
+1 Chalice of the Void
+2 March of Otherworldly Light
+3 Hallowed Moonlight
+1 Pithing Needle
+1 Soul-Guide Lantern
+1 Path to Exile

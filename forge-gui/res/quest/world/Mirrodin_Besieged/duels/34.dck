@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/I_Liga_Sureste_de_Construido/Jose_Subiela_Moreno_-_RG_Valakut_(Standard,_#11315).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+3 Birds of Paradise
+2 Llanowar Elves
+1 Obstinate Baloth
+4 Primeval Titan
+3 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+3 Cultivate
+2 Green Sun's Zenith
+4 Growth Spasm
+3 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+10 Mountain
+1 Rootbound Crag
+1 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+3 Verdant Catacombs
+[Sideboard]
+2 Acidic Slime
+2 Arc Trail
+4 Flame Slash
+2 Gaea's Revenge
+3 Nature's Claim
+1 Thrun, the Last Troll

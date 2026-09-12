@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Ailien02_-_Jund_Dragons_(Standard,_#1372727).dck
+Deck Type=constructed
+
+[Main]
+1 Valki, God of Lies
+1 Ziatora, the Incinerator
+2 Titan of Industry
+2 Prosperous Innkeeper
+2 Moonveil Regent
+4 Goldspan Dragon
+4 Fable of the Mirror-Breaker
+4 Magda, Brazen Outlaw
+4 Jaspera Sentinel
+4 Esika's Chariot
+3 Riveteers Charm
+4 Dragon's Fire
+1 The Meathook Massacre
+1 Swamp
+1 Mountain
+1 Forest
+1 Boseiju, Who Endures
+2 Ziatora's Proving Ground
+2 Haunted Ridge
+2 Den of the Bugbear
+3 Blightstep Pathway
+3 Darkbore Pathway
+4 Cragcrown Pathway
+4 Rockfall Vale
+[Sideboard]
+2 Go Blank
+2 Graveyard Trespasser
+2 Workshop Warchief
+3 Duress
+3 Ray of Enfeeblement
+3 Unleash the Inferno

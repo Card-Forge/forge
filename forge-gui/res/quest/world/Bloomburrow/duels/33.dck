@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Fink64_-_Red_Deck_Wins_(Standard,_#2185370).dck
+Deck Type=constructed
+
+[Main]
+4 Manifold Mouse
+4 Heartfire Hero
+4 Slickshot Show-Off
+4 Monastery Swiftspear
+4 Emberheart Challenger
+4 Might of the Meek
+4 Monstrous Rage
+3 Torch the Tower
+4 Lightning Strike
+4 Shock
+18 Mountain
+3 Rockface Village
+[Sideboard]
+3 Squee, Dubious Monarch
+3 Urabrask's Forge
+4 Tectonic Hazard
+4 Scorching Shot
+1 Fountainport

@@ -51,6 +51,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -60,8 +62,12 @@ import java.util.function.Predicate;
  */
 public class Game {
 
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
+
+    private boolean noGUIUser;
 
     /** The ID. */
     private int id;
@@ -69,6 +75,7 @@ public class Game {
     private final PlayerCollection allPlayers = new PlayerCollection();
     private final PlayerCollection ingamePlayers = new PlayerCollection();
     private final PlayerCollection lostPlayers = new PlayerCollection();
+    private GameEntityViewMap<Player, PlayerView> playerCache = new GameEntityViewMap<Player, PlayerView>();
 
     private List<Card> activePlanes = null;
 
@@ -92,7 +99,6 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
     public int AI_TIMEOUT = 5;
-    public boolean AI_CAN_USE_TIMEOUT = true;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
     // While this is false here, its really set by the Match/Preferences
@@ -132,8 +138,9 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
-    private final Game maingame;
+    private DrawOffer drawOffer;
 
+    private final Game maingame;
     private final GameView view;
     private final Tracker tracker = new Tracker();
 
@@ -151,6 +158,13 @@ public class Game {
     }
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
+    }
+
+    public DrawOffer getDrawOffer() {
+        return drawOffer;
+    }
+    public void setDrawOffer(final DrawOffer drawOffer) {
+        this.drawOffer = drawOffer;
     }
 
     public Player getMonarch() {
@@ -247,22 +261,17 @@ public class Game {
         }
     }
 
-    private final GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
     }
 
     public Player getPlayer(int id) {
-        for(Player p : allPlayers) {
+        for (Player p : allPlayers) {
             if (p.getId() == id) {
                 return p;
             }
         }
         return null;
-    }
-
-    public void addPlayer(int id, Player player) {
-        playerCache.put(id, player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
@@ -334,7 +343,7 @@ public class Game {
             Player pl = factory.createIngamePlayer(this, id == null ? plId++ : id);
             allPlayers.add(pl);
             ingamePlayers.add(pl);
-
+            playerCache.put(pl);
             if (startingLife != -1) {
                 pl.setStartingLife(startingLife);
             } else {
@@ -538,6 +547,16 @@ public class Game {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Snapshot support: aligns this game's fresh-card-id counters with the
+     * source game's, so a copy that preserves original card ids can never
+     * collide with ids handed out for cards created after the copy.
+     */
+    public void dangerouslySyncCardIdCounters(Game from) {
+        this.cardIdCounter = from.cardIdCounter;
+        this.hiddenCardIdCounter = from.hiddenCardIdCounter;
+    }
+
     public final GameOutcome getOutcome() {
         return outcome;
     }
@@ -551,6 +570,11 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
+        // early exit in case many events causing a game over have fired
+        if (isGameOver()) {
+            return;
+        }
+
         for (Player p : allPlayers) {
             p.clearController();
         }
@@ -627,7 +651,7 @@ public class Game {
         return getCardsIn(ZoneType.Command).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
-    public CardCollectionView getColoredCardsInPlay(final String color) {
+    public CardCollectionView getColoredCardsInPlay(final byte color) {
         final CardCollection cards = new CardCollection();
         for (Player p : getPlayers()) {
             cards.addAll(p.getColoredCardsInPlay(color));
@@ -694,11 +718,23 @@ public class Game {
         if (ZoneType.Stack.equals(view.getZone())) {
             visit.visitAll(getStackZone());
         } else if (view.getController() != null && view.getZone() != null) {
-            visit.visitAll(getPlayer(view.getController()).getZone(view.getZone()));
-        } else { // fallback if view doesn't has controller or zone set for some reason
+            Player p = getPlayer(view.getController());
+            if (p != null) {
+                visit.visitAll(p.getZone(view.getZone()));
+            }
+        }
+        // Zone-specific search may miss if the view has stale zone info
+        // (e.g. IdRef resolved from a tracker that wasn't updated after a
+        // zone change). Fall back to global search.
+        if (visit.getFound() == null) {
             forEachCardInGame(visit);
         }
-        return visit.getFound();
+        Card found = visit.getFound();
+        if (found == null) {
+            netLog.error("findByView: id={} (zone={}, controller={}) not found in any zone — returning null",
+                    view.getId(), view.getZone(), view.getController());
+        }
+        return found;
     }
 
     public Card findById(int id) {
@@ -723,9 +759,6 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
-                return;
-            }
-            if (!visitor.visitAll(((PlayerZoneBattlefield)player.getZone(ZoneType.Battlefield)).getMeldedCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
@@ -844,8 +877,6 @@ public class Game {
                 pl.revealFaceDownCards();
             }
         }
-
-        // TODO free any mindslaves
 
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
@@ -969,7 +1000,13 @@ public class Game {
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
+        // free any mindslaves
+        for (Player pl : getPlayers()) {
+            pl.removeController(p);
+        }
+
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
+        runParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
 
         getTriggerHandler().onPlayerLost(p);
@@ -1012,7 +1049,7 @@ public class Game {
         return ++hiddenCardIdCounter;
     }
 
-    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
+    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity, final boolean includeBasicLands) {
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
 
         if (matchRarity) {
@@ -1029,14 +1066,21 @@ public class Game {
 
             if (validRarities.size() == 0) { //If no possible rarity matches were found, use the original method to choose antes
                 for (Player player : getPlayers()) {
-                    chooseRandomCardsForAnte(player, anteed);
+                    chooseRandomCardsForAnte(player, anteed, includeBasicLands);
                 }
                 return anteed;
             }
 
-            //If possible, don't ante basic lands
-            if (validRarities.size() > 1) {
-                validRarities.remove(CardRarity.BasicLand);
+            //If possible, don't ante basic lands (unless the option to include them is enabled)
+            if (!includeBasicLands) {
+                if (validRarities.size() > 1) {
+                    validRarities.remove(CardRarity.BasicLand);
+                } else if (validRarities.size() == 1 && validRarities.get(0) == CardRarity.BasicLand) {
+                    for (Player player : getPlayers()) {
+                        chooseRandomCardsForAnte(player, anteed, includeBasicLands);
+                    }
+                    return anteed;
+                }
             }
 
             if (validRarities.contains(CardRarity.Special)) {
@@ -1076,20 +1120,27 @@ public class Game {
                     Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));
                     anteed.put(player, ante);
                 } else {
-                    chooseRandomCardsForAnte(player, anteed);
+                    chooseRandomCardsForAnte(player, anteed, includeBasicLands);
                 }
             }
         }
         else {
             for (Player player : getPlayers()) {
-                chooseRandomCardsForAnte(player, anteed);
+                chooseRandomCardsForAnte(player, anteed, includeBasicLands);
             }
         }
         return anteed;
     }
 
-    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
+    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed, final boolean includeBasicLands) {
         final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
+        if (includeBasicLands) {
+            Card ante = Aggregates.random(lib);
+            if (ante != null) {
+                anteed.put(player, ante);
+            }
+            return;
+        }
         Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
         Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
@@ -1165,8 +1216,7 @@ public class Game {
         resetNumPiledGuessedSA();
         clearLeftBattlefieldThisTurn();
         clearLeftGraveyardThisTurn();
-        clearCounterAddedThisTurn();
-        clearCounterRemovedThisTurn();
+        clearCountersThisTurn();
         clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
@@ -1194,7 +1244,7 @@ public class Game {
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
-        Set<CounterType> types = null;
+        Set<CounterType> types;
         if (cType == null) {
             types = countersAddedThisTurn.rowKeySet();
         } else if (!countersAddedThisTurn.containsRow(cType)) {
@@ -1217,7 +1267,7 @@ public class Game {
     }
     public int getCounterAddedThisTurn(CounterType cType, Card card) {
         int result = 0;
-        Set<CounterType> types = null;
+        Set<CounterType> types;
         if (cType == null) {
             types = countersAddedThisTurn.rowKeySet();
         } else if (!countersAddedThisTurn.containsRow(cType)) {
@@ -1237,14 +1287,14 @@ public class Game {
         return result;
     }
 
-    public void clearCounterAddedThisTurn() {
+    public void clearCountersThisTurn() {
         countersAddedThisTurn.clear();
+        countersRemovedThisTurn.clear();
     }
 
     public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
         countersRemovedThisTurn.put(cType, Pair.of(CardCopyService.getLKICopy(card), value));
     }
-
     public void addCounterRemovedThisTurn(CounterType cType, Player player, Integer value) {
         countersRemovedThisTurn.put(cType, Pair.of(player, value));
     }
@@ -1257,10 +1307,6 @@ public class Game {
             }
         }
         return result;
-    }
-
-    public void clearCounterRemovedThisTurn() {
-        countersRemovedThisTurn.clear();
     }
 
     /**
@@ -1374,13 +1420,16 @@ public class Game {
 
     public boolean isVoid() {
         return getLeftBattlefieldThisTurn().stream().anyMatch(c -> !c.isLand()) ||
-                getStack().getSpellsCastThisTurn().stream().anyMatch(s -> s.getCastSA().isWarp());
+                getStack().getSpellsCastThisTurn().stream().anyMatch(SpellAbility::isWarp);
     }
 
     public int getAITimeout() {
         return AI_TIMEOUT;
     }
-    public boolean canUseTimeout() {
-        return AI_CAN_USE_TIMEOUT;
+    public boolean isNoGUIUser() {
+        return noGUIUser;
+    }
+    public void setNoGUIUser() {
+        noGUIUser = true;
     }
 }

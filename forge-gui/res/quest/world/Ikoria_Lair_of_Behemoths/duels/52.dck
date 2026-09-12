@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Curryvore_-_Jeskai_Control_(Modern,_#1025811).dck
+Deck Type=constructed
+
+[Main]
+2 Yorion, Sky Nomad
+2 Venser, Shaper Savant
+3 Brazen Borrower
+4 Vendilion Clique
+4 Snapcaster Mage
+4 Restoration Angel
+4 Wall of Omens
+3 Lightning Helix
+3 Path to Exile
+4 Force of Negation
+4 Lightning Bolt
+4 Opt
+4 Spreading Seas
+3 Teferi, Time Raveler
+1 Mountain
+1 Steam Vents
+1 Mystic Sanctuary
+2 Hallowed Fountain
+2 Polluted Delta
+2 Celestial Colonnade
+3 Plains
+4 Scalding Tarn
+4 Raugrin Triome
+4 Island
+4 Field of Ruin
+4 Flooded Strand
+[Sideboard]
+1 Izzet Staticaster
+1 Yorion, Sky Nomad
+2 Celestial Purge
+3 Aether Gust
+4 Ashiok, Dream Render
+4 Dovin's Veto

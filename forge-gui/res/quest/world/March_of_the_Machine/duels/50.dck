@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Hirose_Yoshiyuki_-_BRG_Aggro_(Standard,_#1638784).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+3 Sheoldred, the Apocalypse
+4 Armored Scrapgorger
+3 Atraxa, Grand Unifier
+1 Etali, Primal Conqueror
+3 Reckoner Bankbuster
+2 Abrade
+3 Go for the Throat
+2 Cut Down
+3 The Cruelty of Gix
+3 Tyvar, Jubilant Brawler
+1 Swamp
+1 Forest
+2 Llanowar Wastes
+1 Karplusan Forest
+1 Sulfurous Springs
+4 Blackcleave Cliffs
+2 Copperline Gorge
+2 Haunted Ridge
+2 Rockfall Vale
+3 Deathcap Glade
+4 Ziatora's Proving Ground
+2 Plaza of Heroes
+[Sideboard]
+3 Duress
+1 Abrade
+2 Outland Liberator
+1 Soul Transfer
+1 Cut Down
+3 Razorlash Transmogrant
+2 Glistening Deluge
+2 Lithomantic Barrage

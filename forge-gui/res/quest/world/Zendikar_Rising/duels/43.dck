@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Berry_-_Orzhov_Clerics_(Standard,_#1046711).dck
+Deck Type=constructed
+
+[Main]
+1 Luminarch Aspirant
+1 Drana, the Last Bloodchief
+1 Vito, Thorn of the Dusk Rose
+1 Taborax, Hope's Demise
+2 Mangara, the Diplomat
+2 Orah, Skyclave Hierophant
+4 Speaker of the Heavens
+4 Skyclave Cleric
+4 Kitesail Cleric
+4 Archfiend's Vessel
+4 Nullpriest of Oblivion
+4 Kor Celebrant
+4 Marauding Blight-Priest
+4 Cleric of Life's Bond
+1 Relic Vial
+2 Castle Locthwain
+4 Scoured Barrens
+6 Swamp
+7 Plains
+[Sideboard]

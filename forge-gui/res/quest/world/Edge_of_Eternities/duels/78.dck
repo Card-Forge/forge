@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Alexander_carr_-_Mono_Blue_Tron_(Modern,_#2679151).dck
+Deck Type=constructed
+
+[Main]
+1 Emrakul, the Aeons Torn
+2 Ulamog, the Ceaseless Hunger
+4 Chalice of the Void
+4 Expedition Map
+4 Talisman of Dominance
+3 Spell Snare
+4 Kozilek's Command
+3 Sink into Stupor
+2 Force of Negation
+4 Portent of Calamity
+3 Stock Up
+1 All Is Dust
+4 Ugin, Eye of the Storms
+4 Island
+4 Ugin's Labyrinth
+4 Urza's Mine
+1 Otawara, Soaring City
+4 Urza's Tower
+4 Urza's Power Plant
+[Sideboard]
+1 Vexing Bauble
+4 Consign to Memory
+2 Relic of Progenitus
+2 Dismember
+3 Mystical Dispute
+1 Sire of Seven Deaths
+1 All Is Dust
+1 Extinguisher Battleship

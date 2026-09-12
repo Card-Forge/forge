@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_Valley_Stream/Jonah_Gaynor_-_Sultai_Reanimator_(Standard,_#128830).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+3 Hornet Queen
+1 Sagu Mauler
+4 Satyr Wayfinder
+4 Sidisi, Brood Tyrant
+2 Soul of Innistrad
+4 Sylvan Caryatid
+3 Whip of Erebos
+3 Hero's Downfall
+4 Murderous Cut
+3 Thoughtseize
+1 Evolving Wilds
+3 Forest
+1 Island
+4 Llanowar Wastes
+1 Mana Confluence
+4 Opulent Palace
+2 Polluted Delta
+2 Swamp
+2 Temple of Malady
+1 Temple of Mystery
+2 Yavimaya Coast
+[Sideboard]
+3 Ashiok, Nightmare Weaver
+1 Bile Blight
+3 Disdainful Stroke
+2 Drown in Sorrow
+2 Negate
+1 Nylea's Disciple
+1 Reclamation Sage
+2 Sultai Charm

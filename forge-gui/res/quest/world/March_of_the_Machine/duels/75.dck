@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/ziyanghuakai_-_Jund_Creativity_(Modern,_#1624721).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Titan of Industry
+1 Lightning Bolt
+3 Lightning Bolt
+2 Unholy Heat
+4 Thoughtseize
+4 Indomitable Creativity
+3 Persist
+3 Bitter Reunion
+4 Wrenn and Six
+3 Wrenn and Realmbreaker
+3 Bloodstained Mire
+4 Wooded Foothills
+3 Stomping Ground
+2 Blood Crypt
+3 Scalding Tarn
+3 Dwarven Mine
+3 Arid Mesa
+1 Mountain
+1 Ziatora's Proving Ground
+[Sideboard]
+3 Nature's Claim
+3 Veil of Summer
+2 Necromentia
+2 Strike It Rich
+3 Turn the Earth
+2 Brotherhood's End

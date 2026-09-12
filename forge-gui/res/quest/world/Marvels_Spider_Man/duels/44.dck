@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/Ben_Whitmer_-_Simic_Aggro_(Standard,_#2676098).dck
+Deck Type=constructed
+
+[Main]
+4 Azure Beastbinder
+4 Floodpits Drowner
+4 Gene Pollinator
+4 Jackal, Genius Geneticist
+4 Llanowar Elves
+4 Ouroboroid
+4 Pawpatch Recruit
+3 Spyglass Siren
+2 Tyvar, the Pummeler
+1 Enduring Curiosity
+1 Surrak, Elusive Hunter
+1 Repulsive Mutation
+4 Innkeeper's Talent
+5 Forest
+4 Botanical Sanctum
+4 Breeding Pool
+4 Multiversal Passage
+3 Willowrush Verge
+[Sideboard]
+4 Dragon Sniper
+3 Keen-Eyed Curator
+3 Repulsive Mutation
+2 Insidious Fungus
+2 Tishana's Tidebinder
+1 Enduring Curiosity

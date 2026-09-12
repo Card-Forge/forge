@@ -1,0 +1,8 @@
+Name:Unbreakable Remnant
+ManaCost:W
+Types:Creature Spirit Soldier
+PT:2/1
+K:Escape:1 W ExileFromGrave<2/Card.Other/other>
+T:Mode$ SpellCast | ValidCard$ Card.Self+wasCastFromYourGraveyardByYou | Execute$ TrigPumpAll | TriggerDescription$ When you cast this spell from your graveyard, all cards you own named Unbreakable Remnant perpetually get +1/+1.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Card.YouOwn+namedUnbreakable Remnant+!token | PumpZone$ All | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+Oracle:Escape—{1}{W}, Exile two other cards from your graveyard.\nWhen you cast this spell from your graveyard, all cards you own named Unbreakable Remnant perpetually get +1/+1.

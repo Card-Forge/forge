@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/MOCS_2012/Jan_van_der_Vegt_-_Dzy_-_Junk_Reanimator_(Standard,_#48150).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Angel of Serenity
+4 Avacyn's Pilgrim
+3 Craterhoof Behemoth
+4 Somberwald Sage
+4 Thragtusk
+2 Abrupt Decay
+4 Grisly Salvage
+4 Lingering Souls
+3 Mulch
+4 Unburial Rites
+2 Forest
+1 Gavony Township
+4 Godless Shrine
+2 Isolated Chapel
+4 Overgrown Tomb
+3 Sunpetal Grove
+4 Temple Garden
+4 Woodland Cemetery
+[Sideboard]
+2 Acidic Slime
+3 Loxodon Smiter
+1 Purify the Grave
+2 Rhox Faithmender
+2 Sever the Bloodline
+2 Tragic Slip
+1 Trostani, Selesnya's Voice

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Terminator
+Title=Terminator
+Icon=Terminator.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/Jd_Rivera_-_Simic_Aggro_(Standard,_#2731498).dck
+Deck Type=constructed
+
+[Main]
+3 Azure Beastbinder
+4 Badgermole Cub
+4 Gene Pollinator
+4 Jackal, Genius Geneticist
+4 Llanowar Elves
+4 Ouroboroid
+4 Pawpatch Recruit
+2 Quantum Riddler
+1 Sab-Sunen, Luxa Embodied
+2 Spyglass Siren
+1 Tishana's Tidebinder
+1 Tyvar, the Pummeler
+2 Wan Shi Tong, Librarian
+4 Innkeeper's Talent
+4 Botanical Sanctum
+4 Breeding Pool
+4 Forest
+4 Multiversal Passage
+4 Willowrush Verge
+[Sideboard]
+2 Into the Flood Maw
+2 Keen-Eyed Curator
+1 Quantum Riddler
+4 Repulsive Mutation
+2 Spider-Sense
+1 Tishana's Tidebinder
+3 Torpor Orb

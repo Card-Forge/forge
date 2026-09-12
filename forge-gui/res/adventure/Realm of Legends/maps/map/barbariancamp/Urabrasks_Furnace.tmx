@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="95">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -48,6 +48,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Shrine of Burning Rage|NPH&quot;, &quot;Furnace Skullbomb|ONE&quot;, &quot;Urabrask's Forge|ONE&quot;, &quot;Vindictive Flamestoker|ONE&quot;]}"/>
     <property name="enemy" value="Urabrask"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" value="0"/>
    </properties>
   </object>
@@ -169,6 +171,17 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
    &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="215.333" y="165">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Shrine of Burning Rage|NPH&quot;, &quot;Furnace Skullbomb|ONE&quot;, &quot;Vindictive Flamestoker|ONE&quot;]}"/>
+    <property name="enemy" value="Urabrask"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" value="0"/>
    </properties>
   </object>
  </objectgroup>

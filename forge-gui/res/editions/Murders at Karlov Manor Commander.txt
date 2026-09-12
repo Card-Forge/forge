@@ -7,7 +7,7 @@ ScryfallCode=MKC
 
 [cards]
 1 M Kaust, Eyes of the Glade @Volkan Baǵa
-2 M Mirko, Obsessive Theorist @Heonhwa Choe
+2 M Mirko, Obsessive Theorist @Heonhwa
 3 M Morska, Undersea Sleuth @Ekaterina Burmak
 4 M Nelly Borca, Impulsive Accuser @James Ryman
 5 M Duskana, the Rage Mother @Samuel Perin
@@ -55,7 +55,7 @@ ScryfallCode=MKC
 47 R Ransom Note @Gaboleps
 48 R Ransom Note @Gaboleps
 49 M Kaust, Eyes of the Glade @Volkan Baǵa
-50 M Mirko, Obsessive Theorist @Heonhwa Choe
+50 M Mirko, Obsessive Theorist @Heonhwa
 51 M Morska, Undersea Sleuth @Ekaterina Burmak
 52 M Nelly Borca, Impulsive Accuser @James Ryman
 53 R Ugin's Mastery @David Astruga
@@ -198,7 +198,7 @@ ScryfallCode=MKC
 190 R Tireless Tracker @Eric Deschamps
 191 R Toski, Bearer of Secrets @Jason Rainville
 192 R Trail of Mystery @Raymond Swanland
-193 U Ulvenwald Mysteries @Marzena Nereida Piwowar
+193 U Ulvenwald Mysteries @Nereida
 194 M Whisperwood Elemental @Raymond Swanland
 195 C Wild Growth @Tony Szczudlo
 196 U Wilderness Reclamation @Tyler Walpole
@@ -321,7 +321,7 @@ ScryfallCode=MKC
 313 M Feather, Radiant Arbiter @Dan Dos Santos
 314 M Kaust, Eyes of the Glade @Volkan Baǵa
 315 M Marvo, Deep Operative @John Tedrick
-316 M Mirko, Obsessive Theorist @Heonhwa Choe
+316 M Mirko, Obsessive Theorist @Heonhwa
 317 M Morska, Undersea Sleuth @Ekaterina Burmak
 318 M Nelly Borca, Impulsive Accuser @James Ryman
 319 M Sophia, Dogged Detective @Campbell White

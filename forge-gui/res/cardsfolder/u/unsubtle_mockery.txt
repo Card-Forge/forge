@@ -1,0 +1,6 @@
+Name:Unsubtle Mockery
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SubAbility$ DBSurveil | SpellDescription$ CARDNAME deals 4 damage to target creature. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+Oracle:Unsubtle Mockery deals 4 damage to target creature. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

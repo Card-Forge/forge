@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -80,6 +79,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("Choices")) {
                 faces.addAll(parseFaces(sa, "Choices"));
             } else if (sa.hasParam("Booster")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 SealedTemplate booster = Aggregates.random(StaticData.instance().getBoosters());
                 pack = new BoosterPack(booster.getEdition(), booster).getCards();
                 for (PaperCard pc : pack) {
@@ -150,7 +150,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     while (toMake > 0) {
                         PaperCard pc;
                         if (pack != null) {
-                            pc = Iterables.getLast(IterableUtil.filter(pack, PaperCardPredicates.name(name)));
+                            pc = pack.stream().filter(p -> p.getRules().getMainPart().getName().equals(name)).findAny().get();
                         } else {
                             // Try to get the card in the sa host's current edition
                             String editionCode = sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE;
@@ -210,7 +210,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
             triggerList.triggerChangesZoneAll(game, sa);
-            counterTable.replaceCounterEffect(game, sa, true);
+            counterTable.replaceCounterEffect(game, sa);
 
             if (sa.hasParam("Reveal")) {
                 game.getAction().reveal(cards, player, true);

@@ -8,7 +8,7 @@ TokensCode=H17
 Border=Silver
 
 [cards]
-1 R Grimlock, Dinobot Leader @Tyler Jacobson
+1 M Grimlock, Dinobot Leader @Tyler Jacobson
 2 M Nerf War @Victor Adame Minguez
 3 M Sword of Dungeons & Dragons @Chris Rahn
 

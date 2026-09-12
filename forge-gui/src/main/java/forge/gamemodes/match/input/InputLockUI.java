@@ -58,8 +58,12 @@ public class InputLockUI implements Input {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
-            showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            if (controller.mayAutoPass()) {
+                controller.getGui().updateAutoPassPrompt();
+            } else {
+                controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
+                showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            }
         }
     };
 
@@ -87,10 +91,7 @@ public class InputLockUI implements Input {
     }
     @Override
     public void selectButtonCancel() {
-        //cancel auto pass for all players
-        for (final Player player : controller.getGame().getPlayers()) {
-            player.getController().autoPassCancel();
-        }
+        controller.getYieldController().clearActiveYieldAndDispatch();
     }
 
     @Override

@@ -10,7 +10,7 @@ ScryfallCode=V17
 2 M Arguel's Blood Fast @Daarken
 3 M Arlinn Kord @Winona Nelson
 4 M Bloodline Keeper @Jason Chan
-5a M Bruna, the Fading Light @Clint Cearley
+5 M Bruna, the Fading Light @Clint Cearley
 6 M Chandra, Fire of Kaladesh @Eric Deschamps
 7 M Delver of Secrets @Lius Lasahido
 8 M Elbrus, the Binding Blade @Eric Deschamps

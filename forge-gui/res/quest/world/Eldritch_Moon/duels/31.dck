@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/Standard_Kiel/Malte_Hanisch_-_Bant_Company_(Standard,_#639769).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+4 Duskwatch Recruiter
+1 Nebelgast Herald
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+3 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+2 Thalia, Heretic Cathar
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+5 Forest
+2 Fortified Village
+3 Island
+2 Lumbering Falls
+3 Plains
+2 Prairie Stream
+[Sideboard]
+2 Declaration in Stone
+4 Lambholt Pacifist
+2 Negate
+1 Planar Outburst
+1 Summary Dismissal
+1 Tragic Arrogance

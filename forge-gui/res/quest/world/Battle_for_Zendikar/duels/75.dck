@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Competitive_Modern_Constructed_League/con2053_-_Rogue_(Modern,_#634925).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+2 Kitchen Finks
+4 Loxodon Smiter
+4 Noble Hierarch
+3 Siege Rhino
+4 Tarmogoyf
+3 Voice of Resurgence
+3 Wilt-Leaf Liege
+2 Abrupt Decay
+4 Path to Exile
+2 Inquisition of Kozilek
+3 Lingering Souls
+2 Thoughtseize
+2 Forest
+2 Gavony Township
+1 Godless Shrine
+3 Marsh Flats
+1 Overgrown Tomb
+1 Plains
+1 Shambling Vent
+1 Stirring Wildwood
+1 Swamp
+2 Temple Garden
+4 Verdant Catacombs
+3 Windswept Heath
+[Sideboard]
+1 Engineered Explosives
+3 Qasali Pridemage
+2 Rest in Peace
+2 Scavenging Ooze
+1 Sorin, Solemn Visitor
+2 Stony Silence

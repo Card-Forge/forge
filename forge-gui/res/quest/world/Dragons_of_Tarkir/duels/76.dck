@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Kings Contest
+Title=The Kings Contest
+Icon=The Kings Contest.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Competitive_Modern_Constructed_League/BradPitKeeper_-_Red_Deck_Wins_(Modern,_#659762).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+3 Rift Bolt
+4 Bloodstained Mire
+2 Copperline Gorge
+2 Mountain
+3 Sacred Foundry
+3 Scalding Tarn
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Grafdigger's Cage
+2 Lightning Helix
+3 Path to Exile
+2 Skullcrack

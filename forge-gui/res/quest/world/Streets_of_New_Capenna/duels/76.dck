@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Ito_motoaki_-_Cascade_Crash_(Modern,_#1529236).dck
+Deck Type=constructed
+
+[Main]
+2 Endurance
+2 Fury
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Shardless Agent
+1 Prismari Command
+2 Mystical Dispute
+3 Force of Negation
+3 Dead // Gone
+3 Fire // Ice
+4 Violent Outburst
+4 Crashing Footfalls
+1 Ketria Triome
+1 Waterlogged Grove
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Spara's Headquarters
+1 Stomping Ground
+1 Blood Crypt
+1 Forest
+2 Island
+2 Breeding Pool
+4 Scalding Tarn
+4 Misty Rainforest
+4 Wooded Foothills
+[Sideboard]
+1 Thrun, the Last Troll
+1 Endurance
+2 Anger of the Gods
+2 Mystical Dispute
+2 Klothys, God of Destiny
+3 Force of Vigor
+4 Territorial Kavu

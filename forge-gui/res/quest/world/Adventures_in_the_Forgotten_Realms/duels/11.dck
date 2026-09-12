@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Platinum-Mythic_Rank_Player_-_Abzan_Midrange_(Standard,_#1226694).dck
+Deck Type=constructed
+
+[Main]
+1 Nullpriest of Oblivion
+1 Varragoth, Bloodsky Sire
+1 Killian, Ink Duelist
+1 Toski, Bearer of Secrets
+2 Fynn, the Fangbearer
+2 Nighthawk Scavenger
+2 Lightfoot Rogue
+2 Triumphant Adventurer
+3 Yuan-Ti Fang-Blade
+3 Thunderous Orator
+3 Underdark Basilisk
+1 Reaper's Talisman
+1 Vanishing Verse
+1 Fracture
+1 Mortality Spear
+1 Raise the Draugr
+2 Poison the Cup
+2 You Happen On a Glade
+2 Vastwood Fortification
+1 Silverquill Command
+1 Humiliate
+1 Doomskar
+2 You Find a Cursed Idol
+1 Fall of the Impostor
+2 Binding the Old Gods
+2 Minimus Containment
+1 Branchloft Pathway
+1 Brightclimb Pathway
+1 Woodland Chasm
+1 Darkbore Pathway
+2 Evolving Wilds
+2 Snowfield Sinkhole
+2 Arctic Treeline
+3 Plains
+4 Forest
+7 Swamp
+[Sideboard]
+1 You Hear Something on Watch
+1 Shaile, Dean of Radiance
+1 Warlock Class
+1 Portable Hole
+1 Paladin Class
+2 Pillardrop Rescuer

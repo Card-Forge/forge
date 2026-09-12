@@ -1,0 +1,11 @@
+Name:Changing Loyalty
+ManaCost:1 B
+Types:Enchantment Aura
+K:Flash
+K:Replicate:2
+K:Enchant:Creature
+SVar:AttachAITgts:Card.!token
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return it to the battlefield under your control.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy
+Oracle:Flash\nReplicate {2} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies. Copies become tokens.)\nEnchant creature\nWhen enchanted creature dies, return it to the battlefield under your control.

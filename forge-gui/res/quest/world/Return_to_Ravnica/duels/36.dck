@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Cornelius/Chris_Ingram_-_Red_Deck_Wins_(Standard,_#41446).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+3 Falkenrath Aristocrat
+3 Hellhole Flailer
+3 Hellrider
+4 Knight of Infamy
+4 Rakdos Cackler
+4 Stromkirk Noble
+2 Rakdos Keyrune
+4 Searing Spear
+3 Dreadbore
+3 Mizzium Mortars
+4 Blood Crypt
+3 Cavern of Souls
+4 Dragonskull Summit
+10 Mountain
+2 Swamp
+[Sideboard]
+3 Pillar of Flame
+3 Rakdos Charm
+3 Slaughter Games
+3 Ultimate Price
+3 Zealous Conscripts

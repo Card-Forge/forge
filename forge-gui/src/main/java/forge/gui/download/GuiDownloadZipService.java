@@ -1,6 +1,7 @@
 package forge.gui.download;
 
-import com.esotericsoftware.minlog.Log;
+import org.tinylog.Logger;
+
 import com.google.common.io.Files;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -140,7 +141,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
             return destFile;
         }
         catch (final Exception ex) {
-            Log.error("Downloading " + desc, "Error downloading " + desc, ex);
+            Logger.error(ex, "Error downloading " + desc);
             return null;
         }
         finally {
@@ -170,13 +171,21 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 }
             }
 
-            final Charset charset = Charset.forName("IBM437");
+            Charset charset;
+            try {
+                charset = Charset.forName("IBM437");
+            } catch (java.nio.charset.UnsupportedCharsetException e) {
+                // Fallback for environments like iOS/RoboVM that lack legacy charsets
+                charset = java.nio.charset.StandardCharsets.UTF_8;
+            }
+
             ZipFile zipFile;
             try {
                 zipFile = new ZipFile(zipFilename, charset);
             } catch (Throwable e) { //some older Android versions need the old method
                 zipFile = new ZipFile(zipFilename);
             }
+
             final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             if (progressBar != null) {
@@ -215,7 +224,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
             }
 
             if (failedCount > 0) {
-                Log.error("Downloading " + desc, failedCount + " " + desc + " could not be extracted");
+                Logger.error(failedCount + " " + desc + " could not be extracted");
             }
 
             zipFile.close();

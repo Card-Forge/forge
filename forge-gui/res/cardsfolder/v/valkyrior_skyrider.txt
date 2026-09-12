@@ -1,0 +1,8 @@
+Name:Valkyrior Skyrider
+ManaCost:4 W
+Types:Creature God Warrior Hero
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen this creature enters, you gain 4 life.

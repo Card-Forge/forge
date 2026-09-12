@@ -2,8 +2,6 @@ package forge.assets;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -22,8 +20,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntSet;
 import forge.Forge;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.util.Lang;
 import forge.util.LineReader;
 import forge.util.TextBounds;
 import forge.util.Utils;
@@ -67,7 +67,7 @@ public class FSkinFont {
     //pre-load all supported font sizes
     public static void preloadAll(String language) {
         //todo:really check the language glyph is a lot
-        MAX_FONT_SIZE = (language.equals("zh-CN") || language.equals("ja-JP")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
+        MAX_FONT_SIZE = (Lang.initInstance(language).getFontFile() != null) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
         for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }
@@ -368,7 +368,12 @@ public class FSkinFont {
         String[] translationFilePaths = { ForgeConstants.LANG_DIR + "cardnames-" + langCode + ".txt",
                 ForgeConstants.LANG_DIR + langCode + ".properties" };
         for (String translationFilePath : translationFilePaths) {
-            try (LineReader translationFile = new LineReader(Files.newInputStream(Paths.get(translationFilePath)),
+            FileHandle translationFileHandle = Forge.getAssets().getFileHandle(translationFilePath);
+            // Skip if file doesn't exist (e.g., cardnames-en-US.txt doesn't exist because English is the base language)
+            if (!translationFileHandle.exists()) {
+                continue;
+            }
+            try (LineReader translationFile = new LineReader(translationFileHandle.read(),
                     StandardCharsets.UTF_8)) {
                 for (String fileLine : translationFile.readLines()) {
                     final int stringLength = fileLine.length();
@@ -402,10 +407,11 @@ public class FSkinFont {
         } else {
             fontName += fontSize;
         }
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+        boolean useCjkFont = Lang.initInstance(Forge.locale).getFontFile() != null;
+        if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             fontName += Forge.locale;
         }
-        FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
+        FileHandle fontFile = Forge.getAssets().getFileHandle(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         final boolean[] found = {false};
         if (fontFile != null && fontFile.exists()) {
             FThreads.invokeInEdtNowOrLater(() -> { //font must be initialized on UI thread
@@ -427,7 +433,7 @@ public class FSkinFont {
         if (found[0])
             return;
         //not found generate
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+        if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             String ttfName = Forge.CJK_Font;
             FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
             if (ttfFile != null && ttfFile.exists()) {
@@ -452,7 +458,7 @@ public class FSkinFont {
         } else {
             pageSize = 256;
         }
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+        if (Lang.initInstance(Forge.locale).getFontFile() != null && !Forge.forcedEnglishonCJKMissing) {
             pageSize = 1024;
         }
 
@@ -478,7 +484,13 @@ public class FSkinFont {
                             getTextureData().consumePixmap().dispose();
                         }
                     };
-                    texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+                    if (GuiBase.isIOS()) {
+                        // Linear filtering renders smoother text on Retina displays; other
+                        // platforms keep the original crisp Nearest filtering.
+                        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    } else {
+                        texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+                    }
                     textureRegions.addAll(new TextureRegion(texture));
                 }
 

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Lifore_-_Humans_(Modern,_#1225998).dck
+Deck Type=constructed
+
+[Main]
+1 Esper Sentinel
+2 Mantis Rider
+2 Phantasmal Image
+3 Ragavan, Nimble Pilferer
+3 Adeline, Resplendent Cathar
+3 Imperial Recruiter
+3 Thalia, Guardian of Thraben
+3 Reflector Mage
+4 Thalia's Lieutenant
+4 Champion of the Parish
+4 Meddling Mage
+4 Aether Vial
+2 Lightning Bolt
+2 Teferi, Time Raveler
+1 Island
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Hallowed Fountain
+2 Sunbaked Canyon
+2 Seachrome Coast
+2 Inspiring Vantage
+2 Arid Mesa
+3 Cavern of Souls
+4 Flooded Strand
+[Sideboard]
+1 Sanctum Prelate
+1 Blossoming Calm
+1 Kira, Great Glass-Spinner
+1 Lavinia, Azorius Renegade
+1 Magus of the Moon
+2 Deputy of Detention
+2 Alpine Moon
+2 Lightning Bolt
+4 Sanctifier en-Vec

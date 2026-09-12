@@ -1,0 +1,13 @@
+Name:Bullseye, Death Dealer
+ManaCost:2 BR
+Types:Legendary Creature Human Assassin Villain
+PT:2/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ When NICKNAME enters, you may sacrifice an artifact or discard a nonland card. When you do, NICKNAME deals 2 damage to any target.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ DBSacToHit,DBDiscardToHit
+SVar:DBSacToHit:DB$ ImmediateTrigger | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDamage | SpellDescription$ Sacrifice an artifact. When you do, NICKNAME deals 2 damage to any target.
+SVar:DBDiscardToHit:DB$ ImmediateTrigger | UnlessCost$ Discard<1/Card.nonLand> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDamage | SpellDescription$ Discard a card. When you do, NICKNAME deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Any
+A:AB$ DealDamage | Cost$ 3 T Sac<1/Artifact> | AlternateCost$ 3 T Discard<1/Card.nonLand> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ NICKNAME deals 2 damage to any target.
+DeckHas:Ability$Sacrifice|Graveyard|Discard
+DeckHints:Type$Artifact|Clue|Treasure
+Oracle:When Bullseye enters, you may sacrifice an artifact or discard a nonland card. When you do, Bullseye deals 2 damage to any target.\n{3}, {T}, Sacrifice an artifact or discard a nonland card: Bullseye deals 2 damage to any target.

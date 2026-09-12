@@ -1,0 +1,58 @@
+[metadata]
+Code=OBC
+Date=2003-05-26
+Name=Old Border Custom Tokens
+Type=Promo
+ScryfallCode=OBC
+TokensCode=OBC
+
+[tokens]
+1 b_0_1_insect @Geofrey Darrow
+2 b_1_1_minion @Ron Spencer
+3 b_1_1_rat @DiTerlizzi
+4 b_1_1_skeleton_regenerate @NéNé Thomas
+5 b_2_1_cat @Heather Hudson
+6 b_3_3_angel_flying @Anson Maddocks
+7 b_3_3_kavu @Tony Szczudlo
+8 b_6_6_wurm_trample @Jeff Easley
+9 b_x_x_phyrexian_minion @Sam Wood
+10 b_x_x_spirit @Jesper Myrfors
+11 br_3_1_graveborn_haste @Mike Kimble
+12 butterfly @Carl Critchlow
+13 c_0_1_a_prism @Ron Spencer
+14 c_0_2_a_wall_defender @Dan Frazier
+15 c_1_1_a_gnome @Jeff Laubenstein
+16 c_1_1_a_thopter_flying @Doug Chaffee
+17 carnivore @Val Mayerik
+18 g_1_1_cat @Susan Van Camp
+19 g_1_1_dog @Jeff Miracola
+20 g_1_1_hippo @Amy Weber
+21 g_1_1_snake @Roger Raupp
+22 g_1_1_spike @Adam Rex
+23 g_1_1_splinter_flying_cum @Ron Spencer
+24 g_2_2_beast @Carl Critchlow
+25 g_2_2_monkey @Carl Critchlow
+26 g_3_3_beast @Paolo Parente
+27 g_3_3_centaur @Alex Horley-Orlandelli
+28 g_7_7_elemental_trample @rk post
+29 hornet @Ron Spencer
+30 kelp @Rob Alexander
+31 minor_demon @Quinton Hoover
+32 r_1_1_elemental_cat_haste @David Martin
+33 r_1_1_goblin_scout_mountainwalk @Geofrey Darrow
+34 rgw_1_1_sand_warrior @Richard Kane Ferguson
+35 stangg_twin @Mark Poole
+36 tombspawn @Dom!
+37 u_0_1_starfish @Alan Rabinowitz
+38 u_5_5_wall_defender @Brian Snõddy
+39 u_x_x_orb_flying @Mark Tedin
+40 w_0_1_caribou @Ruth Thompson
+41 w_0_1_deserter @Cecil Fernando
+42 w_1_1_bird_flying @Mark Poole
+43 w_1_1_knight_banding @Ruth Thompson
+44 w_2_2_knight @Greg Staples
+45 w_2_2_reflection @D. Alexander Gregory
+46 w_4_4_angel_flying @Paolo Parente
+47 w_x_x_reflection @Scott M. Fischer
+48 wolves_of_the_hunt @Jeff A. Menges
+49 wood @Mark Tedin

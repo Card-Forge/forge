@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Adam_Ramsay_-_Dimir_Control_(Standard,_#1183568).dck
+Deck Type=constructed
+
+[Main]
+2 Midnight Clock
+3 Mazemind Tome
+1 Mystical Dispute
+1 Suffocating Fumes
+1 Essence Scatter
+1 Soul Shatter
+2 Cling to Dust
+2 Disdainful Stroke
+2 Saw It Coming
+2 Negate
+2 Behold the Multiverse
+4 Heartless Act
+1 Bloodchief's Thirst
+1 Shadows' Verdict
+3 Extinction Event
+1 Elspeth's Nightmare
+4 Shark Typhoon
+1 Ugin, the Spirit Dragon
+1 Castle Vantress
+2 Crawling Barrens
+3 Field of Ruin
+4 Clearwater Pathway
+4 Temple of Deceit
+5 Island
+7 Swamp
+[Sideboard]
+1 Eliminate
+1 Mazemind Tome
+1 Kaervek, the Spiteful
+1 Soul Shatter
+1 Test of Talents
+1 Lochmere Serpent
+1 Ugin, the Spirit Dragon
+2 Shadows' Verdict
+2 Elspeth's Nightmare
+2 Lash of Malice
+2 Mystical Dispute

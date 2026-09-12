@@ -1,7 +1,7 @@
 [metadata]
 Code=PTK
-Date=1999-07-06
-Name=Portal: Three Kingdoms
+Date=1999-05-01
+Name=Portal Three Kingdoms
 Code2=P3
 Type=Starter
 Border=White

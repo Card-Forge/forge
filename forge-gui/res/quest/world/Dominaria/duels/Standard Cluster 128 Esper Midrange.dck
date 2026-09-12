@@ -1,0 +1,40 @@
+[metadata]
+Name=Esper Midrange
+Deck Type=constructed
+Title=Esper Midrange
+Description=Esper Midrange
+Difficulty=Easy
+Icon=Dungeon Crawling Blue
+[Main]
+4 Aether Hub
+1 Arguel's Blood Fast
+4 Champion of Wits
+4 Concealed Courtyard
+2 Doomfall
+4 Drowned Catacomb
+2 Evolving Wilds
+4 Fatal Push
+3 Fetid Pools
+2 Field of Ruin
+4 Gifted Aetherborn
+4 Glint-Sleeve Siphoner
+2 Gonti, Lord of Luxury
+1 Hostage Taker
+1 Island
+2 Ixalan's Binding
+1 Plains
+2 Profane Procession
+1 Swamp
+3 Swamp
+3 The Scarab God
+3 Vraska's Contempt
+3 Walking Ballista
+[Sideboard]
+1 Bontu's Last Reckoning
+2 Duress
+2 Forsake the Worldly
+2 Golden Demise
+2 Liliana, Death's Majesty
+2 Moment of Craving
+3 Negate
+1 Search for Azcanta

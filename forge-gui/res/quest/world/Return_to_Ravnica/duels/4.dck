@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/2012_States_-_Nebraska/BrianSwitzer_-_Azorius_Aggro_(Standard,_#39268).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Angelic Overseer
+4 Champion of the Parish
+3 Elite Inquisitor
+4 Geist of Saint Traft
+4 Knight of Glory
+3 Nearheath Pilgrim
+3 Silverblade Paladin
+3 Thalia, Guardian of Thraben
+4 War Falcon
+4 Spectral Flight
+3 Ajani, Caller of the Pride
+3 Cavern of Souls
+4 Glacial Fortress
+4 Hallowed Fountain
+2 Moorland Haunt
+10 Plains
+[Sideboard]
+2 Grafdigger's Cage
+3 Negate
+3 Oblivion Ring
+2 Pithing Needle
+3 Riders of Gavony
+2 Supreme Verdict

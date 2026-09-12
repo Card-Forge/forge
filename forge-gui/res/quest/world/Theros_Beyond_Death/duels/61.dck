@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Dylan_Carfley_-_Golgari_Midrange_(Modern,_#927096).dck
+Deck Type=constructed
+
+[Main]
+1 Plague Engineer
+1 Questing Beast
+2 Hexdrinker
+2 Tireless Tracker
+3 Scavenging Ooze
+4 Tarmogoyf
+1 Liliana's Triumph
+2 Assassin's Trophy
+2 Abrupt Decay
+4 Fatal Push
+1 Unearth
+1 Collective Brutality
+2 Maelstrom Pulse
+3 Inquisition of Kozilek
+3 Thoughtseize
+1 Liliana, the Last Hope
+4 Liliana of the Veil
+1 Castle Locthwain
+1 Hissing Quagmire
+1 Urborg, Tomb of Yawgmoth
+2 Forest
+2 Swamp
+2 Field of Ruin
+2 Nurturing Peatland
+2 Overgrown Tomb
+2 Treetop Village
+4 Blooming Marsh
+4 Windswept Heath
+[Sideboard]
+1 Collective Brutality
+1 Pithing Needle
+1 Nihil Spellbomb
+1 Grafdigger's Cage
+1 Choke
+1 Kitchen Finks
+1 Shadowspear
+2 Ashiok, Dream Render
+2 Fulminator Mage
+2 Plague Engineer
+2 Collector Ouphe

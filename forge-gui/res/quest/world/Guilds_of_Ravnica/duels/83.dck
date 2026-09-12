@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=White Knight
+Title=White Knight
+Icon=White Knight.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Benjamin_Nichols_-_Izzet_Control_(Modern,_#781917).dck
+Deck Type=constructed
+
+[Main]
+4 Deceiver Exarch
+2 Kiki-Jiki, Mirror Breaker
+1 Nimble Obstructionist
+1 Pestermite
+4 Snapcaster Mage
+2 Vendilion Clique
+3 Cryptic Command
+1 Dispel
+2 Electrolyze
+1 Expansion // Explosion
+1 Hieroglyphic Illumination
+4 Lightning Bolt
+2 Opt
+3 Remand
+1 Spell Snare
+1 Roast
+2 Serum Visions
+2 Jace, the Mind Sculptor
+1 Desolate Lighthouse
+1 Field of Ruin
+2 Flooded Strand
+7 Island
+1 Misty Rainforest
+2 Mountain
+4 Scalding Tarn
+2 Steam Vents
+2 Sulfur Falls
+1 Temple of Epiphany
+[Sideboard]
+1 Abrade
+2 Anger of the Gods
+2 Blood Moon
+1 Ceremonious Rejection
+1 Counterbalance
+1 Dispel
+1 Grim Lavamancer
+1 Magma Spray
+2 Negate
+1 Niv-Mizzet, Parun
+2 Surgical Extraction

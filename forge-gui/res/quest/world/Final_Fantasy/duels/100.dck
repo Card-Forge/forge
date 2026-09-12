@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Kawamura_Atsuto_-_Orzhov_Blink_(Modern,_#2532036).dck
+Deck Type=constructed
+
+[Main]
+3 Flickerwisp
+2 Skyclave Apparition
+4 Solitude
+4 Phelia, Exuberant Shepherd
+4 White Orchid Phantom
+1 Emperor of Bones
+4 Witch Enchanter
+1 Boggart Trawler
+4 Overlord of the Balemurk
+3 Ketramose, the New Dawn
+4 Cecil, Dark Knight
+3 Relic of Progenitus
+4 Fatal Push
+3 Thoughtseize
+3 Plains
+1 Swamp
+2 Godless Shrine
+4 Flooded Strand
+4 Marsh Flats
+2 Shadowy Backstreet
+[Sideboard]
+3 Vindicate
+2 Stony Silence
+1 Temporary Lockdown
+3 High Noon
+2 Wrath of the Skies
+2 Exorcise
+2 Clarion Conqueror

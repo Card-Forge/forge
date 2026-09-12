@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/DFrank_-_Amulet_Titan_(Modern,_#2165236).dck
+Deck Type=constructed
+
+[Main]
+2 Arboreal Grazer
+3 Aftermath Analyst
+2 Lumra, Bellow of the Woods
+2 Dryad of the Ilysian Grove
+4 Primeval Titan
+4 The One Ring
+1 Vexing Bauble
+1 Expedition Map
+4 Amulet of Vigor
+2 Malevolent Rumble
+4 Explore
+4 Urza's Saga
+1 The Mycosynth Gardens
+1 Echoing Deeps
+1 Underground Mortuary
+2 Shifting Woodland
+1 Urza's Cave
+4 Golgari Rot Farm
+1 Gruul Turf
+1 Simic Growth Chamber
+1 Vesuva
+2 Forest
+1 Valakut, the Molten Pinnacle
+1 Oran-Rief, the Vastwood
+1 Mirrorpool
+2 Crumbling Vestige
+1 Hanweir Battlements
+2 Lotus Field
+1 Port of Karfell
+2 Boseiju, Who Endures
+1 Otawara, Soaring City
+[Sideboard]
+2 Generous Ent
+2 Spelunking
+1 Vexing Bauble
+1 Defense Grid
+3 Dismember
+1 Cavern of Souls
+1 Radiant Fountain
+1 Bojuka Bog
+2 Turn the Earth
+1 Boseiju, Who Endures

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mines of Kazum Durl
+Title=Mines of Kazum Durl
+Icon=Mines of Kazum Durl.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Elite_IQ_Tampa/Jon_Lum_-_Mono-Blue_Devotion_(Standard,_#76088).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Cloudfin Raptor
+4 Frostburn Weird
+3 Hypnotic Siren
+2 Judge's Familiar
+4 Master of Waves
+4 Nightveil Specter
+4 Thassa, God of the Sea
+4 Tidebinder Mage
+2 Bident of Thassa
+1 Cyclonic Rift
+2 Rapid Hybridization
+1 Domestication
+20 Island
+4 Mutavault
+1 Nykthos, Shrine to Nyx
+[Sideboard]
+1 AEtherling
+1 Dispel
+2 Gainsay
+1 Haunted Plate Mail
+3 Negate
+1 Pithing Needle
+1 Prognostic Sphinx

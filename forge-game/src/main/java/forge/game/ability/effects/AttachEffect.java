@@ -122,8 +122,8 @@ public class AttachEffect extends SpellAbilityEffect {
             return;
         }
         String attachToName;
-        if (attachTo instanceof Card) {
-            attachToName = ((Card) attachTo).getTranslatedName();
+        if (attachTo instanceof Card c) {
+            attachToName = c.getTranslatedName();
         } else {
             attachToName = attachTo.toString();
         }
@@ -141,7 +141,7 @@ public class AttachEffect extends SpellAbilityEffect {
             }
 
             String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", attachment.getTranslatedName(), attachToName);
-            if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null, message, null))
+            if (sa.hasParam("Optional") && !chooser.getController().confirmAction(sa, null, message, null))
             // TODO add params for message
                 continue;
 

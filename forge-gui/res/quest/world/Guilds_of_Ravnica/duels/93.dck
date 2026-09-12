@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=BaronSamedi
+Title=BaronSamedi
+Icon=BaronSamedi.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Andrew_Tefft_-_Four-Color_Midrange_(Modern,_#771847).dck
+Deck Type=constructed
+
+[Main]
+3 Geist of Saint Traft
+2 Nimble Obstructionist
+4 Snapcaster Mage
+2 Tasigur, the Golden Fang
+2 Countersquall
+2 Kolaghan's Command
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+3 Remand
+3 Collective Brutality
+3 Lingering Souls
+1 Search for Azcanta
+1 Blackcleave Cliffs
+1 Blood Crypt
+2 Creeping Tar Pit
+3 Flooded Strand
+1 Godless Shrine
+1 Hallowed Fountain
+1 Island
+3 Marsh Flats
+1 Mountain
+1 Plains
+3 Polluted Delta
+1 Sacred Foundry
+1 Seachrome Coast
+1 Steam Vents
+1 Swamp
+1 Watery Grave
+[Sideboard]
+1 Alpine Moon
+2 Damping Sphere
+1 Engineered Explosives
+1 Izzet Staticaster
+1 Keranos, God of Storms
+3 Nihil Spellbomb
+1 Stony Silence
+2 Unmoored Ego
+2 Vendilion Clique
+1 Wear // Tear

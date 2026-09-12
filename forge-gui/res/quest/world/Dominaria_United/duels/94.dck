@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Daniel_Bihn_-_Merfolk_(Modern,_#1511503).dck
+Deck Type=constructed
+
+[Main]
+1 Master of Waves
+1 Thassa, God of the Sea
+1 Kira, Great Glass-Spinner
+1 Sygg, River Cutthroat
+4 Vodalian Hexcatcher
+4 Svyelun of Sea and Sky
+4 Tide Shaper
+4 Silvergill Adept
+4 Master of the Pearl Trident
+4 Lord of Atlantis
+4 Aether Vial
+4 Dismember
+4 Spreading Seas
+1 Fiery Islet
+1 Waterlogged Grove
+1 Minamo, School at Water's Edge
+2 Otawara, Soaring City
+2 Riptide Laboratory
+3 Cavern of Souls
+4 Mutavault
+6 Island
+[Sideboard]
+1 Vodalian Mindsinger
+1 Thieving Skydiver
+1 Thada Adel, Acquisitor
+2 Spellskite
+2 Grafdigger's Cage
+2 Brazen Borrower
+3 Chalice of the Void
+3 Spell Pierce

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Bazaar_of_Moxen_2016_-_Annecy_-_Modern_Main_Event/Julien_Potier_-_Eldrazi_(Modern,_#618427).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+2 Eldrazi Displacer
+1 Eldrazi Obligator
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+4 Expedition Map
+2 Relic of Progenitus
+3 Lightning Bolt
+4 Path to Exile
+2 Adarkar Wastes
+2 Cavern of Souls
+4 Eldrazi Temple
+2 Flooded Strand
+2 Ghost Quarter
+1 Hallowed Fountain
+1 Island
+1 Plains
+1 Sacred Foundry
+2 Scalding Tarn
+1 Sea Gate Wreckage
+1 Shivan Reef
+1 Steam Vents
+1 Tomb of the Spirit Dragon
+2 Wastes
+[Sideboard]
+2 Disenchant
+1 Endbringer
+1 Engineered Explosives
+1 Pyroclasm
+2 Rest in Peace
+2 Stony Silence
+4 Stubborn Denial
+2 Timely Reinforcements

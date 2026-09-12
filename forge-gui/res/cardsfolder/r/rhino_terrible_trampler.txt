@@ -1,0 +1,10 @@
+Name:Rhino, Terrible Trampler
+ManaCost:4 G G
+Types:Legendary Creature Human Villain
+PT:7/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy target artifact or land. Distribute three +1/+1 counters among up to three other target creatures.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select up to three other target creatures | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 0 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Trample | Defined$ ParentTarget
+Oracle:Trample\nWhen Rhino enters, destroy target artifact or land. Distribute three +1/+1 counters among up to three other target creatures. They gain trample until end of turn.

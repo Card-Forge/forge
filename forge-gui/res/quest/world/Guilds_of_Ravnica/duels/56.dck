@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Bernard_Bom_-_Bant_Spirits_(Modern,_#771841).dck
+Deck Type=constructed
+
+[Main]
+4 Drogskol Captain
+1 Geist of Saint Traft
+4 Mausoleum Wanderer
+4 Noble Hierarch
+3 Phantasmal Image
+1 Rattlechains
+3 Reflector Mage
+2 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+3 Aether Vial
+4 Collected Company
+2 Path to Exile
+2 Botanical Sanctum
+1 Breeding Pool
+1 Cavern of Souls
+3 Flooded Strand
+1 Forest
+1 Hallowed Fountain
+3 Horizon Canopy
+1 Island
+2 Misty Rainforest
+1 Moorland Haunt
+1 Plains
+1 Seachrome Coast
+1 Temple Garden
+2 Windswept Heath
+[Sideboard]
+1 Disdainful Stroke
+1 Dromoka's Command
+1 Geist of Saint Traft
+2 Knight of Autumn
+3 Rest in Peace
+1 Settle the Wreckage
+2 Stony Silence
+2 Thalia, Guardian of Thraben
+1 Tormod's Crypt
+1 Unified Will

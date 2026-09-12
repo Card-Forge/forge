@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Brandon_Krussow_-_Azorius_Affinity_(Modern,_#1377243)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Memnite
+4 Esper Sentinel
+4 Myr Enforcer
+4 Ornithopter
+4 Ingenious Smith
+4 Thought Monitor
+4 Sojourner's Companion
+1 Cranial Plating
+1 Shadowspear
+4 Springleaf Drum
+4 Portable Hole
+4 Thoughtcast
+4 Urza's Saga
+1 Treasure Vault
+1 Hallowed Fountain
+1 Windswept Heath
+1 Flooded Strand
+1 Seachrome Coast
+1 Plains
+4 Darksteel Citadel
+4 Razortide Bridge
+[Sideboard]
+1 The Antiquities War
+1 Pithing Needle
+1 Jegantha, the Wellspring
+2 Unlicensed Hearse
+2 Teferi, Time Raveler
+4 Mana Tithe
+4 Tormod's Crypt

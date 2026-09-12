@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Raven
+Title=Raven
+Icon=Raven.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Alex_Byers_-_Izzet_Phoenix_(Standard,_#801045).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Electromancer
+4 Arclight Phoenix
+4 Crackling Drake
+4 Opt
+4 Shock
+4 Radical Idea
+4 Lightning Strike
+4 Chart a Course
+3 Tormenting Voice
+1 Lava Coil
+2 Finale of Promise
+2 Saheeli, Sublime Artificer
+4 Steam Vents
+4 Sulfur Falls
+5 Mountain
+7 Island
+[Sideboard]
+1 Lava Coil
+3 Spell Pierce
+4 Augur of Bolas
+2 Negate
+1 Disdainful Stroke
+1 Beacon Bolt
+2 Narset, Parter of Veils
+1 God-Eternal Kefnet

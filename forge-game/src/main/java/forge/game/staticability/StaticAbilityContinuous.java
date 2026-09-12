@@ -17,10 +17,10 @@
  */
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.GameCommand;
 import forge.card.*;
 import forge.game.CardTraitBase;
@@ -206,7 +206,7 @@ public final class StaticAbilityContinuous {
                     if (input.contains("CommanderColorID")) {
                         if (!hostCard.getController().getCommanders().isEmpty()) {
                             if (input.contains("NotCommanderColorID")) {
-                                for (MagicColor.Color color : hostCard.getController().getNotCommanderColorID()) {
+                                for (MagicColor.Color color : hostCard.getController().getCommanderColorID().inverse()) {
                                     newKeywords.add(input.replace("NotCommanderColorID", color.getName()));
                                 }
                                 return true;
@@ -712,11 +712,13 @@ public final class StaticAbilityContinuous {
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.contains("CardColors") || input.contains("cardColors")) {
-                            for (MagicColor.Color color : affectedCard.getColor()) {
-                                extraKeywords.add(
-                                    input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
-                                        .replaceAll("cardColors", color.getName())
+                            if (!(affectedCard.getColor().isColorless())) {
+                                for (MagicColor.Color color : affectedCard.getColor()) {
+                                    extraKeywords.add(
+                                            input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
+                                                    .replaceAll("cardColors", color.getName())
                                     );
+                                }
                             }
                             return true;
                         }
@@ -851,7 +853,7 @@ public final class StaticAbilityContinuous {
                 if (!addedAbilities.isEmpty() || !addedTrigger.isEmpty() || addReplacements != null || addStatics != null
                     || removeAbilities != null) {
                     affectedCard.addChangedCardTraits(
-                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAbilities, se.getTimestamp(), stAb.getId(), false
+                        addedAbilities, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAbilities, se.getTimestamp(), stAb.getId(), false
                     );
                 }
 
@@ -881,6 +883,9 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("CanBlockAmount")) {
                     int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
                     affectedCard.addCanBlockAdditional(v, se.getTimestamp());
+                }
+                if (params.containsKey("LethalDamageByPower")) {
+                    affectedCard.addLethalDamageByPower(se.getTimestamp());
                 }
             }
 
@@ -966,7 +971,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
+        sourceCard.addChangedCardTraits(List.of(addIgnore), null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;
@@ -990,7 +995,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("GainsAbilitiesOfZones")) {
                 validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
             } else {
-                validZones = ImmutableList.of(ZoneType.Battlefield);
+                validZones = List.of(ZoneType.Battlefield);
             }
             cards.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
         }

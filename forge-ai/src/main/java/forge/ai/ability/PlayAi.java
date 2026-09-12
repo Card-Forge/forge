@@ -21,6 +21,7 @@ import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PlayAi extends SpellAbilityAi {
@@ -62,9 +63,8 @@ public class PlayAi extends SpellAbilityAi {
         if ("ReplaySpell".equals(logic)) {
             if (ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"), false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
             if (sa.getPayCosts().getCostMana() != null) {
@@ -73,15 +73,14 @@ public class PlayAi extends SpellAbilityAi {
             cards = CardLists.filter(cards, CardPredicates.greaterCMC(minCMC));
             if (chooseSingleCard(ai, sa, cards, sa.hasParam("Optional"), null, null) != null) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         } else if ("WithTotalCMC".equals(logic)) {
             // Try to play only when there are more than three playable cards.
             if (cards.size() < 3)
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             if (sa.costHasManaX()) {
-                int amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                int amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 if (amount < ComputerUtilCard.getBestAI(cards).getCMC())
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 int totalCMC = 0;
@@ -103,9 +102,8 @@ public class PlayAi extends SpellAbilityAi {
 
             if (t.isPermanent() && !t.isLand()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -159,13 +157,16 @@ public class PlayAi extends SpellAbilityAi {
             state = CardStateName.Original; 
         }
 
+        Predicate<SpellAbility> validSA;
+        if (sa.hasParam("ValidSA")) {
+            validSA = SpellAbilityPredicates.isValid(sa.getParam("ValidSA").split(","), ai, sa.getHostCard(), sa);
+        } else {
+            validSA = null;
+        }
         List<Card> tgtCards = CardLists.filter(options, c -> {
             // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
             // of which spell was the reason for the choice can be used there
-            for (SpellAbility s : AbilityUtils.getSpellsFromPlayEffect(c, ai, state, false)) {
-                if (!sa.matchesValidParam("ValidSA", s)) {
-                    continue;
-                }
+            for (SpellAbility s : AbilityUtils.getSpellsFromPlayEffect(c, ai, state, false, validSA)) {
                 if (s.isLandAbility()) {
                     // might want to run some checks here but it's rare anyway
                     return true;

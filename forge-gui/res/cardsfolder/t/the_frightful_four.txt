@@ -1,0 +1,9 @@
+Name:The Frightful Four
+ManaCost:3 B
+Types:Legendary Creature Villain
+PT:4/4
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | ActivatorThisTurnCast$ EQ1 | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first noncreature spell each turn, that player loses life equal to that spell's mana value.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ X
+SVar:X:TriggeredCard$CardManaCost
+Oracle:Menace\nWhenever an opponent casts their first noncreature spell each turn, that player loses life equal to that spell's mana value.

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Eliott_Vivier_-_Rakdos_Aggro_(Modern,_#1450822).dck
+Deck Type=constructed
+
+[Main]
+2 Seasoned Pyromancer
+2 Fable of the Mirror-Breaker
+3 Dauthi Voidwalker
+4 Fury
+4 Grief
+4 Ragavan, Nimble Pilferer
+1 Kolaghan's Command
+1 Spikefield Hazard
+2 Feign Death
+2 Lightning Bolt
+2 Undying Malice
+3 Malakir Rebirth
+3 Terminate
+1 Agadeem's Awakening
+2 Night's Whisper
+3 Thoughtseize
+2 Blood Moon
+2 Liliana of the Veil
+1 Mountain
+2 Blood Crypt
+3 Swamp
+3 Polluted Delta
+4 Blackcleave Cliffs
+4 Bloodstained Mire
+[Sideboard]
+1 Engineered Explosives
+2 Chalice of the Void
+2 Unlicensed Hearse
+2 Magus of the Moon
+2 Hidetsugu Consumes All
+3 Tourach, Dread Cantor
+3 Fatal Push

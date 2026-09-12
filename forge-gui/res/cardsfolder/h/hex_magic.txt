@@ -1,0 +1,10 @@
+Name:Hex Magic
+ManaCost:2 R
+Types:Sorcery Arcane
+A:SP$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ChangeType$ Card.YouOwn | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Exile all the cards from your hand, then draw that many cards. Until the end of your next turn, you may play cards exiled this way.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play cards exiled this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Exile all the cards from your hand, then draw that many cards. Until the end of your next turn, you may play cards exiled this way.

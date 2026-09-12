@@ -1,7 +1,7 @@
 [metadata]
 Code=PTHB
 Date=2020-01-24
-Name=Theros: Beyond Death Promos
+Name=Theros Beyond Death Promos
 Type=Promo
 ScryfallCode=PTHB
 

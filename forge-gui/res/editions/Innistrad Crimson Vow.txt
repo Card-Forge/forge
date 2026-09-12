@@ -194,7 +194,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 184 C Weary Prisoner @Jason Rainville
 185 C Apprentice Sharpshooter @Steve Prescott
 186 R Ascendant Packleader @Alessandra Pisano
-187 M Avabruck Caretaker @Heonhwa Choe
+187 M Avabruck Caretaker @Heonhwa
 188 C Bramble Armor @Alessandra Pisano
 189 U Bramble Wurm @Lars Grant-West
 190 U Cartographer's Survey @Donato Giancola
@@ -397,7 +397,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 381 R Stensia Uprising @Dan Murayama Scott
 382 M Volatile Arsonist @Gabor Szikszai
 383 R Ascendant Packleader @Alessandra Pisano
-384 M Avabruck Caretaker @Heonhwa Choe
+384 M Avabruck Caretaker @Heonhwa
 385 M Cemetery Prowler @Daarken
 386 M Cultivator Colossus @Antonio José Manzanedo
 387 R Dig Up @Slawomir Maniak

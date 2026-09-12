@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian
+Title=Cohen the Barbarian
+Icon=Cohen the Barbarian.jpg
+Difficulty=Medium
+Description=Zendikar/US_States_2009_-_New_Jersey/Jonathan_Sukenik_-_Bant_(Standard,_#3219).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Emeria Angel
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Rhox War Monk
+4 Steward of Valeron
+4 Path to Exile
+4 Conqueror's Pledge
+2 Overrun
+1 Sleep
+3 Honor of the Pure
+2 Ajani Goldmane
+4 Forest
+1 Island
+2 Marsh Flats
+4 Misty Rainforest
+5 Plains
+4 Seaside Citadel
+4 Sunpetal Grove
+[Sideboard]
+4 Great Sable Stag
+4 Quest for Ancient Secrets
+3 Thornling
+4 Wall of Reverence

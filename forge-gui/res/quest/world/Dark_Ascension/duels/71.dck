@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Evoliga_Sevilla_-_Modern_-_Torneo_II/Olinto_De_La_Obra_-_Infect_(Modern,_#67280).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Apostle's Blessing
+2 Giant Growth
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+2 Breeding Pool
+3 City of Brass
+3 Forest
+4 Inkmoth Nexus
+3 Misty Rainforest
+2 Overgrown Tomb
+1 Pendelhaven
+1 Temple Garden
+2 Verdant Catacombs
+[Sideboard]
+2 Dismember
+2 Grafdigger's Cage
+3 Nature's Claim
+3 Spellskite
+2 Stony Silence
+1 Suppression Field
+2 Torpor Orb

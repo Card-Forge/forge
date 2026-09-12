@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Raven
+Title=Raven
+Icon=Raven.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Abel_Jacoby_-_Abzan_Aggro_(Standard,_#1051062).dck
+Deck Type=constructed
+
+[Main]
+1 Tymaret, Chosen from Death
+2 Rankle, Master of Pranks
+3 Gray Merchant of Asphodel
+3 Skyclave Shade
+4 Ayara, First of Locthwain
+4 Acquisitions Expert
+4 Nightmare Shepherd
+4 Nighthawk Scavenger
+2 Malakir Rebirth
+2 Village Rites
+2 Hagra Mauling
+3 Heartless Act
+2 Bloodchief's Thirst
+2 Witch's Vengeance
+3 Castle Locthwain
+19 Swamp
+[Sideboard]

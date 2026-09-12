@@ -1,0 +1,31 @@
+[metadata]
+Name=Big red
+Deck Type=constructed
+Title=Big red
+Description=Big red
+Difficulty=Hard
+Icon=Brother Voodoo
+[Main]
+4 Abrade
+4 Chandra, Torch of Defiance
+4 Dire Fleet Daredevil
+2 Dunes of the Dead
+4 Earthshaker Khenra
+4 Fanatical Firebrand
+2 Glorybringer
+1 Hazoret the Fervent
+4 Lightning Strike
+8 Mountain
+5 Mountain
+6 Mountain
+4 Pia Nalaar
+4 Rekindling Phoenix
+4 Scavenger Grounds
+[Sideboard]
+2 Chandra's Defeat
+1 Dunes of the Dead
+1 Glorybringer
+2 Hazoret the Fervent
+3 Hour of Devastation
+3 Magma Spray
+3 Sweltering Suns

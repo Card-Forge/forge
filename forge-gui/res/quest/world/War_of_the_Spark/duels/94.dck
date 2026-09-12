@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Theflotist_-_UB_Faeries_(Modern,_#800989).dck
+Deck Type=constructed
+
+[Main]
+3 Mistbind Clique
+2 Snapcaster Mage
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Countersquall
+4 Cryptic Command
+4 Fatal Push
+4 Opt
+2 Collective Brutality
+4 Inquisition of Kozilek
+4 Bitterblossom
+4 Creeping Tar Pit
+4 Darkslick Shores
+4 Island
+4 Mutavault
+4 Polluted Delta
+2 Swamp
+2 Watery Grave
+[Sideboard]
+1 Countersquall
+3 Ashiok, Dream Render
+3 Ceremonious Rejection
+2 Damnation
+1 Disdainful Stroke
+2 Engineered Explosives
+2 Extirpate
+1 The Elderspell

@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/DoggertQBones_-_Mono_Green_Aggro_(Standard,_#1622364).dck
+Deck Type=constructed
+
+[Main]
+4 Evolving Adaptive
+4 Ascendant Packleader
+4 Quirion Beastcaller
+1 Gala Greeters
+4 Bloated Contaminator
+4 Polukranos Reborn
+4 Ulvenwald Oddity
+4 Rootwire Amalgam
+4 Defiler of Vigor
+4 Bushwhack
+18 Forest
+4 Mishra's Foundry
+1 Boseiju, Who Endures
+[Sideboard]

@@ -1,0 +1,23 @@
+Name:Monica Rambeau
+ManaCost:2 W
+Types:Legendary Creature Human Hero
+PT:3/3
+K:Flying
+K:Prowess
+A:AB$ SetState | Cost$ 2 R W W | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:Modal
+Oracle:Flying, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{2}{R}{W}{W}: Transform Monica Rambeau. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Photon, Living Light
+ManaCost:2 R W W
+Types:Legendary Creature Elemental Hero
+PT:4/4
+K:Flying
+K:Hexproof
+K:Prowess
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:Flying, hexproof, prowess\nWhenever you cast a noncreature spell, put a +1/+1 counter on each other creature you control.

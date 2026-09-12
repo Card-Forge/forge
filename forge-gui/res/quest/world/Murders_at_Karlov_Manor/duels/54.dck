@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/AleL35_-_Domain_Rhinos_(Modern,_#2003192).dck
+Deck Type=constructed
+
+[Main]
+4 Scion of Draco
+4 Shardless Agent
+3 Solitude
+3 Subtlety
+3 Fire // Ice
+2 Force of Negation
+4 Crashing Footfalls
+3 Lórien Revealed
+4 Ardent Plea
+4 Leyline Binding
+4 Leyline of the Guildpact
+3 Arid Mesa
+1 Boseiju, Who Endures
+1 Breeding Pool
+4 Flooded Strand
+1 Forest
+1 Hallowed Fountain
+1 Indatha Triome
+1 Island
+1 Meticulous Archive
+4 Misty Rainforest
+1 Otawara, Soaring City
+1 Temple Garden
+1 Thundering Falls
+1 Xander's Lounge
+[Sideboard]
+2 Force of Negation
+1 Boseiju, Who Endures
+2 Endurance
+3 Teferi, Time Raveler
+1 Damping Matrix
+3 Mystical Dispute
+3 Force of Vigor

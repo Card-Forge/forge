@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Adriel_Santos_-_Mono-White_Aggro_(Standard,_#1400113).dck
+Deck Type=constructed
+
+[Main]
+3 Intrepid Adversary
+3 Sungold Sentinel
+4 Thalia, Guardian of Thraben
+4 Cathar Commando
+4 Reidane, God of the Worthy
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Elite Spellbinder
+2 Valorous Stance
+4 Fateful Absence
+2 The Wandering Emperor
+1 Field of Ruin
+2 Cave of the Frost Dragon
+2 Crawling Barrens
+2 Eiganjo, Seat of the Empire
+15 Plains
+[Sideboard]
+2 Portable Hole
+2 Guardian of Faith
+3 Archon of Emeria
+4 Brutal Cathar
+4 Skyclave Apparition

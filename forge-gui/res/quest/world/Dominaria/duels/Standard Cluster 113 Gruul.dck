@@ -1,0 +1,44 @@
+[metadata]
+Name=Gruul
+Deck Type=constructed
+Title=Gruul
+Description=Gruul
+Difficulty=Easy
+Icon=Sentinel
+[Main]
+3 Abrade
+4 Aether Hub
+2 Aethersphere Harvester
+2 Blossoming Defense
+2 Bristling Hydra
+1 Chandra, Torch of Defiance
+1 Channeler Initiate
+1 Forest
+2 Forest
+1 Forest
+1 Forest
+4 Glorybringer
+2 Harnessed Lightning
+2 Hashep Oasis
+4 Jadelight Ranger
+2 Magma Spray
+1 Mountain
+2 Mountain
+1 Mountain
+1 Mountain
+4 Rekindling Phoenix
+1 Rhonas the Indomitable
+4 Rootbound Crag
+4 Servant of the Conduit
+4 Sheltered Thicket
+4 Voltaic Brawler
+[Sideboard]
+1 Blossoming Defense
+2 Chandra's Defeat
+1 Chandra, Torch of Defiance
+2 Deathgorge Scavenger
+1 Heroic Intervention
+1 Magma Spray
+2 Naturalize
+2 Struggle // Survive
+1 Thrashing Brontodon

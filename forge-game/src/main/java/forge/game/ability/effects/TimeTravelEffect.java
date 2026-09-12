@@ -61,7 +61,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
                     c.subtractCounter(counterType, 1, activator);
                 }
             }
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
         }
     }
 

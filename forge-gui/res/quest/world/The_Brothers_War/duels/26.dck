@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rocky
+Title=Rocky
+Icon=Rocky.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/AshenFenix_-_Jeskai_Soldiers_(Standard,_#1535317).dck
+Deck Type=constructed
+
+[Main]
+1 Rescue Retriever
+2 Myrel, Shield of Argive
+2 Fallaji Vanguard
+2 Brutal Cathar
+2 Thalia, Guardian of Thraben
+3 Ambush Paratrooper
+4 Skystrike Officer
+4 Siege Veteran
+4 Valiant Veteran
+4 Harbin, Vanguard Aviator
+4 Yotian Frontliner
+4 Recruitment Officer
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+1 Adarkar Wastes
+2 Fortified Beachhead
+2 Secluded Courtyard
+2 Sundown Pass
+2 Stormcarved Coast
+2 Deserted Beach
+2 Battlefield Forge
+4 Swiftwater Cliffs
+5 Plains
+[Sideboard]

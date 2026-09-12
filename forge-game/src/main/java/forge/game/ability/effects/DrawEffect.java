@@ -18,6 +18,12 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class DrawEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

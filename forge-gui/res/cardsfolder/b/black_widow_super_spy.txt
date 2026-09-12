@@ -1,0 +1,12 @@
+Name:Black Widow, Super Spy
+ManaCost:1 B
+Types:Legendary Creature Human Spy Hero
+PT:2/1
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDigUntil | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may put a +1/+1 counter on NICKNAME. If you don't, you may cast the exiled nonland card until end of turn and mana of any type can be spent to cast that spell.
+SVar:TrigDigUntil:DB$ DigUntil | Defined$ TriggeredTarget | Valid$ Card.nonLand | ValidDescription$ nonland card | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | RememberPut$ True | Optional$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Imprinted | ForgetOnMoved$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ You may cast the exiled nonland card until end of turn and mana of any type can be spent to cast that spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:Menace\nWhenever Black Widow deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may put a +1/+1 counter on Black Widow. If you don't, you may cast the exiled nonland card until end of turn and mana of any type can be spent to cast that spell.

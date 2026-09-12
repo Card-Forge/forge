@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/James_Brennan_-_Bant_Hammer_(Modern,_#1541455)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Giver of Runes
+4 Stoneforge Mystic
+4 Puresteel Paladin
+4 Ornithopter
+4 Esper Sentinel
+1 Shadowspear
+1 Nettlecyst
+1 Kaldra Compleat
+3 Springleaf Drum
+4 Colossus Hammer
+2 Spell Pierce
+2 Blacksmith's Skill
+4 Sigarda's Aid
+4 Urza's Saga
+1 Temple Garden
+1 Hallowed Fountain
+2 Marsh Flats
+2 Flooded Strand
+2 Windswept Heath
+2 Seachrome Coast
+2 Horizon Canopy
+3 Inkmoth Nexus
+4 Plains
+[Sideboard]
+1 Spell Pierce
+1 Relic of Progenitus
+1 Pithing Needle
+1 Path to Exile
+1 Haywire Mite
+2 March of Otherworldly Light
+2 Blacksmith's Skill
+3 Drannith Magistrate
+3 Sanctifier en-Vec

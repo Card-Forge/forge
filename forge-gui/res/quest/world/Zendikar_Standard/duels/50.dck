@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Medium
+Description=Zendikar/Zendikar_Game_Day_-_Guardian_Games_-_USA/David_Jennings_-_Vampires_(Standard,_#3529).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+3 Vampire Hexmage
+3 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Disfigure
+4 Tendrils of Corruption
+3 Duress
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+14 Swamp
+4 Verdant Catacombs
+[Sideboard]
+2 Haunting Echoes
+3 Marsh Casualties
+3 Quest for the Gravelord
+3 Relic of Progenitus
+1 Sadistic Sacrament

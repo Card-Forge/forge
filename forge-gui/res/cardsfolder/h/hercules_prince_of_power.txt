@@ -1,0 +1,7 @@
+Name:Hercules, Prince of Power
+ManaCost:2 G
+Types:Legendary Creature Demigod Warrior Hero
+PT:3/3
+A:AB$ PutCounter | Cost$ 4 G | Defined$ Self | CounterType$ P1P1 | PowerUp$ True | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on NICKNAME. He gains vigilance, indestructible, and haste until end of turn. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBPump:DB$ Pump | KW$ Vigilance & Indestructible & Haste | Defined$ Self
+Oracle:Power-up — {4}{G}: Put a +1/+1 counter on Hercules. He gains vigilance, indestructible, and haste until end of turn. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

@@ -1,0 +1,8 @@
+Name:S.H.I.E.L.D. Deployment Drone
+ManaCost:2 U
+Types:Artifact Creature Robot
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You
+Oracle:Flying\nWhen this creature enters, create a 1/1 white Soldier creature token.

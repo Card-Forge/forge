@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Asoen_-_Rakdos_Aggro_(Modern,_#996580).dck
+Deck Type=constructed
+
+[Main]
+3 Dark Confidant
+3 Kroxa, Titan of Death's Hunger
+3 Lightning Skelemental
+4 Seasoned Pyromancer
+1 Kolaghan's Command
+2 Fatal Push
+2 Cling to Dust
+4 Lightning Bolt
+3 Unearth
+3 Thoughtseize
+4 Inquisition of Kozilek
+4 Ransack the Lab
+3 Liliana of the Veil
+1 Lavaclaw Reaches
+1 Castle Locthwain
+1 Castle Embereth
+1 Prismatic Vista
+2 Mountain
+2 Blood Crypt
+2 Marsh Flats
+3 Swamp
+4 Blackcleave Cliffs
+4 Bloodstained Mire
+[Sideboard]
+1 Kalitas, Traitor of Ghet
+2 Ashiok, Dream Render
+2 Blood Moon
+2 Boil
+2 Collective Brutality
+2 Fulminator Mage
+2 Nihil Spellbomb
+2 Plague Engineer

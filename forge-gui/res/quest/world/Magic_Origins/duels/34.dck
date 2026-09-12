@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=NanaBuruku
+Title=NanaBuruku
+Icon=NanaBuruku.jpg
+Difficulty=Easy
+Description=Magic_Origins/Grand_Prix_London_2015/Erik_Skinstad_-_GW_Aggro_(Standard,_#311528).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Boon Satyr
+2 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+4 Elvish Mystic
+4 Fleecemane Lion
+2 Hangarback Walker
+2 Hidden Dragonslayer
+3 Nissa, Vastwood Seer
+3 Dromoka's Command
+3 Valorous Stance
+2 Ajani, Mentor of Heroes
+1 Elspeth, Sun's Champion
+1 Blossoming Sands
+8 Forest
+1 Mana Confluence
+6 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+1 Back to Nature
+1 Brimaz, King of Oreskos
+2 Evolutionary Leap
+1 Glare of Heresy
+2 Plummet
+2 Tragic Arrogance
+2 Unravel the AEther

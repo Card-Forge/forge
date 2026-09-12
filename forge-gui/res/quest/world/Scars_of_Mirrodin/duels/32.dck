@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2010_TCGplayer.com_TCQ_-_Salem_(12-18)/SeanParticianone_-_Naya_Shaman_(Standard,_#8796).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Baneslayer Angel
+4 Birds of Paradise
+3 Cunning Sparkmage
+4 Fauna Shaman
+4 Goblin Guide
+4 Squadron Hawk
+2 Stoneforge Mystic
+4 Vengevine
+2 Wurmcoil Engine
+1 Basilisk Collar
+1 Sword of Body and Mind
+3 Arc Trail
+3 Explore
+4 Arid Mesa
+4 Copperline Gorge
+3 Forest
+3 Mountain
+2 Plains
+2 Raging Ravine
+4 Razorverge Thicket
+2 Stirring Wildwood
+[Sideboard]
+3 Celestial Purge
+3 Journey to Nowhere
+2 Kor Firewalker
+3 Nature's Claim
+4 Tunnel Ignus

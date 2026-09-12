@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/MAFS_-_Izzet_Wizards_(Modern,_#2208218).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+3 Snapcaster Mage
+3 Thundertrap Trainer
+4 Tamiyo, Inquisitive Student
+3 Lightning Bolt
+2 Flare of Denial
+4 Counterspell
+4 Galvanic Discharge
+2 Invert Polarity
+4 Flame of Anor
+2 Spell Snare
+2 Sink into Stupor
+1 Expressive Iteration
+4 Preordain
+1 Spirebluff Canal
+1 Mountain
+1 Hall of Storm Giants
+3 Island
+1 Otawara, Soaring City
+1 Prismatic Vista
+1 Bloodstained Mire
+4 Steam Vents
+1 Arid Mesa
+2 Thundering Falls
+4 Scalding Tarn
+[Sideboard]
+4 Consign to Memory
+3 Harbinger of the Seas
+1 Mystical Dispute
+2 Stern Scolding
+1 Spell Snare
+1 Surgical Extraction
+1 Unlicensed Hearse
+2 Pyroclasm

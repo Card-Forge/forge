@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/SCG_Orlando_Open/Eli_Kassis_-_Knightfall_(Modern,_#640192).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+2 Courser of Kruphix
+1 Eternal Witness
+1 Izzet Staticaster
+4 Knight of the Reliquary
+4 Noble Hierarch
+1 Reclamation Sage
+1 Reveillark
+2 Scavenging Ooze
+2 Selfless Spirit
+2 Spell Queller
+4 Voice of Resurgence
+4 Collected Company
+3 Path to Exile
+2 Retreat to Coralhelm
+1 Nahiri, the Harbinger
+1 Breeding Pool
+3 Forest
+1 Gavony Township
+1 Ghost Quarter
+1 Hallowed Fountain
+1 Horizon Canopy
+1 Island
+4 Misty Rainforest
+1 Plains
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+1 Bojuka Bog
+1 Celestial Purge
+1 Courser of Kruphix
+1 Detention Sphere
+1 Engineered Explosives
+1 Eternal Witness
+1 Ghost Quarter
+1 Izzet Staticaster
+2 Loaming Shaman
+2 Negate
+1 Reclamation Sage
+1 Scavenging Ooze
+1 Surgical Extraction

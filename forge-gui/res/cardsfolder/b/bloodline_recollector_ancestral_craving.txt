@@ -1,0 +1,18 @@
+Name:Bloodline Recollector
+ManaCost:1 B
+Types:Creature Vampire Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPrepare | TriggerDescription$ At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Ancestral Craving
+ManaCost:B
+Types:Instant
+A:SP$ Draw | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBLoseLife | StackDescription$ {p:Targeted} draws three cards and loses 3 life. | SpellDescription$ Target player draws three cards and loses 3 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | StackDescription$ None
+Oracle:Target player draws three cards and loses 3 life.

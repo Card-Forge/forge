@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Gobern_-_White_Weenie_(Standard,_#1631510).dck
+Deck Type=constructed
+
+[Main]
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+4 Sungold Sentinel
+4 Hopeful Initiate
+4 Anointed Peacekeeper
+2 Guardian of New Benalia
+4 Recruitment Officer
+2 Skrelv, Defector Mite
+2 Sword of Once and Future
+4 Lay Down Arms
+4 Invasion of Gobakhan
+1 Eiganjo, Seat of the Empire
+3 Mishra's Foundry
+13 Plains
+2 Plains
+2 Plains
+3 Plains
+[Sideboard]
+2 Lantern Flare
+4 Wedding Announcement
+2 Destroy Evil
+4 Skrelv's Hive
+3 Surge of Salvation

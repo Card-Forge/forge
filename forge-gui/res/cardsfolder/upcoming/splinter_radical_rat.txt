@@ -1,9 +1,0 @@
-Name:Splinter, Radical Rat
-ManaCost:1 WB WB
-Types:Legendary Creature Mutant Ninja Rat
-PT:2/4
-S:Mode$ Panharmonicon | ValidCard$ Creature.Ninja+YouCtrl | Description$ If an ability of a Ninja creature you control triggers, that ability triggers an additional time.
-A:AB$ Effect | Cost$ 1 U | ValidTgts$ Ninja | TgtPrompt$ Select target Ninja | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target Ninja can't be blocked this turn.
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
-DeckHints:Type$Ninja
-Oracle:If an ability of a Ninja creature you control triggers, that ability triggers an additional time.\n{1}{U}: Target Ninja can't be blocked this turn.

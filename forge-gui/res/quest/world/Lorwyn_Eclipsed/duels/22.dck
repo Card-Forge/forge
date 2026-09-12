@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Ben_Fauerbach_-_Dimir_(Standard,_#2815683).dck
+Deck Type=constructed
+
+[Main]
+4 Deceit
+4 Superior Spider-Man
+3 Doomsday Excruciator
+3 Overlord of the Balemurk
+2 Harvester of Misery
+2 Quantum Riddler
+1 Oildeep Gearhulk
+1 Preacher of the Schism
+4 Requiting Hex
+3 Bitter Triumph
+1 Shoot the Sheriff
+3 Winternight Stories
+2 Intimidation Tactics
+1 Cruelclaw's Heist
+11 Swamp
+4 Gloomlake Verge
+4 Restless Reef
+4 Watery Grave
+1 Multiversal Passage
+1 Starting Town
+1 Undercity Sewers
+[Sideboard]
+4 Duress
+3 Annul
+2 Deadly Cover-Up
+2 Soul-Guide Lantern
+1 Cruel Somnophage
+1 Flashfreeze
+1 Harvester of Misery
+1 Shoot the Sheriff

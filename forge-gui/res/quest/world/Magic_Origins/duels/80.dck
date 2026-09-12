@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Akongo
+Title=Akongo
+Icon=Akongo.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_East_Windsor/Mike_Kurant_-_Red_Deck_Wins_(Modern,_#565749).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+2 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+4 Mountain
+3 Sacred Foundry
+3 Stomping Ground
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Ancient Grudge
+2 Deflecting Palm
+2 Destructive Revelry
+3 Exquisite Firecraft
+3 Molten Rain
+3 Path to Exile

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Doi_Daisuke_-_Boros_Convoke_(Standard,_#2213864).dck
+Deck Type=constructed
+
+[Main]
+4 Resolute Reinforcements
+4 Knight-Errant of Eos
+4 Imodane's Recruiter
+1 Sanguine Evangelist
+4 Warden of the Inner Sky
+4 Spyglass Siren
+4 Novice Inspector
+2 Arabella, Abandoned Doll
+1 Chainsaw
+4 Gleeful Demolition
+4 Case of the Gateway Express
+2 Warleader's Call
+1 Plains
+2 Island
+4 Inspiring Vantage
+3 Spirebluff Canal
+4 Battlefield Forge
+3 Shivan Reef
+2 Adarkar Wastes
+3 Seachrome Coast
+[Sideboard]
+1 Negate
+1 Destroy Evil
+3 Protect the Negotiators
+3 Invasion of Gobakhan
+3 Torch the Tower
+1 Get Lost
+2 Requisition Raid
+1 Assimilation Aegis

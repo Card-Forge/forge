@@ -38,7 +38,8 @@ public class TriggerWaiting {
     }
 
     public void setTriggers(final List<Trigger> trigs) {
-        this.triggers = Maps.newHashMap();
+        // keySet() drives simultaneous-trigger stacking, so preserve collection order
+        this.triggers = Maps.newLinkedHashMap();
         for (Trigger t : trigs) {
             triggers.put(t, t.getHostCard().getController());
         }

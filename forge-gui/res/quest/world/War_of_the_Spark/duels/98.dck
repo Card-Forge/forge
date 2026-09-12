@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Optimus Prime
+Title=Optimus Prime
+Icon=Optimus Prime.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Luka_Mrakovic_-_Esper_Midrange_(Modern,_#801157).dck
+Deck Type=constructed
+
+[Main]
+4 Spell Queller
+3 Snapcaster Mage
+3 Dark Confidant
+4 Path to Exile
+2 Fatal Push
+2 Collective Brutality
+3 Thoughtseize
+4 Lingering Souls
+3 Inquisition of Kozilek
+4 Serum Visions
+2 Bitterblossom
+3 Teferi, Time Raveler
+2 Watery Grave
+2 Swamp
+2 Concealed Courtyard
+4 Polluted Delta
+2 Marsh Flats
+2 Island
+1 Shambling Vent
+1 Creeping Tar Pit
+1 Hallowed Fountain
+1 Godless Shrine
+2 Flooded Strand
+1 Plains
+2 Darkslick Shores
+[Sideboard]
+1 Unmoored Ego
+2 Surgical Extraction
+2 Kaya, Orzhov Usurper
+1 Detention Sphere
+2 Dovin's Veto
+1 Ashiok, Dream Render
+1 Narset, Parter of Veils
+2 Geist of Saint Traft
+1 Engineered Explosives
+2 Timely Reinforcements

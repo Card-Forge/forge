@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Ikenga
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Carrion_-_Die_for_the_Win_(Standard,_#2455942).dck
+Deck Type=constructed
+
+[Main]
+4 Heartfire Hero
+4 Monastery Swiftspear
+4 Cacophony Scamp
+4 Callous Sell-Sword
+4 Slickshot Show-Off
+4 Cori-Steel Cutter
+4 Monstrous Rage
+4 Dreadmaw's Ire
+4 Turn Inside Out
+4 Burst Lightning
+2 Boltwave
+18 Mountain
+[Sideboard]

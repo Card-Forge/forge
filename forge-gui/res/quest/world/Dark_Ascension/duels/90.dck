@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Magic-League_Modern_Trial_01-03-2012/MasterSion_-_Boros_(Modern,_#27258).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Duergar Hedge-Mage
+3 Figure of Destiny
+1 Goblin Bushwhacker
+4 Goblin Guide
+4 Grim Lavamancer
+2 Ranger of Eos
+4 Steppe Lynx
+3 Thalia, Guardian of Thraben
+4 Lightning Bolt
+3 Lightning Helix
+3 Path to Exile
+4 Boom // Bust
+4 Arid Mesa
+3 Flagstones of Trokair
+4 Marsh Flats
+2 Mountain
+3 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Ancient Grudge
+3 Blood Moon
+2 Burrenton Forge-Tender
+1 Combust
+2 Kitchen Finks
+2 Surgical Extraction
+2 Torpor Orb

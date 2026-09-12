@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Mutrol_-_ZombieVine_(Modern,_#1167238).dck
+Deck Type=constructed
+
+[Main]
+2 Skaab Ruinator
+2 Glasspool Mimic
+3 Gravecrawler
+3 Rotting Rats
+4 Satyr Wayfinder
+4 Stitcher's Supplier
+4 Prized Amalgam
+4 Hedron Crab
+4 Merfolk Secretkeeper
+4 Vengevine
+3 Witherbloom Command
+4 Unearth
+1 Watery Grave
+1 Swamp
+1 Forest
+1 Breeding Pool
+2 Overgrown Tomb
+2 Misty Rainforest
+3 Polluted Delta
+4 Verdant Catacombs
+4 Darkslick Shores
+[Sideboard]
+1 Driven // Despair
+1 Collector Ouphe
+1 Plague Engineer
+1 Wonder
+2 Masked Vandal
+3 Creeping Chill
+3 Drown in Filth
+3 Ashiok, Dream Render

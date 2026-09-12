@@ -1,0 +1,11 @@
+Name:Giant-Sized Flying Ant
+ManaCost:3 U
+Types:Creature Insect
+PT:3/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTap,DBUntap
+SVar:DBTap:DB$ Tap | ValidTgts$ Permanent.nonLand | ValidTgtsDesc$ nonland permanent | SpellDescription$ Tap target nonland permanent.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent.nonLand | ValidTgtsDesc$ nonland permanent | SpellDescription$ Untap target nonland permanent.
+Oracle:Flash\nFlying\nWhen this creature enters, choose one —\n• Tap target nonland permanent.\n• Untap target nonland permanent.

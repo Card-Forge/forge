@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/LucasG1ggs_-_Mono_White_Midrange_(Standard,_#1518268).dck
+Deck Type=constructed
+
+[Main]
+2 Serra Paragon
+3 Ambitious Farmhand
+3 Spirited Companion
+3 Sanctuary Warden
+4 Anointed Peacekeeper
+4 Steel Seraph
+4 Reckoner Bankbuster
+2 Destroy Evil
+4 Lay Down Arms
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+3 Mishra's Foundry
+19 Plains
+[Sideboard]
+1 Serra Paragon
+2 Fateful Absence
+2 Farewell
+2 Unlicensed Hearse
+2 Loran of the Third Path
+3 Temporary Lockdown
+3 Banishing Slash

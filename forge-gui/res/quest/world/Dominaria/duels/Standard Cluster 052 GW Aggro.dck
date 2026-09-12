@@ -1,0 +1,38 @@
+[metadata]
+Name=GW Aggro
+Deck Type=constructed
+Title=GW Aggro
+Description=GW Aggro
+Difficulty=Medium
+Icon=Shanna
+[Main]
+3 Ajani Unyielding
+3 Angel of Invention
+1 Arch of Orazca
+4 Cast Out
+2 Forest
+2 Forest
+3 Forest
+4 Growing Rites of Itlimoc
+4 Jadelight Ranger
+4 Merfolk Branchwalker
+1 Path of Discovery
+2 Plains
+2 Plains
+1 Rishkar, Peema Renegade
+4 Scattered Groves
+3 Shefet Dunes
+4 Sram's Expertise
+4 Sunpetal Grove
+1 Tranquil Expanse
+4 Walking Ballista
+4 Wildgrowth Walker
+[Sideboard]
+1 Atzocan Archer
+2 Carnage Tyrant
+3 Deathgorge Scavenger
+2 Dusk // Dawn
+2 Ixalan's Binding
+1 Naturalize
+2 Nissa, Vital Force
+2 Thrashing Brontodon

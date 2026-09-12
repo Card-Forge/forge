@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Brooklyn/Luis_Neiman_in_PTQ_Barcelona_-_Faeries_(Modern,_#25354).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+3 Mana Leak
+3 Remand
+1 Spell Pierce
+4 Spell Snare
+2 Faerie Conclave
+18 Island
+4 Mutavault
+1 Pendelhaven
+[Sideboard]
+3 Engineered Explosives
+1 Pithing Needle
+2 Relic of Progenitus
+2 Sower of Temptation
+2 Threads of Disloyalty

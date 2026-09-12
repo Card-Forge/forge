@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=BabaluAye
+Title=BabaluAye
+Icon=BabaluAye.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Adrian_Schrenk_-_Esper_Superfriends_(Standard,_#800011).dck
+Deck Type=constructed
+
+[Main]
+2 Cast Down
+2 Dovin's Veto
+3 Kaya's Wrath
+2 Cry of the Carnarium
+4 Thought Erasure
+2 The Elderspell
+3 Oath of Kaya
+1 Ixalan's Binding
+1 Search for Azcanta
+4 Narset, Parter of Veils
+4 Teferi, Time Raveler
+2 Kasmina, Enigmatic Mentor
+4 Teferi, Hero of Dominaria
+1 Liliana, Dreadhorde General
+1 Swamp
+4 Glacial Fortress
+4 Hallowed Fountain
+4 Godless Shrine
+4 Isolated Chapel
+4 Drowned Catacomb
+4 Watery Grave
+[Sideboard]
+2 Ixalan's Binding
+1 Spell Pierce
+3 Duress
+1 Narset's Reversal
+1 Moment of Craving
+2 Lyra Dawnbringer
+2 Command the Dreadhorde
+1 The Elderspell
+1 Cast Down
+1 Dovin's Veto

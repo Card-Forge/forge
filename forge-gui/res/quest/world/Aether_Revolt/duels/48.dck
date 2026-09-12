@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Cable
+Title=Cable
+Icon=Cable.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Toastxp_-_4_Colors_CopyCat_(Standard,_#667844).dck
+Deck Type=constructed
+
+[Main]
+3 Elder Deep-Fiend
+4 Felidar Guardian
+4 Rogue Refiner
+4 Servant of the Conduit
+4 Whirler Virtuoso
+2 Aetherworks Marvel
+4 Harnessed Lightning
+4 Attune with Aether
+4 Oath of Nissa
+4 Saheeli Rai
+4 Aether Hub
+4 Botanical Sanctum
+2 Evolving Wilds
+6 Forest
+2 Inspiring Vantage
+1 Island
+1 Mountain
+1 Plains
+2 Spirebluff Canal
+[Sideboard]
+2 Baral's Expertise
+3 Kozilek's Return
+2 Natural State
+3 Negate
+3 Spell Queller
+2 Tamiyo, Field Researcher

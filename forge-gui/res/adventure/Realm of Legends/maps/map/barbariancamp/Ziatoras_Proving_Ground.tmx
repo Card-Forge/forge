@@ -12,7 +12,7 @@
  <tileset firstgid="28289" source="../../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="6" name="Collision" width="50" height="27">
   <data encoding="base64" compression="zlib">
-   eJztlkEKwyAQRd20EKTdBbLPUQo5RO/SnqUX6XV6jpCFFIL++c6YxhIfzCaOf/xq1Klzbqo4WHI0b1ccuaz7WvRy5mVLH1a90uu7F0f28TntM1ZE81EXR/4/amSLu7UUr57PreVd0fgivQ/YiGmlaoRvaCxaL7n+Yv2l+veLc0+vqxlrR/0Z3dQ8MPMorQcLymV9oPli61vfualcy76UtGM5o7fXQnvLql0ih62F1uRf0PpY9sES5wfWZuqXQPKB2qU9/QsfvXCmrM8RhrBGLO+Bz5Vgzl3tfc7qa2toz+hGQ8MMF8N0Fw==
+   eJztVssJwzAM9aWFEtpbIPeOUsgQ2aWdpYtkncwRfMgl2NLTxyGleqBLLL3nJxnH4y2l8cSBQsL5etAhxb7WwifpS0sfVj7pfJGZe9aFj//wkbFc5Dqt0WIeHnux1IYPHxzho8W+OXx7PFfiQxMBObj3ARolrprG9o3ai9aL1F+pntOf7il9Op1maZ2qR3hrfUD6yM0DBZWL+qD6hepb37m1XMu55LhLOc/OrkWdLSu3Rw6qRc3kV6D1kc9Bjuub5kb0PcD5oNa5M32Ej565U/b3CIJtRijmAc/lgNy72v85yq/V0N7RgYAGKxa1gus=
   </data>
  </layer>
  <layer id="7" name="Floor and Walls" width="50" height="27">
@@ -47,7 +47,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="390.167" y="114.5">
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="390.167" y="73.5">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Riveteers Initiate|SNC&quot;, &quot;Riveteers Ascendancy|SNC&quot;]}"/>
     <property name="enemy" value="Ziatora"/>

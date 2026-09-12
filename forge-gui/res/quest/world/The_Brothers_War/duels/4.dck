@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/MJ_23_-_Red_Deck_Wins_(Standard,_#1547192).dck
+Deck Type=constructed
+
+[Main]
+1 Bloodthirsty Adversary
+3 Bloodthirsty Adversary
+3 Thundering Raiju
+3 Feldon, Ronom Excavator
+4 Squee, Dubious Monarch
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Kumano Faces Kakkazan
+4 Play with Fire
+4 Lightning Strike
+3 Strangle
+2 Sokenzan, Crucible of Defiance
+3 Mishra's Foundry
+18 Mountain
+[Sideboard]
+2 Giant Cindermaw
+2 Jaya, Fiery Negotiator
+2 Unlicensed Hearse
+3 Obliterating Bolt
+3 Brotherhood's End
+3 Rending Flame

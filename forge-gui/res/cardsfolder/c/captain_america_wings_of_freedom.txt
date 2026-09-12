@@ -1,0 +1,11 @@
+Name:Captain America, Wings of Freedom
+ManaCost:2 W
+Types:Legendary Creature Human Soldier Hero
+PT:3/1
+K:Flying
+K:First Strike
+K:Ward:1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME attacks, each other Hero you control gets +X/+X until end of turn, where X is NICKNAME's toughness.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Hero.YouCtrl+StrictlyOther | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$CardToughness
+Oracle:Flying, first strike, ward {1}\nWhenever Captain America attacks, each other Hero you control gets +X/+X until end of turn, where X is Captain America's toughness.

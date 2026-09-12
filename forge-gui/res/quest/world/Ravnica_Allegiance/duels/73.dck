@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Caio_Barandas_-_Bant_(Modern,_#786400).dck
+Deck Type=constructed
+
+[Main]
+3 Birds of Paradise
+4 Deputy of Detention
+4 Knight of the Reliquary
+4 Noble Hierarch
+2 Scavenging Ooze
+1 Selfless Spirit
+1 Shalai, Voice of Plenty
+4 Spell Queller
+1 Thalia, Heretic Cathar
+2 Tireless Tracker
+3 Voice of Resurgence
+4 Collected Company
+2 Path to Exile
+3 Retreat to Coralhelm
+1 Breeding Pool
+3 Flooded Strand
+2 Forest
+1 Gavony Township
+1 Ghost Quarter
+1 Hallowed Fountain
+1 Horizon Canopy
+1 Island
+1 Kessig Wolf Run
+2 Misty Rainforest
+1 Plains
+1 Sejiri Steppe
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Eidolon of Rhetoric
+1 Engineered Explosives
+3 Knight of Autumn
+2 Remorseful Cleric
+1 Selfless Spirit
+1 Settle the Wreckage
+1 Surgical Extraction
+1 Tamiyo, Field Researcher
+3 Unified Will

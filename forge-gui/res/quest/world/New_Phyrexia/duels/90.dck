@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Modern_for_Degenerates/F.Birds_-_Merfolks_(Modern,_#19082).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Coralhelm Commander
+4 Lord of Atlantis
+4 Merfolk Sovereign
+4 Merrow Reejerey
+4 Silvergill Adept
+4 AEther Vial
+4 Cryptic Command
+4 Mana Leak
+4 Remand
+4 Rune Snag
+16 Island
+4 Mutavault
+[Sideboard]
+4 Cursecatcher
+4 Dismember
+3 Dispel
+4 Flashfreeze

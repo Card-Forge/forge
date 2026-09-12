@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/ErMagoFramiro_-_Rakdos_Reanimator_(Standard,_#2446956).dck
+Deck Type=constructed
+
+[Main]
+2 Etali, Primal Conqueror
+4 Fear of Missing Out
+4 Overlord of the Balemurk
+2 Atraxa, Grand Unifier
+4 Tersa Lightshatter
+2 Valgavoth, Terror Eater
+2 Valgavoth's Faithful
+2 Bitter Triumph
+4 Torch the Tower
+2 Abrade
+4 Zombify
+2 Duress
+1 Liliana of the Veil
+3 Swamp
+4 Sulfurous Springs
+4 Mountain
+2 Demolition Field
+4 Blazemire Verge
+4 Raucous Theater
+4 Blackcleave Cliffs
+[Sideboard]
+1 Brotherhood's End
+3 Preacher of the Schism
+2 Cut Down
+2 Duress
+2 Ghost Vacuum
+2 Chandra, Spark Hunter
+2 Pyroclasm
+1 Sheoldred, the Apocalypse

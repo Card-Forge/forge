@@ -2,8 +2,6 @@ package forge.gamemodes.net;
 
 import forge.gamemodes.net.event.GuiGameEvent;
 
-import java.util.concurrent.TimeoutException;
-
 public final class GameProtocolSender {
 
     private final IRemote remote;
@@ -16,16 +14,16 @@ public final class GameProtocolSender {
         remote.send(new GuiGameEvent(method, args));
     }
 
+    public void write(final ProtocolMethod method, final Object... args) {
+        method.checkArgs(args);
+        remote.write(new GuiGameEvent(method, args));
+    }
+
     @SuppressWarnings("unchecked")
     public <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         method.checkArgs(args);
-        try {
-            final Object returned = remote.sendAndWait(new GuiGameEvent(method, args));
-            method.checkReturnValue(returned);
-            return (T) returned;
-        } catch (final TimeoutException e) {
-            e.printStackTrace();
-        }
-        return null;
+        final Object returned = remote.sendAndWait(new GuiGameEvent(method, args));
+        method.checkReturnValue(returned);
+        return (T) returned;
     }
 }

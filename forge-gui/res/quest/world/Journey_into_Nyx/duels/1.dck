@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Orunmila
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/Raleigh/Eric_Hymel_-_U-W_Control_(Standard,_#77342).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Elixir of Immortality
+4 Azorius Charm
+4 Dissolve
+2 Last Breath
+4 Sphinx's Revelation
+2 Syncopate
+4 Divination
+3 Planar Cleansing
+4 Supreme Verdict
+2 Elspeth, Sun's Champion
+2 Jace, Architect of Thought
+3 Azorius Guildgate
+4 Hallowed Fountain
+6 Island
+4 Mutavault
+6 Plains
+4 Temple of Enlightenment
+[Sideboard]
+2 Archangel of Thune
+2 Celestial Flare
+1 Deicide
+2 Dispel
+1 Gainsay
+1 Jace, Memory Adept
+2 Negate
+2 Renounce the Guilds
+1 Reprisal

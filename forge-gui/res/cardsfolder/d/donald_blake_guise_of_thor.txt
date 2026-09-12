@@ -1,0 +1,8 @@
+Name:Donald Blake, Guise of Thor
+ManaCost:1 W
+Types:Legendary Creature Human Doctor
+PT:1/3
+K:Lifelink
+A:AB$ PutCounterAll | Cost$ 4 W W | ValidCards$ Card.Self | CounterType$ P1P1 | CounterNum$ 2 | CounterType2$ Flying | CounterNum2$ 1 | PowerUp$ True | SubAbility$ DBAnimate | SpellDescription$ Put two +1/+1 counters and a flying counter on NICKNAME. He becomes a God Warrior Hero. (He loses all other creature types. Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ God,Warrior,Hero | RemoveCreatureTypes$ True | Duration$ Permanent
+Oracle:Lifelink\nPower-up — {4}{W}{W}: Put two +1/+1 counters and a flying counter on Donald Blake. He becomes a God Warrior Hero. (He loses all other creature types. Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

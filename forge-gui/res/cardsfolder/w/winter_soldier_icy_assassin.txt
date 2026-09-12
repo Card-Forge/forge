@@ -1,0 +1,12 @@
+Name:Winter Soldier, Icy Assassin
+ManaCost:W B
+Types:Legendary Creature Human Assassin Villain
+PT:2/2
+K:Vigilance
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ NICKNAME gets +2/+0 for each Equipment attached to it.
+SVar:X:Count$Valid Equipment.Attached/Times.2
+A:AB$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ActivationZone$ Graveyard | SubAbility$ DBAttach | SpellDescription$ Return this card from your graveyard to the battlefield with a finality counter on it. Then you may attach an Equipment you control to him. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ Self | StackDescription$ None
+SVar:EquipMe:Multiple
+Oracle:Vigilance, menace\nWinter Soldier gets +2/+0 for each Equipment attached to him.\n{3}{W}{B}: Return this card from your graveyard to the battlefield with a finality counter on him. Then you may attach an Equipment you control to him. (If a creature with a finality counter on it would die, exile it instead.)

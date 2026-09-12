@@ -55,9 +55,7 @@ public class TapAi extends TapAiBase {
         if (sa.usesTargeting()) {
             // X controls the minimum targets
             if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
-                sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()));
+                ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             }
 
             sa.resetTargets();

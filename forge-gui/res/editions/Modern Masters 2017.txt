@@ -1,7 +1,7 @@
 [metadata]
-Name=Modern Masters 2017
 Code=MM3
 Date=2017-03-17
+Name=Modern Masters 2017
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic

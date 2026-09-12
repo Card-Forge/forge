@@ -2,7 +2,8 @@ Name:Griselbrand's Presence
 ManaCost:no cost
 Colors:black
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you draw a card and each opponent loses 1 life.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
-Oracle:At the beginning of your upkeep, you draw a card and each opponent loses 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep,  each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Command | ValidCard$ Creature | Execute$ TrigDraw | TriggerDescription$ Whenever a creature dies, draw a card. 
+SVar:TrigDraw:DB$ Draw
+Oracle:At the beginning of your upkeep,  each opponent loses 1 life. \nWhenever a creature dies, draw a card. 

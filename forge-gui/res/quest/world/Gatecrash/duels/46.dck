@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Invitational_Qualifier_Charlotte/Andy_James_-_Mono-Red_Aggro_(Standard,_#51544).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+3 Boros Reckoner
+4 Hellrider
+2 Legion Loyalist
+1 Lightning Mauler
+4 Rakdos Shred-Freak
+4 Stromkirk Noble
+4 Vexing Devil
+1 Brimstone Volley
+4 Searing Spear
+2 Skullcrack
+3 Pillar of Flame
+3 Volcanic Strength
+21 Mountain
+[Sideboard]
+2 Blasphemous Act
+3 Grafdigger's Cage
+2 Mizzium Mortars
+2 Reckless Waif
+1 Thundermaw Hellkite

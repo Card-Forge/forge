@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -20,7 +19,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
@@ -53,7 +51,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         final List<String> gains = new ArrayList<>();
         if (isChoice) {
             Player choser = sa.getActivatingPlayer();
-            final String choice = choser.getController().chooseProtectionType(Localizer.getInstance().getMessage("lblChooseAProtection"), sa, choices);
+            final String choice = choser.getController().chooseProtectionType(sa, choices);
             if( null == choice)
                 return;
             gains.add(choice);
@@ -112,7 +110,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         final String players = sa.getParamOrDefault("ValidPlayers", "");
         if (!players.isEmpty()) {
             for (final Player player : AbilityUtils.getDefinedPlayers(host, players, sa)) {
-                player.addChangedKeywords(gainsKWList, ImmutableList.of(), timestamp, 0);
+                player.addChangedKeywords(gainsKWList, List.of(), timestamp, 0);
 
                 if (!"Permanent".equals(sa.getParam("Duration"))) {
                     // If not Permanent, remove protection at EOT

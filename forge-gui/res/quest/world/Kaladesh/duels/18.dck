@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Medium
+Description=Kaladesh/Standard_PTQ_#10227148/ut_Neon_-_Azorius_Flash_(Standard,_#653638).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+2 Gisela, the Broken Blade
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Smuggler's Copter
+2 Declaration in Stone
+3 Stasis Snare
+2 Gideon, Ally of Zendikar
+6 Island
+10 Plains
+4 Port Town
+4 Prairie Stream
+1 Westvale Abbey
+[Sideboard]
+1 Bruna, the Fading Light
+1 Declaration in Stone
+3 Fragmentize
+2 Gideon, Ally of Zendikar
+1 Gisela, the Broken Blade
+2 Jace, Unraveler of Secrets
+1 Key to the City
+3 Spell Shrivel
+1 Westvale Abbey

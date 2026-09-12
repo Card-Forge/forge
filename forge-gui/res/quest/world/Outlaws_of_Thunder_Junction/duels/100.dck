@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/McWinSauce_-_Grixis_Control_(Modern,_#2011794).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+2 Tishana's Tidebinder
+2 Valki, God of Lies
+1 Subtlety
+1 Force of Negation
+2 Flame of Anor
+3 Fatal Push
+4 Counterspell
+1 Sheoldred's Edict
+4 Lightning Bolt
+4 Ancestral Vision
+3 Expressive Iteration
+3 Preordain
+1 Lórien Revealed
+1 Damnation
+4 Jace Reawakened
+2 Island
+1 Otawara, Soaring City
+3 Flooded Strand
+4 Polluted Delta
+4 Scalding Tarn
+2 Steam Vents
+2 Thundering Falls
+1 Undercity Sewers
+2 Watery Grave
+[Sideboard]
+1 Annul
+1 Force of Negation
+2 Kolaghan's Command
+1 Tishana's Tidebinder
+2 Sheoldred's Edict
+2 Stern Scolding
+2 Subtlety
+2 Surgical Extraction
+1 Nihil Spellbomb
+1 Damnation

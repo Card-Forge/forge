@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Tucson/Mike_Dilorenzo_-_G-W_Aggro_(Standard,_#78283).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boon Satyr
+2 Brimaz, King of Oreskos
+4 Experiment One
+2 Fleecemane Lion
+4 Soldier of the Pantheon
+4 Voice of Resurgence
+3 Witchstalker
+4 Advent of the Wurm
+3 Ajani's Presence
+4 Selesnya Charm
+3 Banishing Light
+8 Forest
+2 Mana Confluence
+5 Plains
+4 Temple Garden
+4 Temple of Plenty
+[Sideboard]
+3 Mistcutter Hydra
+3 Plummet
+3 Setessan Tactics
+3 Skylasher
+2 Sundering Growth

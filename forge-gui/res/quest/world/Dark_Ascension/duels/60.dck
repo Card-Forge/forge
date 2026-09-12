@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Magic-League_Modern_Trial_30-03-2012/Kaitsu_-_Rogue_(Modern,_#29207).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Lightning Bolt
+4 Lightning Helix
+4 Boom // Bust
+2 Damnation
+4 Lingering Souls
+4 Smallpox
+3 Ajani Vengeant
+3 Sorin, Lord of Innistrad
+4 Arid Mesa
+4 Flagstones of Trokair
+2 Godless Shrine
+4 Marsh Flats
+2 Mountain
+1 Plains
+4 Sacred Foundry
+2 Swamp
+3 Urborg, Tomb of Yawgmoth
+[Sideboard]
+4 Isochron Scepter
+4 Leyline of the Void
+2 Thought Hemorrhage
+3 Thoughtseize

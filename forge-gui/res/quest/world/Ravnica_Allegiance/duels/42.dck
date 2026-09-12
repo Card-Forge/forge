@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Amy_Demicco_-_Mono-White_Aggro_(Standard,_#788719).dck
+Deck Type=constructed
+
+[Main]
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Hunted Witness
+2 Leonin Vanguard
+4 Rustwing Falcon
+4 Skymarcher Aspirant
+4 Snubhorn Sentry
+4 Venerated Loxodon
+4 Unbreakable Formation
+4 History of Benalia
+4 Legion's Landing
+18 Plains
+[Sideboard]

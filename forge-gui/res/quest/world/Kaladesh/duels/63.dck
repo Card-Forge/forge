@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sakpata
+Title=Sakpata
+Icon=Sakpata.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Patrick_Peters_-_Burn_(Modern,_#665560).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Searing Blaze
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+2 Inspiring Vantage
+3 Mountain
+4 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+2 Kor Firewalker
+3 Path to Exile
+2 Rest in Peace
+1 Skullcrack
+2 Stony Silence

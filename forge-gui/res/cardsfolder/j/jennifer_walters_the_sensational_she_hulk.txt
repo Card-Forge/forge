@@ -1,0 +1,24 @@
+Name:Jennifer Walters
+ManaCost:1 W
+Types:Legendary Creature Human Advisor Hero
+PT:2/3
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
+A:AB$ SetState | Cost$ 3 G W W | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:Modal
+SVar:PlayMain1:TRUE
+Oracle:Your opponents can't cast spells during your turn.\n{3}{G}{W}{W}: Transform Jennifer Walters. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:The Sensational She-Hulk
+ManaCost:3 G W W
+Types:Legendary Creature Gamma Hero
+PT:6/6
+K:Reach
+K:Trample
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
+T:Mode$ DamageDoneOnce | ValidTarget$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever a creature you control is dealt damage, you may have CARDNAME deal that much damage to any target. Do this only once each turn.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
+SVar:X:TriggerCount$DamageAmount
+SVar:PlayMain1:TRUE
+Oracle:Reach, trample\nYour opponents can't cast spells during your turn.\nWhenever a creature you control is dealt damage, you may have The Sensational She-Hulk deal that much damage to any target. Do this only once each turn.

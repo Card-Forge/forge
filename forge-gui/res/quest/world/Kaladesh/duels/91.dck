@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Magnum
+Title=Magnum
+Icon=Magnum.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Grand_Prix_Dallas-Fort_Worth_2016_-_9_to_64_Decklists/Greg_Ogreenc_-_Burn_(Modern,_#645359).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+1 Shard Volley
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+3 Bloodstained Mire
+1 Copperline Gorge
+2 Inspiring Vantage
+2 Sacred Foundry
+3 Scalding Tarn
+2 Snow-Covered Mountain
+2 Stomping Ground
+2 Wooded Foothills
+[Sideboard]
+2 Ancient Grudge
+1 Deflecting Palm
+3 Destructive Revelry
+1 Electrickery
+1 Grafdigger's Cage
+4 Kor Firewalker
+1 Searing Blaze
+2 Skullcrack

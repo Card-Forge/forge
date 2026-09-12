@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Catwoman
+Title=Catwoman
+Icon=Catwoman.jpg
+Difficulty=Easy
+Description=Fate_Reforged/SCG_Invitational_Qualifier_Dover/Chris_Smoot_-_G-W_Devotion_(Standard,_#218880).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Elvish Mystic
+4 Genesis Hydra
+1 Nylea, God of the Hunt
+4 Polukranos, World Eater
+1 Reclamation Sage
+4 Sylvan Caryatid
+1 Temur Sabertooth
+4 Voyaging Satyr
+4 Whisperwood Elemental
+1 Banishing Light
+4 Mastery of the Unseen
+1 Blossoming Sands
+9 Forest
+4 Nykthos, Shrine to Nyx
+2 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+4 Fleecemane Lion
+2 Hornet Nest
+1 Hunt the Hunter
+2 Nissa, Worldwaker
+1 Setessan Tactics
+3 Valorous Stance

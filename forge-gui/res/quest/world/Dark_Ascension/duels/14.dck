@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Easy
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Knoxville,_Tennessee/Damian_Brant_-_Tokens_(Standard,_#26373).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Doomed Traveler
+2 Hero of Bladehold
+4 Midnight Haunting
+4 Gather the Townsfolk
+4 Lingering Souls
+1 Revoke Existence
+3 Honor of the Pure
+4 Intangible Virtue
+3 Oblivion Ring
+3 Stony Silence
+1 Elspeth Tirel
+2 Sorin, Lord of Innistrad
+4 Isolated Chapel
+12 Plains
+6 Swamp
+3 Vault of the Archangel
+[Sideboard]
+2 Celestial Purge
+3 Day of Judgment
+1 Elesh Norn, Grand Cenobite
+2 Mirran Crusader
+3 Timely Reinforcements

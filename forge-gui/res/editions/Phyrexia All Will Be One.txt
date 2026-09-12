@@ -43,7 +43,7 @@ ScryfallCode=ONE
 31 U Resistance Reunited @Aurore Folny
 32 C Sinew Dancer @Campbell White
 33 R Skrelv, Defector Mite @Brian Valeza
-34 R Skrelv's Hive @Heonhwa Choe
+34 R Skrelv's Hive @Heonhwa
 35 U Swooping Lookout @Mike Franchina
 36 C Vanish into Eternity @Magali Villeneuve
 37 U Veil of Assimilation @Wayne Wu
@@ -53,7 +53,7 @@ ScryfallCode=ONE
 41 U Atmosphere Surgeon @Campbell White
 42 R Blade of Shared Souls @Volkan Baǵa
 43 R Blue Sun's Twilight @Piotr Dura
-44 C Bring the Ending @LA Draws
+44 C Bring the Ending @L.A. Draws
 45 C Chrome Prowler @Maxime Minard
 46 U Distorted Curiosity @Svetlin Velinov
 47 R Encroaching Mycosynth @Martin de Diego Sádaba
@@ -145,7 +145,7 @@ ScryfallCode=ONE
 133 C Furnace Strider @Denis Zhbankov
 134 U Gleeful Demolition @Tuan Duong Chu
 135 C Hazardous Blast @Zoltan Boros
-136 U Hexgold Halberd @Heonhwa Choe
+136 U Hexgold Halberd @Heonhwa
 137 C Hexgold Slash @Eli Minaya
 138 R Koth, Fire of Resistance @Eric Wilkerson
 139 C Kuldotha Cackler @Maxime Minard
@@ -183,7 +183,7 @@ ScryfallCode=ONE
 171 U Incubation Sac @Tony Foti
 172 U Infectious Bite @Campbell White
 173 C Lattice-Blade Mantis @Durion
-174 C Maze's Mantle @LA Draws
+174 C Maze's Mantle @L.A. Draws
 175 M Nissa, Ascended Animist @Chase Stone
 176 U Noxious Assault @Billy Christian
 177 C Oil-Gorger Troll @Dave Kendall
@@ -246,7 +246,7 @@ ScryfallCode=ONE
 234 U Myr Convert @José Parodi
 235 C Myr Custodian @Mark Behm
 236 C Myr Kinsmith @Cristi Balanescu
-237 C Phyrexian Atlas @Illustranesia
+237 C Phyrexian Atlas @Septian Fajrianto
 238 C Prophetic Prism @Leanna Crossan
 239 U Prosthetic Injector @Zezhou Chen
 240 U Ribskiff @José Parodi
@@ -460,7 +460,7 @@ ScryfallCode=ONE
 
 [extended art]
 375 R Norn's Wellspring @Jonas De Ro
-376 R Skrelv's Hive @Heonhwa Choe
+376 R Skrelv's Hive @Heonhwa
 377 R White Sun's Twilight @Julian Kok Joon Wen
 378 R Blade of Shared Souls @Volkan Baǵa
 379 R Blue Sun's Twilight @Piotr Dura

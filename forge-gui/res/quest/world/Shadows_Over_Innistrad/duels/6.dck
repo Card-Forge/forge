@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/SCG_Invitational_Qualifier_Newington/Mike_Nguyen_-_Abzan_Midrange_(Standard,_#612659).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Kalitas, Traitor of Ghet
+3 Nissa, Vastwood Seer
+4 Sylvan Advocate
+3 Anguished Unmaking
+3 Dromoka's Command
+4 Declaration in Stone
+3 Languish
+2 Painful Truths
+3 Oath of Nissa
+3 Gideon, Ally of Zendikar
+2 Nissa, Voice of Zendikar
+1 Ob Nixilis Reignited
+2 Sorin, Grim Nemesis
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+4 Hissing Quagmire
+1 Plains
+4 Shambling Vent
+4 Swamp
+2 Westvale Abbey
+[Sideboard]
+2 Duress
+2 Flaying Tendrils
+2 Foul-Tongue Invocation
+2 Self-Inflicted Wound
+2 Transgress the Mind
+2 Virulent Plague

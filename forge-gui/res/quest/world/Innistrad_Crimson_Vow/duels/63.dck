@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/demonictutors_-_Boros_Prowess_(Modern,_#1323851)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Clever Lumimancer
+4 Nivmagus Elemental
+4 Monastery Swiftspear
+4 Leonin Lightscribe
+4 Mutagenic Growth
+4 Gut Shot
+4 Manamorphose
+4 Lightning Bolt
+4 Lava Dart
+2 Assault Strobe
+4 Ground Rift
+2 Mountain
+3 Sunbaked Canyon
+3 Scalding Tarn
+4 Sacred Foundry
+4 Arid Mesa
+4 Inspiring Vantage
+[Sideboard]
+2 Reckless Impulse
+2 Apostle's Blessing
+2 Alpine Moon
+3 Tormod's Crypt
+3 Shattering Spree
+3 Sanctifier en-Vec

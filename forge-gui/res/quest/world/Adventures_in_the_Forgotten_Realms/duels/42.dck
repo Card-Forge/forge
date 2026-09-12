@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Alouroua
+Title=Alouroua
+Icon=Alouroua.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Alexander_Flynn_-_Sultai_Ultimatum_(Standard,_#1184924).dck
+Deck Type=constructed
+
+[Main]
+1 Vorinclex, Monstrous Raider
+1 Valki, God of Lies
+2 Polukranos, Unchained
+2 Elder Gargaroth
+1 Power Word Kill
+2 Jwari Disruption
+3 Mystical Dispute
+4 Heartless Act
+1 Pelakka Predation
+1 Sea Gate Restoration
+2 Extinction Event
+2 Alrund's Epiphany
+3 Shadows' Verdict
+4 Cultivate
+4 Emergent Ultimatum
+1 Kiora Bests the Sea God
+2 Elspeth's Nightmare
+4 Binding the Old Gods
+4 Wolfwillow Haven
+4 Omen of the Sea
+1 Blightstep Pathway
+1 Ketria Triome
+2 Island
+2 Swamp
+3 Forest
+3 Temple of Malady
+4 Zagoth Triome
+4 Barkchannel Pathway
+4 Fabled Passage
+4 Darkbore Pathway
+4 Clearwater Pathway
+[Sideboard]
+1 Pestilent Haze
+1 Yorion, Sky Nomad
+1 Test of Talents
+2 Koma, Cosmos Serpent
+3 Kaervek, the Spiteful
+3 Power Word Kill
+4 Duress

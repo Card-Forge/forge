@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/AKMiD_-_Esper_Midrange_(Standard,_#786596).dck
+Deck Type=constructed
+
+[Main]
+3 Deputy of Detention
+4 Hero of Precinct One
+4 Hostage Taker
+4 Kitesail Freebooter
+2 Seraph of the Scales
+4 Thief of Sanity
+1 Cast Down
+4 Mortify
+1 Vraska's Contempt
+4 Thought Erasure
+2 Dovin, Grand Arbiter
+2 Teferi, Hero of Dominaria
+4 Drowned Catacomb
+3 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+1 Island
+4 Isolated Chapel
+1 Swamp
+4 Watery Grave
+[Sideboard]
+3 Cast Down
+1 Basilica Bell-Haunt
+1 Ethereal Absolution
+2 Fungal Infection
+1 Golden Demise
+2 Karn, Scion of Urza
+4 Negate
+1 The Eldest Reborn

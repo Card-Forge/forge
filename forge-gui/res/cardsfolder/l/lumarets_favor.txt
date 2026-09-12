@@ -1,0 +1,8 @@
+Name:Lumaret's Favor
+ManaCost:1 G
+Types:Instant
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Infusion — When you cast this spell, copy it if you gained life this turn. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True | ConditionCheckSVar$ X
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +4 | SpellDescription$ Target creature gets +2/+4 until end of turn.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Infusion — When you cast this spell, copy it if you gained life this turn. You may choose new targets for the copy.\nTarget creature gets +2/+4 until end of turn.

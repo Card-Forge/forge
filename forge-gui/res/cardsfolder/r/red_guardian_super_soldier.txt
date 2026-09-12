@@ -1,0 +1,8 @@
+Name:Red Guardian, Super-Soldier
+ManaCost:2 W
+Types:Legendary Creature Human Soldier Villain
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy target creature an opponent controls that dealt damage this turn.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+dealtDamageThisTurn | ValidTgtsDesc$ creature an opponent controls that dealt damage this turn
+Oracle:Flash\nWhen Red Guardian enters, destroy target creature an opponent controls that dealt damage this turn.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/tosatimarco_-_Grixis_Murktide_(Modern,_#2536373).dck
+Deck Type=constructed
+
+[Main]
+4 Cecil, Dark Knight
+4 Psychic Frog
+4 Dragon's Rage Channeler
+3 Murktide Regent
+1 Sink into Stupor
+2 Spell Snare
+4 Fatal Push
+2 Force of Negation
+4 Counterspell
+1 Sheoldred's Edict
+3 Lightning Bolt
+4 Expressive Iteration
+2 Molten Collapse
+3 Thoughtseize
+2 Island
+1 Undercity Sewers
+1 Bloodstained Mire
+4 Polluted Delta
+2 Scalding Tarn
+3 Watery Grave
+2 Flooded Strand
+1 Swamp
+1 Otawara, Soaring City
+2 Steam Vents
+[Sideboard]
+3 Stern Scolding
+4 Consign to Memory
+2 Nihil Spellbomb
+2 The Meathook Massacre
+2 Damping Sphere
+2 Subtlety

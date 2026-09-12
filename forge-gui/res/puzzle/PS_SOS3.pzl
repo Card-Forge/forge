@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Secrets of Strixhaven #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/05/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Your opponent has a Royal Treatment in hand. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Impractical Joke;Vibrant Outburst;Torch the Witness;Untimely Malfunction
+p0battlefield=Colorstorm Stallion;Spider-Punk|NoETBTrigs;Mountain;Mountain;Mountain;Mountain;Island;Island;Island;Prismari, the Inspiration|Id:1
+p1life=23
+p1hand=Royal Treatment
+p1battlefield=Infernal Phantom;Werefox Bodyguard|ExecuteScript:TrigExile->1;Forest

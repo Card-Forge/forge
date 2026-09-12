@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Olokun
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/Camari_Bolger_-_Jund_Insidious_Roots_(Standard,_#2536904).dck
+Deck Type=constructed
+
+[Main]
+1 Coati Scavenger
+2 Disruptive Stormbrood
+2 Dragon Sniper
+4 Haywire Mite
+2 Llanowar Elves
+4 Molt Tender
+1 Osteomancer Adept
+4 Overlord of the Balemurk
+2 Rubblebelt Maverick
+2 Scavenging Ooze
+1 Souls of the Lost
+2 Town Greeter
+1 Agatha's Soul Cauldron
+2 Cache Grab
+2 Dredger's Insight
+4 Insidious Roots
+4 Tyvar, Jubilant Brawler
+4 Blooming Marsh
+6 Forest
+1 Great Arashin City
+4 Llanowar Wastes
+1 Swamp
+4 Wastewood Verge
+[Sideboard]
+1 Cankerbloom
+1 Coati Scavenger
+3 Dark Confidant
+2 Dragon Sniper
+1 Gastal Raider
+1 Ghost Vacuum
+2 Go for the Throat
+1 Skyfisher Spider
+2 Souls of the Lost
+1 Voldaren Thrillseeker

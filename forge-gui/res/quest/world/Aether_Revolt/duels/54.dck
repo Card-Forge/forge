@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/Iida_Naoki_-_Goblins_(Modern,_#665779).dck
+Deck Type=constructed
+
+[Main]
+4 Frogtosser Banneret
+4 Goblin Chieftain
+4 Goblin Guide
+4 Goblin Piledriver
+4 Goblin Rabblemaster
+2 Krenko, Mob Boss
+4 Legion Loyalist
+4 Metallic Mimic
+4 Mogg War Marshal
+4 AEther Vial
+2 Smuggler's Copter
+4 Auntie's Hovel
+1 Blackcleave Cliffs
+1 Blood Crypt
+4 Bloodstained Mire
+4 Cavern of Souls
+2 Mountain
+3 Mutavault
+1 Swamp
+[Sideboard]
+4 Blood Moon
+2 Earwig Squad
+3 Fatal Push
+2 Goblin Grenade
+2 Pithing Needle
+2 Shattering Spree

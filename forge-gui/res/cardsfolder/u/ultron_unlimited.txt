@@ -1,0 +1,12 @@
+Name:Ultron, Unlimited
+ManaCost:1 U B
+Types:Legendary Artifact Creature Robot Villain
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+T:Mode$ Connives | Execute$ TrigToken | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control connives, you may pay {1}. If you do, create a 2/2 colorless Robot Villain artifact creature token.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenScript$ c_2_2_a_robot_villain
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Discard
+Oracle:Flying\nWhenever Ultron attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever a creature you control connives, you may pay {1}. If you do, create a 2/2 colorless Robot Villain artifact creature token.

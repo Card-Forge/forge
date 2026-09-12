@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Easy
+Description=Gatecrash/WMCQ_-__Washington_DC/Yiping_Chenglin_-_Jund_(Standard,_#50574).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+3 Crimson Muckwader
+2 Deathrite Shaman
+3 Dreg Mangler
+4 Experiment One
+4 Falkenrath Aristocrat
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+3 Rakdos Cackler
+2 Abrupt Decay
+2 Searing Spear
+1 Ultimate Price
+2 Dreadbore
+4 Blood Crypt
+2 Dragonskull Summit
+2 Forest
+1 Mountain
+4 Overgrown Tomb
+3 Rootbound Crag
+4 Stomping Ground
+2 Woodland Cemetery
+[Sideboard]
+2 Appetite for Brains
+2 Domri Rade
+2 Golgari Charm
+2 Gruul Charm
+1 Kessig Wolf Run
+2 Rakdos Charm
+2 Tragic Slip

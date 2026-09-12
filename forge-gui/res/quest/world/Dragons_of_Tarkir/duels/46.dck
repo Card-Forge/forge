@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dilbert
+Title=Dilbert
+Icon=Dilbert.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Daily_#8300450/ifarnung_-_Abzan_Midrange_(Standard,_#240547).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+4 Satyr Wayfinder
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Abzan Charm
+2 Hero's Downfall
+2 Crux of Fate
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+2 Forest
+4 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+3 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Arashin Cleric
+1 Dromoka's Command
+3 Drown in Sorrow
+2 Duress
+1 Nissa, Worldwaker
+1 Self-Inflicted Wound
+1 Sorin, Solemn Visitor
+3 Ultimate Price

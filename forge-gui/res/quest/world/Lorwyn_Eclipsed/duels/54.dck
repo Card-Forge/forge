@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Magicmalle_-_Reanimator_(Modern,_#2669223).dck
+Deck Type=constructed
+
+[Main]
+1 Superior Spider-Man
+1 Arcane Proxy
+1 Harvester of Misery
+1 Deceit
+1 Flare of Malice
+1 Fell the Profane
+1 Johann's Stopgap
+1 Beseech the Mirror
+1 Roadside Blowout
+1 Deem Inferior
+[Sideboard]
+1 Shriekmaw

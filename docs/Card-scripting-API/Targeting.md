@@ -100,3 +100,5 @@ Example: `TgtPrompt$ Select target creature that entered this turn`
 
 ## TargetingPlayer$ {Defined}
 Some older cards let a different player than the activator choose the target.
+
+## DividedAsYouChoose$ {Count}

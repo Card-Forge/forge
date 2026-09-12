@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Jacob_Franz_-_Izzet_Spellementals_(Standard,_#2940704).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Hearth Elemental
+4 Sunderflock
+4 Burst Lightning
+4 Opt
+4 Prismari Charm
+3 Traumatic Critique
+2 Get Out
+1 Spell Pierce
+1 Spell Snare
+4 Sleight of Hand
+4 Winternight Stories
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+3 Multiversal Passage
+[Sideboard]
+4 Colorstorm Stallion
+3 Soul-Guide Lantern
+2 Annul
+2 Get Out
+1 Broadside Barrage
+1 Impractical Joke
+1 Spell Pierce
+1 Spell Snare

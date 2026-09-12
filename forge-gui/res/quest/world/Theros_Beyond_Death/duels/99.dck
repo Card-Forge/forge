@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Antoine57437_-_Abzan_Triggers_(Modern,_#1029291).dck
+Deck Type=constructed
+
+[Main]
+1 Kitesail Freebooter
+2 Scavenging Ooze
+2 Wall of Omens
+2 Fiend Hunter
+2 Eternal Witness
+4 Flickerwisp
+4 Giver of Runes
+4 Tidehollow Sculler
+4 Wasteland Strangler
+4 Eldrazi Displacer
+4 Aether Vial
+4 Collected Company
+1 Overgrown Tomb
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Verdant Catacombs
+1 Wastes
+1 Godless Shrine
+1 Brushland
+2 Temple Garden
+2 Snow-Covered Plains
+2 Prismatic Vista
+2 Marsh Flats
+4 Eldrazi Temple
+4 Windswept Heath
+[Sideboard]
+1 Spellskite
+1 Big Game Hunter
+1 Kambal, Consul of Allocation
+1 Kunoros, Hound of Athreos
+1 Linvala, Keeper of Silence
+1 Phyrexian Revoker
+1 Sin Collector
+2 Gaddock Teeg
+2 Eldritch Evolution
+2 Auriok Champion
+2 Plague Engineer

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Easy
+Description=Dark_Ascension/SCG_Standard_Open_-_Minneapolis,_Minnesota/Jeremy_Judnic_-_B-W_Tokens_(Standard,_#36827).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blade Splicer
+4 Champion of the Parish
+4 Doomed Traveler
+4 Hero of Bladehold
+4 Gather the Townsfolk
+2 Increasing Devotion
+4 Lingering Souls
+4 Honor of the Pure
+4 Intangible Virtue
+2 Oblivion Ring
+1 Evolving Wilds
+4 Isolated Chapel
+13 Plains
+3 Swamp
+3 Vault of the Archangel
+[Sideboard]
+4 Celestial Purge
+2 Dismember
+1 Elspeth Tirel
+2 Revoke Existence
+2 Sorin, Lord of Innistrad
+1 Stony Silence
+2 Timely Reinforcements

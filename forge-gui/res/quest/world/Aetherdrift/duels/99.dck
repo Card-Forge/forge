@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/txepi_-_Dimir_Murktide_(Modern,_#2384723).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+2 Harbinger of the Seas
+4 Orcish Bowmasters
+4 Murktide Regent
+3 Subtlety
+2 Sink into Stupor
+3 Force of Negation
+4 Consider
+3 Spell Snare
+4 Counterspell
+4 Fatal Push
+2 Sheoldred's Edict
+2 Stock Up
+1 Swamp
+2 Gloomlake Verge
+2 Flooded Strand
+2 Undercity Sewers
+3 Island
+3 Watery Grave
+4 Polluted Delta
+2 Scalding Tarn
+[Sideboard]
+2 Engineered Explosives
+2 Nihil Spellbomb
+2 Thoughtseize
+2 The Meathook Massacre
+1 Sheoldred's Edict
+4 Consign to Memory
+2 Surgical Extraction

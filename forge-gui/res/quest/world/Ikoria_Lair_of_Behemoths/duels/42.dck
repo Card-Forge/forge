@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=The Great Gatsby
+Title=The Great Gatsby
+Icon=The Great Gatsby.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_TeCroney_-_Mono-B_Adventures_(Standard,_#964217).dck
+Deck Type=constructed
+
+[Main]
+2 Murderous Rider
+4 Whisper Squad
+4 Gutterbones
+4 Knight of the Ebon Legion
+4 Hunted Nightmare
+4 Serrated Scorpion
+4 Rotting Regisaur
+4 Heraldic Banner
+2 Duress
+4 Drill Bit
+1 Mobilized District
+4 Castle Locthwain
+19 Swamp
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Murderous Rider
+2 Shadowspear
+2 Duress
+4 Cry of the Carnarium
+4 Disfigure

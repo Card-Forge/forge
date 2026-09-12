@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/AlexanderRosdahl_-_Abzan_(Modern,_#787432).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+3 Scavenging Ooze
+1 Assassin's Trophy
+3 Fatal Push
+3 Path to Exile
+3 Inquisition of Kozilek
+4 Lingering Souls
+4 Thoughtseize
+4 Bitterblossom
+2 Kaya, Orzhov Usurper
+3 Liliana of the Veil
+2 Nissa, Voice of Zendikar
+2 Sorin, Solemn Visitor
+3 Blooming Marsh
+1 Forest
+2 Gavony Township
+1 Godless Shrine
+1 Marsh Flats
+2 Overgrown Tomb
+1 Plains
+1 Shambling Vent
+2 Stirring Wildwood
+1 Swamp
+1 Temple Garden
+3 Verdant Catacombs
+3 Windswept Heath
+[Sideboard]
+3 Fulminator Mage
+3 Knight of Autumn
+2 Krosan Grip
+3 Ravenous Trap
+2 Surgical Extraction
+2 Tireless Tracker

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=White Knight
+Title=White Knight
+Icon=White Knight.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/ASADA_TAKASHI_-_RG_Aggro_(Standard,_#1316693).dck
+Deck Type=constructed
+
+[Main]
+2 Volatile Arsonist
+2 Ill-Tempered Loner
+2 Outland Liberator
+3 Halana and Alena, Partners
+3 Tovolar, Dire Overlord
+4 Reckless Stormseeker
+4 Kessig Naturalist
+4 Werewolf Pack Leader
+3 Snakeskin Veil
+2 Thundering Rebuke
+4 Ranger Class
+3 Arlinn, the Pack's Hope
+1 Lair of the Hydra
+1 Den of the Bugbear
+4 Rockfall Vale
+4 Cragcrown Pathway
+7 Forest
+7 Mountain
+[Sideboard]
+1 Snakeskin Veil
+2 Avabruck Caretaker
+2 Saryth, the Viper's Fang
+2 Burning Hands
+2 Abrade
+2 Cinderclasm
+2 Outland Liberator
+2 Flame-Blessed Bolt

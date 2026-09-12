@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Danielpena397_-_Boros_Auras_(Standard,_#2281415).dck
+Deck Type=constructed
+
+[Main]
+3 Screaming Nemesis
+4 Slickshot Show-Off
+4 Monastery Swiftspear
+4 Hired Claw
+4 Emberheart Challenger
+4 Boros Charm
+4 Burst Lightning
+4 Monstrous Rage
+2 Lightning Helix
+4 Boltwave
+2 Shardmage's Rescue
+4 Battlefield Forge
+4 Inspiring Vantage
+1 Raucous Carnival
+9 Mountain
+3 Restless Bivouac
+[Sideboard]
+2 Lightning Helix
+4 Destroy Evil
+1 Screaming Nemesis
+1 Obliterating Bolt
+3 Torch the Tower
+3 Knight of Grace
+1 Case of the Crimson Pulse

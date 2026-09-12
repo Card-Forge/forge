@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Jack_Doucet_-_Bant_Cage_(Standard,_#2384840).dck
+Deck Type=constructed
+
+[Main]
+4 Brightglass Gearhulk
+4 Llanowar Elves
+3 Mockingbird
+4 Overlord of the Mistmoors
+4 Pawpatch Recruit
+4 Sandstorm Salvager
+3 Sentinel of the Nameless City
+1 Haywire Mite
+1 Insidious Fungus
+3 Collector's Cage
+2 Dusk Rose Reliquary
+3 Sheltered by Ghosts
+4 Botanical Sanctum
+3 Brushland
+2 Adarkar Wastes
+2 Hushwood Verge
+4 Razorverge Thicket
+2 Restless Prairie
+2 Seachrome Coast
+2 Yavimaya Coast
+2 Plains
+1 Forest
+[Sideboard]
+2 Protect the Negotiators
+1 Sheltered by Ghosts
+1 Soul-Guide Lantern
+2 Obstinate Baloth
+2 Tishana's Tidebinder
+2 Spell Pierce
+2 Authority of the Consuls
+1 Split Up
+2 Rest in Peace

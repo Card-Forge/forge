@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Adam_Fajkus_-_Mono-Green_Aggro_(Standard,_#1586256).dck
+Deck Type=constructed
+
+[Main]
+4 Evolving Adaptive
+4 Ascendant Packleader
+4 Cankerbloom
+4 Quirion Beastcaller
+3 Kodama of the West Tree
+2 Bloated Contaminator
+2 Simian Simulacrum
+4 Clay Champion
+2 Tyvar's Stand
+2 Infernal Grasp
+2 Tear Asunder
+4 Audacity
+1 Glorious Sunrise
+1 Unnatural Growth
+2 Boseiju, Who Endures
+4 Deathcap Glade
+4 Llanowar Wastes
+12 Forest
+[Sideboard]
+2 Thrun, Breaker of Silence
+2 Tamiyo's Safekeeping
+2 Tear Asunder
+2 Invoke the Ancients
+2 Workshop Warchief
+2 Infernal Grasp
+3 The Stone Brain

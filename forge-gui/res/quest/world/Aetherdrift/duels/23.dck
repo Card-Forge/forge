@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Daisuke_Jinba_-_Boros_Convoke_(Standard,_#2367601).dck
+Deck Type=constructed
+
+[Main]
+4 Novice Inspector
+4 Nesting Bot
+4 Warden of the Inner Sky
+4 Resolute Reinforcements
+2 Regal Bunnicorn
+4 Imodane's Recruiter
+4 Knight-Errant of Eos
+1 Voyager Glidecar
+1 Torch the Tower
+4 Gleeful Demolition
+3 Sheltered by Ghosts
+3 Case of the Gateway Express
+5 Plains
+3 Mountain
+4 Battlefield Forge
+4 Inspiring Vantage
+4 Sunbillow Verge
+1 Mirrex
+1 Amonkhet Raceway
+[Sideboard]
+3 Torch the Tower
+1 Lithomantic Barrage
+2 Requisition Raid
+2 Destroy Evil
+1 Sheltered by Ghosts
+2 Split Up
+2 Rest in Peace
+2 Chandra, Spark Hunter

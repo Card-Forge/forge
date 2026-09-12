@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Brunz_Costa_-_Mardu_Midrange_(Jegantha)_(Standard,_#1171820).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+2 Giant Killer
+3 Reidane, God of the Worthy
+4 Bonecrusher Giant
+4 Elite Spellbinder
+4 Seasoned Hallowblade
+4 Silverquill Silencer
+1 Eliminate
+2 Vanishing Verse
+3 Heartless Act
+4 Humiliate
+4 Showdown of the Skalds
+2 Temple of Triumph
+2 Swamp
+2 Plains
+2 Temple of Silence
+4 Brightclimb Pathway
+4 Needleverge Pathway
+4 Savai Triome
+4 Blightstep Pathway
+[Sideboard]
+1 Jegantha, the Wellspring
+1 Cling to Dust
+1 Heartless Act
+1 Go Blank
+2 Kroxa, Titan of Death's Hunger
+2 Giant Killer
+2 Vanishing Verse
+2 Eliminate
+3 Archon of Absolution

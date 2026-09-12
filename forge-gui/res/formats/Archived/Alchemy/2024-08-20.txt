@@ -3,4 +3,4 @@ Name:Alchemy (YBLB)
 Type:Archived
 Subtype:Arena
 Effective:2024-08-20
-Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB
+Sets:ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB

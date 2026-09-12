@@ -1,0 +1,11 @@
+Name:Teacher's Pest
+ManaCost:B G
+Types:Creature Skeleton Pest
+PT:1/1
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ ChangeZone | Cost$ B G | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return this card from your graveyard to the battlefield tapped.
+SVar:SacMe:2
+SVar:DiscardMe:2
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever this creature attacks, you gain 1 life.\n{B}{G}: Return this card from your graveyard to the battlefield tapped.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/66yui_-_Death_and_Taxes_(Modern,_#1321448).dck
+Deck Type=constructed
+
+[Main]
+1 Lion Sash
+4 Flickerwisp
+4 Solitude
+4 Giver of Runes
+4 Leonin Arbiter
+4 Archon of Emeria
+4 Skyclave Apparition
+4 Thalia, Guardian of Thraben
+4 Stoneforge Mystic
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+1 Batterskull
+4 Aether Vial
+2 Sejiri Shelter
+4 Path to Exile
+4 Ephemerate
+1 Eiganjo Castle
+1 Castle Ardenvale
+2 Eiganjo, Seat of the Empire
+4 Tectonic Edge
+4 Ghost Quarter
+4 Field of Ruin
+14 Plains
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Rest in Peace
+2 Leonin Relic-Warder
+2 Containment Priest
+2 Burrenton Forge-Tender
+3 Sanctifier en-Vec
+3 Aven Mindcensor

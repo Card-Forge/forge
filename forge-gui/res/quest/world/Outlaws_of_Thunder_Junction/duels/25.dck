@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Absolut_-_Gruul_Aggro_(Standard,_#2074418).dck
+Deck Type=constructed
+
+[Main]
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Fugitive Codebreaker
+4 Slickshot Show-Off
+4 Questing Druid
+2 Two-Headed Hunter
+4 Play with Fire
+2 Witchstalker Frenzy
+2 Snakeskin Veil
+2 Tyvar's Stand
+4 Monstrous Rage
+4 Demonic Ruckus
+4 Copperline Gorge
+4 Karplusan Forest
+8 Mountain
+2 Restless Ridgeline
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+[Sideboard]
+1 Snakeskin Veil
+1 Tyvar's Stand
+2 End the Festivities
+3 Pick Your Poison
+3 Strangle
+2 Case of the Crimson Pulse
+3 Urabrask's Forge

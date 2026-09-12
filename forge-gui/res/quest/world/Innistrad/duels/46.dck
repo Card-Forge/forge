@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Easy
+Description=Innistrad/Pro_Tour_Dark_Ascension_Top_Standard_Decks/Andrej_Strasky_-_UW_Humans_(Standard,_#26007).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+1 Fiend Hunter
+3 Geist of Saint Traft
+4 Grand Abolisher
+3 Hero of Bladehold
+2 Leonin Relic-Warder
+4 Mirran Crusader
+1 Sword of War and Peace
+2 Dismember
+2 Mana Leak
+2 Angelic Destiny
+4 Honor of the Pure
+4 Glacial Fortress
+1 Island
+3 Moorland Haunt
+12 Plains
+4 Seachrome Coast
+[Sideboard]
+1 Divine Offering
+2 Mental Misstep
+2 Mortarpod
+2 Oblivion Ring
+2 Ratchet Bomb
+1 Revoke Existence
+1 Sword of Feast and Famine

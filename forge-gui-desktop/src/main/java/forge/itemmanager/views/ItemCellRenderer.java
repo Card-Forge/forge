@@ -62,6 +62,8 @@ public class ItemCellRenderer extends DefaultTableCellRenderer {
             return new DeckQuantityRenderer();
         case DECK_AI:
             return new DeckAIRenderer();
+        case DECK_KEY_CARD:
+            return new DeckKeyCardRenderer();
         default:
             return new ItemCellRenderer();
         }

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Jpsn54_-_Boros_Kiki_(Modern,_#1215847).dck
+Deck Type=constructed
+
+[Main]
+1 Grim Lavamancer
+2 Walking Ballista
+3 Ranger-Captain of Eos
+3 Thraben Inspector
+4 Fury
+4 Solitude
+4 Esper Sentinel
+4 Brought Back
+4 Ephemerate
+4 Cleansing Wildfire
+4 Showdown of the Skalds
+1 Mountain
+1 Rustvale Bridge
+2 Ghost Quarter
+3 Marsh Flats
+4 Arid Mesa
+4 Sacred Foundry
+4 Plains
+4 Flagstones of Trokair
+[Sideboard]
+1 Skyclave Apparition
+1 Curse of Silence
+2 Soul-Guide Lantern
+2 Burrenton Forge-Tender
+2 Drannith Magistrate
+2 Obsidian Charmaw
+2 Sanctifier en-Vec
+3 Ingot Chewer

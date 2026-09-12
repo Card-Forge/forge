@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Easy
+Description=Aether_Revolt/PaperTyga_-_Deck_(Standard,_#663781).dck
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+3 Rishkar, Peema Renegade
+4 Servant of the Conduit
+4 Tireless Tracker
+3 Verdurous Gearhulk
+4 Winding Constrictor
+3 Blossoming Defense
+3 Fatal Push
+3 Murder
+2 Rishkar's Expertise
+4 Nissa, Voice of Zendikar
+2 Aether Hub
+4 Blooming Marsh
+4 Evolving Wilds
+5 Forest
+4 Hissing Quagmire
+4 Snow-Covered Swamp
+[Sideboard]
+1 Blossoming Defense
+1 Fatal Push
+4 Lost Legacy
+1 Murder
+1 Rishkar's Expertise
+3 Scrapheap Scrounger
+1 Verdurous Gearhulk
+3 Walking Ballista

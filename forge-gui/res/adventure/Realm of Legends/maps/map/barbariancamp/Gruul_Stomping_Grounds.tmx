@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="95">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Clan Guildmage&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rubble Slinger&quot;, &quot;Killer Instinct&quot; ], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Killer Instinct&quot; ]}}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -27,7 +27,7 @@
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYEAF/cyoeDoz+WIgTAr4wUqaekr0TwC67RUPZfZR4o7XOOyGiRtyIsSOSuBWDwL/mSAYG/iEQ5yQO4gBS7ixi/9gQtgLCwtK7EEHmoy45XqA8RoJtDuQibp2wsBZSQjNiJa2PzJB7A4hEN4gQEo6xedXmL0wu4OZEH6nNtjBhsp/B7TjPROq/eh+Jyd/MSGF62d2THlQuprMjGk3Pn+DwvsCC4KND2BL0x+g6RmUnrDZDQp3kN+xmZ1HQZkGykdhTIhwRbcbm9+f+iPs/a+IMCsJiT2HC8HGlkc+QM1CtrsPaM8ULH5Hj3N0/zIrIezbjpaG8AFku2H2o9sNAjB/g+wNQlLPqIRq3l9oeUpM3oPZ/QUYNp/R4hwGYOEGsvcDE3ZzyAEgu4OhGBtA9i+yvcEE9KEDAIw2Z3Q=
+   eJxjYEAF/cyoeDoz+WIgTAr4wUqaekr0TwC67RUPZfZR4o7XOOwGiR+VYGAw5ESIgfi41IPAfyYIxgY+4RAn5A5iwBJu7OI/mBD2wsKCEnvQgSYjbrkeYLxGAu0OZKKunTBwVhJCM6Kl7Y9MELtDCIQ3CJCSTvH5FWYvzO5gJoTfqQ12sKHy3wHteM+Eaj+638nJX0xI4fqZHVMelK4mM2Pajc/foPC+wIJg4wPY0vQHaHoGpSdsdoPCHeR3bGbnUVCmgfJRGBMiXNHtxub3p/4Ie/8rIsxKQmLP4UKwseWRD1CzkO3uA9ozBYvf0eMc3b/MSgj7tqOlIXwA2W6Y/eh2gwDM3yB7g5DUMyqhmvcXWp4Sk/dgdn8Bhs1ntDiHAVi4gez9wITdHHIAyO5gKMYGkP2LbG8wAX3oAAAQzGhR
   </data>
  </layer>
  <layer id="8" name="AboveClutter" width="30" height="17">
@@ -184,6 +184,18 @@
   <object id="93" template="../../../../common/maps/obj/scroll.tx" x="396.855" y="82.7433">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stomping Ground&quot;, &quot;editions&quot;: [ &quot;GPT&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="176.76" y="69.5671" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;NO TERFS ON GRUUL TURF!!!&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
    </properties>
   </object>
  </objectgroup>

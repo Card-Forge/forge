@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Backlash Machine
+Title=The Backlash Machine
+Icon=The Backlash Machine.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/Ovinogeddon_X1_Sunday_Big_Side_Event/Leonardo_Montefusco_-_GW_Auras_(Modern,_#640672).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+2 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Gryff's Boon
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+2 Spirit Mantle
+2 Unflinching Courage
+1 Brushland
+1 Forest
+2 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+4 Glistener Elf
+3 Leyline of Sanctity
+4 Nature's Claim
+4 Noble Hierarch

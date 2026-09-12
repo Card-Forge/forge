@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz
+Title=Vanellope von Schweetz
+Icon=Vanellope von Schweetz.jpg
+Difficulty=Easy
+Description=Kaladesh/SCG_Invitational_Qualifier_Springfield/Josh_Cramer_-_R-B_Aggro_(Standard,_#652655).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bomat Courier
+3 Lathnu Hellion
+4 Night Market Lookout
+4 Scrapheap Scrounger
+3 Key to the City
+4 Smuggler's Copter
+4 Fiery Temper
+4 Unlicensed Disintegration
+4 Alms of the Vein
+4 Incendiary Flow
+4 Foreboding Ruins
+10 Mountain
+8 Swamp
+[Sideboard]
+2 Asylum Visitor
+4 Galvanic Bombardment
+2 Kalitas, Traitor of Ghet
+1 Key to the City
+2 Lightning Axe
+1 Smoldering Marsh
+3 Weaver of Lightning

@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -87,7 +88,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void addDeck(){
-        if (Current.player().getDeckCount() >= AdventurePlayer.MAX_DECK_COUNT){
+        if (Current.player().getDeckCount() >= Current.player().getMaxDeckCount()){
             showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblAddDeck"), Forge.getLocalizer().getMessage("lblMaxDeckCountReached"),
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
             return;
@@ -238,6 +239,13 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        Forge.switchScene(DeckEditScene.getInstance());
+        TextureRegion textureRegion;
+        if (Forge.lastPreview != null)
+            textureRegion = new TextureRegion(Forge.lastPreview);
+        else
+            textureRegion = getUIBackground();
+        DeckEditScene editScene = DeckEditScene.getInstance(textureRegion);
+        editScene.loadEvent(null);
+        Forge.switchScene(editScene);
     }
 }

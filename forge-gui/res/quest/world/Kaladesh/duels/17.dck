@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Super_IQ_Memphis/Josh_Strunk_-_Bant_Flash_(Standard,_#652364).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+4 Reflector Mage
+2 Selfless Spirit
+4 Servant of the Conduit
+4 Spell Queller
+4 Sylvan Advocate
+3 Tireless Tracker
+3 Verdurous Gearhulk
+4 Smuggler's Copter
+2 Blossoming Defense
+4 Tamiyo, Field Researcher
+3 Aether Hub
+4 Botanical Sanctum
+4 Evolving Wilds
+3 Forest
+2 Fortified Village
+1 Island
+2 Lumbering Falls
+3 Plains
+3 Prairie Stream
+[Sideboard]
+2 Blessed Alliance
+3 Ceremonious Rejection
+3 Declaration in Stone
+2 Fragmentize
+2 Negate
+2 Nissa, Vital Force
+1 Summary Dismissal

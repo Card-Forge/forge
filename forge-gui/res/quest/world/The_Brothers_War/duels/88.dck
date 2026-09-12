@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Lim_Lucas_-_Jund_Creativity_(Modern,_#1529222).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+1 Terminate
+2 Fatal Push
+4 Lightning Bolt
+1 Mishra's Command
+1 Transmogrify
+1 Inquisition of Kozilek
+3 Persist
+4 Thoughtseize
+4 Indomitable Creativity
+3 Bitter Reunion
+4 Wrenn and Six
+1 Boseiju, Who Endures
+1 Wooded Foothills
+2 Stomping Ground
+2 Scalding Tarn
+2 Blood Crypt
+2 Mountain
+2 Ziatora's Proving Ground
+4 Dwarven Mine
+4 Arid Mesa
+4 Bloodstained Mire
+[Sideboard]
+1 Portal to Phyrexia
+1 Terastodon
+1 Turn the Earth
+1 Ob Nixilis, the Adversary
+2 Boseiju, Who Endures
+2 Hidetsugu Consumes All
+2 Necromentia
+2 Collective Brutality
+3 Veil of Summer

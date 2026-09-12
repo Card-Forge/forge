@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/ATSUSHI_MORI_-_Izzet_Dragons_(Standard,_#1171974).dck
+Deck Type=constructed
+
+[Main]
+2 Galazeth Prismari
+4 Goldspan Dragon
+4 Brazen Borrower
+4 Bonecrusher Giant
+3 Mazemind Tome
+2 Essence Scatter
+2 Mystical Dispute
+3 Saw It Coming
+4 Frost Bite
+3 Expressive Iteration
+3 Alrund's Epiphany
+1 Shark Typhoon
+3 Faceless Haven
+4 Riverglide Pathway
+4 Volatile Fjord
+4 Fabled Passage
+4 Snow-Covered Mountain
+6 Snow-Covered Island
+[Sideboard]
+1 Negate
+1 Mazemind Tome
+2 The Akroan War
+2 Disdainful Stroke
+2 Cinderclasm
+2 Shark Typhoon
+2 Scorching Dragonfire
+3 Redcap Melee

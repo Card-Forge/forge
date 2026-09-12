@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Abraham_Stein_-_Sultai_Ramp_(Yorion)_(Standard,_#1143325).dck
+Deck Type=constructed
+
+[Main]
+1 Vorinclex, Monstrous Raider
+1 Polukranos, Unchained
+1 Elder Gargaroth
+1 Valki, God of Lies
+3 Quandrix Cultivator
+1 Mystical Dispute
+1 Negate
+2 Eliminate
+2 Behold the Multiverse
+4 Heartless Act
+1 Duress
+1 Extinction Event
+1 Cultivate
+2 Alrund's Epiphany
+3 Sea Gate Restoration
+4 Emergent Ultimatum
+4 Shadows' Verdict
+1 Kiora Bests the Sea God
+4 Omen of the Sea
+4 Wolfwillow Haven
+4 Binding the Old Gods
+1 Professor Onyx
+1 Ketria Triome
+1 Port of Karfell
+2 Swamp
+3 Forest
+3 Island
+3 Temple of Malady
+4 Darkbore Pathway
+4 Fabled Passage
+4 Zagoth Triome
+4 Barkchannel Pathway
+4 Clearwater Pathway
+[Sideboard]
+1 Koma, Cosmos Serpent
+1 Yorion, Sky Nomad
+1 Negate
+1 Elspeth's Nightmare
+1 Polukranos, Unchained
+1 Elder Gargaroth
+2 Duress
+2 Eliminate
+2 Kaervek, the Spiteful
+3 Mystical Dispute

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/CaptainFarbosa_-_Sultai_Reclamation_(Modern,_#1071947).dck
+Deck Type=constructed
+
+[Main]
+3 Ice-Fang Coatl
+4 Uro, Titan of Nature's Wrath
+1 Nexus of Fate
+2 Force of Negation
+2 Archmage's Charm
+2 Abrupt Decay
+3 Fact or Fiction
+3 Growth Spiral
+4 Remand
+4 Fatal Push
+4 Cryptic Command
+2 Wilderness Reclamation
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Watery Grave
+1 Zagoth Triome
+2 Breeding Pool
+3 Scalding Tarn
+3 Mystic Sanctuary
+4 Misty Rainforest
+4 Polluted Delta
+6 Snow-Covered Island
+[Sideboard]
+2 Ceremonious Rejection
+2 Dead of Winter
+2 Engineered Explosives
+2 Mystical Dispute
+2 Nihil Spellbomb
+2 Veil of Summer
+3 Aether Gust

@@ -1,0 +1,7 @@
+Name:Supper for Spiders
+ManaCost:1 B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Creature.OppOwn+ThisTurnEnteredFrom_Battlefield | GainControl$ True | StaticEffect$ Animate | SpellDescription$ Put onto the battlefield under your control all creature cards in your opponents' graveyards that were put there from the battlefield this turn. They are Food artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life." (They lose all other types and subtypes.)
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact & Food | RemoveCardTypes$ True | RemoveSubTypes$ True | AddAbilities$ FoodSac
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:Put onto the battlefield under your control all creature cards in your opponents' graveyards that were put there from the battlefield this turn. They are Food artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life." (They lose all other types and subtypes.)

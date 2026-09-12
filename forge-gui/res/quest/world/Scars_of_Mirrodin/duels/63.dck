@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Blue Devil
+Title=Blue Devil
+Icon=Blue Devil.jpg
+Difficulty=Hard
+Description=../Modern/Scars_of_Mirrodin/2011_PT_Philadelphia_-_18_Points_or_Better/Pat_Cox_-_Zoo_-_21_points_(Modern,_#19370).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Gaddock Teeg
+2 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+3 Path to Exile
+4 Thoughtseize
+4 Tribal Flames
+4 Arid Mesa
+1 Blood Crypt
+1 Forest
+1 Godless Shrine
+1 Misty Rainforest
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+2 Aven Mindcensor
+2 Deathmark
+1 Elspeth, Knight-Errant
+3 Ethersworn Canonist
+2 Qasali Pridemage
+1 Ranger of Eos
+1 Rule of Law
+1 Sword of Body and Mind

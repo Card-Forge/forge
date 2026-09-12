@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Alejandro_Pereira_-_Jund_Food_(Standard,_#984815).dck
+Deck Type=constructed
+
+[Main]
+1 Korvold, Fae-Cursed King
+2 Gutterbones
+4 Priest of Forgotten Gods
+4 Woe Strider
+4 Gilded Goose
+4 Mayhem Devil
+4 Cauldron Familiar
+2 Bolas's Citadel
+4 Witch's Oven
+3 Claim the Firstborn
+4 Trail of Crumbs
+1 Mountain
+1 Castle Locthwain
+3 Swamp
+3 Forest
+4 Fabled Passage
+4 Stomping Ground
+4 Overgrown Tomb
+4 Blood Crypt
+[Sideboard]
+1 Korvold, Fae-Cursed King
+1 Claim the Firstborn
+2 Soul-Guide Lantern
+3 Lava Coil
+4 Cindervines
+4 Duress

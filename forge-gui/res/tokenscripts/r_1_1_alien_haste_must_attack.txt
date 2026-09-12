@@ -1,0 +1,8 @@
+Name:Alien Token
+ManaCost:no cost
+Colors:red
+Types:Creature Alien
+PT:1/1
+K:Haste
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This token attacks each combat if able.
+Oracle:Haste\nThis token attacks each combat if able.

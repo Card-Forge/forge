@@ -1,98 +1,79 @@
 [metadata]
-Name=Rafiq of the Many
+Name=Rafiq
 [Commander]
-1 Rafiq of the Many|ALA|[185]
+1 Rafiq of the Many|ala
 [Main]
-1 Absorb|DMR|[354]
-1 Adarkar Wastes|ICE|[351]
-1 Aerial Extortionist|MKC|[54]
-1 Ardent Plea|ARB|[1]
-1 Audacity|J25|[631]
-1 Augury Adept|C13|[227]
-1 Avacyn's Pilgrim|MM3|[119]
-1 Bant Charm|ALA|[155]
-1 Bastion Protector|C15|[1]
-1 Battlegrace Angel|MM2|[10]
-1 Birds of Paradise|10E|[252]
-1 Bloodforged Battle-Axe|C17|[50]
-1 Bloom Tender|2X2|[138]
-1 Boseiju, Who Endures|NEO|[412]
-1 Brainstorm|CNS|[91]
-1 Brazen Borrower|WOC|[85]
-1 Breeding Pool|GTC|[240]
-1 Brushland|ICE|[352]
-1 Cathedral of War|M13|[221]
-1 Cephalid Constable|JUD|[35]
-1 Cold-Eyed Selkie|C18|[172]
-1 Combat Research|DMU|[44]
-1 Command Tower+|CM1|[2]
-1 Council's Judgment|CNS|[16]
-1 Counterspell|5ED|[77]
-1 Danitha, New Benalia's Light|MAT|[79]
-1 Edric, Spymaster of Trest|CNS|[187]
-1 Eiganjo, Seat of the Empire|NEO|[268]
-1 Essence Scatter|M13|[50]
-1 Finest Hour|C18|[180]
-1 Flooded Strand|MH3|[436]
-1 Force of Will|MED|[33]
-4 Forest|PC2|[151]
-1 Glacial Fortress|M12|[227]
-1 Hallowed Fountain|RTR|[241]
-1 Hashep Oasis|OTC|[299]
-1 Hinterland Harbor|ISD|[241]
-1 Horizon Canopy|FUT|[177]
-1 Invisible Stalker|ISD|[60]
-2 Island|ARC|[141]
-2 Island|HOP|[150]
-1 Kaito, Cunning Infiltrator|FDN|[44]
-1 Kutzil, Malamet Exemplar|LCI|[232]
-1 Lavaspur Boots|OTJ|[243]
-1 Llanowar Elves|ATH|[59]
-1 Malcolm, Alluring Scoundrel|LCI|[63]
-1 Medomai the Ageless|THS|[196]
-1 Misty Rainforest|MH2|[438]
-1 Mother of Runes|EMA|[22]
-1 Nature's Claim|CNS|[171]
-1 Nature's Lore|MKC|[178]
-1 Negate|SS1|[7]
-1 No More Lies|MKM|[427]
-1 Noble Hierarch|CFX|[87]
-1 Okina, Temple to the Grandfathers|CHK|[280]
-2 Plains|DDG|[41]
-1 Plains|DDG|[42]
-1 Ponder|TSR|[315]
-1 Qasali Pridemage|2X2|[386]
-1 Rancor|GVL|[15]
-1 Razorgrass Ambush|MH3|[238]
-1 Reclamation Sage|M19|[196]
-1 Savannah|3ED|[285]
-1 Seaside Citadel|BLC|[329]
-1 Shield of the Oversoul|SHM|[242]
-1 Sigiled Paladin|ALA|[27]
-1 Silhana Ledgewalker|PCA|[77]
-1 Sink into Stupor|MH3|[241]
-1 Sol Ring|ME4|[227]
-1 Sower of Temptation|LRW|[88]
-1 Spara's Headquarters|SNC|[257]
-1 Spell Pierce|ZEN|[67]
-1 Steel of the Godhead|DDI|[30]
-1 Steelshaper's Gift|5DN|[19]
-1 Stoneforge Mystic|TD1|[B11]
-1 Sublime Archangel|M13|[36]
-1 Swan Song|THS|[65]
-1 Swiftfoot Boots|C17|[226]
-1 Sword of Feast and Famine|J14|[6]
-1 Sword of Fire and Ice|G11|[2]
-1 Swords to Plowshares|F01|[6]
-1 Sylvan Caryatid|THS|[180]
-1 Teferi, Time Raveler|WAR|[221]
-1 Temple Garden|RTR|[248]
-1 Treetop Village|DDD|[27]
-1 Tropical Island|3ED|[288]
-1 Trygon Predator|GK2|[125]
-1 Tundra|3ED|[289]
-1 Umezawa's Jitte|PGPX|[2010]
-1 Waterlogged Grove|MH1|[249]
-1 Windswept Heath|MH3|[440]
-1 Yavimaya Coast|M3C|[410]
-1 Yavimaya Hollow|UDS|[143]
+1 Adarkar Wastes|dmu
+1 All That Glitters|eld
+1 An Offer You Can't Refuse|snc
+1 Arcane Signet|onc
+1 Avacyn's Pilgrim|scd
+1 Bastion Protector|c15
+1 Birds of Paradise|dmr
+1 Empyrial Archangel|ala
+1 Ancestral Mask|woc
+1 Bonesplitter|cmr
+1 Brushland|bro
+1 Canopy Cover|wwk
+1 Canopy Vista|onc
+1 Cathedral of War|m13
+1 Cold-Eyed Selkie|eve
+1 Combat Research|dmu
+1 Command Tower|cmd
+1 Conclave Sledge-Captain|moc
+1 Conqueror's Flail|2x2
+1 Crashing Drawbridge|eld
+1 Eater of Virtue|neo
+1 Sol Ring|cmd
+1 Unfinished Business|woc
+1 Celestial Armor|fdn
+1 Armored Skyhunter|cmr
+1 Behemoth Sledge|arb
+1 Colossification|blb
+1 Ethereal Armor|rtr
+1 Favor of the Overbeing|eve
+1 Finest Hour|c18
+13 Forest|ala|[249]
+1 Guardian Augmenter|c21
+1 Heroic Intervention|aer
+1 Hunter's Insight|scd
+1 Hunter's Prowess|scd
+1 Inquisitor's Flail|isd
+1 Instill Energy|5ed
+7 Island|ala|[234]
+1 Kutzil, Malamet Exemplar|lci
+1 Mask of Memory|onc
+1 Mother of Runes|ema
+1 Noble Hierarch|con
+1 Parting Gust|blb
+1 Path to Exile|onc
+8 Plains|ala|[232]
+1 Prairie Stream|scd
+1 Qasali Pridemage|2x2
+1 Rancor|2x2
+1 River's Rebuke|ncc
+1 Sovereigns of Lost Alara|arb
+1 Giltspire Avenger|con
+1 Steel of the Godhead|shm
+1 Rogue's Passage|rtr
+1 Scavenger Grounds|c21
+1 Security Bypass|snc
+1 Sheltered by Ghosts|dsk
+1 Shield of the Oversoul|shm
+1 Simic Charm|cmr
+1 Slip Out the Back|snc
+1 Snake Umbra|nec
+1 Spell Pierce|2x2
+1 Spirit Mantle|cmr
+1 Stoic Angel|mm3
+1 Swiftfoot Boots|scd
+1 Swords to Plowshares|onc
+1 Talisman of Curiosity|mh1
+1 Talisman of Progress|scd
+1 Talisman of Unity|scd
+1 Tyvar's Stand|one
+1 Umezawa's Jitte|bok
+1 Wild Growth|dmr
+1 Winds of Rath|c18
+1 Witness Protection|snc
+1 Yavimaya Coast|dmu

@@ -1,0 +1,10 @@
+Name:Spider-Man, New Champion
+ManaCost:2 R
+Types:Legendary Creature Spider Human Hero
+PT:3/3
+K:Reach
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you discard one or more cards, NICKNAME deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:TriggerCount$Amount
+DeckHints:Ability$Discard
+Oracle:Reach\nWhenever you discard one or more cards, Spider-Man deals that much damage to any target.

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bep
+Title=Bep
+Icon=Bep.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/David_Perez_Macias_-_Rakdos_Sacrifice_(Standard,_#1325892).dck
+Deck Type=constructed
+
+[Main]
+4 Voldaren Epicure
+4 Sokenzan Smelter
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+4 Oni-Cult Anvil
+4 Experimental Synthesizer
+2 Infernal Grasp
+4 Voltage Surge
+4 Deadly Dispute
+3 The Meathook Massacre
+2 Lolth, Spider Queen
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+2 Den of the Bugbear
+4 Blightstep Pathway
+5 Swamp
+6 Mountain
+[Sideboard]
+1 Ebondeath, Dracolich
+1 Reckoner Bankbuster
+1 Go Blank
+1 Power Word Kill
+1 The Meathook Massacre
+1 Sorin the Mirthless
+1 Infernal Grasp
+2 Abrade
+3 Duress
+3 Ray of Enfeeblement

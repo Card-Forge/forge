@@ -192,7 +192,7 @@
   <object id="98" template="../../../../common/maps/obj/enemy.tx" x="474.667" y="226.667">
    <properties>
     <property name="enemy" value="Sygg"/>
-    <property name="threatRange" type="int" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="99" template="../../../../common/maps/obj/manashards.tx" x="466" y="275"/>

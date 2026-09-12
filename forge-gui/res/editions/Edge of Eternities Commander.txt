@@ -87,7 +87,7 @@ ScryfallCode=EOC
 79 R Thought Monitor @Martina Pilcerova
 80 U Thrummingbird @José Parodi
 81 R Universal Surveillance @Aaron J. Riley
-82 R Braids, Arisen Nightmare @Heonhwa Choe
+82 R Braids, Arisen Nightmare @Heonhwa
 83 M God-Eternal Bontu @Lius Lasahido
 84 U Infernal Grasp @Naomi Baker
 85 C Night's Whisper @Carlos Palma Cruchaga

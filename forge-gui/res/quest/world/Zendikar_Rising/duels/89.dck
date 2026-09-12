@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Samwise Gamgee
+Title=Samwise Gamgee
+Icon=Samwise Gamgee.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Chiba_Kazuya_-_WB_Aggro_(Modern,_#1041954).dck
+Deck Type=constructed
+
+[Main]
+1 Nighthawk Scavenger
+3 Bloodghast
+3 Gatekeeper of Malakir
+3 Stromkirk Condemned
+4 Gifted Aetherborn
+4 Vicious Conquistador
+4 Knight of the Ebon Legion
+4 Vampire Nocturnus
+4 Legion Lieutenant
+4 Fatal Push
+3 Thoughtseize
+2 Sorin, Imperious Bloodlord
+1 Windswept Heath
+2 Silent Clearing
+2 Marsh Flats
+4 Swamp
+4 Bloodstained Mire
+4 Isolated Chapel
+4 Godless Shrine
+[Sideboard]
+1 Thoughtseize
+1 Dismember
+2 Witch's Vengeance
+3 Leyline of Sanctity
+4 Drill Bit
+4 Tidehollow Sculler

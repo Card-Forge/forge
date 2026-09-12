@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 021616 - Old Artists Never Die
 URL:http://www.gatheringmagic.com/seanuy-021616-old-artists-never-die/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win on your turn.
 [state]
 ActivePlayer=human

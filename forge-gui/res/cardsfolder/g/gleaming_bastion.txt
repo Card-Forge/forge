@@ -1,0 +1,6 @@
+Name:Gleaming Bastion
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | IsPresent$ Card.Self+ThisTurnEntered,Land.Basic+YouCtrl | SpellDescription$ Add {W} or {U}. Activate only if this land entered this turn or if your control a basic land.
+Oracle:{T}: Add {C}.\n{T}: Add {W} or {U}. Activate only if this land entered this turn or if your control a basic land.

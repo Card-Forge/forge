@@ -1,0 +1,9 @@
+Name:Titanium Man
+ManaCost:2 B B
+Types:Legendary Artifact Creature Human Villain
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBDamage
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+Oracle:Whenever Titanium Man attacks, choose one —\n• Titanium Man gains flying until end of turn.\n• Titanium Man deals 1 damage to any target.

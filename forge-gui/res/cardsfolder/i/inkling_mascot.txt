@@ -1,0 +1,8 @@
+Name:Inkling Mascot
+ManaCost:W B
+Types:Creature Inkling Cat
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigPump | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature gains flying until end of turn. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying | SubAbility$ DBSurveil
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+Oracle:Repartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature gains flying until end of turn. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

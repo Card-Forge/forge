@@ -1,0 +1,10 @@
+Name:Karn, Gilded Guardian
+ManaCost:2W 2U 2B 2R 2G
+Types:Legendary Artifact Creature Golem
+PT:5/5
+K:Vigilance
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw a card for each color among other artifacts you control.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Artifact.Other+YouCtrl$Colors
+Oracle:Vigilance, trample\nWhen Karn enters, draw a card for each color among other artifacts you control.

@@ -17,11 +17,14 @@
  */
 package forge.deck.io;
 
+import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.util.FileSection;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -36,10 +39,14 @@ public class DeckFileHeader {
 
     /** The Constant DECK_TYPE. */
     public static final String DECK_TYPE = "Deck Type";
+    public static final String SOURCE_URL = "Source URL";
     public static final String TAGS = "Tags";
 
     public static final String TAGS_SEPARATOR = ",";
     public static final String DRAFT_NOTES = "DraftNotes";
+    public static final String KEY_CARDS = "KeyCards";
+    public static final String SLEEVE_ART = "SleeveArt";
+    public static final String SLEEVE_OFFSET = "SleeveOffset";
 
     /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
@@ -49,6 +56,7 @@ public class DeckFileHeader {
     public static final String AI_HINTS = "AiHints";
 
     private final DeckFormat deckType;
+    private final String sourceUrl;
     private final boolean customPool;
 
     private final String name;
@@ -56,9 +64,13 @@ public class DeckFileHeader {
 
     private final Set<String> tags;
     private final HashMap<String, String> draftNotes;
+    private final List<String> keyCards;
 
     private final boolean intendedForAi;
     private final String aiHints;
+
+    private final String sleeveArtKey;
+    private final int sleeveArtOffset;
 
     public boolean isIntendedForAi() {
         return intendedForAi;
@@ -72,9 +84,12 @@ public class DeckFileHeader {
         this.name = kvPairs.get(DeckFileHeader.NAME);
         this.comment = kvPairs.get(DeckFileHeader.COMMENT);
         this.deckType = DeckFormat.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), DeckFormat.Constructed);
+        this.sourceUrl = kvPairs.get(DeckFileHeader.SOURCE_URL);
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
         this.intendedForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
         this.aiHints = kvPairs.get(DeckFileHeader.AI_HINTS);
+        this.sleeveArtKey = kvPairs.get(DeckFileHeader.SLEEVE_ART);
+        this.sleeveArtOffset = kvPairs.getInt(DeckFileHeader.SLEEVE_OFFSET, Deck.DEFAULT_SLEEVE_OFFSET);
 
         this.tags = new TreeSet<>();
         
@@ -86,14 +101,22 @@ public class DeckFileHeader {
         }
         this.draftNotes = new HashMap<>();
         extractDraftNotes(kvPairs.get(DeckFileHeader.DRAFT_NOTES));
+
+        this.keyCards = new ArrayList<>();
+        String rawKeyCards = kvPairs.get(DeckFileHeader.KEY_CARDS);
+        if (StringUtils.isNotBlank(rawKeyCards) ) {
+            for (String k: rawKeyCards.split(";"))
+                if (StringUtils.isNotBlank(k))
+                    keyCards.add(k.trim());
+        }
     }
 
     private void extractDraftNotes(String rawNotes) {
-        if(StringUtils.isBlank(rawNotes) ) {
+        if (StringUtils.isBlank(rawNotes)) {
             return;
         }
 
-        for(String t : rawNotes.split("\\|")) {
+        for (String t : rawNotes.split("\\|")) {
             if (StringUtils.isBlank(t)) {
                 continue;
             }
@@ -124,11 +147,27 @@ public class DeckFileHeader {
         return this.deckType;
     }
 
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
     public final Set<String> getTags() {
         return tags;
     }
 
     public final HashMap<String, String> getDraftNotes() {
         return draftNotes;
+    }
+
+    public final List<String> getKeyCards() {
+        return keyCards;
+    }
+
+    public final String getSleeveArtKey() {
+        return sleeveArtKey;
+    }
+
+    public final int getSleeveArtOffset() {
+        return sleeveArtOffset;
     }
 }

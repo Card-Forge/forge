@@ -34,16 +34,6 @@ import forge.game.spellability.SpellAbility;
 public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Player player) {
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + color;
-        result = prime * result + ((manaAbility == null) ? 0 : manaAbility.hashCode());
-        result = prime * result + ((sourceCard == null) ? 0 : sourceCard.hashCode());
-        return result;
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (!(other instanceof Mana)) {
             return false;
@@ -76,6 +66,9 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
             if (mp.isPersistentMana() != mp2.isPersistentMana()) {
                 return false;
             }
+            if (mp.isCombatMana() != mp2.isCombatMana()) {
+                return false;
+            }
         }
 
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
@@ -100,6 +93,9 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
     public boolean isRestricted() {
         return this.manaAbility != null && (!manaAbility.getManaRestrictions().isEmpty() || !manaAbility.getExtraManaRestriction().isEmpty());
     }
+    public boolean meetsManaRestrictions(SpellAbility saBeingPaid) {
+        return this.manaAbility == null || manaAbility.meetsManaRestrictions(saBeingPaid);
+    }
 
     public boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.cannotCounterPaidWith(saBeingPaid);
@@ -116,7 +112,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
     public boolean addsKeywordsType() {
         return this.manaAbility != null && manaAbility.getAddsKeywordsType() != null;
     }
-    
+
     public boolean addsKeywordsUntil() {
         return this.manaAbility != null && manaAbility.getAddsKeywordsUntil() != null;
     }
@@ -127,6 +123,12 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
 
     public boolean triggersWhenSpent() {
         return this.manaAbility != null && manaAbility.getTriggersWhenSpent();
+    }
+    public boolean isPersistentMana() {
+        return this.manaAbility != null && manaAbility.isPersistentMana();
+    }
+    public boolean isCombatMana() {
+        return this.manaAbility != null && manaAbility.isCombatMana();
     }
 
     public byte getColor() {
@@ -141,7 +143,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
         return this.manaAbility;
     }
 
-    public final Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 
@@ -149,4 +151,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
         return color == (byte)ManaAtom.COLORLESS;
     }
 
+    public Mana convertColor(byte color) {
+        return new Mana(color, this.sourceCard, this.manaAbility, this.player);
+    }
 }

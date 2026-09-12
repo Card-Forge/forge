@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/JWQuestion_-_Dimir_Oculus_(Modern,_#2441171).dck
+Deck Type=constructed
+
+[Main]
+2 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Murktide Regent
+1 Subtlety
+2 Force of Negation
+1 Sink into Stupor
+2 Rakshasa's Bargain
+2 Spell Snare
+4 Counterspell
+2 Thought Scour
+1 Dismember
+1 Cling to Dust
+4 Fatal Push
+2 Consider
+4 Unearth
+1 Thoughtseize
+2 Grist, the Hunger Tide
+1 Hedge Maze
+1 Undercity Sewers
+2 Watery Grave
+1 Breeding Pool
+1 Island
+1 Swamp
+1 Misty Rainforest
+2 Verdant Catacombs
+1 Darkslick Shores
+4 Flooded Strand
+4 Polluted Delta
+[Sideboard]
+1 Sheoldred's Edict
+1 Stern Scolding
+1 Toxic Deluge
+4 Consign to Memory
+2 Harbinger of the Seas
+2 Nihil Spellbomb
+1 Engineered Explosives
+1 Thoughtseize
+1 Veil of Summer
+1 Mystical Dispute

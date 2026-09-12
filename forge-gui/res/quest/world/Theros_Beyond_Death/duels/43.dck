@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Adilio_ARAUJO_-_Mono-R_Aggro_(Standard,_#972410).dck
+Deck Type=constructed
+
+[Main]
+2 Torbran, Thane of Red Fell
+4 Grim Initiate
+4 Rimrock Knight
+4 Runaway Steam-Kin
+4 Anax, Hardened in the Forge
+4 Bonecrusher Giant
+4 Fervent Champion
+4 Heraldic Banner
+4 Light Up the Stage
+2 Experimental Frenzy
+2 Chandra, Acolyte of Flame
+1 Mobilized District
+4 Castle Embereth
+17 Mountain
+[Sideboard]
+1 Claim the Firstborn
+1 Experimental Frenzy
+1 Torbran, Thane of Red Fell
+2 Redcap Melee
+2 Fry
+4 Slaying Fire
+4 Lava Coil

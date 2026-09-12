@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_Alaska/Kona_Cordell_-_Valakut_Ramp_(Standard,_#7934).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avenger of Zendikar
+3 Inferno Titan
+4 Primeval Titan
+4 Harrow
+4 Lightning Bolt
+4 Summoning Trap
+2 Cultivate
+4 Explore
+4 Khalni Heart Expedition
+3 Evolving Wilds
+6 Forest
+11 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Koth of the Hammer
+3 Naturalize
+3 Obstinate Baloth
+4 Pyroclasm
+3 Tunnel Ignus

@@ -65,8 +65,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private boolean saved = false;
     private final Localizer localizer = Localizer.getInstance();
 
-    //========== Constructor
-
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
@@ -296,7 +294,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         //open draft pool in Draft Deck Editor right away
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(FModel.getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
     }
 

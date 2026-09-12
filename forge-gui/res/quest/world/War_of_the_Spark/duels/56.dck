@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Ben_Freidman_-_Jeskai_Control_(Modern,_#801848).dck
+Deck Type=constructed
+
+[Main]
+4 Felidar Guardian
+3 Snapcaster Mage
+4 Lightning Bolt
+2 Lightning Helix
+4 Path to Exile
+3 Remand
+4 Serum Visions
+4 Spreading Seas
+2 Narset, Parter of Veils
+4 Saheeli Rai
+4 Teferi, Time Raveler
+2 Island
+1 Mountain
+1 Plains
+1 Arid Mesa
+2 Celestial Colonnade
+4 Flooded Strand
+1 Glacial Fortress
+2 Hallowed Fountain
+1 Sacred Foundry
+4 Scalding Tarn
+2 Steam Vents
+1 Sulfur Falls
+[Sideboard]
+1 Damping Sphere
+1 Engineered Explosives
+2 Detention Sphere
+1 Dispel
+2 Spell Pierce
+2 Surgical Extraction
+2 Vendilion Clique
+2 Ashiok, Dream Render
+1 Narset, Parter of Veils
+1 Timely Reinforcements

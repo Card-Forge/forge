@@ -6,4 +6,5 @@ R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ 
 A:AB$ Untap | Cost$ 7 | SpellDescription$ Untap this creature.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature attacks, it deals 7 damage to target creature defending player controls.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 7
+SVar:HasAttackEffect:TRUE
 Oracle:This creature doesn't untap during your untap step.\n{7}: Untap this creature.\nWhenever this creature attacks, it deals 7 damage to target creature defending player controls.

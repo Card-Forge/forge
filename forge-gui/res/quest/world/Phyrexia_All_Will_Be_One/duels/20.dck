@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Oya
+Title=Oya
+Icon=Oya.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Clinton_Endicott_-_Boros_Enchantments_(Standard,_#1615122).dck
+Deck Type=constructed
+
+[Main]
+4 Ambitious Farmhand
+3 Intrepid Adversary
+2 Phyrexian Vindicator
+2 Serra Paragon
+1 Ao, the Dawn Sky
+3 Steel Seraph
+3 Kumano Faces Kakkazan
+4 Fable of the Mirror-Breaker
+2 The Restoration of Eiganjo
+3 Flame-Blessed Bolt
+2 Destroy Evil
+2 Fateful Absence
+3 Wedding Announcement
+2 The Wandering Emperor
+4 Battlefield Forge
+2 Eiganjo, Seat of the Empire
+4 Field of Ruin
+10 Plains
+4 Sundown Pass
+[Sideboard]
+1 Serra Paragon
+1 Ao, the Dawn Sky
+2 Sanctuary Warden
+1 The Wandering Emperor
+2 Elspeth Resplendent
+2 The Eternal Wanderer
+2 Knockout Blow
+2 Vanquish the Horde
+2 Unlicensed Hearse

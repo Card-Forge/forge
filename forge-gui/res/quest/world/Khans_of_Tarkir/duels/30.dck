@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Standard_Open_Indianapolis/Brian_Brackett_-_Gruul_Midrange_(Standard,_#87334).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Boon Satyr
+2 Courser of Kruphix
+4 Elvish Mystic
+4 Goblin Rabblemaster
+1 Nylea, God of the Hunt
+4 Polukranos, World Eater
+4 Stormbreath Dragon
+4 Sylvan Caryatid
+2 Chord of Calling
+2 Lightning Strike
+1 Searing Blood
+4 Stoke the Flames
+1 Nissa, Worldwaker
+1 Sarkhan, the Dragonspeaker
+10 Forest
+7 Mountain
+4 Temple of Abandon
+4 Wooded Foothills
+[Sideboard]
+2 Arbor Colossus
+1 Bow of Nylea
+1 Chandra, Pyromaster
+2 Circle of Flame
+1 Destructive Revelry
+2 Magma Spray
+1 Nylea's Disciple
+1 Setessan Tactics
+1 Xenagos, the Reveler

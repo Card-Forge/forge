@@ -1,8 +1,0 @@
-Name:Exploding Barrel
-ManaCost:3
-Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPutCounter | SpellDescription$ Add one mana of any color. Put a pressure counter on this artifact.
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PRESSURE | CounterNum$ 1
-A:AB$ DealDamage | Cost$ 8 T | ValidTgts$ Creature | NumDmg$ 20 | ReduceCost$ X | SorcerySpeed$ True | StackDescription$ CARDNAME deals 20 damage to {c:TargetedCard}. | SpellDescription$ It deals 20 damage to target creature. This ability costs {1} less to activate for each pressure counter on this artifact. Activate only as a sorcery.
-SVar:X:Count$CardCounters.PRESSURE
-Oracle:{T}: Add one mana of any color. Put a pressure counter on this artifact.\n{8}, {T}, Sacrifice this artifact: It deals 20 damage to target creature. This ability costs {1} less to activate for each pressure counter on this artifact. Activate only as a sorcery.

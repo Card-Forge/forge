@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gold Finger
+Title=Gold Finger
+Icon=Gold Finger.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Akazaki_Daigo_-_WU_Control_(Standard,_#1081477).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+2 Dream Trawler
+4 Solemn Simulacrum
+4 Mazemind Tome
+2 Thassa's Intervention
+2 Negate
+4 Jwari Disruption
+4 Neutralize
+1 Ondu Inversion
+1 Emeria's Call
+4 Shatter the Sky
+3 Shark Typhoon
+4 Elspeth Conquers Death
+2 Ugin, the Spirit Dragon
+1 Castle Ardenvale
+1 Castle Vantress
+3 Temple of Enlightenment
+4 Plains
+4 Fabled Passage
+8 Island
+[Sideboard]
+1 Brazen Borrower
+1 Baneslayer Angel
+1 Heliod's Intervention
+2 Essence Scatter
+3 Glass Casket
+3 Giant Killer
+4 Mystical Dispute

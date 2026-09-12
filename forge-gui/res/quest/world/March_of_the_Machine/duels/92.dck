@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Takada_Takuya_-_Zombie_(Modern,_#1635870).dck
+Deck Type=constructed
+
+[Main]
+1 Plague Belcher
+4 Wayward Servant
+2 Geralf's Messenger
+4 Gravecrawler
+4 Carrion Feeder
+4 Undead Augur
+4 Shambling Ghast
+4 Champion of the Perished
+4 Headless Rider
+1 Elesh Norn
+2 Unlicensed Hearse
+2 Fatal Push
+2 March of Otherworldly Light
+2 Liliana, Untouched by Death
+1 Plains
+4 Swamp
+3 Concealed Courtyard
+1 Cavern of Souls
+2 Godless Shrine
+2 Polluted Delta
+1 Urborg, Tomb of Yawgmoth
+4 Marsh Flats
+1 Castle Locthwain
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Engineered Explosives
+4 Leyline of the Void
+3 Containment Priest
+2 Despark
+2 March of Wretched Sorrow
+2 Surge of Salvation

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=James T Kirk
+Title=James T Kirk
+Icon=James T Kirk.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/EdVilla88_-_Dimir_Frog_(Modern,_#2451220).dck
+Deck Type=constructed
+
+[Main]
+2 Subtlety
+3 Murktide Regent
+4 Orcish Bowmasters
+4 Psychic Frog
+2 Sink into Stupor
+2 Dismember
+3 Consider
+4 Counterspell
+3 Force of Negation
+4 Fatal Push
+3 Rakshasa's Bargain
+2 Spell Snare
+4 Thoughtseize
+2 Kaito, Bane of Nightmares
+4 Flooded Strand
+1 Breeding Pool
+1 Undercity Sewers
+1 Verdant Catacombs
+2 Island
+2 Watery Grave
+1 Swamp
+1 Darkslick Shores
+4 Polluted Delta
+1 Hedge Maze
+[Sideboard]
+2 Nihil Spellbomb
+3 Harbinger of the Seas
+1 Stern Scolding
+4 Consign to Memory
+2 Collector Ouphe
+1 Engineered Explosives
+1 Abrupt Decay
+1 Veil of Summer

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/DB_Dykman_-_Mono_White_Tokens_(Standard,_#2270199).dck
+Deck Type=constructed
+
+[Main]
+4 Beza, the Bounding Spring
+4 Fortune, Loyal Steed
+4 Frontier Seeker
+1 Novice Inspector
+4 Enduring Innocence
+2 Loran of the Third Path
+4 Get Lost
+2 Virtue of Loyalty
+4 Lay Down Arms
+4 Caretaker's Talent
+3 Temporary Lockdown
+4 Fountainport
+1 Mirrex
+19 Plains
+[Sideboard]
+4 Elspeth's Smite
+2 Boon-Bringer Valkyrie
+1 Sunder the Gateway
+1 Temporary Lockdown
+1 Loran of the Third Path
+3 Exorcise
+3 Overlord of the Mistmoors

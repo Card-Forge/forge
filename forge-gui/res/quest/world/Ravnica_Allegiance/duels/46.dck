@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Ali_Eldrazi_-_5C_Chromatic_Black_(Standard,_#793344).dck
+Deck Type=constructed
+
+[Main]
+4 Hydroid Krasis
+1 Josu Vess, Lich Knight
+4 Chromatic Lantern
+1 Thaumatic Compass
+4 Treasure Map
+1 Cast Down
+4 Moment of Craving
+2 Vraska's Contempt
+3 Cry of the Carnarium
+4 Mastermind's Acquisition
+2 Ritual of Soot
+2 The Eldest Reborn
+3 Karn, Scion of Urza
+4 Cabal Stronghold
+21 Swamp
+[Sideboard]
+1 Banefire
+4 Duress
+1 Josu Vess, Lich Knight
+1 Mass Manipulation
+1 Nexus of Fate
+1 Sanguine Sacrament
+1 Star of Extinction
+1 The Immortal Sun
+1 The Mirari Conjecture
+2 Unmoored Ego
+1 Zacama, Primal Calamity

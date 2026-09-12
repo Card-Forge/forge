@@ -42,6 +42,10 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        Card hostCard = sa.getHostCard();
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean aboutToBeMyTurn = ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+
         if (!targetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
@@ -68,11 +72,39 @@ public class DrawAi extends SpellAbilityAi {
 
         if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
             // Canopy lands and other cards that sacrifice themselves to draw cards
-            if (ai.getCardsIn(ZoneType.Hand).isEmpty()
-                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5)) {
-                // TODO: make this configurable in the AI profile
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
+            if (hostCard.isLand()) {
+                if (aboutToBeMyTurn && ai.getLandsInPlay().size() >= 5) {
+                    return new AiAbilityDecision(80, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
+
+            if (hostCard.isToken() && (hostCard.getType().hasSubtype("Clue") || hostCard.getType().hasSubtype("Blood"))) {
+                if (ph.isPlayerTurn(ai)) {
+                    if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {
+                        return new AiAbilityDecision(90, AiPlayDecision.WillPlay);
+                    }
+                } else {
+                    if (aboutToBeMyTurn) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                    // TODO: Other reasons to draw a card is searching for answers
+                }
+
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+            }
+
+            if (ph.isPlayerTurn(ai)) {
+                if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {
+                    return new AiAbilityDecision(60, AiPlayDecision.WillPlay);
+                }
+            } else {
+                if (aboutToBeMyTurn) {
+                    return new AiAbilityDecision(80, AiPlayDecision.WillPlay);
+                }
+            }
+
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
@@ -254,7 +286,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (drawback && root.getXManaCostPaid() != null) {
                     numCards = root.getXManaCostPaid();
                 } else {
-                    numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                    numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                     // try not to overdraw
                     int safeDraw = Math.abs(Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3));
                     if (source.isInstant() || source.isSorcery()) { safeDraw++; } // card will be spent
@@ -289,7 +321,6 @@ public class DrawAi extends SpellAbilityAi {
         // TODO: if xPaid and one of the below reasons would fail, instead of
         // bailing reduce toPay amount to acceptable level
         if (sa.usesTargeting()) {
-            // ability is targeted
             sa.resetTargets();
 
             // if it wouldn't draw anything and its not mandatory, skip it
@@ -297,15 +328,12 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            // filter player that can be targeted
             PlayerCollection players = game.getPlayers().filter(PlayerPredicates.isTargetableBy(sa));
 
-            // no targets skip it
             if (players.isEmpty()) {
                 return false;
             }
 
-            // filter opponents
             PlayerCollection opps = players.filter(PlayerPredicates.isOpponentOf(ai));
 
             for (Player oppA : opps) {
@@ -530,14 +558,10 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
         return true;
-    } // drawTargetAI()
+    }
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
         if (targetAI(ai, sa, mandatory)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

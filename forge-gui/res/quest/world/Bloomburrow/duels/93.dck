@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Antoine_Defaye_-_Dredge_(Modern,_#2242875).dck
+Deck Type=constructed
+
+[Main]
+4 Golgari Thug
+4 Narcomoeba
+2 Ox of Agonas
+4 Prized Amalgam
+4 Silversmote Ghoul
+4 Stinkweed Imp
+1 Wonder
+2 Darkblast
+4 Otherworldly Gaze
+4 Cathartic Reunion
+1 Conflagrate
+4 Creeping Chill
+4 Tome Scour
+2 Arid Mesa
+1 Blood Crypt
+4 Cephalid Coliseum
+3 Scalding Tarn
+4 Steam Vents
+1 Thundering Falls
+3 Wooded Foothills
+[Sideboard]
+2 Conflagrate
+3 Damping Sphere
+4 Force of Negation
+2 Into the Flood Maw
+4 Leyline of Sanctity

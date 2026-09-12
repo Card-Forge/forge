@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Bethlehem/Josh_Dolphin_-_Selesnya_Aggro_(Standard,_#71701).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Banisher Priest
+4 Boon Satyr
+2 Courser of Kruphix
+4 Experiment One
+2 Fiendslayer Paladin
+4 Fleecemane Lion
+1 Scavenging Ooze
+4 Voice of Resurgence
+1 Witchstalker
+4 Advent of the Wurm
+3 Gods Willing
+4 Selesnya Charm
+2 Ajani, Caller of the Pride
+8 Forest
+8 Plains
+4 Temple Garden
+4 Temple of Plenty
+[Sideboard]
+1 Glare of Heresy
+2 Last Breath
+3 Mistcutter Hydra
+2 Plummet
+3 Rootborn Defenses
+1 Skylasher
+2 Unflinching Courage
+1 Unravel the AEther

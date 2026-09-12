@@ -4,38 +4,51 @@ import com.google.common.collect.Lists;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.NetworkLogConfig;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.*;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
-public class FGameClient implements IToServer {
+public class FGameClient implements IToServer, IHasForgeLog {
+
     static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
+    private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
+    private IDraftEventHandler draftHandler;
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
     private Channel channel;
 
-    public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
+    public FGameClient(String username, IGuiGame clientGui, String hostname, int port) {
+        this.username = username;
         this.clientGui = clientGui;
         this.hostname = hostname;
         this.port = port;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     final IGuiGame getGui() {
@@ -56,7 +69,8 @@ public class FGameClient implements IToServer {
                 public void initChannel(final SocketChannel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
-                            new CompatibleObjectEncoder(),
+                            new LoggingHandler(LogLevel.INFO),
+                            new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
                             new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                             new IdleStateHandler(0, HEARTBEAT_INTERVAL_SECONDS, 0, TimeUnit.SECONDS),
                             new MessageHandler(),
@@ -72,21 +86,20 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
+                    netLog.error(e, "Client channel interrupted");
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            netLog.error(e, "Client connect interrupted");
         }
     }
 
     public void close() {
         if (channel != null)
             channel.close();
+        NetworkLogConfig.deactivateNetworkLogging();
     }
 
     @Override
@@ -94,8 +107,20 @@ public class FGameClient implements IToServer {
         if (disconnectSimulated) {
             return;
         }
-        System.out.println("Client sent " + event);
-        channel.writeAndFlush(event);
+        netLog.info("Client sent {}", event);
+        final CompatibleObjectEncoder encoder = channel.pipeline().get(CompatibleObjectEncoder.class);
+        if (encoder == null) {
+            netLog.error("No encoder in client pipeline for {}", event);
+            return;
+        }
+        final ByteBuf encoded;
+        try {
+            encoded = encoder.encodeToBuf(event, channel.alloc());
+        } catch (Exception e) {
+            netLog.error(e, "Client encode error for {}", event);
+            return;
+        }
+        channel.writeAndFlush(encoded);
     }
 
     /**
@@ -104,7 +129,7 @@ public class FGameClient implements IToServer {
      * will detect the silence and close the connection.
      */
     public void simulateDisconnect() {
-        System.out.println("[simulateDisconnect] Suspending all network writes.");
+        netLog.info("[simulateDisconnect] Suspending all network writes.");
         disconnectSimulated = true;
         // Remove the IdleStateHandler to stop heartbeats, and add an outbound
         // handler that drops ALL writes (including game replies that bypass
@@ -115,16 +140,16 @@ public class FGameClient implements IToServer {
             channel.pipeline().addFirst("writeBlocker", new ChannelOutboundHandlerAdapter() {
                 @Override
                 public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
-                    System.out.println("[writeBlocker] Dropped: " + msg.getClass().getSimpleName());
+                    netLog.info("[writeBlocker] Dropped: {}", msg.getClass().getSimpleName());
                     promise.setSuccess();
                 }
             });
-            System.out.println("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
+            netLog.info("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
         });
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
 
         send(event);
@@ -141,19 +166,23 @@ public class FGameClient implements IToServer {
         lobbyListeners.add(listener);
     }
 
+    public void setDraftHandler(final IDraftEventHandler handler) {
+        this.draftHandler = handler;
+    }
+
     void setGameControllers(final Iterable<PlayerView> myPlayers) {
         for (final PlayerView p : myPlayers) {
-            clientGui.setOriginalGameController(p, new NetGameController(this));
+            NetGameController controller = new NetGameController(this);
+            clientGui.setOriginalGameController(p, controller);
         }
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
-            if (msg instanceof MessageEvent) {
-                final MessageEvent event = (MessageEvent) msg;
+            if (msg instanceof MessageEvent event) {
                 for (final ILobbyListener listener : lobbyListeners) {
-                    listener.message(event.getSource(), event.getMessage());
+                    listener.message(event.getSource(), event.getMessage(), event.getType());
                 }
             }
             super.channelRead(ctx, msg);
@@ -163,18 +192,20 @@ public class FGameClient implements IToServer {
     private class LobbyUpdateHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
-            if (msg instanceof LobbyUpdateEvent) {
+            if (msg instanceof LobbyUpdateEvent event) {
                 for (final ILobbyListener listener : lobbyListeners) {
-                    final LobbyUpdateEvent event = (LobbyUpdateEvent) msg;
                     listener.update(event.getState(), event.getSlot());
                 }
+            } else if (msg instanceof NetEvent netEvent && draftHandler != null
+                    && draftHandler.dispatch(netEvent)) {
+                return;
             }
             super.channelRead(ctx, msg);
         }
 
         @Override
         public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
-            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.WRITER_IDLE) {
+            if (evt instanceof IdleStateEvent ise && ise.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(new HeartbeatEvent());
             }
             super.userEventTriggered(ctx, evt);
@@ -182,6 +213,8 @@ public class FGameClient implements IToServer {
 
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
+            netLog.info("[Disconnect] Channel became inactive, notifying {} listeners", lobbyListeners.size());
+            netLog.info("[Disconnect] Remote address was: {}", ctx.channel().remoteAddress());
             for (final ILobbyListener listener : lobbyListeners) {
                 listener.close();
             }

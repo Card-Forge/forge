@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Boromir
+Title=Boromir
+Icon=Boromir.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/emonyc_-_Esper_Reanimator_(Modern,_#1634267).dck
+Deck Type=constructed
+
+[Main]
+4 Emrakul, the Aeons Torn
+4 Atraxa, Grand Unifier
+1 Djeru and Hazoret
+4 The Underworld Cookbook
+1 Blood Fountain
+2 Fatal Push
+2 Spell Pierce
+4 Goryo's Vengeance
+4 Faithful Mending
+3 Tainted Indulgence
+4 Thoughtseize
+4 Urza's Saga
+4 Leyline Binding
+1 Swamp
+1 Godless Shrine
+1 Plains
+1 Watery Grave
+4 Flooded Strand
+4 Polluted Delta
+2 Hallowed Fountain
+1 Raugrin Triome
+1 Island
+2 Marsh Flats
+1 Ziatora's Proving Ground
+[Sideboard]
+1 Engineered Explosives
+1 Pithing Needle
+2 Silence
+1 Nihil Spellbomb
+1 Flusterstorm
+3 Teferi, Time Raveler
+3 Prismatic Ending
+2 Tourach, Dread Cantor
+1 Path of Peril

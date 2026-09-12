@@ -3,7 +3,7 @@ Name:Pauper Puzzles #00 - Introduction Demo
 URL:https://pauperpuzzles.wordpress.com/2017/01/26/demo-and-introduction-to-pauper-puzzles/
 Goal:Win
 Turns:1
-Difficulty:Easy
+Difficulty:Common
 [state]
 ActivePlayer=Human
 ActivePhase=Main1

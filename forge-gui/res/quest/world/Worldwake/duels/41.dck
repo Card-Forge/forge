@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=MahamotiGenie
+Title=MahamotiGenie
+Icon=MahamotiGenie.jpg
+Difficulty=Medium
+Description=Worldwake/Worldwake_Game_Day_-_Superstars_Game_Center_-_California/Jonathan_Bergstrom_-_Vampires_(Standard,_#2243).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gatekeeper of Malakir
+4 Kalastria Highborn
+4 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Tendrils of Corruption
+4 Urge to Feed
+4 Sign in Blood
+4 Marsh Flats
+16 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+3 Doom Blade
+4 Duress
+4 Mind Sludge

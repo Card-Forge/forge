@@ -4,7 +4,7 @@ URL:http://imgur.com/a/EeY71
 Goal:Gain Control of Specified Permanents
 Targets:Card.Red+inZoneBattlefield+OppCtrl,Card.White+inZoneBattlefield+OppCtrl
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:You can't win the game. Instead, you need to gain control of all five of your opponent's permanents this turn.\nDream Leash is the only card in your library that will be drawn in your Draw step.
 [state]
 humanlife=5

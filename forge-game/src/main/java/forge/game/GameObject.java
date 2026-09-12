@@ -6,10 +6,10 @@ import forge.game.spellability.SpellAbility;
 
 public interface GameObject {
 
-    public default boolean canBeTargetedBy(final SpellAbility sa) {
+    default boolean canBeTargetedBy(final SpellAbility sa) {
         return false;
     }
-    
+
     /**
      * Checks if is valid.
      * 

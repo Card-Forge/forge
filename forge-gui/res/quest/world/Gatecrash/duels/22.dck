@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Easy
+Description=Gatecrash/Faraos_Cigarer_WMCQ/Rasmus_Nilsson_-_Homo_Lightning_(Standard,_#50601).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Firefist Striker
+4 Hellrider
+4 Lightning Mauler
+4 Rakdos Cackler
+4 Stromkirk Noble
+2 Electrickery
+4 Searing Spear
+1 Mugging
+21 Mountain
+[Sideboard]
+2 Homing Lightning
+3 Mark of Mutiny
+1 Mizzium Mortars
+1 Nephalia Drownyard
+1 Pillar of Flame
+4 Skullcrack
+3 Volcanic Strength

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Fujimoto_Yuma_-_Sultai_Dragon_(Standard,_#2455315).dck
+Deck Type=constructed
+
+[Main]
+4 Bloomvine Regent
+4 Disruptive Stormbrood
+4 Marang River Regent
+4 Sagu Wildling
+4 Scavenger Regent
+2 Caustic Exhale
+4 Dispelling Exhale
+2 Go for the Throat
+2 Sheoldred's Edict
+2 Corroding Dragonstorm
+4 Roiling Dragonstorm
+2 Cavern of Souls
+1 Darkslick Shores
+6 Forest
+1 Gloomlake Verge
+2 Island
+4 Maelstrom of the Spirit Dragon
+3 Swamp
+1 Wastewood Verge
+4 Willowrush Verge
+[Sideboard]
+2 Caustic Exhale
+2 Cut Down
+2 Duress
+2 Soul-Guide Lantern
+3 Spell Pierce
+4 Wear Down

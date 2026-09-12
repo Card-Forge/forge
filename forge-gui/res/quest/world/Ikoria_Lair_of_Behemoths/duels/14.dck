@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/AdamAntMTG_-_Azorius_Control_(Standard,_#981068).dck
+Deck Type=constructed
+
+[Main]
+1 Dream Trawler
+2 Archon of Sun's Grace
+4 Brazen Borrower
+3 Glass Casket
+3 Dovin's Veto
+3 Thirst for Meaning
+4 Absorb
+3 Shatter the Sky
+2 Elspeth Conquers Death
+3 The Birth of Meletis
+4 Shark Typhoon
+4 Omen of the Sun
+4 Omen of the Sea
+3 Narset, Parter of Veils
+4 Teferi, Time Raveler
+1 Field of Ruin
+2 Castle Vantress
+3 Castle Ardenvale
+4 Temple of Enlightenment
+4 Hallowed Fountain
+4 Fabled Passage
+6 Plains
+9 Island
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Dovin's Veto
+2 Heliod's Intervention
+2 Devout Decree
+2 Aether Gust
+3 Soul-Guide Lantern
+4 Mystical Dispute

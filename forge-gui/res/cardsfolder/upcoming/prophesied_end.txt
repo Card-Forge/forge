@@ -1,0 +1,6 @@
+Name:Prophesied End
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. If it wasn't attacking, its controller draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | ConditionDefined$ Targeted | ConditionPresent$ Card.!attacking
+Oracle:Destroy target creature. If it wasn't attacking, its controller draws a card.

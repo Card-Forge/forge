@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Connor_Scully_-_Jeskai_Control_(Modern,_#800054).dck
+Deck Type=constructed
+
+[Main]
+1 Vendilion Clique
+4 Snapcaster Mage
+2 Logic Knot
+2 Spell Pierce
+4 Path to Exile
+4 Opt
+2 Hieroglyphic Illumination
+1 Dovin's Veto
+2 Cryptic Command
+1 Surgical Extraction
+1 Oust
+1 Serum Visions
+2 Supreme Verdict
+1 Wrath of God
+1 Detention Sphere
+1 Teferi, Time Raveler
+2 Narset, Parter of Veils
+2 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+4 Flooded Strand
+1 Misty Rainforest
+6 Island
+2 Plains
+4 Field of Ruin
+2 Hallowed Fountain
+2 Glacial Fortress
+3 Celestial Colonnade
+[Sideboard]
+1 Vendilion Clique
+1 Surgical Extraction
+1 Disdainful Stroke
+1 Dispel
+1 Ceremonious Rejection
+1 Lyra Dawnbringer
+2 Restoration Angel
+1 Timely Reinforcements
+1 Stony Silence
+2 Celestial Purge
+2 Rest in Peace
+1 Circle of Protection: Red

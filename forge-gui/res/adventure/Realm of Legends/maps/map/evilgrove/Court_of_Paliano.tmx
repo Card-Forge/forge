@@ -50,7 +50,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Throne of the High City&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Grenzo, Havoc Raiser&quot;, &quot;Grenzo's Cutthroat&quot;, &quot;Spy Kit&quot;]}"/>
     <property name="enemy" value="Grenzo"/>
     <property name="reward">[
   {
@@ -119,7 +119,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Marchesa's Decree|CN2&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Throne of the High City&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
     <property name="enemy" value="Queen Marchesa"/>
     <property name="reward">[
   {

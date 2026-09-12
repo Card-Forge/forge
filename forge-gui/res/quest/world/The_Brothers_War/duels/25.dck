@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/420dragonmtg_-_Red_Deck_Wins_(Standard,_#1529016).dck
+Deck Type=constructed
+
+[Main]
+3 Feldon, Ronom Excavator
+4 Monastery Swiftspear
+4 Kumano Faces Kakkazan
+4 Dwarven Forge-Chanter
+4 Bloodthirsty Adversary
+2 Abrade
+4 Play with Fire
+4 Lightning Strike
+4 Reckless Impulse
+4 Jaya, Fiery Negotiator
+1 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+18 Mountain
+[Sideboard]
+1 The Elder Dragon War
+1 Flame-Blessed Bolt
+2 Fable of the Mirror-Breaker
+2 Chandra, Dressed to Kill
+3 Rending Flame
+3 Reckoner Bankbuster
+3 Obliterating Bolt

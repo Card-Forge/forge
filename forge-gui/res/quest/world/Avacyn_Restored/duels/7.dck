@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Pied Piper
+Title=The Pied Piper
+Icon=The Pied Piper.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/WMCQ_2012_-_College_Park,_United_States/Steven_Juseck_-_Humans_(Standard,_#33611).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+3 Champion of Lambholt
+4 Champion of the Parish
+4 Fiend Hunter
+1 Grand Abolisher
+4 Hero of Bladehold
+4 Mayor of Avabruck
+4 Nearheath Pilgrim
+4 Silverblade Paladin
+4 Thalia, Guardian of Thraben
+2 Angelic Destiny
+4 Cavern of Souls
+4 Forest
+1 Gavony Township
+5 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+2 Eaten by Spiders
+4 Mirran Crusader
+2 Naturalize
+2 Nevermore
+2 Oblivion Ring
+1 Riders of Gavony

@@ -13,14 +13,15 @@ public class FMenuBar extends Header {
     private final List<FMenuTab> tabs = new ArrayList<>();
     private int selected = -1;
 
-    public void addTab(String text0, FDropDown dropDown0) {
-        addTab(text0, dropDown0, false);
+    public FMenuTab addTab(String text0, FDropDown dropDown0) {
+        return addTab(text0, dropDown0, false);
     }
 
-    public void addTab(String text0, FDropDown dropDown0, boolean iconOnly) {
+    public FMenuTab addTab(String text0, FDropDown dropDown0, boolean iconOnly) {
         FMenuTab tab = new FMenuTab(text0, this, dropDown0, tabs.size(), iconOnly);
         dropDown0.setMenuTab(tab);
         tabs.add(add(tab));
+        return tab;
     }
 
     public float getPreferredHeight() {

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Festival_Prelim_#8418407/Aspankxx_-_Mono_Green_(Modern,_#277950).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avatar of the Resolute
+4 Dryad Militant
+4 Experiment One
+2 Kalonian Tusker
+4 Leatherback Baloth
+3 Scavenging Ooze
+4 Strangleroot Geist
+3 Aspect of Hydra
+3 Dismember
+4 Vines of Vastwood
+4 Rancor
+18 Forest
+3 Treetop Village
+[Sideboard]
+2 Back to Nature
+3 Choke
+3 Creeping Corrosion
+3 Skylasher
+3 Unravel the AEther

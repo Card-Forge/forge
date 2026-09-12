@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Akira_Shibata_-_Sultai_Control_(Standard,_#2914571).dck
+Deck Type=constructed
+
+[Main]
+4 Deceit
+4 Emeritus of Ideation
+3 Superior Spider-Man
+1 Black Cat, Cunning Thief
+1 Wistfulness
+4 Ancient Cornucopia
+4 Rakshasa's Bargain
+2 Quandrix Charm
+2 Requiting Hex
+2 Shoot the Sheriff
+2 Witherbloom Charm
+3 Withering Curse
+3 Awaken the Honored Dead
+4 Overgrown Tomb
+4 Starting Town
+4 Watery Grave
+3 Wastewood Verge
+2 Gloomlake Verge
+2 Undercity Sewers
+2 Underground Mortuary
+1 Dreamroot Cascade
+1 Island
+1 Multiversal Passage
+1 Swamp
+[Sideboard]
+2 Cavern of Souls
+2 Duress
+2 Keen-Eyed Curator
+2 Negate
+2 Pest Control
+2 Strategic Betrayal
+1 Bitter Triumph
+1 Black Cat, Cunning Thief
+1 Disdainful Stroke

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/SCG_States_Manchester/Gianni_Castagna_-_Tokens_(Standard,_#618489).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+4 Elvish Visionary
+4 Hangarback Walker
+4 Thraben Inspector
+4 Secure the Wastes
+4 Declaration in Stone
+4 Oath of Nissa
+4 Gideon, Ally of Zendikar
+3 Nissa, Voice of Zendikar
+4 Canopy Vista
+7 Forest
+4 Fortified Village
+6 Plains
+4 Westvale Abbey
+[Sideboard]
+2 Clip Wings
+2 Den Protector
+1 Dragonlord Dromoka
+3 Dromoka's Command
+1 Evolutionary Leap
+1 Hidden Dragonslayer
+1 Quarantine Field
+2 Silkwrap
+2 Surrak, the Hunt Caller

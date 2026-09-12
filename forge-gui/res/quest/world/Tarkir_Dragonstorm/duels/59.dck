@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Tyler_Thoman_-_Sultai_(Modern,_#2441544).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Psychic Frog
+2 Murktide Regent
+2 Orcish Bowmasters
+1 Subtlety
+4 Counterspell
+4 Fatal Push
+2 Consider
+2 Force of Negation
+2 Rakshasa's Bargain
+2 Spell Snare
+2 Thought Scour
+1 Cling to Dust
+1 Dismember
+1 Sink into Stupor
+4 Unearth
+1 Thoughtseize
+2 Grist, the Hunger Tide
+4 Polluted Delta
+3 Verdant Catacombs
+2 Flooded Strand
+2 Misty Rainforest
+2 Watery Grave
+1 Breeding Pool
+1 Darkslick Shores
+1 Hedge Maze
+1 Island
+1 Swamp
+1 Undercity Sewers
+[Sideboard]
+4 Consign to Memory
+2 Harbinger of the Seas
+2 Nihil Spellbomb
+1 Engineered Explosives
+1 Mystical Dispute
+1 Sheoldred's Edict
+1 Stern Scolding
+1 Thoughtseize
+1 Toxic Deluge
+1 Veil of Summer

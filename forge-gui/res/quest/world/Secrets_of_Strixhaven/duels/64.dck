@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Luke_VanKleek_-_Simic_Ritual_(Modern,_#2941179).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Coiling Oracle
+4 Ice-Fang Coatl
+4 Shardless Agent
+4 Subtlety
+2 Endurance
+2 Fblthp, the Lost
+2 Harbinger of the Seas
+2 Skycoach Conductor
+4 Flare of Denial
+4 Sink into Stupor
+2 Force of Negation
+4 Birthing Ritual
+4 Misty Rainforest
+3 Scalding Tarn
+2 Hedge Maze
+2 Snow-Covered Forest
+2 Snow-Covered Island
+1 Boseiju, Who Endures
+1 Breeding Pool
+1 Flooded Strand
+1 Otawara, Soaring City
+1 Watery Grave
+[Sideboard]
+3 Consign to Memory
+3 Culling Ritual
+3 Mystical Dispute
+2 Collector Ouphe
+2 Force of Vigor
+2 Gemstone Caverns

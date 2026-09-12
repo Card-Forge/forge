@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/AliraSirin_-_Red_Deck_Wins_(Standard,_#927376).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Warboss
+4 Torbran, Thane of Red Fell
+4 Tin Street Dodger
+4 Scorch Spitter
+4 Grim Initiate
+4 Fervent Champion
+4 Anax, Hardened in the Forge
+4 Heartfire
+4 Cavalcade of Calamity
+4 Chandra, Acolyte of Flame
+1 Mobilized District
+4 Castle Embereth
+18 Mountain
+[Sideboard]
+2 Chandra's Pyrohelix
+3 Tibalt, Rakish Instigator
+3 Tectonic Giant
+3 Lava Coil
+4 Redcap Melee

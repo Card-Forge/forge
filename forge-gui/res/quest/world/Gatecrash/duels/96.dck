@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Modern_Daily_#8439669/PepperLips_-_Infect_Aggro_(Modern,_#283757).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+3 Relic of Progenitus
+4 Apostle's Blessing
+3 Groundswell
+4 Might of Old Krosa
+4 Spell Pierce
+4 Vines of Vastwood
+4 Sylvan Scrying
+2 Breeding Pool
+4 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+3 Pendelhaven
+1 Temple Garden
+4 Wooded Foothills
+[Sideboard]
+2 Nature's Claim
+3 Negate
+4 Path to Exile
+2 Simic Charm
+3 Spellskite

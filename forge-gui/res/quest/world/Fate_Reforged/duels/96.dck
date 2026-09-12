@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/PPTQ_Ka-Boom!_-_Poggibonsi,_Italy/Marco_Santucci_-_The_Rock_(Modern,_#176652).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+4 Loxodon Smiter
+4 Noble Hierarch
+2 Restoration Angel
+2 Scavenging Ooze
+4 Siege Rhino
+4 Tarmogoyf
+2 Tasigur, the Golden Fang
+3 Abrupt Decay
+2 Dismember
+2 Path to Exile
+4 Thoughtseize
+1 Sorin, Solemn Visitor
+2 Forest
+2 Gavony Township
+1 Godless Shrine
+1 Marsh Flats
+2 Overgrown Tomb
+1 Plains
+2 Razorverge Thicket
+1 Swamp
+1 Temple Garden
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+4 Windswept Heath
+1 Woodland Cemetery
+[Sideboard]
+2 Drown in Sorrow
+3 Duress
+2 Feed the Clan
+2 Lingering Souls
+1 Nature's Claim
+2 Stony Silence
+1 Thrun, the Last Troll

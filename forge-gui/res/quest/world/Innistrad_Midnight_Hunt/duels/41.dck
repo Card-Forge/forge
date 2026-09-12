@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Niv Mizzet
+Title=Niv Mizzet
+Icon=Niv Mizzet.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Adam_Bruce_-_Azorius_Epiphany_(Standard,_#1217142).dck
+Deck Type=constructed
+
+[Main]
+3 Strixhaven Stadium
+2 Test of Talents
+3 Memory Deluge
+3 Behold the Multiverse
+3 Jwari Disruption
+4 Saw It Coming
+4 Fateful Absence
+2 Emeria's Call
+4 Alrund's Epiphany
+4 Doomskar
+4 Teferi, Who Slows the Sunset
+1 Hall of Storm Giants
+1 Cave of the Frost Dragon
+4 Field of Ruin
+4 Plains
+4 Hengegate Pathway
+4 Deserted Beach
+6 Island
+[Sideboard]
+2 Negate
+2 Devastating Mastery
+2 Test of Talents
+2 Disdainful Stroke
+3 Sunset Revelry
+4 Malevolent Hermit

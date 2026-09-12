@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/DemianDesposito10_-_Red_Deck_Wins_(Modern,_#1172256).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wayward Guide-Beast
+4 Skullcrack
+4 Lightning Bolt
+4 Skewer the Critics
+4 Flame Rift
+4 Forked Bolt
+4 Lava Spike
+4 Rift Bolt
+1 The Biblioplex
+1 Ramunap Ruins
+15 Mountain
+[Sideboard]
+2 Searing Blaze
+2 Blood Moon
+3 Dragon's Claw
+4 Smash to Smithereens
+4 Soul-Guide Lantern

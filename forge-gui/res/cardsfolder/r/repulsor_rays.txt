@@ -1,0 +1,5 @@
+Name:Repulsor Rays
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
+Oracle:Repulsor Rays deals 3 damage to target creature.

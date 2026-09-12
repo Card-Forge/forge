@@ -1,0 +1,7 @@
+Name:Rapier Wit
+ManaCost:1 W
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature. If it's your turn, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | ConditionPlayerTurn$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Tap target creature. If it's your turn, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nDraw a card.

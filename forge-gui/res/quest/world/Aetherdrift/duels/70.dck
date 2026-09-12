@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Takaya_Shoichi_-_Domain_Zoo_(Modern,_#2383710).dck
+Deck Type=constructed
+
+[Main]
+3 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Scion of Draco
+2 Phlage, Titan of Fire's Fury
+4 Psychic Frog
+3 Ketramose, the New Dawn
+4 Lightning Bolt
+3 Stubborn Denial
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Plains
+1 Mountain
+1 Blood Crypt
+1 Hallowed Fountain
+1 Steam Vents
+2 Flooded Strand
+4 Wooded Foothills
+4 Arid Mesa
+2 Marsh Flats
+1 Temple Garden
+1 Indatha Triome
+1 Spara's Headquarters
+1 Thundering Falls
+[Sideboard]
+2 Wear // Tear
+3 Relic of Progenitus
+2 Deafening Silence
+2 Prismatic Ending
+2 Obsidian Charmaw
+4 Consign to Memory

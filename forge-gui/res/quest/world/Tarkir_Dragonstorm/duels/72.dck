@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/luna_yeen_-_Sultai_Murktide_(Modern,_#2447260).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+2 Murktide Regent
+2 Orcish Bowmasters
+4 Psychic Frog
+1 Subtlety
+1 Cling to Dust
+2 Consider
+4 Counterspell
+1 Dismember
+4 Fatal Push
+2 Force of Negation
+2 Rakshasa's Bargain
+1 Sink into Stupor
+2 Spell Snare
+2 Thought Scour
+1 Thoughtseize
+4 Unearth
+2 Grist, the Hunger Tide
+1 Breeding Pool
+1 Darkslick Shores
+4 Flooded Strand
+1 Hedge Maze
+1 Island
+1 Misty Rainforest
+4 Polluted Delta
+1 Swamp
+1 Undercity Sewers
+2 Verdant Catacombs
+2 Watery Grave
+[Sideboard]
+4 Consign to Memory
+1 Engineered Explosives
+2 Harbinger of the Seas
+1 Mystical Dispute
+2 Nihil Spellbomb
+1 Sheoldred's Edict
+1 Stern Scolding
+1 Thoughtseize
+1 Toxic Deluge
+1 Veil of Summer

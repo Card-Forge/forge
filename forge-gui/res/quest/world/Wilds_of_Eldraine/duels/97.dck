@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Hasegawa_Yuhei_-_Jund_(Modern,_#1753478).dck
+Deck Type=constructed
+
+[Main]
+4 Tarmogoyf
+4 Ragavan, Nimble Pilferer
+1 Haywire Mite
+4 Orcish Bowmasters
+3 Questing Druid
+1 Pyrite Spellbomb
+1 Nihil Spellbomb
+1 Shadowspear
+2 Fatal Push
+1 Terminate
+2 Lightning Bolt
+3 Unholy Heat
+4 Thoughtseize
+2 Inquisition of Kozilek
+4 Urza's Saga
+4 Wrenn and Six
+1 Swamp
+1 Mountain
+1 Forest
+2 Blood Crypt
+1 Stomping Ground
+3 Bloodstained Mire
+4 Wooded Foothills
+3 Verdant Catacombs
+1 Overgrown Tomb
+1 Boseiju, Who Endures
+1 Ziatora's Proving Ground
+[Sideboard]
+1 Terminate
+2 Engineered Explosives
+1 Pithing Needle
+1 Chalice of the Void
+1 Alpine Moon
+1 Soul-Guide Lantern
+1 Tourach, Dread Cantor
+1 Fury
+1 Endurance
+2 Boseiju, Who Endures
+2 Haywire Mite
+1 Stone of Erech

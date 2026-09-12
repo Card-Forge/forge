@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ikenga
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/PTQ_Khans_of_Tarkir_-_Lille,_France/Benjamin_Van_Koekenbeek_-_Mono_Green_(Modern,_#86141).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+4 Experiment One
+4 Kalonian Tusker
+4 Leatherback Baloth
+3 Scavenging Ooze
+4 Strangleroot Geist
+2 Thrun, the Last Troll
+2 Aspect of Hydra
+3 Dismember
+4 Vines of Vastwood
+4 Rancor
+22 Forest
+[Sideboard]
+2 Arashi, the Sky Asunder
+2 Choke
+2 Creeping Corrosion
+2 Deglamer
+1 Grafdigger's Cage
+2 Obstinate Baloth
+1 Setessan Tactics
+2 Torpor Orb
+1 Unravel the AEther

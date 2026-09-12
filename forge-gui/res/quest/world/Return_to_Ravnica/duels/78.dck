@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/PTQ_Dragon┬┤s_Maze_-_Rockville,_Maryland/Nicholas_Klein_-_Infect_(Modern,_#45249).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Abrupt Decay
+3 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+3 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+1 Breeding Pool
+3 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+1 Darkblast
+3 Dismember
+3 Inquisition of Kozilek
+1 Nature's Claim
+2 Relic of Progenitus
+3 Spellskite

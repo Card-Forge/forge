@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_1K(ish)/Chris_Zuch_-_Burn_(Modern,_#642559).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+4 Searing Blaze
+4 Lava Spike
+3 Rift Bolt
+4 Bloodstained Mire
+2 Copperline Gorge
+2 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+3 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Browbeat
+3 Deflecting Palm
+4 Destructive Revelry
+1 Grim Lavamancer
+2 Lightning Helix
+4 Path to Exile

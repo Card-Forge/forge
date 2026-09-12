@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Hard
+Description=../Modern/Mirrodin_Besieged/Liga_Gargula/Jo_-_Cat_Jund_(Modern,_#23114).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Dark Confidant
+3 Kird Ape
+4 Kitchen Finks
+4 Tarmogoyf
+4 Wild Nacatl
+3 Go for the Throat
+4 Lightning Bolt
+3 Blightning
+4 Inquisition of Kozilek
+4 Arid Mesa
+1 Blood Crypt
+1 Forest
+1 Godless Shrine
+1 Mountain
+2 Overgrown Tomb
+1 Sacred Foundry
+2 Stomping Ground
+2 Swamp
+1 Temple Garden
+2 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+3 Anathemancer
+4 Ancient Grudge
+3 Maelstrom Pulse
+3 Thoughtseize
+2 Thrun, the Last Troll

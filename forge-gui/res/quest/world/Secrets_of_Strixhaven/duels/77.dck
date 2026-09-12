@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Bridge Troll
+Title=Bridge Troll
+Icon=Bridge Troll.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Boulderer_-_Grixis_Control_(Modern,_#2911656).dck
+Deck Type=constructed
+
+[Main]
+2 Orcish Bowmasters
+2 Tamiyo, Inquisitive Student
+4 Snapcaster Mage
+2 Sheoldred's Edict
+3 Flame of Anor
+1 Sink into Stupor
+3 Traumatic Critique
+3 Spell Snare
+4 Fatal Push
+2 Force of Negation
+2 Cling to Dust
+1 Logic Knot
+4 Counterspell
+3 Lightning Bolt
+1 Consider
+1 Spell Pierce
+1 Thundering Falls
+2 Undercity Sewers
+2 Flooded Strand
+4 Polluted Delta
+2 Watery Grave
+2 Steam Vents
+2 Misty Rainforest
+3 Scalding Tarn
+1 Hall of Storm Giants
+2 Island
+1 Swamp
+1 Otawara, Soaring City
+[Sideboard]
+2 Meltdown
+4 Consign to Memory
+3 Fire Magic
+3 Mystical Dispute
+3 Break the Ice

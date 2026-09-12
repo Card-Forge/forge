@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/DannyStarchild_-_Domain_Ramp_(Standard,_#1992453).dck
+Deck Type=constructed
+
+[Main]
+4 Archangel of Wrath
+3 Atraxa, Grand Unifier
+1 Imodane's Recruiter
+4 Topiary Stomper
+4 Herd Migration
+2 Depopulate
+4 Sunfall
+4 Leyline Binding
+2 Spelunking
+4 Up the Beanstalk
+2 Invasion of Zendikar
+1 Boseiju, Who Endures
+4 Plains
+3 Forest
+4 Jetmir's Garden
+4 Cavern of Souls
+4 Spara's Headquarters
+4 Ziatora's Proving Ground
+1 Swamp
+1 Island
+[Sideboard]
+2 Elesh Norn, Mother of Machines
+2 Kutzil's Flanker
+2 Long Goodbye
+3 Negate
+4 Temporary Lockdown
+2 The Stone Brain

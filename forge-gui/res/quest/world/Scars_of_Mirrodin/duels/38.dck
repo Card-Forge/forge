@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Zombie Attack
+Title=Zombie Attack
+Icon=Zombie Attack.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/2010_MTG_Worlds__Top_Standard_Decks/Liang_Chen_-_Valakut_Ramp_-_15_points_(Standard,_#8350).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+2 Oracle of Mul Daya
+3 Overgrown Battlement
+4 Primeval Titan
+3 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+3 Cultivate
+3 Explore
+4 Khalni Heart Expedition
+1 Evolving Wilds
+5 Forest
+12 Mountain
+2 Raging Ravine
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Gaea's Revenge
+4 Nature's Claim
+3 Pyroclasm
+2 Ratchet Bomb
+3 Tumble Magnet

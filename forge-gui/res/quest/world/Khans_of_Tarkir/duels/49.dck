@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/TCGplayer_Open_5K_Milwaukee,_WI/Dustin_Forman_-_Sidisi_Whip_(Standard,_#149728).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Doomwake Giant
+2 Hornet Queen
+1 Pharika, God of Affliction
+2 Prognostic Sphinx
+1 Reclamation Sage
+3 Satyr Wayfinder
+4 Sidisi, Brood Tyrant
+1 Soul of Innistrad
+4 Sylvan Caryatid
+3 Whip of Erebos
+3 Hero's Downfall
+3 Murderous Cut
+2 Sultai Charm
+3 Forest
+1 Island
+3 Llanowar Wastes
+1 Mana Confluence
+3 Opulent Palace
+2 Polluted Delta
+2 Swamp
+3 Temple of Malady
+2 Temple of Mystery
+1 Urborg, Tomb of Yawgmoth
+1 Wooded Foothills
+2 Yavimaya Coast
+[Sideboard]
+3 Ashiok, Nightmare Weaver
+2 Bile Blight
+2 Disdainful Stroke
+2 Drown in Sorrow
+2 Kiora, the Crashing Wave
+1 Silence the Believers
+3 Thoughtseize

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Abbepoj_-_5c_Humans_(Modern,_#1733907).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+4 Champion of the Parish
+4 Esper Sentinel
+4 Coppercoat Vanguard
+4 Thalia's Lieutenant
+2 Meddling Mage
+2 Kitesail Freebooter
+3 Thalia, Guardian of Thraben
+2 Jirina, Dauntless General
+4 Reflector Mage
+4 Mantis Rider
+2 Adeline, Resplendent Cathar
+4 Aether Vial
+4 Secluded Courtyard
+4 Unclaimed Territory
+4 Cavern of Souls
+3 Horizon Canopy
+2 Silent Clearing
+2 Plains
+[Sideboard]
+1 Kataki, War's Wage
+2 Auriok Champion
+2 Lavinia, Azorius Renegade
+2 Dismember
+3 Sanctifier en-Vec
+1 Kambal, Consul of Allocation
+2 Containment Priest
+2 Meddling Mage

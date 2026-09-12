@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Adam_Boyd_-_Jeskai_Aggro_(Standard,_#2785270).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Hexing Squelcher
+4 Hired Claw
+4 Quantum Riddler
+4 Slickshot Show-Off
+4 Boros Charm
+4 Burst Lightning
+4 Full Bore
+4 Lightning Helix
+2 Shock
+4 Inspiring Vantage
+4 Riverpyre Verge
+4 Sacred Foundry
+4 Steam Vents
+3 Multiversal Passage
+2 Sunbillow Verge
+1 Mountain
+[Sideboard]
+4 Sear
+3 Soul-Guide Lantern
+2 Doorkeeper Thrull
+2 Magebane Lizard
+1 Clarion Conqueror
+1 High Noon
+1 Rest in Peace
+1 Sunspine Lynx

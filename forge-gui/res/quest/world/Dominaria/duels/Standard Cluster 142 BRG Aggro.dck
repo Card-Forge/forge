@@ -1,0 +1,36 @@
+[metadata]
+Name=BRG Aggro
+Deck Type=constructed
+Title=BRG Aggro
+Description=BRG Aggro
+Difficulty=Easy
+Icon=Starfire
+[Main]
+4 Abrade
+3 Aether Hub
+4 Blooming Marsh
+4 Canyon Slough
+4 Chandra, Torch of Defiance
+4 Deathgorge Scavenger
+2 Doomfall
+4 Dragonskull Summit
+2 Forest
+4 Harnessed Lightning
+4 Magma Spray
+1 Mountain
+1 Mountain
+4 Rekindling Phoenix
+1 Rootbound Crag
+4 Sheltered Thicket
+1 Swamp
+1 Swamp
+4 Vraska's Contempt
+2 Vraska, Relic Seeker
+2 Walking Ballista
+[Sideboard]
+3 Arguel's Blood Fast
+2 Doomfall
+2 Gonti, Lord of Luxury
+4 Naturalize
+2 Vraska, Relic Seeker
+2 Walking Ballista

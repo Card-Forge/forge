@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Fernando_Hernandez_Argueta_-_Mono-Blue_Burn_(Standard,_#1258455).dck
+Deck Type=constructed
+
+[Main]
+2 Reidane, God of the Worthy
+2 Intrepid Adversary
+3 Thalia, Guardian of Thraben
+3 Brutal Cathar
+3 Adeline, Resplendent Cathar
+4 Clarion Spirit
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Hopeful Initiate
+4 Monk of the Open Hand
+1 Kabira Takedown
+3 Paladin Class
+1 Cave of the Frost Dragon
+4 Faceless Haven
+18 Snow-Covered Plains
+[Sideboard]
+1 Reidane, God of the Worthy
+1 Fateful Absence
+1 Brutal Cathar
+3 Portable Hole
+3 Valorous Stance
+3 Elite Spellbinder
+3 Skyclave Apparition

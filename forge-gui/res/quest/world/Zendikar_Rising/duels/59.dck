@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/2jjm_-_Burn_(Modern,_#1037516).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Eidolon of the Great Revel
+2 Skullcrack
+2 Lightning Helix
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+1 Fiery Islet
+2 Bloodstained Mire
+2 Arid Mesa
+2 Sacred Foundry
+2 Wooded Foothills
+3 Mountain
+4 Inspiring Vantage
+4 Sunbaked Canyon
+[Sideboard]
+1 Searing Blood
+2 Skullcrack
+2 Kor Firewalker
+2 Rest in Peace
+2 Roiling Vortex
+3 Path to Exile
+3 Smash to Smithereens

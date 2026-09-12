@@ -1,0 +1,9 @@
+Name:Flow State
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ X | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. If there is an instant card and a sorcery card in your graveyard, instead put two of them into your hand and the rest on the bottom of your library in any order.
+SVar:X:Count$Compare Y GE2.2.1
+SVar:Y:SVar$Z1/Plus.Z2
+SVar:Z1:Count$ValidGraveyard Instant.YouOwn/LimitMax.1
+SVar:Z2:Count$ValidGraveyard Sorcery.YouOwn/LimitMax.1
+Oracle:Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. If there is an instant card and a sorcery card in your graveyard, instead put two of them into your hand and the rest on the bottom of your library in any order.

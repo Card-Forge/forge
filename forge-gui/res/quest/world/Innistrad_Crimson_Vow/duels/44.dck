@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/MagicTiger#42015_-_Blessed_White_(Standard,_#1284156).dck
+Deck Type=constructed
+
+[Main]
+2 Lunarch Veteran
+2 Traveling Minister
+3 Skyclave Apparition
+4 Hallowed Priest
+4 Luminarch Aspirant
+4 Voice of the Blessed
+4 Attended Healer
+4 Brutal Cathar
+4 Fateful Absence
+2 Paladin Class
+4 Wedding Announcement
+3 Cave of the Frost Dragon
+20 Plains
+[Sideboard]

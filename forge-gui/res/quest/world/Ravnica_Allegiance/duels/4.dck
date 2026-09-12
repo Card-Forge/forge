@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=MamiWata
+Title=MamiWata
+Icon=MamiWata.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Agata_Takeru_-_Mono_Black_(Standard,_#779815).dck
+Deck Type=constructed
+
+[Main]
+1 Deadeye Tracker
+4 Dread Shade
+4 Graveyard Marshal
+4 Gutterbones
+4 Knight of Malice
+2 Midnight Reaper
+3 Ravenous Chupacabra
+4 Seekers' Squire
+4 Vicious Conquistador
+3 Cast Down
+2 Walk the Plank
+2 Dead Weight
+23 Swamp
+[Sideboard]
+1 Deadeye Tracker
+3 Drill Bit
+4 Duress
+1 Midnight Reaper
+2 Moment of Craving
+2 Plague Mare
+2 Plaguecrafter

@@ -17,7 +17,7 @@ public class CardRendererUtils {
     }
     public static boolean needsRotation(final ForgePreferences.FPref fPref, final CardView card, boolean altState) {
         if (isPreferenceEnabled(fPref)) {
-            if (Forge.enableUIMask.equals("Art"))
+            if ((Forge.enableUIMask.equals("Art") || card.useCardArt()))
                 return false;
             switch (fPref) {
                 case UI_ROTATE_SPLIT_CARDS -> {
@@ -43,19 +43,17 @@ public class CardRendererUtils {
         boolean showAlt = false;
         if (card.hasAlternateState()) {
             if (card.hasBackSide())
-                showAlt = reference.contains(card.getBackSideName()) || card.getAlternateState().getAbilityText().contains(reference);
+                showAlt = reference.contains(card.getAlternateState().getName()) || card.getAlternateState().getAbilityText().contains(reference);
             else if (card.hasSecondaryState())
                 showAlt = reference.equals(card.getAlternateState().getAbilityText());
             else if (card.isSplitCard()) {
                 //special case if aftermath cards can be cast from graveyard like yawgmoths will, you will have choices
                 if (card.getAlternateState().hasAftermath())
                     showAlt = card.getAlternateState().getOracleText().contains(reference.trim());
-                else {
-                    if (card.isRoom()) // special case for room cards
-                        showAlt = card.getAlternateState().getOracleName().equalsIgnoreCase(reference);
-                    else
-                        showAlt = reference.contains(card.getAlternateState().getAbilityText());
-                }
+                else if (card.isRoom()) // special case for room cards
+                    showAlt = card.getAlternateState().getOracleName().equalsIgnoreCase(reference);
+                else
+                    showAlt = reference.contains(card.getAlternateState().getAbilityText());
             }
         }
         return showAlt;
@@ -65,7 +63,6 @@ public class CardRendererUtils {
             return card.getAlternateState().hasAftermath();
         return false;
     }
-
 
     public static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
         return FModel.getPreferences().getPrefBoolean(preferenceName);

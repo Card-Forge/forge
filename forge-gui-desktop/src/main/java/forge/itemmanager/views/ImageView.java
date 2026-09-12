@@ -2,6 +2,7 @@ package forge.itemmanager.views;
 
 import forge.ImageCache;
 import forge.card.ColorSet;
+import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.card.Card;
@@ -1092,9 +1093,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         InventoryItem item = itemInfo.item;
                         itemInfo.alt = false;
                         if (!FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER)) {
-                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || (FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS))) {
-                                if (item instanceof PaperCard) {
-                                    if (((PaperCard)item).hasBackFace()) {
+                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS)) {
+                                if (item instanceof PaperCard pc) {
+                                    if (pc.hasBackFace()) {
                                         if (item.equals(lastAltCard)) {
                                             itemInfo.alt = true;
                                             lastAltCard = null;
@@ -1235,6 +1236,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                     CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
                 }
+                
+                // Draw key card indicator if applicable
+                if (paperCard instanceof PaperCard pc) {
+                    drawKeyCardIndicator(g, pc, bounds);
+                }
+
                 //draw draft ranking
                 if (showRanking && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING)) {
                     double score = CardRanker.getRawScore((PaperCard) item);
@@ -1261,6 +1268,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     g.drawString(value, x-w/2, y);
                     g.setClip(clip);
                 }
+            }
+        }
+
+        private void drawKeyCardIndicator(Graphics g, PaperCard card, Rectangle bounds) {
+            try {
+                final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
+                
+                if (currentDeck != null && currentDeck.isKeyCard(card.getName())) {
+                    g.setColor(Color.yellow);
+                    g.setFont(g.getFont().deriveFont(Font.BOLD, 14f));
+                    FontMetrics fm = g.getFontMetrics();
+                    String indicator = "⭐";
+                    int x = bounds.x + bounds.width - fm.stringWidth(indicator) - 3;
+                    int y = bounds.y + fm.getAscent() + 3;
+                    g.drawString(indicator, x, y);
+                }
+            } catch (Exception e) {
+                // Silently ignore if deck context is not available
             }
         }
     }

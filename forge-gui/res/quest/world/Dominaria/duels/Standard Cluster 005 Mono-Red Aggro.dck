@@ -1,0 +1,36 @@
+[metadata]
+Name=Mono-Red Aggro
+Deck Type=constructed
+Title=Mono-Red Aggro
+Description=Mono-Red Aggro
+Difficulty=Hard
+Icon=Quicksilver
+[Main]
+2 Abrade
+4 Ahn-Crop Crasher
+4 Bomat Courier
+2 Chandra, Torch of Defiance
+4 Earthshaker Khenra
+1 Glorybringer
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+4 Lightning Strike
+6 Mountain
+6 Mountain
+6 Mountain
+1 Pia Nalaar
+2 Scavenger Grounds
+4 Shock
+4 Soul-Scar Mage
+3 Sunscorched Desert
+[Sideboard]
+2 Abrade
+2 Aethersphere Harvester
+2 Chandra's Defeat
+1 Chandra, Torch of Defiance
+2 Dire Fleet Daredevil
+2 Glorybringer
+1 Magma Spray
+1 Pia Nalaar
+1 Scavenger Grounds
+1 Vance's Blasting Cannons

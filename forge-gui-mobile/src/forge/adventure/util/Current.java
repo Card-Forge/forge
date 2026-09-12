@@ -27,17 +27,17 @@ public class Current {
     public static void setLatestDeck(Deck generateDeck) {
         deck=generateDeck;
     }
-    public static String generateDefeatMessage(boolean hasDied) {
-        String key = hasDied ? "lblYouDied" : "lblYouLostTheLastGame";
-        String message = Forge.getLocalizer().getMessage(key, player().getName());
-        ItemData itemData = player().getRandomEquippedItem();
-        if (itemData != null  || Config.instance().getSettingData().disableCrackedItems) {
-            itemData.isCracked = true;
-            player().equip(itemData); //un-equip
-            InventoryScene.instance().clearItemDescription();
-            message += "\n{GRADIENT=RED;GRAY;1;1}" + itemData.name + " {ENDGRADIENT}" + Forge.getLocalizer().getMessage("lblCracked");
-        }
-        return message;
-    }
-
+	public static String generateDefeatMessage(boolean hasDied) {
+		String key = hasDied ? "lblYouDied" : "lblYouLostTheLastGame";
+		String message = Forge.getLocalizer().getMessage(key, player().getName());
+		ItemData itemData = player().getRandomEquippedItem();
+		if (itemData != null  && !(Config.instance().getSettingData().disableCrackedItems)){
+			itemData.isCracked = true;
+			player().equip(itemData); // un-equip
+			InventoryScene.instance().clearItemDescription();
+			message += "\n{GRADIENT=RED;GRAY;1;1}" + itemData.name + " {ENDGRADIENT}"
+					+ Forge.getLocalizer().getMessage("lblCracked");
+		}
+		return message;
+	}
 }

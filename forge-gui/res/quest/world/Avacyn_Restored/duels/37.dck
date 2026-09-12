@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/2012_TCGplayer_Open_5K_-_Columbus/DavidRohlfing_-_UG_Defiant_Infect_(Standard,_#35822).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Ichorclaw Myr
+3 Apostle's Blessing
+1 Dismember
+1 Gut Shot
+2 Mental Misstep
+4 Mutagenic Growth
+3 Ranger's Guile
+3 Titanic Growth
+1 Revenge of the Hunted
+4 Rancor
+4 Wild Defiance
+2 Evolving Wilds
+9 Forest
+4 Hinterland Harbor
+4 Inkmoth Nexus
+3 Island
+[Sideboard]
+3 Artful Dodge
+2 Livewire Lash
+3 Mana Leak
+1 Memory's Journey
+2 Spellskite

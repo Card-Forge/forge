@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/BReal2_-_Mardu_Pyromancer_(Modern,_#921420).dck
+Deck Type=constructed
+
+[Main]
+3 Kroxa, Titan of Death's Hunger
+4 Young Pyromancer
+4 Seasoned Pyromancer
+2 Kolaghan's Command
+3 Fatal Push
+4 Lightning Bolt
+2 Smiting Helix
+2 Dreadbore
+3 Inquisition of Kozilek
+3 Ransack the Lab
+4 Thoughtseize
+4 Lingering Souls
+1 Godless Shrine
+1 Castle Locthwain
+1 Sacred Foundry
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+2 Blood Crypt
+2 Arid Mesa
+2 Snow-Covered Swamp
+3 Marsh Flats
+4 Blackcleave Cliffs
+4 Bloodstained Mire
+[Sideboard]
+1 Nahiri, the Harbinger
+2 Angrath's Rampage
+2 Blood Moon
+2 Nihil Spellbomb
+2 Wear // Tear
+3 Ashiok, Dream Render
+3 Collective Brutality

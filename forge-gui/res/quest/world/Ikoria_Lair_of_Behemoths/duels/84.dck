@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Radagast
+Title=Radagast
+Icon=Radagast.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Gabriel_Nunes_Bacon_-_Mono_Red_Blitz_(Modern,_#1076017).dck
+Deck Type=constructed
+
+[Main]
+4 Bonecrusher Giant
+4 Monastery Swiftspear
+4 Bomat Courier
+4 Seasoned Pyromancer
+4 Soul-Scar Mage
+4 Lava Dart
+4 Lightning Bolt
+4 Light Up the Stage
+4 Firebolt
+4 Blood Moon
+1 Ramunap Ruins
+2 Fiery Islet
+17 Mountain
+[Sideboard]
+1 Abrade
+1 Shattering Spree
+1 Obosh, the Preypiercer
+1 Pillage
+2 Blast Zone
+2 Kozilek's Return
+3 Relic of Progenitus
+4 Skullcrack

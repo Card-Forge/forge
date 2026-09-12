@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/DB_xerioc_-_Mono_Blue_Turns_(Modern,_#2440452).dck
+Deck Type=constructed
+
+[Main]
+4 Devourer of Destiny
+4 Nulldrifter
+4 Tamiyo, Inquisitive Student
+1 Emrakul, the Aeons Torn
+4 Talisman of Dominance
+2 Talisman of Creativity
+4 Kozilek's Command
+3 Brainsurge
+2 Lórien Revealed
+4 Time Warp
+4 Temporal Mastery
+2 Ugin, Eye of the Storms
+4 Jace, the Mind Sculptor
+4 Ugin's Labyrinth
+9 Island
+4 Eldrazi Temple
+1 Otawara, Soaring City
+[Sideboard]
+3 Torpor Orb
+4 Consign to Memory
+1 Ugin's Binding
+2 Dismember
+2 Ashiok, Dream Render
+3 Mystical Dispute

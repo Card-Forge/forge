@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/TCGplayer_Standard_States_2015_-_New_York/Jason_Esposito_-_B-R_Aggro_(Standard,_#331105).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Alesha, Who Smiles at Death
+4 Bloodsoaked Champion
+3 Drana, Liberator of Malakir
+3 Flamewake Phoenix
+4 Forerunner of Slaughter
+3 Hangarback Walker
+2 Kolaghan, the Storm's Fury
+2 Lightning Berserker
+3 Makindi Sliderunner
+1 Scab-Clan Berserker
+4 Thunderbreak Regent
+3 Zurgo Bellstriker
+4 Draconic Roar
+1 Ob Nixilis Reignited
+4 Bloodstained Mire
+5 Mountain
+2 Polluted Delta
+4 Smoldering Marsh
+6 Swamp
+3 Wooded Foothills
+[Sideboard]
+3 Complete Disregard
+1 Murderous Cut
+1 Retreat to Valakut
+4 Self-Inflicted Wound
+2 Tainted Remedy
+1 Ultimate Price
+2 Wild Slash

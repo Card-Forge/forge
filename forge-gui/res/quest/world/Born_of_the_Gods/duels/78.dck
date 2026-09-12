@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Yogi Bear
+Title=Yogi Bear
+Icon=Yogi Bear.jpg
+Difficulty=Very Hard
+Description=../Modern/Born_of_the_Gods/GPT_Madrid_2014_La_Ciudadela/Fernando_Lopez_-_Burn_(Modern,_#86362).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+2 Grim Lavamancer
+4 Keldon Marauders
+4 Lightning Bolt
+3 Magma Jet
+2 Searing Blaze
+2 Searing Blood
+4 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+16 Mountain
+[Sideboard]
+4 Molten Rain
+2 Pithing Needle
+1 Relic of Progenitus
+4 Smash to Smithereens

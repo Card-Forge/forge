@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Dobazi_Ryota_-_Mono_Red_(Modern,_#1053245).dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Seasoned Pyromancer
+4 Monastery Swiftspear
+4 Bonecrusher Giant
+4 Blistercoil Weird
+2 Burst Lightning
+4 Lightning Bolt
+4 Lava Dart
+2 Flame Slash
+4 Light Up the Stage
+4 Firebolt
+2 Sunbaked Canyon
+18 Mountain
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Kozilek's Return
+4 Relic of Progenitus
+4 Blood Moon
+4 Shattering Spree

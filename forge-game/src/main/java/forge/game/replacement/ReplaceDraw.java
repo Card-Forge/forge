@@ -19,7 +19,6 @@ package forge.game.replacement;
 
 import java.util.Map;
 
-import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -47,18 +46,25 @@ public class ReplaceDraw extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+        final Player p = (Player) runParams.get(AbilityKey.Affected);
+
+        if (!matchesValidParam("ValidPlayer", p)) {
             return false;
         }
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
 
-        if (hasParam("NotFirstCardInDrawStep")) {
-            final Game game = getHostCard().getGame();
+        final boolean ownDraw = getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW, p);
 
-            final Player p = (Player)runParams.get(AbilityKey.Affected);
-            if (p.numDrawnThisDrawStep() == 0 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
+        if (hasParam("NotFirstCardInDrawStep")) {
+            if (p.numDrawnThisDrawStep() == 0 && ownDraw) {
+                return false;
+            }
+        }
+
+        if (hasParam("FirstExtraCardDrawnThisTurn")) {
+            if ((int) runParams.get(AbilityKey.ExtraDraws) != (ownDraw ? 1 : 0)) {
                 return false;
             }
         }

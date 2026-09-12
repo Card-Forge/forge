@@ -1,7 +1,7 @@
 [metadata]
 Name=Giada, Font of Hope
 [Commander]
-1 Giada, Font of Hope|FDN|2
+1 Giada, Font of Hope|FDN|[298]
 [Main]
 1 Giver of Runes|MH1
 1 Banner of Kinship|FDN
@@ -27,7 +27,7 @@ Name=Giada, Font of Hope
 1 Clever Concealment|ONC
 1 Emeria, the Sky Ruin|ZEN
 1 Emeria's Call|ZNR
-1 Empyrial Storm|C18
+1 Iona, Shield of Emeria|ZEN
 1 Enduring Angel|MID
 1 Exemplar of Light|FDN
 1 Farewell|NEO
@@ -69,4 +69,4 @@ Name=Giada, Font of Hope
 1 True Conviction|SOM
 1 Urza's Incubator|UDS
 1 Vanquisher's Banner|XLN
-1 Weathered Wayfarer|2X2
+1 Moat|LEG

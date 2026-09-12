@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/Topdeck_Open_-_Modern/Yuri_Danishevskiy_-_Solar_Flare_(Modern,_#28832).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+1 Elesh Norn, Grand Cenobite
+1 Eternal Witness
+1 Iona, Shield of Emeria
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Tarmogoyf
+1 Disfigure
+4 Gifts Ungiven
+1 Path to Exile
+1 Smother
+4 Inquisition of Kozilek
+1 Life from the Loam
+3 Lingering Souls
+1 Raven's Crime
+2 Thoughtseize
+1 Unburial Rites
+1 Bojuka Bog
+2 Forest
+1 Gavony Township
+1 Godless Shrine
+1 Horizon Canopy
+1 Marsh Flats
+4 Misty Rainforest
+1 Overgrown Tomb
+1 Plains
+2 Razorverge Thicket
+1 Swamp
+1 Temple Garden
+1 Treetop Village
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+1 Ghost Quarter
+1 Kitchen Finks
+2 Linvala, Keeper of Silence
+2 Nihil Spellbomb
+2 Obstinate Baloth
+1 Shriekmaw
+1 Surgical Extraction
+1 Wurmcoil Engine
+2 Zealous Persecution

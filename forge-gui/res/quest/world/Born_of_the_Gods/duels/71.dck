@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Sabertooth
+Title=Sabertooth
+Icon=Sabertooth.jpg
+Difficulty=Very Hard
+Description=../Modern/Born_of_the_Gods/I_AML_Tercer_Torneo_Diciembre_(Gruul)/Enrique_Del_Olmo_-_Mono_Green_(Modern,_#140287).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+2 Dungrove Elder
+4 Experiment One
+4 Kalonian Tusker
+4 Leatherback Baloth
+2 Obstinate Baloth
+3 Scavenging Ooze
+4 Strangleroot Geist
+3 Aspect of Hydra
+2 Dismember
+4 Vines of Vastwood
+4 Rancor
+20 Forest
+[Sideboard]
+1 Arashi, the Sky Asunder
+1 Creeping Corrosion
+2 Lead the Stampede
+1 Pithing Needle
+2 Skylasher
+2 Spellskite
+1 Thrun, the Last Troll
+2 Unravel the AEther
+1 Wild Defiance

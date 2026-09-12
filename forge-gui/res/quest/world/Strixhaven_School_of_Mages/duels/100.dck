@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Pepeapple_-_Jeskai_Magecraft_(Modern,_#1162265)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Clever Lumimancer
+4 Leonin Lightscribe
+4 Monastery Swiftspear
+4 Nivmagus Elemental
+4 Mutagenic Growth
+4 Gut Shot
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+2 Assault Strobe
+4 Ground Rift
+2 Inspiring Vantage
+3 Mountain
+3 Wooded Foothills
+3 Sunbaked Canyon
+3 Sacred Foundry
+4 Bloodstained Mire
+[Sideboard]
+1 Lurrus of the Dream-Den
+3 Shattering Spree
+3 Path to Exile
+4 Kor Firewalker
+4 Tormod's Crypt

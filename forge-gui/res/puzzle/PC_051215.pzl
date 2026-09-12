@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 051215 - Light and Shadow
 URL:http://www.gatheringmagic.com/seanuy-051215-perplexing-chimera-7-light-and-shadow/
 Goal:Win
 Turns:3
-Difficulty:Hard
+Difficulty:Rare
 Description:Win on your next turn.  You must find a way to guarantee the win on this turn.
 [state]
 ActivePlayer=Human

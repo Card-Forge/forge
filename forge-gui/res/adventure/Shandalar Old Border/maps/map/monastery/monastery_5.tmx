@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="65">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJzt1WEKwjAMhuH8lXUnGLuOh9CziPcqejctJZiGDh3DbD/eB0ZGM2go/ZgIAAAorqNITu1zGeu61l4/ypxqPZ8+dUp1XavtFVOKn88q++v5LfWj6Dn96/uteufzzd7z+fvX60dZyqfOR35/m28N8tvu5x0pH0efT/NZ7r5Wn1/b2yu/a5CPdj/rNog8zNrz/X4f2m8i5/P/huzOZ+70c+B8AABgmxebPi1k
@@ -27,89 +27,132 @@
  </layer>
  <layer id="3" name="Clutter" width="40" height="40">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzNWMtNQ0EMfLeIA2VQDTRBFQRypz3SA+IATYDewZI18tpjPxtlblH2452dsf1222y83C/+AHzcceN2PMLvb3LeGxHLWY15dcbrcewZd1yI9a/AxQ/8j+fHdVloPnCPFay9u5HRAgOLZzk7ox2GW31nGT1U4OnyKETXGT1VzitnODedRWsG/aMh94469uZ4c4Wnbs1Ogs2Xgqeh/aI4pn1UgVdDRAPoneeHeF1rDOtB9FA2P/wS8TFjdgg/jJ+mcVS3AusssvZ7Yp3MWAHWZYnFqtdMf9MBa++oL9Be786V1v1k+rOoBlX9W0W2l+v0761Ba43Ja16vZ2Hav97+q/o3nTs9/0U5xIr5iD9YrWPMmd5gor4JmO+mSyIX/QeifKfPNOWPbA96C/0Ei646LDU1qpf6f621Kmefp237OtXmIrL3rLHq3zri6+oNLXjxdXy74xpabwzfR/hDTU30nGx8zNuB5irzduXVpVV8qzlZjipvIjoHsPxZfLDvgIhMXbPiq+QJzXfHN4XwseKPyafVt2CMw8sTzP2yeQY1sLp/5k1NYMXneaDydu0hyu0Rf54H0Juiuz9QnHfw
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="304" y="457.5" width="32" height="16">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="304" y="457.5" width="32" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="224.254" y="272.356"/>
-  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="220.496" y="384.523"/>
-  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="383.299" y="222.322">
+  <object id="48" template="../../../../common/maps/obj/treasure.tx" x="224.254" y="272.356"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="220.496" y="384.523" />
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="383.299" y="222.322">
    <properties>
-    <property name="enemy" value="Monk"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Monk" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="311.641" y="255.989">
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="311.641" y="255.989">
    <properties>
-    <property name="enemy" value="Angel Warrior"/>
+    <property name="enemy" value="Angel Warrior" />
    </properties>
   </object>
-  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="240.648" y="313.313">
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="240.648" y="313.313">
    <properties>
-    <property name="enemy" value="Adept White Wizard"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Adept White Wizard" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="384.126" y="314.313">
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="384.126" y="314.313">
    <properties>
-    <property name="enemy" value="Monk"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Monk" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="384.292" y="393.969">
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="384.292" y="393.969">
    <properties>
-    <property name="enemy" value="Cleric"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Cleric" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="240.648" y="393.969">
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="240.648" y="393.969">
    <properties>
-    <property name="enemy" value="Monk"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Monk" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="62" template="../../../../../../common/maps/obj/booster.tx" x="240.333" y="302">
+  <object id="62" template="../../../../common/maps/obj/booster.tx" x="240.333" y="302">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;colors&quot;: [ &quot;white&quot; ],
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "colors": [ "white" ],
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;colors&quot;: [ &quot;white&quot; ],
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "colors": [ "white" ],
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;colors&quot;: [ &quot;white&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "colors": [ "white" ],
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="239.333" y="223.667">
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="239.333" y="223.667">
    <properties>
-    <property name="enemy" value="Cleric"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Cleric" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="403.333" y="307"/>
+  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="403.333" y="307" />
  </objectgroup>
 </map>

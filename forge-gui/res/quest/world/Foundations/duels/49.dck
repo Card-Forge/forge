@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Fujimoto_Tomoya_-_Mono_Red_(Standard,_#2282905).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+1 Shock
+2 Lightning Strike
+4 Burst Lightning
+4 Monstrous Rage
+3 Witchstalker Frenzy
+16 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+4 Urabrask's Forge
+3 Lithomantic Barrage
+4 Torch the Tower
+2 Twisted Fealty
+2 Ghost Vacuum

@@ -40,7 +40,7 @@ ScryfallCode=LCI
 28 C Oltec Cloud Guard @Evyn Fong
 29 C Oteclan Landmark @Warren Mahy
 30 C Petrify @Samuel Araya
-31 C Quicksand Whirlpool @LA Draws
+31 C Quicksand Whirlpool @L.A. Draws
 32 M Resplendent Angel @Victor Adame Minguez
 33 U Ruin-Lurker Bat @Camille Alquier
 34 R Sanguine Evangelist @Zezhou Chen
@@ -88,7 +88,7 @@ ScryfallCode=LCI
 76 U Sinuous Benthisaur @John Tedrick
 77 C Song of Stupefaction @Ernanda Souza
 78 U Spyglass Siren @David Astruga
-79 U Staunch Crewmate @LA Draws
+79 U Staunch Crewmate @L.A. Draws
 80 R Subterranean Schooner @Svetlin Velinov
 81 R Tishana's Tidebinder @Nino Vecia
 82 C Unlucky Drop @Patrik Hell
@@ -193,7 +193,7 @@ ScryfallCode=LCI
 181 R Cosmium Confluence @Kasia 'Kafis' Zielińska
 182 C Disturbed Slumber @David Palumbo
 183 U Earthshaker Dreadmaw @Jesper Ejsing
-184 U Explorer's Cache @Marzena Nereida Piwowar
+184 U Explorer's Cache @Nereida
 185 M Ghalta, Stampede Tyrant @Lars Grant-West
 186 U Glimpse the Core @Francisco Miyara
 187 U Glowcap Lantern @Irina Nordsol
@@ -273,7 +273,7 @@ ScryfallCode=LCI
 261 U Sorcerous Spyglass @Tyler Walpole
 262 U Sunbird Standard @Aldo Domínguez
 263 U Swashbuckler's Whip @Irina Nordsol
-264 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
+264 R Tarrian's Soulcleaver @Nereida
 265 R Threefold Thunderhulk @Xavier Ribeiro
 266 R Throne of the Grim Captain @Tiffany Turrill
 267 R Treasure Map @Néstor Ossandón Leal
@@ -410,7 +410,7 @@ ScryfallCode=LCI
 386 R Squirming Emergence @Simon Dominic
 387 R Matzalantli, the Great Door @Piotr Dura
 388 M The Millennium Calendar @Zoltan Boros
-389 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
+389 R Tarrian's Soulcleaver @Nereida
 390 R Threefold Thunderhulk @Xavier Ribeiro
 391 R Treasure Map @Néstor Ossandón Leal
 392 R Sunken Citadel @Matteo Bassini

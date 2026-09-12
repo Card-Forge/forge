@@ -1,0 +1,11 @@
+Name:Rubble Rouser
+ManaCost:2 R
+Types:Creature Dwarf Sorcerer
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+A:AB$ Mana | Cost$ T ExileFromGrave<1/Card> | Produced$ R | SubAbility$ DBImmediateTrig | SpellDescription$ Add {R}.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigDamage | SpellDescription$ When you do, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1
+DeckHas:Ability$Discard
+Oracle:When this creature enters, you may discard a card. If you do, draw a card.\n{T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponent.

@@ -1,0 +1,9 @@
+Name:The Astonishing Ant-Man
+ManaCost:G U
+Types:Legendary Creature Human Scientist Hero
+PT:1/1
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Token | Cost$ 2 G T SubCounter<X/P1P1> | TokenScript$ g_1_1_insect | TokenOwner$ You | TokenAmount$ X | SpellDescription$ Create that many 1/1 green Insect creature tokens.
+SVar:X:Count$xPaid
+Oracle:Whenever you draw a card, put a +1/+1 counter on The Astonishing Ant-Man.\n{2}{G}, {T}, Remove any number of +1/+1 counters from The Astonishing Ant-Man: Create that many 1/1 green Insect creature tokens.

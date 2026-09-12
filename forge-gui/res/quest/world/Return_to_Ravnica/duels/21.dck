@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Kansas_City,_Missouri/Andy_Lozano_-_Bant_Control_(Standard,_#38729).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Thragtusk
+3 Dissipate
+3 Feeling of Dread
+4 Supreme Verdict
+4 Terminus
+4 Detention Sphere
+3 Oblivion Ring
+4 Jace, Architect of Thought
+2 Jace, Memory Adept
+3 Tamiyo, the Moon Sage
+4 Glacial Fortress
+4 Hallowed Fountain
+4 Hinterland Harbor
+5 Island
+2 Plains
+3 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Entreat the Angels
+3 Faith's Shield
+1 Lone Revenant
+3 Negate
+2 Ray of Revelation
+3 Righteous Blow

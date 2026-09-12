@@ -570,9 +570,9 @@ public class QuestUtil {
         }
 
         if (useBazaar) {
-            humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
+            humanStart.addExtraCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
             aiStart.setStartingLife(lifeAI);
-            aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+            aiStart.addExtraCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
 
         final List<RegisteredPlayer> starter = new ArrayList<>();

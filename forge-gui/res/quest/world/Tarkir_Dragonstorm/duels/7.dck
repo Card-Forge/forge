@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/MaxDam_-_Dimir_Bounce_(Standard,_#2445501).dck
+Deck Type=constructed
+
+[Main]
+2 Enduring Curiosity
+4 Fear of Isolation
+4 Floodpits Drowner
+4 Spyglass Siren
+4 This Town Ain't Big Enough
+1 Go for the Throat
+1 Cut Down
+1 Shoot the Sheriff
+1 Stock Up
+3 Hopeless Nightmare
+4 Nowhere to Run
+4 Stormchaser's Talent
+3 Kaito, Bane of Nightmares
+4 Darkslick Shores
+2 Restless Reef
+4 Swamp
+4 Island
+2 Soulstone Sanctuary
+4 Underground River
+4 Gloomlake Verge
+[Sideboard]
+1 Cut Down
+1 Negate
+2 Dreams of Steel and Oil
+1 Gix's Command
+2 Scavenger Regent
+1 Sheoldred, the Apocalypse
+1 Stock Up
+3 Tishana's Tidebinder
+1 Kaito, Bane of Nightmares
+2 Preacher of the Schism

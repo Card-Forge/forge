@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ododua
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/SCG_Invitational_Qualifier_Wilbraham/Zachary_Sexton_-_GW_Auras_(Modern,_#607484).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+3 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+1 Spirit Mantle
+3 Unflinching Courage
+1 Canopy Vista
+2 Forest
+2 Plains
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+1 Ajani, Caller of the Pride
+2 Feed the Clan
+2 Leyline of Sanctity
+1 Myth Realized
+2 Rest in Peace
+3 Stony Silence
+2 Suppression Field
+2 Torpor Orb

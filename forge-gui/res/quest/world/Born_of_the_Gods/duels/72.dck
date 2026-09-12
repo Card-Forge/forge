@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/GPT_Moskau_-_FUNtainment_N├╝rnberg/Anderson_Kyle_-_Red_Deck_Wins_(Modern,_#72325).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Vexing Devil
+1 Flame Javelin
+4 Lightning Bolt
+4 Magma Jet
+4 Searing Blaze
+3 Searing Blood
+3 Shard Volley
+4 Skullcrack
+4 Lava Spike
+2 Pillar of Flame
+4 Rift Bolt
+1 Blood Moon
+4 Arid Mesa
+10 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Anger of the Gods
+2 Combust
+2 Satyr Firedancer
+3 Smash to Smithereens
+2 Torpor Orb

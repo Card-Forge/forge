@@ -1,0 +1,7 @@
+Name:Angel Token
+ManaCost:no cost
+Colors:blue
+Types:Creature Angel
+PT:3/3
+K:Flying
+Oracle:Flying

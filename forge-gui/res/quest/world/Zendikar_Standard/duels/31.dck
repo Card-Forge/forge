@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mister Fantastic
+Title=Mister Fantastic
+Icon=Mister Fantastic.jpg
+Difficulty=Easy
+Description=Zendikar/Standard_Trial_-_Winter_Games_Fair_2009/Mitritsas_Dimitrios_-_Calafell's_Turbo_Fog_(Standard,_#3063).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Font of Mythos
+4 Howling Mine
+4 Angelsong
+2 Archive Trap
+4 Negate
+1 Path to Exile
+4 Safe Passage
+3 Day of Judgment
+4 Time Warp
+2 Sunspring Expedition
+4 Jace Beleren
+4 Glacial Fortress
+10 Island
+4 Kabira Crossroads
+6 Plains
+[Sideboard]
+4 Baneslayer Angel
+2 Pithing Needle
+2 Relic of Progenitus
+1 Tezzeret the Seeker
+2 Wall of Denial

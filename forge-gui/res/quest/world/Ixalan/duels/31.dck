@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot31
+Title=Robot31
+Icon=Abe Sapien.jpg
+Difficulty=Easy
+Description=Abzan 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+2 Sacred Cat
+4 Renegade Map
+4 Fatal Push
+4 Fumigate
+1 Start // Finish
+4 Anointed Procession
+4 Cast Out
+4 Hidden Stockpile
+4 Legion's Landing
+2 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Field of Ruin
+1 Forest
+5 Plains
+4 Shefet Dunes
+4 Swamp
+[Sideboard]
+2 Angel of Sanctions
+2 Arguel's Blood Fast
+3 Crested Sunmare
+4 Duress
+1 Essence Extraction
+2 Sacred Cat
+1 Vraska, Relic Seeker

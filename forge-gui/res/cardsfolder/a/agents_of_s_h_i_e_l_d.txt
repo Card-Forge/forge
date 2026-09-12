@@ -1,0 +1,7 @@
+Name:Agents of S.H.I.E.L.D.
+ManaCost:2 W
+Types:Creature Human Spy Hero
+PT:2/4
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Enzo_Cassanello_-_Turbo_Milling_Domain_(Standard,_#1981496).dck
+Deck Type=constructed
+
+[Main]
+3 Deduce
+4 Get Lost
+4 March of Otherworldly Light
+4 Memory Deluge
+4 No More Lies
+1 Farewell
+4 Sunfall
+2 Temporary Lockdown
+4 Jace, the Perfected Mind
+3 The Wandering Emperor
+1 Adarkar Wastes
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+4 Field of Ruin
+4 Island
+2 Mirrex
+1 Otawara, Soaring City
+4 Plains
+4 Restless Anchorage
+2 Sunken Citadel
+[Sideboard]
+3 Chrome Host Seedshark
+2 Disdainful Stroke
+1 Farewell
+2 Knockout Blow
+2 Negate
+1 Realmbreaker, the Invasion Tree
+2 Temporary Lockdown
+2 Tishana's Tidebinder

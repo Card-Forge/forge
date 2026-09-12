@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Easy
+Description=Kaladesh/BIG_MAGIC_OPEN_Vol.8_-_Watanabe_Yuuya_Cup/Yamakawa_Akihiro_-_BG_Aggro_(Standard,_#643899).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Grim Flayer
+3 Mindwrack Demon
+1 Noxious Gearhulk
+4 Scrapheap Scrounger
+3 Tireless Tracker
+2 Verdurous Gearhulk
+4 Smuggler's Copter
+3 Blossoming Defense
+4 Grasp of Darkness
+1 Ruinous Path
+3 Traverse the Ulvenwald
+2 Dead Weight
+3 Liliana, the Last Hope
+1 Blighted Fen
+4 Blooming Marsh
+4 Evolving Wilds
+5 Forest
+3 Hissing Quagmire
+6 Swamp
+[Sideboard]
+2 Appetite for the Unnatural
+2 Ishkanah, Grafwidow
+3 Kalitas, Traitor of Ghet
+1 Lost Legacy
+3 Nissa, Vital Force
+1 Ruinous Path
+3 Transgress the Mind

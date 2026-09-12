@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Boromir
+Title=Boromir
+Icon=Boromir.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Javier_Dominguez_-_Rakdos_Midrange_(Standard,_#1636204).dck
+Deck Type=constructed
+
+[Main]
+3 Sheoldred, the Apocalypse
+2 Graveyard Trespasser
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Reckoner Bankbuster
+1 Abrade
+3 Cut Down
+4 Go for the Throat
+1 Light Up the Night
+2 Duress
+4 Invoke Despair
+2 Chandra, Hope's Beacon
+2 Sokenzan, Crucible of Defiance
+4 Sulfurous Springs
+4 Haunted Ridge
+1 Mountain
+1 Takenuma, Abandoned Mire
+10 Swamp
+4 Blackcleave Cliffs
+[Sideboard]
+1 Obliterating Bolt
+2 Lithomantic Barrage
+1 Cut Down
+1 Soul Transfer
+1 Abrade
+2 Razorlash Transmogrant
+1 Rotten Reunion
+2 Duress
+2 Liliana of the Veil
+2 Glistening Deluge

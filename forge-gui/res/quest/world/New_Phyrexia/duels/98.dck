@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Winnipeg_,_Manitoba/Rickard_Hedlund_in_PTQ_Barcelona_-_Faeries_(Modern,_#28038).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+3 Mana Leak
+4 Remand
+4 Spell Snare
+4 Mutavault
+18 Snow-Covered Island
+3 Tectonic Edge
+[Sideboard]
+1 Dismember
+2 Dispel
+2 Ratchet Bomb
+3 Relic of Progenitus
+2 Steel Sabotage
+3 Threads of Disloyalty
+2 Wurmcoil Engine

@@ -1,0 +1,9 @@
+Name:Scalar Scholar
+ManaCost:G U
+Types:Creature Salamander Wizard
+PT:2/2
+K:Increment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ When this creature enters, each card you own with {X} in its mana cost perpetually gains "This spell costs {1} less to cast."
+SVar:TrigAnimateAll:DB$ AnimateAll | ValidCards$ Card.YouOwn+hasXCost | Zone$ All | staticAbilities$ STReduceCost | Duration$ Perpetual
+SVar:STReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+Oracle:Increment\nWhen this creature enters, each card you own with {X} in its mana cost perpetually gains "This spell costs {1} less to cast."

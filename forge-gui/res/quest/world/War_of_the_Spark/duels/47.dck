@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Brekyirihunuade
+Title=Brekyirihunuade
+Icon=Brekyirihunuade.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Andrew_Boody_-_Mono_Blue_(Standard,_#801345).dck
+Deck Type=constructed
+
+[Main]
+4 Merfolk Trickster
+4 Pteramander
+4 Siren Stormtamer
+4 Tempest Djinn
+4 Dive Down
+1 Essence Capture
+2 Negate
+4 Opt
+1 Quench
+3 Spell Pierce
+4 Wizard's Retort
+1 Chart a Course
+4 Curious Obsession
+20 Island
+[Sideboard]
+1 Disdainful Stroke
+3 Entrancing Melody
+2 Essence Capture
+2 God-Eternal Kefnet
+2 Negate
+1 Spell Pierce
+4 Surge Mare

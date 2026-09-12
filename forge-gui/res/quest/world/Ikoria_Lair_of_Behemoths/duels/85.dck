@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/DLCabelo_-_5_color_Niv-Mizzet_(Modern,_#1013573).dck
+Deck Type=constructed
+
+[Main]
+1 Nicol Bolas, the Ravager
+1 Snapcaster Mage
+1 Niv-Mizzet Reborn
+3 Uro, Titan of Nature's Wrath
+1 Lightning Helix
+1 Dovin's Veto
+1 Cling to Dust
+2 Kaya's Guile
+2 Remand
+3 Force of Negation
+4 Path to Exile
+4 Assassin's Trophy
+1 Nissa, Who Shakes the World
+1 Jace, the Mind Sculptor
+1 Teferi, Hero of Dominaria
+1 Narset of the Ancient Way
+1 Ashiok, Dream Render
+2 Teferi, Time Raveler
+2 Wrenn and Six
+1 Raugrin Triome
+1 Savai Triome
+1 Zagoth Triome
+1 Watery Grave
+1 Snow-Covered Mountain
+1 Verdant Catacombs
+1 Hallowed Fountain
+1 Overgrown Tomb
+1 Temple Garden
+1 Ketria Triome
+1 Indatha Triome
+1 Snow-Covered Plains
+1 Snow-Covered Swamp
+1 Breeding Pool
+2 Polluted Delta
+2 Flooded Strand
+2 Misty Rainforest
+2 Snow-Covered Island
+2 Snow-Covered Forest
+3 Field of Ruin
+[Sideboard]
+2 Kaya's Guile
+2 Deafening Silence
+3 Veil of Summer
+4 Geomancer's Gambit
+4 Aether Gust

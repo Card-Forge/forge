@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_Monroeville/Brittany_Ward_-_Allies_(Modern,_#656481).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Akoum Battlesinger
+4 Expedition Envoy
+4 Hada Freeblade
+4 Kabira Evangel
+4 Kazandu Blademaster
+2 Lantern Scout
+4 Oran-Rief Survivalist
+2 Reckless Bushwhacker
+2 Selfless Spirit
+4 Collected Company
+4 Path to Exile
+4 Ally Encampment
+4 Cavern of Souls
+1 Forest
+3 Plains
+3 Razorverge Thicket
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Ancient Grudge
+1 Firemantle Mage
+2 Gideon, Ally of Zendikar
+1 Kataki, War's Wage
+1 Lantern Scout
+2 Lead the Stampede
+2 Pay No Heed
+2 Rest in Peace
+1 Return to the Ranks
+1 Stony Silence
+1 Wear // Tear

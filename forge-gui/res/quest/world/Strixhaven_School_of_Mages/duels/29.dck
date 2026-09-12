@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/EDO_BHRI_-_Four-color_Blink_(Yorion)_(Standard,_#1150934).dck
+Deck Type=constructed
+
+[Main]
+1 Polukranos, Unchained
+1 Callous Bloodmage
+2 Archon of Sun's Grace
+3 Yorion, Sky Nomad
+2 Golden Egg
+4 Heartless Act
+4 Vanishing Verse
+4 Negate
+1 Shatter the Sky
+3 Extinction Event
+3 Emeria's Call
+2 Treacherous Blessing
+3 Doom Foretold
+3 Omen of the Sun
+3 Elspeth's Nightmare
+4 Omen of the Sea
+4 Binding the Old Gods
+1 Darkbore Pathway
+1 Forest
+1 Swamp
+2 Island
+2 Plains
+3 Zagoth Triome
+3 Branchloft Pathway
+4 Brightclimb Pathway
+4 Indatha Triome
+4 Fabled Passage
+4 Hengegate Pathway
+4 Clearwater Pathway
+[Sideboard]
+1 Archon of Sun's Grace
+1 Yorion, Sky Nomad
+1 Polukranos, Unchained
+2 Mystical Dispute
+2 Eliminate
+2 Test of Talents
+2 Cling to Dust
+2 Duress
+2 Disdainful Stroke

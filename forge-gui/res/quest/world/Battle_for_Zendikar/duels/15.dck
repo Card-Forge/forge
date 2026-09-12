@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/States_Portland/Sean_Stilwell_-_Atarka_Red_(Standard,_#332168).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Abbot of Keral Keep
+1 Goblin Heelcutter
+3 Lightning Berserker
+4 Makindi Sliderunner
+4 Monastery Swiftspear
+3 Zurgo Bellstriker
+4 Atarka's Command
+2 Become Immense
+1 Fiery Impulse
+2 Murderous Cut
+1 Titan's Strength
+4 Wild Slash
+4 Exquisite Firecraft
+1 Roast
+4 Bloodstained Mire
+2 Cinder Glade
+1 Forest
+7 Mountain
+2 Smoldering Marsh
+3 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Arc Lightning
+2 Outpost Siege
+4 Self-Inflicted Wound
+2 Thunderbreak Regent
+2 Ultimate Price

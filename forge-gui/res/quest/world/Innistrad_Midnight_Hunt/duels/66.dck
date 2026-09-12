@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bep
+Title=Bep
+Icon=Bep.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/AronGomu_-_Blue_Moon_(Modern,_#1228339).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+4 Murktide Regent
+4 Snapcaster Mage
+2 Prismari Command
+2 Force of Negation
+4 Archmage's Charm
+4 Consider
+4 Counterspell
+4 Fire // Ice
+4 Lightning Bolt
+4 Otherworldly Gaze
+2 Blood Moon
+2 Misty Rainforest
+2 Polluted Delta
+2 Scalding Tarn
+2 Steam Vents
+2 Flooded Strand
+4 Spirebluff Canal
+6 Island
+[Sideboard]
+1 Emrakul, the Aeons Torn
+2 Force of Negation
+2 Abrade
+2 Anger of the Gods
+2 Engineered Explosives
+2 Flusterstorm
+2 Soul-Guide Lantern
+2 Torpor Orb

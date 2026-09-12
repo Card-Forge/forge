@@ -25,6 +25,11 @@ import org.apache.commons.lang3.StringUtils;
 public class DigEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
+    @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
@@ -482,7 +487,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         zoneMovements.triggerChangesZoneAll(game, sa);
-        counterTable.replaceCounterEffect(game, sa, true);
+        counterTable.replaceCounterEffect(game, sa);
     }
 
 }

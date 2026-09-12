@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Graciasportanto_-_Azorius_Tempo_(Standard,_#2278648).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+4 Picklock Prankster
+4 Abhorrent Oculus
+1 Kiora, the Rising Tide
+4 Unsummon
+4 Moment of Truth
+2 Get Lost
+1 Negate
+4 Chart a Course
+4 Helping Hand
+3 Recommission
+4 Founding the Third Path
+3 Adarkar Wastes
+4 Meticulous Archive
+1 Plains
+5 Island
+4 Seachrome Coast
+4 Floodfarm Verge
+[Sideboard]
+3 Negate
+1 Monastery Mentor
+3 Exorcise
+1 Get Lost
+3 Sheltered by Ghosts
+1 Disdainful Stroke
+1 Temporary Lockdown
+2 Split Up

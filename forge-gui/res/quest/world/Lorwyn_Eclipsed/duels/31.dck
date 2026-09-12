@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Daanmtg_-_Azorius_Flash_(Standard,_#2826087).dck
+Deck Type=constructed
+
+[Main]
+4 Aang, Swift Savior
+4 Aven Interrupter
+2 Enduring Curiosity
+2 Enduring Innocence
+4 Floodpits Drowner
+4 Voice of Victory
+1 Get Lost
+2 No More Lies
+2 Spell Snare
+1 Avatar's Wrath
+4 High Noon
+3 Seam Rip
+1 Elspeth, Storm Slayer
+2 Ajani, Outland Chaperone
+2 Abandoned Air Temple
+5 Plains
+4 Floodfarm Verge
+2 Island
+4 Hallowed Fountain
+2 Multiversal Passage
+2 Restless Anchorage
+4 Starting Town
+[Sideboard]
+2 Avatar's Wrath
+2 Beza, the Bounding Spring
+2 Disdainful Stroke
+2 Stoic Sphinx
+1 Requisition Raid
+1 Soul-Guide Lantern
+1 Seam Rip
+1 Rest in Peace
+1 Glen Elendra Guardian
+2 Tishana's Tidebinder

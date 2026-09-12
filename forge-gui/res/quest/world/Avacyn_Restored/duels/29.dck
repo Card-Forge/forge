@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/SCG_Invitational_Qualifier_-_Doylestown,_Pennsylvania/Andrew_Rula_-_Tokens_(Standard,_#31056).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Angel of Jubilation
+4 Champion of the Parish
+4 Doomed Traveler
+3 Hero of Bladehold
+4 Midnight Haunting
+4 Gather the Townsfolk
+4 Lingering Souls
+4 Honor of the Pure
+4 Intangible Virtue
+3 Oblivion Ring
+2 Evolving Wilds
+4 Isolated Chapel
+11 Plains
+4 Swamp
+4 Vault of the Archangel
+[Sideboard]
+3 Celestial Purge
+2 Divine Offering
+1 Mortarpod
+1 Shrine of Loyal Legions
+3 Timely Reinforcements
+3 Urgent Exorcism

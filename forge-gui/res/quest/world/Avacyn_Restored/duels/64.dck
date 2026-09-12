@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Samwise Gamgee
+Title=Samwise Gamgee
+Icon=Samwise Gamgee.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/GPT_Moscow_-_SpielRaumWien/Patrick_Bender_-_Boros_(Modern,_#37073).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Figure of Destiny
+4 Grim Lavamancer
+2 Hellspark Elemental
+4 Plated Geopede
+1 Spikeshot Elder
+4 Steppe Lynx
+3 Vexing Devil
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+3 Searing Blaze
+2 Elspeth, Knight-Errant
+4 Arid Mesa
+3 Marsh Flats
+5 Mountain
+4 Plains
+2 Sacred Foundry
+2 Scalding Tarn
+1 Slayers' Stronghold
+[Sideboard]
+4 Kor Firewalker
+2 Magus of the Moon
+2 Torpor Orb
+3 Volcanic Fallout
+3 Whipflare

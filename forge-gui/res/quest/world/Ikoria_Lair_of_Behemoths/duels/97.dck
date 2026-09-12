@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Captainschwiggles_-_UW_Control_(Modern,_#1062960).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+2 Archmage's Charm
+2 Force of Negation
+3 Cryptic Command
+4 Delay
+4 Opt
+4 Path to Exile
+3 Supreme Verdict
+2 Shark Typhoon
+2 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 Scalding Tarn
+1 Polluted Delta
+2 Plains
+2 Mystic Sanctuary
+2 Hallowed Fountain
+2 Glacial Fortress
+2 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+6 Island
+[Sideboard]
+1 Aether Gust
+1 Condemn
+1 Dovin's Veto
+1 Mystical Dispute
+1 Rest in Peace
+2 Ashiok, Dream Render
+2 Celestial Purge
+2 Kor Firewalker
+2 Surgical Extraction
+2 Timely Reinforcements

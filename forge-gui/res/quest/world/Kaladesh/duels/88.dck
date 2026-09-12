@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Danny_van_Benthem_-_BW_Eldrazi_aggro_(Modern,_#660765).dck
+Deck Type=constructed
+
+[Main]
+3 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+4 Wasteland Strangler
+2 Mind Stone
+4 Relic of Progenitus
+1 Go for the Throat
+4 Path to Exile
+2 Collective Brutality
+4 Lingering Souls
+3 Thoughtseize
+1 Sorin, Solemn Visitor
+4 Caves of Koilos
+1 Concealed Courtyard
+4 Eldrazi Temple
+2 Ghost Quarter
+3 Godless Shrine
+3 Marsh Flats
+1 Plains
+1 Sea Gate Wreckage
+2 Shambling Vent
+2 Swamp
+1 Vault of the Archangel
+[Sideboard]
+3 Blessed Alliance
+2 Celestial Purge
+2 Disenchant
+1 Eidolon of Rhetoric
+2 Pithing Needle
+2 Timely Reinforcements
+2 Warping Wail
+1 Wrath of God

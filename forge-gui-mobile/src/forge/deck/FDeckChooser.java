@@ -15,7 +15,6 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
@@ -109,7 +108,7 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
+        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, List.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
             if (result == 0) {
                 if (callback != null) {
                     callback.accept(deckChooser.getDeck());
@@ -561,6 +560,7 @@ public class FDeckChooser extends FScreen {
                     cmbDeckTypes.addItem(DeckType.PIONEER_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.HISTORIC_CARDGEN_DECK);
                 }
+                cmbDeckTypes.addItem(DeckType.NET_EVENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_STANDARD_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_PIONEER_DECK);
@@ -602,6 +602,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECON_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_EVENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_STANDARD_DECK);
@@ -1059,6 +1060,10 @@ public class FDeckChooser extends FScreen {
                 pool = DeckProxy.getNetArchiveBlockDecks(NetDeckArchiveBlock);
                 config = ItemManagerConfig.NET_ARCHIVE_BLOCK_DECKS;
                 break;
+        case NET_EVENT_DECK:
+            pool = DeckProxy.getAllNetworkEventDecks();
+            config = ItemManagerConfig.NET_EVENT_DECKS;
+            break;
         case NET_DECK:
         case NET_COMMANDER_DECK:
             if (netDeckCategory != null) {
@@ -1073,8 +1078,8 @@ public class FDeckChooser extends FScreen {
         }
 
         lstDecks.setSelectionSupport(1, maxSelections);
-        lstDecks.setPool(pool);
         lstDecks.setup(config);
+        lstDecks.setPool(pool);
 
         if (config == ItemManagerConfig.STRING_ONLY) {
             //hide edit/view buttons for string-only lists
@@ -1242,10 +1247,10 @@ public class FDeckChooser extends FScreen {
             //Special branch for quest events
             QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
             player = new RegisteredPlayer(event.getEventDeck());
-            if (event instanceof QuestEventChallenge) {
-                player.setStartingLife(((QuestEventChallenge) event).getAiLife());
+            if (event instanceof QuestEventChallenge qec) {
+                player.setStartingLife(qec.getAiLife());
             }
-            player.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+            player.addExtraCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
         else {
             player = new RegisteredPlayer(getDeck());

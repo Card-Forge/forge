@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Vic Stone
+Title=Vic Stone
+Icon=Vic Stone.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Achim_Noffke_-_Temur_Adventures_(Standard,_#1145204).dck
+Deck Type=constructed
+
+[Main]
+2 Koma, Cosmos Serpent
+3 Llanowar Visionary
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+2 Fire Prophecy
+4 Decisive Denial
+1 Shatterskull Smashing
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+1 Temple of Abandon
+1 Temple of Mystery
+1 Forest
+2 Mountain
+2 Island
+3 Fabled Passage
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Ketria Triome
+4 Barkchannel Pathway
+[Sideboard]
+2 Fire Prophecy
+2 Klothys, God of Destiny
+2 Mystical Dispute
+2 Redcap Melee
+2 Test of Talents
+2 The Akroan War
+3 Ox of Agonas

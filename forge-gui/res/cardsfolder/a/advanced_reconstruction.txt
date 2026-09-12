@@ -1,0 +1,15 @@
+Name:Advanced Reconstruction
+ManaCost:3 R
+Types:Enchantment Class
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your first main phase, mill a card, then exile a card from your graveyard at random. You may play the exiled card this turn.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Hidden$ True | AtRandom$ True | ChangeType$ Card | ChangeNum$ 1 | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Class:2:1 R:AddTrigger$ LeaveTrigger
+SVar:LeaveTrigger:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever one or more cards leave your graveyard, this Class deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+K:Class:3:1 R:AddStaticAbility$ SReduceCost
+SVar:SReduceCost:Mode$ ReduceCost | ValidCard$ Card.!wasCastFromYourHand | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells you cast from anywhere other than your hand cost {2} less to cast.
+Oracle:(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your first main phase, mill a card, then exile a card from your graveyard at random. You may play the exiled card this turn.\n{1}{R}: Level 2\nWhenever one or more cards leave your graveyard, this Class deals 2 damage to each opponent.\n{1}{R}: Level 3\nSpells you cast from anywhere other than your hand cost {2} less to cast.

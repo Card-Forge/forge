@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="170">
+ <editorsettings>
+  <export target="waste_town.abandoned.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="30977" source="../../../../common/maps/tileset/rivers-nocolide.tsx"/>
+ <tileset firstgid="48257" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmUsOgjAURTt3pK7D/4e6BHfEx6hxCRrjKlyGiS7EgbuQFyBpCIUCr320YXCDA0zuyX23H/UHjPkd1pIzdvLofWDovqP30FbHOIvxlt5Hn0WiH6f3gCGXeg4sn7gj3/QJEtlGlvXnGSVP6P48ZTrHnx+WdQhyecfeV7nOTBzqELUHLGW9iRxaE/YhY0PLul/G48p6ffDcYIEzjQvnGmCA+bK9K9m+UieTiyCVd8R3q77XVK9tkgVW54v8y5iwBQywp2D0hJIjy2Uh2fNVvclmyMRciZLloeJRlcUEx7SkI00yoZgrkSW/BmMzmGKBPX7D1TjacOpkgPvXLNd3XRy6WK4BY7dAfzd0ZgE55O+QOnl0cdS996p6NckRFnSiiqGMq4pbVxZY53YTa6lMmL8NU3HUnaeucmDfA3uOngMUIP9OQsVRdLa1kQOEOVtUHGuO+7+iKY4/AhwTSA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVmUtuFDEQQN2JFNSfyRUadlnAFUAhDJwAIdad3IPAERDrBimARsoBWHAEjhAklGHWLBCsaccuUVNy2eXPJJOSrOnumS77uVwfe5SKk6FR6nhqDzuldtr1tttGKouUcdJ/0ZXpp7Jj/t4ZnTvo/sOGOaD/R1NfJ02eHj0n71szZriG++uQkja5aQGb6PWda5ebFFgH2i6uNQY+fFsYR2ZNV9for5uUiomdZ7VSdwLtU+3W6Xv3o0AvbgdTuwyslcHmhNQ4cMjo556HvksVbq2BhHznR+OeQ9/8hThK++uA8nepuH2+7+eAPkv560BqkJL5x8dROuZAHQLNlX++PTAtVjgOmLsS9QfWR+tBbBdgKMlROfrJEWoLqAdpPPDFSl9s5WJAaQ6oyXJq81BMejHz9+vqzxXHvu6axknV8rX5W+ad3zP1SsrBiS8PACf4qm7AwfHk1ubA8ZPhwc9X6Jqbo8Hage6DKIfPNimiOdratJC8FswT1Ow4n432vRiOZWPm8CnzSa8fM3neVZ/d62QcEGvoGonhWNRm3urp8273vzW1aXCtP7UNtD0mf7lietaYd3Wbo3t9LfWjkVnfsesKON4QXSvHOPrOjK/xMGNelw6pxHKctuscv+77fy+ZZ+CdZ7DEcvR2/jSHZF9yJPSPJzYefBbEAymHZG09n/FzXaOxSOzx1+paOBhehl+/kpSYu7D24MY4R8+l/pu7p0rhOEUx5sueUnue92I4QvkDcmApAR/h9oAp/nFpOd6huhnGjc9iS5+/9SSGaq45yYUra7Mleo5/A7FpaXNJTXIhzd059a90j9x36zkCuA7RGHH+wNwuBryvhdydc/6Kz1Nj1meP8hsdI3yP8z/9fhPnuNi+MXvNheWguT+m31Icrr2tVHcuB1dLpeqCM2HgkOrO5Sgp9P+nmPnZJg5sjxAD3Wvncvxx7N1zZUwYyzbZI0e2jSP1vHjbOPA5SwyLlEP7Va4v/AOEiOo1
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="50" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEtOwzAQhgfRQoNUVuyygGUiNQsEF2AFF2DBUdig3CFF6hmAAyDOUI4AQj0Djw0LYoIVM4yTsR0nQeknWXVUJ5nf87AdgDVreCwOIO3ahi64HwGE/7Q9jEod52Na33zifw4Pg9/Xd7tm96u2q/1sYh+Twga1mXCZFK3uvqcI4Dkqr3U6fCDs42Cj30THyU45Xzr7HhO6UdyG5vZi5P0cHVubRRM6mkDmm23sUXB0XE2L36Z0qLSlI1NqlS6uXMHPyyzqI6UjDuixPvwhMZkfah0wzXMdy9yGBUDKtedoBnA8qx9Xx2qv+MU6qnz6kuvYDqpbV7S5fvjERMdN6PYun/ubKh35frmSZcN1ywWOP3DOuNZ7NcdlXzxT9m3quk6HrAO26GLIlw/7kufYxz73iTbxtNowG/+5b/4OQVP+oGL+Ovm73lHjxL4Xj/PpDw4i/nU5UPWfK7Y61H1q3dxd/OyXP6a8Z1PrlPoO6n02Ot54w75p42wv0OnAmqOgaDrkWUvEzWkMcBYX+YGh8gP3behL3VUR+qk5wORrXCr7VTrwtxgdJrmrG6vLMe6ZytUfnPivs6Wt8zkXztxx98wu68fr2O/3SoGvb6/vhj7Ac14XV9jHfaklpgxRR1trpg1D9IdK33wzdH/0jbZ1fAHz74UH
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt11EKgkAQBuCBIPDF1zqC0todOkrdooeEDtEtvIS9d6cUCRZ3tLE2nd3+Dwb2YRVnnFlYIgAAmSp1Y4pz0cU7dUZ0zz77Rgkuj6m5aPEo3AB/1qsuYiKdwxBcD37f96qNpvpIv2djiLbGfVYT3/8L4J/YMz60DsVt5GzSdm7Bcrg+b3un3/MhzIbd8+16aAb6+7j1LxybOp2U1OoblyaHMoI8JOw7yi4nMjm/T/t8cHetfcLvXWo+5jZ2RoQkhhwAAAAAnrkdLFU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="330" y="640" width="126" height="29"/>
+  <object id="123" template="../../../../common/maps/obj/inn.tx" x="312.667" y="436"/>
+  <object id="128" template="../../../../common/maps/obj/shop.tx" x="448.667" y="226">
+   <properties>
+    <property name="commonShopList" value="TRKShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/shardtrader.tx" x="254.667" y="438"/>
+  <object id="143" template="../../../../common/maps/obj/dialog.tx" x="359.167" y="528.75" width="65.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Through the shimmering portal is what seems to be a normal, if decaying town. However, the folks operating the strange shops in this place are from other worlds... Universes Beyond your own, you could say.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="154" template="../../../../common/maps/obj/shop.tx" x="480" y="305">
+   <properties>
+    <property name="commonShopList" value="CLBShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/shop.tx" x="512.5" y="435.5">
+   <properties>
+    <property name="commonShopList" value="40KShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="156" template="../../../../common/maps/obj/shop.tx" x="466" y="437">
+   <properties>
+    <property name="commonShopList" value="WHOShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="157" template="../../../../common/maps/obj/shop.tx" x="417" y="435">
+   <properties>
+    <property name="commonShopList" value="LTRShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="158" template="../../../../common/maps/obj/shop.tx" x="417" y="370.5">
+   <properties>
+    <property name="commonShopList" value="FINShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/shop.tx" x="513.5" y="370">
+   <properties>
+    <property name="commonShopList" value="PIPShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="160" template="../../../../common/maps/obj/shop.tx" x="463.5" y="371">
+   <properties>
+    <property name="commonShopList" value="ACRShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="161" template="../../../../common/maps/obj/shop.tx" x="355" y="370.5">
+   <properties>
+    <property name="commonShopList" value="TLAShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="162" template="../../../../common/maps/obj/shop.tx" x="305" y="371.5">
+   <properties>
+    <property name="commonShopList" value="SPMShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/shop.tx" x="256.5" y="369">
+   <properties>
+    <property name="commonShopList" value="TMTShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/shop.tx" x="433" y="306.5">
+   <properties>
+    <property name="commonShopList" value="MSHShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/shop.tx" x="528" y="306">
+   <properties>
+    <property name="commonShopList" value="HOBShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="168" template="../../../../common/maps/obj/treasure.tx" x="342.864" y="497.182">
+   <properties>
+    <property name="reward">[
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Otherworldly Return Card&quot;
+ }
+]
+</property>
+   </properties>
+  </object>
+  <object id="169" template="../../../../common/maps/obj/shop.tx" x="119.667" y="401.667" width="13.6667" height="16">
+   <properties>
+    <property name="commonShopList" value="UBSLDShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

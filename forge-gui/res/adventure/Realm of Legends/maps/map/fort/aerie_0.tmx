@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="150">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="151">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -92,6 +92,8 @@
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Aerie Mystics|C13&quot;, &quot;Animal Sanctuary|M21&quot;, &quot;Pit Trap|ICE&quot;, &quot;Soulcatchers' Aerie|JUD&quot;, &quot;Leonin Bladetrap&quot;]}"/>
     <property name="enemy" value="Derevi"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -220,7 +222,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 ]</property>
    </properties>
   </object>
-  <object id="144" template="../../../../common/maps/obj/dialog.tx" x="373.752" y="346.817" width="56" height="66.496" rotation="269.646" visible="1">
+  <object id="144" template="../../../../common/maps/obj/dialog.tx" x="383.57" y="346.453" width="56" height="66.496" rotation="269.646" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -268,6 +270,24 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 	}
 ]</property>
     <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="150" template="../../../../common/maps/obj/enemy.tx" x="324.182" y="324">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With your final blow, the bird wizard plummets to the ground, colliding with a sickening thud. 
+
+'Outmaneuvered... how fascinating...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Animal Sanctuary|M21&quot;, &quot;Pit Trap|ICE&quot;, &quot;Soulcatchers' Aerie|JUD&quot;]}"/>
+    <property name="enemy" value="Derevi"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/LemonadeQQ_-_Izzet_Ral_(Standard,_#2379310).dck
+Deck Type=constructed
+
+[Main]
+4 Thundertrap Trainer
+4 Monument to Endurance
+2 Spell Pierce
+4 Opt
+4 Torch the Tower
+4 This Town Ain't Big Enough
+4 Sleight of Hand
+2 Ill-Timed Explosion
+4 Stormchaser's Talent
+4 Artist's Talent
+2 Roaring Furnace // Steaming Sauna
+1 Ral, Crackling Wit
+6 Island
+2 Mountain
+4 Shivan Reef
+1 Thundering Falls
+4 Spirebluff Canal
+4 Riverpyre Verge
+[Sideboard]
+3 Pyroclasm
+2 Negate
+2 Tishana's Tidebinder
+1 Ill-Timed Explosion
+2 Ral, Crackling Wit
+2 Ghost Vacuum
+2 Broadside Barrage
+1 Defabricate

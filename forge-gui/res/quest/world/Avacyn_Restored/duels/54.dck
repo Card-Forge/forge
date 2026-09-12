@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/PPTQ_Comics_Collection_-_Catania,_Italy/Angelo_Schembri_-_Infect_(Modern,_#299774).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+3 Ichorclaw Myr
+4 Noble Hierarch
+2 Spellskite
+3 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+1 Spell Pierce
+4 Vines of Vastwood
+4 Distortion Strike
+1 Wild Defiance
+3 Breeding Pool
+3 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+2 Dismember
+2 Dispel
+1 Dryad Arbor
+3 Nature's Claim
+2 Viridian Corrupter

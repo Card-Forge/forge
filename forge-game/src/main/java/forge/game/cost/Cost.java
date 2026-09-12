@@ -71,7 +71,18 @@ public class Cost implements Serializable {
     }
 
     public final boolean hasManaCost() {
-        return !this.hasNoManaCost();
+        return this.getCostMana() != null;
+    }
+
+    public final boolean isFree() {
+        return isOnlyManaCost() && getTotalMana().isZero();
+    }
+
+    /**
+     * CR 605.1a: true when paying this cost moves any card to or from a library.
+     */
+    public final boolean movesCardToOrFromLibrary() {
+        return LibraryMovementCostVisitor.movesCardToOrFromLibrary(this);
     }
 
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
@@ -316,6 +327,11 @@ public class Cost implements Serializable {
             final String target = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             return new CostPutCounter(splitStr[0], CounterType.getType(splitStr[1]), target, description);
+        }
+
+        if (parse.startsWith("AddCounterYou<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostPutCounterYou(splitStr[0], CounterType.getType(splitStr[1]));
         }
 
         // While no card has "PayLife<2> PayLife<3> there might be a card that
@@ -588,6 +604,11 @@ public class Cost implements Serializable {
             return new CostBlight(splitStr[0]);
         }
 
+        if (parse.startsWith("Teamwork<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostTeamwork(splitStr[0]);
+        }
+
         if (parse.equals("Forage")) {
             return new CostForage();
         }
@@ -853,14 +874,14 @@ public class Cost implements Serializable {
             boolean append = true;
             if (!first) {
                 if (part instanceof CostPartMana) {
-                    cost.insert(0, ", ").insert(0, part.toString());
+                    cost.insert(0, ", ").insert(0, part);
                     append = false;
                 } else {
                     cost.append(", ");
                 }
             }
             if (append) {
-                cost.append(part.toString());
+                cost.append(part);
             }
             first = false;
         }
@@ -872,8 +893,7 @@ public class Cost implements Serializable {
         return cost.toString();
     }
 
-    // TODO: If a Cost needs to pay more than 10 of something, fill this array
-    // as appropriate
+    // TODO: If a Cost needs to pay more than 10 of something, fill this array as appropriate
     /**
      * Constant.
      * <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code>

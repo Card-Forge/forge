@@ -75,7 +75,7 @@ ScryfallCode=9ED
 59 U Annex @John Avon
 60 R Archivist @Donato Giancola
 61 C Aven Fisher @Christopher Moeller
-62 C Aven Windreader @Greg Hildebrandt & Tim Hildebrandt
+62 C Aven Windreader @Greg Hildebrandt
 63 U Azure Drake @Janine Johnston
 64 U Baleful Stare @Randy Gallegos
 65 R Battle of Wits @Edward P. Beard, Jr.

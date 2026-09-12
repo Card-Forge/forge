@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Mtyrant_-_Mono_Blue_Tron_(Modern,_#2537636).dck
+Deck Type=constructed
+
+[Main]
+4 Subtlety
+1 Summon: Bahamut
+4 Emrakul, the Aeons Torn
+4 Talisman of Dominance
+4 Expedition Map
+4 Kozilek's Command
+2 Sink into Stupor
+4 Force of Negation
+4 Portent of Calamity
+4 Stock Up
+1 One with the Multiverse
+2 Ugin, Eye of the Storms
+1 Ugin, the Spirit Dragon
+5 Island
+3 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Otawara, Soaring City
+[Sideboard]
+1 Soulless Jailer
+4 Stern Scolding
+4 Consign to Memory
+1 Boseiju, Who Shelters All
+4 Dismember
+1 Mystical Dispute

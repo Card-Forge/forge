@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Aaron_Skinner_-_Bant_Spirits_(Modern,_#1346736).dck
+Deck Type=constructed
+
+[Main]
+1 Cemetery Illuminator
+2 Selfless Spirit
+2 Shacklegeist
+3 Rattlechains
+4 Spell Queller
+4 Drogskol Captain
+4 Skyclave Apparition
+4 Supreme Phantom
+4 Mausoleum Wanderer
+4 Noble Hierarch
+3 Aether Vial
+4 Collected Company
+1 Boseiju, Who Endures
+1 Island
+1 Plains
+1 Temple Garden
+1 Breeding Pool
+1 Hallowed Fountain
+1 Forest
+1 Horizon Canopy
+1 Waterlogged Grove
+1 Moorland Haunt
+2 Botanical Sanctum
+2 Windswept Heath
+3 Cavern of Souls
+4 Flooded Strand
+[Sideboard]
+1 Kira, Great Glass-Spinner
+1 Ashiok, Dream Render
+2 Force of Negation
+2 Sanctifier en-Vec
+2 Kataki, War's Wage
+2 Auriok Champion
+2 Teferi, Time Raveler
+3 Path to Exile

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/Danny_Lehmann_-_Mono-Blue_Tempo_(Standard,_#1542061).dck
+Deck Type=constructed
+
+[Main]
+1 Tolarian Terror
+3 Delver of Secrets
+4 Haughty Djinn
+3 Ertai's Scorn
+3 Make Disappear
+3 Consider
+3 Essence Scatter
+3 Thirst for Discovery
+3 Negate
+4 Impulse
+4 Syncopate
+4 Fading Hope
+1 Otawara, Soaring City
+21 Island
+[Sideboard]
+1 Delver of Secrets
+1 Essence Scatter
+1 Ertai's Scorn
+1 Lier, Disciple of the Drowned
+3 Tolarian Terror

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Linden_43_-_Rakdos_Midrange_(Standard,_#1975299).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Deep-Cavern Bat
+4 Sheoldred, the Apocalypse
+4 Preacher of the Schism
+2 Hidetsugu Consumes All
+2 Aclazotz, Deepest Betrayal
+4 Inti, Seneschal of the Sun
+3 Gix, Yawgmoth Praetor
+4 Go for the Throat
+2 Cut Down
+2 Duress
+4 Cavern of Souls
+4 Haunted Ridge
+4 Swamp
+4 Sulfurous Springs
+1 Sokenzan, Crucible of Defiance
+2 Blackcleave Cliffs
+4 Restless Vents
+2 Takenuma, Abandoned Mire
+[Sideboard]
+2 Duress
+2 Reckless Stormseeker
+2 Unlicensed Hearse
+1 Obliterating Bolt
+1 Blot Out
+1 Brotherhood's End
+2 Hidetsugu Consumes All
+4 Liliana of the Veil

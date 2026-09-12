@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Robot95
+Title=Robot95
+Icon=Bushwhacked.jpg
+Difficulty=Very Hard
+Description=Mono Black 
+Deck Type=constructed
+
+[Main]
+4 Bone Picker
+4 Dread Wanderer
+2 Gifted Aetherborn
+4 Night Market Lookout
+4 Ruin Raider
+4 Scrapheap Scrounger
+3 Vicious Conquistador
+1 Aethersphere Harvester
+4 Heart of Kiran
+4 Fatal Push
+2 Harsh Scrutiny
+3 Walk the Plank
+2 Dunes of the Dead
+4 Ifnir Deadlands
+15 Swamp
+[Sideboard]
+2 Aethersphere Harvester
+4 Duress
+2 Gifted Aetherborn
+1 Harsh Scrutiny
+1 Key to the City
+4 Kitesail Freebooter
+1 Walk the Plank

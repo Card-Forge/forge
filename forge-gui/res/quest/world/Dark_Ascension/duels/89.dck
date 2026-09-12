@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/Uguzzone_si_Modern(izza)_II/Claudio_Ke_-_Faeries_(Modern,_#32947).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+4 Vendilion Clique
+1 Relic of Progenitus
+1 Sword of Fire and Ice
+3 Vedalken Shackles
+4 Cryptic Command
+3 Mana Leak
+3 Remand
+4 Spell Snare
+1 Academy Ruins
+1 Faerie Conclave
+17 Island
+4 Mutavault
+2 Tectonic Edge
+[Sideboard]
+3 Annul
+3 Dispel
+1 Echoing Truth
+1 Grafdigger's Cage
+3 Ratchet Bomb
+2 Spreading Seas

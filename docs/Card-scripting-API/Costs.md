@@ -10,7 +10,15 @@ For the more common cost variants the Forge engine should then be able to provid
 If that's still not good enough just hardcode the whole cost text with `CostDesc$ {String}`.
 Add `PrecostDesc$ {String}` if the card has additional flavor text that should be included.
 
-The more interesting parts are detailed below.
+If a cost contains an X that's free to announce the script needs this definition:  
+`SVar:X:Count$xPaid`
+
+This can be refined further with
+- `XMin/XMax$ {Count}` - for the few cards with rules text limiting X
+- `AIXMax$ {Count}` - useful for abilities where higher X doesn't result in a greater effect. Can reference X for a relative value, e.g. on *Green Sun's Zenith* AI will not default to spending all available mana:  
+`Count$ValidLibrary Creature.YouOwn+Green+cmcLEX$GreatestCardManaCost`
+
+The more interesting cost parts are detailed below.
 
 # Discard
 `Discard<Num/Type/Description>`

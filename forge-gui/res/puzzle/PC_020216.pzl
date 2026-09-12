@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 020216 - Zookeeper
 URL:http://www.gatheringmagic.com/seanuy-020216-zookeeper/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=Human

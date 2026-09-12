@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/SCG_Classic_Atlanta/Justin_Parente_-_U-B_Faeries_(Modern,_#656932).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Mistbind Clique
+4 Spellstutter Sprite
+3 Vendilion Clique
+4 Cryptic Command
+1 Doom Blade
+3 Mana Leak
+1 Murderous Cut
+1 Smother
+2 Spell Snare
+1 Victim of Night
+4 Ancestral Vision
+3 Collective Brutality
+2 Inquisition of Kozilek
+4 Bitterblossom
+3 Creeping Tar Pit
+2 Darkslick Shores
+3 Island
+4 Mutavault
+4 Polluted Delta
+1 River of Tears
+4 Secluded Glen
+1 Swamp
+2 Watery Grave
+[Sideboard]
+2 Damnation
+1 Disfigure
+1 Dispel
+2 Engineered Explosives
+2 Grafdigger's Cage
+1 Liliana of the Veil
+2 Ravenous Trap
+3 Spreading Seas
+1 Thoughtseize

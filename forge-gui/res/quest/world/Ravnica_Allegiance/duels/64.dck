@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Andrea_Feo_-_Merfolks_(Modern,_#791124).dck
+Deck Type=constructed
+
+[Main]
+4 Silvergill Adept
+2 Merrow Reejerey
+4 Lord of Atlantis
+2 Master of Waves
+4 Benthic Biomancer
+4 Master of the Pearl Trident
+2 Mistcaller
+4 Merfolk Trickster
+4 Aether Vial
+1 Cryptic Command
+1 Echoing Truth
+3 Wizard's Retort
+2 Vapor Snag
+1 Spell Pierce
+2 Spreading Seas
+17 Island
+2 Mutavault
+1 Oboro, Palace in the Clouds
+[Sideboard]
+1 Echoing Truth
+4 Relic of Progenitus
+2 Damping Sphere
+1 Spellskite
+3 Dismember
+2 Negate
+2 Ceremonious Rejection

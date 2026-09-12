@@ -53,17 +53,19 @@ import java.util.stream.Collectors;
 public class BoosterDraft implements IBoosterDraft {
 
     private int nextId = 0;
-    private static final int N_PLAYERS = 8;
+    public static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
 
     int podSize;
     private final List<LimitedPlayer> players = new ArrayList<>();
-    private final LimitedPlayer localPlayer;
+    private LimitedPlayer localPlayer;
     private boolean readyForComputerPick = false;
 
     private IDraftLog draftLog = null;
 
     private boolean shouldShowDraftLog = false;
+    private boolean forNetwork = false;
+    private String productName;
 
     private DraftOptions.DoublePick doublePickDuringDraft;
     protected int nextBoosterGroup = 0;
@@ -88,6 +90,23 @@ public class BoosterDraft implements IBoosterDraft {
         return draft;
     }
 
+    /**
+     * Create a draft for network play. Product is generated but boosters are NOT
+     * initialized — the caller must configure pod size and human seats, then call
+     * {@link #initializeBoosters()} manually.
+     *
+     * @param draftType the draft pool type
+     * @return a partially-initialized draft, or null if product generation fails
+     */
+    public static BoosterDraft createDraftForNetwork(final LimitedPoolType draftType) {
+        final BoosterDraft draft = new BoosterDraft(draftType);
+        draft.forNetwork = true;
+        if (!draft.generateProduct()) {
+            return null;
+        }
+        return draft;
+    }
+
     protected boolean generateProduct() {
         switch (this.draftFormat) {
             case Full: // Draft from all cards in Forge
@@ -107,8 +126,14 @@ public class BoosterDraft implements IBoosterDraft {
                         ? FModel.getBlocks()
                         : FModel.getFantasyBlocks();
 
+                // TODO Conspiracy blocks gated for network draft: pack-effect prompts
+                // (Agent of Acquisitions, Cogwork Librarian, etc.) pop on the host, the
+                // conspiracy player-flag state isn't replicated to clients, and the draft
+                // log isn't shipped over the wire. Custom/Chaos/Import paths can still
+                // smuggle CNS cards in — fix those when the underlying issues are resolved.
                 for (final CardBlock b : storage) {
                     if (b.getCntBoostersDraft() > 0) {
+                        if (forNetwork && b.getName().contains("Conspiracy")) continue;
                         blocks.add(b);
                     }
                 }
@@ -117,6 +142,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (block == null) {
                     return false;
                 }
+                this.productName = block.getName();
 
                 final List<CardEdition> cardSets = block.getSets();
                 final Stack<String> sets = new Stack<>();
@@ -151,6 +177,7 @@ public class BoosterDraft implements IBoosterDraft {
                         return false;
                     }
 
+                    this.productName = block.getName() + " (" + p + ")";
                     final String[] pp = p.toString().split("/");
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(block.getBooster(pp[i]));
@@ -158,6 +185,7 @@ public class BoosterDraft implements IBoosterDraft {
                 } else {
                     // Only one set is chosen. If that set lets you draft 2 cards to start adjust draft settings now
                     String setCode = sets.get(0);
+                    this.productName = block.getName() + " (" + setCode + ")";
                     CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
                     // If this is metaset, edtion will be null
                     if (edition != null) {
@@ -165,7 +193,7 @@ public class BoosterDraft implements IBoosterDraft {
                             // Auto choosing recommended pod size. In the future we may want to allow user to choose
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
-                        doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
+                        doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
                     }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
@@ -192,6 +220,7 @@ public class BoosterDraft implements IBoosterDraft {
                         return false;
                     }
 
+                    this.productName = customDraft.getName();
                     this.setupCustomDraft(customDraft);
                 }
                 break;
@@ -217,6 +246,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (theme == null) {
                     return false; // abort if no theme is selected
                 }
+                this.productName = theme.getLabel();
                 // Filter all sets by theme restrictions
                 final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
@@ -260,6 +290,7 @@ public class BoosterDraft implements IBoosterDraft {
                         SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + inputCubeId);
                         return false;
                     }
+                    this.productName = importedDraft.getName();
                     this.setupCustomDraft(importedDraft);
                 } catch (Exception e) {
                     SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblErrorImportingCube") + ": " + e.getMessage());
@@ -290,7 +321,7 @@ public class BoosterDraft implements IBoosterDraft {
             if (newPodSize != draft.getPodSize()) {
                 draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
             }
-            draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
+            draft.doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
         }
 
         for (String booster : boosters) {
@@ -349,8 +380,71 @@ public class BoosterDraft implements IBoosterDraft {
         }
     }
 
+    /**
+     * Authoritatively set which seats are human-controlled. Seats in {@code humanSeats}
+     * become {@link LimitedPlayer} instances; all other seats become {@link LimitedPlayerAI}.
+     * The constructor seeds seat 0 as a local human by default for single-player use —
+     * network drafts must call this to reassign according to the shuffled seat layout,
+     * which may place the host at a different seat.
+     *
+     * <p>Must be called before {@link #initializeBoosters()} so pack state is allocated
+     * against the final seat configuration. Only network drafts call this; single-player
+     * code leaves seat 0 as the default human.
+     *
+     * @param humanSeats seat indices (0-based) that should be human-controlled
+     */
+    public void setHumanSeats(Set<Integer> humanSeats) {
+        for (int seat = 0; seat < players.size(); seat++) {
+            boolean shouldBeHuman = humanSeats.contains(seat);
+            LimitedPlayer current = players.get(seat);
+            if (shouldBeHuman && current instanceof LimitedPlayerAI) {
+                players.set(seat, new LimitedPlayer(seat, this));
+            } else if (!shouldBeHuman && !(current instanceof LimitedPlayerAI)) {
+                players.set(seat, new LimitedPlayerAI(seat, this));
+            }
+        }
+        // Keep localPlayer consistent with whatever occupies seat 0 now.
+        this.localPlayer = players.get(0);
+    }
+
+    /** Returns the total number of booster rounds in this draft. */
+    public int getNumRounds() {
+        return product.size();
+    }
+
+    /** Human-readable name of the chosen block / theme / cube (null for Full). */
+    public String getProductName() {
+        return productName;
+    }
+
     public int getPodSize() {
         return this.podSize;
+    }
+
+    public void setDoublePick(DraftOptions.DoublePick doublePick) {
+        this.doublePickDuringDraft = doublePick;
+    }
+
+    /** The pick rule as the set declared it, before resolving against a pod size. */
+    public DraftOptions.DoublePick getDoublePick() {
+        return this.doublePickDuringDraft;
+    }
+
+    /**
+     * True when the pick rule gives this player another card from the pack they just
+     * picked from. Call after {@link LimitedPlayer#draftCard} has counted the pick.
+     * Keyed on the player's own count so the network host, where seats do not pick in
+     * lockstep, gets the same answer as offline play.
+     */
+    public boolean keepsPackAfterPick(LimitedPlayer player) {
+        DraftOptions.DoublePick rule = this.doublePickDuringDraft == null
+                ? DraftOptions.DoublePick.NEVER
+                : this.doublePickDuringDraft.resolve(this.podSize);
+        return switch (rule) {
+            case FIRST_PICK -> player.draftedThisRound == 1;
+            case ALWAYS -> player.draftedThisRound % 2 == 1;
+            default -> false;
+        };
     }
 
     @Override
@@ -391,7 +485,19 @@ public class BoosterDraft implements IBoosterDraft {
 
         final SealedTemplate tpl = draft.getSealedProductTemplate();
 
-        // TODO Determine PodSize from custom draft
+        int players = draft.getNumPlayers();
+        final int minPlayers = 2;
+        final int maxPlayers = 8;
+
+        // Check if numPlayers is set in draft file, if not default to 8.
+        if (players == 0) {
+            players = N_PLAYERS;
+        } else {
+            players = Math.max(players, minPlayers);
+            players = Math.min(players, maxPlayers);
+        }
+
+        setPodSize(players);
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
@@ -500,7 +606,6 @@ public class BoosterDraft implements IBoosterDraft {
         if (firstPlayer.unopenedPacks.isEmpty()) {
             return false;
         }
-        // todo set pick two logic  for this booster group
 
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
@@ -548,13 +653,6 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
-        if (DraftOptions.DoublePick.FIRST_PICK.equals(this.doublePickDuringDraft) && currentBoosterPick == 0) {
-            adjust = 0;
-        } else if (currentBoosterPick % 2 == 0 && DraftOptions.DoublePick.ALWAYS.equals(this.doublePickDuringDraft)) {
-            // This may not work with Conspiracy cards that mess with the draft
-            // But it probably doesn't matter since Conspiracy doesn't have double pick?
-            adjust = 0;
-        }
 
         // Do any players have a Canal Dredger?
         List<LimitedPlayer> dredgers = new ArrayList<>();
@@ -602,7 +700,9 @@ public class BoosterDraft implements IBoosterDraft {
             }
 
             if (passToPlayer == null) {
-                passToPlayer = this.players.get((i + adjust + this.podSize) % this.podSize);
+                passToPlayer = keepsPackAfterPick(pl)
+                        ? pl
+                        : this.players.get((i + adjust + this.podSize) % this.podSize);
             }
 
             assert(!toPass.containsKey(passingPack));

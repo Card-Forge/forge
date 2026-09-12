@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/CaboGrosso_-_Mill_(Modern,_#1975458).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+4 Archive Trap
+4 Drown in the Loch
+4 Surgical Extraction
+1 Spell Pierce
+4 Fatal Push
+3 Visions of Beyond
+4 Fractured Sanity
+3 Glimpse the Unthinkable
+2 Tasha's Hideous Laughter
+1 Jace, the Perfected Mind
+5 Island
+4 Field of Ruin
+1 Swamp
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+4 Polluted Delta
+2 Undercity Sewers
+1 Watery Grave
+3 Scalding Tarn
+[Sideboard]
+2 Crypt Incursion
+3 Cursed Totem
+1 Emrakul, the Aeons Torn
+2 Ensnaring Bridge
+2 Extirpate
+1 Ghost Quarter
+2 Mystical Dispute
+2 Nihil Spellbomb

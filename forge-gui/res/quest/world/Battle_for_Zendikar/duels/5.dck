@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Fred Flintstone
+Title=Fred Flintstone
+Icon=Fred Flintstone.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/States_Des_Moines/Ben_Miller_-_R-G_Landfall_(Standard,_#332012).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Abbot of Keral Keep
+1 Chandra, Fire of Kaladesh
+4 Makindi Sliderunner
+4 Monastery Swiftspear
+4 Scythe Leopard
+4 Snapping Gnarlid
+3 Zurgo Bellstriker
+4 Atarka's Command
+2 Titan's Strength
+4 Wild Slash
+2 Exquisite Firecraft
+1 Retreat to Valakut
+4 Bloodstained Mire
+2 Cinder Glade
+3 Forest
+7 Mountain
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Boiling Earth
+3 Flamewake Phoenix
+1 Goblin Heelcutter
+2 Outpost Siege
+2 Retreat to Kazandu
+2 Sarkhan, the Dragonspeaker
+3 Thunderbreak Regent

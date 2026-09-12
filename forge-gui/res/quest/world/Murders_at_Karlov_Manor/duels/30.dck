@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kangee
+Title=Kangee
+Icon=Kangee.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Anthony_Lajom_-_Mono_White_Toxic_(Standard,_#1975918).dck
+Deck Type=constructed
+
+[Main]
+2 Annex Sentry
+4 Crawling Chorus
+4 Jawbone Duelist
+4 Skrelv, Defector Mite
+3 Charge of the Mites
+4 Get Lost
+1 Expel the Interlopers
+2 White Sun's Twilight
+3 Ossification
+4 Skrelv's Hive
+4 Tocasia's Welcome
+4 Mirrex
+17 Plains
+4 The Seedcore
+[Sideboard]
+2 Destroy Evil
+3 Doorkeeper Thrull
+2 Expel the Interlopers
+2 Knockout Blow
+2 Lantern Flare
+1 Serra Paragon
+2 Welcoming Vampire
+1 White Sun's Twilight

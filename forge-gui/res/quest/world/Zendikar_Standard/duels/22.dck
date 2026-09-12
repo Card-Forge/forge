@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Medium
+Description=Zendikar/Canadian_States_2009_-_Manitoba/Taylor_Woodcock_-_Naya_Lightsaber_(Standard,_#3249).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Bloodbraid Elf
+4 Noble Hierarch
+4 Ranger of Eos
+1 Scute Mob
+4 Wild Nacatl
+4 Woolly Thoctar
+4 Lightning Bolt
+4 Path to Exile
+3 Ajani Vengeant
+4 Arid Mesa
+4 Forest
+3 Mountain
+1 Oran-Rief, the Vastwood
+4 Plains
+4 Rootbound Crag
+4 Sunpetal Grove
+[Sideboard]
+2 Burst Lightning
+4 Celestial Purge
+4 Goblin Ruinblaster
+4 Great Sable Stag

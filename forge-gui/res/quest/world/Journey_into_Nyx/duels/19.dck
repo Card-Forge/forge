@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/States-Champs_Montana/Eric_Dennis_-_Esper_Control_(Standard,_#74282).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+3 Dissolve
+1 Doom Blade
+3 Hero's Downfall
+4 Sphinx's Revelation
+1 Syncopate
+3 Ultimate Price
+4 Supreme Verdict
+2 Thoughtseize
+1 Banishing Light
+4 Detention Sphere
+3 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+3 Godless Shrine
+4 Hallowed Fountain
+2 Island
+3 Mutavault
+4 Temple of Deceit
+4 Temple of Enlightenment
+3 Temple of Silence
+3 Watery Grave
+[Sideboard]
+2 Dark Betrayal
+1 Deicide
+2 Drown in Sorrow
+2 Duress
+2 Gainsay
+3 Nyx-Fleece Ram
+1 Obzedat, Ghost Council
+1 Pithing Needle

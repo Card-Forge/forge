@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/James_Williams_-_Mono-White_Aggro_(Modern,_#1619926).dck
+Deck Type=constructed
+
+[Main]
+4 Stoneforge Mystic
+3 Spellskite
+4 Puresteel Paladin
+4 Memnite
+4 Ornithopter
+3 Skrelv, Defector Mite
+3 Esper Sentinel
+1 Gingerbrute
+4 Colossus Hammer
+1 Nettlecyst
+1 Cranial Plating
+1 Shadowspear
+1 Tormod's Crypt
+4 Surge of Salvation
+4 Sigarda's Aid
+4 Urza's Saga
+10 Plains
+4 Marsh Flats
+[Sideboard]

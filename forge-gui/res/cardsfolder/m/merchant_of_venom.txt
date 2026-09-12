@@ -1,0 +1,11 @@
+Name:Merchant of Venom
+ManaCost:3 B
+Types:Creature Cat Warlock
+PT:1/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature enters, each player sacrifices a creature of their choice.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature
+T:Mode$ Sacrificed | ValidCard$ Permanent | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player sacrifices a permanent, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:NeedsToPlay:Creature.YouDontCtrl
+Oracle:Menace\nWhen this creature enters, each player sacrifices a creature of their choice.\nWhenever a player sacrifices a permanent, put a +1/+1 counter on this creature.

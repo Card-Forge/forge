@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Austin_Brush_-_Mono-Blue_Merfolk_(Modern,_#2821044).dck
+Deck Type=constructed
+
+[Main]
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Tide Shaper
+4 Vodalian Hexcatcher
+3 Merfolk Trickster
+3 Silvergill Adept
+2 Harbinger of the Seas
+2 Tishana's Tidebinder
+1 Svyelun of Sea and Sky
+1 Sygg, Wanderwine Wisdom
+4 Aether Vial
+4 Counterspell
+4 Force of Negation
+1 Flare of Denial
+1 Sink into Stupor
+11 Island
+4 Cavern of Souls
+2 Mutavault
+1 Otawara, Soaring City
+[Sideboard]
+4 Mistcaller
+3 Spell Pierce
+2 Consign to Memory
+2 Master of Waves
+2 Tishana's Tidebinder
+1 Harbinger of the Seas
+1 Kopala, Warden of Waves

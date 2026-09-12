@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Easy
+Description=Innistrad/Grand_Prix_Hiroshima/Koutarou_Senba_-_U-W_Aggro_(Standard,_#21733).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+4 Elite Vanguard
+4 Fiend Hunter
+1 Geist-Honored Monk
+4 Grand Abolisher
+4 Hero of Bladehold
+4 Mirran Crusader
+4 Mana Leak
+4 Honor of the Pure
+4 Glacial Fortress
+4 Moorland Haunt
+11 Plains
+4 Seachrome Coast
+[Sideboard]
+3 Celestial Purge
+3 Dismember
+4 Leonin Arbiter
+2 Oblivion Ring
+3 Shrine of Loyal Legions

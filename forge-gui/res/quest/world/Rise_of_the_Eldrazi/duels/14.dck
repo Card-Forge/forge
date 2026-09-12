@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Coimbra_-_Portugal/Pedro_Rafael_Batista_-_Sexy_Red_(Standard,_#1943).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Kargan Dragonlord
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Blightning
+3 Earthquake
+1 Grim Discovery
+1 Akoum Refuge
+4 Arid Mesa
+3 Dragonskull Summit
+4 Lavaclaw Reaches
+7 Mountain
+4 Scalding Tarn
+1 Swamp
+[Sideboard]
+3 Anathemancer
+3 Deathmark
+3 Doom Blade
+3 Malakir Bloodwitch
+3 Tuktuk Scrapper

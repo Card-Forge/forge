@@ -1,0 +1,58 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/mrtoolshed_-_4_Color_Omnath_(Modern,_#1748221).dck
+Deck Type=constructed
+
+[Main]
+1 Eternal Witness
+4 Omnath, Locus of Creation
+4 Solitude
+2 Fury
+3 Fable of the Mirror-Breaker
+1 Elesh Norn, Mother of Machines
+3 The One Ring
+1 The One Ring
+1 Lightning Helix
+4 Lightning Bolt
+1 Eladamri's Call
+1 Ephemerate
+3 March of Otherworldly Light
+2 Time Warp
+1 Time Warp
+4 Leyline Binding
+4 Up the Beanstalk
+4 Wrenn and Six
+4 Teferi, Time Raveler
+1 Plains
+1 Forest
+1 Island
+1 Hallowed Fountain
+1 Steam Vents
+1 Breeding Pool
+1 Stomping Ground
+1 Sacred Foundry
+3 Flooded Strand
+1 Wooded Foothills
+4 Windswept Heath
+4 Misty Rainforest
+1 Flooded Strand
+1 Temple Garden
+1 Indatha Triome
+1 Raugrin Triome
+1 Savai Triome
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+[Sideboard]
+2 Chalice of the Void
+1 Supreme Verdict
+1 Murderous Cut
+2 Dovin's Veto
+3 Obsidian Charmaw
+2 Fury
+2 Endurance
+1 Boseiju, Who Endures
+1 Elesh Norn, Mother of Machines

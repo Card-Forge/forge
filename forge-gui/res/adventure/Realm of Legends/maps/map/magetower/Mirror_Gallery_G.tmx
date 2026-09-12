@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="103">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Insight&quot;, &quot;Bereavement&quot; ]}"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
    eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
@@ -21,7 +21,7 @@
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2LEJgDAARNG4gY1gIWLh4K5g5XpyoNgb8Dz9D1LnVwdJKQAAAO+xtu4CAMgzHNs5sqEAgCBLd51E6f0yN+6CelvvLrhH3edJRH899/+H+37gr77wfp+C24V+L/p9tD/qZ398nujfAV7BEUs=
+   eJzt2MEJgDAMQNFevTmAiOs4rhtKQFAcoGn0Pei5vz0E2tYAAMZxzNkFAPUs1+xczVAACtmne1VUvT9U7X/evf7+3v3VzjBKe/b/R/b+8FdfeL9vhduD/lz688T8iX7zJ0+P/hNq0QzU
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -29,184 +29,128 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmG8OwiAMxTmBWxZdPMiO5r9j6b54PUMcERtK3xgwzdrkfRppf2FAHww7YwaVSqVSqVSqgupbYx6gbKBjD20d/v3ElTs65d8E/60x5gzo0ry5TuD4a1N/LyP/qda8boUfPT/Hif+u56fyK39xfmlfuv1Vmh85H0J7XeLqKvEj+UP/KpUf7a9cf87Ff5tycjyuv9P8qeuWy8P5E5+N8xo2p8TD1e3J+vSDfkuZhxiby297ptQvR6auz9ORMfRbiB+p68bQ/btkT3L8z+NHCH9KzRr8Nv6R34/S/HPvJKX4S991QjVz8i/xEKG+bUPyDnPXA8Lfk/rIPSFWH6mZkx9hUf7vb/QM4N4fOB+yNj+Xb069Jfwx/xabM67vS/d36kN8ttB57thiZ6fk30p5f2luJTbUv4XmLGdItUv4tzUip/9ZI1L9T8r9MPV+ufZb76++fyp/Xr0AEEL8qA==
+   eJztmFsOgyAQRfntTzWmdSVuovvpw2VZV9iQSkIpw1yRh4lDcr9KmFNkZi4MZ6UGkUgkEolEoozqW6XeoPRA517bMvyXhSv16IT/EPxjo9QD0LP5ct3B+a+mfC4j36nUvh6FH62f88I/Sf0UfuHPzs/lpcmv3PxIffDlOsfVFeJH1vd9q1h+tL9S/TkV/7isSfGY/u6uH3tuqXUof2KzUV5Dr8nxUHHRvkblERKXmmNi657J9cuZiGvz3E7/4s4JEndq/fm7JSdT8cfEFP598K+9k4T4fez2fwjx577r+GKi/Mj+b/EQvvqnB+cd1p4HhL934iP3hFB8JGZKfoRF+H9/c2sA9f5A+ZDa/NR6a+Jt4Q/5t9CeUX2fu7+7PsRm89VzwxaqnZx/y+X9ub3l2FD/5tuzlIOLncO/1Rgp/U+NEet/Yu6HsffL2m+9e33/FP60+gBS+gUU
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt18EJgDAMheG3QRcJdCydQkVnUSdT1zBXwZMiNfT/4B0acninQCUAAAAAqFuXpN4zpNJNvjVnafGsuXSTZzbvvXuOoP0BAAAAAO9E/b+3Jk12nY3+bux+H8D/RL0/qMsJbIkNQQ==
+   eJzt17EJgEAMBdC0Vi5y4BxOolOo6Czu6YFYCHYievgepEhI8atAIgAAAP5tqCPGXFP9dpJnrU1EW+1VoiN7qfkBAAC4p9T/vU8RSzrP5tx36Xof+J5S7w//sgFPNgnx
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="55" template="../../../../../common/maps/obj/gate.tx" x="367.576" y="639.395" width="16.6364" height="16.4545">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
    <properties>
-    <property name="dialog">[
-	{
-		&quot;name&quot;: &quot;&quot;,
-		&quot;text&quot;: &quot;The gate is sealed by complex wards. While the guardians stand, its impenetrable.&quot;,
-		&quot;options&quot;:
-			[
-				{
-					&quot;name&quot;: &quot;With the guardians defeated, you fire a blast of magic to test the gate.&quot;,
-					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 88 }, { &quot;deleteMapObject&quot;: 55 } ],
-					&quot;condition&quot;: [
-						{
-							&quot;getMapFlag&quot;: {
-								&quot;key&quot;: &quot;enemiesDefeated&quot;,
-								&quot;op&quot;: &quot;&gt;=&quot;,
-								&quot;val&quot;: 5
-							}
-						}
-					],
-					&quot;text&quot;: &quot;With a gust of green wind, the door shatters and dissolves into raw mana. You are now free to pass.&quot;,
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
-				},
-				{
-					&quot;name&quot;: &quot;You attempt to open the gate normally.&quot;,
-					&quot;text&quot;: &quot;The gate remains closed.&quot;,
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
-				}
-			]
-	}
-]</property>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_1.tmx"/>
    </properties>
   </object>
-  <object id="60" template="../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="370" y="521">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Insight|TMP&quot;, &quot;Bereavement|USG&quot;, &quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Yore-Tiller Nephilim&quot;, &quot;Breya's Apprentice&quot;, &quot;Emporium Thopterist&quot; ] }"/>
+    <property name="enemy" value="Breya"/>
+    <property name="pursueRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="65" template="../../../../../common/maps/obj/entry_down.tx" x="347.5" y="544.5" width="56.5" height="16">
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="313" y="568">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/main_story/castles/green_castle_f1.tmx"/>
-   </properties>
-  </object>
-  <object id="66" template="../../../../../common/maps/obj/enemy.tx" x="79.3333" y="603">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Kederekt Parasite&quot;, &quot;Crawlspace&quot;, &quot;Anvil of Bogardan&quot;
+]}</property>
     <property name="enemy" value="Nekusar"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="67" template="../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="307" y="481">
    <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
-    <property name="enemy" value="Sydri"/>
-    <property name="threatRange" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="68" template="../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
-    <property name="enemy" value="Satya"/>
-    <property name="threatRange" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="69" template="../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
-    <property name="enemy" value="Akiri and Silas"/>
-    <property name="threatRange" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="70" template="../../../../../common/maps/obj/enemy.tx" x="97" y="410">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Nomad Outpost&quot;, &quot;Sword of the Chosen&quot;, &quot;Helm of the Host&quot; , &quot;Aether Membrane&quot;, &quot;Souls of the Faultless&quot;
+]}</property>
     <property name="enemy" value="Dihada"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="83" template="../../../../../common/maps/obj/dialog.tx" x="329.897" y="719.328" width="85.697" height="20.858" visible="1">
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="369" y="463">
    <properties>
-    <property name="dialog">[
-{
-   &quot;text&quot;: &quot;What was once a vibrant castle dedicated to green magic is now infused with every other color of mana. The gate ahead has five wards on it, and five guardians stand ready for battle against you. The way forward seems clear.
-
-Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
-]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sacred Peaks&quot;, &quot;Contaminated Aquifer&quot;, &quot;Tidehollow Strix&quot;, &quot;Bladehold War-Whip&quot;
+]}</property>
+    <property name="enemy" value="Akiri and Silas"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="84" template="../../../../../common/maps/obj/treasure.tx" x="310.286" y="465">
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="425" y="486">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
-}]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mystic Monastery&quot;, &quot;Guide of Souls&quot;, &quot;Era of Innovation&quot;, &quot;Phyrexian Ironworks&quot;, &quot;Fabrication Module&quot;
+]}</property>
+    <property name="enemy" value="Satya"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="85" template="../../../../../common/maps/obj/treasure.tx" x="425.256" y="465">
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="422.5" y="567">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
-}]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Interface Ace&quot;, &quot;Experimental Pilot&quot;, &quot;Deathless Pilot&quot;, &quot;Aradara Express&quot;
+]}</property>
+    <property name="enemy" value="Sydri"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="86" template="../../../../../common/maps/obj/enemy.tx" x="487.954" y="324.326">
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="129" y="409">
    <properties>
-    <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;Hail, {var=player_name}. I see you are challenging one of the greatest obstacles of your quest! Well, I have been saving some of my most mythical spells for just such an occasion. See if any strike your fancy.&quot;,
-		&quot;options&quot;: [
-			{
-				&quot;name&quot;: &quot;(Continue)&quot; }
-		]
-	}
-]</property>
-    <property name="enemy" value="Mysterious Mage"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mox Emerald&quot;, &quot;Emerald Medallion&quot;, &quot;Emerald Collector&quot;, &quot;Unnatural Growth|INR&quot;, &quot;Lurking Predators|m10&quot; ] }"/>
+    <property name="enemy" value="Autumn Willow"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="87" template="../../../../../common/maps/obj/shop.tx" x="524.045" y="323.674">
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="634" y="599">
    <properties>
-    <property name="commonShopList" value="WanderingMerchantMythic"/>
-    <property name="mythicShopList" value=""/>
-    <property name="rareShopList" value=""/>
-    <property name="uncommonShopList" value=""/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Meteor Crater|PLS&quot;, &quot;Belligerent Yearling&quot;, &quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;The Skullspore Nexus|LCI&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
+    <property name="enemy" value="Zacama"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="225" y="226">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Forest|LCI&quot;, &quot;Mythweaver Poq&quot;, &quot;Renata, called to the hunt&quot;, &quot;Tribute to the World Tree&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Basking Capybara|LCI&quot;, &quot;Hunter's blowgun|LCI&quot;, &quot;Shapers' Sanctuary|XLN&quot;]}</property>
+    <property name="enemy" value="Ojer Kaslem"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="430" y="228">
+   <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [ &quot;Branching Evolution&quot;, &quot;Benevolent Hydra|J22&quot;, &quot;Lair of the Hydra&quot;, &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils&quot;, &quot;Thunderous Snapper&quot; ]
+}</property>
+    <property name="enemy" value="Gargos"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="619" y="410">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Leaf-Crowned Visionary|DMU&quot;, &quot;Serpent's Soul-Jar&quot;, &quot;Sword of the Animist|ORI&quot;, &quot;Zendikar's Roil|ORI&quot;, &quot;Oran-Rief, the Vastwood|ZEN&quot;, &quot;Bonds of Mortality|OGW&quot;, &quot;Joraga Treespeaker|ROE&quot;]}"/>
+    <property name="enemy" value="Nissa"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="103" y="600">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nut Collector|DMR&quot;, &quot;Squirrel Sanctuary&quot;, &quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;]}"/>
+    <property name="enemy" value="Chatterfang"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="503" y="226">
+   <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [ &quot;Bloated Contaminator&quot;, &quot;Venerated Rotpriest&quot;, &quot;The Hunter Maze|ONE&quot;, &quot;Blightwidow&quot;, &quot;Shrine of Boundless Growth|NPH&quot;, &quot;Maze Skullbomb|ONE&quot;, &quot;Death-Hood Cobra|NPH&quot; ] }</property>
+    <property name="enemy" value="Vorinclex"/>
+    <property name="threatRange" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="294" y="226">
+   <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [ &quot;March of the World Ooze&quot;, &quot;Gutter Grime|ISD&quot;, &quot;Biowaste Blob&quot;, &quot;Ooze Garden|ALA&quot;, &quot;Predator Ooze&quot;, &quot;Murky Sewer|DSK&quot; ] }</property>
+    <property name="enemy" value="The Mimeoplasm"/>
    </properties>
   </object>
  </objectgroup>

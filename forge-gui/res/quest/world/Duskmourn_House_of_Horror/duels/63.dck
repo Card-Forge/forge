@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orunmila
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Bijas_-_Dimir_Midrange_(Modern,_#2251281).dck
+Deck Type=constructed
+
+[Main]
+1 Tamiyo, Inquisitive Student
+4 Psychic Frog
+2 Harbinger of the Seas
+4 Abhorrent Oculus
+2 Murktide Regent
+2 Spell Snare
+3 Consider
+4 Fatal Push
+3 Thought Scour
+1 Shoot the Sheriff
+4 Counterspell
+2 Sink into Stupor
+3 Force of Negation
+4 Unearth
+3 Preordain
+4 Polluted Delta
+2 Undercity Sewers
+2 Island
+2 Scalding Tarn
+1 Bloodstained Mire
+2 Gloomlake Verge
+1 Swamp
+1 Flooded Strand
+3 Watery Grave
+[Sideboard]
+1 Ghost Vacuum
+2 Thoughtseize
+4 Consign to Memory
+1 Surgical Extraction
+2 Disruptor Flute
+1 Harbinger of the Seas
+2 Toxic Deluge
+2 Mystical Dispute

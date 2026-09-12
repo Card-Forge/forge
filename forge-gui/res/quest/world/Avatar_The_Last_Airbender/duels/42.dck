@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/Ian_Jackson_-_W-U-B-R_Control_(Standard,_#2780184).dck
+Deck Type=constructed
+
+[Main]
+2 The Unagi of Kyoshi Island
+1 Marang River Regent
+4 Consult the Star Charts
+4 Lightning Helix
+3 Get Lost
+3 Inevitable Defeat
+3 Jeskai Revelation
+3 No More Lies
+2 Spell Snare
+3 Stock Up
+2 Day of Judgment
+2 Ultima
+2 Rest in Peace
+3 Floodfarm Verge
+3 Meticulous Archive
+3 Watery Grave
+2 Gloomlake Verge
+2 Multiversal Passage
+2 Sacred Foundry
+2 Sunbillow Verge
+2 Thundering Falls
+1 Cori Mountain Monastery
+1 Elegant Parlor
+1 Fountainport
+1 Godless Shrine
+1 Mistrise Village
+1 Plains
+1 Riverpyre Verge
+[Sideboard]
+3 Flashfreeze
+2 Annul
+2 Stoic Sphinx
+1 Aang, Swift Savior
+1 Beza, the Bounding Spring
+1 Elenda, Saint of Dusk
+1 Mistrise Village
+1 Rest in Peace
+1 Sphinx of the Final Word
+1 Torpor Orb
+1 Ultima

@@ -1,6 +1,6 @@
 Name:Grimoire of the Dead
 ManaCost:4
-Types:Legendary Artifact
+Types:Legendary Artifact Book
 A:AB$ PutCounter | Cost$ 1 T Discard<1/Card> | Defined$ Self | CounterType$ STUDY | CounterNum$ 1 | SpellDescription$ Put a study counter on CARDNAME.
 A:AB$ ChangeZoneAll | Cost$ T SubCounter<3/STUDY> Sac<1/CARDNAME> | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | StaticEffect$ Animate | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control. They are black Zombies in addition to their other colors and types.
 SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Zombie | AddColor$ Black

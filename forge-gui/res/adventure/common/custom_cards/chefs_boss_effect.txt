@@ -2,11 +2,12 @@ Name:Chef's Boss Effect
 ManaCost:no cost
 Colors:blue,green,white
 Types:Enchantment
-S:Mode$ Continuous | AddAbility$ FoodSac | AddType$ Food & Artifact | Affected$ Creature.!token | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Nontoken creature are Food artifacts in addition to their other types and gain "{2}, {T}, Sacrifice this creature: You gain 3 life."
-SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
-T:Mode$ Sacrificed | ValidCard$ Food | Origin$ Any | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever a player sacrifices a Food, put a flavor counter on Chef's Boss Effect.
-SVar:TrigPutCounter:DB$ PutCounter | CounterType$ FLAVOR
-T:Mode$ Phase | IsPresent$ Card.Self+counters_GE1_FLAVOR | PresentZone$ Command | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ At the beginning of your upkeep, if Cheff's Boss Effect has one or more flavor counters, create a token that's a copy of a random creature card with mana value X. Where X is the amount of flavor counters on Chef's Boss Effect. X is maxed out at 8.
-SVar:TrigCopy:DB$ CopyPermanent | NumCopies$ 1 | ValidSupportedCopy$ Creature.cmcEQX | RandomCopied$ True | RandomNum$ 1
-SVar:X:Count$CardCounters.Flavor/LimitMax.8
-Oracle: Nontoken creature are Food artifacts in addition to their other types and gain "{2}, {T}, Sacrifice this creature: You gain 3 life."\nWhenever a player sacrifices a Food, put a flavor counter on Chef's Boss Effect.\nAt the beginning of your upkeep, if Cheff's Boss Effect has one or more flavor counters, create a token that's a copy of a random creature card with mana value X. Where X is the amount of flavor counters on Chef's Boss Effect. X is maxed out at 8.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a Food token. 
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+S:Mode$ Continuous | IsPresent$ Food.YouCtrl | PresentCompare$ GE3 | AddType$ Creature | SetPower$ 2 | SetToughness$ 2 | Affected$ Food.YouCtrl | EffectZone$ Command | AffectedZone$ Battlefield | Description$ As long as you have 3 or more Foods, Foods you control are creatures in addition to their other types,have base power and toughness 2/2 and attack each turn if able. 
+S:Mode$ MustAttack | IsPresent$ Food.YouCtrl | PresentCompare$ GE3 | ValidCreature$ Food.YouCtrl | EffectZone$ Command | Secondary$ True | Description$ As long as you have 3 or more Foods, Foods you control are creatures in addition to their other types,have base power and toughness 2/2 and attack each turn if able. 
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ LT5 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you have less than 5 cards in hand, draw cards equal to the difference. 
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
+SVar:X:Count$ValidHand Card.YouOwn
+SVar:Difference:Number$5/Minus.X
+Oracle:At the beginning of your upkeep, create a Food token. \nAs long as you have 3 or more Foods, Foods you control are creatures in addition to their other types,have base power and toughness 2/2 and attack each turn if able.\nAt the beginning of your end step, if you have less than 5 cards in hand, draw cards equal to the difference. 

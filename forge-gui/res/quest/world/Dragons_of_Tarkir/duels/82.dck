@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dr No
+Title=Dr No
+Icon=Dr No.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Daily_#8124853/Autumnn_-_Burn_(Modern,_#221075).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+2 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+3 Deflecting Palm
+3 Destructive Revelry
+4 Kor Firewalker
+1 Skullcrack
+3 Stony Silence

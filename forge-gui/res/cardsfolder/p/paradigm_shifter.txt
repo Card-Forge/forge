@@ -1,0 +1,8 @@
+Name:Paradigm Shifter
+ManaCost:1 U R
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this creature enters, conjure a card of your choice from the Paradigm Spellbook into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Zone$ Hand | SpellbookName$ Paradigm | Spellbook$ Decorum Dissertation,Echocasting Symposium,Germination Practicum,Improvisation Capstone,Restoration Seminar
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast instant or sorcery spells.
+Oracle:When this creature enters, conjure a card of your choice from the Paradigm Spellbook into your hand.\n{T}: Add two mana in any combination of colors. Spend this mana only to cast instant and sorcery spells.

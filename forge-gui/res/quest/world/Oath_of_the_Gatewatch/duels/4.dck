@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Standard_Constructed_League/Niedzwiedz_-_Bant_(Standard,_#601422).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bounding Krasis
+4 Deathmist Raptor
+4 Den Protector
+4 Jace, Vryn's Prodigy
+4 Reflector Mage
+2 Stratus Dancer
+4 Sylvan Advocate
+1 Wingmate Roc
+4 Collected Company
+4 Dromoka's Command
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+1 Island
+4 Lumbering Falls
+2 Plains
+2 Prairie Stream
+4 Windswept Heath
+1 Wooded Foothills
+3 Yavimaya Coast
+[Sideboard]
+4 Arashin Cleric
+2 Disdainful Stroke
+3 Dispel
+1 Hallowed Moonlight
+1 Hidden Dragonslayer
+2 Negate
+2 Valorous Stance

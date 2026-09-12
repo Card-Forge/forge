@@ -181,7 +181,7 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 169 U You Find Some Prisoners @Lie Setiawan
 170 U You See a Pair of Goblins @Aaron Miller
 171 R Zalto, Fire Giant Duke @Zezhou Chen
-172 M Zariel, Archduke of Avernus @Heonhwa Choe
+172 M Zariel, Archduke of Avernus @Heonhwa
 173 C Bulette @Jason Kang
 174 C Bull's Strength @Gabor Szikszai
 175 U Choose Your Weapon @Olivier Bernard

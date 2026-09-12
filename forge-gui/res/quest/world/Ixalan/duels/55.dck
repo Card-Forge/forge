@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot55
+Title=Robot55
+Icon=Sideshow Bob.jpg
+Difficulty=Easy
+Description=Green Energy 
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+3 Hostage Taker
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+1 The Scarab God
+4 Walking Ballista
+4 Winding Constrictor
+2 Blossoming Defense
+4 Fatal Push
+2 Vraska's Contempt
+4 Attune with Aether
+1 Vraska, Relic Seeker
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+2 Fetid Pools
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+2 Aethersphere Harvester
+2 Confiscation Coup
+3 Deathgorge Scavenger
+4 Duress
+2 Negate
+1 Spell Pierce
+1 The Scarab God

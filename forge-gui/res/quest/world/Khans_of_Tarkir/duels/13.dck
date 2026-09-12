@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Super_IQ_Indian_Trail/Jarrod_Kilby_-_G-R_Aggro_(Standard,_#176200).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ashcloud Phoenix
+3 Boon Satyr
+4 Elvish Mystic
+4 Fanatic of Xenagos
+4 Goblin Rabblemaster
+4 Heir of the Wilds
+4 Stormbreath Dragon
+2 Become Immense
+3 Lightning Strike
+4 Crater's Claws
+1 Sarkhan, the Dragonspeaker
+6 Forest
+1 Mana Confluence
+7 Mountain
+2 Rugged Highlands
+4 Temple of Abandon
+4 Wooded Foothills
+[Sideboard]
+4 Arc Lightning
+1 Chandra, Pyromaster
+3 Destructive Revelry
+1 Harness by Force
+2 Plummet
+2 Tormod's Crypt
+2 Xenagos, the Reveler

@@ -1,0 +1,36 @@
+[metadata]
+Name=Sultai
+Deck Type=constructed
+Title=Sultai
+Description=Sultai
+Difficulty=Medium
+Icon=Spiderman
+[Main]
+4 Aether Hub
+4 Blooming Marsh
+3 Blossoming Defense
+4 Botanical Sanctum
+4 Bristling Hydra
+2 Fatal Push
+3 Fetid Pools
+2 Forest
+1 Forest
+2 Foul Orchard
+4 Glint-Sleeve Siphoner
+3 Hadana's Climb
+2 Hashep Oasis
+1 Ifnir Deadlands
+4 Jadelight Ranger
+4 Servant of the Conduit
+1 Swamp
+2 Verdurous Gearhulk
+2 Vraska's Contempt
+4 Walking Ballista
+4 Winding Constrictor
+[Sideboard]
+2 Cartouche of Ambition
+3 Duress
+2 Fatal Push
+3 Negate
+3 Thrashing Brontodon
+2 Vraska's Contempt

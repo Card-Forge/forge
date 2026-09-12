@@ -54,7 +54,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;colors&quot;: [ &quot;blue&quot;, &quot;red&quot;, &quot;white&quot; ],
-    &quot;colorTtype&quot;: &quot;MultiColor&quot;,
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]
@@ -181,7 +181,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;colors&quot;: [ &quot;blue&quot;, &quot;red&quot;, &quot;white&quot; ],
-    &quot;colorTtype&quot;: &quot;MultiColor&quot;,
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]

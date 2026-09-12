@@ -1,0 +1,6 @@
+Name:Inspired Fire
+ManaCost:3 R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Count$YouDrewThisTurn | EffectZone$ All | Description$ This spell costs {1} less to cast for each card you've drawn this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+Oracle:This spell costs {1} less to cast for each card you've drawn this turn.\nInspired Fire deals 4 damage to target creature.

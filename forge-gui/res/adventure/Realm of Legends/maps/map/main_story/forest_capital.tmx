@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="92">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmM1uEzEQx805QYnKN9e021AXRaW8AbwEJzjQtA/A140DgpYT4gHgGSjqC7RJoKLiCbjBI/Ap8SHGyo52djpjr71Jmr80knfXa/927Bl7nTWNsWAZ2DLYPGgp57G5dcCGYKM54RsAx2LO6Ng+gN1rGXN/TuxBq2DEMV1oG3NmTuxsu/DjiPGdB9s9ITvH+KgWhGfLyvzYbhizQ+x5o/z8WUN+LySJQXoWan+Qx9NQiatZ8GEfG9f8bXYEnhdw/TK/12fvr68ac321fK8byWeEPn3i33ME/vyYkKti+NwYUsYtW5QlH/DvocxUK6Tct+V3Y/gmIcq3WKH+NPgkX0p8qL9rxvxbG5f53I7h69vjdVLEGS8B02WwT8I3zWJ8X0Ewvu6G60mqy7ef1q1XdH6k8G0F8t8kVcd/28paxvX5VFH+Dcnkz4pe14nm7zp8uGd0+53vEDs/lPihfBegzkUrx4KkGL4N1v9AWWslPmpcvtxeNz7ovoWP80/4nl9WZqqqFL5DUkYfun3tfjM8F6fNJ+X/p83xXLTC/5Q2ptPiQ93oGXOzV1wPFB9SPhxvSZvK/VS+28B2p1eOQ8pI56MvNjRhzKTyLSntIiMdax6/MZwxfDQPPLk6NqevMDbfwB6vlxnRj9SXh0aWtudJ9Z9j4/t0KhrXUtw4VVm7q/K9C7SjsWpxg3pPyreu+BlGFdhx/6j9iwhdqLlH06ay/uJa4OOTFPqf4+ugVP+u0gZlwO+sytc5rTNlfuQgl8aXCXyPEs9znOqeMT1shfnqnOdM6oxJGt837biznD1Sfts+3sZeZHu7rD3uv1R96fqvUyXx8ZxzkpqU/2KE53V03RsK9VzuO0jkq5JLjuKbLe3Nkc3O2H/8XHNHYOI2S2HOkDgy4jN6/R/eowd+
+   eJzNmEtuE0EQhpu1jWwlvLdOJiYdZCXhBnAJVrAgjwPw2rGIIGGFOACcgaBcILENFhFL2LCDE5CEh8RDVMvTmppKVb/GcfxLJfXM9HR/U91V3dNZXSkNloHNgU2CZnMenVsLrAfWnxC+LnDM5IyG7T3YvYZS9yfEHjQKRjumU02lpifEzjULP/YJ3wWw7VOy84QPa4p5NifMj82aUlvIntXKz5/W+Pd84hi4Z772u3k89YS4Ggef7WNlyd1mi+F5Dtcv8nur5P3lBaWuL5TvtSP5FNOnS/R79sGfHxJyVQyfGUPMuK6LMucD+j2YGWselVd1+d0YvlEI880E1I/l+wgB/EkK4lycLzk+q7+LSv1bHJbp3I7hM77/BmwHYJ+F/kNEGS8D05Ulvs1xjO9LCMZXbX89TlX5dtO6dQrPjxS+dU/+G6Wq+G9TWMuovpwpyr8hmfyZl+sa4fxdhc/uGc1+5zvEzg/N18N8F6HOJR0eXzF8K6T/rrDWcnzYqFy5vWp84H0LHeef8D2/NM8UqhS+ASpbH5p97W7dPxdPmo/L/0/qw7momf8paUxPis/qRkepm53iuiv4EPPZ8ea0JtxP5bsNbHc65TjEjHg+umJDko2ZVL5ZoV3LiMeaxm8MZwwfzgMb14ZmdAhjcwT2eLnMaP2IfTlQvKQ9T6r/DBvdp2PhuObixihk7Q7le+tpR2KV4sbqHSrfuupm6Aew2/2j9C/CdCHmHklrwvpr1wIXHyff/xxdB7n6d4U2MIP9zlC+1lmZKXMje7kkvozhe5R4nmNU9YzpYcPPV+U8Z1RnTNz4vm7GneXsoPKb5vE2diLb2ybtUf+l6mvbfZ0qjo/mnNPUqPwXI/urj9e9HlPP5L69RL6QXLIf32xpb27Z9Jj9R881txgmauOUzRkcR4Z8hq//A1ZzDK8=
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -305,6 +305,46 @@
                 {
 					&quot;name&quot;: &quot;Not sure I'm up for that.&quot;,
 					&quot;text&quot;: &quot;'Be well traveller, and may what luck you can find guide you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="119.5" y="213" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You step inside a hollow tree, surprisingly large on the inside. A great dryad (or perhaps an elemental? Or a treefolk?) emerges from an interior wall of the tree. 'Hail, adventurer. I seek a truly impressive hero. Is that you?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The three great threats are ended.&quot;,
+                    &quot;text&quot;: &quot;'All the forests are forever in your debt!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Helm of Myth&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gaea's Cradle&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Worldly Tutor&quot;}             
+                      ]
+                    },
+					{&quot;addMapReputation&quot;: 10}  ],
+					&quot;condition&quot;:[{&quot;item&quot;: &quot;Acorn Amulet&quot;}, {&quot;item&quot;: &quot;Strider Reins&quot;}, {&quot;item&quot;: &quot;Joraga Boots&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;It certainly might be.&quot;,
+					&quot;text&quot;: &quot;'As you know, a great number of fearsome legends menace these lands. I have three great treasures to offer to one who can defeat all three of the greatest threats facing the forest.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Which three are we speaking of?&quot;,
+					&quot;text&quot;: &quot;'The primal calamity, Zacama. The worldshaker, Nissa. And the commander of the endless squirrel legions, Chatterfang. Show me the relics they drop upon their defeat, and the great rewards and true adoration of the city will be yours.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I will see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Well I'm impressive, but not THAT impressive.&quot;,
+					&quot;text&quot;: &quot;'Wise of you to know your limits.'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
 				}
 			]

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Cow
+Title=Cow
+Icon=Cow.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/AlexanderRosdahl_-_4_Color_Legends_(Standard,_#1998551).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+4 Inti, Seneschal of the Sun
+3 Ertai Resurrected
+1 Lazav, Wearer of Faces
+1 Kura, the Boundless Sky
+4 Rona, Herald of Invasion
+4 Slogurk, the Overslime
+1 The Goose Mother
+3 Titania, Voice of Gaea
+4 Relic of Legends
+2 Cut Down
+2 Go for the Throat
+1 Long Goodbye
+3 Boseiju, Who Endures
+4 Darkslick Shores
+4 Takenuma, Abandoned Mire
+1 Llanowar Wastes
+4 Otawara, Soaring City
+4 Plaza of Heroes
+1 Sunken Citadel
+1 Swamp
+1 Xander's Lounge
+4 Ziatora's Proving Ground
+2 Cavern of Souls
+[Sideboard]
+2 Tishana's Tidebinder
+2 Cut Down
+2 Unlicensed Hearse
+3 Glistening Deluge
+2 Duress
+2 Liliana of the Veil
+2 Negate

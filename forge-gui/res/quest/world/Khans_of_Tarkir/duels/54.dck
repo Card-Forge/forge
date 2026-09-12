@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Oya
+Title=Oya
+Icon=Oya.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/Level_Up!_Nettuno_-_GP_Trial_Bologna/Paolo_Pagano_-_Infect_(Modern,_#530232).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Spellskite
+2 Apostle's Blessing
+1 Become Immense
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+2 Rancor
+1 Wild Defiance
+2 Breeding Pool
+1 Forest
+4 Inkmoth Nexus
+1 Island
+1 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+3 Polluted Delta
+1 Swamp
+1 Watery Grave
+2 Wooded Foothills
+[Sideboard]
+1 Creeping Corrosion
+3 Nature's Claim
+2 Nihil Spellbomb
+4 Phyrexian Crusader
+2 Pithing Needle
+3 Thoughtseize

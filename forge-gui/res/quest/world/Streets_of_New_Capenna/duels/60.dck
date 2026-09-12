@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Benjamin_Wakefield_-_Jund_(Modern,_#1409456).dck
+Deck Type=constructed
+
+[Main]
+2 Fury
+2 Fable of the Mirror-Breaker
+4 Tarmogoyf
+4 Ragavan, Nimble Pilferer
+1 Shadowspear
+1 Pyrite Spellbomb
+1 Nihil Spellbomb
+1 Terminate
+1 Riveteers Charm
+1 Kolaghan's Command
+2 Unholy Heat
+3 Fatal Push
+2 Inquisition of Kozilek
+4 Thoughtseize
+4 Urza's Saga
+3 Liliana of the Veil
+4 Wrenn and Six
+1 Mountain
+1 Swamp
+1 Stomping Ground
+1 Overgrown Tomb
+1 Forest
+2 Wooded Foothills
+2 Blood Crypt
+2 Boseiju, Who Endures
+2 Blackcleave Cliffs
+3 Bloodstained Mire
+4 Verdant Catacombs
+[Sideboard]
+1 Ashiok, Dream Render
+1 Boseiju, Who Endures
+1 Chalice of the Void
+1 Collective Brutality
+1 Force of Vigor
+1 Leyline of the Void
+1 Pithing Needle
+1 Soul-Guide Lantern
+1 Torpor Orb
+2 Alpine Moon
+2 Engineered Explosives
+2 Unlicensed Hearse

@@ -242,7 +242,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         //open draft pool in Draft Deck Editor right away
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(FModel.getDecks().getWinston(), FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getWinston(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
     }
 

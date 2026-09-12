@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Secret Squirrel
+Title=Secret Squirrel
+Icon=Secret Squirrel.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/Starcitygames_Open_Series__Madison/David_Luety_-_R-W_Humans_(Standard,_#30765).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+2 Doomed Traveler
+2 Fiend Hunter
+4 Hero of Bladehold
+4 Lightning Mauler
+3 Mirran Crusader
+3 Silverblade Paladin
+3 Stormblood Berserker
+3 Thalia, Guardian of Thraben
+3 Sword of War and Peace
+2 Gather the Townsfolk
+3 Honor of the Pure
+4 Cavern of Souls
+4 Clifftop Retreat
+3 Mountain
+12 Plains
+1 Slayers' Stronghold
+[Sideboard]
+3 Celestial Purge
+3 Oblivion Ring
+2 Ratchet Bomb
+1 Revoke Existence
+3 Timely Reinforcements
+3 Zealous Conscripts

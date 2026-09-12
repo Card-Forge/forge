@@ -77,8 +77,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("DamageMap")) {
-            sa.setDamageMap(new CardDamageMap());
-            sa.setPreventMap(new CardDamageMap());
+            sa.setDamageMap(new CardDamageTable());
+            sa.setPreventMap(new CardDamageTable());
             sa.setCounterTable(new GameEntityCounterTable());
         }
         if (sa.hasParam("ChangeZoneTable")) {

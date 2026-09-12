@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/SCG_Super_IQ_-_Manchester_NC/Eric_Fields_-_Humans_(Standard,_#33629).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+2 Fiend Hunter
+4 Hero of Bladehold
+4 Lightning Mauler
+4 Silverblade Paladin
+4 Stormblood Berserker
+4 Thalia, Guardian of Thraben
+3 Sword of War and Peace
+4 Gut Shot
+4 Cavern of Souls
+3 Clifftop Retreat
+4 Mountain
+10 Plains
+2 Slayers' Stronghold
+[Sideboard]
+2 Hellrider
+2 Oblivion Ring
+2 Phyrexian Metamorph
+2 Revoke Existence
+3 Timely Reinforcements
+4 Zealous Conscripts

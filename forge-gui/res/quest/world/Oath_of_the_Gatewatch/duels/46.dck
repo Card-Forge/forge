@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Jarad
+Title=Jarad
+Icon=Jarad.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/Standard_PTQ_#9485618/FelixLeong_-_Red_Deck_Wins_(Standard,_#607078).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Monastery Swiftspear
+3 Pia and Kiran Nalaar
+4 Reckless Bushwhacker
+3 Zurgo Bellstriker
+4 Atarka's Command
+4 Fiery Impulse
+4 Wild Slash
+4 Dragon Fodder
+4 Hordeling Outburst
+4 Bloodstained Mire
+3 Cinder Glade
+11 Mountain
+4 Wooded Foothills
+[Sideboard]
+4 Arc Lightning
+3 Goblin Dark-Dwellers
+4 Rending Volley
+4 Roast

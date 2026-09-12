@@ -35,9 +35,8 @@ public class DiscardAi extends SpellAbilityAi {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
             if (MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand))) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (aiLogic.equals("VolrathsShapeshifter")) {
@@ -73,7 +72,7 @@ public class DiscardAi extends SpellAbilityAi {
         if (sa.hasParam("NumCards")) {
            if (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), ai.getWeakestOpponent()
+                final int cardsToDiscard = Math.min(ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 if (cardsToDiscard < 1) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -140,7 +139,7 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final PlayerCollection opps = ai.getOpponents();
-        Collections.shuffle(opps);
+        Collections.shuffle(opps, MyRandom.getRandom());
         for (Player opp : opps) {
             if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
                 continue;
@@ -184,7 +183,7 @@ public class DiscardAi extends SpellAbilityAi {
             }
             if ("X".equals(sa.getParam("RevealNumber")) && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, true), ai.getWeakestOpponent()
+                final int cardsToDiscard = Math.min(ComputerUtilCost.setMaxXValue(sa, ai, true), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 sa.setXManaCostPaid(cardsToDiscard);
             }
@@ -200,9 +199,8 @@ public class DiscardAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (discardTargetAI(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
         // TODO: check for some extra things
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

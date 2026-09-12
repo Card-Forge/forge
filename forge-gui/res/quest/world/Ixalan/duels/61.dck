@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot61
+Title=Robot61
+Icon=DonkeyKong.jpg
+Difficulty=Medium
+Description=Esper Gift 
+Deck Type=constructed
+
+[Main]
+4 Angel of Invention
+4 Champion of Wits
+3 Hostage Taker
+3 Kitesail Freebooter
+4 Minister of Inquiries
+4 Seekers' Squire
+2 The Scarab God
+4 Walking Ballista
+4 Gate to the Afterlife
+2 God-Pharaoh's Gift
+2 Fatal Push
+1 Search for Azcanta
+4 Aether Hub
+4 Concealed Courtyard
+4 Drowned Catacomb
+2 Fetid Pools
+6 Island
+3 Swamp
+[Sideboard]
+2 Deadeye Tracker
+2 Dreamstealer
+2 Duress
+1 Fatal Push
+1 Jace's Defeat
+1 Kitesail Freebooter
+2 Negate
+2 Vraska's Contempt
+2 Walk the Plank

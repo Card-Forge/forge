@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Pied Piper
+Title=The Pied Piper
+Icon=The Pied Piper.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Igarashi_Tsuyoshi_-_Mono_White_(Standard,_#2245711).dck
+Deck Type=constructed
+
+[Main]
+1 Loran of the Third Path
+1 Beza, the Bounding Spring
+3 Enduring Innocence
+2 Overlord of the Mistmoors
+4 Carrot Cake
+2 Soul Partition
+2 Virtue of Loyalty
+4 Get Lost
+4 Lay Down Arms
+4 Sunfall
+1 Season of the Burrow
+1 Split Up
+4 Caretaker's Talent
+2 Archangel Elspeth
+13 Plains
+2 Demolition Field
+2 Meticulous Archive
+4 Fountainport
+4 Floodfarm Verge
+[Sideboard]
+2 Negate
+1 Disdainful Stroke
+1 Rest in Peace
+1 Destroy Evil
+2 Temporary Lockdown
+1 Loran of the Third Path
+1 The Stone Brain
+3 Elspeth's Smite
+1 Exorcise
+2 Ghost Vacuum

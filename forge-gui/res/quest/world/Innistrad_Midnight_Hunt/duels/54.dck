@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wonder Woman
+Title=Wonder Woman
+Icon=Wonder Woman.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Elias_Martins_-_Izzet_Prowess_(Modern,_#1229432)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Bedlam Reveler
+3 Stormchaser Mage
+3 Sprite Dragon
+4 Monastery Swiftspear
+4 Stormwing Entity
+4 Consider
+4 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+2 Expressive Iteration
+2 Reckless Charge
+2 Serum Visions
+1 Fiery Islet
+2 Scalding Tarn
+3 Steam Vents
+3 Island
+4 Sulfur Falls
+5 Mountain
+[Sideboard]
+1 Soul-Guide Lantern
+2 Tormod's Crypt
+2 Pyroclasm
+2 Alpine Moon
+2 Abrade
+2 Test of Talents
+2 Prismari Command
+2 Mystical Dispute

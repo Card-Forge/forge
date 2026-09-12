@@ -1,0 +1,8 @@
+Name:Wisdom of Ages
+ManaCost:4 U U U
+Types:Sorcery
+A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | SubAbility$ DBEffect | SpellDescription$ Return all instant and sorcery cards from your graveyard to your hand. You have no maximum hand size for the rest of the game.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+Oracle:Return all instant and sorcery cards from your graveyard to your hand. You have no maximum hand size for the rest of the game.\nExile Wisdom of Ages.

@@ -39,7 +39,7 @@ public class CardThemedMatrixIO {
     }
 
     public static File getMatrixFile(final String name) {
-        return new File(ForgeConstants.DECK_GEN_DIR, name + SUFFIX_DATA);
+        return getMatrixFolder(name + SUFFIX_DATA);
     }
 
     public static File getMatrixFolder(final String name) {

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Maf_rulz_-_Dredge_(Modern,_#2274946).dck
+Deck Type=constructed
+
+[Main]
+4 Narcomoeba
+4 Golgari Thug
+4 Prized Amalgam
+3 Silversmote Ghoul
+4 Stinkweed Imp
+2 Ox of Agonas
+1 Wonder
+4 Otherworldly Gaze
+3 Darkblast
+4 Creeping Chill
+1 Conflagrate
+4 Tome Scour
+4 Cathartic Reunion
+1 Watery Grave
+4 Bloodstained Mire
+1 Steam Vents
+3 Cephalid Coliseum
+1 Thundering Falls
+1 Blood Crypt
+4 Polluted Delta
+2 Mountain
+1 Swamp
+[Sideboard]
+4 Leyline of the Void
+2 Consign to Memory
+4 Leyline of Sanctity
+1 Into the Flood Maw
+2 Conflagrate
+2 Embereth Shieldbreaker

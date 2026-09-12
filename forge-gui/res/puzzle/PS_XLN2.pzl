@@ -3,7 +3,7 @@ Name:Possibility Storm - Ixalan #02
 URL:http://www.possibilitystorm.com/wp-content/uploads/2017/10/W_XLN02.jpg
 Goal:Win
 Turns:1
-Difficulty:Medium
+Difficulty:Uncommon
 Description:Win this turn.
 [state]
 humanlife=2

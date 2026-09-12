@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/JimDavisMTG_-_Forgotten_Angels_(Standard,_#1216110).dck
+Deck Type=constructed
+
+[Main]
+2 Reidane, God of the Worthy
+2 Skyclave Shade
+2 Legion Angel
+3 Liesa, Forgotten Archangel
+4 Renegade Reaper
+4 Youthful Valkyrie
+4 Righteous Valkyrie
+4 Vanishing Verse
+2 Starnheim Unleashed
+2 Emeria's Call
+4 Firja's Retribution
+4 Rampage of the Valkyries
+2 Hive of the Eye Tyrant
+4 Shineshadow Snarl
+4 Brightclimb Pathway
+4 Swamp
+9 Plains
+[Sideboard]
+1 Reidane, God of the Worthy
+2 Graveyard Trespasser
+2 Legion Angel
+2 Skyclave Shade
+2 Portable Hole
+3 Power Word Kill
+3 Duress

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Agata_Takeru_-_Mono_Red_(Standard,_#791170).dck
+Deck Type=constructed
+
+[Main]
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+4 Viashino Pyromancer
+3 Dismissive Pyromancer
+4 Goblin Chainwhirler
+3 Captain Lannery Storm
+4 Shock
+4 Lightning Strike
+4 Wizard's Lightning
+4 Light Up the Stage
+22 Mountain
+[Sideboard]
+4 Lava Coil
+2 Rekindling Phoenix
+2 Fight with Fire
+4 The Flame of Keld
+2 Banefire
+1 Dismissive Pyromancer

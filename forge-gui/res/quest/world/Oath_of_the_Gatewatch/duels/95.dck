@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/2016_TCGplayer_Modern_State_Championship_-_NE/Greg_Grandall_-_Zoo_(Modern,_#623899).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+1 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Reckless Bushwhacker
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+2 Mutagenic Growth
+2 Forked Bolt
+4 Arid Mesa
+1 Forest
+1 Mountain
+1 Sacred Foundry
+3 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+4 Ancient Grudge
+2 Dromoka's Command
+2 Grafdigger's Cage
+1 Natural State
+3 Path to Exile
+3 Scavenging Ooze

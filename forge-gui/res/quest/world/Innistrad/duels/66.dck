@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Zagreb,_Croatia/Daniel_Dru┼íko_in_PTQ_Barcelona_-_Boros_(Modern,_#28266).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Figure of Destiny
+4 Goblin Guide
+3 Grim Lavamancer
+3 Mogg Fanatic
+4 Plated Geopede
+4 Steppe Lynx
+2 Brimstone Volley
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+2 Searing Blaze
+4 Arid Mesa
+2 Boros Garrison
+4 Marsh Flats
+4 Mountain
+2 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+3 Combust
+3 Disenchant
+4 Molten Rain
+3 Relic of Progenitus
+2 Shrine of Burning Rage

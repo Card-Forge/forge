@@ -149,7 +149,7 @@ ScryfallCode=OTC
 141 R Misfortune Teller @Nils Hamm
 142 U Morbid Opportunist @Tyler Walpole
 143 M Nashi, Moon Sage's Scion @Valera Lutfullina
-144 R Nighthawk Scavenger @Heonhwa Choe
+144 R Nighthawk Scavenger @Heonhwa
 145 R Ogre Slumlord @Trevor Claxton
 146 R Painful Truths @Winona Nelson
 147 R Predators' Hour @Tomas Duchek
@@ -162,7 +162,7 @@ ScryfallCode=OTC
 154 M Arcane Bombardment @Marta Nael
 155 C Big Score @Gaboleps
 156 C Bitter Reunion @Jake Murray
-157 M Bloodthirsty Adversary @Heonhwa Choe
+157 M Bloodthirsty Adversary @Heonhwa
 158 R Captain Lannery Storm @Chris Rallis
 159 R Captivating Crew @Winona Nelson
 160 R Chaos Warp @Trevor Claxton

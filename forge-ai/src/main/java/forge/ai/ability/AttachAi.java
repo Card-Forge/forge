@@ -79,11 +79,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            final int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
-            sa.setXManaCostPaid(xPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -927,7 +926,7 @@ public class AttachAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
-        List<GameObject> targets = new ArrayList<>();
+        List<GameObject> targets;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(card, sa.getParam("Defined"), sa);
@@ -967,9 +966,8 @@ public class AttachAi extends SpellAbilityAi {
             }
             if (sa.isTargetNumberValid()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
             && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
             // Living Weapon or similar
@@ -1426,33 +1424,33 @@ public class AttachAi extends SpellAbilityAi {
             return attachAIInstantReequipPreference(sa, attachSource);
         }
 
-        Player prefPlayer;
-        if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
-                || "MoveAllAuras".equals(logic)) {
-            prefPlayer = ai;
-        } else {
-            prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
-        }
-
-        // Some ChangeType cards are beneficial, and PrefPlayer should be
-        // changed to represent that
-        final List<Card> prefList;
-
-        if ("Reanimate".equals(logic) || "SpecificCard".equals(logic)) {
-            // Reanimate or SpecificCard aren't so restrictive
-            prefList = list;
-        } else {
+        // Some ChangeType cards are beneficial, and PrefPlayer should be changed to represent that
+        List<Card> prefList = list;
+        if (!"Reanimate".equals(logic) && !"SpecificCard".equals(logic)) {
+            Player prefPlayer;
+            if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
+                    || "MoveAllAuras".equals(logic)) {
+                prefPlayer = ai;
+            } else {
+                prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
+            }
             prefList = CardLists.filterControlledBy(list, prefPlayer);
         }
 
-        // If there are no preferred cards, and not mandatory bail out
-        if (logic == null || prefList.isEmpty()) {
+        final boolean keepsAttachedCardTapped = isAuraSpell(sa) && attachSource.getReplacementEffects()
+                .anyMatch(re -> re.getMode().equals(ReplacementType.Untap)
+                        && re.getLayer().equals(ReplacementLayer.CantHappen));
+
+        // If there are no preferred cards or no applicable logic, bail out unless mandatory
+        if ((logic == null && !keepsAttachedCardTapped) || prefList.isEmpty()) {
             return chooseUnpreferred(mandatory, list);
         }
 
         // Preferred list has at least one card in it to make to the actual Logic
         Card c = null;
-        if ("GainControl".equals(logic)) {
+        if (keepsAttachedCardTapped) {
+            c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+        } else if ("GainControl".equals(logic)) {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
             c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
@@ -1470,12 +1468,6 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         } else if ("HighestEvaluation".equals(logic)) {
             c = attachAIHighestEvaluationPreference(prefList);
-        }
-
-        if (isAuraSpell(sa)) {
-            if (attachSource.getReplacementEffects().anyMatch(re -> re.getMode().equals(ReplacementType.Untap) && re.getLayer().equals(ReplacementLayer.CantHappen))) {
-                c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
-            }
         }
 
         // Consider exceptional cases which break the normal evaluation rules
@@ -1644,7 +1636,7 @@ public class AttachAi extends SpellAbilityAi {
         return !sa.getHostCard().isEquipment() || !ComputerUtilCard.isUselessCreature(ai, c);
     }
 
-    public static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
+    private static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
         Card chosen = null;
 
         List<Card> aiType = CardLists.filter(list, c -> {
@@ -1674,7 +1666,6 @@ public class AttachAi extends SpellAbilityAi {
 
         return chosen;
     }
-
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {

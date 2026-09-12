@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Norfolk/David_Williams_-_Bant_Enchantments_(Standard,_#44336).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Geist of Saint Traft
+4 Invisible Stalker
+4 Silverblade Paladin
+2 Strangleroot Geist
+3 Selesnya Charm
+1 Increasing Savagery
+4 Abundant Growth
+4 Ethereal Armor
+4 Rancor
+4 Spectral Flight
+2 Cavern of Souls
+4 Forest
+1 Glacial Fortress
+4 Hallowed Fountain
+4 Hinterland Harbor
+1 Island
+2 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Detention Sphere
+3 Feeling of Dread
+2 Negate
+2 Nevermore
+1 Rootborn Defenses
+3 Swift Justice

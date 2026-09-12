@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Kannari_Kyouhei_-_BG_Aggro_(Standard,_#1744176).dck
+Deck Type=constructed
+
+[Main]
+3 Graveyard Trespasser
+2 Tenacious Underdog
+4 Evolved Sleeper
+4 Sheoldred, the Apocalypse
+3 Misery's Shadow
+2 Phyrexian Fleshgorger
+1 Glissa Sunslayer
+1 Glissa, Herald of Predation
+3 Mosswood Dreadknight
+4 Go for the Throat
+3 Cut Down
+1 Gix's Command
+4 Liliana of the Veil
+11 Swamp
+4 Llanowar Wastes
+4 Deathcap Glade
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+4 Restless Cottage
+[Sideboard]
+4 Duress
+2 Phyrexian Arena
+2 Path of Peril
+2 Tear Asunder
+1 Gix's Command
+2 Razorlash Transmogrant
+1 Vraska, Betrayal's Sting
+1 The End

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/FantasticMrFox_-_GW_Auras_(Modern,_#995220).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Gladecover Scout
+2 All That Glitters
+2 Spirit Mantle
+2 Spirit Link
+2 Hyena Umbra
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Gryff's Boon
+4 Rancor
+4 Spider Umbra
+1 Forest
+2 Plains
+2 Temple Garden
+2 Wooded Foothills
+4 Horizon Canopy
+4 Windswept Heath
+4 Razorverge Thicket
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Damping Sphere
+2 Gaddock Teeg
+3 Seal of Primordium
+3 Soul-Guide Lantern
+4 Kor Firewalker

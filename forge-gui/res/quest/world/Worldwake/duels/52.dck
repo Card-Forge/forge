@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=The Backlash Machine
+Title=The Backlash Machine
+Icon=The Backlash Machine.jpg
+Difficulty=Hard
+Description=../Modern/Worldwake/WPN_Qualifier_LegacyTurniers_vom_27.03.2012/Friedl_Florian_-_Red_Deck_Wins_(Modern,_#29120).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Goblin Guide
+3 Grim Lavamancer
+4 Keldon Marauders
+4 Spark Elemental
+1 Flame Javelin
+2 Flames of the Blood Hand
+4 Incinerate
+4 Lightning Bolt
+2 Magma Jet
+2 Searing Blaze
+4 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+19 Mountain
+[Sideboard]
+3 Blood Moon
+2 Jaya Ballard, Task Mage
+4 Relic of Progenitus
+3 Smash to Smithereens
+3 Sulfur Elemental

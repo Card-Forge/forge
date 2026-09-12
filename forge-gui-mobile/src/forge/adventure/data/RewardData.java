@@ -1,9 +1,9 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
-import com.google.common.collect.Iterables;
 import forge.ImageKeys;
 import forge.StaticData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.CardDb;
@@ -16,9 +16,11 @@ import forge.model.FModel;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -28,6 +30,7 @@ import java.util.function.Predicate;
  * Also used for deck generation and shops
  */
 public class RewardData implements Serializable {
+    @Serial
     private static final long serialVersionUID = 3158932532013393718L;
     public String type; // TODO convert to enum
     public float probability;
@@ -95,47 +98,41 @@ public class RewardData implements Serializable {
     private static Iterable<PaperCard> allCards;
     private static Iterable<PaperCard> allEnemyCards;
 
-    static private void initializeAllCards(){
+    static private void initializeAllCards() {
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
 
-        allCards = CardUtil.getFullCardPool(false);
+        List<Predicate<PaperCard>> filters = new ArrayList<>();
 
-        if(legals != null)
-            allCards = IterableUtil.filter(allCards, new CardUtil.CardPredicate(legals, true));
-
-        if (Config.instance().getSettingData().excludeAlchemyVariants) {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.IS_REBALANCED.negate());
-        }
+        if (legals != null)
+            filters.add(new CardUtil.CardPredicate(legals, true));
         
         // Filter out by editions and obtainability
-        if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
-        } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableNotRestricted(configData.restrictedEditions));
-        } else {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
-        }
+        if (configData.allowedEditions != null && configData.allowedEditions.length > 0)
+            filters.add(PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
+        else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0)
+            filters.add(PaperCardPredicates.isObtainableNotRestricted(configData.restrictedEditions));
+        else
+            filters.add(PaperCardPredicates.isObtainableAnyEdition());
+
+        if (Config.instance().getSettingData().excludeAlchemyVariants)
+            filters.add(PaperCardPredicates.IS_REBALANCED.negate());
+
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE))
+            filters.add(pc -> !pc.getRules().hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante."));
+
+        if (!AdventurePlayer.current().isCommanderMode())
+            filters.add(pc -> !pc.getRules().getAiHints().getRemNonCommanderDecks());
+
+        filters.add(pc -> !(pc.getRules().isCustom() && pc.getImageKey(false).startsWith(ImageKeys.ADVENTURECARD_PREFIX)));
 
         Set<String> restrictedCards = new HashSet<>(Arrays.asList(configData.restrictedCards));
+        filters.add(pc -> !restrictedCards.contains(pc.getName()));
 
         // Filter out specific cards.
-        allCards = IterableUtil.filter(allCards, input -> {
-            if (input == null)
-                return false;
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE) &&
-                    Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
-                return false;
-            // TODO check if commander player
-            if (input.getRules().getAiHints().getRemNonCommanderDecks())
-                return false;
-            if (input.getRules().isCustom() &&
-                    input.getImageKey(false).startsWith(ImageKeys.ADVENTURECARD_PREFIX)) {
-                return false;
-            }
-
-            return !restrictedCards.contains(input.getName());
-        });
+        allCards = CardUtil.getFullCardPool(false).stream()
+                .filter(IterableUtil.and(filters))
+                .collect(Collectors.toList());
 
         //Filter AI cards for enemies.
         allEnemyCards = IterableUtil.filter(allCards, input -> {
@@ -148,6 +145,10 @@ public class RewardData implements Serializable {
         if (allCards == null)
             initializeAllCards();
         return allCards;
+    }
+
+    public static void invalidateCardPool() {
+        allCards = null;
     }
 
     public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom) {
@@ -257,7 +258,7 @@ public class RewardData implements Serializable {
                 case "item":
                     if(itemNames!=null) {
                         for (int i = 0; i < count + addedCount; i++) {
-                            String itemName = itemNames[WorldSave.getCurrentSave().getWorld().getRandom().nextInt(itemNames.length)];
+                            String itemName = itemNames[rewardRandom.nextInt(itemNames.length)];
                             ItemData itemData = ItemListData.getItem(itemName);
                             if (itemData != null)
                                 ret.add(new Reward(itemData));
@@ -285,19 +286,23 @@ public class RewardData implements Serializable {
                             .forEach(allEditions::add);
                         ConfigData configData = Config.instance().getConfigData();
 
-                        for (String restricted : configData.restrictedEditions) {
-                            allEditions.removeIf(q -> q.getCode().equals(restricted));
+                        if (this.editions != null && this.editions.length > 0) {
+                            Set<String> allowed = new HashSet<>(Arrays.asList(this.editions));
+                            allEditions.removeIf(q -> !allowed.contains(q.getCode()));
+                        } else {
+                            for (String restricted : configData.restrictedEditions) {
+                                allEditions.removeIf(q -> q.getCode().equals(restricted));
+                            }
+                            for (String restrictedCard : configData.restrictedCards) {
+                                allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
+                                    o -> o.name().equals(restrictedCard)));
+                            }
+                            endDate = endDate == 0 ? 9999 : endDate;
+                            allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         }
-                        for (String restrictedCard : configData.restrictedCards) {
-                            allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
-                                o -> o.name().equals(restrictedCard)));
-                        }
-
-                        endDate = endDate == 0 ? 9999 : endDate;
-                        allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
-                                allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
+                                allEditions.get(rewardRandom.nextInt(allEditions.size())).getCode())));
                         }
                     } else {
                         for (int i = 0; i < count + addedCount; i++) {
@@ -309,7 +314,7 @@ public class RewardData implements Serializable {
                 case "landSketchbookShop":
                     Array<ItemData> sketchbookItems = ItemListData.getSketchBooks();
                     for (int i = 0; i < count + addedCount; i++) {
-                        ItemData item = sketchbookItems.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(sketchbookItems.size));
+                        ItemData item = sketchbookItems.get(rewardRandom.nextInt(sketchbookItems.size));
                         if (item != null)
                             ret.add(new Reward(item));
                     }

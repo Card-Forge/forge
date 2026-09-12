@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/2016_TCGplayer_Modern_State_Championship_-_DE/Dan_McCaulley_-_Goblins_(Modern,_#624245).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+4 Goblin Bushwhacker
+2 Goblin Chieftain
+4 Goblin Piledriver
+2 Krenko, Mob Boss
+4 Legion Loyalist
+4 Mogg War Marshal
+4 Reckless Bushwhacker
+3 Warren Instigator
+4 Lightning Bolt
+4 Goblin Grenade
+2 Blood Moon
+19 Mountain
+[Sideboard]
+2 Magmatic Chasm
+3 Mogg Fanatic
+1 Orbs of Warding
+1 Quest for the Goblin Lord
+1 Rending Volley
+1 Smash to Smithereens
+4 Temur Battle Rage
+2 Wild Slash

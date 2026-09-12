@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/PTQ_Dragons_of_Tarkir_-_Roswell,_GA/Leon_Hill_-_B-R_Aggro_(Standard,_#175068).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodsoaked Champion
+4 Goblin Rabblemaster
+4 Master of the Feast
+4 Mogis's Marauder
+4 Monastery Swiftspear
+3 Tymaret, the Murder King
+4 War-Name Aspirant
+4 Boon of Erebos
+4 Lightning Strike
+3 Magma Spray
+4 Bloodstained Mire
+3 Mana Confluence
+4 Mountain
+5 Swamp
+4 Temple of Malice
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Act of Treason
+3 Bile Blight
+1 Circle of Flame
+2 Erebos, God of the Dead
+3 Hero's Downfall
+3 Thoughtseize
+1 Whip of Erebos

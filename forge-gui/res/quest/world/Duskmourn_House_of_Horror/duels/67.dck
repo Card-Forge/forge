@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Deny_Nakano_-_Dimir_Control_(Modern,_#2214314).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+2 Harbinger of the Seas
+3 Murktide Regent
+4 Psychic Frog
+4 Consider
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+2 Go for the Throat
+2 Sink into Stupor
+4 Thought Scour
+1 Consign to Memory
+2 Spell Snare
+4 Unearth
+1 Bloodstained Mire
+3 Darkslick Shores
+2 Island
+4 Polluted Delta
+3 Scalding Tarn
+1 Swamp
+2 Undercity Sewers
+2 Watery Grave
+[Sideboard]
+3 Break the Ice
+3 Consign to Memory
+2 Mystical Dispute
+1 Nihil Spellbomb
+2 Stern Scolding
+2 Surgical Extraction
+2 Toxic Deluge

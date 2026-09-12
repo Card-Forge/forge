@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/AndreaG_-_Orzhov_Bats_(Standard,_#2214067).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+3 Amalia Benavides Aguirre
+3 Deep-Cavern Bat
+2 Elas il-Kor, Sadistic Pilgrim
+4 Essence Channeler
+4 Ruin-Lurker Bat
+1 Sheoldred, the Apocalypse
+3 Starscape Cleric
+2 Zoraline, Cosmos Caller
+1 Patchwork Banner
+2 Bitter Triumph
+2 Cut Down
+3 Get Lost
+4 Case of the Uneaten Feast
+4 Lunar Convocation
+3 Caves of Koilos
+3 Concealed Courtyard
+2 Lupinflower Village
+2 Mudflat Village
+3 Plains
+2 Scoured Barrens
+3 Shadowy Backstreet
+3 Swamp
+[Sideboard]
+2 Cut Down
+2 Dauntless Dismantler
+2 Dawn's Truce
+2 Deadly Cover-Up
+2 Elspeth's Smite
+2 Pest Control
+3 Soul Partition

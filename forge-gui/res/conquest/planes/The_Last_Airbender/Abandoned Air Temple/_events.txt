@@ -1,0 +1,9 @@
+Name:Sokka, Swordmaster|Deck:Sokka, Swordmaster.dck|Variant:Commander|Avatar:Sokka, Swordmaster|Desc:
+Name:Aang, the Last Airbender|Deck:Aang, the Last Airbender.dck|Variant:Commander|Avatar:Aang, the Last Airbender|Desc:
+Name:Katara, Heroic Healer|Deck:Katara, Heroic Healer.dck|Variant:Commander|Avatar:Katara, Heroic Healer|Desc:
+Name:Momo, Playful Pet|Deck:Momo, Playful Pet.dck|Variant:Commander|Avatar:Momo, Playful Pet|Desc:
+Name:Dauntless Escort Avatar|Deck:Dauntless Escort Avatar.dck|Variant:Vanguard|Avatar:Dauntless Escort Avatar|Desc:
+Name:Suki, Kyoshi Warrior|Deck:Suki, Kyoshi Warrior.dck|Variant:Commander|Avatar:Suki, Kyoshi Warrior|Desc:
+Name:Sokka and Suki|Deck:Sokka and Suki.dck|Variant:Commander|Avatar:Sokka and Suki|Desc:
+Name:Hei Bai, Spirit of Balance|Deck:Hei Bai, Spirit of Balance.dck|Variant:Commander|Avatar:Hei Bai, Spirit of Balance|Desc:
+Name:Monk Gyatso|Deck:Monk Gyatso.dck|Variant:Commander|Avatar:Monk Gyatso|Desc:

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Alice in Wonderland
+Title=Alice in Wonderland
+Icon=Alice in Wonderland.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Alberto_Martin_de_Vega_-_W-U-R-G_Domain_(Modern,_#2442484).dck
+Deck Type=constructed
+
+[Main]
+4 Nishoba Brawler
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+3 Phlage, Titan of Fire's Fury
+4 Lightning Bolt
+2 Spectral Denial
+2 Stubborn Denial
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+4 Arid Mesa
+4 Wooded Foothills
+3 Flooded Strand
+1 Arena of Glory
+1 Blood Crypt
+1 Indatha Triome
+1 Mountain
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+1 Windswept Heath
+[Sideboard]
+4 Consign to Memory
+2 Damping Sphere
+2 Pyroclasm
+2 Surgical Extraction
+2 Torpor Orb
+2 Wear // Tear
+1 Phlage, Titan of Fire's Fury

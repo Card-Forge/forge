@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Modern_Daily_#8396847/MissTrigger_-_GW_Aggro_(Modern,_#265864).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+3 Spider Umbra
+3 Spirit Link
+2 Spirit Mantle
+4 Brushland
+1 Forest
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+1 Choke
+1 Dismember
+1 Kor Firewalker
+4 Leyline of Sanctity
+3 Nature's Claim
+1 Pithing Needle
+2 Relic of Progenitus
+2 Stony Silence

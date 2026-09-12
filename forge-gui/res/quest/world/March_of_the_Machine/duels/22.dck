@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Chris_Schiber_-_Mono_White_(Standard,_#1636721).dck
+Deck Type=constructed
+
+[Main]
+2 Cathar Commando
+4 The Restoration of Eiganjo
+2 Spirited Companion
+1 Serra Paragon
+2 Loran of the Third Path
+1 Cityscape Leveler
+2 Reckoner Bankbuster
+2 Destroy Evil
+1 Elspeth's Smite
+2 Farewell
+4 Lay Down Arms
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Elspeth Resplendent
+3 The Eternal Wanderer
+13 Plains
+4 Field of Ruin
+1 Eiganjo, Seat of the Empire
+2 Roadside Reliquary
+1 Raffine's Tower
+4 Demolition Field
+[Sideboard]
+3 Sunset Revelry
+1 Destroy Evil
+2 Ossification
+2 Skrelv's Hive
+2 Elspeth's Smite
+4 Surge of Salvation

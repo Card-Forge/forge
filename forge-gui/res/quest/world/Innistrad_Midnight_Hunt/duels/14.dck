@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Dalamarelven_-_Orzhov_Clerics_2022_(Standard,_#1207316).dck
+Deck Type=constructed
+
+[Main]
+3 Lunarch Veteran
+3 Orah, Skyclave Hierophant
+3 Elderfang Disciple
+3 Professor of Symbology
+3 Drana, the Last Bloodchief
+4 Story Seeker
+4 Cleric of Life's Bond
+4 Luminarch Aspirant
+4 Righteous Valkyrie
+3 Raise the Draugr
+3 Vanishing Verse
+3 Demonic Gifts
+1 Haunting Voyage
+1 Shineshadow Snarl
+4 Brightclimb Pathway
+7 Plains
+7 Swamp
+[Sideboard]
+2 Expanded Anatomy
+2 Reduce to Memory
+2 Academic Probation
+3 Confront the Past
+3 Introduction to Annihilation
+3 Environmental Sciences

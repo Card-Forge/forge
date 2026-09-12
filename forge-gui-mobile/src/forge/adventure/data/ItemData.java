@@ -20,7 +20,7 @@ public class ItemData implements Serializable, Cloneable {
     public String iconName;
     public boolean questItem=false;
     public int cost=1000;
-
+    
     public boolean usableOnWorldMap;
     public boolean usableInPoi;
     public boolean isCracked;

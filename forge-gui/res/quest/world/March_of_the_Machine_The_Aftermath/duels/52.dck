@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dream
+Title=Dream
+Icon=Dream.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Arnaud_Joalland_-_Gruul_Midrange_(Modern,_#1684576).dck
+Deck Type=constructed
+
+[Main]
+4 Bonecrusher Giant
+4 Elvish Mystic
+3 Endurance
+4 Fury
+4 Ignoble Hierarch
+1 Klothys, God of Destiny
+4 Llanowar Elves
+4 Magus of the Moon
+4 Lightning Bolt
+2 Eldritch Evolution
+4 Blood Moon
+1 Boseiju, Who Endures
+4 Copperline Gorge
+1 Fire-Lit Thicket
+2 Forest
+2 Karplusan Forest
+4 Misty Rainforest
+4 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Obosh, the Preypiercer
+1 Endurance
+3 Firebolt
+1 Klothys, God of Destiny
+4 Polukranos Reborn
+1 Skysovereign, Consul Flagship
+4 Tranquil Frillback

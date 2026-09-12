@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Alexander_Andersson_-_Esper_Aggro_(Standard,_#1371483).dck
+Deck Type=constructed
+
+[Main]
+1 Sanctuary Warden
+3 Faerie Vandal
+3 Obscura Interceptor
+4 Tenacious Underdog
+4 Raffine, Scheming Seer
+2 Infernal Grasp
+2 Vanishing Verse
+2 Bloodchief's Thirst
+2 Emeria's Call
+4 The Meathook Massacre
+2 Lolth, Spider Queen
+3 The Wandering Emperor
+4 Kaito Shizuki
+1 Swamp
+1 Eiganjo, Seat of the Empire
+2 Hengegate Pathway
+2 Shattered Sanctum
+2 Brightclimb Pathway
+2 Hive of the Eye Tyrant
+3 Shipwreck Marsh
+3 Deserted Beach
+4 Raffine's Tower
+4 Clearwater Pathway
+[Sideboard]
+1 Bloodchief's Thirst
+1 Obscura Interceptor
+1 Lolth, Spider Queen
+1 Elspeth Resplendent
+2 Negate
+2 Farewell
+3 Duress
+4 Ray of Enfeeblement

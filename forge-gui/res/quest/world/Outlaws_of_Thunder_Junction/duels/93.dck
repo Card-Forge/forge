@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/FERNANDO_FONTES_-_Gruul_Prowess_(Modern,_#2018227).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Soul-Scar Mage
+4 Mishra's Bauble
+4 Lava Dart
+4 Lightning Bolt
+4 Mutagenic Growth
+4 Expressive Iteration
+4 Preordain
+2 Underworld Breach
+2 Arid Mesa
+2 Bloodstained Mire
+1 Fiery Islet
+3 Mountain
+2 Scalding Tarn
+2 Spirebluff Canal
+3 Steam Vents
+1 Stomping Ground
+2 Wooded Foothills
+[Sideboard]
+2 Apostle's Blessing
+3 Blood Moon
+2 Flame of Anor
+1 Jegantha, the Wellspring
+2 Pick Your Poison
+2 Spell Pierce
+3 Surgical Extraction

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/SCG_Invitational_Qualifier_-_Falls_Church,_VA/Andrew_Blackwell_-_G-U_Emerge_Rite_(Standard,_#636499).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Deathmist Raptor
+1 Decimator of the Provinces
+2 Den Protector
+3 Duskwatch Recruiter
+4 Elder Deep-Fiend
+4 Elvish Visionary
+4 Foul Emissary
+2 Nissa, Vastwood Seer
+4 Sylvan Advocate
+2 Ulvenwald Hydra
+3 Whirler Rogue
+2 Cryptolith Rite
+5 Forest
+3 Island
+4 Lumbering Falls
+4 Sanctum of Ugin
+1 Westvale Abbey
+4 Woodland Stream
+4 Yavimaya Coast
+[Sideboard]
+4 Lambholt Pacifist
+3 Negate
+3 Rabid Bite
+2 Vile Redeemer

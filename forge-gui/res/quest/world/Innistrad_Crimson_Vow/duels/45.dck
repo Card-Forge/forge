@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Emiliano_Biondi_-_Esper_Midrange_(Standard,_#1285012).dck
+Deck Type=constructed
+
+[Main]
+2 Iymrith, Desert Doom
+3 Edgar, Charmed Groom
+2 The Celestus
+2 Parasitic Grasp
+2 Soul Shatter
+3 Disdainful Stroke
+3 Jwari Disruption
+4 Memory Deluge
+4 Vanishing Verse
+2 Path of Peril
+2 Bloodchief's Thirst
+2 The Meathook Massacre
+1 Sorin the Mirthless
+2 Lolth, Spider Queen
+1 Hive of the Eye Tyrant
+1 Island
+1 Hall of Storm Giants
+2 Hengegate Pathway
+2 Swamp
+3 Brightclimb Pathway
+4 Shattered Sanctum
+4 Shipwreck Marsh
+4 Deserted Beach
+4 Clearwater Pathway
+[Sideboard]
+1 Disdainful Stroke
+1 Bloodchief's Thirst
+1 Fading Hope
+1 Sorin the Mirthless
+2 Kaya the Inexorable
+2 Parasitic Grasp
+2 Divine Smite
+2 Suspicious Stowaway
+3 Go Blank

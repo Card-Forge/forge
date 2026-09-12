@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Rick_Paul_-_Burn_(Modern,_#666105).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Searing Blaze
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+3 Bloodstained Mire
+2 Inspiring Vantage
+3 Mountain
+2 Sacred Foundry
+3 Scalding Tarn
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+4 Destructive Revelry
+2 Kor Firewalker
+1 Lightning Helix
+3 Path to Exile
+1 Relic of Progenitus
+1 Skullcrack
+2 Sudden Shock

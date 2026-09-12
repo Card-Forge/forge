@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/phyrexia/phyrexiantiles.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/phyrexia/phyrexiantiles.tsx" />
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJy1k10OAiEMhPvqA1xGlBvsDf07luuFtNk2qXVAU3CSeVrot7TTZUe0OJ8S0Vl8SZ/fkSN3vPeZaBUf8ntNZOb4O1Gu6vaqWU1N5GPezqhmcLV2T/7MDK4Vv4nfz7qm7Z1IUe690c9i+slMnis69why2UXyxBzNTzX91Ln6fJUBpu4FyhOaq81XdIf8Llmhc/4/orNVocx8445kymbLs1GGrDjjI5nSXCF2S1VyPJqrIjVau4z6WyZwbb5+5c7g9ebc6vFMrrJXwNf9/gez1/OR3j4BI+CnQA==
@@ -35,32 +35,75 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="271.665" width="48" height="16">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="271.665" width="48" height="16">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/treasure.tx" x="317.667" y="43.1667" />
-  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="207" y="94">
+  <object id="67" template="../../../../common/maps/obj/treasure.tx" x="317.667" y="43.1667"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="207" y="94">
    <properties>
     <property name="enemy" value="Orthodoxy Angel" />
    </properties>
   </object>
-  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="239.167" y="176">
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="239.167" y="176">
    <properties>
     <property name="enemy" value="Orthodoxy Duelist" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="waypoints" value="70,71,70" />
    </properties>
   </object>
-  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="175" y="128">
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="175" y="128">
    <properties>
     <property name="enemy" value="Orthodoxy Duelist" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="waypoints" value="72,73,72" />
    </properties>
   </object>
-  <object id="76" template="../../../../../../common/maps/obj/booster.tx" x="98.6667" y="43">
+  <object id="76" template="../../../../common/maps/obj/booster.tx" x="98.6667" y="43">
    <properties>
     <property name="reward">[
   {
@@ -88,8 +131,51 @@
 </property>
    </properties>
   </object>
-  <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="315" y="74" />
-  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="140" y="80">
+  <object id="78" template="../../../../common/maps/obj/treasure.tx" x="315" y="74"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="140" y="80">
    <properties>
     <property name="enemy" value="Orthodoxy Angel" />
     <property name="threatRange" type="int" value="50" />
@@ -98,9 +184,9 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="Waypoints">
-  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="144" y="176" />
-  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="272" y="176" />
-  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="272" y="128" />
-  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="144" y="128" />
+  <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="144" y="176" />
+  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="272" y="176" />
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="272" y="128" />
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="144" y="128" />
  </objectgroup>
 </map>

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Orunmila
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/FerMTG_-_White_Weenie_(Standard,_#1665716).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+4 Brutal Cathar
+4 Adeline, Resplendent Cathar
+4 Hopeful Initiate
+4 Resolute Reinforcements
+4 Valiant Veteran
+4 Recruitment Officer
+4 Coppercoat Vanguard
+3 Ossification
+3 Invasion of Gobakhan
+16 Plains
+2 Eiganjo, Seat of the Empire
+4 Mishra's Foundry
+[Sideboard]
+4 Wedding Announcement
+2 Destroy Evil
+2 Lay Down Arms
+2 Phyrexian Vindicator
+1 Ossification
+1 Invasion of Gobakhan
+3 Surge of Salvation

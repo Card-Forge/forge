@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/Modern_21-06_El_Nucli/Sergio_Garcia_-_Faeries_(Modern,_#78652).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Spellstutter Sprite
+3 Vendilion Clique
+4 Cryptic Command
+2 Dismember
+3 Mana Leak
+2 Smother
+3 Spell Snare
+3 Inquisition of Kozilek
+3 Thoughtseize
+4 Bitterblossom
+4 Creeping Tar Pit
+4 Darkslick Shores
+4 Island
+4 Mutavault
+4 River of Tears
+4 Secluded Glen
+1 Tectonic Edge
+[Sideboard]
+2 Batterskull
+2 Disfigure
+2 Grafdigger's Cage
+1 Jace Beleren
+3 Ratchet Bomb
+4 Sower of Temptation
+1 Sword of Feast and Famine

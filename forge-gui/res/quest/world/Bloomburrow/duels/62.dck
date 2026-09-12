@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Andreas_Johansson_-_4c_Helga_(Modern,_#2241206).dck
+Deck Type=constructed
+
+[Main]
+4 Omnath, Locus of Creation
+4 Helga, Skittish Seer
+4 Scion of Draco
+4 Solitude
+3 Subtlety
+3 The One Ring
+3 Fire // Ice
+2 Dead // Gone
+4 Leyline Binding
+4 Leyline of the Guildpact
+4 Flooded Strand
+4 Windswept Heath
+3 Wooded Foothills
+1 Zagoth Triome
+1 Savai Triome
+1 Elegant Parlor
+1 Lush Portico
+1 Thundering Falls
+1 Overgrown Tomb
+1 Breeding Pool
+1 Steam Vents
+1 Sacred Foundry
+1 Godless Shrine
+1 Temple Garden
+1 Island
+1 Forest
+1 Plains
+[Sideboard]
+1 Keruga, the Macrosage
+2 Force of Negation
+2 Force of Vigor
+3 Obsidian Charmaw
+2 Endurance
+2 Mystical Dispute
+2 Brotherhood's End
+1 Commandeer

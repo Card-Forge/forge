@@ -26,6 +26,7 @@ public interface IDeviceAdapter {
     void exit();
     void closeSplashScreen();
     void convertToJPEG(InputStream input, OutputStream output) throws IOException;
+    void convertToPNG(InputStream input, OutputStream output) throws IOException;
     Pair<Integer, Integer> getRealScreenSize(boolean real);
     ArrayList<String> getGamepads();
     UpnpServiceConfiguration getUpnpPlatformService();

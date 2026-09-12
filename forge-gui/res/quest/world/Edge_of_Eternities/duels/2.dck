@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Ivan_Draw_Go_-_Jeskai_Artifacts_(Standard,_#2576348).dck
+Deck Type=constructed
+
+[Main]
+4 Pinnacle Emissary
+2 Clay-Fired Bricks
+2 Dusk Rose Reliquary
+3 Glass Casket
+4 Braided Net
+3 Perilous Snare
+3 Cryogen Relic
+3 Repurposing Bay
+4 Simulacrum Synthesizer
+2 Spring-Loaded Sawblades
+1 The Irencrag
+1 Thousand Moons Smithy
+4 United Battlefront
+2 Fomori Vault
+4 Floodfarm Verge
+4 Sacred Foundry
+4 Meticulous Archive
+1 Restless Anchorage
+4 Starting Town
+3 Island
+2 Plains
+[Sideboard]
+3 Day of Judgment
+3 Tishana's Tidebinder
+2 Ghost Vacuum
+3 Three Steps Ahead
+1 Torpor Orb
+3 Abrade

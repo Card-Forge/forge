@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Aaron_Eng_-_Simic_Adventure_(Standard,_#1037141).dck
+Deck Type=constructed
+
+[Main]
+4 Uro, Titan of Nature's Wrath
+4 Brazen Borrower
+4 Edgewall Innkeeper
+4 Fae of Wishes
+4 Beanstalk Giant
+4 Lovestruck Beast
+4 Merfolk Secretkeeper
+1 The Great Henge
+4 Lucky Clover
+1 Castle Vantress
+4 Fabled Passage
+4 Temple of Mystery
+9 Island
+9 Forest
+[Sideboard]
+1 Essence Scatter
+1 Into the Roil
+1 Lullmage's Domination
+1 Negate
+1 Once and Future
+1 Primal Might
+1 Return to Nature
+1 Shadowspear
+1 Soul-Guide Lantern
+1 Sublime Epiphany
+1 Teferi, Master of Time
+2 Run Away Together
+2 Ugin, the Spirit Dragon

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -7,8 +7,8 @@
   <property name="dungeonEffect">{"startBattleWithCard": ["Shivan Gorge|USG", "Dormant Volcano|VIS", "Wall of Lava|ICE", "Grim Lavamancer|TOR", "Gorilla Shaman|ALL", "Task Mage Assembly|PCY", "Havoc|TMP", "Scald|USG"]}</property>
   <property name="respawnEnemies" type="bool" value="true" />
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
    eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
@@ -38,7 +38,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="432.5" y="463">
+  <object id="47" template="../../../../common/maps/obj/gold.tx" x="432.5" y="463">
    <properties>
     <property name="reward">[
   {
@@ -49,7 +49,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="304.5" y="466">
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="304.5" y="466">
    <properties>
     <property name="reward">[
   {
@@ -60,7 +60,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="223.57" y="537.245">
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="223.57" y="537.245">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Wall of Fire|LEA" ] }</property>
     <property name="enemy" value="Master Red Wizard" />
@@ -68,7 +68,7 @@
     <property name="waypoints" value="76,75,76,84,81,82,83,82,79,80,78,77" />
    </properties>
   </object>
-  <object id="55" template="../../../../../../common/maps/obj/gate.tx" x="367.698" y="638.559" width="17" height="16">
+  <object id="55" template="../../../../common/maps/obj/gate.tx" x="367.698" y="638.559" width="17" height="16">
    <properties>
     <property name="dialog">[
 	{
@@ -107,17 +107,17 @@
 ]</property>
    </properties>
   </object>
-  <object id="60" template="../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="354" y="542.5" width="44" height="23.5">
+  <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="354" y="542.5" width="44" height="23.5">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/red_end_palace_f1.tmx" />
    </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="81.5" y="606">
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="81.5" y="606">
    <properties>
     <property name="defeatDialog">[
    {
@@ -128,11 +128,11 @@
    }
 ]</property>
     <property name="enemy" value="Latulla, Keldon Overseer" />
-    <property name="threatRange" type="int" value="40" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Latulla, Keldon Overseer|PCY", "Keldon Necropolis|INV", "Citadel of Pain|PCY", "Copper-Leaf Angel|PCY"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="599">
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="649.5" y="599">
    <properties>
     <property name="defeatDialog">[
    {
@@ -143,11 +143,11 @@
    }
 ]</property>
     <property name="enemy" value="Márton Stromgald" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["M\u00e1rton Stromgald|ICE", "Agent of Stromgald|ALL", "Stromgald Cabal|ICE", "Knight of Stromgald|ICE", "Ebony Horse|3ED"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="660" y="409.5">
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="660" y="409.5">
    <properties>
     <property name="defeatDialog">[
    {
@@ -158,11 +158,11 @@
    }
 ]</property>
     <property name="enemy" value="Jeska, Warrior Adept" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Jeska, Warrior Adept|JUD", "Fires of Yavimaya|INV", "Overabundance|INV", "Narcissism|TOR"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
    <properties>
     <property name="defeatDialog">[
    {
@@ -176,7 +176,7 @@
     <property name="threatRange" type="int" value="20" />
    <property name="effect">{"startBattleWithCard": ["Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Loafing Giant|INV"]}</property></properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="78.5" y="405.5">
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="78.5" y="405.5">
    <properties>
     <property name="defeatDialog">[
    {
@@ -187,11 +187,11 @@
    }
 ]</property>
     <property name="enemy" value="Eron the Relentless" />
-    <property name="threatRange" type="int" value="20" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Koskun Keep|HML", "Eron the Relentless|HML", "Serrated Arrows|HML"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="520.254" y="498.533">
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="520.254" y="498.533">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Wall of Fire|LEA" ] }</property>
     <property name="enemy" value="Master Red Wizard" />
@@ -199,7 +199,7 @@
     <property name="waypoints" value="83,82,79,80,78,77,76,75,84,81,82" />
    </properties>
   </object>
-  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="401.5" y="655">
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="401.5" y="655">
    <properties>
     <property name="dialog">[
   {
@@ -228,15 +228,15 @@
    <property name="effect">{ "startBattleWithCard": [ "Fire Diamond|MIR" ] }</property>
     </properties>
   </object>
-  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="54.5" y="495" />
-  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="223.5" y="498.5" />
-  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="224.5" y="701" />
-  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="52.5" y="703" />
-  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="511" y="703" />
-  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="687" y="703.5" />
-  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="510.5" y="348.5" />
-  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="513.5" y="497" />
-  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="685" y="497" />
-  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="228.5" y="352.5" />
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="54.5" y="495" />
+  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="223.5" y="498.5" />
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="224.5" y="701" />
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="52.5" y="703" />
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="511" y="703" />
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="687" y="703.5" />
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="510.5" y="348.5" />
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="513.5" y="497" />
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="685" y="497" />
+  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="228.5" y="352.5" />
  </objectgroup>
 </map>

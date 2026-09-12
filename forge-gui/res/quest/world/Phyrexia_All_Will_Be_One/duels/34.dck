@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Madcraka_-_Budget_Burn_(Standard,_#1617921).dck
+Deck Type=constructed
+
+[Main]
+2 Fable of the Mirror-Breaker
+4 Sawblade Scamp
+4 Kumano Faces Kakkazan
+4 Phoenix Chick
+4 Thermo-Alchemist
+4 Monastery Swiftspear
+4 Play with Fire
+3 Kami's Flare
+4 Lightning Strike
+2 Strangle
+4 Reckless Impulse
+1 Mechanized Warfare
+1 Chandra, Dressed to Kill
+18 Mountain
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+1 Abrade
+3 Rending Flame
+2 Unlicensed Hearse
+1 The Elder Dragon War
+3 Furnace Punisher
+2 Bloody Betrayal
+3 Obliterating Bolt

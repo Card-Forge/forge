@@ -1,0 +1,9 @@
+Name:Giant-Man, Gargantuan Genius
+ManaCost:3 G G
+Types:Legendary Creature Human Scientist Hero
+PT:6/6
+K:Reach
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your first main phase, add {G} for each creature you control with power 4 or greater.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X
+SVar:X:Count$Valid Creature.YouCtrl+powerGE4
+Oracle:Reach\nAt the beginning of your first main phase, add {G} for each creature you control with power 4 or greater.

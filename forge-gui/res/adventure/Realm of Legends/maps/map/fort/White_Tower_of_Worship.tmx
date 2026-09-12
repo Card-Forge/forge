@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="140">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="141">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -87,6 +87,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Vigor|JOU&quot;, &quot;Spear of Heliod|THS&quot;, &quot;Heliod's Emissary|THS&quot;]}"/>
     <property name="enemy" value="Heliod"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -156,6 +158,16 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/enemy.tx" x="198.461" y="86.6203">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Vigor|JOU&quot;, &quot;Spear of Heliod|THS&quot;]}"/>
+    <property name="enemy" value="Heliod"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
  </objectgroup>

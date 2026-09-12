@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Cable
+Title=Cable
+Icon=Cable.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Alex_Dred_-_Simic_Toxic_(Standard,_#1625209).dck
+Deck Type=constructed
+
+[Main]
+4 Stormchaser Drake
+4 Venerated Rotpriest
+4 Ivy, Gleeful Spellthief
+3 Aspirant's Ascent
+3 Slip Out the Back
+3 Experimental Augury
+2 Prologue to Phyresis
+3 Serum Snare
+2 Tamiyo's Safekeeping
+3 Tyvar's Stand
+3 March of Swirling Mist
+2 Distorted Curiosity
+2 Combat Research
+2 Invasion of Ikoria
+5 Island
+1 Otawara, Soaring City
+5 Forest
+1 Boseiju, Who Endures
+4 Dreamroot Cascade
+4 Yavimaya Coast
+[Sideboard]
+3 Bring the Ending
+2 Tamiyo's Safekeeping
+3 Infectious Bite
+1 Slip Out the Back
+2 Mesmerizing Dose
+4 Bloated Contaminator

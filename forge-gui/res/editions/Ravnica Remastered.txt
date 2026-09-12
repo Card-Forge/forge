@@ -130,7 +130,7 @@ ScryfallCode=RVR
 121 C Rubblebelt Maaka @Eric Velhagen
 122 C Scorched Rusalka @Luca Zontini
 123 U Siege of Towers @Anthony S. Waters
-124 C Skewer the Critics @Heonhwa Choe
+124 C Skewer the Critics @Heonhwa
 125 U Skullcrack @Dave Kendall
 126 U Stalking Vengeance @Anthony S. Waters
 127 C Taste for Mayhem @Greg Hildebrandt
@@ -380,7 +380,7 @@ ScryfallCode=RVR
 337 R Legion Warboss @Alex Konstad
 338 U Light Up the Stage @Dmitry Burmak
 339 R Mizzix's Mastery @Dan Murayama Scott
-340 C Skewer the Critics @Heonhwa Choe
+340 C Skewer the Critics @Heonhwa
 341 U Skullcrack @Dave Kendall
 342 M Utvara Hellkite @Mark Zug
 343 C Arboreal Grazer @Jason Rainville

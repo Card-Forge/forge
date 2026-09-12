@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Attomium_-_Golgari_Yawgmoth_(Modern,_#2529837).dck
+Deck Type=constructed
+
+[Main]
+4 Delighted Halfling
+1 Endurance
+1 Orcish Bowmasters
+2 Walking Ballista
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+1 Outland Liberator
+2 Wall of Roots
+1 Hapatra, Vizier of Poisons
+1 Sephiroth, Fabled SOLDIER
+4 Agatha's Soul Cauldron
+3 Chord of Calling
+4 Malevolent Rumble
+3 Green Sun's Zenith
+2 Dredger's Insight
+2 Grist, the Hunger Tide
+1 Windswept Heath
+4 Verdant Catacombs
+2 Boseiju, Who Endures
+2 Underground Mortuary
+1 Dryad Arbor
+1 Swamp
+1 Shifting Woodland
+2 Forest
+1 Misty Rainforest
+2 Wastewood Verge
+2 Overgrown Tomb
+2 Spymaster's Vault
+[Sideboard]
+2 Force of Vigor
+1 Vexing Bauble
+2 Fulminator Mage
+3 Thoughtseize
+2 Fatal Push
+1 Scavenging Ooze
+1 Dismember
+1 Endurance
+1 Culling Ritual
+1 Skyfisher Spider

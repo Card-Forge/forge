@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/GameRift_Win-A-Goyf_March_2016/Chris_Pantazoglou_-_Red_Deck_Wins_(Modern,_#611524).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+3 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+2 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+6 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+1 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+2 Destructive Revelry
+2 Hallowed Moonlight
+1 Kataki, War's Wage
+2 Kor Firewalker
+2 Path to Exile
+1 Relic of Progenitus
+2 Rending Volley
+2 Slagstorm

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/Arcadia_~_Viernes_de_Modern/Sergi_Troiti├▒o_-_Rogue_(Modern,_#38887).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+4 Hero of Bladehold
+2 Kessig Malcontents
+4 Lightning Mauler
+4 Silverblade Paladin
+3 Stormblood Berserker
+4 Thalia, Guardian of Thraben
+4 Path to Exile
+4 Gather the Townsfolk
+4 Pillar of Flame
+3 Cavern of Souls
+4 Clifftop Retreat
+4 Mountain
+4 Plains
+4 Sacred Foundry
+1 Slayers' Stronghold
+[Sideboard]
+3 Fiend Hunter
+3 Honor of the Pure
+4 Mirran Crusader
+3 Restoration Angel
+2 Riders of Gavony

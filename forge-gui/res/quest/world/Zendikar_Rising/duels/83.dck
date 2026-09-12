@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Antoine57437_-_Abzan_Company_(Modern,_#1058922).dck
+Deck Type=constructed
+
+[Main]
+1 Birds of Paradise
+1 Magus of the Moon
+1 Wall of Omens
+1 Wasteland Strangler
+4 Eternal Witness
+4 Flickerwisp
+4 Giver of Runes
+4 Knight of the White Orchid
+4 Skyclave Apparition
+4 Tidehollow Sculler
+4 Aether Vial
+3 Eladamri's Call
+4 Collected Company
+4 Ephemerate
+1 Godless Shrine
+1 Sacred Foundry
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Temple Garden
+1 Flooded Strand
+3 Snow-Covered Plains
+4 Windswept Heath
+4 Marsh Flats
+[Sideboard]
+1 Shriekmaw
+1 Collector Ouphe
+1 Faerie Macabre
+1 Gaddock Teeg
+1 Gaea's Blessing
+1 Linvala, Keeper of Silence
+1 Mangara of Corondor
+2 Magus of the Moon
+3 Plague Engineer
+3 Auriok Champion

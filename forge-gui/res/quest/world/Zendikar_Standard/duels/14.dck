@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Medium
+Description=Zendikar/2010_TCGplayer.com_$5k_Series_-_Atlanta/Pat_Cox_-_Jund_(Standard,_#2774).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Broodmate Dragon
+4 Siege-Gang Commander
+4 Sprouting Thrinax
+3 Bituminous Blast
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+3 Maelstrom Pulse
+3 Rampant Growth
+4 Dragonskull Summit
+2 Forest
+3 Mountain
+1 Oran-Rief, the Vastwood
+4 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Fleshbag Marauder
+4 Goblin Ruinblaster
+2 Jund Charm
+3 Malakir Bloodwitch
+2 Mind Rot

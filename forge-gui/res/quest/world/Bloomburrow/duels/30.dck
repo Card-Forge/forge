@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Ito_motoaki_-_UB_Aggro_(Standard,_#2155518).dck
+Deck Type=constructed
+
+[Main]
+3 Sheoldred, the Apocalypse
+1 Gix, Yawgmoth Praetor
+2 Faerie Mastermind
+1 Aclazotz, Deepest Betrayal
+3 Deep-Cavern Bat
+3 Preacher of the Schism
+3 Caustic Bronco
+1 Kaervek, the Punisher
+4 Go for the Throat
+4 Cut Down
+1 Sheoldred's Edict
+2 Phantom Interference
+1 Three Steps Ahead
+2 Shoot the Sheriff
+2 Cruelclaw's Heist
+2 Liliana of the Veil
+4 Island
+7 Swamp
+4 Underground River
+4 Darkslick Shores
+1 Mirrex
+3 Restless Reef
+1 Undercity Sewers
+1 Fountainport
+[Sideboard]
+2 Negate
+1 Duress
+2 Gix's Command
+2 Phyrexian Fleshgorger
+1 Sheoldred's Edict
+1 Glistening Deluge
+3 Tishana's Tidebinder
+2 Malicious Eclipse
+1 Cruelclaw's Heist

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Lex Luthor
+Title=Lex Luthor
+Icon=Lex Luthor.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/Pop-a-Lot_Super_Series_Event_#6/Garry_Wong_-_RUG_Pod_(Standard,_#33295).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+4 Birds of Paradise
+1 Borderland Ranger
+1 Daybreak Ranger
+1 Deceiver Exarch
+4 Huntmaster of the Fells
+1 Inferno Titan
+4 Llanowar Elves
+2 Phantasmal Image
+1 Phyrexian Metamorph
+4 Strangleroot Geist
+1 Wolfir Silverheart
+1 Zealous Conscripts
+4 Birthing Pod
+2 Bonfire of the Damned
+3 Green Sun's Zenith
+4 Copperline Gorge
+9 Forest
+4 Hinterland Harbor
+2 Island
+3 Mountain
+2 Rootbound Crag
+[Sideboard]
+3 Arc Trail
+1 Consecrated Sphinx
+2 Crushing Vines
+4 Hellrider
+1 Stingerfling Spider

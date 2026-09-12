@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="110">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="111">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -36,8 +36,10 @@
   </object>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="744.5" y="168.62">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Baron Sengir|HML&quot;, &quot;Cemetery Gate&quot;, &quot;Seal of Doom|NEM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Subversion|ULG&quot;, &quot;Cemetery Gate|HML|[44a]&quot;, &quot;Cemetery Gate|HML|[44b]&quot;, &quot;Koskun Falls|HML&quot;, &quot;Seal of Doom|NEM&quot;]}"/>
     <property name="enemy" value="Sengir"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -160,5 +162,15 @@
   <object id="107" template="../../../../common/maps/obj/collision.tx" x="786.482" y="36.2715" width="43.0363" height="43.4571"/>
   <object id="108" template="../../../../common/maps/obj/collision.tx" x="676.482" y="34.2715" width="43.0363" height="43.4571"/>
   <object id="109" template="../../../../common/maps/obj/collision.tx" x="675.149" y="130.271" width="43.0363" height="43.4571"/>
+  <object id="110" template="../../../../common/maps/obj/enemy.tx" x="744.091" y="169.152">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Subversion|ULG&quot;, &quot;Cemetery Gate|HML|[44a]&quot;, &quot;Seal of Doom|NEM&quot;]}"/>
+    <property name="enemy" value="Sengir"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

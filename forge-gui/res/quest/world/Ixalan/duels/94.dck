@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Robot94
+Title=Robot94
+Icon=Barney Rubble.jpg
+Difficulty=Medium
+Description=Sultai Energy 
+Deck Type=constructed
+
+[Main]
+2 Bristling Hydra
+4 Glint-Sleeve Siphoner
+2 Hostage Taker
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+2 The Scarab God
+4 Winding Constrictor
+2 Blossoming Defense
+2 Essence Scatter
+3 Fatal Push
+1 Vraska's Contempt
+4 Attune with Aether
+2 Duress
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+1 Drowned Catacomb
+1 Fetid Pools
+3 Forest
+1 Island
+4 Swamp
+[Sideboard]
+2 Appetite for the Unnatural
+1 Bristling Hydra
+3 Cartouche of Ambition
+2 Deathgorge Scavenger
+1 Duress
+1 Fatal Push
+2 Negate
+2 Nissa, Steward of Elements
+1 Vraska's Contempt

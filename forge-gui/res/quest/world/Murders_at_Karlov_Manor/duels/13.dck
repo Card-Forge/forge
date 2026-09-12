@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Christoforos_Lampadarios_-_Boros_Convoke_(Standard,_#1978007).dck
+Deck Type=constructed
+
+[Main]
+4 Imodane's Recruiter
+4 Knight-Errant of Eos
+4 Novice Inspector
+4 Resolute Reinforcements
+2 Sanguine Evangelist
+4 Voldaren Epicure
+4 Warden of the Inner Sky
+2 Yotian Frontliner
+4 Gleeful Demolition
+4 Case of the Gateway Express
+2 Warleader's Call
+4 Battlefield Forge
+2 Cavern of Souls
+1 Eiganjo, Seat of the Empire
+1 Mirrex
+3 Mountain
+4 Plains
+2 Sokenzan, Crucible of Defiance
+3 Sundown Pass
+2 Restless Bivouac
+[Sideboard]
+2 End the Festivities
+1 Get Lost
+2 Lithomantic Barrage
+3 Thalia, Guardian of Thraben
+3 Urabrask's Forge
+1 Invasion of Gobakhan
+3 Destroy Evil

@@ -13,3 +13,6 @@ Type=Funny
 
 [eternal]
 2 U Concentrate @Kevin Smith
+
+[WalkerTypes]
+Stone

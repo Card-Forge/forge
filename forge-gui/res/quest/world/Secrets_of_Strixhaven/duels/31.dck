@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Hamuda_-_Orzhov_Aggro_(Standard,_#2904481).dck
+Deck Type=constructed
+
+[Main]
+3 Quill-Blade Laureate
+4 Informed Inkwright
+4 Lecturing Scornmage
+3 Flowerfoot Swordmaster
+4 Cheeky House-Mouse
+4 Scolding Administrator
+2 Shoot the Sheriff
+4 Silverquill Charm
+4 Dig Site Inventory
+3 Practiced Offense
+4 Honor
+4 Concealed Courtyard
+2 Shattered Sanctum
+4 Bleachbone Verge
+4 Godless Shrine
+4 Starting Town
+2 Plains
+1 Swamp
+[Sideboard]
+3 Rest in Peace
+4 Duress
+2 Bitter Triumph
+2 Requisition Raid
+1 The Ooze
+2 Torpor Orb

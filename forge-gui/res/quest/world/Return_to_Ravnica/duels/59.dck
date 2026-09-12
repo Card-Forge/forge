@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Magic-League_Modern_Trial_23-08-2013/Sex_monkey_-_GW_Aggro_(Modern,_#57249).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+3 Kor Spiritdancer
+3 Noble Hierarch
+2 Silhana Ledgewalker
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+2 Keen Sense
+4 Rancor
+2 Spider Umbra
+2 Spirit Mantle
+1 Forest
+4 Horizon Canopy
+3 Misty Rainforest
+4 Razorverge Thicket
+3 Temple Garden
+3 Verdant Catacombs
+[Sideboard]
+2 Ethersworn Canonist
+4 Leyline of Sanctity
+1 Nature's Claim
+2 Qasali Pridemage
+3 Rest in Peace
+3 Stony Silence

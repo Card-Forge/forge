@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Lisa Simpson
+Title=Lisa Simpson
+Icon=Lisa Simpson.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Abby_Rose_Gibson_-_Mono-R_Madness_(Modern,_#949479).dck
+Deck Type=constructed
+
+[Main]
+3 Ox of Agonas
+4 Street Wraith
+4 Storm Herald
+4 Hollow One
+4 Flamewake Phoenix
+4 Flameblade Adept
+1 Lightning Bolt
+2 Lightning Axe
+3 Cathartic Reunion
+4 Goblin Lore
+4 Burning Inquiry
+4 Eldrazi Conscription
+2 Forgotten Cave
+2 Wooded Foothills
+4 Bloodstained Mire
+11 Mountain
+[Sideboard]
+1 Shenanigans
+2 Shrine of Burning Rage
+2 Blood Moon
+3 Tormod's Crypt
+3 Lightning Bolt
+4 Dragon's Claw

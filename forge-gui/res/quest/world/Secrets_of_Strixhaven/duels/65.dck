@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Derek_Choi_-_Dimir_Mill_(Modern,_#2927594).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+2 Exhibition Tidecaller
+4 Archive Trap
+4 Fatal Push
+4 Surgical Extraction
+3 Drown in the Loch
+3 Visions of Beyond
+1 Crypt Incursion
+1 Echoing Truth
+4 Fractured Sanity
+2 Glimpse the Unthinkable
+1 Tasha's Hideous Laughter
+1 Jace, the Perfected Mind
+4 Field of Ruin
+4 Island
+4 Polluted Delta
+2 Swamp
+1 Cephalid Coliseum
+1 Flooded Strand
+1 Mikokoro, Center of the Sea
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+1 Shelldock Isle
+1 Undercity Sewers
+1 Watery Grave
+[Sideboard]
+2 Damping Sphere
+2 Ensnaring Bridge
+2 Extirpate
+2 Soul-Guide Lantern
+1 Baleful Mastery
+1 Damnation
+1 Engineered Explosives
+1 Go for the Throat
+1 Long Goodbye
+1 Pithing Needle
+1 The Meathook Massacre

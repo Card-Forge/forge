@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Gavin_Meagher_-_Azorius_Aggro_(Standard,_#1967689).dck
+Deck Type=constructed
+
+[Main]
+4 Picklock Prankster
+4 Haughty Djinn
+4 Monastery Mentor
+4 Consider
+3 Otherworldly Gaze
+3 March of Swirling Mist
+1 Get Lost
+2 Make Disappear
+1 Negate
+1 Fading Hope
+4 Sleight of Hand
+4 Helping Hand
+2 Recommission
+4 Chart a Course
+4 Seachrome Coast
+4 Adarkar Wastes
+5 Island
+1 Plains
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+3 Deserted Beach
+[Sideboard]
+2 Sunset Revelry
+2 Knockout Blow
+2 Negate
+2 Disdainful Stroke
+1 See Double
+2 Get Lost
+1 Vanquish the Horde
+1 Consuming Tide
+2 Temporary Lockdown

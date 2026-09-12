@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="27" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="195">
  <editorsettings>
-  <export format="tmx"/>
+  <export format="tmx" />
  </editorsettings>
  <properties>
-  <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="false"/>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="respawnEnemies" type="bool" value="false" />
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="38401" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
- <tileset firstgid="54785" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx" />
+ <tileset firstgid="54785" source="../../../../common/maps/tileset/buildings-nocollide.tsx" />
  <layer id="18" name="CollisionBis" width="27" height="40">
   <data encoding="base64" compression="zlib">
    eJzt1dEJwjAQBuA+WmqLj4KO4QSK4g7OotMUA+oI3UbUNeyhodeQXAL3V3zoDwcWQr5eEtMsGzPm/7PLu9+XSZZdPXVra1V1pbXIeeT+Mfe872ksyfF5GmsfcXhGy289EywDOhsUyTPAM2+LvJenuIOyQoWyltOuJIuPR1jc4z2jLDuvZNG9QjkWWCsUcprImFRL8hCOa1lvCMdnHcr+M8qx1qn4lOtQUA5lkTAXP5u/sIbYr1Ck/8TZs/bauO9Vt4Zpa1thPbtnNZvTfC3KfIZ1qEzg/TeK+9+mYXfkWphPazXONyDUk9ZyHaknbbhDkXpKCd/zkFWXeidm2aDWLsVC9MQtX1BrF7PQDre4p/l+vAFhQE9Z
@@ -40,179 +40,311 @@
  </layer>
  <layer id="17" name="AboveClutter" width="27" height="40">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2DggTg3/ezaBbRrGxCvpoOdMLs2DDO7InjoE34gQC8/gQC9/DQKRsEoGAWjYGiAH0DsSyWz/Hlwy9XxQujXVLDHiwdSd3risQ8EFhCQRwYswgwM/4Sw20OtNtUfoPl/gdhchIHBDIiZhSHim7ipb4810HxHILaDYnsRiBzMT9Swh1EYYo+TCELsCiMDw1VGiD1SQDtkqNTumA+0ayE0vH4LQewRZWZgiGKC2BMKtG8rFcMOFl4we8KB9kxkhtgDApTahR52MHuCoPZMYkao3UpEWscFYP5BjqMiJkgYgnAPyE9MCLlgHkickWPfLKCflggj+DA/gez5CLTjJxB/YULVQ459LNCws4L6CWQ+zE8gv4DseseEGobk2IeeFtD99A3qJ1AYTsRi1zYG4vouMHuQ/YNsTyjUP/1A/nsg/R2IAfrkVGU=
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="166" template="../../../../../../common/maps/obj/manashards.tx" x="220.318" y="220.045"/>
-  <object id="167" template="../../../../../../common/maps/obj/booster.tx" x="347.898" y="529.832">
+  <object id="166" template="../../../../common/maps/obj/manashards.tx" x="220.318" y="220.045" />
+  <object id="167" template="../../../../common/maps/obj/booster.tx" x="347.898" y="529.832">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="170" template="../../../../../../common/maps/obj/door_down.tx" x="146.537" y="632.155" width="45.8303" height="21.1308" rotation="0.284412">
+  <object id="170" template="../../../../common/maps/obj/door_down.tx" x="146.537" y="632.155" width="45.8303" height="21.1308" rotation="0.284412">
    <properties>
-    <property name="direction" value="up"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
-    <property name="teleportObjectId" value="204"/>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx" />
+    <property name="teleportObjectId" value="204" />
    </properties>
   </object>
-  <object id="174" template="../../../../../../common/maps/obj/door_down.tx" x="270.927" y="631.04" width="45.8303" height="16.1284" rotation="0.284412">
+  <object id="174" template="../../../../common/maps/obj/door_down.tx" x="270.927" y="631.04" width="45.8303" height="16.1284" rotation="0.284412">
    <properties>
-    <property name="direction" value="up"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
-    <property name="teleportObjectId" value="203"/>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx" />
+    <property name="teleportObjectId" value="203" />
    </properties>
   </object>
-  <object id="175" template="../../../../../../common/maps/obj/treasure.tx" x="247.342" y="222.438">
+  <object id="175" template="../../../../common/maps/obj/treasure.tx" x="247.342" y="222.438">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
-  <object id="176" template="../../../../../../common/maps/obj/door_down.tx" x="203.912" y="149.787" width="29.8454" height="19.2078" rotation="0.284412">
+  <object id="176" template="../../../../common/maps/obj/door_down.tx" x="203.912" y="149.787" width="29.8454" height="19.2078" rotation="0.284412">
    <properties>
-    <property name="direction" value="up"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f4.tmx"/>
-    <property name="teleportObjectId" value="174"/>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f4.tmx" />
+    <property name="teleportObjectId" value="174" />
    </properties>
   </object>
-  <object id="177" template="../../../../../../common/maps/obj/gold.tx" x="362.842" y="499.605"/>
-  <object id="178" template="../../../../../../common/maps/obj/gold.tx" x="379.342" y="510.605"/>
-  <object id="179" template="../../../../../../common/maps/obj/gold.tx" x="336.342" y="547.105"/>
-  <object id="180" template="../../../../../../common/maps/obj/gold.tx" x="353.342" y="541.105"/>
-  <object id="182" template="../../../../../../common/maps/obj/door_down.tx" x="211.919" y="296.502" width="29.8454" height="19.2078" rotation="0.284412">
+  <object id="177" template="../../../../common/maps/obj/gold.tx" x="362.842" y="499.605" />
+  <object id="178" template="../../../../common/maps/obj/gold.tx" x="379.342" y="510.605" />
+  <object id="179" template="../../../../common/maps/obj/gold.tx" x="336.342" y="547.105" />
+  <object id="180" template="../../../../common/maps/obj/gold.tx" x="353.342" y="541.105" />
+  <object id="182" template="../../../../common/maps/obj/door_down.tx" x="211.919" y="296.502" width="29.8454" height="19.2078" rotation="0.284412">
    <properties>
-    <property name="direction" value="down"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f1.tmx"/>
-    <property name="teleportObjectId" value="114"/>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f1.tmx" />
+    <property name="teleportObjectId" value="114" />
    </properties>
   </object>
-  <object id="183" template="../../../../../../common/maps/obj/manashards.tx" x="142.842" y="398.772"/>
-  <object id="184" template="../../../../../../common/maps/obj/manashards.tx" x="284.175" y="440.772"/>
-  <object id="185" template="../../../../../../common/maps/obj/treasure.tx" x="195.509" y="222.772">
+  <object id="183" template="../../../../common/maps/obj/manashards.tx" x="142.842" y="398.772" />
+  <object id="184" template="../../../../common/maps/obj/manashards.tx" x="284.175" y="440.772" />
+  <object id="185" template="../../../../common/maps/obj/treasure.tx" x="195.509" y="222.772">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
-  <object id="186" template="../../../../../../common/maps/obj/treasure.tx" x="298.175" y="280.105">
+  <object id="186" template="../../../../common/maps/obj/treasure.tx" x="298.175" y="280.105">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
-  <object id="187" template="../../../../../../common/maps/obj/treasure.tx" x="338.842" y="566.105">
+  <object id="187" template="../../../../common/maps/obj/treasure.tx" x="338.842" y="566.105">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
-  <object id="188" template="../../../../../../common/maps/obj/enemy.tx" x="193.509" y="438.105">
+  <object id="188" template="../../../../common/maps/obj/enemy.tx" x="193.509" y="438.105">
    <properties>
-    <property name="displayNameOverride" value="Tibalt's Pet Dragon"/>
-    <property name="enemy" value="Volcano Dragon"/>
-    <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="displayNameOverride" value="Tibalt's Pet Dragon" />
+    <property name="enemy" value="Volcano Dragon" />
+    <property name="speedModifier" type="float" value="20" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="189" template="../../../../../../common/maps/obj/collision.tx" x="322.842" y="-7.51957" width="112" height="459.25"/>
-  <object id="190" template="../../../../../../common/maps/obj/collision.tx" x="-3.15789" y="-7.51957" width="122" height="639.916"/>
-  <object id="191" template="../../../../../../common/maps/obj/collision.tx" x="118.175" y="-6.85291" width="206.667" height="93.2497"/>
-  <object id="193" template="../../../../../../common/maps/obj/dialog.tx" x="120.91" y="372.735" width="199.197" height="117.406">
+  <object id="189" template="../../../../common/maps/obj/collision.tx" x="322.842" y="-7.51957" width="112" height="459.25" />
+  <object id="190" template="../../../../common/maps/obj/collision.tx" x="-3.15789" y="-7.51957" width="122" height="639.916" />
+  <object id="191" template="../../../../common/maps/obj/collision.tx" x="118.175" y="-6.85291" width="206.667" height="93.2497" />
+  <object id="193" template="../../../../common/maps/obj/dialog.tx" x="120.91" y="372.735" width="199.197" height="117.406">
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;As you approach, the castle gates swing open with an eerie creak, revealing a darkened courtyard enveloped in an unsettling silence. The ground beneath your feet feels cold and unyielding, as if the very earth recoils from the presence of Tibalt's domain. Sinister gargoyles leer down from the castle walls, their grotesque forms seeming to come alive in the fading light.&quot;,
-    &quot;options&quot;: [
+    "text": "As you approach, the castle gates swing open with an eerie creak, revealing a darkened courtyard enveloped in an unsettling silence. The ground beneath your feet feels cold and unyielding, as if the very earth recoils from the presence of Tibalt's domain. Sinister gargoyles leer down from the castle walls, their grotesque forms seeming to come alive in the fading light.",
+    "options": [
       {
-        &quot;action&quot;: [
+        "action": [
           {
-            &quot;setQuestFlag&quot;: {
-              &quot;key&quot;: &quot;FortressPortal&quot;,
-              &quot;val&quot;: 1
+            "setQuestFlag": {
+              "key": "FortressPortal",
+              "val": 1
             },
-              &quot;activateMapObject&quot;: 194,
-              &quot;deleteMapObject&quot;: -1
+              "activateMapObject": 194,
+              "deleteMapObject": -1
           }
         ],
-        &quot;name&quot;: &quot;(Continue)&quot;
+        "name": "(Continue)"
       }
     ]
   }
 ]</property>
    </properties>
   </object>
-  <object id="194" template="../../../../../../common/maps/obj/portal.tx" x="279.509" y="305.439">
+  <object id="194" template="../../../../common/maps/obj/portal.tx" x="279.509" y="305.439">
    <properties>
-    <property name="activeQuestFlag" value="FortressPortal"/>
-    <property name="portalState" value="inactive"/>
-    <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
-    <property name="teleportObjectId" value="221"/>
+    <property name="activeQuestFlag" value="FortressPortal" />
+    <property name="portalState" value="inactive" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx" />
+    <property name="teleportObjectId" value="221" />
    </properties>
   </object>
  </objectgroup>

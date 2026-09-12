@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Ioannis_Kountouris_-_Esper_Midrange_(Standard,_#1585802).dck
+Deck Type=constructed
+
+[Main]
+3 Guardian of New Benalia
+4 Dennick, Pious Apprentice
+1 Loran of the Third Path
+4 Raffine, Scheming Seer
+2 Sheoldred, the Apocalypse
+2 Ao, the Dawn Sky
+1 Reckoner Bankbuster
+3 Go for the Throat
+2 Cut Down
+2 Make Disappear
+1 Spell Pierce
+2 Duress
+4 Wedding Announcement
+3 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Adarkar Wastes
+1 Deserted Beach
+4 Seachrome Coast
+2 Raffine's Tower
+2 Plaza of Heroes
+1 Takenuma, Abandoned Mire
+4 Caves of Koilos
+4 Darkslick Shores
+1 Underground River
+3 Shattered Sanctum
+1 Shipwreck Marsh
+[Sideboard]
+1 Sheoldred, the Apocalypse
+1 Disdainful Stroke
+2 Negate
+2 Razorlash Transmogrant
+1 Loran of the Third Path
+2 Path of Peril
+2 Cut Down
+2 Reckoner Bankbuster
+1 Destroy Evil
+1 The Eternal Wanderer

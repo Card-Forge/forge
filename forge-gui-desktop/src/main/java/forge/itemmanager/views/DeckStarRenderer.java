@@ -19,6 +19,8 @@ package forge.itemmanager.views;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
@@ -109,6 +111,13 @@ public class DeckStarRenderer extends ItemCellRenderer {
         int height = this.getHeight();
         if (size > width) {
             size = width;
+        }
+
+        // Improve scaling quality
+        if (g instanceof Graphics2D g2d) {
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         }
         FSkin.drawImage(g, skinImage, (width - size) / 2, (height - size) / 2, size, size);
     }

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Aesir08_-_Sultai_Control_(Standard,_#765559).dck
+Deck Type=constructed
+
+[Main]
+3 Doom Whisperer
+1 Dream Eater
+2 Ravenous Chupacabra
+3 Cast Down
+3 Essence Scatter
+2 Fungal Infection
+2 Moment of Craving
+2 Negate
+4 Vraska's Contempt
+2 Find // Finality
+3 Notion Rain
+3 Thought Erasure
+3 Karn, Scion of Urza
+2 Vraska, Relic Seeker
+4 Drowned Catacomb
+2 Field of Ruin
+4 Island
+4 Overgrown Tomb
+3 Swamp
+4 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+1 Arguel's Blood Fast
+1 Carnage Tyrant
+1 Cast Down
+2 Disdainful Stroke
+2 Duress
+1 Golden Demise
+1 Moment of Craving
+1 Negate
+1 Ritual of Soot
+4 Thief of Sanity

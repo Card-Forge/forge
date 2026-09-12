@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Zeus
+Title=Zeus
+Icon=Zeus.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/GalaxyMan2_-_Jund_Eldrazi_(Modern,_#779747).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodbraid Elf
+4 Eldrazi Obligator
+4 Gruul Spellbreaker
+4 Noble Hierarch
+4 Reality Smasher
+2 Scavenging Ooze
+4 Thought-Knot Seer
+1 Relic of Progenitus
+1 Sword of Light and Shadow
+4 Lightning Bolt
+4 Ancient Stirrings
+2 Lava Coil
+3 Cavern of Souls
+4 Eldrazi Temple
+2 Forest
+4 Grove of the Burnwillows
+4 Karplusan Forest
+1 Kessig Wolf Run
+1 Mountain
+1 Stomping Ground
+2 Wooded Foothills
+[Sideboard]
+2 Alpine Moon
+2 Anger of the Gods
+2 Combust
+2 Destructive Revelry
+2 Engineered Explosives
+2 Feed the Clan
+2 Grafdigger's Cage
+1 Tormod's Crypt

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/BugTots_-_Goblins_(Modern,_#1098872).dck
+Deck Type=constructed
+
+[Main]
+1 Pashalik Mons
+1 Goblin Chieftain
+1 Goblin Cratermaker
+2 Kiki-Jiki, Mirror Breaker
+2 Sling-Gang Lieutenant
+2 Mogg War Marshal
+3 Boggart Harbinger
+3 Goblin Ringleader
+3 Munitions Expert
+4 Conspicuous Snoop
+4 Goblin Matron
+4 Skirk Prospector
+4 Aether Vial
+1 Agadeem's Awakening
+3 Thoughtseize
+1 Fiery Islet
+1 Swamp
+2 Mountain
+3 Blood Crypt
+3 Blackcleave Cliffs
+4 Bloodstained Mire
+4 Cavern of Souls
+4 Auntie's Hovel
+[Sideboard]
+1 Munitions Expert
+1 Thoughtseize
+1 Goblin Trashmaster
+2 Fatal Push
+2 Blood Moon
+2 Boil
+3 Chalice of the Void
+3 Relic of Progenitus

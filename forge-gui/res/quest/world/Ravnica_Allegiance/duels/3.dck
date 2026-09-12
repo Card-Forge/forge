@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Alex_Tobaben_-_Mono-red_Aggro_(Standard,_#780462).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Risk Factor
+4 Shock
+4 Wizard's Lightning
+1 Lava Coil
+4 Light Up the Stage
+4 Skewer the Critics
+19 Mountain
+[Sideboard]
+1 Banefire
+2 Dire Fleet Daredevil
+3 Electrostatic Field
+2 Experimental Frenzy
+2 Fiery Cannonade
+2 Hijack
+3 Lava Coil

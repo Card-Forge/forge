@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/SCG_States_Norman/Zane_Deaton_-_Bant_(Standard,_#618502).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Bounding Krasis
+2 Den Protector
+4 Duskwatch Recruiter
+1 Hidden Dragonslayer
+2 Jace, Vryn's Prodigy
+1 Lantern Scout
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+3 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Fortified Village
+2 Island
+4 Lumbering Falls
+3 Plains
+1 Port Town
+3 Prairie Stream
+1 Yavimaya Coast
+[Sideboard]
+1 Altered Ego
+3 Clip Wings
+2 Declaration in Stone
+2 Dispel
+2 Invocation of Saint Traft
+2 Negate

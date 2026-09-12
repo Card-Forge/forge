@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Erik_Rose_-_Golgari_Yawgmoth_(Modern,_#1751477)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Yawgmoth, Thran Physician
+3 Wall of Roots
+3 Strangleroot Geist
+3 Orcish Bowmasters
+4 Delighted Halfling
+4 Young Wolf
+2 Ignoble Hierarch
+1 Blood Artist
+1 Prosperous Innkeeper
+1 Hapatra, Vizier of Poisons
+1 Endurance
+1 Sheoldred, the Apocalypse
+2 Agatha's Soul Cauldron
+4 Chord of Calling
+4 Grist, the Hunger Tide
+4 Verdant Catacombs
+2 Overgrown Tomb
+3 Blooming Marsh
+2 Khalni Garden
+2 Forest
+1 Swamp
+3 Twilight Mire
+2 Boseiju, Who Endures
+3 Wooded Foothills
+[Sideboard]
+2 Endurance
+2 Force of Vigor
+2 Elven Chorus
+1 Pile On
+1 Phyrexian Metamorph
+1 Collector Ouphe
+1 Scavenging Ooze
+1 Go for the Throat
+1 Fatal Push
+1 Haywire Mite
+2 Chalice of the Void

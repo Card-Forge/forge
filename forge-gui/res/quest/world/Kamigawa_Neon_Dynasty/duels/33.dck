@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/AdamAntMTG_-_Azorius_Tempo_(Standard,_#1331856).dck
+Deck Type=constructed
+
+[Main]
+2 Iymrith, Desert Doom
+2 Usher of the Fallen
+2 Adeline, Resplendent Cathar
+2 Brutal Cathar
+3 Skyclave Apparition
+4 Luminarch Aspirant
+4 Spectral Adversary
+1 Spell Pierce
+1 Disdainful Stroke
+1 Fading Hope
+2 Behold the Multiverse
+2 March of Swirling Mist
+2 Fateful Absence
+2 Jwari Disruption
+3 Wedding Announcement
+3 The Wandering Emperor
+1 Cave of the Frost Dragon
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+4 Hengegate Pathway
+4 Deserted Beach
+6 Island
+6 Plains
+[Sideboard]
+1 Disdainful Stroke
+2 Spell Pierce
+2 Valorous Stance
+2 Test of Talents
+2 Negate
+3 Portable Hole
+3 Elite Spellbinder

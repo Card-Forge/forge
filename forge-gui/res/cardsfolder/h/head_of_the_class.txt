@@ -1,0 +1,8 @@
+Name:Head of the Class
+ManaCost:W B
+Types:Creature Kithkin Cleric
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | ValidSpell$ Spell.IsTargeting Valid Creature | Activator$ You | OnlyFirstSpell$ True | Condition$ PlayerTurn | Amount$ 1 | Color$ W B | IgnoreGeneric$ True | Description$ The first spell you cast during each of your turns that targets a creature costs {W}{B} less to cast. This effect reduces only the amount of colored mana you pay.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigPump | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature perpetually gets +1/+1.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+Oracle:The first spell you cast during each of your turns that targets a creature costs {W}{B} less to cast. This effect reduces only the amount of colored mana you pay.\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature perpetually gets +1/+1.

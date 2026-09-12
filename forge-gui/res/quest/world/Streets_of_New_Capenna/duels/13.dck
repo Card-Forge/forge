@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Olokun
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Jose_Pina_-_Temur_Mill_(Standard,_#1384836).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+1 Dual Strike
+2 Fading Hope
+4 Thirst for Discovery
+4 Galvanic Iteration
+4 Expressive Iteration
+4 Maddening Cacophony
+4 Tasha's Hideous Laughter
+4 Splendid Reclamation
+1 Forest
+3 Riveteers Overlook
+3 Cabaretti Courtyard
+4 Maestros Theater
+4 Brokers Hideout
+6 Mountain
+8 Island
+[Sideboard]
+3 Thundering Rebuke
+4 Burn Down the House
+4 Test of Talents
+4 Crush the Weak

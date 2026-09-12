@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Wilma Flintstone
+Title=Wilma Flintstone
+Icon=Wilma Flintstone.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/9._Bottroper_Modern_and_Legacy_Turnier/Robert_Lippmann_-_The_Rock_(Modern,_#423413).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Anafenza, the Foremost
+4 Birds of Paradise
+3 Kitchen Finks
+3 Loxodon Smiter
+3 Noble Hierarch
+4 Siege Rhino
+4 Voice of Resurgence
+3 Wilt-Leaf Liege
+2 Abrupt Decay
+2 Dromoka's Command
+4 Path to Exile
+3 Lingering Souls
+2 Forest
+3 Gavony Township
+1 Godless Shrine
+2 Marsh Flats
+1 Overgrown Tomb
+1 Plains
+2 Razorverge Thicket
+1 Stomping Ground
+1 Swamp
+1 Temple Garden
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+3 Crumble to Dust
+2 Qasali Pridemage
+2 Scavenging Ooze
+2 Stony Silence
+4 Thoughtseize
+2 Zealous Persecution

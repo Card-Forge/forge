@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Bridge Troll
+Title=Bridge Troll
+Icon=Bridge Troll.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/GabingGoblin_-_Grixis_Rogues_(Standard,_#1425570).dck
+Deck Type=constructed
+
+[Main]
+1 Evelyn, the Covetous
+1 Malevolent Hermit
+2 Ledger Shredder
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+2 Reckoner Bankbuster
+1 Spell Pierce
+1 Negate
+2 Prismari Command
+2 Infernal Grasp
+2 Make Disappear
+4 Voltage Surge
+4 Expressive Iteration
+1 The Meathook Massacre
+1 Swamp
+1 Island
+1 Hive of the Eye Tyrant
+2 Shipwreck Marsh
+3 Clearwater Pathway
+3 Riverglide Pathway
+3 Blightstep Pathway
+3 Stormcarved Coast
+4 Haunted Ridge
+4 Xander's Lounge
+[Sideboard]
+1 The Meathook Massacre
+1 Spell Pierce
+1 Malevolent Hermit
+1 Path of Peril
+2 Test of Talents
+2 Soul Shatter
+2 Extract the Truth
+2 Ray of Enfeeblement
+3 Disdainful Stroke

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/Simada_Yuuki_-_Abzan_(Modern,_#2449755).dck
+Deck Type=constructed
+
+[Main]
+3 Eternal Witness
+4 Solitude
+1 Haywire Mite
+4 Guide of Souls
+4 Ocelot Pride
+4 White Orchid Phantom
+3 Emperor of Bones
+2 Witch Enchanter
+2 Brightglass Gearhulk
+4 Severance Priest
+4 Ephemerate
+4 Birthing Ritual
+1 Plains
+1 Forest
+1 Godless Shrine
+4 Windswept Heath
+4 Marsh Flats
+1 Overgrown Tomb
+2 Temple Garden
+4 Flagstones of Trokair
+1 Boseiju, Who Endures
+1 Lush Portico
+1 Shadowy Backstreet
+[Sideboard]
+2 Vindicate
+2 Gaddock Teeg
+3 Orim's Chant
+2 Collector Ouphe
+1 Drannith Magistrate
+2 Skyclave Apparition
+2 Sanctifier en-Vec
+1 Elesh Norn, Mother of Machines

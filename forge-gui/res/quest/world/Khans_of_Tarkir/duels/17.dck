@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/SCG_Super_IQ_Wichita/Hunter_Wahquahboshkuk_-_Abzan_Aggro_(Standard,_#97448).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+4 Fleecemane Lion
+2 Heir of the Wilds
+4 Herald of Torment
+4 Rakshasa Deathdealer
+4 Siege Rhino
+3 Abzan Charm
+4 Hero's Downfall
+1 Ulcerate
+4 Thoughtseize
+3 Sorin, Solemn Visitor
+3 Caves of Koilos
+2 Forest
+2 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+1 Swamp
+4 Temple of Malady
+1 Temple of Plenty
+1 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+3 Bile Blight
+2 Despise
+2 Drown in Sorrow
+1 Elspeth, Sun's Champion
+2 Erase
+1 Silence the Believers
+1 Whip of Erebos
+2 Wingmate Roc

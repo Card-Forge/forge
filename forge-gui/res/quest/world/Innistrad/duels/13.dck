@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Medium
+Description=Innistrad/2011_States_North_Carolina/Joe_Rittiner_-_U-W_Aggro_(Standard,_#21182).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Accorder Paladin
+4 Champion of the Parish
+3 Geist of Saint Traft
+3 Gideon's Lawkeeper
+4 Grand Abolisher
+3 Hero of Bladehold
+4 Mirran Crusader
+2 Phantasmal Image
+4 Angelic Destiny
+3 Honor of the Pure
+3 Oblivion Ring
+4 Glacial Fortress
+1 Island
+3 Moorland Haunt
+12 Plains
+4 Seachrome Coast
+[Sideboard]
+3 Celestial Purge
+2 Gut Shot
+3 Revoke Existence
+3 Surgical Extraction
+3 Timely Reinforcements

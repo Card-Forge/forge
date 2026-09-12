@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Hugo Drax
+Title=Hugo Drax
+Icon=Hugo Drax.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Rockville,_Maryland/Glenn_Jones_in_PTQ_Barcelona_-_Faeries_(Modern,_#28984).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Grim Lavamancer
+2 Mistbind Clique
+4 Spellstutter Sprite
+4 Vendilion Clique
+2 Vedalken Shackles
+1 Burst Lightning
+4 Cryptic Command
+4 Lightning Bolt
+4 Mana Leak
+2 Remand
+4 Spell Snare
+1 Arid Mesa
+1 Breeding Pool
+8 Island
+4 Misty Rainforest
+1 Mountain
+4 Mutavault
+4 Scalding Tarn
+2 Steam Vents
+[Sideboard]
+3 Ancient Grudge
+4 Blood Moon
+1 Combust
+2 Dispel
+2 Firespout
+1 Gut Shot
+2 Sulfur Elemental

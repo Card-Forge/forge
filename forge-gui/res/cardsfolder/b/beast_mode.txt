@@ -1,0 +1,7 @@
+Name:Beast Mode
+ManaCost:1 G
+Types:Instant
+K:Teamwork:1
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn. Also put a +1/+1 counter on that creature if this spell was cast using teamwork.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionZone$ Stack | ConditionPresent$ Card.Self+Teamwork
+Oracle:Teamwork 1 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 1 or more.)\nTarget creature gets +2/+2 and gains trample until end of turn. Also put a +1/+1 counter on that creature if this spell was cast using teamwork.

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Aziza
+Title=Aziza
+Icon=Aziza.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Victor_Lenoble_-_Five-color_Humans_(Modern,_#1978490).dck
+Deck Type=constructed
+
+[Main]
+4 Asmoranomardicadaistinaculdacar
+4 Champion of the Parish
+4 Inti, Seneschal of the Sun
+4 Ovalchase Daredevil
+4 Ranger-Captain of Eos
+4 Thalia's Lieutenant
+4 Warden of the Inner Sky
+4 Aether Vial
+3 Agatha's Soul Cauldron
+1 Shadowspear
+4 The Underworld Cookbook
+4 Urza's Saga
+4 Cavern of Souls
+1 Plains
+4 Secluded Courtyard
+3 Sunbaked Canyon
+4 Unclaimed Territory
+[Sideboard]
+2 Damping Sphere
+2 Dawnbringer Cleric
+1 Grafdigger's Cage
+4 Meddling Mage
+3 Outland Liberator
+1 Pithing Needle
+1 Soul-Guide Lantern
+1 Stone of Erech

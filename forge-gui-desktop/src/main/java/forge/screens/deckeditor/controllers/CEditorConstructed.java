@@ -17,19 +17,26 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import forge.StaticData;
+import forge.card.CardRules;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.SItemManagerUtil;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
@@ -37,6 +44,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
@@ -84,7 +92,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Avatar);
                 allSections.add(DeckSection.Conspiracy);
 
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
                 avatarPool = FModel.getAvatarPool();
                 conspiracyPool = FModel.getConspiracyPool();
 
@@ -93,7 +101,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getCommanderPool();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -101,7 +109,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getTinyLeadersCommander();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -109,7 +117,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getOathbreakerCommander();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -307,9 +315,11 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Main:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltodeck"));
             cmb.addMoveAlternateItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"));
+            addCommanderEntryIfApplicable(cmb, gameType, true);
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"));
+            addCommanderEntryIfApplicable(cmb, gameType, true);
             break;
         case Commander:
             if (gameType == GameType.Oathbreaker) {
@@ -349,19 +359,22 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         }
     }
 
-    public static void buildRemoveContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode, boolean foilAvailable) {
+    public static void buildRemoveContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode, GameType gameType, boolean foilAvailable) {
         final Localizer localizer = Localizer.getInstance();
         switch (sectionMode) {
         case Main:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdeck"));
             cmb.addMoveAlternateItems(localizer.getMessage("lblMove"), localizer.getMessage("lbltosideboard"));
+            addCommanderEntryIfApplicable(cmb, gameType, false);
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));
             cmb.addMoveAlternateItems("Move", "to deck");
+            addCommanderEntryIfApplicable(cmb, gameType, false);
             break;
         case Commander:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));
+            cmb.addAllowedAdditionalColors();
             break;
         case Avatar:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblasavatar"));
@@ -385,10 +398,42 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromcontraptiondeck"));
             break;
         }
+        addChangePrintingEntryIfApplicable(cmb);
         if (foilAvailable) {
             cmb.addMakeFoils();
         }
+        cmb.addKeyCardToggle();
         cmb.addSetColorID();
+    }
+
+    private static void addChangePrintingEntryIfApplicable(EditorContextMenuBuilder cmb) {
+        // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
+        if (!CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().isInfinite()) {
+            return;
+        }
+        PaperCard card = cmb.getItemManager().getSelectedItem();
+        if (card == null) {
+            return;
+        }
+        if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) {
+            return;
+        }
+        GuiUtils.addMenuItem(cmb.getMenu(),
+                Localizer.getInstance().getMessage("lblChangePrinting"),
+                null,
+                () -> {
+                    PaperCard chosen = ChangePrintingDialog.show(card);
+                    if (chosen == null) { return; }
+                    PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
+                    if (newCard.equals(card)) { return; }
+                    CardManager deckManager = (CardManager) cmb.getItemManager();
+                    deckManager.removeItem(card, 1);
+                    deckManager.addItem(newCard, 1);
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
+                            .getDeckController().notifyModelChanged();
+                },
+                true,
+                false);
     }
 
     /* (non-Javadoc)
@@ -404,7 +449,78 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
      */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        buildRemoveContextMenu(cmb, sectionMode, true);
+        buildRemoveContextMenu(cmb, sectionMode, gameType, true);
+    }
+
+    private static void addCommanderEntryIfApplicable(EditorContextMenuBuilder cmb, GameType gameType, boolean isAdd) {
+        if (!gameType.getDeckFormat().hasCommander()) { return; }
+
+        PaperCard selected = cmb.getItemManager().getSelectedItem();
+        if (selected == null) { return; }
+
+        String label = buildCommanderActionLabel(selected, gameType);
+        if (label == null) { return; }
+
+        GuiUtils.addMenuItem(cmb.getMenu(), label, null,
+                () -> placeSelectedAsCommander(selected, isAdd), true, false);
+    }
+
+    private static String buildCommanderActionLabel(PaperCard card, GameType gt) {
+        Localizer loc = Localizer.getInstance();
+        String slotKey = commanderSlotKey(card.getRules(), gt.getDeckFormat());
+        if (slotKey == null) { return null; }
+        String cardWord = SItemManagerUtil.getItemDisplayString(card, 1, false);
+        return loc.getMessage("lblSetEdition") + " " + cardWord + " " + loc.getMessage(slotKey);
+    }
+
+    private static String commanderSlotKey(CardRules rules, DeckFormat df) {
+        if (df.isLegalCommander(rules)) {
+            return df.hasSignatureSpell() ? "lblasoathbreaker" : "lblascommander";
+        }
+        if (df.hasSignatureSpell() && rules.canBeSignatureSpell()) {
+            return "lblassignaturespell";
+        }
+        return null;
+    }
+
+    private static void placeSelectedAsCommander(PaperCard card, boolean isAdd) {
+        ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+        if (!(editor instanceof CEditorConstructed ce)) { return; }
+        if (ce.controller.getModel().getOrCreate(DeckSection.Commander).countByName(card) > 0) { return; }
+        // A catalog add obeys the same copy limit as a normal add
+        if (isAdd && ce.getAllowedAdditions(Collections.singletonMap(card, 1).entrySet()).isEmpty()) { return; }
+        if (!isAdd) {
+            ce.deckManager.removeItem(card, 1);
+        }
+        ce.placeCardInCommanderSection(card);
+        ce.controller.notifyModelChanged();
+        // Surface the result by switching the deck pane to the Commander section
+        ce.getCbxSection().setSelectedItem(DeckSection.Commander);
+    }
+
+    private void placeCardInCommanderSection(PaperCard card) {
+        Deck deck = controller.getModel();
+        CardPool dest = deck.getOrCreate(DeckSection.Commander);
+
+        if (gameType == GameType.Oathbreaker) {
+            boolean newIsOathbreaker = card.getRules().canBeOathbreaker();
+            PaperCard sameSlot = dest.find(c -> c.getRules().canBeOathbreaker() == newIsOathbreaker);
+            if (sameSlot != null) {
+                deck.getMain().add(sameSlot, dest.count(sameSlot));
+                dest.remove(sameSlot, dest.count(sameSlot));
+            }
+        } else if (dest.countAll() > 0) {
+            List<PaperCard> existing = dest.toFlatList();
+            boolean keepAsPartner = existing.size() == 1
+                    && card.getRules().canBePartnerCommander()
+                    && existing.get(0).getRules().canBePartnerCommanders(card.getRules());
+            if (!keepAsPartner) {
+                deck.getMain().addAll(dest);
+                dest.clear();
+            }
+        }
+
+        dest.add(card, 1);
     }
 
     /*

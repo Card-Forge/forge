@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/2radMTG_-_8-Cast_Affinity_(Modern,_#1343213)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Urza, Lord High Artificer
+4 Memnite
+4 Thought Monitor
+4 Ornithopter
+1 Aether Spellbomb
+1 Pithing Needle
+1 Relic of Progenitus
+1 Shadowspear
+3 Nettlecyst
+3 Cranial Plating
+4 Springleaf Drum
+4 Portable Hole
+4 Moonsnare Prototype
+4 Thoughtcast
+4 Urza's Saga
+1 Plains
+1 Island
+2 Razortide Bridge
+2 Otawara, Soaring City
+2 Hallowed Fountain
+3 Seachrome Coast
+4 Darksteel Citadel
+[Sideboard]
+2 Damping Sphere
+2 Relic of Progenitus
+2 Ashiok, Dream Render
+3 Leyline of Sanctity
+3 Metallic Rebuke
+3 Sanctifier en-Vec

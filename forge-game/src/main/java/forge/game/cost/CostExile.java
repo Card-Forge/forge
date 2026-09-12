@@ -237,13 +237,19 @@ public class CostExile extends CostPartWithList {
 
         int amount = this.getAbilityAmount(ability);
         
-        if (sharedType) { // will need more logic if cost ever wants more than 2 that share a type
-            if (list.size() < amount) return false;
-            for (int i = 0; i < list.size(); i++) {
-                final Card card1 = list.get(i);
-                for (final Card compare : list) {
-                    if (!compare.equals(card1) && compare.sharesCardTypeWith(card1)) {
-                        return true;
+        if (sharedType) {
+            if (list.size() < amount) {
+                return false;
+            }
+
+            for (CardType.CoreType coreType : CardType.CoreType.values()) {
+                int count = 0;
+                for (final Card card : list) {
+                    if (card.getType().hasType(coreType)) {
+                        count++;
+                        if (count >= amount) {
+                            return true;
+                        }
                     }
                 }
             }

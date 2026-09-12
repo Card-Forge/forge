@@ -1,0 +1,6 @@
+Name:Intrepid Ace
+ManaCost:R
+Types:Creature Human Pilot
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self+!attacking+!blocking | AddPower$ 2 | Description$ This creature gets +2/+0 as long as it isn't attacking or blocking.
+Oracle:This creature gets +2/+0 as long as it isn't attacking or blocking.

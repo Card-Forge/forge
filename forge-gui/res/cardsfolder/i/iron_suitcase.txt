@@ -1,0 +1,7 @@
+Name:Iron Suitcase
+ManaCost:1
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Animate | Cost$ 3 | Defined$ Self | Power$ 3 | Toughness$ 3 | Keywords$ Flying | Types$ Creature,Artifact,Construct | SpellDescription$ This artifact becomes a 3/3 Construct artifact creature with flying until end of turn.
+Oracle:When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\n{3}: This artifact becomes a 3/3 Construct artifact creature with flying until end of turn.

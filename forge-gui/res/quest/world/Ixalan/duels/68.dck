@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot68
+Title=Robot68
+Icon=Wolverine.jpg
+Difficulty=Hard
+Description=Sultai 
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+3 Hostage Taker
+4 Longtusk Cub
+4 Rogue Refiner
+4 Servant of the Conduit
+2 The Scarab God
+2 Blossoming Defense
+2 Essence Scatter
+4 Fatal Push
+2 Vraska's Contempt
+4 Attune with Aether
+1 Liliana, Death's Majesty
+2 Vraska, Relic Seeker
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+1 Drowned Catacomb
+2 Fetid Pools
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+2 Aethersphere Harvester
+2 Confiscation Coup
+2 Deathgorge Scavenger
+4 Duress
+2 Gonti, Lord of Luxury
+3 Negate

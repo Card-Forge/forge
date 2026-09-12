@@ -11,7 +11,7 @@ SVar:PayLife:DB$ LoseLife | LifeAmount$ 10 | Defined$ Targeted | SubAbility$ DBC
 SVar:RevealCard:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ Targeted | SubAbility$ ExchangeOwn1 | StackDescription$ SpellDescription | SpellDescription$ Reveal a card at random from your hand. Permanently exchange ownership of the revealed card and CARDNAME.
 SVar:ExchangeOwn1:DB$ GainOwnership | Defined$ Remembered | DefinedPlayer$ You | SubAbility$ ToHand
 SVar:ToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Hand | SubAbility$ ExchangeOwn2
-SVar:ExchangeOwn2:DB$ GainOwnership | Defined$ Self | DefinedPlayer$ Targeted | SubAbility$ ToGrave
-SVar:ToGrave:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Graveyard | SubAbility$ DBCleanup
+SVar:ExchangeOwn2:DB$ GainOwnership | Defined$ CorrectedSelf | DefinedPlayer$ Targeted | SubAbility$ ToGrave
+SVar:ToGrave:DB$ ChangeZone | Defined$ CorrectedSelf | Origin$ All | Destination$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Remove Tempest Efreet from your deck before playing if you're not playing for ante.\n{T}, Sacrifice Tempest Efreet: Target opponent may pay 10 life. If that player doesn't, they reveal a card at random from their hand. Exchange ownership of the revealed card and Tempest Efreet. Put the revealed card into your hand and Tempest Efreet from anywhere into that player's graveyard. This change in ownership is permanent.

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Robot51
+Title=Robot51
+Icon=Ala.jpg
+Difficulty=Very Hard
+Description=Mardu Vehicles 
+Deck Type=constructed
+
+[Main]
+3 Bomat Courier
+3 Hazoret the Fervent
+4 Inventor's Apprentice
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+4 Veteran Motorist
+1 Aethersphere Harvester
+1 Cultivator's Caravan
+4 Heart of Kiran
+3 Fatal Push
+4 Unlicensed Disintegration
+2 Aether Hub
+4 Concealed Courtyard
+2 Dragonskull Summit
+4 Inspiring Vantage
+5 Mountain
+4 Spire of Industry
+1 Swamp
+1 Unclaimed Territory
+[Sideboard]
+1 Abrade
+1 Aethersphere Harvester
+1 Canyon Slough
+1 Chandra's Defeat
+1 Chandra, Torch of Defiance
+2 Glorybringer
+3 Harsh Mentor
+3 Rampaging Ferocidon
+2 Shock

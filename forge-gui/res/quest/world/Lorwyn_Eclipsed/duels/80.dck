@@ -1,0 +1,16 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Magicmalle_-_Ub_flare_(Modern,_#2813137).dck
+Deck Type=constructed
+
+[Main]
+4 Aven Heartstabber
+2 Psychic Frog
+1 Basim Ibn Ishaq
+1 Voracious Tome-Skimmer
+1 Kaito, Bane of Nightmares
+[Sideboard]

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Super_IQ_Denver/Joseph_Carver_-_Esper_Control_(Standard,_#652260).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Torrential Gearhulk
+2 Anguished Unmaking
+3 Blessed Alliance
+3 Glimmer of Genius
+3 Grasp of Darkness
+2 Murder
+2 Negate
+2 Spell Shrivel
+2 Ruinous Path
+2 Stasis Snare
+2 Dovin Baan
+3 Gideon, Ally of Zendikar
+2 Ob Nixilis Reignited
+2 Sorin, Grim Nemesis
+4 Aether Hub
+4 Evolving Wilds
+2 Island
+3 Plains
+3 Prairie Stream
+4 Shambling Vent
+4 Sunken Hollow
+3 Swamp
+[Sideboard]
+1 Descend upon the Sinful
+2 Essence Extraction
+2 Fumigate
+1 Jace, Unraveler of Secrets
+2 Kalitas, Traitor of Ghet
+2 Lost Legacy
+2 Negate
+1 Stasis Snare
+2 Summary Dismissal

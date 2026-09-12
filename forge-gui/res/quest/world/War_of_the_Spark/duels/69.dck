@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Akongo
+Title=Akongo
+Icon=Akongo.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/James_Baggett_-_Azorius_Control_(Modern,_#799353).dck
+Deck Type=constructed
+
+[Main]
+3 Knowledge Pool
+2 Condemn
+4 Cryptic Command
+2 Dovin's Veto
+4 Path to Exile
+4 Remand
+4 Serum Visions
+2 Supreme Verdict
+1 Wrath of God
+3 Narset, Parter of Veils
+2 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+7 Island
+2 Plains
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+[Sideboard]
+2 Damping Sphere
+2 Rest in Peace
+2 Celestial Purge
+2 Dispel
+2 Dovin's Veto
+1 Lyra Dawnbringer
+2 Vendilion Clique
+1 Elspeth, Sun's Champion
+1 Timely Reinforcements

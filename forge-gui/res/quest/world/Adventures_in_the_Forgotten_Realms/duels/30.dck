@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Alex_Huerta_-_Naya_Adventures_(Standard,_#1197979).dck
+Deck Type=constructed
+
+[Main]
+1 Minsc, Beloved Ranger
+1 Bonecrusher Giant
+1 Drizzt Do'Urden
+2 Blade Historian
+2 Kenrith, the Returned King
+3 Magda, Brazen Outlaw
+3 Elite Spellbinder
+4 Prosperous Innkeeper
+4 Jaspera Sentinel
+4 Winota, Joiner of Forces
+4 Esika's Chariot
+1 Kabira Takedown
+1 Shatterskull Smashing
+1 Ranger Class
+1 Showdown of the Skalds
+2 Vivien, Monsters' Advocate
+1 Tangled Florahedron
+1 Lair of the Hydra
+1 Den of the Bugbear
+2 Forest
+2 Plains
+2 Mountain
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Fabled Passage
+4 Needleverge Pathway
+[Sideboard]
+1 Burning Hands
+1 Elite Spellbinder
+1 Fire Prophecy
+1 Reidane, God of the Worthy
+2 Roiling Vortex
+2 Klothys, God of Destiny
+2 Ox of Agonas
+2 The Akroan War
+3 Redcap Melee

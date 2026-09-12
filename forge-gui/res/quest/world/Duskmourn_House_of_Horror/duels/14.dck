@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/AmadeusPro_-_Dimir_Midrange_(Standard,_#2270039).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+3 Enduring Curiosity
+4 Faerie Mastermind
+4 Preacher of the Schism
+1 Sheoldred, the Apocalypse
+3 Spyglass Siren
+1 Anoint with Affliction
+3 Cut Down
+2 Phantom Interference
+4 Go for the Throat
+3 Three Steps Ahead
+1 Gix's Command
+2 Kaito, Bane of Nightmares
+2 Fountainport
+4 Gloomlake Verge
+5 Island
+4 Darkslick Shores
+4 Underground River
+3 Restless Reef
+3 Swamp
+[Sideboard]
+3 Anoint with Affliction
+1 Blot Out
+1 Cut Down
+2 Negate
+2 Duress
+1 Gix's Command
+1 Disdainful Stroke
+2 Sheoldred, the Apocalypse
+2 Tishana's Tidebinder

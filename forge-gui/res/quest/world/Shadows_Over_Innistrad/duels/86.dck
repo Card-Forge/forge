@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=King Edward
+Title=King Edward
+Icon=King Edward.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/PPTQ_Dublin_@_Telakka/Ville_Kaukoranta_-_Sam_O._Frog_(Modern,_#636812).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dryad Arbor
+4 Gladecover Scout
+2 Kor Spiritdancer
+2 Silhana Ledgewalker
+4 Slippery Bogle
+3 Path to Exile
+1 Open the Armory
+4 Daybreak Coronet
+4 Ethereal Armor
+1 Gryff's Boon
+3 Hyena Umbra
+1 Keen Sense
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+1 Unflinching Courage
+1 Forest
+3 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+1 Verdant Catacombs
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Gaddock Teeg
+4 Leyline of Sanctity
+3 Rest in Peace
+2 Seal of Primordium
+3 Stony Silence

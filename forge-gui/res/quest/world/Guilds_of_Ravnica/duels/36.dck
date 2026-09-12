@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dead Girl
+Title=Dead Girl
+Icon=Dead Girl.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Allison_Warfield_-_Izzet_Drakes_(Standard,_#772329).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+4 Crackling Drake
+4 Goblin Electromancer
+2 Murmuring Mystic
+4 Opt
+4 Radical Idea
+4 Shock
+1 Beacon Bolt
+4 Chart a Course
+2 Discovery // Dispersal
+4 Lava Coil
+2 Tormenting Voice
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Banefire
+1 Beacon Bolt
+2 Entrancing Melody
+1 Fiery Cannonade
+2 Negate
+3 Niv-Mizzet, Parun
+2 Ral, Izzet Viceroy
+2 Shivan Fire
+1 Star of Extinction

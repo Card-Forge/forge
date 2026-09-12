@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Easy
+Description=Innistrad/Worlds_2011_-_4-2_or_Better_Record/Manuel_Orellana_ÔÇô_12_points_-_Red_Deck_Wins_(Standard,_#22375).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+2 Grim Lavamancer
+4 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+3 Brimstone Volley
+3 Dismember
+3 Galvanic Blast
+3 Arc Trail
+4 Koth of the Hammer
+23 Mountain
+[Sideboard]
+2 Combust
+3 Incinerate
+4 Manic Vandal
+3 Ratchet Bomb
+2 Traitorous Blood

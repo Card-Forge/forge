@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/Adam_Lappin_-_Izzet_Lessons_(Standard,_#2823252).dck
+Deck Type=constructed
+
+[Main]
+4 Gran-Gran
+4 Monument to Endurance
+4 Accumulate Wisdom
+4 Combustion Technique
+4 Firebending Lesson
+3 Abandon Attachments
+2 It'll Quench Ya!
+2 Three Steps Ahead
+1 Spell Snare
+2 Boomerang Basics
+2 Iroh's Demonstration
+4 Artist's Talent
+2 Stormchaser's Talent
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Agna Qel'a
+2 Mountain
+[Sideboard]
+2 Annul
+2 Ral, Crackling Wit
+2 Soul-Guide Lantern
+2 Wan Shi Tong, Librarian
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Essence Scatter
+1 Quantum Riddler
+1 Slagstorm
+1 Spell Pierce
+1 Torpor Orb

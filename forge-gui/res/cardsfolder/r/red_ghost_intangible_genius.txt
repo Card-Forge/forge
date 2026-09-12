@@ -1,0 +1,9 @@
+Name:Red Ghost, Intangible Genius
+ManaCost:2 U R
+Types:Legendary Creature Human Scientist Villain
+PT:2/3
+K:Ward:2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ NICKNAME can't be blocked.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 3/3 red Ape Villain creature token with haste.
+SVar:TrigToken:DB$ Token | TokenScript$ r_3_3_ape_villain_haste
+Oracle:Ward {2}\nRed Ghost can't be blocked.\nWhenever you draw your second card each turn, create a 3/3 red Ape Villain creature token with haste.

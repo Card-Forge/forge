@@ -8,6 +8,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.RecordComponent;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -122,6 +124,7 @@ public class GameEventSerializationTest {
             } else if ("jar".equals(protocol)) {
                 String jarPath = resource.getPath();
                 jarPath = jarPath.substring(5, jarPath.indexOf("!"));
+                jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
                 try (JarFile jar = new JarFile(new File(jarPath))) {
                     Enumeration<JarEntry> entries = jar.entries();
                     while (entries.hasMoreElements()) {

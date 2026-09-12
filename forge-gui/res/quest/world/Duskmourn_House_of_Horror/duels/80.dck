@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Anthony_Arevalo_-_Dimir_Midrange_(Modern,_#2282198).dck
+Deck Type=constructed
+
+[Main]
+1 Murktide Regent
+1 Harbinger of the Seas
+4 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+1 Bitter Triumph
+4 Consider
+3 Spell Snare
+1 Shoot the Sheriff
+2 Sink into Stupor
+1 Force of Negation
+4 Fatal Push
+4 Counterspell
+4 Thought Scour
+4 Unearth
+1 Swamp
+3 Scalding Tarn
+4 Polluted Delta
+1 Otawara, Soaring City
+2 Island
+2 Undercity Sewers
+2 Bloodstained Mire
+3 Watery Grave
+[Sideboard]
+3 Consign to Memory
+1 Force of Negation
+1 Glistening Deluge
+2 Graveyard Trespasser
+2 Harbinger of the Seas
+2 Mystical Dispute
+1 Nihil Spellbomb
+1 Toxic Deluge
+2 Thoughtseize

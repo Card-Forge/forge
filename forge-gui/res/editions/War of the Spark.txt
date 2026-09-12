@@ -63,7 +63,7 @@ ScryfallCode=WAR
 49 U Eternal Skylord @Johan Grenier
 50 R Fblthp, the Lost @Jesper Ejsing
 51 M Finale of Revelation @Johann Bodin
-52 U Flux Channeler @Heonhwa Choe
+52 U Flux Channeler @Heonhwa
 53 M God-Eternal Kefnet @Lius Lasahido
 54 R Jace, Wielder of Mysteries @Anna Steinbauer
 55 U Jace's Triumph @Kieran Yanner
@@ -81,7 +81,7 @@ ScryfallCode=WAR
 67 C Sky Theater Strix @Chris Seaman
 68 R Spark Double @Eric Deschamps
 69 C Spellkeeper Weird @James Paick
-70 C Stealth Mission @Heonhwa Choe
+70 C Stealth Mission @Heonhwa
 71 C Tamiyo's Epiphany @Lake Hurwitz
 72 C Teferi's Time Twist @Ralph Horsley
 73 C Thunder Drake @Yeong-Hao Han
@@ -104,7 +104,7 @@ ScryfallCode=WAR
 90 U Eternal Taskmaster @Tomasz Jedruszek
 91 M Finale of Eternity @Daarken
 92 M God-Eternal Bontu @Lius Lasahido
-93 C Herald of the Dreadhorde @Heonhwa Choe
+93 C Herald of the Dreadhorde @Heonhwa
 94 C Kaya's Ghostform @Johan Grenier
 95 C Lazotep Behemoth @Zezhou Chen
 96 C Lazotep Reaver @Craig J Spearing
@@ -283,7 +283,7 @@ ScryfallCode=WAR
 13★ M Gideon Blackblade @Tada
 32★ U Teyo, the Shieldmage @Foo Midori
 37★ U The Wanderer @Norikatsu Miyoshi
-54★ R Jace, Wielder of Mysteries @Toshiaki Takayama
+54★ R Jace, Wielder of Mysteries @Takayama Toshiaki
 56★ U Kasmina, Enigmatic Mentor @Mid
 61★ U Narset, Parter of Veils @Foo Midori
 83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru

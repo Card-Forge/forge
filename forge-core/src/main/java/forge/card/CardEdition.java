@@ -52,15 +52,6 @@ import java.util.stream.Collectors;
  */
 public final class CardEdition implements Comparable<CardEdition> {
 
-    public DraftOptions getDraftOptions() {
-        return draftOptions;
-    }
-
-    public void setDraftOptions(DraftOptions draftOptions) {
-        this.draftOptions = draftOptions;
-    }
-
-    // immutable
     public enum Type {
         UNKNOWN,
         CORE,
@@ -146,7 +137,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
         CONJURED("conjured"),
-        SCHEME("scheme");
+        SCHEME("scheme"),
+        PRINTSHEETS("printsheets");
 
         private final String name;
 
@@ -164,6 +156,10 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
             return list;
         }
+    }
+
+    public DraftOptions getDraftOptions() {
+        return draftOptions;
     }
 
     private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
@@ -248,21 +244,15 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
 
         public String getFlavorName() {
-            if(extraParams == null)
+            if (extraParams == null)
                 return null;
             return extraParams.get("flavorname");
         }
 
         public String getFunctionalVariantName() {
-            if(extraParams == null)
+            if (extraParams == null)
                 return null;
             return extraParams.get("variant");
-        }
-
-        public String getScriptOverride() {
-            if(extraParams == null)
-                return null;
-            return extraParams.get("script");
         }
     }
 
@@ -288,8 +278,8 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     // SealedProduct
     private String prerelease = null;
-    private int boosterBoxCount = 36;
-    private int fatPackCount = 10;
+    private int boosterBoxCount;
+    private int fatPackCount;
     private String fatPackExtraSlots = "";
 
     // Booster/draft info
@@ -359,6 +349,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         this.name  = name;
         this.date = parseDate(date);
         this.foilType = foil;
+        // Only the file-parsing path assigned these, so the hardcoded UNKNOWN edition
+        // built through this constructor left them null and getScryfallCode() threw an
+        // NPE on any pass over all editions. Cards land in UNKNOWN whenever they are not
+        // assigned to a set, which happens in practice. Defaults mirror the parser's.
+        this.scryfallCode = code;
+        this.tokensCode = "T" + code;
+        this.cardsLanguage = "en";
     }
 
     private static Date parseDate(String date) {
@@ -434,6 +431,20 @@ public final class CardEdition implements Comparable<CardEdition> {
             //Could build a map for this one too if it's used for more than one-offs.
             if (c.collectorNumber.equalsIgnoreCase(collectorNumber))
                 return c;
+        }
+        return null;
+    }
+
+    /** Returns the section name (e.g. "cards", "full art", "borderless") that contains the given collector number, or null. */
+    public String getSectionForCollectorNumber(String collectorNumber) {
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return null;
+        for (Entry<String, java.util.Collection<EditionEntry>> section : cardMap.asMap().entrySet()) {
+            for (EditionEntry ee : section.getValue()) {
+                if (collectorNumber.equalsIgnoreCase(ee.collectorNumber)) {
+                    return section.getKey();
+                }
+            }
         }
         return null;
     }
@@ -542,14 +553,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         return boosterTemplates.get(boosterType);
     }
     public String getRandomBoosterKind() {
-        List<String> boosterTypes = Lists.newArrayList(boosterTemplates.keySet());
-
-        if (boosterTypes.isEmpty()) {
-            return null;
-        }
-
-        Collections.shuffle(boosterTypes);
-        return boosterTypes.get(0);
+        return Aggregates.random(boosterTemplates.keySet());
     }
 
     public Set<String> getAvailableBoosterTypes() {
@@ -629,10 +633,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         private final boolean isCustomEditions;
 
         public Reader(File path) {
-            super(path, CardEdition::getCode);
-            this.isCustomEditions = false;
+            this(path, false);
         }
-
         public Reader(File path, boolean isCustomEditions) {
             super(path, CardEdition::getCode);
             this.isCustomEditions = isCustomEditions;
@@ -645,15 +647,15 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         @Override
         protected CardEdition read(File file) {
-            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
-
             ListMultimap<String, EditionEntry> cardMap = ArrayListMultimap.create();
-            List<BoosterSlot> boosterSlots = null;
             Map<String, List<String>> customPrintSheetsToParse = new HashMap<>();
             List<String> editionSectionsWithCollectorNumbers = EditionSectionWithCollectorNumbers.getNames();
 
+            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
             FileSection metadata = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
+
             List<String> boosterSlotsToParse = Lists.newArrayList();
+            List<BoosterSlot> boosterSlots = null;
             if (metadata.contains("BoosterSlots")) {
                 boosterSlotsToParse = Lists.newArrayList(metadata.get("BoosterSlots").split(","));
                 boosterSlots = Lists.newArrayList();
@@ -667,52 +669,47 @@ public final class CardEdition implements Comparable<CardEdition> {
 
                 if (sectionName.endsWith("Types")) {
                     CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
-                } else {
-                    // Parse cards
-
+                } else if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
                     // parse sections of the format "<collector number> <rarity> <name>"
-                    if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
-                        for(String line : contents.get(sectionName)) {
-                            Matcher matcher = CARD_PATTERN.matcher(line);
+                    for (String line : contents.get(sectionName)) {
+                        Matcher matcher = CARD_PATTERN.matcher(line);
 
-                            if (!matcher.matches()) {
-                                continue;
-                            }
-
-                            String collectorNumber = matcher.group(2);
-                            CardRarity r = CardRarity.smartValueOf(matcher.group(4));
-                            String cardName = matcher.group(5);
-                            String artistName = matcher.group(7);
-                            String extraParamText = matcher.group(9);
-                            Map<String, String> extraParams = null;
-                            if(!StringUtils.isBlank(extraParamText)) {
-                                Matcher paramMatcher = EXTRA_PARAMS_PATTERN.matcher(extraParamText);
-                                if(!paramMatcher.lookingAt())
-                                    System.err.println("Ignoring malformed parameter text: " + extraParamText);
-                                else {
-                                    extraParams = new HashMap<>(2);
-                                    do {
-                                        String k = paramMatcher.group(1).trim().toLowerCase();
-                                        String v = paramMatcher.group(2).trim();
-                                        if(k.isEmpty() || v.isEmpty())
-                                            continue;
-                                        extraParams.put(k, v);
-                                    } while(paramMatcher.find());
-                                }
-                            }
-
-                            EditionEntry cis = new EditionEntry(cardName, collectorNumber, r, artistName, extraParams);
-
-                            cardMap.put(sectionName, cis);
+                        if (!matcher.matches()) {
+                            continue;
                         }
-                    } else if (boosterSlotsToParse.contains(sectionName)) {
-                        // parse booster slots of the format "Base=N\n|Replace=<amount> <sheet>"
-                        boosterSlots.add(BoosterSlot.parseSlot(sectionName, contents.get(sectionName)));
-                    } else {
-                        // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
-                        // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
-                        customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
+
+                        String collectorNumber = matcher.group(2);
+                        CardRarity r = CardRarity.smartValueOf(matcher.group(4));
+                        String cardName = matcher.group(5);
+                        String artistName = matcher.group(7);
+                        String extraParamText = matcher.group(9);
+                        Map<String, String> extraParams = null;
+                        if(!StringUtils.isBlank(extraParamText)) {
+                            Matcher paramMatcher = EXTRA_PARAMS_PATTERN.matcher(extraParamText);
+                            if(!paramMatcher.lookingAt())
+                                System.err.println("Ignoring malformed parameter text: " + extraParamText);
+                            else {
+                                extraParams = new HashMap<>(2);
+                                do {
+                                    String k = paramMatcher.group(1).trim().toLowerCase();
+                                    String v = paramMatcher.group(2).trim();
+                                    if(k.isEmpty() || v.isEmpty())
+                                        continue;
+                                    extraParams.put(k, v);
+                                } while(paramMatcher.find());
+                            }
+                        }
+
+                        EditionEntry cis = new EditionEntry(cardName, collectorNumber, r, artistName, extraParams);
+                        cardMap.put(sectionName, cis);
                     }
+                } else if (boosterSlotsToParse.contains(sectionName)) {
+                    // parse booster slots of the format "Base=N\n|Replace=<amount> <sheet>"
+                    boosterSlots.add(BoosterSlot.parseSlot(sectionName, contents.get(sectionName)));
+                } else {
+                    // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
+                    // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
+                    customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
                 }
             }
 
@@ -755,7 +752,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             CardEdition res = new CardEdition(cardMap, tokenMap, customPrintSheetsToParse);
-            res.boosterSlots = boosterSlots;
             // parse metadata section
             res.name  = metadata.get("name");
             res.date  = parseDate(metadata.get("date"));
@@ -769,11 +765,11 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             res.otherMap = otherMap;
 
+            res.boosterSlots = boosterSlots;
             String boosterDesc = metadata.get("Booster");
 
             if (metadata.contains("Booster")) {
                 // Historical naming convention in Forge for "DraftBooster"
-                // Do i have access to editions slots?
                 if (res.boosterSlots != null) {
                     res.boosterTpl = new SealedTemplateWithSlots(res.code, SealedTemplate.Reader.parseSlots(boosterDesc), res.boosterSlots);
                 } else {
@@ -792,13 +788,11 @@ public final class CardEdition implements Comparable<CardEdition> {
                 }
             }
 
-            res.alias = metadata.get("alias");
-            res.borderColor = BorderColor.valueOf(metadata.get("border", "Black").toUpperCase(Locale.ENGLISH));
             Type enumType = Type.UNKNOWN;
-            if (this.isCustomEditions){
+            if (this.isCustomEditions) {
                 enumType = Type.CUSTOM_SET; // Forcing ThirdParty Edition Type to avoid inconsistencies
             } else {
-                String type  = metadata.get("type");
+                String type = metadata.get("type");
                 if (null != type && !type.isEmpty()) {
                     try {
                         enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
@@ -810,10 +804,11 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             }
             res.type = enumType;
-            res.prerelease = metadata.get("Prerelease", null);
-            res.boosterBoxCount = Integer.parseInt(metadata.get("BoosterBox", enumType.getBoosterBoxDefault()));
-            res.fatPackCount = Integer.parseInt(metadata.get("FatPack", enumType.getFatPackDefault()));
-            res.fatPackExtraSlots = metadata.get("FatPackExtraSlots", "");
+            if (res.hasBoosterTemplate()) {
+                res.boosterBoxCount = Integer.parseInt(metadata.get("BoosterBox", enumType.getBoosterBoxDefault()));
+                res.fatPackCount = Integer.parseInt(metadata.get("FatPack", enumType.getFatPackDefault()));
+                res.fatPackExtraSlots = metadata.get("FatPackExtraSlots", "");
+            }
 
             switch (metadata.get("foil", "newstyle").toLowerCase()) {
                 case "oldstyle":
@@ -847,6 +842,10 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.sheetReplaceCardFromSheet = metadata.get("SheetReplaceCardFromSheet", "");
             res.sheetReplaceCardFromSheet2 = metadata.get("SheetReplaceCardFromSheet2", "");
             res.chaosDraftThemes = metadata.get("ChaosDraftThemes", "").split(";"); // semicolon separated list of theme names
+
+            res.alias = metadata.get("alias");
+            res.borderColor = BorderColor.valueOf(metadata.get("border", "Black").toUpperCase(Locale.ENGLISH));
+            res.prerelease = metadata.get("Prerelease", null);
 
             // Draft options
             String doublePick = metadata.get("DoublePick", "Never");
@@ -886,7 +885,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 initAliases(ee);
             }
         }
-        private void initAliases(CardEdition E){ //Add the alias to the edition here, to ensure it's always done equally.
+        private void initAliases(CardEdition E) { //Add the alias to the edition here, to ensure it's always done equally.
             String alias = E.getAlias();
             if (null != alias)
                 aliasToEdition.put(alias, E);
@@ -894,12 +893,12 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         @Override
         public void add(CardEdition item) { //Even though we want it to be read only, make an exception for custom content.
-            if(lock) throw new UnsupportedOperationException("This is a read-only storage");
+            if (lock) throw new UnsupportedOperationException("This is a read-only storage");
             else map.put(item.getCode(), item);
         }
-        public void append(CardEdition.Collection C){ //Append custom editions
+        public void append(CardEdition.Collection C) { //Append custom editions
             if (lock) throw new UnsupportedOperationException("This is a read-only storage");
-            for(CardEdition E : C){ //Update the alias list as above or else it'll fail to look up.
+            for (CardEdition E : C) { //Update the alias list as above or else it'll fail to look up.
                 this.add(E);
                 initAliases(E); //Made a method in case the system changes, so it's consistent.
             }
@@ -1031,7 +1030,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             int editionIndex = artPreference.latestFirst ? 0 : selectedEditions.size() - 1;
             return selectedEditions.get(editionIndex);
         }
-
 
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = edition -> StaticData.instance().getTournamentPacks().contains(edition.getCode());
 

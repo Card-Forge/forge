@@ -1,5 +1,6 @@
 package forge.game.zone;
 
+import forge.trackable.TrackableProperty;
 import forge.util.ITranslatable;
 import forge.util.Localizer;
 
@@ -11,22 +12,22 @@ import java.util.List;
  * The Enum Zone.
  */
 public enum ZoneType implements ITranslatable {
-    Hand(true, "lblHandZone"),
-    Library(true, "lblLibraryZone"),
-    Graveyard(false, "lblGraveyardZone"),
-    Battlefield(false, "lblBattlefieldZone"),
-    Exile(false, "lblExileZone"),
-    Flashback(false, "lblFlashbackZone"),
-    Command(false, "lblCommandZone"),
+    Hand(true, "lblHandZone", TrackableProperty.Hand),
+    Library(true, "lblLibraryZone", TrackableProperty.Library),
+    Graveyard(false, "lblGraveyardZone", TrackableProperty.Graveyard),
+    Battlefield(false, "lblBattlefieldZone", TrackableProperty.Battlefield),
+    Exile(false, "lblExileZone", TrackableProperty.Exile),
+    Flashback(false, "lblFlashbackZone", TrackableProperty.Flashback),
+    Command(false, "lblCommandZone", TrackableProperty.Command),
     Stack(false, "lblStackZone"),
-    Sideboard(true, "lblSideboardZone"),
-    Ante(false, "lblAnteZone"),
+    Sideboard(true, "lblSideboardZone", TrackableProperty.Sideboard),
+    Ante(false, "lblAnteZone", TrackableProperty.Ante),
     Merged(false, "lblBattlefieldZone"),
-    SchemeDeck(true, "lblSchemeDeckZone"),
-    PlanarDeck(true, "lblPlanarDeckZone"),
-    AttractionDeck(true, "lblAttractionDeckZone"),
-    Junkyard(false, "lblJunkyardZone"),
-    ContraptionDeck(true, "lblContraptionDeckZone"),
+    SchemeDeck(true, "lblSchemeDeckZone", TrackableProperty.SchemeDeck),
+    PlanarDeck(true, "lblPlanarDeckZone", TrackableProperty.PlanarDeck),
+    AttractionDeck(true, "lblAttractionDeckZone", TrackableProperty.AttractionDeck),
+    Junkyard(false, "lblJunkyardZone", TrackableProperty.Junkyard),
+    ContraptionDeck(true, "lblContraptionDeckZone", TrackableProperty.ContraptionDeck),
     //Scrapyard is like the Junkyard but for contraptions; just going to recycle the Junkyard for this.
     Subgame(true, "lblSubgameZone"),
     // ExtraHand is used for Backup Plan for temporary extra hands
@@ -40,9 +41,20 @@ public enum ZoneType implements ITranslatable {
 
     private final boolean holdsHiddenInfo;
     private final String label;
+    private final TrackableProperty trackableProperty;
+
     ZoneType(boolean holdsHidden, String label) {
+        this(holdsHidden, label, null);
+    }
+    ZoneType(boolean holdsHidden, String label, TrackableProperty trackableProperty) {
         holdsHiddenInfo = holdsHidden;
         this.label = label;
+        this.trackableProperty = trackableProperty;
+    }
+
+    /** Returns the TrackableProperty that holds this zone's cards on PlayerView, or null. */
+    public TrackableProperty getTrackableProperty() {
+        return trackableProperty;
     }
 
     public static ZoneType smartValueOf(final String value) {

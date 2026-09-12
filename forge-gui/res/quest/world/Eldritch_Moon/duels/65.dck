@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/Morosoku_-_Eldrazi_(Modern,_#660374).dck
+Deck Type=constructed
+
+[Main]
+4 Brain Maggot
+4 Eternal Scourge
+4 Matter Reshaper
+2 Reality Smasher
+4 Thought-Knot Seer
+4 Wasteland Strangler
+4 AEther Vial
+1 Relic of Progenitus
+2 Kolaghan's Command
+4 Lightning Bolt
+4 Terminate
+4 Blood Crypt
+2 Cavern of Souls
+4 Eldrazi Temple
+2 Ghost Quarter
+1 Mountain
+2 Mutavault
+1 Sea Gate Wreckage
+4 Sulfurous Springs
+3 Swamp
+[Sideboard]
+2 Endbringer
+2 Kozilek's Return
+4 Rakdos Charm
+2 Ratchet Bomb
+2 Relic of Progenitus
+2 Slaughter Games
+1 Sulfur Elemental

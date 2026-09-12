@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/SCG_Super_IQ_Roanoke/Connor_McBroom_-_G-W_Megamorph_(Standard,_#243282).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+1 Dragonlord Dromoka
+4 Elvish Mystic
+4 Fleecemane Lion
+2 Hidden Dragonslayer
+2 Warden of the First Tree
+4 Collected Company
+3 Dromoka's Command
+1 Valorous Stance
+3 Mastery of the Unseen
+2 Blossoming Sands
+10 Forest
+4 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+2 Arashin Cleric
+2 Display of Dominance
+2 Elspeth, Sun's Champion
+1 End Hostilities
+2 Glare of Heresy
+2 Hornet Nest
+1 Nissa, Worldwaker
+1 Plummet
+2 Whisperwood Elemental

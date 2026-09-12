@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/MAD_Modern_Tournament/Marcelino_Pernanbuco_-_Goblins_(Modern,_#53510).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ember Hauler
+3 Goblin Bushwhacker
+4 Goblin Chieftain
+4 Goblin Guide
+4 Goblin Wardriver
+3 Mogg Fanatic
+2 Mogg War Marshal
+1 Siege-Gang Commander
+1 Tuktuk the Explorer
+4 Warren Instigator
+4 AEther Vial
+3 Lightning Bolt
+1 Flame Slash
+4 Goblin Grenade
+16 Mountain
+4 Mutavault
+[Sideboard]
+3 Blood Moon
+4 Relic of Progenitus
+4 Shattering Spree
+4 Torpor Orb

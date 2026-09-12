@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Easy
+Description=Zendikar/US_States_2009_-_Colorado/Brandon_Montoya_-_Vampires_(Standard,_#3237).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+1 Eldrazi Monument
+3 Disfigure
+4 Tendrils of Corruption
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+16 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+4 Duress
+3 Marsh Casualties

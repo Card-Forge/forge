@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Zeekery_-_Affinity_(Modern,_#1225654)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Myr Enforcer
+4 Memnite
+4 Ornithopter
+4 Signal Pest
+4 Sojourner's Companion
+4 Thought Monitor
+4 Frogmite
+1 Shadowspear
+2 Welding Jar
+4 Cranial Plating
+4 Springleaf Drum
+4 Galvanic Blast
+4 Urza's Saga
+1 Island
+2 Spire of Industry
+3 Silverbluff Bridge
+4 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Pithing Needle
+1 Jegantha, the Wellspring
+2 Wear // Tear
+2 Etched Champion
+2 Experimental Frenzy
+3 Relic of Progenitus
+4 Metallic Rebuke

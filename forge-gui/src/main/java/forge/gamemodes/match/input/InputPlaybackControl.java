@@ -13,8 +13,6 @@ public class InputPlaybackControl extends InputSyncronizedBase {
 
     private boolean isPaused = false;
 
-    private PlaybackSpeed speed = PlaybackSpeed.NORMAL;
-
     private final Game game;
     public InputPlaybackControl(final Game game0, final FControlGamePlayback fControlGamePlayback) {
         super(fControlGamePlayback.getController());
@@ -48,7 +46,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
         if (isPaused) {
             getController().getGui().updateButtons(null, "Resume", "Step", true, true, true);
         } else {
-            getController().getGui().updateButtons(null, "Pause", speed.nextSpeedText(), true, true, true);
+            getController().getGui().updateButtons(null, "Pause", control.getSpeed().nextSpeedText(), true, true, true);
         }
         getController().getGui().setGamePause(isPaused);
     }
@@ -76,7 +74,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
             control.singleStep();
         }
         else {
-            speed = speed.nextSpeed();
+            PlaybackSpeed speed = control.getSpeed().nextSpeed();
 
             control.setSpeed(speed);
             getController().getGui().setGameSpeed(speed);

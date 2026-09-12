@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Ismael_Lessa_-_Izzet_Control_(Modern,_#2214269).dck
+Deck Type=constructed
+
+[Main]
+4 Tamiyo, Inquisitive Student
+3 Snapcaster Mage
+3 Thundertrap Trainer
+1 Subtlety
+2 Murktide Regent
+2 Spell Snare
+4 Galvanic Discharge
+2 Lightning Bolt
+4 Counterspell
+2 Sink into Stupor
+2 Flare of Denial
+4 Flame of Anor
+1 Force of Negation
+1 Invert Polarity
+4 Preordain
+1 Expressive Iteration
+2 Steam Vents
+2 Spirebluff Canal
+2 Thundering Falls
+2 Polluted Delta
+4 Misty Rainforest
+3 Snow-Covered Island
+1 Scalding Tarn
+1 Otawara, Soaring City
+2 Flooded Strand
+1 Hall of Storm Giants
+[Sideboard]
+3 Consign to Memory
+1 Surgical Extraction
+2 Stern Scolding
+2 Pyroclasm
+2 Unlicensed Hearse
+1 Subtlety
+4 Obsidian Charmaw

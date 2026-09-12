@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Zachary_Auten_-_Golgari_Yawgmoth_(Modern,_#1224951)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Scavenging Ooze
+1 Zulaport Cutthroat
+2 Geralf's Messenger
+4 Young Wolf
+4 Yawgmoth, Thran Physician
+4 Wall of Roots
+4 Strangleroot Geist
+4 Ignoble Hierarch
+4 Birds of Paradise
+4 Chord of Calling
+4 Eldritch Evolution
+3 Grist, the Hunger Tide
+1 Urborg, Tomb of Yawgmoth
+1 Yavimaya, Cradle of Growth
+1 Dryad Arbor
+1 Swamp
+2 Twilight Mire
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Misty Rainforest
+2 Forest
+3 Blooming Marsh
+4 Verdant Catacombs
+[Sideboard]
+1 Gaea's Blessing
+1 Outland Liberator
+1 Obstinate Baloth
+1 Thrun, the Last Troll
+1 Veil of Summer
+2 Necromentia
+2 Force of Vigor
+3 Endurance
+3 Thoughtseize

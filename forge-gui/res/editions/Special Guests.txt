@@ -160,3 +160,24 @@ ScryfallCode=SPG
 146 M Door of Destinies @Serena Malyon
 147 M Painter's Servant @Ryan Riller
 148 M Thousand-Year Elixir @Raphael Oda
+149 M Archaeomancer @Aurore Folny
+150 M Archmage Emeritus @Valera Lutfullina
+151 M Murmuring Mystic @Marta Nael
+152 M Grim Haruspex @Jason Rainville
+153 M Dualcaster Mage @Zara Alfonso
+154 M Magus of the Library @Christina Kraus
+155 M Sylvan Library @Ekaterina Burmak
+156 M Adrix and Nev, Twincasters @Anna Steinbauer
+157 M Codie, Vociferous Codex @Andreia Ugrai
+158 M Library of Leng @Cynthia Sheppard
+158a M Library of Alexandria @Bruce Brenneise
+159 M Eye of Ugin @Marina Banker
+160 M Austere Command @Marina Banker
+161 M Flesh Duplicate @Marina Banker
+162 M Consign to Memory @Marina Banker
+163 M Sublime Epiphany @Marina Banker
+164 M Consider @Marina Banker
+165 M Necrodominance @Marina Banker
+166 M Mind Twist @Marina Banker
+167 M Splinter Twin @Marina Banker
+168 M Root Maze @Marina Banker

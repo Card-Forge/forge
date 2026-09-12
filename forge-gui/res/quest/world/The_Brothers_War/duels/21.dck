@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sabertooth
+Title=Sabertooth
+Icon=Sabertooth.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Lordan_-_Rakdos_Midrange_(Standard,_#1542024).dck
+Deck Type=constructed
+
+[Main]
+2 Bloodtithe Harvester
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Graveyard Trespasser
+2 Reckoner Bankbuster
+2 Cut Down
+4 Go for the Throat
+2 Duress
+2 Brotherhood's End
+4 Invoke Despair
+1 Sorin the Mirthless
+3 Liliana of the Veil
+1 Ziatora's Proving Ground
+2 Sokenzan, Crucible of Defiance
+2 Takenuma, Abandoned Mire
+3 Sulfurous Springs
+4 Mountain
+4 Haunted Ridge
+9 Swamp
+[Sideboard]
+1 March of Wretched Sorrow
+1 The Cruelty of Gix
+1 Henrika Domnathi
+1 Parasitic Grasp
+1 The Stone Brain
+2 Aggressive Sabotage
+2 Abrade
+2 Unlicensed Hearse
+2 Duress
+2 Cut Down

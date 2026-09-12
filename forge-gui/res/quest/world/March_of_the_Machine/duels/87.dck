@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Killah_SUV_-_Glimpse_Cascade_(Modern,_#1637925).dck
+Deck Type=constructed
+
+[Main]
+4 Chancellor of the Forge
+3 Shardless Agent
+4 Seasoned Pyromancer
+4 Fury
+4 Wavesifter
+1 Shardless Agent
+4 Halo Forager
+4 Violent Outburst
+1 Glimpse of Tomorrow
+3 Glimpse of Tomorrow
+4 Invasion of Alara
+1 Sacred Foundry
+1 Steam Vents
+1 Scalding Tarn
+4 Khalni Garden
+1 Overgrown Tomb
+1 Breeding Pool
+1 Stomping Ground
+1 Polluted Delta
+3 Wooded Foothills
+1 Temple Garden
+1 Blood Crypt
+1 Raugrin Triome
+1 Zagoth Triome
+1 Snow-Covered Island
+1 Snow-Covered Forest
+4 Misty Rainforest
+[Sideboard]
+4 Teferi, Time Raveler
+4 Force of Vigor
+2 Mystical Dispute
+1 Inevitable Betrayal
+3 Endurance
+1 Inevitable Betrayal

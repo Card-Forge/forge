@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Ontario_-_Canada/Marco_Buchar_-_RDW_(Standard,_#1840).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hell's Thunder
+3 Hellspark Elemental
+2 Kargan Dragonlord
+2 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Blightning
+3 Earthquake
+2 Quenchable Fire
+1 Akoum Refuge
+4 Arid Mesa
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+7 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Banefire
+2 Deathmark
+2 Doom Blade
+4 Dragon's Claw
+2 Pithing Needle

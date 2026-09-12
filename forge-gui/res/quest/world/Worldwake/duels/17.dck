@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Medium
+Description=Worldwake/North_Island_Open_2010/Steven_Hitchcock_-_Jund_(Standard,_#2136).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Broodmate Dragon
+3 Siege-Gang Commander
+4 Sprouting Thrinax
+3 Bituminous Blast
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+3 Maelstrom Pulse
+3 Rampant Growth
+3 Dragonskull Summit
+3 Forest
+3 Mountain
+2 Raging Ravine
+2 Rootbound Crag
+4 Savage Lands
+4 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Goblin Ruinblaster
+3 Jund Charm
+4 Malakir Bloodwitch
+3 Mind Rot

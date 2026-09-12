@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/GPT_Ilevel_Lucena/Miguel_Osuna_Fernandez_-_Faeries_(Modern,_#657407).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Mistbind Clique
+4 Spellstutter Sprite
+1 Tasigur, the Golden Fang
+3 Vendilion Clique
+4 Smuggler's Copter
+1 Sword of War and Peace
+2 Cryptic Command
+2 Doom Blade
+2 Go for the Throat
+1 Murderous Cut
+2 Remand
+2 Spell Snare
+3 Duress
+2 Inquisition of Kozilek
+4 Bitterblossom
+4 Drowned Catacomb
+3 Faerie Conclave
+5 Island
+3 Mutavault
+3 Polluted Delta
+2 River of Tears
+3 Secluded Glen
+1 Swamp
+[Sideboard]
+1 Damnation
+3 Deathmark
+4 Dispel
+1 Go for the Throat
+2 Mana Leak
+2 Relic of Progenitus
+2 Serum Visions

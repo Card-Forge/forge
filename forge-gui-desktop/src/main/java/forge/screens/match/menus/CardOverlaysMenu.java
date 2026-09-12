@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import forge.control.KeyboardShortcuts;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.util.Localizer;
@@ -39,7 +40,7 @@ public final class CardOverlaysMenu {
     }
 
     private JMenuItem getMenuItem_CardOverlay(String menuCaption, FPref pref) {
-        JCheckBoxMenuItem menu = new JCheckBoxMenuItem(menuCaption);
+        JCheckBoxMenuItem menu = MenuUtil.createStayOpenCheckBox(menuCaption);
         menu.setState(prefs.getPrefBoolean(pref));
         menu.setEnabled(showOverlays);
         menu.addActionListener(getCardOverlaysAction(pref));
@@ -47,7 +48,7 @@ public final class CardOverlaysMenu {
     }
 
     private JMenuItem getMenuItem_ShowOverlays() {
-        JCheckBoxMenuItem menu = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblShow"));
+        JCheckBoxMenuItem menu = MenuUtil.createStayOpenCheckBox(Localizer.getInstance().getMessage("lblShow"));
         final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_CARDOVERLAYS);
         if (ks != null) { menu.setAccelerator(ks); }
         menu.setState(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
@@ -60,23 +61,16 @@ public final class CardOverlaysMenu {
     }
 
     private void toggleCardOverlayDisplay(JMenuItem showMenu) {
-        toggleShowOverlaySetting();
+        toggleOverlaySetting(FPref.UI_SHOW_CARD_OVERLAYS);
         repaintCardOverlays();
         // Enable/disable overlay menu items based on state of "Show" menu.
         for (Component c : showMenu.getParent().getComponents()) {
-            if (c instanceof JMenuItem) {
-                JMenuItem m = (JMenuItem)c;
-                if (m != showMenu) {
-                    m.setEnabled(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
+            if (c instanceof JMenuItem jmu) {
+                if (jmu != showMenu) {
+                    jmu.setEnabled(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
                 }
             }
         }
-    }
-
-    private static void toggleShowOverlaySetting() {
-        boolean isOverlayEnabled = !prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
-        prefs.setPref(FPref.UI_SHOW_CARD_OVERLAYS, isOverlayEnabled);
-        prefs.save();
     }
 
     private ActionListener getCardOverlaysAction(final FPref overlaySetting) {

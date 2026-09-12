@@ -1,0 +1,64 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Bosh_N_Roll_-_Kiki's_Chord_(Modern,_#1073825).dck
+Deck Type=constructed
+
+[Main]
+1 Acidic Slime
+1 Omnath, Locus of Creation
+1 Seasoned Pyromancer
+1 Kiki-Jiki, Mirror Breaker
+1 Charming Prince
+1 Glasspool Mimic
+1 Venser, Shaper Savant
+1 Watcher for Tomorrow
+1 Gilded Goose
+1 Deputy of Detention
+1 Auriok Champion
+2 Restoration Angel
+2 Avalanche Riders
+2 Skyclave Apparition
+3 Eternal Witness
+3 Soulherder
+3 Birds of Paradise
+4 Coiling Oracle
+4 Ice-Fang Coatl
+4 Noble Hierarch
+4 Aether Vial
+1 Eladamri's Call
+4 Chord of Calling
+4 Ephemerate
+1 Stomping Ground
+1 Steam Vents
+1 Snow-Covered Mountain
+1 Sacred Foundry
+1 Raugrin Triome
+1 Ketria Triome
+1 Hallowed Fountain
+1 Temple Garden
+1 Wooded Foothills
+1 Arid Mesa
+2 Snow-Covered Plains
+2 Snow-Covered Island
+2 Breeding Pool
+3 Snow-Covered Forest
+3 Misty Rainforest
+3 Windswept Heath
+4 Flooded Strand
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Meddling Mage
+1 Auriok Champion
+1 Teferi, Hero of Dominaria
+1 Selfless Spirit
+1 Scavenging Ooze
+1 Qasali Pridemage
+1 Knight of Autumn
+1 Huntmaster of the Fells
+1 Collector Ouphe
+1 Aven Mindcensor
+4 Path to Exile

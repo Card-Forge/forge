@@ -153,13 +153,13 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
     private void showGameOutcomeSummary() {
         for (GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
-            pnlOutcomes.add(new FLabel.Builder().text(o.message).font(FSkinFont.get(14)).build());
+            pnlOutcomes.add(new FLabel.Builder().text(o.message()).font(FSkinFont.get(14)).build());
         }
     }
 
     private void showPlayerScores() {
         for (GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
-            lblStats.setText(removePlayerTypeFromLogMessage(o.message));
+            lblStats.setText(removePlayerTypeFromLogMessage(o.message()));
         }
     }
 

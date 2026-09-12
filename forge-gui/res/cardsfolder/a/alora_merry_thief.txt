@@ -8,4 +8,5 @@ SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Descript
 SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | SpellDescription$ Return that creature to its owner's hand at the beginning of the next end step.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
 K:Choose a Background
+SVar:PlayMain1:TRUE
 Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. Return that creature to its owner's hand at the beginning of the next end step.\nChoose a Background (You can have a Background as a second commander.)

@@ -1,7 +1,7 @@
 [metadata]
 Code=TSB
 Date=2006-10-06
-Name=Time Spiral "Timeshifted"
+Name=Time Spiral Timeshifted
 Type=Expansion
 ScryfallCode=TSB
 BoosterBox=0
@@ -69,7 +69,7 @@ FatPack=0
 59 S Dragon Whelp @Amy Weber
 60 S Dragonstorm @Kev Walker
 61 S Eron the Relentless @Christopher Rush
-62 S Fiery Temper @Greg Hildebrandt & Tim Hildebrandt
+62 S Fiery Temper @Greg Hildebrandt
 63 S Fire Whip @Jeff Miracola
 64 S Goblin Snowman @Daniel Gelon
 65 S Kobold Taskmaster @Randy Asplund-Faith

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot73
+Title=Robot73
+Icon=Mr Slate.jpg
+Difficulty=Easy
+Description=Esper God-pharaoh's Gift 
+Deck Type=constructed
+
+[Main]
+4 Angel of Invention
+4 Champion of Wits
+4 Glint-Sleeve Siphoner
+2 Hostage Taker
+4 Minister of Inquiries
+4 Seekers' Squire
+2 The Scarab God
+2 Trophy Mage
+4 Walking Ballista
+4 Gate to the Afterlife
+2 God-Pharaoh's Gift
+4 Aether Hub
+4 Concealed Courtyard
+4 Drowned Catacomb
+1 Fetid Pools
+2 Glacial Fortress
+6 Island
+3 Swamp
+[Sideboard]
+3 Aethersphere Harvester
+3 Fatal Push
+2 Gonti, Lord of Luxury
+3 Negate
+2 Sunscourge Champion
+2 Vraska's Contempt

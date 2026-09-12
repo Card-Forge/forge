@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/7720_-_Dimir_Rogues_(Standard,_#1053487).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+1 Essence Scatter
+1 Eliminate
+2 Cling to Dust
+2 Heartless Act
+4 Drown in the Loch
+4 Into the Story
+1 Call of the Death-Dweller
+2 Bloodchief's Thirst
+2 Lullmage's Domination
+3 Agadeem's Awakening
+1 Castle Locthwain
+3 Swamp
+4 Temple of Deceit
+4 Clearwater Pathway
+4 Fabled Passage
+6 Island
+[Sideboard]
+1 Bloodchief's Thirst
+1 Eliminate
+1 Lullmage's Domination
+1 Agonizing Remorse
+1 Lurrus of the Dream-Den
+1 Skyclave Shade
+2 Negate
+2 Soul-Guide Lantern
+2 Extinction Event
+3 Mystical Dispute

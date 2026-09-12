@@ -40,7 +40,9 @@ public enum DeckType {
     NET_ARCHIVE_PAUPER_DECK("lblNetArchivePauperDecks"),
     NET_ARCHIVE_LEGACY_DECK("lblNetArchiveLegacyDecks"),
     NET_ARCHIVE_VINTAGE_DECK("lblNetArchiveVintageDecks"),
-    NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks");
+    NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks"),
+    NET_EVENT_DECK("lblNetEventDecks"),
+    PROVIDED_DECK_URL("lblProvideDeckUrl");
 
     public static DeckType[] ConstructedOptions;
     public static DeckType[] CommanderOptions;
@@ -65,13 +67,15 @@ public enum DeckType {
                     DeckType.THEME_DECK,
                     DeckType.RANDOM_DECK,
                     DeckType.NET_DECK,
+                    DeckType.NET_EVENT_DECK,
                     DeckType.NET_ARCHIVE_STANDARD_DECK,
                     DeckType.NET_ARCHIVE_PIONEER_DECK,
                     DeckType.NET_ARCHIVE_MODERN_DECK,
                     DeckType.NET_ARCHIVE_PAUPER_DECK,
                     DeckType.NET_ARCHIVE_LEGACY_DECK,
                     DeckType.NET_ARCHIVE_VINTAGE_DECK,
-                    DeckType.NET_ARCHIVE_BLOCK_DECK
+                    DeckType.NET_ARCHIVE_BLOCK_DECK,
+                    DeckType.PROVIDED_DECK_URL
             };
         } else {
             ConstructedOptions = new DeckType[]{
@@ -85,13 +89,15 @@ public enum DeckType {
                     DeckType.THEME_DECK,
                     DeckType.RANDOM_DECK,
                     DeckType.NET_DECK,
+                    DeckType.NET_EVENT_DECK,
                     DeckType.NET_ARCHIVE_STANDARD_DECK,
                     DeckType.NET_ARCHIVE_PIONEER_DECK,
                     DeckType.NET_ARCHIVE_MODERN_DECK,
                     DeckType.NET_ARCHIVE_PAUPER_DECK,
                     DeckType.NET_ARCHIVE_LEGACY_DECK,
                     DeckType.NET_ARCHIVE_VINTAGE_DECK,
-                    DeckType.NET_ARCHIVE_BLOCK_DECK
+                    DeckType.NET_ARCHIVE_BLOCK_DECK,
+                    DeckType.PROVIDED_DECK_URL
             };
         }
     }
@@ -103,7 +109,8 @@ public enum DeckType {
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
-                    DeckType.NET_COMMANDER_DECK
+                    DeckType.NET_COMMANDER_DECK,
+                    DeckType.PROVIDED_DECK_URL
             };
         }else{
             CommanderOptions = new DeckType[]{
@@ -111,7 +118,8 @@ public enum DeckType {
                     DeckType.PRECON_COMMANDER_DECK,
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
-                    DeckType.NET_COMMANDER_DECK
+                    DeckType.NET_COMMANDER_DECK,
+                    DeckType.PROVIDED_DECK_URL
             };
         }
 

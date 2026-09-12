@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sabertooth
+Title=Sabertooth
+Icon=Sabertooth.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Alexander_Andersson_-_Naya_Runes_(Standard,_#1381930).dck
+Deck Type=constructed
+
+[Main]
+4 Generous Visitor
+4 Fable of the Mirror-Breaker
+4 Runeforge Champion
+4 Jukai Naturalist
+4 Kami of Transience
+2 Rune of Sustenance
+3 Rune of Speed
+4 Showdown of the Skalds
+4 Rune of Might
+4 Circle of Confinement
+1 Overgrown Farmland
+1 Lair of the Hydra
+1 Boseiju, Who Endures
+1 Plains
+1 Forest
+3 Needleverge Pathway
+3 Sundown Pass
+4 Branchloft Pathway
+4 Jetmir's Garden
+4 Cragcrown Pathway
+[Sideboard]
+1 Rune of Sustenance
+1 Valorous Stance
+1 Elspeth Resplendent
+1 Reidane, God of the Worthy
+2 Fateful Absence
+2 Tamiyo's Safekeeping
+3 Flame-Blessed Bolt
+4 Skyclave Apparition

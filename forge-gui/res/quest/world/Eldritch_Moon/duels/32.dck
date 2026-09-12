@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Warp_2_RPTQ/Jason_Yoragson_-_BW_Control_(Standard,_#637332).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Anguished Unmaking
+4 Grasp of Darkness
+2 Ultimate Price
+3 Languish
+1 Planar Outburst
+3 Read the Bones
+2 Ruinous Path
+4 Transgress the Mind
+3 Oath of Liliana
+4 Gideon, Ally of Zendikar
+3 Liliana, the Last Hope
+2 Ob Nixilis Reignited
+2 Sorin, Grim Nemesis
+1 Blighted Fen
+4 Caves of Koilos
+4 Forsaken Sanctuary
+5 Plains
+4 Shambling Vent
+8 Swamp
+[Sideboard]
+2 Dead Weight
+3 Duress
+2 Infinite Obliteration
+2 Kalitas, Traitor of Ghet
+1 Linvala, the Preserver

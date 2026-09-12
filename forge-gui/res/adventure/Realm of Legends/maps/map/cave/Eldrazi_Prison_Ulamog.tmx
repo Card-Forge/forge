@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="59" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="73">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="59" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,6 +33,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Pawn of Ulamog&quot;, &quot;Spawnsire of Ulamog&quot;, &quot;Oblivion Stone|M3C&quot;]}"/>
     <property name="enemy" value="Ulamog"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
@@ -63,6 +65,16 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="234.769" y="402.518" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Spawnsire of Ulamog&quot;]}"/>
+    <property name="enemy" value="Ulamog"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
  </objectgroup>

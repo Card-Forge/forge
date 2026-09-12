@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/benchsummer_-_Smallpox_(Modern,_#1153866).dck
+Deck Type=constructed
+
+[Main]
+2 Fulminator Mage
+3 Sedgemoor Witch
+4 Stoneforge Mystic
+1 Batterskull
+1 Sword of Feast and Famine
+1 Sword of Fire and Ice
+2 Kaya's Guile
+2 Fatal Push
+1 Unearth
+1 Bloodchief's Thirst
+2 Deadly Brew
+3 Lingering Souls
+4 Thoughtseize
+4 Smallpox
+4 Inquisition of Kozilek
+1 Indatha Triome
+1 Temple Garden
+2 Plains
+2 Ghost Quarter
+2 Silent Clearing
+2 Swamp
+3 Urborg, Tomb of Yawgmoth
+4 Marsh Flats
+4 Godless Shrine
+4 Flagstones of Trokair
+[Sideboard]
+1 Thrun, the Last Troll
+2 Fulminator Mage
+2 Gideon of the Trials
+2 Kaya's Guile
+4 Surgical Extraction
+4 Vanishing Verse

@@ -1,0 +1,9 @@
+Name:Voltaic Whip
+ManaCost:2 B
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 2 | AddTrigger$ AttackTrig | Description$ Equipped creature gets +2/+0 and has "Whenever this creature attacks alone, you draw a card and lose 1 life."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | Alone$ True | TriggerDescription$ Whenever this creature attacks alone, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+K:Equip:2
+Oracle:Equipped creature gets +2/+0 and has "Whenever this creature attacks alone, you draw a card and lose 1 life."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,5 @@
+Name:Abandoned Air Temple|Art:Abandoned Air Temple|Colors:W
+Name:Agna Qel'a|Art:Agna Qel'a|Colors:U
+Name:Ba Sing Se|Art:Ba Sing Se|Colors:G
+Name:Fire Nation|Art:Fire Nation Palace|Colors:R
+Name:Realm of Koh|Art:Realm of Koh|Colors:B

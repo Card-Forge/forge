@@ -1,0 +1,7 @@
+Name:Kree Sentinel
+ManaCost:4 R
+Types:Artifact Creature Kree Robot Villain
+PT:5/5
+K:Reach
+K:TypeCycling:Basic:2
+Oracle:Reach\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

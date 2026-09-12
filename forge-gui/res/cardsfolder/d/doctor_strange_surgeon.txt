@@ -1,0 +1,15 @@
+Name:Doctor Strange, Surgeon
+ManaCost:4 W
+Types:Legendary Creature Human Doctor Hero
+PT:2/5
+K:Lifelink
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | AILogic$ DoubleLife | Description$ If you would gain life, you gain twice that much life instead.
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPumpAll | CheckSVar$ Y | SVarCompare$ GEZ | TriggerDescription$ At the beginning of each combat, if you have at least 10 life more than your starting life total, creatures you control get +2/+2 and gain vigilance until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance
+SVar:X:ReplaceCount$LifeGained/Twice
+SVar:Y:Count$YourLifeTotal
+SVar:Z:Count$YourStartingLife/Plus.10
+SVar:PlayMain1:TRUE
+DeckHints:Ability$LifeGain
+Oracle:Lifelink\nIf you would gain life, you gain twice that much life instead.\nAt the beginning of each combat, if you have at least 10 life more than your starting life total, creatures you control get +2/+2 and gain vigilance until end of turn.

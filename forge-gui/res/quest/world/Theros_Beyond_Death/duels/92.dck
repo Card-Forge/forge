@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Dorayaki_-_Temur_Snow_Control_(Modern,_#934892).dck
+Deck Type=constructed
+
+[Main]
+3 Ice-Fang Coatl
+3 Uro, Titan of Nature's Wrath
+1 Nexus of Fate
+2 Hieroglyphic Illumination
+3 Cryptic Command
+3 Fact or Fiction
+3 Force of Negation
+4 Archmage's Charm
+4 Growth Spiral
+4 Remand
+4 Wilderness Reclamation
+2 Snow-Covered Forest
+2 Polluted Delta
+3 Flooded Strand
+3 Breeding Pool
+4 Mystic Sanctuary
+4 Misty Rainforest
+8 Snow-Covered Island
+[Sideboard]
+1 Ceremonious Rejection
+1 Ashiok, Dream Render
+1 Surgical Extraction
+1 Mystical Dispute
+2 Weather the Storm
+2 Dismember
+2 Tireless Tracker
+2 Veil of Summer
+3 Aether Gust

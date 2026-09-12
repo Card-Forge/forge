@@ -1,0 +1,34 @@
+[metadata]
+Name=BR Aggro
+Deck Type=constructed
+Title=BR Aggro
+Description=BR Aggro
+Difficulty=Medium
+Icon=Blue Devil
+[Main]
+3 Abrade
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+4 Fanatical Firebrand
+3 Glorybringer
+2 Grasping Dunes
+2 Hazoret the Fervent
+4 Lightning Strike
+3 Magma Spray
+3 Mountain
+9 Mountain
+4 Mountain
+3 Mountain
+2 Pia Nalaar
+3 Rekindling Phoenix
+3 Scavenger Grounds
+[Sideboard]
+1 Abrade
+2 Chandra's Defeat
+3 Chandra, Torch of Defiance
+1 Dual Shot
+2 Hazoret the Fervent
+2 Puncturing Blow
+1 Scavenger Grounds
+3 Sweltering Suns

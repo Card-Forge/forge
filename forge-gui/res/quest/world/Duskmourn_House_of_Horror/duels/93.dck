@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Abrams94_-_Mono-Blue_Merfolk_(Modern,_#2252728).dck
+Deck Type=constructed
+
+[Main]
+4 Floodpits Drowner
+1 Glasspool Mimic
+4 Harbinger of the Seas
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+2 Rishadan Dockhand
+2 Svyelun of Sea and Sky
+4 Tide Shaper
+3 Vodalian Hexcatcher
+4 Aether Vial
+4 Flare of Denial
+2 Force of Negation
+4 Sink into Stupor
+2 Spreading Seas
+4 Cavern of Souls
+6 Island
+1 Minamo, School at Water's Edge
+3 Mutavault
+2 Otawara, Soaring City
+[Sideboard]
+4 Chalice of the Void
+3 Consign to Memory
+1 Force of Negation
+2 Harbinger of the Tides
+2 Subtlety
+3 Tishana's Tidebinder

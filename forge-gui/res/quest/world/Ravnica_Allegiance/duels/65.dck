@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Jerôme_Fontaine_-_Boros_Burn_(Modern,_#789056).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+1 Grim Lavamancer
+4 Lightning Bolt
+3 Searing Blaze
+4 Boros Charm
+4 Lightning Helix
+4 Light Up the Stage
+4 Skewer the Critics
+4 Lava Spike
+1 Rift Bolt
+2 Arid Mesa
+1 Stomping Ground
+3 Inspiring Vantage
+3 Mountain
+2 Sacred Foundry
+4 Wooded Foothills
+4 Bloodstained Mire
+[Sideboard]
+2 Rest in Peace
+3 Ensnaring Bridge
+1 Deflecting Palm
+3 Destructive Revelry
+4 Skullcrack
+2 Anger of the Gods

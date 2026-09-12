@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Green
+Title=Dungeon Crawling Green
+Icon=Dungeon Crawling Green.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Bohnz_-_Bant_Control_(Modern,_#1045263).dck
+Deck Type=constructed
+
+[Main]
+2 Omnath, Locus of Creation
+2 Uro, Titan of Nature's Wrath
+2 Force of Negation
+2 Lightning Bolt
+3 Mana Leak
+3 Cryptic Command
+4 Path to Exile
+4 Growth Spiral
+2 Teferi, Hero of Dominaria
+2 Wrenn and Six
+2 Jace, the Mind Sculptor
+3 Teferi, Time Raveler
+1 Mountain
+1 Breeding Pool
+1 Snow-Covered Island
+1 Snow-Covered Forest
+1 Raugrin Triome
+1 Forest
+1 Hallowed Fountain
+1 Island
+1 Ketria Triome
+1 Plains
+1 Steam Vents
+1 Temple Garden
+2 Mystic Sanctuary
+2 Field of the Dead
+2 Field of Ruin
+3 Scalding Tarn
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Timely Reinforcements
+1 Supreme Verdict
+1 Mystical Dispute
+1 Firespout
+1 Dovin's Veto
+1 Ceremonious Rejection
+1 Gaea's Blessing
+2 Soul-Guide Lantern
+2 Celestial Purge
+2 Veil of Summer
+2 Aether Gust

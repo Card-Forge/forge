@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Tildar#23898_-_Jeskai_Artifacts_(Standard,_#1359919).dck
+Deck Type=constructed
+
+[Main]
+1 Enthusiastic Mechanaut
+1 Scrap Welder
+2 Sokenzan Smelter
+2 Walking Skyscraper
+2 Runaway Trash-Bot
+3 Replication Specialist
+3 Towashi Songshaper
+3 Towashi Guide-Bot
+4 Ingenious Smith
+4 Automated Artificer
+4 Patchwork Automaton
+4 Bloodline Pretender
+4 Reflections of Littjara
+7 Plains
+8 Mountain
+9 Island
+[Sideboard]

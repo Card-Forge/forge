@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Akagi_Nobuyuki_-_Tribal_Zoo_(Modern,_#1744033).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+2 Bonecrusher Giant
+2 Fury
+4 Territorial Kavu
+4 Scion of Draco
+1 Elesh Norn, Mother of Machines
+4 Fire // Ice
+4 Lightning Bolt
+4 Stubborn Denial
+2 Lorien Revealed
+4 Leyline Binding
+3 Up the Beanstalk
+2 Teferi, Time Raveler
+1 Wrenn and Six
+1 Plains
+1 Island
+1 Forest
+2 Breeding Pool
+2 Sacred Foundry
+4 Flooded Strand
+4 Windswept Heath
+2 Wooded Foothills
+1 Savai Triome
+1 Zagoth Triome
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+[Sideboard]
+2 Engineered Explosives
+2 Hallowed Moonlight
+1 Supreme Verdict
+2 Flusterstorm
+2 Veil of Summer
+2 Deafening Silence
+2 Endurance
+2 Boseiju, Who Endures

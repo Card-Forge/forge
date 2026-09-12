@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/AlekRivera_-_Selesnya_Landfall_(Standard,_#2935807).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Sazh's Chocobo
+3 Mossborn Hydra
+2 Dyadrine, Synthesis Amalgam
+2 Icetill Explorer
+1 Keen-Eyed Curator
+4 Erode
+1 Snakeskin Veil
+2 Bushwhack
+4 Earthbender Ascension
+7 Forest
+4 Escape Tunnel
+4 Fabled Passage
+3 Ba Sing Se
+3 Hushwood Verge
+2 Plains
+2 Temple Garden
+[Sideboard]
+3 Rest in Peace
+3 Sheltered by Ghosts
+2 Leatherhead, Swamp Stalker
+2 Surrak, Elusive Hunter
+1 Kutzil, Malamet Exemplar
+1 Mossborn Hydra
+1 Restoration Magic
+1 Snakeskin Veil
+1 Voice of Victory

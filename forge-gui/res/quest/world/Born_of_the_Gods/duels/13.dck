@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Savannah,_GA/Ryan_Macedo_-_Red_Deck_Wins_(Standard,_#70330).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Chandra's Phoenix
+4 Boros Charm
+4 Lightning Strike
+4 Magma Jet
+4 Searing Blood
+3 Shock
+4 Skullcrack
+4 Warleader's Helix
+2 Chained to the Rocks
+2 Boros Guildgate
+9 Mountain
+4 Mutavault
+4 Sacred Foundry
+4 Temple of Triumph
+[Sideboard]
+2 Blind Obedience
+4 Firedrinker Satyr
+2 Mizzium Mortars
+2 Spark Trooper
+3 Viashino Firstblade

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/GP_Cincinnati_2014_-_Undefeated_Decklists/Alexander_Hayne_-_Azorius_Control_(Standard,_#67557).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+3 Azorius Charm
+4 Dissolve
+1 Fated Retribution
+2 Last Breath
+1 Negate
+4 Sphinx's Revelation
+2 Syncopate
+4 Supreme Verdict
+4 Detention Sphere
+3 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Hallowed Fountain
+7 Island
+3 Mutavault
+4 Plains
+3 Temple of Deceit
+3 Temple of Enlightenment
+3 Temple of Silence
+[Sideboard]
+3 Archangel of Thune
+2 Blind Obedience
+2 Dark Betrayal
+1 Dispel
+1 Gainsay
+1 Pithing Needle
+2 Revoke Existence
+3 Thoughtseize

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/L1X0_-_Dimir_Excruciator_(Standard,_#2796424).dck
+Deck Type=constructed
+
+[Main]
+3 Doomsday Excruciator
+4 Deceit
+1 Harvester of Misery
+4 Kavaero, Mind-Bitten
+1 Archenemy's Charm
+3 Bitter Triumph
+4 Requiting Hex
+2 Shoot the Sheriff
+3 Insatiable Avarice
+2 Intimidation Tactics
+3 Stock Up
+2 Winternight Stories
+2 Deadly Cover-Up
+4 Gloomlake Verge
+4 Restless Reef
+2 Multiversal Passage
+4 Watery Grave
+11 Swamp
+1 Undercity Sewers
+[Sideboard]
+1 Cruelclaw's Heist
+1 Negate
+4 Duress
+2 Torpor Orb
+1 Shoot the Sheriff
+2 Soul-Guide Lantern
+1 Harvester of Misery
+3 Quantum Riddler

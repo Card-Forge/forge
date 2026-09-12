@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Brasatore_-_Red_Deck_Wins_(Standard,_#1990712).dck
+Deck Type=constructed
+
+[Main]
+4 Charming Scoundrel
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Fugitive Codebreaker
+2 Feldon, Ronom Excavator
+4 Monstrous Rage
+4 Lightning Strike
+4 Witchstalker Frenzy
+4 Play with Fire
+2 Case of the Crimson Pulse
+1 Sokenzan, Crucible of Defiance
+17 Mountain
+2 Mishra's Foundry
+[Sideboard]
+4 End the Festivities
+4 Urabrask's Forge
+1 Jaya, Fiery Negotiator
+4 Soul-Guide Lantern
+2 Lithomantic Barrage

@@ -1,0 +1,13 @@
+Name:Borrowed Knowledge
+ManaCost:2 R W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard1,DBDiscard2
+SVar:DBDiscard1:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBPump | SpellDescription$ Discard your hand, then draw cards equal to the number of cards in target opponent's hand.
+SVar:DBPump:DB$ Pump | ValidTgts$ Opponent | SubAbility$ DBDraw1
+SVar:DBDraw1:DB$ Draw | NumCards$ X
+SVar:DBDiscard2:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw2 | RememberDiscarded$ True | SpellDescription$ Discard your hand, then draw cards equal to the number of cards discarded this way.
+SVar:DBDraw2:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TargetedPlayer$CardsInHand
+SVar:Y:Remembered$Amount
+Oracle:Choose one —\n• Discard your hand, then draw cards equal to the number of cards in target opponent's hand.\n• Discard your hand, then draw cards equal to the number of cards discarded this way.

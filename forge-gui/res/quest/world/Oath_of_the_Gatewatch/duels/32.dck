@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Standard_Constructed_League/ASuhar_-_Eldrazi_Green_(Standard,_#608310).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dragonlord Atarka
+4 Elvish Visionary
+4 Rattleclaw Mystic
+1 Ulamog, the Ceaseless Hunger
+4 World Breaker
+3 Hedron Archive
+4 Explosive Vegetation
+4 Nissa's Pilgrimage
+4 Oath of Nissa
+2 Chandra, Flamecaller
+3 Ugin, the Spirit Dragon
+2 Cinder Glade
+9 Forest
+2 Mountain
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+4 Wooded Foothills
+[Sideboard]
+2 Cranial Archive
+3 Crumble to Dust
+3 Kozilek's Return
+4 Roast

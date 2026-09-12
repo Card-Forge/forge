@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Bamm Bamm Rubble
+Title=Bamm Bamm Rubble
+Icon=Bamm Bamm Rubble.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Antoine_Morisse_-_The_Rock_(Modern,_#925356).dck
+Deck Type=constructed
+
+[Main]
+1 Scavenging Ooze
+1 Wall of Omens
+1 Birds of Paradise
+1 Charming Prince
+1 Fiend Hunter
+2 Kitesail Freebooter
+2 Knight of the Reliquary
+3 Eternal Witness
+4 Wasteland Strangler
+4 Tidehollow Sculler
+4 Giver of Runes
+4 Flickerwisp
+4 Aether Vial
+1 Once Upon a Time
+3 Ephemerate
+4 Collected Company
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Temple Garden
+1 Bojuka Bog
+1 Razorverge Thicket
+1 Overgrown Tomb
+1 Field of Ruin
+1 Godless Shrine
+1 Horizon Canopy
+2 Verdant Catacombs
+2 Snow-Covered Plains
+3 Marsh Flats
+4 Windswept Heath
+[Sideboard]
+1 Magus of the Moon
+1 Collector Ouphe
+1 Auriok Champion
+1 Phyrexian Revoker
+1 Spellskite
+1 Kunoros, Hound of Athreos
+1 Kambal, Consul of Allocation
+2 Plague Engineer
+2 Eldritch Evolution
+2 Gaddock Teeg
+2 Veil of Summer

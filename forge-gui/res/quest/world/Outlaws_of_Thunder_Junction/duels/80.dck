@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Amadioha
+Title=Amadioha
+Icon=Amadioha.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Hypsh_-_Grixis_Control_(Modern,_#2067729).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+2 Sheoldred, the Apocalypse
+3 Tishana's Tidebinder
+3 The One Ring
+4 Counterspell
+1 Spell Pierce
+3 Lightning Bolt
+1 Spell Snare
+1 Kolaghan's Command
+3 Fatal Push
+1 Drown in the Loch
+1 Cling to Dust
+3 Sheoldred's Edict
+1 Stern Scolding
+2 Flame of Anor
+1 Three Steps Ahead
+3 Preordain
+2 Lórien Revealed
+2 Island
+1 Swamp
+3 Misty Rainforest
+2 Steam Vents
+2 Watery Grave
+4 Polluted Delta
+1 Breeding Pool
+2 Scalding Tarn
+1 Hall of Storm Giants
+1 Xander's Lounge
+1 Thundering Falls
+1 Undercity Sewers
+[Sideboard]
+2 Engineered Explosives
+2 Flusterstorm
+2 Dress Down
+2 Damnation
+2 Stern Scolding
+3 Pick Your Poison
+2 Surgical Extraction

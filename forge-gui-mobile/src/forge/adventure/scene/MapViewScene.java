@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -35,7 +36,6 @@ public class MapViewScene extends UIScene {
     private static MapViewScene object;
     private final ScrollPane scroll;
     private final Image img;
-    private Texture miniMapTexture;
     private final Image miniMapPlayer;
     private final Group table;
     private final List<TypingLabel> labels;
@@ -46,6 +46,7 @@ public class MapViewScene extends UIScene {
     private final float maxZoom = 1.2f;
     private final float minZoom = 0.25f;
     private Set<PointOfInterest> bookmark;
+    private int lastOverlayMode = 0; // 0=none, 1=details, 2=events, 3=reputation
 
     public static MapViewScene instance() {
         if (object == null)
@@ -165,17 +166,26 @@ public class MapViewScene extends UIScene {
     }
 
 
+    private void setOverlayButtonStates(int mode) {
+        String[] buttons = {"details", "events", "reputation", "names"};
+        // Each mode shows only the *next* button in the cycle
+        // mode 0 (none/names): show "details"
+        // mode 1 (details):    show "events"
+        // mode 2 (events):     show "reputation"
+        // mode 3 (reputation): show "names"
+        int activeIndex = mode; // the button to show (wraps: 0->details, 1->events, 2->reputation, 3->names)
+        for (int i = 0; i < buttons.length; i++) {
+            TextraButton btn = ui.findActor(buttons[i]);
+            if (btn != null) {
+                btn.setVisible(i == activeIndex);
+                btn.setDisabled(i != activeIndex);
+            }
+        }
+    }
+
     public void details() {
-        TextraButton detailsButton = ui.findActor("details");
-        if (detailsButton != null) {
-            detailsButton.setVisible(false);
-            detailsButton.setDisabled(true);
-        }
-        TextraButton eventButton = ui.findActor("events");
-        if (eventButton != null) {
-            eventButton.setVisible(true);
-            eventButton.setDisabled(false);
-        }
+        lastOverlayMode = 1;
+        setOverlayButtonStates(1);
         List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
         for (PointOfInterest poi : allPois) {
             for (AdventureEventData data : AdventurePlayer.current().getEvents()) {
@@ -199,16 +209,8 @@ public class MapViewScene extends UIScene {
     }
 
     public void events() {
-        TextraButton eventsButton = ui.findActor("events");
-        if (eventsButton != null) {
-            eventsButton.setVisible(false);
-            eventsButton.setDisabled(true);
-        }
-        TextraButton repButton = ui.findActor("reputation");
-        if (repButton != null) {
-            repButton.setVisible(true);
-            repButton.setDisabled(false);
-        }
+        lastOverlayMode = 2;
+        setOverlayButtonStates(2);
         for (TypingLabel detail : details) {
             table.removeActor(detail);
         }
@@ -227,16 +229,8 @@ public class MapViewScene extends UIScene {
     }
 
     public void reputation() {
-        TextraButton repButton = ui.findActor("reputation");
-        if (repButton != null) {
-            repButton.setVisible(false);
-            repButton.setDisabled(true);
-        }
-        TextraButton namesButton = ui.findActor("names");
-        if (namesButton != null) {
-            namesButton.setVisible(true);
-            namesButton.setDisabled(false);
-        }
+        lastOverlayMode = 3;
+        setOverlayButtonStates(3);
         for (TypingLabel detail : details) {
             table.removeActor(detail);
         }
@@ -256,16 +250,8 @@ public class MapViewScene extends UIScene {
     }
 
     public void names() {
-        TextraButton namesButton = ui.findActor("names");
-        if (namesButton != null) {
-            namesButton.setVisible(false);
-            namesButton.setDisabled(true);
-        }
-        TextraButton detailsButton = ui.findActor("details");
-        if (detailsButton != null) {
-            detailsButton.setVisible(true);
-            detailsButton.setDisabled(false);
-        }
+        lastOverlayMode = 0;
+        setOverlayButtonStates(0);
         for (TypingLabel detail : details) {
             table.removeActor(detail);
         }
@@ -302,11 +288,10 @@ public class MapViewScene extends UIScene {
 
     @Override
     public void enter() {
-        if (miniMapTexture != null)
-            miniMapTexture.dispose();
-        miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
-        img.setSize(WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight());
-        img.getParent().setSize(WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight());
+        Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
+        Texture miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
+        img.setSize(biomeImage.getWidth(), biomeImage.getHeight());
+        img.getParent().setSize(biomeImage.getWidth(), biomeImage.getHeight());
         img.setDrawable(new TextureRegionDrawable(miniMapTexture));
         miniMapPlayer.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         miniMapPlayer.setSize(Current.player().avatar().getRegionWidth(), Current.player().avatar().getRegionHeight());
@@ -335,26 +320,7 @@ public class MapViewScene extends UIScene {
             label.skipToTheEnd();
         }
 
-        TextraButton detailsButton = ui.findActor("details");
-        if (detailsButton != null) {
-            detailsButton.setVisible(true);
-            detailsButton.setDisabled(false);
-        }
-        TextraButton eventButton = ui.findActor("events");
-        if (eventButton != null) {
-            eventButton.setVisible(false);
-            eventButton.setDisabled(true);
-        }
-        TextraButton repButton = ui.findActor("reputation");
-        if (repButton != null) {
-            repButton.setVisible(false);
-            repButton.setDisabled(true);
-        }
-        TextraButton namesButton = ui.findActor("names");
-        if (namesButton != null) {
-            namesButton.setVisible(false);
-            namesButton.setDisabled(true);
-        }
+        setOverlayButtonStates(0);
         TextraButton zoomInButton = ui.findActor("zoomIn");
         if (zoomInButton != null) {
             zoomInButton.setVisible(true);
@@ -370,6 +336,11 @@ public class MapViewScene extends UIScene {
             questButton.setDisabled(labels.isEmpty());
             questButton.setVisible(!labels.isEmpty());
         }
+        // Restore last overlay mode
+        if (lastOverlayMode == 1) details();
+        else if (lastOverlayMode == 2) events();
+        else if (lastOverlayMode == 3) reputation();
+
         super.enter();
     }
     float getMapX(float posX) {

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/MTGA-Assistant-Meta_-_Esper_Affinity_(Modern,_#1281704).dck
+Deck Type=constructed
+
+[Main]
+2 Thought Monitor
+2 Stonecoil Serpent
+2 Gingerbrute
+4 Ornithopter
+4 Ingenious Smith
+2 Shadowspear
+2 Tormod's Crypt
+3 Blood Fountain
+4 Portable Hole
+4 Nettlecyst
+4 Metallic Rebuke
+3 Reverse Engineer
+2 All That Glitters
+1 Drowned Catacomb
+1 Shipwreck Marsh
+1 Glacial Fortress
+1 Hengegate Pathway
+1 Thriving Isle
+1 Watery Grave
+2 Clearwater Pathway
+3 Plains
+3 Island
+4 Treasure Vault
+4 Hallowed Fountain
+[Sideboard]
+1 Rest in Peace
+2 Soul-Guide Lantern
+2 Aether Gust
+2 Grafdigger's Cage
+3 Glass Casket
+3 Mystical Dispute

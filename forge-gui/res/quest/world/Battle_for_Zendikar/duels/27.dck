@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dilbert
+Title=Dilbert
+Icon=Dilbert.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/States_Duluth/Connor_Gougelmann_-_Abzan_Aggro_(Standard,_#332499).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+3 Den Protector
+4 Hangarback Walker
+4 Knight of the White Orchid
+4 Siege Rhino
+3 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+2 Silkwrap
+1 Gideon, Ally of Zendikar
+1 Ob Nixilis Reignited
+2 Sorin, Solemn Visitor
+2 Canopy Vista
+4 Caves of Koilos
+1 Forest
+3 Llanowar Wastes
+4 Plains
+4 Sandsteppe Citadel
+3 Shambling Vent
+4 Windswept Heath
+[Sideboard]
+3 Duress
+2 Gideon's Reproach
+2 Mastery of the Unseen
+2 Self-Inflicted Wound
+3 Surge of Righteousness
+2 Tragic Arrogance
+1 Ultimate Price

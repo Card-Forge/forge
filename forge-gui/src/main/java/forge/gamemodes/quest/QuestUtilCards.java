@@ -71,7 +71,6 @@ public final class QuestUtilCards {
      * @return the item pool view
      */
     public static ItemPool<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
-
         final ICardDatabase db = FModel.getMagicDb().getCommonCards();
         final ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
 
@@ -135,7 +134,6 @@ public final class QuestUtilCards {
             }
         }
 
-
         if (!snowLandCodes.isEmpty()) {
             String snowLandCode = Aggregates.random(snowLandCodes);
             for (String landName : MagicColor.Constant.SNOW_LANDS) {
@@ -149,7 +147,6 @@ public final class QuestUtilCards {
         }
 
         return pool;
-
     }
 
     /**
@@ -268,7 +265,6 @@ public final class QuestUtilCards {
         final int nR = (int)(questPreferences.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty) * variantModifier);
 
         addAllCards(BoosterUtils.getQuestStarterDeck(formatStartingPool, nC, nU, nR, userPrefs));
-
     }
 
     /**
@@ -338,7 +334,6 @@ public final class QuestUtilCards {
      * @param cards The cards to lose.
      */
     public void loseCards(final List<PaperCard> cards) {
-
         for(PaperCard card : cards) {
 
 	        removeCard(card, 1);
@@ -346,9 +341,7 @@ public final class QuestUtilCards {
 	        if (questAssets.getItemLevel(QuestItemType.CASH_STAKES) > 0) {
 		        addCardToShop(card);
 	        }
-
         }
-
     }
 
     public void addCardToShop(final PaperCard card) {
@@ -361,15 +354,13 @@ public final class QuestUtilCards {
      * @param qty The quantity of the card to remove.
      */
     public void removeCard(final PaperCard card, int qty) {
-
         questAssets.getCardPool().remove(card, qty);
 
         final int leftInPool = questAssets.getCardPool().count(card);
 
         // If card is a nonfoil basic land of the "free" kind, do not remove from the deck
         // but pretend as if it was added through "Add Basic Land".
-        if ((!card.isFoil())
-                && (card.isVeryBasicLand())) {
+        if (!card.isFoil() && card.isVeryBasicLand()) {
             return;
         }
 
@@ -411,7 +402,6 @@ public final class QuestUtilCards {
      * @return the sell mutliplier
      */
     public double getSellMultiplier() {
-
         double baseMultiplier = Double.parseDouble(questPreferences.getPref(QPref.SHOP_SELLING_PERCENTAGE_BASE))/100.0;
         double maxMultiplier = Double.parseDouble(questPreferences.getPref(QPref.SHOP_SELLING_PERCENTAGE_MAX))/100.0;
 
@@ -437,7 +427,6 @@ public final class QuestUtilCards {
         }
 
         return multi;
-
     }
 
     /**
@@ -474,7 +463,6 @@ public final class QuestUtilCards {
      * @return A list containing the booster packs
      */
     private List<InventoryItem> generateRandomSpecialBoosterPacks(final int quantity) {
-
         List<InventoryItem> output = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
@@ -483,7 +471,6 @@ public final class QuestUtilCards {
         }
 
         return output;
-
     }
 
     /**
@@ -492,13 +479,11 @@ public final class QuestUtilCards {
      * @param quantity the count
      */
     private void generateBoostersInShop(final int quantity) {
-
     	questAssets.getShopList().addAllFlat(BoosterUtils.generateRandomBoosterPacks(quantity, questController));
 
         if (questPreferences.getPrefInt(QPref.SPECIAL_BOOSTERS) == 1) {
         	questAssets.getShopList().addAllFlat(generateRandomSpecialBoosterPacks(quantity));
         }
-
     }
 
     /**
@@ -513,7 +498,6 @@ public final class QuestUtilCards {
 		    for (int i = 0; i < quantity; i++) {
 			    questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate).get());
 		    }
-		    return;
 	    } else {
             for (int i = 0; i < quantity; i++) {
                 // Unopened product based on format of the cards?
@@ -523,7 +507,6 @@ public final class QuestUtilCards {
     }
 
     private static int getRandomCardFromBooster(final List<PaperCard> cards, final Predicate<PaperCard> predicate, final List<PaperCard> toAddTo, final int amount) {
-
     	if (amount <= 0) {
     		return 0;
 	    }
@@ -543,7 +526,6 @@ public final class QuestUtilCards {
 	    }
 
 	    return amount;
-
     }
 
     /**
@@ -577,7 +559,6 @@ public final class QuestUtilCards {
     }
 
     private void generateBoosterBoxesInShop(final int count) {
-
         if (count == 0) {
             return;
         }
@@ -606,7 +587,6 @@ public final class QuestUtilCards {
         }
 
         questAssets.getShopList().addAllOfTypeFlat(output);
-
     }
 
     /**
@@ -651,35 +631,32 @@ public final class QuestUtilCards {
                     Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 1),
                     Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")", 1))
             );
-        } else {
-            StringBuilder restrictions    = new StringBuilder();
-            List<String>  allowedSetCodes = FModel.getQuest().getFormat().getAllowedSetCodes();
-            if (allowedSetCodes.isEmpty()) {
-                for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
-                    restrictions.append(":!name(\"").append(restrictedCard).append("\")");
-                }
-            } else {
-                restrictions.append(":fromSets(\"");
-                for (String set : allowedSetCodes) {
-                    restrictions.append(set).append(",");
-                }
-                restrictions.append(")");
-            }
-            return new SealedTemplate("?", ImmutableList.of(
-                    Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 11),
-                    Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 3),
-                    Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 1),
-                    Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")" + restrictions, 1))
-            );
         }
+        StringBuilder restrictions    = new StringBuilder();
+        List<String>  allowedSetCodes = FModel.getQuest().getFormat().getAllowedSetCodes();
+        if (allowedSetCodes.isEmpty()) {
+            for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
+                restrictions.append(":!name(\"").append(restrictedCard).append("\")");
+            }
+        } else {
+            restrictions.append(":fromSets(\"");
+            for (String set : allowedSetCodes) {
+                restrictions.append(set).append(",");
+            }
+            restrictions.append(")");
+        }
+        return new SealedTemplate("?", ImmutableList.of(
+                Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 11),
+                Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 3),
+                Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 1),
+                Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")" + restrictions, 1))
+        );
     }
 
     /**
      * Generate cards in shop.
      */
     private void generateCardsInShop() {
-
-        // Preferences
         final int startPacks = questPreferences.getPrefInt(QPref.SHOP_STARTING_PACKS);
         final int winsForPack = questPreferences.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
         final int maxPacks = questPreferences.getPrefInt(QPref.SHOP_MAX_PACKS);
@@ -702,7 +679,6 @@ public final class QuestUtilCards {
 	        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
 	        questAssets.getShopList().addAllOfType(generateBasicLands(0, 5, questController.getFormat()));
         }
-
     }
 
     /**
@@ -774,7 +750,6 @@ public final class QuestUtilCards {
     }
 
     public int getCompletionPercent(String edition) {
-
         for (String color : SealedProduct.specialSets) {
             if (color.equals(edition)) {
                 return 0;
@@ -806,7 +781,6 @@ public final class QuestUtilCards {
         }
 
         return (numOwnedCards * 100) / completeCards;
-
     }
 
     // These functions provide a way to sort and compare items in the spell shop according to how many are already owned
@@ -827,18 +801,18 @@ public final class QuestUtilCards {
         }
     };
 
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnOwnedGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnOwnedGet = new Function<>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            if (i instanceof PaperCard) {
-                return questAssets.getCardPool().count((PaperCard) i);
-            } else if (i instanceof PreconDeck) {
-                PreconDeck pDeck = (PreconDeck) i;
-                return FModel.getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
-            } else if (i instanceof SealedProduct) {
-                SealedProduct oPack = (SealedProduct) i;
-                return String.format("%d%%", getCompletionPercent(oPack.getEdition()));
+            if (i instanceof PaperCard pc) {
+                return questAssets.getCardPool().count(pc);
+            }
+            if (i instanceof PreconDeck pd) {
+                return FModel.getQuest().getMyDecks().contains(pd.getName()) ? "YES" : "NO";
+            }
+            if (i instanceof SealedProduct sp) {
+                return String.format("%d%%", getCompletionPercent(sp.getEdition()));
             }
             return null;
         }

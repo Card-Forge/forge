@@ -1,0 +1,6 @@
+Name:Interdisciplinary Studies
+ManaCost:2 U
+Types:Instant
+A:SP$ Seek | Num$ 1 | Type$ Card.MultiColor | SubAbility$ DBLearn | SpellDescription$ Seek a multicolored card.,,,,,,
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn.
+Oracle:Seek a multicolored card.\nLearn.

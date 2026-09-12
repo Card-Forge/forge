@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/Magic-League_Standard_Trial/Pokemaster_-_WW_Human_(Standard,_#30299).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Angel of Jubilation
+4 Champion of the Parish
+4 Doomed Traveler
+2 Fiend Hunter
+2 Gideon's Lawkeeper
+3 Hero of Bladehold
+2 Leonin Relic-Warder
+4 Silverblade Paladin
+4 Thalia, Guardian of Thraben
+1 Sword of War and Peace
+1 Angelic Destiny
+4 Honor of the Pure
+4 Cavern of Souls
+19 Plains
+[Sideboard]
+2 Celestial Purge
+3 Mirran Crusader
+1 Oblivion Ring
+2 Ratchet Bomb
+2 Timely Reinforcements

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mortivore
+Title=Mortivore
+Icon=Mortivore.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/MaxPoint_Silver_-_Galaxy_Games_-_2-9-14/DaveWojtas_-_Orzhov_Control_(Standard,_#65651).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Baron of Vizkopa
+3 Brimaz, King of Oreskos
+4 Desecration Demon
+3 Pack Rat
+1 Ratchet Bomb
+2 Bile Blight
+2 Devour Flesh
+4 Hero's Downfall
+2 Last Breath
+1 Ultimate Price
+1 Duress
+4 Thoughtseize
+4 Underworld Connections
+1 Elspeth, Sun's Champion
+4 Godless Shrine
+4 Mutavault
+2 Orzhov Guildgate
+1 Plains
+10 Swamp
+4 Temple of Silence
+[Sideboard]
+2 Dark Betrayal
+2 Doom Blade
+1 Drown in Sorrow
+1 Erebos, God of the Dead
+2 Lifebane Zombie
+1 Obzedat, Ghost Council
+1 Pharika's Cure
+2 Revoke Existence
+1 Sin Collector

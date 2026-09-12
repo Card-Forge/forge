@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Honda_Atsuo_-_BR_Evoke_(Modern,_#1753188).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+4 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+4 Fable of the Mirror-Breaker
+4 Orcish Bowmasters
+2 Fatal Push
+3 Terminate
+2 Feign Death
+4 Not Dead After All
+4 Thoughtseize
+3 Swamp
+4 Blood Crypt
+4 Bloodstained Mire
+4 Polluted Delta
+1 Verdant Catacombs
+3 Blackcleave Cliffs
+1 Takenuma, Abandoned Mire
+[Sideboard]
+3 Blood Moon
+2 Engineered Explosives
+1 Lightning Bolt
+1 Pithing Needle
+2 Chalice of the Void
+2 Tourach, Dread Cantor
+2 Unlicensed Hearse
+2 Sheoldred, the Apocalypse

@@ -1,0 +1,8 @@
+Name:Stature, Size Shifter
+ManaCost:U
+Types:Legendary Creature Human Hero
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self+powerLE1 | Description$ NICKNAME can't be blocked if her power is 1 or less.
+A:AB$ PutCounter | Cost$ X U U | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | PowerUp$ True | SpellDescription$ Put X +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)
+SVar:X:Count$xPaid
+Oracle:Stature can't be blocked if her power is 1 or less.\nPower-up — {X}{U}{U}: Put X +1/+1 counters on Stature. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)

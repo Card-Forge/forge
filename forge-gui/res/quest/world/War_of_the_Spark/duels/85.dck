@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Martin_Sagastome_-_Izzet_Wizards_(Modern,_#795763).dck
+Deck Type=constructed
+
+[Main]
+4 Delver of Secrets
+4 Monastery Swiftspear
+4 Soul-Scar Mage
+4 Stormchaser Mage
+4 Lightning Bolt
+2 Opt
+1 Risk Factor
+2 Spell Pierce
+3 Vapor Snag
+4 Wizard's Lightning
+1 Finale of Promise
+1 Flame Slash
+4 Lava Spike
+4 Serum Visions
+1 Island
+2 Mountain
+2 Arid Mesa
+2 Bloodstained Mire
+4 Scalding Tarn
+4 Spirebluff Canal
+3 Steam Vents
+[Sideboard]
+3 Relic of Progenitus
+1 Sword of War and Peace
+1 Grim Lavamancer
+2 Alpine Moon
+1 Abrade
+2 Magma Spray
+2 Negate
+1 Vendilion Clique
+1 Flame Slash
+1 Shattering Spree

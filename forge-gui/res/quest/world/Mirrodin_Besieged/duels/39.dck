@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/Denver/Clay_Hathaway_in_StarCityGames_Invitational_Qualifier_-_Valakut_Ramp_(Standard,_#10369).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+2 Gaea's Revenge
+3 Overgrown Battlement
+1 Platinum Emperion
+4 Primeval Titan
+1 Terastodon
+1 Viridian Corrupter
+4 Viridian Emissary
+2 Harrow
+4 Summoning Trap
+4 Cultivate
+3 Explore
+4 Green Sun's Zenith
+2 Praetor's Counsel
+1 Red Sun's Zenith
+4 Forest
+2 Khalni Garden
+12 Mountain
+1 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Lavaball Trap
+3 Naturalize
+2 Nature's Claim
+3 Slagstorm
+1 Thrun, the Last Troll
+3 Tumble Magnet
+1 Ulamog, the Infinite Gyre

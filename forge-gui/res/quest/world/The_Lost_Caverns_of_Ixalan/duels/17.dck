@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Catwoman
+Title=Catwoman
+Icon=Catwoman.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Marco_Dei_Lazzaretti_-_4-5c_Control_(Standard,_#1982986).dck
+Deck Type=constructed
+
+[Main]
+4 Archangel of Wrath
+3 Atraxa, Grand Unifier
+1 Imodane's Recruiter
+4 Topiary Stomper
+2 Depopulate
+4 Herd Migration
+4 Sunfall
+4 Leyline Binding
+2 Spelunking
+4 Up the Beanstalk
+2 Invasion of Zendikar
+1 Boseiju, Who Endures
+4 Cavern of Souls
+3 Forest
+1 Island
+4 Jetmir's Garden
+1 Mountain
+3 Plains
+4 Spara's Headquarters
+1 Swamp
+4 Ziatora's Proving Ground
+[Sideboard]
+2 Kutzil's Flanker
+3 Negate
+3 Sunset Revelry
+4 Temporary Lockdown
+3 The Stone Brain

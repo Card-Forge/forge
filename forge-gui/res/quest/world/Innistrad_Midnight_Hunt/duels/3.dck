@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Daniele_Oreto_-_Azorius_Tempo_(Standard,_#1223159).dck
+Deck Type=constructed
+
+[Main]
+2 Linvala, Shield of Sea Gate
+2 Malevolent Hermit
+2 Spectral Adversary
+3 Intrepid Adversary
+3 Reidane, God of the Worthy
+4 Brutal Cathar
+4 Usher of the Fallen
+4 Luminarch Aspirant
+4 Elite Spellbinder
+1 Test of Talents
+2 Kabira Takedown
+2 Jwari Disruption
+3 Fading Hope
+4 Concerted Defense
+2 Hall of Storm Giants
+2 Cave of the Frost Dragon
+3 Deserted Beach
+3 Hengegate Pathway
+5 Plains
+5 Island
+[Sideboard]
+1 Disdainful Stroke
+1 Fading Hope
+2 Portable Hole
+2 Test of Talents
+2 Malevolent Hermit
+3 Ray of Frost
+4 Borrowed Time

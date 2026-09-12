@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Lifeisrisk7_-_Mono-Red_Aggro_(Standard,_#2639837).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Scalding Viper
+2 Ojer Axonil, Deepest Might
+4 Nova Hellkite
+4 Razorkin Needlehead
+4 Screaming Nemesis
+4 Hired Claw
+2 Witchstalker Frenzy
+4 Burst Lightning
+4 Lightning Strike
+2 Rockface Village
+13 Mountain
+3 Soulstone Sanctuary
+2 Spirebluff Canal
+4 Riverpyre Verge
+[Sideboard]
+3 Obliterating Bolt
+3 Sunspine Lynx
+3 Magebane Lizard
+3 Abrade
+3 Stingerback Terror

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Rolando_Caicedo_-_Orzhov_Aggro_(Standard,_#1181311).dck
+Deck Type=constructed
+
+[Main]
+2 Loyal Warhound
+3 Hama Pashar, Ruin Seeker
+3 Barrowin of Clan Undurr
+3 Acererak the Archlich
+3 Nadaar, Selfless Paladin
+4 Luminarch Aspirant
+4 Selfless Savior
+4 Triumphant Adventurer
+3 Vanishing Verse
+3 Heartless Act
+1 Agadeem's Awakening
+4 Paladin Class
+3 Hengegate Pathway
+3 Clearwater Pathway
+4 Brightclimb Pathway
+4 Shineshadow Snarl
+4 Swamp
+5 Plains
+[Sideboard]
+2 Reidane, God of the Worthy
+2 Baneslayer Angel
+2 Portable Hole
+2 Lithoform Blight
+2 Divine Smite
+2 Pestilent Haze
+3 Mystical Dispute

@@ -1,0 +1,40 @@
+[metadata]
+Name=Grixis
+Deck Type=constructed
+Title=Grixis
+Description=Grixis
+Difficulty=Easy
+Icon=Brother Voodoo
+[Main]
+1 Abrade
+4 Aether Hub
+4 Canyon Slough
+3 Chandra, Torch of Defiance
+3 Doomfall
+4 Dragonskull Summit
+4 Drowned Catacomb
+3 Fetid Pools
+1 Field of Ruin
+2 Glimmer of Genius
+4 Glint-Sleeve Siphoner
+4 Harnessed Lightning
+1 Island
+3 Magma Spray
+1 Mountain
+1 Mountain
+3 Spirebluff Canal
+1 Swamp
+3 The Scarab God
+2 Torrential Gearhulk
+4 Vraska's Contempt
+4 Whirler Virtuoso
+[Sideboard]
+1 Arguel's Blood Fast
+2 Chandra's Defeat
+1 Confiscation Coup
+1 Consign // Oblivion
+3 Duress
+1 Golden Demise
+1 Jace's Defeat
+3 Negate
+1 Sweltering Suns

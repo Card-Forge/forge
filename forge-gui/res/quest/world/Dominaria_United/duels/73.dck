@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Matsui_Naito_-_WU_Stoneforge_(Modern,_#1480936)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Serra Paragon
+1 Spellskite
+3 Ingenious Smith
+4 Urza, Lord High Artificer
+4 Stoneforge Mystic
+4 Esper Sentinel
+1 Relic of Progenitus
+1 Kaldra Compleat
+1 Nettlecyst
+1 Talisman of Progress
+1 Sword of the Meek
+1 Pithing Needle
+1 Springleaf Drum
+1 Shadowspear
+1 Aether Spellbomb
+2 Thopter Foundry
+4 Portable Hole
+1 Spell Pierce
+3 Metallic Rebuke
+4 Urza's Saga
+1 Teferi, Time Raveler
+1 Cavern of Souls
+1 Otawara, Soaring City
+1 Raugrin Triome
+1 Sacred Foundry
+1 Hallowed Fountain
+1 Razortide Bridge
+1 Island
+2 Plains
+2 Darksteel Citadel
+4 Seachrome Coast
+4 Flooded Strand
+[Sideboard]
+1 Ashiok, Dream Render
+1 Soul-Guide Lantern
+1 Mystic Reflection
+2 Flusterstorm
+2 Supreme Verdict
+2 Damping Sphere
+2 Engineered Explosives
+2 Path to Exile
+2 Wear // Tear

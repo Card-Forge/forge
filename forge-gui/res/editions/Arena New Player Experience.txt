@@ -47,6 +47,7 @@ ScryfallCode=ANA
 33 L Forest @Edward P. Beard, Jr.
 34 L Forest @Christopher Rush
 35 L Forest @Pete Venters
+36 U Urza's Bauble @Ernanda Souza
 95846 C Snow-Covered Plains @Mark Romanoski
 95847 C Snow-Covered Island @Franz Vohwinkel
 95848 C Snow-Covered Swamp @Rob Alexander

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Medium
+Description=Fate_Reforged/SCG_Standard_Open_Washington/Justin_Uppal_-_Abzan_Aggro_(Standard,_#172448).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Fleecemane Lion
+4 Rakshasa Deathdealer
+4 Siege Rhino
+4 Wingmate Roc
+3 Abzan Charm
+4 Bile Blight
+3 Hero's Downfall
+1 Murderous Cut
+4 Thoughtseize
+3 Caves of Koilos
+1 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Back to Nature
+3 Drown in Sorrow
+2 Elspeth, Sun's Champion
+3 Glare of Heresy
+1 Nissa, Worldwaker
+2 Sorin, Solemn Visitor
+2 Tasigur, the Golden Fang

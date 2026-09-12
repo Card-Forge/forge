@@ -9,8 +9,8 @@ ScryfallCode=CLU
 1 R Apothecary White @Anna Steinbauer
 2 R Senator Peacock @Aurore Folny
 3 R Mastermind Plum @Bryan Sola
-4 R Headliner Scarlett @Heonhwa Choe
-5 R Emissary Green @Heonhwa Choe
+4 R Headliner Scarlett @Heonhwa
+5 R Emissary Green @Heonhwa
 6 R Commander Mustard @Jake Murray
 7 U Wrench @Clint Lockwood
 8 U Candlestick @Clint Lockwood

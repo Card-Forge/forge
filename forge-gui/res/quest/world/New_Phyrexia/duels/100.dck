@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Andurin_Wednesday_Evening_Magic/Jordi_Ferrando_-_Boros_(Modern,_#20514).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Figure of Destiny
+4 Goblin Guide
+3 Grim Lavamancer
+4 Plated Geopede
+4 Steppe Lynx
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Searing Blaze
+3 Shard Volley
+4 Arid Mesa
+4 Flagstones of Trokair
+4 Ghost Quarter
+3 Mountain
+1 Plains
+3 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+2 Elspeth, Knight-Errant
+2 Guttural Response
+2 Phyrexian Metamorph
+2 Ricochet Trap
+3 Smash to Smithereens
+2 Surgical Extraction
+2 Vexing Shusher

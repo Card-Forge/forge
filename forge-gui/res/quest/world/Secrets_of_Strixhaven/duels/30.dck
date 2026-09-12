@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Adam_Eklund_-_Four-Color_Control_(Standard,_#2940507).dck
+Deck Type=constructed
+
+[Main]
+4 Tablet of Discovery
+4 Jeskai Revelation
+3 Inevitable Defeat
+2 Consult the Star Charts
+2 Firebending Lesson
+2 Flashback
+2 Lightning Helix
+2 No More Lies
+1 Erode
+1 Fire Magic
+1 Negate
+1 Sear
+1 Swallowed by Leviathan
+1 Traumatic Critique
+4 Stock Up
+1 Day of Judgment
+1 Ill-Timed Explosion
+4 Great Hall of the Biblioplex
+4 Steam Vents
+2 Hallowed Fountain
+2 Sacred Foundry
+2 Shattered Sanctum
+2 Stormcarved Coast
+1 Cori Mountain Monastery
+1 Floodfarm Verge
+1 Gloomlake Verge
+1 Godless Shrine
+1 Meticulous Archive
+1 Mistrise Village
+1 Multiversal Passage
+1 Plains
+1 Sunbillow Verge
+1 Sundown Pass
+1 Watery Grave
+[Sideboard]
+2 Flashfreeze
+2 High Noon
+2 New Way Forward
+2 Pyroclasm
+2 Rest in Peace
+1 Ancient Vendetta
+1 Annul
+1 Day of Judgment
+1 Disdainful Stroke
+1 Torpor Orb

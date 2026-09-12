@@ -25,9 +25,13 @@ import java.util.Map.Entry;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
+import forge.deck.CardPool;
+import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
+import forge.deck.DeckSection;
 import forge.deck.io.DeckPreferences;
+import forge.game.GameType;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -36,12 +40,16 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
+import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
+import forge.screens.deckeditor.controllers.CEditorLimited;
+import forge.screens.deckeditor.controllers.CEditorNetworkDraft;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.deckeditor.controllers.CProbabilities;
 import forge.screens.deckeditor.controllers.CStatistics;
 import forge.screens.deckeditor.controllers.DeckController;
 import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 
 /**
@@ -136,6 +144,48 @@ public enum CDeckEditorUI implements ICDoc {
         }
     }
 
+    public void changeFormat(final GameType target) {
+        if (!isFormatDropdownGameType(target)) { return; }
+        if (childController == null) { return; }
+        if (childController.getGameType() == target) { return; }
+
+        Deck snapshot = childController.getDeckController().getCurrentDeckInEditor();
+        if (snapshot == null) { snapshot = new Deck(); }
+
+        if (target == GameType.Constructed && snapshot.has(DeckSection.Commander)) {
+            CardPool main = snapshot.getOrCreate(DeckSection.Main);
+            CardPool cmdr = snapshot.get(DeckSection.Commander);
+            if (cmdr != null && !cmdr.isEmpty()) {
+                main.addAll(cmdr);
+                cmdr.clear();
+            }
+        }
+
+        final CEditorConstructed newEditor = new CEditorConstructed(cDetailPicture, target);
+        setEditorController(newEditor);
+        newEditor.getDeckController().setModel(snapshot);
+    }
+
+    static boolean isFormatDropdownGameType(final GameType gt) {
+        return gt == GameType.Constructed || gt == GameType.Commander
+                || gt == GameType.Oathbreaker || gt == GameType.Brawl
+                || gt == GameType.TinyLeaders;
+    }
+
+    private void syncFormatDropdown() {
+        if (childController == null) { return; }
+        final FComboBox<GameType> cb = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat();
+        final GameType gt = childController.getGameType();
+        if (isFormatDropdownGameType(gt)) {
+            if (cb.getSelectedItem() != gt) {
+                cb.setSelectedItem(gt);
+            }
+            cb.setEnabled(true);
+        } else {
+            cb.setEnabled(false);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends InventoryItem> void incrementDeckQuantity(final T item, final int delta) {
         if (item == null || delta == 0) { return; }
@@ -214,6 +264,14 @@ public enum CDeckEditorUI implements ICDoc {
 
         if (childController == null) { return; }
 
+        // Draft log panel is shown for any editor involved in a limited flow —
+        // the shared pool editor, the network drafting controller, or the offline
+        // one. Add new editor classes here if they should display the draft log.
+        boolean isLimitedEditor = childController instanceof CEditorLimited
+                || childController instanceof CEditorNetworkDraft
+                || childController instanceof CEditorDraftingProcess;
+        vEditorLog.setDraftLogVisible(isLimitedEditor);
+
         final ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
         final ItemManager<? extends InventoryItem> deckView = childController.getDeckManager();
 
@@ -275,6 +333,8 @@ public enum CDeckEditorUI implements ICDoc {
         childController.update();
 
         catView.applyFilters();
+
+        syncFormatDropdown();
 
         SwingUtilities.invokeLater(catView::focus);
     }

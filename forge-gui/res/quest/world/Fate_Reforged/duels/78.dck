@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/Modern_PTQ_#8842287/panoma_-_Dredgevine_(Modern,_#329612).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gravecrawler
+4 Gurmag Angler
+4 Hedron Crab
+4 Lotleth Troll
+1 Rotting Rats
+4 Satyr Wayfinder
+1 Skaab Ruinator
+2 Stinkweed Imp
+4 Vengevine
+3 Abrupt Decay
+2 Darkblast
+4 Grisly Salvage
+1 Murderous Cut
+1 Sultai Charm
+2 Breeding Pool
+1 Darkslick Shores
+1 Forest
+2 Misty Rainforest
+2 Overgrown Tomb
+4 Polluted Delta
+2 Swamp
+4 Verdant Catacombs
+1 Watery Grave
+2 Woodland Cemetery
+[Sideboard]
+2 Duress
+2 Ghost Quarter
+2 Gnaw to the Bone
+2 Hurkyl's Recall
+1 Life from the Loam
+1 Memory's Journey
+1 Spellskite
+2 Stubborn Denial
+1 Thoughtseize

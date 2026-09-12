@@ -76,10 +76,15 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             remove.add(RemoveType.EnchantmentTypes);
 
         Predicate<CardTraitBase> removeAbilities = null;
+        boolean removeAllKeywords = false;
         if (sa.hasParam("RemoveAllAbilities")) {
             removeAbilities = e -> true;
+            removeAllKeywords = true;
         } else if (sa.hasParam("RemoveNonManaAbilities")) {
             removeAbilities = Predicate.not(CardTraitBase::isManaAbility);
+            removeAllKeywords = true;
+        } else if (sa.hasParam("RemoveThisAbility")) {
+            removeAbilities = e -> sa.getOriginalAbility().equals(e);
         }
 
         if (sa.hasParam("RememberAnimated")) {
@@ -111,11 +116,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
-        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAbilities != null) {
+        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAllKeywords) {
             if (perpetual) {
-                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAbilities != null));
+                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAllKeywords));
             }
-            c.addChangedCardKeywords(keywords, removeKeywords, removeAbilities != null, timestamp, null);
+            c.addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, null);
         }
 
         // do this after changing types in case it wasn't a creature before
@@ -146,12 +151,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
-        }
-
-        // remove abilities
-        final List<SpellAbility> removedAbilities = Lists.newArrayList();
-        if (sa.hasParam("RemoveThisAbility")) {
-            removedAbilities.add(sa.getOriginalAbility());
         }
 
         // give abilities
@@ -218,9 +217,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // after unanimate to add RevertCost
         if (removeAbilities != null
-                || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
+                || !addedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, addedTriggers, addedReplacements,
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));

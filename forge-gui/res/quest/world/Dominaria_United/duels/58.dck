@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Adam_Lang_-_Rakdos_Goblins_(Modern,_#1498009).dck
+Deck Type=constructed
+
+[Main]
+1 Goblin Cratermaker
+1 Stingscourger
+2 Goblin Ringleader
+2 Sling-Gang Lieutenant
+2 Kiki-Jiki, Mirror Breaker
+3 Boggart Harbinger
+3 Mogg War Marshal
+3 Mogg Fanatic
+4 Rundvelt Hordemaster
+4 Goblin Matron
+4 Conspicuous Snoop
+4 Munitions Expert
+4 Aether Vial
+1 Arid Mesa
+1 Den of the Bugbear
+1 Stomping Ground
+1 Secluded Courtyard
+1 Swamp
+2 Mountain
+4 Auntie's Hovel
+4 Cavern of Souls
+4 Blood Crypt
+4 Bloodstained Mire
+[Sideboard]
+1 Goblin Chainwhirler
+1 Orvar, the All-Form
+1 Earwig Squad
+1 Goblin Trashmaster
+1 Masked Vandal
+1 Boggart Harbinger
+2 Tarfire
+3 Alpine Moon
+4 Leyline of the Void

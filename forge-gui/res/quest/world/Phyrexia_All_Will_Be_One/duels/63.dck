@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Ethan_Leffew_-_Dimir_Mill_(Modern,_#1578655).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+1 Ensnaring Bridge
+3 Fatal Push
+3 Surgical Extraction
+4 Drown in the Loch
+4 Visions of Beyond
+4 Archive Trap
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+3 Jace, the Perfected Mind
+4 Field of Ruin
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+2 Misty Rainforest
+4 Polluted Delta
+1 Shelldock Isle
+4 Island
+1 Swamp
+4 Watery Grave
+[Sideboard]
+2 Extirpate
+2 Baleful Mastery
+2 Crypt Incursion
+2 Spell Pierce
+2 Engineered Explosives
+1 Ensnaring Bridge
+1 Emrakul, the Aeons Torn
+3 Soul-Guide Lantern

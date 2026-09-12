@@ -1,0 +1,11 @@
+Name:Black Panther, Vanguard
+ManaCost:2 G W
+Types:Legendary Creature Human Warrior Hero
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Hero.Other+!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever another nontoken Hero you control enters, ABILITY
+SVar:TrigChoose:DB$ Charm | Choices$ DBToken,DBPumpAll
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+DeckHas:Ability$Token
+DeckHints:Type$Hero
+Oracle:Whenever another nontoken Hero you control enters, choose one —\n• Create a 1/1 white Soldier creature token.\n• Creatures you control get +1/+1 until end of turn.

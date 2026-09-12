@@ -106,7 +106,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sinuous Vermin&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Nezumi Cutthroat&quot; ] }"/>
     <property name="enemy" value="Marrow-Gnawer"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>

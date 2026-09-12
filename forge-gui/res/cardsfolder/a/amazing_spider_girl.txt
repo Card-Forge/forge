@@ -1,0 +1,8 @@
+Name:Amazing Spider-Girl
+ManaCost:3 W W
+Types:Legendary Creature Spider Human Hero
+PT:5/4
+K:Web-slinging:2 W
+K:Flying
+K:Vigilance
+Oracle:Web-slinging {2}{W} (You may cast this spell for {2}{W} if you also return a tapped creature you control to its owner's hand.)\nFlying, vigilance

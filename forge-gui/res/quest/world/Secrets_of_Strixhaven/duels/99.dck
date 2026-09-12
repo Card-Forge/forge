@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Yuya_Torii_-_Mono_Red_(Modern,_#2916817).dck
+Deck Type=constructed
+
+[Main]
+4 Seasoned Pyromancer
+4 Ragavan, Nimble Pilferer
+3 Oliphaunt
+4 Detective's Phoenix
+4 Fear of Missing Out
+4 Soul-Guide Lantern
+2 Abrade
+4 Lightning Bolt
+4 Dead
+3 Visionary's Dance
+3 Blood Moon
+10 Mountain
+1 Shinka, the Bloodsoaked Keep
+3 Arid Mesa
+3 Scalding Tarn
+1 Sokenzan, Crucible of Defiance
+3 Arena of Glory
+[Sideboard]
+2 Damping Sphere
+1 Grafdigger's Cage
+2 Pyroclasm
+2 Meltdown
+2 Stormbreath Dragon
+1 Brotherhood's End
+2 Disruptor Flute
+2 Vexing Bauble
+1 Spider-Punk

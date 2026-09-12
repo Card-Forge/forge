@@ -3,7 +3,7 @@ Name:Possibility Storm - Amonkhet #07
 URL:https://i.redd.it/dta3769jvm3z.png
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn. You have activated Gideon, Ally of Zendikar's emblem-granting ultimate ability earlier in the game.
 [state]
 ActivePlayer=Human

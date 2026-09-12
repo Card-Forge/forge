@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Alice in Wonderland
+Title=Alice in Wonderland
+Icon=Alice in Wonderland.jpg
+Difficulty=Easy
+Description=Innistrad/SCG_Invitational_Qualifier_-_Midlothian,_Virginia/Evan_Woods_-_U-W_Humans_(Standard,_#23902).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Doomed Traveler
+3 Geist of Saint Traft
+3 Gideon's Lawkeeper
+4 Grand Abolisher
+3 Hero of Bladehold
+4 Mirran Crusader
+4 Mana Leak
+4 Angelic Destiny
+4 Honor of the Pure
+3 Oblivion Ring
+4 Glacial Fortress
+4 Island
+4 Moorland Haunt
+8 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Celestial Purge
+2 Day of Judgment
+1 Demystify
+1 Divine Offering
+1 Negate
+1 Revoke Existence
+2 Steel Sabotage
+1 Sword of War and Peace
+4 Timely Reinforcements

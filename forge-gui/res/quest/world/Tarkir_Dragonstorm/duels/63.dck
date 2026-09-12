@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Jack_Scacco_-_Mono-Green_(Modern,_#2445235).dck
+Deck Type=constructed
+
+[Main]
+4 Glaring Fleshraker
+4 Sowing Mycospawn
+3 Devourer of Destiny
+2 Sire of Seven Deaths
+4 Expedition Map
+4 Talisman of Resilience
+1 Talisman of Curiosity
+4 Kozilek's Command
+3 Dismember
+2 All Is Dust
+4 Karn, the Great Creator
+3 Ugin, Eye of the Storms
+4 Eldrazi Temple
+4 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+2 Forest
+[Sideboard]
+2 The Stone Brain
+1 Cityscape Leveler
+1 Disruptor Flute
+1 Engineered Explosives
+1 Ensnaring Bridge
+1 Haywire Mite
+1 Liquimetal Coating
+1 Mystic Forge
+1 Phyrexian Metamorph
+1 Soulless Jailer
+1 Tormod's Crypt
+1 Torpor Orb
+1 Trinisphere
+1 Walking Ballista

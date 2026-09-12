@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=BabaluAye
+Title=BabaluAye
+Icon=BabaluAye.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Andrew_Skorik_-_Gruul_Burn_(Standard,_#2275250).dck
+Deck Type=constructed
+
+[Main]
+4 Hired Claw
+1 Kellan, Planar Trailblazer
+4 Monastery Swiftspear
+4 Questing Druid
+3 Screaming Nemesis
+4 Slickshot Show-Off
+4 Burst Lightning
+4 Lightning Strike
+4 Monstrous Rage
+4 Shock
+4 Boltwave
+4 Copperline Gorge
+3 Karplusan Forest
+8 Mountain
+1 Restless Ridgeline
+4 Thornspire Verge
+[Sideboard]
+2 Case of the Crimson Pulse
+2 Ghost Vacuum
+1 Lithomantic Barrage
+2 Obliterating Bolt
+3 Pawpatch Formation
+1 Pyroclasm
+1 Screaming Nemesis
+3 Witchstalker Frenzy

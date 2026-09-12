@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -234,15 +235,6 @@ public class Aggregates {
     }
 
     public static <T, U> Iterable<Entry<U, Integer>> groupSumBy(Iterable<Entry<T, Integer>> source, Function<T, U> fnGetField) {
-        Map<U, Integer> result = new HashMap<>();
-        for (Entry<T, Integer> kv : source) {
-            U k = fnGetField.apply(kv.getKey());
-            Integer v = kv.getValue();
-            Integer sum = result.get(k);
-            int n = v == null ? 0 : v;
-            int s = sum == null ? 0 : sum;
-            result.put(k, s + n);
-        }
-        return result.entrySet();
+        return StreamUtil.stream(source).collect(Collectors.groupingBy(kv -> fnGetField.apply(kv.getKey()), Collectors.summingInt(e -> e.getValue()))).entrySet();
     }
 }

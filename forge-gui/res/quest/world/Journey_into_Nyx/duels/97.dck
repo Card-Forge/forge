@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/Modern_Constructed_League/deturb_-_GW_Auras_(Modern,_#614987).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+1 Silhana Ledgewalker
+4 Slippery Bogle
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+2 Keen Sense
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+2 Spirit Mantle
+2 Unflinching Courage
+4 Forest
+3 Plains
+4 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+4 Oppressive Rays
+4 Seal of Primordium
+4 Suppression Field

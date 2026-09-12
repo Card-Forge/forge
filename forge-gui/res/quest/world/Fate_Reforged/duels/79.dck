@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/Modern_Cup/Kojima_Yoshifumi_-_Junk_(Modern,_#194938).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Lifebane Zombie
+3 Scavenging Ooze
+4 Siege Rhino
+4 Tarmogoyf
+2 Tasigur, the Golden Fang
+4 Abrupt Decay
+1 Dismember
+1 Murderous Cut
+3 Path to Exile
+1 Zealous Persecution
+3 Inquisition of Kozilek
+4 Lingering Souls
+3 Thoughtseize
+2 Sorin, Solemn Visitor
+1 Forest
+1 Gavony Township
+1 Godless Shrine
+1 Isolated Chapel
+2 Overgrown Tomb
+1 Plains
+2 Stirring Wildwood
+2 Swamp
+2 Temple Garden
+2 Treetop Village
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+1 Blood Baron of Vizkopa
+1 Celestial Purge
+1 Deathmark
+1 Disenchant
+2 Drown in Sorrow
+1 Golgari Charm
+1 Hunt the Hunter
+2 Stony Silence
+3 Timely Reinforcements
+1 Wrath of God

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Costola91_-_GW_Company_(Modern,_#1046953).dck
+Deck Type=constructed
+
+[Main]
+4 Birds of Paradise
+4 Charming Prince
+4 Conclave Mentor
+4 Heliod, Sun-Crowned
+4 Noble Hierarch
+4 Ranger-Captain of Eos
+4 Spike Feeder
+4 Walking Ballista
+4 Auriok Champion
+4 Collected Company
+1 Pendelhaven
+1 Gavony Township
+1 Brushland
+1 Plains
+1 Karn's Bastion
+3 Forest
+4 Temple Garden
+4 Windswept Heath
+4 Horizon Canopy
+[Sideboard]
+1 Thalia, Heretic Cathar
+1 Phyrexian Revoker
+1 Remorseful Cleric
+2 Knight of Autumn
+3 Skyclave Apparition
+3 Thalia, Guardian of Thraben
+4 Archon of Emeria

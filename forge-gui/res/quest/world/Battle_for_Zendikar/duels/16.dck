@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Cockeysville/Harlan_Firer_-_Jeskai_(Standard,_#516611).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Jace, Vryn's Prodigy
+4 Soulfire Grand Master
+3 Tasigur, the Golden Fang
+4 Crackling Doom
+3 Fiery Impulse
+3 Kolaghan's Command
+2 Utter End
+1 Wild Slash
+2 Duress
+3 Painful Truths
+3 Roast
+2 Treasure Cruise
+4 Bloodstained Mire
+3 Flooded Strand
+1 Island
+2 Mountain
+3 Mystic Monastery
+1 Plains
+4 Polluted Delta
+2 Prairie Stream
+2 Shambling Vent
+2 Smoldering Marsh
+1 Sunken Hollow
+1 Swamp
+[Sideboard]
+1 Dispel
+3 Negate
+2 Ob Nixilis Reignited
+3 Radiant Flames
+2 Self-Inflicted Wound

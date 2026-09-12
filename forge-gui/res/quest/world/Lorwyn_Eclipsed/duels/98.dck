@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Hiromatsu_Daiki_-_Goblins_(Modern,_#2826480).dck
+Deck Type=constructed
+
+[Main]
+2 Kiki-Jiki, Mirror Breaker
+3 Boggart Harbinger
+2 Goblin Matron
+2 Sling-Gang Lieutenant
+4 Munitions Expert
+4 Conspicuous Snoop
+4 Ignoble Hierarch
+4 Boggart Trawler
+1 Grub, Storied Matriarch
+4 Mudbutton Cursetosser
+3 Taster of Wares
+4 Aether Vial
+4 Birthing Ritual
+2 Mountain
+4 Cavern of Souls
+1 Blood Crypt
+1 Stomping Ground
+4 Bloodstained Mire
+4 Wooded Foothills
+1 Secluded Courtyard
+1 Commercial District
+1 Raucous Theater
+[Sideboard]
+2 Lightning Bolt
+2 Thoughtseize
+1 Goblin Trashmaster
+2 Nihil Spellbomb
+2 Masked Vandal
+3 Obsidian Charmaw
+3 Vexing Bauble

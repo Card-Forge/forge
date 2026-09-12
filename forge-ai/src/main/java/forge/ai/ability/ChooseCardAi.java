@@ -15,7 +15,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -214,8 +213,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (creats.isEmpty()) {
                 choice = ComputerUtilCard.getWorstAI(options);
             } else {
-                CardLists.sortByCmcDesc(creats);
-                Collections.reverse(creats);
+                creats.sort(CardLists.CmcComparator);
                 choice = creats.get(0);
             }
         } else if ("NegativePowerFirst".equals(logic)) {

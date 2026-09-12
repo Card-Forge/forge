@@ -1,0 +1,9 @@
+Name:Fin Fang Foom
+ManaCost:2 R R
+Types:Legendary Creature Alien Dragon Villain
+PT:3/5
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigCopy | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Artifact.inZoneBattlefield,Land.inZoneBattlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell that targets an artifact or land, copy that spell. You may choose new targets for the copy. Put two +1/+1 counters on CARDNAME.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Flying\nWhenever you cast an instant or sorcery spell that targets an artifact or land, copy that spell. You may choose new targets for the copy. Put two +1/+1 counters on Fin Fang Foom.

@@ -1,0 +1,8 @@
+Name:Consumed by History
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Effect | Triggers$ DiesTrig | SubAbility$ DBDamageAll | SpellDescription$ Until end of turn, whenever a nontoken creature dies, it perpetually gains unearth {5}.,,,,,,
+SVar:DiesTrig:Mode$ ChangesZone | ValidCard$ Creature.!token | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerZones$ Command | TriggerDescription$ Whenever a nontoken creature dies, it perpetually gains unearth {5}.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | PumpZone$ Graveyard | KW$ Unearth:5 | Duration$ Perpetual
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each creature.
+Oracle:Until end of turn, whenever a nontoken creature dies, it perpetually gains unearth {5}.\nConsumed by History deals 3 damage to each creature.

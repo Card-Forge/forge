@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Edgar_Magalhaes_-_Mardu_Discard_(Standard,_#2938441).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodghast
+4 Hardened Academic
+4 Iron-Shield Elf
+4 Marauding Mako
+4 Moonshadow
+2 Tersa Lightshatter
+1 Carnage, Crimson Chaos
+1 Cecil, Dark Knight
+1 Inti, Seneschal of the Sun
+2 Burst Lightning
+2 Requiting Hex
+1 Erode
+4 Practiced Offense
+4 Cool but Rude
+4 Blood Crypt
+4 Sacred Foundry
+4 Starting Town
+2 Blazemire Verge
+2 Concealed Courtyard
+2 Godless Shrine
+2 Inspiring Vantage
+1 Mountain
+1 Swamp
+[Sideboard]
+3 Strategic Betrayal
+3 Voice of Victory
+2 Case of the Crimson Pulse
+2 Seam Rip
+2 Sheltered by Ghosts
+1 Duel Tactics
+1 Inti, Seneschal of the Sun
+1 Leyline of the Void

@@ -1,0 +1,10 @@
+Name:Expressive Firedancer
+ManaCost:1 R
+Types:Creature Human Sorcerer
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, this creature also gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Double Strike | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:X:TriggeredCard$CastTotalManaSpent
+DeckHints:Type$Instant|Sorcery
+Oracle:Opus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, this creature also gains double strike until end of turn.

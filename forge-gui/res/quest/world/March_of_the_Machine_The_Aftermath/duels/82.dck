@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sphinx
+Title=Sphinx
+Icon=Sphinx.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/SaltySaintNick_-_Boros_Burn_(Modern,_#1730164).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+3 Voldaren Epicure
+4 Dragon's Rage Channeler
+4 Pia Nalaar, Consul of Revival
+4 Mishra's Bauble
+4 Experimental Synthesizer
+1 Mishra's Research Desk
+1 Shadowspear
+1 Springleaf Drum
+4 Lightning Bolt
+3 Shrapnel Blast
+4 Galvanic Blast
+3 Light Up the Stage
+1 Underworld Breach
+4 Urza's Saga
+2 Bloodstained Mire
+3 Sunbaked Canyon
+5 Mountain
+2 Sacred Foundry
+3 Arid Mesa
+[Sideboard]
+1 Jegantha, the Wellspring
+2 Pyrite Spellbomb
+2 Tormod's Crypt
+2 Wear // Tear
+2 Alpine Moon
+2 Roiling Vortex
+1 Soul-Guide Lantern
+1 Pithing Needle
+2 Path to Exile

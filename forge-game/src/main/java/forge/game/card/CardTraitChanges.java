@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 public record CardTraitChanges(
         Collection<SpellAbility> abilities,
-        Collection<SpellAbility> removedAbilities,
         Collection<Trigger> triggers,
         Collection<ReplacementEffect> replacements,
         Collection<StaticAbility> staticAbilities,
@@ -27,13 +26,6 @@ public record CardTraitChanges(
      */
     public Collection<SpellAbility> getAbilities() {
         return Objects.requireNonNullElse(abilities, List.of());
-    }
-
-    /**
-     * @return the abilities
-     */
-    public Collection<SpellAbility> getRemovedAbilities() {
-        return Objects.requireNonNullElse(removedAbilities, List.of());
     }
 
     /**
@@ -71,7 +63,6 @@ public record CardTraitChanges(
     public CardTraitChanges copy(Card host, boolean lki) {
         return new CardTraitChanges(
                 this.getAbilities().stream().map(sa -> sa.copy(host, lki)).collect(Collectors.toList()),
-                this.getRemovedAbilities().stream().map(sa -> sa.copy(host, lki)).collect(Collectors.toList()),
                 this.getTriggers().stream().map(tr -> tr.copy(host, lki)).collect(Collectors.toList()),
                 this.getReplacements().stream().map(re -> re.copy(host, lki)).collect(Collectors.toList()),
                 this.getStaticAbilities().stream().map(st -> st.copy(host, lki)).collect(Collectors.toList()),
@@ -101,7 +92,6 @@ public record CardTraitChanges(
         if (remove != null) {
             list.removeIf(remove);
         }
-        list.removeAll(getRemovedAbilities());
         list.addAll(getAbilities());
         return list;
     }

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Pied Piper
+Title=The Pied Piper
+Icon=The Pied Piper.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Kanaura_Fuyuki_-_RG_Eldrazi_(Modern,_#2272588).dck
+Deck Type=constructed
+
+[Main]
+4 Thought-Knot Seer
+4 Devourer of Destiny
+4 Glaring Fleshraker
+4 It That Heralds the End
+4 Nulldrifter
+4 Eldrazi Linebreaker
+4 Sowing Mycospawn
+4 Sire of Seven Deaths
+2 Kozilek's Return
+4 Kozilek's Command
+2 All Is Dust
+3 Unclaimed Territory
+4 Cavern of Souls
+2 Wastes
+4 Eldrazi Temple
+3 Secluded Courtyard
+4 Ugin's Labyrinth
+[Sideboard]
+3 Trinisphere
+3 Wild Slash
+2 Damping Matrix
+3 Collective Resistance
+4 Disruptor Flute

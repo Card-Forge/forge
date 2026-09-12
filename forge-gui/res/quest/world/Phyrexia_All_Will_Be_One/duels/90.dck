@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Oshima_Shimpei_-_Infect_(Modern,_#1564603).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+4 Blighted Agent
+4 Glistener Elf
+4 Venerated Rotpriest
+2 Spell Pierce
+4 Blossoming Defense
+1 Become Immense
+4 Vines of Vastwood
+4 Mutagenic Growth
+4 Might of Old Krosa
+3 Distortion Strike
+3 Scale Up
+1 Snow-Covered Forest
+3 Breeding Pool
+1 Dryad Arbor
+1 Pendelhaven
+4 Misty Rainforest
+2 Verdant Catacombs
+4 Inkmoth Nexus
+2 Waterlogged Grove
+1 Boseiju, Who Endures
+[Sideboard]
+2 Nix
+1 Viridian Corrupter
+1 Spellskite
+1 Torpor Orb
+3 Flusterstorm
+2 Force of Vigor
+1 Veil of Summer
+3 Endurance
+1 Wild Shape

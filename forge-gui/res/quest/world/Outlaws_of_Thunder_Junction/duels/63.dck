@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Piotr_Glogowski_-_Affinity_(Modern,_#1999857).dck
+Deck Type=constructed
+
+[Main]
+4 Ornithopter
+4 Frogmite
+3 Myr Enforcer
+4 Memnite
+4 Thought Monitor
+4 Sojourner's Companion
+4 Combat Courier
+4 Satoru, the Infiltrator
+4 Springleaf Drum
+1 Shadowspear
+4 Simulacrum Synthesizer
+1 Lost Jitte
+4 Urza's Saga
+4 Darksteel Citadel
+4 Darkslick Shores
+1 Drossforge Bridge
+4 Mistvault Bridge
+1 Tanglepool Bridge
+1 Treasure Vault
+[Sideboard]
+1 Jegantha, the Wellspring
