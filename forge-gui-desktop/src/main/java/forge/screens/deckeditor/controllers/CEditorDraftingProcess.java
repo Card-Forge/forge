@@ -23,6 +23,7 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftAction;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
@@ -41,6 +42,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
 
 /**
@@ -104,6 +106,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         CEditorLog.SINGLETON_INSTANCE.addLogEntry(message);
     }
 
+    @Override
+    public void addLogEntry(String message, PaperCard card) {
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message, null, card);
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
@@ -112,42 +119,37 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         if (toAlternate) { return; }
 
         // can only draft one at a time, regardless of the requested quantity
-        PaperCard card = items.iterator().next().getKey();
+        draftCard(items.iterator().next().getKey(), null);
+    }
 
-        if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
-            System.out.println(card + " not drafted because we're skipping this pick");
-            showPackToDraft();
-            return;
-        }
-
-        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
-            card = boosterDraft.getHumanPlayer().pickFromArchdemonCurse(boosterDraft.getHumanPlayer().nextChoice());
-        }
-
-        // Verify if card is in the activate pack?
-        this.getDeckManager().addItem(card, 1);
-
-        // get next booster pack if we aren't picking again from this pack
-        this.boosterDraft.setChoice(card);
+    private void draftCard(PaperCard card, DraftAction variant) {
+        this.boosterDraft.setChoice(card, DeckSection.Sideboard, variant);
+        applyPoolDelta();
         showPackToDraft();
     }
 
+    private void applyPoolDelta() {
+        LimitedPlayer.PoolDelta delta = boosterDraft.getHumanPlayer().drainPoolDelta();
+        delta.added().forEach(c -> getDeckManager().addItem(c, 1));
+        delta.removed().forEach(c -> getDeckManager().removeItem(c, 1));
+    }
+
     protected void showPackToDraft() {
-        boolean nextChoice = this.boosterDraft.hasNextChoice();
-        ItemPool<PaperCard> pool = null;
-        if (nextChoice) {
-            pool = this.boosterDraft.nextChoice();
-            nextChoice = pool != null && !pool.isEmpty();
-        }
-
-        if (nextChoice) {
+        while (this.boosterDraft.hasNextChoice()) {
+            ItemPool<PaperCard> pool = this.boosterDraft.nextChoice();
+            if (pool == null || pool.isEmpty()) {
+                break;
+            }
+            if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
+                boosterDraft.skipChoice();
+                continue;
+            }
             this.showChoices(pool);
+            return;
         }
-        else {
-            boosterDraft.postDraftActions();
-
-            this.saveDraft();
-        }
+        boosterDraft.postDraftActions();
+        applyPoolDelta();
+        this.saveDraft();
     }
 
     /* (non-Javadoc)
@@ -160,11 +162,21 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
+        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), action));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        // no valid remove options
+        cmb.addDraftActionItems(currentActions(), action -> {
+            boosterDraft.getHumanPlayer().activate(action);
+            // The activated card turns face down, so its marker and the hints change
+            this.showChoices(this.getCatalogManager().getPool());
+        });
+    }
+
+    private List<DraftAction> currentActions() {
+        LimitedPlayer me = boosterDraft.getHumanPlayer();
+        return me.getActions(me.nextChoice());
     }
 
     /**
@@ -178,16 +190,17 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
+        String packCaption = localizer.getMessage("lblPackNCards", String.valueOf(packNumber));
 
         int count = list.countAll();
 
-        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
+        if (boosterDraft.getHumanPlayer().isPackHidden()) {
             // Only show facedown cards with no information
             this.getCatalogManager().setPool(generateFakePaperCards(count));
         } else {
             this.getCatalogManager().setPool(list);
         }
+        showAbilityHints(currentActions(), packCaption);
     } // showChoices()
 
     private ItemPool<PaperCard> generateFakePaperCards(int count) {
@@ -267,19 +280,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         // Why is human deck just imported from LimitedPlayer?
         //Deck humanDeck = player.getDeck().copyTo(s);
-        // If we do the above, we shouldn't need remove from card pool below
         Deck humanDeck = (Deck) this.getPlayersDeck().copyTo(s);
-
-        for(PaperCard card : player.getRemovedFromCardPool()) {
-            // This is awkward. We are duplicating the deck construction logic
-            // So we need to remove from the deck twice
-            // This may be problematic for trading cards from your card pool
-            humanDeck.get(DeckSection.Sideboard).remove(card);
-
-            // These cards need to be added to a quest deck if there is an associated quest
-            // Although quest Drafting process happened in #CEditorQuestDraftingProcess
-            // Probably need to make these files closer to each other
-        }
 
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
         finishedDraft.setHumanDeck(humanDeck);
@@ -338,6 +339,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
             VEditorLog.SINGLETON_INSTANCE.showView();
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(true);
 
         ccAddLabel = this.getBtnAdd().getText();
 
@@ -420,6 +422,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
+        VEditorLog.SINGLETON_INSTANCE.setDraftMode(false);
         if (draftLogParent != null) {
             draftLogParent.addDoc(VEditorLog.SINGLETON_INSTANCE);
         }

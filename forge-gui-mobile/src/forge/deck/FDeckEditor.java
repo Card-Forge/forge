@@ -16,6 +16,7 @@ import forge.game.GameLog;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftAction;
 import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
@@ -826,6 +827,54 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     public boolean isDrafting() {
         return false;
+    }
+
+    public List<DraftAction> getDraftActions() {
+        BoosterDraft draft = getDraft();
+        if (draft == null || !isDrafting()) {
+            return List.of();
+        }
+        LimitedPlayer me = draft.getHumanPlayer();
+        return me.getActions(me.nextChoice());
+    }
+
+    public void activateDraftAction(DraftAction action) {
+        BoosterDraft draft = getDraft();
+        CatalogPage packPage = getCatalogPage();
+        // A disabled pack page means a pick is running; no pick may start while the activation's prompt is open
+        if (!packPage.cardManager.isEnabled()) {
+            return;
+        }
+        packPage.cardManager.setEnabled(false);
+        FThreads.invokeInBackgroundThread(() -> {
+            draft.getHumanPlayer().activate(action);
+            FThreads.invokeInEdtLater(() -> {
+                packPage.cardManager.setEnabled(true);
+                updateAbilityHints();
+            });
+        });
+    }
+
+    /** Refreshes the pool pages; the pack page refreshes itself after each pick. */
+    protected void refreshDraftPages() {
+        for (TabPage<FDeckEditor> page : tabPages) {
+            if (page instanceof DeckSectionPage sectionPage) {
+                sectionPage.cardManager.refresh();
+                sectionPage.updateCaption();
+            }
+        }
+        updateAbilityHints();
+    }
+
+    protected void updateAbilityHints() {
+        List<DraftAction> actions = getDraftActions();
+        for (TabPage<FDeckEditor> page : tabPages) {
+            if (page instanceof DraftPackPage packPage) {
+                packPage.showHints(actions);
+            } else if (page instanceof DeckSectionPage sectionPage) {
+                sectionPage.showHints(actions);
+            }
+        }
     }
 
     protected ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd, CardManagerPage source, CardManagerPage destination)
@@ -2049,6 +2098,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             cardManager.setPool(newDeck.getOrCreate(deckSection));
         }
 
+        void showHints(List<DraftAction> actions) {
+            boolean hasPool = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.POOL);
+            cardManager.setMarkerPredicate(c -> actions.stream().anyMatch(a -> a.isPoolActionFor(c)));
+            cardManager.setCaption(captionPrefix + (hasPool
+                    ? " - " + Forge.getLocalizer().getMessage("lblDraftAbilitiesInPoolMenu") : ""));
+        }
+
         @Override
         protected void updateCaption() {
             if (deckSection == DeckSection.Commander || parentScreen.getDeck() == null) {
@@ -2163,6 +2219,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             }
 
+            for (DraftAction action : parentScreen.getDraftActions()) {
+                if (action.isPoolActionFor(card)) {
+                    menu.addItem(new FMenuItem(action.label(), e -> parentScreen.activateDraftAction(action)));
+                }
+            }
             addPerCardItems(menu, card);
         }
 
@@ -2369,7 +2430,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return; // pool is null; do not fall through to cardManager.setPool(pool) below
             }
 
-            this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();
+            this.draftingFaceDown = getDraftPlayer().isPackHidden();
 
             if(draftingFaceDown) {
                 ItemPool<PaperCard> fakePool = new ItemPool<>(PaperCard.class);
@@ -2390,6 +2451,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             this.updateCaption();
             cardManager.setEnabled(true);
+            FThreads.invokeInEdtLater(parentScreen::updateAbilityHints);
+        }
+
+        void showHints(List<DraftAction> actions) {
+            boolean hasPick = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.PICK);
+            cardManager.setMarkerPredicate(c -> actions.stream().anyMatch(a -> a.isPickFor(c)));
+            cardManager.setCaption(caption + (hasPick
+                    ? " - " + Forge.getLocalizer().getMessage("lblDraftAbilitiesInPackMenu") : ""));
         }
 
         @Override
@@ -2398,7 +2467,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return;
             DeckSection destination;
             if(draftingFaceDown) {
-                card = getDraftPlayer().pickFromArchdemonCurse(getDraftPlayer().nextChoice());
                 destination = DeckSection.Sideboard;
             }
             else if(card.isVeryBasicLand()) {
@@ -2414,18 +2482,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 System.err.println("Unable to quick-move card (no page for destination) - " + card + " -> " + destination);
                 return; //Shouldn't happen?
             }
-            moveCard(card, destinationPage);
+            pick(card, destinationPage, null);
         }
 
         @Override
         public void moveCard(PaperCard card, CardManagerPage destination, int qty) {
             assert(qty == 1);
-            assert(destination instanceof DeckSectionPage);
+            pick(card, (DeckSectionPage) destination, null);
+        }
+
+        protected void pick(PaperCard card, DeckSectionPage destination, DraftAction variant) {
             BoosterDraft draft = parentScreen.getDraft();
             cardManager.setEnabled(false); //Prevent any weird inputs until choices are made and the next set of cards is ready.
-            DeckSection section = ((DeckSectionPage) destination).deckSection;
+            DeckSection section = destination.deckSection;
             FThreads.invokeInBackgroundThread(() -> {
-                draft.setChoice(card, section);
+                draft.setChoice(card, section, variant);
 
                 if (draft.hasNextChoice()) {
                     refresh();
@@ -2437,9 +2508,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
 
                 parentScreen.getDeckController().notifyModelChanged();
-                destination.cardManager.refresh();
-                this.updateCaption();
-                destination.updateCaption();
+                // A variant can remove cards from any section
+                FThreads.invokeInEdtLater(parentScreen::refreshDraftPages);
             });
         }
 
@@ -2465,23 +2535,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if(!cardManager.isEnabled())
                 return;
             if(draftingFaceDown) {
-                addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), result -> { //ignore quantity
-                    PaperCard realCard = getDraftPlayer().pickFromArchdemonCurse(getDraftPlayer().nextChoice());
-                    moveCard(realCard, parentScreen.getSideboardPage());
-                });
+                addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), result -> //ignore quantity
+                        pick(card, parentScreen.getSideboardPage(), null));
                 return;
             }
             DeckSection destination = DeckSection.matchingSection(card);
             final DeckSectionPage destinationPage = parentScreen.getPageForSection(destination, true);
             addMoveCardMenuItem(menu, this, destinationPage, result -> { //ignore quantity
-                moveCard(card, destinationPage);
+                pick(card, destinationPage, null);
             });
             addMoveCardMenuItem(menu,
                     this,
                     parentScreen.getSideboardPage(),
                     result -> { //ignore quantity
-                        moveCard(card, parentScreen.getSideboardPage());
+                        pick(card, parentScreen.getSideboardPage(), null);
                     });
+            for (DraftAction action : parentScreen.getDraftActions()) {
+                if (action.isPickFor(card)) {
+                    menu.addItem(new FMenuItem(action.label(), e -> pick(card, destinationPage, action)));
+                }
+            }
         }
 
         @Override

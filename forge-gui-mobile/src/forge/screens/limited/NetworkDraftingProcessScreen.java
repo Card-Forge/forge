@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
@@ -13,24 +14,32 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.DeckEditorConfig;
 import forge.deck.FDeckEditor.FDraftLog;
 import forge.game.GameType;
+import forge.gamemodes.limited.DraftAction;
 import forge.gamemodes.net.EventParticipant;
+import forge.gamemodes.net.event.DraftActivateEvent;
+import forge.gamemodes.net.event.DraftLogEvent;
 import forge.gamemodes.net.event.DraftPickEvent;
-import forge.gui.FThreads;
+import forge.gamemodes.net.event.DraftSeatStateEvent;
+import forge.gamemodes.net.event.NetEvent;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.menu.FDropDownMenu;
+import forge.menu.FMenuItem;
 import forge.screens.FScreen;
 import forge.screens.match.views.VChat;
 import forge.toolbox.DraftTimerRope;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
 import forge.util.Utils;
 
 /**
@@ -47,7 +56,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
     // Pod seats for the direction strip and log; from the host's NetworkEvent or, on a
     // client, the broadcast NetworkEventView (a client has no NetworkEvent).
     private final List<EventParticipant> participants;
-    private final Consumer<DraftPickEvent> pickSender;
+    private final Consumer<NetEvent> draftSender;
     private final Runnable onLeave;
     private final NetworkDraftLog draftLog;
 
@@ -56,19 +65,23 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
 
     private NetworkDraftPackPage networkPackPage;
     private PicksDeckSectionPage mainPicksPage;
+    private PicksDeckSectionPage sidePicksPage;
     private int currentPackNumber;
     private int currentPickNumber;
+    private int currentSeq;
+    private List<DraftAction> actions = List.of();
+    private boolean hiddenPack;
     private boolean draftComplete;
-    private PaperCard pendingPickCard;
     private int[] lastQueueDepths;
+    private List<List<PaperCard>> lastFaceUp = List.of();
 
     public NetworkDraftingProcessScreen(int seatIndex, List<EventParticipant> participants,
-            Consumer<DraftPickEvent> pickSender, Runnable onLeave) {
+            Consumer<NetEvent> draftSender, Runnable onLeave) {
         super(new NetworkDraftEditorConfig(), new PicksDeckController(new Deck()));
 
         this.seatIndex  = seatIndex;
         this.participants = participants;
-        this.pickSender = pickSender;
+        this.draftSender = draftSender;
         this.onLeave    = onLeave;
         this.draftLog   = new NetworkDraftLog(seatIndex);
 
@@ -81,9 +94,12 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
                 networkPackPage = ndpp;
             } else if (page instanceof PicksDeckSectionPage pdsp && pdsp.deckSection == DeckSection.Main) {
                 mainPicksPage = pdsp;
+            } else if (page instanceof PicksDeckSectionPage side && side.deckSection == DeckSection.Sideboard) {
+                sidePicksPage = side;
             }
         }
-        networkPackPage.setPickHandler(this::onPackCardActivated);
+        networkPackPage.setPickHandler(this::submitPick);
+        networkPackPage.setOnStripTap(this::showFaceUpCards);
     }
 
     @Override
@@ -96,42 +112,58 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         return !draftComplete;
     }
 
-    void onPackCardActivated() {
-        PaperCard picked = networkPackPage.getSelectedCard();
-        if (picked == null) return;
-        pendingPickCard = picked;
-        draftLog.recordPendingSelfPick(picked, currentPackNumber, currentPickNumber);
-        networkPackPage.clearPack();
-        pickSender.accept(new DraftPickEvent(seatIndex, picked));
+    public int getSeatIndex() {
+        return seatIndex;
     }
 
+    /** Called on the render thread; posting again would let a later seat-state event overtake the pack. */
     public void onPackArrived(List<PaperCard> pack, int packNumber, int pickNumber,
-            int timerSeconds) {
-        FThreads.invokeInEdtNowOrLater(() -> {
-            pendingPickCard = null; // defensive clear in case prior onSeatPicked never fired
-            currentPackNumber = packNumber;
-            currentPickNumber = pickNumber;
-            int podSize = participants.size();
-            if (lastQueueDepths == null || lastQueueDepths.length != podSize) {
-                // Seed each seat with one pack until the first SeatPicked broadcast arrives
-                lastQueueDepths = new int[podSize];
-                Arrays.fill(lastQueueDepths, 1);
-            }
-            networkPackPage.setPushedPack(pack, packNumber, timerSeconds);
-            networkPackPage.updateDirection(seatIndex, participants,
-                    lastQueueDepths, isPassingRight(packNumber));
-            setSelectedPage(networkPackPage);
-        });
+            int timerSeconds, int seq, int hiddenCount) {
+        currentPackNumber = packNumber;
+        currentPickNumber = pickNumber;
+        currentSeq = seq;
+        hiddenPack = hiddenCount > 0;
+        int podSize = participants.size();
+        if (lastQueueDepths == null || lastQueueDepths.length != podSize) {
+            // Seed each seat with one pack until the first SeatPicked broadcast arrives
+            lastQueueDepths = new int[podSize];
+            Arrays.fill(lastQueueDepths, 1);
+        }
+        networkPackPage.setPushedPack(hiddenPack ? Collections.nCopies(hiddenCount, PaperCard.FAKE_CARD) : pack,
+                packNumber, timerSeconds);
+        networkPackPage.updateDirection(seatIndex, participants,
+                lastQueueDepths, isPassingRight(packNumber));
+        setSelectedPage(networkPackPage);
+        updateAbilityHints();
     }
 
-    public void onSeatPicked(int seat, int[] queueDepths) {
+    void submitPick(PaperCard picked, DraftAction variant) {
+        if (picked == null) return;
+        draftLog.recordPendingSelfPick(hiddenPack ? Forge.getLocalizer().getMessage("lblFaceDownCard") : picked.getName(),
+                currentPackNumber, currentPickNumber);
+        networkPackPage.clearPack();
+        // The host draws a hidden pick itself, so no card is sent
+        draftSender.accept(new DraftPickEvent(seatIndex, currentSeq, hiddenPack ? null : picked, variant));
+    }
+
+    public void onSeatPicked(int seat, int[] queueDepths, List<List<PaperCard>> faceUp) {
         draftLog.recordSeatPicked(seat, queueDepths, participants);
         lastQueueDepths = queueDepths.clone();
+        lastFaceUp = faceUp;
         networkPackPage.updateDirection(seatIndex, participants,
                 lastQueueDepths, isPassingRight(currentPackNumber));
-        if (seat == seatIndex && pendingPickCard != null) {
-            addPickToMain(pendingPickCard);
-            pendingPickCard = null;
+    }
+
+    private void showFaceUpCards() {
+        List<String> lines = new ArrayList<>();
+        for (int seat = 0; seat < lastFaceUp.size(); seat++) {
+            String name = EventParticipant.resolveName(seat, participants, null);
+            for (PaperCard card : lastFaceUp.get(seat)) {
+                lines.add(name + ": " + card.getName());
+            }
+        }
+        if (!lines.isEmpty()) {
+            GuiChoose.reveal(Forge.getLocalizer().getMessage("lblFaceUpCards"), lines);
         }
     }
 
@@ -143,7 +175,6 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
     public void onAutoPicked(int seat, PaperCard card, int packNumber, int pickInPack) {
         draftLog.recordAutoPicked(seat, card, packNumber, pickInPack, participants);
         if (seat == seatIndex) {
-            addPickToMain(card);
             networkPackPage.stopTimer();
         }
     }
@@ -153,12 +184,37 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         networkPackPage.stopTimer();
     }
 
-    private void addPickToMain(PaperCard card) {
-        FThreads.invokeInEdtNowOrLater(() -> {
-            if (mainPicksPage != null) {
-                mainPicksPage.addPick(card);
+    /** The host owns the pool: picks, removals, returns and trades all arrive here. */
+    public void applySeatState(DraftSeatStateEvent state) {
+        if (state.getSeatIndex() != seatIndex) return;
+        if (state.isFull()) {
+            mainPicksPage.setCards(new CardPool());
+            sidePicksPage.setCards(new CardPool());
+        }
+        state.getPoolAdded().forEach(mainPicksPage::addPick);
+        for (PaperCard card : state.getPoolRemoved()) {
+            if (!mainPicksPage.removePick(card)) {
+                sidePicksPage.removePick(card);
             }
-        });
+        }
+        actions = state.getActions();
+        updateAbilityHints();
+    }
+
+    public void onLogEvent(DraftLogEvent event) {
+        if (event.getSeatIndex() < 0 || event.getSeatIndex() == seatIndex) {
+            draftLog.log(event.getMessage());
+        }
+    }
+
+    @Override
+    public List<DraftAction> getDraftActions() {
+        return draftComplete ? List.of() : actions;
+    }
+
+    @Override
+    public void activateDraftAction(DraftAction action) {
+        draftSender.accept(new DraftActivateEvent(seatIndex, action));
     }
 
     @Override
@@ -195,7 +251,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         private final FLabel lblCountdown = new FLabel.Builder()
                 .font(FSkinFont.get(11)).align(Align.left).build();
         private final DraftDirectionStrip directionStrip = new DraftDirectionStrip();
-        private Runnable pickHandler;
+        private BiConsumer<PaperCard, DraftAction> pickHandler;
 
         NetworkDraftPackPage() {
             super(new CardManager(false));
@@ -209,11 +265,27 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
             directionStrip.update(mySeat, participants, depths, passingRight);
         }
 
-        void setPickHandler(Runnable handler) {
+        void setOnStripTap(Runnable onTap) {
+            directionStrip.setOnTap(onTap);
+        }
+
+        void setPickHandler(BiConsumer<PaperCard, DraftAction> handler) {
             this.pickHandler = handler;
             cardManager.setItemActivateHandler(e -> {
-                if (pickHandler != null) pickHandler.run();
+                if (pickHandler != null) pickHandler.accept(getSelectedCard(), null);
             });
+        }
+
+        // The inherited items call the no-op moveCard, so this page builds its own
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            if (!cardManager.isEnabled() || pickHandler == null) return;
+            menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblDraft"), e -> pickHandler.accept(card, null)));
+            for (DraftAction action : parentScreen.getDraftActions()) {
+                if (action.isPickFor(card)) {
+                    menu.addItem(new FMenuItem(action.label(), e -> pickHandler.accept(card, action)));
+                }
+            }
         }
 
         void setPushedPack(List<PaperCard> pack, int packNumber, int timerSeconds) {
@@ -252,7 +324,7 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         @Override
         public void refresh() {}
 
-        /** No-op — picks are confirmed server-side; addPickToMain handles the local state. */
+        /** No-op — picks are confirmed server-side and the pool arrives through applySeatState. */
         @Override
         public void moveCard(PaperCard card, CardManagerPage destination, int qty) {}
 
@@ -289,6 +361,18 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         private float[] widths = new float[0];
         private float totalWidth;
         private boolean hasData;
+        private Runnable onTap;
+
+        void setOnTap(Runnable onTap) {
+            this.onTap = onTap;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (onTap == null) return false;
+            onTap.run();
+            return true;
+        }
 
         /** One drawable element: a name run, a stack of {@code depth} pack icons, or a direction arrow. */
         private static final class Item {
@@ -424,6 +508,13 @@ public final class NetworkDraftingProcessScreen extends FDeckEditor {
         void addPick(PaperCard card) {
             cardManager.addItem(card, 1);
             updateCaption();
+        }
+
+        boolean removePick(PaperCard card) {
+            if (cardManager.getItemCount(card) == 0) return false;
+            cardManager.removeItem(card, 1);
+            updateCaption();
+            return true;
         }
     }
 

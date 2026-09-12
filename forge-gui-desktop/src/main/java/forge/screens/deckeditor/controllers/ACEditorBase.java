@@ -24,9 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
@@ -41,6 +43,7 @@ import forge.deck.DeckRule;
 import forge.deck.DeckRuleColorIdentity;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.limited.DraftAction;
 import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
@@ -413,6 +416,20 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
     public FComboBox getCbxSection() { return deckManager.getCbxSection(); }
 
+    /** Marks the cards that have draft abilities and shows a hint above each panel's cards while an offer exists. */
+    protected void showAbilityHints(List<DraftAction> actions, String packCaption) {
+        boolean hasPick = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.PICK);
+        boolean hasPool = actions.stream().anyMatch(a -> a.kind() == DraftAction.Kind.POOL);
+        catalogManager.setMarkerPredicate(item -> item instanceof PaperCard card
+                && actions.stream().anyMatch(a -> a.isPickFor(card)));
+        deckManager.setMarkerPredicate(item -> item instanceof PaperCard card
+                && actions.stream().anyMatch(a -> a.isPoolActionFor(card)));
+        catalogManager.setCaption(packCaption);
+        catalogManager.setHint(hasPick ? localizer.getMessage("lblDraftAbilityHintDesktop") : null);
+        deckManager.setCaption(localizer.getMessage("lblDraftPicks"));
+        deckManager.setHint(hasPool ? localizer.getMessage("lblDraftPoolAbilityHintDesktop") : null);
+    }
+
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);
     }
@@ -633,6 +650,22 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
                     InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
+
+        public void addDraftActionItems(List<DraftAction> actions, Consumer<DraftAction> onChoose) {
+            ItemManager<?> im = getItemManager();
+            if (!(im instanceof CardManager cardManager) || cardManager.getSelectedItem() == null) {
+                return;
+            }
+            PaperCard card = cardManager.getSelectedItem();
+            for (DraftAction action : actions) {
+                if (isAddContextMenu ? action.isPickFor(card) : action.isPoolActionFor(card)) {
+                    JMenuItem item = GuiUtils.createMenuItem(action.label(), null, () -> onChoose.accept(action), true, false);
+                    item.setToolTipText(action.tooltip());
+                    menu.add(item);
+                }
+            }
+        }
+
         public void addSetColorID() {
             String label = localizer.getMessage("lblColorIdentity");
             CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();

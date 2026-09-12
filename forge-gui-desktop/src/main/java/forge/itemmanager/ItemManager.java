@@ -107,6 +107,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .text("")
         .fontSize(12)
         .build();
+
+    /** A line above the items, for text the player needs while the panel is in use. */
+    private final FLabel lblHint = new FLabel.Builder()
+        .fontAlign(SwingConstants.LEFT)
+        .fontSize(12)
+        .build();
     private FComboBox cbxSection = new FComboBox();
 
     private static final SkinIcon VIEW_OPTIONS_ICON = FSkin.getIcon(FSkinProp.ICO_SETTINGS).resize(20, 20);
@@ -188,6 +194,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.lblCaption);
         this.add(this.lblRatio);
         this.add(this.lblEmpty);
+        this.lblHint.setVisible(false);
+        this.add(this.lblHint);
         this.cbxSection.setVisible(false);
         this.add(this.cbxSection);
         for (final ItemView<T> view : this.views) {
@@ -393,6 +401,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         helper.include(this.btnViewOptions, viewButtonWidth, FTextField.HEIGHT);
 
         helper.newLine(-1);
+        if (this.lblHint.isVisible()) {
+            helper.fillLine(this.lblHint, FTextField.HEIGHT);
+        }
         if (this.currentView.getPnlOptions().isVisible()) {
             helper.fillLine(this.currentView.getPnlOptions(), FTextField.HEIGHT + 4);
         }
@@ -431,6 +442,25 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     public void setCaption(final String caption) {
         this.lblCaption.setText(caption);
         this.lblCaption.setLabelFor(this.listView.getTable());
+    }
+
+    /** Shows {@code hint} on its own line above the items, or hides the line when it is null or empty. */
+    public void setHint(final String hint) {
+        this.lblHint.setText(hint == null ? "" : hint);
+        this.lblHint.setVisible(hint != null && !hint.isEmpty());
+        this.revalidate();
+        this.repaint();
+    }
+
+    private Predicate<? super T> markerPredicate;
+
+    public void setMarkerPredicate(Predicate<? super T> predicate) {
+        this.markerPredicate = predicate;
+        repaint();
+    }
+
+    public boolean isMarked(T item) {
+        return markerPredicate != null && markerPredicate.test(item);
     }
 
     /**

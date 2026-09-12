@@ -19,6 +19,7 @@ import forge.card.DraftOptions;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftPrompt;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
@@ -27,7 +28,10 @@ import forge.gamemodes.net.EventParticipant;
 import forge.gamemodes.net.NetworkEvent;
 import forge.gamemodes.net.NetworkEventView;
 import forge.gamemodes.net.client.FGameClient;
-import forge.gamemodes.net.event.DraftPickEvent;
+import forge.gamemodes.net.event.DraftLogEvent;
+import forge.gamemodes.net.event.DraftPromptResponseEvent;
+import forge.gamemodes.net.event.DraftSeatStateEvent;
+import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.FDraftOverlay;
 import forge.gui.GuiChoose;
@@ -76,6 +80,7 @@ public class CLobby implements IDraftEventHandler {
     private int mySeatIndex;
     private int lastPackNumber;
     private CEditorNetworkDraft networkDraftEditor;
+    private Consumer<NetEvent> draftSender;
 
     public CLobby(final VLobby view) {
         this.view = view;
@@ -468,13 +473,15 @@ public class CLobby implements IDraftEventHandler {
 
     @Override
     public void draftPackArrived(int seatIndex, List<PaperCard> pack,
-            int packNumber, int pickNumber, int timerDurationSeconds) {
+            int packNumber, int pickNumber, int timerDurationSeconds, int seq, int hiddenCount) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor == null) {
                 initDraftEditor(seatIndex);
             }
+            if (seatIndex != mySeatIndex) return;
 
-            FDraftOverlay.SINGLETON_INSTANCE.onPackArrived(packNumber, pickNumber, pack.size(), timerDurationSeconds);
+            FDraftOverlay.SINGLETON_INSTANCE.onPackArrived(packNumber, pickNumber,
+                    hiddenCount > 0 ? hiddenCount : pack.size(), timerDurationSeconds);
 
             if (packNumber != lastPackNumber) {
                 lastPackNumber = packNumber;
@@ -482,7 +489,7 @@ public class CLobby implements IDraftEventHandler {
                 NetworkDraftLog.logPackHeader(packNumber, passingRight);
             }
 
-            networkDraftEditor.showPack(pack, packNumber, pickNumber);
+            networkDraftEditor.showPack(pack, packNumber, pickNumber, seq, hiddenCount);
         });
     }
 
@@ -512,17 +519,16 @@ public class CLobby implements IDraftEventHandler {
                     lastEventView.getProductDescription(), mySeatIndex);
         }
 
-        Consumer<DraftPickEvent> pickSender;
         if (view.getLobby() instanceof ServerGameLobby serverLobby) {
-            pickSender = ev -> serverLobby.handleDraftPick(ev, -1);
+            draftSender = ev -> serverLobby.routeDraftEvent(ev, ServerGameLobby.HOST_LOBBY_SLOT);
         } else {
             FGameClient gameClient = VSubmenuOnlineLobby.SINGLETON_INSTANCE.getClient();
             if (gameClient == null) return;
-            pickSender = gameClient::send;
+            draftSender = gameClient::send;
         }
 
         networkDraftEditor = new CEditorNetworkDraft(
-                mySeatIndex, pickSender, this::cancelActiveDraft,
+                mySeatIndex, draftSender, this::cancelActiveDraft,
                 CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
         VEditorLog.SINGLETON_INSTANCE.resetNewDraft();
 
@@ -538,9 +544,9 @@ public class CLobby implements IDraftEventHandler {
     }
 
     @Override
-    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
+    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths, List<List<PaperCard>> faceUpBySeat) {
         SwingUtilities.invokeLater(() -> {
-            FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths);
+            FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths, faceUpBySeat);
 
             int depth = (seatIndex >= 0 && seatIndex < seatQueueDepths.length) ? seatQueueDepths[seatIndex] : 0;
             if (seatIndex == mySeatIndex) {
@@ -556,8 +562,42 @@ public class CLobby implements IDraftEventHandler {
     @Override
     public void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
         SwingUtilities.invokeLater(() -> {
+            if (seatIndex != mySeatIndex) return;
             if (networkDraftEditor != null) {
                 networkDraftEditor.addAutoPickedCard(card, packNumber, pickInPack);
+            }
+        });
+    }
+
+    @Override
+    public void draftSeatState(DraftSeatStateEvent event) {
+        SwingUtilities.invokeLater(() -> {
+            if (networkDraftEditor == null) {
+                initDraftEditor(event.getSeatIndex());
+            }
+            if (event.getSeatIndex() == mySeatIndex && networkDraftEditor != null) {
+                networkDraftEditor.applySeatState(event);
+            }
+        });
+    }
+
+    @Override
+    public void draftLog(DraftLogEvent event) {
+        SwingUtilities.invokeLater(() -> {
+            if (event.getSeatIndex() < 0 || event.getSeatIndex() == mySeatIndex) {
+                NetworkDraftLog.logDraftEvent(event.getMessage(), event.getCard());
+            }
+        });
+    }
+
+    @Override
+    public void draftPrompt(DraftPrompt prompt) {
+        // Posted, so a modal dialog never opens while the host's own call holds the lobby or host monitor
+        SwingUtilities.invokeLater(() -> {
+            if (prompt.seatIndex() != mySeatIndex || draftSender == null) return;
+            List<Integer> answer = prompt.answerLocally();
+            if (!prompt.isInfoOnly()) {
+                draftSender.accept(new DraftPromptResponseEvent(mySeatIndex, prompt.promptId(), answer));
             }
         });
     }

@@ -472,6 +472,17 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         searchFilter.setCaption(caption0);
     }
 
+    private Predicate<? super T> markerPredicate;
+
+    public void setMarkerPredicate(Predicate<? super T> predicate) {
+        this.markerPredicate = predicate;
+        Gdx.graphics.requestRendering();
+    }
+
+    public boolean isMarked(T item) {
+        return markerPredicate != null && markerPredicate.test(item);
+    }
+
     public ItemPool<T> getPool() {
         return pool;
     }

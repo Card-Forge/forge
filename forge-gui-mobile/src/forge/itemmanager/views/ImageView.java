@@ -1215,6 +1215,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     } else //default rectangle highlight
                         g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                 }
+            } else if (!deckSelectMode && itemManager.isMarked(item)) {
+                // The match screen's actionable colour, always shown: it is the only cue for a draft ability
+                Color markColor = CardRenderer.parseActionableHighlightColor();
+                if (Forge.enableUIMask.equals("Full")) {
+                    g.fillRoundRect(markColor, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
+                } else {
+                    g.fillRect(markColor, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                }
             }
 
             if (item instanceof PaperCard pc) {

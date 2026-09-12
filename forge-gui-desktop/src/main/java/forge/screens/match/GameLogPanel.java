@@ -1,7 +1,7 @@
 package forge.screens.match;
 
 import java.awt.AWTEvent;
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +12,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import javax.swing.JComponent;
 import javax.swing.JLayer;
@@ -25,9 +26,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.LayerUI;
 
 import forge.CachedCardImage;
+import forge.ImageCache;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gui.GuiBase;
 import forge.gui.MouseUtil;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FScrollPane;
@@ -35,10 +39,11 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedTextArea;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {
-    private static final String CARD_VIEW_KEY = "GameLogPanel.cardView";
+    private static final String CARD_KEY = "GameLogPanel.card";
 
     private FScrollPane scrollPane;
     private MyScrollablePanel scrollablePanel;
@@ -48,6 +53,7 @@ public class GameLogPanel extends JPanel {
     private JLayer<FScrollPane> layer;
     private boolean isScrollBarVisible = false;
     private Consumer<CardView> onCardHover;
+    private Consumer<PaperCard> onItemHover;
 
     public GameLogPanel() {
         setMyLayout();
@@ -58,6 +64,10 @@ public class GameLogPanel extends JPanel {
 
     public void setOnCardHover(final Consumer<CardView> callback) {
         this.onCardHover = callback;
+    }
+
+    public void setOnItemHover(final Consumer<PaperCard> callback) {
+        this.onItemHover = callback;
     }
 
     public void reset() {
@@ -135,15 +145,18 @@ public class GameLogPanel extends JPanel {
     }
 
     public void addLogEntry(final String text) {
-        addLogEntry(text, null, null);
+        addLogEntry(text, (CardView) null, null);
     }
 
-    public void addLogEntry(final String text, final java.awt.Color foreground) {
-        addLogEntry(text, null, null);
+    public void addLogEntry(final String text, final Color foreground, final PaperCard card) {
+        final boolean useAlternateBackColor = (scrollablePanel.getComponents().length % 2 == 0);
+        final JTextArea tar = card != null && FModel.getPreferences().getPrefBoolean(FPref.UI_LOG_SHOW_CARD_IMAGES)
+                ? new LogEntryTextArea(text, useAlternateBackColor, card)
+                : createNewLogEntryJTextArea(text, useAlternateBackColor);
         if (foreground != null) {
-            final Component[] kids = scrollablePanel.getComponents();
-            if (kids.length > 0) kids[kids.length - 1].setForeground(foreground);
+            tar.setForeground(foreground);
         }
+        addEntry(tar, card);
     }
 
     public void addLogEntry(final String text, final CardView card, final Iterable<PlayerView> viewers) {
@@ -157,10 +170,13 @@ public class GameLogPanel extends JPanel {
             tar = createNewLogEntryJTextArea(text, useAlternateBackColor);
         }
 
-        if (card != null) {
-            tar.putClientProperty(CARD_VIEW_KEY, card);
-        }
+        addEntry(tar, card);
+    }
 
+    private void addEntry(final JTextArea tar, final Object card) {
+        if (card != null) {
+            tar.putClientProperty(CARD_KEY, card);
+        }
         // If the minimum is not specified then the JTextArea will
         // not be sized correctly using MigLayout.
         // (http://stackoverflow.com/questions/6023145/line-wrap-in-a-jtextarea-causes-jscrollpane-to-missbehave-with-miglayout)
@@ -204,11 +220,33 @@ public class GameLogPanel extends JPanel {
         private static final int CARD_WIDTH = 50;
         private static final int CARD_HEIGHT = 70;
 
-        private final CachedCardImage cachedImage;
+        private final Supplier<BufferedImage> image;
 
         LogEntryTextArea(final String text, final boolean useAlternateBackColor,
                          final CardView card, final Iterable<PlayerView> viewers) {
             super(text);
+            setUp(useAlternateBackColor);
+            final CachedCardImage cachedImage = new CachedCardImage(card, viewers, CARD_WIDTH, CARD_HEIGHT) {
+                @Override
+                public void onImageFetched() {
+                    repaint();
+                }
+            };
+            this.image = cachedImage::getImage;
+        }
+
+        LogEntryTextArea(final String text, final boolean useAlternateBackColor, final PaperCard card) {
+            super(text);
+            setUp(useAlternateBackColor);
+            final String key = card.getImageKey(false);
+            final Pair<BufferedImage, Boolean> original = ImageCache.getCardOriginalImageInfo(key, true);
+            if (ImageCache.isDefaultImage(original.getLeft()) || original.getRight()) {
+                GuiBase.getInterface().getImageFetcher().fetchImage(key, this::repaint);
+            }
+            this.image = () -> ImageCache.getImage(card, CARD_WIDTH, CARD_HEIGHT);
+        }
+
+        private void setUp(final boolean useAlternateBackColor) {
             setFont(textFont);
             setBorder(new EmptyBorder(PADDING, CARD_WIDTH + 2 * PADDING, PADDING, PADDING));
             setFocusable(false);
@@ -222,19 +260,12 @@ public class GameLogPanel extends JPanel {
             if (useAlternateBackColor) { skinColor = skinColor.darker(); }
             setOpaque(true);
             setBackground(skinColor);
-
-            this.cachedImage = new CachedCardImage(card, viewers, CARD_WIDTH, CARD_HEIGHT) {
-                @Override
-                public void onImageFetched() {
-                    repaint();
-                }
-            };
         }
 
         @Override
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            final BufferedImage img = cachedImage.getImage();
+            final BufferedImage img = image.get();
             if (img != null) {
                 ((Graphics2D) g).drawImage(img, null, PADDING, PADDING);
             }
@@ -300,11 +331,11 @@ public class GameLogPanel extends JPanel {
                         MouseUtil.setCursor(Cursor.HAND_CURSOR);
                     }
                     // Trigger card hover callback
-                    if (onCardHover != null) {
-                        final Object cardProp = ((JComponent) e.getSource()).getClientProperty(CARD_VIEW_KEY);
-                        if (cardProp instanceof CardView) {
-                            onCardHover.accept((CardView) cardProp);
-                        }
+                    final Object cardProp = ((JComponent) e.getSource()).getClientProperty(CARD_KEY);
+                    if (onCardHover != null && cardProp instanceof CardView card) {
+                        onCardHover.accept(card);
+                    } else if (onItemHover != null && cardProp instanceof PaperCard item) {
+                        onItemHover.accept(item);
                     }
                 }
                 break;

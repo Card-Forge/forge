@@ -60,6 +60,8 @@ public class BoosterDraft implements IBoosterDraft {
     private final List<LimitedPlayer> players = new ArrayList<>();
     private LimitedPlayer localPlayer;
     private boolean readyForComputerPick = false;
+    // Skips are used up after passPacks routes the skipped pack, so a skipping seat is never a Dredger target
+    private final Map<LimitedPlayer, DraftPack> pendingSkips = new LinkedHashMap<>();
 
     private IDraftLog draftLog = null;
 
@@ -126,14 +128,8 @@ public class BoosterDraft implements IBoosterDraft {
                         ? FModel.getBlocks()
                         : FModel.getFantasyBlocks();
 
-                // TODO Conspiracy blocks gated for network draft: pack-effect prompts
-                // (Agent of Acquisitions, Cogwork Librarian, etc.) pop on the host, the
-                // conspiracy player-flag state isn't replicated to clients, and the draft
-                // log isn't shipped over the wire. Custom/Chaos/Import paths can still
-                // smuggle CNS cards in — fix those when the underlying issues are resolved.
                 for (final CardBlock b : storage) {
                     if (b.getCntBoostersDraft() > 0) {
-                        if (forNetwork && b.getName().contains("Conspiracy")) continue;
                         blocks.add(b);
                     }
                 }
@@ -563,7 +559,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
-        if(readyForComputerPick || localPlayer.shouldSkipThisPick())
+        if(readyForComputerPick)
             this.computerChoose();
         readyForComputerPick = false;
 
@@ -611,7 +607,7 @@ public class BoosterDraft implements IBoosterDraft {
             pl.newPack();
         }
         if (this.getDraftLog() != null) {
-            this.addLog("Round " + this.nextBoosterGroup + " is starting...");
+            this.addLog("Round " + this.nextBoosterGroup + " is starting...", null);
         }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
         return true;
@@ -654,14 +650,6 @@ public class BoosterDraft implements IBoosterDraft {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
 
-        // Do any players have a Canal Dredger?
-        List<LimitedPlayer> dredgers = new ArrayList<>();
-        for (LimitedPlayer pl : this.players) {
-            if (pl.hasCanalDredger()) {
-                dredgers.add(pl);
-            }
-        }
-
         Map<DraftPack, LimitedPlayer> toPass = new HashMap<>();
         for (int i = 0; i < this.podSize; i++) {
             LimitedPlayer pl = this.players.get(i);
@@ -670,34 +658,14 @@ public class BoosterDraft implements IBoosterDraft {
             if (passingPack == null)
                 continue;
 
-            LimitedPlayer passToPlayer = null;
             if (passingPack.isEmpty()) {
                 debugPrint("Pack #" + passingPack.getId() + " is empty. Discarding.");
                 continue;
             }
 
-            if (passingPack.size() == 1) {
-                if (dredgers.size() == 1) {
-                    passToPlayer = dredgers.get(0);
-                } else if (dredgers.size() > 1) {
-                    // Multiple dredgers, so we need to choose one to pass to
-                    if (dredgers.contains(pl)) {
-                        // If the current player has a Canal Dredger, they should pass to themselves
-                        passToPlayer = pl;
-                    } else if (pl instanceof LimitedPlayerAI) {
-                        // Maybe the AI could have more knowledge about the other players.
-                        // Like don't pass to players that have revealed certain cards or colors
-                        // But random is probably fine for now
-                        Collections.shuffle(dredgers);
-                        passToPlayer = dredgers.get(0);
-                    } else {
-                        // Human player, so we need to ask them
-                        passToPlayer = SGuiChoose.one("Which player with Canal Dredger should we pass the last card to?", dredgers);
-                    }
-                }
-                if(passToPlayer != null)
-                    debugPrint("Last card in pack " + passingPack.getId() + " passed to Player[" + passToPlayer.order + "] (Canal Dredger)");
-            }
+            routeLastCard(pl, passingPack);
+            LimitedPlayer passToPlayer = passingPack.getDestination();
+            passingPack.setDestination(null);
 
             if (passToPlayer == null) {
                 passToPlayer = keepsPackAfterPick(pl)
@@ -710,6 +678,8 @@ public class BoosterDraft implements IBoosterDraft {
             toPass.put(passingPack, passToPlayer);
         }
         toPass.forEach((pack, player) -> player.receiveOpenedPack(pack));
+        pendingSkips.forEach(LimitedPlayer::consumeSkip);
+        pendingSkips.clear();
 
         if(ForgePreferences.DEV_MODE) {
             int[] packCounts = players.stream().mapToInt((p) -> p.packQueue.size()).toArray();
@@ -724,6 +694,10 @@ public class BoosterDraft implements IBoosterDraft {
             LimitedPlayer pl = this.players.get(i);
             if (pl.shouldSkipThisPick()) {
                 pl.debugPrint("Skipped (shouldSkipThisPick)");
+                DraftPack head = pl.nextChoice();
+                if (head != null && !head.isEmpty()) {
+                    pendingSkips.put(pl, head);
+                }
                 continue;
             }
 
@@ -731,8 +705,8 @@ public class BoosterDraft implements IBoosterDraft {
             Boolean passPack;
             do {
                 // THe player holding onto the pack to draft an extra card... Do it now.
-                passPack = pl.draftCard(pl.chooseCard());
-            } while (passPack != null && !passPack);
+                passPack = ((LimitedPlayerAI) pl).draftNext();
+            } while (Boolean.FALSE.equals(passPack));
         }
     }
 
@@ -752,10 +726,10 @@ public class BoosterDraft implements IBoosterDraft {
 
     // Return false is the pack will be passed
     @Override
-    public boolean setChoice(final PaperCard c, DeckSection section) {
+    public boolean setChoice(final PaperCard c, DeckSection section, DraftAction variant) {
         final DraftPack thisBooster = this.localPlayer.nextChoice();
 
-        if (!thisBooster.contains(c)) {
+        if (!localPlayer.isPackHidden() && !thisBooster.contains(c)) {
             System.out.println("BoosterDraft : setChoice() error - card not found - " + c
                     + " - booster pack = " + thisBooster);
             return false;
@@ -763,7 +737,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         recordDraftPick(thisBooster, c);
 
-        boolean passPack = this.localPlayer.draftCard(c, section);
+        boolean passPack = Boolean.TRUE.equals(this.localPlayer.draftCard(c, section, variant));
         if (passPack) {
             // Computer players do their extra drafts in computerChoose.
             // Human players get handed the same pack twice by nextChoice.
@@ -782,23 +756,57 @@ public class BoosterDraft implements IBoosterDraft {
     @Override
     public void skipChoice() {
         this.localPlayer.debugPrint("Skipped pick.");
+        pendingSkips.put(localPlayer, localPlayer.nextChoice());
         this.passPacks();
         readyForComputerPick = true;
     }
 
     public void postDraftActions() {
-        List<LimitedPlayer> brokers = new ArrayList<>();
+        // Uses are counted once, before any trade, so a traded Deal Broker adds nothing
+        Map<LimitedPlayer, Integer> uses = new LinkedHashMap<>();
         for (LimitedPlayer pl : this.players) {
-            if (pl.hasBrokers()) {
-                brokers.add(pl);
+            int n = pl.brokerUses();
+            if (n > 0) {
+                uses.put(pl, n);
             }
         }
-
+        List<LimitedPlayer> brokers = new ArrayList<>(uses.keySet());
         Collections.shuffle(brokers);
-        for(LimitedPlayer pl : brokers) {
-            pl.activateBrokers(this.players);
-        }
+        runBrokers(brokers, uses, 0);
+    }
 
+    private void runBrokers(List<LimitedPlayer> brokers, Map<LimitedPlayer, Integer> uses, int index) {
+        if (index >= brokers.size()) {
+            return;
+        }
+        LimitedPlayer broker = brokers.get(index);
+        broker.activateBrokers(this.players, uses.get(broker), () -> runBrokers(brokers, uses, index + 1));
+    }
+
+    /** Sets the pack's Canal Dredger recipient, asking the passer when several seats qualify. */
+    public void routeLastCard(LimitedPlayer passer, DraftPack pack) {
+        if (pack.getDestination() != null || pack.size() != 1) {
+            return;
+        }
+        List<LimitedPlayer> eligible = players.stream()
+                .filter(p -> p.hasFaceUp(LimitedPlayer.Effect.LAST_CARD) && !p.shouldSkipThisPick())
+                .collect(Collectors.toList());
+        if (eligible.size() == 1) {
+            pack.setDestination(eligible.get(0));
+        } else if (eligible.size() > 1) {
+            passer.chooseDredgerSeat(eligible, pack, pack::setDestination);
+        }
+    }
+    @Override
+    public void addPrivateLog(LimitedPlayer seat, String message, PaperCard card) {
+        if (draftLog == null) {
+            return;
+        }
+        if (forNetwork) {
+            draftLog.addPrivateLogEntry(seat.order, message, card);
+        } else if (seat == localPlayer) {
+            draftLog.addLogEntry(message, card);
+        }
     }
 
 
@@ -910,9 +918,9 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     @Override
-    public void addLog(String message) {
+    public void addLog(String message, PaperCard card) {
         if (this.getDraftLog() != null) {
-            this.getDraftLog().addLogEntry(message);
+            this.getDraftLog().addLogEntry(message, card);
         }
         System.out.println("[DRAFT] " + message);
     }

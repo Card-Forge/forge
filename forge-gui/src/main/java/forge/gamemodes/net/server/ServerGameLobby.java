@@ -14,7 +14,10 @@ import forge.gamemodes.net.EventFormat;
 import forge.gamemodes.net.EventParticipant;
 import forge.gamemodes.net.EventPhase;
 import forge.gamemodes.net.NetworkEvent;
+import forge.gamemodes.net.event.DraftActivateEvent;
 import forge.gamemodes.net.event.DraftPickEvent;
+import forge.gamemodes.net.event.DraftPromptResponseEvent;
+import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.event.ReceiveEventPoolEvent;
 import forge.gui.interfaces.IGuiGame;
 import forge.util.IHasForgeLog;
@@ -27,6 +30,8 @@ import java.util.List;
 import java.util.Set;
 
 public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
+    public static final int HOST_LOBBY_SLOT = 0;
+
     /** Returned by {@link #startDraftEvent} with the info the UI needs for overlay/log setup. */
     public record DraftStartResult(String[] names, boolean[] aiFlags, int hostSeatIndex, int totalPacks) {}
 
@@ -399,27 +404,31 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     }
 
     /**
-     * Route an incoming draft pick from a client to the draft host. When the
-     * pick came over the wire, {@code expectedLobbySlot} identifies the
-     * submitting client's lobby slot so we can verify it owns the seat —
-     * otherwise any client could submit picks for anyone. Host-local picks
-     * (where the host is the picker) pass -1 to skip the slot check.
+     * Route a draft event to the draft host after checking that {@code lobbySlot}
+     * owns the event's seat, so no client can act for another seat.
      */
-    public synchronized void handleDraftPick(DraftPickEvent pickEvent, int expectedLobbySlot) {
+    public synchronized void routeDraftEvent(NetEvent event, int lobbySlot) {
         if (draftHost == null) {
-            netLog.warn("Draft pick received but no draft in progress");
+            netLog.warn("Draft event received but no draft in progress");
             return;
         }
-        int seat = pickEvent.getSeatIndex();
-        if (expectedLobbySlot >= 0) {
-            int ownerSlot = findLobbySlotForSeat(seat);
-            if (ownerSlot != expectedLobbySlot) {
-                netLog.warn("Rejecting pick from lobby slot {} for seat {} (owner slot {})",
-                        expectedLobbySlot, seat, ownerSlot);
-                return;
-            }
+        if (event instanceof DraftPickEvent pick && ownsSeat(pick.getSeatIndex(), lobbySlot)) {
+            draftHost.handlePick(pick.getSeatIndex(), pick.getSeq(), pick.getCard(), pick.getVariant());
+        } else if (event instanceof DraftActivateEvent activate && ownsSeat(activate.getSeatIndex(), lobbySlot)) {
+            draftHost.handleActivate(activate.getSeatIndex(), activate.getAction());
+        } else if (event instanceof DraftPromptResponseEvent response && ownsSeat(response.getSeatIndex(), lobbySlot)) {
+            draftHost.handlePromptResponse(response.getSeatIndex(), response.getPromptId(), response.getChosen());
         }
-        draftHost.handlePick(seat, pickEvent.getCard());
+    }
+
+    private boolean ownsSeat(int seat, int lobbySlot) {
+        int ownerSlot = findLobbySlotForSeat(seat);
+        if (lobbySlot < 0 || ownerSlot != lobbySlot) {
+            netLog.warn("Rejecting draft event from lobby slot {} for seat {} (owner slot {})",
+                    lobbySlot, seat, ownerSlot);
+            return false;
+        }
+        return true;
     }
 
     /** Lobby slot of the participant occupying the given seat, or -1 if none. */
