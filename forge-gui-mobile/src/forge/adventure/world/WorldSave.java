@@ -2,7 +2,6 @@ package forge.adventure.world;
 
 import forge.Forge;
 import com.badlogic.gdx.Gdx;
-import forge.Forge;
 import forge.OverlayText;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
