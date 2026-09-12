@@ -6,8 +6,8 @@ import java.util.Map;
 
 import forge.deck.DeckBase;
 import forge.game.GameType;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.PaperToken;
 import forge.itemmanager.TokenManager;
 import forge.model.FModel;
@@ -22,9 +22,6 @@ import forge.util.Localizer;
 
 public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
 
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
-    private DragCell probsParent = null;
 
     private List<PaperToken> fullCatalogCards;
 
@@ -129,9 +126,7 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
         this.getBtnRemove4().setVisible(false);
 
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        probsParent = removeTab(VProbabilities.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE, VProbabilities.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -165,16 +160,7 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
 
         //TODO: Remove filter for SItemManagerUtil.StatTypes.PACK
 
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (probsParent != null) {
-            probsParent.addDoc(VProbabilities.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 
 }

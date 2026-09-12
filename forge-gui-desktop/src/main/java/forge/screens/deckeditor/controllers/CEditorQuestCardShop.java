@@ -29,8 +29,8 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestSpellShop;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gui.UiCommand;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
@@ -77,9 +77,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final ItemPool<InventoryItem> fullCatalogCards
             = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), InventoryItem.class);
     private boolean showingFullCatalog = false;
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
-    private DragCell probsParent = null;
 
     // remember changed gui elements
     private String CCTabLabel = "";
@@ -282,9 +279,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         //TODO: Add filter for SItemManagerUtil.StatTypes.PACK
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        probsParent = removeTab(VProbabilities.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE, VProbabilities.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -325,15 +320,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         //TODO: Remove filter for SItemManagerUtil.StatTypes.PACK
 
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (probsParent != null) {
-            probsParent.addDoc(VProbabilities.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 }

@@ -40,8 +40,8 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
@@ -76,8 +76,6 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
 
     private Map<PaperCard, Integer> decksUsingMyCards;
 
@@ -431,8 +429,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         });
         this.getCbxSection().setVisible(true);
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE);
 
         if (this.controller.getModel() == null) {
             this.getDeckController().setModel(new Deck());
@@ -459,12 +456,6 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     @Override
     public void resetUIChanges() {
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 }

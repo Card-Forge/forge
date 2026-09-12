@@ -30,8 +30,8 @@ import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.WinstonDraft;
 import forge.gui.UiCommand;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -66,8 +66,6 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private String ccTakeLabel = "Take pile";
     private String ccPassLabel = "Pass pile";
 
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
     private boolean saved = false;
 
     //========== Constructor
@@ -306,8 +304,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getBtnAdd().setCommand((UiCommand) CEditorWinstonProcess.this::takePile);
         this.getBtnAdd4().setCommand((UiCommand) CEditorWinstonProcess.this::passPile);
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE);
 
         // set catalog table to single-selection only mode
         //getCatalogManager().setAllowMultipleSelections(false);
@@ -344,13 +341,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
 
         // set catalog table back to free-selection mode
         getCatalogManager().setAllowMultipleSelections(true);

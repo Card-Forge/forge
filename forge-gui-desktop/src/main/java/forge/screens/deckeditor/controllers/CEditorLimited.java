@@ -33,8 +33,8 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.net.EventFormat;
 import forge.gui.UiCommand;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -65,12 +65,6 @@ import forge.util.storage.IStorage;
 public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
 
     private final DeckController<T> controller;
-    private DragCell constructedDecksParent = null;
-    private DragCell commanderDecksParent = null;
-    private DragCell oathbreakerDecksParent = null;
-    private DragCell brawlDecksParent = null;
-    private DragCell tinyLeadersDecksParent = null;
-    private DragCell deckGenParent = null;
     private final List<DeckSection> allSections = new ArrayList<>();
 
     /** Picks the editor screen for a network event deck from its eventFormat tag. */
@@ -250,12 +244,9 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
         this.getCbxSection().setVisible(true);
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
-        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
-        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
-        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -274,24 +265,6 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
         CSubmenuDraft.SINGLETON_INSTANCE.update();
         CSubmenuSealed.SINGLETON_INSTANCE.update();
 
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (constructedDecksParent != null) {
-            constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (commanderDecksParent != null) {
-            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
-        }
-        if (oathbreakerDecksParent != null) {
-            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
-        }
-        if (brawlDecksParent!= null) {
-            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
-        }
-        if (tinyLeadersDecksParent != null) {
-            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 }
