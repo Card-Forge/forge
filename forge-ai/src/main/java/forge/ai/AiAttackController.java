@@ -20,6 +20,7 @@ package forge.ai;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import forge.ai.ability.AnimateAi;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -1739,40 +1740,85 @@ public class AiAttackController {
     }
 
     private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, Integer maxAttack) {
-        // TODO: detect Revenge of Ravens by the trigger instead of by name
-        boolean revengeOfRavens = false;
-        if (defender instanceof Player player) {
-            revengeOfRavens = !CardLists.filter(player.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
-        } else if (defender instanceof Card card) {
-            revengeOfRavens = !CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
-        }
-
-        if (!revengeOfRavens) {
+        int lifeLossPerAttacker = lifeLostPerAttacker(defender);
+        if (lifeLossPerAttacker <= 0) {
             return true;
         }
 
         int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
         maxAttack = Objects.requireNonNullElse(maxAttack, Integer.MAX_VALUE - 1);
-        if (Math.min(maxAttack, numForcedAttackers) >= life) {
+        if (lifeLossPerAttacker * Math.min(maxAttack, numForcedAttackers) >= life) {
             return false;
         }
 
-        // Remove all 1-power attackers since they usually only hurt the attacker
+        // Remove all attackers whose damage wouldn't outweigh the life we pay to send them
         // TODO: improve to account for possible combat effects coming from attackers like that
         CardCollection attUnsafe = new CardCollection();
         for (Card attacker : attackersLeft) {
-            if (attacker.getNetCombatDamage() <= 1) {
+            if (attacker.getNetCombatDamage() <= lifeLossPerAttacker) {
                 attUnsafe.add(attacker);
             }
         }
         attackersLeft.removeAll(attUnsafe);
-        if (Math.min(maxAttack, attackersLeft.size()) >= life) {
+        if (lifeLossPerAttacker * Math.min(maxAttack, attackersLeft.size()) >= life) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * How much life the AI loses for each creature it sends at this defender, from cards like
+     * Revenge of Ravens, Hissing Miasma, Blood Reckoning and Marchesa's Decree.
+     *
+     * Found by looking for the trigger rather than by card name: an Attacks trigger on the
+     * defending player's battlefield whose effect makes the attacking player lose life. Cards that
+     * punish the creature instead of its controller, such as Circle of Flame, deliberately do not
+     * count here, since the cost of attacking is paid by the creature and is already handled by the
+     * usual combat evaluation.
+     */
+    private static int lifeLostPerAttacker(final GameEntity defender) {
+        final Player defendingPlayer;
+        if (defender instanceof Player player) {
+            defendingPlayer = player;
+        } else if (defender instanceof Card card) {
+            defendingPlayer = card.getController();
+        } else {
+            return 0;
+        }
+
+        int total = 0;
+        for (Card c : defendingPlayer.getCardsIn(ZoneType.Battlefield)) {
+            for (Trigger t : c.getTriggers()) {
+                if (t.getMode() != TriggerType.Attacks || !t.hasParam("Attacked")) {
+                    continue;
+                }
+                if (!t.zonesCheck(c.getGame().getZoneOf(c))) {
+                    continue;
+                }
+                total += lifeLossFromTriggerEffect(t.ensureAbility());
+            }
+        }
+        return total;
+    }
+
+    /** Walks the trigger's ability chain looking for life loss aimed at the attacking player. */
+    private static int lifeLossFromTriggerEffect(SpellAbility sa) {
+        int total = 0;
+        for (SpellAbility part = sa; part != null; part = part.getSubAbility()) {
+            if (part.getApi() != ApiType.LoseLife
+                    || !"TriggeredAttackerController".equals(part.getParam("Defined"))) {
+                continue;
+            }
+            // only trust a plain number; anything computed could depend on state we can't evaluate
+            // here, and guessing it would make the AI refuse to attack for no reason
+            String amount = part.getParamOrDefault("LifeAmount", "1");
+            if (!StringUtils.isNumeric(amount)) {
+                continue;
+            }
+            total += Integer.parseInt(amount);
+        }
+        return total;
     }
 
     public final static int countExaltedBonus(Player p) {
