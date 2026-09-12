@@ -134,7 +134,7 @@ public class VLobby implements ILobbyView {
 
     // Play Type selector (network only). Mode state lives in CLobby; this combo is the widget.
     private final FComboBoxPanel<CLobby.LobbyMode> cboModePanel =
-            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblPlayType"),
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblPlayMode") + ":",
                     ImmutableList.copyOf(CLobby.LobbyMode.values()));
 
     // Event config panel (top of right panel in Draft/Sealed mode)
