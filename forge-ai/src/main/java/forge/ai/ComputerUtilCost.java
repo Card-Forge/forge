@@ -5,10 +5,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.card.MagicColor;
+import forge.game.cost.Cost;
+import forge.card.mana.ManaCostShard;
+import forge.game.cost.CostPartMana;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.GameObject;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -647,14 +653,121 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            for (SpellAbility sa : c.getManaAbilities()) {
-                if (sa.getManaPart() != null) {
-                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
-                }
+            // the raw Produced$ is a script string, and every caller runs this through
+            // ColorSet.fromNames, which drops anything that is not a colour name - so an "Any"
+            // source used to contribute nothing at all
+            colorsAvailable.addAll(c.getProducibleColors());
+            if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further source to add
             }
         }
 
         return colorsAvailable;
+    }
+
+    /**
+     * How many sources of each color the player's board could produce, indexed by
+     * {@link MagicColor.Color#ordinal()}. Counted per card rather than per ability, since a land
+     * with two mana abilities still only taps once.
+     */
+    public static int[] getManaSourceCounts(Player ai) {
+        int[] counts = new int[MagicColor.Color.values().length];
+        for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            addManaSources(c, counts);
+        }
+        return counts;
+    }
+
+    /** Adds what one card could produce to counts from {@link #getManaSourceCounts}. */
+    public static void addManaSources(Card c, int[] counts) {
+        final Set<String> producible = c.getProducibleColors();
+        for (MagicColor.Color color : MagicColor.Color.values()) {
+            if (producible.contains(color.getName())) {
+                counts[color.ordinal()] += 1;
+            }
+        }
+    }
+
+    /**
+     * Cast options in hand that one more land could plausibly turn on: not payable as things
+     * stand, and within one mana of reach. Reads {@code ai}'s hand, so callers deciding on behalf
+     * of someone else must already have established they are entitled to look - see the opponent
+     * check in ChangeZoneAi#basicManaFixing. Anything further away cannot become castable this turn
+     * however well the color lines up, and the arithmetic check is free where the payability probe
+     * is not - so it goes first and keeps most of the hand off the mana solver entirely.
+     * <p>
+     * Computed once per priority; the land decision asks about several candidates and the answer
+     * does not vary between them.
+     */
+    public static List<SpellAbility> getOptionsWithinOneLand(final Player ai) {
+        return AiCache.getCached("optionsWithinOneLand", () -> {
+            final int reach = ComputerUtilMana.getAvailableManaEstimate(ai, false) + 1;
+            final List<SpellAbility> near = Lists.newArrayList();
+            for (Card c : ai.getCardsIn(ZoneType.Hand)) {
+                for (SpellAbility sa : c.getAllPossibleAbilities(ai, false)) {
+                    if (!sa.isSpell()) {
+                        continue;
+                    }
+                    final Cost costs = sa.getPayCosts();
+                    if (costs != null && costs.getTotalMana().getCMC() > reach) {
+                        continue;
+                    }
+                    if (!isPayableWith(sa, ai, null)) {
+                        near.add(sa);
+                    }
+                }
+            }
+            return near;
+        }, ImmutableList.of(AiCache::identity), ai);
+    }
+
+    /**
+     * How many held cards one more source of this color would make castable right away - not
+     * merely closer in color, which the source counting already grades. Cached per color rather
+     * than per card, because every land producing that color answers the same.
+     */
+    public static int countUnlockedNow(final Player ai, final MagicColor.Color color) {
+        return AiCache.getCached("unlockedNowByColor", () -> {
+            int unlocked = 0;
+            for (SpellAbility sa : getOptionsWithinOneLand(ai)) {
+                if (isPayableWith(sa, ai, color)) {
+                    unlocked += 1;
+                }
+            }
+            return unlocked;
+        }, ImmutableList.of(AiCache::identity, Object::equals), ai, color);
+    }
+
+    /**
+     * Whether the AI could pay for this spell given mana it does not have yet: {@code extraGeneric}
+     * more mana of any kind, and/or one more source of {@code extraSource}. Playing a land supplies
+     * the second, untapping one supplies either, and both are asked the same way - pay that part of
+     * the cost up front, the way convoke pays a pip, and put what is left to the mana solver.
+     * Nothing is moved, and the answer is the engine's own.
+     */
+    public static boolean isPayableWith(final SpellAbility sa, final Player ai,
+            final int extraGeneric, final MagicColor.Color extraSource) {
+        final CostPartMana costMana = sa.getPayCosts() == null ? null : sa.getPayCosts().getCostMana();
+        if (costMana == null) {
+            return true;
+        }
+        if (extraGeneric <= 0 && extraSource == null) {
+            return ComputerUtilMana.canPayManaCost(sa, ai, 0, false);
+        }
+        final ManaCostBeingPaid probe = new ManaCostBeingPaid(costMana.getManaCostFor(sa));
+        if (extraSource != null && probe.payManaViaConvoke(extraSource.getColorMask()) == null) {
+            // that color pays nothing here, so the answer is whatever it already was
+            return ComputerUtilMana.canPayManaCost(sa, ai, 0, false);
+        }
+        if (extraGeneric > 0) {
+            probe.decreaseShard(ManaCostShard.GENERIC, extraGeneric);
+        }
+        return probe.isPaid() || ComputerUtilMana.canPayManaCost(probe, sa, ai, false);
+    }
+
+    /** As {@link #isPayableWith(SpellAbility, Player, int, MagicColor.Color)} with no extra generic. */
+    public static boolean isPayableWith(SpellAbility sa, Player ai, MagicColor.Color extraSource) {
+        return isPayableWith(sa, ai, 0, extraSource);
     }
 
     public static boolean isFreeCastAllowedByPermanent(Player player, String altCost) {
