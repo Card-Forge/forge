@@ -1,0 +1,13 @@
+Name:Kiora of Salt and Sand
+ManaCost:1 G U
+Types:Legendary Creature Merfolk Noble
+PT:2/4
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | CheckSVar$ X | TriggerDescription$ Whenever you attack, if you've activated a loyalty ability this turn, untap target attacking creature. It can't be blocked this turn.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.attacking | ValidTgtsDesc$ attacking creature | SubAbility$ DBUnblockable | AILogic$ Pump
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWLeviathan | Description$ Planeswalkers you control have "[-8]: Create an 8/8 blue Leviathan creature token with hexproof."
+SVar:X:Count$ThisTurnActivated_Activated.Loyalty+YouCtrl
+SVar:PWLeviathan:DB$ Token | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | TokenScript$ u_8_8_leviathan_hexproof | TokenOwner$ You | SpellDescription$ Create an 8/8 blue Leviathan creature token with hexproof.
+SVar:PlayMain1:TRUE
+Oracle:Whenever you attack, if you've activated a loyalty ability this turn, untap target attacking creature. It can't be blocked this turn.\nPlaneswalkers you control have "[-8]: Create an 8/8 blue Leviathan creature token with hexproof."
