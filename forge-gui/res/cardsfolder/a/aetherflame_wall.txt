@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Wall
 PT:0/4
 K:Defender
-A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-S:Mode$ CanBlockIfShadow | ValidAttacker$ Creature.withShadow | ValidBlocker$ Card.Self | Description$ CARDNAME can block creatures with shadow as though they didn't have shadow.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+S:Mode$ CanBlockIfShadow | ValidAttacker$ Creature.withShadow | ValidBlocker$ Card.Self | Description$ This creature can block creatures with shadow as though they didn't have shadow.
 S:Mode$ CantBlock | ValidCard$ Card.Self+withShadow | Secondary$ True
-Oracle:Defender\nAetherflame Wall can block creatures with shadow as though they didn't have shadow.\n{R}: Aetherflame Wall gets +1/+0 until end of turn.
+Oracle:Defender\nThis creature can block creatures with shadow as though they didn't have shadow.\n{R}: This creature gets +1/+0 until end of turn.

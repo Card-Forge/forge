@@ -3,5 +3,5 @@ ManaCost:1 R
 Types:Creature Wall
 PT:0/5
 K:Defender
-S:Mode$ CanBlockIfShadow | ValidAttacker$ Creature.withShadow | ValidBlocker$ Card.Self | Description$ CARDNAME can block creatures with shadow as though it had shadow.
-Oracle:Defender (This creature can't attack.)\nWall of Diffusion can block creatures with shadow as though Wall of Diffusion had shadow.
+S:Mode$ CanBlockIfShadow | ValidAttacker$ Creature.withShadow | ValidBlocker$ Card.Self | Description$ This creature can block creatures with shadow as though it had shadow.
+Oracle:Defender (This creature can't attack.)\nThis creature can block creatures with shadow as though it had shadow.
