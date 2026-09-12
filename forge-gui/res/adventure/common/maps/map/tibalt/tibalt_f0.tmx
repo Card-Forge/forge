@@ -187,6 +187,7 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;As you approach, the castle gates swing open with an eerie creak, revealing a darkened courtyard enveloped in an unsettling silence. The ground beneath your feet feels cold and unyielding, as if the very earth recoils from the presence of Tibalt's domain. Sinister gargoyles leer down from the castle walls, their grotesque forms seeming to come alive in the fading light.&quot;,
+    &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f0.189.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;action&quot;: [
@@ -199,7 +200,8 @@
               &quot;deleteMapObject&quot;: -1
           }
         ],
-        &quot;name&quot;: &quot;(Continue)&quot;
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
       }
     ]
   }

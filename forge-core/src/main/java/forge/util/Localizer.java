@@ -19,6 +19,8 @@ public class Localizer {
     private Locale locale;
     private ResourceBundle resourceBundle;
     private ResourceBundle englishBundle;
+    private ResourceBundle adventureBundle;
+    private String currentLanguageRegionID;
     private boolean silent = false;
     private boolean english = false;
 
@@ -81,10 +83,12 @@ public class Localizer {
     }
     public String getMessage(boolean forcedEnglish, final String key, final Object... messageArguments) {
         MessageFormat formatter = null;
+        String rawValue = null;
 
         try {
             //formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
-            formatter = new MessageFormat(english || forcedEnglish ? englishBundle.getString(key) : resourceBundle.getString(key), english || forcedEnglish ? Locale.ENGLISH : locale);
+            rawValue = lookup(key, english || forcedEnglish);
+            formatter = new MessageFormat(rawValue, english || forcedEnglish ? Locale.ENGLISH : locale);
         } catch (final IllegalArgumentException | MissingResourceException e) {
             if (!silent)
                 e.printStackTrace();
@@ -101,6 +105,7 @@ public class Localizer {
             try {
                 formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
                 forcedEnglish = true;
+                rawValue = englishBundle.getString(key);
             } catch (final IllegalArgumentException | MissingResourceException e) {
                 if (!silent) {
                     e.printStackTrace();
@@ -116,7 +121,7 @@ public class Localizer {
         String formattedMessage = "CHAR ENCODING ERROR";
         final String[] charsets = { "ISO-8859-1", "UTF-8" };
         //Support non-English-standard characters
-        String detectedCharset = charset(english || forcedEnglish ? englishBundle.getString(key) : resourceBundle.getString(key), charsets);
+        String detectedCharset = charset(rawValue, charsets);
 
         final int argLength = messageArguments.length;
         Object[] syncEncodingMessageArguments = new Object[argLength];
@@ -157,6 +162,7 @@ public class Localizer {
             }
 
             ClassLoader loader = new URLClassLoader(urls);
+            currentLanguageRegionID = languageRegionID;
 
             try {
                 englishBundle = ResourceBundle.getBundle("en-US", new Locale("en", "US"), loader);
@@ -167,10 +173,35 @@ public class Localizer {
                 e.printStackTrace();
             }
 
+            adventureBundle = null;
+
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
 
             notifyObservers();
         }
+    }
+
+    public void loadAdventureBundle(final String languagesDirectory) {
+        if (currentLanguageRegionID == null || languagesDirectory == null || languagesDirectory.isEmpty()) {
+            adventureBundle = null;
+            return;
+        }
+        try {
+            URL[] urls = { new File(languagesDirectory).toURI().toURL() };
+            ClassLoader adventureLoader = new URLClassLoader(urls);
+            adventureBundle = ResourceBundle.getBundle("adventure-" + currentLanguageRegionID, locale, adventureLoader);
+        } catch (final MalformedURLException | NullPointerException | MissingResourceException e) {
+            adventureBundle = null;
+        }
+    }
+
+    private String lookup(final String key, final boolean forceEnglish) {
+        if (!forceEnglish && adventureBundle != null) {
+            try {
+                return adventureBundle.getString(key);
+            } catch (final MissingResourceException ignored) {}
+        }
+        return (forceEnglish ? englishBundle : resourceBundle).getString(key);
     }
 
     public void registerObserver(LocalizationChangeObserver observer) {
