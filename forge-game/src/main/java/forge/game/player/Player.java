@@ -105,6 +105,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int spellsCastLastTurn;
     private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
     private int investigatedThisTurn;
+    private int scryThisTurn;
     private int surveilThisTurn;
     private int committedCrimeThisTurn;
     private int numFlipsThisTurn;
@@ -1093,8 +1094,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         return surveilThisTurn;
     }
 
-    public void resetSurveilThisTurn() {
-        surveilThisTurn = 0;
+    public int getScryThisTurn() {
+        return scryThisTurn;
+    }
+    public void incScryThisTurn() {
+        scryThisTurn++;
     }
 
     public boolean canMulligan() {
@@ -1102,29 +1106,24 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canDraw() {
-        return canDrawAmount(1);
+        return canDraw(1);
     }
-
-    public final boolean canDrawAmount(int amount) {
+    public final boolean canDraw(int amount) {
         return StaticAbilityCantDraw.canDrawThisAmount(this, amount);
     }
 
     public final CardCollectionView drawCard() {
         return drawCards(1);
     }
-
     public final CardCollectionView drawCards(final int n) {
         return drawCards(n, null, AbilityKey.newMap(), this.getZone(ZoneType.Hand));
     }
-
     public final CardCollectionView drawCards(final int n, PlayerZone zone) {
         return drawCards(n, null, AbilityKey.newMap(), zone);
     }
-
     public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params) {
         return drawCards(n, cause, params, this.getZone(ZoneType.Hand));
     }
-
     public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params, PlayerZone zone) {
         final CardCollection drawn = new CardCollection();
         if (n <= 0) {
@@ -2258,9 +2257,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.FirstTime, investigatedThisTurn == 1);
         game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams, false);
     }
-    public final void resetInvestigatedThisTurn() {
-        investigatedThisTurn = 0;
-    }
 
     public final void addSacrificedThisTurn(final Card cpy, final SpellAbility source) {
         // Play the Sacrifice sound
@@ -2471,8 +2467,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         setTappedLandForManaThisTurn(false);
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
         resetLandsPlayedThisTurn();
-        resetInvestigatedThisTurn();
-        resetSurveilThisTurn();
+        investigatedThisTurn = 0;
+        scryThisTurn = 0;
+        surveilThisTurn = 0;
         resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
