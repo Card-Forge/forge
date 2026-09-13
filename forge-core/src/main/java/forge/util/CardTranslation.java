@@ -345,32 +345,24 @@ public class CardTranslation {
                 || !(oracle[0].startsWith("Enchant ") || isKeywordLine(oracle[0]))) {
             return 0;
         }
-        // leaving the last line unmatched is the same thing as pairing from the top
-        return pairingScore(oracle, translated, oracle.length - 1)
-                > pairingScore(oracle, translated, 0) ? 0 : 1;
-    }
-
-    /**
-     * How well the translated lines line up with the English ones when {@code unmatched} is the
-     * English line left without a translation: agreements less disagreements, over the lines
-     * carrying something translation does not alter.
-     */
-    private static int pairingScore(String [] oracle, String [] translated, int unmatched) {
-        int score = 0;
-        for (int i = 0, t = 0; i < oracle.length; i++) {
-            if (i == unmatched) {
+        int asIs = 0, shifted = 0;
+        for (int t = 0; t < translated.length; t++) {
+            List <String> theirs = translationInvariants(translated[t]);
+            // a translated line carrying no marks of its own says nothing either way: plenty
+            // of translations write a cost out in words where the English uses a symbol
+            if (theirs.isEmpty()) {
                 continue;
             }
-            List <String> marks = translationInvariants(oracle[i]);
-            List <String> theirs = translationInvariants(translated[t]);
-            // a translated line carrying none of its own says nothing either way: plenty of
-            // translations write a cost out in words where the English uses a symbol
-            if (!marks.isEmpty() && !theirs.isEmpty()) {
-                score += marks.equals(theirs) ? 1 : -1;
-            }
-            t++;
+            asIs += agreement(oracle[t], theirs);
+            shifted += agreement(oracle[t + 1], theirs);
         }
-        return score;
+        return asIs > shifted ? 0 : 1;
+    }
+
+    /** 1 where the English line's marks are the translated line's, -1 where they differ. */
+    private static int agreement(String oracleLine, List <String> theirs) {
+        List <String> marks = translationInvariants(oracleLine);
+        return marks.isEmpty() ? 0 : marks.equals(theirs) ? 1 : -1;
     }
 
     /**
