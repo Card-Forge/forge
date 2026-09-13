@@ -877,6 +877,8 @@ public class AiAttackController {
             for (final Card attacker : this.attackers) {
                 final GameEntity finalDefender = defender;
                 tasks.add(() -> {
+                    // abort early for timeout
+                    ThreadUtil.checkInterrupt();
                     GameEntity mustAttackDef = null;
                     if (attacker.getSVar("MustAttack").equals("True")) {
                         mustAttackDef = finalDefender;
@@ -941,8 +943,6 @@ public class AiAttackController {
                 ThreadUtil.AIExecutor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-            } finally {
-                ThreadUtil.killAIThreads();
             }
 
             if (attackersLeft.isEmpty()) {

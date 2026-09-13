@@ -3,38 +3,60 @@ package forge.util;
 import java.util.concurrent.*;
 
 public class ThreadUtil {
-    public static final ConcurrentHashMap<Thread, Boolean> activeAIThreads = new ConcurrentHashMap<>();
+    // Reusable ThreadPool for AI Timeout
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
             0, Runtime.getRuntime().availableProcessors(),
-            1L, TimeUnit.SECONDS, // Kill the underlying thread 1s after it becomes idle
-            new SynchronousQueue<>(),  // Hand off tasks directly to the thread with zero queue latency
+            1L, TimeUnit.SECONDS,
+            new SynchronousQueue<>(),
             r -> {
                 Thread t = new Thread(r, "AI ThreadPool");
                 t.setDaemon(true);
-                activeAIThreads.put(t, Boolean.TRUE);
                 return t;
             },
-            // Dropped tasks disappear safely
             new ThreadPoolExecutor.DiscardPolicy()
-    );
+    ) {
+        // This hooks into .submit() or .execute() automatically
+        @Override
+        protected <T> RunnableFuture<T> newTaskFor(Callable<T> callable) {
+            return new TrackableFutureTask<>(callable);
+        }
 
-    public static void killAIThreads() {
-        activeAIThreads.keySet().forEach(t -> {
-            if (t.isAlive()) {
-                // Ask it to stop cooperatively
-                t.interrupt();
-                try {
-                    t.join(1000); // give it up to 1s to exit
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
+        @Override
+        protected <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
+            return new TrackableFutureTask<>(runnable, value);
+        }
+    };
+
+    public static class TrackableFutureTask<V> extends FutureTask<V> {
+        private volatile Thread runnerThread;
+
+        public TrackableFutureTask(Callable<V> callable) {
+            super(callable);
+        }
+
+        public TrackableFutureTask(Runnable runnable, V result) {
+            super(runnable, result);
+        }
+
+        @Override
+        public void run() {
+            runnerThread = Thread.currentThread();
+            try {
+                super.run();
+            } finally {
+                runnerThread = null; // Instantly release the Thread reference to prevent memory leaks
             }
-        });
-        cleanAIThread(); // remove dead ones from the map
+        }
+
+        public Thread getRunnerThread() {
+            return runnerThread;
+        }
     }
 
-    public static void cleanAIThread() {
-        activeAIThreads.keySet().removeIf(thread -> !thread.isAlive());
+    public static void checkInterrupt() throws InterruptedException {
+        if (Thread.currentThread().isInterrupted()) {
+            throw new InterruptedException("AI evaluation interrupted");
+        }
     }
 
     static {

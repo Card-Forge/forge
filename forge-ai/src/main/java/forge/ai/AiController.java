@@ -1600,10 +1600,8 @@ public class AiController {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                if (Thread.currentThread().isInterrupted()) {
-                    throw new InterruptedException("AI evaluation interrupted");
-                }
-
+                // check interrupt status and fire interrupt to stop evaluating
+                ThreadUtil.checkInterrupt();
                 // Don't add Counterspells to the "normal" playcard lookups
                 if (skipCounter && sa.getApi() == ApiType.Counter) {
                     continue;
@@ -1684,22 +1682,25 @@ public class AiController {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             e.printStackTrace();
-            future.cancel(true);
 
             // Log stack traces for profiling
-            ThreadUtil.activeAIThreads.keySet().forEach(t -> {
-                StringBuilder sb = new StringBuilder("AI eval thread at timeout:");
-                int sbInitLength = sb.length();
-                StackTraceElement[] evalStack = t.getStackTrace();
-                for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                    sb.append("\n\tat ").append(evalStack[i]);
-                }
-                if (sb.length() > sbInitLength) {
-                    System.out.println(sb);
-                }
-            });
+            if (future instanceof ThreadUtil.TrackableFutureTask) {
+                Thread executionThread = ((ThreadUtil.TrackableFutureTask<?>) future).getRunnerThread();
 
-            ThreadUtil.killAIThreads();
+                if (executionThread != null) {
+                    StringBuilder sb = new StringBuilder("[" + executionThread.getName() + " Timeout]:");
+                    int sbInitLength = sb.length();
+                    StackTraceElement[] evalStack = executionThread.getStackTrace();
+
+                    for (int i = 0; i < Math.min(30, evalStack.length); i++) {
+                        sb.append("\n\tat ").append(evalStack[i]);
+                    }
+                    if (sb.length() > sbInitLength)
+                        System.out.println(sb);
+                }
+            }
+
+            future.cancel(true);
             return null;
 
         } catch (ExecutionException | InterruptedException ie) {
@@ -1707,7 +1708,6 @@ public class AiController {
             if (ie instanceof InterruptedException)
                 Thread.currentThread().interrupt();
             future.cancel(true);
-            ThreadUtil.killAIThreads();
             return null;
 
         }
