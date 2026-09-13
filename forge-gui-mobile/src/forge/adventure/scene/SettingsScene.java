@@ -321,6 +321,7 @@ public class SettingsScene extends UIScene {
         addCheckBox(localizer.getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
         addCheckBox(localizer.getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
         addCheckBox(localizer.getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+        addCheckBox(localizer.getMessage("cbUseAlternateArtApi"), ForgePreferences.FPref.UI_USE_ALTERNATE_CARD_ART_API);
 
         if (!GuiBase.isAndroid()) {
             addCheckBox(localizer.getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);

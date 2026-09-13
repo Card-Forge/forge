@@ -59,11 +59,12 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 return false;
             }
 
-            boolean isScryfallUrl = urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD)
-                    || urlToDownload.startsWith(ForgeConstants.URL_SCRYFALL_CDN);
-            String newdespath = urlToDownload.contains(".fullborder.") || isScryfallUrl ?
+            boolean isCardArtApiUrl = urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD)
+                    || urlToDownload.startsWith(ForgeConstants.URL_SCRYFALL_CDN)
+                    || urlToDownload.startsWith(ForgeConstants.URL_PIC_CARDFORGE_NET_API_DOWNLOAD);
+            String newdespath = urlToDownload.contains(".fullborder.") || isCardArtApiUrl ?
                     TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
-            if (!newdespath.contains(".full") && isScryfallUrl &&
+            if (!newdespath.contains(".full") && isCardArtApiUrl &&
                     !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR) && !destPath.startsWith(ForgeConstants.CACHE_PLANECHASE_PICS_DIR))
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
