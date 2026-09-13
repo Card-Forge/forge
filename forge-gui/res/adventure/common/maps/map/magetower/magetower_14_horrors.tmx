@@ -101,8 +101,9 @@
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
+    &quot;loctext&quot;: &quot;adv.magetower_magetower_14_horrors.102.d.n0.text&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Continue&quot; } 
+    { &quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot; } 
     ]
 }]</property>
    </properties>
