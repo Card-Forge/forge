@@ -1,0 +1,11 @@
+Name:Infinite Coursework
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature. It becomes unprepared.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBUnprepare
+SVar:DBUnprepare:DB$ AlterAttribute | Defined$ Enchanted | Attributes$ Prepared | Activate$ False
+S:Mode$ Continuous | Affected$ Permanent.AttachedBy | RemoveAllAbilities$ True | Description$ Enchanted creature loses all abilities and doesn't untap during its controller's untap step.
+R:Event$ Untap | ValidCard$ Permanent.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Secondary$ True | Description$ Enchanted creature doesn't untap during its controller's untap step.
+Oracle:Enchant creature\nWhen this Aura enters, tap enchanted creature. It becomes unprepared.\nEnchanted creature loses all abilities and doesn't untap during its controller's untap step.
