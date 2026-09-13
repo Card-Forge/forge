@@ -81,6 +81,7 @@ public class ThreadUtil {
 
     public static void checkInterrupt() throws InterruptedException {
         if (Thread.currentThread().isInterrupted()) {
+            Thread.interrupted(); // so we don't need to remember where we miss to clear the flag
             throw new InterruptedException("AI evaluation interrupted");
         }
     }

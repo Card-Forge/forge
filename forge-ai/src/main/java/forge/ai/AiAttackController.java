@@ -910,10 +910,11 @@ public class AiAttackController {
                     numForcedAttackers.incrementAndGet();
                 }
             } catch (InterruptedException e) {
-                Thread.interrupted(); // clear flag
+                // cooperative exit, flag already cleared by ThreadUtil.checkInterrupt();
             } finally {
                 runnerThread.compareAndSet(Thread.currentThread(), null);
                 latch.countDown();
+                Thread.interrupted(); // always clear
             }
         }
     }
