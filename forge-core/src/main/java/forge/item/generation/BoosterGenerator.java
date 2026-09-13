@@ -457,6 +457,7 @@ public class BoosterGenerator {
                 } catch (Exception e) {
                     ps = getPrintSheet(determineSheet);
                 }
+                // instead of grabbing random cards from the print sheet, shuffle once and take the first N cards to avoid duplicates
                 if (convertAllToFoil || convertThisToFoil) {
                     for (PaperCard pc : ps.random(numCardsToGenerate, true)) {
                         paperCards.add(pc.getFoiled());
