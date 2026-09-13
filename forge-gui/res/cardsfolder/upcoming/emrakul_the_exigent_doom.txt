@@ -1,0 +1,16 @@
+Name:Emrakul, the Exigent Doom
+ManaCost:10
+Types:Legendary Creature Eldrazi
+PT:12/12
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When you cast this spell, untap all lands you control.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Land.YouCtrl
+K:Flying
+K:Trample
+K:Ward:Sac<3/Permanent>
+A:AB$ Effect | Cost$ 3 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted & Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
+SVar:Land:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.IsRemembered+!IsImprinted | AddAbility$ Mana | Description$ Target land gains "{T}: Add {C}{C}" until EFFECTSOURCE is cast from exile. You may cast EFFECTSOURCE for as long as it remains exiled.
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsImprinted+IsRemembered | AffectedZone$ Exile | Secondary$ True | Description$ You may cast EFFECTSOURCE for as long as it remains exiled.
+SVar:Cast:Mode$ SpellCast | ValidCard$ Card.IsImprinted+IsRemembered+wasCastFromExile | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:When you cast this spell, untap all lands you control.\nFlying, trample\nWard—Sacrifice three permanents.\n{3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
