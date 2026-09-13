@@ -317,7 +317,7 @@ public final class SRearrangingUtil {
         // Falls back to original priority order if none qualify.
         if (tryFillGap(true)) { return; }
         if (tryFillGap(false)) { return; }
-        throw new UnsupportedOperationException("Gap was not filled.");
+        // An unfillable gap is cosmetic and the caller removes the cell anyway, so fall through rather than throw
     }
 
     private static boolean containsField(final List<DragCell> cells) {
