@@ -195,12 +195,23 @@ public class Config {
         return prefix;
     }
 
+    public String getLang() {
+        return Lang;
+    }
+
     public String getFilePath(String path) {
         return prefix + path;
     }
 
     public String getCommonFilePath(String path) {
         return commonPrefix + path;
+    }
+
+    private String langFilePath(String fullPath, String rootPrefix) {
+        String baseName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
+        String nameNoExt = baseName.replaceFirst("[.][^.]+$", "");
+        String ext = baseName.substring(baseName.lastIndexOf('.'));
+        return (rootPrefix + "languages/" + nameNoExt + "-" + Lang + ext).replace("//", "/");
     }
 
     public FileHandle getFile(String path) {
@@ -211,9 +222,7 @@ public class Config {
         //not cached, look for resource
         System.out.print("Looking for resource " + path + "... ");
         String fullPath = (prefix + path).replace("//", "/");
-        String fileName = fullPath.replaceFirst("[.][^.]+$", "");
-        String ext = fullPath.substring(fullPath.lastIndexOf('.'));
-        String langFile = fileName + "-" + Lang + ext;
+        String langFile = langFilePath(fullPath, prefix);
 
         for (int iter = 1; iter <= 2; iter++) {
             if (Files.exists(Paths.get(langFile))) {
@@ -227,8 +236,7 @@ public class Config {
             }
             //no local resource, check common resources
             fullPath = (commonPrefix + path).replace("//", "/");
-            fileName = fullPath.replaceFirst("[.][^.]+$", "");
-            langFile = fileName + "-" + Lang + ext;
+            langFile = langFilePath(fullPath, commonPrefix);
         }
         return Cache.get(path);
     }
