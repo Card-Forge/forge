@@ -39,10 +39,14 @@ import forge.itemmanager.views.ItemTableColumn;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VProbabilities;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
@@ -279,7 +283,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         //TODO: Add filter for SItemManagerUtil.StatTypes.PACK
 
-        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE, VProbabilities.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE, VProbabilities.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)

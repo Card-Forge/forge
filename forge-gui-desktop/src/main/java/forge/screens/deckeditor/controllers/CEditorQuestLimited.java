@@ -44,8 +44,12 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.StreamUtil;
@@ -230,7 +234,9 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
 
-        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         if (this.controller.getModel() == null) {
             throw new RuntimeException("Expected deck group but found none!");

@@ -39,8 +39,12 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.sanctioned.CSubmenuWinston;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
@@ -304,7 +308,9 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getBtnAdd().setCommand((UiCommand) CEditorWinstonProcess.this::takePile);
         this.getBtnAdd4().setCommand((UiCommand) CEditorWinstonProcess.this::passPile);
 
-        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         // set catalog table to single-selection only mode
         //getCatalogManager().setAllowMultipleSelections(false);
