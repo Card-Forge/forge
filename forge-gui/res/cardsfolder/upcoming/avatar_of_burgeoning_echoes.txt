@@ -3,7 +3,7 @@ ManaCost:G U
 Types:Creature Avatar
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigEmpower | TriggerDescription$ Landfall — Whenever a land you control enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
-SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 2
+SVar:TrigEmpower:DB$ Empower | Type$ Jace | Num$ 2
 S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWAvatarBE | Description$ Planeswalkers you control have "[-10]: Put a +1/+1 counter on target creature for each land you control."
 SVar:PWAvatarBE:AB$ PutCounter | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put a +1/+1 counter on target creature for each land you control.
 SVar:X:Count$Valid Land.YouCtrl
