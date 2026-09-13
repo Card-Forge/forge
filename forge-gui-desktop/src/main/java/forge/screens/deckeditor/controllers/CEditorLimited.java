@@ -247,6 +247,11 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
         SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
                 VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
                 VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
+
+        // The title box is shared with every other editor and only updateCaptions
+        // writes it, so without this it still shows whichever deck the last editor
+        // had open. SEditorIO.saveDeck takes the name to save under from that box.
+        this.controller.updateCaptions();
     }
 
     /* (non-Javadoc)
