@@ -1,0 +1,9 @@
+Name:Chandra's Emberling
+ManaCost:2 R
+Types:Creature Gremlin Elemental
+PT:2/2
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Haste\nWhenever you cast a noncreature spell, put a +1/+1 counter on this creature.
