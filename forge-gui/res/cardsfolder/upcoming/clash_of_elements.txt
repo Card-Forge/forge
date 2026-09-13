@@ -1,0 +1,8 @@
+Name:Clash of Elements
+ManaCost:1 U R
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | ValidTgtsDesc$ nonland permanent | Optional$ True | DefinedPlayer$ TargetedOwner | Chooser$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | SubAbility$ DBDamage | SpellDescription$ Choose target nonland permanent. Its owner may put it on the top of their library. If they do, CARDNAME deals 2 damage to them. If they didn't put the card on top of their library, they put it on the bottom.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedOwner | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose target nonland permanent. Its owner may put it on the top of their library. If they do, Clash of Elements deals 2 damage to them. If they didn't put the card on top of their library, they put it on the bottom.
