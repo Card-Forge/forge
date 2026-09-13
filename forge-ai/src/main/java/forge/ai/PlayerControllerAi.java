@@ -228,6 +228,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
+        Map<Byte, Integer> planned = ManaPaymentPlanner.specifyComboFromActivePayment(sa, colorSet, manaAmount, different);
+        if (planned != null) {
+            return planned;
+        }
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
             Byte chosen = chooseColor("", sa, colorSet);
