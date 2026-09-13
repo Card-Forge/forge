@@ -843,8 +843,8 @@ public class AiAttackController {
         private final CountDownLatch latch;
         private final AttackRequirementsComparator comparator;
 
-        private final AtomicReference<Thread> runnerThread = new AtomicReference<>();
-        private final Thread CANCELLED_MARKER = new Thread();
+        private final AtomicReference<Object> runnerThread = new AtomicReference<>();
+        private final Object CANCELLED_MARKER = new Object();
         private boolean seasonOfTheWitch;
 
         public ConcurrentAttackerEvaluator(Card attacker, GameEntity targetDefender, Combat combat, Queue<Card> attackersLeft,
@@ -860,9 +860,9 @@ public class AiAttackController {
         }
 
         public void cancelTask() {
-            Thread threadToInterrupt = runnerThread.getAndSet(CANCELLED_MARKER);
-            if (threadToInterrupt != null && threadToInterrupt != CANCELLED_MARKER) {
-                threadToInterrupt.interrupt();
+            Object ref = runnerThread.getAndSet(CANCELLED_MARKER);
+            if (ref instanceof Thread thread) {
+                thread.interrupt();
             }
         }
 
@@ -910,7 +910,7 @@ public class AiAttackController {
                     numForcedAttackers.incrementAndGet();
                 }
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+                Thread.interrupted(); // clear flag
             } finally {
                 runnerThread.compareAndSet(Thread.currentThread(), null);
                 latch.countDown();

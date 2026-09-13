@@ -25,6 +25,13 @@ public class ThreadUtil {
         protected <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
             return new TrackableFutureTask<>(runnable, value);
         }
+
+        // Ensure execute() tasks are also cleaned
+        @Override
+        public void execute(Runnable command) {
+            super.execute(new SafeInterruptWrapper(command));
+        }
+
     };
 
     public static class TrackableFutureTask<V> extends FutureTask<V> {
@@ -44,12 +51,31 @@ public class ThreadUtil {
             try {
                 super.run();
             } finally {
-                runnerThread = null; // Instantly release the Thread reference to prevent memory leaks
+                runnerThread = null;
+                // Clear interrupt flag before returning thread to pool
+                Thread.interrupted();
             }
         }
 
         public Thread getRunnerThread() {
             return runnerThread;
+        }
+    }
+
+    public static class SafeInterruptWrapper implements Runnable {
+        private final Runnable delegate;
+
+        public SafeInterruptWrapper(Runnable delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public void run() {
+            try {
+                delegate.run();
+            } finally {
+                Thread.interrupted(); // clear interrupt flag
+            }
         }
     }
 
