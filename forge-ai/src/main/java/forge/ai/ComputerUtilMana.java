@@ -86,6 +86,34 @@ public class ComputerUtilMana {
         return 0;
     }
 
+    /**
+     * Return the colors that would be used for payment, as a color mask.
+     */
+    public static byte getConvergeColors(final SpellAbility sa, final Player ai) {
+        ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
+        if (payManaCost(cost, sa, ai, true, true, false) != null) {
+            return cost.getColorsPaid();
+        }
+        // TODO return -1 so API can bail out since it's unpayable
+        return 0;
+    }
+
+    /**
+     * The colors a spell nothing has paid for yet is expected to be paid with. Every spell that
+     * reads its own payment asks, so non-converge cards are turned away before the solve, which is
+     * a full payment search. Solved once per announced X per decision: the announcement is part of
+     * the key, so an answer can never outlive the X it was solved for.
+     */
+    public static byte getExpectedConvergeColors(final SpellAbility sa, final Player ai) {
+        final Card host = sa.getHostCard();
+        if (host == null || !host.hasConverge()) {
+            return 0;
+        }
+        return AiCache.getCached("expectedConvergeColors", () -> getConvergeColors(sa, ai),
+                List.of(AiCache::identity, AiCache::identity, Objects::equals),
+                ai, sa, sa.getXManaCostPaid());
+    }
+
     // Does not check if mana sources can be used right now, just checks for potential chance.
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
         if (ai == null || sa == null)
