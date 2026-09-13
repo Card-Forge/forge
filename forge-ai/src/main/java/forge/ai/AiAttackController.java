@@ -873,74 +873,92 @@ public class AiAttackController {
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
-            List<Callable<Integer>> tasks = new ArrayList<>();
+            final CountDownLatch cdl = new CountDownLatch(this.attackers.size());
+            final List<Future<?>> futures = new ArrayList<>();
             for (final Card attacker : this.attackers) {
                 final GameEntity finalDefender = defender;
-                tasks.add(() -> {
-                    // abort early for timeout
-                    ThreadUtil.checkInterrupt();
-                    GameEntity mustAttackDef = null;
-                    if (attacker.getSVar("MustAttack").equals("True")) {
-                        mustAttackDef = finalDefender;
-                    } else if (attacker.hasSVar("EndOfTurnLeavePlay")
-                            && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
-                        mustAttackDef = finalDefender;
-                    } else if (seasonOfTheWitch) {
-                        //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                        mustAttackDef = finalDefender;
-                    } else {
-                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
-                        // check defenders in order of maximum requirements
-                        List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                        final GameEntity def = finalDefender;
-                        reqs.sort((r1, r2) -> {
-                            if (r1.getValue() == r2.getValue()) {
-                                // try to attack the designated defender
-                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
-                                    return -1;
+                futures.add(ThreadUtil.AIExecutor.submit(() -> {
+                    try {
+                        // abort early for timeout
+                        ThreadUtil.checkInterrupt();
+                        GameEntity mustAttackDef = null;
+                        if (attacker.getSVar("MustAttack").equals("True")) {
+                            mustAttackDef = finalDefender;
+                        } else if (attacker.hasSVar("EndOfTurnLeavePlay")
+                                && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
+                            mustAttackDef = finalDefender;
+                        } else if (seasonOfTheWitch) {
+                            //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                            mustAttackDef = finalDefender;
+                        } else {
+                            if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
+                            // check defenders in order of maximum requirements
+                            List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                            reqs.sort((r1, r2) -> {
+                                if (r1.getValue() == r2.getValue()) {
+                                    // try to attack the designated defender
+                                    if (r1.getKey().equals(finalDefender) && !r2.getKey().equals(finalDefender)) {
+                                        return -1;
+                                    }
+                                    if (r2.getKey().equals(finalDefender) && !r1.getKey().equals(finalDefender)) {
+                                        return 1;
+                                    }
+                                    // otherwise PW
+                                    if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                                        return -1;
+                                    }
+                                    if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                                        return 1;
+                                    }
+                                    // or weakest player
+                                    if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                                        return p1.getLife() - p2.getLife();
+                                    }
                                 }
-                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
-                                    return 1;
-                                }
-                                // otherwise PW
-                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                    return -1;
-                                }
-                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                    return 1;
-                                }
-                                // or weakest player
-                                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
-                                    return p1.getLife() - p2.getLife();
+                                return r2.getValue() - r1.getValue();
+                            });
+                            for (Pair<GameEntity, Integer> e : reqs) {
+                                if (e.getRight() == 0) continue;
+                                GameEntity mustAttackDefMaybe = e.getLeft();
+                                if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                                    mustAttackDef = mustAttackDefMaybe;
+                                    break;
                                 }
                             }
-                            return r2.getValue() - r1.getValue();
-                        });
-                        for (Pair<GameEntity, Integer> e : reqs) {
-                            if (e.getRight() == 0) continue;
-                            GameEntity mustAttackDefMaybe = e.getLeft();
-                            if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
-                                mustAttackDef = mustAttackDefMaybe;
-                                break;
+                        }
+                        if (mustAttackDef != null) {
+                            // combat is shared across these parallel futures and its attacker
+                            // multimap is not thread-safe; unsynchronized addAttacker calls
+                            // collide (ConcurrentModificationException, dropped attackers)
+                            synchronized (combat) {
+                                combat.addAttacker(attacker, mustAttackDef);
                             }
+                            attackersLeft.remove(attacker);
+                            numForcedAttackers.incrementAndGet();
                         }
+                        return 0;
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return 0;
+                    } finally {
+                        //Ensure the latch counts down even if interrupted
+                        cdl.countDown();
                     }
-                    if (mustAttackDef != null) {
-                        // combat is shared across these parallel futures and its attacker
-                        // multimap is not thread-safe; unsynchronized addAttacker calls
-                        // collide (ConcurrentModificationException, dropped attackers)
-                        synchronized (combat) {
-                            combat.addAttacker(attacker, mustAttackDef);
-                        }
-                        attackersLeft.remove(attacker);
-                        numForcedAttackers.incrementAndGet();
-                    }
-                    return 0;
-                });
+                }));
             }
 
             try {
-                ThreadUtil.AIExecutor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+                boolean completedInTime = cdl.await(ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+
+                if (!completedInTime) {
+                    // Offload the slow cancellation process to the background pool
+                    // so the current thread never hitches or drop frames
+                    ThreadUtil.AIExecutor.execute(() -> {
+                        for (Future<?> f : futures) {
+                            f.cancel(true);
+                        }
+                    });
+                }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
