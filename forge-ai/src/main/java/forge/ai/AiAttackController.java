@@ -51,6 +51,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -842,8 +843,8 @@ public class AiAttackController {
         private final CountDownLatch latch;
         private final AttackRequirementsComparator comparator;
 
-        // Volatile reference to capture the executing thread for zero-allocation interrupts
-        private volatile Thread runnerThread;
+        private final AtomicReference<Thread> runnerThread = new AtomicReference<>();
+        private final Thread CANCELLED_MARKER = new Thread();
         private boolean seasonOfTheWitch;
 
         public ConcurrentAttackerEvaluator(Card attacker, GameEntity targetDefender, Combat combat, Queue<Card> attackersLeft,
@@ -859,15 +860,20 @@ public class AiAttackController {
         }
 
         public void cancelTask() {
-            Thread threadToInterrupt = runnerThread;
-            if (threadToInterrupt != null) {
+            Thread threadToInterrupt = runnerThread.getAndSet(CANCELLED_MARKER);
+            if (threadToInterrupt != null && threadToInterrupt != CANCELLED_MARKER) {
                 threadToInterrupt.interrupt();
             }
         }
 
         @Override
         public void run() {
-            runnerThread = Thread.currentThread();
+            // Enforce state check before beginning execution
+            if (!runnerThread.compareAndSet(null, Thread.currentThread())) {
+                latch.countDown();
+                return;
+            }
+
             try {
                 // Instantly drop out if the timeout already hit before we woke up
                 ThreadUtil.checkInterrupt();
@@ -906,8 +912,26 @@ public class AiAttackController {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             } finally {
-                runnerThread = null; // Clear pointer context instantly
+                runnerThread.compareAndSet(Thread.currentThread(), null);
                 latch.countDown();
+            }
+        }
+    }
+
+    // TaskCanceller to avoid lambda allocation
+    private class TaskCanceller implements Runnable {
+        private final ConcurrentAttackerEvaluator[] tasks;
+
+        public TaskCanceller(ConcurrentAttackerEvaluator[] tasks) {
+            this.tasks = tasks;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < tasks.length; i++) {
+                if (tasks[i] != null) {
+                    tasks[i].cancelTask();
+                }
             }
         }
     }
@@ -1018,14 +1042,9 @@ public class AiAttackController {
 
                 try {
                     boolean completedInTime = cdl.await(ai.getGame().getAITimeout(), TimeUnit.SECONDS);
-
                     if (!completedInTime) {
-                        // Offload cleanup onto a worker thread by looping over the flat task elements directly
-                        ThreadUtil.AIExecutor.execute(() -> {
-                            for (int i = 0; i < taskCount; i++) {
-                                tasksArray[i].cancelTask();
-                            }
-                        });
+                        // Reuse a dedicated task object for heap free alloc
+                        ThreadUtil.AIExecutor.execute(new TaskCanceller(tasksArray));
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
