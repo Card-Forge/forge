@@ -944,6 +944,7 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        long deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
         // something prevents attacking, try another
         if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
             final PlayerCollection opps = ai.getOpponents();
@@ -1258,6 +1259,8 @@ public class AiAttackController {
         // until the attackers are used up or the player would run out of life
         int attackRounds = 1;
         while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             // sum attacker damage
             int damageThisRound = 0;
             for (Card attritionalAttacker : attritionalAttackers) {
@@ -1287,6 +1290,8 @@ public class AiAttackController {
         double turnsUntilDeathByUnblockable = 0;
         boolean doUnblockableAttack = false;
         for (final Card attacker : this.attackers) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             boolean isUnblockableCreature = true;
             // check blockers individually, as the bulk canBeBlocked doesn't
             // check all circumstances
@@ -1301,6 +1306,8 @@ public class AiAttackController {
             }
         }
         for (final Card attacker : nextTurnAttackers) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             boolean isUnblockableCreature = true;
             // check blockers individually, as the bulk canBeBlocked doesn't
             // check all circumstances
@@ -1384,6 +1391,8 @@ public class AiAttackController {
         possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
 
         while (!left.isEmpty()) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             CardCollection attackersAssigned = new CardCollection();
             for (int i = 0; i < left.size(); i++) {
                 final Card attacker = left.get(i);
