@@ -790,6 +790,47 @@ public class AiAttackController {
 
     final boolean LOG_AI_ATTACKS = false;
 
+    // AttackRequirementsComparator to eliminate the inline sort lambda allocation
+    public static class AttackRequirementsComparator implements Comparator<Pair<GameEntity, Integer>> {
+        private final GameEntity targetDefender;
+
+        // Pass the current turn's defender into the constructor
+        public AttackRequirementsComparator(GameEntity targetDefender) {
+            this.targetDefender = targetDefender;
+        }
+
+        @Override
+        public int compare(Pair<GameEntity, Integer> r1, Pair<GameEntity, Integer> r2) {
+            // 1. Compare by the numerical requirement values first
+            if (r1.getValue().equals(r2.getValue())) {
+
+                // Try to attack the designated defender context
+                if (r1.getKey().equals(targetDefender) && !r2.getKey().equals(targetDefender)) {
+                    return -1;
+                }
+                if (r2.getKey().equals(targetDefender) && !r1.getKey().equals(targetDefender)) {
+                    return 1;
+                }
+
+                // Otherwise prioritize Planeswalkers over Players
+                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                    return -1;
+                }
+                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                    return 1;
+                }
+
+                // Or attack the weakest player
+                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                    return p1.getLife() - p2.getLife();
+                }
+            }
+
+            // Sort descending by weight value
+            return r2.getValue() - r1.getValue();
+        }
+    }
+
     /**
      * <p>
      * Getter for the field <code>attackers</code>.
@@ -875,8 +916,10 @@ public class AiAttackController {
         if (!nextTurn) {
             final CountDownLatch cdl = new CountDownLatch(this.attackers.size());
             final List<Future<?>> futures = new ArrayList<>();
+            final GameEntity finalDefender = defender;
+            // don't allocate a lambda comparator inside loop or it will consume heap for each attackers or android easily hits OOM
+            final AttackRequirementsComparator requirementsComparator = new AttackRequirementsComparator(finalDefender);
             for (final Card attacker : this.attackers) {
-                final GameEntity finalDefender = defender;
                 futures.add(ThreadUtil.AIExecutor.submit(() -> {
                     try {
                         // abort early for timeout
@@ -894,29 +937,7 @@ public class AiAttackController {
                             if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
                             // check defenders in order of maximum requirements
                             List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                            reqs.sort((r1, r2) -> {
-                                if (r1.getValue() == r2.getValue()) {
-                                    // try to attack the designated defender
-                                    if (r1.getKey().equals(finalDefender) && !r2.getKey().equals(finalDefender)) {
-                                        return -1;
-                                    }
-                                    if (r2.getKey().equals(finalDefender) && !r1.getKey().equals(finalDefender)) {
-                                        return 1;
-                                    }
-                                    // otherwise PW
-                                    if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                        return -1;
-                                    }
-                                    if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                        return 1;
-                                    }
-                                    // or weakest player
-                                    if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
-                                        return p1.getLife() - p2.getLife();
-                                    }
-                                }
-                                return r2.getValue() - r1.getValue();
-                            });
+                            reqs.sort(requirementsComparator);
                             for (Pair<GameEntity, Integer> e : reqs) {
                                 if (e.getRight() == 0) continue;
                                 GameEntity mustAttackDefMaybe = e.getLeft();
