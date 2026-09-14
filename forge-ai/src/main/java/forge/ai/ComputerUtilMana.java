@@ -75,15 +75,59 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Return the number of colors used for payment for Converge
+     * Return the colors that would be used for payment, as a color mask.
      */
-    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
+    public static byte getConvergeColors(final SpellAbility sa, final Player ai) {
         ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
         if (payManaCost(cost, sa, ai, true, true, false) != null) {
-            return cost.getSunburst();
+            return cost.getColorsPaid();
         }
         // TODO return -1 so API can bail out since it's unpayable
         return 0;
+    }
+
+    /**
+     * The colors a spell nothing has paid for yet is expected to be paid with. Every spell that
+     * reads its own payment asks, so non-converge cards are turned away before the solve, which is
+     * a full payment search. Solved once per announced X per decision: the announcement is part of
+     * the key, so an answer can never outlive the X it was solved for.
+     */
+    public static byte getExpectedConvergeColors(final SpellAbility sa, final Player ai) {
+        final Card host = sa.getHostCard();
+        if (host == null || !host.hasConverge()) {
+            return 0;
+        }
+        return AiCache.getCached("expectedConvergeColors", () -> getConvergeColors(sa, ai),
+                List.of(AiCache::identity, AiCache::identity, Objects::equals),
+                ai, sa, sa.getXManaCostPaid());
+    }
+
+    /**
+     * Announce X on a converge or sunburst card, where its only job is to buy colors: the least X
+     * that still reaches the most of them.
+     */
+    public static void setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        // the same spell is searched again on the way down to its API logic, and every step of the
+        // walk is a full payment solve
+        sa.setXManaCostPaid(AiCache.getCached("convergeX", () -> searchBestConvergeX(sa, ai, maxX),
+                List.of(AiCache::identity, AiCache::identity, Objects::equals), ai, sa, maxX));
+    }
+
+    private static int searchBestConvergeX(final SpellAbility sa, final Player ai, final int maxX) {
+        int bestX = 0;
+        int bestCount = 0;
+        for (int i = 0; i <= maxX; i++) {
+            sa.setXManaCostPaid(i);
+            int count = ColorSet.fromMask(getExpectedConvergeColors(sa, ai)).countColors();
+            if (count > bestCount) {
+                bestCount = count;
+                bestX = i;
+                if (bestCount == MagicColor.WUBRG.length) {
+                    break; // nothing above this can buy a sixth color
+                }
+            }
+        }
+        return bestX;
     }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
