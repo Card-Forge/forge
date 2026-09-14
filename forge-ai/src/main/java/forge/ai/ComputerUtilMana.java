@@ -75,18 +75,6 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Return the number of colors used for payment for Converge
-     */
-    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
-        ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
-        if (payManaCost(cost, sa, ai, true, true, false) != null) {
-            return cost.getSunburst();
-        }
-        // TODO return -1 so API can bail out since it's unpayable
-        return 0;
-    }
-
-    /**
      * Return the colors that would be used for payment, as a color mask.
      */
     public static byte getConvergeColors(final SpellAbility sa, final Player ai) {
