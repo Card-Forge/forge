@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -429,8 +430,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void editDeck() {
-        DeckEditScene.getInstance().loadEvent(currentEvent);
-        Forge.switchScene(DeckEditScene.getInstance());
+        TextureRegion textureRegion = null;
+        if (lastGameScene instanceof UIScene uiScene)
+            textureRegion = uiScene.getUIBackground();
+        DeckEditScene.getInstance(textureRegion).loadEvent(currentEvent);
+        Forge.switchScene(DeckEditScene.getInstance(textureRegion));
     }
 
     public void advance() {

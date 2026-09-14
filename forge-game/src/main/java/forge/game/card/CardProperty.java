@@ -1150,14 +1150,6 @@ public class CardProperty {
             if (card.getDamageHistory().getDamageDoneThisTurn(true, true, null, property.split(" ")[1], card, sourceController, spellAbility) == 0) {
                 return false;
             }
-        } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (source.getDamageHistory().getDamageDoneThisTurn(true, true, null, "You", card, controller, spellAbility) == 0) {
-                return false;
-            }
-        } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (source.getDamageHistory().getDamageDoneThisTurn(null, true, null, "You", card, controller, spellAbility) == 0) {
-                return false;
-            }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if (card.getAssignedDamage() == 0) {
                 return false;
@@ -1185,6 +1177,8 @@ public class CardProperty {
             }
         } else if (property.startsWith("dealtDamagetoAny")) {
             return card.getDamageHistory().getHasdealtDamagetoAny();
+        } else if (property.startsWith("dealtCombatDamagetoAny")) {
+            return card.getDamageHistory().getHasdealtCombatDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
                 return false;

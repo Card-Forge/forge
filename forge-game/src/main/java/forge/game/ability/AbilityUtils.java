@@ -2311,6 +2311,10 @@ public class AbilityUtils {
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
         }
 
+        if (sq[0].equals("YouScryThisTurn")) {
+            return doXMath(player.getScryThisTurn(), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouSurveilThisTurn")) {
             return doXMath(player.getSurveilThisTurn(), expr, c, ctb);
         }

@@ -81,8 +81,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
         //TODO: eventually (when the real code is refactored) this should be handled normally...
+        //NOTE: the controller argument used to be ignored on this path, so the harness passed null.
+        //      Since PlaySpellAbility was unified into the game module (#10051) it is dereferenced
+        //      to build the cost decision maker, so we hand it this controller instead.
         if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
-            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(this, player, effectSA, !mayChoseNewTargets);
             return;
         }
         SpellAbilityAi sai = SpellApiToAi.Converter.get(effectSA.getApi());
@@ -93,7 +96,7 @@ public class PlayerControllerForTests extends PlayerController {
                 (effectSA.getHostCard().getName().equals("Near-Death Experience") && sai instanceof  GameWinAi) ||
                 (effectSA.getHostCard().getName().equals("Final Fortune") && sai instanceof GameLossAi)
         ) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
-            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(this, player, effectSA, !mayChoseNewTargets);
             return;
         }
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");

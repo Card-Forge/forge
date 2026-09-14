@@ -2239,11 +2239,13 @@ public class Shaders {
             "uniform sampler2D u_texture;\n" +
             "uniform vec2 u_resolution; // Screen or image resolution\n" +
             "uniform float u_pixelSize; // Size of the pixel blocks\n" +
+            "uniform float u_bias;\n" +
             "\n" +
             "void main() {\n" +
             "    vec2 uv = v_texCoords;\n" +
             "    vec2 grid = u_resolution / u_pixelSize;\n" +
             "    vec2 pixelatedUV = floor(uv * grid) / grid;\n" +
-            "    gl_FragColor = v_color * texture2D(u_texture, pixelatedUV);\n" +
+            "    vec4 texColor = v_color * texture2D(u_texture, pixelatedUV);\n" +
+            "    gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
             "}";
 }

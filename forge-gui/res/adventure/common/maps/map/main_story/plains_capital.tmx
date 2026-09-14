@@ -226,8 +226,9 @@
    <properties>
     <property name="dialog">[{
   &quot;text&quot;:&quot;Hello. There is nothing for you to do here...\nFor now.&quot;,
+  &quot;loctext&quot;: &quot;adv.main_story_plains_capital.64.d.n0.text&quot;,
   &quot;options&quot;:[ 
-    { &quot;name&quot;:&quot;Leave&quot; }
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; }
   ]
 }]</property>
     <property name="sprite" value=""/>

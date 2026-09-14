@@ -27,8 +27,6 @@ import java.util.List;
 import java.util.Set;
 
 public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
-    private static final int DRAFT_POD_SIZE = 8;
-
     /** Returned by {@link #startDraftEvent} with the info the UI needs for overlay/log setup. */
     public record DraftStartResult(String[] names, boolean[] aiFlags, int hostSeatIndex, int totalPacks) {}
 
@@ -46,6 +44,20 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
             getData().setEventView(null);
         }
         super.updateView(fullUpdate);
+    }
+
+    /**
+     * A configured draft caps the lobby at its pod size, so the seats can never
+     * outnumber the pod. The cap lifts once the draft is over and the lobby is
+     * only being used to set up the match.
+     */
+    @Override
+    public int getSlotLimit() {
+        BoosterDraft draft = currentEvent == null ? null : currentEvent.getDraft();
+        if (draft != null && (draftHost == null || !draftHost.isFinished())) {
+            return Math.min(super.getSlotLimit(), draft.getPodSize());
+        }
+        return super.getSlotLimit();
     }
 
     /** Set the lobby's declared mode (Constructed / Limited) and broadcast to clients. */
@@ -274,15 +286,15 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         NetworkEvent event = getCurrentEvent();
         if (event == null) return null;
 
+        BoosterDraft draft = event.getDraft();
+        if (draft == null) return null;
+
         populateParticipants();
-        fillRemainingWithAI(DRAFT_POD_SIZE);
+        fillRemainingWithAI(draft.getPodSize());
         shuffleSeatPositions();
 
         List<EventParticipant> participants = event.getParticipants();
         int podSize = participants.size();
-
-        BoosterDraft draft = event.getDraft();
-        if (draft == null) return null;
 
         if (podSize != draft.getPodSize()) {
             draft.setPodSize(podSize);
