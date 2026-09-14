@@ -1,0 +1,18 @@
+Name:Whiplash Wordsmith
+ManaCost:3 BR
+Types:Creature Vampire Sorcerer
+PT:3/3
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & Haste | CheckSVar$ X | Description$ As long as an opponent was dealt noncombat damage this turn, this creature has flying and haste.
+SVar:X:PlayerCountOpponents$HasPropertywasDealtNonCombatDamageThisTurn
+AlternateMode:Prepare
+Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nAs long as an opponent was dealt noncombat damage this turn, this creature has flying and haste.
+
+ALTERNATE
+
+Name:Vicious Verse
+ManaCost:BR
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent.
+Oracle:Vicious Verse deals 1 damage to target opponent.
