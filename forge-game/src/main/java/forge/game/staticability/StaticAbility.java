@@ -375,8 +375,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("Metalcraft") && !controller.hasMetalcraft()) return false;
             if (condition.equals("Delirium") && !controller.hasDelirium()) return false;
             if (condition.equals("Ferocious") && !controller.hasFerocious()) return false;
-            if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
+            if (condition.equals("EnduringStory") && !controller.hasEnduringStory()) return false;
             if (condition.equals("Monarch") & !controller.isMonarch()) return false;
             if (condition.equals("Night") & !game.isNight()) return false;
             if (condition.equals("MaxSpeed") && !controller.maxSpeed()) return false;
@@ -424,7 +424,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("IsPresent")) {
-            final ZoneType zone = hasParam("PresentZone") ? ZoneType.valueOf(getParam("PresentZone")) : ZoneType.Battlefield;
+            final List<ZoneType> zone = hasParam("PresentZone") ? ZoneType.listValueOf(getParam("PresentZone")) : List.of(ZoneType.Battlefield);
             final String compare = getParamOrDefault("PresentCompare", "GE1");
             CardCollectionView list = game.getCardsIn(zone);
             final String present = getParam("IsPresent");
@@ -552,7 +552,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public int getMayPlayTurn() {
-        return mayPlayTurn;
+        return mayPlayTurn + (int)this.hostCard.getGame().getStack().getSpellsCastThisTurn().stream().filter(sp -> this.equals(sp.getMayPlay())).count();
     }
 
     public void incMayPlayTurn() {

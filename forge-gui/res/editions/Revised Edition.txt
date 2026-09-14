@@ -187,7 +187,7 @@ ScryfallCode=3ED
 173 R Rock Hydra @Jeff A. Menges
 174 R Sedge Troll @Dan Frazier
 175 C Shatter @Amy Weber
-176 U Shatterstorm @Mark Poole
+176 U Shatterstorm @Dan Frazier
 177 R Shivan Dragon @Melissa A. Benson
 178 R Smoke @Jesper Myrfors
 179 U Stone Giant @Dameon Willich

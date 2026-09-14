@@ -3,4 +3,4 @@ ManaCost:U
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDef$ +1 | KW$ Hexproof | SpellDescription$ Target creature you control gets +0/+1 and gains hexproof until end of turn.
 K:Overload:1 U
-Oracle:Target creature you control gets +0/+1 and gains hexproof until end of turn.\nOverload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:Target creature you control gets +0/+1 and gains hexproof until end of turn.\nOverload {1}{U} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

@@ -5,4 +5,4 @@ A:SP$ CopyPermanent | ValidTgts$ Artifact.Creature+YouCtrl | TgtPrompt$ Select t
 K:Overload:6 U
 DeckHas:Ability$Token
 DeckNeeds:Type$Artifact
-Oracle:Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

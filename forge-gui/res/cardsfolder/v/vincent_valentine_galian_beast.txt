@@ -22,5 +22,5 @@ PT:3/2
 K:Trample
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return it to the battlefield tapped (front face up).
-SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | GainControl$ True
 Oracle:Trample, lifelink\nWhen Galian Beast dies, return it to the battlefield tapped (front face up).

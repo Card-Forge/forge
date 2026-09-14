@@ -6,5 +6,5 @@ SVar:AttachAILogic:ChangeType
 K:ETBReplacement:Other:DBChooseBasic
 SVar:DBChooseBasic:DB$ ChooseType | Type$ Basic Land | SpellDescription$ As CARDNAME enters, choose a basic land type.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ ChosenType | RemoveLandTypes$ True | Description$ Enchanted land is the chosen type.
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:Enchant land\nAs Phantasmal Terrain enters, choose a basic land type.\nEnchanted land is the chosen type.

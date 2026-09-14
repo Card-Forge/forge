@@ -2,7 +2,6 @@ Name:Myr Superion
 ManaCost:2
 Types:Artifact Creature Myr
 PT:5/6
-Text:Spend only mana produced by creatures to cast this spell.
-A:SP$ PermanentCreature | Cost$ 2 | ManaRestriction$ Creature.inZoneBattlefield
+S:Mode$ ManaRestriction | ValidSource$ Creature.inZoneBattlefield | EffectZone$ All | Description$ Spend only mana produced by creatures to cast this spell.
 AI:RemoveDeck:Random
 Oracle:Spend only mana produced by creatures to cast this spell.

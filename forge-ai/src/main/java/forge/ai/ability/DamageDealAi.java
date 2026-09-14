@@ -190,9 +190,8 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
                 }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("NinThePainArtist".equals(logic)) {
             // Make sure not to mana lock ourselves + make the opponent draw cards into an immediate discard
             if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
@@ -255,11 +254,11 @@ public class DamageDealAi extends DamageAiBase {
 
         // test what happens if we chain this to another damaging spell
         if (chainDmg != null) {
-            int extraDmg = chainDmg.getValue();
-            boolean willTargetIfChained = damageTargetAI(ai, sa, dmg + extraDmg, false);
-            if (!willTargetIfChained) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed); // won't play it even in chain
-            } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
+            if (!damageTargetAI(ai, sa, dmg + chainDmg.getValue(), false)) {
+                // won't play it even in chain
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
                 // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
@@ -1028,7 +1027,7 @@ public class DamageDealAi extends DamageAiBase {
     public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
         if (!ai.getController().isAI()) {
             return null; // should only work for the actual AI player
-        } else if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
+        } else if (((PlayerControllerAi)ai.getController()).getAi().usesFullSimulation()) {
             // simulated AI shouldn't use paired decisions, it tries to find complex decisions on its own
             return null;
         }

@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -49,13 +48,12 @@ public class FogAi extends SpellAbilityAi {
 
         // AI should only activate this during Opponents Declare Blockers phase
         if (!game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai) ||
-            !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // TODO Be careful of effects that don't let you cast spells during combat
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        int remainingLife = ComputerUtilCombat.lifeThatWouldRemain(ai, combat);
-        int dmg = ai.getLife() - remainingLife;
+        int dmg = ai.getLife() - ComputerUtilCombat.lifeThatWouldRemain(ai, combat);
 
         // Count the number of Fog spells in hand
         int fogs = countAvailableFogs(ai);
@@ -79,14 +77,12 @@ public class FogAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.Tempo);
             }
         }
-        // TODO Compare to poison counters?
 
         // Cast it if life is in danger
         if (ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
             return new AiAbilityDecision(100, AiPlayDecision.Tempo);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private boolean handleMemoryCheck(Player ai, SpellAbility sa) {
@@ -94,9 +90,9 @@ public class FogAi extends SpellAbilityAi {
         Game game = ai.getGame();
 
         // if card would be destroyed, react and use immediately if it's not own turn
-        if ((AiCardMemory.isRememberedCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
-                && (!game.getStack().isEmpty())
-                && (!game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))) {
+        if (AiCardMemory.isRememberedCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)
+                && !game.getStack().isEmpty()
+                && !game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, null);
             if (objects.contains(hostCard)) {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
@@ -105,10 +101,10 @@ public class FogAi extends SpellAbilityAi {
         }
 
         // Reserve mana to cast this card if it will be likely needed
-        if (((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
+        if ((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
                 || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
-                && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
-                && (ComputerUtil.aiLifeInDanger(ai, false, 0))) {
+                && AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)
+                && ComputerUtil.aiLifeInDanger(ai, false, 0)) {
             boolean reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
             if (reserved) {
                 AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
@@ -138,7 +134,6 @@ public class FogAi extends SpellAbilityAi {
         }
         return fogs;
     }
-
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {

@@ -1,0 +1,11 @@
+Name:Jocasta, Automaton Avenger
+ManaCost:3
+Types:Legendary Artifact Creature Robot Hero
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Creature.IsCommander+YouOwn | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever your commander deals combat damage to a player, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.IsCommander+YouOwn | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Whenever you attack with your commander, if this card is in your graveyard, you may return it to the battlefield tapped and attacking.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self | Tapped$ True | Attacking$ True
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhenever your commander deals combat damage to a player, put a +1/+1 counter on Jocasta.\nWhenever you attack with your commander, if this card is in your graveyard, you may return it to the battlefield tapped and attacking.

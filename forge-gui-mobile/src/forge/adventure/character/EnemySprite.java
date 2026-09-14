@@ -538,32 +538,32 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                 default: break;
                 case 'C': {
                     batch.setColor(Color.DARK_GRAY);
-                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    batch.draw(Forge.getAssets().getWhiteTexture(), DX, DY, 2, 2);
                     DY += 2; break;
                 }
                 case 'B': {
                     batch.setColor(Color.PURPLE);
-                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    batch.draw(Forge.getAssets().getWhiteTexture(), DX, DY, 2, 2);
                     DY += 2; break;
                 }
                 case 'G': {
                     batch.setColor(Color.GREEN);
-                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    batch.draw(Forge.getAssets().getWhiteTexture(), DX, DY, 2, 2);
                     DY += 2; break;
                 }
                 case 'R': {
                     batch.setColor(Color.RED);
-                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    batch.draw(Forge.getAssets().getWhiteTexture(), DX, DY, 2, 2);
                     DY += 2; break;
                 }
                 case 'U': {
                     batch.setColor(Color.BLUE);
-                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    batch.draw(Forge.getAssets().getWhiteTexture(), DX, DY, 2, 2);
                     DY += 2; break;
                 }
                 case 'W': {
                     batch.setColor(Color.WHITE);
-                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    batch.draw(Forge.getAssets().getWhiteTexture(), DX, DY, 2, 2);
                     DY += 2; break;
                 }
             }

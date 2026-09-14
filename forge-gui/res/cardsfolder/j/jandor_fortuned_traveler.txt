@@ -1,0 +1,12 @@
+Name:Jandor, Fortuned Traveler
+ManaCost:1 R G W
+Types:Legendary Creature Human Citizen
+PT:2/4
+S:Mode$ Continuous | Affected$ Beast.YouCtrl,Camel.YouCtrl,Horse.YouCtrl,Elephant.YouCtrl,Wolf.YouCtrl | AddType$ Mount | AddKeyword$ Saddle:2 | Description$ Each Beast, Camel, Horse, Elephant, and Wolf creature you control is a Mount in addition to its other types and has saddle 2. (Tap any number of other creatures you control with total power 2 or more: That Mount becomes saddled until end of turn. Saddle only as a sorcery.)
+T:Mode$ Attacks | ValidCard$ Creature.IsSaddled+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a saddled creature you control attacks, it gets +2/+2 until end of turn. Draw a card. Create a Food token.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +2 | NumDef$ +2 | SubAbility$DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:PlayMain1:TRUE
+DeckHints:Type$Beast|Camel|Horse|Elephant|Wolf
+Oracle:Each Beast, Camel, Horse, Elephant, and Wolf creature you control is a Mount in addition to its other types and has saddle 2. (Tap any number of other creatures you control with total power 2 or more: That Mount becomes saddled until end of turn. Saddle only as a sorcery.)\nWhenever a saddled creature you control attacks, it gets +2/+2 until end of turn. Draw a card. Create a Food token.

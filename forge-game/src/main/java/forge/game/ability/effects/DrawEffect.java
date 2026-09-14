@@ -18,6 +18,12 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class DrawEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -73,7 +79,7 @@ public class DrawEffect extends SpellAbilityEffect {
             int actualNum = numCards * Collections.frequency(tgts, p);
 
             // it is optional, not upto and player can't choose to draw that many cards
-            if (optional && !upto && !p.canDrawAmount(actualNum)) {
+            if (optional && !upto && !p.canDraw(actualNum)) {
                 continue;
             }
 

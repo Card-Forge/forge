@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="80">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;An-Havva Constable&quot;, &quot;Folk of An-Havva&quot; ], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Folk of An-Havva&quot; ]}}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxj4mZgYMKCf3FBsAU3cRimHptZpOCBspdY+9DxqL2j9o7aO2rvqL2j9g4lewHgVFIj
+  </data>
+ </layer>
+ <layer id="7" name="Background2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lVEOgjAMhhvf4Dgm4CQxIq8mehMTeTOCR/A8wCE4ATGcwyfbAKGObbrAvuR/gIX+69oygI7EA8h8gBz18GFRbhjv4HUeTS+O7v2SkEcsxef7cgV53Bc+TxeIAGC9mso1RTD1or2Y2GG99jNrJkKAraQoNH/T9jPiivqi923YfM7N/V+od/lszsmdctPlp/MeZlM1P6oeeKbYTxuAElWhzunoq1qzhTzp35hJNaDYQmAPoSLxHdu0ZuM51OAl+RYYs0RVCl/dmom877GW1T2WanC8ApzSURzTmg6eH5EoPFXwfrLpLflMbe6dt99J92zi1z3oypcznO0HvQNc+A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOdvGQhykFskAzpLGYAxKTxSKOSz2pAJf7cdlLTf9iA7jshclRy15S4pWa9pICRu0dtXfU3lF7B4O96OU+tnqAWvbWcSMwej0H4yOrIcVeANr7Ioc=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytlDFOxDAQRUdGVIRi61UugYAg7RkoFpAQl6BgU1BxAhZY4C40S8EBWO5BJFhooGQ+ziiTYRwUxJdGjsfxPP/E9jgQXawQvXL7wnHFz8OMKM9iC41PmpAxnYPkfbRVPU/0uVrXCe0+WrDBhIZmXh/lWbu2laxJ1qBzsu6+8ubp+notYOkxmf9XgWu92r7nFe9o7kaI8bDZPHuhuZ6eszbHk/VruSLkrLz/q/2lvrvHhe4LovlOZI3qdl743C5PKVWZz73b8sPjejUh8boXfu4pyOMW236kuCnP4C2Df8669vPiOEZK1m/l/O+l8qr3m3Bnp0TXE6LLkmhQxr5w8fzEY+sct5PYF27qzoAOmTnl++kg8Z0xH7VmXHO3jK3UljU9cu6GY1GP/XbfwBO8vnG8G64+v9/cHiF+RfbMiFdwzx3PXVzt18t37SvxKmHZ/31Pwrf2atlHIX1+c5O3fZ23SjElPkLj92ytPRd9nbN9yel7Erz9BPMLqmGaEQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192.333" y="272.167" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="198.923" y="147.44">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Koskun Keep&quot;, &quot;Joven's Tools&quot;, &quot;Joven's Ferrets&quot;]
+}
+</property>
+    <property name="enemy" value="Joven and Chandler"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="158.583" y="157.903">
+   <properties>
+    <property name="enemy" value="Greensleeves"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="271.026" y="156.291">
+   <properties>
+    <property name="enemy" value="Autumn Willow"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="120.74" y="157.369">
+   <properties>
+    <property name="enemy" value="Feroz"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="239.784" y="157.369">
+   <properties>
+    <property name="enemy" value="Daughter of Autumn"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/dialog.tx" x="179.897" y="240.82" width="60.3608" height="12.8496" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The sounds of cheerful folk and the delicious smell of food fills the air in this cozy inn. It feels like home in a way few places along your travels have. Among the guests are some who look to find you unwelcome, their stares a stark contrast to the otherwise jovial atmosphere.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/scroll.tx" x="137.438" y="91.6521">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;An-Havva Inn&quot;, &quot;editions&quot;: [ &quot;HML&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/booster.tx" x="217.699" y="56.1005">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/booster.tx" x="217.321" y="36.527">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/booster.tx" x="238.364" y="36.3636">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/booster.tx" x="238.545" y="55.2727">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/booster.tx" x="182.182" y="35.4545">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/booster.tx" x="181.636" y="55.4545">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/booster.tx" x="161.818" y="35.8182">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/booster.tx" x="162.364" y="54.9091">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HML&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="226.658" y="160.409" width="74.184" height="46.6816"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="113.408" y="160.659" width="74.184" height="46.6816"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="131.908" y="208.659" width="39.684" height="14.6816"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="244.158" y="209.159" width="39.684" height="14.6816"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="161.783" y="98.7425" width="92.3507" height="34.3483"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="160.158" y="71.3259" width="14.3507" height="30.3483"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="239.825" y="83.1592" width="14.3507" height="30.3483"/>
+ </objectgroup>
+</map>

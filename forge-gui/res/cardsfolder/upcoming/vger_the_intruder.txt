@@ -1,0 +1,13 @@
+Name:V'Ger, the Intruder
+ManaCost:6 U
+Types:Legendary Artifact Creature Construct
+PT:5/7
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBRevealHand,DBPumpAll
+SVar:DBRevealHand:DB$ RevealHand | ValidTgts$ Opponent | Look$ True | SubAbility$ DBDraw | SpellDescription$ Look at target opponent's hand, then draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Creatures your opponents control get -1/-0 until your next turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever V'Ger enters or attacks, choose one —\n• Look at target opponent's hand, then draw a card.\n• Creatures your opponents control get -1/-0 until your next turn.

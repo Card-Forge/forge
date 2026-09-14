@@ -1,0 +1,8 @@
+Name:In the Pale Moonlight
+ManaCost:3 B B
+Types:Enchantment Saga
+K:Chapter:3:DBSac,DBInvestigate,ABToken
+SVar:DBSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature.!token | SacMessage$ nontoken creature | SpellDescription$ Each opponent sacrifices a nontoken creature of their choice.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:ABToken:AB$ Token | Cost$ Sac<1/Artifact;Creature/artifact or creature> | TokenScript$ b_2_2_romulan | TokenAmount$ 2 | CostDesc$ You may sacrifice an artifact or creature. | SpellDescription$ You may sacrifice an artifact or creature. If you do, create two 2/2 black Romulan creature tokens.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a nontoken creature of their choice.\nII — Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")\nIII — You may sacrifice an artifact or creature. If you do, create two 2/2 black Romulan creature tokens.

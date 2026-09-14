@@ -3,7 +3,7 @@ ManaCost:U
 Types:Legendary Creature Moonfolk Wizard
 PT:0/3
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 3 | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever you draw your third card in a turn, exile NICKNAME, then return her to the battlefield transformed under her owner's control.
 SVar:TrigTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
@@ -12,7 +12,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate|Token
 AlternateMode:DoubleFaced
-Oracle:Flying\nWhenever Tamiyo, Inquisitive Student attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you draw your third card in a turn, exile Tamiyo, then return her to the battlefield transformed under her owner's control.
+Oracle:Flying\nWhenever Tamiyo, Inquisitive Student attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")\nWhenever you draw your third card in a turn, exile Tamiyo, then return her to the battlefield transformed under her owner's control.
 
 ALTERNATE
 

@@ -1,0 +1,7 @@
+Name:Strategic Intervention
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +1/+1 until end of turn. Tap up to one target creature defending player controls.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature defending player controls
+Oracle:Whenever a creature you control attacks alone, it gets +1/+1 until end of turn. Tap up to one target creature defending player controls.

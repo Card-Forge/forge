@@ -1,0 +1,13 @@
+Name:Rewrite History
+ManaCost:2 U
+Types:Enchantment Plan
+T:Mode$ TapAll | ValidCards$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control become tapped, draw a card, then discard a card and put a plan counter on this enchantment.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAN | CounterNum$ 1
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ PLAN | CounterAmount$ EQ4 | Execute$ TrigSac | TriggerDescription$ When the fourth plan counter is put on this enchantment, sacrifice it. When you do, return up to two target instant and/or sorcery cards from your graveyard to your hand.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigChangeZone | SubAbility$ DBCleanup | TriggerDescription$ When you do, return up to two target instant and/or sorcery cards from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select up to two target instant and/or sorcery cards from your graveyard
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever one or more creatures you control become tapped, draw a card, then discard a card and put a plan counter on this enchantment.\nWhen the fourth plan counter is put on this enchantment, sacrifice it. When you do, return up to two target instant and/or sorcery cards from your graveyard to your hand.

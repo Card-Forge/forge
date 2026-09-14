@@ -1,8 +1,8 @@
 Name:Trail of Evidence
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ DBInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ DBInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate|Token
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Whenever you cast an instant or sorcery spell, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+Oracle:Whenever you cast an instant or sorcery spell, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

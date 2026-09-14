@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
@@ -23,6 +22,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConniveEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
 
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
@@ -97,9 +101,7 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                     moveParams = AbilityKey.newMap();
                     zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
-                    final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
-                    discardedMap.put(p, CardCollection.getView(toBeDiscarded));
-                    discard(sa, true, discardedMap, moveParams);
+                    discard(sa, true, Map.of(p, CardCollection.getView(toBeDiscarded)), moveParams);
                     counterPlacements.replaceCounterEffect(game, sa);
                     zoneMovements.triggerChangesZoneAll(game, sa);
                 }

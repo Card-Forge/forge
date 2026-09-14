@@ -30,6 +30,9 @@ public class GameLossEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             p.loseConditionMet(GameLossReason.SpellEffect, sa.getHostCard().getName());
         }
+
+        // CR 104.1. A game ends immediately when a player wins
+        sa.getHostCard().getGame().getAction().checkGameOverCondition();
     }
 
 }

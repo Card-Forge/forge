@@ -1,6 +1,7 @@
 package forge.gamemodes.net.event;
 
 import forge.gamemodes.net.ChatMessage;
+import forge.util.LogSafe;
 
 public final class MessageEvent implements NetEvent {
     private static final long serialVersionUID = 1700060210647684186L;
@@ -47,8 +48,14 @@ public final class MessageEvent implements NetEvent {
         }
     }
 
+    /**
+     * Log-facing only — nothing renders chat through this. The protocol
+     * handler logs every inbound message with {@code "Received: {}"}, so
+     * without escaping, a chat line containing a newline forges a log record.
+     * Escaping here rather than at the log statement keeps the formatting lazy.
+     */
     @Override
     public String toString() {
-        return getMessage();
+        return LogSafe.forLog(getMessage());
     }
 }

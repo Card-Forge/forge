@@ -9,4 +9,4 @@ T:Mode$ DamageDoneOnce | ValidSource$ Pirate.YouCtrl | ValidTarget$ Player | Exe
 SVar:TrigExplore:DB$ Explore
 DeckHints:Type$Pirate
 DeckHas:Ability$Counters|Graveyard
-Oracle:Flying\nFrancisco, Fowl Marauder can't block.\nWhenever one or more Pirates you control deal damage to a player, Francisco explores.\nPartner (You can have two commanders if they both have partner.)
+Oracle:Flying\nFrancisco, Fowl Marauder can't block.\nWhenever one or more Pirates you control deal damage to a player, Francisco explores.\nPartner (You can have two commanders if both have partner.)

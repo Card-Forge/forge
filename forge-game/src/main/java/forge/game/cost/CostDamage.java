@@ -63,7 +63,7 @@ public class CostDamage extends CostPart {
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         return true;
     }
-    
+
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa, final boolean effect) {
         final Card source = sa.getHostCard();

@@ -26,32 +26,32 @@ import forge.util.IterableUtil;
 
 public record CardChangedType(CardTypeView addType, CardTypeView removeType, boolean addAllCreatureTypes, Set<RemoveType> remove) implements ICardChangedType {
 
-    public final boolean isRemoveSuperTypes() {
+    public boolean isRemoveSuperTypes() {
         return remove.contains(RemoveType.SuperTypes);
     }
 
-    public final boolean isRemoveCardTypes() {
+    public boolean isRemoveCardTypes() {
         return remove.contains(RemoveType.CardTypes);
     }
 
-    public final boolean isRemoveSubTypes() {
+    public boolean isRemoveSubTypes() {
         return remove.contains(RemoveType.SubTypes);
     }
 
     @Override
-    public final boolean isRemoveLandTypes() {
+    public boolean isRemoveLandTypes() {
         return remove.contains(RemoveType.LandTypes);
     }
 
-    public final boolean isRemoveCreatureTypes() {
+    public boolean isRemoveCreatureTypes() {
         return remove.contains(RemoveType.CreatureTypes);
     }
 
-    public final boolean isRemoveArtifactTypes() {
+    public boolean isRemoveArtifactTypes() {
         return remove.contains(RemoveType.ArtifactTypes);
     }
 
-    public final boolean isRemoveEnchantmentTypes() {
+    public boolean isRemoveEnchantmentTypes() {
         return remove.contains(RemoveType.EnchantmentTypes);
     }
 

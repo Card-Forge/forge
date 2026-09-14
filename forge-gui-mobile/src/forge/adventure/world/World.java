@@ -99,8 +99,10 @@ public class World implements Disposable, SaveFileContent {
     @Override
     public void load(SaveFileData saveFileData) {
 
-        if (biomeImage != null)
+        if (biomeImage != null) {
             biomeImage.dispose();
+            biomeImage = null;
+        }
 
         loadWorldData();
 
@@ -290,7 +292,7 @@ public class World implements Disposable, SaveFileContent {
 
     public boolean generateNew(long seed) {
         try {
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 GuiBase.getInterface().preventSystemSleep(true);
             final long[] currentTime = {System.currentTimeMillis()};
             long startTime = System.currentTimeMillis();
@@ -806,7 +808,7 @@ public class World implements Disposable, SaveFileContent {
             System.out.println("Generating world took :\t\t" + ((System.currentTimeMillis() - startTime) / 1000f) + " s");
             WorldStage.getInstance().clearCache();
 
-            if (GuiBase.isAndroid())
+            if (GuiBase.isMobile())
                 GuiBase.getInterface().preventSystemSleep(false);
         } catch (Exception e) {
             e.printStackTrace();
@@ -941,8 +943,7 @@ public class World implements Disposable, SaveFileContent {
     }
 
     public void dispose() {
-
-        if (biomeImage != null) biomeImage.dispose();
+        Forge.safeDispose(biomeImage);
     }
 
     public void setSeed(long seedOffset) {

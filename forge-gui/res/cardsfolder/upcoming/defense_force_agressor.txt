@@ -1,0 +1,5 @@
+Name:Defense Force Aggressor
+ManaCost:R
+Types:Creature Klingon Warrior
+PT:2/1
+Oracle:

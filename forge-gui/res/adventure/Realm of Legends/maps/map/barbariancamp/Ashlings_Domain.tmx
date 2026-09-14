@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="265">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mana Flare&quot;, &quot;Flamekin Village&quot;, &quot;Taurean Mauler&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="44673" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="24" name="LayerBis" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRQApYwTvQLkAFC0QhtDMfKiYH4NMHsgcdg4AJHwI7Q2lk91DTXhM+VD3I2ISP9DDApQabP9H1kYqpYS+pgJA7cNlLrzQOsgdbuqKHGwar3bQGuOwezmCg/EtPe3GlJ1r7FZtdIyFNDTcAALipQkk=
+  </data>
+ </layer>
+ <layer id="15" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzllr9uwkAMxo26gJJ0oIIu5S3YeIFu7PRZCq/CjFi6dCgwIl4AibVL34NY1IrP+P4kd6cOtfTplDjyL/58ie48ADgnEMX0sRHlXsqbUnA0Lmf+FZfncnE1jzEov6jycaXHnLuvmYcMXO4tMTm3q8+2uWlM7ZmYfviq5Wz5WA+1GWqK5UjvbLXbcuXsbb6F1GrTq4ubwrfvUTuub/+m4K4tOa5NH+Cr/vbeC4D5GGBVgBFtuSgfF5kUb1XzviFs5NrYPu6kvNXt/Yp7tSzuhbnXGcBpa0pyXNyfWruy6Udjy8D/P/qCQUziSIXue+lpSLhmHCKNnYvp6s3F9e1lqYu4xtl0iVDeZ9FIckPn2JV7GdyzOfdjZNY+PnVjufr29SvvxTBpvpIb46NP277Zs7qHh+m5ki25dCbLdQZ+fjDX1L39d10B+Uhj0Q==
+  </data>
+ </layer>
+ <layer id="20" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9lUFOw0AMRQeKhEq6oIggUS6CVEGlrLpjAxdhwam6YoFYd0E5QKVwB86ARL+CiTOxZzxhqKWvNM3Eb+yxne3Yue0etJw797baD8sXuLnZsBiPKzeXWw7u06Fz05EszpC4EtvKPBvZ487BRTxWpqWmUuJFD2jP3s/Tuf6zzaoVXw8u5Y36EKoW6dzXQuZK66XzGppjyZfPzdlrIe5/aej+P0rn1ou+qlvD+wct82ESX/951KgeN4LdXbieVTfxWCWmVEvEApebf29ha/n1+4arPG784sol2S9nudO8K6l3YOAivuK0y9S4Glvbi8RF7sDFlXP5viRfMaMa3iizguoHov/W13G2hUl1InE1hWILcXktXRWNLP0TitNiQ3znYKdwa+afaszPN7fnMsy6NJwnnwVU23VCTUn1YKkjqmUpXsm+pu175GO249xPWqXMYWLT7PJZ/DfWzn5q1crx9VL08/x40uX4wvcppSdjbD676B4MSX/lUm+nCrnlZyTNPYu0b5xmIf+WPXwDThWBcw==
+  </data>
+ </layer>
+ <layer id="21" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1lr1OG0EUhW/stSW8LhDGQoSXSCqToBhCEVn0EN6AhjSRIpq8CRBBlNJVCgdRujBd0iBBSc8rAOIe7V7N9ezM7HhjjnS0f+P55tyZnfVOm+hPSnPR1ZBosJH5rmuM68U60VGNaI95q8wbpfPhgjnuFZnCtdnD1IzhJbLCWsKGYtjoV4y2rmdgQr68oq8593dJvTXTZ1/WEDeUOYZ50KnOlcxgf27PxpT15ONOhoZz/YqoWzfXlzlXHMvUWcu4NlO4rvrqsYIxGbA3Mn8alHMh6UPXN8RFn1qSz+Uq3BVm7jvejRie5vreW3DtGgtzEpi/kEWueYWvHEzIx3TVOaQQ12Zi3U6Gbq7oVtUrNI4Q1xa4q2mRW0WzcmWPQhYfV2cuY7p0vTB9PsrfHdmXq3JDQn+jtOgY7v+MAf295v7XLEPp4jR3vD5b31UFbuy6GvfD6/pbK47Z53neVPPu4ur9V3/PXJLazSKdW2u7F8cMqdkkepMQvU3MvRtPXqnnbbc8732SjduVF8wW+y+3+ZcUn2uuvf9q7thig4Wxf28ZLt5TWDNDXPmdvXaEad9H+4clokd2jZ812E9LhvuLmYcN4y+NcF4t/X2VfU2zestEZ3w8zn3eMVyfegvF+dVz5Pr2oc3PTsbSvB/sU/ZJBBe6UeyLyP9WHzjjO/ZHddxkb7HfL8dxtZJOVr9GPldyXlOus3fbpu+QyyRttvLxw33HEbm28zyY46Zj74rhPgMroYS8
+  </data>
+ </layer>
+ <layer id="19" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytlrlOw0AQhheHBjlFDqIIxHtAQkKEiyhKz9FR0iIUoETieagoEErpIjwBgpcJYv+sB8br2fWBf2nkZB3Pt3PsOL2Gqk33gVLRILuOtfi4Pk4RJhQfZrkPQT3cRWD8F+W2GsXYiKft+C3udRrG/0zIZ3wk5/k2h0t+aZ9ty3AvGmrfQ/l55D8aZ9d9MXOmSz4mFKOvBC4kxVyIOfAz82THXIYp1dSnz50sm9cMmo60zdw+qjBtbhWhV8uwJe4iyTP8rHSMK32dnhZgO+ZFES6vZ+Q4h3XoIFTqNcwybX31lLpq18ddJlxivj+n7193jYG71txIxx9N/nJBlif7fC6TWInJueBB8Eu8eGTW0Edl2F0rj8SF9kI3l8/VsMXYk7Rt9uh4L5w3lbpI7LJp1qjGxMUVuUXP2VzOphxx28z/UTp/dzmznz+f4p7IM13iciPNm8WYtG9eQ7DjiTHaQx7Tx4PoHPPn8F3qH+ohsH1cMPd1/c48bD47iI8acrYt1NzHzWNKe+Bc9DXYXNRrPu5bKPu/CYxJ4lzKRWSxq3CJx7nk3875L8eqs8TlPSLFaJtLNpeE+cXPqM3xiTN39RzrO94JdHb4/5iXXjmWS5hXfYGNd6o9Czdzelw/F/axZQyiz5L9V0+PxqSYfXL1i69nJFXhQtv6jK87Sn135D259ANixA4v
+  </data>
+ </layer>
+ <layer id="22" name="Clutter 2" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzdlsFKxDAQhkcLgrSgbrus+iK6drUS2KJe1ps+iPgmnhRR9OYeZA8iXoQc1hdQ9GnUGdu4aZvapM0q+MNPQxLy7cxOpgVoro4LcOgB3OCz5SRzPEyej4sWACV6cLNMhkzea34uxbMsecXNrlGst9KciPUnvbeqmSKHPnqYnn/gJRZrsphGrL0AwPGrmbJ8N+sMUzPHHxjvmYJbxqySTo5JV8REz+XYdZhfXM16Iu45mgXZ+VpMzVhJp8i8TGM9ni2uxwb3wYR7gczrlHuk4JqIb+rv7WJ+o6B6nw3mnleck/9Pttb8d6iYq7maKauhcR/gxLHPpJqpU7dCfGsyZl20ItcjtxinDRGbR+iNZJxnE/fekLtjcC9YpK4L4o4N6tyUq9LTMOHG28gOJ477+me8tRPr6nkG4AXdNqhLvq6/t4xpwrOlv2COpnBnfpNLNVmlBWQNsCctuXa4xBRculPC8vuOmNQHX+cBdj117zdhyZYlvp8ovkEDjo6oB36PQzu5vEvP6GjWPr1nbdUOsYkrs6nXlGl/irn9r/oE251fxA==
+  </data>
+ </layer>
+ <layer id="18" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytlctqFEEUhmt6sgkzEEi3tzdIlq5MepzM2IsgChGyGATfIi8gZJ+oiFHxgrpNViLouje+gDEPEUgcNAnihZzTVYc6XV23Gf3hp6pv56tz6tJCCLGeCHEXfA+81RbiFNqfiWzJY2b+HNsf4CfwnanPe9LlNSFud4XY6wixlAnxPJXPH8M3x5Z41FL/KJHvjdlYsD1LmkzO5UL2MNPX39jYjxlvrHhP2zKnHfAD8Hc2Fl+uJpfYpG0VawR+pPpjTw2Rj2N5aHkW4r7v1K9PVI4jNc/IdMUNaRLuDsvz6D8xY7ioE8ucFcuwJgfQ9v+dOwfMW93mNzjPz4w8cR/c7EG7EmabTM51MXfhfqpMMVavyz5y0SH5uLb6knhNKy60JdwrBtJl3z9303KxplW74o9li+t7PudhVjzMTbGLfpgZ4xCzxlY1pbqjFmeb74aYX1pxTBLxylyvJxuX2K5xbKizewb+BX/nZX/VsScqZt5cv7Z15BqHye3DvyDPAtyl+r4JnT8+bVj+VS4unRMu7iRsGxd11TJnJtfGnkS/5ptGjeDsuhK51lsijmtjmVzMGdmXO5IfiuvbGrRvYriHM9Koj53paknC+QwxicvFudOwOfdSW/c/XJQ28/VxF2ab5sLa7oO/tjQXmdw817dpfL60vqv/cK/OvABxD2AsWVv2Ta5Z45cBrk1FT+e3r5g2ueZ1qM4tHOOapc5Fru+VeT2m6yyI4b5Kdb6c/Smwj/AfFcM155c8ZOc0f+9ON+wQ9zfk9QecpE1utabAm/e1J5Fvb76DuG+UXyi/TnWNlyHfQnkarm8sGPtGpttBVq/xOREEmU0=
+  </data>
+ </layer>
+ <layer id="23" name="Final layer" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzbERACAIADHmspfBLZzLjgnkaJIB/iP+O6shCkC5e+abOfMFAHo8j80ClA==
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="117" template="../../../../common/maps/obj/enemy.tx" x="230.093" y="357.642">
+   <properties>
+    <property name="enemy" value="Bre"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="162" template="../../../../common/maps/obj/enemy.tx" x="173.842" y="182.105">
+   <properties>
+    <property name="enemy" value="Auntie Ool"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="169" template="../../../../common/maps/obj/enemy.tx" x="294.842" y="192.606">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Lasting Tarfire&quot;, &quot;Boggart Mischief&quot;, &quot;Boggart Ram-Gang&quot;]}"/>
+    <property name="enemy" value="Grub"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="178" template="../../../../common/maps/obj/enemy.tx" x="368.337" y="52.2495">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enraged Flamecaster&quot;, &quot;Tend to the Kiln&quot;, &quot;Lightning Coils&quot;]}"/>
+    <property name="enemy" value="Ashling"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="185" template="../../../../common/maps/obj/manashards.tx" x="379.553" y="15.756"/>
+  <object id="209" template="../../../../common/maps/obj/manashards.tx" x="361.342" y="14.7719"/>
+  <object id="211" template="../../../../common/maps/obj/enemy.tx" x="97.0083" y="361.772">
+   <properties>
+    <property name="enemy" value="Salacinder and Soot"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="223" template="../../../../common/maps/obj/gold.tx" x="353.842" y="33.4386"/>
+  <object id="246" template="../../../../common/maps/obj/entry_up.tx" x="28.5287" y="467.452" width="33.6981" height="12.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="247" template="../../../../common/maps/obj/dialog.tx" x="29.0088" y="435.855" width="40.1667" height="13">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Lava pools ahead, elementals and goblins dancing about on bridges between it. A twisting purple eclipsed sky twists ahead, a remnant of Lorwyn/Shadowmoor it was drawn from.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="248" template="../../../../common/maps/obj/dialog.tx" x="326.259" y="84.1053" width="81.6667" height="13">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A fiery elemental woman stands before you. 'So, you wish to face me? I am no longer merely of flame, ice, or ash. All the limitless elements are at my command!'&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="249" template="../../../../common/maps/obj/gold.tx" x="385.175" y="32.7719"/>
+  <object id="251" template="../../../../common/maps/obj/collision.tx" x="-23.0745" y="-18.0612" width="19.8333" height="509.333"/>
+  <object id="252" template="../../../../common/maps/obj/collision.tx" x="476.259" y="-17.2279" width="19.8333" height="509.333"/>
+  <object id="253" template="../../../../common/maps/obj/collision.tx" x="-31.0746" y="-25.2281" width="538.5" height="16"/>
+  <object id="254" template="../../../../common/maps/obj/collision.tx" x="-32.0746" y="471.772" width="538.5" height="16"/>
+  <object id="255" template="../../../../common/maps/obj/dialog.tx" x="157.009" y="228.605" width="44.6667" height="13">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Boggarts dance and canter about ahead.
+
+'Blights to spread! Butters to bread! Smashes on your head!'&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="256" template="../../../../common/maps/obj/booster.tx" x="441.509" y="59.4386">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="258" template="../../../../common/maps/obj/scroll.tx" x="368.478" y="31.1962">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashling's Command&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="259" template="../../../../common/maps/obj/scroll.tx" x="351.933" y="220.833">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Grub's Command&quot;, &quot;editions&quot;: [ &quot;ECL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="260" template="../../../../common/maps/obj/booster.tx" x="356.509" y="265.439">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ECL&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="263" template="../../../../common/maps/obj/enemy.tx" x="368.418" y="51.7113">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enraged Flamecaster&quot;, &quot;Tend to the Kiln&quot;]}"/>
+    <property name="enemy" value="Ashling"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="264" template="../../../../common/maps/obj/enemy.tx" x="295.569" y="192.469">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Lasting Tarfire&quot;, &quot;Boggart Mischief&quot;]}"/>
+    <property name="enemy" value="Grub"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

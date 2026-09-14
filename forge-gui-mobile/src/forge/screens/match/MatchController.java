@@ -11,11 +11,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
-import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import forge.Forge;
 import forge.Graphics;
@@ -27,6 +26,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
+import forge.card.CardSleeveImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
@@ -167,6 +167,10 @@ public class MatchController extends NetworkGuiGame {
     public static FImage getPlayerSleeve(final PlayerView p) {
         if (p == null)
             return FSkinImage.UNKNOWN;
+        final String artKey = p.getSleeveArtKey();
+        if (!StringUtils.isEmpty(artKey)) {
+            return new CardSleeveImage(artKey, p.getSleeveArtOffset()); // card-art sleeve: cover-cropped to the sleeve aspect
+        }
         return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
     }
 
@@ -303,12 +307,7 @@ public class MatchController extends NetworkGuiGame {
             view.getStack().checkEmptyStack();
 
         if (ph != null && saveState && ph.isMain()) {
-            phaseGameState = new GameState() {
-                @Override
-                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
-                }
-            };
+            phaseGameState = new GameState();
             try {
                 phaseGameState.initFromGame(getGameView().getGame());
             } catch (Exception e) {
@@ -452,7 +451,7 @@ public class MatchController extends NetworkGuiGame {
             PlayerView player = update.getPlayer();
 
             ZoneType zone = null;
-            for(ZoneType type : update.getZones()) {
+            for (ZoneType type : update.getZones()) {
                 zone = type;
                 break;
             }
@@ -615,8 +614,10 @@ public class MatchController extends NetworkGuiGame {
                 final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
                 label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
-                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase,
-                        () -> label.setStopAtPhase(true)));
+                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase, () -> {
+                    label.setStopAtPhase(true);
+                    instance.pushSkipPhaseToControllers(player, phase);
+                }));
             }
         }
 

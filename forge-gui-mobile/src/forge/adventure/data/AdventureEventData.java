@@ -28,6 +28,7 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.StreamUtil;
 
@@ -742,7 +743,7 @@ public class AdventureEventData implements Serializable {
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
             rewardDeck.setName("Drafted Deck");
-            rewardDeck.setComment("Prize for placing 1st overall in draft event");
+            rewardDeck.setComment(Forge.getLocalizer().getMessage("advPrizeDraftFirst"));
             rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Sealed) {
@@ -751,7 +752,7 @@ public class AdventureEventData implements Serializable {
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
             rewardDeck.setName("Sealed Card Pool");
-            rewardDeck.setComment("Prize for placing 1st overall in sealed event");
+            rewardDeck.setComment(Forge.getLocalizer().getMessage("advPrizeSealedFirst"));
             rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
@@ -852,9 +853,10 @@ public class AdventureEventData implements Serializable {
     }
 
     public String getDescription(PointOfInterestChanges changes) {
+        Localizer localizer = Forge.getLocalizer();
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         if (format == AdventureEventController.EventFormat.Draft) {
-            description = "Event Type: Booster Draft\n";
+            description = localizer.getMessage("advEventTypeBoosterDraft");
             description += "Block: " + getCardBlock() + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (eventRules.getPairingDescription()) + "\n\n";
@@ -886,8 +888,8 @@ public class AdventureEventData implements Serializable {
             } else {
                 description += "\n";
             }
-            description += "Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n";
-            description += "Participating in this event will award a valueless copy of each card in your Jumpstart deck.";
+            description += localizer.getMessage("advDraftPrizesDesc");
+            description += localizer.getMessage("advJumpstartParticipationPrize");
         } else if (format == AdventureEventController.EventFormat.Sealed) {
             description = "Event Type: Sealed Deck\n";
             description += "Block: " + getCardBlock() + "\n";
@@ -909,7 +911,7 @@ public class AdventureEventData implements Serializable {
             }
 
             description += "Prizes\n";
-            description += "Champion (3 wins): Keep your Sealed pool (all " + packConfiguration.length + " boosters)\n";
+            description += localizer.getMessage("advSealedChampionPrize", packConfiguration.length);
             description += "2+ wins: Silver Challenge Coin\n";
             description += String.format("1+ wins: %s Booster, %s Booster\n", rewardPacks[1].getComment(), rewardPacks[2].getComment());
             description += String.format("0 wins: %s Booster", rewardPacks[0].getComment());

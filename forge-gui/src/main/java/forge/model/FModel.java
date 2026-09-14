@@ -34,6 +34,7 @@ import forge.game.GameType;
 import forge.game.card.CardUtil;
 import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
+import forge.gui.download.CdnUuidCache;
 import forge.gamemodes.limited.GauntletMini;
 import forge.gamemodes.limited.ThemedChaosDraft;
 import forge.gamemodes.planarconquest.ConquestController;
@@ -63,6 +64,7 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 /**
@@ -85,7 +87,20 @@ public final class FModel {
             getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
-            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)));
+            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART),
+            buildPreferredLanguageAvailability()));
+
+    private static BiPredicate<String, String> buildPreferredLanguageAvailability() {
+        if (!getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)) {
+            return null;
+        }
+        String preferredLang = getPreferences().getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        if (preferredLang == null || preferredLang.isEmpty() || "en".equalsIgnoreCase(preferredLang)) {
+            return null;
+        }
+        return (setCode, collectorNumber) -> CdnUuidCache.isAvailableInLanguage(setCode, collectorNumber, preferredLang);
+    }
+
     private static final Supplier<QuestPreferences> questPreferences = Suppliers.memoize(QuestPreferences::new);
     private static final Supplier<ConquestPreferences> conquestPreferences = Suppliers.memoize(() -> {
        final ConquestPreferences cp = new ConquestPreferences();
@@ -193,9 +208,11 @@ public final class FModel {
         loadDynamicGamedata();
 
         // Load card database
-        // Lazy loading currently disabled
+        // Custom cards and tokens always load eagerly: StaticData.attemptToLoadCard only
+        // consults the main card reader, so a lazy custom reader would never be read.
+        final boolean loadCardsLazily = getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY);
         reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                false);
+                loadCardsLazily);
         tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 false);
 
@@ -257,7 +274,7 @@ public final class FModel {
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
-        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED) && !loadCardsLazily) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
             if(!commanderDeckGenMatrixLoaded){
@@ -335,9 +352,9 @@ public final class FModel {
      */
     public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED.isSet()) {
-            
+
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE));
-            
+
             for (String sectionName: contents.keySet()) {
                 CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
             }

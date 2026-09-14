@@ -1,11 +1,10 @@
 package forge.card;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
-import org.powermock.api.mockito.PowerMockito;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import forge.StaticData;
@@ -13,20 +12,27 @@ import forge.gamesimulationtests.util.CardDatabaseHelper;
 import forge.item.PaperCard;
 import forge.model.FModel;
 
+/**
+ * Every test here checks a card is not loaded yet, loads it, then checks it arrived.
+ *
+ * <p>
+ * The first check uses {@code contains()} rather than {@code getCard()}: since #11763 a lookup
+ * loads the card on demand, so asking {@code getCard()} whether a card is present puts it there.
+ * {@code contains()} reads the loaded-card index without loading anything.
+ * </p>
+ */
 public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
     protected CardDb cardDb;
 
-    @BeforeMethod
-    public void setup() {
-        StaticData data = FModel.getMagicDb();
-        this.cardDb = data.getCommonCards();
-    }
-
     @Override
     protected void initializeStaticData() {
-        StaticData data = CardDatabaseHelper.getStaticDataToPopulateOtherMocks(true);
-        PowerMockito.when(FModel.getMagicDb()).thenReturn(data);
+        // One lazily loaded database of this class's own, indexed once and emptied again before
+        // each test, since the checks above need it to start with nothing loaded.
+        StaticData data = CardDatabaseHelper.createStaticData("CardDbLazyCardLoadingCardMockTestCase", true);
+        data.resetLazyLoadedCards();
+        fModelMock.when(FModel::getMagicDb).thenReturn(data);
+        this.cardDb = data.getCommonCards();
     }
 
     @Test
@@ -36,13 +42,12 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        PaperCard borrowingCard = this.cardDb.getCard(cardName);
-        assertNull(borrowingCard);
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName);
 
-        borrowingCard = this.cardDb.getCard(cardName);
+        PaperCard borrowingCard = this.cardDb.getCard(cardName);
         assertNotNull(borrowingCard);
         assertEquals(borrowingCard.getName(), cardName);
         assertEquals(borrowingCard.getEdition(), "PLST");
@@ -64,31 +69,34 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        PaperCard borrowingCard = this.cardDb.getCard(cardName);
-        assertNull(borrowingCard);
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName, setCode);
 
-        borrowingCard = this.cardDb.getCard(cardName);
+        PaperCard borrowingCard = this.cardDb.getCard(cardName);
         assertNotNull(borrowingCard);
         assertEquals(borrowingCard.getName(), expectedCardName);
         assertEquals(borrowingCard.getEdition(), setCode);
 
-        assertNull(this.cardDb.getCard(cardName, "IMA")); // not added yet
+        // The card is now in the DB so we can update this test
+        CardEdition ima = FModel.getMagicDb().getCardEdition("IMA");
+        assertNotNull(ima);
+        assertNull(this.cardDb.getCardFromSet(expectedCardName, ima, false));
+        // And the lenient call falls back to the one printing that was loaded.
+        assertEquals(this.cardDb.getCard(cardName, "IMA").getEdition(), setCode);
     }
 
     @Test
     public void tesLoadAndGetAetherVialWithWrongCase() {
         String cardName = "AEther vial"; // wrong case
         String expectedCardName = "Aether Vial";
-        PaperCard aetherVialCard = this.cardDb.getCard(cardName);
-        assertNull(aetherVialCard);
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName);
 
-        aetherVialCard = this.cardDb.getCard(cardName);
+        PaperCard aetherVialCard = this.cardDb.getCard(cardName);
         assertNotNull(aetherVialCard);
         assertEquals(aetherVialCard.getName(), expectedCardName);
     }
@@ -100,13 +108,12 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
         String expectedSetCode = "EXO"; // Exodus
         CardRarity expectedCardRarity = CardRarity.Rare;
 
-        PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);
-        assertNull(dominatingLycidCard);
+        assertFalse(this.cardDb.contains(cardName));
 
         // Load the Card (just card name
         FModel.getMagicDb().attemptToLoadCard(cardName, wrongSetCode);
 
-        dominatingLycidCard = this.cardDb.getCard(cardName);
+        PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);
         assertNotNull(dominatingLycidCard);
         assertEquals(dominatingLycidCard.getName(), cardName);
         assertEquals(dominatingLycidCard.getEdition(), expectedSetCode);

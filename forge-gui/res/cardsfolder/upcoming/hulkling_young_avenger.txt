@@ -1,9 +1,0 @@
-Name:Hulkling, Young Avenger
-ManaCost:2 R R
-Types:Legendary Creature Kree Skrull Hero
-PT:4/4
-K:Flying
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ HulklingCopy | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME becomes a copy of up to one other target creature until end of turn, except his name is Hulkling, Young Avenger, he's 4/4, and he has flying and this ability.
-SVar:HulklingCopy:DB$ Clone | ValidTgts$ Creature.Other | ValidTgtsDesc$ another creature | TargetMin$ 0 | TargetMax$ 1 | NewName$ Hulkling, Young Avenger | SetPower$ 4 | SetToughness$ 4 | AddKeywords$ Flying | GainThisAbility$ True | AddSVars$ HulklingCopy | AILogic$ CloneBestCreature
-SVar:BuffedBy:Card.nonCreature+nonLand
-Oracle:Flying\nWhenever you cast a noncreature spell, Hulkling becomes a copy of up to one other target creature until end of turn, except his name is Hulkling, Young Avenger, he's 4/4, and he has flying and this ability.

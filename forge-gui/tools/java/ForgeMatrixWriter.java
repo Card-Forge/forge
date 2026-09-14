@@ -71,7 +71,8 @@ public final class ForgeMatrixWriter {
                 true,
                 false,
                 false,
-                false);
+                false,
+                null);
 
         HashMap<String, List<Map.Entry<PaperCard, Integer>>> matrix = new HashMap<>();
         int rows = 0;
@@ -168,7 +169,6 @@ public final class ForgeMatrixWriter {
         @Override public ISkinImage getCardArt(PaperCard card, boolean backFace) { return null; }
         @Override public ISkinImage createLayeredImage(PaperCard card, FSkinProp background, String overlayFilename, float opacity) { return null; }
         @Override public void clearImageCache() { }
-        @Override public void refreshSkin() { }
         @Override public String encodeSymbols(String str, boolean formatReminderText) { return str; }
         @Override public int getAvatarCount() { return 0; }
         @Override public int getSleevesCount() { return 0; }

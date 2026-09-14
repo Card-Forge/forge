@@ -1,0 +1,8 @@
+Name:Bothersome Noisemaker
+ManaCost:1 R
+Types:Creature Goblin Bard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigAmass | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, amass Goblins 1. (Put a +1/+1 counter on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)
+SVar:TrigAmass:DB$ Amass | Type$ Goblin | Num$ 1
+DeckHas:Ability$Token|Counters & Type$Goblin|Army
+Oracle:Whenever you cast a noncreature spell, amass Goblins 1. (Put a +1/+1 counter on an Army you control. It's also a Goblin. If you don't control an Army, create a 0/0 black Goblin Army creature token first.)

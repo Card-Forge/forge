@@ -28,6 +28,7 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.screens.CoverScreen;
 import forge.util.Aggregates;
+import forge.util.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,7 +154,7 @@ public class ConsoleCommandInterpreter {
                 WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
                 WorldStage.getInstance().loadPOI(poi);
                 Forge.clearTransitionScreen();
-            }, Forge.takeScreenshot())));
+            }, ScreenUtil.getInstance().takeScreenshot())));
             return "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
         registerCommand(new String[]{"spawn", "enemy"}, s -> {

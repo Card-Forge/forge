@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Marvel Super Heroes #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/06/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has two untapped mountains and a HULK SMASH! in their hand. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=I Am Iron Man;Monoist Sentry;Shore Up;Bloodthorn Flail;Shredder's Revenge
+p0battlefield=Iron Man Armor;Hulldrifter;Hydraulic Helper;Hydraulic Helper;Island;Island;Island;Swamp;Swamp
+p1life=11
+p1hand=HULK SMASH!
+p1battlefield=Hulk, Bruce Banner;Mountain;Mountain

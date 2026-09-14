@@ -1,0 +1,9 @@
+Name:Hulk's Thunderclap
+ManaCost:1 G
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Behold<1/Creature.Gamma> | Description$ As an additional cost to cast this spell, you may behold a Gamma creature. (You may choose a Gamma creature you control or reveal a Gamma creature card from your hand.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | ValidTgtsDesc$ creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to another target creature. If this spell's additional cost was paid, destroy target noncreature artifact or noncreature enchantment.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TargetUnique$ True | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.nonCreature,Enchantment.nonCreature | ValidTgtsDesc$ noncreature artifact or noncreature enchantment | Condition$ OptionalCost | ConditionOptionalPaid$ True
+SVar:X:ParentTargeted$CardPower
+Oracle:As an additional cost to cast this spell, you may behold a Gamma creature. (You may choose a Gamma creature you control or reveal a Gamma creature card from your hand.)\nTarget creature you control deals damage equal to its power to another target creature. If this spell's additional cost was paid, destroy target noncreature artifact or noncreature enchantment.

@@ -1,0 +1,9 @@
+Name:Highly Illogical
+ManaCost:1 U
+Types:Instant
+K:Kicker:1 U
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.cmcLE2 | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target spell with mana value 2 or less | SubAbility$ DBCounter | StackDescription$ SpellDescription | SpellDescription$ Counter target spell with mana value 2 or less.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TargetMin$ Y | TargetMax$ Y | StackDescription$ SpellDescription | SpellDescription$ If this spell was kicked, instead counter target spell.
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Kicked.1.0
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nCounter target spell with mana value 2 or less. If this spell was kicked, instead counter target spell.

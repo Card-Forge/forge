@@ -1,0 +1,13 @@
+Name:Ms. Marvel, Kamala Khan
+ManaCost:2 U
+Types:Legendary Creature Mutant Inhuman Hero
+PT:1/4
+K:Vigilance
+K:Reach
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TargetsValid$ Creature.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Embiggen Fist — Whenever you cast a spell that targets a creature you control, draw a card. Until end of turn, NICKNAME gains "NICKNAME's base power is equal to the number of cards in your hand."
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | staticAbilities$ MsMarvelStatic
+SVar:MsMarvelStatic:Mode$ Continuous | Affected$ Card.Self | SetPower$ X | Description$ NICKNAME's base power is equal to the number of cards in your hand.
+SVar:X:Count$ValidHand Card.YouOwn
+Oracle:Vigilance, reach\nYou have no maximum hand size.\nEmbiggen Fist — Whenever you cast a spell that targets a creature you control, draw a card. Until end of turn, Ms. Marvel gains "Ms. Marvel's base power is equal to the number of cards in your hand."

@@ -1,0 +1,10 @@
+Name:Master's Councillors
+ManaCost:1 U
+Types:Creature Human Advisor
+PT:1/3
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +2/+0 for each graveyard with seven or more cards in it.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw your second card each turn, target player mills three cards. (They put the top three cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player
+SVar:X:PlayerCountPlayers$HasPropertyHasCardsInGraveyard_Card_GE7/Times.2
+Oracle:Vigilance\nThis creature gets +2/+0 for each graveyard with seven or more cards in it.\nWhenever you draw your second card each turn, target player mills three cards. (They put the top three cards of their library into their graveyard.)

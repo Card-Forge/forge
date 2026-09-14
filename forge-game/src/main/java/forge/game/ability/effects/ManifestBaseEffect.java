@@ -17,6 +17,13 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public abstract class ManifestBaseEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        // manifests the top of the library unless ChoiceZone points somewhere else
+        return !sa.hasParam("ChoiceZone") || zoneParamIsLibrary(sa, "ChoiceZone");
+    }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();

@@ -1,0 +1,12 @@
+Name:Jalira's Show
+ManaCost:no cost
+Types:Plane Las Vegas
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever you attack, create a 1/1 red Performer creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_performer_flying | TokenOwner$ You
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Command | TriggerDescription$ Whenever you planeswalk here or chaos ensues, destroy up to one target creature. When you do, its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then puts the rest on the bottom of their library in a random order.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDestroy | Secondary$ True | TriggerDescription$ Whenever you planeswalk here or chaos ensues, destroy up to one target creature. When you do, its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then puts the rest on the bottom of their library in a random order.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | RememberLKI$ True | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Performer
+Oracle:Whenever you attack, create a 1/1 red Performer creature token with flying.\nWhenever you planeswalk here or chaos ensues, destroy up to one target creature. When you do, its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then puts the rest on the bottom of their library in a random order.

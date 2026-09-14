@@ -302,8 +302,6 @@ public class VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAlwaysNo;
         private final JMenuItem jmiYieldToStack;
         private final JMenuItem jmiYieldToEntireStack;
-        private StackItemView item;
-
         private String yieldKey = "";
         private boolean abilityScope;
 
@@ -312,10 +310,6 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield.addActionListener(arg0 -> {
                 final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(yieldKey);
                 controller.getMatchUI().getGameController().setShouldAutoYield(yieldKey, !autoYield, abilityScope);
-                if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
-                    //auto-pass priority if ability is on top of stack
-                    controller.getMatchUI().getGameController().passPriority();
-                }
             });
             add(jmiAutoYield);
 
@@ -342,7 +336,6 @@ public class VStack implements IVDoc<CStack> {
                 final PlayerView local = controller.getMatchUI().getCurrentPlayer();
                 if (local == null) return;
                 controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, true));
-                controller.getMatchUI().getGameController().passPriority();
             });
             add(jmiYieldToStack);
 
@@ -351,21 +344,19 @@ public class VStack implements IVDoc<CStack> {
                 final PlayerView local = controller.getMatchUI().getCurrentPlayer();
                 if (local == null) return;
                 controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, false));
-                controller.getMatchUI().getGameController().passPriority();
             });
             add(jmiYieldToEntireStack);
         }
 
         public void setStackInstance(final StackItemView item0) {
-            item = item0;
-            yieldKey = item.getKey();
+            yieldKey = item0.getKey();
             abilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
 
-            jmiAutoYield.setVisible(item.isAbility());
-            jmiAutoYield.setSelected(item.isAbility()
+            jmiAutoYield.setVisible(item0.isAbility());
+            jmiAutoYield.setSelected(item0.isAbility()
                     && controller.getMatchUI().getGameController().shouldAutoYield(yieldKey));
 
-            if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !yieldKey.isEmpty()) {
+            if (item0.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item0.getActivatingPlayer()) && !yieldKey.isEmpty()) {
                 TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(yieldKey);
                 jmiAlwaysYes.setSelected(decision == TriggerDecision.ACCEPT);
                 jmiAlwaysNo.setSelected(decision == TriggerDecision.DECLINE);

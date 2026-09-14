@@ -1,7 +1,6 @@
 package forge.ai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
@@ -15,12 +14,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.StaticData;
 import forge.ai.simulation.GameStateEvaluator;
@@ -220,6 +221,34 @@ public class ComputerUtilCard {
      * @param list
      * @return a {@link forge.game.card.Card} object.
      */
+
+    /**
+     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
+     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
+     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     */
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+        final Game game = newController.getGame();
+        final MutableBoolean reset = new MutableBoolean(false);
+        final CardCollection kept = CardLists.filter(list, c -> {
+            if (!c.isCreature() || c.getController().equals(newController)) {
+                return true;
+            }
+            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                final Card copy = CardCopyService.getLKICopy(c);
+                copy.setController(newController, game.getNextTimestamp());
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
+                reset.setTrue();
+                return copy.getNetToughness() > 0;
+            }
+            return true;
+        });
+        if (reset.isTrue()) {
+            game.getAction().checkStaticAbilities(false);
+        }
+        return kept;
+    }
+
     public static Card getBestLandAI(final Iterable<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.LANDS);
         if (land.isEmpty()) {
@@ -233,7 +262,7 @@ public class ComputerUtilCard {
             // TODO - Improve ranking various non-basic lands depending on context
 
             // Urza's Mine/Tower/Power Plant
-            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(ZoneType.Battlefield, ZoneType.Hand);
             if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();
@@ -292,7 +321,6 @@ public class ComputerUtilCard {
     public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
         return evaluateLandRemovalPriority(ai, land, removal, true);
     }
-
     private static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal,
             final boolean includeLandDestruction) {
         if (land == null || !land.isLand()) {
@@ -321,11 +349,12 @@ public class ComputerUtilCard {
                 }
                 continue;
             }
-            if (isHomewardPathAbility(ability)) {
+            if (ability.getApi() == ApiType.GainControlVariant
+                    && "GainControlOwns".equals(ability.getParam("AILogic"))) {
                 // Usually low priority: Homeward Path matters if the AI has
                 // stolen creatures that it could lose, but otherwise it is
                 // mostly just a colorless land with a narrow political button.
-                if (aiControlsStolenCreature(ai)) {
+                if (ai.getCreaturesInPlay().anyMatch(c -> c.getOwner() != ai)) {
                     score += 100;
                 } else {
                     score = Math.max(0, score - 50);
@@ -420,20 +449,6 @@ public class ComputerUtilCard {
             valid = ability.getParamOrDefault("ValidCards", "");
         }
         return valid.contains("Land");
-    }
-
-    private static boolean isHomewardPathAbility(final SpellAbility ability) {
-        return ability.getApi() == ApiType.GainControlVariant
-                && "GainControlOwns".equals(ability.getParam("AILogic"));
-    }
-
-    private static boolean aiControlsStolenCreature(final Player ai) {
-        for (Card creature : ai.getCreaturesInPlay()) {
-            if (!creature.getOwner().equals(ai)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static boolean isLandAnimationAbility(final SpellAbility ability) {
@@ -1473,7 +1488,7 @@ public class ComputerUtilCard {
 
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 holdCombatTricks = aic.getBoolProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
                 chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
@@ -1755,13 +1770,13 @@ public class ComputerUtilCard {
                     }
                 }
 
-                float value = 1.0f * (pumpedDmg - dmg);
+                float value = pumpedDmg - dmg;
                 if (c == sa.getHostCard() && power > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= power / divisor;
+                    value *= (float) power / divisor;
                 } else {
                     value /= opp.getLife();
                 }
@@ -1833,7 +1848,6 @@ public class ComputerUtilCard {
                     reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
                     // Only proceed with this if we could actually reserve mana
                     if (reserved) {
-                        AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
                         AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
                         return false;
                     }

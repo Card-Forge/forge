@@ -1,8 +1,0 @@
-Name:Photon Blast Barrage
-ManaCost:X R R
-Types:Sorcery
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it X times. You may choose new targets for the copies.
-SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | NumCopies$ X | MayChooseTarget$ True
-A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
-SVar:X:Count$xPaid
-Oracle:When you cast this spell, copy it X times. You may choose new targets for the copies.\nPhoton Blast Barrage deals 1 damage to target creature.

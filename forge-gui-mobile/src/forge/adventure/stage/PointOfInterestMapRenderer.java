@@ -3,11 +3,12 @@ package forge.adventure.stage;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 /**
  * Custom renderer to render the game stage between the map layers of a tiled map
  */
-public class PointOfInterestMapRenderer extends OrthogonalTiledMapRendererBleeding {
+public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
     private final MapStage stage;
 
     public PointOfInterestMapRenderer(MapStage stage) {

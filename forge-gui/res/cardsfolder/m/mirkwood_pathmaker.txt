@@ -1,0 +1,8 @@
+Name:Mirkwood Pathmaker
+ManaCost:2 G
+Types:Creature Elf Ranger
+PT:*/*
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:Mirkwood Pathmaker's power and toughness are each equal to the number of lands you control.

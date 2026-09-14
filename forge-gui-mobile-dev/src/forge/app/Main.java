@@ -96,15 +96,21 @@ public class Main {
         @Override
         public void restart() {
             if (RestartUtil.prepareForRestart()) {
+                // Calls dispose()
                 Gdx.app.exit();
-                System.exit(0);
+                // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
+                // while disposing assets. Non daemon threads and System.exit(0) will cause the exit code -1073740791 (0xC0000409)
+                //System.exit(0);
             }
         }
 
         @Override
         public void exit() {
-            Gdx.app.exit(); //can just use Gdx.app.exit for desktop
-            System.exit(0);
+            // Calls dispose()
+            Gdx.app.exit();
+            // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
+            // while disposing assets. Non daemon threads and System.exit(0) will cause the exit code -1073740791 (0xC0000409)
+            //System.exit(0);
         }
 
         @Override

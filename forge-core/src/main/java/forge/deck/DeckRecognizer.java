@@ -28,11 +28,14 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * <p>
@@ -41,6 +44,9 @@ import java.util.regex.Pattern;
  * 
  */
 public class DeckRecognizer {
+    private static final Map<Pattern, Map<String, Integer>> PORTABLE_PATTERN_GROUPS =
+            Collections.synchronizedMap(new IdentityHashMap<>());
+
     /**
      * The Enum TokenType.
      */
@@ -403,12 +409,78 @@ public class DeckRecognizer {
     private static final String LINE_COMMENT_DELIMITER_OR_MD_HEADER = "#";
     private static final String ASTERISK = "* ";  // Note the blank space after asterisk!
 
+    private static Pattern compilePattern(String regex, int flags) {
+        try {
+            return Pattern.compile(regex, flags);
+        } catch (PatternSyntaxException ignored) {
+            // RoboVM's regex implementation does not support Java named capture groups.
+            return compilePortablePattern(regex, flags);
+        }
+    }
+
+    static Pattern compilePortablePattern(String regex, int flags) {
+        PortablePattern portablePattern = makePortablePattern(regex);
+        Pattern pattern = Pattern.compile(portablePattern.regex, flags);
+        PORTABLE_PATTERN_GROUPS.put(pattern, portablePattern.groupIndexes);
+        return pattern;
+    }
+
+    private static PortablePattern makePortablePattern(String regex) {
+        StringBuilder portableRegex = new StringBuilder(regex.length());
+        Map<String, Integer> groupIndexes = new HashMap<>();
+        int groupIndex = 0;
+        boolean inCharacterClass = false;
+
+        for (int i = 0; i < regex.length(); i++) {
+            char current = regex.charAt(i);
+            if (current == '\\' && i + 1 < regex.length()) {
+                portableRegex.append(current).append(regex.charAt(++i));
+                continue;
+            }
+            if (current == '[') {
+                inCharacterClass = true;
+            } else if (current == ']') {
+                inCharacterClass = false;
+            } else if (current == '(' && !inCharacterClass) {
+                boolean isSpecialGroup = i + 1 < regex.length() && regex.charAt(i + 1) == '?';
+                boolean isNamedGroup = isSpecialGroup && i + 3 < regex.length()
+                        && regex.charAt(i + 2) == '<'
+                        && regex.charAt(i + 3) != '=' && regex.charAt(i + 3) != '!';
+                if (isNamedGroup) {
+                    int nameEnd = regex.indexOf('>', i + 3);
+                    if (nameEnd < 0) {
+                        throw new PatternSyntaxException("Unclosed named capture group", regex, i);
+                    }
+                    groupIndexes.put(regex.substring(i + 3, nameEnd), ++groupIndex);
+                    portableRegex.append('(');
+                    i = nameEnd;
+                    continue;
+                }
+                if (!isSpecialGroup) {
+                    groupIndex++;
+                }
+            }
+            portableRegex.append(current);
+        }
+        return new PortablePattern(portableRegex.toString(), groupIndexes);
+    }
+
+    private static final class PortablePattern {
+        private final String regex;
+        private final Map<String, Integer> groupIndexes;
+
+        private PortablePattern(String regex, Map<String, Integer> groupIndexes) {
+            this.regex = regex;
+            this.groupIndexes = groupIndexes;
+        }
+    }
+
     // Core Matching Patterns (initialised in Constructor)
     public static final String REGRP_DECKNAME = "deckName";
     public static final String REX_DECK_NAME =
             String.format("^(\\/\\/\\s*)?(?<pre>(deck|name(\\s)?))(\\:|=)\\s*(?<%s>([a-zA-Z0-9',\\/\\-\\s\\)\\]\\(\\[\\#]+))\\s*(.*)$",
                     REGRP_DECKNAME);
-    public static final Pattern DECK_NAME_PATTERN = Pattern.compile(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
+    public static final Pattern DECK_NAME_PATTERN = compilePattern(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
 
     public static final String REGRP_TOKEN = "token";
     public static final String REGRP_COLR1 = "colr1";
@@ -422,25 +494,41 @@ public class DeckRecognizer {
     public static final String REX_MANA_COLOURS = String.format("(\\{(%s)\\})|(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r)", MANA_SYMBOLS);
     public static final String REX_MANA = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(%s))((\\s|-|\\|)(?<%s>(%s)))?(?<post>[^a-zA-Z]*)?$",
             REGRP_COLR1, REX_MANA_COLOURS, REGRP_COLR2, REX_MANA_COLOURS);
-    public static final Pattern NONCARD_PATTERN = Pattern.compile(REX_NOCARD, Pattern.CASE_INSENSITIVE);
-    public static final Pattern CMC_PATTERN = Pattern.compile(REX_CMC, Pattern.CASE_INSENSITIVE);
-    public static final Pattern CARD_RARITY_PATTERN = Pattern.compile(REX_RARITY, Pattern.CASE_INSENSITIVE);
-    public static final Pattern MANA_PATTERN = Pattern.compile(REX_MANA, Pattern.CASE_INSENSITIVE);
-    public static final Pattern MANA_SYMBOL_PATTERN = Pattern.compile(REX_MANA_SYMBOLS, Pattern.CASE_INSENSITIVE);
+    public static final Pattern NONCARD_PATTERN = compilePattern(REX_NOCARD, Pattern.CASE_INSENSITIVE);
+    public static final Pattern CMC_PATTERN = compilePattern(REX_CMC, Pattern.CASE_INSENSITIVE);
+    public static final Pattern CARD_RARITY_PATTERN = compilePattern(REX_RARITY, Pattern.CASE_INSENSITIVE);
+    public static final Pattern MANA_PATTERN = compilePattern(REX_MANA, Pattern.CASE_INSENSITIVE);
+    public static final Pattern MANA_SYMBOL_PATTERN = compilePattern(REX_MANA_SYMBOLS, Pattern.CASE_INSENSITIVE);
 
     public static final String REGRP_SET = "setcode";
     public static final String REGRP_COLLNR = "collnr";
     public static final String REGRP_CARD = "cardname";
     public static final String REGRP_CARDNO = "count";
 
-    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
+    // "?" is part of several card names, e.g. "Continue?", "When Will You Learn?" and
+    // "Which of You Burns Brightest?", none of which could be imported before.
+    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\?\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
-    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)", REGRP_COLLNR);
+    /**
+     * One segment of a collector number: either it contains a digit, or it is uppercase
+     * and digits with at most one trailing lowercase letter.
+     *
+     * The second shape is what keeps a card name out. "CAa" and "TMP" are real collector
+     * numbers, but "Sink" must not be one, or "1 TMP Power Sink" parses as a card plus a
+     * set plus a collector number. An unrestricted lowercase run cannot tell those apart.
+     */
+    private static final String REX_COLLNR_SEGMENT = "(?:[0-9A-Za-z]*[0-9][0-9A-Za-z]*|[0-9A-Z]+[a-z]?)";
+    // Only the leading segment has to be strict. Once a separator has been seen the token
+    // can no longer be confused with a card name, so anything alphanumeric is allowed after
+    // one, which is what "118†s" and "2J-b" need.
+    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?%s(?:[-_★☇†Φ][0-9A-Za-z]*)*)",
+            REGRP_COLLNR, REX_COLLNR_SEGMENT);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
     // EXTRA
+    // Foil markers: (F) MTGGoldfish; *F* foil and *E* etched foil, Moxfield/MTGA style
     public static final String REGRP_FOIL_GFISH = "foil";
     private static final String REX_FOIL_MTGGOLDFISH = String.format(
-            "(?<%s>\\(F\\))?", REGRP_FOIL_GFISH);
+            "(?<%s>\\(F\\)|\\*[FE]\\*)?", REGRP_FOIL_GFISH);
     // XMage Sideboard indicator - pushed a bit further with deck section indication
     public static final String REGRP_DECK_SEC_XMAGE_STYLE = "decsec";
     private static final String REX_DECKSEC_XMAGE = String.format(
@@ -450,36 +538,36 @@ public class DeckRecognizer {
     public static final String REX_CARD_SET_REQUEST = String.format(
             "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)\\s?%s(\\s|\\)|\\]|\\})?\\s*%s",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern CARD_SET_PATTERN = Pattern.compile(REX_CARD_SET_REQUEST);
+    public static final Pattern CARD_SET_PATTERN = compilePattern(REX_CARD_SET_REQUEST, 0);
     // 2. Set-Card Request (Amount?, Set, CardName)
     public static final String REX_SET_CARD_REQUEST = String.format(
             "(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s*%s\\s*",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern SET_CARD_PATTERN = Pattern.compile(REX_SET_CARD_REQUEST);
+    public static final Pattern SET_CARD_PATTERN = compilePattern(REX_SET_CARD_REQUEST, 0);
     // 3. Full-Request (Amount?, CardName, Set, Collector Number|Art Index) - MTGArena Format
     public static final String REX_FULL_REQUEST_CARD_SET = String.format(
             "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?(\\s+|\\|\\s*)%s\\s*%s\\s*",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern CARD_SET_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_SET);
+    public static final Pattern CARD_SET_COLLNO_PATTERN = compilePattern(REX_FULL_REQUEST_CARD_SET, 0);
     // 4. Full-Request (Amount?, Set, CardName, Collector Number|Art Index) - Alternative for flexibility
     public static final String REX_FULL_REQUEST_SET_CARD = String.format(
             "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s(\\s+|\\|\\s*)%s\\s*%s$",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern SET_CARD_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_SET_CARD);
+    public static final Pattern SET_CARD_COLLNO_PATTERN = compilePattern(REX_FULL_REQUEST_SET_CARD, 0);
     // 5. (MTGGoldfish mostly) (Amount?, Card Name, <Collector Number>, Set)
     public static final String REX_FULL_REQUEST_CARD_COLLNO_SET = String.format(
             "^(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s+(\\<%s\\>)\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s$",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_COLL_NUMBER, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern CARD_COLLNO_SET_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_COLLNO_SET);
+    public static final Pattern CARD_COLLNO_SET_PATTERN = compilePattern(REX_FULL_REQUEST_CARD_COLLNO_SET, 0);
     // 6. XMage format (Amount?, [Set:Collector Number] Card Name)
     public static final String REX_FULL_REQUEST_XMAGE = String.format(
             "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\[)?%s:%s(\\])\\s+%s\\s*%s$",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_COLL_NUMBER, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern SET_COLLNO_CARD_XMAGE_PATTERN = Pattern.compile(REX_FULL_REQUEST_XMAGE);
+    public static final Pattern SET_COLLNO_CARD_XMAGE_PATTERN = compilePattern(REX_FULL_REQUEST_XMAGE, 0);
     // 7. Card-Only Request (Amount?)
     public static final String REX_CARDONLY = String.format(
             "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*%s", REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
-    public static final Pattern CARD_ONLY_PATTERN = Pattern.compile(REX_CARDONLY);
+    public static final Pattern CARD_ONLY_PATTERN = compilePattern(REX_CARDONLY, 0);
 
     // CoreTypes (to recognise Tokens of type CardType
     private static final CharSequence[] CARD_TYPES = allCardTypes();
@@ -621,7 +709,7 @@ public class DeckRecognizer {
     }
 
     public static String purgeAllLinks(String line){
-        String urlPattern = "(?<protocol>((https|ftp|file|http):))(?<sep>((//|\\\\)+))(?<url>([\\w\\d:#@%/;$~_?+-=\\\\.&]*))";
+        String urlPattern = "(?:(?:https|ftp|file|http):)(?:(?://|\\\\)+)(?:[\\w\\d:#@%/;$~_?+-=\\\\.&]*)";
         Pattern p = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(line);
 
@@ -792,14 +880,17 @@ public class DeckRecognizer {
                 (this.gameFormatRestrictedCards != null && !this.gameFormatRestrictedCards.isEmpty());
     }
 
-    private String getRexGroup(Matcher matcher, String groupName){
-        String rexGroup;
-        try{
-            rexGroup = matcher.group(groupName);
-        } catch (IllegalArgumentException ex) {
-            rexGroup = null;
+    static String getRexGroup(Matcher matcher, String groupName){
+        Map<String, Integer> groupIndexes = PORTABLE_PATTERN_GROUPS.get(matcher.pattern());
+        if (groupIndexes != null) {
+            Integer groupIndex = groupIndexes.get(groupName);
+            return groupIndex == null ? null : matcher.group(groupIndex);
         }
-        return rexGroup;
+        try{
+            return matcher.group(groupName);
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
     }
 
     private boolean isBannedInFormat(PaperCard pc) {
@@ -915,7 +1006,7 @@ public class DeckRecognizer {
         Matcher noncardMatcher = NONCARD_PATTERN.matcher(line);
         if (!noncardMatcher.matches())
             return null;
-        return noncardMatcher.group(REGRP_TOKEN);
+        return getRexGroup(noncardMatcher, REGRP_TOKEN);
     }
 
     private static String cardRarityTokenMatch(final String lineAsIs){
@@ -925,7 +1016,7 @@ public class DeckRecognizer {
         Matcher cardRarityMatcher = CARD_RARITY_PATTERN.matcher(line);
         if (!cardRarityMatcher.matches())
             return null;
-        return cardRarityMatcher.group(REGRP_TOKEN);
+        return getRexGroup(cardRarityMatcher, REGRP_TOKEN);
     }
 
     private static String cardCMCTokenMatch(final String lineAsIs){
@@ -935,7 +1026,7 @@ public class DeckRecognizer {
         Matcher cardCMCmatcher = CMC_PATTERN.matcher(line);
         if (!cardCMCmatcher.matches())
             return null;
-        return cardCMCmatcher.group(REGRP_TOKEN);
+        return getRexGroup(cardCMCmatcher, REGRP_TOKEN);
     }
 
     private String getCardCMCMatch(String lineAsIs) {
@@ -955,8 +1046,8 @@ public class DeckRecognizer {
         Matcher manaMatcher = MANA_PATTERN.matcher(line);
         if (!manaMatcher.matches())
             return null;
-        String firstMana = manaMatcher.group(REGRP_COLR1);
-        String secondMana = manaMatcher.group(REGRP_COLR2);
+        String firstMana = getRexGroup(manaMatcher, REGRP_COLR1);
+        String secondMana = getRexGroup(manaMatcher, REGRP_COLR2);
         firstMana = matchAnyManaSymbolIn(firstMana);
         secondMana = matchAnyManaSymbolIn(secondMana);
         return Pair.of(firstMana, secondMana);
@@ -967,7 +1058,7 @@ public class DeckRecognizer {
             return null;
         Matcher matchManaSymbol = MANA_SYMBOL_PATTERN.matcher(manaToken);
         if (matchManaSymbol.matches())
-            return matchManaSymbol.group(REGRP_MANA);
+            return getRexGroup(matchManaSymbol, REGRP_MANA);
         return manaToken;
     }
 
@@ -1010,7 +1101,40 @@ public class DeckRecognizer {
     private static MagicColor.Color getMagicColor(String colorName){
         if (colorName.toLowerCase().startsWith("multi") || colorName.equalsIgnoreCase("m"))
             return null;  // will be handled separately
-        return MagicColor.Color.fromName(colorName.toLowerCase());
+        return MagicColor.Color.fromName(toLongColourName(colorName));
+    }
+
+    /**
+     * Maps what {@link #REX_MANA_COLOURS} and {@link #manaTokenMatch} can produce onto the
+     * names {@link MagicColor.Color#fromName} understands.
+     *
+     * <p>
+     * Two shapes need translating. A mana symbol has already been reduced to its bare
+     * letter by {@link #matchAnyManaSymbolIn}, so "{U}" arrives here as "U". And the regex
+     * deliberately accepts British spellings, so "colourless" arrives here too. Neither is
+     * in that switch, so both resolved to null and were reported as multicolour: "{U} {W}"
+     * came out as {W}{U}{B}{R}{G} instead of {WU}, and "Colourless" as colourless //
+     * multicolour.
+     * </p>
+     *
+     * <p>
+     * The normalisation lives here rather than in {@code MagicColor.Color.fromName}
+     * because {@code ImageUtil.specFaceToCollectorSuffix} relies on a single letter NOT
+     * resolving to a colour when it builds Scryfall collector-number suffixes for
+     * Specialize faces. Only this parser accepts these shapes, so only this parser widens.
+     * </p>
+     */
+    private static String toLongColourName(String colorName) {
+        String name = colorName.toLowerCase(Locale.ROOT);
+        return switch (name) {
+            case "w" -> MagicColor.Constant.WHITE;
+            case "u" -> MagicColor.Constant.BLUE;
+            case "b" -> MagicColor.Constant.BLACK;
+            case "r" -> MagicColor.Constant.RED;
+            case "g" -> MagicColor.Constant.GREEN;
+            case "c", "colourless" -> MagicColor.Constant.COLORLESS;
+            default -> name;
+        };
     }
 
     public static boolean isDeckName(final String lineAsIs) {
@@ -1027,7 +1151,7 @@ public class DeckRecognizer {
         String line = text.trim();
         final Matcher deckNamePattern = DECK_NAME_PATTERN.matcher(line);
         if (deckNamePattern.matches())
-            return deckNamePattern.group(REGRP_DECKNAME);  // Deck name is at match 7
+            return getRexGroup(deckNamePattern, REGRP_DECKNAME);
         return "";
     }
 

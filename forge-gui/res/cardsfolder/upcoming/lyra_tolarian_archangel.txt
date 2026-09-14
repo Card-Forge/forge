@@ -1,0 +1,12 @@
+Name:Lyra, Tolarian Archangel
+ManaCost:1 U U
+Types:Legendary Creature Angel Wizard
+PT:3/3
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you've drawn three or more cards this turn, create a 3/3 blue Angel creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ u_3_3_angel_flying | TokenOwner$ You
+A:AB$ Effect | Cost$ 3 U U | Triggers$ DamageTrig | SpellDescription$ Until end of turn, whenever NICKNAME deals combat damage to a player, draw two cards.
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.EffectSource | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever EFFECTSOURCE  deals combat damage to a player, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+SVar:X:Count$YouDrewThisTurn
+Oracle:Flying\nAt the beginning of each end step, if you've drawn three or more cards this turn, create a 3/3 blue Angel creature token with flying.\n{3}{U}{U}: Until end of turn, whenever Lyra deals combat damage to a player, draw two cards.

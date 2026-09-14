@@ -32,10 +32,11 @@ import forge.util.Lang;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.Multiset;
 
 /**
  * The Class CostRemoveAnyCounter.
@@ -82,8 +83,8 @@ public class CostRemoveAnyCounter extends CostPart {
         }
         // use flatMap instead of mapMulti for Android 13 and below
         //https://developer.android.com/reference/java/util/stream/Stream#mapMulti
-        return validCards.stream().flatMap(c -> c.getCounters().entrySet().stream().filter(e -> c.canRemoveCounters(e.getKey())))
-                .collect(Collectors.summingInt(e -> e.getValue()));
+        return validCards.stream().flatMap(c -> c.getCounters().entrySet().stream().filter(e -> c.canRemoveCounters(e.getElement())))
+                .collect(Collectors.summingInt(e -> e.getCount()));
     }
 
     /*
@@ -133,10 +134,10 @@ public class CostRemoveAnyCounter extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
-        for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
-            for (Entry<CounterType, Integer> v : e.getValue().entrySet()) {
-                removed += v.getValue();
-                e.getKey().subtractCounter(v.getKey(), v.getValue(), ai);
+        for (Entry<GameEntity, Multiset<CounterType>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
+            for (Multiset.Entry<CounterType> v : e.getValue().entrySet()) {
+                removed += v.getCount();
+                e.getKey().subtractCounter(v.getElement(), v.getCount(), ai);
             }
             if (e.getKey() instanceof Card c) {
                 e.getKey().getGame().updateLastStateForCard(c);
@@ -146,7 +147,6 @@ public class CostRemoveAnyCounter extends CostPart {
         ability.setSVar("CostCountersRemoved", Integer.toString(removed));
         return true;
     }
-
 
     public String getDescriptiveType(boolean multiple) {
         String typeDesc = this.getTypeDescription();

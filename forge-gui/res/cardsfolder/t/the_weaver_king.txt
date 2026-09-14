@@ -1,0 +1,11 @@
+Name:The Weaver King
+ManaCost:4 U B
+Types:Legendary Creature Horror Wizard
+PT:3/6
+K:Shadow
+T:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, they mill that many cards. Then for each opponent, put a creature card from that player's graveyard that was put there from their library this turn onto the battlefield under your control.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ X | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature.ThisTurnEnteredFrom_Library | DefinedPlayer$ Opponent | Chooser$ You | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Hidden$ True
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Ability$Mill
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever The Weaver King deals combat damage to a player, they mill that many cards. Then for each opponent, put a creature card from that player's graveyard that was put there from their library this turn onto the battlefield under your control.

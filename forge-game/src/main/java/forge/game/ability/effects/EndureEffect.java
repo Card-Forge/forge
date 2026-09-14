@@ -81,6 +81,8 @@ public class EndureEffect extends TokenEffectBase {
                 result.setBaseToughnessString(num);
                 result.setBaseToughness(amount);
 
+                result.setTokenSpawningAbility(sa);
+
                 tokenTable.put(pl, result, 1);
             }
         }

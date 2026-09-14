@@ -61,15 +61,23 @@ public class HeadlessGuiDesktop extends GuiDesktop implements IHasForgeLog {
     @Override
     public void showBazaar() { }
 
+    // The overrides below duplicate GuiDesktop's headless guards on purpose. Those guards key off
+    // GraphicsEnvironment.isHeadless(), which is false when the suite runs under Xvfb with a real
+    // DISPLAY — as CI does — so without these a test could open a genuine modal dialog and hang.
+    // Keep their return values in step with GuiDesktop's, or tests exercise semantics production
+    // no longer has.
+
     @Override
     public int showOptionDialog(final String message, final String title,
                                 final FSkinProp icon, final List<String> options,
                                 final int defaultOption) {
         System.err.println("[HeadlessGuiDesktop] " + title + ": " + message);
         if (options != null && !options.isEmpty()) {
-            System.err.println("[HeadlessGuiDesktop] Options: " + options + ", returning: " + defaultOption);
+            System.err.println("[HeadlessGuiDesktop] Options: " + options + ", dismissed without choosing");
         }
-        return defaultOption;
+        // Not defaultOption: SOptionPane.showConfirmDialog reads index 0 as "Yes", so returning the
+        // default would auto-approve every confirmation, including destructive ones.
+        return -1;
     }
 
     @Override

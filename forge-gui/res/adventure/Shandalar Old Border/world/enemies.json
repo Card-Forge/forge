@@ -48128,7 +48128,7 @@
     "nameOverride": "Lin Sivvi, Defiant Hero",
     "sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
     "deck": [
-      "decks/boss/nahiri.dck"
+      "decks/miniboss/nahiri.dck"
     ],
     "ai": "",
     "boss": true,
@@ -61414,7 +61414,7 @@
     "name": "Sliver Queen",
     "sprite": "sprites/enemy/aberration/sliver_queen.atlas",
     "deck": [
-      "decks/boss/sliver_queen.dck"
+      "decks/miniboss/sliver_queen.dck"
     ],
     "ai": "reckless",
     "boss": true,
@@ -67246,7 +67246,7 @@
     "name": "Valyx the Tormentor",
     "sprite": "sprites/enemy/fiend/valyx.atlas",
     "deck": [
-      "decks/boss/valyx.dck"
+      "decks/miniboss/valyx.dck"
     ],
     "ai": "",
     "boss": true,

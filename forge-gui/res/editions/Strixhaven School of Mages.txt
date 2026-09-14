@@ -419,26 +419,26 @@ A-240 M A-Tanazir Quandrix @Raymond Swanland
 A-258 U A-Spell Satchel @YW Tang
 
 [lesson]
-2 Environmental Sciences
-2 Expanded Anatomy
-2 Introduction to Annihilation
-2 Introduction to Prophecy
-1 Mascot Exhibition
-1 Academic Probation
-2 Reduce to Memory
-2 Mercurial Transformation
-1 Teachings of the Archaics
-1 Confront the Past
-2 Necrotic Fumes
-1 Illuminate History
-2 Start from Scratch
-1 Basic Conjuration
-2 Containment Breach
-2 Elemental Summoning
-2 Fractal Summoning
-2 Inkling Summoning
-2 Pest Summoning
-2 Spirit Summoning
+2 Environmental Sciences|STX
+2 Expanded Anatomy|STX
+2 Introduction to Annihilation|STX
+2 Introduction to Prophecy|STX
+1 Mascot Exhibition|STX
+1 Academic Probation|STX
+2 Reduce to Memory|STX
+2 Mercurial Transformation|STX
+1 Teachings of the Archaics|STX
+1 Confront the Past|STX
+2 Necrotic Fumes|STX
+1 Illuminate History|STX
+2 Start from Scratch|STX
+1 Basic Conjuration|STX
+2 Containment Breach|STX
+2 Elemental Summoning|STX
+2 Fractal Summoning|STX
+2 Inkling Summoning|STX
+2 Pest Summoning|STX
+2 Spirit Summoning|STX
 
 [tokens]
 1 br_3_6_avatar_haste_bolt @Bryan Sola

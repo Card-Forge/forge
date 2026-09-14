@@ -14,7 +14,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.ai.AIOption;
 import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
@@ -25,6 +24,7 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
+import forge.gui.FThreads;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
@@ -89,10 +89,8 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
+    private final ImmutableList<VariantCheckBox> vntBoxes  =
             ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -138,6 +136,8 @@ public class VLobby implements ILobbyView {
     private final FLabel lblEventStatus = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC).build();
     private final FLabel lblEventFormatCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormat")).fontSize(13).build();
     private final FLabel lblEventProductCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblProduct")).fontSize(13).build();
+    private final FLabel lblEventPodCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkEventPodCaption")).fontSize(13).build();
+    private final FLabel lblEventPod = new FLabel.Builder().text("—").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
     private final FLabel lblEventPickTimerCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkPickTimerCaption")).fontSize(13).build();
     private final FLabel lblEventDateCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblEventDate")).fontSize(13).build();
     private final FLabel lblEventDate = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
@@ -185,6 +185,7 @@ public class VLobby implements ILobbyView {
             java.awt.Color captionColor = FSkin.getColor(FSkin.Colors.CLR_TEXT).stepColor(-80).getColor();
             lblEventFormatCaption.setForeground(captionColor);
             lblEventProductCaption.setForeground(captionColor);
+            lblEventPodCaption.setForeground(captionColor);
             lblEventPickTimerCaption.setForeground(captionColor);
             lblEventDateCaption.setForeground(captionColor);
             lblEventStatus.setForeground(captionColor);
@@ -208,6 +209,8 @@ public class VLobby implements ILobbyView {
             eventConfigPanel.add(lblEventFormat, "wrap");
             eventConfigPanel.add(lblEventProductCaption);
             eventConfigPanel.add(lblEventProduct, "wrap");
+            eventConfigPanel.add(lblEventPodCaption);
+            eventConfigPanel.add(lblEventPod, "wrap");
             eventConfigPanel.add(lblEventPickTimerCaption);
             eventConfigPanel.add(lblEventPickTimer, "wrap");
             eventConfigPanel.add(lblEventDateCaption);
@@ -227,13 +230,6 @@ public class VLobby implements ILobbyView {
 
         ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
-
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
         for (final VariantCheckBox vcb : vntBoxes) {
@@ -339,6 +335,10 @@ public class VLobby implements ILobbyView {
 
     @Override
     public void update(final int slot, final LobbySlotType type) {
+        FThreads.invokeInEdtNowOrLater(() -> updateImpl(slot, type));
+    }
+
+    private void updateImpl(final int slot, final LobbySlotType type) {
         final FDeckChooser deckChooser = getDeckChooser(slot);
         deckChooser.setIsAi(type==LobbySlotType.AI);
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
@@ -362,20 +362,20 @@ public class VLobby implements ILobbyView {
         }
     }
 
+    // Lobby updates arrive on the Netty IO thread (network) and the EDT (local actions);
+    // VLobby mutates non-thread-safe Swing state, so funnel every update through the EDT.
     @Override
     public void update(final boolean fullUpdate) {
+        FThreads.invokeInEdtNowOrLater(() -> updateImpl(fullUpdate));
+    }
+
+    private void updateImpl(final boolean fullUpdate) {
         activePlayersNum = lobby.getNumberOfSlots();
-        addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
+        addPlayerBtn.setEnabled(activePlayersNum < lobby.getSlotLimit());
 
         controller.syncModeFromHost();
         controller.onLobbyDataChanged();
 
-        ImmutableList<VariantCheckBox> vntBoxes;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
         for (final VariantCheckBox vcb : vntBoxes) {
             vcb.setSelected(hasVariant(vcb.variant));
             vcb.setEnabled(lobby.hasControl());
@@ -406,12 +406,15 @@ public class VLobby implements ILobbyView {
                 panel.setType(type);
                 panel.setPlayerName(slot.getName());
                 panel.setAvatarIndex(slot.getAvatarIndex());
-                panel.setSleeveIndex(slot.getSleeveIndex());
+                final Deck slotDeck = slot.getDeck();
+                panel.setSleeve(slot.getSleeveIndex(),
+                        slotDeck == null ? "" : slotDeck.getSleeveArtKey(),
+                        slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
-                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
+                panel.setUseAiSimulation(slot.getAiOptions());
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));
@@ -537,8 +540,16 @@ public class VLobby implements ILobbyView {
             playerChangeListener.update(index, getSlot(index));
         }
     }
+    // Re-broadcasts a deck whose card-art sleeve changed, so networked opponents pick up the new sleeve
+    void fireDeckSleeveChange(final int index, final Deck deck) {
+        if (playerChangeListener != null && deck != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
+        }
+    }
+
     private void fireDeckChangeListener(final int index, final Deck deck) {
         decks[index] = deck;
+        getPlayerPanel(index).refreshSleeveFromDeck(deck);
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
         }
@@ -929,12 +940,16 @@ public class VLobby implements ILobbyView {
 
     /** Render the event panel from pre-computed contents. No decisions live here. */
     void setEventPanelContents(CLobby.EventPanelContents c) {
-        lblEventStatus.setText(c.statusText());
-        lblEventStatus.setVisible(!c.statusText().isEmpty());
-        lblEventFormat.setText(c.formatText());
-        lblEventProduct.setText(c.productText());
-        lblEventPickTimer.setText(c.timerText());
-        lblEventDate.setText(c.dateText());
+        NetworkEvent.EventPanelText text = c.text();
+        lblEventStatus.setText(text.statusText());
+        lblEventStatus.setVisible(!text.statusText().isEmpty());
+        lblEventFormat.setText(text.formatText());
+        lblEventProduct.setText(text.productText());
+        lblEventPod.setText(text.podText());
+        lblEventPodCaption.setVisible(!text.podText().isEmpty());
+        lblEventPod.setVisible(!text.podText().isEmpty());
+        lblEventPickTimer.setText(text.timerText());
+        lblEventDate.setText(text.dateText());
         if (lobby.hasControl()) {
             btnDismissEvent.setVisible(c.showDismissX());
         }

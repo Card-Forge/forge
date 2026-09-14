@@ -20,17 +20,17 @@ package forge.gamemodes.quest.data;
 import java.io.Serializable;
 
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.PreferencesStore;
+import forge.localinstance.properties.AbstractPreferences;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 
 @SuppressWarnings("serial")
-public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> implements Serializable {
+public class QuestPreferences extends AbstractPreferences<QuestPreferences.QPref> implements Serializable {
 
     /**
      * Preference identifiers, and their default values.
      */
-    public enum QPref implements PreferencesStore.IPref {
+    public enum QPref implements AbstractPreferences.IPref {
 
         // if enabled, player must follow world rules in duels (allowed sets only, banned/restricted cards etc.)
         WORLD_RULES_CONFORMANCE("0"),
@@ -247,11 +247,6 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         catch (final Exception e) {
             return null;
         }
-    }
-
-    @Override
-    protected String getPrefDefault(final QPref key) {
-        return key.getDefault();
     }
 
     /**

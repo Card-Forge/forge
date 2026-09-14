@@ -1,0 +1,13 @@
+Name:Kirk, Enterprising Captain
+ManaCost:3 R
+Types:Legendary Creature Human Officer
+PT:4/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE8 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks while creatures you control have total power 8 or greater, exile the top card of your library. You may play that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
+SVar:HasAttackEffect:TRUE
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Kirk attacks while creatures you control have total power 8 or greater, exile the top card of your library. You may play that card this turn.

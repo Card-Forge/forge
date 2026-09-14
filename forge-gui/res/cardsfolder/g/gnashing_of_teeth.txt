@@ -1,0 +1,7 @@
+Name:Gnashing of Teeth
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBPump,DBPumpAll
+SVar:DBPump:DB$ Pump | IsCurse$ True | ValidTgts$ Creature | NumAtt$ -5 | NumDef$ -5 | ReplaceDyingDefined$ Targeted | SpellDescription$ Target creature gets -5/-5 until end of turn. If that creature would die this turn, exile it instead.
+SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures target player controls get -1/-1 until end of turn.
+Oracle:Choose one —\n• Target creature gets -5/-5 until end of turn. If that creature would die this turn, exile it instead.\n• Creatures target player controls get -1/-1 until end of turn.

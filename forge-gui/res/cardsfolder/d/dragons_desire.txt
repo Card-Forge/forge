@@ -1,0 +1,6 @@
+Name:Dragon's Desire
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ Mana | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each artifact your opponents control.
+SVar:X:Count$Valid Artifact.OppCtrl
+Oracle:Add {R} for each artifact your opponents control.

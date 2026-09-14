@@ -118,7 +118,6 @@ public enum CSubmenuQuestStart implements ICDoc {
                 numberOfBoosters = colorChooser.getNumberOfBoosters();
             });
         });
-
     }
 
     /* (non-Javadoc)

@@ -128,12 +128,12 @@ public abstract class FDisplayObject {
 
     public abstract void draw(Graphics g);
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
-        boolean exact = !GuiBase.isAndroid() && (this instanceof FCardPanel);
+        boolean exact = !GuiBase.isMobile() && (this instanceof FCardPanel);
         if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
         }
         //TODO: mouse detection on android?
-        if (Forge.afterDBloaded && !GuiBase.isAndroid()) {
+        if (Forge.afterDBloaded && !GuiBase.isMobile()) {
             Forge.hoveredCount = listeners.size();
             if (Forge.getCurrentScreen() != null) {
                 if (!Forge.getCurrentScreen().toString().contains("Match"))

@@ -25,12 +25,12 @@ import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 
-public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
+public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref> {
 
     /**
      * Preference identifiers and their default values.
      */
-    public enum FPref implements PreferencesStore.IPref {
+    public enum FPref implements AbstractPreferences.IPref {
         PLAYER_NAME (""),
 
         // Desktop only
@@ -38,6 +38,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SCREENREADER_OPTIMIZE("false"),
         UI_TOUCHSCREEN_OPTIMIZE("false"),
         UI_DOCK_LAYOUT (""),
+        UI_IMAGE_CACHE_MAXIMUM("400"),
 
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
@@ -67,6 +68,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_RANDOM_FOIL ("false"),
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
+        UI_SLEEVE_ART_LIBRARY (""),
         UI_SHOW_CARD_OVERLAYS ("true"),
         UI_OVERLAY_CARD_NAME ("true"),
         UI_OVERLAY_CARD_POWER ("true"),
@@ -76,12 +78,13 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_ABILITY_ICONS("true"),
         UI_OVERLAY_DRAFT_RANKING("true"),
         UI_ENABLE_ONLINE_IMAGE_FETCHER ("true"),
+        UI_CARD_DOWNLOAD_LANG ("en"),
+        UI_PREFER_LANG_FOR_UNIQUE_CARDS ("false"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),
         UI_SMART_CARD_ART("false"),
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
         UI_REVERSE_PROMPT_BUTTON ("false"),
-        UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT ("true"),
@@ -95,6 +98,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
         UI_SHOW_ACTIONABLE_HIGHLIGHTS ("false"),
+        UI_SHOW_AUTOTAP_PREVIEW ("false"),
         UI_ACTIONABLE_HIGHLIGHT_COLOR ("66CCFF"),
         UI_SHOW_LINKED_EXILE_CARDS ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),
@@ -150,7 +154,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
         UI_CARD_ART_FORMAT("Full"),
-    	UI_SELECT_FROM_CARD_DISPLAYS("true"),
+        UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
         UI_ORDER_HAND("false"),
         UI_HAND_MAX_CARDS_PER_ROW("0"),
@@ -163,6 +167,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_MUSIC ("true"),
         UI_VOL_SOUNDS ("100"),
         UI_VOL_MUSIC ("100"),
+        UI_PAUSE_MUSIC_ON_FOCUS_LOSS ("true"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_SOUND_SET("Default"),
         UI_CURRENT_MUSIC_SET("Default"),
@@ -343,7 +348,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
 
-        LAST_IMPORTED_CUBE_ID("");
+        LAST_IMPORTED_CUBE_ID(""),
+
+        ADV_DISPLAY_PRICE_IN_REWARD_SCREEN("true");
 
         private final String strDefaultVal;
 
@@ -455,11 +462,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         catch (final Exception e) {
             return null;
         }
-    }
-
-    @Override
-    protected String getPrefDefault(final FPref key) {
-        return key.getDefault();
     }
 
     // one for normal mode, one for quest mode

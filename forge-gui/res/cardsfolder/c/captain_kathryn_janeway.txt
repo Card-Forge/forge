@@ -1,0 +1,8 @@
+Name:Captain Kathryn Janeway
+ManaCost:3 G
+Types:Legendary Creature Human Officer
+PT:2/3
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.YouCtrl+Other | Execute$ TrigExplore | TriggerDescription$ When CARDNAME or another creature you control enters, that creature explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)
+SVar:TrigExplore:DB$ Explore | Defined$ TriggeredCardLKICopy
+Oracle:You may play an additional land on each of your turns.\nWhenever Captain Janeway or another creature you control enters, that creature explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)

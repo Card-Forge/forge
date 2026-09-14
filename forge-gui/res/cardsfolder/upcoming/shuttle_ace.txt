@@ -1,0 +1,8 @@
+Name:Shuttle Ace
+ManaCost:4 W
+Types:Creature Kelpien Pilot
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ During your turn, this creature has flying.
+T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature becomes tapped, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:During your turn, this creature has flying.\nWhenever this creature becomes tapped, you gain 2 life.

@@ -1,5 +1,4 @@
-Base settings of a plane is configured in
-config.json
+Base settings of a plane is configured in config.json
 
 Example:
 

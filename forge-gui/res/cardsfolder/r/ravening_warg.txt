@@ -1,0 +1,9 @@
+Name:Ravening Warg
+ManaCost:1 B
+Types:Creature Wolf
+PT:2/2
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+powerGE4 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nFerocious — Whenever this creature attacks while you control a creature with power 4 or greater, you gain 2 life.

@@ -91,6 +91,8 @@ public final class CardImageGrid implements IDisposable {
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setWheelScrollingEnabled(true);
+        scrollPane.setOpaque(true);
+        scrollPane.setBackground(list.getBackground());
         list.addMouseWheelListener(e ->
                 scrollPane.dispatchEvent(SwingUtilities.convertMouseEvent(list, e, scrollPane)));
     }
@@ -148,6 +150,15 @@ public final class CardImageGrid implements IDisposable {
                         listener.accept(sel);
                     }
                 }
+            }
+        });
+    }
+
+    /** Notified with the selected card (or null) whenever the selection settles. */
+    public void addSelectionListener(final Consumer<PaperCard> listener) {
+        list.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                listener.accept(list.getSelectedValue());
             }
         });
     }

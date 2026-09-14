@@ -67,7 +67,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             zonesShown = getController().getGui().tempShowZones(controller.getPlayer().getView(), zonesToUpdate);
         });
     }
-    
+
     @Override
     protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {

@@ -42,7 +42,7 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -346,7 +346,7 @@ public final class CMatchUI
         if (!isInGame() || getCurrentPlayer() == null) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer());
+        final Deck deck = getDeckForPlayer(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -1362,7 +1362,7 @@ public final class CMatchUI
     public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final PlayerView view : playersWithTargetables.keySet()) {
-            for(final ZoneType zone : zones) {
+            for (final ZoneType zone : zones) {
                 if (zone.equals(ZoneType.Battlefield) || zone.equals(ZoneType.Hand)) {
                     continue;
                 }
@@ -1432,6 +1432,7 @@ public final class CMatchUI
                 label.setOnRightClick(() -> handleYieldMarkerToggle(player, phase, () -> {
                     label.setEnabled(true);
                     label.repaintOnlyThisLabel();
+                    pushSkipPhaseToControllers(player, phase);
                 }));
             }
         }

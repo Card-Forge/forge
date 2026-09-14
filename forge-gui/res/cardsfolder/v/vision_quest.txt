@@ -1,0 +1,8 @@
+Name:Vision Quest
+ManaCost:X U R
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.Artifact+YouOwn+cmcLEX | ChangeNum$ 1 | WithCountersType$ P1P1 | WithCountersAmount$ X | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Search your library and/or graveyard for an artifact creature card with mana value X or less and put it onto the battlefield with X additional +1/+1 counters. If X is 4 or greater, it gains haste until end of turn. If you search your library this way, shuffle.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+Oracle:Search your library and/or graveyard for an artifact creature card with mana value X or less and put it onto the battlefield with X additional +1/+1 counters. If X is 4 or greater, it gains haste until end of turn. If you search your library this way, shuffle.

@@ -10,12 +10,8 @@ turn=1
 activeplayer=p0
 activephase=MAIN1
 p0life=20
-p0landsplayed=0
-p0landsplayedlastturn=0
 p0hand=Annihilating Glare;Drown in Ichor;Charforger
 p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
 p0battlefield=Churning Reservoir;Cutthroat Centurion;Cutthroat Centurion;Furnace Strider|Counters:OIL=1;Swamp;Swamp;Mountain;Mountain;Mountain
 p1life=8
-p1landsplayed=0
-p1landsplayedlastturn=0
 p1battlefield=Drana and Linvala;Benalish Sleeper;Necrosquito|Counters:OIL=3

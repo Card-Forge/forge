@@ -1,0 +1,13 @@
+Name:Zagorka, Mother of Sanctum
+ManaCost:1 G U R
+Types:Legendary Creature Human Peasant
+PT:4/2
+K:Vigilance
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeatEach | TriggerDescription$ At the beginning of your end step, each player may create a tapped land token named Sanctum with "{T}: Add one mana of any color." Each opponent who does can't attack you during their next turn.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | ChangeZoneTable$ True | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to create a Sanctum? | SubAbility$ DBEffect
+SVar:DBToken:DB$ Token | TokenScript$ sanctum | TokenTapped$ True | TokenOwner$ Player.IsRemembered | RememberTokens$ True
+SVar:DBEffect:DB$ Effect | EffectOwner$ RememberedOwner.Opponent | RememberObjects$ You | StaticAbilities$ STCantAttack | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered | Description$ You can't attack remembered player during your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Vigilance, trample\nAt the beginning of your end step, each player may create a tapped land token named Sanctum with "{T}: Add one mana of any color." Each opponent who does can't attack you during their next turn.

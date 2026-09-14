@@ -1,0 +1,7 @@
+Name:The Queen of Dale
+ManaCost:1 W
+Types:Legendary Creature Human Noble
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | Execute$ TrigRecruit | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first noncreature spell each turn, you recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+SVar:TrigRecruit:DB$ Recruit
+Oracle:Whenever an opponent casts their first noncreature spell each turn, you recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)

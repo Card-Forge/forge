@@ -1,12 +1,9 @@
 Name:Joven and Chandler
-ManaCost:3 R R
+ManaCost:2 R R R
 Types:Legendary Creature Human Rogue
-PT:3/3
-K:Backup:2:BackupAbilities
-SVar:BackupAbilities:DB$ Animate | Keywords$ Haste | Triggers$ DamageTrig
-SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to an opponent, destroy target artifact that player controls.
-K:Haste
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to an opponent, destroy target artifact that player controls.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact damaged player controls
-DeckHas:Ability$Counters
-Oracle:Backup 2 (When this creature enters the battlefield, put two +1/+1 counters on target creature. If that's another creature, it gains the following abilities until end of turn.)\nHaste\nWhenever this creature deals combat damage to an opponent, destroy target artifact that player controls.
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, put a number of +1/+1 counters equal to that artifact's mana value on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+A:AB$ GainControl | Cost$ R R R T | ValidTgts$ Artifact | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target artifact until end of turn. Untap it. It gains haste until end of turn.
+SVar:X:TriggeredCard$CardManaCost
+Oracle:Whenever an artifact is put into a graveyard from the battlefield, put a number of +1/+1 counters equal to that artifact's mana value on Joven and Chandler.\n{R}{R}{R}, {T}: Gain control of target artifact until end of turn. Untap it. It gains haste until end of turn.

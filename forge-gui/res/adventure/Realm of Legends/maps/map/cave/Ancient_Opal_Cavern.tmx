@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="92">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mox Opal&quot;, &quot;Pillar of the Paruns&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAtqOPEjukBBspebHbT2z56+xfdLQNhJz3T1UCCkWr/QObfgSyz6OUOYu2kthsI2UsrvxMT1tS0m1T7iLEfW1gRYxcAq/g0vQ==
+  </data>
+ </layer>
+ <layer id="3" name="Decoration" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzF00sKwCAMBFDprnTTU/fUXUgRQYL5OYkdmJ3JQ8RSbHkPvlmRzL/tWa671RM6o5n9PFevO5ZzNTPDtZgeW3M9ntVd2Ym66N5VO+uuEXeOnkOzy+E81HzO+X7JQ93PHN3If+qxd5nUlyz6HpZUwftEtQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlW0OwiAMhom/ysE2zQ7h9UDxVnMfd/CPENNQuzIBN+OSN0s24Gl5W2i1Um2GrqDUXb/kIOoGefNrdfSSnm5H5j9yG+aFg+hFeNf6gGs9Dkum8d9n4v0gxNYXsvlalBt4ljAlXq0XJ7ZW4FrGS+VYmzPNgefmEjwcFzT5fxcoz5nWUE9q5JzwGOOS4i7hjlqOGTmTjuI8l/C7yeBSvoV3zSvj6T5hfLjva/O+Fdai+RDfVqK1/Qum1EslPpYw6J0k9dLWuUrnsyH9ulftjLruLEjpCS3Qu4o=
+  </data>
+ </layer>
+ <layer id="6" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CB4SnnQLsAE8QyMTDEAXE8E4R9gBHCpsQ8YvT/BqppBtKzmRkYZgJxC5RNihnIdh4EuvsvEXpAdsHsweYmYsxAVv8HiBUZEe4AxTEoDONI8AM+N+FSjxxesLCchSZOa0Csu0mNT2oBUsN1FIwCbMCNzHIbACWTHOg=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BgwCPGgdFLrn20spPefqEXIMdfwzUsRgH9wGgaIgwAQf8HGQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="180.333" y="271.667" width="73" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="368.101" y="76.1694">
+   <properties>
+    <property name="reward">[      {
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;count&quot;: 1,
+        &quot;cardName&quot;: &quot;Dune-Brood Nephilim&quot;,
+        &quot;editions&quot;: [ &quot;GPT&quot; ]
+      },
+      {
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;count&quot;: 1,
+        &quot;cardName&quot;: &quot;Ink-Treader Nephilim&quot;,
+        &quot;editions&quot;: [ &quot;GPT&quot; ]
+      },
+      {
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;count&quot;: 1,
+        &quot;cardName&quot;: &quot;Glint-Eye Nephilim&quot;,
+        &quot;editions&quot;: [ &quot;GPT&quot; ]
+      },
+      {
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;count&quot;: 1,
+        &quot;cardName&quot;: &quot;Witch-Maw Nephilim&quot;,
+        &quot;editions&quot;: [ &quot;GPT&quot; ]
+      },
+      {
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;count&quot;: 1,
+        &quot;cardName&quot;: &quot;Yore-Tiller Nephilim&quot;,
+        &quot;editions&quot;: [ &quot;GPT&quot; ]
+      }]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="207.675" y="56.4637">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragon Arch&quot;, &quot;Tome of the Guildpact&quot;, &quot;Sphinx of the Guildpact&quot;]}"/>
+    <property name="enemy" value="Nephilim Epochal"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="305.833" y="202.25" width="43" height="13.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cavern ahead glitters with the brilliant rainbow light of opaline geodes. There is a sense of ancient dread that fills it. You're sure whatever slumbers within is ancient beyond words. 
+
+The threat here is not necessary for your quest, but guards a powerful spell not available elsewhere.
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="211.333" y="54.3333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragon Arch&quot;, &quot;Tome of the Guildpact&quot;]}"/>
+    <property name="enemy" value="Nephilim Epochal"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -13,6 +13,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Localizer;
+import forge.util.MyRandom;
 
 import java.util.*;
 
@@ -42,7 +43,7 @@ public class DraftEffect extends SpellAbilityEffect {
         CardCollection drafted = new CardCollection();
 
         for (int i = 0; i < numToDraft; i++) {
-            Collections.shuffle(spellbook);
+            Collections.shuffle(spellbook, MyRandom.getRandom());
             List<Card> draftOptions = new ArrayList<>();
             for (String name : spellbook.subList(0, 3)) {
                 // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)

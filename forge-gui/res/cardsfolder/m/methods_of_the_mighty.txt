@@ -1,0 +1,8 @@
+Name:Methods of the Mighty
+ManaCost:3 W
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBDestroyArtifact,DBDestroyTappedCreature,DBPutCounterAll
+SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDestroyTappedCreature:DB$ Destroy | ValidTgts$ Creature.tapped | ValidTgtsDesc$ tapped creature | SpellDescription$ Destroy target tapped creature.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+Oracle:Choose one or more —\n• Destroy target artifact.\n• Destroy target tapped creature.\n• Put a +1/+1 counter on each creature you control.

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.card.MagicColor;
 import forge.game.GameObject;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -385,7 +386,9 @@ public class ComputerUtilCost {
 
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
                 if (differentNames) {
-                    final Set<Card> uniqueNameCards = Sets.newHashSet();
+                    // drives which cards get sacrificed on a scoring tie, so its order must not depend on Card
+                    // identity hashCode (which varies per JVM run)
+                    final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
                     for (final Card card : typeList) {
                         // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                         if (!card.hasNoName()) {
@@ -645,10 +648,9 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            for (SpellAbility sa : c.getManaAbilities()) {
-                if (sa.getManaPart() != null) {
-                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
-                }
+            colorsAvailable.addAll(c.getProducibleColors());
+            if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further source to add
             }
         }
 
@@ -682,7 +684,7 @@ public class ComputerUtilCost {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
             // TODO find a way to consider lower value due to Ward
             if (sa.hasParam("AIXMax")) {
-                sa.setXManaCostPaid(val);
+                root.setXManaCostPaid(val);
                 int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);
                 val = Math.min(val, calculated);
             }
@@ -692,12 +694,6 @@ public class ComputerUtilCost {
             // if announce is used as min targets, check what the max possible number would be
             if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
                 val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa).size());
-            }
-
-            if (sa.hasParam("AIMaxTgtsCount")) {
-                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
-                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(source, "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
             }
         }
 
@@ -730,8 +726,8 @@ public class ComputerUtilCost {
             }
         }
 
-        int x = ObjectUtils.defaultIfNull(val, 0);
-        sa.setXManaCostPaid(x);
+        int x = ObjectUtils.getIfNull(val, 0);
+        root.setXManaCostPaid(x);
         return x;
     }
 
