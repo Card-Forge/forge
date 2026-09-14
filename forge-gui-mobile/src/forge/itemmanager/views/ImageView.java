@@ -64,8 +64,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float SEL_BORDER_SIZE = Utils.scale(1);
     private static final int MIN_COLUMN_COUNT = Forge.isLandscapeMode() ? 2 : 1;
     private static final int MAX_COLUMN_COUNT = 10;
-
-    private Supplier<List<Integer>> selectedIndices = Suppliers.memoize(ArrayList::new);
+    // pre-size init capacity could be cards or decks to prevent arraylist excessive growth, could prevent OOM
+    private Supplier<List<Integer>> selectedIndices = Suppliers.memoize(() -> new ArrayList<>(512));
     private int columnCount = 4;
     private float scrollHeight = 0;
     private ColumnDef pileBy = null;
@@ -73,9 +73,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private boolean updatingLayout;
     private float totalZoomAmount;
-    private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(ArrayList::new);
-    private Supplier<List<Group>> groups = Suppliers.memoize(ArrayList::new);
+    private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(() -> new ArrayList<>(512));
+    private Supplier<List<Group>> groups = Suppliers.memoize(() -> new ArrayList<>(60));
     private Function<Entry<? extends InventoryItem, Integer>, ?> fnIsFavorite = ColumnDef.FAVORITE.fnDisplay, fnPrice = null;
+
+    private long lastRefreshTime = 0;
+    private static final long REFRESH_DEBOUNCE_MS = 50;
+
+    // prevent ui updates too quickly though 50ms maybe a good default
+    private void scheduleLayout(boolean forRefresh) {
+        long now = System.currentTimeMillis();
+        if (now - lastRefreshTime < REFRESH_DEBOUNCE_MS)
+            return;
+        lastRefreshTime = now;
+        updateLayout(forRefresh);
+    }
 
     private class SafeList<T> {
         private final List<T> internalList;
@@ -421,6 +433,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         for (Group group : groups.get()) {
             group.items.clear();
+            group.piles.clear();
         }
         clearSelection();
 
@@ -432,10 +445,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                 Group group;
                 if (groupIndex >= 0) {
-                    if (groupIndex >= groups.get().size())
-                        group = groups.get().get(groups.get().size() - 1);
-                    else
-                        group = groups.get().get(groupIndex);
+                    group = groupIndex < groups.get().size()
+                            ? groups.get().get(groupIndex)
+                            : groups.get().get(groups.get().size() - 1);
                 } else {
                     if (otherItems == null) {
                         //reuse existing Other group if possible
@@ -463,13 +475,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         if (otherItems == null && groups.get().size() > groupBy.getGroups().length) {
             int index = groups.get().size() - 1;
-            if (index < groups.get().size() && index >= 0)
+            if (index >= 0 && index < groups.get().size()) {
                 groups.get().remove(index); //remove Other group if empty
+            }
             btnExpandCollapseAll.updateIsAllCollapsed();
         }
 
-        updateLayout(true);
+        scheduleLayout(true);
     }
+
 
     private boolean showQtyOnCard(T item) {
         return item instanceof PaperCard && itemManager.getAllowGroupIdentical() && FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
@@ -849,8 +863,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateSelection() {
-        for (Integer i : selectedIndices.get()) {
-            orderedItems.get().get(i).selected = true;
+        List<Integer> indices = selectedIndices.get();
+        List<ItemInfo> items = orderedItems.get();
+
+        if (indices == null || indices.isEmpty() || items == null || items.isEmpty()) {
+            return; // nothing to select
+        }
+
+        for (Integer i : indices) {
+            if (i == null || i < 0 || i >= items.size()) {
+                continue; // skip invalid index
+            }
+            ItemInfo itemInfo = items.get(i);
+            if (itemInfo != null) {
+                itemInfo.selected = true; // safe now
+            }
         }
     }
 
