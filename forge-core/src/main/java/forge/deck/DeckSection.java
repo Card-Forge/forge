@@ -96,7 +96,12 @@ public enum DeckSection {
 
         static final Predicate<PaperCard> COMMANDER_VALIDATOR = card -> {
             CardType t = card.getRules().getType();
-            return card.getRules().canBeCommander() || t.isPlaneswalker() || card.getRules().canBeOathbreaker() || card.getRules().canBeSignatureSpell();
+            // Any creature/vehicle/spacecraft may sit in the Commander section (Pauper Commander
+            // allows non-legendary uncommon creatures as commanders); the actual format rule is
+            // enforced by DeckFormat.isLegalCommander during deck conformance validation.
+            return card.getRules().canBeCommander() || t.isPlaneswalker() || card.getRules().canBeOathbreaker()
+                    || card.getRules().canBeSignatureSpell()
+                    || t.isCreature() || t.isVehicle() || t.isSpacecraft();
         };
 
     }
