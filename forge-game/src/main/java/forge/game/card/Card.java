@@ -3413,7 +3413,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (changedCardTypes.isEmpty()) {
             return false;
         }
-        // only Layer 4 are affected, and it's never intrinsic
+        // CR 305.7 only Layer 4 are affected, and it's never intrinsic
         return changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
     }
 
