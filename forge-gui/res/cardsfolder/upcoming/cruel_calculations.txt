@@ -1,0 +1,7 @@
+Name:Cruel Calculations
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Player | SubAbility$ DBDraw | SpellDescription$ Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn.
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Library_Card.OwnedBy Targeted
+Oracle:Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn.
