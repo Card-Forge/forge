@@ -28,6 +28,8 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -503,9 +505,24 @@ public class DeckRecognizer {
     public static final String REGRP_CARD = "cardname";
     public static final String REGRP_CARDNO = "count";
 
-    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
+    // "?" is part of several card names, e.g. "Continue?", "When Will You Learn?" and
+    // "Which of You Burns Brightest?", none of which could be imported before.
+    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\?\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
-    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)", REGRP_COLLNR);
+    /**
+     * One segment of a collector number: either it contains a digit, or it is uppercase
+     * and digits with at most one trailing lowercase letter.
+     *
+     * The second shape is what keeps a card name out. "CAa" and "TMP" are real collector
+     * numbers, but "Sink" must not be one, or "1 TMP Power Sink" parses as a card plus a
+     * set plus a collector number. An unrestricted lowercase run cannot tell those apart.
+     */
+    private static final String REX_COLLNR_SEGMENT = "(?:[0-9A-Za-z]*[0-9][0-9A-Za-z]*|[0-9A-Z]+[a-z]?)";
+    // Only the leading segment has to be strict. Once a separator has been seen the token
+    // can no longer be confused with a card name, so anything alphanumeric is allowed after
+    // one, which is what "118†s" and "2J-b" need.
+    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?%s(?:[-_★☇†Φ][0-9A-Za-z]*)*)",
+            REGRP_COLLNR, REX_COLLNR_SEGMENT);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
     // EXTRA
     // Foil markers: (F) MTGGoldfish; *F* foil and *E* etched foil, Moxfield/MTGA style
@@ -1084,7 +1101,40 @@ public class DeckRecognizer {
     private static MagicColor.Color getMagicColor(String colorName){
         if (colorName.toLowerCase().startsWith("multi") || colorName.equalsIgnoreCase("m"))
             return null;  // will be handled separately
-        return MagicColor.Color.fromName(colorName.toLowerCase());
+        return MagicColor.Color.fromName(toLongColourName(colorName));
+    }
+
+    /**
+     * Maps what {@link #REX_MANA_COLOURS} and {@link #manaTokenMatch} can produce onto the
+     * names {@link MagicColor.Color#fromName} understands.
+     *
+     * <p>
+     * Two shapes need translating. A mana symbol has already been reduced to its bare
+     * letter by {@link #matchAnyManaSymbolIn}, so "{U}" arrives here as "U". And the regex
+     * deliberately accepts British spellings, so "colourless" arrives here too. Neither is
+     * in that switch, so both resolved to null and were reported as multicolour: "{U} {W}"
+     * came out as {W}{U}{B}{R}{G} instead of {WU}, and "Colourless" as colourless //
+     * multicolour.
+     * </p>
+     *
+     * <p>
+     * The normalisation lives here rather than in {@code MagicColor.Color.fromName}
+     * because {@code ImageUtil.specFaceToCollectorSuffix} relies on a single letter NOT
+     * resolving to a colour when it builds Scryfall collector-number suffixes for
+     * Specialize faces. Only this parser accepts these shapes, so only this parser widens.
+     * </p>
+     */
+    private static String toLongColourName(String colorName) {
+        String name = colorName.toLowerCase(Locale.ROOT);
+        return switch (name) {
+            case "w" -> MagicColor.Constant.WHITE;
+            case "u" -> MagicColor.Constant.BLUE;
+            case "b" -> MagicColor.Constant.BLACK;
+            case "r" -> MagicColor.Constant.RED;
+            case "g" -> MagicColor.Constant.GREEN;
+            case "c", "colourless" -> MagicColor.Constant.COLORLESS;
+            default -> name;
+        };
     }
 
     public static boolean isDeckName(final String lineAsIs) {

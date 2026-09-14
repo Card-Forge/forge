@@ -144,6 +144,7 @@ public class Forge implements ApplicationListener {
     public static final int LOW_SPRITES_CAP = 30; // max capacity for transition, generated image renders
     public static final int HIGH_SPRITES_CAP = 800; // max sprite capacity for adventure, classic renders
     private static boolean isDisposed = false;
+    public static boolean invokeWorldSave = false;
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -946,6 +947,9 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void render() {
+        // prevent render if isDisposed
+        if (isDisposed)
+            return;
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
@@ -1074,7 +1078,8 @@ public class Forge implements ApplicationListener {
             safeDispose(scene);
         }*/
         // biomeImage (WorldMap) should be disposed
-        safeDispose(WorldSave.getCurrentSave().getWorld());
+        if (invokeWorldSave)
+            WorldSave.dispose();
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {

@@ -3,16 +3,15 @@ package forge.card;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
-import javax.imageio.ImageIO;
-
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import forge.ImageCache;
 import forge.ImageKeys;
+import forge.StaticData;
+import forge.gamesimulationtests.util.CardDatabaseHelper;
 import forge.item.PaperCard;
+import forge.model.FModel;
 
 /**
  * Test Case for CardDb forcing No Image for all the cards. Check that
@@ -31,10 +30,20 @@ public class CardDbWithNoImageCardDbMockTestCase extends CardDbCardMockTestCase 
 
     @Override
     protected void initCardImageMocks() {
-        PowerMockito.mockStatic(ImageIO.class);
-        PowerMockito.mockStatic(ImageCache.class);
-        PowerMockito.mockStatic(ImageKeys.class);
-        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean())).thenReturn(false);
+        imageKeysMock = Mockito.mockStatic(ImageKeys.class);
+        imageKeysMock.when(() -> ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean()))
+                .thenReturn(false);
+    }
+
+    /**
+     * {@link PaperCard} caches the answer to {@code hasImage}, so this class cannot share
+     * the process-wide card database with the sibling classes that expect the opposite
+     * answer. PowerMock's per-class classloader used to make that a non-issue.
+     */
+    @Override
+    protected void initializeStaticData() {
+        StaticData data = CardDatabaseHelper.createStaticData("CardDbWithNoImageCardDbMockTestCase", false);
+        fModelMock.when(FModel::getMagicDb).thenReturn(data);
     }
 
     @Test

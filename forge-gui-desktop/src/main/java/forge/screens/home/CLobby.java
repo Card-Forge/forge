@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
+import forge.card.DraftOptions;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.gamemodes.limited.BoosterDraft;
@@ -43,6 +44,7 @@ import forge.screens.deckeditor.controllers.CEditorNetworkDraft;
 import forge.screens.deckeditor.controllers.NetworkDraftLog;
 import forge.screens.deckeditor.views.VEditorLog;
 import forge.screens.home.online.VSubmenuOnlineLobby;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
@@ -56,11 +58,7 @@ public class CLobby implements IDraftEventHandler {
 
     /** Desktop event-panel render contract: shared text content + desktop widget visibility. */
     public record EventPanelContents(
-            String formatText,
-            String productText,
-            String timerText,
-            String dateText,
-            String statusText,
+            NetworkEvent.EventPanelText text,
             boolean showDismissX,
             boolean showConformance,
             boolean conformanceEnabled) { }
@@ -225,9 +223,7 @@ public class CLobby implements IDraftEventHandler {
         NetworkEvent.EventPanelText text = NetworkEvent.computeEventPanelText(
                 isHost, activeEventId, currentEvent, lastEventView);
 
-        return new EventPanelContents(
-                text.formatText(), text.productText(), text.timerText(),
-                text.dateText(), text.statusText(),
+        return new EventPanelContents(text,
                 isHost && (inState1 || inState2),
                 inState2,
                 isHost && !inState1);
@@ -321,19 +317,70 @@ public class CLobby implements IDraftEventHandler {
         NetworkEvent event = serverLobby.getCurrentEvent();
         if (event == null) return;
 
-        // Step 4: Pick timer + disconnect grace period (draft only, combined prompt)
+        // Step 4: Pod size, picks per pack, pick timer and disconnect grace (draft only)
         int timerSeconds = event.getPickTimerSeconds();
         int graceSeconds = event.getDisconnectGraceSeconds();
         if (isDraft) {
+            final BoosterDraft podDraft = draft;
+            int floor = Math.max(2, serverLobby.getNumberOfSlots());
+            int recommendedPod = podDraft.getPodSize();
+            if (floor > BoosterDraft.N_PLAYERS) return;
+
+            List<Integer> podSizes = new ArrayList<>();
+            for (int n = floor; n <= BoosterDraft.N_PLAYERS; n++) {
+                podSizes.add(n);
+            }
+            List<DraftOptions.DoublePick> pickRules = Arrays.asList(
+                    DraftOptions.DoublePick.NEVER,
+                    DraftOptions.DoublePick.FIRST_PICK,
+                    DraftOptions.DoublePick.ALWAYS);
+
+            FComboBox<String> podCombo = new FComboBox<>();
+            for (int n : podSizes) {
+                podCombo.addItem(NetworkEvent.markSetDefault(
+                        NetworkEvent.podSizeLabel(n), n == recommendedPod));
+            }
+            podCombo.setSelectedIndex(Math.max(0, podSizes.indexOf(recommendedPod)));
+
+            FComboBox<String> picksCombo = new FComboBox<>();
+
+            FLabel podLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPodSizeLabel")).build();
+            FLabel podHelp = new FLabel.Builder().fontSize(11).text(localizer.getMessage("lblNetworkPodSizeHelp")).build();
+            FLabel picksLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPicksLabel")).build();
+            FLabel picksHelp = new FLabel.Builder().fontSize(11).text(localizer.getMessage("lblNetworkPicksHelp")).build();
             FTextField pickField = new FTextField.Builder().text(String.valueOf(timerSeconds)).build();
             FTextField graceField = new FTextField.Builder().text(String.valueOf(graceSeconds)).build();
             FLabel pickLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPickTimerPrompt")).build();
             FLabel graceLbl1 = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkGraceTimerPromptLine1")).build();
             FLabel graceLbl2 = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkGraceTimerPromptLine2")).build();
 
+            // A set's pick rule can depend on pod size, so both the marker and the selection follow it.
+            Runnable refreshPicks = () -> {
+                DraftOptions.DoublePick defaultPicks = NetworkEvent.defaultPicksFor(
+                        podDraft, podSizes.get(podCombo.getSelectedIndex()));
+                picksCombo.removeAllItems();
+                for (DraftOptions.DoublePick rule : pickRules) {
+                    picksCombo.addItem(NetworkEvent.markSetDefault(
+                            NetworkEvent.picksLabel(rule), rule == defaultPicks));
+                }
+                picksCombo.setSelectedIndex(pickRules.indexOf(defaultPicks));
+            };
+            refreshPicks.run();
+            podCombo.addActionListener(e -> refreshPicks.run());
+
             JPanel panel = new JPanel(new MigLayout("insets 4, gap 2 4, wrap 1"));
             panel.setOpaque(false);
-            panel.add(pickLbl);
+            panel.add(podLbl);
+            panel.add(podCombo, "w 200!");
+            panel.add(podHelp);
+            if (floor > recommendedPod) {
+                panel.add(new FLabel.Builder().fontSize(11)
+                        .text(localizer.getMessage("lblNetworkPodSizeFloor", floor)).build());
+            }
+            panel.add(picksLbl, "gaptop 10");
+            panel.add(picksCombo, "w 200!");
+            panel.add(picksHelp);
+            panel.add(pickLbl, "gaptop 10");
             panel.add(pickField, "w 80!");
             panel.add(graceLbl1, "gaptop 10");
             panel.add(graceLbl2);
@@ -341,22 +388,24 @@ public class CLobby implements IDraftEventHandler {
 
             int result = FOptionPane.showOptionDialog(
                     null,
-                    localizer.getMessage("lblNetworkDraftTimersTitle"),
+                    localizer.getMessage("lblNetworkDraftSettingsTitle"),
                     null,
                     panel,
                     Arrays.asList(
                             localizer.getMessage("lblOK"),
                             localizer.getMessage("lblCancel")));
-            if (result == 0) {
-                try {
-                    int parsed = Integer.parseInt(pickField.getText().trim());
-                    if (parsed >= 0) timerSeconds = parsed;
-                } catch (NumberFormatException ignored) { }
-                try {
-                    int parsed = Integer.parseInt(graceField.getText().trim());
-                    if (parsed >= 0) graceSeconds = parsed;
-                } catch (NumberFormatException ignored) { }
-            }
+            if (result != 0) return;
+
+            podDraft.setPodSize(podSizes.get(podCombo.getSelectedIndex()));
+            podDraft.setDoublePick(pickRules.get(picksCombo.getSelectedIndex()));
+            try {
+                int parsed = Integer.parseInt(pickField.getText().trim());
+                if (parsed >= 0) timerSeconds = parsed;
+            } catch (NumberFormatException ignored) { }
+            try {
+                int parsed = Integer.parseInt(graceField.getText().trim());
+                if (parsed >= 0) graceSeconds = parsed;
+            } catch (NumberFormatException ignored) { }
         }
 
         if (!serverLobby.configureEvent(chosen, draft, timerSeconds, graceSeconds)) {

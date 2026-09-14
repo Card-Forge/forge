@@ -1,0 +1,9 @@
+Name:Fatehold Charm
+ManaCost:W U
+Types:Instant
+A:SP$ Charm | Choices$ DBDraw,DBReturn,DBPumpAll
+SVar:DBDraw:DB$ Draw | SubAbility$ DBEmpower | SpellDescription$ Draw a card. Empower Jace 2.
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 2
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature,Card.inZoneStack | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Hand | SpellDescription$ Return target spell or creature to its owner's hand.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Creatures you control get +1/+2 until end of turn.
+Oracle:Choose one —\n• Draw a card. Empower Jace 2.\n• Return target spell or creature to its owner's hand.\n• Creatures you control get +1/+2 until end of turn.

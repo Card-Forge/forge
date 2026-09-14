@@ -50,10 +50,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -79,7 +77,6 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
-    private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
      * <p>
@@ -876,9 +873,18 @@ public class AiAttackController {
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
+            ExecutorService executor = Executors.newFixedThreadPool(
+                Runtime.getRuntime().availableProcessors(), r -> {
+                    Thread t = Executors.defaultThreadFactory().newThread(r);
+                    t.setDaemon(true);
+                    return t;
+                }
+            );
+            List<Callable<Integer>> tasks = new ArrayList<>();
+
             for (final Card attacker : this.attackers) {
                 final GameEntity finalDefender = defender;
-                futures.add(CompletableFuture.supplyAsync(()-> {
+                tasks.add(() -> {
                     GameEntity mustAttackDef = null;
                     if (attacker.getSVar("MustAttack").equals("True")) {
                         mustAttackDef = finalDefender;
@@ -936,17 +942,17 @@ public class AiAttackController {
                         numForcedAttackers.incrementAndGet();
                     }
                     return 0;
-                }).exceptionally(ex -> {
-                    ex.printStackTrace();
-                    return 0;
-                }));
+                });
             }
-            CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            if (ai.getGame().canUseTimeout())
-                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, ai.getGame().getAITimeout(), TimeUnit.SECONDS).join();
-            else
-                CompletableFuture.allOf(futuresArray).join();
-            futures.clear();
+
+            try {
+                executor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            } finally {
+                executor.shutdownNow();
+            }
+
             if (attackersLeft.isEmpty()) {
                 return aiAggression;
             }

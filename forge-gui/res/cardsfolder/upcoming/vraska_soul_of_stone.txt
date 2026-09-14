@@ -1,0 +1,9 @@
+Name:Vraska, Soul of Stone
+ManaCost:U R W
+Types:Legendary Creature Gorgon Wizard
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Vigilance | Description$ Artifact creatures you control have vigilance.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 colorless Sculpture Treasure artifact creature token with “{T}, Sacrifice this token: Add one mana of any color.”
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_sculpture_treasure | TokenOwner$ You
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Artifact creatures you control have vigilance.\nWhenever you cast a noncreature spell, create a 1/1 colorless Sculpture Treasure artifact creature token with “{T}, Sacrifice this token: Add one mana of any color.”

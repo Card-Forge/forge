@@ -1,5 +1,6 @@
 package forge.adventure.world;
 
+import forge.Forge;
 import com.badlogic.gdx.Gdx;
 import forge.OverlayText;
 import forge.adventure.data.DifficultyData;
@@ -62,6 +63,9 @@ public class WorldSave {
 
     static public boolean load(int currentSlot) {
 
+        Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
+
+        Forge.invokeWorldSave = true; // This is for dispose method check
         String fileName = WorldSave.getSaveFile(currentSlot);
         if (!new File(fileName).exists())
             return false;
@@ -130,6 +134,7 @@ public class WorldSave {
     }
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
+        Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;
@@ -271,4 +276,7 @@ public class WorldSave {
         MapViewScene.instance().clearBookMarks();
     }
 
+    public static void dispose() {
+        Forge.safeDispose(currentSave.world);
+    }
 }

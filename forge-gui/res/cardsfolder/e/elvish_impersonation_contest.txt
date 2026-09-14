@@ -1,0 +1,12 @@
+Name:Elvish Impersonation Contest
+ManaCost:no cost
+Types:Plane Las Vegas
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and at the beginning of your upkeep, create an Elvish Impersonators token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever you planeswalk here and at the beginning of your upkeep, create an Elvish Impersonators token.
+SVar:TrigToken:DB$ CopyPermanent | DefinedName$ Elvish Impersonators
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, target Elvish Impersonators becomes a 6/6. Its controller creates a Treasure token.
+SVar:RolledChaos:DB$ Animate | ValidTgts$ Creature.namedElvish Impersonators | TgtPrompt$ Select target Elvish Impersonators | Power$ 6 | Toughness$ 6 | Duration$ Permanent | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ TargetedController
+DeckHas:Ability$Token & Type$Elf|Treasure
+DeckHints:Type$Elf|Treasure
+Oracle:Whenever you planeswalk here and at the beginning of your upkeep, create an Elvish Impersonators token. (It's a {3}{G} Elf creature with "As this creature enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.")\nThank you very much—Whenever Chaos ensues, target Elvish Impersonators becomes a 6/6. Its controller creates a Treasure token.
