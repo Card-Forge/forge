@@ -2,7 +2,6 @@ Name:Murmuring Volume
 ManaCost:3
 Types:Artifact Book
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-A:AB$ Draw | Cost$ 2 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
-SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+A:AB$ Draw | Cost$ 2 T Discard<1/Card> | SpellDescription$ Draw a card, then discard a card.
 DeckHas:Ability$Discard
 Oracle:{T}: Add one mana of any color.\n{2}, {T}, Discard a card: Draw a card.
