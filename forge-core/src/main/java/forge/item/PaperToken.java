@@ -2,6 +2,7 @@ package forge.item;
 
 import forge.ImageKeys;
 import forge.card.*;
+import forge.deck.DeckRule;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
@@ -135,6 +136,12 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override
     public CardRules getRules() {
         return cardRules;
+    }
+
+    @Override
+    public List<DeckRule> getDeckRuleList() {
+        // Tokens are never a deck's own card pool entry, so this is never worth caching.
+        return DeckRule.parseAll(this);
     }
 
     @Override

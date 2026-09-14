@@ -69,6 +69,43 @@ final class CardFace implements ICardFace, Cloneable {
     // these are raw and unparsed used for Card creation
     @Override public Iterable<String> getKeywords()   { return keywords; }
     @Override public Iterable<String> getDeckRules()  { return deckRules; }
+
+    private transient List<DeckRuleLine> tokenizedDeckRules = null;
+
+    /** This face's own {@code DeckRule:} lines, split into (rule class, params) pairs and cached - computed once per face and shared across every printing, rather than once per {@code PaperCard}. */
+    @Override public List<DeckRuleLine> getTokenizedDeckRules() {
+        if (tokenizedDeckRules == null) {
+            final List<DeckRuleLine> result = new ArrayList<>();
+            for (final String raw : deckRules) {
+                final int colonPos = raw.indexOf(':');
+                final String ruleClass = colonPos > 0 ? raw.substring(0, colonPos) : raw;
+                final String rest = colonPos > 0 ? raw.substring(colonPos + 1) : "";
+                result.add(new DeckRuleLine(ruleClass, parseDeckRuleParams(rest)));
+            }
+            tokenizedDeckRules = result;
+        }
+        return tokenizedDeckRules;
+    }
+
+    /** Splits a {@code Key$ Value | Key2$ Value2} parameter string (see forge.deck.DeckRule, which builds the typed rule objects from this). */
+    private static Map<String, String> parseDeckRuleParams(final String rest) {
+        final Map<String, String> params = new LinkedHashMap<>();
+        for (final String piece : rest.split("\\|")) {
+            final String trimmed = piece.trim();
+            if (trimmed.isEmpty()) {
+                continue;
+            }
+            final int dollarPos = trimmed.indexOf('$');
+            if (dollarPos < 0) {
+                continue;
+            }
+            final String key = trimmed.substring(0, dollarPos).trim();
+            final String value = trimmed.substring(dollarPos + 1).trim();
+            params.put(key, value);
+        }
+        return params;
+    }
+
     @Override public Iterable<String> getAbilities()  { return abilities; }
     @Override public Iterable<String> getStaticAbilities() { return staticAbilities; }
     @Override public Iterable<String> getTriggers()   { return triggers; }

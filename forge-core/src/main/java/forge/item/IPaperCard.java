@@ -4,6 +4,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
+import forge.deck.DeckRule;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +36,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     List<ICardFace> getAllFaces();
     String getCardImageKey();
     String getCardAltImageKey();
+    List<DeckRule> getDeckRuleList();
 
     boolean isRebalanced();
 

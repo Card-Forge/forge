@@ -633,7 +633,7 @@ public class DuelScene extends ForgeScene {
     //Applies DeckRule:Size:AdjustMax$ from any commander that has one (e.g. Whtz, the Bibliophile).
     private static int applyCommanderSizeRule(List<PaperCard> commanders, int maxDeckSize) {
         for(PaperCard commander : commanders) {
-            for(DeckRule rule : DeckRule.parseAll(commander)) {
+            for(DeckRule rule : commander.getDeckRuleList()) {
                 if(!(rule instanceof DeckRuleSize) || !rule.isActiveFor(DeckSection.Commander))
                     continue;
                 DeckRuleSize sizeRule = (DeckRuleSize) rule;
@@ -700,7 +700,7 @@ public class DuelScene extends ForgeScene {
         for(PaperCard commander : playerDeck.getCommanders()) {
             cmdCI |= commander.getRules().getColorIdentity().getColor();
             wildColors += commander.getRules().getAddsWildCardColor() ? 1 : 0;
-            for(DeckRule rule : DeckRule.parseAll(commander)) {
+            for(DeckRule rule : commander.getDeckRuleList()) {
                 if(rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander))
                     ciRules.add((DeckRuleColorIdentity) rule);
             }
