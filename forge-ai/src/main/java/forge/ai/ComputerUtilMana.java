@@ -114,6 +114,34 @@ public class ComputerUtilMana {
                 ai, sa, sa.getXManaCostPaid());
     }
 
+    /**
+     * Announce X on a converge or sunburst card, where its only job is to buy colors: the least X
+     * that still reaches the most of them.
+     */
+    public static void setXForBestConverge(final SpellAbility sa, final Player ai, final int maxX) {
+        // the same spell is searched again on the way down to its API logic, and every step of the
+        // walk is a full payment solve
+        sa.setXManaCostPaid(AiCache.getCached("convergeX", () -> searchBestConvergeX(sa, ai, maxX),
+                List.of(AiCache::identity, AiCache::identity, Objects::equals), ai, sa, maxX));
+    }
+
+    private static int searchBestConvergeX(final SpellAbility sa, final Player ai, final int maxX) {
+        int bestX = 0;
+        int bestCount = 0;
+        for (int i = 0; i <= maxX; i++) {
+            sa.setXManaCostPaid(i);
+            int count = ColorSet.fromMask(getExpectedConvergeColors(sa, ai)).countColors();
+            if (count > bestCount) {
+                bestCount = count;
+                bestX = i;
+                if (bestCount == MagicColor.WUBRG.length) {
+                    break; // nothing above this can buy a sixth color
+                }
+            }
+        }
+        return bestX;
+    }
+
     // Does not check if mana sources can be used right now, just checks for potential chance.
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
         if (ai == null || sa == null)
