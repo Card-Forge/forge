@@ -1311,7 +1311,6 @@ public class FDeckChooser extends FScreen {
     }
 
     private void restoreSavedState() {
-        Forge.restoringState = true;
         DeckType oldDeckType = selectedDeckType;
         if (stateSetting == null) {
             //if can't restore saved state, just refresh deck list
@@ -1325,8 +1324,6 @@ public class FDeckChooser extends FScreen {
             //if can't select old decks, just refresh deck list
             refreshDecksList(oldDeckType, true, null);
         }
-        // fix timing
-        FThreads.delayInEDT(5000, ()-> Forge.restoringState = false);
     }
 
     private DeckType getDeckTypeFromSavedState(String savedState) {
