@@ -1,0 +1,10 @@
+Name:The Wise Sable
+ManaCost:4 R G W
+Types:Legendary Creature Elder Sable Judge
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCard | TriggerDescription$ Judge Call! — When CARDNAME enters the battlefield, choose one of the following six cards at random: Blood Moon; Enraging Licid; Humility; Life and Limb; Opalescence; Yavimaya, Cradle of Growth. Create a token that’s a copy of the chosen card.
+SVar:ChooseCard:DB$ NameCard | Defined$ You | AtRandom$ True | ChooseFromList$ Blood Moon,Enraging Licid,Humility,Life and Limb,Opalescence,Yavimaya; Cradle of Growth | SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:Judge Call! — When The Wise Sable enters the battlefield, choose one of the following six cards at random: Blood Moon; Enraging Licid; Humility; Life and Limb; Opalescence; Yavimaya, Cradle of Growth. Create a token that’s a copy of the chosen card. (One easy way to determine is to roll a D6.)

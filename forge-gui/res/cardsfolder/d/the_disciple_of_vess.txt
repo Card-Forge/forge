@@ -1,0 +1,13 @@
+Name:The Disciple of Vess
+ManaCost:2 B B
+Types:Legendary Creature Human Cleric
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever The Disciple of Vess attacks, you may put a planeswalker card from your hand onto the battlefield. If you don’t, create a token that’s a copy of a Liliana planeswalker chosen at random.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Planeswalker | ChangeNum$ 1 | Optional$ True | RememberChanged$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBClearNamed | Execute$ ChooseCard| TriggerDescription$ If you don’t, create a token that’s a copy of a Liliana planeswalker chosen at random.
+SVar:ChooseCard:DB$ NameCard | Defined$ You | ValidCards$ Planeswalker.Liliana | AtRandom$ True | SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:Whenever The Disciple of Vess attacks, you may put a planeswalker card from your hand onto the battlefield. If you don’t, create a token that’s a copy of a Liliana planeswalker chosen at random.
+(There are currently thirteen. Perhaps look up the list and roll a D20?)\nPERSON

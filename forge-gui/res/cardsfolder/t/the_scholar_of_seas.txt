@@ -1,0 +1,11 @@
+Name:The Scholar of Seas
+ManaCost:1 W B G
+Types:Legendary Creature Merfolk Advisor
+PT:2/2
+S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCard | TriggerDescription$ When CARDNAME enters the battlefield, choose one of the following cards at random and create a token that’s a copy of it:\n• Judge of Currents\n• Merrow Reejerey\n• Lord of Atlantis\n• Merfolk Sovereign\n• Sygg, River Guide\n• Kumena, Tyrant of Orazca
+SVar:ChooseCard:DB$ NameCard | Defined$ You | AtRandom$ True | ChooseFromList$ Judge of Currents,Merrow Reejerey,Lord of Atlantis,Merfolk Sovereign,Sygg; River Guide,Kumena; Tyrant of Orazca | SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:Other Merfolk you control get +1/+1.\nWhen The Scholar of Seas enters the battlefield, choose one of the following cards at random and create a token that’s a copy of it:\n• Judge of Currents\n• Merrow Reejerey\n• Lord of Atlantis\n• Merfolk Sovereign\n• Sygg, River Guide\n• Kumena, Tyrant of Orazca
