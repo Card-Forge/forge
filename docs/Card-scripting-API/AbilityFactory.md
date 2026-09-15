@@ -104,6 +104,21 @@ Parameters (all optional):
 - `RemoveAllAbilities$ True` - Remove all Abilities, Triggers, Statics and Replacement effects
 - `sVars` - a comma-delimited list of SVars that should be granted to the animated being
 
+## Assimilate
+Handles the keyword action "assimilate" - the target ends up under your control as a Borg artifact
+creature with a +1/+1 counter, having lost its other creature types but keeping its other card types.
+
+How it gets there depends on where it starts. A card in a graveyard or exile is put onto the
+battlefield, and the type change rides on that zone change (via `StaticEffect$`) so ETB triggers
+already see a Borg artifact creature. A permanent already on the battlefield only changes controller
+and is animated in place.
+
+Parameters:
+- `ValidTgts`/`TgtZone` - as for any targeted effect; `TgtZone$ Graveyard` for the graveyard form
+
+Example (*Borg Queen, Perfection Manifest*):  
+`SVar:TrigAssimilate:DB$ Assimilate | TgtZone$ Graveyard | ValidTgts$ Creature.OppOwn`
+
 ## Attach
 Attaches a permanent to an affected card or player.
 
