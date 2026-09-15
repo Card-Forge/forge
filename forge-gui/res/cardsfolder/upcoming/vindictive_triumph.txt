@@ -2,6 +2,6 @@ Name:Vindictive Triumph
 ManaCost:W B B
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under your control.
-SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Permanent.cmcLE3 | Defined$ Remembered | Origin$ All | Destination$ Battlefield | GainControl$ True | AtEOT$ Exile | SubAbility$ DBCleanup
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Permanent.cmcLE3 | Defined$ Remembered | Origin$ All | Destination$ Battlefield | GainControl$ True | Tapped$ True | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile target creature or planeswalker. If that permanent's mana value was 3 or less, return it to the battlefield tapped under your control. Exile it at the beginning of the next end step.
