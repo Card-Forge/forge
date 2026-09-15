@@ -9,6 +9,6 @@ SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Condi
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Card.nonLand
 A:AB$ Draw | Cost$ 3 U U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | NumCards$ 2
+SVar:X:Remembered$Valid Card.nonLand
 Oracle:When this creature enters, draw two cards, then discard two cards. When you discard one or more nonland cards this way, tap up to that many target creatures and put a stun counter on each of them.\n{3}{U}{U}, Exile this card from your graveyard: Draw two cards.
