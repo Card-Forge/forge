@@ -43,6 +43,7 @@ ScryfallCode=FRA
 66 C Silence the Echo @Pavel Kolomeyets
 67 C Solve for Disappointment @Eli Minaya
 71 R Vraska's Final Mercy @Magali Villeneuve
+72 R Ajani's Anguish @Mathias Kollros
 75 C Blazing Crescendo @Billy Christian
 76 C Chandra's Emberling @Borja Pindado
 78 M Craterclaw Colossus @Mark Zug
@@ -66,6 +67,7 @@ ScryfallCode=FRA
 106 M Hexhaven Invigorator @Olivier Bernard
 107 R Hungering Puppetbeast @Simon Dominic
 109 C Inspired Tethermage @Cristi Balanescu
+111 R Puppet Crafting @Anna Pavleeva
 112 U Restore with Empathy @Eelis Kyttanen
 114 C Something Worth Saving @PINDURSKI
 116 M Tarmogoyf @Lucas Graciano
@@ -79,6 +81,7 @@ ScryfallCode=FRA
 130 C Emergency Phytomedic @Dmitry Burmak
 132 U Fatehold Charm @Rovina Cai
 133 C Fatehold Chronologist @Alexander Mokhov
+136 U Grim Repriser @Wayne Reynolds
 137 M Ingris Stingerquill @Chase Stone
 138 U Konstrari Charm @Matheus Graef
 140 M Kwia Vigorbloom @Ryan Pancoast
@@ -220,6 +223,7 @@ ScryfallCode=FRA
 357 R Tenured Tethermage @Viktor Fetsch
 358 M Uldaros Theorix @Eugene Maslovski
 363 M The Theorist, Jace Beleren @Miles Johnston
+367 R Ajani's Anguish @Molly Mendoza
 370 R Face Yourself @Jack Hughes
 371 R Identity Echo @Maria Jesus Contreras
 374 M Tarmogoyf @Micha Huigen
