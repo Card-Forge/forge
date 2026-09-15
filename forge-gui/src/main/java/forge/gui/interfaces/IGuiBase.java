@@ -39,6 +39,8 @@ public interface IGuiBase {
     ISkinImage createLayeredImage(PaperCard card, FSkinProp background, String overlayFilename, float opacity);
 
     void clearImageCache();
+    /** Optionally warms the platform's image cache for the given cards. */
+    default void preloadCardImages(Collection<PaperCard> cards) { }
     String encodeSymbols(String str, boolean formatReminderText);
 
     int getAvatarCount();
