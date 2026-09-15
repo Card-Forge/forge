@@ -1032,6 +1032,8 @@ public class AiAttackController {
 
                 int index = 0;
                 for (final Card attacker : this.attackers) {
+                    if (System.nanoTime() > deadlineNanos)
+                        break;
                     tasksArray[index] = new ConcurrentAttackerEvaluator(
                         attacker, finalDefender, combat, attackersLeft, numForcedAttackers,
                         cdl, requirementsComparator, seasonOfTheWitch
