@@ -23,6 +23,8 @@ public class Localizer {
     private String currentLanguageRegionID;
     private boolean silent = false;
     private boolean english = false;
+    //Keys already reported, so a missing translation is logged once instead of on every lookup
+    private final Set<String> reportedKeys = Collections.synchronizedSet(new HashSet<>());
 
     public static Localizer getInstance() {
         if (instance == null) {
@@ -82,6 +84,11 @@ public class Localizer {
         return getMessage(false, key, messageArguments);
     }
     public String getMessage(boolean forcedEnglish, final String key, final Object... messageArguments) {
+        //The flag covers one lookup. Clear it here, or an early return below leaves it set
+        //and silences every later caller.
+        final boolean quiet = silent;
+        silent = false;
+
         MessageFormat formatter = null;
         String rawValue = null;
 
@@ -89,32 +96,25 @@ public class Localizer {
             //formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
             rawValue = lookup(key, english || forcedEnglish);
             formatter = new MessageFormat(rawValue, english || forcedEnglish ? Locale.ENGLISH : locale);
-        } catch (final IllegalArgumentException | MissingResourceException e) {
-            if (!silent)
-                e.printStackTrace();
+        } catch (final MissingResourceException e) {
+            warnOnce(quiet, key, "is not translated in " + locale + ", using English");
+        } catch (final IllegalArgumentException e) {
+            warnOnce(quiet, key, "is not a valid message pattern in " + locale + ", using English: " + e.getMessage());
         }
 
         if (formatter == null) {
-            if (!silent) {
-                System.err.println("INVALID PROPERTY: '" + key + "' -- Translation missing from " + locale);
-            }
-
             if (english || forcedEnglish) {
                 return "INVALID PROPERTY: '" + key + "' -- Translation missing from English?";
             }
             try {
-                formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
-                forcedEnglish = true;
                 rawValue = englishBundle.getString(key);
+                formatter = new MessageFormat(rawValue, Locale.ENGLISH);
+                forcedEnglish = true;
             } catch (final IllegalArgumentException | MissingResourceException e) {
-                if (!silent) {
-                    e.printStackTrace();
-                }
+                warnOnce(quiet, key, "is missing from en-US as well: " + e.getMessage());
                 return "INVALID PROPERTY: '" + key + "' -- Translation missing from English locale?";
             }
         }
-
-        silent = false;
 
         formatter.setLocale(english || forcedEnglish ? Locale.ENGLISH : locale);
 
@@ -142,6 +142,14 @@ public class Localizer {
         } catch(UnsupportedEncodingException ignored) {}
 
         return formattedMessage;
+    }
+
+    /** Report a bad key once per language. The English fallback keeps the text on screen either way. */
+    private void warnOnce(final boolean quiet, final String key, final String problem) {
+        if (quiet || !reportedKeys.add(locale + "/" + key + "/" + problem)) {
+            return;
+        }
+        System.err.println("Localization: '" + key + "' " + problem);
     }
 
     public void setLanguage(final String languageRegionID, final String languagesDirectory) {
@@ -174,6 +182,7 @@ public class Localizer {
             }
 
             adventureBundle = null;
+            reportedKeys.clear();
 
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
 
