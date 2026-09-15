@@ -81,11 +81,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final long REFRESH_DEBOUNCE_MS = 50;
 
     // prevent ui updates too quickly though 50ms maybe a good default
+    // TODO: find a way to refresh the list before drawing consecutively
     private void scheduleLayout(boolean forRefresh) {
-        if (Forge.restoringState) { // the restore runs in bg
-            updateLayout(forRefresh);
-            return;
-        }
         long now = System.currentTimeMillis();
         if (now - lastRefreshTime < REFRESH_DEBOUNCE_MS)
             return;
@@ -484,8 +481,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
             btnExpandCollapseAll.updateIsAllCollapsed();
         }
-
-        scheduleLayout(true);
+        updateLayout(true);
+        // scheduleLayout(true);
     }
 
 

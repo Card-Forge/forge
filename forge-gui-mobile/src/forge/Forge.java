@@ -85,7 +85,6 @@ public class Forge implements ApplicationListener {
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
     private static boolean lastInputWasController = false;
-    public static boolean restoringState = false;
     public static Texture lastPreview = null;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
