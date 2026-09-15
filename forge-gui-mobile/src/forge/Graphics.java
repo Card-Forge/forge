@@ -395,7 +395,7 @@ public class Graphics implements Disposable {
 
         batch.begin();
     }
-    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2) {
+    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
         batch.end();
         float lt = thickness / 3;
 
@@ -412,8 +412,12 @@ public class Graphics implements Disposable {
         startShape(ShapeType.Filled);
         shapeRenderer.setColor(fillColor);
         shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), radius);
+        if (drawPointer)
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
         shapeRenderer.setColor(strokeColor);
         shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness /2);
+        if (drawPointer)
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
         endShape();
 
         float dx = x2 - x1, dy = y2 - y1;
@@ -495,57 +499,59 @@ public class Graphics implements Disposable {
             if (lt > 1) Gdx.gl.glLineWidth(1);
         }
 
-        // --- Arrowhead at (x2,y2) ---
-        float tipX = adjustX(x2);
-        float tipY = adjustY(y2, 0);
-        float adjBeforeX = adjustX(beforeTipX);
-        float adjBeforeY = adjustY(beforeTipY, 0);
+        if (!drawPointer) {
+            // --- Arrowhead at (x2,y2) ---
+            float tipX = adjustX(x2);
+            float tipY = adjustY(y2, 0);
+            float adjBeforeX = adjustX(beforeTipX);
+            float adjBeforeY = adjustY(beforeTipY, 0);
 
-        float headingX = tipX - adjBeforeX;
-        float headingY = tipY - adjBeforeY;
-        float headingLen = (float)Math.sqrt(headingX*headingX + headingY*headingY);
+            float headingX = tipX - adjBeforeX;
+            float headingY = tipY - adjBeforeY;
+            float headingLen = (float)Math.sqrt(headingX*headingX + headingY*headingY);
 
-        if (headingLen > 0) {
-            float nx = headingX / headingLen;
-            float ny = headingY / headingLen;
+            if (headingLen > 0) {
+                float nx = headingX / headingLen;
+                float ny = headingY / headingLen;
 
-            float arrowLength = thickness * 2.2f;
-            float spreadAngle = (float)Math.toRadians(35);
+                float arrowLength = thickness * 2.2f;
+                float spreadAngle = (float)Math.toRadians(35);
 
-            // Left wing
-            float cosL = (float)Math.cos(Math.PI - spreadAngle);
-            float sinL = (float)Math.sin(Math.PI - spreadAngle);
-            float leftDirX = nx * cosL - ny * sinL;
-            float leftDirY = nx * sinL + ny * cosL;
+                // Left wing
+                float cosL = (float)Math.cos(Math.PI - spreadAngle);
+                float sinL = (float)Math.sin(Math.PI - spreadAngle);
+                float leftDirX = nx * cosL - ny * sinL;
+                float leftDirY = nx * sinL + ny * cosL;
 
-            // Right wing
-            float cosR = (float)Math.cos(Math.PI + spreadAngle);
-            float sinR = (float)Math.sin(Math.PI + spreadAngle);
-            float rightDirX = nx * cosR - ny * sinR;
-            float rightDirY = nx * sinR + ny * cosR;
+                // Right wing
+                float cosR = (float)Math.cos(Math.PI + spreadAngle);
+                float sinR = (float)Math.sin(Math.PI + spreadAngle);
+                float rightDirX = nx * cosR - ny * sinR;
+                float rightDirY = nx * sinR + ny * cosR;
 
-            float baseLeftX = tipX + leftDirX * arrowLength;
-            float baseLeftY = tipY + leftDirY * arrowLength;
-            float baseRightX = tipX + rightDirX * arrowLength;
-            float baseRightY = tipY + rightDirY * arrowLength;
+                float baseLeftX = tipX + leftDirX * arrowLength;
+                float baseLeftY = tipY + leftDirY * arrowLength;
+                float baseRightX = tipX + rightDirX * arrowLength;
+                float baseRightY = tipY + rightDirY * arrowLength;
 
-            startShape(ShapeType.Filled);
-            shapeRenderer.setColor(fillColor);
-            shapeRenderer.rectLine(tipX, tipY, baseLeftX, baseLeftY, thickness);
-            shapeRenderer.rectLine(tipX, tipY, baseRightX, baseRightY, thickness);
-            endShape();
+                startShape(ShapeType.Filled);
+                shapeRenderer.setColor(fillColor);
+                shapeRenderer.rectLine(tipX, tipY, baseLeftX, baseLeftY, thickness);
+                shapeRenderer.rectLine(tipX, tipY, baseRightX, baseRightY, thickness);
+                endShape();
 
-            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
-            if (lt > 1) Gdx.gl.glLineWidth(lt);
+                if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+                if (lt > 1) Gdx.gl.glLineWidth(lt);
 
-            startShape(ShapeType.Line);
-            shapeRenderer.setColor(strokeColor);
-            shapeRenderer.line(tipX, tipY, baseLeftX, baseLeftY);
-            shapeRenderer.line(tipX, tipY, baseRightX, baseRightY);
-            endShape();
+                startShape(ShapeType.Line);
+                shapeRenderer.setColor(strokeColor);
+                shapeRenderer.line(tipX, tipY, baseLeftX, baseLeftY);
+                shapeRenderer.line(tipX, tipY, baseRightX, baseRightY);
+                endShape();
 
-            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
-            if (lt > 1) Gdx.gl.glLineWidth(1);
+                if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+                if (lt > 1) Gdx.gl.glLineWidth(1);
+            }
         }
 
         if (fillColor.a < 1 || needSmoothing) {
