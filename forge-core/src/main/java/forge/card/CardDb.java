@@ -947,6 +947,38 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     // Override when there is no date
+    private PaperCard findPreferredLanguageCandidate(List<CardEdition> editions, Map<String, PaperCard> candidatesCard,
+                                                     boolean excludeSpecialRarity) {
+        PaperCard languageWithImage = null;
+        PaperCard languageNoImage = null;
+        boolean anyLocalImage = false;
+
+        for (CardEdition edition : editions) {
+            PaperCard pc = candidatesCard.get(edition.getCode());
+            if (pc == null)
+                continue;
+            if (pc.hasImage())
+                anyLocalImage = true;
+            if (excludeSpecialRarity && pc.getRarity().equals(CardRarity.Special))
+                continue;
+            if (!isPreferredLanguagePrint(pc))
+                continue;
+            if (pc.hasImage()) {
+                languageWithImage = pc;
+                break; // best possible match: right language, already on disk
+            }
+            if (languageNoImage == null)
+                languageNoImage = pc;
+        }
+
+        if (languageWithImage != null)
+            return languageWithImage;
+        if (anyLocalImage)
+            // Some accepted printing already has a local image - never trigger a new download
+            return null;
+        return languageNoImage;
+    }
+
     private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter){
         return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null, false, filter);
     }
@@ -1034,6 +1066,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             Collections.sort(acceptedEditions);  // CardEdition correctly sort by (release) date
             if (artPref.latestFirst)
                 Collections.reverse(acceptedEditions);  // newest editions first
+        }
+
+        if (preferredLanguageAvailability != null) {
+            PaperCard languageCandidate = findPreferredLanguageCandidate(acceptedEditions, candidatesCard, false);
+            if (languageCandidate == null && cardEditions.size() > acceptedEditions.size()) {
+                List<CardEdition> allEditionsOrdered = new ArrayList<>(cardEditions);
+                if (allEditionsOrdered.size() > 1) {
+                    Collections.sort(allEditionsOrdered);
+                    if (artPref.latestFirst)
+                        Collections.reverse(allEditionsOrdered);
+                }
+                languageCandidate = findPreferredLanguageCandidate(allEditionsOrdered, candidatesCard, true);
+            }
+            if (languageCandidate != null)
+                return cr.isFoil ? languageCandidate.getFoiled() : languageCandidate;
         }
 
         final Iterator<CardEdition> editionIterator = acceptedEditions.iterator();

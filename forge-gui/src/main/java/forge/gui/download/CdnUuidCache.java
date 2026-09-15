@@ -89,6 +89,9 @@ public final class CdnUuidCache {
     /** Set codes a lookup couldn't answer locally, waiting for {@link #syncPendingSets}. */
     private static final Set<String> pendingSyncs = ConcurrentHashMap.newKeySet();
 
+    /** Set codes confirmed to have no local index yet. Cleared only when a sync writes one. */
+    private static final Set<String> absentSets = ConcurrentHashMap.newKeySet();
+
     /** Submits {@link #syncPendingSets} to the shared pool; tests disable this. */
     static volatile boolean autoSyncEnabled = true;
 
@@ -98,7 +101,7 @@ public final class CdnUuidCache {
     private CdnUuidCache() {}
 
     /** Test helper */
-    static void clearCacheForTesting() { setCache.clear(); }
+    static void clearCacheForTesting() { setCache.clear(); absentSets.clear(); }
 
     /** Local set-cache directory, honoring the test override. */
     public static String cacheDir() {
@@ -179,6 +182,7 @@ public final class CdnUuidCache {
 
         writeLocalCache(file, merged.toString());
         setCache.remove(setCode); // force a re-read of the freshly-written file on next lookup
+        absentSets.remove(setCode);
     }
 
     /** Records {@code (cn, lang)} as missing as of now, so lookups skip retrying until {@link #MISS_RETRY_AFTER} passes. */
@@ -196,6 +200,7 @@ public final class CdnUuidCache {
 
         writeLocalCache(file, setObj.toString());
         setCache.remove(setCode);
+        absentSets.remove(setCode);
     }
 
     public static boolean isAvailableInLanguage(String scryfallCode, String collectorNum, String lang) {
@@ -248,8 +253,14 @@ public final class CdnUuidCache {
         Map<String, Map<String, LangUuids>> cached = setCache.get(setCode);
         if (cached != null) return cached;
 
+        if (absentSets.contains(setCode)) return MISSING_SET;
+
         Map<String, Map<String, LangUuids>> onDisk = readSetFromDisk(setCode);
-        if (onDisk == MISSING_SET) return MISSING_SET;
+        if (onDisk == MISSING_SET) {
+            absentSets.add(setCode);
+            return MISSING_SET;
+        }
+        absentSets.remove(setCode);
 
         Map<String, Map<String, LangUuids>> existing = setCache.putIfAbsent(setCode, onDisk);
         return existing != null ? existing : onDisk;
