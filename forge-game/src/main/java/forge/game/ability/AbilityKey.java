@@ -60,6 +60,7 @@ public enum AbilityKey {
     Destination("Destination"),
     Devoured("Devoured"),
     DicePTExchanges("DicePTExchanges"),
+    DiceResultModifier("DiceResultModifier"),
     Discard("Discard"),
     DiscardedBefore("DiscardedBefore"),
     DividedShieldAmount("DividedShieldAmount"),

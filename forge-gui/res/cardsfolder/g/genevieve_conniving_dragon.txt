@@ -1,0 +1,17 @@
+Name:Genevieve, Conniving Dragon
+ManaCost:W U B R G
+Types:Legendary Creature Elder Dragon Gamer
+PT:5/5
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigRoll | TriggerDescription$ At the beginning of combat on your turn, roll the party die and create a number of Treasure tokens equal to the result.
+SVar:TrigRoll:DB$ RollDice | Amount$ 1 | ResultSVar$ Result | Sides$ S | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ Result
+SVar:S:Count$Compare X EQ1.4.S2
+SVar:S2:Count$Compare X EQ2.8.S3
+SVar:S3:Count$Compare X EQ3.12.S4
+SVar:S4:Count$Compare X GE4.20.1
+SVar:X:Count$Party
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:At the beginning of combat on your turn, roll the party die and create a number of Treasure tokens equal to the result. (Your party consists of up to one of each of Cleric, Rogue, Warrior, and Wizard. If your party size is 1, the party die is a d4. It’s a d8 for 2, a d12 for 3, and a d20 for 4.)
