@@ -25,7 +25,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -994,22 +993,7 @@ public class CombatUtil {
             return false;
         }
 
-        // rare case:
-        if (blocker.hasKeyword(Keyword.SHADOW)
-                && blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
-            return false;
-        }
-
-        if (attacker.hasKeyword(Keyword.SHADOW) && !blocker.hasKeyword(Keyword.SHADOW)
-                && !blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
-            return false;
-        }
-
-        if (!attacker.hasKeyword(Keyword.SHADOW) && blocker.hasKeyword(Keyword.SHADOW)) {
-            return false;
-        }
-
-        // CantBlockBy static abilities
+        // CantBlockBy static abilities (includes Shadow's own two restrictions)
         if (StaticAbilityCantAttackBlock.cantBlockBy(attacker, blocker)) {
             return false;
         }
