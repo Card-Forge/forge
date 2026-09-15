@@ -279,11 +279,11 @@ public class Graphics implements Disposable {
         batch.begin();
     }
 
-    public void drawLineArrow(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-        drawLineArrow(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
+    public void drawLinePointer(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        drawLinePointer(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
     }
 
-    public void drawLineArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+    public void drawLinePointer(float thickness, Color color, float x1, float y1, float x2, float y2) {
         batch.end(); //must pause batch while rendering shapes
         float ct = thickness / 2;
         float lt = thickness / 3;
@@ -392,6 +392,282 @@ public class Graphics implements Disposable {
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
         Gdx.gl.glDisable(GL_BLEND);
+
+        batch.begin();
+    }
+    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
+        batch.end();
+        float lt = thickness / 3;
+
+        if (alphaComposite < 1) {
+            fillColor = FSkinColor.alphaColor(fillColor, fillColor.a * alphaComposite);
+            strokeColor = FSkinColor.alphaColor(strokeColor, strokeColor.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (fillColor.a < 1 || needSmoothing) {
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+
+        float radius = thickness;
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(fillColor);
+        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), radius);
+        if (drawPointer)
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
+        shapeRenderer.setColor(strokeColor);
+        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness /2);
+        if (drawPointer)
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
+        endShape();
+
+        float dx = x2 - x1, dy = y2 - y1;
+        float length = (float)Math.sqrt(dx*dx + dy*dy);
+
+        // Point just before the tip for direction
+        float beforeTipX = x1, beforeTipY = y1;
+
+        if (length < 120f) {
+            // Straight line
+            float backScale = Math.max(0.1f, 10f / length);
+            beforeTipX = x2 - dx * backScale;
+            beforeTipY = y2 - dy * backScale;
+
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0), thickness);
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0));
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(1);
+
+        } else {
+            // Curved Bezier
+            float midX = (x1 + x2) / 2f;
+            float midY = (y1 + y2) / 2f;
+            float px = -dy / length, py = dx / length;
+            float curveStrength = 50f;
+            float cx = midX + px * curveStrength;
+            float cy = midY + py * curveStrength;
+
+            // Sample at t=0.95 for approach vector
+            float tBefore = 0.95f;
+            beforeTipX = (1 - tBefore)*(1 - tBefore)*x1 + 2*(1 - tBefore)*tBefore*cx + tBefore*tBefore*x2;
+            beforeTipY = (1 - tBefore)*(1 - tBefore)*y1 + 2*(1 - tBefore)*tBefore*cy + tBefore*tBefore*y2;
+
+            int segments = 30;
+            float prevX = x1, prevY = y1;
+
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0), thickness);
+                prevX = bx; prevY = by;
+            }
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            prevX = x1; prevY = y1;
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0));
+                prevX = bx; prevY = by;
+            }
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(1);
+        }
+
+        if (!drawPointer) {
+            // --- Arrowhead at (x2,y2) ---
+            float tipX = adjustX(x2);
+            float tipY = adjustY(y2, 0);
+            float adjBeforeX = adjustX(beforeTipX);
+            float adjBeforeY = adjustY(beforeTipY, 0);
+
+            float headingX = tipX - adjBeforeX;
+            float headingY = tipY - adjBeforeY;
+            float headingLen = (float)Math.sqrt(headingX*headingX + headingY*headingY);
+
+            if (headingLen > 0) {
+                float nx = headingX / headingLen;
+                float ny = headingY / headingLen;
+
+                float arrowLength = thickness * 2.2f;
+                float spreadAngle = (float)Math.toRadians(35);
+
+                // Left wing
+                float cosL = (float)Math.cos(Math.PI - spreadAngle);
+                float sinL = (float)Math.sin(Math.PI - spreadAngle);
+                float leftDirX = nx * cosL - ny * sinL;
+                float leftDirY = nx * sinL + ny * cosL;
+
+                // Right wing
+                float cosR = (float)Math.cos(Math.PI + spreadAngle);
+                float sinR = (float)Math.sin(Math.PI + spreadAngle);
+                float rightDirX = nx * cosR - ny * sinR;
+                float rightDirY = nx * sinR + ny * cosR;
+
+                float baseLeftX = tipX + leftDirX * arrowLength;
+                float baseLeftY = tipY + leftDirY * arrowLength;
+                float baseRightX = tipX + rightDirX * arrowLength;
+                float baseRightY = tipY + rightDirY * arrowLength;
+
+                startShape(ShapeType.Filled);
+                shapeRenderer.setColor(fillColor);
+                shapeRenderer.rectLine(tipX, tipY, baseLeftX, baseLeftY, thickness);
+                shapeRenderer.rectLine(tipX, tipY, baseRightX, baseRightY, thickness);
+                endShape();
+
+                if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+                if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+                startShape(ShapeType.Line);
+                shapeRenderer.setColor(strokeColor);
+                shapeRenderer.line(tipX, tipY, baseLeftX, baseLeftY);
+                shapeRenderer.line(tipX, tipY, baseRightX, baseRightY);
+                endShape();
+
+                if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+                if (lt > 1) Gdx.gl.glLineWidth(1);
+            }
+        }
+
+        if (fillColor.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+
+        batch.begin();
+    }
+
+    public void drawCurvedLinePointer(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2) {
+        batch.end();
+        float lt = thickness / 3;
+
+        if (alphaComposite < 1) {
+            fillColor = FSkinColor.alphaColor(fillColor, fillColor.a * alphaComposite);
+            strokeColor = FSkinColor.alphaColor(strokeColor, strokeColor.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (fillColor.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+
+        float radius = thickness * 1.2f;
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(fillColor);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
+        shapeRenderer.setColor(strokeColor);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
+        endShape();
+
+        float dx = x2 - x1, dy = y2 - y1;
+        float length = (float)Math.sqrt(dx*dx + dy*dy);
+
+        if (length < 120f) {
+            // Straight line if short
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0), thickness);
+            endShape();
+
+
+            if (needSmoothing) {
+                Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(lt);
+            }
+
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0));
+            endShape();
+
+            if (needSmoothing) {
+                Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+
+
+        } else {
+            // Curved Bezier if long
+            float midX = (x1 + x2) / 2f;
+            float midY = (y1 + y2) / 2f;
+            float px = -dy / length, py = dx / length;
+            float curveStrength = 50f;
+            float cx = midX + px * curveStrength;
+            float cy = midY + py * curveStrength;
+
+            int segments = 30;
+            float prevX = x1, prevY = y1;
+
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0), thickness);
+                prevX = bx; prevY = by;
+            }
+            endShape();
+
+            if (needSmoothing) {
+                Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(lt);
+            }
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            prevX = x1; prevY = y1;
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0));
+                prevX = bx; prevY = by;
+            }
+            endShape();
+            if (needSmoothing) {
+                Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+        }
+
+        if (fillColor.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
 
         batch.begin();
     }

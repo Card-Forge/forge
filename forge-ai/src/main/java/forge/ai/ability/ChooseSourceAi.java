@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -126,11 +125,12 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 return bestCreature;
             }
             // No optimal creature was found above, so try to broaden the choice.
-            if (!Iterables.isEmpty(options)) {
-                List<Card> oppCreatures = CardLists.filter(options, Predicate.not(
-                        CardPredicates.CREATURES.and(CardPredicates.isOwner(aiChoser))
-                ));
-                List<Card> aiNonCreatures = CardLists.filter(options,
+            // ChooseSourceEffect includes section headings which are not valid sources.
+            List<Card> fallbackSources = CardLists.filter(options, c -> !c.getName().startsWith("--"));
+            if (!fallbackSources.isEmpty()) {
+                List<Card> oppCreatures = CardLists.filter(fallbackSources,
+                        CardPredicates.CREATURES.and(Predicate.not(CardPredicates.isOwner(aiChoser))));
+                List<Card> aiNonCreatures = CardLists.filter(fallbackSources,
                         CardPredicates.NON_CREATURES
                                 .and(CardPredicates.PERMANENTS)
                                 .and(CardPredicates.isOwner(aiChoser))
@@ -142,7 +142,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 if (!aiNonCreatures.isEmpty()) {
                     return Aggregates.random(aiNonCreatures);
                 }
-                return Aggregates.random(options);
+                return Aggregates.random(fallbackSources);
             } else if (!game.getStack().isEmpty()) {
                 // No permanent for the AI to choose. Should normally not happen unless using dev mode or something,
                 // but when it does happen, choose the top card on stack if possible (generally it'll be the SA
