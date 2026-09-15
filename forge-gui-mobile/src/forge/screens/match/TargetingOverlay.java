@@ -140,7 +140,7 @@ public class TargetingOverlay {
         switch (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION)) {
             case "Point" -> g.drawCurvedLinePointer(Utils.scale(3), color.getColor(), Color.WHITE, start.x, start.y, end.x, end.y);
             case "Line" -> g.drawLinePointer(Utils.scale(3), color.getColor(), start.x, start.y, end.x, end.y);
-            default -> g.drawCurvedArrow(Utils.scale(3), color.alphaColor(0.8f).getColor(), FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(), start.x, start.y, end.x, end.y);
+            default -> g.drawCurvedArrow(Utils.scale(3), color.alphaColor(0.8f).getColor(), FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(), start.x, start.y, end.x, end.y, ArcConnection.Friends.equals(connects));
         }
     }
 }

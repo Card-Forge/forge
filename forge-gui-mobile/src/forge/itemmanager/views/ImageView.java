@@ -82,6 +82,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     // prevent ui updates too quickly though 50ms maybe a good default
     private void scheduleLayout(boolean forRefresh) {
+        if (Forge.restoringState) { // the restore runs in bg
+            updateLayout(forRefresh);
+            return;
+        }
         long now = System.currentTimeMillis();
         if (now - lastRefreshTime < REFRESH_DEBOUNCE_MS)
             return;
