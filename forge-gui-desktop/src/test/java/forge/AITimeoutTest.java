@@ -53,14 +53,28 @@ public class AITimeoutTest extends SimulationTest {
                 50, attackingCreatures);
 
         // No tasks should be running
-        AssertJUnit.assertEquals(0, ThreadUtil.AIExecutor.getActiveCount());
+        AssertJUnit.assertEquals("No tasks should be running", 0, ThreadUtil.AIExecutor.getActiveCount());
 
-        // Wait longer than keepAlive so idle threads terminate.. 1.5 Seconds
-        Thread.sleep(1500);
+        // We poll up to 2.0 seconds total to account for slow CI environments.
+        int retries = 20;
+        while (retries > 0 && ThreadUtil.AIExecutor.getPoolSize() > 0) {
+            Thread.sleep(100);
+            retries--;
+        }
 
-        // Pool should shrink to zero, meaning all worker threads have terminated
-        AssertJUnit.assertEquals("Pool should shrink to zero after idle timeout",
-                0, ThreadUtil.AIExecutor.getPoolSize());
+        if (ThreadUtil.AIExecutor.getPoolSize() > 0) {
+            // Look at the thread if it is stuck somehow
+            java.lang.management.ThreadMXBean threadMXBean = java.lang.management.ManagementFactory.getThreadMXBean();
+            java.lang.management.ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(true, true);
+
+            for (java.lang.management.ThreadInfo info : threadInfos) {
+                if (info.getThreadName().contains("AI ThreadPool")) {
+                    System.err.println(info);
+                }
+            }
+        }
+
+        // Pool should now be strictly verified at zero
+        AssertJUnit.assertEquals("Pool should shrink to zero after idle timeout", 0, ThreadUtil.AIExecutor.getPoolSize());
     }
-
 }
