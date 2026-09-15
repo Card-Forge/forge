@@ -51,6 +51,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -790,6 +791,152 @@ public class AiAttackController {
 
     final boolean LOG_AI_ATTACKS = false;
 
+    // AttackRequirementsComparator to eliminate the inline sort lambda allocation
+    public static class AttackRequirementsComparator implements Comparator<Pair<GameEntity, Integer>> {
+        private final GameEntity targetDefender;
+
+        // Pass the current turn's defender into the constructor
+        public AttackRequirementsComparator(GameEntity targetDefender) {
+            this.targetDefender = targetDefender;
+        }
+
+        @Override
+        public int compare(Pair<GameEntity, Integer> r1, Pair<GameEntity, Integer> r2) {
+            // 1. Compare by the numerical requirement values first
+            if (r1.getValue().equals(r2.getValue())) {
+
+                // Try to attack the designated defender context
+                if (r1.getKey().equals(targetDefender) && !r2.getKey().equals(targetDefender)) {
+                    return -1;
+                }
+                if (r2.getKey().equals(targetDefender) && !r1.getKey().equals(targetDefender)) {
+                    return 1;
+                }
+
+                // Otherwise prioritize Planeswalkers over Players
+                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                    return -1;
+                }
+                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                    return 1;
+                }
+
+                // Or attack the weakest player
+                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                    return p1.getLife() - p2.getLife();
+                }
+            }
+
+            // Sort descending by weight value
+            return r2.getValue() - r1.getValue();
+        }
+    }
+
+    // Allocation free ConcurrentAttackerEvaluator runnable
+    public class ConcurrentAttackerEvaluator implements Runnable {
+        // Shared parameters
+        private final Card attacker;
+        private final GameEntity targetDefender;
+        private final Combat combat;
+        private final Queue<Card> attackersLeft;
+        private final AtomicInteger numForcedAttackers;
+        private final CountDownLatch latch;
+        private final AttackRequirementsComparator comparator;
+
+        private final AtomicReference<Object> runnerThread = new AtomicReference<>();
+        private final Object CANCELLED_MARKER = new Object();
+        private boolean seasonOfTheWitch;
+
+        public ConcurrentAttackerEvaluator(Card attacker, GameEntity targetDefender, Combat combat, Queue<Card> attackersLeft,
+            AtomicInteger numForcedAttackers, CountDownLatch latch, AttackRequirementsComparator comparator, boolean seasonOfTheWitch) {
+            this.attacker = attacker;
+            this.targetDefender = targetDefender;
+            this.combat = combat;
+            this.attackersLeft = attackersLeft;
+            this.numForcedAttackers = numForcedAttackers;
+            this.latch = latch;
+            this.comparator = comparator;
+            this.seasonOfTheWitch = seasonOfTheWitch;
+        }
+
+        public void cancelTask() {
+            Object ref = runnerThread.getAndSet(CANCELLED_MARKER);
+            if (ref instanceof Thread thread) {
+                thread.interrupt();
+            }
+        }
+
+        @Override
+        public void run() {
+            // Enforce state check before beginning execution
+            if (!runnerThread.compareAndSet(null, Thread.currentThread())) {
+                latch.countDown();
+                return;
+            }
+
+            try {
+                // Instantly drop out if the timeout already hit before we woke up
+                ThreadUtil.checkInterrupt();
+
+                GameEntity mustAttackDef = null;
+                if (attacker.getSVar("MustAttack").equals("True")) {
+                    mustAttackDef = targetDefender;
+                } else if (attacker.hasSVar("EndOfTurnLeavePlay") && isEffectiveAttacker(ai, attacker, combat, targetDefender)) {
+                    mustAttackDef = targetDefender;
+                } else if (seasonOfTheWitch) {
+                    //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                    mustAttackDef = targetDefender;
+                } else {
+                    if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return;
+
+                    List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                    reqs.sort(comparator);
+
+                    for (Pair<GameEntity, Integer> e : reqs) {
+                        if (e.getRight() == 0) continue;
+                        GameEntity mustAttackDefMaybe = e.getLeft();
+                        if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                            mustAttackDef = mustAttackDefMaybe;
+                            break;
+                        }
+                    }
+                }
+
+                if (mustAttackDef != null) {
+                    synchronized (combat) {
+                        combat.addAttacker(attacker, mustAttackDef);
+                        attackersLeft.remove(attacker);
+                    }
+                    numForcedAttackers.incrementAndGet();
+                }
+            } catch (InterruptedException e) {
+                // cooperative exit, flag already cleared by ThreadUtil.checkInterrupt();
+            } finally {
+                runnerThread.compareAndSet(Thread.currentThread(), null);
+                latch.countDown();
+                Thread.interrupted(); // always clear
+            }
+        }
+    }
+
+    // TaskCanceller to avoid lambda allocation
+    private class TaskCanceller implements Runnable {
+        private final ConcurrentAttackerEvaluator[] tasks;
+
+        public TaskCanceller(ConcurrentAttackerEvaluator[] tasks) {
+            this.tasks = tasks;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < tasks.length; i++) {
+                if (tasks[i] != null) {
+                    tasks[i].cancelTask();
+                }
+            }
+        }
+    }
+
     /**
      * <p>
      * Getter for the field <code>attackers</code>.
@@ -798,6 +945,7 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        long deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
         // something prevents attacking, try another
         if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
             final PlayerCollection opps = ai.getOpponents();
@@ -873,88 +1021,42 @@ public class AiAttackController {
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
-            ExecutorService executor = Executors.newFixedThreadPool(
-                Runtime.getRuntime().availableProcessors(), r -> {
-                    Thread t = Executors.defaultThreadFactory().newThread(r);
-                    t.setDaemon(true);
-                    return t;
-                }
-            );
-            List<Callable<Integer>> tasks = new ArrayList<>();
-
-            for (final Card attacker : this.attackers) {
+            int taskCount = this.attackers.size();
+            if (taskCount > 0) {
+                final CountDownLatch cdl = new CountDownLatch(taskCount);
                 final GameEntity finalDefender = defender;
-                tasks.add(() -> {
-                    GameEntity mustAttackDef = null;
-                    if (attacker.getSVar("MustAttack").equals("True")) {
-                        mustAttackDef = finalDefender;
-                    } else if (attacker.hasSVar("EndOfTurnLeavePlay")
-                            && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
-                        mustAttackDef = finalDefender;
-                    } else if (seasonOfTheWitch) {
-                        //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                        mustAttackDef = finalDefender;
-                    } else {
-                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
-                        // check defenders in order of maximum requirements
-                        List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                        final GameEntity def = finalDefender;
-                        reqs.sort((r1, r2) -> {
-                            if (r1.getValue() == r2.getValue()) {
-                                // try to attack the designated defender
-                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
-                                    return -1;
-                                }
-                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
-                                    return 1;
-                                }
-                                // otherwise PW
-                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                    return -1;
-                                }
-                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                    return 1;
-                                }
-                                // or weakest player
-                                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
-                                    return p1.getLife() - p2.getLife();
-                                }
-                            }
-                            return r2.getValue() - r1.getValue();
-                        });
-                        for (Pair<GameEntity, Integer> e : reqs) {
-                            if (e.getRight() == 0) continue;
-                            GameEntity mustAttackDefMaybe = e.getLeft();
-                            if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
-                                mustAttackDef = mustAttackDefMaybe;
-                                break;
-                            }
-                        }
-                    }
-                    if (mustAttackDef != null) {
-                        // combat is shared across these parallel futures and its attacker
-                        // multimap is not thread-safe; unsynchronized addAttacker calls
-                        // collide (ConcurrentModificationException, dropped attackers)
-                        synchronized (combat) {
-                            combat.addAttacker(attacker, mustAttackDef);
-                        }
-                        attackersLeft.remove(attacker);
-                        numForcedAttackers.incrementAndGet();
-                    }
-                    return 0;
-                });
-            }
+                // don't allocate a lambda comparator inside loop or it will consume heap for each attackers or android easily hits OOM
+                final AttackRequirementsComparator requirementsComparator = new AttackRequirementsComparator(finalDefender);
+                // Create a raw primitive array to store the tasks instead of an ArrayList of Futures
+                final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[taskCount];
 
-            try {
-                executor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            } finally {
-                executor.shutdownNow();
-            }
+                int index = 0;
+                for (final Card attacker : this.attackers) {
+                    if (System.nanoTime() > deadlineNanos)
+                        break;
+                    tasksArray[index] = new ConcurrentAttackerEvaluator(
+                        attacker, finalDefender, combat, attackersLeft, numForcedAttackers,
+                        cdl, requirementsComparator, seasonOfTheWitch
+                    );
 
-            if (attackersLeft.isEmpty()) {
-                return aiAggression;
+                    // bypasses inner FutureTask heap wrappers entirely!
+                    ThreadUtil.AIExecutor.execute(tasksArray[index]);
+                    index++;
+                }
+
+                try {
+                    boolean completedInTime = cdl.await(ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+                    if (!completedInTime) {
+                        // Reuse a dedicated task object for heap free alloc
+                        ThreadUtil.AIExecutor.execute(new TaskCanceller(tasksArray));
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+
+                if (attackersLeft.isEmpty()) {
+                    return aiAggression;
+                }
             }
         }
 
@@ -1160,6 +1262,8 @@ public class AiAttackController {
         // until the attackers are used up or the player would run out of life
         int attackRounds = 1;
         while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             // sum attacker damage
             int damageThisRound = 0;
             for (Card attritionalAttacker : attritionalAttackers) {
@@ -1189,6 +1293,8 @@ public class AiAttackController {
         double turnsUntilDeathByUnblockable = 0;
         boolean doUnblockableAttack = false;
         for (final Card attacker : this.attackers) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             boolean isUnblockableCreature = true;
             // check blockers individually, as the bulk canBeBlocked doesn't
             // check all circumstances
@@ -1203,6 +1309,8 @@ public class AiAttackController {
             }
         }
         for (final Card attacker : nextTurnAttackers) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             boolean isUnblockableCreature = true;
             // check blockers individually, as the bulk canBeBlocked doesn't
             // check all circumstances
@@ -1286,6 +1394,8 @@ public class AiAttackController {
         possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
 
         while (!left.isEmpty()) {
+            if (System.nanoTime() > deadlineNanos)
+                break;
             CardCollection attackersAssigned = new CardCollection();
             for (int i = 0; i < left.size(); i++) {
                 final Card attacker = left.get(i);
