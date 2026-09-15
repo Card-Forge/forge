@@ -1,0 +1,4 @@
+Name:Werewolf Lightning Mage
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Landfall — Whenever a land enters under your control, put a +1/+1 counter on this permanent.\n{TK}{TK}{TK}{TK} — Whenever a creature blocks this creature, that creature gets -4/-4 until end of turn.\n{TK}{TK} — 4/1\n{TK}{TK}{TK} — 3/5

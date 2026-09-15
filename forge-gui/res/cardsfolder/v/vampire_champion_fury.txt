@@ -1,0 +1,4 @@
+Name:Vampire Champion Fury
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Hellbent — This creature gets +3/+3 as long as you have no cards in hand.\n{TK}{TK}{TK}{TK} — {2}, Sacrifice this creature: It deals X damage divided as you choose among any number of target creatures, where X is its power.\n{TK}{TK} — 1/5\n{TK}{TK}{TK} — 6/3

@@ -1,0 +1,4 @@
+Name:Unstable Robot Dragon
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {1}: Switch this creature's power and toughness until end of turn.\n{TK}{TK}{TK}{TK} — Whenever this creature attacks, it gets +5/+5 until end of turn.\n{TK}{TK} — 3/2\n{TK}{TK}{TK} — 2/7

@@ -63,7 +63,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool,
-            commanderPool, dungeonPool, attractionPool, contraptionPool;
+            commanderPool, dungeonPool, attractionPool, contraptionPool, stickerPool;
 
     CardManager catalogManager;
     CardManager deckManager;
@@ -146,6 +146,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         contraptionPool = FModel.getContraptionPool();
         if(!contraptionPool.isEmpty()) //Hide if un-cards are disabled.
             allSections.add(DeckSection.Contraptions);
+
+        allSections.add(DeckSection.Stickers);
+        stickerPool = FModel.getStickerPool();
 
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false, false);
         deckManager = new CardManager(getCDetailPicture(), false, false, false);
@@ -356,6 +359,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Contraptions:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltocontraptiondeck"));
             break;
+        case Stickers:
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltostickerdeck"));
+            break;
         }
     }
 
@@ -396,6 +402,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Contraptions:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromcontraptiondeck"));
+            break;
+        case Stickers:
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromstickerdeck"));
             break;
         }
         addChangePrintingEntryIfApplicable(cmb);
@@ -626,6 +635,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 catalogManager.setPool(contraptionPool, true);
                 catalogManager.setAllowMultipleSelections(true);
                 deckManager.setPool((this.controller.getModel().getOrCreate(DeckSection.Contraptions)));
+                break;
+            case Stickers:
+                catalogManager.setup(ItemManagerConfig.STICKER_POOL);
+                catalogManager.setPool(stickerPool, true);
+                catalogManager.setAllowMultipleSelections(true);
+                deckManager.setPool(this.controller.getModel().getOrCreate(DeckSection.Stickers));
                 break;
         }
 

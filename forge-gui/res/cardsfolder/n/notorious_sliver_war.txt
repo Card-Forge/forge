@@ -1,0 +1,4 @@
+Name:Notorious Sliver War
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {5}: Creatures you control get +1/+1 until end of turn.\n{TK}{TK}{TK} — Protection from creatures with two or more creature types\n{TK}{TK} — 3/3\n{TK}{TK}{TK}{TK}{TK} — 9/6

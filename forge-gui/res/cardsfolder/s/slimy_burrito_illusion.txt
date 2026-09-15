@@ -1,0 +1,4 @@
+Name:Slimy Burrito Illusion
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)\n{TK}{TK}{TK} — Double strike\n{TK}{TK} — 2/4\n{TK}{TK}{TK}{TK} — 5/6

@@ -1,0 +1,57 @@
+[metadata]
+Code=SUNF
+Date=2022-10-07
+Name=Unfinity Sticker Sheets
+Type=Funny
+ScryfallCode=sunf
+Foil=NotSupported
+
+[cards]
+1 C Eldrazi Guacamole Tightrope @Larissa Hasenheit & Mina Jeon
+2 C Trendy Circus Pirate @Larissa Hasenheit & Mina Jeon
+3 C Night Brushwagg Ringmaster @Larissa Hasenheit & Mina Jeon
+4 C Urza's Dark Cannonball @Larissa Hasenheit & Mina Jeon
+5 C Misunderstood Trapeze Elf @Larissa Hasenheit & Mina Jeon
+6 C Zombie Cheese Magician @Larissa Hasenheit & Mina Jeon
+7 C Carnival Elephant Meteor @Larissa Hasenheit & Mina Jeon
+8 C Happy Dead Squirrel @Larissa Hasenheit & Mina Jeon
+9 C Slimy Burrito Illusion @Larissa Hasenheit & Mina Jeon
+10 C Spooky Clown Mox @Larissa Hasenheit & Mina Jeon
+11 C Mystic Doom Sandwich @Larissa Hasenheit & Mina Jeon
+12 C Narrow-Minded Baloney Fireworks @Larissa Hasenheit & Mina Jeon
+13 C Unsanctioned Ancient Juggler @Larissa Hasenheit & Mina Jeon
+14 C Deep-Fried Plague Myr @Larissa Hasenheit & Mina Jeon
+15 C Contortionist Otter Storm @Larissa Hasenheit & Mina Jeon
+16 C Sticky Kavu Daredevil @Larissa Hasenheit & Mina Jeon
+17 C Goblin Coward Parade @Larissa Hasenheit & Mina Jeon
+18 C Phyrexian Midway Bamboozle @Larissa Hasenheit & Mina Jeon
+19 C Eternal Acrobat Toast @Larissa Hasenheit & Mina Jeon
+20 C Jetpack Death Seltzer @Larissa Hasenheit & Mina Jeon
+21 C Demonic Tourist Laser @Larissa Hasenheit & Mina Jeon
+22 C Cursed Firebreathing Yogurt @Larissa Hasenheit & Mina Jeon
+23 C Ancestral Hot Dog Minotaur @Larissa Hasenheit & Mina Jeon
+24 C Familiar Beeble Mascot @Larissa Hasenheit & Mina Jeon
+25 C Giant Mana Cake @Larissa Hasenheit & Mina Jeon
+26 C Snazzy Aether Homunculus @Larissa Hasenheit & Mina Jeon
+27 C Squid Fire Knight @Larissa Hasenheit & Mina Jeon
+28 C Cool Fluffy Loxodon @Larissa Hasenheit & Mina Jeon
+29 C Space Fungus Snickerdoodle @Larissa Hasenheit & Mina Jeon
+30 C Playable Delusionary Hydra @Larissa Hasenheit & Mina Jeon
+31 C Wrinkly Monkey Shenanigans @Larissa Hasenheit & Mina Jeon
+32 C Geek Lotus Warrior @Larissa Hasenheit & Mina Jeon
+33 C Primal Elder Kitty @Larissa Hasenheit & Mina Jeon
+34 C Sassy Gremlin Blood @Larissa Hasenheit & Mina Jeon
+35 C Yawgmoth Merfolk Soul @Larissa Hasenheit & Mina Jeon
+36 C Unassuming Gelatinous Serpent @Larissa Hasenheit & Mina Jeon
+37 C Squishy Sphinx Ninja @Larissa Hasenheit & Mina Jeon
+38 C Unique Charmed Pants @Larissa Hasenheit & Mina Jeon
+39 C Unhinged Beast Hunt @Larissa Hasenheit & Mina Jeon
+40 C Wild Ogre Bupkis @Larissa Hasenheit & Mina Jeon
+41 C Notorious Sliver War @Larissa Hasenheit & Mina Jeon
+42 C Weird Angel Flame @Larissa Hasenheit & Mina Jeon
+43 C Vampire Champion Fury @Larissa Hasenheit & Mina Jeon
+44 C Trained Blessed Mind @Larissa Hasenheit & Mina Jeon
+45 C Unglued Pea-Brained Dinosaur @Larissa Hasenheit & Mina Jeon
+46 C Elemental Time Flamingo @Larissa Hasenheit & Mina Jeon
+47 C Unstable Robot Dragon @Larissa Hasenheit & Mina Jeon
+48 C Werewolf Lightning Mage @Larissa Hasenheit & Mina Jeon

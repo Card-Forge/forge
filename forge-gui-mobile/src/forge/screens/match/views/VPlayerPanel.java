@@ -69,7 +69,7 @@ public class VPlayerPanel extends FContainer {
      * Zones to include in the extra zones dropdown.
      */
     private static final EnumSet<ZoneType> EXTRA_ZONES = EnumSet.of(ZoneType.Sideboard, ZoneType.PlanarDeck,
-            ZoneType.SchemeDeck, ZoneType.ContraptionDeck, ZoneType.AttractionDeck, ZoneType.Junkyard, ZoneType.Ante);
+            ZoneType.SchemeDeck, ZoneType.ContraptionDeck, ZoneType.AttractionDeck, ZoneType.StickerSheets, ZoneType.Junkyard, ZoneType.Ante);
 
     private final PlayerView player;
     private final VPhaseIndicator phaseIndicator;

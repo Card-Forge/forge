@@ -1,0 +1,4 @@
+Name:Geek Lotus Warrior
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {2}: This creature gets +2/+0 until end of turn.\n{TK}{TK}{TK}{TK} — Whenever a creature enters under your control, this permanent deals 2 damage to target player.\n{TK}{TK} — 4/1\n{TK}{TK}{TK} — 3/6

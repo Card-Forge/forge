@@ -52,5 +52,11 @@ public enum GamePieceType {
      * A Dungeon, which is created in the command zone by effects,
      * and leaves the game when completed.
      */
-    DUNGEON
+    DUNGEON,
+    /**
+     * A sticker sheet. Starts in the player's sticker pool (chosen during deck construction);
+     * three are picked at random at the start of the game and stay in the sticker sheets zone,
+     * revealed, for the rest of the game (CR 123.2a). Never collectible (see Card#isCollectible).
+     */
+    STICKER
 }

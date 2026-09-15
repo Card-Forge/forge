@@ -1,0 +1,4 @@
+Name:Giant Mana Cake
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — When this permanent leaves the battlefield, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{TK}{TK}{TK}{TK} — When this permanent dies, destroy target nonland permanent.\n{TK}{TK} — 3/3\n{TK}{TK}{TK} — 6/2

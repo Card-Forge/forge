@@ -769,6 +769,7 @@ public enum FSkinProp {
             case SchemeDeck -> IMG_ZONE_SCHEME;
             case AttractionDeck -> IMG_ZONE_ATTRACTION;
             case ContraptionDeck -> IMG_ZONE_CONTRAPTION;
+            case StickerSheets -> IMG_ZONE_STICKER;
             case Ante -> IMG_ZONE_ANTE;
             case Junkyard ->IMG_ZONE_JUNKYARD;
             default -> IMG_HDZONE_LIBRARY;
@@ -786,6 +787,7 @@ public enum FSkinProp {
             case Schemes -> IMG_ZONE_SCHEME;
             case Attractions -> IMG_ZONE_ATTRACTION;
             case Contraptions -> IMG_ZONE_CONTRAPTION;
+            case Stickers -> IMG_ZONE_STICKER;
             default -> IMG_HDZONE_SIDEBOARD;
         };
     }

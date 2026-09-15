@@ -1,0 +1,4 @@
+Name:Trained Blessed Mind
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {T}: Exile target card from a graveyard.\n{TK}{TK}{TK} — Threshold — As long as seven or more cards are in your graveyard, this creature gets +4/+0 and has trample.\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK}{TK} — 6/9

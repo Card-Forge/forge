@@ -1,0 +1,4 @@
+Name:Urza's Dark Cannonball
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Exalted, exalted (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)\n{TK}{TK}{TK} — Shadow (This creature can block or be blocked only by creatures with shadow.)\n{TK}{TK} — 1/5\n{TK}{TK}{TK}{TK} — 7/4

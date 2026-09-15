@@ -196,6 +196,7 @@ public enum TrackableProperty {
     SchemeDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     AttractionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     ContraptionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    StickerSheets(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Junkyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
 
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
