@@ -1,0 +1,4 @@
+Name:Weird Angel Flame
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Heroic — Whenever you cast a spell that targets this permanent, put two +1/+1 counters on it.\n{TK}{TK}{TK} — Protection from even mana values\n{TK}{TK} — 2/3\n{TK}{TK}{TK}{TK}{TK} — 7/8

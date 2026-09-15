@@ -1,0 +1,4 @@
+Name:Space Fungus Snickerdoodle
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Skulk (This creature can't be blocked by creatures with greater power.)\n{TK}{TK}{TK} — Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\n{TK}{TK} — 3/2\n{TK}{TK}{TK}{TK}{TK} — 6/8

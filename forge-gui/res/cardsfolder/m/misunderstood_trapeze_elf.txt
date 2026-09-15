@@ -1,0 +1,4 @@
+Name:Misunderstood Trapeze Elf
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Whenever you cast a spell, this creature gets +X/+X until end of turn, where X is the amount of generic mana in that spell's mana cost.\n{TK}{TK}{TK} — Hexproof\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK} — 6/6

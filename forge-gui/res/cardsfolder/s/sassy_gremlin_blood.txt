@@ -1,0 +1,4 @@
+Name:Sassy Gremlin Blood
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Whenever this creature attacks, create a Treasure token.\n{TK}{TK}{TK}{TK}{TK} — {3}: Target creature gains flying until end of turn.\n{TK}{TK} — 3/2\n{TK}{TK}{TK}{TK}{TK}{TK} — 10/10

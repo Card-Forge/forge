@@ -1,0 +1,4 @@
+Name:Yawgmoth Merfolk Soul
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — When this permanent leaves the battlefield, target player discards a card.\n{TK}{TK}{TK}{TK}{TK} — When this permanent leaves the battlefield, create five 1/1 white Clown Robot artifact creature tokens.\n{TK}{TK} — 3/3\n{TK}{TK}{TK}{TK} — 6/5

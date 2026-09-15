@@ -1,0 +1,4 @@
+Name:Eldrazi Guacamole Tightrope
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Haste\n{TK}{TK}{TK}{TK}{TK} — You may cast this card from your graveyard by paying 2 life in addition to paying its other costs.\n{TK}{TK} — 1/4\n{TK}{TK}{TK} — 5/3
