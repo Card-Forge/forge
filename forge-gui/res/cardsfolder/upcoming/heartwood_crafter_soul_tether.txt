@@ -4,7 +4,7 @@ Types:Creature Elf Artificer
 PT:1/1
 K:ETBReplacement:Other:DBPrepare
 SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ CantCastSpellFromHand | SpellDescription$ Add {C}. This mana can't be spent to cast spells from your hand.
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ CantCast FromHand | SpellDescription$ Add {C}. This mana can't be spent to cast spells from your hand.
 AlternateMode:Prepare
 Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\n{T}: Add {C}. This mana can't be spent to cast spells from your hand.
 
