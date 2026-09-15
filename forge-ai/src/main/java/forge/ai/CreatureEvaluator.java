@@ -17,6 +17,9 @@ import forge.game.trigger.TriggerType;
 import java.util.List;
 import java.util.function.Function;
 
+// the evaluator focuses on common abilities that can have impact on their own (or only need very likely conditions)
+// a negative example would be the "CountersRemain" static since it's just not worth the overhead in such a heavily used engine part
+
 public class CreatureEvaluator implements Function<Card, Integer> {
     @Override
     public Integer apply(Card c) {
