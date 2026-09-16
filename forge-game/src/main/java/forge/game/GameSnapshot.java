@@ -15,6 +15,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -314,6 +315,7 @@ public class GameSnapshot {
             Card newCard = findCardById(toGame, fromCard.getId());
             Player toPlayer = findBy(toGame, fromCard.getController());
             ZoneType fromType = fromCard.getZone().getZoneType();
+
             int zonePosition = 0;
             if (ZoneType.ORDERED_ZONES.contains(fromType)) {
                 // If the card is in an ordered zone, we need to find its position in the zone
@@ -335,7 +337,7 @@ public class GameSnapshot {
                 }
             }
 
-            if (zonePosition == 0) {
+            if (!ZoneType.ORDERED_ZONES.contains(fromType)) {
                 setCardInCopiedGame(toGame, toPlayer, fromCard, newCard, fromType, zonePosition);
             } else {
                 // stash this info
@@ -449,8 +451,8 @@ public class GameSnapshot {
     }
 
     private void setCardInCopiedGame(Game toGame, Player toPlayer, Card fromCard, Card newCard, ZoneType fromType, int zonePosition) {
-        // Things should be sorted before getting here, so don't try to put it into its zone position
-        //System.out.println("Setting card " + newCard + " at position " + zonePosition + " in " + toPlayer + "'s "+ fromType);
+        // We sorted above, but still need to enforce the order when adding to the zone.
+        // The add() method will put it at the end of the list otherwise
         if (fromType.equals(ZoneType.Stack)) {
             toGame.getStackZone().add(newCard);
             newCard.setZone(toGame.getStackZone());
@@ -468,7 +470,20 @@ public class GameSnapshot {
             if (toPlayer.getZone(ZoneType.Battlefield) instanceof PlayerZoneBattlefield battlefield) {
                 battlefield.removeFromMelded(newCard);
             }
-            toPlayer.getZone(fromType).add(newCard);
+
+            if (fromType.isOrdered()) {
+                PlayerZone zone = toPlayer.getZone(fromType);
+                if (zonePosition < 0) {
+                    zonePosition = 0;
+                } else if (zonePosition > zone.size()) {
+                    zonePosition = zone.size();
+                }
+
+                toPlayer.getZone(fromType).add(newCard, zonePosition);
+            } else {
+                toPlayer.getZone(fromType).add(newCard);
+            }
+
             newCard.setZone(toPlayer.getZone(fromType));
         }
 
