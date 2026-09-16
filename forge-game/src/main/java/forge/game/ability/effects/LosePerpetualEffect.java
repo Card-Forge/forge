@@ -25,7 +25,7 @@ public class LosePerpetualEffect extends SpellAbilityEffect {
                 }
             }
             if (toRemove != (long) 0) {
-                host.getChangedCardTraits().remove(toRemove, (long) 0);
+                host.removeChangedCardTraits(toRemove, 0);
                 host.removePerpetual(toRemove);
             }       
         }

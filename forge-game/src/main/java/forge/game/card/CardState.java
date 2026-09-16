@@ -685,7 +685,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return abilities.add(a);
     }
 
+    private FCollection<Trigger> cachedTriggers;
+    private int cachedTriggersVersion = -1;
+
     public final FCollectionView<Trigger> getTriggers() {
+        final int version = card.getTraitsVersion();
+        if (cachedTriggers != null && cachedTriggersVersion == version) {
+            return cachedTriggers;
+        }
         FCollection<Trigger> result = new FCollection<>(triggers);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -694,6 +701,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).triggers);
         }
         card.updateTriggers(result, this);
+        cachedTriggers = result;
+        cachedTriggersVersion = version;
         return result;
     }
 
@@ -711,10 +720,19 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final boolean addTrigger(final Trigger t) {
+        card.bumpTraitsVersion();
         return triggers.add(t);
     }
 
+    // asked of every card on every static ability check; a function of the traits version
+    private FCollection<StaticAbility> cachedStaticAbilities;
+    private int cachedStaticAbilitiesVersion = -1;
+
     public final FCollectionView<StaticAbility> getStaticAbilities() {
+        final int version = card.getTraitsVersion();
+        if (cachedStaticAbilities != null && cachedStaticAbilitiesVersion == version) {
+            return cachedStaticAbilities;
+        }
         FCollection<StaticAbility> result = new FCollection<>(staticAbilities);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -723,19 +741,49 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 result.addAll(getCard().getState(CardStateName.RightSplit).staticAbilities);
         }
         card.updateStaticAbilities(result, this);
+        cachedStaticAbilities = result;
+        cachedStaticAbilitiesVersion = version;
         return result;
     }
     public final boolean addStaticAbility(StaticAbility stab) {
+        card.bumpTraitsVersion();
         return staticAbilities.add(stab);
     }
     public final boolean removeStaticAbility(StaticAbility stab) {
+        card.bumpTraitsVersion();
         return staticAbilities.remove(stab);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
         return getReplacementEffects(true);
     }
+    // one slot per rulesHost value
+    private FCollection<ReplacementEffect> cachedReplacementEffects;
+    private FCollection<ReplacementEffect> cachedReplacementEffectsNoRules;
+    private int cachedReplacementEffectsVersion = -1;
+    private int cachedReplacementEffectsNoRulesVersion = -1;
+
     public FCollectionView<ReplacementEffect> getReplacementEffects(boolean rulesHost) {
+        final int version = card.getTraitsVersion();
+        if (rulesHost) {
+            if (cachedReplacementEffects != null && cachedReplacementEffectsVersion == version) {
+                return cachedReplacementEffects;
+            }
+        } else if (cachedReplacementEffectsNoRules != null && cachedReplacementEffectsNoRulesVersion == version) {
+            return cachedReplacementEffectsNoRules;
+        }
+        final FCollection<ReplacementEffect> result = buildReplacementEffects(rulesHost);
+        if (rulesHost) {
+            cachedReplacementEffects = result;
+            cachedReplacementEffectsVersion = version;
+        } else {
+            cachedReplacementEffectsNoRules = result;
+            cachedReplacementEffectsNoRulesVersion = version;
+        }
+        return result;
+    }
+
+    private FCollection<ReplacementEffect> buildReplacementEffects(boolean rulesHost) {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -768,6 +816,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
+        card.bumpTraitsVersion();
         return replacementEffects.add(replacementEffect);
     }
 
@@ -857,6 +906,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         copyFrom(source, lki, null);
     }
     public final void copyFrom(final CardState source, final boolean lki, final CardTraitBase ctb) {
+        card.bumpTraitsVersion();
         // Makes a "deeper" copy of a CardState object
         setName(source.getName());
         setType(source.type);
@@ -926,6 +976,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
 
+        card.bumpTraitsVersion();
         staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
             if (sa.isIntrinsic()) {
@@ -963,9 +1014,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 this.landManaAbilities.put(e.getKey(), e.getValue().copy(card, true));
             }
         }
+        card.bumpTraitsVersion();
     }
 
     public final void addAbilitiesFrom(final CardState source, final boolean lki) {
+        card.bumpTraitsVersion();
         for (SpellAbility sa : source.abilities) {
             if (sa.isIntrinsic() && sa.getApi() != ApiType.PermanentCreature && sa.getApi() != ApiType.PermanentNoncreature) {
                 abilities.add(sa.copy(card, lki));
@@ -988,11 +1041,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
 
+        card.bumpTraitsVersion();
         for (StaticAbility sa : source.staticAbilities) {
             if (sa.isIntrinsic()) {
                 staticAbilities.add(sa.copy(card, lki));
             }
         }
+        card.bumpTraitsVersion();
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
