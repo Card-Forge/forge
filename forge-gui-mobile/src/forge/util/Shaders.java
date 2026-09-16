@@ -160,6 +160,7 @@ public class Shaders {
                     "    v_texCoords = a_texCoord0;\n" +
                     "    gl_Position = u_projTrans * a_position;\n" +
                     "}";
+
     public static final String fragCardShader =
             "#ifdef GL_ES\n" +
                     "precision mediump float;\n" +
@@ -176,15 +177,82 @@ public class Shaders {
                     "uniform float u_time;\n" +
                     "uniform vec2 u_cardPosition;\n" +
                     "\n" +
-                    "float liquidNoise(vec2 p, float time) {\n" +
-                    "    return sin(p.x * 2.0 + sin(p.y * 1.5 + time)) * cos(p.y * 2.0 + cos(p.x * 1.5 - time));\n" +
+                    "// rainbow effect\n" +
+                    "vec3 getPremiumRainbow(float p) {\n" +
+                    "    vec3 c = vec3(0.5, 0.5, 0.5);\n" +
+                    "    vec3 d = vec3(0.0, 0.33, 0.67);\n" +
+                    "    return c + c * cos(6.28318 * (vec3(2.4) * p + d));\n" +
+                    "}\n" +
+                    "\n" +
+                    "// geometric noise\n" +
+                    "float getHash(vec2 p) {\n" +
+                    "    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);\n" +
+                    "}\n" +
+                    "\n" +
+                    "// foil noise\n" +
+                    "float getFoilNoise(vec2 p) {\n" +
+                    "    vec2 i = floor(p);\n" +
+                    "    vec2 f = fract(p);\n" +
+                    "    vec2 u = f * f * (3.0 - 2.0 * f);\n" +
+                    "    return mix(mix(getHash(i + vec2(0.0, 0.0)), getHash(i + vec2(1.0, 0.0)), u.x),\n" +
+                    "               mix(getHash(i + vec2(0.0, 1.0)), getHash(i + vec2(1.0, 1.0)), u.x), u.y);\n" +
                     "}\n" +
                     "\n" +
                     "void main() {\n" +
                     "    vec2 uv = v_texCoords;\n" +
                     "    \n" +
-                    "    // get card texture pixel\n" +
-                    "    vec4 col = texture2D(u_texture, uv);\n" +
+                    "    // Get base card texture pixel\n" +
+                    "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
+                    "    \n" +
+                    "    // boolean flag\n" +
+                    "    if (u_isHolo > 0.0) {\n" +
+                    "        // top-right corner slant\n" +
+                    "        vec2 foilUV = vec2(uv.x * 5.2 + uv.y * 8.5, uv.y * 3.5);\n" +
+                    "        foilUV += u_cardPosition * 0.2;\n" +
+                    "        \n" +
+                    "        // noise layers\n" +
+                    "        float t1 = u_time * 1.2;\n" +
+                    "        float noise1 = getFoilNoise(foilUV * 1.5 + vec2(t1, -t1 * 0.3));\n" +
+                    "        float noise2 = getFoilNoise(foilUV * 3.0 - vec2(t1 * 0.2, t1));\n" +
+                    "        \n" +
+                    "        // thin lightning slivers\n" +
+                    "        float cut1 = sin(foilUV.x * 2.5 + noise1 * 8.0);\n" +
+                    "        float cut2 = cos(foilUV.x * 4.0 + noise2 * 6.0);\n" +
+                    "        \n" +
+                    "        float shardPattern = (cut1 * cut2) * 0.5 + 0.5;\n" +
+                    "        shardPattern = pow(shardPattern, 2.5);\n" +
+                    "        float surgeMask = smoothstep(0.1, 0.7, shardPattern);\n" +
+                    "        \n" +
+                    "        vec3 foilColors = getPremiumRainbow(shardPattern * 1.8 + uv.x * 0.6 - uv.y * 0.4);\n" +
+                    "        \n" +
+                    "        // luminance\n" +
+                    "        float luminance = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "        \n" +
+                    "        // soft shadow\n" +
+                    "        float shadowLift = smoothstep(0.4, 0.0, luminance) * 0.04;\n" +
+                    "        col.rgb += vec3(shadowLift) * surgeMask;\n" +
+                    "        \n" +
+                    "        // shimmer\n" +
+                    "        float smoothSpecular = smoothstep(0.68, 0.95, shardPattern);\n" +
+                    "        float glossSheen = sin(uv.x * 30.0 + uv.y * 30.0 + u_time * 2.0) * 0.5 + 0.5;\n" +
+                    "        vec3 metallicGleam = vec3(smoothSpecular * (0.12 + glossSheen * 0.08));\n" +
+                    "        \n" +
+                    "        // mask\n" +
+                    "        float textProtectionMask = smoothstep(0.01, 0.12, luminance);\n" +
+                    "        \n" +
+                    "        // spectrum\n" +
+                    "        vec3 premiumFoilOverlay = (foilColors * surgeMask * 0.38) + metallicGleam;\n" +
+                    "        \n" +
+                    "        col.rgb += premiumFoilOverlay * textProtectionMask;\n" +
+                    "        \n" +
+                    "        col.rgb = smoothstep(0.0, 1.0, col.rgb);\n" +
+                    "    }\n" +
+                    "    \n" +
+                    "    // grayness \n" +
+                    "    if (u_gray > 0.0) {\n" +
+                    "        float gray = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "        col.rgb = vec3(gray);\n" +
+                    "    }\n" +
                     "    \n" +
                     "    // rounded corner\n" +
                     "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
@@ -196,50 +264,9 @@ public class Shaders {
                     "         float r = length(abs_pixel_coord - abs_rounded_center);\n" +
                     "         alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
                     "    }\n" +
-                    "\n" +
-                    "    // gray tint\n" +
-                    "    if (u_gray > 0.0) {\n" +
-                    "        float grey = dot(col.rgb, vec3(0.22, 0.707, 0.071));\n" +
-                    "        col.rgb = vec3(grey);\n" +
-                    "    }\n" +
-                    "\n" +
-                    "    // time or any number to change the foil look, it can be save as number as foil index and pass it here\n" +
-                    "    vec2 localPos = uv * 3.5;\n" +
-                    "    float t = u_time * 0.35;\n" +
                     "    \n" +
-                    "    float n1 = liquidNoise(localPos, t);\n" +
-                    "    float n2 = liquidNoise(localPos + vec2(n1 * 1.8), t * 1.2);\n" +
-                    "    float surgePattern = liquidNoise(localPos + vec2(n2 * 2.2), t * 0.8);\n" +
-                    "    \n" +
-                    "    float rippleSharpness = pow(abs(surgePattern), 2.5);\n" +
-                    "    \n" +
-                    "    // liquid silver accents\n" +
-                    "    vec3 spectralColor = 0.5 + 0.5 * cos(6.28318 * ((surgePattern * 0.35) + vec3(0.0, 0.33, 0.67)));\n" +
-                    "    vec3 rawFoilSheen = spectralColor * rippleSharpness;\n" +
-                    "\n" +
-                    "    // image illumination levels\n" +
-                    "    float luminance = dot(col.rgb, vec3(0.2126, 0.7152, 0.0722));\n" +
-                    "    \n" +
-                    "    // This tints bright/white surfaces beautifully without washing them out into flat dead tones\n" +
-                    "    vec3 softLightFoil = col.rgb * (vec3(1.0) + rawFoilSheen * 0.45);\n" +
-                    "    \n" +
-                    "    // This allows the hot-foil neon pigments to glow brightly over pitch-black regions and dark shadows\n" +
-                    "    vec3 screenBlendFoil = vec3(1.0) - (vec3(1.0) - col.rgb) * (vec3(1.0) - rawFoilSheen * 0.65);\n" +
-                    "    \n" +
-                    "    // This dynamically handles bright text boxes, dark art slots, and medium borders simultaneously\n" +
-                    "    vec3 bakedFoilColor = mix(screenBlendFoil, softLightFoil, smoothstep(0.25, 0.75, luminance));\n" +
-                    "    \n" +
-                    "    // If a spot is absolute midnight black (like title fonts or frame lines), suppress the foil\n" +
-                    "    // to maintain perfect readability, exactly like physical hot-stamp manufacturing lines\n" +
-                    "    bakedFoilColor = mix(col.rgb, bakedFoilColor, smoothstep(0.08, 0.2, luminance));\n" +
-                    "    bakedFoilColor = clamp(bakedFoilColor, 0.0, 1.0);\n" +
-                    "\n" +
-                    "    // Mix final color cleanly based on the uniform boolean check flag\n" +
-                    "    vec3 finalRGB = mix(col.rgb, bakedFoilColor, step(0.5, u_isHolo));\n" +
-                    "\n" +
-                    "    gl_FragColor = vec4(finalRGB, col.a) * v_color * alpha;\n" +
-                    "}\n";
-
+                    "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
+                    "}";
 
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
