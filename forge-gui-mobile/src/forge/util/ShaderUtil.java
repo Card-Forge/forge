@@ -29,7 +29,7 @@ public class ShaderUtil implements Disposable {
 
     public ShaderProgram getShaderRoundedRect() {
         if (shaderRoundedRect == null)
-            shaderRoundedRect = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRoundedRect);
+            shaderRoundedRect = new ShaderProgram(Shaders.vertCardShader, Shaders.fragCardShader);
         return shaderRoundedRect;
     }
 

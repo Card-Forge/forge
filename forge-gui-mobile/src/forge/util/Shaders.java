@@ -145,6 +145,102 @@ public class Shaders {
             "    \n" +
             "\tgl_FragColor = vec4( mix(discolor, color, col) * mask, 1.0);\n" +
             "}";
+    public static final String vertCardShader =
+            "attribute vec4 a_position;\n" +
+                    "attribute vec4 a_color;\n" +
+                    "attribute vec2 a_texCoord0;\n" +
+                    "\n" +
+                    "uniform mat4 u_projTrans;\n" +
+                    "\n" +
+                    "varying vec4 v_color;\n" +
+                    "varying vec2 v_texCoords;\n" +
+                    "\n" +
+                    "void main() {\n" +
+                    "    v_color = a_color;\n" +
+                    "    v_texCoords = a_texCoord0;\n" +
+                    "    gl_Position = u_projTrans * a_position;\n" +
+                    "}";
+    public static final String fragCardShader =
+            "#ifdef GL_ES\n" +
+                    "precision mediump float;\n" +
+                    "#endif\n" +
+                    "\n" +
+                    "varying vec4 v_color;\n" +
+                    "varying vec2 v_texCoords;\n" +
+                    "\n" +
+                    "uniform sampler2D u_texture;\n" +
+                    "uniform vec2 u_resolution;\n" +
+                    "uniform float edge_radius;\n" +
+                    "uniform float u_gray;\n" +
+                    "uniform float u_isHolo;\n" +
+                    "uniform float u_time;\n" +
+                    "uniform vec2 u_cardPosition;\n" +
+                    "\n" +
+                    "float liquidNoise(vec2 p, float time) {\n" +
+                    "    return sin(p.x * 2.0 + sin(p.y * 1.5 + time)) * cos(p.y * 2.0 + cos(p.x * 1.5 - time));\n" +
+                    "}\n" +
+                    "\n" +
+                    "void main() {\n" +
+                    "    vec2 uv = v_texCoords;\n" +
+                    "    \n" +
+                    "    // get card texture pixel\n" +
+                    "    vec4 col = texture2D(u_texture, uv);\n" +
+                    "    \n" +
+                    "    // rounded corner\n" +
+                    "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
+                    "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
+                    "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
+                    "    vec2 abs_pixel_coord = vec2(abs(uv_base_center.x * half_resolution.x), abs(uv_base_center.y * half_resolution.y));\n" +
+                    "    float alpha = 1.0;\n" +
+                    "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+                    "         float r = length(abs_pixel_coord - abs_rounded_center);\n" +
+                    "         alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    // gray tint\n" +
+                    "    if (u_gray > 0.0) {\n" +
+                    "        float grey = dot(col.rgb, vec3(0.22, 0.707, 0.071));\n" +
+                    "        col.rgb = vec3(grey);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    // time or any number to change the foil look, it can be save as number as foil index and pass it here\n" +
+                    "    vec2 localPos = uv * 3.5;\n" +
+                    "    float t = u_time * 0.35;\n" +
+                    "    \n" +
+                    "    float n1 = liquidNoise(localPos, t);\n" +
+                    "    float n2 = liquidNoise(localPos + vec2(n1 * 1.8), t * 1.2);\n" +
+                    "    float surgePattern = liquidNoise(localPos + vec2(n2 * 2.2), t * 0.8);\n" +
+                    "    \n" +
+                    "    float rippleSharpness = pow(abs(surgePattern), 2.5);\n" +
+                    "    \n" +
+                    "    // liquid silver accents\n" +
+                    "    vec3 spectralColor = 0.5 + 0.5 * cos(6.28318 * ((surgePattern * 0.35) + vec3(0.0, 0.33, 0.67)));\n" +
+                    "    vec3 rawFoilSheen = spectralColor * rippleSharpness;\n" +
+                    "\n" +
+                    "    // image illumination levels\n" +
+                    "    float luminance = dot(col.rgb, vec3(0.2126, 0.7152, 0.0722));\n" +
+                    "    \n" +
+                    "    // This tints bright/white surfaces beautifully without washing them out into flat dead tones\n" +
+                    "    vec3 softLightFoil = col.rgb * (vec3(1.0) + rawFoilSheen * 0.45);\n" +
+                    "    \n" +
+                    "    // This allows the hot-foil neon pigments to glow brightly over pitch-black regions and dark shadows\n" +
+                    "    vec3 screenBlendFoil = vec3(1.0) - (vec3(1.0) - col.rgb) * (vec3(1.0) - rawFoilSheen * 0.65);\n" +
+                    "    \n" +
+                    "    // This dynamically handles bright text boxes, dark art slots, and medium borders simultaneously\n" +
+                    "    vec3 bakedFoilColor = mix(screenBlendFoil, softLightFoil, smoothstep(0.25, 0.75, luminance));\n" +
+                    "    \n" +
+                    "    // If a spot is absolute midnight black (like title fonts or frame lines), suppress the foil\n" +
+                    "    // to maintain perfect readability, exactly like physical hot-stamp manufacturing lines\n" +
+                    "    bakedFoilColor = mix(col.rgb, bakedFoilColor, smoothstep(0.08, 0.2, luminance));\n" +
+                    "    bakedFoilColor = clamp(bakedFoilColor, 0.0, 1.0);\n" +
+                    "\n" +
+                    "    // Mix final color cleanly based on the uniform boolean check flag\n" +
+                    "    vec3 finalRGB = mix(col.rgb, bakedFoilColor, step(0.5, u_isHolo));\n" +
+                    "\n" +
+                    "    gl_FragColor = vec4(finalRGB, col.a) * v_color * alpha;\n" +
+                    "}\n";
+
+
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +
