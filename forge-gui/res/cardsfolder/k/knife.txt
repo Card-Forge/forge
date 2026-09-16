@@ -1,7 +1,7 @@
 Name:Knife
 ManaCost:R
 Types:Artifact Clue Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | AddPower$ 1 | Condition$ PlayerTurn | Description$ During your turn, equipped creature gets +1/+0 and has first strike.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ First Strike | AddPower$ 1 | Condition$ PlayerTurn | Description$ During your turn, equipped creature gets +1/+0 and has first strike.
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
 K:Equip:2
 DeckHas:Ability$Sacrifice

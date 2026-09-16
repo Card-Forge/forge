@@ -4,7 +4,7 @@ Types:Artifact Creature Equipment Insect
 PT:2/2
 K:First Strike
 K:Reconfigure:R
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | Description$ Equipped creature has first strike.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ First Strike | Description$ Equipped creature has first strike.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRandom | TriggerDescription$ At the beginning of your upkeep, a random artifact card in your hand perpetually gains "This spell costs {1} less to cast."
 SVar:TrigRandom:DB$ ChooseCard | Defined$ You | Choices$ Artifact.YouOwn | ChoiceZone$ Hand | AtRandom$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ DBCleanup
