@@ -1,0 +1,6 @@
+Name:Forest Tentacle Token
+ManaCost:no cost
+Colors:green
+Types:Land Creature Forest Tentacle
+PT:1/1
+Oracle:(This token has "{T}: Add {G}." It's affected by summoning sickness until your next turn.)
