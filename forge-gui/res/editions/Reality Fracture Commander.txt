@@ -6,5 +6,27 @@ Type=Commander
 ScryfallCode=FRC
 
 [cards]
+1 M Jace, Multiverse Architect @Volkan Baǵa
+2 M Nissa, Leyline Tamer @Justyna Dura
+3 R Omnath, Locus of the Void @Arif Wijaya
+4 R Dack Fayden, Helping Hand @Josiah "Jo" Cameron
+5 R Ob Nixilis, the Ascended @Caroline Gariba
+6 R Teferi's Reproach @Chris Rallis
+7 R Avacyn, Angel of Horror @Pauline Voss
+8 R Jhoira, Weatherlight Corsair @Wayne Wu
+9 R Venser, Fervent Forger @Borja Pindado
+10 R Niv-Mizzet, Ghost Counsel @Brian Valeza
+11 R Tamiyo, Upriser Crowned @Johannes Voss
+12 R The Ur-Sphinx @Alexandre Honoré
 13 R Darksteel Angel @Chippy
+14 R Ginger, Queen of Sweets @Arif Wijaya
+15 R Memnarch, the Warden @Gaboleps
+16 R Turbulent Crater @Piotr Dura
+17 R Turbulent Shore @Piotr Dura
+18 R Turbulent Wetlands @Piotr Dura
+19 M Akroma, Angel of Fury @Slawomir Maniak
+20 U Arcane Signet @Josu Solano
+21 U Sol Ring @Titus Lunter
+22 C Command Tower @Josu Solano
+23 R Reflecting Pool @Marco Gorlei
 98 R Darksteel Angel @Chippy
