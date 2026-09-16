@@ -1,0 +1,9 @@
+Name:Screeching Soulbreaker
+ManaCost:2 G
+Types:Creature Siren Bard
+PT:1/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ Whenever this creature attacks, it deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Flying\nWhenever this creature attacks, it deals 1 damage to each opponent and you gain 1 life.
