@@ -1,0 +1,9 @@
+Name:Way of the Pyromancer
+ManaCost:1 R
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 2
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWPyromancer | Description$ Planeswalkers you control have "[+1]: Add {R}."
+SVar:PWPyromancer:Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$  Add {R}.
+DeckHints:Type$Planeswalker
+Oracle:When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nPlaneswalkers you control have "[+1]: Add {R}."
