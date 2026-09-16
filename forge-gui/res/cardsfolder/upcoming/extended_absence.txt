@@ -1,0 +1,8 @@
+Name:Extended Absence
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDamageAll | SpellDescription$ Exile target creature or planeswalker. Extended Absence deals 1 damage to each opponent and you gain 1 life.
+SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Lifegain
+Oracle:Exile target creature or planeswalker. Extended Absence deals 1 damage to each opponent and you gain 1 life.
