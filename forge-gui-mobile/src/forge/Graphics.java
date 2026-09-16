@@ -1076,8 +1076,9 @@ public class Graphics implements Disposable {
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", 0);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
                 batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
                 batch.begin();
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1112,8 +1113,9 @@ public class Graphics implements Disposable {
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", 0);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
                 batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
                 batch.begin();
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1200,8 +1202,9 @@ public class Graphics implements Disposable {
 
         boolean shouldApplyHolo = foilEffect && !drawGray;
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", shouldApplyHolo ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         //draw
@@ -1227,8 +1230,9 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", ((float)(image.getRegionHeight() / image.getRegionWidth()) * (ImageCache.getInstance().getRadius(image.getTexture()) * modR)));
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         //draw
@@ -1248,8 +1252,9 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", ((float)(image.getHeight() / image.getWidth()) * (ImageCache.getInstance().getRadius(image) * modR)));
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         //draw
@@ -1601,8 +1606,9 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", 0);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1619,8 +1625,9 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", 0);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 18);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 5, 2);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);

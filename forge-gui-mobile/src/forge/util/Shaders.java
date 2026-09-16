@@ -165,10 +165,10 @@ public class Shaders {
             "#ifdef GL_ES\n" +
                     "precision mediump float;\n" +
                     "#endif\n" +
-                    "\n" +
+
                     "varying vec4 v_color;\n" +
                     "varying vec2 v_texCoords;\n" +
-                    "\n" +
+
                     "uniform sampler2D u_texture;\n" +
                     "uniform vec2 u_resolution;\n" +
                     "uniform float edge_radius;\n" +
@@ -176,95 +176,192 @@ public class Shaders {
                     "uniform float u_isHolo;\n" +
                     "uniform float u_time;\n" +
                     "uniform vec2 u_cardPosition;\n" +
-                    "\n" +
-                    "// rainbow effect\n" +
-                    "vec3 getPremiumRainbow(float p) {\n" +
-                    "    vec3 c = vec3(0.5, 0.5, 0.5);\n" +
-                    "    vec3 d = vec3(0.0, 0.33, 0.67);\n" +
-                    "    return c + c * cos(6.28318 * (vec3(2.4) * p + d));\n" +
+
+                    "// Optional card tilt / movement\n" +
+                    "uniform vec2 u_foilTilt;\n" +
+
+                    "float hash21(vec2 p) {\n" +
+                    "    p = fract(p * vec2(123.34, 456.21));\n" +
+                    "    p += dot(p, p + 45.32);\n" +
+                    "    return fract(p.x * p.y);\n" +
                     "}\n" +
-                    "\n" +
-                    "// geometric noise\n" +
-                    "float getHash(vec2 p) {\n" +
-                    "    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);\n" +
-                    "}\n" +
-                    "\n" +
-                    "// foil noise\n" +
-                    "float getFoilNoise(vec2 p) {\n" +
+
+                    "float noise(vec2 p) {\n" +
                     "    vec2 i = floor(p);\n" +
                     "    vec2 f = fract(p);\n" +
-                    "    vec2 u = f * f * (3.0 - 2.0 * f);\n" +
-                    "    return mix(mix(getHash(i + vec2(0.0, 0.0)), getHash(i + vec2(1.0, 0.0)), u.x),\n" +
-                    "               mix(getHash(i + vec2(0.0, 1.0)), getHash(i + vec2(1.0, 1.0)), u.x), u.y);\n" +
+                    "    f = f * f * (3.0 - 2.0 * f);\n" +
+
+                    "    float a = hash21(i);\n" +
+                    "    float b = hash21(i + vec2(1.0, 0.0));\n" +
+                    "    float c = hash21(i + vec2(0.0, 1.0));\n" +
+                    "    float d = hash21(i + vec2(1.0, 1.0));\n" +
+
+                    "    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);\n" +
                     "}\n" +
-                    "\n" +
-                    "void main() {\n" +
-                    "    vec2 uv = v_texCoords;\n" +
-                    "    \n" +
-                    "    // Get base card texture pixel\n" +
-                    "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
-                    "    \n" +
-                    "    // boolean flag\n" +
-                    "    if (u_isHolo > 0.0) {\n" +
-                    "        // top-right corner slant\n" +
-                    "        vec2 foilUV = vec2(uv.x * 5.2 + uv.y * 8.5, uv.y * 3.5);\n" +
-                    "        foilUV += u_cardPosition * 0.2;\n" +
-                    "        \n" +
-                    "        // noise layers\n" +
-                    "        float t1 = u_time * 1.2;\n" +
-                    "        float noise1 = getFoilNoise(foilUV * 1.5 + vec2(t1, -t1 * 0.3));\n" +
-                    "        float noise2 = getFoilNoise(foilUV * 3.0 - vec2(t1 * 0.2, t1));\n" +
-                    "        \n" +
-                    "        // thin lightning slivers\n" +
-                    "        float cut1 = sin(foilUV.x * 2.5 + noise1 * 8.0);\n" +
-                    "        float cut2 = cos(foilUV.x * 4.0 + noise2 * 6.0);\n" +
-                    "        \n" +
-                    "        float shardPattern = (cut1 * cut2) * 0.5 + 0.5;\n" +
-                    "        shardPattern = pow(shardPattern, 2.5);\n" +
-                    "        float surgeMask = smoothstep(0.1, 0.7, shardPattern);\n" +
-                    "        \n" +
-                    "        vec3 foilColors = getPremiumRainbow(shardPattern * 1.8 + uv.x * 0.6 - uv.y * 0.4);\n" +
-                    "        \n" +
-                    "        // luminance\n" +
-                    "        float luminance = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
-                    "        \n" +
-                    "        // soft shadow\n" +
-                    "        float shadowLift = smoothstep(0.4, 0.0, luminance) * 0.04;\n" +
-                    "        col.rgb += vec3(shadowLift) * surgeMask;\n" +
-                    "        \n" +
-                    "        // shimmer\n" +
-                    "        float smoothSpecular = smoothstep(0.68, 0.95, shardPattern);\n" +
-                    "        float glossSheen = sin(uv.x * 30.0 + uv.y * 30.0 + u_time * 2.0) * 0.5 + 0.5;\n" +
-                    "        vec3 metallicGleam = vec3(smoothSpecular * (0.12 + glossSheen * 0.08));\n" +
-                    "        \n" +
-                    "        // mask\n" +
-                    "        float textProtectionMask = smoothstep(0.01, 0.12, luminance);\n" +
-                    "        \n" +
-                    "        // spectrum\n" +
-                    "        vec3 premiumFoilOverlay = (foilColors * surgeMask * 0.38) + metallicGleam;\n" +
-                    "        \n" +
-                    "        col.rgb += premiumFoilOverlay * textProtectionMask;\n" +
-                    "        \n" +
-                    "        col.rgb = smoothstep(0.0, 1.0, col.rgb);\n" +
+
+                    "vec3 spectralColor(float x) {\n" +
+                    "    x = fract(x);\n" +
+
+                    "    vec3 c1 = vec3(1.00, 0.15, 0.05);\n" +
+                    "    vec3 c2 = vec3(1.00, 0.80, 0.05);\n" +
+                    "    vec3 c3 = vec3(0.10, 1.00, 0.35);\n" +
+                    "    vec3 c4 = vec3(0.05, 0.65, 1.00);\n" +
+                    "    vec3 c5 = vec3(0.35, 0.10, 1.00);\n" +
+
+                    "    vec3 c;\n" +
+
+                    "    if (x < 0.25) {\n" +
+                    "        c = mix(c1, c2, x * 4.0);\n" +
+                    "    } else if (x < 0.50) {\n" +
+                    "        c = mix(c2, c3, (x - 0.25) * 4.0);\n" +
+                    "    } else if (x < 0.75) {\n" +
+                    "        c = mix(c3, c4, (x - 0.50) * 4.0);\n" +
+                    "    } else {\n" +
+                    "        c = mix(c4, c5, (x - 0.75) * 4.0);\n" +
                     "    }\n" +
-                    "    \n" +
-                    "    // grayness \n" +
+
+                    "    return c;\n" +
+                    "}\n" +
+
+                    "void main() {\n" +
+
+                    "    vec2 uv = v_texCoords;\n" +
+                    "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
+
+                    "    if (u_isHolo > 0.0) {\n" +
+                    "        vec2 p = uv;\n" +
+
+                    "        float aspect = u_resolution.x / max(u_resolution.y, 1.0);\n" +
+                    "        p.x *= aspect;\n" +
+
+                    "        // Diagonal foil direction\n" +
+                    "        float diagonal = p.x * 0.72 + p.y * 1.28;\n" +
+                    "        float secondary = p.x * 1.15 - p.y * 0.35;\n" +
+
+                    "        // Card movement / tilt\n" +
+                    "        diagonal += u_foilTilt.x * 1.5;\n" +
+                    "        secondary += u_foilTilt.y * 1.2;\n" +
+
+                    "        // Time\n" +
+                    "        float motion = u_time * 0.035;\n" +
+                    "        diagonal += motion;\n" +
+
+                    "        // Low-frequency noise\n" +
+                    "        float warp = noise(vec2(diagonal * 3.0, secondary * 1.7));\n" +
+                    "        float warp2 = noise(vec2(diagonal * 7.0 + 13.2, secondary * 2.5));\n" +
+
+                    "        float streakCoord = diagonal +\n" +
+                    "                            (warp - 0.5) * 0.075 +\n" +
+                    "                            (warp2 - 0.5) * 0.025;\n" +
+
+                    "        // Diffraction lines\n" +
+                    "        float waves = sin(streakCoord * 105.0);\n" +
+                    "        waves = waves * 0.5 + 0.5;\n" +
+
+                    "        // Narrow bright lines\n" +
+                    "        float thinLines = pow(waves, 18.0);\n" +
+
+                    "        // Second layer gives the foil more complexity\n" +
+                    "        float waves2 = sin(streakCoord * 43.0 + warp * 4.0);\n" +
+                    "        waves2 = waves2 * 0.5 + 0.5;\n" +
+                    "        float thinLines2 = pow(waves2, 10.0);\n" +
+
+                    "        // Irregular shards\n" +
+                    "        float shardNoise = noise(vec2(\n" +
+                    "            secondary * 5.0,\n" +
+                    "            streakCoord * 8.0\n" +
+                    "        ));\n" +
+
+                    "        float shardMask = smoothstep(0.20, 0.80, shardNoise);\n" +
+
+                    "        // Additional long streak variation\n" +
+                    "        float longNoise = noise(vec2(\n" +
+                    "            secondary * 1.8 + 20.0,\n" +
+                    "            streakCoord * 2.2\n" +
+                    "        ));\n" +
+
+                    "        shardMask *= 0.45 + longNoise * 0.85;\n" +
+
+                    "        // Combined foil streak\n" +
+                    "        float foilMask =\n" +
+                    "            thinLines * shardMask +\n" +
+                    "            thinLines2 * shardMask * 0.35;\n" +
+
+                    "        foilMask = clamp(foilMask, 0.0, 1.0);\n" +
+
+                    "        // Rainbow streaks\n" +
+                    "        float spectrum =\n" +
+                    "            streakCoord * 1.35 +\n" +
+                    "            warp * 0.30 +\n" +
+                    "            u_foilTilt.x * 0.8;\n" +
+
+                    "        vec3 rainbow = spectralColor(spectrum);\n" +
+
+                    "        // White highlight\n" +
+                    "        float highlight = pow(foilMask, 1.7);\n" +
+                    "        vec3 whiteSheen = vec3(highlight * 0.75);\n" +
+
+                    "        // Luminance\n" +
+                    "        float luminance = dot(\n" +
+                    "            col.rgb,\n" +
+                    "            vec3(0.299, 0.587, 0.114)\n" +
+                    "        );\n" +
+
+                    "        float imageMask = smoothstep(0.08, 0.55, luminance);\n" +
+
+                    "        // Subtle metallic base\n" +
+                    "        float microMetal = noise(uv * 85.0);\n" +
+                    "        float metal = (microMetal - 0.5) * 0.035;\n" +
+
+                    "        vec3 foil =\n" +
+                    "            rainbow * foilMask * 0.62 +\n" +
+                    "            whiteSheen * 0.42 +\n" +
+                    "            vec3(metal);\n" +
+
+                    "        // Slightly stronger effect in brighter parts\n" +
+                    "        foil *= (0.35 + imageMask * 0.65);\n" +
+
+                    "        col.rgb += foil;\n" +
+
+                    "        // Very subtle reflective contrast\n" +
+                    "        col.rgb *= 1.0 + foilMask * 0.08;\n" +
+
+                    "        // DO NOT use smoothstep on the entire color here.\n" +
+                    "        col.rgb = clamp(col.rgb, 0.0, 1.0);\n" +
+                    "    }\n" +
+
+                    "    // Grayscale\n" +
                     "    if (u_gray > 0.0) {\n" +
                     "        float gray = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
                     "        col.rgb = vec3(gray);\n" +
                     "    }\n" +
-                    "    \n" +
-                    "    // rounded corner\n" +
+
+                    "    // Rounded corners\n" +
                     "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
                     "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
                     "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
-                    "    vec2 abs_pixel_coord = vec2(abs(uv_base_center.x * half_resolution.x), abs(uv_base_center.y * half_resolution.y));\n" +
+
+                    "    vec2 abs_pixel_coord = vec2(\n" +
+                    "        abs(uv_base_center.x * half_resolution.x),\n" +
+                    "        abs(uv_base_center.y * half_resolution.y)\n" +
+                    "    );\n" +
+
                     "    float alpha = 1.0;\n" +
-                    "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
-                    "         float r = length(abs_pixel_coord - abs_rounded_center);\n" +
-                    "         alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
+
+                    "    if (abs_pixel_coord.x > abs_rounded_center.x &&\n" +
+                    "        abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+
+                    "        float r = length(\n" +
+                    "            abs_pixel_coord - abs_rounded_center\n" +
+                    "        );\n" +
+
+                    "        alpha = smoothstep(\n" +
+                    "            edge_radius,\n" +
+                    "            edge_radius - 0.5,\n" +
+                    "            r\n" +
+                    "        );\n" +
                     "    }\n" +
-                    "    \n" +
+
                     "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
                     "}";
 
