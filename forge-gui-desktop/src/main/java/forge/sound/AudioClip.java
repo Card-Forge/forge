@@ -35,6 +35,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -49,6 +50,25 @@ import com.sipgate.mp3wav.Converter;
  */
 public class AudioClip implements IAudioClip {
     private final int maxSize = 16;
+    /**
+     * The JDK's software mixer: it mixes clips itself and opens a single device line, where
+     * AudioSystem.getLine returns one DirectAudioDevice line per clip. It is not registered as a
+     * MixerProvider, so it has to be constructed directly, and is null without
+     * --add-exports java.desktop/com.sun.media.sound=ALL-UNNAMED.
+     */
+    private static final Mixer softMixer = openSoftMixer();
+
+    private static Mixer openSoftMixer() {
+        try {
+            Mixer mixer = (Mixer) Class.forName("com.sun.media.sound.SoftMixingMixer")
+                    .getDeclaredConstructor().newInstance();
+            mixer.open();
+            return mixer;
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
     private final String filename;
     private final List<ClipWrapper> clips;
     private boolean failed;
@@ -209,7 +229,7 @@ public class AudioClip implements IAudioClip {
                 AudioInputStream stream = AudioSystem.getAudioInputStream(bis);
                 AudioFormat format = stream.getFormat();
                 DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
-                Clip clip = (Clip) AudioSystem.getLine(info);
+                Clip clip = (Clip) (softMixer == null ? AudioSystem.getLine(info) : softMixer.getLine(info));
                 clip.open(stream);
                 return clip;
             } catch (IOException ex) {
