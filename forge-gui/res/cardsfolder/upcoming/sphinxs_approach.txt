@@ -4,4 +4,5 @@ Types:Instant
 A:SP$ Draw | NumCards$ 2 | SubAbility$ DBSearch | SpellDescription$ Draw two cards. Then you may exile this spell and four cards named Sphinx's Approach from your graveyard. If you do, search your library for a Sphinx creature card, put it onto the battlefield, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | UnlessCost$ ExileFromGrave<4/Card.namedSphinx's Approach> ExileFromStack<1/Card.Self> | UnlessSwitched$ True | UnlessPayer$ You | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Sphinx | ChangeNum$ 1
 K:A deck can have any number of cards named CARDNAME.
+DeckHints:Type$Sphinx
 Oracle:Draw two cards. Then you may exile this spell and four cards named Sphinx's Approach from your graveyard. If you do, search your library for a Sphinx creature card, put it onto the battlefield, then shuffle.\nA deck can have any number of cards named Sphinx's Approach.
