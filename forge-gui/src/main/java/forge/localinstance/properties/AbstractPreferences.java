@@ -18,8 +18,12 @@
 package forge.localinstance.properties;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.AtomicMoveNotSupportedException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
@@ -71,23 +75,38 @@ public abstract class AbstractPreferences<T extends Enum<T> & IPreferences.IPref
 
     @Override
     public void save() {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(filename));
+        final File target = new File(filename);
+        final File parent = target.getParentFile();
+        if (parent != null && !FileUtil.ensureDirectoryExists(parent)) {
+            System.err.println("Error creating preferences directory: " + parent);
+            return;
+        }
+
+        // Write to a temp file first, then replace the live file.
+        final File tmp = new File(filename + ".tmp");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(tmp))) {
             for (final T key : getEnumValues()) {
                 writer.write(key + "=" + getPref(key));
                 writer.newLine();
             }
         } catch (final IOException ex) {
+            System.err.println("Error writing preferences to " + tmp + ": " + ex);
             ex.printStackTrace();
-        } finally {
-            if (null != writer) {
-                try {
-                    writer.close();
-                } catch (final IOException e) {
-                    System.out.println("error while closing " + filename);
-                }
+            FileUtil.deleteFile(tmp.getAbsolutePath());
+            return;
+        }
+
+        try {
+            try {
+                Files.move(tmp.toPath(), target.toPath(),
+                        StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+            } catch (final AtomicMoveNotSupportedException e) {
+                Files.move(tmp.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
+        } catch (final IOException ex) {
+            System.err.println("Error replacing preferences file " + filename + ": " + ex);
+            ex.printStackTrace();
+            FileUtil.deleteFile(tmp.getAbsolutePath());
         }
     }
 
