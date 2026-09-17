@@ -680,7 +680,7 @@ public class DeckgenUtil {
                 prepareWeightedRandomizedCardPool(potentialCards);
                 for(Map.Entry<PaperCard,Integer> pair:potentialCards){
                     if(format.isLegalCard(pair.getKey())) {
-                        preSelectedCards.add(pair.getKey());
+                        preSelectedCards.add(StaticData.instance().getCommonCards().getCard(pair.getKey().getName()));
                     }
                 }
             }
