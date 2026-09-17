@@ -1610,7 +1610,7 @@ public class ComputerUtil {
      * Returns list of objects threatened by effects on the stack
      *
      * @param ai
-     *            calling player
+     *            player whose objects to evaluate
      * @param sa
      *            SpellAbility to exclude
      * @param top
@@ -1694,6 +1694,18 @@ public class ComputerUtil {
             }
             objects = canBeTargeted;
         }
+
+        final List<GameObject> playerObjects = new ArrayList<>();
+        for (GameObject object : objects) {
+            if ((object instanceof Card card && card.getController().equals(aiPlayer))
+                    || aiPlayer.equals(object)) {
+                playerObjects.add(object);
+            }
+        }
+        if (playerObjects.isEmpty()) {
+            return threatened;
+        }
+        objects = playerObjects;
 
         SpellAbility saviorWithSubs = saviour;
         ApiType saviorWithSubsApi = saviorWithSubs == null ? null : saviorWithSubs.getApi();
@@ -1907,14 +1919,22 @@ public class ComputerUtil {
                 }
             }
         }
-        // Exiling => bounce/shroud
+        // Non-battlefield zone change => bounce/shroud
         else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                 || saviourApi == ApiType.Protection || saviourApi == null)
                 && topStack.hasParam("Destination")
-                && topStack.getParam("Destination").equals("Exile")) {
+                && !topStack.getParam("Destination").equals("Battlefield")
+                && !topStack.getParam("Destination").equals("Stack")) {
             for (final Object o : objects) {
                 if (o instanceof Card c) {
+                    if (!c.isInPlay()) {
+                        continue;
+                    }
+                    // Treat only hostile zone changes as threats. This avoids flagging self-blink and similar plays.
+                    if (!source.getController().isOpponentOf(c.getController())) {
+                        continue;
+                    }
                     // give Shroud to targeted creatures
                     if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;

@@ -28,6 +28,35 @@ import forge.util.collect.FCollectionView;
 
 public class CounterAi extends SpellAbilityAi {
 
+    private boolean threatensAny(Iterable<Player> players) {
+        for (Player player : players) {
+            if (!ComputerUtil.predictThreatenedObjects(player, null, true).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isOpponentCounteringAnotherOpponent(Player ai, SpellAbility stackAbility) {
+        if (ai.getGame().getPlayers().size() < 3 || stackAbility == null) {
+            return false;
+        }
+
+        for (SpellAbility currentAbility = stackAbility; currentAbility != null; currentAbility = currentAbility.getSubAbility()) {
+            if (currentAbility.getApi() == ApiType.Counter && currentAbility.usesTargeting()) {
+                final Player counteringPlayer = currentAbility.getActivatingPlayer();
+                final SpellAbility targetedSpell = currentAbility.getTargets().getFirstTargetedSpell();
+                if (counteringPlayer != null && counteringPlayer.isOpponentOf(ai)
+                        && targetedSpell != null && targetedSpell.getActivatingPlayer() != null
+                        && targetedSpell.getActivatingPlayer().isOpponentOf(ai)
+                        && targetedSpell.getActivatingPlayer() != counteringPlayer) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -78,8 +107,8 @@ public class CounterAi extends SpellAbilityAi {
             sa.resetTargets();
             if (sa.canTargetSpellAbility(topSA)) {
                 sa.getTargets().add(topSA);
+                tgtSA = topSA;
                 if (topSA.getPayCosts().getTotalMana() != null) {
-                    tgtSA = topSA;
                     tgtCMC = topSA.getPayCosts().getTotalMana().getCMC();
                     tgtCMC += topSA.getPayCosts().getTotalMana().countX() > 0 ? 3 : 0; // TODO: somehow determine the value of X paid and account for it?
                 }
@@ -217,6 +246,18 @@ public class CounterAi extends SpellAbilityAi {
         }
 
         if (dontCounter) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        final boolean threatensTeam = threatensAny(ai.getYourTeam());
+
+        // In multiplayer, avoid counter wars between opponents unless the spell also threatens our team.
+        if (isOpponentCounteringAnotherOpponent(ai, tgtSA) && !threatensTeam) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        // In multiplayer, be less eager to counter interaction that is only harming another opponent.
+        if (game.getPlayers().size() >= 3 && !threatensTeam && threatensAny(ai.getOpponents())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
