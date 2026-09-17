@@ -1,0 +1,9 @@
+Name:Arni, Renowned Champion
+ManaCost:3 R
+Types:Legendary Creature Human Berserker
+PT:1/5
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, Arni gets +X/+0 until end of turn, where X is that creature's power.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:TriggeredCard$CardPower
+Oracle:Trample\nWhenever another creature you control enters, Arni gets +X/+0 until end of turn, where X is that creature's power.
