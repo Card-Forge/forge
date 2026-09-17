@@ -229,6 +229,7 @@ ScryfallCode=FRA
 246 U Jiang Yanggu, Alone @Dmitry Burmak
 247 U Kiora of Fire and Ashes @Chris Rahn
 248 U Koth, the Geomancer @Kieran Yanner
+249 U Marwyn, the Clearcutter @Quintin Gleim
 250 U Pia, Determined Rebuilder @Andreas Zafiratos
 252 U Tetsuko Umezawa, Pursuer @Tuan Duong Chu
 254 U Way of the Pyromancer @Andrey Kuzinskiy
@@ -240,6 +241,7 @@ ScryfallCode=FRA
 260 U Ghalta the Unstoppable @Antonio José Manzanedo
 261 U Jiang Yanggu, Never Alone @Dmitry Burmak
 262 U Loot, the Nexus @Filip Burburan
+263 U Marwyn, the Preserver @Quintin Gleim
 264 U Pia, Aether Ascetic @Andreas Zafiratos
 265 U Ruric Thar, Magecrusher @Olivier Bernard
 266 U Titanbones, Towering Heart @Jesper Ejsing
@@ -255,6 +257,14 @@ ScryfallCode=FRA
 278 R Vraska, the Cutting Glare @Kieran Yanner
 279 R Karn, Argent Defender @Scott M. Fischer
 280 U Traxos, Scourge Eternal @Aaron Miller
+281 L Plains @Luc Courtois
+282 L Plains @Florian Herold
+283 L Island @Chris Ostrowski
+284 L Island @Zack Stella
+285 L Swamp @Josu Solano
+286 L Swamp @Leon Tukker
+287 L Mountain @Jorge Jacinto
+288 L Mountain @Chris Ostrowski
 291 M Ajani Resolute @Aleksi Briclot
 292 R Gideon's Memorial @Lius Lasahido
 293 R Liliana the Faultless @Aleksi Briclot
