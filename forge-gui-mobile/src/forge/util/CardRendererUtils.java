@@ -106,7 +106,7 @@ public class CardRendererUtils {
         if (card == null)
             return false;
         if (isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT))
-            return card.hasPaperFoil(); // TODO the Card BG should be the texture instead of the Foil Overlay
+            return card.hasPaperFoil();
         return false;
     }
     public static boolean drawCracks(final CardView card, final boolean isMagnify) {

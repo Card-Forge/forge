@@ -1077,8 +1077,8 @@ public class Graphics implements Disposable {
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
                 batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
                 batch.begin();
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1114,8 +1114,8 @@ public class Graphics implements Disposable {
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
                 ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+                ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
                 batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
                 batch.begin();
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1203,8 +1203,8 @@ public class Graphics implements Disposable {
         boolean shouldApplyHolo = foilEffect && !drawGray;
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", shouldApplyHolo ? 1.0f : 0.0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         //draw
@@ -1231,8 +1231,8 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         //draw
@@ -1253,8 +1253,8 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         //draw
@@ -1607,8 +1607,8 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1626,8 +1626,8 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_isHolo", drawFoil ? 1.0f : 0.0f);
         ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0.0f, 0.0f);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 0, 0);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_foilTilt", 0f, 0f);
+        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_cardPosition", 8, 0);
         batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
         batch.begin();
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);

@@ -175,7 +175,7 @@ public class Shaders {
                     "uniform float u_gray;\n" +
                     "uniform float u_isHolo;\n" +
                     "uniform float u_time;\n" +
-                    "uniform vec2 u_cardPosition;\n" +
+                    "uniform vec2 u_cardPosition; // x component is bind to effect\n" +
                     "uniform vec2 u_foilTilt;\n" +
 
                     "float hash21(vec2 p) {\n" +
@@ -225,15 +225,23 @@ public class Shaders {
                     "        p.x *= aspect;\n" +
 
                     "        vec2 tilt = u_foilTilt * 1.5;\n" +
-                    "        float slowTime = u_time * 0.03;\n" +
+                    "        \n" +
+                    "        // --- SINGLE INT SEEDING SYSTEM ---\n" +
+                    "        // Mixes the input ID with large constants to split indices into wildly varying outputs\n" +
+                    "        float idInput = u_cardPosition.x;\n" +
+                    "        float cardSeed = hash21(vec2(idInput * 12.83, idInput * 91.43));\n" +
+                    "        float colorSeed = hash21(vec2(idInput * 37.11, idInput * 54.19));\n" +
+                    "        \n" +
+                    "        // Offset the timing loop so cards don't cycle colors together in sync\n" +
+                    "        float slowTime = (u_time * 0.03) + (cardSeed * 50.0);\n" +
 
                     "        // Organic background distribution\n" +
                     "        float warpX = noise(p * 6.0 + tilt);\n" +
                     "        float warpY = noise(p * 9.0 - tilt + vec2(slowTime));\n" +
                     "        vec2 warpedUV = p + vec2(warpX, warpY) * 0.15;\n" +
 
-                    "        // Crystalline micro-facets\n" +
-                    "        vec2 facetUV = p * 45.0 + tilt * 8.0;\n" +
+                    "        // Crystalline micro-facets + variation seed\n" +
+                    "        vec2 facetUV = p * 45.0 + tilt * 8.0 + vec2(cardSeed * 25.5);\n" +
                     "        float sharpFlakes = abs(fract(facetUV.x + facetUV.y) - 0.5) * \n" +
                     "                            abs(fract(facetUV.x - facetUV.y * 1.5) - 0.5) * 4.0;\n" +
                     "        \n" +
@@ -247,10 +255,12 @@ public class Shaders {
                     "        float finalGlint = pow(waveGlint, 1.8) * (0.4 + sharpFlakes * 0.6) + flakeGrain;\n" +
                     "        finalGlint = clamp(finalGlint, 0.0, 1.0);\n" +
 
+                    "        // Adjusts the color loop shift based on the seed value\n" +
                     "        float hue = (warpedUV.x * 0.5 + warpedUV.y * 0.3) \n" +
                     "                  + (tilt.x + tilt.y) * 1.1 \n" +
                     "                  + sharpFlakes * 0.08\n" +
-                    "                  + slowTime;\n" +
+                    "                  + slowTime\n" +
+                    "                  + (colorSeed * 7.5); // randomize per seed\n" +
                     "        \n" +
                     "        vec3 foilColor = spectralColor(hue);\n" +
 
@@ -261,7 +271,7 @@ public class Shaders {
                     "        float inkProtection = smoothstep(0.05, 0.30, luminance);\n" +
 
                     "        // We generate the raw intensity color layer\n" +
-                    "        vec3 targetFoil = foilColor * finalGlint * 1.4;\n" +
+                    "        vec3 targetFoil = foilColor * finalGlint * 1.35;\n" +
                     "        \n" +
                     "        // Overlay Blend: \n" +
                     "        vec3 blendLayer;\n" +
@@ -273,7 +283,7 @@ public class Shaders {
                     "        vec3 metallicSpecular = vec3(pow(finalGlint, 3.0) * 0.35);\n" +
 
                     "        // Pushes color heavily into the card surface without burning out text\n" +
-                    "        vec3 finalMix = mix(col.rgb, blendLayer, 0.25) + metallicSpecular;\n" +
+                    "        vec3 finalMix = mix(col.rgb, blendLayer, 0.35) + metallicSpecular;\n" +
                     "        \n" +
                     "        // Apply the ink mask protection so the text font doesn't shift color\n" +
                     "        col.rgb = mix(col.rgb, finalMix, inkProtection);\n" +
