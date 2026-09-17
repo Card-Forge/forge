@@ -110,9 +110,10 @@ public class AudioClip implements IAudioClip {
 
     @Override
     public void dispose() {
-        for (byte[] b : audioClips.values()) {
-            b = null;
+        for (ClipWrapper clip : clips) {
+            clip.close();
         }
+        clips.clear();
         audioClips.clear();
     }
 
@@ -212,6 +213,15 @@ public class AudioClip implements IAudioClip {
             }
             synchronized (this) {
                 clip.stop();
+            }
+        }
+
+        void close() {
+            if (null == clip) {
+                return;
+            }
+            synchronized (this) {
+                clip.close();
             }
         }
 
