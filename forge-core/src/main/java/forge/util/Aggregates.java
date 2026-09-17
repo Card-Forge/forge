@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
 /** 
@@ -70,6 +71,48 @@ public class Aggregates {
             }
         }
         return result;
+    }
+
+    /**
+     * Selects an item with probability proportional to the exponential of its value.
+     *
+     * @param source the candidates to select from
+     * @param valueAccessor the value assigned to each candidate
+     * @param temperature higher values make the selection more uniform
+     * @return the selected item, or null if {@code source} is null or empty
+     */
+    public static <T> T itemWithSoftmax(final Iterable<T> source, final ToDoubleFunction<T> valueAccessor, final double temperature) {
+        if (source == null) { return null; }
+        if (temperature <= 0 || !Double.isFinite(temperature)) {
+            throw new IllegalArgumentException("Temperature must be positive and finite");
+        }
+
+        final List<T> candidates = Lists.newArrayList(source);
+        if (candidates.isEmpty()) { return null; }
+
+        double maxValue = Double.NEGATIVE_INFINITY;
+        final List<Double> values = new ArrayList<>(candidates.size());
+        for (T candidate : candidates) {
+            final double value = valueAccessor.applyAsDouble(candidate);
+            if (!Double.isFinite(value)) {
+                throw new IllegalArgumentException("Softmax values must be finite");
+            }
+            values.add(value);
+            maxValue = Math.max(maxValue, value);
+        }
+
+        double totalWeight = 0;
+        for (double value : values) {
+            totalWeight += Math.exp((value - maxValue) / temperature);
+        }
+        double roll = MyRandom.getRandom().nextDouble() * totalWeight;
+        for (int i = 0; i < candidates.size(); i++) {
+            roll -= Math.exp((values.get(i) - maxValue) / temperature);
+            if (roll < 0) {
+                return candidates.get(i);
+            }
+        }
+        return candidates.get(candidates.size() - 1);
     }
 
     public static final <T> List<T> listWithMin(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
