@@ -26,21 +26,10 @@ public class ShaderUtil implements Disposable {
             shaderGrayscale = new ShaderProgram(Shaders.grayscaleVert, Shaders.grayscaleFrag);
         return shaderGrayscale;
     }
-    private static String loadedFragmentSource = "";
+
     public ShaderProgram getShaderRoundedRect() {
-        String currentHash = Shaders.fragCardShader;
-        if (shaderRoundedRect == null || !currentHash.equals(loadedFragmentSource)) {
-            if (shaderRoundedRect != null) {
-                Forge.safeDispose(shaderRoundedRect);
-            }
+        if (shaderRoundedRect == null)
             shaderRoundedRect = new ShaderProgram(Shaders.vertCardShader, Shaders.fragCardShader);
-            loadedFragmentSource = currentHash;
-            if (!shaderRoundedRect.isCompiled()) {
-                System.err.println("Shader compilation failed:\n" + shaderRoundedRect.getLog());
-            } else {
-                System.out.println("Shader hot-swapped and recompiled successfully!");
-            }
-        }
         return shaderRoundedRect;
     }
 
