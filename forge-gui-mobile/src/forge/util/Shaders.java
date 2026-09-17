@@ -176,8 +176,6 @@ public class Shaders {
                     "uniform float u_isHolo;\n" +
                     "uniform float u_time;\n" +
                     "uniform vec2 u_cardPosition;\n" +
-
-                    "// Optional card tilt / movement\n" +
                     "uniform vec2 u_foilTilt;\n" +
 
                     "float hash21(vec2 p) {\n" +
@@ -190,26 +188,21 @@ public class Shaders {
                     "    vec2 i = floor(p);\n" +
                     "    vec2 f = fract(p);\n" +
                     "    f = f * f * (3.0 - 2.0 * f);\n" +
-
                     "    float a = hash21(i);\n" +
                     "    float b = hash21(i + vec2(1.0, 0.0));\n" +
                     "    float c = hash21(i + vec2(0.0, 1.0));\n" +
                     "    float d = hash21(i + vec2(1.0, 1.0));\n" +
-
                     "    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);\n" +
                     "}\n" +
 
                     "vec3 spectralColor(float x) {\n" +
                     "    x = fract(x);\n" +
-
-                    "    vec3 c1 = vec3(1.00, 0.15, 0.05);\n" +
-                    "    vec3 c2 = vec3(1.00, 0.80, 0.05);\n" +
-                    "    vec3 c3 = vec3(0.10, 1.00, 0.35);\n" +
-                    "    vec3 c4 = vec3(0.05, 0.65, 1.00);\n" +
-                    "    vec3 c5 = vec3(0.35, 0.10, 1.00);\n" +
-
+                    "    vec3 c1 = vec3(1.00, 0.10, 0.20); // Pink-Red\n" +
+                    "    vec3 c2 = vec3(1.00, 0.85, 0.00); // Gold\n" +
+                    "    vec3 c3 = vec3(0.00, 1.00, 0.45); // Neon Green\n" +
+                    "    vec3 c4 = vec3(0.00, 0.60, 1.00); // Electric Cyan\n" +
+                    "    vec3 c5 = vec3(0.65, 0.00, 1.00); // Deep Violet\n" +
                     "    vec3 c;\n" +
-
                     "    if (x < 0.25) {\n" +
                     "        c = mix(c1, c2, x * 4.0);\n" +
                     "    } else if (x < 0.50) {\n" +
@@ -219,114 +212,71 @@ public class Shaders {
                     "    } else {\n" +
                     "        c = mix(c4, c5, (x - 0.75) * 4.0);\n" +
                     "    }\n" +
-
                     "    return c;\n" +
                     "}\n" +
 
                     "void main() {\n" +
-
                     "    vec2 uv = v_texCoords;\n" +
                     "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
 
                     "    if (u_isHolo > 0.0) {\n" +
                     "        vec2 p = uv;\n" +
-
                     "        float aspect = u_resolution.x / max(u_resolution.y, 1.0);\n" +
                     "        p.x *= aspect;\n" +
 
-                    "        // Diagonal foil direction\n" +
-                    "        float diagonal = p.x * 0.72 + p.y * 1.28;\n" +
-                    "        float secondary = p.x * 1.15 - p.y * 0.35;\n" +
+                    "        vec2 tilt = u_foilTilt * 1.5;\n" +
+                    "        float slowTime = u_time * 0.03;\n" +
 
-                    "        // Card movement / tilt\n" +
-                    "        diagonal += u_foilTilt.x * 1.5;\n" +
-                    "        secondary += u_foilTilt.y * 1.2;\n" +
+                    "        // Organic background distribution\n" +
+                    "        float warpX = noise(p * 6.0 + tilt);\n" +
+                    "        float warpY = noise(p * 9.0 - tilt + vec2(slowTime));\n" +
+                    "        vec2 warpedUV = p + vec2(warpX, warpY) * 0.15;\n" +
 
-                    "        // Time\n" +
-                    "        float motion = u_time * 0.035;\n" +
-                    "        diagonal += motion;\n" +
+                    "        // Crystalline micro-facets\n" +
+                    "        vec2 facetUV = p * 45.0 + tilt * 8.0;\n" +
+                    "        float sharpFlakes = abs(fract(facetUV.x + facetUV.y) - 0.5) * \n" +
+                    "                            abs(fract(facetUV.x - facetUV.y * 1.5) - 0.5) * 4.0;\n" +
+                    "        \n" +
+                    "        float flakeGrain = noise(uv * 220.0 + tilt * 4.0) * 0.25;\n" +
 
-                    "        // Low-frequency noise\n" +
-                    "        float warp = noise(vec2(diagonal * 3.0, secondary * 1.7));\n" +
-                    "        float warp2 = noise(vec2(diagonal * 7.0 + 13.2, secondary * 2.5));\n" +
+                    "        // Wave glitter calculation\n" +
+                    "        float shimmer1 = sin((warpedUV.x * 25.0 + warpedUV.y * 35.0) + (tilt.x + tilt.y) * 5.0);\n" +
+                    "        float shimmer2 = cos((warpedUV.x * 45.0 - warpedUV.y * 20.0) - (tilt.x - tilt.y) * 3.5);\n" +
+                    "        float waveGlint = (shimmer1 * shimmer2) * 0.5 + 0.5;\n" +
 
-                    "        float streakCoord = diagonal +\n" +
-                    "                            (warp - 0.5) * 0.075 +\n" +
-                    "                            (warp2 - 0.5) * 0.025;\n" +
+                    "        float finalGlint = pow(waveGlint, 1.8) * (0.4 + sharpFlakes * 0.6) + flakeGrain;\n" +
+                    "        finalGlint = clamp(finalGlint, 0.0, 1.0);\n" +
 
-                    "        // Diffraction lines\n" +
-                    "        float waves = sin(streakCoord * 105.0);\n" +
-                    "        waves = waves * 0.5 + 0.5;\n" +
+                    "        float hue = (warpedUV.x * 0.5 + warpedUV.y * 0.3) \n" +
+                    "                  + (tilt.x + tilt.y) * 1.1 \n" +
+                    "                  + sharpFlakes * 0.08\n" +
+                    "                  + slowTime;\n" +
+                    "        \n" +
+                    "        vec3 foilColor = spectralColor(hue);\n" +
 
-                    "        // Narrow bright lines\n" +
-                    "        float thinLines = pow(waves, 18.0);\n" +
+                    "        // Luminance math for text and shadow shielding\n" +
+                    "        float luminance = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "        \n" +
+                    "        // Tightened protection curve: Completely blocks effect on pure dark values (black ink)\n" +
+                    "        float inkProtection = smoothstep(0.05, 0.30, luminance);\n" +
 
-                    "        // Second layer gives the foil more complexity\n" +
-                    "        float waves2 = sin(streakCoord * 43.0 + warp * 4.0);\n" +
-                    "        waves2 = waves2 * 0.5 + 0.5;\n" +
-                    "        float thinLines2 = pow(waves2, 10.0);\n" +
+                    "        // We generate the raw intensity color layer\n" +
+                    "        vec3 targetFoil = foilColor * finalGlint * 1.4;\n" +
+                    "        \n" +
+                    "        // Overlay Blend: \n" +
+                    "        vec3 blendLayer;\n" +
+                    "        blendLayer.r = col.r < 0.5 ? (2.0 * col.r * targetFoil.r) : (1.0 - 2.0 * (1.0 - col.r) * (1.0 - targetFoil.r));\n" +
+                    "        blendLayer.g = col.g < 0.5 ? (2.0 * col.g * targetFoil.g) : (1.0 - 2.0 * (1.0 - col.g) * (1.0 - targetFoil.g));\n" +
+                    "        blendLayer.b = col.b < 0.5 ? (2.0 * col.b * targetFoil.b) : (1.0 - 2.0 * (1.0 - col.b) * (1.0 - targetFoil.b));\n" +
 
-                    "        // Irregular shards\n" +
-                    "        float shardNoise = noise(vec2(\n" +
-                    "            secondary * 5.0,\n" +
-                    "            streakCoord * 8.0\n" +
-                    "        ));\n" +
+                    "        // Add a micro-specular punch on top to make the sparkles catch light\n" +
+                    "        vec3 metallicSpecular = vec3(pow(finalGlint, 3.0) * 0.35);\n" +
 
-                    "        float shardMask = smoothstep(0.20, 0.80, shardNoise);\n" +
-
-                    "        // Additional long streak variation\n" +
-                    "        float longNoise = noise(vec2(\n" +
-                    "            secondary * 1.8 + 20.0,\n" +
-                    "            streakCoord * 2.2\n" +
-                    "        ));\n" +
-
-                    "        shardMask *= 0.45 + longNoise * 0.85;\n" +
-
-                    "        // Combined foil streak\n" +
-                    "        float foilMask =\n" +
-                    "            thinLines * shardMask +\n" +
-                    "            thinLines2 * shardMask * 0.35;\n" +
-
-                    "        foilMask = clamp(foilMask, 0.0, 1.0);\n" +
-
-                    "        // Rainbow streaks\n" +
-                    "        float spectrum =\n" +
-                    "            streakCoord * 1.35 +\n" +
-                    "            warp * 0.30 +\n" +
-                    "            u_foilTilt.x * 0.8;\n" +
-
-                    "        vec3 rainbow = spectralColor(spectrum);\n" +
-
-                    "        // White highlight\n" +
-                    "        float highlight = pow(foilMask, 1.7);\n" +
-                    "        vec3 whiteSheen = vec3(highlight * 0.75);\n" +
-
-                    "        // Luminance\n" +
-                    "        float luminance = dot(\n" +
-                    "            col.rgb,\n" +
-                    "            vec3(0.299, 0.587, 0.114)\n" +
-                    "        );\n" +
-
-                    "        float imageMask = smoothstep(0.08, 0.55, luminance);\n" +
-
-                    "        // Subtle metallic base\n" +
-                    "        float microMetal = noise(uv * 85.0);\n" +
-                    "        float metal = (microMetal - 0.5) * 0.035;\n" +
-
-                    "        vec3 foil =\n" +
-                    "            rainbow * foilMask * 0.62 +\n" +
-                    "            whiteSheen * 0.42 +\n" +
-                    "            vec3(metal);\n" +
-
-                    "        // Slightly stronger effect in brighter parts\n" +
-                    "        foil *= (0.35 + imageMask * 0.65);\n" +
-
-                    "        col.rgb += foil;\n" +
-
-                    "        // Very subtle reflective contrast\n" +
-                    "        col.rgb *= 1.0 + foilMask * 0.08;\n" +
-
-                    "        // DO NOT use smoothstep on the entire color here.\n" +
+                    "        // Pushes color heavily into the card surface without burning out text\n" +
+                    "        vec3 finalMix = mix(col.rgb, blendLayer, 0.25) + metallicSpecular;\n" +
+                    "        \n" +
+                    "        // Apply the ink mask protection so the text font doesn't shift color\n" +
+                    "        col.rgb = mix(col.rgb, finalMix, inkProtection);\n" +
                     "        col.rgb = clamp(col.rgb, 0.0, 1.0);\n" +
                     "    }\n" +
 
@@ -347,23 +297,15 @@ public class Shaders {
                     "    );\n" +
 
                     "    float alpha = 1.0;\n" +
-
                     "    if (abs_pixel_coord.x > abs_rounded_center.x &&\n" +
                     "        abs_pixel_coord.y > abs_rounded_center.y) {\n" +
-
-                    "        float r = length(\n" +
-                    "            abs_pixel_coord - abs_rounded_center\n" +
-                    "        );\n" +
-
-                    "        alpha = smoothstep(\n" +
-                    "            edge_radius,\n" +
-                    "            edge_radius - 0.5,\n" +
-                    "            r\n" +
-                    "        );\n" +
+                    "        float r = length(abs_pixel_coord - abs_rounded_center);\n" +
+                    "        alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
                     "    }\n" +
 
                     "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
                     "}";
+
 
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
