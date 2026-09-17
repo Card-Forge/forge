@@ -93,6 +93,7 @@ public class GameHUD extends Stage {
     private final Array<TextraButton> abilityButtonMap = new Array<>();
     private final Array<NavArrowActor> hiddenEnemyChevrons = new Array<>();
     private final Vector2 chevronStageCoordinates = new Vector2();
+    private final Vector2 chevronNavigation = new Vector2();
     private final Vector3 playerProjectedCoordinates = new Vector3();
     private String lifepointsTextColor = "";
     private final ScrollPane notificationPane;
@@ -100,6 +101,9 @@ public class GameHUD extends Stage {
     private final Group hudGroup = new Group();
     private final Group menuGroup = new Group();
     private final Group avatarGroup = new Group();
+    private final Vector2 touchDownCoords = new Vector2();
+    private final Vector2 touchDownDirection = new Vector2();
+    private final Vector2 touchDraggedDirection = new Vector2();
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()));
@@ -289,13 +293,12 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Vector2 c = new Vector2();
-        screenToStageCoordinates(c.set(screenX, screenY));
+        screenToStageCoordinates(touchDraggedDirection.set(screenX, screenY));
 
-        float x = (c.x - miniMap.getX()) / miniMap.getWidth();
-        float y = (c.y - miniMap.getY()) / miniMap.getHeight();
+        float x = (touchDraggedDirection.x - miniMap.getX()) / miniMap.getWidth();
+        float y = (touchDraggedDirection.y - miniMap.getY()) / miniMap.getHeight();
         //map bounds
-        if (Controls.actorContainsVector(miniMap, c)) {
+        if (Controls.actorContainsVector(miniMap, touchDraggedDirection)) {
             touchpad.setVisible(false);
             if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
@@ -310,18 +313,16 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector2 c = new Vector2();
-        Vector2 touch = new Vector2();
-        screenToStageCoordinates(touch.set(screenX, screenY));
-        screenToStageCoordinates(c.set(screenX, screenY));
+        screenToStageCoordinates(touchDownCoords.set(screenX, screenY));
+        screenToStageCoordinates(touchDownDirection.set(screenX, screenY));
 
-        float x = (c.x - miniMap.getX()) / miniMap.getWidth();
-        float y = (c.y - miniMap.getY()) / miniMap.getHeight();
-        if (Controls.actorContainsVector(gamehud, c)) {
+        float x = (touchDownDirection.x - miniMap.getX()) / miniMap.getWidth();
+        float y = (touchDownDirection.y - miniMap.getY()) / miniMap.getHeight();
+        if (Controls.actorContainsVector(gamehud, touchDownDirection)) {
             super.touchDown(screenX, screenY, pointer, button);
             return true;
         }
-        if (Controls.actorContainsVector(miniMap, c)) {
+        if (Controls.actorContainsVector(miniMap, touchDownDirection)) {
             if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             } else if (!mapGroup.isVisible()) {
@@ -332,20 +333,20 @@ public class GameHUD extends Stage {
         }
         //auto follow touchpad
         if (GuiBase.isAndroid() && !MapStage.getInstance().isDialogOnlyInput() && !console.isVisible()) {
-            if (!(Controls.actorContainsVector(avatar, touch)) // not inside avatar bounds
-                    && !(Controls.actorContainsVector(miniMap, touch)) // not inside map bounds
-                    && !(Controls.actorContainsVector(gamehud, touch)) //not inside gamehud bounds
-                    && !(Controls.actorContainsVector(menuActor, touch)) //not inside menu button
-                    && !(Controls.actorContainsVector(deckActor, touch)) //not inside deck button
-                    && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
-                    && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
-                    && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
-                    && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
-                    && !(Controls.actorContainsVector(bookmarkActor, touch)) //not inside bookmark button
-                    && !(Controls.actorContainsVector(abilityButtonMap, touch)) //not inside abilityButtonMap
-                    && (Controls.actorContainsVector(ui, touch)) //inside display bounds
+            if (!(Controls.actorContainsVector(avatar, touchDownCoords)) // not inside avatar bounds
+                    && !(Controls.actorContainsVector(miniMap, touchDownCoords)) // not inside map bounds
+                    && !(Controls.actorContainsVector(gamehud, touchDownCoords)) //not inside gamehud bounds
+                    && !(Controls.actorContainsVector(menuActor, touchDownCoords)) //not inside menu button
+                    && !(Controls.actorContainsVector(deckActor, touchDownCoords)) //not inside deck button
+                    && !(Controls.actorContainsVector(openMapActor, touchDownCoords)) //not inside openmap button
+                    && !(Controls.actorContainsVector(logbookActor, touchDownCoords)) //not inside stats button
+                    && !(Controls.actorContainsVector(inventoryActor, touchDownCoords)) //not inside inventory button
+                    && !(Controls.actorContainsVector(exitToWorldMapActor, touchDownCoords)) //not inside exit button
+                    && !(Controls.actorContainsVector(bookmarkActor, touchDownCoords)) //not inside bookmark button
+                    && !(Controls.actorContainsVector(abilityButtonMap, touchDownCoords)) //not inside abilityButtonMap
+                    && (Controls.actorContainsVector(ui, touchDownCoords)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
-                touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
+                touchpad.setBounds(touchDownCoords.x - TOUCHPAD_SCALE / 2, touchDownCoords.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
                 touchpad.setVisible(true);
                 touchpad.setResetOnTouchUp(true);
                 return super.touchDown(screenX, screenY, pointer, button);
@@ -503,21 +504,21 @@ public class GameHUD extends Stage {
         chevronStageCoordinates.set(playerProjectedCoordinates.x, playerProjectedCoordinates.y);
         screenToStageCoordinates(chevronStageCoordinates);
 
-        Vector2 navDirection = new Vector2(enemy.pos()).sub(MapStage.getInstance().player.pos());
-        if (navDirection.isZero(0.01f)) {
-            navDirection.set(1f, 0f);
+        chevronNavigation.set(enemy.pos()).sub(MapStage.getInstance().player.pos());
+        if (chevronNavigation.isZero(0.01f)) {
+            chevronNavigation.set(1f, 0f);
         } else {
-            navDirection.nor();
+            chevronNavigation.nor();
         }
 
-        Vector2 side = new Vector2(-navDirection.y, navDirection.x);
+        Vector2 side = new Vector2(-chevronNavigation.y, chevronNavigation.x);
         int lane = index / 2;
         float spread = (index % 2 == 0 ? 1f : -1f) * lane * 9f;
         float offsetFromPlayer = 18f;
-        float pointerX = chevronStageCoordinates.x + navDirection.x * offsetFromPlayer + side.x * spread;
-        float pointerY = chevronStageCoordinates.y + navDirection.y * offsetFromPlayer + side.y * spread;
+        float pointerX = chevronStageCoordinates.x + chevronNavigation.x * offsetFromPlayer + side.x * spread;
+        float pointerY = chevronStageCoordinates.y + chevronNavigation.y * offsetFromPlayer + side.y * spread;
 
-        chevron.navTargetAngle = navDirection.angleDeg();
+        chevron.navTargetAngle = chevronNavigation.angleDeg();
         chevron.setPosition(pointerX, pointerY);
         chevron.setVisible(true);
     }
@@ -1146,4 +1147,11 @@ public class GameHUD extends Stage {
     public Batch getBatch() {
         return gameStage.getBatch();
     }
+
+    @Override
+    public void dispose() {
+        Forge.safeDispose(miniMapTexture, miniMapToolTipTexture, miniMapToolTipPixmap);
+        super.dispose();
+    }
+
 }
