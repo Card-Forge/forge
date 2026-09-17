@@ -1,0 +1,12 @@
+Name:Nissa, Leyline Tamer
+ManaCost:3 W U B R
+Types:Legendary Creature Elf Wizard
+PT:5/5
+K:Deathtouch
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Landfall —Whenever a land you control enters, draw a card. Then if this is the first time this ability has resolved this turn, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+SVar:X:Count$ResolvedThisTurn
+SVar:BuffedBy:Land
+Oracle:Deathtouch, vigilance\nLandfall — Whenever a land you control enters, draw a card. Then if this is the first time this ability has resolved this turn, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
