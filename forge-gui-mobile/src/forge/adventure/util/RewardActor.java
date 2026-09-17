@@ -78,7 +78,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public TextraButton autoSell;
     public TypingLabel ownedLabel;
     ShaderProgram shaderGrayscale = ShaderUtil.getInstance().getShaderGrayscale();
-    ShaderProgram shaderRoundRect = ShaderUtil.getInstance().getShaderRoundedRect();
+    ShaderProgram shaderFoilRounded = ShaderUtil.getInstance().getShaderFoilRounded();
 
     final int preview_w = 488; //Width and height for generated images.
     final int preview_h = 680;
@@ -108,7 +108,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean shouldDisplayText = false;
     private boolean isDragging = false;
     private boolean isNew = false;
-
     private boolean isAndroidorHasGamepad() {
         return GuiBase.isAndroid() || Forge.hasGamepad();
     }
@@ -1126,14 +1125,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             x = -getWidth() / 2;
         }
         if (Reward.Type.Card.equals(reward.getType())) {
+            boolean isFoil = reward.getCard() != null && reward.getCard().isFoil();
             if (!loaded || image == null) {
                 if (T == null) {
                     T = renderPlaceholder(reward.getCard(), false);
                 }
 
-                drawCard(batch, T, x, width);
+                drawCard(batch, T, x, width, false);
             } else {
-                drawCard(batch, image, x, width);
+                drawCard(batch, image, x, width, isFoil);
             }
         }
         else if (image != null) {
@@ -1141,44 +1141,33 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
     }
 
-    private void drawCard(Batch batch, Texture image, float x, float width) {
+    private void drawCard(Batch batch, Texture image, float x, float width, boolean isFoil) {
         if (image != null) {
-            if (image.toString().contains(".fullborder.") && Forge.enableUIMask.equals("Full")) {
-                batch.end();
-                shaderRoundRect.bind();
-                shaderRoundRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-                shaderRoundRect.setUniformf("edge_radius", (float) (image.getHeight() / image.getWidth()) * 20);
-                shaderRoundRect.setUniformf("u_gray", sold ? 1f : 0f);
-                batch.setShader(shaderRoundRect);
-                batch.begin();
-                //draw rounded
+            Color batchColor = batch.getColor();
+            TextureRegion region = ImageCache.getInstance().croppedBorderImage(image);
+            float radius = Forge.enableUIMask.equals("Full") ? (float) (region.getRegionHeight() / region.getRegionWidth()) * 20 : 0f;
+            batch.end();
+            if (hover | hasKeyboardFocus())
+                batch.setColor(0.5f, 0.5f, 0.5f, 1);
+            shaderFoilRounded.bind();
+            shaderFoilRounded.setUniformf("u_resolution", region.getRegionWidth(), region.getRegionHeight());
+            shaderFoilRounded.setUniformf("edge_radius", radius);
+            shaderFoilRounded.setUniformf("u_gray", sold ? 1f : 0f);
+            shaderFoilRounded.setUniformf("u_isHolo", isFoil ? 1.0f : 0.0f);
+            shaderFoilRounded.setUniformf("u_time", 0);
+            shaderFoilRounded.setUniformf("u_foilTilt", 0f, 0f);
+            shaderFoilRounded.setUniformf("u_cardPosition", 8, 0);
+            batch.setShader(shaderFoilRounded);
+            batch.begin();
+            if (Forge.enableUIMask.equals("Crop"))
+                batch.draw(region, x, -getHeight() / 2, width, getHeight());
+            else
                 batch.draw(image, x, -getHeight() / 2, width, getHeight());
-                //reset
-                batch.end();
-                batch.setShader(null);
-                batch.begin();
-            } else {
-                if (!sold)
-                    batch.draw(ImageCache.getInstance().croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
-                else {
-                    batch.end();
-                    shaderGrayscale.bind();
-                    shaderGrayscale.setUniformf("u_grayness", 1f);
-                    shaderGrayscale.setUniformf("u_bias", 0.7f);
-                    batch.setShader(shaderGrayscale);
-                    batch.begin();
-                    //draw gray
-                    batch.draw(ImageCache.getInstance().croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
-                    //reset
-                    batch.end();
-                    batch.setShader(null);
-                    batch.begin();
-                }
-            }
-            // this is needed here for cards hovered
-            if (hover | hasKeyboardFocus()) {
-                batch.draw(Forge.getAssets().getGrayTexture(), x, -getHeight() / 2, width, getHeight());
-            }
+            //reset
+            batch.end();
+            batch.setColor(batchColor);
+            batch.setShader(null);
+            batch.begin();
             if (hasbackface) {
                 TextureRegion icon = FSkinImage.ADV_FLIPICON.getTextureRegion();
                 float scale = getHeight() / 4f;
@@ -1337,34 +1326,26 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         float y = tooltip.getActor().getStoredImage().getImageY();
                         float w = tooltip.getActor().getStoredImage().getPrefWidth();
                         float h = tooltip.getActor().getStoredImage().getPrefHeight();
-                        if (t.toString().contains(".fullborder.") && Forge.enableUIMask.equals("Full")) {
-                            batch.end();
-                            shaderRoundRect.bind();
-                            shaderRoundRect.setUniformf("u_resolution", t.getWidth(), t.getHeight());
-                            shaderRoundRect.setUniformf("edge_radius", ((float) (t.getHeight() / t.getWidth())) * ImageCache.getInstance().getRadius(t));
-                            shaderRoundRect.setUniformf("u_gray", sold ? 0.8f : 0f);
-                            batch.setShader(shaderRoundRect);
-                            batch.begin();
-                            //draw rounded
+                        float radius = Forge.enableUIMask.equals("Full") && !shouldDisplayText ? (float) (t.getHeight() / t.getWidth()) * 20 : 0f;
+                        batch.end();
+                        shaderFoilRounded.bind();
+                        shaderFoilRounded.setUniformf("u_resolution", t.getWidth(), t.getHeight());
+                        shaderFoilRounded.setUniformf("edge_radius", radius);
+                        shaderFoilRounded.setUniformf("u_gray", sold ? 1f : 0f);
+                        shaderFoilRounded.setUniformf("u_isHolo", reward.getCard() != null && reward.getCard().isFoil() ? 1.0f : 0.0f);
+                        shaderFoilRounded.setUniformf("u_time", 0);
+                        shaderFoilRounded.setUniformf("u_foilTilt", 0f, 0f);
+                        shaderFoilRounded.setUniformf("u_cardPosition", 8, 0);
+                        batch.setShader(shaderFoilRounded);
+                        batch.begin();
+                        if (Forge.enableUIMask.equals("Crop"))
+                            batch.draw(ImageCache.getInstance().croppedBorderImage(t), x, y, w, h);
+                        else
                             batch.draw(t, x, y, w, h);
-                            //reset
-                            batch.end();
-                            batch.setShader(null);
-                            batch.begin();
-                        } else {
-                            batch.end();
-                            shaderGrayscale.bind();
-                            shaderGrayscale.setUniformf("u_grayness", sold ? 1f : 0f);
-                            shaderGrayscale.setUniformf("u_bias", sold ? 0.8f : 1f);
-                            batch.setShader(shaderGrayscale);
-                            batch.begin();
-                            //draw gray
-                            batch.draw(tr, x, y, w, h);
-                            //reset
-                            batch.end();
-                            batch.setShader(null);
-                            batch.begin();
-                        }
+                        //reset
+                        batch.end();
+                        batch.setShader(null);
+                        batch.begin();
                         return;
                     }
                 }

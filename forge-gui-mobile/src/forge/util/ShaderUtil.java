@@ -7,7 +7,7 @@ import forge.Forge;
 public class ShaderUtil implements Disposable {
     public static ShaderUtil instance;
     private ShaderProgram shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
-        shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderRoundedRect, shaderRoundedRect2,
+        shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderFoilRounded, shaderRoundedRect2,
         shaderNoiseFade, shaderPortal, shaderPix;
     private ShaderUtil() {
         ShaderProgram.pedantic = false;
@@ -27,10 +27,10 @@ public class ShaderUtil implements Disposable {
         return shaderGrayscale;
     }
 
-    public ShaderProgram getShaderRoundedRect() {
-        if (shaderRoundedRect == null)
-            shaderRoundedRect = new ShaderProgram(Shaders.vertCardShader, Shaders.fragCardShader);
-        return shaderRoundedRect;
+    public ShaderProgram getShaderFoilRounded() {
+        if (shaderFoilRounded == null)
+            shaderFoilRounded = new ShaderProgram(Shaders.vertCardShader, Shaders.fragCardShader);
+        return shaderFoilRounded;
     }
 
     public ShaderProgram getShaderWarp() {
@@ -107,7 +107,7 @@ public class ShaderUtil implements Disposable {
     @Override
     public void dispose() {
         Forge.safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
-            shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderRoundedRect,
+            shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderFoilRounded,
             shaderRoundedRect2, shaderNoiseFade, shaderPortal, shaderPix);
     }
 }
