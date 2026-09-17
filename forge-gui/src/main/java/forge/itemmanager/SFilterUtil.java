@@ -17,6 +17,7 @@ import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.StarRating;
 import forge.gui.interfaces.IButton;
+import forge.item.AdventurePaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
@@ -428,6 +429,16 @@ public class SFilterUtil {
                 result = result || !card.isFoil();
             }
             return result;
+        };
+    }
+
+    public static Predicate<AdventurePaperCard> buildLockedFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
+        return card -> {
+            if (buttonMap.get(StatTypes.LOCKED).isSelected()) {
+                return card.isLocked();
+            } else {
+                return !card.isLocked();
+            }
         };
     }
 

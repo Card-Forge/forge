@@ -1,5 +1,6 @@
 package forge.adventure.world;
 
+import forge.adventure.archipelago.*;
 import forge.Forge;
 import com.badlogic.gdx.Gdx;
 import forge.OverlayText;
@@ -81,6 +82,7 @@ public class WorldSave {
                 try {
                     currentSave.world.load(mainData.readSubData("world"));
                     currentSave.pointOfInterestChanges.load(mainData.readSubData("pointOfInterestChanges"));
+                    ArchipelagoData.getInstance().load(mainData.readSubData("archipelago"));
                     WorldStage.getInstance().load(mainData.readSubData("worldStage"));
 
                 } catch (Exception e) {
@@ -134,6 +136,17 @@ public class WorldSave {
     }
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
+        return generateNewWorld(name, male, race, avatarIndex, startingColorIdentity, diff, mode, customDeckIndex, starterEdition, seed, ArchipelagoMode.disabled);
+    }
+
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed, ArchipelagoMode archipelagoMode) {
+        // Initial archipelago setup
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer.getInstance().setupFreshSaveFile();
+        } else {
+            ArchipelagoData.getInstance().setupFreshSaveFile(archipelagoMode);
+        }
+
         Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
@@ -141,7 +154,7 @@ public class WorldSave {
         boolean custom = mode == AdventureModes.Custom;
 
         Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
-        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, mode);
+        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, mode, archipelagoMode);
 
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
@@ -179,6 +192,10 @@ public class WorldSave {
                 SaveFileData player = currentSave.player.save();
                 SaveFileData world = currentSave.world.save();
                 SaveFileData worldStage = WorldStage.getInstance().save();
+                SaveFileData archipelago = null;
+                if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+                    archipelago = ArchipelagoData.getInstance().save();
+                }
                 SaveFileData poiChanges = currentSave.pointOfInterestChanges.save();
 
                 String message = getExceptionMessage(player, world, worldStage, poiChanges);
@@ -195,6 +212,9 @@ public class WorldSave {
                 mainData.store("world", world);
                 mainData.store("worldStage", worldStage);
                 mainData.store("pointOfInterestChanges", poiChanges);
+                if (archipelago != null) {
+                    mainData.store("archipelago", archipelago);
+                }
 
                 if (mainData.readString("IOException") != null) {
                     oos.close();
