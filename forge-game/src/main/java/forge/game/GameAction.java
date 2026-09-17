@@ -1442,7 +1442,7 @@ public class GameAction {
                 }
             }
             CardCollection noRegCreats = new CardCollection();
-            CardCollection desCreats = null;
+            CardCollection desCreats = new CardCollection();
             CardCollection unAttachList = new CardCollection();
             CardCollection sacrificeList = new CardCollection();
             PlayerCollection spaceSculptors = new PlayerCollection();
@@ -1462,9 +1462,6 @@ public class GameAction {
                         // ignore the state-based action that checks for lethal damage
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
-                            if (desCreats == null) {
-                                desCreats = new CardCollection();
-                            }
                             desCreats.add(c);
                             c.setHasBeenDealtDeathtouchDamage(false);
                             checkAgainCard = true;
@@ -1473,9 +1470,6 @@ public class GameAction {
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
                     else if (c.hasBeenDealtDeathtouchDamage() || (c.getDamage() > 0 && c.getLethal() <= c.getDamage())) {
-                        if (desCreats == null) {
-                            desCreats = new CardCollection();
-                        }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
                         checkAgainCard = true;
@@ -1573,17 +1567,12 @@ public class GameAction {
                 sacrificeDestroy(c, null, mapParams);
             }
 
-            if (desCreats != null) {
-                if (desCreats.size() > 1 && !orderedDesCreats) {
-                    desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
-                    if (!desCreats.isEmpty()) {
-                        desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
-                    }
-                    orderedDesCreats = true;
-                }
-                for (Card c : desCreats) {
-                    destroy(c, null, true, mapParams);
-                }
+            if (!desCreats.isEmpty() && !orderedDesCreats) {
+                desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
+                orderedDesCreats = true;
+            }
+            for (Card c : desCreats) {
+                destroy(c, null, true, mapParams);
             }
 
             if (sacrificeList.size() > 1 && !orderedSacrificeList) {
