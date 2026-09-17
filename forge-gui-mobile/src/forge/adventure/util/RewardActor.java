@@ -77,15 +77,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     Reward reward;
     public TextraButton autoSell;
     public TypingLabel ownedLabel;
-    ShaderProgram shaderGrayscale = ShaderUtil.getInstance().getShaderGrayscale();
-    ShaderProgram shaderFoilRounded = ShaderUtil.getInstance().getShaderFoilRounded();
 
     final int preview_w = 488; //Width and height for generated images.
     final int preview_h = 680;
 
     TextureRegion backTexture;
     Texture image, T, Tnotext, Talt, Taltnotext;
-    Graphics graphics;
     Texture generatedTooltip = null; //Storage for a generated tooltip. To dispose of on exit.
     boolean needsToBeDisposed;
     float flipProcess = 0;
@@ -101,7 +98,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     int artIndex = 1;
     String imageKey = "";
     public int renderedCount = 0; //Counter for cards that require rendering a preview.
-    static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     RewardImage toolTipImage;
     RewardImage alternateToolTipImage;
     String description = "";
@@ -364,7 +360,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         setCardImage(T);
                         loaded = false;
                         if (!ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)))
-                            fetcher.fetchImage(reward.getCard().getImageKey(false), this);
+                            GuiBase.getInterface().getImageFetcher().fetchImage(reward.getCard().getImageKey(false), this);
                     }
                 }
 
@@ -377,7 +373,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     if (ImageCache.getInstance().imageKeyFileExists(altKey)) {
                         updateBackFace(altKey);
                     } else {
-                        fetcher.fetchImage(altKey, () -> {
+                        GuiBase.getInterface().getImageFetcher().fetchImage(altKey, () -> {
                             System.out.println("Backface fetched: " + altKey);
                             updateBackFace(altKey);
                         });
@@ -455,7 +451,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         onImageFetched();
                     }
                     else {
-                        fetcher.fetchImage(imageKey, this);
+                        GuiBase.getInterface().getImageFetcher().fetchImage(imageKey, this);
                         item = Config.instance().getItemSprite("Deck");
                         setItemTooltips(item, backSprite, isBooster);
                     }
@@ -784,25 +780,26 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private Texture renderPlaceholder(PaperCard card, boolean alternate, boolean displayArt) { //Use CardImageRenderer to output a Texture.
-        Graphics assetGraphics = Forge.getAssets().getAssetGraphics();
         if (renderedCount < 1) {
             renderedCount++;
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
-            assetGraphics.begin(preview_w, preview_h);
-            CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
-            assetGraphics.end();
+            Forge.getAssets().getAssetGraphics().begin(preview_w, preview_h);
+            CardImageRenderer.drawCardImage(Forge.getAssets().getAssetGraphics(), CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
+            Forge.getAssets().getAssetGraphics().end();
         }
         Matrix4 m = new Matrix4();
         FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
         frameBuffer.begin();
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
 
-        assetGraphics.begin(preview_w, preview_h);
-        assetGraphics.setProjectionMatrix(m);
-        assetGraphics.startClip();
-        CardImageRenderer.drawCardImage(assetGraphics, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
-        assetGraphics.end();
-        assetGraphics.endClip();
+        Forge.getAssets().getAssetGraphics().begin(preview_w, preview_h);
+        Forge.getAssets().getAssetGraphics().setProjectionMatrix(m);
+        Forge.getAssets().getAssetGraphics().startClip();
+        CardImageRenderer.drawCardImage(Forge.getAssets().getAssetGraphics(), CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
+        Forge.getAssets().getAssetGraphics().end();
+        Forge.getAssets().getAssetGraphics().endClip();
         frameBuffer.end();
         // Rendering ends here. Grab the rendered framebuffer and bind to texture (faster method than initializing new texture)
         Texture result = frameBuffer.getColorBufferTexture();
@@ -817,26 +814,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         int pw = 192;
         int ph = 256;
         FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(pw, ph, false);
-        SpriteBatch batch = new SpriteBatch(Forge.LOW_SPRITES_CAP);
-
-        frameBuffer.begin();
-
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         Matrix4 matrix = new Matrix4();
         matrix.setToOrtho2D(0, ph, pw, -ph);
-        batch.setProjectionMatrix(matrix);
-
-        batch.begin();
-        batch.draw(sprite, 0, 0, pw, ph);
+        frameBuffer.begin();
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Forge.getAssets().getAssetGraphics().begin(pw, ph);
+        Forge.getAssets().getAssetGraphics().setProjectionMatrix(matrix);
+        Forge.getAssets().getAssetGraphics().startClip();
+        Forge.getAssets().getAssetGraphics().getBatch().draw(sprite, 0, 0, pw, ph);
         if (item != null) {
             if (!isBooster) {
                 float iw = item.getWidth() * 4;
                 float ih = item.getHeight() * 4;
-                batch.draw(item, pw / 2f - iw / 2f, (ph / 2f - ih / 2f), iw, ih);
+                Forge.getAssets().getAssetGraphics().getBatch().draw(item, pw / 2f - iw / 2f, (ph / 2f - ih / 2f), iw, ih);
             } else
-                batch.draw(item, pw / 4f, ph / 4f, pw / 2f, ph / 2f);
+                Forge.getAssets().getAssetGraphics().getBatch().draw(item, pw / 4f, ph / 4f, pw / 2f, ph / 2f);
         }
         if (itemText != null) {
             itemText.setWrap(true);
@@ -845,13 +838,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             itemText.setHeight(ph);
             itemText.setX(itemText.getX() + (modX * 4));
             itemText.setY(itemText.getY() + (modY * 8));
-            itemText.draw(batch, 1);
+            itemText.draw(Forge.getAssets().getAssetGraphics().getBatch(), 1);
         }
-        batch.end();
+        Forge.getAssets().getAssetGraphics().end();
+        Forge.getAssets().getAssetGraphics().endClip();
         frameBuffer.end();
         image = frameBuffer.getColorBufferTexture();
         image.bind();
-        batch.dispose();
     }
 
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
@@ -863,18 +856,20 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             boolean itemExists = item != null;
             FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
             frameBuffer.begin();
+            Gdx.gl.glClearColor(0, 0, 0, 0);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             try {
                 m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
-                getGraphics().begin(preview_w, preview_h);
-                getGraphics().setProjectionMatrix(m);
-                getGraphics().startClip();
-                getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
+                Forge.getAssets().getAssetGraphics().begin(preview_w, preview_h);
+                Forge.getAssets().getAssetGraphics().setProjectionMatrix(m);
+                Forge.getAssets().getAssetGraphics().startClip();
+                Forge.getAssets().getAssetGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
                 if (!isBooster)
-                    getGraphics().drawImage(icon, preview_w / 2f - 75, 160, 160, 160);
+                    Forge.getAssets().getAssetGraphics().drawImage(icon, preview_w / 2f - 75, 160, 160, 160);
                 else //if(loaded)
-                    getGraphics().drawImage(icon, 74, 100, 345, 480);
+                    Forge.getAssets().getAssetGraphics().drawImage(icon, 74, 100, 345, 480);
                /* else
-                    getGraphics().drawImage(icon, 0, 0, preview_w, preview_h);*/
+                    Forge.getAssets().getAssetGraphics().drawImage(icon, 0, 0, preview_w, preview_h);*/
                 float div = (float) preview_h / preview_w;
                 BitmapFont font = Controls.getBitmapFont("default", 4 / div);
                 if(reward.getType().equals(Reward.Type.CardPack)) {
@@ -885,7 +880,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 else
                     layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
-                getGraphics().drawText(font, layout, 32, preview_h - 70);
+                Forge.getAssets().getAssetGraphics().drawText(font, layout, 32, preview_h - 70);
                 align = itemExists ? Align.topLeft : Align.top;
                 if (itemExists) {
                     description = item.getDescription();
@@ -897,15 +892,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 if (itemExists && description.isEmpty() && item.questItem)
                     description = "Quest Item";
-                getGraphics().end();
-                getGraphics().endClip();
+                Forge.getAssets().getAssetGraphics().end();
+                Forge.getAssets().getAssetGraphics().endClip();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 frameBuffer.end();
                 generatedTooltip = frameBuffer.getColorBufferTexture();
                 generatedTooltip.bind();
-                getGraphics().dispose();
                 //reset bitmapfont to default
                 Controls.getBitmapFont("default");
             }
@@ -1144,23 +1138,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private void drawCard(Batch batch, Texture image, float x, float width, boolean isFoil) {
         if (image != null) {
             Color batchColor = batch.getColor();
-            TextureRegion region = ImageCache.getInstance().croppedBorderImage(image);
-            float radius = Forge.enableUIMask.equals("Full") ? (float) (region.getRegionHeight() / region.getRegionWidth()) * 20 : 0f;
+            float radius = Forge.enableUIMask.equals("Full") ? (float) (image.getHeight() / image.getWidth()) * 20 : 0f;
             batch.end();
             if (hover | hasKeyboardFocus())
                 batch.setColor(0.5f, 0.5f, 0.5f, 1);
-            shaderFoilRounded.bind();
-            shaderFoilRounded.setUniformf("u_resolution", region.getRegionWidth(), region.getRegionHeight());
-            shaderFoilRounded.setUniformf("edge_radius", radius);
-            shaderFoilRounded.setUniformf("u_gray", sold ? 1f : 0f);
-            shaderFoilRounded.setUniformf("u_isHolo", isFoil ? 1.0f : 0.0f);
-            shaderFoilRounded.setUniformf("u_time", 0);
-            shaderFoilRounded.setUniformf("u_foilTilt", 0f, 0f);
-            shaderFoilRounded.setUniformf("u_cardPosition", 8, 0);
-            batch.setShader(shaderFoilRounded);
+            ShaderUtil.getInstance().getShaderFoilRounded().bind();
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", radius);
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", sold ? 1f : 0f);
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", isFoil ? 1.0f : 0.0f);
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 0f, 0f);
+            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", 8, 0);
+            batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
             batch.begin();
             if (Forge.enableUIMask.equals("Crop"))
-                batch.draw(region, x, -getHeight() / 2, width, getHeight());
+                batch.draw(ImageCache.getInstance().croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
             else
                 batch.draw(image, x, -getHeight() / 2, width, getHeight());
             //reset
@@ -1169,17 +1162,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             batch.setShader(null);
             batch.begin();
             if (hasbackface) {
-                TextureRegion icon = FSkinImage.ADV_FLIPICON.getTextureRegion();
                 float scale = getHeight() / 4f;
-                batch.draw(icon, getOriginX() - scale / 2f, getOriginY() - scale / 2f, scale, scale);
+                batch.draw(FSkinImage.ADV_FLIPICON.getTextureRegion(), getOriginX() - scale / 2f, getOriginY() - scale / 2f, scale, scale);
             }
         }
-    }
-
-    private Graphics getGraphics() {
-        if (graphics == null)
-            graphics = new Graphics(Forge.LOW_SPRITES_CAP);
-        return graphics;
     }
 
     private void applyProjectionMatrix(Batch batch) {
@@ -1328,15 +1314,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         float h = tooltip.getActor().getStoredImage().getPrefHeight();
                         float radius = Forge.enableUIMask.equals("Full") && !shouldDisplayText ? (float) (t.getHeight() / t.getWidth()) * 20 : 0f;
                         batch.end();
-                        shaderFoilRounded.bind();
-                        shaderFoilRounded.setUniformf("u_resolution", t.getWidth(), t.getHeight());
-                        shaderFoilRounded.setUniformf("edge_radius", radius);
-                        shaderFoilRounded.setUniformf("u_gray", sold ? 1f : 0f);
-                        shaderFoilRounded.setUniformf("u_isHolo", reward.getCard() != null && reward.getCard().isFoil() ? 1.0f : 0.0f);
-                        shaderFoilRounded.setUniformf("u_time", 0);
-                        shaderFoilRounded.setUniformf("u_foilTilt", 0f, 0f);
-                        shaderFoilRounded.setUniformf("u_cardPosition", 8, 0);
-                        batch.setShader(shaderFoilRounded);
+                        ShaderUtil.getInstance().getShaderFoilRounded().bind();
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", t.getWidth(), t.getHeight());
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", radius);
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", sold ? 1f : 0f);
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", reward.getCard() != null && reward.getCard().isFoil() ? 1.0f : 0.0f);
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 0f, 0f);
+                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", 8, 0);
+                        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
                         batch.begin();
                         if (Forge.enableUIMask.equals("Crop"))
                             batch.draw(ImageCache.getInstance().croppedBorderImage(t), x, y, w, h);
