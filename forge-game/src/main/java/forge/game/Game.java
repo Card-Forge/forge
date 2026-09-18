@@ -626,7 +626,14 @@ public class Game {
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
         CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
-            cards.addAll(getCardsIn(z));
+            if (z == ZoneType.Stack) {
+                cards.addAll(getStackZone().getCards());
+                continue;
+            }
+            // adding each player's zone to the result directly avoids building a collection per zone
+            for (final Player p : getPlayers()) {
+                cards.addAll(p.getCardsIn(z));
+            }
         }
         return cards;
     }
