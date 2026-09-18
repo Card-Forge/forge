@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Dragon Construct
 PT:5/4
 K:Trample
 R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ NICKNAME doesn't untap during your untap step.
-T:Mode$ SpellCast | ValidCard$ Artifact,Creature | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact or creature spell, untap Traxos.
+T:Mode$ SpellCast | ValidCard$ Artifact,Creature | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact or creature spell, untap NICKNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Card.Historic
 Oracle:Trample\nTraxos doesn't untap during your untap step.\nWhenever you cast an artifact or creature spell, untap Traxos.
