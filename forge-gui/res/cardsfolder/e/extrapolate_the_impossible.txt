@@ -1,0 +1,8 @@
+Name:Extrapolate the Impossible
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Sideboard | ChangeType$ Card.YouOwn | ChangeTypeDesc$ cards you own with different names | ChangeNum$ 2 | Exactly$ True | DifferentNames$ True | Hidden$ True | Reveal$ True | RememberChanged$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ You may reveal exactly two cards you own with different names from outside the game. An opponent chooses one of them. You put that card into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Chooser$ Opponent | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | Mandatory$ True | Hidden$ True | SelectPrompt$ Select a card to put into that player's hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+Oracle:You may reveal exactly two cards you own with different names from outside the game. An opponent chooses one of them. You put that card into your hand.
