@@ -71,7 +71,7 @@ public class CardRenderer {
 
     /** Pref is normalized to 6 hex chars on the write side; this just parses,
      *  falling back to the FPref default if the stored value is malformed. */
-    private static Color parseActionableHighlightColor() {
+    public static Color parseActionableHighlightColor() {
         String s = FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
         try {
             if (s != null && s.length() == 6) return rgbFromHex(s);

@@ -104,10 +104,10 @@ public class GuiChoose {
         reveal(message, items);
     }
     public static <T> void reveal(final String message, final T[] items) {
-        getChoices(message, -1, -1, items, null);
+        getChoices(message, -1, -1, items, result -> { });
     }
     public static <T> void reveal(final String message, final Collection<T> items) {
-        getChoices(message, -1, -1, items, null);
+        getChoices(message, -1, -1, items, result -> { });
     }
 
     // Get Integer in range
