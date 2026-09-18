@@ -6,6 +6,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
@@ -69,6 +70,8 @@ public class RewardScene extends UIScene {
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
     ItemPool<PaperCard> collectionPool = null;
     private int remainingSelections = 0;
+    public Image marketBackgroundImg = null;
+    private Actor cachedCardsContainerActor = null;
 
     private RewardScene() {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
@@ -77,6 +80,9 @@ public class RewardScene extends UIScene {
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
         headerLabel = ui.findActor("shopName");
         headerLabelOrigPos = new Vector2(headerLabel.getX(), headerLabel.getY());
+        if (ui.findActor("market_background") instanceof Image image)
+            this.marketBackgroundImg = image;
+        this.cachedCardsContainerActor = ui.findActor("cards");
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("detail", this::toggleToolTip);
         ui.onButtonPress("restock", this::restockShop);
@@ -382,7 +388,7 @@ public class RewardScene extends UIScene {
         addToSelectable(doneButton);
         generated.clear();
 
-        Actor card = ui.findActor("cards");
+        Actor card = this.cachedCardsContainerActor;
         //reset pos
         headerLabel.setPosition(headerLabelOrigPos.x, headerLabelOrigPos.y);
         headerLabel.addListener(new ClickListener() {
@@ -409,15 +415,17 @@ public class RewardScene extends UIScene {
             } else {
                 headerLabel.setVisible(false);
             }
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(true);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(true);
+            }
         } else {
             headerLabel.setVisible(false);
             headerLabel.setText("");
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(false);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(false);
+            }
         }
 
         float targetWidth = card.getWidth();
