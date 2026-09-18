@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Token | TokenScript$ cadet | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPutCounterAll | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet, then put a +1/+1 counter on each other Wizard token you control.
 SVar:DBPutCountersAll:DB$ PutCounterAll | ValidCards$ Wizard.!IsRemembered+token+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ At the beginning of each upkeep, if an opponent was dealt noncombat damage last turn, return this card from your graveyard to your hand.
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ At the beginning of each upkeep, if an opponent was dealt noncombat damage last turn, return this card from your graveyard to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:X:PlayerCountOpponents$HasPropertywasDealtNonCombatDamageLastTurn
 DeckHas:Ability$Token
