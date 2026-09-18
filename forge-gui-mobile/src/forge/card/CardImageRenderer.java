@@ -886,74 +886,45 @@ public class CardImageRenderer {
             }
             if (canshow && displayFlipped) {
                 if (Forge.enableUIMask.equals("Full")) {
-                    if (ImageCache.getInstance().isFullBorder(image))
-                        g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180);
-                    else {
-                        g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180);
-                        g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x + radius / 2 - minusxy, new_y + radius / 2 - minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2 - minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2 - minusxy) + (new_h * croppedArea) / 2, 180);
-                        if (CardRendererUtils.drawFoil(card))
-                            g.drawFoil(new_x, new_y, new_w, new_h, modR, false);
-                    }
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 1f, CardRendererUtils.drawFoil(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180);
+                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.drawFoil(card));
                 } else {
-                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180);
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.drawFoil(card));
                 }
             } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, altState)) {
                 if (Forge.enableUIMask.equals("Full")) {
-                    if (ImageCache.getInstance().isFullBorder(image))
-                        g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-                    else {
-                        g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-                        g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x + radius / 2 - minusxy, new_y + radius / 2 - minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2 - minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2 - minusxy) + (new_h * croppedArea) / 2, -90);
-                        if (CardRendererUtils.drawFoil(card))
-                            g.drawFoil(new_x, new_y, new_w, new_h, modR, true);
-                    }
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 1f, CardRendererUtils.drawFoil(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.drawFoil(card));
                 } else
-                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.drawFoil(card));
             } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState)) {
                 boolean isAftermath = CardRendererUtils.hasAftermath(card);
                 if (Forge.enableUIMask.equals("Full")) {
-                    if (ImageCache.getInstance().isFullBorder(image))
-                        g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.drawFoil(card));
-                    else {
-                        g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getInstance().getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-                        g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x + radius / 2 - minusxy, new_y + radius / 2 - minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2 - minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2 - minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
-                    }
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.drawFoil(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
                 } else
-                    g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
             } else {
                 if (card.isFaceDown() && ZoneType.Exile.equals(card.getZone())) {
                     if (card.isForeTold() || altState) {
                         if (CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState) && isCurrentCard) {
                             boolean isAftermath = CardRendererUtils.hasAftermath(card);
                             if (Forge.enableUIMask.equals("Full")) {
-                                if (ImageCache.getInstance().isFullBorder(image))
-                                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-                                else {
-                                    g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getInstance().getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-                                    g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x + radius / 2 - minusxy, new_y + radius / 2 - minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2 - minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2 - minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
-                                }
+                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.drawFoil(card));
                             } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                                g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
                             } else
-                                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
                         } else {
                             if (Forge.enableUIMask.equals("Full")) {
-                                if (ImageCache.getInstance().isFullBorder(image))
-                                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
-                                else {
-                                    g.drawImage(ImageCache.getInstance().getBorderImage(image.toString()), ImageCache.getInstance().borderColor(image), x, y, w, h);
-                                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x + radius / 2.4f - minusxy, y + radius / 2 - minusxy, w * croppedArea, h * croppedArea);
-                                }
+                                g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
                             } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h);
+                                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.drawFoil(card));
                             } else {
-                                g.drawImage(image, x, y, w, h);
+                                g.drawImage(image, x, y, w, h, CardRendererUtils.drawFoil(card));
                             }
                         }
                     } else {
@@ -961,24 +932,17 @@ public class CardImageRenderer {
                         g.drawImage(sleeves, x, y, w, h);
                     }
                 } else if (Forge.enableUIMask.equals("Full") && canshow) {
-                    if (ImageCache.getInstance().isFullBorder(image))
-                        g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
-                    else {
-                        g.drawImage(ImageCache.getInstance().getBorderImage(image.toString()), ImageCache.getInstance().borderColor(image), x, y, w, h);
-                        g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x + radius / 2.4f - minusxy, y + radius / 2 - minusxy, w * croppedArea, h * croppedArea);
-                    }
+                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
                 } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h);
+                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.drawFoil(card));
                 } else {
                     if (canshow)
-                        g.drawImage(image, x, y, w, h);
+                        g.drawImage(image, x, y, w, h, CardRendererUtils.drawFoil(card));
                     else // sleeve
                         g.drawImage(sleeves, x, y, w, h);
                 }
             }
         }
-        if (canshow && !Forge.enableUIMask.equals("Full") && CardRendererUtils.drawFoil(card))
-            g.drawFoil(x, y, w, h, 0f, CardRendererUtils.needsRotation(card, altState));
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
