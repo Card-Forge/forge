@@ -3036,7 +3036,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // CantBlockBy static abilities
-        if (game != null && isCreature() && isInPlay()) {
+        // skipped on a snapshot copy: this only appends reminder text, and the scan below walks the whole board
+        if (game != null && isCreature() && isInPlay() && !isLKI()) {
             for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
                 if (equals(ca)) {
                     continue;
