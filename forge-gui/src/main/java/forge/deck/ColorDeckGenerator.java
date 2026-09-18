@@ -1,6 +1,5 @@
 package forge.deck;
 
-import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
+public class ColorDeckGenerator extends GeneratedDeckProxy implements Comparable<ColorDeckGenerator> {
     public static List<DeckProxy> getColorDecks(final IItemManager<DeckProxy> lstDecks0, final Predicate<PaperCard> formatFilter0, final boolean isAi0) {
         final String[] colors = new String[] { "Random 1", "Random 2", "Random 3",
                 "White", "Blue", "Black", "Red", "Green" };
@@ -19,33 +18,17 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
         return decks;
     }
 
-    private final String name;
     private final int index;
     private final IItemManager<DeckProxy> lstDecks;
     private final boolean isAi;
     private final Predicate<PaperCard> formatFilter;
 
     private ColorDeckGenerator(final String name0, final int index0, final IItemManager<DeckProxy> lstDecks0, final Predicate<PaperCard> formatFilter0, final boolean isAi0) {
-        super();
-        name = name0;
+        super(name0, 60);
         index = index0;
         lstDecks = lstDecks0;
         isAi = isAi0;
         formatFilter = formatFilter0;
-    }
-
-    public CardEdition getEdition() {
-        return CardEdition.UNKNOWN;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
     @Override
@@ -65,8 +48,4 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
         return null;
     }
 
-    @Override
-    public boolean isGeneratedDeck() {
-        return true;
-    }
 }

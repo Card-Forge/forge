@@ -25,6 +25,11 @@ public class NetDeckCategory extends NetDeckStorageBase {
         return selectAndLoad(categories, name, forceDownload, "Select a Net Deck category");
     }
 
+    public static Iterable<NetDeckCategory> getAvailableCategories(final GameType gameType) {
+        final Map<String, NetDeckCategory> categories = getCategories(gameType);
+        return categories == null ? null : categories.values();
+    }
+
     private static Map<String, NetDeckCategory> getCategories(GameType gameType) {
         Map<String, NetDeckCategory> categories;
         switch (gameType) {

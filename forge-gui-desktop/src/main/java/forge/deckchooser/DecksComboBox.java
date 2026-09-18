@@ -25,12 +25,17 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
     }
 
     public void refresh(final DeckType deckType, final boolean isForCommander) {
-        if(isForCommander){
-            setModel(new DefaultComboBoxModel<>(DeckType.CommanderOptions));
-        }else {
-            setModel(new DefaultComboBoxModel<>(DeckType.ConstructedOptions));
+        suppressActionListeners();
+        try {
+            if(isForCommander){
+                setModel(new DefaultComboBoxModel<>(DeckType.CommanderOptions));
+            }else {
+                setModel(new DefaultComboBoxModel<>(DeckType.ConstructedOptions));
+            }
+            setDisplayedDeckType(deckType);
+        } finally {
+            unsuppressActionListeners();
         }
-        setSelectedItem(deckType);
     }
 
     private ActionListener getDeckTypeComboListener() {
@@ -67,6 +72,27 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
     public void setDeckType(final DeckType valueOf) {
         selectedDeckType = valueOf;
         setSelectedItem(selectedDeckType);
+    }
+
+    public void setDisplayedDeckType(final DeckType deckType) {
+        selectedDeckType = deckType;
+        suppressActionListeners();
+        try {
+            boolean isInModel = false;
+            for (int i = 0; i < getItemCount(); i++) {
+                if (getItemAt(i) == deckType) {
+                    isInModel = true;
+                    break;
+                }
+            }
+            if (isInModel) {
+                setSelectedItem(deckType);
+            } else {
+                super.setText(deckType.toString());
+            }
+        } finally {
+            unsuppressActionListeners();
+        }
     }
 
     @Override

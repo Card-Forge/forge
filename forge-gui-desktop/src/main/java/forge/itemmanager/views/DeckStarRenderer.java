@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
 
+import forge.deck.DeckBrowserEntry;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.item.InventoryItem;
@@ -57,7 +58,7 @@ public class DeckStarRenderer extends ItemCellRenderer {
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
         if (value instanceof DeckProxy) {
-            deck = (DeckProxy) value;
+            deck = getFavoriteDeck((DeckProxy) value);
         }
         else {
             deck = null;
@@ -69,11 +70,13 @@ public class DeckStarRenderer extends ItemCellRenderer {
     @Override
     public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
         if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && value instanceof DeckProxy) {
-            deck = (DeckProxy) value;
+            deck = getFavoriteDeck((DeckProxy) value);
+            if (deck == null) {
+                return;
+            }
             DeckPreferences prefs = DeckPreferences.getPrefs(deck);
             prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
             update();
-            listView.getTable().setRowSelectionInterval(row, row);
             listView.getTable().repaint();
             e.consume();
         }
@@ -93,6 +96,10 @@ public class DeckStarRenderer extends ItemCellRenderer {
             this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", deck.getName()));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_FILLED);
         }
+    }
+
+    private DeckProxy getFavoriteDeck(final DeckProxy value) {
+        return DeckBrowserEntry.unwrap(value);
     }
 
     /*

@@ -17,6 +17,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
     private static final int padding0 = 2;
 
     private ColorSet cs;
+    private boolean showColorSet;
 
     /*
      * (non-Javadoc)
@@ -31,11 +32,13 @@ public class ColorSetRenderer extends ItemCellRenderer {
 
         if (value instanceof ColorSet) {
             this.cs = (ColorSet) value;
+            this.showColorSet = true;
         }
         else {
             this.cs = ColorSet.C;
+            this.showColorSet = false;
         }
-        this.setToolTipText(cs.toString());
+        this.setToolTipText(showColorSet ? cs.toString() : null);
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }
 
@@ -49,6 +52,9 @@ public class ColorSetRenderer extends ItemCellRenderer {
         super.paint(g);
 
         final int cellWidth = this.getWidth();
+        if (!showColorSet) {
+            return;
+        }
 
         int x = padding0;
         int y = padding0 + 1;
