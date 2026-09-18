@@ -4,8 +4,8 @@ Types:Creature Kor Scout
 PT:3/4
 K:Flying
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, another target creature you control gets +1/+1 until end of turn. If you’ve scried or surveilled this turn, put a +1/+1 counter on that creature instead.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | NumAtt$ +1 | NumDef$ +1 | CheckSVar$ X | SVarCompare$ EQ0 | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | CheckSVar$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | NumAtt$ +1 | NumDef$ +1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X
 SVar:X:Count$YouScryThisTurn/Plus.Y
 SVar:Y:Count$YouSurveilThisTurn
 DeckHints:Ability$Counters
