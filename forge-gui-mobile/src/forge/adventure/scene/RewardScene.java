@@ -64,7 +64,8 @@ public class RewardScene extends UIScene {
     }
 
     Type type;
-    Array<Actor> generated = new Array<>();
+    Array<Actor> generated = new Array<>(32);
+    private final List<RewardActor> rewardList = new ArrayList<>(32);
     static public final float CARD_WIDTH = 550f;
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
@@ -131,8 +132,8 @@ public class RewardScene extends UIScene {
     float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
     public void quitScene() {
-        //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (actor instanceof RewardActor rewardActor) {
                 rewardActor.removeTooltip();
                 actor.remove();
@@ -178,7 +179,8 @@ public class RewardScene extends UIScene {
     }
 
     void clearGenerated() {
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
@@ -195,16 +197,18 @@ public class RewardScene extends UIScene {
     }
 
     public List<RewardActor> getGeneratedRewards() {
-        List<RewardActor> rewards = new ArrayList<>();
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        rewardList.clear();
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            if (!rewardActor.frontSideUp())
+            if (!rewardActor.frontSideUp()) {
                 continue;
-            rewards.add(rewardActor);
+            }
+            rewardList.add(rewardActor);
         }
-        return rewards;
+        return rewardList;
     }
 
     @Override
@@ -213,8 +217,8 @@ public class RewardScene extends UIScene {
         ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
             if (type == Type.Loot || type == Type.QuestReward) {
-                flipCountDown -= Gdx.graphics.getDeltaTime();
-                exitCountDown += Gdx.graphics.getDeltaTime();
+                flipCountDown -= delta;
+                exitCountDown += delta;
             }
             if (flipCountDown <= 0) {
                 clearGenerated();
