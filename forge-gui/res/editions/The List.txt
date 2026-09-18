@@ -933,6 +933,7 @@ C19-270 U Rogue's Passage @Christine Choi
 C20-4 M Brallin, Skyshark Rider @Paul Scott Canavan
 C20-9 M Kalamax, the Stormsire @Nicholas Gregory
 C20-14 M Shabraz, the Skyshark @Paul Scott Canavan
+C20-18 M Xyris, the Writhing Storm @Filip Burburan
 C20-25 R Dismantling Wave @Raoul Vitale
 C20-45 R Netherborn Altar @Titus Lunter
 C20-67 C Bonder's Ornament @Lindsey Look
@@ -1664,7 +1665,6 @@ DMC-103 R Odric, Lunarch Marshal @Chase Stone
 DMC-107 R Urza's Ruinous Blast @Slawomir Maniak
 DMC-109 C Echoing Truth @Greg Staples
 DMC-142 M Atla Palani, Nest Tender @Ekaterina Burmak
-DMC-175 M Xyris, the Writhing Storm @Filip Burburan
 DMC-220 R Murmuring Bosk @John Avon
 DMC-222 U Nomad Outpost @Kamila Szutenberg
 DMR-4 U Congregate @Mark Zug
@@ -2736,7 +2736,6 @@ JUD-72 U Stitch Together @Arnie Swekel
 JUD-76 C Treacherous Werewolf @Mark Tedin
 JUD-77 U Anger @John Avon
 JUD-78 C Arcane Teachings @Mark Brill
-JUD-78† C Arcane Teachings @Mark Brill
 JUD-84 R Dwarven Bloodboiler @Arnie Swekel
 JUD-88 U Firecat Blitz @David Martin
 JUD-89 C Flaring Pain @Glen Angus
@@ -2746,10 +2745,8 @@ JUD-97 U Planar Chaos @Ron Spencer
 JUD-101 U Swelter @Ben Thompson
 JUD-103 R Worldgorger Dragon @Wayne England
 JUD-119 U Grizzly Fate @Dave Dorman
-JUD-119† U Grizzly Fate @Dave Dorman
 JUD-120 C Harvester Druid @David Martin
 JUD-127 U Phantom Centaur @Carl Critchlow
-JUD-127† U Phantom Centaur @Carl Critchlow
 JUD-129 C Phantom Tiger @Brian Snõddy
 JUD-131 U Serene Sunset @David Martin
 KHC-19 U Banishing Light @Willian Murai
@@ -5598,7 +5595,6 @@ ZNR-298 R Skyclave Shade @Dominik Mayer
 ZNR-304 C Canopy Baloth @Dominik Mayer
 
 [tokens]
-CMM-40 c_a_clue_draw @John Avon
 T2XM-2 c_1_1_shapeshifter_changeling @Steve Prescott
 TAFR-1 w_3_3_angel_flying @Irina Nordsol
 TAKH-16 w_1_1_cat_lifelink @Filip Burburan
@@ -5610,6 +5606,7 @@ TC17-3 b_1_1_rat_deathtouch @Shreya Shetty
 TC21-25 c_3_3_a_golem_flying @Andrew Mar
 TC21-26 c_3_3_a_golem_trample @Andrew Mar
 TC21-27 c_3_3_a_golem_vigilance @Andrew Mar
+TCMM-40 c_a_clue_draw @John Avon
 TCMR-2 w_1_1_soldier @Svetlin Velinov
 TDMC-8 g_0_1_egg_defender @Christopher Burdett
 TELD-7 r_1_1_dwarf @Kari Christensen

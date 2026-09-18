@@ -1,0 +1,7 @@
+Name:Break Under Pressure
+ManaCost:2 B
+Types:Instant
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature.cmcEQX,Planeswalker.cmcEQX | SacMessage$ creature or planeswalker they control with the highest mana value among creatures and planeswalkers they control | SubAbility$ DBGainLife | SpellDescription$ Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl$GreatestCardManaCost
+Oracle:Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control. You gain 2 life.

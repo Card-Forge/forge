@@ -1,0 +1,9 @@
+Name:Way of the Wildspeaker
+ManaCost:2 B
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When CARDNAME enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 7
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWWildspeaker | Description$ Planeswalkers you control have "[-4]: Create a 4/4 green Beast creature token with trample."
+SVar:PWWildspeaker:AB$ Token | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | TokenScript$ g_4_4_beast_trample | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token with trample."
+DeckHints:Type$Planeswalker
+Oracle:When Way of the Wildspeaker enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nPlaneswalkers you control have "[-4]: Create a 4/4 green Beast creature token with trample."
