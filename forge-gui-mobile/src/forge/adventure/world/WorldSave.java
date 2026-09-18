@@ -56,9 +56,17 @@ public class WorldSave {
     }
 
     public PointOfInterestChanges getPointOfInterestChanges(String id) {
-        if (!pointOfInterestChanges.containsKey(id))
-            pointOfInterestChanges.put(id, new PointOfInterestChanges());
-        return pointOfInterestChanges.get(id);
+        if (id == null) { // fallback
+            return new PointOfInterestChanges();
+        }
+
+        PointOfInterestChanges changes = pointOfInterestChanges.get(id);
+        if (changes == null) {
+            changes = new PointOfInterestChanges();
+            pointOfInterestChanges.put(id, changes);
+        }
+
+        return changes;
     }
 
     static public boolean load(int currentSlot) {
