@@ -328,8 +328,8 @@ public final class CardRulesPredicates {
         return result == null ? card -> false : result;
     }
 
-    /** Tokenizes dot-then-plus, matching {@code Card.isValid()}'s own restriction-string split. */
-    private static Predicate<CardRules> restrictionBranch(final String rawBranch) {
+    /** Tokenizes dot-then-plus, matching {@code Card.isValid()}'s own restriction-string split. Also usable directly on a single already-isolated branch (see {@code DeckRule:Copies}' CARDNAME resolution). */
+    public static Predicate<CardRules> restrictionBranch(final String rawBranch) {
         final List<String> typeWords = new ArrayList<>();
         final String[] firstSplit = rawBranch.split("\\.", 2);
         final List<String> tokens = new ArrayList<>();
@@ -349,6 +349,9 @@ public final class CardRulesPredicates {
                 branch = branch == null ? statFilter : branch.and(statFilter);
             } else if (token.equals("Permanent")) {
                 branch = branch == null ? IS_PERMANENT : branch.and(IS_PERMANENT);
+            } else if (token.startsWith("named")) {
+                final Predicate<CardRules> namePredicate = name(PredicateString.StringOp.EQUALS, token.substring("named".length()));
+                branch = branch == null ? namePredicate : branch.and(namePredicate);
             } else {
                 typeWords.add(token);
             }
