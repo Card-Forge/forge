@@ -1,0 +1,5 @@
+Name:Precise Redaction
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgtsDesc$ white or black spell | ValidTgts$ Card.White,Card.Black | SpellDescription$ Counter target white or black spell.
+Oracle:Counter target white or black spell.
