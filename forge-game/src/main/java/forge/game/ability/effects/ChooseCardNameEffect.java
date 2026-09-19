@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import forge.StaticData;
 import forge.card.CardFacePredicates;
