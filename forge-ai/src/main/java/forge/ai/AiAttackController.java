@@ -739,7 +739,8 @@ public class AiAttackController {
         }
 
         int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, defendingOpponent);
-        if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+        final int poisonThreshold = defendingOpponent.getPoisonCounterThreshold();
+        if (totalPoisonDamage >= poisonThreshold - defendingOpponent.getPoisonCounters()) {
             return true;
         }
         for (Card trampler : trampleDmg.keySet()) {
@@ -748,7 +749,7 @@ public class AiAttackController {
                 totalPoisonDamage += dmg;
             }
             totalPoisonDamage += ComputerUtilCombat.predictExtraPoisonWithDamage(trampler, defendingOpponent, dmg);
-            if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+            if (totalPoisonDamage >= poisonThreshold - defendingOpponent.getPoisonCounters()) {
                 return true;
             }
         }
