@@ -1,7 +1,7 @@
 Name:Awaken the Inferno
 ManaCost:4 R
 Types:Sorcery
-A:SP$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidTgtsDesc$ creature or planeswalker an opponent controls | NumDmg$ 6 | SubAbility$ DBPutCounter | SpellDescription$ Awaken the Inferno deals 6 damage to target creature or planeswalker an opponent controls. Put a +1/+1 counter on up to one target creature you control.
+A:SP$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidTgtsDesc$ creature or planeswalker an opponent controls | NumDmg$ 6 | SubAbility$ DBPutCounter | SpellDescription$ CARDNAME deals 6 damage to target creature or planeswalker an opponent controls. Put a +1/+1 counter on up to one target creature you control.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 1
 K:TypeCycling:Basic:2
 DeckHas:Ability$Counters
