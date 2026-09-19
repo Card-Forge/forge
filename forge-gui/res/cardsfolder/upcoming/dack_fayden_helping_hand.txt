@@ -1,0 +1,13 @@
+Name:Dack Fayden, Helping Hand
+ManaCost:4 W W
+Types:Legendary Creature Human Advisor
+PT:4/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ When NICKNAME enters, reveal cards from the top of your library until you reveal X creature cards, where X is the number of opponents you have. Put those creature cards onto the battlefield, then shuffle. They're goaded for the rest of the game. For each of those permanents, choose a different opponent. Each opponent gains control of the permanent for which they were chosen.
+SVar:DBDigUntil:DB$ DigUntil | Amount$ X | Valid$ Creature.YouOwn | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | FoundDestination$ Battlefield | ImprintFound$ True | Shuffle$ True | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Inprinted | Duration$ Permanent | SubAbility$ DBRepeatEach
+SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Imprinted | Zone$ Battlefield | RepeatSubAbility$ DBChoosePlayer |  SubAbility$ DBCleanup
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent.!IsRemembered | RememberChosen$ True | SubAbility$ DBGiveControl
+SVar:DBGiveControl:DB$ GainControl | Defined$ Card.IsRemembered | NewController$ ChosenPlayer
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:PlayerCountOpponents$Amount
+Oracle:When Dack Fayden enters, reveal cards from the top of your library until you reveal X creature cards, where X is the number of opponents you have. Put those creature cards onto the battlefield, then shuffle. They're goaded for the rest of the game. For each of those permanents, choose a different opponent. Each opponent gains control of the permanent for which they were chosen.
