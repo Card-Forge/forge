@@ -43,6 +43,7 @@ public class CardCollections {
     private IStorage<Deck> commander;
     private IStorage<Deck> commanderPrecons;
     private IStorage<Deck> oathbreaker;
+    private IStorage<Deck> pauperCommander;
     private IStorage<Deck> tinyLeaders;
     private IStorage<Deck> brawl;
     private IStorage<Deck> genetic;
@@ -116,6 +117,14 @@ public class CardCollections {
                     true);
         }
         return commander;
+    }
+
+    public IStorage<Deck> getPauperCommander() {
+        if (pauperCommander == null) {
+            pauperCommander = new StorageImmediatelySerialized<>("Pauper Commander decks",
+                    new DeckStorage(new File(ForgeConstants.DECK_PAUPER_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
+        }
+        return pauperCommander;
     }
 
     public IStorage<Deck> getOathbreaker() {
