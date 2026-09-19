@@ -2,6 +2,7 @@ package forge.ai;
 
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
@@ -1516,6 +1517,9 @@ public class PlayerControllerAi extends PlayerController {
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard(), sa);
                 name = ComputerUtilCard.getMostProminentCardName(cards);
+            } else if (logic.equals("MakeCard")) {
+                name = chooseCardName(sa, StaticData.instance().getCommonCards()
+                        .streamAllFaces().filter(cpp).sorted().collect(Collectors.toList()),message);
             } else if (logic.equals("CursedScroll")) {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
