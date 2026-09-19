@@ -515,6 +515,7 @@ Replace=.055F fromSheet("FRA tower")+
 439 M Enlightened Confidant @James Martin
 440 M Return to the Light Realms @Heikala
 441 M Seasoned Cryomancer @Mattias Lindström
+442 R Sphinx's Approach @Harry Conway
 443 M The Theorist, Jace Beleren @ONIKU kuitai
 444 M Darklight Phoenix @Jun Ishimaru
 445 M Overwrite the Multiverse @Pedro Correa
@@ -536,10 +537,16 @@ Replace=.055F fromSheet("FRA tower")+
 461 R Frostbite Pyromental @Paul Adam
 
 [tokens]
+1 cadet @Elizabeth Peiró
+2 ajanis_pridemate @Diego Gisbert
+3 u_3_3_angel_flying @Raluca Marinescu
 4 u_1_1_illusion @Daniel Cotter
+6 u_8_8_leviathan_hexproof @Maxime Minard
+7 r_5_5_dragon_flying @Loïc Canavaggia
+8 g_4_4_beast_trample @Simon Dominic
+9 g_3_3_forest_tentacle @Deruchenko Alexander
+10 mowu @Leonardo Santanna
 11 rg_a_heartwood @Tianxing Xu
-
-
 
 [basic frame]
 1 Plains|FRA|[281]
@@ -604,8 +611,6 @@ Replace=.055F fromSheet("FRA tower")+
 1 Hall of Echoes|FRA|[379]
 1 Roiling Canopy|FRA|[380]
 1 Theorist's Sanctum|FRA|[381]
-
-
 
 [borderless echoed pair]
 1 Ajani Resolute|FRA|[291]
@@ -789,3 +794,13 @@ Replace=.055F fromSheet("FRA tower")+
 1 Vraska, the Cutting Glare|FRA|[278]
 1 Karn, Argent Defender|FRA|[279]
 1 Traxos, Scourge Eternal|FRA|[280]
+12 lotus @Alex V. Ngo
+13 c_1_1_a_sculpture_treasure @Raluca Marinescu
+14 c_1_1_a_thopter_flying @Diego Gisbert
+15 c_a_treasure_sac @Alayna Danner
+
+[other]
+5 u_empower_jace @Manuel Castañón
+16 emblem_ajani_resolute @Tyler Jacobson
+17 emblem_chandra_chill_of_compliance @Kieran Yanner
+18 emblem_chandra_torch_of_defiance @Kieran Yanner
