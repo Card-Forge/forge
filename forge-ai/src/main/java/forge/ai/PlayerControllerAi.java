@@ -1310,17 +1310,47 @@ public class PlayerControllerAi extends PlayerController {
                     }
 
                     if (sa.isMayChooseNewTargets()) {
-                        TargetChoices tc = sa.getTargets();
-                        if (!sa.setupTargets()) {
-                            // if AI can't choose targets need to keep old one even if illegal
-                            sa.setTargets(tc);
-                        }
+                        chooseNewTargetsForCopy(sa);
                         // FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
                         // sa.setupNewTargets(player);
                     }
                 }
                 // need finally add the new spell to the stack
                 getGame().getStack().add(sa);
+            }
+        }
+    }
+
+    private void chooseNewTargetsForCopy(final SpellAbility copy) {
+        List<TargetChoices> oldTargets = new ArrayList<>();
+        boolean targetingPlayer = false;
+        for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+            oldTargets.add(s.getTargets());
+            targetingPlayer |= s.hasParam("TargetingPlayer");
+        }
+
+        boolean chosen;
+        if (targetingPlayer) {
+            // another player picks the targets, so leave that to setupTargets
+            chosen = copy.setupTargets();
+        } else {
+            for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+                s.clearTargets();
+            }
+            // choosing new targets is optional for a copy of our own spell
+            Card original = copy.getHostCard().getCopiedPermanent();
+            boolean ownSpell = (original != null ? original : copy.getHostCard()).getController().equals(player);
+            chosen = brains.doTrigger(copy, !ownSpell);
+            for (SpellAbility s = copy; chosen && s != null; s = s.getSubAbility()) {
+                chosen = !s.usesTargeting() || s.isTargetNumberValid();
+            }
+        }
+
+        if (!chosen) {
+            // if AI can't choose targets need to keep old one even if illegal
+            int i = 0;
+            for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+                s.setTargets(oldTargets.get(i++));
             }
         }
     }
