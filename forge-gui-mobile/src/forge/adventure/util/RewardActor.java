@@ -1035,7 +1035,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        applyTransform(batch, computeTransform(batch.getTransformMatrix().cpy()));
+        matrixCpy.set(batch.getTransformMatrix());
+        applyTransform(batch, computeTransform(matrixCpy));
 
         oldProjectionTransform.set(batch.getProjectionMatrix());
         applyProjectionMatrix(batch);
@@ -1167,30 +1168,34 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void applyProjectionMatrix(Batch batch) {
-        final Vector3 direction = new Vector3(0, 0, -1);
-        final Vector3 up = new Vector3(0, 1, 0);
-        //final Vector3 position = new Vector3( getX()+getWidth()/2 , getY()+getHeight()/2, 0);
-        final Vector3 position = new Vector3(Scene.getIntendedWidth() / 2f, Scene.getIntendedHeight() / 2f, 0);
+        projDirectionVec.set(0, 0, -1);
+        projUpVec.set(0, 1, 0);
+        projPosVec.set(Scene.getIntendedWidth() / 2f, Scene.getIntendedHeight() / 2f, 0);
 
         float fov = 67;
-        Matrix4 projection = new Matrix4();
-        Matrix4 view = new Matrix4();
         float hy = Scene.getIntendedHeight() / 2f;
         float a = (float) ((hy) / Math.sin(MathUtils.degreesToRadians * (fov / 2f)));
         float height = (float) Math.sqrt((a * a) - (hy * hy));
-        position.z = height * 1f;
+        projPosVec.z = height * 1f;
         float far = height * 2f;
         float near = height * 0.8f;
 
         float aspect = (float) Scene.getIntendedWidth() / (float) Scene.getIntendedHeight();
-        projection.setToProjection(Math.abs(near), Math.abs(far), fov, aspect);
-        view.setToLookAt(position, position.cpy().add(direction), up);
-        Matrix4.mul(projection.val, view.val);
 
-        batch.setProjectionMatrix(projection);
+        projectionMat.setToProjection(Math.abs(near), Math.abs(far), fov, aspect);
+        viewMat.setToLookAt(projPosVec, projPosVec.cpy().add(projDirectionVec), projUpVec);
+        Matrix4.mul(projectionMat.val, viewMat.val);
+
+        batch.setProjectionMatrix(projectionMat);
     }
 
     private final Matrix4 computedTransform = new Matrix4();
+    private final Vector3 projDirectionVec = new Vector3(0, 0, -1);
+    private final Vector3 projUpVec = new Vector3(0, 1, 0);
+    private final Vector3 projPosVec = new Vector3();
+    private final Matrix4 projectionMat = new Matrix4();
+    private final Matrix4 viewMat = new Matrix4();
+    private final Matrix4 matrixCpy = new Matrix4();
     private final Matrix4 oldTransform = new Matrix4();
     private final Matrix4 oldProjectionTransform = new Matrix4();
 

@@ -81,6 +81,20 @@ public class MapStage extends GameStage {
     float collisionWidthMod = 0.4f;
     float defaultSpriteSize = 16f;
     float navMapSize =  defaultSpriteSize * collisionWidthMod;
+    private final Vector2 AIVector = new Vector2();
+    private final Vector2 playerPosReg = new Vector2();
+    private final NavigationVertex navigationVertex = new NavigationVertex(new Vector2());
+    private final Comparator<NavigationVertex> distanceComparator = new Comparator<NavigationVertex>() {
+        @Override
+        public int compare(NavigationVertex o1, NavigationVertex o2) {
+            float px = playerPosReg.x;
+            float py = playerPosReg.y;
+
+            float d1 = (o1.pos.x - px) * (o1.pos.x - px) + (o1.pos.y - py) * (o1.pos.y - py);
+            float d2 = (o2.pos.x - px) * (o2.pos.x - px) + (o2.pos.y - py) * (o2.pos.y - py);
+            return Float.compare(d1, d2);
+        }
+    };
 
     public boolean canEscape() {
         return !preventEscape;
@@ -1028,7 +1042,12 @@ public class MapStage extends GameStage {
         }
         float mobSize = navMapSize; //todo: replace with actual size if multiple nav maps implemented
         ArrayList<NavigationVertex> verticesNearPlayer = new ArrayList<>(navMaps.get(mobSize).navGraph.getNodes());
-        verticesNearPlayer.sort(Comparator.comparingInt(o -> Math.round((o.pos.x - player.pos().x) * (o.pos.x - player.pos().x) + (o.pos.y - player.pos().y) * (o.pos.y - player.pos().y))));
+
+        // cache the current player coordinates registry once
+        playerPosReg.set(player.pos());
+
+        // for ambiguous collision with com.badlogic.gdx.utils.Collections
+        java.util.Collections.sort(verticesNearPlayer, distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
             while (it.hasNext()) {
@@ -1040,7 +1059,9 @@ public class MapStage extends GameStage {
 
                 ProgressableGraphPath<NavigationVertex> navPath = new ProgressableGraphPath<>(0);
                 if (mob.getData().flying) {
-                    navPath.add(new NavigationVertex(mob.getTargetVector(player, null,delta)));
+                    // update vertex
+                    navigationVertex.pos.set(mob.getTargetVector(player, null, delta));
+                    navPath.add(navigationVertex);
                 } else {
                     Vector2 destination = mob.getTargetVector(player, verticesNearPlayer, delta);
 
@@ -1058,31 +1079,36 @@ public class MapStage extends GameStage {
                     }
 
                     if (mob.aggro) {
-                        navPath.add(new NavigationVertex(player.pos()));
+                        // reuse
+                        navigationVertex.pos.set(player.pos());
+                        navPath.add(navigationVertex);
                     }
                 }
 
                 if (navPath == null || navPath.getCount() == 0 || navPath.get(0) == null) {
-                        mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
-                        continue;
-                }
-                Vector2 currentVector = null;
-
-                while (navPath.getCount() > 0 && navPath.get(0) != null && (navPath.get(0).pos == null || navPath.get(0).pos.dst(mob.pos()) < 0.5f)) {
-
-                    navPath.remove(0);
-
-                }
-                if (navPath.getCount() != 0) {
-                    currentVector = new Vector2(navPath.get(0).pos).sub(mob.pos());
-                }
-                mob.setNavPath(navPath);
-                mob.clearActions();
-                if (currentVector == null || (currentVector.x == 0.0f && currentVector.y == 0.0f)) {
                     mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                     continue;
                 }
-                mob.steer(currentVector);
+
+                boolean vectorCalculated = false;
+                while (navPath.getCount() > 0 && navPath.get(0) != null && (navPath.get(0).pos == null || navPath.get(0).pos.dst(mob.pos()) < 0.5f)) {
+                    navPath.remove(0);
+                }
+
+                if (navPath.getCount() != 0) {
+                    AIVector.set(navPath.get(0).pos).sub(mob.pos());
+                    vectorCalculated = true;
+                }
+
+                mob.setNavPath(navPath);
+                mob.clearActions();
+
+                if (!vectorCalculated || (AIVector.x == 0.0f && AIVector.y == 0.0f)) {
+                    mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                    continue;
+                }
+
+                mob.steer(AIVector);
                 mob.update(delta);
             }
         }
