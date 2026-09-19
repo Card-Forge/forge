@@ -649,6 +649,9 @@ public class FloatingZone extends FloatingCardArea {
             cardPanels.add(cardPanel);
         }
         setCardPanels(cardPanels);
+        // Re-apply badges so the numbering tracks the live panel order while Ctrl is held;
+        // dispatchHotkey alone only fires on Ctrl press/release, not on intra-hold refreshes.
+        assignOwnHotkeyDigits(!ctrlHeld);
         final int shown = cardPanels.size();
         final int total = player.getZoneSize(zone);
         if (!filter.isEmpty() && shown < total) {
@@ -745,6 +748,7 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private static boolean hotkeyDispatcherInstalled;
+    private static boolean ctrlHeld;
 
     private static void ensureHotkeyDispatcherInstalled() {
         if (hotkeyDispatcherInstalled) return;
@@ -755,13 +759,11 @@ public class FloatingZone extends FloatingCardArea {
 
     private static boolean dispatchHotkey(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+            if (e.getID() == KeyEvent.KEY_PRESSED) ctrlHeld = true;
+            else if (e.getID() == KeyEvent.KEY_RELEASED) ctrlHeld = false;
             for (final FloatingZone fz : floatingAreas.values()) {
                 if (!fz.isVisible()) continue;
-                if (e.getID() == KeyEvent.KEY_RELEASED) {
-                    fz.assignOwnHotkeyDigits(true);
-                } else if (e.getID() == KeyEvent.KEY_PRESSED) {
-                    fz.assignOwnHotkeyDigits(false);
-                }
+                fz.assignOwnHotkeyDigits(!ctrlHeld);
             }
         }
         if (e.getID() != KeyEvent.KEY_PRESSED) return false;
