@@ -972,6 +972,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final String getName(CardState state) {
+        // the values view builds and iterates even when there is nothing to apply
+        if (this.changedCardNames.isEmpty()) {
+            return state.getName();
+        }
         String name = state.getName();
         for (CardChangedName change : this.changedCardNames.values()) {
             if (change.isOverwrite()) {
