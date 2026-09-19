@@ -1,6 +1,6 @@
 Name:Identity Echo
 ManaCost:2 R
 Types:Enchantment
-A:AB$ ChangeZone | Cost$ 3 R | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDigUntil | SorcerySpeed$ True | SpellDescription$ Exile target creature or planeswalker you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Activate only as a sorcery.
+A:AB$ ChangeZone | Cost$ 3 R | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | ValidTgtsDesc$ creature or planeswalker you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDigUntil | SorcerySpeed$ True | SpellDescription$ Exile target creature or planeswalker you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Activate only as a sorcery.
 SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature,Planeswalker | ValidDescription$ creature or planeswalker | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
 Oracle:{3}{R}: Exile target creature or planeswalker you control. Reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Activate only as a sorcery.

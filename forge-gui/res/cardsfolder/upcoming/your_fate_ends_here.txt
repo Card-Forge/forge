@@ -1,0 +1,6 @@
+Name:Your Fate Ends Here
+ManaCost:2 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.cmcGE3,Planeswalker.cmcGE3 | ValidTgtsDesc$ creature or planeswalker with mana value 3 or greater | SubAbility$ DBSurveil | SpellDescription$ Destroy target creature or planeswalker with mana value 3 or greater. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+Oracle:Destroy target creature or planeswalker with mana value 3 or greater. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
