@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -53,6 +54,11 @@ public class CardProperty {
             } else {
                 return false;
             }
+        }
+
+        // a bare core type or supertype only ends at the type check at the bottom
+        if (CardType.isACardType(property) || CardType.isASupertype(property)) {
+            return card.getCurrentState().getTypeWithChanges().hasStringType(property);
         }
 
         if (property.equals("noName")) {
