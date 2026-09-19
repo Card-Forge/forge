@@ -79,6 +79,8 @@ public enum ItemManagerConfig {
             null, null, 4, 0),
     STICKER_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), false, false, true,
             null, null, 4, 0),
+    STICKER_DECK_EDITOR(SColumnUtil.getCatalogDefaultColumns(true), false, false, true,
+            null, null, 4, 0),
     COMMANDER_POOL(SColumnUtil.getCatalogDefaultColumns(true), true, false, false,
             null, null, 4, 0),
     COMMANDER_SECTION(SColumnUtil.getCatalogDefaultColumns(true), true, false, true,

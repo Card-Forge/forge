@@ -407,7 +407,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
                 yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
             }
-            case Stickers -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.STICKER_POOL);
+            case Stickers -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.STICKER_DECK_EDITOR);
             default -> {
                 System.out.printf("Editor (%s) added an unsupported extra deck section - %s%n", deckSection, editorConfig.getGameType());
                 yield new DeckSectionPage(cm, deckSection);

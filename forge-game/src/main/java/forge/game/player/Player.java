@@ -3046,11 +3046,22 @@ public class Player extends GameEntity implements Comparable<Player> {
             stickerPool.add(cp);
         }
         if (!stickerPool.isEmpty()) {
+            CardCollection revealPool = new CardCollection();
+            for (PaperCard cp : stickerPool) {
+                revealPool.add(Card.fromPaperCard(cp, this));
+            }
+            // dontRevealToOwner=true: this player already knows their own sheets; the point of
+            // CR 123.2a's reveal is letting the opponent verify the random cut was fair.
+            getGame().getAction().reveal(revealPool, ZoneType.StickerSheets, this, true, null);
+
             Collections.shuffle(stickerPool, MyRandom.getRandom());
+            List<PaperCard> chosen = stickerPool.subList(0, Math.min(3, stickerPool.size()));
             PlayerZone stickerZone = getZone(ZoneType.StickerSheets);
-            for (PaperCard cp : stickerPool.subList(0, Math.min(3, stickerPool.size()))) {
+            for (PaperCard cp : chosen) {
                 stickerZone.add(Card.fromPaperCard(cp, this));
             }
+            getGame().fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, this + " reveals " + stickerPool.size()
+                    + " sticker sheets and keeps " + Lang.joinHomogenous(chosen, PaperCard::getName) + " for the game."));
         }
 
         // Adventure Mode items

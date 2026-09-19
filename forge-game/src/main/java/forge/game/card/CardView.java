@@ -634,6 +634,7 @@ public class CardView extends GameEntityView {
         case Flashback:
         case Stack:
         case Junkyard:
+        case StickerSheets:
             //cards in these zones are visible to all
             return true;
         case Exile:

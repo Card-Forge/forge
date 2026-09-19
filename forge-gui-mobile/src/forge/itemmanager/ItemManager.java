@@ -915,18 +915,23 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         //TO-maybe-DO: Share logic between this and identical method in desktop.
         final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
+        //snapshot into a local: applyFilters() runs this method on a background thread, and the
+        //lazy stream below can still be mid-iteration when another applyFilters() call (e.g. from
+        //a filter/search change on the UI thread) reassigns the filterPredicate field, which was
+        //throwing a NullPointerException from inside the deferred lambda.
+        final Predicate<? super T> currentFilterPredicate = filterPredicate;
 
         if (useFilter || this.wantUnique || forceFilter) {
             this.model.clear();
         }
 
         if (useFilter && this.wantUnique) {
-            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
+            final Predicate<Entry<T, Integer>> filterForPool = x -> currentFilterPredicate.test(x.getKey());
             final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
+            final Predicate<Entry<T, Integer>> pred = x -> currentFilterPredicate.test(x.getKey());
             this.model.addItems(IterableUtil.filter(this.pool, pred));
         }
         else if (this.wantUnique) {
