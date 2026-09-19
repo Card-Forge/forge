@@ -7251,7 +7251,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
         } else if (currentStateName == CardStateName.Meld) {
             // to follow the rules (but we shouldn't get here while cloned)
-            if (getCopiedPermanent() != null) {
+            if (getCopiedPermanent() != null || this.getMeldedWith() == null) {
                 return 0;
             }
             // Melded creatures have a combined CMC of each of their parts
