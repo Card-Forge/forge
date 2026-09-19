@@ -1,0 +1,4 @@
+Name:Squishy Sphinx Ninja
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\n{TK}{TK}{TK}{TK} — Provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)\n{TK}{TK}{TK} — 5/3\n{TK}{TK}{TK}{TK}{TK} — 7/7

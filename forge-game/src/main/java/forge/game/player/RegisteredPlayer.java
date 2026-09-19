@@ -32,6 +32,7 @@ public class RegisteredPlayer {
     private Iterable<PaperCard> conspiracies = null;
     private Iterable<PaperCard> attractions = null;
     private Iterable<PaperCard> contraptions = null;
+    private Iterable<PaperCard> stickers = null;
     private List<PaperCard> commanders = Lists.newArrayList();
     private List<PaperCard> vanguardAvatars = null;
     private PaperCard planeswalker = null;
@@ -240,10 +241,20 @@ public class RegisteredPlayer {
                 : EmptyList;
     }
 
+    public Iterable<PaperCard> getStickers() {
+        return stickers;
+    }
+    private void assignStickers() {
+        stickers = currentDeck.has(DeckSection.Stickers)
+                ? currentDeck.get(DeckSection.Stickers).toFlatList()
+                : EmptyList;
+    }
+
     public void restoreDeck() {
         currentDeck = (Deck) originalDeck.copyTo(originalDeck.getName());
         assignAttractions();
         assignContraptions();
+        assignStickers();
     }
 
     public boolean useRandomFoil() {

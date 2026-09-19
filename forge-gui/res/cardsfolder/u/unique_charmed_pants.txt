@@ -1,0 +1,4 @@
+Name:Unique Charmed Pants
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {T}: Add one mana of any color.\n{TK}{TK}{TK} — Whenever this creature attacks, if it's not a Brushwagg, it gets +X/+0 until end of turn, where X is the number of supertypes, card types, and subtypes it has.\n{TK}{TK} — 5/1\n{TK}{TK}{TK}{TK} — 4/8

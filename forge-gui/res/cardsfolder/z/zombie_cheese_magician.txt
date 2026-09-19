@@ -1,0 +1,4 @@
+Name:Zombie Cheese Magician
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — First strike\n{TK}{TK}{TK}{TK} — Whenever this creature deals combat damage to a player, draw that many cards.\n{TK}{TK} — 3/3\n{TK}{TK}{TK} — 6/2

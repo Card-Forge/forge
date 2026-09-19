@@ -56,6 +56,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Planeswalker(true, "planeswalkers", "lblPlaneswalker"),
         Scheme(false, "schemes", "lblScheme"),
         Sorcery(false, "sorceries", "lblSorcery"),
+        // Sticker sheets have no real characteristics (CR 123.2); modeled as their own core
+        // type, like Dungeon, purely so the deck-building/zone machinery can be reused.
+        Stickers(false, "stickers", "lblStickers"),
         Vanguard(false, "vanguards", "lblVanguard");
 
         public final boolean isPermanent;
@@ -90,6 +93,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             case Plane, Phenomenon -> GamePieceType.PLANAR;
             case Scheme -> GamePieceType.SCHEME;
             case Dungeon -> GamePieceType.DUNGEON;
+            case Stickers -> GamePieceType.STICKER;
             case Vanguard -> GamePieceType.AVATAR;
             default -> GamePieceType.CARD;
             };
@@ -539,6 +543,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public boolean isDungeon() {
         return coreTypes.contains(CoreType.Dungeon);
+    }
+
+    @Override
+    public boolean isSticker() {
+        return coreTypes.contains(CoreType.Stickers);
     }
 
     @Override

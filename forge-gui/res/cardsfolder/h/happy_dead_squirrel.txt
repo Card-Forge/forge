@@ -1,0 +1,4 @@
+Name:Happy Dead Squirrel
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {T}: Add {C}{C}. Spend this mana only to cast noncreature spells.\n{TK}{TK}{TK} — Infect (This permanent deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{TK}{TK} — 3/2\n{TK}{TK}{TK}{TK} — 4/7

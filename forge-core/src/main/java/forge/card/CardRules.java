@@ -154,7 +154,7 @@ public final class CardRules implements ICardCharacteristics {
             return false; //Type line isn't fully generated, and we need it to determine if this is a variant type
         CardType t = getType();
         return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon()
-                || t.isConspiracy() || t.isDungeon() || t.isAttraction() || t.isContraption();
+                || t.isConspiracy() || t.isDungeon() || t.isAttraction() || t.isContraption() || t.isSticker();
     }
 
     public CardSplitType getSplitType() {

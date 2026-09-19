@@ -1,0 +1,4 @@
+Name:Goblin Coward Parade
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\n{TK}{TK}{TK} — When this permanent leaves the battlefield, you may destroy target creature with power 4 or greater.\n{TK}{TK} — 2/3\n{TK}{TK}{TK}{TK} — 8/4

@@ -1,0 +1,4 @@
+Name:Elemental Time Flamingo
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Exile this permanent: You may cast target nonland card from your graveyard this turn.\n{TK}{TK}{TK}{TK} — Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.\n{TK}{TK} — 1/5\n{TK}{TK}{TK} — 5/4

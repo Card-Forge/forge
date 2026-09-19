@@ -1,0 +1,4 @@
+Name:Spooky Clown Mox
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Vigilance\n{TK}{TK}{TK}{TK} — {1}, {T}: Tap target creature.\n{TK}{TK} — 1/5\n{TK}{TK}{TK} — 5/4

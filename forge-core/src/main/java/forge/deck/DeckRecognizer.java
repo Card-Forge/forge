@@ -184,6 +184,8 @@ public class DeckRecognizer {
                 matchedSection = DeckSection.Attractions;
             else if (sectionName.equals("contraptions"))
                 matchedSection = DeckSection.Contraptions;
+            else if (sectionName.equals("stickers"))
+                matchedSection = DeckSection.Stickers;
 
             if (matchedSection == null)  // no match found
                 return null;
@@ -576,7 +578,7 @@ public class DeckRecognizer {
             "main", "card", "mainboard",
             "avatar", "commander", "schemes",
             "conspiracy", "planes", "deck", "dungeon",
-            "attractions", "contraptions"};
+            "attractions", "contraptions", "stickers"};
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();
