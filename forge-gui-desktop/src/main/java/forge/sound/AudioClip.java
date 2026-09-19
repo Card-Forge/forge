@@ -21,11 +21,16 @@ package forge.sound;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import javax.sound.sampled.AudioFormat;
@@ -69,6 +74,36 @@ public class AudioClip implements IAudioClip {
         }
     }
 
+    /**
+     * A pooled clip is only ever reused, never released: the pool grows to the effect's peak
+     * concurrency and holds a decoded copy of the sound per entry for the life of the process.
+     * Close the ones that have gone quiet, keeping one per effect so the common case stays warm.
+     */
+    private static final long IDLE_TIMEOUT_MS = 10_000L;
+    private static final long REAP_PERIOD_MS = 5_000L;
+    private static final Set<AudioClip> pools = ConcurrentHashMap.newKeySet();
+    private static final ScheduledExecutorService reaper =
+            Executors.newSingleThreadScheduledExecutor(runnable -> {
+                Thread t = new Thread(runnable, "Forge audio reaper");
+                t.setDaemon(true);
+                return t;
+            });
+    static {
+        reaper.scheduleWithFixedDelay(AudioClip::reapIdleClips,
+                REAP_PERIOD_MS, REAP_PERIOD_MS, TimeUnit.MILLISECONDS);
+    }
+
+    private static void reapIdleClips() {
+        final long cutoff = System.currentTimeMillis() - IDLE_TIMEOUT_MS;
+        for (AudioClip pool : pools) {
+            for (ClipWrapper clip : pool.clips) {
+                if (pool.clips.size() > 1 && clip.isIdleSince(cutoff) && pool.clips.remove(clip)) {
+                    clip.close();
+                }
+            }
+        }
+    }
+
     private final String filename;
     private final List<ClipWrapper> clips;
     private boolean failed;
@@ -88,7 +123,9 @@ public class AudioClip implements IAudioClip {
 
     public AudioClip(final String filename) {
         this.filename = filename;
-        clips = new ArrayList<>(maxSize);
+        // Played from the game thread, reaped from the reaper thread.
+        clips = new CopyOnWriteArrayList<>();
+        pools.add(this);
         addClip();
     }
 
@@ -114,6 +151,7 @@ public class AudioClip implements IAudioClip {
             clip.close();
         }
         clips.clear();
+        pools.remove(this);
         audioClips.clear();
     }
 
@@ -162,6 +200,8 @@ public class AudioClip implements IAudioClip {
     static class ClipWrapper {
         private final Clip clip;
         private boolean started;
+        private volatile long lastPlayed = System.currentTimeMillis();
+        private volatile boolean closed;
         static final ClipWrapper Dummy = new ClipWrapper();
 
         private ClipWrapper() {
@@ -184,6 +224,10 @@ public class AudioClip implements IAudioClip {
                 return;
             }
             synchronized (this) {
+                if (closed) {
+                    return;
+                }
+                lastPlayed = System.currentTimeMillis();
                 applyVolume(volume);
                 clip.setMicrosecondPosition(0);
                 this.started = false;
@@ -200,6 +244,10 @@ public class AudioClip implements IAudioClip {
                 return;
             }
             synchronized (this) {
+                if (closed) {
+                    return;
+                }
+                lastPlayed = System.currentTimeMillis();
                 clip.setMicrosecondPosition(0);
                 this.started = false;
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -212,6 +260,9 @@ public class AudioClip implements IAudioClip {
                 return;
             }
             synchronized (this) {
+                if (closed) {
+                    return;
+                }
                 clip.stop();
             }
         }
@@ -221,8 +272,17 @@ public class AudioClip implements IAudioClip {
                 return;
             }
             synchronized (this) {
+                if (closed) {
+                    return;
+                }
+                closed = true;
+                clip.stop();
                 clip.close();
             }
+        }
+
+        boolean isIdleSince(long cutoff) {
+            return clip != null && !closed && !isRunning() && lastPlayed < cutoff;
         }
 
         boolean isRunning() {
