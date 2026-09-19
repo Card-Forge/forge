@@ -415,7 +415,11 @@ public class Game {
     }
 
     public final PlayerCollection getPlayersInTurnOrder(Player p) {
-        final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
+        // with at most two players left, either direction gives the same list once rotated to start
+        // at p, so the turn order check, which scans every card for a reversal effect, cannot matter
+        final boolean directionIrrelevant = ingamePlayers.size() <= 2 && ingamePlayers.contains(p);
+        final PlayerCollection players = new PlayerCollection(
+                directionIrrelevant ? ingamePlayers : getPlayersInTurnOrder());
 
         int i = players.indexOf(p);
         Collections.rotate(players, -i);
