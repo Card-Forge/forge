@@ -322,7 +322,7 @@ Replace=.055F fromSheet("FRA tower")+
 250 U Pia, Determined Rebuilder @Andreas Zafiratos
 251 R Samut, Hazoret's Champion @Grzegorz Rutkowski
 252 U Tetsuko Umezawa, Pursuer @Tuan Duong Chu
-253 U Tomik, Izzet Sparkmate @Randy Vargas
+253 U Tomik, Izzet Sparkmage @Randy Vargas
 254 U Way of the Pyromancer @Andrey Kuzinskiy
 255 U Way of the Warlord @Danny Schwartz
 256 U Winter, Team Player @Aurore Folny
