@@ -2,7 +2,7 @@ Name:Arni, Humble Scribe
 ManaCost:2 U
 Types:Legendary Creature Human Wizard
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+!token+Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another nontoken creature you control enters, untap CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+!token+Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another nontoken creature you control enters, untap NICKNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
