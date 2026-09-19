@@ -208,6 +208,7 @@ public class CombatUtil {
                 (!attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
                 || isAttackerSick(attacker, defender)
+                || (game.getPhaseHandler().isAggressiveCombat() && !attacker.hasKeyword(Keyword.AGGRESSIVE)) //Used for Aggressive keyword
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
