@@ -24,9 +24,13 @@ import com.google.common.collect.MultimapBuilder;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -287,6 +291,11 @@ public final class SLayoutIO {
             writer.add(EF.createAttribute("serial", layoutSerial));
             writer.add(NEWLINE);
 
+            // Editors hide some tabs while they are open. A save taken in that window
+            // must still describe where those tabs belong, or it writes them out of the
+            // layout for good. See SHiddenTabs.
+            final Map<DragCell, List<IVDoc<? extends ICDoc>>> hiddenByCell = hiddenDocsByCell();
+
             for (final DragCell cell : cells) {
                 cell.updateRoughBounds();
                 RectangleOfDouble bounds = cell.getRoughBounds();
@@ -305,6 +314,9 @@ public final class SLayoutIO {
                 for (final IVDoc<? extends ICDoc> vDoc : cell.getDocs()) {
                     createNode(writer, Property.doc, vDoc.getDocumentID().toString());
                 }
+                for (final IVDoc<? extends ICDoc> vDoc : hiddenByCell.getOrDefault(cell, Collections.emptyList())) {
+                    createNode(writer, Property.doc, vDoc.getDocumentID().toString());
+                }
 
                 writer.add(TAB);
                 writer.add(EF.createEndElement("", "", "cell"));
@@ -319,6 +331,15 @@ public final class SLayoutIO {
             if ( writer != null )
                 try { writer.close(); } catch (XMLStreamException e) {}
         }
+    }
+
+    /** Currently hidden docs, grouped by the cell each should be written into. */
+    private static Map<DragCell, List<IVDoc<? extends ICDoc>>> hiddenDocsByCell() {
+        final Map<DragCell, List<IVDoc<? extends ICDoc>>> out = new LinkedHashMap<>();
+        for (final Map.Entry<IVDoc<? extends ICDoc>, DragCell> entry : SHiddenTabs.getHidden().entrySet()) {
+            out.computeIfAbsent(entry.getValue(), c -> new ArrayList<>()).add(entry.getKey());
+        }
+        return out;
     }
 
     private static String getLayoutSerial(String layoutFileName) {
