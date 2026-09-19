@@ -4,7 +4,7 @@ Types:Creature Tiefling Peasant
 PT:0/4
 K:Trample
 K:Myriad
-S:Mode$ Continuous | Affected$ Creature.Self+attacking | AddPower$ X | Description$ As long as CARDNAME is attacking, it gets +X/+0, where X is the number of lands defending player controls.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Creature.attacking | AddPower$ X | Description$ As long as CARDNAME is attacking, it gets +X/+0, where X is the number of lands defending player controls.
 SVar:X:Count$Valid Land.DefenderCtrl
 SVar:BuffedBy:Land.OppCtrl
 SVar:HasAttackEffect:TRUE

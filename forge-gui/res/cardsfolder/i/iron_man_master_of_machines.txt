@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Human Hero
 PT:1/4
 K:Flying
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ NICKNAME gets +1/+0 for each other artifact you control.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | Description$ NICKNAME gets +1/+0 for each other artifact you control.
 T:Mode$ Attacks | ValidCard$ Creature.Self | CheckSVar$ Y | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, if an artifact entered the battlefield under your control this turn, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:X:Count$Valid Artifact.Other+YouCtrl
