@@ -1,0 +1,8 @@
+Name:Loot, the Anomaly
+ManaCost:2 B
+Types:Legendary Creature Beast Horror
+PT:-2/4
+S:Mode$ CombatDamageMinusPower | ValidCard$ Card.Self+powerLT0 | Description$ If NICKNAME's power is negative, he assigns combat damage as though his power were positive.
+#Per Release notes, CombatDamageToughness should supercede this
+A:AB$ Pump | PrecostDesc$ Threshold — | Sac<1/Creature.Other;Planeswalker.Other/another creature or planeswalker> | Activation$ Threshold | Defined$ Self | NumAtt$ -2 | SpellDescription$ NICKNAME gets -2/-0 until end of turn. Activate only if there are seven or more cards in your graveyard.
+Oracle:If Loot's power is negative, he assigns combat damage as though his power were positive.\nThreshold — Sacrifice another creature or planeswalker: Loot gets -2/-0 until end of turn. Activate only if there are seven or more cards in your graveyard.
