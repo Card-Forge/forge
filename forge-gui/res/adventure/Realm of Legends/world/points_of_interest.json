@@ -540,6 +540,18 @@
 			"Story"]
 	},
 	{
+		"name": "Crypt of Broken Rules",
+		"displayName": "Crypt of Broken Rules",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building53",
+		"map": "../Realm of Legends/maps/map/cave/Crypt_of_Broken_Rules.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Peaceful Clearing",
 		"displayName": "Peaceful Clearing",
 		"type": "cave",

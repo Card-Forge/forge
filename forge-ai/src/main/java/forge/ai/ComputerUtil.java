@@ -997,11 +997,23 @@ public class ComputerUtil {
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 if (!sa.isActivatedAbility() || sa.getApi() != ApiType.Regenerate) {
-                    continue; // Not a Regenerate ability
+                    continue;
                 }
+
+                // Combat prediction asks this for many creatures. Rule out
+                // unrelated regeneration abilities before evaluating their costs.
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
+                if (tgt != null) {
+                    if (!CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
+                        continue;
+                    }
+                } else if (!AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
+                    continue;
+                }
+
                 sa.setActivatingPlayer(controller);
                 if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
-                    continue; // Can't play ability
+                    continue;
                 }
 
                 if (controller == ai) {
@@ -1018,14 +1030,7 @@ public class ComputerUtil {
                     }
                 }
 
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
-                if (tgt != null) {
-                    if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
-                        return true;
-                    }
-                } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
-                    return true;
-                }
+                return true;
             }
         }
 
@@ -1433,6 +1438,9 @@ public class ComputerUtil {
                     }
 
                     final String affected = stAb.getParam("Affected");
+                    if (stAb.hasParam("AffectedDefined") || affected == null) {
+                        continue;
+                    }
                     if (affected.startsWith("Creature") && (affected.contains("YouCtrl") || !affected.contains("."))) {
                         return true;
                     }
@@ -1484,7 +1492,8 @@ public class ComputerUtil {
             for (final Card c : opp) {
                 for (StaticAbility stAb : c.getStaticAbilities()) {
                     if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddKeyword")
-                            && stAb.getParam("AddKeyword").contains("Haste")) {
+                            && stAb.getParam("AddKeyword").contains("Haste")
+                            && !stAb.hasParam("AffectedDefined") && stAb.hasParam("Affected")) {
                         final ArrayList<String> affected = Lists.newArrayList(stAb.getParam("Affected").split(","));
                         if (affected.contains("Creature")) {
                             return true;

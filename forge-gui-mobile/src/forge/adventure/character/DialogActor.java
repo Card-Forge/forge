@@ -16,15 +16,21 @@ public class DialogActor extends CharacterSprite {
     public AdventureQuestData questData;
 
     public DialogActor(MapStage stage, int id, String S, TextureRegion textureRegion) {
+        this(stage, id, S, textureRegion, null);
+    }
+    public DialogActor(MapStage stage, int id, String S, TextureRegion textureRegion, String sourceMapFile) {
         super(id,"");
         this.stage = stage;
-        dialog = new MapDialog(S, stage, id);
+        dialog = new MapDialog(S, stage, id, sourceMapFile);
         this.textureRegion = textureRegion;
     }
     public DialogActor(MapStage stage, int id, String S, String sprite) {
+        this(stage, id, S, sprite, null);
+    }
+    public DialogActor(MapStage stage, int id, String S, String sprite, String sourceMapFile) {
         super(id,sprite);
         this.stage = stage;
-        dialog = new MapDialog(S, stage, id);
+        dialog = new MapDialog(S, stage, id, sourceMapFile);
         this.textureRegion = null;
     }
 

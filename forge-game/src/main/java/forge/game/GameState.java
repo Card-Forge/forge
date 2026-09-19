@@ -983,13 +983,12 @@ public class GameState {
             c = Card.fromPaperCard(pc, activator);
         }
 
-        SpellAbility sa = null;
-
         if (!scriptID.isEmpty()) {
             executeScript(game, c, scriptID, putOnStack);
             return;
         }
 
+        SpellAbility sa;
         if (!c.getName().equals(spellDef) && c.hasAlternateState() && spellDef.equals(c.getAlternateState().getName())) {
             sa = c.getAlternateState().getFirstSpellAbility();
         } else {

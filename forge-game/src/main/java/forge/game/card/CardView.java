@@ -349,39 +349,12 @@ public class CardView extends GameEntityView {
         state.updateDefense(c);
     }
 
-    public int getCrackOverlayInt() {
-        if (get(TrackableProperty.CrackOverlay) == null)
-            return 0;
-        return get(TrackableProperty.CrackOverlay);
-    }
     public int getDamage() {
         return get(TrackableProperty.Damage);
     }
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
-        //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
-        int randCrackLevel = 0;
-        if (c.getDamage() > 0) {
-            switch (c.getDamage()) {
-                case 1:
-                case 2:
-                    randCrackLevel = 0;
-                    break;
-                case 3:
-                case 4:
-                    randCrackLevel = 1;
-                    break;
-                case 5:
-                case 6:
-                    randCrackLevel = 2;
-                    break;
-                default:
-                    randCrackLevel = 3;
-                    break;
-            }
-        }
-        set(TrackableProperty.CrackOverlay, randCrackLevel);
     }
 
     public int getAssignedDamage() {

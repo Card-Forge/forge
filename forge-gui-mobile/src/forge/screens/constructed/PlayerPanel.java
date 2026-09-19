@@ -475,8 +475,7 @@ public class PlayerPanel extends FContainer {
             if (allowNetworking) {
                 if (isOpenAiSlotToggle()) {
                     LobbySlotType newType = toggled ? LobbySlotType.AI : LobbySlotType.OPEN;
-                    boolean wasAi = isAi();
-                    type = newType;
+                    setType(newType);
 
                     LobbySlot slot = screen.getLobby().getSlot(index);
                     slot.setType(newType);
@@ -487,12 +486,7 @@ public class PlayerPanel extends FContainer {
 
                     screen.update(index, newType);
 
-                    if (isAi() != wasAi) {
-                        onIsAiChanged(isAi());
-                    }
-
                     setMayEdit(screen.getLobby().mayEdit(index));
-                    refreshSlotToggle();
                     screen.firePlayerChangeListener(index);
                 } else {
                     setIsReady(toggled);
@@ -677,7 +671,7 @@ public class PlayerPanel extends FContainer {
         if (artKey != null && !artKey.isEmpty()) {
             setSleeveArtKey(artKey);
             sleeveArtOffset = artOffset;
-            sleeveLabel.setIcon(new CardSleeveImage(artKey, artOffset));
+            refreshSleeveIcon();
         }
     }
 
@@ -987,14 +981,11 @@ public class PlayerPanel extends FContainer {
         if (artKey != null && !artKey.isEmpty()) {
             sleeveArtKey = artKey;
             sleeveArtOffset = deck.getSleeveArtOffset();
-            sleeveLabel.setIcon(new CardSleeveImage(artKey, sleeveArtOffset));
         } else {
             sleeveArtKey = "";
             sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
-            if (sleeveIndex != -1) {
-                sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(sleeveIndex)));
-            }
         }
+        refreshSleeveIcon();
     }
 
     // Writes the chosen sleeve onto the currently selected deck and saves it (no-op for read-only decks)
@@ -1017,23 +1008,32 @@ public class PlayerPanel extends FContainer {
 
     public void setAvatarIndex(int newAvatarIndex) {
         avatarIndex = newAvatarIndex;
-        if (avatarIndex != -1) {
-            avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(newAvatarIndex)));
-        }
-        else {
-            avatarLabel.setIcon(null);
-        }
+        refreshAvatarIcon();
     }
 
     public void setSleeveIndex(int newSleeveIndex) {
         sleeveIndex = newSleeveIndex;
         sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
         sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
-        if (sleeveIndex != -1) {
-            sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(newSleeveIndex)));
+        refreshSleeveIcon();
+    }
+
+    // An open seat renders no art, though it still holds indices for whoever takes it
+    private void refreshAvatarIcon() {
+        avatarLabel.setIcon(type == LobbySlotType.OPEN || avatarIndex == -1
+                ? null : new FTextureRegionImage(FSkin.getAvatars().get(avatarIndex)));
+    }
+
+    private void refreshSleeveIcon() {
+        if (type == LobbySlotType.OPEN) {
+            sleeveLabel.setIcon(null);
+        }
+        else if (!sleeveArtKey.isEmpty()) {
+            sleeveLabel.setIcon(new CardSleeveImage(sleeveArtKey, sleeveArtOffset));
         }
         else {
-            sleeveLabel.setIcon(null);
+            sleeveLabel.setIcon(sleeveIndex == -1
+                    ? null : new FTextureRegionImage(FSkin.getSleeves().get(sleeveIndex)));
         }
     }
 
@@ -1087,6 +1087,8 @@ public class PlayerPanel extends FContainer {
         }
 
         refreshSlotToggle();
+        refreshAvatarIcon();
+        refreshSleeveIcon();
 
         boolean isAi = isAi();
         if (isAi != wasAi && deckChooser != null) {
@@ -1107,7 +1109,9 @@ public class PlayerPanel extends FContainer {
     }
 
     public int getTeam() {
-        return cbTeam.getSelectedIndex();
+        return screen.hasVariant(GameType.Archenemy)
+                ? cbArchenemyTeam.getSelectedIndex()
+                : cbTeam.getSelectedIndex();
     }
     public void setTeam(int team0) {
         applyingTeamFromNetwork = true;

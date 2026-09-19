@@ -724,7 +724,12 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private int waitForInput(final Input input) {
-        input.selectButtonOK();
+        // OK accepts a yield suggestion when the priority prompt is showing one; ask for the pass itself
+        if (input instanceof InputPassPriority priorityInput) {
+            priorityInput.passPriority();
+        } else {
+            input.selectButtonOK();
+        }
         return WAIT_FOR_NEXT_INPUT;
     }
 
@@ -931,8 +936,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 return debugResult(action, activateAbility(passPriorityInput, activateAbilityAction));
             }
         } else if (action instanceof PassPriorityAction passPriorityAction) {
-            if (inp instanceof InputPassPriority && canReplayPassPriority(passPriorityAction)) {
-                inp.selectButtonOK();
+            if (inp instanceof InputPassPriority priorityInput && canReplayPassPriority(passPriorityAction)) {
+                priorityInput.passPriority();
                 return debugResult(action, true);
             }
             if (inp instanceof InputAttack && canReplayAttackPassPriority(passPriorityAction)) {

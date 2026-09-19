@@ -98,6 +98,9 @@ public enum StaticAbilityMode {
     // StaticAbilityCantBecomeMonarch
     CantBecomeMonarch,
 
+    // StaticAbilityCantGainControl
+    CantGainControl,
+
     // StaticAbilityCantAttach
     CantAttach,
 

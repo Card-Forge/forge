@@ -481,6 +481,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.SourceSA, sp);
             runParams.put(AbilityKey.Targets, distinctObjects);
             runParams.put(AbilityKey.Cause, sp.getHostCard());
+            for (SpellAbility saWalk = sp; saWalk != null; saWalk = saWalk.getSubAbility()) {
+                if (saWalk.usesTargeting() && saWalk.getTargetRestrictions().isRandomTarget() && !saWalk.getTargets().isEmpty()) {
+                    runParams.put(AbilityKey.Random, true);
+                    break;
+                }
+            }
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
 

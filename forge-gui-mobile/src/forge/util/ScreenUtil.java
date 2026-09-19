@@ -17,7 +17,13 @@ public class ScreenUtil implements Disposable {
     private TextureRegion lastScreenTexture;
     private final int THUMB_WIDTH = 256;
     private final int THUMB_HEIGHT = 144;
+    ByteBuffer pixels;
+    int fbW, fbH, bufferSize;
     private ScreenUtil() {
+        fbW = Forge.getScreenWidth();
+        fbH = Forge.getScreenHeight();
+        bufferSize = fbW * fbH * 4;
+        pixels = BufferUtils.newByteBuffer(bufferSize);
     }
 
     public static ScreenUtil getInstance() {
@@ -46,16 +52,12 @@ public class ScreenUtil implements Disposable {
     }
 
     public Pixmap getThumbnailPreview() {
-
         Pixmap pixmap = new Pixmap(THUMB_WIDTH, THUMB_HEIGHT, Pixmap.Format.RGBA8888);
-
+        pixels.clear();
         // Read full framebuffer into a ByteBuffer
-        int fbW = Forge.getScreenWidth();
-        int fbH = Forge.getScreenHeight();
-        ByteBuffer pixels = BufferUtils.newByteBuffer(fbW * fbH * 4);
-
         Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);
         Gdx.gl.glReadPixels(0, 0, fbW, fbH, GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, pixels);
+        pixels.rewind();
 
         // Downscale manually (nearest-neighbor for speed)
         for (int y = 0; y < THUMB_HEIGHT; y++) {
@@ -87,17 +89,26 @@ public class ScreenUtil implements Disposable {
 
         // Create a small, lightweight Pixmap
         Pixmap smallPixmap = new Pixmap(targetWidth, targetHeight, original.getFormat());
-
-        // Draw full-res Pixmap into the small Pixmap (CPU hardware downsampling)
+        // BiLinear filter is used to achieve a cheap blur on smallPixmap
         smallPixmap.setFilter(Pixmap.Filter.BiLinear);
+        // Draw cropped Pixmap into the small Pixmap (CPU hardware downsampling)
         smallPixmap.drawPixmap(original,
             startX, startY, cropWidth, cropHeight,
             0, 0, targetWidth, targetHeight);
 
-        if (Forge.lastPreview != null)
-            Forge.lastPreview.dispose();
-        Forge.lastPreview = new Texture(smallPixmap);
-        Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        try { // try to reuse lastPreview texture and draw the smallPixmap to save texture VRAM
+            if (Forge.lastPreview != null)
+                Forge.lastPreview.draw(smallPixmap, 0, 0);
+            else
+                Forge.lastPreview = new Texture(smallPixmap);
+        } catch (Exception e) {
+            // fallback if you can't draw the smallPixmap
+            if (Forge.lastPreview != null)
+                Forge.lastPreview.dispose();
+            Forge.lastPreview = new Texture(smallPixmap);
+        } finally {
+            Forge.lastPreview.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
         smallPixmap.dispose();
     }
 

@@ -79,20 +79,27 @@ public class VLobby implements ILobbyView {
 
     // Variants frame and variables
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
-    private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
-    private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
-    private final VariantCheckBox vntMoJhoSto = new VariantCheckBox(GameType.MoJhoSto);
-    private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
-    private final VariantCheckBox vntOathbreaker = new VariantCheckBox(GameType.Oathbreaker);
-    private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
-    private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+    private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
+    private final ImmutableList<VariantCheckBox> vntBoxes  =
+            ImmutableList.of(vntPlanechase, vntArchenemy, vntArchenemyRumble, vntVanguard);
+
+    /**
+     * The mutually exclusive game types, in the order the deck editor's own format
+     * dropdown lists them. GameLobby.applyVariant already treats these as a radio
+     * group; the dropdown just makes that visible. Momir Basic and MoJhoSto sit at
+     * the end because they replace the deck outright rather than constrain it.
+     */
+    private static final ImmutableList<GameType> GAME_FORMATS = ImmutableList.of(
+            GameType.Constructed, GameType.Commander, GameType.Oathbreaker,
+            GameType.Brawl, GameType.TinyLeaders,
+            GameType.MomirBasic, GameType.MoJhoSto);
+
+    private final FComboBoxPanel<GameType> cboFormatPanel =
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblGameFormat") + ":", GAME_FORMATS);
+    private boolean suppressFormatListener = false;
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -125,10 +132,10 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> humanListData = new Vector<>();
     private final Vector<Object> aiListData = new Vector<>();
 
-    // Mode selector (network only). Mode state lives in CLobby; this combo is the widget.
-    private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblMode"),
-            ImmutableList.of(Localizer.getInstance().getMessage("lblConstructed"),
-                    Localizer.getInstance().getMessage("lblLimited")));
+    // Play Type selector (network only). Mode state lives in CLobby; this combo is the widget.
+    private final FComboBoxPanel<CLobby.LobbyMode> cboModePanel =
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblPlayMode") + ":",
+                    ImmutableList.copyOf(CLobby.LobbyMode.values()));
 
     // Event config panel (top of right panel in Draft/Sealed mode)
     private final FPanel eventConfigPanel = new FPanel(new MigLayout("insets 5 10 15 10, gap 2, wrap"));
@@ -138,6 +145,8 @@ public class VLobby implements ILobbyView {
     private final FLabel lblEventStatus = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC).build();
     private final FLabel lblEventFormatCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormat")).fontSize(13).build();
     private final FLabel lblEventProductCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblProduct")).fontSize(13).build();
+    private final FLabel lblEventPodCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkEventPodCaption")).fontSize(13).build();
+    private final FLabel lblEventPod = new FLabel.Builder().text("—").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
     private final FLabel lblEventPickTimerCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkPickTimerCaption")).fontSize(13).build();
     private final FLabel lblEventDateCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblEventDate")).fontSize(13).build();
     private final FLabel lblEventDate = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
@@ -185,6 +194,7 @@ public class VLobby implements ILobbyView {
             java.awt.Color captionColor = FSkin.getColor(FSkin.Colors.CLR_TEXT).stepColor(-80).getColor();
             lblEventFormatCaption.setForeground(captionColor);
             lblEventProductCaption.setForeground(captionColor);
+            lblEventPodCaption.setForeground(captionColor);
             lblEventPickTimerCaption.setForeground(captionColor);
             lblEventDateCaption.setForeground(captionColor);
             lblEventStatus.setForeground(captionColor);
@@ -208,6 +218,8 @@ public class VLobby implements ILobbyView {
             eventConfigPanel.add(lblEventFormat, "wrap");
             eventConfigPanel.add(lblEventProductCaption);
             eventConfigPanel.add(lblEventProduct, "wrap");
+            eventConfigPanel.add(lblEventPodCaption);
+            eventConfigPanel.add(lblEventPod, "wrap");
             eventConfigPanel.add(lblEventPickTimerCaption);
             eventConfigPanel.add(lblEventPickTimer, "wrap");
             eventConfigPanel.add(lblEventDateCaption);
@@ -226,14 +238,15 @@ public class VLobby implements ILobbyView {
         }
 
         ////////////////////////////////////////////////////////
-        //////////////////// Variants Panel ////////////////////
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
+        //////////////////// Game Format ///////////////////////
+        cboFormatPanel.addActionListener(e -> onGameFormatChanged());
+        for (final Component c : cboFormatPanel.getComponents()) {
+            c.setFont(FSkin.getBoldFont(14).getBaseFont());
         }
+        constructedFrame.add(cboFormatPanel, "w 100%, h 28px!, gapbottom 10px, spanx 2, wrap");
 
+        ////////////////////////////////////////////////////////
+        //////////////////// Variants Panel ////////////////////
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
         for (final VariantCheckBox vcb : vntBoxes) {
@@ -375,20 +388,26 @@ public class VLobby implements ILobbyView {
 
     private void updateImpl(final boolean fullUpdate) {
         activePlayersNum = lobby.getNumberOfSlots();
-        addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
+        addPlayerBtn.setEnabled(activePlayersNum < lobby.getSlotLimit());
 
         controller.syncModeFromHost();
         controller.onLobbyDataChanged();
 
-        ImmutableList<VariantCheckBox> vntBoxes;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
+        syncGameFormatCombo();
+
         for (final VariantCheckBox vcb : vntBoxes) {
             vcb.setSelected(hasVariant(vcb.variant));
             vcb.setEnabled(lobby.hasControl());
+        }
+
+        // Momir Basic and MoJhoSto write the Avatar section themselves, so Vanguard
+        // cannot be layered on top. applyVariant already unticks it; say why.
+        final boolean avatarSetByFormat = hasVariant(GameType.MomirBasic) || hasVariant(GameType.MoJhoSto);
+        if (avatarSetByFormat) {
+            vntVanguard.setEnabled(false);
+            vntVanguard.setToolTipText(localizer.getMessage("ttVanguardSetByFormat"));
+        } else {
+            vntVanguard.setToolTipText(GameType.Vanguard.getDescription());
         }
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -485,15 +504,11 @@ public class VLobby implements ILobbyView {
         return lobby;
     }
 
-    String getCurrentModeSelection() {
+    CLobby.LobbyMode getCurrentMode() {
         return cboModePanel.getSelectedItem();
     }
-
-    int getCurrentModeIndex() {
-        return cboModePanel.getSelectedIndex();
-    }
-    void setCurrentModeIndex(int idx) {
-        cboModePanel.setSelectedIndex(idx);
+    void setCurrentMode(final CLobby.LobbyMode mode) {
+        cboModePanel.setSelectedItem(mode);
     }
 
     void refreshConstructedFrame() {
@@ -580,6 +595,11 @@ public class VLobby implements ILobbyView {
 
     boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
+    }
+
+    /** True when the selected game format builds the deck itself, as Momir Basic and MoJhoSto do. */
+    boolean hasAutoGeneratedVariant() {
+        return lobby.hasAutoGeneratedVariant();
     }
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
@@ -669,7 +689,9 @@ public class VLobby implements ILobbyView {
         if (selected instanceof String) {
             String sel = (String) selected;
             if (sel.contains("Use deck's scheme section")) {
-                if (deck.has(DeckSection.Schemes)) {
+                // deck is null until the player has a deck for the current game format,
+                // so a format with no decks yet falls through to Random rather than NPE.
+                if (deck != null && deck.has(DeckSection.Schemes)) {
                     schemePool = deck.get(DeckSection.Schemes);
                 } else {
                     sel = "Random";
@@ -700,7 +722,8 @@ public class VLobby implements ILobbyView {
         if (selected instanceof String) {
             String sel = (String) selected;
             if (sel.contains("Use deck's planes section")) {
-                if (deck.has(DeckSection.Planes)) {
+                // Same null case as selectSchemeDeck: no deck yet for this game format.
+                if (deck != null && deck.has(DeckSection.Planes)) {
                     planePool = deck.get(DeckSection.Planes);
                 } else {
                     sel = "Random";
@@ -883,6 +906,7 @@ public class VLobby implements ILobbyView {
     }
 
     void setVariantsVisible(boolean visible) {
+        cboFormatPanel.setVisible(visible);
         Container scrollPane = variantsPanel.getParent();
         while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
             scrollPane = scrollPane.getParent();
@@ -950,12 +974,16 @@ public class VLobby implements ILobbyView {
 
     /** Render the event panel from pre-computed contents. No decisions live here. */
     void setEventPanelContents(CLobby.EventPanelContents c) {
-        lblEventStatus.setText(c.statusText());
-        lblEventStatus.setVisible(!c.statusText().isEmpty());
-        lblEventFormat.setText(c.formatText());
-        lblEventProduct.setText(c.productText());
-        lblEventPickTimer.setText(c.timerText());
-        lblEventDate.setText(c.dateText());
+        NetworkEvent.EventPanelText text = c.text();
+        lblEventStatus.setText(text.statusText());
+        lblEventStatus.setVisible(!text.statusText().isEmpty());
+        lblEventFormat.setText(text.formatText());
+        lblEventProduct.setText(text.productText());
+        lblEventPod.setText(text.podText());
+        lblEventPodCaption.setVisible(!text.podText().isEmpty());
+        lblEventPod.setVisible(!text.podText().isEmpty());
+        lblEventPickTimer.setText(text.timerText());
+        lblEventDate.setText(text.dateText());
         if (lobby.hasControl()) {
             btnDismissEvent.setVisible(c.showDismissX());
         }
@@ -1098,6 +1126,61 @@ public class VLobby implements ILobbyView {
     }
 
     /////////////////////////////////////////////
+
+    /**
+     * Write the chosen format into the lobby. applyVariant's own exclusion switch
+     * clears the other game formats, so this only has to handle Constructed, which
+     * is the absence of all of them rather than a variant of its own.
+     */
+    private void onGameFormatChanged() {
+        if (suppressFormatListener) { return; }
+
+        final GameType selected = cboFormatPanel.getSelectedItem();
+        if (selected == null) { return; }
+
+        if (!lobby.hasControl()) { // not ours to change; put the combo back
+            syncGameFormatCombo();
+            return;
+        }
+        if (selected == currentGameFormat()) { return; }
+
+        if (selected == GameType.Constructed) {
+            for (final GameType gt : GAME_FORMATS) {
+                if (gt != GameType.Constructed) {
+                    lobby.removeVariant(gt);
+                }
+            }
+        } else {
+            lobby.applyVariant(selected);
+        }
+
+        update(false);
+        updateActionButtons();
+    }
+
+    /** The applied game format, or Constructed when none of them is applied. */
+    private GameType currentGameFormat() {
+        for (final GameType gt : GAME_FORMATS) {
+            if (gt != GameType.Constructed && hasVariant(gt)) {
+                return gt;
+            }
+        }
+        return GameType.Constructed;
+    }
+
+    private void syncGameFormatCombo() {
+        final GameType applied = currentGameFormat();
+        if (cboFormatPanel.getSelectedItem() != applied) {
+            suppressFormatListener = true;
+            try {
+                cboFormatPanel.setSelectedItem(applied);
+            } finally {
+                suppressFormatListener = false;
+            }
+        }
+        cboFormatPanel.setEnabled(lobby.hasControl());
+    }
+
     //========== Various listeners in build order
 
     @SuppressWarnings("serial") private class VariantCheckBox extends FCheckBox {

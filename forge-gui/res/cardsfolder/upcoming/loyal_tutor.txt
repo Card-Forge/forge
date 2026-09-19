@@ -1,0 +1,6 @@
+Name:Loyal Tutor
+ManaCost:W
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Planeswalker | SpellDescription$ Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.
+AI:RemoveDeck:Random
+Oracle:Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.

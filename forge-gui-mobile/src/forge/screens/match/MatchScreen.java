@@ -687,7 +687,6 @@ public class MatchScreen extends FScreen {
             case Keys.Y: //auto-yield, always yes, Ctrl+Y on Android, Y when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
                     final IGameController controller = MatchController.instance.getGameController();
-                    final GameView gameView = MatchController.instance.getGameView();
                     final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
                     if (stack.isEmpty()) {
                         return false;
@@ -704,16 +703,11 @@ public class MatchScreen extends FScreen {
                     }
 
                     controller.setShouldAutoYield(key, true, abilityScope);
-                    if (stackInstance.equals(gameView.peekStack())) {
-                        //auto-pass priority if ability is on top of stack
-                        controller.passPriority();
-                    }
                 }
                 break;
             case Keys.N: //auto-yield, always no, Ctrl+N on Android, N when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
                     final IGameController controller = MatchController.instance.getGameController();
-                    final GameView gameView = MatchController.instance.getGameView();
                     final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
                     if (stack.isEmpty()) {
                         return false;
@@ -730,10 +724,6 @@ public class MatchScreen extends FScreen {
                     }
 
                     controller.setShouldAutoYield(key, true, abilityScope);
-                    if (stackInstance.equals(gameView.peekStack())) {
-                        //auto-pass priority if ability is on top of stack
-                        controller.passPriority();
-                    }
                 }
                 break;
         }

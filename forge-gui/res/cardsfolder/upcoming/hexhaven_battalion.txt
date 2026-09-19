@@ -1,0 +1,7 @@
+Name:Hexhaven Battalion
+ManaCost:4 W W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ cadet | TokenOwner$ You | SubAbility$ DBEmpower | SpellDescription$ Create three 2/2 colorless Wizard Soldier creature tokens named Cadet. Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 2
+K:TypeCycling:Basic:2
+Oracle:Create three 2/2 colorless Wizard Soldier creature tokens named Cadet. Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

@@ -138,6 +138,7 @@ public abstract class GameLobby implements IHasGameType {
                     lastArchenemy = otherIndex;
                 }
                 otherSlot.setIsArchenemy(becomesArchenemy);
+                otherSlot.setTeam(becomesArchenemy ? 0 : 1);
             }
         }
 
@@ -165,6 +166,10 @@ public abstract class GameLobby implements IHasGameType {
     protected abstract IGuiGame getGui(int index);
     protected abstract void onGameStarted();
 
+    /** Largest number of slots this lobby may hold. Subclasses may narrow it. */
+    public int getSlotLimit() {
+        return MAX_PLAYERS;
+    }
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
         final LobbySlotType type = isAllowNetworking() ? LobbySlotType.OPEN : LobbySlotType.AI;
@@ -174,7 +179,7 @@ public abstract class GameLobby implements IHasGameType {
         if (slot == null) {
             throw new NullPointerException();
         }
-        if (data.slots.size() >= MAX_PLAYERS) {
+        if (data.slots.size() >= getSlotLimit()) {
             return;
         }
 
@@ -200,20 +205,18 @@ public abstract class GameLobby implements IHasGameType {
         return FModel.getPreferences().getPref(FPref.PLAYER_NAME);
     }
     protected final static int[] localAvatarIndices() {
-        final String[] sAvatars = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        final int[] result = new int[sAvatars.length];
-        for (int i = 0; i < sAvatars.length; i++) {
-            final Integer val = Ints.tryParse(sAvatars[i]);
-            result[i] = val == null ? -1 : val;
-        }
-        return result;
+        return localIndices(FPref.UI_AVATARS);
     }
     protected final static int[] localSleeveIndices() {
-        final String[] sSleeves = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
-        final int[] result = new int[sSleeves.length];
-        for (int i = 0; i < sSleeves.length; i++) {
-            final Integer val = Ints.tryParse(sSleeves[i]);
-            result[i] = val == null ? -1 : val;
+        return localIndices(FPref.UI_SLEEVES);
+    }
+    /** Falls back to the seat's own index, as {@link #addSlot()} does, where a stored value is missing or invalid. */
+    private static int[] localIndices(final FPref pref) {
+        final String[] stored = FModel.getPreferences().getPref(pref).split(",");
+        final int[] result = new int[stored.length];
+        for (int i = 0; i < stored.length; i++) {
+            final Integer val = Ints.tryParse(stored[i]);
+            result[i] = val == null || val < 0 ? i : val;
         }
         return result;
     }
@@ -448,7 +451,7 @@ public abstract class GameLobby implements IHasGameType {
             final int avatar = slot.getAvatarIndex();
             final int sleeve = slot.getSleeveIndex();
             final boolean isArchenemy = slot.isArchenemy();
-            final int team = GameType.Archenemy.equals(currentGameType) && !isArchenemy ? 1 : slot.getTeam();
+            final int team = slot.getTeam();
             final Set<AIOption> aiOptions = slot.getAiOptions(); // TODO: could AiOptions carry the choice of which AI is selected to play against?
 
             final boolean isAI = slot.getType() == LobbySlotType.AI;

@@ -102,11 +102,11 @@ public class YieldController {
         return DeclineScope.fromPref(getStringPref(pref));
     }
 
-    public boolean isSkippingPhase(PlayerView turnPlayer, PhaseType phase) {
+    public synchronized boolean isSkippingPhase(PlayerView turnPlayer, PhaseType phase) {
         EnumSet<PhaseType> set = skipPhases.get(turnPlayer);
         return set != null && set.contains(phase);
     }
-    public void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
+    public synchronized void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
         EnumSet<PhaseType> set = skipPhases.computeIfAbsent(turnPlayer, k -> EnumSet.noneOf(PhaseType.class));
         if (skip) set.add(phase);
         else set.remove(phase);
@@ -338,7 +338,7 @@ public class YieldController {
     }
 
     /** Atomic seed of client-persistent state at game start or reconnection. Cache mode only. */
-    public void applyClientSeed(YieldStateSnapshot snap) {
+    public synchronized void applyClientSeed(YieldStateSnapshot snap) {
         localStore.clear();
         for (String k : snap.cardYields()) localStore.setYield(AutoYieldStore.Tier.GAME, k, true);
         for (String k : snap.abilityYields()) localStore.setYield(AutoYieldStore.Tier.GAME, k, true);
@@ -569,15 +569,6 @@ public class YieldController {
     public boolean isAutoPassingNoActions(PlayerView player) {
         if (!getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return false;
         if (autoPassInterrupted) return false;
-        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
-        if (gv != null && gv.getStack() != null && gv.getStack().isEmpty()) {
-            PlayerView turnPlayer = gv.getPlayerTurn();
-            PhaseType phase = gv.getPhase();
-            if (turnPlayer != null && phase != null
-                    && owner.getGui().isUiSetToSkipPhase(turnPlayer, phase)) {
-                return true;
-            }
-        }
         return player != null && !player.hasAvailableActions();
     }
 

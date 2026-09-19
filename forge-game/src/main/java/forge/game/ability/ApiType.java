@@ -85,6 +85,7 @@ public enum ApiType {
     EachDamage (DamageEachEffect.class),
     Earthbend (EarthbendEffect.class),
     Effect (EffectEffect.class),
+    Empower (EmpowerEffect.class),
     Encode (EncodeEffect.class),
     EndCombatPhase (EndCombatPhaseEffect.class),
     EndTurn (EndTurnEffect.class),
