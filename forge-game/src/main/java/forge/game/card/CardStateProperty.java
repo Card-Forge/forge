@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import forge.card.CardStateName;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -75,6 +76,8 @@ public class CardStateProperty {
                 default:
                     return false;
             }
+        } else if (property.equals("prepared")) {
+            return cardState.getStateName() == CardStateName.PreparedSpell;
         } else if (property.equals("Worthy")) {
             return cardState.isWorthy();
         } else if (property.equals("Outlaw")) {

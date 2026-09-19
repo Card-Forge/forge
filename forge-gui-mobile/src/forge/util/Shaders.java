@@ -145,6 +145,178 @@ public class Shaders {
             "    \n" +
             "\tgl_FragColor = vec4( mix(discolor, color, col) * mask, 1.0);\n" +
             "}";
+    public static final String vertCardShader =
+            "attribute vec4 a_position;\n" +
+                    "attribute vec4 a_color;\n" +
+                    "attribute vec2 a_texCoord0;\n" +
+                    "\n" +
+                    "uniform mat4 u_projTrans;\n" +
+                    "\n" +
+                    "varying vec4 v_color;\n" +
+                    "varying vec2 v_texCoords;\n" +
+                    "\n" +
+                    "void main() {\n" +
+                    "    v_color = a_color;\n" +
+                    "    v_texCoords = a_texCoord0;\n" +
+                    "    gl_Position = u_projTrans * a_position;\n" +
+                    "}";
+
+    public static final String fragCardShader =
+            "#ifdef GL_ES\n" +
+                    "precision mediump float;\n" +
+                    "#endif\n" +
+
+                    "varying vec4 v_color;\n" +
+                    "varying vec2 v_texCoords;\n" +
+
+                    "uniform sampler2D u_texture;\n" +
+                    "uniform vec2 u_resolution;\n" +
+                    "uniform float edge_radius;\n" +
+                    "uniform float u_gray;\n" +
+                    "uniform float u_isHolo;\n" +
+                    "uniform float u_time;\n" +
+                    "uniform vec2 u_cardPosition; // x component is bind to effect\n" +
+                    "uniform vec2 u_foilTilt;\n" +
+
+                    "float hash21(vec2 p) {\n" +
+                    "    p = fract(p * vec2(123.34, 456.21));\n" +
+                    "    p += dot(p, p + 45.32);\n" +
+                    "    return fract(p.x * p.y);\n" +
+                    "}\n" +
+
+                    "float noise(vec2 p) {\n" +
+                    "    vec2 i = floor(p);\n" +
+                    "    vec2 f = fract(p);\n" +
+                    "    f = f * f * (3.0 - 2.0 * f);\n" +
+                    "    float a = hash21(i);\n" +
+                    "    float b = hash21(i + vec2(1.0, 0.0));\n" +
+                    "    float c = hash21(i + vec2(0.0, 1.0));\n" +
+                    "    float d = hash21(i + vec2(1.0, 1.0));\n" +
+                    "    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);\n" +
+                    "}\n" +
+
+                    "vec3 spectralColor(float x) {\n" +
+                    "    x = fract(x);\n" +
+                    "    vec3 c1 = vec3(1.00, 0.10, 0.20); // Pink-Red\n" +
+                    "    vec3 c2 = vec3(1.00, 0.85, 0.00); // Gold\n" +
+                    "    vec3 c3 = vec3(0.00, 1.00, 0.45); // Neon Green\n" +
+                    "    vec3 c4 = vec3(0.00, 0.60, 1.00); // Electric Cyan\n" +
+                    "    vec3 c5 = vec3(0.65, 0.00, 1.00); // Deep Violet\n" +
+                    "    vec3 c;\n" +
+                    "    if (x < 0.25) {\n" +
+                    "        c = mix(c1, c2, x * 4.0);\n" +
+                    "    } else if (x < 0.50) {\n" +
+                    "        c = mix(c2, c3, (x - 0.25) * 4.0);\n" +
+                    "    } else if (x < 0.75) {\n" +
+                    "        c = mix(c3, c4, (x - 0.50) * 4.0);\n" +
+                    "    } else {\n" +
+                    "        c = mix(c4, c5, (x - 0.75) * 4.0);\n" +
+                    "    }\n" +
+                    "    return c;\n" +
+                    "}\n" +
+
+                    "void main() {\n" +
+                    "    vec2 uv = v_texCoords;\n" +
+                    "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
+
+                    "    if (u_isHolo > 0.0) {\n" +
+                    "        vec2 p = uv;\n" +
+                    "        float aspect = u_resolution.x / max(u_resolution.y, 1.0);\n" +
+                    "        p.x *= aspect;\n" +
+
+                    "        vec2 tilt = u_foilTilt * 1.5;\n" +
+                    "        \n" +
+                    "        // --- SINGLE INT SEEDING SYSTEM ---\n" +
+                    "        // Mixes the input ID with large constants to split indices into wildly varying outputs\n" +
+                    "        float idInput = u_cardPosition.x;\n" +
+                    "        float cardSeed = hash21(vec2(idInput * 12.83, idInput * 91.43));\n" +
+                    "        float colorSeed = hash21(vec2(idInput * 37.11, idInput * 54.19));\n" +
+                    "        \n" +
+                    "        // Offset the timing loop so cards don't cycle colors together in sync\n" +
+                    "        float slowTime = (u_time * 0.03) + (cardSeed * 50.0);\n" +
+
+                    "        // Organic background distribution\n" +
+                    "        float warpX = noise(p * 6.0 + tilt);\n" +
+                    "        float warpY = noise(p * 9.0 - tilt + vec2(slowTime));\n" +
+                    "        vec2 warpedUV = p + vec2(warpX, warpY) * 0.15;\n" +
+
+                    "        // Crystalline micro-facets + variation seed\n" +
+                    "        vec2 facetUV = p * 45.0 + tilt * 8.0 + vec2(cardSeed * 25.5);\n" +
+                    "        float sharpFlakes = abs(fract(facetUV.x + facetUV.y) - 0.5) * \n" +
+                    "                            abs(fract(facetUV.x - facetUV.y * 1.5) - 0.5) * 4.0;\n" +
+                    "        \n" +
+                    "        float flakeGrain = noise(uv * 220.0 + tilt * 4.0) * 0.25;\n" +
+
+                    "        // Wave glitter calculation\n" +
+                    "        float shimmer1 = sin((warpedUV.x * 25.0 + warpedUV.y * 35.0) + (tilt.x + tilt.y) * 5.0);\n" +
+                    "        float shimmer2 = cos((warpedUV.x * 45.0 - warpedUV.y * 20.0) - (tilt.x - tilt.y) * 3.5);\n" +
+                    "        float waveGlint = (shimmer1 * shimmer2) * 0.5 + 0.5;\n" +
+
+                    "        float finalGlint = pow(waveGlint, 1.8) * (0.4 + sharpFlakes * 0.6) + flakeGrain;\n" +
+                    "        finalGlint = clamp(finalGlint, 0.0, 1.0);\n" +
+
+                    "        // Adjusts the color loop shift based on the seed value\n" +
+                    "        float hue = (warpedUV.x * 0.5 + warpedUV.y * 0.3) \n" +
+                    "                  + (tilt.x + tilt.y) * 1.1 \n" +
+                    "                  + sharpFlakes * 0.08\n" +
+                    "                  + slowTime\n" +
+                    "                  + (colorSeed * 7.5); // randomize per seed\n" +
+                    "        \n" +
+                    "        vec3 foilColor = spectralColor(hue);\n" +
+
+                    "        // Luminance math for text and shadow shielding\n" +
+                    "        float luminance = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "        \n" +
+                    "        // Tightened protection curve: Completely blocks effect on pure dark values (black ink)\n" +
+                    "        float inkProtection = smoothstep(0.05, 0.30, luminance);\n" +
+
+                    "        // We generate the raw intensity color layer\n" +
+                    "        vec3 targetFoil = foilColor * finalGlint * 1.35;\n" +
+                    "        \n" +
+                    "        // Overlay Blend: \n" +
+                    "        vec3 blendLayer;\n" +
+                    "        blendLayer.r = col.r < 0.5 ? (2.0 * col.r * targetFoil.r) : (1.0 - 2.0 * (1.0 - col.r) * (1.0 - targetFoil.r));\n" +
+                    "        blendLayer.g = col.g < 0.5 ? (2.0 * col.g * targetFoil.g) : (1.0 - 2.0 * (1.0 - col.g) * (1.0 - targetFoil.g));\n" +
+                    "        blendLayer.b = col.b < 0.5 ? (2.0 * col.b * targetFoil.b) : (1.0 - 2.0 * (1.0 - col.b) * (1.0 - targetFoil.b));\n" +
+
+                    "        // Add a micro-specular punch on top to make the sparkles catch light\n" +
+                    "        vec3 metallicSpecular = vec3(pow(finalGlint, 3.0) * 0.35);\n" +
+
+                    "        // Pushes color heavily into the card surface without burning out text\n" +
+                    "        vec3 finalMix = mix(col.rgb, blendLayer, 0.35) + metallicSpecular;\n" +
+                    "        \n" +
+                    "        // Apply the ink mask protection so the text font doesn't shift color\n" +
+                    "        col.rgb = mix(col.rgb, finalMix, inkProtection);\n" +
+                    "        col.rgb = clamp(col.rgb, 0.0, 1.0);\n" +
+                    "    }\n" +
+
+                    "    // Grayscale\n" +
+                    "    if (u_gray > 0.0) {\n" +
+                    "        float gray = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "        col.rgb = vec3(gray);\n" +
+                    "    }\n" +
+
+                    "    // Rounded corners\n" +
+                    "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
+                    "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
+                    "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
+
+                    "    vec2 abs_pixel_coord = vec2(\n" +
+                    "        abs(uv_base_center.x * half_resolution.x),\n" +
+                    "        abs(uv_base_center.y * half_resolution.y)\n" +
+                    "    );\n" +
+
+                    "    float alpha = 1.0;\n" +
+                    "    if (abs_pixel_coord.x > abs_rounded_center.x &&\n" +
+                    "        abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+                    "        float r = length(abs_pixel_coord - abs_rounded_center);\n" +
+                    "        alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
+                    "    }\n" +
+
+                    "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
+                    "}";
+
+
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +
