@@ -547,6 +547,10 @@ Replace=.055F fromSheet("FRA tower")+
 9 g_3_3_forest_tentacle @Deruchenko Alexander
 10 mowu @Leonardo Santanna
 11 rg_a_heartwood @Tianxing Xu
+12 lotus @Alex V. Ngo
+13 c_1_1_a_sculpture_treasure @Raluca Marinescu
+14 c_1_1_a_thopter_flying @Diego Gisbert
+15 c_a_treasure_sac @Alayna Danner
 
 [basic frame]
 1 Plains|FRA|[281]
@@ -794,10 +798,6 @@ Replace=.055F fromSheet("FRA tower")+
 1 Vraska, the Cutting Glare|FRA|[278]
 1 Karn, Argent Defender|FRA|[279]
 1 Traxos, Scourge Eternal|FRA|[280]
-12 lotus @Alex V. Ngo
-13 c_1_1_a_sculpture_treasure @Raluca Marinescu
-14 c_1_1_a_thopter_flying @Diego Gisbert
-15 c_a_treasure_sac @Alayna Danner
 
 [other]
 5 u_empower_jace @Manuel Castañón
