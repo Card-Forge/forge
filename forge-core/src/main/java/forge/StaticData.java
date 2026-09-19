@@ -1,5 +1,6 @@
 package forge;
 
+import com.google.common.collect.Iterables;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -226,6 +227,34 @@ public class StaticData {
         }
         if (card == null)
             card = commonCards.getCard(cardName, setCode);
+        if (card == null)
+            return null;
+        return foil ? card.getFoiled() : card;
+    }
+
+    public PaperCard getOrLoadCard(String cardName, String setCode, int artIndex, boolean foil) {
+        Map<String, CardDb> databases = getAvailableDatabases();
+        PaperCard card = null;
+        for (CardDb db : this.getAvailableDatabases().values()) {
+            card = db.getCard(cardName, setCode, artIndex);
+            if (card != null)
+                break;
+        }
+        if (card == null) {
+            attemptToLoadCard(cardName, setCode);
+            for (CardDb db : this.getAvailableDatabases().values()) {
+                card = db.getCard(cardName, setCode, artIndex);
+                if (card != null)
+                    break;
+            }
+        }
+        if (card == null) {
+            for (CardDb db : this.getAvailableDatabases().values()) {
+                card = db.getCard(cardName, setCode);
+                if (card != null)
+                    break;
+            }
+        }
         if (card == null)
             return null;
         return foil ? card.getFoiled() : card;

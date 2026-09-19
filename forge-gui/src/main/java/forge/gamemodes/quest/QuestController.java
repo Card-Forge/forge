@@ -19,7 +19,9 @@ package forge.gamemodes.quest;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
@@ -44,6 +46,7 @@ import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.data.StarRating;
 import forge.gamemodes.quest.io.QuestChallengeReader;
+import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
@@ -103,6 +106,24 @@ public class QuestController {
     public QuestController() {
     }
 
+    public Predicate<PaperCard> isVariantAllowed = paperCard -> {
+        return paperCard.getMainFace().getType().isAttraction() || paperCard.getMainFace().getType().isContraption();
+    };
+
+    public Stream<PaperCard> getAllCards() {
+        return Stream.concat(FModel.getMagicDb().getCommonCards().streamAllCards(), FModel.getMagicDb().getVariantCards().streamAllCards());
+    }
+
+    public Stream<PaperCard> getAllAllowedCards() {
+        Stream<PaperCard> common = FModel.getMagicDb().getCommonCards().streamAllCards();
+        Stream<PaperCard> variantCards = FModel.getMagicDb().getVariantCards().streamAllCards();
+        variantCards = variantCards.filter(isVariantAllowed);
+        return Stream.concat(common, variantCards);
+    }
+
+    public Stream<PaperCard> getAllMainCards() {
+        return FModel.getMagicDb().getCommonCards().streamAllCards();
+    }
     /**
      *
      * TODO: Write javadoc for this method.

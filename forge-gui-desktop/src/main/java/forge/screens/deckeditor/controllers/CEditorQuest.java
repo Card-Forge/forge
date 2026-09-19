@@ -119,6 +119,16 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
                 break;
         }
 
+        if (FModel.getQuest().getCards().getCardpool()
+                .find(attractionFilter()) != null) {
+            allSections.add(DeckSection.Attractions);
+        }
+
+        if (FModel.getQuest().getCards().getCardpool()
+                .find(contraptionFilter()) != null) {
+            allSections.add(DeckSection.Contraptions);
+        }
+
         this.questData = questData0;
 
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, true, false);
@@ -245,7 +255,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         this.sectionMode = DeckSection.Main;
 
         // show cards, makes this user friendly
-        this.getCatalogManager().setPool(getRemainingCardPool());
+        this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(mainCardsFilter()));
         this.getDeckManager().setPool(getDeck().getMain());
     }
 
@@ -262,6 +272,14 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
         // remove sideboard cards from the catalog
         cardpool.removeAll(getDeck().getOrCreate(DeckSection.Sideboard));
+
+        if (cardpool.find(attractionFilter()) != null) {
+            cardpool.removeAll(getDeck().getOrCreate(DeckSection.Attractions));
+        }
+
+        if (cardpool.find(contraptionFilter()) != null) {
+            cardpool.removeAll(getDeck().getOrCreate(DeckSection.Contraptions));
+        }
 
         switch(FModel.getQuest().getDeckConstructionRules()){
             case Default: break;
@@ -379,18 +397,28 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         switch(sectionMode){
             case Main :
                 this.getCatalogManager().setup(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog);
-                this.getCatalogManager().setPool(getRemainingCardPool());
+                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(mainCardsFilter()));
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
                 break;
             case Sideboard :
                 this.getCatalogManager().setup(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog);
-                this.getCatalogManager().setPool(getRemainingCardPool());
+                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(mainCardsFilter()));
                 this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Sideboard));
                 break;
             case Commander :
                 this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
-                this.getCatalogManager().setPool(getCommanderCardPool());
+                this.getCatalogManager().setPool(getCommanderCardPool().getFilteredPool(mainCardsFilter()));
                 this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Commander));
+                break;
+            case Attractions :
+                this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(attractionFilter()));
+                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Attractions));
+                break;
+            case Contraptions :
+                this.getCatalogManager().setup(ItemManagerConfig.CONTRAPTION_POOL);
+                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(contraptionFilter()));
+                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Contraptions));
                 break;
         }
 
@@ -466,5 +494,17 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
+    }
+
+    private Predicate<PaperCard> mainCardsFilter() {
+        return c -> !c.getRules().isVariant();
+    }
+
+    private Predicate<PaperCard> attractionFilter() {
+        return c -> c.getRules().getType().isAttraction();
+    }
+
+    private Predicate<PaperCard> contraptionFilter() {
+        return c -> c.getRules().getType().isContraption();
     }
 }
