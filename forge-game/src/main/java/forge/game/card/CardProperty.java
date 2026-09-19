@@ -960,7 +960,9 @@ public class CardProperty {
                 return false;
             }
 
-            if (!card.getZone().isCardAddedThisTurn(card, origin)) {
+            // an LKI copy has no current zone
+            final Zone zone = card.getLastKnownZone();
+            if (zone == null || !zone.isCardAddedThisTurn(card, origin)) {
                 return false;
             }
         } else if (property.startsWith("ThisTurnEntered")) {
@@ -1148,14 +1150,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("dealtCombatDamageThisTurn")) {
             if (card.getDamageHistory().getDamageDoneThisTurn(true, true, null, property.split(" ")[1], card, sourceController, spellAbility) == 0) {
-                return false;
-            }
-        } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (source.getDamageHistory().getDamageDoneThisTurn(true, true, null, "You", card, controller, spellAbility) == 0) {
-                return false;
-            }
-        } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (source.getDamageHistory().getDamageDoneThisTurn(null, true, null, "You", card, controller, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {

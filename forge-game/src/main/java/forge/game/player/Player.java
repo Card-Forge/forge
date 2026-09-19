@@ -2057,12 +2057,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasWon() {
-        if (cantWin()) {
+        // no outcome means the player is still in the game, so the replacement check cannot change the answer
+        if (getOutcome() == null || getOutcome().lossState != null) {
             return false;
         }
         // in multiplayer game one player's win is replaced by all other's lose (rule 103.4h)
         // so if someone cannot lose, the game appears to continue
-        return getOutcome() != null && getOutcome().lossState == null;
+        return !cantWin();
     }
 
     public final boolean isInGame() {

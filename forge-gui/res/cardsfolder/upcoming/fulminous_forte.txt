@@ -1,0 +1,7 @@
+Name:Fulminous Forte
+ManaCost:2 R
+Types:Instant
+A:SP$ Charm | Choices$ DBDamageAll,DBDamage
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidDescription$ each creature and planeswalker your opponents control. | SpellDescription$ CARDNAME deals 1 damage to each creature and planeswalker your opponents control.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker.
+Oracle:Choose one —\n• Fulminous Forte deals 1 damage to each creature and planeswalker your opponents control.\n• Fulminous Forte deals 5 damage to target creature or planeswalker.

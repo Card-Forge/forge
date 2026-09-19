@@ -140,7 +140,7 @@ public class PlayerProperty {
         } else if (property.startsWith("wasDealt")) {
             Boolean combat = null;
             if (property.contains("CombatDamage")) {
-                combat = true;
+                combat = !property.contains("NonCombat");
             }
             String validCard = null;
             String comp = "GE";
