@@ -14,6 +14,7 @@ import com.google.common.collect.Multiset;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
@@ -102,6 +103,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         boolean rememberRemoved = sa.hasParam("RememberRemoved");
         boolean rememberAmount = sa.hasParam("RememberAmount");
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
         int totalRemoved = 0;
         CardCollectionView srcCards;
         if (sa.hasParam("Choices")) {
@@ -142,16 +144,16 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                 }
                 if (type.equals("All")) {
                     for (Multiset.Entry<CounterType> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
-                        totalRemoved += tgtPlayer.subtractCounter(e.getElement(), e.getCount(), activator);
+                        totalRemoved += tgtPlayer.subtractCounter(e.getElement(), e.getCount(), activator, table);
                     }
                 } else {
                     if (num.equals("All")) {
                         cntToRemove = tgtPlayer.getCounters(counterType);
                     }
                     if (type.equals("Any")) {
-                        totalRemoved += removeAnyType(tgtPlayer, cntToRemove, sa);
+                        totalRemoved += removeAnyType(tgtPlayer, cntToRemove, sa, table);
                     } else {
-                        totalRemoved += tgtPlayer.subtractCounter(counterType, cntToRemove, activator);
+                        totalRemoved += tgtPlayer.subtractCounter(counterType, cntToRemove, activator, table);
                     }
                 }
             }
@@ -169,11 +171,11 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             final Zone zone = game.getZoneOf(gameCard);
             if (type.equals("All")) {
                 for (Multiset.Entry<CounterType> e : Lists.newArrayList(gameCard.getCounters().entrySet())) {
-                    totalRemoved += gameCard.subtractCounter(e.getElement(), e.getCount(), activator);
+                    totalRemoved += gameCard.subtractCounter(e.getElement(), e.getCount(), activator, table);
                 }
                 game.updateLastStateForCard(gameCard);
             } else if (type.equals("Any")) {
-                totalRemoved += removeAnyType(gameCard, cntToRemove, sa);
+                totalRemoved += removeAnyType(gameCard, cntToRemove, sa, table);
             } else {
                 if (!gameCard.canRemoveCounters(counterType)) {
                     continue;
@@ -200,7 +202,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     removeFromCard = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type), 0, removeFromCard, params);
                 }
                 if (removeFromCard > 0) {
-                    gameCard.subtractCounter(counterType, removeFromCard, activator);
+                    gameCard.subtractCounter(counterType, removeFromCard, activator, table);
                     if (rememberRemoved) {
                         for (int i = 0; i < removeFromCard; i++) {
                             // TODO might need to be more specific
@@ -214,13 +216,15 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             }
         }
 
+        table.replaceRemoveCounterEffect(game, sa);
+
         if (totalRemoved > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
             source.addRemembered(totalRemoved);
         }
     }
 
-    protected int removeAnyType(GameEntity entity, int cntToRemove, SpellAbility sa) {
+    protected int removeAnyType(GameEntity entity, int cntToRemove, SpellAbility sa, GameEntityCounterTable table) {
         boolean rememberRemoved = sa.hasParam("RememberRemoved");
         int removed = 0;
         boolean upTo = sa.hasParam("UpTo");
@@ -261,7 +265,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
             if (chosenAmount > 0) {
                 removed += chosenAmount;
-                entity.subtractCounter(chosenType, chosenAmount, activator);
+                entity.subtractCounter(chosenType, chosenAmount, activator, table);
                 if (entity instanceof Card gameCard) {
                     game.updateLastStateForCard(gameCard);
                 }
