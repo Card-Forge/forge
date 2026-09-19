@@ -604,7 +604,7 @@ public class Game {
         return card == null ? null : card.getLastKnownZone();
     }
 
-    public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
+    public CardCollectionView getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
