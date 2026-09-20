@@ -1,0 +1,8 @@
+Name:Heartstring Puller
+ManaCost:3 R
+Types:Creature Elf Sorcerer
+PT:3/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 2/2 colorless Wizard Soldier creature token named Cadet.
+SVar:TrigToken:DB$ Token | TokenScript$ cadet | TokenOwner$ You
+Oracle:Trample\nWhen this creature enters, create a 2/2 colorless Wizard Soldier creature token named Cadet.

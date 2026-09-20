@@ -1,0 +1,10 @@
+Name:Tomik, Orzhov Lawmage
+ManaCost:1 W
+Types:Legendary Creature Human Advisor
+PT:2/1
+K:Flying
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddStaticAbility$ PWTomik | Description$ Planeswalkers you control have "No more than one creature can attack this planeswalker each combat."
+SVar:PWTomik:Mode$ AttackRestrict | MaxAttackers$ 1 | ValidDefender$ Card.Self | Description$ No more than one creature can attack this planeswalker each combat.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.counters_GE1_P1P1 | ValidTgtsDesc$ creature with a +1/+1 counter on it | KW$ Flying | SpellDescription$ Target creature with a +1/+1 counter on it gains flying until end of turn.
+DeckHints:Ability$Counters & Type$Planeswalker
+Oracle:Flying\nPlaneswalkers you control have "No more than one creature can attack this planeswalker each combat."\n{T}: Target creature with a +1/+1 counter on it gains flying until end of turn.

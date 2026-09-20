@@ -1,0 +1,9 @@
+Name:Recursive Recruitment
+ManaCost:2 U B
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ cadet | RememberTokens$ True | TokenOwner$ You | SubAbility$ DBPutCounter | SpellDescription$ Create two 2/2 colorless Wizard Soldier creature tokens named Cadet. If this spell was cast from a graveyard, put a +1/+1 counter on each of them for every three cards in your graveyard.\nFlashback {6}{U}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.YouOwn/DivideEvenlyDown.3
+K:Flashback:6 U B
+Oracle:Create two 2/2 colorless Wizard Soldier creature tokens named Cadet. If this spell was cast from a graveyard, put a +1/+1 counter on each of them for every three cards in your graveyard.\nFlashback {6}{U}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
