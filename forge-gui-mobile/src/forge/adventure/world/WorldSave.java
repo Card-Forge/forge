@@ -11,10 +11,7 @@ import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
 import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
-import forge.adventure.util.AdventureModes;
-import forge.adventure.util.Config;
-import forge.adventure.util.SaveFileData;
-import forge.adventure.util.SignalList;
+import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
@@ -70,7 +67,7 @@ public class WorldSave {
     }
 
     static public boolean load(int currentSlot) {
-
+        JSONStringLoader.clearCache();
         Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
 
         Forge.invokeWorldSave = true; // This is for dispose method check

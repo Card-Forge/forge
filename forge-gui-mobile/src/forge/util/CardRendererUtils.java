@@ -102,12 +102,14 @@ public class CardRendererUtils {
             return false;
         return card.wasDestroyed() || card.isPhasedOut();
     }
-    public static boolean drawFoil(final CardView card) {
+    public static int drawFoil(final CardView card) {
         if (card == null)
-            return false;
-        if (isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT))
-            return card.hasPaperFoil();
-        return false;
+            return 0;
+        if (!isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT))
+            return 0;
+        if (!card.hasPaperFoil())
+            return 0;
+        return card.getCurrentState().getFoilIndex();
     }
     public static boolean drawCracks(final CardView card, final boolean isMagnify) {
         if (card == null)

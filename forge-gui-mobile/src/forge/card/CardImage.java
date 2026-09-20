@@ -49,7 +49,7 @@ public class CardImage implements FImage {
             CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             if (Forge.enableUIMask.equals("Full")) {
-                g.drawCardRoundRect(image, null, x, y, w, h, false, false, false);
+                g.drawCardRoundRect(image, null, x, y, w, h, false, false, 0);
             } else if (Forge.enableUIMask.equals("Crop")) {
                 g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h);
             } else

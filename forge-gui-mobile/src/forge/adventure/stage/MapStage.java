@@ -1027,12 +1027,14 @@ public class MapStage extends GameStage {
         for (Integer i : idsToRemove) deleteObject(i);
     }
 
+    private final ArrayList<NavigationVertex> navVerticesList = new ArrayList<>(256);
+    private final ProgressableGraphPath<NavigationVertex> emptyFallbackNavPath = new ProgressableGraphPath<>(0);
+    private static final HashMap<String, String> rewardLabelsMap = new HashMap<>(32);
+
     @Override
     protected void onActing(float delta) {
         if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls || isPlayerLeavingDungeon)
             return;
-
-        Iterator<EnemySprite> it = enemies.iterator();
 
         if (freezeAllEnemyBehaviors) {
             if (!positions.contains(player.pos())) {
@@ -1040,30 +1042,36 @@ public class MapStage extends GameStage {
             }
             else return;
         }
-        float mobSize = navMapSize; //todo: replace with actual size if multiple nav maps implemented
-        ArrayList<NavigationVertex> verticesNearPlayer = new ArrayList<>(navMaps.get(mobSize).navGraph.getNodes());
+
+        float mobSize = navMapSize; // todo: replace with actual size if multiple nav maps implemented
+
+        navVerticesList.clear();
+        navVerticesList.addAll(navMaps.get(mobSize).navGraph.getNodes());
 
         // cache the current player coordinates registry once
         playerPosReg.set(player.pos());
 
         // for ambiguous collision with com.badlogic.gdx.utils.Collections
-        java.util.Collections.sort(verticesNearPlayer, distanceComparator);
+        java.util.Collections.sort(navVerticesList, distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
-            while (it.hasNext()) {
-                EnemySprite mob = it.next();
-                if (mob.inactive){
+            int enemyCount = enemies.size();
+
+            for (int i = 0; i < enemyCount; i++) {
+                EnemySprite mob = enemies.get(i);
+                if (mob == null || mob.inactive) {
                     continue;
                 }
                 mob.updatePositon();
 
-                ProgressableGraphPath<NavigationVertex> navPath = new ProgressableGraphPath<>(0);
+                ProgressableGraphPath<NavigationVertex> navPath = emptyFallbackNavPath;
+
                 if (mob.getData().flying) {
                     // update vertex
                     navigationVertex.pos.set(mob.getTargetVector(player, null, delta));
                     navPath.add(navigationVertex);
                 } else {
-                    Vector2 destination = mob.getTargetVector(player, verticesNearPlayer, delta);
+                    Vector2 destination = mob.getTargetVector(player, navVerticesList, delta);
 
                     if (mob.isFrozen() || (destination.epsilonEquals(mob.pos()) && !mob.aggro)) {
                         mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
@@ -1113,22 +1121,27 @@ public class MapStage extends GameStage {
             }
         }
 
-        float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
-        player.setMoveModifier(2 * sprintingMod);
+        float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2f : 1f;
+        player.setMoveModifier(2f * sprintingMod);
 
         positions.add(player.pos());
         if (positions.size() > 4)
             positions.remove();
 
-        for (MapActor actor : new Array.ArrayIterator<>(actors)) {
+        int actorCount = actors.size;
+
+        for (int i = 0; i < actorCount; i++) {
+            MapActor actor = actors.get(i);
+            if (actor == null) continue;
+
             if (actor.collideWithPlayer(player)) {
                 if (actor instanceof EnemySprite) {
                     EnemySprite mob = (EnemySprite) actor;
                     currentMob = mob;
                     resetPosition();
-                    if (mob.dialog != null && mob.dialog.canShow()) { //This enemy has something to say. Display a dialog like if it was a DialogActor but only if dialogue is possible.
+                    if (mob.dialog != null && mob.dialog.canShow()) {
                         mob.dialog.activate();
-                    } else { //Duel the enemy.
+                    } else { // Duel the enemy
                         beginDuel(mob);
                     }
                     break;
@@ -1140,12 +1153,20 @@ public class MapStage extends GameStage {
 
                     if (rewards.size == 1) {
                         Reward reward = rewards.get(0);
+                        final String rewardTypeName = reward.getType().name();
+
                         switch (reward.getType()) {
                             case Life:
                             case Shards:
                             case Gold:
-                                String message = Forge.getLocalizer().getMessageorUseDefault("lbl" + reward.getType().name(), reward.getType().name());
-                                AdventurePlayer.current().addStatusMessage(reward.getType().name(), message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
+                                String labelKey = rewardLabelsMap.get(rewardTypeName);
+                                if (labelKey == null) {
+                                    labelKey = "lbl" + rewardTypeName;
+                                    rewardLabelsMap.put(rewardTypeName, labelKey);
+                                }
+
+                                String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
+                                AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
                                 break;
                             default:

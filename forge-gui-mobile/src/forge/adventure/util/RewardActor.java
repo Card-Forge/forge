@@ -1137,7 +1137,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private void drawCard(Batch batch, Texture image, float x, float width, boolean isFoil) {
         if (image != null) {
             Color batchColor = batch.getColor();
-            float radius = Forge.enableUIMask.equals("Full") ? (float) (image.getHeight() / image.getWidth()) * 20 : 0f;
+            float radius = Forge.enableUIMask.equals("Full") && !shouldDisplayText && loaded ? (float) (image.getHeight() / image.getWidth()) * 20 : 0f;
             batch.end();
             if (hover | hasKeyboardFocus())
                 batch.setColor(0.5f, 0.5f, 0.5f, 1);
@@ -1315,7 +1315,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         float y = tooltip.getActor().getStoredImage().getImageY();
                         float w = tooltip.getActor().getStoredImage().getPrefWidth();
                         float h = tooltip.getActor().getStoredImage().getPrefHeight();
-                        float radius = Forge.enableUIMask.equals("Full") && !shouldDisplayText ? (float) (t.getHeight() / t.getWidth()) * 20 : 0f;
+                        float radius = Forge.enableUIMask.equals("Full") && !shouldDisplayText && loaded ? (float) (t.getHeight() / t.getWidth()) * 20 : 0f;
                         batch.end();
                         ShaderUtil.getInstance().getShaderFoilRounded().bind();
                         ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", t.getWidth(), t.getHeight());

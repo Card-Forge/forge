@@ -51,6 +51,9 @@ public class Config {
 
     private final FolderDeckCatalog preconDeckCatalog = new FolderDeckCatalog("decks/starter/precon/");
     private final FolderDeckCatalog commanderPreconDeckCatalog = new FolderDeckCatalog("decks/starter/commanderprecon/");
+    private static final StringBuilder stringBuilder = new StringBuilder(256);
+    private static final HashMap<String, String> langPathsMap = new HashMap<>(512);
+
 
     static public Config instance() {
         if (currentConfig == null)
@@ -208,10 +211,37 @@ public class Config {
     }
 
     private String langFilePath(String fullPath, String rootPrefix) {
-        String baseName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
-        String nameNoExt = baseName.replaceFirst("[.][^.]+$", "");
-        String ext = baseName.substring(baseName.lastIndexOf('.'));
-        return (rootPrefix + "languages/" + nameNoExt + "-" + Lang + ext).replace("//", "/");
+        if (fullPath == null || rootPrefix == null) return "";
+
+        // return compiled path locations if available
+        stringBuilder.setLength(0);
+        String cacheKey = stringBuilder.append(rootPrefix).append("|").append(fullPath).toString();
+
+        String cachedPath = langPathsMap.get(cacheKey);
+        if (cachedPath != null) {
+            return cachedPath;
+        }
+
+        // before it uses regex parsing that continually allocate short-lived character arrays so we use this and cache the result
+        int lastSlash = fullPath.lastIndexOf('/');
+        String baseName = lastSlash != -1 ? fullPath.substring(lastSlash + 1) : fullPath;
+
+        int lastDot = baseName.lastIndexOf('.');
+        String nameNoExt = lastDot != -1 ? baseName.substring(0, lastDot) : baseName;
+        String ext = lastDot != -1 ? baseName.substring(lastDot) : "";
+
+        stringBuilder.setLength(0);
+        String compiledPath = stringBuilder.append(rootPrefix)
+            .append("languages/")
+            .append(nameNoExt)
+            .append("-")
+            .append(Lang)
+            .append(ext)
+            .toString()
+            .replace("//", "/");
+
+        langPathsMap.put(cacheKey, compiledPath);
+        return compiledPath;
     }
 
     public FileHandle getFile(String path) {
@@ -469,8 +499,10 @@ public class Config {
                 } else {
                     deckName = nameNoExt;
                 }
+                stringBuilder.setLength(0);
+                String deckValuePath = stringBuilder.append(folderPath).append(filename).toString();
                 setMap.computeIfAbsent(setDisplayName, k -> new ArrayList<>())
-                        .add(new String[]{deckName, folderPath + filename});
+                    .add(new String[]{deckName, deckValuePath});
             }
             for (List<String[]> decks : setMap.values()) {
                 decks.sort(Comparator.comparing(a -> a[0]));
