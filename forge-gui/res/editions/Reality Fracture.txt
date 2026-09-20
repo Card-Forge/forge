@@ -29,6 +29,7 @@ ScryfallCode=FRA
 21 C Shatterwing Pegasus @Antonio José Manzanedo
 22 C Surgical Precision @Nathaniel Himawan
 23 C Unflinching Hortimancer @Manuel Castañón
+24 U Your Fate Ends Here @Andrew Mar
 25 U Countersculpt @Anna Podedworna
 26 R Cruel Calculations @Lindsey Look
 27 C Cryotheory Adept @Kai Carpenter
@@ -77,6 +78,7 @@ ScryfallCode=FRA
 70 C Void Extrapolator @Valera Lutfullina
 71 R Vraska's Final Mercy @Magali Villeneuve
 72 R Ajani's Anguish @Mathias Kollros
+73 C Artifist Acumen @Anna Podedworna
 74 C Awaken the Inferno @Kai Carpenter
 75 C Blazing Crescendo @Billy Christian
 76 C Chandra's Emberling @Borja Pindado
@@ -178,26 +180,26 @@ ScryfallCode=FRA
 172 C Living Library @Jarel Threat
 173 C Medic's Kitesail @Paolo Parente
 174 C Murmuring Volume @Zoltan Boros
-175 C Dedicated Commons @Josu Solano
+175 L Dedicated Commons @Josu Solano
 176 R Deserted Beach @Sarah Finnigan
-177 C Fatehold Annex @Sergey Glushakov
-178 C Formidable Commons @Marco Gorlei
+177 L Fatehold Annex @Sergey Glushakov
+178 L Formidable Commons @Marco Gorlei
 179 R Hall of Echoes @Leon Tukker
 180 R Haunted Ridge @Wayne Wu
 181 U Hexhaven Dueling Arena @Constantin Marin
-182 C Innovative Commons @Grady Frederick
-183 C Konstrari Annex @Sergey Glushakov
-184 C Meticulous Commons @Grady Frederick
+182 L Innovative Commons @Grady Frederick
+183 L Konstrari Annex @Sergey Glushakov
+184 L Meticulous Commons @Grady Frederick
 185 R Overgrown Farmland @Titus Lunter
 186 R Rockfall Vale @Cristi Balanescu
 187 R Roiling Canopy @Titus Lunter
 188 C Room of Refuge @Constantin Marin
 189 R Shipwreck Marsh @Darren Tan
-190 C Stingerquill Annex @Sergey Glushakov
+190 L Stingerquill Annex @Sergey Glushakov
 191 R Theorist's Sanctum @Adam Paquette
-192 C Theorix Annex @Sergey Glushakov
-193 C Transformative Commons @Lius Lasahido
-194 C Vigorbloom Annex @Sergey Glushakov
+192 L Theorix Annex @Sergey Glushakov
+193 L Transformative Commons @Lius Lasahido
+194 L Vigorbloom Annex @Sergey Glushakov
 195 M Ajani Resolute @Tyler Jacobson
 196 U Danitha, Sword of Hope @Bryan Sola
 197 U Ghalta the Immovable @Antonio José Manzanedo
@@ -209,6 +211,7 @@ ScryfallCode=FRA
 203 U Saheeli, Consul of Oversight @Billy Christian
 204 U Teyo, Lightshield Expert @Anna Steinbauer
 205 U Thalia, the Survivor @Ryan Pancoast
+206 U Tomik, Orzhov Lawmage @Randy Vargas
 207 U Way of the Healer @Pauline Voss
 208 U Way of the Mentor @Danny Schwartz
 209 U Yoshimaru, Beloved Companion @Brian Valeza
@@ -255,6 +258,7 @@ ScryfallCode=FRA
 250 U Pia, Determined Rebuilder @Andreas Zafiratos
 251 R Samut, Hazoret's Champion @Grzegorz Rutkowski
 252 U Tetsuko Umezawa, Pursuer @Tuan Duong Chu
+253 U Tomik, Izzet Sparkmage @Randy Vargas
 254 U Way of the Pyromancer @Andrey Kuzinskiy
 255 U Way of the Warlord @Danny Schwartz
 256 U Winter, Team Player @Aurore Folny
@@ -290,6 +294,8 @@ ScryfallCode=FRA
 286 L Swamp @Leon Tukker
 287 L Mountain @Jorge Jacinto
 288 L Mountain @Chris Ostrowski
+289 L Forest @Randy Gallegos
+290 L Forest @Chris Ostrowski
 291 M Ajani Resolute @Aleksi Briclot
 292 R Gideon's Memorial @Lius Lasahido
 293 R Liliana the Faultless @Aleksi Briclot
@@ -441,6 +447,7 @@ ScryfallCode=FRA
 439 M Enlightened Confidant @James Martin
 440 M Return to the Light Realms @Heikala
 441 M Seasoned Cryomancer @Mattias Lindström
+442 R Sphinx's Approach @Harry Conway
 443 M The Theorist, Jace Beleren @ONIKU kuitai
 444 M Darklight Phoenix @Jun Ishimaru
 445 M Overwrite the Multiverse @Pedro Correa
@@ -462,5 +469,23 @@ ScryfallCode=FRA
 461 R Frostbite Pyromental @Paul Adam
 
 [tokens]
+1 cadet @Elizabeth Peiró
+2 ajanis_pridemate @Diego Gisbert
+3 u_3_3_angel_flying @Raluca Marinescu
 4 u_1_1_illusion @Daniel Cotter
+6 u_8_8_leviathan_hexproof @Maxime Minard
+7 r_5_5_dragon_flying @Loïc Canavaggia
+8 g_4_4_beast_trample @Simon Dominic
+9 g_3_3_forest_tentacle @Deruchenko Alexander
+10 mowu @Leonardo Santanna
 11 rg_a_heartwood @Tianxing Xu
+12 lotus @Alex V. Ngo
+13 c_1_1_a_sculpture_treasure @Raluca Marinescu
+14 c_1_1_a_thopter_flying @Diego Gisbert
+15 c_a_treasure_sac @Alayna Danner
+
+[other]
+5 u_empower_jace @Manuel Castañón
+16 emblem_ajani_resolute @Tyler Jacobson
+17 emblem_chandra_chill_of_compliance @Kieran Yanner
+18 emblem_chandra_torch_of_defiance @Kieran Yanner

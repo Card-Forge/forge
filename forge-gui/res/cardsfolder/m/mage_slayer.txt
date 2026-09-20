@@ -5,6 +5,6 @@ K:Equip:3
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature attacks, it deals damage equal to its power to the player or planeswalker it's attacking.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender.Opponent & Valid Planeswalker.TriggeredDefender | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ X
 SVar:X:TriggeredAttacker$CardPower
-S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+S:Mode$ Continuous | AffectedDefined$ AttachedBy Self | Affected$ Creature | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 Oracle:Whenever equipped creature attacks, it deals damage equal to its power to the player or planeswalker it's attacking.\nEquip {3}

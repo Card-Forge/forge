@@ -1,7 +1,7 @@
 Name:Stormbeacon Blade
 ManaCost:1 W
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks, draw a card if you control three or more attacking creatures.
 SVar:TrigDraw:DB$ Draw | Defined$ You | ConditionPresent$ Creature.attacking+YouCtrl | ConditionCompare$ GE3
 K:Equip:2

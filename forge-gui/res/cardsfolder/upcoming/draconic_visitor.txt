@@ -1,0 +1,9 @@
+Name:Draconic Visitor
+ManaCost:3 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Artifact.YouCtrl | ReplaceWith$ TokenReplace | Description$ If one or more artifact tokens would be created under your control, that many 5/5 red Dragon creature tokens with flying are created instead.
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ r_5_5_dragon_flying
+DeckNeeds:Ability$Token
+Oracle:Flying\nIf one or more artifact tokens would be created under your control, that many 5/5 red Dragon creature tokens with flying are created instead.

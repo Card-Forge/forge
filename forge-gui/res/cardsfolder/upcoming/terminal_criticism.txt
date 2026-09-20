@@ -1,0 +1,6 @@
+Name:Terminal Criticism
+ManaCost:1 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.Blue,Creature.Red,Planeswalker.Blue,Planeswalker.Red | ValidTgtsDesc$ creature or planeswalker that’s blue or red | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature or planeswalker that's blue or red. You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Destroy target creature or planeswalker that's blue or red. You gain 1 life.
