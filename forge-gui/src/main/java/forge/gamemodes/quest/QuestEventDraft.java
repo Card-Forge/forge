@@ -777,7 +777,6 @@ public class QuestEventDraft implements IQuestEvent {
         final List<QuestDraftFormat> possibleFormats = new ArrayList<>();
         final List<CardBlock> blocks = getBlocks();
 
-        List<String> singleSets = new ArrayList<>();
         if (!allowedQuestSets.isEmpty()) {
             for (final CardBlock block : blocks) {
 
@@ -797,8 +796,9 @@ public class QuestEventDraft implements IQuestEvent {
             }
 
             for (CardEdition allowedQuestSet : allowedQuestSets) {
-                if (allowedQuestSet.isLargeSet() && !singleSets.contains(allowedQuestSet.getCode())) {
-                    if (!allowedQuestSet.hasBoosterTemplate() || allowedQuestSet.getType() == CardEdition.Type.OTHER) {
+                if (allowedQuestSet.isLargeSet()) {
+                    if (!allowedQuestSet.hasBoosterTemplate() || allowedQuestSet.getType() == CardEdition.Type.OTHER ||
+                            allowedQuestSet.getType() == CardEdition.Type.FUNNY) {
                         // skip non-tournament legal and other unusual sets that will crash in Quest Mode
                         continue;
                     }
