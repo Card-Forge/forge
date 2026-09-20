@@ -1552,6 +1552,10 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.FoilIndex, c.getFoil());
         }
         public void setFoilIndexOverride(int index0) {
+            if (index0 == -2) { // 0 turns off the shader foil switch
+                foilIndexOverride = MyRandom.getRandom().nextInt(50) + 1;
+                return;
+            }
             if (index0 < 0) {
                 index0 = CardEdition.getRandomFoil(getSetCode());
             }

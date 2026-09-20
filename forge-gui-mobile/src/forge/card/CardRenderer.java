@@ -647,7 +647,7 @@ public class CardRenderer {
         }
         if (pc.isFoil()) { //draw foil effect if needed
             if (card.getCurrentState().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                card.getCurrentState().setFoilIndexOverride(-1);
+                card.getCurrentState().setFoilIndexOverride(-2);
             }
         }
         if (image != null) {

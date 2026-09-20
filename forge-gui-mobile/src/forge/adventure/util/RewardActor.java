@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -1141,15 +1142,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             batch.end();
             if (hover | hasKeyboardFocus())
                 batch.setColor(0.5f, 0.5f, 0.5f, 1);
-            ShaderUtil.getInstance().getShaderFoilRounded().bind();
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", radius);
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", sold ? 1f : 0f);
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", isFoil ? 1.0f : 0.0f);
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 0f, 0f);
-            ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", 8, 0);
-            batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
+            boolean shouldApplyHolo = isFoil && !shouldDisplayText && loaded;
+            ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+            if (shouldApplyHolo) {
+                shaderProgram.bind();
+                shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+                shaderProgram.setUniformf("edge_radius", radius);
+                shaderProgram.setUniformf("u_time", 0);
+                shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                // TODO: get foilIndex
+                shaderProgram.setUniformf("u_cardPosition", 0, 0);
+            } else {
+                shaderProgram.bind();
+                shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+                shaderProgram.setUniformf("edge_radius", radius);
+                shaderProgram.setUniformf("u_gray", sold ? 1f : 0f);
+            }
+            batch.setShader(shaderProgram);
             batch.begin();
             if (Forge.enableUIMask.equals("Crop"))
                 batch.draw(ImageCache.getInstance().croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
@@ -1317,15 +1326,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         float h = tooltip.getActor().getStoredImage().getPrefHeight();
                         float radius = Forge.enableUIMask.equals("Full") && !shouldDisplayText && loaded ? (float) (t.getHeight() / t.getWidth()) * 20 : 0f;
                         batch.end();
-                        ShaderUtil.getInstance().getShaderFoilRounded().bind();
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", t.getWidth(), t.getHeight());
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", radius);
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", sold ? 1f : 0f);
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", reward.getCard() != null && reward.getCard().isFoil() ? 1.0f : 0.0f);
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 0f, 0f);
-                        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", 8, 0);
-                        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
+                        boolean shouldApplyHolo = reward.getCard() != null && reward.getCard().isFoil() && !shouldDisplayText && loaded;
+                        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+                        if (shouldApplyHolo) {
+                            shaderProgram.bind();
+                            shaderProgram.setUniformf("u_resolution", t.getWidth(), t.getHeight());
+                            shaderProgram.setUniformf("edge_radius", radius);
+                            shaderProgram.setUniformf("u_time", 0);
+                            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                            // TODO: get foilIndex
+                            shaderProgram.setUniformf("u_cardPosition", 0, 0);
+                        } else {
+                            shaderProgram.bind();
+                            shaderProgram.setUniformf("u_resolution", t.getWidth(), t.getHeight());
+                            shaderProgram.setUniformf("edge_radius", radius);
+                            shaderProgram.setUniformf("u_gray", sold ? 1f : 0f);
+                        }
+                        batch.setShader(shaderProgram);
                         batch.begin();
                         if (Forge.enableUIMask.equals("Crop"))
                             batch.draw(ImageCache.getInstance().croppedBorderImage(t), x, y, w, h);

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
@@ -1070,21 +1071,24 @@ public class Graphics implements Disposable {
             return;
         if (image != null) {
             if (!drawGrayscale) {
-                batch.end();
-                ShaderUtil.getInstance().getShaderFoilRounded().bind();
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", 0);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", 0f);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", foilIndex > 0 ? 1.0f : 0.0f);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-                batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
-                batch.begin();
-                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-                batch.end();
-                batch.setShader(null);
-                batch.begin();
+                if (foilIndex > 0) {
+                    batch.end();
+                    ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+                    shaderProgram.bind();
+                    shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+                    shaderProgram.setUniformf("edge_radius", 0);
+                    shaderProgram.setUniformf("u_time", 0);
+                    shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                    shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+                    batch.setShader(shaderProgram);
+                    batch.begin();
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                    batch.end();
+                    batch.setShader(null);
+                    batch.begin();
+                } else {
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                }
                 if (damage_overlay != null && damaged)
                     batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
             } else {
@@ -1107,21 +1111,24 @@ public class Graphics implements Disposable {
     public void drawCardImage(TextureRegion image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged, int foilIndex) {
         if (image != null) {
             if (!drawGrayscale) {
-                batch.end();
-                ShaderUtil.getInstance().getShaderFoilRounded().bind();
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", 0);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", 0f);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", foilIndex > 0 ? 1.0f : 0.0f);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-                ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-                batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
-                batch.begin();
-                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-                batch.end();
-                batch.setShader(null);
-                batch.begin();
+                if (foilIndex > 0) {
+                    batch.end();
+                    ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+                    shaderProgram.bind();
+                    shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+                    shaderProgram.setUniformf("edge_radius", 0);
+                    shaderProgram.setUniformf("u_time", 0);
+                    shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                    shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+                    batch.setShader(shaderProgram);
+                    batch.begin();
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                    batch.end();
+                    batch.setShader(null);
+                    batch.begin();
+                } else {
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                }
                 if (damage_overlay != null && damaged)
                     batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
             } else {
@@ -1195,17 +1202,23 @@ public class Graphics implements Disposable {
             return;
         float radius = ImageCache.getInstance().getRadius(image);
         batch.end();
-        ShaderUtil.getInstance().getShaderFoilRounded().bind();
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * radius);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", drawGray ? 0.8f : 0f);
-
         boolean shouldApplyHolo = foilIndex > 0 && !drawGray;
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", shouldApplyHolo ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
+        float edgeRadius = (float)(image.getHeight() / image.getWidth()) * radius;
+        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+        if (shouldApplyHolo) {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+        } else {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_gray", drawGray ? 0.8f : 0f);
+        }
+        batch.setShader(shaderProgram);
         batch.begin();
         //draw
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -1225,15 +1238,23 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         batch.end();
-        ShaderUtil.getInstance().getShaderFoilRounded().bind();
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", ((float)(image.getRegionHeight() / image.getRegionWidth()) * (ImageCache.getInstance().getRadius(image.getTexture()) * modR)));
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", 0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", foilIndex > 0 ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
+        boolean shouldApplyHolo = foilIndex > 0;
+        float edgeRadius = ((float)(image.getRegionHeight() / image.getRegionWidth()) * (ImageCache.getInstance().getRadius(image.getTexture()) * modR));
+        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+        if (shouldApplyHolo) {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+        } else {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_gray", 0f);
+        }
+        batch.setShader(shaderProgram);
         batch.begin();
         //draw
         drawRotatedImage(image, x, y, w, h, originX, originY, rotation);
@@ -1247,15 +1268,23 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         batch.end();
-        ShaderUtil.getInstance().getShaderFoilRounded().bind();
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", ((float)(image.getHeight() / image.getWidth()) * (ImageCache.getInstance().getRadius(image) * modR)));
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", 0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", foilIndex > 0 ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
+        boolean shouldApplyHolo = foilIndex > 0;
+        float edgeRadius = ((float)(image.getHeight() / image.getWidth()) * (ImageCache.getInstance().getRadius(image) * modR));
+        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+        if (shouldApplyHolo) {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+        } else {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_gray", 0f);
+        }
+        batch.setShader(shaderProgram);
         batch.begin();
         //draw
         drawRotatedImage(image, x, y, w, h, originX, originY, 0, 0, image.getWidth(), image.getHeight(), rotation);
@@ -1600,40 +1629,47 @@ public class Graphics implements Disposable {
     public void drawImage(TextureRegion image, float x, float y, float w, float h, int foilIndex) {
         if (image == null)
             return;
-        batch.end();
-        ShaderUtil.getInstance().getShaderFoilRounded().bind();
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", 0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", foilIndex > 0 ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
-        batch.begin();
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        batch.end();
-        batch.setShader(null);
-        batch.begin();
+        if (foilIndex > 0) {
+            batch.end();
+            ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderProgram.setUniformf("edge_radius", 0);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+            batch.setShader(shaderProgram);
+            batch.begin();
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
+
     }
     public void drawImage(Texture image, float x, float y, float w, float h, int foilIndex) {
         if (image == null)
             return;
-        batch.end();
-        ShaderUtil.getInstance().getShaderFoilRounded().bind();
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("edge_radius", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_gray", 0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_isHolo", foilIndex > 0 ? 1.0f : 0.0f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_time", 0);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_foilTilt", 2, 3.1f);
-        ShaderUtil.getInstance().getShaderFoilRounded().setUniformf("u_cardPosition", foilIndex, 0);
-        batch.setShader(ShaderUtil.getInstance().getShaderFoilRounded());
-        batch.begin();
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        batch.end();
-        batch.setShader(null);
-        batch.begin();
+        if (foilIndex > 0) {
+            batch.end();
+            ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", 0);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+            batch.setShader(shaderProgram);
+            batch.begin();
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
     }
 
     public void drawImage(FImage image, float x, float y, float w, float h) {
