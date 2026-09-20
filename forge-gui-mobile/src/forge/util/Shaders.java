@@ -145,6 +145,174 @@ public class Shaders {
             "    \n" +
             "\tgl_FragColor = vec4( mix(discolor, color, col) * mask, 1.0);\n" +
             "}";
+    public static final String vertCardShader =
+            "attribute vec4 a_position;\n" +
+                    "attribute vec4 a_color;\n" +
+                    "attribute vec2 a_texCoord0;\n" +
+                    "\n" +
+                    "uniform mat4 u_projTrans;\n" +
+                    "\n" +
+                    "varying vec4 v_color;\n" +
+                    "varying vec2 v_texCoords;\n" +
+                    "\n" +
+                    "void main() {\n" +
+                    "    v_color = a_color;\n" +
+                    "    v_texCoords = a_texCoord0;\n" +
+                    "    gl_Position = u_projTrans * a_position;\n" +
+                    "}";
+
+    public static final String fragCardShader =
+            "#ifdef GL_ES\n" +
+                    "precision mediump float;\n" +
+                    "#endif\n" +
+
+                    "varying vec4 v_color;\n" +
+                    "varying vec2 v_texCoords;\n" +
+
+                    "uniform sampler2D u_texture;\n" +
+                    "uniform vec2 u_resolution;\n" +
+                    "uniform float edge_radius;\n" +
+                    "uniform float u_gray;\n" +
+                    "uniform float u_isHolo;\n" +
+                    "uniform float u_time;\n" +
+                    "uniform vec2 u_cardPosition;\n" +
+                    "uniform vec2 u_foilTilt;\n" +
+
+                    "float hash21(vec2 p) {\n" +
+                    "    p = fract(p * vec2(123.34, 456.21));\n" +
+                    "    p += dot(p, p + 45.32);\n" +
+                    "    return fract(p.x * p.y);\n" +
+                    "}\n" +
+
+                    "float noise(vec2 p) {\n" +
+                    "    vec2 i = floor(p);\n" +
+                    "    vec2 f = fract(p);\n" +
+                    "    f = f * f * (3.0 - 2.0 * f);\n" +
+                    "    float a = hash21(i);\n" +
+                    "    float b = hash21(i + vec2(1.0, 0.0));\n" +
+                    "    float c = hash21(i + vec2(0.0, 1.0));\n" +
+                    "    float d = hash21(i + vec2(1.0, 1.0));\n" +
+                    "    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);\n" +
+                    "}\n" +
+
+                    "float fbm(vec2 p) {\n" +
+                    "    float v = 0.0;\n" +
+                    "    v += noise(p) * 0.65;\n" +
+                    "    v += noise(p * 2.0) * 0.35;\n" +
+                    "    return v;\n" +
+                    "}\n" +
+
+                    "vec3 spectralColor(float x) {\n" +
+                    "    return 0.5 + 0.5 * cos(6.28318 * (fract(x) + vec3(0.0, 0.33, 0.67)));\n" +
+                    "}\n" +
+
+                    "vec2 rotate(vec2 p, float a) {\n" +
+                    "    float s = sin(a);\n" +
+                    "    float c = cos(a);\n" +
+                    "    return vec2(p.x * c - p.y * s, p.x * s + p.y * c);\n" +
+                    "}\n" +
+
+                    "float ribbon(vec2 p, float offset, float seed, float sharedField) {\n" +
+                    "    float x = p.x;\n" +
+                    "    float bend = sin(x * 1.10 + seed) * 0.20;\n" +
+                    "    bend += sin(x * 2.15 + seed * 1.73) * 0.10;\n" +
+                    "    bend += sin(x * 4.00 - seed * 0.83) * 0.035;\n" +
+                    "    bend += (sharedField - 0.5) * 0.28;\n" +
+                    "    return abs(p.y - (offset + bend));\n" +
+                    "}\n" +
+
+                    "void main() {\n" +
+                    "    vec2 uv = v_texCoords;\n" +
+                    "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
+
+                    "    if (u_isHolo > 0.0) {\n" +
+                    "        vec2 p = uv * 2.0 - 1.0;\n" +
+                    "        float aspect = u_resolution.x / max(u_resolution.y, 1.0);\n" +
+                    "        p.x *= aspect;\n" +
+
+                    "        float id = u_cardPosition.x;\n" +
+                    "        float seed = hash21(vec2(id * 17.31, id * 91.73));\n" +
+                    "        float seed2 = hash21(vec2(id * 47.21, id * 13.87));\n" +
+                    "        float time = u_time * 0.025;\n" +
+
+                    "        float tiltAngle = u_foilTilt.x * 0.65 - u_foilTilt.y * 0.35;\n" +
+                    "        vec2 q = rotate(p, tiltAngle);\n" +
+
+                    "        float field = fbm(q * 1.35 + vec2(time * 0.15, -time * 0.08) + seed * 8.0);\n" +
+
+                    "        q.x += (field - 0.5) * 0.45;\n" +
+                    "        q.y += sin(q.x * 1.5 + seed * 6.0) * 0.08;\n" +
+
+                    "        vec2 diagonal = q;\n" +
+                    "        diagonal.y += diagonal.x * 0.58;\n" +
+
+                    "        // Ribbons reuse the global 'field' context instead of recalculating 4 separate FBMs\n" +
+                    "        float r1 = ribbon(diagonal, -0.58 + seed * 0.14, seed * 7.0 + time, field);\n" +
+                    "        float r2 = ribbon(diagonal, -0.12 + seed2 * 0.16, seed * 11.0 - time * 0.6, field);\n" +
+                    "        float r3 = ribbon(diagonal,  0.34 + seed * 0.15, seed2 * 13.0 + time * 0.7, field);\n" +
+                    "        float r4 = ribbon(diagonal,  0.70 - seed2 * 0.14, seed * 17.0 - time * 0.4, field);\n" +
+
+                    "        float glow1 = exp(-r1 * 2.8);\n" +
+                    "        float glow2 = exp(-r2 * 2.6);\n" +
+                    "        float glow3 = exp(-r3 * 2.9);\n" +
+                    "        float glow4 = exp(-r4 * 2.6);\n" +
+
+                    "        float broadGlow = glow1 * 0.48 + glow2 * 0.42 + glow3 * 0.48 + glow4 * 0.38;\n" +
+
+                    "        float line1 = exp(-r1 * 18.0);\n" +
+                    "        float line2 = exp(-r2 * 16.0);\n" +
+                    "        float line3 = exp(-r3 * 19.0);\n" +
+                    "        float line4 = exp(-r4 * 15.0);\n" +
+                    "        float brightLine = line1 * 0.95 + line2 * 0.80 + line3 * 0.95 + line4 * 0.65;\n" +
+
+                    "        float rainbow = diagonal.y * 0.34 + diagonal.x * 0.18 + field * 0.45 + seed * 3.0 + time * 0.045;\n" +
+                    "        vec3 rainbowColor = spectralColor(rainbow);\n" +
+
+                    "        float rainbow2 = rainbow + sin(diagonal.x * 2.0) * 0.12 + 0.18;\n" +
+                    "        vec3 rainbowColor2 = spectralColor(rainbow2);\n" +
+                    "        rainbowColor = mix(rainbowColor, rainbowColor2, 0.35);\n" +
+
+                    "        vec3 foil = rainbowColor * broadGlow * 1.25;\n" +
+                    "        foil += rainbowColor * brightLine * 1.35;\n" +
+
+                    "        float whiteFlash = pow(clamp(brightLine, 0.0, 1.0), 2.0);\n" +
+                    "        foil += vec3(1.0) * whiteFlash * 0.40;\n" +
+
+                    "        float sheen = 0.5 + 0.5 * sin(diagonal.x * 3.0 + diagonal.y * 2.0 + time * 1.5 + seed * 20.0);\n" +
+                    "        sheen = pow(sheen, 3.0);\n" +
+                    "        foil += rainbowColor * sheen * 0.12;\n" +
+
+                    "        float luminance = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "        float inkProtection = smoothstep(0.035, 0.32, luminance);\n" +
+
+                    "        vec3 screenFoil = 1.0 - (1.0 - col.rgb) * (1.0 - clamp(foil, 0.0, 1.0));\n" +
+                    "        vec3 finalFoil = mix(col.rgb, screenFoil, 0.55);\n" +
+                    "        finalFoil += vec3(whiteFlash * 0.20);\n" +
+
+                    "        col.rgb = mix(col.rgb, finalFoil, inkProtection);\n" +
+                    "        col.rgb = clamp(col.rgb, 0.0, 1.0);\n" +
+                    "    }\n" +
+
+                    "    if (u_gray > 0.0) {\n" +
+                    "        col.rgb = vec3(dot(col.rgb, vec3(0.299, 0.587, 0.114)));\n" +
+                    "    }\n" +
+
+                    "    // Rounded corner bounds calculations\n" +
+                    "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
+                    "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
+                    "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
+                    "    vec2 abs_pixel_coord = vec2(abs(uv_base_center.x * half_resolution.x), abs(uv_base_center.y * half_resolution.y));\n" +
+                    "    float alpha = 1.0;\n" +
+
+                    "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+                    "        float r = length(abs_pixel_coord - abs_rounded_center);\n" +
+                    "        alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
+                    "    }\n" +
+
+                    "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
+                    "}";
+
+
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +

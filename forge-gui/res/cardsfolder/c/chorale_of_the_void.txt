@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerZone
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.OwnedBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature card in defending player's graveyard | Tapped$ True | Attacking$ True | GainControl$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Void — At the beginning of your end step, sacrifice this Aura unless a nonland permanent left the battlefield this turn or a spell was warped this turn.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ X
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ AE
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddSVar$ AE
 SVar:X:Count$Void.0.1
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:AttachAILogic:Pump

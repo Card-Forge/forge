@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
 A:AB$ Regenerate | Cost$ R R R | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 DeckHas:Keyword$Regenerate
 Oracle:Enchant creature\nEnchanted creature gets +1/+0.\n{R}{R}{R}: Regenerate enchanted creature.

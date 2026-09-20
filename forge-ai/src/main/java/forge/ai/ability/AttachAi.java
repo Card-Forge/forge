@@ -700,7 +700,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int powerBuff = 0;
         for (StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
-            if ("Card.EquippedBy".equals(stAb.getParam("Affected")) && stAb.hasParam("AddPower")) {
+            if ("Equipped".equals(stAb.getParam("AffectedDefined")) && !stAb.hasParam("Affected") && stAb.hasParam("AddPower")) {
                 powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), stAb);
             }
         }
@@ -828,12 +828,7 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
 
-            final String affected = stAbility.getParam("Affected");
-
-            if (affected == null) {
-                continue;
-            }
-            if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
+            if (affectsAttached(stAbility, stCheck)) {
                 totToughness += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddToughness"), sa);
                 totPower += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddPower"), sa);
 
@@ -1044,6 +1039,17 @@ public class AttachAi extends SpellAbilityAi {
      *            the attach source
      * @return the card
      */
+    // stCheck is EnchantedBy or EquippedBy; a static on the attached card
+    // says so through AffectedDefined$ or through the Affected$ text
+    private static boolean affectsAttached(final StaticAbility stAb, final String stCheck) {
+        final String defined = stAb.getParam("AffectedDefined");
+        if (defined != null) {
+            return defined.equals("EnchantedBy".equals(stCheck) ? "Enchanted" : "Equipped") || defined.startsWith("AttachedBy");
+        }
+        final String affected = stAb.getParam("Affected");
+        return affected != null && (affected.contains(stCheck) || affected.contains("AttachedBy"));
+    }
+
     private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For choosing a Card to Pump
         Card card = null;
@@ -1141,12 +1147,7 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
 
-            final String affected = stAbility.getParam("Affected");
-
-            if (affected == null) {
-                continue;
-            }
-            if (affected.contains(stCheck) || affected.contains("AttachedBy")) {
+            if (affectsAttached(stAbility, stCheck)) {
                 totToughness += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddToughness"), stAbility);
                 totPower += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddPower"), stAbility);
 

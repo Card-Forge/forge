@@ -745,6 +745,14 @@ public class ComputerUtilCombat {
             }
         }
 
+        TriggerType mode = trigger.getMode();
+        // every other mode ends in false below; the requirements check runs a
+        // valid-card filter per trigger on the battlefield per attacker-blocker pair
+        if (mode != TriggerType.Attacks && mode != TriggerType.AttackerUnblocked && mode != TriggerType.Blocks
+                && mode != TriggerType.AttackerBlocked && mode != TriggerType.AttackerBlockedByCreature
+                && mode != TriggerType.DamageDone) {
+            return false;
+        }
         if (!trigger.zonesCheck(game.getZoneOf(trigger.getHostCard()))) {
             return false;
         }
@@ -752,7 +760,6 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        TriggerType mode = trigger.getMode();
         if (mode == TriggerType.Attacks) {
             willTrigger = true;
             if (combat.isAttacking(attacker)) {

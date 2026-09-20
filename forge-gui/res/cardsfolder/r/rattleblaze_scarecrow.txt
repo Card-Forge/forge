@@ -2,8 +2,8 @@ Name:Rattleblaze Scarecrow
 ManaCost:6
 Types:Artifact Creature Scarecrow
 PT:5/3
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | IsPresent$ Creature.YouCtrl+Black | Description$ CARDNAME has persist as long as you control a black creature.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Creature.YouCtrl+Red | Description$ CARDNAME has haste as long as you control a red creature.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Persist | IsPresent$ Creature.YouCtrl+Black | Description$ CARDNAME has persist as long as you control a black creature.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Haste | IsPresent$ Creature.YouCtrl+Red | Description$ CARDNAME has haste as long as you control a red creature.
 SVar:BuffedBy:Creature.Black,Creature.Red
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|Red

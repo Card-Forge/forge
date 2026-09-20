@@ -2,7 +2,7 @@ Name:Myr Welder
 ManaCost:3
 Types:Artifact Creature Myr
 PT:1/4
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.IsImprinted+ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all cards exiled with it.
+S:Mode$ Continuous | AffectedDefined$ Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.IsImprinted+ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all cards exiled with it.
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Artifact | Origin$ Graveyard | Destination$ Exile | Imprint$ True | PrecostDesc$ Imprint — | SpellDescription$ Exile target artifact card from a graveyard.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard

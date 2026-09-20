@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Mountain | Description$ Enchanted creature has mountainwalk.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Landwalk:Mountain | Description$ Enchanted creature has mountainwalk.
 AI:RemoveDeck:Random
 DeckHas:Keyword$Landwalk:Mountain
 Oracle:Enchant creature\nEnchanted creature has mountainwalk. (It can't be blocked as long as defending player controls a Mountain.)

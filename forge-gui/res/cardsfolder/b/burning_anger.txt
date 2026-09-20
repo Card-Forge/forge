@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ TapDmg | AddSVar$ BurningAngerDmg | Description$ Enchanted creature has "{T}: This creature deals damage equal to its power to any target."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddAbility$ TapDmg | AddSVar$ BurningAngerDmg | Description$ Enchanted creature has "{T}: This creature deals damage equal to its power to any target."
 SVar:TapDmg:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ BurningAngerDmg | SpellDescription$ CARDNAME deals damage equal to its power to any target.
 SVar:BurningAngerDmg:Count$CardPower
 SVar:NonStackingAttachEffect:True
