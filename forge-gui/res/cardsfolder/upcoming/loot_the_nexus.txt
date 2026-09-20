@@ -2,6 +2,6 @@ Name:Loot, the Nexus
 ManaCost:2 G
 Types:Legendary Creature Beast Noble
 PT:2/1
-A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ X | SpellDescription$ Add X mana in any combination of colors, where X is the number of creatures with defender you control.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Choose a color. Add one mana of that color for each different power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$DifferentCardPower
 Oracle:{T}: Choose a color. Add one mana of that color for each different power among creatures you control.
