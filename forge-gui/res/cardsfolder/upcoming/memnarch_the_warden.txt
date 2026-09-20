@@ -5,7 +5,7 @@ PT:8/9
 K:Indestructible
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create two 1/1 colorless Myr artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_myr | TokenOwner$ You
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever Whenever NICKNAME attacks, draw a card for each artifact you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, draw a card for each artifact you control.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:HasAttackEffect:TRUE
