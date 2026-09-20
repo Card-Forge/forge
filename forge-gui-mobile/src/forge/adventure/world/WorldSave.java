@@ -68,6 +68,7 @@ public class WorldSave {
 
     static public boolean load(int currentSlot) {
         JSONStringLoader.clearCache();
+        CardUtil.clearPriceCache();
         Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
 
         Forge.invokeWorldSave = true; // This is for dispose method check
