@@ -9,6 +9,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -20,7 +21,8 @@ import org.testng.annotations.Test;
  * printed [-2] removes one counter and must not draw. Each case asserts the loyalty actually spent
  * as well, otherwise a harness that skipped cost adjustment would pass on the draw count alone.
  * Cards drawn are counted off the library so an unrelated AI play from hand cannot be mistaken for
- * the draw.
+ * the draw. The trigger is also counted on the stack, since the condition is an intervening-if and
+ * a failing one must keep the trigger off the stack rather than resolve it for nothing.
  */
 public class LoyaltyPaidGateTest extends AITest {
 
@@ -57,7 +59,7 @@ public class LoyaltyPaidGateTest extends AITest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Way of the Mind Sculptor", p);
+        Card sculptor = addCard("Way of the Mind Sculptor", p);
         Card walker = addCard(walkerName, p);
         walker.setCounters(CounterEnumType.LOYALTY, 10);
         if (withCarth) {
@@ -82,11 +84,22 @@ public class LoyaltyPaidGateTest extends AITest {
         int loyaltyBefore = walker.getCounters(CounterEnumType.LOYALTY);
         AssertJUnit.assertTrue("the loyalty ability was not activated",
                 ComputerUtil.handlePlayingSpellAbility(p, sa, null));
-        playUntilStackClear(game);
+
+        int triggersOnStack = 0;
+        do {
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                if (sculptor.equals(si.getSpellAbility().getHostCard())) {
+                    triggersOnStack++;
+                }
+            }
+            game.getPhaseHandler().mainLoopStep();
+        } while (!game.isGameOver() && !game.getStack().isEmpty());
 
         AssertJUnit.assertEquals("wrong number of loyalty counters removed", expectedLoyaltySpent,
                 loyaltyBefore - walker.getCounters(CounterEnumType.LOYALTY));
         AssertJUnit.assertEquals("wrong number of cards drawn", expectedDraws,
                 libraryBefore - p.getCardsIn(ZoneType.Library).size());
+        AssertJUnit.assertEquals("trigger went on the stack without meeting its condition",
+                expectedDraws, triggersOnStack);
     }
 }

@@ -628,7 +628,6 @@ public class PlaySpellAbility {
         if (!ability.isCopied()) {
             ability.resetPaidHash();
             ability.setPaidLife(0);
-            ability.resetPaidCounters();
         }
 
         if (ability.isSpell() && !c.isCopiedSpell()) {

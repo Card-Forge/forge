@@ -103,7 +103,6 @@ public class ComputerUtil {
         if (!sa.isCopied()) {
             sa.resetPaidHash();
             sa.setPaidLife(0);
-            sa.resetPaidCounters();
         }
 
         sa = GameActionUtil.addExtraKeywordCost(sa);

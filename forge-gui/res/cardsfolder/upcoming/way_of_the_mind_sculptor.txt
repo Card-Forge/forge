@@ -3,8 +3,7 @@ ManaCost:4 U
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When CARDNAME enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
 SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 5
-T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Loyalty | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2
-SVar:X:TriggeredSpellAbility$CountersRemovedToPay LOYALTY
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Loyalty+CountersRemovedToPayGE2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
 DeckHints:Type$Planeswalker
 Oracle:When Way of the Mind Sculptor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nWhenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it, draw a card.
