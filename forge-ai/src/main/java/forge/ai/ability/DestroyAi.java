@@ -191,7 +191,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Try to avoid targeting creatures that are dead on board
-            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
             if (list.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
@@ -338,7 +338,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Try to avoid targeting creatures that are dead on board
-            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
 
             CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());

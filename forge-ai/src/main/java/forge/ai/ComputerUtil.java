@@ -2039,10 +2039,10 @@ public class ComputerUtil {
      *            The list of cards to work with
      * @return a filtered list with no dying creatures in it
      */
-    public static CardCollection filterCreaturesThatWillDieThisTurn(final Player ai, final CardCollection list, final SpellAbility excludeSa) {
+    public static CardCollection filterCreaturesThatWillDieThisTurn(final Player ai, final CardCollection list) {
         if (AiProfileUtil.getBoolProperty(ai, AiProps.AVOID_TARGETING_CREATS_THAT_WILL_DIE)) {
             // Try to avoid targeting creatures that are dead on board
-            List<Card> willBeKilled = CardLists.filter(list, card -> card.isCreature() && predictCreatureWillDieThisTurn(ai, card, excludeSa));
+            List<Card> willBeKilled = CardLists.filter(list, card -> card.isCreature() && predictCreatureWillDieThisTurn(ai, card, null));
             list.removeAll(willBeKilled);
         }
         return list;
