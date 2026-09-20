@@ -1,0 +1,8 @@
+Name:Omnipresence
+ManaCost:5 G G G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn | ValidAfterStack$ Spell.cmcLEX | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | Description$ You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:AllowFreeCast:Always
+AI:RemoveDeck:Random
+Oracle:You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.
