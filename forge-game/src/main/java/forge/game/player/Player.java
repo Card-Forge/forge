@@ -1171,7 +1171,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      *         replacement effect applies, since every further draw of the same batch would do the same
      */
     private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params, PlayerZone hand) {
-        final CardCollection drawn = new CardCollection();
+        CardCollection drawn = new CardCollection();
         final PlayerZone library = getZone(ZoneType.Library);
 
         SpellAbility cause = sa;
@@ -1180,7 +1180,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
-
         if (gameStarted) {
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.Cause, cause);
@@ -1188,18 +1187,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (params != null) {
                 repParams.putAll(params);
             }
-            if (library.isEmpty() && game.getReplacementHandler().getReplacementList(ReplacementType.Draw, repParams, null).isEmpty()) {
-                triedToDrawFromEmptyLibrary = true;
-                return null;
-            }
             if (game.getReplacementHandler().run(ReplacementType.Draw, repParams) != ReplacementResult.NotReplaced) {
                 return drawn;
+            }
+            if (library.isEmpty() && game.getReplacementHandler().getReplacementList(ReplacementType.Draw, repParams, null).isEmpty()) {
+                drawn = null;
             }
         }
 
         if (!library.isEmpty()) {
             Card c;
-
             if (hasKeyword("You draw cards from the bottom of your library instead of the top of your library.")) {
                 c = library.get(library.size() - 1);
             } else {

@@ -197,7 +197,6 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // target loop
-            // TODO use can add more Targets
             while (sa.getTargets().size() < maxTargets) {
                 // filter by MustTarget requirement
                 CardCollection originalList = new CardCollection(list);
