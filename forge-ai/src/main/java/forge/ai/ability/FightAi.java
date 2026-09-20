@@ -18,10 +18,6 @@ import forge.util.MyRandom;
 import java.util.List;
 
 public class FightAi extends SpellAbilityAi {
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        return super.checkAiLogic(ai, sa, aiLogic);
-    }
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
