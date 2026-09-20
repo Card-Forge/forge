@@ -1688,6 +1688,14 @@ public class AbilityUtils {
                     return doXMath(0, expr, c, ctb);
                 }
 
+                // Count$CountersRemovedToPay <CounterType>
+                if (sq[0].startsWith("CountersRemovedToPay")) {
+                    final String[] parts = l[0].split(" ");
+                    CounterType cType = CounterType.getType(parts[1]);
+
+                    return doXMath(sa.getRootAbility().getPaidCounters(cType), expr, c, ctb);
+                }
+
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
                     boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0);

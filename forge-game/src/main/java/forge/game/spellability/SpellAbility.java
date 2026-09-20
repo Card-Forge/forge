@@ -100,6 +100,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private ManaCostBeingPaid manaCostBeingPaid;
     private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
+    private Multiset<CounterType> paidCounters = HashMultiset.create();
 
     private SpellAbility grantorOriginal;
     private StaticAbility grantorStatic;
@@ -884,6 +885,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.paidLifeAmount = value;
     }
 
+    public final int getPaidCounters(CounterType type) {
+        return this.paidCounters.count(type);
+    }
+    public final void addPaidCounters(CounterType type, int value) {
+        this.paidCounters.add(type, value);
+    }
+    public final void resetPaidCounters() {
+        this.paidCounters.clear();
+    }
+
     public final void applyPayingManaEffects() {
         Card host = getHostCard();
 
@@ -1295,6 +1306,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.payingMana = Lists.newArrayList(payingMana);
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(getPaidHash());
+            clone.paidCounters = HashMultiset.create(paidCounters);
 
             if (usesTargeting()) {
                 // the targets need to be cloned, otherwise they might be cleared

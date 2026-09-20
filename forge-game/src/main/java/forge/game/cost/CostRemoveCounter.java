@@ -187,6 +187,7 @@ public class CostRemoveCounter extends CostPart {
         for (Map.Entry<GameEntity, Multiset<CounterType>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
             for (Multiset.Entry<CounterType> v : e.getValue().entrySet()) {
                 removed += v.getCount();
+                ability.addPaidCounters(v.getElement(), v.getCount());
                 e.getKey().subtractCounter(v.getElement(), v.getCount(), ai);
             }
             if (e.getKey() instanceof Card c) {

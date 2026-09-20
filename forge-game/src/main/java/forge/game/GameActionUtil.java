@@ -982,6 +982,7 @@ public final class GameActionUtil {
             ability.setSpendPhyrexianMana(false);
             ability.clearPipsToReduce();
             ability.setPaidLife(0);
+            ability.resetPaidCounters();
             if (ability.hasParam("Announce")) {
                 for (final String aVar : ability.getParam("Announce").split(",")) {
                     final String varName = aVar.trim();

@@ -82,6 +82,10 @@ Examples:
 
 Remember the countertype should appear all in caps.
 
+How many counters were actually removed to pay is available afterwards as  
+`Count$CountersRemovedToPay {CounterName}`, on the paying ability or through a defined one such as `TriggeredSpellAbility$CountersRemovedToPay LOYALTY`.  
+Prefer it over the printed cost whenever a card cares about the amount, because cost modification can change it (*Carth the Lion* raises every loyalty cost by [+1]).
+
 # Tap / Untap
 `Cost$ T`
 
