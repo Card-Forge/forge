@@ -35,7 +35,7 @@ public class Current {
 			itemData.isCracked = true;
 			player().equip(itemData); // un-equip
 			InventoryScene.instance().clearItemDescription();
-			message += "\n{GRADIENT=RED;GRAY;1;1}" + itemData.name + " {ENDGRADIENT}"
+			message += "\n{GRADIENT=RED;GRAY;1;1}" + itemData.getDisplayName() + " {ENDGRADIENT}"
 					+ Forge.getLocalizer().getMessage("lblCracked");
 		}
 		return message;
