@@ -2,7 +2,7 @@ Name:Hapatra, the Desert Fang
 ManaCost:2 B B G
 Types:Legendary Creature Human Cleric
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Trig | TriggerDescription$ When Hapatra enters, for each opponent, put X -1/-1 counters on up to one target creature that player controls, where X is the greatest mana value among cards in your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Trig | TriggerDescription$ When NICKNAME enters, for each opponent, put X -1/-1 counters on up to one target creature that player controls, where X is the greatest mana value among cards in your graveyard.
 SVar:Trig:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TargetsForEachPlayer$ True | TargetMin$ 0 | TargetMax$ OneEach | TgtPrompt$ For each opponent, select up to one target creature that player controls | CounterType$ M1M1 | CounterNum$ X
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:X:Count$ValidGraveyard Card.YouCtrl$GreatestCardManaCost
