@@ -1,0 +1,14 @@
+Name:Memnarch, the Warden
+ManaCost:10
+Types:Legendary Artifact Creature Wizard
+PT:8/9
+K:Indestructible
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create two 1/1 colorless Myr artifact creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_myr | TokenOwner$ You
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever Whenever NICKNAME attacks, draw a card for each artifact you control.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Myr
+DeckNeeds:Type$Artifact
+Oracle:Indestructible/nWhen Memnarch enters, create two 1/1 colorless Myr artifact creature tokens./nWhenever Memnarch attacks, draw a card for each artifact you control.
