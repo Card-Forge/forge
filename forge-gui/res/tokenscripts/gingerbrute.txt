@@ -1,0 +1,9 @@
+Name:Gingerbrute Token
+ManaCost:1
+Types:Artifact Creature Food Golem
+PT:1/1
+K:Haste
+A:AB$ Effect | Cost$ 1 | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | SpellDescription$ This token can't be blocked this turn except by creatures with haste.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.withoutHaste | Description$ EFFECTSOURCE can't be blocked this turn except by creatures with haste.
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:{1}: This token can't be blocked this turn except by creatures with haste.\n{2}, {T}, Sacrifice this token: You gain 3 life.\n(This token's mana cost is {1}.)
