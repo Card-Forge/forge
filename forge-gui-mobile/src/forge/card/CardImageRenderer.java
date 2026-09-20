@@ -905,45 +905,45 @@ public class CardImageRenderer {
             }
             if (canshow && displayFlipped) {
                 if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 1f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 1f, CardRendererUtils.getFoilIndex(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.getFoilIndex(card));
                 } else {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180, 0f, CardRendererUtils.getFoilIndex(card));
                 }
             } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, altState)) {
                 if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 1f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 1f, CardRendererUtils.getFoilIndex(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.getFoilIndex(card));
                 } else
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90, 0f, CardRendererUtils.getFoilIndex(card));
             } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState)) {
                 boolean isAftermath = CardRendererUtils.hasAftermath(card);
                 if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.getFoilIndex(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
                 } else
-                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
             } else {
                 if (card.isFaceDown() && ZoneType.Exile.equals(card.getZone())) {
                     if (card.isForeTold() || altState) {
                         if (CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState) && isCurrentCard) {
                             boolean isAftermath = CardRendererUtils.hasAftermath(card);
                             if (Forge.enableUIMask.equals("Full")) {
-                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.drawFoil(card));
+                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.getFoilIndex(card));
                             } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
+                                g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
                             } else
-                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.drawFoil(card));
+                                g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, 0f, CardRendererUtils.getFoilIndex(card));
                         } else {
                             if (Forge.enableUIMask.equals("Full")) {
-                                g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
+                                g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
                             } else if (Forge.enableUIMask.equals("Crop")) {
-                                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.drawFoil(card));
+                                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
                             } else {
-                                g.drawImage(image, x, y, w, h, CardRendererUtils.drawFoil(card));
+                                g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
                             }
                         }
                     } else {
@@ -951,12 +951,12 @@ public class CardImageRenderer {
                         g.drawImage(sleeves, x, y, w, h);
                     }
                 } else if (Forge.enableUIMask.equals("Full") && canshow) {
-                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
                 } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.drawFoil(card));
+                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
                 } else {
                     if (canshow)
-                        g.drawImage(image, x, y, w, h, CardRendererUtils.drawFoil(card));
+                        g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
                     else // sleeve
                         g.drawImage(sleeves, x, y, w, h);
                 }

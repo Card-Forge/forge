@@ -655,11 +655,11 @@ public class CardRenderer {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
-                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
+                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.getFoilIndex(card));
                 } else if (Forge.enableUIMask.equals("Crop")) {
-                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.drawFoil(card));
+                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, CardRendererUtils.getFoilIndex(card));
                 } else
-                    g.drawImage(image, x, y, w, h, CardRendererUtils.drawFoil(card));
+                    g.drawImage(image, x, y, w, h, CardRendererUtils.getFoilIndex(card));
             }
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
@@ -701,25 +701,25 @@ public class CardRenderer {
                 if (!card.isForeTold())
                     g.drawCardImage(sleeves, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify));
                 else
-                    g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.drawFoil(card));
+                    g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.getFoilIndex(card));
             } else {
                 if (card.isFlipped() || needsRotation) {
                     float rotation = card.isFlipped() ? 180 
                         : CardRendererUtils.hasAftermath(card) ? 90 : -90;
                     if (Forge.enableUIMask.equals("Full")) {
-                        g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, rotation, 1f, CardRendererUtils.drawFoil(card));
+                        g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, rotation, 1f, CardRendererUtils.getFoilIndex(card));
                     } else if (Forge.enableUIMask.equals("Crop")) {
-                        g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, x + w / 2, y + h / 2, rotation, 0f, CardRendererUtils.drawFoil(card));
+                        g.drawCardRoundRect(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h, x + w / 2, y + h / 2, rotation, 0f, CardRendererUtils.getFoilIndex(card));
                     } else
-                        g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, rotation, 0f, CardRendererUtils.drawFoil(card));
+                        g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, rotation, 0f, CardRendererUtils.getFoilIndex(card));
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
-                        g.drawCardRoundRect(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.drawFoil(card));
+                        g.drawCardRoundRect(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.getFoilIndex(card));
                     } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                        g.drawCardImage(ImageCache.getInstance().croppedBorderImage(image), crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.drawFoil(card));
+                        g.drawCardImage(ImageCache.getInstance().croppedBorderImage(image), crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.getFoilIndex(card));
                     } else {
                         if (canshow)
-                            g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.drawFoil(card));
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.getFoilIndex(card));
                         else // draw card back sleeves
                             g.drawCardImage(sleeves, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify));
                     }

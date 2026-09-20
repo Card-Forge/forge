@@ -102,7 +102,7 @@ public class CardRendererUtils {
             return false;
         return card.wasDestroyed() || card.isPhasedOut();
     }
-    public static int drawFoil(final CardView card) {
+    public static int getFoilIndex(final CardView card) {
         if (card == null)
             return 0;
         if (!isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT))
