@@ -1,0 +1,339 @@
+//Rank|Name|Rarity|Set
+#1|Hofri Ghostforge|M|STX
+#2|Tanazir Quandrix|M|STX
+#3|Professor Onyx|M|STX
+#4|Velomachus Lorehold|M|STX
+#5|Extus, Oriq Overlord|M|STX
+#6|Mascot Exhibition|M|STX
+#7|Blot Out the Sky|M|STX
+#8|Multiple Choice|R|STX
+#9|Beledros Witherbloom|M|STX
+#10|Mizzix's Mastery|M|STA
+#11|Rowan, Scholar of Sparks|M|STX
+#12|Valentin, Dean of the Vein|R|STX
+#13|Lorehold Command|R|STX
+#14|Shaile, Dean of Radiance|R|STX
+#15|Shadrix Silverquill|M|STX
+#16|Augmenter Pugilist|R|STX
+#17|Gnarled Professor|R|STX
+#18|Venerable Warsinger|R|STX
+#19|Silverquill Command|R|STX
+#20|Torrent Sculptor|R|STX
+#21|Plargg, Dean of Chaos|R|STX
+#22|Mila, Crafty Companion|M|STX
+#23|Sedgemoor Witch|R|STX
+#24|Sparring Regimen|R|STX
+#25|Uvilda, Dean of Perfection|R|STX
+#26|Baleful Mastery|R|STX
+#27|Galazeth Prismari|M|STX
+#28|Selfless Glyphweaver|R|STX
+#29|Day of Judgment|M|STA
+#30|Primal Command|M|STA
+#31|Kasmina, Enigma Sage|M|STX
+#32|Magma Opus|M|STX
+#33|Mortality Spear|U|STX
+#34|Approach of the Second Sun|M|STA
+#35|Time Warp|M|STA
+#36|Swords to Plowshares|R|STA
+#37|Dragonsguard Elite|R|STX
+#38|Quandrix Command|R|STX
+#39|Igneous Inspiration|U|STX
+#40|Closing Statement|U|STX
+#41|Mavinda, Students' Advocate|M|STX
+#42|Retriever Phoenix|R|STX
+#43|Poet's Quill|R|STX
+#44|Blex, Vexing Pest|M|STX
+#45|Lightning Bolt|R|STA
+#46|Prismari Command|R|STX
+#47|Elemental Expressionist|R|STX
+#48|Blade Historian|R|STX
+#49|Kianne, Dean of Substance|R|STX
+#50|Doom Blade|R|STA
+#51|Putrefy|R|STA
+#52|Draconic Intervention|R|STX
+#53|Conspiracy Theorist|R|STX
+#54|Dramatic Finale|R|STX
+#55|Dream Strix|R|STX
+#56|Crackle with Power|M|STX
+#57|Body of Research|M|STX
+#58|Leonin Lightscribe|R|STX
+#59|Archmage Emeritus|R|STX
+#60|Codie, Vociferous Codex|R|STX
+#61|Flamescroll Celebrant|R|STX
+#62|Elite Spellbinder|R|STX
+#63|Manifestation Sage|R|STX
+#64|Flunk|U|STX
+#65|Tempted by the Oriq|R|STX
+#66|Crux of Fate|M|STA
+#67|Lightning Helix|R|STA
+#68|Professor of Symbology|U|STX
+#69|Quandrix Cultivator|U|STX
+#70|Pestilent Cauldron|R|STX
+#71|Rip Apart|U|STX
+#72|Blue Sun's Zenith|M|STA
+#73|Quandrix Apprentice|U|STX
+#74|Rootha, Mercurial Artist|U|STX
+#75|Bookwurm|U|STX
+#76|Devastating Mastery|R|STX
+#77|Illuminate History|R|STX
+#78|Electrolyze|R|STA
+#79|Harmonize|R|STA
+#80|Witherbloom Apprentice|U|STX
+#81|Heated Debate|C|STX
+#82|Quintorius, Field Historian|U|STX
+#83|Returned Pastcaller|U|STX
+#84|Rise of Extus|C|STX
+#85|Wandering Archaic|R|STX
+#86|Killian, Ink Duelist|U|STX
+#87|Devouring Tendrils|U|STX
+#88|Overgrown Arch|U|STX
+#89|Callous Bloodmage|R|STX
+#90|Mage Hunters' Onslaught|C|STX
+#91|Teachings of the Archaics|R|STX
+#92|Demonic Tutor|M|STA
+#93|Radiant Scrollwielder|R|STX
+#94|Maelstrom Muse|U|STX
+#95|Decisive Denial|U|STX
+#96|Emergent Sequence|U|STX
+#97|Dina, Soul Steeper|U|STX
+#98|Jadzi, Oracle of Arcavios|M|STX
+#99|Environmental Sciences|C|STX
+#100|Despark|R|STA
+#101|Witherbloom Command|R|STX
+#102|Master Symmetrist|U|STX
+#103|Thunderous Orator|U|STX
+#104|Academic Dispute|U|STX
+#105|Hall of Oracles|R|STX
+#106|Kelpie Guide|U|STX
+#107|Vanishing Verse|R|STX
+#108|Daemogoth Woe-Eater|U|STX
+#109|Divide by Zero|U|STX
+#110|Inkling Summoning|C|STX
+#111|Counterspell|R|STA
+#112|Regrowth|R|STA
+#113|Shock|U|STA
+#114|Prismari Apprentice|U|STX
+#115|Expressive Iteration|U|STX
+#116|Combat Professor|C|STX
+#117|Bury in Books|C|STX
+#118|Efreet Flamepainter|R|STX
+#119|Frost Trickster|C|STX
+#120|Practical Research|U|STX
+#121|Creative Outburst|U|STX
+#122|Umbral Juke|U|STX
+#123|Eureka Moment|C|STX
+#124|Daemogoth Titan|R|STX
+#125|Hunt for Specimens|C|STX
+#126|Professor of Zoomancy|C|STX
+#127|Pigment Storm|C|STX
+#128|Mage Duel|C|STX
+#129|Basic Conjuration|R|STX
+#130|Fractal Summoning|C|STX
+#131|Elemental Summoning|C|STX
+#132|Compulsive Research|R|STA
+#133|Urza's Rage|R|STA
+#134|Eliminate|U|STA
+#135|Silverquill Apprentice|U|STX
+#136|Explosive Welcome|U|STX
+#137|Silverquill Silencer|R|STX
+#138|Leyline Invocation|C|STX
+#139|Accomplished Alchemist|R|STX
+#140|Quandrix Pledgemage|C|STX
+#141|Zimone, Quandrix Prodigy|U|STX
+#142|Strixhaven Stadium|R|STX
+#143|Shadewing Laureate|U|STX
+#144|Humiliate|U|STX
+#145|Mentor's Guidance|U|STX
+#146|Pilgrim of the Ages|C|STX
+#147|Bayou Groff|C|STX
+#148|Blood Researcher|C|STX
+#149|Oriq Loremage|R|STX
+#150|Culling Ritual|R|STX
+#151|Lash of Malice|C|STX
+#152|Ingenious Mastery|R|STX
+#153|Pest Summoning|C|STX
+#154|Expanded Anatomy|C|STX
+#155|Spirit Summoning|C|STX
+#156|Ephemerate|R|STA
+#157|Growth Spiral|R|STA
+#158|Dueling Coach|U|STX
+#159|Lorehold Excavation|U|STX
+#160|Reduce to Memory|U|STX
+#161|Study Break|C|STX
+#162|Field Trip|C|STX
+#163|Karok Wrangler|U|STX
+#164|Ardent Dustspeaker|U|STX
+#165|Culmination of Studies|R|STX
+#166|Prismari Pledgemage|C|STX
+#167|Mage Hunter|U|STX
+#168|Necrotic Fumes|U|STX
+#169|Owlin Shieldmage|C|STX
+#170|Biomathematician|C|STX
+#171|Expel|C|STX
+#172|Serpentine Curve|C|STX
+#173|Team Pennant|U|STX
+#174|Needlethorn Drake|C|STX
+#175|Tenured Inkcaster|U|STX
+#176|Containment Breach|U|STX
+#177|Honor Troll|U|STX
+#178|Harness Infinity|M|STX
+#179|Brackish Trudge|U|STX
+#180|Tend the Pests|U|STX
+#181|Snow Day|U|STX
+#182|Wormhole Serpent|U|STX
+#183|Guiding Voice|C|STX
+#184|Increasing Vengeance|M|STA
+#185|Tezzeret's Gambit|R|STA
+#186|Agonizing Remorse|U|STA
+#187|Cultivate|U|STA
+#188|Storm-Kiln Artist|U|STX
+#189|Pop Quiz|C|STX
+#190|Illustrious Historian|C|STX
+#191|Lorehold Campus|C|STX
+#192|Lorehold Pledgemage|C|STX
+#193|Reconstruct History|U|STX
+#194|Stonebound Mentor|C|STX
+#195|Fortifying Draught|U|STX
+#196|Enthusiastic Study|C|STX
+#197|Oggyar Battle-Seer|C|STX
+#198|Start from Scratch|U|STX
+#199|Blood Age General|C|STX
+#200|Eyetwitch|U|STX
+#201|Arrogant Poet|C|STX
+#202|Golden Ratio|U|STX
+#203|Quandrix Campus|C|STX
+#204|Spectacle Mage|C|STX
+#205|Prismari Campus|C|STX
+#206|Arcane Subtraction|C|STX
+#207|Spiteful Squad|C|STX
+#208|Reflective Golem|U|STX
+#209|Aether Helix|U|STX
+#210|Elemental Masterpiece|C|STX
+#211|Teach by Example|C|STX
+#212|Moldering Karok|C|STX
+#213|Silverquill Pledgemage|C|STX
+#214|Silverquill Campus|C|STX
+#215|Exponential Growth|R|STX
+#216|Show of Confidence|U|STX
+#217|Plumb the Forbidden|U|STX
+#218|Pillardrop Warden|C|STX
+#219|Witherbloom Campus|C|STX
+#220|Witherbloom Pledgemage|C|STX
+#221|Reckless Amplimancer|C|STX
+#222|Stonerise Spirit|C|STX
+#223|Semester's End|R|STX
+#224|Introduction to Prophecy|C|STX
+#225|Introduction to Annihilation|C|STX
+#226|Mind's Desire|M|STA
+#227|Gift of Estates|R|STA
+#228|Memory Lapse|R|STA
+#229|Sign in Blood|R|STA
+#230|Faithless Looting|R|STA
+#231|Grapeshot|R|STA
+#232|Divine Gambit|U|STA
+#233|Lorehold Apprentice|U|STX
+#234|Eager First-Year|C|STX
+#235|Strict Proctor|R|STX
+#236|Waterfall Aerialist|C|STX
+#237|Frostboil Snarl|R|STX
+#238|Furycalm Snarl|R|STX
+#239|Necroblossom Snarl|R|STX
+#240|Shineshadow Snarl|R|STX
+#241|Vineglimmer Snarl|R|STX
+#242|Verdant Mastery|R|STX
+#243|Defend the Campus|C|STX
+#244|Stonebinder's Familiar|U|STX
+#245|Test of Talents|U|STX
+#246|Letter of Acceptance|C|STX
+#247|Hall Monitor|U|STX
+#248|Ecological Appreciation|M|STX
+#249|Exhilarating Elocution|C|STX
+#250|Symmetry Sage|U|STX
+#251|Novice Dissector|C|STX
+#252|Tome Shredder|C|STX
+#253|Double Major|R|STX
+#254|Fuming Effigy|C|STX
+#255|Big Play|C|STX
+#256|Deadly Brew|U|STX
+#257|Infuse with Vitality|C|STX
+#258|Zephyr Boots|U|STX
+#259|Scurrid Colony|C|STX
+#260|Pillardrop Rescuer|C|STX
+#261|Springmane Cervin|C|STX
+#262|Cram Session|C|STX
+#263|Natural Order|M|STA
+#264|Mana Tithe|R|STA
+#265|Inquisition of Kozilek|R|STA
+#266|Whirlwind Denial|U|STA
+#267|Duress|U|STA
+#268|Infuriate|U|STA
+#269|Thrill of Possibility|U|STA
+#270|Snakeskin Veil|U|STA
+#271|Grinning Ignus|U|STX
+#272|Ageless Guardian|C|STX
+#273|Beaming Defiance|C|STX
+#274|Campus Guide|C|STX
+#275|Go Blank|U|STX
+#276|Star Pupil|C|STX
+#277|Clever Lumimancer|U|STX
+#278|Sudden Breakthrough|C|STX
+#279|Make Your Mark|C|STX
+#280|Access Tunnel|U|STX
+#281|Archway Commons|C|STX
+#282|Promising Duskmage|C|STX
+#283|Charge Through|C|STX
+#284|Essence Infusion|C|STX
+#285|Professor's Warning|C|STX
+#286|Unwilling Ingredient|C|STX
+#287|Leech Fanatic|C|STX
+#288|Twinscroll Shaman|C|STX
+#289|Spell Satchel|U|STX
+#290|Specter of the Fens|C|STX
+#291|Academic Probation|R|STX
+#292|Teferi's Protection|M|STA
+#293|Tainted Pact|M|STA
+#294|Channel|M|STA
+#295|Gods Willing|R|STA
+#296|Brainstorm|R|STA
+#297|Stone Rain|R|STA
+#298|Abundant Harvest|R|STA
+#299|Negate|U|STA
+#300|Opt|U|STA
+#301|Village Rites|U|STA
+#302|Curate|C|STX
+#303|Relic Sloth|C|STX
+#304|Thrilling Discovery|C|STX
+#305|Crushing Disappointment|C|STX
+#306|Resculpt|C|STX
+#307|Burrog Befuddler|C|STX
+#308|Mascot Interception|U|STX
+#309|Soothsayer Adept|C|STX
+#310|The Biblioplex|R|STX
+#311|Spined Karok|C|STX
+#312|Reject|C|STX
+#313|Vortex Runner|C|STX
+#314|Biblioplex Assistant|C|STX
+#315|Rushed Rebirth|R|STX
+#316|Chaos Warp|M|STA
+#317|Defiant Strike|U|STA
+#318|Claim the Firstborn|U|STA
+#319|Adventurous Impulse|U|STA
+#320|Solve the Equation|U|STX
+#321|Square Up|C|STX
+#322|Fervent Mastery|R|STX
+#323|Cogwork Archivist|C|STX
+#324|Excavated Wall|C|STX
+#325|Fracture|U|STX
+#326|Tendrils of Agony|R|STA
+#327|Strategic Planning|U|STA
+#328|First Day of Class|C|STX
+#329|Mercurial Transformation|U|STX
+#330|Detention Vortex|U|STX
+#331|Tangletrap|C|STX
+#332|Dark Ritual|R|STA
+#333|Weather the Storm|R|STA
+#334|Revitalize|U|STA
+#335|Confront the Past|R|STX
+#336|Krosan Grip|R|STA
+#337|Dragon's Approach|C|STX
+#338|Secret Rendezvous|U|STX
