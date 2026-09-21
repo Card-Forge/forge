@@ -70,6 +70,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -96,6 +97,8 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
+    // Cards with an AICurseEffect SVar, scanned once per AI decision loop (per thread) instead of once per evaluated SA
+    private final ThreadLocal<CardCollectionView> curseCards = new ThreadLocal<>();
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -180,8 +183,25 @@ public class AiController {
     }
 
     // look for cards on the battlefield that should prevent the AI from using that spellability
+    private CardCollectionView findCurseCards() {
+        return CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("AICurseEffect"));
+    }
+
+    // Runs body with the curse-card scan done once, rather than once per evaluated SpellAbility.
+    private <T> T withCurseCache(final Callable<T> body) throws Exception {
+        curseCards.set(findCurseCards());
+        try {
+            return body.call();
+        } finally {
+            curseCards.remove();
+        }
+    }
+
     private boolean checkCurseEffects(final SpellAbility sa) {
-        CardCollectionView ccvGameBattlefield = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("AICurseEffect"));
+        CardCollectionView ccvGameBattlefield = curseCards.get();
+        if (ccvGameBattlefield == null) { // not inside a decision loop: scan directly
+            ccvGameBattlefield = findCurseCards();
+        }
         for (final Card c : ccvGameBattlefield) {
             final String curse = c.getSVar("AICurseEffect");
             final Card host = sa.getHostCard();
@@ -434,22 +454,20 @@ public class AiController {
 
         landList = ComputerUtilCard.dedupeCards(landList);
 
+        // these don't depend on the candidate land, so compute them once instead of once per land
+        final CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
+        final int landsOwned = CardLists.count(battlefield, CardPredicates.LANDS) + CardLists.count(hand, CardPredicates.LANDS);
+        final int landCap = Math.max(Aggregates.max(hand, Card::getCMC), 6);
+
         landList = CardLists.filter(landList, c -> {
             String name = c.getName();
-            CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
             if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
                 if (battlefield.anyMatch(CardPredicates.nameEquals(name))) {
                     return false;
                 }
             }
 
-            final CardCollectionView hand1 = player.getCardsIn(ZoneType.Hand);
-            CardCollection lands = new CardCollection(battlefield);
-            lands.addAll(hand1);
-            lands = CardLists.filter(lands, CardPredicates.LANDS);
-            int maxCmcInHand = Aggregates.max(hand1, Card::getCMC);
-
-            if (lands.size() >= Math.max(maxCmcInHand, 6)) {
+            if (landsOwned >= landCap) {
                 // don't play MDFC land if other side is spell and enough lands are available
                 if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Backside).getType().isLand())) {
                     return false;
@@ -688,28 +706,32 @@ public class AiController {
         if (possibleCounters == null || possibleCounters.isEmpty()) {
             return null;
         }
-        SpellAbility bestSA = null;
-        int bestRestriction = Integer.MIN_VALUE;
+        // guarded like the normal evaluation path, so a slow counterspell check can't hang the game thread
+        return callWithAITimeout(() -> withCurseCache(() -> {
+            SpellAbility bestSA = null;
+            int bestRestriction = Integer.MIN_VALUE;
 
-        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
-            sa.setActivatingPlayer(player);
-            // check everything necessary
+            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
+                ThreadUtil.checkInterrupt();
+                sa.setActivatingPlayer(player);
+                // check everything necessary
 
-            AiPlayDecision opinion = canPlayAndPayFor(sa);
-            //PhaseHandler ph = game.getPhaseHandler();
-            // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-            if (opinion == AiPlayDecision.WillPlay) {
-                final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
-                if (bestSA == null || restrictionLevel > bestRestriction) {
-                    bestRestriction = restrictionLevel;
-                    bestSA = sa;
+                AiPlayDecision opinion = canPlayAndPayFor(sa);
+                //PhaseHandler ph = game.getPhaseHandler();
+                // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
+                if (opinion == AiPlayDecision.WillPlay) {
+                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
+                    if (bestSA == null || restrictionLevel > bestRestriction) {
+                        bestRestriction = restrictionLevel;
+                        bestSA = sa;
+                    }
                 }
             }
-        }
 
-        // TODO - "Look" at Targeted SA and "calculate" the threshold
-        // if (bestRestriction < targetedThreshold) return false;
-        return bestSA;
+            // TODO - "Look" at Targeted SA and "calculate" the threshold
+            // if (bestRestriction < targetedThreshold) return false;
+            return bestSA;
+        }));
     }
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
@@ -734,22 +756,25 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-            ApiType saApi = sa.getApi();
+        return callWithAITimeout(() -> {
+            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+                ThreadUtil.checkInterrupt();
+                ApiType saApi = sa.getApi();
 
-            if (saApi == ApiType.Counter || saApi == exceptSA) {
-                continue;
+                if (saApi == ApiType.Counter || saApi == exceptSA) {
+                    continue;
+                }
+                sa.setActivatingPlayer(player);
+                // TODO: this currently only works as a limited prediction of permanent spells.
+                // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
+                // but that is currently difficult to implement due to various side effects leading to stack overflow.
+                Card host = sa.getHostCard();
+                if (sa instanceof SpellPermanent && host != null && !host.isLand() && !ComputerUtil.castPermanentInMain1(player, sa) && ComputerUtilCost.canPayCost(sa, player, false)) {
+                    return sa;
+                }
             }
-            sa.setActivatingPlayer(player);
-            // TODO: this currently only works as a limited prediction of permanent spells.
-            // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
-            // but that is currently difficult to implement due to various side effects leading to stack overflow.
-            Card host = sa.getHostCard();
-            if (sa instanceof SpellPermanent && host != null && !host.isLand() && !ComputerUtil.castPermanentInMain1(player, sa) && ComputerUtilCost.canPayCost(sa, player, false)) {
-                return sa;
-            }
-        }
-        return null;
+            return null;
+        });
     }
 
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
@@ -1596,7 +1621,7 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        Future<SpellAbility> future = ThreadUtil.AIExecutor.submit(() -> {
+        return callWithAITimeout(() -> withCurseCache(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1610,8 +1635,8 @@ public class AiController {
                 if (sa.getHostCard().hasKeyword(Keyword.STORM)
                         && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
                         && player.getZone(ZoneType.Hand).contains(
-                                Predicate.not(CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")))
-                    )) {
+                        Predicate.not(CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")))
+                )) {
                     if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                         // skip evaluating Storm unless we reached the minimum Storm count
                         continue;
@@ -1627,7 +1652,7 @@ public class AiController {
                         if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                             if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
                                     && !player.cantLoseForZeroOrLessLife() && player.getLife() <= sa.getPayCosts()
-                                            .getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                                    .getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
                                 aiPlayDecision = AiPlayDecision.CantAfford;
                             } else {
                                 aiPlayDecision = AiPlayDecision.WillPlay;
@@ -1676,8 +1701,26 @@ public class AiController {
             }
 
             return null;
-        });
+        }));
+    }
 
+    /**
+     * Runs an AI evaluation under the game's AI timeout; returns its result, or null on timeout/failure.
+     * Requires ThreadUtil.isAIThread().
+     */
+    private <T> T callWithAITimeout(final Callable<T> task) {
+        if (ThreadUtil.isAIThread()) {
+            try {
+                return task.call();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // let the outer evaluation see the timeout at its next checkInterrupt()
+                return null;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        final Future<T> future = ThreadUtil.AIExecutor.submit(task);
         try {
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -1700,16 +1743,29 @@ public class AiController {
                 }
             }
 
-            future.cancel(true);
+            cancelAndWait(future);
             return null;
 
         } catch (ExecutionException | InterruptedException ie) {
             // Preserve interrupt status
             if (ie instanceof InterruptedException)
                 Thread.currentThread().interrupt();
-            future.cancel(true);
+            cancelAndWait(future);
             return null;
 
+        }
+    }
+
+    /**
+     * Cancels a timed-out evaluation, then gives the worker a short grace period to unwind.
+     */
+    private static void cancelAndWait(final Future<?> future) {
+        future.cancel(true);
+        if (future instanceof ThreadUtil.TrackableFutureTask<?> task) {
+            final long end = System.nanoTime() + 100_000_000L; // 100ms
+            while (task.getRunnerThread() != null && System.nanoTime() < end && !Thread.currentThread().isInterrupted()) {
+                LockSupport.parkNanos(1_000_000L);
+            }
         }
     }
 

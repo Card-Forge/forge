@@ -11,8 +11,6 @@ import forge.util.ThreadUtil;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
 public class AITimeoutTest extends SimulationTest {
     @Test
     public void timeoutTestLethal() throws Exception {
@@ -41,12 +39,13 @@ public class AITimeoutTest extends SimulationTest {
                 .getAi().getPredictedCombat();
         long endTime = System.nanoTime();
 
-        int duration = Math.toIntExact(TimeUnit.NANOSECONDS.toSeconds(endTime - startTime));
+        double duration = (endTime - startTime) / 1_000_000_000.0;
         int attackingCreatures = combat.getAttackers().size();
 
         // NOTE: This exact test fails at approximately 6.3 - 6.6 seconds average while on local it's a lot faster, seems the external
         // deadlinenanos and cdl await have some delay after the task have run (ie hit a sync block that cannot be cancelled can induce
         // more time). Adding a 2 second buffer may be better, but if this simple test is way beyond then there's something blocking the cancel method
+        System.out.printf("AI Predicted Combat Duration: %.1f seconds\n", duration);
         AssertJUnit.assertTrue("AI Timeout should be less than or equal",
                 duration <= (game.getAITimeout() + 2));
         AssertJUnit.assertEquals("AI should attack with all 50 bears for lethal",

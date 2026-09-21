@@ -65,6 +65,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version $Id$
  */
 public class AiAttackController {
+    private static final int PARALLEL_ATTACKER_THRESHOLD = 5;
+
 
     // possible attackers and blockers
     private List<Card> attackers;
@@ -883,38 +885,7 @@ public class AiAttackController {
             try {
                 // Instantly drop out if the timeout already hit before we woke up
                 ThreadUtil.checkInterrupt();
-
-                GameEntity mustAttackDef = null;
-                if (attacker.getSVar("MustAttack").equals("True")) {
-                    mustAttackDef = targetDefender;
-                } else if (attacker.hasSVar("EndOfTurnLeavePlay") && isEffectiveAttacker(ai, attacker, combat, targetDefender)) {
-                    mustAttackDef = targetDefender;
-                } else if (seasonOfTheWitch) {
-                    //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                    mustAttackDef = targetDefender;
-                } else {
-                    if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return;
-
-                    List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                    reqs.sort(comparator);
-
-                    for (Pair<GameEntity, Integer> e : reqs) {
-                        if (e.getRight() == 0) continue;
-                        GameEntity mustAttackDefMaybe = e.getLeft();
-                        if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
-                            mustAttackDef = mustAttackDefMaybe;
-                            break;
-                        }
-                    }
-                }
-
-                if (mustAttackDef != null) {
-                    synchronized (combat) {
-                        combat.addAttacker(attacker, mustAttackDef);
-                        attackersLeft.remove(attacker);
-                    }
-                    numForcedAttackers.incrementAndGet();
-                }
+                evaluate(attacker);
             } catch (InterruptedException e) {
                 // cooperative exit, flag already cleared by ThreadUtil.checkInterrupt();
             } finally {
@@ -923,22 +894,42 @@ public class AiAttackController {
                 Thread.interrupted(); // always clear
             }
         }
-    }
 
-    // TaskCanceller to avoid lambda allocation
-    private class TaskCanceller implements Runnable {
-        private final ConcurrentAttackerEvaluator[] tasks;
+        /**
+         * The actual per-attacker decision. Touches neither the interrupt flag nor the latch, so it is also safe to
+         * call directly (inline) from the game thread or from an AI worker.
+         */
+        public void evaluate(final Card attacker) {
+            GameEntity mustAttackDef = null;
+            if (attacker.getSVar("MustAttack").equals("True")) {
+                mustAttackDef = targetDefender;
+            } else if (attacker.hasSVar("EndOfTurnLeavePlay") && isEffectiveAttacker(ai, attacker, combat, targetDefender)) {
+                mustAttackDef = targetDefender;
+            } else if (seasonOfTheWitch) {
+                //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                mustAttackDef = targetDefender;
+            } else {
+                if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return;
 
-        public TaskCanceller(ConcurrentAttackerEvaluator[] tasks) {
-            this.tasks = tasks;
-        }
+                List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                reqs.sort(comparator);
 
-        @Override
-        public void run() {
-            for (int i = 0; i < tasks.length; i++) {
-                if (tasks[i] != null) {
-                    tasks[i].cancelTask();
+                for (Pair<GameEntity, Integer> e : reqs) {
+                    if (e.getRight() == 0) continue;
+                    GameEntity mustAttackDefMaybe = e.getLeft();
+                    if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                        mustAttackDef = mustAttackDefMaybe;
+                        break;
+                    }
                 }
+            }
+
+            if (mustAttackDef != null) {
+                synchronized (combat) {
+                    combat.addAttacker(attacker, mustAttackDef);
+                    attackersLeft.remove(attacker);
+                }
+                numForcedAttackers.incrementAndGet();
             }
         }
     }
@@ -1029,35 +1020,55 @@ public class AiAttackController {
         if (!nextTurn) {
             int taskCount = this.attackers.size();
             if (taskCount > 0) {
-                final CountDownLatch cdl = new CountDownLatch(taskCount);
                 final GameEntity finalDefender = defender;
                 // don't allocate a lambda comparator inside loop or it will consume heap for each attackers or android easily hits OOM
                 final AttackRequirementsComparator requirementsComparator = new AttackRequirementsComparator(finalDefender);
-                // Create a raw primitive array to store the tasks instead of an ArrayList of Futures
-                final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[taskCount];
-
-                int index = 0;
-                for (final Card attacker : this.attackers) {
-                    if (System.nanoTime() > deadlineNanos)
-                        break;
-                    tasksArray[index] = new ConcurrentAttackerEvaluator(
-                        attacker, finalDefender, combat, attackersLeft, numForcedAttackers,
-                        cdl, requirementsComparator, seasonOfTheWitch
+                if (taskCount < PARALLEL_ATTACKER_THRESHOLD || ThreadUtil.isAIThread()) {
+                    final ConcurrentAttackerEvaluator evaluator = new ConcurrentAttackerEvaluator(
+                            null, finalDefender, combat, attackersLeft, numForcedAttackers,
+                            null, requirementsComparator, seasonOfTheWitch
                     );
-
-                    // bypasses inner FutureTask heap wrappers entirely!
-                    ThreadUtil.AIExecutor.execute(tasksArray[index]);
-                    index++;
-                }
-
-                try {
-                    boolean completedInTime = cdl.await(ai.getGame().getAITimeout(), TimeUnit.SECONDS);
-                    if (!completedInTime) {
-                        // Reuse a dedicated task object for heap free alloc
-                        ThreadUtil.AIExecutor.execute(new TaskCanceller(tasksArray));
+                    for (final Card attacker : this.attackers) {
+                        if (System.nanoTime() > deadlineNanos || Thread.currentThread().isInterrupted())
+                            break;
+                        evaluator.evaluate(attacker);
                     }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
+                } else {
+                    final CountDownLatch cdl = new CountDownLatch(taskCount);
+                    // Create a raw primitive array to store the tasks instead of an ArrayList of Futures
+                    final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[taskCount];
+
+                    int index = 0;
+                    for (final Card attacker : this.attackers) {
+                        if (System.nanoTime() > deadlineNanos)
+                            break;
+                        tasksArray[index] = new ConcurrentAttackerEvaluator(
+                                attacker, finalDefender, combat, attackersLeft, numForcedAttackers,
+                                cdl, requirementsComparator, seasonOfTheWitch
+                        );
+
+                        // bypasses inner FutureTask heap wrappers entirely!
+                        ThreadUtil.AIExecutor.execute(tasksArray[index]);
+                        index++;
+                    }
+                    // Tasks that were never submitted (deadline hit) would otherwise keep the latch from ever reaching zero
+                    for (int i = index; i < taskCount; i++) {
+                        cdl.countDown();
+                    }
+
+                    try {
+                        boolean completedInTime = cdl.await(ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+                        if (!completedInTime) {
+                            // cancelTask() is just a getAndSet plus an interrupt: do it here instead of queueing it behind stuck work
+                            for (int i = 0; i < index; i++) {
+                                tasksArray[i].cancelTask();
+                            }
+                            // short grace so stragglers stop touching combat/attackersLeft before we carry on
+                            cdl.await(100, TimeUnit.MILLISECONDS);
+                        }
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
 
                 if (attackersLeft.isEmpty()) {
@@ -1359,7 +1370,7 @@ public class AiAttackController {
                 // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
                 // for the risk of walking into a trick
                 && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
-                        || MyRandom.percentTrue(extraChanceIfOppHasMana))
+                || MyRandom.percentTrue(extraChanceIfOppHasMana))
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
                 defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
