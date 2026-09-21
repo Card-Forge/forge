@@ -49,6 +49,12 @@ public class CardView extends GameEntityView {
         return stateViewCache;
     }
 
+    @Override
+    public final boolean equals(final Object o) {
+        if (o == null) { return false; }
+        return o.hashCode() == hashCode() && o instanceof CardView;
+    }
+
     public CardView getBackup() {
         if (get(TrackableProperty.PaperCardBackup) == null)
             return null;
@@ -1251,6 +1257,12 @@ public class CardView extends GameEntityView {
                 return String.valueOf(getId());
             }
             return StringUtils.EMPTY;
+        }
+
+        @Override
+        public final boolean equals(final Object o) {
+            if (o == null) { return false; }
+            return o.hashCode() == hashCode() && o instanceof CardStateView;
         }
 
         @Override
