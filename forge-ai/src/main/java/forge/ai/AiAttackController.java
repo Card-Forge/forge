@@ -374,10 +374,16 @@ public class AiAttackController {
             }
         }
         // reduce the search space
-        final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> !c.hasSVar("EndOfTurnLeavePlay")
-                && (c.toughnessAssignsDamage() || c.getNetCombatDamage() > 0 // performance shortcuts
-                || c.getNetCombatDamage() + ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) > 0)
-                && ComputerUtilCombat.canAttackNextTurn(c));
+        final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> {
+            if (c.hasSVar("EndOfTurnLeavePlay")) {
+                return false;
+            }
+            int dmg = c.getNetCombatDamage();
+            if (dmg <= 0 && ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) - dmg <= 0) {
+                return false;
+            }
+            return ComputerUtilCombat.canAttackNextTurn(c);
+        });
 
         // don't hold back creatures that can't block any of the human creatures
         final List<Card> blockers = getPossibleBlockers(potentialAttackers, opponentsAttackers, true);

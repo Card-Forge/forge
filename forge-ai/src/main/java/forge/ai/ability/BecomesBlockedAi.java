@@ -34,13 +34,11 @@ public class BecomesBlockedAi extends SpellAbilityAi {
             list = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
 
             while (sa.canAddMoreTarget()) {
-                Card choice = null;
-
                 if (list.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
-                choice = ComputerUtilCard.getBestCreatureAI(list);
+                Card choice = ComputerUtilCard.getBestCreatureAI(list);
 
                 if (choice == null) { // can't find anything left
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

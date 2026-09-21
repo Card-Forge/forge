@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Vehicle
 PT:*/*
 A:AB$ ChangeZone | Cost$ T | TargetMin$ 0 | TargetMax$ 2 | TargetsWithSameController$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to two target cards in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to two target cards from a single graveyard.
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards exiled with it.
+S:Mode$ Continuous | AffectedDefined$ Self | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards exiled with it.
 SVar:X:Count$ValidExile Card.ExiledWithSource
 K:Crew:2
 DeckHas:Ability$Graveyard
