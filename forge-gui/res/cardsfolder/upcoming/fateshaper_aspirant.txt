@@ -1,0 +1,10 @@
+Name:Fateshaper Aspirant
+ManaCost:4 W
+Types:Creature Rhino Cleric
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Return,PutCounter | CharmNum$ 1
+SVar:Return:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.Legendary+YouCtrl | TgtPrompt$ Select target legendary card in your graveyard | SpellDescription$ Return target legendary card from your graveyard to your hand.
+SVar:PutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains vigilance and indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance & Indestructible
+Oracle:When this creature enters, choose one —\n• Return target legendary card from your graveyard to your hand.\n• Put a +1/+1 counter on target creature. It gains vigilance and indestructible until end of turn.

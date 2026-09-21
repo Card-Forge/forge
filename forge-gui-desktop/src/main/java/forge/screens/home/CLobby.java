@@ -54,7 +54,25 @@ import net.miginfocom.swing.MigLayout;
 
 public class CLobby implements IDraftEventHandler {
 
-    public enum LobbyMode { CONSTRUCTED, LIMITED }
+    /**
+     * The two lobby workflows. Carries its own label so the Play Type combo can hold
+     * these values directly rather than localized strings the controller has to map back.
+     */
+    public enum LobbyMode {
+        CONSTRUCTED("lblConstructed"),
+        LIMITED("lblLimited");
+
+        private final String labelKey;
+
+        LobbyMode(final String labelKey0) {
+            labelKey = labelKey0;
+        }
+
+        @Override
+        public String toString() {
+            return Localizer.getInstance().getMessage(labelKey);
+        }
+    }
 
     /** Desktop event-panel render contract: shared text content + desktop widget visibility. */
     public record EventPanelContents(
@@ -92,12 +110,12 @@ public class CLobby implements IDraftEventHandler {
         if (!view.getLobby().isAllowNetworking() || view.getLobby().hasControl()) return;
         if (view.getLobby().getData() == null) return;
         boolean hostIsLimited = view.getLobby().getData().isLimitedMode();
-        int desiredIndex = hostIsLimited ? 1 : 0;
-        if (view.getCurrentModeIndex() != desiredIndex) {
+        final LobbyMode hostMode = hostIsLimited ? LobbyMode.LIMITED : LobbyMode.CONSTRUCTED;
+        if (view.getCurrentMode() != hostMode) {
             suppressModeListener = true;
             try {
-                view.setCurrentModeIndex(desiredIndex);
-                currentMode = hostIsLimited ? LobbyMode.LIMITED : LobbyMode.CONSTRUCTED;
+                view.setCurrentMode(hostMode);
+                currentMode = hostMode;
                 view.setVariantsVisible(!hostIsLimited);
             } finally {
                 suppressModeListener = false;
@@ -109,22 +127,17 @@ public class CLobby implements IDraftEventHandler {
         if (suppressModeListener) return;
 
         // Client: mode is host-controlled. If a user click diverges from the synced value,
-        // revert via setCurrentModeIndex (which re-fires this listener).
+        // revert via setCurrentMode (which re-fires this listener).
         if (view.getLobby().isAllowNetworking() && !view.getLobby().hasControl()) {
             boolean hostIsLimited = view.getLobby().getData() != null && view.getLobby().getData().isLimitedMode();
-            int desiredIndex = hostIsLimited ? 1 : 0;
-            if (view.getCurrentModeIndex() != desiredIndex) {
-                view.setCurrentModeIndex(desiredIndex);
+            final LobbyMode hostMode = hostIsLimited ? LobbyMode.LIMITED : LobbyMode.CONSTRUCTED;
+            if (view.getCurrentMode() != hostMode) {
+                view.setCurrentMode(hostMode);
                 return;
             }
         }
 
-        final String selected = view.getCurrentModeSelection();
-        if (Localizer.getInstance().getMessage("lblLimited").equals(selected)) {
-            currentMode = LobbyMode.LIMITED;
-        } else {
-            currentMode = LobbyMode.CONSTRUCTED;
-        }
+        currentMode = view.getCurrentMode();
         final boolean isLimited = (currentMode == LobbyMode.LIMITED);
 
         // Clear event when switching away from Limited, and broadcast the new mode.

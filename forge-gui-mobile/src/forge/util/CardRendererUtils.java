@@ -102,12 +102,14 @@ public class CardRendererUtils {
             return false;
         return card.wasDestroyed() || card.isPhasedOut();
     }
-    public static boolean drawFoil(final CardView card) {
+    public static int getFoilIndex(final CardView card) {
         if (card == null)
-            return false;
-        if (isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT))
-            return card.hasPaperFoil(); // TODO the Card BG should be the texture instead of the Foil Overlay
-        return false;
+            return 0;
+        if (!isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT))
+            return 0;
+        if (!card.hasPaperFoil())
+            return 0;
+        return card.getCurrentState().getFoilIndex();
     }
     public static boolean drawCracks(final CardView card, final boolean isMagnify) {
         if (card == null)

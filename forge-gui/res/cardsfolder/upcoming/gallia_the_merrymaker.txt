@@ -3,8 +3,8 @@ ManaCost:1 R
 Types:Legendary Creature Satyr
 PT:2/1
 K:Haste
-S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+counters_GE1_P1P1 | AddKeyword$ Haste | Description$ Each other creature you control with +1/+1 counter on it has haste.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+counters_GE1_P1P1 | AddKeyword$ Haste | Description$ Each other creature you control with a +1/+1 counter on it has haste.
 A:AB$ PutCounter | Cost$ 1 R T | ValidTgts$ Creature.ThisTurnEntered | ValidTgtsDesc$ creature that entered this turn | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature that entered this turn.
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters
-Oracle:Haste\nEach other creature you control with +1/+1 counter on it has haste.\n{1}{R}, {T}: Put a +1/+1 counter on target creature that entered this turn.
+Oracle:Haste\nEach other creature you control with a +1/+1 counter on it has haste.\n{1}{R}, {T}: Put a +1/+1 counter on target creature that entered this turn.

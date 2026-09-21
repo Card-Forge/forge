@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
@@ -279,11 +280,11 @@ public class Graphics implements Disposable {
         batch.begin();
     }
 
-    public void drawLineArrow(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-        drawLineArrow(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
+    public void drawLinePointer(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        drawLinePointer(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
     }
 
-    public void drawLineArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+    public void drawLinePointer(float thickness, Color color, float x1, float y1, float x2, float y2) {
         batch.end(); //must pause batch while rendering shapes
         float ct = thickness / 2;
         float lt = thickness / 3;
@@ -392,6 +393,282 @@ public class Graphics implements Disposable {
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
         Gdx.gl.glDisable(GL_BLEND);
+
+        batch.begin();
+    }
+    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
+        batch.end();
+        float lt = thickness / 3;
+
+        if (alphaComposite < 1) {
+            fillColor = FSkinColor.alphaColor(fillColor, fillColor.a * alphaComposite);
+            strokeColor = FSkinColor.alphaColor(strokeColor, strokeColor.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (fillColor.a < 1 || needSmoothing) {
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+
+        float radius = thickness;
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(fillColor);
+        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), radius);
+        if (drawPointer)
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
+        shapeRenderer.setColor(strokeColor);
+        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness /2);
+        if (drawPointer)
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
+        endShape();
+
+        float dx = x2 - x1, dy = y2 - y1;
+        float length = (float)Math.sqrt(dx*dx + dy*dy);
+
+        // Point just before the tip for direction
+        float beforeTipX = x1, beforeTipY = y1;
+
+        if (length < 120f) {
+            // Straight line
+            float backScale = Math.max(0.1f, 10f / length);
+            beforeTipX = x2 - dx * backScale;
+            beforeTipY = y2 - dy * backScale;
+
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0), thickness);
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0));
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(1);
+
+        } else {
+            // Curved Bezier
+            float midX = (x1 + x2) / 2f;
+            float midY = (y1 + y2) / 2f;
+            float px = -dy / length, py = dx / length;
+            float curveStrength = 50f;
+            float cx = midX + px * curveStrength;
+            float cy = midY + py * curveStrength;
+
+            // Sample at t=0.95 for approach vector
+            float tBefore = 0.95f;
+            beforeTipX = (1 - tBefore)*(1 - tBefore)*x1 + 2*(1 - tBefore)*tBefore*cx + tBefore*tBefore*x2;
+            beforeTipY = (1 - tBefore)*(1 - tBefore)*y1 + 2*(1 - tBefore)*tBefore*cy + tBefore*tBefore*y2;
+
+            int segments = 30;
+            float prevX = x1, prevY = y1;
+
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0), thickness);
+                prevX = bx; prevY = by;
+            }
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            prevX = x1; prevY = y1;
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0));
+                prevX = bx; prevY = by;
+            }
+            endShape();
+
+            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            if (lt > 1) Gdx.gl.glLineWidth(1);
+        }
+
+        if (!drawPointer) {
+            // --- Arrowhead at (x2,y2) ---
+            float tipX = adjustX(x2);
+            float tipY = adjustY(y2, 0);
+            float adjBeforeX = adjustX(beforeTipX);
+            float adjBeforeY = adjustY(beforeTipY, 0);
+
+            float headingX = tipX - adjBeforeX;
+            float headingY = tipY - adjBeforeY;
+            float headingLen = (float)Math.sqrt(headingX*headingX + headingY*headingY);
+
+            if (headingLen > 0) {
+                float nx = headingX / headingLen;
+                float ny = headingY / headingLen;
+
+                float arrowLength = thickness * 2.2f;
+                float spreadAngle = (float)Math.toRadians(35);
+
+                // Left wing
+                float cosL = (float)Math.cos(Math.PI - spreadAngle);
+                float sinL = (float)Math.sin(Math.PI - spreadAngle);
+                float leftDirX = nx * cosL - ny * sinL;
+                float leftDirY = nx * sinL + ny * cosL;
+
+                // Right wing
+                float cosR = (float)Math.cos(Math.PI + spreadAngle);
+                float sinR = (float)Math.sin(Math.PI + spreadAngle);
+                float rightDirX = nx * cosR - ny * sinR;
+                float rightDirY = nx * sinR + ny * cosR;
+
+                float baseLeftX = tipX + leftDirX * arrowLength;
+                float baseLeftY = tipY + leftDirY * arrowLength;
+                float baseRightX = tipX + rightDirX * arrowLength;
+                float baseRightY = tipY + rightDirY * arrowLength;
+
+                startShape(ShapeType.Filled);
+                shapeRenderer.setColor(fillColor);
+                shapeRenderer.rectLine(tipX, tipY, baseLeftX, baseLeftY, thickness);
+                shapeRenderer.rectLine(tipX, tipY, baseRightX, baseRightY, thickness);
+                endShape();
+
+                if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+                if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+                startShape(ShapeType.Line);
+                shapeRenderer.setColor(strokeColor);
+                shapeRenderer.line(tipX, tipY, baseLeftX, baseLeftY);
+                shapeRenderer.line(tipX, tipY, baseRightX, baseRightY);
+                endShape();
+
+                if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+                if (lt > 1) Gdx.gl.glLineWidth(1);
+            }
+        }
+
+        if (fillColor.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+
+        batch.begin();
+    }
+
+    public void drawCurvedLinePointer(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2) {
+        batch.end();
+        float lt = thickness / 3;
+
+        if (alphaComposite < 1) {
+            fillColor = FSkinColor.alphaColor(fillColor, fillColor.a * alphaComposite);
+            strokeColor = FSkinColor.alphaColor(strokeColor, strokeColor.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (fillColor.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+
+        float radius = thickness * 1.2f;
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(fillColor);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
+        shapeRenderer.setColor(strokeColor);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
+        endShape();
+
+        float dx = x2 - x1, dy = y2 - y1;
+        float length = (float)Math.sqrt(dx*dx + dy*dy);
+
+        if (length < 120f) {
+            // Straight line if short
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0), thickness);
+            endShape();
+
+
+            if (needSmoothing) {
+                Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(lt);
+            }
+
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0),
+                    adjustX(x2), adjustY(y2, 0));
+            endShape();
+
+            if (needSmoothing) {
+                Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+
+
+        } else {
+            // Curved Bezier if long
+            float midX = (x1 + x2) / 2f;
+            float midY = (y1 + y2) / 2f;
+            float px = -dy / length, py = dx / length;
+            float curveStrength = 50f;
+            float cx = midX + px * curveStrength;
+            float cy = midY + py * curveStrength;
+
+            int segments = 30;
+            float prevX = x1, prevY = y1;
+
+            startShape(ShapeType.Filled);
+            shapeRenderer.setColor(fillColor);
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0), thickness);
+                prevX = bx; prevY = by;
+            }
+            endShape();
+
+            if (needSmoothing) {
+                Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(lt);
+            }
+            startShape(ShapeType.Line);
+            shapeRenderer.setColor(strokeColor);
+            prevX = x1; prevY = y1;
+            for (int i = 1; i <= segments; i++) {
+                float t = i / (float)segments;
+                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
+                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
+                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0),
+                        adjustX(bx), adjustY(by, 0));
+                prevX = bx; prevY = by;
+            }
+            endShape();
+            if (needSmoothing) {
+                Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            }
+            if (lt > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+        }
+
+        if (fillColor.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
 
         batch.begin();
     }
@@ -789,33 +1066,69 @@ public class Graphics implements Disposable {
         }
     }
 
-    public void drawCardImage(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+    public void drawCardImage(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged, int foilIndex) {
         if (image == null)
             return;
-        if (!drawGrayscale) {
-            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-            if (damage_overlay != null && damaged)
-                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
-        } else {
-            batch.end();
-            ShaderUtil.getInstance().getShaderGrayscale().bind();
-            ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", 1f);
-            ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 0.8f);
-            batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-            batch.begin();
-            //draw gray
-            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-            //reset
-            batch.end();
-            batch.setShader(null);
-            batch.begin();
+        if (image != null) {
+            if (!drawGrayscale) {
+                if (foilIndex > 0) {
+                    batch.end();
+                    ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+                    shaderProgram.bind();
+                    shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+                    shaderProgram.setUniformf("edge_radius", 0);
+                    shaderProgram.setUniformf("u_time", 0);
+                    shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                    shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+                    batch.setShader(shaderProgram);
+                    batch.begin();
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                    batch.end();
+                    batch.setShader(null);
+                    batch.begin();
+                } else {
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                }
+                if (damage_overlay != null && damaged)
+                    batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+            } else {
+                batch.end();
+                ShaderUtil.getInstance().getShaderGrayscale().bind();
+                ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", 1f);
+                ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 0.8f);
+                batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
+                batch.begin();
+                //draw gray
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                //reset
+                batch.end();
+                batch.setShader(null);
+                batch.begin();
+            }
         }
     }
 
-    public void drawCardImage(TextureRegion image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+    public void drawCardImage(TextureRegion image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged, int foilIndex) {
         if (image != null) {
             if (!drawGrayscale) {
-                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                if (foilIndex > 0) {
+                    batch.end();
+                    ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+                    shaderProgram.bind();
+                    shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+                    shaderProgram.setUniformf("edge_radius", 0);
+                    shaderProgram.setUniformf("u_time", 0);
+                    shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                    shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+                    batch.setShader(shaderProgram);
+                    batch.begin();
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                    batch.end();
+                    batch.setShader(null);
+                    batch.begin();
+                } else {
+                    batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                }
                 if (damage_overlay != null && damaged)
                     batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
             } else {
@@ -884,42 +1197,28 @@ public class Graphics implements Disposable {
         batch.begin();
     }
 
-    public void drawFoil(float x, float y, float w, float h, float radius) {
-        drawFoil(x, y, w, h, radius, false);
-    }
-
-    public void drawFoil(float x, float y, float w, float h, float radius, boolean rotate) {
-        Texture image = Forge.getAssets().getHolofoil();
-        if (image == null)
-            return;
-        batch.end();
-        ShaderUtil.getInstance().getShaderRoundedRect2().bind();
-        ShaderUtil.getInstance().getShaderRoundedRect2().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        ShaderUtil.getInstance().getShaderRoundedRect2().setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * radius);
-        ShaderUtil.getInstance().getShaderRoundedRect2().setUniformf("u_time", Forge.hueFragTime);
-        batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect2());
-        batch.begin();
-        //draw
-        if (rotate)
-            drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, 0, 0, image.getWidth(), image.getHeight(), 90);
-        else
-            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        //reset
-        batch.end();
-        batch.setShader(null);
-        batch.begin();
-    }
-
-    public void drawCardRoundRect(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGray, boolean damaged, boolean foilEffect) {
+    public void drawCardRoundRect(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGray, boolean damaged, int foilIndex) {
         if (image == null)
             return;
         float radius = ImageCache.getInstance().getRadius(image);
         batch.end();
-        ShaderUtil.getInstance().getShaderRoundedRect().bind();
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * radius);
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", drawGray ? 0.8f : 0f);
-        batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
+        boolean shouldApplyHolo = foilIndex > 0 && !drawGray;
+        float edgeRadius = (float)(image.getHeight() / image.getWidth()) * radius;
+        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+        if (shouldApplyHolo) {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+        } else {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_gray", drawGray ? 0.8f : 0f);
+        }
+        batch.setShader(shaderProgram);
         batch.begin();
         //draw
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
@@ -927,31 +1226,68 @@ public class Graphics implements Disposable {
         batch.end();
         batch.setShader(null);
         batch.begin();
-        if (foilEffect && !drawGray) {
-            drawFoil(x, y, w, h, radius);
-        }
         if (damage_overlay != null && damaged)
             batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
     }
 
     public void drawCardRoundRect(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {
-        drawCardRoundRect(image, x, y, w, h, originX, originY, rotation, 1f, false);
+        drawCardRoundRect(image, x, y, w, h, originX, originY, rotation, 1f, 0);
     }
 
-    public void drawCardRoundRect(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation, float modR, boolean drawFoil) {
+    public void drawCardRoundRect(TextureRegion image, float x, float y, float w, float h, float originX, float originY, float rotation, float modR, int foilIndex) {
         if (image == null)
             return;
         batch.end();
-        ShaderUtil.getInstance().getShaderRoundedRect().bind();
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * (ImageCache.getInstance().getRadius(image) * modR));
-        ShaderUtil.getInstance().getShaderRoundedRect().setUniformf("u_gray", 0f);
-        batch.setShader(ShaderUtil.getInstance().getShaderRoundedRect());
+        boolean shouldApplyHolo = foilIndex > 0;
+        float edgeRadius = ((float)(image.getRegionHeight() / image.getRegionWidth()) * (ImageCache.getInstance().getRadius(image.getTexture()) * modR));
+        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+        if (shouldApplyHolo) {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+        } else {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_gray", 0f);
+        }
+        batch.setShader(shaderProgram);
+        batch.begin();
+        //draw
+        drawRotatedImage(image, x, y, w, h, originX, originY, rotation);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+
+    public void drawCardRoundRect(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation, float modR, int foilIndex) {
+        if (image == null)
+            return;
+        batch.end();
+        boolean shouldApplyHolo = foilIndex > 0;
+        float edgeRadius = ((float)(image.getHeight() / image.getWidth()) * (ImageCache.getInstance().getRadius(image) * modR));
+        ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
+        if (shouldApplyHolo) {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+        } else {
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", edgeRadius);
+            shaderProgram.setUniformf("u_gray", 0f);
+        }
+        batch.setShader(shaderProgram);
         batch.begin();
         //draw
         drawRotatedImage(image, x, y, w, h, originX, originY, 0, 0, image.getWidth(), image.getHeight(), rotation);
-        if (drawFoil)
-            drawFoil(x, y, w, h, modR, true);
         //reset
         batch.end();
         batch.setShader(null);
@@ -974,7 +1310,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -996,7 +1332,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -1016,7 +1352,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -1036,7 +1372,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -1056,7 +1392,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -1140,7 +1476,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -1164,7 +1500,7 @@ public class Graphics implements Disposable {
             batch.setShader(null);
             batch.begin();
         } else {
-            drawImage(image, x, y, w, h);
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
     }
 
@@ -1279,6 +1615,63 @@ public class Graphics implements Disposable {
         batch.begin();
     }
 
+    public void drawImage(Texture image, float x, float y, float w, float h) {
+        if (image == null)
+            return;
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+    }
+
+    public void drawImage(TextureRegion image, float x, float y, float w, float h) {
+        if (image == null)
+            return;
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+    }
+    public void drawImage(TextureRegion image, float x, float y, float w, float h, int foilIndex) {
+        if (image == null)
+            return;
+        if (foilIndex > 0) {
+            batch.end();
+            ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderProgram.setUniformf("edge_radius", 0);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+            batch.setShader(shaderProgram);
+            batch.begin();
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
+
+    }
+    public void drawImage(Texture image, float x, float y, float w, float h, int foilIndex) {
+        if (image == null)
+            return;
+        if (foilIndex > 0) {
+            batch.end();
+            ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
+            shaderProgram.bind();
+            shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderProgram.setUniformf("edge_radius", 0);
+            shaderProgram.setUniformf("u_time", 0);
+            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
+            batch.setShader(shaderProgram);
+            batch.begin();
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
+    }
+
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);
     }
@@ -1293,28 +1686,6 @@ public class Graphics implements Disposable {
             fillRect(Color.BLACK, x, y, w, h);
             setAlphaComposite(oldalpha);
         }
-    }
-
-    public void drawImage(Texture image, float x, float y, float w, float h) {
-        drawImage(image, x, y, w, h, false);
-    }
-
-    public void drawImage(Texture image, float x, float y, float w, float h, boolean drawFoil) {
-        if (image != null)
-            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        if (drawFoil)
-            drawFoil(x, y, w, h, 0f);
-    }
-
-    public void drawImage(TextureRegion image, float x, float y, float w, float h) {
-        drawImage(image, x, y, w, h, false);
-    }
-
-    public void drawImage(TextureRegion image, float x, float y, float w, float h, boolean drawFoil) {
-        if (image != null)
-            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        if (drawFoil)
-            drawFoil(x, y, w, h, 0f);
     }
 
     public void drawImage(TextureRegion image, TextureRegion glowImageReference, float x, float y, float w, float h, Color glowColor, boolean selected) {

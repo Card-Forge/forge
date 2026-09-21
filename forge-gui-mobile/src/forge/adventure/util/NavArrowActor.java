@@ -8,21 +8,27 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.Color;
 
+/**
+ * NavArrowActor
+ * Renders an animated arrow pointing towards active targets.
+ */
 public class NavArrowActor extends Actor {
 
     public float navTargetAngle = 0.0f;
-    private Animation<TextureRegion> currentAnimation;
-    private Array<Sprite> sprites;
+    private final Animation<TextureRegion> currentAnimation;
+    private static Array<Sprite> sprites = null;
     float timer;
 
     public NavArrowActor() {
         if (sprites == null) {
             //TODO: Expand compass sprite to have color coded arrows, swap sprites based on distance to target
             sprites = Config.instance().getAtlas("maps/tileset/compass.atlas").createSprites();
-            if (sprites.isEmpty())
+            if (sprites.isEmpty()) {
                 System.out.print("NavArrow sprite not found");
+            }
         }
-        currentAnimation = new Animation<>(0.4f, sprites);
+
+        this.currentAnimation = new Animation<>(0.4f, sprites);
     }
 
     @Override
@@ -33,18 +39,38 @@ public class NavArrowActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (currentAnimation == null)
+        if (currentAnimation == null) {
             return;
-        TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
-        setHeight(currentFrame.getRegionHeight());
-        setWidth(currentFrame.getRegionWidth());
+        }
 
-        Color oldColor = batch.getColor();
-        Color actorColor = getColor();
-        batch.setColor(actorColor.r, actorColor.g, actorColor.b, actorColor.a * parentAlpha);
+        TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
+
+        final float frameWidth = currentFrame.getRegionWidth();
+        final float frameHeight = currentFrame.getRegionHeight();
+
+        setHeight(frameHeight);
+        setWidth(frameWidth);
+
+        final Color oldColor = batch.getColor();
+        final Color actorColor = getColor();
+
+        final float targetAlpha = actorColor.a * parentAlpha;
+        batch.setColor(actorColor.r, actorColor.g, actorColor.b, targetAlpha);
 
         //TODO: Simplify params somehow for readability? All this does is spin the image around the player.
-        batch.draw(currentFrame, getX() - currentFrame.getRegionWidth() / 2, getY() - currentFrame.getRegionHeight() / 2, (currentFrame.getRegionWidth() * 0.5f), (currentFrame.getRegionHeight() * 0.5f), currentFrame.getRegionWidth(), currentFrame.getRegionHeight(), 1, 1, navTargetAngle);
+        batch.draw(
+                currentFrame,
+                getX() - frameWidth / 2f,
+                getY() - frameHeight / 2f,
+                frameWidth * 0.5f,
+                frameHeight * 0.5f,
+                frameWidth,
+                frameHeight,
+                1f,
+                1f,
+                navTargetAngle
+        );
+
         batch.setColor(oldColor);
     }
 }
