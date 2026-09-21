@@ -577,6 +577,8 @@ public class ImageCache {
     public boolean isFullBorder(Texture image) {
         if (image == null)
             return false;
+        if (forge.card.CardAnimationManager.isAnimationTexture(image))
+            return true;
         ImageRecord record = imageRecord.get().get(getTextureKey(image));
         if (record == null)
             return false;

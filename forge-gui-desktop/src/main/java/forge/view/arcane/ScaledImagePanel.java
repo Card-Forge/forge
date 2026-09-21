@@ -19,6 +19,8 @@ package forge.view.arcane;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -101,34 +103,38 @@ public class ScaledImagePanel extends JPanel {
     @Override
     public final void paint(final Graphics g) {
         Dimension sz = getSize();
-        BufferedImage src = this.getSrcImage(); 
-        if (src == null) {
+        BufferedImage img = this.getSrcImage(); 
+        if (img == null || sz.width <= 0 || sz.height <= 0) {
             return;
         }
-        
-        //ResampleOp resizer = new ResampleOp(DimensionConstrain.createMaxDimension(this.getWidth(), this.getHeight(), !scaleLarger));
-        //resizer.setUnsharpenMask(UnsharpenMask.Soft);
-        BufferedImage img = getSrcImage(); //resizer.filter(getSrcImage(), null);
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         float screenScale = GuiBase.getInterface().getScreenScale();
+        float imgScaledWidth = img.getWidth() / screenScale;
+        float imgScaledHeight = img.getHeight() / screenScale;
 
-        boolean needsScale = Math.round(img.getWidth() / screenScale) < sz.width;
-        float scaleFactor = ((float)img.getWidth() / screenScale) / sz.width;
-        if (needsScale && ( scaleFactor < 0.95 || scaleFactor > 1.05 )) { // This should very low-quality scaling to draw during animation
-            float maxZoomX = ((float)sz.width) / (img.getWidth() / screenScale);
-            float maxZoomY = ((float)sz.height) / (img.getHeight() / screenScale);
-            float zoom = Math.min(maxZoomX, maxZoomY);
+        float maxZoomX = ((float) sz.width) / imgScaledWidth;
+        float maxZoomY = ((float) sz.height) / imgScaledHeight;
+        float zoom = Math.min(maxZoomX, maxZoomY);
 
-            int zoomedWidth = (int) (img.getWidth() / screenScale * zoom);
-            int zoomedHeight = (int) (img.getHeight() / screenScale * zoom);
-            int x = (sz.width - zoomedWidth) / 2;
-            int y = (sz.height - zoomedHeight) / 2;
+        int zoomedWidth = Math.round(imgScaledWidth * zoom);
+        int zoomedHeight = Math.round(imgScaledHeight * zoom);
 
-            g.drawImage(img, x, y, x + zoomedWidth, y + zoomedHeight, 0, 0, img.getWidth(), img.getHeight(), null);
-        } else {
-            int x = Math.round((sz.width / 2) - (img.getWidth() / screenScale / 2));
-            int y = Math.round((sz.height / 2) - (img.getHeight() / screenScale / 2));
-            g.drawImage(img, x, y, x + sz.width, y + sz.height, 0, 0, img.getWidth(), img.getHeight(), null);
+        // Snap to border if within small rounding variance
+        if (Math.abs(zoomedWidth - sz.width) <= 4) {
+            zoomedWidth = sz.width;
         }
+        if (Math.abs(zoomedHeight - sz.height) <= 4) {
+            zoomedHeight = sz.height;
+        }
+
+        int x = (sz.width - zoomedWidth) / 2;
+        int y = (sz.height - zoomedHeight) / 2;
+
+        g2d.drawImage(img, x, y, x + zoomedWidth, y + zoomedHeight, 0, 0, img.getWidth(), img.getHeight(), null);
     }
 
     /**

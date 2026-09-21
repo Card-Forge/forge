@@ -64,6 +64,7 @@ public class FImagePanel extends JPanel {
 
     // Ensures that when resizing only {@code doPerformancePaint} is used.
     private boolean isResizing = false;
+    private boolean isAnimated = false;
 
     private Timer resizingTimer = createResizingTimer(100);
 
@@ -105,6 +106,15 @@ public class FImagePanel extends JPanel {
         });
     }
 
+    public void setAnimatedImage(BufferedImage image) {
+        if (this.sourceImage != image) {
+            this.sourceImage = image;
+            this.isAnimated = true;
+            this.isResampleEnabled = false;
+            repaint();
+        }
+    }
+
     /**
      * Displays {@code BufferedImage} with the specified rotation and auto-size mode.
      * <p>
@@ -112,6 +122,7 @@ public class FImagePanel extends JPanel {
      * This means the image can only have either a vertical or horizontal orientation.
      */
     public void setImage(BufferedImage image, int initialRotation, AutoSizeImageMode autoSizeMode) {
+        this.isAnimated = false;
         if (this.sourceImage != image || this.degreesOfRotation != initialRotation || this.autoSizeMode != autoSizeMode) {
             isResampleEnabled = true;
             this.autoSizeMode = autoSizeMode;
@@ -194,7 +205,7 @@ public class FImagePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         if (this.sourceImage != null) {
             setImageScale();
-            if (this.isResizing) {
+            if (this.isResizing || this.isAnimated) {
                 doPerformancePaint(g);
             } else {
                 doQualityPaint(g);

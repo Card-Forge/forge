@@ -824,7 +824,14 @@ public class CardImageRenderer {
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard, float modR) {
         boolean canshow = MatchController.instance.mayView(card);
         String key = card.getState(altState).getImageKey();
-        Texture image = new CachedCardImageRenderer(key).getImage();
+        Texture image = null;
+        String cardName = (card.getState(altState) != null) ? card.getState(altState).getName() : card.getName();
+        if (canshow && cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+            image = CardAnimationManager.getCurrentFrame(cardName);
+        }
+        if (image == null) {
+            image = new CachedCardImageRenderer(key).getImage();
+        }
         if (image == null) {
             //try if its Reward Actor object
             if (card.getObject() instanceof RewardActor actor) {

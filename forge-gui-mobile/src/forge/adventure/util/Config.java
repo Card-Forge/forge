@@ -65,7 +65,12 @@ public class Config {
         String path = resPath();
         FilenameFilter planesFilter = (file, s) -> !s.contains(".") && !s.equals(commonDirectoryName);
 
-        adventures = new File(GuiBase.isMobile() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
+        File adventureDirectory = new File(GuiBase.isMobile() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure");
+        adventures = adventureDirectory.list(planesFilter);
+        if (adventures == null || adventures.length == 0) {
+            throw new IllegalStateException("No adventure planes found in " + adventureDirectory.getAbsolutePath()
+                    + ". The Forge adventure resources are missing or unreadable.");
+        }
         try {
             settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR + "settings.json"));
         } catch (Exception e) {
@@ -133,6 +138,7 @@ public class Config {
     }
 
     public String getPlanePath(String plane) {
+        Objects.requireNonNull(plane, "Adventure plane is not configured");
         if (plane.startsWith("<user>")) {
             return ForgeConstants.USER_ADVENTURE_DIR + "/userplanes/" + plane.substring("<user>".length()) + "/";
         } else {

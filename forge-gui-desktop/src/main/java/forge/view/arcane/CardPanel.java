@@ -57,6 +57,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
+import forge.gui.CardAnimationManager;
 import forge.gui.CardContainer;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -258,7 +259,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         setImage(cachedImage.getImage());
     }
 
+    private String getCardName() {
+        if (card == null) {
+            return null;
+        }
+        if (card.getCurrentState() != null && card.getCurrentState().getName() != null) {
+            return card.getCurrentState().getName();
+        }
+        return card.getName();
+    }
+
     private void setImage(final BufferedImage srcImage) {
+        String cardName = getCardName();
+        if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+            BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName);
+            if (animFrame != null) {
+                if (imagePanel != null) {
+                    imagePanel.setImage(animFrame);
+                    repaint();
+                }
+                return;
+            }
+        }
         if (imagePanel == null || imagePanel.getSrcImage() == srcImage) {
             return;
         }
@@ -307,6 +329,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.rotate(getTappedAngle(), cardXOffset + edgeOffset, (cardYOffset + cardHeight)
                     - edgeOffset);
         }
+
+        if (card != null && imagePanel != null) {
+            String cardName = getCardName();
+            if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+                BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName);
+                if (animFrame != null) {
+                    imagePanel.setImage(animFrame);
+                }
+            }
+        }
+
         super.paint(g2d);
     }
 
@@ -1084,15 +1117,30 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         updateText();
         updatePTOverlay();
         updateImage();
+
+        String cardName = getCardName();
+        if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+            CardAnimationManager.register(this, cardName);
+            BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName);
+            if (animFrame != null) {
+                imagePanel.setImage(animFrame);
+            }
+        } else {
+            CardAnimationManager.unregister(this);
+        }
+
         repaint();
     }
 
     @Override
     public void dispose() {
+        CardAnimationManager.unregister(this);
         attachedToPanel = null;
         attachedPanels = null;
         stack = null;
-        imagePanel.setImage(null);
+        if (imagePanel != null) {
+            imagePanel.setImage(null);
+        }
         imagePanel = null;
         card = null;
     }

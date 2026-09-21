@@ -55,6 +55,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     private Object displayed;
     private boolean mayView = true;
+    private boolean isFlipped = false;
 
     private final FImagePanel panel;
     private BufferedImage currentImage;
@@ -73,10 +74,12 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     }
 
     public void setItem(final BufferedImage image) {
+        CardAnimationManager.unregister(this);
         this.currentImage = image;
         this.panel.setImage(image, getAutoSizeImageMode());
         this.displayed = null;
         this.mayView = false;
+        this.isFlipped = false;
     }
 
     public void setCard(final CardStateView c) {
@@ -94,6 +97,20 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     private void setImage(final Object display, final boolean mayView, final boolean isFlipped) {
         this.displayed = display;
         this.mayView = mayView;
+        this.isFlipped = isFlipped;
+
+        String cardName = getDisplayedCardName();
+        if (mayView && cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+            CardAnimationManager.register(this, cardName);
+            BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName);
+            if (frame != null) {
+                this.currentImage = frame;
+                this.panel.setAnimatedImage(isFlipped ? rotateImage180(frame) : frame);
+                return;
+            }
+        } else {
+            CardAnimationManager.unregister(this);
+        }
 
         final BufferedImage image = getImage();
         if (image != null && image != this.currentImage) {
@@ -186,5 +203,30 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         g2d.dispose();
 
         return rotated;
+    }
+
+    @Override
+    public void paint(final java.awt.Graphics g) {
+        if (mayView && displayed != null) {
+            String cardName = getDisplayedCardName();
+            if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+                BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName);
+                if (frame != null) {
+                    this.panel.setAnimatedImage(isFlipped ? rotateImage180(frame) : frame);
+                }
+            }
+        }
+        super.paint(g);
+    }
+
+    private String getDisplayedCardName() {
+        if (displayed instanceof CardStateView) {
+            return ((CardStateView) displayed).getName();
+        } else if (displayed instanceof PaperCard) {
+            return ((PaperCard) displayed).getName();
+        } else if (displayed instanceof InventoryItem) {
+            return ((InventoryItem) displayed).getName();
+        }
+        return null;
     }
 }

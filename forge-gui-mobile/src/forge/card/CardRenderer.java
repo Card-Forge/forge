@@ -636,7 +636,13 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
-        Texture image = new RendererCachedCardImage(pc, false).getImage();
+        Texture image = null;
+        if (pc != null && CardAnimationManager.hasAnimation(pc.getName())) {
+            image = CardAnimationManager.getCurrentFrame(pc.getName());
+        }
+        if (image == null) {
+            image = new RendererCachedCardImage(pc, false).getImage();
+        }
         final CardView card = CardView.getCardForUi(pc);
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(pc) ? CROP_MULTIPLIER : 0.97f;
@@ -682,8 +688,15 @@ public class CardRenderer {
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList, boolean magnify) {
         boolean canshow = MatchController.instance.mayView(card);
-        boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
-        Texture image = new RendererCachedCardImage(card, false).getImage(showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
+        boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile));
+        Texture image = null;
+        String cardName = (card != null && card.getCurrentState() != null) ? card.getCurrentState().getName() : (card != null ? card.getName() : null);
+        if (canshow && !showsleeves && cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+            image = CardAnimationManager.getCurrentFrame(cardName);
+        }
+        if (image == null) {
+            image = new RendererCachedCardImage(card, false).getImage(showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
+        }
         TextureRegion crack_overlay = FSkin.getCracks().get(getCrackOverlay(card.getDamage()));
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w) / 8;
