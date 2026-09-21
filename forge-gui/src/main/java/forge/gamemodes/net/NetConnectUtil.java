@@ -21,6 +21,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.BuildInfo;
 import forge.util.Localizer;
 import forge.util.URLValidator;
 import org.apache.commons.lang3.StringUtils;
@@ -62,6 +63,31 @@ public class NetConnectUtil {
         NetworkLogConfig.activateNetworkLogging();
         server.startServer(port);
         server.setLobby(lobby);
+
+        // Register with public lobby server
+        final boolean lobbyEnabled = FModel.getNetPreferences().getPrefBoolean(ForgeNetPreferences.FNetPref.LOBBY_ENABLED);
+        if (lobbyEnabled) {
+            final String lobbyUrl = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.LOBBY_SERVER_URL);
+            if (lobbyUrl != null && !lobbyUrl.isEmpty()) {
+                try {
+                    final LobbyClient lobbyClient = new LobbyClient(lobbyUrl);
+                    final String roomName = FModel.getPreferences().getPref(FPref.PLAYER_NAME) + "'s Game";
+                    final String gameVersion = BuildInfo.getVersionString();
+                    final LobbyRoom room = lobbyClient.registerRoom(roomName, "Constructed", port, gameVersion, false, null, 8);
+                    if (room != null) {
+                        final int relayPort = lobbyClient.requestRelay(port);
+                        if (relayPort <= 0) {
+                            System.err.println("Lobby: relay allocation failed, room registered without relay");
+                        }
+                    } else {
+                        System.err.println("Lobby: room registration failed for URL: " + lobbyUrl);
+                    }
+                    server.setLobbyClient(lobbyClient);
+                } catch (Exception e) {
+                    System.err.println("Failed to register with lobby server: " + e.getMessage());
+                }
+            }
+        }
 
         lobby.setListener(new IUpdateable() {
             @Override
@@ -150,6 +176,14 @@ public class NetConnectUtil {
         for (final java.util.Map.Entry<String, String> entry : FServerManager.getAllLocalAddresses().entrySet()) {
             labels.add(entry.getKey());
             urls.add(entry.getValue() + ":" + port);
+        }
+
+        // If a public relay is active, advertise it so joiners can connect without
+        // the host's own address being reachable.
+        final LobbyClient lobbyClient = FServerManager.getInstance().getLobbyClient();
+        if (lobbyClient != null && lobbyClient.getRelayAddress() != null) {
+            labels.add("Relay (Public)");
+            urls.add(lobbyClient.getRelayAddress());
         }
 
         final String rememberedUrl = netPrefs.getPref(ForgeNetPreferences.FNetPref.NET_LAST_COPIED_URL);

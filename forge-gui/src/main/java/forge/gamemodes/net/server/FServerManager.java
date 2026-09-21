@@ -16,6 +16,7 @@ import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.EventPhase;
+import forge.gamemodes.net.LobbyClient;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.draft.BoosterDraftHost;
 import forge.util.IHasForgeLog;
@@ -157,6 +158,7 @@ public final class FServerManager implements IHasForgeLog {
     private IDraftEventHandler draftHandler;
     private boolean UPnPMapped = false;
     private int port;
+    private volatile LobbyClient lobbyClient;
     private static final Localizer localizer = Localizer.getInstance();
     private final Thread shutdownHook = new Thread(() -> {
         if (isHosting()) {
@@ -227,9 +229,13 @@ public final class FServerManager implements IHasForgeLog {
 
     public void startServer(final int port) {
         this.port = port;
+        final boolean lobbyEnabled = FModel.getNetPreferences().getPrefBoolean(ForgeNetPreferences.FNetPref.LOBBY_ENABLED);
         String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
         boolean startUPnP;
-        if (UPnPOption.equalsIgnoreCase("ASK")) {
+        if (lobbyEnabled) {
+            // Lobby + relay handles NAT traversal; skip UPnP prompt
+            startUPnP = false;
+        } else if (UPnPOption.equalsIgnoreCase("ASK")) {
             startUPnP = callUPnPDialog();
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
@@ -312,6 +318,13 @@ public final class FServerManager implements IHasForgeLog {
         if (!isHosting) {
             return;
         }
+
+        // Unregister from lobby server before shutting down
+        if (lobbyClient != null) {
+            lobbyClient.unregisterRoom();
+            lobbyClient = null;
+        }
+
         // Cancel all reconnect timers
         for (final Timer timer : reconnectTimers.values()) {
             timer.cancel();
@@ -349,6 +362,14 @@ public final class FServerManager implements IHasForgeLog {
 
     public boolean isHosting() {
         return isHosting;
+    }
+
+    public void setLobbyClient(LobbyClient client) {
+        this.lobbyClient = client;
+    }
+
+    public LobbyClient getLobbyClient() {
+        return lobbyClient;
     }
 
     public boolean isUPnPMapped() {
@@ -528,6 +549,20 @@ public final class FServerManager implements IHasForgeLog {
                 FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
         final LobbyUpdateEvent event = new LobbyUpdateEvent(localLobby.getData());
         broadcastTo(event, IterableUtil.filter(clients.values(), RemoteClient::hasValidSlot));
+
+        // Update lobby server with current player count and format
+        if (lobbyClient != null) {
+            int count = 0;
+            for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
+                LobbySlotType type = localLobby.getSlot(i).getType();
+                if (type == LobbySlotType.LOCAL || type == LobbySlotType.REMOTE) {
+                    count++;
+                }
+            }
+            lobbyClient.updatePlayerCount(count);
+            String format = localLobby.getData().isLimitedMode() ? "Limited" : localLobby.getGameType().name();
+            lobbyClient.updateFormat(format);
+        }
     }
 
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {

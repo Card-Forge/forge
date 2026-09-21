@@ -26,8 +26,10 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeNetPreferences;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
+import forge.model.FModel;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
@@ -72,6 +74,15 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         FThreads.invokeInBackgroundThread(() -> join(url));
     }
 
+    /**
+     * Join a game at the given URL without prompting for input.
+     * Used by the lobby browser to join with a pre-resolved host:port.
+     */
+    void joinGameWithUrl(final String url) {
+        if (url == null || url.isEmpty()) { return; }
+        FThreads.invokeInBackgroundThread(() -> join(url));
+    }
+
     private void host() {
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblStartingServer"));
@@ -82,7 +93,14 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
 
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.hideOverlay();
-            FNetOverlay.SINGLETON_INSTANCE.show(result);
+            final boolean lobbyEnabled = FModel.getNetPreferences().getPrefBoolean(ForgeNetPreferences.FNetPref.LOBBY_ENABLED);
+            if (lobbyEnabled) {
+                // Show chat overlay without port message; skip UPnP and server addresses dialog
+                FNetOverlay.SINGLETON_INSTANCE.show();
+            } else {
+                FNetOverlay.SINGLETON_INSTANCE.show(result);
+                showServerAddressesDialog();
+            }
             if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
                 VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
             }
@@ -225,5 +243,57 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         final List<JMenu> menus = new ArrayList<>();
         menus.add(ConstructedGameMenu.getMenu());
         return menus;
+    }
+
+    void showLobbySettingsDialog() {
+        final ForgeNetPreferences netPrefs = FModel.getNetPreferences();
+        final Localizer localizer = Localizer.getInstance();
+
+        final String currentUrl = netPrefs.getPref(ForgeNetPreferences.FNetPref.LOBBY_SERVER_URL);
+        final boolean currentlyEnabled = netPrefs.getPrefBoolean(ForgeNetPreferences.FNetPref.LOBBY_ENABLED);
+
+        final JPanel panel = new JPanel(new MigLayout("insets 20, gap 10, wrap 2", "[]10[grow,fill,400!]"));
+        panel.setOpaque(false);
+
+        final FLabel lblUrl = new FLabel.Builder()
+                .text(localizer.getMessageorUseDefault("lblLobbyServerURL", "Lobby Server URL:"))
+                .fontSize(14).build();
+        final javax.swing.JTextField txtUrl = new javax.swing.JTextField(currentUrl);
+        txtUrl.setFont(FSkin.getRelativeFixedFont(14));
+        txtUrl.setPreferredSize(new java.awt.Dimension(400, 30));
+
+        final FLabel lblEnabled = new FLabel.Builder()
+                .text(localizer.getMessageorUseDefault("lblLobbyEnableBrowser", "Enable Lobby Browser:"))
+                .fontSize(14).build();
+        final javax.swing.JCheckBox chkEnabled = new javax.swing.JCheckBox();
+        chkEnabled.setSelected(currentlyEnabled);
+        chkEnabled.setOpaque(false);
+        chkEnabled.setFont(FSkin.getRelativeFixedFont(14));
+
+        panel.add(lblUrl, "");
+        panel.add(txtUrl, "growx, wrap");
+        panel.add(lblEnabled, "");
+        panel.add(chkEnabled, "wrap");
+
+        final List<String> options = new ArrayList<>();
+        options.add(localizer.getMessage("lblOK"));
+        options.add(localizer.getMessage("lblCancel"));
+
+        final int result = FOptionPane.showOptionDialog(
+                localizer.getMessageorUseDefault("lblLobbySettings", "Lobby Settings"),
+                localizer.getMessageorUseDefault("lblLobbySettings", "Lobby Settings"),
+                null, panel, options, 0);
+
+        if (result == 0) {
+            final String newUrl = txtUrl.getText().trim();
+            final boolean newEnabled = chkEnabled.isSelected();
+            netPrefs.setPref(ForgeNetPreferences.FNetPref.LOBBY_SERVER_URL, newUrl);
+            netPrefs.setPref(ForgeNetPreferences.FNetPref.LOBBY_ENABLED, String.valueOf(newEnabled));
+            netPrefs.save();
+            // Refresh the view to show/hide lobby browser
+            if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
+                VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+            }
+        }
     }
 }

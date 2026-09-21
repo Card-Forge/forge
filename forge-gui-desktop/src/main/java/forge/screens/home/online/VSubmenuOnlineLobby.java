@@ -22,6 +22,8 @@ import forge.gui.framework.IVTopLevelUI;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeNetPreferences;
+import forge.model.FModel;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.StopButton;
@@ -40,6 +42,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblLobby"));
     private VLobby lobby;
     private FGameClient client;
+    private LobbyBrowserPanel lobbyBrowser;
 
     private final JPanel pnlTitle = new JPanel(new MigLayout());
     private final StopButton btnStop  = new StopButton();
@@ -124,6 +127,11 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             btnJoin.setFont(FSkin.getRelativeFont(18));
             btnJoin.addActionListener(e -> getLayoutControl().joinGame());
 
+            final FButton btnLobbySettings = new FButton(localizer.getMessageorUseDefault("lblLobbySettings", "Lobby Settings"));
+            btnLobbySettings.setFont(FSkin.getRelativeFont(14));
+            btnLobbySettings.setPreferredSize(new java.awt.Dimension(160, 35));
+            btnLobbySettings.addActionListener(e -> getLayoutControl().showLobbySettingsDialog());
+
             final JPanel buttonPanel = new JPanel(new MigLayout("insets 0, gap 20, ax center"));
             buttonPanel.setOpaque(false);
             buttonPanel.add(btnHost, "w 200!, h 50!");
@@ -134,6 +142,17 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             infoBox.add(lblGuideText, "ax center, gap 0 0 0 0");
             infoBox.add(lblGuideLink, "ax center, gap 0 0 0 25");
             infoBox.add(buttonPanel, "ax center");
+            infoBox.add(btnLobbySettings, "ax center, gaptop 10");
+
+            // Add Public Lobbies browser panel below buttons
+            if (FModel.getNetPreferences().getPrefBoolean(ForgeNetPreferences.FNetPref.LOBBY_ENABLED)) {
+                // Reuse a single panel instance so auto-refresh timers don't accumulate
+                if (lobbyBrowser == null) {
+                    lobbyBrowser = new LobbyBrowserPanel();
+                }
+                infoBox.add(lobbyBrowser, "span, growx, gaptop 20");
+                lobbyBrowser.startAutoRefresh();
+            }
 
             container.setLayout(new BorderLayout());
             final JPanel wrapper = new JPanel(new MigLayout("ax center, ay center"));
@@ -236,12 +255,14 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         final FServerManager server = FServerManager.getInstance();
         if (server.isHosting()) {
             if (SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyDescription"), Localizer.getInstance().getMessage("lblLeave"))) {
+                if (lobbyBrowser != null) lobbyBrowser.stopAutoRefresh();
                 server.stopServer();
                 FNetOverlay.SINGLETON_INSTANCE.reset();
                 if (lobby != null) lobby.getController().cancelActiveDraft();
                 return true;
             }
         } else if (client == null || SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyConfirm"), Localizer.getInstance().getMessage("lblLeave"))) {
+            if (lobbyBrowser != null) lobbyBrowser.stopAutoRefresh();
             if (client != null) {
                 client.close();
                 client = null;
