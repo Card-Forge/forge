@@ -106,6 +106,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean isAndroidorHasGamepad() {
         return GuiBase.isAndroid() || Forge.hasGamepad();
     }
+    private int foilIndex;
 
     @Override
     public void dispose() {
@@ -1149,9 +1150,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
                 shaderProgram.setUniformf("edge_radius", radius);
                 shaderProgram.setUniformf("u_time", 0);
-                shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
-                // TODO: get foilIndex
-                shaderProgram.setUniformf("u_cardPosition", 0, 0);
+                shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
+                shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
             } else {
                 shaderProgram.bind();
                 shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
@@ -1333,9 +1333,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             shaderProgram.setUniformf("u_resolution", t.getWidth(), t.getHeight());
                             shaderProgram.setUniformf("edge_radius", radius);
                             shaderProgram.setUniformf("u_time", 0);
-                            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
-                            // TODO: get foilIndex
-                            shaderProgram.setUniformf("u_cardPosition", 0, 0);
+                            shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
+                            shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
                         } else {
                             shaderProgram.bind();
                             shaderProgram.setUniformf("u_resolution", t.getWidth(), t.getHeight());

@@ -1078,7 +1078,7 @@ public class Graphics implements Disposable {
                     shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
                     shaderProgram.setUniformf("edge_radius", 0);
                     shaderProgram.setUniformf("u_time", 0);
-                    shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                    shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
                     shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
                     batch.setShader(shaderProgram);
                     batch.begin();
@@ -1118,7 +1118,7 @@ public class Graphics implements Disposable {
                     shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
                     shaderProgram.setUniformf("edge_radius", 0);
                     shaderProgram.setUniformf("u_time", 0);
-                    shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+                    shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
                     shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
                     batch.setShader(shaderProgram);
                     batch.begin();
@@ -1210,7 +1210,7 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
             shaderProgram.setUniformf("edge_radius", edgeRadius);
             shaderProgram.setUniformf("u_time", 0);
-            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
         } else {
             shaderProgram.bind();
@@ -1246,7 +1246,7 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
             shaderProgram.setUniformf("edge_radius", edgeRadius);
             shaderProgram.setUniformf("u_time", 0);
-            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
         } else {
             shaderProgram.bind();
@@ -1276,7 +1276,7 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
             shaderProgram.setUniformf("edge_radius", edgeRadius);
             shaderProgram.setUniformf("u_time", 0);
-            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
         } else {
             shaderProgram.bind();
@@ -1636,7 +1636,7 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
             shaderProgram.setUniformf("edge_radius", 0);
             shaderProgram.setUniformf("u_time", 0);
-            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
             batch.setShader(shaderProgram);
             batch.begin();
@@ -1659,7 +1659,7 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
             shaderProgram.setUniformf("edge_radius", 0);
             shaderProgram.setUniformf("u_time", 0);
-            shaderProgram.setUniformf("u_foilTilt", 2, 3.1f);
+            shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
             batch.setShader(shaderProgram);
             batch.begin();
