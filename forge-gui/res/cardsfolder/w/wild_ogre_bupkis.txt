@@ -1,0 +1,4 @@
+Name:Wild Ogre Bupkis
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Whenever this creature attacks, put a +1/+1 counter on it.\n{TK}{TK}{TK} — Metalcraft — This permanent has protection from noncreature permanents as long as you control three or more artifacts.\n{TK}{TK} — 5/1\n{TK}{TK}{TK}{TK} — 7/4

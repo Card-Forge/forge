@@ -1,0 +1,4 @@
+Name:Eternal Acrobat Toast
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Whenever this creature deals combat damage to a player, exile target creature you control, then return it to the battlefield under its owner's control.\n{TK}{TK}{TK} — {T}: Untap another target permanent.\n{TK}{TK}{TK} — 4/4\n{TK}{TK}{TK}{TK}{TK} — 7/8

@@ -132,6 +132,7 @@ public enum EDocID {
     ZONE_SCHEME_DECK (),
     ZONE_ATTRACTION_DECK (),
     ZONE_CONTRAPTION_DECK (),
+    ZONE_STICKER_SHEETS (),
     ZONE_JUNKYARD ();
 
     public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
@@ -179,6 +180,7 @@ public enum EDocID {
         ZONE_DOC_IDS.put(ZoneType.SchemeDeck, ZONE_SCHEME_DECK);
         ZONE_DOC_IDS.put(ZoneType.AttractionDeck, ZONE_ATTRACTION_DECK);
         ZONE_DOC_IDS.put(ZoneType.ContraptionDeck, ZONE_CONTRAPTION_DECK);
+        ZONE_DOC_IDS.put(ZoneType.StickerSheets, ZONE_STICKER_SHEETS);
         ZONE_DOC_IDS.put(ZoneType.Junkyard, ZONE_JUNKYARD);
     }
 

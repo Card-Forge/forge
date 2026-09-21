@@ -100,7 +100,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public DeckSection[] getExtraSections() {
             if(getGameType() != null)
                 return getGameType().getSupplimentalDeckSections().toArray(new DeckSection[0]);
-            return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions};
+            return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers};
         }
 
         private IDeckController initDeckController(String editDeckName, String editDeckPath) {
@@ -407,6 +407,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
                 yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
             }
+            case Stickers -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.STICKER_DECK_EDITOR);
             default -> {
                 System.out.printf("Editor (%s) added an unsupported extra deck section - %s%n", deckSection, editorConfig.getGameType());
                 yield new DeckSectionPage(cm, deckSection);
@@ -943,6 +944,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         "CARD_TYPE CONTAINS_ALL Artifact",
                         "CARD_SUB_TYPE CONTAINS_ALL Contraption"
                 }, true);
+                break;
+            case Stickers:
+                cardManager.applyAdvancedSearchFilter("CARD_TYPE CONTAINS_ALL Stickers");
                 break;
             default:
                 cardManager.resetFilters();
@@ -1569,6 +1573,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Dungeon: return from ? "lblfromdungeondeck" : "lbltodungeondeck";
                 case Attractions: return from ? "lblfromattractiondeck" : "lbltoattractiondeck";
                 case Contraptions: return from ? "lblfromcontraptiondeck" : "lbltocontraptiondeck";
+                case Stickers: return from ? "lblfromstickerdeck" : "lbltostickerdeck";
                 case Avatar: return "lblasavatar";
                 case Commander:
                     if (parentScreen.editorConfig.getGameType() == GameType.Oathbreaker) {
@@ -1847,6 +1852,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         case Dungeon: cardPool.addAll(FModel.getDungeonPool()); break;
                         case Attractions: cardPool.addAll(FModel.getAttractionPool()); break;
                         case Contraptions: cardPool.addAll(FModel.getContraptionPool()); break;
+                        case Stickers: cardPool.addAll(FModel.getStickerPool()); break;
                     }
                 }
             }
@@ -2095,6 +2101,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Schemes:
                 case Attractions:
                 case Contraptions:
+                case Stickers:
                 case Sideboard:
                     ejectCard(card);
                     break;
@@ -2157,6 +2164,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Planes:
             case Attractions:
             case Contraptions:
+            case Stickers:
                 addMoveCardMenuItem(menu, card, cardSourcePage, this);
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
                 addReplaceVariantItems(menu, card);

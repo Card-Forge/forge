@@ -1,0 +1,4 @@
+Name:Wrinkly Monkey Shenanigans
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {1}: Target creature can't block this creature this turn.\n{TK}{TK}{TK}{TK} — Morbid — At the beginning of each end step, if a creature died this turn and this permanent is a creature, put a -1/-1 counter on this permanent and draw a card.\n{TK}{TK} — 2/4\n{TK}{TK}{TK} — 7/2

@@ -18,12 +18,13 @@ public enum DeckSection {
     Conspiracy("lblConspiracies", PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)),
     Dungeon("lblDungeons", PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)),
     Attractions("lblAttractions", PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)),
-    Contraptions("lblContraptions", PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION));
+    Contraptions("lblContraptions", PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)),
+    Stickers("lblStickers", PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER));
 
     /**
      * Array of DeckSections that contain nontraditional cards.
      */
-    public static final DeckSection[] NONTRADITIONAL_SECTIONS = new DeckSection[]{Avatar, Planes, Schemes, Conspiracy, Dungeon, Attractions, Contraptions};
+    public static final DeckSection[] NONTRADITIONAL_SECTIONS = new DeckSection[]{Avatar, Planes, Schemes, Conspiracy, Dungeon, Attractions, Contraptions, Stickers};
 
     private final String nameLbl;
     private final Predicate<PaperCard> fnValidator;
@@ -70,6 +71,8 @@ public enum DeckSection {
             return Attractions;
         if (DeckSection.Contraptions.validate(card))
             return Contraptions;
+        if (DeckSection.Stickers.validate(card))
+            return Stickers;
         return Main;  // default
     }
 
@@ -91,7 +94,7 @@ public enum DeckSection {
             // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
             // in the SideBoard (see Rule 313.2)
             // Those will be matched later, in case (see `Deck::normalizeDeferredSections`)
-            return !t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() && !t.isVanguard();
+            return !t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() && !t.isVanguard() && !t.isSticker();
         };
 
         static final Predicate<PaperCard> COMMANDER_VALIDATOR = card -> {

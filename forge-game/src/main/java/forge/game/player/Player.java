@@ -76,7 +76,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck,
-            ZoneType.Junkyard, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+            ZoneType.Junkyard, ZoneType.StickerSheets, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
     private int life = 20;
     private int startingLife = 20;
@@ -3043,6 +3043,32 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (!contraptionDeck.isEmpty())
             contraptionDeck.shuffle();
+
+        // Sticker sheets (CR 123.2a): reveal the whole selected pool, then keep 3 chosen at
+        // random, face up, in the sticker sheets zone for the rest of the game. Not collectible
+        // (see Card#isCollectible) since, per CR 123.2, sticker sheets aren't cards.
+        List<PaperCard> stickerPool = new ArrayList<>();
+        for (PaperCard cp : registeredPlayer.getStickers()) {
+            stickerPool.add(cp);
+        }
+        if (!stickerPool.isEmpty()) {
+            CardCollection revealPool = new CardCollection();
+            for (PaperCard cp : stickerPool) {
+                revealPool.add(Card.fromPaperCard(cp, this));
+            }
+            // dontRevealToOwner=true: this player already knows their own sheets; the point of
+            // CR 123.2a's reveal is letting the opponent verify the random cut was fair.
+            getGame().getAction().reveal(revealPool, ZoneType.StickerSheets, this, true, null);
+
+            Collections.shuffle(stickerPool, MyRandom.getRandom());
+            List<PaperCard> chosen = stickerPool.subList(0, Math.min(3, stickerPool.size()));
+            PlayerZone stickerZone = getZone(ZoneType.StickerSheets);
+            for (PaperCard cp : chosen) {
+                stickerZone.add(Card.fromPaperCard(cp, this));
+            }
+            getGame().fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, this + " reveals " + stickerPool.size()
+                    + " sticker sheets and keeps " + Lang.joinHomogenous(chosen, PaperCard::getName) + " for the game."));
+        }
 
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards  = registeredPlayer.getExtraCardsInCommandZone();

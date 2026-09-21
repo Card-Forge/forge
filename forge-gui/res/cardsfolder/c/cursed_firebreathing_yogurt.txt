@@ -1,0 +1,4 @@
+Name:Cursed Firebreathing Yogurt
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Prowess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.)\n{TK}{TK}{TK}{TK}{TK} — {2}, {T}: This permanent deals 2 damage to any target.\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK} — 4/8

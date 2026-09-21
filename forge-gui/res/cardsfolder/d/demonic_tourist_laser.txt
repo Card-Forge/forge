@@ -1,0 +1,4 @@
+Name:Demonic Tourist Laser
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Outlast {1} ({1}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\n{TK}{TK}{TK} — When this permanent dies, you get seven {TK}.\n{TK}{TK} — 1/4\n{TK}{TK}{TK}{TK}{TK} — 9/6

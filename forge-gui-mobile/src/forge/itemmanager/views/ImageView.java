@@ -475,9 +475,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         if (otherItems == null && groups.get().size() > groupBy.getGroups().length) {
-            int index = groups.get().size() - 1;
-            if (index >= 0 && index < groups.get().size()) {
-                groups.get().remove(index); //remove Other group if empty
+            //re-fetch the list right before mutating it instead of trusting a size computed
+            //earlier in this method; opening a brand-new deck section (e.g. Stickers) can
+            //refresh this same ImageView more than once in quick succession, and a stale
+            //index here was the cause of an IndexOutOfBoundsException on that path.
+            List<Group> groupList = groups.get();
+            if (!groupList.isEmpty()) {
+                groupList.remove(groupList.size() - 1); //remove Other group if empty
             }
             btnExpandCollapseAll.updateIsAllCollapsed();
         }
@@ -856,8 +860,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private void clearSelection() {
         int count = getCount();
         for (Integer i : selectedIndices.get()) {
-            if (i < count) {
-                orderedItems.get().get(i).selected = false;
+            if (i == null || i < 0 || i >= count) {
+                continue; //stale index from before a refresh; nothing to clear
+            }
+            ItemInfo item = orderedItems.get().get(i);
+            if (item != null) {
+                item.selected = false;
             }
         }
         selectedIndices.get().clear();

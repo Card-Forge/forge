@@ -1,0 +1,4 @@
+Name:Unhinged Beast Hunt
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — {T}: You gain 1 life.\n{TK}{TK}{TK}{TK} — Whenever this creature attacks, tap each creature an opponent controls with the same power and/or same toughness as this creature.\n{TK}{TK} — 4/1\n{TK}{TK}{TK} — 2/6

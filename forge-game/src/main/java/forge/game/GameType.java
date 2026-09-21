@@ -160,8 +160,8 @@ public enum GameType {
             return EnumSet.of(DeckSection.Conspiracy, DeckSection.Contraptions, DeckSection.Attractions);
         if(this == Constructed || this == Commander)
             return EnumSet.of(DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
-                    DeckSection.Attractions, DeckSection.Contraptions);
-        return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions);
+                    DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
+        return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
     }
 
     public static GameType smartValueOf(String name) {

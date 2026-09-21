@@ -1,0 +1,4 @@
+Name:Carnival Elephant Meteor
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Sacrifice this permanent: Draw two cards.\n{TK}{TK}{TK} — Whenever this creature attacks, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\n{TK}{TK} — 4/1\n{TK}{TK}{TK}{TK}{TK} — 8/7

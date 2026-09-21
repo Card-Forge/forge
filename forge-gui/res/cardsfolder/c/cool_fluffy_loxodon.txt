@@ -1,0 +1,4 @@
+Name:Cool Fluffy Loxodon
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — When this permanent leaves the battlefield, draw a card.\n{TK}{TK}{TK}{TK}{TK} — Whenever a creature enters under your control, this permanent becomes a 13/13 Eldrazi creature in addition to its other types until end of turn.\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK} — 5/6

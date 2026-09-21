@@ -1,0 +1,4 @@
+Name:Jetpack Death Seltzer
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Trample\n{TK}{TK}{TK} — {3}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\n{TK}{TK}{TK} — 2/7\n{TK}{TK}{TK}{TK} — 6/5

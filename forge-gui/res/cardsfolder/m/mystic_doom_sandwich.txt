@@ -1,0 +1,4 @@
+Name:Mystic Doom Sandwich
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Lifelink\n{TK}{TK}{TK} — This creature must be blocked if able. Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.\n{TK}{TK} — 1/4\n{TK}{TK}{TK}{TK}{TK} — 6/8

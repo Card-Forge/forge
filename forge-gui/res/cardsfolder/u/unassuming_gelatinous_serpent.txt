@@ -1,0 +1,4 @@
+Name:Unassuming Gelatinous Serpent
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — When this permanent dies, return target noncreature, nonland card from your graveyard to your hand.\n{TK}{TK}{TK}{TK} — Whenever this creature deals combat damage to a player, that player mills twice that many cards.\n{TK}{TK} — 2/3\n{TK}{TK}{TK} — 7/2

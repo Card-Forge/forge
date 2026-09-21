@@ -228,7 +228,7 @@ public enum DeckFormat {
 
     public int getExtraSectionMaxCopies(DeckSection section) {
         return switch (section) {
-            case Avatar, Commander, Planes, Dungeon, Attractions, Contraptions -> 1;
+            case Avatar, Commander, Planes, Dungeon, Attractions, Contraptions, Stickers -> 1;
             case Schemes -> 2;
             case Conspiracy -> Integer.MAX_VALUE;
             default -> maxCardCopies;
@@ -436,6 +436,12 @@ public enum DeckFormat {
                 return contraptionError;
         }
 
+        if (deck.has(DeckSection.Stickers)) {
+            String stickerError = getStickerDeckConformanceProblem(deck);
+            if (stickerError != null)
+                return stickerError;
+        }
+
         final int maxCopies = getMaxCardCopies();
         // Must contain no more than 4 of the same card shared among the main deck and sideboard, except
         // basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony.
@@ -522,6 +528,18 @@ public enum DeckFormat {
             // Constructed Contraption deck must be singleton
             if (contraptionDeck.countByName(cp.getKey()) > 1)
                 return TextUtil.concatWithSpace("contains more than 1 copy of the contraption", cp.getKey().getName());
+        }
+        return null;
+    }
+
+    public String getStickerDeckConformanceProblem(Deck deck) {
+        // CR 123.2a: at least ten unique sticker sheets, no maximum.
+        CardPool stickerDeck = deck.get(DeckSection.Stickers);
+        if (stickerDeck.countAll() < 10)
+            return "must contain at least 10 sticker sheets, or none at all";
+        for (Entry<PaperCard, Integer> cp : stickerDeck) {
+            if (stickerDeck.countByName(cp.getKey()) > 1)
+                return TextUtil.concatWithSpace("contains more than 1 copy of the sticker sheet", cp.getKey().getName());
         }
         return null;
     }

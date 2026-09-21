@@ -1,0 +1,4 @@
+Name:Deep-Fried Plague Myr
+ManaCost:no cost
+Types:Stickers
+Oracle:{TK}{TK} — Whenever this creature attacks, scry 1.\n{TK}{TK}{TK} — Whenever this permanent leaves the battlefield, you may destroy target artifact or enchantment.\n{TK}{TK}{TK} — 4/5\n{TK}{TK}{TK}{TK} — 8/4
