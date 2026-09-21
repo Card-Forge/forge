@@ -1,0 +1,14 @@
+Name:Sphinx of False Conclusions
+ManaCost:2 U U
+Types:Creature Sphinx Illusion
+PT:4/2
+K:Flash
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+!token | Execute$ TrigCopy | TriggerDescription$ When this creature dies, if it isn't a token, create a token that's a copy of it.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
+Oracle:Flash\nFlying\nWhenever this creature attacks, draw a card, then discard a card.\nWhen this creature dies, if it isn't a token, create a token that's a copy of it.
