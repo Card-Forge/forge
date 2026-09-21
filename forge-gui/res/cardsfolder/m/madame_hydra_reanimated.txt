@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Legendary Creature Human Horror Villain
 PT:2/2
 K:Menace
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever NICKNAME enters or attacks, mill two cards. (Put the top two cards of your library into your graveyard.)
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, mill two cards. (Put the top two cards of your library into your graveyard.)
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2

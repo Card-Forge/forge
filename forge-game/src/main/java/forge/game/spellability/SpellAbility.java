@@ -2604,20 +2604,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
 
-        if (activator.canCastSorcery() || withFlash(host, activator)) {
+        // Activated Abilities are instant speed per default, except Planeswalker abilities
+        if (isActivatedAbility() && !isPwAbility() && !getRestrictions().isSorcerySpeed()) {
             return true;
         }
 
-        // spells per default are sorcerySpeed
-        if (isSpell()) {
-            return false;
-        }
-
-        if (isActivatedAbility()) {
-            // Activated Abilities are instant speed per default, except Planeswalker abilities
-            return !isPwAbility() && !getRestrictions().isSorcerySpeed();
-        }
-        return true;
+        return activator.canCastSorcery() || withFlash(host, activator);
     }
 
     public boolean withFlash(Card host, Player activator) {

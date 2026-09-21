@@ -1,5 +1,5 @@
 Name:Way of the Wildspeaker
-ManaCost:2 B
+ManaCost:4 G
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When CARDNAME enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
 SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 7

@@ -1,7 +1,7 @@
 Name:Godsend
 ManaCost:1 W W
 Types:Legendary Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Equipped creature gets +3/+3.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 3 | AddToughness$ 3 | Description$ Equipped creature gets +3/+3.
 T:Mode$ Blocks | ValidCard$ Card.EquippedBy | ValidBlocked$ Creature | Execute$ TrigChooseAttackers | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
 T:Mode$ AttackerBlocked | ValidCard$ Card.EquippedBy | ValidBlocker$ Creature | Execute$ TrigChooseBlockers | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
 SVar:TrigChooseAttackers:DB$ ChooseCard | DefinedCards$ TriggeredAttackers | SubAbility$ DBExile

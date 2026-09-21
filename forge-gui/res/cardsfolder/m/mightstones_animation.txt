@@ -6,6 +6,6 @@ SVar:AttachAITgts:Card.nonCreature
 SVar:AttachAILogic:Animate
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw
-S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | SetPower$ 4 | SetToughness$ 4 | AddType$ Creature | Description$ Enchanted artifact is a creature with base power and toughness 4/4 in addition to its other types.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Artifact | SetPower$ 4 | SetToughness$ 4 | AddType$ Creature | Description$ Enchanted artifact is a creature with base power and toughness 4/4 in addition to its other types.
 DeckNeeds:Type$Artifact
 Oracle:Enchant artifact\nWhen Mightstone's Animation enters, draw a card.\nEnchanted artifact is a creature with base power and toughness 4/4 in addition to its other types.

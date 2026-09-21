@@ -3,5 +3,5 @@ ManaCost:1 R
 Types:Creature Human Pirate
 PT:2/2
 K:Ascend
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Blessing | Description$ CARDNAME has double strike as long as you have the city's blessing.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Double Strike | Condition$ Blessing | Description$ CARDNAME has double strike as long as you have the city's blessing.
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nStorm Fleet Swashbuckler has double strike as long as you have the city's blessing.
