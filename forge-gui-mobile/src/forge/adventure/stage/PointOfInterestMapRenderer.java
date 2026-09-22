@@ -24,13 +24,6 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
             return;
         }
 
-        Camera camera = stage.getCamera();
-        camera.update();
-        // with the unified SpriteBatch, you need to reset the color or you may have
-        // semi/transparent texture set by other scenes
-        batch.setColor(Color.WHITE);
-        batch.setProjectionMatrix(camera.combined);
-
         beginRender();
 
         MapLayers layers = map.getLayers();
@@ -56,5 +49,14 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
     public void loadMap(TiledMap map, String sourceMap, String targetMap, int spawnPoint) {
         stage.loadMap(map, sourceMap, targetMap, spawnPoint);
         super.setMap(map);
+    }
+
+    public void updateCamera() {
+        Camera camera = stage.getCamera();
+        camera.update();
+        // with the unified SpriteBatch, you need to reset the color or you may have
+        // semi/transparent texture set by other scenes
+        batch.setColor(Color.WHITE);
+        batch.setProjectionMatrix(camera.combined);
     }
 }
