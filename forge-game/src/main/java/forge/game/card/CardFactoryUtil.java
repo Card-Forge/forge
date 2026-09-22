@@ -3789,7 +3789,7 @@ public class CardFactoryUtil {
 
             inst.addStaticAbility(st);
         } else if (keyword.equals("Changeling")) {
-            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            String effect = "Mode$ Continuous | EffectZone$ All" +
                     " | CharacteristicDefining$ True | AddAllCreatureTypes$ True | Secondary$ True" +
                     " | Description$ Changeling (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -3875,7 +3875,7 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantAttack | ValidCard$ Card.Self | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Devoid")) {
-            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            String effect = "Mode$ Continuous | EffectZone$ All" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
                     " | Description$ Devoid (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -3894,7 +3894,7 @@ public class CardFactoryUtil {
 
             String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
-                    + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+                    + " | Description$ " + sb + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Enlist")) {
             String effect = "Mode$ OptionalAttackCost | ValidCard$ Card.Self | Cost$ Enlist<1/CARDNAME/creature> | Secondary$ True" +

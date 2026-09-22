@@ -406,11 +406,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this(id0, paperCard0, game0, game0 == null ? null : game0.getTracker());
     }
     public Card(final int id0, final IPaperCard paperCard0, final Game game0, final Tracker tracker0) {
+        this(id0, paperCard0, game0, tracker0, false);
+    }
+    // textFromSource: the caller sets the view's ability text itself, so there is no point computing it
+    public Card(final int id0, final IPaperCard paperCard0, final Game game0, final Tracker tracker0,
+            final boolean textFromSource) {
         super(id0);
 
         game = game0;
         paperCard = paperCard0;
-        view = game0 != null && game0.isNoGUIUser() ? new DummyCardView(id0, tracker0) : new CardView(id0, tracker0);
+        view = textFromSource || (game0 != null && game0.isNoGUIUser())
+                ? new DummyCardView(id0, tracker0) : new CardView(id0, tracker0);
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         view.updateChangedColorWords(this);
@@ -964,7 +970,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final String getName() {
         return getName(currentState);
     }
-
     public final String getName(CardState state) {
         String name = state.getName();
         for (CardChangedName change : this.changedCardNames.values()) {
@@ -978,7 +983,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final String getDisplayName() {
         return getDisplayName(currentState);
     }
-
     public final String getDisplayName(CardState state) {
         //If this card has a changed name, don't use flavor names.
         if(state.getFlavorName() == null || hasNameOverwrite())
@@ -3335,19 +3339,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return false;
     }
 
-    public final boolean canProduceSameManaTypeWith(final Card c) {
-        if (getManaAbilities().isEmpty()) {
-            return false;
-        }
+    /** Every color this card could produce, walking its mana abilities once. */
+    public final Set<String> getProducibleColors() {
         Set<String> colors = new HashSet<>();
-        for (final SpellAbility ab : c.getManaAbilities()) {
+        for (final SpellAbility ab : getManaAbilities()) {
             if (ab.getApi() == ApiType.ManaReflected) {
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {
                 colors = CardUtil.canProduce(6, ab, colors);
             }
+            if (colors.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further ability to add
+            }
         }
-        return canProduceColorMana(colors);
+        return colors;
+    }
+
+    public final boolean canProduceSameManaTypeWith(final Card c) {
+        if (getManaAbilities().isEmpty()) {
+            return false;
+        }
+        return canProduceColorMana(c.getProducibleColors());
     }
 
     public final int getMaxManaProduced() {
@@ -3405,7 +3417,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (changedCardTypes.isEmpty()) {
             return false;
         }
-        // only Layer 4 are affected, and it's never intrinsic
+        // CR 305.7 only Layer 4 are affected, and it's never intrinsic
         return changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
     }
 
@@ -4336,7 +4348,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Table<Long, Long, Pair<Integer, Integer>> getSetPTTable() {
         return newPT;
     }
-
     public final void setPTTable(Table<Long, Long, Pair<Integer, Integer>> table) {
         newPT.clear();
         newPT.putAll(table);
@@ -4345,7 +4356,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Table<Long, Long, Pair<Integer, Integer>> getSetPTCharacterDefiningTable() {
         return newPTCharacterDefining;
     }
-
     public final void setPTCharacterDefiningTable(Table<Long, Long, Pair<Integer, Integer>> table) {
         newPTCharacterDefining.clear();
         newPTCharacterDefining.putAll(table);
@@ -4524,11 +4534,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return assignNoCombatDamage() ? 0 : (toughnessAssignsDamage() ? getNetToughnessBreakdown() : getNetPowerBreakdown()).getTotal();
     }
 
-    // for cards like Giant Growth, etc.
     public final int getTempPowerBoost() {
         return boostPT.values().stream().mapToInt(Pair::getLeft).sum();
     }
-
     public final int getTempToughnessBoost() {
         return boostPT.values().stream().mapToInt(Pair::getRight).sum();
     }
@@ -4536,15 +4544,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void addPTBoost(final int power, final int toughness, final long timestamp, final long staticId) {
         boostPT.put(timestamp, staticId, Pair.of(power, toughness));
     }
-
     public boolean removePTBoost(final long timestamp, final long staticId) {
         return boostPT.remove(timestamp, staticId) != null;
     }
 
     public Table<Long, Long, Pair<Integer, Integer>> getPTBoostTable() {
-        return ImmutableTable.copyOf(boostPT);
+        return boostPT;
     }
-
     public void setPTBoost(Table<Long, Long, Pair<Integer, Integer>> table) {
         this.boostPT.clear();
         boostPT.putAll(table);
@@ -7237,7 +7243,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
         } else if (currentStateName == CardStateName.Meld) {
             // to follow the rules (but we shouldn't get here while cloned)
-            if (getCopiedPermanent() != null) {
+            if (getCopiedPermanent() != null || this.getMeldedWith() == null) {
                 return 0;
             }
             // Melded creatures have a combined CMC of each of their parts
@@ -7933,6 +7939,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return true;
         }
         return StaticAbilityIgnoreLegendRule.ignoreLegendRule(this);
+    }
+
+    public boolean ignorePlaneswalkerZeroLoyaltyRule() {
+        if (!getType().isPlaneswalker()) {
+            return true;
+        }
+        return StaticAbilityIgnoreZeroLoyalty.ignorePlaneswalkerZeroLoyaltyRule(this);
     }
 
     public boolean attackVigilance() {

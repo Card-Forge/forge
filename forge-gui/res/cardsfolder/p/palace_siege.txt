@@ -5,8 +5,8 @@ K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your upkeep, return target creature card from your graveyard to your hand.
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeDragons | AddTrigger$ DragonsTrigger | Description$ • Dragons — At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your upkeep, return target creature card from your graveyard to your hand.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeDragons | AddTrigger$ DragonsTrigger | Description$ • Dragons — At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
 SVar:KhansTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ RaiseDead | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, return target creature card from your graveyard to your hand.
 SVar:RaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
 SVar:DragonsTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ SyphonLife | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.

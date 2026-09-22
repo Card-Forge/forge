@@ -18,10 +18,6 @@ import forge.util.MyRandom;
 import java.util.List;
 
 public class FightAi extends SpellAbilityAi {
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        return super.checkAiLogic(ai, sa, aiLogic);
-    }
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
@@ -38,7 +34,7 @@ public class FightAi extends SpellAbilityAi {
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
         aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
-        humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+        humCreatures = filterDoomed(ai, CardLists.getTargetableCards(humCreatures, sa));
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, humCreatures, sa);
 
@@ -209,6 +205,7 @@ public class FightAi extends SpellAbilityAi {
             aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
             humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
         }
+        humCreatures = filterDoomed(ai, humCreatures);
         if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
@@ -267,6 +264,12 @@ public class FightAi extends SpellAbilityAi {
             }
         }
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+    }
+
+    private static CardCollection filterDoomed(final Player ai, final CardCollection list) {
+        CardCollection result = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
+        result.removeAll(ComputerUtilAbility.getCardsTargetedWithApi(ai, result, null, ApiType.Fight));
+        return result;
     }
 
     /**

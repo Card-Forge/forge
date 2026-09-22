@@ -845,7 +845,6 @@ public class CombatUtil {
                 if (blocker.isValid(valid, null, null, null) &&
                         CardLists.getValidCardCount(blockers, valid, null, null, null) == 0) {
                     return false;
-
                 }
             }
             // MustBeBlockedByAll:<valid>
