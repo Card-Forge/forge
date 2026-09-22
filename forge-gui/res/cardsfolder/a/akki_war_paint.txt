@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Artifact,Creature:artifact or creature
 SVar:AttachAITgts:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | Description$ As long as enchanted permanent is a creature, it gets +2/+1.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 2 | AddToughness$ 1 | Description$ As long as enchanted permanent is a creature, it gets +2/+1.
 Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +2/+1.

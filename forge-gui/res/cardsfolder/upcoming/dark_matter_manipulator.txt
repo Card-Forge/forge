@@ -1,0 +1,12 @@
+Name:Dark Matter Manipulator
+ManaCost:B
+Types:Creature Human Warlock
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill three cards.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | Description$ This creature gets +2/+0 for every seven cards in your graveyard.
+SVar:X:SVar$Y/Times.2
+SVar:Y:Count$ValidGraveyard Card.YouOwn/DivideEvenlyDown.7
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard
+Oracle:When this creature enters, mill three cards.\nThis creature gets +2/+0 for every seven cards in your graveyard.

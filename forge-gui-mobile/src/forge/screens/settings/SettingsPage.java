@@ -669,9 +669,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
             Forge.getLocalizer().getMessage("lblShowAbilityIconsOverlays"),
             Forge.getLocalizer().getMessage("nlShowAbilityIconsOverlays")), 5);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-            Forge.getLocalizer().getMessage("lblUseLaserArrows"),
-            Forge.getLocalizer().getMessage("nlUseLaserArrows")), 5);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ARROW_OPTION,
+            Forge.getLocalizer().getMessage("lblLaserArrowsOption"),
+            Forge.getLocalizer().getMessage("nlLaserArrowsOption"),
+            new String[] { "Default", "Point", "Line" }), 5);
 
         // VIBRATION OPTIONS TAB
         Map<String, String> intensityOptions = new LinkedHashMap<>();

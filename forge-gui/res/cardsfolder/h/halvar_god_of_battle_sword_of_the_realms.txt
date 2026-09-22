@@ -16,7 +16,7 @@ Name:Sword of the Realms
 ManaCost:1 W
 Types:Legendary Artifact Equipment
 K:Equip:1 W
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +2/+0 and has vigilance.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +2/+0 and has vigilance.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigReturn | TriggerDescription$ Whenever equipped creature dies, return it to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
 Oracle:Equipped creature gets +2/+0 and has vigilance.\nWhenever equipped creature dies, return it to its owner's hand.\nEquip {1}{W}

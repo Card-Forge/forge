@@ -590,7 +590,7 @@ Replace=.025F fromSheet("MSH city chaos")+
 1 The Ten Rings|MSH|[313]
 
 [scene]
-1 Nick Fury, Agent of S.H.I.E.L.D.|MSH|[314}
+1 Nick Fury, Agent of S.H.I.E.L.D.|MSH|[314]
 1 Baron Strucker, HYDRA Overlord|MSH|[315]
 1 Captain America, Super-Soldier|MSH|[316]
 1 Captain America's Shield|MSH|[317]

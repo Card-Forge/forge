@@ -570,7 +570,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
     public void update(boolean fullUpdate) {
         super.update(fullUpdate);
         // The base constructor calls update() before our fields initialize; skip until ready
-        if (cmbMode == null) {
+        if (cmbMode == null || !cmbMode.isVisible()) {
             return;
         }
         if (!isHost && getLobby() != null && getLobby().getData() != null) {

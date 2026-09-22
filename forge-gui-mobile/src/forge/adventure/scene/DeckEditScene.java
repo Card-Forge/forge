@@ -7,12 +7,14 @@ import forge.screens.FScreen;
 
 /**
  * DeckEditScene
- * scene class that contains the Deck editor
+ * Scene class that contains the Deck editor layout
  */
 public class DeckEditScene extends ForgeScene {
 
     AdventureDeckEditor screen;
     AdventureEventData currentEvent;
+
+    private AdventureEventData lastLoadedEventContext = null;
 
     private DeckEditScene() {
     }
@@ -27,7 +29,6 @@ public class DeckEditScene extends ForgeScene {
         return object;
     }
 
-
     public void loadEvent(AdventureEventData event){
         currentEvent = event;
     }
@@ -40,10 +41,13 @@ public class DeckEditScene extends ForgeScene {
 
     @Override
     public void enter() {
-        screen = null;
+        Adventure.getInstance().renderTransitionScreen = false;
+        if (lastLoadedEventContext != currentEvent) {
+            screen = null;
+            lastLoadedEventContext = currentEvent;
+        }
         getScreen();
         screen.refresh();
-        Adventure.getInstance().renderTransitionScreen = false;
         super.enter();
     }
 
