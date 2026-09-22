@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -25,6 +26,9 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
 
         Camera camera = stage.getCamera();
         camera.update();
+        // with the unified SpriteBatch, you need to reset the color or you may have
+        // semi/transparent texture set by other scenes
+        batch.setColor(Color.WHITE);
         batch.setProjectionMatrix(camera.combined);
 
         beginRender();

@@ -70,25 +70,18 @@ public abstract class FBufferedImage extends FImageComplex {
         try {
             if (frameBuffer == null) {
                 Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
-
                 //render texture to frame buffer if needed
                 frameBuffer = new FrameBuffer(Format.RGBA8888, (int) width, (int) height, false);
                 frameBuffer.begin();
-
                 //frame graphics must be given a projection matrix
                 //so stuff is rendered properly to custom sized frame buffer
-                Graphics frameGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
                 Matrix4 matrix = new Matrix4();
                 matrix.setToOrtho2D(0, 0, width, height);
-                frameGraphics.setProjectionMatrix(matrix);
-
-                frameGraphics.begin(width, height);
-                draw(frameGraphics, width, height);
-                frameGraphics.end();
-
+                Forge.getAssets().getAssetGraphics().setProjectionMatrix(matrix);
+                Forge.getAssets().getAssetGraphics().begin(width, height);
+                draw(Forge.getAssets().getAssetGraphics(), width, height);
+                Forge.getAssets().getAssetGraphics().end();
                 frameBuffer.end();
-                frameGraphics.dispose();
-
                 Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
             }
         } catch (Exception e) {
@@ -102,6 +95,7 @@ public abstract class FBufferedImage extends FImageComplex {
             frameBuffer.dispose();
     }
 
+    // TODO: Migrate this to SpriteBatch so we don't need instantiating 'new Graphics' with low sprites count and use the existing SpriteBatch
     protected abstract void draw(Graphics g, float w, float h);
 
     @Override
