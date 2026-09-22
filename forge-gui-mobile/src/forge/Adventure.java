@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import forge.adventure.scene.HudScene;
 import forge.gui.error.BugReporter;
-import forge.util.ScreenUtil;
+//import forge.util.ScreenUtil;
 
 public class Adventure {
     public static Adventure instance;
-    private float transitionTimeout;
+    //private float transitionTimeout;
     boolean sceneWasSwapped;
     public boolean renderTransitionScreen = true;
 
@@ -22,7 +22,8 @@ public class Adventure {
 
     void render(float delta) {
         try {
-            if (renderTransitionScreen) {
+            // TODO: Use better transistion. Fixes Android slow screen updates on switching scenes.
+            /*if (renderTransitionScreen) {
                 Forge.getGraphics().getBatch().setProjectionMatrix(Forge.camera.combined);
                 // Transition Overlay
                 float transitionTime = 0.12f;
@@ -62,7 +63,7 @@ public class Adventure {
                     Forge.getGraphics().getBatch().end();
                     return;
                 }
-            }
+            }*/
             // Adventure UIScene
             Forge.currentScene.render();
             Forge.currentScene.act(delta);
