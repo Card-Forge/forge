@@ -3,8 +3,8 @@ Code=YDMU
 Date=2022-10-06
 Name=Alchemy: Dominaria
 Type=Online
-Booster=1 UncommonRareMythic, 9 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
 ScryfallCode=YDMU
+Booster=1 UncommonRareMythic:fromsheet("YDMU cards"), 9 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
 
 [cards]
 1 U Benalish Knight-Counselor @Paolo Parente

@@ -4,118 +4,454 @@ Date=2026-10-02
 Name=Reality Fracture
 Type=Expansion
 ScryfallCode=FRA
+#https://mtgscribe.com/2026/09/08/reality-fracture-play-booster-fact-sheet/
+BoosterSlots=Common,Common-SPG,Uncommon,RareMythic,Land,Wildcard,WildcardFoil,EchoedPair
+Booster=5 Common, 1 Common-SPG, 1 Uncommon, 3 EchoedPair, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("FRA cards")
+
+[Common-SPG]
+Base=Common:fromSheet("FRA cards")
+Replace=0.0182F RareMythic:fromSheet("FRA special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.038F Uncommon:fromSheet("FRA braintwister")
+
+[Wildcard]
+Base=Common:fromSheet("FRA cards")
+Replace=0.74F Uncommon:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.03F Uncommon:fromSheet("FRA braintwister")
+
+[EchoedPair]
+Base=Uncommon:fromSheet("FRA echoed pair")
+Replace=0.067F Rare:fromSheet("FRA echoed pair")
+Replace=0.014F Mythic:fromSheet("FRA echoed pair")
+Replace=0.017F Uncommon:fromSheet("FRA borderless echoed pair")
+Replace=0.0094F Rare:fromSheet("FRA borderless echoed pair")
+Replace=0.0036F Mythic:fromSheet("FRA borderless echoed pair")
+#This is known to be incorrect, but currently unable to assign these cards as a pair, so this will at least fill the slot
+
+[RareMythic]
+Base=Rare:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.148F Mythic:fromSheet("FRA cards"):!fromSheet("FRA echoed pair")
+Replace=0.01F Rare:fromSheet("FRA shattered mirror")
+Replace=0.0048F Mythic:fromSheet("FRA shattered mirror")
+Replace=0.038F Rare:fromSheet("FRA sculptors stronghold")
+Replace=0.01F Mythic:fromSheet("FRA sculptors stronghold")
+Replace=0.031F Rare:fromSheet("FRA braintwister")
+Replace=0.0042F Mythic:fromSheet("FRA braintwister")
+Replace=0.01F Rare:fromSheet("FRA portal view land")
+
+[WildcardFoil]
+Base=Common:fromSheet("FRA cards")
+Replace=0.405F Uncommon:fromSheet("FRA cards")
+Replace=0.06F Rare:fromSheet("FRA cards")
+Replace=0.012F Mythic:fromSheet("FRA cards")
+Replace=0.008407F Uncommon:fromSheet("FRA echoed pair")
+Replace=0.002942F Rare:fromSheet("FRA echoed pair")
+Replace=0.0007006F Mythic:fromSheet("FRA echoed pair")
+Replace=0.005932F Uncommon:fromSheet("FRA braintwister")
+Replace=0.003503F Rare:fromSheet("FRA braintwister")
+Replace=0.0003503F Mythic:fromSheet("FRA braintwister")
+Replace=0.004203F Rare:fromSheet("FRA sculptors stronghold")
+Replace=0.0008173F Mythic:fromSheet("FRA sculptors stronghold")
+Replace=0.001168F Rare:fromSheet("FRA portal view land")
+
+[Land]
+Base=BasicLand:fromSheet("FRA dual basic")
+Replace=.109F BasicLand:fromSheet("FRA dual basic")+
+Replace=.146F BasicLand:fromSheet("FRA basic frame")
+Replace=.036F BasicLand:fromSheet("FRA basic frame")+
+Replace=.218F fromSheet("FRA tower")
+Replace=.055F fromSheet("FRA tower")+
 
 [cards]
+1 M Emrakul, the Exigent Doom @Cristi Balanescu
 2 C Academic Ascent @Randy Gallegos
+3 C Blossom-Blessed Angel @Joshua Raphael
 4 C Campus Crier @Johan Grenier
 5 M Enlightened Confidant @Denman Rooke
+6 C Fateshaper Aspirant @Paul Dainton
+7 R Flickering Hound @Chris Rahn
 8 U Generous Revival @Alessandra Pisano
+9 R Germinate Recruits @Rovina Cai
+10 C Graft Surgeon @Bram Sels
+11 R Guiding Hydra @Jason Mowry
+12 C Hexhaven Battalion @Julia Griffin
+13 R Kindred Judgment @Ekaterina Burmak
 14 R Loyal Tutor @Darren Tan
 15 C Memory Trap @Ekaterina Burmak
+16 C Predictive Preparations @Nathaniel Himawan
 17 U Prophesied End @A. M. Sartor
+18 U Refute Destiny @Billy Christian
 19 R Repurposed Enforcer @Chris Rallis
 20 M Return to the Light Realms @Anna Steinbauer
+21 C Shatterwing Pegasus @Antonio José Manzanedo
+22 C Surgical Precision @Nathaniel Himawan
+23 C Unflinching Hortimancer @Manuel Castañón
+24 U Your Fate Ends Here @Andrew Mar
 25 U Countersculpt @Anna Podedworna
+26 R Cruel Calculations @Lindsey Look
+27 C Cryotheory Adept @Kai Carpenter
 28 R Diviner of Victory @Justyna Dura
+29 C Divining Duelist @David Auden Nash
 30 C Icy Reception @Borja Pindado
+31 C Infinite Coursework @Randy Vargas
 32 R Jace's Machinations @Serena Malyon
+33 C Mindseeker Oculus @Ioannis Fiore
 34 U Perfected Theory @Marta Nael
+35 U Plan for All Outcomes @Chris Cold
+36 U Precise Redaction @Mathias Kollros
 37 C Protege's Awakening @Cynthia Sheppard
+38 M Seasoned Cryomancer @Andrea Piparo
+39 C Semester Foreseer @Alix Branwyn
+40 R Sphinx of False Conclusions @Wylie Beckert
+41 C Sphinx's Approach @Nathaniel Himawan
+42 C Surveillance Phantasm @Randy Vargas
 43 M The Theorist, Jace Beleren @Ekaterina Burmak
 44 R Theorist's Proxy @Matt Stewart
+45 C Undulating Witness @Alexander Ostrowski
+46 C Unsummon @Ioannis Fiore
+47 R Variable Chaser @Kai Carpenter
+48 C Apex Witchstalker @Jason Mowry
 49 M Bloodline Recollector @Cynthia Sheppard
+50 U Break Under Pressure @Jeff Miracola
 51 C Cast Away Doubt @Zara Alfonso
+52 R Dark Matter Manipulator @Steven Belledin
+53 M Darklight Phoenix @Wayne Reynolds
+54 C Extended Absence @Nathaniel Himawan
+55 R Extrapolate the Impossible @Volkan Baǵa
+56 C Last Gasp @Jabari Weathers
+57 R Lich's Relic @Gaboleps
+58 U Multiply by Zero @Florian Herold
 59 M Overwrite the Multiverse @Ryan Pancoast
+60 C Rampart Hunter @Néstor Ossandón Leal
+61 C Rank Rat @Johann Bodin
 62 U Rewrite Regrets @Matt Stewart
+63 R Rise of the Deathbringer @Lie Setiawan
+64 R Sanctum Lurker @Joshua Raphael
+65 C Screeching Soulbreaker @Pavel Kolomeyets
+66 C Silence the Echo @Pavel Kolomeyets
 67 C Solve for Disappointment @Eli Minaya
+68 U Terminal Criticism @Borja Pindado
+69 C Theoretical Necromancer @Chris Rallis
+70 C Void Extrapolator @Valera Lutfullina
+71 R Vraska's Final Mercy @Magali Villeneuve
+72 R Ajani's Anguish @Mathias Kollros
+73 C Artifist Acumen @Anna Podedworna
+74 C Awaken the Inferno @Kai Carpenter
+75 C Blazing Crescendo @Billy Christian
+76 C Chandra's Emberling @Borja Pindado
+77 U Command the Stage @Jarel Threat
 78 M Craterclaw Colossus @Mark Zug
+79 R Curse-Marred Demon @Kev Walker
+80 R Draconic Visitor @Alexander Mokhov
 81 C Eardrum Rattler @Javier Charro
+82 U Essence Burn @Javier Charro
+83 R Face Yourself @Ekaterina Burmak
+84 U Fulminous Forte @Andre Garcia
+85 C Hallway Heckler @Gustavo Pelissari
+86 C Heartstring Puller @Jessica Liu
+87 R Identity Echo @Aldo Domínguez
+88 R Master of Barbs @Aldo Domínguez
 89 C No Admittance @Serena Malyon
 90 R Pompous Battlemage @Justin Gerard
+91 R Pyre Rhymer @Andrea Piparo
+92 C Skilled Battlecarver @Evyn Fong
 93 M Stingcaster Mage @Matt Stewart
+94 C Tether Technician @Victor Maury
+95 U Violent Echoes @Andrea Piparo
+96 C Wrath of the Bloodmane @Manuel Castañón
 97 C Arcane Amphisbaena @Jason Mowry
+98 C Bestial Incursion @Justin Gerard
 99 C Budding Insurgent @Jeff Miracola
+100 R Carnivorous Cultivator @Martina Fačková
 101 C Compel Brutality @Danny Schwartz
+102 U Flourishing Grapple @Omar Rayyan
+103 R Gardenize @Néstor Ossandón Leal
 104 C Greenhouse Propagator @Ekaterina Burmak
+105 U Heartwood Crafter @Anastasia Ovchinnikova
 106 M Hexhaven Invigorator @Olivier Bernard
+107 R Hungering Puppetbeast @Simon Dominic
+108 U Hunter's Axe @Richard Kane Ferguson
 109 C Inspired Tethermage @Cristi Balanescu
+110 M Omnipresence @Bryan Sola
+111 R Puppet Crafting @Anna Pavleeva
 112 U Restore with Empathy @Eelis Kyttanen
+113 R Simulacrum Shaper @Alix Branwyn
 114 C Something Worth Saving @PINDURSKI
+115 C Sureshot Sower @Zara Alfonso
+116 M Tarmogoyf @Lucas Graciano
 117 C Tethermage's Advantage @Javier Charro
+118 R Verdant Kraken @Wayne Reynolds
+119 C Vinelasher Adept @Christina Kraus
+120 C Wrecking Gecko @Raph Lomotan
 121 M Aerid Konstrari @Chris Rahn
 122 M Avatar of Burgeoning Echoes @Eli Minaya
+123 C Blessed Ghoul @Igor Grechanyi
+124 U Bloombrute @Antonio José Manzanedo
 125 C Charge the Sanctum @Néstor Ossandón Leal
 126 U Clash of Elements @Anna Pavleeva
+127 U Craftwork Crusher @Ilse Gort
 128 M Denzilore Fatehold @Dmitry Burmak
+129 U Desperate Futurescribe @Sidharth Chaturvedi
+130 C Emergency Phytomedic @Dmitry Burmak
+131 R Entrust the Spark @Justyna Dura
+132 U Fatehold Charm @Rovina Cai
+133 C Fatehold Chronologist @Alexander Mokhov
+134 C Ferocity of the Hunt @Elliot Lang
+135 R Frostbite Pyromental @Wayne Reynolds
+136 U Grim Repriser @Wayne Reynolds
 137 M Ingris Stingerquill @Chase Stone
+138 U Konstrari Charm @Matheus Graef
+139 C Konstrari Improviser @Matheus Graef
 140 M Kwia Vigorbloom @Ryan Pancoast
+141 U Mind Meanderer @Jason Mowry
+142 R Null Summoner @Magali Villeneuve
 143 U Paradox Shaper @Mark Zug
+144 U Primal Witchstalker @Kaitlyn McCulley
+145 R Proctor of Potential @Andrey Kuzinskiy
 146 U Prudent Fateseer @Gustavo Pelissari
+147 U Recursive Recruitment @Dominik Mayer
+148 R Solarium Sentry @Chris Rallis
 149 R Solitary Cell @Andrea Piparo
+150 U Stingerquill Charm @Danny Schwartz
 151 U Stingerquill Voxmancer @Igor Grechanyi
+152 R Stinging Vitriol @Nathaniel Himawan
 153 C Tam's Resistance @Samuel Perin
+154 R Tenured Tethermage @Javier Charro
+155 U Theorix Charm @Elliot Lang
+156 C Theorix Metamage @Slawomir Maniak
+157 C Twinned Vision @Andreas Zafiratos
+158 U Twisted Fates @Lorenzo Mastroianni
 159 M Uldaros Theorix @Alexander Mokhov
+160 U Vigorbloom Charm @Kaitlyn McCulley
 161 U Vigorbloom Vanguard @Denman Rooke
+162 R Vindictive Triumph @Johan Grenier
 163 U Warrior's Blades @Richard Kane Ferguson
+164 C Whiplash Wordsmith @Anastasia Ovchinnikova
 165 U Woodwork Prodigy @Lius Lasahido
+166 C Afterthought Sentry @Andrew Mar
+167 U Archive Arbiter @Valera Lutfullina
+168 R Codie, Ravenous Codex @Steve Prescott
+169 M The Echoverse Fulcrum @Adam Paquette
+170 U Eye of Jace @Ioannis Fiore
 171 C Keeper of the Quiet Hour @John Tedrick
+172 C Living Library @Jarel Threat
+173 C Medic's Kitesail @Paolo Parente
+174 C Murmuring Volume @Zoltan Boros
+175 L Dedicated Commons @Josu Solano
 176 R Deserted Beach @Sarah Finnigan
+177 L Fatehold Annex @Sergey Glushakov
+178 L Formidable Commons @Marco Gorlei
+179 R Hall of Echoes @Leon Tukker
 180 R Haunted Ridge @Wayne Wu
+181 U Hexhaven Dueling Arena @Constantin Marin
+182 L Innovative Commons @Grady Frederick
+183 L Konstrari Annex @Sergey Glushakov
+184 L Meticulous Commons @Grady Frederick
 185 R Overgrown Farmland @Titus Lunter
 186 R Rockfall Vale @Cristi Balanescu
+187 R Roiling Canopy @Titus Lunter
+188 C Room of Refuge @Constantin Marin
 189 R Shipwreck Marsh @Darren Tan
+190 L Stingerquill Annex @Sergey Glushakov
 191 R Theorist's Sanctum @Adam Paquette
+192 L Theorix Annex @Sergey Glushakov
+193 L Transformative Commons @Lius Lasahido
+194 L Vigorbloom Annex @Sergey Glushakov
 195 M Ajani Resolute @Tyler Jacobson
 196 U Danitha, Sword of Hope @Bryan Sola
 197 U Ghalta the Immovable @Antonio José Manzanedo
+198 R Gideon's Memorial @Manuel Castañón
+199 U Koth of the Homestead @Kieran Yanner
 200 R Liliana the Faultless @Marta Nael
+201 R Lyra, Archangel of Dawn @Victor Adame Minguez
+202 U Rescue Girl, First Responder @Cristi Balanescu
+203 U Saheeli, Consul of Oversight @Billy Christian
+204 U Teyo, Lightshield Expert @Anna Steinbauer
+205 U Thalia, the Survivor @Ryan Pancoast
+206 U Tomik, Orzhov Lawmage @Randy Vargas
+207 U Way of the Healer @Pauline Voss
+208 U Way of the Mentor @Danny Schwartz
+209 U Yoshimaru, Beloved Companion @Brian Valeza
+210 U Yuriko, Blade of the Mighty @Lie Setiawan
+211 U Arni, Humble Scribe @Vincent Christiaens
 212 M Chandra, Chill of Compliance @Kieran Yanner
+213 U Fblthp, Impossibly Lost @Simon Dominic
+214 U Geist of Saint Thalia @Ryan Pancoast
+215 U Hapatra, the Desert Frost @Jodie Muir
+216 R Jace, Reality Sculptor @Martina Fačková
+217 R Lyra, Tolarian Archangel @Victor Adame Minguez
 218 U Proft, Consulting Detective @Lindsey Look
+219 U Ruric Thar, Biomagus @Olivier Bernard
+220 R Samut, Tyrant of Naktamun @Grzegorz Rutkowski
+221 U Tetsuko Umezawa, Fugitive @Tuan Duong Chu
+222 U Traxos, Academy Guardian @Aaron Miller
 223 U Way of the Cryomancer @Andrey Kuzinskiy
+224 U Way of the Mind Sculptor @Josh Hass
+225 U Yargle, Goliath of Otaria @Jehan Choo
+226 U Yuriko, Hope from the Shadows @Lie Setiawan
 227 U Danitha, Spear of Agony @Bryan Sola
+228 U Gallia, Tragic Host @Andrea Piparo
 229 M Garruk, Veiled Butcher @Victor Adame Minguez
+230 R Gideon the Oathless @Manuel Castañón
 231 R Liliana the Repentant @Marta Nael
+232 U Loot, the Anomaly @Filip Burburan
+233 U Mabel, Bitter Recluse @Matt Stewart
+234 U Massacre Girl, Most Wanted @Cristi Balanescu
 235 U Proft, Sinister Mastermind @Lindsey Look
+236 U Teyo, Diamondblade Mage @Anna Steinbauer
 237 U Tinybones, Pocket Nuisance @Jesper Ejsing
+238 U Way of the Deathbringer @Joshua Raphael
+239 U Way of the Necromancer @Pauline Voss
+240 U Winter, Tormented Loner @Aurore Folny
+241 U Yargle, Glutton of Urborg @Jehan Choo
 242 M Ajani Unrelenting @Tyler Jacobson
+243 U Arni, Renowned Champion @Vincent Christiaens
 244 M Chandra, Torch of Defiance @Kieran Yanner
+245 U Gallia, the Merrymaker @Andrea Piparo
 246 U Jiang Yanggu, Alone @Dmitry Burmak
+247 U Kiora of Fire and Ashes @Chris Rahn
+248 U Koth, the Geomancer @Kieran Yanner
+249 U Marwyn, the Clearcutter @Quintin Gleim
+250 U Pia, Determined Rebuilder @Andreas Zafiratos
+251 R Samut, Hazoret's Champion @Grzegorz Rutkowski
+252 U Tetsuko Umezawa, Pursuer @Tuan Duong Chu
+253 U Tomik, Izzet Sparkmage @Randy Vargas
 254 U Way of the Pyromancer @Andrey Kuzinskiy
+255 U Way of the Warlord @Danny Schwartz
+256 U Winter, Team Player @Aurore Folny
+257 U Edgar, Moonlit Sovereign @Joshua Raphael
+258 U Fblthp, Knows the Way @Simon Dominic
 259 M Garruk, Curse Breaker @Victor Adame Minguez
 260 U Ghalta the Unstoppable @Antonio José Manzanedo
 261 U Jiang Yanggu, Never Alone @Dmitry Burmak
+262 U Loot, the Nexus @Filip Burburan
+263 U Marwyn, the Preserver @Quintin Gleim
+264 U Pia, Aether Ascetic @Andreas Zafiratos
+265 U Ruric Thar, Magecrusher @Olivier Bernard
 266 U Titanbones, Towering Heart @Jesper Ejsing
+267 U Way of the Paradox @Josh Hass
+268 U Way of the Wildspeaker @Joshua Raphael
+269 U Yoshimaru, Scrappy Stray @Brian Valeza
+270 U Edgar, Ancient Bloodlord @Joshua Raphael
+271 U Hapatra, the Desert Fang @Jodie Muir
 272 R Karn, Gilded Guardian @Scott M. Fischer
+273 U Kiora of Salt and Sand @Chris Rahn
+274 U Mabel, Valley Hero @Matt Stewart
+275 U Saheeli, Jewel of Avishkar @Billy Christian
+276 R Tam, the Possibility @Martina Fačková
+277 R Vraska, Soul of Stone @Kieran Yanner
+278 R Vraska, the Cutting Glare @Kieran Yanner
 279 R Karn, Argent Defender @Scott M. Fischer
+280 U Traxos, Scourge Eternal @Aaron Miller
+281 L Plains @Luc Courtois
+282 L Plains @Florian Herold
+283 L Island @Chris Ostrowski
+284 L Island @Zack Stella
+285 L Swamp @Josu Solano
+286 L Swamp @Leon Tukker
+287 L Mountain @Jorge Jacinto
+288 L Mountain @Chris Ostrowski
+289 L Forest @Randy Gallegos
+290 L Forest @Chris Ostrowski
+
+[borderless]
 291 M Ajani Resolute @Aleksi Briclot
+292 R Gideon's Memorial @Lius Lasahido
 293 R Liliana the Faultless @Aleksi Briclot
+294 R Lyra, Archangel of Dawn @Aaron Miller
+295 U Teyo, Lightshield Expert @Fajareka Setiawan
+296 U Thalia, the Survivor @Luisa J. Preissler
 297 M Chandra, Chill of Compliance @Aleksi Briclot
+298 U Fblthp, Impossibly Lost @Tomek Larek
+299 U Geist of Saint Thalia @Luisa J. Preissler
+300 R Jace, Reality Sculptor @Aleksi Briclot
+301 R Lyra, Tolarian Archangel @Aaron Miller
+302 R Samut, Tyrant of Naktamun @Nicholas Elias
 303 M Garruk, Veiled Butcher @Aleksi Briclot
+304 R Gideon the Oathless @Lius Lasahido
 305 R Liliana the Repentant @Aleksi Briclot
+306 U Teyo, Diamondblade Mage @Fajareka Setiawan
 307 U Winter, Tormented Loner @Miranda Meeks
 308 M Ajani Unrelenting @Aleksi Briclot
 309 M Chandra, Torch of Defiance @Aleksi Briclot
+310 U Marwyn, the Clearcutter @Jessica Liu
+311 R Samut, Hazoret's Champion @Nicholas Elias
 312 U Winter, Team Player @Miranda Meeks
+313 U Fblthp, Knows the Way @Tomek Larek
 314 M Garruk, Curse Breaker @Aleksi Briclot
+315 U Marwyn, the Preserver @Jessica Liu
 316 R Karn, Gilded Guardian @Billy Christian
+317 R Tam, the Possibility @Aleksi Briclot
+318 R Vraska, Soul of Stone @Syd Mills
+319 R Vraska, the Cutting Glare @Syd Mills
 320 R Karn, Argent Defender @Billy Christian
 321 M Enlightened Confidant @Jabari Weathers
+322 R Kindred Judgment @Joshua Cairos
 323 M Return to the Light Realms @Magali Villeneuve
+324 M Seasoned Cryomancer @Chris Rallis
+325 M Darklight Phoenix @Gonzalo Kenny
+326 R Rise of the Deathbringer @Kieran Yanner
 327 M Craterclaw Colossus @Raluca Marinescu
+328 R Curse-Marred Demon @Thomas M. Baxa
 329 M Stingcaster Mage @Gal Or
 330 M Hexhaven Invigorator @David Auden Nash
+331 M Omnipresence @Chase Stone
+332 R Simulacrum Shaper @Gustavo Pelissari
+333 R Frostbite Pyromental @Paul Adam
+334 R Germinate Recruits @Camille Alquier
 335 R Repurposed Enforcer @Vlad Petruchik
+336 R Cruel Calculations @Francis Tneh
 337 R Jace's Machinations @Rimas Valeikis
+338 R Sphinx of False Conclusions @Arif Wijaya
 339 R Theorist's Proxy @Camille Alquier
+340 R Dark Matter Manipulator @Kevin Glint
 341 M Overwrite the Multiverse @Bengt Hampus Viklander
+342 R Sanctum Lurker @Michael MacRae
+343 R Vraska's Final Mercy @Darius Zablockis
+344 R Master of Barbs @Guglielmo Bonis
+345 R Gardenize @Jurijus Chitrovas
+346 R Hungering Puppetbeast @Kevin Glint
 347 M Aerid Konstrari @Julia Vasilyeva
 348 M Avatar of Burgeoning Echoes @Francis Tneh
 349 M Denzilore Fatehold @Gintas Galvanauskas
+350 R Entrust the Spark @Mintautas Šukys
 351 M Ingris Stingerquill @Ovidio Cartagena
 352 M Kwia Vigorbloom @Eglė Mosakaitė
+353 R Null Summoner @Kevin Glint
+354 R Proctor of Potential @Arif Wijaya
 355 R Solitary Cell @Arif Wijaya
+356 R Stinging Vitriol @Kevin Glint
+357 R Tenured Tethermage @Viktor Fetsch
 358 M Uldaros Theorix @Eugene Maslovski
+359 R Flickering Hound @Justin Hernandez & Alexis Hernandez
+360 R Guiding Hydra @FeelFish
+361 U Refute Destiny @Wojtek Łebski
+362 U Precise Redaction @Florencia Degraf
 363 M The Theorist, Jace Beleren @Miles Johnston
+364 R Extrapolate the Impossible @Sam Chivers
+365 R Lich's Relic @Elena Masci
+366 U Terminal Criticism @Justin Hernandez & Alexis Hernandez
+367 R Ajani's Anguish @Molly Mendoza
+368 R Draconic Visitor @Zoe Van Dijk
+369 U Essence Burn @Jeff Soto
+370 R Face Yourself @Jack Hughes
+371 R Identity Echo @Maria Jesus Contreras
+372 U Flourishing Grapple @Gage Lindsten
+373 R Puppet Crafting @Galen Dara
+374 M Tarmogoyf @Micha Huigen
+375 R Verdant Kraken @Michael Koehler
+376 R Solarium Sentry @Micha Huigen
+377 R Vindictive Triumph @Elena Masci
+378 M The Echoverse Fulcrum @Jack Hughes
+379 R Hall of Echoes @Serena Malyon
+380 R Roiling Canopy @FeelFish
 381 R Theorist's Sanctum @Jaime A. Zuverza
 382 L Plains @Alayna Danner
 383 L Plains @Alayna Danner
@@ -137,36 +473,334 @@ ScryfallCode=FRA
 399 R Overgrown Farmland @Piotr Dura
 400 R Rockfall Vale @Piotr Dura
 401 R Shipwreck Marsh @Piotr Dura
+
+[extended art]
 402 M Bloodline Recollector @Mark Poole
+403 M Emrakul, the Exigent Doom @Ikumi Nakamura
 404 M Loyal Tutor @NAJI YANAGIDA
 405 M The Theorist, Jace Beleren @Yukie Tajima
+406 M Gardenize @Toru Terada
 407 M Aerid Konstrari @NgN
 408 M Denzilore Fatehold @konomura
 409 M Ingris Stingerquill @AKAGI
 410 M Kwia Vigorbloom @Haru Akasaka
 411 M Uldaros Theorix @SUSHIZAWA
+412 M Codie, Ravenous Codex @saemon
+413 M Emrakul, the Exigent Doom @Ikumi Nakamura
 414 M Loyal Tutor @NAJI YANAGIDA
 415 M The Theorist, Jace Beleren @Yukie Tajima
+416 M Gardenize @Toru Terada
 417 M Aerid Konstrari @NgN
 418 M Denzilore Fatehold @konomura
 419 M Ingris Stingerquill @AKAGI
 420 M Kwia Vigorbloom @Haru Akasaka
 421 M Uldaros Theorix @SUSHIZAWA
+422 M Codie, Ravenous Codex @saemon
+423 M Emrakul, the Exigent Doom @Cristi Balanescu
 424 R Loyal Tutor @Darren Tan
 425 R Diviner of Victory @Justyna Dura
+426 R Variable Chaser @Kai Carpenter
 427 M Bloodline Recollector @Cynthia Sheppard
 428 R Pompous Battlemage @Justin Gerard
+429 R Pyre Rhymer @Andrea Piparo
+430 R Carnivorous Cultivator @Martina Fačková
+431 R Codie, Ravenous Codex @Steve Prescott
+432 U Fatehold Charm @Rovina Cai
+433 U Konstrari Charm @Matheus Graef
+434 U Stingerquill Charm @Danny Schwartz
+435 U Theorix Charm @Elliot Lang
+436 U Vigorbloom Charm @Kaitlyn McCulley
+437 R Carnivorous Cultivator @Filip Burburan
+438 M Emrakul, the Exigent Doom @Princess Hidir
 439 M Enlightened Confidant @James Martin
 440 M Return to the Light Realms @Heikala
+441 M Seasoned Cryomancer @Mattias Lindström
+442 R Sphinx's Approach @Harry Conway
 443 M The Theorist, Jace Beleren @ONIKU kuitai
+444 M Darklight Phoenix @Jun Ishimaru
 445 M Overwrite the Multiverse @Pedro Correa
 446 M Craterclaw Colossus @Desmuncubic
 447 M Stingcaster Mage @Ricardo Diseño
+448 M Omnipresence @Killoffer
 449 M Enlightened Confidant @Jabari Weathers
+450 R Kindred Judgment @Joshua Cairos
 451 M Return to the Light Realms @Magali Villeneuve
+452 M Seasoned Cryomancer @Chris Rallis
+453 M Darklight Phoenix @Gonzalo Kenny
+454 R Rise of the Deathbringer @Kieran Yanner
 455 M Craterclaw Colossus @Raluca Marinescu
+456 R Curse-Marred Demon @Thomas M. Baxa
 457 M Stingcaster Mage @Gal Or
 458 M Hexhaven Invigorator @David Auden Nash
+459 M Omnipresence @Chase Stone
+460 R Simulacrum Shaper @Gustavo Pelissari
+461 R Frostbite Pyromental @Paul Adam
+
+[basic frame]
+1 Plains|FRA|[281]
+1 Plains|FRA|[282]
+1 Island|FRA|[283]
+1 Island|FRA|[284]
+1 Swamp|FRA|[285]
+1 Swamp|FRA|[286]
+1 Mountain|FRA|[287]
+1 Mountain|FRA|[288]
+1 Forest|FRA|[289]
+1 Forest|FRA|[290]
+
+[sculptors stronghold]
+1 Germinate Recruits|FRA|[334]
+1 Repurposed Enforcer|FRA|[335]
+1 Cruel Calculations|FRA|[336]
+1 Jace's Machinations|FRA|[337]
+1 Sphinx of False Conclusions|FRA|[338]
+1 Theorist's Proxy|FRA|[339]
+1 Dark Matter Manipulator|FRA|[340]
+1 Overwrite the Multivers|FRA|[341]
+1 Sanctum Lurker|FRA|[342]
+1 Vraska's Final Mercy|FRA|[343]
+1 Master of Barbs|FRA|[344]
+1 Gardenize|FRA|[345]
+1 Hungering Puppetbeast|FRA|[346]
+1 Aerid Konstrari|FRA|[347]
+1 Avatar of Burgeoning Echoes|FRA|[348]
+1 Denzilore Fatehold|FRA|[349]
+1 Entrust the Spark|FRA|[350]
+1 Ingris Stingerquill|FRA|[351]
+1 Kwia Vigorbloom|FRA|[352]
+1 Null Summoner|FRA|[353]
+1 Proctor of Potential|FRA|[354]
+1 Solitary Cell|FRA|[355]
+1 Stinging Vitriol|FRA|[356]
+1 Tenured Tethermage|FRA|[357]
+1 Uldaros Theorix|FRA|[358]
+
+[braintwister]
+1 Flickering Hound|FRA|[359]
+1 Guiding Hydra|FRA|[360]
+1 Refute Destiny|FRA|[361]
+1 Precise Redaction|FRA|[362]
+1 The Theorist, Jace Beleren|FRA|[363]
+1 Extrapolate the Impossible|FRA|[364]
+1 Lich's Relic|FRA|[365]
+1 Terminal Criticism|FRA|[366]
+1 Ajani's Anguish|FRA|[367]
+1 Draconic Visitor|FRA|[368]
+1 Essence Burn|FRA|[369]
+1 Face Yourself|FRA|[370]
+1 Identity Echo|FRA|[371]
+1 Flourishing Grapple|FRA|[372]
+1 Puppet Crafting|FRA|[373]
+1 Tarmogoyf|FRA|[374]
+1 Verdant Kraken|FRA|[375]
+1 Solarium Sentry|FRA|[376]
+1 Vindictive Triumph|FRA|[377]
+1 The Echoverse Fulcrum|FRA|[378]
+1 Hall of Echoes|FRA|[379]
+1 Roiling Canopy|FRA|[380]
+1 Theorist's Sanctum|FRA|[381]
+
+[borderless echoed pair]
+1 Ajani Resolute|FRA|[291]
+1 Gideon's Memorial|FRA|[292]
+1 Liliana the Faultless|FRA|[293]
+1 Lyra, Archangel of Dawn|FRA|[294]
+1 Teyo, Lightshield Expert|FRA|[295]
+1 Thalia, the Survivor|FRA|[296]
+1 Chandra, Chill of Compliance|FRA|[297]
+1 Fblthp, Impossibly Lost|FRA|[298]
+1 Geist of Saint Thalia|FRA|[299]
+1 Jace, Reality Sculptor|FRA|[300]
+1 Lyla, Tolarian Archangel|FRA|[301]
+1 Samut, Tyrant of Naktamun|FRA|[302]
+1 Garruk, Veiled Butcher|FRA|[303]
+1 Gideon the Oathless|FRA|[304]
+1 Liliana the Repentant|FRA|[305]
+1 Teyo, Diamondblade Mage|FRA|[306]
+1 Winter, Tormented Lover|FRA|[307]
+1 Ajani Unrelenting|FRA|[308]
+1 Chandra, Torch of Defiance|FRA|[309]
+1 Marwyn, the Clearcutter|FRA|[310]
+1 Samut, Hazoret's Champion|FRA|[311]
+1 Winter, Team Player|FRA|[312]
+1 Fblthp, Knows the Way|FRA|[313]
+1 Garruk, Curse Breaker|FRA|[314]
+1 Marwyn, the Preserver|FRA|[315]
+1 Karn, Gilded Guardian|FRA|[316]
+1 Tam, the Possibility|FRA|[317]
+1 Vraska, Soul of Stone|FRA|[318]
+1 Vraska, the Cutting Glare|FRA|[319]
+1 Karn, Argent Defender|FRA|[320]
+
+[dual basic]
+1 Dedicated Commons|FRA|[175]
+1 Fatehold Annex|FRA|[177]
+1 Formidable Commons|FRA|[178]
+1 Innovative Commons|FRA|[182]
+1 Konstrari Annex|FRA|[183]
+1 Meticulous Commons|FRA|[184]
+1 Stingerquill Annex|FRA|[190]
+1 Theorix Annex|FRA|[192]
+1 Transformative Commons|FRA|[193]
+1 Vigorbloom Annex|FRA|[194]
+
+[shattered mirror]
+1 Enlightened Confidant|FRA|[321]
+1 Kindred Judgment|FRA|[322]
+1 Return to the Light Realms|FRA|[323]
+1 Seasoned Cryomancer|FRA|[324]
+1 Darklight Phoenix|FRA|[325]
+1 Rise of the Deathbringer|FRA|[326]
+1 Craterclaw Colossus|FRA|[327]
+1 Curse-Marred Demon|FRA|[328]
+1 Stingcaster Mage|FRA|[329]
+1 Hexhaven Invigorator|FRA|[330]
+1 Omnipresence|FRA|[331]
+1 Simulacrum Shaper|FRA|[332]
+1 Frostbite Pyromental|FRA|[333]
+
+[special guests]
+1 Eye of Ugin|SPG|[159]
+1 Austere Command|SPG|[160]
+1 Flesh Duplicate|SPG|[161]
+1 Consign to Memory|SPG|[162]
+1 Sublime Epiphany|SPG|[163]
+1 Consider|SPG|[164]
+1 Necrodominance|SPG|[165]
+1 Mind Twist|SPG|[166]
+1 Splinter Twin|SPG|[167]
+1 Root Maze|SPG|[168]
+
+[tower]
+1 Plains|FRA|[382]
+1 Plains|FRA|[383]
+1 Plains|FRA|[384]
+1 Island|FRA|[385]
+1 Island|FRA|[386]
+1 Island|FRA|[387]
+1 Swamp|FRA|[388]
+1 Swamp|FRA|[389]
+1 Swamp|FRA|[390]
+1 Mountain|FRA|[391]
+1 Mountain|FRA|[392]
+1 Mountain|FRA|[393]
+1 Forest|FRA|[394]
+1 Forest|FRA|[395]
+1 Forest|FRA|[396]
+
+[portal view land]
+1 Deserted Beach|FRA|[397]
+1 Haunted Ridge|FRA|[398]
+1 Overgrown Farmland|FRA|[399]
+1 Rockfall Vale|FRA|[400]
+1 Shipwreck Marsh|FRA|[401]
+
+[echoed pair]
+1 Ajani Resolute|FRA|[195]
+1 Danitha, Sword of Hope|FRA|[196]
+1 Ghalta the Immovable|FRA|[197]
+1 Gideon's Memorial|FRA|[198]
+1 Koth of the Homestead|FRA|[199]
+1 Liliana the Faultless|FRA|[200]
+1 Lyra, Archangel of Dawn|FRA|[201]
+1 Rescue Girl, First Responder|FRA|[202]
+1 Saheeli, Consul of Oversight|FRA|[203]
+1 Teyo, Lightshield Expert|FRA|[204]
+1 Thalia, the Survivor|FRA|[205]
+1 Tomik, Orzhov Lawmage|FRA|[206]
+1 Way of the Healer|FRA|[207]
+1 Way of the Mentor|FRA|[208]
+1 Yoshimaru, Beloved Companion|FRA|[209]
+1 Yuriko, Blade of the Mighty|FRA|[210]
+1 Arni, Humble Scribe|FRA|[211]
+1 Chandra, Chill of Compliance|FRA|[212]
+1 Fblthp, Impossibly Lost|FRA|[213]
+1 Geist of Saint Thalia|FRA|[214]
+1 Hapatra, the Desert Frost|FRA|[215]
+1 Jace, Reality Sculptor|FRA|[216]
+1 Lyla, Tolarian Archangel|FRA|[217]
+1 Proft, Consulting Detective|FRA|[218]
+1 Ruric Thar, Biomagus|FRA|[219]
+1 Samut, Tyrant of Naktamun|FRA|[220]
+1 Tetsuko Umezawa, Fugitive|FRA|[221]
+1 Traxos, Academy Guardian|FRA|[222]
+1 Way of the Cryomancer|FRA|[223]
+1 Way of the Mind Sculptor|FRA|[224]
+1 Yargle, Goliath of Otaria|FRA|[225]
+1 Yuriko, Hope from the Shadows|FRA|[226]
+1 Danitha, Spear of Agony|FRA|[227]
+1 Gallia, Tragic Host|FRA|[228]
+1 Garruk, Veiled Butcher|FRA|[229]
+1 Gideon the Oathless|FRA|[230]
+1 Liliana the Repentant|FRA|[231]
+1 Loot, the Anomaly|FRA|[232]
+1 Mabel, Bitter Recluse|FRA|[233]
+1 Massacre Girl, Most Wanted|FRA|[234]
+1 Proft, Sinister Mastermind|FRA|[235]
+1 Teyo, Diamondblade Mage|FRA|[236]
+1 Tinybones, Pocket Nuisance|FRA|[237]
+1 Way of the Deathbringer|FRA|[238]
+1 Way of the Necromancer|FRA|[239]
+1 Winter, Tormented Lover|FRA|[240]
+1 Yargle, Glutton of Urborg|FRA|[241]
+1 Ajani Unrelenting|FRA|[242]
+1 Arni, Renowned Champion|FRA|[243]
+1 Chandra, Torch of Defiance|FRA|[244]
+1 Gallia, the Merrymaker|FRA|[245]
+1 Jiang Yanggu, Alone|FRA|[246]
+1 Kiora of Fire and Ashes|FRA|[247]
+1 Koth, the Geomancer|FRA|[248]
+1 Marwyn, the Clearcutter|FRA|[249]
+1 Pia, Determined Rebuilder|FRA|[250]
+1 Samut, Hazoret's Champion|FRA|[251]
+1 Tetsuko Umezawa, Pursuer|FRA|[252]
+1 Tomik, Izzet Sparkmage|FRA|[253]
+1 Way of the Pyromancer|FRA|[254]
+1 Way of the Warlord|FRA|[255]
+1 Winter, Team Player|FRA|[256]
+1 Edgar, Moonlit Sovereign|FRA|[257]
+1 Fblthp, Knows the Way|FRA|[258]
+1 Garruk, Curse Breaker|FRA|[259]
+1 Ghalta the Unstoppable|FRA|[260]
+1 Jiang Yanggu, Never Alone|FRA|[261]
+1 Loot, the Nexus|FRA|[262]
+1 Marwyn, the Preserver|FRA|[263]
+1 Pia, Aether Ascetic|FRA|[264]
+1 Ruric Thar, Magecrusher|FRA|[265]
+1 Titanbones, Towering Heart|FRA|[266]
+1 Way of the Paradox|FRA|[267]
+1 Way of the Wildspeaker|FRA|[268]
+1 Yoshimaru, Scrappy Stray|FRA|[269]
+1 Edgar, Ancient Bloodlord|FRA|[270]
+1 Hapatra, the Desert Fang|FRA|[271]
+1 Karn, Gilded Guardian|FRA|[272]
+1 Kiora of Salt and Sand|FRA|[273]
+1 Mabel, Valley Hero|FRA|[274]
+1 Saheeli, Jewel of Avishkar|FRA|[275]
+1 Tam, the Possibility|FRA|[276]
+1 Vraska, Soul of Stone|FRA|[277]
+1 Vraska, the Cutting Glare|FRA|[278]
+1 Karn, Argent Defender|FRA|[279]
+1 Traxos, Scourge Eternal|FRA|[280]
 
 [tokens]
+1 cadet @Elizabeth Peiró
+2 ajanis_pridemate @Diego Gisbert
+3 u_3_3_angel_flying @Raluca Marinescu
 4 u_1_1_illusion @Daniel Cotter
+6 u_8_8_leviathan_hexproof @Maxime Minard
+7 r_5_5_dragon_flying @Loïc Canavaggia
+8 g_4_4_beast_trample @Simon Dominic
+9 g_3_3_forest_tentacle @Deruchenko Alexander
+10 mowu @Leonardo Santanna
+11 rg_a_heartwood @Tianxing Xu
+12 lotus @Alex V. Ngo
+13 c_1_1_a_sculpture_treasure @Raluca Marinescu
+14 c_1_1_a_thopter_flying @Diego Gisbert
+15 c_a_treasure_sac @Alayna Danner
+
+[other]
+5 u_empower_jace @Manuel Castañón
+16 emblem_ajani_resolute @Tyler Jacobson
+17 emblem_chandra_chill_of_compliance @Kieran Yanner
+18 emblem_chandra_torch_of_defiance @Kieran Yanner

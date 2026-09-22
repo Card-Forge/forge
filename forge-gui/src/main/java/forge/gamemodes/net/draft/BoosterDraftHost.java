@@ -113,6 +113,11 @@ public final class BoosterDraftHost implements IHasForgeLog {
         run(dispatches);
     }
 
+    /** True once the draft has ended, whether it completed or was shut down early. */
+    public boolean isFinished() {
+        return finished;
+    }
+
     /**
      * Stop the draft and release timer resources. Safe to call multiple times.
      * Does not distribute pools — call before the draft has legitimately finished
@@ -165,15 +170,20 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     /**
-     * Apply a pick and, if the card's effect passes the pack, dequeue it from
-     * the picker's queue and route it to the next seat in direction. Conspiracy
-     * cards such as Agent of Acquisitions cause {@code draftCard} to return
-     * {@code false}, meaning the picker keeps the pack for another pick.
+     * Apply a pick and, unless the picker keeps the pack, dequeue it from their
+     * queue and route it to the next seat in direction. A pack is kept either
+     * because a Conspiracy card such as Agent of Acquisitions made {@code draftCard}
+     * return {@code false}, or because the pick rule grants a second card from it.
+     * An emptied pack is never kept: {@code isRoundOver} tests for an empty queue, so
+     * retaining one would stall the round.
      */
     private void applyPickAndPass(LimitedPlayer player, int seatIndex, PaperCard card) {
         Boolean passPack = player.draftCard(card, DeckSection.Sideboard);
         picksMadePerSeat[seatIndex]++;
-        if (!Boolean.FALSE.equals(passPack)) {
+        DraftPack head = player.nextChoice();
+        boolean keepsPack = head != null && !head.isEmpty()
+                && (Boolean.FALSE.equals(passPack) || draft.keepsPackAfterPick(player));
+        if (!keepsPack) {
             DraftPack passed = player.passPack();
             if (passed != null && !passed.isEmpty()) {
                 passToNext(seatIndex, passed);

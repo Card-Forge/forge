@@ -1,0 +1,7 @@
+Name:Theoretical Necromancer
+ManaCost:2 B
+Types:Creature Vampire Warlock
+PT:4/1
+A:AB$ ChangeZone | Cost$ 3 B ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn+Other | ValidTgtsDesc$ creature card in your graveyard | SpellDescription$ Return another target creature card from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+Oracle:{3}{B}, Exile this card from your graveyard: Return another target creature card from your graveyard to your hand.

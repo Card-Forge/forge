@@ -1,0 +1,8 @@
+Name:Tarnation
+ManaCost:no cost
+Types:Plane Thunder Junction
+T:Mode$ CommitCrime | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a player commits a crime, they may draw a card. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | OptionalDecider$ TriggeredPlayer
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever chaos ensues, CARDNAME deals 1 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Whenever a player commits a crime, they may draw a card. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\nWhenever chaos ensues, Tarnation deals 1 damage to any target.

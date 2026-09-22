@@ -109,7 +109,7 @@
 #108|Garrison Excavator|U|SOS
 #109|Prismari Charm|U|SOS
 #110|Quandrix Charm|U|SOS
-#111|Vastlands Scavenger|M|SOS
+#111|Vastlands Scavenger|R|SOS
 #112|Mind into Matter|R|SOS
 #113|Stone Docent|C|SOS
 #114|Run Behind|C|SOS
@@ -123,7 +123,7 @@
 #122|Shattered Sanctum|R|SOS
 #123|Erode|R|SOS
 #124|Studious First-Year|C|SOS
-#125|Killian's Confidence|R|SOS
+#125|Killian's Confidence|U|SOS
 #126|Kirol, History Buff|U|SOS
 #127|Wildgrowth Archaic|R|SOS
 #128|Essence Scatter|C|SOS
@@ -138,7 +138,7 @@
 #137|Joined Researchers|R|SOS
 #138|Terramorphic Expanse|C|SOS
 #139|Eager Glyphmage|C|SOS
-#140|Dissection Practice|R|SOS
+#140|Dissection Practice|U|SOS
 #141|Inkling Mascot|C|SOS
 #142|Spirit Mascot|C|SOS
 #143|Cuboid Colony|U|SOS
@@ -202,7 +202,7 @@
 #201|Soaring Stoneglider|U|SOS
 #202|Zealous Lorecaster|C|SOS
 #203|Feed the Swarm|U|SOA
-#204|Rapier Wit|U|SOS
+#204|Rapier Wit|C|SOS
 #205|Mica, Reader of Ruins|U|SOS
 #206|Tester of the Tangential|U|SOS
 #207|Fractal Mascot|C|SOS
@@ -233,7 +233,7 @@
 #232|Burrog Banemaker|C|SOS
 #233|Ancestral Anger|C|SOS
 #234|Emil, Vastlands Roamer|U|SOS
-#235|Flusterstorm|R|SOA
+#235|Flusterstorm|M|SOA
 #236|Helping Hand|U|SOA
 #237|Culling Ritual|R|SOA
 #238|Sheoldred's Edict|R|SOA
@@ -289,7 +289,7 @@
 #288|Return to the Ranks|R|SOA
 #289|Return the Favor|U|SOA
 #290|Bring to Light|R|SOA
-#291|Ennis, Debate Moderator|M|SOS
+#291|Ennis, Debate Moderator|U|SOS
 #292|Encouraging Aviator|U|SOS
 #293|Spellbook Seeker|C|SOS
 #294|Arnyn, Deathbloom Botanist|U|SOS
@@ -302,13 +302,13 @@
 #301|Witherbloom, the Balancer|M|SOS
 #302|Rabid Attack|U|SOS
 #303|Rearing Embermare|C|SOS
-#304|Triumph of the Hordes|U|SOA
+#304|Triumph of the Hordes|M|SOA
 #305|Vampiric Tutor|M|SOA
 #306|Armageddon|M|SOA
 #307|Ad Nauseam|M|SOA
 #308|Adrix and Nev, Twincasters|M|SPG
 #309|Library of Leng|M|SPG
-#310|Pongify|U|SOA
+#310|Pongify|R|SOA
 #311|Magus of the Library|M|SPG
 #312|Blazing Firesinger|U|SOS
 #313|Chelonian Tackle|U|SOS
@@ -316,13 +316,13 @@
 #315|Culling the Weak|R|SOA
 #316|Jeska's Will|M|SOA
 #317|Deflecting Palm|R|SOA
-#318|Smallpox|U|SOA
+#318|Smallpox|R|SOA
 #319|Living End|M|SOA
 #320|Pyretic Ritual|R|SOA
 #321|Harsh Annotation|U|SOS
 #322|Biblioplex Tomekeeper|C|SOS
 #323|Fractal Anomaly|U|SOS
-#324|Efflorescence|R|SOS
+#324|Efflorescence|C|SOS
 #325|Dina's Guidance|R|SOS
 #326|Oracle's Restoration|C|SOS
 #327|Growth Curve|U|SOS
@@ -341,8 +341,3 @@
 #340|Crop Rotation|R|SOA
 #341|Petrified Hamlet|R|SOS
 #342|Veil of Summer|R|SOA
-#343|Forest|C|SOS
-#344|Island|C|SOS
-#345|Mountain|C|SOS
-#346|Plains|C|SOS
-#347|Swamp|C|SOS

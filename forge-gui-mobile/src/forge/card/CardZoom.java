@@ -61,6 +61,9 @@ public class CardZoom extends FOverlay {
     private static boolean showMerged = false;
     private static boolean isAdvBack = false;
     private static HashMap<Object, CardView> cardViewsToClearObject;
+    private static final ArrayList<CardView> specializedCardsList = new ArrayList<>(8);
+    private static float aspectRatioMultiplier = -1f;
+    private static String lastEvaluatedString = "";
 
     public static void show(Object item) {
         show(item, false);
@@ -114,31 +117,32 @@ public class CardZoom extends FOverlay {
     private CardZoom() {
         specialize = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblSpecialized")).font(FSkinFont.get(12)).selectable().command(e -> {
             if (currentCard != null) {
-                final List<CardView> list = new ArrayList<>();
+                specializedCardsList.clear();
+
                 final PaperCard pc = ImageUtil.getPaperCardFromImageKey(currentCard.getCurrentState().getTrackableImageKey());
                 if (pc != null) {
                     Card cardW = Card.fromPaperCard(pc, null);
                     cardW.setState(CardStateName.SpecializeW, true);
-                    list.add(cardW.getView());
+                    specializedCardsList.add(cardW.getView());
 
                     Card cardU = Card.fromPaperCard(pc, null);
                     cardU.setState(CardStateName.SpecializeU, true);
-                    list.add(cardU.getView());
+                    specializedCardsList.add(cardU.getView());
 
                     Card cardB = Card.fromPaperCard(pc, null);
                     cardB.setState(CardStateName.SpecializeB, true);
-                    list.add(cardB.getView());
+                    specializedCardsList.add(cardB.getView());
 
                     Card cardR = Card.fromPaperCard(pc, null);
                     cardR.setState(CardStateName.SpecializeR, true);
-                    list.add(cardR.getView());
+                    specializedCardsList.add(cardR.getView());
 
                     Card cardG = Card.fromPaperCard(pc, null);
                     cardG.setState(CardStateName.SpecializeG, true);
-                    list.add(cardG.getView());
+                    specializedCardsList.add(cardG.getView());
                 }
-                if (!list.isEmpty())
-                    show(list, 0, null);
+                if (!specializedCardsList.isEmpty())
+                    show(specializedCardsList, 0, null);
             }
         }).buildAboveOverlay());
         specialize.setVisible(false);
@@ -363,22 +367,25 @@ public class CardZoom extends FOverlay {
         float w = getWidth();
         float h = getHeight();
         float messageHeight = FDialog.MSG_HEIGHT;
-        float AspectRatioMultiplier;
-        switch (Forge.extrawide) {
-            case "default":
-                AspectRatioMultiplier = 3; //good for tablets with 16:10 or similar
-                break;
-            case "wide":
-                AspectRatioMultiplier = 2.5f;
-                break;
-            case "extrawide":
-                AspectRatioMultiplier = 2; //good for tall phones with 21:9 or similar
-                break;
-            default:
-                AspectRatioMultiplier = 3;
-                break;
+
+        if (aspectRatioMultiplier == -1f || !lastEvaluatedString.equals(Forge.extrawide)) {
+            lastEvaluatedString = (Forge.extrawide != null) ? Forge.extrawide : "default";
+            switch (lastEvaluatedString) {
+                case "default":
+                    aspectRatioMultiplier = 3f;
+                    break;
+                case "wide":
+                    aspectRatioMultiplier = 2.5f;
+                    break;
+                case "extrawide":
+                    aspectRatioMultiplier = 2f;
+                    break;
+                default:
+                    aspectRatioMultiplier = 3f;
+                    break;
+            }
         }
-        float maxCardHeight = h - AspectRatioMultiplier * messageHeight; //maxheight of currently zoomed card
+        float maxCardHeight = h - aspectRatioMultiplier * messageHeight;
 
         float cardWidth, cardHeight, y;
 

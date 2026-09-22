@@ -1,19 +1,31 @@
 package forge.screens;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 
 public class RewardScreen extends FScreen {
     TextureRegion background;
+
     public RewardScreen(String headerCaption, TextureRegion bg) {
         super(headerCaption);
+        setBackground(bg);
+    }
+
+    public void setBackground(TextureRegion bg) {
+        if (bg == null) {
+            this.background = null;
+            return;
+        }
+
         try {
-            background = new TextureRegion(bg);
-            //background.flip(false, true);
+            if (this.background == null) {
+                this.background = new TextureRegion(bg);
+            } else {
+                this.background.setRegion(bg);
+            }
         } catch (Exception ignored) {
-            background = null;
+            this.background = null;
         }
     }
 

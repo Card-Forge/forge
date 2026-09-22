@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Artifact Equipment
 K:Living Weapon
 K:Equip:4
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is the greatest mana value among your commanders.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is the greatest mana value among your commanders.
 SVar:X:Count$ValidAll Card.IsCommander+YouOwn$GreatestCardManaCost
 AI:RemoveDeck:NonCommander
 DeckHas:Ability$Token & Type$Phyrexian|Germ

@@ -89,6 +89,12 @@ public abstract class GameStage extends Stage {
     protected boolean dialogOnlyInput;
     protected final Array<TextraButton> dialogButtonMap = new Array<>();
     TextraButton selectedKey;
+    private final Vector2 inputPriorityDir = new Vector2();
+    private final Vector2 touchConversionVec = new Vector2();
+    private final Vector2 touchDiffVec = new Vector2();
+    private final Vector2 collisionAdjX = new Vector2();
+    private final Vector2 collisionAdjY = new Vector2();
+    private final Rectangle collisionBounds = new Rectangle();
 
     public Dialog getDialog() {
         return dialog;
@@ -393,49 +399,39 @@ public abstract class GameStage extends Stage {
             player.stop();
         } else {
             keyboardInput.setZero();
-            if (KeyBinding.Left.isPressed()) {
-                keyboardInput.x -= 1;
-            }
-
-            if (KeyBinding.Right.isPressed()) {
-                keyboardInput.x += 1;
-            }
-
-            if (KeyBinding.Up.isPressed()) {
-                keyboardInput.y += 1;
-            }
-
-            if (KeyBinding.Down.isPressed()) {
-                keyboardInput.y -= 1;
-            }
+            if (KeyBinding.Left.isPressed())  keyboardInput.x -= 1;
+            if (KeyBinding.Right.isPressed()) keyboardInput.x += 1;
+            if (KeyBinding.Up.isPressed())    keyboardInput.y += 1;
+            if (KeyBinding.Down.isPressed())  keyboardInput.y -= 1;
 
             // Input priority: touch > controller > keyboard
-            Vector2 dir = new Vector2();
+            inputPriorityDir.setZero();
             if (touchX >= 0 && touchInput.len() > 0.2f) {
-                dir.set(touchInput);
+                inputPriorityDir.set(touchInput);
             } else if (controllerInput.len() > 0.2f) {
-                dir.set(controllerInput);
+                inputPriorityDir.set(controllerInput);
             } else if (touchKnobInput.len() > 0.2f) {
-                dir.set(touchKnobInput);
+                inputPriorityDir.set(touchKnobInput);
             } else {
-                dir.set(keyboardInput);
+                inputPriorityDir.set(keyboardInput);
             }
-            if (dir.len() < 0.01f) {
+
+            if (inputPriorityDir.len() < 0.01f) {
                 player.stop();
             } else {
-                player.getMovementDirection().set(dir);
+                player.getMovementDirection().set(inputPriorityDir);
             }
 
             if (touchX >= 0) {
-                Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
+                Vector2 target = this.screenToStageCoordinates(touchConversionVec.set(touchX, touchY));
                 target.x -= player.getWidth() / 2f;
-                Vector2 diff = target.sub(player.pos());
+                touchDiffVec.set(target.sub(player.pos()));
 
-                if (diff.len() < 2) {
+                if (touchDiffVec.len() < 2) {
                     touchInput.setZero();
                     player.stop();
                 } else {
-                    touchInput.set(diff);
+                    touchInput.set(touchDiffVec);
                 }
             }
         }
@@ -484,8 +480,8 @@ public abstract class GameStage extends Stage {
             if (TileMapScene.instance().currentMap().isInMap()) {
                 DialogData noQuicksave = new DialogData();
                 DialogData noQuicksaveOK = new DialogData();
-                noQuicksave.text = "Game not saved. Quicksave is only available on the world map.";
-                noQuicksaveOK.name = "OK";
+                noQuicksave.text = Forge.getLocalizer().getMessageorUseDefault("lblQuicksaveOnlyOnWorldMap", "Game not saved. Quicksave is only available on the world map.");
+                noQuicksaveOK.name = Forge.getLocalizer().getMessage("lblOK");
                 noQuicksave.options = new DialogData[]{noQuicksaveOK};
                 MapDialog noQuicksaveDialog = new MapDialog(noQuicksave, MapStage.getInstance(), -1, null);
                 showDialog();
@@ -652,44 +648,52 @@ public abstract class GameStage extends Stage {
     }
 
     public Vector2 adjustMovement(Vector2 direction, Rectangle boundingRect) {
-        Vector2 adjDirX = direction.cpy();
-        Vector2 adjDirY = direction.cpy();
+        // populate our local cars in-place via .set() instead of .cpy()
+        collisionAdjX.set(direction);
+        collisionAdjY.set(direction);
         boolean foundX = false;
         boolean foundY = false;
-        while (true) {
 
-            if (!isColliding(new Rectangle(boundingRect.x + adjDirX.x, boundingRect.y + adjDirX.y, boundingRect.width, boundingRect.height))) {
+        while (true) {
+            collisionBounds.set(boundingRect.x + collisionAdjX.x, boundingRect.y + collisionAdjX.y, boundingRect.width, boundingRect.height);
+            if (!isColliding(collisionBounds)) {
                 foundX = true;
                 break;
             }
-            if (adjDirX.x == 0)
+            if (collisionAdjX.x == 0)
                 break;
 
-            if (adjDirX.x >= 0)
-                adjDirX.x = Math.max(0, adjDirX.x - 0.2f);
+            if (collisionAdjX.x >= 0)
+                collisionAdjX.x = Math.max(0, collisionAdjX.x - 0.2f);
             else
-                adjDirX.x = Math.min(0, adjDirX.x + 0.2f);
+                collisionAdjX.x = Math.min(0, collisionAdjX.x + 0.2f);
         }
+
         while (true) {
-            if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
+            collisionBounds.set(boundingRect.x + collisionAdjY.x, boundingRect.y + collisionAdjY.y, boundingRect.width, boundingRect.height);
+            if (!isColliding(collisionBounds)) {
                 foundY = true;
                 break;
             }
-            if (adjDirY.y == 0)
+            if (collisionAdjY.y == 0)
                 break;
 
-            if (adjDirY.y >= 0)
-                adjDirY.y = (Math.max(0, adjDirY.y - 0.2f));
+            if (collisionAdjY.y >= 0)
+                collisionAdjY.y = Math.max(0, collisionAdjY.y - 0.2f);
             else
-                adjDirY.y = (Math.min(0, adjDirY.y + 0.2f));
+                collisionAdjY.y = Math.min(0, collisionAdjY.y + 0.2f);
         }
-        if (foundY && foundX)
-            return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;
-        else if (foundY)
-            return adjDirY;
-        else if (foundX)
-            return adjDirX;
-        return Vector2.Zero.cpy();
+
+        if (foundY && foundX) {
+            return collisionAdjX.len() > collisionAdjY.len() ? collisionAdjX : collisionAdjY;
+        } else if (foundY) {
+            return collisionAdjY;
+        } else if (foundX) {
+            return collisionAdjX;
+        }
+
+        collisionAdjX.setZero();
+        return collisionAdjX;
     }
 
     protected void teleported(Vector2 position) {
