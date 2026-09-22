@@ -21,14 +21,14 @@ public class LobbyClient {
 
     private final String serverUrl;
     private final HttpClient httpClient;
-    private String currentRoomId;
-    private String currentSecret;
-    private String relayAddress;
+    private volatile String currentRoomId;
+    private volatile String currentSecret;
+    private volatile String relayAddress;
     private ScheduledExecutorService heartbeatScheduler;
     private ScheduledFuture<?> heartbeatFuture;
     private volatile int currentPlayerCount = 0;
     private volatile String currentFormat = "Constructed";
-    private RelayTunnel relayTunnel;
+    private volatile RelayTunnel relayTunnel;
 
     public LobbyClient(String serverUrl) {
         this.serverUrl = serverUrl.endsWith("/") ? serverUrl.substring(0, serverUrl.length() - 1) : serverUrl;

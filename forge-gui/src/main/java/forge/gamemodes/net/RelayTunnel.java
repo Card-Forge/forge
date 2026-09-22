@@ -28,7 +28,7 @@ public class RelayTunnel {
     private final int gamePort;
     private final ExecutorService executor;
     private volatile boolean running;
-    private Socket tunnelSocket;
+    private volatile Socket tunnelSocket;
 
     public RelayTunnel(String relayHost, int relayPort, int gamePort) {
         this.relayHost = relayHost;
