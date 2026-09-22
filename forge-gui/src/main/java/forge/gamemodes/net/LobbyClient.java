@@ -189,7 +189,7 @@ public class LobbyClient {
                 this.relayAddress = relayHost + ":" + relayPort;
 
                 // Start reverse tunnel: host connects outbound to VPS
-                relayTunnel = new RelayTunnel(relayHost, relayPort, gamePort);
+                relayTunnel = new RelayTunnel(relayHost, relayPort, gamePort, currentSecret);
                 new Thread(() -> {
                     try {
                         relayTunnel.start();

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,6 +18,9 @@ import java.util.concurrent.Executors;
  *
  * This allows joiners behind NAT to connect to the VPS relay, which bridges
  * them to the host's game server — no port forwarding needed on either side.
+ *
+ * Host connections are authenticated with the per-room secret so a third party
+ * cannot hijack the tunnel or inject a data connection by knowing the port.
  */
 public class RelayTunnel {
 
@@ -26,14 +30,16 @@ public class RelayTunnel {
     private final String relayHost;
     private final int relayPort;
     private final int gamePort;
+    private final byte[] secret;
     private final ExecutorService executor;
     private volatile boolean running;
     private volatile Socket tunnelSocket;
 
-    public RelayTunnel(String relayHost, int relayPort, int gamePort) {
+    public RelayTunnel(String relayHost, int relayPort, int gamePort, String secret) {
         this.relayHost = relayHost;
         this.relayPort = relayPort;
         this.gamePort = gamePort;
+        this.secret = secret == null ? new byte[0] : secret.getBytes(StandardCharsets.US_ASCII);
         this.executor = Executors.newCachedThreadPool(r -> {
             Thread t = new Thread(r, "RelayTunnel");
             t.setDaemon(true);
@@ -64,6 +70,7 @@ public class RelayTunnel {
 
                 OutputStream out = tunnelSocket.getOutputStream();
                 out.write(MAGIC_HOST_TUNNEL);
+                out.write(secret);
                 out.flush();
 
                 System.out.println("RelayTunnel: connected to " + relayHost + ":" + relayPort);
@@ -101,6 +108,7 @@ public class RelayTunnel {
             dataConn.setTcpNoDelay(true);
             OutputStream dataOut = dataConn.getOutputStream();
             dataOut.write(MAGIC_HOST_DATA);
+            dataOut.write(secret);
             dataOut.flush();
 
             // Connect to local game server
