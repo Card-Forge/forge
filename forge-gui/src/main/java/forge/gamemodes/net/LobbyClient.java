@@ -118,13 +118,14 @@ public class LobbyClient {
      * Send a single heartbeat immediately (in addition to the scheduled ones).
      */
     private void sendHeartbeatNow() {
-        if (currentRoomId == null) return;
+        if (currentRoomId == null || currentSecret == null) return;
         try {
             String payload = String.format("{\"id\":\"%s\",\"player_count\":%d,\"format\":\"%s\"}",
                     currentRoomId, currentPlayerCount, escapeJson(currentFormat));
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(serverUrl + "/heartbeat"))
                     .header("Content-Type", "application/json")
+                    .header("X-Room-Token", currentSecret)
                     .POST(HttpRequest.BodyPublishers.ofString(payload))
                     .build();
             httpClient.send(request, HttpResponse.BodyHandlers.discarding());
@@ -237,13 +238,14 @@ public class LobbyClient {
             return t;
         });
         heartbeatFuture = heartbeatScheduler.scheduleAtFixedRate(() -> {
-            if (currentRoomId == null) return;
+            if (currentRoomId == null || currentSecret == null) return;
             try {
                 String payload = String.format("{\"id\":\"%s\",\"player_count\":%d,\"format\":\"%s\"}",
                         currentRoomId, currentPlayerCount, escapeJson(currentFormat));
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(serverUrl + "/heartbeat"))
                         .header("Content-Type", "application/json")
+                        .header("X-Room-Token", currentSecret)
                         .POST(HttpRequest.BodyPublishers.ofString(payload))
                         .build();
                 httpClient.send(request, HttpResponse.BodyHandlers.discarding());

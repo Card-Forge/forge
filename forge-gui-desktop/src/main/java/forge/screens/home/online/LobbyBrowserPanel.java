@@ -227,26 +227,32 @@ public class LobbyBrowserPanel extends JPanel {
         LobbyRoom room = tableModel.getRoomAt(row);
         if (room == null) return;
 
-        // Check password
+        // Ask the lobby to authorize this join: it verifies the password (if any)
+        // and records the caller's IP so the relay will accept the connection.
+        String password = "";
         if (room.isHasPassword()) {
-            String password = SOptionPane.showInputDialog(
+            String entered = SOptionPane.showInputDialog(
                     Localizer.getInstance().getMessageorUseDefault("lblLobbyPasswordRequired", "This room is password-protected. Enter password:"),
                     Localizer.getInstance().getMessage("lblJoinGame"));
-            if (password == null) return; // cancelled
+            if (entered == null) return; // cancelled
+            password = entered;
+        }
 
-            if (sharedLobbyClient == null) {
-                String lobbyUrl = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.LOBBY_SERVER_URL);
-                if (lobbyUrl == null || lobbyUrl.isEmpty()) {
-                    return;
-                }
-                sharedLobbyClient = new LobbyClient(lobbyUrl);
-            }
-            if (!sharedLobbyClient.verifyPassword(room.getId(), password)) {
-                SOptionPane.showErrorDialog(
-                        Localizer.getInstance().getMessageorUseDefault("lblLobbyWrongPassword", "Incorrect password."),
-                        Localizer.getInstance().getMessage("lblJoinGame"));
+        if (sharedLobbyClient == null) {
+            String lobbyUrl = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.LOBBY_SERVER_URL);
+            if (lobbyUrl == null || lobbyUrl.isEmpty()) {
                 return;
             }
+            sharedLobbyClient = new LobbyClient(lobbyUrl);
+        }
+        if (!sharedLobbyClient.verifyPassword(room.getId(), password)) {
+            final boolean wrongPassword = room.isHasPassword();
+            SOptionPane.showErrorDialog(
+                    Localizer.getInstance().getMessageorUseDefault(
+                            wrongPassword ? "lblLobbyWrongPassword" : "lblLobbyServerUnavailable",
+                            wrongPassword ? "Incorrect password." : "Could not connect to lobby server"),
+                    Localizer.getInstance().getMessage("lblJoinGame"));
+            return;
         }
 
         // Join via relay
