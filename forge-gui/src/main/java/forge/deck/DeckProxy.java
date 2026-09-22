@@ -466,6 +466,15 @@ public class DeckProxy implements InventoryItem {
         return result;
     }
 
+    public static Iterable<DeckProxy> getAllDecksFromStorage(final String deckType, final GameType gameType,
+            final IStorage<Deck> storage) {
+        final List<DeckProxy> result = new ArrayList<>();
+        if (storage != null) {
+            addDecksRecursivelly(deckType, gameType, result, "", storage, null);
+        }
+        return result;
+    }
+
     public static Iterable<DeckProxy> getAllCommanderDecks() {
         return getAllCommanderDecks(null);
     }

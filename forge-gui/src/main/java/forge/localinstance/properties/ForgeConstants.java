@@ -272,6 +272,7 @@ public final class ForgeConstants {
     public static final String CONQUEST_SAVE_DIR          = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR      = DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
     public static final String DECK_BRAWL_DIR             = DECK_BASE_DIR + "brawl" + PATH_SEPARATOR;
+    public static final String DECK_DECKBOX_DIR           = DECK_BASE_DIR + "deckbox" + PATH_SEPARATOR;
     public static final String MAIN_PREFS_FILE            = USER_PREFS_DIR + "forge.preferences";
     public static final String SERVER_PREFS_FILE          = USER_PREFS_DIR + "server.preferences";
     public static final String CARD_PREFS_FILE            = USER_PREFS_DIR + "card.preferences";
@@ -328,6 +329,7 @@ public final class ForgeConstants {
             DECK_OATHBREAKER_DIR,
             DECK_NET_DIR,
             DECK_NET_EVENT_DIR,
+            DECK_DECKBOX_DIR,
             QUEST_SAVE_DIR,
             CACHE_TOKEN_PICS_DIR,
             CACHE_ICON_PICS_DIR,

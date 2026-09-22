@@ -350,6 +350,9 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
 
         LAST_IMPORTED_CUBE_ID(""),
 
+        DECKBOX_USERNAME(""),
+        DECKBOX_SUBDIRECTORY(""),
+
         ADV_DISPLAY_PRICE_IN_REWARD_SCREEN("true");
 
         private final String strDefaultVal;
