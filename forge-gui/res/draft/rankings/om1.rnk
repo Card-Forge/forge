@@ -1,101 +1,101 @@
 //Rank|Name|Rarity|Set
-#1|Luis, Pompous Pillager|R|OM1
-#2|Alenni, Brood Recruiter|R|OM1
-#3|Qoneus, Horizon Splicer|R|OM1
-#4|Remarkable Readings|R|OM1
-#5|King of the Coldblood Curse|R|OM1
-#6|The Scouring Stormsoul|R|OM1
-#7|Scions of the Ur-Spider|M|OM1
-#8|Neach, Pinnacle Pariah|M|OM1
-#9|Withar, Cocoon Keeper|M|OM1
-#10|A Most Helpful Weaver|R|OM1
-#11|Wrench, Speedway Saboteur|R|OM1
-#12|Through the Omenpath|M|OM1
-#13|Surris, Spidersilk Innovator|M|OM1
+#1|Morlun, Devourer of Spiders|R|OM1
+#2|Silk, Web Weaver|R|OM1
+#3|The Spot, Living Portal|R|OM1
+#4|Friendly Neighborhood|R|OM1
+#5|Lizard, Connors's Curse|R|OM1
+#6|Sandman, Shifting Scoundrel|R|OM1
+#7|Cosmic Spider-Man|M|OM1
+#8|Doctor Octopus, Master Planner|M|OM1
+#9|Mister Negative|M|OM1
+#10|Origin of Spider-Man|R|OM1
+#11|Black Cat, Cunning Thief|R|OM1
+#12|Web of Life and Destiny|M|OM1
+#13|Peter Parker|M|OM1
 #14|Villainous Wrath|R|OM1
-#15|Makdee and Itla, Skysnarers|R|OM1
-#16|Ademi of the Silkchutes|R|OM1
-#17|Goben, Gene-Splice Savant|M|OM1
+#15|Spider-Woman, Stunning Savior|R|OM1
+#16|Spectacular Spider-Man|R|OM1
+#17|Norman Osborn|M|OM1
 #18|Terrific Team-Up|U|OM1
 #19|Spectacular Tactics|C|OM1
-#20|A Trail of Teacups|R|OM1
-#21|Cren, Undercity Dreamer|M|OM1
-#22|Fateweaver|R|OM1
-#23|Janai and Hoppy, Roofskippers|U|OM1
+#20|Kraven's Last Hunt|R|OM1
+#21|Miles Morales|M|OM1
+#22|Radioactive Spider|R|OM1
+#23|Spider-Girl, Legacy Hero|U|OM1
 #24|Mystic Confluence|R|OMB
-#25|Tearle, Entropic Hunger|U|OM1
-#26|Sarn of the Silken Throne|U|OM1
-#27|The Watcher on the Road|R|OM1
-#28|Selesnya Archivist|U|OM1
-#29|Angler's Shield|R|OM1
-#30|Alessos and Pras, Acrobats|U|OM1
-#31|Skv'x the Augmenter|R|OM1
+#25|Morbius the Living Vampire|U|OM1
+#26|Spider-UK|U|OM1
+#27|Mysterio, Master of Illusion|R|OM1
+#28|Damage Control Crew|U|OM1
+#29|Biorganic Carapace|R|OM1
+#30|Spider-Man India|U|OM1
+#31|Symbiote Spider-Man|R|OM1
 #32|Goblin Bombardment|R|OMB
 #33|Sudden Strike|U|OM1
-#34|Mothwing Shroud|C|OM1
-#35|Phantasmal Vision|C|OM1
-#36|Tarantusk, Unwisely Awoken|R|OM1
-#37|Rouse the Swarm|U|OM1
+#34|Web Up|C|OM1
+#35|Mysterio's Phantasm|C|OM1
+#36|Spider-Ham, Peter Porker|R|OM1
+#37|Wall Crawl|U|OM1
 #38|Cheering Crowd|R|OM1
-#39|Demera, Soul of a Spider|R|OM1
-#40|Leyline Weaver|C|OM1
-#41|Cirina Bargainspinner|U|OM1
-#42|The Clutter Cluster|U|OM1
+#39|Mary Jane Watson|R|OM1
+#40|Spider Manifestation|C|OM1
+#41|Sun-Spider, Nimble Webber|U|OM1
+#42|Spiders-Man, Heroic Horde|U|OM1
 #43|Gallant Citizen|C|OM1
 #44|City Pigeon|C|OM1
-#45|Principled Referee|C|OM1
-#46|Basil, Cabaretti Loudmouth|U|OM1
-#47|Generous Betty Wray|U|OM1
+#45|Daily Bugle Reporters|C|OM1
+#46|Flash Thompson, Spider-Fan|U|OM1
+#47|Silver Sable, Mercenary Leader|U|OM1
 #48|Robotics Mastery|U|OM1
-#49|Argyr, Tidal Spinner|U|OM1
-#50|Hex of Undeath|M|OM1
-#51|Remorseless Coup|U|OM1
-#52|Damning Caress|C|OM1
-#53|Favored Fighter|C|OM1
-#54|Gloria, the Great Armorer|R|OM1
-#55|Desecrex, Gift of Servitude|R|OM1
-#56|Brako, Heartless Hunter|R|OM1
-#57|Zora, Spider Fancier|U|OM1
-#58|Drix Interception|C|OM1
-#59|Vexed Bots|U|OM1
-#60|The House Grows Hungry|R|OM1
-#61|Egrix the Bile Bulwark|M|OM1
+#49|Spider-Byte, Web Warden|U|OM1
+#50|Behold the Sinister Six!|M|OM1
+#51|The Spot's Portal|U|OM1
+#52|Venom's Hunger|C|OM1
+#53|Professional Wrestler|C|OM1
+#54|Araña, Heart of the Spider|R|OM1
+#55|Carnage, Crimson Chaos|R|OM1
+#56|Kraven the Hunter|R|OM1
+#57|Aunt May|U|OM1
+#58|Amazing Acrobatics|C|OM1
+#59|Flying Octobot|U|OM1
+#60|The Death of Gwen Stacy|R|OM1
+#61|Gwenom, Remorseless|M|OM1
 #62|Scorpion's Sting|C|OM1
-#63|Orris, Last of the Web Lords|U|OM1
-#64|Zan, Tunnelweb Explorer|C|OM1
-#65|Carlo, Suave Schemer|U|OM1
-#66|Kumonosu, the Watchful|U|OM1
-#67|Spectral Restitching|R|OM1
+#63|Ezekiel Sims, Spider-Totem|U|OM1
+#64|Spider-Man, Brooklyn Visionary|C|OM1
+#65|Prowler, Clawed Thief|U|OM1
+#66|SP//dr, Piloted by Peni|U|OM1
+#67|Hide on the Ceiling|R|OM1
 #68|Unstable Experiment|C|OM1
-#69|Nia, Skysail Storyteller|M|OM1
-#70|Quint's Insight|R|OM1
-#71|Ancestral Carvings|U|OM1
-#72|Borys, the Spider Rider|R|OM1
-#73|Fizik, Etherium Mechanic|R|OM1
+#69|Gwen Stacy|M|OM1
+#70|Shadow of the Goblin|R|OM1
+#71|Pictures of Spider-Man|U|OM1
+#72|Scarlet Spider, Ben Reilly|R|OM1
+#73|Iron Spider, Stark Upgrade|R|OM1
 #74|Rite of Replication|R|OMB
 #75|Skithiryx, the Blight Dragon|M|OMB
-#76|Lost in Littjara|R|OM1
+#76|The Clone Saga|R|OM1
 #77|Grow Extra Arms|C|OM1
-#78|Chizak, Apex Arachnosaur|C|OM1
-#79|Wonderweave Aerialist|C|OM1
-#80|Diligent Webkeepers|U|OM1
+#78|Spider-Rex, Daring Dino|C|OM1
+#79|Skyward Spider|C|OM1
+#80|Web-Warriors|U|OM1
 #81|Arasta of the Endless Web|R|OMB
-#82|Yera and Oski, Weaver and Guide|R|OM1
+#82|Arachne, Psionic Weaver|R|OM1
 #83|Costume Closet|U|OM1
-#84|Lively Leap|C|OM1
-#85|Outsmart the Amateur|U|OM1
-#86|Snatch Back|C|OM1
+#84|Thwip!|C|OM1
+#85|School Daze|U|OM1
+#86|Whoosh!|C|OM1
 #87|Merciless Enforcers|C|OM1
-#88|Kroble, Envoy of the Bog|U|OM1
-#89|Perilous Lunge|C|OM1
-#90|Goro Rel, Scourge to Spiders|U|OM1
+#88|Spider-Man Noir|U|OM1
+#89|Kapow!|C|OM1
+#90|Spider-Slayer, Hatred Honed|U|OM1
 #91|Path to Exile|R|OMB
 #92|Reprieve|U|OMB
-#93|Darval, Whose Web Protects|C|OM1
-#94|Arala, Hedron Scaler|C|OM1
-#95|Nill, Vessel of Valgavoth|U|OM1
-#96|Bane-Marked Leonin|C|OM1
-#97|Lavaborn Goblins|U|OM1
+#93|Spider-Man, Web-Slinger|C|OM1
+#94|Beetle, Legacy Criminal|C|OM1
+#95|Tombstone, Career Criminal|U|OM1
+#96|Venomized Cat|C|OM1
+#97|Raging Goblinoids|U|OM1
 #98|Scout the City|C|OM1
 #99|Supportive Parents|U|OM1
 #100|Sinister Hideout|C|OM1
@@ -104,125 +104,125 @@
 #103|Counterspell|R|OMB
 #104|Infernal Grasp|U|OMB
 #105|Terminate|U|OMB
-#106|Crime-Scene Instructor|C|OM1
-#107|Ozor, Chronicler of Collapse|C|OM1
-#108|Wekhdu, Midnight Hunter|C|OM1
-#109|Tethex, Gift of Malice|C|OM1
+#106|Selfless Police Captain|C|OM1
+#107|Doc Ock, Sinister Scientist|C|OM1
+#108|Swarm, Being of Bees|C|OM1
+#109|Venom, Evil Unleashed|C|OM1
 #110|Strength of Will|R|OM1
 #111|Mob Lookout|C|OM1
-#112|Kavaero, Mind-Bitten|R|OM1
-#113|Ruzic, Booed but Victorious|R|OM1
+#112|Superior Spider-Man|R|OM1
+#113|Ultimate Green Goblin|R|OM1
 #114|Eerie Gravestone|C|OM1
-#115|Reality Fulcrum|R|OM1
+#115|Interdimensional Web Watch|R|OM1
 #116|Vibrant Cityscape|C|OM1
 #117|University Campus|C|OM1
 #118|Najeela, the Blade-Blossom|M|OMB
-#119|Obscura Alleylurkers|C|OM1
-#120|Rhilex the Accursed|R|OM1
+#119|Doc Ock's Henchmen|C|OM1
+#120|Agent Venom|R|OM1
 #121|Common Crook|C|OM1
-#122|Cruel Caracals|C|OM1
-#123|Xecau, Predation's Shadow|U|OM1
-#124|Perfected Pastry|C|OM1
-#125|Opulent Valet|C|OM1
-#126|Stitcher's Wings|R|OM1
+#122|Kraven's Cats|C|OM1
+#123|Rhino, Barreling Brute|U|OM1
+#124|Bagel and Schmear|C|OM1
+#125|News Helicopter|C|OM1
+#126|Rocket-Powered Goblin Glider|R|OM1
 #127|Ponder|C|OMB
 #128|Arachnogenesis|R|OMB
 #129|Silkguard|R|OMB
-#130|Verilax the Havenskin|M|OM1
-#131|Hide in Mundanity|C|OM1
-#132|Viggo, Enforcer of Ig's Crossing|M|OM1
-#133|The Terminus of Return|M|OM1
-#134|Bayo, Irritable Instructor|R|OM1
+#130|Anti-Venom, Horrifying Healer|M|OM1
+#131|Spider-Man No More|C|OM1
+#132|Eddie Brock|M|OM1
+#133|The Soul Stone|M|OM1
+#134|Electro, Assaulting Battery|R|OM1
 #135|Wisecrack|U|OM1
 #136|Rhino's Rampage|U|OM1
-#137|Data Scrubber|C|OM1
-#138|Steelweb Surveyor|C|OM1
+#137|Mechanical Mobster|C|OM1
+#138|Spider-Bot|C|OM1
 #139|Reanimate|R|OMB
-#140|The Infernus|U|OM1
-#141|Kraza, the Swarm as One|R|OM1
-#142|Restless Razorkin|U|OM1
+#140|Molten Man, Inferno Incarnate|U|OM1
+#141|Spider-Punk|R|OM1
+#142|Superior Foes of Spider-Man|U|OM1
 #143|Lurking Lizards|C|OM1
-#144|Knife Trick|C|OM1
-#145|Giantcraft Helm|R|OM1
-#146|Scuttling Spidercoach|U|OM1
-#147|Fearsome Ridgeline|U|OM1
+#144|Pumpkin Bombardment|C|OM1
+#145|Doc Ock's Tentacles|R|OM1
+#146|Spider-Mobile|U|OM1
+#147|Daily Bugle Building|U|OM1
 #148|Urban Retreat|R|OM1
 #149|Savage Beating|M|OMB
-#150|Confessor's Bindings|R|OM1
-#151|Freestrider Aces|C|OM1
-#152|Kazuo, Ruthless Rival|U|OM1
-#153|Dreadfang, Loathed by Fans|U|OM1
-#154|Crash, Reckless Endrider|U|OM1
-#155|Rishei, Getaway Accomplice|U|OM1
-#156|Margot, On the Case|U|OM1
-#157|Vinewoven Chariot|C|OM1
+#150|Rent Is Due|R|OM1
+#151|Wild Pack Squad|C|OM1
+#152|Shocker, Unshakable|U|OM1
+#153|Kraven, Proud Predator|U|OM1
+#154|Shriek, Treblemaker|U|OM1
+#155|Vulture, Scheming Scavenger|U|OM1
+#156|Wraith, Vicious Vigilante|U|OM1
+#157|Subway Train|C|OM1
 #158|Multiversal Passage|R|OM1
 #159|Clever Impersonator|M|OMB
 #160|Lorthos, the Tidemaker|M|OMB
 #161|Thrill of Possibility|C|OMB
 #162|Unexpected Windfall|C|OMB
 #163|Alibou, Ancient Witness|M|OMB
-#164|Eztli of the Thousand Moons|C|OM1
-#165|Vazin, Two-Faced Trickster|U|OM1
-#166|Belion, the Parched|R|OM1
+#164|Starling, Aerial Ally|C|OM1
+#165|Chameleon, Master of Disguise|U|OM1
+#166|Hydro-Man, Fluid Felon|R|OM1
 #167|Secret Identity|U|OM1
 #168|Prison Break|U|OM1
-#169|Scorvus Ames, Crimelord|U|OM1
-#170|Deathflame Burst|C|OM1
+#169|Scorpion, Seething Striker|U|OM1
+#170|Electro's Bolt|C|OM1
 #171|Comeuppance|R|OMB
 #172|Feed the Swarm|C|OMB
 #173|Opposition Agent|M|OMB
 #174|Saw in Half|R|OMB
 #175|Relentless Assault|R|OMB
-#176|Clandestine Work|C|OM1
+#176|Risky Research|C|OM1
 #177|Shock|C|OM1
-#178|Sadistic String-Puller|C|OM1
-#179|Eccentric Arachnologist|C|OM1
-#180|Exclusive Nightclub|R|OM1
+#178|Spider-Islanders|C|OM1
+#179|Guy in the Chair|C|OM1
+#180|Oscorp Industries|R|OM1
 #181|Savage Mansion|C|OM1
-#182|Caldaia Brawlers|C|OM1
+#182|Inner Demons Gangsters|C|OM1
 #183|Ominous Asylum|C|OM1
 #184|Heroic Intervention|R|OMB
-#185|Archangler's Skyrod|U|OM1
-#186|Galvanized Workforce|C|OM1
-#187|Cam and Farrik, Havoc Duo|U|OM1
+#185|Web-Shooters|U|OM1
+#186|Angry Rabble|C|OM1
+#187|Hobgoblin, Mantled Marauder|U|OM1
 #188|Romantic Rendezvous|C|OM1
-#189|Kephon, Rage Incubator|C|OM1
-#190|Nu and Sumi, Career Criminals|U|OM1
-#191|Kivni, Orb Weaver|U|OM1
+#189|Stegron the Dinosaur Man|C|OM1
+#190|Green Goblin, Revenant|U|OM1
+#191|Scarlet Spider, Kaine|U|OM1
 #192|Hex|R|OMB
-#193|Merata, Neuron Hacker|R|OM1
-#194|Lazlo, Enthusiastic Accuser|R|OM1
-#195|Arachnomania|M|OM1
-#196|Phenomena Recorder|R|OM1
-#197|Temple Trap|C|OM1
+#193|Lady Octopus, Inspired Inventor|R|OM1
+#194|J. Jonah Jameson|R|OM1
+#195|Spider-Verse|M|OM1
+#196|Peter Parker's Camera|R|OM1
+#197|Steel Wrecking Ball|C|OM1
 #198|Traumatize|R|OMB
 #199|Tangle|U|OMB
 #200|Nine Lives|R|OMB
 #201|Mindbreak Trap|M|OMB
 #202|Beast Within|U|OMB
 #203|Hunter's Insight|U|OMB
-#204|Duskmourn's Claim|R|OM1
-#205|Lavabrink Repels the Magmaloth|R|OM1
+#204|Parker Luck|R|OM1
+#205|Maximum Carnage|R|OM1
 #206|Parallel Lives|M|OMB
-#207|Chosen by Valgavoth|R|OM1
+#207|With Great Power . . .|R|OM1
 #208|Impostor Syndrome|M|OM1
-#209|Olx, Mouth to Many Eyes|U|OM1
-#210|Pinnacle Research Team|C|OM1
-#211|Detect Intrusion|R|OM1
-#212|Aggressive Symbiosis|U|OM1
-#213|Miasmic Mist|U|OM1
-#214|Fire-Brained Scheme|U|OM1
-#215|Skittering Kitten|C|OM1
-#216|Wardens of Silverweb Summit|C|OM1
-#217|Rizna, the Spider-Crowned|R|OM1
-#218|Full-Throttle Fanatic|C|OM1
-#219|Druneth, Reviver of the Hive|R|OM1
-#220|Uharis, the Stormspinner|R|OM1
-#221|Treat Trolley|C|OM1
-#222|Error-9, Viral Node|U|OM1
-#223|Carriage of Dreams|C|OM1
-#224|Cactarantula Saddle|U|OM1
+#209|Madame Web, Clairvoyant|U|OM1
+#210|Oscorp Research Team|C|OM1
+#211|Spider-Sense|R|OM1
+#212|Alien Symbiosis|U|OM1
+#213|Sandman's Quicksand|U|OM1
+#214|Heroes' Hangout|U|OM1
+#215|Masked Meower|C|OM1
+#216|Spider-Gwen, Free Spirit|C|OM1
+#217|Spinneret and Spiderling|R|OM1
+#218|Taxi Driver|C|OM1
+#219|Jackal, Genius Geneticist|R|OM1
+#220|Spider-Man 2099|R|OM1
+#221|Hot Dog Cart|C|OM1
+#222|Living Brain, Mechanical Marvel|U|OM1
+#223|Passenger Ferry|C|OM1
+#224|Spider-Suit|U|OM1
 #225|Rest in Peace|R|OMB
 #226|Winds of Change|U|OMB
 #227|Wedding Ring|M|OMB
