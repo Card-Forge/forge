@@ -605,6 +605,9 @@ public class BoosterGenerator {
     }
 
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
+        // Most sheets should randomize when being created.
+        // Some sheets need to be created in a specific order
+        // In those cases, we should remove cards when they are fetched and then re-generated when the sheet is emptied
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
         Predicate<PaperCard> setPred = sKey.length > 1
