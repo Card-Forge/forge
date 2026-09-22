@@ -236,6 +236,9 @@ public class LobbyBrowserPanel extends JPanel {
 
             if (sharedLobbyClient == null) {
                 String lobbyUrl = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.LOBBY_SERVER_URL);
+                if (lobbyUrl == null || lobbyUrl.isEmpty()) {
+                    return;
+                }
                 sharedLobbyClient = new LobbyClient(lobbyUrl);
             }
             if (!sharedLobbyClient.verifyPassword(room.getId(), password)) {
@@ -328,11 +331,7 @@ public class LobbyBrowserPanel extends JPanel {
                 c.setFont(c.getFont().deriveFont(Font.ITALIC));
             } else {
                 c.setFont(c.getFont().deriveFont(Font.PLAIN));
-                if (isSelected) {
-                    c.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
-                } else {
-                    c.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
-                }
+                c.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
             }
             if (isSelected) {
                 c.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE).getColor());

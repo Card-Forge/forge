@@ -105,8 +105,6 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                 VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
             }
         });
-
-        showServerAddressesDialog();
     }
 
     static void showServerAddressesDialog() {

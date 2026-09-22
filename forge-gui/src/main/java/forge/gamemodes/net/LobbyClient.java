@@ -102,10 +102,14 @@ public class LobbyClient {
     }
 
     /**
-     * Update the format sent in heartbeats and send an immediate heartbeat
-     * on a background thread to avoid blocking the caller.
+     * Update the format sent in heartbeats. Sends an immediate heartbeat on a
+     * background thread only when the format actually changed, since callers
+     * invoke this on every lobby state change.
      */
     public void updateFormat(String format) {
+        if (format == null || format.equals(currentFormat)) {
+            return;
+        }
         this.currentFormat = format;
         new Thread(this::sendHeartbeatNow, "LobbyHeartbeatNow").start();
     }
