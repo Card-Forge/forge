@@ -7941,6 +7941,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return StaticAbilityIgnoreLegendRule.ignoreLegendRule(this);
     }
 
+    public boolean ignorePlaneswalkerZeroLoyaltyRule() {
+        if (!getType().isPlaneswalker()) {
+            return true;
+        }
+        return StaticAbilityIgnoreZeroLoyalty.ignorePlaneswalkerZeroLoyaltyRule(this);
+    }
+
     public boolean attackVigilance() {
         return StaticAbilityCantAttackBlock.attackVigilance(this);
     }

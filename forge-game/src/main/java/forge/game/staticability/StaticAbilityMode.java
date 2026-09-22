@@ -154,6 +154,7 @@ public enum StaticAbilityMode {
     IgnoreLandwalk,
     // StaticAbilityIgnoreLegendRule
     IgnoreLegendRule,
+    IgnorePlaneswalkerZeroLoyaltyRule,
 
     // StaticAbilityMaxCounter
     MaxCounter,
