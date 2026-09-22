@@ -1994,7 +1994,7 @@ public class GameAction {
         boolean recheck = false;
 
         for (Card c : list) {
-            if (c.getCounters(CounterEnumType.LOYALTY) <= 0) {
+            if (!c.ignorePlaneswalkerZeroLoyaltyRule() && c.getCounters(CounterEnumType.LOYALTY) <= 0) {
                 noRegCreats.add(c);
                 recheck = true;
             }
