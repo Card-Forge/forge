@@ -1130,7 +1130,7 @@ public class MapStage extends GameStage {
 
         int actorCount = actors.size;
 
-        for (int i = 0; i < actorCount; i++) {
+        for (int i = actors.size - 1; i >= 0; i--) {
             MapActor actor = actors.get(i);
             if (actor == null) continue;
 
