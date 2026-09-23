@@ -1127,6 +1127,9 @@ public class MapStage extends GameStage {
             positions.remove();
 
         for (int i = actors.size - 1; i >= 0; i--) {
+            // a collision can run a map dialog whose actions delete several map objects at once
+            // (e.g. itself plus a gate), shrinking the array past the next index
+            if (i >= actors.size) continue;
             MapActor actor = actors.get(i);
             if (actor == null) continue;
 
