@@ -83,15 +83,11 @@ public class AiBlockController {
     /**
      * Blockers that give the same answers to the combat predicates are interchangeable to them,
      * so the expensive ones are evaluated once per class rather than once per card. Built once
-     * per assignment; a card missing from the map is simply evaluated on its own.
+     * per assignment, covering every candidate.
      */
     private Map<Card, Integer> blockerClass;
 
     private void buildBlockerClasses(final List<Card> possibleBlockers) {
-        blockerClass = null;
-        if (possibleBlockers == null || possibleBlockers.size() < 2) {
-            return;
-        }
         final Map<String, Integer> ids = new HashMap<>();
         final Map<Card, Integer> classes = new IdentityHashMap<>();
         for (final Card b : possibleBlockers) {
@@ -106,6 +102,10 @@ public class AiBlockController {
      * combat arithmetic reads but no legality answer reflects, such as marked damage.
      */
     private String signature(final Card c) {
+        // anything carrying its own attachments or hidden identity stands on its own
+        if (!c.getAttachedCards().isEmpty() || c.isFaceDown() || c.hasPerpetual()) {
+            return "self" + c.getId();
+        }
         final StringBuilder sb = new StringBuilder();
         sb.append(c.getName()).append('|').append(c.getNetPower()).append('/').append(c.getNetToughness());
         sb.append('|').append(c.getNetCombatDamage());
@@ -133,10 +133,6 @@ public class AiBlockController {
         for (final Card a : attackers) {
             sb.append(CombatUtil.canBlock(a, c) ? '1' : '0');
         }
-        // anything carrying its own attachments or hidden identity stands on its own
-        if (!c.getAttachedCards().isEmpty() || c.isFaceDown() || c.hasPerpetual()) {
-            sb.append("|self").append(c.getId());
-        }
         return sb.toString();
     }
 
@@ -145,18 +141,18 @@ public class AiBlockController {
      * attackers it is already committed to, and whether it already blocks this one.
      */
     private String memoKey(final Combat combat, final Card blocker, final Card attacker) {
-        final Integer cls = blockerClass == null ? null : blockerClass.get(blocker);
-        if (cls == null) {
-            return null;
-        }
-        final List<Integer> committed = new ArrayList<>();
+        List<Integer> committed = Collections.emptyList();
         if (combat != null) {
-            for (final Card a : combat.getAttackersBlockedBy(blocker)) {
-                committed.add(a.getId());
+            final CardCollection blocked = combat.getAttackersBlockedBy(blocker);
+            if (!blocked.isEmpty()) {
+                committed = new ArrayList<>(blocked.size());
+                for (final Card a : blocked) {
+                    committed.add(a.getId());
+                }
+                Collections.sort(committed);
             }
-            Collections.sort(committed);
         }
-        return cls + "#" + committed
+        return blockerClass.get(blocker) + "#" + committed
                 + (attacker != null && combat != null && combat.isBlocking(blocker, attacker) ? "b" : "");
     }
 
@@ -168,11 +164,9 @@ public class AiBlockController {
             // if the blocker can block a creature with lure it can't block a creature without
             // canBlock with a combat also reads how far the blocker is already committed, so
             // that goes in the key while the class covers everything stable about the card
-            final String key = memoKey(combat, blocker, attacker);
-            final boolean answer = key == null
-                    ? CombatUtil.canBlock(attacker, blocker, combat)
-                    : AiCache.memo(AiCache.Scope.CALL, "canBlock", key,
-                            () -> CombatUtil.canBlock(attacker, blocker, combat));
+            final boolean answer = AiCache.memo(AiCache.Scope.CALL, "canBlock",
+                    memoKey(combat, blocker, attacker),
+                    () -> CombatUtil.canBlock(attacker, blocker, combat));
             if (answer) {
                 boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
                 if (solo && cantBlockAlone) {
@@ -193,11 +187,9 @@ public class AiBlockController {
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
         AiCache.clear(AiCache.Scope.CALL);
         for (final Card b : blockersLeft) {
-            final String key = memoKey(combat, b, null);
-            final boolean answer = key == null
-                    ? !ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat())
-                    : AiCache.memo(AiCache.Scope.CALL, "blockerSurvives", key,
-                            () -> !ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
+            final boolean answer = AiCache.memo(AiCache.Scope.CALL, "blockerSurvives",
+                    memoKey(combat, b, null),
+                    () -> !ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
             if (answer) {
                 blockers.add(b);
             }
@@ -213,11 +205,9 @@ public class AiBlockController {
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
         AiCache.clear(AiCache.Scope.CALL);
         for (final Card b : blockersLeft) {
-            final String key = memoKey(combat, b, null);
-            final boolean answer = key == null
-                    ? ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat())
-                    : AiCache.memo(AiCache.Scope.CALL, "blockerKills", key,
-                            () -> ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
+            final boolean answer = AiCache.memo(AiCache.Scope.CALL, "blockerKills",
+                    memoKey(combat, b, null),
+                    () -> ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
             if (answer) {
                 blockers.add(b);
             }
@@ -1142,10 +1132,10 @@ public class AiBlockController {
      * @param possibleBlockers list of blockers to be considered
      */
     private void assignBlockers(final Combat combat, List<Card> possibleBlockers) {
-        buildBlockerClasses(possibleBlockers);
         if (attackers.isEmpty()) {
             return;
         }
+        buildBlockerClasses(possibleBlockers);
 
         clearBlockers(combat, possibleBlockers);
 
