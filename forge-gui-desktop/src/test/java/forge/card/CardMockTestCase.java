@@ -192,7 +192,35 @@ public class CardMockTestCase {
     }
 
     protected void initializeStaticData() {
-        StaticData data = CardDatabaseHelper.getStaticDataToPopulateOtherMocks();
+        useStaticData(CardDatabaseHelper.getStaticDataToPopulateOtherMocks());
+    }
+
+    /**
+     * Points both {@code FModel.getMagicDb()} and {@link StaticData#instance()} at the database this
+     * test class means to use, for the duration of one test method.
+     *
+     * <p>
+     * Both are needed because they are set in different ways. The first is a mock this class installs
+     * per method; the second is a process-wide field that {@link StaticData}'s constructor assigns to
+     * whichever instance was built last. A class that builds a database of its own therefore leaves
+     * {@code StaticData.instance()} pointing at it for the rest of the JVM, and a class that runs
+     * later and reads the singleton rather than {@code FModel} gets that database instead of its own.
+     * {@link CardDbLazyCardLoadingCardMockTestCase} makes this plain: its database is emptied before
+     * every one of its methods, so anything reading the singleton afterwards finds no cards at all.
+     * </p>
+     */
+    protected void useStaticData(StaticData data) {
         fModelMock.when(FModel::getMagicDb).thenReturn(data);
+        setStaticDataInstance(data);
+    }
+
+    private static void setStaticDataInstance(StaticData data) {
+        try {
+            Field instance = StaticData.class.getDeclaredField("lastInstance");
+            instance.setAccessible(true);
+            instance.set(null, data);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
