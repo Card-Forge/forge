@@ -323,6 +323,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.NaturalResult, roll.getNaturalValue());
             runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
             runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
+            runParams.put(AbilityKey.SourceSA, sa != null ? sa.getRootAbility().copy() : null);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
             rollNum++;
         }
@@ -330,6 +331,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Sides, sides);
         runParams.put(AbilityKey.Result, getFinalResults(resultsList));
         runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
+        runParams.put(AbilityKey.SourceSA, sa != null ? sa.getRootAbility().copy() : null);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
         return getFinalResults(resultsList).stream().reduce(0, Integer::sum);

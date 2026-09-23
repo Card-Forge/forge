@@ -34,38 +34,54 @@ public class TriggerRolledDie extends Trigger {
             if (hasParam("Natural") && runParams.containsKey(AbilityKey.NaturalResult)) {
                 result = (int) runParams.get(AbilityKey.NaturalResult);
             }
+            boolean validFound = false;
             for (String param : params) {
                 if (StringUtils.isNumeric(param)) {
-                    if (param.equals("" + result)) return true;
+                    if (result == Integer.parseInt(param)) {
+                        validFound = true;
+                        break;
+                    }
                 } else if (param.equals("Highest")) {
                     final int sides = (int) runParams.get(AbilityKey.Sides);
-                    if (result == sides) return true;
+                    if (result == sides) {
+                        validFound = true;
+                        break;
+                    }
                 } else {
                     final String comp = param.substring(0, 2);
                     final int rightSide = Integer.parseInt(param.substring(2));
-                    if (Expressions.compare(result, comp, rightSide)) return true;
+                    if (Expressions.compare(result, comp, rightSide)) {
+                        validFound = true;
+                        break;
+                    }
                 }
             }
-            return false;
+            if(!validFound) {
+                return false;
+            }
         }
         if (hasParam("ValidSides")) {
             final int validSides = Integer.parseInt(getParam("ValidSides"));
             final int sides = (int) runParams.get(AbilityKey.Sides);
-            if (sides == validSides) return true;
+            if (sides != validSides) return false;
         }
 
         if (hasParam("Number")) {
             if (((Integer) runParams.get(AbilityKey.Number)) != Integer.parseInt(getParam("Number"))) {
                 return false;
             }
-        } 
+        }
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.SourceSA))) {
+            return false;
+        }
+
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Result, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Result, AbilityKey.Player, AbilityKey.SourceSA);
     }
 
     @Override
