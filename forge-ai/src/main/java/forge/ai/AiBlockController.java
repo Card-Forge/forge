@@ -66,6 +66,7 @@ public class AiBlockController {
     private List<Card> blockedButUnkilled = new ArrayList<>(); // blocked attackers that currently wouldn't be destroyed
     /** Constant <code>blockersLeft</code>. */
     private List<Card> blockersLeft = new ArrayList<>(); // keeps track of all unassigned blockers
+    private List<Card> unblockableAttackers = new ArrayList<>(); // attackers none of the possible blockers can block
     private int diff = 0;
 
     private boolean lifeInDanger = false;
@@ -991,6 +992,7 @@ public class AiBlockController {
         }
 
         attackersLeft = new ArrayList<>(attackers); // keeps track of all currently unblocked attackers
+        attackersLeft.removeAll(unblockableAttackers);
         blockersLeft = new ArrayList<>(possibleBlockers); // keeps track of all unassigned blockers
         blockedButUnkilled = new ArrayList<>(); // keeps track of all blocked attackers that currently wouldn't be destroyed
     }
@@ -1045,6 +1047,7 @@ public class AiBlockController {
             return;
         }
 
+        unblockableAttackers = new ArrayList<>();
         clearBlockers(combat, possibleBlockers);
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
@@ -1052,22 +1055,26 @@ public class AiBlockController {
             diff = 0;
         }
 
-        // remove all attackers that can't be blocked anyway
-        for (final Card a : attackers) {
-            if (!CombatUtil.canBeBlocked(a, null, ai)) { // pass null to skip redundant checks for performance
-                attackersLeft.remove(a);
-            }
-        }
-
-        if (attackersLeft.isEmpty()) {
-            return;
-        }
-
         // remove all blockers that can't block anyway
         for (final Card b : possibleBlockers) {
             if (!CombatUtil.canBlock(b, combat)) {
                 blockersLeft.remove(b);
             }
+        }
+
+        // remove all attackers that can't be blocked anyway, or that none of our blockers can block
+        // (e.g. fliers when we have no flying or reach). Every block search below asks each blocker
+        // about each remaining attacker, so a swarm of them made declaring blockers take minutes.
+        for (final Card a : attackers) {
+            if (!CombatUtil.canBeBlocked(a, null, ai) // pass null to skip redundant checks for performance
+                    || blockersLeft.stream().noneMatch(b -> CombatUtil.canBlock(a, b))) {
+                unblockableAttackers.add(a);
+            }
+        }
+        attackersLeft.removeAll(unblockableAttackers);
+
+        if (attackersLeft.isEmpty()) {
+            return;
         }
 
         // Begin with the weakest blockers

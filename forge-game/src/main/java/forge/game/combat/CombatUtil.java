@@ -752,11 +752,13 @@ public class CombatUtil {
         final CardCollection requirementCards = new CardCollection();
         final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
-            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
+            // cheap keyword check first: getBlockCost scans every static ability in the game,
+            // and this runs for each attacker every time the AI asks whether a blocker can block
+            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
                 continue;
             }
 
-            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
+            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
 
