@@ -1,0 +1,9 @@
+Name:Thomil, the Destroyer
+ManaCost:3 B B
+Types:Legendary Planeswalker Thomil
+Loyalty:4
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ b_2_2_zombie | SpellDescription$ Create a 2/2 black Zombie creature token.
+A:AB$ Mana | Cost$ SubCounter<0/LOYALTY> | Planeswalker$ True | Produced$ B | Amount$ 3 | UnlessCost$ Sac<1/Creature> | UnlessSwitched$ True | UnlessPayer$ You | SpellDescription$ You may sacrifice a creature. If you do, add {B}{B}{B}.
+A:AB$ CopyPermanent | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | DefinedName$ Lord of the Pit | SpellDescription$ Create a Lord of the Pit token. (It's a {4}{B}{B}{B} 7/7 Demon creature with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this token deals 7 damage to you.")
+Text:CARDNAME can be your commander.
+Oracle:[+2]: Create a 2/2 black Zombie creature token.\n[0]: You may sacrifice a creature. If you do, add {B}{B}{B}.\n[-5]: Create a Lord of the Pit token. (It's a {4}{B}{B}{B} 7/7 Demon creature with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this token deals 7 damage to you.")\nThomil, the Destroyer can be your commander.

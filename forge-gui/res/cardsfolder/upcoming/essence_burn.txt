@@ -1,0 +1,5 @@
+Name:Essence Burn
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature.Black,Creature.Green,Planeswalker.Black,Planeswalker.Green | TgtPrompt$ Select target black or green creature or planeswalker | NumDmg$ 5 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 5 damage to target black or green creature or planeswalker. If that permanent would die this turn, exile it instead.
+Oracle:Essence Burn deals 5 damage to target black or green creature or planeswalker. If that permanent would die this turn, exile it instead.

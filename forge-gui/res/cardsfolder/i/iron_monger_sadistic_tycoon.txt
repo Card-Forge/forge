@@ -1,6 +1,6 @@
 Name:Iron Monger, Sadistic Tycoon
 ManaCost:2 B
-Types:Legendary Artifact Creature Robot Villain
+Types:Legendary Artifact Creature Human Villain
 PT:2/2
 K:Flying
 T:Mode$ Connives | Execute$ TrigPutCounterAll | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control connives, put a +1/+1 counter on each Villain you control.

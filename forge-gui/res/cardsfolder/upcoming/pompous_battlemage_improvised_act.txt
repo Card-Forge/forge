@@ -1,0 +1,17 @@
+Name:Pompous Battlemage
+ManaCost:R
+Types:Creature Goblin Sorcerer
+PT:1/1
+K:Prowess
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:Prowess\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Improvised Act
+ManaCost:R
+Types:Sorcery
+A:SP$ Draw | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | SpellDescription$ You may discard a card. If you do, draw a card.
+Oracle:You may discard a card. If you do, draw a card.

@@ -1,0 +1,7 @@
+Name:Gumato
+ManaCost:4 G
+Types:Creature Ape Beast
+PT:4/5
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 3 | SpellDescription$ Add {G}{G}{G}.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\n{T}: Add {G}{G}{G}.

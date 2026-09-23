@@ -1,0 +1,9 @@
+Name:Along the Crooked Way
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this enchantment enters, return target creature card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | ValidTgtsDesc$ creature card in your graveyard
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | ValidCard$ Creature.YouOwn | Execute$ TrigAmass | TriggerDescription$ Whenever a creature card leaves your graveyard, amass Goblins 1.
+SVar:TrigAmass:DB$ Amass | Type$ Goblin | Num$ 1
+A:AB$ PumpAll | Cost$ 1 B | ValidCards$ Goblin.YouCtrl,Orc.YouCtrl | KW$ Menace | SpellDescription$ Goblins and Orcs you control gain menace until end of turn.
+Oracle:When this enchantment enters, return target creature card from your graveyard to your hand.\nWhenever a creature card leaves your graveyard, amass Goblins 1.\n{1}{B}: Goblins and Orcs you control gain menace until end of turn.

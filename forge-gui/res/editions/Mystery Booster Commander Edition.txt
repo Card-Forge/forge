@@ -1,10 +1,88 @@
 [metadata]
 Code=MBC
-Date=2026-10-01
-Name=Mystery Booster: Commander Edition
+Date=2026-11-09
+Name=Mystery Booster Commander Edition
 Type=Draft
 ScryfallCode=MBC
 
 [cards]
+1 R Ekthi, Contaminator Priest @Fariba Khamseh
+2 R Grakk the Pacifist @Aaron Miller
+3 R Nivea, Beloved Battlemage @Winona Nelson
+4 R Seluma, Light of Aysen @Greg Staples
+5 R Worzel, the Protector @Anna Steinbauer
+6 R Yume, Chronicler of Valor @Hendry Iwanaga
+7 R Dyfed, the Guiding Hand @Alix Branwyn
+8 R Flitwing, Lyev Detective @Dallas Williams
+9 R Grandmother Goby @DiTerlizzi
+10 R Gustha Ebbasdotter @Karl Kopinski
+11 R Sash and Waistcoat, Unmen @Filipe Pagliuso
 12 R Tolabow, Loch Rascal @Brian Valeza
+13 R Boss Uramon, Shadow's Reach @Daren Bader
+14 R Istvan, Butcher of Eln @Marius Bota
+15 R Kuroki, Thief of Talents @Adam Vehige
+16 R Miss Highwater @Marius Bota
+17 R Olinda the Oblivious @Justin Gerard
+18 R Sahir, Visitor in Darkness @Kai Carpenter
+19 R Thomil, the Destroyer @Heonhwa
+20 R Balefang the Unslayable @Even Amundsen
+21 R Chira, All In @Rudy Siswanto
+22 R Dragon's Smile @Justin Sweet
+23 R Jabs, Mistress of Mockery @Leanna Crossan
 24 R Joven and Chandler @Douglas Shuler
+25 R Matoc, Lavamancer @Filipe Pagliuso
+26 R The Unluckiest Planeswalker @Kieran Yanner
+27 R Autumn Willow, Harmony @Margaret Organ-Kean
+28 R Blor the Impervious @Kaitlyn McCulley
+29 R Glava, Five-Advents Mage @Zack Stella
+30 R Greensleeves @Yongjae Choi
+31 R Maular, the Next Evolution @Jesper Ejsing
+32 R Meatsqueak, Hoard Lord @Filipe Pagliuso
+33 R Arzakon @Alex Horley-Orlandelli
+34 R Ashaya's Enduring Bond @Anato Finnstark
+35 R Chief Magistrate of Mercadia @Paolo Parente
+36 R Davvol, Evincar of Rath @Jim Pavelec
+37 R Elda, Conjurer of Spectacle @Raluca Marinescu
+38 R Feroz, Ulgrotha's Warden @Andrey Kuzinskiy
+39 R Grizzlegom, Hurloon Hero @Mark Zug
+40 R Homer, the Hermit @Christina Kraus
+41 R Itazura, Lingering Wick @Room 8 Studio
+42 R Jandor, Fortuned Traveler @Justin Gerard
+43 R Lyna, Veil of Vengeance @Adam Rex
+44 R The Madcap Jester @Jesper Ejsing
+45 R Massimo, the Magician @Jodie Muir
+46 R The Muckslinger Gang @Andrew Mar
+47 R Nephilim Epochal @Simon Dominic
+48 R Olag and Miau, New Friends @Steve Argyle
+49 R Rikala, Homarid King @Christopher Burdett
+50 R Selenia, the Cursed Heart @Quinton Hoover
+51 R Sifa Grent @Alex Horley-Orlandelli
+52 R Tresserhorn's Lord, Returned @Helge C. Balzer
+53 R Tsagan, Raider Warlord @Brian Valeza
+54 R Uugguu, the Omniplasm @Franz Vohwinkel
+55 R Venser, Visionary Traveler @Cristi Balanescu
+56 R The Weaver King @Justin Sweet
+57 R Whtz, the Bibliophile @Leanna Crossan
+58 R Zagorka, Mother of Sanctum @Daren Bader
+59 R The Everforger @Chris Seaman
+60 R Valko Indorian @Paolo Parente
+61 U Ruby Collector @Cristi Balanescu
+62 U Case of the Lost Witness @Yeong-Hao Han
+63 U Emerald Collector @Andreas Zafiratos
+64 U Oracle of the Alpha @Nino Vecia
+65 U Pearl Collector @Andreas Zafiratos
+66 U Perforator Crocodile @Loïc Canavaggia
+67 U Overcooked @David Szabo
+68 U Sapphire Collector @Francis Tneh
+69 U Jet Collector @Francis Tneh
+70 U Euru, Acorn Scrounger @Dave Kendall
+71 U Dust to Dust @Doug Keith
+72 R Chaos Warp @Trevor Claxton
+73 R Chromatic Lantern @Jung Park
+74 U Fellwar Stone @John Avon
+75 U Jeweled Amulet @Dan Frazier
+76 U Mind Stone @Adam Rex
+77 U Swiftfoot Boots @Svetlin Velinov
+78 U Thought Vessel @rk post
+79 R Exotic Orchard @Ron Spears
+80 C Path of Ancestry @Alayna Danner

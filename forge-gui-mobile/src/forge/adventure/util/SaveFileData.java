@@ -185,7 +185,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             return objStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            Forge.delayedSwitchBack();
+            Forge.delayedSwitchBack("", "SaveFileData Error\nPress Resume on the Main Menu to try with missing " + key);
         } catch (ClassCastException e) { //this allows loading
             System.err.println("Encountered problem loading object: " + key);
         }

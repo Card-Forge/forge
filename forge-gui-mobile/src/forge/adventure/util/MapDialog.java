@@ -34,6 +34,7 @@ import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -59,12 +60,37 @@ public class MapDialog {
             "  }\n" +
             "]";
 
+    private static final HashMap<String, String> upperCaseMap = new HashMap<>(32);
+    private final ClickListener skipClickListener;
+    private final ChangeListener signalChangeListener;
+    private float volumeFade = 1.0f;
+    private int volumeFadeStepCount = 0;
 
     public MapDialog(String S, MapStage stage, int parentID) {
+        this(S, stage, parentID, null);
+    }
+
+    public MapDialog(String S, MapStage stage, int parentID, String sourceMapFile) {
         this.stage = stage;
         this.parentID = parentID;
+        this.signalChangeListener = null;
+        this.skipClickListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (event.getListenerActor() instanceof Dialog d) {
+                    for (Actor child : d.getContentTable().getChildren()) {
+                        if (child instanceof TypingLabel) {
+                            ((TypingLabel) child).skipToTheEnd();
+                            break;
+                        }
+                    }
+                }
+                super.clicked(event, x, y);
+            }
+        };
+
         try {
-            if (S.isEmpty()) {
+            if (S == null || S.isEmpty()) {
                 System.err.print("Dialog error. Dialog property is empty.\n");
                 this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
                 return;
@@ -72,15 +98,39 @@ public class MapDialog {
             this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
         } catch (Exception exception) {
             exception.printStackTrace();
-
         }
     }
 
     public MapDialog(DialogData prebuiltDialog, MapStage stage, int parentID, AdventureQuestData prebuiltQuestData) {
         this.stage = stage;
         this.parentID = parentID;
-        try
-        {
+        this.skipClickListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (event.getListenerActor() instanceof Dialog d) {
+                    for (Actor child : d.getContentTable().getChildren()) {
+                        if (child instanceof TypingLabel) {
+                            ((TypingLabel) child).skipToTheEnd();
+                            break;
+                        }
+                    }
+                }
+                super.clicked(event, x, y);
+            }
+        };
+
+        this.signalChangeListener = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (prebuiltQuestData != null && questAccepted != null && !questAccepted.isEmpty() && Integer.parseInt(questAccepted) == prebuiltQuestData.getID()) {
+                    Current.player().addQuest(prebuiltQuestData, false);
+                } else {
+                    Current.player().addQuest(questAccepted, false);
+                }
+            }
+        };
+
+        try {
             if (prebuiltDialog == null) {
                 System.err.print("Dialog error. Dialog provided is null.\n");
                 this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
@@ -88,21 +138,8 @@ public class MapDialog {
             }
             this.data = new Array<>();
             this.data.add(prebuiltDialog);
-            ChangeListener listen = new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent changeEvent, Actor actor) {
-                    if (prebuiltQuestData != null && Integer.parseInt(questAccepted) == prebuiltQuestData.getID()) {
-                        Current.player().addQuest(prebuiltQuestData, false);
-                    }
-                    else {
-                        Current.player().addQuest(questAccepted, false);
-                    }
-                }
-            };
-            addQuestAcceptedListener(listen);
-        }
-        catch (Exception exception)
-        {
+            addQuestAcceptedListener(signalChangeListener);
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
@@ -123,25 +160,30 @@ public class MapDialog {
     }
 
     void disposeAudio(boolean fadeout) {
-        if (fadeout) {
-            final float[] v = {1f};
-            for (int i = 10; i > 1; i--) {
-                float delay = i * 0.1f;
-                float j = i;
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        v[0] -= 0.1f;
-                        if (v[0] < 0.1f)
-                            v[0] = 0.1f;
-                        if (audio != null && j == 2) {
-                            unload();
-                        } else if (audio != null && j == 10) {
-                            audio.getRight().setVolume(v[0]);
-                        }
+        if (fadeout && audio != null) {
+            this.volumeFade = 1.0f;
+            this.volumeFadeStepCount = 10;
+
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    volumeFadeStepCount--;
+                    volumeFade -= 0.1f;
+                    if (volumeFade < 0.1f) {
+                        volumeFade = 0.1f;
                     }
-                }, delay);
-            }
+
+                    if (audio != null) {
+                        audio.getRight().setVolume(volumeFade);
+                        if (volumeFadeStepCount <= 0) {
+                            unload();
+                            this.cancel(); // Terminate the recurring timer safely
+                        }
+                    } else {
+                        this.cancel();
+                    }
+                }
+            }, 0.1f, 0.1f, 10);
         } else {
             unload();
         }
@@ -167,7 +209,7 @@ public class MapDialog {
         if (actor instanceof CharacterSprite)
             sprite = ((CharacterSprite) actor).getAvatar();
         String text; //Check for localized string (locname), otherwise print text.
-        if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
+        if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessageorUseDefault(dialog.loctext, dialog.text);
         else text = dialog.text;
         disposeAudio();
         if (dialog.voiceFile != null) {
@@ -228,7 +270,7 @@ public class MapDialog {
             for (DialogData option : dialog.options) {
                 if (isConditionOk(option.condition)) {
                     String name; //Get localized label if present.
-                    if (option.locname != null && !option.locname.isEmpty()) name = L.getMessage(option.locname);
+                    if (option.locname != null && !option.locname.isEmpty()) name = L.getMessageorUseDefault(option.locname, option.name);
                     else name = option.name;
                     TextraButton B;
                     if (option.isDisabled) {
@@ -247,13 +289,7 @@ public class MapDialog {
                     B.setDisabled(option.isDisabled);
                 }
             }
-            D.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    A.skipToTheEnd();
-                    super.clicked(event, x, y);
-                }
-            });
+            D.addListener(skipClickListener);
             if (i == 0) {
                 stage.hideDialog();
                 emitDialogFinished();
@@ -534,30 +570,33 @@ public class MapDialog {
     }
 
     private boolean checkFlagCondition(int flag, String condition, int value) {
-        switch (condition.toUpperCase()) {
-            default:
+        if (condition == null) return false;
+
+        String upperCondition = upperCaseMap.get(condition);
+        if (upperCondition == null) {
+            upperCondition = condition.toUpperCase();
+            upperCaseMap.put(condition, upperCondition);
+        }
+
+        switch (upperCondition) {
             case "EQUALS":
             case "EQUAL":
             case "=":
-                if (flag == value) return true;
-                break;
+                return flag == value;
             case "LESSTHAN":
             case "<":
-                if (flag < value) return true;
-                break;
+                return flag < value;
             case "MORETHAN":
             case ">":
-                if (flag > value) return true;
-                break;
+                return flag > value;
             case "LE_THAN":
             case "<=":
-                if (flag <= value) return true;
-                break;
+                return flag <= value;
             case "ME_THAN":
             case ">=":
-                if (flag >= value) return true;
-                break;
+                return flag >= value;
+            default:
+                return false;
         }
-        return false;
     }
 }

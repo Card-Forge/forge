@@ -1,0 +1,9 @@
+Name:Vraska's Final Mercy
+ManaCost:B B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBLoseLife1,DBLoseLife2
+SVar:DBLoseLife1:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDestroy | SpellDescription$ You lose 2 life. Destroy target creature or planeswalker.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker
+SVar:DBLoseLife2:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBEmpower | SpellDescription$ You lose 2 life. Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 6
+Oracle:Choose one —\n• You lose 2 life. Destroy target creature or planeswalker.\n• You lose 2 life. Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

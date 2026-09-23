@@ -31,8 +31,8 @@ public class SpellAbilityPicker {
     private Plan plan;
     private int numSimulations;
 
-    public SpellAbilityPicker(Game game, Player player) {
-        this.game = game;
+    public SpellAbilityPicker(Player player) {
+        this.game = player.getGame();
         this.player = player;
     }
 
@@ -176,17 +176,17 @@ public class SpellAbilityPicker {
             }
         }
 
-        // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
-        // check the score for the bestSA while counting summon sick creatures for 0.
+        // To make the AI hold off on plays that only add unavailable resources, check the score
+        // while excluding phased-out permanents and summon sick creatures before MAIN2.
         // Do it here on the best SA, rather than for all evaluations, so that if the best SA
         // is indeed a creature spell, we don't pick something else to play now and then have
         // no mana to play the truly best SA post-combat.
-        if (bestSa != null && bestSaValue.summonSickValue <= origGameScore.summonSickValue) {
+        if (bestSa != null && bestSaValue.availableValue <= origGameScore.availableValue) {
             bestSa = null;
         }
 
         long execTime = System.currentTimeMillis() - startTime;
-        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.summonSickValue + " TIME: " + execTime);
+        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.availableValue + " TIME: " + execTime);
         this.bestScore = bestSaValue;
         return bestSa;
     }

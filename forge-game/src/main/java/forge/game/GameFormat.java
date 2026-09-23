@@ -221,6 +221,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public List<PaperCard> getAllCards() {
+        StaticData.instance().ensureAllCardsLoaded();
         List<PaperCard> cards = new ArrayList<>();
         CardDb commonCards = StaticData.instance().getCommonCards();
         for (String setCode : allowedSetCodes_ro) {

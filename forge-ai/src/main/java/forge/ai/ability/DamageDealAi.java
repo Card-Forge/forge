@@ -254,11 +254,11 @@ public class DamageDealAi extends DamageAiBase {
 
         // test what happens if we chain this to another damaging spell
         if (chainDmg != null) {
-            int extraDmg = chainDmg.getValue();
-            boolean willTargetIfChained = damageTargetAI(ai, sa, dmg + extraDmg, false);
-            if (!willTargetIfChained) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed); // won't play it even in chain
-            } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
+            if (!damageTargetAI(ai, sa, dmg + chainDmg.getValue(), false)) {
+                // won't play it even in chain
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
                 // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
@@ -324,12 +324,11 @@ public class DamageDealAi extends DamageAiBase {
             final Player pl, final boolean mandatory) {
         // wait until stack is empty (prevents duplicate kills)
         if (!sa.isTrigger() && !ai.getGame().getStack().isEmpty()) {
-            //TODO:all removal APIs require a check to prevent duplicate kill/bounce/exile/etc.
-            //      The original code is a blunt instrument that also blocks all use of removal as interrupts. The issue is
-            //      with the AI not having code to consider what occurred previously in the stack thus it has no memory of
-            //      removing a target already if something else is placed on top of the stack. A better solution is to place
-            //      the checking mechanism after the target is chosen and determine if the topstack invalidates the earlier
-            //      removal (shroud effect, pump against damage) so a new removal can/should be applied if possible.
+            //TODO: The original code is a blunt instrument that also blocks all use of removal as interrupts.
+            //      Destroy, ChangeZone, DealDamage and Fight targeting skip creatures the stack already kills
+            //      (ComputerUtil.filterCreaturesThatWillDieThisTurn), but other removal APIs don't yet (e.g. curse
+            //      pumps, -1/-1 counters, gain control). Also missing: determine if something above the earlier removal
+            //      on the stack invalidates it (shroud effect, pump against damage) so a new removal can/should be applied.
             //return null;
         }
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -351,7 +350,7 @@ public class DamageDealAi extends DamageAiBase {
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
 
         // Try not to target anything which will already be dead by the time the spell resolves
-        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables, sa);
+        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
@@ -1027,7 +1026,7 @@ public class DamageDealAi extends DamageAiBase {
     public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
         if (!ai.getController().isAI()) {
             return null; // should only work for the actual AI player
-        } else if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
+        } else if (((PlayerControllerAi)ai.getController()).getAi().usesFullSimulation()) {
             // simulated AI shouldn't use paired decisions, it tries to find complex decisions on its own
             return null;
         }

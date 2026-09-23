@@ -1,0 +1,9 @@
+Name:Confusticate and Bebother
+ManaCost:2 U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBDraw | Defined$ You
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays {4}.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Choose one —\n• Counter target spell unless its controller pays {4}.\n• Draw two cards, then discard a card.

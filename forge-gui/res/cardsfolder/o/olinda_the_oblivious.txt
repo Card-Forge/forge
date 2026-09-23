@@ -1,0 +1,14 @@
+Name:Olinda the Oblivious
+ManaCost:3 B
+Types:Legendary Creature Skunk Rogue
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME enters or attacks, for each opponent, put an odor counter on up to one target creature that player controls without an odor counter on it. Each of those creatures has "At the beginning of your upkeep, you lose 2 life" for as long as it has an odor counter on it. (They continue to smell after NICKNAME has left the battlefield.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, for each opponent, put an odor counter on up to one target creature that player controls without an odor counter on it. Each of those creatures has "At the beginning of your upkeep, you lose 2 life" for as long as it has an odor counter on it. (They continue to smell after NICKNAME has left the battlefield.)
+SVar:TrigPutCounter:DB$ PutCounter | IsCurse$ True | ValidTgts$ Creature.OppCtrl+counters_EQ0_ODOR | ValidTgtsDesc$ creature without an odor counter on it | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | CounterType$ ODOR | CounterNum$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ OlindaStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ ODOR | Duration$ Permanent
+SVar:OlindaStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ OlindaOdorTrig | Description$ Each of those creatures has "At the beginning of your upkeep, you lose 2 life" for as long as it has an odor counter on it.
+SVar:OlindaOdorTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ OlindaOdorLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life
+SVar:OlindaOdorLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Olinda enters or attacks, for each opponent, put an odor counter on up to one target creature that player controls without an odor counter on it. Each of those creatures has "At the beginning of your upkeep, you lose 2 life" for as long as it has an odor counter on it. (They continue to smell after Olinda has left the battlefield.)

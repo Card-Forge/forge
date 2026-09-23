@@ -1,0 +1,8 @@
+Name:Null Summoner
+ManaCost:2 U B
+Types:Creature Human Warlock
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, if you cast it, target opponent reveals their hand. You choose a nonland card from it. Exile that card.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True
+S:Mode$ Continuous | Affected$ Card.nonLand+ExiledWithSource | MayPlay$ True | MayPlayIgnoreType$ True | AffectedZone$ Exile | Condition$ Threshold | Description$ Threshold — As long as there are seven or more cards in your graveyard, you may cast the exiled card, and mana of any type can be spent to cast that spell.
+Oracle:When this creature enters, if you cast it, target opponent reveals their hand. You choose a nonland card from it. Exile that card.\nThreshold — As long as there are seven or more cards in your graveyard, you may cast the exiled card, and mana of any type can be spent to cast that spell.

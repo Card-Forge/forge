@@ -13,9 +13,15 @@ import forge.game.spellability.SpellAbility;
 public class LearnEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
+    @Override
     protected String getStackDescription(SpellAbility sa) {
         return "Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)";
     }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();

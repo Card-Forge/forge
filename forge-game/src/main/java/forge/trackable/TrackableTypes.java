@@ -133,6 +133,7 @@ public class TrackableTypes {
     public static final TrackableType<Integer> IntegerType = new TrackableType<Integer>(0);
     public static final TrackableType<Float> FloatType = new TrackableType<Float>(0f);
     public static final TrackableType<String> StringType = new TrackableType<String>("");
+    public static final TrackableType<Object> ObjectType = new TrackableType<Object>(null);
 
     //make this quicker than having to define a new class for every single enum
     private static Map<Class<? extends Enum<?>>, TrackableType<?>> enumTypes = Maps.newHashMap();

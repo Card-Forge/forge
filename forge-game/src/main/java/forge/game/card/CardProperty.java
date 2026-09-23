@@ -20,6 +20,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityCantBeBeamedUp;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -959,7 +960,9 @@ public class CardProperty {
                 return false;
             }
 
-            if (!card.getZone().isCardAddedThisTurn(card, origin)) {
+            // an LKI copy has no current zone
+            final Zone zone = card.getLastKnownZone();
+            if (zone == null || !zone.isCardAddedThisTurn(card, origin)) {
                 return false;
             }
         } else if (property.startsWith("ThisTurnEntered")) {
@@ -1149,14 +1152,6 @@ public class CardProperty {
             if (card.getDamageHistory().getDamageDoneThisTurn(true, true, null, property.split(" ")[1], card, sourceController, spellAbility) == 0) {
                 return false;
             }
-        } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (source.getDamageHistory().getDamageDoneThisTurn(true, true, null, "You", card, controller, spellAbility) == 0) {
-                return false;
-            }
-        } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (source.getDamageHistory().getDamageDoneThisTurn(null, true, null, "You", card, controller, spellAbility) == 0) {
-                return false;
-            }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if (card.getAssignedDamage() == 0) {
                 return false;
@@ -1184,6 +1179,8 @@ public class CardProperty {
             }
         } else if (property.startsWith("dealtDamagetoAny")) {
             return card.getDamageHistory().getHasdealtDamagetoAny();
+        } else if (property.startsWith("dealtCombatDamagetoAny")) {
+            return card.getDamageHistory().getHasdealtCombatDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
                 return false;
@@ -1472,8 +1469,7 @@ public class CardProperty {
             if (!card.hasCounters()) {
                 return false;
             }
-        }
-        else if (property.startsWith("counters")) {
+        } else if (property.startsWith("counters")) {
             // syntax example: counters_GE9_P1P1 or counters_LT12_TIME
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
@@ -1874,6 +1870,10 @@ public class CardProperty {
             }
         } else if (property.equals("canBeTurnedFaceUp")) {
             if (!card.canBeTurnedFaceUp()) {
+                return false;
+            }
+        } else if (property.equals("canBeBeamedUp")) {
+            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card)) {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {

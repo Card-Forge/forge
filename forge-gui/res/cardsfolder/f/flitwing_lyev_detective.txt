@@ -1,0 +1,9 @@
+Name:Flitwing, Lyev Detective
+ManaCost:2 U
+Types:Legendary Creature Faerie Detective
+PT:1/1
+K:Flying
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Permanent.YouCtrl | ReplaceWith$ TokenReplace | Optional$ True | Description$ If you would create one or more tokens, you may create that many Clue tokens instead. (They're artifacts with "{2}, Sacrifice this token: Draw a card.")
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ c_a_clue_draw
+DeckNeeds:Ability$Token
+Oracle:Flying\nIf you would create one or more tokens, you may create that many Clue tokens instead. (They're artifacts with "{2}, Sacrifice this token: Draw a card.")

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.ImmutableList;
+import forge.Adventure;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -50,7 +51,8 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
-import forge.util.StreamUtil;
+import forge.util.Localizer;
+import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -85,7 +87,45 @@ public class DuelScene extends ForgeScene {
     FOptionPane bossDialogue;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
+    private static final HashMap<Integer, String> introKeysMap = new HashMap<>(64);
+    private static final HashMap<Integer, String> insultKeysMap = new HashMap<>(64);
+    private static final cardFDisplayObject cardDisplay = new cardFDisplayObject();
+    private static final enemyAvatarBufferedImage enemyAvatar = new enemyAvatarBufferedImage();
 
+    static {
+        for (int i = 1; i <= 44; i++) {
+            insultKeysMap.put(i, "AdvBossInsult" + i);
+        }
+        for (int i = 1; i <= 35; i++) {
+            introKeysMap.put(i, "AdvBossIntro" + i);
+        }
+    }
+
+    private static class cardFDisplayObject extends FDisplayObject {
+        private CardView cardView;
+        public void setCard(CardView card) { this.cardView = card; }
+        @Override public boolean tap(float x, float y, int count) { if (cardView != null) CardZoom.show(cardView); return true; }
+        @Override public boolean longPress(float x, float y) { if (cardView != null) CardZoom.show(cardView); return true; }
+        @Override
+        public void draw(Graphics g) {
+            if (cardView == null) return;
+            float h = getHeight();
+            float w = h / FCardPanel.ASPECT_RATIO;
+            float xPos = (getWidth() - w) / 2;
+            CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top, true);
+        }
+    }
+
+    private static class enemyAvatarBufferedImage extends FBufferedImage {
+        public enemyAvatarBufferedImage() { super(120, 120); }
+        @Override
+        protected void draw(Graphics g, float w, float h) {
+            TextureRegion region = FSkin.getAvatars().get(90001); // Read direct key pointer address
+            if (region != null) {
+                g.drawImage(region, 0, 0, w, h);
+            }
+        }
+    }
 
     private DuelScene() {
     }
@@ -175,13 +215,13 @@ public class DuelScene extends ForgeScene {
         if (isBossLoss) {
             afterAnte = () -> {
                 final FBufferedImage fb = getFBEnemyAvatar();
-                String bossInsultMsg = insult != null ? insult
-                        : Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44));
-                bossDialogue = createFOption(bossInsultMsg,
-                        enemyName, fb, () -> {
-                            exitChain.run();
-                            fb.dispose();
-                        });
+                int randomKey = Aggregates.randomInt(1, 44);
+                String lookupKey = insultKeysMap.get(randomKey);
+
+                String bossInsultMsg = insult != null ? insult : Forge.getLocalizer().getMessage(lookupKey);
+                bossDialogue = createFOption(bossInsultMsg, enemyName, fb, () -> {
+                    exitChain.run();
+                });
                 FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
             };
         } else {
@@ -216,7 +256,7 @@ public class DuelScene extends ForgeScene {
     }
 
     public void exitDuelScene() {
-        Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
+        Forge.setTransitionScreen(new TransitionScreen(endRunnable, ScreenUtil.getInstance().takeScreenshot(), false, false));
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
@@ -243,28 +283,11 @@ public class DuelScene extends ForgeScene {
     }
 
     private void showAnteCardPopup(String title, PaperCard card, boolean won, Runnable onDone) {
+        Localizer localizer = Forge.getLocalizer();
         CardView cardView = CardView.getCardForUi(card);
 
-        FDisplayObject cardDisplay = new FDisplayObject() {
-            @Override
-            public boolean tap(float x, float y, int count) {
-                CardZoom.show(cardView);
-                return true;
-            }
-            @Override
-            public boolean longPress(float x, float y) {
-                CardZoom.show(cardView);
-                return true;
-            }
-            @Override
-            public void draw(Graphics g) {
-                float h = getHeight();
-                float w = h / FCardPanel.ASPECT_RATIO;
-                float xPos = (getWidth() - w) / 2;
-                CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top, true);
-            }
-        };
-        cardDisplay.setHeight(Forge.getScreenHeight() / 3);
+        cardDisplay.setCard(cardView);
+        cardDisplay.setHeight(Forge.getScreenHeight() / 3f);
 
         int ownedCount = Current.player().getCollectionCards(true).count(card);
         String ownedInfo = won
@@ -272,13 +295,14 @@ public class DuelScene extends ForgeScene {
                 : (ownedCount > 0 ? " (Remaining: " + ownedCount + ")" : "");
         String message = card.getName() + ownedInfo;
         List<String> buttons;
+
         if (won && eventData == null) {
             int sellPrice = Current.player().cardSellPrice(card);
             buttons = sellPrice > 0
-                    ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), "Auto-Sell (" + sellPrice + " gold)")
-                    : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
+                    ? ImmutableList.of(localizer.getMessage("lblOK"), "Auto-Sell (" + sellPrice + " gold)")
+                    : ImmutableList.of(localizer.getMessage("lblOK"));
         } else {
-            buttons = ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
+            buttons = ImmutableList.of(localizer.getMessage("lblOK"));
         }
 
         FOptionPane popup = new FOptionPane(message, null, title, null, cardDisplay, buttons, 0, result -> {
@@ -321,6 +345,8 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
+        Adventure.getInstance().renderTransitionScreen = false;
+        Localizer localizer = Forge.getLocalizer();
         SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
         boolean isDeckMissing = false;
@@ -437,7 +463,8 @@ public class DuelScene extends ForgeScene {
             if (deck == null) {
                 isDeckMissing = true;
                 boolean canUseGeneticAI = Config.instance().getConfigData().enableGeneticAI;
-                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? (canUseGeneticAI ? "Genetic AI deck will be used." : "Player deck will be used.") : "Player deck will be used.");
+                isDeckMissingMsg = localizer.getMessage("advDeckMissingForEnemy", currentEnemy.getName())
+                        + (this.eventData == null ? (canUseGeneticAI ? localizer.getMessage("advGeneticAiDeckWillBeUsed") : localizer.getMessage("advPlayerDeckWillBeUsed")) : localizer.getMessage("advPlayerDeckWillBeUsed"));
                 System.err.println(isDeckMissingMsg);
                 deck = this.eventData == null && canUseGeneticAI ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
             }
@@ -519,15 +546,17 @@ public class DuelScene extends ForgeScene {
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
             String Intro = enemy.getBossIntro();
-            if (Intro != null){
-                bossDialogue = createFOption((Intro), enemy.getName(), fb, fb::dispose);
-                }
-                else {
-                bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
-                enemy.getName(), fb, fb::dispose);
-                }
+            if (Intro != null) {
+                bossDialogue = createFOption((Intro), enemy.getName(), fb, null);
+            } else {
+                int randomKey = Aggregates.randomInt(1, 35);
+                String lookupKey = introKeysMap.get(randomKey);
+
+                bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : localizer.getMessage(lookupKey),
+                        enemy.getName(), fb, null);
+            }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-            bossDialogue.show())), false, true);
+                    bossDialogue.show())), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }
@@ -573,6 +602,7 @@ public class DuelScene extends ForgeScene {
             //If they have a partner commander, it counts toward the 99.
             int commandExtras = Math.max(0, playerDeck.get(DeckSection.Commander).countAll() - 1);
             mainSize += commandExtras;
+            maxDeckSize = applyCommanderSizeRule(playerDeck.getCommanders(), maxDeckSize);
         }
 
         int excessCards = mainSize - maxDeckSize;
@@ -617,9 +647,37 @@ public class DuelScene extends ForgeScene {
     }
 
     private static List<PaperCard> getItemsToRemove(CardPool section, String cardName, int copies) {
-        return section.toFlatList().stream()
-                .filter(e -> e.getCardName().equals(cardName))
-                .collect(StreamUtil.random(copies));
+        List<PaperCard> matchedList = new ArrayList<>();
+        List<PaperCard> flatList = section.toFlatList();
+
+        for (int i = 0; i < flatList.size(); i++) {
+            PaperCard card = flatList.get(i);
+            if (card != null && card.getCardName().equals(cardName)) {
+                matchedList.add(card);
+            }
+        }
+
+        Collections.shuffle(matchedList);
+        if (matchedList.size() > copies) {
+            return matchedList.subList(0, copies);
+        }
+        return matchedList;
+    }
+
+    //Applies DeckRule:Size:AdjustMax$ from any commander that has one (e.g. Whtz, the Bibliophile).
+    private static int applyCommanderSizeRule(List<PaperCard> commanders, int maxDeckSize) {
+        for(PaperCard commander : commanders) {
+            for(DeckRule rule : DeckRule.parseAll(commander)) {
+                if(!(rule instanceof DeckRuleSize) || !rule.isActiveFor(DeckSection.Commander))
+                    continue;
+                DeckRuleSize sizeRule = (DeckRuleSize) rule;
+                if(sizeRule.removesMaxDeckSize())
+                    maxDeckSize = Integer.MAX_VALUE;
+                else if(maxDeckSize != Integer.MAX_VALUE)
+                    maxDeckSize += sizeRule.getMaxDelta();
+            }
+        }
+        return maxDeckSize;
     }
 
     private static void applyAdventureCommandZoneRules(Deck playerDeck, DeckFormat format) {
@@ -672,12 +730,20 @@ public class DuelScene extends ForgeScene {
         //4. Filter for color identity.
         byte cmdCI = 0;
         int wildColors = 0; //For Prismatic Piper and friends.
+        List<DeckRuleColorIdentity> ciRules = new ArrayList<>();
         for(PaperCard commander : playerDeck.getCommanders()) {
             cmdCI |= commander.getRules().getColorIdentity().getColor();
             wildColors += commander.getRules().getAddsWildCardColor() ? 1 : 0;
+            for(DeckRule rule : DeckRule.parseAll(commander)) {
+                if(rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander))
+                    ciRules.add((DeckRuleColorIdentity) rule);
+            }
         }
         for(Map.Entry<PaperCard, Integer> e : mainPool) {
             PaperCard card = e.getKey();
+            if(DeckFormat.allowsOffColorIdentity(ciRules, card.getRules())
+                    || DeckFormat.approvesAdditionalColor(ciRules, card.getRules(), cmdCI))
+                continue; //Exempted or covered by the commander's DeckRule:ColorIdentity.
             ColorSet missingColors = card.getRules().getColorIdentity().getMissingColors(cmdCI);
             if (missingColors.countColors() > 0) {
                 if (missingColors.countColors() <= wildColors) {
@@ -693,6 +759,12 @@ public class DuelScene extends ForgeScene {
     @Override
     public FScreen getScreen() {
         return MatchController.getView();
+    }
+
+    @Override
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
     }
 
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
@@ -732,12 +804,6 @@ public class DuelScene extends ForgeScene {
     }
 
     private FBufferedImage getFBEnemyAvatar() {
-        return new FBufferedImage(120, 120) {
-            @Override
-            protected void draw(Graphics g, float w, float h) {
-                if (FSkin.getAvatars().get(enemyAvatarKey) != null)
-                    g.drawImage(FSkin.getAvatars().get(enemyAvatarKey), 0, 0, w, h);
-            }
-        };
+        return enemyAvatar;
     }
 }

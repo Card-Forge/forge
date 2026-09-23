@@ -20,6 +20,7 @@ package forge.ai;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import forge.ai.ability.AnimateAi;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -50,10 +51,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -79,9 +78,6 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
-    private final int timeOut;
-    private final boolean canUseTimeout;
-    private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
      * <p>
@@ -99,8 +95,6 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -114,8 +108,6 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
@@ -382,10 +374,16 @@ public class AiAttackController {
             }
         }
         // reduce the search space
-        final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> !c.hasSVar("EndOfTurnLeavePlay")
-                && (c.toughnessAssignsDamage() || c.getNetCombatDamage() > 0 // performance shortcuts
-                || c.getNetCombatDamage() + ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) > 0)
-                && ComputerUtilCombat.canAttackNextTurn(c));
+        final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> {
+            if (c.hasSVar("EndOfTurnLeavePlay")) {
+                return false;
+            }
+            int dmg = c.getNetCombatDamage();
+            if (dmg <= 0 && ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) - dmg <= 0) {
+                return false;
+            }
+            return ComputerUtilCombat.canAttackNextTurn(c);
+        });
 
         // don't hold back creatures that can't block any of the human creatures
         final List<Card> blockers = getPossibleBlockers(potentialAttackers, opponentsAttackers, true);
@@ -859,7 +857,7 @@ public class AiAttackController {
         boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
@@ -882,9 +880,18 @@ public class AiAttackController {
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
+            ExecutorService executor = Executors.newFixedThreadPool(
+                Runtime.getRuntime().availableProcessors(), r -> {
+                    Thread t = Executors.defaultThreadFactory().newThread(r);
+                    t.setDaemon(true);
+                    return t;
+                }
+            );
+            List<Callable<Integer>> tasks = new ArrayList<>();
+
             for (final Card attacker : this.attackers) {
                 final GameEntity finalDefender = defender;
-                futures.add(CompletableFuture.supplyAsync(()-> {
+                tasks.add(() -> {
                     GameEntity mustAttackDef = null;
                     if (attacker.getSVar("MustAttack").equals("True")) {
                         mustAttackDef = finalDefender;
@@ -942,17 +949,17 @@ public class AiAttackController {
                         numForcedAttackers.incrementAndGet();
                     }
                     return 0;
-                }).exceptionally(ex -> {
-                    ex.printStackTrace();
-                    return 0;
-                }));
+                });
             }
-            CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            if (canUseTimeout)
-                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
-            else
-                CompletableFuture.allOf(futuresArray).join();
-            futures.clear();
+
+            try {
+                executor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            } finally {
+                executor.shutdownNow();
+            }
+
             if (attackersLeft.isEmpty()) {
                 return aiAggression;
             }
@@ -997,7 +1004,7 @@ public class AiAttackController {
         if (ai.getController().isAI()) {
             // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
             for (Card attacker : this.attackers) {
-                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.MANDATORY_ATTACKERS)) {
+                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                 }
@@ -1239,10 +1246,15 @@ public class AiAttackController {
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
                 && ai.getLife() > defendingOpponent.getLife()
                 && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
-                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
-                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)
+                // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
+                // otherwise we want mana open so we can bluff or use a trick
+                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0 || tradeIfTappedOut)
+                // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
+                // for the risk of walking into a trick
+                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
+                        || MyRandom.percentTrue(extraChanceIfOppHasMana))
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
-                defendingOpponent.getLifeLostThisTurn() + defendingOpponent.getLifeLostThisTurn()))) {
+                defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             aiAggression = 3; // attack expecting to make good trades or damage player.
@@ -1583,6 +1595,7 @@ public class AiAttackController {
                         sa = t.ensureAbility();
                         if (c.getController().isAI()) {
                             PlayerControllerAi aic = ((PlayerControllerAi) c.getController().getController());
+                            sa.setActivatingPlayer(c.getController());
                             if (!aic.getAi().doTrigger(sa, false)) {
                                 missTarget = true;
                                 break;
@@ -1726,8 +1739,6 @@ public class AiAttackController {
             i++;
             if (i + refPowerValue >= cre.getCurrentToughness()) {
                 attUnsafe.add(cre);
-            } else {
-                continue;
             }
         }
 
@@ -1735,40 +1746,85 @@ public class AiAttackController {
     }
 
     private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, Integer maxAttack) {
-        // TODO: detect Revenge of Ravens by the trigger instead of by name
-        boolean revengeOfRavens = false;
-        if (defender instanceof Player player) {
-            revengeOfRavens = !CardLists.filter(player.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
-        } else if (defender instanceof Card card) {
-            revengeOfRavens = !CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
-        }
-
-        if (!revengeOfRavens) {
+        int lifeLossPerAttacker = lifeLostPerAttacker(defender);
+        if (lifeLossPerAttacker <= 0) {
             return true;
         }
 
         int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
         maxAttack = Objects.requireNonNullElse(maxAttack, Integer.MAX_VALUE - 1);
-        if (Math.min(maxAttack, numForcedAttackers) >= life) {
+        if (lifeLossPerAttacker * Math.min(maxAttack, numForcedAttackers) >= life) {
             return false;
         }
 
-        // Remove all 1-power attackers since they usually only hurt the attacker
+        // Remove all attackers whose damage wouldn't outweigh the life we pay to send them
         // TODO: improve to account for possible combat effects coming from attackers like that
         CardCollection attUnsafe = new CardCollection();
         for (Card attacker : attackersLeft) {
-            if (attacker.getNetCombatDamage() <= 1) {
+            if (attacker.getNetCombatDamage() <= lifeLossPerAttacker) {
                 attUnsafe.add(attacker);
             }
         }
         attackersLeft.removeAll(attUnsafe);
-        if (Math.min(maxAttack, attackersLeft.size()) >= life) {
+        if (lifeLossPerAttacker * Math.min(maxAttack, attackersLeft.size()) >= life) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * How much life the AI loses for each creature it sends at this defender, from cards like
+     * Revenge of Ravens, Hissing Miasma, Blood Reckoning and Marchesa's Decree.
+     *
+     * Found by looking for the trigger rather than by card name: an Attacks trigger on the
+     * defending player's battlefield whose effect makes the attacking player lose life. Cards that
+     * punish the creature instead of its controller, such as Circle of Flame, deliberately do not
+     * count here, since the cost of attacking is paid by the creature and is already handled by the
+     * usual combat evaluation.
+     */
+    private static int lifeLostPerAttacker(final GameEntity defender) {
+        final Player defendingPlayer;
+        if (defender instanceof Player player) {
+            defendingPlayer = player;
+        } else if (defender instanceof Card card) {
+            defendingPlayer = card.getController();
+        } else {
+            return 0;
+        }
+
+        int total = 0;
+        for (Card c : defendingPlayer.getCardsIn(ZoneType.Battlefield)) {
+            for (Trigger t : c.getTriggers()) {
+                if (t.getMode() != TriggerType.Attacks || !t.hasParam("Attacked")) {
+                    continue;
+                }
+                if (!t.zonesCheck(c.getGame().getZoneOf(c))) {
+                    continue;
+                }
+                total += lifeLossFromTriggerEffect(t.ensureAbility());
+            }
+        }
+        return total;
+    }
+
+    /** Walks the trigger's ability chain looking for life loss aimed at the attacking player. */
+    private static int lifeLossFromTriggerEffect(SpellAbility sa) {
+        int total = 0;
+        for (SpellAbility part = sa; part != null; part = part.getSubAbility()) {
+            if (part.getApi() != ApiType.LoseLife
+                    || !"TriggeredAttackerController".equals(part.getParam("Defined"))) {
+                continue;
+            }
+            // only trust a plain number; anything computed could depend on state we can't evaluate
+            // here, and guessing it would make the AI refuse to attack for no reason
+            String amount = part.getParamOrDefault("LifeAmount", "1");
+            if (!StringUtils.isNumeric(amount)) {
+                continue;
+            }
+            total += Integer.parseInt(amount);
+        }
+        return total;
     }
 
     public final static int countExaltedBonus(Player p) {

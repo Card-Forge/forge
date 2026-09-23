@@ -675,6 +675,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public boolean looksBackInTime() {
+        // only contains the types that matter for performance
         switch (getMode()) {
             case Exploited:
             case Destroyed:

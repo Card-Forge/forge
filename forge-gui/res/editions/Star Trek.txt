@@ -6,21 +6,81 @@ Type=Expansion
 ScryfallCode=TRK
 
 [cards]
+1 U 70,000 Light-Years from Home @Ariel Orea
 5 U Brad Boimler, Eager Ensign @Andreas Zafiratos
+8 C Command Decision @Raymond Bonilla
+12 C DOT-7 Repair Squad @Colin Searle
 13 M Dr. Beverly Crusher @Mattia Rangoni
+15 C Emergency Medical Hologram @Kirk DouPonce
+17 C Federation Field Medic @Zoltan Boros
+19 C Free Borg Revolutionaries @Smirtouille
+22 C Malfunctioning Holodeck @Pablo Mendoza
+29 U Picard, Leading by Example @Julie Dillon
+33 U Saavik, Stoic Student @Mushk Rizvi
 34 C Set Phasers to . . . @Elizabeth Peiró
+35 C Shields Up! @Raymond Swanland
+36 C Shuttle Ace @Joan Piqué Llorens
+38 C Tactical Officer @Elizabeth Peiró
+50 C Cloistered Telepath @Monztre
 51 C Consider the Prime Directive @Zoltan Boros
+54 U Dominion Saboteur @Alex Negrea
+59 C Federation Probe @Racrufi
+60 C Guidance Failure @David Álvarez
 62 U Highly Illogical @Joel Chaim Holtzman
 64 U Hoshi Sato, Exolinguist @Jason Seiler
+65 C Humpback Whales @Evan Shipard
+72 C Marooned @Joel Chaim Holtzman
+76 C Open Communications @David Robert Hovey
+87 U V'Ger, the Intruder @Jessica Rossier
+92 C Assault Drone @Filipe Pagliuso
+93 C Automated Warfare System @Pierre Raveneau
+94 U Bat'leth @Tony Foti
+95 C Battle-Scarred Survivalist @John Di Giovanni
+97 C Cha'DIch Investigator @Javier Charro
+99 U Collective Drone @José Parodi
+105 C Eject the Warp Core @Pierre Raveneau
+109 R General Chang, Cold Warrior @Cliff Nielsen
+111 C A Good Day to Die @Monztre
+114 C He's Dead, Jim @Crystal Fae
+115 U Hive Mind Coprocessor @Andrey Kuzinskiy
 117 U In the Pale Moonlight @Charles Chaisson
+121 U Organic Avulsion Unit @Andrey Kuzinskiy
+124 C Relentless Drednok @Edouard
+125 U Resistance Is Futile @Matt Stewart
+126 C Rogue Artificial Intelligence @José Parodi
 127 R Salt Vampire @Bastien L. Deharme
 138 U Beckett Mariner, Impetuous Ensign @Lucas Durham
+141 C Cantankerous Captain @Edouard
 142 M Captain James T. Kirk @Jason Pastrana
+144 C Captain's Tutelage @Mark Spears
+152 C Horta @Arthur Haas
+154 U Khaaaaaaaaaaaannn! @Evan Shipard
+156 U La'An Noonien-Singh, Security @Pauline Voss
+158 U Munitions Enthusiast @Lucio Parrillo
+161 C Perils of the Past @Zoltan Boros
+163 C Planetary Patrol @Runa I. Rosenberger
+164 C Plasma Cascade @Narendra Bintara Adi
+168 C Reckless Impulse @Simon Dominic
+172 C Silicate Surveyor @Joan Piqué Llorens
 183 U Amok Time @Jason Raish
 187 M Captain Kathryn Janeway @Jason Pastrana
+189 C Cold-Blooded Crew @John Tyler Christopher
+190 C Common Goal @Ioannis Fiore
+192 C Dathon and Picard at El-Adrel @Bartek Fedyczak
+195 C Dominion Supervisor @Kevin Glint
+199 C First Contact @Kieran Yanner
+203 C I'm a Doctor, Not a . . . @Joel Chaim Holtzman
+207 C Moopsy @Brooklyn Smith
+208 U Mugato @Chuck Lukacs
+213 C Saurian Explorer @Bartek Fedyczak
+216 U Support Mission @Nadia Hurianova
+218 U Syndicate Liquidators @Carlos C Diaz
+224 C Xenobotanist @Marta Nael
+225 C Xindi Surveyors @Joan Piqué Llorens
 228 R The City on the Edge of Forever @Peter Diamond
 252 U Seven of Nine @Bastien L. Deharme
 261 M Crystalline Entity @David Álvarez
+262 C Cybernetic Specialist @Joan Piqué Llorens
 273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
 278 R Blood Crypt @Jonas De Ro
 279 R Breeding Pool @Cliff Nielsen
@@ -32,6 +92,16 @@ ScryfallCode=TRK
 299 R Stomping Ground @Arthur Haas
 301 R Temple Garden @Shahab Alizadeh
 306 R Watery Grave @Raymond Bonilla
+317 L Plains @Bastien Grivet
+318 L Plains @Leon Tukker
+319 L Island @Bastien Grivet
+320 L Island @Leon Tukker
+321 L Swamp @Bastien Grivet
+322 L Swamp @Leon Tukker
+323 L Mountain @Bastien Grivet
+324 L Mountain @Leon Tukker
+325 L Forest @Bastien Grivet
+326 L Forest @Leon Tukker
 340 M Captain Kathryn Janeway @Gal Or
 343 U Seven of Nine @Gal Or
 366 M Dr. Beverly Crusher @Anna Czeszejko
@@ -46,8 +116,11 @@ ScryfallCode=TRK
 399 R Overgrown Tomb @Sam Burley
 400 R Sacred Foundry @Eliz Roxs
 401 R Breeding Pool @Josu Solano
+415 R General Chang, Cold Warrior @Oliver Barrett
 417 R Salt Vampire @Simon Dominic
 418 M Captain James T. Kirk @Josh Newton
+427 R General Chang, Cold Warrior @Julia Vasilyeva
+437 R General Chang, Cold Warrior @Julia Vasilyeva
 478 M Crystalline Entity @David Álvarez
 481 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
 487 R Hallowed Fountain @Mark Poole
@@ -62,6 +135,7 @@ ScryfallCode=TRK
 496 R Breeding Pool @Josu Solano
 500 M Dr. Beverly Crusher @Anna Czeszejko
 520 M Captain Kathryn Janeway @Jurijus Chitrovas
+539 R General Chang, Cold Warrior @Oliver Barrett
 541 R Salt Vampire @Simon Dominic
 542 M Captain James T. Kirk @Josh Newton
 557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura

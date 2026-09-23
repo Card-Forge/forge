@@ -699,11 +699,11 @@ public class GameAction {
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
             // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "All");
-            SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
             eff.getOwner().getZone(ZoneType.Command).add(eff);
         }
 
         eff.addRemembered(copied);
+        copied.addLeavesPlayCommand(() -> cleanStaticEffect(eff, copied));
         // refresh needed for canEnchant checks
         checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
         return eff;
@@ -1994,7 +1994,7 @@ public class GameAction {
         boolean recheck = false;
 
         for (Card c : list) {
-            if (c.getCounters(CounterEnumType.LOYALTY) <= 0) {
+            if (c.getCounters(CounterEnumType.LOYALTY) <= 0 && !c.ignorePlaneswalkerZeroLoyaltyRule()) {
                 noRegCreats.add(c);
                 recheck = true;
             }
@@ -2654,6 +2654,7 @@ public class GameAction {
                 runParams.put(AbilityKey.ScryBottom, toBottom == null ? 0 : toBottom.size());
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
+            p.incScryThisTurn();
         }
     }
 

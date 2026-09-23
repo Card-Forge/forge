@@ -18,11 +18,17 @@
 package forge.itemmanager;
 
 import com.google.common.collect.Lists;
+import forge.StaticData;
+import forge.card.CardEdition;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
+import forge.gui.download.CdnUuidCache;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
@@ -998,7 +1004,35 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     protected Iterable<Entry<T, Integer>> getUnique(final Iterable<Entry<T, Integer>> items) {
-        return Aggregates.uniqueByLast(items, from -> from.getKey().getName());
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)) {
+            return Aggregates.uniqueByLast(items, from -> from.getKey().getName());
+        }
+        final String preferredLang = FModel.getPreferences().getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        if (preferredLang == null || preferredLang.isEmpty() || "en".equalsIgnoreCase(preferredLang)) {
+            return Aggregates.uniqueByLast(items, from -> from.getKey().getName());
+        }
+
+        final Map<String, Entry<T, Integer>> uniques = new LinkedHashMap<>();
+        for (final Entry<T, Integer> entry : items) {
+            final String key = entry.getKey().getName();
+            final Entry<T, Integer> existing = uniques.get(key);
+            if (existing == null || isPreferredLanguagePrint(entry.getKey(), preferredLang)) {
+                uniques.put(key, entry);
+            }
+        }
+        return uniques.values();
+    }
+
+    private boolean isPreferredLanguagePrint(final T item, final String preferredLang) {
+        if (!(item instanceof IPaperCard)) {
+            return false;
+        }
+        final IPaperCard card = (IPaperCard) item;
+        final CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+        if (edition == null) {
+            return false;
+        }
+        return CdnUuidCache.isAvailableInLanguage(edition.getScryfallCode(), card.getCollectorNumber(), preferredLang);
     }
 
     /**

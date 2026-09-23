@@ -1,0 +1,14 @@
+Name:Selenia, the Cursed Heart
+ManaCost:4 W B
+Types:Legendary Creature Human Angel Warrior
+PT:2/5
+K:Flying
+K:Lifelink
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | AILogic$ DoubleLife | Description$ If you would gain life, you gain twice that much life instead.
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME dies, create a legendary black Aura Curse enchantment token named Selenia's Curse attached to target opponent. The token has enchant player and "If enchanted player would lose life, they lose twice that much life instead."
+SVar:TrigToken:DB$ Token | TokenScript$ selenias_curse | TokenOwner$ You | ValidTgts$ Opponent | AttachedTo$ Targeted
+SVar:X:ReplaceCount$LifeGained/Twice
+SVar:PlayMain1:TRUE
+DeckHints:Ability$LifeGain
+Oracle:Flying, lifelink\nIf you would gain life, you gain twice that much life instead.\nWhen Selenia dies, create a legendary black Aura Curse enchantment token named Selenia's Curse attached to target opponent. The token has enchant player and "If enchanted player would lose life, they lose twice that much life instead."

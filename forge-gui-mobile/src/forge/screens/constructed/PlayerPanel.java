@@ -475,8 +475,7 @@ public class PlayerPanel extends FContainer {
             if (allowNetworking) {
                 if (isOpenAiSlotToggle()) {
                     LobbySlotType newType = toggled ? LobbySlotType.AI : LobbySlotType.OPEN;
-                    boolean wasAi = isAi();
-                    type = newType;
+                    setType(newType);
 
                     LobbySlot slot = screen.getLobby().getSlot(index);
                     slot.setType(newType);
@@ -487,12 +486,7 @@ public class PlayerPanel extends FContainer {
 
                     screen.update(index, newType);
 
-                    if (isAi() != wasAi) {
-                        onIsAiChanged(isAi());
-                    }
-
                     setMayEdit(screen.getLobby().mayEdit(index));
-                    refreshSlotToggle();
                     screen.firePlayerChangeListener(index);
                 } else {
                     setIsReady(toggled);
@@ -677,7 +671,7 @@ public class PlayerPanel extends FContainer {
         if (artKey != null && !artKey.isEmpty()) {
             setSleeveArtKey(artKey);
             sleeveArtOffset = artOffset;
-            sleeveLabel.setIcon(new CardSleeveImage(artKey, artOffset));
+            refreshSleeveIcon();
         }
     }
 
@@ -876,9 +870,19 @@ public class PlayerPanel extends FContainer {
         cbTeam.setEnabled(mayEdit);
     }
 
+    // FComboBox fires its changed handler for programmatic selection too, so without these guards
+    // every network lobby update that changes a team re-enters this handler on panels the local user
+    // does not own. The wire listener drops the panel index and the server applies updates to the
+    // sender's own slot, so such an echo rewrites the SENDER's team — clients end up stomping their
+    // own seats with other players' choices until the whole lobby converges onto one team.
+    private boolean applyingTeamFromNetwork;
+
     private FEventHandler teamChangedHandler = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
+            if (applyingTeamFromNetwork || !mayEdit) {
+                return; //programmatic sync, or a panel this client may not speak for
+            }
             @SuppressWarnings("unchecked")
             FComboBox<Object> cb = (FComboBox<Object>)e.getSource();
             if (cb.getSelectedIndex() == -1) {
@@ -977,14 +981,11 @@ public class PlayerPanel extends FContainer {
         if (artKey != null && !artKey.isEmpty()) {
             sleeveArtKey = artKey;
             sleeveArtOffset = deck.getSleeveArtOffset();
-            sleeveLabel.setIcon(new CardSleeveImage(artKey, sleeveArtOffset));
         } else {
             sleeveArtKey = "";
             sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
-            if (sleeveIndex != -1) {
-                sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(sleeveIndex)));
-            }
         }
+        refreshSleeveIcon();
     }
 
     // Writes the chosen sleeve onto the currently selected deck and saves it (no-op for read-only decks)
@@ -1007,23 +1008,32 @@ public class PlayerPanel extends FContainer {
 
     public void setAvatarIndex(int newAvatarIndex) {
         avatarIndex = newAvatarIndex;
-        if (avatarIndex != -1) {
-            avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(newAvatarIndex)));
-        }
-        else {
-            avatarLabel.setIcon(null);
-        }
+        refreshAvatarIcon();
     }
 
     public void setSleeveIndex(int newSleeveIndex) {
         sleeveIndex = newSleeveIndex;
         sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
         sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
-        if (sleeveIndex != -1) {
-            sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(newSleeveIndex)));
+        refreshSleeveIcon();
+    }
+
+    // An open seat renders no art, though it still holds indices for whoever takes it
+    private void refreshAvatarIcon() {
+        avatarLabel.setIcon(type == LobbySlotType.OPEN || avatarIndex == -1
+                ? null : new FTextureRegionImage(FSkin.getAvatars().get(avatarIndex)));
+    }
+
+    private void refreshSleeveIcon() {
+        if (type == LobbySlotType.OPEN) {
+            sleeveLabel.setIcon(null);
+        }
+        else if (!sleeveArtKey.isEmpty()) {
+            sleeveLabel.setIcon(new CardSleeveImage(sleeveArtKey, sleeveArtOffset));
         }
         else {
-            sleeveLabel.setIcon(null);
+            sleeveLabel.setIcon(sleeveIndex == -1
+                    ? null : new FTextureRegionImage(FSkin.getSleeves().get(sleeveIndex)));
         }
     }
 
@@ -1040,6 +1050,9 @@ public class PlayerPanel extends FContainer {
     }
 
     public void setPlayerName(String string) {
+        if (txtPlayerName.isEditing()) {
+            return; //don't clobber (and cursor-reset) a name mid-typing; the commit re-syncs it
+        }
         txtPlayerName.setText(string);
     }
 
@@ -1074,6 +1087,8 @@ public class PlayerPanel extends FContainer {
         }
 
         refreshSlotToggle();
+        refreshAvatarIcon();
+        refreshSleeveIcon();
 
         boolean isAi = isAi();
         if (isAi != wasAi && deckChooser != null) {
@@ -1083,7 +1098,7 @@ public class PlayerPanel extends FContainer {
 
     public Set<AIOption> getAiOptions() {
         return isSimulatedAi()
-                ? ImmutableSet.of(AIOption.USE_SIMULATION)
+                ? ImmutableSet.of(AIOption.USE_FULL_SIMULATION)
                 : Collections.emptySet();
     }
     private boolean isSimulatedAi() {
@@ -1094,17 +1109,29 @@ public class PlayerPanel extends FContainer {
     }
 
     public int getTeam() {
-        return cbTeam.getSelectedIndex();
+        return screen.hasVariant(GameType.Archenemy)
+                ? cbArchenemyTeam.getSelectedIndex()
+                : cbTeam.getSelectedIndex();
     }
     public void setTeam(int team0) {
-        cbTeam.setSelectedIndex(team0);
+        applyingTeamFromNetwork = true;
+        try {
+            cbTeam.setSelectedIndex(team0);
+        } finally {
+            applyingTeamFromNetwork = false;
+        }
     }
 
     public int getArchenemyTeam() {
         return cbTeam.getSelectedIndex();
     }
     public void setArchenemyTeam(int team0) {
-        cbTeam.setSelectedIndex(team0);
+        applyingTeamFromNetwork = true;
+        try {
+            cbTeam.setSelectedIndex(team0);
+        } finally {
+            applyingTeamFromNetwork = false;
+        }
     }
 
     public boolean isReady() {

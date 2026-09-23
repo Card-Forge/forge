@@ -9,3 +9,340 @@ ScryfallCode=FDC
 1 U Arcane Signet @Dan Murayama Scott
 2 U Sol Ring @Mike Bierek
 3 C Command Tower @Ryan Yee
+4 M Giada, Font of Hope @Johannes Voss
+5 M Sai, Master Thopterist @Bryan Sola
+6 M Ghoulcaller Gisa @Miguel Mercado
+7 M Lathliss, Dragon Queen @Zoltan Boros
+8 M Ghalta, Primal Hunger @Raph Lomotan
+9 R All Is Dust @Jason Felix
+10 R Always Watching @Chase Stone
+11 U Angel of Finality @Howard Lyon
+12 R Angel of the Ruins @Viko Menezes
+13 U Angel of Vitality @Johannes Voss
+14 M Angelic Destiny @Jana Schirmer & Johannes Voss
+15 R Angelic Field Marshal @Scott Murphy
+16 R Angelic Sleuth @Marc Simonetti
+17 M Archangel of Tithes @Cynthia Sheppard
+18 R Austere Command @Anna Steinbauer
+19 R Bishop of Wings @Matt Stewart
+20 R Cleansing Nova @Marta Nael
+21 R Court of Grace @Denman Rooke
+22 U Cut a Deal @Olena Richards
+23 R Day of Judgment @Vincent Proce
+24 C Dazzling Angel @Daneen Wilkerson
+25 U Defy Death @Karl Kopinski
+26 C Destroy Evil @Anna Christenson
+27 R Emeria Shepherd @Cynthia Sheppard
+28 R Exemplar of Light @Ekaterina Burmak
+29 U Exorcise @Dominik Mayer
+30 R Fateful Absence @Eric Deschamps
+31 R Firemane Commando @Andrew Mar
+32 R Grasp of Fate @Lie Setiawan
+33 M Herald of Eternal Dawn @Martina Fačková
+34 R Herald of War @Eric Deschamps
+35 C Inspiring Overseer @Irina Nordsol
+36 C Invoke the Divine @Campbell White
+37 R Linvala, the Preserver @Magali Villeneuve
+38 M Lyra Dawnbringer @Chris Rahn
+39 R Merchant of Truth @Carissa Susilo
+40 R Metropolis Reformer @Ryan Pancoast
+41 R Norn's Choirmaster @Jason A. Engle
+42 R Reya Dawnbringer @Matthew D. Wilson
+43 R Righteous Valkyrie @Chris Rahn
+44 R Search the Premises @Matt Stewart
+45 U Secret Rendezvous @Manuel Castañón
+46 C Segovian Angel @Simon Dominic
+47 R Sephara, Sky's Blade @Livia Prima
+48 R Seraph of the Sword @Jaime Jones
+49 R Serra Avenger @Scott M. Fischer
+50 R Speaker of the Heavens @Randy Vargas
+51 U Starnheim Aspirant @Kieran Yanner
+52 R Sunblast Angel @Jason Chan
+53 U Swords to Plowshares @Jesper Ejsing
+54 U Thraben Watcher @Bastien L. Deharme
+55 U Valorous Stance @Anato Finnstark
+56 C Vanguard Seraph @Zezhou Chen
+57 R Wojek Investigator @Ben Hill
+58 U Youthful Valkyrie @Anna Steinbauer
+59 U Aetherize @Alexandre Honoré
+60 R Broodstar @Glen Angus
+61 U Counterspell @Zack Stella
+62 C Etherium Sculptor @Steven Belledin
+63 C Fall from Favor @Caio Monteiro
+64 R Kappa Cannoneer @Jesper Ejsing
+65 U Launch Mishap @Kim Sokol
+66 R Master of Etherium @Matt Cavotta
+67 R Master Transmuter @Chippy
+68 U Memory Guardian @Hardy Fowler
+69 R Misleading Signpost @Julian Kok Joon Wen
+70 C Negate @Magali Villeneuve
+71 U Padeem, Consul of Innovation @Matt Stewart
+72 U Propaganda @Clint Cearley
+73 R Pull from Tomorrow @Sara Winters
+74 R Research Thief @Cristi Balanescu
+75 R Shimmer Dragon @Lie Setiawan
+76 U Tamiyo's Logbook @Piotr Dura
+77 U Thirst for Knowledge @Andrea Piparo
+78 R Thopter Fabricator @Racrufi
+79 R Thopter Spy Network @Jung Park
+80 R Thought Monitor @Martina Pilcerova
+81 C Thoughtcast @Greg Hildebrandt
+82 R Vedalken Archmage @Kev Walker
+83 U Whirler Rogue @Winona Nelson
+84 U Ambition's Cost @Zezhou Chen
+85 M Army of the Damned @Ryan Pancoast
+86 R Ayara, First of Locthwain @Ryan Pancoast
+87 R Bad Moon @Gary Leach
+88 U Carrion Feeder @Svetlin Velinov
+89 R Cemetery Reaper @Dave Allsop
+90 C Cemetery Recruitment @Kieran Yanner
+91 R Champion of the Perished @Kekai Kotaki
+92 U Consumed by Greed @Mathias Kollros
+93 U Consuming Corruption @Andrew Theophilopoulos
+94 R Cryptbreaker @Darek Zabrocki
+95 R Death Baron @Nils Hamm
+96 R Diregraf Colossus @Vincent Proce
+97 R Endless Ranks of the Dead @Ryan Yee
+98 U Eternal Taskmaster @Chris Seaman
+99 U Fleshbag Marauder @Mark Zug
+100 U Go for the Throat @David Rapoza
+101 M God-Eternal Bontu @Lius Lasahido
+102 M Grave Titan @Nils Hamm
+103 R Graveborn Muse @Kev Walker
+104 R Gravecrawler @Steven Belledin
+105 U Gray Merchant of Asphodel @Robbie Trevino
+106 R Headless Rider @E. M. Gist
+107 R Josu Vess, Lich Knight @Tyler Jacobson
+108 M Kalitas, Traitor of Ghet @Todd Lockwood
+109 R Liliana's Mastery @Kieran Yanner
+110 R Liliana's Reaver @Karl Kopinski
+111 U Lord of the Accursed @Grzegorz Rutkowski
+112 R Lord of the Undead @Brom
+113 U Marchesa's Decree @Chris Rallis
+114 R Midnight Reaper @Sidharth Chaturvedi
+115 U Mire Triton @Seb McKinnon
+116 C Moan of the Unhallowed @Nils Hamm
+117 R Mutilate @Zoltan Boros & Gabor Szikszai
+118 R Necrotic Hex @Nils Hamm
+119 C Night's Whisper @John Severin Brassell
+120 U Noxious Ghoul @Luca Zontini
+121 R Open the Graves @Vincent Proce
+122 R Oversold Cemetery @Thomas M. Baxa
+123 R Phyrexian Arena @Svetlin Velinov
+124 R Razorlash Transmogrant @Kekai Kotaki
+125 C Sign in Blood @Howard Lyon
+126 U Soulless One @Thomas M. Baxa
+127 U Syphon Flesh @Ironbrush
+128 C Tendrils of Corruption @Mike Dringenberg
+129 U Undead Augur @Sara Winters
+130 U Undead Butler @Néstor Ossandón Leal
+131 U Undead Warchief @Greg Hildebrandt
+132 C Vengeful Dead @Alex Horley-Orlandelli
+133 C Wight of Precinct Six @Ryan Barger
+134 U Withering Torment @Inkognit
+135 R Zul Ashur, Lich Lord @Raluca Marinescu
+136 C Abrade @Bartek Fedyczak
+137 U Anger @Svetlin Velinov
+138 M Atsushi, the Blazing Sky @Victor Adame Minguez
+139 C Bitter Reunion @Jake Murray
+140 R Blasphemous Act @Daarken
+141 U Breaching Dragonstorm @Danny Schwartz
+142 C Breath Weapon @Cliff Childs
+143 C Carnelian Orb of Dragonkind @Lars Grant-West
+144 R Chain Reaction @Maxime Minard
+145 R Chandra's Ignition @Eric Deschamps
+146 R Chaos Warp @Trevor Claxton
+147 R Count on Luck @Michal Ivan
+148 R Crucible of Fire @Dominick Domingo
+149 R Cursed Mirror @David Gaillet
+150 R Dragon Tempest @Willian Murai
+151 M Dragonhawk, Fate's Tempest @Victor Adame Minguez
+152 U Dragonlord's Servant @Steve Prescott
+153 M Dragonmaster Outcast @Raymond Swanland
+154 U Dragonspeaker Shaman @Kev Walker
+155 R Drakuseth, Maw of Flames @Grzegorz Rutkowski
+156 R The Elder Dragon War @Filip Burburan
+157 U Firespitter Whelp @David Álvarez
+158 R Goddric, Cloaked Reveler @Jason A. Engle
+159 R Goldlust Triad @Arif Wijaya
+160 R Hellkite Charger @Jaime Jones
+161 R Hit the Mother Lode @Diego Gisbert
+162 M Leyline Tyrant @Chase Stone
+163 U Lightning Bolt @Christopher Moeller
+164 R Magmaquake @Gabor Szikszai
+165 C Mana Geyser @Martina Pilcerova
+166 R Minion of the Mighty @Oriana Menendez
+167 M Nogi, Draco-Zealot @Dmitry Burmak
+168 R Orb of Dragonkind @Brian Valeza
+169 R Outpost Siege @Daarken
+170 R Parapet Thrasher @Cristi Balanescu
+171 C Rapacious Dragon @Johan Grenier
+172 R Sarkhan, Dragon Ascendant @Billy Christian
+173 M Scourge of the Throne @Michael Komarck
+174 R Scourge of Valkas @Lucas Graciano
+175 M Shivan Devastator @Brent Hollowell
+176 U Skyline Despot @Lucas Graciano
+177 R Spit Flame @Chris Rahn
+178 R Taurean Mauler @Dominick Domingo
+179 R Terror of Mount Velus @Billy Christian
+180 C Thrill of Possibility @Steve Argyle
+181 R Thunderbreak Regent @Ryan Pancoast
+182 R Thundermane Dragon @Slawomir Maniak
+183 R Tyrant's Familiar @Todd Lockwood
+184 C Unexpected Windfall @Lorenzo Mastroianni
+185 M Utvara Hellkite @Mark Zug
+186 R Warstorm Surge @Raymond Swanland
+187 R Arachnogenesis @Johannes Voss
+188 R Arasta of the Endless Web @Sam Rowan
+189 R Beast Whisperer @Matt Stewart
+190 U Beast Within @Jesper Ejsing
+191 R Birds of Paradise @Marcelo Vignali
+192 C Bite Down @Kitt Lapeña
+193 M Carnage Tyrant @Yeong-Hao Han
+194 U Challenger Troll @Svetlin Velinov
+195 U Clifftop Lookout @John Thacker
+196 U Collective Resistance @Raoul Vitale
+197 U Colossal Majesty @Randy Vargas
+198 R Curious Altisaur @Simon Dominic
+199 R Dungrove Elder @Matt Stewart
+200 M Elder Gargaroth @Nicholas Gregory
+201 U Elemental Bond @David Gaillet
+202 C Elvish Mystic @Wesley Burt
+203 R Ezuri's Predation @Uriah Voth
+204 C Fyndhorn Elves @Igor Kieryluk
+205 U Garruk's Packleader @Nils Hamm
+206 U Garruk's Uprising @Wisnu Tan
+207 R Gigantosaurus @Jonathan Kuo
+208 U Goreclaw, Terror of Qal Sisma @Svetlin Velinov
+209 U Harmonize @Dan Murayama Scott
+210 R Hulking Raptor @Néstor Ossandón Leal
+211 C Ilysian Caryatid @Winona Nelson
+212 U Kenrith's Transformation @Kimonas Theodossiou
+213 C Llanowar Elves @Eric Wilkerson
+214 U Llanowar Tribe @Scott Murphy
+215 R Loot, Exuberant Explorer @Arif Wijaya
+216 R Managorger Hydra @Lucas Graciano
+217 U Monstrous Onslaught @Slawomir Maniak
+218 R Overwhelming Stampede @Steven Belledin
+219 U Paradise Druid @Nils Hamm
+220 R Pugnacious Hammerskull @Kev Walker
+221 C Ram Through @Zoltan Boros
+222 R Regal Imperiosaur @Stephanie Cheung
+223 M Rhonas the Indomitable @Chase Stone
+224 R Ripjaw Raptor @Ryan Pancoast
+225 U Rishkar, Peema Renegade @Todd Lockwood
+226 R Rishkar's Expertise @Magali Villeneuve
+227 R Scavenging Ooze @Austin Hsu
+228 R Scrapshooter @Chris Rahn
+229 R Shamanic Revelation @Cynthia Sheppard
+230 R Steel Leaf Champion @Chris Rahn
+231 R Surrak and Goreclaw @Lucas Graciano
+232 R Surrak, the Hunt Caller @Wesley Burt
+233 C Tamiyo's Safekeeping @Aurore Folny
+234 R Tangleweave Armor @Johann Bodin
+235 U Terrian, World Tyrant @Nicholas Gregory
+236 R Thickest in the Thicket @Michele Giorgi
+237 U Thrashing Brontodon @Randy Vargas
+238 R Unnatural Growth @Svetlin Velinov
+239 R Verdant Sun's Avatar @Izzy
+240 R Whiptongue Hydra @Izzy
+241 C Whisperer of the Wilds @David Gaillet
+242 R Yeva, Nature's Herald @Eric Deschamps
+243 R Adaptive Omnitool @Adrián Rodríguez Pérez
+244 C Aether Spellbomb @Jim Nelson
+245 U Arcane Signet @Dan Murayama Scott
+246 R Basilisk Collar @Craig J Spearing
+247 U Bontu's Monument @Jonas De Ro
+248 C Charcoal Diamond @Lindsey Look
+249 U Chief of the Foundry @Daniel Ljunggren
+250 C Commander's Sphere @Ryan Alexander Lee
+251 R Cultivator's Caravan @Mark Zug
+252 R Darksteel Juggernaut @Randis Albion
+253 R Dragon's Hoard @Adam Paquette
+254 C Dragonstorm Globe @Adrián Rodríguez Pérez
+255 R Duplicant @Thomas M. Baxa
+256 R Endless Atlas @Titus Lunter
+257 C Fire Diamond @Lindsey Look
+258 M Forsaken Monument @Piotr Dura
+259 U Foundry Inspector @Jason A. Engle
+260 R Graaz, Unstoppable Juggernaut @Néstor Ossandón Leal
+261 U Hazoret's Monument @Richard Wright
+262 U Hedron Archive @Craig J Spearing
+263 U Heraldic Banner @Ravenna Tran
+264 U Herald's Horn @Jason Felix
+265 C Ichor Wellspring @Steven Belledin
+266 C Infernal Idol @Drew Tucker
+267 C Marble Diamond @Lindsey Look
+268 R Mazemind Tome @Randy Gallegos
+269 R Metallic Mimic @Zack Stella
+270 U Meteor Golem @Lake Hurwitz
+271 U Mind Stone @Adam Rex
+272 R Mind's Eye @Karl Kopinski
+273 R Myr Battlesphere @Franz Vohwinkel
+274 U Myr Retriever @Trevor Hairsine
+275 R Nettlecyst @Vincent Proce
+276 R Nevinyrral's Disk @Steve Argyle
+277 C Ornithopter of Paradise @Raoul Vitale
+278 U Palladium Myr @Alan Pollack
+279 U Patchwork Banner @Sarah Finnigan
+280 R Psychosis Crawler @Stephan Martiniere
+281 U Rhonas's Monument @Cliff Childs
+282 R Scrawling Crawler @Miro Petrov
+283 U Shimmer Myr @Jana Schirmer & Johannes Voss
+284 C Silver Myr @Alan Pollack
+285 M Skysovereign, Consul Flagship @Jung Park
+286 U Sol Ring @Mike Bierek
+287 U Soul-Guide Lantern @Iris Compiet
+288 C Spire Golem @Daren Bader
+289 R Steel Hellkite @James Paick
+290 R Steel Overseer @Chris Rahn
+291 U Swiftfoot Boots @Svetlin Velinov
+292 U Thought Vessel @rk post
+293 R Tome of Legends @Mila Pesic
+294 R Vanquisher's Banner @Milivoj Ćeran
+295 U Barren Moor @Heather Hudson
+296 C Bojuka Bog @Howard Lyon
+297 R Bonders' Enclave @Cliff Childs
+298 U Buried Ruin @Franz Vohwinkel
+299 R Castle Locthwain @Titus Lunter
+300 U Darksteel Citadel @John Avon
+301 U Forgotten Cave @Wayne Wu
+302 U Foundry of the Consuls @Sam Burley
+303 R Geier Reach Sanitarium @Cliff Childs
+304 R Haven of the Spirit Dragon @Raymond Swanland
+305 U Lonely Sandbar @Heather Hudson
+306 U Memorial to Folly @Sung Choi
+307 R Mosswort Bridge @Jeremy Jarvis
+308 C Radiant Fountain @Adam Paquette
+309 C Remote Isle @Ciruelo
+310 U Rogue's Passage @Christine Choi
+311 R Scavenger Grounds @Steven Belledin
+312 U Secluded Steppe @Heather Hudson
+313 C Seraph Sanctuary @David Palumbo
+314 R Spinerock Knoll @Steve Prescott
+315 U Temple of the False God @Brian Snõddy
+316 U Tranquil Thicket @Heather Hudson
+317 R War Room @Milivoj Ćeran
+318 R Witch's Clinic @Piotr Dura
+319 C Witch's Cottage @Gabor Szikszai
+
+[tokens]
+1 w_3_3_angel_flying @Leonardo Santanna
+2 w_4_4_angel_flying @Magali Villeneuve
+3 w_1_1_spirit_flying @Ryan Yee
+4 b_0_0_phyrexian_germ @Igor Kieryluk
+5 b_2_2_zombie @Anna Steinbauer
+6 b_2_2_zombie_knight_menace @Even Amundsen
+7 r_4_4_dragon_flying @Vance Kovacs
+8 r_5_5_dragon_flying @Alex Konstad
+9 r_6_6_dragon_flying @Mark Zug
+10 g_3_3_beast @Jesper Ejsing
+11 g_4_4_phyrexian_beast @Svetlin Velinov
+12 g_1_2_spider_reach @Daniel Ljunggren
+13 c_a_clue_draw @Clint Lockwood
+14 c_1_1_a_myr @Ryan Pancoast
+15 c_1_1_a_thopter_flying @Svetlin Velinov
+16 c_a_treasure_sac @Alayna Danner
+
+[other]
+17 monarch @Volkan Baǵa

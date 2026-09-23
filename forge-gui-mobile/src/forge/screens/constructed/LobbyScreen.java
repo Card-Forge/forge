@@ -55,7 +55,7 @@ import forge.util.GuiPrefBinders;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final float PADDING = Utils.scale(5);
+    protected static final float PADDING = Utils.scale(5);
     public static final int MAX_PLAYERS = 4;
     private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
 
@@ -116,7 +116,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbPlayerCount.setSelectedItem(2);
         cbPlayerCount.setChangedHandler(event -> {
             // The dropdown is the user's target; getNumPlayers() reads from the lobby and would loop forever.
-            int target = cbPlayerCount.getSelectedItem();
+            // Clamp to what the lobby will accept, or addSlot refuses silently and the loop never ends.
+            int target = Math.min(cbPlayerCount.getSelectedItem(), lobby.getSlotLimit());
+            if (target != cbPlayerCount.getSelectedItem()) {
+                cbPlayerCount.setSelectedItem(target);
+            }
             while(lobby.getNumberOfSlots() < target){
                 lobby.addSlot();
             }
@@ -235,7 +239,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbGamesInMatch.setEnabled(hasControl);
         lblPlayers.setEnabled(hasControl);
         cbPlayerCount.setEnabled(hasControl);
-        while (lobby.getNumberOfSlots() < getNumPlayers()){
+        while (lobby.getNumberOfSlots() < Math.min(getNumPlayers(), lobby.getSlotLimit())){
             lobby.addSlot();
         }
     }
@@ -654,7 +658,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
-                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
+                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_FULL_SIMULATION));
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));
@@ -920,6 +924,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         lblGamesInMatch.setVisible(visible);
         cbGamesInMatch.setVisible(visible);
         playersScroll.setVisible(visible);
+    }
+
+    protected void setVariantsVisible(boolean visible) {
+        lblVariants.setVisible(visible);
+        cbVariants.setVisible(visible);
     }
 
     public void setStartButtonAvailability() {

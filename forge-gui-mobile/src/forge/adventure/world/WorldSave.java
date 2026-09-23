@@ -1,5 +1,8 @@
 package forge.adventure.world;
 
+import forge.Forge;
+import com.badlogic.gdx.Gdx;
+import forge.OverlayText;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -8,10 +11,7 @@ import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
 import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
-import forge.adventure.util.AdventureModes;
-import forge.adventure.util.Config;
-import forge.adventure.util.SaveFileData;
-import forge.adventure.util.SignalList;
+import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
@@ -53,13 +53,25 @@ public class WorldSave {
     }
 
     public PointOfInterestChanges getPointOfInterestChanges(String id) {
-        if (!pointOfInterestChanges.containsKey(id))
-            pointOfInterestChanges.put(id, new PointOfInterestChanges());
-        return pointOfInterestChanges.get(id);
+        if (id == null) { // fallback
+            return new PointOfInterestChanges();
+        }
+
+        PointOfInterestChanges changes = pointOfInterestChanges.get(id);
+        if (changes == null) {
+            changes = new PointOfInterestChanges();
+            pointOfInterestChanges.put(id, changes);
+        }
+
+        return changes;
     }
 
     static public boolean load(int currentSlot) {
+        JSONStringLoader.clearCache();
+        CardUtil.clearPriceCache();
+        Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
 
+        Forge.invokeWorldSave = true; // This is for dispose method check
         String fileName = WorldSave.getSaveFile(currentSlot);
         if (!new File(fileName).exists())
             return false;
@@ -128,6 +140,7 @@ public class WorldSave {
     }
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
+        Forge.getLocalizer().loadAdventureBundle(Config.instance().getPlanePath(Config.instance().getSettingData().plane) + "languages/");
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;
@@ -179,7 +192,7 @@ public class WorldSave {
                     oos.close();
                     fos.close();
                     restoreBackup(oldFileName, fileName);
-                    announceError(message);
+                    finish(message);
                     return true;
                 }
 
@@ -193,7 +206,7 @@ public class WorldSave {
                     oos.close();
                     fos.close();
                     restoreBackup(oldFileName, fileName);
-                    announceError("Please check forge.log for errors.");
+                    finish("Please check forge.log for errors.");
                     return true;
                 }
 
@@ -204,7 +217,7 @@ public class WorldSave {
 
         } catch (IOException e) {
             restoreBackup(oldFileName, fileName);
-            announceError("Please check forge.log for errors.");
+            finish("Please check forge.log for errors.");
             return true;
         }
 
@@ -212,7 +225,16 @@ public class WorldSave {
         Config.instance().saveSettings();
         if (backupFile.exists())
             backupFile.delete();
+        finish(null);
         return true;
+    }
+
+    private void finish(String errors) {
+        if (errors != null)
+            announceError(errors);
+        Gdx.app.postRunnable(() -> {
+            OverlayText.getInstance().update("");
+        });
     }
 
     public void restoreBackup(String oldFilename, String currentFilename) {
@@ -260,4 +282,7 @@ public class WorldSave {
         MapViewScene.instance().clearBookMarks();
     }
 
+    public static void dispose() {
+        Forge.safeDispose(currentSave.world);
+    }
 }

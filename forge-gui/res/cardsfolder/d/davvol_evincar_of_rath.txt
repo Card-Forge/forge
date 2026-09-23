@@ -1,0 +1,8 @@
+Name:Davvol, Evincar of Rath
+ManaCost:2 B G
+Types:Legendary Creature Phyrexian Noble
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature you control enters, you lose 1 life and add {B}.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ B
+Oracle:Whenever another creature you control enters, you lose 1 life and add {B}.

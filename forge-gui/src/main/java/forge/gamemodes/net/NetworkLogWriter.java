@@ -112,13 +112,10 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
             sb.append("=".repeat(80)).append("\n");
             sb.append("Network Debug Log Started\n");
             sb.append("Log file key: ").append(key).append("\n");
-            if (!GuiBase.isAndroid()) {
+            if (!GuiBase.isMobile()) {
                 try {
                     sb.append("PID: ").append(ProcessHandle.current().pid()).append("\n");
-                } catch (Throwable t) {
-                    // ProcessHandle (Java 9) is unavailable on iOS/MobiVM: the jvmdg
-                    // downgrade stub needs MethodHandles trusted-lookup, which MobiVM
-                    // lacks (NoSuchMethodError). Diagnostic PID only, so skip it.
+                } catch (Exception e) {
                     sb.append("PID: (unavailable)\n");
                 }
             }

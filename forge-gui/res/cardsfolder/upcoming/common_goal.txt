@@ -1,0 +1,6 @@
+Name:Common Goal
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Pump | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | AILogic$ PowerDmg | SubAbility$ DBEachDamage | SpellDescription$ One or two target creatures you control each deal damage equal to their power to target creature an opponent controls.
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower
+Oracle:One or two target creatures you control each deal damage equal to their power to target creature an opponent controls.

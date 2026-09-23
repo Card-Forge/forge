@@ -1,0 +1,14 @@
+Name:Miss Highwater
+ManaCost:2 B B
+Types:Legendary Creature Demon Advisor
+PT:5/3
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player.counters_EQ0_Contract | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player who doesn't have a contract counter, they may discard their hand. If they do, they draw seven cards and get a contract counter. For as long as they have a contract counter, when they lose the game, for each artifact and creature they controlled, create a token that's a copy of it.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredTarget | NumCards$ 7 | UnlessCost$ Discard<1/Hand> | UnlessPayer$ TriggeredTarget | UnlessSwitched$ True | UnlessResolveSubs$ WhenPaid | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredTarget | CounterType$ Contract | CounterNum$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredTarget | Triggers$ LoseGameTrigger,ExileEffect | Duration$ Permanent
+SVar:LoseGameTrigger:Mode$ LosesGame | ValidPlayer$ Player.IsRemembered | Execute$ TrigCopy | TriggerDescription$ When that player loses the game, for each artifact and creature they controlled, create a token that's a copy of it.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredLastStateBattlefieldLKICopy.Creature+ControlledBy TriggeredPlayer,Artifact+ControlledBy TriggeredPlayer
+SVar:ExileEffect:Mode$ Always | TriggerZones$ Battlefield | CheckDefinedPlayer$ Player.IsRemembered+counters_EQ0_Contract | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:Menace\nWhenever Miss Highwater deals combat damage to a player who doesn't have a contract counter, they may discard their hand. If they do, they draw seven cards and get a contract counter. For as long as they have a contract counter, when they lose the game, for each artifact and creature they controlled, create a token that's a copy of it.

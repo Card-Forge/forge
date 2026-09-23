@@ -94,6 +94,7 @@ public class ListChooser<T> extends FContainer {
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
             txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
+            txtSearch.setLiveChangeEvents(true); //filter as characters are typed
             txtSearch.setChangedHandler(e -> applyFilters());
 
             advancedSearchFilter = lstChoices.getListItemRenderer().getAdvancedSearchFilter(this);

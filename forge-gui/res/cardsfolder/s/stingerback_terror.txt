@@ -5,7 +5,7 @@ PT:7/7
 K:Flying
 K:Trample
 K:Plot:2 R
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
 SVar:X:Count$ValidHand Card.YouOwn
 SVar:NeedsToPlayVar:X LE6
 SVar:BuffedBy:Card

@@ -7,7 +7,6 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
-import com.badlogic.gdx.utils.SharedLibraryLoader;
 import forge.util.HWInfo;
 import forge.Forge;
 import forge.adventure.util.Config;
@@ -26,9 +25,7 @@ public class GameLauncher {
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
         String switchOrientationFile = assetsDir + "switch_orientation.ini";
         // This should fix MAC-OS startup without the need for -XstartOnFirstThread parameter
-        if (SharedLibraryLoader.isMac) {
-            Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
-        }
+        Lwjgl3ApplicationConfiguration.useGlfwAsync();
         //increase MemoryStack to 1MB, default is 64kb
         Configuration.STACK_SIZE.set(1024);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
@@ -113,11 +110,11 @@ public class GameLauncher {
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
-            config.setHdpiMode(HdpiMode.Logical);
         } else {
             config.setWindowedMode(windowWidth, windowHeight);
             config.setResizable(false);
         }
+        config.setHdpiMode(HdpiMode.Logical);
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
@@ -140,8 +137,6 @@ public class GameLauncher {
                 Forge.setWindowFocus(false);
             }
         });
-
-        config.setHdpiMode(HdpiMode.Logical);
 
         new Lwjgl3Application(start, config);
     }

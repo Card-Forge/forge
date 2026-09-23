@@ -167,6 +167,19 @@ public final class GameActionUtil {
                         newSA.setIntrinsic(inst.isIntrinsic());
 
                         alternatives.add(newSA);
+                    } else if (keyword.startsWith("Beam me up")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
+                        final SpellAbility beamSA = getGraveyardSpellByKeyword(inst, sa, activator,
+                                AlternativeCost.BeamMeUp);
+                        // "if you also return a creature you control to its owner's hand" is an
+                        // additional cost, so with nothing to return the spell is simply not castable
+                        beamSA.getPayCosts().add(new Cost(
+                                "Return<1/Creature.YouCtrl+canBeBeamedUp/creature you control>", false));
+
+                        alternatives.add(beamSA);
                     } else if (keyword.startsWith("Flashback")) {
                         if (!source.isInZone(ZoneType.Graveyard)) {
                             continue;
@@ -341,8 +354,7 @@ public final class GameActionUtil {
             }
             final Card host = o.getHost();
 
-            SpellAbility newSA = null;
-
+            SpellAbility newSA;
             if (o.getPayManaCost() == PayManaCost.NO) {
                 newSA = sa.copyWithNoManaCost(activator);
                 newSA.setBasicSpell(false);
@@ -404,6 +416,10 @@ public final class GameActionUtil {
 
         Card source = sa.getHostCard();
         final Game game = source.getGame();
+        // a spell whose host is in play can never be cast, so no optional cost of it can be offered
+        if (source.isInPlay()) {
+            return costs;
+        }
         boolean lkicheck = false;
 
         Card newHost = sa.getAlternateHost(source);

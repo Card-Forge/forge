@@ -1,0 +1,10 @@
+Name:Arzakon
+ManaCost:W U B R G
+Types:Legendary Planeswalker Arzakon
+Loyalty:4
+A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | ValidTgtsDesc$ any other target | NumDmg$ 3 | Planeswalker$ True | SpellDescription$ CARDNAME deals 3 damage to any other target.
+A:AB$ CopyPermanent | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | DefinedName$ Black Lotus | SpellDescription$ Create a Black Lotus token. (It's a {0} artifact with "{T}, Sacrifice this token: Add three mana of any one color.")
+A:AB$ ChangeZoneAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ Timetwister | SpellDescription$ Each player shuffles their hand and graveyard into their library, then draws seven cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player
+Text:CARDNAME can be your commander.
+Oracle:[+2]: Arzakon deals 3 damage to any other target.\n[-3]: Create a Black Lotus token. (It's a {0} artifact with "{T}, Sacrifice this token: Add three mana of any one color.")\n[-7]: Each player shuffles their hand and graveyard into their library, then draws seven cards.\nArzakon can be your commander.

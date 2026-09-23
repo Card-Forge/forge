@@ -6,6 +6,6 @@ K:etbCounter:P1P1:Y:no Condition:CARDNAME enters with a +1/+1 counter on it for 
 SVar:X:Count$xPaid
 SVar:Y:Count$CastTotalManaSpent
 T:Mode$ SpellCast | ValidSA$ Spell.Kicked | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a kicked spell, you may remove two +1/+1 counters from NICKNAME. If you do, copy that spell. You may choose new targets for that copy. (A copy of a permanent spell becomes a token.)
-SVar:TrigCopy:DB$ CopySpellAbility | Cost$ SubCounter<2/P1P1> | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ SubCounter<2/P1P1> | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
 DeckHas:Ability$Counters
 Oracle:Verazol, the Split Current enters with a +1/+1 counter on it for each mana spent to cast it.\nWhenever you cast a kicked spell, you may remove two +1/+1 counters from Verazol. If you do, copy that spell. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

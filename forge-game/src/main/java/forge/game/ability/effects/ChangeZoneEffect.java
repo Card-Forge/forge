@@ -37,6 +37,11 @@ import java.util.Set;
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return zoneParamIsLibrary(sa, "Origin") || zoneParamIsLibrary(sa, "Destination");
+    }
+
+    @Override
     public void buildSpellAbility(SpellAbility sa) {
         super.buildSpellAbility(sa);
         AbilityFactory.adjustChangeZoneTarget(sa.getMapParams(), sa);
@@ -1415,6 +1420,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard = game.getAction().exile(c, sa, moveParams);
 
                     handleExiledWith(movedCard, sa);
+                    final CardCollectionView lastStateBattlefield = triggerList.getLastStateBattlefield();
+                    if (destination.equals(ZoneType.Exile) && lastStateBattlefield.contains(c) && source.equals(c)) {
+                        // support Wormfang Newt returning itself
+                        handleExiledWith(movedCard, sa, lastStateBattlefield.get(c));
+                    }
 
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
@@ -1691,4 +1701,5 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         return Pair.of(dest1, libPos1);
     }
+
 }

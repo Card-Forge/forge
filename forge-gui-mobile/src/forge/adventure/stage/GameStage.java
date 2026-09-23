@@ -46,6 +46,7 @@ import forge.adventure.world.WorldSave;
 import forge.assets.FBufferedImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinImage;
+import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.ColorSet;
 import forge.deck.Deck;
@@ -55,6 +56,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.CoverScreen;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,6 +77,10 @@ public abstract class GameStage extends Stage {
     private float animationTimeout = 0;
     public static float maximumScrollDistance = 1.5f;
     public static float minimumScrollDistance = 0.3f;
+    private final Vector2 keyboardInput = new Vector2();
+    private final Vector2 controllerInput = new Vector2();
+    private final Vector2 touchInput = new Vector2();
+    protected final Vector2 touchKnobInput = new Vector2();
 
     private String extraAnnouncement = "";
 
@@ -83,6 +89,12 @@ public abstract class GameStage extends Stage {
     protected boolean dialogOnlyInput;
     protected final Array<TextraButton> dialogButtonMap = new Array<>();
     TextraButton selectedKey;
+    private final Vector2 inputPriorityDir = new Vector2();
+    private final Vector2 touchConversionVec = new Vector2();
+    private final Vector2 touchDiffVec = new Vector2();
+    private final Vector2 collisionAdjX = new Vector2();
+    private final Vector2 collisionAdjY = new Vector2();
+    private final Rectangle collisionBounds = new Rectangle();
 
     public Dialog getDialog() {
         return dialog;
@@ -199,8 +211,11 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        if (cardArt != null) {
-            Image art = new Image(cardArt.getTextureRegion());
+        if (cardArt != null && cardArt.getTextureRegion() != null) {
+            TextureRegion textureRegion = cardArt.getTextureRegion();
+            if (CardImageRenderer.forgeArt == cardArt)
+                textureRegion.flip(false, true); // fix inverted
+            Image art = new Image(textureRegion);
             art.setWidth(58);
             art.setHeight(46);
             art.setPosition(25, 43);
@@ -248,17 +263,16 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
         if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
         }
-        player.getMovementDirection().x = controller.getAxis(0);
-        player.getMovementDirection().y = -controller.getAxis(1);
-        if (player.getMovementDirection().len() < 0.2) {
-            player.stop();
-        }
+        controllerInput.set(controller.getAxis(0), -controller.getAxis(1));
         return true;
+    }
+
+    public void setTouchKnobInput(float x, float y) {
+        touchKnobInput.set(x, y);
     }
 
     enum PlayerModification {
@@ -267,7 +281,6 @@ public abstract class GameStage extends Stage {
         Fly
 
     }
-
 
     HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
 
@@ -360,6 +373,7 @@ public abstract class GameStage extends Stage {
             animationTimeout -= delta;
             return;
         }
+
         Array<PlayerModification> modsToRemove = new Array<>();
         for (Map.Entry<PlayerModification, Float> mod : currentModifications.entrySet()) {
             mod.setValue(mod.getValue() - delta);
@@ -371,28 +385,57 @@ public abstract class GameStage extends Stage {
             onRemoveEffect(mod);
         }
 
-        if (isPaused()) {
-            return;
-        }
-
-
         if (onEndAction != null) {
-
             onEndAction.run();
             onEndAction = null;
         }
 
-        if (touchX >= 0) {
-            Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
-            target.x -= player.getWidth() / 2f;
-            Vector2 diff = target.sub(player.pos());
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls) {
+            keyboardInput.setZero();
+            controllerInput.setZero();
+            touchInput.setZero();
+            touchKnobInput.setZero();
+            player.getMovementDirection().setZero();
+            player.stop();
+        } else {
+            keyboardInput.setZero();
+            if (KeyBinding.Left.isPressed())  keyboardInput.x -= 1;
+            if (KeyBinding.Right.isPressed()) keyboardInput.x += 1;
+            if (KeyBinding.Up.isPressed())    keyboardInput.y += 1;
+            if (KeyBinding.Down.isPressed())  keyboardInput.y -= 1;
 
-            if (diff.len() < 2) {
-                diff.setZero();
-                player.stop();
+            // Input priority: touch > controller > keyboard
+            inputPriorityDir.setZero();
+            if (touchX >= 0 && touchInput.len() > 0.2f) {
+                inputPriorityDir.set(touchInput);
+            } else if (controllerInput.len() > 0.2f) {
+                inputPriorityDir.set(controllerInput);
+            } else if (touchKnobInput.len() > 0.2f) {
+                inputPriorityDir.set(touchKnobInput);
+            } else {
+                inputPriorityDir.set(keyboardInput);
             }
-            player.setMovementDirection(diff);
+
+            if (inputPriorityDir.len() < 0.01f) {
+                player.stop();
+            } else {
+                player.getMovementDirection().set(inputPriorityDir);
+            }
+
+            if (touchX >= 0) {
+                Vector2 target = this.screenToStageCoordinates(touchConversionVec.set(touchX, touchY));
+                target.x -= player.getWidth() / 2f;
+                touchDiffVec.set(target.sub(player.pos()));
+
+                if (touchDiffVec.len() < 2) {
+                    touchInput.setZero();
+                    player.stop();
+                } else {
+                    touchInput.set(touchDiffVec);
+                }
+            }
         }
+
         camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
         camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 
@@ -415,31 +458,30 @@ public abstract class GameStage extends Stage {
 
     abstract protected void onActing(float delta);
 
-
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
         if (isPaused())
             return true;
         if (KeyBinding.Left.isPressed(keycode)) {
-            player.getMovementDirection().x = -1;
+            keyboardInput.x = -1;
         }
         if (KeyBinding.Right.isPressed(keycode)) {
-            player.getMovementDirection().x = +1;
+            keyboardInput.x = +1;
         }
         if (KeyBinding.Up.isPressed(keycode)) {
-            player.getMovementDirection().y = +1;
+            keyboardInput.y = +1;
         }
         if (KeyBinding.Down.isPressed(keycode)) {
-            player.getMovementDirection().y = -1;
+            keyboardInput.y = -1;
         }
         if (keycode == Input.Keys.F5)//todo config
         {
             if (TileMapScene.instance().currentMap().isInMap()) {
                 DialogData noQuicksave = new DialogData();
                 DialogData noQuicksaveOK = new DialogData();
-                noQuicksave.text = "Game not saved. Quicksave is only available on the world map.";
-                noQuicksaveOK.name = "OK";
+                noQuicksave.text = Forge.getLocalizer().getMessageorUseDefault("lblQuicksaveOnlyOnWorldMap", "Game not saved. Quicksave is only available on the world map.");
+                noQuicksaveOK.name = Forge.getLocalizer().getMessage("lblOK");
                 noQuicksave.options = new DialogData[]{noQuicksaveOK};
                 MapDialog noQuicksaveDialog = new MapDialog(noQuicksave, MapStage.getInstance(), -1, null);
                 showDialog();
@@ -542,6 +584,10 @@ public abstract class GameStage extends Stage {
     public void stop() {
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        touchInput.setZero();
+        touchKnobInput.setZero();
+        keyboardInput.setZero();
+        controllerInput.setZero();
         touchX = -1;
         touchY = -1;
         player.stop();
@@ -602,44 +648,52 @@ public abstract class GameStage extends Stage {
     }
 
     public Vector2 adjustMovement(Vector2 direction, Rectangle boundingRect) {
-        Vector2 adjDirX = direction.cpy();
-        Vector2 adjDirY = direction.cpy();
+        // populate our local cars in-place via .set() instead of .cpy()
+        collisionAdjX.set(direction);
+        collisionAdjY.set(direction);
         boolean foundX = false;
         boolean foundY = false;
-        while (true) {
 
-            if (!isColliding(new Rectangle(boundingRect.x + adjDirX.x, boundingRect.y + adjDirX.y, boundingRect.width, boundingRect.height))) {
+        while (true) {
+            collisionBounds.set(boundingRect.x + collisionAdjX.x, boundingRect.y + collisionAdjX.y, boundingRect.width, boundingRect.height);
+            if (!isColliding(collisionBounds)) {
                 foundX = true;
                 break;
             }
-            if (adjDirX.x == 0)
+            if (collisionAdjX.x == 0)
                 break;
 
-            if (adjDirX.x >= 0)
-                adjDirX.x = Math.max(0, adjDirX.x - 0.2f);
+            if (collisionAdjX.x >= 0)
+                collisionAdjX.x = Math.max(0, collisionAdjX.x - 0.2f);
             else
-                adjDirX.x = Math.min(0, adjDirX.x + 0.2f);
+                collisionAdjX.x = Math.min(0, collisionAdjX.x + 0.2f);
         }
+
         while (true) {
-            if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
+            collisionBounds.set(boundingRect.x + collisionAdjY.x, boundingRect.y + collisionAdjY.y, boundingRect.width, boundingRect.height);
+            if (!isColliding(collisionBounds)) {
                 foundY = true;
                 break;
             }
-            if (adjDirY.y == 0)
+            if (collisionAdjY.y == 0)
                 break;
 
-            if (adjDirY.y >= 0)
-                adjDirY.y = (Math.max(0, adjDirY.y - 0.2f));
+            if (collisionAdjY.y >= 0)
+                collisionAdjY.y = Math.max(0, collisionAdjY.y - 0.2f);
             else
-                adjDirY.y = (Math.min(0, adjDirY.y + 0.2f));
+                collisionAdjY.y = Math.min(0, collisionAdjY.y + 0.2f);
         }
-        if (foundY && foundX)
-            return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;
-        else if (foundY)
-            return adjDirY;
-        else if (foundX)
-            return adjDirX;
-        return Vector2.Zero.cpy();
+
+        if (foundY && foundX) {
+            return collisionAdjX.len() > collisionAdjY.len() ? collisionAdjX : collisionAdjY;
+        } else if (foundY) {
+            return collisionAdjY;
+        } else if (foundX) {
+            return collisionAdjX;
+        }
+
+        collisionAdjX.setZero();
+        return collisionAdjX;
     }
 
     protected void teleported(Vector2 position) {
@@ -655,8 +709,10 @@ public abstract class GameStage extends Stage {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
             Forge.advFreezePlayerControls = true;
-            getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Death);
-            getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            PlayerSprite playerSprite = getPlayerSprite();
+            playerSprite.setAnimation(CharacterSprite.AnimationTypes.Death);
+            playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            float deathDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Death, 1f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -667,9 +723,9 @@ public abstract class GameStage extends Stage {
                         WorldStage.getInstance().loadPOI(poi);
                         WorldSave.getCurrentSave().autoSave();
                         Forge.clearTransitionScreen();
-                    }, Forge.takeScreenshot()))));
+                    }, ScreenUtil.getInstance().takeScreenshot()))));
                 }
-            }, 1f);
+            }, deathDuration);
         }//Spawn shouldn't be null
     }
 
@@ -677,14 +733,16 @@ public abstract class GameStage extends Stage {
         if (!Current.player().hasEquippedItem())
             return;
         Forge.advFreezePlayerControls = true;
-        getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Hit);
-        getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        PlayerSprite playerSprite = getPlayerSprite();
+        playerSprite.setAnimation(CharacterSprite.AnimationTypes.Hit);
+        playerSprite.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        float hitDuration = playerSprite.getActionAnimationDuration(CharacterSprite.AnimationTypes.Hit, 1f);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 showImageDialog(Current.generateDefeatMessage(false), getDefeatBadge(), () -> Forge.advFreezePlayerControls = false);
             }
-        }, 1f);
+        }, hitDuration);
     }
 
     private FBufferedImage getDefeatBadge() {

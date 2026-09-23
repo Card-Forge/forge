@@ -1,0 +1,7 @@
+Name:Lake-town Lookout
+ManaCost:W
+Types:Creature Human Scout
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigRecruit | TriggerDescription$ When this creature dies, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
+SVar:TrigRecruit:DB$ Recruit
+Oracle:When this creature dies, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.

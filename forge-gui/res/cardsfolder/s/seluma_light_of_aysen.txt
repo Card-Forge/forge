@@ -1,0 +1,9 @@
+Name:Seluma, Light of Aysen
+ManaCost:4 W
+Types:Legendary Creature Angel Warrior
+PT:4/4
+DeckRule:ColorIdentity:Exempt$ Angel,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have Angel cards of any color identity and any basic land cards.
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, return target Angel creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.Angel+YouOwn | TgtPrompt$ Select target Angel creature card from your graveyard | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Rulebreaker — A deck with this commander can have Angel cards of any color identity and any basic land cards.\nFlying\nWhenever Seluma deals combat damage to a player, return target Angel creature card from your graveyard to the battlefield.

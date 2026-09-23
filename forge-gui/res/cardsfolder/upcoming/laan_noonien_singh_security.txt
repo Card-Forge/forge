@@ -1,0 +1,9 @@
+Name:La'An Noonien-Singh, Security
+ManaCost:2 R R
+Types:Legendary Creature Human Soldier
+PT:3/3
+K:Menace
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | CheckSVar$ X | SVarCompare$ GE8 | NoResolvingCheck$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack while creatures you control have total power 8 or greater, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
+Oracle:Whenever you attack while creatures you control have total power 8 or greater, target creature can't block this turn.

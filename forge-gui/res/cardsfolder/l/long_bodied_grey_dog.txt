@@ -1,0 +1,9 @@
+Name:Long-Bodied Grey Dog
+ManaCost:3
+Types:Creature Dog
+PT:2/2
+K:Flash
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBTreasureTokens | TriggerDescription$ When this creature enters, create a tapped Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:DBTreasureTokens:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenTapped$ True
+Oracle:Flash\nReach\nWhen this creature enters, create a tapped Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

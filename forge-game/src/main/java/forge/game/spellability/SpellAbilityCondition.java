@@ -91,6 +91,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
             }
+            if (value.equals("EnduringStory")) {
+                this.setEnduringStory(true);
+            }
             if (value.equals("Kicked")) {
                 this.kicked = true;
             }
@@ -266,6 +269,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isDelirium() && !activator.hasDelirium()) return false;
         if (this.isRevolt() && !activator.hasRevolt()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
+        if (this.isEnduringStory() && !activator.hasEnduringStory()) return false;
 
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;

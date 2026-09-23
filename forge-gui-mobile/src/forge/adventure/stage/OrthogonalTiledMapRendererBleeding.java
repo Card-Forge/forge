@@ -22,7 +22,7 @@ public class OrthogonalTiledMapRendererBleeding extends OrthogonalTiledMapRender
     }
 
     @Override
-    protected void renderMapLayer(MapLayer layer) {
+    public void renderMapLayer(MapLayer layer) {
         if (layer.isVisible()) {
             if (layer instanceof MapGroupLayer) {
                 MapLayers childLayers = ((MapGroupLayer) layer).getLayers();

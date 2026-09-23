@@ -29,7 +29,7 @@ public final class DeckUrlLoader {
     private static final Pattern PRINTING_HINT = Pattern.compile(
             "^(\\s*\\d+\\s+.+?)\\s+\\[[A-Z0-9_]{2,7}\\](?:\\s+\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)?\\s*$");
     private static final String URL_DECK_DIR_NAME = "URL";
-    private static final String SUPPORTED_PROVIDERS = "Moxfield, Archidekt";
+    private static final String SUPPORTED_PROVIDERS = "Moxfield, Archidekt, TappedOut, MTGGoldfish";
     private static final Localizer localizer = Localizer.getInstance();
 
     public static DeckProxy load(final String deckUrl) throws IOException {
@@ -59,6 +59,12 @@ public final class DeckUrlLoader {
         }
         if (host.endsWith("archidekt.com")) {
             return new ArchidektDeckUrlProvider();
+        }
+        if (host.endsWith("tappedout.net")) {
+            return new TappedOutDeckUrlProvider();
+        }
+        if (host.endsWith("mtggoldfish.com")) {
+            return new MtgGoldfishDeckUrlProvider();
         }
         throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls", SUPPORTED_PROVIDERS));
     }
@@ -119,10 +125,14 @@ public final class DeckUrlLoader {
 
     static String getDeckName(final Map<?, ?> root, final String deckId, final String sourceUrl, final String defaultName,
             final Iterable<Deck> savedDecks) throws IOException {
-        final String requestedName = getString(root.get("name"), defaultName);
+        return getDeckName(getString(root.get("name"), defaultName), deckId, sourceUrl, savedDecks);
+    }
+
+    static String getDeckName(final String requestedName, final String deckId, final String sourceUrl,
+            final Iterable<Deck> savedDecks) throws IOException {
         for (final Deck deck : savedDecks) {
             if (isSameSourceDeck(sourceUrl, deck.getSourceUrl())) {
-                return deck.getName();
+                continue;
             }
             if (requestedName.equals(deck.getName())) {
                 return requestedName + " " + deckId;
@@ -165,6 +175,12 @@ public final class DeckUrlLoader {
         if (host.endsWith("archidekt.com")) {
             return "archidekt:" + ArchidektDeckUrlProvider.getDeckId(normalizedUrl);
         }
+        if (host.endsWith("tappedout.net")) {
+            return "tappedout:" + TappedOutDeckUrlProvider.getDeckSlug(normalizedUrl);
+        }
+        if (host.endsWith("mtggoldfish.com")) {
+            return "mtggoldfish:" + MtgGoldfishDeckUrlProvider.getDeckId(normalizedUrl);
+        }
         return null;
     }
 
@@ -188,9 +204,17 @@ public final class DeckUrlLoader {
         }
     }
 
+    static String readText(final String requestUrl, final String providerName) throws IOException {
+        return readUrl(requestUrl, providerName, "text/plain, text/html, */*");
+    }
+
     private static String readUrl(final String requestUrl, final String providerName) throws IOException {
+        return readUrl(requestUrl, providerName, "application/json");
+    }
+
+    private static String readUrl(final String requestUrl, final String providerName, final String accept) throws IOException {
         final HttpURLConnection conn = (HttpURLConnection) new URL(requestUrl).openConnection();
-        conn.setRequestProperty("Accept", "application/json");
+        conn.setRequestProperty("Accept", accept);
         conn.setRequestProperty("User-Agent", "Forge Deck URL Loader");
         conn.setConnectTimeout(15000);
         conn.setReadTimeout(30000);
@@ -210,7 +234,7 @@ public final class DeckUrlLoader {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                out.append(line);
+                out.append(line).append('\n');
             }
         }
         return out.toString();

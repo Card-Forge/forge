@@ -62,42 +62,6 @@ public class FScreen {
             "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
-    public static final FScreen DECK_EDITOR_COMMANDER = new FScreen(
-            VDeckEditorUI.SINGLETON_INSTANCE,
-            CDeckEditorUI.SINGLETON_INSTANCE,
-            "lblCommanderDeckEditor",
-            FSkin.getImage(FSkinProp.IMG_PACK),
-            true,
-            "lblCloseEditor",
-            ForgeConstants.EDITOR_LAYOUT_FILE,
-            false);
-    public static final FScreen DECK_EDITOR_TINY_LEADERS = new FScreen(
-            VDeckEditorUI.SINGLETON_INSTANCE,
-            CDeckEditorUI.SINGLETON_INSTANCE,
-            "lblTinyLeadersDeckEditor",
-            FSkin.getImage(FSkinProp.IMG_PACK),
-            true,
-            "lblCloseEditor",
-            ForgeConstants.EDITOR_LAYOUT_FILE,
-            false);
-    public static final FScreen DECK_EDITOR_BRAWL = new FScreen(
-            VDeckEditorUI.SINGLETON_INSTANCE,
-            CDeckEditorUI.SINGLETON_INSTANCE,
-            "lblBrawlDeckEditor",
-            FSkin.getImage(FSkinProp.IMG_PACK),
-            true,
-            "lblCloseEditor",
-            ForgeConstants.EDITOR_LAYOUT_FILE,
-            false);
-    public static final FScreen DECK_EDITOR_OATHBREAKER = new FScreen(
-            VDeckEditorUI.SINGLETON_INSTANCE,
-            CDeckEditorUI.SINGLETON_INSTANCE,
-            "lblOathbreakerDeckEditor",
-            FSkin.getImage(FSkinProp.IMG_PACK),
-            true,
-            "lblCloseEditor",
-            ForgeConstants.EDITOR_LAYOUT_FILE,
-            false);
     public static final FScreen DECK_EDITOR_PLANECHASE = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
@@ -224,18 +188,19 @@ public class FScreen {
         return controller;
     }
 
+    public String getDaytime() {
+        return daytime;
+    }
+    public void setDaytime(final String daytime) {
+        this.daytime = daytime;
+    }
+
     public String getTabCaption() {
         return tabCaption;
     }
     public void setTabCaption(final String caption) {
         this.tabCaption = caption;
         FView.SINGLETON_INSTANCE.getNavigationBar().updateTitle(this);
-    }
-    public String getDaytime() {
-        return daytime;
-    }
-    public void setDaytime(final String daytime) {
-        this.daytime = daytime;
     }
 
     public SkinImage getTabIcon() {

@@ -139,6 +139,10 @@ public class GauntletMini {
         starter.add(human);
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(GamePlayerUtil.createAiPlayer()));
 
+        for (final RegisteredPlayer pl : starter) {
+            pl.assignConspiracies();
+        }
+
         hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(gauntletType, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }

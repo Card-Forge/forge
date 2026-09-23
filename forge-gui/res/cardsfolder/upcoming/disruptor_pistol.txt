@@ -1,0 +1,6 @@
+Name:Disruptor Pistol
+ManaCost:2
+Types:Artifact
+A:AB$ DealDamage | Cost$ 4 T Sac<1/CARDNAME/this artifact> | ValidTgts$ Creature | NumDmg$ 5 | SpellDescription$ It deals 5 damage to target creature.
+DeckHas:Ability$Sacrifice
+Oracle:{4}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.

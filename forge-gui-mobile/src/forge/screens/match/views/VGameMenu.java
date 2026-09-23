@@ -58,10 +58,6 @@ public class VGameMenu extends FDropDownMenu {
                             final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
                             boolean abilityScope = MatchController.instance.getGameController().getYieldController().isAbilityScope();
                             MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
-                            if (!autoYield && MatchController.instance.getGameController().shouldAutoYield(key)) {
-                                //auto-pass priority if ability is on top of stack
-                                MatchController.instance.getGameController().passPriority();
-                            }
                         }
                     }
                 };

@@ -14,6 +14,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.gui.FThreads;
 import forge.toolbox.FOverlay;
+import forge.util.ScreenUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -76,7 +77,7 @@ public class LoadingOverlay extends FOverlay {
     public LoadingOverlay(Runnable toRun, boolean aftermatch, boolean otherTransition) {
         caption = "";
         textMode = true;
-        textureRegion = Forge.takeScreenshot();
+        textureRegion = ScreenUtil.getInstance().takeScreenshot();
         match = true;
         bgAnimation = new BGAnimation();
         runnable = toRun;

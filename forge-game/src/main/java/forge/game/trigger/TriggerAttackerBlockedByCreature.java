@@ -54,11 +54,9 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Object a = runParams.get(AbilityKey.Attacker),
-                b = runParams.get(AbilityKey.Blocker);
+        final Card attacker = (Card) runParams.get(AbilityKey.Attacker),
+                blocker = (Card) runParams.get(AbilityKey.Blocker);
 
-        final Card attacker = (Card) a,
-                blocker = (Card) b;
         if (hasParam("ValidCard")) {
             final String validCard = getParam("ValidCard");
             if (validCard.equals("LessPowerThanBlocker")) {

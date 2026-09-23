@@ -1181,6 +1181,8 @@ public class AbilityUtils {
                 next = game.getNextPlayerAfter(next, dir);
             }
             players.add(next);
+        } else if (defined.equals("ManaSpender")) {
+            players.addAll(((SpellAbility) sa).getPayingMana().stream().map(m -> m.getPlayer()).collect(Collectors.toList()));
         } else {
             // will be filtered below
             players.addAll(game.getPlayersInTurnOrder());
@@ -2279,6 +2281,9 @@ public class AbilityUtils {
         if (sq[0].equals("YourStartingLife")) {
             return doXMath(player.getStartingLife(), expr, c, ctb);
         }
+        if (sq[0].equals("YourStartingLibrarySize")) {
+            return doXMath(player.getStartingLibrarySize(), expr, c, ctb);
+        }
 
         if (sq[0].equals("YourLifeTotal")) {
             return doXMath(player.getLife(), expr, c, ctb);
@@ -2304,6 +2309,10 @@ public class AbilityUtils {
         if (sq[0].startsWith("YouRolledThisTurn")) {
             int n = calculateAmount(c, sq[0].substring(17), ctb);
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YouScryThisTurn")) {
+            return doXMath(player.getScryThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("YouSurveilThisTurn")) {
@@ -2725,7 +2734,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
-            return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
+            return doXMath(game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -2789,7 +2798,7 @@ public class AbilityUtils {
                     activated++;
                 }
             }
-            return activated;
+            return doXMath(activated, expr, c, ctb);
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
@@ -2914,6 +2923,9 @@ public class AbilityUtils {
         }
         if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Backside)) {
             collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Backside), controller, withAltCost);
+        }
+        if (tgtCard.hasState(CardStateName.Secondary)) {
+            collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Secondary), controller, withAltCost);
         }
 
         for (SpellAbility s : list) {
@@ -3502,6 +3514,9 @@ public class AbilityUtils {
         if (value.contains("StartingLife")) {
             return doXMath(player.getStartingLife(), m, source, ctb);
         }
+        if (value.contains("StartingLibrarySize")) {
+            return doXMath(player.getStartingLibrarySize(), m, source, ctb);
+        }
 
         if (value.contains("LifeTotal")) {
             return doXMath(player.getLife(), m, source, ctb);
@@ -3716,6 +3731,15 @@ public class AbilityUtils {
             }
             // filter out fun types?
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
+        if (def.startsWith("PlaneswalkerType")) {
+            final Set<String> walkerTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                walkerTypes.addAll(card.getType().getPlaneswalkerTypes());
+            }
+
+            return doXMath(walkerTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
         //Per request for custom cards.

@@ -8,7 +8,8 @@ import forge.game.cost.Cost;
 import forge.util.Lang;
 
 public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndType>
-    implements KeywordWithCostInterface, KeywordWithTypeInterface {
+        implements KeywordWithCostInterface, KeywordWithTypeInterface {
+
     private Cost cost;
     private String costString;
     private String type;

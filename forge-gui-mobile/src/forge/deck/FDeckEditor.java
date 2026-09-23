@@ -1,5 +1,6 @@
 package forge.deck;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -34,6 +35,7 @@ import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.match.views.VChat;
 import forge.screens.match.views.VLog;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
@@ -53,7 +55,7 @@ import java.util.stream.Collectors;
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
     public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
-    private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     //Toggle that suppresses most conformity logic in the editor.
     public static final String DECK_TAG_SUPPRESS_CONFORMITY = "noEditorConformity";
@@ -330,6 +332,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     public static DeckEditorConfig EditorConfigSealed = new GameTypeDeckEditorConfig(GameType.Sealed,
             new FileDeckGroupController(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
+            .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
+    /** Editor for network-event sealed/draft pools stored in {@code getNetworkEventDecks()}. */
+    public static DeckEditorConfig EditorConfigNetworkEventPool = new GameTypeDeckEditorConfig(GameType.Sealed,
+            new FileDeckController<>(FModel.getDecks().getNetworkEventDecks(), Deck::new, null))
             .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
     public static DeckEditorConfig EditorConfigWinston = new GameTypeDeckEditorConfig(GameType.Winston,
             new FileDeckGroupController(FModel.getDecks().getWinston(), DeckGroup::new, null));
@@ -762,7 +768,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public Deck getDeck() {
         return deck;
     }
-    private void setDeck(Deck deck) {
+    public void setDeck(Deck deck) {
         if (this.deck == deck) { return; }
         this.deck = deck;
         setHeaderText(getDeckController().getDeckDisplayName());
@@ -1138,6 +1144,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected final FLabel btnSave;
         protected final FLabel btnMoreOptions;
         protected FDisplayObject btnDraftLog;
+        protected ChatHeaderButton btnChat;
 
         protected DeckHeader() {
             setHeight(HEADER_HEIGHT);
@@ -1186,13 +1193,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
                 btnDraftLog.setSize(width, height);
                 out.add(btnDraftLog);
+                remainingWidth -= width;
+            }
+            if(btnChat != null) {
+                float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
+                btnChat.setSize(width, height);
+                out.add(btnChat);
             }
             return out;
         }
 
         public void initDraftLog(GameLog draftLog, FContainer parentScreen) {
-            VLog draftLogContainer = new VLog(() -> draftLog);
+            VLog draftLogContainer = new VLog(() -> draftLog, true);
             draftLogContainer.setDropDownContainer(parentScreen);
+            // Live-refresh the open dropdown so a remote player's pick shows without local interaction
+            draftLog.addObserver((o, arg) -> FThreads.invokeInEdtNowOrLater(draftLogContainer::refresh));
             this.btnDraftLog = new FLabel.ButtonBuilder()
                     .text(Localizer.getInstance().getMessage("lblEditorLog"))
                     .pressedColor(Header.getBtnPressedColor())
@@ -1201,6 +1216,47 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     .build();
             draftLogContainer.setDropdownOwner(btnDraftLog);
             this.add(btnDraftLog);
+        }
+
+        public VChat initChat(FContainer parentScreen) {
+            VChat chat = new VChat();
+            chat.setDropDownContainer(parentScreen);
+            this.btnChat = new ChatHeaderButton(new FLabel.ButtonBuilder()
+                    .text(Localizer.getInstance().getMessage("lblChat"))
+                    .pressedColor(Header.getBtnPressedColor())
+                    .command((e) -> chat.show())
+                    .font(FSkinFont.get(20)));
+            chat.setDropdownOwner(btnChat);
+            this.add(btnChat);
+            return chat;
+        }
+    }
+
+    /** Header chat button that renders the unread-message badge shared with the in-match chat tab. */
+    protected static class ChatHeaderButton extends FLabel implements IUnreadIndicator {
+        private int unreadCount;
+
+        protected ChatHeaderButton(Builder builder) {
+            super(builder);
+        }
+
+        @Override
+        public void incrementUnread() {
+            unreadCount++;
+            Gdx.graphics.requestRendering();
+        }
+
+        @Override
+        public void clearUnread() {
+            if (unreadCount == 0) { return; }
+            unreadCount = 0;
+            Gdx.graphics.requestRendering();
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            super.draw(g);
+            FMenuTab.drawUnreadBadge(g, unreadCount, getWidth());
         }
     }
 
@@ -1620,12 +1676,49 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             }
 
+            final byte cmdCI = commanderColorIdentity(parentScreen.getDeck());
+            final List<DeckRuleColorIdentity> ciRules = activeColorIdentityRules(parentScreen.getDeck());
+
+            if (card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
+                return false;
+            }
+            for (final DeckRuleColorIdentity rule : ciRules) {
+                if (rule.allowsOffColorIdentity(card.getRules())) {
+                    return false; //Rulebreaker-style exemption - fine as an ordinary card, not partner-commander-only.
+                }
+                if (rule.approvesAdditionalColor(card.getRules(), cmdCI)) {
+                    return false; //fits within the commander's player-chosen additional colors.
+                }
+            }
+            return true;
+        }
+
+        /** The combined color identity of the deck's current commanders (0 if there's no deck yet). */
+        protected static byte commanderColorIdentity(final Deck deck) {
             byte cmdCI = 0;
-            for (final PaperCard p : parentScreen.getDeck().getCommanders()) {
+            if (deck == null) {
+                return cmdCI;
+            }
+            for (final PaperCard p : deck.getCommanders()) {
                 cmdCI |= p.getRules().getColorIdentity().getColor();
             }
+            return cmdCI;
+        }
 
-            return !card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI);
+        /** Every active DeckRule:ColorIdentity rule across the deck's current commanders (empty if there's no deck yet). */
+        protected static List<DeckRuleColorIdentity> activeColorIdentityRules(final Deck deck) {
+            final List<DeckRuleColorIdentity> rules = new ArrayList<>();
+            if (deck == null) {
+                return rules;
+            }
+            for (final PaperCard p : deck.getCommanders()) {
+                for (final DeckRule rule : DeckRule.parseAll(p)) {
+                    if (rule instanceof DeckRuleColorIdentity && rule.isActiveFor(DeckSection.Commander)) {
+                        rules.add((DeckRuleColorIdentity) rule);
+                    }
+                }
+            }
+            return rules;
         }
 
         protected void setVanguard(PaperCard card) {
@@ -1926,14 +2019,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    protected static class DeckSectionPage extends CardManagerPage {
+    public static class DeckSectionPage extends CardManagerPage {
         private final String captionPrefix;
-        protected final DeckSection deckSection;
+        public final DeckSection deckSection;
 
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection) {
             this(cardManager, deckSection, ItemManagerConfig.DECK_EDITOR);
         }
-        protected DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config) {
+        public DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config) {
             this(cardManager, deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
         }
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config, String caption, FImage icon) {
@@ -2099,6 +2192,39 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         removeCard(card);
                     });
                 }));
+            }
+
+            if (currentDeck != null && deckSection == DeckSection.Commander) {
+                for (final DeckRule rule : DeckRule.parseAll(card)) {
+                    if (!(rule instanceof DeckRuleColorIdentity) || !rule.isActiveFor(DeckSection.Commander)) {
+                        continue;
+                    }
+                    final DeckRuleColorIdentity ciRule = (DeckRuleColorIdentity) rule;
+                    if (!ciRule.hasAllowedAdditionalColorBudget()) {
+                        continue;
+                    }
+                    final int additionalColorCount = ciRule.getAdditionalColorCount();
+                    final byte commanderCI = commanderColorIdentity(currentDeck);
+                    final List<String> colorChoices = new ArrayList<>();
+                    for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                        if ((commanderCI & MagicColor.WUBRG[i]) == 0) {
+                            colorChoices.add(MagicColor.Constant.ONLY_COLORS.get(i));
+                        }
+                    }
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAllowedAdditionalColors"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        Set<String> currentColors;
+                        if(card.getMarkedColors() != null)
+                            currentColors = card.getMarkedColors().stream().map(MagicColor.Color::getName).collect(Collectors.toSet());
+                        else
+                            currentColors = null;
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblAllowedAdditionalColors"), 0, additionalColorCount, colorChoices, currentColors, null, result -> {
+                            addCard(card.copyWithMarkedColors(ColorSet.fromNames(result)));
+                            removeCard(card);
+                            if(parentScreen.getCatalogPage() != null)
+                                parentScreen.getCatalogPage().refresh(); //refresh so cards shown match the new allowed additional colors
+                        });
+                    }));
+                }
             }
         }
 

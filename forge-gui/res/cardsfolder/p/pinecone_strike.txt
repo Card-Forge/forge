@@ -1,0 +1,7 @@
+Name:Pinecone Strike
+ManaCost:1 R
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDamage,DBDestroy
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature would die this turn, exile it instead.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.token | ValidTgtsDesc$ artifact token | SpellDescription$ Destroy target artifact token.
+Oracle:Choose one or both —\n• Pinecone Strike deals 3 damage to target creature. If that creature would die this turn, exile it instead.\n• Destroy target artifact token.

@@ -108,6 +108,10 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         return rectangle;
     }
 
+    public Vector2 getCenter() {
+        return rectangle.getCenter(new Vector2());
+    }
+
     public PointOfInterestData getData() {
         return data;
     }

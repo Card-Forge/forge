@@ -1,0 +1,7 @@
+Name:Dathon and Picard at El-Adrel
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | Choices$ DBTemba,DBShaka
+SVar:DBTemba:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Temba, His Arms Wide — Target creature gets +3/+3 and gains trample until end of turn.
+SVar:DBShaka:DB$ Sacrifice | SacValid$ Artifact.!token,Enchantment.!token | SacMessage$ nontoken artifact or enchantment | Defined$ Opponent | SpellDescription$ Shaka, When the Walls Fell — Each opponent sacrifices a nontoken artifact or enchantment of their choice.
+Oracle:Choose one —\n• Temba, His Arms Wide — Target creature gets +3/+3 and gains trample until end of turn.\n• Shaka, When the Walls Fell — Each opponent sacrifices a nontoken artifact or enchantment of their choice.

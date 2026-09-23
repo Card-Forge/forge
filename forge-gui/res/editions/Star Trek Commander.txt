@@ -6,7 +6,33 @@ Type=Commander
 ScryfallCode=TRC
 
 [cards]
+78 R Christine Chapel, Combat Medic @Pauline Voss
 85 M Captain Kirk, Boldly Going @Josh Newton
+132 C Evasive Maneuvers @Evan Shipard
+133 C Head of Security @Alexey Kot
+137 U Shuttle Crew @Pierre Raveneau
+138 C Sickbay Orderly @Thanh Tuấn
+139 C Starfleet Crew @Runa I. Rosenberger
+140 U Will Riker, Assuming Command @Grant Griffin
+141 U Worf, Chief Tactical Officer @Ariel Orea
+142 C Cryogenic Stasis @Arthur Haas
+145 C Exocomp @Pierre Raveneau
+146 C Kolinahr Priest @Andrey Kuzinskiy
+147 U La Forge, Perceptive Engineer @Elizabeth Peiró
+148 U Pelia, Immortal Innovator @Lie Setiawan
+151 U T'Pol, Vulcan Representative @Kieran Yanner
+152 U Badgey, Malicious Glitch @Carlos C Diaz
+153 C Ceti Eel @Monztre
+161 C Defense Force Aggressor @Josu Hernaiz
+162 C Direct Hit @David Szabo
+163 C Gin'tak Charge @Johann Bodin
+165 U Kruge, Genesis Seeker @Flavio Greco Paglia
+166 C Mek'leth Berserker @Johann Bodin
+168 C Warship Flight Crew @Johann Bodin
+172 C Gorn Captain @Jason Pastrana
+173 U Gumato @Raymond Swanland
+175 C Talarian Hook Spider @Zoltan Boros
+177 C Disruptor Pistol @Jason Smith
 192 R Operations Officer @Ioannis Fiore
 193 M Picard, Steadfast Captain @Mark Spears
 194 M Spock, Logical Choice @Bastien Jez
@@ -17,3 +43,7 @@ ScryfallCode=TRC
 199 R Klingon Strike Force @Fahmi Fauzi
 200 M Benjamin Sisko, Besieged @Josu Hernaiz
 201 R Tenacious Tosk @Filipe Pagliuso
+300 R Christine Chapel, Combat Medic @Pauline Voss
+579 C Refute @Mark Spears
+580 C Last Gasp @Arthur Haas
+582 C Run Amok @Carlos C Diaz

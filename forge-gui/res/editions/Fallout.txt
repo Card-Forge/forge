@@ -219,7 +219,7 @@ ScryfallCode=PIP
 211 U Behemoth Sledge @Campbell White
 212 R Biomass Mutation @Nicholas Gregory
 213 R Casualties of War @Samuel Perin
-214 U Corpsejack Menace @Russell Lu
+214 U Corpsejack Menace @Russell Dongjun Lu
 215 R Fervent Charge @Aaron J. Riley
 216 R Find // Finality @Nikola Matkovic
 217 U General's Enforcer @Nino Is
@@ -232,7 +232,7 @@ ScryfallCode=PIP
 224 U Arcane Signet @Eddie Mendoza
 225 R Basilisk Collar @Artur Treffner
 226 R Bloodforged Battle-Axe @James Bousema
-227 U Brass Knuckles @Russell Lu
+227 U Brass Knuckles @Russell Dongjun Lu
 228 R Champion's Helm @Bruno Biazotto
 229 U Contagion Clasp @Zuzanna Wużyk
 230 U Everflowing Chalice @David Astruga
@@ -747,7 +747,7 @@ ScryfallCode=PIP
 739 U Behemoth Sledge @Campbell White
 740 R Biomass Mutation @Nicholas Gregory
 741 R Casualties of War @Samuel Perin
-742 U Corpsejack Menace @Russell Lu
+742 U Corpsejack Menace @Russell Dongjun Lu
 743 R Fervent Charge @Aaron J. Riley
 744 R Find // Finality @Nikola Matkovic
 745 U General's Enforcer @Nino Is
@@ -760,7 +760,7 @@ ScryfallCode=PIP
 752 U Arcane Signet @Eddie Mendoza
 753 R Basilisk Collar @Artur Treffner
 754 R Bloodforged Battle-Axe @James Bousema
-755 U Brass Knuckles @Russell Lu
+755 U Brass Knuckles @Russell Dongjun Lu
 756 R Champion's Helm @Bruno Biazotto
 757 U Contagion Clasp @Zuzanna Wużyk
 758 U Everflowing Chalice @David Astruga

@@ -461,7 +461,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             int burn = p.getManaPool().clearPool(true).size();
 
             if (p.getManaPool().hasBurn()) {
-                final int lost = p.loseLife(burn, false, true);
+                final int lost = p.loseLife(burn, false, true, null);
                 if (lost > 0) {
                     lossMap.put(p, lost);
                 }

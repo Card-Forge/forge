@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Noble Ox
 PT:2/4
 K:Flash
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
+S:Mode$ Continuous | AffectedDefined$ Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBlock | TriggerDescription$ When CARDNAME enters the battlefield, all unblocked creatures attacking you become blocked by CARDNAME.
 SVar:TrigBlock:DB$ Block | DefinedAttacker$ Valid Creature.attackingYou+unblocked | DefinedBlocker$ Self
 AI:RemoveDeck:All

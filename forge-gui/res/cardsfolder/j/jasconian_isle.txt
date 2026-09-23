@@ -1,6 +1,6 @@
 Name:Jasconian Isle
 ManaCost:no cost
-Colors:blue
+Colors:colorless
 Types:Land Creature Island Fish
 PT:3/4
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.

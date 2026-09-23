@@ -128,8 +128,6 @@ public class AudioClip implements IAudioClip {
         return ClipWrapper.Dummy;
     }
 
-
-
     private static boolean waitSoundSystemDelay() {
         try {
             Thread.sleep(SoundSystem.DELAY);

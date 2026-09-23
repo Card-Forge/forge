@@ -6,7 +6,7 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:You may choose not to untap CARDNAME during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | Execute$ TrigStore | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is tapped, put a storage counter on it.
 SVar:TrigStore:DB$ PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1
-A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ R | Amount$ X | AILogic$ ManaRitualBattery | SpellDescription$ Add {R} for each storage counter removed this way.
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ R | Amount$ X | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each storage counter removed this way.
 SVar:X:Count$xPaid
-AI:RemoveDeck:All
+SVar:AIUntapPreference:StorageLand
 Oracle:Dwarven Hold enters tapped.\nYou may choose not to untap Dwarven Hold during your untap step.\nAt the beginning of your upkeep, if Dwarven Hold is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Dwarven Hold: Add {R} for each storage counter removed this way.

@@ -1,0 +1,12 @@
+Name:Christine Chapel, Combat Medic
+ManaCost:3 G
+Types:Legendary Creature Human Doctor
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Strange new worlds — When NICKNAME enters, you gain life equal to the number of differently named lands you control.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put two +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+DeckHas:Ability$LifeGain|Counters
+DeckHints:Ability$LifeGain
+Oracle:Strange new worlds — When Christine Chapel enters, you gain life equal to the number of differently named lands you control.\nWhenever you gain life, put two +1/+1 counters on Christine Chapel.

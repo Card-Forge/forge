@@ -16,6 +16,7 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedTextField;
+import forge.util.BuildInfo;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
@@ -86,6 +87,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbSROptimize = new OptionsCheckBox(localizer.getMessage("cbSROptimize"));
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
     private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
+    private final JCheckBox cbPreferLangForUniqueCards = new OptionsCheckBox(localizer.getMessage("cbPreferLangForUniqueCards"));
     private final JCheckBox cbDisableCardImages = new OptionsCheckBox(localizer.getMessage("lblDisableCardImages"));
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
@@ -145,6 +147,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
     private final FComboBoxPanel<String> cbpCardArtFormat = new FComboBoxPanel<>(localizer.getMessage("cbpCardArtFormat")+":");
     private final FComboBoxPanel<String> cbpCardArtPreference = new FComboBoxPanel<>(localizer.getMessage("lblPreferredArt")+":");
+    private final FComboBoxPanel<String> cbpCardDownloadLang = new FComboBoxPanel<>(localizer.getMessage("cbpCardDownloadLang")+":");
     private final FComboBoxPanel<String> cbpMulliganRule = new FComboBoxPanel<>(localizer.getMessage("cbpMulliganRule")+":");
     private final FComboBoxPanel<String> cbpSoundSets = new FComboBoxPanel<>(localizer.getMessage("cbpSoundSets")+":");
     private final FComboBoxPanel<String> cbpMusicSets = new FComboBoxPanel<>(localizer.getMessage("cbpMusicSets")+":");
@@ -214,7 +217,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUseSentry, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUseSentry")), descriptionConstraints);
 
-        if (FControl.instance.isSnapshot()) {
+        if (BuildInfo.isDevelopmentVersion()) {
             pnlPrefs.add(cbCheckSnapshot, titleConstraints);
             pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSnapshotUpdate")), descriptionConstraints);
         }
@@ -395,6 +398,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbImageFetcher, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlImageFetcher")), descriptionConstraints);
+
+        pnlPrefs.add(cbpCardDownloadLang, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardDownloadLang")), descriptionConstraints);
+
+        pnlPrefs.add(cbPreferLangForUniqueCards, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPreferLangForUniqueCards")), descriptionConstraints);
 
         pnlPrefs.add(cbDisableCardImages, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisableCardImages")), descriptionConstraints);
@@ -780,6 +789,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbImageFetcher() {
         return cbImageFetcher;
+    }
+
+    public JCheckBox getCbPreferLangForUniqueCards() {
+        return cbPreferLangForUniqueCards;
+    }
+
+    public FComboBoxPanel<String> getCbpCardDownloadLangComboBoxPanel() {
+        return cbpCardDownloadLang;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

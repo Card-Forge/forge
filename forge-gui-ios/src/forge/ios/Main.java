@@ -16,14 +16,13 @@ import org.robovm.apple.foundation.NSProcessInfo;
 import org.robovm.apple.uikit.UIApplication;
 import org.robovm.apple.uikit.UIPasteboard;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 import com.badlogic.gdx.backends.iosrobovm.IOSFiles;
+import com.badlogic.gdx.graphics.glutils.HdpiMode;
 
 import forge.Forge;
 import forge.assets.ImageCache;
@@ -94,86 +93,6 @@ public class Main extends IOSApplication.Delegate {
 
     private static int createAppCounter = 0;
 
-    private void copyEssentialResources(final String assetsDir) {
-        log("copyEssentialResources() starting");
-        try {
-            String bundlePath = NSBundle.getMainBundle().getBundlePath();
-            File bundleResDir = new File(bundlePath, "res");
-
-            log("Bundle res dir: " + bundleResDir.getAbsolutePath());
-
-            if (bundleResDir.exists() && bundleResDir.isDirectory()) {
-                // Copy essential small resource directories to avoid watchdog timeout
-
-                // Copy languages directory (9 small files)
-                File bundleLangDir = new File(bundleResDir, "languages");
-                File docsLangDir = new File(assetsDir + "/res", "languages");
-
-                if (bundleLangDir.exists() && !docsLangDir.exists()) {
-                    log("Copying languages directory...");
-                    copyDirectory(bundleLangDir, docsLangDir);
-                    log("Languages copied successfully");
-                } else if (docsLangDir.exists()) {
-                    log("Languages directory already exists");
-                } else {
-                    log("Languages directory not found in bundle");
-                }
-
-                // Copy defaults directory (placeholder images like no_card.jpg)
-                File bundleDefaultsDir = new File(bundleResDir, "defaults");
-                File docsDefaultsDir = new File(assetsDir + "/res", "defaults");
-
-                if (bundleDefaultsDir.exists() && !docsDefaultsDir.exists()) {
-                    log("Copying defaults directory...");
-                    copyDirectory(bundleDefaultsDir, docsDefaultsDir);
-                    log("Defaults copied successfully");
-                } else if (docsDefaultsDir.exists()) {
-                    log("Defaults directory already exists");
-                } else {
-                    log("Defaults directory not found in bundle");
-                }
-            } else {
-                log("No bundled resources found at: " + bundleResDir.getAbsolutePath());
-            }
-        } catch (Exception e) {
-            log("Error copying essential resources: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void copyFile(final File source, final File dest) throws IOException {
-        try (FileInputStream fis = new FileInputStream(source);
-             FileOutputStream fos = new FileOutputStream(dest)) {
-            byte[] buffer = new byte[8192];
-            int length;
-            while ((length = fis.read(buffer)) > 0) {
-                fos.write(buffer, 0, length);
-            }
-        }
-    }
-
-    private void copyDirectory(final File source, final File dest) throws IOException {
-        if (!dest.exists()) {
-            dest.mkdirs();
-        }
-
-        File[] files = source.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                File destFile = new File(dest, file.getName());
-                if (file.isDirectory()) {
-                    copyDirectory(file, destFile);
-                } else {
-                    // Only copy if destination doesn't exist (don't overwrite user changes)
-                    if (!destFile.exists()) {
-                        copyFile(file, destFile);
-                        log("Copied " + file.getName());
-                    }
-                }
-            }
-        }
-    }
-
     @Override
     protected IOSApplication createApplication() {
         synchronized (initLock) {
@@ -200,40 +119,6 @@ public class Main extends IOSApplication.Delegate {
             // timeouts) and the jetsam memory ceiling. Set here, before any game/CardState class loads.
             System.setProperty("forge.staticMemo", "on");
 
-            // Clear card cache when a new build is deployed. The cache stores
-            // pre-parsed card rules for fast startup, but stale caches cause bugs
-            // (e.g., duplicate triggers). Compare the app's CFBundleVersion to a
-            // stored marker — if they differ, this is a new deploy.
-            String appBuild = NSBundle.getMainBundle().getInfoDictionaryObject("CFBundleVersion").toString();
-            File cacheDir = new File(documentsPath + "cache/db/");
-            cacheDir.mkdirs();
-            File buildMarker = new File(cacheDir, ".build_version");
-            String cachedBuild = "";
-            if (buildMarker.exists()) {
-                try {
-                    byte[] bytes = new byte[(int) buildMarker.length()];
-                    FileInputStream fis = new FileInputStream(buildMarker);
-                    fis.read(bytes);
-                    fis.close();
-                    cachedBuild = new String(bytes).trim();
-                } catch (IOException e) { /* treat as mismatch */ }
-            }
-            if (!appBuild.equals(cachedBuild)) {
-                File cardCache = new File(cacheDir, "cardcache.bin");
-                File cardsDb = new File(cacheDir, "cardsdb.bin");
-                if (cardCache.exists()) { cardCache.delete(); log("Cleared stale cardcache.bin (build " + cachedBuild + " -> " + appBuild + ")"); }
-                if (cardsDb.exists()) { cardsDb.delete(); log("Cleared stale cardsdb.bin"); }
-                try {
-                    FileOutputStream fos = new FileOutputStream(buildMarker);
-                    fos.write(appBuild.getBytes());
-                    fos.close();
-                } catch (IOException e) {
-                    log("Could not write build marker: " + e.getMessage());
-                }
-            } else {
-                log("Card cache up-to-date for build " + appBuild);
-            }
-
             final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
             config.useAccelerometer = false;
             config.useCompass = false;
@@ -249,6 +134,17 @@ public class Main extends IOSApplication.Delegate {
             // Detect if running on iPad
             boolean isTablet = org.robovm.apple.uikit.UIDevice.getCurrentDevice().getUserInterfaceIdiom()
                 == org.robovm.apple.uikit.UIUserInterfaceIdiom.Pad;
+
+            // The backend defaults to HdpiMode.Logical: getWidth/getHeight report
+            // logical points while getPpcX/getPpcY report physical px/cm, so
+            // forge.util.Utils's finger-size math is inflated by the retina scale
+            // (3x on modern iPhones) and saturates its max clamp — the oversized
+            // in-game prompt buttons. Pixels mode gives Android-identical pixel
+            // units on phones; iPads keep Logical because that layout is
+            // device-verified and must not change.
+            if (!isTablet) {
+                config.hdpiMode = HdpiMode.Pixels;
+            }
 
             forge.gui.GuiBase.setIsIOS(true);
 
@@ -310,7 +206,7 @@ public class Main extends IOSApplication.Delegate {
         // super MUST run first so ObjectAL's audio-session interruption recovery works.
         super.didBecomeActive(application);
         // Permanently suspend the OpenAL effects engine. Sound effects now play through
-        // libGDX Music (AVAudioPlayer) on iOS (see forge.sound.AudioClip), so OpenAL is
+        // libGDX Music (AVAudioPlayer) on iOS (see forge.sound.MusicAudioClip), so OpenAL is
         // unused - but libGDX auto-initializes it, and an ACTIVE OpenAL 3D-mixer render
         // cycle beats against the AVAudioPlayer music/effects (mediaserverd) clock,
         // producing the slow periodic music crackle. Suspending it (alcSuspendContext)
@@ -358,7 +254,7 @@ public class Main extends IOSApplication.Delegate {
                 // DNS). There is no external config on iOS anyway: the DSN is set right here.
                 options.setEnableExternalConfiguration(false);
                 options.setDebugMetaLoader(io.sentry.internal.debugmeta.NoOpDebugMetaLoader.getInstance());
-                options.setRelease(forge.util.BuildInfo.getVersionString());
+                options.setRelease(getVersionString());
                 options.setEnvironment("iOS");
                 options.setTag("Platform", "iOS/RoboVM");
                 options.setShutdownTimeoutMillis(5000);
@@ -431,7 +327,7 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public String getVersionString() {
-            return "0.0";
+            return Main.getVersionString();
         }
 
         @Override
@@ -466,12 +362,22 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public void restart() {
-            // Not possible on iOS
+            // iOS cannot programmatically relaunch an app, so a restart is an exit
+            // the user completes by reopening Forge. Restart-required settings
+            // (Adventure plane, skin, language, card DB toggles) are saved before
+            // this is called and take effect on the next launch.
+            exit();
         }
 
         @Override
         public void exit() {
-            // Not possible on iOS
+            // Programmatic termination is discouraged by Apple's HIG for App Store
+            // apps; Forge iOS is sideload/TestFlight distributed, and keeping the
+            // process alive here left restart-required settings silently unapplied
+            // (process-lifetime singletons like the adventure plane config can only
+            // be rebuilt by a fresh launch). Revisit if App Store distribution ever
+            // becomes a goal.
+            System.exit(0);
         }
 
         @Override
@@ -536,6 +442,22 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void requestFileAcces() {
 
+        }
+    }
+
+    private static String getVersionString() {
+        // RoboVM AOT-links everything into one native binary with no runtime JAR manifest, so
+        // BuildInfo.getVersionString() (manifest Implementation-Version) resolves to "GIT" on iOS.
+        // Read the app bundle's own version instead — the iOS analog of Android's PackageManager
+        // versionName. CFBundleShortVersionString is the marketing version; CFBundleVersion is the
+        // (monotonic, per-upload) App Store build number.
+        try {
+            NSBundle b = NSBundle.getMainBundle();
+            String version = b.getInfoDictionaryObject("CFBundleShortVersionString").toString();
+            String build = b.getInfoDictionaryObject("CFBundleVersion").toString();
+            return version + " (" + build + ")";
+        } catch (Exception e) {
+            return "0.0";
         }
     }
 }

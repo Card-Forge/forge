@@ -283,6 +283,10 @@ public class DiscardEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = AbilityKey.addCardZoneTableParams(params, sa);
 
+        if (mode.equals("Random")) {
+            params.put(AbilityKey.Random, true);
+        }
+
         // extra check for Circling Vultures
         discard(sa, !(sa instanceof AbilityStatic), discardedMap, params);
 

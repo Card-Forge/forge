@@ -42,6 +42,7 @@ import java.util.Map;
  */
 
 public class AnimateAi extends SpellAbilityAi {
+
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Game game = ai.getGame();

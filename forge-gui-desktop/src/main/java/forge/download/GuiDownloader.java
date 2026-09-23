@@ -115,7 +115,10 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         pnl.add(pnlDialog, "w 400px!, h 350px!, ax center, ay center");
         SOverlayUtils.showOverlay();
 
-        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, null, this::fireStateChanged);
+        progressBar.setIndeterminate(true);
+
+        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose,
+                () -> progressBar.setIndeterminate(false), this::fireStateChanged);
     }
 
     private class ProxyHandler implements ChangeListener {

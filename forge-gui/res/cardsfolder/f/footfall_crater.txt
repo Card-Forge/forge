@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Land
 K:Cycling:1
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ DBPump | Description$ Enchanted land has "{T}: Target creature gains trample and haste until end of turn."
+S:Mode$ Continuous | AffectedDefined$ AttachedBy Self | Affected$ Land | AddAbility$ DBPump | Description$ Enchanted land has "{T}: Target creature gains trample and haste until end of turn."
 SVar:DBPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | KW$ Trample & Haste | SpellDescription$ Target creature gains trample and haste until end of turn.
 SVar:NonStackingAttachEffect:True
 SVar:PlayMain1:TRUE
