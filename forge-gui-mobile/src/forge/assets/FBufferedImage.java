@@ -70,26 +70,21 @@ public abstract class FBufferedImage extends FImageComplex {
         try {
             if (frameBuffer == null) {
                 Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
-
+                Forge.getGraphics().getBatch().end();
                 //render texture to frame buffer if needed
                 frameBuffer = new FrameBuffer(Format.RGBA8888, (int) width, (int) height, false);
                 frameBuffer.begin();
-
                 //frame graphics must be given a projection matrix
                 //so stuff is rendered properly to custom sized frame buffer
-                Graphics frameGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
                 Matrix4 matrix = new Matrix4();
                 matrix.setToOrtho2D(0, 0, width, height);
-                frameGraphics.setProjectionMatrix(matrix);
-
-                frameGraphics.begin(width, height);
-                draw(frameGraphics, width, height);
-                frameGraphics.end();
-
+                Forge.getGraphics().setProjectionMatrix(matrix);
+                Forge.getGraphics().begin(width, height);
+                draw(Forge.getGraphics(), width, height);
+                Forge.getGraphics().end();
                 frameBuffer.end();
-                frameGraphics.dispose();
-
                 Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+                Forge.getGraphics().getBatch().begin();
             }
         } catch (Exception e) {
             e.printStackTrace();
