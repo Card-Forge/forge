@@ -369,8 +369,6 @@ public class GameHUD extends Stage {
 
     Texture miniMapTexture;
     TextureRegion miniMapRegion;
-    Texture miniMapToolTipTexture;
-    Pixmap miniMapToolTipPixmap;
     public boolean fromWorldMap = false;
 
     public void enter() {
@@ -378,13 +376,6 @@ public class GameHUD extends Stage {
         Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
         miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
         miniMapRegion = new TextureRegion(miniMapTexture, 0, 0, viewWidth, viewHeight);
-        if (miniMapToolTipTexture != null)
-            miniMapToolTipTexture.dispose();
-        if (miniMapToolTipPixmap != null)
-            miniMapToolTipPixmap.dispose();
-        miniMapToolTipPixmap = new Pixmap((int) (miniMap.getWidth() * 3), (int) (miniMap.getHeight() * 3), Pixmap.Format.RGBA8888);
-        miniMapToolTipPixmap.drawPixmap(WorldSave.getCurrentSave().getWorld().getBiomeImage(), 0, 0, WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight(), 0, 0, miniMapToolTipPixmap.getWidth(), miniMapToolTipPixmap.getHeight());
-        miniMapToolTipTexture = new Texture(miniMapToolTipPixmap);
         miniMap.setDrawable(new TextureRegionDrawable(miniMapRegion));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
@@ -1177,7 +1168,6 @@ public class GameHUD extends Stage {
 
     @Override
     public void dispose() {
-        Forge.safeDispose(miniMapToolTipTexture, miniMapToolTipPixmap);
         super.dispose();
     }
 
