@@ -568,7 +568,13 @@ public class VLobby implements ILobbyView {
     // Re-broadcasts a deck whose card-art sleeve changed, so networked opponents pick up the new sleeve
     void fireDeckSleeveChange(final int index, final Deck deck) {
         if (playerChangeListener != null && deck != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
+            // Send our copy with the new sleeve rather than the saved deck, which lacks the
+            // scheme, planar and avatar sections picked for this player in the lobby
+            final Deck withSleeve = decks[index] == null ? deck : new Deck(decks[index]);
+            withSleeve.setSleeveArtKey(deck.getSleeveArtKey());
+            withSleeve.setSleeveArtOffset(deck.getSleeveArtOffset());
+            decks[index] = withSleeve;
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(withSleeve));
         }
     }
 
