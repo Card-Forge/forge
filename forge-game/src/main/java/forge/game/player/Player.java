@@ -2639,7 +2639,12 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Then runs triggers.
      */
     public void planeswalk(SpellAbility sa) {
-        planeswalkTo(sa, new CardCollection(getZone(ZoneType.PlanarDeck).get(0)));
+        final PlayerZone planarDeck = getZone(ZoneType.PlanarDeck);
+        if (planarDeck.isEmpty()) {
+            System.out.println(getName() + " has no planar deck to planeswalk from");
+            return;
+        }
+        planeswalkTo(sa, new CardCollection(planarDeck.get(0)));
     }
 
     /**

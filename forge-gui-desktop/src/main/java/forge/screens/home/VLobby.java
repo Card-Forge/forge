@@ -674,6 +674,11 @@ public class VLobby implements ILobbyView {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
             fireDeckChangeListener(playerIndex, deck);
+            // The new main deck replaces the old one wholesale, dropping the scheme, planar and
+            // avatar sections picked for this player, so re-apply the variant selections.
+            selectSchemeDeck(playerIndex);
+            selectPlanarDeck(playerIndex);
+            selectVanguardAvatar(playerIndex);
         }
         mainChooser.saveState();
     }
