@@ -1055,9 +1055,7 @@ public class MapStage extends GameStage {
         java.util.Collections.sort(navVerticesList, distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
-            int enemyCount = enemies.size();
-
-            for (int i = 0; i < enemyCount; i++) {
+            for (int i = enemies.size() - 1; i >= 0; i--) {
                 EnemySprite mob = enemies.get(i);
                 if (mob == null || mob.inactive) {
                     continue;
@@ -1127,8 +1125,6 @@ public class MapStage extends GameStage {
         positions.add(player.pos());
         if (positions.size() > 4)
             positions.remove();
-
-        int actorCount = actors.size;
 
         for (int i = actors.size - 1; i >= 0; i--) {
             MapActor actor = actors.get(i);
