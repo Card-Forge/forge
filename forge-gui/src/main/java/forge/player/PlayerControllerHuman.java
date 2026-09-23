@@ -39,6 +39,7 @@ import forge.game.player.actions.ColorChoiceAction;
 import forge.game.player.actions.ConfirmAction;
 import forge.game.player.actions.ManaComboAction;
 import forge.game.player.actions.ModeChoiceAction;
+import forge.game.player.actions.PassPriorityAction;
 import forge.game.player.actions.PayCostAction;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
@@ -1685,6 +1686,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         boolean nowMayAutoPass = autoPassing || skipsPromptForStackOrPhase();
 
         if (nowMayAutoPass) {
+            // A skipped phase has no priority input to record its implicit pass.
+            if (macros != null && macros.isRecording()) {
+                macros.addRememberedAction(new PassPriorityAction(stack.isEmpty(), getGame().getPhaseHandler().getPhase()));
+            }
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
@@ -3808,11 +3813,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** An auto-yielded ability on top of the stack, or a phase set to be skipped with the stack empty.
      *  Reads the view, not the engine, because this also runs on network threads. */
     private boolean skipsPromptForStackOrPhase() {
-        if (isMacroActive()) return false;
+        if (macros != null && macros.isReplaying()) return false;
         final GameView gameView = getGui().getGameView();
         if (gameView == null) return false;
         final StackItemView top = gameView.peekStack();
-        if (top != null) return top.isAbility() && shouldAutoYield(top.getKey());
+        if (top != null) return !isMacroActive() && top.isAbility() && shouldAutoYield(top.getKey());
         final PlayerView turnPlayer = gameView.getPlayerTurn();
         final PhaseType phase = gameView.getPhase();
         return turnPlayer != null && phase != null && isUiSetToSkipPhase(turnPlayer, phase);
@@ -3868,7 +3873,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
-        if (isMacroActive()) {
+        if (macros != null && macros.isReplaying()) {
             return false;
         }
         if (isRemoteClient()) {
