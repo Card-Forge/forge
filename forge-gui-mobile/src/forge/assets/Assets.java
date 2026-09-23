@@ -26,7 +26,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
-import forge.Graphics;
 import forge.animation.GifAnimation;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -105,7 +104,6 @@ public class Assets implements Disposable {
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
-    private Graphics assetGraphics;
     private boolean isDisposed = false;
     private int miniMapID;
 
@@ -157,7 +155,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics, miniMapTexture);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -183,12 +181,6 @@ public class Assets implements Disposable {
         if (fonts != null)
             fonts.clear();
         Forge.safeDispose(manager);
-    }
-
-    public Graphics getAssetGraphics() {
-        if (assetGraphics == null)
-            assetGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
-        return assetGraphics;
     }
 
     public GifAnimation getGifAnimation() {

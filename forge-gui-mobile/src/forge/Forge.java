@@ -138,7 +138,6 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
-    public static final int LOW_SPRITES_CAP = 30; // FBufferedImage.java sprites capacity
     public static final int HIGH_SPRITES_CAP = 2000; // Adventure and Classic sprites capacity
     private static boolean isDisposed = false;
     public static boolean invokeWorldSave = false;
