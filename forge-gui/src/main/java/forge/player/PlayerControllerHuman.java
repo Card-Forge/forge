@@ -952,18 +952,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (useFloatingHandReveal) {
                 final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
                 zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
-                final Iterable<PlayerZoneUpdate>[] zonesShown = new Iterable[1];
-                FThreads.invokeInEdtNowOrLater(() -> {
-                    getGui().updateZones(zonesToUpdate);
-                    zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
-                });
+                // Called on the game thread: the GUI marshals its own Swing work, and a remote GUI must
+                // sync state from here while the game is not advancing
+                getGui().updateZones(zonesToUpdate);
+                final Iterable<PlayerZoneUpdate> zonesShown = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
+                getGui().hideZones(getLocalPlayerView(), zonesShown);
             } else {
                 getGui().reveal(fm, collection);
             }

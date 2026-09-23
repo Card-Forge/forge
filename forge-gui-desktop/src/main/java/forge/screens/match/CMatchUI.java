@@ -530,6 +530,10 @@ public final class CMatchUI
 
     @Override
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        if (!FThreads.isGuiThread()) {
+            FThreads.invokeInEdtLater(() -> updateZones(zonesToUpdate));
+            return;
+        }
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
 
@@ -587,6 +591,11 @@ public final class CMatchUI
 
     @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        if (!FThreads.isGuiThread()) {
+            final AtomicReference<Iterable<PlayerZoneUpdate>> result = new AtomicReference<>();
+            FThreads.invokeInEdtAndWait(() -> result.set(tempShowZones(controller, zonesToUpdate)));
+            return result.get();
+        }
         List<PlayerZoneUpdate> updatedPlayerZones = Lists.newArrayList();
 
         for (final PlayerZoneUpdate update : zonesToUpdate) {
@@ -617,6 +626,10 @@ public final class CMatchUI
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        if (!FThreads.isGuiThread()) {
+            FThreads.invokeInEdtLater(() -> hideZones(controller, zonesToUpdate));
+            return;
+        }
         if (zonesToUpdate != null) {
             for (final PlayerZoneUpdate update : zonesToUpdate) {
                 final PlayerView player = update.getPlayer();
