@@ -480,9 +480,13 @@ public class Assets implements Disposable {
             return miniMapTexture;
         try {
             // try to reuse existing texture to save VRAM init and overwrite the pixeldata
-            if (miniMapTexture != null) {
+            if (miniMapTexture != null
+                && miniMapTexture.getWidth() == pixmap.getWidth()
+                && miniMapTexture.getHeight() == pixmap.getHeight()) {
                 miniMapTexture.draw(pixmap, 0, 0);
             } else {
+                if (miniMapTexture != null)
+                    miniMapTexture.dispose();
                 miniMapTexture = new Texture(pixmap);
             }
         } catch (Exception e) {
