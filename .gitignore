@@ -98,8 +98,77 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 
-# Ignore Claude configuration
-.claude
 # EDHREC commander matrix tool intermediates
 forge-gui/tools/build
 forge-gui-ios/robovm.properties
+
+# ==============================================================================
+# Security, Credentials, and Secrets
+# ==============================================================================
+
+# Environment variable files
+.env
+.env.*
+*.env
+
+# Secret, credential, and auth config files
+secrets.json
+secrets.yaml
+secrets.yml
+*.secret
+*.secrets
+credentials.json
+credentials.yaml
+credentials.yml
+*.credentials
+.credentials/
+client_secret*.json
+service-account*.json
+google-credentials*.json
+auth.json
+.netrc
+.npmrc
+.pypirc
+
+# Private keys, certificates, keystores, and SSH credentials
+*.key
+*.pem
+*.pfx
+*.p12
+*.pkcs12
+*.crt
+*.cer
+*.jks
+*.keystore
+*.truststore
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+id_ecdsa
+id_ecdsa.pub
+
+# AI tools, LLM assistants, and IDE agent caches/configs
+.claude
+.claude/
+.claude*.json
+.claude*.yaml
+.codex/
+.codex*
+.openai/
+.openai*
+.anthropic/
+.anthropic*
+.gemini/
+.gemini*
+.agy/
+.agy*
+.antigravity/
+.antigravity*
+.cursor/
+.cursorrules.local
+.continue/
+
+# Local developer overrides
+local.properties
+*.local.properties
