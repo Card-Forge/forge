@@ -161,23 +161,40 @@ public class FGameClient implements IToServer, IHasForgeLog {
 
     @Override
     public void send(final NetEvent event) {
+        trySend(event);
+    }
+
+    /**
+     * Returns false when the event was dropped rather than written. The channel
+     * is null or inactive while a reconnect is in progress (and after FAILED /
+     * SEAT_LOST), so UI actions taken during that window are discarded; the
+     * server replays the current Input prompt on resume.
+     */
+    private boolean trySend(final NetEvent event) {
         if (disconnectSimulated) {
-            return;
+            return false;
+        }
+        // Read the volatile once: the reconnect thread can null it between uses
+        final Channel ch = channel;
+        if (ch == null || !ch.isActive()) {
+            netLog.warn("Client not connected (state={}), dropped {}", getReconnectState(), event);
+            return false;
         }
         netLog.info("Client sent {}", event);
-        final CompatibleObjectEncoder encoder = channel.pipeline().get(CompatibleObjectEncoder.class);
+        final CompatibleObjectEncoder encoder = ch.pipeline().get(CompatibleObjectEncoder.class);
         if (encoder == null) {
             netLog.error("No encoder in client pipeline for {}", event);
-            return;
+            return false;
         }
         final ByteBuf encoded;
         try {
-            encoded = encoder.encodeToBuf(event, channel.alloc());
+            encoded = encoder.encodeToBuf(event, ch.alloc());
         } catch (Exception e) {
             netLog.error(e, "Client encode error for {}", event);
-            return;
+            return false;
         }
-        channel.writeAndFlush(encoded);
+        ch.writeAndFlush(encoded);
+        return true;
     }
 
     /**
@@ -226,7 +243,10 @@ public class FGameClient implements IToServer, IHasForgeLog {
     public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
 
-        send(event);
+        if (!trySend(event)) {
+            // No reply will ever arrive; unblock the caller instead of hanging it
+            replies.complete(event.getId(), null);
+        }
 
         // Wait for reply
         return replies.get(event.getId());
