@@ -76,26 +76,53 @@ def get_default_target_dirs() -> list[str]:
     """Locations where animated cards are discovered by both Desktop and Mobile Forge."""
     cache_dir = get_platform_cache_dir()
     targets = [
-        # Main project repository resource dir
+        # Main project repository resource dirs
         str(REPO_ROOT / "res" / "animated_cards"),
+        str(REPO_ROOT / "forge-gui" / "res" / "animated_cards"),
     ]
 
-    # Runnable snapshot distribution dir(s) if built
+    # Target folder in forge-installer and all app instances below it
     installer_target = REPO_ROOT / "forge-installer" / "target"
     if installer_target.is_dir():
-        for dist_dir in sorted(installer_target.glob("forge-installer-*")):
-            if dist_dir.is_dir() and not dist_dir.name.endswith(".jar"):
-                targets.append(str(dist_dir / "res" / "animated_cards"))
+        # 1. Directly in installer target
+        targets.append(str(installer_target / "res" / "animated_cards"))
+
+        # 2. Recursively find all .app bundles and all app instances below forge-installer/target
+        for root, dirs, _ in os.walk(installer_target):
+            rpath = Path(root)
+
+            # Check for any .app bundle
+            for d in dirs:
+                if d.endswith(".app"):
+                    app_dir = rpath / d
+                    targets.append(str(app_dir / "Contents" / "Resources" / "res" / "animated_cards"))
+                    targets.append(str(app_dir / "Contents" / "MacOS" / "res" / "animated_cards"))
+                    targets.append(str(app_dir / "res" / "animated_cards"))
+                    targets.append(str(app_dir.parent / "res" / "animated_cards"))
+
+            # Check for any directory named 'res'
+            if rpath.name == "res":
+                targets.append(str(rpath / "animated_cards"))
+            elif (rpath / "res").is_dir():
+                targets.append(str(rpath / "res" / "animated_cards"))
 
     # Local user cache pics dir
     targets.append(str(cache_dir / "pics" / "cards" / "animated_cards"))
     # Local user cache root
     targets.append(str(cache_dir / "animated_cards"))
 
+    # macOS application locations if Forge.app is installed
+    if sys.platform == "darwin":
+        for app_path in [Path("/Applications/Forge.app"), Path.home() / "Applications" / "Forge.app"]:
+            if app_path.is_dir():
+                targets.append(str(app_path / "Contents" / "Resources" / "res" / "animated_cards"))
+                targets.append(str(app_path / "res" / "animated_cards"))
+
     # Windows fallback paths if running on Windows
     if sys.platform == "win32":
         targets.extend([
             r"D:\projects\forge\res\animated_cards",
+            r"D:\projects\forge\forge-gui\res\animated_cards",
             r"D:\projects\forge\forge-installer\target\forge-installer-2.0.15-SNAPSHOT\res\animated_cards",
         ])
 
@@ -115,10 +142,20 @@ def get_cache_search_dirs() -> list[str]:
     cache_dir = get_platform_cache_dir()
     dirs = [
         str(cache_dir / "pics" / "cards"),
+        str(REPO_ROOT / "forge-gui" / "res" / "cardsfolder"),
         str(REPO_ROOT / "res" / "cardsfolder"),
     ]
+    installer_target = REPO_ROOT / "forge-installer" / "target"
+    if installer_target.is_dir():
+        for dist_dir in sorted(installer_target.glob("forge-installer-*")):
+            cf_dir = dist_dir / "res" / "cardsfolder"
+            if cf_dir.is_dir():
+                dirs.append(str(cf_dir))
     if sys.platform == "win32":
-        dirs.append(r"D:\projects\forge\res\cardsfolder")
+        dirs.extend([
+            r"D:\projects\forge\res\cardsfolder",
+            r"D:\projects\forge\forge-gui\res\cardsfolder",
+        ])
 
     seen = set()
     unique = []
@@ -130,15 +167,38 @@ def get_cache_search_dirs() -> list[str]:
     return unique
 
 
+def get_editions_search_dirs() -> list[str]:
+    """Edition definitions search directories."""
+    dirs = [
+        str(REPO_ROOT / "forge-gui" / "res" / "editions"),
+        str(REPO_ROOT / "res" / "editions"),
+    ]
+    installer_target = REPO_ROOT / "forge-installer" / "target"
+    if installer_target.is_dir():
+        for dist_dir in sorted(installer_target.glob("forge-installer-*")):
+            ed_dir = dist_dir / "res" / "editions"
+            if ed_dir.is_dir():
+                dirs.append(str(ed_dir))
+    if sys.platform == "win32":
+        dirs.extend([
+            r"D:\projects\forge\res\editions",
+            r"D:\projects\forge\forge-gui\res\editions",
+            r"D:\projects\forge\forge-installer\target\forge-installer-2.0.15-SNAPSHOT\res\editions",
+        ])
+
+    seen = set()
+    unique = []
+    for d in dirs:
+        norm = os.path.normpath(d)
+        if norm not in seen and os.path.isdir(norm):
+            seen.add(norm)
+            unique.append(norm)
+    return unique
+
+
 DEFAULT_TARGET_DIRS = get_default_target_dirs()
 CACHE_SEARCH_DIRS = get_cache_search_dirs()
-
-# Edition definitions search directories
-EDITIONS_SEARCH_DIRS = [
-    str(REPO_ROOT / "res" / "editions"),
-]
-if sys.platform == "win32":
-    EDITIONS_SEARCH_DIRS.append(r"D:\projects\forge\res\editions")
+EDITIONS_SEARCH_DIRS = get_editions_search_dirs()
 
 # Edition sections that define cards with collector numbers
 EDITION_SECTIONS = {
@@ -577,20 +637,29 @@ def process_card_animation(
 
         # 4. Deploy to all active Forge destinations
         print("\n[*] Deploying animated frames to Forge directories:")
-        target_subfolder = card_name.strip()
-        deployed_count = 0
+        target_subfolders = [card_name.strip()]
+        if art_index is not None:
+            indexed_folder = f"{card_name.strip()}{art_index}"
+            if indexed_folder not in target_subfolders:
+                target_subfolders.append(indexed_folder)
+        if card_number:
+            col_folder = f"{card_name.strip()}_{str(card_number).strip()}"
+            if col_folder not in target_subfolders:
+                target_subfolders.append(col_folder)
 
+        deployed_count = 0
         target_dirs = get_default_target_dirs()
         for base_target in target_dirs:
-            dest_dir = os.path.join(base_target, target_subfolder)
-            try:
-                os.makedirs(dest_dir, exist_ok=True)
-                for f in os.listdir(composited_dir):
-                    shutil.copy2(os.path.join(composited_dir, f), os.path.join(dest_dir, f))
-                print(f"  [OK] {dest_dir} ({len(raw_frames)} frames)")
-                deployed_count += 1
-            except Exception as ex:
-                print(f"  [SKIP] Could not write to {dest_dir}: {ex}")
+            for sub in target_subfolders:
+                dest_dir = os.path.join(base_target, sub)
+                try:
+                    os.makedirs(dest_dir, exist_ok=True)
+                    for f in os.listdir(composited_dir):
+                        shutil.copy2(os.path.join(composited_dir, f), os.path.join(dest_dir, f))
+                    print(f"  [OK] {dest_dir} ({len(raw_frames)} frames)")
+                    deployed_count += 1
+                except Exception as ex:
+                    print(f"  [SKIP] Could not write to {dest_dir}: {ex}")
 
         num_msg = f" (collector #{card_number})" if card_number else ""
         print(f"\n[SUCCESS] Successfully generated and deployed animation for '{card_name}'{num_msg} ({len(raw_frames)} frames @ {fps} FPS)!")

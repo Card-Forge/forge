@@ -269,10 +269,32 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return card.getName();
     }
 
+    private int getCardArtIndex() {
+        if (card != null) {
+            forge.item.IPaperCard pc = card.getPaperCard();
+            if (pc != null) {
+                return pc.getArtIndex();
+            }
+        }
+        return 0;
+    }
+
+    private String getCollectorNumber() {
+        if (card != null) {
+            forge.item.IPaperCard pc = card.getPaperCard();
+            if (pc != null) {
+                return pc.getCollectorNumber();
+            }
+        }
+        return null;
+    }
+
     private void setImage(final BufferedImage srcImage) {
         String cardName = getCardName();
-        if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
-            BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName);
+        int artIndex = getCardArtIndex();
+        String collectorNum = getCollectorNumber();
+        if (cardName != null && CardAnimationManager.hasAnimation(cardName, artIndex, collectorNum)) {
+            BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName, artIndex, collectorNum);
             if (animFrame != null) {
                 if (imagePanel != null) {
                     imagePanel.setImage(animFrame);
@@ -332,8 +354,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         if (card != null && imagePanel != null) {
             String cardName = getCardName();
-            if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
-                BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName);
+            int artIndex = getCardArtIndex();
+            String collectorNum = getCollectorNumber();
+            if (cardName != null && CardAnimationManager.hasAnimation(cardName, artIndex, collectorNum)) {
+                BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName, artIndex, collectorNum);
                 if (animFrame != null) {
                     imagePanel.setImage(animFrame);
                 }
@@ -1119,9 +1143,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         updateImage();
 
         String cardName = getCardName();
-        if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+        int artIndex = getCardArtIndex();
+        String collectorNum = getCollectorNumber();
+        if (cardName != null && CardAnimationManager.hasAnimation(cardName, artIndex, collectorNum)) {
             CardAnimationManager.register(this, cardName);
-            BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName);
+            BufferedImage animFrame = CardAnimationManager.getCurrentFrame(cardName, artIndex, collectorNum);
             if (animFrame != null) {
                 imagePanel.setImage(animFrame);
             }

@@ -31,7 +31,9 @@ import forge.StaticData;
 import forge.game.card.Card;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
+import forge.gui.CardAnimationManager;
 import forge.gui.SOverlayUtils;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FOverlay;
@@ -214,10 +216,42 @@ public enum CardZoomer {
      * Needs to be called whenever the source image changes.
      */
     private void setImage() {
-        imagePanel = new FImagePanel();
+        final String cardName = thisCard != null ? thisCard.getName() : null;
+        int artIndex = 0;
+        String collectorNum = null;
+        if (thisCard != null && thisCard.getCard() != null) {
+            IPaperCard pc = thisCard.getCard().getPaperCard();
+            if (pc != null) {
+                artIndex = pc.getArtIndex();
+                collectorNum = pc.getCollectorNumber();
+            }
+        }
 
-        final BufferedImage xlhqImage = FImageUtil.getImageXlhq(thisCard);
-        imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(thisCard) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
+        final int finalArtIndex = artIndex;
+        final String finalCollectorNum = collectorNum;
+        final boolean hasAnim = cardName != null && CardAnimationManager.hasAnimation(cardName, finalArtIndex, finalCollectorNum);
+
+        if (hasAnim) {
+            imagePanel = new FImagePanel() {
+                @Override
+                public void paint(java.awt.Graphics g) {
+                    BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName, finalArtIndex, finalCollectorNum);
+                    if (frame != null) {
+                        setAnimatedImage(frame);
+                    }
+                    super.paint(g);
+                }
+            };
+            CardAnimationManager.register(imagePanel, cardName);
+            BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName, finalArtIndex, finalCollectorNum);
+            if (frame != null) {
+                imagePanel.setAnimatedImage(frame);
+            }
+        } else {
+            imagePanel = new FImagePanel();
+            final BufferedImage xlhqImage = FImageUtil.getImageXlhq(thisCard);
+            imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(thisCard) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
+        }
 
         pnlMain.removeAll();
         pnlMain.add(imagePanel, "w 80%!, h 80%!");
@@ -257,6 +291,9 @@ public enum CardZoomer {
 
     public void closeZoomer() {
         if (!isOpen) { return; }
+        if (imagePanel != null) {
+            CardAnimationManager.unregister(imagePanel);
+        }
         stopMouseWheelCoolDownTimer();
         isOpen = false;
         SOverlayUtils.hideOverlay();

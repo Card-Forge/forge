@@ -61,6 +61,10 @@ public class CardView extends GameEntityView {
         return getCardForUi(get(TrackableProperty.PaperCardBackup));
     }
 
+    public IPaperCard getPaperCard() {
+        return get(TrackableProperty.PaperCardBackup);
+    }
+
     public static CardView getCardForUi(IPaperCard pc) {
         return Card.getCardForUi(pc).getView();
     }

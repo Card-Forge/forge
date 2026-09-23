@@ -102,6 +102,16 @@ __pycache__
 forge-gui/tools/build
 forge-gui-ios/robovm.properties
 
+# Generated card animation frames and local video assets
+animated_cards/
+**/animated_cards/
+*.mp4
+*.mov
+*.avi
+*.webm
+._*
+
+
 # ==============================================================================
 # Security, Credentials, and Secrets
 # ==============================================================================

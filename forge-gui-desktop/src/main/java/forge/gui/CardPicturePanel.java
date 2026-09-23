@@ -28,7 +28,9 @@ import javax.swing.JPanel;
 
 import forge.ImageCache;
 import forge.ImageKeys;
+import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -100,9 +102,11 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         this.isFlipped = isFlipped;
 
         String cardName = getDisplayedCardName();
-        if (mayView && cardName != null && CardAnimationManager.hasAnimation(cardName)) {
+        int artIndex = getDisplayedCardArtIndex();
+        String collectorNum = getDisplayedCollectorNumber();
+        if (mayView && cardName != null && CardAnimationManager.hasAnimation(cardName, artIndex, collectorNum)) {
             CardAnimationManager.register(this, cardName);
-            BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName);
+            BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName, artIndex, collectorNum);
             if (frame != null) {
                 this.currentImage = frame;
                 this.panel.setAnimatedImage(isFlipped ? rotateImage180(frame) : frame);
@@ -209,8 +213,10 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     public void paint(final java.awt.Graphics g) {
         if (mayView && displayed != null) {
             String cardName = getDisplayedCardName();
-            if (cardName != null && CardAnimationManager.hasAnimation(cardName)) {
-                BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName);
+            int artIndex = getDisplayedCardArtIndex();
+            String collectorNum = getDisplayedCollectorNumber();
+            if (cardName != null && CardAnimationManager.hasAnimation(cardName, artIndex, collectorNum)) {
+                BufferedImage frame = CardAnimationManager.getCurrentFrame(cardName, artIndex, collectorNum);
                 if (frame != null) {
                     this.panel.setAnimatedImage(isFlipped ? rotateImage180(frame) : frame);
                 }
@@ -226,6 +232,36 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
             return ((PaperCard) displayed).getName();
         } else if (displayed instanceof InventoryItem) {
             return ((InventoryItem) displayed).getName();
+        }
+        return null;
+    }
+
+    private int getDisplayedCardArtIndex() {
+        if (displayed instanceof CardStateView) {
+            CardView cv = ((CardStateView) displayed).getCard();
+            if (cv != null) {
+                IPaperCard pc = cv.getPaperCard();
+                if (pc != null) {
+                    return pc.getArtIndex();
+                }
+            }
+        } else if (displayed instanceof PaperCard) {
+            return ((PaperCard) displayed).getArtIndex();
+        }
+        return 0;
+    }
+
+    private String getDisplayedCollectorNumber() {
+        if (displayed instanceof CardStateView) {
+            CardView cv = ((CardStateView) displayed).getCard();
+            if (cv != null) {
+                IPaperCard pc = cv.getPaperCard();
+                if (pc != null) {
+                    return pc.getCollectorNumber();
+                }
+            }
+        } else if (displayed instanceof PaperCard) {
+            return ((PaperCard) displayed).getCollectorNumber();
         }
         return null;
     }

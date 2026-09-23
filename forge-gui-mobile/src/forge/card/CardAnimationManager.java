@@ -1,9 +1,11 @@
 package forge.card;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,20 +35,42 @@ public final class CardAnimationManager {
         return INSTANCE;
     }
 
+    private List<File> getCandidateDirectories() {
+        List<File> dirs = new ArrayList<>();
+        if (ForgeConstants.RES_DIR != null) {
+            dirs.add(new File(ForgeConstants.RES_DIR, "animated_cards"));
+        }
+        if (ForgeConstants.CACHE_CARD_PICS_DIR != null) {
+            dirs.add(new File(ForgeConstants.CACHE_CARD_PICS_DIR, "animated_cards"));
+        }
+        if (ForgeConstants.CACHE_DIR != null) {
+            dirs.add(new File(ForgeConstants.CACHE_DIR, "animated_cards"));
+        }
+        dirs.add(new File("res/animated_cards"));
+        dirs.add(new File("../res/animated_cards"));
+        dirs.add(new File("../../res/animated_cards"));
+        dirs.add(new File("forge-gui/res/animated_cards"));
+        dirs.add(new File("forge-installer/target/res/animated_cards"));
+        dirs.add(new File("forge-installer/target/forge-installer-2.0.15-SNAPSHOT/res/animated_cards"));
+        dirs.add(new File("Forge.app/Contents/Resources/res/animated_cards"));
+        dirs.add(new File("Forge.app/Contents/MacOS/res/animated_cards"));
+        dirs.add(new File("Forge.app/res/animated_cards"));
+        dirs.add(new File("../Resources/res/animated_cards"));
+        dirs.add(new File("D:/projects/forge/res/animated_cards"));
+        dirs.add(new File("D:/projects/forge/forge-gui/res/animated_cards"));
+        dirs.add(new File("D:/projects/forge/forge-installer/target/forge-installer-2.0.15-SNAPSHOT/res/animated_cards"));
+        return dirs;
+    }
+
     public synchronized void initialize() {
         if (initialized) {
             return;
         }
         initialized = true;
 
-        // Scan potential locations for animated card folders
-        scanDirectory(new File(ForgeConstants.RES_DIR, "animated_cards"));
-        scanDirectory(new File(ForgeConstants.CACHE_CARD_PICS_DIR, "animated_cards"));
-        scanDirectory(new File(ForgeConstants.CACHE_DIR, "animated_cards"));
-        scanDirectory(new File("res/animated_cards"));
-        scanDirectory(new File("../res/animated_cards"));
-        scanDirectory(new File("D:/projects/forge/res/animated_cards"));
-        scanDirectory(new File("D:/projects/forge/forge-installer/target/forge-installer-2.0.15-SNAPSHOT/res/animated_cards"));
+        for (File dir : getCandidateDirectories()) {
+            scanDirectory(dir);
+        }
 
         if (!animationFiles.isEmpty()) {
             System.out.println("[CardAnimationManager-Mobile] Discovered animated cards: " + animationFiles.keySet());
@@ -76,21 +100,59 @@ public final class CardAnimationManager {
             if (animationFiles.containsKey(cardName) || animationFiles.containsKey(normKey)) {
                 continue;
             }
+            loadCardFolder(folder, cardName, normKey);
+        }
+    }
 
-            File[] frameFiles = folder.listFiles((dir, name) -> {
-                String lower = name.toLowerCase();
-                return lower.endsWith(".jpg") || lower.endsWith(".png") || lower.endsWith(".jpeg");
-            });
+    private boolean loadCardFolder(File folder, String cardName, String normKey) {
+        File[] frameFiles = folder.listFiles((dir, name) -> {
+            String lower = name.toLowerCase();
+            return lower.endsWith(".jpg") || lower.endsWith(".png") || lower.endsWith(".jpeg");
+        });
 
-            if (frameFiles == null || frameFiles.length == 0) {
+        if (frameFiles == null || frameFiles.length == 0) {
+            return false;
+        }
+
+        Arrays.sort(frameFiles, Comparator.comparing(File::getName));
+        animationFiles.put(cardName, frameFiles);
+        animationFiles.put(normKey, frameFiles);
+        System.out.println("[CardAnimationManager-Mobile] Registered animation files for card '" + folder.getName() + "' with " + frameFiles.length + " frames.");
+        return true;
+    }
+
+    private synchronized boolean tryLoadCard(String rawName, String key, String normKey) {
+        if (animationFiles.containsKey(key) || animationFiles.containsKey(normKey)) {
+            return true;
+        }
+
+        for (File baseDir : getCandidateDirectories()) {
+            if (baseDir == null || !baseDir.exists() || !baseDir.isDirectory()) {
                 continue;
             }
 
-            Arrays.sort(frameFiles, Comparator.comparing(File::getName));
-            animationFiles.put(cardName, frameFiles);
-            animationFiles.put(normKey, frameFiles);
-            System.out.println("[CardAnimationManager-Mobile] Registered animation files for card '" + folder.getName() + "' with " + frameFiles.length + " frames.");
+            File directFolder = new File(baseDir, rawName);
+            if (directFolder.isDirectory() && loadCardFolder(directFolder, key, normKey)) {
+                return true;
+            }
+
+            File directFolderLower = new File(baseDir, key);
+            if (directFolderLower.isDirectory() && loadCardFolder(directFolderLower, key, normKey)) {
+                return true;
+            }
+
+            File[] subs = baseDir.listFiles(File::isDirectory);
+            if (subs != null) {
+                for (File sub : subs) {
+                    String subName = sub.getName().toLowerCase().trim();
+                    String subNorm = normalize(sub.getName());
+                    if ((subName.equals(key) || subNorm.equals(normKey)) && loadCardFolder(sub, key, normKey)) {
+                        return true;
+                    }
+                }
+            }
         }
+        return false;
     }
 
     public static boolean hasAnimation(String cardName) {
@@ -101,7 +163,30 @@ public final class CardAnimationManager {
             INSTANCE.initialize();
         }
         String key = cardName.toLowerCase().trim();
-        return INSTANCE.animationFiles.containsKey(key) || INSTANCE.animationFiles.containsKey(normalize(key));
+        String normKey = normalize(key);
+        if (INSTANCE.animationFiles.containsKey(key) || INSTANCE.animationFiles.containsKey(normKey)) {
+            return true;
+        }
+        return INSTANCE.tryLoadCard(cardName, key, normKey);
+    }
+
+    public static boolean hasAnimation(String cardName, int artIndex, String collectorNumber) {
+        if (cardName == null) {
+            return false;
+        }
+        if (collectorNumber != null && !collectorNumber.isEmpty()) {
+            String colKey = cardName + "_" + collectorNumber;
+            if (hasAnimation(colKey)) {
+                return true;
+            }
+        }
+        if (artIndex > 0) {
+            String artKey = cardName + artIndex;
+            if (hasAnimation(artKey)) {
+                return true;
+            }
+        }
+        return hasAnimation(cardName);
     }
 
     public static boolean isAnimationTexture(Texture texture) {
@@ -126,6 +211,14 @@ public final class CardAnimationManager {
             File[] files = INSTANCE.animationFiles.get(key);
             if (files == null) {
                 files = INSTANCE.animationFiles.get(normalize(key));
+            }
+            if (files == null) {
+                if (INSTANCE.tryLoadCard(cardName, key, normalize(key))) {
+                    files = INSTANCE.animationFiles.get(key);
+                    if (files == null) {
+                        files = INSTANCE.animationFiles.get(normalize(key));
+                    }
+                }
             }
             if (files == null || files.length == 0) {
                 return null;
@@ -155,6 +248,25 @@ public final class CardAnimationManager {
         }
 
         return frame;
+    }
+
+    public static Texture getCurrentFrame(String cardName, int artIndex, String collectorNumber) {
+        if (cardName == null) {
+            return null;
+        }
+        if (collectorNumber != null && !collectorNumber.isEmpty()) {
+            String colKey = cardName + "_" + collectorNumber;
+            if (hasAnimation(colKey)) {
+                return getCurrentFrame(colKey);
+            }
+        }
+        if (artIndex > 0) {
+            String artKey = cardName + artIndex;
+            if (hasAnimation(artKey)) {
+                return getCurrentFrame(artKey);
+            }
+        }
+        return getCurrentFrame(cardName);
     }
 
     private static synchronized Texture[] loadTextures(File[] files) {
