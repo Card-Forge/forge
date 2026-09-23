@@ -663,6 +663,9 @@ public class GameHUD extends Stage {
         updateBGM();
 
         updateAudioFades(delta);
+
+        if (!mapGroup.isVisible())
+            return;
         // player position
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
