@@ -29,9 +29,18 @@ from pathlib import Path
 
 try:
     from PIL import Image
-    import requests
 except ImportError as e:
-    sys.exit(f"[ERROR] Missing required Python package: {e}. Please run: pip install Pillow requests")
+    sys.exit(f"[ERROR] Missing required Python package: {e}. Please run: pip install Pillow")
+
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    import json
+    import urllib.error
+    import urllib.parse
+    import urllib.request
+    HAS_REQUESTS = False
 
 # Standard MTG fullborder dimensions in Forge
 STANDARD_CARD_WIDTH = 488
@@ -43,29 +52,93 @@ DEFAULT_ART_Y = 70
 DEFAULT_ART_W = 420
 DEFAULT_ART_H = 314
 
-# Locations where animated cards are discovered by both Desktop and Mobile Forge
-DEFAULT_TARGET_DIRS = [
-    # Main project repository resource dir
-    r"D:\projects\forge\res\animated_cards",
-    # Runnable snapshot distribution dir
-    r"D:\projects\forge\forge-installer\target\forge-installer-2.0.15-SNAPSHOT\res\animated_cards",
-    # Local user cache pics dir
-    os.path.expandvars(r"%LOCALAPPDATA%\Forge\Cache\pics\cards\animated_cards"),
-    # Local user cache root
-    os.path.expandvars(r"%LOCALAPPDATA%\Forge\Cache\animated_cards"),
-]
+# Repository root dynamically derived from this script's location
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# Local cache card picture search paths
-CACHE_SEARCH_DIRS = [
-    os.path.expandvars(r"%LOCALAPPDATA%\Forge\Cache\pics\cards"),
-    r"D:\projects\forge\res\cardsfolder",
-]
+
+def get_platform_cache_dir() -> Path:
+    """Return platform-specific Forge cache directory."""
+    if sys.platform == "darwin":
+        return Path.home() / "Library" / "Caches" / "Forge"
+    elif sys.platform == "win32":
+        local_app_data = os.environ.get("LOCALAPPDATA")
+        if local_app_data:
+            return Path(local_app_data) / "Forge" / "Cache"
+        return Path.home() / "AppData" / "Local" / "Forge" / "Cache"
+    else:  # Linux / FreeBSD / other UNIX
+        xdg_cache = os.environ.get("XDG_CACHE_HOME")
+        if xdg_cache:
+            return Path(xdg_cache) / "forge"
+        return Path.home() / ".cache" / "forge"
+
+
+def get_default_target_dirs() -> list[str]:
+    """Locations where animated cards are discovered by both Desktop and Mobile Forge."""
+    cache_dir = get_platform_cache_dir()
+    targets = [
+        # Main project repository resource dir
+        str(REPO_ROOT / "res" / "animated_cards"),
+    ]
+
+    # Runnable snapshot distribution dir(s) if built
+    installer_target = REPO_ROOT / "forge-installer" / "target"
+    if installer_target.is_dir():
+        for dist_dir in sorted(installer_target.glob("forge-installer-*")):
+            if dist_dir.is_dir() and not dist_dir.name.endswith(".jar"):
+                targets.append(str(dist_dir / "res" / "animated_cards"))
+
+    # Local user cache pics dir
+    targets.append(str(cache_dir / "pics" / "cards" / "animated_cards"))
+    # Local user cache root
+    targets.append(str(cache_dir / "animated_cards"))
+
+    # Windows fallback paths if running on Windows
+    if sys.platform == "win32":
+        targets.extend([
+            r"D:\projects\forge\res\animated_cards",
+            r"D:\projects\forge\forge-installer\target\forge-installer-2.0.15-SNAPSHOT\res\animated_cards",
+        ])
+
+    # Deduplicate while preserving order
+    seen = set()
+    unique = []
+    for t in targets:
+        norm = os.path.normpath(t)
+        if norm not in seen:
+            seen.add(norm)
+            unique.append(norm)
+    return unique
+
+
+def get_cache_search_dirs() -> list[str]:
+    """Local cache card picture search paths."""
+    cache_dir = get_platform_cache_dir()
+    dirs = [
+        str(cache_dir / "pics" / "cards"),
+        str(REPO_ROOT / "res" / "cardsfolder"),
+    ]
+    if sys.platform == "win32":
+        dirs.append(r"D:\projects\forge\res\cardsfolder")
+
+    seen = set()
+    unique = []
+    for d in dirs:
+        norm = os.path.normpath(d)
+        if norm not in seen:
+            seen.add(norm)
+            unique.append(norm)
+    return unique
+
+
+DEFAULT_TARGET_DIRS = get_default_target_dirs()
+CACHE_SEARCH_DIRS = get_cache_search_dirs()
 
 # Edition definitions search directories
 EDITIONS_SEARCH_DIRS = [
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "res", "editions"),
-    r"D:\projects\forge\res\editions",
+    str(REPO_ROOT / "res" / "editions"),
 ]
+if sys.platform == "win32":
+    EDITIONS_SEARCH_DIRS.append(r"D:\projects\forge\res\editions")
 
 # Edition sections that define cards with collector numbers
 EDITION_SECTIONS = {
@@ -257,16 +330,26 @@ def _download_scryfall_image(data: dict, save_path: str, headers: dict, card_nam
     actual_num = data.get("collector_number", "")
     print(f"[*] Downloading card scan from Scryfall ({actual_name} #{actual_num}): {img_url}")
     try:
-        img_resp = requests.get(img_url, headers=headers, timeout=30)
-        if img_resp.status_code == 200:
-            os.makedirs(os.path.dirname(os.path.abspath(save_path)), exist_ok=True)
-            with open(save_path, "wb") as f:
-                f.write(img_resp.content)
-            print(f"[+] Downloaded and cached card scan to: {save_path}")
-            return True
+        os.makedirs(os.path.dirname(os.path.abspath(save_path)), exist_ok=True)
+        if HAS_REQUESTS:
+            img_resp = requests.get(img_url, headers=headers, timeout=30)
+            if img_resp.status_code == 200:
+                with open(save_path, "wb") as f:
+                    f.write(img_resp.content)
+                print(f"[+] Downloaded and cached card scan to: {save_path}")
+                return True
+            else:
+                print(f"[!] Failed to download image from Scryfall, status: {img_resp.status_code}")
+                return False
         else:
-            print(f"[!] Failed to download image from Scryfall, status: {img_resp.status_code}")
-            return False
+            req = urllib.request.Request(img_url, headers=headers)
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                if resp.status == 200:
+                    with open(save_path, "wb") as f:
+                        f.write(resp.read())
+                    print(f"[+] Downloaded and cached card scan to: {save_path}")
+                    return True
+                return False
     except Exception as ex:
         print(f"[!] Error downloading image content: {ex}")
         return False
@@ -282,49 +365,56 @@ def download_card_image_from_scryfall(
     headers = {"User-Agent": "ForgeMTG-AnimationGenerator/1.0"}
     set_clean = set_code.strip().lower()
 
-    if card_number:
-        num_clean = str(card_number).strip().lower()
-        print(f"[*] Querying Scryfall API for '{card_name}' #{card_number} (set: {set_code})...")
-        # Direct lookup by set code and collector number: /cards/:code/:number
-        url = f"https://api.scryfall.com/cards/{set_clean}/{num_clean}"
-        try:
-            resp = requests.get(url, headers=headers, timeout=15)
-            if resp.status_code == 200:
-                data = resp.json()
-                return _download_scryfall_image(data, save_path, headers, card_name)
-        except Exception as ex:
-            print(f"[!] Error querying Scryfall by collector number: {ex}")
-
-        # Fallback query using Scryfall search syntax
-        search_url = "https://api.scryfall.com/cards/search"
-        params = {"q": f's:{set_clean} cn:"{num_clean}"'}
-        try:
-            resp = requests.get(search_url, params=params, headers=headers, timeout=15)
-            if resp.status_code == 200:
-                data = resp.json()
-                cards = data.get("data", [])
-                if cards:
-                    return _download_scryfall_image(cards[0], save_path, headers, card_name)
-        except Exception:
-            pass
-
-    # Standard lookup by card name and set
-    print(f"[*] Querying Scryfall API for '{card_name}' (set: {set_code})...")
-    url = "https://api.scryfall.com/cards/named"
-    params = {"exact": card_name, "set": set_clean}
+    def _fetch_scryfall_json(url: str, params: dict | None = None) -> dict | None:
+        if HAS_REQUESTS:
+            try:
+                resp = requests.get(url, params=params, headers=headers, timeout=15)
+                if resp.status_code == 200:
+                    return resp.json()
+            except Exception:
+                pass
+            return None
+        else:
+            try:
+                if params:
+                    q = urllib.parse.urlencode(params)
+                    url = f"{url}?{q}"
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    if resp.status == 200:
+                        return json.loads(resp.read().decode("utf-8"))
+            except Exception:
+                pass
+            return None
 
     try:
-        resp = requests.get(url, params=params, headers=headers, timeout=15)
-        if resp.status_code != 200:
-            # Try fuzzy search as fallback
-            params = {"fuzzy": card_name, "set": set_clean}
-            resp = requests.get(url, params=params, headers=headers, timeout=15)
+        if card_number:
+            num_clean = str(card_number).strip().lower()
+            print(f"[*] Querying Scryfall API for '{card_name}' #{card_number} (set: {set_code})...")
+            # Direct lookup by set code and collector number: /cards/:code/:number
+            data = _fetch_scryfall_json(f"https://api.scryfall.com/cards/{set_clean}/{num_clean}")
+            if data:
+                return _download_scryfall_image(data, save_path, headers, card_name)
 
-        if resp.status_code != 200:
-            print(f"[!] Scryfall API returned status {resp.status_code}: {resp.text}")
+            # Fallback query using Scryfall search syntax
+            search_data = _fetch_scryfall_json(
+                "https://api.scryfall.com/cards/search",
+                {"q": f's:{set_clean} cn:"{num_clean}"'}
+            )
+            if search_data and search_data.get("data"):
+                return _download_scryfall_image(search_data["data"][0], save_path, headers, card_name)
+
+        # Standard lookup by card name and set
+        print(f"[*] Querying Scryfall API for '{card_name}' (set: {set_code})...")
+        named_url = "https://api.scryfall.com/cards/named"
+        data = _fetch_scryfall_json(named_url, {"exact": card_name, "set": set_clean})
+        if not data:
+            data = _fetch_scryfall_json(named_url, {"fuzzy": card_name, "set": set_clean})
+
+        if not data:
+            print(f"[!] Scryfall API query failed for '{card_name}' ({set_code}).")
             return False
 
-        data = resp.json()
         return _download_scryfall_image(data, save_path, headers, card_name)
 
     except Exception as ex:
@@ -357,7 +447,11 @@ def extract_video_frames(video_path: str, output_dir: str, fps: int = 24) -> lis
         frame_pattern,
     ]
     print(f"[*] Extracting video frames at {fps} FPS with ffmpeg...")
-    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    except FileNotFoundError:
+        hint = "brew install ffmpeg" if sys.platform == "darwin" else "install ffmpeg via your package manager"
+        raise RuntimeError(f"ffmpeg executable not found on PATH. Please {hint}.")
     if res.returncode != 0:
         raise RuntimeError(f"ffmpeg frame extraction failed:\n{res.stderr}")
 
@@ -431,15 +525,12 @@ def process_card_animation(
             else:
                 cache_filename = f"{card_name}.fullborder.jpg"
 
-            cache_target = os.path.expandvars(
-                rf"%LOCALAPPDATA%\Forge\Cache\pics\cards\{set_code.upper()}\{cache_filename}"
-            )
+            cache_dir = get_platform_cache_dir()
+            cache_target = str(cache_dir / "pics" / "cards" / set_code.upper() / cache_filename)
             if download_card_image_from_scryfall(set_code, card_name, cache_target, card_number=card_number):
                 template_path = cache_target
                 # If cached under an indexed name, also ensure a base unindexed copy exists as fallback
-                unindexed_target = os.path.expandvars(
-                    rf"%LOCALAPPDATA%\Forge\Cache\pics\cards\{set_code.upper()}\{card_name}.fullborder.jpg"
-                )
+                unindexed_target = str(cache_dir / "pics" / "cards" / set_code.upper() / f"{card_name}.fullborder.jpg")
                 if not os.path.exists(unindexed_target):
                     try:
                         shutil.copy2(cache_target, unindexed_target)
@@ -489,7 +580,8 @@ def process_card_animation(
         target_subfolder = card_name.strip()
         deployed_count = 0
 
-        for base_target in DEFAULT_TARGET_DIRS:
+        target_dirs = get_default_target_dirs()
+        for base_target in target_dirs:
             dest_dir = os.path.join(base_target, target_subfolder)
             try:
                 os.makedirs(dest_dir, exist_ok=True)
