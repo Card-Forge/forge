@@ -37,6 +37,8 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
@@ -87,7 +89,60 @@ public class AiBlockController {
      */
     private Map<Card, Integer> blockerClass;
 
+    /**
+     * Damage prevention lives on whatever card grants it, not on the creature it protects, so two
+     * otherwise identical blockers can take different damage. Collected once per assignment; the
+     * signature then asks whether a blocker is named by any of it.
+     */
+    private List<ReplacementEffect> preventionEffects;
+    private Set<Integer> preventionDefined;
+
+    private void collectPrevention() {
+        preventionEffects = null;
+        preventionDefined = null;
+        for (final Card ca : ai.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+                if (!ReplacementType.DamageDone.equals(re.getMode())
+                        || (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
+                    continue;
+                }
+                if (preventionEffects == null) {
+                    preventionEffects = new ArrayList<>();
+                }
+                preventionEffects.add(re);
+            }
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getApi() != ApiType.PreventDamage || !sa.hasParam("Defined")) {
+                    continue;
+                }
+                for (final Card named : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa)) {
+                    if (preventionDefined == null) {
+                        preventionDefined = new HashSet<>();
+                    }
+                    preventionDefined.add(named.getId());
+                }
+            }
+        }
+    }
+
+    private boolean namedByPrevention(final Card c) {
+        if (preventionDefined != null && preventionDefined.contains(c.getId())) {
+            return true;
+        }
+        if (preventionEffects != null) {
+            for (final ReplacementEffect re : preventionEffects) {
+                if (re.matchesValidParam("ValidTarget", c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void buildBlockerClasses(final List<Card> possibleBlockers) {
+        collectPrevention();
         final Map<String, Integer> ids = new HashMap<>();
         final Map<Card, Integer> classes = new IdentityHashMap<>();
         for (final Card b : possibleBlockers) {
@@ -102,8 +157,8 @@ public class AiBlockController {
      * combat arithmetic reads but no legality answer reflects, such as marked damage.
      */
     private String signature(final Card c) {
-        // anything carrying its own attachments or hidden identity stands on its own
-        if (!c.getAttachedCards().isEmpty() || c.isFaceDown() || c.hasPerpetual()) {
+        // anything carrying its own attachments, hidden identity or damage prevention stands on its own
+        if (!c.getAttachedCards().isEmpty() || c.isFaceDown() || c.hasPerpetual() || namedByPrevention(c)) {
             return "self" + c.getId();
         }
         final StringBuilder sb = new StringBuilder();
