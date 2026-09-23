@@ -14,6 +14,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -26,6 +27,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -356,6 +358,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectableCards.clear();
         selectionMin = 0;
         selectionMax = 0;
+    }
+
+    @Override
+    public void showRevealedCards(final Iterable<CardView> cards) { }
+
+    @Override
+    public void hideRevealedCards() { }
+
+    protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final CardView c : cards) {
+            final ZoneType zone = c.getZone();
+            if (zone != null && zone != ZoneType.Battlefield) {
+                zones.add(new PlayerZoneUpdate(c.getOwner(), zone));
+            }
+        }
+        return zones;
     }
 
     public boolean isSelectable(final CardView card) {
@@ -941,6 +960,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
+
+    @Override
+    public PlayerZoneUpdates openZones(final PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players, final boolean backupLastZones) {
+        return null;
+    }
 
     @Override
     public void updateCards(Iterable<CardView> cards) { }

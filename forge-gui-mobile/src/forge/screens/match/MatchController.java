@@ -2,6 +2,7 @@ package forge.screens.match;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -90,6 +91,7 @@ public class MatchController extends NetworkGuiGame {
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
     private final Map<PlayerView, InfoTab> lastZonesToRestore = Maps.newHashMap();
+    private PlayerZoneUpdates selectionZonesOpened;
 
     public static MatchScreen getView() {
         return view;
@@ -229,6 +231,7 @@ public class MatchController extends NetworkGuiGame {
         view = new MatchScreen(playerPanels);
         if(GuiBase.isNetPlay(this))
             view.resetFields();
+        selectionZonesOpened = null;
         clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
@@ -447,7 +450,6 @@ public class MatchController extends NetworkGuiGame {
         return updates;
     }
 
-    @Override
     public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
         for(PlayerZoneUpdate update : playerZoneUpdates) {
             PlayerView player = update.getPlayer();
@@ -525,16 +527,6 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        return view.tempShowZones(controller, zonesToUpdate);
-    }
-
-    @Override
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-	    view.hideZones(controller, zonesToUpdate);
-    }
-
-    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView card : cards) {
             view.updateSingleCard(card);
@@ -544,12 +536,28 @@ public class MatchController extends NetworkGuiGame {
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         super.setSelectables(cards, min, max);
+        final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
+            final Set<ZoneType> zoneTypes = EnumSet.noneOf(ZoneType.class);
+            final Map<PlayerView, Object> players = Maps.newHashMap();
+            for (final PlayerZoneUpdate update : zones) {
+                zoneTypes.addAll(update.getZones());
+                players.put(update.getPlayer(), null);
+            }
+            // openZones wipes the tab backup VStack shares for Command, and there is no tab to switch to
+            zoneTypes.remove(ZoneType.Command);
+            if (zoneTypes.isEmpty()) {
+                return;
+            }
+            updateZones(zones);
+            final PlayerZoneUpdates opened = openZones(getCurrentPlayer(), zoneTypes, players, true);
+            // openZones does nothing for mixed zone types, and restoring then would apply an older backup
+            selectionZonesOpened = opened.isEmpty() ? null : opened;
         });
     }
 
@@ -561,6 +569,10 @@ public class MatchController extends NetworkGuiGame {
             for (final PlayerView p : getGameView().getPlayers()) {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            if (selectionZonesOpened != null) {
+                restoreOldZones(getCurrentPlayer(), selectionZonesOpened);
+                selectionZonesOpened = null;
             }
         });
     }

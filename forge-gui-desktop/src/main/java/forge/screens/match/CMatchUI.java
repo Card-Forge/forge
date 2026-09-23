@@ -153,6 +153,9 @@ public final class CMatchUI
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
             ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard);
 
+    private final List<PlayerZoneUpdate> selectionZonesShown = Lists.newArrayList();
+    private final List<PlayerZoneUpdate> revealZonesShown = Lists.newArrayList();
+
     private final FScreen screen;
     private final VMatchUI view;
     private final CMatchUIMenus menus = new CMatchUIMenus(this);
@@ -589,55 +592,27 @@ public final class CMatchUI
         }
     }
 
-    @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        if (!FThreads.isGuiThread()) {
-            final AtomicReference<Iterable<PlayerZoneUpdate>> result = new AtomicReference<>();
-            FThreads.invokeInEdtAndWait(() -> result.set(tempShowZones(controller, zonesToUpdate)));
-            return result.get();
-        }
-        List<PlayerZoneUpdate> updatedPlayerZones = Lists.newArrayList();
-
+    private List<PlayerZoneUpdate> tempShowZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        final List<PlayerZoneUpdate> shown = Lists.newArrayList();
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView player = update.getPlayer();
-                for (final ZoneType zone : update.getZones()) {
-                    switch (zone) {
-                        case Battlefield: // always shown
-                            break;
-                        case Hand:  // controller hand always shown
-                            if (controller != player) {
-                                if (FloatingZone.show(this,player,zone)) {
-                                    updatedPlayerZones.add(update);
-                                }
-                            }
-                            break;
-                        default:
-                            if (!FLOATING_ZONE_TYPES.contains(zone))
-                                break;
-                            if (FloatingZone.show(this,player,zone)) {
-                                updatedPlayerZones.add(update);
-                            }
-                            break;
-                    }
+            for (final ZoneType zone : update.getZones()) {
+                if (needsFloatingZone(player, zone) && FloatingZone.show(this, player, zone)) {
+                    shown.add(new PlayerZoneUpdate(player, zone));
                 }
             }
-        return updatedPlayerZones;
+        }
+        return shown;
     }
 
-    @Override
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        if (!FThreads.isGuiThread()) {
-            FThreads.invokeInEdtLater(() -> hideZones(controller, zonesToUpdate));
-            return;
-        }
-        if (zonesToUpdate != null) {
-            for (final PlayerZoneUpdate update : zonesToUpdate) {
-                final PlayerView player = update.getPlayer();
-                for (final ZoneType zone : update.getZones()) {
-                    if (FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && controller != player)) {
-                        FloatingZone.hide(this, player, zone);
-                    }
-                }
+    private boolean needsFloatingZone(final PlayerView player, final ZoneType zone) {
+        return FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && !isLocalPlayer(player));
+    }
+
+    private void hideZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            for (final ZoneType zone : update.getZones()) {
+                FloatingZone.hide(this, update.getPlayer(), zone);
             }
         }
     }
@@ -700,11 +675,17 @@ public final class CMatchUI
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         super.setSelectables(cards, min, max);
+        // max 0 marks display-only highlighting, e.g. GuiChoose.manipulateCardList, which shows its own window
+        final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            if (!zones.isEmpty()) {
+                updateZones(zones);
+                selectionZonesShown.addAll(tempShowZones(zones));
             }
             FloatingZone.refreshAll();
         });
@@ -719,8 +700,34 @@ public final class CMatchUI
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
+            hideZones(selectionZonesShown);
+            selectionZonesShown.clear();
             FloatingZone.refreshAll();
             FloatingZone.clearAllHotkeyAffordance();
+        });
+    }
+
+    @Override
+    public void showRevealedCards(final Iterable<CardView> cards) {
+        // the host sends these only for a hand reveal, so other zones of mixed cards stay closed
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerZoneUpdate update : getZonesHolding(cards)) {
+            if (update.getZones().contains(ZoneType.Hand)) {
+                zones.add(new PlayerZoneUpdate(update.getPlayer(), ZoneType.Hand));
+            }
+        }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            // refreshes a floating zone that is already open, so newly visible cards show their faces
+            updateZones(zones);
+            revealZonesShown.addAll(tempShowZones(zones));
+        });
+    }
+
+    @Override
+    public void hideRevealedCards() {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            hideZones(revealZonesShown);
+            revealZonesShown.clear();
         });
     }
 
@@ -982,6 +989,8 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+        selectionZonesShown.clear();
+        revealZonesShown.clear();
         if (isNetGame()) {
             writeMatchPreferences();
         }
@@ -1394,13 +1403,8 @@ public final class CMatchUI
             }
         }
 
-        tempShowZones(controller, zonesToUpdate);
+        tempShowZones(zonesToUpdate);
         return zonesToUpdate;
-    }
-
-    @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        hideZones(playerView, playerZoneUpdates);
     }
 
     @Override

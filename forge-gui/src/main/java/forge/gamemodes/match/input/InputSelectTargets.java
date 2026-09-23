@@ -17,8 +17,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.util.*;
 
 import java.util.ArrayList;
@@ -66,17 +64,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         final int initialMin = numTargets != null ? numTargets : sa.getMinTargets();
         final int initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
         controller.getGui().setSelectables(CardView.getCollection(choices), initialMin, initialMax);
-        final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-        for (final Card c : choices) {
-            zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
-        }
         FThreads.invokeInEdtNowOrLater(() -> {
             final List<GameEntityView> views = new ArrayList<>();
             for (final GameEntity c : targets) {
                 if (c instanceof Card) views.add(GameEntityView.get(c));
             }
             controller.getGui().setHighlighted(views, true);
-            controller.getGui().updateZones(zonesToUpdate);
         });
     }
 
