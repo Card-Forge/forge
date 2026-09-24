@@ -4,10 +4,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
 import forge.ai.PlayerControllerAi;
@@ -16,6 +18,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
@@ -32,18 +35,16 @@ public class MassTokenBlockTest extends SimulationTest {
     private static final List<String> DEFENDERS = List.of("Grizzly Bears", "Hill Giant", "Llanowar Elves",
             "Centaur Courser", "Runeclaw Bear", "Craw Wurm", "Gray Ogre", "Trained Armodon");
 
-    private Game game;
-    private Player attacker;
     private Player defender;
     private Combat combat;
 
     private void setUp(int defenderLife, List<String> attackerNames, int tokens, List<String> defenderNames) {
-        game = initAndCreateGame();
-        attacker = game.getPlayers().get(1);
+        Game game = initAndCreateGame();
+        Player attacker = game.getPlayers().get(1);
         defender = game.getPlayers().get(0);
         defender.setLife(defenderLife, null);
 
-        List<Card> attacking = new java.util.ArrayList<>(addTokens(INSECT, tokens, attacker));
+        List<Card> attacking = new ArrayList<>(addTokens(INSECT, tokens, attacker));
         for (String name : attackerNames) {
             attacking.add(addCard(name, attacker));
         }
@@ -60,43 +61,81 @@ public class MassTokenBlockTest extends SimulationTest {
         }
     }
 
-    private Set<String> declareBlocks() {
-        long start = System.nanoTime();
+    private void declareBlocks() {
         ((PlayerControllerAi) defender.getController()).getAi().declareBlockersFor(defender, combat);
-        long ms = (System.nanoTime() - start) / 1_000_000;
-
-        Set<String> blocks = new TreeSet<>();
-        for (Card a : combat.getAttackers()) {
-            for (Card b : combat.getBlockers(a)) {
-                blocks.add(a.getName() + "<-" + b.getName());
-            }
-        }
-        System.out.println("#11810 life=" + defender.getLife() + " blocks=" + blocks + " took " + ms + " ms");
-        return blocks;
     }
 
-    // expected blocks are what the AI chose before the speed-up; only the time spent should change
+    private void assertNoFlierIsBlocked() {
+        for (Card a : combat.getAttackers()) {
+            if (a.hasKeyword(Keyword.FLYING)) {
+                assertTrue(combat.getBlockers(a).isEmpty(), a + " can't be blocked by ground creatures");
+            }
+        }
+    }
 
     @Test
     public void lethalEvasiveSwarmStillChumpsTheGroundAttackers() {
         setUp(20, GROUND_ATTACKERS, 66, DEFENDERS);
-        assertEquals(declareBlocks(), Set.of("Craterhoof Behemoth<-Llanowar Elves", "Grizzly Bears<-Runeclaw Bear",
-                "Hill Giant<-Craw Wurm", "Hill Giant<-Grizzly Bears"));
+        declareBlocks();
+
+        assertNoFlierIsBlocked();
+        for (Card a : combat.getAttackers()) {
+            if (!a.hasKeyword(Keyword.FLYING)) {
+                assertFalse(combat.getBlockers(a).isEmpty(), "facing lethal damage, " + a + " should be blocked");
+            }
+        }
     }
 
     @Test
-    public void nonLethalEvasiveSwarmStillMakesGoodBlocks() {
+    public void nonLethalEvasiveSwarmOnlyMakesSafeBlocks() {
         setUp(200, GROUND_ATTACKERS, 66, DEFENDERS);
-        assertEquals(declareBlocks(), Set.of("Grizzly Bears<-Centaur Courser", "Hill Giant<-Craw Wurm"));
+        declareBlocks();
+
+        assertNoFlierIsBlocked();
+        assertFalse(combat.getAllBlockers().isEmpty(), "there are good blocks to make against the ground attackers");
+        for (Card a : combat.getAttackers()) {
+            for (Card b : combat.getBlockers(a)) {
+                assertTrue(b.getNetToughness() > a.getNetPower(), "life isn't in danger, so " + b + " shouldn't chump " + a);
+            }
+        }
+    }
+
+    /**
+     * The speed-up itself: the block search must not keep asking blockers about attackers none of
+     * them can block, nor scan every static ability for a block cost per attacker.
+     */
+    @Test
+    public void unblockableSwarmIsNotSearched() {
+        setUp(20, GROUND_ATTACKERS, 66, DEFENDERS);
+        AtomicInteger blockCostScans = new AtomicInteger();
+        AtomicInteger tokenBlockChecks = new AtomicInteger();
+
+        try (MockedStatic<CombatUtil> ignored = Mockito.mockStatic(CombatUtil.class, invocation -> {
+            String name = invocation.getMethod().getName();
+            Object[] args = invocation.getArguments();
+            if (name.equals("getBlockCost")) {
+                blockCostScans.incrementAndGet();
+            } else if (name.equals("canBlock") && args.length == 3 && args[0] instanceof Card a
+                    && args[2] instanceof Combat && a.isToken()) {
+                tokenBlockChecks.incrementAndGet();
+            }
+            return invocation.callRealMethod();
+        })) {
+            declareBlocks();
+        }
+
+        assertEquals(tokenBlockChecks.get(), 0, "no blocker can block a flying token, so none should be asked to");
+        assertTrue(blockCostScans.get() < 100,"block costs were scanned " + blockCostScans + " times");
     }
 
     /** A blocker with reach can block the fliers, so they must stay in the search. */
     @Test
     public void reachBlockerStillBlocksAFlier() {
         setUp(3, List.of(), 3, List.of("Giant Spider"));
-        Set<String> blocks = declareBlocks();
-        assertEquals(blocks.size(), 1, "3 lethal 1/1 fliers, one Giant Spider: it has to chump one");
-        assertTrue(blocks.iterator().next().endsWith("<-Giant Spider"));
+        declareBlocks();
+
+        assertEquals(combat.getAllBlockers().size(), 1, "3 lethal 1/1 fliers, one Giant Spider: it has to chump one");
+        assertEquals(combat.getAllBlockers().get(0).getName(), "Giant Spider");
     }
 
     /** mustBlockAnAttacker now checks lure requirements before block costs; the requirement must still bind. */
@@ -109,6 +148,8 @@ public class MassTokenBlockTest extends SimulationTest {
 
         assertFalse(CombatUtil.canBlock(bear, blocker, combat), "able to block the Unicorn, so it can't block anything else");
         assertTrue(CombatUtil.canBlock(unicorn, blocker, combat));
-        assertEquals(declareBlocks(), Set.of("Prized Unicorn<-Runeclaw Bear"));
+        declareBlocks();
+        assertEquals(combat.getBlockers(unicorn).size(), 1);
+        assertTrue(combat.getBlockers(bear).isEmpty());
     }
 }

@@ -66,7 +66,6 @@ public class AiBlockController {
     private List<Card> blockedButUnkilled = new ArrayList<>(); // blocked attackers that currently wouldn't be destroyed
     /** Constant <code>blockersLeft</code>. */
     private List<Card> blockersLeft = new ArrayList<>(); // keeps track of all unassigned blockers
-    private List<Card> unblockableAttackers = new ArrayList<>(); // attackers none of the possible blockers can block
     private int diff = 0;
 
     private boolean lifeInDanger = false;
@@ -992,7 +991,6 @@ public class AiBlockController {
         }
 
         attackersLeft = new ArrayList<>(attackers); // keeps track of all currently unblocked attackers
-        attackersLeft.removeAll(unblockableAttackers);
         blockersLeft = new ArrayList<>(possibleBlockers); // keeps track of all unassigned blockers
         blockedButUnkilled = new ArrayList<>(); // keeps track of all blocked attackers that currently wouldn't be destroyed
     }
@@ -1047,7 +1045,6 @@ public class AiBlockController {
             return;
         }
 
-        unblockableAttackers = new ArrayList<>();
         clearBlockers(combat, possibleBlockers);
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
@@ -1065,6 +1062,7 @@ public class AiBlockController {
         // remove all attackers that can't be blocked anyway, or that none of our blockers can block
         // (e.g. fliers when we have no flying or reach). Every block search below asks each blocker
         // about each remaining attacker, so a swarm of them made declaring blockers take minutes.
+        final List<Card> unblockableAttackers = new ArrayList<>();
         for (final Card a : attackers) {
             if (!CombatUtil.canBeBlocked(a, null, ai) // pass null to skip redundant checks for performance
                     || blockersLeft.stream().noneMatch(b -> CombatUtil.canBlock(a, b))) {
@@ -1113,6 +1111,7 @@ public class AiBlockController {
             // == 2. If the AI life would still be in danger make a safer approach ==
             if (lifeInDanger) {
                 clearBlockers(combat, possibleBlockers); // reset every block assignment
+                attackersLeft.removeAll(unblockableAttackers);
                 makeTradeBlocks(combat);
                 makeGoodBlocks(combat);
                 // choose necessary chump blocks if life is still in danger
@@ -1132,6 +1131,7 @@ public class AiBlockController {
             // == 3. If the AI life would be in serious danger make an even safer approach ==
             if (lifeInDanger && ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
                 clearBlockers(combat, possibleBlockers);
+                attackersLeft.removeAll(unblockableAttackers);
                 makeChumpBlocks(combat);
 
                 if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
