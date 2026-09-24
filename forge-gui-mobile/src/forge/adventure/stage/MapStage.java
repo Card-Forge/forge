@@ -81,6 +81,20 @@ public class MapStage extends GameStage {
     float collisionWidthMod = 0.4f;
     float defaultSpriteSize = 16f;
     float navMapSize =  defaultSpriteSize * collisionWidthMod;
+    private final Vector2 AIVector = new Vector2();
+    private final Vector2 playerPosReg = new Vector2();
+    private final NavigationVertex navigationVertex = new NavigationVertex(new Vector2());
+    private final Comparator<NavigationVertex> distanceComparator = new Comparator<NavigationVertex>() {
+        @Override
+        public int compare(NavigationVertex o1, NavigationVertex o2) {
+            float px = playerPosReg.x;
+            float py = playerPosReg.y;
+
+            float d1 = (o1.pos.x - px) * (o1.pos.x - px) + (o1.pos.y - py) * (o1.pos.y - py);
+            float d2 = (o2.pos.x - px) * (o2.pos.x - px) + (o2.pos.y - py) * (o2.pos.y - py);
+            return Float.compare(d1, d2);
+        }
+    };
 
     public boolean canEscape() {
         return !preventEscape;
@@ -1013,12 +1027,14 @@ public class MapStage extends GameStage {
         for (Integer i : idsToRemove) deleteObject(i);
     }
 
+    private final ArrayList<NavigationVertex> navVerticesList = new ArrayList<>(256);
+    private final ProgressableGraphPath<NavigationVertex> emptyFallbackNavPath = new ProgressableGraphPath<>(0);
+    private static final HashMap<String, String> rewardLabelsMap = new HashMap<>(32);
+
     @Override
     protected void onActing(float delta) {
         if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls || isPlayerLeavingDungeon)
             return;
-
-        Iterator<EnemySprite> it = enemies.iterator();
 
         if (freezeAllEnemyBehaviors) {
             if (!positions.contains(player.pos())) {
@@ -1026,23 +1042,34 @@ public class MapStage extends GameStage {
             }
             else return;
         }
-        float mobSize = navMapSize; //todo: replace with actual size if multiple nav maps implemented
-        ArrayList<NavigationVertex> verticesNearPlayer = new ArrayList<>(navMaps.get(mobSize).navGraph.getNodes());
-        verticesNearPlayer.sort(Comparator.comparingInt(o -> Math.round((o.pos.x - player.pos().x) * (o.pos.x - player.pos().x) + (o.pos.y - player.pos().y) * (o.pos.y - player.pos().y))));
+
+        float mobSize = navMapSize; // todo: replace with actual size if multiple nav maps implemented
+
+        navVerticesList.clear();
+        navVerticesList.addAll(navMaps.get(mobSize).navGraph.getNodes());
+
+        // cache the current player coordinates registry once
+        playerPosReg.set(player.pos());
+
+        // for ambiguous collision with com.badlogic.gdx.utils.Collections
+        java.util.Collections.sort(navVerticesList, distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
-            while (it.hasNext()) {
-                EnemySprite mob = it.next();
-                if (mob.inactive){
+            for (int i = enemies.size() - 1; i >= 0; i--) {
+                EnemySprite mob = enemies.get(i);
+                if (mob == null || mob.inactive) {
                     continue;
                 }
                 mob.updatePositon();
 
-                ProgressableGraphPath<NavigationVertex> navPath = new ProgressableGraphPath<>(0);
+                ProgressableGraphPath<NavigationVertex> navPath = emptyFallbackNavPath;
+
                 if (mob.getData().flying) {
-                    navPath.add(new NavigationVertex(mob.getTargetVector(player, null,delta)));
+                    // update vertex
+                    navigationVertex.pos.set(mob.getTargetVector(player, null, delta));
+                    navPath.add(navigationVertex);
                 } else {
-                    Vector2 destination = mob.getTargetVector(player, verticesNearPlayer, delta);
+                    Vector2 destination = mob.getTargetVector(player, navVerticesList, delta);
 
                     if (mob.isFrozen() || (destination.epsilonEquals(mob.pos()) && !mob.aggro)) {
                         mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
@@ -1058,51 +1085,59 @@ public class MapStage extends GameStage {
                     }
 
                     if (mob.aggro) {
-                        navPath.add(new NavigationVertex(player.pos()));
+                        // reuse
+                        navigationVertex.pos.set(player.pos());
+                        navPath.add(navigationVertex);
                     }
                 }
 
                 if (navPath == null || navPath.getCount() == 0 || navPath.get(0) == null) {
-                        mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
-                        continue;
-                }
-                Vector2 currentVector = null;
-
-                while (navPath.getCount() > 0 && navPath.get(0) != null && (navPath.get(0).pos == null || navPath.get(0).pos.dst(mob.pos()) < 0.5f)) {
-
-                    navPath.remove(0);
-
-                }
-                if (navPath.getCount() != 0) {
-                    currentVector = new Vector2(navPath.get(0).pos).sub(mob.pos());
-                }
-                mob.setNavPath(navPath);
-                mob.clearActions();
-                if (currentVector == null || (currentVector.x == 0.0f && currentVector.y == 0.0f)) {
                     mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                     continue;
                 }
-                mob.steer(currentVector);
+
+                boolean vectorCalculated = false;
+                while (navPath.getCount() > 0 && navPath.get(0) != null && (navPath.get(0).pos == null || navPath.get(0).pos.dst(mob.pos()) < 0.5f)) {
+                    navPath.remove(0);
+                }
+
+                if (navPath.getCount() != 0) {
+                    AIVector.set(navPath.get(0).pos).sub(mob.pos());
+                    vectorCalculated = true;
+                }
+
+                mob.setNavPath(navPath);
+                mob.clearActions();
+
+                if (!vectorCalculated || (AIVector.x == 0.0f && AIVector.y == 0.0f)) {
+                    mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                    continue;
+                }
+
+                mob.steer(AIVector);
                 mob.update(delta);
             }
         }
 
-        float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
-        player.setMoveModifier(2 * sprintingMod);
+        float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2f : 1f;
+        player.setMoveModifier(2f * sprintingMod);
 
         positions.add(player.pos());
         if (positions.size() > 4)
             positions.remove();
 
-        for (MapActor actor : new Array.ArrayIterator<>(actors)) {
+        for (int i = actors.size - 1; i >= 0; i--) {
+            MapActor actor = actors.get(i);
+            if (actor == null) continue;
+
             if (actor.collideWithPlayer(player)) {
                 if (actor instanceof EnemySprite) {
                     EnemySprite mob = (EnemySprite) actor;
                     currentMob = mob;
                     resetPosition();
-                    if (mob.dialog != null && mob.dialog.canShow()) { //This enemy has something to say. Display a dialog like if it was a DialogActor but only if dialogue is possible.
+                    if (mob.dialog != null && mob.dialog.canShow()) {
                         mob.dialog.activate();
-                    } else { //Duel the enemy.
+                    } else { // Duel the enemy
                         beginDuel(mob);
                     }
                     break;
@@ -1114,12 +1149,20 @@ public class MapStage extends GameStage {
 
                     if (rewards.size == 1) {
                         Reward reward = rewards.get(0);
+                        final String rewardTypeName = reward.getType().name();
+
                         switch (reward.getType()) {
                             case Life:
                             case Shards:
                             case Gold:
-                                String message = Forge.getLocalizer().getMessageorUseDefault("lbl" + reward.getType().name(), reward.getType().name());
-                                AdventurePlayer.current().addStatusMessage(reward.getType().name(), message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
+                                String labelKey = rewardLabelsMap.get(rewardTypeName);
+                                if (labelKey == null) {
+                                    labelKey = "lbl" + rewardTypeName;
+                                    rewardLabelsMap.put(rewardTypeName, labelKey);
+                                }
+
+                                String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
+                                AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
                                 break;
                             default:

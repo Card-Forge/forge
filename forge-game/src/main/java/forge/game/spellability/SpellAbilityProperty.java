@@ -34,6 +34,11 @@ public class SpellAbilityProperty {
             String comparator = property.substring(5, 7);
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
             return Expressions.compare(sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid(), comparator, y);
+        } else if (property.startsWith("CountersRemovedToPay")) {
+            String comparator = property.substring(20, 22);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(22), sa);
+            Integer removed = sa.getSVarInt("CostCountersRemoved");
+            return Expressions.compare(removed == null ? 0 : removed, comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
