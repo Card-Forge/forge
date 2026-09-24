@@ -20,10 +20,12 @@ import forge.player.PersistentAutoDecisionStore;
 import forge.player.PlayerControllerHuman;
 import forge.util.collect.FCollectionView;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -164,12 +166,17 @@ public class YieldController {
     }
 
     public boolean shouldAutoYield() {
+        // A client's controller has no owner, so the host reports when a yield ends
+        if (owner == null) return isYieldActive();
         if (autoPassUntilEOT) return true;
-        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+        GameView gv = owner.getGui() != null ? owner.getGui().getGameView() : null;
         if (autoPassUntilStackEmpty) {
             if (gv != null && gv.peekStack() != null) return true;
             autoPassUntilStackEmpty = false;
             stackYieldRespectsInterrupts = false;
+            PlayerView local = owner.getLocalPlayerView();
+            // Remote only. A local GUI reads this controller directly, and the update would re-enter tryAutoPassNow
+            if (owner.isRemoteClient() && local != null) owner.getGui().applyYieldUpdate(new YieldUpdate.StackYield(local, false, false));
         }
         if (autoPassUntilMarker != null && gv != null) {
             PlayerView turnPlayer = gv.getPlayerTurn();
@@ -434,6 +441,15 @@ public class YieldController {
         PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
         IGuiGame gui = owner != null ? owner.getGui() : null;
         if (local != null && gui != null) gui.applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+    }
+
+    /** Active yields as updates, to refill a client's empty cache after reconnect. */
+    public synchronized List<YieldUpdate> activeYieldUpdates(PlayerView local) {
+        List<YieldUpdate> updates = new ArrayList<>();
+        if (autoPassUntilEOT) updates.add(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, true));
+        if (autoPassUntilStackEmpty) updates.add(new YieldUpdate.StackYield(local, true, stackYieldRespectsInterrupts));
+        if (autoPassUntilMarker != null) updates.add(new YieldUpdate.SetMarker(autoPassUntilMarker.getPhaseOwner(), autoPassUntilMarker.getPhase(), false));
+        return updates;
     }
 
     /** Toggle APINA: flip pref, persist, push to controller. Returns new value. */

@@ -247,7 +247,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                     boolean atOrPast = YieldController.isPriorityAtOrPastMarker(
                             getGameView(), self, PhaseType.UPKEEP);
                     yc.setMarker(self, PhaseType.UPKEEP, atOrPast);
-                    getController().getGui().applyYieldUpdate(
+                    if (getController().isRemoteClient()) getController().getGui().applyYieldUpdate(
                             new YieldUpdate.SetMarker(self, PhaseType.UPKEEP, atOrPast));
                 }
             }
