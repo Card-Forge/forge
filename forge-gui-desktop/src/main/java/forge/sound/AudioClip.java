@@ -48,6 +48,7 @@ public class AudioClip implements IAudioClip {
      */
     private static final int MAX_VOICES = 16;
 
+    /** Each sound's samples, shared with {@link AltSoundSystem}. */
     private static final Map<String, byte[]> audioClips = new ConcurrentHashMap<>(30);
 
     /** This sound in {@link SoftwareMixer#FORMAT}, or null if it could not be loaded. */
@@ -58,11 +59,12 @@ public class AudioClip implements IAudioClip {
     /** When the next voice may start sounding, so a batch stays granular. See {@link #play}. */
     private volatile long nextStart;
 
-    public static byte[] getAudioClips(File file) throws IOException {
-        // The file's own format, which is what AltSoundSystem wants; the mixer converts its copy.
+    /** This sound's samples in {@link SoftwareMixer#FORMAT}, decoded once and kept. */
+    static byte[] samplesOf(File file) throws IOException, UnsupportedAudioFileException {
         byte[] cached = audioClips.get(file.toString());
         if (cached == null) {
-            cached = Converter.convertFrom(Files.asByteSource(file).openStream()).toByteArray();
+            cached = SoftwareMixer.decode(
+                    Converter.convertFrom(Files.asByteSource(file).openStream()).toByteArray());
             audioClips.put(file.toString(), cached);
         }
         return cached;
@@ -88,7 +90,7 @@ public class AudioClip implements IAudioClip {
             return null;
         }
         try {
-            return SoftwareMixer.decode(getAudioClips(fSound));
+            return samplesOf(fSound);
         } catch (IOException ex) {
             System.err.println("Unable to load sound file: " + filename);
         } catch (UnsupportedAudioFileException ex) {
