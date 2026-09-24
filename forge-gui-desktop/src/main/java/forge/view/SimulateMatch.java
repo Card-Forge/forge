@@ -69,6 +69,11 @@ public class SimulateMatch {
             }
         }
 
+        String deckDir = null;
+        if (params.containsKey("D")) {
+            deckDir = params.get("D").get(0);
+        }
+
         int nGames = 1;
         if (params.containsKey("n")) {
             // Number of games should only be a single string
@@ -128,8 +133,7 @@ public class SimulateMatch {
 
         if (params.containsKey("d")) {
             for (String deck : params.get("d")) {
-                Deck d = deckFromCommandLineParameter(deck, type,
-                        params.get("D") != null ? params.get("D").get(0) : null);
+                Deck d = deckFromCommandLineParameter(deck, type, deckDir);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
@@ -268,7 +272,7 @@ public class SimulateMatch {
         }
 
         if (params.containsKey("D")) {
-            // Direc
+            // Load decks from the specified directory
             String foldName = params.get("D").get(0);
             File folder = new File(foldName);
             if (!folder.isDirectory()) {
