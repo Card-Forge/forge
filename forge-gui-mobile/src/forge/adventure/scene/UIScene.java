@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraLabel;
-import forge.Adventure;
 import forge.Forge;
 import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
@@ -203,7 +202,7 @@ public class UIScene extends Scene {
     public UIScene(String uiFilePath) {
         textboxOpen = false;
         uiFile = uiFilePath;
-        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Adventure.getInstance().getUiBatch()) {
+        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Forge.getGraphics().getBatch()) {
             @Override
             public boolean keyUp(int keycode) {
                 keyReleased(keycode);
