@@ -9,19 +9,17 @@ import forge.token.TokenDb;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
+import forge.util.ThreadUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * The class holding game invariants, such as cards, editions, game formats. All that data, which is not supposed to be changed by player
@@ -919,177 +917,173 @@ public class StaticData {
         boolean nifHeader = false;
         boolean cniHeader = false;
         final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F★?\\d+★?");
-        for (CardEdition e : editions) {
-            if (CardEdition.Type.FUNNY.equals(e.getType()))
-                continue;
 
-            Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
-            List<CompletableFuture<?>> futures = new ArrayList<>();
-            for (CardEdition.EditionEntry c : e.getObtainableCards()) {
-                int amount = 1;
+        ExecutorService pool = ThreadUtil.getComputingPool(0.5f);
+        try {
+            for (CardEdition e : editions) {
+                if (CardEdition.Type.FUNNY.equals(e.getType()))
+                    continue;
 
-                if (cardCount.containsKey(c.name())) {
-                    amount = cardCount.get(c.name()).getRight() + 1;
+                Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
+                for (CardEdition.EditionEntry c : e.getObtainableCards()) {
+                    int amount = 1;
+                    if (cardCount.containsKey(c.name())) {
+                        amount = cardCount.get(c.name()).getRight() + 1;
+                    }
+                    cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && funnyCardCollectorNumberPattern.matcher(c.collectorNumber()).matches(), amount));
                 }
 
-                cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && funnyCardCollectorNumberPattern.matcher(c.collectorNumber()).matches(), amount));
-            }
-
-            // loop through the cards in this edition, considering art variations...
-            for (Map.Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
-                futures.add(CompletableFuture.supplyAsync(()-> {
-                    final String c = entry.getKey();
-                    final int artID = entry.getValue().getRight();
-                    final boolean isFunny = entry.getValue().getLeft();
-                    PaperCard cp = getCommonCards().getCard(c, e.getCode(), artID);
-                    if (cp == null) {
-                        cp = getVariantCards().getCard(c, e.getCode(), artID);
-                    }
-                    if (cp == null) {
-                        if (isFunny) //skip funny cards
-                            return null;
-                        if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType()))
-                            return null;
-                        EDITION_Q.add(e.getCode() + "_" + e.getName());
-                        CNI_Q.add(e.getCode() + "_" + c + "\n");
-                        return null;
-                    }
-                    // check the front image
-                    String imagePath = ImageUtil.getImageRelativePath(cp, "", true, false);
-                    if (imagePath != null) {
-                        File file = ImageKeys.getImageFile(imagePath);
-                        if (file == null && ImageKeys.hasSetLookup(imagePath))
-                            file = ImageKeys.setLookUpFile(imagePath, imagePath +"border");
-                        if (file == null) {
-                            if (imagePath.isEmpty())
-                                return null;
-                            EDITION_Q.add(e.getCode() + "_" + e.getName());
-                            NIF_Q.add(e.getCode() + "_" + imagePath + "\n");
-                        }
-                    }
-                    // check the back face
-                    if (cp.hasBackFace()) {
-                        imagePath = ImageUtil.getImageRelativePath(cp, "back", true, false);
-                        if (imagePath != null) {
-                            File file = ImageKeys.getImageFile(imagePath);
-                            if (file == null && ImageKeys.hasSetLookup(imagePath))
-                                file = ImageKeys.setLookUpFile(imagePath, imagePath +"border");
-                            if (file == null) {
-                                if (imagePath.isEmpty())
-                                    return null;
+                List<Future<?>> futures = new ArrayList<>();
+                for (Map.Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
+                    futures.add(pool.submit(() -> {
+                        try {
+                            final String c = entry.getKey();
+                            final int artID = entry.getValue().getRight();
+                            final boolean isFunny = entry.getValue().getLeft();
+                            PaperCard cp = getCommonCards().getCard(c, e.getCode(), artID);
+                            if (cp == null) {
+                                cp = getVariantCards().getCard(c, e.getCode(), artID);
+                            }
+                            if (cp == null) {
+                                if (isFunny) return;
+                                if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType())) return;
                                 EDITION_Q.add(e.getCode() + "_" + e.getName());
-                                NIF_Q.add(e.getCode() + "_" + imagePath + "\n");
+                                CNI_Q.add(e.getCode() + "_" + c + "\n");
+                                return;
+                            }
+                            String imagePath = ImageUtil.getImageRelativePath(cp, "", true, false);
+                            if (imagePath != null) {
+                                File file = ImageKeys.getImageFile(imagePath);
+                                if (file == null && ImageKeys.hasSetLookup(imagePath))
+                                    file = ImageKeys.setLookUpFile(imagePath, imagePath + "border");
+                                if (file == null && !imagePath.isEmpty()) {
+                                    EDITION_Q.add(e.getCode() + "_" + e.getName());
+                                    NIF_Q.add(e.getCode() + "_" + imagePath + "\n");
+                                }
+                            }
+                            if (cp.hasBackFace()) {
+                                String backPath = ImageUtil.getImageRelativePath(cp, "back", true, false);
+                                if (backPath != null) {
+                                    File file = ImageKeys.getImageFile(backPath);
+                                    if (file == null && ImageKeys.hasSetLookup(backPath))
+                                        file = ImageKeys.setLookUpFile(backPath, backPath + "border");
+                                    if (file == null && !backPath.isEmpty()) {
+                                        EDITION_Q.add(e.getCode() + "_" + e.getName());
+                                        NIF_Q.add(e.getCode() + "_" + backPath + "\n");
+                                    }
+                                }
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }));
+                }
+                for (Future<?> f : futures) {
+                    try {
+                        f.get();
+                    } catch (InterruptedException | ExecutionException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                for (Map.Entry<String, Collection<CardEdition.EditionEntry>> tokenEntry : e.getTokens().asMap().entrySet()) {
+                    final String name = tokenEntry.getKey();
+                    final int artIndex = tokenEntry.getValue().size();
+                    try {
+                        PaperToken token = getAllTokens().getToken(name, e.getCode());
+                        if (token == null) continue;
+                        for (int i = 0; i < artIndex; i++) {
+                            String imgKey = token.getImageKey(i);
+                            File file = ImageKeys.getImageFile(imgKey);
+                            if (file == null) {
+                                EDITION_Q.add(e.getCode() + "_" + e.getName());
+                                TOKEN_Q.add(e.getCode() + "_" + token.getImageFilename(i + 1) + "\n");
                             }
                         }
+                    } catch (Exception ex) {
+                        System.out.println("No Token found: " + name + " in " + e.getName());
                     }
-                    return null;
-                }).exceptionally(ex -> {
-                    ex.printStackTrace();
-                    return null;
-                }));
-            }
-            CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            CompletableFuture.allOf(futuresArray).join();
-            futures.clear();
-
-            // TODO: Audit token images here...
-            for(Map.Entry<String, Collection<CardEdition.EditionEntry>> tokenEntry : e.getTokens().asMap().entrySet()) {
-                final String name = tokenEntry.getKey();
-                final int artIndex = tokenEntry.getValue().size();
-                try {
-                    PaperToken token = getAllTokens().getToken(name, e.getCode());
-                    if (token == null) {
-                        continue;
-                    }
-
-                    for(int i = 0; i < artIndex; i++) {
-                        String imgKey = token.getImageKey(i);
-                        File file = ImageKeys.getImageFile(imgKey);
-                        if (file == null) {
-                            EDITION_Q.add(e.getCode() + "_" + e.getName());
-                            TOKEN_Q.add(e.getCode() + "_" + token.getImageFilename(i + 1) + "\n");
-                        }
-                    }
-                } catch(Exception ex) {
-                    System.out.println("No Token found: " + name + " in " + e.getName());
                 }
             }
+        } finally {
+            pool.shutdown();
         }
-        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-        List<String> NIF = new ArrayList<>(NIF_Q).stream().sorted().collect(Collectors.toList());
-        List<String> CNI = new ArrayList<>(CNI_Q).stream().sorted().collect(Collectors.toList());
-        List<String> TOK = new ArrayList<>(TOKEN_Q).stream().sorted().collect(Collectors.toList());
-        List<String> sorted_editions = EDITION_Q.stream().distinct().sorted().collect(Collectors.toList());
+
+        List<String> NIF = new ArrayList<>(NIF_Q);
+        NIF.sort(null);
+        List<String> CNI = new ArrayList<>(CNI_Q);
+        CNI.sort(null);
+        List<String> TOK = new ArrayList<>(TOKEN_Q);
+        TOK.sort(null);
+
+        List<String> sorted_editions = new ArrayList<>(new LinkedHashSet<>(EDITION_Q));
+        sorted_editions.sort(null);
+
+        Map<String, List<String>> nifByCode = groupByCode(NIF);
+        Map<String, List<String>> cniByCode = groupByCode(CNI);
+        Map<String, List<String>> tokByCode = groupByCode(TOK);
+
         for (String edition : sorted_editions) {
-            String[] arr =  edition.split("_");
+            String[] arr = edition.split("_");
             String code = arr[0];
             boolean NIF_TITLE = false, CNI_TITLE = false, TOK_TITLE = false;
-            for (String nif : NIF) {
-                if (nif.startsWith(code)) {
-                    if (!nifHeader) {
-                        noImageFound.append("\n-------------------\n");
-                        noImageFound.append("NO IMAGE FOUND LIST\n");
-                        noImageFound.append("-------------------\n\n");
-                        nifHeader = true;
-                    }
-                    if (!NIF_TITLE) {
-                        noImageFound.append(edition.replace(code + "_","")).append(" (").append(code).append(")").append("\n");
-                        NIF_TITLE = true;
-                    }
-                    noImageFound.append("    ").append(nif.replace(code + "_", ""));
+
+            for (String nif : nifByCode.getOrDefault(code, List.of())) {
+                if (!nifHeader) {
+                    noImageFound.append("\n-------------------\nNO IMAGE FOUND LIST\n-------------------\n\n");
+                    nifHeader = true;
                 }
-            }
-            if (NIF_TITLE)
-                noImageFound.append("\n");
-            for (String tok : TOK) {
-                if (tok.startsWith(code)) {
-                    if (!nifHeader) {
-                        noImageFound.append("\n-------------------\n");
-                        noImageFound.append("NO IMAGE FOUND LIST\n");
-                        noImageFound.append("-------------------\n\n");
-                        nifHeader = true;
-                    }
-                    if (!NIF_TITLE) {
-                        noImageFound.append(edition.replace(code + "_","")).append(" (").append(code).append(")").append("\n");
-                        NIF_TITLE = true;
-                    }
-                    if (!TOK_TITLE) {
-                        noImageFound.append("  TOKENS\n");
-                        TOK_TITLE = true;
-                    }
-                    noImageFound.append("    ").append(tok.replace(code + "_", ""));
+                if (!NIF_TITLE) {
+                    noImageFound.append(edition.replace(code + "_", "")).append(" (").append(code).append(")").append("\n");
+                    NIF_TITLE = true;
                 }
+                noImageFound.append("    ").append(nif.replace(code + "_", ""));
             }
-            if (TOK_TITLE)
-                noImageFound.append("\n");
-            for (String cni : CNI) {
-                if (cni.startsWith(code)) {
-                    if (!cniHeader) {
-                        cardNotImplemented.append("\n-------------------\n");
-                        cardNotImplemented.append("UNIMPLEMENTED CARD LIST\n");
-                        cardNotImplemented.append("-------------------\n\n");
-                        cniHeader = true;
-                    }
-                    if (!CNI_TITLE) {
-                        cardNotImplemented.append(edition.replace(code + "_","")).append(" (").append(code).append(")").append("\n");
-                        CNI_TITLE = true;
-                    }
-                    cardNotImplemented.append("     ").append(cni.replace(code + "_", ""));
+            if (NIF_TITLE) noImageFound.append("\n");
+
+            for (String tok : tokByCode.getOrDefault(code, List.of())) {
+                if (!nifHeader) {
+                    noImageFound.append("\n-------------------\nNO IMAGE FOUND LIST\n-------------------\n\n");
+                    nifHeader = true;
                 }
+                if (!NIF_TITLE) {
+                    noImageFound.append(edition.replace(code + "_", "")).append(" (").append(code).append(")").append("\n");
+                    NIF_TITLE = true;
+                }
+                if (!TOK_TITLE) { noImageFound.append("  TOKENS\n"); TOK_TITLE = true; }
+                noImageFound.append("    ").append(tok.replace(code + "_", ""));
             }
-            if (CNI_TITLE)
-                cardNotImplemented.append("\n");
+            if (TOK_TITLE) noImageFound.append("\n");
+
+            for (String cni : cniByCode.getOrDefault(code, List.of())) {
+                if (!cniHeader) {
+                    cardNotImplemented.append("\n-------------------\nUNIMPLEMENTED CARD LIST\n-------------------\n\n");
+                    cniHeader = true;
+                }
+                if (!CNI_TITLE) {
+                    cardNotImplemented.append(edition.replace(code + "_", "")).append(" (").append(code).append(")").append("\n");
+                    CNI_TITLE = true;
+                }
+                cardNotImplemented.append("     ").append(cni.replace(code + "_", ""));
+            }
+            if (CNI_TITLE) cardNotImplemented.append("\n");
         }
 
         final int missingImages = NIF.size() + TOK.size();
         final int unimplemenedCards = CNI.size();
         String totalStats = "Missing images: " + missingImages + "\nUnimplemented cards: " + unimplemenedCards + "\n";
-        cardNotImplemented.append("\n-----------\n");
-        cardNotImplemented.append(totalStats);
-        cardNotImplemented.append("-----------\n\n");
-
-        noImageFound.append(cardNotImplemented); // combine things together...
+        cardNotImplemented.append("\n-----------\n").append(totalStats).append("-----------\n\n");
+        noImageFound.append(cardNotImplemented);
         return Pair.of(missingImages, unimplemenedCards);
+    }
+
+    private static Map<String, List<String>> groupByCode(List<String> entries) {
+        Map<String, List<String>> byCode = new HashMap<>();
+        for (String entry : entries) {
+            String code = entry.split("_", 2)[0];
+            byCode.computeIfAbsent(code, k -> new ArrayList<>()).add(entry);
+        }
+        return byCode;
     }
 
     private String prettifyCardArtPreferenceName(CardDb.CardArtPreference preference) {
