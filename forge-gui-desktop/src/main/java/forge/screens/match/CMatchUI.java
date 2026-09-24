@@ -605,8 +605,9 @@ public final class CMatchUI
         return shown;
     }
 
+    // a hand initHandViews already docked needs no window of its own, whoever controls that player
     private boolean needsFloatingZone(final PlayerView player, final ZoneType zone) {
-        return FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && !isLocalPlayer(player));
+        return FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && getHandFor(player) == null);
     }
 
     private void hideZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
@@ -675,7 +676,7 @@ public final class CMatchUI
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         super.setSelectables(cards, min, max);
-        // max 0 marks display-only highlighting, e.g. GuiChoose.manipulateCardList, which shows its own window
+        // a maximum of 0 marks display-only highlighting, whose caller shows its own window
         final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
@@ -717,7 +718,6 @@ public final class CMatchUI
             }
         }
         FThreads.invokeInEdtNowOrLater(() -> {
-            // refreshes a floating zone that is already open, so newly visible cards show their faces
             updateZones(zones);
             revealZonesShown.addAll(tempShowZones(zones));
         });
@@ -804,6 +804,9 @@ public final class CMatchUI
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
         FloatingZone.closeAll();
+        // the tracked entries refer to windows closeAll has already disposed
+        selectionZonesShown.clear();
+        revealZonesShown.clear();
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
@@ -1386,7 +1389,7 @@ public final class CMatchUI
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
+    public void openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final PlayerView view : playersWithTargetables.keySet()) {
             for (final ZoneType zone : zones) {
@@ -1404,7 +1407,6 @@ public final class CMatchUI
         }
 
         tempShowZones(zonesToUpdate);
-        return zonesToUpdate;
     }
 
     @Override

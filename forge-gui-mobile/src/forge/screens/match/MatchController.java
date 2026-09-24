@@ -90,8 +90,9 @@ public class MatchController extends NetworkGuiGame {
     }
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
-    private final Map<PlayerView, InfoTab> lastZonesToRestore = Maps.newHashMap();
-    private PlayerZoneUpdates selectionZonesOpened;
+    private Map<PlayerView, Object> selectionZonesBackup;
+    // a panel with no tab selected backs up as this, so a restore can tell it from an entry openZones never touched
+    private static final Object NO_TAB = new Object();
 
     public static MatchScreen getView() {
         return view;
@@ -231,7 +232,7 @@ public class MatchController extends NetworkGuiGame {
         view = new MatchScreen(playerPanels);
         if(GuiBase.isNetPlay(this))
             view.resetFields();
-        selectionZonesOpened = null;
+        selectionZonesBackup = null;
         clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
@@ -425,8 +426,7 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
-        PlayerZoneUpdates updates = new PlayerZoneUpdates();
+    public void openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
         if (zones.size() == 1) {
             final ZoneType zoneType = zones.iterator().next();
             switch (zoneType) {
@@ -434,45 +434,28 @@ public class MatchController extends NetworkGuiGame {
                 case Command:
                     playersWithTargetables.clear(); //clear since no zones need to be restored
                 default:
-                    lastZonesToRestore.clear();
                     //open zone tab for given zone if needed
-                    boolean result = true;
                     for (final PlayerView player : playersWithTargetables.keySet()) {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-                        if (backupLastZones)
-                            lastZonesToRestore.put(player, playerPanel.getSelectedTab());
-                        playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
-                        updates.add(new PlayerZoneUpdate(player, zoneType));
+                        final InfoTab previous = playerPanel.getSelectedTab();
+                        playersWithTargetables.put(player, previous == null ? NO_TAB : previous); //backup selected tab before changing it
                         playerPanel.setSelectedZone(zoneType);
                     }
             }
         }
-        return updates;
     }
 
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        for(PlayerZoneUpdate update : playerZoneUpdates) {
-            PlayerView player = update.getPlayer();
-
-            ZoneType zone = null;
-            for (ZoneType type : update.getZones()) {
-                zone = type;
-                break;
-            }
-
-            final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-            if (zone == null) {
-                playerPanel.hideSelectedTab();
+    /** Restores the tabs openZones backed up into the caller's own map, leaving entries it never touched alone. */
+    public void restoreOldZones(final Map<PlayerView, Object> backup) {
+        for (final Map.Entry<PlayerView, Object> e : backup.entrySet()) {
+            if (e.getKey() == null || e.getKey().getHasLost()) {
                 continue;
             }
-
-            //final InfoTab zoneTab = playerPanel.getZoneTab(zone);
-            //playerPanel.setSelectedTab(zoneTab);
-        }
-        for (Map.Entry<PlayerView, InfoTab> e : lastZonesToRestore.entrySet()) {
-            if (e.getKey() != null && !e.getKey().getHasLost()) {
-                final VPlayerPanel p = view.getPlayerPanel(e.getKey());
-                p.setSelectedTab(e.getValue());
+            final Object previous = e.getValue();
+            if (previous == NO_TAB) {
+                view.getPlayerPanel(e.getKey()).setSelectedTab(null);
+            } else if (previous instanceof InfoTab tab) {
+                view.getPlayerPanel(e.getKey()).setSelectedTab(tab);
             }
         }
     }
@@ -546,18 +529,24 @@ public class MatchController extends NetworkGuiGame {
             final Set<ZoneType> zoneTypes = EnumSet.noneOf(ZoneType.class);
             final Map<PlayerView, Object> players = Maps.newHashMap();
             for (final PlayerZoneUpdate update : zones) {
-                zoneTypes.addAll(update.getZones());
-                players.put(update.getPlayer(), null);
+                for (final ZoneType zone : update.getZones()) {
+                    // Command has no tab to switch to, and letting it reach openZones would empty this backup
+                    if (zone == ZoneType.Command) {
+                        continue;
+                    }
+                    zoneTypes.add(zone);
+                    players.put(update.getPlayer(), null);
+                }
             }
-            // openZones wipes the tab backup VStack shares for Command, and there is no tab to switch to
-            zoneTypes.remove(ZoneType.Command);
             if (zoneTypes.isEmpty()) {
                 return;
             }
             updateZones(zones);
-            final PlayerZoneUpdates opened = openZones(getCurrentPlayer(), zoneTypes, players, true);
-            // openZones does nothing for mixed zone types, and restoring then would apply an older backup
-            selectionZonesOpened = opened.isEmpty() ? null : opened;
+            openZones(getCurrentPlayer(), zoneTypes, players);
+            // showMessage re-issues setSelectables as picks narrow the choices; the first backup is the one to keep
+            if (selectionZonesBackup == null) {
+                selectionZonesBackup = players;
+            }
         });
     }
 
@@ -570,9 +559,9 @@ public class MatchController extends NetworkGuiGame {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
-            if (selectionZonesOpened != null) {
-                restoreOldZones(getCurrentPlayer(), selectionZonesOpened);
-                selectionZonesOpened = null;
+            if (selectionZonesBackup != null) {
+                restoreOldZones(selectionZonesBackup);
+                selectionZonesBackup = null;
             }
         });
     }

@@ -362,6 +362,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectionMax = 0;
     }
 
+    // the libgdx port never receives these: reveal falls back to its own card list there
     @Override
     public void showRevealedCards(final Iterable<CardView> cards) { }
 
@@ -371,6 +372,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final CardView c : cards) {
+            // an IdRef the tracker cannot resolve arrives as a null view, and PlayerZoneUpdate rejects a null player
+            if (c == null || c.getOwner() == null) { continue; }
             final ZoneType zone = c.getZone();
             if (zone != null && zone != ZoneType.Battlefield) {
                 zones.add(new PlayerZoneUpdate(c.getOwner(), zone));
@@ -964,9 +967,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
 
     @Override
-    public PlayerZoneUpdates openZones(final PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players, final boolean backupLastZones) {
-        return null;
-    }
+    public void openZones(final PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players) { }
 
     @Override
     public void updateCards(Iterable<CardView> cards) { }

@@ -33,7 +33,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
 import forge.player.AutoYieldStore.TriggerDecision;
-import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.TargetingOverlay;
@@ -57,7 +56,6 @@ public class VStack extends FDropDown {
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
     private Map<PlayerView, Object> playersWithValidTargets;
-    private PlayerZoneUpdates restorablePlayerZones = null;
 
     private int stackSize;
 
@@ -87,15 +85,14 @@ public class VStack extends FDropDown {
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }
-        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets, true);
+        MatchController.instance.openZones(player, zones, playersWithValidTargets);
     }
 
     //restore old zones when active stack instance changes
     private void restoreOldZones() {
-        if (restorablePlayerZones == null) { return; }
-        PlayerView player = MatchController.instance.getCurrentPlayer();
-        MatchController.instance.restoreOldZones(player, restorablePlayerZones);
-        restorablePlayerZones = null;
+        if (playersWithValidTargets == null) { return; }
+        MatchController.instance.restoreOldZones(playersWithValidTargets);
+        playersWithValidTargets = null;
     }
 
     public void checkEmptyStack() { //sort the bug in client when desynch happens
