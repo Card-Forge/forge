@@ -1143,7 +1143,10 @@ public class MapStage extends GameStage {
         try {
             for (int i = count - 1; i >= 0; i--) {
                 final T item = snapshot[i];
-                if (item == null || !items.contains(item, true)) continue;
+                if (item == null) continue;
+                // the array copies itself on the first change during the pass, so only then can
+                // an item have been removed; skips the scan on the usual frame with no removals
+                if (items.items != snapshot && !items.contains(item, true)) continue;
                 if (visit.test(item)) break;
             }
         } finally {
