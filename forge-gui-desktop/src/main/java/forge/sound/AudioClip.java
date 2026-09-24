@@ -18,47 +18,54 @@
 
 package forge.sound;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.function.Supplier;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.google.common.io.Files;
 import com.sipgate.mp3wav.Converter;
 
+import forge.sound.SoftwareMixer.Voice;
+
 /**
  * SoundSystem - a simple sound playback system for Forge.
  * Do not use directly. Instead, use the {@link forge.sound.SoundEffectType} enumeration.
  *
+ * <p>A clip is its decoded samples, nothing more: playing it hands a voice to
+ * {@link SoftwareMixer}, which sums every voice onto one audio line. Overlapping plays cost a read
+ * cursor apiece rather than a device line apiece.
+ *
  * @author Agetian
  */
 public class AudioClip implements IAudioClip {
-    private final int maxSize = 16;
-    private final String filename;
-    private final List<ClipWrapper> clips;
-    private boolean failed;
-    private static final Map<String, byte[]> audioClips = new HashMap<>(30);
+    /**
+     * Enough overlap for anything Forge triggers at once, and a bound on a runaway event storm.
+     */
+    private static final int MAX_VOICES = 16;
+
+    private static final Map<String, byte[]> audioClips = new ConcurrentHashMap<>(30);
+
+    /** This sound in {@link SoftwareMixer#FORMAT}, or null if it could not be loaded. */
+    private final byte[] pcm;
+    /** Voices handed to the mixer that may still be sounding. */
+    private final List<Voice> voices = new CopyOnWriteArrayList<>();
+    private volatile float volume = 1f;
+    /** When the next voice may start sounding, so a batch stays granular. See {@link #play}. */
+    private volatile long nextStart;
 
     public static byte[] getAudioClips(File file) throws IOException {
-        if (!audioClips.containsKey(file.toString()) ) {
-            audioClips.put(file.toString(), Converter.convertFrom(Files.asByteSource(file).openStream()).toByteArray());
+        // The file's own format, which is what AltSoundSystem wants; the mixer converts its copy.
+        byte[] cached = audioClips.get(file.toString());
+        if (cached == null) {
+            cached = Converter.convertFrom(Files.asByteSource(file).openStream()).toByteArray();
+            audioClips.put(file.toString(), cached);
         }
-        return audioClips.get(file.toString());
+        return cached;
     }
 
     public static boolean fileExists(String fileName) {
@@ -67,183 +74,72 @@ public class AudioClip implements IAudioClip {
     }
 
     public AudioClip(final String filename) {
-        this.filename = filename;
-        clips = new ArrayList<>(maxSize);
-        addClip();
+        pcm = decode(filename);
+    }
+
+    /**
+     * A sound that will not load leaves this clip silent. It used to throw, out of a call made
+     * while resolving the stack -- a question about audio is not worth interrupting a game for.
+     */
+    private static byte[] decode(final String filename) {
+        File fSound = SoundSystem.instance.getSoundResource(filename);
+        if (fSound == null || !fSound.exists()) {
+            System.err.println("Sound file does not exist, cannot make a clip of it: " + filename);
+            return null;
+        }
+        try {
+            return SoftwareMixer.decode(getAudioClips(fSound));
+        } catch (IOException ex) {
+            System.err.println("Unable to load sound file: " + filename);
+        } catch (UnsupportedAudioFileException ex) {
+            System.err.println("Unsupported file type of the sound file: " + fSound + " - " + ex.getMessage());
+        }
+        return null;
     }
 
     @Override
     public final void play(float value) {
-        if (clips.stream().anyMatch(ClipWrapper::isRunning)) {
-            // introduce small delay to make a batch sounds more granular,
-            // e.g. when you auto-tap 4 lands the 4 tap sounds should
-            // not become completely merged
-            waitSoundSystemDelay();
-        }
-        getIdleClip().start(value);
+        volume = value;
+        // A batch of one sound -- four lands tapping together -- should stay granular instead of
+        // summing into one louder copy, so each voice starts SoundSystem.DELAY after the one
+        // before it. The mixer owes the voice that much silence; the old code got the same spacing
+        // by sleeping the delay on the caller, which during a match is the game thread.
+        final long now = System.currentTimeMillis();
+        final long startAt = isDone() ? now : Math.max(now, nextStart);
+        nextStart = startAt + SoundSystem.DELAY;
+        start(value, false, SoftwareMixer.framesForMillis(startAt - now));
     }
 
     @Override
     public final void loop() {
-        getIdleClip().loop();
+        start(volume, true, 0);
+    }
+
+    private void start(float value, boolean loop, int delayFrames) {
+        voices.removeIf(voice -> !voice.isPlaying());
+        if (pcm == null || voices.size() >= MAX_VOICES) {
+            return;
+        }
+        voices.add(SoftwareMixer.play(pcm, value, loop, delayFrames));
     }
 
     @Override
     public void dispose() {
-        for (byte[] b : audioClips.values()) {
-            b = null;
-        }
+        stop();
         audioClips.clear();
     }
 
     @Override
     public final void stop() {
-        for (ClipWrapper clip: clips) {
-            clip.stop();
+        for (Voice voice : voices) {
+            voice.stop();
         }
+        voices.clear();
     }
 
     @Override
     public final boolean isDone() {
-        return clips.stream().noneMatch(ClipWrapper::isRunning);
-    }
-
-    private ClipWrapper getIdleClip() {
-        return clips.stream()
-                .filter(clip -> !clip.isRunning())
-                .findFirst()
-                .orElseGet(this::addClip);
-    }
-
-    private ClipWrapper addClip() {
-        if (clips.size() < maxSize && !failed) {
-            ClipWrapper clip = new ClipWrapper(filename);
-            if (clip.isFailed()) {
-                failed = true;
-            } else {
-                clips.add(clip);
-            }
-            return clip;
-        }
-        return ClipWrapper.Dummy;
-    }
-
-    private static boolean waitSoundSystemDelay() {
-        try {
-            Thread.sleep(SoundSystem.DELAY);
-            return true;
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    static class ClipWrapper {
-        private final Clip clip;
-        private boolean started;
-        static final ClipWrapper Dummy = new ClipWrapper();
-
-        private ClipWrapper() {
-            clip = null;
-        }
-
-        ClipWrapper(String filename) {
-            clip = createClip(filename);
-            if (clip != null) {
-                clip.addLineListener(this::clipStateChanged);
-            }
-        }
-
-        boolean isFailed() {
-            return null == clip;
-        }
-
-        void start(float volume) {
-            if (null == clip) {
-                return;
-            }
-            synchronized (this) {
-                applyVolume(volume);
-                clip.setMicrosecondPosition(0);
-                this.started = false;
-                clip.start();
-                // with JRE 1.8.0_211 if another thread called clip.setMicrosecondPosition
-                // just now, it would deadlock. To prevent this we synchronize this method
-                // and wait
-                wait(() -> this.started);
-            }
-        }
-
-        void loop() {
-            if (null == clip) {
-                return;
-            }
-            synchronized (this) {
-                clip.setMicrosecondPosition(0);
-                this.started = false;
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-                wait(() -> this.started);
-            }
-        }
-
-        void stop() {
-            if (null == clip) {
-                return;
-            }
-            synchronized (this) {
-                clip.stop();
-            }
-        }
-
-        boolean isRunning() {
-            return clip != null && (clip.isRunning() || clip.isActive());
-        }
-
-        private Clip createClip(String filename) {
-            File fSound = SoundSystem.instance.getSoundResource(filename);
-            if (fSound == null || !fSound.exists()) {
-                throw new IllegalArgumentException("Sound file " + fSound + " does not exist, cannot make a clip of it");
-            }
-            try {
-                ByteArrayInputStream bis = new ByteArrayInputStream(getAudioClips(fSound));
-                AudioInputStream stream = AudioSystem.getAudioInputStream(bis);
-                AudioFormat format = stream.getFormat();
-                DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
-                Clip clip = (Clip) AudioSystem.getLine(info);
-                clip.open(stream);
-                return clip;
-            } catch (IOException ex) {
-                System.err.println("Unable to load sound file: " + filename);
-            } catch (LineUnavailableException ex) {
-                System.err.println("Error initializing sound system: " + ex);
-            } catch (UnsupportedAudioFileException ex) {
-                System.err.println("Unsupported file type of the sound file: " + fSound + " - " + ex.getMessage());
-                return null;
-            }
-            throw new MissingResourceException("Sound clip failed to load", this.getClass().getName(), filename);
-        }
-
-        private void applyVolume(float volume) {
-            if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-                FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                float dB = (float) (20.0 * Math.log10(Math.max(volume, 0.0001)));
-                dB = Math.max(dB, gain.getMinimum());
-                dB = Math.min(dB, gain.getMaximum());
-                gain.setValue(dB);
-            }
-        }
-
-        private void clipStateChanged(LineEvent lineEvent) {
-            started |= lineEvent.getType() == LineEvent.Type.START;
-        }
-
-        private void wait(Supplier<Boolean> completed) {
-            final int attempts = 5;
-            for (int i = 0; i < attempts; i++) {
-                if (completed.get() || !waitSoundSystemDelay()) {
-                    break;
-                }
-            }
-        }
+        voices.removeIf(voice -> !voice.isPlaying());
+        return voices.isEmpty();
     }
 }
