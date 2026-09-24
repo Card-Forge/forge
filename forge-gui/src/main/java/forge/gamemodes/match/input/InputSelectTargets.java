@@ -12,7 +12,6 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -64,13 +63,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         final int initialMin = numTargets != null ? numTargets : sa.getMinTargets();
         final int initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
         controller.getGui().setSelectables(CardView.getCollection(choices), initialMin, initialMax);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            final List<GameEntityView> views = new ArrayList<>();
-            for (final GameEntity c : targets) {
-                if (c instanceof Card) views.add(GameEntityView.get(c));
-            }
-            controller.getGui().setHighlighted(views, true);
-        });
+        final List<GameEntityView> views = new ArrayList<>();
+        for (final GameEntity c : targets) {
+            if (c instanceof Card) views.add(GameEntityView.get(c));
+        }
+        controller.getGui().setHighlighted(views, true);
     }
 
     @Override

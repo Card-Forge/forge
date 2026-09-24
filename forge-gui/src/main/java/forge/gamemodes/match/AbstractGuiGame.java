@@ -325,17 +325,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
-        for (final GameEntityView gv : entities) {
-            final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
-            if (!hasChanged) continue;
-            if (gv instanceof PlayerView pv) {
-                updateLives(Collections.singleton(pv));
+        // updateSingleCard reaches the widgets directly, and callers include the game thread
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final GameEntityView gv : entities) {
+                final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+                if (!hasChanged) continue;
+                if (gv instanceof PlayerView pv) {
+                    updateLives(Collections.singleton(pv));
+                }
+                if (gv instanceof CardView cv) {
+                    updateSingleCard(cv);
+                }
             }
-            if (gv instanceof CardView cv) {
-                // since we are in UI thread, may redraw the card right now
-                updateSingleCard(cv);
-            }
-        }
+        });
     }
 
     public boolean isHighlighted(final GameEntityView ge) {
