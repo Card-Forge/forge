@@ -1029,7 +1029,6 @@ public class MapStage extends GameStage {
 
     private final ArrayList<NavigationVertex> navVerticesList = new ArrayList<>(256);
     private final ProgressableGraphPath<NavigationVertex> emptyFallbackNavPath = new ProgressableGraphPath<>(0);
-    private static final HashMap<String, String> rewardLabelsMap = new HashMap<>(32);
 
     @Override
     protected void onActing(float delta) {
@@ -1055,9 +1054,7 @@ public class MapStage extends GameStage {
         java.util.Collections.sort(navVerticesList, distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
-            int enemyCount = enemies.size();
-
-            for (int i = 0; i < enemyCount; i++) {
+            for (int i = enemies.size() - 1; i >= 0; i--) {
                 EnemySprite mob = enemies.get(i);
                 if (mob == null || mob.inactive) {
                     continue;
@@ -1128,9 +1125,7 @@ public class MapStage extends GameStage {
         if (positions.size() > 4)
             positions.remove();
 
-        int actorCount = actors.size;
-
-        for (int i = 0; i < actorCount; i++) {
+        for (int i = actors.size - 1; i >= 0; i--) {
             MapActor actor = actors.get(i);
             if (actor == null) continue;
 
@@ -1159,13 +1154,7 @@ public class MapStage extends GameStage {
                             case Life:
                             case Shards:
                             case Gold:
-                                String labelKey = rewardLabelsMap.get(rewardTypeName);
-                                if (labelKey == null) {
-                                    labelKey = "lbl" + rewardTypeName;
-                                    rewardLabelsMap.put(rewardTypeName, labelKey);
-                                }
-
-                                String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
+                                String message = Forge.getLocalizer().getMessageorUseDefault(reward.getType().getLabelKey(), rewardTypeName);
                                 AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
                                 break;

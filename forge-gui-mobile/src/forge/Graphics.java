@@ -52,9 +52,37 @@ public class Graphics implements Disposable {
 
     public void begin(float regionWidth0, float regionHeight0) {
         batch.begin();
-        bounds = new Rectangle(0, 0, regionWidth0, regionHeight0);
+        setBounds(regionWidth0, regionHeight0);
+    }
+
+    public void setBounds(float regionWidth0, float regionHeight0) {
+        setBounds(new Rectangle(0, 0, regionWidth0, regionHeight0));
+        setRegionHeight(regionHeight0);
+        setVisibleBounds(new Rectangle(getBounds()));
+    }
+
+    public void setRegionHeight(float regionHeight0) {
         regionHeight = regionHeight0;
-        visibleBounds = new Rectangle(bounds);
+    }
+
+    public float getRegionHeight() {
+        return regionHeight;
+    }
+
+    public void setBounds(Rectangle bounds0) {
+        bounds = bounds0;
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
+    public void setVisibleBounds(Rectangle visibleBounds0) {
+        visibleBounds = visibleBounds0;
+    }
+
+    public Rectangle getVisibleBounds() {
+        return visibleBounds;
     }
 
     public void end() {
