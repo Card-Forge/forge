@@ -951,7 +951,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            // Reveal an opponent's hand in the prompt bar instead of a names list; the GUI decides how to show the cards
+            // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
             final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
