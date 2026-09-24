@@ -13,6 +13,8 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <!-- outside src, which is compiled whole as main code -->
+        <testSourceDirectory>test</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -109,6 +111,12 @@
                     <artifactId>gdx</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

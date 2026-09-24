@@ -44,13 +44,16 @@ import forge.util.ScreenUtil;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.Queue;
+import java.util.function.Predicate;
 
 /**
  * Stage to handle tiled maps for points of interests
  */
 public class MapStage extends GameStage {
     public static MapStage instance;
-    final Array<MapActor> actors = new Array<>();
+    // a snapshot array so the per-frame collision pass can iterate while collisions remove actors
+    final SnapshotArray<MapActor> actors = new SnapshotArray<>(true, 16, MapActor.class);
+    private final Predicate<MapActor> actorCollision = this::collideWithActor;
     public com.badlogic.gdx.physics.box2d.World gdxWorld;
     public TiledMap tiledMap;
     public Array<Rectangle> collisionRect = new Array<>();
@@ -1126,62 +1129,79 @@ public class MapStage extends GameStage {
         if (positions.size() > 4)
             positions.remove();
 
-        for (int i = actors.size - 1; i >= 0; i--) {
-            // a collision can run a map dialog whose actions delete several map objects at once
-            // (e.g. itself plus a gate), shrinking the array past the next index
-            if (i >= actors.size) continue;
-            MapActor actor = actors.get(i);
-            if (actor == null) continue;
+        visitNewestFirst(actors, actorCollision);
+    }
 
-            if (actor.collideWithPlayer(player)) {
-                if (actor instanceof EnemySprite) {
-                    EnemySprite mob = (EnemySprite) actor;
-                    currentMob = mob;
-                    resetPosition();
-                    if (mob.dialog != null && mob.dialog.canShow()) {
-                        mob.dialog.activate();
-                    } else { // Duel the enemy
-                        beginDuel(mob);
-                    }
-                    break;
-                } else if (actor instanceof RewardSprite) {
-                    freezeAllEnemyBehaviors = true;
-                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 100);
-                    RewardSprite RS = (RewardSprite) actor;
-                    Array<Reward> rewards = RS.getRewards();
+    /**
+     * Visits the items newest first, over a snapshot taken before the first visit, skipping any
+     * item removed by an earlier visit; stops once a visit returns true. A collision can run a map
+     * dialog whose actions delete several map objects at once (e.g. itself plus a gate).
+     */
+    static <T> void visitNewestFirst(final SnapshotArray<T> items, final Predicate<? super T> visit) {
+        final T[] snapshot = items.begin();
+        final int count = items.size;
+        try {
+            for (int i = count - 1; i >= 0; i--) {
+                final T item = snapshot[i];
+                if (item == null || !items.contains(item, true)) continue;
+                if (visit.test(item)) break;
+            }
+        } finally {
+            items.end();
+        }
+    }
 
-                    if (rewards.size == 1) {
-                        Reward reward = rewards.get(0);
-                        final String rewardTypeName = reward.getType().name();
-
-                        switch (reward.getType()) {
-                            case Life:
-                            case Shards:
-                            case Gold:
-                                String labelKey = rewardLabelsMap.get(rewardTypeName);
-                                if (labelKey == null) {
-                                    labelKey = "lbl" + rewardTypeName;
-                                    rewardLabelsMap.put(rewardTypeName, labelKey);
-                                }
-
-                                String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
-                                AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
-                                AdventurePlayer.current().addReward(reward);
-                                break;
-                            default:
-                                showRewardScene(rewards);
-                                break;
-                        }
-                    } else {
-                        showRewardScene(rewards);
-                    }
-                    RS.remove();
-                    actors.removeValue(RS, true);
-                    changes.deleteObject(RS.getId());
-                    break;
+    /** Handles the player touching this actor; true when that ends this frame's collision pass. */
+    private boolean collideWithActor(final MapActor actor) {
+        if (actor.collideWithPlayer(player)) {
+            if (actor instanceof EnemySprite) {
+                EnemySprite mob = (EnemySprite) actor;
+                currentMob = mob;
+                resetPosition();
+                if (mob.dialog != null && mob.dialog.canShow()) {
+                    mob.dialog.activate();
+                } else { // Duel the enemy
+                    beginDuel(mob);
                 }
+                return true;
+            } else if (actor instanceof RewardSprite) {
+                freezeAllEnemyBehaviors = true;
+                HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 100);
+                RewardSprite RS = (RewardSprite) actor;
+                Array<Reward> rewards = RS.getRewards();
+
+                if (rewards.size == 1) {
+                    Reward reward = rewards.get(0);
+                    final String rewardTypeName = reward.getType().name();
+
+                    switch (reward.getType()) {
+                        case Life:
+                        case Shards:
+                        case Gold:
+                            String labelKey = rewardLabelsMap.get(rewardTypeName);
+                            if (labelKey == null) {
+                                labelKey = "lbl" + rewardTypeName;
+                                rewardLabelsMap.put(rewardTypeName, labelKey);
+                            }
+
+                            String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
+                            AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
+                            AdventurePlayer.current().addReward(reward);
+                            break;
+                        default:
+                            showRewardScene(rewards);
+                            break;
+                    }
+                } else {
+                    showRewardScene(rewards);
+                }
+                RS.remove();
+                actors.removeValue(RS, true);
+                changes.deleteObject(RS.getId());
+                return true;
             }
         }
+        return false;
     }
 
     private void showRewardScene(Array<Reward> rewards) {
