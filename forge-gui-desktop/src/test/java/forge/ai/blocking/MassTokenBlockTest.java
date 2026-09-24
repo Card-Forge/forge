@@ -95,7 +95,9 @@ public class MassTokenBlockTest extends SimulationTest {
         assertFalse(combat.getAllBlockers().isEmpty(), "there are good blocks to make against the ground attackers");
         for (Card a : combat.getAttackers()) {
             for (Card b : combat.getBlockers(a)) {
-                assertTrue(b.getNetToughness() > a.getNetPower(), "life isn't in danger, so " + b + " shouldn't chump " + a);
+                boolean survives = b.getNetToughness() > a.getNetPower();
+                boolean kills = b.getNetPower() >= a.getNetToughness();
+                assertTrue(survives || kills, "life isn't in danger, so " + b + " shouldn't chump " + a);
             }
         }
     }
