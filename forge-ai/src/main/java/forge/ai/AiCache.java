@@ -6,7 +6,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,20 +28,11 @@ public class AiCache {
 
     /** Answers matched against an argument tuple, and answers looked up by a key the caller builds. */
     private static final class Store {
-        private final boolean shared;
-        private final Multimap<String, List<Object>> tuples;
-        private final Map<String, Map<Object, Object>> keyed;
-
-        private Store(boolean shared) {
-            this.shared = shared;
-            this.tuples = shared
-                    ? Multimaps.synchronizedMultimap(ArrayListMultimap.create())
-                    : ArrayListMultimap.create();
-            this.keyed = shared ? new ConcurrentHashMap<>() : new HashMap<>();
-        }
+        private final Multimap<String, List<Object>> tuples = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
+        private final Map<String, Map<Object, Object>> keyed = new ConcurrentHashMap<>();
 
         private Map<Object, Object> keyed(String name) {
-            return keyed.computeIfAbsent(name, k -> shared ? new ConcurrentHashMap<>() : new HashMap<>());
+            return keyed.computeIfAbsent(name, k -> new ConcurrentHashMap<>());
         }
 
         private void clear() {
@@ -51,8 +41,8 @@ public class AiCache {
         }
     }
 
-    private final static Store priorityStore = new Store(true);
-    private final static ThreadLocal<Store> callStore = ThreadLocal.withInitial(() -> new Store(false));
+    private final static Store priorityStore = new Store();
+    private final static ThreadLocal<Store> callStore = ThreadLocal.withInitial(Store::new);
 
     private static Store store(Scope scope) {
         return scope == Scope.PRIORITY ? priorityStore : callStore.get();
