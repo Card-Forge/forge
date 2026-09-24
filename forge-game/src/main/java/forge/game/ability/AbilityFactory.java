@@ -19,6 +19,7 @@ package forge.game.ability;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import forge.card.CardStateName;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
@@ -35,7 +36,9 @@ import io.sentry.Sentry;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -45,7 +48,10 @@ import java.util.stream.Collectors;
  * @author Forge
  * @version $Id$
  */
-public final class AbilityFactory {
+public final class AbilityFactory implements IHasForgeParams {
+    /** APIs whose Choices$ param lists the SVars of their choices. */
+    public static final Set<ApiType> CHOICE_APIS = Sets.immutableEnumSet(
+            ApiType.Charm, ApiType.GenericChoice, ApiType.AssignGroup, ApiType.VillainousChoice, ApiType.Vote);
 
     public static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
@@ -65,6 +71,12 @@ public final class AbilityFactory {
             "VoteSubAbility", // for Vote with VoteCard
             "VoteTiedAbility" // for fallback to Choices
         );
+
+    /** The sub-ability keys above, and the other params AbilityFactory reads. */
+    public static final String[] OPTIONAL_PARAMS = Stream.concat(additionalAbilityKeys.stream(), Stream.of(
+        "Choices", "Cost", "NonBasicSpell", "PreventionSubAbility", "ResultSubAbilities",
+        "SpellDescription", "SubAbility", "ValidTgts"
+    )).toArray(String[]::new);
 
     public enum AbilityRecordType {
         Ability("AB"),
@@ -245,7 +257,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup || api == ApiType.VillainousChoice || api == ApiType.Vote) {
+        if (CHOICE_APIS.contains(api)) {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));

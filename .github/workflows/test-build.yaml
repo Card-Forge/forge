@@ -11,6 +11,8 @@ jobs:
     name: Test with Java ${{ matrix.Java }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2   # a PR build checks out the merge commit; its first parent is the base
 
       - name: Setup java
         uses: actions/setup-java@v3
@@ -26,4 +28,34 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B clean test
+          # Card-script errors fail a PR's build only on the lines it changes; elsewhere they're reported
+          CARDSCRIPT=""
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git -c core.quotePath=false diff -U0 HEAD^1 HEAD -- forge-gui/res > "$RUNNER_TEMP/pr.diff"
+            CARDSCRIPT="-Dcardscript.diff=$RUNNER_TEMP/pr.diff"
+          fi
+          mvn -U -B clean test $CARDSCRIPT
+
+      # CardScriptLinterTest writes its findings here; hand them, plus the PR number,
+      # to the Card-script review workflow. A pull_request build has a read-only token
+      # on fork PRs and cannot comment, so posting happens there. The number is a hint
+      # only: the poster re-checks it against the build's trusted head SHA before
+      # commenting, so a tampered artifact can't redirect it. One matrix leg only, and
+      # always() so a failing build still ships its findings.
+      - name: Stage card-script review data
+        if: ${{ always() && github.event_name == 'pull_request' && matrix.java == '17' }}
+        run: |
+          printf '{"number": %s}\n' "${{ github.event.pull_request.number }}" > card-script-pr-meta.json
+          [ -f forge-gui-desktop/target/card-script-findings.json ] \
+            && cp forge-gui-desktop/target/card-script-findings.json card-script-findings.json || true
+
+      - name: Upload card-script review data
+        if: ${{ always() && github.event_name == 'pull_request' && matrix.java == '17' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: card-script-review
+          path: |
+            card-script-findings.json
+            card-script-pr-meta.json
+          if-no-files-found: ignore
+          retention-days: 1   # only needed until the poster runs minutes later

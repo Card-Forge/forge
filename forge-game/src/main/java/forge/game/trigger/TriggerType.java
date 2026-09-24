@@ -180,6 +180,10 @@ public enum TriggerType {
         throw new RuntimeException("No constructor found that would take Map as 1st parameter in class " + clasz.getName());
     }
 
+    public Class<? extends Trigger> getTriggerClass() {
+        return constructor.getDeclaringClass();
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @param value
