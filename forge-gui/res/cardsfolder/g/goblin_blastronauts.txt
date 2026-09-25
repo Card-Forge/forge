@@ -1,6 +1,6 @@
 Name:Goblin Blastronauts
 ManaCost:3 R R
-Types:Creature Goblin Emplyee
+Types:Creature Goblin Employee
 PT:5/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
 T:Mode$ RolledDie | TriggerZones$ Battlefield | ValidPlayer$ You | ValidSA$ Spell,Activated.!ManaAbility,Triggered.!ManaAbility | ValidResult$ 6 | Execute$ TrigCopyTarget | OptionalDecider$ You | TriggerDescription$ Whenever you roll a 6, you may copy the spell, ability, or Attraction visit that caused you to roll that die. You may choose new targets for the copy.
