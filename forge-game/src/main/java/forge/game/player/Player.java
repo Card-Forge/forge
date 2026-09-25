@@ -2495,7 +2495,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         setExpentThisTurn(0);
         attractionsVisitedThisTurn = 0;
 
-        damageReceivedThisTurn.clear();
+        damageReceivedLastTurn = damageReceivedThisTurn;
+        damageReceivedThisTurn = Lists.newArrayList();
+
         planeswalkedToThisTurn.clear();
 
         elementalBendThisTurn.clear();

@@ -7147,7 +7147,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
-        damageReceivedThisTurn.clear();
+        damageReceivedLastTurn = damageReceivedThisTurn;
+        damageReceivedThisTurn = Lists.newArrayList();
         resetExcessDamage();
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
