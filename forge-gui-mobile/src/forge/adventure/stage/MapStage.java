@@ -49,6 +49,7 @@ import java.util.Queue;
  * Stage to handle tiled maps for points of interests
  */
 public class MapStage extends GameStage {
+
     public static MapStage instance;
     final Array<MapActor> actors = new Array<>();
     public com.badlogic.gdx.physics.box2d.World gdxWorld;
@@ -174,7 +175,6 @@ public class MapStage extends GameStage {
 
     @Override
     public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect) {
-
     }
 
     Group collisionGroup;
@@ -703,7 +703,6 @@ public class MapStage extends GameStage {
                                 restockPrice = 0; //Tied to restock button
                             }
                             shopList = shopList.replaceAll("\\s", "");
-
                         }
 
                         if (prop.containsKey("noRestock") && (boolean) prop.get("noRestock")) {
@@ -966,7 +965,6 @@ public class MapStage extends GameStage {
     }
 
     public boolean lookForID(int id) { //Search actor by ID.
-
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A.getId() == id)
                 return true;
@@ -977,7 +975,7 @@ public class MapStage extends GameStage {
     public EnemySprite getEnemyByID(int id) { //Search actor by ID, enemies only.
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A instanceof EnemySprite && A.getId() == id)
-                return ((EnemySprite) A);
+                return (EnemySprite) A;
         }
         return null;
     }
@@ -1029,7 +1027,6 @@ public class MapStage extends GameStage {
 
     private final ArrayList<NavigationVertex> navVerticesList = new ArrayList<>(256);
     private final ProgressableGraphPath<NavigationVertex> emptyFallbackNavPath = new ProgressableGraphPath<>(0);
-    private static final HashMap<String, String> rewardLabelsMap = new HashMap<>(32);
 
     @Override
     protected void onActing(float delta) {
@@ -1051,8 +1048,7 @@ public class MapStage extends GameStage {
         // cache the current player coordinates registry once
         playerPosReg.set(player.pos());
 
-        // for ambiguous collision with com.badlogic.gdx.utils.Collections
-        java.util.Collections.sort(navVerticesList, distanceComparator);
+        navVerticesList.sort(distanceComparator);
 
         if (!freezeAllEnemyBehaviors) {
             for (int i = enemies.size() - 1; i >= 0; i--) {
@@ -1155,13 +1151,7 @@ public class MapStage extends GameStage {
                             case Life:
                             case Shards:
                             case Gold:
-                                String labelKey = rewardLabelsMap.get(rewardTypeName);
-                                if (labelKey == null) {
-                                    labelKey = "lbl" + rewardTypeName;
-                                    rewardLabelsMap.put(rewardTypeName, labelKey);
-                                }
-
-                                String message = Forge.getLocalizer().getMessageorUseDefault(labelKey, rewardTypeName);
+                                String message = Forge.getLocalizer().getMessageorUseDefault(reward.getType().getLabelKey(), rewardTypeName);
                                 AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
                                 break;
@@ -1257,8 +1247,6 @@ public class MapStage extends GameStage {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
         }
     }
-
-
 
     public void resetPosition() {
         if (positions.peek() != null){

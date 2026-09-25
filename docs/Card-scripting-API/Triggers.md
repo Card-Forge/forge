@@ -377,7 +377,7 @@ TriggeredObjects:
 - `Player` - The player that rolled the dice
 
 # PlaneswalkedTo / PlaneswalkedFrom
-These triggers go off when a player planeswalks to or away from one or  more planes.
+These triggers go off when a player planeswalks to or away from one or more planes.
 
 Parameters:
 - `ValidCard` - One of the planes must match this

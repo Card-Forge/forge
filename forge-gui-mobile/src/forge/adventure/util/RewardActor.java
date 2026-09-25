@@ -823,6 +823,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Forge.getGraphics().begin(pw, ph);
         Forge.getGraphics().setProjectionMatrix(matrix);
         Forge.getGraphics().startClip();
+        Forge.getGraphics().getBatch().setColor(Color.WHITE);
         Forge.getGraphics().getBatch().draw(sprite, 0, 0, pw, ph);
         if (item != null) {
             if (!isBooster) {

@@ -319,7 +319,7 @@ public class AttackConstraints {
             }
         }
 
-        Collections.sort(result, Comparator.reverseOrder());
+        result.sort(Comparator.reverseOrder());
 
         Multimap<GameEntity, StaticAbility> playerReqs = MultimapBuilder.hashKeys().arrayListValues().build(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
@@ -339,7 +339,7 @@ public class AttackConstraints {
         }
         if (!usedAttackers.isEmpty()) {
             // order could have changed
-            Collections.sort(result, Comparator.reverseOrder());
+            result.sort(Comparator.reverseOrder());
         }
 
         return result;
