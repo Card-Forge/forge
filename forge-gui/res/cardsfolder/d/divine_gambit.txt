@@ -2,5 +2,5 @@ Name:Divine Gambit
 ManaCost:W W
 Types:Sorcery
 A:SP$ ChangeZone | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl,Enchantment.OppCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target artifact, creature, or enchantment an opponent controls | SubAbility$ DBChangeZone | SpellDescription$ Exile target artifact, creature, or enchantment an opponent controls. That player may put a permanent card from their hand onto the battlefield.
-SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ TargetedController | ChangeType$ Permanent | Origin$ Hand | Destination$ Battlefield
+SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ TargetedController | Putter$ Owner | ChangeType$ Permanent | Origin$ Hand | Destination$ Battlefield
 Oracle:Exile target artifact, creature, or enchantment an opponent controls. That player may put a permanent card from their hand onto the battlefield.
