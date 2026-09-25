@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.Glyph;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import com.badlogic.gdx.utils.IntSet;
@@ -37,6 +38,7 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static HashMap<String, String> langUniqueCharacterSet = new HashMap<>();
+    private static final GlyphLayout GLYPH_LAYOUT = new GlyphLayout();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
@@ -181,49 +183,12 @@ public class FSkinFont {
             outBounds.height = 0f;
             return;
         }
-        BitmapFontData data = font.getData();
-        int width = 0;
-        Glyph lastGlyph = null;
+        updateScale();
 
-        while (start < end) {
-            char ch = str.charAt(start++);
-            if (ch == '[' && data.markupEnabled) {
-                if (!(start < end && str.charAt(start) == '[')) { // non escaped '['
-                    while (start < end && str.charAt(start) != ']')
-                        start++;
-                    start++;
-                    continue;
-                }
-                start++;
-            }
-            lastGlyph = data.getGlyph(ch);
-            if (lastGlyph != null) {
-                width = lastGlyph.xadvance;
-                break;
-            }
-        }
-        while (start < end) {
-            char ch = str.charAt(start++);
-            if (ch == '[' && data.markupEnabled) {
-                if (!(start < end && start < end && str.charAt(start) == '[')) { // non escaped '['
-                    while (start < end && str.charAt(start) != ']')
-                        start++;
-                    start++;
-                    continue;
-                }
-                start++;
-            }
+        GLYPH_LAYOUT.setText(font, str, start, end, font.getColor(), 0, Align.left, false, null);
 
-            Glyph g = data.getGlyph(ch);
-            if (g != null) {
-                width += lastGlyph.getKerning(ch);
-                lastGlyph = g;
-                width += g.xadvance;
-            }
-        }
-
-        outBounds.width = width * data.scaleX;
-        outBounds.height = data.capHeight;
+        outBounds.width = GLYPH_LAYOUT.width;
+        outBounds.height = font.getData().capHeight;
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
         TextBounds bounds = new TextBounds();
@@ -232,31 +197,17 @@ public class FSkinFont {
     }
     public void getMultiLineBounds(CharSequence str, TextBounds outBounds) {
         if (outBounds == null) return;
-        updateScale();
         if (font == null) {
             outBounds.width = 0f;
             outBounds.height = 0f;
             return;
         }
-        BitmapFontData data = font.getData();
-        int start = 0;
-        float maxWidth = 0;
-        int numLines = 0;
-        int length = str.length();
+        updateScale();
 
-        TextBounds internalLineBoundsHolder = new TextBounds();
+        GLYPH_LAYOUT.setText(font, str, 0, str.length(), font.getColor(), 0, Align.left, false, null);
 
-        while (start < length) {
-            int lineEnd = indexOf(str, '\n', start);
-            getBounds(str, start, lineEnd, internalLineBoundsHolder);
-            float lineWidth = internalLineBoundsHolder.width;
-            maxWidth = Math.max(maxWidth, lineWidth);
-            start = lineEnd + 1;
-            numLines++;
-        }
-
-        outBounds.width = maxWidth;
-        outBounds.height = data.capHeight + (numLines - 1) * data.lineHeight;
+        outBounds.width = GLYPH_LAYOUT.width;
+        outBounds.height = GLYPH_LAYOUT.height;
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
         TextBounds bounds = new TextBounds();
@@ -265,61 +216,18 @@ public class FSkinFont {
     }
     public void getWrappedBounds(CharSequence str, float wrapWidth, TextBounds outBounds) {
         if (outBounds == null) return;
-        updateScale();
         if (font == null) {
             outBounds.width = 0f;
             outBounds.height = 0f;
             return;
         }
-        BitmapFontData data = font.getData();
+        updateScale();
         if (wrapWidth <= 0) wrapWidth = Integer.MAX_VALUE;
-        int start = 0;
-        int numLines = 0;
-        int length = str.length();
-        float maxWidth = 0;
 
-        TextBounds internalLineBoundsHolder = new TextBounds();
+        GLYPH_LAYOUT.setText(font, str, 0, str.length(), font.getColor(), wrapWidth, Align.left, true, null);
 
-        while (start < length) {
-            int newLine = indexOf(str, '\n', start);
-            int lineEnd = start + computeVisibleGlyphs(str, start, newLine, wrapWidth);
-            int nextStart = lineEnd + 1;
-            if (lineEnd < newLine) {
-                while (lineEnd > start) {
-                    if (isWhitespace(str.charAt(lineEnd))) break;
-                    if (isBreakChar(str.charAt(lineEnd - 1))) break;
-                    lineEnd--;
-                }
-
-                if (lineEnd == start) {
-                    if (nextStart > start + 1) nextStart--;
-                    lineEnd = nextStart;
-                } else {
-                    nextStart = lineEnd;
-                    while (nextStart < length) {
-                        char c = str.charAt(nextStart);
-                        if (!isWhitespace(c)) break;
-                        nextStart++;
-                        if (c == '\n') break;
-                    }
-                    while (lineEnd > start) {
-                        if (!isWhitespace(str.charAt(lineEnd - 1))) break;
-                        lineEnd--;
-                    }
-                }
-            }
-
-            if (lineEnd > start) {
-                getBounds(str, start, lineEnd, internalLineBoundsHolder);
-                float lineWidth = internalLineBoundsHolder.width;
-                maxWidth = Math.max(maxWidth, lineWidth);
-            }
-            start = nextStart;
-            numLines++;
-        }
-
-        outBounds.width = maxWidth;
-        outBounds.height = data.capHeight + (numLines - 1) * data.lineHeight;
+        outBounds.width = GLYPH_LAYOUT.width;
+        outBounds.height = GLYPH_LAYOUT.height;
     }
     public float getAscent() {
         if (font == null)
