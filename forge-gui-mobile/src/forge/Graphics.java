@@ -52,10 +52,10 @@ public class Graphics implements Disposable {
     private static final TextBounds textBounds = new TextBounds();
     private static final Rectangle tmpBounds = new Rectangle();
     private int clipDepth = 0;
-    private static final Rectangle[] structuralClipRectPoolArray = new Rectangle[16];
+    private static final Rectangle[] clipPool = new Rectangle[16];
     static {
         for (int i = 0; i < 16; i++) {
-            structuralClipRectPoolArray[i] = new Rectangle();
+            clipPool[i] = new Rectangle();
         }
     }
 
@@ -133,22 +133,22 @@ public class Graphics implements Disposable {
         // ZERO ALLOCATION APPROACH: Pick a totally isolated memory index slot based on our active
         // clipping depth instead of transformCount, ensuring parent and child boxes never overlap!
         final int activePoolIdx = clipDepth & 15;
-        final Rectangle activeClipRegister = structuralClipRectPoolArray[activePoolIdx];
+        final Rectangle activeClip = clipPool[activePoolIdx];
 
         // Advance our depth pointer before processing layout math
         clipDepth++;
 
-        activeClipRegister.set(adjustX(x), adjustY(y, h), w, h);
+        activeClip.set(adjustX(x), adjustY(y, h), w, h);
 
         if (!Dtransforms.isEmpty()) { // transform position if needed
-            tmp.set(activeClipRegister.x, activeClipRegister.y, 0);
+            tmp.set(activeClip.x, activeClip.y, 0);
             tmp.mul(batch.getTransformMatrix());
             float minX = tmp.x;
             float maxX = minX;
             float minY = tmp.y;
             float maxY = minY;
 
-            tmp.set(activeClipRegister.x + activeClipRegister.width, activeClipRegister.y, 0);
+            tmp.set(activeClip.x + activeClip.width, activeClip.y, 0);
             tmp.mul(batch.getTransformMatrix());
             if (tmp.x < minX) {
                 minX = tmp.x;
@@ -161,7 +161,7 @@ public class Graphics implements Disposable {
                 maxY = tmp.y;
             }
 
-            tmp.set(activeClipRegister.x + activeClipRegister.width, activeClipRegister.y + activeClipRegister.height, 0);
+            tmp.set(activeClip.x + activeClip.width, activeClip.y + activeClip.height, 0);
             tmp.mul(batch.getTransformMatrix());
             if (tmp.x < minX) {
                 minX = tmp.x;
@@ -174,7 +174,7 @@ public class Graphics implements Disposable {
                 maxY = tmp.y;
             }
 
-            tmp.set(activeClipRegister.x, activeClipRegister.y + activeClipRegister.height, 0);
+            tmp.set(activeClip.x, activeClip.y + activeClip.height, 0);
             tmp.mul(batch.getTransformMatrix());
             if (tmp.x < minX) {
                 minX = tmp.x;
@@ -187,10 +187,10 @@ public class Graphics implements Disposable {
                 maxY = tmp.y;
             }
 
-            activeClipRegister.set(minX, minY, maxX - minX, maxY - minY);
+            activeClip.set(minX, minY, maxX - minX, maxY - minY);
         }
 
-        if (!ScissorStack.pushScissors(activeClipRegister)) {
+        if (!ScissorStack.pushScissors(activeClip)) {
             failedClipCount++; // tracked failed clips to prevent calling popScissors on endClip
             return false;
         }
