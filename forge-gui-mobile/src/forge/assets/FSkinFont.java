@@ -166,16 +166,22 @@ public class FSkinFont {
     }
     // Expose methods from font that updates scale as needed
     public TextBounds getBounds(CharSequence str) {
-        updateScale(); //must update scale before measuring text
+        updateScale(); // must update scale before measuring text
         return getBounds(str, 0, str.length());
     }
     public TextBounds getBounds(CharSequence str, int start, int end) {
+        TextBounds bounds = new TextBounds();
+        getBounds(str, start, end, bounds);
+        return bounds;
+    }
+    public void getBounds(CharSequence str, int start, int end, TextBounds outBounds) {
+        if (outBounds == null) return;
         if (font == null) {
-            return new TextBounds(0f, 0f);
+            outBounds.width = 0f;
+            outBounds.height = 0f;
+            return;
         }
         BitmapFontData data = font.getData();
-        //int start = 0;
-        //int end = str.length();
         int width = 0;
         Glyph lastGlyph = null;
 
@@ -199,7 +205,7 @@ public class FSkinFont {
         while (start < end) {
             char ch = str.charAt(start++);
             if (ch == '[' && data.markupEnabled) {
-                if (!(start < end && str.charAt(start) == '[')) { // non escaped '['
+                if (!(start < end && start < end && str.charAt(start) == '[')) { // non escaped '['
                     while (start < end && str.charAt(start) != ']')
                         start++;
                     start++;
@@ -216,13 +222,21 @@ public class FSkinFont {
             }
         }
 
-        return new TextBounds(width * data.scaleX, data.capHeight);
-
+        outBounds.width = width * data.scaleX;
+        outBounds.height = data.capHeight;
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
+        TextBounds bounds = new TextBounds();
+        getMultiLineBounds(str, bounds);
+        return bounds;
+    }
+    public void getMultiLineBounds(CharSequence str, TextBounds outBounds) {
+        if (outBounds == null) return;
         updateScale();
         if (font == null) {
-            return new TextBounds(0f, 0f);
+            outBounds.width = 0f;
+            outBounds.height = 0f;
+            return;
         }
         BitmapFontData data = font.getData();
         int start = 0;
@@ -230,21 +244,32 @@ public class FSkinFont {
         int numLines = 0;
         int length = str.length();
 
+        TextBounds internalLineBoundsHolder = new TextBounds();
+
         while (start < length) {
             int lineEnd = indexOf(str, '\n', start);
-            float lineWidth = getBounds(str, start, lineEnd).width;
+            getBounds(str, start, lineEnd, internalLineBoundsHolder);
+            float lineWidth = internalLineBoundsHolder.width;
             maxWidth = Math.max(maxWidth, lineWidth);
             start = lineEnd + 1;
             numLines++;
         }
 
-        return new TextBounds(maxWidth, data.capHeight + (numLines - 1) * data.lineHeight);
-
+        outBounds.width = maxWidth;
+        outBounds.height = data.capHeight + (numLines - 1) * data.lineHeight;
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
+        TextBounds bounds = new TextBounds();
+        getWrappedBounds(str, wrapWidth, bounds);
+        return bounds;
+    }
+    public void getWrappedBounds(CharSequence str, float wrapWidth, TextBounds outBounds) {
+        if (outBounds == null) return;
         updateScale();
         if (font == null) {
-            return new TextBounds(0f, 0f);
+            outBounds.width = 0f;
+            outBounds.height = 0f;
+            return;
         }
         BitmapFontData data = font.getData();
         if (wrapWidth <= 0) wrapWidth = Integer.MAX_VALUE;
@@ -252,12 +277,14 @@ public class FSkinFont {
         int numLines = 0;
         int length = str.length();
         float maxWidth = 0;
+
+        TextBounds internalLineBoundsHolder = new TextBounds();
+
         while (start < length) {
             int newLine = indexOf(str, '\n', start);
             int lineEnd = start + computeVisibleGlyphs(str, start, newLine, wrapWidth);
             int nextStart = lineEnd + 1;
             if (lineEnd < newLine) {
-                // Find char to break on.
                 while (lineEnd > start) {
                     if (isWhitespace(str.charAt(lineEnd))) break;
                     if (isBreakChar(str.charAt(lineEnd - 1))) break;
@@ -265,26 +292,17 @@ public class FSkinFont {
                 }
 
                 if (lineEnd == start) {
-
                     if (nextStart > start + 1) nextStart--;
-
-                    lineEnd = nextStart; // If no characters to break, show all.
-
+                    lineEnd = nextStart;
                 } else {
                     nextStart = lineEnd;
-
-                    // Eat whitespace at start of wrapped line.
-
                     while (nextStart < length) {
                         char c = str.charAt(nextStart);
                         if (!isWhitespace(c)) break;
                         nextStart++;
-                        if (c == '\n') break; // Eat only the first wrapped newline.
+                        if (c == '\n') break;
                     }
-
-                    // Eat whitespace at end of line.
                     while (lineEnd > start) {
-
                         if (!isWhitespace(str.charAt(lineEnd - 1))) break;
                         lineEnd--;
                     }
@@ -292,14 +310,16 @@ public class FSkinFont {
             }
 
             if (lineEnd > start) {
-                float lineWidth = getBounds(str, start, lineEnd).width;
+                getBounds(str, start, lineEnd, internalLineBoundsHolder);
+                float lineWidth = internalLineBoundsHolder.width;
                 maxWidth = Math.max(maxWidth, lineWidth);
             }
             start = nextStart;
             numLines++;
         }
 
-        return new TextBounds(maxWidth, data.capHeight + (numLines - 1) * data.lineHeight);
+        outBounds.width = maxWidth;
+        outBounds.height = data.capHeight + (numLines - 1) * data.lineHeight;
     }
     public float getAscent() {
         if (font == null)
