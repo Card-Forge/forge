@@ -259,7 +259,7 @@ public class SimulateMatch {
         int numPlayers = 0;
         if (params.containsKey("d")) {
             for (String deck : params.get("d")) {
-                Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
+                Deck d = deckFromCommandLineParameter(deck, rules.getGameType(), null);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
@@ -378,10 +378,6 @@ public class SimulateMatch {
 
     public static Match simulateOffthreadGame(List<Deck> decks, GameType format, int games) {
         return null;
-    }
-
-    private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
-        return deckFromCommandLineParameter(deckname, type, null);
     }
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type, String deckDir) {
