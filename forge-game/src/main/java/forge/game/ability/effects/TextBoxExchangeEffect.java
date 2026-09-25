@@ -100,25 +100,25 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         for (SpellAbility sa : from.spellabilities) {
             SpellAbility copy = sa.copy(to, false, true);
             // need to persist any previous word changes
-            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            copy.changeTextIntrinsic(copy.getTextChanges());
             spellabilities.add(copy);
         }
         List<Trigger> triggers = Lists.newArrayList();
         for (Trigger tr : from.triggers) {
             Trigger copy = tr.copy(to, false, true);
-            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            copy.changeTextIntrinsic(copy.getTextChanges());
             triggers.add(copy);
         }
         List<ReplacementEffect> reps = Lists.newArrayList();
         for (ReplacementEffect re : from.replacements) {
             ReplacementEffect copy = re.copy(to, false, true);
-            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            copy.changeTextIntrinsic(copy.getTextChanges());
             reps.add(copy);
         }
         List<StaticAbility> statics = Lists.newArrayList();
         for (StaticAbility st : from.statics) {
             StaticAbility copy = st.copy(to, false, true);
-            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            copy.changeTextIntrinsic(copy.getTextChanges());
             statics.add(copy);
         }
         to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, 0);
