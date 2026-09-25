@@ -152,6 +152,8 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> oathbreakerCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> tinyLeadersCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> commanderPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> pauperCommanderPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(forge.deck.DeckFormat.PauperCommander.isLegalCommanderPredicate()), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> pauperCommanderCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(forge.deck.DeckFormat.PauperCommander.isLegalCardPredicate()), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> avatarPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_VANGUARD)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> conspiracyPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> dungeonPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
@@ -323,6 +325,14 @@ public final class FModel {
 
     public static ItemPool<PaperCard> getCommanderPool() {
         return commanderPool.get();
+    }
+
+    public static ItemPool<PaperCard> getPauperCommanderPool() {
+        return pauperCommanderPool.get();
+    }
+
+    public static ItemPool<PaperCard> getPauperCommanderCards() {
+        return pauperCommanderCards.get();
     }
 
     public static ItemPool<PaperCard> getAvatarPool() {
