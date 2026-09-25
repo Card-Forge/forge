@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.google.common.collect.ImmutableList;
@@ -39,6 +40,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FilesPage extends TabPage<SettingsScreen> {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
+    private static final AtomicBoolean auditRunning = new AtomicBoolean(false);
 
     protected FilesPage() {
         super(Forge.getLocalizer().getMessage("lblFiles"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN);
@@ -100,27 +102,28 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnListImageData"), Forge.getLocalizer().getMessage("lblListImageData")) {
             @Override
             public void select() {
+                if (!auditRunning.compareAndSet(false, true)) {
+                    return; //an audit is already in flight - ignore this click instead of starting another one
+                }
                 FThreads.invokeInEdtLater(() -> {
                     final String baseCaption = Forge.getLocalizer().getMessage("lblProcessingCards");
-                    LoadingOverlay.runBackgroundTask(baseCaption, loader -> {
-                        StringBuffer nifSB = new StringBuffer();
-                        StringBuffer cniSB = new StringBuffer();
+                    LoadingOverlay.runBackgroundTask(baseCaption, true, loader -> {
+                        try {
+                            StringBuffer nifSB = new StringBuffer();
+                            StringBuffer cniSB = new StringBuffer();
 
-                        Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB, percent ->
-                                FThreads.invokeInEdtLater(() -> loader.setCaption(baseCaption + " " + percent + "%"))
-                        );
+                            Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB, percent ->
+                                    FThreads.invokeInEdtLater(() -> loader.setCaption(baseCaption + " " + percent + "%"))
+                            );
 
-                        String msg = nifSB.toString();
-                        String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
-                        FThreads.invokeInEdtLater(() -> FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, result -> {
-                            switch (result) {
-                                case 0:
-                                    Forge.getClipboard().setContents(msg);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }));
+                            String msg = nifSB.toString();
+                            String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
+                            FThreads.invokeInEdtLater(() -> FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, result -> {
+                                if (result == 0) Forge.getClipboard().setContents(msg);
+                            }));
+                        } finally {
+                            auditRunning.set(false); //always release, even if audit() throws
+                        }
                     });
                 });
             }
