@@ -54,6 +54,7 @@ public class FrameRate {
     public void render(boolean showFPS) {
         if (!showFPS || font == null)
             return;
+        Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
         Forge.getGraphics().getBatch().begin();
         font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), true, Align.left);
         Forge.getGraphics().getBatch().end();

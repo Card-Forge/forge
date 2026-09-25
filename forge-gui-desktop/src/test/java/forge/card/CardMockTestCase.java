@@ -192,7 +192,26 @@ public class CardMockTestCase {
     }
 
     protected void initializeStaticData() {
-        StaticData data = CardDatabaseHelper.getStaticDataToPopulateOtherMocks();
+        useStaticData(CardDatabaseHelper.getStaticDataToPopulateOtherMocks());
+    }
+
+    /**
+     * Points both {@code FModel.getMagicDb()} and {@link StaticData#instance()} at this class's
+     * database. The singleton needs setting too because {@link StaticData}'s constructor assigns it,
+     * so a class that builds its own database leaves it pointing there for the rest of the JVM.
+     */
+    protected void useStaticData(StaticData data) {
         fModelMock.when(FModel::getMagicDb).thenReturn(data);
+        setStaticDataInstance(data);
+    }
+
+    private static void setStaticDataInstance(StaticData data) {
+        try {
+            Field instance = StaticData.class.getDeclaredField("lastInstance");
+            instance.setAccessible(true);
+            instance.set(null, data);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

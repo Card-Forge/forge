@@ -581,7 +581,7 @@ public class VLobby implements ILobbyView {
     }
     private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
         final Deck deck = decks[index];
-        final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
+        final Deck copy = deck == null ? new Deck() : new Deck(deck);
         copy.putSection(section, cards);
         decks[index] = copy;
         if (playerChangeListener != null) {
@@ -772,9 +772,9 @@ public class VLobby implements ILobbyView {
             if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
                 vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
             } else { //Only other string is "Random"
-                if (isPlayerAI(playerIndex)) { //AI
+                if (isPlayerAI(playerIndex)) {
                     vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                } else { //Human
+                } else {
                     vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
                 }
             }
