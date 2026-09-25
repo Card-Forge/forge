@@ -752,11 +752,12 @@ public class CombatUtil {
         final CardCollection requirementCards = new CardCollection();
         final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
-            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
+            // the lure check reads the attacker's own keywords; getBlockCost walks every card in the game
+            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
                 continue;
             }
 
-            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
+            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
 
