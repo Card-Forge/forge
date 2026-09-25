@@ -43,6 +43,7 @@ import java.util.List;
  */
 
 public class MapDialog {
+
     private final MapStage stage;
     private Array<DialogData> data;
     private final int parentID;
@@ -444,7 +445,7 @@ public class MapDialog {
                 RewardScene.instance().loadRewards(ret, RewardScene.Type.QuestReward, null);
                 Forge.switchScene(RewardScene.instance());
             }
-               if (E.grantRewardsChoice != null && E.grantRewardsChoice.length > 0) {
+            if (E.grantRewardsChoice != null && E.grantRewardsChoice.length > 0) {
                Array<Reward> ret = new Array<Reward>();
                for(RewardData rdata:E.grantRewardsChoice) {
                    ret.addAll(rdata.generate(false, true));

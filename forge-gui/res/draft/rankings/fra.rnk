@@ -1,0 +1,281 @@
+//Rank|Name|Rarity|Set
+#1|Chandra, Torch of Defiance|M|FRA
+#2|Ajani Unrelenting|M|FRA
+#3|Craterclaw Colossus|M|FRA
+#4|Denzilore Fatehold|M|FRA
+#5|Garruk, Curse Breaker|M|FRA
+#6|Lyra, Tolarian Archangel|R|FRA
+#7|The Theorist, Jace Beleren|M|FRA
+#8|Verdant Kraken|R|FRA
+#9|Kwia Vigorbloom|M|FRA
+#10|Sublime Epiphany|R|FRA
+#11|Garruk, Veiled Butcher|M|FRA
+#12|Draconic Visitor|R|FRA
+#13|Guiding Hydra|R|FRA
+#14|Ingris Stingerquill|M|FRA
+#15|Overwrite the Multiverse|M|FRA
+#16|Uldaros Theorix|M|FRA
+#17|Aerid Konstrari|M|FRA
+#18|Avatar of Burgeoning Echoes|M|FRA
+#19|Hungering Puppetbeast|R|FRA
+#20|Mind Twist|M|FRA
+#21|Austere Command|R|FRA
+#22|Curse-Marred Demon|R|FRA
+#23|Lyra, Archangel of Dawn|R|FRA
+#24|Sphinx of False Conclusions|R|FRA
+#25|Chandra, Chill of Compliance|M|FRA
+#26|Craftwork Crusher|U|FRA
+#27|Seasoned Cryomancer|M|FRA
+#28|Stingcaster Mage|M|FRA
+#29|Tenured Tethermage|R|FRA
+#30|Vraska, the Cutting Glare|R|FRA
+#31|Flesh Duplicate|R|FRA
+#32|Hapatra, the Desert Fang|U|FRA
+#33|Lich's Relic|R|FRA
+#34|Liliana the Faultless|R|FRA
+#35|Master of Barbs|R|FRA
+#36|Null Summoner|R|FRA
+#37|Proctor of Potential|R|FRA
+#38|Rise of the Deathbringer|R|FRA
+#39|Simulacrum Shaper|R|FRA
+#40|Stingerquill Charm|U|FRA
+#41|Theorist's Sanctum|R|FRA
+#42|Vindictive Triumph|R|FRA
+#43|Bloombrute|U|FRA
+#44|Desperate Futurescribe|U|FRA
+#45|Fulminous Forte|U|FRA
+#46|Kindred Judgment|R|FRA
+#47|Mind Meanderer|U|FRA
+#48|Ruric Thar, Magecrusher|U|FRA
+#49|Saheeli, Consul of Oversight|U|FRA
+#50|Saheeli, Jewel of Avishkar|U|FRA
+#51|Yoshimaru, Scrappy Stray|U|FRA
+#52|Dark Matter Manipulator|R|FRA
+#53|Darklight Phoenix|M|FRA
+#54|Diviner of Victory|R|FRA
+#55|Fblthp, Knows the Way|U|FRA
+#56|Kiora of Fire and Ashes|U|FRA
+#57|Liliana the Repentant|R|FRA
+#58|Splinter Twin|R|FRA
+#59|The Echoverse Fulcrum|M|FRA
+#60|Twisted Fates|U|FRA
+#61|Vraska, Soul of Stone|R|FRA
+#62|Warrior's Blades|U|FRA
+#63|Clash of Elements|U|FRA
+#64|Edgar, Moonlit Sovereign|U|FRA
+#65|Enlightened Confidant|M|FRA
+#66|Jace, Reality Sculptor|R|FRA
+#67|Primal Witchstalker|U|FRA
+#68|Solitary Cell|R|FRA
+#69|Vigorbloom Charm|U|FRA
+#70|Vraska's Final Mercy|R|FRA
+#71|Way of the Warlord|U|FRA
+#72|Your Fate Ends Here|U|FRA
+#73|Command the Stage|U|FRA
+#74|Cruel Calculations|R|FRA
+#75|Gallia, Tragic Host|U|FRA
+#76|Gideon the Oathless|R|FRA
+#77|Gideon's Memorial|R|FRA
+#78|Heartwood Crafter|U|FRA
+#79|Hexhaven Battalion|C|FRA
+#80|Kiora of Salt and Sand|U|FRA
+#81|Last Gasp|C|FRA
+#82|Loot, the Nexus|U|FRA
+#83|Massacre Girl, Most Wanted|U|FRA
+#84|Memory Trap|C|FRA
+#85|Mindseeker Oculus|C|FRA
+#86|Multiply by Zero|U|FRA
+#87|Paradox Shaper|U|FRA
+#88|Pia, Determined Rebuilder|U|FRA
+#89|Plan for All Outcomes|U|FRA
+#90|Proft, Consulting Detective|U|FRA
+#91|Puppet Crafting|R|FRA
+#92|Recursive Recruitment|U|FRA
+#93|Stingerquill Voxmancer|U|FRA
+#94|Tetsuko Umezawa, Pursuer|U|FRA
+#95|Teyo, Lightshield Expert|U|FRA
+#96|Titanbones, Towering Heart|U|FRA
+#97|Violent Echoes|U|FRA
+#98|Way of the Healer|U|FRA
+#99|Way of the Wildspeaker|U|FRA
+#100|Woodwork Prodigy|U|FRA
+#101|Flickering Hound|R|FRA
+#102|Repurposed Enforcer|R|FRA
+#103|Sanctum Lurker|R|FRA
+#104|Tarmogoyf|M|FRA
+#105|Carnivorous Cultivator|R|FRA
+#106|Compel Brutality|C|FRA
+#107|Edgar, Ancient Bloodlord|U|FRA
+#108|Fatehold Charm|U|FRA
+#109|Geist of Saint Thalia|U|FRA
+#110|Infinite Coursework|C|FRA
+#111|Jace's Machinations|R|FRA
+#112|Jiang Yanggu, Never Alone|U|FRA
+#113|No Admittance|C|FRA
+#114|Prophesied End|U|FRA
+#115|Samut, Hazoret's Champion|R|FRA
+#116|Tomik, Orzhov Lawmage|U|FRA
+#117|Winter, Tormented Loner|U|FRA
+#118|Wrath of the Bloodmane|C|FRA
+#119|Arni, Humble Scribe|U|FRA
+#120|Break Under Pressure|U|FRA
+#121|Grim Repriser|U|FRA
+#122|Hapatra, the Desert Frost|U|FRA
+#123|Loot, the Anomaly|U|FRA
+#124|Marwyn, the Preserver|U|FRA
+#125|Refute Destiny|U|FRA
+#126|Stinging Vitriol|R|FRA
+#127|Terminal Criticism|U|FRA
+#128|Tetsuko Umezawa, Fugitive|U|FRA
+#129|Tinybones, Pocket Nuisance|U|FRA
+#130|Tomik, Izzet Sparkmage|U|FRA
+#131|Traxos, Academy Guardian|U|FRA
+#132|Way of the Pyromancer|U|FRA
+#133|Ajani's Anguish|R|FRA
+#134|Deserted Beach|R|FRA
+#135|Fatehold Annex|C|FRA
+#136|Formidable Commons|C|FRA
+#137|Ghalta the Unstoppable|U|FRA
+#138|Greenhouse Propagator|C|FRA
+#139|Haunted Ridge|R|FRA
+#140|Innovative Commons|C|FRA
+#141|Konstrari Annex|C|FRA
+#142|Meticulous Commons|C|FRA
+#143|Overgrown Farmland|R|FRA
+#144|Rockfall Vale|R|FRA
+#145|Ruric Thar, Biomagus|U|FRA
+#146|Shipwreck Marsh|R|FRA
+#147|Solarium Sentry|R|FRA
+#148|Stingerquill Annex|C|FRA
+#149|Theorix Annex|C|FRA
+#150|Transformative Commons|C|FRA
+#151|Vigorbloom Annex|C|FRA
+#152|Arcane Amphisbaena|C|FRA
+#153|Consider|C|FRA
+#154|Dedicated Commons|C|FRA
+#155|Extended Absence|C|FRA
+#156|Fatehold Chronologist|C|FRA
+#157|Gallia, the Merrymaker|U|FRA
+#158|Koth of the Homestead|U|FRA
+#159|Mabel, Bitter Recluse|U|FRA
+#160|Mabel, Valley Hero|U|FRA
+#161|Pia, Aether Ascetic|U|FRA
+#162|Proft, Sinister Mastermind|U|FRA
+#163|Prudent Fateseer|U|FRA
+#164|Theorist's Proxy|R|FRA
+#165|Theorix Charm|U|FRA
+#166|Awaken the Inferno|C|FRA
+#167|Danitha, Spear of Agony|U|FRA
+#168|Danitha, Sword of Hope|U|FRA
+#169|Fblthp, Impossibly Lost|U|FRA
+#170|Konstrari Improviser|C|FRA
+#171|Koth, the Geomancer|U|FRA
+#172|Pyre Rhymer|R|FRA
+#173|Restore with Empathy|U|FRA
+#174|Semester Foreseer|C|FRA
+#175|Silence the Echo|C|FRA
+#176|Skilled Battlecarver|C|FRA
+#177|Something Worth Saving|C|FRA
+#178|Surgical Precision|C|FRA
+#179|Unflinching Hortimancer|C|FRA
+#180|Unsummon|C|FRA
+#181|Void Extrapolator|C|FRA
+#182|Way of the Paradox|U|FRA
+#183|Winter, Team Player|U|FRA
+#184|Yoshimaru, Beloved Companion|U|FRA
+#185|Yuriko, Hope from the Shadows|U|FRA
+#186|Bestial Incursion|C|FRA
+#187|Codie, Ravenous Codex|R|FRA
+#188|Countersculpt|U|FRA
+#189|Heartstring Puller|C|FRA
+#190|Hunter's Axe|U|FRA
+#191|Icy Reception|C|FRA
+#192|Marwyn, the Clearcutter|U|FRA
+#193|Rank Rat|C|FRA
+#194|Theoretical Necromancer|C|FRA
+#195|Traxos, Scourge Eternal|U|FRA
+#196|Way of the Cryomancer|U|FRA
+#197|Yuriko, Blade of the Mighty|U|FRA
+#198|Archive Arbiter|U|FRA
+#199|Emergency Phytomedic|C|FRA
+#200|Karn, Gilded Guardian|U|FRA
+#201|Pompous Battlemage|R|FRA
+#202|Protege's Awakening|C|FRA
+#203|Teyo, Diamondblade Mage|U|FRA
+#204|Vigorbloom Vanguard|U|FRA
+#205|Way of the Deathbringer|U|FRA
+#206|Apex Witchstalker|C|FRA
+#207|Blazing Crescendo|C|FRA
+#208|Campus Crier|C|FRA
+#209|Murmuring Volume|C|FRA
+#210|Rewrite Regrets|U|FRA
+#211|Screeching Soulbreaker|C|FRA
+#212|Sureshot Sower|C|FRA
+#213|Tether Technician|C|FRA
+#214|Thalia, the Survivor|U|FRA
+#215|Twinned Vision|C|FRA
+#216|Vinelasher Adept|C|FRA
+#217|Divining Duelist|C|FRA
+#218|Emrakul, the Exigent Doom|M|FRA
+#219|Fateshaper Aspirant|C|FRA
+#220|Precise Redaction|U|FRA
+#221|Shatterwing Pegasus|C|FRA
+#222|Undulating Witness|C|FRA
+#223|Arni, Renowned Champion|U|FRA
+#224|Artifist Acumen|C|FRA
+#225|Blessed Ghoul|C|FRA
+#226|Blossom-Blessed Angel|C|FRA
+#227|Cryotheory Adept|C|FRA
+#228|Eardrum Rattler|C|FRA
+#229|Graft Surgeon|C|FRA
+#230|Jiang Yanggu, Alone|U|FRA
+#231|Predictive Preparations|C|FRA
+#232|Room of Refuge|C|FRA
+#233|Solve for Disappointment|C|FRA
+#234|Theorix Metamage|C|FRA
+#235|Ajani Resolute|M|FRA
+#236|Bloodline Recollector|M|FRA
+#237|Essence Burn|U|FRA
+#238|Flourishing Grapple|U|FRA
+#239|Konstrari Charm|U|FRA
+#240|Rampart Hunter|C|FRA
+#241|Tam's Resistance|C|FRA
+#242|Whiplash Wordsmith|C|FRA
+#243|Academic Ascent|C|FRA
+#244|Budding Insurgent|C|FRA
+#245|Cast Away Doubt|C|FRA
+#246|Chandra's Emberling|C|FRA
+#247|Generous Revival|U|FRA
+#248|Hallway Heckler|C|FRA
+#249|Inspired Tethermage|C|FRA
+#250|Medic's Kitesail|C|FRA
+#251|Samut, Hazoret's Champion|R|FRA
+#252|Tetsuko Umezawa, Pursuer|U|FRA
+#253|Tomik, Izzet Sparkmage|U|FRA
+#254|Way of the Pyromancer|U|FRA
+#255|Way of the Warlord|U|FRA
+#256|Winter, Team Player|U|FRA
+#257|Edgar, Moonlit Sovereign|U|FRA
+#258|Fblthp, Knows the Way|U|FRA
+#259|Garruk, Curse Breaker|M|FRA
+#260|Ghalta the Unstoppable|U|FRA
+#261|Jiang Yanggu, Never Alone|U|FRA
+#262|Loot, the Nexus|U|FRA
+#263|Marwyn, the Preserver|U|FRA
+#264|Pia, Aether Ascetic|U|FRA
+#265|Ruric Thar, Magecrusher|U|FRA
+#266|Titanbones, Towering Heart|U|FRA
+#267|Way of the Paradox|U|FRA
+#268|Way of the Wildspeaker|U|FRA
+#269|Yoshimaru, Scrappy Stray|U|FRA
+#270|Edgar, Ancient Bloodlord|U|FRA
+#271|Hapatra, the Desert Fang|U|FRA
+#272|Karn, Gilded Guardian|R|FRA
+#273|Kiora of Salt and Sand|U|FRA
+#274|Mabel, Valley Hero|U|FRA
+#275|Saheeli, Jewel of Avishkar|U|FRA
+#276|Tam, the Possibility|R|FRA
+#277|Vraska, Soul of Stone|R|FRA
+#278|Vraska, the Cutting Glare|R|FRA
+#279|Karn, Argent Defender|R|FRA
+#280|Traxos, Scourge Eternal|U|FRA

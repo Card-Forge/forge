@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Dryad Scout
 PT:3/3
 K:Vigilance
-A:AB$ Destroy | Cost$ Sac<1/CARDNAME/this creature> | ValidTgts$ Artifact,Enchantment | ValidTgtsDesc# artifact or enchantment | SorcerySpeed$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME/this creature> | ValidTgts$ Artifact,Enchantment | ValidTgtsDesc$ artifact or enchantment | SorcerySpeed$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Targeted | ConditionPresent$ Enchantment.Legendary
 Oracle:Vigilance\nSacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.

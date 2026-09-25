@@ -4525,13 +4525,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return StaticAbilityCombatDamageToughness.combatDamageToughness(this);
     }
 
+    public final boolean negateCombatAssignedDamage() {
+        return StaticAbilityCombatDamageNegatePower.combatDamageNegatePower(this);
+    }
+
     public final boolean assignNoCombatDamage() {
         return StaticAbilityAssignNoCombatDamage.assignNoCombatDamage(this);
     }
 
     // How much combat damage does the card deal
     public final int getNetCombatDamage() {
-        return assignNoCombatDamage() ? 0 : (toughnessAssignsDamage() ? getNetToughnessBreakdown() : getNetPowerBreakdown()).getTotal();
+        if (assignNoCombatDamage()) {
+            return 0;
+        } else if (toughnessAssignsDamage()) {
+            return getNetToughnessBreakdown().getTotal();
+        }
+
+        int multiple = 1;
+        if (negateCombatAssignedDamage()) {
+            multiple = -1;
+        }
+
+        return getNetPowerBreakdown().getTotal() * multiple;
     }
 
     public final int getTempPowerBoost() {
@@ -7147,7 +7162,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
-        damageReceivedThisTurn.clear();
+        damageReceivedLastTurn = damageReceivedThisTurn;
+        damageReceivedThisTurn = Lists.newArrayList();
         resetExcessDamage();
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
