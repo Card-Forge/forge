@@ -17,7 +17,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
+import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -909,7 +911,12 @@ public class StaticData {
             preferences_avails[i] = prettifyCardArtPreferenceName(preferences[i]);
         return preferences_avails;
     }
+
     public Pair<Integer, Integer> audit(StringBuffer noImageFound, StringBuffer cardNotImplemented) {
+        return audit(noImageFound, cardNotImplemented, null);
+    }
+
+    public Pair<Integer, Integer> audit(StringBuffer noImageFound, StringBuffer cardNotImplemented, IntConsumer onProgressPercent) {
         Queue<String> EDITION_Q = new ConcurrentLinkedQueue<>();
         Queue<String> NIF_Q = new ConcurrentLinkedQueue<>();
         Queue<String> CNI_Q = new ConcurrentLinkedQueue<>();
@@ -917,6 +924,18 @@ public class StaticData {
         boolean nifHeader = false;
         boolean cniHeader = false;
         final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F★?\\d+★?");
+
+        // cheap pre-pass (no I/O, just counting names) so percentages have a denominator
+        int totalCards = 0;
+        for (CardEdition e : editions) {
+            if (CardEdition.Type.FUNNY.equals(e.getType())) continue;
+            Set<String> names = new HashSet<>();
+            for (CardEdition.EditionEntry c : e.getObtainableCards()) names.add(c.name());
+            totalCards += names.size();
+        }
+        final int totalForProgress = Math.max(1, totalCards);
+        final AtomicInteger completedCards = new AtomicInteger();
+        final AtomicInteger lastReportedPercent = new AtomicInteger(-1);
 
         ExecutorService pool = ThreadUtil.getComputingPool(0.5f);
         try {
@@ -975,6 +994,14 @@ public class StaticData {
                             }
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                        } finally {
+                            if (onProgressPercent != null) {
+                                int done = completedCards.incrementAndGet();
+                                int percent = (int) Math.min(100, (done * 100L) / totalForProgress);
+                                if (lastReportedPercent.getAndSet(percent) != percent) {
+                                    onProgressPercent.accept(percent); //only fires when the % actually moves, not per-card
+                                }
+                            }
                         }
                     }));
                 }

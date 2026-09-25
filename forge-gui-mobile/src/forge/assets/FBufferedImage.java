@@ -73,12 +73,13 @@ public abstract class FBufferedImage extends FImageComplex {
             if (frameBuffer == null) {
                 Graphics g = Forge.getGraphics();
                 SpriteBatch batch = g.getBatch();
+                boolean wasScissorEnabled = Gdx.gl.glIsEnabled(GL20.GL_SCISSOR_TEST);
                 boolean wasDrawing = batch.isDrawing(); //don't assume - check, so we never call end() on an already-paused batch
                 Matrix4 savedProjection = wasDrawing ? new Matrix4(batch.getProjectionMatrix()) : null;
                 float savedRegionHeight = wasDrawing ? g.getRegionHeight() : 0f;
                 Rectangle savedBounds = wasDrawing ? g.getBounds() : null;
                 Rectangle savedVisibleBounds = wasDrawing ? g.getVisibleBounds() : null;
-                Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
+                if (wasScissorEnabled) Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
                 frameBuffer = new FrameBuffer(Format.RGBA8888, (int) width, (int) height, false);
 
                 try {
@@ -101,7 +102,7 @@ public abstract class FBufferedImage extends FImageComplex {
                         g.setRegionHeight(savedRegionHeight);
                         batch.begin();
                     }
-                    Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+                    if (wasScissorEnabled) Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
                 }
             }
         } catch (Exception e) {

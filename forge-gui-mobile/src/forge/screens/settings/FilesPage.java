@@ -100,23 +100,29 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnListImageData"), Forge.getLocalizer().getMessage("lblListImageData")) {
             @Override
             public void select() {
-                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblProcessingCards"), true, () -> {
-                    StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
-                    StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
+                FThreads.invokeInEdtLater(() -> {
+                    final String baseCaption = Forge.getLocalizer().getMessage("lblProcessingCards");
+                    LoadingOverlay.runBackgroundTask(baseCaption, loader -> {
+                        StringBuffer nifSB = new StringBuffer();
+                        StringBuffer cniSB = new StringBuffer();
 
-                    Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB);
-                    String msg = nifSB.toString();
-                    String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
-                    FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, result -> {
-                        switch (result) {
-                            case 0:
-                                Forge.getClipboard().setContents(msg);
-                                break;
-                            default:
-                                break;
-                        }
+                        Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB, percent ->
+                                FThreads.invokeInEdtLater(() -> loader.setCaption(baseCaption + " " + percent + "%"))
+                        );
+
+                        String msg = nifSB.toString();
+                        String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
+                        FThreads.invokeInEdtLater(() -> FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, result -> {
+                            switch (result) {
+                                case 0:
+                                    Forge.getClipboard().setContents(msg);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }));
                     });
-                }));
+                });
             }
         }, 1);
         //content downloaders
