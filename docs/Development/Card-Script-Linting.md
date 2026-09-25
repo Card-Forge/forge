@@ -1,6 +1,6 @@
 # Card-script linting
 
-The card-script linter checks card scripts against the engine code: whether each API, trigger mode and replacement event exists, and whether the engine actually reads each param a script sets. It runs in the test suite, in the Card Workshop, and on pull requests, where it comments on the changed lines.
+The card-script linter checks card scripts against the engine code: whether each API, trigger mode and replacement event exists, and whether the engine actually reads each param a script sets. It runs on pull requests, where it comments on the changed lines, in the Card Workshop, and on request against any card or folder.
 
 ## Checking your cards
 
