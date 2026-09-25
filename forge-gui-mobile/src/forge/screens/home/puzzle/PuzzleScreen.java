@@ -60,7 +60,10 @@ public class PuzzleScreen extends LaunchScreen {
                 LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingThePuzzle"), true, () -> {
                     // Load selected puzzle
                     final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                    hostedMatch.setStartGameHook(() -> chosen.applyToGame(hostedMatch.getGame()));
+                    hostedMatch.setStartGameHook(() -> {
+                        chosen.applyToGame(hostedMatch.getGame());
+                        hostedMatch.refreshTitle();
+                    });
 
                     hostedMatch.setEndGameHook((() -> chosen.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()))));
 
