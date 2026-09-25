@@ -59,7 +59,7 @@ public class LoadingOverlay extends FOverlay {
         runBackgroundTask(caption0, false, loader -> task.run());
     }
 
-    public static void runBackgroundTask(String caption0, boolean blockInput, final java.util.function.Consumer<LoadingOverlay> task) {
+    public static void runBackgroundTask(String caption0, boolean blockInput, final Consumer<LoadingOverlay> task) {
         final LoadingOverlay loader = new LoadingOverlay(caption0, true);
         loader.blockInput = blockInput;
         loader.show();
