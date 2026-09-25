@@ -184,9 +184,12 @@ public class FSkinFont {
     }
     public void getBounds(CharSequence str, int start, int end, TextBounds outBounds) {
         if (outBounds == null) return;
-        if (font == null) {
-            outBounds.width = 0f;
-            outBounds.height = 0f;
+        if (font == null || str == null || start >= end || str.length() == 0 || start < 0 || end > str.length()) {
+            outBounds.set(0f, 0f);
+            return;
+        }
+        if (end - start == 1 && (str.charAt(start) == '\r' || str.charAt(start) == '\n')) {
+            outBounds.set(0f, 0f);
             return;
         }
         updateScale();
@@ -208,9 +211,8 @@ public class FSkinFont {
     }
     public void getMultiLineBounds(CharSequence str, TextBounds outBounds) {
         if (outBounds == null) return;
-        if (font == null) {
-            outBounds.width = 0f;
-            outBounds.height = 0f;
+        if (font == null || str == null || str.length() == 0) {
+            outBounds.set(0f, 0f);
             return;
         }
         updateScale();
@@ -234,9 +236,8 @@ public class FSkinFont {
     }
     public void getWrappedBounds(CharSequence str, float wrapWidth, TextBounds outBounds) {
         if (outBounds == null) return;
-        if (font == null) {
-            outBounds.width = 0f;
-            outBounds.height = 0f;
+        if (font == null || str == null || str.length() == 0) {
+            outBounds.set(0f, 0f);
             return;
         }
         updateScale();
