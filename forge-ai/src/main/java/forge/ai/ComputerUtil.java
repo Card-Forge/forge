@@ -3216,7 +3216,7 @@ public class ComputerUtil {
                 continue;
             }
             // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
+            AiBlockController block = new AiBlockController(ai, ai);
             // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
             block.assignBlockersForCombat(combat, excludedBlockers);
 

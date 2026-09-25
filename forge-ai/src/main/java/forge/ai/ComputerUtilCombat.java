@@ -2565,7 +2565,7 @@ public class ComputerUtilCombat {
                 if (p instanceof Player p1 && !ComputerUtilCard.canBeBlockedProfitably(p1, attacker, true)) {
                     return p;
                 }
-                if (p instanceof Card card && !ComputerUtilCard.canBeBlockedProfitably(card.getController(), attacker, true)) {
+                if (p instanceof Card card && !ComputerUtilCard.canBeBlockedProfitably(card.isBattle() ? card.getProtectingPlayer() : card.getController(), attacker, true)) {
                     return p;
                 }
             }

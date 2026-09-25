@@ -70,6 +70,12 @@ public class PlayerControllerAi extends PlayerController {
         return pilotsNonAggroDeck;
     }
 
+    /** Whether the board is wide enough for this AI's profile to let expensive evaluations take approximate shortcuts. */
+    public boolean takesShortcuts() {
+        final int threshold = brains.getIntProperty(AiProps.SHORTCUT_MIN_CREATURES);
+        return threshold >= 0 && CardLists.count(getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES) >= threshold;
+    }
+
     public void setupAutoProfile(Deck deck) {
         pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
     }

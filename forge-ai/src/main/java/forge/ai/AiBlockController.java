@@ -19,6 +19,9 @@ package forge.ai;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import com.google.common.collect.Table;
 
 import com.google.common.collect.Lists;
 import forge.card.CardStateName;
@@ -75,17 +78,22 @@ public class AiBlockController {
     private boolean lifeInDanger = false;
 
     // set to true when AI is predicting a blocking for another player so it doesn't use hidden information
-    private boolean checkingOther = false;
+    private final boolean checkingOther;
 
-    public AiBlockController(Player p, boolean checkingOther) {
-        this.checkingOther = checkingOther;
+    // the AI whose profile decides whether this assignment may take shortcuts
+    private final Player decider;
+
+    public AiBlockController(Player p, Player decider) {
+        this.checkingOther = decider != p;
+        this.decider = decider;
         ai = p;
     }
 
     /**
      * Blockers that give the same answers to the combat predicates are interchangeable to them,
      * so the expensive ones are evaluated once per class rather than once per card. Built once
-     * per assignment, covering every candidate.
+     * per assignment, covering every candidate. Null when the deciding AI is not taking
+     * shortcuts, and every predicate is then evaluated per card.
      */
     private Map<Card, Integer> blockerClass;
 
@@ -141,14 +149,14 @@ public class AiBlockController {
         return false;
     }
 
-    private void buildBlockerClasses(final List<Card> possibleBlockers) {
+    private Map<Card, Integer> buildBlockerClasses(final List<Card> possibleBlockers) {
         collectPrevention();
         final Map<String, Integer> ids = new HashMap<>();
         final Map<Card, Integer> classes = new IdentityHashMap<>();
         for (final Card b : possibleBlockers) {
             classes.put(b, ids.computeIfAbsent(signature(b), k -> ids.size()));
         }
-        blockerClass = classes;
+        return classes;
     }
 
     /**
@@ -185,6 +193,13 @@ public class AiBlockController {
         }
         Collections.sort(hidden);
         sb.append('|').append(hidden);
+        // granted triggers and abilities are keyed by the effect granting them, which every card it affects shares
+        for (final Table<Long, Long, ?> traits : List.<Table<Long, Long, ?>>of(c.getChangedCardTraitsByText(), c.getChangedCardTraits())) {
+            for (final Table.Cell<Long, Long, ?> t : traits.cellSet()) {
+                sb.append('|').append(t.getRowKey()).append(':').append(t.getColumnKey());
+            }
+            sb.append('/');
+        }
         for (final Card a : attackers) {
             sb.append(CombatUtil.canBlock(a, c) ? '1' : '0');
         }
@@ -210,6 +225,13 @@ public class AiBlockController {
         return blockerClass.get(blocker) + "#" + committed;
     }
 
+    private boolean memo(final String predicate, final Combat combat, final Card blocker, final Supplier<Boolean> exact) {
+        if (blockerClass == null) {
+            return exact.get();
+        }
+        return AiCache.memo(AiCache.Scope.CALL, predicate, memoKey(combat, blocker), exact);
+    }
+
     // finds the creatures able to block the attacker
     private List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
         final List<Card> blockers = new ArrayList<>();
@@ -219,8 +241,7 @@ public class AiBlockController {
             // if the blocker can block a creature with lure it can't block a creature without
             // canBlock with a combat also reads how far the blocker is already committed, so
             // that goes in the key while the class covers everything stable about the card
-            final boolean answer = AiCache.memo(AiCache.Scope.CALL, "canBlock",
-                    memoKey(combat, blocker),
+            final boolean answer = memo("canBlock", combat, blocker,
                     () -> CombatUtil.canBlock(attacker, blocker, combat));
             if (answer) {
                 boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
@@ -242,8 +263,7 @@ public class AiBlockController {
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
         AiCache.clear(AiCache.Scope.CALL);
         for (final Card b : blockersLeft) {
-            final boolean answer = AiCache.memo(AiCache.Scope.CALL, "blockerSurvives",
-                    memoKey(combat, b),
+            final boolean answer = memo("blockerSurvives", combat, b,
                     () -> !ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
             if (answer) {
                 blockers.add(b);
@@ -260,8 +280,7 @@ public class AiBlockController {
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
         AiCache.clear(AiCache.Scope.CALL);
         for (final Card b : blockersLeft) {
-            final boolean answer = AiCache.memo(AiCache.Scope.CALL, "blockerKills",
-                    memoKey(combat, b),
+            final boolean answer = memo("blockerKills", combat, b,
                     () -> ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
             if (answer) {
                 blockers.add(b);
@@ -1181,7 +1200,8 @@ public class AiBlockController {
         if (attackers.isEmpty()) {
             return;
         }
-        buildBlockerClasses(possibleBlockers);
+        blockerClass = decider.getController() instanceof PlayerControllerAi aic && aic.takesShortcuts()
+                ? buildBlockerClasses(possibleBlockers) : null;
 
         clearBlockers(combat, possibleBlockers);
 
