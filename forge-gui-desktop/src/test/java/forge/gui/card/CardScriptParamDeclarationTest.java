@@ -22,6 +22,8 @@ import java.util.regex.Pattern;
 
 import org.testng.annotations.Test;
 
+import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.ability.ApiType;
 import forge.game.ability.IHasForgeParams;
 import forge.game.ability.SpellAbilityEffect;
@@ -32,8 +34,8 @@ import forge.game.ability.SpellAbilityEffect;
  * <ul>
  *   <li>the framework classes ({@link CardScriptParams#FRAMEWORK}) together declare every ability param
  *       read outside effects and their AI, each param once;</li>
- *   <li>an effect that declares lists exactly what it and its AI read beyond that, and may mark some
- *       REQUIRED_PARAMS;</li>
+ *   <li>an effect that declares lists exactly what it reads beyond that, and may mark some
+ *       REQUIRED_PARAMS; its AI class lists what only the AI reads;</li>
  *   <li>INTERNAL_PARAMS are params the engine sets itself, which scripts shouldn't.</li>
  * </ul>
  * Effects that don't declare yet are left alone; run with -DsuggestParams=true to print the arrays for
@@ -94,50 +96,82 @@ public class CardScriptParamDeclarationTest {
     private void checkEffects(Set<String> framework, List<String> errors) {
         for (Map.Entry<Class<?>, List<ApiType>> e : effectClasses().entrySet()) {
             Class<?> effect = e.getKey();
-            if (!declares(effect)) {
+            if (!declares(effect, SpellAbilityEffect.class)) {
                 continue;
             }
             Set<String> reads = new TreeSet<>();
-            e.getValue().forEach(api -> reads.addAll(engine.apiReads(api)));
+            e.getValue().forEach(api -> reads.addAll(engine.effectReads(api)));
             Set<String> expected = new TreeSet<>(reads);
             expected.removeAll(framework);
+            check(effect, SpellAbilityEffect.class, reads, expected, framework, errors);
+        }
+        // checked once it or an effect it serves declares, so a declared API declares both halves
+        for (Map.Entry<Class<?>, List<ApiType>> e : aiClasses().entrySet()) {
+            Class<?> ai = e.getKey();
+            if (declares(ai, SpellAbilityAi.class) || e.getValue().stream()
+                    .anyMatch(api -> declares(api.getSpellEffect().getClass(), SpellAbilityEffect.class))) {
+                check(ai, SpellAbilityAi.class, engine.aiReads(ai), aiExpected(ai, e.getValue(), framework),
+                    framework, errors);
+            }
+        }
+    }
 
-            Set<String> own = new TreeSet<>();
-            Set<String> required = new TreeSet<>();
-            for (Class<?> c = effect; c != SpellAbilityEffect.class; c = c.getSuperclass()) {
-                checkFields(c, errors);
-                own.addAll(declared(c));
-                for (String[] group : required(c)) {
-                    if (group.length == 0) {
-                        errors.add(c.getSimpleName() + ": REQUIRED_PARAMS has an empty group");
-                    }
-                    required.addAll(List.of(group));
+    /** What an AI class declares: what it reads beyond the framework and every effect it serves. */
+    private Set<String> aiExpected(Class<?> ai, List<ApiType> apis, Set<String> framework) {
+        Set<String> expected = engine.aiReads(ai);
+        expected.removeAll(framework);
+        Set<String> everyEffect = null;
+        for (ApiType api : apis) {
+            Set<String> reads = engine.effectReads(api);
+            if (everyEffect == null) {
+                everyEffect = reads;
+            } else {
+                everyEffect.retainAll(reads);
+            }
+        }
+        expected.removeAll(everyEffect);
+        return expected;
+    }
+
+    /** A class, with its superclasses below {@code stop}, declares exactly {@code expected}. */
+    private static void check(Class<?> cls, Class<?> stop, Set<String> reads, Set<String> expected,
+            Set<String> framework, List<String> errors) {
+        Set<String> own = new TreeSet<>();
+        Set<String> required = new TreeSet<>();
+        for (Class<?> c = cls; c != stop; c = c.getSuperclass()) {
+            checkFields(c, errors);
+            own.addAll(declared(c));
+            for (String[] group : required(c)) {
+                if (group.length == 0) {
+                    errors.add(c.getSimpleName() + ": REQUIRED_PARAMS has an empty group");
                 }
+                required.addAll(List.of(group));
             }
-            String name = effect.getSimpleName();
-            for (String p : required) {
-                if (!reads.contains(p) && !framework.contains(p)) {
-                    errors.add(name + ": REQUIRED_PARAMS names '" + p + "', which it never reads");
-                }
+        }
+        String name = cls.getSimpleName();
+        for (String p : required) {
+            if (!reads.contains(p) && !framework.contains(p)) {
+                errors.add(name + ": REQUIRED_PARAMS names '" + p + "', which it never reads");
             }
-            own.removeAll(required);
-            int before = errors.size();
-            for (String p : own) {
-                if (framework.contains(p)) {
-                    errors.add(name + ": re-declares framework param '" + p + "'");
-                } else if (!expected.contains(p)) {
-                    errors.add(name + ": declares '" + p + "', which neither it nor its AI reads");
-                }
+        }
+        own.removeAll(required);
+        int before = errors.size();
+        for (String p : own) {
+            if (framework.contains(p)) {
+                errors.add(name + ": re-declares framework param '" + p + "'");
+            } else if (!expected.contains(p)) {
+                errors.add(name + ": declares '" + p + "', which it doesn't read"
+                    + (reads.contains(p) ? " on its own; its effect declares it" : ""));
             }
-            Set<String> missing = new TreeSet<>(expected);
-            missing.removeAll(own);
-            missing.removeAll(required);
-            if (!missing.isEmpty()) {
-                errors.add(name + ": reads " + missing + " without declaring them");
-            }
-            if (errors.size() > before) {
-                errors.add(name + " wants\n" + array(expected, required));
-            }
+        }
+        Set<String> missing = new TreeSet<>(expected);
+        missing.removeAll(own);
+        missing.removeAll(required);
+        if (!missing.isEmpty()) {
+            errors.add(name + ": reads " + missing + " without declaring them");
+        }
+        if (errors.size() > before) {
+            errors.add(name + " wants\n" + array(expected, required));
         }
     }
 
@@ -211,10 +245,17 @@ public class CardScriptParamDeclarationTest {
         later.forEach((cls, params) -> System.out.println("  " + simpleName(cls) + ": " + params));
         System.out.println("=== undeclared effects");
         for (Map.Entry<Class<?>, List<ApiType>> e : effectClasses().entrySet()) {
-            if (!declares(e.getKey())) {
+            if (!declares(e.getKey(), SpellAbilityEffect.class)) {
                 Set<String> expected = new TreeSet<>();
-                e.getValue().forEach(api -> expected.addAll(engine.apiReads(api)));
+                e.getValue().forEach(api -> expected.addAll(engine.effectReads(api)));
                 expected.removeAll(framework);
+                System.out.println(e.getKey().getSimpleName() + ":\n" + array(expected, Set.of()));
+            }
+        }
+        System.out.println("=== undeclared AI classes");
+        for (Map.Entry<Class<?>, List<ApiType>> e : aiClasses().entrySet()) {
+            Set<String> expected = aiExpected(e.getKey(), e.getValue(), framework);
+            if (!declares(e.getKey(), SpellAbilityAi.class) && !expected.isEmpty()) {
                 System.out.println(e.getKey().getSimpleName() + ":\n" + array(expected, Set.of()));
             }
         }
@@ -280,9 +321,21 @@ public class CardScriptParamDeclarationTest {
         return out;
     }
 
-    /** True if the effect or one of its superclasses below SpellAbilityEffect declares. */
-    private static boolean declares(Class<?> effect) {
-        for (Class<?> c = effect; c != SpellAbilityEffect.class; c = c.getSuperclass()) {
+    /** AI classes by the APIs they serve. */
+    private static Map<Class<?>, List<ApiType>> aiClasses() {
+        Map<Class<?>, List<ApiType>> out = new LinkedHashMap<>();
+        for (ApiType api : ApiType.values()) {
+            Class<?> ai = SpellApiToAi.Converter.getAiClass(api);
+            if (ai != null) {
+                out.computeIfAbsent(ai, k -> new ArrayList<>()).add(api);
+            }
+        }
+        return out;
+    }
+
+    /** True if the class or one of its superclasses below {@code stop} declares. */
+    private static boolean declares(Class<?> cls, Class<?> stop) {
+        for (Class<?> c = cls; c != stop; c = c.getSuperclass()) {
             if (IHasForgeParams.optionalParams(c) != null || IHasForgeParams.requiredParams(c) != null
                     || IHasForgeParams.internalParams(c) != null) {
                 return true;

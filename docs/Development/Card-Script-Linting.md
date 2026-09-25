@@ -87,7 +87,8 @@ public class DamageDealEffect extends DamageBaseEffect {
 ```
 
 - **Framework classes** (listed in `CardScriptParams.FRAMEWORK`, such as `AbilityFactory`, `CardTraitBase` and `SpellAbility`) declare the params that any ability can use. Each param is declared once, in the class that reads it.
-- **Effects** declare the params their API uses in addition to those. This includes params that the effect's AI or helper methods read for it.
+- **Effects** declare the params their API uses in addition to those. This includes params that the effect's helper methods read for it.
+- **AI classes** declare the params that only the AI reads, such as `AIExpectAmount` on `DamageDealAi`. An effect that declares needs its AI class to declare too, if the AI reads anything more.
 - **`INTERNAL_PARAMS`** lists params that the engine sets itself, for example when it builds keyword abilities. A script that sets one gets a warning.
 
 Effects are being declared in batches. Until an effect declares its params, CI checks them against the compiled code instead, and the Card Workshop doesn't check them.
@@ -108,6 +109,8 @@ card-script param declarations are out of sync with the code:
 A param read by an effect goes in that effect's `OPTIONAL_PARAMS`. A param read by a framework class goes in that class's array.
 
 The check also follows method calls. A param read in a helper method belongs to the effects that call the helper. If shared code starts to call the helper, the param belongs to every ability instead. So an engine change can make the check fail for a class you didn't edit. The message still names the class and the fix.
+
+A read made on another ability doesn't count for the class that makes it. For example, `TokenAi` reads `SacValid$` from the ability on top of the stack, so `SacValid$` belongs to Sacrifice, not Token. The check counts a read as the class's own when it is made on one of the method's parameters, or on the root or targeting ability of one. A param that is only ever read on other abilities is accepted on every ability.
 
 ### Declaring the next batch
 

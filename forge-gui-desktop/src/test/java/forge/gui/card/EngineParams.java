@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.EnumMap;
@@ -85,6 +86,7 @@ final class EngineParams {
             }
         }
 
+        List<Read> foreign = new ArrayList<>();
         for (Read r : reads) {
             String cls = outer(r.cls());
             switch (r.kind()) {
@@ -108,8 +110,13 @@ final class EngineParams {
                 case STATIC -> false;
                 case ANY -> base != null;
             };
+            // a handler's read of another ability, such as the top of the stack, is that ability's param
             if (ownContext) {
-                handlers.computeIfAbsent(cls, c -> new TreeSet<>()).add(r.name());
+                if (r.own()) {
+                    handlers.computeIfAbsent(cls, c -> new TreeSet<>()).add(r.name());
+                } else {
+                    foreign.add(r);
+                }
                 continue;
             }
             Set<String> layer = switch (r.context()) {
@@ -128,13 +135,35 @@ final class EngineParams {
             // a helper only effects reach reads their params; one shared code reaches, every ability's
             Set<String> from = origins.get(r.method());
             if (from != null && from.stream().allMatch(h -> handlerBase(h) == SpellAbilityEffect.class)) {
-                from.forEach(h -> handlers.computeIfAbsent(h, c -> new TreeSet<>()).add(r.name()));
+                if (r.own()) {
+                    from.forEach(h -> handlers.computeIfAbsent(h, c -> new TreeSet<>()).add(r.name()));
+                } else {
+                    foreign.add(r);
+                }
             } else {
-                framework.computeIfAbsent(r.name(), k -> new TreeSet<>()).add(cls);
-                if (r.context() == ParamReadScanner.Context.ANY) {
-                    general.add(r.name());
+                addShared(r, cls);
+            }
+        }
+        // a param only ever read on other abilities (e.g. AINoRecursiveCheck) has no handler, so any may carry it
+        Set<String> known = new HashSet<>(framework.keySet());
+        handlers.values().forEach(known::addAll);
+        known.addAll(trigger);
+        known.addAll(replacement);
+        for (Read r : foreign) {
+            if (!known.contains(r.name())) {
+                switch (r.context()) {
+                    case TRIGGER -> trigger.add(r.name());
+                    case REPLACEMENT -> replacement.add(r.name());
+                    default -> addShared(r, outer(r.cls()));
                 }
             }
+        }
+    }
+
+    private void addShared(Read r, String cls) {
+        framework.computeIfAbsent(r.name(), k -> new TreeSet<>()).add(cls);
+        if (r.context() == ParamReadScanner.Context.ANY) {
+            general.add(r.name());
         }
     }
 
@@ -189,12 +218,20 @@ final class EngineParams {
 
     /** Everything an ability of this API reads beyond the framework: its effect and AI classes. */
     Set<String> apiReads(ApiType api) {
-        Set<String> out = hierarchyReads(api.getSpellEffect().getClass(), SpellAbilityEffect.class);
+        Set<String> out = effectReads(api);
         Class<?> ai = SpellApiToAi.Converter.getAiClass(api);
         if (ai != null) {
-            out.addAll(hierarchyReads(ai, SpellAbilityAi.class));
+            out.addAll(aiReads(ai));
         }
         return out;
+    }
+
+    Set<String> effectReads(ApiType api) {
+        return hierarchyReads(api.getSpellEffect().getClass(), SpellAbilityEffect.class);
+    }
+
+    Set<String> aiReads(Class<?> ai) {
+        return hierarchyReads(ai, SpellAbilityAi.class);
     }
 
     /** What CardScriptParams needs to check every line, declared or not. */

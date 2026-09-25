@@ -32,8 +32,12 @@ final class ParamReadScanner {
     /** Whose param a read is, from the receiver's type. ANY: a CardTraitBase or similar, could be any. */
     enum Context { ABILITY, TRIGGER, STATIC, REPLACEMENT, ANY }
 
-    /** One param name passed to an accessor by a method ("forge/game/Foo.bar(desc)") of a class. */
-    record Read(String cls, String method, Kind kind, Context context, String name) { }
+    /**
+     * One param name passed to an accessor by a method ("forge/game/Foo.bar(desc)") of a class. {@code own}
+     * is false for {@code x.getParam("X")} on a local or a returned value, such as another ability on the
+     * stack or a sub-ability, rather than on one of the method's parameters (or a SAME_ABILITY call on one).
+     */
+    record Read(String cls, String method, Kind kind, Context context, String name, boolean own) { }
 
     /** Engine methods whose first String argument is a param name (or, for SVAR, an SVar name). */
     private static final Map<String, Kind> ACCESSORS = Map.ofEntries(
@@ -47,6 +51,8 @@ final class ParamReadScanner {
     /** Lookups on a param map itself, e.g. {@code sa.getMapParams().get("X")}. */
     private static final Set<String> MAP_READS = Set.of("get", "containsKey", "getOrDefault");
     private static final Set<String> MAP_WRITES = Set.of("put", "remove");
+    /** Calls that can return the ability they are made on, e.g. a root ability or the one that targets. */
+    private static final Set<String> SAME_ABILITY = Set.of("getRootAbility", "getSATargetingCard");
     private static final Pattern NAME = Pattern.compile("[A-Za-z][A-Za-z0-9]*");
     /** A param inside an ability the engine writes itself, e.g. {@code "DB$ Pump | CumulativeUpkeep$ True"}. */
     private static final Pattern SCRIPT_KEY = Pattern.compile("(?:^|\\|)\\s*([A-Za-z][A-Za-z0-9]*)\\$");
@@ -55,7 +61,7 @@ final class ParamReadScanner {
      * A call: what it can take a key from, a constant (String) or the caller's n-th String parameter
      * (Integer), and whose param map it's made on, if it's made on one.
      */
-    private record Call(String target, List<Object> args, Context paramMap) { }
+    private record Call(String target, List<Object> args, List<Boolean> afterParam, Context paramMap) { }
     private record Method(String owner, String key, List<Call> calls) { }
     private record Accessor(Kind kind, int keyArg, Context context) { }
 
@@ -95,7 +101,7 @@ final class ParamReadScanner {
             if (refs[i] != null && refs[i][0] == 8) {
                 Matcher m = SCRIPT_KEY.matcher((String) cp[refs[i][1]]);
                 while (m.find()) {
-                    scriptWrites.add(new Read(self, null, Kind.WRITE, Context.ANY, m.group(1)));
+                    scriptWrites.add(new Read(self, null, Kind.WRITE, Context.ANY, m.group(1), true));
                 }
             }
         }
@@ -107,22 +113,76 @@ final class ParamReadScanner {
             String name = (String) cp[in.readUnsignedShort()];
             String desc = (String) cp[in.readUnsignedShort()];
             int attrs = in.readUnsignedShort();
+            byte[] code = null;
+            String signature = null;
             for (int a = 0; a < attrs; a++) {
                 String attr = (String) cp[in.readUnsignedShort()];
                 int len = in.readInt();
-                if (!attr.equals("Code")) {
+                if (attr.equals("Code")) {
+                    in.skipBytes(4);
+                    code = new byte[in.readInt()];
+                    in.readFully(code);
+                    in.skipBytes(len - 8 - code.length);
+                } else if (attr.equals("Signature")) {
+                    signature = (String) cp[in.readUnsignedShort()];
+                } else {
                     in.skipBytes(len);
-                    continue;
                 }
-                in.skipBytes(4);
-                byte[] code = new byte[in.readInt()];
-                in.readFully(code);
-                in.skipBytes(len - 8 - code.length);
+            }
+            if (code != null) {
                 boolean isStatic = (access & 0x0008) != 0;
-                methods.add(new Method(self, self + "." + name + desc,
-                    calls(code, cp, refs, slots(desc, isStatic, "Ljava/lang/String;"), slots(desc, isStatic, "Ljava/util/Map;"))));
+                methods.add(new Method(self, self + "." + name + desc, calls(code, cp, refs,
+                    slots(desc, isStatic, "Ljava/lang/String;"), paramMapSlots(desc, signature, isStatic),
+                    slots(desc, isStatic, null))));
             }
         }
+    }
+
+    /**
+     * Map parameters that can hold a trait's params: a Map<String, String>. Other maps, such as the AI's
+     * Map<String, Object> of options, don't hold script params.
+     */
+    private static List<Integer> paramMapSlots(String desc, String signature, boolean isStatic) {
+        List<Integer> maps = slots(desc, isStatic, "Ljava/util/Map;");
+        if (signature == null || maps.isEmpty()) {
+            return maps;
+        }
+        List<String> erased = paramTypes(desc);
+        List<String> generic = genericParamTypes(signature);
+        if (generic.size() != erased.size()) {
+            return maps; // e.g. an inner class constructor, whose signature leaves out the outer instance
+        }
+        List<Integer> out = new ArrayList<>();
+        int slot = isStatic ? 0 : 1;
+        for (int i = 0; i < erased.size(); i++) {
+            if (generic.get(i).equals("Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;")) {
+                out.add(slot);
+            }
+            slot += erased.get(i).equals("J") || erased.get(i).equals("D") ? 2 : 1;
+        }
+        return out;
+    }
+
+    /** The parameter types of a generic method signature (JVMS 4.7.9.1), with their type arguments. */
+    private static List<String> genericParamTypes(String signature) {
+        List<String> out = new ArrayList<>();
+        int i = signature.indexOf('(') + 1;
+        while (signature.charAt(i) != ')') {
+            int start = i;
+            while (signature.charAt(i) == '[') {
+                i++;
+            }
+            char c = signature.charAt(i);
+            if (c == 'L') {
+                for (int depth = 0; signature.charAt(i) != ';' || depth > 0; i++) {
+                    depth += signature.charAt(i) == '<' ? 1 : signature.charAt(i) == '>' ? -1 : 0;
+                }
+            } else if (c == 'T') {
+                i = signature.indexOf(';', i);
+            }
+            out.add(signature.substring(start, ++i));
+        }
+        return out;
     }
 
     /** Every name passed to an accessor, plus every param in an ability string the engine writes. */
@@ -149,7 +209,7 @@ final class ParamReadScanner {
             for (Call c : m.calls()) {
                 for (Accessor a : accessors(c)) {
                     if (key(c, a) instanceof String s && NAME.matcher(s).matches()) {
-                        out.add(new Read(m.owner(), m.key(), a.kind(), a.context(), s));
+                        out.add(new Read(m.owner(), m.key(), a.kind(), a.context(), s, onParameter(c)));
                     }
                 }
             }
@@ -228,6 +288,18 @@ final class ParamReadScanner {
         return c.args().get(Math.max(0, c.args().size() - strings + a.keyArg()));
     }
 
+    /**
+     * Whether a direct accessor call is made on one of the method's parameters: the receiver is loaded just
+     * before the key. A helper passed the key, such as getDefinedCards(host, "Defined", sa), counts as one.
+     */
+    private static boolean onParameter(Call c) {
+        String target = c.target();
+        if (!target.startsWith("forge/") || !ACCESSORS.containsKey(simpleName(target)) || c.args().isEmpty()) {
+            return true;
+        }
+        return c.afterParam().get(Math.max(0, c.args().size() - stringArgs(target)));
+    }
+
     private static int stringArgs(String target) {
         boolean map = target.startsWith("java/util/Map.");
         int strings = 0;
@@ -244,9 +316,15 @@ final class ParamReadScanner {
      * the operand stack: a call takes its String arguments off the end, and a store, branch or return
      * (the end of an expression) clears them.
      */
-    private static List<Call> calls(byte[] code, Object[] cp, int[][] refs, List<Integer> stringSlots, List<Integer> mapSlots) {
+    private static List<Call> calls(byte[] code, Object[] cp, int[][] refs, List<Integer> stringSlots, List<Integer> mapSlots,
+            List<Integer> paramSlots) {
         List<Call> calls = new ArrayList<>();
         List<Object> args = new ArrayList<>();
+        // for each pending value: whether it was loaded straight after one of the method's parameters
+        List<Boolean> afterParam = new ArrayList<>();
+        boolean paramJustLoaded = false;
+        // parameters, and locals holding one of them or what a SAME_ABILITY call on one returned
+        Set<Integer> ownSlots = new HashSet<>(paramSlots);
         Map<Integer, String> constLocals = new HashMap<>();
         // a Map parameter, or a local holding a trait's param map, and whose params it holds
         Map<Integer, Context> mapLocals = new HashMap<>();
@@ -257,27 +335,37 @@ final class ParamReadScanner {
         while (pc < code.length) {
             int op = code[pc] & 0xff;
             String konst = null;
+            boolean paramLoaded = false;
             switch (op) {
                 case 0x12, 0x13 -> {                                         // ldc, ldc_w
                     int[] r = refs[op == 0x12 ? code[pc + 1] & 0xff : u2(code, pc + 1)];
                     if (r != null && r[0] == 8) {
                         konst = (String) cp[r[1]];
                         args.add(konst);
+                        afterParam.add(paramJustLoaded);
                     }
                 }
                 case 0x19, 0x2a, 0x2b, 0x2c, 0x2d -> {                       // aload
                     int slot = op == 0x19 ? code[pc + 1] & 0xff : op - 0x2a;
                     if (constLocals.containsKey(slot)) {
                         args.add(constLocals.get(slot));
+                        afterParam.add(paramJustLoaded);
                     } else if (stringSlots.contains(slot)) {
                         args.add(stringSlots.indexOf(slot));
+                        afterParam.add(paramJustLoaded);
                     }
+                    paramLoaded = ownSlots.contains(slot);
                     if (mapLocals.containsKey(slot)) {
                         paramMap = mapLocals.get(slot);
                     }
                 }
                 case 0x3a, 0x4b, 0x4c, 0x4d, 0x4e -> {                       // astore: String key = "X";
                     int slot = op == 0x3a ? code[pc + 1] & 0xff : op - 0x4b;
+                    if (paramJustLoaded) {
+                        ownSlots.add(slot);
+                    } else if (!paramSlots.contains(slot)) {
+                        ownSlots.remove(slot);
+                    }
                     if (lastConst != null) {
                         constLocals.put(slot, lastConst);
                     } else {
@@ -289,6 +377,7 @@ final class ParamReadScanner {
                         mapLocals.remove(slot);
                     }
                     args.clear();
+                    afterParam.clear();
                     paramMap = null;
                 }
                 case 0xb4 -> {                                               // getfield: this.mapParams
@@ -303,9 +392,14 @@ final class ParamReadScanner {
                     int[] nat = refs[mref[2]];
                     String name = (String) cp[nat[1]];
                     String target = cp[refs[mref[1]][1]] + "." + name + cp[nat[2]];
-                    calls.add(new Call(target, List.copyOf(args), paramMap));
-                    int consumed = Math.min(stringArgs(target), args.size());
+                    calls.add(new Call(target, List.copyOf(args), List.copyOf(afterParam), paramMap));
+                    paramLoaded = paramJustLoaded && SAME_ABILITY.contains(name);
+                    // runParams.get(AbilityKey.X) takes an enum key, not the pending name of an enclosing
+                    // matchesValidParam("X", ...): only a param map's lookup takes a pending name
+                    boolean otherMap = target.startsWith("java/util/Map.") && paramMap == null;
+                    int consumed = otherMap ? 0 : Math.min(stringArgs(target), args.size());
                     args.subList(args.size() - consumed, args.size()).clear();
+                    afterParam.subList(afterParam.size() - consumed, afterParam.size()).clear();
                     // a trait's param map (a StaticAbility's holds static params), or a copy of one
                     if (name.equals("getMapParams") || name.equals("getOriginalMapParams")) {
                         paramMap = contextOf(target.substring(0, target.lastIndexOf('.', target.indexOf('('))));
@@ -314,32 +408,39 @@ final class ParamReadScanner {
                     }
                     if (target.endsWith(")V")) {
                         args.clear();
+                        afterParam.clear();
                     }
                 }
                 case 0xba, 0x57, 0x58, 0xa8, 0xbf, 0xb3, 0xb5 -> {           // indy, pop, jsr, athrow, put*
                     args.clear();
+                    afterParam.clear();
                     paramMap = null;
                 }
                 default -> {
                     if (op >= 0x36 && op <= 0x56 || op >= 0x99 && op <= 0xa7 || op >= 0xac && op <= 0xb1
                             || op == 0xc6 || op == 0xc7) {
                         args.clear();                                        // store, branch, return
+                        afterParam.clear();
                         paramMap = null;
                     }
                 }
             }
             lastConst = konst;
+            paramJustLoaded = paramLoaded;
             pc += length(code, pc);
         }
         return calls;
     }
 
-    /** Local-variable slots holding the method's parameters of this type, in parameter order. */
+    /** Local-variable slots holding the method's parameters of this type (null: all, and this), in order. */
     private static List<Integer> slots(String desc, boolean isStatic, String wanted) {
         List<Integer> slots = new ArrayList<>();
+        if (wanted == null && !isStatic) {
+            slots.add(0);
+        }
         int slot = isStatic ? 0 : 1;
         for (String type : paramTypes(desc)) {
-            if (type.equals(wanted)) {
+            if (wanted == null || type.equals(wanted)) {
                 slots.add(slot);
             }
             slot += type.equals("J") || type.equals("D") ? 2 : 1;

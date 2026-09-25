@@ -52,6 +52,11 @@ public class CardScriptLinterTest {
         assertEquals(PARAMS.correctCase("PreCostDesc"), "PrecostDesc");
         assertTrue(PARAMS.forTrigger(TriggerType.ChangesZone).contains("Destination"),
             "AbilityUtils reads Destination on a trigger, so it's a trigger param");
+        assertTrue(!PARAMS.forApi(ApiType.Animate).contains("SacValid"), "AnimateAi reads SacValid on the ability on the stack");
+        assertTrue(!PARAMS.forApi(ApiType.Dig).contains("Attacker"), "DigAi reads Attacker from its options map");
+        assertTrue(PARAMS.forApi(ApiType.Untap).contains("Radiance"), "read on sa.getSATargetingCard(), often sa itself");
+        assertTrue(PARAMS.forTrigger(TriggerType.AttackersDeclared).contains("AttackingPlayer"),
+            "matchesValidParam(\"AttackingPlayer\", runParams.get(...))");
     }
 
     /** At runtime only declarations count: an undeclared API isn't checked, a declared one is. */
@@ -62,6 +67,8 @@ public class CardScriptLinterTest {
         assertEquals(declared.requiredParams(ApiType.DealDamage), List.of(List.of("NumDmg")));
         CardScriptLinter runtime = new CardScriptLinter(declared);
         assertEquals(runtime.lint(HEAD + "A:SP$ DealDamage | ValidTgts$ Any").get(0).code(), "MISSING-KEY");
+        // params only the AI reads are declared on the AI class
+        assertEquals(runtime.lint(HEAD + "A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | AIExpectAmount$ 1"), List.of());
     }
 
     @Test

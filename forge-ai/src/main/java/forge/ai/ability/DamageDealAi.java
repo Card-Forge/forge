@@ -40,6 +40,10 @@ import java.util.Map;
 import forge.util.IterableUtil;
 
 public class DamageDealAi extends DamageAiBase {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AIExpectAmount", "AITgts", "AITgtsStrict",
+    };
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final SpellAbility root = sa.getRootAbility();

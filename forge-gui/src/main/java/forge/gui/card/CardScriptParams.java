@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.CardTraitBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -96,6 +97,11 @@ public final class CardScriptParams {
                     req.add(List.of(g));
                     params.addAll(List.of(g));
                 }
+            }
+            // the params only the AI reads are declared on its AI class
+            Class<?> ai = SpellApiToAi.Converter.getAiClass(api);
+            for (Class<?> c = ai; c != null && c != SpellAbilityAi.class; c = c.getSuperclass()) {
+                params.addAll(List.of(orEmpty(IHasForgeParams.optionalParams(c))));
             }
             if (declared.contains(api)) {
                 own.put(api, params);

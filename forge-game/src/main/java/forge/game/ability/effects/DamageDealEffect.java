@@ -28,9 +28,8 @@ import forge.util.collect.FCollection;
 
 public class DamageDealEffect extends DamageBaseEffect {
     public static final String[] OPTIONAL_PARAMS = {
-        "AIExpectAmount", "AITgts", "AITgtsStrict", "CardChoices", "ChoiceAmount", "ChoicePrompt",
-        "CounterNum", "DamageMap", "DamageSource", "Defined", "DivideEvenly",
-        "DividerOnResolution", "ExcessDamage", "ExcessDamageCondition", "NumDef",
+        "CardChoices", "ChoiceAmount", "ChoicePrompt", "DamageMap", "DamageSource", "Defined",
+        "DivideEvenly", "DividerOnResolution", "ExcessDamage", "ExcessDamageCondition",
         "OptionalDecider", "PlayerChoices", "Radiance", "Random", "RelativeTarget",
         "RememberRedirectedExcess", "ReplaceDyingCondition", "ReplaceDyingDefined",
         "ReplaceDyingExiledWith", "ReplaceDyingValid", "ReplaceDyingZone",
