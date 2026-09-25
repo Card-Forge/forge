@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import forge.ImageKeys;
 import forge.localinstance.properties.ForgeConstants;
@@ -150,7 +149,7 @@ public class CardRenderer {
     public static final float CROP_MULTIPLIER = 0.96f;
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.7f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
-    private static final GlyphLayout layout = new GlyphLayout();
+    private static final GlyphLayout glyphLayout = new GlyphLayout();
 
     static {
         try {
@@ -971,25 +970,17 @@ public class CardRenderer {
             return;
         }
 
-        Set<Multiset.Entry<CounterType>> counterEntries = countersSet.entrySet();
-        Object[] entryArray = counterEntries.toArray();
-        int entryCount = entryArray.length;
-        if (entryCount == 0) {
-            return;
-        }
-
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
             int maxCounters = 0;
-            for (int i = 0; i < entryCount; i++) {
-                Multiset.Entry<CounterType> entry = (Multiset.Entry<CounterType>) entryArray[i];
+            for (Multiset.Entry<CounterType> entry : countersSet.entrySet()) {
                 if (entry != null && entry.getCount() > maxCounters) {
                     maxCounters = entry.getCount();
                 }
             }
 
             if (font != null && !String.valueOf(maxCounters).isEmpty()) {
-                layout.setText(font, String.valueOf(maxCounters));
-                if (counterBoxBaseWidth + layout.width > w) {
+                glyphLayout.setText(font, String.valueOf(maxCounters));
+                if (counterBoxBaseWidth + glyphLayout.width > w) {
                     drawCounterImage(card, g, x, y, w, h);
                     return;
                 }
@@ -999,8 +990,7 @@ public class CardRenderer {
         int currentCounter = 0;
         int verticalLayout = 0;
 
-        for (int i = 0; i < entryCount; i++) {
-            Multiset.Entry<CounterType> counterEntry = (Multiset.Entry<CounterType>) entryArray[i];
+        for (Multiset.Entry<CounterType> counterEntry : countersSet.entrySet()) {
             if (counterEntry == null) continue;
 
             final CounterType counter = counterEntry.getElement();
@@ -1023,9 +1013,9 @@ public class CardRenderer {
 
                 String finalDisplayName = stringBuilder.toString();
 
-                layout.setText(font, counterValueStr);
+                glyphLayout.setText(font, counterValueStr);
 
-                final float counterBoxRealWidth = counterBoxBaseWidth + layout.width + 4f;
+                final float counterBoxRealWidth = counterBoxBaseWidth + glyphLayout.width + 4f;
                 final float counterYOffset = spaceFromTopOfCard - (currentCounter * (counterBoxHeight + counterBoxSpacing));
                 currentCounter++;
 
@@ -1049,14 +1039,14 @@ public class CardRenderer {
     private static final int GL_BLEND = GL20.GL_BLEND;
 
     private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, int horizontalAlignment) {
-        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+        if (color.a < 1) { // enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
         }
-        if (font != null && !text.isEmpty()) {
-            layout.setText(font, text);
-            TextBounds textBounds = new TextBounds(layout.width, layout.height);
+        if (font != null && text != null && !text.isEmpty()) {
+            glyphLayout.setText(font, text);
 
-            float textHeight = textBounds.height;
+            float textHeight = glyphLayout.height;
+
             if (h > textHeight) {
                 y += (h - textHeight) / 2;
             }
@@ -1094,6 +1084,10 @@ public class CardRenderer {
     }
 
     private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h, boolean larger) {
+        if (markers == null || markers.isEmpty()) {
+            return;
+        }
+
         int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
         BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
 
@@ -1109,11 +1103,13 @@ public class CardRenderer {
         final float spaceFromTopOfCard = y + h - markerBoxHeight - markerBoxSpacing - otherSymbolsSize + ySymbols;
 
         int markerCounter = markers.size() - 1;
+        final int markersCount = markers.size();
 
-        for (String marker : markers) {
-            if (font != null && !marker.isEmpty()) {
-                layout.setText(font, marker);
-                final float markerBoxRealWidth = markerBoxBaseWidth + layout.width + 4;
+        for (int i = 0; i < markersCount; i++) {
+            final String marker = markers.get(i);
+            if (font != null && marker != null && !marker.isEmpty()) {
+                glyphLayout.setText(font, marker);
+                final float markerBoxRealWidth = markerBoxBaseWidth + glyphLayout.width + 4;
 
                 final float markerYOffset = spaceFromTopOfCard - (markerCounter-- * (markerBoxHeight + markerBoxSpacing));
 

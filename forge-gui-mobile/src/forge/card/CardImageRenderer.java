@@ -688,10 +688,18 @@ public class CardImageRenderer {
         } //remaining rendering only needed if card on top
 
         if (state != null && state.isBasicLand()) {
-            //draw watermark
-            if (imageProp == null && origColors == ColorSet.C) {
-                imageProp = FSkinProp.IMG_WATERMARK_C;
+            // set the correct watermark from color
+            if (imageProp == null && origColors.countColors() == 1) {
+                for (MagicColor.Color c : MagicColor.Color.values()) {
+                    String str = c.getBasicLandType();
+                    if (str != null && state.getType().hasSubtype(str)) {
+                        imageProp = FSkinProp.watermarkFromColor(c);
+                    }
+                }
             }
+            if (imageProp == null)
+                imageProp = FSkinProp.IMG_WATERMARK_C;
+            //draw watermark
             if (imageProp != null) {
                 float iconSize = h * 0.75f;
                 g.drawImage(FSkin.getImages().get(imageProp), x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
