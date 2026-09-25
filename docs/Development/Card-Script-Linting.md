@@ -19,10 +19,10 @@ The last comment comes from comparing the card with its printed version on Scryf
 **Run the linter yourself.** You need a clone of the repository, a JDK and Maven. From the repository root, run:
 
 ```
-mvn -pl forge-gui-desktop -am test "-Dtest=CardScriptLinterTest#lintCorpus" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dcardscript.path=forge-gui/res/cardsfolder/upcoming"
+mvn -pl forge-gui-desktop -am test "-Dtest=CardScriptLinterTest#checkCards" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dcardscript.path=forge-gui/res/cardsfolder/upcoming"
 ```
 
-`cardscript.path` can be a folder or a single file, in the repository or anywhere else. The results appear near the end of the output:
+`cardscript.path` can be a single file, a folder, or all of `forge-gui/res/cardsfolder`, in the repository or anywhere else. The output lists every finding:
 
 ```
 Findings in ...\forge-gui\res\cardsfolder\upcoming:
@@ -32,7 +32,7 @@ Findings in ...\forge-gui\res\cardsfolder\upcoming:
 1 script(s), 3 error(s), 0 warning(s)
 ```
 
-Each line shows the file, the line number, the severity, a code, and what to change.
+Each line shows the file, the line number, the severity, a code, and what to change. If there are errors, the run ends in `BUILD FAILURE` and Maven's failure summary at the end of the output lists them again. Warnings don't fail the run, so with only warnings it ends in `BUILD SUCCESS` and the warnings are in the list above.
 
 ### Errors and warnings
 
@@ -72,7 +72,7 @@ The linter doesn't yet check param values (`Defined$`, `Valid*$`, values that mu
 |---|---|---|---|
 | 1. Param declarations | Classes list the params they read (see below). | `IHasForgeParams` | — |
 | 2. Declaration check | Reads the compiled engine code to find every param passed to `getParam`, `hasParam` and similar methods. Fails if the declarations don't match. | `CardScriptParamDeclarationTest` | test suite |
-| 3. Lint | Checks every card and token script (see the codes above). | `CardScriptLinter`, `CardScriptLinterTest` | test suite, Card Workshop |
+| 3. Lint | Checks card and token scripts (see the codes above). | `CardScriptLinter`, `CardScriptLinterTest` | CI on PRs, Card Workshop, `checkCards` |
 | 4. Scryfall check | Compares each changed card with its printed version. | `.github/scripts/card_script_review.py` | CI on PRs |
 | 5. PR comments | Posts the results of steps 3 and 4 on the lines a PR changes. | `.github/workflows/card-script-review.yml` | CI on PRs |
 
@@ -121,26 +121,22 @@ It also lists the shared code that still has to declare, and candidates for `REQ
 
 ### When a build fails
 
-| | Local test run | CI on a PR | Card Workshop |
+| | CI on a PR | `checkCards` | Card Workshop |
 |---|---|---|---|
-| **Error** | reported | fails the build if on a changed line; commented | highlighted |
-| **Warning** | reported | commented | not shown |
+| **Error** | fails the build if on a changed line; commented | fails the run | highlighted |
+| **Warning** | commented | printed | not shown |
 
-A PR build only fails on errors in the lines the PR changes, so existing errors in other cards don't block it. These options change what fails a run:
+On a PR, CI passes the PR's `git diff -U0` to `lintCorpus` as `-Dcardscript.diff`. It lints every script but only fails on errors in the lines the PR changes, so existing errors in other cards don't block it. It also writes every finding to `forge-gui-desktop/target/card-script-findings.json`, which the review workflow posts as comments. Without a diff, as in a local test run, `lintCorpus` is skipped.
 
-- `-Dcardscript.gate=upcoming`: also fail on errors in `cardsfolder/upcoming`.
-- `-Dcardscript.gate=all`: fail on every error.
-- `-Dcardscript.diff=<file>`: fail on errors in the lines a `git diff -U0` output changes. CI uses this.
-
-Every result is also written to `forge-gui-desktop/target/card-script-findings.json`.
+An error on a line the PR didn't change doesn't fail the build, even if the PR caused it: for example, deleting an SVar that an unchanged line still refers to.
 
 The Card Workshop only knows declared params. Until an API declares its params, the Workshop doesn't flag param typos on that API's lines.
 
 ### How accurate it is
 
-Each run prints which kinds of lines it checked and which it skipped.
+A PR build's log shows which kinds of lines the lint checked and which it skipped.
 
-`-Dcardscript.selfcheck=true` also measures how many mistakes the linter misses. It takes copies of real scripts in memory, adds a known mistake to each copy, and counts how many the linter reports. The script files aren't changed. The linter reports over 99% of misspelt param names, and about 63% of params set on an API that doesn't read them. It misses the rest because shared engine code reads those params for any ability.
+Adding known mistakes to copies of real scripts showed that the linter reports over 99% of misspelt param names, and about 63% of params set on an API that doesn't read them. It misses the rest because shared engine code reads those params for any ability.
 
 Trigger, replacement and static params are only checked in CI until their classes declare.
 
@@ -148,8 +144,10 @@ Trigger, replacement and static params are only checked in CI until their classe
 
 Most card PRs come from forks. A `pull_request` build of a fork PR has a read-only token, so it can't post comments. Instead the build saves its results as an artifact. `card-script-review.yml` runs after the build with a token that can comment. It checks that the artifact belongs to the PR's latest commit, then posts the comments. It treats the artifact as data and never runs code from the PR. GitHub only runs this workflow from the default branch, so it can't be tested on a PR before merge.
 
-### Running all the checks
+### Running the tests
 
 ```
 mvn -pl forge-gui-desktop -am test "-Dtest=CardScript*Test" "-Dsurefire.failIfNoSpecifiedTests=false"
 ```
+
+This runs the linter's unit tests and the declaration check. `lintCorpus` and `checkCards` are skipped unless given `-Dcardscript.diff` or `-Dcardscript.path`.

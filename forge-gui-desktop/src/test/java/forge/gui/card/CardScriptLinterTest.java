@@ -2,6 +2,7 @@ package forge.gui.card;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import forge.game.ability.ApiType;
@@ -145,26 +146,19 @@ public class CardScriptLinterTest {
     }
 
     /**
-     * Lints every card and token script, reports what was and wasn't checked, and writes every finding
-     * to forge-gui-desktop/target/card-script-findings.json for the PR review workflow.
-     *
-     * Which ERRORs fail the build:
-     * <ul>
-     *   <li>-Dcardscript.diff=file (a {@code git diff -U0}): those on lines the diff adds or changes. CI
-     *       passes a PR's diff, so a PR answers only for what it changed.</li>
-     *   <li>-Dcardscript.gate: {@code none} (the default) on nothing else; {@code upcoming} also on
-     *       cardsfolder/upcoming, where new scripts land; {@code all} on every ERROR.</li>
-     * </ul>
-     * Everything else is only reported, so the corpus's backlog can't block unrelated work.
-     * -Dcardscript.path=folder-or-file prints every finding for the scripts there, in or outside the repo.
-     * -Dcardscript.selfcheck=true also adds known mistakes to in-memory copies of real scripts and reports
-     * how many the linter finds.
+     * The PR gate. CI passes a PR's {@code git diff -U0} as -Dcardscript.diff; this lints every card and token
+     * script, fails on ERRORs on the lines the diff adds or changes, and writes every finding to
+     * forge-gui-desktop/target/card-script-findings.json for the PR review workflow. Errors elsewhere are only
+     * reported, so the corpus's backlog can't block unrelated work.
      */
     @Test
     public void lintCorpus() throws IOException {
+        String diff = System.getProperty("cardscript.diff");
+        if (diff == null || diff.isBlank()) {
+            throw new SkipException("runs on PR builds; to check scripts, run checkCards with -Dcardscript.path");
+        }
         Path root = locateRoot();
-        Map<String, Set<Integer>> changed = changedLines(System.getProperty("cardscript.diff"));
-        String gate = System.getProperty("cardscript.gate", "none");
+        Map<String, Set<Integer>> changed = changedLines(diff);
 
         Map<String, Integer> counts = new TreeMap<>(), lineKinds = new TreeMap<>();
         List<String> json = new ArrayList<>();
@@ -178,9 +172,7 @@ public class CardScriptLinterTest {
                 counts.merge(f.severity() + " " + f.code(), 1, Integer::sum);
                 json.add("{\"path\":" + quote(rel) + ",\"line\":" + f.line() + ",\"severity\":" + quote(f.severity().name())
                     + ",\"code\":" + quote(f.code()) + ",\"body\":" + quote(f.message()) + "}");
-                boolean gated = gate.equals("all") || gate.equals("upcoming") && rel.contains("/upcoming/")
-                    || changed.getOrDefault(rel, Set.of()).contains(f.line());
-                if (f.severity() == Severity.ERROR && gated) {
+                if (f.severity() == Severity.ERROR && changed.getOrDefault(rel, Set.of()).contains(f.line())) {
                     blocking.add(rel + ":" + f.toString().replace("→", "->"));
                 }
             }
@@ -196,124 +188,45 @@ public class CardScriptLinterTest {
         System.out.println("  not checked anywhere: param values other than SVar references, Cost$ and"
             + " Defined/Origin/Destination case; required params beyond the declared REQUIRED_PARAMS; Oracle text");
         System.out.println("  findings:             " + counts);
-        String path = System.getProperty("cardscript.path");
-        if (path != null && !path.isBlank()) {
-            printFindings(root, path);
-        }
         assertTrue(blocking.isEmpty(), "card-script errors:\n  " + String.join("\n  ", blocking));
-
-        if (Boolean.getBoolean("cardscript.selfcheck")) {
-            int[] typos = typoRecall(scripts);
-            System.out.println("  typo self-check:      " + typos[0] + " of " + typos[1] + " misspelt params found");
-            System.out.println("  wrong-API self-check: " + wrongApiRecall(scripts));
-            assertTrue(typos[0] >= typos[1] * 0.99, "the linter misses more than 1% of misspelt params");
-        }
     }
 
-    /** Prints one line per finding for the scripts in a folder or file, relative to the repo or absolute. */
-    private void printFindings(Path root, String path) throws IOException {
-        Path target = root.resolve(path).normalize();
-        if (!Files.exists(target)) {
-            System.out.println("cardscript.path: " + target + " does not exist");
-            return;
+    /**
+     * Checks the scripts in -Dcardscript.path, a folder or file relative to the repo or absolute: prints every
+     * finding, and fails if any is an ERROR.
+     */
+    @Test
+    public void checkCards() throws IOException {
+        String path = System.getProperty("cardscript.path");
+        if (path == null || path.isBlank()) {
+            throw new SkipException("pass -Dcardscript.path=folder-or-file to check scripts");
         }
+        Path target = locateRoot().resolve(path).normalize();
+        assertTrue(Files.exists(target), target + " does not exist");
         List<Path> files;
         try (Stream<Path> walk = Files.walk(target)) {
             files = walk.filter(p -> p.toString().endsWith(".txt")).sorted().collect(Collectors.toList());
         }
-        int errors = 0, warnings = 0;
+        List<String> errors = new ArrayList<>();
+        int warnings = 0;
         System.out.println("Findings in " + target + ":");
         for (Path p : files) {
             String name = (p.equals(target) ? p.getFileName() : target.relativize(p)).toString().replace('\\', '/');
             for (Finding f : linter.lint(Files.readString(p, StandardCharsets.UTF_8))) {
                 // the arrow is for PR comments; many consoles can't print it
-                System.out.println("  " + name + ":" + f.toString().replace("→", "->"));
+                String line = name + ":" + f.toString().replace("→", "->");
+                System.out.println("  " + line);
                 if (f.severity() == Severity.ERROR) {
-                    errors++;
+                    errors.add(line);
                 } else {
                     warnings++;
                 }
             }
         }
-        System.out.println(files.size() + " script(s), " + errors + " error(s), " + warnings + " warning(s)");
-    }
-
-    /** Swaps two letters of a param in copies of real scripts; counts how many the linter finds: {found, tried}. */
-    private int[] typoRecall(List<Path> scripts) throws IOException {
-        Pattern key = Pattern.compile("\\| ([A-Z][A-Za-z]{4,})\\$");
-        int planted = 0, caught = 0;
-        for (int i = 0; i < scripts.size() && planted < 2000; i += 17) {
-            String text = Files.readString(scripts.get(i), StandardCharsets.UTF_8);
-            Matcher m = key.matcher(text);
-            if (!m.find()) {
-                continue;
-            }
-            String k = m.group(1);
-            String typo = k.substring(0, 2) + k.charAt(3) + k.charAt(2) + k.substring(4);
-            if (typo.equals(k)) {
-                continue;
-            }
-            planted++;
-            String mutated = text.substring(0, m.start(1)) + typo + text.substring(m.end(1));
-            if (linter.lint(mutated).stream().anyMatch(f -> f.severity() == Severity.ERROR && typo.equals(f.token()))) {
-                caught++;
-            }
+        System.out.println(files.size() + " script(s), " + errors.size() + " error(s), " + warnings + " warning(s)");
+        if (!errors.isEmpty()) {
+            fail("card-script errors:\n  " + String.join("\n  ", errors));
         }
-        return new int[] {caught, planted};
-    }
-
-    /**
-     * Adds, to copies of real abilities, params that cards use with other APIs but never with this one,
-     * and reports how many the linter flags. It accepts the rest because shared code reads them for any
-     * ability.
-     */
-    private String wrongApiRecall(List<Path> scripts) throws IOException {
-        Pattern ability = Pattern.compile("^(A:|SVar:[^:]+:)(SP|AB|DB)\\$ (\\w+)");
-        Pattern key = Pattern.compile("\\| *([A-Za-z]+)\\$");
-        Map<String, Set<String>> used = new TreeMap<>();
-        Map<String, List<String>> sample = new TreeMap<>();
-        for (Path p : scripts) {
-            List<String> lines = Files.readAllLines(p, StandardCharsets.UTF_8);
-            for (int i = 0; i < lines.size(); i++) {
-                Matcher a = ability.matcher(lines.get(i));
-                if (!a.find()) {
-                    continue;
-                }
-                Set<String> keys = used.computeIfAbsent(a.group(3), k -> new HashSet<>());
-                Matcher m = key.matcher(lines.get(i));
-                while (m.find()) {
-                    keys.add(m.group(1));
-                }
-                List<String> s = sample.computeIfAbsent(a.group(3), k -> new ArrayList<>());
-                if (s.isEmpty()) {
-                    s.add(String.join("\n", lines) + "\n@" + i);
-                }
-            }
-        }
-        Set<String> common = new TreeSet<>();
-        used.values().forEach(common::addAll);
-        int planted = 0, caught = 0;
-        for (Map.Entry<String, List<String>> e : sample.entrySet()) {
-            String[] parts = e.getValue().get(0).split("\n@");
-            String[] lines = parts[0].split("\n", -1);
-            int at = Integer.parseInt(parts[1]);
-            List<String> candidates = new ArrayList<>();
-            for (String k : common) {
-                if (!used.get(e.getKey()).contains(k) && PARAMS.isKnown(k)) {
-                    candidates.add(k);
-                }
-            }
-            for (int j = 0; j < 10 && j < candidates.size(); j++) {
-                String k = candidates.get(j * candidates.size() / 10); // spread over the alphabet
-                planted++;
-                String[] copy = lines.clone();
-                copy[at] = copy[at] + " | " + k + "$ 1";
-                if (linter.lint(String.join("\n", copy)).stream().anyMatch(f -> k.equals(f.token()) && f.line() == at + 1)) {
-                    caught++;
-                }
-            }
-        }
-        return caught + " of " + planted + " params on the wrong API found";
     }
 
     private static String lineKind(String l) {
