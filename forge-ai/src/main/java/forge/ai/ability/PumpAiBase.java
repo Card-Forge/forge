@@ -378,6 +378,17 @@ public abstract class PumpAiBase extends SpellAbilityAi {
     }
 
     /**
+     * Whether a -X/-X of the given size (passed as the negative NumDef) finishes this creature off.
+     * Shrinking it to zero toughness works even through indestructible.
+     */
+    protected static boolean diesToCurse(final Card c, final int defense) {
+        if (c.getNetToughness() <= -defense) {
+            return true;
+        }
+        return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
+    }
+
+    /**
      * <p>
      * getCurseCreatures.
      * </p>
@@ -401,12 +412,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         }
 
         if (defense < 0) { // with spells that give -X/-X, compi will try to destroy a creature
-            list = CardLists.filter(list, c -> {
-                if (c.getSVar("Targeting").equals("Dies") || c.getNetToughness() <= -defense) {
-                    return true; // can kill indestructible creatures
-                }
-                return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
-            }); // leaves all creatures that will be destroyed
+            // leaves all creatures that will be destroyed
+            list = CardLists.filter(list, c -> c.getSVar("Targeting").equals("Dies") || diesToCurse(c, defense));
         } // -X/-X end
         else if (attack < 0 && !game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
