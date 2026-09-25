@@ -144,6 +144,7 @@ public enum Keyword {
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING("Phasing", SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     PLOT("Plot", KeywordWithCost.class, false, "You may pay %s and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery."),
+    POISON_TOLERANCE("Poison Tolerance", PoisonTolerance.class, false, "It takes %d additional poison counters for you to lose the game to poison."),
     POISONOUS("Poisonous", KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets {%d:poison counter}."),
     PROTECTION("Protection", Protection.class, true, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
     PROTOTYPE("Prototype", KeywordWithCost.class, false, "You may cast this spell with different mana cost, color, and size. It keeps its abilities and types."),
