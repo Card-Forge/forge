@@ -3440,7 +3440,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public String getMonarchSet() {
-        return monarchEffect == null ? monarchEffect.getSetCode() : null;
+        return monarchEffect != null ? monarchEffect.getSetCode() : null;
     }
 
     public void createMonarchEffect(final String set) {
