@@ -39,6 +39,7 @@ public class FSkinFont {
     private static final String TTF_FILE = "font1.ttf";
     private static HashMap<String, String> langUniqueCharacterSet = new HashMap<>();
     private static final GlyphLayout GLYPH_LAYOUT = new GlyphLayout();
+    private static final TextBounds TEXT_BOUNDS = new TextBounds();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
@@ -172,9 +173,8 @@ public class FSkinFont {
         return getBounds(str, 0, str.length());
     }
     public TextBounds getBounds(CharSequence str, int start, int end) {
-        TextBounds bounds = new TextBounds();
-        getBounds(str, start, end, bounds);
-        return bounds;
+        getBounds(str, start, end, TEXT_BOUNDS);
+        return TEXT_BOUNDS;
     }
     public void getBounds(CharSequence str, int start, int end, TextBounds outBounds) {
         if (outBounds == null) return;
@@ -187,13 +187,11 @@ public class FSkinFont {
 
         GLYPH_LAYOUT.setText(font, str, start, end, font.getColor(), 0, Align.left, false, null);
 
-        outBounds.width = GLYPH_LAYOUT.width;
-        outBounds.height = font.getData().capHeight;
+        outBounds.set(GLYPH_LAYOUT.width, font.getData().capHeight);
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
-        TextBounds bounds = new TextBounds();
-        getMultiLineBounds(str, bounds);
-        return bounds;
+        getMultiLineBounds(str, TEXT_BOUNDS);
+        return TEXT_BOUNDS;
     }
     public void getMultiLineBounds(CharSequence str, TextBounds outBounds) {
         if (outBounds == null) return;
@@ -206,13 +204,11 @@ public class FSkinFont {
 
         GLYPH_LAYOUT.setText(font, str, 0, str.length(), font.getColor(), 0, Align.left, false, null);
 
-        outBounds.width = GLYPH_LAYOUT.width;
-        outBounds.height = GLYPH_LAYOUT.height;
+        outBounds.set(GLYPH_LAYOUT.width, GLYPH_LAYOUT.height);
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
-        TextBounds bounds = new TextBounds();
-        getWrappedBounds(str, wrapWidth, bounds);
-        return bounds;
+        getWrappedBounds(str, wrapWidth, TEXT_BOUNDS);
+        return TEXT_BOUNDS;
     }
     public void getWrappedBounds(CharSequence str, float wrapWidth, TextBounds outBounds) {
         if (outBounds == null) return;
@@ -226,8 +222,7 @@ public class FSkinFont {
 
         GLYPH_LAYOUT.setText(font, str, 0, str.length(), font.getColor(), wrapWidth, Align.left, true, null);
 
-        outBounds.width = GLYPH_LAYOUT.width;
-        outBounds.height = GLYPH_LAYOUT.height;
+        outBounds.set(GLYPH_LAYOUT.width, GLYPH_LAYOUT.height);
     }
     public float getAscent() {
         if (font == null)
