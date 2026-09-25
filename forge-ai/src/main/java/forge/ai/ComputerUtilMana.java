@@ -728,6 +728,13 @@ public class ComputerUtilMana {
                             break; // no one to finish with the gut shot
                         }
                     }
+                } else {
+                    // otherwise treat it as the life cost it is, with the floor checkLifeCost uses
+                    int remainingLife = sa.hasParam("AILifeThreshold")
+                            ? Integer.parseInt(sa.getParam("AILifeThreshold")) : 4;
+                    if (ai.getLife() - phyLifeToPay < remainingLife && !ai.cantLoseForZeroOrLessLife()) {
+                        break;
+                    }
                 }
 
                 if (toPay.isPhyrexian()) {
