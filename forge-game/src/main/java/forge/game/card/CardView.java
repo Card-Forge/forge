@@ -49,6 +49,12 @@ public class CardView extends GameEntityView {
         return stateViewCache;
     }
 
+    @Override
+    public final boolean equals(final Object o) {
+        if (o == null) { return false; }
+        return o.hashCode() == hashCode() && o instanceof CardView;
+    }
+
     public CardView getBackup() {
         if (get(TrackableProperty.PaperCardBackup) == null)
             return null;
@@ -956,19 +962,12 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.RightSplitState);
     }
 
-    public boolean hasBackSide() {
-        return get(TrackableProperty.HasBackSide);
-    }
-
     public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 
     public CardStateView getState(final boolean alternate0) {
         return alternate0 ? getAlternateState() : getCurrentState();
-    }
-    void updateBackSide(boolean hasBackSide) {
-        set(TrackableProperty.HasBackSide, hasBackSide);
     }
 
     public boolean wasDestroyed() {
@@ -1031,10 +1030,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Modal, c.isModal());
         set(TrackableProperty.Room, c.isRoom());
         set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
-
-        // hasBackside
-        if (c.getAlternateState() != null)
-            updateBackSide(c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
@@ -1251,6 +1246,12 @@ public class CardView extends GameEntityView {
                 return String.valueOf(getId());
             }
             return StringUtils.EMPTY;
+        }
+
+        @Override
+        public final boolean equals(final Object o) {
+            if (o == null) { return false; }
+            return o.hashCode() == hashCode() && o instanceof CardStateView;
         }
 
         @Override
@@ -1552,6 +1553,10 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.FoilIndex, c.getFoil());
         }
         public void setFoilIndexOverride(int index0) {
+            if (index0 == -2) { // 0 turns off the shader foil switch
+                foilIndexOverride = MyRandom.getRandom().nextInt(50) + 1;
+                return;
+            }
             if (index0 < 0) {
                 index0 = CardEdition.getRandomFoil(getSetCode());
             }

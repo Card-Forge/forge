@@ -5,7 +5,7 @@ PT:4/5
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile any number of other nontoken creatures you control until it leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | ChangeType$ Creature.!token+Other+YouCtrl | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of other nontoken creatures you control | Duration$ UntilHostLeavesPlay
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each card exiled with it.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each card exiled with it.
 SVar:X:Count$ValidExile Card.ExiledWithSource/Times.2
 SVar:MaxTgts:Count$Valid Creature.!token+Other+YouCtrl
 AI:RemoveDeck:Random

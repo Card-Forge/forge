@@ -996,6 +996,18 @@ public class AdventureDeckEditor extends FDeckEditor {
         getCatalogPage().scheduleRefresh();
     }
 
+    private static final HashMap<Integer, String> priceStringsMap = new HashMap<>(256);
+    // container to draw the sellIconFile
+    private static final FImage fImageSellIcon = new FImage() {
+        @Override public float getWidth() { return 100f; }
+        @Override public float getHeight() { return 100f; }
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            if (AdventureDeckHeader.sellIconFile != null) {
+                g.drawImage(Forge.getAssets().getTexture(AdventureDeckHeader.sellIconFile), x, y, w, h);
+            }
+        }
+    };
     protected static class AdventureCardManager extends CardManager {
 
         public AdventureCardManager() {
@@ -1032,42 +1044,37 @@ public class AdventureDeckEditor extends FDeckEditor {
                         float totalHeight = h + 2 * FList.PADDING;
                         float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
-                        String price = String.valueOf(Current.player().cardSellPrice(value.getKey()));
+                        int priceRawVal = Current.player().cardSellPrice(value.getKey());
+
+                        String priceStr = priceStringsMap.get(priceRawVal);
+                        if (priceStr == null) {
+                            priceStr = String.valueOf(priceRawVal);
+                            priceStringsMap.put(priceRawVal, priceStr);
+                        }
+
                         float priceHeight = font.getLineHeight();
-                        y += totalHeight - priceHeight - FList.PADDING;
-                        g.fillRect(backColor, x - FList.PADDING, y, cardArtWidth, priceHeight);
-                        g.drawImage(FSkinImage.QUEST_COINSTACK, x, y, priceHeight, priceHeight);
+                        float drawY = y + totalHeight - priceHeight - FList.PADDING;
+
+                        g.fillRect(backColor, x - FList.PADDING, drawY, cardArtWidth, priceHeight);
+                        g.drawImage(FSkinImage.QUEST_COINSTACK, x, drawY, priceHeight, priceHeight);
                         float offset = priceHeight * 1.1f;
-                        g.drawText(price, font, foreColor, x + offset, y, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, Align.left, true);
+
+                        g.drawText(priceStr, font, foreColor, x + offset, drawY, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, Align.left, true);
                     }
                 }
             };
         }
+
     }
 
     protected static class AdventureDeckHeader extends DeckHeader {
-        private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
+        private static final FileHandle sellIconFile = Config.instance().getFile("ui/sell.png");
         public final FLabel lblGold;
 
         protected AdventureDeckHeader() {
             super();
-            this.lblGold = new FLabel.Builder().text("0").icon(Forge.getAssets().getTexture(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
-                    new FImage() {
-                        @Override
-                        public float getWidth() {
-                            return 100f;
-                        }
-
-                        @Override
-                        public float getHeight() {
-                            return 100f;
-                        }
-
-                        @Override
-                        public void draw(Graphics g, float x, float y, float w, float h) {
-                            g.drawImage(Forge.getAssets().getTexture(sellIcon), x, y, w, h);
-                        }
-                    }
+            this.lblGold = new FLabel.Builder().text("0").icon(
+                    Forge.getAssets().getTexture(sellIconFile) == null ? FSkinImage.QUEST_COINSTACK : fImageSellIcon
             ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
             this.add(lblGold);
         }
@@ -1076,7 +1083,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected List<FDisplayObject> layoutHeaderElements(float height, float availableWidth) {
             List<FDisplayObject> out = super.layoutHeaderElements(height, availableWidth);
             float remainingWidth = availableWidth - (float) out.stream().mapToDouble(FDisplayObject::getWidth).sum();
-            float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth)); // Will push out name label if it has to.
+            float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth));
             lblGold.setSize(width, height);
             out.add(lblGold);
             return out;
@@ -1091,6 +1098,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             g.fillRect(FSkinColor.get(FSkinColor.Colors.ADV_CLR_THEME).alphaColor(0.5f), 0, 0, getWidth(), HEADER_HEIGHT);
         }
     }
+
 
     protected static class AdventureDraftPackPage extends DraftPackPage {
         public AdventureDraftPackPage(CardManager cardManager) {

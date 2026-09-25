@@ -11,11 +11,7 @@ import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -25,6 +21,7 @@ import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
+import forge.adventure.util.JSONStringLoader;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
 import forge.assets.Assets;
@@ -141,10 +138,10 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
-    public static final int LOW_SPRITES_CAP = 30; // max capacity for transition, generated image renders
-    public static final int HIGH_SPRITES_CAP = 800; // max sprite capacity for adventure, classic renders
+    public static final int HIGH_SPRITES_CAP = 1500; // Adventure and Classic sprites capacity
     private static boolean isDisposed = false;
     public static boolean invokeWorldSave = false;
+    public static Camera camera;
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -218,6 +215,10 @@ public class Forge implements ApplicationListener {
         //screenWidth and screenHeight should be set initially and only change upon restarting the app
         screenWidth = Gdx.app.getGraphics().getWidth();
         screenHeight = Gdx.app.getGraphics().getHeight();
+        //set Classic Mode camera and position
+        camera = new OrthographicCamera(screenWidth, screenHeight);
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        camera.update();
         // Desktop default: auto-detect from initial window/backbuffer aspect ratio
         if (!GuiBase.isAndroid() && desktopAutoOrientation) {
             isPortraitMode = screenHeight > screenWidth;
@@ -1066,20 +1067,20 @@ public class Forge implements ApplicationListener {
         // don't call getInstance() or they will be recreated on dispose
         safeDispose( // I need to know what line the startup bug occurs when the app is paused...
             MapStage.instance,
-            Adventure.instance,
             ScreenUtil.instance,
             ShaderUtil.instance,
-            graphics,
             Assets.instance,
-            lastPreview);
+            lastPreview, graphics);
         // No need to dispose Scene stages unless we use custom SpriteBatch for ownership
         /*safeDispose(currentScene);
         for (Scene scene : lastScene) {
             safeDispose(scene);
         }*/
         // biomeImage (WorldMap) should be disposed
-        if (invokeWorldSave)
+        if (invokeWorldSave) {
             WorldSave.dispose();
+            JSONStringLoader.clearCache();
+        }
         try {
             SoundSystem.instance.dispose();
         } catch (Exception e) {

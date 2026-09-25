@@ -2,7 +2,7 @@ Name:Ratcatcher Trainee
 ManaCost:1 R
 Types:Creature Human Peasant
 PT:2/1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, CARDNAME has first strike.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, CARDNAME has first strike.
 DeckHas:Ability$Token & Type$Rat
 AlternateMode:Adventure
 Oracle:During your turn, Ratcatcher Trainee has first strike.

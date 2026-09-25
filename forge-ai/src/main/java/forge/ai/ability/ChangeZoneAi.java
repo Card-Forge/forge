@@ -1118,6 +1118,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                     return true;
                 });
+                if (origin.contains(ZoneType.Battlefield)) {
+                    list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
+                }
             }
 
             // See if maybe there's a special priority applicable for this, in case the opponent

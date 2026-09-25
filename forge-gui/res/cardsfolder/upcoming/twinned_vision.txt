@@ -1,0 +1,7 @@
+Name:Twinned Vision
+ManaCost:1 UR
+Types:Instant
+A:SP$ Draw | NumCards$ 1 | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromYourHand | ConditionCompare$ EQ1 | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Draw a card. If this spell wasn't cast from your hand, draw two cards instead.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromYourHand | ConditionCompare$ EQ0 | StackDescription$ None
+K:Flashback:1 UR UR Discard<1/Card>
+Oracle:Draw a card. If this spell wasn't cast from your hand, draw two cards instead.\nFlashback—{1}{U/R}{U/R}, Discard a card. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

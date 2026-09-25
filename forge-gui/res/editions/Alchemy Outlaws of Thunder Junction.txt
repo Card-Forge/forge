@@ -1,10 +1,10 @@
 [metadata]
 Code=YOTJ
 Date=2024-05-07
-Name=Alchemy: Thunder Junction
+Name=Alchemy: Outlaws of Thunder Junction
 Type=Online
-Booster=1 UncommonRareMythic,8 Common:fromsheet("OTJ cards"), 3 Uncommon:fromSheet("OTJ cards"), 1 UncommonRareMythic:fromSheet("OTJ cards"), 1 RareMythic:fromSheet("OTJ cards"), 1 BasicLand:fromSheet("OTJ cards")
 ScryfallCode=YOTJ
+Booster=1 UncommonRareMythic:fromsheet("YOTJ cards"), 8 Common:fromsheet("OTJ cards"), 3 Uncommon:fromSheet("OTJ cards"), 1 UncommonRareMythic:fromSheet("OTJ cards"), 1 RareMythic:fromSheet("OTJ cards"), 1 BasicLand:fromSheet("OTJ cards")
 
 [cards]
 1 R Prairie Survivalist @Francis Tneh
