@@ -187,6 +187,16 @@ final class ParamReadScanner {
 
     /** Every name passed to an accessor, plus every param in an ability string the engine writes. */
     List<Read> result() {
+        // sb.append(key).append("$ True | ...") builds an ability with a param named by the key parameter
+        for (Method m : methods) {
+            List<Call> calls = m.calls();
+            for (int i = 0; i + 1 < calls.size(); i++) {
+                if (lastAppended(calls.get(i)) instanceof Integer param
+                        && lastAppended(calls.get(i + 1)) instanceof String s && s.startsWith("$")) {
+                    derived.computeIfAbsent(m.key(), x -> new HashSet<>()).add(new Accessor(Kind.WRITE, param, Context.ANY));
+                }
+            }
+        }
         // a method forwarding one of its String parameters into an accessor's key is an accessor
         for (boolean changed = true; changed; ) {
             changed = false;
@@ -298,6 +308,15 @@ final class ParamReadScanner {
             return true;
         }
         return c.afterParam().get(Math.max(0, c.args().size() - stringArgs(target)));
+    }
+
+    /** What a StringBuilder.append(String) call appends, if the scan knows it; else null. */
+    private static Object lastAppended(Call c) {
+        if (!c.target().equals("java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;")
+                || c.args().isEmpty()) {
+            return null;
+        }
+        return c.args().get(c.args().size() - 1);
     }
 
     private static int stringArgs(String target) {
