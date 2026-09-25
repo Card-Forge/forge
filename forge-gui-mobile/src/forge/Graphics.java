@@ -39,12 +39,25 @@ public class Graphics implements Disposable {
     private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
     private float regionHeight;
-    private Rectangle bounds;
-    private Rectangle visibleBounds;
+    private Rectangle bounds = new Rectangle();
+    private Rectangle visibleBounds = new Rectangle();
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
     private boolean isDisposed = false;
+    private static final float[] arrowVertices = new float[14];
+    private static final Vector2 vectorAngleHelper1 = new Vector2();
+    private static final Vector2 vectorAngleHelper2 = new Vector2();
+    private static final Vector2 vectorAngleHelper3 = new Vector2();
+    private static final TextBounds textBounds = new TextBounds();
+    private static final Rectangle tmpBounds = new Rectangle();
+    private int clipDepth = 0;
+    private static final Rectangle[] clipPool = new Rectangle[16];
+    static {
+        for (int i = 0; i < 16; i++) {
+            clipPool[i] = new Rectangle();
+        }
+    }
 
     public Graphics(final int spriteCapacity) {
         batch = new SpriteBatch(spriteCapacity);
@@ -56,9 +69,9 @@ public class Graphics implements Disposable {
     }
 
     public void setBounds(float regionWidth0, float regionHeight0) {
-        setBounds(new Rectangle(0, 0, regionWidth0, regionHeight0));
-        setRegionHeight(regionHeight0);
-        setVisibleBounds(new Rectangle(getBounds()));
+        bounds.set(0, 0, regionWidth0, regionHeight0);
+        regionHeight = regionHeight0;
+        visibleBounds.set(bounds.x, bounds.y, bounds.width, bounds.height);
     }
 
     public void setRegionHeight(float regionHeight0) {
@@ -70,7 +83,7 @@ public class Graphics implements Disposable {
     }
 
     public void setBounds(Rectangle bounds0) {
-        bounds = bounds0;
+        bounds.set(bounds0.x, bounds0.y, bounds0.width, bounds0.height);
     }
 
     public Rectangle getBounds() {
@@ -78,7 +91,7 @@ public class Graphics implements Disposable {
     }
 
     public void setVisibleBounds(Rectangle visibleBounds0) {
-        visibleBounds = visibleBounds0;
+        visibleBounds.set(visibleBounds0.x, visibleBounds0.y, visibleBounds0.width, visibleBounds0.height);
     }
 
     public Rectangle getVisibleBounds() {
@@ -115,41 +128,27 @@ public class Graphics implements Disposable {
     }
 
     public boolean startClip(float x, float y, float w, float h) {
-        batch.flush(); //must flush batch to prevent other things not rendering
+        batch.flush(); // must flush batch to prevent other things not rendering
 
-        Rectangle clip = new Rectangle(adjustX(x), adjustY(y, h), w, h);
-        if (!Dtransforms.isEmpty()) { //transform position if needed
-            tmp.set(clip.x, clip.y, 0);
+        // ZERO ALLOCATION APPROACH: Pick a totally isolated memory index slot based on our active
+        // clipping depth instead of transformCount, ensuring parent and child boxes never overlap!
+        final int activePoolIdx = clipDepth & 15;
+        final Rectangle activeClip = clipPool[activePoolIdx];
+
+        // Advance our depth pointer before processing layout math
+        clipDepth++;
+
+        activeClip.set(adjustX(x), adjustY(y, h), w, h);
+
+        if (!Dtransforms.isEmpty()) { // transform position if needed
+            tmp.set(activeClip.x, activeClip.y, 0);
             tmp.mul(batch.getTransformMatrix());
             float minX = tmp.x;
             float maxX = minX;
             float minY = tmp.y;
             float maxY = minY;
-            tmp.set(clip.x + clip.width, clip.y, 0);
-            tmp.mul(batch.getTransformMatrix());
-            if (tmp.x < minX) {
-                minX = tmp.x;
-            } else if (tmp.x > maxX) {
-                maxX = tmp.x;
-            }
-            if (tmp.y < minY) {
-                minY = tmp.y;
-            } else if (tmp.y > maxY) {
-                maxY = tmp.y;
-            }
-            tmp.set(clip.x + clip.width, clip.y + clip.height, 0);
-            tmp.mul(batch.getTransformMatrix());
-            if (tmp.x < minX) {
-                minX = tmp.x;
-            } else if (tmp.x > maxX) {
-                maxX = tmp.x;
-            }
-            if (tmp.y < minY) {
-                minY = tmp.y;
-            } else if (tmp.y > maxY) {
-                maxY = tmp.y;
-            }
-            tmp.set(clip.x, clip.y + clip.height, 0);
+
+            tmp.set(activeClip.x + activeClip.width, activeClip.y, 0);
             tmp.mul(batch.getTransformMatrix());
             if (tmp.x < minX) {
                 minX = tmp.x;
@@ -162,10 +161,37 @@ public class Graphics implements Disposable {
                 maxY = tmp.y;
             }
 
-            clip.set(minX, minY, maxX - minX, maxY - minY);
+            tmp.set(activeClip.x + activeClip.width, activeClip.y + activeClip.height, 0);
+            tmp.mul(batch.getTransformMatrix());
+            if (tmp.x < minX) {
+                minX = tmp.x;
+            } else if (tmp.x > maxX) {
+                maxX = tmp.x;
+            }
+            if (tmp.y < minY) {
+                minY = tmp.y;
+            } else if (tmp.y > maxY) {
+                maxY = tmp.y;
+            }
+
+            tmp.set(activeClip.x, activeClip.y + activeClip.height, 0);
+            tmp.mul(batch.getTransformMatrix());
+            if (tmp.x < minX) {
+                minX = tmp.x;
+            } else if (tmp.x > maxX) {
+                maxX = tmp.x;
+            }
+            if (tmp.y < minY) {
+                minY = tmp.y;
+            } else if (tmp.y > maxY) {
+                maxY = tmp.y;
+            }
+
+            activeClip.set(minX, minY, maxX - minX, maxY - minY);
         }
-        if (!ScissorStack.pushScissors(clip)) {
-            failedClipCount++; //tracked failed clips to prevent calling popScissors on endClip
+
+        if (!ScissorStack.pushScissors(activeClip)) {
+            failedClipCount++; // tracked failed clips to prevent calling popScissors on endClip
             return false;
         }
         return true;
@@ -173,30 +199,36 @@ public class Graphics implements Disposable {
 
     public void endClip() {
         if (failedClipCount == 0) {
-            batch.flush(); //must flush batch to ensure stuffed rendered during clip respects that clip
+            batch.flush(); // must flush batch to ensure stuff rendered during clip respects that clip
             ScissorStack.popScissors();
+
+            // Retract depth tracking downward as layout loops exit
+            if (clipDepth > 0) {
+                clipDepth--;
+            }
         } else {
             failedClipCount--;
         }
     }
 
     public void draw(FDisplayObject displayObj) {
-        if (displayObj.getWidth() <= 0 || displayObj.getHeight() <= 0) {
+        if (displayObj == null || displayObj.getWidth() <= 0 || displayObj.getHeight() <= 0) {
             return;
         }
 
-        final Rectangle parentBounds = bounds;
-        bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
-        if (!Dtransforms.isEmpty()) { //transform screen position if needed by applying transform matrix to rectangle
+        final float oldX = bounds.x, oldY = bounds.y, oldW = bounds.width, oldH = bounds.height;
+        bounds.set(oldX + displayObj.getLeft(), oldY + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
+
+        if (!Dtransforms.isEmpty()) {
             updateScreenPosForRotation(displayObj);
         } else {
             displayObj.screenPos.set(bounds);
         }
 
-        Rectangle intersection = Utils.getIntersection(bounds, visibleBounds);
+        Rectangle intersection = Utils.getIntersection(bounds, visibleBounds, tmpBounds);
         if (intersection != null) { //avoid drawing object if it's not within visible region
-            final Rectangle backup = visibleBounds;
-            visibleBounds = intersection;
+            final float backupX = visibleBounds.x, backupY = visibleBounds.y, backupW = visibleBounds.width, backupH = visibleBounds.height;
+            visibleBounds.set(intersection.x, intersection.y, intersection.width, intersection.height);
 
             if (displayObj.getRotate90()) { //use top-right corner of bounds as pivot point
                 startRotateTransform(displayObj.getWidth(), 0, -90);
@@ -212,10 +244,10 @@ public class Graphics implements Disposable {
                 endTransform();
             }
 
-            visibleBounds = backup;
+            visibleBounds.set(backupX, backupY, backupW, backupH);
         }
 
-        bounds = parentBounds;
+        bounds.set(oldX, oldY, oldW, oldH);
     }
 
     private void updateScreenPosForRotation(FDisplayObject displayObj) {
@@ -368,7 +400,7 @@ public class Graphics implements Disposable {
     }
 
     public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, Color color, float x1, float y1, float x2, float y2) {
-        batch.end(); //must pause batch while rendering shapes
+        batch.end(); // must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
@@ -376,54 +408,58 @@ public class Graphics implements Disposable {
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glEnable(GL_LINE_SMOOTH);
 
-        float angle = new Vector2(x2 - x1, y2 - y1).angleRad();
-        float perpRotation = (float) (Math.PI * 0.5f);
-        float arrowHeadRotation = (float) (Math.PI * 0.8f);
-        float arrowTipAngle = (float) (Math.PI - arrowHeadRotation);
+        vectorAngleHelper1.set(x2 - x1, y2 - y1);
+        float angle = vectorAngleHelper1.angleRad();
+        float perpRotation = (float)(Math.PI * 0.5f);
+        float arrowHeadRotation = (float)(Math.PI * 0.8f);
+        float arrowTipAngle = (float)(Math.PI - arrowHeadRotation);
         float halfThickness = arrowThickness / 2;
 
         int index = 0;
-        float[] vertices = new float[14];
-        Vector2 arrowCorner1 = new Vector2(x2 + arrowSize * (float) Math.cos(angle + arrowHeadRotation), y2 + arrowSize * (float) Math.sin(angle + arrowHeadRotation));
-        Vector2 arrowCorner2 = new Vector2(x2 + arrowSize * (float) Math.cos(angle - arrowHeadRotation), y2 + arrowSize * (float) Math.sin(angle - arrowHeadRotation));
-        float arrowCornerLen = (arrowCorner1.dst(arrowCorner2) - arrowThickness) / 2;
-        float arrowHeadLen = arrowSize * (float) Math.cos(arrowTipAngle);
-        index = addVertex(arrowCorner1.x, arrowCorner1.y, vertices, index);
-        index = addVertex(x2, y2, vertices, index);
-        index = addVertex(arrowCorner2.x, arrowCorner2.y, vertices, index);
-        index = addVertex(arrowCorner2.x + arrowCornerLen * (float) Math.cos(angle + perpRotation), arrowCorner2.y + arrowCornerLen * (float) Math.sin(angle + perpRotation), vertices, index);
-        index = addVertex(x1 + halfThickness * (float) Math.cos(angle - perpRotation), y1 + halfThickness * (float) Math.sin(angle - perpRotation), vertices, index);
-        index = addVertex(x1 + halfThickness * (float) Math.cos(angle + perpRotation), y1 + halfThickness * (float) Math.sin(angle + perpRotation), vertices, index);
-        index = addVertex(arrowCorner1.x + arrowCornerLen * (float) Math.cos(angle - perpRotation), arrowCorner1.y + arrowCornerLen * (float) Math.sin(angle - perpRotation), vertices, index);
 
-        //draw arrow tail
+        vectorAngleHelper2.set(x2 + arrowSize * (float) Math.cos(angle + arrowHeadRotation), y2 + arrowSize * (float) Math.sin(angle + arrowHeadRotation));
+        vectorAngleHelper3.set(x2 + arrowSize * (float) Math.cos(angle - arrowHeadRotation), y2 + arrowSize * (float) Math.sin(angle - arrowHeadRotation));
+
+        float arrowCornerLen = (vectorAngleHelper2.dst(vectorAngleHelper3) - arrowThickness) / 2;
+        float arrowHeadLen = arrowSize * (float) Math.cos(arrowTipAngle);
+
+        index = addVertex(vectorAngleHelper2.x, vectorAngleHelper2.y, arrowVertices, index);
+        index = addVertex(x2, y2, arrowVertices, index);
+        index = addVertex(vectorAngleHelper3.x, vectorAngleHelper3.y, arrowVertices, index);
+        index = addVertex(vectorAngleHelper3.x + arrowCornerLen * (float) Math.cos(angle + perpRotation), vectorAngleHelper3.y + arrowCornerLen * (float) Math.sin(angle + perpRotation), arrowVertices, index);
+        index = addVertex(x1 + halfThickness * (float) Math.cos(angle - perpRotation), y1 + halfThickness * (float) Math.sin(angle - perpRotation), arrowVertices, index);
+        index = addVertex(x1 + halfThickness * (float) Math.cos(angle + perpRotation), y1 + halfThickness * (float) Math.sin(angle + perpRotation), arrowVertices, index);
+        index = addVertex(vectorAngleHelper2.x + arrowCornerLen * (float) Math.cos(angle - perpRotation), vectorAngleHelper2.y + arrowCornerLen * (float) Math.sin(angle - perpRotation), arrowVertices, index);
+
+        // draw arrow tail
         startShape(ShapeType.Filled);
         shapeRenderer.setColor(color);
         shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
-                adjustX(x2 - arrowHeadLen * (float) Math.cos(angle)), //shorten tail to make room for arrow head
+                adjustX(x2 - arrowHeadLen * (float) Math.cos(angle)),
                 adjustY(y2 - arrowHeadLen * (float) Math.sin(angle), 0), arrowThickness);
 
-        //draw arrow head
-        shapeRenderer.triangle(vertices[0], vertices[1], vertices[2], vertices[3], vertices[4], vertices[5]);
+        // draw arrow head
+        shapeRenderer.triangle(arrowVertices[0], arrowVertices[1], arrowVertices[2], arrowVertices[3], arrowVertices[4], arrowVertices[5]);
         endShape();
 
-        //draw border around arrow
+        // draw border around arrow
         if (borderThickness > 1) {
             Gdx.gl.glLineWidth(borderThickness);
         }
         startShape(ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.polygon(vertices);
+        shapeRenderer.polygon(arrowVertices);
         endShape();
         if (borderThickness > 1) {
             Gdx.gl.glLineWidth(1);
         }
 
-        Gdx.gl.glDisable(GL_LINE_SMOOTH);
         Gdx.gl.glDisable(GL_BLEND);
+        Gdx.gl.glDisable(GL_LINE_SMOOTH);
 
         batch.begin();
     }
+
     public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
         batch.end();
         float lt = thickness / 3;
@@ -444,13 +480,13 @@ public class Graphics implements Disposable {
         if (drawPointer)
             shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
         shapeRenderer.setColor(strokeColor);
-        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness /2);
+        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness / 2);
         if (drawPointer)
-            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
+            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
         endShape();
 
         float dx = x2 - x1, dy = y2 - y1;
-        float length = (float)Math.sqrt(dx*dx + dy*dy);
+        float length = (float) Math.sqrt(dx * dx + dy * dy);
 
         // Point just before the tip for direction
         float beforeTipX = x1, beforeTipY = y1;
@@ -463,8 +499,7 @@ public class Graphics implements Disposable {
 
             startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
-            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
-                    adjustX(x2), adjustY(y2, 0), thickness);
+            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
             endShape();
 
             if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
@@ -472,8 +507,7 @@ public class Graphics implements Disposable {
 
             startShape(ShapeType.Line);
             shapeRenderer.setColor(strokeColor);
-            shapeRenderer.line(adjustX(x1), adjustY(y1, 0),
-                    adjustX(x2), adjustY(y2, 0));
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
             endShape();
 
             if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
@@ -490,8 +524,8 @@ public class Graphics implements Disposable {
 
             // Sample at t=0.95 for approach vector
             float tBefore = 0.95f;
-            beforeTipX = (1 - tBefore)*(1 - tBefore)*x1 + 2*(1 - tBefore)*tBefore*cx + tBefore*tBefore*x2;
-            beforeTipY = (1 - tBefore)*(1 - tBefore)*y1 + 2*(1 - tBefore)*tBefore*cy + tBefore*tBefore*y2;
+            beforeTipX = (1 - tBefore) * (1 - tBefore) * x1 + 2 * (1 - tBefore) * tBefore * cx + tBefore * tBefore * x2;
+            beforeTipY = (1 - tBefore) * (1 - tBefore) * y1 + 2 * (1 - tBefore) * tBefore * cy + tBefore * tBefore * y2;
 
             int segments = 30;
             float prevX = x1, prevY = y1;
@@ -499,12 +533,12 @@ public class Graphics implements Disposable {
             startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
             for (int i = 1; i <= segments; i++) {
-                float t = i / (float)segments;
-                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
-                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
-                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0),
-                        adjustX(bx), adjustY(by, 0), thickness);
-                prevX = bx; prevY = by;
+                float t = i / (float) segments;
+                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
+                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
+                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0), thickness);
+                prevX = bx;
+                prevY = by;
             }
             endShape();
 
@@ -513,14 +547,15 @@ public class Graphics implements Disposable {
 
             startShape(ShapeType.Line);
             shapeRenderer.setColor(strokeColor);
-            prevX = x1; prevY = y1;
+            prevX = x1;
+            prevY = y1;
             for (int i = 1; i <= segments; i++) {
-                float t = i / (float)segments;
-                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
-                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
-                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0),
-                        adjustX(bx), adjustY(by, 0));
-                prevX = bx; prevY = by;
+                float t = i / (float) segments;
+                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
+                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
+                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0));
+                prevX = bx;
+                prevY = by;
             }
             endShape();
 
@@ -537,24 +572,24 @@ public class Graphics implements Disposable {
 
             float headingX = tipX - adjBeforeX;
             float headingY = tipY - adjBeforeY;
-            float headingLen = (float)Math.sqrt(headingX*headingX + headingY*headingY);
+            float headingLen = (float) Math.sqrt(headingX * headingX + headingY * headingY);
 
             if (headingLen > 0) {
                 float nx = headingX / headingLen;
                 float ny = headingY / headingLen;
 
                 float arrowLength = thickness * 2.2f;
-                float spreadAngle = (float)Math.toRadians(35);
+                float spreadAngle = (float) Math.toRadians(35);
 
                 // Left wing
-                float cosL = (float)Math.cos(Math.PI - spreadAngle);
-                float sinL = (float)Math.sin(Math.PI - spreadAngle);
+                float cosL = (float) Math.cos(Math.PI - spreadAngle);
+                float sinL = (float) Math.sin(Math.PI - spreadAngle);
                 float leftDirX = nx * cosL - ny * sinL;
                 float leftDirY = nx * sinL + ny * cosL;
 
                 // Right wing
-                float cosR = (float)Math.cos(Math.PI + spreadAngle);
-                float sinR = (float)Math.sin(Math.PI + spreadAngle);
+                float cosR = (float) Math.cos(Math.PI + spreadAngle);
+                float sinR = (float) Math.sin(Math.PI + spreadAngle);
                 float rightDirX = nx * cosR - ny * sinR;
                 float rightDirY = nx * sinR + ny * cosR;
 
@@ -608,20 +643,18 @@ public class Graphics implements Disposable {
         shapeRenderer.setColor(fillColor);
         shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
         shapeRenderer.setColor(strokeColor);
-        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness /2);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
         endShape();
 
         float dx = x2 - x1, dy = y2 - y1;
-        float length = (float)Math.sqrt(dx*dx + dy*dy);
+        float length = (float) Math.sqrt(dx * dx + dy * dy);
 
         if (length < 120f) {
             // Straight line if short
             startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
-            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
-                    adjustX(x2), adjustY(y2, 0), thickness);
+            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
             endShape();
-
 
             if (needSmoothing) {
                 Gdx.gl.glEnable(GL_LINE_SMOOTH);
@@ -632,8 +665,7 @@ public class Graphics implements Disposable {
 
             startShape(ShapeType.Line);
             shapeRenderer.setColor(strokeColor);
-            shapeRenderer.line(adjustX(x1), adjustY(y1, 0),
-                    adjustX(x2), adjustY(y2, 0));
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
             endShape();
 
             if (needSmoothing) {
@@ -642,7 +674,6 @@ public class Graphics implements Disposable {
             if (lt > 1) {
                 Gdx.gl.glLineWidth(1);
             }
-
 
         } else {
             // Curved Bezier if long
@@ -658,12 +689,12 @@ public class Graphics implements Disposable {
 
             startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
+
             for (int i = 1; i <= segments; i++) {
-                float t = i / (float)segments;
-                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
-                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
-                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0),
-                        adjustX(bx), adjustY(by, 0), thickness);
+                float t = i / (float) segments;
+                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
+                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
+                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0), thickness);
                 prevX = bx; prevY = by;
             }
             endShape();
@@ -678,11 +709,10 @@ public class Graphics implements Disposable {
             shapeRenderer.setColor(strokeColor);
             prevX = x1; prevY = y1;
             for (int i = 1; i <= segments; i++) {
-                float t = i / (float)segments;
-                float bx = (1 - t)*(1 - t)*x1 + 2*(1 - t)*t*cx + t*t*x2;
-                float by = (1 - t)*(1 - t)*y1 + 2*(1 - t)*t*cy + t*t*y2;
-                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0),
-                        adjustX(bx), adjustY(by, 0));
+                float t = i / (float) segments;
+                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
+                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
+                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0));
                 prevX = bx; prevY = by;
             }
             endShape();
@@ -1867,26 +1897,25 @@ public class Graphics implements Disposable {
             if (alphaComposite < 1) {
                 color = FSkinColor.alphaColor(color, color.a * alphaComposite);
             }
-            if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            if (color.a < 1) { // enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL_BLEND);
             }
 
-            TextBounds textBounds;
             if (wrap) {
-                textBounds = font.getWrappedBounds(text, w);
+                font.getWrappedBounds(text, w, textBounds);
             } else {
-                textBounds = font.getMultiLineBounds(text);
+                font.getMultiLineBounds(text, textBounds);
             }
 
             boolean needClip = false;
 
             while (textBounds.width > w || textBounds.height > h) {
-                if (font.canShrink()) { //shrink font to fit if possible
+                if (font.canShrink()) { // shrink font to fit if possible
                     font = font.shrink();
                     if (wrap) {
-                        textBounds = font.getWrappedBounds(text, w);
+                        font.getWrappedBounds(text, w, textBounds);
                     } else {
-                        textBounds = font.getMultiLineBounds(text);
+                        font.getMultiLineBounds(text, textBounds);
                     }
                 } else {
                     needClip = true;
@@ -1894,7 +1923,7 @@ public class Graphics implements Disposable {
                 }
             }
 
-            if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
+            if (needClip) { // prevent text flowing outside region if couldn't shrink it to fit
                 startClip(x, y, w, h);
             }
 
@@ -1913,7 +1942,7 @@ public class Graphics implements Disposable {
                 Gdx.gl.glDisable(GL_BLEND);
             }
         } catch (Exception e) {
-            //shouldnt be here but force English on CJK Error
+            // shouldn't be here but force English on CJK Error
             Forge.setForcedEnglishonCJKMissing();
         }
     }

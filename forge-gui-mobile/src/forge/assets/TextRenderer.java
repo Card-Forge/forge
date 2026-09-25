@@ -33,6 +33,8 @@ public class TextRenderer {
     private boolean wrap, needClip;
     private List<Piece> pieces = new ArrayList<>();
     private List<Float> lineWidths = new ArrayList<>();
+    private static final TextBounds bounds = new TextBounds();
+    private static final TextBounds textBounds = new TextBounds();
     // iOS-compatible: BreakIterator may not be available (missing ICU resources in RoboVM)
     private BreakIterator boundary;
 
@@ -548,26 +550,28 @@ public class TextRenderer {
         }
     }
 
-    private TextBounds getCurrentBounds() {
+    private void getCurrentBounds(TextBounds outBounds) {
         float maxWidth = 0;
-        for (Float lineWidth : lineWidths) {
+        int size = lineWidths.size();
+        for (int i = 0; i < size; i++) {
+            float lineWidth = lineWidths.get(i);
             if (lineWidth > maxWidth) {
                 maxWidth = lineWidth;
             }
         }
-        TextBounds bounds = new TextBounds();
-        bounds.width = maxWidth;
-        bounds.height = totalHeight;
-        return bounds;
+        outBounds.set(maxWidth, totalHeight);
     }
 
     public TextBounds getBounds(String text, FSkinFont skinFont) {
         setProps(text, skinFont, Float.MAX_VALUE, Float.MAX_VALUE, false);
-        return getCurrentBounds();
+        getCurrentBounds(textBounds);
+        return textBounds;
     }
+
     public TextBounds getWrappedBounds(String text, FSkinFont skinFont, float maxWidth) {
         setProps(text, skinFont, maxWidth, Float.MAX_VALUE, true);
-        return getCurrentBounds();
+        getCurrentBounds(textBounds);
+        return textBounds;
     }
 
     public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, int horzAlignment, boolean centerVertically) {
