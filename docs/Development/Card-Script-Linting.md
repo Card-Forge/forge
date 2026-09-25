@@ -4,19 +4,9 @@ The card-script linter checks card scripts against the engine code: whether each
 
 ## Checking your cards
 
-You can check a script in two ways before it is merged.
+Check your scripts before you open a pull request. The pull request runs the same checks again and comments on what it finds, but it is a review step, not a place to test scripts.
 
-**Open a pull request.** When the build finishes, a bot comments on the lines your PR changes. For example:
-
-> `PreCostDesc$` → `PrecostDesc$` (params are case-sensitive)
-
-> (warning) `NumCards$` → not used by LoseLife
-
-> Types `Sorcery` → `Instant`
-
-The last comment comes from comparing the card with its printed version on Scryfall. That comparison covers the name, type line, P/T, mana cost and loyalty. Cards that Scryfall doesn't list yet are skipped.
-
-**Run the linter yourself.** You need a clone of the repository, a JDK and Maven. From the repository root, run:
+**Check before opening a pull request.** You need a clone of the repository, a JDK and Maven. From the repository root, run:
 
 ```
 mvn -pl forge-gui-desktop -am test "-Dtest=CardScriptLinterTest#checkCards" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dcardscript.path=forge-gui/res/cardsfolder/upcoming"
@@ -33,6 +23,16 @@ Findings in ...\forge-gui\res\cardsfolder\upcoming:
 ```
 
 Each line shows the file, the line number, the severity, a code, and what to change. If there are errors, the run ends in `BUILD FAILURE` and Maven's failure summary at the end of the output lists them again. Warnings don't fail the run, so with only warnings it ends in `BUILD SUCCESS` and the warnings are in the list above.
+
+**Review on the pull request.** When the PR build finishes, a bot comments on the lines your PR changes. For example:
+
+> `PreCostDesc$` → `PrecostDesc$` (params are case-sensitive)
+
+> (warning) `NumCards$` → not used by LoseLife
+
+> Types `Sorcery` → `Instant`
+
+The last comment comes from comparing the card with its printed version on Scryfall. That comparison covers the name, type line, P/T, mana cost and loyalty. Cards that Scryfall doesn't list yet are skipped.
 
 ### Errors and warnings
 

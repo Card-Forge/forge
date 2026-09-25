@@ -69,9 +69,11 @@ public final class CardScriptLinter {
         "AddReplacementEffect", "AddTypes", "AddKeyword", "AddKeywords", "RemoveKeywords");
     private static final Set<String> DESC_KEYS = Set.of("SpellDescription", "TriggerDescription",
         "StackDescription", "Description");
-    private static final Set<String> ZONE_KEYS = Set.of("Defined", "Origin", "Destination");
-    private static final Set<String> CANONICAL = Set.of("Self", "Targeted", "Remembered", "Imprinted",
-        "Battlefield", "Exile", "Graveyard", "Hand", "Library", "Command", "Stack");
+    private static final Set<String> ZONES = Set.of("Battlefield", "Exile", "Graveyard", "Hand", "Library",
+        "Command", "Stack");
+    /** Values whose case the engine matches exactly, by the param they belong to. */
+    private static final Map<String, Set<String>> CANONICAL = Map.of(
+        "Defined", Set.of("Self", "Targeted", "Remembered", "Imprinted"), "Origin", ZONES, "Destination", ZONES);
 
     private static final Pattern DECLARER = Pattern.compile("AB|SP|DB|ST", Pattern.CASE_INSENSITIVE);
     private static final Pattern SVAR_NAME = Pattern.compile("[A-Za-z0-9_]+");
@@ -389,9 +391,9 @@ public final class CardScriptLinter {
             if (AMP_LISTS.contains(key) && val.contains(",") && !val.contains(":")) {
                 add(ln, Severity.ERROR, "LEX-DELIM", "`" + key + "$` is split on ` & `, not `,`", val);
             }
-            if (ZONE_KEYS.contains(key)) {
+            if (CANONICAL.containsKey(key)) {
                 String head = val.split(" ")[0];
-                for (String c : CANONICAL) {
+                for (String c : CANONICAL.get(key)) {
                     if (c.equalsIgnoreCase(head) && !c.equals(head)) {
                         add(ln, Severity.ERROR, "CASE", "`" + key + "$ " + head + "`" + TO + "`" + key + "$ " + c + "` (case-sensitive)", head);
                     }

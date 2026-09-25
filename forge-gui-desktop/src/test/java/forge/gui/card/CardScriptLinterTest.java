@@ -101,6 +101,9 @@ public class CardScriptLinterTest {
         assertEquals(codes(HEAD + "Variant:A:A:SP$ Draw | SubAbility$ DBX\nVariant:A:SVar:DBX:DB$ Draw"), List.of());
         // no "did you mean" unless the suggestion is a param this ability reads
         assertEquals(codes(HEAD + "A:SP$ Draw | Host$ True"), List.of("UNKNOWN-KEY"));
+        // a case fix is only suggested from the values of that param
+        assertEquals(codes(HEAD + "A:SP$ Pump | Defined$ hand"), List.of());
+        assertEquals(codes(HEAD + "A:SP$ Pump | Defined$ self"), List.of("CASE"));
     }
 
     @Test
