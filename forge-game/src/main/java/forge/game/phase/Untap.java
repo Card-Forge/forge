@@ -253,7 +253,7 @@ public class Untap extends Phase {
             return;
         }
         final Game game = previous.getGame();
-        List<Card> casted = game.getStack().getSpellsCastLastTurn();
+        List<Card> casted = game.getStack().getSpellCardsCastLastTurn();
 
         if (game.isDay() && casted.stream().noneMatch(CardPredicates.isController(previous))) {
             game.setDayTime(true);
