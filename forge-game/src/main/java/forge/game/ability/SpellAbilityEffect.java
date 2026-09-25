@@ -43,8 +43,8 @@ import java.util.*;
 public abstract class SpellAbilityEffect implements IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
         "AfterDescription", "ConditionDescription", "DefinedExiler", "ExiledWithEffectSource",
-        "Forecast", "GiftDescription", "Named", "ReturnValid", "StackDescription", "StartingWith",
-        "ThisDefinedAndTgts",
+        "Forecast", "GiftDescription", "Named", "ReturnAbility", "ReturnValid", "StackDescription",
+        "StartingWith", "ThisDefinedAndTgts",
     };
 
     public void resolve(SpellAbility sa) {}

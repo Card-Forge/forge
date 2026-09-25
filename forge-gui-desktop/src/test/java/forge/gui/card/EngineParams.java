@@ -19,7 +19,6 @@ import com.google.common.reflect.ClassPath;
 
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.replacement.ReplacementEffect;
@@ -136,10 +135,6 @@ final class EngineParams {
                     general.add(r.name());
                 }
             }
-        }
-        // AbilityFactory reads its sub-ability keys by looping over this list, which the scan can't follow
-        for (String key : AbilityFactory.additionalAbilityKeys) {
-            framework.computeIfAbsent(key, k -> new TreeSet<>()).add("forge/game/ability/AbilityFactory");
         }
     }
 

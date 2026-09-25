@@ -38,7 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <p>
@@ -72,11 +71,10 @@ public final class AbilityFactory implements IHasForgeParams {
             "VoteTiedAbility" // for fallback to Choices
         );
 
-    /** The sub-ability keys above, and the other params AbilityFactory reads. */
-    public static final String[] OPTIONAL_PARAMS = Stream.concat(additionalAbilityKeys.stream(), Stream.of(
-        "Choices", "Cost", "NonBasicSpell", "PreventionSubAbility", "ResultSubAbilities",
-        "SpellDescription", "SubAbility", "ValidTgts"
-    )).toArray(String[]::new);
+    public static final String[] OPTIONAL_PARAMS = {
+        "Choices", "Cost", "Execute", "NonBasicSpell", "PreventionSubAbility", "RepeatSubAbility",
+        "ResultSubAbilities", "SpellDescription", "SubAbility", "ValidTgts",
+    };
 
     public enum AbilityRecordType {
         Ability("AB"),

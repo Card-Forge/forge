@@ -51,9 +51,10 @@ import java.util.stream.IntStream;
 
 public class AbilityUtils implements IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
-        "AbilityCount", "AnnounceMax", "ETB", "ForgetOtherTargets", "IncludeAllComponentCards",
-        "LockInText", "RememberCostMana", "RememberTargets", "UnlessColor", "UnlessCost",
-        "UnlessPayer", "UnlessResolveSubs", "UnlessSwitched", "UnlessUpTo", "XMax", "XMin",
+        "AbilityCount", "AnnounceMax", "ETB", "ForgetOtherTargets", "GiftAbility",
+        "IncludeAllComponentCards", "LockInText", "RememberCostMana", "RememberTargets",
+        "UnlessColor", "UnlessCost", "UnlessPayer", "UnlessResolveSubs", "UnlessSwitched",
+        "UnlessUpTo", "XMax", "XMin",
     };
 
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
