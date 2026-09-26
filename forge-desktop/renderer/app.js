@@ -13,6 +13,8 @@ let started = false;
 let mutationQueue = Promise.resolve();
 let previewGeneration = 0;
 let toastTimer;
+let searchTimer;
+const extraSections = { Avatar: 'Vanguard', Planes: 'Planes', Schemes: 'Schemes', Conspiracy: 'Conspiracies', Dungeon: 'Dungeons', Attractions: 'Attractions', Contraptions: 'Contraptions' };
 const cards = new Map();
 const art = new Map();
 const pageSize = 24;
@@ -80,6 +82,9 @@ async function refreshLibrary() {
 }
 async function search() {
   const generation = ++searchGeneration;
+  const filtered = Boolean($('search').value.trim() || colors !== null || $('type-filter').value || $('mana-filter').value);
+  $('clear-filters').disabled = !filtered;
+  $('catalog-scope').textContent = filtered ? 'Filtered library · printings grouped' : 'Full library · printings grouped';
   $('result-count').textContent = 'Searching…';
   try {
     const page = await api.request('search', { text: $('search').value, colors,
@@ -87,11 +92,13 @@ async function search() {
       type: $('type-filter').value, sort: $('sort').value, offset, limit: pageSize, unique: true });
     if (generation !== searchGeneration) return;
     total = page.total;
-    $('result-count').textContent = `${total.toLocaleString()} cards`;
+    $('result-count').textContent = filtered
+      ? `${total.toLocaleString()} of ${page.catalogTotal.toLocaleString()} cards`
+      : `${total.toLocaleString()} cards`;
     $('catalog').innerHTML = page.cards.length ? page.cards.map(card => {
       remember(card);
       return `<article class="catalog-card ${selected?.id === card.id ? 'selected' : ''}" tabindex="0" draggable="true" data-card="${esc(card.id)}" style="--card-glow:${glow(card)}" aria-label="Inspect ${esc(card.name)}"><div class="card-top"><h3>${esc(card.name)}</h3><span class="mana-cost">${cost(card.manaCost)}</span></div><div class="card-type">${esc(card.type)}</div><div class="card-rules">${esc(card.oracleText || 'Every great deck starts with a solid foundation.')}</div><div class="card-bottom"><span>${esc(card.rarity.toUpperCase())}</span><button class="add-card" data-add="${esc(card.id)}" aria-label="Add ${esc(card.name)}">+</button></div></article>`;
-    }).join('') : '<div class="empty"><strong>No cards found.</strong>Try a shorter search or clear a filter.<br>Your next idea is still out there.</div>';
+    }).join('') : '<div class="empty"><strong>No matching cards.</strong>Try a shorter search or use Clear filters.<br>The library contains cards supported by the bundled engine.</div>';
     $('catalog').scrollTop = 0;
     $('page-label').textContent = total ? `${offset + 1}–${Math.min(offset + pageSize, total)} of ${total.toLocaleString()}` : '0 cards';
     $('previous').disabled = offset === 0;
@@ -103,7 +110,8 @@ function inspect(card) {
   if (!card) return;
   selected = remember(card);
   document.querySelectorAll('.catalog-card').forEach(element => element.classList.toggle('selected', element.dataset.card === card.id));
-  $('inspector').innerHTML = `${cardArt(card)}<div class="art-credit">Card art via Scryfall · representative printing</div><div class="inspector-details"><h2>${esc(card.name)}</h2><div class="inspect-type">${esc(card.type)} <span class="mana-cost">${cost(card.manaCost)}</span></div><p class="oracle">${esc(card.oracleText)}</p><div class="inspect-meta"><span>${esc(card.edition)} · ${esc(card.rarity)}</span><span>MV ${card.manaValue}</span></div><button class="button secondary" id="inspector-add">+ Add to ${section === 'Main' ? 'main deck' : section.toLowerCase()}</button></div>`;
+  const target = destinationSection(card);
+  $('inspector').innerHTML = `${cardArt(card)}<div class="art-credit">Card art via Scryfall · representative printing</div><div class="inspector-details"><h2>${esc(card.name)}</h2><div class="inspect-type">${esc(card.type)} <span class="mana-cost">${cost(card.manaCost)}</span></div><p class="oracle">${esc(card.oracleText)}</p><div class="inspect-meta"><span>${esc(card.edition)} · ${esc(card.rarity)}</span><span>MV ${card.manaValue}</span></div><button class="button secondary" id="inspector-add">+ Add to ${esc(extraSections[target] || (target === 'Main' ? 'main deck' : target.toLowerCase()))}</button></div>`;
   $('inspector-add').onclick = () => changeQuantity(card, 1);
   loadArt($('inspector'));
 }
@@ -130,6 +138,10 @@ function renderDeck() {
   $('commander-count').textContent = count('Commander');
   $('commander-section').hidden = state.format !== 'Commander' && count('Commander') === 0;
   if ($('commander-section').hidden && section === 'Commander') section = 'Main';
+  const supplemental = Object.entries(extraSections).filter(([key]) => count(key) > 0 || key === section);
+  $('supplemental-toolbar').hidden = supplemental.length === 0;
+  $('supplemental-section').innerHTML = '<option value="">Extra cards…</option>' + supplemental.map(([key, label]) => `<option value="${key}">${label} · ${count(key)}</option>`).join('');
+  $('supplemental-section').value = extraSections[section] ? section : '';
   document.querySelectorAll('[data-section]').forEach(button => button.classList.toggle('active', button.dataset.section === section));
   const grouped = new Map();
   for (const entry of entries(section)) {
@@ -161,11 +173,16 @@ function renderDeck() {
   if (selected) inspect(selected);
   if (state.saveError) toast('Deck is not saved: ' + state.saveError);
 }
+function destinationSection(card) {
+  if (extraSections[card.deckSection]) return card.deckSection;
+  return extraSections[section] ? 'Main' : section;
+}
 function changeQuantity(card, delta) {
   if (!card || !state) return;
-  const targetSection = section;
+  const targetSection = delta < 0 ? section : destinationSection(card);
   return mutate(() => {
     const entry = entries(targetSection).find(entry => entry.card.id === card.id);
+    section = targetSection;
     return api.request('edit', { revision: state.deck.revision, edits: [{ section: targetSection, cardId: card.id, quantity: Math.max(0, (entry?.quantity || 0) + delta) }] });
   });
 }
@@ -207,7 +224,14 @@ async function previewImport() {
   }
 }
 
-$('search').addEventListener('input', (() => { let timer; return () => { clearTimeout(timer); searchGeneration++; timer = setTimeout(() => { offset = 0; run(search); }, 180); }; })());
+$('search').addEventListener('input', () => { clearTimeout(searchTimer); searchGeneration++; searchTimer = setTimeout(() => { offset = 0; run(search); }, 180); });
+$('clear-filters').onclick = () => {
+  clearTimeout(searchTimer);
+  $('search').value = ''; $('type-filter').value = ''; $('mana-filter').value = '';
+  colors = null; offset = 0;
+  document.querySelectorAll('[data-color]').forEach(button => { button.classList.remove('active'); button.setAttribute('aria-pressed', 'false'); });
+  run(search);
+};
 for (const id of ['type-filter', 'mana-filter', 'sort']) $(id).onchange = () => { offset = 0; run(search); };
 document.querySelectorAll('[data-color]').forEach(button => {
   button.onclick = () => {
@@ -247,6 +271,7 @@ $('deck-list').ondrop = event => {
   if (card) changeQuantity(card, 1);
 };
 document.querySelectorAll('[data-section]').forEach(button => button.onclick = () => { section = button.dataset.section; renderDeck(); });
+$('supplemental-section').onchange = () => { if ($('supplemental-section').value) { section = $('supplemental-section').value; renderDeck(); } };
 $('deck-name').onchange = () => { const name = $('deck-name').value; mutate(() => api.request('rename', { name, revision: state.deck.revision })); };
 $('deck-name').onkeydown = event => { if (event.key === 'Enter') $('deck-name').blur(); };
 $('deck-format').onchange = () => { const format = $('deck-format').value; mutate(() => api.request('format', { format, revision: state.deck.revision })); };
@@ -320,7 +345,6 @@ async function initialize(status) {
     renderDeck();
     await refreshLibrary();
     inspect(state.deck.entries.find(entry => entry.card.name === 'Lightning Bolt')?.card || state.deck.entries[0]?.card);
-    $('search').value = 'Lightning';
     await search();
     $('loading').hidden = true;
   } catch (error) {

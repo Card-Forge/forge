@@ -1,8 +1,10 @@
 package forge.api;
 
 import forge.card.CardDb;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 
+import java.text.Normalizer;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,17 +14,19 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /** A stable, printing-aware catalog. Construct after Forge's card database has loaded. */
 public final class CardCatalog {
     public record CardInfo(String id, String name, String edition, int artIndex, boolean foil,
                            String manaCost, int manaValue, String type, String oracleText,
-                           int colors, int colorIdentity, String rarity, String collectorNumber) { }
+                           int colors, int colorIdentity, String rarity, String collectorNumber,
+                           String deckSection) { }
     /** colors is an allowed-color mask (W=1 U=2 B=4 R=8 G=16); null allows any. */
     public record Query(String text, Integer colors, Integer maxManaValue, int offset, int limit) {
         public Query {
-            text = text == null ? "" : text.strip().toLowerCase(Locale.ROOT);
+            text = normalize(text == null ? "" : text.strip());
             if (colors != null && (colors < 0 || colors > 31)) {
                 throw new IllegalArgumentException("Invalid color mask");
             }
@@ -34,13 +38,14 @@ public final class CardCatalog {
             }
         }
     }
-    public record Page(int total, int offset, List<CardInfo> cards) {
+    public record Page(int total, int offset, List<CardInfo> cards, int catalogTotal) {
         public Page { cards = List.copyOf(cards); }
     }
 
     private final Map<String, PaperCard> cards;
-    private record IndexedCard(CardInfo info, String searchText) { }
+    private record IndexedCard(CardInfo info, String searchText, String typeText) { }
     private final List<IndexedCard> index;
+    private final int uniqueCount;
 
     public CardCatalog(CardDb database) {
         this(database.getAllCards());
@@ -49,11 +54,28 @@ public final class CardCatalog {
     public CardCatalog(Collection<PaperCard> source) {
         cards = source.stream().collect(Collectors.toUnmodifiableMap(CardCatalog::id,
                 Function.identity(), (first, duplicate) -> first));
-        index = cards.values().stream().map(CardCatalog::describe)
-                .sorted(Comparator.comparing(CardInfo::name, String.CASE_INSENSITIVE_ORDER)
-                        .thenComparing(CardInfo::id))
-                .map(card -> new IndexedCard(card, (card.name() + "\n" + card.type() + "\n"
-                        + card.oracleText()).toLowerCase(Locale.ROOT))).toList();
+        index = cards.values().stream().map(CardCatalog::indexCard)
+                .sorted(Comparator.comparing((IndexedCard card) -> card.info().name(), String.CASE_INSENSITIVE_ORDER)
+                        .thenComparing(card -> card.info().id())).toList();
+        uniqueCount = (int) index.stream().map(card -> card.info().name()).distinct().count();
+    }
+
+    private static String normalize(String text) {
+        return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("\\p{M}+", "")
+                .toLowerCase(Locale.ROOT).replace('’', '\'').replace("æ", "ae").replace("œ", "oe");
+    }
+
+    private static IndexedCard indexCard(PaperCard card) {
+        var info = describe(card);
+        var text = new StringBuilder(info.name());
+        var types = new StringBuilder(info.type());
+        for (var face : card.getAllFaces()) {
+            text.append('\n').append(face.getName()).append('\n').append(face.getType())
+                    .append('\n').append(Objects.requireNonNullElse(face.getOracleText(), ""))
+                    .append('\n').append(Objects.requireNonNullElse(face.getFlavorName(), ""));
+            types.append('\n').append(face.getType());
+        }
+        return new IndexedCard(info, normalize(text.toString()), normalize(types.toString()));
     }
 
     public Page search(Query query) {
@@ -62,32 +84,40 @@ public final class CardCatalog {
 
     public Page browse(Query query, String type, String sort, boolean unique) {
         Objects.requireNonNull(query);
-        String typeFilter = Objects.requireNonNullElse(type, "").toLowerCase(Locale.ROOT);
+        String typeFilter = normalize(Objects.requireNonNullElse(type, ""));
+        var typePattern = Pattern.compile("(?<!\\p{L})" + Pattern.quote(typeFilter) + "(?!\\p{L})");
         var seen = new HashSet<String>();
         var ordering = Comparator.comparing(CardInfo::name, String.CASE_INSENSITIVE_ORDER).thenComparing(CardInfo::id);
         if ("mana".equals(sort)) { ordering = Comparator.comparingInt(CardInfo::manaValue).thenComparing(ordering); }
         if (!query.text().isEmpty()) {
-            ordering = Comparator.comparingInt((CardInfo card) -> card.name().toLowerCase(Locale.ROOT)
+            ordering = Comparator.comparingInt((CardInfo card) -> normalize(card.name())
                     .startsWith(query.text()) ? 0 : 1).thenComparing(ordering);
         }
         List<CardInfo> matches = index.stream().filter(card -> card.searchText().contains(query.text()))
+                .filter(card -> typeFilter.isEmpty() || typePattern.matcher(card.typeText()).find())
                 .map(IndexedCard::info)
-                .filter(card -> card.type().toLowerCase(Locale.ROOT).contains(typeFilter))
                 .filter(card -> query.colors() == null || (card.colors() & ~query.colors()) == 0)
                 .filter(card -> query.maxManaValue() == null || card.manaValue() <= query.maxManaValue())
                 .filter(card -> !unique || seen.add(card.name()))
                 .sorted(ordering)
                 .toList();
         return new Page(matches.size(), query.offset(), matches.stream()
-                .skip(query.offset()).limit(query.limit()).toList());
+                .skip(query.offset()).limit(query.limit()).toList(), unique ? uniqueCount : cards.size());
     }
 
     public int size() { return cards.size(); }
 
     public static CardCatalog fromDatabase(CardDb database) {
+        return fromDatabases(List.of(database));
+    }
+
+    public static CardCatalog fromDatabases(Collection<CardDb> databases) {
         // Import accepts foil printings too; the browser groups them by name by default.
-        var all = new ArrayList<>(database.getAllCards());
-        all.addAll(database.getAllCards().stream().map(PaperCard::getFoiled).toList());
+        var all = new ArrayList<PaperCard>();
+        for (var database : databases) {
+            all.addAll(database.getAllCards());
+            all.addAll(database.getAllCards().stream().map(PaperCard::getFoiled).toList());
+        }
         return new CardCatalog(all);
     }
 
@@ -112,6 +142,6 @@ public final class CardCatalog {
                 rules.getManaCost().toString(), rules.getManaCost().getCMC(), rules.getType().toString(),
                 Objects.requireNonNullElse(rules.getOracleText(), "").replace("\\n", "\n"),
                 rules.getColor().getColor(), rules.getColorIdentity().getColor(),
-                card.getRarity().name(), card.getCollectorNumber());
+                card.getRarity().name(), card.getCollectorNumber(), DeckSection.matchingSection(card).name());
     }
 }

@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.2
+# Mana Table — beta 0.1.0-beta.3
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -9,6 +9,9 @@ or account is needed. The first launch scans the card library and can take a mom
 The first launch gives you **First spark**, a sample 60-card red deck.
 
 1. Search by card name, type, or rules text. Filter colors, type, and mana value.
+   The library starts unfiltered. **Clear filters** restores the full catalog;
+   filtered results show their count alongside the library total. Back-face names
+   also find their parent card. Alternate printings are grouped by card name.
 2. Click a card to inspect it. Use **+** or drag it into the deck to add a copy.
 3. Switch between Main, Side, and (for Commander) Cmd. Changes save automatically.
 4. Rename the deck in its title field. Use undo/redo or Ctrl+Z/Ctrl+Y.
@@ -16,6 +19,12 @@ The first launch gives you **First spark**, a sample 60-card red deck.
    before any deck is created. Files in `.txt`, `.dec`, and `.dck` are supported.
 6. Use **Export** to copy a list, save text, or save a `.dck` for the original Forge.
 7. Choose **Draw a hand** for practice draws. Shuffle, mulligan, draw, and bottom cards.
+
+Scripted casual cards and supplemental cards (planes, schemes, dungeons, and
+similar cards) are included. Supplemental cards go into their own deck sections;
+use **Extra deck sections** to review them. Tokens are not part of this deck-building
+catalog. The catalog covers the bundled engine's supported cards, not every card
+in existence. Browsing or adding a card does not establish tournament legality.
 
 Press `/` to focus search. Press Ctrl+S to retry a failed save.
 

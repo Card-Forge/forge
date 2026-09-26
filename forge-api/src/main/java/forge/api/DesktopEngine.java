@@ -50,7 +50,7 @@ public final class DesktopEngine {
         System.setOut(System.err); // Forge diagnostics must never corrupt the JSON protocol.
         protocol.println(JSON.toJson(Map.of("event", "loading", "message", "Loading Forge card library…")));
         var data = EngineResources.load(Path.of(args[0]));
-        var engine = new DesktopEngine(CardCatalog.fromDatabase(data.getCommonCards()), Path.of(args[1]));
+        var engine = new DesktopEngine(CardCatalog.fromDatabases(data.getAvailableDatabases().values()), Path.of(args[1]));
         protocol.println(JSON.toJson(Map.of("event", "ready", "printings", engine.catalog.size())));
         try (var input = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
             String line;

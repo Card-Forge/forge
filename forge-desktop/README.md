@@ -50,3 +50,9 @@ visible and block switching decks until saved.
 The beta does not implement a match-session host. The existing game projection
 and observation hooks remain available in `forge-api` for the next gameplay work.
 See [the API integration guide](../forge-api/README.md).
+
+Catalog searches include ordinary and supplemental card databases, all faces,
+and scripted casual cards. The UI starts without a query or color/type/mana filter.
+`search` returns both the matching `total` and unfiltered `catalogTotal` (with
+printing grouping applied consistently). `card.deckSection` routes supplemental
+cards to sections such as Planes or Schemes; it is not a legality assertion.

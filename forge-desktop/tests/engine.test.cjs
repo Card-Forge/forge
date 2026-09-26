@@ -21,6 +21,22 @@ test('real Forge engine: persistence, revisions, import, export and practice', {
   let engine = start();
   try {
     await ready(engine);
+    const all = await engine.request('search', { limit: 24 });
+    assert.ok(all.total > 33000, `Expected the full catalog; got ${all.total}`);
+    assert.equal(all.catalogTotal, all.total);
+    assert.equal(all.cards.length, 24);
+    const lastPage = await engine.request('search', { offset: all.total - 1, limit: 24 });
+    assert.equal(lastPage.cards.length, 1);
+    for (const [query, name] of [['Insectile Aberration', 'Delver of Secrets'], ['Nicol Bolas, the Arisen', 'Nicol Bolas, the Ravager'], ['Ach! Hans, Run!', '"Ach! Hans, Run!"']]) {
+      const matches = await engine.request('search', { text: query, limit: 200 });
+      assert.ok(matches.cards.some(card => card.name === name), `Missing ${query}`);
+      assert.equal(matches.catalogTotal, all.total);
+    }
+    const planes = await engine.request('search', { type: 'Plane', limit: 200 });
+    assert.ok(planes.cards.length > 0);
+    assert.ok(planes.cards.every(card => card.deckSection === 'Planes'), 'Plane filtering must not match Planeswalker');
+    const plane = (await engine.request('search', { text: 'The Eon Fog' })).cards.find(card => card.name === 'The Eon Fog');
+    assert.equal(plane.deckSection, 'Planes');
     let state = await engine.request('new', { name: 'Persistence test', format: 'Constructed' });
     assert.equal(state.saveError, null);
     const deckId = state.id;
@@ -44,6 +60,8 @@ test('real Forge engine: persistence, revisions, import, export and practice', {
     state = await engine.request('import', { text: 'Deck\n4 Lightning Bolt\n56 Mountain\nSideboard\n2 Shock', name: 'Real import', format: 'Constructed' });
     assert.equal(state.validation.valid, true);
     assert.equal(state.saveError, null);
+    state = await engine.request('edit', { revision: state.deck.revision, edits: [{ section: 'Planes', cardId: plane.id, quantity: 1 }] });
+    assert.equal(state.deck.entries.find(entry => entry.section === 'Planes').card.name, 'The Eon Fog');
     const forgeExport = await engine.request('export', { kind: 'forge' });
     assert.match(forgeExport, /\[metadata\][\s\S]*\[Main\][\s\S]*\[Sideboard\]/);
     assert.equal((await engine.request('importPreview', { text: forgeExport.split('\n').slice(2).join('\n') })).problems.length, 0);
@@ -62,7 +80,8 @@ test('real Forge engine: persistence, revisions, import, export and practice', {
     state = await engine.request('open', { id: importedId });
     assert.equal(state.deck.name, 'Real import');
     assert.equal(state.deck.canUndo, false);
-    assert.equal(state.deck.entries.reduce((sum, entry) => sum + entry.quantity, 0), 62);
+    assert.equal(state.deck.entries.reduce((sum, entry) => sum + entry.quantity, 0), 63);
+    assert.equal(state.deck.entries.find(entry => entry.section === 'Planes').card.name, 'The Eon Fog');
     assert.equal((await engine.request('list')).decks.length, 2);
     await assert.rejects(engine.request('open', { id: '../../outside' }));
     fs.writeFileSync(path.join(data, 'decks', 'broken.json'), '{');

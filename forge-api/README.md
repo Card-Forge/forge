@@ -5,7 +5,7 @@ an Arena-inspired match experience, backed by Forge's existing rules and AI.
 `forge-api` is the first integration layer. It depends on `forge-game` and
 `forge-core`, and can load cards without Swing, LibGDX, `FModel`, or a GUI process.
 
-The [Forge Workshop desktop beta](../forge-desktop/README.md) now consumes this
+The [Mana Table desktop beta](../forge-desktop/README.md) now consumes this
 module through `DesktopEngine`, a private stdin/stdout JSON transport. It includes
 local deck persistence and an opening-hand practice table. Build with
 `mvn -pl forge-api -am verify`; the executable engine is `target/forge-engine.jar`.
@@ -15,7 +15,7 @@ local deck persistence and an opening-hand practice table. Build with
 | Hook | Behavior |
 | --- | --- |
 | `EngineResources.load(path)` | Explicit, once-per-process initialization from Forge's resource directory |
-| `CardCatalog.search(query)` | Case-insensitive name/type/rules search, allowed-color and mana-value filters, deterministic pagination, printing IDs |
+| `CardCatalog.search(query)` | Name/type/rules search across all card faces, accent-insensitive matching, color and mana-value filters, deterministic pagination, printing IDs |
 | `DeckImport.preview(text)` | Forge's existing deck recognizer with line-numbered problems; imports cannot silently discard unresolved rows |
 | `DeckEditor.apply(revision, edits)` | Atomic batches of absolute quantities across deck sections; stale writes fail |
 | `DeckEditor.undo/redo(revision)` | Bounded history, monotonically increasing revisions |
@@ -32,6 +32,13 @@ on a worker thread; search results include alternate printings rather than group
 them into a single card. Color masks are W=1, U=2, B=4, R=8, G=16; zero finds colorless
 cards. A nonzero allowed-color mask also includes colorless cards. This is a card
 color filter, not a Commander color-identity legality check.
+
+`CardCatalog.fromDatabases(data.getAvailableDatabases().values())` includes both
+ordinary and supplemental cards. The desktop uses `browse(..., unique=true)` to
+group printings by name. Each page includes `catalogTotal` before filtering, while
+`total` counts matching cards. `CardInfo.deckSection` identifies the appropriate
+section for supplemental cards. Resource loading includes scripted casual cards
+and scripts whose edition is unknown; it does not invent unsupported card rules.
 
 ## Build and run
 

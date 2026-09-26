@@ -33,6 +33,10 @@ delete environment.FORGE_OFFLINE;
     await expect(page.locator('.brand')).toHaveText('MMANATABLE');
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     await expect(page.locator('#main-count')).toHaveText('60');
+    await expect(page.locator('#search')).toHaveValue('');
+    const catalogTotal = Number((await page.locator('#result-count').innerText()).replace(/\D/g, ''));
+    assert.ok(catalogTotal > 33000, `Incomplete packaged catalog: ${catalogTotal}`);
+    await expect(page.locator('#catalog .catalog-card')).toHaveCount(24);
     console.log('Packaged engine and starter deck ready.');
     let artwork = true;
     try { await expect(page.locator('#inspector img')).toBeVisible({ timeout: 12000 }); }
@@ -44,6 +48,6 @@ delete environment.FORGE_OFFLINE;
     await expect(page.locator('.hand-card')).toHaveCount(8);
     await capture('practice-preview.png');
     assert.deepEqual(errors, []);
-    console.log(JSON.stringify({ packaged: true, bundledJava: true, starterDeck: 60, practiceHand: 8, artworkLoaded: artwork, errors }, null, 2));
+    console.log(JSON.stringify({ packaged: true, bundledJava: true, catalogTotal, starterDeck: 60, practiceHand: 8, artworkLoaded: artwork, errors }, null, 2));
   } finally { await application.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

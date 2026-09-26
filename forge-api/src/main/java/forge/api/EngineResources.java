@@ -55,7 +55,9 @@ public final class EngineResources {
                 new CardStorageReader(root.resolve("tokenscripts").toString(), null, false), null, null,
                 root.resolve("editions").toString(), root.resolve("custom/editions").toString(),
                 root.resolve("blockdata").toString(), root.resolve("setlookup").toString(),
-                "latest", false, false, false, false);
+                // The catalog is a browser, not a tournament-legality filter. Keep scripted
+                // casual cards and scripts without an assigned printing available too.
+                "latest", true, true, false, false);
     }
 
     private static String imagePath(Path root, String category) {
