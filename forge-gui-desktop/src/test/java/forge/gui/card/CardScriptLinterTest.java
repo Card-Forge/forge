@@ -5,6 +5,7 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,15 +24,21 @@ import java.util.stream.Stream;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import forge.card.CardType;
 import forge.game.ability.ApiType;
 import forge.game.trigger.TriggerType;
 import forge.gui.card.CardScriptLinter.Finding;
 import forge.gui.card.CardScriptLinter.Severity;
+import forge.util.FileSection;
+import forge.util.FileUtil;
 
 public class CardScriptLinterTest {
 
     /** Declarations, with the params of everything not declared yet filled in from the bytecode scan. */
     private static final CardScriptParams PARAMS = new CardScriptParams(EngineParams.get().scanned());
+    static {
+        loadTypes(locateRoot());
+    }
     private final CardScriptLinter linter = new CardScriptLinter(PARAMS);
 
     private List<String> codes(String... lines) {
@@ -91,6 +98,9 @@ public class CardScriptLinterTest {
         assertEquals(codes("Name:Test\nManaCost:WW\nTypes:Instant"), List.of("MANA"));
         assertEquals(codes("Name:Test\nTypes:Instant\nA:SP$ Draw"), List.of("NO-MANACOST"));
         assertEquals(codes(HEAD + "A:AB$ Draw | Cost$ Tapp"), List.of("COST"));
+        assertEquals(codes("Name:Test\nManaCost:1 R\nTypes:Creature Goblim"), List.of("TYPE-TYPO"));
+        assertEquals(codes("Name:Test\nManaCost:1 R\nTypes:creature Goblin"), List.of("TYPE-TYPO"));
+        assertEquals(codes("Name:Test\nManaCost:1 R\nTypes:Creature Frobnicator"), List.of("TYPE-UNKNOWN"));
         assertEquals(codes(HEAD + "A:SP$ Draw\nOracel:Draw a card."), List.of("LEX-PREFIX"));
         assertEquals(codes(HEAD + "A:SP$ Draw\nOracle::Draw a card."), List.of("LEX-PREFIX"));
         assertEquals(codes(HEAD + "A:SP$ Charm | Choices$ DBA,DBB\nSVar:DBA:DB$ Draw"), List.of("REF-UNDEF"));
@@ -311,6 +321,28 @@ public class CardScriptLinterTest {
             }
         }
         return out;
+    }
+
+    /** The type lists FModel loads at startup, from TypeLists.txt and the editions' type sections. */
+    static void loadTypes(Path root) {
+        if (CardType.Constant.LOADED.isSet()) {
+            return;
+        }
+        Path res = root.resolve("forge-gui/res");
+        List<Path> files = new ArrayList<>(List.of(res.resolve("lists/TypeLists.txt")));
+        try (Stream<Path> editions = Files.list(res.resolve("editions"))) {
+            editions.filter(p -> p.toString().endsWith(".txt")).forEach(files::add);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        for (Path f : files) {
+            FileSection.parseSections(FileUtil.readFile(f.toFile())).forEach((section, lines) -> {
+                if (section.endsWith("Types")) {
+                    CardType.Helper.parseTypes(section, lines);
+                }
+            });
+        }
+        CardType.Constant.LOADED.set();
     }
 
     static Path locateRoot() {

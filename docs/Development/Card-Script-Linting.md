@@ -53,6 +53,7 @@ The last comment comes from comparing the card with its printed version on Scryf
 | `COST` | error | A cost the engine doesn't recognise. It would be treated as free. | Check the cost syntax. |
 | `MANA` | error | Not a mana symbol, or a repeated letter such as `WW`. | Write each symbol separately, e.g. `W W`. |
 | `NO-MANACOST` | error | A card that isn't a land has no `ManaCost` line. | Add one. |
+| `TYPE-TYPO` | error | A word on the `Types` line is miscased or one letter off a known type. | Use the suggested type. |
 | `LEX-PREFIX` | error | A line starts with a prefix the card reader doesn't recognise, e.g. `Oracel:`. | Fix the prefix. |
 | `LEX-DELIM` | error | A list uses the wrong separator: ` & ` instead of `,`, or the reverse. | Use the separator the message names. |
 | `CASE` | error | A zone or `Defined$` value in the wrong case, e.g. `self`. | Use the suggested case. |
@@ -60,6 +61,7 @@ The last comment comes from comparing the card with its printed version on Scryf
 | `LOYALTY` | error | A loyalty ability without `Planeswalker$ True`. | Add it. |
 | `WRONG-KEY` | warning | A real param, but this API doesn't read it. | Remove it, or check whether it belongs on another line. |
 | `INTERNAL-KEY` | warning | A param the engine sets itself. Scripts shouldn't set it. | Remove it. |
+| `TYPE-UNKNOWN` | warning | A word on the `Types` line that isn't in the type lists. The engine accepts it, but choices of a creature type won't offer it. | Fix the word, or add the type to `res/lists/TypeLists.txt` or its edition file. |
 | `ORPHAN` | warning | An SVar ability that nothing refers to. | Remove it, or add the missing reference. |
 | `LEX-PIPE`, `LEX-DBLSPACE`, `LEX-NOSPACE`, `LEX-CURLY` | warning | Spacing around `\|` or `$`, or a curly apostrophe. | Fix as the message says. |
 | `DESC-COST` | warning | `SpellDescription$` repeats the activation cost. | Remove the cost from the description. |

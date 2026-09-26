@@ -1,6 +1,7 @@
 package forge.gui.card;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,7 +13,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
+import org.apache.commons.lang3.EnumUtils;
+
+import forge.card.CardType;
 import forge.card.mana.ManaCostShard;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
@@ -188,6 +193,7 @@ public final class CardScriptLinter {
             }
             switch (prefix) {
                 case "ManaCost" -> checkMana(value.trim(), ln);
+                case "Types" -> checkTypes(value, ln);
                 case "Variant" -> {
                     int c = value.indexOf(':');
                     if (c > 0) {
@@ -441,6 +447,29 @@ public final class CardScriptLinter {
             for (String tok : cost.split(" +")) {
                 if (!isManaToken(tok)) {
                     add(ln, Severity.ERROR, "MANA", "`" + tok + "`" + TO + "not a mana symbol", tok);
+                }
+            }
+        }
+
+        /** A miscased or one-letter-off type is an error; any other word the type lists lack is a warning. */
+        private void checkTypes(String types, int ln) {
+            // the type lists load with the card database; before that, every subtype would look unknown
+            if (!CardType.Constant.LOADED.isSet()) {
+                return;
+            }
+            // parse as the engine does: it matches multi-word types first, and files every word it doesn't know as a subtype
+            for (String t : CardType.parse(types.trim(), false).getSubtypes()) {
+                if (CardType.isASubType(t)) {
+                    continue;
+                }
+                String fix = Stream.of(CardType.getAllCardTypes(), EnumUtils.getEnumMap(CardType.Supertype.class).keySet(), CardType.getSortedSubTypes())
+                    .flatMap(Collection::stream)
+                    .filter(k -> k.equalsIgnoreCase(t) || (k.charAt(0) == t.charAt(0) && CardScriptParams.oneEditApart(t, k)))
+                    .findFirst().orElse(null);
+                if (fix != null) {
+                    add(ln, Severity.ERROR, "TYPE-TYPO", "`" + t + "`" + TO + "`" + fix + "`", t);
+                } else {
+                    add(ln, Severity.WARN, "TYPE-UNKNOWN", "`" + t + "`" + TO + "not in the type lists", t);
                 }
             }
         }

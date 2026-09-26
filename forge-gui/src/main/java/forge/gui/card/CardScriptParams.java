@@ -222,7 +222,7 @@ public final class CardScriptParams {
         return a != null ? a : new String[0];
     }
 
-    private static boolean oneEditApart(String a, String b) {
+    static boolean oneEditApart(String a, String b) {
         if (a.equals(b) || Math.abs(a.length() - b.length()) > 1) {
             return false;
         }
