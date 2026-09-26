@@ -25,6 +25,9 @@ import forge.gui.card.CardReaderExperiments;
 import forge.util.BuildInfo;
 import io.sentry.Sentry;
 
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+
 /**
  * Main class for Forge's swing application view.
  */
@@ -41,6 +44,15 @@ public final class Main {
             // -Djava.awt.headless=false on the command line, since it runs before GraphicsEnvironment
             // caches its answer.
             System.setProperty("java.awt.headless", "true");
+        }
+
+        // The GUI needs a display and a Java runtime that can drive one. Linux distributions ship a
+        // "headless" runtime package that lacks the AWT/Swing libraries, and it is often the default
+        // java, so check up front and say what is wrong: the alternative is a HeadlessException from
+        // the first Swing call (and, in releases before #11761, no output at all).
+        if (args.length == 0 && GraphicsEnvironment.isHeadless()) {
+            explainMissingDisplay();
+            System.exit(1);
         }
 
         // Sentry chains to whatever default handler is already installed, but if none is, an uncaught
@@ -118,6 +130,42 @@ public final class Main {
         }
 
         System.exit(0);
+    }
+
+    /**
+     * Tell the user why the GUI cannot start on this runtime. Written to stderr since there is no
+     * display to put a dialog on.
+     */
+    private static void explainMissingDisplay() {
+        System.err.print(describeMissingDisplay(System.getProperty("os.name", ""), System.getProperty("java.home"),
+                System.getProperty("java.vendor") + " " + System.getProperty("java.version"),
+                System.getProperty("java.awt.headless"), System.getenv("DISPLAY")));
+        System.err.flush();
+    }
+
+    /**
+     * Build the explanation for a runtime that reports itself headless, naming the likely cause.
+     * On Linux the runtime is headless when DISPLAY is unset or when the install is a "headless"
+     * package, which the JDK detects by the absence of lib/libawt_xawt.so.
+     */
+    public static String describeMissingDisplay(final String osName, final String javaHome, final String javaVersion,
+            final String headlessProperty, final String display) {
+        final boolean windowsOrMac = osName.matches("(?i).*(windows|mac).*");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Forge cannot start: this Java runtime has no display to open a window on.\n");
+        sb.append("  Java: ").append(javaHome).append(" (").append(javaVersion).append(")\n");
+        if ("true".equalsIgnoreCase(headlessProperty)) {
+            sb.append("  -Djava.awt.headless=true was passed on the command line; drop it to run the GUI.\n");
+        } else if (!windowsOrMac && (display == null || display.trim().isEmpty())) {
+            sb.append("  The DISPLAY environment variable is not set, so there is no X11/Wayland session to use.\n");
+        } else if (!windowsOrMac && !new File(javaHome, "lib/libawt_xawt.so").exists()) {
+            sb.append("  This is a \"headless\" Java package (no lib/libawt_xawt.so), which cannot show windows.\n");
+            sb.append("  Install the full runtime instead, e.g. \"sudo apt install openjdk-21-jre\" or\n");
+            sb.append("  \"sudo dnf install java-21-openjdk\", or point JAVA_HOME at a full JDK.\n");
+        } else {
+            sb.append("  Check that a graphical session is available and that the Java install is not a headless package.\n");
+        }
+        return sb.toString();
     }
 
     /**
