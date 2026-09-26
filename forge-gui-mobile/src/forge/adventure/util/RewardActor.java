@@ -392,7 +392,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite item = reward.getItem().sprite();
                 setItemTooltips(item, backSprite, false);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%200]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0, false);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%200]" + reward.getItem().getDisplayName()) : null, 0, isQuestItemLoot ? -10 : 0, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -881,7 +881,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             Align.center, true);
                 }
                 else
-                    layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
+                    layout.setText(font, itemExists ? item.getDisplayName() : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 Forge.getGraphics().drawText(font, layout, 32, preview_h - 70);
                 align = itemExists ? Align.topLeft : Align.top;
                 if (itemExists) {
@@ -1091,7 +1091,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 display = reward.type.toString();
                 break;
             case Item:
-                display = reward.getItem() != null ? reward.getItem().name : "";
+                display = reward.getItem() != null ? reward.getItem().getDisplayName() : "";
                 break;
             case CardPack:
                 display = reward.getDeck() != null ? "Card Pack (" + reward.getDeck().getComment() + ")" : "";

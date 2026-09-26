@@ -194,7 +194,7 @@ public class InventoryScene extends UIScene {
             return;
         }
         final int cost = initialCost;
-        showDialog(createGenericDialog("", "[+" + data.iconName + "] " + data.name + "\n" +
+        showDialog(createGenericDialog("", "[+" + data.iconName + "] " + data.getDisplayName() + "\n" +
             Forge.getLocalizer().getMessage("lblRepairCost", "[+GoldCoin] " + cost),
             Forge.getLocalizer().getMessage("lblYes"),
             Forge.getLocalizer().getMessage("lblNo"), () -> {
@@ -308,7 +308,7 @@ public class InventoryScene extends UIScene {
                             this.triggerUse();
                             removeDialog();
                         }, this::removeDialog);
-                useDialog.getContentTable().add(Controls.newTextraLabel("Use " + data.name + "?\n" + data.getDescription()));
+                useDialog.getContentTable().add(Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblUse") + " " + data.getDisplayName() + "?\n" + data.getDescription()));
             }
             showDialog(useDialog);
         }
@@ -345,9 +345,9 @@ public class InventoryScene extends UIScene {
             boolean isInPoi = MapStage.getInstance().isInMap();
             useButton.setDisabled(!(isInPoi && data.usableInPoi || !isInPoi && data.usableOnWorldMap));
             if (data.shardsNeeded == 0)
-                useButton.setText("Use");
+                useButton.setText(Forge.getLocalizer().getMessage("lblUse"));
             else
-                useButton.setText("Use " + data.shardsNeeded + "[+Shards]");
+                useButton.setText(Forge.getLocalizer().getMessage("lblUse") + " " + data.shardsNeeded + "[+Shards]");
             useButton.layout();
             if (Current.player().getShards() < data.shardsNeeded)
                 useButton.setDisabled(true);
@@ -362,14 +362,14 @@ public class InventoryScene extends UIScene {
                     if (id != null && id.equals(data.longID) && data.isEquipped) {
                         button.setText("Unequip");
                     } else {
-                        button.setText("Equip");
+                        button.setText(Forge.getLocalizer().getMessage("lblEquip"));
                     }
                     button.layout();
                 }
             }
             repairButton.setVisible(data.isCracked);
             String status = data.isCracked ? " (" + Forge.getLocalizer().getMessage("lblCracked") + ")" : "";
-            itemDescription.setText(data.name + status + "\n[%98]" + data.getDescription());
+            itemDescription.setText(data.getDisplayName() + status + "\n[%98]" + data.getDescription());
         }
         else if (deckLocation.containsKey(actor)){
             Deck data = (deckLocation.get(actor));
@@ -377,7 +377,7 @@ public class InventoryScene extends UIScene {
 
             deleteButton.setDisabled(true);
             useButton.setDisabled(false);
-            useButton.setText("Open");
+            useButton.setText(Forge.getLocalizer().getMessage("lblOpen"));
             useButton.layout();
             equipButton.setDisabled(true);
             repairButton.setVisible(false);
