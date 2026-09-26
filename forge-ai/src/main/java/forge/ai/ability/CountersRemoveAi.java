@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
@@ -21,7 +20,6 @@ import forge.game.zone.ZoneType;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
@@ -86,7 +84,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-        boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+        boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
 
         CounterType iceType = CounterType.getType("ICE");
 
@@ -362,9 +360,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
         } else if (target instanceof Player targetPlayer) {
             if (targetPlayer.isOpponentOf(player)) {
                 return !type.is(CounterEnumType.POISON) ? max : min;
-            } else {
-                return type.is(CounterEnumType.POISON) ? max : min;
             }
+            return type.is(CounterEnumType.POISON) ? max : min;
         }
 
         return super.chooseNumber(player, sa, min, max, params);
@@ -381,8 +378,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         Player ai = sa.getActivatingPlayer();
         GameEntity target = (GameEntity) params.get("Target");
 
-        if (target instanceof Card) {
-            Card targetCard = (Card) target;
+        if (target instanceof Card targetCard) {
             if (targetCard.getController().isOpponentOf(ai)) {
                 // if its a Planeswalker try to remove Loyality first
                 if (targetCard.isPlaneswalker()) {
@@ -396,7 +392,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
             } else {
                 if (options.contains(CounterEnumType.M1M1) && targetCard.hasKeyword(Keyword.PERSIST)) {
                     return CounterEnumType.M1M1;
-                } else if (options.contains(CounterEnumType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
+                }
+                if (options.contains(CounterEnumType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
                     return CounterEnumType.P1P1;
                 }
                 for (CounterType type : options) {
@@ -405,8 +402,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     }
                 }
             }
-        } else if (target instanceof Player) {
-            Player targetPlayer = (Player) target;
+        } else if (target instanceof Player targetPlayer) {
             if (targetPlayer.isOpponentOf(ai)) {
                 for (CounterType type : options) {
                     if (!type.is(CounterEnumType.POISON)) {

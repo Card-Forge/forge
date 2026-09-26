@@ -92,10 +92,10 @@ public class TileMapScene extends HudScene {
         float intHeight = Scene.getIntendedHeight();
 
         tiledMapRenderer.setView(stage.getCamera().combined, camX - intWidth / 2.0f, camY - intHeight / 2.0f, intWidth, intHeight);
-
         if (!Forge.isLandscapeMode()) {
             stage.getCamera().position.x = stage.getPlayerSprite().getX();
         }
+        tiledMapRenderer.updateCamera();
         tiledMapRenderer.render();
         hud.draw();
     }

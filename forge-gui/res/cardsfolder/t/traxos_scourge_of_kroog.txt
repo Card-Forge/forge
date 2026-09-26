@@ -1,6 +1,6 @@
 Name:Traxos, Scourge of Kroog
 ManaCost:4
-Types:Legendary Artifact Creature Construct
+Types:Legendary Artifact Creature Dragon Construct
 PT:7/7
 K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ NICKNAME enters tapped.

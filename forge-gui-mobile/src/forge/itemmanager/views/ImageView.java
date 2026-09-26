@@ -428,6 +428,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         updateLayout(false); //need to update layout to adjust wrapping of items
     }
 
+    private boolean isGroupLarger() {
+        if (groupBy == null || groupBy.getGroups() == null)
+            return !groups.get().isEmpty();
+        return groups.get().size() > groupBy.getGroups().length;
+    }
+
     @Override
     protected void onRefresh() {
         Group otherItems = groupBy == null ? groups.get().get(0) : null;
@@ -452,7 +458,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 } else {
                     if (otherItems == null) {
                         //reuse existing Other group if possible
-                        if (groups.get().size() > groupBy.getGroups().length) {
+                        if (isGroupLarger()) {
                             otherItems = groups.get().get(groups.get().size() - 1);
                         } else {
                             otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
@@ -474,7 +480,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
 
-        if (otherItems == null && groups.get().size() > groupBy.getGroups().length) {
+        if (otherItems == null && isGroupLarger()) {
             int index = groups.get().size() - 1;
             if (index >= 0 && index < groups.get().size()) {
                 groups.get().remove(index); //remove Other group if empty

@@ -3,8 +3,8 @@ Code=YLCI
 Date=2023-12-05
 Name=Alchemy: Ixalan
 Type=Online
-Booster=1 UncommonRareMythic,8 Common:!dfc:!fromSheet("LCI lands"):fromsheet("LCI cards"), 3 Uncommon:!dfc:!fromSheet("LCI lands"):fromSheet("LCI cards"), 1 fromSheet("LCI double-face"), 1 RareMythic:fromSheet("LCI cards"), 1 fromSheet("LCI lands")
 ScryfallCode=YLCI
+Booster=1 UncommonRareMythic:fromSheet("YLCI cards"), 8 Common:!dfc:!fromSheet("LCI lands"):fromsheet("LCI cards"), 3 Uncommon:!dfc:!fromSheet("LCI lands"):fromSheet("LCI cards"), 1 fromSheet("LCI double-face"), 1 RareMythic:fromSheet("LCI cards"), 1 fromSheet("LCI lands")
 
 [cards]
 1 R Cogwork Progenitor @Kev Walker
@@ -37,3 +37,6 @@ ScryfallCode=YLCI
 28 R Scalesoul Gnome @Svetlin Velinov
 29 R Stalwart Speartail @Filip Burburan
 30 R Tan Jolom, the Worldwalker @Anthony Devine
+
+[conjured]
+31 U Thieving Magpie @Una Fricker

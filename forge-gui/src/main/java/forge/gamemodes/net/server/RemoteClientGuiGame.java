@@ -387,7 +387,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        syncAndSend(ProtocolMethod.hideZones, controller, zonesToUpdate);
+        // Closing a window needs no fresh state: the payload is players the client already has and zone types
+        send(ProtocolMethod.hideZones, controller, zonesToUpdate);
     }
 
     @Override

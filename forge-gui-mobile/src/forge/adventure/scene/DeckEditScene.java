@@ -11,13 +11,9 @@ import forge.screens.FScreen;
  */
 public class DeckEditScene extends ForgeScene {
 
-    AdventureDeckEditor screen;
     AdventureEventData currentEvent;
 
-    private AdventureEventData lastLoadedEventContext = null;
-
-    private DeckEditScene() {
-    }
+    private DeckEditScene() {}
 
     private static DeckEditScene object;
     TextureRegion backDrop;
@@ -41,27 +37,16 @@ public class DeckEditScene extends ForgeScene {
 
     @Override
     public void enter() {
-        Adventure.getInstance().renderTransitionScreen = false;
-        if (lastLoadedEventContext != currentEvent) {
-            screen = null;
-            lastLoadedEventContext = currentEvent;
-        }
-        getScreen();
-        screen.refresh();
+        if (currentEvent == null)
+            ((AdventureDeckEditor) getScreen()).setEvent(null);
+        ((AdventureDeckEditor) getScreen()).refresh();
         super.enter();
     }
 
     @Override
     public FScreen getScreen() {
-        if (screen == null) {
-            if (currentEvent == null) {
-                screen = new AdventureDeckEditor(false, backDrop);
-                screen.setEvent(null);
-            }
-            else {
-                screen = new AdventureDeckEditor(currentEvent, backDrop);
-            }
-        }
-        return screen;
+        return currentEvent == null
+            ? new AdventureDeckEditor(false, backDrop)
+            :  new AdventureDeckEditor(currentEvent, backDrop);
     }
 }
