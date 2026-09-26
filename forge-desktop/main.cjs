@@ -1,0 +1,131 @@
+const { app, BrowserWindow, ipcMain, dialog, protocol, net, session, Menu, clipboard } = require('electron');
+const path = require('node:path');
+const fs = require('node:fs');
+const { pathToFileURL } = require('node:url');
+const { createHash } = require('node:crypto');
+const { EngineClient } = require('./engine-client.cjs');
+
+const project = path.resolve(__dirname, '..');
+const userData = process.env.FORGE_USER_DATA || (app.isPackaged
+  ? path.join(path.dirname(process.execPath), 'UserData') : path.join(__dirname, '.data'));
+fs.mkdirSync(userData, { recursive: true });
+app.setPath('userData', userData);
+app.setName('Forge Workshop');
+protocol.registerSchemesAsPrivileged([{ scheme: 'workshop', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
+
+let window;
+let engine;
+const methods = new Set(['search', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'export', 'practice']);
+function verify(event) {
+  if (!window || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame
+    || !event.senderFrame.url.startsWith('workshop://app/')) throw new Error('Unknown desktop client');
+}
+
+const artCache = new Map();
+let artQueue = Promise.resolve();
+let lastArtRequest = 0;
+function art(name) {
+  if (process.env.FORGE_OFFLINE === '1') return null;
+  if (typeof name !== 'string' || name.length > 200) return null;
+  if (artCache.has(name)) return artCache.get(name);
+  const promise = artQueue.then(async () => {
+    const key = createHash('sha256').update(name).digest('hex');
+    const file = path.join(userData, 'art', `${key}.jpg`);
+    if (fs.existsSync(file)) return 'data:image/jpeg;base64,' + fs.readFileSync(file).toString('base64');
+    await new Promise(resolve => setTimeout(resolve, Math.max(0, 150 - (Date.now() - lastArtRequest))));
+    lastArtRequest = Date.now();
+    try {
+      const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(name)}&format=image&version=normal`, {
+        headers: { 'User-Agent': 'ForgeWorkshop/0.1.0 (https://github.com/proflayton/forge)', Accept: 'image/jpeg' },
+        signal: AbortSignal.timeout(8000)
+      });
+      if (!response.ok || !response.headers.get('content-type')?.startsWith('image/')) return null;
+      const bytes = Buffer.from(await response.arrayBuffer());
+      if (bytes.length > 2_000_000) return null;
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, bytes);
+      return 'data:image/jpeg;base64,' + bytes.toString('base64');
+    } catch { return null; }
+  });
+  artQueue = promise.catch(() => null);
+  artCache.set(name, promise);
+  return promise;
+}
+
+if (app.requestSingleInstanceLock()) {
+app.on('second-instance', () => {
+  if (window) { if (window.isMinimized()) window.restore(); window.show(); window.focus(); }
+});
+app.whenReady().then(async () => {
+  protocol.handle('workshop', request => {
+    const pathname = new URL(request.url).pathname;
+    const allowed = new Set(['/index.html', '/style.css', '/app.js']);
+    if (!allowed.has(pathname)) return new Response('Not found', { status: 404 });
+    return net.fetch(pathToFileURL(path.join(__dirname, 'renderer', pathname.slice(1))).toString());
+  });
+  session.defaultSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
+  session.defaultSession.setPermissionCheckHandler(() => false);
+  Menu.setApplicationMenu(null);
+  window = new BrowserWindow({
+    width: 1540, height: 980, minWidth: 1120, minHeight: 740, backgroundColor: '#101415',
+    title: 'Forge Workshop · Beta', show: process.env.FORGE_TEST !== '1',
+    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: true, nodeIntegration: false }
+  });
+  window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  window.webContents.on('will-navigate', event => event.preventDefault());
+  const jar = app.isPackaged ? path.join(process.resourcesPath, 'forge-engine.jar') : path.join(project, 'forge-api', 'target', 'forge-engine.jar');
+  const resources = app.isPackaged ? path.join(process.resourcesPath, 'forge-res') : path.join(project, 'forge-gui', 'res');
+  const java = process.env.FORGE_JAVA || (app.isPackaged ? path.join(process.resourcesPath, 'runtime', 'bin', 'java.exe')
+    : process.env.JAVA_HOME ? path.join(process.env.JAVA_HOME, 'bin', 'java.exe')
+      : fs.existsSync('C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe') ? 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe' : 'java');
+  engine = new EngineClient({ java, jar, resources, data: path.join(userData, 'decks'), log: path.join(userData, 'engine.log') });
+  engine.on('status', status => { if (!window.isDestroyed()) window.webContents.send('engine-status', status); });
+  ipcMain.handle('status', event => { verify(event); return engine.status; });
+  ipcMain.handle('engine', (event, method, params) => {
+    verify(event);
+    if (!methods.has(method)) throw new Error('Unknown command');
+    if (JSON.stringify(params).length > 1_500_000) throw new Error('Request too large');
+    return engine.request(method, params);
+  });
+  ipcMain.handle('art', (event, name) => { verify(event); return art(name); });
+  ipcMain.handle('copy-deck', async event => {
+    verify(event);
+    clipboard.writeText(await engine.request('export', { kind: 'text' }));
+    return true;
+  });
+  ipcMain.handle('import-file', async event => {
+    verify(event);
+    const result = await dialog.showOpenDialog(window, { properties: ['openFile'], filters: [{ name: 'Deck lists', extensions: ['txt', 'dec', 'dck'] }] });
+    if (result.canceled) return null;
+    const file = result.filePaths[0];
+    if (fs.statSync(file).size > 1_000_000) throw new Error('Deck files must be smaller than 1 MB');
+    let text = fs.readFileSync(file, 'utf8');
+    let name = path.basename(file, path.extname(file));
+    if (path.extname(file).toLowerCase() === '.dck') {
+      let metadata = false;
+      text = text.split(/\r?\n/).filter(line => {
+        if (/^\[metadata\]/i.test(line)) { metadata = true; return false; }
+        if (/^\[/.test(line)) metadata = false;
+        if (metadata && line.startsWith('Name=')) name = line.slice(5);
+        return !metadata;
+      }).join('\n');
+    }
+    return { text, name };
+  });
+  ipcMain.handle('export-file', async (event, kind) => {
+    verify(event);
+    if (!['text', 'forge'].includes(kind)) throw new Error('Unknown deck format');
+    const text = await engine.request('export', { kind });
+    const state = await engine.request('snapshot');
+    const extension = kind === 'forge' ? 'dck' : 'txt';
+    const result = await dialog.showSaveDialog(window, { defaultPath: state.deck.name.replace(/[<>:"/\\|?*]/g, '_') + '.' + extension,
+      filters: [{ name: kind === 'forge' ? 'Forge deck' : 'Plain-text deck', extensions: [extension] }] });
+    if (result.canceled) return false;
+    await fs.promises.writeFile(result.filePath, text, 'utf8');
+    return true;
+  });
+  await window.loadURL('workshop://app/index.html');
+});
+app.on('window-all-closed', () => app.quit());
+app.on('before-quit', () => engine?.close());
+} else { app.quit(); }

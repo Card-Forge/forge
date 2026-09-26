@@ -80,6 +80,18 @@ public final class DeckEditor {
         return snapshot();
     }
 
+    public synchronized Snapshot rename(long expectedRevision, String name) {
+        checkRevision(expectedRevision);
+        if (name == null || name.isBlank() || name.length() > 100) {
+            throw new IllegalArgumentException("Deck name must be 1..100 characters");
+        }
+        remember(undo, deck);
+        deck = new Deck(deck, name.strip());
+        redo.clear();
+        revision++;
+        return snapshot();
+    }
+
     public synchronized Snapshot redo(long expectedRevision) {
         checkRevision(expectedRevision);
         if (!redo.isEmpty()) {

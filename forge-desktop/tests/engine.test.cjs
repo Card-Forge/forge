@@ -1,0 +1,71 @@
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const fs = require('node:fs');
+const { once } = require('node:events');
+const { EngineClient } = require('../engine-client.cjs');
+const root = path.resolve(__dirname, '../..');
+const data = path.join(root, 'forge-desktop/test-results', `engine-${Date.now()}`);
+function start() {
+  return new EngineClient({ java: process.env.FORGE_JAVA || 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',
+    jar: path.join(root, 'forge-api/target/forge-engine.jar'), resources: path.join(root, 'forge-gui/res'),
+    data: path.join(data, 'decks'), log: path.join(data, 'engine.log') });
+}
+async function ready(engine) {
+  while (engine.status.state !== 'ready') {
+    if (engine.status.state === 'error') throw new Error(engine.status.message);
+    await once(engine, 'status');
+  }
+}
+test('real Forge engine: persistence, revisions, import, export and practice', { timeout: 120000 }, async () => {
+  let engine = start();
+  try {
+    await ready(engine);
+    let state = await engine.request('new', { name: 'Persistence test', format: 'Constructed' });
+    assert.equal(state.saveError, null);
+    const deckId = state.id;
+    const result = await engine.request('search', { text: 'Lightning Bolt', limit: 24, unique: true });
+    assert.equal(result.cards[0].name, 'Lightning Bolt');
+    assert.equal(result.cards.filter(card => card.name === 'Lightning Bolt').length, 1);
+    const bolt = result.cards[0];
+    state = await engine.request('edit', { revision: state.deck.revision, edits: [{ section: 'Main', cardId: bolt.id, quantity: 4 }] });
+    const revision = state.deck.revision;
+    await assert.rejects(engine.request('edit', { revision: revision - 1, edits: [{ section: 'Main', cardId: bolt.id, quantity: 1 }] }), /revision/);
+    await assert.rejects(engine.request('edit', { revision, edits: [{ section: 'Main', cardId: bolt.id, quantity: 2 }, { section: 'Main', cardId: 'bad-id', quantity: 1 }] }), /Unknown printing/);
+    assert.equal((await engine.request('snapshot')).deck.entries[0].quantity, 4);
+    state = await engine.request('undo', { revision });
+    assert.equal(state.deck.entries.length, 0);
+    state = await engine.request('redo', { revision: state.deck.revision });
+    assert.equal(state.deck.entries[0].quantity, 4);
+    const bad = await engine.request('importPreview', { text: '4 Not A Real Magic Card XYZ' });
+    assert.equal(bad.problems.length, 1);
+    await assert.rejects(engine.request('import', { text: '4 Not A Real Magic Card XYZ', name: 'Bad' }));
+    assert.equal((await engine.request('snapshot')).id, deckId);
+    state = await engine.request('import', { text: 'Deck\n4 Lightning Bolt\n56 Mountain\nSideboard\n2 Shock', name: 'Real import', format: 'Constructed' });
+    assert.equal(state.validation.valid, true);
+    assert.equal(state.saveError, null);
+    const forgeExport = await engine.request('export', { kind: 'forge' });
+    assert.match(forgeExport, /\[metadata\][\s\S]*\[Main\][\s\S]*\[Sideboard\]/);
+    assert.equal((await engine.request('importPreview', { text: forgeExport.split('\n').slice(2).join('\n') })).problems.length, 0);
+    const exported = await engine.request('export', { kind: 'text' });
+    assert.match(exported, /56 Mountain/);
+    assert.equal((await engine.request('importPreview', { text: exported })).problems.length, 0);
+    let practice = await engine.request('practice', { action: 'shuffle' });
+    assert.equal(practice.hand.length, 7); assert.equal(practice.remaining, 53);
+    practice = await engine.request('practice', { action: 'draw' });
+    assert.equal(practice.hand.length, 8); assert.equal(practice.remaining, 52);
+    practice = await engine.request('practice', { action: 'bottom', index: 0 });
+    assert.equal(practice.hand.length, 7); assert.equal(practice.remaining, 53);
+    const importedId = state.id;
+    engine.close(); await once(engine.child, 'exit');
+    engine = start(); await ready(engine);
+    state = await engine.request('open', { id: importedId });
+    assert.equal(state.deck.name, 'Real import');
+    assert.equal(state.deck.canUndo, false);
+    assert.equal(state.deck.entries.reduce((sum, entry) => sum + entry.quantity, 0), 62);
+    assert.equal((await engine.request('list')).decks.length, 2);
+    await assert.rejects(engine.request('open', { id: '../../outside' }));
+    fs.writeFileSync(path.join(data, 'decks', 'broken.json'), '{');
+    assert.equal((await engine.request('list')).problems.length, 1);
+  } finally { engine.close(); }
+});

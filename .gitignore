@@ -31,6 +31,11 @@ nbactions.xml
 # Ignore binaries, temp files and test output, everywhere
 /.tools/
 /.m2/
+/forge-desktop/node_modules/
+/forge-desktop/.data/
+/forge-desktop/test-results/
+/forge-desktop/playwright-report/
+/dist/
 
 target
 test-output

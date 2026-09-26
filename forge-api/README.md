@@ -5,6 +5,11 @@ an Arena-inspired match experience, backed by Forge's existing rules and AI.
 `forge-api` is the first integration layer. It depends on `forge-game` and
 `forge-core`, and can load cards without Swing, LibGDX, `FModel`, or a GUI process.
 
+The [Forge Workshop desktop beta](../forge-desktop/README.md) now consumes this
+module through `DesktopEngine`, a private stdin/stdout JSON transport. It includes
+local deck persistence and an opening-hand practice table. Build with
+`mvn -pl forge-api -am verify`; the executable engine is `target/forge-engine.jar`.
+
 ## Implemented
 
 | Hook | Behavior |
@@ -117,9 +122,9 @@ flowchart LR
    should own the engine subprocess and IPC. If a loopback HTTP/WebSocket transport
    is chosen, bind it locally and authenticate each session.
 
-The desktop shell, transport, match launcher, prompt adapter, and Arena-like
-presentation are follow-up work. This commit is a tested foundation for those
-pieces, not a complete replacement UI or playable headless human-match server.
+The desktop shell, local transport, and deck workshop are implemented in
+`forge-desktop`. The match launcher, prompt adapter, and full gameplay
+presentation remain follow-up work; the beta is not a playable headless human-match server.
 
 ## Upstream maintenance
 

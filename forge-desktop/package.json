@@ -1,0 +1,20 @@
+{
+  "name": "forge-workshop",
+  "productName": "Forge Workshop",
+  "version": "0.1.0-beta.1",
+  "description": "A desktop deck workshop powered by the Forge rules engine",
+  "main": "main.cjs",
+  "private": true,
+  "author": "proflayton",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "electron .",
+    "test": "playwright test",
+    "package": "node scripts/package.cjs"
+  },
+  "devDependencies": {
+    "@electron/packager": "20.3.0",
+    "@playwright/test": "1.63.0",
+    "electron": "44.4.5"
+  }
+}

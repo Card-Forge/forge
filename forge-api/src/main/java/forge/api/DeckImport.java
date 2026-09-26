@@ -1,5 +1,7 @@
 package forge.api;
 
+import forge.StaticData;
+import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
@@ -7,9 +9,11 @@ import forge.deck.DeckSection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /** Paste/import preview using Forge's existing multi-format deck recognizer. */
 public final class DeckImport {
+    private static final Pattern NATIVE_LINE = Pattern.compile("^(\\d+)\\s+(.+\\|.+)$");
     private DeckImport() { }
 
     public record Problem(int line, String kind, String text) { }
@@ -50,6 +54,28 @@ public final class DeckImport {
         DeckSection section = DeckSection.Main;
         String[] lines = text.split("\\R", -1);
         for (int index = 0; index < lines.length; index++) {
+            var nativeLine = NATIVE_LINE.matcher(lines[index].strip());
+            if (nativeLine.matches()) {
+                try {
+                    int quantity = Integer.parseInt(nativeLine.group(1));
+                    if (quantity < 1 || quantity > 1000) { throw new IllegalArgumentException("INVALID_QUANTITY"); }
+                    var request = CardDb.CardRequest.fromString(nativeLine.group(2));
+                    if (request.flags != null && !request.flags.isEmpty()) { throw new IllegalArgumentException("UNSUPPORTED_FLAGS"); }
+                    var data = StaticData.instance();
+                    var edition = data.getCardEdition(request.edition);
+                    forge.item.PaperCard card = null;
+                    for (var database : data.getAvailableDatabases().values()) {
+                        card = database.getCardFromSet(request.cardName, edition, request.artIndex, request.collectorNumber, request.isFoil);
+                        if (card != null) { break; }
+                    }
+                    if (card == null) { throw new IllegalArgumentException("UNKNOWN_PRINTING"); }
+                    if (!section.validate(card)) { throw new IllegalArgumentException("INVALID_SECTION"); }
+                    entries.add(new DeckEditor.Entry(section.name(), CardCatalog.describe(card), quantity));
+                } catch (RuntimeException error) {
+                    problems.add(new Problem(index + 1, "INVALID_FORGE_ROW", lines[index]));
+                }
+                continue;
+            }
             var token = recognizer.recognizeLine(lines[index], section);
             if (token == null) { continue; }
             switch (token.getType()) {
