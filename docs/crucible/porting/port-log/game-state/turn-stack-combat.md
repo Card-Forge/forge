@@ -485,7 +485,7 @@ own `"controls"` branch, `property.substring(8)`, no comparator suffix: every re
 every other unresolved param in this port gets. The Landwalk ignore-check (`StaticAbilityIgnoreLandwalk.java`) stays
 unported: zero real corpus `S:Mode$ IgnoreLandwalk` lines exist, so nothing here can ever need to consult it.
 
-Protection is also now covered, `protectionValid` (staticability.go) built the same per-card way `landwalkType` is:
+Protection is also now covered, `protectionEach` (staticability.go) built the same per-card way `landwalkType` is:
 Java's own `keyword.startsWith("Protection")` branch (`CardFactoryUtil.java:3953-3963`) calls
 `Protection.getProtectionValid(keyword, false)` (`damage=false`, the block-legality call, distinct from the
 damage-prevention one this port never makes) to build `ValidBlocker$`, and that builder's own output differs per card (a
@@ -505,7 +505,7 @@ empty-`validSource` case — `CardFactoryUtil` then omits `ValidBlocker$` entire
 `applyCantBlockBy`'s own `hasValidBlocker=false` contract already gives for free.
 
 Skulk (15 cards, `K:Skulk`, CR 702.118a's "can't be blocked by creatures with greater power") is covered too, but not
-through `cantBlockByKeywords`' fixed-string table or a `protectionValid`/`landwalkType`-shaped per-card-argument reader:
+through `cantBlockByKeywords`' fixed-string table or a `protectionEach`/`landwalkType`-shaped per-card-argument reader:
 its own `ValidBlocker$ Creature.powerGTX` names a `Compare` property whose `X` operand is neither a fixed string nor a
 per-card script value. `CardFactoryUtil.java`'s own Skulk branch hardcodes `st.setSVar("X", "Count$CardPower")` directly
 on the synthesized `StaticAbility`, and `CardProperty.java`'s own `power`-comparison branch always resolves that operand

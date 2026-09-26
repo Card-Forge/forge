@@ -1,0 +1,19 @@
+# ScriptedController.ChooseTargets (control.go) never validates its queued
+# answer against the candidates it was offered, unlike a real player's UI or
+# the AI -- this scenario uses that to isolate the CR 608.2b re-check
+# (targetStillLegal -> cardCantBeTargetedBy) on its own, a target Java could
+# never actually have chosen. TestTargetCandidates* (staticability_internal_test.go)
+# holds the choice-time filter (targetCandidates) to the same rule directly.
+# CR 702.19a: Shroud carries no Activator$ gate at all in Java
+# (CardFactoryUtil.java's own Shroud branch) -- it refuses every spell or
+# ability, its own controller's included. human's own Lightning Bolt at
+# human's own Kalonian Behemoth is still a legal candidate when cast (the
+# players remain legal candidates for ValidTgts$ Any), but the CR 608.2b
+# re-check at resolution (targetStillLegal -> cardCantBeTargetedBy) finds
+# the Behemoth illegal and drops it -- Bolt fizzles, dealing no damage.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets 1
+queue action human cast 3
+passpriority

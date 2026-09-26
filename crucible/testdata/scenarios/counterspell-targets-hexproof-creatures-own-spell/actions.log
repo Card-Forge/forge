@@ -1,0 +1,26 @@
+# StaticAbilityCantTarget.java:70-72's own zone gate: a keyword-generated
+# CantTarget ability with no AffectedZone$ (Hexproof's, CardFactoryUtil.java
+# 3920-3931) only ever applies while the card isInPlay() -- cardCantBeTargetedBy
+# (staticability.go) reproduces this as "target.Zone != Battlefield -> never
+# refuses". Rubbleback Rhino's own printed Hexproof does not protect the
+# creature SPELL on the stack: ai's Counterspell still legally targets it
+# there (its own ValidTgts$ Card only asks stackSpellCandidates, never
+# cardCantBeTargetedBy), and Rhino is countered before it can enter the
+# battlefield and start refusing anything.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+tapformana human 5 G
+tapformana human 6 G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+castspell human 1
+tapformana ai 7 U
+tapformana ai 8 U
+queue targets 1
+castspell ai 9
+resolvestack

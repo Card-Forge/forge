@@ -1,0 +1,19 @@
+# ScriptedController.ChooseTargets (control.go) never validates its queued
+# answer against the candidates it was offered, unlike a real player's UI or
+# the AI -- this scenario uses that to isolate the CR 608.2b re-check
+# (targetStillLegal -> cardCantBeTargetedBy) on its own, a target Java could
+# never actually have chosen. TestTargetCandidates* (staticability_internal_test.go)
+# holds the choice-time filter (targetCandidates) to the same rule directly.
+# CR 702.11b/e: Hexproof only refuses an opponent's spell or ability, its
+# own Activator$ Opponent gate (cardCantBeTargetedBy, staticability.go).
+# ai's own players are still a legal candidate for Lightning Bolt's own
+# ValidTgts$ Any (targetCandidates never returns an empty set here), so
+# casting still succeeds; the CR 608.2b re-check at resolution
+# (targetStillLegal) then finds human's Rubbleback Rhino illegal and drops
+# it, the only target Bolt named -- Bolt fizzles, dealing no damage.
+startturn ai
+advance 3
+tapformana ai 2 R
+queue targets 1
+queue action ai cast 3
+passpriority

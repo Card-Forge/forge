@@ -495,7 +495,7 @@ Resolved: `Power$`, `Toughness$`, `Types$`, `RemoveTypes$`, the `Remove*Types$` 
 triggers, replacements, statics and SVars, `HiddenKeywords$`, `RemoveAllAbilities$`, `Perpetual` and every duration past
 end of turn and Permanent, `Types$ ChosenType`. Debuff fails closed when removing "Protection from <color>" from a card
 whose protection Java would split first. Protection's `Gains$ Choice` asks `ChooseProtectionType`; a card type becomes
-`Protection:<type>` (ProtectEffect's `isACardType` split), which `protectionValid` already reads.
+`Protection:<type>` (ProtectEffect's `isACardType` split), which `protectionEach` already reads.
 
 **Delayed and reflexive triggers** (delayedtrigger.go). `Game.delayed` is `TriggerHandler`'s delayed list: a
 `DB$ DelayedTrigger` line registers itself, fires once, and is gone. `ThisTurn$` lapses as the next turn begins

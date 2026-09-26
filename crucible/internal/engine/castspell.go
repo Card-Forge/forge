@@ -244,18 +244,18 @@ func firstSpellAbility(c *Card) *compile.Ability {
 
 // enchantTargets is every battlefield permanent, across every player, that
 // spec (self's own Enchant restriction, enchantSpec) matches, and that does
-// not refuse self outright (hostRefusesEnchant, staticability.go -- CR
-// 702.16e/702.11h's own Protection/Hexproof gate, a separate question from
-// the card-type restriction spec itself checks) -- CR 601.2c's legal-target
-// set for casting self as an Aura. Matches' own source parameter is self,
-// the same "the enchantment's own id, not the host's" convention
-// cleanupDanglingAttachments (action.go) already uses when re-checking an
-// attached Aura's own restriction after the fact.
+// not refuse self outright (cardCantBeTargetedBy, staticability.go -- CR
+// 702.11b/702.16e/702.19a's own Hexproof/Protection/Shroud gate, a separate
+// question from the card-type restriction spec itself checks) -- CR
+// 601.2c's legal-target set for casting self as an Aura. Matches' own
+// source parameter is self, the same "the enchantment's own id, not the
+// host's" convention cleanupDanglingAttachments (action.go) already uses
+// when re-checking an attached Aura's own restriction after the fact.
 func (g *Game) enchantTargets(spec valid.Spec, controller PlayerID, self CardID) []CardID {
 	var eligible []CardID
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			if Matches(g, g.Card(id), spec, controller, self) && !hostRefusesEnchant(g, g.Card(self), id) {
+			if Matches(g, g.Card(id), spec, controller, self) && !cardCantBeTargetedBy(g, g.Card(id), controller, self) {
 				eligible = append(eligible, id)
 			}
 		}

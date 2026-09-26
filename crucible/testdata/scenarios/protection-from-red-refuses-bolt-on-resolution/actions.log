@@ -1,0 +1,19 @@
+# ScriptedController.ChooseTargets (control.go) never validates its queued
+# answer against the candidates it was offered, unlike a real player's UI or
+# the AI -- this scenario uses that to isolate the CR 608.2b re-check
+# (targetStillLegal -> cardCantBeTargetedBy) on its own, a target Java could
+# never actually have chosen. TestTargetCandidates* (staticability_internal_test.go)
+# holds the choice-time filter (targetCandidates) to the same rule directly.
+# CR 702.16e: Protection's targeting half carries no Activator$ gate either
+# (CardFactoryUtil.java's own Protection branch, ValidSource$ only) --
+# matched against the spell's own color, not who casts it. human's red
+# Lightning Bolt at ai's Narwhal (Protection from red) is still a legal
+# candidate at cast time (ai remains a legal ValidTgts$ Any candidate too),
+# but the CR 608.2b re-check finds Narwhal illegal against ValidSource$
+# Card.Red and drops it -- Bolt fizzles, dealing no damage.
+startturn human
+advance 3
+tapformana human 1 R
+queue targets 3
+queue action human cast 2
+passpriority

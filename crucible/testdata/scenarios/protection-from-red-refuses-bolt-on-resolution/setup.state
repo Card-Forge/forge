@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanbattlefield=Mountain|Id:1
+humanhand=Lightning Bolt|Id:2
+aibattlefield=Narwhal|Id:3

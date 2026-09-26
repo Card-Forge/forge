@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Untap
+humanlife=20
+humanbattlefield=Rubbleback Rhino|Id:1
+ailife=20
+aibattlefield=Pacifism|Id:2|AttachedTo:1

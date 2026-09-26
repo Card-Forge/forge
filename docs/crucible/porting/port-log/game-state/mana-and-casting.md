@@ -319,7 +319,7 @@ monotonic counter, on `Card.Timestamp`'s own "never reused within a game" terms.
 - **`targetsStillLegal`** (`targeting.go`), CR 608.2b's fizzle check: every chosen target re-checked on its own
   ([`## CR 608.2b`](targeting-and-chaining.md#cr-6082b-every-target-re-checked-at-resolution)). An Aura's own single
   `Target` keeps its own check, `auraTargetStillLegal`, which re-runs `enchantTargets`'s two checks (`Matches` against
-  the `Enchant` spec, `hostRefusesEnchant`).
+  the `Enchant` spec, `cardCantBeTargetedBy`).
 - **`moveResolvedSpellToGraveyard`** (`stack.go`), CR 608.2m's own "then it's put into its owner's graveyard," run after
   dispatch (fizzled or resolved) whenever the ability's own `Source` card is still in the `Stack` zone —
   `permanentEffect`/`attachEffect` already move their own source to the battlefield as part of what they resolve into,

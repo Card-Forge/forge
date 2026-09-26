@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Mountain|Id:1|Tapped
+humangraveyard=Lightning Bolt
+ailife=20
+aibattlefield=Narwhal|Id:3

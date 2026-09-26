@@ -368,8 +368,8 @@ converting -- `pushTriggeredAbilities`'s own `a.Controller` is the pushed abilit
 `combatdamage.go`, `continuous.go`, `attack.go`, `castspell.go`, plus `internal/fixture`'s own `dump.go`/`load_test.go`
 (a different package, needing the same field-to-method rename since it reads a card's controller for its own dump/load
 round-trip check). Two engine tests (`action_test.go`) that directly wrote `g.Card(x).Controller = b` to fake "someone
-already controls this" for `hostRefusesEnchant`/`cleanupDanglingAttachments` coverage could not keep doing that: a
-direct field write has nothing left to write to, and even if it did, `applyContinuousControl`'s own
+already controls this" for `hostRefusesAttach`/`cleanupDanglingAttachments` coverage could not keep doing that: a direct
+field write has nothing left to write to, and even if it did, `applyContinuousControl`'s own
 clear-and-rebuild-every-pass contract would wipe it the instant `CheckStateBasedActions` runs. Both now build a real
 `GainControl$ You | Affected$ Card.IsRemembered` permanent and `Memory.Remember` the target instead -- the real
 mechanism exercising the exact behavior the test wants, rather than a field poke standing in for it.

@@ -1,0 +1,9 @@
+# GameEntity.java:292-304 (cantBeEnchantedByMsg): CR 704.5m's ongoing
+# attachment-legality re-check only re-runs the Enchant-restriction match
+# and StaticAbilityCantAttach (hostRefusesAttach, staticability.go) -- never
+# StaticAbilityCantTarget. A host's Hexproof does not make an already
+# -attached Aura fall off (the Aura was a legal target when it targeted the
+# host; CR 704.5m never re-runs that check). ai's Pacifism, attached to
+# human's Rubbleback Rhino before this scenario starts, stays attached
+# through StartTurn's own Untap-step state-based-action pass.
+startturn human

@@ -49,17 +49,19 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     would unlock (PORT-8).
 
     The "cleanup aura" rule's own Protection/Hexproof gap (CR 702.11h/702.16e — a static-ability "can't be enchanted"
-    question, distinct from the `Enchant` restriction itself) is closed too, for both real corpus shapes: a new
-    `hostRefusesEnchant` (`staticability.go`) reuses `protectionValid` (item 28) against the aura card itself rather
-    than a candidate blocker — Java's own Protection branch synthesizes a `Mode$ CantAttach | ValidCard$ <valid>` line
-    alongside CantBlockBy's `ValidBlocker$ <valid>`, the identical string — and reads bare Hexproof's own unconditional
-    "any opponent" form directly (80 of ~110 real `K:Hexproof` lines), the same hardcoded-keyword shape Menace/Skulk
-    already have rather than a general `Mode$ CantTarget` engine this port does not build. Checked both when an Aura is
-    cast (`enchantTargets`, castspell.go, CR 601.2c's own legal-target set) and on every ongoing SBA pass
-    (`cleanupDanglingAttachments`, above). Writing this surfaced a real, separate gap: `protectionValid`/`landwalkType`
-    (item 28) read only a card's PRINTED keyword lines, missing one a Layer 6 continuous effect grants — closed by a new
-    `Card.KeywordLines` (card.go) both now share with `HasKeyword`. A qualified Hexproof (`Hexproof:Black`,
-    `Hexproof:Enchantment`, ...) resolves too now: `hexproofValidSource` (staticability.go) ports
+    question, distinct from the `Enchant` restriction itself) is closed too, for both real corpus shapes: Protection's
+    own `CantAttach` half is `hostRefusesAttach` (`staticability.go`), reusing `protectionEach` (item 28) against the
+    aura card itself rather than a candidate blocker — Java's own Protection branch synthesizes a
+    `Mode$ CantAttach | ValidCard$ <valid>` line alongside CantBlockBy's `ValidBlocker$ <valid>`, the identical string —
+    checked on every ongoing SBA pass (`cleanupDanglingAttachments`, above). Hexproof, Shroud and Protection's targeting
+    half are `cardCantBeTargetedBy` instead (`staticability.go`,
+    [`## Hexproof, Shroud and Protection refuse a target`](porting/port-log/game-state/targeting-and-chaining.md#hexproof-shroud-and-protection-refuse-a-target)),
+    checked when an Aura is cast (`enchantTargets`, castspell.go, CR 601.2c's own legal-target set) and at the CR 608.2b
+    re-check — not on the ongoing SBA pass, since Java's own `cantBeEnchantedByMsg` never re-checks either there.
+    Writing the first version of this (since folded into the split above) surfaced a real, separate gap:
+    `protectionEach`/`landwalkType` (item 28) read only a card's PRINTED keyword lines, missing one a Layer 6 continuous
+    effect grants — closed by a new `Card.KeywordLines` (card.go) both now share with `HasKeyword`. A qualified Hexproof
+    (`Hexproof:Black`, `Hexproof:Enchantment`, ...) resolves too: `hexproofValidSource` (staticability.go) ports
     `KeywordWithType.parse`'s own bare-color-word case (a color name is prefixed `Card.` before it reaches `Matches`,
     since it is not itself a recognized valid-string base — `colorFromName`, valid.go, already has the exact name set)
     and its bare-type fallthrough (a type word stays as-is, `baseMatches`'s own ordinary type check). The ability-source
@@ -1732,7 +1734,7 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     `ValidDefender$ Player.controls<Type>` needed a new `matchesValidDefender` (`staticability.go`): a `Player`, not a
     `Card`, matched the same way `SpellCast`'s own `ValidActivatingPlayer` is (item 26) — `You`/`Opponent`/`Player` bare
     forms plus a `"controls<Type>"` battlefield scan, `landwalkType` reading the type argument straight off the keyword
-    line (`enchantSpec`'s own precedent). Protection's own restriction (`protectionValid`, staticability.go) needed no
+    line (`enchantSpec`'s own precedent). Protection's own restriction (`protectionEach`, staticability.go) needed no
     new property at all: both real corpus shapes — the natural-language "Protection from red" and the colon-structured
     "Protection:Artifact" — resolve through `Matches`/`baseMatches` exactly as written once
     `Protection.getProtectionValid`'s own two branches are reproduced, `keyword.Parse`'s existing space-vs-colon split

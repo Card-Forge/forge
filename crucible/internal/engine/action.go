@@ -694,14 +694,14 @@ func resolveWorldRule(g *Game, controller PlayerController) bool {
 // an Aura, and neither carries an `Enchant` restriction to re-check --
 // `enchantSpec` only ever fires for an Aura.
 //
-// Protection and Hexproof preventing the attachment in the first place (CR
-// 702.11h/702.16e, a static-ability "can't be enchanted" question, not the
-// Enchant string itself) are checked too, via `hostRefusesEnchant`
+// Protection's own CantAttach half preventing the attachment from staying
+// legal (CR 704.5m proper, a static-ability "can't be attached" question,
+// not the Enchant string itself) is checked too, via `hostRefusesAttach`
 // (staticability.go) -- Protection for both real corpus shapes
-// (`protectionValid` already built for CantBlockBy) and bare Hexproof's own
-// unconditional "any opponent" form; a qualified Hexproof (`Hexproof from
-// red`) still is not, needing its own ValidSource$ evaluation this does not
-// attempt (`hostRefusesEnchant`'s own doc comment).
+// (`protectionEach` already built for CantBlockBy). Hexproof and Shroud do
+// not belong here: Java generates no CantAttach ability for either
+// (`hostRefusesAttach`'s own doc comment), so a host gaining hexproof or
+// shroud after an Aura already attached does not make it fall off.
 //
 // Candidates are collected before either Move or Unattach runs, because
 // both mutate the battlefield zone or a card's own attachment list -- the
@@ -718,7 +718,7 @@ func cleanupDanglingAttachments(g *Game, controller PlayerController) bool {
 				if spec, ok := enchantSpec(c); ok {
 					legal = Matches(g, g.Card(host), spec, c.Controller(), id)
 				}
-				legal = legal && !hostRefusesEnchant(g, c, host)
+				legal = legal && !hostRefusesAttach(g, c, host)
 			}
 			switch {
 			case legal:

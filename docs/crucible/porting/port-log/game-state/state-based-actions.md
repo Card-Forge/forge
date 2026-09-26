@@ -95,17 +95,30 @@ ever contain, which would silently destroy every such Aura on the very next `Che
 `AttachedTo` (`CardID`-only) has no representation for "attached to a player" at all, so a player-target Aura is a gap
 this specific check does not close — a distinct, larger one from the type-restriction check it does close.
 
-**`hostRefusesEnchant` (staticability.go) is the OTHER half of the cleanup-aura rule: does the specific host refuse THIS
-specific Aura, a card-property question `enchantSpec`'s own type-restriction check (above) is not.** It is checked from
-both callers of `enchantSpec` -- `enchantTargets` (cast time) and `cleanupDanglingAttachments` (every ongoing SBA pass)
--- in addition to, not instead of, the `Matches` call each already makes. Protection is ported from
-`CardFactoryUtil.java`'s own Protection branch, which synthesizes a
+**Two different Java checks share this rule's "does the specific host refuse THIS specific Aura" question, a
+card-property question `enchantSpec`'s own type-restriction check (above) is not, and this port keeps them in two
+functions rather than one.** `hostRefusesAttach` (staticability.go) is
+`GameEntity.cantBeAttachedMsg -> StaticAbilityCantAttach.cantAttach` (`GameEntity.java:270`) -- Protection's own
+`CantAttach` half only, checked from `cleanupDanglingAttachments` (every ongoing SBA pass, CR 704.5m) in addition to,
+not instead of, its own `Matches` call. `cardCantBeTargetedBy` (staticability.go,
+[`## Hexproof, Shroud and Protection refuse a target`](targeting-and-chaining.md#hexproof-shroud-and-protection-refuse-a-target))
+is `Card.canBeTargetedBy -> StaticAbilityCantTarget.cantTarget` -- Hexproof, Shroud and Protection's targeting half,
+checked from `enchantTargets` (cast time, CR 601.2c) and `auraTargetStillLegal` (the CR 608.2b re-check) instead. Java's
+own `cantBeEnchantedByMsg` (`GameEntity.java:292-304`) never re-checks Hexproof or Shroud for an already -attached Aura,
+only the `Enchant` restriction itself -- a host gaining Hexproof or Shroud after the Aura attached does not make it fall
+off, since the Aura was a legal target when it targeted the host and CR 704.5m never re-runs that check.
+`hostRefusesAttach` checking only Protection is why: putting Hexproof or Shroud there, as one earlier version of this
+port's merged `hostRefusesEnchant` did, would fall an already-attached Aura off the instant its host gained either -- a
+bug this split fixed rather than reproduced (PORT-8 does not apply; no card script depended on the old behavior).
+
+Protection is ported from `CardFactoryUtil.java`'s own Protection branch, which synthesizes a
 `Mode$ CantAttach | Target$ Card.Self | ValidCard$ <valid>` line alongside `CantBlockBy`'s own `ValidBlocker$ <valid>`
--- the identical `valid` string `protectionValid`
+-- the identical `valid` string `protectionEach`
 ([`## Block legality: CantBlockBy`](turn-stack-combat.md#block-legality-cantblockby)) already extracts for blocking,
-matched against the Aura itself here rather than a candidate blocker. Hexproof is ported from `CardFactoryUtil.java`'s
-own Hexproof branch (`Mode$ CantTarget | ValidTarget$ Card.Self | Activator$ Opponent`, plus a `ValidSource$`/`ValidSA$`
-when the keyword names a type): bare `K:Hexproof` (80 of 110 real lines) refuses any opponent's Aura unconditionally,
+matched against the Aura itself here rather than a candidate blocker, once per recognized Protection line (CR 702.16b: a
+card with two or more applies each independently). Hexproof is ported from `CardFactoryUtil.java`'s own Hexproof branch
+(`Mode$ CantTarget | ValidTarget$ Card.Self | Activator$ Opponent`, plus a `ValidSource$`/`ValidSA$` when the keyword
+names a type): bare `K:Hexproof` (80 of 110 real lines) refuses any opponent's Aura unconditionally,
 `Activator$ Opponent` collapsing to the identical `aura.Controller != h.Controller` check every other no-team-simplified
 `Opponent` in this port already makes. A qualified form (`K:Hexproof:Black`, `K:Hexproof:Enchantment`, ..., 30 of 110
 real lines) additionally requires the Aura itself to match a `ValidSource$` string -- `hexproofValidSource` builds that
@@ -116,9 +129,8 @@ case, valid.go), while a bare type word (`Enchantment`, 11 real lines) and an al
 fallthrough handles the first, `propertyMatches`'s own color/type dispatch the second. The ability-source shape
 (`Triggered`/`Activated`, 2 real lines, "Hexproof from triggered/activated abilities") is refused rather than resolved:
 Java's own branch would synthesize `ValidSA$` for these (`getTypeDescription().contains("abilities")`), and `Matches`
-never evaluates a `SpellAbility` -- an Aura's own cast-time targeting is not itself a triggered or activated ability
-doing the targeting anyway, so refusing produces the identical observable result here as correctly resolving it would,
-just for the honest reason rather than an accident of what `Matches` happens to never match.
+never evaluates a `SpellAbility` -- observable outside an Aura's own cast now that `cardCantBeTargetedBy` is called from
+ordinary targeting too, logged in `game-state.md`'s Not ported yet.
 
 ---
 

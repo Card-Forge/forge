@@ -623,7 +623,7 @@ func TestCheckStateBasedActionsAuraSurvivesWhenHostMatchesEnchant(t *testing.T) 
 }
 
 // TestCheckStateBasedActionsAuraGoesToGraveyardWhenHostGainsProtection proves
-// hostRefusesEnchant (staticability.go) is checked on every SBA pass, not
+// hostRefusesAttach (staticability.go) is checked on every SBA pass, not
 // only when the Aura is first cast: a legally attached red Aura falls off
 // (CR 704.5m) the instant its host gains Protection from red, here from a
 // continuous effect (applyContinuousKeyword, continuous.go) rather than a

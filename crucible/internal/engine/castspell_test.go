@@ -365,9 +365,9 @@ func TestCastSpellAuraFailsForEnchantPlayer(t *testing.T) {
 }
 
 // TestCastSpellAuraFailsWhenOnlyTargetHasProtectionFromAuraColor proves
-// hostRefusesEnchant (staticability.go): a red Aura has no legal target
+// cardCantBeTargetedBy (staticability.go): a red Aura has no legal target
 // when the only Creature on the battlefield has Protection from red (CR
-// 702.11h) -- protectionValid's own ValidBlocker string, reused here
+// 702.11h) -- protectionEach's own ValidBlocker string, reused here
 // against the aura itself rather than a candidate blocker.
 func TestCastSpellAuraFailsWhenOnlyTargetHasProtectionFromAuraColor(t *testing.T) {
 	t.Parallel()
@@ -387,7 +387,7 @@ func TestCastSpellAuraFailsWhenOnlyTargetHasProtectionFromAuraColor(t *testing.T
 }
 
 // TestCastSpellAuraFailsWhenOnlyTargetHasHexproofFromOpponent proves
-// hostRefusesEnchant's bare-Hexproof branch: an opponent's Aura has no
+// cardCantBeTargetedBy's bare-Hexproof branch: an opponent's Aura has no
 // legal target when the only Creature on the battlefield has Hexproof (CR
 // 702.11i, "can't be the target of spells or abilities your opponents
 // control").

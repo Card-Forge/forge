@@ -1,0 +1,4 @@
+humanlife=20
+ailife=20
+humanbattlefield=Rubbleback Rhino|Id:1
+aibattlefield=Pacifism|Id:2|AttachedTo:1

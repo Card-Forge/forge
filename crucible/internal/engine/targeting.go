@@ -199,7 +199,8 @@ func (g *Game) targetCandidates(controller PlayerID, source CardID, spec string)
 	parsed := valid.Parse(spec)
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			if Matches(g, g.Card(id), parsed, controller, source) {
+			c := g.Card(id)
+			if Matches(g, c, parsed, controller, source) && !cardCantBeTargetedBy(g, c, controller, source) {
 				candidates = append(candidates, CardEntity(id))
 			}
 		}
@@ -534,9 +535,16 @@ func (g *Game) withoutIllegal(owner *Ability, targets []EntityID, chosen, kept *
 //     Player.java:1033-1043) and still matches owner's ValidTgts$;
 //   - anything else (an ability on the stack, ChangeTargets) is kept.
 //
-// Hexproof, shroud, protection and ward (StaticAbilityCantTarget) are not
-// checked here because targetCandidates does not check them either; that
-// gap is logged once, for both, in game-state.md's Not ported yet.
+// Hexproof, shroud and protection (StaticAbilityCantTarget,
+// cardCantBeTargetedBy) are checked identically to targetCandidates
+// (Java's own SpellAbility.canTarget runs entity.canBeTargetedBy(this) at
+// both call sites regardless of fizzleCheck, no asymmetry). Ward
+// (StaticAbilityCantTarget's own BecomesTarget-triggered cost-tax, a
+// different mechanism entirely) is not; that gap is logged in
+// game-state.md's Not ported yet. Player targets are not checked against
+// Hexproof/Shroud: no card mechanism grants a Player entity either keyword
+// yet (cardCantBeTargetedBy's own doc comment), so there is nothing to
+// check.
 func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 	spec, hasSpec := targetSpec(owner)
 	if pid, ok := e.AsPlayer(); ok {
@@ -558,6 +566,9 @@ func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 		return false
 	}
 	if c.IsPhasedOut() {
+		return false
+	}
+	if cardCantBeTargetedBy(g, c, owner.Controller, owner.Source) {
 		return false
 	}
 	if !hasSpec {
@@ -626,7 +637,7 @@ func (g *Game) restamp(old []targetStamp, targets []EntityID, aura CardID) []tar
 // auraTargetStillLegal is targetsStillLegal's own Aura branch: a's Target
 // (castAura, castspell.go) is still legal only if it is still on the
 // battlefield, still matches self's own Enchant restriction, and still does
-// not refuse self outright (hostRefusesEnchant, staticability.go -- the
+// not refuse self outright (cardCantBeTargetedBy, staticability.go -- the
 // identical two checks enchantTargets already ran to build the candidate set
 // this target was chosen from, castspell.go).
 func (g *Game) auraTargetStillLegal(a *Ability) bool {
@@ -641,9 +652,12 @@ func (g *Game) auraTargetStillLegal(a *Ability) bool {
 	if stamp, ok := a.stampOf(a.Target); ok && stamp != target.zoneStamp {
 		return false
 	}
+	if cardCantBeTargetedBy(g, target, a.Controller, a.Source) {
+		return false
+	}
 	spec, ok := enchantSpec(c)
 	if !ok {
 		return true
 	}
-	return Matches(g, target, spec, a.Controller, a.Source) && !hostRefusesEnchant(g, c, a.Target)
+	return Matches(g, target, spec, a.Controller, a.Source)
 }

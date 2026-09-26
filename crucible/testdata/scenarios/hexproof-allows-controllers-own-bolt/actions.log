@@ -1,0 +1,10 @@
+# CR 702.11b/e: Hexproof's Activator$ Opponent gate (cardCantBeTargetedBy,
+# staticability.go) only ever refuses an opponent's spell or ability --
+# human's own Lightning Bolt at human's own hexproof Rubbleback Rhino stays
+# a legal target throughout, so Bolt resolves normally.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets 1
+queue action human cast 3
+passpriority
