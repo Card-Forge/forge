@@ -87,6 +87,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbSROptimize = new OptionsCheckBox(localizer.getMessage("cbSROptimize"));
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
     private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
+    private final JCheckBox cbUseAlternateArtApi = new OptionsCheckBox(localizer.getMessage("cbUseAlternateArtApi"));
     private final JCheckBox cbPreferLangForUniqueCards = new OptionsCheckBox(localizer.getMessage("cbPreferLangForUniqueCards"));
     private final JCheckBox cbDisableCardImages = new OptionsCheckBox(localizer.getMessage("lblDisableCardImages"));
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
@@ -398,6 +399,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbImageFetcher, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlImageFetcher")), descriptionConstraints);
+
+        pnlPrefs.add(cbUseAlternateArtApi, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUseAlternateArtApi")), descriptionConstraints);
 
         pnlPrefs.add(cbpCardDownloadLang, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardDownloadLang")), descriptionConstraints);
@@ -797,6 +801,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<String> getCbpCardDownloadLangComboBoxPanel() {
         return cbpCardDownloadLang;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbUseAlternateArtApi() {
+        return cbUseAlternateArtApi;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
