@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.4
+# Mana Table — beta 0.1.0-beta.5
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -19,7 +19,7 @@ The first launch gives you **First spark**, a sample 60-card red deck.
    before any deck is created. Files in `.txt`, `.dec`, and `.dck` are supported.
 6. Use **Export** to copy a list, save text, or save a `.dck` for the original Forge.
 7. Choose **Draw a hand** for practice draws. Shuffle, mulligan, draw, and bottom cards.
-8. Choose **Play vs AI** with a Constructed deck. Pick Verdant (green creatures)
+8. Choose **Play vs AI** with a Constructed or Commander deck. Pick Verdant (green creatures)
    or Cinder (red damage), then start a real game. Keep or mulligan your opening
    hand; after a mulligan, select the cards to return and confirm.
 9. Click highlighted cards to play them, use **Auto-pay mana**, and follow the
@@ -28,6 +28,14 @@ The first launch gives you **First spark**, a sample 60-card red deck.
    blocker. Confirm each combat step. Hover over cards to read their rules.
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
+
+Commander games start at 40 life, with 100-card AI decks led by Goreclaw or Torbran.
+If your imported list has all 100 cards in Main, match setup offers a **Commander
+for this game** selector. A single valid leader is selected automatically; other
+choices show any deck-color or structure problems. One copy moves into the command
+zone only in the match copy, leaving the saved list unchanged. Decks with commanders
+already assigned in Cmd keep those leaders, including valid partner pairs.
+Command-zone cards are visible on the table and can be clicked to cast them.
 
 Scripted casual cards and supplemental cards (planes, schemes, dungeons, and
 similar cards) are included. Supplemental cards go into their own deck sections;
@@ -41,12 +49,12 @@ Press `/` to focus search. Press Ctrl+S to retry a failed save.
 
 Deck building uses the engine's real card definitions and structural validation
 for Constructed, Commander, and Limited. The match table runs single Constructed
-games against two AI decks, with engine-controlled turns, London mulligans, mana,
+and one-on-one Commander games, with format-matched AI decks, engine-controlled turns, London mulligans, mana,
 targets, spells, combat, and game results. Your saved deck is not changed by playing.
 The separate opening-hand table remains available for quick practice draws.
 
-This is the first gameplay beta. Unusual card effects and complex board states
-need broader testing. Commander games, multiplayer, sideboarding between games,
+Unusual card effects and complex board states need broader testing.
+Limited matches, games with more than two players, sideboarding between games,
 match saves/resume after closing the app, and animations are not included.
 If a game stops on an unsupported engine interaction, its error appears in the
 decision panel; your deck remains saved and you can start another game.

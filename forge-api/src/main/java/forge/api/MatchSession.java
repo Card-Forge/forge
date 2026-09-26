@@ -27,8 +27,14 @@ import java.util.concurrent.*;
 
 /** One local human-versus-AI game. Mutable engine objects never leave this adapter. */
 public final class MatchSession {
+    private static final forge.util.ITriggerEvent CARD_CLICK = new forge.util.ITriggerEvent() {
+        public int getButton() { return 1; }
+        public int getX() { return 0; }
+        public int getY() { return 0; }
+    };
     private final String id = UUID.randomUUID().toString();
     private final Game game;
+    private final String format;
     private final PlayerControllerHuman human;
     private final PlayerView viewer;
     private final IGuiGame gui;
@@ -63,14 +69,19 @@ public final class MatchSession {
         Pending(String kind, Input input) { this.kind = kind; this.input = input; }
     }
 
-    public MatchSession(Deck deck, String opponent, Path resources, Path profile) {
+    public MatchSession(Deck deck, String format, String opponent, Path resources, Path profile) {
         HeadlessPlatform.initialize(resources, profile);
+        this.format = format;
+        boolean commander = format.equals("Commander");
         var rules = new GameRules(GameType.Constructed);
+        if (commander) rules.addAppliedVariant(GameType.Commander);
         rules.setGamesPerMatch(1);
+        rules.setWarnAboutAICards(false); // Opponent lists are supplied by the host, not chosen by the player.
         var ai = new LobbyPlayerAi(opponent.equals("red") ? "Cinder · AI" : "Verdant · AI", Set.of());
         ai.setAiProfile("Default");
-        var humanPlayer = new RegisteredPlayer(new Deck(deck)).setPlayer(new LobbyPlayerHuman("You"));
-        var computer = new RegisteredPlayer(opponentDeck(opponent)).setPlayer(ai);
+        var aiDeck = commander ? CommanderOpponents.create(opponent) : opponentDeck(opponent);
+        var humanPlayer = (commander ? RegisteredPlayer.forCommander(new Deck(deck)) : new RegisteredPlayer(new Deck(deck))).setPlayer(new LobbyPlayerHuman("You"));
+        var computer = (commander ? RegisteredPlayer.forCommander(aiDeck) : new RegisteredPlayer(aiDeck)).setPlayer(ai);
         var match = new Match(rules, List.of(humanPlayer, computer), "Mana Table");
         game = match.createGame();
         human = (PlayerControllerHuman) game.getPlayers().get(0).getController();
@@ -81,7 +92,7 @@ public final class MatchSession {
         });
         human.setGui(gui);
         for (var player : game.getPlayers()) player.updateOpponentsForView();
-        latest = Map.of("id", id, "revision", 0L, "status", "starting", "message", message);
+        latest = Map.of("id", id, "revision", 0L, "status", "starting", "message", message, "format", format);
         HeadlessPlatform.activate(this);
         game.getAction().invoke(() -> {
             try {
@@ -95,7 +106,10 @@ public final class MatchSession {
     public Map<String, Object> state() { return latest; }
     public boolean finished() { return closed || error != null || game.isGameOver(); }
 
-    public static List<Map<String, String>> opponents() {
+    public static List<Map<String, String>> opponents(String format) {
+        if (format.equals("Commander")) return List.of(
+                Map.of("id", "green", "name", "Verdant", "description", "Goreclaw, Terror of Qal Sisma · Green ramp and big creatures · 100 cards"),
+                Map.of("id", "red", "name", "Cinder", "description", "Torbran, Thane of Red Fell · Red creatures and damage · 100 cards"));
         return List.of(Map.of("id", "green", "name", "Verdant", "description", "Green creatures, mana ramp, and combat tricks"),
                 Map.of("id", "red", "name", "Cinder", "description", "Red creatures and direct damage"));
     }
@@ -167,7 +181,7 @@ public final class MatchSession {
                     case "ok" -> human.selectButtonOk();
                     case "cancel" -> human.selectButtonCancel();
                     case "attackAll" -> human.alphaStrike();
-                    case "card" -> human.selectCard(chosenCard, null, null);
+                    case "card" -> human.selectCard(chosenCard, null, CARD_CLICK);
                     case "player" -> human.selectPlayer(chosenPlayer, null);
                 }
             });
@@ -216,8 +230,13 @@ public final class MatchSession {
             byte[] colors = {MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, MagicColor.COLORLESS};
             String[] labels = {"W", "U", "B", "R", "G", "C"};
             for (int i = 0; i < colors.length; i++) mana.put(labels[i], player.getMana(colors[i]));
+            var commanderDamage = new ArrayList<Object>();
+            if (format.equals("Commander")) for (PlayerView owner : view.getPlayers()) {
+                if (owner.equals(player) || owner.getCommanders() == null) continue;
+                for (CardView commander : owner.getCommanders()) commanderDamage.add(map("name", commander.isFaceDown() ? "Face-down commander" : commander.getCurrentState().getName(), "damage", player.getCommanderDamage(commander)));
+            }
             players.add(map("id", player.getId(), "name", player.equals(viewer) ? "You" : player.getName(), "human", player.equals(viewer),
-                    "life", player.getLife(), "priority", player.getHasPriority(), "mana", mana, "zones", zones));
+                    "life", player.getLife(), "priority", player.getHasPriority(), "mana", mana, "zones", zones, "commanderDamage", commanderDamage));
         }
         var stack = new ArrayList<Object>();
         for (var item : view.getStack()) {
@@ -231,7 +250,7 @@ public final class MatchSession {
             var outcome = game.getOutcome();
             result = outcome.isDraw() ? "Draw" : outcome.getWinningLobbyPlayer() == human.getLobbyPlayer() ? "Victory" : "Defeat";
         }
-        latest = Collections.unmodifiableMap(map("id", id, "revision", ++revision, "status", error != null ? "error" : game.isGameOver() ? "finished" : "playing",
+        latest = Collections.unmodifiableMap(map("id", id, "revision", ++revision, "format", format, "status", error != null ? "error" : game.isGameOver() ? "finished" : "playing",
                 "error", error, "viewerId", viewer.getId(), "turn", view.getTurn(), "phase", view.getPhase() == null ? "Pregame" : view.getPhase().nameForUi,
                 "phaseKey", view.getPhase() == null ? "PREGAME" : view.getPhase().name(),
                 "activePlayerId", view.getPlayerTurn() == null ? null : view.getPlayerTurn().getId(), "players", players,
@@ -288,8 +307,11 @@ public final class MatchSession {
             case "openZones" -> new PlayerZoneUpdates();
             case "tempShowZones" -> a[1];
             case "getAbilityToPlay" -> {
-                var abilities = ((List<SpellAbilityView>)a[1]).stream().filter(SpellAbilityView::canPlay).toList();
-                yield abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility() ? abilities.get(0)
+                // Engine-driven choices (including triggers) have no pointer event and
+                // are not activated abilities. Filtering them by canPlay silently drops triggers.
+                var abilities = a[2] == null ? (List<SpellAbilityView>)a[1]
+                        : ((List<SpellAbilityView>)a[1]).stream().filter(SpellAbilityView::canPlay).toList();
+                yield abilities.size() == 1 && (a[2] == null || !abilities.get(0).promptIfOnlyPossibleAbility()) ? abilities.get(0)
                         : first(choose("Choose an ability", 0, 1, abilities, false, null));
             }
             case "one" -> first(choose((String)a[0], 1, 1, (List<?>)a[1], false, (FSerializableFunction<Object, String>)a[2]));

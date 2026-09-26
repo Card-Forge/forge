@@ -124,15 +124,26 @@ public final class DesktopEngine {
             }
             case "export" -> export(string(p, "kind", "text"));
             case "practice" -> practice(string(p, "action", "shuffle"), number(p, "index", -1));
-            case "matchOpponents" -> MatchSession.opponents();
+            case "matchOpponents" -> MatchSession.opponents(format);
+            case "matchSetup" -> {
+                requireDeck();
+                var preview = MatchSetup.prepare(editor.toDeck(), format, string(p, "commanderId", "")).preview();
+                var result = new LinkedHashMap<String, Object>();
+                result.put("deckId", deckId); result.put("revision", editor.snapshot().revision());
+                result.put("name", editor.snapshot().name()); result.put("setup", preview);
+                result.put("saveError", saveError); result.put("opponents", MatchSession.opponents(format));
+                yield result;
+            }
             case "matchStart" -> {
                 requireDeck();
                 ensureSaved();
                 if (match != null && !match.finished()) throw new IllegalStateException("Finish or concede the current match first");
-                if (!format.equals("Constructed")) throw new IllegalArgumentException("This match beta uses Constructed decks");
-                var validation = editor.validate(DeckFormat.Constructed);
-                if (!validation.valid()) throw new IllegalArgumentException(validation.problem());
-                match = new MatchSession(editor.toDeck(), string(p, "opponent", "green"), resources, directory.getParent());
+                if (p.has("deckId") && !deckId.equals(string(p, "deckId", "")) || p.has("revision") && p.get("revision").getAsLong() != editor.snapshot().revision()) {
+                    throw new IllegalArgumentException("The deck changed. Reopen match setup before starting.");
+                }
+                var prepared = MatchSetup.prepare(editor.toDeck(), format, string(p, "commanderId", ""));
+                if (prepared.preview().problem() != null) throw new IllegalArgumentException(prepared.preview().problem());
+                match = new MatchSession(prepared.deck(), format, string(p, "opponent", "green"), resources, directory.getParent());
                 yield match.state();
             }
             case "matchState" -> match == null ? null : match.state();

@@ -25,7 +25,8 @@ local deck persistence, opening-hand practice, and human-versus-AI matches. Buil
 | `DeckEditor.toDeck()` | Detached Forge deck for existing persistence and match setup |
 | `GameStateMapper.snapshot(view, viewer)` | Immutable records containing turn, phase, players, life, priority, zone counts, visible cards |
 | `GameObservation` | Pollable event revision with explicit unsubscribe/close; raw events never cross the API |
-| `MatchSession` | One human-versus-AI Constructed game, cached state, scoped prompts, controller input, and concession |
+| `MatchSetup` | Validated match copy with a selectable commander when an imported list has no Commander section |
+| `MatchSession` | One human-versus-AI Constructed or Commander game, cached state, scoped prompts, controller input, and concession |
 
 The records contain values rather than live engine objects and can be serialized
 by a future IPC or HTTP adapter. This module does not start a network listener.
@@ -123,8 +124,9 @@ The private desktop transport exposes:
 
 | Request | Parameters / result |
 | --- | --- |
-| `matchOpponents` | Lists the bundled green and red AI decks |
-| `matchStart` | `{opponent}`; validates and copies the current saved Constructed deck |
+| `matchOpponents` | Lists the green and red AI decks for the current deck's format |
+| `matchSetup` | Optional `{commanderId}`; returns deck ID/revision, candidate commanders, validated setup, and opponents |
+| `matchStart` | `{opponent, commanderId?, deckId?, revision?}`; validates a detached match deck and rejects stale setup |
 | `matchState` | Cached snapshot with session `id`, `revision`, `status`, `players`, `stack`, `prompt`, and `result` |
 | `matchAction` | `{sessionId, promptId, ...answer}`; replies once to the current prompt |
 | `matchConcede` | `{sessionId}`; ends the game without editing the deck |
@@ -141,8 +143,14 @@ Replies complete that future directly; controller input runs on the dedicated
 UI executor. This avoids queuing replies behind the blocked game thread. Engine
 state is projected at input boundaries, never read live by the IPC request loop.
 
-The first match beta supports single Constructed games. It has no network peers,
-sideboarding, Commander matches, or durable match saves. Complex card-specific
+The match beta supports single Constructed and one-on-one Commander games.
+Commander setup uses `RegisteredPlayer.forCommander`, the engine's Commander
+variant, 40 life, and 100-card singleton AI decks. Missing commander assignments
+can be supplied from the main deck for that game without changing the saved list.
+Existing commanders, including legal partner pairs, remain intact. Color identity
+and deck conformance are checked before launching.
+
+There are no network peers, sideboarding, Limited matches, or durable match saves. Complex card-specific
 interactions need broader coverage. Unsupported adapter calls surface an error
 and terminate that session so another game can be started safely.
 

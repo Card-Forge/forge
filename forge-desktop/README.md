@@ -22,7 +22,7 @@ executable or set `JAVA_HOME`. Development deck data lives in `forge-desktop/.da
 `FORGE_USER_DATA` overrides the data folder; `FORGE_OFFLINE=1` disables image fetches.
 
 ```sh
-node --test tests/engine.test.cjs tests/match.test.cjs
+node --test tests/engine.test.cjs tests/match.test.cjs tests/commander.test.cjs
 npm test
 npm run package
 ```
@@ -44,13 +44,13 @@ Requests are newline-delimited UTF-8 JSON: `{id, method, params}`. Responses are
 
 Commands: `search`, `list`, `new`, `open`, `snapshot`, `edit`, `rename`, `undo`,
 `redo`, `format`, `save`, `importPreview`, `import`, `export`, `practice`,
-`matchOpponents`, `matchStart`, `matchState`, `matchAction`, `matchConcede`.
+`matchOpponents`, `matchSetup`, `matchStart`, `matchState`, `matchAction`, `matchConcede`.
 Edits require the current deck revision. Saved decks use opaque UUID filenames,
 schema version 1, printing IDs, quantities, and explicit sections. Writes use
 temporary files and atomic replacement where supported. Failed writes remain
 visible and block switching decks until saved.
 
-`MatchSession` hosts one human-versus-AI Constructed game. `matchStart` uses the
+`MatchSession` hosts one human-versus-AI Constructed or Commander game. `matchStart` uses the
 saved current deck and an opponent ID from `matchOpponents`. `matchState` returns
 a cached snapshot with a revision, viewer-filtered zones, stack, and current
 prompt. `matchAction` requires `sessionId` and the current `promptId`; stale or
@@ -58,6 +58,14 @@ duplicate answers are rejected. Card handles belong to that prompt only.
 Synchronous dialogs use response futures so replies cannot deadlock behind the
 waiting engine thread. Returning to the workshop keeps the match active; closing
 the application ends it. See [the API integration guide](../forge-api/README.md).
+
+`matchSetup` returns the current deck ID/revision, format, starting life, opponents,
+and a validated Commander preview. A Commander list without a Cmd section can
+select `commanderId` from its main-deck candidates; the host validates a detached
+99+1 copy and never edits the saved list. A unique valid candidate is preselected.
+Pass `commanderId`, `deckId`, and `revision` to `matchStart` to launch that preview.
+Commander matches use the engine variant, 40 life, singleton AI decks, command-zone
+casting, commander tax, and commander damage. Existing Cmd sections are honored.
 
 Catalog searches include ordinary and supplemental card databases, all faces,
 and scripted casual cards. The UI starts without a query or color/type/mana filter.

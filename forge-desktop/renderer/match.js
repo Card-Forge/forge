@@ -10,6 +10,8 @@
   let selection = [];
   let selectionPrompt;
   let choiceFilter = '';
+  let prepared;
+  let preparing = 0;
 
   function show() {
     document.body.classList.add('in-match');
@@ -23,23 +25,51 @@
 
   async function setup() {
     if (match && !['finished', 'error'].includes(match.status)) { show(); return; }
+    const request = ++preparing;
     await mutationQueue;
-    const deck = await api.request('snapshot');
-    options = await api.request('matchOpponents');
-    $('match-deck-label').textContent = deck.deck.name;
+    const next = await api.request('matchSetup');
+    if (request !== preparing) return;
+    prepared = next;
+    options = prepared.opponents;
+    $('match-deck-label').textContent = prepared.name;
     $('match-opponent-choice').innerHTML = options.map(option => `<option value="${esc(option.id)}">${esc(option.name)}</option>`).join('');
     $('match-opponent-description').textContent = options[0].description;
-    const problem = deck.format !== 'Constructed' ? 'Choose a Constructed deck for this match beta.' : deck.validation.problem || deck.saveError;
+    const configuration = prepared.setup;
+    $('match-commander-field').hidden = !configuration.needsCommander || !configuration.commanderChoices.length;
+    $('match-commander-choice').innerHTML = '<option value="">Choose your commander…</option>' + configuration.commanderChoices.map(card => `<option value="${esc(card.id)}">${esc(card.name)}${card.valid ? '' : ' · deck needs changes'}</option>`).join('');
+    $('match-commander-choice').value = configuration.commanderId;
+    $('match-commanders').hidden = configuration.needsCommander || !configuration.commanders.length;
+    $('match-commanders').textContent = `Commander: ${configuration.commanders.join(' + ')}`;
+    $('match-rules-copy').textContent = `${configuration.format} · One game. Two players. ${configuration.startingLife} life.${configuration.format === 'Commander' ? ' Commander tax and commander damage use the engine rules.' : ' The engine handles casting, mana, targeting, and combat.'}`;
+    updateSetup();
+    $('match-setup').showModal();
+  }
+
+  function updateSetup() {
+    const problem = prepared.saveError || prepared.setup.problem;
     $('match-start-note').textContent = problem || '';
     $('match-start').disabled = Boolean(problem);
-    $('match-setup').showModal();
+  }
+
+  async function chooseCommander() {
+    const request = ++preparing;
+    $('match-start').disabled = true;
+    $('match-start-note').textContent = 'Checking your commander…';
+    try {
+      const next = await api.request('matchSetup', { commanderId: $('match-commander-choice').value });
+      if (request !== preparing) return;
+      prepared = next;
+      $('match-commander-choice').value = next.setup.commanderId;
+      updateSetup();
+    } catch (error) { if (request === preparing) $('match-start-note').textContent = error.message; }
   }
 
   async function start() {
     $('match-start').disabled = true;
     $('match-start-note').textContent = 'Preparing your game…';
     try {
-      const result = await api.request('matchStart', { opponent: $('match-opponent-choice').value });
+      const result = await api.request('matchStart', { opponent: $('match-opponent-choice').value,
+        commanderId: prepared.setup.commanderId, deckId: prepared.deckId, revision: prepared.revision });
       $('match-setup').close();
       displayedRevision = -1;
       show();
@@ -63,17 +93,21 @@
     const hand = zone(player, 'Hand');
     const mana = Object.entries(player.mana).filter(([, count]) => count).map(([color, count]) => `<span class="match-mana">${cost(`{${color}}`)} ${count}</span>`).join('');
     const turn = match.activePlayerId === player.id;
-    const other = ['Graveyard', 'Exile', 'Command'].map(name => {
+    const commands = zone(player, 'Command');
+    const commandZone = commands.cards.length ? `<section class="match-command-zone"><div class="eyebrow">COMMAND ZONE</div><div>${commands.cards.map(cardTile).join('')}</div></section>` : '';
+    const other = ['Graveyard', 'Exile'].map(name => {
       const cards = zone(player, name);
       if (!cards.count) return '';
       return `<details class="match-zone" data-zone="${player.id}-${name}"><summary>${name} <b>${cards.count}</b></summary><div>${cards.cards.map(cardTile).join('') || '<span class="muted">Cards are hidden.</span>'}</div></details>`;
     }).join('');
-    return `<div class="match-player ${turn ? 'has-turn' : ''}"><button class="match-life" data-match-player="${player.id}" aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${turn ? 'Active turn' : 'At the table'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div><div class="match-resources"><span>▱ ${library.count} library</span>${!player.human ? `<span>▰ ${hand.count} in hand</span>` : ''}</div></div><div class="match-battlefield">${field.cards.length ? field.cards.map(cardTile).join('') : '<span class="field-empty">The battlefield is waiting.</span>'}</div>${other ? `<div class="match-other-zones">${other}</div>` : ''}`;
+    const damage = player.commanderDamage?.map(card => `<span title="${esc(card.name)}">${esc(card.name)}: ${card.damage}/21</span>`).join('') || '';
+    return `<div class="match-player ${turn ? 'has-turn' : ''}"><button class="match-life" data-match-player="${player.id}" aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${turn ? 'Active turn' : 'At the table'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div><div class="match-resources"><span>▱ ${library.count} library</span>${!player.human ? `<span>▰ ${hand.count} in hand</span>` : ''}</div></div>${damage ? `<div class="match-commander-damage">Commander damage received · ${damage}</div>` : ''}<div class="match-zones-row"><div class="match-battlefield">${field.cards.length ? field.cards.map(cardTile).join('') : '<span class="field-empty">The battlefield is waiting.</span>'}</div>${commandZone}</div>${other ? `<div class="match-other-zones">${other}</div>` : ''}`;
   }
 
   function render(next) {
     if (!next || next.id === match?.id && next.revision === displayedRevision) return;
     match = next;
+    document.querySelector('.match-heading .eyebrow').textContent = `MANA TABLE · ${next.format || 'Constructed'} · SINGLE GAME`;
     displayedRevision = next.revision;
     $('match-title').textContent = next.result ? next.result === 'Victory' ? 'A game well played.' : next.result === 'Defeat' ? 'Another game. Another lesson.' : 'An even table.' : 'Make your next move.';
     $('match-turn').textContent = next.turn ? `Turn ${next.turn}` : 'Shuffling';
@@ -192,6 +226,7 @@
   });
   for (const id of ['match-tab', 'play-match']) $(id).onclick = () => run(setup);
   $('match-start').onclick = () => run(start);
+  $('match-commander-choice').onchange = chooseCommander;
   $('match-opponent-choice').onchange = event => { $('match-opponent-description').textContent = options.find(option => option.id === event.target.value)?.description || ''; };
   $('match-back').onclick = showWorkshop;
   $('match-concede').onclick = () => $('match-concede-dialog').showModal();

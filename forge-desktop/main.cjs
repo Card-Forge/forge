@@ -16,7 +16,7 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'workshop', privileges: { standa
 
 let window;
 let engine;
-const methods = new Set(['search', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'export', 'practice', 'matchOpponents', 'matchStart', 'matchState', 'matchAction', 'matchConcede']);
+const methods = new Set(['search', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'export', 'practice', 'matchOpponents', 'matchSetup', 'matchStart', 'matchState', 'matchAction', 'matchConcede']);
 function verify(event) {
   if (!window || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame
     || !event.senderFrame.url.startsWith('workshop://app/')) throw new Error('Unknown desktop client');
