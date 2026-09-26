@@ -1,5 +1,6 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -47,6 +48,7 @@ import forge.card.CardSplitType;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
@@ -780,7 +782,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return renderPlaceholder(card, alternate, true);
     }
 
-    private Texture renderPlaceholder(PaperCard card, boolean alternate, boolean displayArt) { //Use CardImageRenderer to output a Texture.
+    private Texture renderPlaceholder(PaperCard card, boolean alternate, boolean displayArt) {
+        if (!Gdx.app.getType().equals(Application.ApplicationType.HeadlessDesktop) && !FThreads.isGuiThread()) {
+            return null;
+        }
+
         if (renderedCount < 1) {
             renderedCount++;
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
@@ -788,8 +794,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             CardImageRenderer.drawCardImage(Forge.getGraphics(), CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
             Forge.getGraphics().end();
         }
-        Matrix4 m = new Matrix4();
         FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
+        // safety check: escape gracefully if the context is uninitialized
+        if (frameBuffer == null) {
+            return null;
+        }
+        Matrix4 m = new Matrix4();
         frameBuffer.begin();
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -812,9 +822,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY, boolean isBooster) {
+        if (!Gdx.app.getType().equals(Application.ApplicationType.HeadlessDesktop) && !FThreads.isGuiThread()) {
+            return;
+        }
+
         int pw = 192;
         int ph = 256;
         FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(pw, ph, false);
+        if (frameBuffer == null) {
+            return;
+        }
         Matrix4 matrix = new Matrix4();
         matrix.setToOrtho2D(0, ph, pw, -ph);
         frameBuffer.begin();
@@ -852,11 +869,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
         int align = Align.left;
         if (generatedTooltip == null) {
+            // If this method was invoked from a background thread,
+            // immediately defer the FrameBuffer compilation onto libGDX's main OpenGL rendering thread
+            if (!Gdx.app.getType().equals(Application.ApplicationType.HeadlessDesktop) && !FThreads.isGuiThread()) {
+                Gdx.app.postRunnable(() -> setItemTooltips(icon, backSprite, isBooster));
+                return;
+            }
+
+            FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
+            // safety check: If the context hasn't fully caught up yet, escape gracefully
+            if (frameBuffer == null) {
+                return;
+            }
             Matrix4 m = new Matrix4();
             GlyphLayout layout = new GlyphLayout();
             ItemData item = getReward().getItem();
             boolean itemExists = item != null;
-            FrameBuffer frameBuffer = Forge.getAssets().getItemFrameBuffer(preview_w, preview_h, true);
             frameBuffer.begin();
             Gdx.gl.glClearColor(0, 0, 0, 0);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -868,10 +896,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Forge.getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
                 if (!isBooster)
                     Forge.getGraphics().drawImage(icon, preview_w / 2f - 75, 160, 160, 160);
-                else //if(loaded)
+                else
                     Forge.getGraphics().drawImage(icon, 74, 100, 345, 480);
-               /* else
-                    Forge.getAssets().getAssetGraphics().drawImage(icon, 0, 0, preview_w, preview_h);*/
+
                 float div = (float) preview_h / preview_w;
                 BitmapFont font = Controls.getBitmapFont("default", 4 / div);
                 if(reward.getType().equals(Reward.Type.CardPack)) {
@@ -907,8 +934,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
         }
 
-        //Rendering code ends here.
-
+        // Rendering code ends here.
         if (toolTipImage == null)
             toolTipImage = new RewardImage(processDrawable(generatedTooltip));
 
@@ -1127,7 +1153,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (T == null) {
                     T = renderPlaceholder(reward.getCard(), false);
                 }
-
                 drawCard(batch, T, x, width, false);
             } else {
                 drawCard(batch, image, x, width, isFoil);
