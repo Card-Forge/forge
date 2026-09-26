@@ -152,7 +152,7 @@ function renderDeck() {
   const order = ['Creatures', 'Planeswalkers', 'Instants', 'Sorceries', 'Enchantments', 'Artifacts', 'Other cards', 'Lands'];
   $('deck-list').innerHTML = grouped.size ? order.filter(group => grouped.has(group)).map(group => {
     const rows = grouped.get(group);
-    return `<div class="group-label">${group} · ${rows.reduce((sum, row) => sum + row.quantity, 0)}</div>` + rows.map(entry => `<div class="deck-row" tabindex="0" data-card="${esc(entry.card.id)}" style="--card-glow:${glow(entry.card)}" title="${esc(entry.card.name)}"><span class="quantity">${entry.quantity}</span><span class="row-name">${esc(entry.card.name)}</span><span class="mana-cost">${cost(entry.card.manaCost)}</span><button class="row-control" data-remove="${esc(entry.card.id)}" aria-label="Remove ${esc(entry.card.name)}">−</button><button class="row-control" data-add="${esc(entry.card.id)}" aria-label="Add ${esc(entry.card.name)}">+</button></div>`).join('');
+    return `<div class="group-label">${group} · ${rows.reduce((sum, row) => sum + row.quantity, 0)}</div>` + rows.map(entry => `<div class="deck-row" tabindex="0" data-card="${esc(entry.card.id)}" style="--card-glow:${glow(entry.card)}"><span class="quantity">${entry.quantity}</span><span class="row-name">${esc(entry.card.name)}</span><span class="mana-cost">${cost(entry.card.manaCost)}</span><button class="row-control" data-remove="${esc(entry.card.id)}" aria-label="Remove ${esc(entry.card.name)}">−</button><button class="row-control" data-add="${esc(entry.card.id)}" aria-label="Add ${esc(entry.card.name)}">+</button></div>`).join('');
   }).join('') : `<div class="empty"><strong>A little room for possibility.</strong>Add cards from the library<br>or drag them into this ${section === 'Main' ? 'deck' : 'section'}.</div>`;
   const main = entries('Main');
   const nonland = main.filter(entry => !entry.card.type.includes('Land'));
@@ -206,7 +206,7 @@ async function practice(action = 'shuffle', index = -1) {
   $('practice-tab').classList.add('active');
   $('workshop-tab').classList.remove('active');
   $('practice-name').textContent = state.deck.name;
-  $('practice-hand').innerHTML = result.hand.map((card, index) => `<div class="hand-card">${cardArt(card)}<button class="text-button" data-bottom="${index}">↓ Bottom</button></div>`).join('');
+  $('practice-hand').innerHTML = result.hand.map((card, index) => `<div class="hand-card" tabindex="0" data-card="${esc(remember(card).id)}" aria-label="Inspect ${esc(card.name)}">${cardArt(card)}<button class="text-button" data-bottom="${index}">↓ Bottom</button></div>`).join('');
   $('practice-stats').textContent = `${result.remaining} in library · ${result.draws} drawn · ${result.mulligans} mulligan${result.mulligans === 1 ? '' : 's'}`;
   $('draw-card').disabled = result.remaining === 0;
   loadArt($('practice-hand'));

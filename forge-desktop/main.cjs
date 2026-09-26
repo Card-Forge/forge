@@ -60,7 +60,7 @@ app.on('second-instance', () => {
 app.whenReady().then(async () => {
   protocol.handle('workshop', request => {
     const pathname = new URL(request.url).pathname;
-    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/match.js', '/match.css']);
+    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/match.js', '/match.css', '/card-preview.js', '/card-preview.css']);
     if (!allowed.has(pathname)) return new Response('Not found', { status: 404 });
     return net.fetch(pathToFileURL(path.join(__dirname, 'renderer', pathname.slice(1))).toString());
   });

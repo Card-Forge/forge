@@ -12,6 +12,8 @@
   let choiceFilter = '';
   let prepared;
   let preparing = 0;
+  let previewCards = [];
+  cardPreview.bind($('match-view'), '[data-preview-card]', element => previewCards[Number(element.dataset.previewCard)]);
 
   function show() {
     document.body.classList.add('in-match');
@@ -84,7 +86,7 @@
     const stats = card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
     const marks = [card.sick ? 'New' : '', card.attacking ? 'Attacking' : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
     const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
-    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" title="${esc(card.name + '\n' + card.text)}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}">${art}<span class="match-card-name">${esc(card.name)}</span>${stats ? `<span class="match-stats">${stats}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}">${art}<span class="match-card-name">${esc(card.name)}</span>${stats ? `<span class="match-stats">${stats}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -106,6 +108,8 @@
 
   function render(next) {
     if (!next || next.id === match?.id && next.revision === displayedRevision) return;
+    cardPreview.hide();
+    previewCards = [];
     match = next;
     document.querySelector('.match-heading .eyebrow').textContent = `MANA TABLE · ${next.format || 'Constructed'} · SINGLE GAME`;
     displayedRevision = next.revision;

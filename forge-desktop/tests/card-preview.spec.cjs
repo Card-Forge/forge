@@ -1,0 +1,131 @@
+const { test, expect, _electron: electron } = require('@playwright/test');
+const path = require('node:path');
+
+test('card previews show readable details without blocking play or retaining stale cards', async () => {
+  const appPath = path.resolve(__dirname, '..');
+  const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
+    FORGE_USER_DATA: path.join(appPath, 'test-results', `preview-ui-${Date.now()}`) };
+  delete environment.ELECTRON_RUN_AS_NODE;
+  const application = await electron.launch({
+    ...(process.env.MANA_TEST_EXECUTABLE ? { executablePath: process.env.MANA_TEST_EXECUTABLE } : {}),
+    args: process.env.MANA_TEST_EXECUTABLE ? [] : [appPath], env: environment
+  });
+  const errors = [];
+  try {
+    const page = await application.firstWindow();
+    page.on('pageerror', error => errors.push(error.message));
+    await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
+    const preview = page.locator('#card-preview');
+    const title = preview.locator('h2');
+    await page.locator('#search').fill('Lightning Bolt');
+    const libraryCard = page.locator('.catalog-card').filter({ has: page.getByRole('heading', { name: 'Lightning Bolt', exact: true }) });
+    await libraryCard.hover();
+    await expect(title).toHaveText('Lightning Bolt');
+    await expect(preview.locator('.preview-rules')).toContainText('3 damage');
+    await expect(preview.locator('.card-art')).toHaveAttribute('data-art', 'Lightning Bolt');
+    await expect(preview).toHaveCSS('pointer-events', 'none');
+    await page.keyboard.press('Escape');
+    await expect(preview).toBeHidden();
+    await page.locator('#deck-list .deck-row').first().hover();
+    await expect(preview).toBeVisible();
+    await page.locator('#practice-button').click();
+    await expect(preview).toBeHidden();
+    const practiceCard = page.locator('#practice-hand .hand-card').first();
+    await practiceCard.hover();
+    await expect(title).toHaveText(await practiceCard.locator('.card-fallback strong').textContent());
+    await page.locator('#workshop-tab').click();
+
+    await page.locator('#import-button').click();
+    await page.locator('#import-name').fill('Preview test');
+    await page.locator('#import-format').selectOption('Commander');
+    await page.locator('#import-text').fill('Deck\n34 Forest\n33 Mountain\n32 Plains\n1 Toph, the First Metalbender');
+    await page.locator('#preview-import').click();
+    await page.locator('#confirm-import').click();
+    await expect(page.locator('#deck-name')).toHaveValue('Preview test');
+    await page.locator('#play-match').click();
+    await page.locator('#match-start').click();
+    const commander = page.locator('#match-human .match-command-zone .match-card');
+    await expect(commander).toBeVisible();
+    const pregame = await page.evaluate(() => window.forge.request('matchState'));
+    if (pregame.prompt?.inputType === 'InputConfirm') {
+      await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', pregame.prompt.id);
+      await page.locator('#match-ok').click();
+    }
+    await expect(page.locator('#match-hand .match-card')).toHaveCount(7);
+    const match = await page.evaluate(() => window.forge.request('matchState'));
+    const card = match.players.find(player => player.human).zones.find(zone => zone.name === 'Command').cards[0];
+    await commander.hover();
+    await expect(title).toHaveText(card.name);
+    await expect(preview.locator('.preview-rules')).toHaveText(card.text);
+    await expect(preview.locator('.preview-stats strong')).toHaveText(`${card.power} / ${card.toughness}`);
+    await expect(commander).toHaveAttribute('aria-describedby', 'card-preview');
+    const assertPlacement = async source => {
+      const a = await source.boundingBox();
+      const b = await preview.boundingBox();
+      const viewport = await page.evaluate(() => ({ width: innerWidth, height: innerHeight }));
+      expect(b.x).toBeGreaterThanOrEqual(0);
+      expect(b.y).toBeGreaterThanOrEqual(0);
+      expect(b.x + b.width).toBeLessThanOrEqual(viewport.width);
+      expect(b.y + b.height).toBeLessThanOrEqual(viewport.height);
+      expect(b.x + b.width <= a.x || b.x >= a.x + a.width || b.y + b.height <= a.y || b.y >= a.y + a.height).toBe(true);
+    };
+    await assertPlacement(commander);
+    await page.screenshot({ path: path.join(appPath, 'test-results/card-preview.png') });
+    const handCard = page.locator('#match-hand .match-card').first();
+    await handCard.hover();
+    await expect(title).toHaveText(await handCard.locator('.match-card-name').textContent());
+    await assertPlacement(handCard);
+    await handCard.click(); // The enlarged view must never intercept card actions.
+    await expect(preview).toBeHidden();
+    await page.mouse.move(0, 0);
+    await page.keyboard.press('Tab');
+    await commander.focus();
+    await expect(title).toHaveText(card.name);
+    await page.keyboard.press('Escape');
+    await expect(preview).toBeHidden();
+    await expect(commander).not.toHaveAttribute('aria-describedby');
+
+    // Exercise the renderer boundary with a face-down card and unusually long rules.
+    await page.evaluate(() => {
+      const fixture = document.createElement('button');
+      fixture.id = 'preview-fixture';
+      fixture.textContent = 'Preview fixture';
+      fixture.style.cssText = 'position:fixed;left:20px;top:100px;width:100px;height:130px;z-index:10';
+      document.body.append(fixture);
+      cardPreview.bind(fixture, '#preview-fixture', () => fixture.dataset.faceDown === 'yes'
+        ? { name: 'PRIVATE CARD NAME', text: 'PRIVATE RULES', faceDown: true, type: 'Creature', power: 9, toughness: 9 }
+        : { name: 'Long rules', text: 'Rules paragraph.\n'.repeat(90), type: 'Creature', power: 4, toughness: 5,
+          faceDown: false, tapped: true, attacking: true, damage: 2, counters: { '+1/+1': 3 } });
+      fixture.dataset.faceDown = 'yes';
+    });
+    const fixture = page.locator('#preview-fixture');
+    await fixture.hover();
+    await expect(title).toHaveText('Face-down card');
+    await expect(preview).not.toContainText('PRIVATE');
+    await expect(preview.locator('[data-art], img, .preview-stats')).toHaveCount(0);
+    await page.mouse.move(0, 0);
+    await fixture.evaluate(element => { element.dataset.faceDown = 'no'; });
+    await fixture.hover();
+    await expect(title).toHaveText('Long rules');
+    await expect(preview.locator('.preview-status')).toContainText('Tapped');
+    await expect(preview.locator('.preview-status')).toContainText('Attacking');
+    await expect(preview.locator('.preview-status')).toContainText('2 damage marked');
+    await expect(preview.locator('.preview-status')).toContainText('3 +1/+1');
+    await expect(preview.locator('.preview-scroll-hint')).toBeVisible();
+    await page.mouse.wheel(0, 500);
+    await expect.poll(() => preview.locator('.preview-rules').evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+    await assertPlacement(fixture);
+    await fixture.evaluate(element => element.remove());
+    await expect(preview).toBeHidden();
+
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1120, 740));
+    await commander.hover();
+    await expect(title).toHaveText(card.name);
+    await assertPlacement(commander);
+    await page.locator('#match-concede').click();
+    await expect(preview).toBeHidden();
+    await page.locator('#match-concede-confirm').click();
+    await expect(page.locator('#match-prompt')).toContainText('Defeat');
+    expect(errors).toEqual([]);
+  } finally { await application.close(); }
+});

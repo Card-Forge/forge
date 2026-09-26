@@ -1,0 +1,36 @@
+.card-preview {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px;
+  max-height: calc(100vh - 24px);
+  border: 1px solid #8b805d;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #29382f, #17221e 65%);
+  box-shadow: 0 16px 65px #000a, 0 0 0 1px #d6be8b15 inset;
+  color: var(--text);
+}
+.preview-visual { min-width: 0; }
+.preview-visual .card-art { border-color: #95845e; }
+.preview-visual small { display: block; margin-top: 10px; color: var(--muted); font-size: 9px; text-align: center; }
+.preview-card-back { display: grid; place-items: center; background: radial-gradient(ellipse, #3a4d3d, #14251f); }
+.preview-card-back span { font: 90px Georgia; color: var(--accent); opacity: .5; }
+.preview-details { display: flex; flex-direction: column; min-width: 0; min-height: 0; max-height: calc(100vh - 58px); }
+.preview-details .eyebrow { font-size: 9px; margin: 3px 0 10px; }
+.preview-details h2 { font: 24px/1.15 Georgia, serif; margin: 0 0 12px; overflow-wrap: anywhere; }
+.preview-cost { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 12px; }
+.preview-cost .mana { width: 22px; height: 22px; font-size: 11px; margin: 0; }
+.preview-type { font-size: 12px; line-height: 1.5; color: #b9c6b7; padding-bottom: 12px; border-bottom: 1px solid #465247; }
+.preview-rules { font: 14px/1.6 'Segoe UI', sans-serif; color: #e0e5d9; white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; min-height: 40px; margin: 14px 0; overscroll-behavior: contain; }
+.preview-scroll-hint { color: var(--accent); font-size: 10px; margin-bottom: 10px; }
+.preview-stats { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #465247; padding-top: 12px; margin-top: auto; }
+.preview-stats span { font-size: 8px; letter-spacing: 1px; color: var(--muted); }
+.preview-stats strong { font: 24px Georgia; color: var(--accent); white-space: nowrap; }
+.preview-status { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.preview-status span { background: #d6be8b18; color: #e1cfa5; padding: 4px 7px; border-radius: 4px; font-size: 10px; }
+.preview-footer { display: flex; justify-content: space-between; gap: 10px; color: #91a48f; font-size: 9px; padding-top: 16px; margin-top: auto; }
+.preview-footer span { color: #b5c3ad; }
+.preview-details > :not(.preview-rules) { flex-shrink: 0; }

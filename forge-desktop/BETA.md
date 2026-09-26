@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.5
+# Mana Table — beta 0.1.0-beta.6
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -12,7 +12,8 @@ The first launch gives you **First spark**, a sample 60-card red deck.
    The library starts unfiltered. **Clear filters** restores the full catalog;
    filtered results show their count alongside the library total. Back-face names
    also find their parent card. Alternate printings are grouped by card name.
-2. Click a card to inspect it. Use **+** or drag it into the deck to add a copy.
+2. Hover over a card for enlarged artwork and readable rules, or click to inspect
+   it in the sidebar. Use **+** or drag it into the deck to add a copy.
 3. Switch between Main, Side, and (for Commander) Cmd. Changes save automatically.
 4. Rename the deck in its title field. Use undo/redo or Ctrl+Z/Ctrl+Y.
 5. Paste a list with **Import deck**, check it, and import. Unknown lines are shown
@@ -25,7 +26,8 @@ The first launch gives you **First spark**, a sample 60-card red deck.
 9. Click highlighted cards to play them, use **Auto-pay mana**, and follow the
    decision panel. Click a player's life total to target them. For combat, select
    attackers or **Attack with all**; to block, select an attacker and then your
-   blocker. Confirm each combat step. Hover over cards to read their rules.
+   blocker. Confirm each combat step. Hover over cards for an enlarged preview
+   with current rules, power/toughness, counters, damage, and combat status.
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
 
@@ -36,6 +38,10 @@ choices show any deck-color or structure problems. One copy moves into the comma
 zone only in the match copy, leaving the saved list unchanged. Decks with commanders
 already assigned in Cmd keep those leaders, including valid partner pairs.
 Command-zone cards are visible on the table and can be clicked to cast them.
+
+Card previews also work in the library, deck list, and opening-hand practice.
+Keyboard focus shows the same details. Press Esc or move away to dismiss a preview;
+for long rules, scroll while hovering over the card to read the remaining text.
 
 Scripted casual cards and supplemental cards (planes, schemes, dungeons, and
 similar cards) are included. Supplemental cards go into their own deck sections;
