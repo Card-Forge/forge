@@ -1,5 +1,9 @@
 # ⚔️  Forge: The Magic: The Gathering Rules Engine
 
+This fork adds an engine API foundation for a custom desktop web UI. See
+[forge-api](forge-api/README.md) for implemented hooks, build instructions, and
+the path to deck-building and match interfaces.
+
 Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 
 [![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)

@@ -1034,6 +1034,11 @@ public class Game {
         events.register(subscriber);
     }
 
+    /** Detach clients when a match or an external UI session closes. */
+    public void unsubscribeFromEvents(final Object subscriber) {
+        events.unregister(subscriber);
+    }
+
     public GameRules getRules() {
         return rules;
     }

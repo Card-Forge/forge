@@ -29,6 +29,8 @@ nbactions.xml
 .flattened-pom.xml
 
 # Ignore binaries, temp files and test output, everywhere
+/.tools/
+/.m2/
 
 target
 test-output
