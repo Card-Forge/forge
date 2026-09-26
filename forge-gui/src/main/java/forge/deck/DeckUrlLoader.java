@@ -69,7 +69,7 @@ public final class DeckUrlLoader {
         throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls", SUPPORTED_PROVIDERS));
     }
 
-    private static Deck importDeck(final DeckUrlProvider.RemoteDeck remoteDeck) throws IOException {
+    static Deck importDeck(final DeckUrlProvider.RemoteDeck remoteDeck) throws IOException {
         final DeckRecognizer recognizer = new DeckRecognizer();
         recognizer.forceImportBannedAndRestrictedCards();
         final List<Token> tokens = recognizer.parseCardList(getRecognizableImportLines(recognizer, remoteDeck.importText()));
