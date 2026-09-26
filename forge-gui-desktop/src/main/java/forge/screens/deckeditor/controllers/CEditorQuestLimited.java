@@ -32,8 +32,8 @@ import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gui.UiCommand;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -44,8 +44,12 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.StreamUtil;
@@ -64,8 +68,6 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
     private final QuestController questData;
     private final DeckController<DeckGroup> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
 
     private Map<PaperCard, Integer> decksUsingMyCards;
 
@@ -232,8 +234,9 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         if (this.controller.getModel() == null) {
             throw new RuntimeException("Expected deck group but found none!");
@@ -262,13 +265,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
     @Override
     public void resetUIChanges() {
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 
 }

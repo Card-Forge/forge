@@ -86,13 +86,23 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        // Skip on other screens (e.g. DRAFTING_PROCESS) — editing would switch screens back here
-        if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_CONSTRUCTED) {
-            editPreferredDeck(lstDecks, preferredDeck);
-        }
+        editPreferredDeck(lstDecks, preferredDeck);
     }
 
+    /**
+     * Opens the preferred deck for editing, if we are already on the screen that
+     * edits it.
+     *
+     * Shared by every deck list doc. All of them route through
+     * DeckManager.editDeck to DECK_EDITOR_CONSTRUCTED, so on any other screen this
+     * would switch screens from inside populate(), while DragCell.setSelected is
+     * still iterating that cell's docs. loadLayout then clears the list underneath
+     * it and the iteration throws.
+     */
     public static void editPreferredDeck(DeckManager lstDecks, String preferredDeck) {
+        if (Singletons.getControl().getCurrentScreen() != FScreen.DECK_EDITOR_CONSTRUCTED) {
+            return;
+        }
         DeckProxy deckProxy = lstDecks.stringToItem(preferredDeck);
         lstDecks.editDeck(deckProxy);
         if (deckProxy != null)

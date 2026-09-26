@@ -21,8 +21,8 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.UiCommand;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -30,7 +30,11 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
@@ -52,8 +56,6 @@ import java.util.function.Supplier;
  */
 public final class CEditorVariant extends CDeckEditor<Deck> {
     private final DeckController<Deck> controller;
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
     private final Predicate<PaperCard> cardPoolCondition;
 
     //=========== Constructor
@@ -172,8 +174,9 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
 
         resetUI();
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         this.controller.refreshModel();
     }
@@ -191,12 +194,6 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
      */
     @Override
     public void resetUIChanges() {
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 }
