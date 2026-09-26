@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.*;
+import java.util.function.IntConsumer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -568,7 +569,9 @@ public class VLobby implements ILobbyView {
     // Re-broadcasts a deck whose card-art sleeve changed, so networked opponents pick up the new sleeve
     void fireDeckSleeveChange(final int index, final Deck deck) {
         if (playerChangeListener != null && deck != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
+            final Deck withSleeve = withSleeveOf(decks[index], deck);
+            decks[index] = withSleeve;
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(withSleeve));
         }
     }
 
@@ -673,9 +676,55 @@ public class VLobby implements ILobbyView {
             } else {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
+            final Deck previous = decks[playerIndex];
             fireDeckChangeListener(playerIndex, deck);
+            // The new main deck replaces the old one wholesale, dropping the scheme, planar and
+            // avatar sections picked for this player, so carry them over (or re-pick them).
+            if (hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble)) {
+                keepVariantSection(playerIndex, previous, DeckSection.Schemes, schemeDeckLists, this::selectSchemeDeck);
+            }
+            if (hasVariant(GameType.Planechase)) {
+                keepVariantSection(playerIndex, previous, DeckSection.Planes, planarDeckLists, this::selectPlanarDeck);
+            }
+            if (hasVariant(GameType.Vanguard)) {
+                keepVariantSection(playerIndex, previous, DeckSection.Avatar, vgdAvatarLists, this::selectVanguardAvatar);
+            }
         }
         mainChooser.saveState();
+    }
+
+    private void keepVariantSection(final int playerIndex, final Deck previous, final DeckSection section,
+            final List<FList<Object>> selectionLists, final IntConsumer reselect) {
+        final Object selected = playerIndex < selectionLists.size() ? selectionLists.get(playerIndex).getSelectedValue() : null;
+        final CardPool kept = variantSectionToKeep(selected, previous, section);
+        if (kept != null) {
+            fireDeckSectionChangeListener(playerIndex, section, kept);
+        } else {
+            reselect.accept(playerIndex);
+        }
+    }
+
+    /**
+     * The variant section a player keeps when they pick a new main deck, or null when it has to be
+     * picked again: when they chose "Use deck's ..." (the new deck's own section applies) or there
+     * was nothing picked before. Keeping it stops a "Random" pick from being re-rolled.
+     */
+    static CardPool variantSectionToKeep(final Object selected, final Deck previous, final DeckSection section) {
+        if (selected instanceof String && ((String) selected).startsWith("Use deck's")) {
+            return null;
+        }
+        if (previous == null || !previous.has(section)) {
+            return null;
+        }
+        return previous.get(section);
+    }
+
+    /** The lobby deck with a new sleeve: keeps the variant sections picked in the lobby, which the saved deck lacks. */
+    static Deck withSleeveOf(final Deck lobbyDeck, final Deck saved) {
+        final Deck withSleeve = new Deck(lobbyDeck == null ? saved : lobbyDeck);
+        withSleeve.setSleeveArtKey(saved.getSleeveArtKey());
+        withSleeve.setSleeveArtOffset(saved.getSleeveArtOffset());
+        return withSleeve;
     }
 
     private void selectSchemeDeck(final int playerIndex) {
