@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.6
+# Mana Table — beta 0.1.0-beta.7
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -42,6 +42,12 @@ Command-zone cards are visible on the table and can be clicked to cast them.
 Card previews also work in the library, deck list, and opening-hand practice.
 Keyboard focus shows the same details. Press Esc or move away to dismiss a preview;
 for long rules, scroll while hovering over the card to read the remaining text.
+
+The match table has separate playmats for you and your opponent. Lands sit behind
+other permanents; lands that become creatures move into the main battlefield row.
+Library, graveyard, and exile piles sit beside each playmat. Click a graveyard or
+exile pile to browse its cards, then click it again to close it. Crowded rows and
+large hands scroll sideways. Life totals remain clickable for player targets.
 
 Scripted casual cards and supplemental cards (planes, schemes, dungeons, and
 similar cards) are included. Supplemental cards go into their own deck sections;

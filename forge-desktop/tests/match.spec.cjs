@@ -54,6 +54,25 @@ test('match table plays cards through engine prompts and resumes after deck brow
     expect(paid).toBe(true);
     expect(mulligan).toBe(true);
     await expect(page.locator('#match-human .match-card')).not.toHaveCount(0);
+    const layout = await page.locator('#match-human').evaluate(element => {
+      const bounds = selector => element.querySelector(selector).getBoundingClientRect().toJSON();
+      return { lands: bounds('.lands-row'), permanents: bounds('.permanents-row'),
+        cards: [...element.querySelectorAll('.battlefield-row .match-card')].map(card => ({
+          card: card.getBoundingClientRect().toJSON(), row: card.parentElement.getBoundingClientRect().toJSON()
+        })) };
+    });
+    expect(layout.lands.y).toBeGreaterThan(layout.permanents.y);
+    for (const { card, row } of layout.cards) {
+      expect(card.y).toBeGreaterThanOrEqual(row.y - 4); // Hover lifts a card slightly.
+      expect(card.y + card.height).toBeLessThanOrEqual(row.y + row.height + 1);
+    }
+    await expect(page.locator('#match-human .lands-row .match-card')).not.toHaveCount(0);
+    await expect(page.locator('#match-human .permanents-row .match-card')).not.toHaveCount(0);
+    await page.locator('#match-human .match-zone summary').first().click();
+    await expect(page.locator('#match-human .match-zone[open] .zone-drawer-title')).toContainText('Graveyard');
+    await page.locator('#match-human .match-zone summary').last().click();
+    await expect(page.locator('.match-zone[open]')).toHaveCount(1);
+    await page.locator('#match-human .match-zone summary').last().click();
     await page.screenshot({ path: path.join(appPath, 'test-results/match-table.png'), fullPage: true });
     await page.locator('#match-back').click();
     await expect(page.locator('#deck-name')).toHaveValue('First spark');

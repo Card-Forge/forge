@@ -86,7 +86,7 @@
     const stats = card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
     const marks = [card.sick ? 'New' : '', card.attacking ? 'Attacking' : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
     const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
-    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}">${art}<span class="match-card-name">${esc(card.name)}</span>${stats ? `<span class="match-stats">${stats}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -99,11 +99,22 @@
     const commandZone = commands.cards.length ? `<section class="match-command-zone"><div class="eyebrow">COMMAND ZONE</div><div>${commands.cards.map(cardTile).join('')}</div></section>` : '';
     const other = ['Graveyard', 'Exile'].map(name => {
       const cards = zone(player, name);
-      if (!cards.count) return '';
-      return `<details class="match-zone" data-zone="${player.id}-${name}"><summary>${name} <b>${cards.count}</b></summary><div>${cards.cards.map(cardTile).join('') || '<span class="muted">Cards are hidden.</span>'}</div></details>`;
+      const top = cards.cards.at(-1);
+      const face = top && !top.faceDown ? cardArt(top) : '<span class="empty-pile" aria-hidden="true">◇</span>';
+      const preview = top ? `data-preview-card="${previewCards.push(top) - 1}"` : '';
+      return `<details class="match-zone" data-zone="${player.id}-${name}"><summary ${preview} aria-label="${name}: ${cards.count} cards">${face}<span>${name} <b>${cards.count}</b></span></summary><div><span class="zone-drawer-title">${esc(player.name)} · ${name}</span>${cards.cards.map(cardTile).join('') || `<span class="muted">${cards.count ? 'Cards are hidden.' : 'No cards here yet.'}</span>`}</div></details>`;
     }).join('');
     const damage = player.commanderDamage?.map(card => `<span title="${esc(card.name)}">${esc(card.name)}: ${card.damage}/21</span>`).join('') || '';
-    return `<div class="match-player ${turn ? 'has-turn' : ''}"><button class="match-life" data-match-player="${player.id}" aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${turn ? 'Active turn' : 'At the table'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div><div class="match-resources"><span>▱ ${library.count} library</span>${!player.human ? `<span>▰ ${hand.count} in hand</span>` : ''}</div></div>${damage ? `<div class="match-commander-damage">Commander damage received · ${damage}</div>` : ''}<div class="match-zones-row"><div class="match-battlefield">${field.cards.length ? field.cards.map(cardTile).join('') : '<span class="field-empty">The battlefield is waiting.</span>'}</div>${commandZone}</div>${other ? `<div class="match-other-zones">${other}</div>` : ''}`;
+    const isLand = card => !card.faceDown && card.type.includes('Land') && !card.type.includes('Creature');
+    const lands = field.cards.filter(isLand);
+    const permanents = field.cards.filter(card => !isLand(card));
+    const row = (name, cards, label) => `<div class="battlefield-row ${name}-row" data-field-row="${player.id}-${name}" aria-label="${esc(player.name)}: ${label}">${cards.map(cardTile).join('') || `<span class="field-empty">${label}</span>`}</div>`;
+    const hiddenHand = !player.human ? `<div class="opponent-hand" aria-label="${hand.count} cards in opponent's hand"><div aria-hidden="true">${Array.from({ length: Math.min(hand.count, 9) }, (_, index) => `<i style="--back-angle:${(index - (Math.min(hand.count, 9) - 1) / 2) * 4}deg"></i>`).join('')}</div><span>${hand.count} in hand</span></div>` : '';
+    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
+    const side = `<aside class="match-side-zones">${commandZone}<div class="match-library" aria-label="${library.count} cards in ${esc(player.name)}'s library"><span class="library-back" aria-hidden="true">M</span><span>Library <b>${library.count}</b></span></div><div class="match-other-zones">${other}</div></aside>`;
+    const fieldRows = player.human ? row('permanents', permanents, 'Battlefield') + row('lands', lands, 'Lands') : row('lands', lands, 'Lands') + row('permanents', permanents, 'Battlefield');
+    const battlefield = `<div class="match-zones-row"><div class="match-battlefield">${fieldRows}</div>${side}</div>`;
+    return player.human ? battlefield + portrait : portrait + battlefield;
   }
 
   function render(next) {
@@ -113,22 +124,28 @@
     match = next;
     document.querySelector('.match-heading .eyebrow').textContent = `MANA TABLE · ${next.format || 'Constructed'} · SINGLE GAME`;
     displayedRevision = next.revision;
-    $('match-title').textContent = next.result ? next.result === 'Victory' ? 'A game well played.' : next.result === 'Defeat' ? 'Another game. Another lesson.' : 'An even table.' : 'Make your next move.';
+    $('match-title').textContent = next.result || 'The battlefield';
     $('match-turn').textContent = next.turn ? `Turn ${next.turn}` : 'Shuffling';
     $('match-phase').textContent = next.phase || 'Preparing the match';
+    $('match-phase').classList.toggle('your-turn', Boolean(next.players?.find(player => player.human && player.id === next.activePlayerId)));
     $('match-concede').hidden = ['finished', 'error'].includes(next.status);
     if (next.players) {
       const opened = new Set([...document.querySelectorAll('.match-zone[open]')].map(element => element.dataset.zone));
+      const scrolls = new Map([...document.querySelectorAll('[data-field-row]')].map(element => [element.dataset.fieldRow, element.scrollLeft]));
+      const handScroll = $('match-hand').scrollLeft;
       const human = next.players.find(player => player.human);
       const opponent = next.players.find(player => !player.human);
       $('match-opponent').innerHTML = opponent ? playerLane(opponent) : '';
       $('match-human').innerHTML = human ? playerLane(human) : '';
       $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(cardTile).join('') : '';
-      $('match-hand-count').textContent = human ? `${zone(human, 'Hand').count} cards · click a highlighted card to act` : '';
+      $('match-hand').scrollLeft = handScroll;
+      $('match-hand-count').textContent = human ? `${zone(human, 'Hand').count} cards · hover to inspect` : '';
       document.querySelectorAll('.match-zone').forEach(element => { element.open = opened.has(element.dataset.zone); });
+      document.querySelectorAll('[data-field-row]').forEach(element => { element.scrollLeft = scrolls.get(element.dataset.fieldRow) || 0; });
       loadArt($('match-view'));
     }
     $('match-stack').innerHTML = next.stack?.length ? next.stack.map((item, index) => `<div class="stack-item"><span>${index === 0 ? 'NEXT TO RESOLVE' : 'WAITING'}</span><strong>${esc(item.name)}</strong><p>${esc(item.text)}</p><small>${esc(item.controller)}</small></div>`).join('') : '<p class="stack-empty">Nothing on the stack.</p>';
+    $('match-stack').parentElement.hidden = !next.stack?.length;
     $('match-notices').innerHTML = next.notices?.length ? next.notices.slice(-5).map(notice => `<p>${esc(notice)}</p>`).join('') : '<p>Click cards to play or select them. Click a player’s life total to target them. Hover over a card to read it.</p>';
     renderPrompt();
   }
@@ -228,6 +245,10 @@
     if (card) answer({ action: 'card', key: card.dataset.matchCard });
     else if (player) answer({ action: 'player', playerId: Number(player.dataset.matchPlayer) });
   });
+  $('match-view').addEventListener('toggle', event => {
+    if (!event.target.matches('.match-zone[open]')) return;
+    document.querySelectorAll('.match-zone[open]').forEach(element => { if (element !== event.target) element.open = false; });
+  }, true);
   for (const id of ['match-tab', 'play-match']) $(id).onclick = () => run(setup);
   $('match-start').onclick = () => run(start);
   $('match-commander-choice').onchange = chooseCommander;
