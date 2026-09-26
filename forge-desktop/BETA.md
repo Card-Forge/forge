@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.3
+# Mana Table — beta 0.1.0-beta.4
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -19,6 +19,15 @@ The first launch gives you **First spark**, a sample 60-card red deck.
    before any deck is created. Files in `.txt`, `.dec`, and `.dck` are supported.
 6. Use **Export** to copy a list, save text, or save a `.dck` for the original Forge.
 7. Choose **Draw a hand** for practice draws. Shuffle, mulligan, draw, and bottom cards.
+8. Choose **Play vs AI** with a Constructed deck. Pick Verdant (green creatures)
+   or Cinder (red damage), then start a real game. Keep or mulligan your opening
+   hand; after a mulligan, select the cards to return and confirm.
+9. Click highlighted cards to play them, use **Auto-pay mana**, and follow the
+   decision panel. Click a player's life total to target them. For combat, select
+   attackers or **Attack with all**; to block, select an attacker and then your
+   blocker. Confirm each combat step. Hover over cards to read their rules.
+10. **Deck workshop** returns to your decks while the match waits for your next
+    decision. **Play** resumes the table. **Concede** ends the game.
 
 Scripted casual cards and supplemental cards (planes, schemes, dungeons, and
 similar cards) are included. Supplemental cards go into their own deck sections;
@@ -30,17 +39,24 @@ Press `/` to focus search. Press Ctrl+S to retry a failed save.
 
 ## What this beta covers
 
-This is a deck-building beta, backed by Forge's real card definitions and deck
-validation. Constructed, Commander, and Limited deck structures are available.
-The practice table tests opening hands. It does **not** run full games, resolve
-spells, enforce mulligan rules, or provide AI opponents yet.
+Deck building uses the engine's real card definitions and structural validation
+for Constructed, Commander, and Limited. The match table runs single Constructed
+games against two AI decks, with engine-controlled turns, London mulligans, mana,
+targets, spells, combat, and game results. Your saved deck is not changed by playing.
+The separate opening-hand table remains available for quick practice draws.
+
+This is the first gameplay beta. Unusual card effects and complex board states
+need broader testing. Commander games, multiplayer, sideboarding between games,
+match saves/resume after closing the app, and animations are not included.
+If a game stops on an unsupported engine interaction, its error appears in the
+decision panel; your deck remains saved and you can start another game.
 
 Deck validation checks structure and Forge's selected deck-format rules. It does
 not certify rotating set legality or current ban lists. Catalog results group
 alternate printings; choosing individual artwork/printings is not in this beta.
 
 Card illustrations load from Scryfall when available. They may use a different
-printing than your deck entry. The card library, deck editing, saves, and practice
+printing than your deck entry. The card library, deck editing, saves, AI matches, and practice
 draws work offline. Previously fetched illustrations are cached; other cards have
 a text fallback. Card definitions and resources reflect the checked-out Forge
 version and are not updated automatically.

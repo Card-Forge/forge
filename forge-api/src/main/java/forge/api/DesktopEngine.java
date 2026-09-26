@@ -37,6 +37,8 @@ public final class DesktopEngine {
     private final List<CardCatalog.CardInfo> hand = new ArrayList<>();
     private int mulligans;
     private int draws;
+    private Path resources;
+    private MatchSession match;
 
     public DesktopEngine(CardCatalog catalog, Path directory) throws Exception {
         this.catalog = catalog;
@@ -51,6 +53,7 @@ public final class DesktopEngine {
         protocol.println(JSON.toJson(Map.of("event", "loading", "message", "Loading Forge card library…")));
         var data = EngineResources.load(Path.of(args[0]));
         var engine = new DesktopEngine(CardCatalog.fromDatabases(data.getAvailableDatabases().values()), Path.of(args[1]));
+        engine.resources = Path.of(args[0]);
         protocol.println(JSON.toJson(Map.of("event", "ready", "printings", engine.catalog.size())));
         try (var input = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
             String line;
@@ -121,6 +124,20 @@ public final class DesktopEngine {
             }
             case "export" -> export(string(p, "kind", "text"));
             case "practice" -> practice(string(p, "action", "shuffle"), number(p, "index", -1));
+            case "matchOpponents" -> MatchSession.opponents();
+            case "matchStart" -> {
+                requireDeck();
+                ensureSaved();
+                if (match != null && !match.finished()) throw new IllegalStateException("Finish or concede the current match first");
+                if (!format.equals("Constructed")) throw new IllegalArgumentException("This match beta uses Constructed decks");
+                var validation = editor.validate(DeckFormat.Constructed);
+                if (!validation.valid()) throw new IllegalArgumentException(validation.problem());
+                match = new MatchSession(editor.toDeck(), string(p, "opponent", "green"), resources, directory.getParent());
+                yield match.state();
+            }
+            case "matchState" -> match == null ? null : match.state();
+            case "matchAction" -> { if (match == null) throw new IllegalStateException("No active match"); yield match.action(p); }
+            case "matchConcede" -> { if (match == null) throw new IllegalStateException("No active match"); yield match.concede(p); }
             default -> throw new IllegalArgumentException("Unknown engine command");
         };
     }

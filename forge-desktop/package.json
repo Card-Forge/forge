@@ -1,8 +1,8 @@
 {
   "name": "mana-table",
   "productName": "Mana Table",
-  "version": "0.1.0-beta.3",
-  "description": "A desktop deck workshop powered by the Forge rules engine",
+  "version": "0.1.0-beta.4",
+  "description": "A deck workshop and playable match table powered by the Forge rules engine",
   "main": "main.cjs",
   "private": true,
   "author": "proflayton",

@@ -377,7 +377,8 @@ public final class FModel {
     }
 
     public static StaticData getMagicDb() {
-        return magicDb.get();
+        // A dedicated engine host may have initialized the shared database before the GUI services.
+        return StaticData.instance() == null ? magicDb.get() : StaticData.instance();
     }
 
     public static ForgePreferences getPreferences() {

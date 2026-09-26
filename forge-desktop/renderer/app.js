@@ -187,6 +187,9 @@ function changeQuantity(card, delta) {
   });
 }
 function showWorkshop() {
+  document.body.classList.remove('in-match');
+  $('match-view').hidden = true;
+  $('match-tab').classList.remove('active');
   $('workshop-view').hidden = false;
   $('practice-view').hidden = true;
   $('workshop-tab').classList.add('active');
@@ -195,6 +198,9 @@ function showWorkshop() {
 async function practice(action = 'shuffle', index = -1) {
   await mutationQueue;
   const result = await api.request('practice', { action, index });
+  document.body.classList.remove('in-match');
+  $('match-view').hidden = true;
+  $('match-tab').classList.remove('active');
   $('workshop-view').hidden = true;
   $('practice-view').hidden = false;
   $('practice-tab').classList.add('active');

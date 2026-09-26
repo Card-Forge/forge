@@ -47,7 +47,39 @@ delete environment.FORGE_OFFLINE;
     await page.locator('#draw-card').click();
     await expect(page.locator('.hand-card')).toHaveCount(8);
     await capture('practice-preview.png');
+    await page.locator('#back-workshop').click();
+    await page.locator('#play-match').click();
+    await page.locator('#match-start').click();
+    let matchState, previousPrompt;
+    const deadline = Date.now() + 60000;
+    while (Date.now() < deadline) {
+      matchState = await page.evaluate(() => window.forge.request('matchState'));
+      assert.notEqual(matchState.status, 'error', matchState.error);
+      const prompt = matchState.prompt;
+      if (!prompt || prompt.id === previousPrompt) { await page.waitForTimeout(100); continue; }
+      await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', prompt.id);
+      const human = matchState.players.find(player => player.human);
+      const field = human.zones.find(zone => zone.name === 'Battlefield').cards;
+      if (field.some(card => card.type.includes('Creature'))) break;
+      previousPrompt = prompt.id;
+      if (prompt.kind === 'choice') {
+        for (let i = 0; i < prompt.min; i++) await page.locator(`[data-choice="${i}"]`).click();
+        if (prompt.min !== 1 || prompt.max !== 1) await page.locator('#match-submit').click();
+      } else if (prompt.kind === 'reveal') await page.locator('#match-submit').click();
+      else if (prompt.inputType === 'InputPassPriority') {
+        const hand = human.zones.find(zone => zone.name === 'Hand').cards;
+        const card = hand.find(card => card.selectable && card.type.includes('Land')) || hand.find(card => card.selectable && card.type.includes('Creature'));
+        if (card) await page.locator(`[data-match-card="${card.key}"]`).click();
+        else await page.locator('#match-ok').click();
+      } else if (prompt.okEnabled) await page.locator('#match-ok').click();
+      else throw new Error('Unhandled packaged match prompt: ' + JSON.stringify(prompt));
+    }
+    assert.ok(matchState.players.find(player => player.human).zones.find(zone => zone.name === 'Battlefield').cards.some(card => card.type.includes('Creature')), 'Packaged engine must cast and resolve a human creature');
+    await capture('match-preview.png');
+    await page.locator('#match-concede').click();
+    await page.locator('#match-concede-confirm').click();
+    await expect(page.locator('#match-prompt')).toContainText('Defeat');
     assert.deepEqual(errors, []);
-    console.log(JSON.stringify({ packaged: true, bundledJava: true, catalogTotal, starterDeck: 60, practiceHand: 8, artworkLoaded: artwork, errors }, null, 2));
+    console.log(JSON.stringify({ packaged: true, bundledJava: true, catalogTotal, starterDeck: 60, practiceHand: 8, playableMatch: true, artworkLoaded: artwork, errors }, null, 2));
   } finally { await application.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

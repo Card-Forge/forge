@@ -59,7 +59,7 @@
         </dependency>
         <dependency>
             <groupId>forge</groupId>
-            <artifactId>forge-game</artifactId>
+            <artifactId>forge-gui</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

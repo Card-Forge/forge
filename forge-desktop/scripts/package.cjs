@@ -1,9 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
+const { createHash } = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const tools = path.join(root, '.tools');
 const appSource = path.join(root, 'forge-desktop');
+const manifestPath = path.join(root, 'dist', 'latest-beta.json');
+const previousBeta = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8').replace(/^\uFEFF/, '')) : null;
 const stamp = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14);
 const build = path.join(tools, `desktop-beta-${stamp}`);
 const stage = path.join(build, 'app');
@@ -22,7 +25,7 @@ delete metadata.scripts;
 fs.writeFileSync(path.join(stage, 'package.json'), JSON.stringify(metadata, null, 2));
 fs.copyFileSync(path.join(root, 'LICENSE'), path.join(stage, 'LICENSE'));
 console.log('Collecting Forge card resources…');
-for (const folder of ['cardsfolder', 'tokenscripts', 'editions', 'languages', 'blockdata', 'lists', 'setlookup']) {
+for (const folder of ['cardsfolder', 'tokenscripts', 'editions', 'languages', 'blockdata', 'lists', 'setlookup', 'ai']) {
   fs.cpSync(path.join(root, 'forge-gui/res', folder), path.join(resources, folder), { recursive: true });
 }
 console.log('Building the bundled Java runtime…');
@@ -43,7 +46,22 @@ if (result.status !== 0) throw new Error('Could not build the Java runtime.');
     fs.copyFileSync(path.join(root, 'LICENSE'), path.join(packaged, 'FORGE-LICENSE.txt'));
     fs.copyFileSync(path.join(appSource, 'BETA.md'), path.join(packaged, 'START-HERE.md'));
     fs.writeFileSync(path.join(packaged, 'SOURCE.txt'), 'Source: https://github.com/proflayton/forge/tree/feature/desktop-beta\nForge upstream: https://github.com/Card-Forge/forge\nForge is GPL-3.0-or-later.\nElectron and Java notices accompany their bundled runtimes.\n');
+    if (previousBeta) {
+      for (const folder of ['decks', 'art']) {
+        const previous = path.join(previousBeta.directory, 'UserData', folder);
+        const destination = path.join(packaged, 'UserData', folder);
+        if (fs.existsSync(previous)) fs.cpSync(previous, destination, { recursive: true, errorOnExist: true, force: false });
+        if (folder === 'decks' && fs.existsSync(previous)) {
+          const files = fs.readdirSync(previous).filter(file => file.endsWith('.json'));
+          for (const file of files) {
+            const digest = directory => createHash('sha256').update(fs.readFileSync(path.join(directory, file))).digest('hex');
+            if (digest(previous) !== digest(destination)) throw new Error(`Saved deck verification failed: ${file}`);
+          }
+          console.log(`Preserved and verified ${files.length} saved deck files from the previous beta.`);
+        }
+      }
+    }
     console.log(`BETA_READY=${path.join(packaged, executable)}`);
   }
-  fs.writeFileSync(path.join(root, 'dist', 'latest-beta.json'), JSON.stringify({ version: metadata.version, directory: packages[0], executable }, null, 2));
+  fs.writeFileSync(manifestPath, JSON.stringify({ version: metadata.version, directory: packages[0], executable }, null, 2));
 })().catch(error => { console.error(error); process.exitCode = 1; });

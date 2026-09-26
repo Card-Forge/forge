@@ -2,12 +2,14 @@
 
 This fork targets a desktop application with a web UI: a fast deck workshop and
 an Arena-inspired match experience, backed by Forge's existing rules and AI.
-`forge-api` is the first integration layer. It depends on `forge-game` and
-`forge-core`, and can load cards without Swing, LibGDX, `FModel`, or a GUI process.
+`forge-api` supplies catalog, deck, and match hooks. It depends on the shared
+`forge-gui` module (including the human controller), `forge-ai`, `forge-game`, and
+`forge-core`. It creates no Swing or LibGDX UI; `HeadlessPlatform` supplies the
+shared controller's platform services and preferences.
 
 The [Mana Table desktop beta](../forge-desktop/README.md) now consumes this
 module through `DesktopEngine`, a private stdin/stdout JSON transport. It includes
-local deck persistence and an opening-hand practice table. Build with
+local deck persistence, opening-hand practice, and human-versus-AI matches. Build with
 `mvn -pl forge-api -am verify`; the executable engine is `target/forge-engine.jar`.
 
 ## Implemented
@@ -23,6 +25,7 @@ local deck persistence and an opening-hand practice table. Build with
 | `DeckEditor.toDeck()` | Detached Forge deck for existing persistence and match setup |
 | `GameStateMapper.snapshot(view, viewer)` | Immutable records containing turn, phase, players, life, priority, zone counts, visible cards |
 | `GameObservation` | Pollable event revision with explicit unsubscribe/close; raw events never cross the API |
+| `MatchSession` | One human-versus-AI Constructed game, cached state, scoped prompts, controller input, and concession |
 
 The records contain values rather than live engine objects and can be serialized
 by a future IPC or HTTP adapter. This module does not start a network listener.
@@ -88,8 +91,8 @@ from a network/renderer thread. Cache and publish the immutable snapshot instead
 Hidden zones publish counts and only cards Forge allows the viewer to see. Hidden
 cards publish no IDs or positional placeholders. Face-down cards are conservatively
 redacted, even for their controller; their IDs, type, mana cost and power/toughness
-are null. A future prompt adapter must issue scoped handles for selecting these
-objects instead of exposing their underlying card IDs. This first projection excludes stack
+are null. `MatchSession` issues scoped handles for selecting these objects instead
+of exposing their underlying card IDs. The original `GameStateMapper` excludes stack
 entries, combat assignments, attachments, counters, mana pools, temporary reveal
 prompts, face-down controller previews, and spectator sessions. Never serialize
 `Game`, `CardView`, alternate states, raw events, or logs directly to a client.
@@ -98,45 +101,56 @@ Close `GameObservation` when the host session closes. It retains the game until
 closed. Its revision is local to that observation and is not a game replay cursor,
 action authorization token, or durable resume ID.
 
-## Path to a playable desktop client
+## Playable desktop integration
 
 ```mermaid
 flowchart LR
-    UI[Desktop web renderer] <-->|proposed IPC| Host[Java host and session adapter]
+    UI[Desktop web renderer] <-->|private IPC| Host[Java host and session adapter]
     Host --> API[forge-api: catalog, decks, projected state]
-    Host <-->|next: prompts and input| GUI[Shared Forge human controller]
+    Host <-->|prompts and input| GUI[Shared Forge human controller]
     API --> Engine[forge-core and forge-game]
     GUI --> Engine
     AI[forge-ai] --> Engine
 ```
 
-1. Build the desktop shell and deck workshop around search, paste preview, section
-   editing, undo, mana curve, validation, and persistence. Use debounced search and
-   virtualized card lists; keep animations in the renderer.
-2. Add a Java host adapter for `IGuiGame` and `IGameController`. Reuse
-   `PlayerControllerHuman` and the existing input queue for priority, target
-   selection, mulligans, mana payment, attackers/blockers, and modal choices.
-   These still live in `forge-gui`; `forge-api` alone cannot run a human match.
-   Supply `IGuiBase` services and match/resource setup required by that adapter.
-3. Give every prompt an ID, player binding, allowed choices, and cardinality;
-   accept each response once and reject old prompt IDs. Dispatch input through
-   Forge's existing controller threading model. Its synchronous prompts block the
-   game loop, so queueing their replies behind that same blocked loop would deadlock.
-4. Extend the projection with stack/combat/mana/counters and transient reveals,
-   testing each visibility rule. Send ordered snapshots/events to the renderer;
-   renderer animation timing must not determine game rules.
-5. Package the Java runtime with the desktop application. A desktop main process
-   should own the engine subprocess and IPC. If a loopback HTTP/WebSocket transport
-   is chosen, bind it locally and authenticate each session.
+`MatchSession` adapts `IGuiGame` to structured prompts and reuses
+`PlayerControllerHuman`, its input queue, and the existing AI. Snapshots add the
+stack, combat flags, counters, mana, and transient reveal choices. Card handles
+are scoped to a prompt; the renderer never receives hidden card IDs or raw logs.
+The original `GameStateMapper` remains a smaller projection for other consumers.
 
-The desktop shell, local transport, and deck workshop are implemented in
-`forge-desktop`. The match launcher, prompt adapter, and full gameplay
-presentation remain follow-up work; the beta is not a playable headless human-match server.
+The private desktop transport exposes:
+
+| Request | Parameters / result |
+| --- | --- |
+| `matchOpponents` | Lists the bundled green and red AI decks |
+| `matchStart` | `{opponent}`; validates and copies the current saved Constructed deck |
+| `matchState` | Cached snapshot with session `id`, `revision`, `status`, `players`, `stack`, `prompt`, and `result` |
+| `matchAction` | `{sessionId, promptId, ...answer}`; replies once to the current prompt |
+| `matchConcede` | `{sessionId}`; ends the game without editing the deck |
+
+Input answers use `action: ok/cancel/attackAll/card/player`, with `key` for a
+visible card or `playerId` for a player. Dialog answers use `choices` (indices in
+selection order), `value` (number/text), or `values` (allocations). Reveal prompts
+need only the two IDs. The prompt supplies cardinality and range constraints;
+the host validates them before dispatch. Combat allocations may allow `action:
+skip`. Old session IDs and prompt IDs fail rather than being replayed.
+
+Synchronous dialogs publish a snapshot before waiting on a response future.
+Replies complete that future directly; controller input runs on the dedicated
+UI executor. This avoids queuing replies behind the blocked game thread. Engine
+state is projected at input boundaries, never read live by the IPC request loop.
+
+The first match beta supports single Constructed games. It has no network peers,
+sideboarding, Commander matches, or durable match saves. Complex card-specific
+interactions need broader coverage. Unsupported adapter calls surface an error
+and terminate that session so another game can be started safely.
 
 ## Upstream maintenance
 
 Keep `upstream` pointed at Card-Forge/forge and `origin` at proflayton/forge.
-The only engine implementation change is the counterpart to event subscription,
-`Game.unsubscribeFromEvents`. The new Maven module is otherwise additive. Preserve
+Shared changes include `Game.unsubscribeFromEvents`, explicit resource/profile
+path overrides, and reusing initialized `StaticData` from `FModel.getMagicDb`.
+The new host, protocol, and renderer live in their own modules. Preserve
 the repository's existing license and attribution. Forge's existing resources
 remain the source of truth for card definitions and rules.

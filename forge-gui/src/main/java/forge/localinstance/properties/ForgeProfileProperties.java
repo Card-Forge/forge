@@ -156,6 +156,12 @@ public class ForgeProfileProperties {
 
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> getDefaultDirs() {
+        // Embedders can keep engine preferences and caches within their own portable profile.
+        String embeddedUserDir = System.getProperty("forge.userDir");
+        String embeddedCacheDir = System.getProperty("forge.cacheDir");
+        if (embeddedUserDir != null && embeddedCacheDir != null) {
+            return Pair.of(embeddedUserDir, embeddedCacheDir);
+        }
         if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
             // iOS: Main.java points these at the writable Documents sandbox; the
             // assets dir is the read-only app bundle, so deriving data/cache from

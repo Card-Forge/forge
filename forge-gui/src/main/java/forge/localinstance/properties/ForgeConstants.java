@@ -38,7 +38,7 @@ public final class ForgeConstants {
     public static final String PROFILE_FILE                     = ASSETS_DIR + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE            = PROFILE_FILE + ".example";
 
-    public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
+    public static final String RES_DIR                      = System.getProperty("forge.resources", ASSETS_DIR + "res" + PATH_SEPARATOR);
     public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_DIR         = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_LIST_DIR   = ADVENTURE_COMMON_DIR  + "list" + PATH_SEPARATOR;
