@@ -29,8 +29,8 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         long minutes = (totalSeconds % 3600) / 60;
         long seconds = totalSeconds % 60;
         return hours > 0
-                ? String.format("%dh:%02dm:%02ds", hours, minutes, seconds)
-                : String.format("%dm:%02ds", minutes, seconds);
+                ? String.format("%dh : %02dm : %02ds", hours, minutes, seconds)
+                : String.format("%dm : %02ds", minutes, seconds);
     }
 
     @Override
