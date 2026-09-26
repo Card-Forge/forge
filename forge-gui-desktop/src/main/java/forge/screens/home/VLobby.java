@@ -24,6 +24,7 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
+import forge.gui.CommanderChooser;
 import forge.gui.FThreads;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
@@ -115,6 +116,11 @@ public class VLobby implements ILobbyView {
     private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
     private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final Deck[] decks = new Deck[MAX_PLAYERS];
+    // Commander variant: each deck as picked in the deck chooser, who may lead it, and the
+    // commander(s) the player picked instead of the default. Picks are never saved to the deck.
+    private final Deck[] baseDecks = new Deck[MAX_PLAYERS];
+    private final Map<Integer, List<CommanderOptions.Option>> commanderOptions = new HashMap<>();
+    private final Map<Integer, List<PaperCard>> commanderPicks = new HashMap<>();
 
     // Variants
     private final List<FList<Object>> schemeDeckLists = new ArrayList<>();
@@ -673,9 +679,162 @@ public class VLobby implements ILobbyView {
             } else {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
-            fireDeckChangeListener(playerIndex, deck);
+            fireDeckChangeListener(playerIndex, prepareCommanderPick(playerIndex, deck));
         }
         mainChooser.saveState();
+    }
+
+    /**
+     * Records the newly selected deck and works out who may lead it. Returns the deck to use:
+     * the deck itself, or a copy led by the player's earlier pick when a lobby refresh
+     * reselects the same deck.
+     */
+    private Deck prepareCommanderPick(final int index, final Deck deck) {
+        final Deck previousBase = baseDecks[index];
+        final List<PaperCard> previousPick = commanderPicks.remove(index);
+        baseDecks[index] = deck;
+        commanderOptions.remove(index);
+        if (deck == null || !hasVariant(GameType.Commander)) {
+            updateCommanderPickButton(index);
+            return deck;
+        }
+        commanderOptions.put(index, CommanderOptions.getOptions(deck, DeckFormat.Commander));
+
+        Deck result = deck;
+        if (previousPick != null && previousBase != null
+                && deck.getName().equals(previousBase.getName()) && isValidCommanderPick(deck, previousPick)) {
+            result = CommanderOptions.withCommanders(deck, previousPick);
+            commanderPicks.put(index, previousPick);
+        }
+        updateCommanderPickButton(index);
+        return result;
+    }
+
+    private static boolean isValidCommanderPick(final Deck deck, final List<PaperCard> pick) {
+        for (final PaperCard card : pick) {
+            if (!deck.getMain().contains(card) && !deck.getCommanders().contains(card)) {
+                return false;
+            }
+        }
+        return DeckFormat.Commander.getCommanderConformanceProblem(CommanderOptions.withCommanders(deck, pick)) == null;
+    }
+
+    /** Opens the commander picker for a player and applies their choice to the lobby deck. */
+    void chooseCommander(final int index) {
+        final List<CommanderOptions.Option> options = commanderOptions.get(index);
+        final Deck base = baseDecks[index];
+        if (options == null || options.isEmpty() || base == null || decks[index] == null) {
+            return;
+        }
+
+        final List<PaperCard> current = commanderPicks.getOrDefault(index, base.getCommanders());
+        int selected = 0;
+        for (int i = 0; i < options.size(); i++) {
+            final List<PaperCard> commanders = options.get(i).getCommanders();
+            if (isSameCommanders(commanders, current) || commanders.size() == 1 && current.contains(commanders.get(0))) {
+                selected = i;
+                break;
+            }
+        }
+
+        final String playerName = getPlayerPanel(index).getPlayerName();
+        final CommanderOptions.Option option = CommanderChooser.choose(
+                localizer.getMessage("lblChooseCommanderFor", playerName),
+                localizer.getMessage("lblChooseCommanderHint"),
+                options, selected, this::describeCommanderOption, o -> o.getCommanders().get(0));
+        if (option == null) {
+            return;
+        }
+
+        List<PaperCard> picked = option.getCommanders();
+        if (picked.size() == 1) {
+            final PaperCard commander = picked.get(0);
+            final List<PaperCard> partners = CommanderOptions.getPartnerOptions(base, commander, DeckFormat.Commander);
+            if (!partners.isEmpty()) {
+                // Optional.empty() stands for "No partner"; null means the dialog was cancelled.
+                // It's left out when the commander needs a partner to cover the deck's colors.
+                final List<Optional<PaperCard>> partnerChoices = new ArrayList<>();
+                if (option.getKind() == CommanderOptions.Kind.DEFAULT
+                        || CommanderOptions.canLeadAlone(base, commander, DeckFormat.Commander)) {
+                    partnerChoices.add(Optional.empty());
+                }
+                int selectedPartner = 0;
+                for (final PaperCard partner : partners) {
+                    if (current.contains(commander) && current.contains(partner)) {
+                        selectedPartner = partnerChoices.size();
+                    }
+                    partnerChoices.add(Optional.of(partner));
+                }
+                final Optional<PaperCard> partner = CommanderChooser.choose(
+                        localizer.getMessage("lblChoosePartnerFor", CardTranslation.getTranslatedName(commander.getName())),
+                        localizer.getMessage("lblChooseCommanderHint"),
+                        partnerChoices, selectedPartner,
+                        p -> p.map(c -> CardTranslation.getTranslatedName(c.getName())).orElse(localizer.getMessage("lblNoPartner")),
+                        p -> p.orElse(null));
+                if (partner == null) {
+                    return;
+                }
+                if (partner.isPresent()) {
+                    picked = Arrays.asList(commander, partner.get());
+                }
+            }
+        }
+
+        if (isSameCommanders(picked, base.getCommanders())) {
+            commanderPicks.remove(index);
+        } else {
+            commanderPicks.put(index, picked);
+        }
+        fireDeckChangeListener(index, CommanderOptions.withCommanders(decks[index], picked));
+        updateCommanderPickButton(index);
+    }
+
+    private void updateCommanderPickButton(final int index) {
+        if (index >= playerPanels.size()) {
+            return;
+        }
+        final PlayerPanel panel = getPlayerPanel(index);
+        final List<CommanderOptions.Option> options = commanderOptions.get(index);
+        final Deck base = baseDecks[index];
+        if (options == null || options.isEmpty() || base == null) {
+            panel.setCommanderPick("", false);
+            return;
+        }
+        final List<PaperCard> pick = commanderPicks.get(index);
+        final List<PaperCard> defaults = base.getCommanders();
+        boolean hasChoices = options.size() > 1;
+        if (!hasChoices && defaults.size() == 1) {
+            // A lone default commander may still be able to take a partner from the deck
+            hasChoices = !CommanderOptions.getPartnerOptions(base, defaults.get(0), DeckFormat.Commander).isEmpty();
+        }
+        final String text = pick == null
+                ? describeCommanders(defaults) + " (" + localizer.getMessage("lblDefaultCommanderTag") + ")"
+                : describeCommanders(pick);
+        panel.setCommanderPick(text, hasChoices);
+    }
+
+    private String describeCommanderOption(final CommanderOptions.Option option) {
+        final String names = describeCommanders(option.getCommanders());
+        switch (option.getKind()) {
+            case DEFAULT:
+                return names + " (" + localizer.getMessage("lblDefaultCommanderTag") + ")";
+            case SUGGESTED:
+                return names + " (" + localizer.getMessage("lblSuggestedCommanderTag") + ")";
+            default:
+                return names;
+        }
+    }
+
+    private static String describeCommanders(final List<PaperCard> commanders) {
+        final List<String> names = new ArrayList<>();
+        for (final PaperCard commander : commanders) {
+            names.add(CardTranslation.getTranslatedName(commander.getName()));
+        }
+        return String.join(" + ", names);
+    }
+
+    private static boolean isSameCommanders(final List<PaperCard> a, final List<PaperCard> b) {
+        return a.size() == b.size() && a.containsAll(b) && b.containsAll(a);
     }
 
     private void selectSchemeDeck(final int playerIndex) {
