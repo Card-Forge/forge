@@ -3,14 +3,11 @@ package forge.player;
 import com.google.common.collect.Maps;
 import forge.game.player.PlayerView;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
-public class PlayerZoneUpdates implements Iterable<PlayerZoneUpdate>, Serializable {
-    private static final long serialVersionUID = 7023549243041119023L;
-
+public class PlayerZoneUpdates implements Iterable<PlayerZoneUpdate> {
     private final Map<PlayerView, PlayerZoneUpdate> updates = Collections.synchronizedMap(Maps.newHashMap());
 
     public PlayerZoneUpdates() {

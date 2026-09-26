@@ -795,15 +795,6 @@ public class MatchScreen extends FScreen {
         }
     }
 
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        // pfps needs to actually do something
-        return zonesToUpdate; // pfps should return only those zones newly shown
-    }
-
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        // pfps needs to actually do something
-    }
-
     public void updateSingleCard(final CardView card) {
         if (card == null)
             return;

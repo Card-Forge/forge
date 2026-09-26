@@ -124,7 +124,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (showExileUpdate) {
                 showExileUpdate = false;
-                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets, false);
+                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets);
                 activatingPlayer = null;
                 playersWithValidTargets.clear();
             }

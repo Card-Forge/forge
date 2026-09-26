@@ -15,7 +15,6 @@ import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
-import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.IHasForgeLog;
@@ -23,7 +22,6 @@ import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +44,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     finishGame          (Mode.SERVER, Void.TYPE),
     showManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
-    tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
-    hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
     getAbilityToPlay    (Mode.SERVER, SpellAbilityView.class, CardView.class, List/*SpellAbilityView*/.class, ITriggerEvent.class),
     assignCombatDamage  (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE, Boolean.TYPE),
@@ -67,12 +63,12 @@ public enum ProtocolMethod implements IHasForgeLog {
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
     clearSelectables    (Mode.SERVER, Void.TYPE),
+    showRevealedCards   (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    hideRevealedCards   (Mode.SERVER, Void.TYPE),
     setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*GameEntityView*/.class, Boolean.TYPE),
     setWeaklySelectable (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearWeaklySelectable(Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
-    openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
-    restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
