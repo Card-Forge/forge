@@ -340,6 +340,7 @@ Volver:Volvers
 Vorta:Vorta
 Vulcan:Vulcans
 Wall:Walls
+Walrus:Walruses
 Warlock:Warlocks
 Warrior:Warriors
 Weasel:Weasels
