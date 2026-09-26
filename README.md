@@ -1,9 +1,15 @@
-# ⚔️  Forge: The Magic: The Gathering Rules Engine
+# Mana Table
 
-This fork includes **Forge Workshop**, a desktop deck-building beta with card
+**Mana Table** is a desktop deck-building beta powered by the Forge engine, with card
 search, imports, autosave, undo/redo, and opening-hand practice. See the
 [desktop beta guide](forge-desktop/BETA.md) and [development instructions](forge-desktop/README.md).
 The [engine API](forge-api/README.md) provides the foundation for a future match UI.
+
+Launch the local Windows build with **Launch Mana Table.cmd**.
+
+## Upstream Forge
+
+The information below describes the original Forge engine and its applications.
 
 Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 

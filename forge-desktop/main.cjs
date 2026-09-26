@@ -4,13 +4,14 @@ const fs = require('node:fs');
 const { pathToFileURL } = require('node:url');
 const { createHash } = require('node:crypto');
 const { EngineClient } = require('./engine-client.cjs');
+const { productName } = require('./package.json');
 
 const project = path.resolve(__dirname, '..');
 const userData = process.env.FORGE_USER_DATA || (app.isPackaged
   ? path.join(path.dirname(process.execPath), 'UserData') : path.join(__dirname, '.data'));
 fs.mkdirSync(userData, { recursive: true });
 app.setPath('userData', userData);
-app.setName('Forge Workshop');
+app.setName(productName);
 protocol.registerSchemesAsPrivileged([{ scheme: 'workshop', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 
 let window;
@@ -36,7 +37,7 @@ function art(name) {
     lastArtRequest = Date.now();
     try {
       const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(name)}&format=image&version=normal`, {
-        headers: { 'User-Agent': 'ForgeWorkshop/0.1.0 (https://github.com/proflayton/forge)', Accept: 'image/jpeg' },
+        headers: { 'User-Agent': `ManaTable/${app.getVersion()} (https://github.com/proflayton/forge)`, Accept: 'image/jpeg' },
         signal: AbortSignal.timeout(8000)
       });
       if (!response.ok || !response.headers.get('content-type')?.startsWith('image/')) return null;
@@ -68,7 +69,7 @@ app.whenReady().then(async () => {
   Menu.setApplicationMenu(null);
   window = new BrowserWindow({
     width: 1540, height: 980, minWidth: 1120, minHeight: 740, backgroundColor: '#101415',
-    title: 'Forge Workshop · Beta', show: process.env.FORGE_TEST !== '1',
+    title: `${productName} · Beta`, show: process.env.FORGE_TEST !== '1',
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: true, nodeIntegration: false }
   });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));

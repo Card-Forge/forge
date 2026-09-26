@@ -1,6 +1,6 @@
-# Forge Workshop — beta 0.1.0
+# Mana Table — beta 0.1.0-beta.2
 
-Double-click **Forge Workshop.exe**. Keep the executable with its accompanying
+Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
@@ -53,6 +53,6 @@ app. No installer or administrator privileges are needed.
 ## Credits
 
 Forge engine and card scripts: the Card-Forge contributors, GPL-3.0-or-later.
-Desktop work: proflayton's Forge fork. Card illustrations: Scryfall / respective
+Mana Table desktop app: proflayton. Card illustrations: Scryfall / respective
 rights holders. Magic: The Gathering belongs to Wizards of the Coast. This is an
 independent fan project.

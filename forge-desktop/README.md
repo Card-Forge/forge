@@ -1,4 +1,4 @@
-# Forge Workshop desktop beta
+# Mana Table desktop beta
 
 A local Electron renderer connected to the Forge Java engine through private
 stdin/stdout pipes. No HTTP server is started. The renderer has no Node access;

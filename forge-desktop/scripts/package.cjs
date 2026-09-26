@@ -31,18 +31,19 @@ const result = spawnSync(path.join(javaHome, 'bin/jlink.exe'), ['--add-modules',
 if (result.status !== 0) throw new Error('Could not build the Java runtime.');
 (async () => {
   const { packager } = await import('@electron/packager');
-  const output = path.join(root, 'dist', `ForgeWorkshop-${metadata.version}-${stamp}`);
+  const output = path.join(root, 'dist', `${metadata.productName.replace(/\s+/g, '')}-${metadata.version}-${stamp}`);
+  const executable = `${metadata.productName}.exe`;
   const packages = await packager({
-    dir: stage, name: 'Forge Workshop', platform: 'win32', arch: 'x64', out: output, overwrite: false,
+    dir: stage, name: metadata.productName, platform: 'win32', arch: 'x64', out: output, overwrite: false,
     asar: true, prune: false, electronVersion: require('electron/package.json').version,
     extraResource: [jar, resources, runtime],
-    win32metadata: { CompanyName: 'proflayton', FileDescription: 'Forge Workshop desktop beta', ProductName: 'Forge Workshop' }
+    win32metadata: { CompanyName: 'proflayton', FileDescription: `${metadata.productName} desktop beta`, ProductName: metadata.productName }
   });
   for (const packaged of packages) {
     fs.copyFileSync(path.join(root, 'LICENSE'), path.join(packaged, 'FORGE-LICENSE.txt'));
     fs.copyFileSync(path.join(appSource, 'BETA.md'), path.join(packaged, 'START-HERE.md'));
     fs.writeFileSync(path.join(packaged, 'SOURCE.txt'), 'Source: https://github.com/proflayton/forge/tree/feature/desktop-beta\nForge upstream: https://github.com/Card-Forge/forge\nForge is GPL-3.0-or-later.\nElectron and Java notices accompany their bundled runtimes.\n');
-    console.log(`BETA_READY=${path.join(packaged, 'Forge Workshop.exe')}`);
+    console.log(`BETA_READY=${path.join(packaged, executable)}`);
   }
-  fs.writeFileSync(path.join(root, 'dist', 'latest-beta.json'), JSON.stringify({ version: metadata.version, directory: packages[0] }, null, 2));
+  fs.writeFileSync(path.join(root, 'dist', 'latest-beta.json'), JSON.stringify({ version: metadata.version, directory: packages[0], executable }, null, 2));
 })().catch(error => { console.error(error); process.exitCode = 1; });

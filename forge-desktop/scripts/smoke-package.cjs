@@ -10,7 +10,7 @@ delete environment.FORGE_JAVA;
 delete environment.JAVA_HOME;
 delete environment.FORGE_OFFLINE;
 (async () => {
-  const application = await electron.launch({ executablePath: path.join(beta.directory, 'Forge Workshop.exe'), args: ['--disable-gpu'], env: environment });
+  const application = await electron.launch({ executablePath: path.join(beta.directory, beta.executable), args: ['--disable-gpu'], env: environment });
   try {
     const page = await application.firstWindow();
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
@@ -28,6 +28,9 @@ delete environment.FORGE_OFFLINE;
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     assert.equal(await application.evaluate(({ app }) => app.isPackaged), true);
+    assert.equal(await application.evaluate(({ app }) => app.getName()), 'Mana Table');
+    await expect(page).toHaveTitle('Mana Table');
+    await expect(page.locator('.brand')).toHaveText('MMANATABLE');
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     await expect(page.locator('#main-count')).toHaveText('60');
     console.log('Packaged engine and starter deck ready.');
