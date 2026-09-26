@@ -8,14 +8,15 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.util.Aggregates;
 import forge.util.IterableUtil;
-import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static forge.gamemodes.limited.CardRanker.getOrderedRawScores;
 import static forge.gamemodes.limited.CardRanker.rankCardsInPack;
@@ -28,8 +29,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         deckCols = new DeckColors();
     }
 
-    @Override
-    public PaperCard chooseCard() {
+    private PaperCard chooseCard() {
         if (packQueue.isEmpty()) {
             return null;
         }
@@ -44,8 +44,9 @@ public class LimitedPlayerAI extends LimitedPlayer {
         CardPool pool = deck.getOrCreate(DeckSection.Sideboard);
 
         PaperCard bestPick;
-        if (hasArchdemonCurse()) {
-            bestPick = pickFromArchdemonCurse(chooseFrom);
+        if (isPackHidden()) {
+            // The engine replaces a hidden pick with a random card
+            bestPick = chooseFrom.get(0);
             debugPrint("Pick forced by Archdemon Curse.");
         } else {
             final ColorSet chosenColors = deckCols.getChosenColors();
@@ -62,40 +63,47 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return bestPick;
     }
 
+    @Override
+    protected void chooseAbilities(PaperCard pick, List<DraftAction> offers, boolean random, DraftPack pack,
+                                   Consumer<List<DraftAction>> then) {
+        List<DraftAction> chosen = new ArrayList<>();
+        for (DraftAction offer : offers) {
+            boolean take = switch (abilityEffect(offer.source())) {
+                case NOTE_CREATURE_NAME -> revealWithBanneret(pick);
+                case NOTE_CREATURE_TYPES -> revealWithVanguard(pick);
+                case NOTE_CARD_NAME -> revealWithSmuggler(pick);
+                case REMOVE_FACE_UP -> removeWithAnimus(pick);
+                case REMOVE_FACE_DOWN -> removeWithGrinder(pick);
+                case EXTRA_PICK_RETURN -> handleCogworkLibrarian();
+                case EXTRA_PICK_SKIP -> handleLeovoldsOperative();
+                case DRAFT_WHOLE_PACK -> handleAgentOfAcquisitions();
+                default -> false;
+            };
+            if (take) {
+                chosen.add(offer);
+                if (!canCombine(chosen)) {
+                    chosen.remove(chosen.size() - 1);
+                }
+            }
+        }
+        then.accept(chosen);
+    }
+
+    public Boolean draftNext() {
+        PaperCard pick = chooseCard();
+        if (pick == null) {
+            return null;
+        }
+        return draftCard(pick, DeckSection.Sideboard, DraftAction.choose(pick));
+    }
     public Deck buildDeck(String landSetCode) {
         CardPool section = deck.getOrCreate(DeckSection.Sideboard);
         return new BoosterDeckBuilder(section.toFlatList(), deckCols).buildDeck(landSetCode);
     }
 
     @Override
-    protected String chooseColor(List<String> colors, LimitedPlayer player, String title) {
-        if (player.equals(this)) {
-            // For Paliano, choose one of my colors
-            // For Regicide, random is fine?
-        } else {
-            // For Paliano, if player has revealed anything, try to avoid that color
-            // For Regicide, don't choose one of my colors
-        }
-        Collections.shuffle(colors);
-        return colors.get(0);
-    }
-
-    @Override
-    protected String removeWithAny(PaperCard bestPick, List<String> options) {
-        // If we have multiple remove from draft options, do none of them for now
-
-        Collections.shuffle(options);
-        if (options.get(0).equals("Animus of Predation")) {
-            if (removeWithAnimus(bestPick)) {
-                return "Animus of Predation";
-            }
-        } else if (options.get(0).equals("Cogwork Grinder")) {
-            if (removeWithGrinder(bestPick)) {
-                return "Cogwork Grinder";
-            }
-        }
-
-        return null;
+    protected void chooseColor(List<String> colors, LimitedPlayer drafter, String title, Consumer<String> then) {
+        then.accept(Aggregates.random(colors));
     }
 
     private boolean removeWithAnimus(PaperCard bestPick) {
@@ -118,8 +126,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return false;
     }
 
-    @Override
-    protected boolean revealWithBanneret(PaperCard bestPick) {
+    private boolean revealWithBanneret(PaperCard bestPick) {
         // Just choose the first creature that we haven't noted yet.
         // This is a very simple heuristic, but it's good enough for now.
         if (!bestPick.getRules().getType().isCreature()) {
@@ -130,8 +137,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return nobleBanneret == null || !nobleBanneret.contains(bestPick.getName());
     }
 
-    @Override
-    protected boolean revealWithVanguard(PaperCard bestPick) {
+    private boolean revealWithVanguard(PaperCard bestPick) {
         // Just choose the first creature that we haven't noted types of yet.
         // This is a very simple heuristic, but it's good enough for now.
         if (!bestPick.getRules().getType().isCreature()) {
@@ -149,8 +155,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return types.containsAll(notedTypes);
     }
 
-    @Override
-    protected boolean revealWithSmuggler(PaperCard bestPick) {
+    private boolean revealWithSmuggler(PaperCard bestPick) {
         // Note a name we haven't noted yet
         List<String> notedNames = getDraftNotes().getOrDefault("Smuggler Captain", null);
         if (notedNames != null && !notedNames.isEmpty() && notedNames.contains(bestPick.getName())) {
@@ -171,43 +176,18 @@ public class LimitedPlayerAI extends LimitedPlayer {
     }
 
     @Override
-    public boolean handleWhispergearSneak() {
-        // Always choose the next pack I will open
-        // What do I do with this information? Great question. I have no idea.
-        List<PaperCard> cards;
-        int round = draft.getRound();
-        if (this.unopenedPacks.isEmpty()) {
-            // Take a peek at the pack you are about to get if it's the last round
-            cards = peekAtBoosterPack(round, draft.getNeighbor(this, round % 2 == 1));
-        } else {
-            cards = peekAtBoosterPack(round + 1, this);
+    protected void guessCard(DraftPack pack, PaperCard source, Consumer<PaperCard> then) {
+        if (!isPackHidden()) {
+            then.accept(getOrderedRawScores(pack).get(0));
+            return;
         }
-
-        return true;
-    }
-
-    @Override
-    public LimitedPlayer handleIllusionaryInformant() {
-        // Always choose the next pack I will open
-        // What do I do with this information? Great question. I have no idea.
-        LimitedPlayer peekAt = draft.getAllPlayers().stream().filter((s) -> s != this).collect(StreamUtil.random()).orElse(null);
-        // Not really sure what the AI does with this information. But its' known now.
-        //peekAt.getLastPick();
-        return peekAt;
-    }
-
-    @Override
-    public PaperCard handleSpirePhantasm(DraftPack chooseFrom) {
-        if (chooseFrom.isEmpty()) {
-            return null;
+        List<PaperCard> options = guessOptions(pack, source);
+        if (!options.isEmpty()) {
+            then.accept(Aggregates.random(options));
         }
-
-        // Choose the card with the highest rank left
-        return getOrderedRawScores(chooseFrom).get(0);
     }
 
-    @Override
-    public boolean handleLeovoldsOperative(DraftPack pack, PaperCard drafted) {
+    private boolean handleLeovoldsOperative() {
         // Whats the score of the thing I just drafted?
         // Whats the next card I would draft?
         if (currentPack == 3) {
@@ -217,8 +197,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return draftedThisRound < 3;
     }
 
-    @Override
-    public boolean handleAgentOfAcquisitions(DraftPack pack, PaperCard drafted) {
+    private boolean handleAgentOfAcquisitions() {
         // Whats the score of the thing I just drafted?
         // Whats the total score of the rest of the pack?
         // How many of these cards would actually make my deck?
@@ -229,8 +208,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return draftedThisRound > 2 && draftedThisRound < 6;
     }
 
-    @Override
-    public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
+    private boolean handleCogworkLibrarian() {
         if (currentPack == 3) {
             return true;
         }
@@ -239,13 +217,28 @@ public class LimitedPlayerAI extends LimitedPlayer {
     }
 
     @Override
-    protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
-        Collections.shuffle(possibleEditions);
-        return possibleEditions.get(0);
+    protected void chooseEdition(List<CardEdition> editions, PaperCard source, Consumer<CardEdition> then) {
+        then.accept(Aggregates.random(editions));
     }
 
     @Override
-    protected PaperCard chooseExchangeCard(PaperCard offer) {
+    protected void chooseDredgerSeat(List<LimitedPlayer> eligible, DraftPack pack, Consumer<LimitedPlayer> then) {
+        then.accept(eligible.contains(this) ? this : Aggregates.random(eligible));
+    }
+
+    @Override
+    protected void chooseExchangeCard(PaperCard offer, Consumer<PaperCard> then) {
+        then.accept(pickExchangeCard(offer));
+    }
+
+    @Override
+    protected void chooseCardToExchange(PaperCard exchangeCard, List<Pair<PaperCard, LimitedPlayer>> offers,
+                                        Consumer<Pair<PaperCard, LimitedPlayer>> then) {
+        PaperCard accepted = pickOfferToAccept(exchangeCard, offers.stream().map(Pair::getKey).collect(Collectors.toList()));
+        then.accept(offers.stream().filter(o -> o.getKey().equals(accepted)).findFirst().orElse(null));
+    }
+
+    private PaperCard pickExchangeCard(PaperCard offer) {
         final ColorSet colors = deckCols.getChosenColors();
         List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
 
@@ -277,9 +270,9 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return exchangeCard;
     }
 
-    protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
+    private PaperCard pickOfferToAccept(PaperCard exchangeCard, List<PaperCard> offers) {
         double score = CardRanker.getRawScore(exchangeCard);
-        List<Pair<Double, PaperCard>> rankedColorList = CardRanker.getScores(offers.keySet());
+        List<Pair<Double, PaperCard>> rankedColorList = CardRanker.getScores(offers);
         final ColorSet colors = deckCols.getChosenColors();
         for(Pair<Double, PaperCard> pair : rankedColorList) {
             ColorSet cardColors = pair.getRight().getRules().getColorIdentity();

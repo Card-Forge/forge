@@ -412,7 +412,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     /** Pref is normalized to 6 hex chars on the write side; this just parses,
      *  falling back to the FPref default if the stored value is malformed. */
-    private static Color parseActionableHighlightColor() {
+    public static Color parseActionableHighlightColor() {
         String s = forge.model.FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
         try {
             if (s != null && s.length() == 6) return new Color(Integer.parseInt(s, 16));
