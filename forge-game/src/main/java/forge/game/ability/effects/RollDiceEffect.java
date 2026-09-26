@@ -314,7 +314,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
             }
         }
-
+        SpellAbility sourceSA = sa != null ? sa.getRootAbility().copy() : null;
         int rollNum = 1;
         for (DieRollResult roll : resultsList) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
@@ -323,6 +323,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.NaturalResult, roll.getNaturalValue());
             runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
             runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
+            runParams.put(AbilityKey.SourceSA, sourceSA);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
             rollNum++;
         }
@@ -330,6 +331,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Sides, sides);
         runParams.put(AbilityKey.Result, getFinalResults(resultsList));
         runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
+        runParams.put(AbilityKey.SourceSA, sourceSA);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
         return getFinalResults(resultsList).stream().reduce(0, Integer::sum);
