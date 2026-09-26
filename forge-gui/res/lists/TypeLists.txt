@@ -76,6 +76,7 @@ Coward:Cowards
 Coyote:Coyotes
 Crab:Crabs
 Crocodile:Crocodiles
+Custodes:Custodes
 Cyberman:Cybermen
 Cyclops:Cyclopes
 Dalek:Daleks
