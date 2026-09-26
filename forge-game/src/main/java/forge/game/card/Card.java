@@ -100,7 +100,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // Hidden keywords won't be displayed on the card
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = TreeBasedTable.create();
+    private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = new LazyTable<>();
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, imprintedCards,
@@ -125,31 +125,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // changes by AF animate and continuous static effects
 
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, ICardChangedType> changedCardTypesByText = TreeBasedTable.create(); // Layer 3
-    private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = TreeBasedTable.create(); // Layer 4 CDA
-    private final Table<Long, Long, ICardChangedType> changedCardTypes = TreeBasedTable.create(); // Layer 4
+    private final Table<Long, Long, ICardChangedType> changedCardTypesByText = new LazyTable<>(); // Layer 3
+    private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = new LazyTable<>(); // Layer 4 CDA
+    private final Table<Long, Long, ICardChangedType> changedCardTypes = new LazyTable<>(); // Layer 4
 
-    private final Table<Long, Long, CardChangedName> changedCardNames = TreeBasedTable.create(); // Layer 3
-    private final Table<Long, Long, IKeywordsChange> changedCardKeywordsByText = TreeBasedTable.create(); // Layer 3 by Text Change
+    private final Table<Long, Long, CardChangedName> changedCardNames = new LazyTable<>(); // Layer 3
+    private final Table<Long, Long, IKeywordsChange> changedCardKeywordsByText = new LazyTable<>(); // Layer 3 by Text Change
     protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), false); // Layer 3 by Word Change
-    private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
+    private final Table<Long, Long, KeywordsChange> changedCardKeywords = new LazyTable<>(); // Layer 6
 
     // stores the keywords created by static abilities
     private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywords = Maps.newHashMap();
 
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    private final Table<Long, Long, ICardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
+    private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = new LazyTable<>(); // Layer 3 by Text Change
+    private final Table<Long, Long, ICardTraitChanges> changedCardTraits = new LazyTable<>(); // Layer 6
 
     // stores the card traits created by static abilities
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
-    private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = new LazyTable<>();
+    private final Table<StaticAbility, String, Trigger> storedTrigger = new LazyTable<>();
     private final Table<StaticAbility, SpellAbility, SpellAbility> storedAbilityForTrigger = HashBasedTable.create();
-    private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
-    private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = new LazyTable<>();
+    private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = new LazyTable<>();
 
     private final Table<StaticAbility, SpellAbility, SpellAbility> storedSpellAbililityByText = HashBasedTable.create();
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbililityGainedByText = TreeBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbililityGainedByText = new LazyTable<>();
     private final Table<StaticAbility, Trigger, Trigger> storedTriggerByText = HashBasedTable.create();
     private final Table<StaticAbility, ReplacementEffect, ReplacementEffect> storedReplacementEffectByText = HashBasedTable.create();
     private final Table<StaticAbility, StaticAbility, StaticAbility> storedStaticAbilityByText = HashBasedTable.create();
@@ -157,15 +157,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywordByText = Maps.newHashMap();
 
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, CardColor> changedCardColorsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    private final Table<Long, Long, CardColor> changedCardColorsCharacterDefining = TreeBasedTable.create(); // Layer 5 CDA
-    private final Table<Long, Long, CardColor> changedCardColors = TreeBasedTable.create(); // Layer 5
+    private final Table<Long, Long, CardColor> changedCardColorsByText = new LazyTable<>(); // Layer 3 by Text Change
+    private final Table<Long, Long, CardColor> changedCardColorsCharacterDefining = new LazyTable<>(); // Layer 5 CDA
+    private final Table<Long, Long, CardColor> changedCardColors = new LazyTable<>(); // Layer 5
 
-    protected final Table<Long, Long, CardManaCost> changedCardManaCost = TreeBasedTable.create(); // Layer 3
+    protected final Table<Long, Long, CardManaCost> changedCardManaCost = new LazyTable<>(); // Layer 3
 
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap(); // Layer 1
 
-    private final Table<Long, Long, Map<String, String>> changedSVars = TreeBasedTable.create();
+    private final Table<Long, Long, Map<String, String>> changedSVars = new LazyTable<>();
 
     private Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
@@ -276,10 +276,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // stack of set power/toughness
     // x=timestamp y=StaticAbility id
-    private Table<Long, Long, Pair<Integer,Integer>> newPTText = TreeBasedTable.create(); // Text Change Layer 3
-    private Table<Long, Long, Pair<Integer,Integer>> newPTCharacterDefining = TreeBasedTable.create(); // Layer 7a
-    private Table<Long, Long, Pair<Integer,Integer>> newPT = TreeBasedTable.create(); // Layer 7b
-    private Table<Long, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create(); // Layer 7c
+    private Table<Long, Long, Pair<Integer,Integer>> newPTText = new LazyTable<>(); // Text Change Layer 3
+    private Table<Long, Long, Pair<Integer,Integer>> newPTCharacterDefining = new LazyTable<>(); // Layer 7a
+    private Table<Long, Long, Pair<Integer,Integer>> newPT = new LazyTable<>(); // Layer 7b
+    private Table<Long, Long, Pair<Integer,Integer>> boostPT = new LazyTable<>(); // Layer 7c
 
     private CardDamageHistory damageHistory = new CardDamageHistory();
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
@@ -7576,6 +7576,62 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public CardView getView() {
         return view;
+    }
+
+    /**
+     * A table that allocates no backing storage until something is put into it. Most cards never
+     * receive a continuous effect of a given kind, so an eagerly created table stays empty for the
+     * whole of the card's life.
+     */
+    private static final class LazyTable<R extends Comparable<? super R>, C extends Comparable<? super C>, V>
+            extends ForwardingTable<R, C, V> {
+        private Table<R, C, V> delegate = ImmutableTable.of();
+
+        @Override
+        protected Table<R, C, V> delegate() {
+            return delegate;
+        }
+
+        private boolean materialised() {
+            return !(delegate instanceof ImmutableTable);
+        }
+
+        private Table<R, C, V> mutable() {
+            if (!materialised()) {
+                delegate = TreeBasedTable.create();
+            }
+            return delegate;
+        }
+
+        @Override
+        public V put(R rowKey, C columnKey, V value) {
+            return mutable().put(rowKey, columnKey, value);
+        }
+
+        @Override
+        public void putAll(Table<? extends R, ? extends C, ? extends V> table) {
+            if (!table.isEmpty()) {
+                mutable().putAll(table);
+            }
+        }
+
+        @Override
+        public V remove(Object rowKey, Object columnKey) {
+            return materialised() ? delegate.remove(rowKey, columnKey) : null;
+        }
+
+        @Override
+        public void clear() {
+            if (materialised()) {
+                delegate.clear();
+            }
+        }
+
+        @Override
+        public Set<C> columnKeySet() {
+            // an immutable key set refuses retainAll outright, where an empty one has nothing to retain
+            return materialised() ? delegate.columnKeySet() : Collections.emptySet();
+        }
     }
 
     // Counts number of instances of a given keyword.
