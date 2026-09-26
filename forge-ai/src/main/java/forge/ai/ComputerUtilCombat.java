@@ -2244,7 +2244,7 @@ public class ComputerUtilCombat {
     // cached per AI decision (AiCache is cleared in chooseSpellAbilityToPlay);
     // predictions ask this once per attacker otherwise
     private static Boolean isCombatDamagePreventedThisTurnCached(final Game game) {
-        return AiCache.getCached("isPreventCombatDamageThisTurn",
+        return AiCache.getCached(AiCache.Scope.PRIORITY, "isPreventCombatDamageThisTurn",
                 () -> game.getReplacementHandler().isPreventCombatDamageThisTurn(),
                 List.of(AiCache::identity), game);
     }
@@ -2565,7 +2565,7 @@ public class ComputerUtilCombat {
                 if (p instanceof Player p1 && !ComputerUtilCard.canBeBlockedProfitably(p1, attacker, true)) {
                     return p;
                 }
-                if (p instanceof Card card && !ComputerUtilCard.canBeBlockedProfitably(card.getController(), attacker, true)) {
+                if (p instanceof Card card && !ComputerUtilCard.canBeBlockedProfitably(card.isBattle() ? card.getProtectingPlayer() : card.getController(), attacker, true)) {
                     return p;
                 }
             }

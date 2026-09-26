@@ -2933,7 +2933,7 @@ public class ComputerUtil {
     }
 
     public static int evaluateBoardPosition(final Player ai, final Player opponent) {
-        return AiCache.getCached("evaluateBoardPosition",
+        return AiCache.getCached(AiCache.Scope.PRIORITY, "evaluateBoardPosition",
                 () -> evaluateBoardPositionChanged(ai, opponent),
                 List.of(AiCache::identity, AiCache::identity), ai, opponent);
     }
@@ -3179,7 +3179,7 @@ public class ComputerUtil {
     // call this to determine if it's safe to use a life payment spell
     // or trigger "emergency" strategies such as holding mana for Spike Weaver or Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
-        return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
+        return Integer.MIN_VALUE == AiCache.getCached(AiCache.Scope.PRIORITY, "aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
                 List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
@@ -3216,7 +3216,7 @@ public class ComputerUtil {
                 continue;
             }
             // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
+            AiBlockController block = new AiBlockController(ai, ai);
             // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
             block.assignBlockersForCombat(combat, excludedBlockers);
 
