@@ -179,12 +179,11 @@ public class ThreadUtil {
         return Thread.currentThread().getName().startsWith("Game");
     }
 
-    // this is used for IO operations used by image fetcher, set lookup so don't compete in main rendering thread and set this to minimum priority
     private final static AtomicInteger ioThreadCounter = new AtomicInteger();
     private final static ExecutorService serviceIO = Executors.newFixedThreadPool(2, r -> {
         Thread t = new Thread(r, "Service-IO-" + ioThreadCounter.getAndIncrement());
         t.setDaemon(true);
-        t.setPriority(Thread.MIN_PRIORITY);
+        t.setPriority(Thread.NORM_PRIORITY);
         return t;
     });
 

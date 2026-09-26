@@ -734,7 +734,12 @@ public class AiAttackController {
         }
 
         if (defendingOpponent.getLife() > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
-            int totalCombatDamage = tramplers.stream().map(c -> trampleDmg.getOrDefault(c, 0)).reduce(0, Integer::sum);
+            Integer acc = 0;
+            for (Card c : tramplers) {
+                Integer orDefault = trampleDmg.getOrDefault(c, 0);
+                acc = acc + orDefault;
+            }
+            int totalCombatDamage = acc;
             if (totalCombatDamage >= defendingOpponent.getLife()) {
                 return true;
             }
@@ -1058,13 +1063,12 @@ public class AiAttackController {
                     }
 
                     try {
-                        boolean completedInTime = cdl.await(ai.getGame().getAITimeout(), TimeUnit.SECONDS);
+                        long remainingNanos = deadlineNanos - System.nanoTime();
+                        boolean completedInTime = remainingNanos > 0 && cdl.await(remainingNanos, TimeUnit.NANOSECONDS);
                         if (!completedInTime) {
-                            // cancelTask() is just a getAndSet plus an interrupt: do it here instead of queueing it behind stuck work
                             for (int i = 0; i < index; i++) {
                                 tasksArray[i].cancelTask();
                             }
-                            // short grace so stragglers stop touching combat/attackersLeft before we carry on
                             cdl.await(100, TimeUnit.MILLISECONDS);
                         }
                     } catch (InterruptedException e) {
@@ -1732,11 +1736,20 @@ public class AiAttackController {
                         missTarget = true;
                         break;
                     }
-                    if (sa.isCurse() && validTargets.stream().noneMatch(
-                            CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
-                        // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
-                        missTarget = true;
-                        break;
+                    if (sa.isCurse()) {
+                        Predicate<Card> predicate = CardPredicates.isControlledByAnyOf(c.getController().getOpponents());
+                        boolean b = true;
+                        for (Card validTarget : validTargets) {
+                            if (predicate.test(validTarget)) {
+                                b = false;
+                                break;
+                            }
+                        }
+                        if (b) {
+                            // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
+                            missTarget = true;
+                            break;
+                        }
                     }
                 }
             }

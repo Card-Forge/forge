@@ -73,7 +73,6 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.LockSupport;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
 import static java.lang.Math.max;
@@ -478,9 +477,12 @@ public class AiController {
                     return false;
                 }
             }
-            return c.getAllPossibleAbilities(player, true).stream().anyMatch(
-                    la -> la.isLandAbility() && saSideEffects(c, la).willingToPlay()
-            );
+            for (SpellAbility la : c.getAllPossibleAbilities(player, true)) {
+                if (la.isLandAbility() && saSideEffects(c, la).willingToPlay()) {
+                    return true;
+                }
+            }
+            return false;
         });
         return landList;
     }
@@ -651,9 +653,20 @@ public class AiController {
 
         // what types can I go get?
         for (final String name : MagicColor.Constant.BASIC_LANDS) {
-            if (landList.stream().anyMatch(c -> c.getType().hasSubtype(name)) &&
-                    landsInBattlefield.stream().anyMatch(c -> c.getType().hasSubtype(name))) {
-                basics.add(name);
+            boolean b = false;
+            for (Card card : landList) {
+                if (card.getType().hasSubtype(name)) {
+                    b = true;
+                    break;
+                }
+            }
+            if (b) {
+                for (Card c : landsInBattlefield) {
+                    if (c.getType().hasSubtype(name)) {
+                        basics.add(name);
+                        break;
+                    }
+                }
             }
         }
 
@@ -1593,7 +1606,13 @@ public class AiController {
             return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
         //removed skipped SA
-        skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
+        List<SpellAbility> list = new ArrayList<>();
+        for (SpellAbility spellAbility : saList) {
+            if (spellAbility.isSkip()) {
+                list.add(spellAbility);
+            }
+        }
+        skipped = list;
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
         //update LivingEndPlayer
@@ -2325,7 +2344,12 @@ public class AiController {
 
     // TODO move to more common place
     private static <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
-        List<T> filtered = input.stream().filter(pred).collect(Collectors.toList());
+        List<T> filtered = new ArrayList<>();
+        for (T t : input) {
+            if (pred.test(t)) {
+                filtered.add(t);
+            }
+        }
         input.removeAll(filtered);
         return filtered;
     }
