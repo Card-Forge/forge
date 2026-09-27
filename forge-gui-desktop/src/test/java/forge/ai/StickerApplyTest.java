@@ -187,6 +187,53 @@ public class StickerApplyTest extends AITest {
         assertEquals(bear.getName(), word.getWord() + " Gemrazer");
     }
 
+    /** CR 123.6b/c - a name sticker applies to the face the object shows, and alone to a face-down one. */
+    @Test
+    public void testNameStickerFollowsTransformAndFaceDown() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        List<Sticker> stickers = sheet(p, "Eldrazi Guacamole Tightrope");
+        String word = first(stickers, StickerKind.NAME).getWord();
+
+        Card delver = addCard("Delver of Secrets", p);
+        delver.addSticker(new AppliedSticker(first(stickers, StickerKind.NAME), game.getNextTimestamp(), 0));
+        delver.changeCardState("Transform", null, null);
+        assertEquals(delver.getName(), word + " Insectile Aberration");
+
+        Card bear = addCard("Grizzly Bears", p);
+        bear.addSticker(new AppliedSticker(nth(stickers, StickerKind.NAME, 1), game.getNextTimestamp(), 0));
+        String bearWord = nth(stickers, StickerKind.NAME, 1).getWord();
+        bear.turnFaceDown(true);
+        assertEquals(bear.getName(), bearWord, "a face-down permanent's name is just the sticker's word");
+        bear.turnFaceUp(null);
+        assertEquals(bear.getName(), bearWord + " Grizzly Bears");
+    }
+
+    /** CR 123.5a/c - a melded permanent has both cards' stickers, and one card keeps them all as it leaves. */
+    @Test
+    public void testMeldedPermanentGetsBothCardsStickers() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        List<Sticker> stickers = sheet(p, "Eldrazi Guacamole Tightrope");
+        Card rats = addCard("Graf Rats", p);
+        Card scavengers = addCard("Midnight Scavengers", p);
+        rats.addSticker(new AppliedSticker(first(stickers, StickerKind.PT), game.getNextTimestamp()));
+        scavengers.addSticker(new AppliedSticker(first(stickers, StickerKind.ART), game.getNextTimestamp()));
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility meld = rats.getTriggers().iterator().next().ensureAbility();
+        meld.setActivatingPlayer(p);
+        AbilityUtils.resolve(meld);
+        Card host = p.getCardsIn(ZoneType.Battlefield).stream().filter(c -> c.getMeldedWith() != null).findFirst().orElseThrow();
+        assertEquals(host.getStickers().size(), 2);
+        assertEquals(host.getNetToughness(), first(stickers, StickerKind.PT).getToughness());
+
+        game.getAction().moveToGraveyard(host, null);
+        long keepers = p.getCardsIn(ZoneType.Graveyard).stream().filter(Card::isStickered).count();
+        assertEquals(keepers, 1L);
+        assertTrue(p.getCardsIn(ZoneType.Graveyard).stream().anyMatch(c -> c.getStickers().size() == 2));
+    }
+
     /** CR 123.5c - when a merged permanent leaves, its owner chooses the card that keeps the stickers. */
     @Test
     public void testLeavingMergedPermanentOwnerChoosesTheKeeper() {
