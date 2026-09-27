@@ -45,7 +45,7 @@ stack. Error: `engine: RunChaos: <card>: chaos trigger <Key>$ not resolvable yet
 
 | Chaos-trigger shape                                                                                                         | Real lines | Why                                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------------- | ---------: | ---------------------------------------------------------------------------------------------------------- |
-| `OptionalDecider$`                                                                                                          |          6 | Forge defect: optional flag set on the RunChaos ability, never on the copy (below)                         |
+| `OptionalDecider$`                                                                                                          |          6 | Forge defect: optional flag set on the RunChaos ability, not on the copy (below)                           |
 | `Cost$`                                                                                                                     |          0 | Same defect (`:29-30`)                                                                                     |
 | `Static$`, `TriggerController$`, any other param past `Mode$`/`TriggerZones$`/`Execute$`/`TriggerDescription$`/`Secondary$` |          0 | Java never reads them here; resolving as if absent would guess. Allow-list = the 158 real lines' param set |
 | No `Execute$`                                                                                                               |          0 | `ensureAbility` gives an empty ability; `chaos trigger without Execute$ not resolvable yet`                |
@@ -55,11 +55,13 @@ A `Defined$` spelling `definedCards` does not resolve is `engine: Defined$ "<spe
 reader.
 
 **Forge defect, `RunChaosEffect.java:25-31`.** `sa.setOptionalTrigger(true)` (`:27`, `:30`) targets `sa`, the RunChaos
-ability, not `triggerSA`, so the copy is never optional; and `decider` defaults to the activator (`:25`), never `null`,
-unlike `TriggerHandler.java:505-516`. `WrappedAbility.resolve` (`WrappedAbility.java:431-437`) then asks
+ability, not `triggerSA`. The copy is optional only if an earlier ordinary run of the same trigger already flagged the
+stored ability `ensureAbility` returns (`TriggerHandler.java:473-475,507-508` flag that shared object;
+`SpellAbility.copy`'s `clone()` keeps the flag): history-dependent. And `decider` defaults to the activator (`:25`),
+never `null`, unlike `TriggerHandler.java:505-516`. `WrappedAbility.resolve` (`WrappedAbility.java:431-437`) then asks
 `confirmTrigger` for every copy. Controllers split: `PlayerControllerHuman.confirmTrigger` prompts even for a mandatory
-chaos ability; the AI's (`PlayerControllerAi.java:411`) sees `isMandatory()` and never declines an
-`OptionalDecider$ You` one. Row in [`forge-java-defects.md`](../../forge-java-defects.md). Crucible meanwhile:
+chaos ability; the AI's (`PlayerControllerAi.java:411`) sees `isMandatory()` on an unflagged copy and never declines it,
+`OptionalDecider$ You` or not. Row in [`forge-java-defects.md`](../../forge-java-defects.md). Crucible meanwhile:
 `OptionalDecider$`/`Cost$` rejected (fail closed); a mandatory chaos ability resolves without confirmation, the AI's
 reading and CR 603.3d's.
 

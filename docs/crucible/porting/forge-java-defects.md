@@ -340,16 +340,20 @@ reading is deliberate.
 `engine: ChaosEnsues: Defined$ <spec> naming more than one plane not resolvable yet` before anything fires
 (`TestChaosEnsuesRejectsUnportedDefinedShapes`).
 
-### `RunChaosEffect.java:25-31` — chaos copies never optional, always confirmed
+### `RunChaosEffect.java:25-31` — chaos copies' optionality history-dependent, always confirmed
 
 `RunChaosEffect.resolve` builds one `WrappedAbility` per chaos trigger of each card. For `OptionalDecider$` (`:26-28`)
 and `Cost$` (`:29-30`) it calls `sa.setOptionalTrigger(true)`, where `sa` is the RunChaos ability itself, not
-`triggerSA`, the copy the wrapper delegates `isOptionalTrigger` to (`WrappedAbility.java:363-365`). `decider` starts as
-the activator (`:25`), never `null`, unlike `TriggerHandler.java:505-516`, which leaves it `null` for a mandatory
-trigger. So `WrappedAbility.resolve` (`WrappedAbility.java:431-437`) asks `confirmTrigger` for every copy:
+`triggerSA`, the copy the wrapper delegates `isOptionalTrigger` to (`WrappedAbility.java:363-365`). The copy is optional
+only if the stored ability `Trigger.ensureAbility` returns (`Trigger.java:620-631`) was already flagged by an earlier
+ordinary run of the same trigger: `TriggerHandler.java:473-475` stores that ability as the overriding one and `:507-508`
+flags it, and `SpellAbility.copy`'s `clone()` (`SpellAbility.java:1253-1256`) keeps the flag. `decider` starts as the
+activator (`:25`), never `null`, unlike `TriggerHandler.java:505-516`, which leaves it `null` for a mandatory trigger.
+So `WrappedAbility.resolve` (`WrappedAbility.java:431-437`) asks `confirmTrigger` for every copy:
 `PlayerControllerHuman.confirmTrigger` prompts even for a mandatory chaos ability, while `PlayerControllerAi.java:411`
-reads `isMandatory()` as true and never declines an `OptionalDecider$ You` one. Pools of Becoming reaches it whenever it
-reveals one of the 6 planes whose chaos ability names `OptionalDecider$ You`.
+reads `isMandatory()` as true for an unflagged copy and never declines it, so an `OptionalDecider$ You` chaos ability is
+optional for the AI only if its plane's chaos trigger already fired the ordinary way. Pools of Becoming reaches it
+whenever it reveals one of the 6 planes whose chaos ability names `OptionalDecider$ You`.
 
 **Proposed fix:** set the flag on `triggerSA` and start `decider` at `null`, as `TriggerHandler.registerActiveTrigger`
 does.

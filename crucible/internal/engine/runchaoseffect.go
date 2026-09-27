@@ -31,7 +31,9 @@ import (
 //
 // OptionalDecider$ and Cost$ on a chaos trigger are rejected: :27 and :30
 // set the optional flag on the RunChaos ability itself rather than on the
-// copy, so neither ever reaches the wrapped ability (forge-java-defects.md).
+// copy, so whether the copy is optional depends on whether an earlier
+// ordinary run of that trigger already flagged its shared stored ability
+// (forge-java-defects.md).
 type runChaosEffect struct{}
 
 // runChaosTriggerParams are the chaos-trigger params this port reads or can
