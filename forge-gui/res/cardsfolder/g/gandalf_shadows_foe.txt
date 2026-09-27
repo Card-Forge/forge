@@ -1,6 +1,6 @@
 Name:Gandalf, Shadow's Foe
 ManaCost:5 U U
-Types:Legendary Creature - Avatar Wizard
+Types:Legendary Creature Avatar Wizard
 PT:3/4
 K:Vigilance
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile up to three target lands you control, then return them to the battlefield tapped under their owner's control.

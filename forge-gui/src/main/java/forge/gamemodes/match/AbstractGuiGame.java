@@ -14,6 +14,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -26,6 +27,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -323,17 +325,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
-        for (final GameEntityView gv : entities) {
-            final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
-            if (!hasChanged) continue;
-            if (gv instanceof PlayerView pv) {
-                updateLives(Collections.singleton(pv));
+        // updateSingleCard reaches the widgets directly, and callers include the game thread
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final GameEntityView gv : entities) {
+                final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+                if (!hasChanged) continue;
+                if (gv instanceof PlayerView pv) {
+                    updateLives(Collections.singleton(pv));
+                }
+                if (gv instanceof CardView cv) {
+                    updateSingleCard(cv);
+                }
             }
-            if (gv instanceof CardView cv) {
-                // since we are in UI thread, may redraw the card right now
-                updateSingleCard(cv);
-            }
-        }
+        });
     }
 
     public boolean isHighlighted(final GameEntityView ge) {
@@ -356,6 +360,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectableCards.clear();
         selectionMin = 0;
         selectionMax = 0;
+    }
+
+    // the libgdx port never receives these: reveal falls back to its own card list there
+    @Override
+    public void showRevealedCards(final Iterable<CardView> cards) { }
+
+    @Override
+    public void hideRevealedCards() { }
+
+    protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final CardView c : cards) {
+            // an IdRef the tracker cannot resolve arrives as a null view, and PlayerZoneUpdate rejects a null player
+            if (c == null || c.getOwner() == null) { continue; }
+            final ZoneType zone = c.getZone();
+            if (zone != null && zone != ZoneType.Battlefield) {
+                zones.add(new PlayerZoneUpdate(c.getOwner(), zone));
+            }
+        }
+        return zones;
     }
 
     public boolean isSelectable(final CardView card) {
@@ -941,6 +965,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
+
+    @Override
+    public void openZones(final PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players) { }
 
     @Override
     public void updateCards(Iterable<CardView> cards) { }

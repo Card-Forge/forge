@@ -139,7 +139,7 @@ public class Forge implements ApplicationListener {
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
     public static final int HIGH_SPRITES_CAP = 1500; // Adventure and Classic sprites capacity
-    private static boolean isDisposed = false;
+    public static boolean isDisposed = false;
     public static boolean invokeWorldSave = false;
     public static Camera camera;
 
