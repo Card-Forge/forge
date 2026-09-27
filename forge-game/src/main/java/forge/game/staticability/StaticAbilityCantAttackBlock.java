@@ -46,6 +46,13 @@ public class StaticAbilityCantAttackBlock {
             return true;
         }
 
+        return findCantAttackAbility(attacker, defender) != null;
+    }
+
+    /**
+     * @return the first CantAttack static ability preventing attacker from attacking defender, or null
+     */
+    public static StaticAbility findCantAttackAbility(final Card attacker, final GameEntity defender) {
         for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantAttack)) {
@@ -53,11 +60,11 @@ public class StaticAbilityCantAttackBlock {
                 }
 
                 if (applyCantAttackAbility(stAb, attacker, defender)) {
-                    return true;
+                    return stAb;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /**

@@ -45,6 +45,24 @@ public class StaticAbilityMustAttack {
         return entityList;
     }
 
+    /**
+     * @return the MustAttack static abilities that apply to the attacker
+     */
+    public static List<StaticAbility> mustAttackSources(final Card attacker) {
+        final List<StaticAbility> result = new ArrayList<>();
+        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.checkConditions(StaticAbilityMode.MustAttack)) {
+                    continue;
+                }
+                if (stAb.matchesValidParam("ValidCreature", attacker)) {
+                    result.add(stAb);
+                }
+            }
+        }
+        return result;
+    }
+
     public static Multimap<GameEntity, StaticAbility> mustAttackSpecific(final Player attackingPlayer, final FCollectionView<GameEntity> possibleDefenders) {
         Multimap<GameEntity, StaticAbility> result = MultimapBuilder.hashKeys(possibleDefenders.size()).arrayListValues().build();
         for (final Card ca : attackingPlayer.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
