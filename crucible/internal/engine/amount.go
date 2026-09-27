@@ -33,7 +33,7 @@ const maxAmountDepth = 4
 // face defines, looked up in amounts and resolved in turn, one level of
 // indirection at a time; or an Expression whose outer Head is "Count" with
 // no operator suffix (Op == nil) and whose inner Count$ head is one of the
-// "Valid" family (expr.ParseCount, expr.IsValidHead) -- Count$Valid <spec>
+// "Valid" family (amt.Count, parsed at load, expr.IsValidHead) -- Count$Valid <spec>
 // (battlefield) or Count$Valid<Zone>[,<Zone>...] <spec> (one or more other
 // zones), counting cards each spec matches (countValid, below).
 //
@@ -86,8 +86,8 @@ func resolveAmountDepth(g *Game, amounts map[string]expr.Amount, sourceControlle
 		if amt.Op != nil || !strings.EqualFold(amt.Head, "Count") {
 			return 0, false
 		}
-		count := expr.ParseCount(amt.Body)
-		if !expr.IsValidHead(count.Head) {
+		count := amt.Count
+		if count == nil || !expr.IsValidHead(count.Head) {
 			return 0, false
 		}
 		if count.DistinctProperty != "" {

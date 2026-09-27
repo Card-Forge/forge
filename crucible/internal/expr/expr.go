@@ -59,6 +59,13 @@ type Amount struct {
 	Body string
 	// Op is the arithmetic applied to the result, nil when there is none.
 	Op *Op
+	// Count is Body already read by [ParseCount], set when Head is `Count`
+	// (case-folded, the engine's own dispatch) and nil otherwise. Parsing it
+	// here rather than in the evaluator is what keeps a compiled card's
+	// amounts free of runtime re-parsing (PORT-2): Parse runs once per SVar
+	// at card load. Shared and read-only once built, like the rest of a
+	// compiled card.
+	Count *Count
 
 	// Negative records a `-` prefix on an expression or a reference, which
 	// Java strips before it does anything else and applies as a multiplier at
@@ -116,6 +123,10 @@ func Parse(amount string) Amount {
 		out.Kind = Expression
 		out.Context, out.Head = cutContext(body[:at])
 		out.Body, out.Op = cutOperator(body[at+1:])
+		if strings.EqualFold(out.Head, "Count") {
+			count := ParseCount(out.Body)
+			out.Count = &count
+		}
 		return out
 	}
 

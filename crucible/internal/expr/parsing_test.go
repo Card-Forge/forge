@@ -201,6 +201,35 @@ func TestParseCountDistinctProperty(t *testing.T) {
 	}
 }
 
+// A Count expression carries its body already read by ParseCount, so an
+// evaluator never parses script text at game time (PORT-2); every other head
+// carries none.
+func TestParseCarriesCompiledCount(t *testing.T) {
+	t.Parallel()
+
+	goyf := expr.Parse("Count$ValidGraveyard Card.OppOwn$CardTypes/Plus.1")
+	if goyf.Count == nil {
+		t.Fatal("Count = nil, want the body parsed at Parse time")
+	}
+	if goyf.Count.Head != "ValidGraveyard" || goyf.Count.DistinctProperty != "CardTypes" {
+		t.Errorf("Count = %+v, want ValidGraveyard with DistinctProperty CardTypes", *goyf.Count)
+	}
+	if goyf.Op == nil || goyf.Op.Name != "Plus" || goyf.Op.Operand != "1" {
+		t.Errorf("Op = %+v, want Plus.1 cut before the body is read", goyf.Op)
+	}
+
+	devotion := expr.Parse("Count$Devotion.Black")
+	if devotion.Count == nil || devotion.Count.Head != "Devotion" || len(devotion.Count.Parameters) != 1 {
+		t.Errorf("Count = %+v, want Devotion with one parameter", devotion.Count)
+	}
+
+	for _, amount := range []string{"SVar$X/Plus.1", "Number$0", "X", "3"} {
+		if got := expr.Parse(amount); got.Count != nil {
+			t.Errorf("Parse(%q).Count = %+v, want nil -- not a Count head", amount, *got.Count)
+		}
+	}
+}
+
 func TestEmpty(t *testing.T) {
 	t.Parallel()
 
