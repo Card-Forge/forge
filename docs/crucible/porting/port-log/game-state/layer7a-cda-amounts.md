@@ -120,10 +120,17 @@ rather than reproduced.
   applies below seven loyalty.
 - **Printed mana value only.** `CardManaCost`, Devotion and Chroma read `Def.Faces[0].ManaCost` (`Card.CMC`'s own
   limit).
+- **Runtime string dispatch (PORT-2).** `paidMeasure` (amountpaid.go) and `manaAtomColor`/`devotionMod` (amountheads.go)
+  switch on `count.DistinctProperty`/`count.Parameters` text on every evaluation instead of resolving to a typed
+  `expr.Measure`/`mana.Colors` once at compile (`internal/expr`/`internal/carddb/compile`); `expr.Operator(op.Name)`
+  (amount.go) does the same for `doXMath`'s own operator. Correctness holds today -- each dispatch is total and
+  side-effect-free -- but a compile-time `expr.Count` field is the eventual fix, not a new switch arm.
 
 ### Tests
 
 `characteristic_defining_amounts_test.go` (Tarmogoyf, Devotion + Altar, Domain, a player/host-head table, every doXMath
-operator, unresolvable shapes, Winter's Layer 8 hand size, the corpus floor); `TestParseCarriesCompiledCount`
-(`internal/expr`); scenarios `tarmogoyf-survives-damage-under-its-card-type-toughness` and
-`tarmogoyf-dies-when-graveyards-hold-too-few-card-types`.
+operator, unresolvable shapes, Winter's Layer 8 hand size, the corpus floor); `amountheads_controlled_test.go`
+(`TestDomainCountUsesControllerNotOwner`, `TestDevotionAndChromaCountUseControllerNotOwner` -- a GainControl'd land or
+creature must count toward the new controller's Domain/Devotion/Chroma, not stay attributed to its owner);
+`TestParseCarriesCompiledCount` (`internal/expr`); scenarios `tarmogoyf-survives-damage-under-its-card-type-toughness`
+and `tarmogoyf-dies-when-graveyards-hold-too-few-card-types`.

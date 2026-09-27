@@ -101,11 +101,30 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 	case "Devotion", "DevotionDual":
 		return devotionCount(g, sourceController, count)
 	case "Chroma":
-		return chromaCount(g.Zone(Battlefield, sourceController).Cards(), g, count.Parameters)
+		return chromaCount(battlefieldControlledBy(g, sourceController), g, count.Parameters)
 	case "ChromaInGrave":
 		return chromaCount(g.Zone(Graveyard, sourceController).Cards(), g, count.Parameters)
 	}
 	return 0, false
+}
+
+// battlefieldControlledBy is Player.getCardsIn(Battlefield) filtered to what
+// pid actually controls: g.Zone(Battlefield, pid) is keyed by owner, not
+// controller (zone.go), so a stolen permanent sits in its owner's zone while
+// GainControl$/ExchangeControl$ move who controls it. Every xCount head that
+// reads "permanents pid controls" -- Domain, Devotion, Chroma among them --
+// has to walk every player's own battlefield and filter on Controller,
+// never trust the zone's owner key alone.
+func battlefieldControlledBy(g *Game, pid PlayerID) []CardID {
+	var out []CardID
+	for _, owner := range g.Players() {
+		for _, id := range g.Zone(Battlefield, owner).Cards() {
+			if g.Card(id).Controller() == pid {
+				out = append(out, id)
+			}
+		}
+	}
+	return out
 }
 
 // domainCount is xCount's own Count$Domain: how many of the five basic land
@@ -116,7 +135,7 @@ func domainCount(g *Game, pid PlayerID) int {
 	// MagicColor.Constant.BASIC_LANDS, in its own order.
 	basicLandTypes := [...]string{"Plains", "Island", "Swamp", "Mountain", "Forest"}
 	var seen [len(basicLandTypes)]bool
-	for _, id := range g.Zone(Battlefield, pid).Cards() {
+	for _, id := range battlefieldControlledBy(g, pid) {
 		t := g.Card(id).Type()
 		if !t.Has(cardtype.Land) {
 			continue
@@ -163,7 +182,7 @@ func devotionCount(g *Game, pid PlayerID, count expr.Count) (int, bool) {
 	if !ok {
 		return 0, false
 	}
-	return shardsOfColor(g, g.Zone(Battlefield, pid).Cards(), mask) + mod, true
+	return shardsOfColor(g, battlefieldControlledBy(g, pid), mask) + mod, true
 }
 
 // chromaCount is xCount's own Count$Chroma (CardLists.getTotalChroma): the
