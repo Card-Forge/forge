@@ -401,8 +401,8 @@ public final class MatchSession {
             case "showOptionDialog" -> { var options = (List<?>)a[3]; yield options.indexOf(first(choose(a[1] + "\n" + a[0], 1, 1, options, false, null))); }
             case "getInteger" -> number((String)a[0], (int)a[1], (int)a[2]);
             case "showInputDialog" -> inputText(a);
-            case "chooseSingleEntityForEffect" -> { revealDelayed((DelayedReveal)a[2]); yield first(choose((String)a[0], (boolean)a[3] ? 0 : 1, 1, (List<?>)a[1], false, null)); }
-            case "chooseEntitiesForEffect" -> { revealDelayed((DelayedReveal)a[4]); yield choose((String)a[0], (int)a[2], (int)a[3], (List<?>)a[1], false, null); }
+            case "chooseSingleEntityForEffect" -> first(chooseForEffect((String)a[0], (boolean)a[3] ? 0 : 1, 1, (List<?>)a[1], (DelayedReveal)a[2]));
+            case "chooseEntitiesForEffect" -> chooseForEffect((String)a[0], (int)a[2], (int)a[3], (List<?>)a[1], (DelayedReveal)a[4]);
             case "reveal" -> { reveal((String)a[0], (List<?>)a[1]); yield null; }
             case "message", "showErrorDialog" -> { synchronized (gate) { notices.add(String.valueOf(a[0])); while (notices.size() > 12) notices.remove(0); } yield null; }
             case "assignCombatDamage" -> combatDamage(a);
@@ -432,7 +432,56 @@ public final class MatchSession {
     }
 
     private void revealDelayed(DelayedReveal reveal) { if (reveal != null) reveal(reveal.getMessagePrefix(), reveal.getCards()); }
-    private void reveal(String title, List<?> choices) { dialog("reveal", title, choices, 0, 0, false, null); }
+    private void reveal(String title, List<?> choices) {
+        if (!libraryCards(choices)) { dialog("reveal", title, choices, 0, 0, false, null); return; }
+        var next = choicePrompt("reveal", title, List.of(), 0, 0, false, null);
+        libraryPrompt(next, List.of(), choices, ((CardView)choices.get(0)).getController(), false);
+        await(next);
+    }
+
+    private static boolean libraryCards(List<?> choices) {
+        return !choices.isEmpty() && choices.stream().allMatch(item -> item instanceof CardView card && card.getZone() == ZoneType.Library)
+                && choices.stream().map(item -> ((CardView)item).getController()).distinct().count() == 1;
+    }
+
+    private List<?> chooseForEffect(String title, int min, int max, List<?> choices, DelayedReveal reveal) {
+        boolean library = reveal == null ? libraryCards(choices) : reveal.getZone().equals(Set.of(ZoneType.Library)) && choices.stream().allMatch(CardView.class::isInstance);
+        if (!library) { revealDelayed(reveal); return choose(title, min, max, choices, false, null); }
+        if (choices.isEmpty()) return List.of();
+        var next = choicePrompt("choice", title, choices, Math.max(0, min), Math.min(choices.size(), max < 0 ? choices.size() : max), false, null);
+        libraryPrompt(next, choices, reveal == null ? choices : reveal.getCards(),
+                reveal == null ? ((CardView)choices.get(0)).getController() : reveal.getOwner(), true);
+        var selected = new ArrayList<Object>();
+        for (var index : await(next).getAsJsonArray("choices")) selected.add(choices.get(index.getAsInt()));
+        return selected;
+    }
+
+    private void libraryPrompt(Pending next, List<?> choices, List<?> revealed, PlayerView owner, boolean choosing) {
+        String library = owner.equals(viewer) ? "your library" : owner.getName() + "’s library";
+        next.prompt.put("context", "librarySearch");
+        next.prompt.put("title", (choosing ? "Search " : "Look at ") + library);
+        var permitted = new LinkedHashSet<Object>(revealed);
+        permitted.addAll(choices);
+        var cards = new ArrayList<Map<String, Object>>();
+        for (Object item : permitted) {
+            if (!(item instanceof CardView card)) continue;
+            var details = choiceCard(card, viewer);
+            int index = choices.indexOf(card);
+            cards.add(map("index", index < 0 ? null : index, "label", details.get("name"), "card", details));
+        }
+        // A search grants access to these cards, not a catalog query or a new
+        // permission to inspect another hidden zone. Do not expose deck order.
+        cards.sort(Comparator.comparing(card -> String.valueOf(card.get("label")), String.CASE_INSENSITIVE_ORDER));
+        next.prompt.put("libraryCards", cards);
+    }
+
+    static Map<String, Object> choiceCard(CardView card, PlayerView viewer) {
+        boolean hidden = card.isFaceDown() || !card.canBeShownTo(viewer);
+        var face = card.getCurrentState();
+        return map("name", hidden ? "Face-down or hidden card" : face.getName(), "faceDown", hidden,
+                "type", hidden ? "" : face.getType().toString(), "manaCost", hidden ? "" : face.getManaCost().toString(),
+                "text", hidden ? "" : card.getText(), "power", hidden ? null : face.getPower(), "toughness", hidden ? null : face.getToughness());
+    }
     private static Object first(List<?> choices) { return choices.isEmpty() ? null : choices.get(0); }
     private static List<?> combine(Object source, Object destination) {
         var combined = new ArrayList<Object>((Collection<?>)source);

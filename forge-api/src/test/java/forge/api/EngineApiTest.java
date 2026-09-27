@@ -104,6 +104,30 @@ public class EngineApiTest {
     }
 
     @Test
+    public void choiceDetailsRequireTheViewersCurrentPermission() {
+        var owner = new PlayerView(1, null);
+        var opponent = new PlayerView(2, null);
+        var card = new CardView(42, null, "Secret library card");
+        card.set(TrackableProperty.Controller, owner);
+        card.set(TrackableProperty.Zone, ZoneType.Library);
+        assertEquals(MatchSession.choiceCard(card, owner).get("name"), "Face-down or hidden card");
+        assertEquals(MatchSession.choiceCard(card, opponent).get("text"), "");
+        assertNull(MatchSession.choiceCard(card, owner).get("power"));
+        var allowed = new TrackableCollection<PlayerView>();
+        allowed.add(owner);
+        card.set(TrackableProperty.PlayerMayLook, allowed);
+        assertEquals(MatchSession.choiceCard(card, owner).get("name"), "Secret library card");
+        assertEquals(MatchSession.choiceCard(card, opponent).get("name"), "Face-down or hidden card");
+        card.set(TrackableProperty.PlayerMayLook, null);
+        assertEquals(MatchSession.choiceCard(card, owner).get("name"), "Face-down or hidden card");
+        card.set(TrackableProperty.Zone, ZoneType.Hand);
+        assertEquals(MatchSession.choiceCard(card, owner).get("name"), "Secret library card");
+        assertEquals(MatchSession.choiceCard(card, opponent).get("name"), "Face-down or hidden card");
+        card.set(TrackableProperty.Facedown, true);
+        assertEquals(MatchSession.choiceCard(card, owner).get("name"), "Face-down or hidden card");
+    }
+
+    @Test
     public void observationDetachesFromRealGameEventBus() {
         var game = new Match(new GameRules(GameType.Constructed), List.of(), "API test").createGame();
         var observation = new GameObservation(game);

@@ -174,6 +174,16 @@ also checks the pointer-down target before accepting a click after a refresh.
 User-initiated ability choices carry `context: playAbility`, a card-specific
 title, and optional option details. An empty choice list cancels that selection.
 
+Library choices carry `context: librarySearch` and combine the delayed reveal
+with the actual selection in one prompt. `choices` retains the engine's eligible
+indices and min/max constraints. `libraryCards` contains only the cards supplied
+for that choice/reveal, sorted by name, with viewer-filtered `card` details and
+an `index` into `choices` (null for cards that can be inspected but not selected).
+Clients may group identical copies but must return distinct original indices.
+No card-catalog search is needed. A read-only library reveal uses `kind: reveal`
+with no selectable indices. Temporary visibility follows the shared controller;
+these details do not grant later access to hidden library cards.
+
 The match beta supports two-player Constructed and 2–6 player Commander games
 with one local human and AI opponents. `matchSetup.maxPlayers` reports the limit.
 `matchStart.opponents` takes 1–5 opponent deck IDs in seat order; the legacy

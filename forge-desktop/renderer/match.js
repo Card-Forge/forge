@@ -17,9 +17,18 @@
   let pollTimer;
   let refreshRequested = false;
   let boardSignature;
+  let libraryMode = 'eligible';
+  let libraryGroups = [];
+  const libraryPicker = document.createElement('section');
+  libraryPicker.id = 'match-library-picker';
+  libraryPicker.className = 'library-picker';
+  libraryPicker.hidden = true;
+  libraryPicker.setAttribute('aria-labelledby', 'match-library-title');
+  document.querySelector('.match-arena').append(libraryPicker);
   const choiceScope = () => ({ sessionId: match?.id, promptId: match?.prompt?.id });
   const scopeAttributes = () => `data-match-session="${esc(match.id)}" data-match-prompt="${esc(match.prompt?.id || '')}"`;
   cardPreview.bind($('match-view'), '[data-preview-card]', element => previewCards[Number(element.dataset.previewCard)]);
+  cardPreview.bind(libraryPicker, '[data-library-preview]', element => libraryGroups[Number(element.dataset.libraryPreview)]?.card);
 
   function show() {
     document.body.classList.add('in-match');
@@ -250,7 +259,14 @@
   function renderPrompt() {
     const prompt = match?.prompt;
     const status = matchFeedback.describe(match);
-    const context = status.context && !status.pregame && !status.terminal
+    const librarySearch = prompt?.context === 'librarySearch';
+    libraryPicker.hidden = !librarySearch;
+    if (!librarySearch && libraryPicker.dataset.promptId) {
+      libraryPicker.replaceChildren();
+      delete libraryPicker.dataset.promptId;
+      libraryGroups = [];
+    }
+    const context = status.context && !status.pregame && !status.terminal && !librarySearch
       ? `<div class="match-step-context"><strong>${esc(status.phase)}</strong><p>${esc(status.context.text)}</p><small>Normally next: ${esc(status.context.next)}</small></div>` : '';
     $('match-prompt').dataset.promptId = prompt?.id || '';
     if (!prompt) {
@@ -262,12 +278,18 @@
     if (selectionPrompt !== prompt.id) {
       selectionPrompt = prompt.id;
       choiceFilter = '';
+      libraryMode = 'eligible';
       selection = prompt.ordered && prompt.min === prompt.choices?.length ? prompt.choices.map(choice => choice.index) : [];
     }
     // Keep the engine's actual cost, selected combat target, or required choice visible.
     const engineDetail = status.instruction && prompt.inputType !== 'InputPassPriority' && prompt.message
       ? `<p class="match-engine-instruction">${esc(prompt.message)}</p>` : '';
     const header = `<div class="eyebrow">${status.decision}</div><h2>${esc(prompt.title || status.title || (prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'))}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>${engineDetail}${context}`;
+    if (librarySearch) {
+      $('match-prompt').innerHTML = header + '<p>Use the library panel to inspect these cards and confirm your choice. This spell or ability is still resolving.</p>';
+      renderLibraryPicker();
+      return;
+    }
     if (prompt.context === 'playAbility') {
       const scope = choiceScope();
       $('match-prompt').innerHTML = header + `<div class="match-choices">${prompt.choices.map(choice => `<button class="match-choice ability-choice" data-ability-choice="${choice.index}"><strong>${esc(choice.label)}</strong>${choice.detail ? `<small>${esc(choice.detail)}</small>` : ''}</button>`).join('')}</div><button id="match-ability-cancel" class="button secondary">Back to the battlefield</button>`;
@@ -305,6 +327,72 @@
       $('match-submit').onclick = () => answer({ values: [...document.querySelectorAll('[data-amount]')].map(input => input.value) });
       if ($('match-skip')) $('match-skip').onclick = () => answer({ action: 'skip' });
     }
+  }
+
+  function renderLibraryPicker() {
+    const prompt = match.prompt;
+    if (libraryPicker.dataset.promptId === prompt.id) return;
+    libraryPicker.dataset.promptId = prompt.id;
+    const scope = choiceScope();
+    const viewing = prompt.kind === 'reveal';
+    if (viewing) libraryMode = 'all';
+    const groups = new Map();
+    for (const item of prompt.libraryCards) {
+      // Identical cards share a row, but every selected copy retains its own
+      // engine-issued choice index. Filtering never changes those indices.
+      const key = JSON.stringify(item.card);
+      if (!groups.has(key)) groups.set(key, { card: item.card, indices: [], count: 0 });
+      const group = groups.get(key);
+      group.count++;
+      if (item.index != null) group.indices.push(item.index);
+    }
+    libraryGroups = [...groups.values()];
+    libraryPicker.innerHTML = `<header><div class="eyebrow">${viewing ? 'LIBRARY CARDS' : 'LIBRARY SEARCH'}</div><h2 id="match-library-title">${esc(prompt.title)}</h2><p>${esc(prompt.message)}</p></header><div class="library-tools"><div class="library-modes" ${viewing ? 'hidden' : ''}><button data-library-mode="eligible">Eligible (${prompt.choices.length})</button><button data-library-mode="all">All revealed (${prompt.libraryCards.length})</button></div><input id="library-filter" type="search" placeholder="Filter these library cards…" aria-label="Find a card in this library search"></div><p class="library-scope">${viewing ? 'These are the cards this effect lets you inspect. Continue when you are ready.' : 'Only eligible cards can be selected. Each available copy is counted separately.'}</p><div id="library-options" class="library-options"></div><footer><div><strong id="library-selection-count" role="status" aria-live="polite"></strong><span id="library-selection-summary"></span></div><button id="library-confirm" class="button primary"></button></footer>`;
+    $('library-filter').oninput = event => { choiceFilter = event.target.value.trim().toLowerCase(); renderLibraryOptions(); };
+    libraryPicker.onclick = event => {
+      if (match?.prompt?.id !== scope.promptId || match.id !== scope.sessionId || inFlight) return;
+      const mode = event.target.closest('[data-library-mode]');
+      if (mode) { libraryMode = mode.dataset.libraryMode; renderLibraryOptions(); return; }
+      const add = event.target.closest('[data-library-add]');
+      const remove = event.target.closest('[data-library-remove]');
+      const group = libraryGroups[Number((add || remove)?.dataset[add ? 'libraryAdd' : 'libraryRemove'])];
+      if (add && group && selection.length < prompt.max) {
+        const index = group.indices.find(index => !selection.includes(index));
+        if (index != null) selection.push(index);
+      } else if (remove && group) {
+        const index = group.indices.findLast(index => selection.includes(index));
+        selection = selection.filter(value => value !== index);
+      } else return;
+      renderLibraryOptions();
+    };
+    $('library-confirm').onclick = () => answer(viewing ? { action: 'ack' } : { choices: [...selection] }, scope);
+    renderLibraryOptions();
+  }
+
+  function renderLibraryOptions() {
+    const prompt = match.prompt;
+    const viewing = prompt.kind === 'reveal';
+    cardPreview.hide();
+    libraryPicker.querySelectorAll('[data-library-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.libraryMode === libraryMode)));
+    const visible = libraryGroups.map((group, index) => ({ ...group, index })).filter(group =>
+      (libraryMode === 'all' || group.indices.length) && `${group.card.name} ${group.card.type} ${group.card.text}`.toLowerCase().includes(choiceFilter));
+    const scroll = $('library-options').scrollTop;
+    $('library-options').innerHTML = visible.map(group => {
+      const chosen = group.indices.filter(index => selection.includes(index)).length;
+      const available = group.indices.length;
+      const canAdd = !viewing && available > chosen && selection.length < prompt.max;
+      const art = group.card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(group.card);
+      return `<article class="library-option ${chosen ? 'selected' : ''} ${available ? '' : 'ineligible'}" data-library-preview="${group.index}"><button class="library-card" data-library-add="${group.index}" aria-label="Choose ${esc(group.card.name)}" ${canAdd ? '' : 'disabled'}>${art}<span class="library-card-details"><strong>${esc(group.card.name)}</strong><span>${cost(group.card.manaCost)}</span><small>${esc(group.card.type)}</small></span></button><div class="library-quantity">${available && !viewing ? `<button class="library-remove" data-library-remove="${group.index}" aria-label="Remove one ${esc(group.card.name)}" ${chosen ? '' : 'disabled'}>−</button><span><b>${chosen} selected</b><small>${available} available</small></span><button class="library-add" data-library-add="${group.index}" aria-label="Add one ${esc(group.card.name)}" ${canAdd ? '' : 'disabled'}>+</button>` : `<span>${group.count} ${group.count === 1 ? 'copy' : 'copies'}${viewing ? '' : ' · Not eligible'}</span>`}</div></article>`;
+    }).join('') || `<p id="library-empty">${choiceFilter ? 'No matches in this search. Clear the filter to see the available cards.' : 'No eligible cards to choose.'}</p>`;
+    $('library-options').scrollTop = scroll;
+    $('library-selection-count').textContent = viewing ? `${prompt.libraryCards.length} cards revealed` : `${selection.length} selected · ${prompt.min === prompt.max ? `choose ${prompt.max}` : `choose up to ${prompt.max}`}`;
+    $('library-selection-summary').textContent = libraryGroups.map(group => {
+      const count = group.indices.filter(index => selection.includes(index)).length;
+      return count ? `${count} × ${group.card.name}` : '';
+    }).filter(Boolean).join(' · ') || (viewing ? 'This does not select a card.' : prompt.min === 0 ? 'Choosing no cards is allowed.' : 'Choose the requested cards.');
+    $('library-confirm').textContent = viewing ? 'Continue resolving' : selection.length ? `Confirm ${selection.length} ${selection.length === 1 ? 'card' : 'cards'}` : 'Choose no cards';
+    $('library-confirm').disabled = !viewing && (selection.length < prompt.min || selection.length > prompt.max);
+    loadArt(libraryPicker);
   }
 
   function renderChoices() {

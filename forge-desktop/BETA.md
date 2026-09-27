@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.15
+# Mana Table — beta 0.1.0-beta.16
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -47,6 +47,16 @@ by someone with access; the app does not sign in to Moxfield.
    with current rules, power/toughness, counters, damage, and combat status.
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
+
+Library searches open a card picker over the table. **Eligible** shows the cards
+you can choose from that library right now; **All revealed** lets you inspect the
+other cards the effect permits you to see. The filter searches only those cards.
+Identical cards are grouped with copy counts; use **+** and **−** to select copies,
+then confirm. Selections stay selected when you change the filter. **Choose no
+cards** is available when the effect permits it. For example, Roiling Regrowth
+lets you choose up to two basic lands after sacrificing a land, and the engine
+puts those chosen lands onto the battlefield tapped. The picker closes when
+the choice resolves; hidden library cards are no longer shown afterward.
 
 Commander supports **2–6 players**: you and 1–5 AI opponents, all playing for
 themselves. Choose **Table size**, then a deck for each opponent. Games start at
