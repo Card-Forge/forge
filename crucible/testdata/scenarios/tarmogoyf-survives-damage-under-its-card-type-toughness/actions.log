@@ -1,0 +1,7 @@
+# CR 613.4a / 604.3: Tarmogoyf's characteristic-defining ability sets its
+# power to the card types among all graveyards and its toughness to that plus
+# one (Count$ValidGraveyard Card$CardTypes, SVar$X/Plus.1). A creature card in
+# one graveyard and an instant in the other make it 2/3, so the 2 marked
+# damage it already carries is not lethal at the first state-based-action
+# check. tarmogoyf-dies-when-graveyards-hold-too-few-card-types is the mirror.
+startturn human

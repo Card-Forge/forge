@@ -1,0 +1,6 @@
+# CR 613.4a / 704.5g: with only a creature card in any graveyard,
+# Tarmogoyf's characteristic-defining ability makes it 1/2, so its 2 marked
+# damage is lethal and the first state-based-action check destroys it -- the
+# graveyard it lands in then holds two creature cards, still one card type.
+# tarmogoyf-survives-damage-under-its-card-type-toughness is the mirror.
+startturn human
