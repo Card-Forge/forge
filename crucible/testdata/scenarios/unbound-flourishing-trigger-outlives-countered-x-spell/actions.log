@@ -1,0 +1,28 @@
+# Unbound Flourishing's real "whenever you cast a permanent spell with {X}"
+# trigger (Mode$ SpellCast | HasXManaCost$ True, TriggerSpellAbilityCastOrCopy
+# .java:171-181) fires off Farmer Cotton ({X}{G}{W}, X = 1) and goes on the
+# stack above it. ai's Counterspell, cast on top of both, counters Farmer
+# Cotton first; the trigger's DB$ ChangeX | Defined$ TriggeredSpellAbility
+# then resolves against a spell no longer on the stack, which is a no-op,
+# not an error (changexeffect.go): Java writes the new X onto an orphaned
+# SpellAbility nothing reads again.
+#
+# What this cannot show: the doubled X itself. expect.state has no stack
+# and no X, and every real {X} permanent reads X back only through
+# Count$xPaid or etbCounter, neither resolved yet -- so letting Farmer Cotton
+# resolve would fail on its own ETB Token, not on ChangeX. The doubling is
+# proven at module level instead (TestUnboundFlourishingDoublesX,
+# changexvalue_test.go), against the same verbatim trigger lines.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 W
+queue payx 1
+queue paygeneric G
+castspell human 1
+tapformana ai 7 U
+tapformana ai 8 U
+queue targets 1
+castspell ai 9
+resolvestack

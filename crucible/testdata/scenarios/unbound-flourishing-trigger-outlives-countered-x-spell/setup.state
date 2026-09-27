@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanbattlefield=Unbound Flourishing|Id:10;Forest|Id:2;Forest|Id:3;Plains|Id:4
+humanhand=Farmer Cotton|Id:1
+aibattlefield=Island|Id:7;Island|Id:8
+aihand=Counterspell|Id:9

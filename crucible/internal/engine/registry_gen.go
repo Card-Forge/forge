@@ -38,6 +38,7 @@ func NewRegistry() *Registry {
 	r[APIChangeCombatants] = changeCombatantsEffect{}
 	r[APIChangeSpeed] = changeSpeedEffect{}
 	r[APIChangeTargets] = changeTargetsEffect{}
+	r[APIChangeX] = changeXEffect{}
 	r[APIChangeZone] = changeZoneEffect{}
 	r[APIChangeZoneAll] = changeZoneAllEffect{}
 	r[APICharm] = charmEffect{}
