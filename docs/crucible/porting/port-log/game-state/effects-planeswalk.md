@@ -64,13 +64,13 @@ APIs.
 
 ### Corpus: 28 of 30 real `DB$ Planeswalk` lines resolve
 
-| Shape                                                                   | Lines | Status                                                                                                 |
-| ----------------------------------------------------------------------- | ----: | ------------------------------------------------------------------------------------------------------ |
-| Bare, `SubAbility$`, `SpellDescription$`, `ConditionCheckSVar$`         |    26 | resolve; mostly a phenomenon's "(Then planeswalk away from this phenomenon.)"                          |
-| `Optional$ True` (TARDIS, Start the TARDIS)                             |     2 | resolve through `ConfirmEffect`; a no-op outside Planechase, as Java                                   |
-| `Defined$ Remembered` (Spatial Merging)                                 |     1 | **rejected**: walks to two planes at once                                                              |
-| `Defined$ Remembered \| DontPlaneswalkAway$ True` (Norn's Seedcore)     |     1 | **rejected**: new plane joins the old one                                                              |
-| `Cause$ PlanarDie` (synthetic, `Player.java:3272`; 0 card-script lines) |     — | resolves: `Cause$` only feeds the replacement's `AbilityKey.Cause`, and that path fails closed (below) |
+| Shape                                                                   | Lines | Status                                                                                                                                                                               |
+| ----------------------------------------------------------------------- | ----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Bare, `SubAbility$`, `SpellDescription$`, `ConditionCheckSVar$`         |    26 | resolve; mostly a phenomenon's "(Then planeswalk away from this phenomenon.)"                                                                                                        |
+| `Optional$ True` (TARDIS, Start the TARDIS)                             |     2 | resolve through `ConfirmEffect`; a no-op outside Planechase, as Java. Deviates from ADR-0029's own listed example of a shape to reject — 2 real corpus lines make it worth resolving |
+| `Defined$ Remembered` (Spatial Merging)                                 |     1 | **rejected**: walks to two planes at once                                                                                                                                            |
+| `Defined$ Remembered \| DontPlaneswalkAway$ True` (Norn's Seedcore)     |     1 | **rejected**: new plane joins the old one                                                                                                                                            |
+| `Cause$ PlanarDie` (synthetic, `Player.java:3272`; 0 card-script lines) |     — | resolves: `Cause$` only feeds the replacement's `AbilityKey.Cause`, and that path fails closed (below)                                                                               |
 
 **Rejected: `Defined$`, `DontPlaneswalkAway$`.** Both need more than one concurrent active plane (Java's
 `currentPlanes`/`activePlanes` lists grow past one). ADR-0029 chose a single `activePlane` on the premise "none found";
@@ -105,6 +105,6 @@ plane counts: it goes to the bottom first and is walked straight back to
 (`TriggerPlaneswalkedFrom.setTriggeringObjects`). `new CardCollection((Card) null)` adds nothing (`FCollection.add`,
 null → false), so X is 0: the eruption deals no damage. Fix: `TriggerObjectsCards$CardCounters.PRESSURE`
 (`AbilityUtils.java:694-697`, reads the `Cards` collection as it stood at trigger time, counters included). Crucible
-records no `Card` triggering object for these modes, matching Java; not compensated. Row in `forge-java-defects.md`.
+records no `Card` triggering object for these modes, matching Java; not compensated. Row in `card-script-defects.md`.
 
 Tests: `planechase_test.go`.

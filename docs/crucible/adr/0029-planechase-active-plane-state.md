@@ -23,8 +23,11 @@ Forge-oracle research (full report cited throughout) found the surrounding mecha
   `g.rand.Int32n(6)`. No new randomness primitive needed.
 - `PlaneswalkEffect.java:39-43` moves **every player's** current plane back to that player's own `PlanarDeck` bottom
   before the activator's new plane enters (`leaveCurrentPlane`, `Player.java:2669-2679`), not just the activator's.
-- `Game.activePlanes` is typed `List<Card>` but every real code path (`initPlane`, `planeswalkTo`) drives it to exactly
-  one card.
+- `Game.activePlanes` is typed `List<Card>`. Game-mode setup and the default `planeswalk()` path (no `Defined$`) drive
+  it to exactly one card; two real corpus lines do not — Spatial Merging's `Defined$ Remembered` and Norn's Seedcore's
+  `Defined$ Remembered | DontPlaneswalkAway$ True` both call `planeswalkTo` needing more than one concurrent plane
+  (`docs/crucible/porting/port-log/game-state/effects-planeswalk.md`, "Corpus" table). A single-`CardID` state (below)
+  cannot represent this; those two lines are rejected rather than resolved, pending a superseding ADR.
 
 Corpus weight beyond the 4 APIs: 159 Plane + 14 Phenomenon card files (173 total) carry their own scripts once a
 Planechase deck exists; scoping their full ability surface is out of scope for this ADR (Related, below).
@@ -36,8 +39,11 @@ Planechase deck exists; scoping their full ability surface is out of scope for t
 - PORT-2: card scripts compile once; Plane/Phenomenon abilities need zero new dispatch machinery, only the same
   zone-scoped trigger/static checks every card already gets — confirmed no Java-side special case exists to port.
 - Corpus-first (Plan Section 1.5): port the dominant, unconditional shape of each of the 4 APIs; reject rarer shapes
-  (`Optional$`, the replacement-driven "roll extra dice, discard one" shape) as unresolved, matching every other M6
-  effect's convention, rather than build for a shape no real corpus card exercises yet.
+  with no resolvable state to back them (the `Defined$`/`DontPlaneswalkAway$` concurrent-plane shapes, the
+  replacement-driven "roll extra dice, discard one" shape) as unresolved, matching every other M6 effect's convention,
+  rather than build for a shape no real corpus card exercises yet. A rarer shape that a chosen state design already
+  covers (`Optional$` — 2 real corpus lines, resolves through the existing `ConfirmEffect` decision) is not excluded by
+  this driver; only shapes the Decision's state design cannot represent are.
 
 ## Considered Options
 
@@ -67,7 +73,9 @@ Java invocation drives the list to size ≤1 (Context); a single field is simple
 is set once at game construction, true when any player's `PlanarDeck` zone is non-empty after setup — this reproduces
 Java's `hasAppliedVariant(GameType.Planechase)` gate (`GameAction.java:2358`) without inventing new variant-flag
 plumbing Crucible's fixture-driven setup has no other use for (YAGNI): a deck with no planes behaves exactly like Java's
-`null` case. Revisit to a slice only if a real corpus card needs concurrent multi-plane (none found).
+`null` case. Two real corpus lines (Spatial Merging, Norn's Seedcore — Context, above) do need concurrent multi-plane;
+kept as `Planeswalk`'s own rejected shapes rather than reopening this decision for 2 lines. Revisit to a slice via a
+superseding ADR if a future porter's corpus count makes that trade worth it.
 
 **Plane ownership: Option 2.** No new `Player` field. `g.Card(activePlane).ZoneOwner` already answers "whose Command
 zone is this plane in," reused by `leaveCurrentPlane`'s per-player-loop port. Avoids duplicating state two ways.

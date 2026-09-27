@@ -27,11 +27,13 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `captured_by_the_consulate`                | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`)  | ChangeTargets port              | Not filed                                                        |
 | `mount_keralia`                            | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0                   | Planeswalk port                 | Not filed                                                        |
 
-Every row but `peace_talks`, the two Clone rows and `captured_by_the_consulate` is merged upstream; the Clone rows and
-`captured_by_the_consulate` are rejected with an `error` meanwhile (`Defined$ TriggeredSourceSA` is not resolvable, so
-the fix, `Defined$ TriggeredSpellAbility`, is what the port would resolve). `peace_talks` is carried as a pending fix,
-logged in [upstream-patches.md](upstream-patches.md), until upstream merges it. `internal/carddb/compile` compiles the
-whole corpus with no exemption of any kind, and `internal/valid` parses all 49,615 valid strings with no padded base.
+Every row but `peace_talks`, the two Clone rows, `captured_by_the_consulate` and `mount_keralia` is merged upstream; the
+Clone rows and `captured_by_the_consulate` are rejected with an `error` meanwhile (`Defined$ TriggeredSourceSA` is not
+resolvable, so the fix, `Defined$ TriggeredSpellAbility`, is what the port would resolve); `mount_keralia` resolves X to
+0 instead (no counters to read back), so its eruption silently deals no damage until fixed upstream. `peace_talks` is
+carried as a pending fix, logged in [upstream-patches.md](upstream-patches.md), until upstream merges it.
+`internal/carddb/compile` compiles the whole corpus with no exemption of any kind, and `internal/valid` parses all
+49,615 valid strings with no padded base.
 
 Two more change no rules behaviour:
 
