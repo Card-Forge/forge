@@ -74,7 +74,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
                 throw new IllegalStateException("The cardpool has been depleted and has no more cards for slot " + slot.getKey());
             }
 
-            List<PaperCard> foundCards = ps.random(slot.getRight(), true);
+            List<PaperCard> foundCards = ps.fetch(slot.getRight(), true);
             if(poolLimited)
                 ps.removeAll(foundCards);
             result.addAll(foundCards);

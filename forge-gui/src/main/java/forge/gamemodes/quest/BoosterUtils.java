@@ -490,7 +490,7 @@ public final class BoosterUtils {
             PrintSheet ps = new PrintSheet("Quest rewards");
             Predicate<PaperCard> predicate = IterableUtil.and(preds);
             FModel.getQuest().getAllAllowedCards().filter(predicate).forEach(ps::add);
-            rewards.addAll(ps.random(qty, true));
+            rewards.addAll(ps.fetch(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
             rewards.add(new QuestRewardCardDuplicate());
