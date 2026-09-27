@@ -1106,8 +1106,7 @@ public class AiAttackController {
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
             for (Card attacker : left) {
-                if (System.nanoTime() > deadlineNanos)
-                    break; // out of time - stop adding attackers rather than force through the rest of a large list
+                // if we are doing lethal damage don't skip this since doAssault() can be more than the minimun AITimeout..
                 if (attackMax != null && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
