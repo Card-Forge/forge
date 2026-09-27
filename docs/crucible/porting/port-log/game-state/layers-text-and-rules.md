@@ -121,3 +121,36 @@ this static, and stays rejected (`pumpeffect.go`).
 No scenario fixture: every behavior here is a block/attack declaration being refused, and the harness has no verb that
 expects an illegal declaration; `hiddenkeyword_test.go` covers it the way `combatlegality_test.go` covers printed lure
 and can't-block keywords.
+
+## Layer 8: vote and villainous-choice params land
+
+Java: `StaticAbilityContinuous.java:536-553` writes four per-player tables (`Player.addControlVote`,
+`addAdditionalVote`, `addAdditionalOptionalVote`, `addAdditionalVillainousChoices`); `VoteEffect.java:83-104` and
+`VillainousChoiceEffect.java:22-28` read them. They are player-facing, so they ride `RulesMod` like `SetMaxHandSize$`:
+four new `RulesEffect` fields filled by `rulesEffect`, folded by `RulesMod` methods.
+
+| Param (real lines)                | Card                      | Fold                              | Reader                                                           |
+| --------------------------------- | ------------------------- | --------------------------------- | ---------------------------------------------------------------- |
+| `AdditionalVote$` (1)             | Brago's Representative    | Sum                               | Vote: each player votes `1 + sum` times                          |
+| `AdditionalOptionalVote$` (3)     | Ballot Broker, Tivit, ... | Sum                               | Vote: `ChooseNumber(0..sum)` more votes, asked only if sum > 0   |
+| `ControlVote$` (1, Effect SVar)   | Illusion of Choice        | Latest `Timestamp` across players | Vote: that player casts every ballot, counted as the voter's     |
+| `AdditionalVillainousChoice$` (1) | The Valeyard              | Sum                               | VillainousChoice: the whole choice `1 + sum` times, then resolve |
+
+`ChooseNumber` is asked only when an optional vote exists: Java always calls `chooseNumber(0, optionalVotes)`, but a
+`[0, 0]` choice decides nothing and would make every scripted vote queue an extra answer (the "nothing meaningful to
+decide" reasoning `DeclareCombatAttackers` already uses).
+
+Replaces the old fail-closed checks (`battlefieldStaticNames`), which also missed `ControlVote$`: its one real line sits
+on an Effect card in the Command zone, not the battlefield, so a controlled vote silently ran uncontrolled.
+
+**Forge bug (PORT-8), not reproduced:** `VoteEffect.java:93-94` removes `realVoter` (the `ControlVote$` player) from a
+`VotePlayer$ Other` ballot, not the player whose vote it is: under a controlled vote each player may vote for
+themselves, and nobody may vote for the controller. That combination returns an error citing the line instead.
+
+Not resolved (skipped, `applyOneContinuousRules`' doc comment): `ControlOpponentsSearchingLibrary$` (1 real line) — no
+search effect hands its decisions to another controller; `DeclaresAttackers$`/`DeclaresBlockers$` (1 `S:` line, 5 Effect
+SVars) — `DeclareCombatAttackers`/`DeclareCombatBlockers` ask the attacking/defending player only; `IgnoreEffectCost$`
+(4) — a cost-paid exemption from another static, its own mechanic.
+
+Tests: `extravotes_test.go` (each param from its real line; `ControlVote$` through a controller that records who is
+asked; the `VotePlayer$ Other` refusal).

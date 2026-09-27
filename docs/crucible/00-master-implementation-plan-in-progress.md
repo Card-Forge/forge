@@ -1655,9 +1655,10 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     now call them instead of comparing against the bare constants. Not resolved: `MayLookAt$`/`MayPlay$` (88/181 real
     lines) — a cast-time zone-eligibility permission `CastSpell`'s own hand-only check has nowhere to consult yet;
     `AddHiddenKeyword$` resolves per card for the four keyword lines something reads (41 of 53 real lines,
-    `port-log/game-state/layers-text-and-rules.md`); vote/villainous-choice params (0-3 real lines each) — multiplayer
-    mechanics this port has no concept of; a qualified `Affected$` `matchesPlayerSpec` cannot resolve
-    (`Player.NotedForGreenAnchor`/`Player.Chosen`, 1 real line each).
+    `port-log/game-state/layers-text-and-rules.md`); the four vote/villainous-choice params resolve into `RulesEffect`
+    fields Vote/VillainousChoice read; `ControlOpponentsSearchingLibrary$`/`DeclaresAttackers$`/`DeclaresBlockers$` hand
+    a decision to another player's controller, which nothing here can; a qualified `Affected$` `matchesPlayerSpec`
+    cannot resolve (`Player.NotedForGreenAnchor`/`Player.Chosen`, 1 real line each).
 
     The legend rule's own `ignoreLegendRule` exemption (item 25) and `CantBlockBy` (item 28's own combat note) already
     showed a static-ability mode can be independently buildable when it needs no layer-folding of its own —

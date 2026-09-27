@@ -922,8 +922,9 @@ func applyContinuousRules(g *Game) {
 // dispatch every other player-shaped Affected/ValidPlayer/ValidActivatingPlayer
 // check in this port already reuses, applied here against a static
 // ability's Affected$ rather than a trigger's own player-shaped param), if
-// s is a Mode$ Continuous line naming SetMaxHandSize$, RaiseMaxHandSize$
-// and/or AdjustLandPlays$ in a shape rulesEffect (below) can resolve.
+// s is a Mode$ Continuous line naming SetMaxHandSize$, RaiseMaxHandSize$,
+// AdjustLandPlays$ and/or one of the four vote params in a shape
+// rulesEffect (below) can resolve.
 //
 // Not resolved, each for a specific reason:
 //   - AffectedDefined$/AffectedZone$/CharacteristicDefining$/an unresolved
@@ -941,10 +942,14 @@ func applyContinuousRules(g *Game) {
 //   - MayLookAt$/MayPlay$ (88, 181 real lines corpus-wide) -- a cast-time
 //     zone-eligibility permission CastSpell's own hand-only check
 //     (castspell.go) has nowhere to consult yet.
-//   - ControlOpponentsSearchingLibrary$/ControlVote$/AdditionalVote$/
-//     AdditionalOptionalVote$/AdditionalVillainousChoice$/
-//     DeclaresAttackers$/DeclaresBlockers$ (0-3 real lines each) --
-//     multiplayer/vote mechanics this port has no concept of at all.
+//   - ControlOpponentsSearchingLibrary$ (1 real line) -- a library search
+//     handing its decisions to another player's controller, which no
+//     search effect here can do; DeclaresAttackers$/DeclaresBlockers$ (1
+//     S: line, 5 Effect SVars) -- handing a declaration to another
+//     player, which DeclareCombatAttackers/DeclareCombatBlockers cannot.
+//     The vote params (AdditionalVote$, AdditionalOptionalVote$,
+//     AdditionalVillainousChoice$, ControlVote$) do resolve here, into
+//     RulesEffect fields Vote/VillainousChoice read.
 //   - IgnoreEffectCost$ (4) -- a cost-ignoring ability grant, its own
 //     separate mechanic. AddHiddenKeyword$ is not this function's:
 //     applyOneContinuousHiddenKeyword (below) resolves it per card.
@@ -984,7 +989,8 @@ func applyOneContinuousRules(g *Game, host *Card, amounts map[string]expr.Amount
 }
 
 // rulesEffect reads s's own SetMaxHandSize$/RaiseMaxHandSize$/
-// AdjustLandPlays$ params into one RulesEffect. "Unlimited" (Java's own
+// AdjustLandPlays$/AdditionalVote$/AdditionalOptionalVote$/
+// AdditionalVillainousChoice$/ControlVote$ params into one RulesEffect. "Unlimited" (Java's own
 // literal sentinel for `p.setUnlimitedHandSize(true)`/
 // `p.addMaxLandPlaysInfinite`) is checked before falling to ptParam (above)
 // for the numeric case, since ptParam itself would just report it
@@ -1023,6 +1029,26 @@ func rulesEffect(g *Game, host *Card, amounts map[string]expr.Amount, s *compile
 		} else {
 			return RulesEffect{}, false
 		}
+	}
+	for _, v := range [...]struct {
+		key string
+		dst *int
+	}{
+		{"AdditionalVote", &e.AdditionalVotes},
+		{"AdditionalOptionalVote", &e.AdditionalOptionalVotes},
+		{"AdditionalVillainousChoice", &e.AdditionalVillainousChoices},
+	} {
+		if _, ok := s.Param(v.key); !ok {
+			continue
+		}
+		n, ok := ptParam(g, amounts, host, s, v.key)
+		if !ok {
+			return RulesEffect{}, false
+		}
+		*v.dst, hasEffect = n, true
+	}
+	if _, ok := s.Param("ControlVote"); ok {
+		e.ControlVote, hasEffect = true, true
 	}
 	return e, hasEffect
 }

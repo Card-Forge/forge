@@ -20,10 +20,24 @@ import (
 // every ability with VoteNum bound to its vote count.
 //
 // Java groups votes in a hash multimap, so its tie order and EachVote$
-// order are arbitrary; this port uses the options' own order. Extra votes
-// (AdditionalVote$/AdditionalOptionalVote$ statics) and a controlled vote
-// are not modeled, so the effect fails while such a static is out.
+// order are arbitrary; this port uses the options' own order. Each player
+// votes 1 + AdditionalVote$ times plus up to AdditionalOptionalVote$ more,
+// and a ControlVote$ player casts every ballot (Layer 8, RulesMod).
 type voteEffect struct{}
+
+// controlVoter is Game.getControlVote: the player holding the latest
+// ControlVote$ effect, if any player holds one.
+func (g *Game) controlVoter() (PlayerID, bool) {
+	best, found := NoPlayer, false
+	var bestTS uint64
+	for _, p := range g.Players() {
+		ts, ok := g.Player(p).Rules.controlVote()
+		if ok && (!found || ts > bestTS) {
+			best, bestTS, found = p, ts, true
+		}
+	}
+	return best, found
+}
 
 type voteOption struct {
 	sub    int
@@ -37,9 +51,6 @@ func (voteEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
-	}
-	if battlefieldStaticNames(g, "AdditionalVote") || battlefieldStaticNames(g, "AdditionalOptionalVote") || battlefieldStaticNames(g, "ControlVote") {
-		return fmt.Errorf("engine: Vote: extra or controlled votes not resolvable yet")
 	}
 	choices := additionalAbilities(a.Params, "Choices")
 	var options []voteOption
@@ -93,6 +104,14 @@ func (voteEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 	voters = rotateToFront(voters, a.Controller)
 	raw, _ := a.Params.Param("VotePlayer")
 	other := raw == "Other"
+	controlVoter, controlled := g.controlVoter()
+	if controlled && other {
+		// VoteEffect.java:93-94 removes the controlling player, not the
+		// voter, from a VotePlayer$ Other ballot: the voter could vote for
+		// themselves and nobody for the controller. A Forge bug (PORT-8),
+		// so the combination fails closed rather than copying it.
+		return fmt.Errorf("engine: Vote: ControlVote$ with VotePlayer$ Other not resolvable (VoteEffect.java:93-94)")
+	}
 	counts := make([]int, len(options))
 	var ballots []struct {
 		option int
@@ -112,15 +131,34 @@ func (voteEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		if len(opts) == 0 {
 			continue
 		}
-		pick, err := castVote(g, controller, p, a, choices, options, opts)
-		if err != nil {
-			return err
+		// VoteEffect.java:89-101: one vote, plus every AdditionalVote$,
+		// plus up to every AdditionalOptionalVote$ -- p decides how many of
+		// those (asked only when there is a choice to make) -- all cast by
+		// the ControlVote$ player when one exists.
+		rules := g.Player(p).Rules
+		amount := 1 + rules.additionalVotes()
+		if optional := rules.additionalOptionalVotes(); optional > 0 {
+			extra := controller.ChooseNumber(g, p, a.Source, 0, optional)
+			if extra < 0 || extra > optional {
+				return fmt.Errorf("engine: Vote: %d additional votes out of range [0, %d]", extra, optional)
+			}
+			amount += extra
 		}
-		counts[pick]++
-		ballots = append(ballots, struct {
-			option int
-			voter  PlayerID
-		}{pick, p})
+		realVoter := p
+		if controlled {
+			realVoter = controlVoter
+		}
+		for range amount {
+			pick, err := castVote(g, controller, realVoter, a, choices, options, opts)
+			if err != nil {
+				return err
+			}
+			counts[pick]++
+			ballots = append(ballots, struct {
+				option int
+				voter  PlayerID
+			}{pick, p})
+		}
 	}
 	resolveSub := func(i int, amounts bool) error {
 		child := *a
