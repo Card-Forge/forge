@@ -1,11 +1,13 @@
 package forge.api;
 
 import com.google.gson.JsonObject;
+import com.google.common.eventbus.Subscribe;
 import forge.StaticData;
 import forge.ai.LobbyPlayerAi;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.game.*;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.card.CardView;
 import forge.game.player.*;
 import forge.game.spellability.SpellAbilityView;
@@ -25,7 +27,7 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.*;
 
-/** One local human-versus-AI game. Mutable engine objects never leave this adapter. */
+/** One local human with one or more AI opponents. Mutable engine objects never leave this adapter. */
 public final class MatchSession {
     private static final forge.util.ITriggerEvent CARD_CLICK = new forge.util.ITriggerEvent() {
         public int getButton() { return 1; }
@@ -71,7 +73,8 @@ public final class MatchSession {
         Pending(String kind, Input input) { this.kind = kind; this.input = input; }
     }
 
-    public MatchSession(Deck deck, String format, String opponent, Path resources, Path profile) {
+    public MatchSession(Deck deck, String format, List<String> opponents, Path resources, Path profile) {
+        validateOpponents(format, opponents);
         HeadlessPlatform.initialize(resources, profile);
         this.format = format;
         boolean commander = format.equals("Commander");
@@ -79,18 +82,24 @@ public final class MatchSession {
         if (commander) rules.addAppliedVariant(GameType.Commander);
         rules.setGamesPerMatch(1);
         rules.setWarnAboutAICards(false); // Opponent lists are supplied by the host, not chosen by the player.
-        var preset = commander && opponent.startsWith("preset:") ? DeckPresets.find(opponent.substring(7)) : null;
-        var ai = new LobbyPlayerAi(preset != null ? preset.name() + " · AI" : opponent.equals("red") ? "Cinder · AI" : "Verdant · AI", Set.of());
-        ai.setAiProfile("Default");
-        var aiDeck = preset != null ? DeckPresets.create(preset.id()) : commander ? CommanderOpponents.create(opponent) : opponentDeck(opponent);
         var humanPlayer = (commander ? RegisteredPlayer.forCommander(new Deck(deck)) : new RegisteredPlayer(new Deck(deck))).setPlayer(new LobbyPlayerHuman("You"));
-        var computer = (commander ? RegisteredPlayer.forCommander(aiDeck) : new RegisteredPlayer(aiDeck)).setPlayer(ai);
-        var match = new Match(rules, List.of(humanPlayer, computer), "Mana Table");
+        var seats = new ArrayList<RegisteredPlayer>();
+        seats.add(humanPlayer);
+        for (String opponent : opponents) {
+            var preset = commander && opponent.startsWith("preset:") ? DeckPresets.find(opponent.substring(7)) : null;
+            String name = preset != null ? preset.name() : opponent.equals("red") ? "Cinder" : "Verdant";
+            var ai = new LobbyPlayerAi(name + " · AI" + (opponents.size() > 1 ? " " + seats.size() : ""), Set.of());
+            ai.setAiProfile("Default");
+            var aiDeck = preset != null ? DeckPresets.create(preset.id()) : commander ? CommanderOpponents.create(opponent) : opponentDeck(opponent);
+            seats.add((commander ? RegisteredPlayer.forCommander(aiDeck) : new RegisteredPlayer(aiDeck)).setPlayer(ai));
+        }
+        var match = new Match(rules, seats, "Mana Table");
         game = match.createGame();
         human = (PlayerControllerHuman) game.getPlayers().get(0).getController();
         viewer = human.getPlayer().getView();
         activity = new MatchActivity(viewer);
         game.subscribeToEvents(activity);
+        game.subscribeToEvents(this);
         gui = (IGuiGame) Proxy.newProxyInstance(IGuiGame.class.getClassLoader(), new Class<?>[]{IGuiGame.class}, (proxy, method, args) -> {
             if (method.isDefault()) return InvocationHandler.invokeDefault(proxy, method, args);
             return invokeGui(method.getName(), args == null ? new Object[0] : args);
@@ -104,7 +113,7 @@ public final class MatchSession {
                 match.startGame(game);
                 synchronized (gate) { pending = null; publish(null); }
             } catch (Throwable failure) { if (!closed) fail(failure); }
-            finally { game.unsubscribeFromEvents(activity); }
+            finally { game.unsubscribeFromEvents(activity); game.unsubscribeFromEvents(this); }
         });
     }
 
@@ -127,6 +136,24 @@ public final class MatchSession {
         }
     }
     public boolean finished() { return closed || error != null || game.isGameOver(); }
+
+    static void validateOpponents(String format, List<String> opponents) {
+        int maximum = format.equals("Commander") ? 5 : 1;
+        if (opponents.isEmpty() || opponents.size() > maximum) throw new IllegalArgumentException(
+                format.equals("Commander") ? "Choose 1–5 AI opponents for a 2–6 player Commander table" : "Constructed supports one AI opponent");
+        var allowed = opponents(format).stream().map(opponent -> opponent.get("id")).toList();
+        for (String opponent : opponents) if (!allowed.contains(opponent)) throw new IllegalArgumentException("Unknown opponent: " + opponent);
+    }
+
+    @Subscribe
+    public void onPhase(GameEventTurnPhase event) {
+        // A local table ends when its only human is eliminated. Do not leave an
+        // invisible AI-only game running after the player starts another table.
+        if (viewer.getHasLost() && !game.isGameOver()) {
+            game.setGameOver(GameEndReason.AllHumansLost);
+            human.getInputQueue().onGameOver(true);
+        }
+    }
 
     public static List<Map<String, String>> opponents(String format) {
         if (format.equals("Commander")) {
@@ -168,9 +195,11 @@ public final class MatchSession {
             // Preserve its actual input kind instead of publishing an empty name.
             Class<?> inputClass = current.getClass();
             while (inputClass.getSimpleName().isEmpty()) inputClass = inputClass.getSuperclass();
+            var playerChoices = current instanceof InputSelectEntitiesFromList<?> selection
+                    ? selection.getValidChoices().stream().filter(Player.class::isInstance).map(entity -> ((Player) entity).getId()).toList() : List.of();
             next.prompt = map("id", next.id, "kind", "input", "inputType", inputClass.getSimpleName(),
                     "message", message, "ok", ok, "cancel", cancel, "okEnabled", okEnabled, "cancelEnabled", cancelEnabled,
-                    "canAttackAll", current instanceof InputAttack);
+                    "canAttackAll", current instanceof InputAttack, "playerChoices", playerChoices);
             pending = next;
             publish(next);
         }
@@ -229,6 +258,7 @@ public final class MatchSession {
             pending = null;
             if (old != null) old.response.completeExceptionally(new CancellationException("Match conceded"));
             human.concede();
+            if (!game.isGameOver()) game.setGameOver(GameEndReason.AllHumansLost);
             human.getInputQueue().onGameOver(true);
             publish(null);
             return latest;
@@ -249,7 +279,8 @@ public final class MatchSession {
     private void publish(Pending prompt) {
         var view = game.getView();
         var players = new ArrayList<Object>();
-        for (PlayerView player : view.getPlayers()) {
+        var allPlayers = game.getRegisteredPlayers().stream().map(Player::getView).toList();
+        for (PlayerView player : allPlayers) {
             var zones = new ArrayList<Object>();
             for (ZoneType zone : List.of(ZoneType.Battlefield, ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command)) {
                 var visible = new ArrayList<Object>();
@@ -262,11 +293,13 @@ public final class MatchSession {
             String[] labels = {"W", "U", "B", "R", "G", "C"};
             for (int i = 0; i < colors.length; i++) mana.put(labels[i], player.getMana(colors[i]));
             var commanderDamage = new ArrayList<Object>();
-            if (format.equals("Commander")) for (PlayerView owner : view.getPlayers()) {
+            if (format.equals("Commander")) for (PlayerView owner : allPlayers) {
                 if (owner.equals(player) || owner.getCommanders() == null) continue;
-                for (CardView commander : owner.getCommanders()) commanderDamage.add(map("name", commander.isFaceDown() ? "Face-down commander" : commander.getCurrentState().getName(), "damage", player.getCommanderDamage(commander)));
+                for (CardView commander : owner.getCommanders()) commanderDamage.add(map("name", commander.isFaceDown() ? "Face-down commander" : commander.getCurrentState().getName(),
+                        "ownerId", owner.getId(), "owner", owner.getName(), "damage", player.getCommanderDamage(commander)));
             }
             players.add(map("id", player.getId(), "name", player.equals(viewer) ? "You" : player.getName(), "human", player.equals(viewer),
+                    "seat", allPlayers.indexOf(player) + 1, "eliminated", player.getHasLost(),
                     "life", player.getLife(), "priority", player.getHasPriority(), "mana", mana, "zones", zones, "commanderDamage", commanderDamage));
         }
         var stack = new ArrayList<Object>();
@@ -279,12 +312,12 @@ public final class MatchSession {
         String result = null;
         if (game.isGameOver() && game.getOutcome() != null) {
             var outcome = game.getOutcome();
-            result = outcome.isDraw() ? "Draw" : outcome.getWinningLobbyPlayer() == human.getLobbyPlayer() ? "Victory" : "Defeat";
+            result = viewer.getHasLost() ? "Defeat" : outcome.isDraw() ? "Draw" : outcome.getWinningLobbyPlayer() == human.getLobbyPlayer() ? "Victory" : "Defeat";
         }
         var activityFrame = activity.frame();
         activityRevision = activityFrame.revision();
         latest = Collections.unmodifiableMap(map("id", id, "revision", ++revision, "boardRevision", revision, "format", format, "status", error != null ? "error" : game.isGameOver() ? "finished" : "playing",
-                "error", error, "viewerId", viewer.getId(), "turn", view.getTurn(), "phase", view.getPhase() == null ? "Pregame" : view.getPhase().nameForUi,
+                "error", error, "playerCount", allPlayers.size(), "viewerId", viewer.getId(), "turn", view.getTurn(), "phase", view.getPhase() == null ? "Pregame" : view.getPhase().nameForUi,
                 "phaseKey", view.getPhase() == null ? "PREGAME" : view.getPhase().name(),
                 "activePlayerId", view.getPlayerTurn() == null ? null : view.getPlayerTurn().getId(), "players", players,
                 "stack", stack, "prompt", prompt == null ? null : prompt.prompt, "result", result, "notices", List.copyOf(notices), "activity", activityFrame.entries()));
@@ -298,10 +331,14 @@ public final class MatchSession {
         if (prompt != null) prompt.cards.put(key, card);
         var counters = new LinkedHashMap<String, Integer>();
         if (card.getCounters() != null) for (var entry : card.getCounters().entrySet()) counters.put(entry.getElement().getName(), entry.getCount());
+        var combat = game.getView().getCombat();
+        var defender = combat == null ? null : combat.getDefender(card);
         return map("key", key, "visualId", activity.visualId(card), "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
                 "manaCost", hidden ? "" : face.getManaCost().toString(), "power", hidden ? null : face.getPower(), "toughness", hidden ? null : face.getToughness(),
                 "text", hidden ? "" : card.getText(), "tapped", card.isTapped(), "sick", card.isSick(), "damage", card.getDamage(),
                 "attacking", card.isAttacking(), "blocking", card.isBlocking(), "counters", counters,
+                "defenderId", defender instanceof PlayerView ? defender.getId() : null,
+                "defender", defender == null ? null : defender instanceof CardView target && (!target.canBeShownTo(viewer) || target.isFaceDown()) ? "Face-down permanent" : defender.getName(),
                 "selectable", selectable.contains(card) || actionable.contains(card)
                         || prompt != null && prompt.input instanceof InputLondonMulligan && card.getController().equals(viewer) && card.getZone() == ZoneType.Hand,
                 "highlighted", highlighted.contains(card), "faceDown", hidden);
@@ -319,6 +356,7 @@ public final class MatchSession {
             next.put("revision", ++revision); next.put("status", "error"); next.put("error", failure); next.put("prompt", null);
             latest = Collections.unmodifiableMap(next);
             human.concede();
+            if (!game.isGameOver()) game.setGameOver(GameEndReason.AllHumansLost);
             human.getInputQueue().onGameOver(true);
         }
     }

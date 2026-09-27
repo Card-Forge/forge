@@ -50,8 +50,9 @@ schema version 1, printing IDs, quantities, and explicit sections. Writes use
 temporary files and atomic replacement where supported. Failed writes remain
 visible and block switching decks until saved.
 
-`MatchSession` hosts one human-versus-AI Constructed or Commander game. `matchStart` uses the
-saved current deck and an opponent ID from `matchOpponents`. `matchState` returns
+`MatchSession` hosts one human with one AI in Constructed or 1–5 AIs in Commander.
+`matchStart` uses the saved current deck and an `opponents` array of IDs from
+`matchOpponents` (or legacy singular `opponent`). `matchState` returns
 a cached snapshot with a revision, viewer-filtered zones, stack, and current
 prompt. `matchAction` requires `sessionId` and the current `promptId`; stale or
 duplicate answers are rejected. Card handles belong to that prompt only.
@@ -65,6 +66,18 @@ animations. `activity` is a bounded event history copied by the host. A separate
 correlates visible cards across stable snapshots without replacing prompt-scoped
 action keys. Motion defaults to the system preference and can be toggled locally.
 
+The renderer retains card nodes across changes to prompt handles and highlights
+when visible board data is unchanged. It acknowledges clicks synchronously and
+polls immediately after actions, then every 50 ms while resolving and 350 ms at
+a waiting prompt. Polls never overlap, and responses from an old session cannot
+replace a newer table. Cached artwork bypasses the network download queue.
+
+`node --test tests/multiplayer.test.cjs` exercises real four- and six-player
+Commander setup, private zones, attacks against a selected defender, concession,
+and human elimination. `npm test -- tests/multiplayer.spec.cjs` covers seat setup,
+viewing any opponent, resizing to 1000/1120/1540 pixels, immediate acknowledgment,
+and retaining the same card DOM nodes through a response pause.
+
 `turn-guide.js` describes all engine phase keys, names each priority action, and
 distinguishes optional responses from required combat, cost, and card-selection
 prompts. Guidance never dispatches an action. The renderer retains the engine's
@@ -74,7 +87,7 @@ Run `node --test tests/turn-guide.test.cjs` for the phase/prompt matrix and
 main phases, end step, spell responses, and mandatory cleanup discards.
 
 `matchSetup` returns the current deck ID/revision, format, starting life, opponents,
-and a validated Commander preview. A Commander list without a Cmd section can
+`maxPlayers`, and a validated Commander preview. A Commander list without a Cmd section can
 select `commanderId` from its main-deck candidates; the host validates a detached
 99+1 copy and never edits the saved list. A unique valid candidate is preselected.
 Pass `commanderId`, `deckId`, and `revision` to `matchStart` to launch that preview.

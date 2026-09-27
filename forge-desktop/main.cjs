@@ -30,10 +30,15 @@ function art(name) {
   if (process.env.FORGE_OFFLINE === '1') return null;
   if (typeof name !== 'string' || name.length > 200) return null;
   if (artCache.has(name)) return artCache.get(name);
+  // Cached cards should never wait behind unrelated network downloads.
+  const key = createHash('sha256').update(name).digest('hex');
+  const file = path.join(userData, 'art', `${key}.jpg`);
+  if (fs.existsSync(file)) {
+    const cached = fs.promises.readFile(file).then(bytes => 'data:image/jpeg;base64,' + bytes.toString('base64')).catch(() => null);
+    artCache.set(name, cached);
+    return cached;
+  }
   const promise = artQueue.then(async () => {
-    const key = createHash('sha256').update(name).digest('hex');
-    const file = path.join(userData, 'art', `${key}.jpg`);
-    if (fs.existsSync(file)) return 'data:image/jpeg;base64,' + fs.readFileSync(file).toString('base64');
     await new Promise(resolve => setTimeout(resolve, Math.max(0, 150 - (Date.now() - lastArtRequest))));
     lastArtRequest = Date.now();
     try {
@@ -69,7 +74,7 @@ app.whenReady().then(async () => {
   session.defaultSession.setPermissionCheckHandler(() => false);
   Menu.setApplicationMenu(null);
   window = new BrowserWindow({
-    width: 1540, height: 980, minWidth: 1120, minHeight: 740, backgroundColor: '#101415',
+    width: 1540, height: 980, minWidth: 1000, minHeight: 740, backgroundColor: '#101415',
     title: `${productName} · Beta`, show: process.env.FORGE_TEST !== '1',
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: true, nodeIntegration: false }
   });

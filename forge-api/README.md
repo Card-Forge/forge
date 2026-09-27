@@ -26,7 +26,7 @@ local deck persistence, opening-hand practice, and human-versus-AI matches. Buil
 | `GameStateMapper.snapshot(view, viewer)` | Immutable records containing turn, phase, players, life, priority, zone counts, visible cards |
 | `GameObservation` | Pollable event revision with explicit unsubscribe/close; raw events never cross the API |
 | `MatchSetup` | Validated match copy with a selectable commander when an imported list has no Commander section |
-| `MatchSession` | One human-versus-AI Constructed or Commander game, cached state, scoped prompts, controller input, and concession |
+| `MatchSession` | One human with AI opponents in Constructed or 2–6 player Commander, cached state, scoped prompts, controller input, and concession |
 | `MatchActivity` | Immutable, viewer-filtered recent actions and event-time turn/phase metadata |
 
 The records contain values rather than live engine objects and can be serialized
@@ -174,7 +174,19 @@ also checks the pointer-down target before accepting a click after a refresh.
 User-initiated ability choices carry `context: playAbility`, a card-specific
 title, and optional option details. An empty choice list cancels that selection.
 
-The match beta supports single Constructed and one-on-one Commander games.
+The match beta supports two-player Constructed and 2–6 player Commander games
+with one local human and AI opponents. `matchSetup.maxPlayers` reports the limit.
+`matchStart.opponents` takes 1–5 opponent deck IDs in seat order; the legacy
+singular `opponent` starts a two-player game. Invalid sizes and unknown decks
+fail before a session starts. Each AI receives a detached deck and unique name.
+Snapshots include `playerCount`, each player's `seat` and `eliminated` flag,
+and commander-damage `ownerId`/`owner`. Attacking cards include `defender` and a
+`defenderId` when attacking a player; raw engine card IDs are not exposed.
+Lost opponents remain in the snapshot; the local session finishes
+when its human concedes or loses, using the engine's `AllHumansLost` termination.
+Input prompts can include `playerChoices` for required selections such as
+choosing the starting player. Dispatch those through the usual `action: player`.
+
 `deckPresets` returns four attributed offline Commander precons with card counts,
 commander entries, and source links. `presetImport {id}` validates the complete
 list before creating a new saved Commander deck; existing decks are never replaced.

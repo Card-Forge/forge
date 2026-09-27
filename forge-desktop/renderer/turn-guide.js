@@ -12,9 +12,9 @@ const turnGuide = (() => {
     { key: 'COMBAT_BEGIN', name: 'Beginning of combat', next: 'Declare attackers', button: 'Continue to attackers',
       text: 'The last chance to act before attackers are chosen. Beginning-of-combat abilities happen here.' },
     { key: 'COMBAT_DECLARE_ATTACKERS', name: 'Declare attackers', next: 'Declare blockers, if attacking', button: 'Continue to blockers',
-      text: 'The active player chooses attackers and who or what they attack. After they are declared, both players can act before blockers are chosen.' },
+      text: 'The active player chooses attackers and who or what they attack. After they are declared, players can act before blockers are chosen.' },
     { key: 'COMBAT_DECLARE_BLOCKERS', name: 'Declare blockers', next: 'Combat damage (first strike, if needed)', button: 'Continue to damage',
-      text: 'The defending player assigns blockers. After blocks are declared, this is a chance to use spells or abilities before combat damage.' },
+      text: 'Defending players assign their blockers. After blocks are declared, this is a chance to use spells or abilities before combat damage.' },
     { key: 'COMBAT_FIRST_STRIKE_DAMAGE', name: 'First-strike damage', next: 'Regular combat damage', button: 'Continue to regular damage',
       text: 'Creatures with first strike or double strike deal damage in this extra step. Players can then act before regular combat damage.' },
     { key: 'COMBAT_DAMAGE', name: 'Combat damage', next: 'End of combat', button: 'Finish combat damage',
@@ -40,7 +40,7 @@ const turnGuide = (() => {
     if (priority) {
       if (state.stack?.length) {
         title = `${state.stack[0].name} is waiting.`;
-        instruction = 'Choose Let it resolve if you do not want to play anything first. It takes effect after both players pass.\n\nTo respond, select a highlighted card or ability.';
+        instruction = 'Choose Let it resolve if you do not want to play anything first. It takes effect after every remaining player passes.\n\nTo respond, select a highlighted card or ability.';
         passLabel = 'Let it resolve';
         passHint = 'Play nothing in response to this spell or ability.';
         responseText = state.stack[0].text || '';
@@ -53,16 +53,21 @@ const turnGuide = (() => {
         instruction = main && yours
           ? `Play a highlighted card or use an ability. When you’re done, choose ${passLabel}.`
           : `Nothing is waiting to resolve. You do not have to play anything. Choose ${passLabel} to continue.\n\nTo act first, select a highlighted instant or ability.`;
-        passHint = 'Pass this chance to act. The step ends after both players pass without playing anything.';
+        passHint = 'Pass this chance to act. The step ends after every remaining player passes without playing anything.';
         if (context && ['DRAW', 'COMBAT_FIRST_STRIKE_DAMAGE', 'COMBAT_DAMAGE'].includes(state.phaseKey)) {
           context.text = state.phaseKey === 'DRAW'
             ? 'The turn’s draw has already been handled. You can act now, before the main phase.'
             : 'Combat damage for this step has already been handled. You can act now, before moving on.';
         }
       }
+    } else if (prompt?.playerChoices?.length) {
+      title = 'Choose a player.';
+      instruction = 'Click one of the highlighted life totals to choose that player.';
     } else if (prompt?.inputType === 'InputAttack') {
       title = 'Choose your attackers.';
-      instruction = 'Select the creatures you want to attack with, then choose Confirm attackers. To attack with none, leave them unselected and confirm, if allowed.';
+      instruction = state.playerCount > 2
+        ? 'Choose an opponent’s life total (or a planeswalker) first, then select your attackers for that defender. Repeat for other opponents, then choose Confirm attackers.'
+        : 'Select the creatures you want to attack with, then choose Confirm attackers. To attack with none, leave them unselected and confirm, if allowed.';
       passLabel = 'Confirm attackers';
     } else if (prompt?.inputType === 'InputBlock') {
       title = 'Choose your blockers.';

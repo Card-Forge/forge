@@ -14,6 +14,9 @@
   let preparing = 0;
   let previewCards = [];
   let pointerChoice;
+  let pollTimer;
+  let refreshRequested = false;
+  let boardSignature;
   const choiceScope = () => ({ sessionId: match?.id, promptId: match?.prompt?.id });
   const scopeAttributes = () => `data-match-session="${esc(match.id)}" data-match-prompt="${esc(match.prompt?.id || '')}"`;
   cardPreview.bind($('match-view'), '[data-preview-card]', element => previewCards[Number(element.dataset.previewCard)]);
@@ -39,13 +42,16 @@
     $('match-deck-label').textContent = prepared.name;
     $('match-opponent-choice').innerHTML = options.map(option => `<option value="${esc(option.id)}">${esc(option.name)}</option>`).join('');
     $('match-opponent-description').textContent = options[0].description;
+    $('match-player-count-field').hidden = prepared.maxPlayers <= 2;
+    $('match-player-count').value = '2';
+    renderOpponentSeats();
     const configuration = prepared.setup;
     $('match-commander-field').hidden = !configuration.needsCommander || !configuration.commanderChoices.length;
     $('match-commander-choice').innerHTML = '<option value="">Choose your commander…</option>' + configuration.commanderChoices.map(card => `<option value="${esc(card.id)}">${esc(card.name)}${card.valid ? '' : ' · deck needs changes'}</option>`).join('');
     $('match-commander-choice').value = configuration.commanderId;
     $('match-commanders').hidden = configuration.needsCommander || !configuration.commanders.length;
     $('match-commanders').textContent = `Commander: ${configuration.commanders.join(' + ')}`;
-    $('match-rules-copy').textContent = `${configuration.format} · One game. Two players. ${configuration.startingLife} life.${configuration.format === 'Commander' ? ' Commander tax and commander damage use the engine rules.' : ' The engine handles casting, mana, targeting, and combat.'}`;
+    updateRulesCopy();
     $('match-format-suggestion').hidden = !prepared.commanderAvailable;
     updateSetup();
     $('match-setup').showModal();
@@ -55,6 +61,21 @@
     const problem = prepared.saveError || prepared.setup.problem;
     $('match-start-note').textContent = problem || '';
     $('match-start').disabled = Boolean(problem);
+  }
+
+  function updateRulesCopy() {
+    const count = prepared.setup.format === 'Commander' ? Number($('match-player-count').value) : 2;
+    $('match-rules-copy').textContent = `${prepared.setup.format} · ${count} players · ${prepared.setup.startingLife} life. ${count > 2 ? 'You and ' + (count - 1) + ' AI opponents, each playing for themselves. ' : ''}${prepared.setup.format === 'Commander' ? 'Every seat has a 100-card deck. Commander tax and damage apply.' : 'One game against the AI.'}`;
+  }
+
+  function renderOpponentSeats() {
+    const count = prepared.setup.format === 'Commander' ? Number($('match-player-count').value) - 1 : 1;
+    const previous = [...$('match-extra-opponents').querySelectorAll('select')].map(select => select.value);
+    $('match-extra-opponents').innerHTML = Array.from({ length: count - 1 }, (_, index) => {
+      const selected = previous[index] || options[(index + 1) % options.length].id;
+      return `<label class="field-label">Opponent ${index + 2}<select data-opponent-seat="${index + 2}" aria-label="AI opponent ${index + 2}">${options.map(option => `<option value="${esc(option.id)}" ${option.id === selected ? 'selected' : ''}>${esc(option.name)}</option>`).join('')}</select></label>`;
+    }).join('');
+    updateRulesCopy();
   }
 
   async function chooseCommander() {
@@ -74,12 +95,14 @@
     $('match-start').disabled = true;
     $('match-start-note').textContent = 'Preparing your game…';
     try {
-      const result = await api.request('matchStart', { opponent: $('match-opponent-choice').value,
+      const result = await api.request('matchStart', { opponents: [$('match-opponent-choice').value,
+        ...[...$('match-extra-opponents').querySelectorAll('select')].map(select => select.value)],
         commanderId: prepared.setup.commanderId, deckId: prepared.deckId, revision: prepared.revision });
       $('match-setup').close();
       displayedRevision = -1;
       show();
       render(result);
+      schedulePoll(0);
     } catch (error) {
       $('match-start-note').textContent = error.message;
     } finally { $('match-start').disabled = false; }
@@ -88,9 +111,9 @@
   const zone = (player, name) => player.zones.find(value => value.name === name) || { count: 0, cards: [] };
   function cardTile(card) {
     const stats = card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
-    const marks = [card.sick ? 'New' : '', card.attacking ? 'Attacking' : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
+    const marks = [card.sick ? 'New' : '', card.attacking ? `Attacking${card.defender ? ' → ' + card.defender : ''}` : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
     const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
-    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}" ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -108,13 +131,13 @@
       const preview = top ? `data-preview-card="${previewCards.push(top) - 1}"` : '';
       return `<details class="match-zone" data-zone="${player.id}-${name}"><summary ${preview} aria-label="${name}: ${cards.count} cards">${face}<span>${name} <b>${cards.count}</b></span></summary><div><span class="zone-drawer-title">${esc(player.name)} · ${name}</span>${cards.cards.map(cardTile).join('') || `<span class="muted">${cards.count ? 'Cards are hidden.' : 'No cards here yet.'}</span>`}</div></details>`;
     }).join('');
-    const damage = player.commanderDamage?.map(card => `<span title="${esc(card.name)}">${esc(card.name)}: ${card.damage}/21</span>`).join('') || '';
+    const damage = player.commanderDamage?.map(card => `<span title="${esc(card.owner || '')}">${esc(card.name)}: ${card.damage}/21${match.playerCount > 2 ? `<small>${esc(card.owner)}</small>` : ''}</span>`).join('') || '';
     const isLand = card => !card.faceDown && card.type.includes('Land') && !card.type.includes('Creature');
     const lands = field.cards.filter(isLand);
     const permanents = field.cards.filter(card => !isLand(card));
     const row = (name, cards, label) => `<div class="battlefield-row ${name}-row" data-field-row="${player.id}-${name}" aria-label="${esc(player.name)}: ${label}">${cards.map(cardTile).join('') || `<span class="field-empty">${label}</span>`}</div>`;
     const hiddenHand = !player.human ? `<div class="opponent-hand" aria-label="${hand.count} cards in opponent's hand"><div aria-hidden="true">${Array.from({ length: Math.min(hand.count, 9) }, (_, index) => `<i style="--back-angle:${(index - (Math.min(hand.count, 9) - 1) / 2) * 4}deg"></i>`).join('')}</div><span>${hand.count} in hand</span></div>` : '';
-    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
+    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${player.eliminated ? 'Eliminated' : turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
     const side = `<aside class="match-side-zones">${commandZone}<div class="match-library" aria-label="${library.count} cards in ${esc(player.name)}'s library"><span class="library-back" aria-hidden="true">M</span><span>Library <b>${library.count}</b></span></div><div class="match-other-zones">${other}</div></aside>`;
     const fieldRows = player.human ? row('permanents', permanents, 'Battlefield') + row('lands', lands, 'Lands') : row('lands', lands, 'Lands') + row('permanents', permanents, 'Battlefield');
     const battlefield = `<div class="match-zones-row"><div class="match-battlefield">${fieldRows}</div>${side}</div>`;
@@ -124,11 +147,15 @@
   function render(next) {
     if (!next || next.id === match?.id && next.revision <= displayedRevision) return;
     const previous = match;
-    const boardChanged = !previous || previous.id !== next.id || previous.boardRevision !== next.boardRevision;
+    const untracked = next.players?.some(player => player.zones.some(zone => zone.cards.some(card => !card.visualId)));
+    const signature = JSON.stringify(next.players, (key, value) => ['selectable', 'highlighted', 'priority', ...(untracked ? [] : ['key'])].includes(key) ? undefined : value);
+    const boardChanged = !previous || previous.id !== next.id || signature !== boardSignature;
     const before = boardChanged ? matchFeedback.capture() : new Map();
     if (boardChanged) { cardPreview.hide(); previewCards = []; }
     match = next;
-    document.querySelector('.match-heading .eyebrow').textContent = `MANA TABLE · ${next.format || 'Constructed'} · SINGLE GAME`;
+    boardSignature = signature;
+    $('match-view').classList.toggle('multiplayer', next.playerCount > 2);
+    document.querySelector('.match-heading .eyebrow').textContent = `MANA TABLE · ${next.format || 'Constructed'} · ${next.playerCount || 2} PLAYERS`;
     displayedRevision = next.revision;
     $('match-title').textContent = next.result || 'The battlefield';
     $('match-turn').textContent = next.turn ? `Turn ${next.turn}` : 'Shuffling';
@@ -140,8 +167,11 @@
       const scrolls = new Map([...document.querySelectorAll('[data-field-row]')].map(element => [element.dataset.fieldRow, element.scrollLeft]));
       const handScroll = $('match-hand').scrollLeft;
       const human = next.players.find(player => player.human);
-      const opponent = next.players.find(player => !player.human);
-      $('match-opponent').innerHTML = opponent ? playerLane(opponent) : '';
+      const opponents = next.players.filter(player => !player.human);
+      const opponentScroll = $('match-opponent').scrollLeft;
+      $('match-opponent').innerHTML = opponents.map(opponent => `<section class="match-lane opponent-lane ${opponent.eliminated ? 'eliminated' : ''}" data-player-id="${opponent.id}" aria-label="${esc(opponent.name)} battlefield">${playerLane(opponent)}</section>`).join('');
+      $('match-opponent').scrollLeft = opponentScroll;
+      $('match-human').dataset.playerId = human?.id || '';
       $('match-human').innerHTML = human ? playerLane(human) : '';
       $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(cardTile).join('') : '';
       $('match-hand').scrollLeft = handScroll;
@@ -150,12 +180,53 @@
       document.querySelectorAll('[data-field-row]').forEach(element => { element.scrollLeft = scrolls.get(element.dataset.fieldRow) || 0; });
       loadArt($('match-view'));
     }
+    // Priority changes replace action handles, not the physical cards. Preserve
+    // DOM nodes, artwork, focus and hover previews when the board is unchanged.
+    if (next.prompt && next.players) {
+      const cardsByVisualId = new Map(next.players.flatMap(player => player.zones.flatMap(zone => zone.cards)).filter(card => card.visualId).map(card => [card.visualId, card]));
+      document.querySelectorAll('.match-card[data-visual-card]').forEach(element => {
+        const card = cardsByVisualId.get(element.dataset.visualCard);
+        if (!card) return;
+        element.dataset.matchCard = card.key;
+        element.dataset.matchPrompt = next.prompt.id;
+        element.dataset.matchSession = next.id;
+        element.classList.toggle('actionable', card.selectable);
+        element.classList.toggle('chosen', card.highlighted);
+        previewCards[Number(element.dataset.previewCard)] = card;
+      });
+    }
+    renderSeats(next);
     $('match-stack').innerHTML = next.stack?.length ? next.stack.map((item, index) => `<div class="stack-item"><span>${index === 0 ? 'NEXT TO RESOLVE' : 'WAITING'}</span><strong>${esc(item.name)}</strong><p>${esc(item.text)}</p><small>${esc(item.controller)}</small></div>`).join('') : '<p class="stack-empty">Nothing on the stack.</p>';
     $('match-stack').parentElement.hidden = !next.stack?.length || next.status === 'resolving';
     $('match-notices').innerHTML = next.notices?.length ? next.notices.slice(-5).map(notice => `<p>${esc(notice)}</p>`).join('') : '<p>Click cards to play or select them. Click a player’s life total to target them. Hover over a card to read it.</p>';
     if (next.notices?.length && JSON.stringify(next.notices) !== JSON.stringify(previous?.notices)) $('match-notices').parentElement.open = true;
     renderPrompt();
     matchFeedback.render(next, previous, before);
+    if (next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
+    const busy = !next.prompt && !['finished', 'error'].includes(next.status);
+    $('match-view').setAttribute('aria-busy', String(busy));
+    $('match-action-status').textContent = busy ? 'Updating table…' : '';
+    if (!busy) document.querySelectorAll('.action-pending').forEach(element => element.classList.remove('action-pending'));
+  }
+
+  function renderSeats(state) {
+    $('match-seats').hidden = !(state.playerCount > 2);
+    $('match-seats').innerHTML = (state.players || []).map(player => `<div class="table-seat ${player.id === state.activePlayerId ? 'active' : ''} ${player.eliminated ? 'eliminated' : ''}"><button class="seat-focus" data-focus-player="${player.id}" aria-label="View ${esc(player.name)} battlefield"><span>SEAT ${player.seat} · ${player.eliminated ? 'ELIMINATED' : player.id === state.activePlayerId ? 'CURRENT TURN' : player.priority ? 'PRIORITY' : 'WAITING'}</span><strong>${esc(player.name)}</strong></button><button class="seat-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}">${player.life}</button></div>`).join('');
+  }
+
+  function focusPlayer(id) {
+    const lane = document.querySelector(`#match-opponent [data-player-id="${Number(id)}"]`);
+    if (lane) $('match-opponent').scrollTo({ left: lane.offsetLeft - ($('match-opponent').clientWidth - lane.offsetWidth) / 2, behavior: 'instant' });
+  }
+
+  function positionDrawer(details) {
+    const drawer = details.querySelector(':scope > div');
+    const anchor = details.querySelector('summary').getBoundingClientRect();
+    Object.assign(drawer.style, { position: 'fixed', right: 'auto', bottom: 'auto', left: '0px', top: '0px',
+      maxWidth: `${innerWidth - 24}px`, maxHeight: `${Math.min(innerHeight / 2, 380)}px` });
+    const size = drawer.getBoundingClientRect();
+    drawer.style.left = `${Math.max(12, Math.min(anchor.right - size.width, innerWidth - size.width - 12))}px`;
+    drawer.style.top = `${Math.max(12, Math.min(anchor.bottom + 8, innerHeight - size.height - 12))}px`;
   }
 
   function renderPrompt() {
@@ -260,9 +331,12 @@
     }
     inFlight = true;
     $('match-prompt').classList.add('sending');
+    $('match-view').setAttribute('aria-busy', 'true');
+    $('match-action-status').textContent = 'Sending action…';
+    if (values.key) document.querySelector(`[data-match-card="${CSS.escape(values.key)}"]`)?.classList.add('action-pending');
     try { render(await api.request('matchAction', { sessionId: scope.sessionId, promptId: scope.promptId, ...values })); }
     catch (error) { toast(error.message); await api.request('matchState').then(render).catch(() => {}); }
-    finally { inFlight = false; $('match-prompt').classList.remove('sending'); }
+    finally { inFlight = false; $('match-prompt').classList.remove('sending'); schedulePoll(0); }
   }
 
   $('match-view').addEventListener('pointerdown', event => {
@@ -272,6 +346,8 @@
   });
   $('match-view').addEventListener('pointercancel', () => { pointerChoice = null; });
   $('match-view').addEventListener('click', event => {
+    const seat = event.target.closest('[data-focus-player]');
+    if (seat) { focusPlayer(seat.dataset.focusPlayer); return; }
     if (match?.prompt?.kind !== 'input') return;
     const card = event.target.closest('[data-match-card]');
     const player = event.target.closest('[data-match-player]');
@@ -287,9 +363,11 @@
     else if (player) answer({ action: 'player', playerId: Number(player.dataset.matchPlayer) });
   });
   $('match-view').addEventListener('toggle', event => {
-    if (!event.target.matches('.match-zone[open]')) return;
-    document.querySelectorAll('.match-zone[open]').forEach(element => { if (element !== event.target) element.open = false; });
+    if (!event.target.matches('.match-zone[open], .match-commander-damage[open]')) return;
+    document.querySelectorAll('.match-zone[open], .match-commander-damage[open]').forEach(element => { if (element !== event.target) element.open = false; });
+    positionDrawer(event.target);
   }, true);
+  window.addEventListener('resize', () => document.querySelectorAll('.match-zone[open], .match-commander-damage[open]').forEach(positionDrawer));
   for (const id of ['match-tab', 'play-match']) $(id).onclick = () => run(setup);
   $('match-start').onclick = () => run(start);
   $('match-commander-choice').onchange = chooseCommander;
@@ -302,18 +380,33 @@
     } finally { $('match-use-commander').disabled = false; }
   });
   $('match-opponent-choice').onchange = event => { $('match-opponent-description').textContent = options.find(option => option.id === event.target.value)?.description || ''; };
+  $('match-player-count').onchange = renderOpponentSeats;
   $('match-back').onclick = showWorkshop;
   $('match-concede').onclick = () => $('match-concede-dialog').showModal();
   $('match-concede-confirm').onclick = () => run(async () => {
     const next = await api.request('matchConcede', { sessionId: match.id });
     $('match-concede-dialog').close(); render(next);
   });
-  setInterval(async () => {
-    if (!match || polling || inFlight || ['finished', 'error'].includes(match.status)) return;
+  function schedulePoll(delay) {
+    clearTimeout(pollTimer);
+    pollTimer = setTimeout(pollMatch, delay);
+  }
+  async function pollMatch() {
+    if (!match || ['finished', 'error'].includes(match.status)) return;
+    if (polling || inFlight) { refreshRequested = true; return; }
     polling = true;
-    try { render(await api.request('matchState')); }
+    const sessionId = match.id;
+    try {
+      const next = await api.request('matchState');
+      if (match?.id === sessionId) render(next);
+    }
     catch (error) { toast(error.message); }
-    finally { polling = false; }
-  }, 250);
-  api.request('matchState').then(previous => { if (previous) render(previous); }).catch(() => {});
+    finally {
+      polling = false;
+      const delay = refreshRequested ? 0 : match?.status === 'resolving' || !match?.prompt ? 50 : 350;
+      refreshRequested = false;
+      schedulePoll(delay);
+    }
+  }
+  api.request('matchState').then(previous => { if (previous) { render(previous); schedulePoll(0); } }).catch(() => {});
 })();

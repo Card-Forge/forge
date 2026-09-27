@@ -1,4 +1,4 @@
-/* Two playmats share one table. Each row scrolls independently on crowded boards. */
+/* Playmats share one table. Each row scrolls independently on crowded boards. */
 .in-match { overflow: hidden; }
 .in-match .topbar { height: 56px; }
 .in-match .app-layout { display: block; min-height: 0; }
@@ -32,6 +32,8 @@
 .table-sigil { position: absolute; inset: 0; display: grid; place-items: center; font: 240px Georgia; color: #b0ae87; opacity: .025; pointer-events: none; z-index: -1; }
 .match-lane { position: relative; min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: 9px 12px; border: 1px solid #8d927b36; border-radius: 13px; box-shadow: inset 0 0 0 3px #10181745, 0 5px 12px #0002; }
 .opponent-lane { background: radial-gradient(ellipse at 50% 0%, #4c493444, transparent 80%), #272f27e8; }
+.match-opponents { display: flex; gap: 12px; min-height: 0; min-width: 0; overflow-x: auto; overflow-y: hidden; position: relative; }
+.match-opponents > .match-lane { flex: 1; }
 .human-lane { background: radial-gradient(ellipse at 50% 100%, #53796335, transparent 80%), #1d342de8; border-color: #8eae9142; }
 .match-lane:has(.match-zone[open]), .match-lane:has(.match-commander-damage[open]) { z-index: 8; }
 .match-player { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; flex: 0 0 43px; min-height: 0; }
@@ -47,7 +49,7 @@
 .opponent-hand { display: flex; gap: 9px; align-items: center; margin-right: 10px; color: #aeb7a0; font-size: 8px; }
 .opponent-hand > div { display: flex; padding-left: 10px; }
 .opponent-hand i { display: block; width: 20px; height: 28px; margin-left: -10px; border: 1px solid #8a866447; border-radius: 3px; background: linear-gradient(45deg, #182d25, #485040); box-shadow: 0 2px 3px #0005; transform: rotate(var(--back-angle)); }
-.match-commander-damage { position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: #a5b598; font-size: 8px; }
+.match-commander-damage { position: absolute; right: 0; top: calc(50% - 4px); color: #a5b598; font-size: 8px; }
 .match-commander-damage summary { cursor: pointer; }
 .match-commander-damage > div { position: absolute; z-index: 10; right: 0; top: 20px; display: grid; gap: 8px; width: 240px; padding: 12px; background: #1b2923; border: 1px solid #77825f; border-radius: 6px; box-shadow: 0 8px 30px #0009; color: var(--accent); font-size: 10px; }
 .human-lane .match-commander-damage > div { top: auto; bottom: 20px; }
@@ -119,6 +121,51 @@
 #match-commander-field { margin: 0 0 22px; }
 #match-commander-field .muted, #match-commanders { font-size: 11px; line-height: 1.6; margin: 10px 0 18px; }
 #match-start-note { white-space: pre-line; max-height: 150px; overflow: auto; }
+#match-extra-opponents { display: grid; gap: 14px; margin-top: 14px; }
+#match-player-count-field { margin-bottom: 18px; }
+.match-seats { display: flex; gap: 8px; margin-bottom: 8px; height: 46px; }
+.table-seat { display: flex; min-width: 0; flex: 1; border: 1px solid #465443; border-radius: 7px; background: #1a2923; }
+.table-seat.active { border-color: #d6be8b; background: #354133; }
+.seat-focus { min-width: 0; flex: 1; text-align: left; padding: 5px 9px; border: 0; background: transparent; }
+.seat-focus span { display: block; font-size: 7px; letter-spacing: .6px; color: #bdc7ac; }
+.seat-focus strong { display: block; font: 12px Georgia; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; }
+.seat-life { flex-shrink: 0; border: 0; border-left: 1px solid #52604a; background: transparent; font: 21px Georgia; padding: 3px 9px; color: #dfc991; }
+.multiplayer .match-layout { height: calc(100dvh - 170px); }
+.multiplayer .match-opponents > .match-lane { flex: 1 0 max(240px, calc((100% - 24px) / 3)); padding: 7px; }
+.multiplayer .opponent-lane { --field-card-width: clamp(34px, calc(10vh - 44px), 57px); --pile-width: 25px; }
+.multiplayer .opponent-lane .match-player { gap: 6px; justify-content: flex-start; flex-basis: 48px; }
+.multiplayer .opponent-lane .match-life { gap: 5px; padding-right: 7px; flex-shrink: 0; }
+.multiplayer .opponent-lane .match-life > span { display: none; }
+.multiplayer .opponent-lane .match-life > b { font-size: 23px; }
+.multiplayer .opponent-lane .match-player-info { min-width: 0; padding-right: 4px; }
+.multiplayer .opponent-lane .match-player-info > strong { font-size: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.multiplayer .opponent-hand { position: static; order: 3; align-self: flex-start; flex-shrink: 0; margin: 4px 0 0 auto; font-size: 7px; }
+.multiplayer .opponent-hand > div { display: none; }
+.multiplayer .opponent-lane .match-zones-row { gap: 5px; }
+.multiplayer .opponent-lane .match-side-zones { flex-basis: 92px; padding-left: 5px; gap: 4px; }
+.multiplayer .opponent-lane .match-zone, .multiplayer .opponent-lane .match-library { font-size: 7px; }
+.multiplayer .opponent-lane .battlefield-row { gap: 8px; padding: 4px; }
+.multiplayer .opponent-lane .match-mana-pool { position: static; transform: none; max-width: none; }
+.multiplayer .opponent-lane .match-commander-damage { right: auto; left: 0; top: auto; bottom: -4px; transform: none; }
+.multiplayer .opponent-lane .match-commander-damage > div { left: 0; right: auto; }
+.match-commander-damage small { display: block; color: #a5b598; margin-top: 3px; }
+.eliminated { opacity: .45; }
+#match-action-status { font-size: 10px; color: #ead5a0; letter-spacing: 0; text-transform: none; }
+.action-pending .card-art { outline: 2px solid #e5cf92; outline-offset: 2px; filter: brightness(1.2); }
+#match-view[aria-busy="true"] .match-card { cursor: progress; }
+.player-choice { outline: 2px solid #bddbaa; outline-offset: 3px; box-shadow: 0 0 16px #a8cf9840; }
+@media (max-width: 1100px) {
+  .match-heading h1 { font-size: 16px; }
+  .match-heading-actions { gap: 9px; }
+  .match-heading-actions .button { padding: 7px 8px; font-size: 10px; }
+  .match-layout { grid-template-columns: minmax(0, 1fr) 230px; }
+  .match-arena { padding: 8px 7px 3px; }
+  .match-side-zones { --pile-width: 26px; flex-basis: 103px; }
+  .multiplayer .match-opponents > .match-lane { flex-basis: max(235px, calc((100% - 12px) / 2)); }
+  .match-player-info > strong { font-size: 12px; }
+  .seat-focus { padding-left: 6px; }
+  .seat-life { font-size: 18px; padding: 3px 6px; }
+}
 @media (max-width: 1250px) {
   .match-layout { grid-template-columns: minmax(0, 1fr) 240px; gap: 12px; }
   .in-match main { padding-left: 14px; padding-right: 14px; }

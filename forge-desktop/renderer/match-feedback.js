@@ -98,7 +98,7 @@ const matchFeedback = (() => {
     next.players?.forEach(player => {
       const old = previous.players?.find(value => value.id === player.id);
       if (!old || old.life === player.life) return;
-      const element = document.querySelector(`[data-match-player="${player.id}"]`);
+      const element = document.querySelector(`.match-life[data-match-player="${player.id}"]`);
       if (!element) return;
       const delta = document.createElement('span');
       delta.className = `life-change ${player.life < old.life ? 'loss' : 'gain'}`;
@@ -118,19 +118,24 @@ const matchFeedback = (() => {
     $('match-phase').innerHTML = status.pregame || status.terminal ? esc(status.pregame ? 'Choose your opening hand' : next.result || 'Game ended')
       : stages.map(([label], index) => `<span class="phase-step ${index === status.stage ? 'current' : index < status.stage ? 'past' : ''}" ${index === status.stage ? 'aria-current="step"' : ''}>${esc(label)}</span>`).join('<i aria-hidden="true">›</i>');
     $('match-phase').setAttribute('aria-label', `Current phase: ${status.phase}`);
+    document.querySelectorAll('[data-match-player]').forEach(element => {
+      element.classList.toggle('player-choice', Boolean(next.prompt?.playerChoices?.includes(Number(element.dataset.matchPlayer))));
+    });
     $('match-turn-guide').hidden = status.pregame || status.terminal;
     const guide = $('match-turn-guide-list');
     if (guide.dataset.phase !== next.phaseKey) {
       guide.dataset.phase = next.phaseKey;
       guide.innerHTML = turnGuide.steps.map(step => `<li ${step.key === next.phaseKey ? 'aria-current="step"' : ''}><strong>${esc(step.name)}${step.key === next.phaseKey ? ' · Now' : ''}</strong><p>${esc(step.text)}</p></li>`).join('');
     }
-    for (const [id, isHuman] of [['match-human', true], ['match-opponent', false]]) {
-      const lane = $(id), player = next.players?.find(value => value.human === isHuman);
+    for (const lane of document.querySelectorAll('.match-lane[data-player-id]')) {
+      const player = next.players?.find(value => value.id === Number(lane.dataset.playerId));
+      const isHuman = player?.human;
       const active = player?.id === next.activePlayerId;
       lane.classList.toggle('turn-active', active && !status.terminal);
       lane.querySelector('.match-player')?.classList.toggle('has-turn', active);
+      lane.querySelector('.match-player')?.classList.toggle('has-priority', Boolean(player?.priority));
       const label = lane.querySelector('.match-player-info > small');
-      if (label) label.textContent = status.terminal ? 'Game over' : isHuman && next.prompt ? status.optionalResponse ? 'Your response is optional' : 'Your action now'
+      if (label) label.textContent = player?.eliminated ? 'Eliminated' : status.terminal ? 'Game over' : isHuman && next.prompt ? status.optionalResponse ? 'Your response is optional' : 'Your action now'
         : active ? (isHuman ? 'Your turn' : 'Opponent’s turn') : 'Waiting';
     }
     const entries = next.activity || [];

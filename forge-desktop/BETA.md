@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.13
+# Mana Table — beta 0.1.0-beta.14
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -48,8 +48,22 @@ by someone with access; the app does not sign in to Moxfield.
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
 
-Commander games start at 40 life, with 100-card AI decks and a command zone on both
-sides. Setup states the opponent's format and total card count. If an existing
+Commander supports **2–6 players**: you and 1–5 AI opponents, all playing for
+themselves. Choose **Table size**, then a deck for each opponent. Games start at
+40 life with 100-card decks and a command zone at every seat. This beta runs
+locally against AI; online play with other people is not included.
+
+Larger tables show every player's life and current turn in the seat strip. Click
+a name to bring that opponent's playmat into view, or scroll the opponent row.
+Life totals remain separate buttons for selecting players. To split attacks,
+select the defending player's life total before assigning their attackers, then
+repeat for another defender. The decision panel names the current defender;
+hovering an attacking card also identifies its defender. Commander damage names
+the commander and its owner, including when opponents use the same deck.
+Eliminated opponents stay marked at their seats. The local table ends when you
+concede or are eliminated; you can immediately start another match.
+
+Setup states the opponent's format and total card count. If an existing
 Commander-ready import was saved as Constructed, **Use Commander · 100 cards**
 changes its saved format without changing its cards, then refreshes the opponents.
 If your imported list has all 100 cards in Main, match setup offers a **Commander
@@ -63,11 +77,17 @@ Card previews also work in the library, deck list, and opening-hand practice.
 Keyboard focus shows the same details. Press Esc or move away to dismiss a preview;
 for long rules, scroll while hovering over the card to read the remaining text.
 
-The match table has separate playmats for you and your opponent. Lands sit behind
+The match table has separate playmats for you and each opponent. Lands sit behind
 other permanents; lands that become creatures move into the main battlefield row.
 Library, graveyard, and exile piles sit beside each playmat. Click a graveyard or
 exile pile to browse its cards, then click it again to close it. Crowded rows and
 large hands scroll sideways. Life totals remain clickable for player targets.
+
+Actions show **Sending action…** immediately and refresh quickly while the table
+updates. Response pauses preserve unchanged card elements and their artwork,
+keeping hover previews steady. Cached artwork loads without waiting behind new
+image downloads. The window supports widths down to 1000 pixels; at smaller
+sizes the deck workshop uses two columns with hover previews for card details.
 
 The heading shows whose turn it is, the turn number, and the current step. The
 strip between playmats tracks Beginning, Main 1, Combat, Main 2, and Ending.
@@ -119,13 +139,13 @@ Press `/` to focus search. Press Ctrl+S to retry a failed save.
 ## What this beta covers
 
 Deck building uses the engine's real card definitions and structural validation
-for Constructed, Commander, and Limited. The match table runs single Constructed
-and one-on-one Commander games, with format-matched AI decks, engine-controlled turns, London mulligans, mana,
+for Constructed, Commander, and Limited. The match table runs two-player Constructed
+and 2–6 player Commander games, with format-matched AI decks, engine-controlled turns, London mulligans, mana,
 targets, spells, combat, and game results. Your saved deck is not changed by playing.
 The separate opening-hand table remains available for quick practice draws.
 
 Unusual card effects and complex board states need broader testing.
-Limited matches, games with more than two players, sideboarding between games,
+Online multiplayer, Limited matches, tables above six players, sideboarding between games,
 and match saves/resume after closing the app are not included.
 If a game stops on an unsupported engine interaction, its error appears in the
 decision panel; your deck remains saved and you can start another game.

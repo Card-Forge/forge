@@ -148,6 +148,7 @@ public final class DesktopEngine {
                 result.put("deckId", deckId); result.put("revision", editor.snapshot().revision());
                 result.put("name", editor.snapshot().name()); result.put("setup", preview);
                 result.put("saveError", saveError); result.put("opponents", MatchSession.opponents(format));
+                result.put("maxPlayers", format.equals("Commander") ? 6 : 2);
                 result.put("commanderAvailable", format.equals("Constructed") && MatchSetup.suggestedFormat(editor.toDeck()).equals("Commander"));
                 yield result;
             }
@@ -160,7 +161,15 @@ public final class DesktopEngine {
                 }
                 var prepared = MatchSetup.prepare(editor.toDeck(), format, string(p, "commanderId", ""));
                 if (prepared.preview().problem() != null) throw new IllegalArgumentException(prepared.preview().problem());
-                match = new MatchSession(prepared.deck(), format, string(p, "opponent", "green"), resources, directory.getParent());
+                var opponents = new ArrayList<String>();
+                if (p.has("opponents")) {
+                    if (!p.get("opponents").isJsonArray()) throw new IllegalArgumentException("Opponents must be a list of deck IDs");
+                    for (var opponent : p.getAsJsonArray("opponents")) {
+                        if (!opponent.isJsonPrimitive() || !opponent.getAsJsonPrimitive().isString()) throw new IllegalArgumentException("Each opponent must be a deck ID");
+                        opponents.add(opponent.getAsString());
+                    }
+                } else opponents.add(string(p, "opponent", "green"));
+                match = new MatchSession(prepared.deck(), format, opponents, resources, directory.getParent());
                 yield match.state();
             }
             case "matchState" -> match == null ? null : match.state();
