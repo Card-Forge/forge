@@ -41,7 +41,8 @@ class EngineClient extends EventEmitter {
     this.pending.clear();
   }
   request(method, params = {}) {
-    if (this.status.state !== 'ready') return Promise.reject(new Error('The card library is still loading.'));
+    if (this.status.state !== 'ready') return Promise.reject(new Error(this.status.state === 'error'
+      ? this.status.message : 'The card library is still loading.'));
     return new Promise((resolve, reject) => {
       const id = ++this.sequence;
       const timer = setTimeout(() => { this.pending.delete(id); reject(new Error('The engine took too long. Your saved decks are safe; relaunch to reconnect.')); }, 30000);

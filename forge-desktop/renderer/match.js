@@ -526,5 +526,15 @@
       schedulePoll(delay);
     }
   }
-  api.request('matchState').then(previous => { if (previous) { render(previous); schedulePoll(0); } }).catch(() => {});
+  let restored = false;
+  function restoreMatch(status) {
+    if (status.state !== 'ready' || restored) return;
+    restored = true;
+    api.request('matchState').then(previous => { if (previous) { render(previous); schedulePoll(0); } })
+      .catch(error => toast(error.message));
+  }
+  // Subscribe before checking status so readiness cannot be missed between them.
+  // A renderer reload can find an already-running match; a cold start must wait.
+  api.onStatus(restoreMatch);
+  api.status().then(restoreMatch).catch(error => toast(error.message));
 })();

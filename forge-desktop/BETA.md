@@ -1,8 +1,11 @@
-# Mana Table — beta 0.1.0-beta.20
+# Mana Table — beta 0.1.0-beta.21
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
+
+Beta 21 fixes a startup error: restoring the match view now waits for the card
+library to finish loading. Engine failures also report their actual cause.
 
 ## Try it
 

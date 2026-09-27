@@ -14,10 +14,12 @@ async function launchDesktop(prefix) {
   const executable = packaged ? path.join(packaged.directory, packaged.executable) : process.env.MANA_TEST_EXECUTABLE;
   const application = await electron.launch({ env, args: executable ? [] : [appPath],
     ...(executable ? { executablePath: executable } : {}) });
+  const diagnostics = [];
+  application.process().stderr.on('data', chunk => diagnostics.push(chunk.toString()));
   try {
     await application.firstWindow();
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
-    return { application, appPath, dataPath, packaged, executable };
+    return { application, appPath, dataPath, packaged, executable, diagnostics };
   } catch (error) { await application.close(); throw error; }
 }
 
