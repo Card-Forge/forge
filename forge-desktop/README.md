@@ -65,6 +65,14 @@ animations. `activity` is a bounded event history copied by the host. A separate
 correlates visible cards across stable snapshots without replacing prompt-scoped
 action keys. Motion defaults to the system preference and can be toggled locally.
 
+`turn-guide.js` describes all engine phase keys, names each priority action, and
+distinguishes optional responses from required combat, cost, and card-selection
+prompts. Guidance never dispatches an action. The renderer retains the engine's
+message for required choices and provides a read-only expandable turn guide.
+Run `node --test tests/turn-guide.test.cjs` for the phase/prompt matrix and
+`npm test -- tests/priority.spec.cjs` for a real match through upkeep, draw,
+main phases, end step, spell responses, and mandatory cleanup discards.
+
 `matchSetup` returns the current deck ID/revision, format, starting life, opponents,
 and a validated Commander preview. A Commander list without a Cmd section can
 select `commanderId` from its main-deck candidates; the host validates a detached

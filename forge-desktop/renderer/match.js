@@ -160,10 +160,13 @@
 
   function renderPrompt() {
     const prompt = match?.prompt;
+    const status = matchFeedback.describe(match);
+    const context = status.context && !status.pregame && !status.terminal
+      ? `<div class="match-step-context"><strong>${esc(status.phase)}</strong><p>${esc(status.context.text)}</p><small>Normally next: ${esc(status.context.next)}</small></div>` : '';
     $('match-prompt').dataset.promptId = prompt?.id || '';
     if (!prompt) {
       const terminal = ['finished', 'error'].includes(match?.status);
-      $('match-prompt').innerHTML = terminal ? `<div class="eyebrow">${match.status === 'error' ? 'MATCH INTERRUPTED' : 'GAME COMPLETE'}</div><h2>${esc(match.result || 'This game stopped.')}</h2><p>${esc(match.error || 'Your deck is saved. Take another seat whenever you’re ready.')}</p><button id="match-again" class="button primary">New game →</button>` : '<div class="eyebrow">AT THE TABLE</div><h2>Resolving…</h2><p>The engine is handling the game. Your next choice will appear here.</p><div class="match-thinking"><span></span></div>';
+      $('match-prompt').innerHTML = terminal ? `<div class="eyebrow">${match.status === 'error' ? 'MATCH INTERRUPTED' : 'GAME COMPLETE'}</div><h2>${esc(match.result || 'This game stopped.')}</h2><p>${esc(match.error || 'Your deck is saved. Take another seat whenever you’re ready.')}</p><button id="match-again" class="button primary">New game →</button>` : `<div class="eyebrow">${esc(status.owner.toUpperCase())}</div><h2>${esc(status.phase)} in progress…</h2><p>No action needed right now. Any choices will appear here.</p>${context}<div class="match-thinking"><span></span></div>`;
       if ($('match-again')) $('match-again').onclick = () => run(setup);
       return;
     }
@@ -172,8 +175,10 @@
       choiceFilter = '';
       selection = prompt.ordered && prompt.min === prompt.choices?.length ? prompt.choices.map(choice => choice.index) : [];
     }
-    const status = matchFeedback.describe(match);
-    const header = `<div class="eyebrow">${status.decision}</div><h2>${esc(prompt.title || (prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'))}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>`;
+    // Keep the engine's actual cost, selected combat target, or required choice visible.
+    const engineDetail = status.instruction && prompt.inputType !== 'InputPassPriority' && prompt.message
+      ? `<p class="match-engine-instruction">${esc(prompt.message)}</p>` : '';
+    const header = `<div class="eyebrow">${status.decision}</div><h2>${esc(prompt.title || status.title || (prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'))}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>${engineDetail}${context}`;
     if (prompt.context === 'playAbility') {
       const scope = choiceScope();
       $('match-prompt').innerHTML = header + `<div class="match-choices">${prompt.choices.map(choice => `<button class="match-choice ability-choice" data-ability-choice="${choice.index}"><strong>${esc(choice.label)}</strong>${choice.detail ? `<small>${esc(choice.detail)}</small>` : ''}</button>`).join('')}</div><button id="match-ability-cancel" class="button secondary">Back to the battlefield</button>`;
@@ -183,7 +188,7 @@
     }
     if (prompt.kind === 'input') {
       const okLabel = status.passLabel || (prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok);
-      const skipResponses = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn' && !status.yours;
+      const skipResponses = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn';
       const response = status.responseText ? `<div class="match-response-detail"><span>WAITING TO RESOLVE</span><p>${esc(status.responseText)}</p></div>` : '';
       const passHint = status.passHint ? `<small class="match-pass-hint">${esc(status.passHint)}</small>` : '';
       $('match-prompt').innerHTML = header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(skipResponses ? 'Skip responses this turn' : prompt.cancel || 'Cancel')}</button>${skipResponses ? '<small class="match-pass-hint">Skip optional responses until this turn ends. You will still make required choices.</small>' : ''}</div>`;

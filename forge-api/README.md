@@ -143,6 +143,12 @@ need only the two IDs. The prompt supplies cardinality and range constraints;
 the host validates them before dispatch. Combat allocations may allow `action:
 skip`. Old session IDs and prompt IDs fail rather than being replayed.
 
+An input prompt's `inputType` uses its nearest named input class, including for
+anonymous subclasses such as cleanup discards (`InputSelectCardsFromList`).
+`InputPassPriority` means an optional opportunity to act, not a required payment
+or selection. Clients can explain the current `phaseKey`, but must retain the
+prompt's actual message and enabled actions for costs, discards, and combat.
+
 Synchronous dialogs publish a snapshot before waiting on a response future.
 Replies complete that future directly; controller input runs on the dedicated
 UI executor. This avoids queuing replies behind the blocked game thread. Engine

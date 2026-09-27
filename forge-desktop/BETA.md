@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.12
+# Mana Table — beta 0.1.0-beta.13
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -77,16 +77,25 @@ spell resolutions, combat, and life changes. Scroll back to review what happened
 
 Playing a land updates your hand and battlefield, then waits in the current
 phase. The game does not automatically pass just because you have nothing else
-to cast. Use **Next step** or **Continue** to pass, or **End Turn** when offered
-to yield the rest of your turn.
+to cast. The button names the next action, such as **Go to combat** or
+**Finish upkeep**. It passes only the current chance to act; the other player
+can respond before the step ends.
 
-During the opponent's turn, priority pauses say **Optional response**.
-**Continue opponent's turn** plays nothing at this pause and passes once; you
-can still act at later pauses. When a spell or ability is waiting, the prompt
+Response pauses outside your main phases say **Optional response**. You do not
+have to play a card to move on. When a spell or ability is waiting, the prompt
 names it, shows its engine description, and offers **Let it resolve**. Select a
 highlighted card or ability if you want to act first. **Skip responses this turn**
 is the separate option to pass optional responses for the rest of that turn;
 required choices still appear.
+
+Every step has a plain-language explanation and a **Normally next** cue.
+Upkeep explains that it comes before drawing and has no general payment cost.
+Combat asks you to **Confirm attackers** or **Confirm blocks** and retains the
+engine's selected target. Cleanup shows any required discard selection, with
+the requested number and hand limit from the engine. Costs, targets, triggers,
+and other card-specific choices remain visible. **Guide to the turn** expands
+the full sequence with the current step marked **Now**. Automatic steps say
+when no action is needed.
 
 Cards with multiple ways to play now show a prompt naming the card. For example,
 Springheart Nantuko offers **Cast as a creature** or **Bestow — cast as an Aura**.

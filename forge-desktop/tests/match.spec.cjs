@@ -54,7 +54,7 @@ test('match table plays cards through engine prompts and resumes after deck brow
         const active = state.players.find(player => player.id === state.activePlayerId);
         await expect(page.locator('#match-turn-owner')).toHaveText(active.human ? 'Your turn' : `${active.name}’s turn`);
         await expect(page.locator('#match-turn')).toHaveText(`Turn ${state.turn}`);
-        const optional = p.inputType === 'InputPassPriority' && (!active.human || state.stack?.length);
+        const optional = p.inputType === 'InputPassPriority' && (!active.human || !['MAIN1', 'MAIN2'].includes(state.phaseKey) || state.stack?.length);
         await expect(page.locator('#match-prompt .eyebrow')).toHaveText(optional
           ? `${active.human ? 'YOUR TURN' : 'OPPONENT’S TURN'} · OPTIONAL RESPONSE`
           : active.human ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR CHOICE');

@@ -21,6 +21,20 @@
 .match-response-detail { margin-top: 14px; padding: 11px; border: 1px solid #71674c; border-radius: 5px; background: #d6be8b09; }
 .match-response-detail > span { font-size: 8px; letter-spacing: 1px; color: #d6be8b; }
 .match-response-detail > p { margin-top: 6px; max-height: 95px; overflow-y: auto; white-space: pre-line; }
+.match-step-context { margin: 12px 0; border-left: 2px solid #c6b37c80; padding: 1px 0 1px 10px; }
+.match-step-context strong { font-size: 11px; color: #dfc991; }
+.match-step-context p { font-size: 11px; line-height: 1.5; margin: 5px 0 7px; color: #b6c4af; }
+.match-step-context small { font-size: 10px; color: #d3d7b9; }
+.match-engine-instruction { padding: 10px; background: #d6be8b0c; border: 1px solid #71674c; white-space: pre-line; }
+.match-turn-guide { flex-shrink: 0; padding: 12px 15px; }
+.match-turn-guide summary { font-size: 12px; color: #dfc991; cursor: pointer; }
+.match-turn-guide > p { font-size: 10px; line-height: 1.5; color: #a7b49e; margin: 10px 0; }
+#match-turn-guide-list { max-height: 340px; overflow: auto; margin: 0; padding-left: 22px; font-size: 11px; }
+#match-turn-guide-list li { padding: 8px 5px; color: #a7b49e; }
+#match-turn-guide-list strong { color: #d1d9c1; }
+#match-turn-guide-list p { font-size: 11px; line-height: 1.5; margin-top: 4px; }
+#match-turn-guide-list [aria-current="step"] { background: #dac38a1c; border-radius: 4px; }
+#match-turn-guide-list [aria-current="step"] strong { color: #f2dda7; }
 .match-history { display: flex; flex-direction: column; min-height: 155px; flex: 1; padding: 15px; background: #192620; border-color: #415540; }
 .match-history .eyebrow { font-size: 9px; letter-spacing: 1.5px; }
 #match-latest { font: 13px/1.5 Georgia; color: #e4dfc3; margin: 10px 0; padding: 9px 0; border-bottom: 1px solid #43533d; }

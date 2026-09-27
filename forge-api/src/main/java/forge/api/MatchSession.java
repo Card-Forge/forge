@@ -164,7 +164,11 @@ public final class MatchSession {
             Input current = human.getInputQueue().getInput();
             if (current == null || current != displayedInput || current != human.getInputProxy().getInput() || game.isGameOver()) return;
             Pending next = new Pending("input", current);
-            next.prompt = map("id", next.id, "kind", "input", "inputType", current.getClass().getSimpleName(),
+            // Cleanup's discard input (among others) is an anonymous subclass.
+            // Preserve its actual input kind instead of publishing an empty name.
+            Class<?> inputClass = current.getClass();
+            while (inputClass.getSimpleName().isEmpty()) inputClass = inputClass.getSuperclass();
+            next.prompt = map("id", next.id, "kind", "input", "inputType", inputClass.getSimpleName(),
                     "message", message, "ok", ok, "cancel", cancel, "okEnabled", okEnabled, "cancelEnabled", cancelEnabled,
                     "canAttackAll", current instanceof InputAttack);
             pending = next;

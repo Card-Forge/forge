@@ -2,7 +2,7 @@ const { test, expect, _electron: electron } = require('@playwright/test');
 const path = require('node:path');
 const fs = require('node:fs');
 
-test('opponent pauses explain passing once, and a waiting spell names what will resolve', async () => {
+test('turn guidance explains each pause, preserves cleanup choices, and passes only once', async () => {
   const appPath = path.resolve(__dirname, '..');
   const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
     FORGE_USER_DATA: path.join(appPath, 'test-results', `priority-${Date.now()}`) };
@@ -25,9 +25,13 @@ test('opponent pauses explain passing once, and a waiting spell names what will 
     await expect(page.locator('#deck-name')).toHaveValue('Priority pauses');
     await page.locator('#play-match').click();
     await page.locator('#match-start').click();
-    let sawPause = false, sawSpell = false, oldPrompt;
+    let sawPause = false, sawSpell = false, sawCleanup = false, oldPrompt;
+    const steps = new Set();
+    const expectedSteps = ['UPKEEP', 'DRAW', 'MAIN1', 'COMBAT_BEGIN', 'MAIN2', 'END_OF_TURN'];
+    const buttons = { UPKEEP: 'Finish upkeep', DRAW: 'Finish draw step', MAIN1: 'Go to combat',
+      COMBAT_BEGIN: 'Continue to attackers', MAIN2: 'Go to end step', END_OF_TURN: 'Finish end step' };
     const deadline = Date.now() + 65000;
-    while (Date.now() < deadline && !(sawPause && sawSpell)) {
+    while (Date.now() < deadline && !(sawPause && sawSpell && sawCleanup && expectedSteps.every(key => steps.has(key)))) {
       const state = await page.evaluate(() => window.forge.request('matchState'));
       expect(state.status, state.error).not.toBe('error');
       const p = state.prompt;
@@ -36,12 +40,47 @@ test('opponent pauses explain passing once, and a waiting spell names what will 
       const opponentPriority = p.inputType === 'InputPassPriority' && state.activePlayerId !== human.id;
       const emptyPause = !sawPause && opponentPriority && !state.stack.length && state.phaseKey === 'UPKEEP';
       const spellPause = !sawSpell && opponentPriority && state.stack.length;
+      const checkStep = p.inputType === 'InputPassPriority' && !state.stack.length && expectedSteps.includes(state.phaseKey) && !steps.has(state.phaseKey);
+      const cleanup = !sawCleanup && state.phaseKey === 'CLEANUP' && state.activePlayerId === human.id && p.inputType !== 'InputPassPriority';
+      if (checkStep || cleanup) {
+        if (await page.locator('#match-prompt').getAttribute('data-prompt-id') !== p.id) { await page.waitForTimeout(100); continue; }
+        await expect(page.locator('.match-step-context strong')).toHaveText(await page.locator('#match-phase-name').textContent());
+        await expect(page.locator('.match-step-context small')).toContainText('Normally next:');
+        if (checkStep) {
+          await expect(page.locator('#match-ok')).toHaveText(buttons[state.phaseKey]);
+          if (state.phaseKey === 'UPKEEP') {
+            await expect(page.locator('.match-step-context')).toContainText('There is no upkeep cost unless a card says so.');
+            await page.locator('#match-turn-guide summary').click();
+            await expect(page.locator('#match-turn-guide-list [aria-current="step"]')).toContainText('Upkeep · Now');
+            await expect(page.locator('#match-turn-guide-list li')).toHaveCount(13);
+            await page.locator('#match-turn-guide summary').click();
+          }
+          steps.add(state.phaseKey);
+        }
+        if (cleanup) {
+          expect(p.inputType).toBe('InputSelectCardsFromList');
+          await expect(page.locator('#match-prompt h2')).toHaveText('Select the requested cards.');
+          await expect(page.locator('.match-engine-instruction')).toHaveText(p.message);
+          await expect(page.locator('.match-engine-instruction')).toContainText(/discard/i);
+          await expect(page.locator('#match-ok')).toBeDisabled();
+          await expect(page.locator('#match-prompt .eyebrow')).toHaveText('YOUR ACTION');
+          await page.screenshot({ path: test.info().outputPath('cleanup-choice.png') });
+          const before = human.zones.find(zone => zone.name === 'Hand').count;
+          const card = human.zones.find(zone => zone.name === 'Hand').cards.find(card => card.selectable);
+          await page.locator(`[data-match-card="${card.key}"]`).click();
+          await expect.poll(async () => {
+            const next = await page.evaluate(() => window.forge.request('matchState'));
+            return next.players.find(player => player.human).zones.find(zone => zone.name === 'Hand').count;
+          }).toBe(before - 1);
+          sawCleanup = true; oldPrompt = p.id; continue;
+        }
+      }
       if (emptyPause || spellPause) {
         if (await page.locator('#match-prompt').getAttribute('data-prompt-id') !== p.id) { await page.waitForTimeout(100); continue; }
         await expect(page.locator('#match-prompt .eyebrow')).toHaveText('OPPONENT’S TURN · OPTIONAL RESPONSE');
         if (emptyPause) {
-          await expect(page.locator('#match-prompt h2')).toHaveText('Let your opponent continue.');
-          await expect(page.locator('#match-ok')).toHaveText('Continue opponent’s turn');
+          await expect(page.locator('#match-prompt h2')).toHaveText('Finish upkeep?');
+          await expect(page.locator('#match-ok')).toHaveText('Finish upkeep');
           await expect(page.locator('#match-cancel')).toHaveText('Skip responses this turn');
           await page.screenshot({ path: test.info().outputPath('opponent-pause.png') });
           await page.locator('#match-ok').click();
@@ -78,6 +117,8 @@ test('opponent pauses explain passing once, and a waiting spell names what will 
     }
     expect(sawPause).toBe(true);
     expect(sawSpell).toBe(true);
+    expect(sawCleanup).toBe(true);
+    expect([...steps].sort()).toEqual(expectedSteps.sort());
     expect(errors).toEqual([]);
   } finally { await application.close(); }
 });

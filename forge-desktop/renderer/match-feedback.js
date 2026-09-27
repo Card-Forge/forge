@@ -1,12 +1,6 @@
 /* Presentation of copied engine events. Animations never queue or delay game actions. */
 const matchFeedback = (() => {
-  const phases = {
-    UNTAP: 'Untap', UPKEEP: 'Upkeep', DRAW: 'Draw', MAIN1: 'Main phase 1',
-    COMBAT_BEGIN: 'Beginning of combat', COMBAT_DECLARE_ATTACKERS: 'Declare attackers',
-    COMBAT_DECLARE_BLOCKERS: 'Declare blockers', COMBAT_FIRST_STRIKE_DAMAGE: 'First-strike damage',
-    COMBAT_DAMAGE: 'Combat damage', COMBAT_END: 'End of combat', MAIN2: 'Main phase 2',
-    END_OF_TURN: 'End step', CLEANUP: 'Cleanup', PREGAME: 'Opening hands'
-  };
+  const phases = { ...Object.fromEntries(turnGuide.steps.map(step => [step.key, step.name])), PREGAME: 'Opening hands' };
   const stages = [ ['Beginning', ['UNTAP', 'UPKEEP', 'DRAW']], ['Main 1', ['MAIN1']],
     ['Combat', ['COMBAT_BEGIN', 'COMBAT_DECLARE_ATTACKERS', 'COMBAT_DECLARE_BLOCKERS', 'COMBAT_FIRST_STRIKE_DAMAGE', 'COMBAT_DAMAGE', 'COMBAT_END']],
     ['Main 2', ['MAIN2']], ['Ending', ['END_OF_TURN', 'CLEANUP']] ];
@@ -40,32 +34,12 @@ const matchFeedback = (() => {
     const phase = phases[state.phaseKey] || state.phase || 'Preparing the match';
     const stage = stages.findIndex(([, keys]) => keys.includes(state.phaseKey));
     const prompt = state.prompt;
-    let instruction = '';
-    let title = '', passLabel = '', passHint = '', responseText = '';
-    const optionalResponse = prompt?.inputType === 'InputPassPriority' && (!yours || Boolean(state.stack?.length));
-    if (prompt?.inputType === 'InputPassPriority') {
-      if (state.stack?.length) {
-        title = `${state.stack[0].name} is waiting.`;
-        instruction = 'Choose Let it resolve if you do not want to play anything first. It takes effect after both players pass.\n\nTo respond, select a highlighted card or ability.';
-        passLabel = 'Let it resolve';
-        passHint = 'Play nothing in response to this spell or ability.';
-        responseText = state.stack[0].text || '';
-      } else if (yours) {
-        title = 'Play a card or continue.';
-        instruction = 'You can play a highlighted card or activate an ability. Choose Next step to pass without taking an action.';
-        passLabel = 'Next step';
-      } else {
-        title = 'Let your opponent continue.';
-        instruction = 'Nothing is waiting to resolve. Choose Continue opponent’s turn to play nothing at this pause.\n\nYou only need to select a highlighted card or ability if you want to act first.';
-        passLabel = 'Continue opponent’s turn';
-        passHint = 'Pass only this chance to act.';
-      }
-    }
+    const guidance = turnGuide.describe(state, yours);
+    const { optionalResponse } = guidance;
     const decision = terminal ? 'GAME COMPLETE' : !prompt ? 'GAME RESOLVING' : pregame ? 'YOUR CHOICE'
       : optionalResponse ? `${yours ? 'YOUR TURN' : 'OPPONENT’S TURN'} · OPTIONAL RESPONSE`
         : yours ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR CHOICE';
-    return { human, active, yours, terminal, pregame, owner, phase, stage, instruction, decision,
-      optionalResponse, title, passLabel, passHint, responseText };
+    return { human, active, yours, terminal, pregame, owner, phase, stage, decision, ...guidance };
   }
 
   function capture() {
@@ -144,6 +118,12 @@ const matchFeedback = (() => {
     $('match-phase').innerHTML = status.pregame || status.terminal ? esc(status.pregame ? 'Choose your opening hand' : next.result || 'Game ended')
       : stages.map(([label], index) => `<span class="phase-step ${index === status.stage ? 'current' : index < status.stage ? 'past' : ''}" ${index === status.stage ? 'aria-current="step"' : ''}>${esc(label)}</span>`).join('<i aria-hidden="true">›</i>');
     $('match-phase').setAttribute('aria-label', `Current phase: ${status.phase}`);
+    $('match-turn-guide').hidden = status.pregame || status.terminal;
+    const guide = $('match-turn-guide-list');
+    if (guide.dataset.phase !== next.phaseKey) {
+      guide.dataset.phase = next.phaseKey;
+      guide.innerHTML = turnGuide.steps.map(step => `<li ${step.key === next.phaseKey ? 'aria-current="step"' : ''}><strong>${esc(step.name)}${step.key === next.phaseKey ? ' · Now' : ''}</strong><p>${esc(step.text)}</p></li>`).join('');
+    }
     for (const [id, isHuman] of [['match-human', true], ['match-opponent', false]]) {
       const lane = $(id), player = next.players?.find(value => value.human === isHuman);
       const active = player?.id === next.activePlayerId;
