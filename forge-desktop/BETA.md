@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.19
+# Mana Table — beta 0.1.0-beta.20
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -64,11 +64,13 @@ by someone with access; the app does not sign in to Moxfield.
     decision. **Play** resumes the table. **Concede** ends the game.
 
 Your life, available mana, and commander damage sit in the match header, outside
-the battlefield. The playmat extends beneath the hand. Move onto your battlefield
-or its controls to tuck the hand down and reach the cards underneath; hover the
-exposed strip at the bottom, or focus a hand card, to bring it back. **Esc** also
-tucks the hand away. Only highlighted playable cards show the grab cursor;
-artwork itself never starts a browser image drag.
+the battlefield. The playmat extends beneath a persistent fan of cards. Hover
+or focus one card to lift it; neighboring cards slide aside, and the rest of the
+hand stays in place. Approach an overlapping battlefield card from the table to
+open a local gap in the fan. Canceled drags glide back into the hand. **Esc**
+releases the inspected card. Motion follows the animation preference and reduced
+motion setting. Only highlighted playable cards show the grab cursor; artwork
+itself never starts a browser image drag.
 
 Library searches open a card picker over the table. **Eligible** shows the cards
 you can choose from that library right now; **All revealed** lets you inspect the

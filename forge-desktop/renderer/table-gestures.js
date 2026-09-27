@@ -7,14 +7,24 @@ function createTableDrag(root, options) {
     const current = gesture;
     gesture = null;
     if (current.dragging) {
+      const accepted = commit && options.valid(current) && (!options.canDrop || options.canDrop(current, event));
       suppressClick = true;
-      current.ghost.remove();
       current.label.remove();
       current.source.classList.remove('drag-source');
       document.body.classList.remove('table-dragging');
       if (root.hasPointerCapture(current.pointerId)) root.releasePointerCapture(current.pointerId);
-      options.finish?.({ commit, event });
-      if (commit && options.valid(current)) options.drop(current, event);
+      options.finish?.({ commit: accepted, event });
+      if (accepted) options.drop(current, event);
+      const motion = document.getElementById('match-view').dataset.motion !== 'off' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!accepted && options.returnBounds && current.source.isConnected && motion) {
+        const start = current.ghost.getBoundingClientRect(), end = options.returnBounds(current);
+        current.ghost.classList.replace('table-drag-ghost', 'table-return-ghost');
+        const animation = current.ghost.animate([
+          { translate: '0 0', scale: '1', opacity: .94 },
+          { translate: `${end.left - start.left}px ${end.top - start.top}px`, scale: String(end.width / start.width), opacity: 0 }
+        ], { duration: 180, easing: 'cubic-bezier(.2,.75,.25,1)' });
+        animation.finished.catch(() => {}).finally(() => current.ghost.remove());
+      } else current.ghost.remove();
     }
   }
   root.addEventListener('pointerdown', event => {
@@ -34,6 +44,7 @@ function createTableDrag(root, options) {
       document.body.classList.add('table-dragging');
       gesture.ghost = gesture.source.cloneNode(true);
       gesture.ghost.removeAttribute('id');
+      for (const attribute of ['data-match-card', 'data-visual-card', 'data-preview-card']) gesture.ghost.removeAttribute(attribute);
       gesture.ghost.className += ' table-drag-ghost';
       gesture.ghost.setAttribute('aria-hidden', 'true');
       gesture.ghost.tabIndex = -1;
@@ -45,8 +56,8 @@ function createTableDrag(root, options) {
       root.setPointerCapture(event.pointerId);
     }
     event.preventDefault();
-    gesture.ghost.style.left = `${event.clientX + 18}px`;
-    gesture.ghost.style.top = `${Math.max(8, Math.min(innerHeight - 270, event.clientY - 100))}px`;
+    gesture.ghost.style.left = `${event.clientX - (gesture.anchor?.x ?? -18)}px`;
+    gesture.ghost.style.top = `${Math.max(8, Math.min(innerHeight - 270, event.clientY - (gesture.anchor?.y ?? 100)))}px`;
     gesture.label.style.left = `${Math.max(8, Math.min(innerWidth - 310, event.clientX - 90))}px`;
     gesture.label.style.top = `${Math.max(8, Math.min(innerHeight - 58, event.clientY + 28))}px`;
     const hint = options.over(gesture, event);

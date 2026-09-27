@@ -67,8 +67,7 @@ test('a played card animates once; priority refreshes do not replay it and tappi
     await page.mouse.up();
     await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
     expect((await page.evaluate(() => window.forge.request('matchState'))).prompt.id).toBe(state.prompt.id);
-    // The pointer is back over the battlefield, so re-enter through the hand's
-    // exposed strip before picking the card up again.
+    // Pick the same card up again from the persistent fan.
     await tile.locator('.match-hand-cost').hover({ position: { x: 14, y: 10 } });
     box = await tile.boundingBox();
     await page.mouse.move(box.x + box.width / 2, box.y + 55);
@@ -92,6 +91,10 @@ test('a played card animates once; priority refreshes do not replay it and tappi
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', next.prompt.id);
       expect(await animations()).toEqual([{ id: forest.visualId, kind: 'arrival' }]);
     }
+    // Approach the permanent from the table so the overlapping cards make room.
+    const landBox = await field.boundingBox();
+    await page.mouse.move(table.x + 12, table.y + 12);
+    await page.mouse.move(landBox.x + landBox.width / 2, landBox.y + landBox.height / 2, { steps: 8 });
     await field.click();
     await expect(field).toHaveClass(/tapped/);
     await expect.poll(animations).toEqual([{ id: forest.visualId, kind: 'arrival' }, { id: forest.visualId, kind: 'tap' }]);

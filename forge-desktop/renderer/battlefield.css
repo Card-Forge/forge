@@ -21,7 +21,7 @@
   isolation: isolate;
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
+  overflow: clip;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr) 24px minmax(0, 1fr) var(--hand-peek);

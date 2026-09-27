@@ -1,6 +1,6 @@
-/* Compact fan, with an upright inspection card and paging for unusually large hands. */
+/* A persistent fan. Only the card being inspected lifts out of the hand. */
 function createHandView(arena, hand, send) {
-  let state, first = 0, raised, capacity = 7, receded = false;
+  let state, first = 0, raised, capacity = 7, tableIntent = false, tableTarget;
   hand.setAttribute('role', 'group');
   hand.setAttribute('aria-label', 'Your hand. Use arrow keys to browse focused cards.');
   const previous = document.createElement('button'), next = document.createElement('button');
@@ -13,33 +13,47 @@ function createHandView(arena, hand, send) {
   const tiles = () => [...hand.children];
   function layout() {
     if (!hand.isConnected) return;
-    arena.dataset.handReceded = String(receded);
-    hand.classList.toggle('hand-receded', receded);
     hand.dataset.canPlay = String(state?.prompt?.inputType === 'InputPassPriority');
+    hand.classList.toggle('hand-yielding', Boolean(tableTarget));
     const cards = tiles(), width = hand.clientWidth;
     capacity = Math.max(1, Math.min(10, Math.floor((width - 208) / 56) + 1));
     first = Math.max(0, Math.min(first, cards.length - capacity));
     const count = Math.min(capacity, cards.length), cardWidth = 148;
-    const step = count > 1 ? Math.min(122, (width - 74 - cardWidth) / (count - 1)) : 0;
+    const step = count > 1 ? Math.min(108, (width - 96 - cardWidth) / (count - 1)) : 0;
     const left = (width - cardWidth - step * (count - 1)) / 2;
+    const selected = cards.indexOf(raised), target = tableTarget?.getBoundingClientRect();
+    const origin = hand.getBoundingClientRect();
     cards.forEach((card, index) => {
       const slot = index - first, visible = slot >= 0 && slot < capacity;
       const center = slot - (count - 1) / 2;
       card.dataset.handVisible = String(visible);
-      card.style.setProperty('--hand-x', `${left + step * slot}px`);
-      card.style.setProperty('--hand-raised-x', `${Math.max(8, Math.min(width - 188, left + step * slot - 16))}px`);
-      card.style.setProperty('--hand-angle', `${center * Math.min(1.3, 6 / Math.max(1, count - 1))}deg`);
-      card.style.setProperty('--hand-arc', `${Math.abs(center) * 1.4}px`);
+      const x = left + step * slot;
+      let shift = selected >= first && selected < first + capacity && index !== selected
+        ? Math.sign(index - selected) * Math.max(10, 38 - Math.abs(index - selected) * 5) : 0;
+      // A table control approached from above opens a local gap in the fan.
+      // The cards keep their size and height; the hand never folds away.
+      if (target && target.bottom > origin.bottom - 160) {
+        const centerX = origin.left + x + cardWidth / 2;
+        const targetCenter = (target.left + target.right) / 2;
+        if (centerX + 76 > target.left - 12 && centerX - 76 < target.right + 12)
+          shift = centerX < targetCenter ? target.left - 88 - centerX : target.right + 88 - centerX;
+      }
+      shift = Math.max(12 - x, Math.min(width - cardWidth - 12 - x, shift));
+      card.style.setProperty('--hand-x', `${x}px`);
+      card.style.setProperty('--hand-shift', `${shift}px`);
+      card.style.setProperty('--hand-angle', `${center * Math.min(2.4, 14 / Math.max(1, count - 1))}deg`);
+      card.style.setProperty('--hand-arc', `${Math.pow(center / Math.max(1, (count - 1) / 2), 2) * 10}px`);
       card.style.setProperty('--hand-order', slot + 1);
-      card.classList.toggle('hand-raised', card === raised && visible && !receded);
+      card.classList.toggle('hand-raised', card === raised && visible);
     });
     previous.hidden = first === 0;
     next.hidden = first + capacity >= cards.length;
     document.getElementById('match-hand-count').textContent = `${cards.length} cards · ${cards.length > capacity ? `${first + 1}–${Math.min(cards.length, first + capacity)} shown · ` : ''}hover to lift${hand.dataset.canPlay === 'true' ? ' · drag highlighted cards to play' : ''}`;
   }
-  function recede(value) {
-    if (receded === value) return;
-    receded = value;
+  function yieldTo(target) {
+    if (tableTarget === target) return;
+    tableTarget = target;
+    if (target) raised = null;
     layout();
   }
   const peekTop = () => arena.getBoundingClientRect().bottom - parseFloat(getComputedStyle(arena).getPropertyValue('--hand-peek')) - 5;
@@ -52,40 +66,48 @@ function createHandView(arena, hand, send) {
   }
   hand.addEventListener('pointermove', event => {
     if (document.body.classList.contains('table-dragging') || event.buttons) return;
-    // The exposed strip is a stable entrance. Cards withdrawing past the
-    // pointer cannot immediately reopen the hand over a battlefield target.
-    if (receded && event.clientY < peekTop()) return;
-    recede(false);
+    if (tableIntent && event.clientY < peekTop()) {
+      const beneath = document.elementsFromPoint(event.clientX, event.clientY)
+        .map(element => element.closest('#match-human .match-card, #match-human .match-zone summary'))
+        .find(Boolean);
+      if (beneath) { yieldTo(beneath); return; }
+    }
+    if (event.clientY >= peekTop()) tableIntent = false;
+    yieldTo(null);
     lift(event.target.closest('.match-hand-card'));
   });
-  hand.addEventListener('pointerleave', () => {
-    if (!document.body.classList.contains('table-dragging')) lift(hand.contains(document.activeElement) ? document.activeElement : null);
-  });
-  hand.addEventListener('focusin', event => { recede(false); lift(event.target.closest('.match-hand-card')); });
+  hand.addEventListener('focusin', event => { tableIntent = false; yieldTo(null); lift(event.target.closest('.match-hand-card')); });
   hand.addEventListener('focusout', event => { if (!hand.contains(event.relatedTarget)) lift(null); });
   hand.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { recede(true); return; }
+    if (event.key === 'Escape') { lift(null); return; }
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     const cards = tiles(), index = cards.indexOf(document.activeElement);
     if (index < 0) return;
     event.preventDefault();
-    recede(false);
+    yieldTo(null);
     const target = event.key === 'Home' ? 0 : event.key === 'End' ? cards.length - 1 : Math.max(0, Math.min(cards.length - 1, index + (event.key === 'ArrowLeft' ? -1 : 1)));
     lift(cards[target]); cards[target]?.focus({ preventScroll: true });
   });
-  function page(direction) { cardPreview.hide(); raised = null; receded = false; first += direction * Math.max(1, capacity - 1); layout(); }
+  function page(direction) { cardPreview.hide(); raised = null; tableTarget = null; first += direction * Math.max(1, capacity - 1); layout(); }
   previous.onclick = () => page(-1); next.onclick = () => page(1);
   hand.addEventListener('wheel', event => {
     if (event.defaultPrevented || event.ctrlKey || tiles().length <= capacity || (!event.deltaX && !event.shiftKey)) return;
     event.preventDefault(); page(Math.sign(event.deltaX || event.deltaY));
   }, { passive: false });
   new ResizeObserver(layout).observe(hand);
-  // Reserve only a small strip for the hand. As the player enters the table,
-  // uncover the permanents and piles beneath it, including for keyboard users.
+  // Pointer movement, rather than geometry-generated pointerover events, owns
+  // inspection. An animation cannot select a different card under a still cursor.
   for (const type of ['pointermove', 'focusin']) document.addEventListener(type, event => {
     if (!hand.isConnected || document.body.classList.contains('table-dragging') || event.buttons) return;
-    if (event.target.closest('#match-human, #match-phase, #match-self')) recede(true);
-    else if (event.target.closest('.hand-page')) recede(false);
+    if (event.target.closest('#match-human, #match-phase, #match-self')) {
+      tableIntent = true;
+      lift(null);
+      yieldTo(event.target.closest('#match-human .match-card, #match-human .match-zone summary'));
+    } else if (!hand.contains(event.target)) {
+      if (type === 'pointermove') { tableIntent = event.clientY < peekTop(); lift(null); }
+      yieldTo(null);
+    }
+    if (type === 'pointermove' && event.clientY >= peekTop() && tableTarget) yieldTo(null);
   });
   function destination(event) {
     const hit = document.elementFromPoint(event.clientX, event.clientY);
@@ -96,23 +118,32 @@ function createHandView(arena, hand, send) {
     start(event) {
       const source = event.target.closest('.match-hand-card.actionable');
       if (!source || state?.prompt?.inputType !== 'InputPassPriority' || document.getElementById('match-view').getAttribute('aria-busy') === 'true') return;
-      return { source, key: source.dataset.matchCard, scope: { sessionId: state.id, promptId: state.prompt.id } };
+      const rect = source.getBoundingClientRect();
+      return { source, key: source.dataset.matchCard, scope: { sessionId: state.id, promptId: state.prompt.id },
+        anchor: { x: (event.clientX - rect.left) / rect.width * 180, y: (event.clientY - rect.top) / rect.height * 250 } };
     },
     valid(g) { return g.source.isConnected && !document.getElementById('match-view').hidden && state?.id === g.scope.sessionId && state?.prompt?.id === g.scope.promptId && g.source.dataset.matchCard === g.key; },
+    canDrop(g, event) { return destination(event); },
+    returnBounds(g) {
+      const origin = hand.getBoundingClientRect(), style = getComputedStyle(g.source);
+      return { left: origin.left + g.source.offsetLeft + 148 * .06 + parseFloat(style.getPropertyValue('--hand-shift')),
+        top: origin.bottom + 34 + parseFloat(style.getPropertyValue('--hand-arc')) - 216 * .88, width: 148 * .88 };
+    },
     over(g, event) {
-      recede(true);
+      lift(null);
       const valid = destination(event);
       arena.classList.toggle('hand-drop-ready', Boolean(valid));
       return { valid, text: valid ? 'Release to play · choose targets next if needed' : 'Drag onto the table to play · Esc to cancel' };
     },
     drop(g, event) { if (destination(event)) send({ action: 'card', key: g.key }, g.scope); },
-    finish({ commit, event }) {
+    finish() {
       arena.classList.remove('hand-drop-ready');
-      if (!commit || !destination(event)) { recede(false); if (hand.contains(document.activeElement)) lift(document.activeElement); }
+      lift(null);
     }
   });
-  return { revealTable() { recede(true); }, render(nextState) {
-    if (state?.id !== nextState.id || nextState.prompt?.inputType?.includes('Mulligan') && !state?.prompt?.inputType?.includes('Mulligan')) receded = false;
+  return { releaseCard() { lift(null); }, render(nextState) {
+    if (state?.id !== nextState.id) { first = 0; raised = null; tableTarget = null; tableIntent = false; }
+    if (!tableTarget?.isConnected) tableTarget = null;
     state = nextState;
     if (!raised?.isConnected) raised = null;
     layout(); drag.refresh();

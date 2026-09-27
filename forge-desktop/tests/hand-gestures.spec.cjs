@@ -43,6 +43,7 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     async function lift() {
       await card.focus();
       await page.keyboard.press('Home');
+      await card.evaluate(element => Promise.all(element.getAnimations().map(animation => animation.finished.catch(() => {}))));
       const box = await card.boundingBox();
       await page.mouse.move(box.x + box.width / 2, box.y + 50);
       await page.mouse.down();
@@ -102,11 +103,12 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     await expect(card).toHaveAttribute('data-hand-visible', 'false');
     await page.getByRole('button', { name: 'Earlier cards in hand' }).click();
     await expect(card).toHaveAttribute('data-hand-visible', 'true');
-    // A permanent below the resting fan must be immediately reachable from the
-    // playmat, without an invisible hand layer intercepting the click.
+    // The hand stays a full fan when visiting the table. Only cards obstructing
+    // a permanent move sideways, with no change in card height or size.
     await page.evaluate(() => {
       const target = document.createElement('button');
       target.id = 'under-hand-fixture'; target.textContent = 'Use permanent';
+      target.className = 'match-card';
       target.style.cssText = 'position:absolute;left:40%;bottom:12px;width:100px;height:42px';
       window.underHandClicks = 0; target.onclick = () => window.underHandClicks++;
       document.getElementById('match-human').append(target);
@@ -116,15 +118,55 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     const overlap = await hand.boundingBox();
     expect(area.y + area.height - overlap.y).toBeGreaterThan(40);
     await page.mouse.move(area.x + 12, area.y + 12);
-    await expect(hand).toHaveClass(/hand-receded/);
+    const sizes = () => hand.locator('button').evaluateAll(cards => cards.map(card => [card.offsetWidth, card.offsetHeight]));
+    const restingSizes = await sizes();
+    const target = await under.boundingBox();
+    await page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, { steps: 8 });
+    await expect(hand).toHaveClass(/hand-yielding/);
     await under.click();
     expect(await page.evaluate(() => window.underHandClicks)).toBe(1);
+    expect(await sizes()).toEqual(restingSizes);
+    await page.mouse.move(area.x + 12, area.y + 12);
     await card.locator('.mana').first().hover();
-    await expect(hand).not.toHaveClass(/hand-receded/);
     await expect(card).toHaveClass(/hand-raised/);
     await card.focus();
-    await under.focus(); await expect(hand).toHaveClass(/hand-receded/);
-    await card.focus(); await expect(hand).not.toHaveClass(/hand-receded/);
+    await under.focus(); await expect(hand).toHaveClass(/hand-yielding/);
+    await card.focus(); await expect(hand).not.toHaveClass(/hand-yielding/);
+    expect(await sizes()).toEqual(restingSizes);
+    // With motion enabled, a still cursor must keep the same card selected
+    // while that card lifts and its neighbors make room.
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.locator('#match-view').evaluate(element => element.dataset.motion = 'on');
+    await page.mouse.move(5, 5);
+    await card.locator('.mana').first().hover();
+    await expect(card).toHaveClass(/hand-raised/);
+    await page.waitForTimeout(450);
+    await expect(card).toHaveClass(/hand-raised/);
+    expect(await sizes()).toEqual(restingSizes);
+    expect(await hand.locator('.hand-raised').count()).toBe(1);
+    const transforms = await hand.locator('[data-hand-visible="true"]').evaluateAll(cards => cards.map(card => getComputedStyle(card).transform));
+    await page.mouse.move(area.x + 12, area.y + 12);
+    await expect(hand.locator('.hand-raised')).toHaveCount(0);
+    await page.waitForTimeout(250);
+    expect(await hand.locator('[data-hand-visible="true"]').evaluateAll(cards => cards.map(card => getComputedStyle(card).transform))).not.toEqual(transforms);
+    expect(await sizes()).toEqual(restingSizes);
+    await page.evaluate(() => {
+      window.gestureState.prompt.inputType = 'InputPassPriority'; window.handFixture.render(window.gestureState);
+      window.returnAnimations = 0;
+      const animate = Element.prototype.animate;
+      Element.prototype.animate = function (...args) {
+        if (this.classList.contains('table-return-ghost')) window.returnAnimations++;
+        return animate.apply(this, args);
+      };
+    });
+    await lift();
+    await page.keyboard.press('Escape'); await page.mouse.up();
+    expect(await page.evaluate(() => window.returnAnimations)).toBe(1);
+    await expect(page.locator('.table-return-ghost')).toHaveCount(0);
+    expect(await actions()).toHaveLength(1);
+    await page.evaluate(() => { window.gestureState.prompt.inputType = 'InputSelectTargets'; window.handFixture.render(window.gestureState); });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await card.focus(); await page.keyboard.press('Home');
     // Real loaded artwork is decorative, including when no game action exists.
     await page.evaluate(() => {
       const card = document.querySelector('#match-hand [data-match-card="card-0"]');
@@ -144,6 +186,7 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     expect(await page.evaluate(() => window.nativeHandDrags)).toBe(0);
     await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
     expect(await actions()).toHaveLength(1);
+    if (!packaged) await page.screenshot({ path: test.info().outputPath('persistent-hand.png') });
     expect(errors).toEqual([]);
   } finally { await application.close(); }
 });

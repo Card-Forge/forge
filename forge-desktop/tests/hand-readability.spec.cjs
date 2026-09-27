@@ -52,6 +52,7 @@ test('hand costs and creature stats stay readable and reachable at desktop sizes
     for (const size of [[1540, 980], [1120, 740], [1000, 740]]) {
       await application.evaluate(({ BrowserWindow }, size) => BrowserWindow.getAllWindows()[0].setSize(...size), size);
       await page.waitForTimeout(150);
+      await page.locator('#match-back').focus();
       for (const card of hand) {
         const tile = page.locator(`#match-hand [data-visual-card="${card.visualId}"]`);
         await tile.focus(); // Keyboard focus lifts the card without playing it.
@@ -89,6 +90,7 @@ test('hand costs and creature stats stay readable and reachable at desktop sizes
         expect(layout.nameSize).toBeGreaterThanOrEqual(13);
       }
       expect(await page.locator('#match-hand').evaluate(element => element.getBoundingClientRect().height)).toBeLessThanOrEqual(150);
+      expect(await page.locator('.match-arena').evaluate(element => element.scrollTop)).toBe(0);
       await page.locator('#match-hand .match-card').first().focus();
       await page.mouse.move(5, 5);
       if (!packaged) await page.screenshot({ path: test.info().outputPath(`hand-${size[0]}.png`) });

@@ -437,7 +437,7 @@
     if (values.action === 'card' && match.prompt.inputType === 'InputPassPriority'
       && document.querySelector(`#match-hand .actionable[data-match-card="${CSS.escape(values.key)}"]`)) {
       cardPreview.hide();
-      handView.revealTable();
+      handView.releaseCard();
     }
     inFlight = true;
     $('match-prompt').classList.add('sending');
