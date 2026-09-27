@@ -2,9 +2,13 @@ package forge.game.combat;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -137,13 +141,96 @@ public final class CombatExplainer {
         return result;
     }
 
+    private static final int MAX_SUGGESTIONS = 3;
+
     /**
-     * Describe an attack that fulfills the most attack requirements without violating any restriction.
+     * Describe a few legal attacks close to the declared one: without one of the declared attackers,
+     * with additional attackers, and the attack fulfilling the most requirements.
      * Only meant to be shown when the player asks for it.
      */
-    public static String suggestLegalAttack(final Combat combat) {
-        final Pair<Map<Card, GameEntity>, Integer> bestAttack = combat.getAttackConstraints().getLegalAttackers();
-        return describeAttack(bestAttack.getLeft());
+    public static String suggestLegalAttacks(final Combat combat) {
+        final Localizer loc = Localizer.getInstance();
+        final AttackConstraints constraints = combat.getAttackConstraints();
+        final Map<Card, GameEntity> declared = combat.getAttackersAndDefenders();
+        final Pair<Map<Card, GameEntity>, Integer> best = constraints.getLegalAttackers();
+        final int maxViolations = best.getRight();
+
+        final List<Map<Card, GameEntity>> candidates = Lists.newArrayList();
+        // without one of the declared attackers
+        for (final Card attacker : declared.keySet()) {
+            final Map<Card, GameEntity> attack = new LinkedHashMap<>(declared);
+            attack.remove(attacker);
+            candidates.add(attack);
+        }
+        // with one more attacker
+        final Map<Card, GameEntity> additional = getAdditionalAttackers(combat, declared);
+        for (final Map.Entry<Card, GameEntity> e : additional.entrySet()) {
+            final Map<Card, GameEntity> attack = new LinkedHashMap<>(declared);
+            attack.put(e.getKey(), e.getValue());
+            candidates.add(attack);
+        }
+        // with as many more attackers as needed (e.g. "can't attack unless at least two other creatures attack")
+        final Map<Card, GameEntity> filled = new LinkedHashMap<>(declared);
+        for (final Map.Entry<Card, GameEntity> e : additional.entrySet()) {
+            filled.put(e.getKey(), e.getValue());
+            if (isLegalAttack(constraints, filled, maxViolations)) {
+                candidates.add(filled);
+                break;
+            }
+        }
+
+        final List<Map<Card, GameEntity>> legal = candidates.stream()
+                .filter(attack -> isLegalAttack(constraints, attack, maxViolations))
+                .distinct()
+                .sorted(Comparator.comparingInt(attack -> countDifferences(declared, attack)))
+                .limit(MAX_SUGGESTIONS)
+                .collect(Collectors.toCollection(Lists::newArrayList));
+        // always include the attack fulfilling the most requirements
+        if (!legal.contains(best.getLeft())) {
+            if (legal.size() == MAX_SUGGESTIONS) {
+                legal.remove(MAX_SUGGESTIONS - 1);
+            }
+            legal.add(best.getLeft());
+        }
+
+        final StringBuilder sb = new StringBuilder(loc.getMessage("lblWhyAttackLegalOptions"));
+        for (final Map<Card, GameEntity> attack : legal) {
+            sb.append("\n- ").append(describeAttack(attack));
+        }
+        return sb.toString();
+    }
+
+    private static boolean isLegalAttack(final AttackConstraints constraints, final Map<Card, GameEntity> attack, final int maxViolations) {
+        final int violations = constraints.countViolations(attack);
+        return violations != -1 && violations <= maxViolations;
+    }
+
+    /**
+     * @return the creatures that could additionally attack without paying a cost, mapped to the defender they'd attack
+     */
+    private static Map<Card, GameEntity> getAdditionalAttackers(final Combat combat, final Map<Card, GameEntity> declared) {
+        final Map<Card, GameEntity> result = new LinkedHashMap<>();
+        final List<GameEntity> defenders = Lists.newArrayList(declared.values());
+        defenders.addAll(combat.getDefenders());
+        for (final Card c : combat.getAttackingPlayer().getCreaturesInPlay()) {
+            if (declared.containsKey(c) || !combat.getAttackConstraints().getRestrictions().containsKey(c)) {
+                continue;
+            }
+            // prefer a defender already being attacked
+            for (final GameEntity defender : defenders) {
+                if (CombatUtil.canAttack(c, defender) && CombatUtil.getAttackCost(c.getGame(), c, defender) == null) {
+                    result.put(c, defender);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private static int countDifferences(final Map<Card, GameEntity> a, final Map<Card, GameEntity> b) {
+        final Set<Card> cards = new HashSet<>(a.keySet());
+        cards.addAll(b.keySet());
+        return (int) cards.stream().filter(c -> !Objects.equals(a.get(c), b.get(c))).count();
     }
 
     private static void explainGlobalRestrictions(final Combat combat, final GlobalAttackRestrictions global,
@@ -244,12 +331,11 @@ public final class CombatExplainer {
     private static String describeAttack(final Map<Card, GameEntity> attack) {
         final Localizer loc = Localizer.getInstance();
         if (attack.isEmpty()) {
-            return loc.getMessage("lblWhyAttackLegalNoAttack");
+            return loc.getMessage("lblWhyAttackNoAttack");
         }
-        final String attackers = attack.entrySet().stream()
+        return attack.entrySet().stream()
                 .map(e -> loc.getMessage("lblWhyAttackAssignment", e.getKey(), e.getValue()))
                 .collect(Collectors.joining(", "));
-        return loc.getMessage("lblWhyAttackLegalExample", attackers);
     }
 
     // ////////////////////////////////////

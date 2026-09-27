@@ -106,8 +106,9 @@ public class CombatExplainerTest extends SimulationTest {
         List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
         AssertJUnit.assertEquals(reasons.toString(), 1, reasons.size());
         assertContains(reasons.get(0), juggernaut.toString(), "attacks each combat if able");
-        // the legal attack suggested on demand includes the Juggernaut
-        assertContains(CombatExplainer.suggestLegalAttack(combat), juggernaut.toString());
+        // the closest legal attack suggested on demand adds the Juggernaut
+        assertContains(CombatExplainer.suggestLegalAttacks(combat),
+                bear + " attacking " + defending + ", " + juggernaut + " attacking " + defending);
     }
 
     @Test
@@ -125,10 +126,14 @@ public class CombatExplainerTest extends SimulationTest {
     public void testCantAttackAlone() {
         setUp();
         Card mogg = addCreature("Mogg Flunkies", attacking);
+        Card bear = addCreature("Grizzly Bears", attacking);
         Combat combat = startCombat();
         combat.addAttacker(mogg, defending);
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
         assertContains(CombatUtil.explainInvalidAttack(combat), mogg.toString(), "can't attack or block alone.");
+        // both not attacking and attacking together with another creature are suggested
+        assertContains(CombatExplainer.suggestLegalAttacks(combat), "Not attacking at all",
+                mogg + " attacking " + defending + ", " + bear + " attacking " + defending);
     }
 }

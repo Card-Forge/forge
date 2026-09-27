@@ -114,10 +114,10 @@ public class InputAttack extends InputSyncronizedBase {
             ThreadUtil.invokeInGameThread(() -> {
                 final Localizer localizer = Localizer.getInstance();
                 final String title = localizer.getMessage("lblCombatDeclareAttackersStep");
-                final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalAttack"));
-                // only suggest a legal attack when asked for, closing the dialog counts as OK
+                final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalAttacks"));
+                // only suggest legal attacks when asked for, closing the dialog counts as OK
                 if (getController().getGui().showOptionDialog(attackErrors, title, SOptionPane.WARNING_ICON, options, 0) == 1) {
-                    getController().getGui().message(CombatExplainer.suggestLegalAttack(combat), title);
+                    getController().getGui().message(CombatExplainer.suggestLegalAttacks(combat), title);
                 }
             });
             return;
