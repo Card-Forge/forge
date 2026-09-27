@@ -8,21 +8,26 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
-import forge.gui.FThreads;
+import forge.FrameRate;
 
 import java.nio.ByteBuffer;
 
 public class ScreenUtil implements Disposable {
     public static ScreenUtil instance;
-    private TextureRegion lastScreenTexture;
+    private TextureRegion screenTextureRegion = null;
+    private Texture screenshotTexture = null;
     private final int THUMB_WIDTH = 256;
     private final int THUMB_HEIGHT = 144;
     ByteBuffer pixels;
-    int fbW, fbH, bufferSize;
+    int bufferSize, width, height;
+    private static boolean isInitialized = false;
+    private volatile boolean pendingScreenshot = false;
+    private static boolean firstCapture = true;
+
     private ScreenUtil() {
-        fbW = Forge.getScreenWidth();
-        fbH = Forge.getScreenHeight();
-        bufferSize = fbW * fbH * 4;
+        width = Forge.getScreenWidth();
+        height = Forge.getScreenHeight();
+        bufferSize = width * height * 4;
         pixels = BufferUtils.newByteBuffer(bufferSize);
     }
 
@@ -30,25 +35,39 @@ public class ScreenUtil implements Disposable {
         return instance == null ? instance = new ScreenUtil() : instance;
     }
 
-    public TextureRegion takeScreenshot() {
-        FThreads.invokeInEdtNowOrLater(() -> {
-            if (lastScreenTexture != null)
-                lastScreenTexture.getTexture().dispose();
+    public void initScreenshotBuffer() {
+        if (isInitialized) return;
+        screenshotTexture = new Texture(width, height, Pixmap.Format.RGB565);
+        screenTextureRegion = new TextureRegion(screenshotTexture);
+        screenTextureRegion.flip(false, true);
+        isInitialized = true;
+    }
 
-            int width = Forge.getScreenWidth();
-            int height = Forge.getScreenHeight();
-            Texture texture = new Texture(width, height, Pixmap.Format.RGB565);
-            lastScreenTexture = new TextureRegion(texture);
-            lastScreenTexture.flip(false, true);
-            Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, texture.getTextureObjectHandle());
-            Gdx.gl20.glCopyTexSubImage2D(GL20.GL_TEXTURE_2D, 0, 0, 0, 0, 0, width, height);
-            Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, 0);
-        });
-        return lastScreenTexture;
+    public TextureRegion takeScreenshot() {
+        if (!isInitialized) {
+            initScreenshotBuffer();
+        }
+        FrameRate.hideFPSCountdown = 2;
+        pendingScreenshot = true;
+        return screenTextureRegion;
+    }
+
+    public void onRenderFrame() {
+        if (!pendingScreenshot) return;
+        // Only copy when hideFPSCountdown has reached 0 (FPS is hidden) or firstCapture
+        if (firstCapture || FrameRate.hideFPSCountdown <= 0) {
+            Gdx.app.postRunnable(() -> {
+                Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, screenshotTexture.getTextureObjectHandle());
+                Gdx.gl20.glCopyTexSubImage2D(GL20.GL_TEXTURE_2D, 0, 0, 0, 0, 0, width, height);
+                Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, 0);
+                pendingScreenshot = false;
+                firstCapture = false;
+            });
+        }
     }
 
     public TextureRegion getLastScreenTexture() {
-        return lastScreenTexture;
+        return screenTextureRegion;
     }
 
     public Pixmap getThumbnailPreview() {
@@ -56,16 +75,16 @@ public class ScreenUtil implements Disposable {
         pixels.clear();
         // Read full framebuffer into a ByteBuffer
         Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);
-        Gdx.gl.glReadPixels(0, 0, fbW, fbH, GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, pixels);
+        Gdx.gl.glReadPixels(0, 0, width, height, GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, pixels);
         pixels.rewind();
 
         // Downscale manually (nearest-neighbor for speed)
         for (int y = 0; y < THUMB_HEIGHT; y++) {
             for (int x = 0; x < THUMB_WIDTH; x++) {
-                int srcX = x * fbW / THUMB_WIDTH;
-                int srcY = y * fbH / THUMB_HEIGHT;
+                int srcX = x * width / THUMB_WIDTH;
+                int srcY = y * height / THUMB_HEIGHT;
 
-                int index = (srcY * fbW + srcX) * 4;
+                int index = (srcY * width + srcX) * 4;
                 int r = pixels.get(index) & 0xFF;
                 int g = pixels.get(index + 1) & 0xFF;
                 int b = pixels.get(index + 2) & 0xFF;
@@ -114,7 +133,6 @@ public class ScreenUtil implements Disposable {
 
     @Override
     public void dispose() {
-        if (lastScreenTexture != null)
-            Forge.safeDispose(lastScreenTexture.getTexture());
+        Forge.safeDispose(screenshotTexture);
     }
 }

@@ -951,6 +951,7 @@ public class Forge implements ApplicationListener {
         // prevent render if isDisposed
         if (isDisposed)
             return;
+        ScreenUtil.getInstance().onRenderFrame();
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
