@@ -27,6 +27,7 @@ Rows start with the ChooseSource/Empower batch. Bugs noted before it are only in
 | `StaticAbilityCantAttackBlock.java:269` | `cantBlockBy(attacker, null)` always false, so `CombatUtil.canBeBlocked`'s unblockable check (`CombatUtil.java:533`) never fires | Check not ported; no validator outcome depends on it    | Not filed |
 | `Player.java:2642`                      | `planeswalk`'s `getZone(PlanarDeck).get(0)` unguarded; throws on an empty planar deck, after every plane has already left        | `error` before anything moves                           | Not filed |
 | `TriggerChaosEnsues.java:43-48`         | Suspected: `Affected` iterable must be all host, so chaos ensuing for two planes fires neither                                   | `Defined$` naming two planes returns an `error`         | Not filed |
+| `RunChaosEffect.java:25-31`             | `setOptionalTrigger(true)` hits the RunChaos ability, not the copy; decider never null, so every copy asks `confirmTrigger`      | `OptionalDecider$`/`Cost$` chaos trigger: `error`       | Not filed |
 
 ### `ChooseSourceEffect.java:84-89` — `TargetControls$` throws on an empty player list
 
@@ -338,3 +339,21 @@ reading is deliberate.
 **Crucible meanwhile:** `chaosEnsuesAffected` (`chaosensueseffect.go`) returns
 `engine: ChaosEnsues: Defined$ <spec> naming more than one plane not resolvable yet` before anything fires
 (`TestChaosEnsuesRejectsUnportedDefinedShapes`).
+
+### `RunChaosEffect.java:25-31` — chaos copies never optional, always confirmed
+
+`RunChaosEffect.resolve` builds one `WrappedAbility` per chaos trigger of each card. For `OptionalDecider$` (`:26-28`)
+and `Cost$` (`:29-30`) it calls `sa.setOptionalTrigger(true)`, where `sa` is the RunChaos ability itself, not
+`triggerSA`, the copy the wrapper delegates `isOptionalTrigger` to (`WrappedAbility.java:363-365`). `decider` starts as
+the activator (`:25`), never `null`, unlike `TriggerHandler.java:505-516`, which leaves it `null` for a mandatory
+trigger. So `WrappedAbility.resolve` (`WrappedAbility.java:431-437`) asks `confirmTrigger` for every copy:
+`PlayerControllerHuman.confirmTrigger` prompts even for a mandatory chaos ability, while `PlayerControllerAi.java:411`
+reads `isMandatory()` as true and never declines an `OptionalDecider$ You` one. Pools of Becoming reaches it whenever it
+reveals one of the 6 planes whose chaos ability names `OptionalDecider$ You`.
+
+**Proposed fix:** set the flag on `triggerSA` and start `decider` at `null`, as `TriggerHandler.registerActiveTrigger`
+does.
+
+**Crucible meanwhile:** `runChaosEffect` (`runchaoseffect.go`) returns
+`engine: RunChaos: <card>: chaos trigger OptionalDecider$ not resolvable yet` (or `Cost$`) before any copy is pushed
+(`TestRunChaosRejectsUnportedChaosTriggers`). A mandatory chaos ability resolves without confirmation.

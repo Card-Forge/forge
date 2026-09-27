@@ -164,7 +164,7 @@ func NewRegistry() *Registry {
 	r[APIReverseTurnOrder] = reverseTurnOrderEffect{}
 	r[APIRingTemptsYou] = ringTemptsYouEffect{}
 	r[APIRollDice] = rollDiceEffect{}
-	r[APIRollPlanarDice] = rollPlanarDiceEffect{}
+	r[APIRunChaos] = runChaosEffect{}
 	r[APISacrifice] = sacrificeEffect{}
 	r[APISacrificeAll] = sacrificeAllEffect{}
 	r[APIScry] = scryEffect{}

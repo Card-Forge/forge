@@ -7,9 +7,10 @@
 ## Context
 
 Four `ApiType` effects are deferred on Planechase (CR 901): `Planeswalk` (30 corpus lines), `ChaosEnsues` (11),
-`RunChaos` (1), `RollPlanarDice` (1) — 43 lines total. Each Java resolve gates on `Game.getActivePlanes() == null`
-(`Game.java:80,1041-1046`) as "not a Planechase game"; Crucible's `*Game` has no equivalent state at all (`zone.go`'s
-`PlanarDeck` constant is unused past its name; `effecthelpers.go:99` excludes it from `ChangeZone` destinations).
+`RunChaos` (1), `RollPlanarDice` (1) — 43 lines total. Every Java resolve but `RunChaosEffect`'s gates on
+`Game.getActivePlanes() == null` (`Game.java:80,1041-1046`) as "not a Planechase game"; Crucible's `*Game` has no
+equivalent state at all (`zone.go`'s `PlanarDeck` constant is unused past its name; `effecthelpers.go:99` excludes it
+from `ChangeZone` destinations).
 
 Forge-oracle research (full report cited throughout) found the surrounding mechanic simpler than expected:
 
