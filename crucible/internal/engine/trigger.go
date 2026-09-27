@@ -3432,6 +3432,124 @@ func anyPlaneMatches(g *Game, cards []CardID, spec string, hostController Player
 	return false
 }
 
+// checkChaosEnsuesTriggers is Mode$ ChaosEnsues (TriggerChaosEnsues.performTest),
+// CR 311.7's "whenever chaos ensues", run without AbilityKey.Affected: every
+// chaos ability whose host sits where its TriggerZones$ allows fires --
+// normally just the active plane's own, all 158 real lines being
+// TriggerZones$ Command. player is AbilityKey.Player, the player chaos
+// ensues for (ChaosEnsuesEffect's activator): it is what ValidPlayer$ is
+// checked against and what every match records as TriggeredPlayer
+// (setTriggeringObjectsFrom(runParams, AbilityKey.Player)).
+//
+// The walk is planeswalkTriggerMatches' own: every player's Battlefield and
+// whole Command zone (planeswalkTriggerZones), TriggerZones$ gating each
+// line through phaseTriggerZoneMatches. A Static$ True line (0 real lines)
+// resolves inline through resolveStaticTriggers (ADR-0020) before the other
+// matches are pushed; its failure is left pending for the caller's
+// TakePendingError.
+func (g *Game) checkChaosEnsuesTriggers(controller PlayerController, player PlayerID) {
+	g.runChaosEnsuesTriggers(controller, player, NoCard)
+}
+
+// checkChaosEnsuesOnTriggers is Mode$ ChaosEnsues run with AbilityKey.Affected
+// naming one card: CR 311.7's "chaos ensues for a particular object"
+// (ChaosEnsuesEffect.java:41-57, Defined$). Only affected's own chaos
+// abilities fire -- every other host fails performTest's Affected check
+// (TriggerChaosEnsues.java:36-50) -- and they fire from whatever zone
+// affected is in, a revealed plane still in the planar deck included. Java
+// widens each such trigger's active zones by the card's current zone for
+// the run and restores them afterwards (ChaosEnsuesEffect.java:45-49,
+// 61-70), which is the same as skipping the TriggerZones$ gate for affected
+// alone; no trigger state changes here.
+//
+// Callers decide affected first: a Defined$ card with no chaos ability
+// (hasChaosEnsuesTrigger) means nothing fires at all
+// (ChaosEnsuesEffect.java:54-56), so this is never called for one.
+func (g *Game) checkChaosEnsuesOnTriggers(controller PlayerController, player PlayerID, affected CardID) {
+	g.runChaosEnsuesTriggers(controller, player, affected)
+}
+
+// runChaosEnsuesTriggers is the run both entry points share; affected is
+// NoCard when AbilityKey.Affected is unset.
+func (g *Game) runChaosEnsuesTriggers(controller PlayerController, player PlayerID, affected CardID) {
+	g.resolveStaticTriggers(controller, g.chaosEnsuesTriggerMatches(player, affected, true))
+	g.pushTriggeredAbilities(controller, g.chaosEnsuesTriggerMatches(player, affected, false))
+}
+
+// hasChaosEnsuesTrigger reports whether c carries a Mode$ ChaosEnsues line:
+// ChaosEnsuesEffect.java:43-44's test for whether a Defined$ card counts as
+// affected.
+func hasChaosEnsuesTrigger(c *Card) bool {
+	if c.Def == nil {
+		return false
+	}
+	for _, face := range c.Def.Faces {
+		for _, t := range face.Triggers {
+			if isChaosEnsuesTrigger(t) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// isChaosEnsuesTrigger reports whether t is CR 311.7's chaos ability: Mode$
+// ChaosEnsues.
+func isChaosEnsuesTrigger(t *compile.Ability) bool {
+	return strings.EqualFold(t.Name, "ChaosEnsues")
+}
+
+// chaosEnsuesTriggerMatches collects the Mode$ ChaosEnsues lines that fire
+// for player, Static$ True ones only or the rest only, as static says: every
+// zone-scoped host when affected is NoCard, affected alone otherwise.
+func (g *Game) chaosEnsuesTriggerMatches(player PlayerID, affected CardID, static bool) []Ability {
+	if affected != NoCard {
+		return g.appendChaosEnsuesMatches(nil, affected, player, static, false, Command)
+	}
+	var matches []Ability
+	for _, pid := range g.Players() {
+		for _, z := range planeswalkTriggerZones {
+			for _, host := range g.Zone(z, pid).Cards() {
+				matches = g.appendChaosEnsuesMatches(matches, host, player, static, true, z)
+			}
+		}
+	}
+	return matches
+}
+
+// appendChaosEnsuesMatches appends host's matching chaos abilities to
+// matches. When gated, zone (where host was found) must satisfy each line's
+// TriggerZones$; ungated is checkChaosEnsuesOnTriggers' widened zones.
+// ValidPlayer$ (0 real lines) is performTest's only other test, matched
+// against player; a spec matchesPlayerSpec does not recognize never fires.
+func (g *Game) appendChaosEnsuesMatches(matches []Ability, host CardID, player PlayerID, static, gated bool, zone ZoneType) []Ability {
+	h := g.Card(host)
+	if h.Def == nil {
+		return matches
+	}
+	objects := triggeredObjects{player: player}
+	for _, face := range h.Def.Faces {
+		for _, t := range face.Triggers {
+			if !isChaosEnsuesTrigger(t) || isStaticTrigger(t) != static {
+				continue
+			}
+			if gated && !phaseTriggerZoneMatches(h, t, zone) {
+				continue
+			}
+			if spec, ok := t.Param("ValidPlayer"); ok {
+				matched, recognized := matchesPlayerSpec(g, player, h.Controller(), host, spec)
+				if !recognized || !matched {
+					continue
+				}
+			}
+			if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
+				matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: objects})
+			}
+		}
+	}
+	return matches
+}
+
 // planeswalkTriggerMatches collects the Mode$ mode lines cards matches,
 // Static$ True ones only or the rest only, as static says.
 func (g *Game) planeswalkTriggerMatches(mode string, cards []CardID, static bool) []Ability {

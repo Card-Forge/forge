@@ -233,8 +233,8 @@ type triggeredObjects struct {
 	sourceController PlayerID
 	// player is AbilityKey.Player: who became the monarch (Mode$
 	// BecomeMonarch), took the initiative (TakesInitiative) or completed a
-	// dungeon (DungeonCompleted), or whom the Ring tempted
-	// (RingTemptsYou). NoPlayer when unset.
+	// dungeon (DungeonCompleted), whom the Ring tempted (RingTemptsYou), or
+	// for whom chaos ensued (ChaosEnsues). NoPlayer when unset.
 	player PlayerID
 	// blocker is AbilityKey.Blocker for Mode$ AttackerBlockedByCreature
 	// (TriggerAttackerBlockedByCreature.setTriggeringObjects), read by

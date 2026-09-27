@@ -201,13 +201,13 @@ state-based actions, combat, mulligans, the valid-string evaluator, mana pool an
 Instants/Sorceries through the stack (ADR-0018), trigger firing, replacement effects, block legality, continuous effects
 across all eight layers (partial), targeting, SubAbility chaining, last-known information, activated abilities.
 
-M6 in progress: 173 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
-`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 30, 15 have real corpus lines and are listed by
+M6 in progress: 174 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
+`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 29, 14 have real corpus lines and are listed by
 `scripts/unported-apis.sh` as deliberately deferred (Planechase/Archenemy/Un-set/Alchemy shapes, plus
 `ChangeText`/`ControlPlayer`/`Meld`); the rest (`Mutate`, `Haunt`, `Bond`, `Encode`,
 `InternalIgnoreEffect`/`InternalLegendaryRule`/`InternalRadiation`, ...) have zero real `AB$`/`SP$`/`DB$` lines under
 that exact name and never surface in `unported-apis.sh`'s corpus-driven listing at all. Largest gaps (corpus lines,
-`scripts/unported-apis.sh`): `ChangeText` (17), `ControlPlayer` (11), `ChaosEnsues` (11).
+`scripts/unported-apis.sh`): `ChangeText` (17), `ControlPlayer` (11), `Meld` (7).
 
 Thin or missing: Layer 1 past `Clone`'s "becomes a copy" (no "enters as a copy"); most of Layers 3-8 past their literal
 shapes; Ward's own non-mana cost shapes (`PayLife`/`Discard`/`Sac`/`Ward:X`) and ability-source/retargeted Ward — the
