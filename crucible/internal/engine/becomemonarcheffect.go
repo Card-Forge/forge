@@ -75,9 +75,11 @@ func (g *Game) SetMonarch(p PlayerID) {
 }
 
 // IsDesignationCard reports whether id is some player's designation effect
-// card ("The Monarch", "The Initiative", "The Ring"): state the designation
-// itself implies, which a fixture writes as monarch=/initiative=/
+// card ("The Monarch", "The Initiative", "The Ring", "Planar Dice"): state the
+// designation itself implies, which a fixture writes as monarch=/initiative=/
 // numringtemptedyou= rather than as a Command-zone card no database holds.
+// "Planar Dice" is written as nothing: Java makes one for every player of a
+// Planechase game (Player.createPlanechaseEffects), so no fixture line carries it.
 func (g *Game) IsDesignationCard(id CardID) bool {
 	if id == NoCard {
 		return false
@@ -86,7 +88,7 @@ func (g *Game) IsDesignationCard(id CardID) bool {
 		return true
 	}
 	for _, pid := range g.Players() {
-		if pl := g.Player(pid); pl.monarchEffect == id || pl.initiativeEffect == id {
+		if pl := g.Player(pid); pl.monarchEffect == id || pl.initiativeEffect == id || pl.planarDie == id {
 			return true
 		}
 	}

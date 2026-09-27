@@ -161,6 +161,14 @@ type Player struct {
 	// the battlefield or changes controller (loseRingBearer); Game.RingBearer
 	// also answers NoCard for a bearer another player controls.
 	ringBearer CardID
+	// planarDie is this player's "Planar Dice" effect card
+	// (Player.createPlanechaseEffects), NoCard until they first roll the
+	// planar die. Java creates one per player at the start of a Planechase
+	// game; this port has no match setup, so the roller's is made at their
+	// first roll, before its trigger could first fire -- and only the
+	// roller's, whose ValidPlayer$ You is the only one a roll can match
+	// (rollplanardiceeffect.go).
+	planarDie CardID
 	// lossHandled records that Game.onPlayerLost has run for this player:
 	// Java runs it once, as the loss is awarded (GameAction.
 	// checkGameOverCondition), passing the monarchy and the initiative on
