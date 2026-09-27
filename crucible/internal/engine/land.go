@@ -24,9 +24,10 @@ const maxLandPlays = 1
 //
 // Reports whether the land was played. false covers every legal-but-declined
 // case: not pid's turn, not a main phase, something on the stack, the card
-// is not in pid's hand, the card is not a land, or the per-turn limit
-// (LandPlayLimit, player.go) is already spent -- the same "declined by the
-// rules, not a bug" contract PayManaCost and TapLandForMana already carry.
+// is neither in pid's hand nor MayPlay$-granted, the card is not a land, or
+// the per-turn limit (LandPlayLimit, player.go) is already spent -- the
+// same "declined by the rules, not a bug" contract PayManaCost and
+// TapLandForMana already carry.
 //
 // checkLandPlayedTriggers (trigger.go, CR 603.5) runs after checkETBTriggers,
 // Player.playLand's own real ordering (Java's moveTo fires ETB triggers
@@ -46,7 +47,11 @@ func (g *Game) PlayLand(pid PlayerID, card CardID, controller PlayerController) 
 		return false
 	}
 	c := g.Card(card)
-	if c.Controller() != pid || c.Zone != Hand {
+	// Outside pid's hand, a Layer 8 MayPlay$ grant (mayPlayOption, game.go)
+	// is the only permission: Crucible of Worlds' "play lands from your
+	// graveyard". A land has no mana cost or flash timing to vary, so any
+	// live grant carrying the zone permission will do.
+	if (c.Controller() != pid || c.Zone != Hand) && !g.mayPlayLand(pid, card) {
 		return false
 	}
 	if !c.Type().Has(cardtype.Land) {

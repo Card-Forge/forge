@@ -295,9 +295,10 @@ of comparing against the bare constants.
 Delirium's own "each opponent's maximum hand size is seven minus..." -- carries `Condition$`, which no static-ability
 mode this port checks has an evaluator for.
 
-Not attempted here: `MayLookAt$`/`MayPlay$` (88/181 real lines corpus-wide, the layer's own largest real params by far)
-need a cast-time zone-eligibility permission `CastSpell`'s own hand-only check (castspell.go) has nowhere to consult
-yet. `AddHiddenKeyword$` resolves separately, per card:
+`MayPlay$` (183 `S:` + 477 Effect-SVar lines, the layer's largest real param) resolves as a per-card grant
+`CastSpell`/`PlayLand` consult, and `MayLookAt$` is a no-op in an omniscient engine:
+[Layer 8: `MayPlay$` lands](layers-text-and-rules.md#layer-8-mayplay-lands-and-maylookat-needs-nothing).
+`AddHiddenKeyword$` resolves separately, per card:
 [Layer 8: `AddHiddenKeyword$` lands](layers-text-and-rules.md#layer-8-addhiddenkeyword-lands). The vote params
 (`AdditionalVote$`, `AdditionalOptionalVote$`, `AdditionalVillainousChoice$`, `ControlVote$`) resolve into `RulesEffect`
 fields:

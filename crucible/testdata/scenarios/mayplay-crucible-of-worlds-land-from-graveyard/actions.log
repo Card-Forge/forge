@@ -1,0 +1,8 @@
+# Layer 8 MayPlay$ (StaticAbilityContinuous.java RULES layer, Card.setMayPlay):
+# Crucible of Worlds grants "you may play lands from your graveyard". The
+# grant is rebuilt on every state-based-action check the turn walk runs, and
+# PlayLand takes the Forest from the graveyard (without it the play is
+# declined and the Forest stays put). It still counts as the land drop.
+startturn human
+advance 3
+playland human 2

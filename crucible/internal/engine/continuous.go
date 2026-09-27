@@ -901,6 +901,7 @@ func applyContinuousRules(g *Game) {
 		g.Player(pid).Rules.Clear()
 	}
 	clearHiddenKeywords(g)
+	g.mayPlay = nil
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -911,6 +912,7 @@ func applyContinuousRules(g *Game) {
 				for _, s := range face.Statics {
 					applyOneContinuousRules(g, h, face.Amounts, s)
 					applyOneContinuousHiddenKeyword(g, h, s)
+					applyOneContinuousMayPlay(g, h, s)
 				}
 			}
 		}
@@ -939,9 +941,9 @@ func applyContinuousRules(g *Game) {
 //     arithmetic SVar rulesEffect's own amount resolution has no head for
 //     either way -- rulesEffect itself still returns not-ok, for a reason
 //     unrelated to Condition$.
-//   - MayLookAt$/MayPlay$ (88, 181 real lines corpus-wide) -- a cast-time
-//     zone-eligibility permission CastSpell's own hand-only check
-//     (castspell.go) has nowhere to consult yet.
+//   - MayPlay$/MayLookAt$ are not this function's: MayPlay$ is a per-card
+//     grant (applyOneContinuousMayPlay, below) and MayLookAt$ changes no
+//     state in an omniscient engine.
 //   - ControlOpponentsSearchingLibrary$ (1 real line) -- a library search
 //     handing its decisions to another player's controller, which no
 //     search effect here can do; DeclaresAttackers$/DeclaresBlockers$ (1
@@ -1154,6 +1156,96 @@ func applyOneContinuousHiddenKeyword(g *Game, host *Card, s *compile.Ability) {
 			continue
 		}
 		c.hiddenKeywords = append(c.hiddenKeywords, lines...)
+	}
+}
+
+// applyOneContinuousMayPlay is StaticAbilityContinuous.java's own RULES-layer
+// MayPlay$ (lines 473-489, 892-911): every card in an AffectedZone$ zone
+// that Affected$ matches gets a mayPlayGrant for the host's controller,
+// read back by CastSpell/PlayLand (mayPlayOption, game.go).
+//
+// The static must be active where its host is (StaticAbility.zonesCheck):
+// a battlefield host needs no EffectZone$ or EffectZone$ Battlefield/All;
+// an Effect card's statics work from the Command zone whatever they name
+// (EffectEffect.java). A host in any other zone is not walked at all
+// (traitHosts), so the EffectZone$ Graveyard "cast this from your
+// graveyard" lines stay a gap. Battlefield and Stack in AffectedZone$ grant
+// nothing: nothing is cast from either.
+//
+// MayLookAt$ on the same line needs nothing: the engine is omniscient
+// (lookateffect.go), so "may look at" changes no state.
+func applyOneContinuousMayPlay(g *Game, host *Card, s *compile.Ability) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	if _, ok := s.Param("MayPlay"); !ok {
+		return
+	}
+	if !continuousConditionMet(g, host, s) {
+		return
+	}
+	// Params that change what the grant allows or when it holds in a way
+	// this does not model, so a line naming any of them grants nothing
+	// (GO-7): MayPlayLimit$ (a per-static, per-turn use count,
+	// stAb.getMayPlayTurn), the mana-spending relaxations
+	// (MayPlayIgnoreType$/IgnoreColor$/SnowIgnoreColor$), an alternative or
+	// raised cost (MayPlayAltManaCost$, RaiseCost$), a grant for someone
+	// other than the host's controller (MayPlayPlayer$), a single-face
+	// restriction (MayPlayText$), the SVar/presence conditions
+	// continuousConditionMet does not evaluate (CheckSVar$ and siblings,
+	// IsPresent$), and the spell-ability restrictions (ValidSA$,
+	// ValidAfterStack$, ReplaceGraveyard$).
+	for _, key := range [...]string{
+		"MayPlayLimit", "MayPlayIgnoreType", "MayPlayIgnoreColor", "MayPlaySnowIgnoreColor",
+		"MayPlayAltManaCost", "RaiseCost", "MayPlayPlayer", "MayPlayText",
+		"CheckSVar", "CheckSecondSVar", "CheckThirdSVar", "IsPresent",
+		"ValidSA", "ValidAfterStack", "ReplaceGraveyard", "CharacteristicDefining",
+	} {
+		if _, ok := s.Param(key); ok {
+			return
+		}
+	}
+	if zone, ok := s.Param("EffectZone"); ok && !host.IsEffect &&
+		!strings.EqualFold(zone, "Battlefield") && !strings.EqualFold(zone, "All") {
+		return
+	}
+	affected, ok := s.Param("Affected")
+	if !ok {
+		return
+	}
+	rawZones, ok := s.Param("AffectedZone")
+	if !ok {
+		return
+	}
+	var zones []ZoneType
+	for _, name := range strings.Split(rawZones, ",") {
+		z, ok := ZoneByName(strings.TrimSpace(name))
+		if !ok {
+			return
+		}
+		if z != Battlefield && z != Stack {
+			zones = append(zones, z)
+		}
+	}
+	_, withoutManaCost := s.Param("MayPlayWithoutManaCost")
+	_, withFlash := s.Param("MayPlayWithFlash")
+	_, noZonePermission := s.Param("MayPlayDontGrantZonePermissions")
+	player := host.Controller()
+	spec := valid.Parse(affected)
+	for _, z := range zones {
+		for _, pid := range g.Players() {
+			for _, id := range g.Zone(z, pid).Cards() {
+				c := g.Card(id)
+				if !Matches(g, c, spec, player, host.ID) {
+					continue
+				}
+				g.mayPlay = append(g.mayPlay, mayPlayGrant{
+					CardID: id, Timestamp: c.Timestamp, Grantee: player,
+					WithoutManaCost: withoutManaCost, WithFlash: withFlash,
+					ZonePermission: !noZonePermission,
+				})
+			}
+		}
 	}
 }
 

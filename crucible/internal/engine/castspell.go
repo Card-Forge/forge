@@ -46,10 +46,17 @@ func castableAsInstantOrSorcery(c *Card) bool {
 // restrictions and may be cast whenever something asks (PassPriority,
 // priority.go).
 //
+// A card outside pid's hand is castable only under a Layer 8 MayPlay$
+// grant (mayPlayOption, game.go), which can also waive the mana cost
+// (MayPlayWithoutManaCost$) or the sorcery-speed timing
+// (MayPlayWithFlash$). A grant choice this port cannot make is recorded
+// for TakePendingError and declines the cast.
+//
 // Reports whether the spell was cast. false covers every legal-but-declined
-// case: wrong timing, the card is not in pid's hand, castableAsPermanent
-// says no, or the cost could not be paid -- the same "declined by the
-// rules, not a bug" contract PayManaCost and PlayLand already carry. A
+// case: wrong timing, the card is neither in pid's hand nor granted,
+// castableAsPermanent says no, or the cost could not be paid -- the same
+// "declined by the rules, not a bug" contract PayManaCost and PlayLand
+// already carry. A
 // failed cost payment leaves the pool exactly as PayManaCost already
 // guarantees, and the card never leaves hand.
 //
@@ -60,13 +67,19 @@ func castableAsInstantOrSorcery(c *Card) bool {
 // Java's own checkTriggerEffects call sits.
 func (g *Game) CastSpell(pid PlayerID, card CardID, controller PlayerController) bool {
 	c := g.Card(card)
-	if c.Controller() != pid || c.Zone != Hand {
+	fromHand := c.Controller() == pid && c.Zone == Hand
+	play, granted, err := g.mayPlayOption(pid, card, fromHand)
+	if err != nil {
+		g.recordPendingError(err)
 		return false
 	}
-	if !c.Type().Has(cardtype.Instant) && !g.canActSorcerySpeed(pid) {
+	if !fromHand && !granted {
 		return false
 	}
-	return g.castSpell(controller, pid, card, castOpts{})
+	if !c.Type().Has(cardtype.Instant) && !play.WithFlash && !g.canActSorcerySpeed(pid) {
+		return false
+	}
+	return g.castSpell(controller, pid, card, castOpts{withoutManaCost: play.WithoutManaCost})
 }
 
 // castOpts is how an effect's "cast it" differs from casting it normally

@@ -154,3 +154,51 @@ SVars) — `DeclareCombatAttackers`/`DeclareCombatBlockers` ask the attacking/de
 
 Tests: `extravotes_test.go` (each param from its real line; `ControlVote$` through a controller that records who is
 asked; the `VotePlayer$ Other` refusal).
+
+## Layer 8: `MayPlay$` lands, and `MayLookAt$` needs nothing
+
+Java: `StaticAbilityContinuous.java:473-489` (RULES layer) and `:892-911` → `Card.setMayPlay` (`Card.java:3818`), a
+`CardPlayOption` per static; `SpellAbilityRestriction.java:231-255` reads it when a spell is cast from a zone other than
+the hand.
+
+| Piece                           | What it holds / does                                                              | Why                                                                              |
+| ------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `mayPlayGrant` (`rulesmod.go`)  | Card, its `Timestamp` at grant, grantee, `WithoutManaCost`/`WithFlash`/zone perm. | `CardPlayOption`; the timestamp ends the grant on any zone change (CR 400.7)     |
+| `Game.mayPlay`                  | This pass's grants; `Game.Clone` copies the slice                                 | Rebuilt every pass in `applyContinuousRules`, like every other continuous effect |
+| `applyOneContinuousMayPlay`     | Cards in `AffectedZone$` matching `Affected$`, grantee = host's controller        | Battlefield hosts and Effect cards (`traitHosts`)                                |
+| `mayPlayOption` / `mayPlayLand` | The one option every live grant agrees on                                         | `CastSpell`/`PlayLand` consult it for a card outside the caster's hand           |
+| `valid.go` `TopLibrary`         | Card is its owner's library index 0                                               | `CardProperty.java:610`; Future Sight's `Card.TopLibrary+YouCtrl`                |
+
+`CastSpell` outside the hand: needs a grant; `MayPlayWithFlash$` lifts sorcery timing, `MayPlayWithoutManaCost$` casts
+through `castOpts.withoutManaCost` (Play's own path). `MayPlayDontGrantZonePermissions$` (`grantsZonePermissions`,
+`SpellAbilityRestriction.java:239-241`) changes how but not whether: alone it allows nothing outside the hand.
+`PlayLand` takes any live grant with zone permission and still spends a land drop.
+
+Choices Java leaves to the player fail closed (`recordPendingError`, cast declined): two live grants on one card that
+differ in cost or timing, and a cost-changing grant on a card also castable from hand (Omniscience: Java offers the
+normal and the free spell side by side). No `PlayerController` decision was added: both are rare, and picking for the
+player would be a guess (GO-7).
+
+Coverage: 421 of the corpus's 660 real `MayPlay$` lines (67 of 183 `S:`, 354 of 477 Effect-SVar) carry no skipped param,
+each still subject to its `Affected$` properties being ones `Matches` evaluates. Skipped whole:
+
+| Param (lines, first reason counted)                             | Reason                                                                |
+| --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `MayPlayLimit$` (71)                                            | Per-static, per-turn use count (`stAb.getMayPlayTurn`): no state here |
+| `MayPlayIgnoreType$`/`IgnoreColor$`/`SnowIgnoreColor$` (66)     | Mana-spending relaxations `PayManaCost` has no hook for               |
+| `MayPlayAltManaCost$` (20), `RaiseCost$` (16)                   | Alternative/raised cost; `castOpts` carries only "without mana cost"  |
+| `CheckSVar$` (19), `IsPresent$` (9)                             | Conditions `continuousConditionMet` does not evaluate                 |
+| `MayPlayPlayer$` (15)                                           | Grantee other than the host's controller                              |
+| `ValidSA$` (7), `ValidAfterStack$` (6)                          | Spell-ability restrictions on the cast itself                         |
+| `EffectZone$` Graveyard/Exile/Command on a non-Effect host (10) | Hosts outside the battlefield are not walked (`traitHosts`)           |
+
+Airbend/Heist's `exileGrants` stay unconsumed: both need an alternative `{2}` cost or any-type mana
+(`airbendeffect.go`).
+
+`MayLookAt$` (88 `S:` + 20 Effect-SVar lines) resolves to nothing, on purpose: the engine is omniscient
+(`lookateffect.go`), so a permission to look at a hidden card changes no state. With `MayPlay$`, Java's
+`MayLookAt$ True` shortcut only adds the grantee to the lookers; nothing here reads that either.
+
+Tests: `mayplay_test.go` (Crucible of Worlds, Future Sight, Light Up the Stage's Effect-card impulse draw, free and
+flash grants, a zone-permission-less grant, Omniscience failing closed). Scenario
+`mayplay-crucible-of-worlds-land-from-graveyard`.

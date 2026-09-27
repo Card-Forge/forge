@@ -1652,8 +1652,8 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     effects) and `LandPlayLimit` (`AdjustLandPlays$` sums unconditionally, `Player.getMaxLandPlays`'s own contract, no
     order-dependence at all). Both take the printed default as a parameter rather than reading `turn.go`/`land.go`'s own
     constants directly, keeping `player`'s own `enginelint` group acyclic. `cleanupStep`/`PlayLand` (turn.go/land.go)
-    now call them instead of comparing against the bare constants. Not resolved: `MayLookAt$`/`MayPlay$` (88/181 real
-    lines) — a cast-time zone-eligibility permission `CastSpell`'s own hand-only check has nowhere to consult yet;
+    now call them instead of comparing against the bare constants. `MayPlay$` resolves as a per-card grant
+    `CastSpell`/`PlayLand` consult (421 of 660 real lines; `MayLookAt$` is a no-op in an omniscient engine);
     `AddHiddenKeyword$` resolves per card for the four keyword lines something reads (41 of 53 real lines,
     `port-log/game-state/layers-text-and-rules.md`); the four vote/villainous-choice params resolve into `RulesEffect`
     fields Vote/VillainousChoice read; `ControlOpponentsSearchingLibrary$`/`DeclaresAttackers$`/`DeclaresBlockers$` hand

@@ -121,3 +121,24 @@ func (r *RulesMod) Clear() { r.effects = nil }
 func (r RulesMod) clone() RulesMod {
 	return RulesMod{effects: append([]RulesEffect(nil), r.effects...)}
 }
+
+// mayPlayGrant is one MayPlay$ permission a Mode$ Continuous static gives
+// this pass: Java's CardPlayOption (Card.setMayPlay, Card.java:3818), the
+// Layer 8 grant that lets Grantee cast or play CardID from a zone they
+// normally could not.
+//
+// Timestamp is the card's own as the grant was made: every zone change
+// stamps a new one, so a card that moved since (cast, milled, returned) is
+// a new object the grant no longer names (CR 400.7). WithoutManaCost is
+// MayPlayWithoutManaCost$, WithFlash MayPlayWithFlash$, and ZonePermission
+// is false only under MayPlayDontGrantZonePermissions$: such a grant
+// changes how a card is cast but not whether its zone allows casting at
+// all (SpellAbilityRestriction.java:239-241).
+type mayPlayGrant struct {
+	CardID          CardID
+	Timestamp       uint64
+	Grantee         PlayerID
+	WithoutManaCost bool
+	WithFlash       bool
+	ZonePermission  bool
+}
