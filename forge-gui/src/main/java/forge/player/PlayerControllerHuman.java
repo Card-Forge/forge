@@ -1422,6 +1422,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return chooseSingleEntityForEffect(options, null, null,
+                localizer.getMessage("lblChooseCardToKeepStickers"), false, null, null);
+    }
+
+    @Override
     public int chooseStickerNamePosition(Sticker sticker, Card target) {
         // CR 123.6a
         if (StringUtils.isBlank(target.getName()) || target.stickerWouldFillBlank()) {

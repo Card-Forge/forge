@@ -731,6 +731,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return ComputerUtilCard.getBestAI(options);
+    }
+
+    @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return Aggregates.random(sectors);
     }

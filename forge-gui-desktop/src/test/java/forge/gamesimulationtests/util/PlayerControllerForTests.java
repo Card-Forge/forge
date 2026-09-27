@@ -512,6 +512,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return Iterables.getFirst(options, null);
+    }
+
+    @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return chooseItem(sectors);
     }

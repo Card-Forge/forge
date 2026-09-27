@@ -258,6 +258,8 @@ public abstract class PlayerController {
 
     // CR 123.6b - how many of the object's words precede the sticker's word
     public abstract int chooseStickerNamePosition(Sticker sticker, Card target);
+    // CR 123.5c
+    public abstract Card chooseCardToKeepStickers(CardCollectionView options);
     public final String chooseSector(Card assignee, String ai) {
         final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
         return chooseSector(assignee, ai, sectors);

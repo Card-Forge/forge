@@ -4,12 +4,14 @@ import java.util.List;
 
 import forge.StaticData;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.sticker.AppliedSticker;
 import forge.game.card.sticker.Sticker;
 import forge.game.card.sticker.StickerKind;
 import forge.game.card.sticker.StickerSheet;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
@@ -141,5 +143,53 @@ public class StickerApplyTest extends AITest {
         assertTrue(sheetText.contains("used"), "the sheet should mark the sticker as taken");
         assertTrue(sheetText.contains(first(stickers, StickerKind.NAME).getWord()),
                 "and still list the ones that are not");
+    }
+
+    private Card inZone(Player p, String name, ZoneType zone) {
+        return p.getCardsIn(zone).stream().filter(c -> c.getName().equals(name)).findFirst().orElseThrow();
+    }
+
+    private Card mutateOnto(Game game, Player p, Card mutating, Card target) {
+        SpellAbility mutate = mutating.getSpells().stream().filter(SpellAbility::isMutate).findFirst().orElseThrow();
+        mutate.setActivatingPlayer(p);
+        mutate.getTargets().add(target);
+        AbilityUtils.resolve(mutate);
+        return inZone(p, "Gemrazer", ZoneType.Merged);
+    }
+
+    /** CR 123.5b - a stickered card that becomes part of a merged permanent brings its stickers. */
+    @Test
+    public void testMutatingCardBringsItsStickers() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Sticker pt = first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.PT);
+        Card bear = addCard("Grizzly Bears", p);
+        Card gem = addCardToZone("Gemrazer", p, ZoneType.Graveyard);
+        gem.addSticker(new AppliedSticker(pt, game.getNextTimestamp()));
+
+        Card component = mutateOnto(game, p, gem, bear);
+        assertTrue(bear.isStickered(), "the merged permanent should carry the sticker");
+        assertEquals(bear.getNetPower(), pt.getPower());
+        assertEquals(bear.getNetToughness(), pt.getToughness());
+        assertFalse(component.isStickered());
+    }
+
+    /** CR 123.5c - when a merged permanent leaves, its owner chooses the card that keeps the stickers. */
+    @Test
+    public void testLeavingMergedPermanentOwnerChoosesTheKeeper() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Sticker pt = first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.PT);
+        Card bear = addCard("Grizzly Bears", p);
+        Card gem = addCardToZone("Gemrazer", p, ZoneType.Hand);
+        mutateOnto(game, p, gem, bear);
+        bear.addSticker(new AppliedSticker(pt, game.getNextTimestamp()));
+
+        game.getAction().moveToGraveyard(bear, null);
+        Card gemInYard = inZone(p, "Gemrazer", ZoneType.Graveyard);
+        Card bearInYard = inZone(p, "Grizzly Bears", ZoneType.Graveyard);
+        assertTrue(gemInYard.isStickered(), "the AI should keep the sticker on the better card");
+        assertFalse(bearInYard.isStickered());
+        assertEquals(gemInYard.getNetToughness(), pt.getToughness());
     }
 }

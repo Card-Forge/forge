@@ -66,6 +66,20 @@ public class AppliedSticker implements PerpetualInterface {
         }
     }
 
+    public void removeEffect(Card c) {
+        switch (sticker.getKind()) {
+            case PT -> c.removeNewPT(timestamp, 0);
+            case NAME -> c.removeChangedName(timestamp, 0);
+            case ABILITY -> {
+                c.removeChangedCardKeywords(timestamp, 0);
+                c.removeChangedCardTraits(timestamp, 0);
+                c.removeChangedSVars(timestamp, 0);
+            }
+            case ART -> {
+            }
+        }
+    }
+
     // CR 123.7
     private void grantAbility(Card c) {
         List<String> keywords = getGrantedKeywords();
