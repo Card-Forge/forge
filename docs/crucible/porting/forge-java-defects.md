@@ -26,6 +26,7 @@ Rows start with the ChooseSource/Empower batch. Bugs noted before it are only in
 | `PlayEffect.java:312`, `:389`           | `continue` without `amount--` under `AllowRepeats$` re-offers the same unplayable card forever                                   | `playRepeatLoop` returns an `error`                     | Not filed |
 | `StaticAbilityCantAttackBlock.java:269` | `cantBlockBy(attacker, null)` always false, so `CombatUtil.canBeBlocked`'s unblockable check (`CombatUtil.java:533`) never fires | Check not ported; no validator outcome depends on it    | Not filed |
 | `Player.java:2642`                      | `planeswalk`'s `getZone(PlanarDeck).get(0)` unguarded; throws on an empty planar deck, after every plane has already left        | `error` before anything moves                           | Not filed |
+| `TriggerChaosEnsues.java:43-48`         | Suspected: `Affected` iterable must be all host, so chaos ensuing for two planes fires neither                                   | `Defined$` naming two planes returns an `error`         | Not filed |
 
 ### `ChooseSourceEffect.java:84-89` — `TargetControls$` throws on an empty player list
 
@@ -321,3 +322,19 @@ first.
 
 **Crucible meanwhile:** `planeswalkEffect` (`planeswalkeffect.go`) returns
 `engine: Planeswalk: activator's planar deck is empty` before anything moves (`TestPlaneswalkRejectsUnportedShapes`).
+
+### `TriggerChaosEnsues.java:43-48` — chaos ensuing for two planes fires neither
+
+Suspected, not confirmed: no real card reaches it. `performTest`'s `Iterable` branch over `AbilityKey.Affected` returns
+false as soon as one affected card is not the trigger's host, so a trigger passes only when every affected card is its
+own host. `ChaosEnsuesEffect.resolve` (`ChaosEnsuesEffect.java:41-57`) fills `Affected` with every `Defined$` card
+carrying a chaos ability; two distinct planes there fire no chaos ability at all. CR 311.7 speaks of chaos ensuing "for
+a particular object", so the multi-card intent is undefined; "any affected card is the host" (`contains`) reads as the
+likely intent. The one real `Defined$` line (The Fertile Lands of Saulvinia) remembers a single plane.
+
+**Proposed fix:** test `Iterables.contains(affected, getHostCard())` instead of every element, or confirm the all-host
+reading is deliberate.
+
+**Crucible meanwhile:** `chaosEnsuesAffected` (`chaosensueseffect.go`) returns
+`engine: ChaosEnsues: Defined$ <spec> naming more than one plane not resolvable yet` before anything fires
+(`TestChaosEnsuesRejectsUnportedDefinedShapes`).

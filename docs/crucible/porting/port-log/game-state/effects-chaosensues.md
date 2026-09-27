@@ -75,9 +75,10 @@ Norn's Seedcore's own chaos ability dies the same way: its `DigUntil` has `DigZo
 **every** affected card equals the host, so two distinct planes fire neither. CR 311.7 defines chaos ensuing only "for a
 particular object"; no real line reaches the case (Saulvinia remembers `DigUntil`'s single found plane, then
 `Cleanup`s). Suspected Forge defect — "any affected card is the host" was likely meant — but unverifiable without a real
-card, so fail closed rather than reproduce a silent no-op or guess the intent. Error:
+card, so fail closed rather than reproduce a silent no-op or guess the intent; row in
+[`forge-java-defects.md`](../../forge-java-defects.md). Error:
 `engine: ChaosEnsues: Defined$ <spec> naming more than one plane not resolvable yet`. The same card listed twice (Java
-adds it once per chaos trigger, `:48`) is one card, fires normally.
+adds it once per chaos trigger, `ChaosEnsuesEffect.java:48`) is one card, fires normally.
 
 **Error: a `Defined$` spelling `definedCards` does not resolve** (`engine: Defined$ "<spec>" not resolvable yet`), as
 every `Defined$` reader. Checked after the Planechase gate: outside Planechase nothing is read, as Java.
