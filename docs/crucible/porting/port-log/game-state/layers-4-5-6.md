@@ -53,12 +53,14 @@ itself.
 
 Kept Java quirks (PORT-7), each visible to a card:
 
-- `CheckSecondSVar$` is read only when `CheckSVar$` is present (`StaticAbility.java:470-472`).
+- `CheckSecondSVar$` is read only when `CheckSVar$` is present (`StaticAbility.java:470-472`). No real line writes one
+  without the other.
 - `CharacteristicDefining$` is tested for presence, not value: the one `CharacteristicDefining$ False` line is a CDA.
 - An unchosen `ChosenType`/`ChosenColor`-bearing token is dropped, not the whole line (`removeIf`).
 - `SetColor$ ChosenColor` with nothing chosen adds no color effect at all, not an overwrite to colorless.
 - `Remove*Types$` flags apply only when `AddType$` is absent or kept a token (`StaticAbilityContinuous.java:425-426`).
-- `RemoveType$ ChosenType` is never substituted, only dropped when unchosen: Java substitutes `AddType$` alone.
+- `RemoveType$ ChosenType` is never substituted, only dropped when unchosen: Java substitutes `AddType$` alone. No real
+  `S:` line writes `RemoveType$ ChosenType` today.
 
 `HostCardUID`/`HostCardControllerUID`/`ChosenPlayerUID` become this port's `CardID`/`PlayerID` numbers. Java writes its
 own ids there. Neither engine's `CardUID_`/`PlayerUID_` valid property is read by this port yet, so the text only has to
