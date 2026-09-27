@@ -26,9 +26,9 @@ Scratch file for whoever resumes this branch. Deleted in the final commit.
 
 ## Status
 
-- [ ] 1 state
-- [ ] 2 trigger modes
-- [ ] 3 effect
-- [ ] 4 tests
-- [ ] 5 docs
-- [ ] 6 gates
+- [x] 1 state
+- [x] 2 trigger modes
+- [x] 3 effect
+- [x] 4 tests
+- [x] 5 docs
+- [x] 6 gates

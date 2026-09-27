@@ -3367,3 +3367,100 @@ func becomesTargetSourceMatches(isSpellSource bool, sourceController, hostContro
 	}
 	return true
 }
+
+// checkPlaneswalkedFromTriggers is Mode$ PlaneswalkedFrom
+// (TriggerPlaneswalkedFrom.performTest), CR 901's "when you planeswalk away
+// from": fired once per player by planeswalkEffect's leave step
+// (Player.leaveCurrentPlane, Player.java:2669-2679), before that player's
+// plane leaves the Command zone -- so a plane's own "When you planeswalk
+// away from CARDNAME" still sees itself there. cards is that player's
+// current plane, or empty for a player without one: Java runs the trigger
+// either way, and an empty collection matches no ValidCard$ while a line
+// without ValidCard$ fires regardless (CardTraitBase.matchesValid's
+// Iterable branch, matchesValidParam).
+func (g *Game) checkPlaneswalkedFromTriggers(controller PlayerController, cards []CardID) {
+	g.checkPlaneswalkTriggers(controller, "PlaneswalkedFrom", cards)
+}
+
+// checkPlaneswalkedToTriggers is Mode$ PlaneswalkedTo
+// (TriggerPlaneswalkedTo.performTest): fired once by planeswalkEffect after
+// the new plane has reached the activator's Command zone
+// (Player.planeswalkTo, Player.java:2649-2664), cards being that plane --
+// 62 of the corpus's 72 real Mode$ Planeswalked* lines are this mode, most
+// a plane's or phenomenon's own "when you planeswalk to / encounter
+// CARDNAME".
+func (g *Game) checkPlaneswalkedToTriggers(controller PlayerController, cards []CardID) {
+	g.checkPlaneswalkTriggers(controller, "PlaneswalkedTo", cards)
+}
+
+// checkPlaneswalkTriggers is the walk both planeswalk modes share: their
+// Java performTests are identical (ValidCard$ against AbilityKey.Cards and
+// nothing else).
+//
+// A Static$ True line (5 real lines, all on effect cards a plane made --
+// Chaotic Aether's "until a player planeswalks away from a plane" exile
+// among them) resolves here and now through resolveStaticTriggers
+// (statictrigger.go, ADR-0020), before the event's other matches are
+// pushed, as checkTapsForManaTriggers does. Java sets only AbilityKey.Cards
+// as the triggering object (setTriggeringObjectsFrom(runParams,
+// AbilityKey.Cards)) and no ported Defined$ reads TriggeredCards, so no
+// triggered object is recorded.
+func (g *Game) checkPlaneswalkTriggers(controller PlayerController, mode string, cards []CardID) {
+	g.resolveStaticTriggers(controller, g.planeswalkTriggerMatches(mode, cards, true))
+	g.pushTriggeredAbilities(controller, g.planeswalkTriggerMatches(mode, cards, false))
+}
+
+// planeswalkTriggerZones is where a Mode$ Planeswalked* host can be: every
+// real line sits on a plane or phenomenon in the Command zone, or on an
+// effect card one made there. The whole Command zone is walked, not
+// traitHosts: a face-up plane is an ordinary Command-zone card, not an
+// effect card. TriggerZones$ gates each line the way Mode$ Phase's does
+// (phaseTriggerZoneMatches): 65 of the 72 real lines name none, 7 name
+// Command.
+var planeswalkTriggerZones = [...]ZoneType{Battlefield, Command}
+
+// anyPlaneMatches is CardTraitBase.matchesValid's Iterable branch over
+// AbilityKey.Cards: true when at least one of cards matches spec, so false
+// for none.
+func anyPlaneMatches(g *Game, cards []CardID, spec string, hostController PlayerID, host CardID) bool {
+	parsed := valid.Parse(spec)
+	for _, id := range cards {
+		if Matches(g, g.Card(id), parsed, hostController, host) {
+			return true
+		}
+	}
+	return false
+}
+
+// planeswalkTriggerMatches collects the Mode$ mode lines cards matches,
+// Static$ True ones only or the rest only, as static says.
+func (g *Game) planeswalkTriggerMatches(mode string, cards []CardID, static bool) []Ability {
+	var matches []Ability
+	for _, pid := range g.Players() {
+		for _, z := range planeswalkTriggerZones {
+			for _, host := range g.Zone(z, pid).Cards() {
+				h := g.Card(host)
+				if h.Def == nil {
+					continue
+				}
+				for _, face := range h.Def.Faces {
+					for _, t := range face.Triggers {
+						if !strings.EqualFold(t.Name, mode) || isStaticTrigger(t) != static {
+							continue
+						}
+						if !phaseTriggerZoneMatches(h, t, z) {
+							continue
+						}
+						if validCard, ok := t.Param("ValidCard"); ok && !anyPlaneMatches(g, cards, validCard, h.Controller(), host) {
+							continue
+						}
+						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						}
+					}
+				}
+			}
+		}
+	}
+	return matches
+}

@@ -190,6 +190,18 @@ type Game struct {
 	// initiative is the player who has the initiative (CR 725,
 	// Game.hasInitiative), NoPlayer while nobody does.
 	initiative PlayerID
+
+	// activePlane is Game.activePlanes (Game.java:80) narrowed to the one
+	// card every real Java path drives it to (ADR-0029): the face-up plane
+	// or phenomenon, NoCard while there is none. Its planar controller is
+	// the player whose Command zone holds it (Card.ZoneOwner), so no Player
+	// field mirrors Java's Player.currentPlanes.
+	activePlane CardID
+	// planechaseActive stands in for Java's activePlanes != null ("this is
+	// a Planechase game", PlaneswalkEffect.java:23): NewCard sets it the
+	// first time setup puts a card into any player's PlanarDeck, and
+	// nothing unsets it (ADR-0029).
+	planechaseActive bool
 }
 
 // pumpRecord is one resolved Pump effect's own contribution -- Defined$'s
@@ -356,6 +368,11 @@ func (g *Game) NewCard(def *compile.Card, owner PlayerID, zone ZoneType) CardID 
 		controller: owner,
 	})
 	g.put(id, zone, owner)
+	if zone == PlanarDeck {
+		// Setup seating a planar deck is what makes this a Planechase
+		// game (ADR-0029); real play only ever moves cards there.
+		g.planechaseActive = true
+	}
 	return id
 }
 
@@ -810,6 +827,8 @@ func (g *Game) Clone() *Game {
 		monarch:               g.monarch,
 		monarchBeginTurn:      g.monarchBeginTurn,
 		initiative:            g.initiative,
+		activePlane:           g.activePlane,
+		planechaseActive:      g.planechaseActive,
 	}
 	for i := range g.extraPhases {
 		out.extraPhases[i] = append([]PhaseType(nil), g.extraPhases[i]...)

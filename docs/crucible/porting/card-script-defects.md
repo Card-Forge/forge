@@ -25,6 +25,7 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `ludevic_necrogenius_olag_ludevics_hubris` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color            | Clone port (`effects-clone.md`) | Not filed                                                        |
 | `taskmaster_mercenary_mimic`               | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`) | Clone port (`effects-clone.md`) | Not filed                                                        |
 | `captured_by_the_consulate`                | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`)  | ChangeTargets port              | Not filed                                                        |
+| `mount_keralia`                            | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0                   | Planeswalk port                 | Not filed                                                        |
 
 Every row but `peace_talks`, the two Clone rows and `captured_by_the_consulate` is merged upstream; the Clone rows and
 `captured_by_the_consulate` are rejected with an `error` meanwhile (`Defined$ TriggeredSourceSA` is not resolvable, so

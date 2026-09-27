@@ -25,6 +25,7 @@ Rows start with the ChooseSource/Empower batch. Bugs noted before it are only in
 | `FlipOntoBattlefieldEffect.java:109`    | Neighbor filter re-tests the landing spot instead of the candidate; "always true" only for a non-Aura-enchantment spot           | `flipCandidates` rejects that one shape with an `error` | Not filed |
 | `PlayEffect.java:312`, `:389`           | `continue` without `amount--` under `AllowRepeats$` re-offers the same unplayable card forever                                   | `playRepeatLoop` returns an `error`                     | Not filed |
 | `StaticAbilityCantAttackBlock.java:269` | `cantBlockBy(attacker, null)` always false, so `CombatUtil.canBeBlocked`'s unblockable check (`CombatUtil.java:533`) never fires | Check not ported; no validator outcome depends on it    | Not filed |
+| `Player.java:2642`                      | `planeswalk`'s `getZone(PlanarDeck).get(0)` unguarded; throws on an empty planar deck, after every plane has already left        | `error` before anything moves                           | Not filed |
 
 ### `ChooseSourceEffect.java:84-89` — `TargetControls$` throws on an empty player list
 
@@ -307,3 +308,16 @@ be saved by a separate per-pair `canBlock(attacker, blocker)`.
 
 **Crucible meanwhile:** `canBeBlockedInCombat` (`blockvalidation.go`) leaves the check out. The block validator's
 outcomes do not change: each of its requirement tests also asks `CanBlock(attacker, blocker)`, which applies the static.
+
+### `Player.java:2642` — `planeswalk` reads an empty planar deck's top card
+
+`Player.planeswalk` is `planeswalkTo(sa, new CardCollection(getZone(ZoneType.PlanarDeck).get(0)))` with no size check.
+`PlaneswalkEffect.resolve` calls it after every player's `leaveCurrentPlane` (`PlaneswalkEffect.java:39-48`), so an
+activator with an empty planar deck throws `IndexOutOfBoundsException` with every plane already moved to a planar deck.
+Reachable only when the activator's deck is empty and the active plane is not theirs: their own leaving plane refills it
+first.
+
+**Proposed fix:** return from `planeswalk` when the planar deck is empty.
+
+**Crucible meanwhile:** `planeswalkEffect` (`planeswalkeffect.go`) returns
+`engine: Planeswalk: activator's planar deck is empty` before anything moves (`TestPlaneswalkRejectsUnportedShapes`).

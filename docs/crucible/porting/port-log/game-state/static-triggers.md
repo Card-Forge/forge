@@ -7,10 +7,11 @@
 
 ## Static triggers resolve at their trigger site
 
-A `T:` line with `Static$ True` never uses the stack. Wired for `Mode$ TapsForMana` only (CR 605.1b triggered mana
-ability: Wild Growth, Utopia Sprawl, Fertile Ground). Other modes that skip `Static$` lines today (`trigger.go`
-`checkAbandonedTriggers`, `checkLandPlayedTriggers`, `isBecomesTargetTrigger`) keep skipping until each ports its effect
-(ADR-0020 decision 3).
+A `T:` line with `Static$ True` never uses the stack. Wired for `Mode$ TapsForMana` (CR 605.1b triggered mana ability:
+Wild Growth, Utopia Sprawl, Fertile Ground) and `Mode$ PlaneswalkedFrom`/`PlaneswalkedTo`
+([`effects-planeswalk.md`](effects-planeswalk.md#mode-planeswalkedfrom-and-mode-planeswalkedto-land)). Other modes that
+skip `Static$` lines today (`trigger.go` `checkAbandonedTriggers`, `checkLandPlayedTriggers`, `isBecomesTargetTrigger`)
+keep skipping until each ports its effect (ADR-0020 decision 3).
 
 Java read directly: `TriggerHandler.java:243-262` (`runTrigger`: `TapsForMana`/`ManaAdded` never wait, `:257`),
 `:300-309` (`runWaitingTrigger`: statics first), `:522-527` (`playTrigger` instead of `addSimultaneousStackEntry`),
