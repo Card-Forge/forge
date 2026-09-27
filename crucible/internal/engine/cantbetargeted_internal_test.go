@@ -31,7 +31,7 @@ func targetCandidatesTestGame(t *testing.T, players ...string) *Game {
 
 func targetCandidatesTestTypeRegistry(t *testing.T) *cardtype.Registry {
 	t.Helper()
-	reg, err := cardtype.LoadRegistry(strings.NewReader("[CreatureTypes]\nElf\n"))
+	reg, err := cardtype.LoadRegistry(strings.NewReader("[CreatureTypes]\nElf\nSalamander\n"))
 	if err != nil {
 		t.Fatalf("LoadRegistry: %v", err)
 	}
@@ -40,8 +40,13 @@ func targetCandidatesTestTypeRegistry(t *testing.T) *cardtype.Registry {
 
 func targetCandidatesTestCreature(t *testing.T, keywords ...string) *compile.Card {
 	t.Helper()
+	return targetCandidatesTestCreatureOfType(t, "Creature Elf", keywords...)
+}
+
+func targetCandidatesTestCreatureOfType(t *testing.T, typeLine string, keywords ...string) *compile.Card {
+	t.Helper()
 	def := &compile.Card{Name: "Test Creature"}
-	def.Faces[0].Type = cardtype.Parse(targetCandidatesTestTypeRegistry(t), "Creature Elf")
+	def.Faces[0].Type = cardtype.Parse(targetCandidatesTestTypeRegistry(t), typeLine)
 	def.Faces[0].Power, def.Faces[0].Toughness = "2", "2"
 	def.Faces[0].Keywords = keywords
 	return def
@@ -177,5 +182,30 @@ func TestTargetCandidatesPlayerShroudExcludesEvenTheController(t *testing.T) {
 
 	if got := g.targetCandidates(p, src, "Player"); hasPlayerCandidate(got, p) {
 		t.Errorf("targetCandidates includes a Shroud player for its own controller, want excluded")
+	}
+}
+
+// TestTargetCandidatesPlayerProtectionExcludesMatchingTypeIncludesOthers is
+// CR 702.16e for a Player entity -- Gor Muldrak, Amphinologist's own
+// `Protection:Salamander` shape, a plain colon-structured characteristic
+// protectionEach resolves against Player.KeywordLines the same way it
+// already does against a card's own. No real corpus card combines the
+// Salamander subtype with a targeted ability, the reason
+// gor-muldrak-protection-does-not-refuse-unrelated-bolt (fixture) only
+// covers the non-matching half; this covers both.
+func TestTargetCandidatesPlayerProtectionExcludesMatchingTypeIncludesOthers(t *testing.T) {
+	t.Parallel()
+
+	g := targetCandidatesTestGame(t, "a", "b")
+	p, opp := g.Players()[0], g.Players()[1]
+	g.Player(p).KeywordMod.Add(KeywordEffect{AddKeywords: []string{"Protection:Salamander"}})
+	salamander := g.NewCard(targetCandidatesTestCreatureOfType(t, "Creature Salamander"), opp, Hand)
+	elf := g.NewCard(targetCandidatesTestCreature(t), opp, Hand)
+
+	if got := g.targetCandidates(opp, salamander, "Player"); hasPlayerCandidate(got, p) {
+		t.Errorf("targetCandidates includes a Protection-from-Salamander player against a Salamander source, want excluded")
+	}
+	if got := g.targetCandidates(opp, elf, "Player"); !hasPlayerCandidate(got, p) {
+		t.Errorf("targetCandidates excludes a Protection-from-Salamander player against a non-Salamander source, want included")
 	}
 }

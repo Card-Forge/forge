@@ -127,7 +127,7 @@ func cantBlockBy(g *Game, attacker, blocker CardID) bool {
 				applyCantBlockBy(g, h, "Creature.Self", "", false, "Player.controls"+typ, true, attacker, blocker) {
 				return true
 			}
-			if refused, _ := protectionEach(h, func(vb string, hasVB bool) bool {
+			if refused, _ := protectionEach(h.KeywordLines(), func(vb string, hasVB bool) bool {
 				return applyCantBlockBy(g, h, "Creature.Self", vb, hasVB, "", false, attacker, blocker)
 			}); refused {
 				return true
@@ -247,17 +247,26 @@ func landwalkType(h *Card) (string, bool) {
 // off KeywordLines (card.go), printed and continuously granted alike, the
 // same as landwalkType.
 //
-// h can carry more than one recognized Protection line -- 22 corpus cards
-// do, Mirran Crusader's own "Protection from black" and "Protection from
-// green" among them -- each refusing independently (CR 702.16b: "a source
-// with two or more protection abilities... [applies] each individually").
-// fn is called once per recognized line, in KeywordLines order, and
+// lines can carry more than one recognized Protection line -- 22 corpus
+// cards do, Mirran Crusader's own "Protection from black" and "Protection
+// from green" among them -- each refusing independently (CR 702.16b: "a
+// source with two or more protection abilities... [applies] each
+// individually"). fn is called once per recognized line, in order, and
 // protectionEach reports true the first time fn does (the block/attach/
 // target is refused) -- a single-line version of this port used to report
 // only the first recognized line, missing every card with a second one;
 // every caller now loops here instead.
-func protectionEach(h *Card, fn func(validBlocker string, hasValidBlocker bool) bool) (refused, ok bool) {
-	for _, line := range h.KeywordLines() {
+//
+// lines is a *Card's or a *Player's own KeywordLines -- Absolute Virtue's
+// own "Protection:Player.Opponent:each of your opponents" (`AddKeyword$`
+// naming a player, `Affected$ You`, so lines is Player.KeywordLines when it
+// reaches here) is the reason this reads lines rather than a *Card
+// directly: Gor Muldrak, Amphinologist's identically-shaped
+// "Protection:Salamander" already resolves whether it is printed on a card
+// or granted to a player through continuous.go's own player branch, the
+// same characteristic split either way.
+func protectionEach(lines []string, fn func(validBlocker string, hasValidBlocker bool) bool) (refused, ok bool) {
+	for _, line := range lines {
 		k := keyword.Parse(line)
 		if k.Name != "Protection" {
 			continue
@@ -273,6 +282,24 @@ func protectionEach(h *Card, fn func(validBlocker string, hasValidBlocker bool) 
 		} else {
 			characteristic, _, _ := strings.Cut(k.Details, ":")
 			if characteristic == "" {
+				continue
+			}
+			// A player-relative characteristic ("Player.Opponent", Absolute
+			// Virtue's own line; "Player.PlayerUID_ChosenPlayerUID", True
+			// -Name Nemesis/Guardian Archon/Courageous Resolve/Noble
+			// Heritage/Eon Frolicker's own "protection from the chosen
+			// player"; "Player.OpponentOf...", Cliffside Rescuer -- 10 real
+			// corpus lines total, both printed and Pump-granted) is not a
+			// Card spec at all -- Matches only ever evaluates a *Card, and
+			// nothing here turns "controlled by an opponent"/"controlled by
+			// the chosen player" into the ValidSource$-shaped card spec
+			// Java's own "ControlledBy " + characteristic would
+			// (Protection.java:13-27). Refused rather than passed to Matches
+			// as a bare characteristic it was never meant to be (GO-7):
+			// matching "Player.Opponent" as if it were a card type/subtype
+			// word would be a wrong answer, not a coverage gap (Not ported
+			// yet).
+			if strings.HasPrefix(characteristic, "Player.") {
 				continue
 			}
 			vb, hasVB = characteristic, true
@@ -342,7 +369,7 @@ func protectionColorValid(protectType string) (valid string, hasValidBlocker, re
 // asking for one line's answer.
 func hostRefusesAttach(g *Game, aura *Card, host CardID) bool {
 	h := g.Card(host)
-	refused, _ := protectionEach(h, func(vb string, hasVB bool) bool {
+	refused, _ := protectionEach(h.KeywordLines(), func(vb string, hasVB bool) bool {
 		return !hasVB || Matches(g, aura, valid.Parse(vb), h.Controller(), h.ID)
 	})
 	return refused
@@ -401,7 +428,7 @@ func cardCantBeTargetedBy(g *Game, target *Card, activator PlayerID, source Card
 		return false
 	}
 	src := g.Card(source)
-	if refused, _ := protectionEach(target, func(vb string, hasVB bool) bool {
+	if refused, _ := protectionEach(target.KeywordLines(), func(vb string, hasVB bool) bool {
 		return !hasVB || Matches(g, src, valid.Parse(vb), target.Controller(), target.ID)
 	}); refused {
 		return true
@@ -434,28 +461,48 @@ func cardCantBeTargetedBy(g *Game, target *Card, activator PlayerID, source Card
 // playerCantBeTargetedBy is cardCantBeTargetedBy's own Player-entity
 // counterpart -- Java's Player.canBeTargetedBy -> StaticAbilityCantTarget.
 // cantTarget (Player.java:1030-1041), ported from PlayerFactoryUtil.java's
-// own Hexproof/Shroud branches (`ValidTarget$ Player.You`, `EffectZone$
-// Command`, otherwise identical to the Card branches CardFactoryUtil.java
-// synthesizes). Protection's own player-targeting branch
-// (PlayerFactoryUtil.java:33-40) is not read yet: real corpus cards do
-// grant a player Protection (Runed Halo's `Protection:ChosenName`, Absolute
-// Virtue's `Protection:Player.Opponent:...`, Serra's Emissary, Gor Muldrak
-// Amphinologist -- keywordTokens' own dynamic-marker skip, continuous.go,
-// already refuses `ChosenName`; the rest reach `Player.KeywordMod`
-// unresolved), but `protectionEach` (above) only ever matches a source
-// card's own color/type against a candidate blocker, aura or targeting
-// ability's host -- Absolute Virtue's `Player.Opponent:...` is a
-// player-relative spec `protectionColorValid`/the colon-structured branch
-// was never built to parse. Logged in game-state.md's Not ported yet.
+// own Hexproof/Shroud/Protection branches (`ValidTarget$ Player.You`,
+// `EffectZone$ Command`, otherwise identical to the Card branches
+// CardFactoryUtil.java synthesizes).
+//
+// Protection is checked first and unconditionally, `protectionEach` shared
+// with the Card branch (above) unchanged: Gor Muldrak, Amphinologist's own
+// `Protection:Salamander` (a plain colon-structured characteristic) resolves
+// against `Player.KeywordLines` exactly the way it would against a card's --
+// the one shape among the corpus's named player-Protection cards that does.
+// The other three still refuse nothing -- Runed Halo's `Protection:ChosenName`
+// and Serra's Emissary's `Protection:ChosenType` never even reach
+// `Player.KeywordMod` (keywordTokens' own dynamic-marker skip, continuous.go)
+// -- and Absolute Virtue's `Protection:Player.Opponent:...` (one of 10 real
+// corpus `Protection:Player...` lines, printed and Pump-granted alike --
+// `protectionEach`'s own doc comment) reaches it but `protectionEach` itself
+// refuses to read a player-relative characteristic; logged in game-state.md's
+// Not ported yet.
 //
 // target's own KeywordLines (player.go) is entirely Layer 6's doing --
 // applyOneContinuousKeyword's own player branch (continuous.go), the one
 // source of a Player's keyword lines, since a player has no printed face
-// to fold onto the way a card does. Shroud first and unconditional, same
-// as the Card branch; Hexproof gated on `Activator$ Opponent`, matched the
-// same way.
+// to fold onto the way a card does. Shroud next and unconditional, same as
+// the Card branch; Hexproof last, gated on `Activator$ Opponent`, matched
+// the same way.
 func playerCantBeTargetedBy(g *Game, target PlayerID, activator PlayerID, source CardID) bool {
 	p := g.Player(target)
+	src := g.Card(source)
+	// Matches' own source parameter is "the card the spec is written on,"
+	// for a host-relative property (Self/Other/HostCard...) to resolve
+	// against -- the Card branch passes the protected card itself (its
+	// closest equivalent of Java's player.getKeywordCard()); a player has no
+	// such card, so NoCard here, not source (the ATTACKING card): passing
+	// source would resolve a host-relative property against the wrong side
+	// entirely. Unreached today -- Salamander names no property, and every
+	// other player-Protection line above is either skipped by keywordTokens
+	// or refused by protectionEach itself before fn ever runs -- but wrong
+	// the moment a future corpus line needs one.
+	if refused, _ := protectionEach(p.KeywordLines(), func(vb string, hasVB bool) bool {
+		return !hasVB || Matches(g, src, valid.Parse(vb), target, NoCard)
+	}); refused {
+		return true
+	}
 	for _, line := range p.KeywordLines() {
 		if keyword.Parse(line).Name == "Shroud" {
 			return true
@@ -464,7 +511,6 @@ func playerCantBeTargetedBy(g *Game, target PlayerID, activator PlayerID, source
 	if matched, _ := matchesPlayerSpec(g, activator, target, source, "Opponent"); !matched {
 		return false
 	}
-	src := g.Card(source)
 	for _, line := range p.KeywordLines() {
 		k := keyword.Parse(line)
 		if k.Name != "Hexproof" {

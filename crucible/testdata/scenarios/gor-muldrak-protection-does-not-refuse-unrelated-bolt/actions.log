@@ -1,0 +1,15 @@
+# CR 702.16e: Gor Muldrak, Amphinologist's own `Protection:Salamander`
+# (Affected$ You, a plain colon-structured characteristic -- protectionEach
+# resolves it against Player.KeywordLines exactly the way it already does
+# against a card's, staticability.go) refuses only a Salamander source.
+# Lightning Bolt (an Instant, no creature type at all) does not match --
+# ai's Bolt at human, Gor Muldrak's own controller, still connects. The
+# matching half (a Salamander source actually refused) has no real corpus
+# card to cast that combines the type with a targeted ability, so it is
+# covered directly in cantbetargeted_internal_test.go instead.
+startturn ai
+advance 3
+tapformana ai 2 R
+queue targets human
+queue action ai cast 3
+passpriority

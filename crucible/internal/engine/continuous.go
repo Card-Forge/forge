@@ -506,15 +506,18 @@ func applyContinuousKeyword(g *Game) {
 // back with keyword.Parse the identical way it already reads a printed
 // keyword. 16 real lines whose `Affected$` includes `You` (12 bare `You`)
 // name `AddKeyword$ Hexproof` (Leyline of Sanctity among them), 4 name
-// `AddKeyword$ Shroud` (Ivory Mask, True Believer) -- the two player
-// -granted keywords `playerCantBeTargetedBy` (staticability.go) reads.
-// A handful more name `AddKeyword$ Protection:...` (Runed Halo's own
-// `Protection:ChosenName`, Absolute Virtue's `Protection:Player.Opponent:
-// ...`) -- keywordTokens' own dynamic-marker skip (below) already refuses
-// `ChosenName`, but `Player.Opponent`'s colon-structured player-relative
-// shape is not a marker, so it reaches `Player.KeywordMod` unresolved;
-// `playerCantBeTargetedBy` does not read Protection at all yet (Not ported
-// yet, game-state.md).
+// `AddKeyword$ Shroud` (Ivory Mask, True Believer) -- two of the three
+// keywords `playerCantBeTargetedBy` (staticability.go) reads, Protection
+// the third. A handful more name `AddKeyword$ Protection:...`: Gor Muldrak,
+// Amphinologist's own `Protection:Salamander` resolves the identical
+// colon-structured-characteristic way a card's own does (`protectionEach`,
+// staticability.go, shared unchanged). Runed
+// Halo's `Protection:ChosenName` and Serra's Emissary's
+// `Protection:ChosenType` are skipped outright by keywordTokens' own
+// dynamic-marker check (below), never reaching `Player.KeywordMod` at all;
+// Absolute Virtue's `Protection:Player.Opponent:...` does reach it, but
+// `protectionEach` refuses to read a player-relative characteristic
+// (Not ported yet, game-state.md).
 //
 // A whole line is skipped, not applied partially, the instant it carries:
 //   - RemoveKeyword$/RemoveAllAbilities$ (5 of 1,561 real AddKeyword$
