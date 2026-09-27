@@ -1,0 +1,117 @@
+name: Research simulation
+
+on:
+  push:
+    branches:
+      - chatgpt-connectivity-test
+    paths:
+      - "research/run.properties"
+      - "research/decks/**"
+      - ".github/workflows/research-sim.yml"
+  workflow_dispatch:
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Read simulation configuration
+        shell: bash
+        run: |
+          set -a
+          source research/run.properties
+          set +a
+
+          {
+            echo "DECK_DIR=$DECK_DIR"
+            echo "DECK1=$DECK1"
+            echo "DECK2=$DECK2"
+            echo "GAMES=$GAMES"
+            echo "MATCH_SIZE=$MATCH_SIZE"
+            echo "SEED=$SEED"
+            echo "TIMEOUT=$TIMEOUT"
+            echo "QUIET=$QUIET"
+          } >> "$GITHUB_ENV"
+
+      - name: Build Forge desktop and dependencies
+        run: mvn -U -B -pl forge-gui-desktop -am package -DskipTests
+
+      - name: Locate runnable desktop jar
+        id: jar
+        shell: bash
+        run: |
+          JAR="$(find forge-gui-desktop/target -maxdepth 1 -type f -name '*-jar-with-dependencies.jar' | head -n 1)"
+          if [ -z "$JAR" ]; then
+            echo "Runnable desktop jar was not produced."
+            find forge-gui-desktop/target -maxdepth 1 -type f -print || true
+            exit 1
+          fi
+          echo "jar=$JAR" >> "$GITHUB_OUTPUT"
+          echo "Using $JAR"
+
+      - name: Run Forge simulation
+        shell: bash
+        run: |
+          set -o pipefail
+
+          if [ ! -d "$GITHUB_WORKSPACE/$DECK_DIR" ]; then
+            echo "Deck directory not found: $GITHUB_WORKSPACE/$DECK_DIR"
+            exit 1
+          fi
+          if [ ! -f "$GITHUB_WORKSPACE/$DECK_DIR/$DECK1" ]; then
+            echo "Deck 1 not found: $GITHUB_WORKSPACE/$DECK_DIR/$DECK1"
+            exit 1
+          fi
+          if [ ! -f "$GITHUB_WORKSPACE/$DECK_DIR/$DECK2" ]; then
+            echo "Deck 2 not found: $GITHUB_WORKSPACE/$DECK_DIR/$DECK2"
+            exit 1
+          fi
+
+          ARGS=(
+            sim
+            -D "$GITHUB_WORKSPACE/$DECK_DIR"
+            -d "$DECK1" "$DECK2"
+            -s "$SEED"
+            -c "$TIMEOUT"
+          )
+
+          if [ "$MATCH_SIZE" -gt 0 ]; then
+            ARGS+=( -m "$MATCH_SIZE" )
+          else
+            ARGS+=( -n "$GAMES" )
+          fi
+
+          if [ "$QUIET" = "true" ]; then
+            ARGS+=( -q )
+          fi
+
+          cd forge-gui
+          java -Djava.awt.headless=true -jar "../${{ steps.jar.outputs.jar }}" "${ARGS[@]}" 2>&1 | tee ../research-sim.log
+
+      - name: Show result summary
+        if: always()
+        shell: bash
+        run: |
+          echo "===== Forge research simulation summary ====="
+          grep -E "Simulation mode|Ai\(|Game Outcome: Turn|Game Outcome: .*has (won|lost)|Match Result:|Game Result:" research-sim.log || true
+
+      - name: Upload simulation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-simulation-log
+          path: |
+            research-sim.log
+            research/run.properties
+          if-no-files-found: warn
