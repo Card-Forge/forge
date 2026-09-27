@@ -32,12 +32,12 @@ Activator is `a.Controller` (`sa.getActivatingPlayer()`).
 `AbilityKey.Player`; an `AbilityKey.Affected` gate. Own walk, sharing only `planeswalkTriggerZones` and
 `phaseTriggerZoneMatches`.
 
-| Entry point                                                       | Use                                                                                                                                                     |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `(g *Game) checkChaosEnsuesTriggers(controller, player PlayerID)` | No `Affected`. Every player's `Battlefield` + whole `Command` zone, `TriggerZones$` gated. The planar die's chaos face (`RollPlanarDice`) calls this    |
-| `(g *Game) checkChaosEnsuesOnTriggers(controller, player, card)`  | `Affected` = `card`. Only `card`'s chaos abilities, from any zone, `TriggerZones$` not checked. Caller must first confirm `hasChaosEnsuesTrigger(card)` |
-| `hasChaosEnsuesTrigger(c *Card) bool`, `isChaosEnsuesTrigger(t)`  | "has a chaos ability" test (`ChaosEnsuesEffect.java:43-44`)                                                                                             |
-| `(g *Game) chaosEnsuesTriggerMatches(player, affected, static)`   | Shared collector; `affected == NoCard` = no `Affected` key                                                                                              |
+| Entry point                                                       | Use                                                                                                                                                                   |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `(g *Game) checkChaosEnsuesTriggers(controller, player PlayerID)` | No `Affected`. Every player's `Battlefield` + whole `Command` zone, `TriggerZones$` gated. Entry point for the planar die's chaos face (`RollPlanarDice`, not ported) |
+| `(g *Game) checkChaosEnsuesOnTriggers(controller, player, card)`  | `Affected` = `card`. Only `card`'s chaos abilities, from any zone, `TriggerZones$` not checked. Caller must first confirm `hasChaosEnsuesTrigger(card)`               |
+| `hasChaosEnsuesTrigger(c *Card) bool`, `isChaosEnsuesTrigger(t)`  | "has a chaos ability" test (`ChaosEnsuesEffect.java:43-44`)                                                                                                           |
+| `(g *Game) chaosEnsuesTriggerMatches(player, affected, static)`   | Shared collector; `affected == NoCard` = no `Affected` key                                                                                                            |
 
 Both entry points resolve `Static$ True` lines inline through `resolveStaticTriggers` (ADR-0020) first, then push the
 rest through `pushTriggeredAbilities`; a static failure is left pending — callers finish with `g.TakePendingError()`.
@@ -88,5 +88,12 @@ every `Defined$` reader. Checked after the Planechase gate: outside Planechase n
 | Gap              | Why                                                                                                                                                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Scenario fixture | `GameState.java` has no `PlanarDeck` zone key (`ZONES`, `GameState.java:53`); a Crucible-only key would break the Java oracle's reading of the fixture (`effects-planeswalk.md`, same reason). Module tests instead |
+
+**For `RunChaos`** (Pools of Becoming, not ported): `RunChaosEffect.java:18-39` does not run `TriggerType.ChaosEnsues`
+at all. It wraps each targeted card's chaos ability directly (`WrappedAbility`, copied for the activator,
+`OptionalDecider$` honoured) and hands the list to `orderAndPlaySimultaneousSa` — no `performTest`, so no
+`Affected`/`ValidPlayer$` check and the multi-plane defect above is not reached. `hasChaosEnsuesTrigger` and
+`isChaosEnsuesTrigger` fit it; `chaosEnsuesTriggerMatches` does not as is (it applies `ValidPlayer$` and uses the host's
+controller, not the activator).
 
 Tests: `planar_chaos_test.go`.
