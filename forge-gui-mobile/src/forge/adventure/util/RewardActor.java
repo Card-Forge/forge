@@ -896,6 +896,24 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
         int align = Align.left;
+
+        if (tooltip != null) {
+            removeListener(tooltip);
+            tooltip = null;
+        }
+        if (toolTipImage != null) {
+            toolTipImage.remove();
+            toolTipImage = null;
+        }
+
+        if (loaded && Reward.Type.CardPack.equals(reward.getType())) {
+            // Let the engine dispose of the old texture pointer handle safely first
+            if (generatedTooltip != null) {
+                generatedTooltip.dispose();
+                generatedTooltip = null;
+            }
+        }
+
         if (generatedTooltip == null) {
             // If this method was invoked from a background thread,
             // immediately defer the FrameBuffer compilation onto libGDX's main OpenGL rendering thread
@@ -963,8 +981,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
 
         // Rendering code ends here.
-        if (toolTipImage == null)
+        if (toolTipImage == null) {
             toolTipImage = new RewardImage(processDrawable(generatedTooltip));
+        }
 
         if (tooltip == null) {
             tooltip = new ImageToolTip(new ComplexTooltip(toolTipImage, align));
