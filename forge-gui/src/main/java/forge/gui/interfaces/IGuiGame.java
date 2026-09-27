@@ -265,10 +265,12 @@ public interface IGuiGame {
     void setSelectables(Iterable<CardView> cards, int min, int max);
     void clearSelectables();
     /**
-     * Cards revealed to the player for the current prompt, until {@link #hideRevealedCards()}; the GUI chooses how
-     * to display them. Unrelated to {@link #updateRevealedCards}, which records the match's reveal history.
+     * Cards from {@code owner}'s hand revealed to the player for the current prompt, until
+     * {@link #hideRevealedCards()}; the GUI chooses how to display them. The owner is stated rather than read from the
+     * cards, which may be copies still reporting the zone a card has just left. Unrelated to
+     * {@link #updateRevealedCards}, which records the match's reveal history.
      */
-    void showRevealedCards(Iterable<CardView> cards);
+    void showRevealedCards(PlayerView owner, Iterable<CardView> cards);
     void hideRevealedCards();
     boolean isSelecting();
 

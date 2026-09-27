@@ -490,9 +490,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void showRevealedCards(final Iterable<CardView> cards) {
+    public void showRevealedCards(final PlayerView owner, final Iterable<CardView> cards) {
         // the sync carries the temporary visibility granted by tempShowCards, so the client sees card faces
-        syncAndSend(ProtocolMethod.showRevealedCards, cards);
+        syncAndSend(ProtocolMethod.showRevealedCards, owner, cards);
     }
 
     @Override

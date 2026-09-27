@@ -364,7 +364,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // the libgdx port never receives these: reveal falls back to its own card list there
     @Override
-    public void showRevealedCards(final Iterable<CardView> cards) { }
+    public void showRevealedCards(final PlayerView owner, final Iterable<CardView> cards) { }
 
     @Override
     public void hideRevealedCards() { }

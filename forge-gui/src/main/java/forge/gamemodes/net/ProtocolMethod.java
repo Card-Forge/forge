@@ -63,7 +63,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
     clearSelectables    (Mode.SERVER, Void.TYPE),
-    showRevealedCards   (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    showRevealedCards   (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*CardView*/.class),
     hideRevealedCards   (Mode.SERVER, Void.TYPE),
     setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*GameEntityView*/.class, Boolean.TYPE),
     setWeaklySelectable (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
