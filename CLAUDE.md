@@ -209,10 +209,11 @@ M6 in progress: 176 of the corpus's 203 script-driven `Effect` APIs resolve (`Ne
 that exact name and never surface in `unported-apis.sh`'s corpus-driven listing at all. Largest gaps (corpus lines,
 `scripts/unported-apis.sh`): `ChangeText` (17), `ControlPlayer` (11), `Meld` (7).
 
-Thin or missing: Layer 1 past `Clone`'s "becomes a copy" (no "enters as a copy"); most of Layers 3-8 past their literal
-shapes; Ward's own non-mana cost shapes (`PayLife`/`Discard`/`Sac`/`Ward:X`) and ability-source/retargeted Ward — the
-mana-cost shape against a directly cast spell is ported (ADR-0028), alongside Hexproof/Shroud/Protection. Full list:
-`port-log/game-state.md`, "Not ported yet".
+Thin or missing: Layer 1 past `Clone`'s own "enters as a copy" (`entersascopy.go` resolves it now) — a copy replacement
+other than `Clone` itself, CR 616.1's choice among several, Mystic Reflection's batch "next time"; most of Layers 3-8
+past their literal shapes; Ward's own non-mana cost shapes (`PayLife`/`Discard`/`Sac`/`Ward:X`) and
+ability-source/retargeted Ward — the mana-cost shape against a directly cast spell is ported (ADR-0028), alongside
+Hexproof/Shroud/Protection. Full list: `port-log/game-state.md`, "Not ported yet".
 
 **P4 exit gate:** fixture-count half met (≥300 scenarios, `testdata/scenarios/`); qualitative half ("every layer, every
 SBA," Plan Section 3.2) not.

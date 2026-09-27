@@ -147,3 +147,48 @@ func TestParamKinds(t *testing.T) {
 		t.Fatalf("param-kinds.golden has %d lines, generated %d", len(wl), len(gl))
 	}
 }
+
+// An effect that reads a param through another effect class's static helper
+// reads that param: CloneEffect reads PumpDuration$ only through
+// TokenEffectBase.addPumpUntil. Only the called method's body counts, not the
+// rest of the helper's class.
+func TestReadEffectParamsFollowsStaticHelpers(t *testing.T) {
+	t.Parallel()
+
+	dir := t.TempDir()
+	files := map[string]string{
+		"CallerEffect.java": `public class CallerEffect extends SpellAbilityEffect {
+    public void resolve(SpellAbility sa) {
+        sa.getParam("Own");
+        HelperEffectBase.addThing(sa, c);
+    }
+}`,
+		"HelperEffectBase.java": `public abstract class HelperEffectBase extends SpellAbilityEffect {
+    public static void addThing(SpellAbility sa, final Card c) {
+        if (!sa.hasParam("Helped")) {
+            return;
+        }
+    }
+    public static void other(SpellAbility sa) {
+        sa.getParam("NotCalled");
+    }
+}`,
+	}
+	for name, body := range files {
+		if err := os.WriteFile(filepath.Join(dir, name), []byte(body), 0o600); err != nil {
+			t.Fatal(err)
+		}
+	}
+	got, err := readEffectParams(dir, "CallerEffect")
+	if err != nil {
+		t.Fatalf("readEffectParams: %v", err)
+	}
+	for _, key := range []string{"Own", "Helped"} {
+		if !got[key] {
+			t.Errorf("readEffectParams missed %q", key)
+		}
+	}
+	if got["NotCalled"] {
+		t.Error("readEffectParams collected a param from a helper method the effect never calls")
+	}
+}

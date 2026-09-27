@@ -1,0 +1,24 @@
+# CR 614.1c / 707.2 / 614.12: Clone's K:ETBReplacement:Copy is a Copy-layer
+# replacement of its own entry. It applies before the ETB trigger check, so
+# Clone enters as a copy of the opponent's Venerable Monk, carrying the
+# Monk's "when this enters, you gain 2 life" -- which triggers for Clone's
+# controller. A 0/0 Clone would die to the next state-based action check;
+# the 2/2 copy survives it.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+# Optional$: "you may have Clone enter as a copy", then Choices$
+# Creature.Other picks the Monk (Id:6).
+queue confirmeffect true
+queue cardchoice 6
+castspell human 1
+# Resolves Clone, then the copied Monk trigger it put on the stack.
+resolvestack
+# Leave Main1: the state-based action check a 0/0 would not survive.
+advance

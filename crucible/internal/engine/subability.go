@@ -86,6 +86,9 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		hostTransforms:    parent.hostTransforms,
 		hasHostTransforms: parent.hasHostTransforms,
 		damageMap:         parent.damageMap,
+		// ReplacementHandler.executeReplacement sets the replacing objects
+		// on every ability of the ReplaceWith$ chain, not the head alone.
+		replacing: parent.replacing,
 	}
 	return r.Resolve(g, &child, controller)
 }

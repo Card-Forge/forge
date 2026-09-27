@@ -42,6 +42,10 @@ func copyTestDef(t *testing.T, name, typeLine, power, toughness string, lines ..
 			f.Statics = append(f.Statics, body)
 		case "A":
 			f.Abilities = append(f.Abilities, body)
+		case "T":
+			f.Triggers = append(f.Triggers, body)
+		case "R":
+			f.Replacements = append(f.Replacements, body)
 		case "SVar":
 			k, v, _ := strings.Cut(body, ":")
 			f.SVars.Set(k, v)
@@ -731,7 +735,7 @@ func TestCloneRejectsUnportedShapes(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ line, want string }{
-		{"Clone | ValidTgts$ Creature | AddTriggers$ T", "AddTriggers$ not resolvable yet"},
+		{"Clone | ValidTgts$ Creature | PumpKeywords$ Haste", "PumpKeywords$ not resolvable yet"},
 		{"Clone | ValidTgts$ Creature | RemoveCreatureTypes$ True", "RemoveCreatureTypes$ not resolvable yet"},
 		{"Clone | ValidTgts$ Creature | Duration$ UntilUnattached", `Duration$ "UntilUnattached" not resolvable yet`},
 		{"Clone | Choices$ Card.token+YouCtrl", `valid property "token"`},

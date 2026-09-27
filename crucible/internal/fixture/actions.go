@@ -53,6 +53,7 @@ import (
 //	queue blocks [<b>=<a>,...]    ScriptedController.QueueBlocks, blocker=attacker pairs from CardByFixtureID (no pairs declines)
 //	queue damage <b>=<n>[,...]    ScriptedController.QueueDamageAssignment, blocker=amount pairs from CardByFixtureID
 //	queue discard <id>[,...]      ScriptedController.QueueDiscard, ids from CardByFixtureID
+//	queue cardchoice <id>[,...]   ScriptedController.QueueCardChoice, an effect's card pick, ids from CardByFixtureID
 //	queue battleprotector <p>     ScriptedController.QueueBattleProtector, a seated player's name
 //	paymanacost <player> <cost>          Game.PayManaCost(player, cost, controller) -- cost is mana.Parse's own text
 //	tapformana <player> <id> <color>     Game.TapLandForMana(player, id, color), id from CardByFixtureID
@@ -417,6 +418,13 @@ func runQueue(args []string, l *Loaded, c *engine.ScriptedController) error {
 			return fmt.Errorf("queue discard: %w", err)
 		}
 		c.QueueDiscard(ids)
+
+	case "cardchoice":
+		ids, err := resolveCardIDs(l, value)
+		if err != nil {
+			return fmt.Errorf("queue cardchoice: %w", err)
+		}
+		c.QueueCardChoice(ids)
 
 	case "battleprotector":
 		pid, err := resolveActionPlayer(l, args[1:], 1)

@@ -78,7 +78,7 @@ func (g *Game) playLandNow(controller PlayerController, pid PlayerID, card CardI
 	origin := c.Zone
 	g.Move(card, Battlefield, pid)
 	c.controller = pid
-	g.checkMovedReplacement(card, origin)
+	g.enterBattlefieldReplacements(controller, card, origin)
 	g.checkETBTriggers(controller, card, origin)
 	g.checkLandPlayedTriggers(controller, card, pid, origin)
 	g.Player(pid).LandsPlayed++
