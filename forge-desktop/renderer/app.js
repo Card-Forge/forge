@@ -42,10 +42,10 @@ function mutate(action) {
   return mutationQueue;
 }
 function cost(value) {
-  return (String(value).match(/\{[^}]+\}/g) || []).slice(0, 9).map(symbol => {
+  return (String(value).match(/\{[^}]+\}/g) || []).map(symbol => {
     const mana = symbol.slice(1, -1);
-    const color = ({ W: 'white', U: 'blue', B: 'black', R: 'red', G: 'green' })[mana] || 'colorless';
-    return `<span class="mana small ${color}" title="${esc(mana)}">${esc(mana)}</span>`;
+    const color = ({ W: 'white', U: 'blue', B: 'black', R: 'red', G: 'green' })[mana.split('/')[0]] || 'colorless';
+    return `<span class="mana small ${color}${mana.includes('/') ? ' compound' : ''}${mana.length > 2 ? ' wide' : ''}" title="${esc(mana)}">${esc(mana)}</span>`;
   }).join('');
 }
 function glow(card) {

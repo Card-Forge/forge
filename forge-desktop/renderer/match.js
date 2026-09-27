@@ -109,11 +109,27 @@
   }
 
   const zone = (player, name) => player.zones.find(value => value.name === name) || { count: 0, cards: [] };
-  function cardTile(card) {
-    const stats = card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
+  function handHint() {
+    const human = match?.players?.find(player => player.human);
+    const hand = $('match-hand');
+    $('match-hand-count').textContent = human ? `${zone(human, 'Hand').count} cards${hand.scrollWidth > hand.clientWidth + 1 ? ' · scroll for more' : ''} · hover for rules` : '';
+  }
+  new ResizeObserver(handHint).observe($('match-hand'));
+  $('match-hand').addEventListener('focusin', event => {
+    event.target.closest('.match-card')?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+  });
+  function cardTile(card, presentation) {
+    const inHand = presentation === 'hand';
+    const stats = !card.faceDown && card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
+    const statsBadge = stats ? `<span class="match-stats" aria-label="Power ${esc(card.power)}, toughness ${esc(card.toughness)}">${esc(stats)}</span>` : '';
     const marks = [card.sick ? 'New' : '', card.attacking ? `Attacking${card.defender ? ' → ' + card.defender : ''}` : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
     const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
-    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}" ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    const symbols = !card.faceDown ? cost(card.manaCost) : '';
+    const costLabel = card.faceDown ? 'Hidden card' : symbols ? `Mana cost ${card.manaCost}` : card.type.includes('Land') ? 'Land · no mana cost' : 'No mana cost';
+    const handCost = inHand ? `<span class="match-hand-cost" aria-label="${esc(costLabel)}">${symbols || `<span class="hand-no-cost">${esc(costLabel)}</span>`}</span>` : '';
+    const handType = inHand ? `<span class="match-hand-type" title="${esc(card.type)}">${esc(card.faceDown ? 'Face down' : card.type.split(/\s[-—–]\s/)[0])}</span>` : '';
+    const description = inHand ? ` aria-description="${esc([costLabel, card.type, stats ? `Power ${card.power}, toughness ${card.toughness}` : ''].filter(Boolean).join('. '))}"` : '';
+    return `<button class="match-card ${inHand ? 'match-hand-card' : ''} ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"${description} ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}>${handCost}<span class="match-card-face">${art}${inHand ? '' : statsBadge}</span><span class="match-card-name">${esc(card.name)}</span>${inHand ? `<span class="match-hand-details">${handType}${statsBadge}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -173,9 +189,9 @@
       $('match-opponent').scrollLeft = opponentScroll;
       $('match-human').dataset.playerId = human?.id || '';
       $('match-human').innerHTML = human ? playerLane(human) : '';
-      $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(cardTile).join('') : '';
+      $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(card => cardTile(card, 'hand')).join('') : '';
       $('match-hand').scrollLeft = handScroll;
-      $('match-hand-count').textContent = human ? `${zone(human, 'Hand').count} cards · hover to inspect` : '';
+      handHint();
       document.querySelectorAll('.match-zone').forEach(element => { element.open = opened.has(element.dataset.zone); });
       document.querySelectorAll('[data-field-row]').forEach(element => { element.scrollLeft = scrolls.get(element.dataset.fieldRow) || 0; });
       loadArt($('match-view'));

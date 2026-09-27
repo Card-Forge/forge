@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.14
+# Mana Table — beta 0.1.0-beta.15
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -83,6 +83,13 @@ Library, graveyard, and exile piles sit beside each playmat. Click a graveyard o
 exile pile to browse its cards, then click it again to close it. Crowded rows and
 large hands scroll sideways. Life totals remain clickable for player targets.
 
+Cards in your hand show large mana symbols, names, card types, and a separate
+power/toughness badge. These use the current engine data and stay readable even
+when artwork is unavailable. Full costs include X, hybrid, Phyrexian, and long
+costs; lands are distinguished from zero-cost spells. Smaller windows scroll the
+hand instead of shrinking the text. Keyboard focus brings each card fully into
+view. Hover for the full card and rules.
+
 Actions show **Sending action…** immediately and refresh quickly while the table
 updates. Response pauses preserve unchanged card elements and their artwork,
 keeping hover previews steady. Cached artwork loads without waiting behind new
@@ -124,6 +131,8 @@ to cancel. Card clicks retain their original decision context across refreshes;
 if the table changed, select the card again.
 
 Brief animations highlight card arrivals, tapping, combat, and life changes.
+Card movement follows actual zone changes; priority and prompt refreshes do not
+replay a completed play. Tapping and combat retain their separate visual cues.
 Use **Animations on/off** beside the turn number to toggle them; the initial
 setting follows your system's reduced-motion preference. Actions remain usable
 while animations run.

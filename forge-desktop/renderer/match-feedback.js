@@ -66,19 +66,26 @@ const matchFeedback = (() => {
     if (!motion || !previous || previous.id !== next.id || $('match-view').hidden || next.boardRevision === previous.boardRevision) return;
     const prior = new Map(previous.players?.flatMap(player => player.zones.flatMap(zone => zone.cards)).filter(card => card.visualId).map(card => [card.visualId, card]) || []);
     const current = new Map(next.players?.flatMap(player => player.zones.flatMap(zone => zone.cards)).filter(card => card.visualId).map(card => [card.visualId, card]) || []);
+    const locations = state => new Map(state.players?.flatMap(player => player.zones.flatMap(zone =>
+      zone.cards.filter(card => card.visualId).map(card => [card.visualId, `${player.id}:${zone.name}`]))) || []);
+    const priorLocations = locations(previous), currentLocations = locations(next);
     let arrivals = 0;
     document.querySelectorAll('.match-card[data-visual-card]').forEach(element => {
       const id = element.dataset.visualCard, old = before.get(id) || positions.get(id), card = current.get(id), former = prior.get(id);
       if (!id || !card || !element.checkVisibility()) return;
       const area = element.closest('#match-hand') ? 'hand' : element.closest('.battlefield-row') ? 'field' : 'other';
-      if ((!old || old.area !== area) && (area === 'field' || area === 'hand') && arrivals++ < 10) {
+      // Cached rectangles describe where a flight can start, not whether a
+      // play happened. Priority-only snapshots retain DOM nodes and can still
+      // have a cached hand rectangle for a card already on the battlefield.
+      const moved = priorLocations.get(id) !== currentLocations.get(id);
+      if (moved && (area === 'field' || area === 'hand') && arrivals++ < 10) {
         const end = element.getBoundingClientRect();
         const source = old?.rect;
         if (source && end.width) {
           const flight = element.cloneNode(true);
           flight.classList.add('match-flight'); flight.removeAttribute('data-match-card'); flight.removeAttribute('data-preview-card');
           flight.removeAttribute('data-visual-card'); flight.tabIndex = -1; flight.setAttribute('aria-hidden', 'true');
-          Object.assign(flight.style, { left: `${end.left}px`, top: `${end.top}px`, width: `${end.width}px` });
+          Object.assign(flight.style, { left: `${end.left}px`, top: `${end.top}px`, width: `${end.width}px`, height: `${end.height}px` });
           document.body.append(flight); flights.add(flight);
           const animation = flight.animate([
             { transform: `translate(${source.left - end.left}px, ${source.top - end.top}px) scale(.65)`, opacity: .3 },

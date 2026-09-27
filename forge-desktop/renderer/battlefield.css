@@ -12,8 +12,8 @@
 .match-heading-actions .button { padding: 8px 12px; }
 .match-layout { display: grid; grid-template-columns: minmax(0, 1fr) 275px; grid-template-rows: minmax(0, 1fr); gap: 18px; height: calc(100dvh - 116px); }
 .match-arena {
-  --field-card-width: clamp(40px, calc(12.5vh - 48px), 74px);
-  --hand-card-width: clamp(70px, 10vh, 100px);
+  --field-card-width: clamp(36px, calc(12.5vh - 54px), 74px);
+  --hand-card-width: 138px;
   --pile-width: clamp(32px, 5vh, 47px);
   position: relative;
   isolation: isolate;
@@ -22,7 +22,7 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) 24px minmax(0, 1fr) 22px clamp(120px, 17vh, 165px);
+  grid-template-rows: minmax(0, 1fr) 24px minmax(0, 1fr) 22px clamp(170px, 22vh, 222px);
   padding: 14px 16px 4px;
   border: 1px solid #4b4b3b;
   border-radius: 18px;
@@ -107,10 +107,27 @@
 .zone-drawer-title { width: 100%; padding-bottom: 8px; border-bottom: 1px solid #556244; color: var(--accent); font-size: 11px; }
 .match-hand-label { display: flex; justify-content: space-between; align-items: end; padding: 0 8px; font-size: 8px; letter-spacing: 1.5px; color: #bdc6ad; }
 .match-hand-label > span + span { color: #8f9f89; letter-spacing: 0; }
-.match-hand { display: flex; align-items: center; justify-content: safe center; gap: 10px; overflow-x: auto; overflow-y: hidden; padding: 5px 8px; min-width: 0; min-height: 0; }
-.match-hand .match-card { width: var(--hand-card-width); flex-basis: var(--hand-card-width); }
-.match-hand .match-card:hover, .match-hand .match-card:focus-visible { transform: translateY(-4px); }
-.match-hand .match-card .card-art { box-shadow: 0 5px 15px #0009; }
+.match-hand { display: flex; align-items: stretch; justify-content: safe center; gap: 10px; overflow-x: auto; overflow-y: hidden; padding: 7px 8px 9px; min-width: 0; min-height: 0; scrollbar-color: #a3b394 #1b2923; }
+/* Keep game information at a readable size. Only the illustration gives up
+   height on shorter screens; crowded hands scroll instead of shrinking. */
+.match-hand-card { width: var(--hand-card-width); flex-basis: var(--hand-card-width); display: grid; grid-template-rows: auto minmax(0, 1fr) 32px 26px; gap: 4px; padding: 5px; border: 1px solid #77836c; border-radius: 8px; background: #17251f; box-shadow: 0 3px 8px #0006; }
+.match-hand-card:hover, .match-hand-card:focus-visible { transform: translateY(-4px); }
+.match-hand-card.actionable { border-color: #c4e2af; box-shadow: 0 0 0 1px #a8cf9866, 0 3px 10px #0009; }
+.match-hand-card.chosen { border-color: #edca82; box-shadow: 0 0 0 2px #d6be8baa; }
+.match-hand-card .match-card-face { min-height: 0; }
+.match-hand-card .card-art { height: 100%; aspect-ratio: auto; border: 0; box-shadow: none; }
+.match-hand-card .card-art img { object-position: center 22%; }
+.match-hand-card .card-fallback strong, .match-hand-card .card-fallback small { display: none; }
+.match-hand-card .card-fallback { display: grid; place-items: center; }
+.match-hand-card .match-card-name { margin: 0; color: #f3efdc; font: 600 13px/16px 'Segoe UI', sans-serif; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.match-hand-details { display: flex; align-items: center; justify-content: space-between; gap: 5px; min-width: 0; }
+.match-hand-type { font-size: 11px; line-height: 13px; color: #bdcbb9; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.match-hand-cost { display: flex; align-items: center; flex-wrap: wrap; gap: 3px; min-height: 23px; }
+.match-hand-cost .mana.small { flex: 0 0 auto; width: 22px; height: 22px; margin: 0; padding: 0; font: 700 14px/1 'Segoe UI', sans-serif; border: 1px solid #ffffff45; }
+.match-hand-cost .mana.wide { width: auto; min-width: 22px; padding: 0 3px; }
+.match-hand-cost .mana.compound { border-radius: 7px; font-size: 12px; }
+.hand-no-cost { font-size: 11px; color: #c5d0bd; }
+.match-hand-card .match-stats { position: static; flex-shrink: 0; padding: 2px 6px; border-radius: 4px; color: #17241b; background: #f2e6bf; font: 700 19px/22px 'Segoe UI', sans-serif; }
 .match-rail { min-height: 0; overflow-y: auto; position: static; gap: 12px; padding-bottom: 4px; }
 .match-prompt { border-color: #697055; background: linear-gradient(140deg, #29392f, #1a2521); }
 .match-prompt, .match-stack { padding: 18px; flex-shrink: 0; }
@@ -191,4 +208,9 @@
   .match-command-zone { padding-bottom: 0; }
   .match-command-zone > .eyebrow { font-size: 6px; margin-bottom: 3px; }
   .match-zone summary, .match-library { gap: 4px; }
+  .multiplayer .opponent-lane .match-side-zones { align-content: center; }
+  .multiplayer .opponent-lane .match-command-zone { display: flex; justify-content: space-between; align-items: center; gap: 3px; }
+  .multiplayer .opponent-lane .match-command-zone > .eyebrow { max-width: 44px; text-align: left; line-height: 1.4; margin: 0; }
+  .multiplayer .opponent-lane .match-command-zone .match-card { width: 23px; flex-basis: 23px; }
+  .multiplayer .opponent-lane .match-command-zone .match-card-name { display: none; }
 }

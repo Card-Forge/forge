@@ -80,6 +80,14 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
         expect(bounds.left).toBeGreaterThanOrEqual(bounds.min - 2);
         expect(bounds.right).toBeLessThanOrEqual(bounds.max + 2);
         expect(bounds.top).toBeGreaterThan(0); expect(bounds.bottom).toBeLessThan(bounds.height);
+        const pilesFit = await page.locator(`#match-opponent [data-player-id="${last.id}"] .match-side-zones`).evaluate(element => {
+          const lane = element.closest('.match-lane').getBoundingClientRect();
+          return [...element.querySelectorAll('.match-library, .match-zone summary')].every(pile => {
+            const box = pile.getBoundingClientRect();
+            return box.top >= lane.top && box.bottom <= lane.bottom;
+          });
+        });
+        expect(pilesFit, `${count} seats at ${size}: pile counts remain visible`).toBe(true);
         await expect(page.locator('#match-hand .match-card').first()).toBeVisible();
         await capture(`${count}-players-${size[0]}.png`);
       }

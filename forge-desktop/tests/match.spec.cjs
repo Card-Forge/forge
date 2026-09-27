@@ -1,12 +1,16 @@
 const { test, expect, _electron: electron } = require('@playwright/test');
 const path = require('node:path');
+const fs = require('node:fs');
 
 test('match table plays cards through engine prompts and resumes after deck browsing', async () => {
   const appPath = path.resolve(__dirname, '..');
   const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
     FORGE_USER_DATA: path.join(appPath, 'test-results', `table-${Date.now()}`) };
   delete environment.ELECTRON_RUN_AS_NODE;
-  const application = await electron.launch({ args: [appPath], env: environment });
+  const packaged = process.env.MANA_TEST_PACKAGED === '1'
+    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
+  const application = await electron.launch({ args: packaged ? [] : [appPath], env: environment,
+    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
   const errors = [];
   try {
     const page = await application.firstWindow();
@@ -110,17 +114,20 @@ test('match table plays cards through engine prompts and resumes after deck brow
     await expect(page.locator('#match-motion')).toHaveText('Animations off');
     expect(await page.locator('#match-view').evaluate(element => element.getAnimations({ subtree: true }).length)).toBe(0);
     await expect(page.locator('#match-human .match-card')).not.toHaveCount(0);
-    const layout = await page.locator('#match-human').evaluate(element => {
-      const bounds = selector => element.querySelector(selector).getBoundingClientRect().toJSON();
-      return { lands: bounds('.lands-row'), permanents: bounds('.permanents-row'),
-        cards: [...element.querySelectorAll('.battlefield-row .match-card')].map(card => ({
-          card: card.getBoundingClientRect().toJSON(), row: card.parentElement.getBoundingClientRect().toJSON()
-        })) };
-    });
-    expect(layout.lands.y).toBeGreaterThan(layout.permanents.y);
-    for (const { card, row } of layout.cards) {
-      expect(card.y).toBeGreaterThanOrEqual(row.y - 4); // Hover lifts a card slightly.
-      expect(card.y + card.height).toBeLessThanOrEqual(row.y + row.height + 1);
+    for (const size of [[1540, 980], [1120, 740], [1000, 740]]) {
+      await application.evaluate(({ BrowserWindow }, size) => BrowserWindow.getAllWindows()[0].setSize(...size), size);
+      const layout = await page.locator('#match-human').evaluate(element => {
+        const bounds = selector => element.querySelector(selector).getBoundingClientRect().toJSON();
+        return { lands: bounds('.lands-row'), permanents: bounds('.permanents-row'),
+          cards: [...element.querySelectorAll('.battlefield-row .match-card')].map(card => ({
+            card: card.getBoundingClientRect().toJSON(), row: card.parentElement.getBoundingClientRect().toJSON()
+          })) };
+      });
+      expect(layout.lands.y).toBeGreaterThan(layout.permanents.y);
+      for (const { card, row } of layout.cards) {
+        expect(card.y).toBeGreaterThanOrEqual(row.y - 4); // Hover lifts a card slightly.
+        expect(card.y + card.height).toBeLessThanOrEqual(row.y + row.height + 1);
+      }
     }
     await expect(page.locator('#match-human .lands-row .match-card')).not.toHaveCount(0);
     await expect(page.locator('#match-human .permanents-row .match-card')).not.toHaveCount(0);
@@ -129,7 +136,7 @@ test('match table plays cards through engine prompts and resumes after deck brow
     await page.locator('#match-human .match-zone summary').last().click();
     await expect(page.locator('.match-zone[open]')).toHaveCount(1);
     await page.locator('#match-human .match-zone summary').last().click();
-    await page.screenshot({ path: path.join(appPath, 'test-results/match-table.png'), fullPage: true });
+    if (!packaged) await page.screenshot({ path: path.join(appPath, 'test-results/match-table.png'), fullPage: true });
     await page.locator('#match-back').click();
     await expect(page.locator('#deck-name')).toHaveValue('Feedback check');
     await expect(page.locator('#main-count')).toHaveText('60');
