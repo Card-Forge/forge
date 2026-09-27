@@ -1,0 +1,16 @@
+# CR 702.21a/ADR-0028: the same Ward trigger as ward-refuses-payment-counters
+# -the-spell, but ai pays the {2} this time (ConfirmPayCost true,
+# resolveUnlessCost then calls Game.PayManaCost, manapay.go) -- Bolt is not
+# countered and resolves normally, dealing 3 damage to Tomakul Honor Guard's
+# 3/1 and killing it.
+startturn ai
+advance 3
+tapformana ai 2 R
+tapformana ai 3 R
+tapformana ai 4 R
+queue targets 1
+queue action ai cast 5
+queue confirmpaycost true
+queue paygeneric R
+queue paygeneric R
+passpriority

@@ -176,7 +176,10 @@ func (g *Game) castAura(pid PlayerID, card CardID, c *Card, controller PlayerCon
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.Player(pid).SpellsCastThisTurn++
 	g.checkSpellCastTriggers(controller, card, pid)
-	g.checkBecomesTargetTriggers(controller, []EntityID{CardEntity(target)}, true, pid)
+	tgts := []EntityID{CardEntity(target)}
+	matches := g.checkBecomesTargetTriggers(tgts, true, pid)
+	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
+	g.pushTriggeredAbilities(controller, matches)
 	return true
 }
 
@@ -227,8 +230,24 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.Player(pid).SpellsCastThisTurn++
 	g.checkSpellCastTriggers(controller, card, pid)
-	g.checkBecomesTargetTriggers(controller, a.Targets, false, pid)
+	tgts := allTargetsOf(a)
+	matches := g.checkBecomesTargetTriggers(tgts, false, pid)
+	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
+	g.pushTriggeredAbilities(controller, matches)
 	return true
+}
+
+// allTargetsOf gathers a's own top-level Targets plus every one of a
+// Charm's chosen modes' own Targets (Ability.Modes, ability.go) --
+// checkBecomesTargetTriggers/checkWardTriggers otherwise never see a modal
+// spell's own chosen target, since chooseCharmModes stores each mode's
+// targets on Ability.Modes[i], not on a.Targets itself.
+func allTargetsOf(a Ability) []EntityID {
+	targets := append([]EntityID(nil), a.Targets...)
+	for _, mode := range a.Modes {
+		targets = append(targets, mode.Targets...)
+	}
+	return targets
 }
 
 // firstSpellAbility is c's first A:SP$ line (Def.Faces[0].Abilities), or

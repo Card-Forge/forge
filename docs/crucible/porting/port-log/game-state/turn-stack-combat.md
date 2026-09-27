@@ -590,3 +590,55 @@ answer declines every offer, still consuming the queue slot). `fixture/actions.g
 fixture: a real Gust Walker attacks and taps -- `GameState`'s own dump format (`dump.go`) has no
 `Exerted`/granted-keyword/PT field to assert against, so the exert flag and the Pump/Flying payoff are proven at module
 level instead (`TestDeclareCombatAttackersExertsAndRunsPayoff`, `attack_test.go`).
+
+## Ward: a natively constructed triggered ability
+
+CR 702.21a (ADR-0028): `checkWardTriggers` (trigger.go) runs alongside `checkBecomesTargetTriggers`, at the two call
+sites that name an actual spell (`castAura`, `castInstantOrSorcery`). Each of a newly-targeted battlefield card's own
+`Ward` lines fires independently (CR 702.21g, `protectionEach`'s own "check every line" precedent, ADR-0027) when the
+spell's own controller is an opponent of the warded card's (`matchesPlayerSpec`'s "Opponent" base, the identical check
+`cardCantBeTargetedBy`'s own Hexproof gate already makes).
+
+Scoped to the mana-cost shape only (~252 of ~262 real corpus lines, `K:Ward:`/`AddKeyword$ Ward:` combined):
+`cost.Parse(details).IsPureMana()` plus `mana.Parse` with no `X`, the identical pre-check `resolveUnlessCost`
+(effect.go) runs at resolution -- checked again here, before pushing, so a shape this port cannot pay for is never
+pushed rather than pushed and then erroring. `PayLife`/`Discard`/`Sac`/`Ward:X`/Alchemy shapes are skipped (GO-7),
+logged in `game-state.md`'s Not ported yet.
+
+No new `compile.Ability`-from-script-text machinery: the built `Ability` has `API: APICounter`, `Controller` the warded
+card's own controller (CR 603.3a: a triggered ability's controller is its source's controller), `Source` the warded
+card, and `wardCounters` (`ability.go`) a single `EntityID` naming the targeting spell -- Forge's own
+`Defined$ TriggeredSourceSA` stand-in, kept off `Targets` on purpose: a real `Targets` entry would run the spell through
+`pushTriggeredAbilities`'s own post-push `checkBecomesTargetTriggers` scan (wrongly marking it `BecameTargetThisTurn`
+and letting an unrelated watcher's `ValidTarget$` fire against a stack card) and through `resolveTop`'s own CR 608.2b
+`targetsStillLegal` re-check (`cardCantBeTargetedBy` has no business running against a spell). `counterEffect`
+(`countereffect.go`) reads `wardCounters` alongside `Targets` instead, and its own `c.Zone != Stack` check is the
+identical "left the stack already" answer Forge's own `getInstanceMatchingSpellAbilityID` null-check gives. `Params` is
+a `*compile.Ability` built with `designationTrigger`'s own (`becomemonarcheffect.go`) `[]vocab.Param` literal shape --
+`DB$ Counter`, `TargetType$ Spell`, `UnlessCost$ <the Ward line's own cost text>`,
+`UnlessPayer$ TriggeredSourceController` -- resolved through `definedPlayers`'s existing
+`TriggeredSource`/`TriggeredSourceController` case (`defined.go`) against
+`Ability.triggered.source`/`.sourceController`, set to the targeting spell's `CardEntity` and its controller
+respectively, so the payer is the attacker even though `Controller` above now names the warded player.
+
+`checkWardTriggers`' own matches are collected into the same slice as `checkBecomesTargetTriggers`'s own matches from
+the identical targeting event (`allTargetsOf(a)`, `castspell.go`, which also gathers a Charm's chosen modes' own
+targets), then pushed together through one `pushTriggeredAbilities` call -- CR 603.3b's APNAP batching, so Ward's own
+trigger shares a batch with every other BecomesTarget trigger the same spell caused instead of always resolving first in
+a batch of its own. `resolveTargets` is a no-op for the pushed `Ability` (no `ValidTgts$` named, and `Targets` itself is
+empty for Ward), and Ward's own `wardCounters` reference survives untouched. `PushAbility` stamps it (CR 400.7's own
+zoneStamp, ADR-0027) and appends it to the real stack; `resolveTop`'s own `targetsStillLegal` re-check is a no-op too
+(empty `Targets`), so a spell that already left the stack by the time Ward resolves is caught by `counterEffect`'s own
+zone check instead, the identical answer Forge's own reference lookup gives.
+
+Scoped out for this pack (ADR-0028, logged in `game-state.md`'s Not ported yet): an activated or triggered ability
+targeting a Warded permanent (no `EntityID` for `counterEffect` to counter by) and `ChangeTargets`/`CopySpellAbility`
+retargeting one onto a Warded permanent (neither call site names the spell).
+
+Fixtures: `ward-refuses-payment-counters-the-spell` (ai declines the {2}, Bolt is countered, Tomakul Honor Guard takes
+no damage), `ward-payment-lets-the-spell-resolve` (ai pays, Bolt resolves and kills the 3/1),
+`ward-does-not-trigger-for-controllers-own-spell` (human's own Bolt at human's own Warded creature never raises the
+trigger at all). `fixture/actions.go` gains `queue confirmpaycost <bool>` (`ScriptedController.QueueConfirmPayCost`),
+this port's first fixture-reachable `UnlessCost$` pay-or-not prompt. `TestCastSpellWardEachInstanceFiresIndependently`/
+`TestCastSpellWardDoesNotFireForANonManaCost` (`ward_test.go`) prove CR 702.21g and the mana-only scope directly through
+`Game.StackLen()`, since two Ward triggers and a skipped one both dump identically otherwise.

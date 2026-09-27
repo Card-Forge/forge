@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanbattlefield=Tomakul Honor Guard|Id:1
+aibattlefield=Mountain|Id:2;Mountain|Id:3;Mountain|Id:4
+aihand=Lightning Bolt|Id:5

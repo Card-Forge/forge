@@ -171,6 +171,21 @@ type Ability struct {
 	// EntityID for. The ability is still pushed and fails with this error
 	// when it resolves, modesErr's own deferral.
 	targetsErr error
+	// wardCounters is checkWardTriggers' own answer to Forge's
+	// Defined$ TriggeredSourceSA (trigger.go, ADR-0028): the spell Ward's
+	// built Counter ability counters. Kept off Targets on purpose -- a real
+	// Targets entry would run the spell through
+	// pushTriggeredAbilities' own post-push checkBecomesTargetTriggers scan
+	// (wrongly marking the spell BecameTargetThisTurn and letting an
+	// unrelated watcher's ValidTarget$ fire against a stack card) and
+	// through resolveTop's own CR 608.2b targetsStillLegal re-check
+	// (cardCantBeTargetedBy has no business running against a spell).
+	// Forge's own Defined$ reference is exempt from both, since CR 702.21a
+	// names no target at all; counterEffect (countereffect.go) reads this
+	// field instead, and its own `c.Zone != Stack` check is the identical
+	// "left the stack already" answer Forge's own
+	// getInstanceMatchingSpellAbilityID null-check gives.
+	wardCounters EntityID
 }
 
 // abilityRefs is what Defined$ can name beyond the host card: the

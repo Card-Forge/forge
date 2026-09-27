@@ -1,0 +1,15 @@
+# CR 702.21a/ADR-0028: Tomakul Honor Guard's own Ward:2 fires the moment
+# ai's Lightning Bolt chooses it as a target (checkWardTriggers, trigger.go)
+# -- a real triggered ability pushed onto the stack above Bolt itself,
+# resolving first (CR 405.5). ai, the spell's own controller, is asked to
+# pay {2} (resolveUnlessCost, effect.go, UnlessPayer$ TriggeredSourceController
+# resolving to ai);
+# declining leaves counterEffect (countereffect.go) to counter Bolt outright
+# -- Tomakul Honor Guard takes no damage, and Bolt never resolves.
+startturn ai
+advance 3
+tapformana ai 2 R
+queue targets 1
+queue action ai cast 3
+queue confirmpaycost false
+passpriority

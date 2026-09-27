@@ -221,11 +221,9 @@ ported yet rather than guessed at.
 
 Not resolved: "Hexproof from triggered/activated abilities" (2 real corpus lines, card and player alike) —
 `hexproofValidSource`'s own `ok=false` for `Triggered`/`Activated` (Java's `ValidSA$`, not `ValidSource$`; `Matches`
-only ever takes a `*Card`) — so it never refuses; a `Ward` (`Keyword.WARD`, `CardFactoryUtil.java`'s own
-`Mode$ BecomesTarget | Execute$ DB$ Counter | UnlessCost$ ...` synthesis) is not a targeting restriction at all — a
-Warded permanent is targeted successfully, then its trigger may counter the triggering spell/ability afterward — and
-stays unbuilt: no keyword-to-trigger synthesis exists yet for turning a bare `K:Ward:N` line into that trigger+effect
-pair (Not ported yet).
+only ever takes a `*Card`) — so it never refuses. Ward is not a targeting restriction at all, and is covered separately,
+in [`turn-stack-combat.md`](turn-stack-combat.md#ward-a-natively-constructed-triggered-ability) — a Warded permanent is
+targeted successfully; its own trigger counters the triggering spell afterward if the cost goes unpaid (ADR-0028).
 
 Fixtures use `Lightning Bolt` (`DealDamage`), not `Pump`, to prove a target was accepted or refused — a Pump's own
 `+3/+3` marks no state `fixture.Dump` carries, so a fizzled Pump and a resolved one dump identically; Bolt's damage does

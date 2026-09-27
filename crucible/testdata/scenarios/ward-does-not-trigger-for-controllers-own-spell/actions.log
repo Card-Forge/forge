@@ -1,0 +1,11 @@
+# CR 702.21a: Ward triggers only for "a spell or ability an opponent
+# controls" (matchesPlayerSpec's own "Opponent" base, checkWardTriggers,
+# trigger.go) -- human's own Lightning Bolt at human's own Tomakul Honor
+# Guard never raises the trigger at all, so no ConfirmPayCost prompt is
+# needed: Bolt resolves straight through and kills the 3/1.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets 1
+queue action human cast 3
+passpriority

@@ -81,8 +81,11 @@ re-check the same as anything else on the stack.
 
 1. **`checkWardTriggers` (trigger.go) runs alongside `checkBecomesTargetTriggers`**, at the two call sites that name an
    actual spell card (`castAura`, `castInstantOrSorcery`) — the two places this port casts something with a chosen
-   target today. For each newly-targeted `CardEntity` whose card is on the battlefield and carries one or more `Ward`
-   lines (`KeywordLines`, printed and continuously granted alike — Layer 6 grants Ward the identical way it grants
+   target today, over `allTargetsOf(a)` (`castspell.go`), which also gathers a Charm's own chosen modes' targets
+   (`Ability.Modes[i].Targets`), so a modal spell aimed at a Warded creature is not missed. For each newly-targeted
+   `CardEntity`, deduped the same way `checkBecomesTargetTriggers` dedupes (a spell naming the same card twice fires
+   each Ward line once, not twice), whose card is on the battlefield and carries one or more `Ward` lines
+   (`KeywordLines`, printed and continuously granted alike — Layer 6 grants Ward the identical way it grants
    Hexproof/Shroud/Protection, ADR-0027's own pack), each line fires independently (CR 702.21g) when `sourceController`
    is an opponent of the warded card's controller (`matchesPlayerSpec`, the same "Opponent" check
    `cardCantBeTargetedBy`'s own Hexproof gate already makes) and TriggerZones$'s own Battlefield restriction holds.
@@ -96,22 +99,30 @@ re-check the same as anything else on the stack.
    `stackAbilityCandidates` (targeting.go) already names for `ChangeTargets`/`Counter`. `ChangeTargets`'s and
    `CopySpellAbility`'s own re-targeting call sites are out of scope for the identical reason plus one more: neither
    names the spell whose targeting just changed to the two call sites Ward reads from.
-4. **The built `Ability` has `API: APICounter`, `Controller` the targeting spell's own controller, `Source` the warded
-   card, and `Targets` a single `CardEntity` naming the targeting spell.** `Params` is a `*compile.Ability` built with
-   `designationTrigger`'s own `[]vocab.Param` literal shape: `DB$ Counter`, `TargetType$ Spell`,
-   `UnlessCost$ <the Ward line's own cost text>`, `UnlessPayer$ You` — "You" resolves to `Controller`
-   (`definedPlayers`'s own already-tested case), which is set to the attacker rather than the warded player specifically
-   so the existing string resolves to the correct payer without a new `TriggeredSourceSAController` case. `Targets` is
-   set directly rather than through `Defined$ TriggeredSourceSA` (which `counterEffect` does not read at all, and which
-   nothing in this port resolves yet) — a runtime-constructed `Ability` needs no `Defined$` indirection to reach a value
-   already sitting in Go, and `counterEffect` already reads `a.Targets` directly.
-5. **Pushed through `pushTriggeredAbilities`**, the same call every other triggered ability's own match list goes
-   through: `resolveTargets` is a no-op for it (no `ValidTgts$` named, so `Targets` set above survives untouched),
-   `PushAbility` stamps it (CR 400.7's own zoneStamp, ADR-0027) and appends it to the real stack, and `resolveTop`'s own
-   `targetsStillLegal` re-check (ADR-0027) means a spell that already left the stack by the time Ward resolves is
-   handled by the identical fizzle path every other stale target already is, no new code needed.
-   `checkBecomes TargetTriggers` firing again for the Ward-Counter's own `Targets` (the spell it names) is harmless:
-   nothing watches a card on the Stack for `BecomesTarget` today, and nothing in the corpus needs to.
+4. **The built `Ability` has `API: APICounter`, `Controller` the warded card's own controller (CR 603.3a: a triggered
+   ability's controller is its source's controller), `Source` the warded card, and `wardCounters` (`ability.go`) — a
+   dedicated `EntityID` field, not `Targets` — naming the targeting spell.** `wardCounters` is Forge's own
+   `Defined$ TriggeredSourceSA` stand-in, kept off `Targets` on purpose: a real `Targets` entry would run the spell
+   through `pushTriggeredAbilities`'s own post-push `checkBecomesTargetTriggers` scan (wrongly marking it
+   `BecameTargetThisTurn` and letting an unrelated watcher's `ValidTarget$` fire against a stack card) and through
+   `resolveTop`'s own CR 608.2b `targetsStillLegal` re-check (`cardCantBeTargetedBy` has no business running against a
+   spell). `counterEffect` (`countereffect.go`) reads `wardCounters` alongside `Targets` instead, and its own
+   `c.Zone != Stack` check is the identical "left the stack already" answer Forge's own
+   `getInstanceMatchingSpellAbilityID` null-check gives — no new `Defined$` resolution machinery needed. `Params` is a
+   `*compile.Ability` built with `designationTrigger`'s own `[]vocab.Param` literal shape: `DB$ Counter`,
+   `TargetType$ Spell`, `UnlessCost$ <the Ward line's own cost text>`, `UnlessPayer$ TriggeredSourceController` —
+   resolved through `definedPlayers`'s existing `TriggeredSource`/`TriggeredSourceController` case (`defined.go`)
+   against `Ability.triggered.source`/`.sourceController`, set to the targeting spell's `CardEntity` and its controller
+   respectively, so the payer is the attacker even though `Controller` above now names the warded player.
+5. **Collected into the same match slice as `checkBecomesTargetTriggers`'s own BecomesTarget matches from the identical
+   targeting event, then pushed together through one `pushTriggeredAbilities` call** (`castAura`/
+   `castInstantOrSorcery`, `castspell.go`) — CR 603.3b's APNAP batching, so Ward's own trigger shares a batch with every
+   other BecomesTarget trigger the same spell caused instead of always resolving first in a batch of its own.
+   `resolveTargets` is a no-op for the pushed `Ability` (no `ValidTgts$` named, and `Targets` itself is empty for Ward),
+   and `wardCounters` survives untouched alongside it. `PushAbility` stamps it (CR 400.7's own zoneStamp, ADR-0027) and
+   appends it to the real stack; `resolveTop`'s own `targetsStillLegal` re-check is a no-op too (empty `Targets`), so a
+   spell that already left the stack by the time Ward resolves is caught by `counterEffect`'s own zone check instead,
+   the identical answer Forge's own reference lookup gives.
 
 ## Consequences
 

@@ -34,7 +34,15 @@ func (counterEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 	if !ok {
 		dest = "Graveyard"
 	}
-	for _, t := range a.Targets {
+	targets := a.Targets
+	if a.wardCounters != NoEntity {
+		// checkWardTriggers' own Defined$ TriggeredSourceSA stand-in
+		// (ability.go's wardCounters doc comment, ADR-0028): the spell
+		// this Ward-built Counter counters, kept off Targets so it never
+		// ran through BecomesTarget or the CR 608.2b fizzle check.
+		targets = append(append([]EntityID(nil), targets...), a.wardCounters)
+	}
+	for _, t := range targets {
 		id, isCard := t.AsCard()
 		if !isCard {
 			continue

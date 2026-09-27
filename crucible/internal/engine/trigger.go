@@ -19,7 +19,11 @@ import (
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
+	"github.com/jczastkiewicz/crucible/internal/carddb/vocab"
+	"github.com/jczastkiewicz/crucible/internal/cost"
 	"github.com/jczastkiewicz/crucible/internal/expr"
+	"github.com/jczastkiewicz/crucible/internal/keyword"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -1967,7 +1971,7 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 				continue
 			}
 			g.PushAbility(matches[i])
-			g.checkBecomesTargetTriggers(controller, matches[i].Targets, false, matches[i].Controller)
+			g.pushTriggeredAbilities(controller, g.checkBecomesTargetTriggers(matches[i].Targets, false, matches[i].Controller))
 		}
 	}
 }
@@ -3137,7 +3141,7 @@ func isLandPlayedTrigger(t *compile.Ability) bool {
 // per-activator "have you not targeted this before" set, a separate
 // mechanic FirstTime$'s own plain bool cannot answer; ActivationLimit$ (3)
 // and Static$ (1) -- each its own further mechanic.
-func (g *Game) checkBecomesTargetTriggers(controller PlayerController, targets []EntityID, isSpellSource bool, sourceController PlayerID) {
+func (g *Game) checkBecomesTargetTriggers(targets []EntityID, isSpellSource bool, sourceController PlayerID) []Ability {
 	var matches []Ability
 	seen := make(map[EntityID]bool, len(targets))
 	for _, tgt := range targets {
@@ -3186,7 +3190,88 @@ func (g *Game) checkBecomesTargetTriggers(controller PlayerController, targets [
 			}
 		}
 	}
-	g.pushTriggeredAbilities(controller, matches)
+	return matches
+}
+
+// checkWardTriggers is CR 702.21a's own trigger, fired at the two call
+// sites that name the actual spell being cast (castAura, castInstantOrSorcery
+// -- ADR-0028's own scope: an activated or triggered ability has no
+// EntityID to hand counterEffect, and ChangeTargets/CopySpellAbility name
+// no spell CardID at their own call sites). Each of a newly-targeted
+// battlefield card's own Ward lines fires independently (CR 702.21g,
+// protectionEach's own "check every line" precedent, ADR-0027's implementing
+// pack) when spellController is an opponent of the warded card's own
+// controller -- matchesPlayerSpec's "Opponent" base, the identical check
+// cardCantBeTargetedBy's own Hexproof gate already makes. Deduped like
+// checkBecomesTargetTriggers' own seen set, so a spell naming the same
+// warded card twice (two target words) fires each Ward line once, not
+// twice.
+//
+// Built natively (ADR-0028 Decision point 4/5), not read off any card's
+// Def.Faces[].Triggers the way checkBecomesTargetTriggers' own scan is: no
+// script text names Ward's Execute$, so there is nothing to scan. Scoped to
+// the mana-cost shape only (Decision point 2) -- cost.Parse/mana.Parse's
+// own pre-check here mirrors resolveUnlessCost's (effect.go) exactly, so a
+// shape that would error there is never pushed here at all.
+//
+// Controller is the warded card's own controller (CR 603.3a: a triggered
+// ability's controller is its source's controller), not spellController --
+// APNAP ordering (pushTriggeredAbilities) and "an opponent controls this
+// ability" checks need the real controller. The payer is spellController:
+// UnlessPayer$ TriggeredSourceController resolves through
+// triggered.sourceController (definedPlayers, defined.go), set below to
+// spellController.
+//
+// Returned rather than pushed: castAura/castInstantOrSorcery combine this
+// with checkBecomesTargetTriggers' own matches from the same targeting
+// event into one pushTriggeredAbilities call, so Ward's trigger and every
+// other BecomesTarget trigger the same spell caused share one APNAP batch
+// (CR 603.3b) instead of Ward always resolving first in a batch of its own.
+func (g *Game) checkWardTriggers(targets []EntityID, spell CardID, spellController PlayerID) []Ability {
+	var matches []Ability
+	seen := make(map[EntityID]bool, len(targets))
+	for _, tgt := range targets {
+		if seen[tgt] {
+			continue
+		}
+		seen[tgt] = true
+
+		cid, ok := tgt.AsCard()
+		if !ok {
+			continue
+		}
+		c := g.Card(cid)
+		if c.Zone != Battlefield {
+			continue
+		}
+		if matched, _ := matchesPlayerSpec(g, spellController, c.Controller(), spell, "Opponent"); !matched {
+			continue
+		}
+		for _, line := range c.KeywordLines() {
+			k := keyword.Parse(line)
+			if k.Name != "Ward" || k.Details == "" {
+				continue
+			}
+			parsed := cost.Parse(k.Details)
+			if !parsed.IsPureMana() {
+				continue
+			}
+			manaCost, err := mana.Parse(strings.Join(parsed.Mana, " "))
+			if err != nil || manaCost.CountX() > 0 {
+				continue
+			}
+			params := &compile.Ability{Record: compile.SubAbility, Name: "Counter", Params: []vocab.Param{
+				{Key: "DB", Value: "Counter"}, {Key: "TargetType", Value: "Spell"},
+				{Key: "UnlessCost", Value: k.Details}, {Key: "UnlessPayer", Value: "TriggeredSourceController"},
+			}}
+			matches = append(matches, Ability{
+				API: APICounter, Source: cid, Controller: c.Controller(),
+				wardCounters: CardEntity(spell), Params: params,
+				triggered: triggeredObjects{source: CardEntity(spell), sourceController: spellController},
+			})
+		}
+	}
+	return matches
 }
 
 // isBecomesTargetTrigger reports whether t is a Mode$ BecomesTarget line

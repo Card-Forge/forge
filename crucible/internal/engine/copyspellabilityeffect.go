@@ -115,7 +115,7 @@ func (copySpellAbilityEffect) Resolve(g *Game, a *Ability, controller PlayerCont
 		// isSpellSource as castInstantOrSorcery/castAura pass it: true only
 		// for an Aura (becomesTargetSourceMatches reads .Aura as always true
 		// under a spell source).
-		g.checkBecomesTargetTriggers(controller, tg.targets, tg.aura, tg.copier)
+		g.pushTriggeredAbilities(controller, g.checkBecomesTargetTriggers(tg.targets, tg.aura, tg.copier))
 	}
 	return nil
 }

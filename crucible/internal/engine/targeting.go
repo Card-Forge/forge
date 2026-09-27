@@ -539,9 +539,10 @@ func (g *Game) withoutIllegal(owner *Ability, targets []EntityID, chosen, kept *
 // cardCantBeTargetedBy/playerCantBeTargetedBy) are checked identically to
 // targetCandidates (Java's own SpellAbility.canTarget runs
 // entity.canBeTargetedBy(this) at both call sites regardless of
-// fizzleCheck, no asymmetry). Ward (StaticAbilityCantTarget's own
-// BecomesTarget-triggered cost-tax, a different mechanism entirely) is
-// not; that gap is logged in game-state.md's Not ported yet.
+// fizzleCheck, no asymmetry). Ward is not a "can't be targeted" check at
+// all -- it is CR 702.21a's own triggered ability, fired once a target is
+// chosen rather than filtering candidates (checkWardTriggers, trigger.go,
+// ADR-0028), so it has no place in this function.
 func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 	spec, hasSpec := targetSpec(owner)
 	if pid, ok := e.AsPlayer(); ok {

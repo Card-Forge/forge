@@ -1,0 +1,8 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humangraveyard=Tomakul Honor Guard
+ailife=20
+aibattlefield=Mountain|Id:2|Tapped;Mountain|Id:3|Tapped;Mountain|Id:4|Tapped
+aigraveyard=Lightning Bolt

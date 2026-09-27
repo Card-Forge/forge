@@ -75,6 +75,7 @@ import (
 //	queue payphyrexian <bool>            ScriptedController.QueuePayPhyrexian
 //	queue payhybridphyrexian <color|life> ScriptedController.QueuePayHybridPhyrexian, "life" for the zero mana.Colors answer
 //	queue confirmeffect <bool>           ScriptedController.QueueConfirmEffect, an effect's yes/no prompt
+//	queue confirmpaycost <bool>          ScriptedController.QueueConfirmPayCost, an UnlessCost$ pay-or-not prompt
 //	queue optionaltrigger <bool>         ScriptedController.QueueConfirmOptionalTrigger, an OptionalDecider$ trigger's "you may"
 //
 // A scenario that needs a decision point no verb here reaches -- choosing
@@ -451,6 +452,13 @@ func runQueue(args []string, l *Loaded, c *engine.ScriptedController) error {
 			return fmt.Errorf("queue hybridmanacolor %q: %w", value, err)
 		}
 		c.QueueHybridManaColor(color)
+
+	case "confirmpaycost":
+		v, err := strconv.ParseBool(value)
+		if err != nil {
+			return fmt.Errorf("queue confirmpaycost %q: %w", value, err)
+		}
+		c.QueueConfirmPayCost(v)
 
 	case "paymonocoloredhybrid":
 		v, err := strconv.ParseBool(value)

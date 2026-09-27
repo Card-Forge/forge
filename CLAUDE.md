@@ -210,8 +210,9 @@ that exact name and never surface in `unported-apis.sh`'s corpus-driven listing 
 `scripts/unported-apis.sh`): `Planeswalk` (30), `ChangeText` (17), `ControlPlayer` (11).
 
 Thin or missing: Layer 1 past `Clone`'s "becomes a copy" (no "enters as a copy"); most of Layers 3-8 past their literal
-shapes; Ward as a targeting restriction (it is a `BecomesTarget` trigger + `Counter`/`UnlessCost$`, not a static check —
-Hexproof/Shroud/Protection are ported). Full list: `port-log/game-state.md`, "Not ported yet".
+shapes; Ward's own non-mana cost shapes (`PayLife`/`Discard`/`Sac`/`Ward:X`) and ability-source/retargeted Ward — the
+mana-cost shape against a directly cast spell is ported (ADR-0028), alongside Hexproof/Shroud/Protection. Full list:
+`port-log/game-state.md`, "Not ported yet".
 
 **P4 exit gate:** fixture-count half met (≥300 scenarios, `testdata/scenarios/`); qualitative half ("every layer, every
 SBA," Plan Section 3.2) not.
