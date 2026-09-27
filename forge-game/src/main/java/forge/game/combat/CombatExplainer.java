@@ -21,18 +21,26 @@ import com.google.common.collect.Multimaps;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAttackRestrict;
+import forge.game.staticability.StaticAbilityBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustAttack;
+import forge.game.staticability.StaticAbilityMustBlock;
+import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 
 /**
- * Human readable explanations of why an attack is not allowed.
+ * Human readable explanations of why an attack or block is not allowed.
  * <p>
  * The checks mirror {@link CombatUtil}; every method returns null (or an empty list) when the action is legal.
  */
@@ -350,6 +358,242 @@ public final class CombatExplainer {
         return attack.entrySet().stream()
                 .map(e -> loc.getMessage("lblWhyAttackAssignment", e.getKey(), e.getValue()))
                 .collect(Collectors.joining(", "));
+    }
+
+    // ///////////////////////////////////
+    // ////////// BLOCK METHODS //////////
+    // ///////////////////////////////////
+
+    /**
+     * Explain why the blocker can't block the attacker, mirroring {@link CombatUtil#canBlock(Card, Card, Combat)}.
+     *
+     * @return the reason, or null if the blocker can block the attacker
+     */
+    public static String whyCantBlock(final Card attacker, final Card blocker, final Combat combat) {
+        if (attacker == null || blocker == null || CombatUtil.canBlock(attacker, blocker, combat)) {
+            return null;
+        }
+        final Localizer loc = Localizer.getInstance();
+
+        if (combat != null) {
+            if (!CombatUtil.canBlockMoreCreatures(blocker, combat.getAttackersBlockedBy(blocker))) {
+                return loc.getMessage("lblWhyBlockCantBlockMore", blocker);
+            }
+            final CardCollection otherBlockers = combat.getAllBlockers();
+            otherBlockers.remove(blocker);
+            final int maxBlockers = StaticAbilityBlockRestrict.blockRestrictNum(blocker.getController());
+            if (CardLists.count(otherBlockers, CardPredicates.isController(blocker.getController())) >= maxBlockers) {
+                return loc.getMessage("lblWhyBlockMaxBlockers", maxBlockers,
+                        describeSources(StaticAbilityBlockRestrict.blockRestrictSources(blocker.getController())));
+            }
+        }
+
+        final String cantBlockAtAll = whyCantBlockAtAll(blocker);
+        if (cantBlockAtAll != null) {
+            return cantBlockAtAll;
+        }
+
+        if (!CombatUtil.canBeBlocked(attacker, combat, blocker.getController())) {
+            if (combat != null) {
+                final int maxBlockedBy = StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, blocker.getController()).getRight();
+                if (maxBlockedBy == combat.getBlockers(attacker).size()) {
+                    return loc.getMessage("lblWhyBlockAttackerMaxBlockers", attacker, maxBlockedBy);
+                }
+                final Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
+                if (attacked != null && attacked != blocker.getController()) {
+                    return loc.getMessage("lblWhyBlockNotAttackingYou", attacker, attacked);
+                }
+            }
+            final StaticAbility unblockable = StaticAbilityCantAttackBlock.findCantBlockByAbility(attacker, null);
+            if (unblockable != null) {
+                return loc.getMessage("lblWhyBlockUnblockable", attacker, describeSource(unblockable));
+            }
+        }
+
+        if (combat != null && combat.isBlocking(blocker, attacker)) {
+            return loc.getMessage("lblWhyBlockAlreadyBlocking", blocker, attacker);
+        }
+
+        final StaticAbility cantBlockBy = StaticAbilityCantAttackBlock.findCantBlockByAbility(attacker, blocker);
+        if (cantBlockBy != null) {
+            return loc.getMessage("lblWhyBlockCantBlockBy", attacker, blocker, describeSource(cantBlockBy));
+        }
+
+        // what remains is a requirement to block another attacker (lure effects)
+        if (combat != null && CombatUtil.mustBlockAnAttacker(blocker, combat, null)) {
+            return explainMustBlockAnAttacker(blocker, combat, null);
+        }
+
+        return loc.getMessage("lblWhyBlockGeneric", blocker, attacker);
+    }
+
+    /**
+     * Explain why the blocker can't block at all, mirroring {@link CombatUtil#canBlock(Card)}.
+     *
+     * @return the reason, or null if the blocker could block
+     */
+    public static String whyCantBlockAtAll(final Card blocker) {
+        if (CombatUtil.canBlock(blocker)) {
+            return null;
+        }
+        final Localizer loc = Localizer.getInstance();
+        if (!blocker.isCreature() || blocker.isBattle()) {
+            return loc.getMessage("lblWhyBlockNotCreature", blocker);
+        }
+        if (blocker.isPhasedOut()) {
+            return loc.getMessage("lblWhyBlockPhasedOut", blocker);
+        }
+        if (blocker.isTapped() && !StaticAbilityCantAttackBlock.canBlockTapped(blocker)) {
+            return loc.getMessage("lblWhyBlockTapped", blocker);
+        }
+        for (final String keyword : List.of("CARDNAME can't block.", "CARDNAME can't attack or block.")) {
+            if (blocker.hasKeyword(keyword)) {
+                return describeKeyword(blocker, keyword);
+            }
+        }
+        if (blocker.isDetained()) {
+            return loc.getMessage("lblWhyBlockDetained", blocker);
+        }
+        final StaticAbility stAb = StaticAbilityCantAttackBlock.findCantBlockAbility(blocker);
+        if (stAb != null) {
+            return loc.getMessage("lblWhyBlockBecauseOf", blocker, describeSource(stAb));
+        }
+        for (final String keyword : List.of("CARDNAME can't attack or block alone.", "CARDNAME can't block alone.")) {
+            if (blocker.hasKeyword(keyword)) {
+                return describeKeyword(blocker, keyword);
+            }
+        }
+        return loc.getMessage("lblWhyBlockCantBlock", blocker);
+    }
+
+    /**
+     * Explain why the blocker must block one of the attackers requiring it to block (lure and "must block" effects).
+     *
+     * @see CombatUtil#mustBlockAnAttacker(Card, Combat, List)
+     */
+    public static String explainMustBlockAnAttacker(final Card blocker, final Combat combat, final List<Card> freeBlockers) {
+        final Localizer loc = Localizer.getInstance();
+        final CardCollection required = CombatUtil.getBlockRequirementAttackers(blocker, combat, freeBlockers);
+        final String reasons = required.stream()
+                .map(attacker -> describeBlockRequirement(attacker, blocker))
+                .distinct()
+                .collect(Collectors.joining("; "));
+        final String attackers = Lang.joinHomogenous(required, null, loc.getMessage("lblOr"));
+        final CardCollection blocking = combat.getAttackersBlockedBy(blocker);
+        if (blocking.isEmpty()) {
+            return loc.getMessage("lblWhyBlockMustBlockReq", blocker, attackers, reasons);
+        }
+        return loc.getMessage("lblWhyBlockMustBlockReqInstead", blocker, attackers, reasons, Lang.joinHomogenous(blocking));
+    }
+
+    /**
+     * Explain why the blocker must still block the attacker it was required to block by an effect.
+     */
+    public static String explainMustStillBlock(final Card blocker, final Card attacker) {
+        return Localizer.getInstance().getMessage("lblWhyBlockMustBlockReq", blocker, attacker, describeBlockRequirement(attacker, blocker));
+    }
+
+    /**
+     * Explain why the creature must block although it wasn't assigned to block ("blocks each combat if able").
+     */
+    public static String explainBlocksEachCombat(final Card blocker, final Card attacker) {
+        final Localizer loc = Localizer.getInstance();
+        final StaticAbility stAb = StaticAbilityMustBlock.findBlocksEachCombatIfAble(blocker);
+        if (stAb == null || (stAb.toString().isEmpty() && stAb.getHostCard() == blocker)) {
+            // the creature's own ability without any text to show
+            return loc.getMessage("lblWhyBlockEachCombatSelf", blocker, attacker);
+        }
+        return loc.getMessage("lblWhyBlockEachCombat", blocker, describeSource(stAb), attacker);
+    }
+
+    /**
+     * Explain why the attacker can't be blocked by the number of creatures assigned to block it (menace, ...).
+     */
+    public static String explainBlockerAmount(final Card attacker, final int amount, final Player defender) {
+        final Localizer loc = Localizer.getInstance();
+        final Pair<Integer, Integer> minMax = StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defender);
+
+        final List<String> sources = Lists.newArrayList();
+        for (final KeywordInterface inst : attacker.getKeywords()) {
+            if (inst.getKeyword() == Keyword.MENACE) {
+                sources.add(attacker + ": " + inst.getTitle() + " (" + inst.getReminderText() + ")");
+                break;
+            }
+        }
+        StaticAbilityCantAttackBlock.minMaxBlockerSources(attacker).stream()
+                .map(CombatExplainer::describeSource)
+                .forEach(sources::add);
+        final String source = sources.isEmpty() ? attacker.toString() : String.join("; ", sources);
+
+        if (amount < minMax.getLeft()) {
+            return loc.getMessage("lblWhyBlockTooFewBlockers", attacker, minMax.getLeft(), amount, source);
+        }
+        return loc.getMessage("lblWhyBlockTooManyBlockers", attacker, minMax.getRight(), amount, source);
+    }
+
+    /**
+     * @return why the blocker is required to block the attacker, naming the card responsible where possible
+     */
+    private static String describeBlockRequirement(final Card attacker, final Card blocker) {
+        final Localizer loc = Localizer.getInstance();
+        final Set<String> reasons = new LinkedHashSet<>();
+        if (blocker.getMustBlockCards().contains(attacker)) {
+            reasons.add(loc.getMessage("lblWhyBlockReqEffect", blocker, attacker));
+        }
+        for (final String keyword : LURE_KEYWORDS) {
+            if (!attacker.hasStartOfKeyword(keyword)) {
+                continue;
+            }
+            final int before = reasons.size();
+            // hidden keywords granted by a static ability (e.g. Lure)
+            for (final long staticId : attacker.getHiddenExtrinsicKeywordStaticIds(keyword)) {
+                final StaticAbility stAb = findStaticAbility(attacker, staticId);
+                if (stAb != null) {
+                    reasons.add(describeSource(stAb));
+                }
+            }
+            for (final KeywordInterface inst : attacker.getKeywords()) {
+                if (inst.getOriginal().startsWith(keyword)) {
+                    reasons.add(inst.getStatic() != null ? describeSource(inst.getStatic()) : describeLureKeyword(attacker, inst.getOriginal()));
+                }
+            }
+            if (reasons.size() == before) {
+                reasons.add(describeLureKeyword(attacker, keyword));
+            }
+        }
+        if (reasons.isEmpty()) {
+            reasons.add(loc.getMessage("lblWhyBlockReqEffect", blocker, attacker));
+        }
+        return String.join("; ", reasons);
+    }
+
+    private static final String[] LURE_KEYWORDS = {
+            "All creatures able to block CARDNAME do so.",
+            "CARDNAME must be blocked if able.",
+            "CARDNAME must be blocked by exactly one creature if able.",
+            "CARDNAME must be blocked by two or more creatures if able.",
+            "MustBeBlockedBy"
+    };
+
+    private static String describeLureKeyword(final Card attacker, final String keyword) {
+        if (keyword.startsWith("MustBeBlockedBy")) {
+            return Localizer.getInstance().getMessage("lblWhyBlockReqMustBeBlockedBy", attacker);
+        }
+        return attacker + ": " + keyword.replace("CARDNAME", attacker.getName());
+    }
+
+    private static StaticAbility findStaticAbility(final Card card, final long id) {
+        if (id == 0) {
+            return null;
+        }
+        for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.getId() == id) {
+                    return stAb;
+                }
+            }
+        }
+        return null;
     }
 
     // ////////////////////////////////////

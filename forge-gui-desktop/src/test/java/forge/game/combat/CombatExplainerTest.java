@@ -177,4 +177,109 @@ public class CombatExplainerTest extends SimulationTest {
         AssertJUnit.assertFalse(explanation, explanation.contains(token + " must attack"));
         assertContains(CombatExplainer.suggestLegalAttacks(combat), otherToken + " attacking " + otherDesignated);
     }
+
+    @Test
+    public void testFlyingPreventsBlock() {
+        setUp();
+        Card angel = addCreature("Serra Angel", attacking);
+        Card bear = addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(angel, defending);
+
+        AssertJUnit.assertFalse(CombatUtil.canBlock(angel, bear, combat));
+        assertContains(CombatExplainer.whyCantBlock(angel, bear, combat), "Serra Angel", "Grizzly Bears", "Flying");
+    }
+
+    @Test
+    public void testCanBlockHasNoReason() {
+        setUp();
+        Card attacker = addCreature("Grizzly Bears", attacking);
+        Card blocker = addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(attacker, defending);
+
+        AssertJUnit.assertNull(CombatExplainer.whyCantBlock(attacker, blocker, combat));
+    }
+
+    @Test
+    public void testTappedBlocker() {
+        setUp();
+        Card attacker = addCreature("Grizzly Bears", attacking);
+        Card blocker = addCreature("Grizzly Bears", defending);
+        blocker.setTapped(true);
+        Combat combat = startCombat();
+        combat.addAttacker(attacker, defending);
+
+        assertContains(CombatExplainer.whyCantBlock(attacker, blocker, combat), "tapped");
+    }
+
+    @Test
+    public void testCantBlockAlone() {
+        setUp();
+        Card attacker = addCreature("Grizzly Bears", attacking);
+        Card mogg = addCreature("Mogg Flunkies", defending);
+        addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(attacker, defending);
+        combat.addBlocker(attacker, mogg);
+
+        assertContains(CombatUtil.validateBlocks(combat, defending), mogg.toString(), "can't attack or block alone.");
+    }
+
+    @Test
+    public void testLureSkippedBlock() {
+        setUp();
+        Card attacker = addCreature("Grizzly Bears", attacking);
+        Card lure = addCard("Lure", attacking);
+        lure.attachToEntity(attacker, null);
+        Card blocker = addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(attacker, defending);
+
+        assertContains(CombatUtil.validateBlocks(combat, defending), blocker.toString(), attacker.toString(),
+                "Lure", "All creatures able to block enchanted creature do so.");
+    }
+
+    @Test
+    public void testLureBlockingOtherAttacker() {
+        setUp();
+        Card lured = addCreature("Grizzly Bears", attacking);
+        Card lure = addCard("Lure", attacking);
+        lure.attachToEntity(lured, null);
+        Card other = addCreature("Grizzly Bears", attacking);
+        Card blocker = addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(lured, defending);
+        combat.addAttacker(other, defending);
+
+        // clicking the other attacker's blocker is rejected with the lure as reason
+        AssertJUnit.assertFalse(CombatUtil.canBlock(other, blocker, combat));
+        assertContains(CombatExplainer.whyCantBlock(other, blocker, combat), lured.toString(), "Lure");
+
+        combat.addBlocker(other, blocker);
+        assertContains(CombatUtil.validateBlocks(combat, defending), "is blocking " + other, lured.toString(), "Lure");
+    }
+
+    @Test
+    public void testBlocksEachCombatIfAble() {
+        setUp();
+        Card attacker = addCreature("Grizzly Bears", attacking);
+        Card golem = addCreature("Iron Golem", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(attacker, defending);
+
+        assertContains(CombatUtil.validateBlocks(combat, defending), golem.toString(), attacker.toString(), "each combat");
+    }
+
+    @Test
+    public void testMenaceSingleBlocker() {
+        setUp();
+        Card brute = addCreature("Boggart Brute", attacking);
+        Card blocker = addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(brute, defending);
+        combat.addBlocker(brute, blocker);
+
+        assertContains(CombatUtil.validateBlocks(combat, defending), brute.toString(), "at least 2", "Menace");
+    }
 }

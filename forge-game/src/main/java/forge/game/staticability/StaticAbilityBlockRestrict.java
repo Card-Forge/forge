@@ -6,6 +6,9 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StaticAbilityBlockRestrict {
 
     static public int blockRestrictNum(Player defender) {
@@ -27,6 +30,21 @@ public class StaticAbilityBlockRestrict {
             }
         }
         return num;
+    }
+
+    /**
+     * @return the BlockRestrict static abilities limiting the number of blockers of the defender
+     */
+    static public List<StaticAbility> blockRestrictSources(Player defender) {
+        final List<StaticAbility> result = new ArrayList<>();
+        for (final Card ca : defender.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.checkConditions(StaticAbilityMode.BlockRestrict) && blockRestrict(stAb, defender)) {
+                    result.add(stAb);
+                }
+            }
+        }
+        return result;
     }
 
     static public boolean blockRestrict(StaticAbility stAb, Player defender) {

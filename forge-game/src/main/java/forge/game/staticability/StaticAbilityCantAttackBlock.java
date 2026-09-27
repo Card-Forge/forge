@@ -17,6 +17,9 @@
  */
 package forge.game.staticability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -163,6 +166,13 @@ public class StaticAbilityCantAttackBlock {
             return true;
         }
 
+        return findCantBlockAbility(blocker) != null;
+    }
+
+    /**
+     * @return the first CantBlock static ability preventing blocker from blocking, or null
+     */
+    public static StaticAbility findCantBlockAbility(final Card blocker) {
         CardCollection list = new CardCollection(blocker);
         list.addAll(blocker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : list) {
@@ -171,11 +181,11 @@ public class StaticAbilityCantAttackBlock {
                     continue;
                 }
                 if (applyCantBlockAbility(stAb, blocker)) {
-                    return true;
+                    return stAb;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     public static boolean applyCantBlockAbility(final StaticAbility stAb, final Card blocker) {
@@ -212,6 +222,13 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean cantBlockBy(final Card attacker, final Card blocker) {
+        return findCantBlockByAbility(attacker, blocker) != null;
+    }
+
+    /**
+     * @return the first CantBlockBy static ability preventing blocker from blocking attacker, or null
+     */
+    public static StaticAbility findCantBlockByAbility(final Card attacker, final Card blocker) {
         // add attacker and blocker first in case of LKI
         CardCollection list = new CardCollection(attacker);
         if (blocker != null) {
@@ -224,11 +241,11 @@ public class StaticAbilityCantAttackBlock {
                     continue;
                 }
                 if (applyCantBlockByAbility(stAb, attacker, blocker)) {
-                    return true;
+                    return stAb;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -448,6 +465,21 @@ public class StaticAbilityCantAttackBlock {
                     continue;
                 }
                 applyMinMaxBlockerAbility(stAb, attacker, defender, result);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @return the MinMaxBlocker static abilities that apply to the attacker
+     */
+    public static List<StaticAbility> minMaxBlockerSources(final Card attacker) {
+        final List<StaticAbility> result = new ArrayList<>();
+        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.checkConditions(StaticAbilityMode.MinMaxBlocker) && stAb.matchesValidParam("ValidCard", attacker)) {
+                    result.add(stAb);
+                }
             }
         }
         return result;
