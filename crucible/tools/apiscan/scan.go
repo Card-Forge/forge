@@ -218,8 +218,14 @@ func readParams(path string) (map[string]bool, error) {
 		return nil, err
 	}
 	keys := map[string]bool{}
+	addParams(keys, string(raw))
+	return keys, nil
+}
+
+// addParams adds every param key src reads to keys.
+func addParams(keys map[string]bool, src string) {
 	for _, re := range []*regexp.Regexp{paramRead, helperRead, keyVariable, validParamRead} {
-		for _, m := range re.FindAllStringSubmatch(string(raw), -1) {
+		for _, m := range re.FindAllStringSubmatch(src, -1) {
 			for _, key := range m[1:] {
 				if key != "" {
 					keys[key] = true
@@ -227,7 +233,6 @@ func readParams(path string) (map[string]bool, error) {
 			}
 		}
 	}
-	return keys, nil
 }
 
 func sorted(set map[string]bool) []string {
@@ -420,6 +425,7 @@ func readExclusions(path string) (map[string]bool, error) {
 // TokenEffectBase, and an API whose vocabulary stops at its own file is an API
 // reported as not reading params it plainly reads.
 func readEffectParams(effects, class string) (map[string]bool, error) {
+	start := class
 	keys, err := readParams(filepath.Join(effects, class+".java"))
 	if err != nil {
 		return nil, err
@@ -446,5 +452,68 @@ func readEffectParams(effects, class string) (map[string]bool, error) {
 			keys[key] = true
 		}
 	}
+	addHelperParams(effects, start, keys)
 	return keys, nil
+}
+
+// staticCall matches a call to a static method of another class,
+// `TokenEffectBase.addPumpUntil(sa, ...)`: the class and the method name.
+var staticCall = regexp.MustCompile(`\b([A-Z][A-Za-z0-9_]*)\.([a-z][A-Za-z0-9_]*)\s*\(`)
+
+// addHelperParams adds the params read by every static method of another
+// effect class that class's own file calls. CloneEffect is no TokenEffectBase,
+// yet reads PumpDuration$ through TokenEffectBase.addPumpUntil(sa, ...); the
+// superclass chain alone reports it as a param Clone never reads. Only the
+// called method's own body counts, never the rest of its class, and only one
+// level deep: a helper's own helpers are not followed.
+func addHelperParams(effects, class string, keys map[string]bool) {
+	raw, err := os.ReadFile(filepath.Join(effects, class+".java"))
+	if err != nil {
+		return
+	}
+	for _, m := range staticCall.FindAllStringSubmatch(string(raw), -1) {
+		if m[1] == class {
+			continue
+		}
+		other, err := os.ReadFile(filepath.Join(effects, m[1]+".java"))
+		if err != nil {
+			continue
+		}
+		if body, ok := staticMethodBody(string(other), m[2]); ok {
+			addParams(keys, body)
+		}
+	}
+}
+
+// staticMethodBody returns the body of the static method name declared in
+// src, braces included, by counting braces from the declaration's first one.
+// Braces inside string or character literals would miscount; a miscount only
+// widens what counts as read, never narrows it.
+func staticMethodBody(src, name string) (string, bool) {
+	decl, err := regexp.Compile(`\bstatic\b[^;{=]*\b` + regexp.QuoteMeta(name) + `\s*\(`)
+	if err != nil {
+		return "", false
+	}
+	loc := decl.FindStringIndex(src)
+	if loc == nil {
+		return "", false
+	}
+	open := strings.IndexByte(src[loc[1]:], '{')
+	if open < 0 {
+		return "", false
+	}
+	start := loc[1] + open
+	depth := 0
+	for i := start; i < len(src); i++ {
+		switch src[i] {
+		case '{':
+			depth++
+		case '}':
+			depth--
+			if depth == 0 {
+				return src[start : i+1], true
+			}
+		}
+	}
+	return "", false
 }

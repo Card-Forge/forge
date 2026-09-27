@@ -197,7 +197,10 @@ type Face struct {
 	// interpret it downstream" split Type/Power/Toughness/Loyalty already
 	// use. Expanding a keyword into the triggers, statics and abilities it
 	// stands for is a different job entirely (keyword.go's own doc
-	// comment) that this does not do.
+	// comment), done here for two keywords only, each because it names an
+	// SVar nothing else would compile: `Dungeon` (its rooms, added to
+	// Triggers) and `ETBReplacement` (its replacement, added to
+	// Replacements). The keyword line itself stays here too.
 	Keywords []string
 
 	Abilities    []*Ability
@@ -280,6 +283,16 @@ func compileFace(face *carddb.Face) (Face, error) {
 		}
 	}
 	for _, kw := range face.Keywords {
+		if rest, ok := strings.CutPrefix(kw, "ETBReplacement:"); ok {
+			r, err := c.etbReplacement(rest)
+			if err != nil {
+				return Face{}, err
+			}
+			if r != nil {
+				out.Replacements = append(out.Replacements, r)
+			}
+			continue
+		}
 		rooms, ok := strings.CutPrefix(kw, "Dungeon:")
 		if !ok {
 			continue
@@ -354,6 +367,80 @@ func (c *faceCompiler) dungeonRooms(svars []string) ([]*Ability, error) {
 		})
 	}
 	return triggers, nil
+}
+
+// ErrBadETBReplacement is a `K:ETBReplacement` keyword too short to name
+// its SVar, or naming a replacement layer Forge does not have.
+var ErrBadETBReplacement = errors.New("bad ETBReplacement keyword")
+
+// replacementLayers are ReplacementLayer.java's values, the only ones
+// ReplacementLayer.smartValueOf accepts (case-insensitively).
+var replacementLayers = [...]string{"CantHappen", "Control", "Copy", "Transform", "Other"}
+
+// etbReplacement expands one `K:ETBReplacement:<Layer>:<SVar>[:<Optional>
+// [:<Zone>[:<Valid>]]]` keyword (rest is what follows the prefix) into the
+// replacement it stands for, the way CardFactoryUtil.java:2595-2606 and
+// createETBReplacement (CardFactoryUtil.java:515-543) do at card creation:
+//
+//	Event$ Moved | ValidCard$ <Valid> | Destination$ Battlefield | ReplacementResult$ Updated | Layer$ <Layer>
+//
+// plus Optional$ True when the fourth field contains "Optional", ActiveZones$
+// <Zone> when the fifth is present, and Description$ from the SVar's own
+// SpellDescription$. The SVar is the replacement's ReplaceWith$ ability.
+// Valid defaults to Card.Self: the keyword's own card entering. Layer$ is a
+// param here rather than a field because that is how an R: line spells the
+// same thing, and ReplacementEffect's constructor reads it the same way
+// (ReplacementEffect.java:109-111). Nothing references the SVar through a
+// param, so without this it would compile nowhere (PORT-2).
+//
+// Only the Copy layer (68 cards, "enters as a copy") is expanded; any other
+// layer returns nil. The engine dispatches no other ETBReplacement layer
+// yet, and compiling the Other layer's 353 SVars surfaces two dead params
+// (ListTitle$ on ChooseEvenOdd, ashlings_prerogative.txt and
+// gollum_riddle_master.txt) that the tools/apiscan -api gate would fail on:
+// those belong to whoever ports the Other layer, not to Layer 1.
+func (c *faceCompiler) etbReplacement(rest string) (*Ability, error) {
+	fields := strings.Split(rest, ":")
+	if len(fields) < 2 {
+		return nil, fmt.Errorf("%w: %q names no SVar", ErrBadETBReplacement, rest)
+	}
+	layer := ""
+	for _, l := range replacementLayers {
+		if strings.EqualFold(l, strings.TrimSpace(fields[0])) {
+			layer = l
+		}
+	}
+	if layer == "" {
+		return nil, fmt.Errorf("%w: %q names no replacement layer", ErrBadETBReplacement, rest)
+	}
+	if layer != "Copy" {
+		return nil, nil
+	}
+	ref, err := c.reference("ReplaceWith", fields[1])
+	if err != nil {
+		return nil, err
+	}
+	// fields is Java's splitkw without its leading "ETBReplacement", so
+	// splitkw[n] is fields[n-1].
+	validCard := "Card.Self"
+	if len(fields) >= 5 {
+		validCard = fields[4]
+	}
+	params := []vocab.Param{
+		{Key: "Event", Value: "Moved"}, {Key: "ValidCard", Value: validCard},
+		{Key: "Destination", Value: "Battlefield"}, {Key: "ReplacementResult", Value: "Updated"},
+		{Key: "Layer", Value: layer}, {Key: "ReplaceWith", Value: fields[1]},
+	}
+	if len(fields) >= 3 && strings.Contains(fields[2], "Optional") {
+		params = append(params, vocab.Param{Key: "Optional", Value: "True"})
+	}
+	if len(fields) >= 4 && fields[3] != "" {
+		params = append(params, vocab.Param{Key: "ActiveZones", Value: fields[3]})
+	}
+	if desc, ok := ref.Ability.Param("SpellDescription"); ok {
+		params = append(params, vocab.Param{Key: "Description", Value: desc})
+	}
+	return &Ability{Record: Replacement, Name: "Moved", Params: params, Subs: []SubRef{ref}}, nil
 }
 
 // compileAmounts parses every SVar face defines that is NOT itself an
