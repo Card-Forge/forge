@@ -19,15 +19,15 @@ public class ScreenUtil implements Disposable {
     private final int THUMB_WIDTH = 256;
     private final int THUMB_HEIGHT = 144;
     ByteBuffer pixels;
-    int fbW, fbH, bufferSize, width, height;
+    int bufferSize, width, height;
     private static boolean isInitialized = false;
     private volatile boolean pendingScreenshot = false;
     private static boolean firstCapture = true;
 
     private ScreenUtil() {
-        fbW = Forge.getScreenWidth();
-        fbH = Forge.getScreenHeight();
-        bufferSize = fbW * fbH * 4;
+        width = Forge.getScreenWidth();
+        height = Forge.getScreenHeight();
+        bufferSize = width * height * 4;
         pixels = BufferUtils.newByteBuffer(bufferSize);
     }
 
@@ -37,9 +37,6 @@ public class ScreenUtil implements Disposable {
 
     public void initScreenshotBuffer() {
         if (isInitialized) return;
-
-        width = forge.Forge.getScreenWidth();
-        height = forge.Forge.getScreenHeight();
         screenshotTexture = new Texture(width, height, Pixmap.Format.RGB565);
         screenTextureRegion = new TextureRegion(screenshotTexture);
         screenTextureRegion.flip(false, true);
@@ -78,16 +75,16 @@ public class ScreenUtil implements Disposable {
         pixels.clear();
         // Read full framebuffer into a ByteBuffer
         Gdx.gl.glPixelStorei(GL20.GL_PACK_ALIGNMENT, 1);
-        Gdx.gl.glReadPixels(0, 0, fbW, fbH, GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, pixels);
+        Gdx.gl.glReadPixels(0, 0, width, height, GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, pixels);
         pixels.rewind();
 
         // Downscale manually (nearest-neighbor for speed)
         for (int y = 0; y < THUMB_HEIGHT; y++) {
             for (int x = 0; x < THUMB_WIDTH; x++) {
-                int srcX = x * fbW / THUMB_WIDTH;
-                int srcY = y * fbH / THUMB_HEIGHT;
+                int srcX = x * width / THUMB_WIDTH;
+                int srcY = y * height / THUMB_HEIGHT;
 
-                int index = (srcY * fbW + srcX) * 4;
+                int index = (srcY * width + srcX) * 4;
                 int r = pixels.get(index) & 0xFF;
                 int g = pixels.get(index + 1) & 0xFF;
                 int b = pixels.get(index + 2) & 0xFF;
