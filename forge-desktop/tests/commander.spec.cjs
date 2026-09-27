@@ -40,7 +40,7 @@ test('a 100-card Toph list can pick a valid commander and start a 40-life AI gam
     await expect(page.locator('#match-opponent-description')).toContainText('Torbran');
     await page.screenshot({ path: path.join(appPath, 'test-results/commander-setup.png') });
     await page.locator('#match-start').click();
-    await expect(page.locator('#match-human .match-life b')).toHaveText('40');
+    await expect(page.locator('#match-self .match-life b')).toHaveText('40');
     await expect(page.locator('#match-opponent .match-life b')).toHaveText('40');
     await expect(page.locator('#match-human .match-command-zone')).toContainText('Toph, the First Metalbender');
     await expect(page.locator('#match-opponent .match-command-zone')).toContainText('Torbran, Thane of Red Fell');
@@ -60,7 +60,7 @@ test('a 100-card Toph list can pick a valid commander and start a 40-life AI gam
     await expect(page.locator('.match-zone summary')).toHaveCount(4);
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1120, 740));
     await expect.poll(() => page.locator('#match-hand').evaluate(element => element.getBoundingClientRect().bottom <= innerHeight)).toBe(true);
-    const targets = await page.locator('#match-human .match-life, #match-opponent .match-life, .match-command-zone .match-card, #match-hand .match-card').evaluateAll(elements => elements.map(element => {
+    const targets = await page.locator('#match-self .match-life, #match-opponent .match-life, .match-command-zone .match-card, #match-hand .match-card').evaluateAll(elements => elements.map(element => {
       const rect = element.getBoundingClientRect();
       return rect.top >= 0 && rect.bottom <= innerHeight && rect.left >= 0 && rect.right <= innerWidth;
     }));

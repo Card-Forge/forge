@@ -42,6 +42,7 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     const actions = () => page.evaluate(() => window.gestureActions);
     async function lift() {
       await card.focus();
+      await page.keyboard.press('Home');
       const box = await card.boundingBox();
       await page.mouse.move(box.x + box.width / 2, box.y + 50);
       await page.mouse.down();
@@ -69,6 +70,7 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     expect(await actions()).toEqual([{ action: { action: 'card', key: 'card-0' }, scope: { sessionId: 'gesture', promptId: 'p2' } }]);
     expect(await page.evaluate(() => window.gestureClicks)).toEqual([]);
     // A later ordinary click is not swallowed by a previous drag.
+    await card.locator('.mana').first().hover();
     await card.click();
     expect(await page.evaluate(() => window.gestureClicks)).toEqual(['card-0']);
     // Targeting/discard/payment prompts do not interpret hand drags as casts.
@@ -100,6 +102,47 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     await expect(card).toHaveAttribute('data-hand-visible', 'false');
     await page.getByRole('button', { name: 'Earlier cards in hand' }).click();
     await expect(card).toHaveAttribute('data-hand-visible', 'true');
+    // A permanent below the resting fan must be immediately reachable from the
+    // playmat, without an invisible hand layer intercepting the click.
+    await page.evaluate(() => {
+      const target = document.createElement('button');
+      target.id = 'under-hand-fixture'; target.textContent = 'Use permanent';
+      target.style.cssText = 'position:absolute;left:40%;bottom:12px;width:100px;height:42px';
+      window.underHandClicks = 0; target.onclick = () => window.underHandClicks++;
+      document.getElementById('match-human').append(target);
+    });
+    const under = page.locator('#under-hand-fixture');
+    const area = await page.locator('#match-human').boundingBox();
+    const overlap = await hand.boundingBox();
+    expect(area.y + area.height - overlap.y).toBeGreaterThan(40);
+    await page.mouse.move(area.x + 12, area.y + 12);
+    await expect(hand).toHaveClass(/hand-receded/);
+    await under.click();
+    expect(await page.evaluate(() => window.underHandClicks)).toBe(1);
+    await card.locator('.mana').first().hover();
+    await expect(hand).not.toHaveClass(/hand-receded/);
+    await expect(card).toHaveClass(/hand-raised/);
+    await card.focus();
+    await under.focus(); await expect(hand).toHaveClass(/hand-receded/);
+    await card.focus(); await expect(hand).not.toHaveClass(/hand-receded/);
+    // Real loaded artwork is decorative, including when no game action exists.
+    await page.evaluate(() => {
+      const card = document.querySelector('#match-hand [data-match-card="card-0"]');
+      card.classList.remove('actionable');
+      card.querySelector('.card-art').dataset.art = 'Gesture art';
+      art.set(JSON.stringify(['Gesture art', 'front']), Promise.resolve('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aB1sAAAAASUVORK5CYII='));
+      loadArt(card);
+      window.nativeHandDrags = 0;
+      document.getElementById('match-hand').addEventListener('dragstart', () => window.nativeHandDrags++);
+    });
+    await expect(card.locator('img')).toBeAttached();
+    expect(await card.locator('img').evaluate(img => ({ draggable: img.draggable, cursor: getComputedStyle(img).cursor, pointerEvents: getComputedStyle(img).pointerEvents })))
+      .toEqual({ draggable: false, cursor: 'default', pointerEvents: 'none' });
+    const picture = await card.locator('.card-art').boundingBox();
+    await page.mouse.move(picture.x + 40, picture.y + 20); await page.mouse.down();
+    await page.mouse.move(picture.x + 70, picture.y - 80, { steps: 8 }); await page.mouse.up();
+    expect(await page.evaluate(() => window.nativeHandDrags)).toBe(0);
+    await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
     expect(await actions()).toHaveLength(1);
     expect(errors).toEqual([]);
   } finally { await application.close(); }

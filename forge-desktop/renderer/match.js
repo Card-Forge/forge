@@ -157,7 +157,7 @@
     const permanents = field.cards.filter(card => !isLand(card));
     const row = (name, cards, label) => `<div class="battlefield-row ${name}-row" data-field-row="${player.id}-${name}" aria-label="${esc(player.name)}: ${label}">${cards.map(cardTile).join('') || `<span class="field-empty">${label}</span>`}</div>`;
     const hiddenHand = !player.human ? `<div class="opponent-hand" aria-label="${hand.count} cards in opponent's hand"><div aria-hidden="true">${Array.from({ length: Math.min(hand.count, 9) }, (_, index) => `<i style="--back-angle:${(index - (Math.min(hand.count, 9) - 1) / 2) * 4}deg"></i>`).join('')}</div><span>${hand.count} in hand</span></div>` : '';
-    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}"><span>${esc(player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${player.eliminated ? 'Eliminated' : turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
+    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}" data-player-portrait="${player.id}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}" title="${esc(player.name)} · ${player.life} life"><span>${esc(player.human ? 'You' : player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${player.eliminated ? 'Eliminated' : turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool" aria-label="Available mana">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
     const side = `<aside class="match-side-zones">${commandZone}<div class="match-library" aria-label="${library.count} cards in ${esc(player.name)}'s library"><span class="library-back" aria-hidden="true">M</span><span>Library <b>${library.count}</b></span></div><div class="match-other-zones">${other}</div></aside>`;
     const fieldRows = player.human ? row('permanents', permanents, 'Battlefield') + row('lands', lands, 'Lands') : row('lands', lands, 'Lands') + row('permanents', permanents, 'Battlefield');
     const battlefield = `<div class="match-zones-row"><div class="match-battlefield">${fieldRows}</div>${side}</div>`;
@@ -193,6 +193,8 @@
       $('match-opponent').scrollLeft = opponentScroll;
       $('match-human').dataset.playerId = human?.id || '';
       $('match-human').innerHTML = human ? playerLane(human) : '';
+      const portrait = $('match-human').querySelector('.match-player');
+      $('match-self').replaceChildren(...(portrait ? [portrait] : []));
       $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(card => cardTile(card, 'hand')).join('') : '';
       $('match-hand').scrollLeft = handScroll;
       document.querySelectorAll('.match-zone').forEach(element => { element.open = opened.has(element.dataset.zone); });
@@ -225,6 +227,7 @@
     matchFeedback.render(next, previous, before);
     if (next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
     const busy = !next.prompt && !['finished', 'error'].includes(next.status);
+    $('match-view').dataset.playerInput = String(Boolean(next.prompt?.playerChoices?.length || next.prompt?.inputType?.includes('Target') || next.prompt?.inputType === 'InputAttack'));
     $('match-view').setAttribute('aria-busy', String(busy));
     $('match-action-status').textContent = busy ? 'Updating table…' : '';
     if (!busy) document.querySelectorAll('.action-pending').forEach(element => element.classList.remove('action-pending'));
@@ -431,6 +434,11 @@
       toast('The table updated. Select your card again.');
       return;
     }
+    if (values.action === 'card' && match.prompt.inputType === 'InputPassPriority'
+      && document.querySelector(`#match-hand .actionable[data-match-card="${CSS.escape(values.key)}"]`)) {
+      cardPreview.hide();
+      handView.revealTable();
+    }
     inFlight = true;
     $('match-prompt').classList.add('sending');
     $('match-view').setAttribute('aria-busy', 'true');
@@ -442,10 +450,12 @@
   }
 
   $('match-view').addEventListener('pointerdown', event => {
-    const element = event.target.closest('[data-match-card]');
-    pointerChoice = element ? { element, key: element.dataset.matchCard,
-      sessionId: element.dataset.matchSession, promptId: element.dataset.matchPrompt } : null;
+    const element = event.target.closest('[data-match-card], [data-match-player]');
+    pointerChoice = element ? { element, key: element.dataset.matchCard, playerId: element.dataset.matchPlayer,
+      ...(element.hasAttribute('data-match-card') ? { sessionId: element.dataset.matchSession, promptId: element.dataset.matchPrompt } : choiceScope()) } : null;
   });
+  // Artwork never starts a browser image/text drag. Game drags use scoped pointer gestures.
+  $('match-view').addEventListener('dragstart', event => event.preventDefault());
   $('match-view').addEventListener('pointercancel', () => { pointerChoice = null; });
   $('match-view').addEventListener('click', event => {
     const seat = event.target.closest('[data-focus-player]');
@@ -462,7 +472,13 @@
       const scope = event.detail > 0 ? pressed : { sessionId: card.dataset.matchSession, promptId: card.dataset.matchPrompt };
       answer({ action: 'card', key: card.dataset.matchCard }, scope);
     }
-    else if (player) answer({ action: 'player', playerId: Number(player.dataset.matchPlayer) });
+    else if (player) {
+      const pressed = pointerChoice;
+      pointerChoice = null;
+      if ($('match-view').dataset.playerInput !== 'true') return;
+      if (event.detail > 0 && (!pressed || pressed.element !== player || pressed.playerId !== player.dataset.matchPlayer)) return;
+      answer({ action: 'player', playerId: Number(player.dataset.matchPlayer) }, event.detail > 0 ? pressed : choiceScope());
+    }
   });
   $('match-view').addEventListener('toggle', event => {
     if (!event.target.matches('.match-zone[open], .match-commander-damage[open]')) return;

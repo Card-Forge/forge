@@ -44,6 +44,11 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
         if (!p) { await page.waitForTimeout(30); continue; }
         const human = state.players.find(player => player.human);
         if (state.phaseKey === 'MAIN1' && state.activePlayerId === human.id) break;
+        if (p.playerChoices?.includes(human.id)) {
+          await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', p.id);
+          await page.locator('#match-self .match-life').click();
+          continue;
+        }
         let answer = p.kind === 'choice' ? { choices: Array.from({ length: p.min }, (_, index) => index) }
           : p.kind === 'reveal' ? { action: 'ack' } : p.playerChoices?.length
             ? { action: 'player', playerId: p.playerChoices.find(id => id === human.id) ?? p.playerChoices[0] } : { action: 'ok' };
@@ -70,6 +75,15 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
         await application.evaluate(({ BrowserWindow }, size) => BrowserWindow.getAllWindows()[0].setSize(...size), size);
         await page.waitForTimeout(150);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        await expect(page.locator('#match-human .match-player')).toHaveCount(0);
+        await expect(page.locator('#match-self .match-life b')).toHaveText('40');
+        expect(await page.locator('#match-self').evaluate(element => {
+          const arena = document.querySelector('.match-arena').getBoundingClientRect();
+          return [...element.querySelectorAll('.match-life, .match-player-info, .match-commander-damage summary')].every(control => {
+            const b = control.getBoundingClientRect(), hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+            return b.top >= 0 && b.bottom <= arena.top && b.right <= innerWidth && control.contains(hit);
+          });
+        }), 'Your life and player controls stay above the table and can be reached').toBe(true);
         const last = state.players.at(-1);
         await page.locator(`[data-focus-player="${last.id}"]`).click();
         const bounds = await page.locator(`#match-opponent [data-player-id="${last.id}"]`).evaluate(element => {
@@ -98,7 +112,7 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
       for (const [label, selector] of [
         ['graveyard', `#match-opponent [data-player-id="${firstOpponent.id}"] .match-zone`],
         ['opponent-damage', `#match-opponent [data-player-id="${firstOpponent.id}"] .match-commander-damage`],
-        ['your-damage', '#match-human .match-commander-damage']
+        ['your-damage', '#match-self .match-commander-damage']
       ]) {
         const details = page.locator(selector).first();
         await details.locator('summary').click();

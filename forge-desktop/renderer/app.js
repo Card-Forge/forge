@@ -70,6 +70,7 @@ function loadArt(container) {
     art.get(key).then(source => {
       if (!source || !element.isConnected || element.querySelector('img')) return;
       const img = document.createElement('img');
+      img.draggable = false;
       img.src = source;
       img.alt = element.dataset.artLabel || name;
       element.append(img);

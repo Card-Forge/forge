@@ -13,7 +13,7 @@ function createTableDrag(root, options) {
       current.source.classList.remove('drag-source');
       document.body.classList.remove('table-dragging');
       if (root.hasPointerCapture(current.pointerId)) root.releasePointerCapture(current.pointerId);
-      options.finish?.();
+      options.finish?.({ commit, event });
       if (commit && options.valid(current)) options.drop(current, event);
     }
   }

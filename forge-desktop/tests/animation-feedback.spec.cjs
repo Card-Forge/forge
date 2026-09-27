@@ -67,7 +67,9 @@ test('a played card animates once; priority refreshes do not replay it and tappi
     await page.mouse.up();
     await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
     expect((await page.evaluate(() => window.forge.request('matchState'))).prompt.id).toBe(state.prompt.id);
-    await tile.focus();
+    // The pointer is back over the battlefield, so re-enter through the hand's
+    // exposed strip before picking the card up again.
+    await tile.locator('.match-hand-cost').hover({ position: { x: 14, y: 10 } });
     box = await tile.boundingBox();
     await page.mouse.move(box.x + box.width / 2, box.y + 55);
     await page.mouse.down();

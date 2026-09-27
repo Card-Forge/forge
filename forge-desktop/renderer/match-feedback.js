@@ -139,9 +139,10 @@ const matchFeedback = (() => {
       const isHuman = player?.human;
       const active = player?.id === next.activePlayerId;
       lane.classList.toggle('turn-active', active && !status.terminal);
-      lane.querySelector('.match-player')?.classList.toggle('has-turn', active);
-      lane.querySelector('.match-player')?.classList.toggle('has-priority', Boolean(player?.priority));
-      const label = lane.querySelector('.match-player-info > small');
+      const portrait = document.querySelector(`.match-player[data-player-portrait="${player?.id}"]`);
+      portrait?.classList.toggle('has-turn', active);
+      portrait?.classList.toggle('has-priority', Boolean(player?.priority));
+      const label = portrait?.querySelector('.match-player-info > small');
       if (label) label.textContent = player?.eliminated ? 'Eliminated' : status.terminal ? 'Game over' : isHuman && next.prompt ? status.optionalResponse ? 'Your response is optional' : 'Your action now'
         : active ? (isHuman ? 'Your turn' : 'Opponent’s turn') : 'Waiting';
     }
