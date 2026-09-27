@@ -206,7 +206,7 @@ public class Assets implements Disposable {
         FrameBuffer buffer = isCard ? cardFrameBuffer : itemFrameBuffer;
         if (buffer == null) {
             try {
-                buffer =  new FrameBuffer(Pixmap.Format.RGB565, w, h, false);
+                buffer = new FrameBuffer(Pixmap.Format.RGB565, w, h, false);
             } catch (Exception e) {
                 // framebuffer creation failed
                 e.printStackTrace();

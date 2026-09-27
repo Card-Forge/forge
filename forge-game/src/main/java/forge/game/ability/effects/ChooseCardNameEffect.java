@@ -95,6 +95,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 Predicate<ICardFace> cpp = x -> true;
                 List<Predicate<ICardFace>> conditions = new ArrayList<>();
                 if (sa.hasParam("ValidCards")) {
+                    StringBuilder newValid = new StringBuilder();
                     for(String v: valid.split(",")) {
                         //Calculating/replacing this must happen before running valid in CardFacePredicates
                         if (v.contains("cmcEQ") && !StringUtils.isNumeric(v.split("cmcEQ")[1])) {
@@ -111,7 +112,10 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                             }
                         }
                         conditions.add(CardFacePredicates.valid(v));
+                        newValid.append(v);
+                        newValid.append(',');
                     }
+                    valid = newValid.substring(0, newValid.length() -1);
                     cpp = IterableUtil.or(conditions);
                     if (sa.hasParam("ExcludeChosen")) {
                         final Predicate<ICardFace> innerCpp = cpp;
