@@ -39,12 +39,20 @@ jobs:
           echo "jar=$JAR" >> "$GITHUB_OUTPUT"
           echo "Using $JAR"
 
-      - name: Start Forge command-line simulation mode
+      - name: Run one AI vs AI game
         shell: bash
         run: |
           set -o pipefail
           cd forge-gui
-          java -Djava.awt.headless=true -jar "../${{ steps.jar.outputs.jar }}" sim 2>&1 | tee ../sim-smoke.log
+          java -Djava.awt.headless=true -jar "../${{ steps.jar.outputs.jar }}" \
+            sim \
+            -D "$GITHUB_WORKSPACE/forge-gui/res/quest/precons" \
+            -d "Abzan Siege.dck" "Adaptive Enchantment.dck" \
+            -n 1 \
+            -s 12345 \
+            -c 60 \
+            -q \
+            2>&1 | tee ../sim-smoke.log
 
       - name: Upload smoke-test log
         if: always()
