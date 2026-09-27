@@ -19,6 +19,7 @@ tabletop battlefield, a persistent card fan, card inspection, and combat assignm
 | Make a contribution | [Contributing](CONTRIBUTING.md) |
 | Understand the components | [Architecture](docs/Development/Mana-Table-Architecture.md) |
 | Run checks or diagnose a regression | [Testing](docs/Development/Mana-Table-Testing.md) |
+| Run an encounter or host a UX playtest | [Encounter guide](docs/Development/Mana-Table-Encounters.md) |
 | Build a distributable | [Packaging and releases](docs/Development/Mana-Table-Releases.md) |
 | Extend the engine adapter | [Engine API contract](forge-api/README.md) |
 

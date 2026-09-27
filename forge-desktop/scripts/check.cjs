@@ -9,7 +9,7 @@ function scripts(directory) {
   });
 }
 const files = fs.readdirSync(root).filter(file => file.endsWith('.cjs')).map(file => path.join(root, file))
-  .concat(...['renderer', 'scripts', 'tests'].map(directory => scripts(path.join(root, directory))));
+  .concat(...['renderer', 'scripts', 'tests', 'encounters'].map(directory => scripts(path.join(root, directory))));
 for (const file of files) {
   const result = spawnSync(process.execPath, ['--check', file], { stdio: 'inherit', windowsHide: true });
   if (result.error) throw result.error;

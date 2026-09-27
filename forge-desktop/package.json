@@ -15,6 +15,8 @@
     "test:unit": "node scripts/test-node.cjs unit",
     "test:engine": "node scripts/test-node.cjs engine",
     "test:ui": "playwright test",
+    "test:encounters": "playwright test tests/land-play.spec.cjs tests/encounter-ux.spec.cjs",
+    "encounter": "node scripts/encounter.cjs",
     "test:smoke": "playwright test tests/startup.spec.cjs tests/desktop.spec.cjs tests/match.spec.cjs",
     "check": "node scripts/check.cjs",
     "doctor": "node scripts/doctor.cjs",

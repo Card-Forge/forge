@@ -62,11 +62,15 @@ Run these in `forge-desktop`:
 | `npm run test:engine` | Real Java protocol, persistence, game, Commander, and preset tests |
 | `npm run test:smoke` | Electron deck-workshop and playable-match checks |
 | `npm run test:ui` | All Electron/Playwright checks (`npm test` remains an alias) |
+| `npm run test:encounters` | Reusable encounter regressions and UX handoff checks |
+| `npm run encounter -- --help` | Automated or guided human playtests with review artifacts |
 | `npm run package` | Build a new Windows x64 package with Java and card resources |
 
 See [testing](../docs/Development/Mana-Table-Testing.md) for subsets, packaged
 tests, and failure artifacts; see [releases](../docs/Development/Mana-Table-Releases.md)
 for versioning, data preservation, and distribution.
+For reusable scenarios and participant sessions, see the
+[encounter guide](../docs/Development/Mana-Table-Encounters.md).
 
 ## Environment variables
 

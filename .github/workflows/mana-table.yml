@@ -74,3 +74,13 @@ jobs:
         run: npm run test:engine
       - name: Run desktop smoke tests
         run: npm run test:smoke -- --reporter=line
+      - name: Run reusable encounters
+        run: npm run test:encounters -- --reporter=line --output=test-results/encounter-suite
+      - name: Save encounter evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: encounter-evidence
+          path: forge-desktop/test-results/encounter-suite/
+          if-no-files-found: ignore
+          retention-days: 14

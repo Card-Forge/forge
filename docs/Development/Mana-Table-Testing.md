@@ -11,6 +11,7 @@ root. Run npm commands below from `forge-desktop` after `npm ci`.
 | Real-engine integration | `npm run test:engine` | Persistence/revisions, matches, Commander, multiplayer, presets |
 | UI smoke | `npm run test:smoke` | Cold startup, renderer reload, deck workflow, casting and match lifecycle |
 | Complete UI suite | `npm run test:ui` | All `tests/*.spec.cjs` interaction scenarios |
+| Reusable encounter suite | `npm run test:encounters` | Shared automated scenarios, participant handoff, notes and failure artifacts |
 
 `npm test` retains its existing meaning: the Playwright UI suite. It does not
 include the Node engine or unit suites. `test:engine` runs files serially because
@@ -25,6 +26,9 @@ a supported way to lift a card. Direct center clicks can hit an overlapping card
 keep real hit testing enabled instead of bypassing it with forced clicks.
 
 ## Run a focused regression
+
+See [reusable encounters](Mana-Table-Encounters.md) to run the same setup as an
+automated regression or a guided human playtest, with optional video recording.
 
 ```sh
 npm run test:ui -- tests/hand-gestures.spec.cjs tests/hand-readability.spec.cjs
@@ -85,8 +89,9 @@ checks bundled resources; unlike the normal UI suite, it permits artwork fetches
 ## CI and review
 
 The `Mana Table` workflow builds the focused Java reactor on Windows, checks
-JavaScript, runs unit and real-engine tests, then the UI smoke suite. The full UI
-suite is a local/release check. Inherited Forge workflows remain separate and may
+JavaScript, runs unit and real-engine tests, then the UI smoke and encounter suites.
+Encounter artifacts are retained for 14 days. The full UI suite is a local/release
+check. Inherited Forge workflows remain separate and may
 also run. A local successful command does not mean a hosted CI run has completed.
 
 Add regression tests for changed behavior, especially hidden information,
