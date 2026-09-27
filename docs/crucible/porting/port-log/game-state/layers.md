@@ -89,20 +89,15 @@ split `Ability.Params` already has. This does not touch `WriteCanonical`/`Finger
 golden AST walks only `Abilities`/`Triggers`/`Statics`/`Replacements` — so `TestCorpusAST` needed no regeneration.
 
 `resolveAmount`/`resolveAmountDepth` (amount.go, `internal/engine`) evaluate an `expr.Amount` to an int: a `Literal`
-resolves directly (its own `Value` already carries the sign); a `Reference` looks its name up in `amounts` and resolves
-THAT in turn, one level of indirection at a time (`maxAmountDepth`, 4, bounds the recursion — defensive, not a real
-corpus need, since the one real chain this port's own research found, Roiling Horror's `Y -> Z`, carries an operator at
-every hop and is refused before it would ever recurse); an `Expression` resolves only when its outer Head is `"Count"`,
-`Op` is nil (no operator suffix — Roiling Horror's own shape, and 267 of the corpus's 2,804 Valid-family lines, stay
-unresolved for exactly this reason), and the inner `Count$` head (`expr.ParseCount`) is one of the "Valid" family
-(`expr.IsValidHead`). `validCountZones` maps the head's own zone suffix (empty is Battlefield, Java's own default;
-`,`-joined for the 40-some real lines naming more than one zone) to this port's own `ZoneType` values, and `countValid`
-counts every card in every one of those zones, every player's own, `Matches` accepts — the identical
-`sourceController`/`source` pairing (a static ability's own host controller/id) every other valid-string check in this
-port already passes. Single-zone coverage this closes: bare `Valid` (1,973 of 2,804), `ValidGraveyard` (471),
-`ValidHand` (253), `ValidLibrary` (63), `ValidExile` (43) — effectively the whole family bar `ValidAll`/`ValidSelf` (8
-real lines, neither an actual zone name), the operator-carrying 267, and a dozen more where the argument itself carries
-a `$`-suffixed distinct-value operator (`expr.Count.DistinctProperty`, below).
+resolves directly; a `Reference` resolves the named SVar in turn (runtime SVar first, `maxAmountDepth` bounding the
+chain); an `Expression` dispatches on its head. For the Valid family, `validCountZones` maps the head's own zone suffix
+(empty is Battlefield, Java's own default; `,`-joined for the 40-some real lines naming more than one zone) to this
+port's own `ZoneType` values, and `countValid` counts every card in every one of those zones, every player's own,
+`Matches` accepts -- the identical `sourceController`/`source` pairing every other valid-string check passes.
+Single-zone coverage: bare `Valid` (1,973 of 2,804), `ValidGraveyard` (471), `ValidHand` (253), `ValidLibrary` (63),
+`ValidExile` (43) -- the whole family bar `ValidAll`/`ValidSelf` (8 real lines, neither an actual zone name). doXMath
+suffixes, the heads past the Valid family and the `$`-suffixed properties below are
+[`layer7a-cda-amounts.md`](layer7a-cda-amounts.md#layer-7a-amounts-the-real-corpus-vocabulary-and-what-resolves)'s.
 
 A `Count$Valid<Zone> <spec>` argument can itself carry a further `$`: Tarmogoyf's own toughness SVar is
 `Count$ValidGraveyard Card$CardTypes`. `xCount` (`AbilityUtils.java`) cuts the whole "head argument" string on the FIRST
@@ -114,11 +109,11 @@ among whatever `Card` matched, not the matches themselves. `expr.ParseCount` now
 have parsed without error (`valid.Parse` never fails, its own doc comment) into a single-alternative spec with base name
 `"Card$CardTypes"`, an unrecognized base that itself matches nothing, but count.Valid would then hold `Card` correctly
 once split, which DOES match every real object — silently returning a real but WRONG number (a plain match count, not a
-distinct-type count) rather than failing to resolve at all. `resolveAmount` (`amount.go`) checks
-`DistinctProperty != ""` and refuses the whole expression (GO-7) rather than resolve `Valid` alone. Five distinct
-operators exist in the real corpus (`CardTypes`, 7; `DifferentCardPower`, 2; `GreatestCardPower`,
-`GreatestCardManaCost`, `CreatureType`, 1 each — a dozen real lines total), each its own separate Java function; too
-little value to build five more evaluators for, so none of them resolve.
+distinct-type count) rather than failing to resolve at all. `resolveAmount` measures the properties `handlePaid` defines
+that this port can evaluate (`paidMeasure`, amountpaid.go: `CardTypes`, `Colors`, `Amount`, and
+`Greatest`/`Least`/`Different`/sum of `CardManaCost` or `CardCounters.<TYPE>`) and refuses every other one (GO-7) rather
+than resolve `Valid` alone; [`layer7a-cda-amounts.md`](layer7a-cda-amounts.md#refused-rather-than-guessed-go-7) has the
+list.
 
 This was caught after Batch B had already shipped and merged, not during it: writing
 `TestApplyContinuousCharacteristicDefiningSkipsDistinctPropertyCount` (continuous_test.go) — a Tarmogoyf-shaped CDA, one
@@ -432,12 +427,9 @@ type-folding machinery rather than re-deriving a card's type from its printed fa
 4, core types only (not supertypes, not subtypes), matching `CardType.CoreType`'s own enum exactly. `Metalcraft` is
 `battlefieldArtifactCount`: the same `Type()` read, `.Has(cardtype.Artifact)`, over the controller's own battlefield.
 
-One real line resolves its `Condition$` but still does not apply for an unrelated reason: Winter, Misanthropic Guide's
-`Condition$ Delirium | Affected$ Opponent | SetMaxHandSize$ Y` (Layer 8) now passes its own `Condition$` check, but `Y`
-is `Number$7/Minus.X` and `X` is `Count$ValidGraveyard Card.YouOwn$CardTypes` -- a `DistinctProperty` expression
-`resolveAmount` (amount.go, item 27's own Tarmogoyf-shaped gap) already skips, feeding an arithmetic
-`Number$.../Minus.X` SVar shape this port's amount resolution has no head for either way -- `rulesEffect` itself still
-returns not-ok, so the line still does not apply, correctly, just no longer for the reason its own name once suggested.
+Winter, Misanthropic Guide's `Condition$ Delirium | Affected$ Opponent | SetMaxHandSize$ Y` (Layer 8) applies: `Y` is
+`Number$7/Minus.X` over `X`, `Count$ValidGraveyard Card.YouOwn$CardTypes`, both of which `resolveAmount` evaluates
+(`TestAmountDrivesWinterMaximumHandSize`).
 
 `TestApplyContinuousPTSkipsConditionParam` moved from `Condition$ PlayerTurn` (now resolvable, and coincidentally false
 in a fresh test game with no active player set -- `NoPlayer` matches no real `PlayerID`) to `Condition$ MaxSpeed` to

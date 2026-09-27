@@ -1625,15 +1625,12 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     `applyOneContinuousPT`, applying `SetPower$`/`SetToughness$` to host ALONE
     (`StaticAbilityContinuous.getAffectedCards`'s own CharacteristicDefining branch hardcodes the affected set to the
     host card regardless of any `Affected$` a real corpus line also carries) at `LayerCharacteristic` — a layer
-    `PTEffect`'s own folding already carried since Layer 7b/7c first landed, unused as a real caller until now. Still
-    not resolved: every other `Count$` head (`xPaid`, `CardCounters`, `Devotion`, and eighty-some more
-    `AbilityUtils.calculateAmount` itself dispatches on), any `Count$Valid...` expression carrying an operator suffix
-    (Roiling Horror's own `Y -> Z` chain, 267 of the 2,804), and a dozen more where the Valid argument itself carries a
-    `$`-suffixed distinct-value operator (Tarmogoyf's own `Count$ValidGraveyard Card$CardTypes` — a new
-    `expr.Count.DistinctProperty` field now catches this rather than silently misparsing `Card$CardTypes` as one base
-    name and resolving a plain match count against `Card`, which matches every object; caught by
-    `TestApplyContinuousCharacteristicDefiningSkipsDistinctPropertyCount` after this slice had already shipped, a real
-    bug, not a hypothetical one) — a full `AbilityUtils.calculateAmount` port, not this slice's job.
+    `PTEffect`'s own folding already carried since Layer 7b/7c first landed, unused as a real caller until now.
+    `resolveAmount` now covers the real CDA vocabulary past the Valid family too: doXMath suffixes, `SVar$`/`Number$`,
+    the measurable `handlePaid` properties (Tarmogoyf's `$CardTypes`, `$GreatestCardManaCost`, ...), Domain,
+    YourLifeTotal, Devotion, Chroma, CardCounters and the rest -- 389 of 405 real CDA amount dimensions (no CDA writes
+    `xPaid`); the last 16 (`ExiledWith$`, `Remembered$`, `$DifferentCardNames`, `YourTurns`, `Party`) and why are
+    `porting/port-log/game-state/layer7a-cda-amounts.md`'s.
 
     **Layer 8 (`RULES`) has real content now too, this port's first player-facing continuous effect.** A new
     `RulesMod`/`RulesEffect` (`rulesmod.go`) lives on `Player`, not `Card` —
@@ -1664,13 +1661,13 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     `Mode$ Continuous` was always going to be the one mode that could not skip that machinery entirely, and now six of
     its layers partly haven't had to: all six subsets needed only the valid-string evaluator (`valid.go`) every other
     slice already reused, plus (for Layers 4/5) small additions to `cardtype.Line`/`valid.go` themselves. The rest of
-    Layers 4/5/6 past a literal token list, Layer 7a's own SVar shapes outside the Valid family, and Layer 8's own
-    remainder above are the real remaining size of this item, alongside two layers this port has not touched at all:
-    Layer 1 (copy effects) is not even part of `StaticAbilityContinuous.java`'s own switch in Forge itself — zero real
-    references to `StaticAbilityLayer.COPY` anywhere in it, a wholly separate "become a copy of a card" mechanism at
-    resolution time, not a recomputed-each-pass continuous effect at all, so it is not this item's job even in
-    principle. Layer 3 (`GainTextOf$`, 1 real line) needs its own single-card text-copying mechanism for one real corpus
-    card, not a slice worth building for that alone.
+    Layers 4/5/6 past a literal token list, Layer 7a's own last 16 CDA amount dimensions, and Layer 8's own remainder
+    above are the real remaining size of this item, alongside two layers this port has not touched at all: Layer 1 (copy
+    effects) is not even part of `StaticAbilityContinuous.java`'s own switch in Forge itself — zero real references to
+    `StaticAbilityLayer.COPY` anywhere in it, a wholly separate "become a copy of a card" mechanism at resolution time,
+    not a recomputed-each-pass continuous effect at all, so it is not this item's job even in principle. Layer 3
+    (`GainTextOf$`, 1 real line) needs its own single-card text-copying mechanism for one real corpus card, not a slice
+    worth building for that alone.
 
     **Layer 2 (`CONTROL`) is real now too — this port's first controller-change mechanism.** A new
     `ControlMod`/`ControlEffect` (`controlmod.go`) folds onto `Card.Controller`, which stops being a plain field and
@@ -1711,10 +1708,8 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     Blessing), `EnduringStory` (4, a Saga's own chapter count) and `Monarch` (2) — each its own mechanic this port
     tracks no state for anywhere yet, so (like an unrecognized `Affected$` value already does) the line is skipped
     rather than treated as met (GO-7). Winter, Misanthropic Guide's own `Condition$ Delirium | SetMaxHandSize$ Y` (the
-    sole real line pairing a now-resolvable `Condition$` with Layer 8) still does not apply, for an unrelated reason:
-    `Y` is `Number$7/Minus.X` and `X` is `Count$ValidGraveyard Card.YouOwn$CardTypes`, a `DistinctProperty` expression
-    `resolveAmount` already skips (item 27's own Tarmogoyf-shaped gap, above) feeding an arithmetic SVar shape this
-    port's amount resolution has no head for either way.
+    sole real line pairing a now-resolvable `Condition$` with Layer 8) applies: `Y` is `Number$7/Minus.X` over a
+    `$CardTypes` count, both of which `resolveAmount` evaluates.
 
 28. Combat (`combat/`), mana payment (`mana/`), mulligans (`mulligan/`). **Combat further along than "everything but
     static abilities"** (`combat.go`, `attack.go`, `block.go`, `combatdamage.go`, `staticability.go`) — first strike,
