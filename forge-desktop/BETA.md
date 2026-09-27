@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.17
+# Mana Table — beta 0.1.0-beta.18
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -44,11 +44,22 @@ by someone with access; the app does not sign in to Moxfield.
    the four precons plus Goreclaw (Verdant) and Torbran (Cinder); Constructed uses
    the two 60-card opponents. Keep or mulligan your opening
    hand; after a mulligan, select the cards to return and confirm.
-9. Click highlighted cards to play them, use **Auto-pay mana**, and follow the
-   decision panel. Click a player's life total to target them. For combat, select
-   attackers or **Attack with all**; to block, select an attacker and then your
-   blocker. Confirm each combat step. Hover over cards for an enlarged preview
+9. Your hand fans out along the table edge. Hover or focus to lift a card and read
+   its full cost and stats. Click a highlighted card or drag it onto the table
+   to play it, use **Auto-pay mana**, and follow the
+   decision panel. Click a player's life total to target them. The combat panel
+   shows attackers, their defenders, and connected blockers. Choose a defender
+   before selecting attackers. To block, select an attacker, then a legal creature
+   below, or drag a creature onto an eligible attacker; click an assigned blocker
+   to remove that block. Confirm each combat
+   step when ready. **Table view** returns to the playmats; **Combat** reopens the
+   overview. During response windows, your hand remains accessible and mana/target
+   prompts return to the table automatically. Hover over cards for an enlarged preview
    with current rules, power/toughness, counters, damage, and combat status.
+   Dragging starts one play; follow the engine's next prompt to choose modes,
+   targets, or payments. Release back in your hand, outside the table, or press
+   **Esc** to cancel a drag. Arrow keys move between focused hand cards; large
+   hands have paging arrows (also Shift+wheel or horizontal scrolling).
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
 

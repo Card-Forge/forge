@@ -14,6 +14,31 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class MatchActivityTest {
+    @Test public void faceDownCombatPositionsAreDistinctAndBreakAtHiddenZoneTransitions() {
+        var viewer = new PlayerView(1, null);
+        var owner = new PlayerView(2, null);
+        var activity = new MatchActivity(viewer);
+        var ids = new CombatCardIds(viewer, activity);
+        var first = new CardView(10, null, "Secret one");
+        var second = new CardView(11, null, "Secret two");
+        for (var card : java.util.List.of(first, second)) {
+            card.set(TrackableProperty.Controller, owner);
+            card.set(TrackableProperty.Zone, ZoneType.Battlefield);
+            card.set(TrackableProperty.Facedown, true);
+        }
+        var before = ids.id(first);
+        assertNotNull(before);
+        assertEquals(ids.id(first), before);
+        assertNotEquals(before, ids.id(second));
+        assertNull(activity.visualId(first));
+        ids.changedZone(new GameEventCardChangeZone(first, new ZoneView(owner, ZoneType.Battlefield), new ZoneView(owner, ZoneType.Library)));
+        first.set(TrackableProperty.Zone, ZoneType.Library);
+        assertNull(ids.id(first));
+        first.set(TrackableProperty.Zone, ZoneType.Battlefield);
+        assertNotEquals(ids.id(first), before);
+        first.set(TrackableProperty.Facedown, false);
+        assertEquals(ids.id(first), activity.visualId(first));
+    }
     @BeforeClass public void language() { Localizer.getInstance().initialize("en-US", "../forge-gui/res/languages"); }
 
     @Test public void copiesEventsWithoutLeakingHiddenCardsAndResetsTheirHandles() {

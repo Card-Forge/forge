@@ -10,6 +10,9 @@ import forge.deck.Deck;
 import forge.game.*;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.card.CardView;
+import forge.game.card.Card;
+import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.player.*;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
@@ -41,6 +44,7 @@ public final class MatchSession {
     private final PlayerControllerHuman human;
     private final PlayerView viewer;
     private final MatchActivity activity;
+    private final CombatCardIds combatIds;
     private final IGuiGame gui;
     private final Object gate = new Object();
     private final Set<CardView> selectable = new HashSet<>();
@@ -62,6 +66,7 @@ public final class MatchSession {
         final String kind;
         final Input input;
         final Map<String, CardView> cards = new LinkedHashMap<>();
+        final Set<String> blockPairs = new HashSet<>();
         final CompletableFuture<JsonObject> response = new CompletableFuture<>();
         Map<String, Object> prompt;
         int size, min, max;
@@ -99,7 +104,9 @@ public final class MatchSession {
         human = (PlayerControllerHuman) game.getPlayers().get(0).getController();
         viewer = human.getPlayer().getView();
         activity = new MatchActivity(viewer);
+        combatIds = new CombatCardIds(viewer, activity);
         game.subscribeToEvents(activity);
+        game.subscribeToEvents(combatIds);
         game.subscribeToEvents(this);
         gui = (IGuiGame) Proxy.newProxyInstance(IGuiGame.class.getClassLoader(), new Class<?>[]{IGuiGame.class}, (proxy, method, args) -> {
             if (method.isDefault()) return InvocationHandler.invokeDefault(proxy, method, args);
@@ -114,7 +121,7 @@ public final class MatchSession {
                 match.startGame(game);
                 synchronized (gate) { pending = null; publish(null); }
             } catch (Throwable failure) { if (!closed) fail(failure); }
-            finally { game.unsubscribeFromEvents(activity); game.unsubscribeFromEvents(this); }
+            finally { game.unsubscribeFromEvents(activity); game.unsubscribeFromEvents(combatIds); game.unsubscribeFromEvents(this); }
         });
     }
 
@@ -220,12 +227,20 @@ public final class MatchSession {
             }
             String action = string(request, "action");
             CardView card = null;
+            CardView attacker = null;
             PlayerView target = null;
             switch (action) {
                 case "ok" -> { if (!okEnabled) throw new IllegalArgumentException("Continue is not available"); }
                 case "cancel" -> { if (!cancelEnabled) throw new IllegalArgumentException("Cancel is not available"); }
                 case "attackAll" -> { if (!(next.input instanceof InputAttack)) throw new IllegalArgumentException("Not declaring attackers"); }
                 case "card" -> { card = next.cards.get(string(request, "key")); if (card == null) throw new IllegalArgumentException("Card is not visible in this prompt"); }
+                case "block" -> {
+                    if (!(next.input instanceof InputBlock)) throw new IllegalArgumentException("Not declaring blockers");
+                    attacker = next.cards.get(string(request, "attackerKey"));
+                    card = next.cards.get(string(request, "blockerKey"));
+                    if (attacker == null || card == null || !next.blockPairs.contains(attacker.getId() + ":" + card.getId()))
+                        throw new IllegalArgumentException("That creature cannot block this attacker");
+                }
                 case "player" -> {
                     int playerId = exactInt(string(request, "playerId"));
                     target = game.getView().getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElseThrow();
@@ -233,6 +248,7 @@ public final class MatchSession {
                 default -> throw new IllegalArgumentException("Unknown match action");
             }
             CardView chosenCard = card;
+            CardView chosenAttacker = attacker;
             PlayerView chosenPlayer = target;
             pending = null;
             markBusy();
@@ -243,6 +259,12 @@ public final class MatchSession {
                     case "cancel" -> human.selectButtonCancel();
                     case "attackAll" -> human.alphaStrike();
                     case "card" -> human.selectCard(chosenCard, null, CARD_CLICK);
+                    case "block" -> {
+                        // One scoped gesture: select the attacker and toggle this exact
+                        // block through the engine's normal input, then publish once.
+                        human.selectCard(chosenAttacker, null, CARD_CLICK);
+                        human.selectCard(chosenCard, null, CARD_CLICK);
+                    }
                     case "player" -> human.selectPlayer(chosenPlayer, null);
                 }
             });
@@ -321,7 +343,60 @@ public final class MatchSession {
                 "error", error, "playerCount", allPlayers.size(), "viewerId", viewer.getId(), "turn", view.getTurn(), "phase", view.getPhase() == null ? "Pregame" : view.getPhase().nameForUi,
                 "phaseKey", view.getPhase() == null ? "PREGAME" : view.getPhase().name(),
                 "activePlayerId", view.getPlayerTurn() == null ? null : view.getPlayerTurn().getId(), "players", players,
-                "stack", stack, "prompt", prompt == null ? null : prompt.prompt, "result", result, "notices", List.copyOf(notices), "activity", activityFrame.entries()));
+                "stack", stack, "combat", combatState(prompt), "prompt", prompt == null ? null : prompt.prompt, "result", result, "notices", List.copyOf(notices), "activity", activityFrame.entries()));
+    }
+
+    /** Copy combat only at a safe publish boundary, never from an IPC state read. */
+    private Map<String, Object> combatState(Pending prompt) {
+        var combat = game.getCombat();
+        if (combat == null || game.isGameOver()) return null;
+        boolean blocking = prompt != null && prompt.input instanceof InputBlock;
+        boolean attacking = prompt != null && prompt.input instanceof InputAttack;
+        var defenders = new ArrayList<Object>();
+        GameEntity selectedDefender = null;
+        for (var defender : combat.getDefenders()) {
+            defenders.add(combatDefender(defender));
+            if (attacking && highlighted.contains(GameEntityView.get(defender))) selectedDefender = defender;
+        }
+        var candidates = new ArrayList<String>();
+        if (attacking) for (Card card : human.getPlayer().getCreaturesInPlay()) {
+            if (combat.isAttacking(card) || selectedDefender != null && CombatUtil.canAttack(card, selectedDefender))
+                candidates.add(combatIds.id(card.getView()));
+        }
+        var blockers = blocking ? human.getPlayer().getCreaturesInPlay() : List.<Card>of();
+        var attacks = new ArrayList<Object>();
+        for (Card attacker : combat.getAttackers()) {
+            if (!attacker.getView().canBeShownTo(viewer)) continue;
+            var assigned = combat.getBlockers(attacker);
+            var eligible = new ArrayList<String>();
+            for (Card blocker : blockers) {
+                if (combat.isBlocking(blocker, attacker) || CombatUtil.canBlock(attacker, blocker, combat)) {
+                    eligible.add(combatIds.id(blocker.getView()));
+                    prompt.blockPairs.add(attacker.getId() + ":" + blocker.getId());
+                }
+            }
+            attacks.add(map("cardId", combatIds.id(attacker.getView()),
+                    "defender", combatDefender(combat.getDefenderByAttacker(attacker)),
+                    "defendingPlayerId", combat.getDefenderPlayerByAttacker(attacker) == null ? null : combat.getDefenderPlayerByAttacker(attacker).getId(),
+                    "blockerIds", assigned.stream().filter(card -> card.getView().canBeShownTo(viewer)).map(card -> combatIds.id(card.getView())).toList(),
+                    "blocked", combat.isBlocked(attacker), "eligibleBlockerIds", eligible));
+        }
+        return map("attackingPlayerId", combat.getAttackingPlayer().getId(), "attackers", attacks,
+                "defenders", defenders, "selectedDefender", selectedDefender == null ? null : combatDefender(selectedDefender),
+                "attackerCandidates", candidates,
+                "blockerCandidates", blockers.stream().map(card -> combatIds.id(card.getView())).toList(),
+                "blockProblem", blocking ? CombatUtil.validateBlocks(combat, human.getPlayer()) : null);
+    }
+
+    private Map<String, Object> combatDefender(GameEntity entity) {
+        if (entity instanceof Player player) return map("kind", "player", "id", player.getId(),
+                "name", player.getView().equals(viewer) ? "You" : player.getName(), "playerId", player.getId());
+        if (entity instanceof Card card) {
+            boolean visible = card.getView().canBeShownTo(viewer) && !card.isFaceDown();
+            return map("kind", "card", "id", combatIds.id(card.getView()), "name", visible ? card.getView().getCurrentState().getName() : "Face-down permanent",
+                    "playerId", card.isBattle() && card.getProtectingPlayer() != null ? card.getProtectingPlayer().getId() : card.getController().getId());
+        }
+        return null;
     }
 
     private Map<String, Object> cardState(CardView card, Pending prompt) {
@@ -334,7 +409,7 @@ public final class MatchSession {
         if (card.getCounters() != null) for (var entry : card.getCounters().entrySet()) counters.put(entry.getElement().getName(), entry.getCount());
         var combat = game.getView().getCombat();
         var defender = combat == null ? null : combat.getDefender(card);
-        var result = map("key", key, "visualId", activity.visualId(card), "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
+        var result = map("key", key, "visualId", activity.visualId(card), "combatId", combatIds.id(card), "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
                 "manaCost", hidden ? "" : face.getManaCost().toString(), "power", hidden ? null : face.getPower(), "toughness", hidden ? null : face.getToughness(),
                 "text", hidden ? "" : card.getText(), "tapped", card.isTapped(), "sick", card.isSick(), "damage", card.getDamage(),
                 "attacking", card.isAttacking(), "blocking", card.isBlocking(), "counters", counters,
@@ -342,7 +417,10 @@ public final class MatchSession {
                 "defender", defender == null ? null : defender instanceof CardView target && (!target.canBeShownTo(viewer) || target.isFaceDown()) ? "Face-down permanent" : defender.getName(),
                 "selectable", selectable.contains(card) || actionable.contains(card)
                         || prompt != null && prompt.input instanceof InputLondonMulligan && card.getController().equals(viewer) && card.getZone() == ZoneType.Hand,
-                "highlighted", highlighted.contains(card), "faceDown", hidden);
+                "highlighted", highlighted.contains(card), "faceDown", hidden,
+                "combatKeywords", hidden ? List.of() : List.of(Keyword.FLYING, Keyword.REACH, Keyword.TRAMPLE, Keyword.FIRST_STRIKE,
+                        Keyword.DOUBLE_STRIKE, Keyword.DEATHTOUCH, Keyword.LIFELINK, Keyword.MENACE, Keyword.VIGILANCE, Keyword.INDESTRUCTIBLE)
+                        .stream().filter(face::hasKeyword).map(keyword -> keyword.name().toLowerCase(Locale.ROOT).replace('_', ' ')).toList());
         addCardFaces(result, card, !hidden && card.canBeShownTo(viewer));
         return result;
     }

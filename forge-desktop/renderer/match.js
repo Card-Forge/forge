@@ -26,6 +26,8 @@
   libraryPicker.setAttribute('aria-labelledby', 'match-library-title');
   document.querySelector('.match-arena').append(libraryPicker);
   const choiceScope = () => ({ sessionId: match?.id, promptId: match?.prompt?.id });
+  const combatView = createCombatView(document.querySelector('.match-arena'), answer);
+  const handView = createHandView(document.querySelector('.match-arena'), $('match-hand'), answer);
   const scopeAttributes = () => `data-match-session="${esc(match.id)}" data-match-prompt="${esc(match.prompt?.id || '')}"`;
   cardPreview.bind($('match-view'), '[data-preview-card]', element => previewCards[Number(element.dataset.previewCard)]);
   cardPreview.bind(libraryPicker, '[data-library-preview]', element => libraryGroups[Number(element.dataset.libraryPreview)]?.card);
@@ -118,15 +120,6 @@
   }
 
   const zone = (player, name) => player.zones.find(value => value.name === name) || { count: 0, cards: [] };
-  function handHint() {
-    const human = match?.players?.find(player => player.human);
-    const hand = $('match-hand');
-    $('match-hand-count').textContent = human ? `${zone(human, 'Hand').count} cards${hand.scrollWidth > hand.clientWidth + 1 ? ' · scroll for more' : ''} · hover for rules` : '';
-  }
-  new ResizeObserver(handHint).observe($('match-hand'));
-  $('match-hand').addEventListener('focusin', event => {
-    event.target.closest('.match-card')?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
-  });
   function cardTile(card, presentation) {
     const inHand = presentation === 'hand';
     const stats = !card.faceDown && card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
@@ -202,7 +195,6 @@
       $('match-human').innerHTML = human ? playerLane(human) : '';
       $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(card => cardTile(card, 'hand')).join('') : '';
       $('match-hand').scrollLeft = handScroll;
-      handHint();
       document.querySelectorAll('.match-zone').forEach(element => { element.open = opened.has(element.dataset.zone); });
       document.querySelectorAll('[data-field-row]').forEach(element => { element.scrollLeft = scrolls.get(element.dataset.fieldRow) || 0; });
       loadArt($('match-view'));
@@ -228,6 +220,8 @@
     $('match-notices').innerHTML = next.notices?.length ? next.notices.slice(-5).map(notice => `<p>${esc(notice)}</p>`).join('') : '<p>Click cards to play or select them. Click a player’s life total to target them. Hover over a card to read it.</p>';
     if (next.notices?.length && JSON.stringify(next.notices) !== JSON.stringify(previous?.notices)) $('match-notices').parentElement.open = true;
     renderPrompt();
+    combatView.render(next);
+    handView.render(next);
     matchFeedback.render(next, previous, before);
     if (next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
     const busy = !next.prompt && !['finished', 'error'].includes(next.status);

@@ -116,6 +116,7 @@ const cardPreview = (() => {
   });
 
   document.addEventListener('pointerover', event => {
+    if (document.body.classList.contains('table-dragging')) return;
     if (panel.contains(event.target)) { clearTimeout(leaveTimer); return; }
     if (event.pointerType !== 'touch') {
       const source = find(event.target);
@@ -135,7 +136,7 @@ const cardPreview = (() => {
     if (active && !active.element.contains(event.relatedTarget) && !panel.contains(event.relatedTarget)) hide();
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Tab') keyboard = true;
+    if (event.key === 'Tab' || event.target.closest('#match-hand') && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) keyboard = true;
     if (event.key === 'Escape') hide();
     if (event.key.toLowerCase() === 'f' && !event.repeat && !event.ctrlKey && !event.altKey && !event.metaKey
       && !event.target.closest('input, textarea, select, [contenteditable="true"]') && !panel.hidden) {

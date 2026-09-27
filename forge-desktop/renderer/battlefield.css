@@ -14,6 +14,7 @@
 .match-arena {
   --field-card-width: clamp(36px, calc(12.5vh - 54px), 74px);
   --hand-card-width: 138px;
+  --hand-height: clamp(124px, 16vh, 150px);
   --pile-width: clamp(32px, 5vh, 47px);
   position: relative;
   isolation: isolate;
@@ -22,7 +23,7 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) 24px minmax(0, 1fr) 22px clamp(170px, 22vh, 222px);
+  grid-template-rows: minmax(0, 1fr) 24px minmax(0, 1fr) 22px var(--hand-height);
   padding: 14px 16px 4px;
   border: 1px solid #4b4b3b;
   border-radius: 18px;

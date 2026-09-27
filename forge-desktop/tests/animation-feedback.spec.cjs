@@ -52,8 +52,28 @@ test('a played card animates once; priority refreshes do not replay it and tappi
       };
     });
     const forest = state.players.find(player => player.human).zones.find(zone => zone.name === 'Hand').cards[0];
-    // The newly readable cost bar must still activate exactly its own card.
-    await page.locator(`#match-hand [data-visual-card="${forest.visualId}"] .match-hand-cost`).click();
+    // A canceled drag must not fall through into a card click. A successful
+    // drag plays exactly the selected Forest and still emits one arrival.
+    const tile = page.locator(`#match-hand [data-visual-card="${forest.visualId}"]`);
+    await tile.focus();
+    let box = await tile.boundingBox();
+    const table = await page.locator('#match-human').boundingBox();
+    const destination = { x: table.x + table.width / 2, y: table.y + 25 };
+    await page.mouse.move(box.x + box.width / 2, box.y + 55);
+    await page.mouse.down();
+    await page.mouse.move(destination.x, destination.y, { steps: 10 });
+    await expect(page.locator('.table-drag-ghost')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await page.mouse.up();
+    await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
+    expect((await page.evaluate(() => window.forge.request('matchState'))).prompt.id).toBe(state.prompt.id);
+    await tile.focus();
+    box = await tile.boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + 55);
+    await page.mouse.down();
+    await page.mouse.move(destination.x, destination.y, { steps: 10 });
+    await expect(page.locator('.table-drag-label')).toContainText('Release to play');
+    await page.mouse.up();
     const field = page.locator(`#match-human .lands-row [data-visual-card="${forest.visualId}"]`);
     await expect(field).toBeVisible();
     const animations = () => page.evaluate(id => window.cardAnimations.filter(item => item.id === id), forest.visualId);

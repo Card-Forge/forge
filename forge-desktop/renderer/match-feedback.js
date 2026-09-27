@@ -47,7 +47,7 @@ const matchFeedback = (() => {
     if ($('match-view').hidden) return result;
     document.querySelectorAll('.match-card[data-visual-card]').forEach(element => {
       const id = element.dataset.visualCard;
-      if (!id || !element.checkVisibility()) return;
+      if (!id || element.classList.contains('table-drag-ghost') || element.dataset.handVisible === 'false' || !element.checkVisibility()) return;
       result.set(id, { rect: element.getBoundingClientRect(),
         transform: getComputedStyle(element.querySelector('.card-art')).transform,
         area: element.closest('#match-hand') ? 'hand' : element.closest('.battlefield-row') ? 'field' : 'other' });
@@ -72,7 +72,7 @@ const matchFeedback = (() => {
     let arrivals = 0;
     document.querySelectorAll('.match-card[data-visual-card]').forEach(element => {
       const id = element.dataset.visualCard, old = before.get(id) || positions.get(id), card = current.get(id), former = prior.get(id);
-      if (!id || !card || !element.checkVisibility()) return;
+      if (!id || !card || element.classList.contains('table-drag-ghost') || element.dataset.handVisible === 'false' || !element.checkVisibility()) return;
       const area = element.closest('#match-hand') ? 'hand' : element.closest('.battlefield-row') ? 'field' : 'other';
       // Cached rectangles describe where a flight can start, not whether a
       // play happened. Priority-only snapshots retain DOM nodes and can still

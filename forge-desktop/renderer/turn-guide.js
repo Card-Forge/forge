@@ -65,13 +65,11 @@ const turnGuide = (() => {
       instruction = 'Click one of the highlighted life totals to choose that player.';
     } else if (prompt?.inputType === 'InputAttack') {
       title = 'Choose your attackers.';
-      instruction = state.playerCount > 2
-        ? 'Choose an opponent’s life total (or a planeswalker) first, then select your attackers for that defender. Repeat for other opponents, then choose Confirm attackers.'
-        : 'Select the creatures you want to attack with, then choose Confirm attackers. To attack with none, leave them unselected and confirm, if allowed.';
+      instruction = 'In the combat panel, choose who to attack, then select your creatures. Each attack shows its defender. Choose Confirm attackers when ready, or confirm with none if allowed.';
       passLabel = 'Confirm attackers';
     } else if (prompt?.inputType === 'InputBlock') {
       title = 'Choose your blockers.';
-      instruction = 'Select an attacking creature, then one of your creatures to block it. Repeat for other attackers, then choose Confirm blocks. Leave your creatures unassigned to take the attacks, if allowed.';
+      instruction = 'Select an attacker in the combat panel, then choose a legal blocker below, or drag it onto an eligible attacker. Connected cards show each block. Click an assigned blocker to remove that block, then Confirm blocks when ready.';
       passLabel = 'Confirm blocks';
     } else if (prompt?.inputType?.startsWith('InputPayMana')) {
       title = 'Pay the requested cost.';

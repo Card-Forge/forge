@@ -45,19 +45,21 @@ test('hand costs and creature stats stay readable and reachable at desktop sizes
       } else await page.waitForTimeout(100);
     }
     await expect(page.locator('#match-hand .match-card')).toHaveCount(7);
+    await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.inputType).toContain('Mulligan');
     const state = await page.evaluate(() => window.forge.request('matchState'));
+    await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
     const hand = state.players.find(player => player.human).zones.find(zone => zone.name === 'Hand').cards;
     for (const size of [[1540, 980], [1120, 740], [1000, 740]]) {
       await application.evaluate(({ BrowserWindow }, size) => BrowserWindow.getAllWindows()[0].setSize(...size), size);
       await page.waitForTimeout(150);
       for (const card of hand) {
         const tile = page.locator(`#match-hand [data-visual-card="${card.visualId}"]`);
-        await tile.focus(); // Keyboard users can reach cards outside the scroller.
+        await tile.focus(); // Keyboard focus lifts the card without playing it.
         await expect(tile.locator('.match-stats')).toHaveText(`${card.power}/${card.toughness}`);
         await expect(tile.locator('.match-hand-cost .mana')).toHaveText((card.manaCost.match(/\{([^}]+)\}/g) || []).map(value => value.slice(1, -1)));
         await expect(tile.locator('.match-card-name')).toHaveText(card.name);
         const layout = await tile.evaluate(element => {
-          const hand = element.parentElement.getBoundingClientRect();
+          const hand = element.closest('.match-arena').getBoundingClientRect();
           const bounds = element.getBoundingClientRect();
           const cost = element.querySelector('.match-hand-cost').getBoundingClientRect();
           const stats = element.querySelector('.match-stats').getBoundingClientRect();
@@ -70,6 +72,8 @@ test('hand costs and creature stats stay readable and reachable at desktop sizes
               return rect.left >= bounds.left && rect.right <= bounds.right && rect.top >= bounds.top && rect.bottom <= bounds.bottom;
             }),
             visible: bounds.left >= hand.left && bounds.right <= hand.right && bounds.top >= hand.top && bounds.bottom <= hand.bottom,
+            exposed: [cost, stats, name].every(rect => element.contains(document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2))),
+            hits: [cost, stats, name].map(rect => document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2)?.outerHTML.slice(0, 200)),
             separate: cost.bottom <= name.top && name.bottom <= stats.top,
             statsSize: parseFloat(getComputedStyle(element.querySelector('.match-stats')).fontSize),
             costSizes: [...element.querySelectorAll('.mana')].map(symbol => parseFloat(getComputedStyle(symbol).fontSize)),
@@ -78,11 +82,13 @@ test('hand costs and creature stats stay readable and reachable at desktop sizes
         });
         expect(layout.fits, `${size}: ${card.name} details fit`).toBe(true);
         expect(layout.visible, `${size}: ${card.name} scrolls fully into view: ${JSON.stringify(layout.bounds)}`).toBe(true);
+        expect(layout.exposed, `${size}: ${card.name} lifted card information is not covered by neighboring cards: ${JSON.stringify(layout.hits)}`).toBe(true);
         expect(layout.separate, `${size}: cost, name and stats never overlap`).toBe(true);
         expect(layout.statsSize).toBeGreaterThanOrEqual(18);
         expect(Math.min(...layout.costSizes)).toBeGreaterThanOrEqual(12);
         expect(layout.nameSize).toBeGreaterThanOrEqual(13);
       }
+      expect(await page.locator('#match-hand').evaluate(element => element.getBoundingClientRect().height)).toBeLessThanOrEqual(150);
       await page.locator('#match-hand .match-card').first().focus();
       await page.mouse.move(5, 5);
       if (!packaged) await page.screenshot({ path: test.info().outputPath(`hand-${size[0]}.png`) });

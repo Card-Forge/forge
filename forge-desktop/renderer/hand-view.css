@@ -1,0 +1,49 @@
+/* The hand occupies a narrow strip; one card lifts upright for inspection. */
+.match-hand-card { grid-template-areas: 'cost' 'art' 'name' 'details'; }
+.match-hand { position: relative; display: block; padding: 0; overflow: visible; z-index: 12; }
+.match-hand > .match-hand-card {
+  position: absolute; left: var(--hand-x); bottom: 8px;
+  width: 148px; height: calc(var(--hand-height) - 18px);
+  grid-template-areas: 'cost' 'art' 'name'; grid-template-rows: auto minmax(0, 1fr) 16px;
+  z-index: var(--hand-order); transform: translateY(var(--hand-arc)) rotate(var(--hand-angle));
+  transform-origin: center 160%; touch-action: none;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.match-hand > [data-hand-visible="false"] { opacity: 0; pointer-events: none; }
+.match-hand-card .match-hand-cost { grid-area: cost; }
+.match-hand-card .match-card-face { grid-area: art; }
+.match-hand-card .match-card-name { grid-area: name; }
+.match-hand-card .match-hand-details { grid-area: details; }
+.match-hand > .match-hand-card:not(.hand-raised) .match-card-name { display: block; white-space: nowrap; text-overflow: ellipsis; }
+.match-hand > .match-hand-card:not(.hand-raised) .match-hand-details { position: absolute; left: 7px; bottom: 26px; }
+.match-hand > .match-hand-card:not(.hand-raised) .match-hand-type { display: none; }
+.match-hand > .match-hand-card.hand-raised {
+  left: var(--hand-raised-x); bottom: 6px; width: 180px; height: 262px;
+  grid-template-areas: 'cost' 'art' 'name' 'details'; grid-template-rows: auto minmax(0, 1fr) 32px 26px;
+  z-index: 30; transform: none; border-color: #e5cc8d;
+  box-shadow: 0 12px 28px #000b, 0 0 0 1px #d8c58b55;
+}
+.match-hand > .match-hand-card.actionable { cursor: grab; }
+.match-hand > .match-hand-card.drag-source { opacity: .35; }
+.hand-page { position: absolute; bottom: 43px; z-index: 13; width: 26px; height: 44px; padding: 0; border: 1px solid #a4ae85; border-radius: 6px; background: #1c3029; color: #f0d8a0; font-size: 28px; box-shadow: 0 3px 9px #0009; }
+.hand-page[data-direction="previous"] { left: 10px; }
+.hand-page[data-direction="next"] { right: 10px; }
+.match-arena:has(.combat-view[data-mode="attack"]:not([hidden])) .match-hand,
+.match-arena:has(.combat-view[data-mode="block"]:not([hidden])) .match-hand,
+.match-arena:has(.library-picker:not([hidden])) .match-hand { z-index: 1; }
+.match-arena:has(.combat-view[data-mode="attack"]:not([hidden])) .hand-page,
+.match-arena:has(.combat-view[data-mode="block"]:not([hidden])) .hand-page,
+.match-arena:has(.library-picker:not([hidden])) .hand-page { visibility: hidden; }
+.hand-drop-ready::after { content: 'PLAY HERE'; position: absolute; inset: 12px 12px calc(var(--hand-height) + 30px); z-index: 14; display: grid; place-items: center; pointer-events: none; border: 2px dashed #d8df9c; border-radius: 12px; background: #9bb66c14; color: #fff0bd; font: 18px Georgia; letter-spacing: 3px; text-shadow: 0 2px 6px #000; }
+.table-dragging, .table-dragging * { cursor: grabbing !important; user-select: none !important; }
+.table-drag-ghost { position: fixed !important; z-index: 10000 !important; pointer-events: none !important; margin: 0 !important; width: 180px !important; height: 250px !important; bottom: auto !important; opacity: .94 !important; transform: rotate(4deg) !important; box-shadow: 0 15px 35px #000b !important; }
+.match-hand-card.table-drag-ghost { grid-template-areas: 'cost' 'art' 'name' 'details'; grid-template-rows: auto minmax(0, 1fr) 32px 26px; background: #20382a; }
+.combat-candidate.table-drag-ghost { height: auto !important; padding: 10px; }
+.table-drag-label { position: fixed; z-index: 10001; pointer-events: none; max-width: 300px; padding: 9px 12px; border: 1px solid #858571; border-radius: 6px; background: #19291ff5; color: #e7e0c7; font-size: 12px; line-height: 1.4; box-shadow: 0 4px 15px #0007; }
+.table-drag-label.valid { border-color: #d3da98; color: #edf5bd; }
+.combat-candidate:not(:disabled) { touch-action: none; }
+.combat-candidate[data-combat-action="block"]:not(:disabled) { cursor: grab; }
+.combat-lane.block-drop-ready { outline: 2px solid #e6d699; outline-offset: -1px; background: #415333; }
+.combat-lane.block-drop-allowed:not(.block-drop-ready) { border-color: #bad494; }
+@media (prefers-reduced-motion: reduce) { .match-hand > .match-hand-card { transition: none; } }
+#match-view[data-motion="off"] .match-hand > .match-hand-card { transition: none; }

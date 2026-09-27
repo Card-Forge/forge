@@ -226,6 +226,21 @@ to describe the current face; inspecting `otherFace` never performs a game actio
 Face-down cards and cards the viewer cannot see never expose alternate identities,
 including in library-search choices. Split cards do not claim to have back artwork.
 
+Match snapshots include `combat` with attackers, their player/permanent defenders,
+assigned blocker IDs, the defending player for each attack, and the engine's
+blocked status (which can remain true after a blocker leaves). During declaration,
+the snapshot includes attacker candidates, legal blocker pairs, the selected
+defender, and any final block-validation problem. IDs refer to visible cards'
+`combatId`, falling back to `visualId`; face-down battlefield cards receive distinct
+opaque position handles, reset on zone changes, without exposing their identities.
+
+`matchAction {action: "block", attackerKey, blockerKey, sessionId, promptId}` toggles
+one block through the engine's normal input. Both card keys must belong to the
+same current prompt and form a legal or already assigned pair. The adapter rejects
+stale keys, non-blocking phases, and illegal pairs before making changes. Confirming
+blocks still uses `action: "ok"`, including engine enforcement of menace and other
+requirements. No damage outcome is predicted by the client.
+
 ## Upstream maintenance
 
 Keep `upstream` pointed at Card-Forge/forge and `origin` at proflayton/forge.
