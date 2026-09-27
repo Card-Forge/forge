@@ -702,21 +702,13 @@ public class VLobby implements ILobbyView {
 
         Deck result = deck;
         if (previousPick != null && previousBase != null
-                && deck.getName().equals(previousBase.getName()) && isValidCommanderPick(deck, previousPick)) {
+                && deck.getName().equals(previousBase.getName())
+                && CommanderPicks.isValidPick(deck, previousPick, DeckFormat.Commander)) {
             result = CommanderOptions.withCommanders(deck, previousPick);
             commanderPicks.put(index, previousPick);
         }
         updateCommanderPickButton(index);
         return result;
-    }
-
-    private static boolean isValidCommanderPick(final Deck deck, final List<PaperCard> pick) {
-        for (final PaperCard card : pick) {
-            if (!deck.getMain().contains(card) && !deck.getCommanders().contains(card)) {
-                return false;
-            }
-        }
-        return DeckFormat.Commander.getCommanderConformanceProblem(CommanderOptions.withCommanders(deck, pick)) == null;
     }
 
     /** Opens the commander picker for a player and applies their choice to the lobby deck. */
@@ -728,20 +720,11 @@ public class VLobby implements ILobbyView {
         }
 
         final List<PaperCard> current = commanderPicks.getOrDefault(index, base.getCommanders());
-        int selected = 0;
-        for (int i = 0; i < options.size(); i++) {
-            final List<PaperCard> commanders = options.get(i).getCommanders();
-            if (isSameCommanders(commanders, current) || commanders.size() == 1 && current.contains(commanders.get(0))) {
-                selected = i;
-                break;
-            }
-        }
-
         final String playerName = getPlayerPanel(index).getPlayerName();
         final CommanderOptions.Option option = CommanderChooser.choose(
                 localizer.getMessage("lblChooseCommanderFor", playerName),
                 localizer.getMessage("lblChooseCommanderHint"),
-                options, selected, this::describeCommanderOption, o -> o.getCommanders().get(0));
+                options, CommanderPicks.indexOfCurrent(options, current), CommanderPicks::describe, o -> o.getCommanders().get(0));
         if (option == null) {
             return;
         }
@@ -751,18 +734,14 @@ public class VLobby implements ILobbyView {
             final PaperCard commander = picked.get(0);
             final List<PaperCard> partners = CommanderOptions.getPartnerOptions(base, commander, DeckFormat.Commander);
             if (!partners.isEmpty()) {
-                // Optional.empty() stands for "No partner"; null means the dialog was cancelled.
-                // It's left out when the commander needs a partner to cover the deck's colors.
+                // Optional.empty() stands for "No partner"; null means the dialog was cancelled
                 final List<Optional<PaperCard>> partnerChoices = new ArrayList<>();
-                if (option.getKind() == CommanderOptions.Kind.DEFAULT
-                        || CommanderOptions.canLeadAlone(base, commander, DeckFormat.Commander)) {
+                if (CommanderPicks.allowsNoPartner(base, option, DeckFormat.Commander)) {
                     partnerChoices.add(Optional.empty());
                 }
-                int selectedPartner = 0;
+                final int currentPartner = CommanderPicks.indexOfCurrentPartner(partners, commander, current);
+                final int selectedPartner = currentPartner < 0 ? 0 : partnerChoices.size() + currentPartner;
                 for (final PaperCard partner : partners) {
-                    if (current.contains(commander) && current.contains(partner)) {
-                        selectedPartner = partnerChoices.size();
-                    }
                     partnerChoices.add(Optional.of(partner));
                 }
                 final Optional<PaperCard> partner = CommanderChooser.choose(
@@ -780,7 +759,7 @@ public class VLobby implements ILobbyView {
             }
         }
 
-        if (isSameCommanders(picked, base.getCommanders())) {
+        if (CommanderPicks.isSame(picked, base.getCommanders())) {
             commanderPicks.remove(index);
         } else {
             commanderPicks.put(index, picked);
@@ -800,41 +779,8 @@ public class VLobby implements ILobbyView {
             panel.setCommanderPick("", false);
             return;
         }
-        final List<PaperCard> pick = commanderPicks.get(index);
-        final List<PaperCard> defaults = base.getCommanders();
-        boolean hasChoices = options.size() > 1;
-        if (!hasChoices && defaults.size() == 1) {
-            // A lone default commander may still be able to take a partner from the deck
-            hasChoices = !CommanderOptions.getPartnerOptions(base, defaults.get(0), DeckFormat.Commander).isEmpty();
-        }
-        final String text = pick == null
-                ? describeCommanders(defaults) + " (" + localizer.getMessage("lblDefaultCommanderTag") + ")"
-                : describeCommanders(pick);
-        panel.setCommanderPick(text, hasChoices);
-    }
-
-    private String describeCommanderOption(final CommanderOptions.Option option) {
-        final String names = describeCommanders(option.getCommanders());
-        switch (option.getKind()) {
-            case DEFAULT:
-                return names + " (" + localizer.getMessage("lblDefaultCommanderTag") + ")";
-            case SUGGESTED:
-                return names + " (" + localizer.getMessage("lblSuggestedCommanderTag") + ")";
-            default:
-                return names;
-        }
-    }
-
-    private static String describeCommanders(final List<PaperCard> commanders) {
-        final List<String> names = new ArrayList<>();
-        for (final PaperCard commander : commanders) {
-            names.add(CardTranslation.getTranslatedName(commander.getName()));
-        }
-        return String.join(" + ", names);
-    }
-
-    private static boolean isSameCommanders(final List<PaperCard> a, final List<PaperCard> b) {
-        return a.size() == b.size() && a.containsAll(b) && b.containsAll(a);
+        panel.setCommanderPick(CommanderPicks.describeCurrent(base, commanderPicks.get(index)),
+                CommanderPicks.hasChoices(base, options, DeckFormat.Commander));
     }
 
     private void selectSchemeDeck(final int playerIndex) {
