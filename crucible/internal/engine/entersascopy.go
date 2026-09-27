@@ -32,10 +32,25 @@ func (g *Game) enterBattlefieldReplacements(controller PlayerController, moved C
 
 // copyReplacement is one Copy-layer replacement that applies to an entry:
 // its host, the replacement, and the host face's SVar amounts.
+//
+// gen distinguishes moved's own replacements across generations: the DB
+// shares one *compile.Card per name (compile/db.go's byName), and cloneDef
+// copies Faces by value, so a copy that lands moved on a def it has carried
+// before (Body Double copying another Body Double, or an uncopied Vesuva)
+// reuses the exact same *compile.Ability pointer moved already ran. Without
+// gen, wasApplied would treat that as already applied and skip it, though
+// Java's own copied state is a fresh ReplacementEffect with hasRun=false and
+// offers the choice again (the Body Double/Clone rulings agree). gen is
+// len(moved's own copies) at the time this candidate was gathered for a
+// self=true host; it is always 0 for a non-self host, whose own Def never
+// changes through this loop, so pointer identity alone already dedupes it
+// correctly and a change to moved's own generation must not make Crucible
+// reconsider a different card's already-run replacement.
 type copyReplacement struct {
 	host    CardID
 	r       *compile.Ability
 	amounts map[string]expr.Amount
+	gen     int
 }
 
 // applyCopyReplacements is ReplacementHandler.run's Copy layer for moved's
@@ -89,9 +104,13 @@ func (g *Game) copyReplacementCandidates(moved CardID, origin ZoneType, applied 
 		if h.Def == nil {
 			return nil
 		}
+		gen := 0
+		if self {
+			gen = len(h.copies)
+		}
 		face := &h.Def.Faces[0]
 		for _, r := range face.Replacements {
-			c := copyReplacement{host: h.ID, r: r, amounts: face.Amounts}
+			c := copyReplacement{host: h.ID, r: r, amounts: face.Amounts, gen: gen}
 			if wasApplied(applied, c) {
 				continue
 			}
@@ -123,7 +142,7 @@ func (g *Game) copyReplacementCandidates(moved CardID, origin ZoneType, applied 
 
 func wasApplied(applied []copyReplacement, c copyReplacement) bool {
 	for _, a := range applied {
-		if a.host == c.host && a.r == c.r {
+		if a.host == c.host && a.r == c.r && a.gen == c.gen {
 			return true
 		}
 	}
