@@ -6,7 +6,6 @@ package engine
 import (
 	"sort"
 	"strconv"
-	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
@@ -326,36 +325,7 @@ func (c *Card) KeywordLines() []string {
 	if c.Def != nil {
 		lines = append(lines, c.Def.Faces[0].Keywords...)
 	}
-	if len(c.KeywordMod.effects) == 0 {
-		return lines
-	}
-	effects := append([]KeywordEffect(nil), c.KeywordMod.effects...)
-	sort.SliceStable(effects, func(i, j int) bool { return effects[i].Timestamp < effects[j].Timestamp })
-	for _, e := range effects {
-		switch {
-		case e.RemoveAll:
-			lines = nil
-		case len(e.RemoveKeywords) > 0:
-			kept := lines[:0:0]
-			for _, line := range lines {
-				if !hasAnyPrefix(line, e.RemoveKeywords) {
-					kept = append(kept, line)
-				}
-			}
-			lines = kept
-		}
-		lines = append(lines, e.AddKeywords...)
-	}
-	return lines
-}
-
-func hasAnyPrefix(s string, prefixes []string) bool {
-	for _, p := range prefixes {
-		if strings.HasPrefix(s, p) {
-			return true
-		}
-	}
-	return false
+	return c.KeywordMod.fold(lines)
 }
 
 // BasePower and BaseToughness are the card's printed power and toughness --

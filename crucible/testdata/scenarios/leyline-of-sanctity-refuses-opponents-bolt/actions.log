@@ -1,0 +1,16 @@
+# ScriptedController.ChooseTargets never validates its queued answer against
+# the offered candidates (last pack's own header note, targeting-and-chaining.md).
+# CR 702.11b: Leyline of Sanctity's own continuous grant (`Affected$ You |
+# AddKeyword$ Hexproof`) puts Hexproof on human, not on any card --
+# applyOneContinuousKeyword's own new player branch (continuous.go) writes
+# it to Player.KeywordMod every Layer 6 pass. ai's Lightning Bolt at human
+# is still offered a legal candidate (ai itself, ValidTgts$ Any), so casting
+# still succeeds; the CR 608.2b re-check (targetStillLegal ->
+# playerCantBeTargetedBy) then finds human illegal and drops it -- Bolt
+# fizzles, dealing no damage.
+startturn ai
+advance 3
+tapformana ai 2 R
+queue targets human
+queue action ai cast 3
+passpriority

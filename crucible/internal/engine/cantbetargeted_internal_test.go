@@ -56,6 +56,15 @@ func hasCardCandidate(candidates []EntityID, id CardID) bool {
 	return false
 }
 
+func hasPlayerCandidate(candidates []EntityID, id PlayerID) bool {
+	for _, e := range candidates {
+		if got, ok := e.AsPlayer(); ok && got == id {
+			return true
+		}
+	}
+	return false
+}
+
 // TestTargetCandidatesHexproofExcludesOpponentIncludesController is CR
 // 702.11b/e at the point a target is offered, not just at the CR 608.2b
 // re-check every fixture scenario can reach instead.
@@ -75,7 +84,7 @@ func TestTargetCandidatesHexproofExcludesOpponentIncludesController(t *testing.T
 	}
 }
 
-// TestTargetCandidatesShroudExcludesEvenTheController is CR 702.19a: Shroud
+// TestTargetCandidatesShroudExcludesEvenTheController is CR 702.18a: Shroud
 // carries no Activator$ gate, unlike Hexproof.
 func TestTargetCandidatesShroudExcludesEvenTheController(t *testing.T) {
 	t.Parallel()
@@ -130,5 +139,43 @@ func TestTargetCandidatesProtectionChecksEveryLine(t *testing.T) {
 
 	if got := g.targetCandidates(opp, green, "Creature"); hasCardCandidate(got, target) {
 		t.Errorf("targetCandidates includes a creature with Protection from green against a green source (second Protection line), want excluded")
+	}
+}
+
+// TestTargetCandidatesPlayerHexproofExcludesOpponentIncludesSelf is CR
+// 702.11b/e for a Player entity -- Leyline of Sanctity's own shape,
+// PlayerFactoryUtil.java's `Activator$ Opponent` gate, checked directly
+// against Player.KeywordMod rather than through a Layer 6 pass: a bare
+// Add is enough here, and running one would only risk a Clear() wiping it
+// (applyContinuousKeyword's own doc comment).
+func TestTargetCandidatesPlayerHexproofExcludesOpponentIncludesSelf(t *testing.T) {
+	t.Parallel()
+
+	g := targetCandidatesTestGame(t, "a", "b")
+	p, opp := g.Players()[0], g.Players()[1]
+	g.Player(p).KeywordMod.Add(KeywordEffect{AddKeywords: []string{"Hexproof"}})
+	src := g.NewCard(targetCandidatesTestCreature(t), opp, Hand)
+
+	if got := g.targetCandidates(opp, src, "Player"); hasPlayerCandidate(got, p) {
+		t.Errorf("opponent's targetCandidates includes a Hexproof player, want excluded")
+	}
+	if got := g.targetCandidates(p, src, "Player"); !hasPlayerCandidate(got, p) {
+		t.Errorf("controller's own targetCandidates excludes their own Hexproof player, want included")
+	}
+}
+
+// TestTargetCandidatesPlayerShroudExcludesEvenTheController is CR 702.18a
+// for a Player entity -- True Believer/Ivory Mask's own shape: no
+// Activator$ gate, unlike Hexproof.
+func TestTargetCandidatesPlayerShroudExcludesEvenTheController(t *testing.T) {
+	t.Parallel()
+
+	g := targetCandidatesTestGame(t, "a")
+	p := g.Players()[0]
+	g.Player(p).KeywordMod.Add(KeywordEffect{AddKeywords: []string{"Shroud"}})
+	src := g.NewCard(targetCandidatesTestCreature(t), p, Hand)
+
+	if got := g.targetCandidates(p, src, "Player"); hasPlayerCandidate(got, p) {
+		t.Errorf("targetCandidates includes a Shroud player for its own controller, want excluded")
 	}
 }

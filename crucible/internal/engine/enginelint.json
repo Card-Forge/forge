@@ -154,7 +154,7 @@
       "combat",
       "attackconstraints"
     ],
-    "staticability": ["id", "zone", "card", "game", "valid"],
+    "staticability": ["id", "zone", "card", "game", "valid", "player"],
     "block": [
       "id",
       "zone",

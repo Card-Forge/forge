@@ -245,7 +245,7 @@ func firstSpellAbility(c *Card) *compile.Ability {
 // enchantTargets is every battlefield permanent, across every player, that
 // spec (self's own Enchant restriction, enchantSpec) matches, and that does
 // not refuse self outright (cardCantBeTargetedBy, staticability.go -- CR
-// 702.11b/702.16e/702.19a's own Hexproof/Protection/Shroud gate, a separate
+// 702.11b/702.16e/702.18a's own Hexproof/Protection/Shroud gate, a separate
 // question from the card-type restriction spec itself checks) -- CR
 // 601.2c's legal-target set for casting self as an Aura. Matches' own
 // source parameter is self, the same "the enchantment's own id, not the

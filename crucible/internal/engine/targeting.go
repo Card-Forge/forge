@@ -191,7 +191,7 @@ func (g *Game) targetCandidates(controller PlayerID, source CardID, spec string)
 		if g.Player(pid).Lost {
 			continue
 		}
-		if matched, _ := matchesPlayerSpec(g, pid, controller, source, spec); matched {
+		if matched, _ := matchesPlayerSpec(g, pid, controller, source, spec); matched && !playerCantBeTargetedBy(g, pid, controller, source) {
 			candidates = append(candidates, PlayerEntity(pid))
 		}
 	}
@@ -536,19 +536,19 @@ func (g *Game) withoutIllegal(owner *Ability, targets []EntityID, chosen, kept *
 //   - anything else (an ability on the stack, ChangeTargets) is kept.
 //
 // Hexproof, shroud and protection (StaticAbilityCantTarget,
-// cardCantBeTargetedBy) are checked identically to targetCandidates
-// (Java's own SpellAbility.canTarget runs entity.canBeTargetedBy(this) at
-// both call sites regardless of fizzleCheck, no asymmetry). Ward
-// (StaticAbilityCantTarget's own BecomesTarget-triggered cost-tax, a
-// different mechanism entirely) is not; that gap is logged in
-// game-state.md's Not ported yet. Player targets are not checked against
-// Hexproof/Shroud: no card mechanism grants a Player entity either keyword
-// yet (cardCantBeTargetedBy's own doc comment), so there is nothing to
-// check.
+// cardCantBeTargetedBy/playerCantBeTargetedBy) are checked identically to
+// targetCandidates (Java's own SpellAbility.canTarget runs
+// entity.canBeTargetedBy(this) at both call sites regardless of
+// fizzleCheck, no asymmetry). Ward (StaticAbilityCantTarget's own
+// BecomesTarget-triggered cost-tax, a different mechanism entirely) is
+// not; that gap is logged in game-state.md's Not ported yet.
 func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 	spec, hasSpec := targetSpec(owner)
 	if pid, ok := e.AsPlayer(); ok {
 		if g.Player(pid).Lost {
+			return false
+		}
+		if playerCantBeTargetedBy(g, pid, owner.Controller, owner.Source) {
 			return false
 		}
 		if !hasSpec {

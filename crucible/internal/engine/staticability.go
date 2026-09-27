@@ -350,7 +350,7 @@ func hostRefusesAttach(g *Game, aura *Card, host CardID) bool {
 
 // cardCantBeTargetedBy reports whether target refuses to be the target of
 // an ability controlled by activator, sourced from source -- CR 702.11b/e
-// (Hexproof), 702.19a/b (Shroud) and 702.16e (Protection's targeting half),
+// (Hexproof), 702.18a/b (Shroud) and 702.16e (Protection's targeting half),
 // Java's Card.canBeTargetedBy/Player.canBeTargetedBy ->
 // StaticAbilityCantTarget.cantTarget (Card.java:6820-6838,
 // StaticAbilityCantTarget.java:37-51), narrowed the same way protectionEach
@@ -379,7 +379,7 @@ func hostRefusesAttach(g *Game, aura *Card, host CardID) bool {
 // it against aura instead. Shroud next, also unconditional (no
 // Activator$, no "Shroud from X" variant Keyword.java ever parses -- base
 // Shroud refuses every spell/ability, the controller's own included, CR
-// 702.19a). Hexproof last, gated on `Activator$ Opponent`
+// 702.18a). Hexproof last, gated on `Activator$ Opponent`
 // (CardFactoryUtil.java:3920-3931) -- matchesPlayerSpec's own "Opponent"
 // base already is that check, activator against target's controller as
 // You; bare `K:Hexproof` (80 of 110 real lines) then refuses
@@ -393,13 +393,9 @@ func hostRefusesAttach(g *Game, aura *Card, host CardID) bool {
 // naming one of these two cards as ValidTgts$ incorrectly lets the target
 // through; logged in game-state.md's Not ported yet.
 //
-// Player targets never refuse here: no keyword-granting mechanism exists
-// yet for a Player entity (PlayerFactoryUtil.java's own
-// `Affected$ You | AddKeyword$ Hexproof`-shaped continuous grant --
-// Leyline of Sanctity's own line -- has nothing on the Go side to land on;
-// Card.KeywordMod, continuous.go's own applyOneContinuousKeyword, only ever
-// writes a Card's keywords). Logged as its own game-state.md row, separate
-// from this one.
+// A Player target is playerCantBeTargetedBy's own job (below) -- Player has
+// no `protectionEach`/battlefield zone, so the two do not share a body, only
+// the Shroud/Hexproof shape.
 func cardCantBeTargetedBy(g *Game, target *Card, activator PlayerID, source CardID) bool {
 	if target.Zone != Battlefield {
 		return false
@@ -428,6 +424,57 @@ func cardCantBeTargetedBy(g *Game, target *Card, activator PlayerID, source Card
 		}
 		if vs, ok := hexproofValidSource(k.Details); ok {
 			if vs == "" || Matches(g, src, valid.Parse(vs), target.Controller(), target.ID) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// playerCantBeTargetedBy is cardCantBeTargetedBy's own Player-entity
+// counterpart -- Java's Player.canBeTargetedBy -> StaticAbilityCantTarget.
+// cantTarget (Player.java:1030-1041), ported from PlayerFactoryUtil.java's
+// own Hexproof/Shroud branches (`ValidTarget$ Player.You`, `EffectZone$
+// Command`, otherwise identical to the Card branches CardFactoryUtil.java
+// synthesizes). Protection's own player-targeting branch
+// (PlayerFactoryUtil.java:33-40) is not read yet: real corpus cards do
+// grant a player Protection (Runed Halo's `Protection:ChosenName`, Absolute
+// Virtue's `Protection:Player.Opponent:...`, Serra's Emissary, Gor Muldrak
+// Amphinologist -- keywordTokens' own dynamic-marker skip, continuous.go,
+// already refuses `ChosenName`; the rest reach `Player.KeywordMod`
+// unresolved), but `protectionEach` (above) only ever matches a source
+// card's own color/type against a candidate blocker, aura or targeting
+// ability's host -- Absolute Virtue's `Player.Opponent:...` is a
+// player-relative spec `protectionColorValid`/the colon-structured branch
+// was never built to parse. Logged in game-state.md's Not ported yet.
+//
+// target's own KeywordLines (player.go) is entirely Layer 6's doing --
+// applyOneContinuousKeyword's own player branch (continuous.go), the one
+// source of a Player's keyword lines, since a player has no printed face
+// to fold onto the way a card does. Shroud first and unconditional, same
+// as the Card branch; Hexproof gated on `Activator$ Opponent`, matched the
+// same way.
+func playerCantBeTargetedBy(g *Game, target PlayerID, activator PlayerID, source CardID) bool {
+	p := g.Player(target)
+	for _, line := range p.KeywordLines() {
+		if keyword.Parse(line).Name == "Shroud" {
+			return true
+		}
+	}
+	if matched, _ := matchesPlayerSpec(g, activator, target, source, "Opponent"); !matched {
+		return false
+	}
+	src := g.Card(source)
+	for _, line := range p.KeywordLines() {
+		k := keyword.Parse(line)
+		if k.Name != "Hexproof" {
+			continue
+		}
+		if k.Details == "" {
+			return true
+		}
+		if vs, ok := hexproofValidSource(k.Details); ok {
+			if vs == "" || Matches(g, src, valid.Parse(vs), target, source) {
 				return true
 			}
 		}

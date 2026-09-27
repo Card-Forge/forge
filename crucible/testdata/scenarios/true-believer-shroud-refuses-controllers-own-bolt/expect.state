@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=True Believer|Id:1;Mountain|Id:2|Tapped
+humangraveyard=Lightning Bolt
+ailife=20

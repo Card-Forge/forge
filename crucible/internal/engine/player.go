@@ -2,7 +2,11 @@
 
 package engine
 
-import "sort"
+import (
+	"sort"
+
+	"github.com/jczastkiewicz/crucible/internal/keyword"
+)
 
 // Player is one player in one game.
 //
@@ -163,6 +167,37 @@ type Player struct {
 	// (CR 724.4, 725.4, becomemonarcheffect.go), then drops the player from
 	// ingamePlayers.
 	lossHandled bool
+	// KeywordMod is CR 613's Layer 6 for a Player entity -- the same
+	// continuous ability-granting type a Card's own KeywordMod
+	// (keywordmod.go) already is, reused unchanged: nothing about "which
+	// keywords currently apply, folded in timestamp order" is specific to a
+	// card. Java's own PlayerFactoryUtil.addStaticAbility-shaped grant
+	// (`Affected$ You | AddKeyword$ Hexproof`, Leyline of Sanctity's own
+	// line) writes here through applyContinuousKeyword (continuous.go),
+	// cleared and rebuilt every Layer 6 pass the identical way a card's own
+	// is.
+	KeywordMod KeywordMod
+}
+
+// HasKeyword reports whether the player currently carries the named
+// keyword -- Card.HasKeyword's own player-entity counterpart, Java's own
+// Player.hasKeyword(String). A player has no printed face to fold onto,
+// unlike a card: every line here came from a continuous effect.
+func (p *Player) HasKeyword(name string) bool {
+	for _, line := range p.KeywordLines() {
+		if keyword.Parse(line).Name == name {
+			return true
+		}
+	}
+	return false
+}
+
+// KeywordLines is every keyword line p currently carries -- Card.
+// KeywordLines' own player-entity counterpart, folded in Timestamp order
+// the identical way (KeywordsChange.applyKeywords). No printed face to
+// start from: a player's own keyword lines are entirely Layer 6's doing.
+func (p *Player) KeywordLines() []string {
+	return p.KeywordMod.fold(nil)
 }
 
 // HandSizeLimit folds Layer 8's own SetMaxHandSize$/RaiseMaxHandSize$

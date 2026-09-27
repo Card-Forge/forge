@@ -1,0 +1,12 @@
+# CR 702.11b: Leyline of Sanctity's own `Affected$ You` grants Hexproof to
+# human alone (applyOneContinuousKeyword's own matchesPlayerSpec("You")
+# check, continuous.go, resolved against host.Controller() -- human --
+# never against every player in the game). human's Lightning Bolt at ai
+# is unaffected by human's own Leyline: ai has no Hexproof at all, so Bolt
+# resolves normally.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets ai
+queue action human cast 3
+passpriority

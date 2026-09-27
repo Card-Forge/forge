@@ -475,6 +475,7 @@ func applyContinuousKeyword(g *Game) {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
 			g.Card(id).KeywordMod.Clear()
 		}
+		g.Player(pid).KeywordMod.Clear()
 	}
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
@@ -492,14 +493,28 @@ func applyContinuousKeyword(g *Game) {
 }
 
 // applyOneContinuousKeyword is applyOneContinuousPT's/Type's/Color's own
-// Layer 6 counterpart: s applies to every battlefield permanent its own
-// Affected$ valid-string matches, if s is a Mode$ Continuous line naming
-// AddKeyword$ in the one shape this slice can resolve -- a plain, " & "-
-// separated list of literal keyword lines, already written exactly the way
-// a real K: line would be ("Ward:2", "First Strike", "Protection:...") --
-// keywordTokens (below) hands each one to KeywordEffect verbatim, and
-// HasKeyword (card.go) reads them back with keyword.Parse the identical way
-// it already reads a printed keyword.
+// Layer 6 counterpart: s applies to every battlefield permanent AND every
+// player its own Affected$ valid-string matches (targetCandidates' own
+// union reasoning, targeting.go -- an ordinary card-shaped spec like
+// "Creature.YouCtrl" simply matches no player, the identical way an
+// ordinary player-shaped one like "You" matches no card), if s is a
+// Mode$ Continuous line naming AddKeyword$ in the one shape this slice can
+// resolve -- a plain, " & "-separated list of literal keyword lines,
+// already written exactly the way a real K: line would be ("Ward:2",
+// "First Strike", "Protection:...") -- keywordTokens (below) hands each one
+// to KeywordEffect verbatim, and HasKeyword (card.go, player.go) reads them
+// back with keyword.Parse the identical way it already reads a printed
+// keyword. 16 real lines whose `Affected$` includes `You` (12 bare `You`)
+// name `AddKeyword$ Hexproof` (Leyline of Sanctity among them), 4 name
+// `AddKeyword$ Shroud` (Ivory Mask, True Believer) -- the two player
+// -granted keywords `playerCantBeTargetedBy` (staticability.go) reads.
+// A handful more name `AddKeyword$ Protection:...` (Runed Halo's own
+// `Protection:ChosenName`, Absolute Virtue's `Protection:Player.Opponent:
+// ...`) -- keywordTokens' own dynamic-marker skip (below) already refuses
+// `ChosenName`, but `Player.Opponent`'s colon-structured player-relative
+// shape is not a marker, so it reaches `Player.KeywordMod` unresolved;
+// `playerCantBeTargetedBy` does not read Protection at all yet (Not ported
+// yet, game-state.md).
 //
 // A whole line is skipped, not applied partially, the instant it carries:
 //   - RemoveKeyword$/RemoveAllAbilities$ (5 of 1,561 real AddKeyword$
@@ -550,6 +565,15 @@ func applyOneContinuousKeyword(g *Game, host *Card, s *compile.Ability) {
 				continue
 			}
 			g.Card(id).KeywordMod.Add(KeywordEffect{Timestamp: host.Timestamp, AddKeywords: keywords})
+		}
+		// A Player entity, not just a card, can be Affected$: Leyline of
+		// Sanctity's own `Affected$ You | AddKeyword$ Hexproof`
+		// (PlayerFactoryUtil.java's own precedent for a player-granted
+		// keyword) matches no card at all -- targetCandidates' own union
+		// reasoning (targeting.go) applies here too, probing both pools
+		// unconditionally rather than picking one by a spec's own shape.
+		if matched, _ := matchesPlayerSpec(g, pid, host.Controller(), host.ID, affected); matched {
+			g.Player(pid).KeywordMod.Add(KeywordEffect{Timestamp: host.Timestamp, AddKeywords: keywords})
 		}
 	}
 }

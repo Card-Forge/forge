@@ -1,0 +1,10 @@
+# CR 702.11b/e: Hexproof's Activator$ Opponent gate (playerCantBeTargetedBy,
+# staticability.go) only ever refuses an opponent's spell or ability --
+# human's own Lightning Bolt at human, both granted by human's own Leyline
+# of Sanctity, stays a legal target throughout, so Bolt resolves normally.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets human
+queue action human cast 3
+passpriority

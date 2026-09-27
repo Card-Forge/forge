@@ -1,0 +1,12 @@
+# CR 702.18a: True Believer's own continuous grant (`Affected$ You |
+# AddKeyword$ Shroud`) carries no Activator$ gate -- it refuses every
+# spell or ability, human's own included. human's own Lightning Bolt at
+# human is still offered a legal candidate (ai, ValidTgts$ Any), so casting
+# still succeeds; the CR 608.2b re-check (playerCantBeTargetedBy)
+# then finds human illegal and drops it -- Bolt fizzles, dealing no damage.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets human
+queue action human cast 3
+passpriority

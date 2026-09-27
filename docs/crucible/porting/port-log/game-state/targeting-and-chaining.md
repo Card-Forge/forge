@@ -166,7 +166,7 @@ regardless of `fizzleCheck` (`SpellAbility.java:1608`), no asymmetry to reproduc
 | Keyword    | Refuses when                                                                                         | Activator gate | CR        |
 | ---------- | ---------------------------------------------------------------------------------------------------- | -------------- | --------- |
 | Protection | source (the ability's own host card) matches `protectionEach`'s spec                                 | none           | 702.16e   |
-| Shroud     | always                                                                                               | none           | 702.19a   |
+| Shroud     | always                                                                                               | none           | 702.18a   |
 | Hexproof   | activator is an opponent of target's controller, and (bare, or source matches `hexproofValidSource`) | Opponent       | 702.11b/e |
 
 `hexproofValidSource` (`staticability.go`, built for an Aura's own attach check) is reused unchanged — the same
@@ -198,23 +198,39 @@ real corpus interaction, only by this port's own prior scope limit). `enchantTar
 `auraTargetStillLegal` (the CR 608.2b re-check) call `cardCantBeTargetedBy` instead, picking up Shroud for an Aura's own
 target for the first time too.
 
-Not resolved: "Hexproof from triggered/activated abilities" (2 real corpus lines) — `hexproofValidSource`'s own
-`ok=false` for `Triggered`/`Activated` (Java's `ValidSA$`, not `ValidSource$`; `Matches` only ever takes a `*Card`) — so
-it never refuses; a `Ward` (`Keyword.WARD`, `CardFactoryUtil.java`'s own
+A Player entity's Hexproof/Shroud now refuses too — Leyline of Sanctity's own `Affected$ You | AddKeyword$ Hexproof`
+line (`PlayerFactoryUtil.java`'s own continuous-grant precedent) and Ivory Mask/True Believer's
+`Affected$ You | AddKeyword$ Shroud` (16 lines whose `Affected$` includes `You`, 12 of them bare `You`, for Hexproof; 4
+for Shroud) write to `Player.KeywordMod` (player.go) through `applyOneContinuousKeyword`'s own player branch
+(continuous.go) exactly the way a card's own `KeywordMod` is written, folded into `Player.KeywordLines` the identical
+way `KeywordMod.fold` folds a card's. `playerCantBeTargetedBy` (staticability.go) is `cardCantBeTargetedBy`'s own
+Player-entity counterpart — the same Shroud-then-gated-Hexproof shape, matched against `Player.KeywordLines` instead of
+`Card.KeywordLines`, with no battlefield zone gate (a player has no zone). Protection's own player-targeting branch
+(`PlayerFactoryUtil.java:33-40`) is not read: real cards do grant a player Protection (Runed Halo, Absolute Virtue,
+Serra's Emissary, Gor Muldrak Amphinologist), and the non-`ChosenName` ones among them do reach `Player.KeywordMod`
+unresolved, but `protectionEach` was built to match a source card's own color/type, never Absolute Virtue's
+player-relative `Player.Opponent:...` spec — logged in game-state.md's Not ported yet rather than guessed at.
+
+Not resolved: "Hexproof from triggered/activated abilities" (2 real corpus lines, card and player alike) —
+`hexproofValidSource`'s own `ok=false` for `Triggered`/`Activated` (Java's `ValidSA$`, not `ValidSource$`; `Matches`
+only ever takes a `*Card`) — so it never refuses; a `Ward` (`Keyword.WARD`, `CardFactoryUtil.java`'s own
 `Mode$ BecomesTarget | Execute$ DB$ Counter | UnlessCost$ ...` synthesis) is not a targeting restriction at all — a
 Warded permanent is targeted successfully, then its trigger may counter the triggering spell/ability afterward — and
 stays unbuilt: no keyword-to-trigger synthesis exists yet for turning a bare `K:Ward:N` line into that trigger+effect
-pair (Not ported yet). A Player entity's Hexproof/Shroud (`PlayerFactoryUtil.java`'s own
-`Affected$ You | AddKeyword$ Hexproof`-shaped continuous grant, Leyline of Sanctity's own line) never refuses either:
-`continuous.go`'s `applyOneContinuousKeyword` only ever writes a Card's `KeywordMod`, nothing grants a Player entity a
-keyword yet.
+pair (Not ported yet).
 
 Fixtures use `Lightning Bolt` (`DealDamage`), not `Pump`, to prove a target was accepted or refused — a Pump's own
 `+3/+3` marks no state `fixture.Dump` carries, so a fizzled Pump and a resolved one dump identically; Bolt's damage does
 not. `hexproof-refuses-opponents-bolt-on-resolution`, `hexproof-allows-controllers-own-bolt`,
 `shroud-refuses-controllers-own-bolt-on-resolution`, `protection-from-red-refuses-bolt-on-resolution` cover the four
-keyword/gate combinations; `counterspell-targets-hexproof-creatures-own-spell` covers the zone gate;
-`pacifism-stays-attached-to-hexproof-host` covers the `hostRefusesAttach` split's own regression.
+Card-entity keyword/gate combinations; `leyline-of-sanctity-refuses-opponents-bolt`,
+`leyline-of-sanctity-allows-controllers-own-bolt`, `leyline-of-sanctity-hexproof-does-not-extend-to-opponent` and
+`true-believer-shroud-refuses-controllers-own-bolt` cover the same four for a Player entity;
+`counterspell-targets-hexproof-creatures-own-spell` covers the zone gate; `pacifism-stays-attached-to-hexproof-host`
+covers the `hostRefusesAttach` split's own regression. `cantbetargeted_internal_test.go` (package `engine`, TEST-2's
+"not observable from outside" row) holds `targetCandidates`' own choice-time filter to the same rule directly, Card and
+Player alike — every "-on-resolution"/"-refuses-" fixture above would still pass with that filter deleted, since
+`ScriptedController.ChooseTargets` never validates its answer against the candidates it was offered.
 
 ## SubAbility chaining itself lands
 
