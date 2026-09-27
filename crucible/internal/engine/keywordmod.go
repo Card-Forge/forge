@@ -28,9 +28,9 @@ type KeywordMod struct {
 // away first. RemoveKeywords drops every line starting with one of its
 // entries (KeywordCollection.remove's own startsWith match); RemoveAll drops
 // every line. Removal applies before the effect's own additions, Java's
-// applyKeywords order. A resolved Animate/Debuff line is the only source of
-// a removal today: applyOneContinuousKeyword (continuous.go) still skips a
-// static line naming RemoveKeyword$/RemoveAllAbilities$.
+// applyKeywords order. A resolved Animate/Debuff line and a static
+// RemoveKeyword$/RemoveAllAbilities$ line (applyOneContinuousKeyword,
+// continuous.go) are the sources of a removal.
 type KeywordEffect struct {
 	Timestamp      uint64
 	AddKeywords    []string

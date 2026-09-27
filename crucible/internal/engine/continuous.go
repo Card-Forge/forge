@@ -6,9 +6,9 @@
 // RemoveType$, applyContinuousType), Layer 5's own color-changing keys
 // (AddColor$/SetColor$, applyContinuousColor) and Layer 6's own
 // ability-granting key (AddKeyword$, applyContinuousKeyword below -- the
-// single largest real slice of all four, 1,556 of 1,857 real lines) are the
-// next three, all four evaluated against the same blanket Affected$
-// valid-string.
+// single largest real slice of all four, 1,710 of 1,875 real lines) are the
+// next three, Layers 4-6 through continuouslayers.go's gate and affected
+// set (AffectedDefined$/AffectedZone$/Affected$).
 //
 // Ported from
 // forge-game/src/main/java/forge/game/staticability/StaticAbilityContinuous.java's
@@ -20,9 +20,7 @@ import (
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
-	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/expr"
-	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -225,20 +223,23 @@ func applyOneCharacteristicDefiningPT(g *Game, host *Card, amounts map[string]ex
 	})
 }
 
-// applyContinuousType recomputes every battlefield permanent's own Layer 4
-// TypeMod effects from scratch, from every real Mode$ Continuous S: line
-// currently in play -- applyContinuousPT's own reasoning applies identically
-// here: Java's own applyContinuousAbility runs fresh from
-// GameAction.checkStateEffects every state-based-action pass, not stored and
-// incrementally updated, so a type-granting effect (an anthem-shaped
-// "creatures you control are Zombies") has to reach a creature that enters
-// after it and stop the instant it itself leaves.
+// applyContinuousType recomputes every card's own Layer 4 TypeMod effects
+// from scratch, from every real Mode$ Continuous S: line currently in play
+// -- applyContinuousPT's own reasoning applies identically here: Java's own
+// applyContinuousAbility runs fresh from GameAction.checkStateEffects every
+// state-based-action pass, not stored and incrementally updated, so a
+// type-granting effect (an anthem-shaped "creatures you control are
+// Zombies") has to reach a creature that enters after it and stop the
+// instant it itself leaves. Cards off the battlefield are cleared too: an
+// AffectedZone$ line reaches them (forEachOffBattlefieldCard,
+// continuouslayers.go).
 func applyContinuousType(g *Game) {
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
 			g.Card(id).TypeMod.Clear()
 		}
 	}
+	forEachOffBattlefieldCard(g, func(c *Card) { c.TypeMod.Clear() })
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -247,120 +248,49 @@ func applyContinuousType(g *Game) {
 			}
 			for _, face := range h.Def.Faces {
 				for _, s := range face.Statics {
-					applyOneContinuousType(g, h, s)
+					applyOneContinuousType(g, h, face.Amounts, s)
 				}
 			}
 		}
 	}
 }
 
-// applyOneContinuousType is applyOneContinuousPT's own Layer 4 counterpart:
-// s applies to every battlefield permanent its own Affected$ valid-string
-// matches, if s is a Mode$ Continuous line naming AddType$ and/or RemoveType$
-// in the one shape this slice can resolve -- a plain, space-and-ampersand
-// (" & ") separated list of literal type words, no dynamic value and no
-// bulk-removal flag.
-//
-// A whole line is skipped, not applied partially, the instant it carries
-// anything past that shape (game-state.md's "Continuous effects" section has
-// the corpus counts):
-//   - AffectedDefined$/AffectedZone$/CharacteristicDefining$/an unresolved
-//     Condition$ value -- applyOneContinuousPT's own skip reasons, identical
-//     here since all are properties of the static ability itself, not of
-//     which layer it happens to write to.
-//   - ChosenType$/ChosenType2$/ImprintedCreatureType$/AllBasicLandType$/
-//     AllNonBasicLandType$ as an AddType$ or RemoveType$ token (29 of 256
-//     real AddType$ lines) -- each needs a runtime value (a chosen type, an
-//     imprinted card's own creature types, the basic-land-type enum) this
-//     port has no evaluator for.
-//   - RemoveSuperTypes$/RemoveCardTypes$/RemoveSubTypes$/RemoveLandTypes$/
-//     RemoveCreatureTypes$/RemoveArtifactTypes$/RemoveEnchantmentTypes$ (62
-//     of 284 real AddType$/RemoveType$ lines) -- a bulk "wipe this whole
-//     category first" flag most often paired with AddType$ in a real "becomes
-//     a Turtle" shape (StaticAbilityContinuous.java:425-448); applying AddType$
-//     alone without the wipe would leave the card BOTH its old and new
-//     creature types, an actively wrong answer worse than the coverage gap of
-//     skipping the whole line (the same reasoning Intimidate's own doc
-//     comment, staticability.go, already gives for a property this port would
-//     otherwise get backwards).
-//   - AddAllCreatureTypes$ (8) -- every creature type in the game, an enum
-//     this port's cardtype.Registry is not plumbed into the engine to read
-//     from a static-ability effect yet (ParseToken's own doc comment,
-//     cardtype.go).
-//
-// 173 of 256 real AddType$ lines and all 28 real RemoveType$ lines (173+28 of
-// 284, game-state.md) carry none of the above and resolve here.
-func applyOneContinuousType(g *Game, host *Card, s *compile.Ability) {
+// applyOneContinuousType is Layer 4 for one Mode$ Continuous line: when the
+// line is on (layerStaticApplies) and names a type change layerTypeChange
+// resolves -- AddType$/RemoveType$ with their runtime tokens, the
+// Remove*Types$ category flags -- every card layerAffectedCards names gets
+// that TypeEffect. A line layerTypeChange or layerAffectedCards cannot
+// resolve does nothing: the whole line, never a part of it, since applying
+// "is a Turtle" without the "loses its other creature types" it also asks
+// for would leave the card with both, an answer worse than the coverage
+// gap. port-log/game-state/layers-4-5-6.md has the corpus counts.
+func applyOneContinuousType(g *Game, host *Card, amounts map[string]expr.Amount, s *compile.Ability) {
 	if !strings.EqualFold(s.Name, "Continuous") {
 		return
 	}
-	if !continuousConditionMet(g, host, s) {
+	effect, ok := layerTypeChange(g, host, s)
+	if !ok || !layerStaticApplies(g, host, amounts, s) {
 		return
 	}
-	for _, key := range [...]string{
-		"AffectedDefined", "AffectedZone", "CharacteristicDefining",
-		"AddAllCreatureTypes",
-		"RemoveSuperTypes", "RemoveCardTypes", "RemoveSubTypes", "RemoveLandTypes",
-		"RemoveCreatureTypes", "RemoveArtifactTypes", "RemoveEnchantmentTypes",
-	} {
-		if _, ok := s.Param(key); ok {
-			return
-		}
-	}
-	addTypes, hasAdd := typeTokens(s, "AddType")
-	removeTypes, hasRemove := typeTokens(s, "RemoveType")
-	if !hasAdd && !hasRemove {
-		return
-	}
-	affected, ok := s.Param("Affected")
+	affected, ok := layerAffectedCards(g, host, s)
 	if !ok {
 		return
 	}
-
-	spec := valid.Parse(affected)
-	for _, pid := range g.Players() {
-		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			if !Matches(g, g.Card(id), spec, host.Controller(), host.ID) {
-				continue
-			}
-			g.Card(id).TypeMod.Add(TypeEffect{Timestamp: host.Timestamp, AddTypes: addTypes, RemoveTypes: removeTypes})
-		}
+	for _, id := range affected {
+		g.Card(id).TypeMod.Add(effect)
 	}
 }
 
-// typeTokens reads key (AddType$ or RemoveType$) as its own " & "-separated
-// list of literal type words, each classified by cardtype.ParseToken and
-// unioned together -- the fragment TypeEffect carries. false, along with a
-// dynamic value (ChosenType and the rest, applyOneContinuousType's own list)
-// mixed anywhere into the list, since a token this cannot resolve makes the
-// whole line's own Add/Remove set wrong, not just incomplete (the same
-// whole-line skip its own doc comment explains).
-func typeTokens(s *compile.Ability, key string) (cardtype.Line, bool) {
-	v, ok := s.Param(key)
-	if !ok {
-		return cardtype.Line{}, false
-	}
-	var out cardtype.Line
-	for _, word := range strings.Split(v, " & ") {
-		switch word {
-		case "ChosenType", "ChosenType2", "ImprintedCreatureType", "AllBasicLandType", "AllNonBasicLandType":
-			return cardtype.Line{}, false
-		}
-		out = out.Union(cardtype.ParseToken(word))
-	}
-	return out, true
-}
-
-// applyContinuousColor recomputes every battlefield permanent's own Layer 5
-// ColorMod effects from scratch, from every real Mode$ Continuous S: line
-// currently in play -- applyContinuousPT's/applyContinuousType's own
-// reasoning applies identically here.
+// applyContinuousColor recomputes every card's own Layer 5 ColorMod effects
+// from scratch, from every real Mode$ Continuous S: line currently in play
+// -- applyContinuousType's own reasoning, off-battlefield clear included.
 func applyContinuousColor(g *Game) {
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
 			g.Card(id).ColorMod.Clear()
 		}
 	}
+	forEachOffBattlefieldCard(g, func(c *Card) { c.ColorMod.Clear() })
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -369,107 +299,38 @@ func applyContinuousColor(g *Game) {
 			}
 			for _, face := range h.Def.Faces {
 				for _, s := range face.Statics {
-					applyOneContinuousColor(g, h, s)
+					applyOneContinuousColor(g, h, face.Amounts, s)
 				}
 			}
 		}
 	}
 }
 
-// applyOneContinuousColor is applyOneContinuousPT's/applyOneContinuousType's
-// own Layer 5 counterpart: s applies to every battlefield permanent its own
-// Affected$ valid-string matches, if s is a Mode$ Continuous line naming
-// AddColor$ and/or SetColor$ in the one shape this slice can resolve -- a
-// plain, " & "-separated list of literal color words (White/Blue/Black/
-// Red/Green), plus the two fixed tokens "All" (WUBRG) and "Colorless" (no
-// color at all, `SetColor$ Colorless`'s own real corpus shape).
-//
-// Skipped, the same reasons applyOneContinuousPT/applyOneContinuousType
-// already give for their own params: AffectedDefined$/AffectedZone$/
-// CharacteristicDefining$/an unresolved Condition$ value. A "ChosenColor"
-// token (7 of 61 real AddColor$/SetColor$ lines) skips the whole line -- a
-// runtime value (Card.getChosenColors()) this port has no evaluator for, the
-// identical "whole line, not partial" choice typeTokens already makes for
-// ChosenType.
-// 54 of 61 real lines carry none of it.
-func applyOneContinuousColor(g *Game, host *Card, s *compile.Ability) {
+// applyOneContinuousColor is Layer 5 for one Mode$ Continuous line:
+// applyOneContinuousType's shape, with layerColorChange reading
+// AddColor$/SetColor$ (a literal color list, All, Colorless, or host's own
+// ChosenColor).
+func applyOneContinuousColor(g *Game, host *Card, amounts map[string]expr.Amount, s *compile.Ability) {
 	if !strings.EqualFold(s.Name, "Continuous") {
 		return
 	}
-	if !continuousConditionMet(g, host, s) {
+	effect, ok := layerColorChange(host, s)
+	if !ok || !layerStaticApplies(g, host, amounts, s) {
 		return
 	}
-	for _, key := range [...]string{"AffectedDefined", "AffectedZone", "CharacteristicDefining"} {
-		if _, ok := s.Param(key); ok {
-			return
-		}
-	}
-	addColors, hasAdd := colorTokens(s, "AddColor")
-	setColors, hasSet := colorTokens(s, "SetColor")
-	if !hasAdd && !hasSet {
-		return
-	}
-	affected, ok := s.Param("Affected")
+	affected, ok := layerAffectedCards(g, host, s)
 	if !ok {
 		return
 	}
-
-	spec := valid.Parse(affected)
-	for _, pid := range g.Players() {
-		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			if !Matches(g, g.Card(id), spec, host.Controller(), host.ID) {
-				continue
-			}
-			c := g.Card(id)
-			if hasSet {
-				c.ColorMod.Add(ColorEffect{Timestamp: host.Timestamp, Colors: setColors, Overwrite: true})
-			}
-			if hasAdd {
-				c.ColorMod.Add(ColorEffect{Timestamp: host.Timestamp, Colors: addColors})
-			}
-		}
+	for _, id := range affected {
+		g.Card(id).ColorMod.Add(effect)
 	}
 }
 
-// colorTokens reads key (AddColor$ or SetColor$) as its own " & "-separated
-// list of literal color words, unioned together via colorFromName (valid.go)
-// -- the same per-word classification colorMatches uses, without its "non"
-// prefix handling, which no real AddColor$/SetColor$ token carries. "All"
-// resolves to every color (mana.AllColors) and "Colorless" to no color at
-// all (mana.Colors(0), already the zero value) -- Java's own getColorsFromParam
-// special-cases both the identical way. false, for the whole token list, the
-// moment "ChosenColor" appears anywhere in it -- applyOneContinuousColor's
-// own doc comment has the reason.
-func colorTokens(s *compile.Ability, key string) (mana.Colors, bool) {
-	v, ok := s.Param(key)
-	if !ok {
-		return 0, false
-	}
-	var out mana.Colors
-	for _, word := range strings.Split(v, " & ") {
-		switch word {
-		case "ChosenColor":
-			return 0, false
-		case "All":
-			out |= mana.AllColors
-		case "Colorless":
-			// No color at all -- contributes nothing to out, which is
-			// exactly right for a lone "Colorless" token.
-		default:
-			c, ok := colorFromName(word)
-			if !ok {
-				return 0, false
-			}
-			out |= c
-		}
-	}
-	return out, true
-}
-
-// applyContinuousKeyword recomputes every battlefield permanent's own Layer
-// 6 KeywordMod effects from scratch, from every real Mode$ Continuous S:
-// line currently in play -- applyContinuousPT's/applyContinuousType's own
-// reasoning applies identically here.
+// applyContinuousKeyword recomputes every card's own Layer 6 KeywordMod
+// effects from scratch, from every real Mode$ Continuous S: line currently
+// in play -- applyContinuousType's own reasoning, off-battlefield clear
+// included.
 func applyContinuousKeyword(g *Game) {
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
@@ -477,6 +338,7 @@ func applyContinuousKeyword(g *Game) {
 		}
 		g.Player(pid).KeywordMod.Clear()
 	}
+	forEachOffBattlefieldCard(g, func(c *Card) { c.KeywordMod.Clear() })
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -485,98 +347,61 @@ func applyContinuousKeyword(g *Game) {
 			}
 			for _, face := range h.Def.Faces {
 				for _, s := range face.Statics {
-					applyOneContinuousKeyword(g, h, s)
+					applyOneContinuousKeyword(g, h, face.Amounts, s)
 				}
 			}
 		}
 	}
 }
 
-// applyOneContinuousKeyword is applyOneContinuousPT's/Type's/Color's own
-// Layer 6 counterpart: s applies to every battlefield permanent AND every
-// player its own Affected$ valid-string matches (targetCandidates' own
-// union reasoning, targeting.go -- an ordinary card-shaped spec like
-// "Creature.YouCtrl" simply matches no player, the identical way an
-// ordinary player-shaped one like "You" matches no card), if s is a
-// Mode$ Continuous line naming AddKeyword$ in the one shape this slice can
-// resolve -- a plain, " & "-separated list of literal keyword lines,
-// already written exactly the way a real K: line would be ("Ward:2",
-// "First Strike", "Protection:...") -- keywordTokens (below) hands each one
-// to KeywordEffect verbatim, and HasKeyword (card.go, player.go) reads them
-// back with keyword.Parse the identical way it already reads a printed
-// keyword. 16 real lines whose `Affected$` includes `You` (12 bare `You`)
-// name `AddKeyword$ Hexproof` (Leyline of Sanctity among them), 4 name
-// `AddKeyword$ Shroud` (Ivory Mask, True Believer) -- two of the three
-// keywords `playerCantBeTargetedBy` (staticability.go) reads, Protection
-// the third. A handful more name `AddKeyword$ Protection:...`: Gor Muldrak,
-// Amphinologist's own `Protection:Salamander` resolves the identical
-// colon-structured-characteristic way a card's own does (`protectionEach`,
-// staticability.go, shared unchanged). Runed
-// Halo's `Protection:ChosenName` and Serra's Emissary's
-// `Protection:ChosenType` are skipped outright by keywordTokens' own
-// dynamic-marker check (below), never reaching `Player.KeywordMod` at all;
-// Absolute Virtue's `Protection:Player.Opponent:...` does reach it, but
-// `protectionEach` refuses to read a player-relative characteristic
-// (Not ported yet, game-state.md).
+// applyOneContinuousKeyword is Layer 6's keyword half for one Mode$
+// Continuous line: applyOneContinuousType's shape, with layerKeywordChange
+// resolving AddKeyword$ (literal lines, verbatim -- HasKeyword (card.go)
+// reads a granted "Ward:2" or "Protection:..." with keyword.Parse exactly as
+// it reads a printed one -- and the runtime tokens Java substitutes) and
+// RemoveKeyword$/RemoveAllAbilities$, then layerKeywordsFor finishing the
+// tokens that name the affected card itself.
 //
-// A whole line is skipped, not applied partially, the instant it carries:
-//   - RemoveKeyword$/RemoveAllAbilities$ (5 of 1,561 real AddKeyword$
-//     lines) -- this slice does not resolve either removal direction yet
-//     (KeywordMod's own doc comment), and applying the add half of a "gains
-//     X, loses Y" line without the remove half would leave the card with
-//     both, an answer worse than the coverage gap of skipping the whole
-//     line -- applyOneContinuousType's own "becomes a Turtle" paragraph
-//     gives the identical reasoning.
-//   - SharedKeywords$/FromDraftNotes$ -- a game-wide, remembered-list or
-//     draft-note source for the keyword list rather than a fixed token list
-//     (StaticAbilityContinuous.java's own alternate addKeywords-building
-//     branches).
-//   - a dynamic-value marker anywhere inside any one token (keywordTokens'
-//     own doc comment has the full list, StaticAbilityContinuous.java's own
-//     removeIf lambda) -- 42 of 1,857 real AddKeyword$ lines.
-//
-// 1,556 of 1,857 real AddKeyword$ lines carry none of the above and
-// resolve.
-func applyOneContinuousKeyword(g *Game, host *Card, s *compile.Ability) {
+// A Player entity, not just a card, can be Affected$ too: Leyline of
+// Sanctity's own `Affected$ You | AddKeyword$ Hexproof`
+// (PlayerFactoryUtil.java's own precedent for a player-granted keyword)
+// matches no card at all -- targetCandidates' own union reasoning
+// (targeting.go) applies here too, probing both pools unconditionally
+// rather than picking one by a spec's own shape. `change.add` (not
+// layerKeywordsFor's per-card rewrite, which needs a *Card for
+// CardColors/ConvertedManaCost -- no real corpus line pairs either token
+// with a player-shaped Affected$) is what a player receives.
+func applyOneContinuousKeyword(g *Game, host *Card, amounts map[string]expr.Amount, s *compile.Ability) {
 	if !strings.EqualFold(s.Name, "Continuous") {
 		return
 	}
-	if !continuousConditionMet(g, host, s) {
+	change, ok := layerKeywordChange(g, host, amounts, s)
+	if !ok || !layerStaticApplies(g, host, amounts, s) {
 		return
 	}
-	for _, key := range [...]string{
-		"AffectedDefined", "AffectedZone", "CharacteristicDefining",
-		"RemoveKeyword", "RemoveAllAbilities", "SharedKeywords", "FromDraftNotes",
-	} {
-		if _, ok := s.Param(key); ok {
-			return
-		}
-	}
-	keywords, ok := keywordTokens(s, "AddKeyword")
+	affected, ok := layerAffectedCards(g, host, s)
 	if !ok {
 		return
 	}
-	affected, ok := s.Param("Affected")
-	if !ok {
-		return
+	for _, id := range affected {
+		c := g.Card(id)
+		c.KeywordMod.Add(KeywordEffect{
+			Timestamp:      host.Timestamp,
+			AddKeywords:    change.layerKeywordsFor(c),
+			RemoveKeywords: change.remove,
+			RemoveAll:      change.removeAll,
+		})
 	}
-
-	spec := valid.Parse(affected)
-	for _, pid := range g.Players() {
-		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			if !Matches(g, g.Card(id), spec, host.Controller(), host.ID) {
-				continue
+	if spec, ok := s.Param("Affected"); ok {
+		for _, pid := range g.Players() {
+			if matched, _ := matchesPlayerSpec(g, pid, host.Controller(), host.ID, spec); matched {
+				g.Player(pid).KeywordMod.Add(KeywordEffect{
+					Timestamp:      host.Timestamp,
+					AddKeywords:    change.add,
+					RemoveKeywords: change.remove,
+					RemoveAll:      change.removeAll,
+				})
 			}
-			g.Card(id).KeywordMod.Add(KeywordEffect{Timestamp: host.Timestamp, AddKeywords: keywords})
-		}
-		// A Player entity, not just a card, can be Affected$: Leyline of
-		// Sanctity's own `Affected$ You | AddKeyword$ Hexproof`
-		// (PlayerFactoryUtil.java's own precedent for a player-granted
-		// keyword) matches no card at all -- targetCandidates' own union
-		// reasoning (targeting.go) applies here too, probing both pools
-		// unconditionally rather than picking one by a spec's own shape.
-		if matched, _ := matchesPlayerSpec(g, pid, host.Controller(), host.ID, affected); matched {
-			g.Player(pid).KeywordMod.Add(KeywordEffect{Timestamp: host.Timestamp, AddKeywords: keywords})
 		}
 	}
 }
@@ -712,7 +537,8 @@ func applyPumpEffects(g *Game) {
 	}
 }
 
-// keywordTokens reads key (AddKeyword$) as its own " & "-separated list of
+// keywordTokens reads key (Pump's KW$, pumpKeywords -- its one caller; a static
+// AddKeyword$ goes through layerKeywordChange) as its " & "-separated list of
 // literal keyword lines, returned verbatim -- each token is exactly what a
 // K: line would carry, HasKeyword's own job to parse further at query time,
 // not this function's. false, for the whole line, the moment a

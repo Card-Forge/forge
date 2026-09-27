@@ -292,7 +292,8 @@
       "layer",
       "ability",
       "amount",
-      "playerstate"
+      "playerstate",
+      "continuouslayers"
     ],
     "amount": ["id", "zone", "card", "game", "valid"],
     "replacement": [

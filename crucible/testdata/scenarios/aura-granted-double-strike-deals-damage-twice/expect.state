@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=20
+humanbattlefield=Grizzly Bears|Id:1|Tapped;Battle Mastery|AttachedTo:1
+ailife=16

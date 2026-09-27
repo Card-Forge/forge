@@ -186,9 +186,10 @@ caller only ever needed to _read_ a printed line, never build a new one at runti
 per-word classification (core type, then supertype, then subtype fallthrough) pulled out for a single already-split word
 — no `*cardtype.Registry` needed, unlike `Parse` itself, because multiword lookahead is the only thing `Parse` uses a
 `Registry` for and `AddType$`/`RemoveType$` values are already split on `" & "` into individual type names by the
-compiled script. That absence is deliberate, not an oversight worked around: this port still injects no
-`*cardtype.Registry`/`*carddb.DB` into the engine (`CLAUDE.md`'s own GO-2), so a Layer 4 effect built to need one would
-have nothing to call. `Union` and `Without` are CR 613.4's own add/remove directions on `Line` itself.
+compiled script. The expansions that do need the vocabulary (`AllBasicLandType`, a `Remove*Types$` category) read it off
+the game's DB, `compile.DB.Types()`
+([`layers-4-5-6.md`](layers-4-5-6.md#cardtyperegistry-no-new-injection-the-db-already-carries-it)). `Union` and
+`Without` are CR 613.4's own add/remove directions on `Line` itself.
 
 `TypeMod` (`typemod.go`) is `PT`'s own structure, copied for Layer 4: a `[]TypeEffect` (`Timestamp`, `AddTypes`,
 `RemoveTypes`), a `foldType` that sorts by `Timestamp` and folds each effect's `Union` then `Without` into the running
@@ -197,16 +198,10 @@ dependency-reordering case. `Card.Type()` now folds `TypeMod` over the printed `
 `Card.Power`/`Toughness` already fold `PT` over `BasePower`/`BaseToughness`. `Move` calls `TypeMod.Clear()` on leaving
 the battlefield, next to `PT.Clear()`; `Game.Clone` deep-copies it, next to `PT`'s own clone.
 
-`applyOneContinuousType` skips a whole line, not just the part it cannot resolve, the moment it carries anything past a
-plain literal `AddType$`/`RemoveType$` token list: `ChosenType$`/`ChosenType2$`/`ImprintedCreatureType$`/
-`AllBasicLandType$`/`AllNonBasicLandType$` as a token (29 of 256 real `AddType$` lines) need a runtime value this port
-has no evaluator for; `AddAllCreatureTypes$` (8) needs the full creature-type enum, which needs the `Registry` this port
-does not inject; and `RemoveSuperTypes$`/`RemoveCardTypes$`/`RemoveSubTypes$`/`RemoveLandTypes$`/
-`RemoveCreatureTypes$`/`RemoveArtifactTypes$`/`RemoveEnchantmentTypes$` (62 of 284 real `AddType$`/`RemoveType$` lines)
-are a bulk "wipe this whole category first" flag, most often paired with `AddType$` in a real "Enchanted creature is a
-Turtle" shape (`StaticAbilityContinuous.java:425-448`) — applying `AddType$` alone without the wipe the line also asks
-for would leave a card with both its old and new creature types, an answer actively worse than skipping the line
-outright. 201 of 284 real `AddType$`/`RemoveType$` lines carry none of the above and resolve.
+`applyOneContinuousType` skips a whole line, not just the part it cannot resolve: applying "is a Turtle" without the
+`RemoveCreatureTypes$` wipe the line also asks for would leave a card with both its old and new creature types. Which
+shapes resolve, the runtime tokens (`ChosenType`, `AllBasicLandType`, ...), the `Remove*Types$` flags and the counts:
+[`layers-4-5-6.md`](layers-4-5-6.md).
 
 Intimidate's own `CantBlockBy` synthesis
 ([`## Block legality: CantBlockBy`](turn-stack-combat.md#block-legality-cantblockby)) is `SharesColorWith`'s real reason
@@ -219,18 +214,15 @@ did not need: `SetColor$` (Java's own `overwriteColors`) replaces the running co
 into it, so `ColorEffect` carries one `Overwrite bool` instead of two separate `cardtype.Line` fields, and `foldColor`
 branches on it per effect in `Timestamp` order — `SetPower$`/`AddPower$`'s own `LayerSetPT`/`LayerModifyPT` split,
 collapsed to a bool since Layer 5 has no third sub-layer to distinguish. `colorFromName` (valid.go's own `colorMatches`,
-pulled out so both share it rather than duplicating the five-color switch) maps the bare color words; `colorTokens`
-(continuous.go) adds the two fixed tokens Java's own `getColorsFromParam` special-cases (`"All"` → `mana.AllColors`,
-`"Colorless"` → no color at all, both real corpus shapes) and skips the whole line the instant `"ChosenColor"` appears
-anywhere in the `" & "`-split list (7 of 61 real lines) — a runtime value (`Card.getChosenColors()`) this port has no
-evaluator for, `typeTokens`'s own "whole line, not partial" choice applied identically here. 54 of 61 real
-`AddColor$`/`SetColor$` lines carry none of it and resolve. `Card.Colors()` folds `ColorMod` over the printed
+pulled out so both share it rather than duplicating the five-color switch) maps the bare color words; `layerColorChange`
+(continuouslayers.go) adds the fixed values Java's own `getColorsFromParam` special-cases (`"All"`, `"Colorless"`,
+host's `ChosenColor`), counts in [`layers-4-5-6.md`](layers-4-5-6.md). `Card.Colors()` folds `ColorMod` over the printed
 `Colors:`-override-or-mana-cost base the same way `Type()` folds `TypeMod`; `Move`/`Game.Clone` treat `ColorMod`
 identically to `TypeMod`/`PT`.
 
 **Layer 6, `applyContinuousKeyword` (`continuous.go`), and `KeywordMod`.** `AddKeyword$` is the single largest real
-slice of all four layers this port resolves (1,556 of 1,857 real lines, ahead even of Layer 7's own 2,192 of 2,426) --
-an equipment or Aura granting Flying/Trample/Menace/Ward, the single most common continuous shape in the whole corpus.
+slice of all four layers this port resolves (1,710 of 1,875 real lines, [`layers-4-5-6.md`](layers-4-5-6.md)) -- an
+equipment or Aura granting Flying/Trample/Menace/Ward, the single most common continuous shape in the whole corpus.
 `KeywordMod`/`KeywordEffect` (`keywordmod.go`) are simpler than `TypeMod`/`ColorMod`: `HasKeyword` (card.go) only ever
 asks membership ("is this keyword present"), never "what is the current value" the way `Power`/`Type`/`Colors` do, so
 there is no fold order to resolve at all -- two continuous effects both granting a keyword never disagree about
@@ -244,19 +236,11 @@ reads a printed one. `HasKeyword` gaining this fold reaches every existing call 
 own code --`TestApplyContinuousKeywordGrantedFlyingAffectsCanBlock` (continuous_test.go) proves the reach past a bare
 `HasKeyword` check into real block legality.
 
-`keywordTokens` (continuous.go) splits `AddKeyword$` on `" & "` the identical way `typeTokens`/`colorTokens` do, and
-skips the whole line -- not just the bad token -- the instant a dynamic-value marker (`StaticAbilityContinuous.java`'s
-own `removeIf` lambda: `ChosenColor`, `ChosenType`, `ChosenNumber`, `ChosenPlayer`, `ChosenName`, `ChosenEvenOdd`,
-`AllColors`/`allColors`, `CommanderColorID`, `ColorsYouCtrl`/`colorsYouCtrl`, `YourBasic` -- 42 of 1,857 real lines)
-appears as a SUBSTRING anywhere within any one token, checked with `strings.Contains` rather than exact-token equality:
-a real corpus token often embeds the marker as a qualifier inside a larger one
-(`"Protection:Card.ChosenColor:chosenColor"` is one token, not "ChosenColor" standing alone), the identical reason
-Java's own check is `input.contains(...)`, not `input.equals(...)`. `RemoveKeyword$`/ `RemoveAllAbilities$` (5 of 1,561
-real `AddKeyword$` lines carrying no dynamic marker) and `SharedKeywords$`/ `FromDraftNotes$` (a
-game-wide/remembered-list/draft-note keyword source rather than a fixed token list) each skip the whole line too, at the
-outer `applyOneContinuousKeyword` level rather than inside `keywordTokens`, since they are static-ability PARAMS, not
-tokens inside the `AddKeyword$` value itself -- applying the add half of a real "gains X, loses Y" line without the
-remove half `applyOneContinuousType`'s own "becomes a Turtle" paragraph already explains why not to.
+`layerKeywordChange` (continuouslayers.go) splits `AddKeyword$` on `" & "` and runs Java's own `removeIf` and
+substitution passes over each token, markers matched by substring (`strings.Contains`) as Java's `input.contains(...)`
+does, since a real token embeds the marker inside a larger one (`"Protection:Card.ChosenColor:chosenColor"`).
+`RemoveKeyword$`/`RemoveAllAbilities$` fold into the same `KeywordEffect` as removals. Details and counts:
+[`layers-4-5-6.md`](layers-4-5-6.md).
 
 **Layer 8, `applyContinuousRules`, and `RulesMod` -- this port's first player-facing continuous effect.** Every layer
 above lives on `Card`; `RulesMod`/`RulesEffect` (rulesmod.go) live on `Player` instead, matched through `Affected$`

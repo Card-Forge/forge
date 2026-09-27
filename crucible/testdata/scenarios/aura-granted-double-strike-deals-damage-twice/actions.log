@@ -1,0 +1,16 @@
+# CR 613.1f (Layer 6) through AffectedDefined$ Enchanted: Battle Mastery's
+# "Enchanted creature has double strike" reaches the creature it is attached
+# to (StaticAbilityContinuous.getAffectedCards), so the unblocked Grizzly
+# Bears (2/2) deal combat damage in both the First Strike Damage step and the
+# regular Combat Damage step (CR 702.4) -- 4 total, not a plain 2/2's 2.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+firststrikedamage
+advance
+combatdamage

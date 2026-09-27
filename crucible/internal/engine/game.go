@@ -467,6 +467,19 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 	if from == Exile && kind != Exile {
 		c.turnFaceUp()
 	}
+	// A zone change always drops continuous-effect grants from the zone left
+	// behind: Java gives every zone's own card fresh characteristics
+	// (Layers 4/5/6, continuouslayers.go's own AffectedZone$ reach can now
+	// write these off the battlefield too). Leaving the battlefield already
+	// clears these below as part of its own broader reset; this covers
+	// entering it (a reanimated permanent must not keep its graveyard's
+	// grants) and every other-zone-to-other-zone move (an AffectedZone$ Hand
+	// grant must not ride along into the graveyard or stack).
+	if from != kind {
+		c.TypeMod.Clear()
+		c.ColorMod.Clear()
+		c.KeywordMod.Clear()
+	}
 	switch {
 	case from == Battlefield && kind != Battlefield:
 		snap := *c

@@ -557,8 +557,8 @@ func colorMatches(name string) (color mana.Colors, mustHave bool, ok bool) {
 
 // colorFromName maps one of the five color words to its mana.Colors bit --
 // colorMatches' own switch, pulled out so a caller that needs the bare
-// name-to-color mapping without the "non" prefix handling (continuous.go's
-// colorTokens, Layer 5's own AddColor$/SetColor$) does not duplicate it.
+// name-to-color mapping without the "non" prefix handling (continuouslayers.go's
+// layerColorChange, Layer 5's own AddColor$/SetColor$) does not duplicate it.
 func colorFromName(name string) (mana.Colors, bool) {
 	switch name {
 	case "White":
