@@ -5,7 +5,7 @@
 
 package engine
 
-//enginelint:allow id zone card game valid ability control effect replacement replaceeffect subability
+//enginelint:allow id zone card game valid ability control effect replacement replaceeffect subability amount
 
 import (
 	"fmt"
@@ -161,6 +161,21 @@ func (g *Game) copyReplacementApplies(h *Card, self bool, r *compile.Ability, am
 	if !ok || !Matches(g, g.Card(moved), valid.Parse(validCard), h.Controller(), h.ID) {
 		return false, nil
 	}
+	// checkSVarMatches reads an amount it cannot resolve as "does not
+	// apply", which here would silently skip the copy (Protean Raider's
+	// Count$AttackersDeclared): refuse it instead (GO-7).
+	for _, key := range [...]string{"CheckSVar", "SVarCompare"} {
+		v, ok := r.Param(key)
+		if !ok {
+			continue
+		}
+		if key == "SVarCompare" && len(v) >= 3 {
+			v = v[2:]
+		}
+		if _, ok := resolveNamedAmount(g, amounts, h, v); !ok {
+			return false, fmt.Errorf("engine: %q: copy replacement %s$ %q not resolvable yet", h.Def.Name, key, v)
+		}
+	}
 	if !replacementRequirementsCheck(g, h, amounts, r) {
 		return false, nil
 	}
@@ -212,6 +227,13 @@ func copyReplacementResolvable(h *Card, r *compile.Ability) error {
 			// port has already happened by the time the effect exists.
 			return fmt.Errorf("engine: %q: an Effect replacing the entry it is part of not resolvable yet", h.Def.Name)
 		}
+		if _, ok := a.Param("ETB"); ok && a != with {
+			// Altered Ego, Undercover Operative, Dominion Saboteur:
+			// counters placed as part of the entry (PutCounter's ETB$),
+			// which PutCounter refuses -- refused here instead, before the
+			// copy applies rather than after.
+			return fmt.Errorf("engine: %q: copy replacement sub-ability %s with ETB$ not resolvable yet", h.Def.Name, a.Name)
+		}
 	}
 	return nil
 }
@@ -248,8 +270,11 @@ func (g *Game) runCopyReplacement(controller PlayerController, moved CardID, c c
 		API: APIClone, Source: c.host, Controller: h.Controller(), Params: with, Amounts: c.amounts,
 		replacing: &replacementEvent{result: replacementUpdated, card: moved},
 	}
+	// Named before resolving: the copy may change the host's own name (it is
+	// the entering card itself for every self replacement).
+	name := h.Def.Name
 	if err := g.registry.Resolve(g, &a, controller); err != nil {
-		return fmt.Errorf("engine: %q: copy replacement: %w", h.Def.Name, err)
+		return fmt.Errorf("engine: %q: copy replacement: %w", name, err)
 	}
 	return nil
 }

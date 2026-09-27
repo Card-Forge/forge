@@ -114,12 +114,13 @@ through combat as a 3/3 copy of Hill Giant.
 
 ### Shapes not resolved
 
-58 of the corpus's 180 `(AB|SP|DB)$ Clone` lines resolve as a spell, activated or triggered ability, and 58 more as a
-Copy-layer replacement ([`layer1-enters-as-copy.md`](layer1-enters-as-copy.md)). Blocked, by first blocker:
+58 of the corpus's 180 `(AB|SP|DB)$ Clone` lines resolve as a spell, activated or triggered ability, and 50 more as a
+Copy-layer replacement ([`layer1-enters-as-copy.md`](layer1-enters-as-copy.md); one more, Lazotep Convert's, is
+unreachable). Blocked, by first blocker:
 
 | Shape                                                                    | Lines | Blocker                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Run as a Copy-layer replacement (`K:ETBReplacement:Copy`, `Layer$ Copy`) | 11    | [`layer1-enters-as-copy.md`](layer1-enters-as-copy.md#what-resolves)                                                                                                                                                                    |
+| Run as a Copy-layer replacement (`K:ETBReplacement:Copy`, `Layer$ Copy`) | 18    | [`layer1-enters-as-copy.md`](layer1-enters-as-copy.md#what-resolves)                                                                                                                                                                    |
 | `R:` replacement with `ReplaceWith$` Clone, `Event$ Transform` (Ludevic) | 1     | `replacement.go` dispatches no `Transform` replacement                                                                                                                                                                                  |
 | `Defined$`/`CloneTarget$` outside `definedCards`                         | 27    | `ParentTarget` (a sub-ability's own `ValidTgts$` is not targeted separately, `subability.go`), `TriggeredCardLKICopy`, `TriggeredTarget*`, `RememberedLKI`, `Sacrificed`, `TopOfLibrary`, `ExiledWith`, `Exiled`, `Remembered.Creature` |
 | Unported valid properties                                                | 10    | `NotDefinedTargeted`, `token`, `ExiledWithSource`, `ThisTurnEntered*`, `cmcLEY`                                                                                                                                                         |

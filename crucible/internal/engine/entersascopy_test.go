@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
+	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/engine"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 )
@@ -263,6 +264,24 @@ func TestEntersAsCopyRejectsWhatItCannotRun(t *testing.T) {
 			},
 			want: "an Effect replacing the entry",
 		},
+		{
+			name: "counters placed as part of the entry (Altered Ego)",
+			setup: func(t *testing.T, _ *engine.Game, _ engine.PlayerID) *compile.Card {
+				return testCloneDef(t, "Test Ego", "Creature.Other | SubAbility$ DBAddCounter",
+					"SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 2")
+			},
+			want: "PutCounter with ETB$ not resolvable yet",
+		},
+		{
+			name: "a CheckSVar$ amount that does not resolve (Protean Raider)",
+			setup: func(t *testing.T, _ *engine.Game, _ engine.PlayerID) *compile.Card {
+				return copyTestDef(t, "Test Raider", "Creature Shapeshifter", "2", "2", "Cost:G",
+					"R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Layer$ Copy | ReplacementResult$ Updated | Optional$ True | ReplaceWith$ DBCopy | CheckSVar$ RaidTest | Description$ Raid",
+					"SVar:DBCopy:DB$ Clone | Choices$ Creature.Other",
+					"SVar:RaidTest:Count$AttackersDeclared")
+			},
+			want: `CheckSVar$ "RaidTest" not resolvable yet`,
+		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
@@ -277,6 +296,36 @@ func TestEntersAsCopyRejectsWhatItCannotRun(t *testing.T) {
 				t.Error("a rejected copy replacement still copied")
 			}
 		})
+	}
+}
+
+// TestEntersAsCopyOfItselfFromAWatcher proves Displaced Dinosaurs' R: line:
+// a watcher's Copy-layer replacement whose Defined$ and CloneTarget$ are
+// both ReplacedCard makes a historic permanent its controller casts enter
+// as a copy of itself, except a 7/7 Dinosaur creature -- and a nonhistoric
+// one is untouched.
+func TestEntersAsCopyOfItselfFromAWatcher(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	g.NewCard(copyTestDef(t, "Test Dinosaurs", "Enchantment", "", "",
+		"R:Event$ Moved | ValidCard$ Permanent.Historic+YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ BecomeDino | Layer$ Copy | ReplacementResult$ Updated | Description$ x",
+		"SVar:BecomeDino:DB$ Clone | Defined$ ReplacedCard | CloneTarget$ ReplacedCard | SetPower$ 7 | SetToughness$ 7 | AddTypes$ Creature & Dinosaur"),
+		p, engine.Battlefield)
+	relic := g.NewCard(copyTestDef(t, "Test Relic", "Artifact", "", "", "Cost:G"), p, engine.Hand)
+	sc := engine.NewScriptedController()
+	mustCastAndResolve(t, g, p, sc, relic)
+
+	r := g.Card(relic)
+	if !r.IsCopy() || r.Def.Name != "Test Relic" || !r.Type().Has(cardtype.Creature) {
+		t.Fatalf("relic is %q %v (copy %v), want a creature copy of itself", r.Def.Name, r.Type(), r.IsCopy())
+	}
+	wantPT(t, g, relic, 7, 7)
+
+	bear := g.NewCard(copyTestDef(t, "Test Bear", "Creature Elf", "2", "2", "Cost:G"), p, engine.Hand)
+	mustCastAndResolve(t, g, p, sc, bear)
+	if g.Card(bear).IsCopy() {
+		t.Error("a nonhistoric creature entered as a copy")
 	}
 }
 

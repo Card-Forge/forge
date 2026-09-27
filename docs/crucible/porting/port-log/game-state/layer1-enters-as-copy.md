@@ -90,8 +90,15 @@ only on the transient `Ability` the dispatch builds; `resolveSubAbility` now pas
 
 A token that enters as a copy of Thunderbond Vanguard carries its "each creature token you control enters as a copy"
 replacement, which matches the token itself on the re-gather, so the token becomes a copy of itself once more: a second
-identical entry in `Card.copies`, no visible change, the same thing Java's re-run does with the copied state's own
-replacement.
+identical entry in `Card.copies`, no visible change. Whether Java's re-run does the same was not traced.
+
+### Divergences
+
+| Where                     | Java                                                    | Here                                                                                     |
+| ------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Cards entering together   | Last battlefield state excludes every card of the batch | `ChangeZoneAll` and other loops move one card at a time: a Clone can copy an earlier one |
+| Entering from a graveyard | Last graveyard state still holds the entrant            | Already moved out; no corpus line can tell (`cloneChoice`'s comment)                     |
+| Timing of the replacement | Before the move (`GameAction.changeZone`)               | Right after `Game.Move`, before anything else looks at the card                          |
 
 ### Rejected, as a pending error before anything changes
 
@@ -101,6 +108,8 @@ replacement.
 | `ReplaceWith$` other than `Clone` (Mimeoplasm, Living Lore, Primal Clay, ...) | Each needs its own API run mid-entry; not Layer 1 copying                                                 |
 | A copy replacement hosted by an effect card (Mystic Reflection)               | "The next time one or more enter" is a batch; entries here are one at a time                              |
 | A `SubAbility$` `Effect` with `ReplacementEffects$` (Spark Double, Moritte)   | Its replacement edits the same entry, which has already happened here: counters would be silently missing |
+| A chained sub-ability with `ETB$` (Altered Ego, Undercover Operative)         | Counters placed as part of the entry; `PutCounter` refuses `ETB$`, so refused before the copy, not after  |
+| `CheckSVar$`/`SVarCompare$` that does not resolve (Protean Raider)            | `checkSVarMatches` reads it as "does not apply", which would skip the copy silently                       |
 | `ValidTgts$` anywhere in the chain; a replacement param outside the read set  | Not modeled at a replacement site                                                                         |
 | `Clone`'s own rejected params (`PumpKeywords$`, `RemoveCardTypes$`, ...)      | [`effects-clone.md`](effects-clone.md#rejected); `Clone` errors before acting                             |
 
@@ -120,17 +129,36 @@ Numeric SVars an added trait reads still arrive through `AddSVars$`, as in Java.
 
 ### What resolves
 
-Of the 66 `K:ETBReplacement:Copy` cards whose SVar is a `Clone`, 56 pass every check above and `Clone`'s own (among them
-Clone, Phyrexian Metamorph, Vesuva, Body Double, Phantasmal Image, Essence of the Wild, Superior Spider-Man). A
-sub-ability or amount those checks cannot see still resolves through the Registry, and fails there with its own error.
-The 10 others:
+Measured, not estimated: every real card with a Copy-layer `Moved` replacement was put onto the battlefield from the
+real corpus through `permanentEffect`, on a fixed board (Grizzly Bears, Ornithopter, Forest, Island, Glorious Anthem,
+Bonesplitter on its side; Hill Giant opposite; Grizzly Bears, Clone and Forest in a graveyard), with a controller that
+agrees to every copy and picks the first card offered.
 
-| Blocker                                                                                   | Cards |
-| ----------------------------------------------------------------------------------------- | ----: |
-| Valid properties `Matches` lacks (`ThisTurnEntered*`, `cmcLEY`)                           |     4 |
-| `RemoveCardTypes$`/`RemoveSubTypes$`, `Embalm$`/`RemoveCost$`                             |     3 |
-| `SubAbility$` `Effect` replacing the same entry (Spark Double, Moritte of the Frost)      |     2 |
-| `Duration$ UntilFacedown` (Vesuvan Shapeshifter, whose `Event$ TurnFaceUp` half is unrun) |     1 |
+Of the 66 `K:ETBReplacement:Copy` cards whose SVar is a `Clone`:
 
-Outside the keyword, Protean Raider and Displaced Dinosaurs (`R:` lines naming `Clone`) run. Mystic Reflection and the
-non-`Clone` lines (Primal Clay and its four kin, The Mimeoplasm, Living Lore) are errors.
+| Outcome                                                                                             | Cards |
+| --------------------------------------------------------------------------------------------------- | ----: |
+| Entered as a copy (Clone, Phyrexian Metamorph, Vesuva, Body Double, Phantasmal Image, Evil Twin...) |    43 |
+| Watcher; its own entry replaces nothing (Essence of the Wild, Infinite Reflection, Thunderbond)     |     3 |
+| Board offered nothing matching `Choices$` (Deceptive Frostkite, Jwari Shapeshifter, The Master)     |     3 |
+| Battle entering front face up, never offered its back face's copy (Invasion of Amonkhet)            |     1 |
+| Error                                                                                               |    16 |
+
+The 3 watchers share Essence of the Wild's shape, tested with a synthetic card; the 3 unmatched filter on properties
+`Matches` has (`powerGE4`, `Ally`, `counters_GE1_TAKEOVER`). The 16 errors:
+
+| Blocker                                                                                                  | Cards | Before the copy |
+| -------------------------------------------------------------------------------------------------------- | ----: | --------------- |
+| Valid properties `Matches` lacks (`ThisTurnEntered*`, `cmcLEY`)                                          |     4 | yes             |
+| `RemoveCardTypes$`/`RemoveSubTypes$`, `Embalm$`/`RemoveCost$`                                            |     3 | yes             |
+| Chained `PutCounter` with `ETB$` (Altered Ego, Undercover Operative, Dominion Saboteur)                  |     3 | yes             |
+| `SubAbility$` `Effect` replacing the same entry (Spark Double, Moritte of the Frost)                     |     2 | yes             |
+| `SetPower$ X` not resolvable (Hulking Metamorph)                                                         |     1 | yes             |
+| `Duration$ UntilFacedown` (Vesuvan Shapeshifter)                                                         |     1 | yes             |
+| Chained `ImmediateTrigger` `ConditionDefined$` (Superior Spider-Man)                                     |     1 | no              |
+| Its "when you do" trigger's `Effect` `Duration$ AsLongAsControl`, on resolving (Wall of Stolen Identity) |     1 | no              |
+
+The last two copy first and fail in the chain, as any Registry chain can: the game stops at the error either way.
+
+Outside the keyword: Displaced Dinosaurs runs (tested). Protean Raider errors (`CheckSVar$ Count$AttackersDeclared`).
+Mystic Reflection and the non-`Clone` lines (Primal Clay and its four kin, The Mimeoplasm, Living Lore) are errors.

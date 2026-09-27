@@ -1671,8 +1671,8 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     — zero real references to `StaticAbilityLayer.COPY` in it — but a resolution-time state swap (`Card.addCloneState`),
     so it is not this item's job: `Card.copies` holds it (`Clone`'s "becomes a copy",
     `port-log/game-state/effects-clone.md`), and "enters as a copy" is a Copy-layer replacement of the card's entry
-    (`K:ETBReplacement:Copy` expanded at compile time, `entersascopy.go`; 58 of the corpus's 69 Copy-layer `Clone`
-    replacement lines resolve, `port-log/game-state/layer1-enters-as-copy.md`).
+    (`K:ETBReplacement:Copy` expanded at compile time, `entersascopy.go`; 50 of the corpus's 69 Copy-layer `Clone`
+    replacement lines resolve, 18 are refused with an error, `port-log/game-state/layer1-enters-as-copy.md`).
 
     **Layer 2 (`CONTROL`) is real now too — this port's first controller-change mechanism.** A new
     `ControlMod`/`ControlEffect` (`controlmod.go`) folds onto `Card.Controller`, which stops being a plain field and
