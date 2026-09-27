@@ -3,7 +3,8 @@
 # Runs in the checkout the session works in (hook input cwd); skipped when
 # nothing under crucible/ or docs/ changed since HEAD.
 . "$(dirname "$0")/lib.sh"
-cwd=$(jq -r '.cwd // ""')
+in=$(cat)
+cwd=$(jq -r '.cwd // ""' <<<"$in")
 root=$(repo_root "${cwd:-${CLAUDE_PROJECT_DIR:-.}}")
 cd "$root" || exit 0
 [ -n "$(git status --porcelain -- crucible docs/crucible CLAUDE.md)" ] || exit 0
