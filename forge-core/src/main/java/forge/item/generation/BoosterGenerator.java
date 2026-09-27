@@ -57,7 +57,7 @@ public class BoosterGenerator {
     }
 
     private static PaperCard generateFoilCard(PrintSheet sheet) {
-        PaperCard randomCard = sheet.random(1, true).get(0);
+        PaperCard randomCard = sheet.fetch(1, false).get(0);
         return randomCard.getFoiled();
     }
 
@@ -287,7 +287,7 @@ public class BoosterGenerator {
                         ? edition.getSlotReplaceCommonWith().trim() + " " + setCode
                         : edition.getSlotReplaceCommonWith().trim();
                 PrintSheet replaceSheet = getPrintSheet(replaceKey);
-                result.addAll(replaceSheet.random(1, true));
+                result.addAll(replaceSheet.fetch(1, false));
                 System.out.println("Common was replaced with something from the replace sheet...");
                 replaceCommon = false;
             }
@@ -298,11 +298,11 @@ public class BoosterGenerator {
             // For cards that end in '+', attempt to convert this card to foil.
             if (convertCardFoil) {
                 paperCards = Lists.newArrayList();
-                for(PaperCard pc : ps.random(numCards, true)) {
+                for(PaperCard pc : ps.fetch(numCards, true)) {
                     paperCards.add(pc.getFoiled());
                 }
             } else {
-                paperCards = ps.random(numCards, true);
+                paperCards = ps.fetch(numCards, true);
             }
 
             result.addAll(paperCards);
@@ -354,7 +354,7 @@ public class BoosterGenerator {
                                 } else {
                                     // Otherwise it's not foil (even though this is the
                                     // foil slot!)
-                                    result.addAll(ps.random(1, true));
+                                    result.addAll(ps.fetch(1, false));
                                 }
                             } else {
                                 foilCardGeneratedAndHeld.add(generateFoilCard(ps));
@@ -459,11 +459,11 @@ public class BoosterGenerator {
                 }
                 // instead of grabbing random cards from the print sheet, shuffle once and take the first N cards to avoid duplicates
                 if (convertAllToFoil || convertThisToFoil) {
-                    for (PaperCard pc : ps.random(numCardsToGenerate, true)) {
+                    for (PaperCard pc : ps.fetch(numCardsToGenerate, true)) {
                         paperCards.add(pc.getFoiled());
                     }
                 } else {
-                    paperCards.addAll(ps.random(numCardsToGenerate, true));
+                    paperCards.addAll(ps.fetch(numCardsToGenerate, true));
                 }
             }
             result.addAll(paperCards);
@@ -536,7 +536,7 @@ public class BoosterGenerator {
      */
     public static void replaceCardFromExtraSheet(List<PaperCard> booster, String printSheetKey) {
         PrintSheet replacementSheet = tryGetStaticSheet(printSheetKey);
-        PaperCard toAdd = replacementSheet.random(1, false).get(0);
+        PaperCard toAdd = replacementSheet.fetch(1, false).get(0);
         BoosterGenerator.replaceCard(booster, toAdd);
     }
 
