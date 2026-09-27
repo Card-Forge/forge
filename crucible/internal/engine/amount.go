@@ -1,17 +1,20 @@
 // Amount resolution: turning a compile.Face's own SVar-defined amounts
-// (compile.Face.Amounts) into an int, the slice of AbilityUtils.calculateAmount
-// this port can evaluate without a full port of it -- the "Valid" family of
-// Count$ heads (CardLists.getValidCardCount against a zone this port already
-// models), reusing Matches (valid.go) the identical way every other
-// valid-string check in this port already does.
+// (compile.Face.Amounts) into an int -- the slice of
+// AbilityUtils.calculateAmount/xCount this port can evaluate against state it
+// already models. What resolves: plain and SVar-referenced numbers, doXMath's
+// arithmetic suffixes, the Number$/SVar$ heads, the Count$Valid family
+// (CardLists.getValidCardCount, reusing Matches from valid.go) with the
+// handlePaid distinct-value subset in amountpaid.go, and the host-, player- and
+// zone-measuring Count$ heads in amountheads.go.
 //
 // Ported from forge-game/src/main/java/forge/game/ability/AbilityUtils.java's
-// xCount/calculateAmount, the branch at line ~3424 ("count valid cards on the
-// battlefield" / "count valid cards in any specified zone/s").
+// calculateAmount (:367), xCount (:1566), doXMath (:3206), playerXCount
+// (:3288) and handlePaid (:3675).
 
 package engine
 
 import (
+	"math"
 	"strconv"
 	"strings"
 
@@ -19,38 +22,32 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
-// maxAmountDepth bounds SVar-reference recursion (a `SVar:X:Y` chain) --
-// defensive, not a real corpus need: the one real chain this port's own
-// corpus-frequency research found (Roiling Horror's Y -> Z) carries an
-// operator at each hop, which resolveAmount already refuses before it would
-// ever recurse into it. A card whose own SVar chain is malformed enough to
-// cycle fails to resolve rather than looping forever (GO-7).
-const maxAmountDepth = 4
+// maxAmountDepth bounds SVar-reference recursion (a `SVar:X:Y` chain, an
+// SVar$ head, an operator's own SVar operand) -- defensive, not a real corpus
+// need: the deepest real chain a CDA writes (Roiling Horror's X -> Y -> Z,
+// Tarmogoyf's Y -> SVar$X -> X) is three hops. A card whose own SVar chain is
+// malformed enough to cycle fails to resolve rather than looping forever
+// (GO-7).
+const maxAmountDepth = 6
 
 // resolveAmount evaluates amt to an int, when it is one of the shapes this
 // port can compute: a plain Literal (Value already carries its own sign,
-// [expr.Amount]'s own doc comment); a Reference to another SVar this same
-// face defines, looked up in amounts and resolved in turn, one level of
-// indirection at a time; or an Expression whose outer Head is "Count" with
-// no operator suffix (Op == nil) and whose inner Count$ head is one of the
-// "Valid" family (amt.Count, parsed at load, expr.IsValidHead) -- Count$Valid <spec>
-// (battlefield) or Count$Valid<Zone>[,<Zone>...] <spec> (one or more other
-// zones), counting cards each spec matches (countValid, below).
+// [expr.Amount]'s own doc comment); a Reference to an SVar, looked up in
+// source's runtime SVars first and amounts second, resolved in turn one level
+// of indirection at a time (namedAmount); or an Expression whose head
+// expressionValue evaluates, with its own doXMath suffix (applyOperator) and
+// leading `-` applied after, in calculateAmount's own order (the multiplier
+// last, `val * multiplier`).
 //
-// Every other shape -- an operator suffix, a non-Count expression head
-// (SVar$, PlayerCountOpponents, the eighty-some others
-// AbilityUtils.calculateAmount itself dispatches on), a Count head outside
-// the Valid family (xPaid, CardCounters, Devotion, ...), or a Valid family
-// argument itself carrying a `$`-suffixed distinct-value operator
-// (Tarmogoyf's own `Count$ValidGraveyard Card$CardTypes`,
-// [expr.Count.DistinctProperty]'s own doc comment) -- reports false rather
-// than a wrong number (GO-7): every real corpus caller of this (ptParam,
-// continuous.go) already treats an unresolved amount as "skip this
-// dimension," not "apply zero." The DistinctProperty case matters
-// specifically because count.Valid itself still parses to something that
-// looks usable (`Card`, matching every object) -- without the explicit
-// check below, this would silently measure the wrong thing (a plain match
-// count) rather than skip.
+// Every other shape -- a context-prefixed head (`CastSA>`, `Spawner>`,
+// `TriggeredSpellAbility>`: adjustTriggerContext switches which ability the
+// measurement is taken against, which a static ability has none of), one of
+// the eighty-some other heads calculateAmount/xCount dispatch on, or an SVar
+// operand that itself does not resolve -- reports false rather than a wrong
+// number (GO-7): every caller already treats an unresolved amount as "skip
+// this dimension" (ptParam, continuous.go) or as an error naming the value,
+// never as "apply zero" -- which is what Java itself would print to stderr
+// and do.
 //
 // sourceController/source are the pairing Matches itself always takes: for
 // a static ability, host's own controller and id (AbilityUtils.xCount's own
@@ -66,14 +63,7 @@ func resolveAmountDepth(g *Game, amounts map[string]expr.Amount, sourceControlle
 		return amt.Value, true
 
 	case expr.Reference:
-		if depth >= maxAmountDepth {
-			return 0, false
-		}
-		next, ok := amounts[strings.ToLower(amt.Name)]
-		if !ok {
-			return 0, false
-		}
-		n, ok := resolveAmountDepth(g, amounts, sourceController, source, next, depth+1)
+		n, ok := namedAmount(g, amounts, sourceController, source, amt.Name, depth)
 		if !ok {
 			return 0, false
 		}
@@ -83,27 +73,164 @@ func resolveAmountDepth(g *Game, amounts map[string]expr.Amount, sourceControlle
 		return n, true
 
 	case expr.Expression:
-		if amt.Op != nil || !strings.EqualFold(amt.Head, "Count") {
+		if amt.Context != "" {
 			return 0, false
 		}
-		count := amt.Count
-		if count == nil || !expr.IsValidHead(count.Head) {
-			return 0, false
-		}
-		if count.DistinctProperty != "" {
-			return 0, false
-		}
-		zones, ok := validCountZones(count.Head)
+		n, ok := expressionValue(g, amounts, sourceController, source, amt, depth)
 		if !ok {
 			return 0, false
 		}
-		n := countValid(g, zones, count.Valid, sourceController, source)
+		if amt.Op != nil {
+			if n, ok = applyOperator(g, amounts, sourceController, source, n, amt.Op, depth); !ok {
+				return 0, false
+			}
+		}
 		if amt.Negative {
 			n = -n
 		}
 		return n, true
 	}
 	return 0, false
+}
+
+// namedAmount is calculateAmount's own SVar lookup for a bare name:
+// ability.getSVar, then card.getSVar -- a runtime SVar an effect stored on
+// source (Card.svars, StoreSVar's own setSVar) shadowing the script's own
+// SVar of that name, the same order resolveNamedAmount already uses for the
+// outermost name. depth counts the hop so a cycle ends (maxAmountDepth).
+func namedAmount(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, name string, depth int) (int, bool) {
+	if depth >= maxAmountDepth {
+		return 0, false
+	}
+	key := strings.ToLower(name)
+	if source != NoCard {
+		if n, ok := g.Card(source).svars[key]; ok {
+			return n, true
+		}
+	}
+	next, ok := amounts[key]
+	if !ok {
+		return 0, false
+	}
+	return resolveAmountDepth(g, amounts, sourceController, source, next, depth+1)
+}
+
+// expressionValue is calculateAmount's own head dispatch, before any
+// operator: `Count$` (xCount, countValue in amountheads.go), `Number$N` (a
+// plain number, the one head carrying no measurement at all), `SVar$Name`
+// (the named SVar, resolved -- calculateAmount's own
+// `calculateAmount(card, l[0], ability)`) and `PlayerCount<Players>$`
+// (playerCountValue, amountheads.go). Head is matched as written: Java tests
+// calcX[0].startsWith for each, and no corpus head extends one of these four
+// names into another.
+func expressionValue(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, amt expr.Amount, depth int) (int, bool) {
+	switch {
+	case amt.Count != nil:
+		return countValue(g, sourceController, source, *amt.Count)
+	case amt.Head == "Number":
+		return amt.Value, amt.Numeric
+	case amt.Head == "SVar":
+		return namedAmount(g, amounts, sourceController, source, amt.Body, depth)
+	case strings.HasPrefix(amt.Head, "PlayerCount"):
+		// playerXCount's own Highest/Lowest branch hands the whole
+		// "HighestX/Op" string down to playerXProperty, which applies the
+		// operator per player, then applies it again to the result -- a
+		// double application no corpus line exercises. Refused rather than
+		// guessed at either way (GO-7).
+		if amt.Op != nil {
+			return 0, false
+		}
+		return playerCountValue(g, sourceController, strings.TrimPrefix(amt.Head, "PlayerCount"), amt.Body)
+	}
+	return 0, false
+}
+
+// applyOperator is doXMath: op's own arithmetic applied to n. The operator
+// is matched by containment in doXMath's own order (expr.Operator); a name
+// matching none leaves n unchanged, doXMath's own final else.
+//
+// The operand (doXMath's secondaryNum) is read only by the operators that
+// use it, and is 0 when the suffix carries none or carries more than one
+// `.`-separated part (`s.length == 2` is the only case Java parses). An
+// integer operand was read at load (expr.Op.Numeric); anything else is an
+// SVar name, resolved like any other (namedAmount) -- Java's own
+// `calculateAmount(c, s[1], ctb)` fallback. false for an operand that does
+// not resolve, and for Mod by zero (Java throws ArithmeticException there,
+// which no card script can be allowed to do to a batch, GO-7).
+func applyOperator(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, n int, op *expr.Op, depth int) (int, bool) {
+	name, ok := expr.Operator(op.Name)
+	if !ok {
+		return n, true
+	}
+	secondary := func() (int, bool) {
+		switch {
+		case op.Numeric:
+			return op.Value, true
+		case op.Operand == "" || strings.Contains(op.Operand, "."):
+			return 0, true
+		}
+		return namedAmount(g, amounts, sourceController, source, op.Operand, depth)
+	}
+	switch name {
+	case "Twice":
+		return n * 2, true
+	case "Thrice":
+		return n * 3, true
+	case "HalfUp":
+		return int(math.Ceil(float64(n) / 2)), true
+	case "HalfDown":
+		return int(math.Floor(float64(n) / 2)), true
+	case "ThirdUp":
+		return int(math.Ceil(float64(n) / 3)), true
+	case "ThirdDown":
+		return int(math.Floor(float64(n) / 3)), true
+	case "Negative":
+		return -n, true
+	case "Abs":
+		if n < 0 {
+			return -n, true
+		}
+		return n, true
+	}
+	m, ok := secondary()
+	if !ok {
+		return 0, false
+	}
+	switch name {
+	case "Plus":
+		return n + m, true
+	case "NMinus":
+		return m - n, true
+	case "Minus":
+		return n - m, true
+	case "Times":
+		return n * m, true
+	case "Pow":
+		return int(math.Pow(float64(n), float64(m))), true
+	case "DivideEvenlyUp":
+		if m == 0 {
+			return 0, true
+		}
+		if n%m == 0 {
+			return n / m, true
+		}
+		return n/m + 1, true
+	case "DivideEvenlyDown":
+		if m == 0 {
+			return 0, true
+		}
+		return n / m, true
+	case "Mod":
+		if m == 0 {
+			return 0, false
+		}
+		return n % m, true
+	case "LimitMax":
+		return min(n, m), true
+	case "LimitMin":
+		return max(n, m), true
+	}
+	return n, true
 }
 
 // validZoneNames maps a Count$Valid<Zone> head's own zone suffix (the part

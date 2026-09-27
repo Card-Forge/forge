@@ -556,12 +556,10 @@ func TestApplyContinuousPTResolvesChainedSVarReference(t *testing.T) {
 	}
 }
 
-// TestApplyContinuousPTSkipsCountWithOperator proves a Count$ expression
-// carrying an operator suffix (/Plus.1) is left unresolved rather than
-// applied with the operator silently ignored -- resolveAmount's own doc
-// comment names this as out of scope (needs its own operand evaluation,
-// itself sometimes another SVar reference, Roiling Horror's own real shape).
-func TestApplyContinuousPTSkipsCountWithOperator(t *testing.T) {
+// TestApplyContinuousPTResolvesCountWithOperator proves a Count$ expression
+// carrying an operator suffix (/Plus.1) applies it after counting --
+// doXMath, resolveAmount's own applyOperator: one Elf plus one is 2.
+func TestApplyContinuousPTResolvesCountWithOperator(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -574,8 +572,30 @@ func TestApplyContinuousPTSkipsCountWithOperator(t *testing.T) {
 
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
+	if pw, ok := g.Card(creature).Power(); !ok || pw != 4 {
+		t.Errorf("Power() = (%d, %v), want (4, true) -- X = one Elf, Plus.1", pw, ok)
+	}
+}
+
+// TestApplyContinuousPTSkipsUnresolvableOperand proves an operator whose own
+// operand names an SVar the card does not define leaves the whole amount
+// unresolved rather than treating the operand as 0 (Java's own stderr-and-
+// zero fallback, which this port does not reproduce, GO-7).
+func TestApplyContinuousPTSkipsUnresolvableOperand(t *testing.T) {
+	t.Parallel()
+
+	g := newGame(t, "a", "b")
+	p, other := g.Players()[0], g.Players()[1]
+	g.Player(p).Life, g.Player(other).Life = 20, 20
+	g.NewCard(continuousDefWithSVar(t, "Test Missing Operand Anthem",
+		"Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | AddToughness$ X",
+		"X", "Count$Valid Elf/Plus.Z"), p, engine.Battlefield)
+	creature := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+
+	engine.CheckStateBasedActions(g, engine.NewScriptedController())
+
 	if pw, ok := g.Card(creature).Power(); !ok || pw != 2 {
-		t.Errorf("Power() = (%d, %v), want (2, true) -- an operator suffix must not resolve", pw, ok)
+		t.Errorf("Power() = (%d, %v), want (2, true) -- an undefined operand SVar must not resolve", pw, ok)
 	}
 }
 
@@ -604,8 +624,8 @@ func TestApplyContinuousPTResolvesMultiZoneCount(t *testing.T) {
 
 // TestApplyContinuousCharacteristicDefiningSkipsUnresolvableSVar proves a
 // CharacteristicDefining$ line whose own SetPower$/SetToughness$ SVar is not
-// a shape resolveAmount evaluates (a bare Count head outside the Valid
-// family) is skipped entirely -- the host's own printed "*/*" base stays
+// a shape resolveAmount evaluates (Count$CardPower: another permanent's
+// power is mid-rebuild while Layer 7 applies) is skipped entirely -- the host's own printed "*/*" base stays
 // unresolvable, not silently zero.
 func TestApplyContinuousCharacteristicDefiningSkipsUnresolvableSVar(t *testing.T) {
 	t.Parallel()
@@ -633,18 +653,17 @@ func TestApplyContinuousCharacteristicDefiningSkipsUnresolvableSVar(t *testing.T
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
 	if _, ok := g.Card(cda).Power(); ok {
-		t.Error("Power() resolved, want unresolvable -- Count$CardPower is outside the Valid family this port evaluates")
+		t.Error("Power() resolved, want unresolvable -- Count$CardPower is not a head resolveAmount evaluates")
 	}
 }
 
 // TestApplyContinuousCharacteristicDefiningSkipsDistinctPropertyCount proves
-// a Valid family argument itself carrying a `$`-suffixed distinct-value
-// operator (Tarmogoyf's own real `Count$ValidGraveyard Card$CardTypes`) is
-// skipped, not silently resolved as a plain match count against `Card`
-// (which would wrongly compute 0 every time, since every card matches
-// `Card` -- expr.Count.DistinctProperty's own doc comment; this is a
-// regression test for a real bug caught after the fact, not a hypothetical
-// one).
+// a Valid family argument carrying a `$`-suffixed property this port does
+// not measure (`$CreatureType`: distinct creature types, which needs the
+// subtype vocabulary to tell a creature type from any other subtype) is
+// skipped, not silently resolved as a plain match count against `Card` --
+// expr.Count.DistinctProperty's own doc comment; a regression test for a
+// real bug caught after the fact, kept for the properties still unported.
 func TestApplyContinuousCharacteristicDefiningSkipsDistinctPropertyCount(t *testing.T) {
 	t.Parallel()
 
@@ -661,7 +680,7 @@ func TestApplyContinuousCharacteristicDefiningSkipsDistinctPropertyCount(t *test
 	raw.Faces[0].Type = cardtype.Parse(reg, "Creature Lhurgoyf")
 	raw.Faces[0].Power, raw.Faces[0].Toughness = "*", "*"
 	raw.Faces[0].Statics = []string{"Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X"}
-	raw.Faces[0].SVars.Set("X", "Count$ValidGraveyard Card$CardTypes")
+	raw.Faces[0].SVars.Set("X", "Count$ValidGraveyard Card$CreatureType")
 	def, err := compile.Compile(raw)
 	if err != nil {
 		t.Fatalf("compile: %v", err)
@@ -672,7 +691,7 @@ func TestApplyContinuousCharacteristicDefiningSkipsDistinctPropertyCount(t *test
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
 	if pw, ok := g.Card(goyf).Power(); ok {
-		t.Errorf("Power() = (%d, true), want unresolvable -- Card$CardTypes is a distinct-value count this port does not evaluate, and must not silently resolve to a plain match count against \"Card\"", pw)
+		t.Errorf("Power() = (%d, true), want unresolvable -- Card$CreatureType is a distinct-value count this port does not evaluate, and must not silently resolve to a plain match count against \"Card\"", pw)
 	}
 }
 
