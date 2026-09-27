@@ -37,12 +37,12 @@ type Count struct {
 	// correct, just not sufficient on its own -- so a caller that ignores
 	// DistinctProperty and evaluates Valid alone gets a real but wrong
 	// answer (Tarmogoyf's own graveyard-card COUNT, not its distinct-type
-	// count) rather than a skip. A dozen real corpus lines carry one of five
-	// distinct DistinctProperty operators (`CardTypes`, `CreatureType`,
-	// `DifferentCardPower`, `GreatestCardPower`, `GreatestCardManaCost`),
-	// each its own separate Java function -- too little value for five new
-	// evaluators, so nothing in this port resolves DistinctProperty; every
-	// caller must check it and skip (GO-7) rather than silently measuring
+	// count) rather than a skip. 350 real corpus lines carry one of 23
+	// distinct properties (GreatestCardPower 67, GreatestCardManaCost 61,
+	// CardPower 43, Colors 32, ... -- port-log/game-state/
+	// layer7a-cda-amounts.md); the engine's own evaluator (paidMeasure,
+	// engine/amountpaid.go) measures the subset it can and reports every
+	// other property unresolved (GO-7) rather than silently measuring
 	// Valid's own match count instead.
 	DistinctProperty string
 }

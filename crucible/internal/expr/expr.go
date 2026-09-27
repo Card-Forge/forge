@@ -42,8 +42,13 @@ type Amount struct {
 	Kind Kind
 
 	// Value is the number, when the amount is a [Literal]. The sign is already
-	// applied.
+	// applied. It is also a `Number$N` expression's own N when Numeric is set;
+	// a `-` written before `Number$` stays in Negative, as for any expression.
 	Value int
+	// Numeric reports a `Number$` expression whose body is an integer
+	// (xCount's own Integer.parseInt), read into Value at load so the
+	// evaluator never converts script text (PORT-2).
+	Numeric bool
 
 	// Name is the SVar named by a [Reference].
 	Name string
@@ -59,6 +64,13 @@ type Amount struct {
 	Body string
 	// Op is the arithmetic applied to the result, nil when there is none.
 	Op *Op
+	// Count is Body already read by [ParseCount], set when Head is `Count`
+	// (case-folded, the engine's own dispatch) and nil otherwise. Parsing it
+	// here rather than in the evaluator is what keeps a compiled card's
+	// amounts free of runtime re-parsing (PORT-2): Parse runs once per SVar
+	// at card load. Shared and read-only once built, like the rest of a
+	// compiled card.
+	Count *Count
 
 	// Negative records a `-` prefix on an expression or a reference, which
 	// Java strips before it does anything else and applies as a multiplier at
@@ -77,6 +89,11 @@ type Op struct {
 	// Operand is the value after the `.`, empty for the operators that take
 	// none. A number or an SVar name; resolving the latter needs a game.
 	Operand string
+	// Value is Operand as an integer when Numeric is set: doXMath's own
+	// Integer.parseInt(s[1]), read at load (PORT-2). An operand that is not
+	// an integer is an SVar name the evaluator looks up instead.
+	Value   int
+	Numeric bool
 }
 
 // Parse reads an amount.
@@ -116,6 +133,15 @@ func Parse(amount string) Amount {
 		out.Kind = Expression
 		out.Context, out.Head = cutContext(body[:at])
 		out.Body, out.Op = cutOperator(body[at+1:])
+		switch {
+		case strings.EqualFold(out.Head, "Count"):
+			count := ParseCount(out.Body)
+			out.Count = &count
+		case out.Head == "Number":
+			if n, err := strconv.Atoi(out.Body); err == nil {
+				out.Value, out.Numeric = n, true
+			}
+		}
 		return out
 	}
 
@@ -143,7 +169,11 @@ func cutOperator(body string) (string, *Op) {
 	if name == "" {
 		return head, nil
 	}
-	return head, &Op{Name: name, Operand: operand}
+	op := &Op{Name: name, Operand: operand}
+	if n, err := strconv.Atoi(operand); err == nil {
+		op.Value, op.Numeric = n, true
+	}
+	return head, op
 }
 
 // Contexts are the head prefixes that change which ability the measurement is

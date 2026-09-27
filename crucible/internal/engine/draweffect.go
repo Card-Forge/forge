@@ -14,7 +14,7 @@ import "fmt"
 // through resolveNamedAmount (amount.go) -- a plain integer or a named SVar
 // this face defines, the identical literal-or-reference resolution a
 // continuous effect's own numeric params already get (ptParam,
-// continuous.go); a "*"-shaped amount or one outside the Valid family still
+// continuous.go); a "*"-shaped amount or a head resolveAmount does not evaluate still
 // fails, resolveAmount's own contract -- and Defined$ (definedPlayers,
 // defined.go).
 //

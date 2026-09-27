@@ -129,13 +129,13 @@ func applyContinuousPT(g *Game) {
 //     Remembered-driven affected set (AbilityUtils.getDefinedCards) rather
 //     than a blanket valid-string match against the whole battlefield.
 //   - A non-numeric, non-resolvable AddPower$/AddToughness$/SetPower$/
-//     SetToughness$ -- resolveAmount (amount.go) now evaluates a named SVar
-//     whose own body is a Count$Valid* expression (ptParam, below); a plain
-//     integer resolves as it always did, and only a genuinely unresolvable
-//     value (xPaid, an operator suffix, ChosenNumber, ...) is skipped, per
-//     missing dimension rather than per whole line -- a real corpus line
-//     naming both a resolvable and an unresolvable dimension together is
-//     not a shape worth losing the resolvable half over.
+//     SetToughness$ -- a plain integer or a named SVar resolveAmount
+//     (amount.go) evaluates resolves (ptParam, below); only a value it
+//     cannot evaluate (xPaid, Count$Party, ExiledWith$, ...: resolveAmount's
+//     own doc comment) is skipped, per missing dimension rather than per
+//     whole line -- a real corpus line naming both a resolvable and an
+//     unresolvable dimension together is not a shape worth losing the
+//     resolvable half over.
 func applyOneContinuousPT(g *Game, host *Card, amounts map[string]expr.Amount, s *compile.Ability) {
 	if !strings.EqualFold(s.Name, "Continuous") {
 		return
@@ -201,6 +201,18 @@ func applyOneContinuousPT(g *Game, host *Card, amounts map[string]expr.Amount, s
 // SETS the base value it defines, never adds to one -- no real corpus
 // CharacteristicDefining line pairs SetPower$/SetToughness$ with an
 // Add-shaped key.
+//
+// The amount itself is resolveAmount's (amount.go, amountheads.go,
+// amountpaid.go): 363 of the corpus's 374 real "*" CDA power/toughness
+// dimensions on a card that stays on the battlefield resolve
+// (TestCharacteristicDefiningCorpusFloor) -- the Count$Valid family with or
+// without a doXMath
+// suffix or a handlePaid property (Tarmogoyf's CardTypes, GreatestCardManaCost,
+// ...), SVar$/Number$, Domain, YourLifeTotal, Devotion, Chroma, CardCounters,
+// NumInAllHands, ChosenNumber, YouDrewThisTurn, OppGreatestLifeTotal and
+// PlayerCountOpponents$HighestCardsInHand. A dimension that does not resolve
+// is left off the effect (HasPower/HasToughness false), so a printed "*"
+// stays unresolvable rather than reading as zero.
 //
 // ExcludeZone$ (1 real line among 264 CharacteristicDefining$ True cards) --
 // skip host entirely while it sits in one of the named zones -- is not
@@ -577,7 +589,7 @@ func keywordTokens(s *compile.Ability, key string) ([]string, bool) {
 // `ctb.getSVar(n)` lookup, xCount), resolved via resolveAmount (amount.go).
 // Reports false for a missing key, or a value that is neither a plain
 // integer nor a name amounts resolves (a genuinely dynamic value --
-// AffectedX, ChosenNumber, xPaid, ... -- resolveAmount's own doc comment has
+// AffectedX, xPaid, Count$Party, ... -- resolveAmount's own doc comment has
 // the full account) -- the same "not resolvable, coverage gap rather than a
 // wrong answer" contract compareMatches (valid.go) already documents.
 func ptParam(g *Game, amounts map[string]expr.Amount, host *Card, s *compile.Ability, key string) (int, bool) {
@@ -624,14 +636,9 @@ func applyContinuousRules(g *Game) {
 //     Condition$ value -- applyOneContinuousPT's own skip reasons (a
 //     CharacteristicDefining line makes no sense for a player-facing effect
 //     anyway). The one real line pairing Condition$ Delirium with
-//     SetMaxHandSize$ (Winter, Misanthropic Guide) resolves its Condition$
-//     now but still does not apply: its own SetMaxHandSize$ names an SVar
-//     built from a Count$ValidGraveyard ...$CardTypes distinct-value count
-//     (amount.go's own resolveAmount skips a DistinctProperty expression,
-//     item 27's own Tarmogoyf-shaped gap) feeding a Number$.../Minus.X
-//     arithmetic SVar rulesEffect's own amount resolution has no head for
-//     either way -- rulesEffect itself still returns not-ok, for a reason
-//     unrelated to Condition$.
+//     SetMaxHandSize$ (Winter, Misanthropic Guide) applies: its
+//     `Number$7/Minus.X` over a `Count$ValidGraveyard ...$CardTypes` X
+//     resolves through resolveAmount (amount.go, amountpaid.go).
 //   - MayLookAt$/MayPlay$ (88, 181 real lines corpus-wide) -- a cast-time
 //     zone-eligibility permission CastSpell's own hand-only check
 //     (castspell.go) has nowhere to consult yet.

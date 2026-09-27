@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Untap
+humanlife=20
+humanbattlefield=Tarmogoyf|Damage:2
+humangraveyard=Grizzly Bears
+ailife=20
+aigraveyard=Lightning Bolt

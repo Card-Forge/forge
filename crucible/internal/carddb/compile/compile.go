@@ -304,7 +304,40 @@ func compileFace(face *carddb.Face) (Face, error) {
 		out.Triggers = append(out.Triggers, triggers...)
 	}
 	out.Amounts = compileAmounts(face)
+	out.Amounts = addInlineAmounts(out.Amounts, out.Statics)
 	return out, nil
+}
+
+// addInlineAmounts parses a static ability's power/toughness value written
+// inline as a raw expression rather than as an SVar name --
+// nethergoyf.txt's own `SetPower$ Count$ValidGraveyard Card.YouOwn$CardTypes`,
+// which calculateAmount reads as a raw value because `amount.indexOf('$') > 0`
+// -- into amounts, keyed by the value's own text folded to lower case: the
+// key an evaluator already looks a param value up by. An SVar name never
+// contains `$`, so no such key can shadow a real SVar. Parsed here, once,
+// for the same reason every other amount is (PORT-2).
+//
+// Limited to the four Layer 7 keys (SetPower$, SetToughness$, AddPower$,
+// AddToughness$) a Mode$ Continuous line's own amount resolution reads;
+// every other key keeps reading an SVar name only.
+func addInlineAmounts(amounts map[string]expr.Amount, statics []*Ability) map[string]expr.Amount {
+	for _, s := range statics {
+		for _, key := range [...]string{"SetPower", "SetToughness", "AddPower", "AddToughness"} {
+			v, ok := s.Param(key)
+			if !ok || strings.Index(v, "$") <= 0 {
+				continue
+			}
+			amt := expr.Parse(v)
+			if amt.Kind != expr.Expression {
+				continue
+			}
+			if amounts == nil {
+				amounts = map[string]expr.Amount{}
+			}
+			amounts[strings.ToLower(v)] = amt
+		}
+	}
+	return amounts
 }
 
 // ErrBadRoom is a dungeon room ability missing its RoomName$, or naming a

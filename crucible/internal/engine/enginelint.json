@@ -44,7 +44,7 @@
     "trigger": ["trigger.go"],
     "statictrigger": ["statictrigger.go"],
     "continuous": ["continuous.go"],
-    "amount": ["amount.go"],
+    "amount": ["amount.go", "amountheads.go", "amountpaid.go"],
     "replacement": ["replacement.go"],
     "playerstate": ["playerstate.go"],
     "defined": ["defined.go"],
@@ -295,7 +295,7 @@
       "playerstate",
       "continuouslayers"
     ],
-    "amount": ["id", "zone", "card", "game", "valid"],
+    "amount": ["id", "zone", "card", "game", "valid", "parts", "player"],
     "replacement": [
       "id",
       "zone",
