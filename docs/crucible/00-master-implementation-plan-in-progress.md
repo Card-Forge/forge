@@ -1769,7 +1769,7 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-**In progress.** 175 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
+**In progress.** 176 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
 `PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`, `Destroy`, `Tap`,
 `Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`, `TapAll`, `UntapAll`,
 `PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`, `Unattach`, `RevealHand`,
@@ -1790,9 +1790,9 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 `ReplaceEffect`, `ReplaceDamage`, `ReplaceSplitDamage`, `ReplaceToken`, `ReplaceCounter`, `ReplaceMana`, `Clone`,
 `BecomeMonarch`, `TakeInitiative`, `Venture`, `OpenAttraction`, `AssembleContraption`, `Regeneration`, `Play`,
 `CopySpellAbility`, `RingTemptsYou`, `Abandon`, `ChangeTargets`, `MustBlock`, `Phases`, `ManaReflected`, `ControlSpell`,
-`Planeswalk`, `ChaosEnsues`, `RollPlanarDice`) — see `docs/crucible/porting/port-log/game-state.md` for the per-API
-landing notes; items 30-32 below stay in their original plan-authoring voice (forward-looking, not yet rewritten as a
-per-item retrospective the way M0-M5 are).
+`Planeswalk`, `ChaosEnsues`, `RollPlanarDice`, `RunChaos`) — see `docs/crucible/porting/port-log/game-state.md` for the
+per-API landing notes; items 30-32 below stay in their original plan-authoring voice (forward-looking, not yet rewritten
+as a per-item retrospective the way M0-M5 are).
 
 30. Implement APIs in corpus-first, then frequency order (Section 1.5). Keywords, triggers, replacements, cost parts
     alongside.

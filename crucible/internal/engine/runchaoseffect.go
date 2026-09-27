@@ -65,6 +65,10 @@ func (runChaosEffect) Resolve(g *Game, a *Ability, c PlayerController) error {
 		if h.Def == nil {
 			continue
 		}
+		// Every Plane/Phenomenon card in the corpus has one face; Java's
+		// c.getTriggers() (RunChaosEffect.java:21) reads only the current
+		// state's triggers, but scanning every face is equivalent today and
+		// avoids a second card-state lookup this port has no other need for.
 		for _, face := range h.Def.Faces {
 			for _, t := range face.Triggers {
 				if !isChaosEnsuesTrigger(t) {
