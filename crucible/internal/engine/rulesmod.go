@@ -7,12 +7,13 @@ package engine
 // RulesMod is the Layer 8 continuous effects currently affecting one
 // player -- CR 613's own rule-changing catch-all layer, which carries no CR
 // number of its own (layer.go's own doc comment), trimmed to the corpus's
-// two dominant real shapes: SetMaxHandSize$/RaiseMaxHandSize$ (a player's
-// own maximum hand size, 43 and 8 real lines) and AdjustLandPlays$ (how many
-// lands a turn allows, 27 real lines). Every other Layer 8 param
-// (MayLookAt$, 88; MayPlay$, 181; vote/villainous-choice params, a handful
-// each) needs its own separate mechanic this port does not build --
-// applyOneContinuousRules's own doc comment (continuous.go) has the reasons.
+// player-facing real shapes: SetMaxHandSize$/RaiseMaxHandSize$ (a player's
+// own maximum hand size, 43 and 8 real lines), AdjustLandPlays$ (how many
+// lands a turn allows, 27 real lines) and the vote/villainous-choice params
+// Vote and VillainousChoice read (AdditionalVote$, AdditionalOptionalVote$,
+// AdditionalVillainousChoice$, ControlVote$). The per-card Layer 8 params
+// live elsewhere; applyOneContinuousRules's own doc comment (continuous.go)
+// has what is not resolved and why.
 type RulesMod struct {
 	effects []RulesEffect
 }
@@ -45,6 +46,64 @@ type RulesEffect struct {
 	HasAdjustLandPlays       bool
 	AdjustLandPlays          int
 	AdjustLandPlaysUnlimited bool
+
+	// AdditionalVotes, AdditionalOptionalVotes and AdditionalVillainousChoices
+	// are AdditionalVote$/AdditionalOptionalVote$/AdditionalVillainousChoice$
+	// (Player.addAdditionalVote/addAdditionalOptionalVote/
+	// addAdditionalVillainousChoices): each sums across every effect on the
+	// player, order-free, the way Player.getAdditionalVotesAmount does. Zero
+	// is "this effect adds none", so no Has flag is needed.
+	AdditionalVotes             int
+	AdditionalOptionalVotes     int
+	AdditionalVillainousChoices int
+
+	// ControlVote is ControlVote$ (Player.addControlVote): the player
+	// chooses how every player votes. Game.getControlVote picks the player
+	// holding the latest such effect by Timestamp.
+	ControlVote bool
+}
+
+// additionalVotes sums every effect's AdditionalVotes
+// (Player.getAdditionalVotesAmount).
+func (r RulesMod) additionalVotes() int {
+	n := 0
+	for _, e := range r.effects {
+		n += e.AdditionalVotes
+	}
+	return n
+}
+
+// additionalOptionalVotes sums every effect's AdditionalOptionalVotes
+// (Player.getAdditionalOptionalVotesAmount).
+func (r RulesMod) additionalOptionalVotes() int {
+	n := 0
+	for _, e := range r.effects {
+		n += e.AdditionalOptionalVotes
+	}
+	return n
+}
+
+// additionalVillainousChoices sums every effect's AdditionalVillainousChoices
+// (Player.getAdditionalVillainousChoices).
+func (r RulesMod) additionalVillainousChoices() int {
+	n := 0
+	for _, e := range r.effects {
+		n += e.AdditionalVillainousChoices
+	}
+	return n
+}
+
+// controlVote is Player.getHighestControlVote: the latest Timestamp among
+// this player's ControlVote effects, and whether there is one.
+func (r RulesMod) controlVote() (uint64, bool) {
+	var best uint64
+	found := false
+	for _, e := range r.effects {
+		if e.ControlVote && (!found || e.Timestamp > best) {
+			best, found = e.Timestamp, true
+		}
+	}
+	return best, found
 }
 
 // Add records one continuous effect. Order does not matter here for the
@@ -61,4 +120,25 @@ func (r *RulesMod) Clear() { r.effects = nil }
 // shared backing array would let a push on the clone alias the original.
 func (r RulesMod) clone() RulesMod {
 	return RulesMod{effects: append([]RulesEffect(nil), r.effects...)}
+}
+
+// mayPlayGrant is one MayPlay$ permission a Mode$ Continuous static gives
+// this pass: Java's CardPlayOption (Card.setMayPlay, Card.java:3818), the
+// Layer 8 grant that lets Grantee cast or play CardID from a zone they
+// normally could not.
+//
+// Timestamp is the card's own as the grant was made: every zone change
+// stamps a new one, so a card that moved since (cast, milled, returned) is
+// a new object the grant no longer names (CR 400.7). WithoutManaCost is
+// MayPlayWithoutManaCost$, WithFlash MayPlayWithFlash$, and ZonePermission
+// is false only under MayPlayDontGrantZonePermissions$: such a grant
+// changes how a card is cast but not whether its zone allows casting at
+// all (SpellAbilityRestriction.java:239-241).
+type mayPlayGrant struct {
+	CardID          CardID
+	Timestamp       uint64
+	Grantee         PlayerID
+	WithoutManaCost bool
+	WithFlash       bool
+	ZonePermission  bool
 }

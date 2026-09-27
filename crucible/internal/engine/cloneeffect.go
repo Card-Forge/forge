@@ -37,12 +37,13 @@ type copyEffect struct {
 	imprinted  []CardID
 }
 
-// UncopiedDef is c's definition under every copy effect -- Def itself when
-// none applies. Java's GameState writes a copied permanent under its own
-// paper card's name, which is what the fixture dumper reads this for.
+// UncopiedDef is c's definition under every copy effect and any Layer 3
+// text change (preTextDef, card.go) -- Def itself when none applies.
+// Java's GameState writes a copied permanent under its own paper card's
+// name, which is what the fixture dumper reads this for.
 func (c *Card) UncopiedDef() *compile.Card {
 	if len(c.copies) == 0 {
-		return c.Def
+		return c.preTextDef()
 	}
 	return c.uncopiedDef
 }
@@ -56,7 +57,7 @@ func (c *Card) IsCopy() bool { return len(c.copies) > 0 }
 // and toughness a token's creating effect gave it, which a copy effect on c
 // hides (BasePower).
 func (c *Card) copiableValues() copyOriginal {
-	o := copyOriginal{def: c.Def}
+	o := copyOriginal{def: c.preTextDef()}
 	if len(c.copies) == 0 {
 		o.power, o.hasPower = c.basePower, c.hasBasePower
 		o.toughness, o.hasToughness = c.baseToughness, c.hasBaseToughness
@@ -68,6 +69,7 @@ func (c *Card) copiableValues() copyOriginal {
 // its definition c's. The slice is rebuilt rather than appended in place: a
 // last-known-information snapshot shares the old backing array.
 func (c *Card) addCopy(e copyEffect) {
+	c.clearTextChange()
 	if len(c.copies) == 0 {
 		c.uncopiedDef = c.Def
 	}

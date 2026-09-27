@@ -192,8 +192,13 @@ func checkStateBasedActions(g *Game, controller PlayerController) (over, perform
 	// Affected$ specs that can themselves read Controller() (a "YouCtrl"
 	// property), which must already reflect this pass's own control changes
 	// (applyContinuousControl's own doc comment).
+	// clearContinuousText/applyContinuousText bracket Layer 2 for Layer 3:
+	// last pass's text changes end before control is recomputed, and this
+	// pass's apply right after it (clearContinuousText's own doc comment).
+	clearContinuousText(g)
 	applyContinuousControl(g)
 	g.dropStolenRingBearers()
+	applyContinuousText(g)
 	applyContinuousPT(g)
 	applyContinuousType(g)
 	applyContinuousColor(g)

@@ -257,6 +257,12 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		}
 		match := (c.CMC()%2 == 0) == (sc.Memory.ChosenEvenOdd() == "Even")
 		return match == (name == "cmcChosenEvenOdd")
+	case name == "TopLibrary":
+		// CardProperty.java:610-624's plain form: c is the top card of its
+		// owner's library -- index 0, the end DrawCards reads from. The
+		// "TopLibrary_<valid>"/"BottomLibrary" forms are not resolved.
+		lib := g.Zone(Library, c.Owner).Cards()
+		return len(lib) > 0 && lib[0] == c.ID
 	case name == "IsRemembered":
 		sc, ok := sourceCard(g, source)
 		return ok && containsEntity(sc.Memory.Remembered(), CardEntity(c.ID))

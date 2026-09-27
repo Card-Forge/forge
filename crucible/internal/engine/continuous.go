@@ -508,6 +508,161 @@ func applyOneContinuousNames(g *Game, host *Card, s *compile.Ability) {
 	}
 }
 
+// clearContinuousText ends every Layer 3 text change the previous pass
+// applied (clearTextChange, card.go), before Layer 2 runs: Java's own
+// checkStaticAbilities clears every static effect first
+// (StaticEffects.clearStaticEffects) and only then collects the static
+// abilities to apply from each card's own restored text, so a static the
+// gained text carries never takes part in a layer ahead of Layer 3. Walks
+// the whole arena rather than the battlefield enumeration, since a
+// phased-out permanent is missing from the latter (Zone.Cards, ADR-0021)
+// and would otherwise keep last pass's text forever.
+func clearContinuousText(g *Game) {
+	for i := range g.cards {
+		g.cards[i].clearTextChange()
+	}
+}
+
+// applyContinuousText is Layer 3 (CR 613.1c): every Mode$ Continuous static
+// currently in play naming GainTextOf$ rewrites its affected permanent's
+// text, applyOneContinuousText below. Called after applyContinuousControl
+// and before every other applier (CheckStateBasedActions, action.go), CR
+// 613.1's own order: the host's controller decides whose graveyard
+// TopOfGraveyard reads, and Layers 4-7 then fold over the text-changed Def
+// exactly the way they already fold over a copy effect's, picking up the
+// gained text's own statics with no change to any of them -- Java's own
+// checkStaticAbilities adds a text-gained static to every layer after the
+// one that gained it (the toAdd list).
+//
+// The host's statics are read from a Def captured before the walk, since
+// applying the line to the host itself (AffectedDefined$ Self, the one real
+// shape) swaps that very Def mid-walk.
+func applyContinuousText(g *Game) {
+	for _, pid := range g.Players() {
+		for _, host := range g.traitHosts(pid) {
+			h := g.Card(host)
+			def := h.Def
+			if def == nil {
+				continue
+			}
+			for fi, face := range def.Faces {
+				for si, s := range face.Statics {
+					applyOneContinuousText(g, h, s, textChange{owner: def, face: fi, static: si})
+				}
+			}
+		}
+	}
+}
+
+// applyOneContinuousText is StaticAbilityContinuous.java's own TEXT-layer
+// GainTextOf$ branch: the affected permanent gets the full text of the
+// GainTextOf$ card -- name, mana cost, color, types, abilities, power and
+// toughness (Java's own addChangedName/addChangedManaCost/addColorByText/
+// addChangedCardTypesByText/addChangedCardTraitsByText/
+// addChangedCardKeywordsByText/addNewPTByText, one call each) -- plus every
+// GainTextAbilities$ ability, and loses every ability of its own
+// (CardTraitChanges' own `e -> true` removal).
+//
+// Built for the corpus's one real line, Volrath's Shapeshifter:
+//
+//	AffectedDefined$ Self | GainTextOf$ TopOfGraveyard.Creature | GainTextAbilities$ VolrathDiscard
+//
+// The text read is the source card's own printed front face (its current
+// state in the graveyard -- Java's first.getCurrentStateName()), never a
+// back or adventure face: textChangedDef leaves every other face blank and
+// SplitType zero, so a transforming DFC on top of the graveyard cannot make
+// the permanent transform.
+//
+// Skipped, not guessed (GO-7): any AffectedDefined$ other than Self,
+// Affected$/AffectedZone$/CharacteristicDefining$ alongside GainTextOf$, and
+// a GainTextOf$ Defined other than TopOfGraveyard -- none is a real corpus
+// shape. The other Layer 3 params StaticAbility.java:143 lists
+// (ChangeColorWordsTo$, Incorporate$, ManaCost$) are not read here at all;
+// AddNames$ is applyOneContinuousNames' own.
+//
+// key names s by its position in the host's own definition (textChange's
+// own doc comment); applyOneContinuousText fills in the rest.
+func applyOneContinuousText(g *Game, host *Card, s *compile.Ability, key textChange) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	gainTextOf, ok := s.Param("GainTextOf")
+	if !ok {
+		return
+	}
+	if !continuousConditionMet(g, host, s) {
+		return
+	}
+	for _, key := range [...]string{"Affected", "AffectedZone", "CharacteristicDefining"} {
+		if _, ok := s.Param(key); ok {
+			return
+		}
+	}
+	if defined, _ := s.Param("AffectedDefined"); !strings.EqualFold(defined, "Self") {
+		return
+	}
+	source, ok := topOfGraveyard(g, host, gainTextOf)
+	if !ok {
+		return
+	}
+	src := g.Card(source).Def
+	if src == nil {
+		return
+	}
+	key.from = src
+	cached := host.text
+	if cached.def != nil && cached.from == key.from && cached.owner == key.owner &&
+		cached.face == key.face && cached.static == key.static {
+		key.def = cached.def
+		host.setTextChange(key)
+		return
+	}
+	var gained []*compile.Ability
+	for _, sub := range s.Subs {
+		if strings.EqualFold(sub.Key, "GainTextAbilities") {
+			gained = append(gained, sub.Ability)
+		}
+	}
+	key.def = textChangedDef(src, gained)
+	host.setTextChange(key)
+}
+
+// topOfGraveyard resolves AbilityUtils.getDefinedCards' own "TopOfGraveyard"
+// Defined for a static ability: the last card of host's controller's
+// graveyard (grave.getLast()), kept only if it matches the optional
+// ".<valid>" filter after the head (getDefinedCards' own incR[1]
+// restriction). false for an empty graveyard, a filtered-out top card, or a
+// Defined other than TopOfGraveyard.
+func topOfGraveyard(g *Game, host *Card, defined string) (CardID, bool) {
+	head, filter, hasFilter := strings.Cut(defined, ".")
+	if head != "TopOfGraveyard" {
+		return NoCard, false
+	}
+	grave := g.Zone(Graveyard, host.Controller()).Cards()
+	if len(grave) == 0 {
+		return NoCard, false
+	}
+	top := grave[len(grave)-1]
+	if hasFilter && !Matches(g, g.Card(top), valid.Parse(filter), host.Controller(), host.ID) {
+		return NoCard, false
+	}
+	return top, true
+}
+
+// textChangedDef is the definition a GainTextOf$ change gives its permanent:
+// src's own front face, with gained appended to its abilities. The ability
+// slice is copied before appending, because src is shared by every game in
+// the process (ADR-0007) and appending into its spare capacity would write
+// into all of them at once. Every other slice the face holds is shared
+// read-only, as any Def's is.
+func textChangedDef(src *compile.Card, gained []*compile.Ability) *compile.Card {
+	face := src.Faces[0]
+	face.Abilities = append(append(make([]*compile.Ability, 0, len(face.Abilities)+len(gained)), face.Abilities...), gained...)
+	out := &compile.Card{Filename: src.Filename, Name: src.Name}
+	out.Faces[0] = face
+	return out
+}
+
 // applyPumpEffects re-adds every resolved Pump effect's own contribution
 // (pumpeffect.go) into its target's Layer 7b/7c PT and Layer 6 KeywordMod --
 // the one-shot counterpart to applyContinuousPT's/applyContinuousKeyword's
@@ -603,11 +758,15 @@ func ptParam(g *Game, amounts map[string]expr.Amount, host *Card, s *compile.Abi
 // applyContinuousRules recomputes every player's own Layer 8 RulesEffects
 // from scratch, applyContinuousPT's own reasoning (above) applied to a
 // player rather than a card: SetMaxHandSize$/RaiseMaxHandSize$/
-// AdjustLandPlays$ Read Player.HandSizeLimit/LandPlayLimit (player.go).
+// AdjustLandPlays$ Read Player.HandSizeLimit/LandPlayLimit (player.go). The
+// same walk recomputes every card's own AddHiddenKeyword$ grants
+// (applyOneContinuousHiddenKeyword), Java's own RULES-layer param.
 func applyContinuousRules(g *Game) {
 	for _, pid := range g.Players() {
 		g.Player(pid).Rules.Clear()
 	}
+	clearHiddenKeywords(g)
+	g.mayPlay = nil
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -617,6 +776,8 @@ func applyContinuousRules(g *Game) {
 			for _, face := range h.Def.Faces {
 				for _, s := range face.Statics {
 					applyOneContinuousRules(g, h, face.Amounts, s)
+					applyOneContinuousHiddenKeyword(g, h, s)
+					applyOneContinuousMayPlay(g, h, s)
 				}
 			}
 		}
@@ -628,8 +789,9 @@ func applyContinuousRules(g *Game) {
 // dispatch every other player-shaped Affected/ValidPlayer/ValidActivatingPlayer
 // check in this port already reuses, applied here against a static
 // ability's Affected$ rather than a trigger's own player-shaped param), if
-// s is a Mode$ Continuous line naming SetMaxHandSize$, RaiseMaxHandSize$
-// and/or AdjustLandPlays$ in a shape rulesEffect (below) can resolve.
+// s is a Mode$ Continuous line naming SetMaxHandSize$, RaiseMaxHandSize$,
+// AdjustLandPlays$ and/or one of the four vote params in a shape
+// rulesEffect (below) can resolve.
 //
 // Not resolved, each for a specific reason:
 //   - AffectedDefined$/AffectedZone$/CharacteristicDefining$/an unresolved
@@ -639,20 +801,20 @@ func applyContinuousRules(g *Game) {
 //     SetMaxHandSize$ (Winter, Misanthropic Guide) applies: its
 //     `Number$7/Minus.X` over a `Count$ValidGraveyard ...$CardTypes` X
 //     resolves through resolveAmount (amount.go, amountpaid.go).
-//   - MayLookAt$/MayPlay$ (88, 181 real lines corpus-wide) -- a cast-time
-//     zone-eligibility permission CastSpell's own hand-only check
-//     (castspell.go) has nowhere to consult yet.
-//   - ControlOpponentsSearchingLibrary$/ControlVote$/AdditionalVote$/
-//     AdditionalOptionalVote$/AdditionalVillainousChoice$/
-//     DeclaresAttackers$/DeclaresBlockers$ (0-3 real lines each) --
-//     multiplayer/vote mechanics this port has no concept of at all.
-//   - IgnoreEffectCost$/AddHiddenKeyword$ (4, 19) -- each its own separate
-//     mechanic (a cost-ignoring ability grant; a hidden functional keyword
-//     whose own real values -- "must be blocked if able," "can't attack
-//     alone," "doesn't untap," ... -- are each a distinct
-//     block/attack/untap-step rule this port's own combat/turn model has no
-//     hook for, none of them sharing enough machinery to be worth building
-//     as one slice the way SetMaxHandSize/AdjustLandPlays do).
+//   - MayPlay$/MayLookAt$ are not this function's: MayPlay$ is a per-card
+//     grant (applyOneContinuousMayPlay, below) and MayLookAt$ changes no
+//     state in an omniscient engine.
+//   - ControlOpponentsSearchingLibrary$ (1 real line) -- a library search
+//     handing its decisions to another player's controller, which no
+//     search effect here can do; DeclaresAttackers$/DeclaresBlockers$ (1
+//     S: line, 5 Effect SVars) -- handing a declaration to another
+//     player, which DeclareCombatAttackers/DeclareCombatBlockers cannot.
+//     The vote params (AdditionalVote$, AdditionalOptionalVote$,
+//     AdditionalVillainousChoice$, ControlVote$) do resolve here, into
+//     RulesEffect fields Vote/VillainousChoice read.
+//   - IgnoreEffectCost$ (4) -- a cost-ignoring ability grant, its own
+//     separate mechanic. AddHiddenKeyword$ is not this function's:
+//     applyOneContinuousHiddenKeyword (below) resolves it per card.
 //   - A qualified Affected$ matchesPlayerSpec cannot resolve
 //     (Player.NotedForGreenAnchor, Player.Chosen -- 1 real line each,
 //     matchesPlayerSpec's own doc comment has the general reason).
@@ -689,7 +851,8 @@ func applyOneContinuousRules(g *Game, host *Card, amounts map[string]expr.Amount
 }
 
 // rulesEffect reads s's own SetMaxHandSize$/RaiseMaxHandSize$/
-// AdjustLandPlays$ params into one RulesEffect. "Unlimited" (Java's own
+// AdjustLandPlays$/AdditionalVote$/AdditionalOptionalVote$/
+// AdditionalVillainousChoice$/ControlVote$ params into one RulesEffect. "Unlimited" (Java's own
 // literal sentinel for `p.setUnlimitedHandSize(true)`/
 // `p.addMaxLandPlaysInfinite`) is checked before falling to ptParam (above)
 // for the numeric case, since ptParam itself would just report it
@@ -729,7 +892,221 @@ func rulesEffect(g *Game, host *Card, amounts map[string]expr.Amount, s *compile
 			return RulesEffect{}, false
 		}
 	}
+	for _, v := range [...]struct {
+		key string
+		dst *int
+	}{
+		{"AdditionalVote", &e.AdditionalVotes},
+		{"AdditionalOptionalVote", &e.AdditionalOptionalVotes},
+		{"AdditionalVillainousChoice", &e.AdditionalVillainousChoices},
+	} {
+		if _, ok := s.Param(v.key); !ok {
+			continue
+		}
+		n, ok := ptParam(g, amounts, host, s, v.key)
+		if !ok {
+			return RulesEffect{}, false
+		}
+		*v.dst, hasEffect = n, true
+	}
+	if _, ok := s.Param("ControlVote"); ok {
+		e.ControlVote, hasEffect = true, true
+	}
 	return e, hasEffect
+}
+
+// clearHiddenKeywords drops every card's AddHiddenKeyword$ grants before
+// applyContinuousRules rebuilds them. The whole arena, not the battlefield
+// enumeration: a card that left play or phased out since the last pass
+// must not keep a grant nothing re-derives.
+func clearHiddenKeywords(g *Game) {
+	for i := range g.cards {
+		g.cards[i].hiddenKeywords = nil
+	}
+}
+
+// hiddenKeywordRead reports whether line is an AddHiddenKeyword$ line
+// something in this port reads (hasKeywordText/hasKeywordTextPrefix: block
+// legality, block requirements, canAttackAtAll).
+func hiddenKeywordRead(line string) bool {
+	switch line {
+	case "CARDNAME can't block.", "CARDNAME can't attack or block.",
+		"All creatures able to block CARDNAME do so.", "CARDNAME must be blocked if able.":
+		return true
+	}
+	return false
+}
+
+// applyOneContinuousHiddenKeyword is StaticAbilityContinuous.java's own
+// RULES-layer AddHiddenKeyword$ (lines 322-323, 751-752): every " & "-split
+// line goes onto each affected card's hidden keywords
+// (Card.addHiddenExtrinsicKeywords), seen by Card.hasKeyword's exact-text
+// shortcut (Card.java:4981) but not part of its keyword list -- the one
+// thing that makes a hidden keyword differ from an AddKeyword$ one.
+//
+// The affected set is AffectedDefined$ Self/Enchanted/Equipped (the host, or
+// what it is attached to -- 15 of the 19 real S: lines), filtered by
+// Affected$ when present, or else every battlefield card Affected$ matches
+// (the real Effect-SVar lines, AffectedZone$ Battlefield written out).
+//
+// Skipped whole, not applied partially (GO-7):
+//   - a line naming a keyword nothing here reads (hiddenKeywordRead): "This
+//     card doesn't untap during your next untap step." (no untap-step hook),
+//     "CARDNAME can't attack alone."/"CARDNAME can only attack alone."
+//     (attackconstraints.go reads neither), "CARDNAME count as <name>."
+//     (graveyard-only name aliasing).
+//   - AffectedZone$ other than Battlefield, CharacteristicDefining$, any
+//     other AffectedDefined$, an unresolved Condition$.
+func applyOneContinuousHiddenKeyword(g *Game, host *Card, s *compile.Ability) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	raw, ok := s.Param("AddHiddenKeyword")
+	if !ok {
+		return
+	}
+	if !continuousConditionMet(g, host, s) {
+		return
+	}
+	if _, ok := s.Param("CharacteristicDefining"); ok {
+		return
+	}
+	if zone, ok := s.Param("AffectedZone"); ok && !strings.EqualFold(zone, "Battlefield") {
+		return
+	}
+	lines := strings.Split(raw, " & ")
+	for i, l := range lines {
+		lines[i] = strings.TrimSpace(l)
+		if !hiddenKeywordRead(lines[i]) {
+			return
+		}
+	}
+
+	var targets []CardID
+	if defined, ok := s.Param("AffectedDefined"); ok {
+		switch {
+		case strings.EqualFold(defined, "Self"):
+			targets = []CardID{host.ID}
+		case strings.EqualFold(defined, "Enchanted"), strings.EqualFold(defined, "Equipped"):
+			if attached, ok := host.AttachedTo(); ok {
+				targets = []CardID{attached}
+			}
+		default:
+			return
+		}
+	} else {
+		if _, ok := s.Param("Affected"); !ok {
+			return
+		}
+		for _, pid := range g.Players() {
+			targets = append(targets, g.Zone(Battlefield, pid).Cards()...)
+		}
+	}
+	affected, filtered := s.Param("Affected")
+	var spec valid.Spec
+	if filtered {
+		spec = valid.Parse(affected)
+	}
+	for _, id := range targets {
+		c := g.Card(id)
+		if c.Zone != Battlefield || c.IsPhasedOut() {
+			continue
+		}
+		if filtered && !Matches(g, c, spec, host.Controller(), host.ID) {
+			continue
+		}
+		c.hiddenKeywords = append(c.hiddenKeywords, lines...)
+	}
+}
+
+// applyOneContinuousMayPlay is StaticAbilityContinuous.java's own RULES-layer
+// MayPlay$ (lines 473-489, 892-911): every card in an AffectedZone$ zone
+// that Affected$ matches gets a mayPlayGrant for the host's controller,
+// read back by CastSpell/PlayLand (mayPlayOption, game.go).
+//
+// The static must be active where its host is (StaticAbility.zonesCheck):
+// a battlefield host needs no EffectZone$ or EffectZone$ Battlefield/All;
+// an Effect card's statics work from the Command zone whatever they name
+// (EffectEffect.java). A host in any other zone is not walked at all
+// (traitHosts), so the EffectZone$ Graveyard "cast this from your
+// graveyard" lines stay a gap. Battlefield and Stack in AffectedZone$ grant
+// nothing: nothing is cast from either.
+//
+// MayLookAt$ on the same line needs nothing: the engine is omniscient
+// (lookateffect.go), so "may look at" changes no state.
+func applyOneContinuousMayPlay(g *Game, host *Card, s *compile.Ability) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	if _, ok := s.Param("MayPlay"); !ok {
+		return
+	}
+	if !continuousConditionMet(g, host, s) {
+		return
+	}
+	// Params that change what the grant allows or when it holds in a way
+	// this does not model, so a line naming any of them grants nothing
+	// (GO-7): MayPlayLimit$ (a per-static, per-turn use count,
+	// stAb.getMayPlayTurn), the mana-spending relaxations
+	// (MayPlayIgnoreType$/IgnoreColor$/SnowIgnoreColor$), an alternative or
+	// raised cost (MayPlayAltManaCost$, RaiseCost$), a grant for someone
+	// other than the host's controller (MayPlayPlayer$), a single-face
+	// restriction (MayPlayText$), the SVar/presence conditions
+	// continuousConditionMet does not evaluate (CheckSVar$ and siblings,
+	// IsPresent$), and the spell-ability restrictions (ValidSA$,
+	// ValidAfterStack$, ReplaceGraveyard$).
+	for _, key := range [...]string{
+		"MayPlayLimit", "MayPlayIgnoreType", "MayPlayIgnoreColor", "MayPlaySnowIgnoreColor",
+		"MayPlayAltManaCost", "RaiseCost", "MayPlayPlayer", "MayPlayText",
+		"CheckSVar", "CheckSecondSVar", "CheckThirdSVar", "IsPresent",
+		"ValidSA", "ValidAfterStack", "ReplaceGraveyard", "CharacteristicDefining",
+	} {
+		if _, ok := s.Param(key); ok {
+			return
+		}
+	}
+	if zone, ok := s.Param("EffectZone"); ok && !host.IsEffect &&
+		!strings.EqualFold(zone, "Battlefield") && !strings.EqualFold(zone, "All") {
+		return
+	}
+	affected, ok := s.Param("Affected")
+	if !ok {
+		return
+	}
+	rawZones, ok := s.Param("AffectedZone")
+	if !ok {
+		return
+	}
+	var zones []ZoneType
+	for _, name := range strings.Split(rawZones, ",") {
+		z, ok := ZoneByName(strings.TrimSpace(name))
+		if !ok {
+			return
+		}
+		if z != Battlefield && z != Stack {
+			zones = append(zones, z)
+		}
+	}
+	_, withoutManaCost := s.Param("MayPlayWithoutManaCost")
+	_, withFlash := s.Param("MayPlayWithFlash")
+	_, noZonePermission := s.Param("MayPlayDontGrantZonePermissions")
+	player := host.Controller()
+	spec := valid.Parse(affected)
+	for _, z := range zones {
+		for _, pid := range g.Players() {
+			for _, id := range g.Zone(z, pid).Cards() {
+				c := g.Card(id)
+				if !Matches(g, c, spec, player, host.ID) {
+					continue
+				}
+				g.mayPlay = append(g.mayPlay, mayPlayGrant{
+					CardID: id, Timestamp: c.Timestamp, Grantee: player,
+					WithoutManaCost: withoutManaCost, WithFlash: withFlash,
+					ZonePermission: !noZonePermission,
+				})
+			}
+		}
+	}
 }
 
 // applyContinuousControl recomputes every battlefield card's own Layer 2

@@ -32,6 +32,7 @@ func (c *Card) IsFaceDown() bool { return c.faceUpDef != nil }
 // control and enters p's battlefield face down, answering whether it did.
 func (g *Game) manifest(controller PlayerController, id CardID, p PlayerID, cloaked bool) {
 	c := g.Card(id)
+	c.clearTextChange()
 	if c.faceUpDef == nil {
 		c.faceUpDef = c.Def
 	}

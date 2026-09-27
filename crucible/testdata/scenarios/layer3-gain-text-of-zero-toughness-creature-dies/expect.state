@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Untap
+humanlife=20
+humangraveyard=Nightmare;Volrath's Shapeshifter
+ailife=20

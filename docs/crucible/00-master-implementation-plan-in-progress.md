@@ -1639,12 +1639,13 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     effects) and `LandPlayLimit` (`AdjustLandPlays$` sums unconditionally, `Player.getMaxLandPlays`'s own contract, no
     order-dependence at all). Both take the printed default as a parameter rather than reading `turn.go`/`land.go`'s own
     constants directly, keeping `player`'s own `enginelint` group acyclic. `cleanupStep`/`PlayLand` (turn.go/land.go)
-    now call them instead of comparing against the bare constants. Not resolved: `MayLookAt$`/`MayPlay$` (88/181 real
-    lines) — a cast-time zone-eligibility permission `CastSpell`'s own hand-only check has nowhere to consult yet;
-    `AddHiddenKeyword$` (19) — each of its 8 real distinct values its own separate block/attack/untap-step mechanic, not
-    one shape worth building as a slice; vote/villainous-choice params (0-3 real lines each) — multiplayer mechanics
-    this port has no concept of; a qualified `Affected$` `matchesPlayerSpec` cannot resolve
-    (`Player.NotedForGreenAnchor`/`Player.Chosen`, 1 real line each).
+    now call them instead of comparing against the bare constants. `MayPlay$` resolves as a per-card grant
+    `CastSpell`/`PlayLand` consult (421 of 660 real lines; `MayLookAt$` is a no-op in an omniscient engine);
+    `AddHiddenKeyword$` resolves per card for the four keyword lines something reads (41 of 53 real lines,
+    `port-log/game-state/layers-text-and-rules.md`); the four vote/villainous-choice params resolve into `RulesEffect`
+    fields Vote/VillainousChoice read; `ControlOpponentsSearchingLibrary$`/`DeclaresAttackers$`/`DeclaresBlockers$` hand
+    a decision to another player's controller, which nothing here can; a qualified `Affected$` `matchesPlayerSpec`
+    cannot resolve (`Player.NotedForGreenAnchor`/`Player.Chosen`, 1 real line each).
 
     The legend rule's own `ignoreLegendRule` exemption (item 25) and `CantBlockBy` (item 28's own combat note) already
     showed a static-ability mode can be independently buildable when it needs no layer-folding of its own —
@@ -1652,14 +1653,14 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     its layers partly haven't had to: all six subsets needed only the valid-string evaluator (`valid.go`) every other
     slice already reused, plus (for Layers 4/5) small additions to `cardtype.Line`/`valid.go` themselves. The rest of
     Layers 4/5/6 past a literal token list, Layer 7a's own last 16 CDA amount dimensions, and Layer 8's own remainder
-    above are the real remaining size of this item, alongside Layer 3, which this port has not touched: `GainTextOf$`, 1
-    real line, needs its own single-card text-copying mechanism for one real corpus card, not a slice worth building for
-    that alone. Layer 1 (copy effects) is not part of `StaticAbilityContinuous.java`'s switch either — zero real
-    references to `StaticAbilityLayer.COPY` in it — but a resolution-time state swap (`Card.addCloneState`), so it is
-    not this item's job: `Card.copies` holds it (`Clone`'s "becomes a copy", `port-log/game-state/effects-clone.md`),
-    and "enters as a copy" is a Copy-layer replacement of the card's entry (`K:ETBReplacement:Copy` expanded at compile
-    time, `entersascopy.go`; 50 of the corpus's 69 Copy-layer `Clone` replacement lines resolve, 18 are refused with an
-    error, `port-log/game-state/layer1-enters-as-copy.md`).
+    above are the real remaining size of this item. Layer 3's `GainTextOf$` (1 real line, Volrath's Shapeshifter) swaps
+    `Card.Def` for a composite text definition between Layers 2 and 4 (`applyContinuousText`,
+    `port-log/game-state/layers-text-and-rules.md`). Layer 1 (copy effects) is not part of
+    `StaticAbilityContinuous.java`'s switch either — zero real references to `StaticAbilityLayer.COPY` in it — but a
+    resolution-time state swap (`Card.addCloneState`), so it is not this item's job: `Card.copies` holds it (`Clone`'s
+    "becomes a copy", `port-log/game-state/effects-clone.md`), and "enters as a copy" is a Copy-layer replacement of the
+    card's entry (`K:ETBReplacement:Copy` expanded at compile time, `entersascopy.go`; 50 of the corpus's 69 Copy-layer
+    `Clone` replacement lines resolve, 18 are refused with an error, `port-log/game-state/layer1-enters-as-copy.md`).
 
     **Layer 2 (`CONTROL`) is real now too — this port's first controller-change mechanism.** A new
     `ControlMod`/`ControlEffect` (`controlmod.go`) folds onto `Card.Controller`, which stops being a plain field and

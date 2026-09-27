@@ -592,6 +592,8 @@ func (c *faceCompiler) reference(key, name string) (SubRef, error) {
 //     and only for Effect (EffectEffect.java).
 //   - `ResultSubAbilities$ 1:A,2:B` names `key:svar` pairs, and only for
 //     RollDice.
+//   - `GainTextAbilities$ A & B` names a list, and only on a continuous
+//     static (StaticAbilityContinuous.java's GainTextOf$ branch).
 //
 // The API gate is not decoration. `Choices$` on any other API is a valid
 // string, and resolving it as a list of SVars would fail on cards that are
@@ -606,6 +608,12 @@ func (c *faceCompiler) references(a *Ability, p vocab.Param) ([]string, bool) {
 		return splitTrim(p.Value, ","), true
 	case cloneTraitKeys[strings.ToLower(p.Key)] && a.Name == "Clone":
 		return splitTrim(p.Value, ","), true
+	case strings.EqualFold(p.Key, "GainTextAbilities") && a.Record == StaticEffect:
+		// StaticAbilityContinuous.java's own GainTextOf$ branch splits on
+		// " & " and parses each name with AbilityUtils.getSVar: the
+		// abilities the text-changed card has on top of the gained text
+		// (Volrath's Shapeshifter's "{2}: Discard a card.").
+		return splitTrim(p.Value, "&"), true
 	case strings.EqualFold(p.Key, "ResultSubAbilities") && a.Name == "RollDice":
 		var out []string
 		for _, pair := range splitTrim(p.Value, ",") {

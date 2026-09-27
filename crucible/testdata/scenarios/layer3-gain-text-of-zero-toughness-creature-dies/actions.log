@@ -1,0 +1,6 @@
+# CR 613.1c Layer 3 (GainTextOf$, StaticAbilityContinuous.java TEXT branch):
+# the top card of the graveyard is a creature, so Volrath's Shapeshifter has
+# Nightmare's full text, including its */* and its characteristic-defining
+# "equal to the number of Swamps you control" (Layer 7a, over the gained
+# text). No Swamps: it is 0/0 and dies to CR 704.5f on the same check.
+startturn human
