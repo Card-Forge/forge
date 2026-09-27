@@ -152,6 +152,18 @@ type Ability struct {
 	hostTransforms    int
 	hasHostTransforms bool
 
+	// xManaCostPaid is SpellAbility.xManaCostPaid: the value of X announced
+	// for this ability's own mana cost (CR 601.2b, CR 602.2b), set by
+	// castSpell and ActivateAbility from payManaCostX (manapay.go) and
+	// rewritten by ChangeX (changexeffect.go). Java's field is a nullable
+	// Integer, null when no cost part carried an X or the cost was not paid
+	// (PlaySpellAbility.announceValuesLikeX, a WithoutManaCost$ cast), and
+	// ChangeXEffect.java writes only a non-null one -- hasXManaCostPaid is
+	// that null. A value, so Clone and a CopySpellAbility copy carry it
+	// (CR 707.10).
+	xManaCostPaid    int
+	hasXManaCostPaid bool
+
 	// damageMap is SpellAbility.getDamageMap: damage recorded under a
 	// DamageMap$ ability for a later DamageResolve, shared down the
 	// sub-ability chain.

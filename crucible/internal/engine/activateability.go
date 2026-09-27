@@ -324,9 +324,11 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 		API: apiType, Source: card, Controller: pid,
 		Params: ability, Amounts: c.Def.Faces[0].Amounts,
 	}
-	if !g.PayManaCost(pid, manaCost, controller) {
+	x, paid := g.payManaCostX(pid, manaCost, controller)
+	if !paid {
 		return false
 	}
+	x.setOn(&activated)
 	if shape.Tap {
 		c.Tapped = true
 		g.checkTapsTriggers(controller, card, pid, false)

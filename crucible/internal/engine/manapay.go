@@ -25,20 +25,40 @@ import "github.com/jczastkiewicz/crucible/internal/mana"
 // not necessarily the last (game-state.md's "Mana pool and payment"
 // section).
 func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerController) bool {
+	_, ok := g.payManaCostX(decider, cost, controller)
+	return ok
+}
+
+// xAnnounced is the value of X a payment announced (CR 601.2b), and whether
+// the cost carried an X at all -- SpellAbility.xManaCostPaid's own nullable
+// Integer, split the way Ability carries it (xManaCostPaid,
+// hasXManaCostPaid, ability.go; xAnnounced.setOn, castspell.go).
+type xAnnounced struct {
+	value     int
+	announced bool
+}
+
+// payManaCostX is PayManaCost that also reports the X it announced, for the
+// callers that put the paid ability on the stack and so must remember it
+// (PlaySpellAbility.java:462-465's ability.setXManaCostPaid): castSpell's
+// three branches (castspell.go) and ActivateAbility (activateability.go).
+func (g *Game) payManaCostX(decider PlayerID, cost mana.Cost, controller PlayerController) (xAnnounced, bool) {
 	resolved := make([]mana.Shard, 0, len(cost.Shards())+cost.Generic())
 	var snow []mana.Shard
 	generic := cost.Generic()
 	life := 0
+	var x xAnnounced
 
 	// CR 601.2b: X is announced once, before any other part of the cost is
 	// paid, and every X symbol the cost carries stands for that same
 	// announced value -- not one value each.
 	if countX := cost.CountX(); countX > 0 {
-		x := controller.ChoosePayX(g, decider, cost)
-		if x < 0 {
-			return false
+		n := controller.ChoosePayX(g, decider, cost)
+		if n < 0 {
+			return xAnnounced{}, false
 		}
-		generic += x * countX
+		generic += n * countX
+		x = xAnnounced{value: n, announced: true}
 	}
 
 	for _, s := range cost.Shards() {
@@ -59,7 +79,7 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 			choice := controller.ChooseHybridManaColor(g, decider, s.Colors())
 			pure, ok := mana.PureShard(choice)
 			if !ok {
-				return false
+				return xAnnounced{}, false
 			}
 			resolved = append(resolved, pure)
 		case s.IsOr2Generic():
@@ -67,7 +87,7 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 			if controller.ChoosePayMonocoloredHybrid(g, decider, color, s.CMC()) {
 				pure, ok := mana.PureShard(color)
 				if !ok {
-					return false
+					return xAnnounced{}, false
 				}
 				resolved = append(resolved, pure)
 			} else {
@@ -78,7 +98,7 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 			if controller.ChoosePayColorlessHybrid(g, decider, color) {
 				pure, ok := mana.PureShard(color)
 				if !ok {
-					return false
+					return xAnnounced{}, false
 				}
 				resolved = append(resolved, pure)
 			} else {
@@ -89,7 +109,7 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 			if controller.ChoosePayPhyrexian(g, decider, color) {
 				pure, ok := mana.PureShard(color)
 				if !ok {
-					return false
+					return xAnnounced{}, false
 				}
 				resolved = append(resolved, pure)
 			} else {
@@ -102,7 +122,7 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 			} else {
 				pure, ok := mana.PureShard(choice)
 				if !ok {
-					return false
+					return xAnnounced{}, false
 				}
 				resolved = append(resolved, pure)
 			}
@@ -116,13 +136,13 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 	}
 
 	if !g.Player(decider).ManaPool.PayWithSnow(mana.FromShards(resolved, 0), snow) {
-		return false
+		return xAnnounced{}, false
 	}
 	if life > 0 {
 		g.Player(decider).Life -= life
 		g.sink.Emit(Event{Kind: LifeChanged, Source: NoCard, Target: PlayerEntity(decider), Amount: int32(-life)})
 	}
-	return true
+	return x, true
 }
 
 // isTwoColorHybrid reports whether s is a plain two-colour hybrid symbol

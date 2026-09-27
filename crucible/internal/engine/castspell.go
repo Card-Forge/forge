@@ -96,7 +96,8 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	if !castableAsPermanent(c) {
 		return false
 	}
-	if !g.payCastCost(pid, c, controller, opts) {
+	x, paid := g.payCastCost(pid, c, controller, opts)
+	if !paid {
 		return false
 	}
 	g.putSpellOnStack(card, pid)
@@ -104,7 +105,9 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	if c.Type().Has(cardtype.Creature) {
 		api = APIPermanentCreature
 	}
-	g.PushAbility(Ability{API: api, Source: card, Controller: pid, spell: true})
+	cast := Ability{API: api, Source: card, Controller: pid, spell: true}
+	x.setOn(&cast)
+	g.PushAbility(cast)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.Player(pid).SpellsCastThisTurn++
 	g.checkSpellCastTriggers(controller, card, pid)
@@ -112,12 +115,21 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 }
 
 // payCastCost pays c's printed mana cost for pid (CR 601.2g-h), or nothing
-// under opts.withoutManaCost.
-func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, opts castOpts) bool {
+// under opts.withoutManaCost, and reports the X it announced for the caller
+// to record on the spell (xAnnounced.setOn, manapay.go). A WithoutManaCost$
+// cast announces none: its cost has no X part left, and
+// PlaySpellAbility.announceValuesLikeX leaves xManaCostPaid null then.
+func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, opts castOpts) (xAnnounced, bool) {
 	if opts.withoutManaCost {
-		return true
+		return xAnnounced{}, true
 	}
-	return g.PayManaCost(pid, c.Def.Faces[0].ManaCost, controller)
+	return g.payManaCostX(pid, c.Def.Faces[0].ManaCost, controller)
+}
+
+// setOn records x on a as the X its cost was paid with; announced false
+// leaves Java's null.
+func (x xAnnounced) setOn(a *Ability) {
+	a.xManaCostPaid, a.hasXManaCostPaid = x.value, x.announced
 }
 
 // putSpellOnStack moves card to the stack under pid and makes pid its
@@ -168,11 +180,14 @@ func (g *Game) castAura(pid PlayerID, card CardID, c *Card, controller PlayerCon
 	if len(eligible) > 1 {
 		target = controller.ChooseEnchantTarget(g, pid, card, eligible)
 	}
-	if !g.payCastCost(pid, c, controller, opts) {
+	x, paid := g.payCastCost(pid, c, controller, opts)
+	if !paid {
 		return false
 	}
 	g.putSpellOnStack(card, pid)
-	g.PushAbility(Ability{API: APIAttach, Source: card, Controller: pid, Target: target, spell: true})
+	cast := Ability{API: APIAttach, Source: card, Controller: pid, Target: target, spell: true}
+	x.setOn(&cast)
+	g.PushAbility(cast)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.Player(pid).SpellsCastThisTurn++
 	g.checkSpellCastTriggers(controller, card, pid)
@@ -222,9 +237,11 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	if !g.resolveTargets(controller, &a) {
 		return false
 	}
-	if !g.payCastCost(pid, c, controller, opts) {
+	x, paid := g.payCastCost(pid, c, controller, opts)
+	if !paid {
 		return false
 	}
+	x.setOn(&a)
 	g.putSpellOnStack(card, pid)
 	g.PushAbility(a)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
