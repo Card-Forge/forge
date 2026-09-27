@@ -52,6 +52,14 @@ func castableAsInstantOrSorcery(c *Card) bool {
 // (MayPlayWithFlash$). A grant choice this port cannot make is recorded
 // for TakePendingError and declines the cast.
 //
+// mayPlayOption runs before the timing check below, since its own
+// WithFlash result feeds that check: an ambiguous-grant error (two live
+// grants disagreeing, or a cost-changing grant beside a normal hand cast,
+// mayplay_test.go's TestMayPlayHandChoiceFailsClosed) can fire even when
+// the attempt would also have failed on timing alone. Both outcomes are
+// "declined, not a bug" (GO-7); only the reason surfaced can differ, and
+// only when a card the corpus never combines this way is scripted to.
+//
 // Reports whether the spell was cast. false covers every legal-but-declined
 // case: wrong timing, the card is neither in pid's hand nor granted,
 // castableAsPermanent says no, or the cost could not be paid -- the same
