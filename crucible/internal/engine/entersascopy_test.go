@@ -279,3 +279,44 @@ func TestEntersAsCopyRejectsWhatItCannotRun(t *testing.T) {
 		})
 	}
 }
+
+// TestEntersAsCopyGainsTheAddedTraits proves AddTriggers$, AddAbilities$ and
+// AddStaticAbilities$ (Phantasmal Image, Evil Twin, Sakashima): the traits
+// the named SVars hold join the copied values, so an added ETB trigger
+// fires for the entering copy, an added static applies to it, and an added
+// activated ability is on it -- while the copied card's own definition
+// gains none of them.
+func TestEntersAsCopyGainsTheAddedTraits(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	giant := g.NewCard(giantDef(t), other, engine.Battlefield)
+	clone := g.NewCard(testCloneDef(t, "Test Twin",
+		"Creature.Other | AddTriggers$ TrigETB | AddAbilities$ ABPump | AddStaticAbilities$ STBig",
+		"SVar:TrigETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ When this enters, you gain 1 life.",
+		"SVar:TrigGain:DB$ GainLife | LifeAmount$ 1",
+		"SVar:ABPump:AB$ Pump | Cost$ G | Defined$ Self | NumAtt$ +1 | SpellDescription$ This gets +1/+0.",
+		"SVar:STBig:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Description$ This gets +1/+1."),
+		p, engine.Hand)
+	sc := engine.NewScriptedController()
+	sc.QueueConfirmEffect(true)
+	sc.QueueCardChoice([]engine.CardID{giant})
+	mustCastAndResolve(t, g, p, sc, clone)
+	engine.CheckStateBasedActions(g, sc)
+
+	c := g.Card(clone)
+	if c.Def.Name != "Copied Giant" {
+		t.Fatalf("clone is %q, want a copy of Copied Giant", c.Def.Name)
+	}
+	if got := g.Player(p).Life; got != 21 {
+		t.Errorf("life = %d, want 21: the added ETB trigger did not fire", got)
+	}
+	wantPT(t, g, clone, 5, 6)
+	abilities := c.Def.Faces[0].Abilities
+	if len(abilities) != 1 || abilities[0].Name != "Pump" {
+		t.Errorf("copy's abilities = %v, want the added Pump", abilities)
+	}
+	if gf := g.Card(giant).Def.Faces[0]; len(gf.Abilities)+len(gf.Triggers)+len(gf.Statics) != 0 {
+		t.Error("the added traits reached the copied card's own definition")
+	}
+}

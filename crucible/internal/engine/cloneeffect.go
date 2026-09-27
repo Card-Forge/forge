@@ -190,9 +190,10 @@ func (g *Game) uncopy(id CardID, e copyEffect) {
 // "except" params applied (CardFactory.getCloneStates): NewName$/KeepName$,
 // AddColors$/SetColor$, NonLegendary$, AddTypes$, AddKeywords$ (IfNew
 // filtering), SetPower$/SetToughness$, AddSVars$ (numeric SVars; an
-// ability SVar is already compiled into the ability that names it, PORT-2)
-// and GainThisAbility$ (the copy keeps the trigger or ability this line
-// resolves under).
+// ability SVar is already compiled into the ability that names it, PORT-2),
+// AddTriggers$/AddAbilities$/AddStaticAbilities$ (the traits their SVars
+// hold, compiled at load into the line's own Subs) and GainThisAbility$
+// (the copy keeps the trigger or ability this line resolves under).
 // IntoPlayTapped$ taps the copy; RememberCloneOrigin$ remembers the copied
 // card.
 //
@@ -206,14 +207,13 @@ func (g *Game) uncopy(id CardID, e copyEffect) {
 type cloneEffect struct{}
 
 // cloneUnresolvedParams are the CloneEffect/getCloneStates params this port
-// does not resolve: gaining triggers, abilities or statics named by SVar
-// (each needs a compiled SVar trait this port does not build for Clone
-// yet), the pump keywords' own until-command, Embalm's condition,
+// does not resolve: gaining another card's text (GainTextAbilities$,
+// GainTextOf$), the pump keywords' own until-command, Embalm's condition,
 // mana cost and card/creature type rewriting, keyword removal, loyalty, and
 // RemoveCreatureTypes$ -- which getCloneStates never reads (PORT-8,
 // effects-clone.md).
 var cloneUnresolvedParams = [...]string{
-	"AddTriggers", "AddAbilities", "AddStaticAbilities", "GainTextAbilities", "GainTextOf",
+	"GainTextAbilities", "GainTextOf",
 	"PumpKeywords", "PumpDuration", "Embalm", "RemoveCost", "SetManaCost", "SetColorByManaCost",
 	"RemoveCardTypes", "RemoveSubTypes", "RemoveCreatureTypes", "SetCreatureTypes", "RemoveKeywords",
 	"SetLoyalty", "Condition",
@@ -576,12 +576,24 @@ func cloneDef(g *Game, a *Ability, origin cloneOrigin, out *Card) (*compile.Card
 		}
 		ch.apply(f, faceAt(out.Def, i), faceAt(origin.printed, i))
 	}
-	// Java adds the gained ability to every copied state, but only the
+	// Java adds the gained traits to every copied state, but only the
 	// current one is ever active. This port's trigger scans walk every face
-	// of Def, so the ability goes on the current face alone -- on an
-	// adventurer's second face too it would trigger twice.
+	// of Def, so they go on the current face alone -- on an adventurer's
+	// second face too a trigger would fire twice. Java's order is
+	// AddTriggers$, AddAbilities$, AddStaticAbilities$, then
+	// GainThisAbility$ (CardFactory.java:633-682).
+	f := &def.Faces[0]
+	for _, sub := range a.Params.Subs {
+		switch {
+		case strings.EqualFold(sub.Key, "AddTriggers"):
+			f.Triggers = append(append([]*compile.Ability(nil), f.Triggers...), sub.Ability)
+		case strings.EqualFold(sub.Key, "AddAbilities"):
+			f.Abilities = append(append([]*compile.Ability(nil), f.Abilities...), sub.Ability)
+		case strings.EqualFold(sub.Key, "AddStaticAbilities"):
+			f.Statics = append(append([]*compile.Ability(nil), f.Statics...), sub.Ability)
+		}
+	}
 	if ch.gain != nil {
-		f := &def.Faces[0]
 		switch ch.gainKind {
 		case compile.Trigger:
 			f.Triggers = append(append([]*compile.Ability(nil), f.Triggers...), ch.gain)

@@ -102,23 +102,35 @@ replacement.
 | A copy replacement hosted by an effect card (Mystic Reflection)               | "The next time one or more enter" is a batch; entries here are one at a time                              |
 | A `SubAbility$` `Effect` with `ReplacementEffects$` (Spark Double, Moritte)   | Its replacement edits the same entry, which has already happened here: counters would be silently missing |
 | `ValidTgts$` anywhere in the chain; a replacement param outside the read set  | Not modeled at a replacement site                                                                         |
-| `Clone`'s own rejected params (`AddTriggers$`, `PumpKeywords$`, ...)          | [`effects-clone.md`](effects-clone.md#rejected); `Clone` errors before acting                             |
+| `Clone`'s own rejected params (`PumpKeywords$`, `RemoveCardTypes$`, ...)      | [`effects-clone.md`](effects-clone.md#rejected); `Clone` errors before acting                             |
 
 The error goes through `recordPendingError` (ADR-0020 decision 4): the entry sites have no error return, and
 `Registry.Resolve`/`ResolveStack`/the fixture runner take it at the next boundary.
 
+### Clone's added traits: `AddTriggers$`, `AddAbilities$`, `AddStaticAbilities$`
+
+15 of the "enters as a copy" cards (Phantasmal Image, Evil Twin, Progenitor Mimic, Sakashima...) copy "except it has
+<ability>" (CR 707.9a: the exception becomes part of the copiable values). `getCloneStates` parses each named SVar out
+of the host's SVars at resolution (`CardFactory.java:633-665`). Here `compile` follows the three keys on a `Clone` line
+(`cloneTraitKeys`, gated on `Clone` like `effectTraitKeys` on `Effect`; `AddStaticAbilities$` SVars compile as
+continuous effects, like `StaticAbilities$`), and `cloneDef` appends the compiled traits to the copy's current face,
+triggers then abilities then statics, before `GainThisAbility$`. 18 `Clone` lines change fingerprint in `ast.golden`,
+the 18 carrying one of the keys; none names a missing SVar, so Java's silent `containsKey` skip is never exercised.
+Numeric SVars an added trait reads still arrive through `AddSVars$`, as in Java.
+
 ### What resolves
 
-Of the 66 `K:ETBReplacement:Copy` cards whose SVar is a `Clone`, 43 pass every check above and `Clone`'s own (among them
-Clone, Phyrexian Metamorph, Vesuva, Body Double, Essence of the Wild, Superior Spider-Man). A sub-ability or amount
-those checks cannot see still resolves through the Registry, and fails there with its own error. The 23 others:
+Of the 66 `K:ETBReplacement:Copy` cards whose SVar is a `Clone`, 56 pass every check above and `Clone`'s own (among them
+Clone, Phyrexian Metamorph, Vesuva, Body Double, Phantasmal Image, Essence of the Wild, Superior Spider-Man). A
+sub-ability or amount those checks cannot see still resolves through the Registry, and fails there with its own error.
+The 10 others:
 
 | Blocker                                                                                   | Cards |
 | ----------------------------------------------------------------------------------------- | ----: |
-| `Clone`'s `AddTriggers$`/`AddAbilities$`/`AddStaticAbilities$` (trait SVars not compiled) |    15 |
 | Valid properties `Matches` lacks (`ThisTurnEntered*`, `cmcLEY`)                           |     4 |
-| `RemoveCardTypes$`/`RemoveSubTypes$`, `Embalm$`/`RemoveCost$`                             |     2 |
+| `RemoveCardTypes$`/`RemoveSubTypes$`, `Embalm$`/`RemoveCost$`                             |     3 |
 | `SubAbility$` `Effect` replacing the same entry (Spark Double, Moritte of the Frost)      |     2 |
+| `Duration$ UntilFacedown` (Vesuvan Shapeshifter, whose `Event$ TurnFaceUp` half is unrun) |     1 |
 
 Outside the keyword, Protean Raider and Displaced Dinosaurs (`R:` lines naming `Clone`) run. Mystic Reflection and the
 non-`Clone` lines (Primal Clay and its four kin, The Mimeoplasm, Living Lore) are errors.

@@ -537,7 +537,7 @@ func (c *faceCompiler) reference(key, name string) (SubRef, error) {
 	// like a trigger's, and only the naming key says they are continuous
 	// effects (EffectEffect.java adds them through addStaticAbility).
 	want := SubAbility
-	if strings.EqualFold(key, "StaticAbilities") {
+	if strings.EqualFold(key, "StaticAbilities") || strings.EqualFold(key, "AddStaticAbilities") {
 		want = StaticEffect
 	}
 	ability, err := c.line(body, want)
@@ -570,6 +570,8 @@ func (c *faceCompiler) references(a *Ability, p vocab.Param) ([]string, bool) {
 	case strings.EqualFold(p.Key, "Choices") && choiceAPIs[a.Name]:
 		return splitTrim(p.Value, ","), true
 	case effectTraitKeys[strings.ToLower(p.Key)] && a.Name == "Effect":
+		return splitTrim(p.Value, ","), true
+	case cloneTraitKeys[strings.ToLower(p.Key)] && a.Name == "Clone":
 		return splitTrim(p.Value, ","), true
 	case strings.EqualFold(p.Key, "ResultSubAbilities") && a.Name == "RollDice":
 		var out []string
@@ -666,6 +668,19 @@ var effectTraitKeys = map[string]bool{
 	"staticabilities":    true,
 	"triggers":           true,
 	"replacementeffects": true,
+}
+
+// cloneTraitKeys are the params through which a Clone names the SVars
+// holding the triggers, activated abilities and continuous effects its copy
+// gains: CardFactory.getCloneStates splits each on "," and parses every name
+// out of the host's SVars (CardFactory.java:633-665). Compiled here so the
+// engine adds compiled abilities to the copy instead of reparsing script
+// text at resolution (PORT-2). Gated on Clone for the reason effectTraitKeys
+// is gated on Effect.
+var cloneTraitKeys = map[string]bool{
+	"addtriggers":        true,
+	"addabilities":       true,
+	"addstaticabilities": true,
 }
 
 // choiceAPIs are the APIs whose `Choices$` names sub-abilities.
