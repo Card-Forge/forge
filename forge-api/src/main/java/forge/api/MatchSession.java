@@ -5,6 +5,7 @@ import com.google.common.eventbus.Subscribe;
 import forge.StaticData;
 import forge.ai.LobbyPlayerAi;
 import forge.card.MagicColor;
+import forge.card.CardStateName;
 import forge.deck.Deck;
 import forge.game.*;
 import forge.game.event.GameEventTurnPhase;
@@ -333,7 +334,7 @@ public final class MatchSession {
         if (card.getCounters() != null) for (var entry : card.getCounters().entrySet()) counters.put(entry.getElement().getName(), entry.getCount());
         var combat = game.getView().getCombat();
         var defender = combat == null ? null : combat.getDefender(card);
-        return map("key", key, "visualId", activity.visualId(card), "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
+        var result = map("key", key, "visualId", activity.visualId(card), "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
                 "manaCost", hidden ? "" : face.getManaCost().toString(), "power", hidden ? null : face.getPower(), "toughness", hidden ? null : face.getToughness(),
                 "text", hidden ? "" : card.getText(), "tapped", card.isTapped(), "sick", card.isSick(), "damage", card.getDamage(),
                 "attacking", card.isAttacking(), "blocking", card.isBlocking(), "counters", counters,
@@ -342,6 +343,25 @@ public final class MatchSession {
                 "selectable", selectable.contains(card) || actionable.contains(card)
                         || prompt != null && prompt.input instanceof InputLondonMulligan && card.getController().equals(viewer) && card.getZone() == ZoneType.Hand,
                 "highlighted", highlighted.contains(card), "faceDown", hidden);
+        addCardFaces(result, card, !hidden && card.canBeShownTo(viewer));
+        return result;
+    }
+
+    /** Only add alternate identities after the same visibility check as the current face. */
+    private static void addCardFaces(Map<String, Object> result, CardView card, boolean visible) {
+        if (!visible || !card.isDoubleFacedCard() || !card.hasAlternateState()) return;
+        var current = card.getCurrentState();
+        var other = card.getAlternateState();
+        boolean back = current.getState() == CardStateName.Backside || current.getState() == CardStateName.Meld;
+        var front = back ? other : current;
+        String artName = Objects.requireNonNullElse(front.getOracleName(), "");
+        if (artName.isEmpty()) artName = front.getName();
+        result.put("artName", artName);
+        result.put("artFace", back ? "back" : "front");
+        result.put("otherFace", map("name", other.getName(), "manaCost", other.getManaCost().toString(),
+                "type", other.getType().toString(), "oracleText", other.getOracleText(),
+                "power", other.getPower(), "toughness", other.getToughness(),
+                "artName", artName, "artFace", back ? "front" : "back"));
     }
 
     void fail(Throwable failure) { failure.printStackTrace(System.err); fail(failure.getMessage() == null ? failure.getClass().getSimpleName() : failure.getMessage()); }
@@ -478,9 +498,11 @@ public final class MatchSession {
     static Map<String, Object> choiceCard(CardView card, PlayerView viewer) {
         boolean hidden = card.isFaceDown() || !card.canBeShownTo(viewer);
         var face = card.getCurrentState();
-        return map("name", hidden ? "Face-down or hidden card" : face.getName(), "faceDown", hidden,
+        var result = map("name", hidden ? "Face-down or hidden card" : face.getName(), "faceDown", hidden,
                 "type", hidden ? "" : face.getType().toString(), "manaCost", hidden ? "" : face.getManaCost().toString(),
                 "text", hidden ? "" : card.getText(), "power", hidden ? null : face.getPower(), "toughness", hidden ? null : face.getToughness());
+        addCardFaces(result, card, !hidden);
+        return result;
     }
     private static Object first(List<?> choices) { return choices.isEmpty() ? null : choices.get(0); }
     private static List<?> combine(Object source, Object destination) {

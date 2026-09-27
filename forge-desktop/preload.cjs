@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('forge', {
   status: () => ipcRenderer.invoke('status'),
   request: (method, params = {}) => ipcRenderer.invoke('engine', method, params),
-  art: name => ipcRenderer.invoke('art', name),
+  art: (name, face = 'front') => ipcRenderer.invoke('art', name, face),
   browseDecks: destination => ipcRenderer.invoke('browse-decks', destination),
   importFile: () => ipcRenderer.invoke('import-file'),
   exportFile: kind => ipcRenderer.invoke('export-file', kind),

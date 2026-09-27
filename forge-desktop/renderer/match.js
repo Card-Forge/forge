@@ -132,7 +132,9 @@
     const stats = !card.faceDown && card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
     const statsBadge = stats ? `<span class="match-stats" aria-label="Power ${esc(card.power)}, toughness ${esc(card.toughness)}">${esc(stats)}</span>` : '';
     const marks = [card.sick ? 'New' : '', card.attacking ? `Attacking${card.defender ? ' → ' + card.defender : ''}` : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
-    const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
+    const hybridLand = !inHand && !card.faceDown && card.type.includes('Land') && /Artifact|Creature|Enchantment/.test(card.type);
+    const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card)
+      + (hybridLand ? `<span class="match-type-badge" title="${esc(card.type)}" aria-label="Current type: ${esc(card.type)}">Land</span>` : '');
     const symbols = !card.faceDown ? cost(card.manaCost) : '';
     const costLabel = card.faceDown ? 'Hidden card' : symbols ? `Mana cost ${card.manaCost}` : card.type.includes('Land') ? 'Land · no mana cost' : 'No mana cost';
     const handCost = inHand ? `<span class="match-hand-cost" aria-label="${esc(costLabel)}">${symbols || `<span class="hand-no-cost">${esc(costLabel)}</span>`}</span>` : '';

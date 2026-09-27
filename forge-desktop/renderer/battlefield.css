@@ -55,7 +55,10 @@
 .human-lane .match-commander-damage > div { top: auto; bottom: 20px; }
 .match-zones-row { flex: 1; min-height: 0; display: flex; gap: 16px; }
 .match-battlefield { display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 0; min-height: 0; gap: 3px; }
-.battlefield-row { display: flex; align-items: center; justify-content: safe center; gap: 13px; flex: 1; min-height: 0; overflow-x: auto; overflow-y: hidden; padding: 5px 8px; }
+.battlefield-row { display: flex; align-items: center; justify-content: safe center; gap: 13px; flex: 1; min-height: 0; overflow-x: auto; overflow-y: hidden; padding: 5px 8px; container-type: size; }
+/* Fit the full portrait and its name to THIS row's content height, after
+   padding and scrollbars. Leave room for the hover lift and focus outline. */
+.battlefield-row > .match-card { --field-card-width: min(74px, calc((100cqh - 20px) * 488 / 680)); }
 .lands-row { border-top: 1px solid #9bab8830; }
 .opponent-lane .lands-row { border-top: 0; border-bottom: 1px solid #9bab8830; }
 .field-empty { margin: auto; color: #89988070; font: italic 12px Georgia; letter-spacing: .5px; }
@@ -66,7 +69,9 @@
 .match-card { position: relative; flex: 0 0 var(--field-card-width); width: var(--field-card-width); padding: 0; border: 0; border-radius: 5px; background: transparent; text-align: left; transition: transform .15s; }
 .match-card:hover, .match-card:focus-visible { transform: translateY(-3px); z-index: 3; }
 .match-card-face { position: relative; display: block; }
+.match-type-badge { position: absolute; left: 1px; top: 2px; border: 1px solid #c8d3a0; border-radius: 3px; padding: 1px 2px; background: #263e2a; color: #eef0cf; font: 7px/1.2 'Segoe UI', sans-serif; }
 .match-card .card-art { border-radius: 5px; border-color: #6b795c; box-shadow: 0 4px 9px #0008; transition: transform .18s; }
+.match-card:not(.match-hand-card) .card-art img { object-fit: contain; }
 .match-card .card-fallback { inset: 3px; padding: 4px; border-radius: 3px; }
 .match-card .card-fallback strong { font: 9px/1.2 Georgia; }
 .match-card .card-fallback small { font-size: 6px; }
@@ -249,4 +254,18 @@
   .multiplayer .opponent-lane .match-command-zone > .eyebrow { max-width: 44px; text-align: left; line-height: 1.4; margin: 0; }
   .multiplayer .opponent-lane .match-command-zone .match-card { width: 23px; flex-basis: 23px; }
   .multiplayer .opponent-lane .match-command-zone .match-card-name { display: none; }
+  /* Short playmats use two adjacent sections instead of squeezing two portrait
+     rows vertically. Each section still scrolls independently on crowded boards. */
+  .match-battlefield { position: relative; flex-direction: row; gap: 5px; }
+  .battlefield-row, .multiplayer .opponent-lane .battlefield-row { position: relative; min-width: 0; padding-top: 14px; }
+  .match-battlefield::before, .match-battlefield::after { position: absolute; top: 1px; z-index: 1; pointer-events: none; font-size: 7px; line-height: 10px; color: #becaaa; }
+  .match-battlefield::before { content: 'Battlefield'; left: 5px; }
+  .match-battlefield::after { content: 'Lands'; left: calc(50% + 5px); }
+  .opponent-lane .match-battlefield::before { content: 'Lands'; }
+  .opponent-lane .match-battlefield::after { content: 'Battlefield'; }
+  .battlefield-row .field-empty { font-size: 10px; }
+  .lands-row, .opponent-lane .lands-row { border-top: 0; border-bottom: 0; }
+  .human-lane .lands-row { border-left: 1px solid #9bab8830; }
+  .opponent-lane .lands-row { border-right: 1px solid #9bab8830; }
+  .multiplayer .opponent-lane .match-player { flex-basis: 40px; }
 }

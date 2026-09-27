@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.16
+# Mana Table — beta 0.1.0-beta.17
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -27,7 +27,11 @@ by someone with access; the app does not sign in to Moxfield.
    filtered results show their count alongside the library total. Back-face names
    also find their parent card. Alternate printings are grouped by card name.
 2. Hover over a card for enlarged artwork and readable rules, or click to inspect
-   it in the sidebar. Use **+** or drag it into the deck to add a copy.
+   it in the sidebar. For double-faced cards, click **View back face** in the
+   preview or press **F** while hovering/focusing the card. Repeat to return to
+   its current face. The workshop sidebar also has a face button. This only
+   changes the preview; transforming or playing a face still follows game rules.
+   Use **+** or drag it into the deck to add a copy.
 3. Switch between Main, Side, and (for Commander) Cmd. Changes save automatically.
 4. Rename the deck in its title field. Use undo/redo or Ctrl+Z/Ctrl+Y.
 5. Paste a list with **Import deck**, check it, and import. **Auto-detect** recognizes
@@ -57,6 +61,14 @@ cards** is available when the effect permits it. For example, Roiling Regrowth
 lets you choose up to two basic lands after sacrificing a land, and the engine
 puts those chosen lands onto the battlefield tapped. The picker closes when
 the choice resolves; hidden library cards are no longer shown afterward.
+
+Battlefield portraits fit their actual row height, including card names, tap
+states and scrollbars. Short windows place the land and battlefield sections
+side by side so each portrait has enough height. Artifacts and creatures that also count as lands carry
+a **Land** badge; their preview shows their current types. For example, Toph,
+the First Metalbender makes your nontoken artifacts lands while she is on the
+battlefield, so they can be earthbend targets. Land creatures join the creature
+row for combat.
 
 Commander supports **2–6 players**: you and 1–5 AI opponents, all playing for
 themselves. Choose **Table size**, then a deck for each opponent. Games start at

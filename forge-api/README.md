@@ -219,6 +219,13 @@ There are no network peers, sideboarding, Limited matches, or durable match save
 interactions need broader coverage. Unsupported adapter calls surface an error
 and terminate that session so another game can be started safely.
 
+Catalog and visible match cards expose `artName` and `artFace` (`front`/`back`)
+for physical double-faced cards. `otherFace` provides its name, mana cost, type,
+rules (`oracleText`), power/toughness, and artwork identity. Match fields continue
+to describe the current face; inspecting `otherFace` never performs a game action.
+Face-down cards and cards the viewer cannot see never expose alternate identities,
+including in library-search choices. Split cards do not claim to have back artwork.
+
 ## Upstream maintenance
 
 Keep `upstream` pointed at Card-Forge/forge and `origin` at proflayton/forge.

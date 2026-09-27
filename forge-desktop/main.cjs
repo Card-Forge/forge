@@ -26,23 +26,26 @@ function verify(event) {
 const artCache = new Map();
 let artQueue = Promise.resolve();
 let lastArtRequest = 0;
-function art(name) {
+function art(name, face = 'front') {
   if (process.env.FORGE_OFFLINE === '1') return null;
   if (typeof name !== 'string' || name.length > 200) return null;
-  if (artCache.has(name)) return artCache.get(name);
+  if (face !== 'front' && face !== 'back') return null;
+  // Preserve existing front-face downloads; backs have their own cache entry.
+  const cacheName = face === 'back' ? `${name}\0back` : name;
+  if (artCache.has(cacheName)) return artCache.get(cacheName);
   // Cached cards should never wait behind unrelated network downloads.
-  const key = createHash('sha256').update(name).digest('hex');
+  const key = createHash('sha256').update(cacheName).digest('hex');
   const file = path.join(userData, 'art', `${key}.jpg`);
   if (fs.existsSync(file)) {
     const cached = fs.promises.readFile(file).then(bytes => 'data:image/jpeg;base64,' + bytes.toString('base64')).catch(() => null);
-    artCache.set(name, cached);
+    artCache.set(cacheName, cached);
     return cached;
   }
   const promise = artQueue.then(async () => {
     await new Promise(resolve => setTimeout(resolve, Math.max(0, 150 - (Date.now() - lastArtRequest))));
     lastArtRequest = Date.now();
     try {
-      const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(name)}&format=image&version=normal`, {
+      const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(name)}&format=image&version=normal&face=${face}`, {
         headers: { 'User-Agent': `ManaTable/${app.getVersion()} (https://github.com/proflayton/forge)`, Accept: 'image/jpeg' },
         signal: AbortSignal.timeout(8000)
       });
@@ -55,7 +58,7 @@ function art(name) {
     } catch { return null; }
   });
   artQueue = promise.catch(() => null);
-  artCache.set(name, promise);
+  artCache.set(cacheName, promise);
   return promise;
 }
 
@@ -94,7 +97,7 @@ app.whenReady().then(async () => {
     if (JSON.stringify(params).length > 1_500_000) throw new Error('Request too large');
     return engine.request(method, params);
   });
-  ipcMain.handle('art', (event, name) => { verify(event); return art(name); });
+  ipcMain.handle('art', (event, name, face) => { verify(event); return art(name, face); });
   ipcMain.handle('browse-decks', async (event, destination) => {
     verify(event);
     let url;

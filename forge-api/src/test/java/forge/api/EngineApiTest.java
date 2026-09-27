@@ -2,6 +2,9 @@ package forge.api;
 
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.mana.ManaCost;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -32,6 +35,60 @@ public class EngineApiTest {
         CardRules rules = new CardRules.Reader().readCard(List.of("Name:" + name,
                 "ManaCost:" + mana, "Types:" + type, "Oracle:Test rules text"));
         return new PaperCard(rules, "TST", CardRarity.Common);
+    }
+
+    @Test
+    public void catalogDescribesBothPhysicalFacesButDoesNotInventBacksForSplitCards() {
+        for (String mode : List.of("DoubleFaced", "Modal", "Split")) {
+            var rules = new CardRules.Reader().readCard(List.of("Name:Front", "ManaCost:U", "Types:Creature Human",
+                    "PT:1/1", "Oracle:Front rules", "AlternateMode:" + mode, "ALTERNATE", "Name:Back",
+                    "ManaCost:no cost", "Types:Creature Insect", "PT:3/2", "Oracle:Flying"));
+            var info = CardCatalog.describe(new PaperCard(rules, "TST", CardRarity.Common));
+            assertEquals(info.artFace(), "front");
+            if (mode.equals("Split")) { assertNull(info.otherFace()); continue; }
+            assertEquals(info.otherFace().name(), "Back");
+            assertEquals(info.otherFace().oracleText(), "Flying");
+            assertEquals(info.otherFace().power(), "3");
+            assertEquals(info.otherFace().toughness(), "2");
+            assertEquals(info.otherFace().artName(), info.name());
+            assertEquals(info.otherFace().artFace(), "back");
+        }
+    }
+
+    @Test
+    public void alternateFacesFollowTransformationAndNeverRevealHiddenIdentities() {
+        var owner = new PlayerView(1, null);
+        var opponent = new PlayerView(2, null);
+        var card = new CardView(42, null, "Front");
+        card.set(TrackableProperty.Controller, owner);
+        card.set(TrackableProperty.Zone, ZoneType.Hand);
+        card.set(TrackableProperty.DoubleFaced, true);
+        var front = card.getCurrentState();
+        var back = card.createAlternateState(CardStateName.Backside);
+        back.set(TrackableProperty.Name, "Back");
+        back.set(TrackableProperty.OracleText, "Flying");
+        back.set(TrackableProperty.Type, CardType.parse("Creature Insect", false));
+        back.set(TrackableProperty.ManaCost, ManaCost.NO_COST);
+        back.set(TrackableProperty.Power, 3);
+        back.set(TrackableProperty.Toughness, 2);
+        card.set(TrackableProperty.AlternateState, back);
+        var visible = MatchSession.choiceCard(card, owner);
+        assertEquals(visible.get("artFace"), "front");
+        assertEquals(((java.util.Map<?, ?>)visible.get("otherFace")).get("name"), "Back");
+        assertFalse(MatchSession.choiceCard(card, opponent).containsKey("otherFace"));
+        card.set(TrackableProperty.Zone, ZoneType.Battlefield);
+        card.set(TrackableProperty.CurrentState, back);
+        card.set(TrackableProperty.AlternateState, front);
+        var transformed = MatchSession.choiceCard(card, opponent);
+        assertEquals(transformed.get("artFace"), "back");
+        assertEquals(transformed.get("artName"), "Front");
+        assertEquals(((java.util.Map<?, ?>)transformed.get("otherFace")).get("artFace"), "front");
+        card.set(TrackableProperty.Facedown, true);
+        assertFalse(MatchSession.choiceCard(card, owner).containsKey("otherFace"));
+        assertFalse(MatchSession.choiceCard(card, opponent).containsKey("artName"));
+        card.set(TrackableProperty.Facedown, false);
+        card.set(TrackableProperty.Zone, ZoneType.Library);
+        assertFalse(MatchSession.choiceCard(card, owner).containsKey("otherFace"));
     }
 
     @Test

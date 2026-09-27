@@ -1,6 +1,8 @@
 package forge.api;
 
 import forge.card.CardDb;
+import forge.card.CardSplitType;
+import forge.card.ICardFace;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 
@@ -22,7 +24,16 @@ public final class CardCatalog {
     public record CardInfo(String id, String name, String edition, int artIndex, boolean foil,
                            String manaCost, int manaValue, String type, String oracleText,
                            int colors, int colorIdentity, String rarity, String collectorNumber,
-                           String deckSection) { }
+                           String deckSection, String power, String toughness,
+                           String artName, String artFace, FaceInfo otherFace) { }
+    public record FaceInfo(String name, String manaCost, String type, String oracleText,
+                           String power, String toughness, String artName, String artFace) { }
+
+    private static FaceInfo describeFace(ICardFace face, String artName, String artFace) {
+        return new FaceInfo(face.getName(), face.getManaCost().toString(), face.getType().toString(),
+                Objects.requireNonNullElse(face.getOracleText(), "").replace("\\n", "\n"),
+                face.getPower(), face.getToughness(), artName, artFace);
+    }
     /** colors is an allowed-color mask (W=1 U=2 B=4 R=8 G=16); null allows any. */
     public record Query(String text, Integer colors, Integer maxManaValue, int offset, int limit) {
         public Query {
@@ -142,6 +153,9 @@ public final class CardCatalog {
                 rules.getManaCost().toString(), rules.getManaCost().getCMC(), rules.getType().toString(),
                 Objects.requireNonNullElse(rules.getOracleText(), "").replace("\\n", "\n"),
                 rules.getColor().getColor(), rules.getColorIdentity().getColor(),
-                card.getRarity().name(), card.getCollectorNumber(), DeckSection.matchingSection(card).name());
+                card.getRarity().name(), card.getCollectorNumber(), DeckSection.matchingSection(card).name(),
+                rules.getMainPart().getPower(), rules.getMainPart().getToughness(), card.getName(), "front",
+                CardSplitType.DUAL_FACED_CARDS.contains(rules.getSplitType()) && rules.getOtherPart() != null
+                        ? describeFace(rules.getOtherPart(), card.getName(), "back") : null);
     }
 }

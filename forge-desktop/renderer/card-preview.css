@@ -14,6 +14,12 @@
   color: var(--text);
 }
 .preview-visual { min-width: 0; }
+.card-preview.has-other-face { pointer-events: auto; }
+.preview-flip { width: 100%; display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 12px; padding: 10px; border: 1px solid #afad7e; border-radius: 6px; background: #3c5039; color: #f1e5c7; font-size: 12px; }
+.preview-flip:hover, .preview-flip:focus-visible { background: #536649; outline: 2px solid #e6ce92; }
+.preview-flip kbd { padding: 1px 5px; border: 1px solid #acb498; border-radius: 3px; font: 10px 'Segoe UI', sans-serif; }
+.preview-face-note { display: block; margin-top: 8px; color: #c1cdb4; font-size: 10px; text-align: center; }
+.preview-type small { display: block; margin-top: 8px; color: #e3cd95; font-size: 11px; line-height: 1.4; }
 .preview-visual .card-art { border-color: #95845e; }
 .preview-visual small { display: block; margin-top: 10px; color: var(--muted); font-size: 9px; text-align: center; }
 .preview-card-back { display: grid; place-items: center; background: radial-gradient(ellipse, #3a4d3d, #14251f); }

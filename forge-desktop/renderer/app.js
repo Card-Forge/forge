@@ -59,17 +59,19 @@ function glow(card) {
 }
 function remember(card) { cards.set(card.id, card); return card; }
 function cardArt(card, className = '') {
-  return `<div class="card-art ${className}" data-art="${esc(card.name)}"><div class="card-fallback"><strong>${esc(card.name)}</strong><span class="art-symbol">✧</span><small>${esc(card.type)}<br>${esc(card.manaCost)}</small></div></div>`;
+  return `<div class="card-art ${className}" data-art="${esc(card.artName || card.name)}" data-art-face="${card.artFace === 'back' ? 'back' : 'front'}" data-art-label="${esc(card.name)}"><div class="card-fallback"><strong>${esc(card.name)}</strong><span class="art-symbol">✧</span><small>${esc(card.type)}<br>${esc(card.manaCost)}</small></div></div>`;
 }
 function loadArt(container) {
   container.querySelectorAll('[data-art]').forEach(element => {
     const name = element.dataset.art;
-    if (!art.has(name)) art.set(name, api.art(name).catch(() => null));
-    art.get(name).then(source => {
+    const face = element.dataset.artFace || 'front';
+    const key = JSON.stringify([name, face]);
+    if (!art.has(key)) art.set(key, api.art(name, face).catch(() => null));
+    art.get(key).then(source => {
       if (!source || !element.isConnected || element.querySelector('img')) return;
       const img = document.createElement('img');
       img.src = source;
-      img.alt = name;
+      img.alt = element.dataset.artLabel || name;
       element.append(img);
     });
   });
@@ -106,12 +108,14 @@ async function search() {
     if (!selected && page.cards.length) inspect(page.cards[0]);
   } catch (error) { if (generation === searchGeneration) { $('result-count').textContent = 'Search unavailable'; toast(error.message); } }
 }
-function inspect(card) {
+function inspect(card, otherFace = false) {
   if (!card) return;
   selected = remember(card);
   document.querySelectorAll('.catalog-card').forEach(element => element.classList.toggle('selected', element.dataset.card === card.id));
   const target = destinationSection(card);
-  $('inspector').innerHTML = `${cardArt(card)}<div class="art-credit">Card art via Scryfall · representative printing</div><div class="inspector-details"><h2>${esc(card.name)}</h2><div class="inspect-type">${esc(card.type)} <span class="mana-cost">${cost(card.manaCost)}</span></div><p class="oracle">${esc(card.oracleText)}</p><div class="inspect-meta"><span>${esc(card.edition)} · ${esc(card.rarity)}</span><span>MV ${card.manaValue}</span></div><button class="button secondary" id="inspector-add">+ Add to ${esc(extraSections[target] || (target === 'Main' ? 'main deck' : target.toLowerCase()))}</button></div>`;
+  const face = otherFace && card.otherFace ? card.otherFace : card;
+  $('inspector').innerHTML = `${cardArt(face)}<div class="art-credit">Card art via Scryfall · representative printing</div>${card.otherFace ? `<button class="preview-flip" id="inspector-flip">View ${otherFace ? 'front' : 'back'} face</button>` : ''}<div class="inspector-details"><h2>${esc(face.name)}</h2><div class="inspect-type">${esc(face.type)} <span class="mana-cost">${cost(face.manaCost)}</span></div><p class="oracle">${esc(face.oracleText)}</p><div class="inspect-meta"><span>${esc(card.edition)} · ${esc(card.rarity)}</span><span>MV ${card.manaValue}</span></div><button class="button secondary" id="inspector-add">+ Add to ${esc(extraSections[target] || (target === 'Main' ? 'main deck' : target.toLowerCase()))}</button></div>`;
+  if (card.otherFace) $('inspector-flip').onclick = () => inspect(card, !otherFace);
   $('inspector-add').onclick = () => changeQuantity(card, 1);
   loadArt($('inspector'));
 }

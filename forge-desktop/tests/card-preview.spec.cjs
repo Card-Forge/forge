@@ -1,18 +1,23 @@
 const { test, expect, _electron: electron } = require('@playwright/test');
 const path = require('node:path');
+const fs = require('node:fs');
 
 test('card previews show readable details without blocking play or retaining stale cards', async () => {
   const appPath = path.resolve(__dirname, '..');
   const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
     FORGE_USER_DATA: path.join(appPath, 'test-results', `preview-ui-${Date.now()}`) };
   delete environment.ELECTRON_RUN_AS_NODE;
+  const packaged = process.env.MANA_TEST_PACKAGED === '1'
+    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
+  const executable = packaged ? path.join(packaged.directory, packaged.executable) : process.env.MANA_TEST_EXECUTABLE;
   const application = await electron.launch({
-    ...(process.env.MANA_TEST_EXECUTABLE ? { executablePath: process.env.MANA_TEST_EXECUTABLE } : {}),
-    args: process.env.MANA_TEST_EXECUTABLE ? [] : [appPath], env: environment
+    ...(executable ? { executablePath: executable } : {}),
+    args: executable ? [] : [appPath], env: environment
   });
   const errors = [];
   try {
     const page = await application.firstWindow();
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     const preview = page.locator('#card-preview');
@@ -70,7 +75,7 @@ test('card previews show readable details without blocking play or retaining sta
       expect(b.x + b.width <= a.x || b.x >= a.x + a.width || b.y + b.height <= a.y || b.y >= a.y + a.height).toBe(true);
     };
     await assertPlacement(commander);
-    await page.screenshot({ path: path.join(appPath, 'test-results/card-preview.png') });
+    if (!executable) await page.screenshot({ path: test.info().outputPath('card-preview.png') });
     const handCard = page.locator('#match-hand .match-card').first();
     await handCard.hover();
     await expect(title).toHaveText(await handCard.locator('.match-card-name').textContent());
@@ -93,7 +98,8 @@ test('card previews show readable details without blocking play or retaining sta
       fixture.style.cssText = 'position:fixed;left:20px;top:100px;width:100px;height:130px;z-index:10';
       document.body.append(fixture);
       cardPreview.bind(fixture, '#preview-fixture', () => fixture.dataset.faceDown === 'yes'
-        ? { name: 'PRIVATE CARD NAME', text: 'PRIVATE RULES', faceDown: true, type: 'Creature', power: 9, toughness: 9 }
+        ? { name: 'PRIVATE CARD NAME', text: 'PRIVATE RULES', faceDown: true, type: 'Creature', power: 9, toughness: 9,
+          otherFace: { name: 'PRIVATE BACK', oracleText: 'PRIVATE BACK RULES' } }
         : { name: 'Long rules', text: 'Rules paragraph.\n'.repeat(90), type: 'Creature', power: 4, toughness: 5,
           faceDown: false, tapped: true, attacking: true, damage: 2, counters: { '+1/+1': 3 } });
       fixture.dataset.faceDown = 'yes';
@@ -103,6 +109,9 @@ test('card previews show readable details without blocking play or retaining sta
     await expect(title).toHaveText('Face-down card');
     await expect(preview).not.toContainText('PRIVATE');
     await expect(preview.locator('[data-art], img, .preview-stats')).toHaveCount(0);
+    await expect(preview.locator('.preview-flip')).toHaveCount(0);
+    await page.keyboard.press('f');
+    await expect(title).toHaveText('Face-down card');
     await page.mouse.move(0, 0);
     await fixture.evaluate(element => { element.dataset.faceDown = 'no'; });
     await fixture.hover();
