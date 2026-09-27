@@ -776,7 +776,6 @@ public class QuestEventDraft implements IQuestEvent {
         final List<QuestDraftFormat> possibleFormats = new ArrayList<>();
         final List<CardBlock> blocks = getBlocks();
 
-        List<String> singleSets = new ArrayList<>();
         if (!allowedQuestSets.isEmpty()) {
             for (final CardBlock block : blocks) {
 
@@ -786,7 +785,8 @@ public class QuestEventDraft implements IQuestEvent {
                 for (CardEdition set : block.getSets()) {
                     if (!allowedQuestSets.contains(set)) {
                         blockAllowed = false;
-                        break;
+                    } else if(set.isLargeSet()) {
+                        possibleFormats.add(new QuestDraftFormat(set));
                     }
                 }
 
@@ -794,17 +794,6 @@ public class QuestEventDraft implements IQuestEvent {
                     possibleFormats.add(new QuestDraftFormat(block));
                 } 
             }
-
-            for (CardEdition allowedQuestSet : allowedQuestSets) {
-                if (allowedQuestSet.isLargeSet() && !singleSets.contains(allowedQuestSet.getCode())) {
-                    if (!allowedQuestSet.hasBoosterTemplate() || allowedQuestSet.getType() == CardEdition.Type.OTHER) {
-                        // skip non-tournament legal and other unusual sets that will crash in Quest Mode
-                        continue;
-                    }
-                    possibleFormats.add(new QuestDraftFormat(allowedQuestSet));
-                }
-            }
-
         } else {
             for (CardBlock block : blocks) {
                 possibleFormats.add(new QuestDraftFormat(block));
