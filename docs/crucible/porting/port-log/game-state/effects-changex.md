@@ -1,6 +1,6 @@
 # Effects: ChangeX
 
-One script-driven `ApiType` resolves, 171 of the corpus's 203. Corpus lines: ChangeX 2. Needs two engine pieces first:
+One script-driven `ApiType` resolves, 172 of the corpus's 203. Corpus lines: ChangeX 2. Needs two engine pieces first:
 the announced X stored on the stack item, and `HasXManaCost$` on SpellCast triggers.
 
 ## Announced X is recorded on the stack item

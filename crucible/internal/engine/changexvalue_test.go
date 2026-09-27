@@ -25,8 +25,8 @@ const (
 	unboundFlourishingTrigCopy = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | AILogic$ Always"
 )
 
-// watcherDef compiles an Enchantment carrying the given T: lines and SVars,
-// the way a card script writes them (TEST-1).
+// xWatcherDef compiles an Enchantment carrying the given T: lines and SVars,
+// the way a card script writes them.
 func xWatcherDef(t *testing.T, name string, triggers []string, svars ...string) *compile.Card {
 	t.Helper()
 	raw := &carddb.Card{Filename: name}
@@ -221,7 +221,10 @@ func TestChangeXAfterSpellLeftStackIsNoOp(t *testing.T) {
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting {X}{G} with X=1")
 	}
-	trigger, _ := g.StackTop()
+	trigger, ok := g.StackTop()
+	if !ok || trigger.API != engine.APIChangeX {
+		t.Fatalf("StackTop() = %+v, %v, want the pushed ChangeX trigger", trigger, ok)
+	}
 	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
 		t.Fatal(err)
 	}

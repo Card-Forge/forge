@@ -1781,7 +1781,7 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-**In progress.** 171 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
+**In progress.** 172 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
 `PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`, `Destroy`, `Tap`,
 `Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`, `TapAll`, `UntapAll`,
 `PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`, `Unattach`, `RevealHand`,
