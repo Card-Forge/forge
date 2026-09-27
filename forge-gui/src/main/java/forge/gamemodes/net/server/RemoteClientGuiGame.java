@@ -349,7 +349,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void alertUser() { send(ProtocolMethod.alertUser); }
+    public void alertUser() {
+        send(ProtocolMethod.alertUser);
+    }
 
     @Override
     public void enableOverlay() {
@@ -374,11 +376,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void hideManaPool(final PlayerView player) {
         send(ProtocolMethod.hideManaPool, player);
-    }
-
-    @Override
-    public void updateShards(Iterable<PlayerView> shardsUpdate) {
-        //mobile adventure local game only..
     }
 
     @Override

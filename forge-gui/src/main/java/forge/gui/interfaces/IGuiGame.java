@@ -33,10 +33,12 @@ import forge.util.collect.FCollectionView;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
+
     record OrderResult<T>(List<T> ordered, boolean rememberDecision) implements Serializable {}
 
     /**
@@ -84,29 +86,27 @@ public interface IGuiGame {
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
     void flashIncorrectAction();
-
     void alertUser();
 
-    void updatePhase(boolean saveState);
+    default void updatePhase(boolean saveState) {}
+    default void updateTurn(PlayerView player) {}
 
-    void updateTurn(PlayerView player);
+    default void updatePlayerControl() {}
 
-    void updatePlayerControl();
-
-    void enableOverlay();
-    void disableOverlay();
+    default void enableOverlay() {}
+    default void disableOverlay() {}
 
     void finishGame();
 
-    void showManaPool(PlayerView player);
-    void hideManaPool(PlayerView player);
+    default void showManaPool(PlayerView player) {}
+    default void hideManaPool(PlayerView player) {}
 
-    void updateStack();
+    default void updateStack() {}
 
-    void notifyStackAddition(final GameEventSpellAbilityCast event);
-    void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
+    default void notifyStackAddition(final GameEventSpellAbilityCast event) {}
+    default void notifyStackRemoval(final GameEventSpellRemovedFromStack event) {}
 
-    void handleLandPlayed(CardView land);
+    default void handleLandPlayed(CardView land) {}
 
     void handleGameEvent(GameEvent event);
     default void handleGameEvents(List<GameEvent> events) {
@@ -115,27 +115,28 @@ public interface IGuiGame {
         }
     }
 
-    void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
+    default void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {}
 
-    void updateSingleCard(CardView card);
-
-    void updateCards(Iterable<CardView> cards);
+    default void updateCard(final CardView card) {
+        updateCards(Collections.singleton(card));
+    }
+    default void updateCards(Iterable<CardView> cards) {}
     default void updateCardsNetSafe(FCollectionView<CardView> cards) { updateCards(isNetGame() ? cards.threadSafeIterable() : cards); }
 
     void updateRevealedCards(TrackableCollection<CardView> collection);
 
-    void refreshCardDetails(Iterable<CardView> cards);
-
-    void refreshField();
+    default void refreshCardDetails(Iterable<CardView> cards) {}
+    default void refreshField() {}
 
     GameState getGamestate();
 
-    void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
+    default void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {}
+    default void updateLives(Iterable<PlayerView> livesUpdate) {}
 
-    void updateLives(Iterable<PlayerView> livesUpdate);
-    void updateShards(Iterable<PlayerView> shardsUpdate);
+    // adventure only
+    default void updateShards(Iterable<PlayerView> shardsUpdate) {}
 
-    void updateDependencies();
+    default void updateDependencies() {}
 
     void setPanelSelection(CardView hostCard);
 
@@ -253,7 +254,7 @@ public interface IGuiGame {
 
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
 
-    void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players);
+    default void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players) {}
 
     void setHighlighted(Iterable<GameEntityView> entities, boolean b);
 
@@ -264,18 +265,19 @@ public interface IGuiGame {
      */
     void setSelectables(Iterable<CardView> cards, int min, int max);
     void clearSelectables();
+    boolean isSelecting();
+
+    void setWeaklySelectable(final Iterable<CardView> cards);
+    void clearWeaklySelectable();
+
     /**
      * Cards from {@code owner}'s hand revealed to the player for the current prompt, until
      * {@link #hideRevealedCards()}; the GUI chooses how to display them. The owner is stated rather than read from the
      * cards, which may be copies still reporting the zone a card has just left. Unrelated to
      * {@link #updateRevealedCards}, which records the match's reveal history.
      */
-    void showRevealedCards(PlayerView owner, Iterable<CardView> cards);
-    void hideRevealedCards();
-    boolean isSelecting();
-
-    void setWeaklySelectable(final Iterable<CardView> cards);
-    void clearWeaklySelectable();
+    default void showRevealedCards(PlayerView owner, Iterable<CardView> cards) {}
+    default void hideRevealedCards() {}
 
     boolean isGamePaused();
     void setGamePause(boolean pause);
@@ -292,23 +294,22 @@ public interface IGuiGame {
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
-    boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
-
     void updateAutoPassPrompt();
 
     void setCurrentPlayer(PlayerView player);
+
+    boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
+
+    /** Repaint marker chevron / stack-yield UI for the given player. */
+    default void refreshYieldUi(PlayerView player) {}
+    /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
+    void applyYieldUpdate(YieldUpdate update);
 
     /**
      * Apply a delta update packet to the local game state.
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
-
-    /** Repaint marker chevron / stack-yield UI for the given player. */
-    default void refreshYieldUi(PlayerView player) {}
-
-    /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
-    void applyYieldUpdate(YieldUpdate update);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

@@ -10,8 +10,6 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -247,11 +245,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final void updateSingleCard(final CardView card) {
-        updateCards(Collections.singleton(card));
-    }
-
-    @Override
     public void updateRevealedCards(TrackableCollection<CardView> collection) {
         if (gameView != null) {
             TrackableCollection<CardView> existing = gameView.getRevealedCollection();
@@ -259,16 +252,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 collection.addAll(existing);
             gameView.updateRevealedCards(collection);
         }
-    }
-
-    @Override
-    public void refreshCardDetails(final Iterable<CardView> cards) {
-        //not needed for base game implementation
-    }
-
-    @Override
-    public void refreshField() {
-        //not needed for base game implementation
     }
 
     @Override
@@ -334,7 +317,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     updateLives(Collections.singleton(pv));
                 }
                 if (gv instanceof CardView cv) {
-                    updateSingleCard(cv);
+                    updateCard(cv);
                 }
             }
         });
@@ -361,13 +344,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectionMin = 0;
         selectionMax = 0;
     }
-
-    // the libgdx port never receives these: reveal falls back to its own card list there
-    @Override
-    public void showRevealedCards(final PlayerView owner, final Iterable<CardView> cards) { }
-
-    @Override
-    public void hideRevealedCards() { }
 
     protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
@@ -940,55 +916,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void notifyStackAddition(GameEventSpellAbilityCast event) {
-    }
-
-    @Override
-    public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
-    }
-
-    @Override
-    public void handleLandPlayed(CardView land) {
-    }
-
-    @Override
-    public void updateStack() { }
-
-    @Override
-    public void updatePhase(boolean saveState) { }
-
-    @Override
-    public void updateTurn(PlayerView player) { }
-
-    @Override
-    public void updatePlayerControl() { }
-
-    @Override
-    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
-
-    @Override
-    public void openZones(final PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players) { }
-
-    @Override
-    public void updateCards(Iterable<CardView> cards) { }
-
-    @Override
-    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) { }
-
-    @Override
-    public void updateLives(Iterable<PlayerView> livesUpdate) { }
-
-    @Override
     public void afterGameEnd() {
         if (awaitNextInputTimer != null) {
             awaitNextInputTimer.cancel();
             awaitNextInputTimer = null;
         }
         daytime = null;
-    }
-
-    @Override
-    public void updateDependencies() {
     }
 
     @Override
