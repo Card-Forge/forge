@@ -7,7 +7,13 @@
 # not an error (changexeffect.go): Java writes the new X onto an orphaned
 # SpellAbility nothing reads again.
 #
-# What this cannot show: the doubled X itself. expect.state has no stack
+# What this pins: Unbound Flourishing's and Farmer Cotton's real scripts run
+# through casting, the trigger and ChangeX without an error. What it cannot
+# tell apart: whether the trigger fired at all -- the end state is the same
+# either way -- so firing is pinned at module level
+# (TestSpellCastTriggerHasXManaCost*, xannounced_test.go).
+#
+# Nor can it show the doubled X itself. expect.state has no stack
 # and no X, and every real {X} permanent reads X back only through
 # Count$xPaid or etbCounter, neither resolved yet -- so letting Farmer Cotton
 # resolve would fail on its own ETB Token, not on ChangeX. The doubling is

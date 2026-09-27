@@ -82,7 +82,7 @@ func castXCreature(t *testing.T, g *engine.Game, p engine.PlayerID, x int) (*sta
 	if x >= 0 {
 		cost = "X G"
 		r.QueuePayX(x)
-		queueGeneric(r.ScriptedController, mana.ShardG, x)
+		queueXPayGeneric(r.ScriptedController, mana.ShardG, x)
 	}
 	g.Player(p).ManaPool.Add(mana.Green, max(x, 0)+1)
 	creature := g.NewCard(creatureDefManaCost(t, cost), p, engine.Hand)
@@ -190,7 +190,7 @@ func TestCopiedSpellKeepsChangedX(t *testing.T) {
 	spell := g.NewCard(gainInstant(t, "Gain X", "X W", "1"), p, engine.Hand)
 	r := &stackXRecorder{ScriptedController: engine.NewScriptedController(), api: engine.APIGainLife}
 	r.QueuePayX(2)
-	queueGeneric(r.ScriptedController, mana.ShardW, 2)
+	queueXPayGeneric(r.ScriptedController, mana.ShardW, 2)
 
 	if !g.CastSpell(p, spell, r) {
 		t.Fatal("CastSpell failed casting {X}{W} with X=2 and three white")
@@ -217,7 +217,7 @@ func TestChangeXAfterSpellLeftStackIsNoOp(t *testing.T) {
 	creature := g.NewCard(creatureDefManaCost(t, "X G"), p, engine.Hand)
 	c := engine.NewScriptedController()
 	c.QueuePayX(1)
-	queueGeneric(c, mana.ShardG, 1)
+	queueXPayGeneric(c, mana.ShardG, 1)
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting {X}{G} with X=1")
 	}

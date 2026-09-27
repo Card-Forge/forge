@@ -65,6 +65,7 @@ operator it lacks such as `Pow`, an SVar `resolveNamedAmount` cannot resolve suc
 
 Tests: `changexvalue_test.go` (Unbound Flourishing's verbatim lines doubling X = 3 to 6, literal, named SVar, operand
 and sign, unannounced X left alone, a copy keeping the changed X per CR 707.10, spell gone, every rejected shape).
-Scenario `unbound-flourishing-trigger-outlives-countered-x-spell`: the real trigger fires off Farmer Cotton,
-Counterspell counters it, and ChangeX resolves as a no-op; `expect.state` has no stack or X, so the doubling itself
-stays module-tested.
+Scenario `unbound-flourishing-trigger-outlives-countered-x-spell`: Unbound Flourishing's and Farmer Cotton's real
+scripts run through casting, the trigger and ChangeX (a no-op once Counterspell has countered the spell) without an
+error. Its end state is the same whether or not the trigger fires, and `expect.state` has no stack or X, so firing
+(`TestSpellCastTriggerHasXManaCost*`) and the doubling stay module-tested.

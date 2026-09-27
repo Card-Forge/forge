@@ -7,9 +7,9 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
-// wantX fails t unless the stack's top item announced X = want (CR
+// wantStackTopX fails t unless the stack's top item announced X = want (CR
 // 601.2b), or announced none when announced is false.
-func wantX(t *testing.T, g *engine.Game, want int, announced bool) {
+func wantStackTopX(t *testing.T, g *engine.Game, want int, announced bool) {
 	t.Helper()
 	top, ok := g.StackTop()
 	if !ok {
@@ -21,8 +21,8 @@ func wantX(t *testing.T, g *engine.Game, want int, announced bool) {
 	}
 }
 
-// queueGeneric queues n answers of shard for ChoosePayGeneric.
-func queueGeneric(c *engine.ScriptedController, shard mana.Shard, n int) {
+// queueXPayGeneric queues n answers of shard for ChoosePayGeneric.
+func queueXPayGeneric(c *engine.ScriptedController, shard mana.Shard, n int) {
 	for range n {
 		c.QueuePayGeneric(shard)
 	}
@@ -38,12 +38,12 @@ func TestCastPermanentSpellRecordsAnnouncedX(t *testing.T) {
 	creature := g.NewCard(creatureDefManaCost(t, "X G"), p, engine.Hand)
 	c := engine.NewScriptedController()
 	c.QueuePayX(3)
-	queueGeneric(c, mana.ShardG, 3)
+	queueXPayGeneric(c, mana.ShardG, 3)
 
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting {X}{G} with X=3 and four green")
 	}
-	wantX(t, g, 3, true)
+	wantStackTopX(t, g, 3, true)
 }
 
 // A cost with no {X} announces none: Java's xManaCostPaid stays null, the
@@ -58,7 +58,7 @@ func TestCastSpellWithoutXAnnouncesNone(t *testing.T) {
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting {R} with one red")
 	}
-	wantX(t, g, 0, false)
+	wantStackTopX(t, g, 0, false)
 }
 
 // X = 0 is announced, not absent: the cost carried an X symbol.
@@ -73,7 +73,7 @@ func TestCastSpellWithXZeroAnnouncesZero(t *testing.T) {
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting {X}{G} with X=0")
 	}
-	wantX(t, g, 0, true)
+	wantStackTopX(t, g, 0, true)
 }
 
 // An Instant's cast path (castInstantOrSorcery) records X too.
@@ -84,12 +84,12 @@ func TestCastInstantRecordsAnnouncedX(t *testing.T) {
 	spell := g.NewCard(gainInstant(t, "Gain X", "X W", "1"), p, engine.Hand)
 	c := engine.NewScriptedController()
 	c.QueuePayX(2)
-	queueGeneric(c, mana.ShardW, 2)
+	queueXPayGeneric(c, mana.ShardW, 2)
 
 	if !g.CastSpell(p, spell, c) {
 		t.Fatal("CastSpell failed casting {X}{W} with X=2 and three white")
 	}
-	wantX(t, g, 2, true)
+	wantStackTopX(t, g, 2, true)
 }
 
 // An Aura's cast path (castAura) records X too.
@@ -103,12 +103,12 @@ func TestCastAuraRecordsAnnouncedX(t *testing.T) {
 	aura := g.NewCard(def, p, engine.Hand)
 	c := engine.NewScriptedController()
 	c.QueuePayX(1)
-	queueGeneric(c, mana.ShardW, 1)
+	queueXPayGeneric(c, mana.ShardW, 1)
 
 	if !g.CastSpell(p, aura, c) {
 		t.Fatal("CastSpell failed casting an {X}{W} Aura with X=1 and one legal host")
 	}
-	wantX(t, g, 1, true)
+	wantStackTopX(t, g, 1, true)
 }
 
 // An activated ability's {X} (CR 602.2b) is recorded on its stack item the
@@ -121,12 +121,12 @@ func TestActivateAbilityRecordsAnnouncedX(t *testing.T) {
 	creature := g.NewCard(def, p, engine.Battlefield)
 	c := engine.NewScriptedController()
 	c.QueuePayX(2)
-	queueGeneric(c, mana.ShardG, 2)
+	queueXPayGeneric(c, mana.ShardG, 2)
 
 	if !g.ActivateAbility(p, creature, 0, c) {
 		t.Fatal("ActivateAbility failed paying Cost$ X with X=2 and two green")
 	}
-	wantX(t, g, 2, true)
+	wantStackTopX(t, g, 2, true)
 }
 
 // A spell cast without paying its mana cost announces no X
@@ -145,7 +145,7 @@ func TestCastWithoutPayingAnnouncesNoX(t *testing.T) {
 	if got := g.Card(spell).Zone; got != engine.Stack {
 		t.Fatalf("spell zone = %v, want Stack", got)
 	}
-	wantX(t, g, 0, false)
+	wantStackTopX(t, g, 0, false)
 }
 
 // HasXManaCost$ (TriggerSpellAbilityCastOrCopy.java:171-181) fires a
@@ -158,7 +158,7 @@ func TestSpellCastTriggerHasXManaCostFiresForXSpell(t *testing.T) {
 	creature := g.NewCard(creatureDefManaCost(t, "X G"), p, engine.Hand)
 	c := engine.NewScriptedController()
 	c.QueuePayX(1)
-	queueGeneric(c, mana.ShardG, 1)
+	queueXPayGeneric(c, mana.ShardG, 1)
 
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting {X}{G} with X=1 and two green")
