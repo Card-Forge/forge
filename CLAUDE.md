@@ -202,7 +202,7 @@ Instants/Sorceries through the stack (ADR-0018), trigger firing, replacement eff
 across all eight layers (partial), targeting, SubAbility chaining, last-known information, activated abilities.
 
 M6 in progress: 173 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
-`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 31, 16 have real corpus lines and are listed by
+`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 30, 15 have real corpus lines and are listed by
 `scripts/unported-apis.sh` as deliberately deferred (Planechase/Archenemy/Un-set/Alchemy shapes, plus
 `ChangeText`/`ControlPlayer`/`Meld`); the rest (`Mutate`, `Haunt`, `Bond`, `Encode`,
 `InternalIgnoreEffect`/`InternalLegendaryRule`/`InternalRadiation`, ...) have zero real `AB$`/`SP$`/`DB$` lines under

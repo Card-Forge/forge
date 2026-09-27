@@ -78,6 +78,28 @@ func TestPlaneswalkIsANoOpOutsidePlanechase(t *testing.T) {
 	}
 }
 
+// TestPlaneswalkReplacementOutsidePlanechaseIsInert proves the Planechase
+// gate runs before the replacement check (PlaneswalkEffect.java:23 before
+// :32): Susan Foreman beside TARDIS in a normal game neither errors nor
+// moves anything.
+func TestPlaneswalkReplacementOutsidePlanechaseIsInert(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	g.NewCard(planarDef(t, "Susan Test", "Creature Elf", nil, []string{
+		"Event$ Planeswalk | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Scry",
+	}, "Scry", "DB$ GainLife | Defined$ You | LifeAmount$ 1"), p, engine.Battlefield)
+	c := engine.NewScriptedController()
+	c.QueueConfirmEffect(true)
+	resolveLine(t, g, p, c, "DB$ Planeswalk | Optional$ True")
+	if got := g.ActivePlane(); got != engine.NoCard {
+		t.Errorf("ActivePlane = %v, want NoCard", got)
+	}
+	if got := g.Player(p).Life; got != 20 {
+		t.Errorf("life = %d, want 20", got)
+	}
+}
+
 // TestPlaneswalkTurnsTheTopPlaneFaceUp proves the first planeswalk of a game
 // with no active plane yet: the top of the activator's planar deck moves to
 // their Command zone and becomes the active plane.
