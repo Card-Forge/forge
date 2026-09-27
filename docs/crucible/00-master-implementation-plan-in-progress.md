@@ -1581,36 +1581,24 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     `applyContinuousAbility` running fresh from `GameAction.checkStateEffects` every time (an anthem has to reach a
     creature that enters after it, and stop the instant it itself leaves). `PTEffect` gained `HasPower`/`HasToughness`
     flags to make this correct: a real corpus `SetPower$`-only or `SetToughness$`-only line (68 and 9 of them) must
-    leave the other dimension untouched, which the original bare `int` fields could not express. A new
-    `applyContinuousType` is Layer 4's own counterpart: `AddType$`/`RemoveType$` lines naming only literal type words
-    (201 of 284 real lines), folded through a new `TypeMod`/`TypeEffect` (`typemod.go`, `pt.go`'s own structure copied
-    for the type line) via two new `cardtype.Line` methods, `Union`/`Without`, and a new `ParseToken` (classifies one
-    already-split type word with no `*Registry` needed, since `AddType$`/`RemoveType$` values are already split on
-    `" & "` — this port still injects no `*cardtype.Registry`/`*carddb.DB` into the engine, GO-2). A whole
-    `AddType$`/`RemoveType$` line is skipped, not partially applied, the moment it carries a dynamic value
-    (`ChosenType`, `ImprintedCreatureType`, ... — 29 of 256 real `AddType$` lines), a bulk `RemoveXTypes$` flag (62 of
-    284, the real "becomes a Turtle" shape pairing `AddType$` with a wipe-first flag — applying the add half alone would
-    leave both the old and new types, worse than the gap), or `AddAllCreatureTypes$` (8, needs the `Registry` this port
-    does not inject). A new `applyContinuousColor` is Layer 5's own counterpart: `AddColor$`/`SetColor$` lines naming a
-    literal color, `All` (WUBRG) or `Colorless` (54 of 61 real lines), folded through a new `ColorMod`/`ColorEffect`
-    (`colormod.go`, `TypeMod`'s own structure copied again, with one `Overwrite bool` standing in for `SetColor$`'s own
-    "replace outright" vs `AddColor$`'s own "union in") — a `"ChosenColor"` token (7 of 61) skips the whole line,
-    `AddType$`'s own dynamic-value reasoning applied identically. `colorFromName` (`valid.go`'s own `colorMatches`,
-    pulled out so both share the five-color mapping) backs both. A new `applyContinuousKeyword` is Layer 6's own
-    counterpart, and the single largest real slice of all four: `AddKeyword$` lines naming only literal keyword lines
-    (1,556 of 1,857 real lines — more than Layer 7's own 2,192 of 2,426), folded through a new
-    `KeywordMod`/`KeywordEffect` (`keywordmod.go`) `Card.HasKeyword` now reads back the identical way it already reads a
-    printed keyword line, reaching `cantBlockByKeywords` and combat's own First Strike/Trample/ Deathtouch reads for
-    free without changing either. Unlike `TypeMod`/`ColorMod`, `KeywordEffect` needs no fold order at all: `HasKeyword`
-    only ever asks membership, never "what is the current value," so two continuous effects both granting a keyword
-    never disagree about anything. Skipped whole: `RemoveKeyword$`/`RemoveAllAbilities$` (5 of 1,561) — the identical
-    "gains X, loses Y" reasoning `AddType$`'s own bulk-removal skip already gives; `SharedKeywords$`/`FromDraftNotes$` —
-    a game-wide/remembered-list/draft-note keyword source rather than a fixed token list; a dynamic-value marker
-    anywhere inside any one token (42 of 1,857), checked by substring (`strings.Contains`) since a marker is often a
-    qualifier embedded in a larger token (`"Protection:Card.ChosenColor:chosenColor"`) rather than the whole token
-    itself. Not resolved for any of the four layers: `AffectedDefined$`/`AffectedZone$` (0 and 24) — its own specific
-    missing piece (`porting/port-log/game-state.md`'s "Layer 7, Layer 4, Layer 5 and Layer 6" section has the full
-    account), not a reason to have skipped the slices that do resolve. `Condition$` is resolved now (below).
+    leave the other dimension untouched, which the original bare `int` fields could not express. Layers 4, 5 and 6
+    (`applyContinuousType`/`Color`/`Keyword`) fold through `TypeMod`/`TypeEffect`, `ColorMod`/`ColorEffect` (one
+    `Overwrite bool` for `SetColor$`) and `KeywordMod`/`KeywordEffect` (`typemod.go`, `colormod.go`, `keywordmod.go`),
+    read back by `Card.Type`/`Colors`/`HasKeyword`, so combat's First Strike/Trample/Deathtouch reads and
+    `cantBlockByKeywords` see a granted keyword unchanged. Each line goes through `continuouslayers.go`:
+    `layerStaticApplies` (`StaticAbility.checkConditions`: `EffectZone$`, `Condition$`, `IsPresent$`,
+    `TopCardOfLibraryIs$`, the `CheckSVar$` chain), `layerAffectedCards` (`getAffectedCards`: CDA self,
+    `AffectedDefined$` Self/Enchanted/Equipped/AttachedBy Self, `AffectedZone$`, `Affected$`) and the
+    TYPE/COLOR/ABILITIES branches' runtime tokens (`ChosenType`, `ImprintedCreatureType`, `All*LandType`,
+    `Remove*Types$`, `ChosenColor`, `AllColors`, `CardColors`, `RemoveKeyword$`, `RemoveAllAbilities$`'s keyword half,
+    ...). The subtype vocabulary comes off `compile.DB.Types()`, no new `Game` field (GO-2). 254 of 284 real
+    `AddType$`/`RemoveType$` lines, 60 of 61 `AddColor$`/`SetColor$` and 1,710 of 1,875 `AddKeyword$` resolve; the rest
+    (a `CheckSVar$` amount outside `Count$Valid`, an `EffectZone$` host `traitHosts` does not walk,
+    `AddAllCreatureTypes$`, `CardManaCost`, `SharedKeywordsZone$`) and the counting rule:
+    `porting/port-log/game-state/layers-4-5-6.md`. Not resolved for Layer 7 (Layers 4-6 resolve both):
+    `AffectedDefined$`/`AffectedZone$` (0 and 24) — its own specific missing piece (`porting/port-log/game-state.md`'s
+    "Layer 7, Layer 4, Layer 5 and Layer 6" section has the full account), not a reason to have skipped the slices that
+    do resolve. `Condition$` is resolved now (below).
 
     `CharacteristicDefining$` (265 real lines, Layer 7a) and a non-numeric `AddPower$`/`AddToughness$`/`SetPower$`/
     `SetToughness$` naming a named SVar are resolved now, for the one shape both actually need most:
