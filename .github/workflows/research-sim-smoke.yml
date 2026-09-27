@@ -1,0 +1,54 @@
+name: Research sim smoke test
+
+on:
+  push:
+    branches:
+      - chatgpt-connectivity-test
+    paths:
+      - ".github/workflows/research-sim-smoke.yml"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build Forge desktop and dependencies
+        run: mvn -U -B -pl forge-gui-desktop -am package -DskipTests
+
+      - name: Locate runnable desktop jar
+        id: jar
+        shell: bash
+        run: |
+          JAR="$(find forge-gui-desktop/target -maxdepth 1 -type f -name '*-jar-with-dependencies.jar' | head -n 1)"
+          if [ -z "$JAR" ]; then
+            echo "Runnable desktop jar was not produced."
+            find forge-gui-desktop/target -maxdepth 1 -type f -print || true
+            exit 1
+          fi
+          echo "jar=$JAR" >> "$GITHUB_OUTPUT"
+          echo "Using $JAR"
+
+      - name: Start Forge command-line simulation mode
+        shell: bash
+        run: |
+          set -o pipefail
+          java -Djava.awt.headless=true -jar "${{ steps.jar.outputs.jar }}" sim 2>&1 | tee sim-smoke.log
+
+      - name: Upload smoke-test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-sim-smoke-log
+          path: sim-smoke.log
+          if-no-files-found: warn
