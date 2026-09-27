@@ -249,26 +249,25 @@ public class AnimateAi extends SpellAbilityAi {
             decision = animateTgtAI(sa);
             if (decision.willingToPlay()) {
                 return decision;
-            } else if (!mandatory) {
+            } if (!mandatory) {
                 return decision;
-            } else {
-                // fallback if animate is mandatory
-                sa.resetTargets();
-                List<Card> list = CardUtil.getValidCardsToTarget(sa);
-                if (list.isEmpty()) {
-                    return decision;
-                }
-                // don't gift a beneficial effect to an opponent's creature if self-targeting is possible
-                if (!sa.isCurse()) {
-                    List<Card> ownChoices = CardLists.filterControlledBy(list, aiPlayer);
-                    if (!ownChoices.isEmpty()) {
-                        list = ownChoices;
-                    }
-                }
-                Card toAnimate = ComputerUtilCard.getWorstAI(list);
-                rememberAnimatedThisTurn(aiPlayer, toAnimate);
-                sa.getTargets().add(toAnimate);
             }
+            // fallback if animate is mandatory
+            sa.resetTargets();
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
+            if (list.isEmpty()) {
+                return decision;
+            }
+            // don't gift a beneficial effect to an opponent's creature if self-targeting is possible
+            if (!sa.isCurse()) {
+                List<Card> ownChoices = CardLists.filterControlledBy(list, aiPlayer);
+                if (!ownChoices.isEmpty()) {
+                    list = ownChoices;
+                }
+            }
+            Card toAnimate = ComputerUtilCard.getWorstAI(list);
+            rememberAnimatedThisTurn(aiPlayer, toAnimate);
+            sa.getTargets().add(toAnimate);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

@@ -341,13 +341,6 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void disableOverlay() {
-    }
-    @Override
-    public void enableOverlay() {
-    }
-
-    @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
             if (Config.instance().getSettingData().disableWinLose) {
