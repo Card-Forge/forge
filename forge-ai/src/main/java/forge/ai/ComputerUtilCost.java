@@ -728,6 +728,12 @@ public class ComputerUtilCost {
 
         int x = ObjectUtils.getIfNull(val, 0);
         root.setXManaCostPaid(x);
+        if (root.isSpell() && root.getHostCard() != null && root.getHostCard().hasConverge()) {
+            // on a converge or sunburst card X only buys colors, so the useful announcement is the
+            // least X that reaches the most of them rather than all the mana the AI can find. The
+            // return value still reports what it could afford.
+            ComputerUtilMana.setXForBestConverge(root, ai, x);
+        }
         return x;
     }
 
