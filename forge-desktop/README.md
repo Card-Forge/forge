@@ -59,6 +59,12 @@ Synchronous dialogs use response futures so replies cannot deadlock behind the
 waiting engine thread. Returning to the workshop keeps the match active; closing
 the application ends it. See [the API integration guide](../forge-api/README.md).
 
+`match-feedback.js` presents turn ownership, phases, recent actions, and optional
+animations. `activity` is a bounded event history copied by the host. A separate
+`boardRevision` keeps event-only updates from rebuilding the table; `visualId`
+correlates visible cards across stable snapshots without replacing prompt-scoped
+action keys. Motion defaults to the system preference and can be toggled locally.
+
 `matchSetup` returns the current deck ID/revision, format, starting life, opponents,
 and a validated Commander preview. A Commander list without a Cmd section can
 select `commanderId` from its main-deck candidates; the host validates a detached

@@ -37,6 +37,7 @@ public final class MatchSession {
     private final String format;
     private final PlayerControllerHuman human;
     private final PlayerView viewer;
+    private final MatchActivity activity;
     private final IGuiGame gui;
     private final Object gate = new Object();
     private final Set<CardView> selectable = new HashSet<>();
@@ -48,6 +49,7 @@ public final class MatchSession {
     private volatile boolean closed;
     private volatile String error;
     private long revision;
+    private long activityRevision;
     private String message = "Preparing the match…", ok = "Continue", cancel = "Cancel";
     private boolean okEnabled, cancelEnabled;
     private Input displayedInput;
@@ -86,6 +88,8 @@ public final class MatchSession {
         game = match.createGame();
         human = (PlayerControllerHuman) game.getPlayers().get(0).getController();
         viewer = human.getPlayer().getView();
+        activity = new MatchActivity(viewer);
+        game.subscribeToEvents(activity);
         gui = (IGuiGame) Proxy.newProxyInstance(IGuiGame.class.getClassLoader(), new Class<?>[]{IGuiGame.class}, (proxy, method, args) -> {
             if (method.isDefault()) return InvocationHandler.invokeDefault(proxy, method, args);
             return invokeGui(method.getName(), args == null ? new Object[0] : args);
@@ -99,11 +103,28 @@ public final class MatchSession {
                 match.startGame(game);
                 synchronized (gate) { pending = null; publish(null); }
             } catch (Throwable failure) { if (!closed) fail(failure); }
+            finally { game.unsubscribeFromEvents(activity); }
         });
     }
 
     IGuiGame gui() { return gui; }
-    public Map<String, Object> state() { return latest; }
+    public Map<String, Object> state() {
+        synchronized (gate) {
+            // During AI work, publish only event-time copies. Never read a live board from IPC.
+            if ("resolving".equals(latest.get("status"))) {
+                var frame = activity.frame();
+                if (frame.revision() != activityRevision) {
+                    activityRevision = frame.revision();
+                    var next = new LinkedHashMap<>(latest);
+                    next.put("revision", ++revision);
+                    next.put("turn", frame.turn()); next.put("phase", frame.phase()); next.put("phaseKey", frame.phaseKey());
+                    next.put("activePlayerId", frame.activePlayerId()); next.put("activity", frame.entries());
+                    latest = Collections.unmodifiableMap(next);
+                }
+            }
+            return latest;
+        }
+    }
     public boolean finished() { return closed || error != null || game.isGameOver(); }
 
     public static List<Map<String, String>> opponents(String format) {
@@ -250,11 +271,13 @@ public final class MatchSession {
             var outcome = game.getOutcome();
             result = outcome.isDraw() ? "Draw" : outcome.getWinningLobbyPlayer() == human.getLobbyPlayer() ? "Victory" : "Defeat";
         }
-        latest = Collections.unmodifiableMap(map("id", id, "revision", ++revision, "format", format, "status", error != null ? "error" : game.isGameOver() ? "finished" : "playing",
+        var activityFrame = activity.frame();
+        activityRevision = activityFrame.revision();
+        latest = Collections.unmodifiableMap(map("id", id, "revision", ++revision, "boardRevision", revision, "format", format, "status", error != null ? "error" : game.isGameOver() ? "finished" : "playing",
                 "error", error, "viewerId", viewer.getId(), "turn", view.getTurn(), "phase", view.getPhase() == null ? "Pregame" : view.getPhase().nameForUi,
                 "phaseKey", view.getPhase() == null ? "PREGAME" : view.getPhase().name(),
                 "activePlayerId", view.getPlayerTurn() == null ? null : view.getPlayerTurn().getId(), "players", players,
-                "stack", stack, "prompt", prompt == null ? null : prompt.prompt, "result", result, "notices", List.copyOf(notices)));
+                "stack", stack, "prompt", prompt == null ? null : prompt.prompt, "result", result, "notices", List.copyOf(notices), "activity", activityFrame.entries()));
     }
 
     private Map<String, Object> cardState(CardView card, Pending prompt) {
@@ -264,7 +287,7 @@ public final class MatchSession {
         if (prompt != null) prompt.cards.put(key, card);
         var counters = new LinkedHashMap<String, Integer>();
         if (card.getCounters() != null) for (var entry : card.getCounters().entrySet()) counters.put(entry.getElement().getName(), entry.getCount());
-        return map("key", key, "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
+        return map("key", key, "visualId", activity.visualId(card), "name", hidden ? "Face-down card" : face.getName(), "type", hidden ? "" : face.getType().toString(),
                 "manaCost", hidden ? "" : face.getManaCost().toString(), "power", hidden ? null : face.getPower(), "toughness", hidden ? null : face.getToughness(),
                 "text", hidden ? "" : card.getText(), "tapped", card.isTapped(), "sick", card.isSick(), "damage", card.getDamage(),
                 "attacking", card.isAttacking(), "blocking", card.isBlocking(), "counters", counters,

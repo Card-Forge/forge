@@ -21,12 +21,29 @@ test('real human-controller match: casting, targeting, combat, hidden informatio
     let oldPrompt;
     let firstAction;
     let staleChecked = false;
+    const activity = new Map();
+    let previousEvent = 0;
     let cardCount = 0, targetCount = 0, combatCount = 0, paidCount = 0, blockCount = 0;
     const end = Date.now() + 135000;
     let steps = 0;
     while (Date.now() < end && steps < 1400) {
       state = await engine.request('matchState');
       assert.notEqual(state.status, 'error', state.error);
+      assert.ok((state.activity || []).length <= 120, 'History must remain bounded');
+      let lastId = 0;
+      for (const entry of state.activity || []) {
+        assert.ok(entry.id > lastId, 'Events must be ordered without duplicates');
+        lastId = entry.id;
+        if (activity.has(entry.id)) assert.deepEqual(entry, activity.get(entry.id), 'Published events must remain immutable');
+        activity.set(entry.id, entry);
+        if (entry.kind === 'draw') {
+          assert.equal(entry.cardName, null, 'Library-to-hand events must not reveal the card');
+          assert.equal(entry.cardId, null, 'Library-to-hand events must not provide correlation handles');
+        }
+      }
+      assert.ok(lastId >= previousEvent, 'Polling must not lose history');
+      previousEvent = lastId;
+      if (state.boardRevision) assert.ok(state.boardRevision <= state.revision);
       if (state.result) break;
       const p = state.prompt;
       if (!p || p.id === oldPrompt) { await sleep(25); continue; }
@@ -40,9 +57,16 @@ test('real human-controller match: casting, targeting, combat, hidden informatio
       assert.equal(zone(opponent, 'Hand').length, 0, 'Opponent hand must stay hidden');
       assert.equal(zone(opponent, 'Library').length, 0, 'Opponent library must stay hidden');
       assert.equal(zone(human, 'Library').length, 0, 'Human library order must stay hidden');
+      const visible = state.players.flatMap(player => player.zones.flatMap(zone => zone.cards));
+      for (const card of visible) {
+        if (card.faceDown) assert.equal(card.visualId, null);
+        else assert.match(card.visualId, /^[a-f0-9-]{36}$/, 'Visual identities must be opaque');
+      }
       const answer = { sessionId, promptId: p.id };
       if (!firstAction && p.kind === 'input') {
         await assert.rejects(engine.request('matchAction', { ...answer, action: 'card', key: 'not-a-visible-card' }), /not visible/);
+        const visual = visible.find(card => card.visualId);
+        if (visual) await assert.rejects(engine.request('matchAction', { ...answer, action: 'card', key: visual.visualId }), /not visible/);
         assert.equal((await engine.request('matchState')).prompt.id, p.id, 'Invalid answers must preserve the pending choice');
       }
       if (p.kind === 'choice') answer.choices = Array.from({ length: Math.max(p.min, Math.min(1, p.max)) }, (_, index) => index);
@@ -82,13 +106,18 @@ test('real human-controller match: casting, targeting, combat, hidden informatio
     assert.ok(targetCount > 0, 'Human should choose targets');
     assert.ok(combatCount > 0, 'Human should declare attackers');
     assert.ok(paidCount > 0, 'Human should pay for spells');
+    const opponent = state.players.find(player => !player.human);
+    const events = [...activity.values()];
+    assert.ok(events.some(entry => entry.kind === 'land' && entry.playerId === opponent.id), 'Opponent land plays must be recorded');
+    assert.ok(events.some(entry => entry.kind === 'cast' && entry.playerId === opponent.id), 'Opponent spells must be recorded');
+    for (const kind of ['resolved', 'combat', 'damage', 'life', 'turn']) assert.ok(events.some(entry => entry.kind === kind), `Missing real game events: ${kind}`);
     assert.equal((await engine.request('snapshot')).deck.revision, deck.deck.revision, 'Playing must not edit the saved deck');
     const restarted = await engine.request('matchStart', { opponent: 'red' });
     assert.notEqual(restarted.id, sessionId);
     await assert.rejects(engine.request('matchAction', firstAction), /no longer active/);
     const conceded = await engine.request('matchConcede', { sessionId: restarted.id });
     assert.equal(conceded.result, 'Defeat');
-    console.log(JSON.stringify({ result: state.result, turns: state.turn, steps, cardCount, targetCount, combatCount, paidCount, blockCount, hiddenInformation: true }));
+    console.log(JSON.stringify({ result: state.result, turns: state.turn, steps, cardCount, targetCount, combatCount, paidCount, blockCount, events: activity.size, hiddenInformation: true }));
   } catch (error) {
     console.error('Match diagnostics:', data, JSON.stringify({ status: state?.status, prompt: state?.prompt, turn: state?.turn }));
     throw error;

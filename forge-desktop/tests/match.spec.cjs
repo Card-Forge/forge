@@ -11,13 +11,32 @@ test('match table plays cards through engine prompts and resumes after deck brow
   try {
     const page = await application.firstWindow();
     page.on('pageerror', error => errors.push(error.message));
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.evaluate(() => {
+      window.matchAnimationTargets = [];
+      const animate = Element.prototype.animate;
+      Element.prototype.animate = function (...args) {
+        if (this.matches('.match-card, .match-card .card-art')) window.matchAnimationTargets.push(this.className);
+        return animate.apply(this, args);
+      };
+    });
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
+    await page.locator('#import-button').click();
+    await page.locator('#import-name').fill('Feedback check');
+    await page.locator('#import-text').fill('Deck\n24 Mountain\n4 Raging Goblin\n4 Goblin Arsonist\n4 Monastery Swiftspear\n4 Ghitu Lavarunner\n4 Foundry Street Denizen\n4 Mogg Fanatic\n4 Goblin Cohort\n4 Jackal Pup\n4 Akroan Crusader');
+    await page.locator('#preview-import').click();
+    await page.locator('#confirm-import').click();
+    await expect(page.locator('#deck-name')).toHaveValue('Feedback check');
     await page.locator('#play-match').click();
-    await expect(page.locator('#match-deck-label')).toHaveText('First spark');
+    await expect(page.locator('#match-deck-label')).toHaveText('Feedback check');
     await expect(page.locator('#match-opponent-choice option')).toHaveCount(2);
     await page.locator('#match-start').click();
     await expect(page.locator('#match-view')).toBeVisible();
-    let played = false, paid = false, mulligan = false, oldPrompt;
+    await expect(page.locator('#match-motion')).toHaveText('Animations off');
+    await page.locator('#match-motion').click();
+    await expect(page.locator('#match-motion')).toHaveAttribute('aria-pressed', 'true');
+    expect(await page.evaluate(() => localStorage.getItem('mana-table-motion'))).toBe('on');
+    let played = false, paid = false, mulligan = false, yourTurn = false, opponentTurn = false, oldPrompt;
     const deadline = Date.now() + 65000;
     while (Date.now() < deadline) {
       const state = await page.evaluate(() => window.forge.request('matchState'));
@@ -27,7 +46,16 @@ test('match table plays cards through engine prompts and resumes after deck brow
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', p.id);
       const human = state.players.find(player => player.human);
       const field = human.zones.find(zone => zone.name === 'Battlefield').cards;
-      if (played && paid && field.some(card => card.type.includes('Creature'))) break;
+      if (state.turn > 0) {
+        const active = state.players.find(player => player.id === state.activePlayerId);
+        await expect(page.locator('#match-turn-owner')).toHaveText(active.human ? 'Your turn' : `${active.name}’s turn`);
+        await expect(page.locator('#match-turn')).toHaveText(`Turn ${state.turn}`);
+        await expect(page.locator('#match-prompt .eyebrow')).toHaveText(active.human ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR ACTION');
+        await expect(page.locator('#match-phase [aria-current="step"]')).toHaveCount(1);
+        await expect(page.locator('#match-phase-name')).not.toBeEmpty();
+        if (active.human) yourTurn = true; else opponentTurn = true;
+      }
+      if (played && paid && yourTurn && opponentTurn && field.some(card => card.type.includes('Creature'))) break;
       oldPrompt = p.id;
       if (p.kind === 'choice') {
         for (let i = 0; i < p.min; i++) await page.locator(`[data-choice="${i}"]`).click();
@@ -38,7 +66,10 @@ test('match table plays cards through engine prompts and resumes after deck brow
         await page.locator('#match-cancel').click();
       } else if (p.inputType === 'InputPassPriority') {
         const hand = human.zones.find(zone => zone.name === 'Hand').cards;
-        const card = hand.find(card => card.selectable && card.type.includes('Land')) || hand.find(card => card.selectable && card.type.includes('Creature'));
+        // Once a creature has resolved, pass to exercise an opponent turn instead
+        // of repeatedly trying to pay for another spell with spent mana.
+        const card = field.some(card => card.type.includes('Creature')) ? null
+          : hand.find(card => card.selectable && card.type.includes('Land')) || hand.find(card => card.selectable && card.type.includes('Creature'));
         if (card) { await page.locator(`[data-match-card="${card.key}"]`).click(); played = true; }
         else await page.locator('#match-ok').click();
       } else if (p.okEnabled) {
@@ -50,9 +81,27 @@ test('match table plays cards through engine prompts and resumes after deck brow
         await page.locator(`[data-match-card="${card.key}"]`).click();
       }
     }
-    expect(played).toBe(true);
-    expect(paid).toBe(true);
+    const diagnostics = await page.evaluate(async () => {
+      const state = await window.forge.request('matchState');
+      return { status: state.status, turn: state.turn, phase: state.phaseKey, prompt: state.prompt, events: state.activity?.slice(-5), toast: document.getElementById('toast').textContent };
+    });
+    expect(errors).toEqual([]);
+    expect(played, JSON.stringify(diagnostics)).toBe(true);
+    expect(paid, JSON.stringify(diagnostics)).toBe(true);
     expect(mulligan).toBe(true);
+    expect(yourTurn).toBe(true);
+    expect(opponentTurn, JSON.stringify(diagnostics)).toBe(true);
+    expect(await page.evaluate(() => window.matchAnimationTargets.length)).toBeGreaterThan(0);
+    await expect(page.locator('#match-history-list')).toContainText('You cast');
+    await expect(page.locator('#match-history-list')).toContainText('played');
+    const history = await page.locator('#match-history-list').textContent();
+    const eventIds = await page.locator('#match-history-list li').evaluateAll(items => items.map(item => item.dataset.eventId));
+    expect(new Set(eventIds).size).toBe(eventIds.length);
+    await page.waitForTimeout(500); // Repeated polling must retain history without duplicates.
+    await expect(page.locator('#match-history-list')).toHaveText(history);
+    await page.locator('#match-motion').click();
+    await expect(page.locator('#match-motion')).toHaveText('Animations off');
+    expect(await page.locator('#match-view').evaluate(element => element.getAnimations({ subtree: true }).length)).toBe(0);
     await expect(page.locator('#match-human .match-card')).not.toHaveCount(0);
     const layout = await page.locator('#match-human').evaluate(element => {
       const bounds = selector => element.querySelector(selector).getBoundingClientRect().toJSON();
@@ -75,11 +124,13 @@ test('match table plays cards through engine prompts and resumes after deck brow
     await page.locator('#match-human .match-zone summary').last().click();
     await page.screenshot({ path: path.join(appPath, 'test-results/match-table.png'), fullPage: true });
     await page.locator('#match-back').click();
-    await expect(page.locator('#deck-name')).toHaveValue('First spark');
+    await expect(page.locator('#deck-name')).toHaveValue('Feedback check');
     await expect(page.locator('#main-count')).toHaveText('60');
     await page.locator('#match-tab').click();
     await expect(page.locator('#match-setup')).not.toBeVisible();
     await expect(page.locator('#match-view')).toBeVisible();
+    await expect(page.locator('#match-history-list')).toHaveText(history);
+    await expect(page.locator('#match-motion')).toHaveAttribute('aria-pressed', 'false');
     await page.locator('#match-concede').click();
     await page.locator('#match-concede-confirm').click();
     await expect(page.locator('#match-prompt')).toContainText('Defeat');

@@ -86,7 +86,7 @@
     const stats = card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
     const marks = [card.sick ? 'New' : '', card.attacking ? 'Attacking' : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
     const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
-    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -119,8 +119,10 @@
 
   function render(next) {
     if (!next || next.id === match?.id && next.revision === displayedRevision) return;
-    cardPreview.hide();
-    previewCards = [];
+    const previous = match;
+    const boardChanged = !previous || previous.id !== next.id || previous.boardRevision !== next.boardRevision;
+    const before = boardChanged ? matchFeedback.capture() : new Map();
+    if (boardChanged) { cardPreview.hide(); previewCards = []; }
     match = next;
     document.querySelector('.match-heading .eyebrow').textContent = `MANA TABLE · ${next.format || 'Constructed'} · SINGLE GAME`;
     displayedRevision = next.revision;
@@ -129,7 +131,7 @@
     $('match-phase').textContent = next.phase || 'Preparing the match';
     $('match-phase').classList.toggle('your-turn', Boolean(next.players?.find(player => player.human && player.id === next.activePlayerId)));
     $('match-concede').hidden = ['finished', 'error'].includes(next.status);
-    if (next.players) {
+    if (next.players && boardChanged) {
       const opened = new Set([...document.querySelectorAll('.match-zone[open]')].map(element => element.dataset.zone));
       const scrolls = new Map([...document.querySelectorAll('[data-field-row]')].map(element => [element.dataset.fieldRow, element.scrollLeft]));
       const handScroll = $('match-hand').scrollLeft;
@@ -145,9 +147,11 @@
       loadArt($('match-view'));
     }
     $('match-stack').innerHTML = next.stack?.length ? next.stack.map((item, index) => `<div class="stack-item"><span>${index === 0 ? 'NEXT TO RESOLVE' : 'WAITING'}</span><strong>${esc(item.name)}</strong><p>${esc(item.text)}</p><small>${esc(item.controller)}</small></div>`).join('') : '<p class="stack-empty">Nothing on the stack.</p>';
-    $('match-stack').parentElement.hidden = !next.stack?.length;
+    $('match-stack').parentElement.hidden = !next.stack?.length || next.status === 'resolving';
     $('match-notices').innerHTML = next.notices?.length ? next.notices.slice(-5).map(notice => `<p>${esc(notice)}</p>`).join('') : '<p>Click cards to play or select them. Click a player’s life total to target them. Hover over a card to read it.</p>';
+    if (next.notices?.length && JSON.stringify(next.notices) !== JSON.stringify(previous?.notices)) $('match-notices').parentElement.open = true;
     renderPrompt();
+    matchFeedback.render(next, previous, before);
   }
 
   function renderPrompt() {
@@ -164,9 +168,10 @@
       choiceFilter = '';
       selection = prompt.ordered && prompt.min === prompt.choices?.length ? prompt.choices.map(choice => choice.index) : [];
     }
-    const header = `<div class="eyebrow">YOUR DECISION</div><h2>${prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'}</h2><p class="match-prompt-text">${esc(prompt.message)}</p>`;
+    const status = matchFeedback.describe(match);
+    const header = `<div class="eyebrow">${status.decision}</div><h2>${prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>`;
     if (prompt.kind === 'input') {
-      const okLabel = prompt.inputType === 'InputPassPriority' ? 'Pass priority' : prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok;
+      const okLabel = prompt.inputType === 'InputPassPriority' ? match.stack?.length ? 'Pass response' : status.yours ? 'Next step' : 'Continue' : prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok;
       $('match-prompt').innerHTML = header + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button><button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button></div>`;
       $('match-ok').onclick = () => answer({ action: 'ok' });
       $('match-cancel').onclick = () => answer({ action: 'cancel' });
@@ -223,7 +228,7 @@
     if (prompt.inputType === 'InputAttack') return 'Choose your attackers.';
     if (prompt.inputType === 'InputBlock') return 'Set your blocks.';
     if (prompt.inputType.startsWith('InputPayMana')) return 'Pay for your spell.';
-    if (prompt.inputType === 'InputPassPriority') return 'Your move.';
+    if (prompt.inputType === 'InputPassPriority') return match.stack?.length ? 'Respond or let it resolve.' : matchFeedback.describe(match).yours ? 'Play a card or continue.' : 'You can respond now.';
     if (prompt.inputType.includes('Target')) return 'Choose a target.';
     return 'Make your choice.';
   }

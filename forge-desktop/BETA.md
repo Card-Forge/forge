@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.7
+# Mana Table — beta 0.1.0-beta.8
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -49,6 +49,17 @@ Library, graveyard, and exile piles sit beside each playmat. Click a graveyard o
 exile pile to browse its cards, then click it again to close it. Crowded rows and
 large hands scroll sideways. Life totals remain clickable for player targets.
 
+The heading shows whose turn it is, the turn number, and the current step. The
+strip between playmats tracks Beginning, Main 1, Combat, Main 2, and Ending.
+The decision panel says when it is **your action**, including responses during
+the opponent's turn. **Recent actions** retains the last 120 events: plays,
+spell resolutions, combat, and life changes. Scroll back to review what happened.
+
+Brief animations highlight card arrivals, tapping, combat, and life changes.
+Use **Animations on/off** beside the turn number to toggle them; the initial
+setting follows your system's reduced-motion preference. Actions remain usable
+while animations run.
+
 Scripted casual cards and supplemental cards (planes, schemes, dungeons, and
 similar cards) are included. Supplemental cards go into their own deck sections;
 use **Extra deck sections** to review them. Tokens are not part of this deck-building
@@ -67,7 +78,7 @@ The separate opening-hand table remains available for quick practice draws.
 
 Unusual card effects and complex board states need broader testing.
 Limited matches, games with more than two players, sideboarding between games,
-match saves/resume after closing the app, and animations are not included.
+and match saves/resume after closing the app are not included.
 If a game stops on an unsupported engine interaction, its error appears in the
 decision panel; your deck remains saved and you can start another game.
 
