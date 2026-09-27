@@ -118,6 +118,10 @@ Only lines something reads are granted; a line naming any other keyword is skipp
 filter being a property `Matches` evaluates. A `Pump`/`Animate` `KW$ HIDDEN ...` token is a separate one-shot grant, not
 this static, and stays rejected (`pumpeffect.go`).
 
+The `canAttackAtAll` check reads printed lines too, so a card printed with `CARDNAME can't attack.` or
+`CARDNAME can't attack or block.` can no longer attack either; it previously could. `Defender` is still not enforced as
+an attack restriction (a separate, pre-existing gap).
+
 No scenario fixture: every behavior here is a block/attack declaration being refused, and the harness has no verb that
 expects an illegal declaration; `hiddenkeyword_test.go` covers it the way `combatlegality_test.go` covers printed lure
 and can't-block keywords.
@@ -176,8 +180,16 @@ through `castOpts.withoutManaCost` (Play's own path). `MayPlayDontGrantZonePermi
 
 Choices Java leaves to the player fail closed (`recordPendingError`, cast declined): two live grants on one card that
 differ in cost or timing, and a cost-changing grant on a card also castable from hand (Omniscience: Java offers the
-normal and the free spell side by side). No `PlayerController` decision was added: both are rare, and picking for the
-player would be a guess (GO-7).
+normal and the free spell side by side). No `PlayerController` decision was added; picking for the player would be a
+guess (GO-7). The second case has 9 real lines past the skip list (`AffectedZone$` naming `Hand` with
+`MayPlayWithoutManaCost$`: Omniscience, Fires of Invention, One with the Multiverse, ...). While one is in play every
+nonland cast from its controller's hand declines with a pending error, which `PassPriority`/`ResolveStack` return: the
+game stops rather than silently paying (the behavior before this grant existed). A `ChooseMayPlayOption` decision is
+what would close it.
+
+The grant reaches the real priority loop without extra wiring: `priorityRound` runs `CheckStateBasedActions` before
+asking for each action (CR 117.5), so an impulse-drawn card is castable in the same main phase
+(`TestMayPlayGrantReachesThePriorityLoop`).
 
 Coverage: 421 of the corpus's 660 real `MayPlay$` lines (67 of 183 `S:`, 354 of 477 Effect-SVar) carry no skipped param,
 each still subject to its `Affected$` properties being ones `Matches` evaluates. Skipped whole:

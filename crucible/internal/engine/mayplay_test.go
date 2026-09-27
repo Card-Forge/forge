@@ -101,6 +101,33 @@ func TestMayPlayImpulseDrawFromEffectCard(t *testing.T) {
 	}
 }
 
+// The same impulse draw through the real priority loop, with no manual
+// check: priorityRound's own state-based-action check (CR 117.5) builds the
+// grant before the caster is asked for an action, so the exiled card is
+// castable in the same main phase.
+func TestMayPlayGrantReachesThePriorityLoop(t *testing.T) {
+	t.Parallel()
+	g, p, other := newTwoPlayerGame(t)
+	first := g.NewCard(creatureDefCost(t, "Exiled Bear", "G"), p, engine.Library)
+	c := engine.NewScriptedController()
+	resolveLine(t, g, p, c,
+		"DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect",
+		"DBEffect", "DB$ Effect | StaticAbilities$ StaticMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup",
+		"DBCleanup", "DB$ Cleanup | ClearRemembered$ True",
+		"StaticMayPlay", "Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True")
+
+	g.Player(p).ManaPool.Add(mana.Green, 1)
+	c.QueueAction(p, engine.Action{Kind: engine.ActionCast, Card: first})
+	c.QueueAction(p, engine.Action{})
+	c.QueueAction(other, engine.Action{})
+	if err := g.PassPriority(engine.NewRegistry(), c); err != nil {
+		t.Fatalf("PassPriority: %v", err)
+	}
+	if g.Card(first).Zone != engine.Battlefield {
+		t.Errorf("impulse-drawn card in %v, want cast and resolved onto the battlefield", g.Card(first).Zone)
+	}
+}
+
 // MayPlayWithoutManaCost$ from exile: cast with an empty pool.
 func TestMayPlayWithoutManaCostFromExile(t *testing.T) {
 	t.Parallel()
