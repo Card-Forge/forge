@@ -1,7 +1,6 @@
 package forge.net;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +16,11 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
-import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -54,15 +51,6 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones,
-            Map<PlayerView, Object> players, boolean backupLastZones) {
-        return null;
-    }
-
-    @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) { }
-
-    @Override
     public void openView(TrackableCollection<PlayerView> myPlayers) {
         openViewCalled = true;
     }
@@ -88,12 +76,6 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     @Override public void hideManaPool(PlayerView player) { }
     @Override public void updateStack() { }
 
-    @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        return zonesToUpdate;
-    }
-
-    @Override public void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate) { }
     @Override public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
     @Override public void updateCards(Iterable<CardView> cards) { }
 
