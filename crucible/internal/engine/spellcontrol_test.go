@@ -280,7 +280,7 @@ func TestControlSpellPerplexingChimeraRetargetFailsClosed(t *testing.T) {
 }
 
 // TestControlSpellExchangeSkipsASpellThatLeftTheStack proves
-// ControlSpellEffect.java:71-74: countered before the exchanging trigger
+// ControlSpellEffect.java:74-77: countered before the exchanging trigger
 // resolves, the spell has no stack instance, so nothing is exchanged or
 // remembered.
 func TestControlSpellExchangeSkipsASpellThatLeftTheStack(t *testing.T) {
@@ -354,7 +354,7 @@ func TestControlSpellInvertPolarityWinsTheSpell(t *testing.T) {
 
 // TestControlSpellGainOnASpellThatLeftTheStackFails proves the Gain
 // branch's missing stack instance -- a null dereference in Java
-// (ControlSpellEffect.java:101) -- is an error rather than a silent skip.
+// (ControlSpellEffect.java:99) -- is an error rather than a silent skip.
 func TestControlSpellGainOnASpellThatLeftTheStackFails(t *testing.T) {
 	t.Parallel()
 	g, p, other := newTwoPlayerGame(t)

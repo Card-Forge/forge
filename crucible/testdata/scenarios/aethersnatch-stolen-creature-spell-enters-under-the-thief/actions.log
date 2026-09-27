@@ -1,0 +1,26 @@
+# CR 110.2a/608.3a through ControlSpellEffect.java: ai's Aethersnatch gains
+# control of human's Grizzly Bears while it is a spell on the stack. The
+# stack item and the card both change controller, so when the Bears resolve
+# they enter the battlefield under ai's control, still owned by human.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+queue paygeneric G
+castspell human 1
+tapformana ai 4 U
+tapformana ai 5 U
+tapformana ai 6 U
+tapformana ai 7 U
+tapformana ai 8 U
+tapformana ai 9 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue targets 1
+castspell ai 10
+# Aethersnatch's SubAbility$ ChangeTargets | Optional$ True: decline, the
+# Bears have no targets to change anyway.
+queue confirmeffect false
+resolvestack

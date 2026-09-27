@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Forest|Id:2|Tapped;Forest|Id:3|Tapped
+ailife=20
+aibattlefield=Island|Id:4|Tapped;Island|Id:5|Tapped;Island|Id:6|Tapped;Island|Id:7|Tapped;Island|Id:8|Tapped;Island|Id:9|Tapped;Grizzly Bears|Id:1|Owner:human|SummonSick
+aigraveyard=Aethersnatch

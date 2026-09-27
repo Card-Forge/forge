@@ -23,13 +23,13 @@ import "fmt"
 // its parent's targets) or Defined$ TriggeredSpellAbility (the spell a
 // Mode$ SpellCast trigger recorded).
 //
-// Card.runChangeControllerCommands (ControlSpellEffect.java:84, :96) has
+// Card.runChangeControllerCommands (ControlSpellEffect.java:88, :96) has
 // nothing to run here: the only change-controller command this port has is
 // losing the Ring-bearer designation, which changeControllerAt already
 // covers for the exchanged host, and a spell is never a Ring-bearer.
 //
 // Ported from forge-game/src/main/java/forge/game/ability/effects/ControlSpellEffect.java's
-// resolve (ControlSpellEffect.java:53-104).
+// resolve (ControlSpellEffect.java:54-101).
 type controlSpellEffect struct{}
 
 // controlSpellUnresolvedParams are rejected before anything changes (PORT-8,
@@ -63,7 +63,7 @@ func (controlSpellEffect) Resolve(g *Game, a *Ability, _ PlayerController) error
 	}
 	mode, ok := a.Params.Param("Mode")
 	if !ok {
-		// ControlSpellEffect.java:57 calls equals on the missing param.
+		// ControlSpellEffect.java:58 calls equals on the missing param.
 		return fmt.Errorf("engine: ControlSpell: Mode$ is required")
 	}
 	if mode != "Gain" && mode != "Exchange" {
@@ -92,7 +92,7 @@ func (controlSpellEffect) Resolve(g *Game, a *Ability, _ PlayerController) error
 		ts := g.timestamp
 		item, onStack := g.stackItem(s.id)
 		if exchange {
-			// ControlSpellEffect.java:60-86: the host is the exchange
+			// ControlSpellEffect.java:69-90: the host is the exchange
 			// object (DefinedExchange$ absent defaults to Self).
 			if source.Zone != Battlefield || source.IsPhasedOut() || !onStack {
 				continue
@@ -108,7 +108,7 @@ func (controlSpellEffect) Resolve(g *Game, a *Ability, _ PlayerController) error
 			g.changeControllerAt(a.Source, item.Controller, ts)
 		}
 		if !onStack {
-			// ControlSpellEffect.java:101 dereferences the missing stack
+			// ControlSpellEffect.java:99 dereferences the missing stack
 			// instance; no corpus chain reaches it, since every Gain line's
 			// spell is a target its own parent fizzles without.
 			return fmt.Errorf("engine: ControlSpell: the named spell is no longer on the stack")
@@ -184,7 +184,7 @@ func controlSpellTargets(g *Game, a *Ability) ([]namedSpell, error) {
 	return spells, nil
 }
 
-// giveSpell is the spell half of ControlSpellEffect.java:97-101: the card
+// giveSpell is the spell half of ControlSpellEffect.java:92-99: the card
 // gains a timestamped controller (Card.addTempController -- it rides along
 // onto the battlefield, Game.Move leaving a Stack card's control alone
 // there, and is cleared anywhere else), and the stack item and every chosen
