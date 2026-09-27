@@ -1,23 +1,14 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('four and six player tables stay usable at desktop sizes and acknowledge actions immediately', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `table-multi-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('multiplayer');
   try {
     const page = await application.firstWindow();
     // Resizing an invisible packaged window can stall Chromium's screenshot
     // compositor. Keep all layout/hit-test assertions in the packaged smoke;
     // capture the visual review artifacts in the development run.
-    const capture = name => packaged ? Promise.resolve() : page.screenshot({ path: test.info().outputPath(name) });
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
+    const capture = name => executable ? Promise.resolve() : page.screenshot({ path: test.info().outputPath(name) });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });

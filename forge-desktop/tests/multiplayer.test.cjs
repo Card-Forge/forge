@@ -1,17 +1,11 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const path = require('node:path');
-const { once } = require('node:events');
-const { EngineClient } = require('../engine-client.cjs');
-const root = path.resolve(__dirname, '../..');
+const { testProfile, startEngine, ready } = require('./support/engine.cjs');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const zone = (player, name) => player.zones.find(zone => zone.name === name);
 
 test('four and six player Commander: private hands, distinct opponents, attacks, concede and human elimination', { timeout: 200000 }, async () => {
-  const engine = new EngineClient({ java: 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',
-    jar: path.join(root, 'forge-api/target/forge-engine.jar'), resources: path.join(root, 'forge-gui/res'),
-    data: path.join(root, `forge-desktop/test-results/multiplayer-${Date.now()}/decks`),
-    log: path.join(root, `forge-desktop/test-results/multiplayer-${Date.now()}/engine.log`) });
+  const engine = startEngine(testProfile('multiplayer'));
   async function readyState() {
     for (let i = 0; i < 800; i++) {
       const state = await engine.request('matchState');
@@ -38,7 +32,7 @@ test('four and six player Commander: private hands, distinct opponents, attacks,
     return { action: 'card', key: card.key };
   }
   try {
-    while (engine.status.state !== 'ready') { if (engine.status.state === 'error') throw new Error(engine.status.message); await once(engine, 'status'); }
+    await ready(engine);
     await engine.request('import', { name: 'Constructed validation', format: 'Constructed', text: 'Deck\n60 Forest' });
     await assert.rejects(engine.request('matchStart', { opponents: ['green', 'red', 'green'] }), /Constructed supports/);
     const saved = await engine.request('import', { name: 'Commander table regression', format: 'Commander', text: 'Deck\n99 Forest\nCommander\n1 Rhys the Redeemed' });

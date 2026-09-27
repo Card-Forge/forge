@@ -1,13 +1,10 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 const path = require('node:path');
 const fs = require('node:fs');
 test('desktop beta supports a complete deck-building workflow', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const dataPath = path.join(appPath, 'test-results', `desktop-${Date.now()}`);
+  const { application, appPath, dataPath, executable } = await launchDesktop('desktop');
   const errors = [];
-  const environment = { ...process.env, FORGE_TEST: '1', FORGE_USER_DATA: dataPath, FORGE_OFFLINE: '1' };
-  delete environment.ELECTRON_RUN_AS_NODE;
-  const application = await electron.launch({ args: [appPath], env: environment });
   try {
     const page = await application.firstWindow();
     page.on('pageerror', error => errors.push(error.message));
@@ -49,7 +46,9 @@ test('desktop beta supports a complete deck-building workflow', async () => {
     await page.locator('[data-section=Main]').click();
     await expect(page.locator('#supplemental-toolbar')).toBeHidden();
     await page.locator('#clear-filters').click();
-    await page.screenshot({ path: path.join(appPath, 'test-results/workshop.png') });
+    // Invisible packaged windows can stall Chromium's screenshot compositor.
+    // Capture in source runs; keep every interaction assertion in both modes.
+    if (!executable) await page.screenshot({ path: path.join(appPath, 'test-results/workshop.png') });
     await page.locator('#search').fill('Llanowar Elves');
     await expect(page.locator('#catalog .catalog-card').first()).toContainText('Llanowar Elves');
     await page.locator('#catalog button[data-add]').first().click();
@@ -83,7 +82,7 @@ test('desktop beta supports a complete deck-building workflow', async () => {
     await expect(page.locator('.hand-card')).toHaveCount(8);
     await page.locator('[data-bottom]').first().click();
     await expect(page.locator('.hand-card')).toHaveCount(7);
-    await page.screenshot({ path: path.join(appPath, 'test-results/practice.png') });
+    if (!executable) await page.screenshot({ path: path.join(appPath, 'test-results/practice.png') });
     await page.locator('#back-workshop').click();
     await page.locator('#export-button').click();
     await expect(page.locator('#export-text')).toHaveValue(/56 Mountain/);

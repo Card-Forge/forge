@@ -1,16 +1,8 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('hand gestures cancel safely on stale prompts and large hands stay reachable', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `hand-gestures-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('hand-gestures');
   try {
     const page = await application.firstWindow();
     await application.evaluate(({ BrowserWindow }) => {
@@ -186,7 +178,7 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     expect(await page.evaluate(() => window.nativeHandDrags)).toBe(0);
     await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
     expect(await actions()).toHaveLength(1);
-    if (!packaged) await page.screenshot({ path: test.info().outputPath('persistent-hand.png') });
+    if (!executable) await page.screenshot({ path: test.info().outputPath('persistent-hand.png') });
     expect(errors).toEqual([]);
   } finally { await application.close(); }
 });

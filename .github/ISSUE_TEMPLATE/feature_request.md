@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest an improvement to Mana Table
 title: ''
 labels: ''
 assignees: ''
@@ -8,14 +8,14 @@ type: 'Feature'
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**What are you trying to do?**
+Describe the deck-building or match situation and what makes it difficult.
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**What should change?**
+Describe the behavior you would like, including relevant cards, format, player
+count, or input method. A sketch or short reference video can help with UI ideas.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Alternatives considered**
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**How would we know it works?**
+Give a concrete example of the improved experience.

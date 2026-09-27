@@ -1,101 +1,108 @@
-# Mana Table desktop beta
+# Mana Table desktop development
 
-A local Electron renderer connected to the Forge Java engine through private
-stdin/stdout pipes. No HTTP server is started. The renderer has no Node access;
-the preload exposes an allowlisted API. The Java process owns deck edits,
-validation, persistence, practice-hand shuffling, and human-versus-AI games.
+Electron hosts the plain HTML/CSS/JavaScript renderer and a Java child process.
+The Java process owns the card catalog, deck operations, persistence, rules, AI,
+and matches. Communication uses private stdin/stdout JSON pipes; there is no HTTP
+server. Read the [architecture](../docs/Development/Mana-Table-Architecture.md)
+and [engine API](../forge-api/README.md) before extending that boundary.
 
-## Development
+## Prerequisites
 
-Requirements: JDK 17, Maven 3.8.1+, Node 22.12+, Windows x64 for the supplied package script.
+- Git, **JDK 17+**, **Maven 3.8.1+**, **Node.js 22.12+** with npm.
+- Contributor CI uses JDK 17, Node 24, and Windows. Windows x64 is the tested
+  desktop target and the only target supported by the package script.
+- Set `JAVA_HOME` to the JDK directory. Java discovery works on Windows, Linux,
+  and macOS, but non-Windows desktop behavior is not yet validated by this fork.
+
+The repository is large because it contains Forge resources. A first build needs
+network access for Maven/npm dependencies and Electron; a running test suite uses
+the local card scripts and normally disables remote artwork.
+
+## Build and launch
+
+From the repository root:
 
 ```sh
-# From repository root
 mvn -pl forge-api -am verify
 cd forge-desktop
 npm ci
+npm run doctor
 npm start
 ```
 
-The engine jar is `forge-api/target/forge-engine.jar`. Set `FORGE_JAVA` to a Java
-executable or set `JAVA_HOME`. Development deck data lives in `forge-desktop/.data`.
-`FORGE_USER_DATA` overrides the data folder; `FORGE_OFFLINE=1` disables image fetches.
+This produces `forge-api/target/forge-engine.jar` and builds only its required
+Maven modules. Rebuild the JAR after Java changes. Restart Electron after changes
+to `main.cjs`, the preload, or renderer code. No frontend bundle step is required.
 
-```sh
-node --test tests/engine.test.cjs tests/match.test.cjs tests/commander.test.cjs
-npm test
-npm run package
+In PowerShell, configure your own installed JDK, for example:
+
+```powershell
+$env:JAVA_HOME = 'C:\path\to\your\jdk-17'
+$env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
+java -version
+mvn -version
 ```
 
-Packaging copies only the required Forge resources, builds a Java runtime using
-`jlink`, and writes a new timestamped folder under `dist`. Existing packages and
-their user data are preserved. The package script copies decks and cached art
-from the previous beta and verifies deck file hashes before updating
-`dist/latest-beta.json` to identify the new build.
-The packaged app needs neither Maven, Node, nor a system Java installation.
+Use `npm.cmd` if your PowerShell policy prevents execution of `npm.ps1`.
+Ignored `.tools` and `.m2` directories on someone else's workstation are not
+prerequisites. To opt into a repository-local Maven cache, pass
+`-Dmaven.repo.local=.m2` while building from the root.
 
-Read [BETA.md](BETA.md) for user instructions and the current scope.
+`npm run doctor` reports the resolved Java command, Node requirement, engine JAR,
+resources, and installed desktop dependencies. It exits nonzero for missing items.
 
-## Protocol
+## Common commands
 
-Requests are newline-delimited UTF-8 JSON: `{id, method, params}`. Responses are
-`{id, result}` or `{id, error}`. Startup emits `{event: "loading"}` and
-`{event: "ready", printings}`. Forge diagnostics go to stderr and the desktop log.
+Run these in `forge-desktop`:
 
-Commands: `search`, `list`, `new`, `open`, `snapshot`, `edit`, `rename`, `undo`,
-`redo`, `format`, `save`, `importPreview`, `import`, `export`, `practice`,
-`matchOpponents`, `matchSetup`, `matchStart`, `matchState`, `matchAction`, `matchConcede`.
-Edits require the current deck revision. Saved decks use opaque UUID filenames,
-schema version 1, printing IDs, quantities, and explicit sections. Writes use
-temporary files and atomic replacement where supported. Failed writes remain
-visible and block switching decks until saved.
+| Command | Purpose |
+| --- | --- |
+| `npm run check` | Parse host, renderer, scripts, and tests without launching the app |
+| `npm run test:unit` | Fast Node tests; no Java process or Electron window |
+| `npm run test:engine` | Real Java protocol, persistence, game, Commander, and preset tests |
+| `npm run test:smoke` | Electron deck-workshop and playable-match checks |
+| `npm run test:ui` | All Electron/Playwright checks (`npm test` remains an alias) |
+| `npm run package` | Build a new Windows x64 package with Java and card resources |
 
-`MatchSession` hosts one human with one AI in Constructed or 1–5 AIs in Commander.
-`matchStart` uses the saved current deck and an `opponents` array of IDs from
-`matchOpponents` (or legacy singular `opponent`). `matchState` returns
-a cached snapshot with a revision, viewer-filtered zones, stack, and current
-prompt. `matchAction` requires `sessionId` and the current `promptId`; stale or
-duplicate answers are rejected. Card handles belong to that prompt only.
-Synchronous dialogs use response futures so replies cannot deadlock behind the
-waiting engine thread. Returning to the workshop keeps the match active; closing
-the application ends it. See [the API integration guide](../forge-api/README.md).
+See [testing](../docs/Development/Mana-Table-Testing.md) for subsets, packaged
+tests, and failure artifacts; see [releases](../docs/Development/Mana-Table-Releases.md)
+for versioning, data preservation, and distribution.
 
-`match-feedback.js` presents turn ownership, phases, recent actions, and optional
-animations. `activity` is a bounded event history copied by the host. A separate
-`boardRevision` keeps event-only updates from rebuilding the table; `visualId`
-correlates visible cards across stable snapshots without replacing prompt-scoped
-action keys. Motion defaults to the system preference and can be toggled locally.
+## Environment variables
 
-The renderer retains card nodes across changes to prompt handles and highlights
-when visible board data is unchanged. It acknowledges clicks synchronously and
-polls immediately after actions, then every 50 ms while resolving and 350 ms at
-a waiting prompt. Polls never overlap, and responses from an old session cannot
-replace a newer table. Cached artwork bypasses the network download queue.
+| Variable | Meaning |
+| --- | --- |
+| `JAVA_HOME` | JDK directory for development; required by packaging for `jlink` |
+| `FORGE_JAVA` | Explicit Java executable override, including for packaged tests |
+| `FORGE_USER_DATA` | Override the complete data directory for a manual or automated test |
+| `FORGE_OFFLINE=1` | Disable artwork retrieval; the engine/catalog still use bundled scripts |
+| `FORGE_TEST=1` | Start the Electron window hidden for automation |
+| `MANA_TEST_PACKAGED=1` | UI tests use the executable in `dist/latest-beta.json` |
+| `MANA_TEST_EXECUTABLE` | UI-test executable override when packaged mode is not selected |
 
-`node --test tests/multiplayer.test.cjs` exercises real four- and six-player
-Commander setup, private zones, attacks against a selected defender, concession,
-and human elimination. `npm test -- tests/multiplayer.spec.cjs` covers seat setup,
-viewing any opponent, resizing to 1000/1120/1540 pixels, immediate acknowledgment,
-and retaining the same card DOM nodes through a response pause.
+Java resolution is shared in `runtime.cjs`: `FORGE_JAVA` first, then the packaged
+runtime (if packaged), then `JAVA_HOME/bin/java[.exe]`, then `java` on `PATH`.
+Legacy `FORGE_*` variable and module names are kept for compatibility.
 
-`turn-guide.js` describes all engine phase keys, names each priority action, and
-distinguishes optional responses from required combat, cost, and card-selection
-prompts. Guidance never dispatches an action. The renderer retains the engine's
-message for required choices and provides a read-only expandable turn guide.
-Run `node --test tests/turn-guide.test.cjs` for the phase/prompt matrix and
-`npm test -- tests/priority.spec.cjs` for a real match through upkeep, draw,
-main phases, end step, spell responses, and mandatory cleanup discards.
+## Data and troubleshooting
 
-`matchSetup` returns the current deck ID/revision, format, starting life, opponents,
-`maxPlayers`, and a validated Commander preview. A Commander list without a Cmd section can
-select `commanderId` from its main-deck candidates; the host validates a detached
-99+1 copy and never edits the saved list. A unique valid candidate is preselected.
-Pass `commanderId`, `deckId`, and `revision` to `matchStart` to launch that preview.
-Commander matches use the engine variant, 40 life, singleton AI decks, command-zone
-casting, commander tax, and commander damage. Existing Cmd sections are honored.
+Development data lives in `forge-desktop/.data`. A packaged build uses `UserData`
+beside its executable. Either can be overridden with `FORGE_USER_DATA`.
+Each profile contains `decks/` (UUID JSON files), `art/` (cached illustrations),
+`engine.log`, and Electron preferences/cache files. Deck saves use schema version
+1 and atomic file replacement where supported. Match state is not a saved deck
+and does not survive closing the app.
 
-Catalog searches include ordinary and supplemental card databases, all faces,
-and scripted casual cards. The UI starts without a query or color/type/mana filter.
-`search` returns both the matching `total` and unfiltered `catalogTotal` (with
-printing grouping applied consistently). `card.deckSection` routes supplemental
-cards to sections such as Planes or Schemes; it is not a legality assertion.
+- **Engine does not start:** run `npm run doctor`; check Java and the JAR, then
+  read `engine.log` in the profile being used.
+- **Library appears to stall:** the first resource scan takes time. The engine
+  requests up to 2 GB of heap; avoid launching many integration tests at once.
+- **Electron runs as a Node CLI:** unset `ELECTRON_RUN_AS_NODE` before `npm start`.
+  Automated tests remove it in their shared launcher.
+- **Launcher cannot find a beta:** build a package first. The root `.cmd` launchers
+  read a generated manifest; they do not start the development source tree.
+- **Artwork is absent:** offline tests intentionally omit it. The card catalog
+  and rules do not depend on downloaded images.
+
+The [player guide](BETA.md) describes current features and limitations. The
+[contribution guide](../CONTRIBUTING.md) explains branch and review conventions.

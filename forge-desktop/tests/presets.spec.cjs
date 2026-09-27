@@ -1,16 +1,8 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('preset browser adds a playable Commander copy, offers AI precons and repairs old Constructed imports', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `presets-ui-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('presets');
   try {
     const page = await application.firstWindow();
     await application.evaluate(({ BrowserWindow, shell }) => {
@@ -34,7 +26,7 @@ test('preset browser adds a playable Commander copy, offers AI precons and repai
     expect(links[0]).toBe('https://moxfield.com/decks/lnTvk7dGp0KzsvxIMxPDJg');
     expect(JSON.parse(Buffer.from(new URL(links[1]).searchParams.get('q'), 'base64').toString()).sortColumn).toBe('views');
     expect(JSON.parse(Buffer.from(new URL(links[2]).searchParams.get('q'), 'base64').toString()).sortColumn).toBe('updated');
-    await page.screenshot({ path: test.info().outputPath('preset-library.png') });
+    if (!executable) await page.screenshot({ path: test.info().outputPath('preset-library.png') });
     await page.locator('#preset-add').click();
     await expect(page.locator('#deck-name')).toHaveValue('Explorers of the Deep');
     await expect(page.locator('#deck-format')).toHaveValue('Commander');

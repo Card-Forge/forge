@@ -1,13 +1,13 @@
-# Forge engine API foundation
+# Mana Table engine API
 
-This fork targets a desktop application with a web UI: a fast deck workshop and
-an Arena-inspired match experience, backed by Forge's existing rules and AI.
+Mana Table is a desktop application with a web UI: a deck workshop and playable
+match table, backed by Forge's existing rules and AI.
 `forge-api` supplies catalog, deck, and match hooks. It depends on the shared
 `forge-gui` module (including the human controller), `forge-ai`, `forge-game`, and
 `forge-core`. It creates no Swing or LibGDX UI; `HeadlessPlatform` supplies the
 shared controller's platform services and preferences.
 
-The [Mana Table desktop beta](../forge-desktop/README.md) now consumes this
+The [Mana Table desktop beta](../forge-desktop/README.md) consumes this
 module through `DesktopEngine`, a private stdin/stdout JSON transport. It includes
 local deck persistence, opening-hand practice, and human-versus-AI matches. Build with
 `mvn -pl forge-api -am verify`; the executable engine is `target/forge-engine.jar`.
@@ -29,8 +29,8 @@ local deck persistence, opening-hand practice, and human-versus-AI matches. Buil
 | `MatchSession` | One human with AI opponents in Constructed or 2–6 player Commander, cached state, scoped prompts, controller input, and concession |
 | `MatchActivity` | Immutable, viewer-filtered recent actions and event-time turn/phase metadata |
 
-The records contain values rather than live engine objects and can be serialized
-by a future IPC or HTTP adapter. This module does not start a network listener.
+The records contain values rather than live engine objects. The desktop serializes
+them through its private transport; this module does not start a network listener.
 Printing IDs are opaque, case-sensitive identifiers; clients must round-trip them.
 Catalog construction eagerly indexes the supplied printings. Initialize it once
 on a worker thread; search results include alternate printings rather than grouping
@@ -59,11 +59,10 @@ with a sideboard, and verifies unknown-card detection. It does not start a match
 The initial resource scan can take time. The unit tests require the checked-in
 language files at `forge-gui/res/languages`; they do not load the entire card database.
 
-On this Windows workspace a local Maven download is available at
-`.tools/apache-maven-3.9.9/bin/mvn.cmd`, with the dependency cache in `.m2`.
-Use `-Dmaven.repo.local=F:\ForgeButBetter\.m2` to reuse that cache and set
-`JAVA_HOME=C:\Program Files\BellSoft\LibericaJDK-17`. These local tools and caches
-are ignored by Git.
+Set `JAVA_HOME` to your JDK installation and put Maven on `PATH`. No particular
+JDK vendor, local tool directory, or custom dependency cache is required. See
+the [desktop setup guide](../forge-desktop/README.md) for the application and
+the [testing guide](../docs/Development/Mana-Table-Testing.md) for real-engine tests.
 
 ```java
 var data = EngineResources.load(Path.of("forge-gui/res"));
@@ -80,6 +79,40 @@ An existing Forge process should reuse its initialized `StaticData`, not call
 editor needs schemes, planes, and other supplemental cards. Use
 `DeckSerializer.writeDeck(editor.toDeck(), file)` for Forge-native saving.
 File locations and persistence are the host application's responsibility.
+
+## Desktop transport and deck commands
+
+`DesktopEngine` reads newline-delimited UTF-8 JSON from its private stdin:
+`{id, method, params}`. Replies are `{id, result}` or `{id, error}`. Startup emits
+`{event: "loading", message}` and `{event: "ready", printings}`. Diagnostics go to
+stderr; stdout is reserved for protocol messages. The Electron `EngineClient`
+correlates request IDs and records diagnostics in the active profile's log.
+
+| Command | Parameters / behavior |
+| --- | --- |
+| `search` | Optional `text`, `colors`, `maxManaValue`, `type`, `sort`, `unique`, `offset`, `limit`; paginated catalog results |
+| `list`, `open` | List saved decks; open by `{id}` |
+| `new` | `{name, format}`; create a saved deck |
+| `snapshot` | Current deck, revision, validation, format and save state |
+| `edit` | `{revision, edits}`; absolute quantities using `DeckEditor.Edit` entries |
+| `rename`, `format` | `{revision, name}` or `{revision, format}` |
+| `undo`, `redo` | `{revision}`; deck-editor history |
+| `save` | Retry saving the current deck |
+| `importPreview`, `import` | Preview `{text}`; import `{text, name, format?}` as a new deck |
+| `export` | `{kind: "text"}` or `{kind: "forge"}`; deck-list text |
+| `deckPresets`, `presetImport` | List attributed presets; import one by `{id}` |
+| `practice` | `{action: "shuffle" / "mulligan" / "draw" / "bottom", index?}`; opening-hand sandbox |
+
+The host owns one current deck editor. Successful edits autosave. Saved files use
+opaque UUID filenames, schema version 1, printing IDs, quantities, and explicit
+sections. Writes use temporary files and atomic replacement where supported.
+Save failures remain visible and block switching decks until saved. Practice
+hands are separate from a playable match and are not persisted.
+
+For exact request/response fields, see
+[`DesktopEngine.java`](src/main/java/forge/api/DesktopEngine.java) and the
+[real transport tests](../forge-desktop/tests/engine.test.cjs). New commands must
+also be added to the Electron host's allowlist.
 
 ## Game integration contract
 
@@ -107,7 +140,8 @@ action authorization token, or durable resume ID.
 
 ```mermaid
 flowchart LR
-    UI[Desktop web renderer] <-->|private IPC| Host[Java host and session adapter]
+    UI[Desktop web renderer] <-->|context-isolated preload| Desktop[Electron main process]
+    Desktop <-->|private JSON lines over stdio| Host[Java host and session adapter]
     Host --> API[forge-api: catalog, decks, projected state]
     Host <-->|prompts and input| GUI[Shared Forge human controller]
     API --> Engine[forge-core and forge-game]
@@ -129,9 +163,9 @@ The private desktop transport exposes:
 
 | Request | Parameters / result |
 | --- | --- |
-| `matchOpponents` | Lists the green and red AI decks for the current deck's format |
+| `matchOpponents` | Lists AI decks for the current deck's format, including Commander preset opponents |
 | `matchSetup` | Optional `{commanderId}`; returns deck ID/revision, candidate commanders, validated setup, opponents, and `commanderAvailable` for a Commander-ready list saved as Constructed |
-| `matchStart` | `{opponent, commanderId?, deckId?, revision?}`; validates a detached match deck and rejects stale setup |
+| `matchStart` | `{opponents: [...], commanderId?, deckId?, revision?}`; validates a detached match deck and rejects stale setup; legacy `opponent` accepts one deck ID |
 | `matchState` | Cached snapshot with session `id`, `revision`, `boardRevision`, `status`, `players`, `stack`, `prompt`, `activity`, and `result` |
 | `matchAction` | `{sessionId, promptId, ...answer}`; replies once to the current prompt |
 | `matchConcede` | `{sessionId}`; ends the game without editing the deck |
@@ -243,9 +277,13 @@ requirements. No damage outcome is predicted by the client.
 
 ## Upstream maintenance
 
-Keep `upstream` pointed at Card-Forge/forge and `origin` at proflayton/forge.
+Keep `upstream` pointed at Card-Forge/forge and the integration repository at
+proflayton/Mana-Table. In a contributor's clone, `origin` may point to their own fork.
 Shared changes include `Game.unsubscribeFromEvents`, explicit resource/profile
 path overrides, and reusing initialized `StaticData` from `FModel.getMagicDb`.
 The new host, protocol, and renderer live in their own modules. Preserve
 the repository's existing license and attribution. Forge's existing resources
 remain the source of truth for card definitions and rules.
+
+The [architecture guide](../docs/Development/Mana-Table-Architecture.md) maps the
+desktop modules and explains how to extend prompts, snapshots, and host commands.

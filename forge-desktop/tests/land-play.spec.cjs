@@ -1,17 +1,9 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 for (const format of ['Constructed', 'Commander']) {
   test(`${format}: playing a Forest updates the table and waits for the player`, async () => {
-    const appPath = path.resolve(__dirname, '..');
-    const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-      FORGE_USER_DATA: path.join(appPath, 'test-results', `forest-${format}-${Date.now()}`) };
-    delete env.ELECTRON_RUN_AS_NODE;
-    const packaged = process.env.MANA_TEST_PACKAGED === '1'
-      ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-    const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-      ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+    const { application } = await launchDesktop('land-play');
     const errors = [];
     try {
       const page = await application.firstWindow();
@@ -64,7 +56,12 @@ for (const format of ['Constructed', 'Commander']) {
       expect(idle.prompt.id).toBe(after.prompt.id);
       expect(idle.turn).toBe(before.turn);
 
-      await page.locator('#match-human .lands-row [aria-label="Forest"]').click();
+      // Approach from the playmat so the overlapping fan makes room for the land.
+      const permanent = page.locator('#match-human .lands-row [aria-label="Forest"]');
+      const table = await page.locator('#match-human').boundingBox(), land = await permanent.boundingBox();
+      await page.mouse.move(table.x + 12, table.y + 12);
+      await page.mouse.move(land.x + land.width / 2, land.y + land.height / 2, { steps: 8 });
+      await permanent.click();
       await expect(page.locator('#match-human .lands-row [aria-label="Forest, tapped"]')).toHaveCount(1);
       await expect.poll(async () => {
         const state = await page.evaluate(() => window.forge.request('matchState'));

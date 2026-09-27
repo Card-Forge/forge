@@ -1,19 +1,10 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('turn guidance explains each pause, preserves cleanup choices, and passes only once', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `priority-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('priority');
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
@@ -64,7 +55,7 @@ test('turn guidance explains each pause, preserves cleanup choices, and passes o
           await expect(page.locator('.match-engine-instruction')).toContainText(/discard/i);
           await expect(page.locator('#match-ok')).toBeDisabled();
           await expect(page.locator('#match-prompt .eyebrow')).toHaveText('YOUR ACTION');
-          await page.screenshot({ path: test.info().outputPath('cleanup-choice.png') });
+          if (!executable) await page.screenshot({ path: test.info().outputPath('cleanup-choice.png') });
           const before = human.zones.find(zone => zone.name === 'Hand').count;
           const card = human.zones.find(zone => zone.name === 'Hand').cards.find(card => card.selectable);
           await page.locator(`[data-match-card="${card.key}"]`).click();
@@ -82,7 +73,7 @@ test('turn guidance explains each pause, preserves cleanup choices, and passes o
           await expect(page.locator('#match-prompt h2')).toHaveText('Finish upkeep?');
           await expect(page.locator('#match-ok')).toHaveText('Finish upkeep');
           await expect(page.locator('#match-cancel')).toHaveText('Skip responses this turn');
-          await page.screenshot({ path: test.info().outputPath('opponent-pause.png') });
+          if (!executable) await page.screenshot({ path: test.info().outputPath('opponent-pause.png') });
           await page.locator('#match-ok').click();
           // Continue must pass once, then stop again during the same opponent turn.
           await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.id || p.id).not.toBe(p.id);
@@ -96,7 +87,7 @@ test('turn guidance explains each pause, preserves cleanup choices, and passes o
           await expect(page.locator('#match-prompt h2')).toHaveText(`${state.stack[0].name} is waiting.`);
           await expect(page.locator('#match-ok')).toHaveText('Let it resolve');
           if (state.stack[0].text) await expect(page.locator('.match-response-detail p')).toHaveText(state.stack[0].text);
-          await page.screenshot({ path: test.info().outputPath('waiting-spell.png') });
+          if (!executable) await page.screenshot({ path: test.info().outputPath('waiting-spell.png') });
           await page.locator('#match-ok').click();
           await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.id || p.id).not.toBe(p.id);
           sawSpell = true;

@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const { pathToFileURL } = require('node:url');
 const { createHash } = require('node:crypto');
 const { EngineClient } = require('./engine-client.cjs');
+const { engineOptions } = require('./runtime.cjs');
 const { productName } = require('./package.json');
 const { commanderBrowse, publicDeckUrl } = require('./deck-sources.cjs');
 
@@ -46,7 +47,7 @@ function art(name, face = 'front') {
     lastArtRequest = Date.now();
     try {
       const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(name)}&format=image&version=normal&face=${face}`, {
-        headers: { 'User-Agent': `ManaTable/${app.getVersion()} (https://github.com/proflayton/forge)`, Accept: 'image/jpeg' },
+        headers: { 'User-Agent': `ManaTable/${app.getVersion()} (https://github.com/proflayton/Mana-Table)`, Accept: 'image/jpeg' },
         signal: AbortSignal.timeout(8000)
       });
       if (!response.ok || !response.headers.get('content-type')?.startsWith('image/')) return null;
@@ -83,12 +84,8 @@ app.whenReady().then(async () => {
   });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   window.webContents.on('will-navigate', event => event.preventDefault());
-  const jar = app.isPackaged ? path.join(process.resourcesPath, 'forge-engine.jar') : path.join(project, 'forge-api', 'target', 'forge-engine.jar');
-  const resources = app.isPackaged ? path.join(process.resourcesPath, 'forge-res') : path.join(project, 'forge-gui', 'res');
-  const java = process.env.FORGE_JAVA || (app.isPackaged ? path.join(process.resourcesPath, 'runtime', 'bin', 'java.exe')
-    : process.env.JAVA_HOME ? path.join(process.env.JAVA_HOME, 'bin', 'java.exe')
-      : fs.existsSync('C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe') ? 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe' : 'java');
-  engine = new EngineClient({ java, jar, resources, data: path.join(userData, 'decks'), log: path.join(userData, 'engine.log') });
+  engine = new EngineClient(engineOptions({ project, userData,
+    resourcesPath: app.isPackaged ? process.resourcesPath : undefined }));
   engine.on('status', status => { if (!window.isDestroyed()) window.webContents.send('engine-status', status); });
   ipcMain.handle('status', event => { verify(event); return engine.status; });
   ipcMain.handle('engine', (event, method, params) => {

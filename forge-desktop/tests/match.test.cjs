@@ -1,19 +1,14 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const path = require('node:path');
-const { once } = require('node:events');
-const { EngineClient } = require('../engine-client.cjs');
-const root = path.resolve(__dirname, '../..');
+const { testProfile, startEngine, ready } = require('./support/engine.cjs');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 test('real human-controller match: casting, targeting, combat, hidden information and lifecycle', { timeout: 180000 }, async () => {
-  const data = path.join(root, 'forge-desktop/test-results', `match-${Date.now()}`);
-  const engine = new EngineClient({ java: process.env.FORGE_JAVA || 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',
-    jar: path.join(root, 'forge-api/target/forge-engine.jar'), resources: path.join(root, 'forge-gui/res'),
-    data: path.join(data, 'decks'), log: path.join(data, 'engine.log') });
+  const data = testProfile('match');
+  const engine = startEngine(data);
   let state;
   try {
-    while (engine.status.state !== 'ready') { if (engine.status.state === 'error') throw new Error(engine.status.message); await once(engine, 'status'); }
+    await ready(engine);
     const deck = await engine.request('import', { name: 'Match regression', text: 'Deck\n24 Mountain\n4 Lightning Bolt\n4 Shock\n4 Monastery Swiftspear\n4 Ghitu Lavarunner\n4 Goblin Arsonist\n4 Borderland Marauder\n4 Lightning Strike\n4 Viashino Pyromancer\n4 Chandra\'s Pyrohelix' });
     state = await engine.request('matchStart', { opponent: 'green' });
     const sessionId = state.id;

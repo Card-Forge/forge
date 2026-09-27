@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report a Mana Table desktop, deck-building, or match problem
 title: ''
 labels: ''
 assignees: ''
@@ -8,31 +8,30 @@ type: 'Bug'
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**What happened, and what did you expect?**
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Steps to reproduce**
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+1.
+2.
+3.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Match details (if applicable)**
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+- Format and number of players:
+- Relevant card names and deck list:
+- Turn/phase and exact prompt text:
+- Action taken (click, drag, keyboard):
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Version [e.g. 22]
+**Environment**
 
-**Additional context**
-Add any other context about the problem here.
+- Mana Table version or source commit:
+- Packaged app or source checkout:
+- OS, window size, and display scaling:
+
+**Screenshots or logs**
+
+Attach a screenshot/recording and relevant `engine.log` output if available.
+Source logs live in `forge-desktop/.data/engine.log`; packaged logs are in
+`UserData/engine.log` beside the app. A custom `FORGE_USER_DATA` overrides these
+locations. Remove personal paths or private deck information before sharing.

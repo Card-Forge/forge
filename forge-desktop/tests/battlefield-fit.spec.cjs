@@ -1,20 +1,11 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('crowded battlefield portraits, names and stats fit each row at two, four and six seats', async () => {
   test.setTimeout(180000);
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `field-fit-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('battlefield-fit');
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.locator('#import-button').click();
@@ -86,7 +77,7 @@ test('crowded battlefield portraits, names and stats fit each row at two, four a
           await last.hover();
           expect(await check(), `${count} seats at ${size}: hovered/tapped card remains visible`).toEqual([]);
         }
-        if (!packaged && size[0] === 1000) {
+        if (!executable && size[0] === 1000) {
           await page.mouse.move(0, 0);
           await page.keyboard.press('Escape');
           await page.screenshot({ path: test.info().outputPath(`crowded-${count}-seats.png`) });

@@ -1,18 +1,12 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const path = require('node:path');
-const { once } = require('node:events');
-const { EngineClient } = require('../engine-client.cjs');
-const root = path.resolve(__dirname, '../..');
+const { testProfile, startEngine, ready } = require('./support/engine.cjs');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 test('Commander setup validates detached leaders, command-zone casting, and Toph earthbending', { timeout: 180000 }, async () => {
-  const data = path.join(root, 'forge-desktop/test-results', `commander-${Date.now()}`);
-  const engine = new EngineClient({ java: process.env.FORGE_JAVA || 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',
-    jar: path.join(root, 'forge-api/target/forge-engine.jar'), resources: path.join(root, 'forge-gui/res'),
-    data: path.join(data, 'decks'), log: path.join(data, 'engine.log') });
+  const engine = startEngine(testProfile('commander'));
   try {
-    while (engine.status.state !== 'ready') { if (engine.status.state === 'error') throw new Error(engine.status.message); await once(engine, 'status'); }
+    await ready(engine);
     const toph = await engine.request('import', { name: 'Toph setup regression', format: 'Commander',
       text: 'Deck\n34 Forest\n33 Mountain\n31 Plains\n1 Toph, Greatest Earthbender\n1 Toph, the First Metalbender' });
     const prepared = await engine.request('matchSetup');

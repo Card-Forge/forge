@@ -101,7 +101,7 @@ delete environment.FORGE_OFFLINE;
     await expect(page.locator('#match-rules-copy')).toContainText('40 life');
     await capture('commander-setup-preview.png');
     await page.locator('#match-start').click();
-    await expect(page.locator('#match-human .match-life b')).toHaveText('40');
+    await expect(page.locator('#match-self .match-life b')).toHaveText('40');
     await expect(page.locator('#match-opponent .match-life b')).toHaveText('40');
     await expect(page.locator('#match-human .match-command-zone')).toContainText('Toph, the First Metalbender');
     await capture('commander-preview.png');

@@ -1,21 +1,12 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const path = require('node:path');
-const { once } = require('node:events');
-const { EngineClient } = require('../engine-client.cjs');
-const root = path.resolve(__dirname, '../..');
+const { testProfile, startEngine, ready } = require('./support/engine.cjs');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 test('precons import intact and all four AI decks start with 99 cards plus a commander', { timeout: 120000 }, async () => {
-  const profile = path.join(root, 'forge-desktop/test-results', `presets-${Date.now()}`);
-  const engine = new EngineClient({ java: 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',
-    jar: path.join(root, 'forge-api/target/forge-engine.jar'), resources: path.join(root, 'forge-gui/res'),
-    data: path.join(profile, 'decks'), log: path.join(profile, 'engine.log') });
+  const engine = startEngine(testProfile('presets'));
   try {
-    while (engine.status.state !== 'ready') {
-      if (engine.status.state === 'error') throw new Error(engine.status.message);
-      await once(engine, 'status');
-    }
+    await ready(engine);
     const presets = await engine.request('deckPresets');
     assert.equal(presets.length, 4);
     const ids = new Set();

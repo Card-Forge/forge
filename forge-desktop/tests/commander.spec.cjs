@@ -1,20 +1,12 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 const path = require('node:path');
-const fs = require('node:fs');
 
 test('a 100-card Toph list can pick a valid commander and start a 40-life AI game', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `commander-ui-${Date.now()}`) };
-  delete environment.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ args: packaged ? [] : [appPath], env: environment,
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, appPath, executable } = await launchDesktop('commander');
   const errors = [];
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     await page.locator('#import-button').click();
@@ -38,7 +30,7 @@ test('a 100-card Toph list can pick a valid commander and start a 40-life AI gam
     await expect(page.locator('#match-start')).toBeEnabled();
     await page.locator('#match-opponent-choice').selectOption('red');
     await expect(page.locator('#match-opponent-description')).toContainText('Torbran');
-    await page.screenshot({ path: path.join(appPath, 'test-results/commander-setup.png') });
+    if (!executable) await page.screenshot({ path: path.join(appPath, 'test-results/commander-setup.png') });
     await page.locator('#match-start').click();
     await expect(page.locator('#match-self .match-life b')).toHaveText('40');
     await expect(page.locator('#match-opponent .match-life b')).toHaveText('40');
@@ -60,28 +52,22 @@ test('a 100-card Toph list can pick a valid commander and start a 40-life AI gam
     await expect(page.locator('.match-zone summary')).toHaveCount(4);
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1120, 740));
     await expect.poll(() => page.locator('#match-hand').evaluate(element => element.getBoundingClientRect().bottom <= innerHeight)).toBe(true);
-    const targets = await page.locator('#match-self .match-life, #match-opponent .match-life, .match-command-zone .match-card, #match-hand .match-card').evaluateAll(elements => elements.map(element => {
+    const targets = await page.locator('#match-self .match-life, #match-opponent .match-life, .match-command-zone .match-card').evaluateAll(elements => elements.map(element => {
       const rect = element.getBoundingClientRect();
       return rect.top >= 0 && rect.bottom <= innerHeight && rect.left >= 0 && rect.right <= innerWidth;
     }));
     expect(targets.every(Boolean)).toBe(true);
-    await page.screenshot({ path: path.join(appPath, 'test-results/tabletop-compact.png') });
-    // A layout-only crowded-table fixture must scroll, rather than widen the playmat.
-    const crowded = await page.evaluate(() => {
-      const template = document.querySelector('.match-command-zone .match-card');
-      return [...document.querySelectorAll('#match-human .battlefield-row, #match-hand')].map(row => {
-        const original = [...row.childNodes];
-        row.replaceChildren(...Array.from({ length: 26 }, () => template.cloneNode(true)));
-        row.scrollLeft = row.scrollWidth;
-        const bounds = row.getBoundingClientRect(), last = row.lastElementChild.getBoundingClientRect();
-        const valid = row.scrollWidth > row.clientWidth && bounds.right <= innerWidth
-          && last.right <= bounds.right + 1 && last.top >= bounds.top - 1 && last.bottom <= bounds.top + row.clientHeight + 1;
-        const result = { valid, width: row.clientWidth, scrollWidth: row.scrollWidth, row: bounds.toJSON(), last: last.toJSON(), clientHeight: row.clientHeight };
-        row.replaceChildren(...original);
-        return result;
-      });
-    });
-    expect(crowded.every(row => row.valid), JSON.stringify(crowded)).toBe(true);
+    if (!executable) await page.screenshot({ path: path.join(appPath, 'test-results/tabletop-compact.png') });
+    // The hand is now a partly overlapping fan. Inspect each real card; large
+    // hands and crowded battlefields have dedicated gesture/fit tests.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const card of await page.locator('#match-hand .match-card').all()) {
+      await card.focus();
+      expect(await card.evaluate(element => {
+        const b = element.getBoundingClientRect(), a = element.closest('.match-arena').getBoundingClientRect();
+        return b.top >= a.top && b.bottom <= a.bottom && b.left >= a.left && b.right <= a.right;
+      })).toBe(true);
+    }
     await page.locator('#match-concede').click();
     await page.locator('#match-concede-confirm').click();
     await expect(page.locator('#match-prompt')).toContainText('Defeat');

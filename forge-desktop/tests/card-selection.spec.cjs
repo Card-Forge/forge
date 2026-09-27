@@ -1,19 +1,10 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('Forest clicks cannot become Nantuko casts after a refresh; casting choices name the card and cancel', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `selection-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('card-selection');
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
@@ -85,7 +76,7 @@ test('Forest clicks cannot become Nantuko casts after a refresh; casting choices
     await expect(page.locator('[data-ability-choice]')).toHaveCount(2);
     await expect(page.locator('[data-ability-choice="0"]')).toContainText('Cast as a creature');
     await expect(page.locator('[data-ability-choice="1"]')).toContainText('Bestow — cast as an Aura');
-    await page.screenshot({ path: test.info().outputPath('nantuko-choices.png') });
+    if (!executable) await page.screenshot({ path: test.info().outputPath('nantuko-choices.png') });
     await page.locator('#match-ability-cancel').click();
     await expect(page.locator('#match-ok')).toBeVisible();
     const canceled = await page.evaluate(() => window.forge.request('matchState'));

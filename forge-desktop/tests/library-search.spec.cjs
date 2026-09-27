@@ -1,20 +1,11 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('Roiling Regrowth searches the remaining library, selects two copies, and closes the reveal', async () => {
   test.setTimeout(180000);
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `library-search-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('library-search');
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
@@ -122,7 +113,7 @@ test('Roiling Regrowth searches the remaining library, selects two copies, and c
     for (const size of [[1540, 980], [1000, 740]]) {
       await application.evaluate(({ BrowserWindow }, size) => BrowserWindow.getAllWindows()[0].setSize(...size), size);
       await expect(page.locator('#library-confirm')).toBeInViewport();
-      if (!packaged) await page.screenshot({ path: test.info().outputPath(`library-${size[0]}.png`) });
+      if (!executable) await page.screenshot({ path: test.info().outputPath(`library-${size[0]}.png`) });
     }
     await expect(page.evaluate(params => window.forge.request('matchAction', params), { sessionId: state.id, promptId: state.prompt.id, choices: [forests[0].index, forests[0].index] })).rejects.toThrow(/duplicate/);
     await page.locator('#library-confirm').click();

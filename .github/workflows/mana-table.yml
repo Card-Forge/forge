@@ -1,0 +1,76 @@
+name: Mana Table
+
+on:
+  push:
+    paths:
+      - 'forge-desktop/**'
+      - 'forge-api/**'
+      - 'forge-core/**'
+      - 'forge-game/**'
+      - 'forge-ai/**'
+      - 'forge-gui/**'
+      - 'pom.xml'
+      - '.mvn/**'
+      - '.github/workflows/mana-table.yml'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'docs/Development/Mana-Table-*.md'
+  pull_request:
+    paths:
+      - 'forge-desktop/**'
+      - 'forge-api/**'
+      - 'forge-core/**'
+      - 'forge-game/**'
+      - 'forge-ai/**'
+      - 'forge-gui/**'
+      - 'pom.xml'
+      - '.mvn/**'
+      - '.github/workflows/mana-table.yml'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'docs/Development/Mana-Table-*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mana-table-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  desktop:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: forge-desktop
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: forge-desktop/package-lock.json
+      - name: Build and test engine adapter
+        working-directory: .
+        run: mvn -B -pl forge-api -am verify
+      - name: Install desktop dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check development setup
+        run: npm run doctor
+      - name: Check JavaScript syntax
+        run: npm run check
+      - name: Run unit tests
+        run: npm run test:unit
+      - name: Run real-engine tests
+        run: npm run test:engine
+      - name: Run desktop smoke tests
+        run: npm run test:smoke -- --reporter=line

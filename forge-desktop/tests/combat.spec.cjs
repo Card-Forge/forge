@@ -1,20 +1,11 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('combat panel assigns and removes real engine blocks, preserves scope, and shows multiplayer defenders', async () => {
   test.setTimeout(240000);
-  const appPath = path.resolve(__dirname, '..');
-  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `combat-${Date.now()}`) };
-  delete env.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, executable } = await launchDesktop('combat');
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
@@ -139,7 +130,7 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
       expect(bounds.lanesHeight).toBeGreaterThan(50);
       expect(bounds.scroll).toBeLessThanOrEqual(1);
     }
-    if (!packaged) await page.screenshot({ path: test.info().outputPath('assigning-blocks.png') });
+    if (!executable) await page.screenshot({ path: test.info().outputPath('assigning-blocks.png') });
     await panel.getByRole('button', { name: 'Table view' }).click();
     await expect(panel).toBeHidden();
     await page.locator('#combat-toggle').click();

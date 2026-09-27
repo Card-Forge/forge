@@ -1,23 +1,11 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
-const path = require('node:path');
-const fs = require('node:fs');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 
 test('card previews show readable details without blocking play or retaining stale cards', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `preview-ui-${Date.now()}`) };
-  delete environment.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const executable = packaged ? path.join(packaged.directory, packaged.executable) : process.env.MANA_TEST_EXECUTABLE;
-  const application = await electron.launch({
-    ...(executable ? { executablePath: executable } : {}),
-    args: executable ? [] : [appPath], env: environment
-  });
+  const { application, executable } = await launchDesktop('card-preview');
   const errors = [];
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     const preview = page.locator('#card-preview');
@@ -77,7 +65,11 @@ test('card previews show readable details without blocking play or retaining sta
     await assertPlacement(commander);
     if (!executable) await page.screenshot({ path: test.info().outputPath('card-preview.png') });
     const handCard = page.locator('#match-hand .match-card').first();
-    await handCard.hover();
+    // Leave the commander/playmat and approach the fan from its bottom edge.
+    // The hand deliberately yields to battlefield controls approached from above.
+    const arena = await page.locator('.match-arena').boundingBox();
+    await page.mouse.move(arena.x + arena.width / 2, arena.y + arena.height - 6);
+    await handCard.locator('.match-hand-cost').hover({ position: { x: 14, y: 10 } });
     await expect(title).toHaveText(await handCard.locator('.match-card-name').textContent());
     await assertPlacement(handCard);
     await handCard.click(); // The enlarged view must never intercept card actions.

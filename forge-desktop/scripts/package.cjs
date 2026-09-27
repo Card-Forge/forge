@@ -13,10 +13,12 @@ const stage = path.join(build, 'app');
 const resources = path.join(build, 'forge-res');
 const runtime = path.join(build, 'runtime');
 const jar = path.join(root, 'forge-api/target/forge-engine.jar');
-const javaHome = process.env.JAVA_HOME || 'C:/Program Files/BellSoft/LibericaJDK-17';
+const javaHome = process.env.JAVA_HOME;
+if (process.platform !== 'win32' || process.arch !== 'x64') throw new Error('The package script currently supports Windows x64 only.');
+if (!javaHome || !fs.existsSync(path.join(javaHome, 'bin', 'jlink.exe'))) throw new Error('Set JAVA_HOME to a JDK 17+ installation containing bin/jlink.exe.');
 if (!fs.existsSync(jar)) throw new Error('Build forge-api with Maven before packaging.');
 fs.mkdirSync(stage, { recursive: true });
-for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'deck-sources.cjs', 'renderer']) {
+for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'runtime.cjs', 'deck-sources.cjs', 'renderer']) {
   fs.cpSync(path.join(appSource, file), path.join(stage, file), { recursive: true });
 }
 const metadata = JSON.parse(fs.readFileSync(path.join(appSource, 'package.json'), 'utf8'));
@@ -45,7 +47,7 @@ if (result.status !== 0) throw new Error('Could not build the Java runtime.');
   for (const packaged of packages) {
     fs.copyFileSync(path.join(root, 'LICENSE'), path.join(packaged, 'FORGE-LICENSE.txt'));
     fs.copyFileSync(path.join(appSource, 'BETA.md'), path.join(packaged, 'START-HERE.md'));
-    fs.writeFileSync(path.join(packaged, 'SOURCE.txt'), 'Source: https://github.com/proflayton/forge/tree/feature/desktop-beta\nForge upstream: https://github.com/Card-Forge/forge\nForge is GPL-3.0-or-later.\nElectron and Java notices accompany their bundled runtimes.\n');
+    fs.writeFileSync(path.join(packaged, 'SOURCE.txt'), 'Source: https://github.com/proflayton/Mana-Table/tree/feature/desktop-beta\nForge upstream: https://github.com/Card-Forge/forge\nForge is GPL-3.0-or-later.\nElectron and Java notices accompany their bundled runtimes.\n');
     if (previousBeta) {
       for (const folder of ['decks', 'art']) {
         const previous = path.join(previousBeta.directory, 'UserData', folder);

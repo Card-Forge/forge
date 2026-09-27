@@ -1,142 +1,78 @@
-# Contributing to Forge
+# Contributing to Mana Table
 
-[Official repo](https://github.com/Card-Forge/forge.git).
+Start with the [desktop setup guide](forge-desktop/README.md), then read the
+[architecture map](docs/Development/Mana-Table-Architecture.md). The working
+integration branch is **`feature/desktop-beta`**; base feature branches and pull
+requests on it until the repository adopts another integration branch.
 
-## Contents
+## Pick the right layer
 
-- [Requirements / Tools](#requirements--tools)
-- [Project Quick Setup](#project-quick-setup)
-  - [IntelliJ](#intellij)
-  - [Eclipse](#eclipse)
-  - [Windows](#windows)
-  - [Linux / Mac OSX](#linux--mac-osx)
-  - [Android Platform](#android-platform)
-  - [Proguard update](#proguard-update)
-- [Card Scripting](#card-scripting)
-- [General Notes](#general-notes)
-- [Using AI coding agents](#using-ai-coding-agents)
-- [Project Hierarchy](#project-hierarchy)
+- **UI and interaction:** `forge-desktop/renderer`. Keep game decisions in the
+  engine; the renderer displays snapshots and answers current prompts.
+- **Desktop services:** `forge-desktop/main.cjs`, `preload.cjs`, and the small
+  CommonJS modules beside them. These own process startup, files, and permitted IPC.
+- **API and visibility:** `forge-api/src/main/java/forge/api`. Extend the adapter
+  when a UI needs new projected state or an engine-controlled interaction.
+- **Card rules and AI:** the existing Forge modules and `forge-gui/res`. Consult
+  the [upstream notes](docs/upstream/CONTRIBUTING.md) and card-scripting guides.
 
-## Requirements / Tools
+Keep unrelated upstream formatting and resource changes out of focused PRs.
+Follow the style of the file being changed: Java 17 and the Maven checks for Java;
+plain JavaScript/CSS for the renderer; CommonJS for Electron and Node tools.
+Do not add a framework or broad formatting migration as incidental cleanup.
 
-- your favourite Java IDE (IntelliJ, Eclipse, VSCodium, Emacs, Vi...)
-- Java JDK 17 or later
-- Git
-- Git client (optional)
-- [Maven](https://maven.apache.org/install.html)
-- GitHub account
-- Libgdx (optional: familiarity with this library is helpful for mobile platform development)
-- Android SDK (optional: for Android releases)
-- RoboVM (optional: for iOS releases) (TBD: Current status of support by libgdx)
+## Work on a change
 
-## Project Quick Setup
+```sh
+git switch feature/desktop-beta
+git pull --ff-only
+git switch -c feature/describe-your-change
+```
 
-- Login into GitHub with your user account and fork the project
-- Clone your forked project to your local machine
-- Go to the project location on your machine. Run Maven to download all dependencies and build a snapshot.
-  - Example for Windows & Linux: `mvn -U -B clean -P windows-linux install`
+Describe the behavior being improved. For a game regression, retain a small deck
+list and reproduction sequence with the format, table size, relevant cards, phase,
+and pending choice. For visual changes, capture the relevant state at 1000×740
+and a larger window; check keyboard access and reduced motion when affected.
 
-### IntelliJ
+Run checks appropriate to the change. The [testing guide](docs/Development/Mana-Table-Testing.md)
+separates quick checks, real-engine tests, and Electron interactions. New tests
+should catch a meaningful behavior or regression, rather than restating the
+implementation. Use the shared helpers under `forge-desktop/tests/support` so
+tests use isolated data and the same Java resolution as the app.
 
-IntelliJ is the recommended IDE for Forge development. Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
+Never commit generated packages, local profiles, caches, logs, or test output.
+They are already ignored. Use `FORGE_USER_DATA` for a disposable manual-test
+profile instead of experimenting on your saved decks.
 
-### Eclipse
+## Review expectations
 
-Eclipse includes Maven integration so a separate install is not necessary.
-Google no longer supports Android SDK releases for Eclipse.
+A PR should explain the concrete problem, resulting behavior, and checks run.
+Include screenshots for visible changes and mention remaining limitations.
+Update the relevant documentation when changing setup, IPC, environment variables,
+saved data, or packaging. Do not change persisted schemas or the action protocol
+without describing compatibility and migration behavior.
 
-### Windows
+Keep prompt/session checks and hidden-information filtering intact. A visual ID
+is not an action key; a card entering a hidden zone must not remain inspectable.
+See the [API contract](forge-api/README.md) for the full integration rules.
 
-TBD
+If an AI coding assistant substantially helped produce a contribution, identify
+that in the PR body or a co-author attribution, following the upstream policy.
+The contributor remains responsible for understanding and verifying the change.
 
-### Linux / Mac OSX
+## Report an issue
 
-TBD
+Use this fork's issue tracker for Mana Table UI, host, and API issues. Include the
+beta version/commit, OS, window size, deck format, number of players, reproduction,
+and expected versus actual behavior. Engine diagnostics are in `engine.log`
+inside the active data directory; share the relevant excerpt and a minimal deck.
+See [data locations and troubleshooting](forge-desktop/README.md#data-and-troubleshooting).
 
-### Android Platform
+## Keep upstream changes manageable
 
-In IntelliJ, if the SDK Manager is not already running, go to Tools > Android > Android SDK Manager. Install the following options / versions:
-
-- Android SDK Build-tools 35.0.0
-- Android 15 (API 35) SDK Platform
-
-> [!CAUTION]
-> Be careful about using unsupported api calls e.g. ``StringBuilder.isEmpty()``. Google's documentation for these is sometimes inaccurate.
-
-### Proguard update
-
-Standalone Proguard 7.6.0 is included with the project (proguard.jar) under forge-gui-android > tools and supports up to Java 23 (latest android uses Java 17).
-
-## Card Scripting
-
-Visit [this page](https://github.com/Card-Forge/forge/wiki/Card-scripting-API) for information on scripting.
-
-Card scripting resources are found in the forge-gui/res/ path.
-
-## General Notes
-
-- Art files need to be copyright-free and they should be in the public domain. Credits and attribution should be included in [Credit and Thanks](https://github.com/Card-Forge/forge/wiki/Credit-and-Thanks).
-- If your contribution adds new UI elements consider the [UI guidelines](https://github.com/Card-Forge/forge/wiki/UI-Guidelines).
-
-## Using AI coding agents
-
-If you use an AI agent (e.g. Claude Code, OpenAI Codex) to substantially code a contribution to Forge please identify this when you make a pull request, either by including the coding agent as a co-author or by noting in the body of the request.
-
-Agents have a tendency to add unnecessary new unit or wiring tests to the CI suite. This should be avoided unless necessary to catch potential future integration regressions.
-
-## Project Hierarchy
-
-Forge is divided into 4 primary projects with additional projects that target specific platform releases. The primary projects are:
-
-- forge-ai
-- forge-core
-- forge-game
-- forge-gui
-
-The platform-specific projects are:
-
-- forge-gui-android
-- forge-gui-desktop
-- forge-gui-ios
-- forge-gui-mobile
-- forge-gui-mobile-dev
-
-#### forge-ai
-
-The forge-ai project contains the computer opponent logic for gameplay. It includes decision-making algorithms for specific abilities, cards and turn phases.
-
-#### forge-core
-
-The forge-core project contains the core game engine, card mechanics, rules engine, and fundamental game logic. It includes the implementation of Magic: The Gathering rules, card interactions, and the game state management system.
-
-#### forge-game
-
-The forge-game project handles the game session management, player interactions, and game flow control. It includes implementations for multiplayer support, game modes, matchmaking, and game state persistence. This module bridges the core game engine with the user interface and networking components.
-
-#### forge-gui
-
-The forge-gui project contains the user interface components and rendering logic for the game. It includes the main game window, card displays, player interactions, and the scripting resource definitions in the res/ path.
-
-#### forge-gui-android
-
-Libgdx-based backend targeting Android. Requires Android SDK and relies on forge-gui-mobile for GUI logic.
-
-#### forge-gui-desktop
-
-Java Swing based GUI targeting desktop machines.
-
-Screen layout and game logic revolving around the GUI is found here. For example, the overlay arrows (when enabled) that indicate attackers and blockers, or the targets of the stack are defined and drawn by this.
-
-#### forge-gui-ios
-
-Libgdx-based backend targeting iOS. Relies on forge-gui-mobile for GUI logic.
-
-#### forge-gui-mobile
-
-Mobile GUI game logic utilizing [libgdx](https://libgdx.badlogicgames.com/) library. Screen layout and game logic revolving around the GUI for the mobile platforms is found here.
-
-#### forge-gui-mobile-dev
-
-Libgdx backend for desktop development for mobile backends. Utilizes LWJGL. Relies on forge-gui-mobile for GUI logic.
-
-#### forge-installer
+`origin` is this fork (or your personal fork). An `upstream` remote may point to
+`https://github.com/Card-Forge/forge.git`. Keep shared-engine patches small and
+document why the adapter needs them. Do not rewrite shared branch history during
+upstream integration. The module map and existing adapter touchpoints are in the
+architecture guide. Preserve the [license](LICENSE), Forge attribution, and
+third-party notices.

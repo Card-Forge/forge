@@ -1,20 +1,12 @@
-const { test, expect, _electron: electron } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
+const { launchDesktop } = require('./support/desktop.cjs');
 const path = require('node:path');
-const fs = require('node:fs');
 
 test('match table plays cards through engine prompts and resumes after deck browsing', async () => {
-  const appPath = path.resolve(__dirname, '..');
-  const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
-    FORGE_USER_DATA: path.join(appPath, 'test-results', `table-${Date.now()}`) };
-  delete environment.ELECTRON_RUN_AS_NODE;
-  const packaged = process.env.MANA_TEST_PACKAGED === '1'
-    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
-  const application = await electron.launch({ args: packaged ? [] : [appPath], env: environment,
-    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  const { application, appPath, executable } = await launchDesktop('match');
   const errors = [];
   try {
     const page = await application.firstWindow();
-    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     page.on('pageerror', error => errors.push(error.message));
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.evaluate(() => {
@@ -137,7 +129,7 @@ test('match table plays cards through engine prompts and resumes after deck brow
     await page.locator('#match-human .match-zone summary').last().click();
     await expect(page.locator('.match-zone[open]')).toHaveCount(1);
     await page.locator('#match-human .match-zone summary').last().click();
-    if (!packaged) await page.screenshot({ path: path.join(appPath, 'test-results/match-table.png'), fullPage: true });
+    if (!executable) await page.screenshot({ path: path.join(appPath, 'test-results/match-table.png'), fullPage: true });
     await page.locator('#match-back').click();
     await expect(page.locator('#deck-name')).toHaveValue('Feedback check');
     await expect(page.locator('#main-count')).toHaveText('60');

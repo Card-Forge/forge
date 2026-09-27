@@ -3,20 +3,10 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const fs = require('node:fs');
 const { once } = require('node:events');
-const { EngineClient } = require('../engine-client.cjs');
-const root = path.resolve(__dirname, '../..');
-const data = path.join(root, 'forge-desktop/test-results', `engine-${Date.now()}`);
-function start() {
-  return new EngineClient({ java: process.env.FORGE_JAVA || 'C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',
-    jar: path.join(root, 'forge-api/target/forge-engine.jar'), resources: path.join(root, 'forge-gui/res'),
-    data: path.join(data, 'decks'), log: path.join(data, 'engine.log') });
-}
-async function ready(engine) {
-  while (engine.status.state !== 'ready') {
-    if (engine.status.state === 'error') throw new Error(engine.status.message);
-    await once(engine, 'status');
-  }
-}
+const { testProfile, startEngine, ready } = require('./support/engine.cjs');
+const data = testProfile('engine');
+const start = () => startEngine(data);
+
 test('real Forge engine: persistence, revisions, import, export and practice', { timeout: 120000 }, async () => {
   let engine = start();
   try {
