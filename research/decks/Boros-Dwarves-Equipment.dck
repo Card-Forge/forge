@@ -1,0 +1,31 @@
+[metadata]
+Name=Boros Dwarves Equipment Test
+Deck Type=constructed
+
+[Main]
+4 Sacred Foundry|EOE
+4 Dáin's Company|HOB
+4 Inspiring Vantage|OTJ
+4 Dwarven Mauler|HOB
+4 Leyline Axe|FDN
+4 Kíli the Resourceful|HOB
+4 Lavaspur Boots|OTJ
+3 Plains|FIN
+2 Cavern of Souls|LCI
+2 Raubahn, Bull of Ala Mhigo|FIN
+4 Thorin, Mountain-king|HOB
+4 The Lonely Mountain|HOB
+4 Warden of the Inner Sky|LCI
+2 Basilisk Collar|FDN
+4 Dragonfire Blade|TDM
+1 Multiversal Passage|SPM
+4 Sunbillow Verge|DFT
+2 Doc Ock's Tentacles|SPM
+
+[Sideboard]
+2 Chainsaw|DSK
+3 Erode|SOS
+2 Shattered Acolyte|SOS
+2 The Queen of Dale|HOB
+2 Voice of Victory|TDM
+4 Rest in Peace|BIG
