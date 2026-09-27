@@ -35,7 +35,7 @@ import forge.util.TextUtil;
 import forge.util.WordUtil;
 import forge.util.storage.IStorage;
 
-public class SimulateMatch {
+// Connectivity test: harmless source edit by ChatGPT.\npublic class SimulateMatch {
     public static void simulate(String[] args) {
         FModel.initialize(null, null);
 
