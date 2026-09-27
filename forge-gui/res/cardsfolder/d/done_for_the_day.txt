@@ -1,8 +1,8 @@
 Name:Done for the Day
 ManaCost:2 G
 Types:Enchantment
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Employee+YouCtrl,Permanent.Performer+YouCtrl,Permanent.Robot+YouCtrl | Execute$ TrigCharm | TriggerDescription$ At the beginning of your end step, if you control an Employee, a Performer, or a Robot, ABILITY If you control all three, you may put a sticker on a nonland permanent you own.
-SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ 1 | Choices$ DBTicket,DBTreasure | SubAbility$ DBEmployee
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Employee+YouCtrl,Permanent.Performer+YouCtrl,Permanent.Robot+YouCtrl | Execute$ TrigChoice | TriggerDescription$ At the beginning of your end step, if you control an Employee, a Performer, or a Robot, ABILITY If you control all three, you may put a sticker on a nonland permanent you own.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ DBTicket,DBTreasure | SubAbility$ DBEmployee
 SVar:DBTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1 | SpellDescription$ You get {TK}.
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
 SVar:DBEmployee:DB$ Branch | BranchConditionSVar$ Employees | TrueSubAbility$ DBPerformer

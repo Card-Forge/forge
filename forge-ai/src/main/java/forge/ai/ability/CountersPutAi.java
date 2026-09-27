@@ -145,13 +145,6 @@ public class CountersPutAi extends CountersAi {
         }
         final String type = types[0];
 
-        // A ticket is a resource with no downside and nothing to aim: the AI should always take
-        // one it is offered rather than decline for want of a target (CR 123.3c).
-        if ("TICKET".equals(type) && !sa.usesTargeting()
-                && !AbilityUtils.getDefinedPlayers(source, sa.getParamOrDefault("Defined", "You"), sa).isEmpty()) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
                 && sa.hasParam("MaxFromEffect");

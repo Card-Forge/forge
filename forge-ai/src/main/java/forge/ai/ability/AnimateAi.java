@@ -242,15 +242,8 @@ public class AnimateAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
-    /**
-     * Whether a pure power and toughness setting effect is worth taking. It sets them rather than
-     * adding to them, so the same ability is a buff or a shrink depending on the board - and one
-     * that reads its numbers off the board can set them to 0/0. Only its own creatures and only a
-     * pure P/T change are judged here: anything that also hands out types, keywords or abilities
-     * can be worth having at any size, and shrinking somebody else's creature is the point.
-     */
+    // an effect that only sets P/T can shrink the AI's own creature
     private static boolean worthAnimating(final Player ai, final SpellAbility sa) {
-        // Whatever follows may be the reason the ability is worth taking at all.
         if (sa.getSubAbility() != null) {
             return true;
         }

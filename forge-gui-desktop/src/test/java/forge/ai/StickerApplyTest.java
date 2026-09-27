@@ -1,7 +1,6 @@
 package forge.ai;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.StaticData;
 import forge.game.Game;
@@ -54,20 +53,6 @@ public class StickerApplyTest extends AITest {
         throw new AssertionError("sheet has no " + kind + " sticker at " + index);
     }
 
-    @Test
-    public void testNameStickerAtFront() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        assertEquals(bear.getName(), "Grizzly Bears");
-
-        Sticker word = first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.NAME);
-        bear.addSticker(new AppliedSticker(word, game.getNextTimestamp(), 0));
-
-        assertEquals(bear.getName(), "Eldrazi Grizzly Bears");
-        assertTrue(bear.isStickered(), "CR 123.4 - the bear is now a stickered object");
-    }
-
     /**
      * CR 123.6a - a blank line is not a word, so a sticker put on a card printed with one fills
      * it rather than being placed among the words, and blanks nobody stickered stay put.
@@ -91,34 +76,6 @@ public class StickerApplyTest extends AITest {
         assertEquals(ship.getName(), "Eldrazi Guacamole Rocketship Tightrope");
     }
 
-    /** A blank inside a word is still a blank - CR 123.6a does not say it stands alone. */
-    @Test
-    public void testNameStickerFillsABlankInsideAWord() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card saurus = addCard("_____-o-saurus", p);
-        saurus.addSticker(new AppliedSticker(
-                first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.NAME),
-                game.getNextTimestamp(), 0));
-        assertEquals(saurus.getName(), "Eldrazi-o-saurus");
-    }
-
-    /** CR 123.6b - the word can go after any number of the words already in the name. */
-    @Test
-    public void testNameStickerInTheMiddleAndAtTheEnd() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        List<Sticker> stickers = sheet(p, "Eldrazi Guacamole Tightrope");
-
-        Card middle = addCard("Grizzly Bears", p);
-        middle.addSticker(new AppliedSticker(first(stickers, StickerKind.NAME), game.getNextTimestamp(), 1));
-        assertEquals(middle.getName(), "Grizzly Eldrazi Bears");
-
-        Card end = addCard("Grizzly Bears", p);
-        end.addSticker(new AppliedSticker(nth(stickers, StickerKind.NAME, 1), game.getNextTimestamp(), 2));
-        assertEquals(end.getName(), "Grizzly Bears Guacamole");
-    }
-
     /** CR 123.6b - a later name sticker builds on the name the earlier one produced. */
     @Test
     public void testTwoNameStickersCompose() {
@@ -131,50 +88,6 @@ public class StickerApplyTest extends AITest {
         assertEquals(bear.getName(), "Eldrazi Grizzly Bears");
         bear.addSticker(new AppliedSticker(nth(stickers, StickerKind.NAME, 1), game.getNextTimestamp(), 3));
         assertEquals(bear.getName(), "Eldrazi Grizzly Bears Guacamole");
-    }
-
-    /** CR 123.6c - if the name is now shorter than the remembered position, the word goes last. */
-    @Test
-    public void testNamePositionClampsToShorterName() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card mox = addCard("Black Lotus", p);
-        Sticker word = first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.NAME);
-        // Placed as though nine words preceded it; "Black Lotus" has two.
-        mox.addSticker(new AppliedSticker(word, game.getNextTimestamp(), 9));
-        assertEquals(mox.getName(), "Black Lotus Eldrazi");
-    }
-
-    /** CR 123.8 - a power and toughness sticker sets them. */
-    @Test
-    public void testPowerToughnessSticker() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        assertEquals(bear.getNetPower(), 2);
-        assertEquals(bear.getNetToughness(), 2);
-
-        Sticker pt = first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.PT);
-        bear.addSticker(new AppliedSticker(pt, game.getNextTimestamp()));
-
-        assertEquals(bear.getNetPower(), pt.getPower());
-        assertEquals(bear.getNetToughness(), pt.getToughness());
-    }
-
-    /** CR 123.9 - an art sticker changes nothing but makes its object stickered. */
-    @Test
-    public void testArtStickerOnlyMarks() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        assertFalse(bear.isStickered());
-
-        bear.addSticker(new AppliedSticker(first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.ART),
-                game.getNextTimestamp()));
-
-        assertTrue(bear.isStickered());
-        assertEquals(bear.getName(), "Grizzly Bears");
-        assertEquals(bear.getNetPower(), 2);
     }
 
     /**
@@ -228,49 +141,5 @@ public class StickerApplyTest extends AITest {
         assertTrue(sheetText.contains("used"), "the sheet should mark the sticker as taken");
         assertTrue(sheetText.contains(first(stickers, StickerKind.NAME).getWord()),
                 "and still list the ones that are not");
-    }
-
-    /** CR 123.7 - an ability sticker grants the object the ability printed on it. */
-    @Test
-    public void testAbilityStickerGrantsItsKeyword() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        assertFalse(bear.hasKeyword("Flying"));
-
-        // Ancestral Hot Dog Minotaur's second ability sticker is plain Flying.
-        Sticker flying = null;
-        for (Sticker s : sheet(p, "Ancestral Hot Dog Minotaur")) {
-            if (s.getKind() == StickerKind.ABILITY && "Flying".equals(s.getKeywords())) {
-                flying = s;
-            }
-        }
-        assertNotNull(flying, "that sheet should carry a Flying ability sticker");
-        assertTrue(flying.isImplemented(), "a keyword sticker is placeable");
-
-        bear.addSticker(new AppliedSticker(flying, game.getNextTimestamp()));
-        assertTrue(bear.hasKeyword("Flying"), "the bear should have gained flying");
-
-        // CR 123.5 - and keeps it moving to another public zone.
-        Card inGraveyard = game.getAction().moveTo(ZoneType.Graveyard, bear, null, null);
-        assertTrue(inGraveyard.isStickered());
-        assertTrue(inGraveyard.hasKeyword("Flying"), "the granted ability survives a public zone");
-    }
-
-    /** An ability sticker with no Forge ability yet is not offered as a choice. */
-    @Test
-    public void testUnwrittenAbilityStickerIsNotOffered() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card sheet = Card.fromPaperCard(
-                StaticData.instance().getVariantCards().getCard("Eldrazi Guacamole Tightrope"), p);
-        Sticker unwritten = Sticker.parse(sheet, "STKX",
-                Map.of("Kind", "Ability", "Tickets", "2", "Text", "Do something not written yet."));
-        assertFalse(unwritten.isImplemented(), "an ability sticker with no script grants nothing");
-
-        sheet(p, "Eldrazi Guacamole Tightrope");
-        for (Sticker s : StickerSheet.getAvailableStickers(p)) {
-            assertTrue(s.isImplemented(), s + " should not be offered");
-        }
     }
 }

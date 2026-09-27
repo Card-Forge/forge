@@ -722,13 +722,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa, boolean isOptional) {
-        // Scored where the AI scores what to put a sticker on, so the two agree.
         return PutStickerAi.chooseSticker(options, target, sa, isOptional);
     }
 
     @Override
     public int chooseStickerNamePosition(Sticker sticker, Card target) {
-        // Position only changes the printed name, so put the word at the front.
         return 0;
     }
 

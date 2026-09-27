@@ -265,8 +265,7 @@ public class GameAction {
             if (c.hasPerpetual()) {
                 copied.setPerpetual(c);
             }
-            // CR 123.5 - stickers are kept on a move to another public zone, and are not kept
-            // on a move to a hidden one.
+            // CR 123.5
             if (c.isStickered() && !zoneTo.getZoneType().isHidden()) {
                 copied.setStickers(c);
             }
@@ -583,8 +582,6 @@ public class GameAction {
             c.cleanupExiledWith();
         }
 
-        // Now that the card is in its new zone: a sticker it kept is out of the pool, and one it
-        // dropped on the way to a hidden zone is back in it (CR 123.5).
         if (c.isStickered() || copied.isStickered()) {
             Card.refreshSheetViews(copied.getOwner());
         }

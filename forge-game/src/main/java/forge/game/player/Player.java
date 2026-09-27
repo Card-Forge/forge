@@ -3037,14 +3037,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!attractionDeck.isEmpty())
             attractionDeck.shuffle();
 
-        // Sticker sheets - CR 123.2a: reveal them all, then three are chosen at random.
-        // Only the chosen three are ever accessible (CR 123.2c), so the rest are not kept.
+        // Sticker sheets - CR 123.2a/c: only the three chosen are kept
         PlayerZone stickerSheets = getZone(ZoneType.StickerSheets);
         for (IPaperCard cp : Aggregates.random(registeredPlayer.getStickerSheets(), DeckFormat.CHOSEN_STICKER_SHEETS)) {
             Card sheet = Card.fromPaperCard(cp, this);
             sheet.setCollectible(false);
             stickerSheets.add(sheet);
         }
+        Card.refreshSheetViews(this);
 
         // Contraptions
         PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);

@@ -253,17 +253,10 @@ public abstract class PlayerController {
 
     public abstract String chooseSector(Card assignee, String ai, List<String> sectors);
 
-    /**
-     * CR 123.3 - choose one of the stickers this player has access to, to put on the given
-     * object. Returns null to decline when the choice is optional.
-     */
     public abstract Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa,
             boolean isOptional);
 
-    /**
-     * CR 123.6b - choose how many of the object's words precede the word a name sticker adds.
-     * The answer ranges from 0 (first) to the number of words in the name (last).
-     */
+    // CR 123.6b - how many of the object's words precede the sticker's word
     public abstract int chooseStickerNamePosition(Sticker sticker, Card target);
     public final String chooseSector(Card assignee, String ai) {
         final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");

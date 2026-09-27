@@ -54,8 +54,7 @@ public enum GamePieceType {
      */
     DUNGEON,
     /**
-     * A sticker sheet, which is revealed at the start of the game and
-     * stays revealed, supplying the stickers its owner has access to.
+     * A sticker sheet, revealed at the start of the game.
      */
     STICKER_SHEET
 }

@@ -2421,8 +2421,7 @@ public class ComputerUtil {
         final Game game = ai.getGame();
         String chosen = "";
         if (kindOfType.equals("Letter")) {
-            // Choosing a letter is only ever worth anything for what it matches, and the only
-            // card that asks counts the name stickers on itself that begin with it.
+            // _____ _____ Rocketship counts its own name stickers starting with the letter
             Map<String, Integer> begins = Maps.newHashMap();
             for (AppliedSticker applied : sa.getHostCard().getStickers()) {
                 String letters = applied.getSticker().getLetters();

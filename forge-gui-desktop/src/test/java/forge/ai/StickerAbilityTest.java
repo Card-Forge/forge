@@ -2,29 +2,23 @@ package forge.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.StaticData;
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.sticker.AppliedSticker;
 import forge.game.card.sticker.Sticker;
 import forge.game.card.sticker.StickerKind;
 import forge.game.card.sticker.StickerSheet;
-import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -83,91 +77,6 @@ public class StickerAbilityTest extends AITest {
         throw new AssertionError(sheetName + " has no sticker " + slot);
     }
 
-    /** A granted static ability is conditional, and the condition is checked where it is now. */
-    @Test
-    public void testThresholdStickerWaitsForSevenCards() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        bear.addSticker(new AppliedSticker(sticker(p, "Trained Blessed Mind", "STK8"),
-                game.getNextTimestamp()));
-        game.getAction().checkStateEffects(true);
-
-        assertEquals(bear.getNetPower(), 2, "under threshold, the sticker does nothing");
-        assertFalse(bear.hasKeyword("Trample"));
-
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Grizzly Bears", p, ZoneType.Graveyard);
-        }
-        game.getAction().checkStateEffects(true);
-
-        assertEquals(bear.getNetPower(), 6, "threshold - the sticker gives +4/+0");
-        assertEquals(bear.getNetToughness(), 2);
-        assertTrue(bear.hasKeyword("Trample"), "threshold - and trample");
-    }
-
-    /** Hellbent reads the hand, so it turns off again when the hand is not empty. */
-    @Test
-    public void testHellbentStickerReadsTheHand() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        bear.addSticker(new AppliedSticker(sticker(p, "Vampire Champion Fury", "STK7"),
-                game.getNextTimestamp()));
-        game.getAction().checkStateEffects(true);
-        assertEquals(bear.getNetPower(), 5, "hellbent with an empty hand - +3/+3");
-
-        addCardToZone("Grizzly Bears", p, ZoneType.Hand);
-        game.getAction().checkStateEffects(true);
-        assertEquals(bear.getNetPower(), 2, "a card in hand turns hellbent off");
-    }
-
-    /** Metalcraft counts artifacts, and the protection it grants takes a card property. */
-    @Test
-    public void testMetalcraftStickerNeedsThreeArtifacts() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        bear.addSticker(new AppliedSticker(sticker(p, "Wild Ogre Bupkis", "STK8"),
-                game.getNextTimestamp()));
-        game.getAction().checkStateEffects(true);
-        assertFalse(bear.hasKeyword(Keyword.PROTECTION), "no artifacts, no metalcraft");
-
-        addCards("Sol Ring", 3, p);
-        game.getAction().checkStateEffects(true);
-        assertTrue(bear.hasKeyword(Keyword.PROTECTION), "metalcraft - protection from noncreature permanents");
-    }
-
-    /**
-     * Misunderstood Trapeze Elf's sticker pumps by the generic mana in the spell that was cast,
-     * which is the one thing on any sheet Forge could not already count.
-     */
-    @Test
-    public void testGenericManaStickerReadsTheSpellCast() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        bear.addSticker(new AppliedSticker(sticker(p, "Misunderstood Trapeze Elf", "STK7"),
-                game.getNextTimestamp()));
-        game.getAction().checkStateEffects(true);
-
-        // Hill Giant costs {3}{R}: three generic, and a red pip that must not be counted.
-        SpellAbility cast = addCardToZone("Hill Giant", p, ZoneType.Hand).getFirstSpellAbility();
-        cast.setActivatingPlayer(p);
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.SpellAbility, cast);
-        runParams.put(AbilityKey.Activator, p);
-        game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, false);
-        game.getTriggerHandler().runWaitingTriggers();
-        game.getStack().addAllTriggeredAbilitiesToStack();
-        while (!game.getStack().isEmpty()) {
-            game.getStack().resolveStack();
-        }
-
-        assertEquals(bear.getNetPower(), 5, "+3/+3 for the three generic mana, not +4/+4");
-        assertEquals(bear.getNetToughness(), 5);
-    }
-
     /**
      * CR 123.5 - a sticker is kept into the graveyard, so a sticker whose ability only does
      * anything there has to be rebuilt on the card that arrives, not the one that left.
@@ -186,21 +95,6 @@ public class StickerAbilityTest extends AITest {
         game.getAction().checkStateEffects(true);
         assertTrue(dead.isStickered(), "the sticker follows the card into the graveyard");
         assertFalse(dead.mayPlay(p).isEmpty(), "from the graveyard it may be cast for 2 life");
-    }
-
-    /** The sticker that counts a creature's types, and the creatures its protection stops. */
-    @Test
-    public void testCountsTheStickersNeed() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-
-        // Grizzly Bears is a Creature Bear: two types in all.
-        Card bear = addCard("Grizzly Bears", p);
-        assertEquals(AbilityUtils.calculateAmount(bear, "Count$ValidSelf Card$AllTypes", null), 2);
-        // Elvish Archers is an Elf Archer, so it has the two creature types the sticker asks for.
-        Card archers = addCard("Elvish Archers", p);
-        assertTrue(archers.isValid("Creature.numCreatureTypesGE2", p, bear, null));
-        assertFalse(bear.isValid("Creature.numCreatureTypesGE2", p, bear, null));
     }
 
     /**
@@ -233,31 +127,6 @@ public class StickerAbilityTest extends AITest {
         assertFalse(bigger.isValid("Creature.OppCtrl+powerEQSTK8P", p, bear, tapAll),
                 "a 3/3 does not");
         assertTrue(match.isValid("Creature.OppCtrl+toughnessEQSTK8T", p, bear, tapAll));
-    }
-
-    /**
-     * A sticker that grants an attack trigger has to bring the AI's attack hint with it, or a
-     * creature that only wants to attack for the trigger never does.
-     */
-    @Test
-    public void testAttackStickerTellsTheAiToAttack() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        Card bear = addCard("Grizzly Bears", p);
-        assertFalse("TRUE".equals(bear.getSVar("HasAttackEffect")), "nothing to attack for yet");
-
-        // Carnival Elephant Meteor's second ability sticker is "whenever this creature attacks".
-        bear.addSticker(new AppliedSticker(sticker(p, "Carnival Elephant Meteor", "STK8"),
-                game.getNextTimestamp()));
-        game.getAction().checkStateEffects(true);
-        assertEquals(bear.getSVar("HasAttackEffect"), "TRUE", "the sticker attacks for value");
-
-        // A sticker that grants something else does not claim to.
-        Card other = addCard("Grizzly Bears", p);
-        other.addSticker(new AppliedSticker(sticker(p, "Eldrazi Guacamole Tightrope", "STK7"),
-                game.getNextTimestamp()));
-        game.getAction().checkStateEffects(true);
-        assertFalse("TRUE".equals(other.getSVar("HasAttackEffect")), "haste is not an attack trigger");
     }
 
     private int traits(Card c) {

@@ -1403,8 +1403,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa, boolean isOptional) {
         String title = localizer.getMessage("lblChooseSticker", CardTranslation.getTranslatedName(target.getName()));
-        // The sheets print the ticket cost first, and what the sticker does after it, so the
-        // list reads the way the sheet the player is looking at does.
         final List<String> labels = Lists.newArrayList();
         final List<Integer> indices = Lists.newArrayList();
         for (Sticker s : options) {
@@ -1412,7 +1410,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     : StringUtils.repeat("{TK}", s.getTickets()) + " - " + s.getDescription());
             indices.add(indices.size());
         }
-        // A remote player's prompt is serialized, and a sticker is not, so choose by position.
         FSerializableFunction<Integer, String> display = labels::get;
         Integer chosen;
         if (isOptional) {
@@ -1426,11 +1423,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public int chooseStickerNamePosition(Sticker sticker, Card target) {
-        // CR 123.6a - a blank is not a word, so there is nothing to choose: the word goes there.
+        // CR 123.6a
         if (StringUtils.isBlank(target.getName()) || target.stickerWouldFillBlank()) {
             return 0;
         }
-        // CR 123.6b - otherwise offer every name the sticker could produce and let them pick.
         int words = target.getName().split(" ").length;
         final List<Integer> positions = Lists.newArrayList();
         final List<String> names = Lists.newArrayList();

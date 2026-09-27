@@ -28,7 +28,6 @@ public enum ZoneType implements ITranslatable {
     AttractionDeck(true, "lblAttractionDeckZone", TrackableProperty.AttractionDeck),
     Junkyard(false, "lblJunkyardZone", TrackableProperty.Junkyard),
     ContraptionDeck(true, "lblContraptionDeckZone", TrackableProperty.ContraptionDeck),
-    // Sticker sheets are revealed at the start of the game and stay revealed (CR 123.2c).
     StickerSheets(false, "lblStickerSheetsZone", TrackableProperty.StickerSheets),
     //Scrapyard is like the Junkyard but for contraptions; just going to recycle the Junkyard for this.
     Subgame(true, "lblSubgameZone"),

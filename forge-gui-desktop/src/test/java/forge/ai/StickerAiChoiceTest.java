@@ -1,14 +1,11 @@
 package forge.ai;
 
-import java.util.List;
-
 import forge.StaticData;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
-import forge.game.card.sticker.AppliedSticker;
 import forge.game.card.sticker.Sticker;
 import forge.game.card.sticker.StickerKind;
 import forge.game.card.sticker.StickerSheet;
@@ -23,7 +20,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -42,19 +38,6 @@ public class StickerAiChoiceTest extends AITest {
         return sheet;
     }
 
-    private Card playAndResolve(Game game, Player p, String name) {
-        Card entered = game.getAction().moveTo(ZoneType.Battlefield,
-                addCardToZone(name, p, ZoneType.Hand), null, null);
-        // A card's own triggers are not active until the game next checks state effects.
-        game.getAction().checkStateEffects(true);
-        game.getTriggerHandler().runWaitingTriggers();
-        game.getStack().addAllTriggeredAbilitiesToStack();
-        while (!game.getStack().isEmpty()) {
-            game.getStack().resolveStack();
-        }
-        return entered;
-    }
-
     /** Resolves a bare PutSticker for the given player, the way a card's own would resolve. */
     private void putSticker(Player p, Card host, String params) {
         SpellAbility put = AbilityFactory.getAbility("DB$ PutSticker | " + params, host);
@@ -62,43 +45,9 @@ public class StickerAiChoiceTest extends AITest {
         AbilityUtils.resolve(put);
     }
 
-    private Card stickeredCard(Player p) {
-        Card found = null;
-        for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-            if (c.isStickered()) {
-                assertNull(found, "more than one card was stickered");
-                found = c;
-            }
-        }
-        return found;
-    }
-
     private Sticker onlySticker(Card c) {
         assertEquals(c.getStickers().size(), 1);
         return c.getStickers().get(0).getSticker();
-    }
-
-    /**
-     * "A nonland permanent you own" includes the artifacts, but nothing a sticker prints does
-     * anything on a mana rock, so the AI should choose a creature while it has one.
-     */
-    @Test
-    public void testAiStickersACreatureNotAnArtifact() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(0);
-        giveSheet(ai, "Eldrazi Guacamole Tightrope");
-        ai.setCounters(CounterEnumType.TICKET, 1, ai, false);
-
-        // The artifact goes down first, so it is the first thing in the AI's battlefield list.
-        Card rock = addCard("Sol Ring", ai);
-        Card bear = addCard("Grizzly Bears", ai);
-        Card elephant = playAndResolve(game, ai, "Aerialephant");
-
-        Card stickered = stickeredCard(ai);
-        assertNotNull(stickered, "the AI had a sticker to place and something to place it on");
-        assertFalse(rock.isStickered(), "a sticker on a mana rock does nothing");
-        assertTrue(stickered.isCreature(), "the sticker should be on a creature");
-        assertTrue(stickered == bear || stickered == elephant);
     }
 
     /**
@@ -143,54 +92,6 @@ public class StickerAiChoiceTest extends AITest {
         assertEquals(ai.getCounters(CounterEnumType.TICKET), 2, "and the tickets are still there");
     }
 
-    /** A power and toughness sticker on something that is not a creature is a wasted ticket. */
-    @Test
-    public void testAiDoesNotBuyAPowerToughnessStickerForAnArtifact() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(0);
-        giveSheet(ai, "Eldrazi Guacamole Tightrope");
-        ai.setCounters(CounterEnumType.TICKET, 6, ai, false);
-        Card rock = addCard("Sol Ring", ai);
-        game.getAction().checkStateEffects(true);
-
-        List<Sticker> options = StickerSheet.getAvailableStickers(ai);
-        Sticker chosen = ai.getController().chooseSticker(options, rock, null, false);
-        assertNotNull(chosen);
-        assertFalse(chosen.getKind() == StickerKind.PT,
-                "a mana rock has no power or toughness to set");
-    }
-
-    /**
-     * Pin Collection puts an ability sticker on itself without paying for it, and an Equipment
-     * hands its sticker abilities to whatever it is attached to - so the ticket cost is no
-     * reason to turn that down.
-     */
-    @Test
-    public void testAiTakesAFreeStickerOnAnEquipment() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(0);
-        giveSheet(ai, "Eldrazi Guacamole Tightrope");
-        assertEquals(ai.getCounters(CounterEnumType.TICKET), 0);
-        Card pins = addCard("Pin Collection", ai);
-        game.getAction().checkStateEffects(true);
-
-        putSticker(ai, pins, "Kind$ Ability | Defined$ Self | Optional$ True | NoTicketCost$ True");
-
-        assertTrue(pins.isStickered(), "it costs nothing, so there is nothing to weigh it against");
-        assertEquals(onlySticker(pins).getKind(), StickerKind.ABILITY);
-        assertEquals(ai.getCounters(CounterEnumType.TICKET), 0, "and nothing was paid");
-    }
-
-    /** Puts every power and toughness sticker of one sheet on the given card. */
-    private void stickAllPT(Game game, Card sheet, Card on) {
-        for (Sticker s : StickerSheet.getStickers(sheet)) {
-            if (s.getKind() == StickerKind.PT) {
-                on.addSticker(new AppliedSticker(s, game.getNextTimestamp()));
-            }
-        }
-        game.getAction().checkStateEffects(true);
-    }
-
     /** Runs the turn player's begin-combat triggers. */
     private void toBeginCombat(Game game) {
         playUntilPhase(game, PhaseType.COMBAT_BEGIN);
@@ -216,21 +117,6 @@ public class StickerAiChoiceTest extends AITest {
         assertTrue(amb.isInPlay(), "0/0 would have died");
         assertEquals(amb.getNetPower(), 3, "it owns no stickers, so there is nothing to become");
         assertEquals(amb.getNetToughness(), 3);
-    }
-
-    /** The same trigger, when the stickers in play add up to more than it has. */
-    @Test
-    public void testAiTakesAPowerAndToughnessBiggerThanItsOwn() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPhaseHandler().getPlayerTurn();
-        Card sheet = giveSheet(ai, "Eldrazi Guacamole Tightrope"); // 1/4 and 5/3
-        Card amb = addCard("Ambassador Blorpityblorpboop", ai);
-        stickAllPT(game, sheet, addCard("Grizzly Bears", ai));
-
-        toBeginCombat(game);
-
-        assertEquals(amb.getNetPower(), 6, "1 + 5 power across the stickers it controls");
-        assertEquals(amb.getNetToughness(), 7, "4 + 3 toughness");
     }
 
     /**

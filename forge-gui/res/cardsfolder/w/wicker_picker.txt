@@ -1,9 +1,0 @@
-Name:Wicker Picker
-ManaCost:3
-Types:Artifact Creature Scarecrow Guest
-PT:2/3
-S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Hand,Graveyard,Library,Exile,Command,Stack | AddKeyword$ Kicker:1 | Description$ Creature spells you cast have sticker kicker {1}. (You may pay an additional {1} as you cast a creature spell. If you do, you get {TK}, then you may put a sticker on it.)
-T:Mode$ SpellCast | ValidCard$ Creature | ValidSA$ Spell.Kicked | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTicket | TriggerDescription$ Whenever you cast a creature spell with sticker kicker paid, you get {TK}, then you may put a sticker on it.
-SVar:TrigTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1 | SubAbility$ DBSticker
-SVar:DBSticker:DB$ PutSticker | Defined$ TriggeredCard | Optional$ True
-Oracle:Creature spells you cast have sticker kicker {1}. (You may pay an additional {1} as you cast a creature spell. If you do, you get {TK}, then you may put a sticker on it.)

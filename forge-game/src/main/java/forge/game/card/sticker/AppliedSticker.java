@@ -18,12 +18,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.TriggerHandler;
 
 /**
- * A sticker that is on an object, with the two things placing it decided: when, and - for a name
- * sticker - where in the name its word sits (CR 123.6b).
- * <p>
- * The position is a word index, not a character offset, and is remembered as the object moves
- * between public zones. If the name later has fewer words than that, the word goes on the end
- * instead (CR 123.6c).
+ * A sticker on an object. A name sticker also keeps its word position (CR 123.6b).
  */
 public class AppliedSticker implements PerpetualInterface {
     private static final String HAS_ATTACK_EFFECT = "HasAttackEffect";
@@ -51,7 +46,6 @@ public class AppliedSticker implements PerpetualInterface {
         return timestamp;
     }
 
-    /** How many of the object's words precede this name sticker's word. */
     public int getNamePosition() {
         return namePosition;
     }
@@ -60,28 +54,19 @@ public class AppliedSticker implements PerpetualInterface {
         return sticker.getKind();
     }
 
-    /**
-     * Applies this sticker to the card it is on. Name stickers are not applied one at a time:
-     * every name sticker on a card contributes to one name, so the card recomputes the whole
-     * name instead - see {@link Card#recomputeStickerName}.
-     */
     @Override
     public void applyEffect(Card c) {
         switch (sticker.getKind()) {
             case PT -> c.addNewPT(sticker.getPower(), sticker.getToughness(), timestamp, 0);
             case NAME -> c.recomputeStickerName();
             case ABILITY -> grantAbility(c);
-            // An art sticker only ever acts as a marker (CR 123.9).
+            // CR 123.9
             case ART -> {
             }
         }
     }
 
-    /**
-     * CR 123.7 - the object gains the ability printed on the sticker. Keywords are granted
-     * directly; anything with its own script is built from an SVar on the sheet the sticker
-     * came from, which is also where any SVars it refers to live.
-     */
+    // CR 123.7
     private void grantAbility(Card c) {
         List<String> keywords = getGrantedKeywords();
         if (!keywords.isEmpty()) {
@@ -97,16 +82,10 @@ public class AppliedSticker implements PerpetualInterface {
         }
     }
 
-    /**
-     * The AI reads this SVar off the attacker to decide whether a creature is worth attacking
-     * with for something other than its damage, so a sticker that grants an attack trigger has
-     * to bring it along - the same way a static that grants one writes it with AddSVar$.
-     */
     public static boolean grantsAttackTrigger(CardTraitChanges traits) {
         return traits.getTriggers().stream().anyMatch(t -> t.getMode() == TriggerType.Attacks);
     }
 
-    /** The keywords this sticker prints, which do not depend on what it is on. */
     public List<String> getGrantedKeywords() {
         if (sticker.getKeywords() == null) {
             return List.of();
@@ -114,14 +93,8 @@ public class AppliedSticker implements PerpetualInterface {
         return Arrays.stream(sticker.getKeywords().split(",")).map(String::trim).toList();
     }
 
-    /**
-     * What this sticker's printed ability grants the given card, built but not applied. The
-     * cards that hand an object the abilities of stickers on a different object build the same
-     * changes this way.
-     */
     public CardTraitChanges getGrantedTraits(Card c) {
-        // The sheet's state, not the sheet, so that an SVar the ability only reads when it
-        // resolves is still looked up on the sheet - the same wiring a static's AddAbility uses.
+        // the sheet's state, so SVars read at resolution are still found on the sheet
         CardState sheetState = sticker.getSheet().getCurrentState();
         List<SpellAbility> abilities = Lists.newArrayList();
         List<Trigger> triggers = Lists.newArrayList();

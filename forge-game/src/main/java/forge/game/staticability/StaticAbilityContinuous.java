@@ -313,8 +313,6 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            // Pin Collection and Clandestine Chameleon: an object has the abilities printed on
-            // ability stickers that are on some other object.
             if (params.containsKey("GainsStickerAbilitiesOf") || params.containsKey("GainsStickerAbilitiesOfDefined")) {
                 CardCollection sources = cardsGainedFrom(params.containsKey("GainsStickerAbilitiesOfDefined")
                         ? "GainsStickerAbilitiesOfDefined" : "GainsStickerAbilitiesOf", params, hostCard, stAb, game);
@@ -801,11 +799,8 @@ public final class StaticAbilityContinuous {
                 List<Trigger> addedTrigger = Lists.newArrayList();
                 List<StaticAbility> addedStaticAbility = Lists.newArrayList();
                 if (stickerAbilities != null) {
-                    // Not getSpellAbilityForStaticAbility and friends, which the paths below use
-                    // to cache what they build: those resolve the ability's SVars against the
-                    // granting static, and a sticker's live on the sheet it came from, so a cached
-                    // one builds, runs and reads 0. Bounded to one affected card each for Pin
-                    // Collection and Clandestine Chameleon.
+                    // not cached like the paths below: those would resolve SVars against the
+                    // static instead of the sticker's sheet
                     for (AppliedSticker applied : stickerAbilities) {
                         CardTraitChanges granted = applied.getGrantedTraits(affectedCard);
                         addedAbilities.addAll(granted.getAbilities());

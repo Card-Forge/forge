@@ -2030,8 +2030,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void addChangedSVars(Map<String, String> map, long timestamp, long staticId) {
-        // One static can have more than one reason to add an SVar - AddSVar$ and a sticker that
-        // brings HasAttackEffect with it - and they share this key, so merge rather than replace.
         Map<String, String> existing = this.changedSVars.get(timestamp, staticId);
         if (existing != null && !existing.isEmpty()) {
             Map<String, String> merged = Maps.newHashMap(existing);
@@ -4610,7 +4608,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     private List<AppliedSticker> stickers = new ArrayList<>();
-    /** Read once from the script of a sticker sheet - see {@link StickerSheet#getStickers}. */
     private List<Sticker> sheetStickers;
 
     public final List<Sticker> getSheetStickers() {
@@ -4620,7 +4617,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         sheetStickers = read;
     }
 
-    /** CR 123.4 - an object is "stickered" while it has any sticker on it. */
+    // CR 123.4
     public final boolean isStickered() {
         return !stickers.isEmpty();
     }
@@ -4632,10 +4629,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         s.applyEffect(this);
         updateStickersForView();
     }
-    /**
-     * CR 123.5 - stickers carry over to the new object in another public zone, keeping their
-     * timestamps and name positions, and apply again there.
-     */
+    // CR 123.5
     public final void setStickers(final Card oldCard) {
         stickers = new ArrayList<>(oldCard.getStickers());
         for (AppliedSticker s : stickers) {
@@ -4644,20 +4638,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateStickersForView();
     }
 
-    /**
-     * Refreshes what the details pane says about stickers - for this card, and for the owner's
-     * sheets, which describe what is still on them and so go stale the moment one is placed.
-     */
     private void updateStickersForView() {
         view.updateStickers(this);
         refreshSheetViews(getOwner());
     }
 
-    /**
-     * Refreshes what each of a player's sticker sheets says is still free. Which stickers are
-     * available depends on where their stickered cards are, so this has to run once a card has
-     * landed in its new zone - not while it is between zones, where nothing can see it.
-     */
     public static void refreshSheetViews(final Player p) {
         if (p == null) {
             return;
@@ -4668,14 +4653,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     /**
-     * CR 123.6c - rebuilds the name from the card's own name plus every name sticker on it, in
-     * timestamp order.
-     * <p>
-     * CR 123.6a: a blank line is not a word of the name, so it never counts towards a sticker's
-     * position. A card printed with one has somewhere the sticker goes - that is what the blank
-     * is for - so each sticker fills the leftmost blank still empty, and only once there are
-     * none left does it go after the number of words chosen when it was placed (or at the end,
-     * if the name is now shorter than that). Blanks nobody has stickered stay as they are.
+     * CR 123.6c - name stickers apply in timestamp order. Each fills the leftmost blank still
+     * empty (CR 123.6a); with none left it goes after its chosen number of words.
      */
     public final void recomputeStickerName() {
         List<AppliedSticker> nameStickers = new ArrayList<>();
@@ -4696,14 +4675,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         addChangedName(name, false, nameStickers.get(nameStickers.size() - 1).getTimestamp(), 0);
     }
 
-    /** A run of underscores standing in for a word the card does not have - CR 123.6a. */
     private static final Pattern NAME_BLANK = Pattern.compile("_{2,}");
 
-    /**
-     * The name that results from putting one name sticker on the given name. Shared with the
-     * prompt that asks a player where to put it, so the preview and the name they end up with
-     * are built the same way.
-     */
     public static String addStickerWord(final String name, final String word, final int position) {
         Matcher blank = NAME_BLANK.matcher(name);
         if (blank.find()) {
@@ -4717,7 +4690,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return String.join(" ", words);
     }
 
-    /** Whether a name sticker put on this card now would fill a blank rather than be placed. */
     public final boolean stickerWouldFillBlank() {
         String name = getName();
         return StringUtils.isNotEmpty(name) && NAME_BLANK.matcher(name).find();

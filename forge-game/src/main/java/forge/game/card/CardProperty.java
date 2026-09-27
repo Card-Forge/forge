@@ -1335,14 +1335,10 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("stickered")) {
-            // CR 123.4 - an object is "stickered" while it has any kind of sticker on it.
-            // A card that wants the opposite writes !stickered, as every other property does.
             if (!card.isStickered()) {
                 return false;
             }
         } else if (property.startsWith("stickeredWith ")) {
-            // stickeredWith Name - has at least one sticker of that kind on it. Not "withSticker",
-            // which the broad "with<keyword>" branch above would swallow.
             StickerKind wanted = StickerKind.smartValueOf(property.substring("stickeredWith ".length()));
             if (card.getStickers().stream().noneMatch(s -> s.getKind() == wanted)) {
                 return false;

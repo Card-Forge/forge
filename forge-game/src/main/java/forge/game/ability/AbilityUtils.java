@@ -2104,12 +2104,7 @@ public class AbilityUtils {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
-        // CardStickers, CardStickers.Name, CardStickers.Art, ...; and for the cards that
-        // count letters on the name stickers they carry:
-        //   CardStickers.NameMinLetters.8   name stickers of eight or more letters
-        //   CardStickers.NameMaxLetters.7   name stickers of seven or fewer letters
-        //   CardStickers.NameLetter.o       occurrences of a letter across all name stickers
-        //   CardStickers.NameStartsWith.ChosenType   name stickers beginning with the chosen letter
+        // CardStickers[.<Kind>|.NameMinLetters.N|.NameMaxLetters.N|.NameLetter.x|.NameStartsWith.x]
         if (sq[0].startsWith("CardStickers")) {
             return doXMath(countStickers(c, sq), expr, c, ctb);
         }
@@ -2899,10 +2894,6 @@ public class AbilityUtils {
         return doXMath(num, expr, c, ctb);
     }
 
-    /**
-     * Counts the stickers on a card for the {@code CardStickers} Count$ family - the whole
-     * sticker, or the name stickers whose word matches what the card asks about.
-     */
     private static int countStickers(Card c, String[] sq) {
         String kind = sq.length > 1 ? sq[1] : null;
         if (kind == null || kind.isEmpty()) {
@@ -2912,9 +2903,6 @@ public class AbilityUtils {
         int count = 0;
         for (AppliedSticker applied : c.getStickers()) {
             Sticker s = applied.getSticker();
-            // The four Name* options all ask about a name sticker's word; anything else is a
-            // plain kind. Dispatch on the exact label - CardStickers.Name is a live option and
-            // must not fall into the letter counting.
             if (s.getKind() == StickerKind.NAME && arg != null) {
                 String letters = s.getLetters();
                 switch (kind) {
@@ -3793,7 +3781,6 @@ public class AbilityUtils {
             return doXMath(filtered.size(), splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
-        // The power or toughness printed on the power and toughness stickers these cards carry.
         if (def.startsWith("StickerPower") || def.startsWith("StickerToughness")) {
             final boolean power = def.startsWith("StickerPower");
             int total = 0;

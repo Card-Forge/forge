@@ -26,13 +26,6 @@ import forge.game.card.sticker.StickerKind;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-/**
- * Fires when a player puts a sticker on an object - CR 123.3.
- * <p>
- * {@code StickerKind$ Art} or {@code StickerKind$ Name,Ability,PT} restricts which kinds of
- * sticker trigger it. A card reading "if it's an art sticker, instead ..." is written as two
- * triggers, one on Art and one on the rest.
- */
 public class TriggerStickerPlaced extends Trigger {
 
     public TriggerStickerPlaced(final Map<String, String> params, final Card host, final boolean intrinsic) {
@@ -48,8 +41,6 @@ public class TriggerStickerPlaced extends Trigger {
             return false;
         }
         if (hasParam("StickerKind")) {
-            // A comma separated list, so "if it's an art sticker, instead ..." can be written as
-            // one trigger on Art and another on the kinds that are not Art.
             final Object placed = runParams.get(AbilityKey.StickerKind);
             if (Arrays.stream(getParam("StickerKind").split(","))
                     .noneMatch(kind -> StickerKind.smartValueOf(kind.trim()) == placed)) {

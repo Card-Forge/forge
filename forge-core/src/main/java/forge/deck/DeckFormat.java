@@ -61,7 +61,7 @@ public enum DeckFormat {
 
         @Override
         public String getStickerSheetConformanceProblem(Deck deck) {
-            //CR 123.2b - in limited, a player chooses up to three sheets from what they opened.
+            //CR 123.2b
             if (deck.get(DeckSection.Stickers).countAll() > CHOSEN_STICKER_SHEETS)
                 return TextUtil.concatWithSpace("must contain no more than",
                         String.valueOf(CHOSEN_STICKER_SHEETS), "sticker sheets");
@@ -134,7 +134,7 @@ public enum DeckFormat {
     Archenemy      ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
     Puzzle         ( Range.of(0, Integer.MAX_VALUE), Range.is(0), 4);
 
-    /** CR 123.2a - how many of a player's sticker sheets are chosen at random to be used. */
+    // CR 123.2a
     public static final int CHOSEN_STICKER_SHEETS = 3;
 
     private final Range<Integer> mainRange;
@@ -534,7 +534,7 @@ public enum DeckFormat {
 
     public String getStickerSheetConformanceProblem(Deck deck) {
         CardPool stickerSheets = deck.get(DeckSection.Stickers);
-        //CR 123.2a - at least ten sheets, all unique. Three are chosen at random at the start.
+        //CR 123.2a
         if (stickerSheets.countAll() < 10)
             return "must contain at least 10 sticker sheets, or none at all";
         for (Entry<PaperCard, Integer> cp : stickerSheets) {

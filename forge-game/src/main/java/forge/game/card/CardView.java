@@ -671,7 +671,7 @@ public class CardView extends GameEntityView {
             // true for now, to actually see the Scheme cards (can't see deck anyway)
             return true;
         case StickerSheets:
-            // CR 123.2c - the chosen sticker sheets are revealed and stay revealed
+            // CR 123.2c
             return true;
         default:
             break;
@@ -806,11 +806,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NonAbilityText, c.getNonAbilityText());
     }
 
-    /**
-     * What is on this card, or - for a sticker sheet - what is still on the sheet. An art
-     * sticker changes nothing a player can otherwise see (CR 123.9), so without this there is
-     * no way to tell a stickered permanent from a plain one.
-     */
     void updateStickers(Card c) {
         set(TrackableProperty.Stickers, StickerSheet.describe(c));
     }

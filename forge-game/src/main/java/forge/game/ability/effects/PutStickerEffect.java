@@ -25,24 +25,12 @@ import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Puts a sticker on an object - CR 123.3.
- * <p>
- * Optional parameters:
- * <ul>
- *   <li>{@code Kind$ Name|Art|Ability|PT} - restrict the choice to one kind of sticker.</li>
- *   <li>{@code Optional$ True} - the player may decline.</li>
- *   <li>{@code MaxTickets$ N} - offer only stickers costing that many tickets or fewer.</li>
- *   <li>{@code NoTicketCost$ True} - place it without paying the ticket cost.</li>
- * </ul>
- * The effect records {@code StickersPlaced} on the ability, and for a name sticker also
- * {@code StickerUniqueVowels}, so a sub-ability can read them the way a die roll's
- * sub-abilities read its result.
+ * CR 123.3. Optional: {@code Kind$}, {@code Optional$}, {@code MaxTickets$}, {@code NoTicketCost$}.
+ * Records {@code StickersPlaced} and {@code StickerUniqueVowels} for sub-abilities.
  */
 public class PutStickerEffect extends SpellAbilityEffect {
 
-    /** How many stickers this resolution placed, for the cards that say "when you do". */
     private static final String PLACED = "StickersPlaced";
-    /** The unique vowels in the name sticker just placed, for the cards that count them. */
     private static final String VOWELS = "StickerUniqueVowels";
 
     @Override
@@ -53,7 +41,6 @@ public class PutStickerEffect extends SpellAbilityEffect {
             sb.append(sa.getParam("Kind").toLowerCase()).append(" ");
         }
         sb.append("sticker on ");
-        // Only a targeting ability knows what it will be on; the rest choose as they resolve.
         if (sa.usesTargeting() || sa.hasParam("Defined")) {
             sb.append(StringUtils.join(getTargetCards(sa), ", "));
         } else {
@@ -63,11 +50,6 @@ public class PutStickerEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-    /**
-     * The objects to sticker. These cards say "a nonland permanent you own", not "target", so
-     * the normal form is {@code Choices$}, a choice rather than a target. {@code ValidTgts$} is
-     * for the few that really do target.
-     */
     private static List<Card> chooseObjects(SpellAbility sa, Game game) {
         if (!sa.hasParam("Choices")) {
             return getTargetCards(sa);
@@ -77,7 +59,7 @@ public class PutStickerEffect extends SpellAbilityEffect {
                 ? ZoneType.smartValueOf(sa.getParam("ChoiceZone")) : ZoneType.Battlefield;
         CardCollection pool = CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("Choices"),
                 chooser, sa.getHostCard(), sa);
-        // CR 123.3b - only an object its owner owns can be stickered, so never offer the rest.
+        // CR 123.3b
         pool = CardLists.filter(pool, CardPredicates.isOwner(chooser));
         if (pool.isEmpty()) {
             return new CardCollection();
@@ -93,14 +75,8 @@ public class PutStickerEffect extends SpellAbilityEffect {
         return result;
     }
 
-    /**
-     * The stickers this ability may offer the given player: what is on their sheets, capped by
-     * what this ability lets them spend (CR 123.3c) and by the kind it asks for. The AI scores
-     * this list too, to decide what is worth putting a sticker on.
-     */
     public static List<Sticker> availableStickers(SpellAbility sa, Player owner) {
-        // CR 123.3c - normally only stickers the owner can pay for, but a card may waive the
-        // cost, and may cap how expensive a sticker it offers.
+        // CR 123.3c
         int affordable = sa.hasParam("NoTicketCost") ? Integer.MAX_VALUE
                 : owner.getCounters(CounterEnumType.TICKET);
         if (sa.hasParam("MaxTickets")) {
@@ -121,15 +97,12 @@ public class PutStickerEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
         final boolean optional = sa.hasParam("Optional");
-        // The same ability object resolves again and again, so clear what the last resolution
-        // recorded before anything can read it.
         sa.setSVar(VOWELS, "0");
         sa.setSVar(PLACED, "0");
         int placed = 0;
 
         for (final Card target : chooseObjects(sa, game)) {
-            // CR 123.3b - a player can't put a sticker on an object they don't own. If an effect
-            // would make them, that part of the effect does nothing.
+            // CR 123.3b
             final Player owner = target.getOwner();
             if (owner == null || !owner.equals(sa.getActivatingPlayer())) {
                 continue;
@@ -148,7 +121,6 @@ public class PutStickerEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // CR 123.3c - the owner pays the sticker's ticket cost to place it.
             if (chosen.getTickets() > 0 && !sa.hasParam("NoTicketCost")) {
                 owner.subtractCounter(CounterEnumType.TICKET, chosen.getTickets(), owner);
             }
