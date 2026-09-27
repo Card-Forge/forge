@@ -525,8 +525,14 @@ func containsAllCards(have, want []CardID) bool {
 }
 
 // hasKeywordText is Card.hasKeyword for a keyword written as a whole line
-// ("CARDNAME can't block."): some current keyword line is exactly line.
+// ("CARDNAME can't block."): some hidden keyword (Card.java:4981's
+// shortcut) or current keyword line is exactly line.
 func (c *Card) hasKeywordText(line string) bool {
+	for _, l := range c.hiddenKeywords {
+		if l == line {
+			return true
+		}
+	}
 	for _, l := range c.KeywordLines() {
 		if l == line {
 			return true
@@ -535,9 +541,14 @@ func (c *Card) hasKeywordText(line string) bool {
 	return false
 }
 
-// hasKeywordTextPrefix is Card.hasStartOfKeyword: some current keyword line
-// starts with prefix.
+// hasKeywordTextPrefix is Card.hasStartOfKeyword: some hidden keyword or
+// current keyword line starts with prefix.
 func (c *Card) hasKeywordTextPrefix(prefix string) bool {
+	for _, l := range c.hiddenKeywords {
+		if strings.HasPrefix(l, prefix) {
+			return true
+		}
+	}
 	for _, l := range c.KeywordLines() {
 		if strings.HasPrefix(l, prefix) {
 			return true

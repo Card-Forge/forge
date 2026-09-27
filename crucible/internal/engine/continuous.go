@@ -893,11 +893,14 @@ func ptParam(g *Game, amounts map[string]expr.Amount, host *Card, s *compile.Abi
 // applyContinuousRules recomputes every player's own Layer 8 RulesEffects
 // from scratch, applyContinuousPT's own reasoning (above) applied to a
 // player rather than a card: SetMaxHandSize$/RaiseMaxHandSize$/
-// AdjustLandPlays$ Read Player.HandSizeLimit/LandPlayLimit (player.go).
+// AdjustLandPlays$ Read Player.HandSizeLimit/LandPlayLimit (player.go). The
+// same walk recomputes every card's own AddHiddenKeyword$ grants
+// (applyOneContinuousHiddenKeyword), Java's own RULES-layer param.
 func applyContinuousRules(g *Game) {
 	for _, pid := range g.Players() {
 		g.Player(pid).Rules.Clear()
 	}
+	clearHiddenKeywords(g)
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -907,6 +910,7 @@ func applyContinuousRules(g *Game) {
 			for _, face := range h.Def.Faces {
 				for _, s := range face.Statics {
 					applyOneContinuousRules(g, h, face.Amounts, s)
+					applyOneContinuousHiddenKeyword(g, h, s)
 				}
 			}
 		}
@@ -941,13 +945,9 @@ func applyContinuousRules(g *Game) {
 //     AdditionalOptionalVote$/AdditionalVillainousChoice$/
 //     DeclaresAttackers$/DeclaresBlockers$ (0-3 real lines each) --
 //     multiplayer/vote mechanics this port has no concept of at all.
-//   - IgnoreEffectCost$/AddHiddenKeyword$ (4, 19) -- each its own separate
-//     mechanic (a cost-ignoring ability grant; a hidden functional keyword
-//     whose own real values -- "must be blocked if able," "can't attack
-//     alone," "doesn't untap," ... -- are each a distinct
-//     block/attack/untap-step rule this port's own combat/turn model has no
-//     hook for, none of them sharing enough machinery to be worth building
-//     as one slice the way SetMaxHandSize/AdjustLandPlays do).
+//   - IgnoreEffectCost$ (4) -- a cost-ignoring ability grant, its own
+//     separate mechanic. AddHiddenKeyword$ is not this function's:
+//     applyOneContinuousHiddenKeyword (below) resolves it per card.
 //   - A qualified Affected$ matchesPlayerSpec cannot resolve
 //     (Player.NotedForGreenAnchor, Player.Chosen -- 1 real line each,
 //     matchesPlayerSpec's own doc comment has the general reason).
@@ -1025,6 +1025,110 @@ func rulesEffect(g *Game, host *Card, amounts map[string]expr.Amount, s *compile
 		}
 	}
 	return e, hasEffect
+}
+
+// clearHiddenKeywords drops every card's AddHiddenKeyword$ grants before
+// applyContinuousRules rebuilds them. The whole arena, not the battlefield
+// enumeration: a card that left play or phased out since the last pass
+// must not keep a grant nothing re-derives.
+func clearHiddenKeywords(g *Game) {
+	for i := range g.cards {
+		g.cards[i].hiddenKeywords = nil
+	}
+}
+
+// hiddenKeywordRead reports whether line is an AddHiddenKeyword$ line
+// something in this port reads (hasKeywordText/hasKeywordTextPrefix: block
+// legality, block requirements, canAttackAtAll).
+func hiddenKeywordRead(line string) bool {
+	switch line {
+	case "CARDNAME can't block.", "CARDNAME can't attack or block.",
+		"All creatures able to block CARDNAME do so.", "CARDNAME must be blocked if able.":
+		return true
+	}
+	return false
+}
+
+// applyOneContinuousHiddenKeyword is StaticAbilityContinuous.java's own
+// RULES-layer AddHiddenKeyword$ (lines 322-323, 751-752): every " & "-split
+// line goes onto each affected card's hidden keywords
+// (Card.addHiddenExtrinsicKeywords), seen by Card.hasKeyword's exact-text
+// shortcut (Card.java:4981) but not part of its keyword list -- the one
+// thing that makes a hidden keyword differ from an AddKeyword$ one.
+//
+// The affected set is AffectedDefined$ Self/Enchanted/Equipped (the host, or
+// what it is attached to -- 15 of the 19 real S: lines), filtered by
+// Affected$ when present, or else every battlefield card Affected$ matches
+// (the real Effect-SVar lines, AffectedZone$ Battlefield written out).
+//
+// Skipped whole, not applied partially (GO-7):
+//   - a line naming a keyword nothing here reads (hiddenKeywordRead): "This
+//     card doesn't untap during your next untap step." (no untap-step hook),
+//     "CARDNAME can't attack alone."/"CARDNAME can only attack alone."
+//     (attackconstraints.go reads neither), "CARDNAME count as <name>."
+//     (graveyard-only name aliasing).
+//   - AffectedZone$ other than Battlefield, CharacteristicDefining$, any
+//     other AffectedDefined$, an unresolved Condition$.
+func applyOneContinuousHiddenKeyword(g *Game, host *Card, s *compile.Ability) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	raw, ok := s.Param("AddHiddenKeyword")
+	if !ok {
+		return
+	}
+	if !continuousConditionMet(g, host, s) {
+		return
+	}
+	if _, ok := s.Param("CharacteristicDefining"); ok {
+		return
+	}
+	if zone, ok := s.Param("AffectedZone"); ok && !strings.EqualFold(zone, "Battlefield") {
+		return
+	}
+	lines := strings.Split(raw, " & ")
+	for i, l := range lines {
+		lines[i] = strings.TrimSpace(l)
+		if !hiddenKeywordRead(lines[i]) {
+			return
+		}
+	}
+
+	var targets []CardID
+	if defined, ok := s.Param("AffectedDefined"); ok {
+		switch {
+		case strings.EqualFold(defined, "Self"):
+			targets = []CardID{host.ID}
+		case strings.EqualFold(defined, "Enchanted"), strings.EqualFold(defined, "Equipped"):
+			if attached, ok := host.AttachedTo(); ok {
+				targets = []CardID{attached}
+			}
+		default:
+			return
+		}
+	} else {
+		if _, ok := s.Param("Affected"); !ok {
+			return
+		}
+		for _, pid := range g.Players() {
+			targets = append(targets, g.Zone(Battlefield, pid).Cards()...)
+		}
+	}
+	affected, filtered := s.Param("Affected")
+	var spec valid.Spec
+	if filtered {
+		spec = valid.Parse(affected)
+	}
+	for _, id := range targets {
+		c := g.Card(id)
+		if c.Zone != Battlefield || c.IsPhasedOut() {
+			continue
+		}
+		if filtered && !Matches(g, c, spec, host.Controller(), host.ID) {
+			continue
+		}
+		c.hiddenKeywords = append(c.hiddenKeywords, lines...)
+	}
 }
 
 // applyContinuousControl recomputes every battlefield card's own Layer 2

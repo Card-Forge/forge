@@ -152,7 +152,8 @@
       "valid",
       "ability",
       "combat",
-      "attackconstraints"
+      "attackconstraints",
+      "blockvalidation"
     ],
     "staticability": ["id", "zone", "card", "game", "valid"],
     "block": [

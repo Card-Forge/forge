@@ -106,11 +106,17 @@ func (g *Game) eligibleAttackers() []CardID {
 
 // canAttackAtAll is the part of CombatUtil.canAttack(attacker, defender)
 // that does not depend on the defender, for the sources this port has: a
-// creature, untapped, not summoning sick unless it has haste, not detained
+// creature, untapped, not summoning sick unless it has haste, without
+// StaticAbilityCantAttackBlock.cantAttack's own two keyword lines
+// ("CARDNAME can't attack." and "CARDNAME can't attack or block.",
+// StaticAbilityCantAttackBlock.java:41, printed or hidden), not detained
 // (CR 701.35).
 func (g *Game) canAttackAtAll(id CardID) bool {
 	c := g.Card(id)
 	if !c.Type().Has(cardtype.Creature) || c.Tapped {
+		return false
+	}
+	if c.hasKeywordText("CARDNAME can't attack.") || c.hasKeywordText("CARDNAME can't attack or block.") {
 		return false
 	}
 	if c.SummonSick && !c.HasKeyword("Haste") {

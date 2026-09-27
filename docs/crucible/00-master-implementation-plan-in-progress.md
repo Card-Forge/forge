@@ -1654,9 +1654,9 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     constants directly, keeping `player`'s own `enginelint` group acyclic. `cleanupStep`/`PlayLand` (turn.go/land.go)
     now call them instead of comparing against the bare constants. Not resolved: `MayLookAt$`/`MayPlay$` (88/181 real
     lines) — a cast-time zone-eligibility permission `CastSpell`'s own hand-only check has nowhere to consult yet;
-    `AddHiddenKeyword$` (19) — each of its 8 real distinct values its own separate block/attack/untap-step mechanic, not
-    one shape worth building as a slice; vote/villainous-choice params (0-3 real lines each) — multiplayer mechanics
-    this port has no concept of; a qualified `Affected$` `matchesPlayerSpec` cannot resolve
+    `AddHiddenKeyword$` resolves per card for the four keyword lines something reads (41 of 53 real lines,
+    `port-log/game-state/layers-text-and-rules.md`); vote/villainous-choice params (0-3 real lines each) — multiplayer
+    mechanics this port has no concept of; a qualified `Affected$` `matchesPlayerSpec` cannot resolve
     (`Player.NotedForGreenAnchor`/`Player.Chosen`, 1 real line each).
 
     The legend rule's own `ignoreLegendRule` exemption (item 25) and `CantBlockBy` (item 28's own combat note) already
@@ -1669,8 +1669,8 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     Layer 1 (copy effects) is not even part of `StaticAbilityContinuous.java`'s own switch in Forge itself — zero real
     references to `StaticAbilityLayer.COPY` anywhere in it, a wholly separate "become a copy of a card" mechanism at
     resolution time, not a recomputed-each-pass continuous effect at all, so it is not this item's job even in
-    principle. Layer 3 (`GainTextOf$`, 1 real line) needs its own single-card text-copying mechanism for one real corpus
-    card, not a slice worth building for that alone.
+    principle. Layer 3's `GainTextOf$` (1 real line, Volrath's Shapeshifter) swaps `Card.Def` for a composite text
+    definition between Layers 2 and 4 (`applyContinuousText`, `port-log/game-state/layers-text-and-rules.md`).
 
     **Layer 2 (`CONTROL`) is real now too — this port's first controller-change mechanism.** A new
     `ControlMod`/`ControlEffect` (`controlmod.go`) folds onto `Card.Controller`, which stops being a plain field and

@@ -824,6 +824,7 @@ func (g *Game) Clone() *Game {
 		c.detainedBy = append([]PlayerID(nil), g.cards[i].detainedBy...)
 		c.goadedBy = append([]goad(nil), g.cards[i].goadedBy...)
 		c.mustBlock = append([]mustBlockReq(nil), g.cards[i].mustBlock...)
+		c.hiddenKeywords = append([]string(nil), g.cards[i].hiddenKeywords...)
 		c.PT = g.cards[i].PT.clone()
 		c.TypeMod = g.cards[i].TypeMod.clone()
 		c.ColorMod = g.cards[i].ColorMod.clone()

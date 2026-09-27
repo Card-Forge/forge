@@ -297,9 +297,8 @@ mode this port checks has an evaluator for.
 
 Not attempted here: `MayLookAt$`/`MayPlay$` (88/181 real lines corpus-wide, the layer's own largest real params by far)
 need a cast-time zone-eligibility permission `CastSpell`'s own hand-only check (castspell.go) has nowhere to consult
-yet. `AddHiddenKeyword$` (19) has 8 real distinct values ("must be blocked if able," "can't attack alone," "doesn't
-untap," ...), each its own separate block/attack/untap-step rule this port's combat/turn model has no hook for, none
-sharing enough machinery to be worth building as one slice the way `SetMaxHandSize$`/`AdjustLandPlays$` did.
+yet. `AddHiddenKeyword$` resolves separately, per card:
+[Layer 8: `AddHiddenKeyword$` lands](layers-text-and-rules.md#layer-8-addhiddenkeyword-lands).
 `ControlOpponentsSearchingLibrary$`, `ControlVote$`, `AdditionalVote$`, `AdditionalOptionalVote$`,
 `AdditionalVillainousChoice$`, `DeclaresAttackers$` and `DeclaresBlockers$` (0-3 real lines each) are multiplayer/vote
 mechanics this port has no concept of at all.
@@ -390,8 +389,9 @@ directly; `TestCheckStateBasedActionsAuraGoesToOwnersGraveyard` and
 `TestCheckStateBasedActionsAuraGoesToGraveyardWhenEnchantPropertyStopsMatching` (action_test.go, rewritten as above)
 prove a real caller reads it.
 
-Not resolved: the qualified `GainControl$ Player.isMonarch` (1 of 44, above). Layer 1 (copy effects) and Layer 3
-(`GainTextOf$`) stay untouched -- [`## Not ported yet`](../game-state.md#not-ported-yet), has the reasons.
+Not resolved: the qualified `GainControl$ Player.isMonarch` (1 of 44, above). Layer 1 (copy effects) is
+[`effects-clone.md`](effects-clone.md)'s; Layer 3 (`GainTextOf$`) is
+[Layer 3: `GainTextOf$` lands](layers-text-and-rules.md#layer-3-gaintextof-lands).
 
 ### `Condition$`: the one gate all six appliers share
 

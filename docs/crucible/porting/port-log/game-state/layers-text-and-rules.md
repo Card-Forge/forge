@@ -6,7 +6,8 @@
 - **Java:** `StaticAbilityContinuous.java:577-640` (TEXT layer), `Card.java:128-279` (the `...ByText` tables),
   `AbilityUtils.java:116-124` (`TopOfGraveyard`)
 
-CR 613.1c's text-changing layer for its one real `GainTextOf$` line.
+CR 613.1c's text-changing layer for its one real `GainTextOf$` line, and the rest of this port's Layer 8 bucket
+(`StaticAbilityLayer.RULES`: the static params no numbered CR 613 layer holds).
 
 ## Layer 3: `GainTextOf$` lands
 
@@ -84,3 +85,39 @@ battlefield, a Clone of it, a gained lord static, a gained `*/*` CDA, `Game.Clon
 - A second static reaching the same card from the gained text in the same pass (the top card itself a Shapeshifter):
   Java re-applies it via `toAdd`; the result is identical (later text replaces earlier wholesale), so nothing is lost.
 - Any `GainTextOf$` shape other than `AffectedDefined$ Self` + `TopOfGraveyard[.Valid]`: none exists.
+
+## Layer 8: `AddHiddenKeyword$` lands
+
+Java: `StaticAbilityContinuous.java:322-323` (RULES layer) and `:751-752` → `Card.addHiddenExtrinsicKeywords`
+(`Card.java:5225`). `Card.hasKeyword(String)` checks the hidden table first (`Card.java:4981`), `hasStartOfKeyword` too
+(`:5257`). "Hidden" means: a whole keyword line that exact-text and prefix reads see, but that is not in the card's
+keyword list, so nothing that removes, lists or counts keywords (`RemoveAllAbilities$`, `KeywordLines`) touches it. That
+is the one difference from `AddKeyword$` (Layer 6, `KeywordMod`).
+
+| Piece                                             | What it holds / does                                                   | Why                                                                          |
+| ------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `Card.hiddenKeywords []string`                    | This pass's grants                                                     | Java's `hiddenExtrinsicKeywords` table; `Game.Clone` deep-copies it          |
+| `clearHiddenKeywords` (in `applyContinuousRules`) | Resets it on every card in the arena                                   | A card that left play or phased out keeps no grant nothing re-derives        |
+| `applyOneContinuousHiddenKeyword`                 | `AffectedDefined$` Self/Enchanted/Equipped, else `Affected$` over play | The two real shapes: Aura/Equipment/self statics, Effect-card blanket lines  |
+| `hasKeywordText` / `hasKeywordTextPrefix`         | Read hidden lines before printed/Layer 6 ones                          | Block legality and block requirements already read these two                 |
+| `canAttackAtAll`                                  | Refuses "CARDNAME can't attack." / "CARDNAME can't attack or block."   | `StaticAbilityCantAttackBlock.java:41`; the grant would otherwise half-apply |
+
+Only lines something reads are granted; a line naming any other keyword is skipped whole (GO-7):
+
+| Keyword line (corpus: `S:` + Effect SVar)                 | Lines  | Status                                                            |
+| --------------------------------------------------------- | ------ | ----------------------------------------------------------------- |
+| `CARDNAME can't block.`                                   | 1 + 26 | Resolved                                                          |
+| `All creatures able to block CARDNAME do so.`             | 8 + 0  | Resolved                                                          |
+| `CARDNAME must be blocked if able.`                       | 4 + 0  | Resolved                                                          |
+| `CARDNAME can't attack or block.`                         | 0 + 2  | Resolved (block and attack halves)                                |
+| `This card doesn't untap during your next untap step.`    | 1 + 6  | Skipped: no untap-step hook reads it                              |
+| `CARDNAME can't attack alone.` / `can only attack alone.` | 3 + 0  | Skipped: `attackconstraints.go` reads neither                     |
+| `CARDNAME count as <name>.`                               | 2 + 0  | Skipped: graveyard-only name aliasing (`AffectedZone$ Graveyard`) |
+
+41 of 53 real lines resolve (13 of 19 `S:` lines, 28 of 34 Effect-SVar lines), each still subject to its own `Affected$`
+filter being a property `Matches` evaluates. A `Pump`/`Animate` `KW$ HIDDEN ...` token is a separate one-shot grant, not
+this static, and stays rejected (`pumpeffect.go`).
+
+No scenario fixture: every behavior here is a block/attack declaration being refused, and the harness has no verb that
+expects an illegal declaration; `hiddenkeyword_test.go` covers it the way `combatlegality_test.go` covers printed lure
+and can't-block keywords.

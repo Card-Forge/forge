@@ -202,6 +202,15 @@ type Card struct {
 	// later layer folds over it unaware" shape copies already use.
 	text textChange
 
+	// hiddenKeywords is Card.hiddenExtrinsicKeywords (Card.java:103): whole
+	// keyword lines a Mode$ Continuous AddHiddenKeyword$ static grants this
+	// pass (applyOneContinuousHiddenKeyword, continuous.go). Unlike
+	// KeywordMod's AddKeyword$ grants they are not part of the card's
+	// keyword list, so nothing that removes or counts keywords sees them;
+	// only Card.hasKeyword's exact-text and hasStartOfKeyword's prefix reads
+	// do (hasKeywordText/hasKeywordTextPrefix, blockvalidation.go).
+	hiddenKeywords []string
+
 	// RegenShields counts the regeneration shields Regenerate gave this
 	// permanent this turn (CR 701.15): each replaces one destruction
 	// (Game.regenerate) and all of them end at cleanup or when it leaves the
