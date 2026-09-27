@@ -170,7 +170,8 @@ func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse b
 // and "TriggeredBlocker"/"TriggeredBlockerLKICopy", what Mode$
 // AttackerBlockedByCreature recorded, and "TriggeredAttacker"/
 // "TriggeredAttackerLKICopy", what Mode$ Attacks recorded (an error when
-// the trigger recorded none). A CardID is stable across zone changes, so each pair of spellings
+// the trigger recorded none), and "ReplacedCard", the card whose entry a
+// Moved replacement is replacing (an error anywhere else). A CardID is stable across zone changes, so each pair of spellings
 // names the same card; Java's LKI form differs only in which snapshot it
 // reads.
 func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error) {
@@ -216,6 +217,11 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attacker", defined)
 		}
 		return []CardID{refs.triggered.attacker}, nil
+	case "ReplacedCard":
+		if refs.replaced == NoCard {
+			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement of a card's entry", defined)
+		}
+		return []CardID{refs.replaced}, nil
 	case "Imprinted":
 		return append([]CardID(nil), host.Memory.Imprinted()...), nil
 	case "ChosenCard":

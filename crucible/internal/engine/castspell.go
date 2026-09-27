@@ -269,9 +269,10 @@ func (g *Game) enchantTargets(spec valid.Spec, controller PlayerID, self CardID)
 // host.wasCast()/isDash()/isBlitz()/isWarp()/isSneak(), none of which this
 // port can grant a spell). What is left, ported directly, is the whole of
 // what both APIPermanentCreature and APIPermanentNoncreature actually do:
-// the card leaves the stack and becomes a permanent, CR 614.1's own "enters
-// tapped" replacement runs against it before anything else sees the result
-// (checkMovedReplacement, replacement.go), and then CR 603.2's own ETB
+// the card leaves the stack and becomes a permanent, CR 614.1's replacements
+// of its entry ("enters as a copy", then "enters tapped") run against it
+// before anything else sees the result (enterBattlefieldReplacements,
+// entersascopy.go), and then CR 603.2's own ETB
 // trigger check runs (checkETBTriggers, trigger.go) the same way Java's
 // table.triggerChangesZoneAll does after every zone change. Java
 // splits the two APIs only for getStackDescription's own display text
@@ -286,7 +287,7 @@ func (permanentEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 	origin := g.Card(a.Source).Zone
 	copyBecomesToken(g.Card(a.Source))
 	g.Move(a.Source, Battlefield, a.Controller)
-	g.checkMovedReplacement(a.Source, origin)
+	g.enterBattlefieldReplacements(controller, a.Source, origin)
 	g.checkETBTriggers(controller, a.Source, origin)
 	return nil
 }
@@ -309,7 +310,7 @@ func (attachEffect) Resolve(g *Game, a *Ability, controller PlayerController) er
 	copyBecomesToken(g.Card(a.Source))
 	g.Move(a.Source, Battlefield, a.Controller)
 	g.Attach(a.Source, a.Target)
-	g.checkMovedReplacement(a.Source, origin)
+	g.enterBattlefieldReplacements(controller, a.Source, origin)
 	g.checkETBTriggers(controller, a.Source, origin)
 	return nil
 }

@@ -68,10 +68,12 @@ import (
 )
 
 // checkMovedReplacement is CR 614.1's own "look at the event before it
-// happens" for a card that just moved onto the battlefield -- called from
-// every real "moves onto the battlefield" site this port has
+// happens" for a card that just moved onto the battlefield -- called, after
+// the Copy layer, by enterBattlefieldReplacements (entersascopy.go), which
+// every real "moves onto the battlefield" site this port has calls
 // (permanentEffect.Resolve/attachEffect.Resolve -- castspell.go;
-// Game.PlayLand -- land.go), right after Game.Move and, like
+// Game.PlayLand -- land.go; moveByEffect -- zonemove.go), right after
+// Game.Move and, like
 // checkETBTriggers, not from Game.Move itself (Matches depends on game.go;
 // game.go cannot depend back on anything that calls it, enginelint's own
 // acyclic-parts rule). It runs BEFORE checkETBTriggers: a replacement

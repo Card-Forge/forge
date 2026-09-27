@@ -9,8 +9,8 @@ Layer 1's first copy effect.
 
 `cloneEffect` (`CloneEffect.java`, with `CardFactory.getCloneStates` at `CardFactory.java:461-750`) makes a permanent a
 copy of another card: CR 707.2, a Layer 1 copy effect (CR 613.2a). It resolves the "becomes a copy" shape (activated,
-triggered and spell lines). The largest single shape, "enters as a copy" (62 of 168 cards), is not reachable: see
-[Shapes not resolved](#shapes-not-resolved).
+triggered and spell lines). The largest single shape, "enters as a copy", is a Copy-layer replacement that runs this
+same effect: [`layer1-enters-as-copy.md`](layer1-enters-as-copy.md).
 
 ### Model: Layer 1 is the definition every other layer folds over
 
@@ -103,7 +103,6 @@ through combat as a 3/3 copy of Hill Giant.
 | `Duration$` `UntilUnattached`, `UntilFacedown`, `UntilTargetedUntaps`, `UntilNextEndStep`                                    | Endings this port does not track                                                                                          |
 | `Choices$`/`Valid` properties `token`, `NotDefinedTargeted`, `ExiledWithSource`, `ThisTurnEntered*`, non-literal comparisons | `Matches` has no case and reads them false silently (GO-7)                                                                |
 | A copy target outside the battlefield, or face down                                                                          | Java's clone state there is hidden or dies with the next zone change; neither is modeled                                  |
-| Clone as a replacement's `ReplaceWith$`                                                                                      | `Choices$` filters by last battlefield state then (`sa.isReplacementAbility()`); unreachable today                        |
 
 ### Divergences
 
@@ -116,16 +115,17 @@ through combat as a 3/3 copy of Hill Giant.
 
 ### Shapes not resolved
 
-56 of the corpus's 180 `(AB|SP|DB)$ Clone` lines resolve. The other 124:
+56 of the corpus's 180 `(AB|SP|DB)$ Clone` lines resolve as a spell, activated or triggered ability, and 45 more as a
+Copy-layer replacement ([`layer1-enters-as-copy.md`](layer1-enters-as-copy.md)). Blocked, by first blocker:
 
-| Shape                                                                           | Lines | Blocker                                                                                                                                                                                                                                                          |
-| ------------------------------------------------------------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `K:ETBReplacement:Copy:<SVar>[:Optional]` ("enters as a copy", Clone itself)    | 62    | Three missing pieces: the engine expands no `ETBReplacement` keyword (421 corpus lines, every mode); `compile` does not compile the SVar it names; and no hook runs an ability on the entering card before it lands, with `Choices$` over last battlefield state |
-| `R:` replacement with `ReplaceWith$` Clone (`Event$ Moved`, `Event$ Transform`) | 14    | `replacement.go` dispatches `Moved` only for "enters tapped"; `Transform` replacements not at all                                                                                                                                                                |
-| `Defined$`/`CloneTarget$` outside `definedCards`                                | 28    | `ParentTarget` (a sub-ability's own `ValidTgts$` is not targeted separately, `subability.go`), `TriggeredCardLKICopy`, `TriggeredTarget*`, `ReplacedCard`, `RememberedLKI`, `Sacrificed`, `TopOfLibrary`, `ExiledWith`, `Remembered.Creature`                    |
-| Unported valid properties                                                       | 10    | `NotDefinedTargeted`, `token`, `ExiledWithSource`, `ThisTurnEntered*`, `cmcLEY`                                                                                                                                                                                  |
-| Rejected params                                                                 | 7     | `AddTriggers$` 4, `AddStaticAbilities$`, `RemoveCardTypes$`, `PumpKeywords$`                                                                                                                                                                                     |
-| Unported durations                                                              | 3     | `UntilUnattached` 2, `UntilTargetedUntaps`                                                                                                                                                                                                                       |
+| Shape                                                                    | Lines | Blocker                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Run as a Copy-layer replacement (`K:ETBReplacement:Copy`, `Layer$ Copy`) | 24    | [`layer1-enters-as-copy.md`](layer1-enters-as-copy.md#what-resolves)                                                                                                                                                                    |
+| `R:` replacement with `ReplaceWith$` Clone, `Event$ Transform` (Ludevic) | 1     | `replacement.go` dispatches no `Transform` replacement                                                                                                                                                                                  |
+| `Defined$`/`CloneTarget$` outside `definedCards`                         | 27    | `ParentTarget` (a sub-ability's own `ValidTgts$` is not targeted separately, `subability.go`), `TriggeredCardLKICopy`, `TriggeredTarget*`, `RememberedLKI`, `Sacrificed`, `TopOfLibrary`, `ExiledWith`, `Exiled`, `Remembered.Creature` |
+| Unported valid properties                                                | 10    | `NotDefinedTargeted`, `token`, `ExiledWithSource`, `ThisTurnEntered*`, `cmcLEY`                                                                                                                                                         |
+| Rejected params                                                          | 7     | `AddTriggers$` 4, `AddStaticAbilities$`, `RemoveCardTypes$`, `PumpKeywords$`                                                                                                                                                            |
+| Unported durations                                                       | 3     | `UntilUnattached` 2, `UntilTargetedUntaps`                                                                                                                                                                                              |
 
 `Defined$ Remembered` after `RememberLKI$` (Absorb Identity) copies the remembered card's current values, not its LKI
 snapshot: `Memory` holds a `CardID`, and a card's copiable values off the battlefield are its printed ones, so this

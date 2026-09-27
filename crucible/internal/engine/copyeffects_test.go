@@ -42,6 +42,10 @@ func copyTestDef(t *testing.T, name, typeLine, power, toughness string, lines ..
 			f.Statics = append(f.Statics, body)
 		case "A":
 			f.Abilities = append(f.Abilities, body)
+		case "T":
+			f.Triggers = append(f.Triggers, body)
+		case "R":
+			f.Replacements = append(f.Replacements, body)
 		case "SVar":
 			k, v, _ := strings.Cut(body, ":")
 			f.SVars.Set(k, v)

@@ -180,11 +180,24 @@ type abilityRefs struct {
 	targets           []EntityID
 	triggerRemembered []EntityID
 	triggered         triggeredObjects
+	// replaced is the card a Moved replacement's ReplaceWith$ ability is
+	// replacing the entry of (Defined$ ReplacedCard); NoCard otherwise.
+	replaced CardID
 }
 
 // refs is a's own abilityRefs.
 func (a *Ability) refs() abilityRefs {
-	return abilityRefs{targets: a.Targets, triggerRemembered: a.TriggerRemembered, triggered: a.triggered}
+	return abilityRefs{targets: a.Targets, triggerRemembered: a.TriggerRemembered, triggered: a.triggered,
+		replaced: a.replacedCard()}
+}
+
+// replacedCard is the card entering the battlefield when a runs as a Moved
+// replacement's ReplaceWith$ ability (entersascopy.go), NoCard otherwise.
+func (a *Ability) replacedCard() CardID {
+	if a.replacing == nil {
+		return NoCard
+	}
+	return a.replacing.card
 }
 
 // triggeredObjects is the slice of Java's triggering-objects map

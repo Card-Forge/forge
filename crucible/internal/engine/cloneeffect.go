@@ -196,6 +196,10 @@ func (g *Game) uncopy(id CardID, e copyEffect) {
 // IntoPlayTapped$ taps the copy; RememberCloneOrigin$ remembers the copied
 // card.
 //
+// The same effect runs as a Copy-layer replacement's ReplaceWith$ ("enters
+// as a copy", entersascopy.go), where Choices$ never offers the entering
+// card and Defined$/CloneTarget$ ReplacedCard name it.
+//
 // Ported from forge-game/src/main/java/forge/game/ability/effects/
 // CloneEffect.java's resolve and forge-game/src/main/java/forge/game/card/
 // CardFactory.java's getCloneStates.
@@ -218,12 +222,6 @@ var cloneUnresolvedParams = [...]string{
 func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectParams(a, "Clone", cloneUnresolvedParams[:]...); err != nil {
 		return err
-	}
-	if a.replacing != nil {
-		// Choices$ filters against the last battlefield state when Clone
-		// replaces an event (an "enters as a copy" replacement), which this
-		// port does not dispatch to Clone.
-		return fmt.Errorf("engine: Clone: as a replacement effect not resolvable yet")
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
@@ -426,9 +424,21 @@ func cloneChoice(g *Game, a *Ability, controller PlayerController) (CardID, bool
 	if err != nil {
 		return NoCard, false, err
 	}
+	// As a replacement of a card's entry ("enters as a copy"), Java keeps
+	// only the last battlefield state's cards (CloneEffect.java's
+	// isReplacementAbility branch): the card entering is not yet there to be
+	// copied. This port has already moved it, so it is left out by hand.
+	// Java's last graveyard state still holds a card entering from the
+	// graveyard, which this port has moved out of it. No corpus line can
+	// tell: each choosing there says Other, except Lazotep Convert's, a
+	// battle's back face, which enters cast from exile.
+	entering := a.replacedCard()
 	var choices []CardID
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(zone, pid).Cards() {
+			if zone == Battlefield && id == entering {
+				continue
+			}
 			if Matches(g, g.Card(id), spec, a.Controller, a.Source) {
 				choices = append(choices, id)
 			}

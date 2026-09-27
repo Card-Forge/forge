@@ -51,6 +51,11 @@ type replacementEvent struct {
 
 	// mana is ProduceMana's produced mana.
 	mana producedMana
+
+	// card is Moved's Affected: the card entering the battlefield, what
+	// Defined$ ReplacedCard names (entersascopy.go). NoCard for every other
+	// event.
+	card CardID
 }
 
 // producedMana is one production of mana as this port's mana abilities make

@@ -14,7 +14,7 @@ const libraryBottom = -1
 // permanent entering the battlefield goes to newController's side
 // (NoPlayer keeps its current controller -- its owner, for any card not
 // already on the battlefield), is tapped first when tapped is set (Java's
-// setTapped before moveToPlay), then runs checkMovedReplacement and the ETB
+// setTapped before moveToPlay), then runs enterBattlefieldReplacements and the ETB
 // triggers exactly as permanentEffect does. A library destination honours
 // libPos: 0 is the top, libraryBottom the bottom. A card leaving the
 // battlefield fires the dies/exiled/returned trigger matching its
@@ -32,7 +32,7 @@ func (g *Game) moveByEffect(controller PlayerController, id CardID, dest ZoneTyp
 		if tapped {
 			c.Tapped = true
 		}
-		g.checkMovedReplacement(id, origin)
+		g.enterBattlefieldReplacements(controller, id, origin)
 		g.checkETBTriggers(controller, id, origin)
 	case Library:
 		if libPos == 0 {
