@@ -81,6 +81,7 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
+    private long deadlineNanos;
 
     /**
      * <p>
@@ -948,7 +949,7 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
-        long deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
+        deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
         // something prevents attacking, try another
         if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
             final PlayerCollection opps = ai.getOpponents();
@@ -1105,6 +1106,8 @@ public class AiAttackController {
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
             for (Card attacker : left) {
+                if (System.nanoTime() > deadlineNanos)
+                    break; // out of time - stop adding attackers rather than force through the rest of a large list
                 if (attackMax != null && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
@@ -1163,6 +1166,8 @@ public class AiAttackController {
             CardLists.sortByPowerDesc(this.attackers);
             aiAggression = 6;
             for (Card attacker : this.attackers) {
+                if (System.nanoTime() > deadlineNanos)
+                    break;
                 // reached max, breakup
                 if (combat.getAttackers().size() >= attackMax)
                     break;
@@ -1203,6 +1208,8 @@ public class AiAttackController {
         final List<Card> candidateAttackers = new ArrayList<>();
         int candidateUnblockedDamage = 0;
         for (final Card pCard : myList) {
+            if (System.nanoTime() > deadlineNanos)
+                break; // partial candidateAttackers list is safer than none - downstream code already handles smaller lists
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
             // TODO: Account for triggered power boosts.
@@ -1224,6 +1231,8 @@ public class AiAttackController {
         }
 
         for (final Card pCard : categorizedOppList) {
+            if (System.nanoTime() > deadlineNanos)
+                break; // this is the O(N×M) one via getCardCanBlockAnAttacker - highest priority of the four to guard
             // if the creature can attack next turn add it to counter attackers list
             if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
