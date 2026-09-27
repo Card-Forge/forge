@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.9
+# Mana Table — beta 0.1.0-beta.10
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -59,6 +59,12 @@ Playing a land updates your hand and battlefield, then waits in the current
 phase. The game does not automatically pass just because you have nothing else
 to cast. Use **Next step** or **Continue** to pass, or **End Turn** when offered
 to yield the rest of your turn.
+
+Cards with multiple ways to play now show a prompt naming the card. For example,
+Springheart Nantuko offers **Cast as a creature** or **Bestow — cast as an Aura**.
+Click a mode to continue to payment and targets, or **Back to the battlefield**
+to cancel. Card clicks retain their original decision context across refreshes;
+if the table changed, select the card again.
 
 Brief animations highlight card arrivals, tapping, combat, and life changes.
 Use **Animations on/off** beside the turn number to toggle them; the initial

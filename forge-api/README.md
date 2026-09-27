@@ -161,6 +161,13 @@ handles are discarded on hidden-zone transitions and omitted for face-down or
 hidden cards. They cannot authorize actions: use the current prompt's `key`.
 Event IDs and visual IDs belong to one session, not a replay or durable save.
 
+Action keys are unique to a prompt; an old key is rejected even when paired with
+a newer prompt ID. Renderers must retain the session and prompt that produced a
+clicked card instead of borrowing the newest decision's identity. The desktop
+also checks the pointer-down target before accepting a click after a refresh.
+User-initiated ability choices carry `context: playAbility`, a card-specific
+title, and optional option details. An empty choice list cancels that selection.
+
 The match beta supports single Constructed and one-on-one Commander games.
 Commander setup uses `RegisteredPlayer.forCommander`, the engine's Commander
 variant, 40 life, and 100-card singleton AI decks. Missing commander assignments

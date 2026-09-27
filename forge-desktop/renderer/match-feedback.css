@@ -14,6 +14,9 @@
 .phase-step.current { color: #f2dda7; background: #dac38a1c; box-shadow: inset 0 0 0 1px #c6b37c65; }
 .match-phase i { font-style: normal; color: #a4ae8577; }
 .match-prompt .eyebrow { line-height: 1.6; letter-spacing: 1.3px; color: #b4dfbf; }
+.ability-choice { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.ability-choice strong { font-size: 12px; color: #eee0ba; }
+.ability-choice small { font-size: 10px; line-height: 1.5; color: #b7c9b5; }
 .match-history { display: flex; flex-direction: column; min-height: 155px; flex: 1; padding: 15px; background: #192620; border-color: #415540; }
 .match-history .eyebrow { font-size: 9px; letter-spacing: 1.5px; }
 #match-latest { font: 13px/1.5 Georgia; color: #e4dfc3; margin: 10px 0; padding: 9px 0; border-bottom: 1px solid #43533d; }

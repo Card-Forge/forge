@@ -13,6 +13,9 @@
   let prepared;
   let preparing = 0;
   let previewCards = [];
+  let pointerChoice;
+  const choiceScope = () => ({ sessionId: match?.id, promptId: match?.prompt?.id });
+  const scopeAttributes = () => `data-match-session="${esc(match.id)}" data-match-prompt="${esc(match.prompt?.id || '')}"`;
   cardPreview.bind($('match-view'), '[data-preview-card]', element => previewCards[Number(element.dataset.previewCard)]);
 
   function show() {
@@ -86,7 +89,7 @@
     const stats = card.type.includes('Creature') ? `${card.power}/${card.toughness}` : '';
     const marks = [card.sick ? 'New' : '', card.attacking ? 'Attacking' : '', card.blocking ? 'Blocking' : '', card.damage ? `${card.damage} damage` : '', ...Object.entries(card.counters).map(([name, count]) => `${count} ${name}`)].filter(Boolean);
     const art = card.faceDown ? '<div class="card-art match-card-back"><span>M</span></div>' : cardArt(card);
-    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"><span class="match-card-face">${art}${stats ? `<span class="match-stats">${stats}</span>` : ''}</span><span class="match-card-name">${esc(card.name)}</span>${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -118,7 +121,7 @@
   }
 
   function render(next) {
-    if (!next || next.id === match?.id && next.revision === displayedRevision) return;
+    if (!next || next.id === match?.id && next.revision <= displayedRevision) return;
     const previous = match;
     const boardChanged = !previous || previous.id !== next.id || previous.boardRevision !== next.boardRevision;
     const before = boardChanged ? matchFeedback.capture() : new Map();
@@ -169,7 +172,14 @@
       selection = prompt.ordered && prompt.min === prompt.choices?.length ? prompt.choices.map(choice => choice.index) : [];
     }
     const status = matchFeedback.describe(match);
-    const header = `<div class="eyebrow">${status.decision}</div><h2>${prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>`;
+    const header = `<div class="eyebrow">${status.decision}</div><h2>${esc(prompt.title || (prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'))}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>`;
+    if (prompt.context === 'playAbility') {
+      const scope = choiceScope();
+      $('match-prompt').innerHTML = header + `<div class="match-choices">${prompt.choices.map(choice => `<button class="match-choice ability-choice" data-ability-choice="${choice.index}"><strong>${esc(choice.label)}</strong>${choice.detail ? `<small>${esc(choice.detail)}</small>` : ''}</button>`).join('')}</div><button id="match-ability-cancel" class="button secondary">Back to the battlefield</button>`;
+      $('match-prompt').querySelectorAll('[data-ability-choice]').forEach(button => { button.onclick = () => answer({ choices: [Number(button.dataset.abilityChoice)] }, scope); });
+      $('match-ability-cancel').onclick = () => answer({ choices: [] }, scope);
+      return;
+    }
     if (prompt.kind === 'input') {
       const okLabel = prompt.inputType === 'InputPassPriority' ? match.stack?.length ? 'Pass response' : status.yours ? 'Next step' : 'Continue' : prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok;
       $('match-prompt').innerHTML = header + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button><button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button></div>`;
@@ -233,21 +243,38 @@
     return 'Make your choice.';
   }
 
-  async function answer(values) {
+  async function answer(values, scope = choiceScope()) {
     if (inFlight || !match?.prompt) return;
+    if (scope.sessionId !== match.id || scope.promptId !== match.prompt.id) {
+      toast('The table updated. Select your card again.');
+      return;
+    }
     inFlight = true;
-    const current = match;
     $('match-prompt').classList.add('sending');
-    try { render(await api.request('matchAction', { sessionId: current.id, promptId: current.prompt.id, ...values })); }
+    try { render(await api.request('matchAction', { sessionId: scope.sessionId, promptId: scope.promptId, ...values })); }
     catch (error) { toast(error.message); await api.request('matchState').then(render).catch(() => {}); }
     finally { inFlight = false; $('match-prompt').classList.remove('sending'); }
   }
 
+  $('match-view').addEventListener('pointerdown', event => {
+    const element = event.target.closest('[data-match-card]');
+    pointerChoice = element ? { element, key: element.dataset.matchCard,
+      sessionId: element.dataset.matchSession, promptId: element.dataset.matchPrompt } : null;
+  });
+  $('match-view').addEventListener('pointercancel', () => { pointerChoice = null; });
   $('match-view').addEventListener('click', event => {
     if (match?.prompt?.kind !== 'input') return;
     const card = event.target.closest('[data-match-card]');
     const player = event.target.closest('[data-match-player]');
-    if (card) answer({ action: 'card', key: card.dataset.matchCard });
+    if (card) {
+      const pressed = pointerChoice;
+      pointerChoice = null;
+      // Keyboard activation has no pointerdown. Pointer clicks must finish on the
+      // same card and prompt on which they began, even if the hand reflows.
+      if (event.detail > 0 && (!pressed || pressed.element !== card || pressed.key !== card.dataset.matchCard)) return;
+      const scope = event.detail > 0 ? pressed : { sessionId: card.dataset.matchSession, promptId: card.dataset.matchPrompt };
+      answer({ action: 'card', key: card.dataset.matchCard }, scope);
+    }
     else if (player) answer({ action: 'player', playerId: Number(player.dataset.matchPlayer) });
   });
   $('match-view').addEventListener('toggle', event => {

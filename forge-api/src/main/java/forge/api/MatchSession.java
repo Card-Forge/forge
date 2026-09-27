@@ -283,7 +283,8 @@ public final class MatchSession {
     private Map<String, Object> cardState(CardView card, Pending prompt) {
         boolean hidden = card.isFaceDown();
         var face = card.getCurrentState();
-        String key = prompt == null ? "" : "c" + prompt.cards.size();
+        // Never let an old card handle identify a different card in a later prompt.
+        String key = prompt == null ? "" : prompt.id + ":c" + prompt.cards.size();
         if (prompt != null) prompt.cards.put(key, card);
         var counters = new LinkedHashMap<String, Integer>();
         if (card.getCounters() != null) for (var entry : card.getCounters().entrySet()) counters.put(entry.getElement().getName(), entry.getCount());
@@ -335,7 +336,8 @@ public final class MatchSession {
                 var abilities = a[2] == null ? (List<SpellAbilityView>)a[1]
                         : ((List<SpellAbilityView>)a[1]).stream().filter(SpellAbilityView::canPlay).toList();
                 yield abilities.size() == 1 && (a[2] == null || !abilities.get(0).promptIfOnlyPossibleAbility()) ? abilities.get(0)
-                        : first(choose("Choose an ability", 0, 1, abilities, false, null));
+                        : a[2] == null ? first(choose("Choose an ability of " + label(a[0]), 0, 1, abilities, false, null))
+                        : chooseAbility((CardView)a[0], abilities);
             }
             case "one" -> first(choose((String)a[0], 1, 1, (List<?>)a[1], false, (FSerializableFunction<Object, String>)a[2]));
             case "oneOrNone" -> first(choose((String)a[0], 0, 1, (List<?>)a[1], false, null));
@@ -388,6 +390,34 @@ public final class MatchSession {
         var combined = new ArrayList<Object>((Collection<?>)source);
         if (destination != null) combined.addAll((Collection<?>)destination);
         return combined;
+    }
+
+    private SpellAbilityView chooseAbility(CardView host, List<SpellAbilityView> abilities) {
+        if (abilities.isEmpty()) return null;
+        boolean visible = host != null && host.canBeShownTo(viewer) && !host.isFaceDown();
+        String name = visible ? host.getCurrentState().getName() : "this card";
+        var next = choicePrompt("choice", "Choose how to play " + name + ". Mana payment and any targets come next.",
+                abilities, 0, 1, false, ability -> visible ? String.valueOf(ability) : "Card ability");
+        next.prompt.put("context", "playAbility");
+        next.prompt.put("title", "Play " + name);
+        var items = new ArrayList<Object>();
+        for (int i = 0; i < abilities.size(); i++) {
+            var ability = abilities.get(i);
+            String description = visible ? ability.getDescription() : "Card ability";
+            String title = description;
+            String detail = "";
+            if (visible && ability.isSpell() && description.startsWith("Bestow ")) {
+                title = "Bestow — cast as an Aura";
+                detail = description;
+            } else if (visible && ability.isSpell() && description.startsWith(name + " - Creature")) {
+                title = "Cast as a creature";
+                detail = host.getCurrentState().getManaCost() + " · " + description.substring(name.length() + 3);
+            }
+            items.add(map("index", i, "label", title, "detail", detail));
+        }
+        next.prompt.put("choices", items);
+        var chosen = await(next).getAsJsonArray("choices");
+        return chosen.isEmpty() ? null : abilities.get(chosen.get(0).getAsInt());
     }
 
     private List<?> choose(String title, int min, int max, List<?> choices, boolean ordered, FSerializableFunction<Object, String> display) {
