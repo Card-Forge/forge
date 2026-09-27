@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Clone|Id:1
+humanbattlefield=Island|Id:2;Island|Id:3;Island|Id:4;Island|Id:5
+aibattlefield=Venerable Monk|Id:6

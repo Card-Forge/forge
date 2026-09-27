@@ -77,6 +77,10 @@ Consequences, each tested (`entersascopy_test.go`):
 | A watcher's `CloneTarget$ ReplacedCard` names the entering card                                    | `Defined$ ReplacedCard` (`definedCards`, `abilityRefs.replaced`)         |
 | Declining, or nothing to copy, leaves the card as itself (a 0/0 Clone dies to state-based actions) | `Clone` returns before acting                                            |
 
+Scenario `clone-enters-as-copy-and-gets-the-copied-etb-trigger` casts the real Clone as a copy of Venerable Monk: its
+controller gains 2 life and the copy survives the state-based action check a 0/0 would not. `actions.log` gains
+`queue cardchoice <id>[,...]` (`ScriptedController.QueueCardChoice`), since `Choices$` had no verb.
+
 Only the entering card's `Faces[0]` is read, not every face as `checkMovedReplacement` does: Invasion of Amonkhet
 entering front face up must not be offered its back face Lazotep Convert's replacement.
 

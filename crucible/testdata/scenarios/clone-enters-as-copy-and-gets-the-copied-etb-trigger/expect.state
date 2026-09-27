@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=BeginCombat
+humanlife=22
+humanbattlefield=Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Clone|SummonSick
+ailife=20
+aibattlefield=Venerable Monk
