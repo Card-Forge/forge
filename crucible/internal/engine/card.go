@@ -195,6 +195,13 @@ type Card struct {
 	// when their printed names differ.
 	HasNonLegendaryCreatureNames bool
 
+	// text is Layer 3's own text-changing effect on this permanent (CR
+	// 613.1c): GainTextOf$ (applyContinuousText, continuous.go). While it
+	// applies, Def is the composite text definition and text.base is the
+	// definition under it, Layer 1's own result -- the same "swap Def, every
+	// later layer folds over it unaware" shape copies already use.
+	text textChange
+
 	// RegenShields counts the regeneration shields Regenerate gave this
 	// permanent this turn (CR 701.15): each replaces one destruction
 	// (Game.regenerate) and all of them end at cleanup or when it leaves the
@@ -446,6 +453,64 @@ func (c *Card) Colors() mana.Colors {
 		base = f.Colors
 	}
 	return foldColor(base, c.ColorMod.effects)
+}
+
+// textChange is one permanent's Layer 3 text change: Java's
+// changedCardNames/changedCardManaCost/changedCardColorsByText/
+// changedCardTypesByText/changedCardTraitsByText/changedCardKeywordsByText/
+// newPTText (Card.java:128-279), every one of which GainTextOf$ writes at
+// once, collapsed into the one composite definition they describe together.
+//
+// base is non-nil exactly while the change applies. def and its key outlive
+// it: they cache the composite built from source definition from by the
+// static at Faces[face].Statics[static] of definition owner, so a pass whose
+// graveyard top is unchanged reuses it rather than building a new one. The
+// key names the static by position, not by pointer, since card.go's own
+// enginelint group may not name the static's type. Every pointer here is
+// immutable compiled data, so Game.Clone and a last-known-information
+// snapshot share them like any Def.
+type textChange struct {
+	base         *compile.Card
+	def          *compile.Card
+	from, owner  *compile.Card
+	face, static int
+}
+
+// preTextDef is c's definition under any Layer 3 text change -- Def itself
+// when none applies. CR 707.2 leaves text-changing effects out of an
+// object's copiable values, so copying reads this, not Def.
+func (c *Card) preTextDef() *compile.Card {
+	if c.text.base != nil {
+		return c.text.base
+	}
+	return c.Def
+}
+
+// clearTextChange ends c's Layer 3 text change, if any: Def returns to what
+// it was under the change. A writer that replaced Def since the change
+// applied (a copy effect ending, a face turning up) has already said what
+// Def is, so its value stands and only the record is dropped.
+func (c *Card) clearTextChange() {
+	if c.text.base == nil {
+		return
+	}
+	if c.Def == c.text.def {
+		c.Def = c.text.base
+	}
+	c.text.base = nil
+}
+
+// setTextChange makes t.def c's definition as a Layer 3 text change,
+// recording t's key for the next pass's cache check. A second change in the
+// same pass stacks over the first, as Java's timestamp-ordered tables do;
+// base stays the definition under both.
+func (c *Card) setTextChange(t textChange) {
+	if c.text.base == nil {
+		c.text.base = c.Def
+	}
+	t.base = c.text.base
+	c.text = t
+	c.Def = t.def
 }
 
 // Power and Toughness are the card's current power and toughness: Layer 0

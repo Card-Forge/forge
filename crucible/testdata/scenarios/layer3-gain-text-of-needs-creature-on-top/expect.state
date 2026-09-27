@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Untap
+humanlife=20
+humanbattlefield=Volrath's Shapeshifter
+humangraveyard=Nightmare;Lightning Bolt
+ailife=20

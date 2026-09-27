@@ -644,6 +644,161 @@ func applyOneContinuousNames(g *Game, host *Card, s *compile.Ability) {
 	}
 }
 
+// clearContinuousText ends every Layer 3 text change the previous pass
+// applied (clearTextChange, card.go), before Layer 2 runs: Java's own
+// checkStaticAbilities clears every static effect first
+// (StaticEffects.clearStaticEffects) and only then collects the static
+// abilities to apply from each card's own restored text, so a static the
+// gained text carries never takes part in a layer ahead of Layer 3. Walks
+// the whole arena rather than the battlefield enumeration, since a
+// phased-out permanent is missing from the latter (Zone.Cards, ADR-0021)
+// and would otherwise keep last pass's text forever.
+func clearContinuousText(g *Game) {
+	for i := range g.cards {
+		g.cards[i].clearTextChange()
+	}
+}
+
+// applyContinuousText is Layer 3 (CR 613.1c): every Mode$ Continuous static
+// currently in play naming GainTextOf$ rewrites its affected permanent's
+// text, applyOneContinuousText below. Called after applyContinuousControl
+// and before every other applier (CheckStateBasedActions, action.go), CR
+// 613.1's own order: the host's controller decides whose graveyard
+// TopOfGraveyard reads, and Layers 4-7 then fold over the text-changed Def
+// exactly the way they already fold over a copy effect's, picking up the
+// gained text's own statics with no change to any of them -- Java's own
+// checkStaticAbilities adds a text-gained static to every layer after the
+// one that gained it (the toAdd list).
+//
+// The host's statics are read from a Def captured before the walk, since
+// applying the line to the host itself (AffectedDefined$ Self, the one real
+// shape) swaps that very Def mid-walk.
+func applyContinuousText(g *Game) {
+	for _, pid := range g.Players() {
+		for _, host := range g.traitHosts(pid) {
+			h := g.Card(host)
+			def := h.Def
+			if def == nil {
+				continue
+			}
+			for fi, face := range def.Faces {
+				for si, s := range face.Statics {
+					applyOneContinuousText(g, h, s, textChange{owner: def, face: fi, static: si})
+				}
+			}
+		}
+	}
+}
+
+// applyOneContinuousText is StaticAbilityContinuous.java's own TEXT-layer
+// GainTextOf$ branch: the affected permanent gets the full text of the
+// GainTextOf$ card -- name, mana cost, color, types, abilities, power and
+// toughness (Java's own addChangedName/addChangedManaCost/addColorByText/
+// addChangedCardTypesByText/addChangedCardTraitsByText/
+// addChangedCardKeywordsByText/addNewPTByText, one call each) -- plus every
+// GainTextAbilities$ ability, and loses every ability of its own
+// (CardTraitChanges' own `e -> true` removal).
+//
+// Built for the corpus's one real line, Volrath's Shapeshifter:
+//
+//	AffectedDefined$ Self | GainTextOf$ TopOfGraveyard.Creature | GainTextAbilities$ VolrathDiscard
+//
+// The text read is the source card's own printed front face (its current
+// state in the graveyard -- Java's first.getCurrentStateName()), never a
+// back or adventure face: textChangedDef leaves every other face blank and
+// SplitType zero, so a transforming DFC on top of the graveyard cannot make
+// the permanent transform.
+//
+// Skipped, not guessed (GO-7): any AffectedDefined$ other than Self,
+// Affected$/AffectedZone$/CharacteristicDefining$ alongside GainTextOf$, and
+// a GainTextOf$ Defined other than TopOfGraveyard -- none is a real corpus
+// shape. The other Layer 3 params StaticAbility.java:143 lists
+// (ChangeColorWordsTo$, Incorporate$, ManaCost$) are not read here at all;
+// AddNames$ is applyOneContinuousNames' own.
+//
+// key names s by its position in the host's own definition (textChange's
+// own doc comment); applyOneContinuousText fills in the rest.
+func applyOneContinuousText(g *Game, host *Card, s *compile.Ability, key textChange) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	gainTextOf, ok := s.Param("GainTextOf")
+	if !ok {
+		return
+	}
+	if !continuousConditionMet(g, host, s) {
+		return
+	}
+	for _, key := range [...]string{"Affected", "AffectedZone", "CharacteristicDefining"} {
+		if _, ok := s.Param(key); ok {
+			return
+		}
+	}
+	if defined, _ := s.Param("AffectedDefined"); !strings.EqualFold(defined, "Self") {
+		return
+	}
+	source, ok := topOfGraveyard(g, host, gainTextOf)
+	if !ok {
+		return
+	}
+	src := g.Card(source).Def
+	if src == nil {
+		return
+	}
+	key.from = src
+	cached := host.text
+	if cached.def != nil && cached.from == key.from && cached.owner == key.owner &&
+		cached.face == key.face && cached.static == key.static {
+		key.def = cached.def
+		host.setTextChange(key)
+		return
+	}
+	var gained []*compile.Ability
+	for _, sub := range s.Subs {
+		if strings.EqualFold(sub.Key, "GainTextAbilities") {
+			gained = append(gained, sub.Ability)
+		}
+	}
+	key.def = textChangedDef(src, gained)
+	host.setTextChange(key)
+}
+
+// topOfGraveyard resolves AbilityUtils.getDefinedCards' own "TopOfGraveyard"
+// Defined for a static ability: the last card of host's controller's
+// graveyard (grave.getLast()), kept only if it matches the optional
+// ".<valid>" filter after the head (getDefinedCards' own incR[1]
+// restriction). false for an empty graveyard, a filtered-out top card, or a
+// Defined other than TopOfGraveyard.
+func topOfGraveyard(g *Game, host *Card, defined string) (CardID, bool) {
+	head, filter, hasFilter := strings.Cut(defined, ".")
+	if head != "TopOfGraveyard" {
+		return NoCard, false
+	}
+	grave := g.Zone(Graveyard, host.Controller()).Cards()
+	if len(grave) == 0 {
+		return NoCard, false
+	}
+	top := grave[len(grave)-1]
+	if hasFilter && !Matches(g, g.Card(top), valid.Parse(filter), host.Controller(), host.ID) {
+		return NoCard, false
+	}
+	return top, true
+}
+
+// textChangedDef is the definition a GainTextOf$ change gives its permanent:
+// src's own front face, with gained appended to its abilities. The ability
+// slice is copied before appending, because src is shared by every game in
+// the process (ADR-0007) and appending into its spare capacity would write
+// into all of them at once. Every other slice the face holds is shared
+// read-only, as any Def's is.
+func textChangedDef(src *compile.Card, gained []*compile.Ability) *compile.Card {
+	face := src.Faces[0]
+	face.Abilities = append(append(make([]*compile.Ability, 0, len(face.Abilities)+len(gained)), face.Abilities...), gained...)
+	out := &compile.Card{Filename: src.Filename, Name: src.Name}
+	out.Faces[0] = face
+	return out
+}
+
 // applyPumpEffects re-adds every resolved Pump effect's own contribution
 // (pumpeffect.go) into its target's Layer 7b/7c PT and Layer 6 KeywordMod --
 // the one-shot counterpart to applyContinuousPT's/applyContinuousKeyword's

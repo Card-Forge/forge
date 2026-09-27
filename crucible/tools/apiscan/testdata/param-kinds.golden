@@ -2939,8 +2939,8 @@ DisableTriggers	ValidCard	2	-	valid:5	token:2
 DisableTriggers	ValidCause	8	-	-	token:8
 DisableTriggers	ValidMode	8	-	-	token:8
 DisableTriggers	ValidTrigger	1	-	-	token:1
-Discard	AB	132	-	-	token:132
-Discard	AILogic	11	-	-	token:11
+Discard	AB	133	-	-	token:133
+Discard	AILogic	12	-	-	token:12
 Discard	Activation	1	-	-	token:1
 Discard	ActivationFirstCombat	2	-	-	bool:2
 Discard	ActivationPhases	3	-	-	token:3
@@ -2956,10 +2956,10 @@ Discard	ConditionManaSpent	1	-	-	token:1
 Discard	ConditionPresent	33	-	valid:1	token:33
 Discard	ConditionSVarCompare	12	-	-	token:12
 Discard	ConditionZone	1	-	-	token:1
-Discard	Cost	138	-	-	token:79,prose:56,int:3
+Discard	Cost	139	-	-	token:79,prose:56,int:4
 Discard	CostDesc	2	-	text:1	prose:1,token:1
 Discard	DB	798	-	-	token:798
-Discard	Defined	676	-	defined:66	token:673,prose:3
+Discard	Defined	677	-	defined:66	token:674,prose:3
 Discard	DefinedCards	27	defined:2	defined:1	token:21,prose:6
 Discard	DiscardMessage	1	-	-	prose:1
 Discard	DiscardValid	96	-	-	token:94,prose:2
@@ -2968,10 +2968,10 @@ Discard	Exhaust	1	-	-	bool:1
 Discard	InstantSpeed	1	-	-	bool:1
 Discard	IsCurse	1	-	-	bool:1
 Discard	Mandatory	3	-	-	bool:3
-Discard	Mode	1096	-	-	token:1096
+Discard	Mode	1097	-	-	token:1097
 Discard	ModeCost	1	-	-	int:1
 Discard	NonBasicSpell	1	-	-	bool:1
-Discard	NumCards	749	amount:2	amount:6	int:685,token:62,amount:2
+Discard	NumCards	750	amount:2	amount:6	int:686,token:62,amount:2
 Discard	Optional	56	-	-	bool:56
 Discard	Planeswalker	21	-	-	bool:21
 Discard	PlayerTurn	8	-	defined:2	bool:8
@@ -2984,7 +2984,7 @@ Discard	RevealNumber	11	amount:1	-	token:8,int:3
 Discard	SP	165	-	-	token:165
 Discard	ST	1	-	-	token:1
 Discard	SorcerySpeed	30	-	-	bool:30
-Discard	SpellDescription	343	-	-	prose:337,token:6
+Discard	SpellDescription	344	-	-	prose:338,token:6
 Discard	StackDescription	31	-	-	token:23,prose:8
 Discard	SubAbility	381	-	-	token:381
 Discard	TargetMax	5	-	-	token:5

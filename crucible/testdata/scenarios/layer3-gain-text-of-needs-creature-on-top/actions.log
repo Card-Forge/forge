@@ -1,0 +1,6 @@
+# CR 613.1c Layer 3: GainTextOf$ TopOfGraveyard.Creature reads only the top
+# card (the last one listed). Lightning Bolt is on top, over Nightmare, so
+# Volrath's Shapeshifter keeps its printed 0/1 and survives the check that
+# layer3-gain-text-of-zero-toughness-creature-dies proves would kill it as a
+# Swampless Nightmare.
+startturn human
