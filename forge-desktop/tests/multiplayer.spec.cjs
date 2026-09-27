@@ -13,6 +13,10 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
     ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
   try {
     const page = await application.firstWindow();
+    // Resizing an invisible packaged window can stall Chromium's screenshot
+    // compositor. Keep all layout/hit-test assertions in the packaged smoke;
+    // capture the visual review artifacts in the development run.
+    const capture = name => packaged ? Promise.resolve() : page.screenshot({ path: test.info().outputPath(name) });
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -77,7 +81,7 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
         expect(bounds.right).toBeLessThanOrEqual(bounds.max + 2);
         expect(bounds.top).toBeGreaterThan(0); expect(bounds.bottom).toBeLessThan(bounds.height);
         await expect(page.locator('#match-hand .match-card').first()).toBeVisible();
-        await page.screenshot({ path: test.info().outputPath(`${count}-players-${size[0]}.png`) });
+        await capture(`${count}-players-${size[0]}.png`);
       }
       // A drawer must escape the scrolling row, especially the first opponent's
       // wide graveyard panel and a six-seat commander's damage list.
@@ -96,7 +100,7 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
           const hit = document.elementFromPoint(box.left + 4, box.bottom - 4);
           return box.left >= 0 && box.right <= innerWidth && box.bottom <= innerHeight && (hit === element || element.contains(hit));
         })).toBe(true);
-        await page.screenshot({ path: test.info().outputPath(`${count}-${label}.png`) });
+        await capture(`${count}-${label}.png`);
         await details.locator('summary').click();
       }
       await page.locator('#match-concede').click();

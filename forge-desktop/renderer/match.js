@@ -226,7 +226,9 @@
       maxWidth: `${innerWidth - 24}px`, maxHeight: `${Math.min(innerHeight / 2, 380)}px` });
     const size = drawer.getBoundingClientRect();
     drawer.style.left = `${Math.max(12, Math.min(anchor.right - size.width, innerWidth - size.width - 12))}px`;
-    drawer.style.top = `${Math.max(12, Math.min(anchor.bottom + 8, innerHeight - size.height - 12))}px`;
+    // Open above a low anchor so the panel never covers its own close control.
+    const top = anchor.bottom + size.height + 20 <= innerHeight ? anchor.bottom + 8 : anchor.top - size.height - 8;
+    drawer.style.top = `${Math.max(12, Math.min(top, innerHeight - size.height - 12))}px`;
   }
 
   function renderPrompt() {
