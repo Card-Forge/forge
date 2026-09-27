@@ -4332,6 +4332,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             setState(getFaceupCardStateName(), updateView, true);
         }
         updateChangedText();
+        // CR 123.6c - a name sticker adds to whatever the name now is
+        if (isStickered()) {
+            recomputeStickerName();
+        }
     }
 
     public final CardStateName getFaceupCardStateName() {

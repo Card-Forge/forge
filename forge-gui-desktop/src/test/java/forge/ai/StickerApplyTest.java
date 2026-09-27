@@ -174,6 +174,19 @@ public class StickerApplyTest extends AITest {
         assertFalse(component.isStickered());
     }
 
+    /** CR 123.6c - a name sticker keeps its word when the name under it changes. */
+    @Test
+    public void testNameStickerFollowsAMutate() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Sticker word = first(sheet(p, "Eldrazi Guacamole Tightrope"), StickerKind.NAME);
+        Card bear = addCard("Grizzly Bears", p);
+        bear.addSticker(new AppliedSticker(word, game.getNextTimestamp(), 0));
+        mutateOnto(game, p, addCardToZone("Gemrazer", p, ZoneType.Hand), bear);
+        assertEquals(bear.getTopMergedCard().getName(), "Gemrazer");
+        assertEquals(bear.getName(), word.getWord() + " Gemrazer");
+    }
+
     /** CR 123.5c - when a merged permanent leaves, its owner chooses the card that keeps the stickers. */
     @Test
     public void testLeavingMergedPermanentOwnerChoosesTheKeeper() {
