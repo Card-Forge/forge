@@ -43,7 +43,8 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          java -Djava.awt.headless=true -jar "${{ steps.jar.outputs.jar }}" sim 2>&1 | tee sim-smoke.log
+          cd forge-gui
+          java -Djava.awt.headless=true -jar "../${{ steps.jar.outputs.jar }}" sim 2>&1 | tee ../sim-smoke.log
 
       - name: Upload smoke-test log
         if: always()
