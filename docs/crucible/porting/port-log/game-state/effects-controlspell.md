@@ -44,16 +44,16 @@ the Ring-bearer designation, is already in `changeControllerAt`.
 
 ### Rejected before acting (PORT-8, GO-7)
 
-| Shape                                                    | Reason                                                                                                                                                           |
-| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RememberTargets$`                                       | `AbilityUtils.java:1517`'s generic pre-resolve remember; not run by this port                                                                                    |
-| `TargetValidTargeting$`                                  | `targetChoiceFor` reads it for ChangeTargets only                                                                                                                |
-| `DefinedExchange$`                                       | an exchange object other than the host; no corpus line                                                                                                           |
-| `Condition$`, `ConditionDefined$`                        | `subAbilityConditionMet` reads `ConditionDefined$` as never met (`isPresentMatches`, `trigger.go`): a silent skip                                                |
-| missing `Mode$`; `Mode$` other than `Gain`/`Exchange`    | Java NPEs on the missing param (`ControlSpellEffect.java:58`)                                                                                                    |
-| `Defined$` other than `Targeted`/`TriggeredSpellAbility` | `getDefinedSpellAbilities` shapes not built (`Remembered`, `ValidStack`, ...)                                                                                    |
-| `CantGainControl` static in play, Exchange mode          | `Card.canBeControlledBy`'s static half                                                                                                                           |
-| Gain mode, spell no longer on the stack                  | Java dereferences the null stack instance (`ControlSpellEffect.java:99`); no corpus chain reaches it, every Gain spell being a target its parent fizzles without |
+| Shape                                                    | Reason                                                                                                                                                                                           |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `RememberTargets$`                                       | `AbilityUtils.java:1517`'s generic pre-resolve remember; not run by this port                                                                                                                    |
+| `TargetValidTargeting$`                                  | `targetChoiceFor` reads it for ChangeTargets only                                                                                                                                                |
+| `DefinedExchange$`                                       | an exchange object other than the host; no corpus line                                                                                                                                           |
+| `Condition$`, `ConditionDefined$`                        | `subAbilityConditionMet` reads `ConditionDefined$` as never met (`isPresentMatches`, `trigger.go`): a silent skip                                                                                |
+| missing `Mode$`; `Mode$` other than `Gain`/`Exchange`    | Java NPEs on the missing param (`ControlSpellEffect.java:58`) and reads any other value as Gain; every corpus line says `Gain` or `Exchange`, so an unknown value is refused rather than guessed |
+| `Defined$` other than `Targeted`/`TriggeredSpellAbility` | `getDefinedSpellAbilities` shapes not built (`Remembered`, `ValidStack`, ...)                                                                                                                    |
+| `CantGainControl` static in play, Exchange mode          | `Card.canBeControlledBy`'s static half                                                                                                                                                           |
+| Gain mode, spell no longer on the stack                  | Java dereferences the null stack instance (`ControlSpellEffect.java:99`); no corpus chain reaches it, every Gain spell being a target its parent fizzles without                                 |
 
 `ChangeTargets` now rejects `ConditionDefined$` too (`changeTargetsUnresolvedParams`): Perplexing Chimera's retarget is
 gated on `ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE2`, which read as never met and
