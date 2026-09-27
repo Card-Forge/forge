@@ -20,3 +20,13 @@ Java keeps the value of X a cost was paid with on the `SpellAbility` itself: `Sp
 
 Nothing reads the recorded X yet: `Count$xPaid` (927 corpus files) stays unresolved in `resolveAmount` (`amount.go` has
 no ability context), and `etbCounter:...:X` is unported. Tests: `xannounced_test.go`.
+
+## `HasXManaCost$` fires SpellCast triggers
+
+`checkSpellCastTriggers` (`trigger.go`) resolves `HasXManaCost$` instead of skipping every trigger that carries it:
+`TriggerSpellAbilityCastOrCopy.java:171-181`'s spell branch, the cast card's printed mana cost carrying at least one
+`{X}` (`cast.getManaCost().countX()`). Printed, not announced: a spell cast without paying its mana cost still fires it.
+The activated-ability branch (`getCostMana().getAmountOfX()`) never arises, since the walk runs only for a cast spell.
+
+Corpus: 2 `Mode$ SpellCast` lines carry `HasXManaCost$`. `unbound_flourishing.txt` now fires; `brass_infiniscope.txt`'s
+`CastTrigger` also names `ValidSA$`, still on the skip list, so it stays unfired.

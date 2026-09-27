@@ -147,3 +147,63 @@ func TestCastWithoutPayingAnnouncesNoX(t *testing.T) {
 	}
 	wantX(t, g, 0, false)
 }
+
+// HasXManaCost$ (TriggerSpellAbilityCastOrCopy.java:171-181) fires a
+// SpellCast trigger for a spell whose mana cost carries {X}.
+func TestSpellCastTriggerHasXManaCostFiresForXSpell(t *testing.T) {
+	t.Parallel()
+	g, p, _ := newTwoPlayerGame(t)
+	g.NewCard(spellCastWatcherDefExtra(t, "X Watcher", "ValidActivatingPlayer$ You | HasXManaCost$ True"), p, engine.Battlefield)
+	g.Player(p).ManaPool.Add(mana.Green, 2)
+	creature := g.NewCard(creatureDefManaCost(t, "X G"), p, engine.Hand)
+	c := engine.NewScriptedController()
+	c.QueuePayX(1)
+	queueGeneric(c, mana.ShardG, 1)
+
+	if !g.CastSpell(p, creature, c) {
+		t.Fatal("CastSpell failed casting {X}{G} with X=1 and two green")
+	}
+	if got := g.StackLen(); got != 2 {
+		t.Fatalf("StackLen = %d, want 2: the spell and the HasXManaCost trigger", got)
+	}
+	if top, _ := g.StackTop(); top.API != engine.APIGainLife {
+		t.Errorf("top = %v, want the watcher's GainLife trigger", top.API)
+	}
+}
+
+// HasXManaCost$ skips a spell whose mana cost has no {X}.
+func TestSpellCastTriggerHasXManaCostSkipsNonXSpell(t *testing.T) {
+	t.Parallel()
+	g, p, _ := newTwoPlayerGame(t)
+	g.NewCard(spellCastWatcherDefExtra(t, "X Watcher", "ValidActivatingPlayer$ You | HasXManaCost$ True"), p, engine.Battlefield)
+	g.Player(p).ManaPool.Add(mana.Green, 1)
+	creature := g.NewCard(creatureDefManaCost(t, "G"), p, engine.Hand)
+
+	if !g.CastSpell(p, creature, engine.NewScriptedController()) {
+		t.Fatal("CastSpell failed casting {G} with one green")
+	}
+	if got := g.StackLen(); got != 1 {
+		t.Errorf("StackLen = %d, want 1: no trigger for a spell without {X}", got)
+	}
+}
+
+// HasXManaCost$ reads the printed mana cost (cast.getManaCost().countX()),
+// not whether X was announced: a spell cast without paying still fires it.
+func TestSpellCastTriggerHasXManaCostReadsPrintedCost(t *testing.T) {
+	t.Parallel()
+	g, p, _ := newTwoPlayerGame(t)
+	g.NewCard(spellCastWatcherDefExtra(t, "X Watcher", "ValidActivatingPlayer$ You | HasXManaCost$ True"), p, engine.Battlefield)
+	spell := g.NewCard(gainInstant(t, "Gain X", "X W", "1"), p, engine.Exile)
+	host := pushPlayLine(t, g, p, nil, "DB$ Play | Defined$ Remembered | WithoutManaCost$ True")
+	g.Card(host).Memory.Remember(engine.CardEntity(spell))
+	top, _ := g.StackTop()
+	if err := engine.NewRegistry().Resolve(g, &top, engine.NewScriptedController()); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.StackLen(); got != 3 {
+		t.Fatalf("StackLen = %d, want 3: the Play, the free X spell, the HasXManaCost trigger", got)
+	}
+	if top, _ := g.StackTop(); top.API != engine.APIGainLife {
+		t.Errorf("top = %v, want the watcher's GainLife trigger", top.API)
+	}
+}

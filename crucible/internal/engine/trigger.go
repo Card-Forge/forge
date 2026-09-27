@@ -419,7 +419,7 @@ func attacksMultiplePlayers(g *Game, attacked EntityID) bool {
 // Not resolved, skipped via hasAnyParam below: ValidSA/ValidSAonCard (a
 // SpellAbility, not a Card, Matches (valid.go) only evaluates one of
 // those), TargetsValid/CanTargetOtherCondition (this port's targeting has
-// no per-trigger target-inspection hook), HasXManaCost/NoColoredMana/
+// no per-trigger target-inspection hook), NoColoredMana/
 // SnowSpentForCardsColor (no mana-payment-detail tracking past whether the
 // cost was paid), IsSingleTarget (no generic target-count reader),
 // TriggersWhenSpent (a mana-ability-specific remembered-list this port has
@@ -427,6 +427,13 @@ func attacksMultiplePlayers(g *Game, attacked EntityID) bool {
 // ActivatorThisTurnCast/ActivatorThisTurnCastEach (a per-turn cast-history
 // count this port tracks nothing for). 1,163 of 1,435 real lines carry none
 // of these.
+//
+// HasXManaCost is resolved: TriggerSpellAbilityCastOrCopy.java:171-181's
+// spell branch, the cast card's own mana cost carrying at least one {X}
+// (cast.getManaCost().countX()) -- the printed cost, not whether an X was
+// announced, so a spell cast without paying its mana cost still fires it.
+// The activated-ability branch never arises here: this walk only ever runs
+// for a cast spell.
 func (g *Game) checkSpellCastTriggers(controller PlayerController, cast CardID, activator PlayerID) {
 	var matches []Ability
 	c := g.Card(cast)
@@ -445,8 +452,11 @@ func (g *Game) checkSpellCastTriggers(controller PlayerController, cast CardID, 
 						continue
 					}
 					if hasAnyParam(t, "ValidSA", "ValidSAonCard", "TargetsValid", "CanTargetOtherCondition",
-						"HasXManaCost", "IsSingleTarget", "NoColoredMana", "SnowSpentForCardsColor",
+						"IsSingleTarget", "NoColoredMana", "SnowSpentForCardsColor",
 						"TriggersWhenSpent", "ActivatorThisTurnCast", "ActivatorThisTurnCastEach") {
+						continue
+					}
+					if hasAnyParam(t, "HasXManaCost") && (c.Def == nil || c.Def.Faces[0].ManaCost.CountX() == 0) {
 						continue
 					}
 					if validCard, ok := t.Param("ValidCard"); ok && !Matches(g, c, valid.Parse(validCard), h.Controller(), host) {
