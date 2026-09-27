@@ -1665,12 +1665,14 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     its layers partly haven't had to: all six subsets needed only the valid-string evaluator (`valid.go`) every other
     slice already reused, plus (for Layers 4/5) small additions to `cardtype.Line`/`valid.go` themselves. The rest of
     Layers 4/5/6 past a literal token list, Layer 7a's own SVar shapes outside the Valid family, and Layer 8's own
-    remainder above are the real remaining size of this item, alongside two layers this port has not touched at all:
-    Layer 1 (copy effects) is not even part of `StaticAbilityContinuous.java`'s own switch in Forge itself — zero real
-    references to `StaticAbilityLayer.COPY` anywhere in it, a wholly separate "become a copy of a card" mechanism at
-    resolution time, not a recomputed-each-pass continuous effect at all, so it is not this item's job even in
-    principle. Layer 3 (`GainTextOf$`, 1 real line) needs its own single-card text-copying mechanism for one real corpus
-    card, not a slice worth building for that alone.
+    remainder above are the real remaining size of this item, alongside Layer 3, which this port has not touched:
+    `GainTextOf$`, 1 real line, needs its own single-card text-copying mechanism for one real corpus card, not a slice
+    worth building for that alone. Layer 1 (copy effects) is not part of `StaticAbilityContinuous.java`'s switch either
+    — zero real references to `StaticAbilityLayer.COPY` in it — but a resolution-time state swap (`Card.addCloneState`),
+    so it is not this item's job: `Card.copies` holds it (`Clone`'s "becomes a copy",
+    `port-log/game-state/effects-clone.md`), and "enters as a copy" is a Copy-layer replacement of the card's entry
+    (`K:ETBReplacement:Copy` expanded at compile time, `entersascopy.go`; 58 of the corpus's 69 Copy-layer `Clone`
+    replacement lines resolve, `port-log/game-state/layer1-enters-as-copy.md`).
 
     **Layer 2 (`CONTROL`) is real now too — this port's first controller-change mechanism.** A new
     `ControlMod`/`ControlEffect` (`controlmod.go`) folds onto `Card.Controller`, which stops being a plain field and
