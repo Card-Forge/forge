@@ -1,6 +1,8 @@
 package engine_test
 
 import (
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb"
@@ -8,7 +10,80 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/engine"
 	"github.com/jczastkiewicz/crucible/internal/mana"
+	"github.com/jczastkiewicz/crucible/pkg/javarand"
 )
+
+// cdaCorpusFloor is how many of the real corpus's CDA power/toughness
+// dimensions (a SetPower$/SetToughness$ on a CharacteristicDefining$ line of a
+// card whose printed value is not a plain number) resolve on an otherwise
+// empty battlefield. It only ever goes up; port-log/game-state/
+// layer7a-cda-amounts.md lists what the remainder needs.
+const cdaCorpusFloor = 363
+
+// Every real CDA creature, alone on the battlefield: counts how many of its
+// "*" dimensions Layer 7a resolves, so a regression in any amount head shows
+// up as a lower count, and a panic on any real shape fails the test outright.
+// A +0/+50 anthem keeps a creature whose CDA resolves to 0 toughness on the
+// battlefield to be counted; it adds nothing to a dimension Layer 7a left
+// unresolved (foldPT only adds to a resolved value).
+func TestCharacteristicDefiningCorpusFloor(t *testing.T) {
+	t.Parallel()
+
+	db := scenarioDB(t)
+	anthem := amountDef(t, "Test Toughness Anthem", "Enchantment", "", "", "",
+		[]string{"Mode$ Continuous | Affected$ Creature | AddToughness$ 50"})
+	resolved, total := 0, 0
+	var missing []string
+	for _, name := range db.Names() {
+		def, ok := db.Card(name)
+		if !ok {
+			continue
+		}
+		face := def.Faces[0]
+		var hasP, hasT bool
+		for _, s := range face.Statics {
+			if _, cda := s.Param("CharacteristicDefining"); !cda {
+				continue
+			}
+			_, p := s.Param("SetPower")
+			_, tg := s.Param("SetToughness")
+			hasP, hasT = hasP || p, hasT || tg
+		}
+		_, errP := strconv.Atoi(face.Power)
+		_, errT := strconv.Atoi(face.Toughness)
+		hasP, hasT = hasP && errP != nil, hasT && errT != nil
+		if !hasP && !hasT {
+			continue
+		}
+		g := engine.NewGame(db, javarand.New(1), []string{"a", "b"})
+		p := g.Players()[0]
+		for _, pid := range g.Players() {
+			g.Player(pid).Life = 20
+		}
+		g.SetTurnState(1, p, engine.Main1)
+		g.NewCard(anthem, p, engine.Battlefield)
+		id := g.NewCard(def, p, engine.Battlefield)
+		engine.CheckStateBasedActions(g, engine.NewScriptedController())
+		for _, dim := range []struct {
+			has bool
+			get func() (int, bool)
+		}{{hasP, g.Card(id).Power}, {hasT, g.Card(id).Toughness}} {
+			if !dim.has {
+				continue
+			}
+			total++
+			if _, ok := dim.get(); ok {
+				resolved++
+			} else {
+				missing = append(missing, name)
+			}
+		}
+	}
+	t.Logf("CDA dimensions resolved: %d of %d; unresolved: %s", resolved, total, strings.Join(missing, ", "))
+	if resolved < cdaCorpusFloor {
+		t.Errorf("CDA dimensions resolved = %d of %d, want at least %d", resolved, total, cdaCorpusFloor)
+	}
+}
 
 // svarLine is one `SVar:Name:Body` line, in script order.
 type svarLine struct{ name, body string }
@@ -51,9 +126,10 @@ func newLiveGame(t *testing.T) *engine.Game {
 var cdaLine = []string{"Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y"}
 
 // cdaDef is a */* creature whose power is X and toughness Y.
-func cdaDef(t *testing.T, x, y string) *compile.Card {
+func cdaDef(t *testing.T, x, y string, extra ...svarLine) *compile.Card {
 	t.Helper()
-	return amountDef(t, "Test CDA", "Creature Lhurgoyf", "", "*", "*", cdaLine, svarLine{"X", x}, svarLine{"Y", y})
+	svars := append([]svarLine{{"X", x}, {"Y", y}}, extra...)
+	return amountDef(t, "Test CDA", "Creature Lhurgoyf", "", "*", "*", cdaLine, svars...)
 }
 
 func wantCDAPT(t *testing.T, g *engine.Game, id engine.CardID, power, toughness int, why string) {
@@ -137,6 +213,7 @@ func TestCharacteristicDefiningPlayerAndHostHeads(t *testing.T) {
 	for _, tt := range []struct {
 		name        string
 		x, y        string
+		extra       []svarLine
 		setup       func(g *engine.Game, p, opp engine.PlayerID, host engine.CardID)
 		power, tghn int
 	}{
@@ -146,6 +223,16 @@ func TestCharacteristicDefiningPlayerAndHostHeads(t *testing.T) {
 				g.Player(p).Life, g.Player(opp).Life = 17, 5
 			},
 			power: 17, tghn: 17,
+		},
+		{
+			// roiling_horror.txt: YourLifeTotal/Minus.Z, Z itself an SVar
+			// naming OppGreatestLifeTotal -- the operand resolved in turn.
+			name: "Roiling Horror's life difference", x: "Count$YourLifeTotal/Minus.Z", y: "Count$YourLifeTotal/Minus.Z",
+			extra: []svarLine{{"Z", "Count$OppGreatestLifeTotal"}},
+			setup: func(g *engine.Game, p, opp engine.PlayerID, _ engine.CardID) {
+				g.Player(p).Life, g.Player(opp).Life = 23, 18
+			},
+			power: 5, tghn: 5,
 		},
 		{
 			name: "CardCounters on the host", x: "Count$CardCounters.TIME", y: "Count$CardCounters.TIME/Twice",
@@ -214,7 +301,7 @@ func TestCharacteristicDefiningPlayerAndHostHeads(t *testing.T) {
 			g := newLiveGame(t)
 			p, opp := g.Players()[0], g.Players()[1]
 			g.Player(p).Life, g.Player(opp).Life = 20, 20
-			host := g.NewCard(cdaDef(t, tt.x, tt.y), p, engine.Battlefield)
+			host := g.NewCard(cdaDef(t, tt.x, tt.y, tt.extra...), p, engine.Battlefield)
 			tt.setup(g, p, opp, host)
 			engine.CheckStateBasedActions(g, engine.NewScriptedController())
 			wantCDAPT(t, g, host, tt.power, tt.tghn, tt.x+" / "+tt.y)
@@ -314,5 +401,32 @@ func TestAmountUnresolvableShapesStaySkipped(t *testing.T) {
 				t.Errorf("Power() = (%d, true), want unresolvable", pw)
 			}
 		})
+	}
+}
+
+// Winter, Misanthropic Guide's Layer 8 line shares the amount path: each
+// opponent's maximum hand size is seven minus the card types in its
+// controller's graveyard (Number$7/Minus.X over Count$ValidGraveyard
+// Card.YouOwn$CardTypes), once Delirium holds.
+func TestAmountDrivesWinterMaximumHandSize(t *testing.T) {
+	t.Parallel()
+
+	g := newLiveGame(t)
+	p, opp := g.Players()[0], g.Players()[1]
+	g.NewCard(amountDef(t, "Test Winter", "Legendary Creature Human Warlock", "", "3", "4",
+		[]string{"Mode$ Continuous | Condition$ Delirium | Affected$ Opponent | SetMaxHandSize$ Y"},
+		svarLine{"X", "Count$ValidGraveyard Card.YouOwn$CardTypes"}, svarLine{"Y", "Number$7/Minus.X"}), p, engine.Battlefield)
+	g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Graveyard)
+	g.NewCard(amountDef(t, "Test Relic", "Artifact", "1", "", "", nil), p, engine.Graveyard)
+	g.NewCard(amountDef(t, "Test Bolt", "Instant", "R", "", "", nil), p, engine.Graveyard)
+	g.NewCard(landDef(t, "Forest", "Basic Land Forest"), p, engine.Graveyard)
+
+	engine.CheckStateBasedActions(g, engine.NewScriptedController())
+
+	if limit, ok := g.Player(opp).HandSizeLimit(7); !ok || limit != 3 {
+		t.Errorf("opponent HandSizeLimit = (%d, %v), want (3, true) -- seven minus four card types", limit, ok)
+	}
+	if limit, ok := g.Player(p).HandSizeLimit(7); !ok || limit != 7 {
+		t.Errorf("controller HandSizeLimit = (%d, %v), want (7, true) -- Affected$ Opponent only", limit, ok)
 	}
 }

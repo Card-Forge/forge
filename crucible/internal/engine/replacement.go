@@ -764,13 +764,14 @@ func damageReplacementMatches(g *Game, r *compile.Ability, source CardID, hostCo
 // Plus.1 among LifeGained's own). Every other operator doXMath itself has
 // (HalfUp, ThirdUp/Down, Negative, Times, Pow, Divide*, Mod, Abs,
 // LimitMax/Min) carries 0 real lines here and is refused rather than guessed
-// at (GO-7); so do fated_firepower.txt's/hawkeye_young_avenger.txt's own
-// Plus.Y operand (Count$CardCounters.FIRE/Count$CardPower, neither the Valid
-// family resolveAmount evaluates) and
-// ojer_axonil_deepest_might_temple_of_power.txt's own bare Count$CardPower
-// VarValue$ (no ReplaceCount$ at all -- damage set equal to the host's own
-// power, not measured off original at all) -- each needs an amount head
-// this port has no evaluator for, not anything specific to this dispatch.
+// at (GO-7); so are hawkeye_young_avenger.txt's own Plus.Y operand and
+// ojer_axonil_deepest_might_temple_of_power.txt's own bare VarValue$ (no
+// ReplaceCount$ at all -- damage set equal to the host's own power, not
+// measured off original at all), both Count$CardPower, a head resolveAmount
+// has no evaluator for; and fated_firepower.txt's own VarValue$, which writes
+// the ReplaceCount$ expression inline rather than naming an SVar, so the
+// named lookup here never reaches it (its Plus.Y operand,
+// Count$CardCounters.FIRE, itself resolves).
 func resolveReplaceCountAmount(g *Game, amounts map[string]expr.Amount, host *Card, value string, original int, wantBody string) (int, bool) {
 	if n, err := strconv.Atoi(value); err == nil {
 		return n, true

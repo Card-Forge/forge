@@ -13,6 +13,7 @@
 package engine
 
 import (
+	"math"
 	"strconv"
 	"strings"
 
@@ -26,7 +27,8 @@ import (
 // below. Any other head -- Party, YourTurns, xPaid and the rest of xCount's
 // own two hundred-odd branches -- reports false (GO-7).
 //
-//   - YourLifeTotal: the controller's life (Player.getLife).
+//   - YourLifeTotal: the controller's life (Player.getLife);
+//     OppGreatestLifeTotal, the highest among its opponents.
 //   - YouDrewThisTurn: cards the controller drew this turn
 //     (Player.getNumDrawnThisTurn; Player.CardsDrawnThisTurn here).
 //   - NumInAllHands: every card in every hand -- no earlier xCount branch
@@ -74,6 +76,16 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 	switch count.Head {
 	case "YourLifeTotal":
 		return g.Player(sourceController).Life, true
+	case "OppGreatestLifeTotal":
+		// Player.getOpponentsGreatestLifeTotal: Aggregates.max seeds with
+		// Integer.MIN_VALUE, which is what no opponent at all reads as.
+		n := math.MinInt32
+		for _, pid := range g.Players() {
+			if pid != sourceController && !g.Player(pid).Lost {
+				n = max(n, g.Player(pid).Life)
+			}
+		}
+		return n, true
 	case "YouDrewThisTurn":
 		return g.Player(sourceController).CardsDrawnThisTurn, true
 	case "NumInAllHands":
