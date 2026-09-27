@@ -33,6 +33,7 @@ import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
+import forge.gui.util.SOptionPane;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -112,10 +113,11 @@ public class InputAttack extends InputSyncronizedBase {
             //must run in game thread to prevent problems for mobile game
             ThreadUtil.invokeInGameThread(() -> {
                 final Localizer localizer = Localizer.getInstance();
+                final String title = localizer.getMessage("lblCombatDeclareAttackersStep");
                 final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalAttack"));
-                // only suggest a legal attack when asked for
-                if (!getController().getGui().confirm(null, attackErrors, true, options)) {
-                    getController().getGui().message(CombatExplainer.suggestLegalAttack(combat));
+                // only suggest a legal attack when asked for, closing the dialog counts as OK
+                if (getController().getGui().showOptionDialog(attackErrors, title, SOptionPane.WARNING_ICON, options, 0) == 1) {
+                    getController().getGui().message(CombatExplainer.suggestLegalAttack(combat), title);
                 }
             });
             return;
