@@ -201,10 +201,10 @@ state-based actions, combat, mulligans, the valid-string evaluator, mana pool an
 Instants/Sorceries through the stack (ADR-0018), trigger firing, replacement effects, block legality, continuous effects
 across all eight layers (partial), targeting, SubAbility chaining, last-known information, activated abilities.
 
-M6 in progress: 170 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
-`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 33, 18 have real corpus lines and are listed by
+M6 in progress: 171 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
+`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 32, 17 have real corpus lines and are listed by
 `scripts/unported-apis.sh` as deliberately deferred (Planechase/Archenemy/Un-set/Alchemy shapes, plus
-`ChangeText`/`ControlPlayer`/`Meld`/`ControlSpell`); the rest (`Mutate`, `Haunt`, `Bond`, `Encode`,
+`ChangeText`/`ControlPlayer`/`Meld`); the rest (`Mutate`, `Haunt`, `Bond`, `Encode`,
 `InternalIgnoreEffect`/`InternalLegendaryRule`/`InternalRadiation`, ...) have zero real `AB$`/`SP$`/`DB$` lines under
 that exact name and never surface in `unported-apis.sh`'s corpus-driven listing at all. Largest gaps (corpus lines,
 `scripts/unported-apis.sh`): `Planeswalk` (30), `ChangeText` (17), `ControlPlayer` (11).

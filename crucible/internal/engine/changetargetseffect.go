@@ -47,12 +47,15 @@ type changeTargetsEffect struct{}
 // condition params subAbilityConditionMet reads as never met, silently:
 // ConditionTargetValidTargeting$/ConditionTargetsSingleTarget$ (Meddle,
 // Quicksilver Dragon), ConditionPlayerDefined$/ConditionPlayerContains$
-// (Emissary of Grudges). TargetsWithControllerProperty$ is a
-// canTargetSpellAbility filter stackAbilityCandidates does not read.
+// (Emissary of Grudges), ConditionDefined$ (Perplexing Chimera's and Sudden
+// Substitution's `ConditionDefined$ Remembered | ConditionPresent$ Card`,
+// which isPresentMatches, trigger.go, reads as never met).
+// TargetsWithControllerProperty$ is a canTargetSpellAbility filter
+// stackAbilityCandidates does not read.
 var changeTargetsUnresolvedParams = [...]string{
 	"Chooser", "RandomTarget", "RandomTargetRestriction", "ModeCost",
 	"ConditionTargetValidTargeting", "ConditionTargetsSingleTarget",
-	"ConditionPlayerDefined", "ConditionPlayerContains", "TargetsWithControllerProperty",
+	"ConditionPlayerDefined", "ConditionPlayerContains", "ConditionDefined", "TargetsWithControllerProperty",
 }
 
 // retargeted is one spell's newly targeted objects, held until every named

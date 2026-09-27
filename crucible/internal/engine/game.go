@@ -455,6 +455,9 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		// its owner's control -- the other half of castSpell's CR 110.2
 		// "the caster controls it" (castspell.go).
 		c.controller = c.Owner
+		// ControlSpell's temporary controller goes too: GameAction.java:651-654
+		// clears every controller of a card leaving for a zone without one.
+		c.tempControllers = nil
 	}
 	isPermanent := c.Type().IsPermanent()
 	g.Zone(c.Zone, c.ZoneOwner).remove(id)
@@ -554,6 +557,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 	from := c.Zone
 	if from == Stack {
 		c.controller = c.Owner
+		c.tempControllers = nil
 	}
 	g.Zone(c.Zone, c.ZoneOwner).remove(id)
 	g.putFront(id, owner)
