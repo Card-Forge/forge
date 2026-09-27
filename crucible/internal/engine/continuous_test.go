@@ -769,10 +769,10 @@ func TestApplyContinuousTypeRemovesNamedType(t *testing.T) {
 	}
 }
 
-// TestApplyContinuousTypeSkipsDynamicValue proves an AddType$ token this
-// port cannot resolve at runtime (ChosenType, a chosen-type reference) skips
-// the whole line rather than adding a literal subtype named "ChosenType".
-func TestApplyContinuousTypeSkipsDynamicValue(t *testing.T) {
+// TestApplyContinuousTypeDropsUnchosenChosenType proves an AddType$
+// ChosenType token on a host that has chosen nothing is dropped, Java's own
+// removeIf, rather than added as a literal subtype named "ChosenType".
+func TestApplyContinuousTypeDropsUnchosenChosenType(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -788,13 +788,13 @@ func TestApplyContinuousTypeSkipsDynamicValue(t *testing.T) {
 	}
 }
 
-// TestApplyContinuousTypeSkipsBulkRemovalFlag proves a line pairing AddType$
-// with a bulk RemoveCreatureTypes$ flag (the real "becomes a Turtle" shape,
-// StaticAbilityContinuous.java:425-448) is skipped whole: applying AddType$
-// alone, without the wipe RemoveCreatureTypes$ asks for, would leave the
-// creature with both its old and new creature types -- an actively wrong
-// answer this port refuses to give rather than shipping half of a line.
-func TestApplyContinuousTypeSkipsBulkRemovalFlag(t *testing.T) {
+// TestApplyContinuousTypeSkipsCategoryRemovalWithoutVocabulary proves a
+// line pairing AddType$ with RemoveCreatureTypes$ (the real "becomes a
+// Turtle" shape, StaticAbilityContinuous.java:425-448) is skipped whole in a
+// game whose DB carries no subtype vocabulary: applying AddType$ alone,
+// without the wipe it cannot evaluate, would leave the creature with both
+// its old and new creature types.
+func TestApplyContinuousTypeSkipsCategoryRemovalWithoutVocabulary(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -807,7 +807,7 @@ func TestApplyContinuousTypeSkipsBulkRemovalFlag(t *testing.T) {
 
 	typ := g.Card(creature).Type()
 	if typ.HasSubtype("Turtle") {
-		t.Errorf("Type() = %q, want the whole line skipped (RemoveCreatureTypes$ is not evaluated), not just partially applied", typ)
+		t.Errorf("Type() = %q, want the whole line skipped (no vocabulary for RemoveCreatureTypes$), not just partially applied", typ)
 	}
 	if !typ.HasSubtype("Elf") {
 		t.Errorf("Type() = %q, want the creature's own printed Elf left untouched by the skipped line", typ)
@@ -941,10 +941,10 @@ func TestApplyContinuousColorSetColorColorless(t *testing.T) {
 	}
 }
 
-// TestApplyContinuousColorSkipsChosenColor proves an AddColor$/SetColor$
-// token this port cannot resolve at runtime (ChosenColor) skips the whole
-// line rather than crashing or resolving to no color.
-func TestApplyContinuousColorSkipsChosenColor(t *testing.T) {
+// TestApplyContinuousColorUnchosenChosenColorChangesNothing proves
+// AddColor$ ChosenColor on a host that has chosen no color adds nothing --
+// getColorsFromParam's null, not an effect resolving to no color.
+func TestApplyContinuousColorUnchosenChosenColorChangesNothing(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -956,7 +956,7 @@ func TestApplyContinuousColorSkipsChosenColor(t *testing.T) {
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
 	if colors := g.Card(creature).Colors(); colors != mana.Red {
-		t.Errorf("Colors() = %v, want unchanged Red -- an unresolvable ChosenColor token must not apply", colors)
+		t.Errorf("Colors() = %v, want unchanged Red -- nothing chosen, nothing added", colors)
 	}
 }
 
@@ -1046,10 +1046,10 @@ func TestApplyContinuousKeywordRecomputesWhenSourceLeaves(t *testing.T) {
 	}
 }
 
-// TestApplyContinuousKeywordSkipsDynamicValue proves an AddKeyword$ token
-// this port cannot resolve at runtime (a ChosenColor-qualified Protection
-// grant) skips the whole line rather than granting a literal, wrong keyword.
-func TestApplyContinuousKeywordSkipsDynamicValue(t *testing.T) {
+// TestApplyContinuousKeywordDropsUnchosenChosenColorToken proves an
+// AddKeyword$ token naming ChosenColor on a host that has chosen none is
+// dropped (Java's removeIf) rather than granted with the literal marker.
+func TestApplyContinuousKeywordDropsUnchosenChosenColorToken(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -1061,16 +1061,14 @@ func TestApplyContinuousKeywordSkipsDynamicValue(t *testing.T) {
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
 	if g.Card(creature).HasKeyword("Protection") {
-		t.Error("HasKeyword(\"Protection\") = true, an unresolvable ChosenColor token must not apply")
+		t.Error("HasKeyword(\"Protection\") = true, want the unchosen ChosenColor token dropped")
 	}
 }
 
-// TestApplyContinuousKeywordSkipsRemoveKeywordCombo proves a line pairing
-// AddKeyword$ with RemoveKeyword$ (a real "gains X, loses Y" shape) is
-// skipped whole: applying AddKeyword$ alone would leave the creature with
-// both the old and new keyword, an actively wrong answer this port refuses
-// to give rather than shipping half of a line.
-func TestApplyContinuousKeywordSkipsRemoveKeywordCombo(t *testing.T) {
+// TestApplyContinuousKeywordAddsAndRemoves proves a line pairing
+// AddKeyword$ with RemoveKeyword$ (a real "gains X, loses Y" shape) applies
+// both halves: the creature gains Reach and loses its printed Flying.
+func TestApplyContinuousKeywordAddsAndRemoves(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -1082,11 +1080,11 @@ func TestApplyContinuousKeywordSkipsRemoveKeywordCombo(t *testing.T) {
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
 	c := g.Card(creature)
-	if c.HasKeyword("Reach") {
-		t.Error("HasKeyword(\"Reach\") = true, want the whole line skipped (RemoveKeyword$ is not evaluated), not just partially applied")
+	if !c.HasKeyword("Reach") {
+		t.Error("HasKeyword(\"Reach\") = false, want the granted Reach")
 	}
-	if !c.HasKeyword("Flying") {
-		t.Error("HasKeyword(\"Flying\") = false, want the creature's own printed Flying left untouched by the skipped line")
+	if c.HasKeyword("Flying") {
+		t.Error("HasKeyword(\"Flying\") = true, want the printed Flying removed")
 	}
 }
 
