@@ -395,6 +395,24 @@ func TestRollPlanarDiceRefusesUnportedShapes(t *testing.T) {
 	})
 }
 
+// TestChaoticAethersEffectRefusesTheRoll proves the PlanarDiceResult
+// refusal reaches Chaotic Aether's real replacement, which is live only on
+// the effect card its DB$ Effect makes (chaotic_aether.txt:5,7-8).
+func TestChaoticAethersEffectRefusesTheRoll(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := planarDieGame(t, dieBlank)
+	planarDeck(g, p, plainPlane(t, "There"))
+	resolveLine(t, g, p, engine.NewScriptedController(),
+		"DB$ Effect | ReplacementEffects$ BlankIsChaos | Duration$ Permanent",
+		"BlankIsChaos", "Event$ PlanarDiceResult | ValidRoll$ Blank | ReplaceWith$ REChaos | Description$ Each blank roll of the planar die is a {CHAOS} roll until a player planeswalks away from a plane.",
+		"REChaos", "DB$ ReplaceEffect | VarName$ Result | VarValue$ Chaos | VarType$ PlanarDice")
+	err := rollDie(t, g, p, engine.NewScriptedController(), "DB$ RollPlanarDice")
+	if err == nil || !strings.Contains(err.Error(), "Event$ PlanarDiceResult") {
+		t.Errorf("err = %v, want Chaotic Aether's replacement refused", err)
+	}
+}
+
 // TestRolledDieTriggersNotLiveDoNotRefuse proves the RolledDie refusal is
 // for live lines only: a creature card in hand, and a battlefield line
 // whose TriggerZones$ is elsewhere, cannot fire and leave the roll alone.
