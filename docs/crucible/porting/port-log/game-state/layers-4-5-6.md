@@ -12,18 +12,18 @@ own gate, affected set and runtime tokens.
 
 ## Layers 4, 5 and 6: gate, affected set and runtime tokens
 
-### What was missing, checked against Java
+### What Layers 4/5/6 read, past a literal token list
 
-The gap was not a missing layer or an unported amount evaluator. Three things kept most real lines from resolving:
+Three mechanisms, ported into `continuouslayers.go`, decide whether and how a real `S:Mode$ Continuous` line applies:
 
-| Gap                                                                                                                 | Java                                                                       | Effect before this change                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `AffectedDefined$ Self`/`Enchanted`/`Equipped`/`AttachedBy Self`: upstream's shape for Auras, Equipment, self-buffs | `getAffectedCards`, `StaticAbilityContinuous.java:1048-1050,1066-1067`     | every such line skipped: 1,062 of 1,875 `AddKeyword$` lines, 187 of 284 `AddType$`/`RemoveType$`, 38 of 61 colors |
-| `IsPresent$`, `CheckSVar$` chain, `EffectZone$`, `TopCardOfLibraryIs$`                                              | `StaticAbility.checkConditions`/`zonesCheck`, `StaticAbility.java:337-512` | ignored: 55 `AddKeyword$`, 6 type, 1 color line applied unconditionally                                           |
-| Runtime tokens (`ChosenType`, `ChosenColor`, `AllColors`, `HostCardUID`, ...), `Remove*Types$`, `RemoveKeyword$`    | `StaticAbilityContinuous.java:167-460, 706-748`                            | whole line skipped                                                                                                |
+| Mechanism                                                                                                           | Java                                                                       |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `AffectedDefined$ Self`/`Enchanted`/`Equipped`/`AttachedBy Self`: upstream's shape for Auras, Equipment, self-buffs | `getAffectedCards`, `StaticAbilityContinuous.java:1048-1050,1066-1067`     |
+| `IsPresent$`, `CheckSVar$` chain, `EffectZone$`, `TopCardOfLibraryIs$` (`layerStaticApplies`)                       | `StaticAbility.checkConditions`/`zonesCheck`, `StaticAbility.java:337-512` |
+| Runtime tokens (`ChosenType`, `ChosenColor`, `AllColors`, `HostCardUID`, ...), `Remove*Types$`, `RemoveKeyword$`    | `StaticAbilityContinuous.java:167-460, 706-748`                            |
 
-Every host-side value these tokens read already existed: `Memory` (`memory.go`) holds the chosen color, type, number,
-player, names and even/odd, and the imprinted list. `*cardtype.Registry` was also already reachable, see below.
+Every host-side value these tokens read already exists: `Memory` (`memory.go`) holds the chosen color, type, number,
+player, names and even/odd, and the imprinted list. `*cardtype.Registry` is also already reachable, see below.
 
 ### `*cardtype.Registry`: no new injection, the DB already carries it
 
@@ -78,16 +78,17 @@ when every param that layer's applier reads is a shape the port evaluates (wheth
 state, not shape). A `CheckSVar$`/`PresentCompare$` operand counts as resolvable when it is an integer or an SVar
 `resolveAmount` (`amount.go`) computes: `Count$Valid<zones> <spec>` with no operator or distinct-property suffix.
 
-| Lines                                                    | Total | Before | After |
-| -------------------------------------------------------- | ----- | ------ | ----- |
-| `AddType$`/`RemoveType$`                                 | 284   | 52     | 254   |
-| Type flags without `AddType$`/`RemoveType$`              | 10    | 0      | 2     |
-| `AddColor$`/`SetColor$`                                  | 61    | 10     | 60    |
-| `AddKeyword$`                                            | 1,875 | 666    | 1,710 |
-| `RemoveKeyword$`/`RemoveAllAbilities$`, no `AddKeyword$` | 61    | 0      | 56    |
+| Lines                                                    | Total | Resolved |
+| -------------------------------------------------------- | ----- | -------- |
+| `AddType$`/`RemoveType$`                                 | 284   | 254      |
+| Type flags without `AddType$`/`RemoveType$`              | 10    | 2        |
+| `AddColor$`/`SetColor$`                                  | 61    | 60       |
+| `AddKeyword$`                                            | 1,875 | 1,710    |
+| `RemoveKeyword$`/`RemoveAllAbilities$`, no `AddKeyword$` | 61    | 56       |
 
-"Before" is `origin/master`'s own skip logic on today's corpus, not the 201/54/1,556 the previous note cited: upstream
-has since moved Aura/Equipment/self lines to `AffectedDefined$`, which that logic skipped.
+Most of the resolved total names `AffectedDefined$ Self`/`Enchanted`/`Equipped`/`AttachedBy Self` -- upstream's current
+shape for Auras, Equipment and self-buffs -- and reaches its target through `layerAffectedCards`. The unresolved
+remainder is the "Still not resolved" table below.
 
 ### Still not resolved
 
