@@ -39,10 +39,11 @@ on 5.
 | `Count$YourTurns`                                                                       | 2    | deferred: `Player.Turn` is never incremented           |
 | `Count$Party`                                                                           | 1    | deferred: needs `*cardtype.Registry` and Java's greedy |
 
-Net: 389 of 405 by shape. `TestCharacteristicDefiningCorpusFloor` measures it end to end against the real card DB, one
-card alone on the battlefield: 363 of 378 "\*" dimensions resolve (a printed integer is not counted; the four
-planeswalker misses are the test's own loyalty-less walkers dying to CR 704.5i, not an amount gap). Its floor only goes
-up.
+Net: 389 of 405 by shape — per CDA line, SVar chain followed, every face. `TestCharacteristicDefiningCorpusFloor`
+measures it end to end against the real card DB, one card per name, face 0, alone on the battlefield: 363 of 374 "\*"
+dimensions resolve. A printed integer is not counted, and Grist and Grand Master of Flowers are skipped: planeswalkers
+put in with no loyalty counters leave the battlefield (CR 704.5i), so there is no Layer 7a value to read. Its floor only
+goes up.
 
 ### Model: extend `resolveAmount`, the one evaluator
 
@@ -84,6 +85,17 @@ No new `Game` state, no new controller decision: `Game.Clone` and `TestCloneAllo
 | Devotion to `Chosen...` or colorless              | Host's chosen color / a mana type with no `mana.Colors` bit; 0 CDA lines                                       |
 | `Mode$ Devotion` line with any other param        | `checkConditions`' Condition$ family is not evaluated for this mode                                            |
 | An operand SVar that does not resolve             | Java prints to stderr and uses 0; a wrong P/T is worse than an unresolved one                                  |
+
+### Latent Forge defects (PORT-8)
+
+None is reachable from today's corpus, so none is patched upstream; each is why the matching shape above is refused
+rather than reproduced.
+
+| File:line                     | Defect                                                                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `AbilityUtils.java:3310,3321` | `playerXCount` Highest/Lowest pass the whole `s`, `/op` included, to `playerXProperty`: the operator applies twice |
+| `AbilityUtils.java:3257`      | `doXMath` `Mod` with a zero operand throws `ArithmeticException`                                                   |
+| `AbilityUtils.java:1584`      | `xCount` `Number$` with a non-integer body throws `NumberFormatException`                                          |
 
 ### Deferred, and what each needs
 

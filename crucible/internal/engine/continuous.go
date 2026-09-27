@@ -205,10 +205,10 @@ func applyOneContinuousPT(g *Game, host *Card, amounts map[string]expr.Amount, s
 // Add-shaped key.
 //
 // The amount itself is resolveAmount's (amount.go, amountheads.go,
-// amountpaid.go): 363 of the corpus's 378 real "*" CDA power/toughness
-// dimensions resolve (TestCharacteristicDefiningCorpusFloor, whose four
-// planeswalker misses are the test's own loyalty-less walkers dying, not an
-// amount gap) -- the Count$Valid family with or without a doXMath
+// amountpaid.go): 363 of the corpus's 374 real "*" CDA power/toughness
+// dimensions on a card that stays on the battlefield resolve
+// (TestCharacteristicDefiningCorpusFloor) -- the Count$Valid family with or
+// without a doXMath
 // suffix or a handlePaid property (Tarmogoyf's CardTypes, GreatestCardManaCost,
 // ...), SVar$/Number$, Domain, YourLifeTotal, Devotion, Chroma, CardCounters,
 // NumInAllHands, ChosenNumber, YouDrewThisTurn, OppGreatestLifeTotal and

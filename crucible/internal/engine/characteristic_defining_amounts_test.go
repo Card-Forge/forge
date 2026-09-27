@@ -33,7 +33,7 @@ func TestCharacteristicDefiningCorpusFloor(t *testing.T) {
 	anthem := amountDef(t, "Test Toughness Anthem", "Enchantment", "", "", "",
 		[]string{"Mode$ Continuous | Affected$ Creature | AddToughness$ 50"})
 	resolved, total := 0, 0
-	var missing []string
+	var missing, left []string
 	for _, name := range db.Names() {
 		def, ok := db.Card(name)
 		if !ok {
@@ -64,6 +64,13 @@ func TestCharacteristicDefiningCorpusFloor(t *testing.T) {
 		g.NewCard(anthem, p, engine.Battlefield)
 		id := g.NewCard(def, p, engine.Battlefield)
 		engine.CheckStateBasedActions(g, engine.NewScriptedController())
+		if g.Card(id).Zone != engine.Battlefield {
+			// Not a creature on the battlefield at all -- a planeswalker
+			// whose CDA applies only elsewhere, put there with no loyalty
+			// counters (CR 704.5i) -- so there is no Layer 7a value to read.
+			left = append(left, name)
+			continue
+		}
 		for _, dim := range []struct {
 			has bool
 			get func() (int, bool)
@@ -79,7 +86,8 @@ func TestCharacteristicDefiningCorpusFloor(t *testing.T) {
 			}
 		}
 	}
-	t.Logf("CDA dimensions resolved: %d of %d; unresolved: %s", resolved, total, strings.Join(missing, ", "))
+	t.Logf("CDA dimensions resolved: %d of %d; unresolved: %s; left the battlefield: %s",
+		resolved, total, strings.Join(missing, ", "), strings.Join(left, ", "))
 	if resolved < cdaCorpusFloor {
 		t.Errorf("CDA dimensions resolved = %d of %d, want at least %d", resolved, total, cdaCorpusFloor)
 	}
