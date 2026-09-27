@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.11
+# Mana Table — beta 0.1.0-beta.12
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -79,6 +79,14 @@ Playing a land updates your hand and battlefield, then waits in the current
 phase. The game does not automatically pass just because you have nothing else
 to cast. Use **Next step** or **Continue** to pass, or **End Turn** when offered
 to yield the rest of your turn.
+
+During the opponent's turn, priority pauses say **Optional response**.
+**Continue opponent's turn** plays nothing at this pause and passes once; you
+can still act at later pauses. When a spell or ability is waiting, the prompt
+names it, shows its engine description, and offers **Let it resolve**. Select a
+highlighted card or ability if you want to act first. **Skip responses this turn**
+is the separate option to pass optional responses for the rest of that turn;
+required choices still appear.
 
 Cards with multiple ways to play now show a prompt naming the card. For example,
 Springheart Nantuko offers **Cast as a creature** or **Bestow — cast as an Aura**.

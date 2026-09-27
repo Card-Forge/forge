@@ -41,15 +41,31 @@ const matchFeedback = (() => {
     const stage = stages.findIndex(([, keys]) => keys.includes(state.phaseKey));
     const prompt = state.prompt;
     let instruction = '';
+    let title = '', passLabel = '', passHint = '', responseText = '';
+    const optionalResponse = prompt?.inputType === 'InputPassPriority' && (!yours || Boolean(state.stack?.length));
     if (prompt?.inputType === 'InputPassPriority') {
-      instruction = state.stack?.length
-        ? `${state.stack[0].name} is waiting to resolve. You may respond with an instant or ability, or pass to let it resolve if nobody responds.`
-        : yours ? 'You can play a highlighted card or activate an ability. Choose Next step to pass without taking an action.'
-          : 'It is your opponent’s turn, and you can respond now. Play a highlighted instant or ability, or choose Continue.';
+      if (state.stack?.length) {
+        title = `${state.stack[0].name} is waiting.`;
+        instruction = 'Choose Let it resolve if you do not want to play anything first. It takes effect after both players pass.\n\nTo respond, select a highlighted card or ability.';
+        passLabel = 'Let it resolve';
+        passHint = 'Play nothing in response to this spell or ability.';
+        responseText = state.stack[0].text || '';
+      } else if (yours) {
+        title = 'Play a card or continue.';
+        instruction = 'You can play a highlighted card or activate an ability. Choose Next step to pass without taking an action.';
+        passLabel = 'Next step';
+      } else {
+        title = 'Let your opponent continue.';
+        instruction = 'Nothing is waiting to resolve. Choose Continue opponent’s turn to play nothing at this pause.\n\nYou only need to select a highlighted card or ability if you want to act first.';
+        passLabel = 'Continue opponent’s turn';
+        passHint = 'Pass only this chance to act.';
+      }
     }
     const decision = terminal ? 'GAME COMPLETE' : !prompt ? 'GAME RESOLVING' : pregame ? 'YOUR CHOICE'
-      : yours ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR ACTION';
-    return { human, active, yours, terminal, pregame, owner, phase, stage, instruction, decision };
+      : optionalResponse ? `${yours ? 'YOUR TURN' : 'OPPONENT’S TURN'} · OPTIONAL RESPONSE`
+        : yours ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR CHOICE';
+    return { human, active, yours, terminal, pregame, owner, phase, stage, instruction, decision,
+      optionalResponse, title, passLabel, passHint, responseText };
   }
 
   function capture() {
@@ -134,7 +150,7 @@ const matchFeedback = (() => {
       lane.classList.toggle('turn-active', active && !status.terminal);
       lane.querySelector('.match-player')?.classList.toggle('has-turn', active);
       const label = lane.querySelector('.match-player-info > small');
-      if (label) label.textContent = status.terminal ? 'Game over' : isHuman && next.prompt ? 'Your action now'
+      if (label) label.textContent = status.terminal ? 'Game over' : isHuman && next.prompt ? status.optionalResponse ? 'Your response is optional' : 'Your action now'
         : active ? (isHuman ? 'Your turn' : 'Opponent’s turn') : 'Waiting';
     }
     const entries = next.activity || [];

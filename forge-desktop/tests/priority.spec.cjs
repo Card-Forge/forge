@@ -1,0 +1,83 @@
+const { test, expect, _electron: electron } = require('@playwright/test');
+const path = require('node:path');
+const fs = require('node:fs');
+
+test('opponent pauses explain passing once, and a waiting spell names what will resolve', async () => {
+  const appPath = path.resolve(__dirname, '..');
+  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
+    FORGE_USER_DATA: path.join(appPath, 'test-results', `priority-${Date.now()}`) };
+  delete env.ELECTRON_RUN_AS_NODE;
+  const packaged = process.env.MANA_TEST_PACKAGED === '1'
+    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
+  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
+    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  try {
+    const page = await application.firstWindow();
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
+    await page.locator('#import-button').click();
+    await page.locator('#import-name').fill('Priority pauses');
+    await page.locator('#import-text').fill('Deck\n60 Forest');
+    await page.locator('#preview-import').click();
+    await page.locator('#confirm-import').click();
+    await expect(page.locator('#deck-name')).toHaveValue('Priority pauses');
+    await page.locator('#play-match').click();
+    await page.locator('#match-start').click();
+    let sawPause = false, sawSpell = false, oldPrompt;
+    const deadline = Date.now() + 65000;
+    while (Date.now() < deadline && !(sawPause && sawSpell)) {
+      const state = await page.evaluate(() => window.forge.request('matchState'));
+      expect(state.status, state.error).not.toBe('error');
+      const p = state.prompt;
+      if (!p || p.id === oldPrompt) { await page.waitForTimeout(30); continue; }
+      const human = state.players.find(player => player.human);
+      const opponentPriority = p.inputType === 'InputPassPriority' && state.activePlayerId !== human.id;
+      const emptyPause = !sawPause && opponentPriority && !state.stack.length && state.phaseKey === 'UPKEEP';
+      const spellPause = !sawSpell && opponentPriority && state.stack.length;
+      if (emptyPause || spellPause) {
+        if (await page.locator('#match-prompt').getAttribute('data-prompt-id') !== p.id) { await page.waitForTimeout(100); continue; }
+        await expect(page.locator('#match-prompt .eyebrow')).toHaveText('OPPONENT’S TURN · OPTIONAL RESPONSE');
+        if (emptyPause) {
+          await expect(page.locator('#match-prompt h2')).toHaveText('Let your opponent continue.');
+          await expect(page.locator('#match-ok')).toHaveText('Continue opponent’s turn');
+          await expect(page.locator('#match-cancel')).toHaveText('Skip responses this turn');
+          await page.screenshot({ path: test.info().outputPath('opponent-pause.png') });
+          await page.locator('#match-ok').click();
+          // Continue must pass once, then stop again during the same opponent turn.
+          await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.id || p.id).not.toBe(p.id);
+          const next = await page.evaluate(() => window.forge.request('matchState'));
+          expect(next.activePlayerId).toBe(state.activePlayerId);
+          expect(next.turn).toBe(state.turn);
+          await page.waitForTimeout(350);
+          expect((await page.evaluate(() => window.forge.request('matchState'))).prompt.id).toBe(next.prompt.id);
+          sawPause = true;
+        } else {
+          await expect(page.locator('#match-prompt h2')).toHaveText(`${state.stack[0].name} is waiting.`);
+          await expect(page.locator('#match-ok')).toHaveText('Let it resolve');
+          if (state.stack[0].text) await expect(page.locator('.match-response-detail p')).toHaveText(state.stack[0].text);
+          await page.screenshot({ path: test.info().outputPath('waiting-spell.png') });
+          await page.locator('#match-ok').click();
+          await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.id || p.id).not.toBe(p.id);
+          sawSpell = true;
+        }
+      } else {
+        const answer = { sessionId: state.id, promptId: p.id };
+        if (p.kind === 'choice') answer.choices = Array.from({ length: p.min }, (_, index) => index);
+        else if (p.kind === 'reveal') answer.action = 'ack';
+        else if (p.okEnabled) answer.action = 'ok';
+        else {
+          const card = human.zones.flatMap(zone => zone.cards).find(card => card.selectable && !card.highlighted);
+          expect(card, JSON.stringify(p)).toBeTruthy();
+          answer.action = 'card'; answer.key = card.key;
+        }
+        await page.evaluate(answer => window.forge.request('matchAction', answer), answer);
+      }
+      oldPrompt = p.id;
+    }
+    expect(sawPause).toBe(true);
+    expect(sawSpell).toBe(true);
+    expect(errors).toEqual([]);
+  } finally { await application.close(); }
+});

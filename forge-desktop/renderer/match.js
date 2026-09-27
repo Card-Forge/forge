@@ -182,8 +182,11 @@
       return;
     }
     if (prompt.kind === 'input') {
-      const okLabel = prompt.inputType === 'InputPassPriority' ? match.stack?.length ? 'Pass response' : status.yours ? 'Next step' : 'Continue' : prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok;
-      $('match-prompt').innerHTML = header + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button><button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button></div>`;
+      const okLabel = status.passLabel || (prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok);
+      const skipResponses = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn' && !status.yours;
+      const response = status.responseText ? `<div class="match-response-detail"><span>WAITING TO RESOLVE</span><p>${esc(status.responseText)}</p></div>` : '';
+      const passHint = status.passHint ? `<small class="match-pass-hint">${esc(status.passHint)}</small>` : '';
+      $('match-prompt').innerHTML = header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(skipResponses ? 'Skip responses this turn' : prompt.cancel || 'Cancel')}</button>${skipResponses ? '<small class="match-pass-hint">Skip optional responses until this turn ends. You will still make required choices.</small>' : ''}</div>`;
       $('match-ok').onclick = () => answer({ action: 'ok' });
       $('match-cancel').onclick = () => answer({ action: 'cancel' });
       if ($('match-attack-all')) $('match-attack-all').onclick = () => answer({ action: 'attackAll' });
@@ -239,7 +242,7 @@
     if (prompt.inputType === 'InputAttack') return 'Choose your attackers.';
     if (prompt.inputType === 'InputBlock') return 'Set your blocks.';
     if (prompt.inputType.startsWith('InputPayMana')) return 'Pay for your spell.';
-    if (prompt.inputType === 'InputPassPriority') return match.stack?.length ? 'Respond or let it resolve.' : matchFeedback.describe(match).yours ? 'Play a card or continue.' : 'You can respond now.';
+    if (prompt.inputType === 'InputPassPriority') return matchFeedback.describe(match).title;
     if (prompt.inputType.includes('Target')) return 'Choose a target.';
     return 'Make your choice.';
   }

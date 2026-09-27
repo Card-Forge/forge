@@ -10,6 +10,7 @@ test('match table plays cards through engine prompts and resumes after deck brow
   const errors = [];
   try {
     const page = await application.firstWindow();
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     page.on('pageerror', error => errors.push(error.message));
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.evaluate(() => {
@@ -53,7 +54,10 @@ test('match table plays cards through engine prompts and resumes after deck brow
         const active = state.players.find(player => player.id === state.activePlayerId);
         await expect(page.locator('#match-turn-owner')).toHaveText(active.human ? 'Your turn' : `${active.name}’s turn`);
         await expect(page.locator('#match-turn')).toHaveText(`Turn ${state.turn}`);
-        await expect(page.locator('#match-prompt .eyebrow')).toHaveText(active.human ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR ACTION');
+        const optional = p.inputType === 'InputPassPriority' && (!active.human || state.stack?.length);
+        await expect(page.locator('#match-prompt .eyebrow')).toHaveText(optional
+          ? `${active.human ? 'YOUR TURN' : 'OPPONENT’S TURN'} · OPTIONAL RESPONSE`
+          : active.human ? 'YOUR ACTION' : 'OPPONENT’S TURN · YOUR CHOICE');
         await expect(page.locator('#match-phase [aria-current="step"]')).toHaveCount(1);
         await expect(page.locator('#match-phase-name')).not.toBeEmpty();
         if (active.human) yourTurn = true; else opponentTurn = true;

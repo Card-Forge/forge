@@ -17,6 +17,10 @@
 .ability-choice { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .ability-choice strong { font-size: 12px; color: #eee0ba; }
 .ability-choice small { font-size: 10px; line-height: 1.5; color: #b7c9b5; }
+.match-pass-hint { font-size: 10px; line-height: 1.5; color: #a3b4a0; padding: 0 2px 6px; }
+.match-response-detail { margin-top: 14px; padding: 11px; border: 1px solid #71674c; border-radius: 5px; background: #d6be8b09; }
+.match-response-detail > span { font-size: 8px; letter-spacing: 1px; color: #d6be8b; }
+.match-response-detail > p { margin-top: 6px; max-height: 95px; overflow-y: auto; white-space: pre-line; }
 .match-history { display: flex; flex-direction: column; min-height: 155px; flex: 1; padding: 15px; background: #192620; border-color: #415540; }
 .match-history .eyebrow { font-size: 9px; letter-spacing: 1.5px; }
 #match-latest { font: 13px/1.5 Georgia; color: #e4dfc3; margin: 10px 0; padding: 9px 0; border-bottom: 1px solid #43533d; }
