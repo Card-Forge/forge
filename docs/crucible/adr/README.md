@@ -39,10 +39,11 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0026](0026-turn-driver.md)                                 | Turn driver: priority wired into turns         | Accepted           |
 | [0027](0027-per-target-fizzle-check.md)                     | CR 608.2b: per-target fizzle check             | Accepted           |
 | [0028](0028-ward-native-triggered-ability.md)               | Ward: a natively constructed triggered ability | Accepted           |
+| [0029](0029-planechase-active-plane-state.md)               | Planechase: active-plane state                 | Accepted           |
 
 ## Numbering
 
-No gap and no missing number: 0001-0028, every number used exactly once. Numbers are allocated when an ADR is written,
+No gap and no missing number: 0001-0029, every number used exactly once. Numbers are allocated when an ADR is written,
 never reserved — the plan lists remaining subjects without numbers for that reason.
 
 The plan's M0 exit gate asked for ADR-0001 through ADR-0011 `Accepted`. The three subjects after it — ports and
