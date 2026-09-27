@@ -46,6 +46,7 @@
     $('match-commanders').hidden = configuration.needsCommander || !configuration.commanders.length;
     $('match-commanders').textContent = `Commander: ${configuration.commanders.join(' + ')}`;
     $('match-rules-copy').textContent = `${configuration.format} · One game. Two players. ${configuration.startingLife} life.${configuration.format === 'Commander' ? ' Commander tax and commander damage use the engine rules.' : ' The engine handles casting, mana, targeting, and combat.'}`;
+    $('match-format-suggestion').hidden = !prepared.commanderAvailable;
     updateSetup();
     $('match-setup').showModal();
   }
@@ -284,6 +285,14 @@
   for (const id of ['match-tab', 'play-match']) $(id).onclick = () => run(setup);
   $('match-start').onclick = () => run(start);
   $('match-commander-choice').onchange = chooseCommander;
+  $('match-use-commander').onclick = () => run(async () => {
+    $('match-use-commander').disabled = true;
+    try {
+      await mutate(() => api.request('format', { format: 'Commander', revision: prepared.revision }));
+      $('match-setup').close();
+      await setup();
+    } finally { $('match-use-commander').disabled = false; }
+  });
   $('match-opponent-choice').onchange = event => { $('match-opponent-description').textContent = options.find(option => option.id === event.target.value)?.description || ''; };
   $('match-back').onclick = showWorkshop;
   $('match-concede').onclick = () => $('match-concede-dialog').showModal();

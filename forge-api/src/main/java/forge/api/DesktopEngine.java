@@ -109,12 +109,28 @@ public final class DesktopEngine {
                 yield save();
             }
             case "save" -> { requireDeck(); yield save(); }
-            case "importPreview" -> DeckImport.preview(string(p, "text", ""));
+            case "deckPresets" -> DeckPresets.list();
+            case "presetImport" -> {
+                var deck = DeckPresets.create(string(p, "id", ""));
+                ensureSaved();
+                editor = new DeckEditor(catalog, deck);
+                deckId = UUID.randomUUID().toString();
+                format = "Commander";
+                clearPractice();
+                yield save();
+            }
+            case "importPreview" -> {
+                var preview = DeckImport.preview(string(p, "text", ""));
+                String suggested = preview.problems().isEmpty() && !preview.entries().isEmpty()
+                        ? MatchSetup.suggestedFormat(preview.open("Import preview", catalog).toDeck()) : "Constructed";
+                yield Map.of("entries", preview.entries(), "problems", preview.problems(), "suggestedFormat", suggested);
+            }
             case "import" -> {
                 var preview = DeckImport.preview(string(p, "text", ""));
                 if (preview.entries().isEmpty()) { throw new IllegalArgumentException("Paste at least one card"); }
                 DeckEditor imported = preview.open(checkedName(string(p, "name", "Imported deck")), catalog);
-                String importedFormat = checkedFormat(string(p, "format", "Constructed"));
+                String requestedFormat = string(p, "format", "Auto");
+                String importedFormat = requestedFormat.equals("Auto") ? MatchSetup.suggestedFormat(imported.toDeck()) : checkedFormat(requestedFormat);
                 ensureSaved();
                 editor = imported;
                 deckId = UUID.randomUUID().toString();
@@ -132,6 +148,7 @@ public final class DesktopEngine {
                 result.put("deckId", deckId); result.put("revision", editor.snapshot().revision());
                 result.put("name", editor.snapshot().name()); result.put("setup", preview);
                 result.put("saveError", saveError); result.put("opponents", MatchSession.opponents(format));
+                result.put("commanderAvailable", format.equals("Constructed") && MatchSetup.suggestedFormat(editor.toDeck()).equals("Commander"));
                 yield result;
             }
             case "matchStart" -> {

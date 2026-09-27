@@ -225,7 +225,8 @@ async function previewImport() {
     $('import-preview').innerHTML = '<div class="import-errors">Paste a deck list with at least one card.</div>';
   } else {
     const count = result.entries.reduce((sum, entry) => sum + entry.quantity, 0);
-    $('import-preview').innerHTML = `<div class="import-result">✓ ${count} cards across ${new Set(result.entries.map(entry => entry.section)).size} section(s). Ready to bring into the workshop.</div>`;
+    const format = $('import-format').value === 'Auto' ? `${result.suggestedFormat} · detected` : $('import-format').value;
+    $('import-preview').innerHTML = `<div class="import-result">✓ ${count} cards · ${esc(format)}. Ready to bring into the workshop.</div>`;
     $('confirm-import').disabled = false;
   }
 }
@@ -297,6 +298,7 @@ $('new-form').onsubmit = event => {
 };
 for (const id of ['import-button', 'import-sidebar']) $(id).onclick = openImport;
 $('import-text').oninput = () => { previewGeneration++; $('confirm-import').disabled = true; $('import-preview').textContent = ''; };
+$('import-format').onchange = () => { if ($('import-text').value.trim()) run(previewImport); };
 $('preview-import').onclick = () => run(previewImport);
 $('import-file').onclick = () => run(async () => { const file = await api.importFile(); if (file) { $('import-text').value = file.text; $('import-name').value = file.name; await previewImport(); } });
 $('confirm-import').onclick = () => {

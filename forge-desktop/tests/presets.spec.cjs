@@ -1,0 +1,82 @@
+const { test, expect, _electron: electron } = require('@playwright/test');
+const path = require('node:path');
+const fs = require('node:fs');
+
+test('preset browser adds a playable Commander copy, offers AI precons and repairs old Constructed imports', async () => {
+  const appPath = path.resolve(__dirname, '..');
+  const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
+    FORGE_USER_DATA: path.join(appPath, 'test-results', `presets-ui-${Date.now()}`) };
+  delete env.ELECTRON_RUN_AS_NODE;
+  const packaged = process.env.MANA_TEST_PACKAGED === '1'
+    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
+  const application = await electron.launch({ env, args: packaged ? [] : [appPath],
+    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
+  try {
+    const page = await application.firstWindow();
+    await application.evaluate(({ BrowserWindow, shell }) => {
+      BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false);
+      globalThis.browsedDecks = [];
+      shell.openExternal = async url => { globalThis.browsedDecks.push(url); };
+    });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
+    const original = await page.evaluate(() => window.forge.request('snapshot'));
+    await page.locator('#presets-sidebar').click();
+    await expect(page.locator('[data-preset]')).toHaveCount(4);
+    await expect(page.locator('#preset-name')).toHaveText('Explorers of the Deep');
+    await expect(page.locator('#preset-count')).toHaveText('99 main + 1 commander · 40 life');
+    await page.locator('#preset-source').click();
+    await page.locator('#preset-popular').click();
+    await page.locator('#preset-browse').click();
+    await expect.poll(() => application.evaluate(() => globalThis.browsedDecks.length)).toBe(3);
+    const links = await application.evaluate(() => globalThis.browsedDecks);
+    expect(links[0]).toBe('https://moxfield.com/decks/lnTvk7dGp0KzsvxIMxPDJg');
+    expect(JSON.parse(Buffer.from(new URL(links[1]).searchParams.get('q'), 'base64').toString()).sortColumn).toBe('views');
+    expect(JSON.parse(Buffer.from(new URL(links[2]).searchParams.get('q'), 'base64').toString()).sortColumn).toBe('updated');
+    await page.screenshot({ path: test.info().outputPath('preset-library.png') });
+    await page.locator('#preset-add').click();
+    await expect(page.locator('#deck-name')).toHaveValue('Explorers of the Deep');
+    await expect(page.locator('#deck-format')).toHaveValue('Commander');
+    await expect(page.locator('#commander-count')).toHaveText('1');
+    await expect(page.locator('#main-count')).toHaveText('99');
+    expect((await page.evaluate(() => window.forge.request('list'))).decks.some(deck => deck.id === original.id)).toBe(true);
+    await page.locator('#play-match').click();
+    await expect(page.locator('#match-opponent-choice option')).toHaveCount(6);
+    await page.locator('#match-opponent-choice').selectOption('preset:veloci-ramp-tor');
+    await expect(page.locator('#match-opponent-description')).toContainText('Pantlaza, Sun-Favored');
+    await expect(page.locator('#match-opponent-description')).toContainText('100 cards');
+    await page.locator('#match-start').click();
+    await expect(page.locator('#match-opponent .match-life b')).toHaveText('40');
+    await expect(page.locator('#match-opponent .match-command-zone')).toContainText('Pantlaza, Sun-Favored');
+    const game = await page.evaluate(() => window.forge.request('matchState'));
+    const ai = game.players.find(player => !player.human);
+    expect(ai.zones.find(zone => zone.name === 'Library').count + ai.zones.find(zone => zone.name === 'Hand').count).toBe(99);
+    await page.locator('#match-concede').click();
+    await page.locator('#match-concede-confirm').click();
+    await expect(page.locator('#match-again')).toBeVisible();
+    await page.locator('#workshop-tab').click();
+    await page.locator('#import-button').click();
+    await expect(page.locator('#import-format')).toHaveValue('Auto');
+    await page.locator('#import-text').fill('Deck\n34 Forest\n33 Mountain\n31 Plains\n1 Toph, Greatest Earthbender\n1 Toph, the First Metalbender');
+    await page.locator('#preview-import').click();
+    await expect(page.locator('#import-preview')).toContainText('Commander · detected');
+    await page.locator('#import-format').selectOption('Constructed');
+    await expect(page.locator('#import-preview')).toContainText('Constructed');
+    await page.locator('#confirm-import').click();
+    await expect(page.locator('#deck-format')).toHaveValue('Constructed');
+    const saved = await page.evaluate(() => window.forge.request('snapshot'));
+    await page.locator('#play-match').click();
+    await expect(page.locator('#match-format-suggestion')).toBeVisible();
+    await expect(page.locator('#match-opponent-description')).toContainText('60 cards');
+    await page.locator('#match-use-commander').click();
+    await expect(page.locator('#match-rules-copy')).toContainText('Commander');
+    await expect(page.locator('#match-opponent-description')).toContainText('100 cards');
+    await expect(page.locator('#match-commander-choice option:checked')).toHaveText('Toph, the First Metalbender');
+    await expect(page.locator('#match-format-suggestion')).toBeHidden();
+    const corrected = await page.evaluate(() => window.forge.request('snapshot'));
+    expect(corrected.format).toBe('Commander');
+    expect(corrected.deck).toEqual(saved.deck);
+    expect(errors).toEqual([]);
+  } finally { await application.close(); }
+});

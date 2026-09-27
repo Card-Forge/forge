@@ -1,10 +1,11 @@
-const { app, BrowserWindow, ipcMain, dialog, protocol, net, session, Menu, clipboard } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, protocol, net, session, Menu, clipboard, shell } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 const { pathToFileURL } = require('node:url');
 const { createHash } = require('node:crypto');
 const { EngineClient } = require('./engine-client.cjs');
 const { productName } = require('./package.json');
+const { commanderBrowse, publicDeckUrl } = require('./deck-sources.cjs');
 
 const project = path.resolve(__dirname, '..');
 const userData = process.env.FORGE_USER_DATA || (app.isPackaged
@@ -16,7 +17,7 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'workshop', privileges: { standa
 
 let window;
 let engine;
-const methods = new Set(['search', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'export', 'practice', 'matchOpponents', 'matchSetup', 'matchStart', 'matchState', 'matchAction', 'matchConcede']);
+const methods = new Set(['search', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'deckPresets', 'presetImport', 'export', 'practice', 'matchOpponents', 'matchSetup', 'matchStart', 'matchState', 'matchAction', 'matchConcede']);
 function verify(event) {
   if (!window || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame
     || !event.senderFrame.url.startsWith('workshop://app/')) throw new Error('Unknown desktop client');
@@ -60,7 +61,7 @@ app.on('second-instance', () => {
 app.whenReady().then(async () => {
   protocol.handle('workshop', request => {
     const pathname = new URL(request.url).pathname;
-    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/match-feedback.js', '/match-feedback.css']);
+    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/presets.js', '/presets.css', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/match-feedback.js', '/match-feedback.css']);
     if (!allowed.has(pathname)) return new Response('Not found', { status: 404 });
     return net.fetch(pathToFileURL(path.join(__dirname, 'renderer', pathname.slice(1))).toString());
   });
@@ -89,6 +90,18 @@ app.whenReady().then(async () => {
     return engine.request(method, params);
   });
   ipcMain.handle('art', (event, name) => { verify(event); return art(name); });
+  ipcMain.handle('browse-decks', async (event, destination) => {
+    verify(event);
+    let url;
+    if (destination === 'updated' || destination === 'views') url = commanderBrowse(destination);
+    else {
+      const preset = (await engine.request('deckPresets')).find(preset => preset.id === destination);
+      if (!preset) throw new Error('Unknown preset deck');
+      url = publicDeckUrl(preset.moxfieldUrl);
+    }
+    await shell.openExternal(url);
+    return true;
+  });
   ipcMain.handle('copy-deck', async event => {
     verify(event);
     clipboard.writeText(await engine.request('export', { kind: 'text' }));

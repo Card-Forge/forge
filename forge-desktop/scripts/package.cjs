@@ -16,7 +16,7 @@ const jar = path.join(root, 'forge-api/target/forge-engine.jar');
 const javaHome = process.env.JAVA_HOME || 'C:/Program Files/BellSoft/LibericaJDK-17';
 if (!fs.existsSync(jar)) throw new Error('Build forge-api with Maven before packaging.');
 fs.mkdirSync(stage, { recursive: true });
-for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'renderer']) {
+for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'deck-sources.cjs', 'renderer']) {
   fs.cpSync(path.join(appSource, file), path.join(stage, file), { recursive: true });
 }
 const metadata = JSON.parse(fs.readFileSync(path.join(appSource, 'package.json'), 'utf8'));

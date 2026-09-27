@@ -16,6 +16,15 @@ public final class MatchSetup {
                           boolean needsCommander, List<CommanderChoice> commanderChoices, String problem) { }
     public record Prepared(Deck deck, Preview preview) { }
 
+    public static String suggestedFormat(Deck deck) {
+        if (!deck.getCommanders().isEmpty()) return "Commander";
+        if (deck.getMain().countAll() == 100) {
+            var preview = prepare(deck, "Commander", "").preview();
+            if (preview.problem() == null || preview.commanderChoices().stream().anyMatch(CommanderChoice::valid)) return "Commander";
+        }
+        return "Constructed";
+    }
+
     public static Prepared prepare(Deck source, String format, String chosenId) {
         Deck deck = new Deck(source);
         boolean commander = format.equals("Commander");

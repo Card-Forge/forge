@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.10
+# Mana Table — beta 0.1.0-beta.11
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -8,6 +8,20 @@ or account is needed. The first launch scans the card library and can take a mom
 
 The first launch gives you **First spark**, a sample 60-card red deck.
 
+**Preset decks** in the sidebar adds an editable copy of Explorers of the Deep,
+Veloci-Ramp-Tor, Blood Rites, or Ahoy Mateys. All four are complete 100-card
+Commander precons with their commander assigned. They are also available as AI
+opponents in Commander matches. The bundled lists work offline and come from
+[Wizards' official decklists](https://magic.wizards.com/en/news/announcements/the-lost-caverns-of-ixalan-commander-decklists);
+each preset links to its matching Moxfield listing.
+
+The preset browser opens Moxfield's Commander discovery page sorted by most
+views or recent updates in your default browser. These are external browse links,
+not a locally cached popularity ranking. Moxfield currently rejects automated
+requests from this environment. To add another deck, export its text list on
+Moxfield and choose **Import a Moxfield list**. Private decks need to be exported
+by someone with access; the app does not sign in to Moxfield.
+
 1. Search by card name, type, or rules text. Filter colors, type, and mana value.
    The library starts unfiltered. **Clear filters** restores the full catalog;
    filtered results show their count alongside the library total. Back-face names
@@ -16,12 +30,15 @@ The first launch gives you **First spark**, a sample 60-card red deck.
    it in the sidebar. Use **+** or drag it into the deck to add a copy.
 3. Switch between Main, Side, and (for Commander) Cmd. Changes save automatically.
 4. Rename the deck in its title field. Use undo/redo or Ctrl+Z/Ctrl+Y.
-5. Paste a list with **Import deck**, check it, and import. Unknown lines are shown
+5. Paste a list with **Import deck**, check it, and import. **Auto-detect** recognizes
+   assigned commanders and valid 100-card Commander lists; an explicit format
+   selection overrides detection. Unknown lines are shown
    before any deck is created. Files in `.txt`, `.dec`, and `.dck` are supported.
 6. Use **Export** to copy a list, save text, or save a `.dck` for the original Forge.
 7. Choose **Draw a hand** for practice draws. Shuffle, mulligan, draw, and bottom cards.
-8. Choose **Play vs AI** with a Constructed or Commander deck. Pick Verdant (green creatures)
-   or Cinder (red damage), then start a real game. Keep or mulligan your opening
+8. Choose **Play vs AI** with a Constructed or Commander deck. Commander offers
+   the four precons plus Goreclaw (Verdant) and Torbran (Cinder); Constructed uses
+   the two 60-card opponents. Keep or mulligan your opening
    hand; after a mulligan, select the cards to return and confirm.
 9. Click highlighted cards to play them, use **Auto-pay mana**, and follow the
    decision panel. Click a player's life total to target them. For combat, select
@@ -31,7 +48,10 @@ The first launch gives you **First spark**, a sample 60-card red deck.
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
 
-Commander games start at 40 life, with 100-card AI decks led by Goreclaw or Torbran.
+Commander games start at 40 life, with 100-card AI decks and a command zone on both
+sides. Setup states the opponent's format and total card count. If an existing
+Commander-ready import was saved as Constructed, **Use Commander · 100 cards**
+changes its saved format without changing its cards, then refreshes the opponents.
 If your imported list has all 100 cards in Main, match setup offers a **Commander
 for this game** selector. A single valid leader is selected automatically; other
 choices show any deck-color or structure problems. One copy moves into the command

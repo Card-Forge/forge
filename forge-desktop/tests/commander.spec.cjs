@@ -1,15 +1,20 @@
 const { test, expect, _electron: electron } = require('@playwright/test');
 const path = require('node:path');
+const fs = require('node:fs');
 
 test('a 100-card Toph list can pick a valid commander and start a 40-life AI game', async () => {
   const appPath = path.resolve(__dirname, '..');
   const environment = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: '1',
     FORGE_USER_DATA: path.join(appPath, 'test-results', `commander-ui-${Date.now()}`) };
   delete environment.ELECTRON_RUN_AS_NODE;
-  const application = await electron.launch({ args: [appPath], env: environment });
+  const packaged = process.env.MANA_TEST_PACKAGED === '1'
+    ? JSON.parse(fs.readFileSync(path.join(appPath, '../dist/latest-beta.json'), 'utf8')) : null;
+  const application = await electron.launch({ args: packaged ? [] : [appPath], env: environment,
+    ...(packaged ? { executablePath: path.join(packaged.directory, packaged.executable) } : {}) });
   const errors = [];
   try {
     const page = await application.firstWindow();
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     await page.locator('#import-button').click();
@@ -40,6 +45,10 @@ test('a 100-card Toph list can pick a valid commander and start a 40-life AI gam
     await expect(page.locator('#match-human .match-command-zone')).toContainText('Toph, the First Metalbender');
     await expect(page.locator('#match-opponent .match-command-zone')).toContainText('Torbran, Thane of Red Fell');
     const pregame = await page.evaluate(() => window.forge.request('matchState'));
+    const ai = pregame.players.find(player => !player.human);
+    expect(pregame.format).toBe('Commander');
+    expect(ai.zones.find(zone => zone.name === 'Library').count + ai.zones.find(zone => zone.name === 'Hand').count).toBe(99);
+    expect(ai.zones.find(zone => zone.name === 'Hand').cards).toEqual([]);
     if (pregame.prompt?.inputType === 'InputConfirm') {
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', pregame.prompt.id);
       await page.locator('#match-ok').click(); // Choose play before the opening hands are dealt.

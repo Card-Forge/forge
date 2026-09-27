@@ -79,9 +79,10 @@ public final class MatchSession {
         if (commander) rules.addAppliedVariant(GameType.Commander);
         rules.setGamesPerMatch(1);
         rules.setWarnAboutAICards(false); // Opponent lists are supplied by the host, not chosen by the player.
-        var ai = new LobbyPlayerAi(opponent.equals("red") ? "Cinder · AI" : "Verdant · AI", Set.of());
+        var preset = commander && opponent.startsWith("preset:") ? DeckPresets.find(opponent.substring(7)) : null;
+        var ai = new LobbyPlayerAi(preset != null ? preset.name() + " · AI" : opponent.equals("red") ? "Cinder · AI" : "Verdant · AI", Set.of());
         ai.setAiProfile("Default");
-        var aiDeck = commander ? CommanderOpponents.create(opponent) : opponentDeck(opponent);
+        var aiDeck = preset != null ? DeckPresets.create(preset.id()) : commander ? CommanderOpponents.create(opponent) : opponentDeck(opponent);
         var humanPlayer = (commander ? RegisteredPlayer.forCommander(new Deck(deck)) : new RegisteredPlayer(new Deck(deck))).setPlayer(new LobbyPlayerHuman("You"));
         var computer = (commander ? RegisteredPlayer.forCommander(aiDeck) : new RegisteredPlayer(aiDeck)).setPlayer(ai);
         var match = new Match(rules, List.of(humanPlayer, computer), "Mana Table");
@@ -128,11 +129,16 @@ public final class MatchSession {
     public boolean finished() { return closed || error != null || game.isGameOver(); }
 
     public static List<Map<String, String>> opponents(String format) {
-        if (format.equals("Commander")) return List.of(
-                Map.of("id", "green", "name", "Verdant", "description", "Goreclaw, Terror of Qal Sisma · Green ramp and big creatures · 100 cards"),
-                Map.of("id", "red", "name", "Cinder", "description", "Torbran, Thane of Red Fell · Red creatures and damage · 100 cards"));
-        return List.of(Map.of("id", "green", "name", "Verdant", "description", "Green creatures, mana ramp, and combat tricks"),
-                Map.of("id", "red", "name", "Cinder", "description", "Red creatures and direct damage"));
+        if (format.equals("Commander")) {
+            var opponents = new ArrayList<Map<String, String>>();
+            for (var preset : DeckPresets.list()) opponents.add(Map.of("id", "preset:" + preset.id(), "name", preset.name(),
+                    "description", preset.commanders().get(0).name() + " · " + preset.theme() + " · Commander · 100 cards"));
+            opponents.add(Map.of("id", "green", "name", "Goreclaw · Verdant", "description", "Goreclaw, Terror of Qal Sisma · Green ramp and big creatures · Commander · 100 cards"));
+            opponents.add(Map.of("id", "red", "name", "Torbran · Cinder", "description", "Torbran, Thane of Red Fell · Red creatures and damage · Commander · 100 cards"));
+            return List.copyOf(opponents);
+        }
+        return List.of(Map.of("id", "green", "name", "Verdant", "description", "Green creatures, mana ramp, and combat tricks · Constructed · 60 cards"),
+                Map.of("id", "red", "name", "Cinder", "description", "Red creatures and direct damage · Constructed · 60 cards"));
     }
 
     private static Deck opponentDeck(String key) {

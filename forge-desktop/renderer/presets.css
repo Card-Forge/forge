@@ -1,0 +1,31 @@
+#presets-dialog { width: 1000px; max-width: calc(100vw - 60px); }
+.presets-intro { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 20px; }
+.presets-intro p { color: var(--muted); line-height: 1.6; max-width: 440px; }
+.presets-links { display: flex; gap: 14px; flex-wrap: wrap; }
+.presets-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+.preset-grid { display: grid; gap: 10px; align-content: start; }
+.preset-card { display: flex; gap: 16px; align-items: center; text-align: left; background: #18221f; border: 1px solid #3b4c40; border-radius: 8px; padding: 12px; }
+.preset-card[aria-pressed=true] { background: #2a392c; border-color: var(--accent); box-shadow: inset 3px 0 var(--accent); }
+.preset-card h3 { font: 20px Georgia; margin: 8px 0; }
+.preset-card p { font-size: 11px; color: var(--mint); margin-bottom: 7px; }
+.preset-card small { font-size: 10px; color: var(--muted); }
+.preset-art { flex: 0 0 58px; }
+.preset-art .card-art { border-radius: 5px; }
+.preset-art .card-fallback { inset: 3px; padding: 4px; }
+.preset-art .card-fallback strong { font-size: 7px; }
+.preset-art .art-symbol { font-size: 25px; }
+.preset-detail { background: #141d19; border: 1px solid var(--line); border-radius: 8px; padding: 22px; min-width: 0; }
+.preset-detail h3 { font: 26px Georgia; margin: 10px 0 14px; }
+.preset-detail p { line-height: 1.6; color: #b9cbb9; margin-bottom: 12px; }
+#preset-commander { font-size: 12px; color: var(--accent); }
+#preset-count { font-size: 11px; }
+.preset-detail details { margin: 16px 0; color: var(--muted); font-size: 11px; }
+.preset-detail summary { cursor: pointer; }
+#preset-list { max-height: 200px; overflow: auto; white-space: pre-wrap; font: 11px/1.7 'Segoe UI', sans-serif; }
+.preset-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.preset-provenance { margin-top: 16px; font-size: 10px; color: var(--muted); line-height: 1.6; }
+.preset-community { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 22px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.preset-community p { font-size: 11px; color: var(--muted); line-height: 1.6; max-width: 590px; }
+.match-format-suggestion { padding: 12px; background: #293629; border: 1px solid #647251; border-radius: 6px; margin-bottom: 16px; }
+.match-format-suggestion p { line-height: 1.6; font-size: 12px; margin-bottom: 10px; }
+@media(max-height:800px) { .preset-card { padding: 8px 12px; } .preset-art { flex-basis: 43px; } .preset-card h3 { font-size: 17px; margin: 5px 0; } }

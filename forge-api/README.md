@@ -130,7 +130,7 @@ The private desktop transport exposes:
 | Request | Parameters / result |
 | --- | --- |
 | `matchOpponents` | Lists the green and red AI decks for the current deck's format |
-| `matchSetup` | Optional `{commanderId}`; returns deck ID/revision, candidate commanders, validated setup, and opponents |
+| `matchSetup` | Optional `{commanderId}`; returns deck ID/revision, candidate commanders, validated setup, opponents, and `commanderAvailable` for a Commander-ready list saved as Constructed |
 | `matchStart` | `{opponent, commanderId?, deckId?, revision?}`; validates a detached match deck and rejects stale setup |
 | `matchState` | Cached snapshot with session `id`, `revision`, `boardRevision`, `status`, `players`, `stack`, `prompt`, `activity`, and `result` |
 | `matchAction` | `{sessionId, promptId, ...answer}`; replies once to the current prompt |
@@ -169,6 +169,18 @@ User-initiated ability choices carry `context: playAbility`, a card-specific
 title, and optional option details. An empty choice list cancels that selection.
 
 The match beta supports single Constructed and one-on-one Commander games.
+`deckPresets` returns four attributed offline Commander precons with card counts,
+commander entries, and source links. `presetImport {id}` validates the complete
+list before creating a new saved Commander deck; existing decks are never replaced.
+Commander opponents include `preset:<id>` for these same lists. Constructed games
+reject Commander preset opponents.
+
+`importPreview` includes `suggestedFormat`. Imports default to `format: Auto`:
+assigned commanders imply Commander, and an unassigned 100-card list must validate
+with at least one commander before it is detected as Commander. Explicit formats
+remain authoritative. Existing decks only change format through the `format`
+command, including the desktop's explicit **Use Commander** action.
+
 Commander setup uses `RegisteredPlayer.forCommander`, the engine's Commander
 variant, 40 life, and 100-card singleton AI decks. Missing commander assignments
 can be supplied from the main deck for that game without changing the saved list.
