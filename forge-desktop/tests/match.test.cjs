@@ -2,6 +2,41 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { testProfile, startEngine, ready } = require('./support/engine.cjs');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const hasteCreatures = new Set(['Monastery Swiftspear', 'Raging Goblin', 'Reckless Lackey', 'Torch Courier']);
+
+// Establish the fixture before testing the playthrough. A random opening with
+// only burn spells can finish a game without ever presenting an attack prompt.
+// Only unsuitable opening hands are discarded; failures during play are final.
+async function prepareOpening(engine) {
+  for (let attempt = 1; attempt <= 20; attempt++) {
+    let state = await engine.request('matchStart', { opponent: 'green' });
+    const deadline = Date.now() + 10000;
+    let previousPrompt;
+    while (Date.now() < deadline) {
+      state = await engine.request('matchState');
+      assert.notEqual(state.status, 'error', state.error);
+      const p = state.prompt;
+      if (!p || p.id === previousPrompt) { await sleep(25); continue; }
+      assert.ok(!state.turn, 'Fixture setup must stop before the first turn');
+      if (p.inputType?.includes('Mulligan')) {
+        const hand = state.players.find(player => player.human).zones.find(zone => zone.name === 'Hand').cards;
+        if (hand.filter(card => card.name === 'Mountain').length >= 2
+          && hand.some(card => hasteCreatures.has(card.name))
+          && hand.some(card => ['Lightning Bolt', 'Shock'].includes(card.name))) {
+          return { state, attempt };
+        }
+        await engine.request('matchConcede', { sessionId: state.id });
+        break;
+      }
+      previousPrompt = p.id;
+      assert.equal(p.inputType, 'InputConfirm', 'Unexpected setup prompt: ' + JSON.stringify(p));
+      assert.equal(p.ok, 'Play');
+      await engine.request('matchAction', { sessionId: state.id, promptId: p.id, action: 'ok' });
+    }
+    assert.ok(state.prompt?.inputType?.includes('Mulligan'), 'Setup did not reach the opening hand');
+  }
+  throw new Error('Could not prepare an opening with two lands, a haste creature, and a one-mana targeted spell');
+}
 
 test('real human-controller match: casting, targeting, combat, hidden information and lifecycle', { timeout: 180000 }, async () => {
   const data = testProfile('match');
@@ -9,8 +44,9 @@ test('real human-controller match: casting, targeting, combat, hidden informatio
   let state;
   try {
     await ready(engine);
-    const deck = await engine.request('import', { name: 'Match regression', text: 'Deck\n24 Mountain\n4 Lightning Bolt\n4 Shock\n4 Monastery Swiftspear\n4 Ghitu Lavarunner\n4 Goblin Arsonist\n4 Borderland Marauder\n4 Lightning Strike\n4 Viashino Pyromancer\n4 Chandra\'s Pyrohelix' });
-    state = await engine.request('matchStart', { opponent: 'green' });
+    const deck = await engine.request('import', { name: 'Match regression', text: 'Deck\n24 Mountain\n4 Lightning Bolt\n4 Shock\n4 Monastery Swiftspear\n4 Raging Goblin\n4 Reckless Lackey\n4 Torch Courier\n4 Lightning Strike\n4 Viashino Pyromancer\n4 Chandra\'s Pyrohelix' });
+    const opening = await prepareOpening(engine);
+    state = opening.state;
     const sessionId = state.id;
     await assert.rejects(engine.request('matchStart', { opponent: 'red' }), /current match/);
     let oldPrompt;
@@ -75,7 +111,8 @@ test('real human-controller match: casting, targeting, combat, hidden informatio
         answer.action = 'attackAll'; combatCount++;
       } else if (p.inputType === 'InputPassPriority') {
         const playable = zone(human, 'Hand').filter(card => card.selectable);
-        const card = playable.find(card => card.type.includes('Land')) || playable.find(card => card.type.includes('Creature')) || playable[0];
+        const card = playable.find(card => card.type.includes('Land')) || playable.find(card => hasteCreatures.has(card.name))
+          || playable.find(card => card.type.includes('Creature')) || playable[0];
         if (card) { answer.action = 'card'; answer.key = card.key; cardCount++; }
         else answer.action = 'ok';
       } else if (p.inputType === 'InputBlock' && zone(human, 'Battlefield').some(card => card.selectable && !card.blocking && card.type.includes('Creature'))) {
@@ -112,9 +149,10 @@ test('real human-controller match: casting, targeting, combat, hidden informatio
     await assert.rejects(engine.request('matchAction', firstAction), /no longer active/);
     const conceded = await engine.request('matchConcede', { sessionId: restarted.id });
     assert.equal(conceded.result, 'Defeat');
-    console.log(JSON.stringify({ result: state.result, turns: state.turn, steps, cardCount, targetCount, combatCount, paidCount, blockCount, events: activity.size, hiddenInformation: true }));
+    console.log(JSON.stringify({ result: state.result, openingAttempts: opening.attempt, turns: state.turn, steps, cardCount, targetCount, combatCount, paidCount, blockCount, events: activity.size, hiddenInformation: true }));
   } catch (error) {
-    console.error('Match diagnostics:', data, JSON.stringify({ status: state?.status, prompt: state?.prompt, turn: state?.turn }));
+    console.error('Match diagnostics:', data, JSON.stringify({ status: state?.status, prompt: state?.prompt, turn: state?.turn,
+      activity: state?.activity?.slice(-12) }));
     throw error;
   } finally { engine.close(); }
 });

@@ -28,7 +28,10 @@ CLI repetitions create
 independent profiles and stop at the first failure. They do not replay old card
 handles. Existing `tests/match.test.cjs` also plays a full game through casting,
 targets, payments, combat, and a terminal result; that engine bot is separate from
-the guided encounter runner.
+the guided encounter runner. It prepares an opening with two lands, a haste
+creature, and a one-mana targeted spell, discarding unsuitable openings before
+the playthrough starts (at most 20 attempts). It never retries a failed
+playthrough. This makes required actions reachable without seeding the engine.
 
 To exercise a packaged beta, add `--packaged` to the CLI command (or set
 `MANA_TEST_PACKAGED=1` for the Playwright suite). This
