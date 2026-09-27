@@ -121,6 +121,10 @@ stack, combat flags, counters, mana, and transient reveal choices. Card handles
 are scoped to a prompt; the renderer never receives hidden card IDs or raw logs.
 The original `GameStateMapper` remains a smaller projection for other consumers.
 
+The desktop host disables automatic passing when no actions are available.
+An action such as playing a land returns to a visible priority prompt before
+the game can advance. Explicit pass and end-turn inputs still use engine rules.
+
 The private desktop transport exposes:
 
 | Request | Parameters / result |

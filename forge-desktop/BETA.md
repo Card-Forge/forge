@@ -1,4 +1,4 @@
-# Mana Table — beta 0.1.0-beta.8
+# Mana Table — beta 0.1.0-beta.9
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
@@ -54,6 +54,11 @@ strip between playmats tracks Beginning, Main 1, Combat, Main 2, and Ending.
 The decision panel says when it is **your action**, including responses during
 the opponent's turn. **Recent actions** retains the last 120 events: plays,
 spell resolutions, combat, and life changes. Scroll back to review what happened.
+
+Playing a land updates your hand and battlefield, then waits in the current
+phase. The game does not automatically pass just because you have nothing else
+to cast. Use **Next step** or **Continue** to pass, or **End Turn** when offered
+to yield the rest of your turn.
 
 Brief animations highlight card arrivals, tapping, combat, and life changes.
 Use **Animations on/off** beside the turn number to toggle them; the initial

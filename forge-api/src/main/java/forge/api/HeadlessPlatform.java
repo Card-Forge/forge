@@ -66,7 +66,9 @@ final class HeadlessPlatform {
         prefs.setPref(FPref.UI_ORDER_HAND, false);
         prefs.setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, true);
         prefs.setPref(FPref.UI_SHOW_AUTOTAP_PREVIEW, true);
-        prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, true);
+        // A land play must return to a visible decision, even with nothing else to cast.
+        // Auto-passing here skips publication of the new board and can run into the AI's turn.
+        prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, false);
         prefs.setPref(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD, "NEVER");
         prefs.setPref(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS, "NEVER");
         AiProfileUtil.loadAllProfiles(resources.resolve("ai").toString());

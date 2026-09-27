@@ -42,8 +42,11 @@ test('match table plays cards through engine prompts and resumes after deck brow
       const state = await page.evaluate(() => window.forge.request('matchState'));
       expect(state.status, state.error).not.toBe('error');
       const p = state.prompt;
-      if (!p || p.id === oldPrompt) { await page.waitForTimeout(100); continue; }
-      await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', p.id);
+      // The engine can replace a transient prompt before the renderer's next poll.
+      // Act only when both sides agree, rather than waiting for an obsolete ID.
+      if (!p || p.id === oldPrompt || await page.locator('#match-prompt').getAttribute('data-prompt-id') !== p.id) {
+        await page.waitForTimeout(100); continue;
+      }
       const human = state.players.find(player => player.human);
       const field = human.zones.find(zone => zone.name === 'Battlefield').cards;
       if (state.turn > 0) {
