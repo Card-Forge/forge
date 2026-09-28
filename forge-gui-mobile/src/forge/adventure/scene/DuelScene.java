@@ -256,7 +256,7 @@ public class DuelScene extends ForgeScene {
     }
 
     public void exitDuelScene() {
-        TransitionScreen transitionScreen = new TransitionScreen(endRunnable, ScreenUtil.getInstance().takeScreenshot(), false, false);
+        TransitionScreen transitionScreen = new TransitionScreen(endRunnable, ScreenUtil.getInstance().getLastScreenTexture(), false, false);
         transitionScreen.afterMatch = !isArena;
         transitionScreen.afterEvent = eventData != null;
         Forge.setTransitionScreen(transitionScreen);
