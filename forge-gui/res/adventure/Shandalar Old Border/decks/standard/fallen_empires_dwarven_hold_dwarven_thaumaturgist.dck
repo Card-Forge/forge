@@ -1,0 +1,30 @@
+[metadata]
+Name=Dwarven Thaumaturgist
+[Main]
+20 Mountain|3ED
+1 Dwarven Hold|FEM
+3 Dwarven Ruins|FEM
+4 Dwarven Thaumaturgist|WTH
+2 Dwarven Lieutenant|FEM
+2 Dwarven Warriors|3ED
+2 Dwarven Vigilantes|VIS
+1 Spirit Shield|FEM
+1 Ring of Renewal|FEM
+2 Lava Burst|ICE
+1 Jayemdae Tome|3ED
+1 Chaos Orb|2ED
+2 Chaos Charm|MIR
+4 Aeolipile|FEM
+2 Sentinel|LEG
+1 Arcane Teachings|JUD
+2 Fellwar Stone|DRK
+2 Primal Clay|3ED
+2 Granite Gargoyle|3ED
+2 Wall of Fire|3ED
+1 Wall of Lava|ICE
+2 Wall of Heat|LEG
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Red Mana Battery|LEG
+1 Jayemdae Tome|3ED
+1 Dwarven Thaumaturgist|WTH

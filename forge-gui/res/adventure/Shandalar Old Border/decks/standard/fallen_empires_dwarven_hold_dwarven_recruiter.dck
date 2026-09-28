@@ -1,0 +1,44 @@
+[metadata]
+Name=Dwarven Recruiter
+[Main]
+21 Mountain|3ED
+1 Dwarven Hold|FEM
+2 Dwarven Ruins|FEM
+1 Dwarven Lieutenant|FEM
+1 Dwarven Soldier|FEM|[53b]
+1 Dwarven Warriors|3ED
+1 Dwarven Vigilantes|VIS
+1 Dwarven Weaponsmith|3ED
+1 Dwarven Nomad|MIR
+1 Dwarven Vigilantes|VIS
+1 Dwarven Grunt|ODY
+1 Ball Lightning|DRK
+1 Fireball|3ED
+1 Hammer of Bogardan|MIR
+1 Shivan Dragon|3ED
+1 Chaos Charm|MIR
+1 Aeolipile|FEM
+1 Rukh Egg|ARN
+1 Nalathni Dragon|DRC94
+1 Brothers of Fire|DRK
+1 Anvil of Bogardan|VIS
+1 Millstone|ATQ
+1 Book Burning|JUD
+1 Flint Golem|NMS
+1 Grindstone|TMP
+1 Helm of Obedience|ALL
+1 Chain of Plasma|ONS
+1 Robber Fly|MMQ
+1 Shocker|TMP
+1 Skullscorch|TOR
+1 Wheel of Fortune|3ED
+1 Volcanic Hammer|7ED
+1 Howling Mine|3ED
+1 Wall of Razors|STH
+1 Wall of Heat|LEG
+1 Wall of Earth|LEG
+4 Dwarven Shrine|ODY
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Dwarven Shrine|ODY
+1 Dwarven Recruiter|ODY

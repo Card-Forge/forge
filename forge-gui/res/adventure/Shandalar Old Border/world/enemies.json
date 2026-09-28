@@ -103480,5 +103480,1050 @@
       "Ally"
     ],
     "spawnRate": 0
+  },
+  {
+    "name": "FEM Brassclaw Orc vs Dwarves",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/orc_warrior_brass.atlas",
+    "scale": 0.7,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_brassclaw_orc.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Armorer",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_6.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_armorer.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "WR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Berserker",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_berserker.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Gate",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/dwarven_gate.atlas",
+    "scale": 0.5,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_gate.dck"
+    ],
+    "ai": "cautious",
+    "boss": true,
+    "speed": 0,
+    "life": 40,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Dwarven Hold|FEM"
+      },
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 150,
+        "addMaxCount": 150
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 5,
+        "addMaxCount": 5
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "WR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Boss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Lieutenant",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_2.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_lieutenant.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Demolition Team",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_3.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_demolition_team.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "WR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Miner",
+    "sprite": "sprites/enemy/humanoid/dwarf/miner.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_miner.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "WR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Recruiter",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_4.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_recruiter.dck"
+    ],
+    "ai": "cautious",
+    "speed": 14,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 75,
+        "addMaxCount": 75
+      },
+      {
+        "type": "shards",
+        "probability": 0.75,
+        "count": 2,
+        "addMaxCount": 3
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.5
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Miniboss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Soldier",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_soldier.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Pony Trader",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/dwarven_pony_trader.atlas",
+    "scale": 0.75,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_pony_trader.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "UR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Thaumaturgist",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarfpilot.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_thaumaturgist.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Trader",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/dwarven_trader.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_trader.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "UR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Warrior",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_8.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_warrior.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Dwarven Weaponsmith",
+    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_7.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_dwarven_weaponsmith.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "Dwarf",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Goblin Digging Team vs Dwarves",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/goblin_digging_team_group.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_goblin_digging_team.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Goblin Flotilla vs Dwarves",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_goblin_flotilla.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "UR",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Goblin Grenade Runner vs Dwarves",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_bomber.atlas",
+    "scale": 0.75,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_goblin_grenade_runner.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Goblin Pyro Medic vs Dwarves",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_2.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_goblin_pyro_medic.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Orcish Captain vs Dwarves",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/orc_brute_rosybrown.atlas",
+    "scale": 0.65,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_orcish_captain.dck"
+    ],
+    "ai": "cautious",
+    "speed": 14,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 75,
+        "addMaxCount": 75
+      },
+      {
+        "type": "shards",
+        "probability": 0.75,
+        "count": 2,
+        "addMaxCount": 3
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.5
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Miniboss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Orcish Spy vs Dwarves",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/orcish_spy.atlas",
+    "scale": 0.7,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_orcish_spy.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Standard"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Orcish Veteran vs Dwarves",
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/orc_warrior_veteran.atlas",
+    "scale": 0.7,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_orcish_veteran.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Elite"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Orgg vs Dwarves",
+    "sprite": "sprites/enemy/monstrosity/umber_hulk.atlas",
+    "scale": 0.5,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_orgg.dck"
+    ],
+    "ai": "cautious",
+    "boss": true,
+    "speed": 12,
+    "life": 40,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Orgg|FEM"
+      },
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 150,
+        "addMaxCount": 150
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 5,
+        "addMaxCount": 5
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Boss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Warren Goblins vs Dwarves",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_group.atlas",
+    "scale": 1.0,
+    "deck": [
+      "decks/standard/fallen_empires_dwarven_hold_warren_goblins.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "FallenEmpires",
+      "DwarvenHold",
+      "OrcGoblin",
+      "Standard"
+    ],
+    "spawnRate": 0
   }
 ]

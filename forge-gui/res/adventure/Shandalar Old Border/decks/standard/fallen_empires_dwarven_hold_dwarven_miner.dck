@@ -1,0 +1,29 @@
+[metadata]
+Name=Dwarven Miner
+[Main]
+11 Mountain|3ED
+1 Dwarven Hold|FEM
+1 Dwarven Ruins|FEM
+3 Crystal Vein|MIR
+4 Gemstone Mine|WTH
+1 Strip Mine|ATQ|[82a]
+1 Strip Mine|ATQ|[82b]
+1 Strip Mine|ATQ|[82c]
+1 Strip Mine|ATQ|[82d]
+4 Dwarven Miner|MIR
+4 Dwarven Blastminer|ONS
+4 Dwarven Driller|JUD
+4 Pardic Miner|ODY
+2 Dingus Egg|3ED
+3 Aeolipile|FEM
+2 Demolish|ODY
+2 Aftershock|TMP
+3 Howling Mine|3ED
+2 Giant Strength|5ED
+1 Mudhole|ODY
+2 Dwarven Landslide|APC
+3 Stonehands|ICE
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Dwarven Miner|MIR
+1 Limited Resources|EXO

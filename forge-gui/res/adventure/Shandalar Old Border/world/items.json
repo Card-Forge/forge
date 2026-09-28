@@ -3016,5 +3016,11 @@
     "description": "A timeless trophy proving your victory over the Time Walker.",
     "iconName": "BossTrophy",
     "questItem": true
+  },
+  {
+    "name": "Dwarven Rune Stone",
+    "description": "A rune stone given to you by a Dwarven Pony Trader. It opens a secret latch into the Dwarven Hold.",
+    "iconName": "RedRune",
+    "questItem": true
   }
 ]
