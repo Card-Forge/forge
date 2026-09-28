@@ -32,7 +32,6 @@ import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ItemPool;
-import forge.util.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -63,7 +62,8 @@ public class RewardScene extends UIScene {
         Shop,
         Loot,
         QuestReward,
-        RewardChoice
+        RewardChoice,
+        EventReward
     }
 
     Type type;
@@ -189,7 +189,7 @@ public class RewardScene extends UIScene {
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            if (type == Type.Loot)
+            if (type == Type.Loot || type == Type.EventReward)
                 AdventurePlayer.current().addReward(rewardActor.getReward());
             if (type == Type.QuestReward)
                 AdventurePlayer.current().addReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
@@ -221,7 +221,7 @@ public class RewardScene extends UIScene {
         stage.act(delta);
         ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
-            if (type == Type.Loot || type == Type.QuestReward) {
+            if (type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) {
                 flipCountDown -= delta;
                 exitCountDown += delta;
             }
@@ -257,7 +257,7 @@ public class RewardScene extends UIScene {
         }
         if (exit)
             done(true);
-        else if ((type == Type.Loot || type == Type.QuestReward) && !shown) {
+        else if ((type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) && !shown) {
             shown = true;
             float delay = 0.09f;
             generated.shuffle();
@@ -408,7 +408,7 @@ public class RewardScene extends UIScene {
         headerLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (type == Type.Loot || type == Type.QuestReward) {
+                if (type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
@@ -473,6 +473,7 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case QuestReward:
+            case EventReward:
             case Loot:
                 headerLabel.setPosition(restockButton.getX(), restockButton.getY());
                 headerLabel.setVisible(true);
@@ -561,7 +562,7 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
+            RewardActor actor = new RewardActor(reward, type == Type.EventReward || type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
