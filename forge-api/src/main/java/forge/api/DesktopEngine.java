@@ -82,7 +82,9 @@ public final class DesktopEngine {
         return switch (method) {
             case "search" -> catalog.browse(new CardCatalog.Query(string(p, "text", ""),
                     integer(p, "colors"), integer(p, "maxManaValue"), number(p, "offset", 0), number(p, "limit", 48)),
-                    string(p, "type", ""), string(p, "sort", "name"), !p.has("unique") || p.get("unique").getAsBoolean());
+                    string(p, "type", ""), string(p, "sort", "name"), !p.has("unique") || p.get("unique").getAsBoolean(),
+                    integer(p, "colorIdentity"), string(p, "role", ""));
+            case "deckInsights" -> { requireDeck(); yield DeckInsights.analyze(catalog, editor.snapshot(), format, deckId); }
             case "list" -> list();
             case "new" -> create(string(p, "name", "Untitled deck"), string(p, "format", "Constructed"));
             case "open" -> open(string(p, "id", ""));

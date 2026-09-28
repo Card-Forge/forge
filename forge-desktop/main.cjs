@@ -18,7 +18,7 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'workshop', privileges: { standa
 
 let window;
 let engine;
-const methods = new Set(['search', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'deckPresets', 'presetImport', 'export', 'practice', 'matchOpponents', 'matchSetup', 'matchStart', 'matchState', 'matchAction', 'matchConcede']);
+const methods = new Set(['search', 'deckInsights', 'list', 'new', 'open', 'snapshot', 'edit', 'rename', 'undo', 'redo', 'format', 'save', 'importPreview', 'import', 'deckPresets', 'presetImport', 'export', 'practice', 'matchOpponents', 'matchSetup', 'matchStart', 'matchState', 'matchAction', 'matchConcede']);
 function verify(event) {
   if (!window || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame
     || !event.senderFrame.url.startsWith('workshop://app/')) throw new Error('Unknown desktop client');
@@ -70,7 +70,7 @@ app.on('second-instance', () => {
 app.whenReady().then(async () => {
   protocol.handle('workshop', request => {
     const pathname = new URL(request.url).pathname;
-    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/presets.js', '/presets.css', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/turn-guide.js', '/match-feedback.js', '/match-feedback.css', '/combat-view.js', '/combat-view.css', '/table-gestures.js', '/hand-view.js', '/hand-view.css', '/response-skip.js']);
+    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/presets.js', '/presets.css', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/turn-guide.js', '/match-feedback.js', '/match-feedback.css', '/combat-view.js', '/combat-view.css', '/table-gestures.js', '/hand-view.js', '/hand-view.css', '/response-skip.js', '/deck-workshop.js', '/deck-workshop.css']);
     if (!allowed.has(pathname)) return new Response('Not found', { status: 404 });
     return net.fetch(pathToFileURL(path.join(__dirname, 'renderer', pathname.slice(1))).toString());
   });

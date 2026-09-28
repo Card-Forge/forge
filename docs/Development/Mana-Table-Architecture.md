@@ -32,6 +32,16 @@ flowchart LR
 | Game adapter | `MatchSession`, `MatchActivity`, `HeadlessPlatform`, `CombatCardIds` | Human input, AI session, visibility filtering, stable projected state |
 | Minimal observation hooks | `GameStateMapper`, `GameObservation` | Smaller immutable projection and event invalidation for other consumers |
 
+Deck-building discovery and review live in `deck-workshop.js` / `.css`, with
+`DeckInsights.java` providing role estimates and recommendations. The script
+loads before `app.js`; its callbacks use the shared app state after initialization.
+`app.js` owns the edit queue. Catalog controls count by card name across printings
+and reuse an existing printing in the selected destination. Deck-row quantity
+and section moves preserve exact printing IDs. Moves use a single atomic edit
+batch, so undo restores both sections. Queued edits capture the deck ID and source
+section; review replies are checked against the deck ID, revision, and format
+request key. Search/grouping filters change presentation only.
+
 Java classes above live in `forge-api/src/main/java/forge/api`. Renderer files
 are under `forge-desktop/renderer`. The API README is the detailed
 [integration contract](../../forge-api/README.md).

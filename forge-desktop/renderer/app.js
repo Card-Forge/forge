@@ -79,29 +79,28 @@ function loadArt(container) {
 }
 async function refreshLibrary() {
   const result = await api.request('list');
-  $('deck-library').innerHTML = result.decks.map(deck => `<button class="library-deck ${state?.id === deck.id ? 'active' : ''}" data-open="${esc(deck.id)}"><span class="deck-icon">▱</span><strong>${esc(deck.name)}</strong><small>${deck.count} cards · ${esc(deck.format)}</small></button>`).join('');
+  $('deck-library').innerHTML = result.decks.map(deck => `<button class="library-deck ${state?.id === deck.id ? 'active' : ''}" data-open="${esc(deck.id)}"><span class="deck-icon">▱</span><strong>${esc(deck.name)}</strong><small>${deck.count} main · ${esc(deck.format)}</small></button>`).join('');
   if (result.problems.length) toast('Some saved decks could not be read. They have been left untouched.');
   return result.decks;
 }
 async function search() {
+  if (deckWorkshop.mode === 'suggestions') { deckWorkshop.renderSuggestions(); return; }
   const generation = ++searchGeneration;
-  const filtered = Boolean($('search').value.trim() || colors !== null || $('type-filter').value || $('mana-filter').value);
+  const filtered = Boolean($('search').value.trim() || colors !== null || $('type-filter').value || $('mana-filter').value || deckWorkshop.filtered());
   $('clear-filters').disabled = !filtered;
   $('catalog-scope').textContent = filtered ? 'Filtered library · printings grouped' : 'Full library · printings grouped';
   $('result-count').textContent = 'Searching…';
   try {
     const page = await api.request('search', { text: $('search').value, colors,
       maxManaValue: $('mana-filter').value === '' ? null : Number($('mana-filter').value),
-      type: $('type-filter').value, sort: $('sort').value, offset, limit: pageSize, unique: true });
+      type: $('type-filter').value, sort: $('sort').value, offset, limit: pageSize, unique: true, ...deckWorkshop.query() });
     if (generation !== searchGeneration) return;
     total = page.total;
     $('result-count').textContent = filtered
       ? `${total.toLocaleString()} of ${page.catalogTotal.toLocaleString()} cards`
       : `${total.toLocaleString()} cards`;
-    $('catalog').innerHTML = page.cards.length ? page.cards.map(card => {
-      remember(card);
-      return `<article class="catalog-card ${selected?.id === card.id ? 'selected' : ''}" tabindex="0" draggable="true" data-card="${esc(card.id)}" style="--card-glow:${glow(card)}" aria-label="Inspect ${esc(card.name)}"><div class="card-top"><h3>${esc(card.name)}</h3><span class="mana-cost">${cost(card.manaCost)}</span></div><div class="card-type">${esc(card.type)}</div><div class="card-rules">${esc(card.oracleText || 'Every great deck starts with a solid foundation.')}</div><div class="card-bottom"><span>${esc(card.rarity.toUpperCase())}</span><button class="add-card" data-add="${esc(card.id)}" aria-label="Add ${esc(card.name)}">+</button></div></article>`;
-    }).join('') : '<div class="empty"><strong>No matching cards.</strong>Try a shorter search or use Clear filters.<br>The library contains cards supported by the bundled engine.</div>';
+    $('catalog').innerHTML = page.cards.length ? page.cards.map(card => deckWorkshop.cardTile(card)).join('') : '<div class="empty"><strong>No matching cards.</strong>Try a shorter search or use Clear filters.<br>The library contains cards supported by the bundled engine.</div>';
+    deckWorkshop.syncCounts();
     $('catalog').scrollTop = 0;
     $('page-label').textContent = total ? `${offset + 1}–${Math.min(offset + pageSize, total)} of ${total.toLocaleString()}` : '0 cards';
     $('previous').disabled = offset === 0;
@@ -117,7 +116,7 @@ function inspect(card, otherFace = false) {
   const face = otherFace && card.otherFace ? card.otherFace : card;
   $('inspector').innerHTML = `${cardArt(face)}<div class="art-credit">Card art via Scryfall · representative printing</div>${card.otherFace ? `<button class="preview-flip" id="inspector-flip">View ${otherFace ? 'front' : 'back'} face</button>` : ''}<div class="inspector-details"><h2>${esc(face.name)}</h2><div class="inspect-type">${esc(face.type)} <span class="mana-cost">${cost(face.manaCost)}</span></div><p class="oracle">${esc(face.oracleText)}</p><div class="inspect-meta"><span>${esc(card.edition)} · ${esc(card.rarity)}</span><span>MV ${card.manaValue}</span></div><button class="button secondary" id="inspector-add">+ Add to ${esc(extraSections[target] || (target === 'Main' ? 'main deck' : target.toLowerCase()))}</button></div>`;
   if (card.otherFace) $('inspector-flip').onclick = () => inspect(card, !otherFace);
-  $('inspector-add').onclick = () => changeQuantity(card, 1);
+  $('inspector-add').onclick = () => changeQuantity(card, 1, { byName: true });
   loadArt($('inspector'));
 }
 function entries(inSection) { return state?.deck.entries.filter(entry => entry.section === inSection) || []; }
@@ -130,6 +129,7 @@ function category(card) {
 }
 function renderDeck() {
   if (!state) return;
+  const restoreFocus = deckWorkshop.preserveFocus();
   state.deck.entries.forEach(entry => remember(entry.card));
   $('deck-name').value = state.deck.name;
   $('deck-format').value = state.format;
@@ -148,17 +148,11 @@ function renderDeck() {
   $('supplemental-section').innerHTML = '<option value="">Extra cards…</option>' + supplemental.map(([key, label]) => `<option value="${key}">${label} · ${count(key)}</option>`).join('');
   $('supplemental-section').value = extraSections[section] ? section : '';
   document.querySelectorAll('[data-section]').forEach(button => button.classList.toggle('active', button.dataset.section === section));
-  const grouped = new Map();
-  for (const entry of entries(section)) {
-    const group = category(entry.card);
-    if (!grouped.has(group)) grouped.set(group, []);
-    grouped.get(group).push(entry);
-  }
-  const order = ['Creatures', 'Planeswalkers', 'Instants', 'Sorceries', 'Enchantments', 'Artifacts', 'Other cards', 'Lands'];
-  $('deck-list').innerHTML = grouped.size ? order.filter(group => grouped.has(group)).map(group => {
-    const rows = grouped.get(group);
-    return `<div class="group-label">${group} · ${rows.reduce((sum, row) => sum + row.quantity, 0)}</div>` + rows.map(entry => `<div class="deck-row" tabindex="0" data-card="${esc(entry.card.id)}" style="--card-glow:${glow(entry.card)}"><span class="quantity">${entry.quantity}</span><span class="row-name">${esc(entry.card.name)}</span><span class="mana-cost">${cost(entry.card.manaCost)}</span><button class="row-control" data-remove="${esc(entry.card.id)}" aria-label="Remove ${esc(entry.card.name)}">−</button><button class="row-control" data-add="${esc(entry.card.id)}" aria-label="Add ${esc(entry.card.name)}">+</button></div>`).join('');
-  }).join('') : `<div class="empty"><strong>A little room for possibility.</strong>Add cards from the library<br>or drag them into this ${section === 'Main' ? 'deck' : 'section'}.</div>`;
+  const grouped = deckWorkshop.groups();
+  $('deck-list').innerHTML = grouped.length ? grouped.map(([group, rows]) => {
+    return `<div class="group-label">${esc(group)} · ${rows.reduce((sum, row) => sum + row.quantity, 0)}</div>` + rows.map(entry => `<div class="deck-row" tabindex="0" data-card="${esc(entry.card.id)}" style="--card-glow:${glow(entry.card)}"><input class="quantity" type="number" min="0" max="1000" value="${entry.quantity}" data-quantity="${esc(entry.card.id)}" aria-label="Copies of ${esc(entry.card.name)}"><span class="row-name" title="${esc(entry.card.name)}">${esc(entry.card.name)}</span><span class="mana-cost">${cost(entry.card.manaCost)}</span><button class="row-control" data-remove="${esc(entry.card.id)}" aria-label="Remove ${esc(entry.card.name)}">−</button><button class="row-control" data-add="${esc(entry.card.id)}" aria-label="Add ${esc(entry.card.name)}">+</button>${['Main', 'Sideboard'].includes(section) ? `<button class="row-control move-card" data-move="${esc(entry.card.id)}" aria-label="Move all ${esc(entry.card.name)} to ${section === 'Main' ? 'sideboard' : 'main deck'}" title="Move all copies to ${section === 'Main' ? 'sideboard' : 'main deck'}">⇄</button>` : ''}</div>`).join('');
+  }).join('') : $('deck-search').value.trim() ? '<div class="empty"><strong>No matches in this section.</strong>Clear the deck search to see the rest.</div>' : `<div class="empty"><strong>A little room for possibility.</strong>Add cards from the library<br>or drag them into this ${section === 'Main' ? 'deck' : 'section'}.</div>`;
+  restoreFocus();
   const main = entries('Main');
   const nonland = main.filter(entry => !entry.card.type.includes('Land'));
   const spellCount = nonland.reduce((sum, entry) => sum + entry.quantity, 0);
@@ -175,6 +169,7 @@ function renderDeck() {
   $('validation').textContent = state.validation.valid ? '✓ Deck structure looks good · set legality not checked' : `◇ ${state.validation.problem}`;
   $('validation').title = `${state.validation.problem || 'Valid deck structure'}. Rotating set legality and ban lists are not checked.`;
   $('practice-button').disabled = count('Main') < 7;
+  deckWorkshop.renderReview();
   if (selected) inspect(selected);
   if (state.saveError) toast('Deck is not saved: ' + state.saveError);
 }
@@ -182,13 +177,16 @@ function destinationSection(card) {
   if (extraSections[card.deckSection]) return card.deckSection;
   return extraSections[section] ? 'Main' : section;
 }
-function changeQuantity(card, delta) {
+function changeQuantity(card, delta, { byName = false } = {}) {
   if (!card || !state) return;
-  const targetSection = delta < 0 ? section : destinationSection(card);
+  const targetSection = byName || delta > 0 ? destinationSection(card) : section;
+  const deckId = state.id;
   return mutate(() => {
-    const entry = entries(targetSection).find(entry => entry.card.id === card.id);
+    if (state.id !== deckId) throw new Error('Deck changed; select the card again.');
+    const entry = entries(targetSection).find(entry => byName ? entry.card.name === card.name : entry.card.id === card.id);
+    if (delta < 0 && !entry) return state;
     section = targetSection;
-    return api.request('edit', { revision: state.deck.revision, edits: [{ section: targetSection, cardId: card.id, quantity: Math.max(0, (entry?.quantity || 0) + delta) }] });
+    return api.request('edit', { revision: state.deck.revision, edits: [{ section: targetSection, cardId: entry?.card.id || card.id, quantity: Math.max(0, (entry?.quantity || 0) + delta) }] });
   });
 }
 function showWorkshop() {
@@ -240,6 +238,7 @@ $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchG
 $('clear-filters').onclick = () => {
   clearTimeout(searchTimer);
   $('search').value = ''; $('type-filter').value = ''; $('mana-filter').value = '';
+  $('role-filter').value = ''; $('identity-filter').checked = false;
   colors = null; offset = 0;
   document.querySelectorAll('[data-color]').forEach(button => { button.classList.remove('active'); button.setAttribute('aria-pressed', 'false'); });
   run(search);
@@ -263,9 +262,11 @@ for (const id of ['catalog', 'deck-list']) {
   $(id).addEventListener('click', event => {
     const add = event.target.closest('[data-add]');
     const remove = event.target.closest('[data-remove]');
-    if (add) changeQuantity(cards.get(add.dataset.add), 1);
+    const catalogRemove = event.target.closest('[data-catalog-remove]');
+    if (add) changeQuantity(cards.get(add.dataset.add), 1, { byName: id === 'catalog' });
+    else if (catalogRemove) changeQuantity(cards.get(catalogRemove.dataset.catalogRemove), -1, { byName: true });
     else if (remove) changeQuantity(cards.get(remove.dataset.remove), -1);
-    else { const card = event.target.closest('[data-card]'); if (card) inspect(cards.get(card.dataset.card)); }
+    else if (!event.target.closest('button,input')) { const card = event.target.closest('[data-card]'); if (card) inspect(cards.get(card.dataset.card)); }
   });
   $(id).addEventListener('keydown', event => {
     if (event.target.matches('[data-card]') && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); inspect(cards.get(event.target.dataset.card)); }
@@ -280,7 +281,7 @@ $('deck-list').ondragleave = () => $('deck-list').classList.remove('drag-over');
 $('deck-list').ondrop = event => {
   event.preventDefault(); $('deck-list').classList.remove('drag-over');
   const card = cards.get(event.dataTransfer.getData('application/x-forge-card'));
-  if (card) changeQuantity(card, 1);
+  if (card) changeQuantity(card, 1, { byName: true });
 };
 document.querySelectorAll('[data-section]').forEach(button => button.onclick = () => { section = button.dataset.section; renderDeck(); });
 $('supplemental-section').onchange = () => { if ($('supplemental-section').value) { section = $('supplemental-section').value; renderDeck(); } };
@@ -324,7 +325,7 @@ $('about-button').onclick = () => $('about-dialog').showModal();
 document.addEventListener('keydown', event => {
   if (!started || document.querySelector('dialog[open]')) return;
   const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
-  if (event.key === '/' && !typing) { event.preventDefault(); $('search').focus(); }
+  if (event.key === '/' && !typing && !$('workshop-view').hidden) { event.preventDefault(); deckWorkshop.showMode('library'); $('search').focus(); }
   if ((event.ctrlKey || event.metaKey) && !typing && ['z', 'y'].includes(event.key.toLowerCase())) {
     event.preventDefault(); const redo = event.key.toLowerCase() === 'y' || event.shiftKey; $(redo ? 'redo' : 'undo').click();
   }

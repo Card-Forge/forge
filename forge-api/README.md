@@ -23,6 +23,7 @@ local deck persistence, opening-hand practice, and human-versus-AI matches. Buil
 | `DeckEditor.undo/redo(revision)` | Bounded history, monotonically increasing revisions |
 | `DeckEditor.validate(format)` | Forge's structural deck validation; not Standard/Modern set or ban-list legality |
 | `DeckEditor.toDeck()` | Detached Forge deck for existing persistence and match setup |
+| `DeckInsights.analyze(...)` | Read-only role estimates and explained suggestions from a small offline candidate pool |
 | `GameStateMapper.snapshot(view, viewer)` | Immutable records containing turn, phase, players, life, priority, zone counts, visible cards |
 | `GameObservation` | Pollable event revision with explicit unsubscribe/close; raw events never cross the API |
 | `MatchSetup` | Validated match copy with a selectable commander when an imported list has no Commander section |
@@ -90,7 +91,8 @@ correlates request IDs and records diagnostics in the active profile's log.
 
 | Command | Parameters / behavior |
 | --- | --- |
-| `search` | Optional `text`, `colors`, `maxManaValue`, `type`, `sort`, `unique`, `offset`, `limit`; paginated catalog results |
+| `search` | Optional `text`, `colors`, `colorIdentity`, `role`, `maxManaValue`, `type`, `sort`, `unique`, `offset`, `limit`; paginated catalog results |
+| `deckInsights` | Current deck ID/revision, color identity, estimated main-deck role counts, per-card roles and explained suggestions; no mutation |
 | `list`, `open` | List saved decks; open by `{id}` |
 | `new` | `{name, format}`; create a saved deck |
 | `snapshot` | Current deck, revision, validation, format and save state |
@@ -108,6 +110,24 @@ opaque UUID filenames, schema version 1, printing IDs, quantities, and explicit
 sections. Writes use temporary files and atomic replacement where supported.
 Save failures remain visible and block switching decks until saved. Practice
 hands are separate from a playable match and are not persisted.
+
+`search.colorIdentity` is an additional allowed-color-identity mask (0..31),
+including symbols in rules text and alternate faces. It is independent of the
+existing card-color filter. Both filters include colorless cards. `role` accepts
+`Lands`, `Ramp`, `Draw`, or `Interaction`; absent/empty leaves roles unfiltered.
+Role estimates inspect bundled card types and rules text and can overlap or miss
+unusual wording. They are building aids, not engine rules or legality judgments.
+
+`deckInsights` uses the union of explicit Commander entries for Commander decks
+and the union of main-deck identities for Constructed. A missing commander or an
+empty main deck produces a null identity; a colorless identity is zero. Role
+counts include quantities from Main only. Suggestions come from the named pool
+in `DeckInsights.java`, exclude names present in any section/printing, and respect
+color identity. Their order favors roles with fewer copies; creature-dependent
+and basic-land-search suggestions have additional prerequisites. Limited has no
+suggestions because the API has no draft/sealed pool. These are starting points,
+not live popularity, budget, set/ban-list, or synergy rankings. The response
+includes the limitations and the reason for each suggestion.
 
 For exact request/response fields, see
 [`DesktopEngine.java`](src/main/java/forge/api/DesktopEngine.java) and the

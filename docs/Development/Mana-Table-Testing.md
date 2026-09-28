@@ -39,7 +39,7 @@ node --test tests/commander.test.cjs
 | Change | Useful existing coverage |
 | --- | --- |
 | Startup/readiness and engine failures | `startup.spec.cjs`, `engine-client.test.cjs` |
-| Deck editing/import/export | `engine.test.cjs`, `desktop.spec.cjs`, `presets.*` |
+| Deck editing/import/export, discovery and review | `engine.test.cjs`, `desktop.spec.cjs`, `deck-workshop.spec.cjs`, `presets.*` |
 | Prompts, turn guidance and stale actions | `match.*`, `priority.spec.cjs`, `card-selection.spec.cjs`, `land-play.spec.cjs` |
 | Commander/multiplayer | `commander.*`, `multiplayer.*` |
 | Hand and battlefield layout | `hand-gestures.spec.cjs`, `hand-readability.spec.cjs`, `battlefield-fit.spec.cjs` |

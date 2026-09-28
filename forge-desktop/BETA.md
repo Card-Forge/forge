@@ -1,14 +1,33 @@
-# Mana Table — beta 0.1.0-beta.22
+# Mana Table — beta 0.1.0-beta.23
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 22 adds **Skip responses this turn**, a checkbox beside the decision panel.
-It continues automatically when the engine finds no playable response, pauses
-when you can act, and resets when the turn changes. Your empty-stack main phases,
-attackers, blockers, targets, payments, and other required choices still wait for
-you. Uncheck it at any time to return to manual responses.
+Beta 23 focuses on **finding cards, reviewing your deck, and suggestions**:
+
+- Library cards show how many copies are in the selected section, plus copies
+  elsewhere. Use **+ / −** without losing your place. Imported printings count
+  together; adding reuses an existing printing in that section.
+- Filter by **Commander colors** (or **Deck colors**) and **role**. Commander
+  colors include rules-text and back-face identity and combine multiple leaders.
+  Put your commander in **Cmd** to establish that identity.
+- **Find in this deck** searches the selected section. Group by type, mana value,
+  or name. Type a quantity directly, or use **⇄** to move that row's copies between
+  main and sideboard. Moves preserve printings and undo as one action.
+- Open **Deck review** for the mana curve, creature/spell/land totals, and estimated
+  role counts. Click a role to browse matching library cards. The summary shows
+  total deck size, including commanders, even when review is closed.
+- **Suggested for this deck** offers explained, color-compatible starting points
+  for mana, draw, and interaction. Suggestions come from a small offline curated
+  pool and update with your edits; cards already in any deck section are omitted.
+  Role counts are rules-text estimates and may overlap. Suggestions do not assess
+  combos, prices, rotating set legality, ban lists, or competitive strength. Limited
+  suggestions need a draft/sealed pool and are not available yet.
+
+**Skip responses this turn** remains available beside the game's decision panel.
+It advances when the engine finds no playable response, pauses for your decisions,
+and resets when the turn changes.
 
 ## Try it
 

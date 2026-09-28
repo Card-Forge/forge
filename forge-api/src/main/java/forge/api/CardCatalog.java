@@ -57,6 +57,7 @@ public final class CardCatalog {
     private record IndexedCard(CardInfo info, String searchText, String typeText) { }
     private final List<IndexedCard> index;
     private final int uniqueCount;
+    private final Map<String, CardInfo> byName;
 
     public CardCatalog(CardDb database) {
         this(database.getAllCards());
@@ -69,6 +70,8 @@ public final class CardCatalog {
                 .sorted(Comparator.comparing((IndexedCard card) -> card.info().name(), String.CASE_INSENSITIVE_ORDER)
                         .thenComparing(card -> card.info().id())).toList();
         uniqueCount = (int) index.stream().map(card -> card.info().name()).distinct().count();
+        byName = index.stream().map(IndexedCard::info).collect(Collectors.toUnmodifiableMap(
+                card -> normalize(card.name()), Function.identity(), (first, duplicate) -> first));
     }
 
     private static String normalize(String text) {
@@ -94,7 +97,13 @@ public final class CardCatalog {
     }
 
     public Page browse(Query query, String type, String sort, boolean unique) {
+        return browse(query, type, sort, unique, null, "");
+    }
+
+    public Page browse(Query query, String type, String sort, boolean unique, Integer identity, String role) {
         Objects.requireNonNull(query);
+        if (identity != null && (identity < 0 || identity > 31)) throw new IllegalArgumentException("Invalid color identity");
+        if (role != null && !role.isEmpty() && !DeckInsights.ROLES.contains(role)) throw new IllegalArgumentException("Unknown card role");
         String typeFilter = normalize(Objects.requireNonNullElse(type, ""));
         var typePattern = Pattern.compile("(?<!\\p{L})" + Pattern.quote(typeFilter) + "(?!\\p{L})");
         var seen = new HashSet<String>();
@@ -108,8 +117,10 @@ public final class CardCatalog {
                 .filter(card -> typeFilter.isEmpty() || typePattern.matcher(card.typeText()).find())
                 .map(IndexedCard::info)
                 .filter(card -> query.colors() == null || (card.colors() & ~query.colors()) == 0)
+                .filter(card -> identity == null || (card.colorIdentity() & ~identity) == 0)
                 .filter(card -> query.maxManaValue() == null || card.manaValue() <= query.maxManaValue())
                 .filter(card -> !unique || seen.add(card.name()))
+                .filter(card -> role == null || role.isEmpty() || DeckInsights.roles(card).contains(role))
                 .sorted(ordering)
                 .toList();
         return new Page(matches.size(), query.offset(), matches.stream()
@@ -117,6 +128,8 @@ public final class CardCatalog {
     }
 
     public int size() { return cards.size(); }
+
+    CardInfo named(String name) { return byName.get(normalize(name)); }
 
     public static CardCatalog fromDatabase(CardDb database) {
         return fromDatabases(List.of(database));

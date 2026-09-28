@@ -72,6 +72,12 @@ for versioning, data preservation, and distribution.
 For reusable scenarios and participant sessions, see the
 [encounter guide](../docs/Development/Mana-Table-Encounters.md).
 
+The deck-building regression is `tests/deck-workshop.spec.cjs`. It covers rapid
+copy edits across imported printings, section moves and undo, deck search/grouping,
+color identity, explained suggestions, and wide/compact screenshots. Run it with
+`npm run test:ui -- tests/deck-workshop.spec.cjs`. The engine transport regression
+also checks that review is read-only and role/identity filters use real card data.
+
 ## Environment variables
 
 | Variable | Meaning |
