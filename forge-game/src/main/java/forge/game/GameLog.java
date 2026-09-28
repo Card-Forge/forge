@@ -17,6 +17,8 @@
  */
 package forge.game;
 
+import forge.util.ResearchMode;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,8 @@ public class GameLog extends Observable implements Serializable {
     private final List<GameLogEntry> log = new ArrayList<>();
 
     private final transient GameLogFormatter formatter = new GameLogFormatter(this);
+    private final transient long researchLogId = ResearchMode.isEnabled() ? ResearchGameLogJson.nextLogId() : 0;
+    private transient long researchEventIndex = 0;
     private long matchStartMillis = -1;
 
     public void markMatchStartIfNeeded() {
@@ -65,6 +69,9 @@ public class GameLog extends Observable implements Serializable {
 
     void add(GameLogEntry entry) {
         log.add(entry);
+        if (ResearchMode.isEnabled() && entry != null) {
+            ResearchGameLogJson.append(researchLogId, ++researchEventIndex, entry);
+        }
         this.setChanged();
         this.notifyObservers();
     }
