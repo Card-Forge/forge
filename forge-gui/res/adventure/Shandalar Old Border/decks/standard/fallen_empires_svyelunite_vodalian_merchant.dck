@@ -13,7 +13,7 @@ Name=Vodalian Merchant
 1 Conch Horn|FEM
 2 High Tide|FEM|[18a]
 2 High Tide|FEM|[18b]
-1 Bribery|MMQ
+2 Bribery|MMQ
 1 Credit Voucher|MMQ
 1 Trade Secrets|ONS
 4 Donate|UDS
@@ -21,9 +21,7 @@ Name=Vodalian Merchant
 1 Bamboozle|ODY
 2 Diminishing Returns|ALL
 2 Dream Cache|MIR
-3 Prosperity|VIS
-
-
+2 Prosperity|VIS
 [StartInBattle_Reference]
 1 Svyelunite Temple|FEM
 1 Trade Routes|MMQ

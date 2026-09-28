@@ -1,7 +1,7 @@
 [metadata]
 Name=Homarid Warrior
 [Main]
-20 Island|3ED
+21 Island|3ED
 2 Seafloor Debris|ODY
 4 Homarid Warrior|FEM|[22a]
 4 Homarid Warrior|FEM|[22b]
@@ -13,16 +13,14 @@ Name=Homarid Warrior
 1 Homarid|FEM|[19d]
 4 Water Wurm|DRK
 1 Mystic Might|ICE
+1 Fishliver Oil|ARN
 3 Viscerid Armor|ALL
 2 Breaking Wave|INV
 2 Unstable Mutation|3ED
 2 High Tide|FEM|[18c]
 2 Homarid Spawning Bed|FEM
-
-2 Fishliver Oil|ARN
 [StartInBattle_Reference]
 1 Sand Silos|FEM
-1 Seafloor Debris|ODY
 1 Tidal Influence|FEM
-1 Homarid Warrior|5ED
 1 Tidal Flats|FEM|[27c]
+1 Homarid Warrior|5ED

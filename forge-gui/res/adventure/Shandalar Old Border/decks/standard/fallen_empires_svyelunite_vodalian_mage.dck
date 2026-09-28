@@ -9,22 +9,22 @@ Name=Vodalian Mage
 1 Vodalian Mage|FEM|[30c]
 4 Sea Scryer|MIR
 1 Blue Mana Battery|LEG
-2 Daze|NMS
-1 Ensnare|NMS
+1 Daze|NMS
+1 Mana Leak|STH
 4 Errant Minion|ICE
 1 Force Spike|LEG
 1 Glowing Anemone|MMQ
 4 Gush|MMQ
 2 Mind Stone|WTH
 1 Mana Drain|LEG
-2 Reset|LEG
+1 Power Leak|3ED
 4 Rising Waters|NMS
 2 Sapphire Medallion|TMP
 1 Slow Motion|ULG
 2 Snap|ULG
-3 Thwart|MMQ
-1 Tidal Bore|MMQ
-
+2 Thwart|MMQ
+1 Withdraw|PCY
+2 Soul Barrier|ICE
 [StartInBattle_Reference]
 1 Svyelunite Temple|FEM
 1 Coral Atoll|VIS

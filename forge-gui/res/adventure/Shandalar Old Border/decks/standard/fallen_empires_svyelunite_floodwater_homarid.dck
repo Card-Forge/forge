@@ -15,6 +15,7 @@ Name=Floodwater Homarid
 1 Submerge|NMS
 4 Psychic Venom|3ED
 4 Spiny Starfish|ALL
+1 Flood|DRK
 3 Floodwater Dam|ALL
 4 Floodgate|MIR
 3 Sawtooth Loon|PLS
@@ -24,9 +25,8 @@ Name=Floodwater Homarid
 3 Sunken Hope|PLS
 1 Flash Flood|LEG
 1 Sunken Field|PCY
-
 [StartInBattle_Reference]
 1 Flood Plain|MIR
 1 Flooded Woodlands|ICE
-1 Floodwater Dam|ALL
 1 Floodgate|MIR
+1 Floodwater Dam|ALL

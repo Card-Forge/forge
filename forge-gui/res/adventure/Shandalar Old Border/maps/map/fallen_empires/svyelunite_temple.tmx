@@ -258,7 +258,7 @@
   <object id="40003" template="../../../../../../common/maps/obj/enemy.tx" x="879.5" y="575.25">
    <properties>
     <property name="Type" value="FEM Floodwater Homarid" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Flood Plain|MIR&quot;, &quot;Flooded Woodlands|ICE&quot;, &quot;Floodwater Dam|ALL&quot;, &quot;Floodgate|MIR&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Flood Plain|MIR&quot;, &quot;Flooded Woodlands|ICE&quot;, &quot;Floodgate|MIR&quot;, &quot;Floodwater Dam|ALL&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Floodwater Homarid" />
     <property name="threatRange" type="int" value="8" />
     <property name="displayNameOverride" value="Floodwater Homarid" />
@@ -334,7 +334,7 @@
   <object id="40016" template="../../../../../../common/maps/obj/enemy.tx" x="160.432" y="47.8409" rotation="0">
    <properties>
     <property name="Type" value="FEM Vodalian War Machine" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Vodalian War Machine|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Vodalian War Machine|FEM&quot;, &quot;Vodalian Soldiers|FEM|[31c]&quot;, &quot;Lifeline|USG&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian War Machine" />
     <property name="threatRange" type="int" value="20" />
     <property name="pursueRange" type="int" value="32" />
@@ -347,7 +347,7 @@
   <object id="40017" template="../../../../../../common/maps/obj/enemy.tx" x="256.5" y="47.5">
    <properties>
     <property name="Type" value="FEM Svyelunite Priest" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Svyelunite Priest|FEM&quot;, &quot;Squeeze|MMQ&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Svyelunite Priest|FEM&quot;, &quot;Squeeze|MMQ&quot;, &quot;Worry Beads|MMQ&quot;, &quot;Pedantic Learning|ODY&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Svyelunite Priest" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
@@ -358,7 +358,7 @@
   <object id="40043" template="../../../../../../common/maps/obj/enemy.tx" x="31.4091" y="369.818">
    <properties>
     <property name="Type" value="FEM Svyelunite Priest" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Svyelunite Priest|FEM&quot;, &quot;Squeeze|MMQ&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Svyelunite Priest|FEM&quot;, &quot;Squeeze|MMQ&quot;, &quot;Worry Beads|MMQ&quot;, &quot;Pedantic Learning|ODY&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Svyelunite Priest" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="103,104,105" />
@@ -370,7 +370,7 @@
   <object id="40018" template="../../../../../../common/maps/obj/enemy.tx" x="271.864" y="96.25">
    <properties>
     <property name="Type" value="FEM Seasinger" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Treasure Trove|7ED&quot;, &quot;Lilting Refrain|USG&quot;, &quot;Seasinger|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Island|3ED&quot;, &quot;Mystic Decree|HML&quot;, &quot;Lilting Refrain|USG&quot;, &quot;Seasinger|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Seasinger" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Seasinger" />
@@ -418,7 +418,7 @@
   <object id="40021" template="../../../../../../common/maps/obj/enemy.tx" x="433.25" y="69.25">
    <properties>
     <property name="Type" value="FEM Homarid Deep Spawn" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Island|3ED&quot;, &quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Deep Water|DRK&quot;, &quot;Mystic Decree|HML&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Island|3ED&quot;, &quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Triassic Egg|LEG&quot;, &quot;Mystic Decree|HML&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Deep Spawn" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="108,111" />
@@ -431,7 +431,7 @@
   <object id="40031" template="../../../../../../common/maps/obj/enemy.tx" x="781.25" y="141.25">
    <properties>
     <property name="Type" value="FEM Homarid Deep Spawn" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Island|3ED&quot;, &quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Deep Water|DRK&quot;, &quot;Mystic Decree|HML&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Island|3ED&quot;, &quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Triassic Egg|LEG&quot;, &quot;Mystic Decree|HML&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Deep Spawn" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="" />
@@ -444,7 +444,7 @@
   <object id="40022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Island|3ED&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="108,110" />
@@ -456,7 +456,7 @@
   <object id="40023" template="../../../../../../common/maps/obj/enemy.tx" x="79.5" y="256">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Island|3ED&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="79,78,77,78" />
@@ -468,7 +468,7 @@
   <object id="40042" template="../../../../../../common/maps/obj/enemy.tx" x="191.25" y="368.75">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;, &quot;Island|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Island|3ED&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="80,81,80,79" />
@@ -528,7 +528,7 @@
   <object id="40025" template="../../../../../../common/maps/obj/enemy.tx" x="353.25" y="432.75">
    <properties>
     <property name="Type" value="FEM Homarid Green" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid|FEM|[19a]&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid|FEM|[19a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Green" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="89,85,87,86,89" />
@@ -540,7 +540,7 @@
   <object id="40033" template="../../../../../../common/maps/obj/enemy.tx" x="431" y="384.75">
    <properties>
     <property name="Type" value="FEM Homarid Purple" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid|FEM|[19c]&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid|FEM|[19c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Purple" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="89,82,90" />
@@ -552,7 +552,7 @@
   <object id="40034" template="../../../../../../common/maps/obj/enemy.tx" x="704.5" y="305.25">
    <properties>
     <property name="Type" value="FEM Homarid Red" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid|FEM|[19d]&quot;, &quot;Tidal Flats|FEM|[27a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27a]&quot;, &quot;Homarid|FEM|[19d]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Red" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="113,134,133" />
@@ -564,7 +564,7 @@
   <object id="40032" template="../../../../../../common/maps/obj/enemy.tx" x="368.25" y="513.25">
    <properties>
     <property name="Type" value="FEM Homarid Yellow" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid|FEM|[19b]&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid|FEM|[19b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Yellow" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="87,86,88" />
@@ -576,7 +576,7 @@
   <object id="40026" template="../../../../../../common/maps/obj/enemy.tx" x="495.75" y="273.25">
    <properties>
     <property name="Type" value="FEM Homarid Warrior A" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid Warrior|FEM|[22a]&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Warrior|FEM|[22a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior A" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="83,82,81,82,83,84" />
@@ -588,7 +588,7 @@
   <object id="40037" template="../../../../../../common/maps/obj/enemy.tx" x="702.5" y="209.5">
    <properties>
     <property name="Type" value="FEM Homarid Warrior 5ED" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid Warrior|5ED&quot;, &quot;Tidal Flats|FEM|[27c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27c]&quot;, &quot;Homarid Warrior|5ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior 5ED" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="114,84,114,115,116" />
@@ -600,7 +600,7 @@
   <object id="40036" template="../../../../../../common/maps/obj/enemy.tx" x="558.25" y="511.75">
    <properties>
     <property name="Type" value="FEM Homarid Warrior C" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid Warrior|FEM|[22c]&quot;, &quot;Tidal Flats|FEM|[27a]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27a]&quot;, &quot;Homarid Warrior|FEM|[22c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior C" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="99,101,100,101,102,101,100,101" />
@@ -612,7 +612,7 @@
   <object id="40035" template="../../../../../../common/maps/obj/enemy.tx" x="576" y="401.25">
    <properties>
     <property name="Type" value="FEM Homarid Warrior B" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seafloor Debris|ODY&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Homarid Warrior|FEM|[22b]&quot;, &quot;Tidal Flats|FEM|[27c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27c]&quot;, &quot;Homarid Warrior|FEM|[22b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Warrior B" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="99,112" />
@@ -624,7 +624,7 @@
   <object id="40027" template="../../../../../../common/maps/obj/enemy.tx" x="576.25" y="319.75">
    <properties>
     <property name="Type" value="FEM Homarid Shaman" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Shaman|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="90,113,112,113" />
@@ -636,7 +636,7 @@
   <object id="40074" template="../../../../../../common/maps/obj/enemy.tx" x="640.25" y="431.5">
    <properties>
     <property name="Type" value="FEM Homarid Shaman" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Shaman|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="pursueRange" type="int" value="15" />
     <property name="threatRange" type="int" value="30" />
@@ -648,7 +648,7 @@
   <object id="40030" template="../../../../../../common/maps/obj/enemy.tx" x="896.75" y="126.25">
    <properties>
     <property name="Type" value="FEM Homarid Shaman" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Shaman|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Shaman|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="120,121" />
@@ -660,7 +660,7 @@
   <object id="40028" template="../../../../../../common/maps/obj/enemy.tx" x="920" y="56.25">
    <properties>
     <property name="Type" value="FEM Homarid Spawning Bed" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Triassic Egg|LEG&quot;, &quot;Triassic Egg|LEG&quot;, &quot;Triassic Egg|LEG&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Spawning Bed" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Homarid Spawning Bed" />
@@ -672,7 +672,7 @@
   <object id="40029" template="../../../../../../common/maps/obj/enemy.tx" x="969.75" y="72">
    <properties>
     <property name="Type" value="FEM Homarid Spawning Bed" />
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Island|3ED&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Island|3ED&quot;, &quot;Sand Silos|FEM&quot;, &quot;Tidal Influence|FEM&quot;, &quot;Tidal Flats|FEM|[27b]&quot;, &quot;Homarid Spawning Bed|FEM&quot;, &quot;Triassic Egg|LEG&quot;, &quot;Triassic Egg|LEG&quot;, &quot;Triassic Egg|LEG&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Homarid Spawning Bed" />
     <property name="threatRange" type="int" value="30" />
     <property name="displayNameOverride" value="Homarid Spawning Bed" />

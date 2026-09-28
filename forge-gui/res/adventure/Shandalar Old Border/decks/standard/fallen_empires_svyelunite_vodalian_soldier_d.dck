@@ -10,7 +10,8 @@ Name=Vodalian Soldier
 4 Tidal Courier|APC
 2 Conch Horn|FEM
 2 Coral Helm|ATQ
-2 Fishliver Oil|ARN
+1 Coral Net|TOR
+1 Fishliver Oil|ARN
 2 Living Armor|DRK
 1 Merseine|FEM|[23a]
 1 Merseine|FEM|[23b]
@@ -19,7 +20,6 @@ Name=Vodalian Soldier
 3 Spirit Shield|FEM
 2 Sunken City|DRK
 3 Zelyon Sword|FEM
-
 [StartInBattle_Reference]
 1 Svyelunite Temple|FEM
 1 Coral Reef|HML
