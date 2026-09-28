@@ -5,6 +5,10 @@ const { launchDesktop } = require('./support/desktop.cjs');
 const read = page => page.evaluate(() => window.forge.request('snapshot'));
 const tile = (page, name) => page.locator('#catalog .catalog-card').filter({ has: page.getByRole('heading', { name, exact: true }) });
 async function capture(application, page, filename) {
+  // Capture the layout after resizing without a hover preview or a half-painted transition.
+  await page.mouse.move(10, 10);
+  await page.keyboard.press('Escape');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   const png = await application.evaluate(async ({ BrowserWindow }) =>
     (await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined, { stayHidden: true })).toPNG().toString('base64'));
