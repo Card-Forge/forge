@@ -21,6 +21,7 @@ import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 
 import java.io.File;
@@ -93,7 +94,7 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
 
         cardname = cardname.replace(" ", "+");
         cardname = cardname.replace("'", "");
-        String scryfallurl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + "named?fuzzy=" + cardname;
+        String scryfallurl = ImageFetcher.getCardArtApiBaseUrl() + "named?fuzzy=" + cardname;
         if(!setCode.equals(CardEdition.UNKNOWN_CODE)) scryfallurl += "&set=" + setCode.toLowerCase();
         if(face.equals("back")) scryfallurl += "&face=back";
         scryfallurl += "&format=image";
