@@ -1,5 +1,7 @@
 # CLAUDE.md — Crucible
 
+@.claude/RTK.md
+
 Fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). Java MTG engine.
 
 **Crucible** = Go port of that engine + automated deck testing / optimization suite. Runs batch simulations of a target
