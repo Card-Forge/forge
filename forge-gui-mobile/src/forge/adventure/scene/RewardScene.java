@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -236,7 +237,7 @@ public class RewardScene extends UIScene {
         autoSell = false;
         updateDetailButton();
         if (type == Type.Loot) {
-            setUIBackground(getLastScreenshotDrawable(ScreenUtil.getInstance().getLastScreenTexture()));
+            setUIBackground(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
         } else {
             setUIBackground(origDrawable);
         }

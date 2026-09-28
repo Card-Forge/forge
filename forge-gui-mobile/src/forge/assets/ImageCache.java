@@ -416,7 +416,8 @@ public class ImageCache {
                 }
 
                 CardRenderer.clearcardArtCache();
-                ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
+                Forge.getAssets().manager().update(16);
+                //((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
             }
         } catch (Exception e) {
             System.err.println("Failed to enqueue asynchronous image: " + fileName);

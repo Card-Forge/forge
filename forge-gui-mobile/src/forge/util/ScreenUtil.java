@@ -99,10 +99,11 @@ public class ScreenUtil implements Disposable {
 
     private void updateLastPreview(Pixmap original, float scaleFactor) {
         // Calculate tiny target dimensions
+        float mul = 0.66f;
         int targetWidth = Math.max(1, Math.round(original.getWidth() * scaleFactor));
         int targetHeight = Math.max(1, Math.round(original.getHeight() * scaleFactor));
-        int cropWidth = (int) (original.getWidth() * 0.66);
-        int cropHeight = (int) (original.getHeight() * 0.66);
+        int cropWidth = (int) (original.getWidth() * mul);
+        int cropHeight = (int) (original.getHeight() * mul);
         int startX = (original.getWidth() - cropWidth) / 2;
         int startY = (original.getHeight() - cropHeight) / 2;
 
