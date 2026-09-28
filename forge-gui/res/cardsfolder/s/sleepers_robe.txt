@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAITgts:Card.powerGE1
 SVar:AttachAILogic:Curiosity
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to an opponent, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Enchant creature\nEnchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)\nWhenever enchanted creature deals combat damage to an opponent, you may draw a card.

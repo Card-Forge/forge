@@ -1,0 +1,10 @@
+Name:Traxos, Academy Guardian
+ManaCost:3 U
+Types:Legendary Artifact Creature Dragon Construct
+PT:1/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | Description$ This spell costs {2} less to cast if you've cast a noncreature spell this turn.
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+K:Flying
+K:Vigilance
+K:Prowess
+Oracle:This spell costs {2} less to cast if you've cast a noncreature spell this turn.\nFlying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

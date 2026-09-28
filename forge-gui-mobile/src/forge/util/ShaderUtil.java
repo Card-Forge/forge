@@ -7,8 +7,8 @@ import forge.Forge;
 public class ShaderUtil implements Disposable {
     public static ShaderUtil instance;
     private ShaderProgram shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
-        shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderRoundedRect, shaderRoundedRect2,
-        shaderNoiseFade, shaderPortal, shaderPix;
+        shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderCardRounded, shaderRoundedRect2,
+        shaderNoiseFade, shaderPortal, shaderPix, shaderCardRoundedHolo;
     private ShaderUtil() {
         ShaderProgram.pedantic = false;
     }
@@ -27,10 +27,16 @@ public class ShaderUtil implements Disposable {
         return shaderGrayscale;
     }
 
-    public ShaderProgram getShaderRoundedRect() {
-        if (shaderRoundedRect == null)
-            shaderRoundedRect = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRoundedRect);
-        return shaderRoundedRect;
+    public ShaderProgram getShaderCardRounded() {
+        if (shaderCardRounded == null)
+            shaderCardRounded = new ShaderProgram(Shaders.vertCardShader, Shaders.fragCardShader);
+        return shaderCardRounded;
+    }
+
+    public ShaderProgram getShaderCardRoundedHolo() {
+        if (shaderCardRoundedHolo == null)
+            shaderCardRoundedHolo = new ShaderProgram(Shaders.vertCardShader, Shaders.fragCardShaderHolo);
+        return shaderCardRoundedHolo;
     }
 
     public ShaderProgram getShaderWarp() {
@@ -107,7 +113,7 @@ public class ShaderUtil implements Disposable {
     @Override
     public void dispose() {
         Forge.safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay, shaderPixelate,
-            shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderRoundedRect,
-            shaderRoundedRect2, shaderNoiseFade, shaderPortal, shaderPix);
+            shaderRipple, shaderPixelateWarp, shaderChromaticAberration, shaderHueShift, shaderCardRounded,
+            shaderRoundedRect2, shaderNoiseFade, shaderPortal, shaderPix, shaderCardRoundedHolo);
     }
 }

@@ -1,0 +1,9 @@
+Name:Theorix Charm
+ManaCost:U B
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBPump,DBMill
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | ValidTgtsDesc$ noncreature spell | UnlessCost$ 2 | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Target creature gets -2/-2 until end of turn.
+SVar:DBMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBDraw | SpellDescription$ Mill three cards, then draw a card. (To mill three cards, put the top three cards of your library into your graveyard.)
+SVar:DBDraw:DB$ Draw
+Oracle:Choose one —\n• Counter target noncreature spell unless its controller pays {2}.\n• Target creature gets -2/-2 until end of turn.\n• Mill three cards, then draw a card. (To mill three cards, put the top three cards of your library into your graveyard.)

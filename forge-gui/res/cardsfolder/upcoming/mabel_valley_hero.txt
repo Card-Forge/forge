@@ -1,0 +1,7 @@
+Name:Mabel, Valley Hero
+ManaCost:1 R W
+Types:Legendary Creature Mouse Soldier
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME or another creature you control enters, put a +1/+1 counter on target creature that entered this turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.ThisTurnEntered | ValidTgtsDesc$ creature that entered this turn | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever Mabel or another creature you control enters, put a +1/+1 counter on target creature that entered this turn.

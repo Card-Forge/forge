@@ -1,0 +1,7 @@
+Name:Blessed Ghoul
+ManaCost:WB
+Types:Creature Zombie Cleric
+PT:1/1
+K:Lifelink
+A:AB$ ChangeZone | Cost$ 2 WB | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to your hand.
+Oracle:Lifelink\n{2}{W/B}: Return this card from your graveyard to your hand.

@@ -51,6 +51,7 @@ import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -183,6 +184,30 @@ public enum CDeckEditorUI implements ICDoc {
             cb.setEnabled(true);
         } else {
             cb.setEnabled(false);
+        }
+        syncTabCaption(gt);
+    }
+
+    /**
+     * The format dropdown lives inside the deck panel, so the navigation bar alone
+     * gives no clue which format the open editor is building for. Mirror the
+     * selected format in the tab caption. Only the Constructed screen hosts the
+     * dropdown; every other editor keeps the caption it was built with.
+     */
+    private void syncTabCaption(final GameType gt) {
+        if (childController.getScreen() != FScreen.DECK_EDITOR_CONSTRUCTED) { return; }
+        FScreen.DECK_EDITOR_CONSTRUCTED.setTabCaption(
+                Localizer.getInstance().getMessage(formatTabCaptionKey(gt)));
+    }
+
+    private static String formatTabCaptionKey(final GameType gt) {
+        if (gt == null) { return "lblDeckEditorWithSpaces"; }
+        switch (gt) {
+            case Commander:   return "lblCommanderDeckEditor";
+            case Oathbreaker: return "lblOathbreakerDeckEditor";
+            case Brawl:       return "lblBrawlDeckEditor";
+            case TinyLeaders: return "lblTinyLeadersDeckEditor";
+            default:          return "lblDeckEditorWithSpaces";
         }
     }
 

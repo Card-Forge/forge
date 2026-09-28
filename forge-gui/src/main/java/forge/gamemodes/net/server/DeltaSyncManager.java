@@ -251,6 +251,12 @@ public class DeltaSyncManager implements IHasForgeLog {
         if (old == obj) {
             // Existing object — dirty props only
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
+            // identical to mergeDelayedProps' own early-out: only a frozen tracker can add to an empty
+            // dirty set, so with no dirty props and no freeze the delta below would always come out empty
+            Tracker tracker = obj.getTracker();
+            if (dirtyProps.isEmpty() && (tracker == null || !tracker.isFrozen())) {
+                return;
+            }
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
             if (!delta.isEmpty()) {
                 // Merged, not replaced: a retried walk must not drop props an earlier attempt took

@@ -1,0 +1,10 @@
+Name:Fblthp, Impossibly Lost
+ManaCost:1 U
+Types:Legendary Creature Homunculus
+PT:1/1
+T:Mode$ DamageAll | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | PlayerTurn$ True | TriggerDescription$ When one or more of your opponents are dealt combat damage during your turn, draw two cards. If your library has no cards in it, you win the game. NICKNAME's owner shuffles him into their library. (If you draw from an empty library this way, you still win the game.)
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBWinGame
+SVar:DBWinGame:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self
+SVar:X:Count$ValidLibrary Card.YouOwn
+Oracle:When one or more of your opponents are dealt combat damage during your turn, draw two cards. If your library has no cards in it, you win the game. Fblthp's owner shuffles him into their library. (If you draw from an empty library this way, you still win the game.)

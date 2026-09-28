@@ -105,7 +105,7 @@ public class TargetingOverlay {
                     if (cards == null) continue;
                     for (final CardView blockingCard : cards) {
                         if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                        drawArrow(g, endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
+                        drawArrow(g, endpoints.get(blockingCard.getId()), endpoints.get(attackingCard.getId()), ArcConnection.FoesBlocking);
                     }
                     if (playerViewSet != null) {
                         for (final PlayerView p : playerViewSet) {
@@ -137,9 +137,10 @@ public class TargetingOverlay {
                 color = foeDefColor;
         }
 
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_USE_LASER_ARROWS))
-            g.drawLineArrow(Utils.scale(3), color, start.x, start.y, end.x, end.y);
-        else
-            g.drawArrow(BORDER_THICKNESS, ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
+        switch (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION)) {
+            case "Point" -> g.drawCurvedLinePointer(Utils.scale(3), color.getColor(), Color.WHITE, start.x, start.y, end.x, end.y);
+            case "Line" -> g.drawLinePointer(Utils.scale(3), color.getColor(), start.x, start.y, end.x, end.y);
+            default -> g.drawCurvedArrow(Utils.scale(3), color.alphaColor(0.8f).getColor(), FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(), start.x, start.y, end.x, end.y, ArcConnection.Friends.equals(connects));
+        }
     }
 }

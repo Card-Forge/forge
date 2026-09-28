@@ -1,0 +1,6 @@
+Name:Rewrite Regrets
+ManaCost:3 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.cmcLE6+YouOwn,Planeswalker.cmcLE6+YouOwn | ValidTgtsDesc$ creature or planeswalker card with mana value 6 or less in your graveyard | SubAbility$ DBEmpower | SpellDescription$ Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 2 | SpellDescription$ Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+Oracle:Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.\nEmpower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

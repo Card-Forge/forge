@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ UCDraw | Description$ Enchanted land has "{T}, Pay 1 life: Draw a card."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | AddAbility$ UCDraw | Description$ Enchanted land has "{T}, Pay 1 life: Draw a card."
 SVar:UCDraw:AB$ Draw | Cost$ T PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant land\nEnchanted land has "{T}, Pay 1 life: Draw a card."
