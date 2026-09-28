@@ -275,7 +275,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         this.flipOnClick = flippable;
         this.reward = reward;
         this.isRewardShop = RewardScene.Type.Shop.equals(type);
-        this.canAutoSell = (RewardScene.Type.Loot.equals(type) || RewardScene.Type.QuestReward.equals(type));
+        this.canAutoSell = (RewardScene.Type.EventReward.equals(type) || RewardScene.Type.Loot.equals(type) || RewardScene.Type.QuestReward.equals(type));
         this.showOverlay = showOverlay;
 
 
@@ -1068,7 +1068,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public void act(float delta) {
         super.act(delta);
         if (Forge.getAssets() != null && Forge.getAssets().manager() != null) {
-            Forge.getAssets().manager().update();
+            Forge.getAssets().manager().update(16);
         }
 
         if (clicked) {
