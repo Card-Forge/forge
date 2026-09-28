@@ -57,7 +57,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private final RemoteClient client;
     private final GameProtocolSender sender;
     private final DeltaSyncManager syncManager;
-    DeltaPacket delta;
 
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
@@ -149,27 +148,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private void syncAndSend(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
         updateGameView();
-        boolean replaceTrackables = true;
-        // if delta contains a new object we're now sending it's most likely a newer instance:
-        // the client may not be quick enough to replace it in the EDT first, so we take the safer route
-        if (delta != null) {
-            for (Object obj : args) {
-                if (obj instanceof CardView cv && delta.getNewObjects().containsKey(cv.getId())) {
-                    replaceTrackables = false;
-                } else if (obj instanceof Iterable<?> it) {
-                    for (Object e : it) {
-                        if (e instanceof CardView cv && delta.getNewObjects().containsKey(cv.getId())) {
-                            replaceTrackables = false;
-                            break;
-                        }
-                    }
-                }
-                if (!replaceTrackables) {
-                    break;
-                }
-            }
-        }
-        sender.send(method, replaceTrackables, args);
+        // if this gets provided with new object views while more updates got chained (e.g. revealing what got bounced):
+        // the client may not be quick enough to replace it in the EDT before this passes IO lookup, so we take the safer route
+        sender.send(method, getForwarder().hasPendingZoneChange(args), args);
     }
 
     /**
@@ -249,7 +230,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             flushPendingEvents();
             return;
         }
-        delta = syncManager.collectDeltas(gameView);
+        DeltaPacket delta = syncManager.collectDeltas(gameView);
         if (!delta.isEmpty()) {
             if (flush) {
                 sender.send(ProtocolMethod.applyDelta, delta);

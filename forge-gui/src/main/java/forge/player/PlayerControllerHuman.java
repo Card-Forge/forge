@@ -2664,11 +2664,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
             CardUtil.turnToRightFace(cardFace.getName(), instanceForPlayer);
             // TODO need the valid check be done against the CardFace?
-            for (String v : valid.split(",")) {
-                if (instanceForPlayer.isValid(v, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
-                    // it need to return name for card face
-                    return cardFace.getName();
-                }
+            if (instanceForPlayer.isValid(valid.split(","), sa.getHostCard().getController(), sa.getHostCard(), sa)) {
+                // it need to return name for card face
+                return cardFace.getName();
             }
         }
     }
