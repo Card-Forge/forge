@@ -35,6 +35,10 @@
   cardPreview.bind(libraryPicker, '[data-library-preview]', element => libraryGroups[Number(element.dataset.libraryPreview)]?.card);
 
   function show() {
+    if ($('match-view').hidden) {
+      clearTimeout(toastTimer);
+      $('toast').hidden = true;
+    }
     document.body.classList.add('in-match');
     $('workshop-view').hidden = true;
     $('practice-view').hidden = true;

@@ -23,7 +23,10 @@ test('hand costs and creature stats stay readable and reachable at desktop sizes
     await page.locator('#confirm-import').click();
     await expect(page.locator('#deck-name')).toHaveValue('Readable hand');
     await page.locator('#play-match').click();
+    // Hold the workshop notification open so a timer cannot hide a transition regression.
+    await page.evaluate(() => { toast('Deck imported. Make it yours.'); clearTimeout(toastTimer); });
     await page.locator('#match-start').click();
+    await expect(page.locator('#toast')).toBeHidden();
     // Resolve who-plays-first choices before the opening hand is dealt.
     for (let step = 0; step < 60; step++) {
       const state = await page.evaluate(() => window.forge.request('matchState'));
