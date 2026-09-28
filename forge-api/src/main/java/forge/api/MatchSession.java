@@ -232,6 +232,9 @@ public final class MatchSession {
             requireSession(request);
             Pending next = pending;
             if (next == null || !next.id.equals(string(request, "promptId"))) throw new IllegalArgumentException("That choice has changed. Use the current prompt.");
+            String action = string(request, "action");
+            if (action.equals("passIfNoResponse") && !Boolean.TRUE.equals(next.prompt.get("canAutoPass")))
+                throw new IllegalArgumentException("This response window needs your decision");
             if (!next.kind.equals("input")) {
                 validateDialog(next, request);
                 pending = null;
@@ -239,16 +242,11 @@ public final class MatchSession {
                 next.response.complete(request.deepCopy());
                 return latest;
             }
-            String action = string(request, "action");
             CardView card = null;
             CardView attacker = null;
             PlayerView target = null;
             switch (action) {
-                case "ok" -> { if (!okEnabled) throw new IllegalArgumentException("Continue is not available"); }
-                case "passIfNoResponse" -> {
-                    if (!Boolean.TRUE.equals(next.prompt.get("canAutoPass")))
-                        throw new IllegalArgumentException("This response window needs your decision");
-                }
+                case "ok", "passIfNoResponse" -> { if (!okEnabled) throw new IllegalArgumentException("Continue is not available"); }
                 case "cancel" -> { if (!cancelEnabled) throw new IllegalArgumentException("Cancel is not available"); }
                 case "attackAll" -> { if (!(next.input instanceof InputAttack)) throw new IllegalArgumentException("Not declaring attackers"); }
                 case "card" -> { card = next.cards.get(string(request, "key")); if (card == null) throw new IllegalArgumentException("Card is not visible in this prompt"); }

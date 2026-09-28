@@ -76,6 +76,13 @@ test('Forest clicks cannot become Nantuko casts after a refresh; casting choices
     await expect(page.locator('[data-ability-choice]')).toHaveCount(2);
     await expect(page.locator('[data-ability-choice="0"]')).toContainText('Cast as a creature');
     await expect(page.locator('[data-ability-choice="1"]')).toContainText('Bestow — cast as an Aura');
+    const abilityChoice = await page.evaluate(() => window.forge.request('matchState'));
+    // Even a syntactically valid empty selection cannot turn an auto-pass into
+    // an implicit answer to an optional casting dialog.
+    await expect(page.evaluate(params => window.forge.request('matchAction', params), {
+      sessionId: abilityChoice.id, promptId: abilityChoice.prompt.id, action: 'passIfNoResponse', choices: []
+    })).rejects.toThrow('needs your decision');
+    expect((await page.evaluate(() => window.forge.request('matchState'))).prompt.id).toBe(abilityChoice.prompt.id);
     if (!executable) await page.screenshot({ path: test.info().outputPath('nantuko-choices.png') });
     await page.locator('#match-ability-cancel').click();
     await expect(page.locator('#match-ok')).toBeVisible();

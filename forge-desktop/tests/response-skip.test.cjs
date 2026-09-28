@@ -2,7 +2,8 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { testProfile, startEngine, ready } = require('./support/engine.cjs');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const cheap = new Set(['Lightning Bolt', 'Shock', 'Burst Lightning', 'Galvanic Blast', 'Wild Slash', 'Play with Fire']);
+// Keep this fixture's chosen response to one mana with no optional extra costs.
+const cheap = new Set(['Lightning Bolt', 'Shock', 'Galvanic Blast', 'Wild Slash']);
 const handOf = state => state.players.find(player => player.human).zones.find(zone => zone.name === 'Hand').cards;
 
 test('automatic pass waits for an affordable instant, then becomes available after its mana is spent', { timeout: 120000 }, async () => {
