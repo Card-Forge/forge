@@ -41,7 +41,7 @@ public class ViewRewardsScene extends ForgeScene {
             }
         }
 
-        screen.setBackground(currentBackground);
+        screen.setBackground(currentBackground, RewardScene.Type.Loot.equals(scene.type));
 
         super.enter();
         CardZoom.show(list, index, null, true);

@@ -951,6 +951,7 @@ public class Forge implements ApplicationListener {
         // prevent render if isDisposed
         if (isDisposed)
             return;
+        ScreenUtil.getInstance().onRenderFrame();
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
@@ -1135,7 +1136,8 @@ public class Forge implements ApplicationListener {
             }
             lastScene.add(currentScene);
         }
-        storeScreen();
+        if (!(newScene instanceof ViewRewardsScene))
+            storeScreen();
         Adventure.getInstance().sceneWasSwapped = true;
         currentScene = newScene;
 
