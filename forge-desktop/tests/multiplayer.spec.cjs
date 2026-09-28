@@ -28,24 +28,30 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
       for (const select of await page.locator('#match-extra-opponents select').all()) await select.selectOption('green');
       await page.locator('#match-start').click();
       let state;
-      for (let i = 0; i < 160; i++) {
+      const setupDeadline = Date.now() + 30000;
+      while (Date.now() < setupDeadline) {
         state = await page.evaluate(() => window.forge.request('matchState'));
         expect(state.status, state.error).not.toBe('error');
         const p = state.prompt;
         if (!p) { await page.waitForTimeout(30); continue; }
         const human = state.players.find(player => player.human);
-        if (state.phaseKey === 'MAIN1' && state.activePlayerId === human.id) break;
+        if (state.phaseKey === 'MAIN1' && state.activePlayerId === human.id && p.inputType === 'InputPassPriority') break;
         if (p.playerChoices?.includes(human.id)) {
           await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', p.id);
           await page.locator('#match-self .match-life').click();
-          continue;
+        } else {
+          const answer = p.kind === 'choice' ? { choices: Array.from({ length: p.min }, (_, index) => index) }
+            : p.kind === 'reveal' ? { action: 'ack' } : p.playerChoices?.length
+              ? { action: 'player', playerId: p.playerChoices.find(id => id === human.id) ?? p.playerChoices[0] } : { action: 'ok' };
+          await page.evaluate(answer => window.forge.request('matchAction', answer), { sessionId: state.id, promptId: p.id, ...answer });
         }
-        let answer = p.kind === 'choice' ? { choices: Array.from({ length: p.min }, (_, index) => index) }
-          : p.kind === 'reveal' ? { action: 'ack' } : p.playerChoices?.length
-            ? { action: 'player', playerId: p.playerChoices.find(id => id === human.id) ?? p.playerChoices[0] } : { action: 'ok' };
-        await page.evaluate(answer => window.forge.request('matchAction', answer), { sessionId: state.id, promptId: p.id, ...answer });
+        // Six-player AI turns can outlast many quick snapshot polls. Wait for
+        // this decision to advance instead of spending a fixed iteration budget.
+        await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.id || p.id).not.toBe(p.id);
       }
       expect(state.phaseKey).toBe('MAIN1');
+      expect(state.activePlayerId).toBe(state.players.find(player => player.human).id);
+      expect(state.prompt.inputType).toBe('InputPassPriority');
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
       await expect(page.locator('#match-opponent > .match-lane')).toHaveCount(count - 1);
       await expect(page.locator('#match-seats .table-seat')).toHaveCount(count);
