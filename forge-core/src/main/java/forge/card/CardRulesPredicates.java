@@ -629,9 +629,8 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
     public static final Predicate<CardRules> NOT_BASIC_LAND = subject -> !subject.getType().isBasicLand();
     /** Matches only Plains, Island, Swamp, Mountain, or Forest. */
-    public static final Predicate<CardRules> IS_TRUE_BASIC_LAND = subject -> !subject.getName().equals("Wastes")&&subject.getType().isBasicLand();
+    public static final Predicate<CardRules> IS_TRUE_BASIC_LAND = subject -> !subject.getName().equals("Wastes") && subject.getType().isBasicLand();
     /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
-    public static final Predicate<CardRules> NOT_TRUE_BASIC_LAND = subject -> !subject.getType().isBasicLand() || subject.getName().equals("Wastes");
     public static final Predicate<CardRules> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();
     public static final Predicate<CardRules> CAN_BE_COMMANDER = CardRules::canBeCommander;
     public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = CardRules::canBePartnerCommander;

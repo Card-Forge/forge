@@ -89,6 +89,8 @@ public class CardStateProperty {
             return !type.hasStringType(property.substring(3));
         } else if (property.equals("CostsPhyrexianMana")) {
             return cardState.getManaCost().hasPhyrexian();
+        } else if (property.equals("CostsHybridMana")) {
+            return cardState.getManaCost().hasHybrid();
         } else if (property.startsWith("HasSVar")) {
             final String svar = property.substring(8);
             return cardState.hasSVar(svar);

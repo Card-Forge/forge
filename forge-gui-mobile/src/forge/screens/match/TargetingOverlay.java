@@ -105,7 +105,7 @@ public class TargetingOverlay {
                     if (cards == null) continue;
                     for (final CardView blockingCard : cards) {
                         if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                        drawArrow(g, endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
+                        drawArrow(g, endpoints.get(blockingCard.getId()), endpoints.get(attackingCard.getId()), ArcConnection.FoesBlocking);
                     }
                     if (playerViewSet != null) {
                         for (final PlayerView p : playerViewSet) {

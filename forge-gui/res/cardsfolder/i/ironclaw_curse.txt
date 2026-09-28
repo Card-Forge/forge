@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ -1 | Description$ Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddToughness$ -1 | Description$ Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
 S:Mode$ CantBlockBy | ValidAttackerRelative$ Creature.powerGEIronclawX | ValidBlocker$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
 SVar:IronclawX:Count$CardToughness
 Oracle:Enchant creature\nEnchanted creature gets -0/-1.\nEnchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.

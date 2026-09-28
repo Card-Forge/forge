@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 5
 S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWWarlord | Description$ Planeswalkers you control have "[-4]: This planeswalker deals 2 damage to up to one target creature or planeswalker and 2 damage to target player."
 SVar:PWWarlord:AB$ DealDamage |  Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | SubAbility$ DBDealDamage | DamageMap$ True | SpellDescription$ This planeswalker deals 2 damage to up to one target creature or planeswalker and 2 damage to target player."
-SVar:DBDealDamage:DB$ DealDamage | ValidTgt$ Player | NumDmg$ 2 | SubAbility$ DBDamageResolve
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player | NumDmg$ 2 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 DeckHints:Type$Planeswalker
 Oracle:When Way of the Warlord enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nPlaneswalkers you control have "[-4]: This planeswalker deals 2 damage to up to one target creature or planeswalker and 2 damage to target player."

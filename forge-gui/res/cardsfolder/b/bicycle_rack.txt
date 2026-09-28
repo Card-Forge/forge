@@ -5,6 +5,6 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Card | AffectedZone$ Hand |
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ Whenever Chaos ensues, until end of turn, creatures you control have "This creature gets +1/+1 for each card you've discarded this turn."
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ STBuff
 SVar:STBuff:Mode$ Continuous | Affected$ Creature.YouCtrl | AddStaticAbility$ STBuffGranted | Description$ Creatures you control have "This creature gets +1/+1 for each card you've discarded this turn."
-SVar:STBuffGranted:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each card you've discarded this turn.
+SVar:STBuffGranted:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each card you've discarded this turn.
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 Oracle:Cards in each player's hand have cycling {2}.\nWhenever Chaos ensues, until end of turn, creatures you control have "This creature gets +1/+1 for each card you've discarded this turn."

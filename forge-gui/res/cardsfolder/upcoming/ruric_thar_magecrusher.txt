@@ -6,5 +6,5 @@ R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | D
 K:Reach
 K:Vigilance
 K:Trample
-S:Mode$ Continuous | Affected$ Card.Self+!dealtCombatDamagetoAny | AddKeyword$ Hexproof | Description$ NICKNAME has hexproof as long as they haven't dealt combat damage yet. (They can't be the target of spells or abilities your opponents control.)
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.!dealtCombatDamagetoAny | AddKeyword$ Hexproof | Description$ NICKNAME has hexproof as long as they haven't dealt combat damage yet. (They can't be the target of spells or abilities your opponents control.)
 Oracle:This spell can't be countered.\nReach, vigilance, trample\nRuric Thar has hexproof as long as they haven't dealt combat damage yet. (They can't be the target of spells or abilities your opponents control.)

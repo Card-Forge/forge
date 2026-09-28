@@ -1,0 +1,13 @@
+Name:Tamiyo, Upriser Crowned
+ManaCost:4 R W
+Types:Legendary Creature Moonfolk Warrior
+PT:3/5
+K:Flying
+K:Double Strike
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When NICKNAME enters, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+T:Mode$ DamageDoneOnce | CheckDefinedPlayer$ You.isMonarch | NoResolvingCheck$ True | CombatDamage$ True | ValidSource$ Creature | ValidTarget$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures deal combat damage to you while you're the monarch, tap those creatures and put a stun counter on each of them.
+SVar:TrigTap:DB$ Tap | Defined$ TriggeredSources | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ TriggeredSources | CounterType$ Stun | CounterNum$ 1
+Oracle:Flying, double strike, haste\nWhen Tamiyo enters, you become the monarch.\nWhenever one or more creatures deal combat damage to you while you're the monarch, tap those creatures and put a stun counter on each of them.

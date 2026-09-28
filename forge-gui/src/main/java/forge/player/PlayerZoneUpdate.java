@@ -3,13 +3,10 @@ package forge.player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 
-import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class PlayerZoneUpdate implements Serializable {
-    private static final long serialVersionUID = -7666875897455073969L;
-
+public class PlayerZoneUpdate {
     private final PlayerView player;
     private final Set<ZoneType> zones;
 

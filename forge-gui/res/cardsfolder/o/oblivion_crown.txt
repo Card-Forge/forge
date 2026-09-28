@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 K:Flash
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "Discard a card: This creature gets +1/+1 until end of turn."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddAbility$ Pump | Description$ Enchanted creature has "Discard a card: This creature gets +1/+1 until end of turn."
 SVar:Pump:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 AI:RemoveDeck:All
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has "Discard a card: This creature gets +1/+1 until end of turn."

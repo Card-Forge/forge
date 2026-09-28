@@ -2,7 +2,7 @@ Name:Fatehold Chronologist
 ManaCost:1 WU
 Types:Creature Bird Wizard
 PT:1/2
-K:FLying
+K:Flying
 K:ETBReplacement:Other:DBPrepare
 SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared.
 AlternateMode:Prepare

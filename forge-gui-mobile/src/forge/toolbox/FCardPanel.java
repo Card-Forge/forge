@@ -199,7 +199,7 @@ public class FCardPanel extends FDisplayObject {
             CardRenderer.drawCardWithOverlays(g, card, x - mod / 2, y - mod / 2, w + mod, h + mod, getStackPosition());
             if (splatter != null) {
                 g.setAlphaComposite(0.6f);
-                g.drawCardImage(splatter, null, x - mod / 2, y - mod / 2, w + mod, h + mod, true, false, false);
+                g.drawCardImage(splatter, null, x - mod / 2, y - mod / 2, w + mod, h + mod, true, false, 0);
                 g.setAlphaComposite(oldAlpha);
             }
             if (tapped) {

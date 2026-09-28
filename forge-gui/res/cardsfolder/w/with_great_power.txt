@@ -3,7 +3,7 @@ Variant:UniversesWithin:FlavorName:Chosen by Valgavoth
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant:Creature.YouCtrl:creature you control
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddSVar$ EqMe & EnMe | Description$ Enchanted creature gets +2/+2 for each Aura and Equipment attached to it.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ X | AddToughness$ X | AddSVar$ EqMe & EnMe | Description$ Enchanted creature gets +2/+2 for each Aura and Equipment attached to it.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEnchanted | DamageTarget$ Enchanted | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
 SVar:DmgEnchanted:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Enchanted | VarType$ Card
 SVar:X:Count$Valid Aura.AttachedTo Creature.EnchantedBy,Equipment.AttachedTo Creature.EnchantedBy/Times.2

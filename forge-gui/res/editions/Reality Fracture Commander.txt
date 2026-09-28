@@ -111,7 +111,22 @@ ScryfallCode=FRC
 103 R Turbulent Wetlands @Piotr Dura
 
 [tokens]
+1 w_4_4_angel_flying @Harkalé Linaï
+2 w_2_1_insect_flying @Michele Giorgi
+3 w_1_1_soldier @Magali Villeneuve
+4 w_1_1_spirit_flying @Kim Sokol
+5 w_1_1_warrior @Ryan Barger
+6 u_x_x_shark_flying @Caio Monteiro
+7 b_2_2_rogue @Maria Poliakova
+8 b_0_0_zombie_army @David Astruga
+9 r_1_1_goblin @Paolo Parente
+10 kobolds_of_kher_keep @Paolo Parente
+11 gw_1_1_citizen @Maria Poliakova
+12 gingerbrute @Alexandre Honoré
 13 incubator_c_0_0_a_phyrexian @Johann Bodin
+14 c_a_map_sac_explore @Francesca Baerald
+15 c_1_1_a_myr @Michele Giorgi
+16 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez
 
 [other]
 17 monarch @Luaren Ayrey

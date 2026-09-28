@@ -5,7 +5,7 @@ K:Enchant:Creature
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters, target player sacrifices a creature other than enchanted creature.
 SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.!EnchantedBy | SacMessage$ creature other than enchanted creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ MortalDestroy
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddSVar$ MortalDestroy
 SVar:MortalDestroy:SVar:DestroyWhenDamaged:True
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EnchantedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature is dealt damage, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy

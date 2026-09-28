@@ -1,7 +1,7 @@
 Name:Jiang Yanggu, Never Alone
 ManaCost:3 G
 Types:Legendary Creature Human Druid
-PT:3/3
+PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create Mowu, a legendary 3/3 green Dog creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ mowu | TokenOwner$ You
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap all tokens you control.

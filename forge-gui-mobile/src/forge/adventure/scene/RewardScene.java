@@ -6,6 +6,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
@@ -63,12 +64,15 @@ public class RewardScene extends UIScene {
     }
 
     Type type;
-    Array<Actor> generated = new Array<>();
+    Array<Actor> generated = new Array<>(32);
+    private final List<RewardActor> rewardList = new ArrayList<>(32);
     static public final float CARD_WIDTH = 550f;
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
     ItemPool<PaperCard> collectionPool = null;
     private int remainingSelections = 0;
+    public Image marketBackgroundImg = null;
+    private Actor cachedCardsContainerActor = null;
 
     private RewardScene() {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
@@ -77,6 +81,9 @@ public class RewardScene extends UIScene {
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
         headerLabel = ui.findActor("shopName");
         headerLabelOrigPos = new Vector2(headerLabel.getX(), headerLabel.getY());
+        if (ui.findActor("market_background") instanceof Image image)
+            this.marketBackgroundImg = image;
+        this.cachedCardsContainerActor = ui.findActor("cards");
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("detail", this::toggleToolTip);
         ui.onButtonPress("restock", this::restockShop);
@@ -125,8 +132,8 @@ public class RewardScene extends UIScene {
     float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
     public void quitScene() {
-        //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (actor instanceof RewardActor rewardActor) {
                 rewardActor.removeTooltip();
                 actor.remove();
@@ -172,7 +179,8 @@ public class RewardScene extends UIScene {
     }
 
     void clearGenerated() {
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
@@ -189,16 +197,18 @@ public class RewardScene extends UIScene {
     }
 
     public List<RewardActor> getGeneratedRewards() {
-        List<RewardActor> rewards = new ArrayList<>();
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        rewardList.clear();
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            if (!rewardActor.frontSideUp())
+            if (!rewardActor.frontSideUp()) {
                 continue;
-            rewards.add(rewardActor);
+            }
+            rewardList.add(rewardActor);
         }
-        return rewards;
+        return rewardList;
     }
 
     @Override
@@ -207,8 +217,8 @@ public class RewardScene extends UIScene {
         ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
             if (type == Type.Loot || type == Type.QuestReward) {
-                flipCountDown -= Gdx.graphics.getDeltaTime();
-                exitCountDown += Gdx.graphics.getDeltaTime();
+                flipCountDown -= delta;
+                exitCountDown += delta;
             }
             if (flipCountDown <= 0) {
                 clearGenerated();
@@ -382,7 +392,7 @@ public class RewardScene extends UIScene {
         addToSelectable(doneButton);
         generated.clear();
 
-        Actor card = ui.findActor("cards");
+        Actor card = this.cachedCardsContainerActor;
         //reset pos
         headerLabel.setPosition(headerLabelOrigPos.x, headerLabelOrigPos.y);
         headerLabel.addListener(new ClickListener() {
@@ -409,15 +419,17 @@ public class RewardScene extends UIScene {
             } else {
                 headerLabel.setVisible(false);
             }
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(true);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(true);
+            }
         } else {
             headerLabel.setVisible(false);
             headerLabel.setText("");
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(false);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(false);
+            }
         }
 
         float targetWidth = card.getWidth();
