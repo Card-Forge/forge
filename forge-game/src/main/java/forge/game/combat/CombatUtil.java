@@ -992,7 +992,6 @@ public class CombatUtil {
             return false;
         }
 
-        // CantBlockBy static abilities (includes Shadow's own two restrictions)
         if (StaticAbilityCantAttackBlock.cantBlockBy(attacker, blocker)) {
             return false;
         }

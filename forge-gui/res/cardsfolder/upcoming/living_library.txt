@@ -2,5 +2,5 @@ Name:Living Library
 ManaCost:2
 Types:Artifact Creature Book Illusion
 PT:0/4
-A:AB$ ChangeZone | Cost$ 6 Sac<1/CARDNAME/this creature> | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidTgtsDesc$ creature or planeswalker an opponent controls | ValidOrigin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Choose target creature or planeswalker an opponent controls. Its owner shuffles it into their library.
+A:AB$ ChangeZone | Cost$ 6 Sac<1/CARDNAME/this creature> | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidTgtsDesc$ creature or planeswalker an opponent controls | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Choose target creature or planeswalker an opponent controls. Its owner shuffles it into their library.
 Oracle:{6}, Sacrifice this creature: Choose target creature or planeswalker an opponent controls. Its owner shuffles it into their library.

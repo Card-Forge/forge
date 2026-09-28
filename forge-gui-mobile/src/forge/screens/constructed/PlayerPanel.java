@@ -381,7 +381,6 @@ public class PlayerPanel extends FContainer {
             humanAiSwitch.setPosition(x, y);
         }
 
-
         if (devModeSwitch.isVisible()) {
             if(Forge.isLandscapeMode())
                 y += dy;
