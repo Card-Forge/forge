@@ -33,7 +33,10 @@ jobs:
           source research/run.properties
           set +a
 
+          RESEARCH_MODE="${RESEARCH_MODE:-false}"
+
           {
+            echo "RESEARCH_MODE=$RESEARCH_MODE"
             echo "DECK_DIR=$DECK_DIR"
             echo "DECK1=$DECK1"
             echo "DECK2=$DECK2"
@@ -96,8 +99,15 @@ jobs:
             ARGS+=( -q )
           fi
 
+          echo "Research mode: $RESEARCH_MODE"
+
           cd forge-gui
-          java -Djava.awt.headless=true -jar "../${{ steps.jar.outputs.jar }}" "${ARGS[@]}" 2>&1 | tee ../research-sim.log
+          java \
+            -Djava.awt.headless=true \
+            -Dforge.research="$RESEARCH_MODE" \
+            -jar "../${{ steps.jar.outputs.jar }}" \
+            "${ARGS[@]}" \
+            2>&1 | tee ../research-sim.log
 
       - name: Show result summary
         if: always()
