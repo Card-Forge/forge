@@ -8,6 +8,9 @@ on:
       - "research/run.properties"
       - "research/decks/**"
       - ".github/workflows/research-sim.yml"
+      - "forge-core/src/main/java/forge/util/ResearchMode.java"
+      - "forge-game/src/main/java/forge/game/GameLog.java"
+      - "forge-game/src/main/java/forge/game/ResearchGameLogJson.java"
   workflow_dispatch:
 
 jobs:
@@ -105,6 +108,7 @@ jobs:
           java \
             -Djava.awt.headless=true \
             -Dforge.research="$RESEARCH_MODE" \
+            -Dforge.research.jsonLog="$GITHUB_WORKSPACE/research-playlog.jsonl" \
             -jar "../${{ steps.jar.outputs.jar }}" \
             "${ARGS[@]}" \
             2>&1 | tee ../research-sim.log
@@ -115,6 +119,11 @@ jobs:
         run: |
           echo "===== Forge research simulation summary ====="
           grep -E "Simulation mode|Ai\(|Game Outcome: Turn|Game Outcome: .*has (won|lost)|Match Result:|Game Result:" research-sim.log || true
+          if [ -f research-playlog.jsonl ]; then
+            echo "Research JSON log lines: $(wc -l < research-playlog.jsonl)"
+            echo "===== First 5 research JSON events ====="
+            head -n 5 research-playlog.jsonl
+          fi
 
       - name: Upload simulation log
         if: always()
@@ -123,5 +132,6 @@ jobs:
           name: research-simulation-log
           path: |
             research-sim.log
+            research-playlog.jsonl
             research/run.properties
           if-no-files-found: warn
