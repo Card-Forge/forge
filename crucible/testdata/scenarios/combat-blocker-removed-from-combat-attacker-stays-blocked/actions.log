@@ -1,0 +1,29 @@
+# CR 506.4/509.1h: a blocked creature remains blocked even if every
+# creature blocking it is removed from combat. human attacks with Grizzly
+# Bears; ai blocks with Hill Giant. In the declare blockers step human pays
+# {4}{T} for Labyrinth of Skophos and removes the Giant from combat. The
+# Bears stay blocked with no blocker (Java's AttackingBand keeps its blocked
+# flag, Combat.removeFromCombat), so they deal no combat damage at all: ai
+# stays at 20 and the Giant is undamaged.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks 7=1
+declareblockers
+tapformana human 3 W
+tapformana human 4 W
+tapformana human 5 W
+tapformana human 6 W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue targets 7
+queue action human activate 2 1
+passpriority
+advance
+advance
+combatdamage
+advance

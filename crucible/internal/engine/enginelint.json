@@ -73,7 +73,7 @@
     "zone": ["id"],
     "layer": [],
     "parts": ["id", "layer"],
-    "card": ["id", "zone", "parts", "layer", "goadeffect", "effecteffect", "cloneeffect", "mustblockeffect"],
+    "card": ["id", "zone", "parts", "layer", "goadeffect", "effecteffect", "cloneeffect", "mustblockeffect", "room"],
     "player": ["id", "parts", "mana"],
     "ability": ["id", "damageresolveeffect", "replaceeffect"],
     "combat": ["id", "game", "valid", "effecthelpers"],
@@ -102,7 +102,7 @@
     ],
     "phase": [],
     "event": ["id", "zone", "phase", "parts"],
-    "control": ["id", "game", "combat", "zone", "priority"],
+    "control": ["id", "game", "combat", "zone", "priority", "room"],
     "action": [
       "id",
       "zone",
@@ -138,7 +138,7 @@
     ],
     "mulligan": ["id", "zone", "game", "control"],
     "stack": ["id", "ability", "game", "effect", "event", "action", "control", "card", "zone"],
-    "priority": ["id", "card", "game", "phase", "control", "effect", "action", "player"],
+    "priority": ["id", "card", "game", "phase", "control", "effect", "action", "player", "room"],
     "driver": ["game", "phase", "control", "effect"],
     "valid": ["id", "zone", "card", "parts", "game", "combat", "player", "effecthelpers"],
     "attack": [
@@ -260,7 +260,8 @@
       "replacement",
       "pumpeffect",
       "sacrificeeffect",
-      "facedown"
+      "facedown",
+      "room"
     ],
     "trigger": [
       "id",
@@ -318,7 +319,7 @@
       "defined"
     ],
     "playerstate": ["id", "zone", "card", "game"],
-    "defined": ["id", "game", "player", "card", "ability", "parts"],
+    "defined": ["id", "game", "player", "card", "ability", "parts", "valid"],
     "condition": ["id", "card", "game", "ability", "trigger", "phase"],
     "pumpeffect": [
       "id",

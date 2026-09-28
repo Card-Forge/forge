@@ -15,19 +15,22 @@ Rows start with the ChooseSource/Empower batch. Bugs noted before it are only in
 
 ## Status
 
-| Site                                    | Defect                                                                                                                           | Crucible meanwhile                                      | Upstream  |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------- |
-| `ChooseSourceEffect.java:84-89`         | `tgtPlayers.get(0)` unguarded; throws once the player list is empty                                                              | `TargetControls$` rejected                              | Not filed |
-| `ChooseSourceEffect.java:131-133`       | Pool exhausted before every chooser has picked hangs the game                                                                    | `error` for the chooser left empty                      | Not filed |
-| `Player.java:3435`                      | `getMonarchSet` ternary condition inverted                                                                                       | No counterpart: no set codes in Crucible                | Not filed |
-| `GameAction.java:2568-2573`             | `takeInitiative` has no `return` after passing a lost player's take on                                                           | Reproduced (oracle parity)                              | Not filed |
-| `CardUtil.java:345`                     | Recursive frame resolves `Valid$` against the reflecting host                                                                    | None: `ManaReflected` deferred                          | Not filed |
-| `FlipOntoBattlefieldEffect.java:109`    | Neighbor filter re-tests the landing spot instead of the candidate; "always true" only for a non-Aura-enchantment spot           | `flipCandidates` rejects that one shape with an `error` | Not filed |
-| `PlayEffect.java:312`, `:389`           | `continue` without `amount--` under `AllowRepeats$` re-offers the same unplayable card forever                                   | `playRepeatLoop` returns an `error`                     | Not filed |
-| `StaticAbilityCantAttackBlock.java:269` | `cantBlockBy(attacker, null)` always false, so `CombatUtil.canBeBlocked`'s unblockable check (`CombatUtil.java:533`) never fires | Check not ported; no validator outcome depends on it    | Not filed |
-| `Player.java:2642`                      | `planeswalk`'s `getZone(PlanarDeck).get(0)` unguarded; throws on an empty planar deck, after every plane has already left        | `error` before anything moves                           | Not filed |
-| `TriggerChaosEnsues.java:43-48`         | Suspected: `Affected` iterable must be all host, so chaos ensuing for two planes fires neither                                   | `Defined$` naming two planes returns an `error`         | Not filed |
-| `RunChaosEffect.java:25-31`             | `setOptionalTrigger(true)` hits the RunChaos ability, not the copy; decider never null, so every copy asks `confirmTrigger`      | `OptionalDecider$`/`Cost$` chaos trigger: `error`       | Not filed |
+| Site                                    | Defect                                                                                                                                  | Crucible meanwhile                                      | Upstream  |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------- |
+| `ChooseSourceEffect.java:84-89`         | `tgtPlayers.get(0)` unguarded; throws once the player list is empty                                                                     | `TargetControls$` rejected                              | Not filed |
+| `ChooseSourceEffect.java:131-133`       | Pool exhausted before every chooser has picked hangs the game                                                                           | `error` for the chooser left empty                      | Not filed |
+| `Player.java:3435`                      | `getMonarchSet` ternary condition inverted                                                                                              | No counterpart: no set codes in Crucible                | Not filed |
+| `GameAction.java:2568-2573`             | `takeInitiative` has no `return` after passing a lost player's take on                                                                  | Reproduced (oracle parity)                              | Not filed |
+| `CardUtil.java:345`                     | Recursive frame resolves `Valid$` against the reflecting host                                                                           | None: `ManaReflected` deferred                          | Not filed |
+| `FlipOntoBattlefieldEffect.java:109`    | Neighbor filter re-tests the landing spot instead of the candidate; "always true" only for a non-Aura-enchantment spot                  | `flipCandidates` rejects that one shape with an `error` | Not filed |
+| `PlayEffect.java:312`, `:389`           | `continue` without `amount--` under `AllowRepeats$` re-offers the same unplayable card forever                                          | `playRepeatLoop` returns an `error`                     | Not filed |
+| `StaticAbilityCantAttackBlock.java:269` | `cantBlockBy(attacker, null)` always false, so `CombatUtil.canBeBlocked`'s unblockable check (`CombatUtil.java:533`) never fires        | Check not ported; no validator outcome depends on it    | Not filed |
+| `Player.java:2642`                      | `planeswalk`'s `getZone(PlanarDeck).get(0)` unguarded; throws on an empty planar deck, after every plane has already left               | `error` before anything moves                           | Not filed |
+| `TriggerChaosEnsues.java:43-48`         | Suspected: `Affected` iterable must be all host, so chaos ensuing for two planes fires neither                                          | `Defined$` naming two planes returns an `error`         | Not filed |
+| `RunChaosEffect.java:25-31`             | `setOptionalTrigger(true)` hits the RunChaos ability, not the copy; decider never null, so every copy asks `confirmTrigger`             | `OptionalDecider$`/`Cost$` chaos trigger: `error`       | Not filed |
+| `SwitchBlockEffect.java:22-25`          | `Blocks` trigger run with `AbilityKey.Attacker`; `TriggerBlocks.java:61` reads `Attackers`, so a re-block never matches `ValidBlocked$` | That re-block: `error` before anything moves            | Not filed |
+| `SwitchBlockEffect.java:97,103,151,157` | `addBlocker` never records `addBlockedByThisTurn`; Sorrow's Path's history-based `DefinedAttacker$` then misses a switched block        | That switch: `error` before anything moves              | Not filed |
+| `SwitchBlockEffect.java:88`             | Jarkeld's `removeFromCombat(blocker)` drops the blocker's block on a third attacker too; card text moves only the switched block        | That switch: `error` before anything moves              | Not filed |
 
 ### `ChooseSourceEffect.java:84-89` — `TargetControls$` throws on an empty player list
 
@@ -361,3 +364,44 @@ does.
 **Crucible meanwhile:** `runChaosEffect` (`runchaoseffect.go`) returns
 `engine: RunChaos: <card>: chaos trigger OptionalDecider$ not resolvable yet` (or `Cost$`) before any copy is pushed
 (`TestRunChaosRejectsUnportedChaosTriggers`). A mandatory chaos ability resolves without confirmation.
+
+### `SwitchBlockEffect.java:22-25` — re-block `Blocks` trigger never sees its attacker
+
+`runTriggers` builds one run-param map with `AbilityKey.Attacker` and `AbilityKey.Blocker` and runs both
+`AttackerBlockedByCreature` and `Blocks` with it. `TriggerBlocks.performTest` reads `AbilityKey.Attackers`
+(`TriggerBlocks.java:61`, and `:71` for triggering objects), as `BlockEffect.java` and `PhaseHandler` supply it. Under
+`RemoveFromCombat$` (Sorrow's Path) a `Mode$ Blocks` trigger naming `ValidBlocked$` tests `null` and never fires; 8
+corpus `Blocks` triggers name it.
+
+**Proposed fix:** put `AbilityKey.Attackers` in the map for the `Blocks` run.
+
+**Crucible meanwhile:** `checkReblockTriggerKeys` (`switchblockeffect.go`) returns an `error` before any block moves
+when a re-block would test such a trigger (`TestSwitchBlockSorrowsPathValidBlockedTriggerFailsClosed`). A `Blocks`
+trigger without `ValidBlocked$` fires normally.
+
+### `SwitchBlockEffect.java:97,103,151,157` — switched blocks leave no blocked-by record
+
+`BlockEffect.java:60-61` and `PhaseHandler.java:804-805` record `addBlockedThisTurn`/`addBlockedByThisTurn` for every
+block they add; `SwitchBlockEffect`'s four `combat.addBlocker` calls do not. Sorrow's Path finds its attackers through
+that record (`DefinedAttacker$ Valid Creature.blockedByValidThisTurn Targeted`, `CardProperty.java:1618`). After one
+switch, a second activation targeting a switched blocker misses the attacker it now blocks: `removeFromCombat` strips
+the blocker from it and the other blocker is never added, contrary to "each one then blocks all creatures the other was
+blocking".
+
+**Proposed fix:** record both lists in `SwitchBlockEffect` after each `addBlocker`, as `BlockEffect` does.
+
+**Crucible meanwhile:** `checkStrayBlocks` (`switchblockeffect.go`) returns an `error` before any block moves when a
+targeted blocker blocks a live attacker the scan missed (`TestSwitchBlockSorrowsPathSecondSwitchFailsClosed`). Blocks
+the effect adds are not recorded either, matching Java's record.
+
+### `SwitchBlockEffect.java:88` — General Jarkeld drops a blocker's other blocks
+
+General Jarkeld: "each creature that's blocking exactly one of those attacking creatures stops blocking it and is
+blocking the other attacking creature." `combat.removeFromCombat(blocker)` (`:88`) removes every block the creature has.
+A creature blocking one of the two targets and a third attacker (a multi-block, e.g. from a `Block` effect) loses the
+third block and only gets the switched one back.
+
+**Proposed fix:** `combat.removeBlockAssignment(attacker, blocker)` for the two targeted attackers only.
+
+**Crucible meanwhile:** `checkStrayBlocks` returns an `error` before any block moves when a switching blocker also
+blocks a live attacker outside the two targets (`TestSwitchBlockJarkeldStrayBlockFailsClosed`).

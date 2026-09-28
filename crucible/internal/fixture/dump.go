@@ -110,7 +110,7 @@ func dumpZone(g *engine.Game, kind engine.ZoneType, owner engine.PlayerID) strin
 func dumpCard(g *engine.Game, id engine.CardID) string {
 	c := g.Card(id)
 	var b strings.Builder
-	b.WriteString(c.UncopiedDef().Name)
+	b.WriteString(c.PrintedDef().Name)
 	b.WriteString("|Id:")
 	b.WriteString(strconv.FormatUint(uint64(id), 10))
 
@@ -161,6 +161,12 @@ func dumpCard(g *engine.Game, id engine.CardID) string {
 			b.WriteString("|Counters:")
 			b.WriteString(s)
 		}
+	}
+	// GameState.java:445-450: last, left then right, in any zone -- only a
+	// Room on the battlefield has any.
+	for _, d := range c.UnlockedDoors() {
+		b.WriteString("|UnlockedRoom:")
+		b.WriteString(d.String())
 	}
 	return b.String()
 }

@@ -631,6 +631,29 @@ func TestRunActionsQueueDiscardBadIDErrors(t *testing.T) {
 	}
 }
 
+// queue cardchoice answers an effect's ChooseCardsForEffect with the cards
+// setup.state's Id: numbers name.
+func TestRunActionsQueueCardChoiceResolvesFixtureIDs(t *testing.T) {
+	t.Parallel()
+
+	db := testDB(t, "Mountain", "Forest")
+	l := load(t, db, "humanlife=20\nailife=20\nhumanlibrary=Mountain|Id:1;Forest|Id:2\n")
+	c := engine.NewScriptedController()
+
+	if err := runActions(t, l, c, "queue cardchoice 2,1\n"); err != nil {
+		t.Fatalf("RunActions: %v", err)
+	}
+
+	got := c.ChooseCardsForEffect(l.Game, l.Game.Players()[0], engine.NoCard, nil, 0, 2)
+	want := []engine.CardID{l.CardByFixtureID[2], l.CardByFixtureID[1]}
+	if len(got) != 2 || got[0] != want[0] || got[1] != want[1] {
+		t.Errorf("card choice %v, want %v", got, want)
+	}
+	if err := runActions(t, l, c, "queue cardchoice abc\n"); err == nil {
+		t.Error("a non-numeric id did not error")
+	}
+}
+
 // queue targets answers a triggered ability's ChooseTargets with the cards
 // setup.state's Id: numbers name.
 func TestRunActionsQueueTargetsResolvesFixtureIDs(t *testing.T) {

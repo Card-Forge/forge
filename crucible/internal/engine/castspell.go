@@ -73,7 +73,33 @@ func castableAsInstantOrSorcery(c *Card) bool {
 // own "whenever a player casts a spell" trigger (checkSpellCastTriggers,
 // trigger.go) -- fired at cast time, not on resolution, the same place
 // Java's own checkTriggerEffects call sits.
+//
+// A Room card casts as its left half (DoorLeft); CastRoomDoor picks either.
 func (g *Game) CastSpell(pid PlayerID, card CardID, controller PlayerController) bool {
+	return g.castFromHand(pid, card, DoorLeft, controller)
+}
+
+// CastRoomDoor is CastSpell for a Room card cast as its half d (CR 709.3,
+// Card.setSplitStateToPlayAbility): the spell has that half's
+// characteristics and cost, and that door unlocks as the Room enters
+// (permanentEffect). Reports false for a card that is not a Room or for any
+// d besides DoorLeft/DoorRight -- applyAction (priority.go) hands this an
+// unvalidated controller answer, and doorView (room.go) indexes
+// printed.Faces[d] directly, so an out-of-range d must be refused here
+// rather than reaching that index (GO-7: a controller's wrong answer errors,
+// never panics).
+func (g *Game) CastRoomDoor(pid PlayerID, card CardID, d Door, controller PlayerController) bool {
+	if d != DoorLeft && d != DoorRight {
+		return false
+	}
+	if !isRoomDef(g.Card(card).Def) {
+		return false
+	}
+	return g.castFromHand(pid, card, d, controller)
+}
+
+// castFromHand is CastSpell's hand and timing gates.
+func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller PlayerController) bool {
 	c := g.Card(card)
 	fromHand := c.Controller() == pid && c.Zone == Hand
 	play, granted, err := g.mayPlayOption(pid, card, fromHand)
@@ -87,7 +113,7 @@ func (g *Game) CastSpell(pid PlayerID, card CardID, controller PlayerController)
 	if !c.Type().Has(cardtype.Instant) && !play.WithFlash && !g.canActSorcerySpeed(pid) {
 		return false
 	}
-	return g.castSpell(controller, pid, card, castOpts{withoutManaCost: play.WithoutManaCost})
+	return g.castSpell(controller, pid, card, castOpts{withoutManaCost: play.WithoutManaCost, door: d})
 }
 
 // castOpts is how an effect's "cast it" differs from casting it normally
@@ -97,6 +123,8 @@ type castOpts struct {
 	// no mana is paid, and an X in the cost is 0, so ChoosePayX is never
 	// asked (CR 107.3b).
 	withoutManaCost bool
+	// door is the half a Room card is cast as; ignored for anything else.
+	door Door
 }
 
 // castSpell is CastSpell past its timing and hand gates: the three spell
@@ -117,8 +145,15 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	if !castableAsPermanent(c) {
 		return false
 	}
+	room := isRoomDef(c.Def)
+	if room {
+		c.castAsDoor(opts.door)
+	}
 	x, paid := g.payCastCost(pid, c, controller, opts)
 	if !paid {
+		if room {
+			c.undoCastAsDoor()
+		}
 		return false
 	}
 	g.putSpellOnStack(card, pid)
@@ -342,9 +377,15 @@ type permanentEffect struct{}
 
 func (permanentEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	origin := g.Card(a.Source).Zone
+	door, castRoom := g.Card(a.Source).castRoomDoor()
 	copyBecomesToken(g.Card(a.Source))
 	g.Move(a.Source, Battlefield, a.Controller)
 	g.enterBattlefieldReplacements(controller, a.Source, origin)
+	if castRoom {
+		// GameAction.java:571: the half the Room was cast as unlocks for
+		// its caster as it enters, firing its "when you unlock this door".
+		g.unlockDoor(controller, a.Source, a.Controller, door)
+	}
 	g.checkETBTriggers(controller, a.Source, origin)
 	return nil
 }

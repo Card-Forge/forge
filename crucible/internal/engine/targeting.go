@@ -75,6 +75,43 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 	return true
 }
 
+// hasSameControllerRestriction reports whether a names
+// TargetsWithSameController$ (TargetRestrictions.java:184-185). Two halves
+// of SpellAbility.canTarget's pairwise check are ported: the candidate
+// pre-filter (withSameControllerPartner) and the fizzle-time check
+// (targetStillLegal). The single ChooseTargets answer is not re-validated,
+// the same trust every other ChooseTargets answer gets; a set spanning two
+// controllers makes every card target illegal at resolution, so it fizzles.
+func hasSameControllerRestriction(a *Ability) bool {
+	if a.Params == nil {
+		return false
+	}
+	_, ok := a.Params.Param("TargetsWithSameController")
+	return ok
+}
+
+// withSameControllerPartner is CardLists.getTargetableCards' own
+// TargetsWithSameController$ pre-filter (CardLists.java:201-217): before
+// any target is chosen, for an ability needing at least two, a card whose
+// controller controls no other candidate card cannot be part of a legal
+// set and is not offered. Player candidates pass through untouched.
+func (g *Game) withSameControllerPartner(candidates []EntityID) []EntityID {
+	perController := map[PlayerID]int{}
+	for _, e := range candidates {
+		if id, ok := e.AsCard(); ok {
+			perController[g.Card(id).Controller()]++
+		}
+	}
+	out := make([]EntityID, 0, len(candidates))
+	for _, e := range candidates {
+		if id, ok := e.AsCard(); ok && perController[g.Card(id).Controller()] < 2 {
+			continue
+		}
+		out = append(out, e)
+	}
+	return out
+}
+
 // targetChoice is one targeting part's CR 601.2c question: the legal
 // candidates and how many of them to choose. err is set, with no
 // candidates, when the legal set holds something this port cannot offer as
@@ -156,6 +193,9 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		candidates = g.stackSpellCandidates(a.Controller, a.Source, validTgts)
 	default:
 		candidates = g.targetCandidates(a.Controller, a.Source, validTgts)
+	}
+	if targetMin >= 2 && hasSameControllerRestriction(a) {
+		candidates = g.withSameControllerPartner(candidates)
 	}
 	if len(candidates) == 0 {
 		return targetChoice{}, true, false
@@ -529,8 +569,9 @@ func (g *Game) withoutIllegal(owner *Ability, targets []EntityID, chosen, kept *
 //
 //   - a card target is the same object it was (its zoneStamp, recorded by
 //     stampTargets, has not changed -- CR 400.7), is not phased out
-//     (Card.canBeTargetedBy, Card.java:6829-6831, CR 702.26b), and still
-//     matches owner's ValidTgts$;
+//     (Card.canBeTargetedBy, Card.java:6829-6831, CR 702.26b), still
+//     matches owner's ValidTgts$, and -- under TargetsWithSameController$
+//     -- shares its controller with every other chosen card target;
 //   - a player target has not left the game (Player.canBeTargetedBy,
 //     Player.java:1033-1043) and still matches owner's ValidTgts$;
 //   - anything else (an ability on the stack, ChangeTargets) is kept.
@@ -571,6 +612,18 @@ func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 	}
 	if cardCantBeTargetedBy(g, c, owner.Controller, owner.Source) {
 		return false
+	}
+	if hasSameControllerRestriction(owner) {
+		// SpellAbility.java:1543-1549 runs at fizzle time too: a target
+		// whose controller no longer matches every other chosen card
+		// target is illegal. owner.Targets is still the full chosen list
+		// here (withoutIllegal rebuilds it only afterwards), matching
+		// MagicStack.hasFizzled's remove-after-the-loop order.
+		for _, other := range owner.Targets {
+			if oid, ok := other.AsCard(); ok && oid != id && g.Card(oid).Controller() != c.Controller() {
+				return false
+			}
+		}
 	}
 	if !hasSpec {
 		return true

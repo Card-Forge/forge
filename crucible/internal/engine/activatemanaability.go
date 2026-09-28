@@ -46,9 +46,18 @@ import (
 // isPwAbility's own bare hasParam check) and Ultimate$ (purely descriptive,
 // never itself a restriction) are both admitted: 21 real A:AB$ Mana lines
 // name the first, every one paired with AddCounter<...>/SubCounter<...>.
+// ActivationPhases$ is admitted too -- ActivateManaAbility checks it before
+// this gate the identical way ActivateAbility does (inActivationPhases,
+// activateability.go) -- but the sole real corpus line naming it,
+// mana_cache.txt's "Upkeep->Main2", stays unreachable regardless: it also
+// names Activator$/PlayerTurn$, neither admitted here (Activator$ is CR
+// 606's own "any player" grant and PlayerTurn$ its own "only during their
+// turn" restriction, both restrictions this function has no general
+// resolving-ability gate for, the identical reasoning as the
+// IsPresent$/ConditionCheckSVar$/... group above).
 var manaAbilityAllowedParams = map[string]bool{
 	"ab": true, "cost": true, "spelldescription": true, "produced": true, "amount": true,
-	"planeswalker": true, "ultimate": true, "activationzone": true,
+	"planeswalker": true, "ultimate": true, "activationzone": true, "activationphases": true,
 }
 
 // manaAbilityParamsResolvable reports whether a is nothing but the params
@@ -127,7 +136,12 @@ func parseComboColors(produced string) (mana.Colors, bool) {
 //
 // Reports whether the mana was produced. false covers not pid's own
 // permanent, not on the battlefield, index not naming an Activated API
-// "Mana" line at all, a param past manaAbilityAllowedParams, a Cost$ past
+// "Mana" line at all, the current step outside ActivationPhases$'s own set
+// (inActivationPhases, activateability.go's own identical gate, reused
+// outright and checked first the identical way -- 1 real corpus A:AB$ Mana
+// line names it, mana_cache.txt's "Upkeep->Main2", already unreachable
+// regardless for an unrelated reason: it also names Activator$/PlayerTurn$,
+// neither in manaAbilityAllowedParams), a param past manaAbilityAllowedParams, a Cost$ past
 // ActivationShape (internal/cost, ActivateAbility's own identical gate,
 // reused outright -- ActivateAbility itself refuses API "Mana" and this
 // function refuses anything else, so the two never overlap) -- including a
@@ -244,6 +258,9 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if ability.Record != compile.Activated || ability.Name != "Mana" {
 		return false
 	}
+	if !g.inActivationPhases(ability) {
+		return false
+	}
 	if !manaAbilityParamsResolvable(ability) {
 		return false
 	}
@@ -296,7 +313,7 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if fromHand && shape.SelfExileFromGrave {
 		return false
 	}
-	if shape.Tap && (c.Tapped || (c.SummonSick && !c.HasKeyword("Haste"))) {
+	if shape.Tap && (c.Tapped || c.isSick()) {
 		return false
 	}
 	if shape.PayEnergyN > g.Player(pid).Counters.Count(Energy) {

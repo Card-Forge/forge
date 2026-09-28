@@ -230,6 +230,9 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if (isLoyaltyAbility || sorcerySpeed) && !g.canActSorcerySpeed(pid) {
 		return false
 	}
+	if !g.inActivationPhases(ability) {
+		return false
+	}
 	fromGraveyard, fromHand := false, false
 	switch zone, _ := ability.Param("ActivationZone"); zone {
 	case "", "Battlefield":
@@ -279,7 +282,7 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if fromHand && shape.SelfExileFromGrave {
 		return false
 	}
-	if shape.Tap && (c.Tapped || (c.SummonSick && !c.HasKeyword("Haste"))) {
+	if shape.Tap && (c.Tapped || c.isSick()) {
 		return false
 	}
 	hand := g.Zone(Hand, pid).Cards()
@@ -390,4 +393,19 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	}
 	g.pushTriggeredAbilities(controller, []Ability{activated})
 	return true
+}
+
+// inActivationPhases is SpellAbilityRestriction.checkTimingRestrictions'
+// ActivationPhases$ check (SpellAbilityRestriction.java:131-132,294-297):
+// the current step must be in the named phase set (PhaseType.parseRange --
+// parsePhaseRange, phase.go). No ActivationPhases$ means no restriction. A
+// value parsePhaseRange cannot read refuses the activation rather than
+// ignoring the restriction (GO-7).
+func (g *Game) inActivationPhases(ability *compile.Ability) bool {
+	phases, ok := ability.Param("ActivationPhases")
+	if !ok {
+		return true
+	}
+	set, ok := parsePhaseRange(phases)
+	return ok && set.has(g.activePhase)
 }

@@ -238,6 +238,26 @@ func TestMustAttackStaticNamesTheDefender(t *testing.T) {
 	_ = host
 }
 
+// MustAttack$ Player.Other names every player but the static's own
+// controller (matchesPlayerSpec's "Other", host = controller) --
+// definedPlayers' generic Player.<property> fallthrough, added porting
+// Subgame (effects-subgame.md), now reaches definedEntities the same way
+// every other MustAttack$ spelling does. 2 real corpus lines.
+func TestMustAttackStaticPlayerOtherNamesEveryOpponent(t *testing.T) {
+	t.Parallel()
+	g, a, b := combatGame(t)
+	host := g.NewCard(combatCreatureDef(t, "Taunter", []string{"Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Player.Other"}, nil), a, engine.Battlefield)
+
+	ac := engine.NewScriptedController()
+	ac.QueueAttackers(nil)
+	_, err := g.DeclareCombatAttackers(ac)
+	wantIllegal(t, err, "CR 508.1d")
+
+	ac.QueueAttackers([]engine.CardID{host})
+	ac.QueueAttackTarget(engine.PlayerEntity(b))
+	declareAttackers(t, g, ac)
+}
+
 // "Target creature attacks this turn if able" is an effect card in the
 // Command zone carrying Mode$ MustAttack | ValidCreature$ Card.IsRemembered
 // (18 corpus lines).

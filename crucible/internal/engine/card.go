@@ -159,6 +159,19 @@ type Card struct {
 	// turn.go) alongside AttacksThisTurn.
 	BecameTargetThisTurn bool
 
+	// blockedByThisTurn is Card.getBlockedByThisTurn (Card.java:112,
+	// 1658-1666): every creature that blocked this card this turn, in the
+	// order recorded. Written where Java writes it -- blockers declared
+	// (DeclareCombatBlockers, block.go; PhaseHandler.java:804-805) and a
+	// Block effect adding a blocker (blockeffect.go; BlockEffect.java:60-61)
+	// -- and nowhere else: SwitchBlock's re-added blocks are not recorded,
+	// as SwitchBlockEffect.java's own addBlocker calls do not record them.
+	// Cleared every cleanup (cleanupStep, turn.go; Card.onCleanupPhase,
+	// Card.java:7152) and on leaving the battlefield (Game.Move), where
+	// Java's card becomes a new object. Read by SwitchBlock's
+	// `blockedByValidThisTurn Targeted` (switchblockeffect.go).
+	blockedByThisTurn []CardID
+
 	// LoyaltyAbilityActivated is CR 606.3's own once-per-turn marker
 	// (Card.planeswalkerAbilityActivated in Java, collapsed from an int to a
 	// bool -- StaticAbilityNumLoyaltyAct's own limit-raising static ability,
@@ -244,6 +257,16 @@ type Card struct {
 	frontDef   *compile.Card
 	Transforms int
 
+	// roomDef is a Room's printed split card while it is a permanent or a
+	// spell cast as one of its halves (room.go, CR 709.5): its own
+	// characteristics (Def, or faceUpDef/uncopiedDef under a face-down or
+	// copy effect) then hold the view of its unlocked doors, or of the half
+	// it was cast as. doors is Card.unlockedRooms; castDoor is the half a
+	// Room spell was cast as, which unlocks as it enters (permanentEffect).
+	roomDef  *compile.Card
+	doors    doorSet
+	castDoor Door
+
 	// copies are the Layer 1 copy effects on this permanent (CR 613.2a,
 	// 707.2), ascending Timestamp: Java's Card.clonedStates. The last one's
 	// definition is Def; uncopiedDef is what Def was before the first of
@@ -314,6 +337,14 @@ func (c *Card) Type() cardtype.Line {
 		return cardtype.Line{}
 	}
 	return foldType(c.Def.Faces[0].Type, c.TypeMod.effects)
+}
+
+// isSick is Card.isSick (Card.java:3651-3653): summoning sickness
+// restricts only a creature (CR 302.6), and haste lifts it
+// (Card.hasSickness). A land or artifact that entered this turn can pay a
+// {T} cost.
+func (c *Card) isSick() bool {
+	return c.SummonSick && c.Type().Has(cardtype.Creature) && !c.HasKeyword("Haste")
 }
 
 // HasKeyword reports whether the card currently carries the named keyword:

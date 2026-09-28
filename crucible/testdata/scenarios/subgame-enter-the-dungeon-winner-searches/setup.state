@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Enter the Dungeon|Id:1
+humanbattlefield=Swamp|Id:2;Swamp|Id:3
+humanlibrary=Mountain|Id:4;Forest|Id:5;Island|Id:6

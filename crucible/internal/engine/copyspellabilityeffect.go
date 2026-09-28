@@ -230,7 +230,19 @@ func (g *Game) copyTriggerWatching() bool {
 // effects end when a permanent leaves the battlefield (endCopiesOnLeave), so
 // its printed Def is its copiable values.
 func (g *Game) copySpell(controller PlayerController, orig Ability, copier PlayerID, mayChoose bool) (CardID, copiedTargets, error) {
-	host := g.NewCard(g.Card(orig.Source).Def, copier, Stack)
+	source := g.Card(orig.Source)
+	if source.roomDef != nil {
+		// A Room spell's own Def, while on the stack, is doorView's single-half
+		// projection (room.go) -- not the split card CardEntity's own
+		// isRoomDef/roomDef machinery expects. Copying it with NewCard(Def, ...)
+		// as-is would build a permanent copy of one bare half that can never be
+		// a Room again (enterRoom sees isRoomDef(Def) false), the identical
+		// "one-way loss of Room-ness" Clone and Discover are already rejected
+		// for (room.go, effects-unlockdoor.md) -- rejected here too rather than
+		// silently building a corrupted copy (GO-7/PORT-8).
+		return NoCard, copiedTargets{}, fmt.Errorf("engine: CopySpellAbility: copying a Room spell not resolvable yet")
+	}
+	host := g.NewCard(source.Def, copier, Stack)
 	g.Card(host).IsCopiedSpell = true
 	cp := orig
 	cp.ID = NoStackItem

@@ -40,10 +40,14 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0027](0027-per-target-fizzle-check.md)                     | CR 608.2b: per-target fizzle check             | Accepted           |
 | [0028](0028-ward-native-triggered-ability.md)               | Ward: a natively constructed triggered ability | Accepted           |
 | [0029](0029-planechase-active-plane-state.md)               | Planechase: active-plane state                 | Accepted           |
+| [0030](0030-controlplayer-scheduled-control-redirect.md)    | ControlPlayer: a scheduled control redirect    | Accepted           |
+| [0031](0031-declareblocker-replacement.md)                  | Camouflage: a DeclareBlocker replacement event | Accepted           |
+| [0032](0032-meld-two-cards-one-permanent.md)                | Meld: two cards, one permanent                 | Accepted           |
+| [0033](0033-restartgame-mid-resolution-reset.md)            | RestartGame: mid-resolution reset              | Accepted           |
 
 ## Numbering
 
-No gap and no missing number: 0001-0029, every number used exactly once. Numbers are allocated when an ADR is written,
+No gap and no missing number: 0001-0033, every number used exactly once. Numbers are allocated when an ADR is written,
 never reserved — the plan lists remaining subjects without numbers for that reason.
 
 The plan's M0 exit gate asked for ADR-0001 through ADR-0011 `Accepted`. The three subjects after it — ports and

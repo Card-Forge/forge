@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"slices"
 	"sync"
 	"testing"
 
@@ -224,9 +225,9 @@ func compareZoneCards(t *testing.T, playerName string, zone engine.ZoneType, got
 		label := fmt.Sprintf("%s %s[%d]", playerName, zone, i)
 
 		// GameState text names a card by its own paper card, never by what a
-		// copy effect currently makes it (GameState.java writes
-		// getPaperCard().getName()).
-		if gname, wname := gcard.UncopiedDef().Name, wcard.UncopiedDef().Name; gname != wname {
+		// copy effect or a Room's doors currently make it (GameState.java
+		// writes getPaperCard().getName()).
+		if gname, wname := gcard.PrintedDef().Name, wcard.PrintedDef().Name; gname != wname {
 			t.Errorf("%s name = %q, want %q", label, gname, wname)
 			continue
 		}
@@ -259,6 +260,9 @@ func compareZoneCards(t *testing.T, playerName string, zone engine.ZoneType, got
 		}
 		if g, w := playerNameOrEmpty(got, gcard.PhasedOutFor()), playerNameOrEmpty(want, wcard.PhasedOutFor()); g != w {
 			t.Errorf("%s phased out for %q, want %q", label, g, w)
+		}
+		if g, w := gcard.UnlockedDoors(), wcard.UnlockedDoors(); !slices.Equal(g, w) {
+			t.Errorf("%s unlocked doors = %v, want %v", label, g, w)
 		}
 		compareCounters(t, label, gcard.Counters, wcard.Counters)
 	}

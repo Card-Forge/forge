@@ -106,6 +106,7 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 	blockersByAttacker := map[CardID][]CardID{}
 	var blockedAttackers []CardID
 	for _, blk := range blocks {
+		g.recordBlockedBy(blk)
 		g.checkBlocksTriggers(controller, blk)
 		g.checkAttackerBlockedByCreatureTriggers(controller, blk)
 		if _, ok := blockersByAttacker[blk.Attacker]; !ok {
@@ -117,6 +118,15 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 		g.checkAttackerBlockedTriggers(controller, attacker, blockersByAttacker[attacker])
 	}
 	return blocks, nil
+}
+
+// recordBlockedBy is Card.addBlockedByThisTurn for blk: its attacker was
+// blocked by its blocker this turn (PhaseHandler.java:805,
+// BlockEffect.java:61). Java stores an LKI copy and compares by id; the
+// CardID is that id.
+func (g *Game) recordBlockedBy(blk Block) {
+	a := g.Card(blk.Attacker)
+	a.blockedByThisTurn = append(a.blockedByThisTurn, blk.Blocker)
 }
 
 // checkBlockPairing is DeclareCombatBlockers' per-pair pass (its doc

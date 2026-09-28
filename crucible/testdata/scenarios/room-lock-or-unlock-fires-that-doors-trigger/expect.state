@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Marina Vendrell|Tapped;Bottomless Pool|UnlockedRoom:LeftSplit|UnlockedRoom:RightSplit
+ailife=20
+aihand=Grizzly Bears

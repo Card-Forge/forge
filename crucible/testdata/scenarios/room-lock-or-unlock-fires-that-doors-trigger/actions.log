@@ -1,0 +1,14 @@
+# CR 709.5: a Room's doors lock and unlock independently. human's Bottomless
+# Pool // Locker Room has only Locker Room (RightSplit) unlocked. Marina
+# Vendrell's sorcery-speed ability (UnlockDoor Mode$ LockOrUnlock) targets it;
+# with one door locked human may pick either door, and picks the locked
+# LeftSplit, which unlocks. Bottomless Pool's own "When you unlock this door"
+# (Mode$ UnlockDoor, ThisDoor$ True) then triggers and returns ai's Grizzly
+# Bears to its owner's hand. Both doors end unlocked.
+startturn human
+advance 3
+queue targets 2
+queue action human activate 1 0
+queue roomdoor LeftSplit
+queue targets 3
+passpriority

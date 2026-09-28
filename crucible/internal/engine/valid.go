@@ -14,8 +14,8 @@
 // membership in source's own Memory lists (sourceCard's own doc comment) --
 // EnchantedBy/EquippedBy/AttachedBy/FortifiedBy, bare form only (one check
 // in Java too, before it ever reaches CardProperty), inZone/inRealZone (c's
-// own Zone, LKI-collapsed the same way YouCtrl already is), attacking and
-// blocking, bare form only (the current Combat's Attackers/Blocks),
+// own Zone, LKI-collapsed the same way YouCtrl already is), attacking,
+// blocking and blocked, bare form only (the current Combat's Attackers/Blocks),
 // HasCounters and counters_<op><n>_<type> (countersMatches' own doc
 // comment), enchanted/equipped/modified (attachedByType/isModified's own
 // doc comments), RememberedPlayerCtrl/RememberedPlayerOwn (membership in
@@ -231,6 +231,9 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		return g.isRingBearer(c)
 	case name == "IsSolved":
 		return c.Solved
+	case name == "FullyUnlocked":
+		// CardProperty.java:1863: both doors of a Room permanent unlocked.
+		return len(c.UnlockedDoors()) == 2
 	case name == "NamedCard":
 		sc, ok := sourceCard(g, source)
 		if !ok || c.Def == nil {
@@ -341,6 +344,12 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		return g.Card(cid).Controller() == c.Controller()
 	case name == "blocking":
 		return isBlocking(g.combat.Blocks, c.ID)
+	case name == "blocked":
+		// CardProperty.java:1591-1592: combat.isBlocked(card) -- an attacker
+		// with a blocker, or one an effect made blocked (ForcedBlocked).
+		// Exact-matched: blockedBySource*, blockedThisTurn and the rest are
+		// distinct Java branches this case must not swallow.
+		return g.combat.isBlocked(c.ID)
 	case name == "HasCounters":
 		return c.Counters.Any()
 	case strings.HasPrefix(name, "counters_"):
@@ -705,7 +714,9 @@ func matchesPlayerSpec(g *Game, candidate, host PlayerID, source CardID, spec st
 // this port needing only the boolean "at all" question every real corpus
 // line asks), and VenturedThisTurn (Player.VenturedThisTurn, at least one
 // venture this turn -- PlayerProperty.java:482's getVenturedThisTurn() < 1,
-// Keen-Eared Sentry's CantVenture).
+// Keen-Eared Sentry's CantVenture), and IsRemembered (the source card
+// remembers the candidate, PlayerProperty.java:209-212 -- what Subgame's
+// RememberPlayers$ feeds, subgameeffect.go).
 //
 // Every other real property (EnchantedBy and Chosen on a *player* -- an
 // Aura enchanting a player directly, CR 303.4h, and a ChosenPlayer memory
@@ -739,6 +750,11 @@ func matchesPlayerProperty(g *Game, candidate, host PlayerID, source CardID, pro
 		return g.Player(candidate).DescendedThisTurn, true
 	case "VenturedThisTurn":
 		return g.Player(candidate).VenturedThisTurn > 0, true
+	case "IsRemembered":
+		// PlayerProperty.java:209-212: source.isRemembered(player). No
+		// source recognizes the property and matches nobody.
+		sc, ok := sourceCard(g, source)
+		return ok && containsEntity(sc.Memory.Remembered(), PlayerEntity(candidate)), true
 	}
 	return false, false
 }

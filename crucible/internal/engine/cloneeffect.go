@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow card game ability defined condition control parts effecthelpers id zone valid amount copypermanenteffect effecteffect player
+//enginelint:allow card game ability defined condition control parts effecthelpers id zone valid amount copypermanenteffect effecteffect player room
 
 import (
 	"fmt"
@@ -56,8 +56,15 @@ func (c *Card) IsCopy() bool { return len(c.copies) > 0 }
 // characteristics of a face-down permanent (CR 708.5) -- plus the base power
 // and toughness a token's creating effect gave it, which a copy effect on c
 // hides (BasePower).
+//
+// A Room permanent's copiable values are its whole printed card, both
+// halves (CardFactory.java:535-542 copies LeftSplit, RightSplit and the
+// empty room); which doors are unlocked is not copied.
 func (c *Card) copiableValues() copyOriginal {
 	o := copyOriginal{def: c.preTextDef()}
+	if c.IsRoomPermanent() && len(c.copies) == 0 && !c.IsFaceDown() {
+		o.def = c.roomDef
+	}
 	if len(c.copies) == 0 {
 		o.power, o.hasPower = c.basePower, c.hasBasePower
 		o.toughness, o.hasToughness = c.baseToughness, c.hasBaseToughness
@@ -236,6 +243,12 @@ func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 	origin, found, err := cloneOriginOf(g, a, controller, source)
 	if err != nil || !found {
 		return err
+	}
+	if isRoomDef(origin.vals.def) {
+		// CloneEffect.java:146 gives a permanent that becomes a copy of a
+		// Room its own locked/unlocked doors (updateRooms); this port's
+		// copy effects have no door state of their own yet.
+		return fmt.Errorf("engine: Clone: becoming a copy of a Room not resolvable yet")
 	}
 	if hasParam(a, "Optional") && !controller.ConfirmEffect(g, source.Controller(), a.Source) {
 		return nil

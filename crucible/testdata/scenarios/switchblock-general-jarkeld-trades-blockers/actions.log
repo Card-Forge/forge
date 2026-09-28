@@ -1,0 +1,23 @@
+# SwitchBlockEffect.java, General Jarkeld's branch: human attacks with
+# Grizzly Bears (2/2) and Craw Wurm (6/4). ai blocks the Bears with Hill
+# Giant (3/3) and the Wurm with Mons's Goblin Raiders (1/1). In the declare
+# blockers step (Jarkeld's ActivationPhases$) human taps Jarkeld targeting
+# both attackers: each blocker now blocks the other attacker. Combat damage
+# then kills both blockers -- the Wurm kills the Giant, the Bears kill the
+# Raiders -- instead of the Giant killing the Bears.
+startturn human
+advance 5
+queue attackers 1,2
+declareattackers
+advance
+queue blocks 4=1,5=2
+declareblockers
+queue action human activate 3 0
+queue targets 1,2
+passpriority
+advance
+advance
+combatdamage
+# One more advance for the state-based-action check that moves the
+# lethally damaged creatures to the graveyard.
+advance

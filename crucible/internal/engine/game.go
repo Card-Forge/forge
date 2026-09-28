@@ -409,6 +409,24 @@ func (g *Game) Players() []PlayerID {
 	return out
 }
 
+// playersInTurnOrder is Java's getPlayersInTurnOrder(): Players() reversed
+// when turn order has been reversed (ReverseTurnOrder), forward otherwise.
+// Read by definedPlayers' own "Player"/"Opponent"/"Player.<property>"
+// fallthrough cases (AbilityUtils.java:1188) -- rotation to start from the
+// active player, if Java's own callers ever depend on that rather than just
+// the direction, is not modeled here; no real corpus caller found needing it
+// (defined.go).
+func (g *Game) playersInTurnOrder() []PlayerID {
+	out := g.Players()
+	if !g.turnOrderReversed {
+		return out
+	}
+	for i, j := 0, len(out)-1; i < j; i, j = i+1, j-1 {
+		out[i], out[j] = out[j], out[i]
+	}
+	return out
+}
+
 // NumCards is how many handles have been allocated, NoCard excluded. It is the
 // arena's high-water mark, not a count of cards in play.
 func (g *Game) NumCards() int { return len(g.cards) - 1 }
@@ -426,6 +444,11 @@ func (g *Game) NewCard(def *compile.Card, owner PlayerID, zone ZoneType) CardID 
 		controller: owner,
 	})
 	g.put(id, zone, owner)
+	if zone == Battlefield {
+		// A fixture seating a Room on the battlefield: both doors locked
+		// until the loader unlocks the ones it names.
+		g.cards[id].enterRoom()
+	}
 	if zone == PlanarDeck {
 		// Setup seating a planar deck is what makes this a Planechase
 		// game (ADR-0029); real play only ever moves cards there.
@@ -579,6 +602,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		c.detainedBy = nil
 		c.goadedBy = nil
 		c.mustBlock = nil
+		c.blockedByThisTurn = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
 		// Layer 3's text change ends with the object (CR 400.7), before the
 		// copy and face-down restores below read or replace Def.
@@ -587,12 +611,18 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		c.Sprocket = 0
 		c.turnFaceUp()
 		c.turnFrontFaceUp()
+		c.leaveRoom()
 		g.dropPreventShields(id)
 		g.Unattach(id)
 		g.clearPumps(id)
 		g.clearAnimates(id)
 		g.loseRingBearer(id)
+	case from == Stack && kind != Stack && kind != Battlefield:
+		// A Room spell that does not resolve into a permanent goes back to
+		// its printed split card.
+		c.leaveRoom()
 	case from != Battlefield && kind == Battlefield:
+		c.enterRoom()
 		c.SummonSick = true
 		if loyalty, ok := c.BaseLoyalty(); ok && c.Type().Has(cardtype.Planeswalker) {
 			c.Counters.Add(Loyalty, loyalty)
@@ -672,6 +702,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 		c.detainedBy = nil
 		c.goadedBy = nil
 		c.mustBlock = nil
+		c.blockedByThisTurn = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
 		// Layer 3's text change ends with the object (CR 400.7), before the
 		// copy and face-down restores below read or replace Def.
@@ -680,11 +711,15 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 		c.Sprocket = 0
 		c.turnFaceUp()
 		c.turnFrontFaceUp()
+		c.leaveRoom()
 		g.dropPreventShields(id)
 		g.Unattach(id)
 		g.clearPumps(id)
 		g.clearAnimates(id)
 		g.loseRingBearer(id)
+	}
+	if from == Stack {
+		c.leaveRoom()
 	}
 
 	g.sink.Emit(Event{
@@ -921,6 +956,7 @@ func (g *Game) Clone() *Game {
 		c.goadedBy = append([]goad(nil), g.cards[i].goadedBy...)
 		c.mustBlock = append([]mustBlockReq(nil), g.cards[i].mustBlock...)
 		c.hiddenKeywords = append([]string(nil), g.cards[i].hiddenKeywords...)
+		c.blockedByThisTurn = append([]CardID(nil), g.cards[i].blockedByThisTurn...)
 		c.PT = g.cards[i].PT.clone()
 		c.TypeMod = g.cards[i].TypeMod.clone()
 		c.ColorMod = g.cards[i].ColorMod.clone()

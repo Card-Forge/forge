@@ -260,6 +260,29 @@ func TestCopySpellOfAPermanentBecomesAToken(t *testing.T) {
 	}
 }
 
+// TestCopySpellAbilityRejectsCopyingARoomSpell proves a Room spell on the
+// stack cannot be copied: its own Def, while cast, is doorView's single-half
+// projection (room.go), not the split card the copy's own roomDef/Room-ness
+// would need. Copying it as-is builds a permanent copy of one bare half that
+// can never become a Room again -- rejected instead (rules-review finding on
+// the merged UnlockDoor commit; GO-7/PORT-8, the same discipline Clone and
+// Discover already apply to casting/copying a Room).
+func TestCopySpellAbilityRejectsCopyingARoomSpell(t *testing.T) {
+	t.Parallel()
+	g, p, _ := newTwoPlayerGame(t)
+	room := g.NewCard(testRoomDef(t), p, engine.Hand)
+	g.NewCard(copyWatcher(t, "Card", "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility"), p, engine.Battlefield)
+	g.Player(p).ManaPool.Add(mana.Blue, 1)
+	c := engine.NewScriptedController()
+	if !g.CastSpell(p, room, c) {
+		t.Fatal("CastSpell failed")
+	}
+	err := g.ResolveStack(engine.NewRegistry(), c)
+	if err == nil || !strings.Contains(err.Error(), "not resolvable yet") {
+		t.Fatalf("ResolveStack = %v, want a not-resolvable-yet error", err)
+	}
+}
+
 // TestCopySpellTargetsASpellOnTheStack proves the ValidTgts$ shapes: with
 // TargetType$ Spell, and without it (Mischievous Quanar's ValidTgts$
 // Instant, which CopySpellAbilityEffect.buildSpellAbility points at the

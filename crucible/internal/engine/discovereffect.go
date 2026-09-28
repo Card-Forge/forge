@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow ability card castspell condition control defined earthbendeffect effecthelpers event game id parts player trigger zone zonemove
+//enginelint:allow ability card castspell condition control defined earthbendeffect effecthelpers event game id parts player trigger zone zonemove room
 
 import (
 	"fmt"
@@ -57,7 +57,9 @@ func (discoverEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 		cast := false
 		if found != NoCard {
 			cast = controller.ConfirmEffect(g, p, a.Source)
-			if cast && !castableAsPermanent(g.Card(found)) {
+			// A Room offers a choice of halves to cast (CR 709.3) this
+			// effect has no decision for.
+			if cast && (!castableAsPermanent(g.Card(found)) || isRoomDef(g.Card(found).Def)) {
 				return fmt.Errorf("engine: Discover: casting %q not resolvable yet", g.Card(found).Def.Name)
 			}
 			if hasParam(a, "RememberDiscovered") {

@@ -290,6 +290,17 @@ func (ld *loader) card(entry string, kind engine.ZoneType, owner engine.PlayerID
 				return fmt.Errorf("%s: protector %q: no such player", name, info)
 			}
 			c.ProtectingPlayer = ld.slotToID[slot]
+		case strings.HasPrefix(info, "UnlockedRoom:"):
+			// GameState.java:1419: the door unlocks with every trigger
+			// suppressed (GameState.java:617). Only a Room on the
+			// battlefield has doors.
+			d, ok := engine.DoorByName(strings.TrimPrefix(info, "UnlockedRoom:"))
+			if !ok {
+				return fmt.Errorf("%s: %q: not LeftSplit or RightSplit", name, info)
+			}
+			if !ld.game.LoadUnlockedDoor(id, d) {
+				ld.unapplied = append(ld.unapplied, fmt.Sprintf("%s: %s off a Room on the battlefield", name, info))
+			}
 		case strings.HasPrefix(info, "IsRingBearer"):
 			// GameState.java: player.setRingBearer(c), the player whose
 			// zone the entry is in.

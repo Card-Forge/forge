@@ -58,6 +58,7 @@ func (blockEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 				continue
 			}
 			g.combat.Blocks = append(g.combat.Blocks, pair)
+			g.recordBlockedBy(pair)
 			g.checkAttackerBlockedByCreatureTriggers(controller, pair)
 			g.checkBlocksTriggers(controller, pair)
 		}

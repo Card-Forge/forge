@@ -8,6 +8,14 @@ package engine
 // invented ahead of a caller that would set it.
 const startingHandSize = 7
 
+// startingLife is CR 103.3's twenty: RegisteredPlayer.startingLife's own
+// default (RegisteredPlayer.java:25), what Game's constructor hands every
+// seat when no StartingLife was forced (Game.java:347-351). The variants
+// that raise it (Commander, Archenemy, Vanguard, RegisteredPlayer.java:137-171)
+// have no game setup in this port, so it is a constant for the same reason
+// startingHandSize is. Subgame's seats start at it (subgameeffect.go).
+const startingLife = 20
+
 // DealOpeningHands is CR 103.1-103.4's procedure up to the point
 // PerformMulligans, below, can run: decide who plays first and deal each
 // seated player an opening hand of startingHandSize, shuffled library first.
@@ -34,12 +42,20 @@ func DealOpeningHands(g *Game, controller PlayerController) PlayerID {
 
 	for _, pid := range players {
 		g.Shuffle(Library, pid)
-		lib := g.Zone(Library, pid)
-		for i := 0; i < startingHandSize && lib.Len() > 0; i++ {
-			g.Move(lib.Cards()[0], Hand, pid)
-		}
+		drawOpeningHand(g, pid)
 	}
 	return first
+}
+
+// drawOpeningHand moves the top startingHandSize cards of pid's library to
+// their hand, fewer if the library runs out first: GameAction.startGame's
+// p1.drawCards(p1.getStartingHandSize()) (GameAction.java:2341) without a
+// shuffle, which each caller does or not as its own Java does.
+func drawOpeningHand(g *Game, pid PlayerID) {
+	lib := g.Zone(Library, pid)
+	for i := 0; i < startingHandSize && lib.Len() > 0; i++ {
+		g.Move(lib.Cards()[0], Hand, pid)
+	}
 }
 
 // PerformMulligans runs the London mulligan procedure for every seated

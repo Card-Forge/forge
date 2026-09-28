@@ -53,7 +53,7 @@ import (
 //	queue blocks [<b>=<a>,...]    ScriptedController.QueueBlocks, blocker=attacker pairs from CardByFixtureID (no pairs declines)
 //	queue damage <b>=<n>[,...]    ScriptedController.QueueDamageAssignment, blocker=amount pairs from CardByFixtureID
 //	queue discard <id>[,...]      ScriptedController.QueueDiscard, ids from CardByFixtureID
-//	queue cardchoice <id>[,...]   ScriptedController.QueueCardChoice, an effect's card pick, ids from CardByFixtureID
+//	queue cardchoice <id>[,...]   ScriptedController.QueueCardChoice, an effect's ChooseCardsForEffect pick, ids from CardByFixtureID
 //	queue battleprotector <p>     ScriptedController.QueueBattleProtector, a seated player's name
 //	paymanacost <player> <cost>          Game.PayManaCost(player, cost, controller) -- cost is mana.Parse's own text
 //	tapformana <player> <id> <color>     Game.TapLandForMana(player, id, color), id from CardByFixtureID
@@ -514,6 +514,15 @@ func runQueue(args []string, l *Loaded, c *engine.ScriptedController) error {
 		}
 		c.QueueConfirmEffect(v)
 
+	case "roomdoor":
+		// Which door of a Room UnlockDoor's Mode$ Unlock/LockOrUnlock picks
+		// (ChooseRoomDoor), in Java's CardStateName spelling.
+		d, ok := engine.DoorByName(value)
+		if !ok {
+			return fmt.Errorf("queue roomdoor %q: want LeftSplit or RightSplit", value)
+		}
+		c.QueueRoomDoor(d)
+
 	case "optionaltrigger":
 		// An OptionalDecider$ trigger's "you may" (ConfirmOptionalTrigger),
 		// asked as the trigger goes on the stack: Swarm Intelligence's
@@ -546,8 +555,9 @@ func resolveActionPlayer(l *Loaded, args []string, want int) (engine.PlayerID, e
 }
 
 // resolveAction parses `queue action`'s own arguments -- a seated player,
-// then "pass", "cast <id>", "activate <id> <index>", "playland <id>",
-// "tapformana <id> <color>" or "manaability <id> <index>" -- into the Action
+// then "pass", "cast <id> [<door>]", "activate <id> <index>", "playland
+// <id>", "tapformana <id> <color>", "manaability <id> <index>" or
+// "unlockdoor <id> <door>" -- into the Action
 // that player's next TakeAction returns. An empty queue already answers
 // pass (ScriptedController.TakeAction); an explicit "pass" is for a player
 // who passes now and acts later in the same round, since the queue is
@@ -572,15 +582,30 @@ func resolveAction(l *Loaded, args []string) (engine.Action, engine.PlayerID, er
 		return engine.Action{}, engine.NoPlayer, fmt.Errorf("want exactly one card id, got %q", args[2])
 	}
 	switch args[1] {
-	case "cast", "playland":
+	case "cast", "unlockdoor":
+		// cast's optional door is the half a Room is cast as; unlockdoor's
+		// is the door the special action unlocks. Both use Java's
+		// CardStateName spelling (LeftSplit, RightSplit).
+		kind := engine.ActionCast
+		if args[1] == "unlockdoor" {
+			kind = engine.ActionUnlockDoor
+		}
+		switch {
+		case len(args) == 3 && kind == engine.ActionCast:
+			return engine.Action{Kind: kind, Card: ids[0]}, pid, nil
+		case len(args) == 4:
+			d, ok := engine.DoorByName(args[3])
+			if !ok {
+				return engine.Action{}, engine.NoPlayer, fmt.Errorf("door %q: want LeftSplit or RightSplit", args[3])
+			}
+			return engine.Action{Kind: kind, Card: ids[0], Door: d}, pid, nil
+		}
+		return engine.Action{}, engine.NoPlayer, fmt.Errorf("%s takes a card id and a door, got %q", args[1], strings.Join(args[2:], " "))
+	case "playland":
 		if len(args) != 3 {
 			return engine.Action{}, engine.NoPlayer, fmt.Errorf("%s takes one card id, got %q", args[1], strings.Join(args[2:], " "))
 		}
-		kind := engine.ActionCast
-		if args[1] == "playland" {
-			kind = engine.ActionPlayLand
-		}
-		return engine.Action{Kind: kind, Card: ids[0]}, pid, nil
+		return engine.Action{Kind: engine.ActionPlayLand, Card: ids[0]}, pid, nil
 	case "activate", "manaability":
 		if len(args) != 4 {
 			return engine.Action{}, engine.NoPlayer, fmt.Errorf("%s takes a card id and an ability index, got %q", args[1], strings.Join(args[2:], " "))
@@ -604,7 +629,7 @@ func resolveAction(l *Loaded, args []string) (engine.Action, engine.PlayerID, er
 		}
 		return engine.Action{Kind: engine.ActionTapForMana, Card: ids[0], Color: color}, pid, nil
 	default:
-		return engine.Action{}, engine.NoPlayer, fmt.Errorf("want pass, cast, activate, playland, tapformana or manaability, got %q", args[1])
+		return engine.Action{}, engine.NoPlayer, fmt.Errorf("want pass, cast, activate, playland, tapformana, manaability or unlockdoor, got %q", args[1])
 	}
 }
 

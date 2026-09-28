@@ -38,14 +38,17 @@ func (e *actionError) Error() string {
 // ActivateAbility's own arguments), play a land (ActionPlayLand), or
 // activate a mana ability -- a basic land's intrinsic one (ActionTapForMana,
 // Color is the one color it taps for) or a scripted one
-// (ActionManaAbility, AbilityIndex as ActivateManaAbility takes it). The
-// zero value, ActionPass, is a pass -- GO-8's typed-struct shape, not a map
-// or a sentinel string.
+// (ActionManaAbility, AbilityIndex as ActivateManaAbility takes it), or
+// unlock a Room's locked door (ActionUnlockDoor). Door is the half a Room
+// card is cast as (ActionCast; DoorLeft for every other card) or the door
+// ActionUnlockDoor unlocks. The zero value, ActionPass, is a pass -- GO-8's
+// typed-struct shape, not a map or a sentinel string.
 type Action struct {
 	Kind         ActionKind
 	Card         CardID
 	AbilityIndex int
 	Color        mana.Colors
+	Door         Door
 }
 
 // ActionKind is Action's own discriminant.
@@ -68,6 +71,9 @@ const (
 	// ActionManaAbility activates Card's AbilityIndex'th mana ability via
 	// ActivateManaAbility (CR 605.3a). ADR-0026.
 	ActionManaAbility
+	// ActionUnlockDoor unlocks Door of the Room Card via UnlockDoor: a
+	// special action (CR 116.2, 709.5), after which the player keeps priority.
+	ActionUnlockDoor
 )
 
 // canActSorcerySpeed is CR 307.1's own timing restriction (Player.java's
@@ -210,8 +216,18 @@ func (g *Game) livePlayerCount() int {
 func (g *Game) applyAction(pid PlayerID, a Action, controller PlayerController) error {
 	switch a.Kind {
 	case ActionCast:
-		if !g.CastSpell(pid, a.Card, controller) {
+		cast := false
+		if a.Door == DoorLeft {
+			cast = g.CastSpell(pid, a.Card, controller)
+		} else {
+			cast = g.CastRoomDoor(pid, a.Card, a.Door, controller)
+		}
+		if !cast {
 			return &actionError{pid: pid, kind: "cast", card: a.Card}
+		}
+	case ActionUnlockDoor:
+		if !g.UnlockDoor(pid, a.Card, a.Door, controller) {
+			return &actionError{pid: pid, kind: fmt.Sprintf("unlock door %s of", a.Door), card: a.Card}
 		}
 	case ActionActivate:
 		if !g.ActivateAbility(pid, a.Card, a.AbilityIndex, controller) {

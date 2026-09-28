@@ -133,7 +133,7 @@ queue attacktarget <p>|<id>   ScriptedController.QueueAttackTarget, a player nam
 queue blocks [<b>=<a>,...]    ScriptedController.QueueBlocks, blocker=attacker pairs from Loaded.CardByFixtureID (no pairs declines)
 queue damage <b>=<n>[,...]    ScriptedController.QueueDamageAssignment, blocker=amount pairs from Loaded.CardByFixtureID
 queue discard <id>[,...]      ScriptedController.QueueDiscard, ids from Loaded.CardByFixtureID
-queue cardchoice <id>[,...]   ScriptedController.QueueCardChoice, an effect's card pick (Clone's Choices$), ids from Loaded.CardByFixtureID
+queue cardchoice <id>[,...]   ScriptedController.QueueCardChoice, an effect's ChooseCardsForEffect pick (Clone's Choices$, among others), ids from Loaded.CardByFixtureID
 queue battleprotector <p>     ScriptedController.QueueBattleProtector, a seated player's name
 paymanacost <player> <cost>   Game.PayManaCost(player, cost, controller), cost is mana.Parse's own text
 tapformana <player> <id> <color> Game.TapLandForMana(player, id, color), id from Loaded.CardByFixtureID
@@ -149,6 +149,9 @@ queue action <p> activate <id> <n>  ScriptedController.QueueAction, p activates 
 queue action <p> playland <id>      ScriptedController.QueueAction, p plays land id (ADR-0026)
 queue action <p> tapformana <id> <color>  ScriptedController.QueueAction, p taps basic land id for color (ADR-0026)
 queue action <p> manaability <id> <n>     ScriptedController.QueueAction, p activates id's n'th mana ability (ADR-0026)
+queue action <p> cast <id> <door>         ScriptedController.QueueAction, p casts Room id as its LeftSplit/RightSplit half
+queue action <p> unlockdoor <id> <door>   ScriptedController.QueueAction, p unlocks Room id's LeftSplit/RightSplit door (special action)
+queue roomdoor <door>                 ScriptedController.QueueRoomDoor, UnlockDoor's LeftSplit/RightSplit pick
 queue paygeneric <shard>      ScriptedController.QueuePayGeneric, a bare shard symbol ("W", "C", ...)
 queue payx <n>                 ScriptedController.QueuePayX, the value of X for a cost carrying one
 queue paysnow <shard>          ScriptedController.QueuePaySnow, a bare shard symbol naming the color
@@ -346,6 +349,13 @@ way it omits `landsplayed=0`), `|IsRingBearer` on the bearer's battlefield entry
 command zone (`Game.IsDesignationCard`) -- the count implies it. `compareGames` compares the count and the bearer's
 battlefield position. `testdata/scenarios/ring-tempts-you-nazgul-becomes-ring-bearer` and
 `ring-bearer-cant-be-blocked-by-greater-power` are the examples.
+
+**`|UnlockedRoom:<LeftSplit|RightSplit>` is Java's own key, applied.** `Load` unlocks that door of a Room on the
+battlefield through `Game.LoadUnlockedDoor`, no trigger (`GameState.java:1419`; Java suppresses every trigger during
+setup, `:617`); off the battlefield it lands in `Unapplied`. `Dump` writes one per unlocked door, last in the entry,
+left then right (`GameState.java:445-450`), and names a Room by its printed card (`Card.PrintedDef`), not its door view.
+`compareGames` compares unlocked doors. `testdata/scenarios/room-lock-or-unlock-fires-that-doors-trigger` is the example
+([`effects-unlockdoor.md`](game-state/effects-unlockdoor.md)).
 
 **`Protector:` is `lost=`/`won=`/`over=`'s own pattern applied to a single card field.** `Card.ProtectingPlayer` (CR
 704.5w, `game-state.md`'s "Combat") is Crucible state with no Java `GameState` key to diverge from at all — grep finds

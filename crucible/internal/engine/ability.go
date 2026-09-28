@@ -285,6 +285,11 @@ type triggeredObjects struct {
 	// will. A value, so a stacked Ability copies it with no aliasing. Zero
 	// amount when unset.
 	produced producedMana
+	// scheme is AbilityKey.Scheme for Mode$ SetInMotion
+	// (TriggerSetInMotion.setTriggeringObjects): the scheme just set in
+	// motion, read by SetInMotion's Again$ (setinmotioneffect.go). NoCard
+	// when unset.
+	scheme CardID
 }
 
 // targetStamp is one card target's zoneStamp as recorded by stampTargets.

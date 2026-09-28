@@ -213,6 +213,24 @@ func TestClaimThePrizeEffectRejectsUnresolvableDefined(t *testing.T) {
 	}
 }
 
+// TestClaimThePrizeEffectRejectsConditionDefined pins pick_a_beeble.txt's own
+// real corpus line ("ConditionDefined$ Self | ConditionPresent$
+// Card.Self+counters_GE6_LUCK"): isPresentMatches (trigger.go) treats any
+// ConditionDefined$ as never met and returns false silently, which would
+// make this resolve to an invisible no-op on the corpus's only real use.
+// Rejected loudly instead (GO-7), the same as every other effect naming
+// ConditionDefined$ -- found and fixed porting SetInMotion.
+func TestClaimThePrizeEffectRejectsConditionDefined(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil,
+		"DB$ ClaimThePrize | ConditionDefined$ Self | ConditionPresent$ Card.Self+counters_GE6_LUCK")
+	if err == nil || !strings.Contains(err.Error(), "ConditionDefined$ not resolvable yet") {
+		t.Errorf("err = %v, want ConditionDefined$ rejected", err)
+	}
+}
+
 // TestClaimThePrizeEffectConditionPresentFalseIsANoOp proves
 // subAbilityConditionMet's gate applies here the same as every other effect
 // (pick_a_beeble.txt's own real "ConditionPresent$ Card.Self+counters_GE6_

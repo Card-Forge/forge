@@ -9,6 +9,7 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/engine"
 	"github.com/jczastkiewicz/crucible/internal/mana"
+	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
 // etbRemoveFromCombatTriggerDefParams builds a *compile.Card whose own
@@ -119,6 +120,41 @@ func TestRemoveFromCombatEffectRemovesABlocker(t *testing.T) {
 	}
 	if len(g.Attackers()) != 1 {
 		t.Errorf("Attackers() = %v, want the attacker still attacking", g.Attackers())
+	}
+}
+
+// TestRemoveFromCombatEffectBlockerLeavesAttackerBlocked proves CR
+// 506.4/509.1h: an attacker whose only blocker is removed from combat
+// stays blocked (Java's AttackingBand keeps its blocked flag,
+// Combat.removeFromCombat) and deals no combat damage to the player.
+func TestRemoveFromCombatEffectBlockerLeavesAttackerBlocked(t *testing.T) {
+	t.Parallel()
+
+	g := newGame(t, "a", "b")
+	p, other := g.Players()[0], g.Players()[1]
+	g.SetTurnState(1, p, engine.Main1)
+	g.Player(p).Life, g.Player(other).Life = 20, 20
+	attacker := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+	blocker := g.NewCard(creatureDefPT(t, "1", "1"), other, engine.Battlefield)
+
+	ac := engine.NewScriptedController()
+	ac.QueueAttackers([]engine.CardID{attacker})
+	declareAttackers(t, g, ac)
+	bc := engine.NewScriptedController()
+	bc.QueueBlocks([]engine.Block{{Blocker: blocker, Attacker: attacker}})
+	declareBlockers(t, g, bc)
+
+	c := engine.NewScriptedController()
+	c.QueueTargets([]engine.EntityID{engine.CardEntity(blocker)})
+	if _, err := castETBRemoveFromCombat(t, g, p, etbRemoveFromCombatTriggerDefParams(t, "Test RemoveFromCombat Only Blocker", "ValidTgts$ Creature"), c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if !engine.Matches(g, g.Card(attacker), valid.Parse("Card.blocked"), p, engine.NoCard) {
+		t.Error("the attacker is no longer blocked after its only blocker left combat")
+	}
+	g.DealCombatDamage(engine.NewScriptedController())
+	if life := g.Player(other).Life; life != 20 {
+		t.Errorf("defender life = %d, want 20 (a blocked attacker deals no damage to the player)", life)
 	}
 }
 

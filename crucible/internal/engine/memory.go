@@ -41,6 +41,13 @@ type Memory struct {
 	chosenType      string
 	chosenType2     string
 	namedCards      []string
+
+	// chosenSector is Card's setChosenSector (Card.java:2348): the sector
+	// ("Alpha", "Beta" or "Gamma") ChooseSector picks for Space Beleren's
+	// own later Creature.ChosenSector reads. Java never clears it and never
+	// copies it onto an effect card (EffectEffect.java:277-306), so neither
+	// Cleanup nor copyChoicesFrom touches it.
+	chosenSector string
 }
 
 // Remember adds an entity, and reports whether it was new. Order is the order
@@ -144,6 +151,13 @@ func (m *Memory) SetChosenEvenOdd(v string) { m.chosenEvenOdd = v }
 // ChosenEvenOdd is ChooseEvenOdd's pick, "" when none was made.
 func (m *Memory) ChosenEvenOdd() string { return m.chosenEvenOdd }
 
+// SetChosenSector records ChooseSector's pick, one of "Alpha", "Beta" or
+// "Gamma".
+func (m *Memory) SetChosenSector(v string) { m.chosenSector = v }
+
+// ChosenSector is ChooseSector's pick, "" when none was made.
+func (m *Memory) ChosenSector() string { return m.chosenSector }
+
 // SetChosenDirection records ChooseDirection's pick, "Left" or "Right".
 func (m *Memory) SetChosenDirection(v string) { m.chosenDirection = v }
 
@@ -180,8 +194,8 @@ func (m *Memory) ClearNamedCards() { m.namedCards = nil }
 // because the overwhelming majority of cards remember nothing.
 // copyChoicesFrom copies src's choices onto m: what EffectEffect.resolve
 // hands an effect card from its host -- chosen colors, cards, player,
-// direction, type, second type, named cards and number (not even/odd,
-// which Java does not copy).
+// direction, type, second type, named cards and number (not even/odd or
+// sector, which Java does not copy).
 func (m *Memory) copyChoicesFrom(src *Memory) {
 	if src.chosenColors != 0 {
 		m.chosenColors = src.chosenColors
@@ -219,6 +233,7 @@ func (m Memory) clone() Memory {
 		chosenDirection: m.chosenDirection,
 		chosenType:      m.chosenType,
 		chosenType2:     m.chosenType2,
+		chosenSector:    m.chosenSector,
 		namedCards:      append([]string(nil), m.namedCards...),
 	}
 	if m.remembered != nil {

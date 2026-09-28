@@ -98,13 +98,26 @@ func (g *Game) removeFromCombat(id CardID) {
 		delete(g.combat.AttackTargets, id)
 	}
 	var blocks []Block
+	var lostBlocker []CardID
 	for _, b := range g.combat.Blocks {
 		if b.Attacker != id && b.Blocker != id {
 			blocks = append(blocks, b)
+		} else if b.Blocker == id && !containsCard(lostBlocker, b.Attacker) {
+			lostBlocker = append(lostBlocker, b.Attacker)
 		}
 	}
 	g.combat.Blocks = blocks
 	g.combat.ForcedBlocked = withoutCards(g.combat.ForcedBlocked, []CardID{id})
+	// CR 509.1h/506.4: an attacker whose last blocker leaves combat remains
+	// blocked. Java keeps its AttackingBand's blocked flag
+	// (Combat.removeFromCombat, Combat.java:611-638, never clears it); here
+	// that attacker joins ForcedBlocked, which isBlocked and combat damage
+	// already read as "blocked, no blocker".
+	for _, atk := range lostBlocker {
+		if !g.combat.isBlocked(atk) {
+			g.combat.ForcedBlocked = append(g.combat.ForcedBlocked, atk)
+		}
+	}
 }
 
 // clone is Combat's half of Game.Clone: a shared backing array would let a

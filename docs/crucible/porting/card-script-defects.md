@@ -9,33 +9,37 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 
 ## Status
 
-| Card                                       | Defect                                                                                             | Found by                        | Upstream                                                         |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------- |
-| `the_dawning_archaic`                      | `ODeckHints:` for `DeckHints:`                                                                     | Unknown-key rejection           | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
-| `spirit_of_resilience`                     | `DBCleanup:` for `SVar:DBCleanup:`                                                                 | Unknown-key rejection           | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
-| `favor_of_jukai`                           | Missing `\|` fuses `ValidTgts$` and `NumAtt$`                                                      | Valid-base vocabulary           | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
-| `casey_raph_hotheads`                      | `SVar:DBCleanup` never written                                                                     | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `circadian_struggle`                       | Cleanup chains to a `DBEffect` that does not exist                                                 | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `withering_curse`                          | Chains to a `DBPutCounter` that does not exist                                                     | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `worzel_the_protector`                     | Chains to a `DBAttach` that does not exist                                                         | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `typhoid_mary_fractured`                   | Chains to a `DBCharm` that does not exist                                                          | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `goblin_razerunners`                       | `ValidTgts$ Player, Planeswalker` — a space after the comma                                        | Valid-string parsing            | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
-| `flamewave_invoker`                        | `ValidTgts$ Player, Planeswalker` — a space after the comma                                        | Valid-string parsing            | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
-| `peace_talks`                              | `StaticAbilities$` names `STCantTargetPlayer`, never defined                                       | Effect trait compilation        | pending                                                          |
-| `ludevic_necrogenius_olag_ludevics_hubris` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color            | Clone port (`effects-clone.md`) | Not filed                                                        |
-| `taskmaster_mercenary_mimic`               | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`) | Clone port (`effects-clone.md`) | Not filed                                                        |
-| `captured_by_the_consulate`                | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`)  | ChangeTargets port              | Not filed                                                        |
-| `mount_keralia`                            | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0                   | Planeswalk port                 | Not filed                                                        |
-| `ashlings_prerogative` (line 5)            | `ListTitle$` on `ChooseEvenOdd`, which `ChooseEvenOddEffect.java` never reads                      | `ETBReplacement` expansion      | Not filed                                                        |
-| `gollum_riddle_master` (line 6)            | `ListTitle$` on `ChooseEvenOdd`, which `ChooseEvenOddEffect.java` never reads                      | `ETBReplacement` expansion      | Not filed                                                        |
+| Card                                       | Defect                                                                                                         | Found by                        | Upstream                                                         |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------- |
+| `the_dawning_archaic`                      | `ODeckHints:` for `DeckHints:`                                                                                 | Unknown-key rejection           | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
+| `spirit_of_resilience`                     | `DBCleanup:` for `SVar:DBCleanup:`                                                                             | Unknown-key rejection           | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
+| `favor_of_jukai`                           | Missing `\|` fuses `ValidTgts$` and `NumAtt$`                                                                  | Valid-base vocabulary           | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
+| `casey_raph_hotheads`                      | `SVar:DBCleanup` never written                                                                                 | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `circadian_struggle`                       | Cleanup chains to a `DBEffect` that does not exist                                                             | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `withering_curse`                          | Chains to a `DBPutCounter` that does not exist                                                                 | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `worzel_the_protector`                     | Chains to a `DBAttach` that does not exist                                                                     | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `typhoid_mary_fractured`                   | Chains to a `DBCharm` that does not exist                                                                      | Sub-ability resolution          | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `goblin_razerunners`                       | `ValidTgts$ Player, Planeswalker` — a space after the comma                                                    | Valid-string parsing            | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
+| `flamewave_invoker`                        | `ValidTgts$ Player, Planeswalker` — a space after the comma                                                    | Valid-string parsing            | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
+| `peace_talks`                              | `StaticAbilities$` names `STCantTargetPlayer`, never defined                                                   | Effect trait compilation        | pending                                                          |
+| `ludevic_necrogenius_olag_ludevics_hubris` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color                        | Clone port (`effects-clone.md`) | Not filed                                                        |
+| `taskmaster_mercenary_mimic`               | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`)             | Clone port (`effects-clone.md`) | Not filed                                                        |
+| `captured_by_the_consulate`                | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`)              | ChangeTargets port              | Not filed                                                        |
+| `mount_keralia`                            | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0                               | Planeswalk port                 | Not filed                                                        |
+| `ashlings_prerogative` (line 5)            | `ListTitle$` on `ChooseEvenOdd`, which `ChooseEvenOddEffect.java` never reads                                  | `ETBReplacement` expansion      | Not filed                                                        |
+| `gollum_riddle_master` (line 6)            | `ListTitle$` on `ChooseEvenOdd`, which `ChooseEvenOddEffect.java` never reads                                  | `ETBReplacement` expansion      | Not filed                                                        |
+| `tooth_claw_and_tail`                      | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port                | Not filed                                                        |
+| `your_will_is_not_your_own`                | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port                | Not filed                                                        |
 
-Every row but `peace_talks`, the two Clone rows, `captured_by_the_consulate`, `mount_keralia` and the two `ListTitle$`
-rows is merged upstream; the Clone rows and `captured_by_the_consulate` are rejected with an `error` meanwhile
-(`Defined$ TriggeredSourceSA` is not resolvable, so the fix, `Defined$ TriggeredSpellAbility`, is what the port would
-resolve); `mount_keralia` resolves X to 0 instead (no counters to read back), so its eruption silently deals no damage
-until fixed upstream. The `ListTitle$` rows are latent: both SVars are named only by `K:ETBReplacement:Other`, which
-`compile` does not expand yet, so no gate reads them; expanding that layer makes `tools/apiscan -check -api` fail on
-both ([`layer1-enters-as-copy.md`](port-log/game-state/layer1-enters-as-copy.md)). `peace_talks` is carried as a pending
+Every row but `peace_talks`, the two Clone rows, `captured_by_the_consulate`, `mount_keralia`, the two `ListTitle$` rows
+and the two scheme rows is merged upstream; the Clone rows and `captured_by_the_consulate` are rejected with an `error`
+meanwhile (`Defined$ TriggeredSourceSA` is not resolvable, so the fix, `Defined$ TriggeredSpellAbility`, is what the
+port would resolve); `mount_keralia` resolves X to 0 instead (no counters to read back), so its eruption silently deals
+no damage until fixed upstream. The `ListTitle$` rows are latent: both SVars are named only by `K:ETBReplacement:Other`,
+which `compile` does not expand yet, so no gate reads them; expanding that layer makes `tools/apiscan -check -api` fail
+on both ([`layer1-enters-as-copy.md`](port-log/game-state/layer1-enters-as-copy.md)). The two scheme rows fire as Java
+does: a later scheme set in motion while either still sits face up in Command (Plots That Span Centuries'
+`RepeatNum$ 3`, one resolution, no state-based check between) triggers it again. `peace_talks` is carried as a pending
 fix, logged in [upstream-patches.md](upstream-patches.md), until upstream merges it. `internal/carddb/compile` compiles
 the whole corpus with no exemption of any kind, and `internal/valid` parses all 49,615 valid strings with no padded
 base.

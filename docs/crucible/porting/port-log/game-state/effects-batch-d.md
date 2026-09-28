@@ -36,11 +36,16 @@ it.
 
 ## ClaimThePrize
 
-`claimtheprizeeffect.go` ports `ClaimThePrizeEffect.java`'s resolve in full for the one real corpus line: for each
-`Defined$` (default `Self`) card, run CR's own Mode$ ClaimPrize trigger once
-(`TriggerHandler.runTrigger(TriggerType.ClaimPrize, ...)`, Java's own). Every other param on `pick_a_beeble.txt`'s own
-real line (`ConditionDefined$`/`ConditionPresent$`) is the generic `Condition$` family `subAbilityConditionMet` already
-gates on before `Resolve` does anything effect-specific, so nothing is rejected here.
+`claimtheprizeeffect.go` ports `ClaimThePrizeEffect.java`'s resolve for each `Defined$` (default `Self`) card: run CR's
+own Mode$ ClaimPrize trigger once (`TriggerHandler.runTrigger(TriggerType.ClaimPrize, ...)`, Java's own).
+
+`pick_a_beeble.txt`'s own real line also names `ConditionDefined$`/`ConditionPresent$`; `ConditionDefined$` is rejected,
+not silently gated as this file originally said.
+
+`isPresentMatches` (called from `subAbilityConditionMet`) treats a defined condition as never met and returns false
+silently. That would make the corpus's only real line resolve to an invisible no-op instead of running (GO-7).
+
+Found porting `SetInMotion`, fixed the same way every other effect naming `ConditionDefined$` already is.
 
 New trigger dispatch: `checkClaimPrizeTriggers`/`isClaimPrizeTrigger` (`claimtheprizeeffect.go`) —
 `checkExertedTriggers`'s own exact structural sibling again: a single unified battlefield walk covers both a claimed

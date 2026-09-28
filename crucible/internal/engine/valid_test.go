@@ -818,6 +818,37 @@ func TestMatchesBlocking(t *testing.T) {
 	}
 }
 
+// blocked matches an attacker with a declared blocker, not an unblocked
+// attacker and not the blocker itself (CardProperty.java:1591).
+func TestMatchesBlocked(t *testing.T) {
+	t.Parallel()
+
+	g := newGame(t, "a", "b")
+	a, b := g.Players()[0], g.Players()[1]
+	g.SetTurnState(1, a, engine.Main1)
+	blockedAttacker := g.NewCard(creatureDefPT(t, "2", "2"), a, engine.Battlefield)
+	freeAttacker := g.NewCard(creatureDefPT(t, "2", "2"), a, engine.Battlefield)
+	blocker := g.NewCard(creatureDefPT(t, "2", "2"), b, engine.Battlefield)
+
+	ac := engine.NewScriptedController()
+	ac.QueueAttackers([]engine.CardID{blockedAttacker, freeAttacker})
+	declareAttackers(t, g, ac)
+	bc := engine.NewScriptedController()
+	bc.QueueBlocks([]engine.Block{{Blocker: blocker, Attacker: blockedAttacker}})
+	declareBlockers(t, g, bc)
+
+	spec := valid.Parse("Creature.attacking+blocked")
+	if !engine.Matches(g, g.Card(blockedAttacker), spec, a, engine.NoCard) {
+		t.Error("the blocked attacker did not match Creature.attacking+blocked")
+	}
+	if engine.Matches(g, g.Card(freeAttacker), spec, a, engine.NoCard) {
+		t.Error("the unblocked attacker matched Creature.attacking+blocked")
+	}
+	if engine.Matches(g, g.Card(blocker), valid.Parse("Card.blocked"), a, engine.NoCard) {
+		t.Error("the blocker itself matched Card.blocked")
+	}
+}
+
 // A suffixed attacking/blocking form ("attackingYou", "blockingSource") is
 // not equal to the bare name, so it is a coverage gap: it matches nothing
 // rather than evaluating the suffix.

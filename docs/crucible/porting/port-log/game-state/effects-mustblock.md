@@ -135,7 +135,9 @@ them unchanged.
 | anything else (`ValidPlayer$` 1 line, …)                          | `error` from the declaration                                              |
 
 `MustAttack$` spellings `definedEntities` does not know (`CardOwner`, `EffectSource`, `RememberedPlayer`,
-`EnchantedController`, `Player.Other`, …, 17 lines) error when the static applies.
+`EnchantedController`, …, 13 lines) error when the static applies. `Player.Other` (2 lines) and `Player.IsRemembered` (2
+lines) resolve now: `definedPlayers`' generic `Player.<property>` fallthrough, added porting `Subgame`
+(`effects-subgame.md`), reaches `definedEntities` the same way every other `definedPlayers` case already does.
 
 ## Tests and fixtures
 

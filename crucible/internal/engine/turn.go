@@ -241,6 +241,8 @@ func (g *Game) beginStep(controller PlayerController, driven bool) (bool, error)
 		priority = false // CR 502.4, PhaseHandler.java:251
 	case Draw:
 		g.drawStep(controller)
+	case Main1:
+		g.archenemyMain1(controller)
 	case CombatBegin:
 		g.combatsThisTurn++
 	case DeclareAttackers:
@@ -510,6 +512,7 @@ func (g *Game) cleanupStep(controller PlayerController) {
 			g.Card(id).Damage.Clear()
 			g.Card(id).AttacksThisTurn = 0
 			g.Card(id).BecameTargetThisTurn = false
+			g.Card(id).blockedByThisTurn = nil
 			g.Card(id).LoyaltyAbilityActivated = false
 			g.Card(id).RegenShields = 0
 		}

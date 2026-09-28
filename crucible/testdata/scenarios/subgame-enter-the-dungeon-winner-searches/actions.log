@@ -1,0 +1,19 @@
+# CR 720 through Enter the Dungeon: a whole subgame plays out inside the
+# spell's resolution (SubgameEffect.java), each player starting at 5 life and
+# using a copy of their library as their deck. Human goes first; ai's library
+# is empty, so ai loses on its first subgame draw (CR 704.5b) and human wins.
+# RememberPlayers$ Win remembers human, who then searches the main game's
+# library -- untouched by the subgame, which played copies -- for two cards.
+# Life totals are the main game's own throughout.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+# The subgame's own start: the starting player, then each seat keeps.
+queue startingplayer human
+queue keephand true
+queue keephand true
+# The winner's search, after the subgame.
+queue cardchoice 4,6
+castspell human 1
+resolvestack

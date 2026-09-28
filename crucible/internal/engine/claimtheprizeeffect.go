@@ -22,13 +22,28 @@ import (
 // (TriggerHandler.runTrigger(TriggerType.ClaimPrize, ...)) once.
 //
 // Ported from forge-game/src/main/java/forge/game/ability/effects/
-// ClaimThePrizeEffect.java's resolve. Java's resolve reads only Defined$;
-// every other param on the one real corpus line (ConditionDefined$/
-// ConditionPresent$) is the generic Condition$ family subAbilityConditionMet
-// already gates on, so nothing is rejected here.
+// ClaimThePrizeEffect.java's resolve. Java's resolve reads only Defined$.
+//
+// ConditionDefined$ is rejected, not silently gated: the one real corpus
+// line (pick_a_beeble.txt's "ConditionDefined$ Self | ConditionPresent$
+// Card.Self+counters_GE6_LUCK") named it assuming subAbilityConditionMet
+// would evaluate it, but isPresentMatches (trigger.go) treats any
+// ConditionDefined$ as never met and returns false silently -- this effect
+// would resolve to nil, quietly doing nothing, on the corpus's only real
+// use. Discovered porting SetInMotion (effects-setinmotion.md); fixed here
+// the way every other effect naming ConditionDefined$ already does (GO-7),
+// rather than resolving to an invisible no-op.
 type claimThePrizeEffect struct{}
 
+// claimThePrizeUnresolvedParams names the one shape isPresentMatches cannot
+// evaluate (see the doc comment above): rejected loudly before acting,
+// never silently gated to "condition not met".
+var claimThePrizeUnresolvedParams = [...]string{"ConditionDefined"}
+
 func (claimThePrizeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectParams(a, "ClaimThePrize", claimThePrizeUnresolvedParams[:]...); err != nil {
+		return err
+	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil

@@ -13,6 +13,7 @@ package engine
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 )
@@ -40,17 +41,21 @@ import (
 // "TriggeredActivator", what the trigger that made the ability recorded
 // (Ability.triggered) -- an error, "the trigger recorded no ...",
 // when it recorded no such key, so a trigger mode that never learned to
-// set one fails loudly (GO-7). A player no longer in the game is skipped,
-// matching Java's own `if (!p.isInGame()) continue`.
+// set one fails loudly (GO-7). Any other "Player.<property>" is Java's
+// fallthrough: every player matching that one property
+// (matchesPlayerProperty, valid.go) -- "Player.IsRemembered", the players
+// the host remembers, is the corpus's 153 real lines of it. A player no
+// longer in the game is skipped, matching Java's own
+// `if (!p.isInGame()) continue`.
 func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, refs abilityRefs) ([]PlayerID, error) {
 	var candidates []PlayerID
 	switch defined {
 	case "You":
 		candidates = []PlayerID{controller}
 	case "Player":
-		candidates = g.Players()
+		candidates = g.playersInTurnOrder()
 	case "Opponent", "Player.Opponent":
-		for _, pid := range g.Players() {
+		for _, pid := range g.playersInTurnOrder() {
 			if pid != controller {
 				candidates = append(candidates, pid)
 			}
@@ -110,7 +115,23 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		}
 		candidates = []PlayerID{refs.triggered.activator}
 	default:
-		return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+		// getDefinedPlayers' fallthrough (AbilityUtils.java:1186-1198):
+		// every player, filtered by the dotted restriction. Only a single
+		// property matchesPlayerProperty recognizes resolves; a comma list
+		// or an unrecognized property stays an error.
+		prop, ok := strings.CutPrefix(defined, "Player.")
+		if !ok || strings.Contains(prop, ",") {
+			return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+		}
+		for _, pid := range g.playersInTurnOrder() {
+			matched, recognized := matchesPlayerSpec(g, pid, controller, host, defined)
+			if !recognized {
+				return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+			}
+			if matched {
+				candidates = append(candidates, pid)
+			}
+		}
 	}
 	var players []PlayerID
 	for _, pid := range candidates {

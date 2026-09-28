@@ -1,0 +1,23 @@
+# CR 709.3, 709.5: human casts Bottomless Pool // Locker Room as its right
+# half, Locker Room ({4}{U}); it enters with only that door unlocked
+# (GameAction.java:571), and Bottomless Pool's "When you unlock this door"
+# stays silent. With the stack empty again human takes the special action,
+# paying Bottomless Pool's {U} to unlock the left door (CardFactoryUtil.java:124,
+# no stack). That door's trigger now fires and returns ai's Grizzly Bears.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+tapformana human 7 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue action human cast 1 RightSplit
+queue action human pass
+queue action human unlockdoor 1 LeftSplit
+queue targets 8
+passpriority
