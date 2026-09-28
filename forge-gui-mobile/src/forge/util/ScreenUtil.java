@@ -47,7 +47,7 @@ public class ScreenUtil implements Disposable {
         if (!isInitialized) {
             initScreenshotBuffer();
         }
-        FrameRate.hideFPSCountdown = 2;
+        FrameRate.hideFPSCountdown = Forge.isMobileAdventureMode ? 1 : 2;
         pendingScreenshot = true;
         return screenTextureRegion;
     }
