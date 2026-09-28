@@ -5,7 +5,7 @@
 
 package engine
 
-//enginelint:allow id card game player ability turn defined amount control
+//enginelint:allow id card game player ability turn defined amount control condition
 
 import "fmt"
 
@@ -16,7 +16,13 @@ import "fmt"
 // continuous effect's own numeric params already get (ptParam,
 // continuous.go); a "*"-shaped amount or a head resolveAmount does not evaluate still
 // fails, resolveAmount's own contract -- and Defined$ (definedPlayers,
-// defined.go).
+// defined.go). Condition$/ConditionPresent$/ConditionCompare$/
+// ConditionCheckSVar$/ConditionSVarCompare$/ConditionDefined$ are resolved
+// through subAbilityConditionMet (condition.go), the identical way every
+// other M6 effect's own does -- this file had no call to it at all until
+// found missing (rules review on the LosePerpetual/ADR-0023 landing), so
+// every one of the corpus's own 747 real SVar-defined Draw lines carrying a
+// Condition*$ param silently drew anyway.
 //
 // Not ported: Upto (a player chooses how many, 0 to NumCards$), the optional
 // draw's own confirmation prompt (OptionalDecider$), Reveal, and
@@ -36,9 +42,10 @@ import "fmt"
 type drawEffect struct{}
 
 func (drawEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	source := g.Card(a.Source)
 	n := 1
 	if v, ok := a.Params.Param("NumCards"); ok {
-		parsed, ok := resolveNamedAmount(g, a.Amounts, g.Card(a.Source), v)
+		parsed, ok := resolveNamedAmount(g, a.Amounts, source, v)
 		if !ok {
 			return fmt.Errorf("engine: Draw: NumCards$ %q is not resolvable", v)
 		}
@@ -48,6 +55,9 @@ func (drawEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Draw: %s$ not resolvable yet", key)
 		}
+	}
+	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
+		return nil
 	}
 	defined, _ := a.Params.Param("Defined")
 	players, err := definedPlayers(g, a.Controller, a.Source, defined, a.refs())

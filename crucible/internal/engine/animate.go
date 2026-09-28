@@ -12,7 +12,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
+	"github.com/jczastkiewicz/crucible/internal/expr"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
@@ -144,14 +146,15 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 }
 
 // animateUnresolvedParams are the doAnimate/AnimateEffect params this port
-// does not model: granted abilities, triggers, replacements, statics and
-// SVars (each needs a runtime-parsed trait, PORT-2), hidden keywords,
+// does not model: granted abilities, replacements, statics and SVars (none is
+// compiled at load yet, PORT-2 -- Triggers$ is, animateTriggerGrants),
+// hidden keywords,
 // "can't have" keywords, removing abilities, all creature types, a
 // renaming, mana-cost changes, a revert cost, a leave-the-battlefield
 // replacement, what the animated card remembers or imprints, an Optional$
 // confirmation, and the end-of-turn delayed trigger (AtEOT$).
 var animateUnresolvedParams = [...]string{
-	"Abilities", "Triggers", "Replacements", "staticAbilities", "sVars", "HiddenKeywords",
+	"Abilities", "Replacements", "staticAbilities", "sVars", "HiddenKeywords",
 	"CantHaveKeyword", "RemoveAllAbilities", "RemoveNonManaAbilities", "RemoveThisAbility",
 	"AddAllCreatureTypes", "Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
 	"RememberObjects", "ImprintCards", "Optional", "OptionQuestion", "AtEOT", "TgtZone",
@@ -159,8 +162,9 @@ var animateUnresolvedParams = [...]string{
 }
 
 // animateDuration reads Duration$: absent is until end of turn, Permanent
-// never ends; every other duration (Perpetual, UntilHostLeavesPlay,
-// UntilYourNextTurn, ...) needs a lifetime this port does not track.
+// never ends; every other duration (UntilHostLeavesPlay, UntilYourNextTurn,
+// Perpetual on anything but a trigger grant, ...) needs a lifetime this port
+// does not track.
 func animateDuration(a *Ability, api string) (bool, error) {
 	d, ok := a.Params.Param("Duration")
 	if !ok {
@@ -179,17 +183,39 @@ func animateDuration(a *Ability, api string) (bool, error) {
 // ChosenColor or All -- with OverwriteColors$ (Layer 5), and Keywords$/
 // RemoveKeywords$ (" & " lists, Layer 6). Types$ ChosenType and a
 // keyword naming one of the host's SVars (Java substitutes its text) are
-// not resolved.
-func buildAnimate(g *Game, a *Ability, api string) (animateRecord, error) {
+// not resolved. The triggers a Duration$ Perpetual Triggers$ grants come
+// back beside the record (animateTriggerGrants), nil when there are none.
+func buildAnimate(g *Game, a *Ability, api string) (animateRecord, []*compile.Ability, error) {
 	var r animateRecord
 	if err := rejectParams(a, api, animateUnresolvedParams[:]...); err != nil {
-		return r, err
+		return r, nil, err
 	}
-	permanent, err := animateDuration(a, api)
+	grants, err := animateTriggerGrants(a, api)
 	if err != nil {
-		return r, err
+		return r, nil, err
 	}
-	r.Permanent = permanent
+	if grants == nil {
+		if r.Permanent, err = animateDuration(a, api); err != nil {
+			return r, nil, err
+		}
+	}
+	r, err = buildAnimateCharacteristics(g, a, api, r)
+	if err != nil {
+		return r, nil, err
+	}
+	if grants != nil && !r.empty() {
+		// PerpetualPTBoost/PerpetualTypes/... (AnimateEffectBase.java:51-235)
+		// each need a zone-surviving store of their own; an ordinary record
+		// would be dropped by clearAnimates at the card's next zone change.
+		return r, nil, fmt.Errorf("engine: %s: Duration$ Perpetual on a characteristic change not resolvable yet", api)
+	}
+	return r, grants, nil
+}
+
+// buildAnimateCharacteristics reads buildAnimate's characteristic params
+// into r.
+func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecord) (animateRecord, error) {
+	var err error
 	if r.HasPower = hasParam(a, "Power"); r.HasPower {
 		if r.Power, err = optionalAmount(g, a, api, "Power", 0); err != nil {
 			return r, err
@@ -285,5 +311,74 @@ func (g *Game) animateCards(template animateRecord, cards []CardID) {
 		r := template
 		r.Card, r.Timestamp = id, ts
 		g.addAnimate(r)
+	}
+}
+
+// animateTriggerGrants reads Triggers$ (ADR-0023's trigger slice): the
+// compiled triggers the resolution grants, nil when it names none. Only
+// Duration$ Perpetual is built -- PerpetualAbilities over changedCardTraits
+// (AnimateEffectBase.java:221-233), a grant that never ends and survives
+// zone changes (grantedTriggers, card.go). A grant that ends (until end of
+// turn, Permanent on a card that later leaves play, ...) needs the overlay's
+// removal bookkeeping for continuous effects, the rest of ADR-0023, and is
+// refused. So is a grant compile left unfollowed because the trigger
+// regrants itself (Snarlfang Vermin, compile.go's regrants), and one whose
+// Execute$ targets outside the battlefield (TgtZone$, Pass the Torch's
+// TrigPlay): targetCandidates (targeting.go) scans the battlefield only, so
+// the granted trigger would silently never go on the stack (ADR-0023
+// decision 4: a grant the port cannot apply fails when applied).
+func animateTriggerGrants(a *Ability, api string) ([]*compile.Ability, error) {
+	raw, ok := a.Params.Param("Triggers")
+	if !ok {
+		return nil, nil
+	}
+	if d, _ := a.Params.Param("Duration"); d != "Perpetual" {
+		return nil, fmt.Errorf("engine: %s: Triggers$ not resolvable yet", api)
+	}
+	var subs []compile.SubRef
+	for _, sub := range a.Params.Subs {
+		if strings.EqualFold(sub.Key, "Triggers") {
+			subs = append(subs, sub)
+		}
+	}
+	names := 0
+	for _, name := range strings.Split(raw, ",") {
+		if strings.TrimSpace(name) != "" {
+			names++
+		}
+	}
+	if len(subs) != names {
+		return nil, fmt.Errorf("engine: %s: Triggers$ %q grants a trigger that regrants itself, not resolvable yet", api, raw)
+	}
+	out := make([]*compile.Ability, 0, len(subs))
+	for _, sub := range subs {
+		for _, exec := range sub.Ability.Subs {
+			if !strings.EqualFold(exec.Key, "Execute") {
+				continue
+			}
+			if _, ok := exec.Ability.Param("TgtZone"); ok {
+				return nil, fmt.Errorf("engine: %s: Triggers$ %s: Execute$ %s targets through TgtZone$, not resolvable yet", api, sub.SVar, exec.SVar)
+			}
+		}
+		out = append(out, sub.Ability)
+	}
+	return out, nil
+}
+
+// grantPerpetualTriggers gives each of cards one grant row holding triggers,
+// in whatever zone the card is -- AnimateEffect.java:166-178 skips only a
+// phased-out card, and Racketeer Boss grants to cards in hand. Every row
+// shares the resolution's one new timestamp (AnimateEffect.java:57) as its
+// id; amounts is the granting face's SVars (grantedTriggers' own doc
+// comment).
+func (g *Game) grantPerpetualTriggers(cards []CardID, triggers []*compile.Ability, amounts map[string]expr.Amount) {
+	g.timestamp++
+	id := g.timestamp
+	for _, cid := range cards {
+		c := g.Card(cid)
+		if c.IsPhasedOut() {
+			continue
+		}
+		c.grants = c.withGrant(grantedTriggers{id: id, triggers: triggers, amounts: amounts})
 	}
 }

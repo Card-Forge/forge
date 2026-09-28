@@ -53,7 +53,7 @@ func (g *Game) checkExertedTriggers(controller PlayerController, card CardID) {
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isExertedTrigger(t) {
 						continue
@@ -62,7 +62,7 @@ func (g *Game) checkExertedTriggers(controller PlayerController, card CardID) {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}

@@ -290,6 +290,14 @@ type triggeredObjects struct {
 	// motion, read by SetInMotion's Again$ (setinmotioneffect.go). NoCard
 	// when unset.
 	scheme CardID
+	// grant is not an AbilityKey but the trigger itself, as far as
+	// LosePerpetual asks (SpellAbility.getTrigger): the id of the source
+	// card's grant row (grantedTriggers, card.go) the trigger that put this
+	// ability on the stack came from; 0 for a printed trigger or an ability
+	// no trigger put there. Kept here so it travels down the SubAbility$
+	// chain with the rest of the triggering objects, as Java's getTrigger
+	// walks up getParent to the root (SpellAbility.java:1354-1359).
+	grant uint64
 }
 
 // targetStamp is one card target's zoneStamp as recorded by stampTargets.

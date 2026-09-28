@@ -9,6 +9,7 @@ import (
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
+	"github.com/jczastkiewicz/crucible/internal/expr"
 	"github.com/jczastkiewicz/crucible/internal/keyword"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/pkg/collect"
@@ -291,11 +292,60 @@ type Card struct {
 	// with ControlMod's continuous effects by timestamp, the latest winning.
 	tempControllers []ControlEffect
 
+	// grants is this card's overlay of granted triggers (ADR-0023 decision
+	// 2), ascending id: the Layer-6 rows of Java's changedCardTraits
+	// (Card.java:141-142) this port builds, one per Animate/AnimateAll
+	// Duration$ Perpetual resolution that granted Triggers$ to the card
+	// (PerpetualAbilities, AnimateEffectBase.java:221-233). Perpetual is the
+	// only duration built, and it survives every zone change -- Java re-applies
+	// the card's perpetual list to the new object (GameAction.java:265-266) --
+	// so Move leaves it alone. Every trigger scan reads it through
+	// triggerFaces (trigger.go). Replaced, never edited in place: a
+	// last-known-information snapshot shares the backing array.
+	grants []grantedTriggers
+
 	// attachedTo is the card this one is attached to, and attachments is the
 	// reverse. Both are unexported because they are two representations of one
 	// fact and only Game.Attach and Game.Unattach may write either.
 	attachedTo  CardID
 	attachments *collect.OrderedSet[CardID]
+}
+
+// grantedTriggers is one row of a card's grant overlay: the triggers one
+// granting resolution gave it. id is that resolution's timestamp, Java's row
+// key (game.getNextTimestamp, AnimateEffect.java:57), shared by every card the
+// one resolution granted to and unique per resolution, so two grants of the
+// same compiled SVar stay apart even though they hold the same
+// *compile.Ability. amounts is the granting face's SVars: a granted trigger's
+// Execute$ chain was compiled in that card's namespace
+// (AbilityUtils.getSVar(sa, s), AnimateEffectBase.java:173) and reads its
+// amounts there.
+type grantedTriggers struct {
+	id       uint64
+	triggers []*compile.Ability
+	amounts  map[string]expr.Amount
+}
+
+// withGrant returns c's grants plus g, in a fresh slice (grants' own
+// doc comment has the reason).
+func (c *Card) withGrant(g grantedTriggers) []grantedTriggers {
+	out := make([]grantedTriggers, 0, len(c.grants)+1)
+	return append(append(out, c.grants...), g)
+}
+
+// withoutGrant returns c's grants less the row keyed id, in a fresh slice,
+// and whether that row was there (Card.removePerpetual, Card.java:4595-4604).
+func (c *Card) withoutGrant(id uint64) ([]grantedTriggers, bool) {
+	out := make([]grantedTriggers, 0, len(c.grants))
+	found := false
+	for _, g := range c.grants {
+		if g.id == id {
+			found = true
+			continue
+		}
+		out = append(out, g)
+	}
+	return out, found
 }
 
 // Controller is this card's current controller: Layer 2's own GainControl$

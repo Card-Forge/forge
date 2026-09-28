@@ -167,6 +167,9 @@ type dungeonRoom struct {
 // triggers, whose overriding abilities carry RoomName$/NextRoom$.
 func dungeonRooms(d *Card) []dungeonRoom {
 	var out []dungeonRoom
+	// The dungeon's printed room table, not a trigger scan: a grant adds no
+	// room, so this reads Def directly rather than triggerFaces (ADR-0023
+	// decision 3 is about the scans).
 	for _, t := range d.Def.Faces[0].Triggers {
 		if !strings.EqualFold(t.Name, "RoomEntered") {
 			continue

@@ -141,7 +141,7 @@ func (g *Game) rolledDieTriggerHost() (name, mode string, found bool) {
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !strings.EqualFold(t.Name, "RolledDie") && !strings.EqualFold(t.Name, "RolledDieOnce") {
 							continue
@@ -214,7 +214,7 @@ func (g *Game) planarDiceTriggerMatches(roller PlayerID, face planarDieFace, sta
 				if h.Def == nil {
 					continue
 				}
-				for _, cardFace := range h.Def.Faces {
+				for cardFace := range h.triggerFaces {
 					for _, t := range cardFace.Triggers {
 						if !strings.EqualFold(t.Name, "PlanarDice") || isStaticTrigger(t) != static {
 							continue
@@ -223,7 +223,7 @@ func (g *Game) planarDiceTriggerMatches(roller PlayerID, face planarDieFace, sta
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, cardFace.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: cardFace.Amounts, Optional: optional, triggered: objects})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: cardFace.Amounts, Optional: optional, triggered: cardFace.objects(objects)})
 						}
 					}
 				}

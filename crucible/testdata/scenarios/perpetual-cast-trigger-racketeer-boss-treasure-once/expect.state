@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+ailife=20
+humangraveyard=Shatterstorm;Unsummon
+humanbattlefield=Mountain|Tapped;Forest|Tapped;Forest|Tapped;Forest|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Island|Tapped;Forest|Tapped;Forest|Tapped;Racketeer Boss|SummonSick;Grizzly Bears|SummonSick

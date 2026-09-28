@@ -158,7 +158,7 @@ func (g *Game) phaseTriggerMatches(hosts []CardID, mode string, cards []CardID) 
 		if h.Def == nil {
 			continue
 		}
-		for _, face := range h.Def.Faces {
+		for face := range h.triggerFaces {
 			for _, t := range face.Triggers {
 				if !strings.EqualFold(t.Name, mode) || !phaseTriggerZoneMatches(h, t, h.Zone) {
 					continue
@@ -167,7 +167,7 @@ func (g *Game) phaseTriggerMatches(hosts []CardID, mode string, cards []CardID) 
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+					matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 				}
 			}
 		}

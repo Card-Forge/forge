@@ -234,7 +234,7 @@ func (g *Game) setInMotionTriggerMatches(scheme CardID, static bool) []Ability {
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isSetInMotionTrigger(t) || isStaticTrigger(t) != static || !phaseTriggerZoneMatches(h, t, z) {
 							continue
@@ -243,7 +243,7 @@ func (g *Game) setInMotionTriggerMatches(scheme CardID, static bool) []Ability {
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: objects})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objects)})
 						}
 					}
 				}

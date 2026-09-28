@@ -1,0 +1,40 @@
+# Racketeer Boss (racketeer_boss.txt): its ETB lets you choose a creature
+# card in hand, which perpetually gains "When you cast this spell, create a
+# Treasure token and this spell perpetually loses this ability" (ADR-0023's
+# trigger grant, Duration$ Perpetual). The grant survives hand -> stack,
+# fires from the stack (CR 603.2, a spell's own cast trigger) and
+# LosePerpetual strips it, so recasting the card makes no second Treasure.
+startturn human
+advance 3
+# Cast Racketeer Boss; its ETB chooses Grizzly Bears (Id:2) in hand.
+tapformana human 3 R
+tapformana human 4 G
+queue cardchoice 2
+castspell human 1
+resolvestack
+# Cast Grizzly Bears: the granted trigger makes a Treasure, then loses itself.
+tapformana human 5 G
+tapformana human 6 G
+queue paygeneric G
+castspell human 2
+resolvestack
+# Shatterstorm destroys that Treasure (a token ceases to exist, CR 704.5d),
+# so any Treasure left at the end would be a second one.
+tapformana human 7 R
+tapformana human 8 R
+tapformana human 9 R
+tapformana human 10 R
+queue paygeneric R
+queue paygeneric R
+castspell human 14
+resolvestack
+# Unsummon returns the Bears to hand; recasting them triggers nothing.
+tapformana human 11 U
+queue targets 2
+castspell human 15
+resolvestack
+tapformana human 12 G
+tapformana human 13 G
+queue paygeneric G
+castspell human 2
+resolvestack

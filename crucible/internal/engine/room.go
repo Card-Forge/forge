@@ -335,7 +335,7 @@ func (g *Game) doorTriggerMatches(mode string, room CardID, p PlayerID, d Door) 
 				if h.Def == nil {
 					continue
 				}
-				for slot, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !strings.EqualFold(t.Name, mode) || !doorTriggerZoneMatches(h, t, z) {
 							continue
@@ -349,13 +349,14 @@ func (g *Game) doorTriggerMatches(mode string, room CardID, p PlayerID, d Door) 
 								continue
 							}
 						}
+						// A granted trigger (slot -1) is printed on no door.
 						if mode == "UnlockDoor" && hasAnyParam(t, "ThisDoor") &&
-							(host != room || doorAtSlot(h.doors, slot) != d) {
+							(host != room || face.slot < 0 || doorAtSlot(h.doors, face.slot) != d) {
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub,
-								Amounts: face.Amounts, Optional: optional, triggered: triggeredObjects{card: room, player: p}})
+								Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: room, player: p})})
 						}
 					}
 				}

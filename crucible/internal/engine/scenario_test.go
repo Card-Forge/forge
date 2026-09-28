@@ -297,10 +297,19 @@ func scenarioDB(t *testing.T) *compile.DB {
 	t.Helper()
 	scenarioDBOnce.Do(func() {
 		root := scenarioRepoRoot(t)
-		scenarioDBVal, scenarioDBErr = compile.LoadDB(
-			filepath.Join(root, "forge-gui", "res", "cardsfolder"),
-			filepath.Join(root, "forge-gui", "res", "lists", "TypeLists.txt"),
-		)
+		typeList := filepath.Join(root, "forge-gui", "res", "lists", "TypeLists.txt")
+		scenarioDBVal, scenarioDBErr = compile.LoadDB(filepath.Join(root, "forge-gui", "res", "cardsfolder"), typeList)
+		if scenarioDBErr != nil {
+			return
+		}
+		// res/tokenscripts too, so a scenario's Token effect (Racketeer
+		// Boss's Treasure) finds its TokenScript$.
+		tokens, err := compile.LoadTokenScripts(filepath.Join(root, "forge-gui", "res", "tokenscripts"), typeList)
+		if err != nil {
+			scenarioDBErr = err
+			return
+		}
+		scenarioDBVal = scenarioDBVal.WithTokens(tokens)
 	})
 	if scenarioDBErr != nil {
 		t.Fatalf("load corpus: %v", scenarioDBErr)

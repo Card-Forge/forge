@@ -69,7 +69,7 @@ func (runChaosEffect) Resolve(g *Game, a *Ability, c PlayerController) error {
 		// c.getTriggers() (RunChaosEffect.java:21) reads only the current
 		// state's triggers, but scanning every face is equivalent today and
 		// avoids a second card-state lookup this port has no other need for.
-		for _, face := range h.Def.Faces {
+		for face := range h.triggerFaces {
 			for _, t := range face.Triggers {
 				if !isChaosEnsuesTrigger(t) {
 					continue
@@ -78,6 +78,7 @@ func (runChaosEffect) Resolve(g *Game, a *Ability, c PlayerController) error {
 				if err != nil {
 					return fmt.Errorf("engine: RunChaos: %s: %w", h.Def.Name, err)
 				}
+				cp.triggered = face.objects(cp.triggered)
 				copies = append(copies, cp)
 			}
 		}

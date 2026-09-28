@@ -11,7 +11,7 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if err := rejectParams(a, "AnimateAll", "Zone", "ValidTgts", "Defined", "RememberAnimated"); err != nil {
 		return err
 	}
-	template, err := buildAnimate(g, a, "AnimateAll")
+	template, grants, err := buildAnimate(g, a, "AnimateAll")
 	if err != nil {
 		return err
 	}
@@ -26,6 +26,9 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	}
 	if spec != "" {
 		cards = filterValid(g, cards, spec, a.Controller, a.Source)
+	}
+	if grants != nil {
+		g.grantPerpetualTriggers(cards, grants, a.Amounts)
 	}
 	if template.empty() {
 		return nil

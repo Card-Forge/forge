@@ -197,7 +197,7 @@ func (g *Game) ringTemptsYouTriggersResolvable(p PlayerID) error {
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !strings.EqualFold(t.Name, "RingTemptsYou") || !phaseTriggerZoneMatches(h, t, z) {
 							continue

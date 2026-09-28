@@ -202,7 +202,7 @@ func (g *Game) copyTriggerWatching() bool {
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					switch strings.ToLower(t.Name) {
 					case "spellcopy", "spellcastorcopy", "spellabilitycopy":

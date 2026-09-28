@@ -195,3 +195,35 @@ func TestDrawEffectNonNumericNumCardsErrors(t *testing.T) {
 		t.Errorf("ResolveStack error = %q, want it to name NumCards$", err.Error())
 	}
 }
+
+// TestDrawEffectRespectsConditionCheckSVar proves Draw calls
+// subAbilityConditionMet the same way every other M6 effect does: this file
+// had no call to it at all until found missing (rules review on the
+// LosePerpetual/ADR-0023 landing), so a Condition*$ param on DB$ Draw
+// silently drew anyway regardless of whether the condition held.
+func TestDrawEffectRespectsConditionCheckSVar(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		name    string
+		compare string
+		want    bool
+	}{
+		{"met", "GE1", true},
+		{"unmet", "GE2", false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
+			g, p, _ := newTwoPlayerGame(t)
+			top := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Library)
+			resolveLine(t, g, p, engine.NewScriptedController(),
+				"DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | SubAbility$ DBDraw",
+				"DBDraw", "DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ "+tc.compare)
+			got := g.Card(top).Zone == engine.Hand
+			if got != tc.want {
+				t.Errorf("drew = %v, want %v (ConditionSVarCompare$ %s)", got, tc.want, tc.compare)
+			}
+		})
+	}
+}

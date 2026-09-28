@@ -172,7 +172,16 @@ func Check(cfgPath string, c *Config) (violations []Violation, ungrouped []strin
 		if ast.IsGenerated(f) {
 			continue
 		}
-		ast.Inspect(f, func(n ast.Node) bool {
+		var visit func(n ast.Node) bool
+		visit = func(n ast.Node) bool {
+			// The Sel of x.Sel is qualified -- a package member, a field or a
+			// method -- never an unqualified reference to a package-level
+			// declaration, and methods are not tracked (topLevelNames). Only
+			// x can be one: compile.Ability names no engine Ability.
+			if sel, ok := n.(*ast.SelectorExpr); ok {
+				ast.Inspect(sel.X, visit)
+				return false
+			}
 			id, ok := n.(*ast.Ident)
 			if !ok {
 				return true
@@ -190,7 +199,8 @@ func Check(cfgPath string, c *Config) (violations []Violation, ungrouped []strin
 				Ident: id.Name, FromGrp: from, ToGrp: to, DeclFile: decl,
 			})
 			return true
-		})
+		}
+		ast.Inspect(f, visit)
 	}
 	sort.Slice(violations, func(i, j int) bool {
 		if violations[i].File != violations[j].File {

@@ -74,7 +74,7 @@ func (g *Game) checkETBTriggers(controller PlayerController, entered CardID, ori
 	var matches []Ability
 	c := g.Card(entered)
 	if c.Def != nil {
-		for _, face := range c.Def.Faces {
+		for face := range c.triggerFaces {
 			for _, t := range face.Triggers {
 				if !isETBTrigger(t, origin) {
 					continue
@@ -87,7 +87,7 @@ func (g *Game) checkETBTriggers(controller PlayerController, entered CardID, ori
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: entered, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+					matches = append(matches, Ability{API: api, Source: entered, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 				}
 			}
 		}
@@ -132,7 +132,7 @@ func (g *Game) otherETBTriggerMatches(entered CardID, origin ZoneType) []Ability
 			if w.Def == nil {
 				continue
 			}
-			for _, face := range w.Def.Faces {
+			for face := range w.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isETBTrigger(t, origin) {
 						continue
@@ -145,7 +145,7 @@ func (g *Game) otherETBTriggerMatches(entered CardID, origin ZoneType) []Ability
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -179,7 +179,7 @@ func (g *Game) checkDiesTriggers(controller PlayerController, left CardID) {
 		c = snap
 	}
 	if c.Def != nil {
-		for _, face := range c.Def.Faces {
+		for face := range c.triggerFaces {
 			for _, t := range face.Triggers {
 				if !isDiesTrigger(t) {
 					continue
@@ -192,7 +192,7 @@ func (g *Game) checkDiesTriggers(controller PlayerController, left CardID) {
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 				}
 			}
 		}
@@ -235,7 +235,7 @@ func (g *Game) otherDiesTriggerMatches(left CardID) []Ability {
 			if w.Def == nil {
 				continue
 			}
-			for _, face := range w.Def.Faces {
+			for face := range w.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isDiesTrigger(t) {
 						continue
@@ -248,7 +248,7 @@ func (g *Game) otherDiesTriggerMatches(left CardID) []Ability {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -302,7 +302,7 @@ func (g *Game) checkAttacksTriggers(controller PlayerController, attacker CardID
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isAttacksTrigger(t) {
 						continue
@@ -341,7 +341,7 @@ func (g *Game) checkAttacksTriggers(controller PlayerController, attacker CardID
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-							triggered: triggeredObjects{attacker: attacker}})
+							triggered: face.objects(triggeredObjects{attacker: attacker})})
 					}
 				}
 			}
@@ -442,38 +442,73 @@ func (g *Game) checkSpellCastTriggers(controller PlayerController, cast CardID, 
 	spellID, _ := g.spellItemOf(cast)
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
-			h := g.Card(host)
-			if h.Def == nil {
+			matches = g.appendSpellCastMatches(matches, host, c, activator, spellID, false)
+		}
+	}
+	// The spell's own triggers, from the stack: traitHosts never covers it.
+	if c.Zone == Stack {
+		matches = g.appendSpellCastMatches(matches, cast, c, activator, spellID, true)
+	}
+	g.pushTriggeredAbilities(controller, matches)
+}
+
+// appendSpellCastMatches appends host's SpellCast triggers that fire for the
+// spell c. onStack marks host as the spell itself, on the stack: CR 603.2's
+// "when you cast this spell" (Racketeer Boss's granted trigger, Abby,
+// Merciless Soldier's printed one) triggers from there. Java needs no special
+// case -- TriggerHandler collects every card's triggers in every zone
+// (TriggerHandler.java:193-201) and TriggerReplacementBase.zonesCheck
+// (TriggerReplacementBase.java:61-65) passes a trigger with no TriggerZones$
+// in any zone -- so a stack host's trigger fires when it names no
+// TriggerZones$ or one naming Stack (phaseTriggerZoneMatches). Battlefield
+// and Command hosts keep the ungated scan they always had.
+//
+// A stack host's trigger whose Execute$ is an AB$ with its own Cost$ is
+// skipped: a triggered ability's Cost$ is neither asked for nor paid
+// anywhere in this port yet (game-state.md, "Not ported yet"), and firing it
+// would hand out Bearer of Silence's "you may pay {1}{C}" edict, Eldrazi
+// Obligator's steal and 4 more cast triggers for free. They stay unfired,
+// as before the stack was scanned at all.
+//
+// Every face's triggers are read (triggerFaces), where Java reads only the
+// current state's. No real self-cast trigger sits on a face other than the
+// one cast: the 3 multi-face cards among them (Bruna, the Fading Light;
+// Lae'zel, Githyanki Warrior; Drowner of Truth) print it on the front face,
+// and their other faces are melded, specialized or a land, never cast.
+func (g *Game) appendSpellCastMatches(matches []Ability, host CardID, c *Card, activator PlayerID, spellID StackItemID, onStack bool) []Ability {
+	h := g.Card(host)
+	if h.Def == nil {
+		return matches
+	}
+	for face := range h.triggerFaces {
+		for _, t := range face.Triggers {
+			if !isSpellCastTrigger(t) {
 				continue
 			}
-			for _, face := range h.Def.Faces {
-				for _, t := range face.Triggers {
-					if !isSpellCastTrigger(t) {
-						continue
-					}
-					if hasAnyParam(t, "ValidSA", "ValidSAonCard", "TargetsValid", "CanTargetOtherCondition",
-						"IsSingleTarget", "NoColoredMana", "SnowSpentForCardsColor",
-						"TriggersWhenSpent", "ActivatorThisTurnCast", "ActivatorThisTurnCastEach") {
-						continue
-					}
-					if hasAnyParam(t, "HasXManaCost") && (c.Def == nil || c.Def.Faces[0].ManaCost.CountX() == 0) {
-						continue
-					}
-					if validCard, ok := t.Param("ValidCard"); ok && !Matches(g, c, valid.Parse(validCard), h.Controller(), host) {
-						continue
-					}
-					if !matchesActivatingPlayer(g, t, activator, h.Controller(), host) {
-						continue
-					}
-					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-							triggered: triggeredObjects{spellAbility: spellID}})
-					}
-				}
+			if onStack && (!phaseTriggerZoneMatches(h, t, Stack) || executeHasCost(t)) {
+				continue
+			}
+			if hasAnyParam(t, "ValidSA", "ValidSAonCard", "TargetsValid", "CanTargetOtherCondition",
+				"IsSingleTarget", "NoColoredMana", "SnowSpentForCardsColor",
+				"TriggersWhenSpent", "ActivatorThisTurnCast", "ActivatorThisTurnCastEach") {
+				continue
+			}
+			if hasAnyParam(t, "HasXManaCost") && (c.Def == nil || c.Def.Faces[0].ManaCost.CountX() == 0) {
+				continue
+			}
+			if validCard, ok := t.Param("ValidCard"); ok && !Matches(g, c, valid.Parse(validCard), h.Controller(), host) {
+				continue
+			}
+			if !matchesActivatingPlayer(g, t, activator, h.Controller(), host) {
+				continue
+			}
+			if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
+				matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
+					triggered: face.objects(triggeredObjects{spellAbility: spellID})})
 			}
 		}
 	}
-	g.pushTriggeredAbilities(controller, matches)
+	return matches
 }
 
 // matchesActivatingPlayer is ValidActivatingPlayer's own check, ported from
@@ -534,7 +569,7 @@ func (g *Game) checkBlocksTriggers(controller PlayerController, blk Block) {
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isBlocksTrigger(t) {
 						continue
@@ -551,7 +586,7 @@ func (g *Game) checkBlocksTriggers(controller PlayerController, blk Block) {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -606,7 +641,7 @@ func (g *Game) checkAttackerBlockedTriggers(controller PlayerController, attacke
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !strings.EqualFold(t.Name, "AttackerBlocked") {
 						continue
@@ -631,7 +666,7 @@ func (g *Game) checkAttackerBlockedTriggers(controller PlayerController, attacke
 						}
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -667,7 +702,7 @@ func (g *Game) checkAttackerBlockedByCreatureTriggers(controller PlayerControlle
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !strings.EqualFold(t.Name, "AttackerBlockedByCreature") {
 						continue
@@ -690,7 +725,7 @@ func (g *Game) checkAttackerBlockedByCreatureTriggers(controller PlayerControlle
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-							triggered: triggeredObjects{blocker: blk.Blocker}})
+							triggered: face.objects(triggeredObjects{blocker: blk.Blocker})})
 					}
 				}
 			}
@@ -750,7 +785,7 @@ func (g *Game) checkDamageDoneTriggersToCard(controller PlayerController, source
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !damageDoneMatches(g, t, source, h, host, isCombat, amount, toughness, hasToughness) {
 						continue
@@ -760,7 +795,7 @@ func (g *Game) checkDamageDoneTriggersToCard(controller PlayerController, source
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: damageSourceObjects(g, source)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageSourceObjects(g, source))})
 					}
 				}
 			}
@@ -777,7 +812,7 @@ func (g *Game) checkDamageDoneTriggersToPlayer(controller PlayerController, sour
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !damageDoneMatches(g, t, source, h, host, isCombat, amount, 0, false) {
 						continue
@@ -789,7 +824,7 @@ func (g *Game) checkDamageDoneTriggersToPlayer(controller PlayerController, sour
 						}
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: damageSourceObjects(g, source)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageSourceObjects(g, source))})
 					}
 				}
 			}
@@ -976,7 +1011,7 @@ func (g *Game) checkDamageDoneOnceTriggers(controller PlayerController, table da
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isDamageDoneOnceTrigger(t) {
 							continue
@@ -999,7 +1034,7 @@ func (g *Game) checkDamageDoneOnceTriggers(controller PlayerController, table da
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -1088,7 +1123,7 @@ func (g *Game) checkDamageDealtOnceTriggers(controller PlayerController, table d
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isDamageDealtOnceTrigger(t) {
 							continue
@@ -1108,7 +1143,7 @@ func (g *Game) checkDamageDealtOnceTriggers(controller PlayerController, table d
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -1160,7 +1195,7 @@ func (g *Game) checkDamageAllTriggers(controller PlayerController, table damageT
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isDamageAllTrigger(t) {
 						continue
@@ -1172,7 +1207,7 @@ func (g *Game) checkDamageAllTriggers(controller PlayerController, table damageT
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -1228,14 +1263,14 @@ func (g *Game) checkDiscardedTriggers(controller PlayerController, card CardID, 
 	var matches []Ability
 	c := g.Card(card)
 	if c.Def != nil {
-		for _, face := range c.Def.Faces {
+		for face := range c.triggerFaces {
 			for _, t := range face.Triggers {
 				if !discardedTriggerMatches(g, t, c, c.Controller(), card, player) {
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
 					matches = append(matches, Ability{API: api, Source: card, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-						triggered: triggeredObjects{card: card}})
+						triggered: face.objects(triggeredObjects{card: card})})
 				}
 			}
 		}
@@ -1259,14 +1294,14 @@ func (g *Game) otherDiscardedTriggerMatches(card CardID, player PlayerID) []Abil
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !discardedTriggerMatches(g, t, c, h.Controller(), host, player) {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-							triggered: triggeredObjects{card: card}})
+							triggered: face.objects(triggeredObjects{card: card})})
 					}
 				}
 			}
@@ -1342,13 +1377,13 @@ func (g *Game) checkSacrificedTriggers(controller PlayerController, card CardID,
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !sacrificedTriggerMatches(g, t, c, h.Controller(), host, player) {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -1426,7 +1461,7 @@ func (g *Game) checkAbandonedTriggers(controller PlayerController, abandoned Car
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isAbandonedTrigger(t) {
 						continue
@@ -1438,7 +1473,7 @@ func (g *Game) checkAbandonedTriggers(controller PlayerController, abandoned Car
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -1494,7 +1529,7 @@ func (g *Game) checkChangesZoneAllTriggers(controller PlayerController, cards []
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isChangesZoneAllTrigger(t) {
 						continue
@@ -1509,7 +1544,7 @@ func (g *Game) checkChangesZoneAllTriggers(controller PlayerController, cards []
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -1578,7 +1613,7 @@ func (g *Game) checkTapsTriggers(controller PlayerController, card CardID, playe
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isTapsTrigger(t) {
 						continue
@@ -1601,7 +1636,7 @@ func (g *Game) checkTapsTriggers(controller PlayerController, card CardID, playe
 						}
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -1660,7 +1695,7 @@ func (g *Game) tapsForManaMatches(card CardID, player PlayerID, objects triggere
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isTapsForManaTrigger(t) || isStaticTrigger(t) != static {
 						continue
@@ -1678,7 +1713,7 @@ func (g *Game) tapsForManaMatches(card CardID, player PlayerID, objects triggere
 						}
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: objects})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objects)})
 					}
 				}
 			}
@@ -1717,7 +1752,7 @@ func (g *Game) checkUntapsTriggers(controller PlayerController, card CardID) {
 			if h.Def == nil {
 				continue
 			}
-			for _, face := range h.Def.Faces {
+			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isUntapsTrigger(t) {
 						continue
@@ -1726,7 +1761,7 @@ func (g *Game) checkUntapsTriggers(controller PlayerController, card CardID) {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
@@ -1817,7 +1852,7 @@ func (g *Game) checkPhaseTriggers(controller PlayerController) {
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isPhaseTrigger(t) {
 							continue
@@ -1839,7 +1874,7 @@ func (g *Game) checkPhaseTriggers(controller PlayerController) {
 							}
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -2227,15 +2262,20 @@ func triggerCommonRequirementsMet(g *Game, host *Card, amounts map[string]expr.A
 // (host's own controller only), anything else -- "Any", the corpus's own
 // overwhelming default, or absent -- every player, Java's own three
 // additive You/Opponent/Allies blocks collapsed to the one partition they
-// produce for a single-valued param. PresentDefined$ skips the whole line:
-// no Defined$-to-cards resolver exists for an arbitrary reference yet.
+// produce for a single-valued param. definedKey (PresentDefined$/
+// ConditionDefined$) Remembered counts the host's remembered objects instead
+// (rememberedPresentMatches); any other value skips the whole line: no
+// Defined$-to-cards resolver exists for an arbitrary reference yet.
 func isPresentMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability, isKey, compareKey, definedKey, zoneKey, playerKey string) bool {
 	spec, ok := t.Param(isKey)
 	if !ok {
 		return true
 	}
-	if _, ok := t.Param(definedKey); ok {
-		return false
+	if defined, ok := t.Param(definedKey); ok {
+		if defined != "Remembered" {
+			return false
+		}
+		return rememberedPresentMatches(g, host, amounts, t, spec, compareKey)
 	}
 	var zones []ZoneType
 	if zoneList, ok := t.Param(zoneKey); ok {
@@ -2269,6 +2309,52 @@ func isPresentMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *co
 			n++
 		}
 	}
+	return presentCountMatches(g, host, amounts, t, compareKey, n)
+}
+
+// rememberedPresentMatches is the Defined$ Remembered branch of
+// isPresentMatches: the candidates are what the host card remembers, not a
+// zone scan -- SpellAbilityCondition.java:350-351's
+// AbilityUtils.getDefinedObjects(host, "Remembered", sa), whose restriction
+// filter (GameObjectPredicates.restriction, :365) counts a remembered player
+// too when the spec names players (3 real lines: ConditionPresent$ Player).
+// Pass the Torch's "if you do" (ConditionDefined$ Remembered |
+// ConditionPresent$ Card after RememberPlayed$) is the shape. Remembered is
+// the one Defined$ value read here; every other one still reads as unmet.
+func rememberedPresentMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability, spec, compareKey string) bool {
+	parsed := valid.Parse(spec)
+	n := 0
+	for _, e := range host.Memory.Remembered() {
+		if id, ok := e.AsCard(); ok {
+			if Matches(g, g.Card(id), parsed, host.Controller(), host.ID) {
+				n++
+			}
+			continue
+		}
+		if pid, ok := e.AsPlayer(); ok {
+			if matched, recognized := matchesPlayerSpec(g, pid, host.Controller(), host.ID, spec); recognized && matched {
+				n++
+			}
+		}
+	}
+	return presentCountMatches(g, host, amounts, t, compareKey, n)
+}
+
+// executeHasCost reports whether t's Execute$ ability names its own Cost$.
+func executeHasCost(t *compile.Ability) bool {
+	for _, sub := range t.Subs {
+		if strings.EqualFold(sub.Key, "Execute") {
+			if _, ok := sub.Ability.Param("Cost"); ok {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// presentCountMatches compares n, the count of present objects, against
+// compareKey (GE1 when absent), its right side a literal or a named SVar.
+func presentCountMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability, compareKey string, n int) bool {
 	compare, ok := t.Param(compareKey)
 	if !ok {
 		compare = "GE1"
@@ -2467,6 +2553,47 @@ func triggerPhasesCheck(g *Game, host *Card, t *compile.Ability) bool {
 // neither is reachable against the real corpus today, but a card cannot be
 // trusted not to be the first, PORT-8), or one naming an OptionalDecider$
 // this port cannot resolve (triggerIsOptional's own doc comment).
+// triggerFace is one source of a card's triggers: a face of its current
+// definition, or one row of its grant overlay (grantedTriggers, card.go).
+// Triggers and Amounts read as a compile.Face's do; slot is the face's index
+// in Def.Faces, -1 for a grant; grant is the row's id, 0 for a face.
+type triggerFace struct {
+	Triggers []*compile.Ability
+	Amounts  map[string]expr.Amount
+	slot     int
+	grant    uint64
+}
+
+// objects returns o stamped with the grant the face's triggers came from:
+// every trigger scan pushes its matches with it, so LosePerpetual can tell
+// which grant fired (triggeredObjects.grant).
+func (f triggerFace) objects(o triggeredObjects) triggeredObjects {
+	o.grant = f.grant
+	return o
+}
+
+// triggerFaces yields every source of c's triggers, ADR-0023 decision 3's
+// accessor: each face of the current definition in Def.Faces order, then
+// each grant row in ascending id -- the definition then Layer-6 timestamp
+// order Java merges them in (Card.java:4913-4920). Every trigger scan ranges
+// over this rather than Def.Faces, so a granted trigger is visible to all of
+// them at once. With no grant it yields exactly Def.Faces.
+func (c *Card) triggerFaces(yield func(triggerFace) bool) {
+	if c.Def != nil {
+		for i := range c.Def.Faces {
+			f := &c.Def.Faces[i]
+			if !yield(triggerFace{Triggers: f.Triggers, Amounts: f.Amounts, slot: i}) {
+				return
+			}
+		}
+	}
+	for _, g := range c.grants {
+		if !yield(triggerFace{Triggers: g.triggers, Amounts: g.amounts, slot: -1, grant: g.id}) {
+			return
+		}
+	}
+}
+
 func triggerEffectAPI(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability) (*compile.Ability, APIType, bool, bool) {
 	if !triggerPhasesCheck(g, host, t) {
 		return nil, 0, false, false
@@ -2582,7 +2709,7 @@ func (g *Game) checkAttackersDeclaredTrigger(controller PlayerController) {
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isAttackersDeclaredTrigger(t) {
 							continue
@@ -2594,7 +2721,7 @@ func (g *Game) checkAttackersDeclaredTrigger(controller PlayerController) {
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -2641,7 +2768,7 @@ func (g *Game) checkAttackersDeclaredOneTargetTrigger(controller PlayerControlle
 					if h.Def == nil {
 						continue
 					}
-					for _, face := range h.Def.Faces {
+					for face := range h.triggerFaces {
 						for _, t := range face.Triggers {
 							if !isAttackersDeclaredOneTargetTrigger(t) {
 								continue
@@ -2653,7 +2780,7 @@ func (g *Game) checkAttackersDeclaredOneTargetTrigger(controller PlayerControlle
 								continue
 							}
 							if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 							}
 						}
 					}
@@ -2860,7 +2987,7 @@ func (g *Game) checkDrawnTriggers(controller PlayerController, drawer PlayerID, 
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isDrawnTrigger(t) {
 							continue
@@ -2887,7 +3014,7 @@ func (g *Game) checkDrawnTriggers(controller PlayerController, drawer PlayerID, 
 							}
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -2957,7 +3084,7 @@ func (g *Game) checkLifeGainedTriggers(controller PlayerController, gainer Playe
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isLifeGainedTrigger(t) {
 							continue
@@ -2980,7 +3107,7 @@ func (g *Game) checkLifeGainedTriggers(controller PlayerController, gainer Playe
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -3039,7 +3166,7 @@ func (g *Game) checkLandPlayedTriggers(controller PlayerController, card CardID,
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isLandPlayedTrigger(t) {
 							continue
@@ -3064,7 +3191,7 @@ func (g *Game) checkLandPlayedTriggers(controller PlayerController, card CardID,
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -3173,7 +3300,7 @@ func (g *Game) checkBecomesTargetTriggers(targets []EntityID, isSpellSource bool
 				if w.Def == nil {
 					continue
 				}
-				for _, face := range w.Def.Faces {
+				for face := range w.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isBecomesTargetTrigger(t) {
 							continue
@@ -3193,7 +3320,7 @@ func (g *Game) checkBecomesTargetTriggers(targets []EntityID, isSpellSource bool
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}
@@ -3483,7 +3610,7 @@ func hasChaosEnsuesTrigger(c *Card) bool {
 	if c.Def == nil {
 		return false
 	}
-	for _, face := range c.Def.Faces {
+	for face := range c.triggerFaces {
 		for _, t := range face.Triggers {
 			if isChaosEnsuesTrigger(t) {
 				return true
@@ -3528,7 +3655,7 @@ func (g *Game) appendChaosEnsuesMatches(matches []Ability, host CardID, player P
 		return matches
 	}
 	objects := triggeredObjects{player: player}
-	for _, face := range h.Def.Faces {
+	for face := range h.triggerFaces {
 		for _, t := range face.Triggers {
 			if !isChaosEnsuesTrigger(t) || isStaticTrigger(t) != static {
 				continue
@@ -3543,7 +3670,7 @@ func (g *Game) appendChaosEnsuesMatches(matches []Ability, host CardID, player P
 				}
 			}
 			if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-				matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: objects})
+				matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objects)})
 			}
 		}
 	}
@@ -3561,7 +3688,7 @@ func (g *Game) planeswalkTriggerMatches(mode string, cards []CardID, static bool
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !strings.EqualFold(t.Name, mode) || isStaticTrigger(t) != static {
 							continue
@@ -3573,7 +3700,7 @@ func (g *Game) planeswalkTriggerMatches(mode string, cards []CardID, static bool
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 						}
 					}
 				}

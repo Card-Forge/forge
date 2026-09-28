@@ -203,8 +203,8 @@ state-based actions, combat, mulligans, the valid-string evaluator, mana pool an
 Instants/Sorceries through the stack (ADR-0018), trigger firing, replacement effects, block legality, continuous effects
 across all eight layers (partial), targeting, SubAbility chaining, last-known information, activated abilities.
 
-M6 in progress: 181 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
-`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 22, 7 have real corpus lines and are listed by
+M6 in progress: 182 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
+`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 21, 6 have real corpus lines and are listed by
 `scripts/unported-apis.sh` as deliberately deferred (Un-set/Alchemy shapes, plus `ChangeText`/`ControlPlayer`/`Meld`);
 the rest (`Mutate`, `Haunt`, `Bond`, `Encode`, `InternalIgnoreEffect`/`InternalLegendaryRule`/`InternalRadiation`, ...)
 have zero real `AB$`/`SP$`/`DB$` lines under that exact name and never surface in `unported-apis.sh`'s corpus-driven

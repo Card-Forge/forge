@@ -261,7 +261,7 @@ func (g *Game) checkReblockTriggerKeys(join []Block) error {
 				if h.Def == nil {
 					continue
 				}
-				for _, face := range h.Def.Faces {
+				for face := range h.triggerFaces {
 					for _, t := range face.Triggers {
 						if !isBlocksTrigger(t) {
 							continue

@@ -964,6 +964,7 @@ func (g *Game) Clone() *Game {
 		c.ControlMod = g.cards[i].ControlMod.clone()
 		c.tempControllers = append([]ControlEffect(nil), g.cards[i].tempControllers...)
 		c.copies = append([]copyEffect(nil), g.cards[i].copies...)
+		c.grants = append([]grantedTriggers(nil), g.cards[i].grants...)
 		if g.cards[i].svars != nil {
 			c.svars = make(map[string]int, len(g.cards[i].svars))
 			for k, v := range g.cards[i].svars {
@@ -987,6 +988,7 @@ func (g *Game) Clone() *Game {
 		s.KeywordMod = snap.KeywordMod.clone()
 		s.ControlMod = snap.ControlMod.clone()
 		s.copies = append([]copyEffect(nil), snap.copies...)
+		s.grants = append([]grantedTriggers(nil), snap.grants...)
 		if snap.attachments != nil {
 			s.attachments = snap.attachments.Clone()
 		}

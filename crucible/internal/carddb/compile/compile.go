@@ -543,6 +543,9 @@ func (c *faceCompiler) line(text string, want Record) (*Ability, error) {
 		for _, name := range names {
 			sub, err := c.reference(p.Key, name)
 			if err != nil {
+				if isAnimateGrant(ability, p) && c.regrants(err, name) {
+					continue
+				}
 				return nil, err
 			}
 			ability.Subs = append(ability.Subs, sub)
@@ -554,7 +557,7 @@ func (c *faceCompiler) line(text string, want Record) (*Ability, error) {
 // reference compiles the SVar a param names.
 func (c *faceCompiler) reference(key, name string) (SubRef, error) {
 	if c.open[name] {
-		return SubRef{}, fmt.Errorf("%w: %s revisits %q", ErrCycle, key, name)
+		return SubRef{}, &cycleError{key: key, name: name}
 	}
 	body, ok := c.face.SVars.Get(name)
 	if !ok {
@@ -581,6 +584,36 @@ func (c *faceCompiler) reference(key, name string) (SubRef, error) {
 	return SubRef{Key: key, SVar: name, Ability: ability}, nil
 }
 
+// cycleError is ErrCycle naming the SVar the chain came back to.
+type cycleError struct{ key, name string }
+
+func (e *cycleError) Error() string {
+	return fmt.Sprintf("%v: %s revisits %q", ErrCycle, e.key, e.name)
+}
+
+func (e *cycleError) Unwrap() error { return ErrCycle }
+
+// isAnimateGrant reports whether p is an Animate/AnimateAll `Triggers$`:
+// the triggers it grants (animateAPIs).
+func isAnimateGrant(a *Ability, p vocab.Param) bool {
+	return strings.EqualFold(p.Key, "Triggers") && animateAPIs[a.Name]
+}
+
+// regrants reports whether err, from following grant, is a granted trigger
+// coming back to grant itself: its chain revisits grant or an SVar on the
+// chain that granted it (Snarlfang Vermin's CombatTrig runs TrigSuspect,
+// whose DBAnimate grants CombatTrig: "It perpetually gains this ability").
+// Java parses a grant's SVar only when the grant applies, so the loop never
+// closes there; a tree cannot hold it. The grant is left unfollowed rather
+// than failing the card, and the engine, seeing fewer compiled grants than
+// names, refuses it when applied (ADR-0023 decision 4, animate.go). reference
+// has already unwound its own open marks when this runs, so c.open is the
+// granting chain's.
+func (c *faceCompiler) regrants(err error, grant string) bool {
+	var cyc *cycleError
+	return errors.As(err, &cyc) && (cyc.name == grant || c.open[cyc.name])
+}
+
 // references returns the SVar names a param holds, and whether the param names
 // abilities at all.
 //
@@ -589,7 +622,9 @@ func (c *faceCompiler) reference(key, name string) (SubRef, error) {
 //   - `SubAbility$ X` and the additional-ability keys name one SVar.
 //   - `Choices$ A,B,C` names a list, and only for the five APIs that read it.
 //   - `StaticAbilities$`/`Triggers$`/`ReplacementEffects$ A,B` name a list,
-//     and only for Effect (EffectEffect.java).
+//     and only for Effect (EffectEffect.java). `Triggers$` also names one on
+//     Animate/AnimateAll (AnimateEffectBase.doAnimate), and nothing else of
+//     theirs is followed yet (ADR-0023).
 //   - `ResultSubAbilities$ 1:A,2:B` names `key:svar` pairs, and only for
 //     RollDice.
 //   - `GainTextAbilities$ A & B` names a list, and only on a continuous
@@ -607,6 +642,8 @@ func (c *faceCompiler) references(a *Ability, p vocab.Param) ([]string, bool) {
 	case effectTraitKeys[strings.ToLower(p.Key)] && a.Name == "Effect":
 		return splitTrim(p.Value, ","), true
 	case cloneTraitKeys[strings.ToLower(p.Key)] && a.Name == "Clone":
+		return splitTrim(p.Value, ","), true
+	case isAnimateGrant(a, p):
 		return splitTrim(p.Value, ","), true
 	case strings.EqualFold(p.Key, "GainTextAbilities") && a.Record == StaticEffect:
 		// StaticAbilityContinuous.java's own GainTextOf$ branch splits on
@@ -722,6 +759,20 @@ var cloneTraitKeys = map[string]bool{
 	"addtriggers":        true,
 	"addabilities":       true,
 	"addstaticabilities": true,
+}
+
+// animateAPIs are the APIs whose `Triggers$` names the SVars holding the
+// triggers they grant: AnimateEffect.java and AnimateAllEffect.java split it
+// on "," and AnimateEffectBase.doAnimate parses each name with
+// TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), ...)
+// (AnimateEffect.java:128-130, AnimateAllEffect.java:109-110,
+// AnimateEffectBase.java:170-174). Compiled here so a granted trigger is a
+// compiled ability, never script text parsed at resolution (PORT-2, ADR-0023
+// decision 1). Their Abilities$/staticAbilities$/Replacements$ stay
+// unfollowed until the engine can apply them (animate.go rejects each).
+var animateAPIs = map[string]bool{
+	"Animate":    true,
+	"AnimateAll": true,
 }
 
 // choiceAPIs are the APIs whose `Choices$` names sub-abilities.

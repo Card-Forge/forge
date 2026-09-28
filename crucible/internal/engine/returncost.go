@@ -88,7 +88,7 @@ func (g *Game) checkReturnedTriggers(controller PlayerController, left CardID) {
 		c = snap
 	}
 	if c.Def != nil {
-		for _, face := range c.Def.Faces {
+		for face := range c.triggerFaces {
 			for _, t := range face.Triggers {
 				if !isReturnedTrigger(t) {
 					continue
@@ -101,7 +101,7 @@ func (g *Game) checkReturnedTriggers(controller PlayerController, left CardID) {
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 				}
 			}
 		}
@@ -128,7 +128,7 @@ func (g *Game) otherReturnedTriggerMatches(left CardID) []Ability {
 			if w.Def == nil {
 				continue
 			}
-			for _, face := range w.Def.Faces {
+			for face := range w.triggerFaces {
 				for _, t := range face.Triggers {
 					if !isReturnedTrigger(t) {
 						continue
@@ -141,7 +141,7 @@ func (g *Game) otherReturnedTriggerMatches(left CardID) []Ability {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional})
+						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
 					}
 				}
 			}
