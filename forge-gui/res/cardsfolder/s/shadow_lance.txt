@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
 A:AB$ Pump | Cost$ 1 B | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Enchanted creature gets +2/+2 until end of turn.
 Oracle:Enchant creature\nEnchanted creature has first strike.\n{1}{B}: Enchanted creature gets +2/+2 until end of turn.

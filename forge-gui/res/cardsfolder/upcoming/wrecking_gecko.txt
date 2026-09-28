@@ -1,0 +1,7 @@
+Name:Wrecking Gecko
+ManaCost:4 G
+Types:Artifact Creature Lizard Construct
+PT:5/5
+K:Ward:2
+A:AB$ Pump | Cost$ 6 G G | Defined$ Self | NumAtt$ +4 | NumDef$ +4 | KW$ Trample | SpellDescription$ This creature gets +4/+4 and gains trample until end of turn.
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\n{6}{G}{G}: This creature gets +4/+4 and gains trample until end of turn.

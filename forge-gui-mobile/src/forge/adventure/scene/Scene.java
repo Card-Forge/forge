@@ -123,22 +123,30 @@ public abstract class Scene implements Disposable {
     }
 
     private ShaderDrawable lastPreviewDrawable;
+    private float uniformWidth = 0;
+    private float uniformHeight = 0;
+    private float uniformPixelSize = 0;
     // move here so Scene can access it
     public ShaderDrawable getLastPreviewDrawable(TextureRegion region) {
+        float width = getIntendedWidth();
+        float height = getIntendedHeight();
+        float mul = 1.2f;
+        float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
+
+        // sync to local vars
+        this.uniformWidth = width;
+        this.uniformHeight = height;
+        this.uniformPixelSize = pixelSize;
+
         if (lastPreviewDrawable == null) {
-            // initialize
-            float mul = 1.2f;
-            float width = getIntendedWidth();
-            float height = getIntendedHeight();
-            float pixelSize = width > height ? (width / height) * mul : (height / width) * mul;
-            // set default shader parameters
             lastPreviewDrawable = new ShaderDrawable(ShaderUtil.getInstance().getShaderPix());
             lastPreviewDrawable.setUniformSetter(shader -> {
-                shader.setUniformf("u_resolution", width, height);
-                shader.setUniformf("u_pixelSize", pixelSize);
+                shader.setUniformf("u_resolution", this.uniformWidth, this.uniformHeight);
+                shader.setUniformf("u_pixelSize", this.uniformPixelSize);
                 shader.setUniformf("u_bias", 0.8f);
             });
         }
+
         lastPreviewDrawable.setRegion(region);
         return lastPreviewDrawable;
     }

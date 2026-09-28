@@ -1,0 +1,8 @@
+Name:Jund 'Em Out
+ManaCost:B R G
+Types:Sorcery
+K:Retrace
+A:SP$ NameCard | AtRandom$ True | ChooseFromList$ Abrupt Decay,Blightning,Bloodbraid Elf,Lightning Bolt,Liliana of the Veil,Tarmogoyf | SubAbility$ DBCast | StackDescription$ SpellDescription | SpellDescription$ Choose one at random. Create a copy of the chosen card. You may cast the copy without paying its mana cost.\n• Abrupt Decay\n• Blightning\n• Bloodbraid Elf\n• Lightning Bolt\n• Liliana of the Veil\n• Tarmogoyf
+SVar:DBCast:DB$ Play | WithoutManaCost$ True | CopyFromChosenName$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+Oracle:Retrace (Sorry, no room for reminder text.)\nChoose one at random. Create a copy of the chosen card. You may cast the copy without paying its mana cost.\n• Abrupt Decay\n• Blightning\n• Bloodbraid Elf\n• Lightning Bolt\n• Liliana of the Veil\n• Tarmogoyf

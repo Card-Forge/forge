@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 K:Cumulative upkeep:UB
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLoseLife | ValidCard$ Card.Self | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:TriggeredCard$CardCounters.AGE/Times.2

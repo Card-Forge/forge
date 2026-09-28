@@ -3,6 +3,6 @@ ManaCost:U U
 Types:Enchantment Aura
 K:Enchant:Enchantment
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted enchantment.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | GainControl$ You | Description$ You control enchanted enchantment.
 AI:RemoveDeck:All
 Oracle:Enchant enchantment\nYou control enchanted enchantment.

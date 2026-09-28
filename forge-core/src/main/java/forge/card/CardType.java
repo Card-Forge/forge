@@ -325,6 +325,19 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
+    public Set<String> getPlaneswalkerTypes() {
+        final Set<String> walkerTypes = Sets.newLinkedHashSet();
+        if (isPlaneswalker()) {
+            for (final String t : subtypes) {
+                if (isAPlaneswalkerType(t)) {
+                    walkerTypes.add(t);
+                }
+            }
+        }
+        return walkerTypes;
+    }
+
+    @Override
     public Set<String> getLandTypes() {
         final Set<String> landTypes = Sets.newLinkedHashSet();
         if (isLand()) {

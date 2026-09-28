@@ -101,6 +101,7 @@ Modern Horizons 2, 3/6/MH2, MH2
 Adventures in the Forgotten Realms, 3/6/AFR, AFR
 Innistrad: Midnight Hunt, 3/6/MID, MID
 Innistrad: Crimson Vow, 3/6/VOW, VOW
+Alchemy: Innistrad, 3/6/ISD, YMID
 Innistrad: Double Feature, 3/6/MID, DBL
 Kamigawa: Neon Dynasty, 3/6/NEO, NEO
 Alchemy: Kamigawa, 3/6/NEO, YNEO
@@ -127,30 +128,40 @@ March of the Machine Jumpstart, -/2/MOM, Meta-Choose(S(MOM Brood 1)Brood 1;S(MOM
 The Lord of the Rings: Tales of Middle-earth, 3/6/LTR, LTR
 The Lord of the Rings: Tales of Middle-earth Jumpstart, -/2/LTR, Meta-Choose(S(LTR Courageous 1)Courageous 1;S(LTR Courageous 2)Courageous 2;S(LTR Tricksy 1)Tricksy 1;S(LTR Tricksy 2)Tricksy 2;S(LTR Mordor 1)Mordor 1;S(LTR Mordor 2)Mordor 1;S(LTR Marauders 1)Marauders 1;S(LTR Marauders 2)Marauders 1;S(LTR Journey 1)Journey 1;S(LTR Journey 2)Journey 2)Themes
 Wilds of Eldraine, 3/6/WOE, WOE
-Alchemy: Eldraine, 3/6/WOE, YWOE
+Alchemy: Wilds of Eldraine, 3/6/WOE, YWOE
 The Lost Caverns of Ixalan, 3/6/LCI, LCI
 Alchemy: Ixalan, 3/6/LCI, YLCI
 Ravnica Remastered, 3/6/RAV, RVR
 Murders at Karlov Manor, 3/6/MKM, MKM
+Alchemy: Murders at Karlov Manor, 3/6/MKM, YMKM
 Outlaws of Thunder Junction, 3/6/OTJ, OTJ
+Alchemy: Outlaws of Thunder Junction, 3/6/OTJ, YOTJ
 Modern Horizons 3, 3/6/MH3, MH3
 Bloomburrow, 3/6/BLB, BLB
+Alchemy: Bloomburrow, 3/6/BLB, YBLB
 Duskmourn: House of Horror, 3/6/DSK, DSK
+Alchemy: Duskmourn, 3/6/DSK, YDSK
 Foundations, 3/6/FDN, FDN
 Jumpstart 2025, -/2/J25, Meta-Choose(S(J25 Prideful)Prideful;S(J25 Giddyap)Giddyap;S(J25 Angels 1)Angels 1;S(J25 Angels 2)Angels 2;S(J25 Heroes 1)Heroes 1;S(J25 Heroes 2)Heroes 2;S(J25 Legion 1)Legion 1;S(J25 Legion 2)Legion 2;S(J25 Healers 1)Healers 1;S(J25 Healers 2)Healers 2;S(J25 Healers 3)Healers 3;S(J25 Healers 4)Healers 4;S(J25 Stalwart 1)Stalwart 1;S(J25 Stalwart 2)Stalwart 2;S(J25 Stalwart 3)Stalwart 3;S(J25 Stalwart 4)Stalwart 4;S(J25 Armed 1)Armed 1;S(J25 Armed 2)Armed 2;S(J25 Armed 3)Armed 3;S(J25 Armed 4)Armed 4;S(J25 Enchanted 1)Enchanted 1;S(J25 Enchanted 2)Enchanted 2;S(J25 Enchanted 3)Enchanted 3;S(J25 Enchanted 4)Enchanted 4;S(J25 Illusions)Illusions;S(J25 Ninjas)Ninjas;S(J25 Of the Coast 1)Of the Coast 1;S(J25 Of the Coast 2)Of the Coast 2;S(J25 Drowned 1)Drowned 1;S(J25 Drowned 2)Drowned 2;S(J25 Wizards 1)Wizards 1;S(J25 Wizards 2)Wizards 2;S(J25 Soaring 1)Soaring 1;S(J25 Soaring 2)Soaring 2;S(J25 Soaring 3)Soaring 3;S(J25 Soaring 4)Soaring 4;S(J25 Surprise 1)Surprise 1;S(J25 Surprise 2)Surprise 2;S(J25 Surprise 3)Surprise 3;S(J25 Surprise 4)Surprise 4;S(J25 Bookworms 1)Bookworms 1;S(J25 Bookworms 2)Bookworms 2;S(J25 Bookworms 3)Bookworms 3;S(J25 Bookworms 4)Bookworms 4;S(J25 Inventive 1)Inventive 1;S(J25 Inventive 2)Inventive 2;S(J25 Inventive 3)Inventive 3;S(J25 Inventive 4)Inventive 4;S(J25 Snakes)Snakes;S(J25 Nefarious)Nefarious;S(J25 Treasures 1)Treasures 1;S(J25 Treasures 2)Treasures 2;S(J25 N'er-do-wells 1)N'er-do-wells 1;S(J25 N'er-do-wells 2)N'er-do-wells 2;S(J25 Icky 1)Icky 1;S(J25 Icky 2)Icky 2;S(J25 Clerics 1)Clerics 1;S(J25 Clerics 2)Clerics 2;S(J25 Clerics 3)Clerics 3;S(J25 Clerics 4)Clerics 4;S(J25 Vampires 1)Vampires 1;S(J25 Vampires 2)Vampires 2;S(J25 Vampires 3)Vampires 3;S(J25 Vampires 4)Vampires 4;S(J25 Grave Robbers 1)Grave Robbers 1;S(J25 Grave Robbers 2)Grave Robbers 2;S(J25 Grave Robbers 3)Grave Robbers 3;S(J25 Grave Robbers 4)Grave Robbers 4;S(J25 Ghastly 1)Ghastly 1;S(J25 Ghastly 2)Ghastly 2;S(J25 Ghastly 3)Ghastly 3;S(J25 Ghastly 4)Ghastly 4;S(J25 Too Many)Too Many;S(J25 Burning)Burning;S(J25 Dragons 1)Dragons 1;S(J25 Dragons 2)Dragons 2;S(J25 Copied 1)Copied 1;S(J25 Copied 2)Copied 2;S(J25 Warriors 1)Warriors 1;S(J25 Warriors 2)Warriors 2;S(J25 Stoked 1)Stoked 1;S(J25 Stoked 2)Stoked 2;S(J25 Stoked 3)Stoked 3;S(J25 Stoked 4)Stoked 4;S(J25 Goblins 1)Goblins 1;S(J25 Goblins 2)Goblins 2;S(J25 Goblins 3)Goblins 3;S(J25 Goblins 4)Goblins 4;S(J25 Bloody 1)Bloody 1;S(J25 Bloody 2)Bloody 2;S(J25 Bloody 3)Bloody 3;S(J25 Bloody 4)Bloody 4;S(J25 Zealots 1)Zealots 1;S(J25 Zealots 2)Zealots 2;S(J25 Zealots 3)Zealots 3;S(J25 Zealots 4)Zealots 4;S(J25 Modified)Modified;S(J25 Dinner)Dinner;S(J25 Fun Guys 1)Fun Guys 1;S(J25 Fun Guys 2)Fun Guys 2;S(J25 Beasts 1)Beasts 1;S(J25 Beasts 2)Beasts 2;S(J25 Dinosaurs 1)Dinosaurs 1;S(J25 Dinosaurs 2)Dinosaurs 2;S(J25 Encounter 1)Encounter 1;S(J25 Encounter 2)Encounter 2;S(J25 Encounter 3)Encounter 3;S(J25 Encounter 4)Encounter 4;S(J25 Explorers 1)Explorers 1;S(J25 Explorers 2)Explorers 2;S(J25 Explorers 3)Explorers 3;S(J25 Explorers 4)Explorers 4;S(J25 Elves 1)Elves 1;S(J25 Elves 2)Elves 2;S(J25 Elves 3)Elves 3;S(J25 Elves 4)Elves 4;S(J25 Landfall 1)Landfall 1;S(J25 Landfall 2)Landfall 2;S(J25 Landfall 3)Landfall 3;S(J25 Landfall 4)Landfall 4;S(J25 Chaos)Chaos)Themes
 Pioneer Masters, 3/6/PIO, PIO
 Innistrad Remastered, 3/6/INR, INR
 Aetherdrift, 3/6/DFT, DFT
+Alchemy: Aetherdrift, 3/6/DFT, YDFT
 Tarkir Dragonstorm, 3/6/TDM, TDM
+Alchemy: Tarkir, 3/6/TDM, YTDM
 Final Fantasy, 3/6/FIN, FIN
-Alchemy: Innistrad, 3/6/ISD, YMID
 Edge of Eternities, 3/6/EOE, EOE
+Alchemy: Edge of Eternities, 3/6/EOE, YEOE
 Marvel's Spider-Man, 3/6/SPM, SPM
+Through the Omenpaths, 3/6/SPM, OM1
 Avatar: The Last Airbender, 3/6/TLA, TLA
 Avatar: The Last Airbender Jumpstart, -/2/TLA, Meta-Choose(S(TLA Aang)Aang;S(TLA Swordmaster)Swordmaster;S(TLA Airbending)Airbending;S(TLA Freedom Fighters)Freedom Fighters;S(TLA Warriors)Warriors;S(TLA Alliance 1)Alliance 1;S(TLA Alliance 2)Alliance 2;S(TLA Gliding 1)Gliding 1;S(TLA Gliding 2)Gliding 2;S(TLA Hei Bai 1)Hei Bai 1;S(TLA Hei Bai 2)Hei Bai 2;S(TLA Insurgent 1)Insurgent 1;S(TLA Insurgent 2)Insurgent 2;S(TLA Katara)Katara;S(TLA Librarian)Librarian;S(TLA Adaptive)Adaptive;S(TLA Spirit)Spirit;S(TLA Underwater)Underwater;S(TLA Adept 1)Adept 1;S(TLA Adept 2)Adept 2;S(TLA Lessons 1)Lessons 1;S(TLA Lessons 2)Lessons 2;S(JTLE Soaring 1)Soaring 1;S(TLA Soaring 2)Soaring 2;S(TLA Wise 1)Wise 1;S(TLA Wise 2)Wise 2;S(JLTA Azula)Azula;S(TLA Ozai)Ozai;S(TLA Bad Advice)Bad Advice;S(TLA Nightmares)Nightmares;S(TLA Siege Engines)Siege Engines;S(TLA Bounty Hunter 1)Bounty Hunter 1;S(TLA Bounty Hunter 2)Bounty Hunter 2;S(TLA Hunting 1)Hunting 1;S(TLA Hunting 2)Hunting 2;S(TLA Reinforced 1)Reinforced 1;S(TLA Reinforced 2)Reinforced 2;S(TLA Relentless 1)Relentless 1;S(TLA Relentless 2)Relentless 2;S(TLA Roku)Roku;S(TLA Zuko)Zuko;S(TLA Fire Nation)Fire Nation;S(TLA Iroh)Iroh;S(TLA Musicians)Musicians;S(TLA Firebending 1)Firebending 1;S(TLA Firebending 2)Firebending 2;S(TLA Powerful 1)Powerful 1;S(TLA Powerful 2)Powerful 2;S(TLA Rebelling 1)Rebelling 1;S(TLA Rebelling 2)Rebelling 2;S(TLA Sparky Sparky 1)Sparky Sparky 1;S(TLA Sparky Sparky 2)Sparky Sparky 2;S(TLA Kyoshi)Kyoshi;S(TLA Toph)Toph;S(TLA At the Zoo)At the Zoo;S(TLA Bumi)Bumi;S(TLA Cabbages)Cabbages;S(TLA Earthbending 1)Earthbending 1;S(TLA Earthbending 2)Earthbending 2;S(TLA Earth Kingdom 1)Earth Kingdom 1;S(TLA Earth Kingdom 2)Earth Kingdom 2;S(TLA Earth Rumble 1)Earth Rumble 1;S(TLA Earth Rumble 2)Earth Rumble 2;S(TLA Learning 1)Learning 1;S(TLA Learning 2)Learning 2;S(TLA Shrines)Shrines)Themes
 Lorwyn Eclipsed, 3/6/ECL, ECL
+Alchemy: Lorwyn Eclipsed, 3/6/ECL, YECL
 Teenage Mutant Ninja Turtles, 3/6/TMT, TMT
 Secrets of Strixhaven, 3/6/SOS, SOS
+Alchemy: Secrets of Strixhaven, 3/6/SOS, YSOS
 Marvel Super Heroes, 3/6/MSH, MSH
 Marvel Super Heroes Jumpstart, -/2/MSH, Meta-Choose(S(MSH Agents of S.H.I.E.L.D.)Agents of S.H.I.E.L.D.;S(MSH Battalion)Battalion;S(MSH Caretakers)Caretakers;S(MSH Counterargument)Counterargument;S(MSH Equipped)Equipped;S(MSH Marvelous)Marvelous;S(MSH Precise)Precise;S(MSH Squadron)Squadron;S(MSH Wakanda)Wakanda;S(MSH Web-Slinging)Web-Slinging;S(MSH Analyzed)Analyzed;S(MSH Atlantis)Atlantis;S(MSH Blink)Blink;S(MSH Conniving)Conniving;S(MSH Geniuses)Geniuses;S(MSH Iron Man)Iron Man;S(MSH Kang Dynasty)Kang Dynasty;S(MSH Pym Particles)Pym Particles;S(MSH Soaring)Soaring;S(MSH Tricksters)Tricksters;S(MSH Armed)Armed;S(MSH DOOM)DOOM;S(MSH HYDRA)HYDRA;S(MSH Lethal)Lethal;S(MSH Masters of Evil)Masters of Evil;S(MSH Mayhem)Mayhem;S(MSH Returned)Returned;S(MSH Street Level Villains)Street Level Villains;S(MSH Thunderbolts)Thunderbolts;S(MSH Ultron)Ultron;S(MSH Boosted)Boosted;S(MSH Fearless)Fearless;S(MSH Heroes for Hire)Heroes for Hire;S(MSH Runaways)Runaways;S(MSH Scarlet)Scarlet;S(MSH Speedy)Speedy;S(MSH Spider-Verse)Spider-Verse;S(MSH Thor)Thor;S(MSH Vehicles)Vehicles;S(MSH Young Avengers)Young Avengers;S(MSH Animal)Animal;S(MSH Great Lakes Avengers)Great Lakes Avengers;S(MSH Incredible)Incredible;S(MSH Rampaging)Rampaging;S(MSH Savage Lands)Savage Lands;S(MSH Tenacious)Tenacious;S(MSH Towering)Towering;S(MSH Trained)Trained;S(MSH Uncanny)Uncanny;S(MSH Wild)Wild;S(MSH Fantastic)Fantastic)Themes
 The Hobbit, 3/6/HOB, HOB
+Reality Fracture, 3/6/FRA, FRA

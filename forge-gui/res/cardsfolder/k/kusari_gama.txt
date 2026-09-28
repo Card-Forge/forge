@@ -2,7 +2,7 @@ Name:Kusari-Gama
 ManaCost:3
 Types:Artifact Equipment
 K:Equip:3
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ GamaPump | Description$ Equipped creature has "{2}: This creature gets +1/+0 until end of turn."
+S:Mode$ Continuous | AffectedDefined$ Equipped | AddAbility$ GamaPump | Description$ Equipped creature has "{2}: This creature gets +1/+0 until end of turn."
 SVar:GamaPump:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Creature.blocking | Execute$ GamaDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a blocking creature, CARDNAME deals that much damage to each other creature defending player controls.
 SVar:GamaDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.!TriggeredTarget+ControlledBy TriggeredTargetController

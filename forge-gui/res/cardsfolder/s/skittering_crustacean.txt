@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Crab
 PT:2/3
 A:AB$ PutCounter | Cost$ 6 U | Monstrosity$ 4
-S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Hexproof | Description$ As long as CARDNAME is monstrous, it has hexproof. (It can't be the target of spells or abilities your opponents control.)
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.IsMonstrous | AddKeyword$ Hexproof | Description$ As long as CARDNAME is monstrous, it has hexproof. (It can't be the target of spells or abilities your opponents control.)
 DeckHas:Ability$Counters
 Oracle:{6}{U}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)\nAs long as Skittering Crustacean is monstrous, it has hexproof. (It can't be the target of spells or abilities your opponents control.)

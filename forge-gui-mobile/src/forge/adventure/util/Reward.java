@@ -14,7 +14,14 @@ public class Reward {
         Item,
         Life,
         Shards,
-        CardPack
+        CardPack;
+        private final String labelKey = "lbl" + this.name();
+        /**
+         * @return The pre-cached localizer key name (e.g., "lblLife", "lblShards", "lblGold").
+         */
+        public String getLabelKey() {
+            return this.labelKey;
+        }
     }
 
     Type type;

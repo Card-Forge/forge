@@ -1,0 +1,8 @@
+Name:Grim Repriser
+ManaCost:B R
+Types:Creature Zombie Bard
+PT:2/2
+K:Prowess
+A:AB$ ChangeZone | Cost$ B R | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | WithCountersType$ FINALITY | CheckSVar$ X | SpellDescription$ Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if an opponent has been dealt noncombat damage this turn. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:X:PlayerCountOpponents$HasPropertywasDealtNonCombatDamageThisTurn
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{B}{R}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if an opponent has been dealt noncombat damage this turn. (If a creature with a finality counter on it would die, exile it instead.)

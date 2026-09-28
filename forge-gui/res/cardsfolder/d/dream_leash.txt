@@ -5,5 +5,5 @@ K:Enchant:Permanent
 SVar:AttachAITgts:Permanent.tapped
 SVar:AttachAILogic:GainControl
 S:Mode$ CantTarget | ValidTarget$ Permanent.untapped | EffectZone$ Stack | ValidSource$ Spell.Self | Description$ You can't choose an untapped permanent as this spell's target as you cast it.
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | GainControl$ You | Description$ You control enchanted permanent.
 Oracle:Enchant permanent\nYou can't choose an untapped permanent as this spell's target as you cast it.\nYou control enchanted permanent.

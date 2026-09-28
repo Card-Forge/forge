@@ -144,18 +144,22 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;A big switch is embedded into the wall.&quot;,
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt.72.d.n0.text&quot;,
     &quot;options&quot;: [
       {
         &quot;text&quot;: &quot;You hear some loud sounds coming from the north.&quot;,
+        &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt.72.d.n1.text&quot;,
         &quot;name&quot;: &quot;Flip the switch&quot;,
+        &quot;locname&quot;: &quot;adv.graveyard_crypt_crypt.72.d.n2.name&quot;,
         &quot;options&quot;: [
           {
             &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 85 } ],
-            &quot;name&quot;: &quot;Continue&quot;
+            &quot;name&quot;: &quot;Continue&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue&quot;
           }
         ]
       },
-      { &quot;name&quot;: &quot;Leave&quot; }
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; }
     ]
   }
 
@@ -167,7 +171,8 @@
     <property name="dialog">[
   {
     &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find it!&quot; } ]
+    &quot;loctext&quot;: &quot;adv.graveyard_crypt_crypt.85.d.n0.text&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find it!&quot;, &quot;locname&quot;: &quot;adv.graveyard_crypt_crypt.85.d.n1.name&quot; } ]
   }
 ]</property>
    </properties>
