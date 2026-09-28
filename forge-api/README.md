@@ -208,6 +208,20 @@ also checks the pointer-down target before accepting a click after a refresh.
 User-initiated ability choices carry `context: playAbility`, a card-specific
 title, and optional option details. An empty choice list cancels that selection.
 
+Input prompts expose `canAutoPass`. It is true only for a priority window where
+the controller's current availability scan finds no playable non-mana action.
+The scan considers costs, targets, and playable zones, and conservatively stops
+on a scan timeout. An untapped mana source alone does not require a response.
+The player's empty-stack main phases and all required decisions always return
+false. `matchAction {action: "passIfNoResponse", sessionId, promptId}` checks this
+published permission and passes priority through the normal engine input;
+ineligible or stale requests are rejected without advancing the game.
+The desktop checkbox lasts only for its current session, turn, and active
+player. It briefly pauses before each pass, stops when a response becomes
+available, and resets on turn changes, a new game, or renderer reload.
+This is an additive protocol change: existing manual actions remain valid, and
+clients must treat a missing `canAutoPass` field as false.
+
 Library choices carry `context: librarySearch` and combine the delayed reveal
 with the actual selection in one prompt. `choices` retains the engine's eligible
 indices and min/max constraints. `libraryCards` contains only the cards supplied

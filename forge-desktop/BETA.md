@@ -1,11 +1,14 @@
-# Mana Table — beta 0.1.0-beta.21
+# Mana Table — beta 0.1.0-beta.22
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 21 fixes a startup error: restoring the match view now waits for the card
-library to finish loading. Engine failures also report their actual cause.
+Beta 22 adds **Skip responses this turn**, a checkbox beside the decision panel.
+It continues automatically when the engine finds no playable response, pauses
+when you can act, and resets when the turn changes. Your empty-stack main phases,
+attackers, blockers, targets, payments, and other required choices still wait for
+you. Uncheck it at any time to return to manual responses.
 
 ## Try it
 
@@ -157,8 +160,9 @@ Response pauses outside your main phases say **Optional response**. You do not
 have to play a card to move on. When a spell or ability is waiting, the prompt
 names it, shows its engine description, and offers **Let it resolve**. Select a
 highlighted card or ability if you want to act first. **Skip responses this turn**
-is the separate option to pass optional responses for the rest of that turn;
-required choices still appear.
+is a checkbox that continues only when you have no playable response. It pauses
+when an action is available, keeps your main phases and required choices manual,
+and turns off at the next turn. Uncheck it to stop automatic responses immediately.
 
 Every step has a plain-language explanation and a **Normally next** cue.
 Upkeep explains that it comes before drawing and has no general payment cost.

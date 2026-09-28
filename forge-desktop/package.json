@@ -1,7 +1,7 @@
 {
   "name": "mana-table",
   "productName": "Mana Table",
-  "version": "0.1.0-beta.21",
+  "version": "0.1.0-beta.22",
   "description": "A deck workshop and playable match table powered by the Forge rules engine",
   "main": "main.cjs",
   "private": true,
@@ -17,7 +17,7 @@
     "test:ui": "playwright test",
     "test:encounters": "playwright test tests/land-play.spec.cjs tests/encounter-ux.spec.cjs",
     "encounter": "node scripts/encounter.cjs",
-    "test:smoke": "playwright test tests/startup.spec.cjs tests/desktop.spec.cjs tests/match.spec.cjs",
+    "test:smoke": "playwright test tests/startup.spec.cjs tests/desktop.spec.cjs tests/match.spec.cjs tests/response-skip.spec.cjs",
     "check": "node scripts/check.cjs",
     "doctor": "node scripts/doctor.cjs",
     "package": "node scripts/package.cjs"

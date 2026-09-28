@@ -14,6 +14,7 @@ import forge.game.card.Card;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.*;
+import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.*;
@@ -207,10 +208,23 @@ public final class MatchSession {
                     ? selection.getValidChoices().stream().filter(Player.class::isInstance).map(entity -> ((Player) entity).getId()).toList() : List.of();
             next.prompt = map("id", next.id, "kind", "input", "inputType", inputClass.getSimpleName(),
                     "message", message, "ok", ok, "cancel", cancel, "okEnabled", okEnabled, "cancelEnabled", cancelEnabled,
-                    "canAttackAll", current instanceof InputAttack, "playerChoices", playerChoices);
+                    "canAttackAll", current instanceof InputAttack, "playerChoices", playerChoices,
+                    "canAutoPass", canAutoPass(current));
             pending = next;
             publish(next);
         }
+    }
+
+    private boolean canAutoPass(Input input) {
+        var view = game.getView();
+        // The controller refreshes this conservative action scan before publishing
+        // priority. It includes affordable spells/abilities in playable zones and
+        // treats scan timeouts as available actions; mana abilities alone do not count.
+        // Never infer this from card highlighting in the renderer or skip a main phase.
+        boolean ownMain = viewer.equals(view.getPlayerTurn()) && view.getStack().isEmpty()
+                && (view.getPhase() == PhaseType.MAIN1 || view.getPhase() == PhaseType.MAIN2);
+        return input instanceof InputPassPriority && okEnabled && view.getTurn() > 0
+                && !ownMain && !viewer.hasAvailableActions();
     }
 
     public Map<String, Object> action(JsonObject request) {
@@ -231,6 +245,10 @@ public final class MatchSession {
             PlayerView target = null;
             switch (action) {
                 case "ok" -> { if (!okEnabled) throw new IllegalArgumentException("Continue is not available"); }
+                case "passIfNoResponse" -> {
+                    if (!Boolean.TRUE.equals(next.prompt.get("canAutoPass")))
+                        throw new IllegalArgumentException("This response window needs your decision");
+                }
                 case "cancel" -> { if (!cancelEnabled) throw new IllegalArgumentException("Cancel is not available"); }
                 case "attackAll" -> { if (!(next.input instanceof InputAttack)) throw new IllegalArgumentException("Not declaring attackers"); }
                 case "card" -> { card = next.cards.get(string(request, "key")); if (card == null) throw new IllegalArgumentException("Card is not visible in this prompt"); }
@@ -256,6 +274,7 @@ public final class MatchSession {
                 if (closed || human.getInputQueue().getInput() != next.input) return;
                 switch (action) {
                     case "ok" -> human.selectButtonOk();
+                    case "passIfNoResponse" -> ((InputPassPriority) next.input).passPriority();
                     case "cancel" -> human.selectButtonCancel();
                     case "attackAll" -> human.alphaStrike();
                     case "card" -> human.selectCard(chosenCard, null, CARD_CLICK);

@@ -8,8 +8,8 @@ root. Run npm commands below from `forge-desktop` after `npm ci`.
 | Java compilation, style, tests and engine JAR | `mvn -pl forge-api -am verify` (root) | Adapter and required upstream modules |
 | JavaScript syntax | `npm run check` | Host, renderer, tooling and test sources |
 | Fast unit tests | `npm run test:unit` | Phase guidance, external deck URL rules, runtime resolution |
-| Real-engine integration | `npm run test:engine` | Persistence/revisions, matches, Commander, multiplayer, presets |
-| UI smoke | `npm run test:smoke` | Cold startup, renderer reload, deck workflow, casting and match lifecycle |
+| Real-engine integration | `npm run test:engine` | Persistence/revisions, matches, Commander, multiplayer, presets, response availability |
+| UI smoke | `npm run test:smoke` | Cold startup, renderer reload, deck workflow, casting, match lifecycle, conditional response skipping |
 | Complete UI suite | `npm run test:ui` | All `tests/*.spec.cjs` interaction scenarios |
 | Reusable encounter suite | `npm run test:encounters` | Shared automated scenarios, participant handoff, notes and failure artifacts |
 

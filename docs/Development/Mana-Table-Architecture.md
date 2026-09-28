@@ -25,6 +25,7 @@ flowchart LR
 | Match coordination | `renderer/match.js` | Setup, scoped answers, polling, stable board rendering, prompt controls |
 | Card interaction | `hand-view.js`, `table-gestures.js`, `card-preview.js` | Fan layout, cancelable dragging, inspection and alternate faces |
 | Match explanation | `turn-guide.js`, `match-feedback.js` | Phase guidance, activity history, turn indicators and animation |
+| Optional response skipping | `response-skip.js` | Turn-scoped checkbox, cancellable delay, engine-authorized priority passes |
 | Combat | `combat-view.js` | Attackers, defenders, legal block connections and assignment controls |
 | Java protocol | `DesktopEngine.java` | Method dispatch, current deck, saved files, practice and one active match |
 | Deck hooks | `CardCatalog`, `DeckEditor`, `DeckImport`, `DeckPresets`, `MatchSetup` | Search, revisioned edits, validation, imports, detached match decks |
@@ -56,6 +57,14 @@ cross-file assumptions instead of expanding the central `match.js` indefinitely.
 sessions. Polling is faster while resolving than while waiting for input.
 Required selections keep the engine's message and enabled actions; explanatory
 turn guidance never chooses an action on the player's behalf.
+
+When the player checks **Skip responses this turn**, `response-skip.js` submits
+`passIfNoResponse` only for a prompt with engine-issued `canAutoPass: true`.
+This permission comes from the controller's current action scan and preserves
+empty-stack main phases and required inputs. The normal session/prompt checks
+still apply. Unchecking cancels a queued pass; turn/session changes clear the
+setting. Renderer reloads start unchecked, and browsing the workshop suspends
+automatic passes until the player returns to the table.
 
 ## Identifiers with different jobs
 

@@ -28,6 +28,8 @@
   const choiceScope = () => ({ sessionId: match?.id, promptId: match?.prompt?.id });
   const combatView = createCombatView(document.querySelector('.match-arena'), answer);
   const handView = createHandView(document.querySelector('.match-arena'), $('match-hand'), answer);
+  const responseSkip = createResponseSkip($('match-prompt'), { current: () => match,
+    busy: () => inFlight || polling, visible: () => !$('match-view').hidden, answer });
   const scopeAttributes = () => `data-match-session="${esc(match.id)}" data-match-prompt="${esc(match.prompt?.id || '')}"`;
   cardPreview.bind($('match-view'), '[data-preview-card]', element => previewCards[Number(element.dataset.previewCard)]);
   cardPreview.bind(libraryPicker, '[data-library-preview]', element => libraryGroups[Number(element.dataset.libraryPreview)]?.card);
@@ -40,6 +42,7 @@
     $('workshop-tab').classList.remove('active');
     $('practice-tab').classList.remove('active');
     $('match-tab').classList.add('active');
+    responseSkip.render(match);
   }
 
   async function setup() {
@@ -231,6 +234,7 @@
     $('match-view').setAttribute('aria-busy', String(busy));
     $('match-action-status').textContent = busy ? 'Updating table…' : '';
     if (!busy) document.querySelectorAll('.action-pending').forEach(element => element.classList.remove('action-pending'));
+    responseSkip.render(next);
   }
 
   function renderSeats(state) {
@@ -298,12 +302,12 @@
     }
     if (prompt.kind === 'input') {
       const okLabel = status.passLabel || (prompt.inputType.startsWith('InputPayMana') && prompt.ok === 'Auto' ? 'Auto-pay mana' : prompt.ok);
-      const skipResponses = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn';
+      const endTurn = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn';
       const response = status.responseText ? `<div class="match-response-detail"><span>WAITING TO RESOLVE</span><p>${esc(status.responseText)}</p></div>` : '';
       const passHint = status.passHint ? `<small class="match-pass-hint">${esc(status.passHint)}</small>` : '';
-      $('match-prompt').innerHTML = header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(skipResponses ? 'Skip responses this turn' : prompt.cancel || 'Cancel')}</button>${skipResponses ? '<small class="match-pass-hint">Skip optional responses until this turn ends. You will still make required choices.</small>' : ''}</div>`;
+      $('match-prompt').innerHTML = header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}${endTurn ? '' : `<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button>`}</div>`;
       $('match-ok').onclick = () => answer({ action: 'ok' });
-      $('match-cancel').onclick = () => answer({ action: 'cancel' });
+      if ($('match-cancel')) $('match-cancel').onclick = () => answer({ action: 'cancel' });
       if ($('match-attack-all')) $('match-attack-all').onclick = () => answer({ action: 'attackAll' });
     } else if (prompt.kind === 'choice' || prompt.kind === 'reveal') {
       const range = prompt.kind === 'reveal' ? 'Revealed to you by the engine' : prompt.min === prompt.max ? `Choose ${prompt.min}` : `Choose ${prompt.min}–${prompt.max}`;
@@ -434,6 +438,7 @@
       toast('The table updated. Select your card again.');
       return;
     }
+    responseSkip.cancelPending();
     if (values.action === 'card' && match.prompt.inputType === 'InputPassPriority'
       && document.querySelector(`#match-hand .actionable[data-match-card="${CSS.escape(values.key)}"]`)) {
       cardPreview.hide();
@@ -445,7 +450,10 @@
     $('match-action-status').textContent = 'Sending action…';
     if (values.key) document.querySelector(`[data-match-card="${CSS.escape(values.key)}"]`)?.classList.add('action-pending');
     try { render(await api.request('matchAction', { sessionId: scope.sessionId, promptId: scope.promptId, ...values })); }
-    catch (error) { toast(error.message); await api.request('matchState').then(render).catch(() => {}); }
+    catch (error) {
+      if (values.action === 'passIfNoResponse') responseSkip.stop();
+      toast(error.message); await api.request('matchState').then(render).catch(() => {});
+    }
     finally { inFlight = false; $('match-prompt').classList.remove('sending'); schedulePoll(0); }
   }
 
