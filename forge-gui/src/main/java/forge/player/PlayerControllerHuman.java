@@ -39,6 +39,7 @@ import forge.game.player.actions.ColorChoiceAction;
 import forge.game.player.actions.ConfirmAction;
 import forge.game.player.actions.ManaComboAction;
 import forge.game.player.actions.ModeChoiceAction;
+import forge.game.player.actions.PassPriorityAction;
 import forge.game.player.actions.PayCostAction;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
@@ -787,9 +788,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
-        if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
-        if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+        if (!isMacroActive()) {
+            AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
+            if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+            if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+        }
 
         // triggers with costs can always be declined by not paying the cost
         if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
@@ -823,9 +826,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = spellAbilityView.getHostCard();
             else
                 cardView = wrapper.getCardView();
-            return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            final boolean result = this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            recordConfirm(cardView, result);
+            return result;
         }
-        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        final boolean result = InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        recordConfirm(wrapper.getCardView(), result);
+        return result;
     }
 
     @Override
@@ -944,26 +951,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            // Show opponent's hand as a FloatingZone with a minimal OK dialog instead of a names list
-            final boolean useFloatingHandReveal = zone == ZoneType.Hand
+            // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
+            final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
                     && !getGui().isLibgdxPort();
-            if (useFloatingHandReveal) {
-                final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-                zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
-                final Iterable<PlayerZoneUpdate>[] zonesShown = new Iterable[1];
-                FThreads.invokeInEdtNowOrLater(() -> {
-                    getGui().updateZones(zonesToUpdate);
-                    zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
-                });
+            if (revealInPrompt) {
+                getGui().showRevealedCards(collection);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
+                getGui().hideRevealedCards();
             } else {
                 getGui().reveal(fm, collection);
             }
@@ -1509,7 +1510,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // CombatUtil.canAttack ensures we only get here when the player has a legal attacker
         // so APINA must never skip - the invocation itself is the available action. User
         // initiated yields (pass until end of turn) still skip when not-attacking is legal.
-        if (yieldController.shouldAutoYield()) {
+        if (!isMacroActive() && yieldController.shouldAutoYield()) {
             if (CombatUtil.validateAttackers(combat)) {
                 return;
             }
@@ -1679,6 +1680,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         boolean nowMayAutoPass = autoPassing || skipsPromptForStackOrPhase();
 
         if (nowMayAutoPass) {
+            // A skipped phase has no priority input to record its implicit pass.
+            if (macros != null && macros.isRecording()) {
+                macros.addRememberedAction(new PassPriorityAction(stack.isEmpty(), getGame().getPhaseHandler().getPhase()));
+            }
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
@@ -3638,6 +3643,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return macros;
     }
 
+    public boolean isMacroActive() {
+        return macros != null && (macros.isRecording() || macros.isReplaying());
+    }
+
     @Override
     public void concede() {
         if (player != null) {
@@ -3790,17 +3799,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** True while the player is auto-passing. Deliberately does not cover a skipped phase or an auto-yielded
      *  stack top: {@link #autoPassCancel} runs every cleanup, and cleanup is a skipped phase for most players. */
     public boolean mayAutoPass() {
-        return yieldController.shouldAutoYield()
-                || yieldController.isAutoPassingNoActions(getLocalPlayerView());
+        return !isMacroActive()
+                && (yieldController.shouldAutoYield()
+                || yieldController.isAutoPassingNoActions(getLocalPlayerView()));
     }
 
     /** An auto-yielded ability on top of the stack, or a phase set to be skipped with the stack empty.
      *  Reads the view, not the engine, because this also runs on network threads. */
     private boolean skipsPromptForStackOrPhase() {
+        if (macros != null && macros.isReplaying()) return false;
         final GameView gameView = getGui().getGameView();
         if (gameView == null) return false;
         final StackItemView top = gameView.peekStack();
-        if (top != null) return top.isAbility() && shouldAutoYield(top.getKey());
+        if (top != null) return !isMacroActive() && top.isAbility() && shouldAutoYield(top.getKey());
         final PlayerView turnPlayer = gameView.getPlayerTurn();
         final PhaseType phase = gameView.getPhase();
         return turnPlayer != null && phase != null && isUiSetToSkipPhase(turnPlayer, phase);
@@ -3839,6 +3850,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         yieldController.setTriggerDecision(key, decision, isAbilityScope);
 
+        if (isMacroActive()) return;
         if (!(inputQueue.getInput() instanceof InputConfirm)) return;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
         if (top == null || !top.isTrigger()) return;
@@ -3855,6 +3867,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
+        if (macros != null && macros.isReplaying()) {
+            return false;
+        }
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }

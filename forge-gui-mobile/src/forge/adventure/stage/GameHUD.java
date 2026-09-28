@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -104,9 +106,11 @@ public class GameHUD extends Stage {
     private final Vector2 touchDownCoords = new Vector2();
     private final Vector2 touchDownDirection = new Vector2();
     private final Vector2 touchDraggedDirection = new Vector2();
+    private int viewWidth = 150;
+    private int viewHeight = 150;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()));
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), Forge.getGraphics().getBatch());
         instance = this;
         this.gameStage = gameStage;
 
@@ -357,39 +361,22 @@ public class GameHUD extends Stage {
 
     @Override
     public void draw() {
-        int yPos = (int) gameStage.player.getY();
-        int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
         updateHiddenEnemyChevrons();
         super.draw(); //draw the Hud
-        int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
-        int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
-        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
 
-        miniMapPlayer.setVisible(miniMap.isVisible() &&
-                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
-                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
-                || !console.isVisible())); // prevent drawing on top of console or notifications
     }
 
     Texture miniMapTexture;
-    Texture miniMapToolTipTexture;
-    Pixmap miniMapToolTipPixmap;
+    TextureRegion miniMapRegion;
     public boolean fromWorldMap = false;
 
     public void enter() {
         updateKeys();
-        if (miniMapTexture != null)
-            miniMapTexture.dispose();
-        miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
-        if (miniMapToolTipTexture != null)
-            miniMapToolTipTexture.dispose();
-        if (miniMapToolTipPixmap != null)
-            miniMapToolTipPixmap.dispose();
-        miniMapToolTipPixmap = new Pixmap((int) (miniMap.getWidth() * 3), (int) (miniMap.getHeight() * 3), Pixmap.Format.RGBA8888);
-        miniMapToolTipPixmap.drawPixmap(WorldSave.getCurrentSave().getWorld().getBiomeImage(), 0, 0, WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight(), 0, 0, miniMapToolTipPixmap.getWidth(), miniMapToolTipPixmap.getHeight());
-        miniMapToolTipTexture = new Texture(miniMapToolTipPixmap);
-        miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
+        Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
+        miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
+        miniMapRegion = new TextureRegion(miniMapTexture, 0, 0, viewWidth, viewHeight);
+        miniMap.setDrawable(new TextureRegionDrawable(miniMapRegion));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
 
@@ -676,6 +663,40 @@ public class GameHUD extends Stage {
         updateBGM();
 
         updateAudioFades(delta);
+
+        if (!mapGroup.isVisible())
+            return;
+        // player position
+        int yPos = (int) gameStage.player.getY();
+        int xPos = (int) gameStage.player.getX();
+        int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
+        int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
+
+        miniMapPlayer.setVisible(miniMap.isVisible() &&
+                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
+                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
+                || !console.isVisible())); // prevent drawing on top of console or notifications
+
+        if (isDebugMap()) {
+            // Full size map for debugging
+            miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
+            miniMapRegion.setRegion(0, 0, miniMapTexture.getWidth(), miniMapTexture.getHeight());
+            ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+        } else {
+            // Radar Map
+            miniMapPlayer.setPosition(miniMap.getX(1), miniMap.getY(1), 1);
+            float percentX = gameStage.player.getX() / WorldSave.getCurrentSave().getWorld().getWidthInPixels();
+            float percentY = gameStage.player.getY() / WorldSave.getCurrentSave().getWorld().getHeightInPixels();
+            int pixelX = (int) (percentX * miniMapTexture.getWidth());
+            int pixelY = (int) (percentY * miniMapTexture.getHeight());
+            pixelY = miniMapTexture.getHeight() - pixelY;
+            int sourceX = pixelX - (viewWidth / 2);
+            int sourceY = pixelY - (viewHeight / 2);
+            sourceX = MathUtils.clamp(sourceX, 0, miniMapTexture.getWidth() - viewWidth);
+            sourceY = MathUtils.clamp(sourceY, 0, miniMapTexture.getHeight() - viewHeight);
+            miniMapRegion.setRegion(sourceX, sourceY, viewWidth, viewHeight);
+            ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+        }
     }
 
     private void updateAudioFades(float delta) {
@@ -1150,7 +1171,6 @@ public class GameHUD extends Stage {
 
     @Override
     public void dispose() {
-        Forge.safeDispose(miniMapTexture, miniMapToolTipTexture, miniMapToolTipPixmap);
         super.dispose();
     }
 
