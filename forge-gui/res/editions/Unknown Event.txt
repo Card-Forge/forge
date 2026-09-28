@@ -522,3 +522,5 @@ MZ99 M The Collector @
 [CreatureTypes]
 Glass:Glasses
 Stained:Stained
+Judge:Judges
+Chef:Chefs

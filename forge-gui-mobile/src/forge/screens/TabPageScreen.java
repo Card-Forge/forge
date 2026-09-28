@@ -245,7 +245,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
+            g.fillRect(Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_THEME).alphaColor(0.7f) : getBackColor(), 0, 0, getWidth(), getHeight());
         }
 
         @Override

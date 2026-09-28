@@ -3,8 +3,8 @@ Code=YBLB
 Date=2024-08-20
 Name=Alchemy: Bloomburrow
 Type=Online
-Booster=1 UncommonRareMythic,8 Common:fromsheet("BLB cards"), 3 Uncommon:fromSheet("BLB cards"), 1 UncommonRareMythic:fromSheet("BLB cards"), 1 RareMythic:fromSheet("BLB cards"), 1 BasicLand:fromSheet("BLB cards")
 ScryfallCode=YBLB
+Booster=1 UncommonRareMythic:fromsheet("YBLB cards"), 8 Common:fromsheet("BLB cards"), 3 Uncommon:fromSheet("BLB cards"), 1 UncommonRareMythic:fromSheet("BLB cards"), 1 RareMythic:fromSheet("BLB cards"), 1 BasicLand:fromSheet("BLB cards")
 
 [cards]
 1 R Awestruck Cygnet @Deruchenko Alexander

@@ -1,0 +1,5 @@
+Name:Yargle, Goliath of Otaria
+ManaCost:4 U
+Types:Legendary Creature Frog Spirit
+PT:3/9
+Oracle:

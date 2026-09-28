@@ -1,0 +1,11 @@
+Name:Pursued by Something
+ManaCost:no cost
+Types:Plane Duskmourn
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Creature.tapped+YouCtrl | Execute$ TrigDread | TriggerDescription$ At the beginning of your second main phase, if you control a tapped creature, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigExile | TriggerDescription$ Whenever Chaos ensues, exile target creature. If it's an instant or sorcery, cast it without paying its mana cost. Otherwise put it onto the battlefield under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | SubAbility$ DBBattlefield
+SVar:DBBattlefield:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionNotPresent$ Instant,Sorcery | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:At the beginning of your second main phase, if you control a tapped creature, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever Chaos ensues, exile target creature. If it's an instant or sorcery, cast it without paying its mana cost. Otherwise put it onto the battlefield under its owner's control.

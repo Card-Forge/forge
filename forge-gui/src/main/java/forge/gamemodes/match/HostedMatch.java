@@ -162,9 +162,6 @@ public class HostedMatch {
         game = match.createGame();
         game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
         game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
-        // Android API 31 and above can use completeOnTimeout -> CompletableFuture:
-        //https://developer.android.com/reference/java/util/concurrent/CompletableFuture#completeOnTimeout(T,%20long,%20java.util.concurrent.TimeUnit)
-        game.AI_CAN_USE_TIMEOUT = !GuiBase.isAndroid() || GuiBase.getAndroidAPILevel() > 30;
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
@@ -432,7 +429,7 @@ public class HostedMatch {
         @Override
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.getGui().updateSingleCard(event.blocker());
+                humanController.getGui().updateCard(event.blocker());
             }
             return null;
         }
@@ -440,7 +437,7 @@ public class HostedMatch {
         @Override
         public Void visit(final UiEventAttackerDeclared event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.getGui().updateSingleCard(event.attacker());
+                humanController.getGui().updateCard(event.attacker());
             }
             return null;
         }

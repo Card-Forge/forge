@@ -1,0 +1,6 @@
+Name:Wrath of the Bloodmane
+ManaCost:2 R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Creature.Legendary+YouCtrl | Description$ This spell costs {1} less to cast if you control a legendary creature.
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker.
+Oracle:This spell costs {1} less to cast if you control a legendary creature.\nWrath of the Bloodmane deals 4 damage to target creature or planeswalker.

@@ -17,6 +17,7 @@ public class Classic {
         if (screen == null) // shouldn't be null
             return;
         try {
+            Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
             Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
             screen.screenPos.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
             if (screen.getRotate180()) {

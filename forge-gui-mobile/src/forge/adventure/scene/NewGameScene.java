@@ -399,48 +399,48 @@ public class NewGameScene extends MenuScene {
     }
 
     private void showDifficultyHelp() {
+        Localizer localizer = Forge.getLocalizer();
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
         boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
         String startingEquipment = selectedDifficulty.startItems == null || selectedDifficulty.startItems.length == 0
-                ? "None"
+                ? localizer.getMessage("lblNone")
                 : String.join(", ", selectedDifficulty.startItems);
 
         difficultySummary = new DialogData();
-        difficultySummary.name = "Summary";
+        difficultySummary.name = localizer.getMessage("lblSummary");
         switch (selectedDifficulty.name) {
             case "Easy":
-                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryEasy", selectedDifficulty.name, startingEquipment);
                 break;
             case "Normal":
-                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryNormal", selectedDifficulty.name, startingEquipment);
                 break;
             case "Hard":
                 if (enableGeneticAI) {
-                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                    difficultySummary.text = localizer.getMessage("advDifficultySummaryHardGenetic", selectedDifficulty.name, startingEquipment);
                 } else {
-                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                    difficultySummary.text = localizer.getMessage("advDifficultySummaryHard", selectedDifficulty.name, startingEquipment);
                 }
                 break;
             case "Insane":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: %s", selectedDifficulty.name, startingEquipment);
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryInsane", selectedDifficulty.name, startingEquipment);
                 break;
             default:
-                difficultySummary.text = "((Custom difficulty settings))";
+                difficultySummary.text = localizer.getMessage("advDifficultySummaryCustom");
                 break;
         }
 
 
         DialogData dismiss = new DialogData();
-        //todo: add translation
-        dismiss.name = "OK";
+        dismiss.name = localizer.getMessage("lblOK");
 
         DialogData matchImpacts = new DialogData();
-        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int) (selectedDifficulty.enemyLifeFactor * 100), (int) (selectedDifficulty.goldLoss * 100), (int) (selectedDifficulty.lifeLoss * 100));
-        matchImpacts.name = "Duels";
+        matchImpacts.text = localizer.getMessage("advDifficultyMatchImpacts", selectedDifficulty.name, selectedDifficulty.startingLife, (int) (selectedDifficulty.enemyLifeFactor * 100), (int) (selectedDifficulty.goldLoss * 100), (int) (selectedDifficulty.lifeLoss * 100));
+        matchImpacts.name = localizer.getMessage("lblDuels");
 
         DialogData economyImpacts = new DialogData();
-        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.startingMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
-        economyImpacts.name = "Economy";
+        economyImpacts.text = localizer.getMessage("advDifficultyEconomyImpacts", selectedDifficulty.name, selectedDifficulty.startingMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
+        economyImpacts.name = localizer.getMessage("lblEconomy");
 
         difficultySummary.options = new DialogData[3];
         difficultySummary.options[0] = matchImpacts;

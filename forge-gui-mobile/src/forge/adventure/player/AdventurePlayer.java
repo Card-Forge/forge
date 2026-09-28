@@ -1004,7 +1004,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     private void refreshEditor() {
-        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance(null).getScreen());
         if (editor != null)
             editor.refresh();
     }

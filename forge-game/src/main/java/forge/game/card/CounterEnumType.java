@@ -195,6 +195,8 @@ public enum CounterEnumType implements CounterType {
 
     GHOSTFORM("GHSTF", 223, 0, 254, CounterAiCategory.Neutral),
 
+    GLASS("GLASS", 219, 225, 227, CounterAiCategory.Negative),
+
     GLYPH("GLYPH", 184, 202, 199, CounterAiCategory.Positive),
 
     GOLD("GOLD", 248, 191, 0, CounterAiCategory.Negative),
@@ -406,6 +408,8 @@ public enum CounterEnumType implements CounterType {
     SHIELD("SHLD", 202, 198, 186, CounterAiCategory.Positive),
 
     SHRED("SHRED", 255, 165, 152, CounterAiCategory.Positive),
+
+    SHY("SHY", 232, 178, 199, CounterAiCategory.Neutral),
 
     SILVER("SILVER", 192, 192, 192, CounterAiCategory.Positive),
 

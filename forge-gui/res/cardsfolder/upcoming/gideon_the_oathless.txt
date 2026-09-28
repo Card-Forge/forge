@@ -1,0 +1,10 @@
+Name:Gideon the Oathless
+ManaCost:2 B
+Types:Legendary Creature Human Mercenary
+PT:3/3
+K:Ward:Discard<1/Card>
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage1 | TriggerDescription$ Whenever a creature an opponent controls enters, NICKNAME deals 1 damage to that player.
+SVar:TrigDamage1:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredCardController
+T:Mode$ AbilityCast | ValidSA$ Activated.Loyalty+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage2 | TriggerDescription$ Whenever an opponent activates a loyalty ability, NICKNAME deals 1 damage to that player.
+SVar:TrigDamage2:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredActivator
+Oracle:Ward—Discard a card.\nWhenever a creature an opponent controls enters, Gideon deals 1 damage to that player.\nWhenever an opponent activates a loyalty ability, Gideon deals 1 damage to that player.

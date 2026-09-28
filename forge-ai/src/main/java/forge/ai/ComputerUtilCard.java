@@ -1964,10 +1964,14 @@ public class ComputerUtilCard {
                 if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                     continue;
                 }
-                if (!stAb.hasParam("Affected")) {
+                if (!stAb.hasParam("Affected") && !stAb.hasParam("AffectedDefined")) {
                     continue;
                 }
                 if (!stAb.hasParam("AddPower") && !stAb.hasParam("AddToughness")) {
+                    continue;
+                }
+                if (stAb.hasParam("AffectedDefined")
+                        && !AbilityUtils.getDefinedCards(c, stAb.getParam("AffectedDefined"), stAb).contains(vCard)) {
                     continue;
                 }
                 if (!stAb.matchesValidParam("Affected", vCard)) {

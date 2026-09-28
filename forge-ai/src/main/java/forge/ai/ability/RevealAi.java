@@ -8,8 +8,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordWithCost;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -56,23 +56,15 @@ public class RevealAi extends RevealAiBase {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // logic to see if it should reveal Miracle Card
         if (sa.isKeyword(Keyword.MIRACLE)) {
-            final Card c = sa.getHostCard();
-
             // the PlayEffect with Miracle Cost
             SpellAbility playSub = sa.getSubAbility().getAdditionalAbility("Execute");
-            Cost playCost = new Cost(playSub.getParam("PlayCost"), false);
 
-            for (SpellAbility s : c.getAllPossibleAbilities(ai, false)) {
-                if (!s.isBasicSpell()) {
+            for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(sa.getHostCard(), ai)) {
+                if (!(s instanceof Spell)) {
                     continue;
                 }
-                Spell spell = (Spell) s;
-                s.setActivatingPlayer(ai);
-                // timing restrictions still apply
-                if (!s.getRestrictions().checkTimingRestrictions(c, s))
-                    continue;
 
-                spell = (Spell) spell.copyWithDefinedCost(playCost);
+                Spell spell = (Spell) s.copyWithDefinedCost(((KeywordWithCost) sa.getKeyword()).getCost());
                 if (playSub.hasParam("PlayReduceCost")) {
                     spell.putParam("ReduceCost", playSub.getParam("PlayReduceCost"));
                 }

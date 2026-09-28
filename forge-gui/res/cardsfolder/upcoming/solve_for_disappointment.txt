@@ -1,0 +1,6 @@
+Name:Solve for Disappointment
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Permanent.nonLand | NumCards$ 1 | SubAbility$ DBEmpower | SpellDescription$ Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 1 | SpellDescription$ Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+Oracle:Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.\nEmpower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

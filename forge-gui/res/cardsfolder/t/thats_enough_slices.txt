@@ -1,0 +1,9 @@
+Name:That's Enough Slices
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When you encounter this phenomenon, each player creates a Pizza token. If that player has the least life or is tied for the least life, they create two Pizza tokens instead. Then planeswalk away from this phenomenon. (A Pizza token is a Food artifact with "{2}, {T}, Sacrifice this token: You gain 6 life.")
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBToken | SubAbility$ PWAway
+SVar:DBToken:DB$ Token | TokenScript$ c_a_pizza_sac | TokenOwner$ Player.IsRemembered | SubAbility$ DBBonusToken
+SVar:DBBonusToken:DB$ Token | TokenScript$ c_a_pizza_sac | TokenOwner$ Player.IsRemembered | ConditionDefined$ Remembered | ConditionPresent$ Player.withLowestLife | ConditionCompare$ GE1
+SVar:PWAway:DB$ Planeswalk
+Oracle:When you encounter this phenomenon, each player creates a Pizza token. If that player has the least life or is tied for the least life, they create two Pizza tokens instead. Then planeswalk away from this phenomenon. (A Pizza token is a Food artifact with "{2}, {T}, Sacrifice this token: You gain 6 life.")

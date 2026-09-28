@@ -1,0 +1,7 @@
+Name:Gallia, Tragic Host
+ManaCost:1 B
+Types:Legendary Creature Zombie Satyr
+PT:2/1
+K:Menace
+A:AB$ ChangeZone | Cost$ 4 B ExileFromGrave<1/Creature.Other/another creature card> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | WithCountersType$ P1P1 | SpellDescription$ Return this card from your graveyard to the battlefield tapped with a +1/+1 counter on her.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{4}{B}, Exile another creature card from your graveyard: Return this card from your graveyard to the battlefield tapped with a +1/+1 counter on her.

@@ -28,11 +28,13 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -73,7 +75,7 @@ public class ComputerUtilAbility {
                 all.add(p.getCardsIn(ZoneType.Library).get(0));
             }
         }
-        all.addAll(game.getCardsIn(ZoneType.Command));
+        all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()));
         all.addAll(game.getCardsIn(ZoneType.Exile));
         all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
@@ -211,13 +213,15 @@ public class ComputerUtilAbility {
             }
         }
         for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
-            SpellAbility ab = si.getSpellAbility();
-            if (ab != null && ab.getApi() == api && si.getTargetChoices() != null) {
-                for (Card c : cardList) {
-                    // TODO: somehow ensure that the detected SA won't be countered
-                    if (si.getTargetChoices().getTargetCards().contains(c)) {
-                        // Was already targeted by a spell ability instance on stack
-                        targeted.add(c);
+            for (SpellAbility ab = si.getSpellAbility(); ab != null; ab = ab.getSubAbility()) {
+                TargetChoices tc = ab == si.getSpellAbility() ? si.getTargetChoices() : ab.getTargets();
+                if (ab.getApi() == api && tc != null) {
+                    for (Card c : cardList) {
+                        // TODO: somehow ensure that the detected SA won't be countered
+                        if (tc.getTargetCards().contains(c)) {
+                            // Was already targeted by a spell ability instance on stack
+                            targeted.add(c);
+                        }
                     }
                 }
             }

@@ -556,10 +556,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (!StaticAbilityCastWithFlash.anyWithFlashNeedsInfo(sa, c, activator)) {
-            if (!sa.canCastTiming(c, activator)) {
-                return false;
-            }
+        if (!sa.canCastTiming(c, activator) && !StaticAbilityCastWithFlash.anyWithFlashNeedsInfo(sa, c, activator)) {
+            return false;
         }
 
         // Special check for Lion's Eye Diamond

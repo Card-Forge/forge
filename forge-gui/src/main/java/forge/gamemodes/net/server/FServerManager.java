@@ -53,6 +53,7 @@ import org.jupnp.model.meta.Device;
 import org.jupnp.registry.Registry;
 import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
+import org.jupnp.util.SpecificationViolationReporter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -147,7 +148,7 @@ public final class FServerManager implements IHasForgeLog {
         }, deadline, TimeUnit.SECONDS);
     }
 
-    private boolean isHosting = false;
+    private volatile boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
     private UpnpService upnpService = null;
@@ -306,7 +307,11 @@ public final class FServerManager implements IHasForgeLog {
         stopServer(true);
     }
 
-    private void stopServer(final boolean removeShutdownHook) {
+    private synchronized void stopServer(final boolean removeShutdownHook) {
+        // The shutdown hook and the channel-close thread both stop the server; only the first does the work
+        if (!isHosting) {
+            return;
+        }
         // Cancel all reconnect timers
         for (final Timer timer : reconnectTimers.values()) {
             timer.cancel();
@@ -323,7 +328,12 @@ public final class FServerManager implements IHasForgeLog {
             Thread.currentThread().interrupt();
         }
         if (upnpService != null) {
-            upnpService.shutdown();
+            try {
+                upnpService.shutdown();
+            } catch (Exception | AssertionError e) {
+                // The JDK wraps a failed multicast leave in AssertionError, which jupnp doesn't catch
+                netLog.debug("UPnP shutdown incomplete: {}", e.toString());
+            }
             upnpService = null;
         }
         if (removeShutdownHook) {
@@ -759,6 +769,9 @@ public final class FServerManager implements IHasForgeLog {
                 upnpService.shutdown();
             }
 
+            // Gateways routinely break the UPnP spec in ways jupnp tolerates; don't log each one
+            SpecificationViolationReporter.disableReporting();
+
             // Create a new UPnP service instance
             upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
             upnpService.startup();
@@ -774,6 +787,7 @@ public final class FServerManager implements IHasForgeLog {
                 public void run() {
                     if (!listener.isCompleted()) {
                         listener.setCompleted();
+                        netLog.warn("UPnP: no gateway confirmed a mapping for port {} within 5 seconds", port);
                         onUPnPResult(false);
                     }
                 }
@@ -997,7 +1011,8 @@ public final class FServerManager implements IHasForgeLog {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             if (msg instanceof HeartbeatEvent) {
-                return; // Consumed — arrival resets IdleStateHandler read timer
+                ctx.writeAndFlush(new HeartbeatEvent());
+                return;
             }
             if (msg instanceof MessageEvent) {
                 final String raw = ((MessageEvent) msg).getMessage();
@@ -1113,6 +1128,16 @@ public final class FServerManager implements IHasForgeLog {
                         broadcast(new MessageEvent(String.format("%s has reconnected.", username)));
                     }
                     netLog.info("[Reconnect] Player reconnected: {}", username);
+                } else if (isMatchActive()) {
+                    // Match is in progress and this user isn't on the disconnected list —
+                    // either their reconnect window expired, or they were never in this match.
+                    // Tell them explicitly so the client surfaces the seat-lost modal instead
+                    // of inferring it from a lobby update.
+                    netLog.info("[Reconnect] LoginEvent for {} during active match - seat unavailable", username);
+                    if (client != null) {
+                        broadcastTo(new SeatLostEvent(), client);
+                    }
+                    ctx.close();
                 } else {
                     // Normal login flow
                     final int index = localLobby.connectPlayer(username, event.getAvatarIndex(), event.getSleeveIndex());

@@ -23,11 +23,16 @@ public class StaticAbilityAlternativeCost {
         list.addAll(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(StaticAbilityMode.AlternativeCost)) {
+                if (!stAb.checkMode(StaticAbilityMode.AlternativeCost)) {
                     continue;
                 }
 
+                // apply() is cheap, checkConditions() may scan the battlefield
                 if (!apply(stAb, sa, source, pl)) {
+                    continue;
+                }
+
+                if (!stAb.checkConditions()) {
                     continue;
                 }
 

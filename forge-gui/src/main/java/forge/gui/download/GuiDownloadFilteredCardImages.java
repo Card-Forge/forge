@@ -132,11 +132,12 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
         if (destFull.exists() || destFb.exists()) return;
         if (downloads.containsKey(destFull.getAbsolutePath())) return;
+        if (downloads.containsKey(destFb.getAbsolutePath())) return;
 
         final String url = buildUrl(c, face);
         if (url == null) return;
 
-        downloads.put(destFull.getAbsolutePath(), url);
+        downloads.put(destFb.getAbsolutePath(), url);
     }
 
     /** Best available download URL for one face: CDN, then Scryfall API, then cardforge. */

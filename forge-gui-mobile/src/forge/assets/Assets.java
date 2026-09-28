@@ -26,7 +26,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
-import forge.Graphics;
 import forge.animation.GifAnimation;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -102,11 +101,11 @@ public class Assets implements Disposable {
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
-    private Texture whiteTexture, backdropTexture, grayTexture, holofoil;
+    private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
-    private Graphics assetGraphics;
     private boolean isDisposed = false;
+    private int miniMapID;
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -130,63 +129,58 @@ public class Assets implements Disposable {
 
     @Override
     public void dispose() {
-        if (!isDisposed) {
-            isDisposed = true;
-            if (counterFonts != null) {
-                for (BitmapFont bitmapFont : counterFonts.values())
-                    Forge.safeDispose(bitmapFont);
-                counterFonts.clear();
-            }
-            if (fallback_skins != null) {
-                for (Texture texture : fallback_skins.values())
-                    Forge.safeDispose(texture);
-                fallback_skins.clear();
-            }
-            if (tmxMap != null) {
-                for (Texture texture : tmxMap.values())
-                    Forge.safeDispose(texture);
-                tmxMap.clear();
-            }
-            if (textrafonts != null) {
-                for (Font f : textrafonts.values())
-                    Forge.safeDispose(f);
-                textrafonts.clear();
-            }
-            Forge.safeDispose(
-                defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
-                cardFrameBuffer, itemFrameBuffer, gifAnimation, assetGraphics);
-            if (cardArtCache != null)
-                cardArtCache.clear();
-            if (avatarImages != null)
-                avatarImages.clear();
-            if (manaImages != null)
-                manaImages.clear();
-            if (symbolLookup != null)
-                symbolLookup.clear();
-            if (images != null)
-                images.clear();
-            if (avatars != null)
-                avatars.clear();
-            if (sleeves != null)
-                sleeves.clear();
-            if (cracks != null)
-                cracks.clear();
-            if (borders != null)
-                borders.clear();
-            if (deckbox != null)
-                deckbox.clear();
-            if (cursor != null)
-                cursor.clear();
-            if (fonts != null)
-                fonts.clear();
-            Forge.safeDispose(manager);
+        if (isDisposed) {
+            return;
         }
-    }
-
-    public Graphics getAssetGraphics() {
-        if (assetGraphics == null)
-            assetGraphics = new Graphics(Forge.LOW_SPRITES_CAP);
-        return assetGraphics;
+        isDisposed = true;
+        if (counterFonts != null) {
+            for (BitmapFont bitmapFont : counterFonts.values())
+                Forge.safeDispose(bitmapFont);
+            counterFonts.clear();
+        }
+        if (fallback_skins != null) {
+            for (Texture texture : fallback_skins.values())
+                Forge.safeDispose(texture);
+            fallback_skins.clear();
+        }
+        if (tmxMap != null) {
+            for (Texture texture : tmxMap.values())
+                Forge.safeDispose(texture);
+            tmxMap.clear();
+        }
+        if (textrafonts != null) {
+            for (Font f : textrafonts.values())
+                Forge.safeDispose(f);
+            textrafonts.clear();
+        }
+        Forge.safeDispose(
+            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
+        if (cardArtCache != null)
+            cardArtCache.clear();
+        if (avatarImages != null)
+            avatarImages.clear();
+        if (manaImages != null)
+            manaImages.clear();
+        if (symbolLookup != null)
+            symbolLookup.clear();
+        if (images != null)
+            images.clear();
+        if (avatars != null)
+            avatars.clear();
+        if (sleeves != null)
+            sleeves.clear();
+        if (cracks != null)
+            cracks.clear();
+        if (borders != null)
+            borders.clear();
+        if (deckbox != null)
+            deckbox.clear();
+        if (cursor != null)
+            cursor.clear();
+        if (fonts != null)
+            fonts.clear();
+        Forge.safeDispose(manager);
     }
 
     public GifAnimation getGifAnimation() {
@@ -212,7 +206,7 @@ public class Assets implements Disposable {
         FrameBuffer buffer = isCard ? cardFrameBuffer : itemFrameBuffer;
         if (buffer == null) {
             try {
-                buffer =  new FrameBuffer(Pixmap.Format.RGB565, w, h, false);
+                buffer = new FrameBuffer(Pixmap.Format.RGB565, w, h, false);
             } catch (Exception e) {
                 // framebuffer creation failed
                 e.printStackTrace();
@@ -348,7 +342,6 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
-
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);
     }
@@ -358,6 +351,8 @@ public class Assets implements Disposable {
     }
 
     public Texture getTexture(FileHandle file, boolean is2D, boolean required) {
+        if (isDisposed)
+            return null;
         if (file == null || !file.exists()) {
             if (!required)
                 return null;
@@ -469,6 +464,33 @@ public class Assets implements Disposable {
         }
         return holofoil;
     }
+
+    public Texture getNewMiniMapTexture(Pixmap pixmap) {
+        if (pixmap == null)
+            return null;
+        if (miniMapID == pixmap.hashCode())
+            return miniMapTexture;
+        try {
+            // try to reuse existing texture to save VRAM init and overwrite the pixeldata
+            if (miniMapTexture != null
+                && miniMapTexture.getWidth() == pixmap.getWidth()
+                && miniMapTexture.getHeight() == pixmap.getHeight()) {
+                miniMapTexture.draw(pixmap, 0, 0);
+            } else {
+                if (miniMapTexture != null)
+                    miniMapTexture.dispose();
+                miniMapTexture = new Texture(pixmap);
+            }
+        } catch (Exception e) {
+            // if somehow we can't reuse the existing texture then dispose and initialize a new one
+            if (miniMapTexture != null)
+                miniMapTexture.dispose();
+            miniMapTexture = new Texture(pixmap);
+        }
+        miniMapID = pixmap.hashCode();
+        return miniMapTexture;
+    }
+
     public Font getTextraFont(BitmapFont bitmapFont, TextureAtlas item_atlas, TextureAtlas pixelmana_atlas) {
         if (textrafonts == null)
             textrafonts = new ObjectMap<>();

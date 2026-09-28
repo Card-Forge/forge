@@ -1,0 +1,6 @@
+Name:Karn, Argent Defender
+ManaCost:2
+Types:Legendary Artifact Creature Golem
+PT:1/3
+S:Mode$ DisableTriggers | ValidCause$ Artifact,Creature | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | Description$ Artifacts and creatures entering the battlefield don’t cause abilities to trigger.
+Oracle:Artifacts and creatures entering the battlefield don’t cause abilities to trigger.

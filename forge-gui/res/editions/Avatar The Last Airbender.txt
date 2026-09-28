@@ -272,7 +272,7 @@ Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 193 C Rocky Rebuke @Hokyoung Kim
 194 C Saber-Tooth Moose-Lion @Shiren
 195 U Seismic Sense @Jo Cordisco
-196 U Shared Roots @Alfven Ato
+196 U Shared Roots @VEN
 197 U Sparring Dummy @Gemi
 198 U Toph, the Blind Bandit @Yueko
 199 U True Ancestry @Chibi

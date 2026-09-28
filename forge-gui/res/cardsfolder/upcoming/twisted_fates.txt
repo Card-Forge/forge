@@ -1,0 +1,6 @@
+Name:Twisted Fates
+ManaCost:2 W W B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | ValidTgtsDesc$ nonland permanent | SubAbility$ DBPutCounterAll | SpellDescription$ Destroy target nonland permanent. Put a +1/+1 counter on each creature target player controls.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidTgts$ Player | ValidCards$ Creature | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Destroy target nonland permanent. Put a +1/+1 counter on each creature target player controls.

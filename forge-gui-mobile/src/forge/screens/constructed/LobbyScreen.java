@@ -116,7 +116,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbPlayerCount.setSelectedItem(2);
         cbPlayerCount.setChangedHandler(event -> {
             // The dropdown is the user's target; getNumPlayers() reads from the lobby and would loop forever.
-            int target = cbPlayerCount.getSelectedItem();
+            // Clamp to what the lobby will accept, or addSlot refuses silently and the loop never ends.
+            int target = Math.min(cbPlayerCount.getSelectedItem(), lobby.getSlotLimit());
+            if (target != cbPlayerCount.getSelectedItem()) {
+                cbPlayerCount.setSelectedItem(target);
+            }
             while(lobby.getNumberOfSlots() < target){
                 lobby.addSlot();
             }
@@ -235,7 +239,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbGamesInMatch.setEnabled(hasControl);
         lblPlayers.setEnabled(hasControl);
         cbPlayerCount.setEnabled(hasControl);
-        while (lobby.getNumberOfSlots() < getNumPlayers()){
+        while (lobby.getNumberOfSlots() < Math.min(getNumPlayers(), lobby.getSlotLimit())){
             lobby.addSlot();
         }
     }

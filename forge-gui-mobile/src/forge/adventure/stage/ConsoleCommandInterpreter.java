@@ -41,6 +41,9 @@ import java.util.regex.Pattern;
 public class ConsoleCommandInterpreter {
     private static ConsoleCommandInterpreter instance;
     Command root = new Command();
+    private final ArrayList<String> matchTokenList = new ArrayList<>(32);
+    private final StringBuilder completionBuilder = new StringBuilder(128);
+    private static final String[] emptyStringArray = new String[0];
 
     static class Command {
         HashMap<String, Command> children = new HashMap<>();
@@ -50,36 +53,43 @@ public class ConsoleCommandInterpreter {
     public String complete(String text) {
         String[] words = splitOnSpace(text);
         Command currentCommand = root;
-        StringBuilder completionString = new StringBuilder();
+
+        completionBuilder.setLength(0);
+
         for (String name : words) {
             if (!currentCommand.children.containsKey(name)) {
                 for (String key : currentCommand.children.keySet()) {
                     if (key.startsWith(name)) {
-                        return completionString + key + " ";
+                        // append directly
+                        completionBuilder.append(key).append(" ");
+                        return completionBuilder.toString();
                     }
                 }
                 break;
             }
-            completionString.append(name).append(" ");
+            completionBuilder.append(name).append(" ");
             currentCommand = currentCommand.children.get(name);
         }
         return text;
     }
 
     private String[] splitOnSpace(String text) {
-        List<String> matchList = new ArrayList<>();
+        matchTokenList.clear();
+
         Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
         Matcher regexMatcher = regex.matcher(text);
         while (regexMatcher.find()) {
             if (regexMatcher.group(1) != null) {
-                matchList.add(regexMatcher.group(1));
+                matchTokenList.add(regexMatcher.group(1));
             } else if (regexMatcher.group(2) != null) {
-                matchList.add(regexMatcher.group(2));
+                matchTokenList.add(regexMatcher.group(2));
             } else {
-                matchList.add(regexMatcher.group());
+                matchTokenList.add(regexMatcher.group());
             }
         }
-        return matchList.toArray(new String[0]);
+
+        // reuse
+        return matchTokenList.toArray(emptyStringArray);
     }
 
     public String command(String text) {
