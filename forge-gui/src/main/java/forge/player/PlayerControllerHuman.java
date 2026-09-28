@@ -957,7 +957,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
                     && !getGui().isLibgdxPort();
             if (revealInPrompt) {
-                getGui().showRevealedCards(owner, collection);
+                getGui().showRevealedCards(collection);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();

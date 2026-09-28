@@ -271,12 +271,10 @@ public interface IGuiGame {
     void clearWeaklySelectable();
 
     /**
-     * Cards from {@code owner}'s hand revealed to the player for the current prompt, until
-     * {@link #hideRevealedCards()}; the GUI chooses how to display them. The owner is stated rather than read from the
-     * cards, which may be copies still reporting the zone a card has just left. Unrelated to
-     * {@link #updateRevealedCards}, which records the match's reveal history.
+     * Cards revealed to the player for the current prompt, until {@link #hideRevealedCards()}; the GUI chooses how
+     * to display them. Unrelated to {@link #updateRevealedCards}, which records the match's reveal history.
      */
-    default void showRevealedCards(PlayerView owner, Iterable<CardView> cards) {}
+    default void showRevealedCards(Iterable<CardView> cards) {}
     default void hideRevealedCards() {}
 
     boolean isGamePaused();
@@ -307,9 +305,10 @@ public interface IGuiGame {
 
     /**
      * Apply a delta update packet to the local game state.
+     * No-op for offline games - network implementation is in {@link NetworkGuiGame}.
      * @param packet the delta packet containing changes
      */
-    void applyDelta(DeltaPacket packet);
+    default void applyDelta(DeltaPacket packet) {}
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();
