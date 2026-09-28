@@ -143,6 +143,9 @@ test('deck discovery, printing-aware edits, organization and explained suggestio
     await expect(page.locator('#catalog .catalog-card')).toHaveCount(0);
     await page.locator('#catalog-library-tab').click();
     await expect(page.locator('#identity-filter')).toBeDisabled();
+    await page.evaluate(() => mutate(() => api.request('import', { name: 'Land creature review', format: 'Constructed',
+      text: 'Deck\n1 Dryad Arbor\n1 Llanowar Elves\n1 Naturalize' })));
+    await expect(page.locator('#deck-stats')).toHaveText('1 creatures1 other spells1 lands');
     expect(errors).toEqual([]);
   } finally { await application.close(); }
 });

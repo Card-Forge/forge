@@ -162,7 +162,8 @@ function renderDeck() {
   const maximum = Math.max(1, ...curve);
   $('mana-curve').innerHTML = curve.map((value, index) => `<div class="curve-column" title="${index === 7 ? '7+' : index} mana: ${value} cards"><span class="bar-count">${value || ''}</span><div class="bar" style="height:${Math.max(2, value / maximum * 37)}px"></div><span class="bar-label">${index === 7 ? '7+' : index}</span></div>`).join('');
   $('average-mana').textContent = `Average ${spellCount ? (manaSum / spellCount).toFixed(1) : '0.0'}`;
-  const creatures = main.filter(entry => entry.card.type.includes('Creature')).reduce((sum, entry) => sum + entry.quantity, 0);
+  // Match the deck groups: land creatures belong to Lands, not both totals.
+  const creatures = nonland.filter(entry => entry.card.type.includes('Creature')).reduce((sum, entry) => sum + entry.quantity, 0);
   const lands = count('Main') - spellCount;
   $('deck-stats').innerHTML = `<span><b>${creatures}</b> creatures</span><span><b>${spellCount - creatures}</b> other spells</span><span><b>${lands}</b> lands</span>`;
   $('validation').classList.toggle('valid', state.validation.valid);
