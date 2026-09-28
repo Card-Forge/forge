@@ -21,6 +21,7 @@ import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class TransitionScreen extends FContainer {
@@ -32,6 +33,8 @@ public class TransitionScreen extends FContainer {
     String enemyAtlasPath, playerAvatarName, enemyAvatarName;
     private String message = "", playerRecord = "", enemyRecord = "";
     boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene, isAlternate;
+    public boolean afterMatch;
+    private boolean snap = true;
     GlyphLayout layout;
 
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
@@ -179,12 +182,13 @@ public class TransitionScreen extends FContainer {
                 float fontScale = GuiBase.isAndroid() ? 12f : 10f;
                 BitmapFont font = Controls.getBitmapFont("default", fontScale / (screenW / screenH));
                 if (textureRegion != null) {
-                    if (isArenaScene)
+                    float value = 1 - percentage;
+                    g.setAlphaComposite(value > 0.35f ? value : 0.35f);
+                    if (isArenaScene) {
                         g.drawImage(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                    else
-                        g.drawImage(FSkinTexture.ADV_BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                    g.setAlphaComposite(1 - percentage);
-                    g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    } else {
+                        g.drawGrayTransitionImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
+                    }
                     g.setAlphaComposite(oldAlpha);
                 }
                 String p1Record = "0 - 0";
@@ -254,8 +258,10 @@ public class TransitionScreen extends FContainer {
                     }
                 }
             } else {
-                if (textureRegion != null)
-                    g.drawGrayTransitionImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
+                if (textureRegion != null) {
+                    float value = afterMatch ? 0.6f - percentage : percentage;
+                    g.drawGrayTransitionImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), isArenaScene, value);
+                }
             }
         }
 
@@ -269,6 +275,11 @@ public class TransitionScreen extends FContainer {
 
         @Override
         protected void onEnd(boolean endingAll) {
+            if (snap && isArenaScene) {
+                snap = false;
+                // overwrite initial capture
+                ScreenUtil.getInstance().takeScreenshot();
+            }
             if (runnable != null) {
                 if (isMatchTransition()) {
                     Timer.schedule(new Timer.Task() {
