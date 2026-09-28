@@ -148,7 +148,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private void syncAndSend(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
         updateGameView();
-        sender.send(method, args);
+        // if this gets provided with new object views while more updates got chained (e.g. revealing what got bounced):
+        // the client may not be quick enough to replace it in the EDT before this passes IO lookup, so we take the safer route
+        sender.send(method, getForwarder().hasPendingZoneChange(args), args);
     }
 
     /**
