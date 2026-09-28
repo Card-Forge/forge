@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
@@ -30,6 +31,7 @@ import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ItemPool;
+import forge.util.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -73,6 +75,7 @@ public class RewardScene extends UIScene {
     private int remainingSelections = 0;
     public Image marketBackgroundImg = null;
     private Actor cachedCardsContainerActor = null;
+    private Drawable origDrawable = null;
 
     private RewardScene() {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
@@ -91,6 +94,7 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
+        origDrawable = getBGDrawable();
     }
 
     @Override
@@ -231,6 +235,11 @@ public class RewardScene extends UIScene {
     public void enter() {
         autoSell = false;
         updateDetailButton();
+        if (type == Type.Loot) {
+            setUIBackground(getLastScreenshotDrawable(ScreenUtil.getInstance().getLastScreenTexture()));
+        } else {
+            setUIBackground(origDrawable);
+        }
         super.enter();
     }
 

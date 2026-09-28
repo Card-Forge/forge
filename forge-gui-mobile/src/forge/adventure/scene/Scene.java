@@ -122,7 +122,7 @@ public abstract class Scene implements Disposable {
 
     }
 
-    private ShaderDrawable lastPreviewDrawable;
+    private ShaderDrawable lastPreviewDrawable, lastScreenshotDrawable;
     private float uniformWidth = 0;
     private float uniformHeight = 0;
     private float uniformPixelSize = 0;
@@ -149,5 +149,20 @@ public abstract class Scene implements Disposable {
 
         lastPreviewDrawable.setRegion(region);
         return lastPreviewDrawable;
+    }
+    public ShaderDrawable getLastScreenshotDrawable(TextureRegion region) {
+        float width = getIntendedWidth();
+        float height = getIntendedHeight();
+
+        if (lastScreenshotDrawable == null) {
+            lastScreenshotDrawable = new ShaderDrawable(ShaderUtil.getInstance().getShaderGrayscale());
+            lastScreenshotDrawable.setUniformSetter(shader -> {
+                shader.setUniformf("u_grayness", 1f);
+                shader.setUniformf("u_bias", 0.35f);
+            });
+        }
+
+        lastScreenshotDrawable.setRegion(region);
+        return lastScreenshotDrawable;
     }
 }
