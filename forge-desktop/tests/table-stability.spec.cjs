@@ -1,12 +1,17 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('node:fs');
 const { launchDesktop } = require('./support/desktop.cjs');
 const landPlay = require('../encounters/land-play.cjs');
 
 test('lifted card pixels cover the fan and unchanged hand cards survive board and phase updates', async () => {
   test.setTimeout(180000);
-  const { application } = await launchDesktop('table-stability');
+  const { application, executable } = await launchDesktop('table-stability');
   try {
     const page = await application.firstWindow();
+    // Keep compositor presentation active for this pixel test even though the
+    // packaged test window stays hidden. Closing the window ends subscription.
+    if (executable) await application.evaluate(({ BrowserWindow }) =>
+      BrowserWindow.getAllWindows()[0].webContents.beginFrameSubscription(() => {}));
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     const context = await landPlay.prepare(page, 'Constructed');
@@ -37,7 +42,14 @@ test('lifted card pixels cover the fan and unchanged hand cards survive board an
       await page.waitForTimeout(400);
       const box = await card.boundingBox();
       const points = [.6, .78, .96].flatMap(y => [.06, .25, .5, .75, .94].map(x => ({ x: Math.round(box.x + box.width * x), y: Math.round(box.y + box.height * y) })));
-      const png = await page.screenshot({ path: test.info().outputPath(`lifted-${index}.png`), scale: 'css', timeout: 10000 });
+      // CDP screenshots can stall on a hidden packaged window. Capture makes
+      // the page renderable without showing the BrowserWindow. stayHidden:true
+      // can return an old compositor frame, so retain the default here.
+      const png = executable ? Buffer.from(await application.evaluate(async ({ BrowserWindow }, size) =>
+        (await BrowserWindow.getAllWindows()[0].webContents.capturePage())
+          .resize(size).toPNG().toString('base64'), await page.evaluate(() => ({ width: innerWidth, height: innerHeight }))), 'base64')
+        : await page.screenshot({ scale: 'css', timeout: 10000 });
+      fs.writeFileSync(test.info().outputPath(`lifted-${index}.png`), png);
       const pixels = await application.evaluate(({ nativeImage }, { png, points }) => {
         const image = nativeImage.createFromBuffer(Buffer.from(png, 'base64'));
         return points.map(point => [...image.crop({ ...point, width: 1, height: 1 }).getBitmap()]);

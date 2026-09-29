@@ -66,6 +66,13 @@ The UI helper supports both source and packaged builds, removes
 their own assertions and close the application in `finally`. Engine tests wait
 for ready/error with a bounded timeout and close their child process in `finally`.
 
+For pixel assertions in hidden packaged windows, keep compositor presentation
+active with `beginFrameSubscription` and use native `capturePage`, as in
+`table-stability.spec.cjs`. CDP capture can stall, and native capture without
+fresh presentation can return an earlier frame. The window remains hidden;
+closing it ends the subscription. Normalize images to CSS coordinates before
+sampling pixels. Source combat screenshots use CDP after arrow geometry settles.
+
 Failures can leave `engine.log`, Playwright error context, and screenshots in
 `test-results`. Use a separate output directory when comparing runs:
 
