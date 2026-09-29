@@ -25,6 +25,14 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
         { sessionId: state.id, promptId: state.prompt.id, ...answer }); }
       catch (error) { if (!error.message.includes('That choice has changed')) throw error; }
     };
+    const expectAutoWait = async state => {
+      expect(state.prompt.canAutoPass).toBe(false);
+      await expect(act(state, { action: 'passIfNoResponse' })).rejects.toThrow('needs your decision');
+      await page.getByRole('button', { name: 'Auto', exact: true }).click();
+      await page.waitForTimeout(1200);
+      expect((await read()).prompt.id).toBe(state.prompt.id);
+      await page.getByRole('button', { name: 'Full control', exact: true }).click();
+    };
     let state, attack, blocker, oldPrompt, sawAttackPicker = false;
     // Play small creatures and pass our attacks so the AI can develop its board.
     for (let step = 0; step < 1100; step++) {
@@ -42,6 +50,7 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
       }
       if (p.inputType === 'InputAttack' && !sawAttackPicker && state.combat.attackOptions?.length) {
         await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', p.id);
+        await expectAutoWait(state);
         await expect(page.locator('#combat-view')).toBeHidden();
         const physical = state.combat.attackOptions?.[0];
         if (physical) {
@@ -102,6 +111,7 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
     expect(attack, JSON.stringify({ prompt: state.prompt, combat: state.combat, turn: state.turn })).toBeTruthy();
     expect(sawAttackPicker).toBe(true);
     await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
+    await expectAutoWait(state);
     const panel = page.locator('#combat-view');
     await expect(panel).toBeHidden();
     const physicalAttacker = page.locator(`.match-arena .battlefield-card[data-table-combat="${attack.cardId}"]`);

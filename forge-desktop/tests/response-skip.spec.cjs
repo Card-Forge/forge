@@ -66,7 +66,7 @@ test('remembered response modes honor stops and temporary holds without duplicat
   } finally { await application.close(); }
 });
 
-test('skip responses protects the main phase, resolves an unanswered stack, and remembers Auto next turn', async () => {
+test('Auto resolves an unanswered stack and waits for a playable land next turn', async () => {
   const { application, dataPath } = await launchDesktop('response-skip');
   try {
     const page = await application.firstWindow();
@@ -79,12 +79,11 @@ test('skip responses protects the main phase, resolves an unanswered stack, and 
     const before = await read(page);
     expect(before.prompt.canAutoPass).toBe(false);
     await expect(act(page, before, { action: 'passIfNoResponse' })).rejects.toThrow('needs your decision');
-    await auto.click();
     await landPlay.steps[0].perform(page, context);
     await landPlay.steps[0].verify(page, context);
-    await expect(auto).toHaveAttribute('aria-pressed', 'true');
-    expect((await read(page)).prompt.canAutoPass).toBe(false);
-    await expect(page.locator('#match-skip-status')).toHaveText('Paused for your action.');
+    // Full control still waits here, even though Auto could now advance.
+    expect((await read(page)).prompt.canAutoPass).toBe(true);
+    await expect(page.locator('#match-skip-status')).toHaveText('Full control · remembered');
     // The control remains reachable in the compact layout.
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1000, 740));
     const bounds = await auto.boundingBox();
@@ -135,5 +134,57 @@ test('skip responses protects the main phase, resolves an unanswered stack, and 
     await page.reload();
     await expect.poll(() => page.evaluate(() => playPreferences.get().responseMode)).toBe('auto');
     expect(errors).toEqual([]);
+  } finally { await application.close(); }
+});
+
+test('Auto advances after the only playable land, then waits for the next legal land play', async () => {
+  const { application } = await launchDesktop('auto-empty-main');
+  try {
+    const page = await application.firstWindow();
+    const context = await landPlay.prepare(page, 'Commander');
+    const auto = page.getByRole('button', { name: 'Auto', exact: true });
+    await auto.click();
+    // A land is available now: Auto must leave the opening main phase alone.
+    const before = await read(page);
+    expect(before.prompt.canAutoPass).toBe(false);
+    await page.waitForTimeout(1100);
+    expect((await read(page)).prompt.id).toBe(before.prompt.id);
+    await landPlay.steps[0].perform(page, context);
+    await expect(page.locator('#match-history-list')).toContainText('You played Forest.');
+    await expect(page.locator('#match-human .lands-row [aria-label="Forest"]')).toHaveCount(1);
+    // No Continue click: one land is all this opening hand can play. The next
+    // turn's land allowance must bring Auto to a stop again.
+    await expect.poll(async () => {
+      const state = await read(page);
+      return state.turn > before.turn && state.activePlayerId === context.humanId
+        && state.phaseKey === 'MAIN1' && state.prompt?.inputType === 'InputPassPriority';
+    }, { timeout: 25000 }).toBe(true);
+    const next = await read(page);
+    expect(next.prompt.canAutoPass).toBe(false);
+    await page.waitForTimeout(1100);
+    expect((await read(page)).prompt.id).toBe(next.prompt.id);
+    await expect(auto).toHaveAttribute('aria-pressed', 'true');
+    // Players who want the old main-phase pause can save it explicitly.
+    const controls = page.locator('.match-response-settings');
+    await controls.locator('summary').click();
+    await controls.getByRole('checkbox', { name: 'Main phase 1', exact: true }).check();
+    await controls.locator('summary').click();
+    const land = next.players.find(player => player.human).zones.find(zone => zone.name === 'Hand').cards[0];
+    await act(page, next, { action: 'card', key: land.key });
+    // The stop label was already present before the click. Wait for the engine
+    // to finish the land play, rather than mistaking that old label for a reply.
+    await expect.poll(async () => {
+      const state = await read(page);
+      return state.phaseKey === 'MAIN1' && state.prompt?.id !== next.prompt.id && state.prompt?.canAutoPass === true;
+    }).toBe(true);
+    const held = await read(page);
+    await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', held.prompt.id);
+    await expect(page.locator('#match-skip-status')).toHaveText('Paused at your saved turn stop.');
+    await page.waitForTimeout(1300);
+    expect((await read(page)).prompt.id).toBe(held.prompt.id);
+    await controls.locator('summary').click();
+    await controls.getByRole('checkbox', { name: 'Main phase 1', exact: true }).uncheck();
+    await controls.locator('summary').click();
+    await expect.poll(async () => (await read(page)).prompt?.id).not.toBe(held.prompt.id);
   } finally { await application.close(); }
 });

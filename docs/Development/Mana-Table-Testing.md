@@ -77,7 +77,10 @@ The desktop test launcher seeds **Full control** in its isolated profile so
 encounters retain deterministic response pauses. Pass `preferences: null` to
 `launchDesktop` to exercise production defaults, or supply a preference object.
 `response-skip.spec.cjs` checks Auto across real turns and verifies cancellation,
-phase stops, temporary holds, stale prompts, and persistence. `preferences.test.cjs`
+phase stops, temporary holds, stale prompts, and persistence. Its opening-land
+scenario must advance automatically after the only available play, then wait
+for the next turn's land play. `response-skip.test.cjs` also protects affordable
+instants and commanders from an automatic pass. `preferences.test.cjs`
 covers validation, disk round trips, and corrupt-file recovery.
 
 After `npm run package`, run a fresh test profile against the manifest's build:

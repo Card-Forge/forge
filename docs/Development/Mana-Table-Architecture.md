@@ -96,11 +96,15 @@ turn guidance never chooses an action on the player's behalf.
 
 In **Auto**, `response-skip.js` submits `passIfNoResponse` only for
 `InputPassPriority` with engine-issued `canAutoPass: true`.
-This permission comes from the controller's current action scan and preserves
-empty-stack main phases and required inputs. The normal session/prompt checks
+This permission comes from the controller's current action scan. Main phases
+advance when no playable action remains; land plays, affordable spells and
+abilities, and castable commanders hold priority. Required inputs always wait.
+The normal session/prompt checks
 still apply. Switching to **Full control**, selecting an own-turn stop, or using
 **Hold this turn** cancels a queued pass. Only the temporary hold resets at a
-turn/session boundary. Browsing the workshop suspends automatic passes.
+turn/session boundary. Both main phases can be selected as saved stops. A
+one-second pause before leaving an empty main phase lets the last play settle
+on the table. Browsing the workshop suspends automatic passes.
 `preferences.cjs` validates and atomically stores the response mode, phase stops
 and inspector preference in the fixed profile file `preferences.json` through
 dedicated, origin-checked IPC. Auto is the production default; the renderer uses

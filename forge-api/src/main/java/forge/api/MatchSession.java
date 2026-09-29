@@ -14,7 +14,6 @@ import forge.game.card.Card;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.*;
-import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.*;
@@ -227,11 +226,11 @@ public final class MatchSession {
         // The controller refreshes this conservative action scan before publishing
         // priority. It includes affordable spells/abilities in playable zones and
         // treats scan timeouts as available actions; mana abilities alone do not count.
-        // Never infer this from card highlighting in the renderer or skip a main phase.
-        boolean ownMain = viewer.equals(view.getPlayerTurn()) && view.getStack().isEmpty()
-                && (view.getPhase() == PhaseType.MAIN1 || view.getPhase() == PhaseType.MAIN2);
+        // Land plays and castable commanders count as actions too. A main phase
+        // with no remaining play is eligible; the client applies saved phase stops.
+        // Never infer this permission from card highlighting in the renderer.
         return input instanceof InputPassPriority && okEnabled && view.getTurn() > 0
-                && !ownMain && !viewer.hasAvailableActions();
+                && !viewer.hasAvailableActions();
     }
 
     public Map<String, Object> action(JsonObject request) {

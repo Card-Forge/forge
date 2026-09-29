@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const phaseStops = ['UPKEEP', 'DRAW', 'COMBAT_BEGIN', 'END_OF_TURN'];
+const phaseStops = ['UPKEEP', 'DRAW', 'MAIN1', 'COMBAT_BEGIN', 'MAIN2', 'END_OF_TURN'];
 const defaults = () => ({ responseMode: 'auto', phaseStops: [], cardDetails: false });
 function validate(patch) {
   if (!patch || typeof patch !== 'object' || Array.isArray(patch)) throw new Error('Invalid play preferences');

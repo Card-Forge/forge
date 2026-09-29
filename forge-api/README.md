@@ -232,13 +232,17 @@ Input prompts expose `canAutoPass`. It is true only for a priority window where
 the controller's current availability scan finds no playable non-mana action.
 The scan considers costs, targets, and playable zones, and conservatively stops
 on a scan timeout. An untapped mana source alone does not require a response.
-The player's empty-stack main phases and all required decisions always return
-false. `matchAction {action: "passIfNoResponse", sessionId, promptId}` checks this
+Main phases become eligible after the last playable action, including land
+plays, affordable spells, activated abilities, and commanders. Required decisions
+(attacks, blocks, targets, payments, and other choices) always return false.
+`matchAction {action: "passIfNoResponse", sessionId, promptId}` checks this
 published permission and passes priority through the normal engine input;
 ineligible or stale requests are rejected without advancing the game.
-The desktop checkbox lasts only for its current session, turn, and active
-player. It briefly pauses before each pass, stops when a response becomes
-available, and resets on turn changes, a new game, or renderer reload.
+The desktop remembers Auto/Full control and optional own-turn phase stops,
+including both main phases. It briefly pauses before each pass and stops when
+a play becomes available. Hold this turn resets at the next turn; saved mode
+and phase stops persist across games. These client preferences can suppress an
+eligible pass but never authorize one the engine has rejected.
 This is an additive protocol change: existing manual actions remain valid, and
 clients must treat a missing `canAutoPass` field as false.
 

@@ -6,8 +6,8 @@ function createResponseSkip(anchor, { current, busy, visible, answer, preference
   panel.innerHTML = '<div class="response-modes" role="group" aria-label="Response control">'
     + '<button data-response-mode="auto" aria-pressed="false">Auto</button><button data-response-mode="manual" aria-pressed="false">Full control</button></div>'
     + '<button class="response-hold" aria-pressed="false">Hold this turn</button>'
-    + '<details class="response-stops"><summary>Preferences</summary><div class="response-stops-body"><p>Auto continues only when you have no playable response. Your main phases and required choices always wait. This setting is remembered between games.</p><p>Always wait at these steps on your turn:</p>'
-    + [['UPKEEP', 'Upkeep'], ['DRAW', 'Draw'], ['COMBAT_BEGIN', 'Beginning of combat'], ['END_OF_TURN', 'End step']]
+    + '<details class="response-stops"><summary>Preferences</summary><div class="response-stops-body"><p>Auto continues when you have no playable card or ability, including after your last play in a main phase. Attacks, blocks, and required choices always wait. This setting is remembered between games.</p><p>Always wait at these steps on your turn:</p>'
+    + [['UPKEEP', 'Upkeep'], ['DRAW', 'Draw'], ['MAIN1', 'Main phase 1'], ['COMBAT_BEGIN', 'Beginning of combat'], ['MAIN2', 'Main phase 2'], ['END_OF_TURN', 'End step']]
       .map(([phase, label]) => `<label><input type="checkbox" data-stop="${phase}">${label}</label>`).join('') + '</div></details>'
     + '<small id="match-skip-status" role="status" aria-live="polite"></small>';
   anchor.after(panel);
@@ -25,6 +25,8 @@ function createResponseSkip(anchor, { current, busy, visible, answer, preference
     ? `${state.id}:${state.turn}:${state.activePlayerId}` : null;
   const stopped = state => Boolean(state && state.activePlayerId != null && state.activePlayerId === state.players?.find(player => player.human)?.id)
     && preferences.get().phaseStops.includes(state.phaseKey);
+  const ownEmptyMain = state => state?.activePlayerId != null && state.activePlayerId === state.players?.find(player => player.human)?.id
+    && ['MAIN1', 'MAIN2'].includes(state.phaseKey) && !state.stack?.length;
   function allowed(state) {
     const prefs = preferences.get();
     return prefs.ready && prefs.responseMode === 'auto' && !held && !stopped(state)
@@ -43,7 +45,8 @@ function createResponseSkip(anchor, { current, busy, visible, answer, preference
       if (busy()) { timer = setTimeout(pass, 100); return; }
       attempted = key;
       answer({ action: 'passIfNoResponse' }, scope);
-    }, 550);
+    // Let the last play settle on the table before leaving a main phase.
+    }, ownEmptyMain(state) ? 1000 : 550);
   }
   function render(state) {
     cancelPending();
@@ -62,7 +65,8 @@ function createResponseSkip(anchor, { current, busy, visible, answer, preference
     hold.textContent = held ? 'Resume Auto' : 'Hold this turn';
     status.textContent = !prefs.ready ? 'Loading preferences…' : prefs.responseMode === 'manual' ? 'Full control · remembered'
       : held ? 'Holding until this turn ends.' : stopped(state) ? 'Paused at your saved turn stop.'
-        : allowed(state) ? 'No response available. Continuing…' : state?.prompt ? 'Paused for your action.' : 'Auto · remembered';
+        : allowed(state) ? ownEmptyMain(state) ? 'No more plays available. Continuing…' : 'No response available. Continuing…'
+          : state?.prompt ? 'Paused for your action.' : 'Auto · remembered';
     if (allowed(state) && visible()) schedule(state);
   }
   panel.querySelectorAll('[data-response-mode]').forEach(button => {

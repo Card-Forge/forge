@@ -1,10 +1,21 @@
-# Mana Table — beta 0.1.0-beta.27
+# Mana Table — beta 0.1.0-beta.28
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 27 introduces the **3D table**:
+Beta 28 fixes **Auto stopping after your last playable card**:
+
+- After playing your land, Auto continues if you have no other playable card
+  or ability. The card has a moment to settle on the table before play advances.
+- Auto still waits for available land plays, affordable spells and abilities,
+  and castable commanders. Attacks, blocks, targets, payments, and other required
+  choices remain yours.
+- Save a stop for **Main phase 1** or **Main phase 2** under **Preferences** if
+  you want to pause there even with nothing left to play. Full control and
+  Hold this turn also remain available.
+
+Beta 27 introduced the **3D table**:
 
 - A gently tilted perspective camera looks over a lit playmat. Cards have
   thickness and shadows; your hand lifts toward you and permanents turn
@@ -48,12 +59,12 @@ Beta 25's **physical cards and remembered play preferences** remain available:
   use their edge arrows, the mouse wheel, or Left/Right/Home/End on a focused card
   to browse. There are no native scrollbars across the battlefield.
 - **Auto** is the default response mode. It continues only when the engine says
-  you have no playable response, and always waits at your main phases and required
-  choices. **Full control** waits at every response window the engine presents.
+  you have no playable card or ability, including during main phases. Required
+  choices always wait. **Full control** waits at every response window the engine presents.
   Your choice is remembered between games, app launches, and beta upgrades.
 - **Hold this turn** temporarily pauses Auto; **Resume Auto** releases the hold.
-  Under **Preferences**, save stops on your upkeep, draw, beginning of combat,
-  or end step. A hold expires at the next turn; saved stops remain enabled.
+  Under **Preferences**, save stops on your upkeep, draw, either main phase,
+  beginning of combat, or end step. A hold expires at the next turn; saved stops remain enabled.
 - Your life and mana remain beside the steady hand fan. Creatures stay toward the
   center, lands behind them, with separate play areas for every Commander seat.
 
@@ -222,9 +233,11 @@ The decision panel says when it is **your action**, including responses during
 the opponent's turn. **Latest action** shows what just happened. Expand **Action
 history** for the last 120 events: plays, spell resolutions, combat, and life changes.
 
-Playing a land updates your hand and battlefield, then waits in the current
-phase. The game does not automatically pass just because you have nothing else
-to cast. The button names the next action, such as **Go to combat** or
+Playing a land updates your hand and battlefield. Auto continues after a short
+pause if you have no remaining play; it waits if the land lets you cast a spell,
+activate an ability, or play your commander. Full control, Hold this turn, and
+saved main-phase stops let you pause even when nothing remains to play.
+The button names the next action, such as **Go to combat** or
 **Finish upkeep**. It passes only the current chance to act; the other player
 can respond before the step ends.
 
@@ -232,7 +245,7 @@ Response pauses outside your main phases say **Optional response**. You do not
 have to play a card to move on. When a spell or ability is waiting, the prompt
 names it, shows its engine description, and offers **Let it resolve**. Select a
 highlighted card or ability if you want to act first. **Auto** continues only when
-you have no playable response, preserving your main phases and required choices.
+you have no playable action, preserving available plays and required choices.
 Switch to **Full control** to wait at every engine response window, or use
 **Hold this turn** for a temporary pause. The mode and stops under **Preferences**
 are remembered; only the temporary hold expires when the turn changes.

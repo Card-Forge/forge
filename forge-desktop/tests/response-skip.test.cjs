@@ -32,7 +32,7 @@ test('automatic pass waits for an affordable instant, then becomes available aft
       assert.ok(state.prompt?.inputType?.includes('Mulligan'), 'Did not reach opening hand');
     }
     assert.ok(prepared, 'Could not prepare the response fixture');
-    let playedLand = false, casting = false, stopped = false, passed = false, oldPrompt;
+    let playedLand = false, checkedMainPlay = false, casting = false, stopped = false, passed = false, oldPrompt;
     const end = Date.now() + 70000;
     while (Date.now() < end && !passed) {
       state = await engine.request('matchState');
@@ -47,6 +47,10 @@ test('automatic pass waits for an affordable instant, then becomes available aft
           const land = handOf(state).find(card => card.name === 'Mountain');
           assert.ok(land);
           answer = { action: 'card', key: land.key }; playedLand = true;
+        } else if (playedLand && !casting && !state.stack.length && state.activePlayerId === human.id && state.phaseKey === 'MAIN1') {
+          assert.equal(p.canAutoPass, false, 'Playing a land must not skip a spell it can pay for');
+          checkedMainPlay = true;
+          answer = { action: 'ok' };
         } else if (playedLand && state.stack.length && state.activePlayerId === opponent.id) {
           if (!casting) {
             assert.equal(p.canAutoPass, false, 'An affordable instant must hold priority');
@@ -76,6 +80,59 @@ test('automatic pass waits for an affordable instant, then becomes available aft
       oldPrompt = p.id;
       await engine.request('matchAction', { ...scope, ...answer });
     }
-    assert.ok(stopped && passed, 'Did not verify both response availability states');
+    assert.ok(checkedMainPlay && stopped && passed, 'Did not verify main-phase and response availability');
+  } finally { engine.close(); }
+});
+
+test('Auto preserves a castable commander, then allows the empty main phase after casting it', { timeout: 120000 }, async () => {
+  const engine = startEngine(testProfile('auto-commander-main'));
+  try {
+    await ready(engine);
+    await engine.request('import', { name: 'Commander priority', format: 'Commander', text: 'Deck\n99 Forest\nCommander\n1 Rhys the Redeemed' });
+    await engine.request('matchStart', { opponent: 'green' });
+    let playedLand = false, castCommander = false, verified = false, oldPrompt;
+    const end = Date.now() + 70000;
+    while (Date.now() < end && !verified) {
+      const state = await engine.request('matchState');
+      assert.notEqual(state.status, 'error', state.error);
+      const p = state.prompt;
+      if (!p || p.id === oldPrompt) { await sleep(25); continue; }
+      const human = state.players.find(player => player.human);
+      const scope = { sessionId: state.id, promptId: p.id };
+      let answer;
+      if (p.inputType === 'InputPassPriority' && state.activePlayerId === human.id && state.phaseKey === 'MAIN1' && !state.stack.length) {
+        if (!playedLand) {
+          assert.equal(p.canAutoPass, false, 'An available land play must hold the main phase');
+          answer = { action: 'card', key: handOf(state)[0].key };
+          playedLand = true;
+        } else if (!castCommander) {
+          assert.equal(p.canAutoPass, false, 'A commander payable with this land must hold the main phase');
+          await assert.rejects(engine.request('matchAction', { ...scope, action: 'passIfNoResponse' }), /needs your decision/);
+          assert.equal((await engine.request('matchState')).prompt.id, p.id);
+          const commander = human.zones.find(zone => zone.name === 'Command').cards.find(card => card.name === 'Rhys the Redeemed');
+          assert.ok(commander?.selectable, 'The available commander is highlighted');
+          answer = { action: 'card', key: commander.key };
+          castCommander = true;
+        } else {
+          assert.ok(human.zones.find(zone => zone.name === 'Battlefield').cards.some(card => card.name === 'Rhys the Redeemed'));
+          assert.equal(p.canAutoPass, true, 'No land play, mana, or affordable activation remains');
+          await engine.request('matchAction', { ...scope, action: 'passIfNoResponse' });
+          await assert.rejects(engine.request('matchAction', { ...scope, action: 'passIfNoResponse' }), /changed/);
+          verified = true;
+          continue;
+        }
+      } else if (p.inputType === 'InputPassPriority') {
+        answer = { action: p.canAutoPass ? 'passIfNoResponse' : 'ok' };
+      } else {
+        assert.notEqual(p.canAutoPass, true, 'Auto never answers a required choice or mana payment');
+        if (p.kind === 'choice') answer = { choices: Array.from({ length: Math.max(p.min, Math.min(1, p.max)) }, (_, index) => index) };
+        else if (p.kind === 'reveal') answer = { action: 'ack' };
+        else if (p.okEnabled) answer = { action: 'ok' };
+        else throw new Error(`Unexpected fixture input: ${JSON.stringify(p)}`);
+      }
+      oldPrompt = p.id;
+      await engine.request('matchAction', { ...scope, ...answer });
+    }
+    assert.ok(verified, 'Did not finish the commander main-phase scenario');
   } finally { engine.close(); }
 });
