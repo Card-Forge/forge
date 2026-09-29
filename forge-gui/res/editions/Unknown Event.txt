@@ -523,3 +523,4 @@ MZ99 M The Collector @
 Glass:Glasses
 Stained:Stained
 Judge:Judges
+Chef:Chefs
