@@ -1,8 +1,11 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Sets;
+
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
+import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -141,12 +144,57 @@ public class CloneAi extends SpellAbilityAi {
             return true;
         }
 
+        if ("CloneBestLand".equals(sa.getParam("AILogic"))) {
+            final Card host = sa.getHostCard();
+            final Player self = host.getController();
+            // every land is scored as ours, because that is where the copy arrives: Cabal Coffers
+            // counts our Swamps, not theirs. Skip a legendary we already control, since copying
+            // that just means sacrificing one of the two
+            final Card best = bestLandToBecome(CardLists.filter(targets,
+                    t -> t != host && !(t.getType().isLegendary() && self.isCardInPlay(t.getName()))), host, self);
+            if (best == null) {
+                return false;
+            }
+            sa.getTargets().add(best);
+            return true;
+        }
+
         // Default:
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things that clone a target. Those can just use
         // AI:RemoveDeck:All until this can do a reasonably good job of picking
         // a good target
         return false;
+    }
+
+    /**
+     * The land the host is best off becoming, or null if none of them beats what it already is.
+     * A land is scored under whoever controls it now, so an opponent's is judged on a copy moved
+     * to our side: Cabal Coffers counts our Swamps, Gaea's Cradle our creatures.
+     */
+    private static Card bestLandToBecome(final Iterable<Card> candidates, final Card host, final Player self) {
+        final Game game = self.getGame();
+        Card best = null;
+        int bestScore = GameStateEvaluator.evaluateLand(host);
+        boolean copied = false;
+        for (final Card land : candidates) {
+            Card judged = land;
+            if (!self.equals(land.getController())) {
+                judged = CardCopyService.getLKICopy(land);
+                judged.setController(self, game.getNextTimestamp());
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(judged), new CardCollection(judged));
+                copied = true;
+            }
+            final int score = GameStateEvaluator.evaluateLand(judged);
+            if (score > bestScore) {
+                best = land;
+                bestScore = score;
+            }
+        }
+        if (copied) {
+            game.getAction().checkStaticAbilities(false);
+        }
+        return best;
     }
 
     /* (non-Javadoc)
@@ -255,5 +303,16 @@ public class CloneAi extends SpellAbilityAi {
 
         // don't activate during main2 unless this effect is permanent
         return !ph.is(PhaseType.MAIN2) || !sa.hasParam("Duration");
+    }
+
+    @Override
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
+            final String logic) {
+        if ("CloneBestLand".equals(logic)) {
+            // the upgrade is permanent and the cost taps, so wait until the end of the turn before
+            // ours: the mana stays open as a threat until then, and it unlocks in our untap step
+            return super.checkPhaseRestrictions(ai, sa, ph, "AtOppEOT");
+        }
+        return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
 }
