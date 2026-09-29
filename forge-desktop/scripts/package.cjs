@@ -18,7 +18,7 @@ if (process.platform !== 'win32' || process.arch !== 'x64') throw new Error('The
 if (!javaHome || !fs.existsSync(path.join(javaHome, 'bin', 'jlink.exe'))) throw new Error('Set JAVA_HOME to a JDK 17+ installation containing bin/jlink.exe.');
 if (!fs.existsSync(jar)) throw new Error('Build forge-api with Maven before packaging.');
 fs.mkdirSync(stage, { recursive: true });
-for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'runtime.cjs', 'deck-sources.cjs', 'renderer']) {
+for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'runtime.cjs', 'deck-sources.cjs', 'preferences.cjs', 'renderer']) {
   fs.cpSync(path.join(appSource, file), path.join(stage, file), { recursive: true });
 }
 const metadata = JSON.parse(fs.readFileSync(path.join(appSource, 'package.json'), 'utf8'));
@@ -49,6 +49,14 @@ if (result.status !== 0) throw new Error('Could not build the Java runtime.');
     fs.copyFileSync(path.join(appSource, 'BETA.md'), path.join(packaged, 'START-HERE.md'));
     fs.writeFileSync(path.join(packaged, 'SOURCE.txt'), 'Source: https://github.com/proflayton/Mana-Table/tree/feature/desktop-beta\nForge upstream: https://github.com/Card-Forge/forge\nForge is GPL-3.0-or-later.\nElectron and Java notices accompany their bundled runtimes.\n');
     if (previousBeta) {
+      const previousPreferences = path.join(previousBeta.directory, 'UserData', 'preferences.json');
+      if (fs.existsSync(previousPreferences)) {
+        const destination = path.join(packaged, 'UserData', 'preferences.json');
+        fs.mkdirSync(path.dirname(destination), { recursive: true });
+        fs.copyFileSync(previousPreferences, destination, fs.constants.COPYFILE_EXCL);
+        if (!fs.readFileSync(previousPreferences).equals(fs.readFileSync(destination))) throw new Error('Play preference verification failed');
+        console.log('Preserved and verified play preferences from the previous beta.');
+      }
       for (const folder of ['decks', 'art']) {
         const previous = path.join(previousBeta.directory, 'UserData', folder);
         const destination = path.join(packaged, 'UserData', folder);

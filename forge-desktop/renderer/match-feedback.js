@@ -49,7 +49,7 @@ const matchFeedback = (() => {
       const id = element.dataset.visualCard;
       if (!id || element.classList.contains('table-drag-ghost') || element.dataset.handVisible === 'false' || !element.checkVisibility()) return;
       result.set(id, { rect: element.getBoundingClientRect(),
-        transform: getComputedStyle(element.querySelector('.card-art')).transform,
+        transform: getComputedStyle(element.querySelector('.permanent-surface, .card-art')).transform,
         area: element.closest('#match-hand') ? 'hand' : element.closest('.battlefield-row') ? 'field' : 'other' });
       positions.delete(id); positions.set(id, result.get(id));
       while (positions.size > 200) positions.delete(positions.keys().next().value);
@@ -95,7 +95,7 @@ const matchFeedback = (() => {
         }
         animate(element, [{ opacity: .4 }, { opacity: 1 }]);
       } else if (old && former && former.tapped !== card.tapped) {
-        const art = element.querySelector('.card-art');
+        const art = element.querySelector('.permanent-surface, .card-art');
         animate(art, [{ transform: old.transform }, { transform: getComputedStyle(art).transform }], 280);
       }
       if (former && ((!former.attacking && card.attacking) || (!former.blocking && card.blocking) || former.damage !== card.damage)) {

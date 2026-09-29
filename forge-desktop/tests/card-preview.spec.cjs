@@ -8,8 +8,8 @@ test('card previews show readable details without blocking play or retaining sta
     const page = await application.firstWindow();
     page.on('pageerror', error => errors.push(error.message));
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
-    const preview = page.locator('#card-preview');
-    const title = preview.locator('h2');
+    let preview = page.locator('#card-preview');
+    let title = preview.locator('h2');
     await page.locator('#search').fill('Lightning Bolt');
     const libraryCard = page.locator('.catalog-card').filter({ has: page.getByRole('heading', { name: 'Lightning Bolt', exact: true }) });
     await libraryCard.hover();
@@ -47,11 +47,29 @@ test('card previews show readable details without blocking play or retaining sta
     await expect(page.locator('#match-hand .match-card')).toHaveCount(7);
     const match = await page.evaluate(() => window.forge.request('matchState'));
     const card = match.players.find(player => player.human).zones.find(zone => zone.name === 'Command').cards[0];
+    preview = page.locator('#table-card-details'); title = preview.locator('h2');
+    // Rapid movement across a card must cancel the delayed enlargement, rather
+    // than displaying it after the pointer has already left.
+    await commander.evaluate(element => {
+      const zoom = document.getElementById('card-zoom');
+      window.zoomReveals = 0;
+      window.zoomObserver = new MutationObserver(() => { if (!zoom.hidden) window.zoomReveals++; });
+      zoomObserver.observe(zoom, { attributes: true, attributeFilter: ['hidden'] });
+      element.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse' }));
+      document.body.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse' }));
+    });
+    await page.waitForTimeout(260);
+    expect(await page.evaluate(() => { zoomObserver.disconnect(); return zoomReveals; })).toBe(0);
     await commander.hover();
+    await expect(page.locator('#card-zoom')).toHaveAttribute('aria-label', card.name);
+    await expect(preview).toBeHidden();
+    await expect(page.locator('#card-preview')).toBeHidden();
+    await expect(page.locator('#card-zoom')).toHaveCSS('pointer-events', 'none');
+    await page.keyboard.press('i');
     await expect(title).toHaveText(card.name);
     await expect(preview.locator('.preview-rules')).toHaveText(card.text);
     await expect(preview.locator('.preview-stats strong')).toHaveText(`${card.power} / ${card.toughness}`);
-    await expect(commander).toHaveAttribute('aria-describedby', 'card-preview');
+    await expect(commander).toHaveAttribute('aria-describedby', 'table-card-details');
     const assertPlacement = async source => {
       const a = await source.boundingBox();
       const b = await preview.boundingBox();
@@ -71,6 +89,9 @@ test('card previews show readable details without blocking play or retaining sta
     await page.mouse.move(arena.x + arena.width / 2, arena.y + arena.height - 6);
     await handCard.locator('.match-hand-cost').hover({ position: { x: 14, y: 10 } });
     await expect(title).toHaveText(await handCard.locator('.match-card-name').textContent());
+    await expect(page.locator('#card-zoom')).toBeHidden();
+    await expect(handCard).toHaveClass(/hand-raised/);
+    await expect.poll(async () => (await handCard.boundingBox()).width).toBeGreaterThan(220);
     await assertPlacement(handCard);
     await handCard.click(); // The enlarged view must never intercept card actions.
     await expect(preview).toBeHidden();
@@ -88,7 +109,7 @@ test('card previews show readable details without blocking play or retaining sta
       fixture.id = 'preview-fixture';
       fixture.textContent = 'Preview fixture';
       fixture.style.cssText = 'position:fixed;left:20px;top:100px;width:100px;height:130px;z-index:10';
-      document.body.append(fixture);
+      document.querySelector('.match-arena').append(fixture);
       cardPreview.bind(fixture, '#preview-fixture', () => fixture.dataset.faceDown === 'yes'
         ? { name: 'PRIVATE CARD NAME', text: 'PRIVATE RULES', faceDown: true, type: 'Creature', power: 9, toughness: 9,
           otherFace: { name: 'PRIVATE BACK', oracleText: 'PRIVATE BACK RULES' } }
@@ -105,6 +126,7 @@ test('card previews show readable details without blocking play or retaining sta
     await page.keyboard.press('f');
     await expect(title).toHaveText('Face-down card');
     await page.mouse.move(0, 0);
+    await page.keyboard.press('Escape');
     await fixture.evaluate(element => { element.dataset.faceDown = 'no'; });
     await fixture.hover();
     await expect(title).toHaveText('Long rules');
@@ -112,7 +134,7 @@ test('card previews show readable details without blocking play or retaining sta
     await expect(preview.locator('.preview-status')).toContainText('Attacking');
     await expect(preview.locator('.preview-status')).toContainText('2 damage marked');
     await expect(preview.locator('.preview-status')).toContainText('3 +1/+1');
-    await expect(preview.locator('.preview-scroll-hint')).toBeVisible();
+    await preview.locator('.preview-rules').hover();
     await page.mouse.wheel(0, 500);
     await expect.poll(() => preview.locator('.preview-rules').evaluate(element => element.scrollTop)).toBeGreaterThan(0);
     await assertPlacement(fixture);

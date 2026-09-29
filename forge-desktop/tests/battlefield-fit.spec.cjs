@@ -34,7 +34,7 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
       }
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
       // Freeze at a real input prompt and populate every real seat's rows with
-      // cloned card elements. This forces scrollbars and mixed tap states without
+      // cloned card elements. This forces crowded ranks and mixed tap states without
       // requiring dozens of turns or changing any engine state.
       await page.evaluate(() => {
         const creature = document.querySelector('#match-human .match-command-zone .match-card');
@@ -50,6 +50,11 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
             copy.querySelector('.match-hand-details')?.remove();
             copy.removeAttribute('data-match-card');
             copy.removeAttribute('data-visual-card');
+            const surface = document.createElement('span'); surface.className = 'permanent-surface';
+            const stats = copy.querySelector('.match-stats');
+            if (stats) copy.append(stats);
+            surface.append(copy.querySelector('.match-card-face'), copy.querySelector('.match-card-name'));
+            copy.prepend(surface);
             copy.style.transition = 'none';
             copy.querySelector('.card-art').style.transition = 'none';
             row.append(copy);
@@ -73,6 +78,8 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
           });
         }));
         expect(await check(), `${count} seats at ${size}: artwork, name and stats inside scrollport`).toEqual([]);
+        await expect(page.locator('.battlefield-row').first()).toHaveCSS('scrollbar-width', 'none');
+        await expect(page.locator('.battlefield-card.tapped .permanent-surface').first()).toHaveCSS('transform', 'matrix(0, 1, -1, 0, 0, 0)');
         expect(await page.locator('.match-battlefield').evaluateAll(fields => fields.every(field => {
           const front = field.querySelector('.permanents-row').getBoundingClientRect();
           const back = field.querySelector('.lands-row').getBoundingClientRect();

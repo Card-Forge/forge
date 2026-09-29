@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { launchDesktop } = require('./support/desktop.cjs');
 
 test('hand gestures cancel safely on stale prompts and large hands stay reachable', async () => {
+  test.setTimeout(180000);
   const { application, executable } = await launchDesktop('hand-gestures');
   try {
     const page = await application.firstWindow();
@@ -178,7 +179,21 @@ test('hand gestures cancel safely on stale prompts and large hands stay reachabl
     expect(await page.evaluate(() => window.nativeHandDrags)).toBe(0);
     await expect(page.locator('.table-drag-ghost')).toHaveCount(0);
     expect(await actions()).toHaveLength(1);
-    if (!executable) await page.screenshot({ path: test.info().outputPath('persistent-hand.png') });
+    // Resizing keeps the held card reachable as the fan changes capacity.
+    await last.focus();
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1540, 980));
+    await expect(last).toHaveAttribute('data-hand-visible', 'true');
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1000, 740));
+    await expect(last).toHaveAttribute('data-hand-visible', 'true');
+    expect(await last.evaluate(element => {
+      const b = element.getBoundingClientRect(), a = element.closest('.match-arena').getBoundingClientRect();
+      return b.left >= a.left && b.right <= a.right && b.top >= a.top && b.bottom <= a.bottom;
+    })).toBe(true);
+    if (!executable) {
+      const png = await application.evaluate(async ({ BrowserWindow }) =>
+        (await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined, { stayHidden: true })).toPNG().toString('base64'));
+      require('node:fs').writeFileSync(test.info().outputPath('persistent-hand.png'), Buffer.from(png, 'base64'));
+    }
     expect(errors).toEqual([]);
   } finally { await application.close(); }
 });

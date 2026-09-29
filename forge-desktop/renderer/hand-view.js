@@ -18,10 +18,14 @@ function createHandView(arena, hand, send) {
     const cards = tiles(), width = hand.clientWidth;
     capacity = Math.max(1, Math.min(10, Math.floor((width - 208) / 56) + 1));
     first = Math.max(0, Math.min(first, cards.length - capacity));
+    // Keep the held/focused card in the fan when a resize reduces its capacity.
+    const selected = cards.indexOf(raised);
+    if (selected >= 0 && (selected < first || selected >= first + capacity))
+      first = Math.max(0, Math.min(selected - capacity + 1, cards.length - capacity));
     const count = Math.min(capacity, cards.length), cardWidth = 148;
     const step = count > 1 ? Math.min(108, (width - 96 - cardWidth) / (count - 1)) : 0;
     const left = (width - cardWidth - step * (count - 1)) / 2;
-    const selected = cards.indexOf(raised), target = tableTarget?.getBoundingClientRect();
+    const target = tableTarget?.getBoundingClientRect();
     const origin = hand.getBoundingClientRect();
     cards.forEach((card, index) => {
       const slot = index - first, visible = slot >= 0 && slot < capacity;

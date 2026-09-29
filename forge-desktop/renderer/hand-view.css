@@ -19,12 +19,20 @@
 .match-hand-card .card-art img { object-fit: contain; object-position: center; }
 .match-hand-card .match-card-name { position: absolute; left: 5px; right: 5px; bottom: 34px; padding: 2px 3px; max-height: 36px; border-radius: 3px; background: #13232deb; }
 .match-hand-card .match-hand-details { position: absolute; left: 5px; right: 5px; bottom: 5px; height: 26px; padding: 0 2px; border-radius: 3px; background: #13232deb; }
+/* Once the portrait is available, inspection exposes its printed rules. Keep
+   the current power/toughness and readable mana symbols as small corner badges. */
+.match-hand-card.hand-raised:has(.card-art img) .match-card-name,
+.match-hand-card.hand-raised:has(.card-art img) .match-hand-type { opacity: 0; pointer-events: none; }
+.match-hand-card.hand-raised:has(.card-art img) .match-hand-details { background: transparent; }
+.match-hand-card.hand-raised:has(.card-art img) .match-hand-cost { justify-content: flex-end; background: transparent; }
+.match-hand-card.hand-raised:has(.card-art img) .mana { box-shadow: 0 1px 3px #0008; }
+.match-hand-card.hand-raised:has(.card-art img) .hand-no-cost { opacity: 0; }
 .match-hand > .match-hand-card:not(.hand-raised) { grid-template-rows: auto minmax(0, 1fr) 0 0; }
 .match-hand > .match-hand-card:not(.hand-raised) .match-card-name { position: absolute; grid-area: auto; left: 7px; right: 7px; bottom: 53px; display: block; white-space: nowrap; text-overflow: ellipsis; background: #17251fe6; }
 .match-hand > .match-hand-card:not(.hand-raised) .match-hand-details { position: absolute; grid-area: auto; left: 7px; right: auto; bottom: 76px; }
 .match-hand > .match-hand-card:not(.hand-raised) .match-hand-type { display: none; }
 .match-hand > .match-hand-card.hand-raised {
-  z-index: 30; transform: translate(0, -44px) rotate(0deg) scale(1.216); border-color: #e5cc8d;
+  z-index: 30; transform: translate(0, -46px) rotate(0deg) scale(1.52); border-color: #e5cc8d;
   box-shadow: 0 12px 28px #000b, 0 0 0 1px #d8c58b55;
 }
 #match-view .match-hand[data-can-play="true"] > .match-hand-card.actionable { cursor: grab; }

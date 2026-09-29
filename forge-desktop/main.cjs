@@ -7,11 +7,13 @@ const { EngineClient } = require('./engine-client.cjs');
 const { engineOptions } = require('./runtime.cjs');
 const { productName } = require('./package.json');
 const { commanderBrowse, publicDeckUrl } = require('./deck-sources.cjs');
+const { createPreferences } = require('./preferences.cjs');
 
 const project = path.resolve(__dirname, '..');
 const userData = process.env.FORGE_USER_DATA || (app.isPackaged
   ? path.join(path.dirname(process.execPath), 'UserData') : path.join(__dirname, '.data'));
 fs.mkdirSync(userData, { recursive: true });
+const preferences = createPreferences(userData);
 app.setPath('userData', userData);
 app.setName(productName);
 protocol.registerSchemesAsPrivileged([{ scheme: 'workshop', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
@@ -70,7 +72,7 @@ app.on('second-instance', () => {
 app.whenReady().then(async () => {
   protocol.handle('workshop', request => {
     const pathname = new URL(request.url).pathname;
-    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/presets.js', '/presets.css', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/turn-guide.js', '/match-feedback.js', '/match-feedback.css', '/combat-view.js', '/combat-view.css', '/table-gestures.js', '/hand-view.js', '/hand-view.css', '/response-skip.js', '/deck-workshop.js', '/deck-workshop.css']);
+    const allowed = new Set(['/index.html', '/style.css', '/app.js', '/presets.js', '/presets.css', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/turn-guide.js', '/match-feedback.js', '/match-feedback.css', '/combat-view.js', '/combat-view.css', '/table-gestures.js', '/hand-view.js', '/hand-view.css', '/response-skip.js', '/play-preferences.js', '/table-card-preview.js', '/battlefield-view.js', '/deck-workshop.js', '/deck-workshop.css']);
     if (!allowed.has(pathname)) return new Response('Not found', { status: 404 });
     return net.fetch(pathToFileURL(path.join(__dirname, 'renderer', pathname.slice(1))).toString());
   });
@@ -88,6 +90,7 @@ app.whenReady().then(async () => {
     resourcesPath: app.isPackaged ? process.resourcesPath : undefined }));
   engine.on('status', status => { if (!window.isDestroyed()) window.webContents.send('engine-status', status); });
   ipcMain.handle('status', event => { verify(event); return engine.status; });
+  ipcMain.handle('preferences', (event, patch) => { verify(event); return patch === undefined ? preferences.get() : preferences.set(patch); });
   ipcMain.handle('engine', (event, method, params) => {
     verify(event);
     if (!methods.has(method)) throw new Error('Unknown command');

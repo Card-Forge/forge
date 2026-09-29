@@ -69,6 +69,13 @@ npm run test:ui -- --output=test-results/my-change --reporter=line tests/match.s
 
 ## Packaged verification
 
+The desktop test launcher seeds **Full control** in its isolated profile so
+encounters retain deterministic response pauses. Pass `preferences: null` to
+`launchDesktop` to exercise production defaults, or supply a preference object.
+`response-skip.spec.cjs` checks Auto across real turns and verifies cancellation,
+phase stops, temporary holds, stale prompts, and persistence. `preferences.test.cjs`
+covers validation, disk round trips, and corrupt-file recovery.
+
 After `npm run package`, run a fresh test profile against the manifest's build:
 
 ```powershell

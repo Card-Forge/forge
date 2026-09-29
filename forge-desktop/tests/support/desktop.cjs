@@ -3,10 +3,12 @@ const path = require('node:path');
 const { _electron: electron } = require('@playwright/test');
 const appPath = path.resolve(__dirname, '../..');
 
-async function launchDesktop(prefix, { offline = true, videoDir } = {}) {
+async function launchDesktop(prefix, { offline = true, videoDir, preferences = { responseMode: 'manual' } } = {}) {
   const output = path.join(appPath, 'test-results');
   fs.mkdirSync(output, { recursive: true });
   const dataPath = fs.mkdtempSync(path.join(output, `${prefix}-`));
+  // Encounters pause at each response window unless the scenario tests Auto.
+  if (preferences) fs.writeFileSync(path.join(dataPath, 'preferences.json'), JSON.stringify(preferences));
   const env = { ...process.env, FORGE_TEST: '1', FORGE_OFFLINE: offline ? '1' : '0', FORGE_USER_DATA: dataPath };
   delete env.ELECTRON_RUN_AS_NODE;
   const packaged = process.env.MANA_TEST_PACKAGED === '1'

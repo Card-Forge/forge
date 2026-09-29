@@ -23,9 +23,9 @@ flowchart LR
 | Runtime/transport | `runtime.cjs`, `engine-client.cjs` | Java/path resolution, request IDs, replies, startup status, logs |
 | Workshop | `renderer/app.js`, `presets.js` | Catalog, deck editing, imports, practice, preset browsing |
 | Match coordination | `renderer/match.js` | Setup, scoped answers, polling, stable board rendering, prompt controls |
-| Card interaction | `hand-view.js`, `table-gestures.js`, `card-preview.js` | Fan layout, cancelable dragging, inspection and alternate faces |
+| Card interaction | `hand-view.js`, `table-gestures.js`, `card-preview.js`, `table-card-preview.js`, `battlefield-view.js` | Fan layout, cancelable dragging, card enlargement, optional inspector, alternate faces and crowded ranks |
 | Match explanation | `turn-guide.js`, `match-feedback.js` | Phase guidance, activity history, turn indicators and animation |
-| Optional response skipping | `response-skip.js` | Turn-scoped checkbox, cancellable delay, engine-authorized priority passes |
+| Response preferences | `preferences.cjs`, `play-preferences.js`, `response-skip.js` | Remembered Auto/Full control, own-turn stops, temporary holds and engine-authorized passes |
 | Combat | `combat-view.js` | Attackers, defenders, legal block connections and assignment controls |
 | Java protocol | `DesktopEngine.java` | Method dispatch, current deck, saved files, practice and one active match |
 | Deck hooks | `CardCatalog`, `DeckEditor`, `DeckImport`, `DeckPresets`, `MatchSetup` | Search, revisioned edits, validation, imports, detached match decks |
@@ -53,12 +53,16 @@ feature-specific styles. Keep feature behavior in its owning file and document
 cross-file assumptions instead of expanding the central `match.js` indefinitely.
 
 Battlefield cards use an explicit `battlefield` presentation in `cardTile`.
-`battlefield.css` crops their cached portrait artwork and lays out names, current
-stats, counters, damage, and tap indicators separately. Hand/command/zone cards
-retain portrait images; `card-preview.js` always inspects the full engine-projected
-card, including its permitted other face. The crop is presentation only and may
-be less accurate for unusual frames. Two battlefield ranks remain vertical at
-every supported size, with per-row horizontal scrolling for crowded boards.
+`battlefield.css` reserves a square footprint around each portrait surface, which
+turns a full 90 degrees when tapped. Current stats, counters and damage remain
+upright. `match-feedback.js` animates that same surface only when the tap state
+changes. Two battlefield ranks remain vertical at every supported size.
+`battlefield-view.js` overlaps crowded ranks and provides edge buttons, wheel and
+keyboard browsing; native scrollbars are hidden without removing access to cards.
+`card-preview.js` delegates match roots to `table-card-preview.js`. Hand cards lift
+in place; other cards use an image-only, pointer-transparent layer anchored to the
+source. The optional rail inspector shows rules and current values. Both consume
+only the visibility-filtered projection, including permitted alternate faces.
 `hand-view.css` reserves the lower-left player controls; `hand-view.js` keeps the
 fan and local gap behavior. `match-feedback.css` places the action prompt at the
 lower right, with latest activity and expandable history above. Game overlays
@@ -80,13 +84,19 @@ sessions. Polling is faster while resolving than while waiting for input.
 Required selections keep the engine's message and enabled actions; explanatory
 turn guidance never chooses an action on the player's behalf.
 
-When the player checks **Skip responses this turn**, `response-skip.js` submits
-`passIfNoResponse` only for a prompt with engine-issued `canAutoPass: true`.
+In **Auto**, `response-skip.js` submits `passIfNoResponse` only for
+`InputPassPriority` with engine-issued `canAutoPass: true`.
 This permission comes from the controller's current action scan and preserves
 empty-stack main phases and required inputs. The normal session/prompt checks
-still apply. Unchecking cancels a queued pass; turn/session changes clear the
-setting. Renderer reloads start unchecked, and browsing the workshop suspends
-automatic passes until the player returns to the table.
+still apply. Switching to **Full control**, selecting an own-turn stop, or using
+**Hold this turn** cancels a queued pass. Only the temporary hold resets at a
+turn/session boundary. Browsing the workshop suspends automatic passes.
+`preferences.cjs` validates and atomically stores the response mode, phase stops
+and inspector preference in the fixed profile file `preferences.json` through
+dedicated, origin-checked IPC. Auto is the production default; the renderer uses
+Full control until loading finishes. Failed saves preserve the latest local
+choice instead of re-enabling automatic play. Tests seed Full control unless
+they explicitly exercise Auto. Packaging preserves this file across betas.
 
 ## Identifiers with different jobs
 

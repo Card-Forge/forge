@@ -127,6 +127,7 @@
   }
 
   const zone = (player, name) => player.zones.find(value => value.name === name) || { count: 0, cards: [] };
+  const battlefieldView = createBattlefieldView($('match-view'));
   function cardTile(card, presentation) {
     const inHand = presentation === 'hand';
     const onBattlefield = presentation === 'battlefield';
@@ -143,7 +144,7 @@
     const description = ` aria-description="${esc([inHand ? costLabel : '', card.faceDown ? '' : card.type, stats ? `Power ${card.power}, toughness ${card.toughness}` : '', ...marks].filter(Boolean).join('. '))}"`;
     const fieldStatus = onBattlefield ? `<span class="battlefield-status">${card.tapped ? '<span class="field-tapped">Tapped</span>' : ''}${card.sick ? '<span class="field-new">New</span>' : ''}${card.damage ? `<span class="field-damage">${card.damage} damage</span>` : ''}</span>` : '';
     const counters = onBattlefield ? Object.entries(card.counters).map(([name, count]) => `<span title="${esc(name)} counters" aria-label="${count} ${esc(name)} counters">${count} ${esc(name)}</span>`).join('') : '';
-    return `<button class="match-card ${inHand ? 'match-hand-card' : onBattlefield ? 'battlefield-card' : ''} ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"${description} ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}>${handCost}<span class="match-card-face">${art}${inHand ? '' : statsBadge}</span><span class="match-card-name">${esc(card.name)}</span>${inHand ? `<span class="match-hand-details">${handType}${statsBadge}</span>` : ''}${fieldStatus}${counters ? `<span class="battlefield-counters">${counters}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${inHand ? 'match-hand-card' : onBattlefield ? 'battlefield-card' : ''} ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"${description} ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}>${handCost}${onBattlefield ? `<span class="permanent-surface"><span class="match-card-face">${art}</span><span class="match-card-name">${esc(card.name)}</span></span>${statsBadge}` : `<span class="match-card-face">${art}${inHand ? '' : statsBadge}</span><span class="match-card-name">${esc(card.name)}</span>`}${inHand ? `<span class="match-hand-details">${handType}${statsBadge}</span>` : ''}${fieldStatus}${counters ? `<span class="battlefield-counters">${counters}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -165,7 +166,7 @@
     const isLand = card => !card.faceDown && card.type.includes('Land') && !card.type.includes('Creature');
     const lands = field.cards.filter(isLand);
     const permanents = field.cards.filter(card => !isLand(card));
-    const row = (name, cards, label) => `<div class="battlefield-row ${name}-row" data-field-row="${player.id}-${name}" aria-label="${esc(player.name)}: ${label}">${cards.map(card => cardTile(card, 'battlefield')).join('') || `<span class="field-empty">${label}</span>`}</div>`;
+    const row = (name, cards, label) => `<div class="battlefield-rank"><div class="battlefield-row ${name}-row" data-field-row="${player.id}-${name}" aria-label="${esc(player.name)}: ${label}">${cards.map(card => cardTile(card, 'battlefield')).join('') || `<span class="field-empty">${label}</span>`}</div></div>`;
     const hiddenHand = !player.human ? `<div class="opponent-hand" aria-label="${hand.count} cards in opponent's hand"><div aria-hidden="true">${Array.from({ length: Math.min(hand.count, 9) }, (_, index) => `<i style="--back-angle:${(index - (Math.min(hand.count, 9) - 1) / 2) * 4}deg"></i>`).join('')}</div><span>${hand.count} in hand</span></div>` : '';
     const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}" data-player-portrait="${player.id}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}" title="${esc(player.name)} · ${player.life} life"><span>${esc(player.human ? 'You' : player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${player.eliminated ? 'Eliminated' : turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool" aria-label="Available mana">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
     const side = `<aside class="match-side-zones">${commandZone}<div class="match-library" aria-label="${library.count} cards in ${esc(player.name)}'s library"><span class="library-back" aria-hidden="true">M</span><span>Library <b>${library.count}</b></span></div><div class="match-other-zones">${other}</div></aside>`;
@@ -234,6 +235,7 @@
     renderPrompt();
     combatView.render(next);
     handView.render(next);
+    if (boardChanged) battlefieldView.render();
     matchFeedback.render(next, previous, before);
     if (next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
     const busy = !next.prompt && !['finished', 'error'].includes(next.status);

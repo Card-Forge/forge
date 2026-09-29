@@ -37,7 +37,7 @@ test('a played card animates once; priority refreshes do not replay it and tappi
       Element.prototype.animate = function (frames, options) {
         const card = this.closest('.match-card');
         if (card && !card.classList.contains('match-flight')) window.cardAnimations.push({
-          id: card.dataset.visualCard, kind: this.classList.contains('card-art') ? 'tap' : frames[0].opacity != null ? 'arrival' : 'combat'
+          id: card.dataset.visualCard, kind: (this.classList.contains('card-art') || this.classList.contains('permanent-surface')) ? 'tap' : frames[0].opacity != null ? 'arrival' : 'combat'
         });
         return animate.call(this, frames, options);
       };

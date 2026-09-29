@@ -72,7 +72,7 @@ test('turn guidance explains each pause, preserves cleanup choices, and passes o
         if (emptyPause) {
           await expect(page.locator('#match-prompt h2')).toHaveText('Finish upkeep?');
           await expect(page.locator('#match-ok')).toHaveText('Finish upkeep');
-          await expect(page.getByRole('checkbox', { name: 'Skip responses this turn' })).not.toBeChecked();
+          await expect(page.getByRole('button', { name: 'Full control', exact: true })).toHaveAttribute('aria-pressed', 'true');
           await expect(page.locator('#match-cancel')).toHaveCount(0);
           if (!executable) await page.screenshot({ path: test.info().outputPath('opponent-pause.png') });
           await page.locator('#match-ok').click();

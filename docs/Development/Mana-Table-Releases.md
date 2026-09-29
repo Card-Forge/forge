@@ -26,8 +26,9 @@ dependencies are not shipped.
 ## Data preservation
 
 If `dist/latest-beta.json` exists, packaging copies `UserData/decks` and
-`UserData/art` from that previous package to the new one. Every copied deck JSON
-is verified with SHA-256. The manifest changes only after packaging and copying
+`UserData/art` and `UserData/preferences.json` from that previous package to the
+new one. Every copied deck JSON is verified with SHA-256; play preferences are
+verified byte for byte. The manifest changes only after packaging and copying
 succeed; older packages remain in place. It does not copy development `.data`,
 live match state, or every Electron preference.
 

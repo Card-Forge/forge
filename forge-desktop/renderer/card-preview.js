@@ -1,5 +1,6 @@
 /* Preview only the card supplied by its view; match cards are already visibility-filtered. */
 const cardPreview = (() => {
+  const tablePreview = createTableCardPreview();
   const bindings = [];
   const panel = document.createElement('aside');
   panel.id = 'card-preview';
@@ -164,8 +165,11 @@ const cardPreview = (() => {
     if (active && (!active.element.isConnected || active.element.closest('[hidden]') || document.querySelector('dialog[open]'))) hide();
   }).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['hidden', 'open'] });
 
-  function bind(root, selector, resolve) { bindings.push({ root, selector, resolve }); }
+  function bind(root, selector, resolve) {
+    if (root.closest('#match-view')) tablePreview.bind(root, selector, resolve);
+    else bindings.push({ root, selector, resolve });
+  }
   bind($('workshop-view'), '[data-card]', element => cards.get(element.dataset.card));
   bind($('practice-hand'), '[data-card]', element => cards.get(element.dataset.card));
-  return { bind, hide };
+  return { bind, hide() { hide(); tablePreview.hide(); } };
 })();

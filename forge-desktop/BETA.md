@@ -1,28 +1,34 @@
-# Mana Table — beta 0.1.0-beta.24
+# Mana Table — beta 0.1.0-beta.25
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 24 brings an **Arena-inspired card and battlefield presentation**:
+Beta 25 focuses on **physical cards and remembered play preferences**:
 
-- One open board with creatures toward the center and lands behind them, including
-  at smaller window sizes. Compact artwork tiles carry readable names and large
-  power/toughness badges; tapped, new, damage, and counter indicators use engine state.
-- Portrait cards remain in your steady hand fan, command zone, zone browsers, and
-  full-card inspection. Hover or keyboard focus lifts a hand card. Click and drag
-  still use the engine's current legal actions.
-- Your life, available mana, and commander damage sit at the lower left, beside
-  the hand. The decision controls sit at the lower right. The latest action stays
-  visible; expand **Action history** to review the last 120 events.
-- Commander tables keep every player's own battlefield, piles, and targeting
-  controls. Select a seat to bring that opponent into view at larger tables.
+- Hover or focus lifts your hand card to a larger, readable size. Cards on the
+  table enlarge over their position, without the old floating rules popup.
+  Click **Card details** or press **I** while inspecting to show extra rules,
+  current stats, and counters in the side rail. This preference is remembered.
+- **F** previews the other face of a double-faced card. It changes inspection
+  only; casting and transforming still follow the engine's rules.
+- Permanents use portrait cards with a full sideways rotation when tapped.
+  Power/toughness and status badges stay upright. Crowded rows overlap slightly;
+  use their edge arrows, the mouse wheel, or Left/Right/Home/End on a focused card
+  to browse. There are no native scrollbars across the battlefield.
+- **Auto** is the default response mode. It continues only when the engine says
+  you have no playable response, and always waits at your main phases and required
+  choices. **Full control** waits at every response window the engine presents.
+  Your choice is remembered between games, app launches, and beta upgrades.
+- **Hold this turn** temporarily pauses Auto; **Resume Auto** releases the hold.
+  Under **Preferences**, save stops on your upkeep, draw, beginning of combat,
+  or end step. A hold expires at the next turn; saved stops remain enabled.
+- Your life and mana remain beside the steady hand fan. Creatures stay toward the
+  center, lands behind them, with separate play areas for every Commander seat.
 
-The layout takes inspiration from
-[Arena's card presentation](https://magic.wizards.com/en/news/mtg-arena/we-put-battles-on-mtg-arena-what-was-that-like),
-with Mana Table's own interface and CSS board. No Arena backgrounds or interface
-assets are bundled. Battlefield artwork is cropped from the existing cached card
-portrait; unusual frames may crop differently. Hover always shows the full card.
+The presentation uses Mana Table's own interface and CSS board, with existing
+cached card portraits. Match inspection always uses the engine's visible card
+projection; hidden identities and their alternate faces remain hidden.
 
 Beta 23's **card discovery, deck review, and suggestions** remain available:
 
@@ -44,10 +50,6 @@ Beta 23's **card discovery, deck review, and suggestions** remain available:
   Role counts are rules-text estimates and may overlap. Suggestions do not assess
   combos, prices, rotating set legality, ban lists, or competitive strength. Limited
   suggestions need a draft/sealed pool and are not available yet.
-
-**Skip responses this turn** remains available beside the game's decision panel.
-It advances when the engine finds no playable response, pauses for your decisions,
-and resets when the turn changes.
 
 ## Try it
 
@@ -198,10 +200,11 @@ can respond before the step ends.
 Response pauses outside your main phases say **Optional response**. You do not
 have to play a card to move on. When a spell or ability is waiting, the prompt
 names it, shows its engine description, and offers **Let it resolve**. Select a
-highlighted card or ability if you want to act first. **Skip responses this turn**
-is a checkbox that continues only when you have no playable response. It pauses
-when an action is available, keeps your main phases and required choices manual,
-and turns off at the next turn. Uncheck it to stop automatic responses immediately.
+highlighted card or ability if you want to act first. **Auto** continues only when
+you have no playable response, preserving your main phases and required choices.
+Switch to **Full control** to wait at every engine response window, or use
+**Hold this turn** for a temporary pause. The mode and stops under **Preferences**
+are remembered; only the temporary hold expires when the turn changes.
 
 Every step has a plain-language explanation and a **Normally next** cue.
 Upkeep explains that it comes before drawing and has no general payment cost.

@@ -99,7 +99,9 @@ Legacy `FORGE_*` variable and module names are kept for compatibility.
 Development data lives in `forge-desktop/.data`. A packaged build uses `UserData`
 beside its executable. Either can be overridden with `FORGE_USER_DATA`.
 Each profile contains `decks/` (UUID JSON files), `art/` (cached illustrations),
-`engine.log`, and Electron preferences/cache files. Deck saves use schema version
+`preferences.json` (response mode, own-turn stops, and card inspector), `engine.log`,
+and Electron preferences/cache files. Play preferences carry forward when packaging
+the next beta. Deck saves use schema version
 1 and atomic file replacement where supported. Match state is not a saved deck
 and does not survive closing the app.
 

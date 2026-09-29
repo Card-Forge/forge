@@ -20,8 +20,8 @@ test('both faces can be inspected without playing a card, including a modal land
         return new Response(Buffer.concat([png, Buffer.from(face)]), { headers: { 'content-type': 'image/png' } });
       };
     });
-    const preview = page.locator('#card-preview');
-    const title = preview.locator('h2');
+    let preview = page.locator('#card-preview');
+    let title = preview.locator('h2');
     await page.locator('#search').fill('Delver of Secrets');
     const delver = page.locator('.catalog-card').filter({ has: page.getByRole('heading', { name: 'Delver of Secrets', exact: true }) });
     await delver.hover();
@@ -85,27 +85,34 @@ test('both faces can be inspected without playing a card, including a modal land
     expect(modal?.otherFace?.name).toBe('Bala Ged Sanctuary');
     await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
     const hand = page.locator(`#match-hand [data-visual-card="${modal.visualId}"]`);
-    await hand.evaluate(element => element.parentElement.append(element));
+    preview = page.locator('#table-card-details'); title = preview.locator('h2');
+    await page.locator('#match-card-details').click();
+    await hand.focus();
     await hand.hover();
     await expect(title).toHaveText('Bala Ged Recovery');
     await page.keyboard.press('f');
     await expect(title).toHaveText('Bala Ged Sanctuary');
     await expect(preview.locator('.preview-type')).toHaveText('Land');
-    await expect(preview.locator('.preview-face-note')).toHaveText('Other face · preview only');
+    await expect(preview.locator('.preview-face-note')).toHaveText('Inspecting only \u00b7 game unchanged');
     expect((await read()).prompt.id).toBe(state.prompt.id);
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1000, 740));
     await page.mouse.move(0, 0);
     await page.waitForTimeout(150);
     await page.locator('#match-hand').evaluate(element => { element.scrollLeft = 0; });
+    // A resting fan intentionally overlaps card centers. Keyboard focus pages
+    // and lifts this card before inspecting it, without reordering the hand.
+    await page.locator('#match-back').focus();
+    await hand.focus();
     await hand.hover();
     await expect(title).toHaveText('Bala Ged Recovery');
-    await preview.getByRole('button', { name: 'View back face' }).click();
+    await preview.getByRole('button', { name: 'View other face' }).click();
     await expect(title).toHaveText('Bala Ged Sanctuary');
-    const box = await preview.boundingBox();
+    const box = await page.locator('#card-zoom').boundingBox();
     expect(box.y).toBeGreaterThanOrEqual(0);
     expect(box.y + box.height).toBeLessThanOrEqual(await page.evaluate(() => innerHeight));
     if (!executable) await page.screenshot({ path: test.info().outputPath('back-face.png') });
     await page.keyboard.press('Escape');
+    await hand.focus();
     await hand.click();
     for (let step = 0; step < 80; step++) {
       state = await read();
@@ -124,7 +131,7 @@ test('both faces can be inspected without playing a card, including a modal land
     await expect(land.locator('.card-art')).toHaveAttribute('data-art-face', 'back');
     await land.hover();
     await expect(title).toHaveText('Bala Ged Sanctuary');
-    await preview.getByRole('button', { name: 'View front face' }).click();
+    await preview.getByRole('button', { name: 'View other face' }).click();
     await expect(title).toHaveText('Bala Ged Recovery');
     await expect(land).toHaveClass(/tapped/);
     expect((await page.evaluate(() => window.forge.request('snapshot'))).deck).toEqual(saved.deck);
