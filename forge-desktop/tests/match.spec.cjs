@@ -115,8 +115,8 @@ test('match table plays cards through engine prompts and resumes after deck brow
             card: card.getBoundingClientRect().toJSON(), row: card.parentElement.getBoundingClientRect().toJSON()
           })) };
       });
-      if (await page.evaluate(() => innerHeight <= 800)) expect(layout.lands.x).toBeGreaterThan(layout.permanents.x);
-      else expect(layout.lands.y).toBeGreaterThan(layout.permanents.y);
+      // Compact artwork tiles preserve front/back ranks even in short windows.
+      expect(layout.lands.y).toBeGreaterThan(layout.permanents.y);
       for (const { card, row } of layout.cards) {
         expect(card.y).toBeGreaterThanOrEqual(row.y - 4); // Hover lifts a card slightly.
         expect(card.y + card.height).toBeLessThanOrEqual(row.y + row.height + 1);

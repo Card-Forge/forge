@@ -47,7 +47,7 @@ test('preset browser adds a playable Commander copy, offers AI precons and repai
     await page.locator('#match-concede').click();
     await page.locator('#match-concede-confirm').click();
     await expect(page.locator('#match-again')).toBeVisible();
-    await page.locator('#workshop-tab').click();
+    await page.locator('#match-back').click();
     await page.locator('#import-button').click();
     await expect(page.locator('#import-format')).toHaveValue('Auto');
     await page.locator('#import-text').fill('Deck\n34 Forest\n33 Mountain\n31 Plains\n1 Toph, Greatest Earthbender\n1 Toph, the First Metalbender');
