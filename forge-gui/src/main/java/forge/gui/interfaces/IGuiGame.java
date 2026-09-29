@@ -305,9 +305,10 @@ public interface IGuiGame {
 
     /**
      * Apply a delta update packet to the local game state.
+     * No-op for offline games - network implementation is in {@link NetworkGuiGame}.
      * @param packet the delta packet containing changes
      */
-    void applyDelta(DeltaPacket packet);
+    default void applyDelta(DeltaPacket packet) {}
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();
