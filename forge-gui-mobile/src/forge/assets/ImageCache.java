@@ -579,8 +579,12 @@ public class ImageCache {
 
     public int getRadius(Texture t) {
         if (t == null)
-            return 20;
-        ImageRecord record = imageRecord.get().get(getTextureKey(t));
+            return 0;
+        String key = getTextureKey(t);
+        if (!key.contains("card") && !key.contains("token")) {
+            return 0;
+        }
+        ImageRecord record = imageRecord.get().get(key);
         if (record == null)
             return 20;
         Integer i = record.cardRadius;
