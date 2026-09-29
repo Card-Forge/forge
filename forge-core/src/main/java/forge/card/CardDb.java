@@ -946,39 +946,40 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, false, filter);
     }
 
-    // Override when there is no date
-    private PaperCard findPreferredLanguageCandidate(List<CardEdition> editions, Map<String, PaperCard> candidatesCard,
-                                                     boolean excludeSpecialRarity) {
-        PaperCard languageWithImage = null;
-        PaperCard languageNoImage = null;
-        boolean anyLocalImage = false;
+    static final EnumSet<CardEdition.Type> WIDENING_EXCLUDED_TYPES = EnumSet.of(
+            CardEdition.Type.PROMO, CardEdition.Type.ONLINE, CardEdition.Type.FUNNY,
+            CardEdition.Type.COLLECTOR_EDITION, CardEdition.Type.OTHER,
+            CardEdition.Type.UNKNOWN, CardEdition.Type.CUSTOM_SET);
 
+    private PaperCard findPreferredLanguageCandidate(List<CardEdition> editions, Map<String, PaperCard> candidatesCard,
+                                                     boolean skipSpecialRarity) {
+        PaperCard firstMatch = null;
         for (CardEdition edition : editions) {
             PaperCard pc = candidatesCard.get(edition.getCode());
             if (pc == null)
                 continue;
-            if (pc.hasImage())
-                anyLocalImage = true;
-            if (excludeSpecialRarity && pc.getRarity().equals(CardRarity.Special))
+            if (skipSpecialRarity && pc.getRarity().equals(CardRarity.Special))
                 continue;
             if (!isPreferredLanguagePrint(pc))
                 continue;
-            if (pc.hasImage()) {
-                languageWithImage = pc;
-                break; // best possible match: right language, already on disk
-            }
-            if (languageNoImage == null)
-                languageNoImage = pc;
+            if (pc.hasImage())
+                return pc;
+            if (firstMatch == null)
+                firstMatch = pc;
         }
-
-        if (languageWithImage != null)
-            return languageWithImage;
-        if (anyLocalImage)
-            // Some accepted printing already has a local image - never trigger a new download
-            return null;
-        return languageNoImage;
+        return firstMatch;
     }
 
+    private static boolean anyHasLocalImage(List<CardEdition> editions, Map<String, PaperCard> candidatesCard) {
+        for (CardEdition edition : editions) {
+            PaperCard pc = candidatesCard.get(edition.getCode());
+            if (pc != null && pc.hasImage())
+                return true;
+        }
+        return false;
+    }
+
+    // Override when there is no date
     private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter){
         return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null, false, filter);
     }
@@ -1070,14 +1071,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         if (preferredLanguageAvailability != null) {
             PaperCard languageCandidate = findPreferredLanguageCandidate(acceptedEditions, candidatesCard, false);
-            if (languageCandidate == null && cardEditions.size() > acceptedEditions.size()) {
-                List<CardEdition> allEditionsOrdered = new ArrayList<>(cardEditions);
-                if (allEditionsOrdered.size() > 1) {
-                    Collections.sort(allEditionsOrdered);
+            if (languageCandidate == null && cardEditions.size() > acceptedEditions.size()
+                    && !anyHasLocalImage(acceptedEditions, candidatesCard)) {
+                List<CardEdition> excludedEditions = new ArrayList<>(cardEditions);
+                excludedEditions.removeAll(acceptedEditions);
+                excludedEditions.removeIf(edition -> WIDENING_EXCLUDED_TYPES.contains(edition.getType()));
+                if (excludedEditions.size() > 1) {
+                    Collections.sort(excludedEditions);
                     if (artPref.latestFirst)
-                        Collections.reverse(allEditionsOrdered);
+                        Collections.reverse(excludedEditions);
                 }
-                languageCandidate = findPreferredLanguageCandidate(allEditionsOrdered, candidatesCard, true);
+                languageCandidate = findPreferredLanguageCandidate(excludedEditions, candidatesCard, true);
             }
             if (languageCandidate != null)
                 return cr.isFoil ? languageCandidate.getFoiled() : languageCandidate;
