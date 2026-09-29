@@ -48,13 +48,14 @@ The last comment comes from comparing the card with its printed version on Scryf
 | `UNKNOWN-KEY` | error | No engine code reads this param. | Check the spelling, or remove it. |
 | `MISSING-KEY` | error | The ability needs this param. | Add it. |
 | `API-UNKNOWN` | error | The API, trigger mode, replacement event or static mode doesn't exist. | Check the spelling. |
-| `REF-UNDEF` | error | `SubAbility$`, `Execute$` or a similar param names an SVar that this face doesn't define. | Fix the name, or move the SVar to this face. |
+| `REF-UNDEF` | error | `SubAbility$`, `Execute$` or a similar param names an SVar that this face doesn't define, or `NextRoom$` names a room that isn't on the `K:Dungeon:` line. | Fix the name, or move the SVar to this face. |
 | `DUP-PARAM` | error, or warning if both values are the same | The param appears twice on one line. The engine uses the last one. | Remove one of them. |
 | `COST` | error | A cost the engine doesn't recognise. It would be treated as free. | Check the cost syntax. |
 | `MANA` | error | Not a mana symbol, or a repeated letter such as `WW`. | Write each symbol separately, e.g. `W W`. |
 | `NO-MANACOST` | error | A card that isn't a land has no `ManaCost` line. | Add one. |
 | `TYPE-TYPO` | error | A word on the `Types` line is miscased or one letter off a known type. | Use the suggested type. |
 | `LEX-PREFIX` | error | A line starts with a prefix the card reader doesn't recognise, e.g. `Oracel:`. | Fix the prefix. |
+| `LEX-DOLLAR` | error, or warning for a param name | A param without `$`, or a `$` without a param name. The engine reads a bare param name as that param with an empty value, and ignores anything else. | Add the `$`, e.g. `NumDmg$ 3`. |
 | `LEX-DELIM` | error | A list uses the wrong separator: ` & ` instead of `,`, or the reverse. | Use the separator the message names. |
 | `CASE` | error | A zone or `Defined$` value in the wrong case, e.g. `self`. | Use the suggested case. |
 | `TRIG-CTX` | error | A `Triggered...` value on an `A:` line. An activated ability has no trigger to refer to. | Move it to the trigger's SVar. |

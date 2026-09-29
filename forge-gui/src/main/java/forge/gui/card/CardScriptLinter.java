@@ -65,7 +65,13 @@ public final class CardScriptLinter {
     /** Params naming SVars that hold abilities, triggers, ...: comma lists. */
     private static final Map<String, Kind> SVAR_LISTS = Map.of(
         "Abilities", Kind.ABILITY, "Triggers", Kind.TRIGGER, "AddTriggers", Kind.TRIGGER,
-        "StaticAbilities", Kind.STATIC, "AddStaticAbilities", Kind.STATIC, "ReplacementEffects", Kind.REPLACEMENT);
+        "StaticAbilities", Kind.STATIC, "AddStaticAbilities", Kind.STATIC, "ReplacementEffects", Kind.REPLACEMENT,
+        "staticAbilities", Kind.STATIC, "Replacements", Kind.REPLACEMENT); // Animate's own spellings
+    /** Params naming SVars the engine copies by name: comma lists, split without trimming. */
+    private static final Set<String> SVAR_NAME_LISTS = Set.of("AddSVars", "sVars");
+    /** Params naming a single SVar: the whole value is looked up. */
+    private static final Set<String> SVAR_NAMES = Set.of("TriggersWhenSpent", "ExtraTurnDelayedTrigger",
+        "ExtraTurnDelayedTriggerExecute", "ExtraPhaseDelayedTrigger", "ExtraPhaseDelayedTriggerExcute");
     /** The same, split on " & " by StaticAbilityContinuous. */
     private static final Map<String, Kind> SVAR_AMP_LISTS = Map.of(
         "AddAbility", Kind.ABILITY, "AddTrigger", Kind.TRIGGER, "AddStaticAbility", Kind.STATIC,
@@ -117,6 +123,8 @@ public final class CardScriptLinter {
         private final List<Finding> out;
         private final Map<String, Integer> svars = new LinkedHashMap<>();
         private final Map<String, Kind> svarKinds = new HashMap<>();
+        /** The rooms on this face's K:Dungeon: line, or null. */
+        private List<String> rooms;
 
         Face(String[] lines, int from, int to, boolean front, List<Finding> out) {
             this.lines = lines;
@@ -134,6 +142,8 @@ public final class CardScriptLinter {
                     if (p.length == 3) {
                         svars.put(p[1], i + 1);
                     }
+                } else if (line.startsWith("K:Dungeon:")) {
+                    rooms = List.of(line.substring("K:Dungeon:".length()).split(","));
                 }
                 // an SVar named in Triggers$ holds a trigger, in StaticAbilities$ a static, ...
                 for (Map.Entry<String, String> p : parse(bodyOf(line)).entrySet()) {
@@ -217,6 +227,11 @@ public final class CardScriptLinter {
                         for (String ch : p.length > 2 ? p[2].split(",") : new String[0]) {
                             checkRef("Chapter", ch.trim(), ln);
                         }
+                    } else if (value.startsWith("Dungeon:")) {
+                        // CardFactoryUtil builds each room from its SVar; a missing one fails the card
+                        for (String room : value.substring("Dungeon:".length()).split(",")) {
+                            checkName("K:Dungeon:", room, ln);
+                        }
                     }
                 }
                 default -> { }
@@ -255,6 +270,9 @@ public final class CardScriptLinter {
                 String key = (d < 0 ? piece : piece.substring(0, d)).trim();
                 String val = d < 0 ? "" : piece.substring(d + 1).trim();
                 if (key.isEmpty()) {
+                    if (d >= 0) {
+                        add(ln, Severity.ERROR, "LEX-DOLLAR", "`" + piece.trim() + "`" + TO + "no param name before `$`", piece.trim());
+                    }
                     continue;
                 }
                 if (seen.containsKey(key)) {
@@ -264,6 +282,13 @@ public final class CardScriptLinter {
                         : "duplicate `" + key + "$`" + TO + "the engine keeps `" + val + "`, drops `" + seen.get(key) + "`", key);
                 }
                 seen.put(key, val);
+                // without a $, the engine takes the whole piece as a param with an empty value
+                if (d < 0 && !params.isKnown(key)) {
+                    add(ln, Severity.ERROR, "LEX-DOLLAR", "`" + key + "`" + TO + "no `$`, so nothing reads it", key);
+                    continue;
+                } else if (d < 0) {
+                    add(ln, Severity.WARN, "LEX-DOLLAR", "`" + key + "`" + TO + "`" + key + "$ ...` (without `$` it is set with an empty value)", key);
+                }
                 keys.put(key, val);
                 if (d >= 0 && DESC_KEYS.contains(key) && !val.isEmpty() && !piece.substring(d + 1).startsWith(" ")) {
                     add(ln, Severity.WARN, "LEX-NOSPACE", "add a space after `" + key + "$`", key);
@@ -393,6 +418,23 @@ public final class CardScriptLinter {
                     checkRef(key, r.trim(), ln);
                 }
             }
+            if (SVAR_NAME_LISTS.contains(key)) {
+                for (String r : val.split(",")) {
+                    checkName(key + "$", r, ln);
+                }
+            }
+            if (SVAR_NAMES.contains(key)) {
+                checkName(key + "$", val, ln);
+            }
+            if (key.equals("NextRoom")) {
+                for (String r : val.split(",")) {
+                    if (rooms == null) {
+                        checkName(key + "$", r, ln);
+                    } else if (!rooms.contains(r)) {
+                        add(ln, Severity.ERROR, "REF-UNDEF", "`" + key + "$ " + r + "`" + TO + "not a room on the `K:Dungeon:` line", r);
+                    }
+                }
+            }
             // a ':' means a parameterized keyword (Protection:...), whose value carries commas itself
             if (AMP_LISTS.contains(key) && val.contains(",") && !val.contains(":")) {
                 add(ln, Severity.ERROR, "LEX-DELIM", "`" + key + "$` is split on ` & `, not `,`", val);
@@ -416,6 +458,13 @@ public final class CardScriptLinter {
         private void checkRef(String key, String val, int ln) {
             if (SVAR_NAME.matcher(val).matches() && !svars.containsKey(val)) {
                 add(ln, Severity.ERROR, "REF-UNDEF", "`" + key + "$ " + val + "`" + TO + "no such SVar on this face", val);
+            }
+        }
+
+        /** An SVar the engine looks up by exactly this name, untrimmed; {@code where} is the param or line naming it. */
+        private void checkName(String where, String name, int ln) {
+            if (!name.isEmpty() && !svars.containsKey(name)) {
+                add(ln, Severity.ERROR, "REF-UNDEF", "`" + where + " " + name + "`" + TO + "no such SVar on this face", name);
             }
         }
 

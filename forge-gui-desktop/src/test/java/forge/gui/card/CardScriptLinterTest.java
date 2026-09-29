@@ -126,6 +126,44 @@ public class CardScriptLinterTest {
     }
 
     @Test
+    public void checksSVarNamesTheEngineLooksUp() {
+        // Animate's own spellings of StaticAbilities$ and ReplacementEffects$, and the statics they name
+        assertEquals(codes(HEAD + "A:SP$ Animate | Defined$ Self | staticAbilities$ STX"), List.of("REF-UNDEF"));
+        assertEquals(codes(HEAD + "A:SP$ Animate | Defined$ Self | staticAbilities$ STX\nSVar:STX:Mode$ Continuous | Affected$ Creature | AddPowr$ 1"),
+            List.of("KEY-TYPO"));
+        assertEquals(codes(HEAD + "A:SP$ Animate | Defined$ Self | Replacements$ RX"), List.of("REF-UNDEF"));
+        // copied by name, split on commas without trimming
+        assertEquals(codes(HEAD + "A:SP$ Animate | Defined$ Self | sVars$ X,Y\nSVar:X:1"), List.of("REF-UNDEF"));
+        assertEquals(codes(HEAD + "A:SP$ Clone | Defined$ Self | AddSVars$ X, Y\nSVar:X:1\nSVar:Y:1"), List.of("REF-UNDEF"));
+        // one SVar name: the whole value is looked up
+        assertEquals(codes(HEAD + "A:AB$ Mana | Cost$ T | Produced$ G | TriggersWhenSpent$ TA,TB\nSVar:TA:1\nSVar:TB:1"),
+            List.of("REF-UNDEF"));
+        assertEquals(codes(HEAD + "A:SP$ AddTurn | Defined$ You | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DelTrig"), List.of("REF-UNDEF"));
+        // dungeon rooms, and the rooms each one leads to
+        String dungeon = "Name:Test\nManaCost:no cost\nTypes:Dungeon\nK:Dungeon:DBA,DBB\n";
+        assertEquals(linter.lint(dungeon + "SVar:DBA:DB$ Draw | RoomName$ A | NextRoom$ DBB").get(0).message(),
+            "`K:Dungeon: DBB` → no such SVar on this face");
+        // DBC is an SVar, but not a room
+        assertEquals(codes(dungeon + "SVar:DBA:DB$ Draw | RoomName$ A | NextRoom$ DBB,DBC\nSVar:DBB:DB$ Draw | RoomName$ B\nSVar:DBC:DB$ Draw"),
+            List.of("REF-UNDEF"));
+        assertEquals(codes(dungeon + "SVar:DBA:DB$ Draw | RoomName$ A | NextRoom$ DBB\nSVar:DBB:DB$ Draw | RoomName$ B"), List.of());
+    }
+
+    @Test
+    public void flagsParamsWithoutADollar() {
+        assertEquals(codes(HEAD + "A:SP$ DealDamage | ValidTgts$ Any | NumDmg 3"), List.of("LEX-DOLLAR", "MISSING-KEY"));
+        assertEquals(codes(HEAD + "A:SP$ Draw | $ 1"), List.of("LEX-DOLLAR"));
+        // a bare param name is read as that param with an empty value
+        List<Finding> bare = linter.lint(HEAD + "A:SP$ Draw | NumCards$ 1 | Defined");
+        assertEquals(bare.stream().map(Finding::code).collect(Collectors.toList()), List.of("LEX-DOLLAR"));
+        assertEquals(bare.get(0).severity(), Severity.WARN);
+        // ... replacing any earlier value
+        assertEquals(codes(HEAD + "A:SP$ Draw | Defined$ You | Defined"), List.of("DUP-PARAM", "LEX-DOLLAR"));
+        // an empty SVar name isn't also reported as undefined
+        assertEquals(codes(HEAD + "A:SP$ Animate | Defined$ Self | sVars"), List.of("LEX-DOLLAR"));
+    }
+
+    @Test
     public void messagesReadAsWrongToRight() {
         assertEquals(linter.lint(HEAD + "A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SubABility$ DBX").get(0).message(),
             "`SubABility$` → `SubAbility$` (params are case-sensitive)");
