@@ -20,7 +20,10 @@ test('a physical card survives hand, play, tap and resize, with a usable graphic
     const arena = await page.locator('.match-arena').boundingBox();
     await page.mouse.move(arena.x + arena.width / 2, arena.y + arena.height - 6);
     await inHand.locator('.match-hand-cost').hover({ position: { x: 14, y: 10 } });
-    await inHand.click();
+    await page.mouse.down();
+    await page.mouse.move(arena.x + arena.width / 2, arena.y + arena.height * .56, { steps: 10 });
+    await expect(page.locator('.match-arena')).toHaveClass(/hand-drop-ready/);
+    await page.mouse.up();
     const onTable = page.locator(`#match-human .battlefield-card[data-visual-card="${card.visualId}"]`);
     await expect(onTable).toHaveAttribute('data-scene-card', object);
     context.selectedForestId = card.visualId;

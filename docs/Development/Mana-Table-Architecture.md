@@ -24,7 +24,7 @@ flowchart LR
 | Workshop | `renderer/app.js`, `presets.js` | Catalog, deck editing, imports, practice, preset browsing |
 | Match coordination | `renderer/match.js` | Setup, scoped answers, polling, stable board rendering, prompt controls |
 | Card interaction | `hand-view.js`, `table-gestures.js`, `card-preview.js`, `table-card-preview.js`, `battlefield-view.js` | Fan layout, cancelable dragging, card enlargement, optional inspector, alternate faces and crowded ranks |
-| 3D presentation | `table-scene.js`, `table-scene-world.mjs`, `table-scene.css` | Local Three.js scene, perspective camera, stable card objects, textures, movement and graphics fallback |
+| 3D presentation | `table-scene.js`, `table-scene-world.mjs`, `table-world-layout.mjs`, `table-scene.css` | World-space seating and camera, projected controls, stable card objects, textures, movement and graphics fallback |
 | Match explanation | `turn-guide.js`, `match-feedback.js` | Phase guidance, activity history, turn indicators and animation |
 | Table events | `cast-view.js`, `reveal-view.js` | Pending spell and stack portraits, prompt-scoped revealed cards |
 | Response preferences | `preferences.cjs`, `play-preferences.js`, `response-skip.js` | Remembered Auto/Full control, own-turn stops, temporary holds and engine-authorized passes |
@@ -161,23 +161,35 @@ Keep further shared changes small and reviewable.
 
 ## 3D scene and interaction boundary
 
-The default table uses a fixed perspective camera over a lit playmat. Hand,
-battlefield, and casting portraits are meshes with card thickness and soft
+The default table has authored world coordinates for two through six seats.
+`table-world-layout.mjs` arranges playmats, life medallions, hidden hand backs,
+decks, public discard piles, commanders, and battlefield ranks around the table.
+The camera fits the whole table to the viewport; clicking a player's name moves
+closer to that seat, and **Whole table** restores the overview. Camera focus never
+sends an engine action. Crowded ranks page in world space using their arrows,
+the wheel, or Left/Right/Home/End on a focused card.
+
+Hand, battlefield, and casting portraits are meshes with card thickness and soft
 projected shadows. `visualId` correlates the same object across zones; a source
 still on the battlefield gets a separate representation for its stack ability.
 Polling updates targets without replaying entrances. Transforms interpolate
 only until settled, then rendering sleeps. Reduced motion and Animations off
 snap directly to the new state. DOM flight clones are disabled for scene cards.
 
-The existing DOM remains the responsive layout and accessible interaction
-layer. Screen anchors are projected onto the table or an elevated plane;
-field cards lie on the table while held and casting cards face the camera.
+World objects project their bounds back onto accessible DOM controls each frame.
+The 3D view removes the old scrolling seat lanes; the 2D fallback keeps them.
+Held and casting cards use camera-relative screen anchors and face the camera.
 Clicks, keyboard input, legal target highlighting, combat arrows, and scoped
-drags continue through the existing engine answer path. This first scene keeps
-life, stats, menus, the detailed combat inspector and reveal/search galleries
-as HTML controls. It is not an orbiting tabletop or a physics simulation.
+drags continue through the existing engine answer path. Combat arrows follow the
+projected targets as the camera moves. Life numbers, stats, menus, the detailed
+combat inspector and reveal/search galleries remain HTML controls. Projection
+writes and combat SVG updates are excluded from the scene's mutation observer
+so they cannot keep the render loop awake.
+World labels covered by held or casting cards become transparent while retaining
+their hit regions, preventing DOM text from showing through a WebGL card face.
 
-Textures come only from existing authorized card portraits. Face changes clear
+Card textures come only from existing authorized card portraits. Opponent hand
+counts produce anonymous backs, without reading hidden card identities. Face changes clear
 the previous texture; objects leaving the visible projection are removed and
 disposed immediately. No hidden-zone images are synthesized. Context loss or
 initialization failure restores the complete 2D presentation, and the player
@@ -187,6 +199,10 @@ Three.js is pinned in `package-lock.json` and served through two exact protocol
 paths. Packaging copies its two runtime modules and MIT license into the ASAR;
 the scene never downloads executable code. `table-scene.spec.cjs` checks real
 engine card continuity, tapping, idle rendering, sizes, context loss and retry.
+`table-world.spec.cjs` checks two, four, and six seats, projected life hit targets,
+camera focus, and crowded-rank paging while a real engine decision stays unchanged.
+`battlefield-fit.spec.cjs` and `multiplayer.spec.cjs` retain explicit 2D fallback
+coverage for scrollports, seat navigation, and drawers.
 
 This is a local, single-human application with one active match. There is no
 network API, multiplayer service, durable match resume, or full tournament-format

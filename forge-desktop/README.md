@@ -34,7 +34,9 @@ This produces `forge-api/target/forge-engine.jar` and builds only its required
 Maven modules. Rebuild the JAR after Java changes. Restart Electron after changes
 to `main.cjs`, the preload, or renderer code. No frontend bundle step is required.
 Three.js is pinned and installed by `npm ci`; its modules are served locally.
-The match defaults to a fixed 3D table. **3D table / 2D table** switches presentation
+The match defaults to a 3D table with world-space seats, playmats, cards, and piles.
+Click a player's name to focus their battlefield; **Whole table** restores the
+overview. **3D table / 2D table** switches presentation
 without restarting the match. A missing/lost WebGL 2 context restores the 2D
 view automatically. Artwork, menus and engine actions keep the same services.
 

@@ -3,6 +3,7 @@ function createBattlefieldView(root) {
   let frame;
   function update(row) {
     if (!row.isConnected) return;
+    if (row.closest('.scene-active')) return;
     const cards = [...row.querySelectorAll('.battlefield-card')];
     const width = cards[0]?.offsetWidth || 0;
     const overlap = cards.length > 1 ? Math.max(0, Math.min(width * .32, (cards.length * (width + 10) - row.clientWidth + 30) / (cards.length - 1))) : 0;

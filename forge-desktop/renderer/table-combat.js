@@ -104,7 +104,7 @@ function createTableCombat(arena, send) {
     const point = element => {
       if (!element || !element.checkVisibility()) return null;
       const r = element.getBoundingClientRect(), row = element.closest('.battlefield-row');
-      const clip = row?.getBoundingClientRect() || bounds;
+      const clip = arena.classList.contains('scene-active') ? bounds : row?.getBoundingClientRect() || bounds;
       const x = r.left + r.width / 2, y = r.top + r.height / 2;
       return x < clip.left || x > clip.right || y < clip.top || y > clip.bottom ? null : { x: x - bounds.left, y: y - bounds.top };
     };
@@ -123,6 +123,7 @@ function createTableCombat(arena, send) {
   }
   function scheduleLines() { cancelAnimationFrame(frame); frame = requestAnimationFrame(lines); }
   arena.addEventListener('scroll', scheduleLines, true);
+  arena.addEventListener('worldlayout', scheduleLines);
   new ResizeObserver(scheduleLines).observe(arena);
   function render(next) {
     state = next; drag.refresh();

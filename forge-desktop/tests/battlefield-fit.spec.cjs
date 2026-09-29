@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { launchDesktop } = require('./support/desktop.cjs');
 
-test('crowded battlefield tiles keep readable names and stats in front and back rows at two, four and six seats', async () => {
+test('2D fallback keeps crowded front and back rows readable at two, four and six seats', async () => {
   test.setTimeout(180000);
   const { application, executable } = await launchDesktop('battlefield-fit');
   try {
@@ -33,6 +33,11 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
         });
       }
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
+      if (count === 2) {
+        await expect(page.locator('.match-arena')).toHaveClass(/scene-active/);
+        await page.locator('#match-renderer').click();
+        await expect(page.locator('.match-arena')).not.toHaveClass(/scene-active/);
+      }
       // Freeze at a real input prompt and populate every real seat's rows with
       // cloned card elements. This forces crowded ranks and mixed tap states without
       // requiring dozens of turns or changing any engine state.

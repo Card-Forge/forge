@@ -19,3 +19,60 @@ body:has(.scene-active) > .table-return-ghost[data-scene-card] { opacity: 0; }
 #match-renderer { font-size: 10px; color: #b3c5bd; }
 #match-renderer[aria-pressed="true"] { color: #f4d897; }
 @media (max-width: 1100px) { .match-heading-actions { gap: 8px; } }
+
+/* World space supplies the positions. These are transparent, accessible hit
+   regions and readable labels attached to the projected objects. */
+.world-seat-focus { display: none; }
+#match-view:has(.scene-active) .match-seats { display: none; }
+#match-view:has(.scene-active) .match-layout { height: calc(100dvh - 68px); border: 0; border-radius: 0; box-shadow: none; }
+.scene-active.match-arena { display: block; padding: 0; }
+.scene-active #match-opponent, .scene-active #match-human, .scene-active #match-self,
+.scene-active .opponent-lane, .scene-active .match-zones-row, .scene-active .match-battlefield,
+.scene-active .battlefield-rank, .scene-active .battlefield-row, .scene-active .match-side-zones,
+.scene-active .match-other-zones, .scene-active .match-command-zone, .scene-active .match-command-zone > div,
+.scene-active .match-player, .scene-active #match-self .match-player, .scene-active .opponent-hand,
+.scene-active .match-zone { display: contents; }
+.scene-active .field-empty, .scene-active .match-command-zone > .eyebrow, .scene-active .opponent-hand > div { display: none; }
+.scene-active [data-world-visible="false"] { display: none !important; }
+.scene-active [data-world-covered="true"] { opacity: 0 !important; }
+.scene-active [data-world-box] { position: absolute; left: var(--world-x); top: var(--world-y); width: var(--world-w); height: var(--world-h); margin: 0; flex: none; transform: none; }
+.scene-active .battlefield-row > .battlefield-card[data-world-box], .scene-active .match-command-zone .match-card[data-world-box] { width: var(--world-w); height: var(--world-h); margin: 0; transition: none; }
+.scene-active .match-command-zone .match-card > .match-card-face { opacity: 0; }
+.scene-active .battlefield-card, .scene-active .match-command-zone .match-card { z-index: 2; }
+.scene-active .battlefield-card:hover, .scene-active .battlefield-card:focus-visible { z-index: 6; }
+.scene-active .battlefield-card > .scene-card-name { left: 0; bottom: -15px; width: 100%; background: #101a21b0; border-radius: 3px; font-size: 11px; line-height: 14px; padding: 0 2px; }
+.scene-active .battlefield-card .match-stats { font-size: 14px; line-height: 17px; padding: 1px 3px; min-width: 27px; }
+.scene-active #match-human .battlefield-card .match-stats { font-size: 17px; line-height: 20px; }
+.scene-active .battlefield-status { top: -3px; bottom: auto; left: -2px; right: auto; }
+.scene-active .match-command-zone .match-card-name { display: block; position: absolute; left: -8px; right: -8px; top: 100%; text-align: center; font-size: 0; margin-top: 3px; }
+.scene-active .match-command-zone .match-card-name::before { content: 'CMD'; color: #e9cc8e; font-size: 9px; }
+.scene-active .opponent-lane .match-command-zone .match-card-name { display: block; }
+.scene-active[data-world-focus-id]:not([data-world-focus-id=""]) .match-command-zone .match-card-name { font-size: 10px; }
+.scene-active[data-world-focus-id]:not([data-world-focus-id=""]) .match-command-zone .match-card-name::before { content: 'CMD · '; }
+.scene-active .rank-page { z-index: 5; font-size: 22px; }
+.scene-active #match-phase { position: absolute; left: 10px; top: 8px; width: auto; height: 22px; padding: 3px 10px; gap: 7px; border: 0; border-radius: 14px; background: #101e29d9; z-index: 8; pointer-events: none; }
+.scene-active .match-life[data-world-box], .scene-active #match-self .match-life[data-world-box] { padding: 0; display: block; background: transparent; border: 0; box-shadow: none; border-radius: 50%; z-index: 7; }
+.scene-active .match-life > span:not(.life-change) { visibility: hidden; }
+.scene-active .match-life > b, .scene-active #match-self .match-life > b { position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%); min-width: 38px; padding: 0 4px; font: 700 28px/30px Georgia; color: #fff3cf; text-align: center; text-shadow: 0 2px 3px #000, 0 0 8px #000; border-radius: 10px; background: #12242bc4; }
+.scene-active .match-player-info, .scene-active #match-self .match-player-info { z-index: 7; text-align: center; padding: 0; }
+.scene-active .match-player-info > strong { display: none; }
+.scene-active .world-seat-focus { display: block; width: 100%; padding: 0; font: 12px/16px Georgia; text-shadow: 0 1px 3px #000; color: #eee4c9; background: transparent; border: 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.scene-active .world-seat-focus:hover { color: #ffe4a0; text-decoration: underline; }
+.scene-active .match-player-info > small, .scene-active #match-self .match-player-info > small { display: block; font-size: 9px; margin: 0; text-shadow: 0 1px 3px #000; }
+.scene-active .match-mana-pool, .scene-active #match-self .match-mana-pool { position: static; transform: none; max-width: none; justify-content: center; margin: 2px 0 0; }
+.scene-active .match-commander-damage[data-world-box], .scene-active #match-self .match-commander-damage[data-world-box] { position: absolute; left: var(--world-x); top: var(--world-y); right: auto; bottom: auto; font-size: 8px; z-index: 8; }
+.scene-active .opponent-hand > span { text-align: center; color: #9fb4bb; font-size: 9px; white-space: nowrap; pointer-events: none; }
+.scene-active .match-library { display: block; padding: 0; }
+.scene-active .match-library .library-back, .scene-active .match-zone summary > .card-art, .scene-active .match-zone summary > .empty-pile { opacity: 0; pointer-events: none; }
+.scene-active .match-zone > summary { display: block; padding: 0; z-index: 3; }
+.scene-active .match-library > span:last-child, .scene-active .match-zone summary > span:last-child { position: absolute; top: calc(100% + 3px); left: -24px; right: -24px; display: flex; justify-content: center; align-items: center; gap: 3px; font-size: 9px; line-height: 13px; text-shadow: 0 1px 3px #000; white-space: nowrap; }
+.scene-active .match-library b, .scene-active .match-zone summary b { position: static; padding: 0 3px; font-size: 10px; min-width: 15px; box-shadow: none; }
+.scene-active .match-library > span:last-child, .scene-active .match-zone summary > span:last-child { top: calc(100% - 8px); flex-direction: column-reverse; font-size: 0; line-height: 0; gap: 0; }
+.scene-active .match-library > span:last-child::before, .scene-active .match-zone summary > span:last-child::before,
+.scene-active .match-library b, .scene-active .match-zone summary b { line-height: 12px; }
+.scene-active .match-library > span:last-child::before { content: 'Deck'; font-size: 9px; }
+.scene-active .match-zone[data-zone$="-Graveyard"] summary > span:last-child::before { content: 'GY'; font-size: 9px; }
+.scene-active .match-zone[data-zone$="-Exile"] summary > span:last-child::before { content: 'Exile'; font-size: 9px; }
+.scene-active .match-library > span:last-child, .scene-active .match-zone summary > span:last-child { pointer-events: none; }
+.world-overview { position: absolute; right: 12px; top: 10px; z-index: 15; padding: 5px 12px; background: #152532ed; border: 1px solid #aeaa82; border-radius: 18px; color: #f4deb0; }
+.scene-active .match-hand-label { background: #10212bbd; }

@@ -83,7 +83,7 @@ const steps = [{
   questions: 'Was the land easy to reach behind your hand? Can you tell that it is tapped and that you have mana?',
   async perform(page, context) {
     const permanent = page.locator(`#match-human [data-visual-card="${context.playedForestId}"]`);
-    const table = await page.locator('#match-human').boundingBox(), land = await permanent.boundingBox();
+    const table = await page.locator('.match-arena').boundingBox(), land = await permanent.boundingBox();
     await page.mouse.move(table.x + 12, table.y + 12);
     await page.mouse.move(land.x + land.width / 2, land.y + land.height / 2, { steps: 8 });
     await permanent.click();

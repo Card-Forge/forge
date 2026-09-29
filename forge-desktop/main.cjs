@@ -79,7 +79,7 @@ app.whenReady().then(async () => {
       return net.fetch(pathToFileURL(path.join(directory, file)).toString());
     }
     const allowed = new Set(['/index.html', '/style.css', '/app.js', '/presets.js', '/presets.css', '/match.js', '/match.css', '/battlefield.css', '/card-preview.js', '/card-preview.css', '/turn-guide.js', '/match-feedback.js', '/match-feedback.css', '/combat-view.js', '/combat-view.css', '/table-combat.js', '/table-combat.css', '/cast-view.js', '/cast-view.css', '/reveal-view.js', '/reveal-view.css', '/table-gestures.js', '/hand-view.js', '/hand-view.css', '/response-skip.js', '/play-preferences.js', '/table-card-preview.js', '/battlefield-view.js', '/deck-workshop.js', '/deck-workshop.css']);
-    if (!allowed.has(pathname) && !['/table-scene.js', '/table-scene-world.mjs', '/table-scene.css'].includes(pathname)) return new Response('Not found', { status: 404 });
+    if (!allowed.has(pathname) && !['/table-scene.js', '/table-scene-world.mjs', '/table-world-layout.mjs', '/table-scene.css'].includes(pathname)) return new Response('Not found', { status: 404 });
     return net.fetch(pathToFileURL(path.join(__dirname, 'renderer', pathname.slice(1))).toString());
   });
   session.defaultSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));

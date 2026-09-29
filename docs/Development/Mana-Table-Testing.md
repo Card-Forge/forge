@@ -42,11 +42,12 @@ node --test tests/commander.test.cjs
 | Deck editing/import/export, discovery and review | `engine.test.cjs`, `desktop.spec.cjs`, `deck-workshop.spec.cjs`, `presets.*` |
 | Prompts, turn guidance and stale actions | `match.*`, `priority.spec.cjs`, `card-selection.spec.cjs`, `land-play.spec.cjs` |
 | Commander/multiplayer | `commander.*`, `multiplayer.*` |
-| Hand and battlefield layout | `hand-gestures.spec.cjs`, `hand-readability.spec.cjs`, `battlefield-fit.spec.cjs` |
+| Hand and 2D fallback layout | `hand-gestures.spec.cjs`, `hand-readability.spec.cjs`, `battlefield-fit.spec.cjs`, `multiplayer.spec.cjs` |
 | Combat | `combat.spec.cjs`, `match.test.cjs`, `multiplayer.test.cjs` |
 | Card visibility/inspection | `card-preview.spec.cjs`, `card-faces.spec.cjs`, `library-search.spec.cjs` |
 | Animation/event correlation | `animation-feedback.spec.cjs` |
 | 3D continuity, idle rendering and graphics fallback | `table-scene.spec.cjs` (real WebGL and engine); animation-feedback retains the 2D fallback check |
+| World-space seats, camera focus and crowded ranks | `table-world.spec.cjs` (two, four and six seats, projected hit targets, no engine action from camera/paging) |
 | Anchored controls and independent panel scrolling | `rail-layout.spec.cjs` |
 | Casting, cancelling, the stack and revealed hand portraits | `casting-reveal.spec.cjs` |
 | Source-aware artifact mana choices | `mana-choice.spec.cjs` |

@@ -172,7 +172,7 @@
     const permanents = field.cards.filter(card => !isLand(card));
     const row = (name, cards, label) => `<div class="battlefield-rank"><div class="battlefield-row ${name}-row" data-field-row="${player.id}-${name}" aria-label="${esc(player.name)}: ${label}">${cards.map(card => cardTile(card, 'battlefield')).join('') || `<span class="field-empty">${label}</span>`}</div></div>`;
     const hiddenHand = !player.human ? `<div class="opponent-hand" aria-label="${hand.count} cards in opponent's hand"><div aria-hidden="true">${Array.from({ length: Math.min(hand.count, 9) }, (_, index) => `<i style="--back-angle:${(index - (Math.min(hand.count, 9) - 1) / 2) * 4}deg"></i>`).join('')}</div><span>${hand.count} in hand</span></div>` : '';
-    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}" data-player-portrait="${player.id}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}" title="${esc(player.name)} · ${player.life} life"><span>${esc(player.human ? 'You' : player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><small>${player.eliminated ? 'Eliminated' : turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool" aria-label="Available mana">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
+    const portrait = `<div class="match-player ${turn ? 'has-turn' : ''} ${player.priority ? 'has-priority' : ''}" data-player-portrait="${player.id}">${hiddenHand}<button class="match-life" data-match-player="${player.id}" ${player.eliminated ? 'disabled' : ''} aria-label="Target ${esc(player.name)}" title="${esc(player.name)} · ${player.life} life"><span>${esc(player.human ? 'You' : player.name.slice(0, 1))}</span><b>${player.life}</b></button><div class="match-player-info"><strong>${esc(player.name)}</strong><button class="world-seat-focus" data-world-focus="${player.id}" aria-label="View ${esc(player.name)} battlefield" title="Look closer at this battlefield">${esc(player.name)}</button><small>${player.eliminated ? 'Eliminated' : turn ? player.human ? 'Your turn' : 'Their turn' : 'Waiting'}${player.priority ? ' · Priority' : ''}</small><div class="match-mana-pool" aria-label="Available mana">${mana}</div></div>${damage ? `<details class="match-commander-damage"><summary>Commander damage</summary><div>${damage}</div></details>` : ''}</div>`;
     const side = `<aside class="match-side-zones">${commandZone}<div class="match-library" aria-label="${library.count} cards in ${esc(player.name)}'s library"><span class="library-back" aria-hidden="true">M</span><span>Library <b>${library.count}</b></span></div><div class="match-other-zones">${other}</div></aside>`;
     const fieldRows = player.human ? row('permanents', permanents, 'Battlefield') + row('lands', lands, 'Lands') : row('lands', lands, 'Lands') + row('permanents', permanents, 'Battlefield');
     const battlefield = `<div class="match-zones-row"><div class="match-battlefield">${fieldRows}</div>${side}</div>`;
@@ -206,7 +206,7 @@
       const opponentScroll = $('match-opponent').scrollLeft;
       $('match-opponent').innerHTML = opponents.map(opponent => `<section class="match-lane opponent-lane ${opponent.eliminated ? 'eliminated' : ''}" data-player-id="${opponent.id}" aria-label="${esc(opponent.name)} battlefield">${playerLane(opponent)}</section>`).join('');
       $('match-opponent').scrollLeft = opponentScroll;
-      $('match-human').dataset.playerId = human?.id || '';
+      $('match-human').dataset.playerId = human?.id ?? '';
       $('match-human').innerHTML = human ? playerLane(human) : '';
       const portrait = $('match-human').querySelector('.match-player');
       $('match-self').replaceChildren(...(portrait ? [portrait] : []));
@@ -245,7 +245,7 @@
     castView.render(next, before);
     revealView.render(next);
     tableScene.render(next);
-    if (next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
+    if (!document.querySelector('.scene-active') && next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
     const busy = !next.prompt && !['finished', 'error'].includes(next.status);
     $('match-view').dataset.playerInput = String(Boolean(next.prompt?.playerChoices?.length || next.prompt?.inputType?.includes('Target') || next.prompt?.inputType === 'InputAttack'));
     $('match-view').setAttribute('aria-busy', String(busy));
@@ -260,6 +260,7 @@
   }
 
   function focusPlayer(id) {
+    if (document.querySelector('.scene-active')) { tableScene.focus(Number(id)); return; }
     const lane = document.querySelector(`#match-opponent [data-player-id="${Number(id)}"]`);
     if (lane) $('match-opponent').scrollTo({ left: lane.offsetLeft - ($('match-opponent').clientWidth - lane.offsetWidth) / 2, behavior: 'instant' });
   }

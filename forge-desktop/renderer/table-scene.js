@@ -38,5 +38,5 @@ function createTableScene(arena) {
   };
   new MutationObserver(() => { if (view.hidden) world?.pause(); else start(); }).observe(view, { attributes: true, attributeFilter: ['hidden'] });
   label();
-  return { render(state) { latest = state; if (world) world.update(state); else start(); } };
+  return { focus(id) { world?.focus(id); }, render(state) { latest = state; if (world) world.update(state); else start(); } };
 }

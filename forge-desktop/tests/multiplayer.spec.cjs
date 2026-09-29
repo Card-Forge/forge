@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { launchDesktop } = require('./support/desktop.cjs');
 
-test('four and six player tables stay usable at desktop sizes and acknowledge actions immediately', async () => {
+test('2D fallback keeps four and six player tables usable and acknowledges actions immediately', async () => {
   const { application, executable } = await launchDesktop('multiplayer');
   try {
     const page = await application.firstWindow();
@@ -53,6 +53,11 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
       expect(state.activePlayerId).toBe(state.players.find(player => player.human).id);
       expect(state.prompt.inputType).toBe('InputPassPriority');
       await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
+      if (count === 4) {
+        await expect(page.locator('.match-arena')).toHaveClass(/scene-active/);
+        await page.locator('#match-renderer').click();
+        await expect(page.locator('.match-arena')).not.toHaveClass(/scene-active/);
+      }
       await expect(page.locator('#match-opponent > .match-lane')).toHaveCount(count - 1);
       await expect(page.locator('#match-seats .table-seat')).toHaveCount(count);
       await expect(page.locator('#match-seats .table-seat.active')).toHaveCount(1);

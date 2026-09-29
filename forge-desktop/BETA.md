@@ -1,10 +1,23 @@
-# Mana Table — beta 0.1.0-beta.28
+# Mana Table — beta 0.1.0-beta.29
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 28 fixes **Auto stopping after your last playable card**:
+Beta 29 places **the players and battlefield around a physical table**:
+
+- Each seat has a playmat, life medallion, deck, discard piles, and command zone
+  in the same 3D world. Opponent hands appear as card backs behind their playmats.
+- Two players sit across the table; larger Commander games arrange the opponents
+  around an arc. All seats stay in view without a scrolling opponent strip.
+- Click a player's name to look closer at their battlefield. **Whole table**
+  returns to the overview. Crowded rows have arrows, wheel browsing, and keyboard
+  navigation. Camera movement and browsing never pass priority or play a card.
+- Cards, target controls, and combat arrows stay attached to their positions as
+  the camera moves. The active player's playmat and life marker light up.
+- **2D table** remains available, including as an automatic graphics fallback.
+
+Beta 28 fixed **Auto stopping after your last playable card**:
 
 - After playing your land, Auto continues if you have no other playable card
   or ability. The card has a moment to settle on the table before play advances.
