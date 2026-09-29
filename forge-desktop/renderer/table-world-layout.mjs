@@ -200,16 +200,27 @@ export function createWorldLayout(arena, scene, texture, request) {
     const covers = [...arena.querySelectorAll('#match-hand > .match-hand-card[data-scene-card], .cast-card[data-scene-card] .cast-portrait')]
       .filter(element => element.checkVisibility() && element.dataset.handVisible !== 'false')
       .map(element => element.getBoundingClientRect());
+    function occlude(label, covers) {
+      const box = label.getBoundingClientRect();
+      const covered = box.width > 0 && box.height > 0 && covers.some(cover =>
+        box.right > cover.left && box.left < cover.right && box.bottom > cover.top && box.top < cover.bottom);
+      if (label.dataset.worldCovered !== String(covered)) label.dataset.worldCovered = String(covered);
+    }
     for (const element of projected) {
       if (!element.isConnected) continue;
       const labels = element.matches('.match-player-info, .rank-page') ? [element]
         : element.querySelectorAll('.scene-card-name, .match-stats, .match-card-name, :scope > b, :scope > summary, :scope > span:last-child');
       for (const label of labels) {
-        const box = label.getBoundingClientRect();
-        const covered = box.width > 0 && box.height > 0 && covers.some(cover =>
-          box.right > cover.left && box.left < cover.right && box.bottom > cover.top && box.top < cover.bottom);
-        if (label.dataset.worldCovered !== String(covered)) label.dataset.worldCovered = String(covered);
+        occlude(label, covers);
       }
+    }
+    // Neighboring hand labels are DOM too. Their cost/name badges must not
+    // bleed through the closer WebGL card when it lifts out of the fan.
+    const held = [...arena.querySelectorAll('#match-hand > .match-hand-card[data-scene-card]')]
+      .filter(element => element.dataset.handVisible !== 'false' && element.classList.contains('hand-raised'));
+    for (const element of arena.querySelectorAll('#match-hand > .match-hand-card')) {
+      const above = held.filter(card => card !== element).map(card => card.getBoundingClientRect());
+      for (const label of element.querySelectorAll('.match-hand-cost, .match-card-name, .match-hand-details')) occlude(label, above);
     }
   }
   function destroy(item) {

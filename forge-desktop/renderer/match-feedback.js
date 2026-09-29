@@ -10,6 +10,66 @@ const matchFeedback = (() => {
   let historySession, historyCursor = -1;
   const flights = new Set();
   const positions = new Map();
+  const dock = document.createElement('section');
+  dock.id = 'match-turn-dock'; dock.setAttribute('aria-label', 'Turn and phase');
+  dock.innerHTML = '<div class="turn-dock-owner"><strong id="turn-dock-owner"></strong><span id="turn-dock-number"></span></div>'
+    + '<button id="turn-dock-phase" aria-controls="match-turn-guide" aria-expanded="false" title="Explain this step"><strong></strong><span aria-hidden="true">?</span></button>'
+    + '<p id="turn-dock-action"></p><div id="turn-dock-track" aria-label="Turn progress"></div>';
+  document.querySelector('.match-rail').append(dock);
+  const cue = document.createElement('div');
+  cue.id = 'match-turn-cue'; cue.hidden = true; cue.setAttribute('aria-hidden', 'true');
+  document.querySelector('.match-arena').append(cue);
+  let cueTimer;
+  const guide = $('match-turn-guide'), phaseButton = $('turn-dock-phase');
+  phaseButton.onclick = () => {
+    guide.open = !guide.open;
+    if (guide.open) requestAnimationFrame(() => {
+      const current = guide.querySelector('[aria-current="step"]');
+      if (current) guide.scrollTop += current.getBoundingClientRect().top - guide.getBoundingClientRect().top - 44;
+    });
+  };
+  guide.addEventListener('toggle', () => phaseButton.setAttribute('aria-expanded', String(guide.open)));
+  function dismissCue() { clearTimeout(cueTimer); cue.getAnimations().forEach(animation => animation.cancel()); cue.hidden = true; cue.replaceChildren(); }
+  new MutationObserver(() => { if ($('match-view').hidden) dismissCue(); })
+    .observe($('match-view'), { attributes: true, attributeFilter: ['hidden'] });
+  function text(element, value) { if (element.textContent !== value) element.textContent = value; }
+
+  function turnDock(next, previous, status) {
+    dock.dataset.owner = status.yours ? 'you' : status.pregame ? 'none' : 'opponent';
+    text($('turn-dock-owner'), status.owner);
+    $('turn-dock-owner').title = status.owner;
+    text($('turn-dock-number'), next.turn ? `Turn ${next.turn}` : 'Setup');
+    text(phaseButton.querySelector('strong'), status.terminal ? 'Game complete' : status.phase);
+    phaseButton.disabled = status.pregame || status.terminal;
+    const action = status.terminal ? next.result || 'Game ended' : status.pregame ? next.prompt ? 'Waiting for your choice' : 'Preparing the game'
+      : !next.prompt ? next.stack?.length ? 'Resolving the stack' : status.yours ? 'Your turn is advancing' : 'Opponent is playing'
+        : status.optionalResponse ? `Your response${next.stack?.length ? ` · ${next.stack.length} on the stack` : ' is optional'}`
+          : next.prompt.inputType === 'InputPassPriority' ? 'Your play' : 'Waiting for your choice';
+    text($('turn-dock-action'), action);
+    dock.dataset.waiting = String(Boolean(next.prompt) && !status.terminal);
+    const track = $('turn-dock-track');
+    track.hidden = status.pregame || status.terminal;
+    if (track.dataset.stage !== String(status.stage)) {
+      track.dataset.stage = String(status.stage);
+      track.innerHTML = ['Begin', 'Main 1', 'Combat', 'Main 2', 'End'].map((label, index) =>
+        `<span ${index === status.stage ? 'aria-current="step"' : ''} class="${index < status.stage ? 'past' : ''}">${label}</span>`).join('');
+    }
+    const sameGame = previous?.id === next.id;
+    if (!sameGame || status.terminal || status.pregame) dismissCue();
+    const turnChanged = sameGame && !status.terminal && !status.pregame
+      && (previous.turn !== next.turn || previous.activePlayerId !== next.activePlayerId);
+    if (turnChanged) {
+      dismissCue(); cue.hidden = false;
+      cue.dataset.owner = dock.dataset.owner;
+      cue.innerHTML = `<span>TURN ${next.turn}</span><strong>${esc(status.owner)}</strong>`;
+      animate(cue, [{ opacity: 0, translate: '0 8px' }, { opacity: 1, translate: '0 0' }], 220);
+      cueTimer = setTimeout(dismissCue, 1600);
+    }
+    // Required decisions and the physical stack take precedence over a turn cue.
+    if (next.stack?.length || next.prompt && next.prompt.inputType !== 'InputPassPriority') dismissCue();
+    if (sameGame && previous.phaseKey !== next.phaseKey && !status.terminal && !status.pregame)
+      animate(phaseButton, [{ backgroundColor: '#ddc89355' }, { backgroundColor: 'transparent' }], 650);
+  }
 
   function updateMotion() {
     $('match-view').dataset.motion = motion ? 'on' : 'off';
@@ -132,6 +192,7 @@ const matchFeedback = (() => {
   function render(next, previous, before) {
     if (previous?.id !== next.id) { positions.clear(); flights.forEach(element => element.remove()); flights.clear(); }
     const status = describe(next);
+    turnDock(next, previous, status);
     $('match-title').innerHTML = `<strong id="match-turn-owner">${esc(status.owner)}</strong><span id="match-phase-name">${esc(status.terminal ? '' : status.phase)}</span>`;
     $('match-title').setAttribute('aria-label', `${status.owner}. ${status.phase}.`);
     $('match-view').dataset.turnOwner = status.yours ? 'you' : status.pregame ? 'none' : 'opponent';

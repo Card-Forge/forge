@@ -65,11 +65,11 @@ const turnGuide = (() => {
       instruction = 'Click one of the highlighted life totals to choose that player.';
     } else if (prompt?.inputType === 'InputAttack') {
       title = 'Choose your attackers.';
-      instruction = 'Click creatures on your battlefield to attack the highlighted defender, or drag a creature onto an opponent. Click a life total to change defenders. Confirm attackers when ready.';
+      instruction = 'Click your creature, then a highlighted opponent or planeswalker to attack it. You can also drag between them. Repeat the same pair to recall an attack. Confirm attackers when ready.';
       passLabel = 'Confirm attackers';
     } else if (prompt?.inputType === 'InputBlock') {
       title = 'Choose your blockers.';
-      instruction = 'Click an attacking creature, then one of your highlighted blockers, or drag your creature onto an attacker. Blue lines show blocks. Select that attacker and click its blocker again to remove the block. Confirm blocks when ready.';
+      instruction = 'Click your creature, then a highlighted attacking creature to block it. You can also drag between them. Blue lines show blocks. Repeat the same pair to remove a block. Confirm blocks when ready.';
       passLabel = 'Confirm blocks';
     } else if (prompt?.inputType?.startsWith('InputPayMana')) {
       title = 'Pay the requested cost.';

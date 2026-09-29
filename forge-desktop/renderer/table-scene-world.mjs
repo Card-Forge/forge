@@ -15,7 +15,7 @@ export function createTableWorld(arena, onFailure) {
   // The table uses millimetre-like units. A sensible near plane keeps the card
   // face and thin cardstock from fighting for depth at the far seats.
   const scene = new T.Scene(), camera = new T.PerspectiveCamera(38, 1, 40, 10000);
-  const ray = new T.Raycaster(), ground = new T.Plane(new T.Vector3(0, 0, 1), 0);
+  const ray = new T.Raycaster();
   scene.add(new T.HemisphereLight(0xf3f3e3, 0x283d4e, 2.2));
   const light = new T.DirectionalLight(0xffe9c3, 2.1);
   light.position.set(-350, 300, 900); scene.add(light);
@@ -80,9 +80,9 @@ export function createTableWorld(arena, onFailure) {
     const map = new T.CanvasTexture(surface); map.colorSpace = T.SRGBColorSpace;
     map.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy()); return map;
   }
-  function point(x, y, z = 0) {
+  function cameraPoint(x, y, depth) {
     ray.setFromCamera(new T.Vector2((x - bounds.left) / bounds.width * 2 - 1, 1 - (y - bounds.top) / bounds.height * 2), camera);
-    return ray.ray.intersectPlane(z ? new T.Plane(ground.normal, -z) : ground, new T.Vector3());
+    return ray.ray.at(depth / ray.ray.direction.dot(camera.getWorldDirection(new T.Vector3())), new T.Vector3());
   }
   function resize(dt) {
     bounds = arena.getBoundingClientRect();
@@ -189,7 +189,7 @@ export function createTableWorld(arena, onFailure) {
     const style = getComputedStyle(element);
     const matrix = new DOMMatrix(style.transform === 'none' ? undefined : style.transform);
     let angle = entry.world ? entry.world.angle + (entry.fan || 0) + (element.classList.contains('tapped') ? -Math.PI / 2 : 0) : -Math.atan2(matrix.b, matrix.a);
-    const held = element.classList.contains('hand-raised') || element.matches(':focus-visible');
+    const held = isHand ? element.classList.contains('hand-raised') : element.matches(':focus-visible');
     const hovering = element.matches(':hover');
     let lift = entry.world ? (hovering || held ? 16 : 9) : kind === 'cast' ? 50 : held ? 90 : 50;
     if (dragged === entry.key && pointer) {
@@ -197,8 +197,15 @@ export function createTableWorld(arena, onFailure) {
       lift = 100; angle = -.04;
     }
     const cx = rect.x + rect.width / 2, cy = rect.y + rect.height / 2;
-    const target = entry.world && dragged !== entry.key ? entry.world.position.clone().setZ(lift) : point(cx, cy, lift);
-    const worldPixel = entry.world && dragged !== entry.key ? 1 : point(cx + 1, cy, lift).distanceTo(target);
+    const onTable = entry.world && dragged !== entry.key;
+    // A held card faces the camera, so its depth must also be camera-relative.
+    // Intersecting the sloping table let lower neighbors cover its printed rules.
+    const order = Number(style.getPropertyValue('--hand-order')) || 0;
+    const castOrder = Number(style.getPropertyValue('--cast-index')) || 0;
+    const depth = camera.position.distanceTo(look) * .4
+      * (dragged === entry.key ? .7 : isHand ? held ? .75 : .92 - order * .004 : 1 + castOrder * .008);
+    const target = onTable ? entry.world.position.clone().setZ(lift) : cameraPoint(cx, cy, depth);
+    const worldPixel = onTable ? 1 : 2 * depth * Math.tan(T.MathUtils.degToRad(camera.fov / 2)) / height;
     const pxHeight = isHand ? element.offsetHeight * Math.hypot(matrix.a, matrix.b) : surface.offsetHeight;
     const scale = entry.world && dragged !== entry.key ? entry.world.height : (dragged === entry.key ? 206 : pxHeight) * worldPixel;
     const rotation = new T.Quaternion();
@@ -218,12 +225,18 @@ export function createTableWorld(arena, onFailure) {
     entry.face.material.opacity = kind === 'pile' && !entry.count ? .23 : 1;
     entry.body.visible = kind !== 'pile' || entry.count > 0;
     const color = element.classList.contains('table-attacking') || element.classList.contains('in-combat') ? 0xec9470
-      : element.classList.contains('chosen') || kind === 'cast' ? 0xf1d58b : 0x79d4ee;
-    entry.rim.visible = kind !== 'back' && (hovering || held || element.classList.contains('actionable') || element.classList.contains('chosen') || element.classList.contains('in-combat') || kind === 'cast');
+      : element.classList.contains('chosen') || element.classList.contains('table-combat-selected') || kind === 'cast' ? 0xf1d58b : 0x79d4ee;
+    entry.rim.visible = kind !== 'back' && (hovering || held || element.matches('.actionable, .chosen, .in-combat, .table-combat-selected, .combat-target-ready') || kind === 'cast');
     entry.rim.material.color.setHex(color);
-    entry.shadow.position.copy(group.position); entry.shadow.position.z = 6;
-    entry.shadow.position.x += lift * .1; entry.shadow.position.y -= lift * .12;
-    entry.shadow.rotation.set(0, 0, angle); entry.shadow.scale.setScalar(scale * (1 + lift / 750));
+    entry.shadow.position.copy(group.position);
+    if (onTable) {
+      entry.shadow.position.z = 6;
+      entry.shadow.position.x += lift * .1; entry.shadow.position.y -= lift * .12;
+      entry.shadow.rotation.set(0, 0, angle); entry.shadow.scale.setScalar(scale * (1 + lift / 750));
+    } else {
+      entry.shadow.position.add(new T.Vector3(scale * .035, -scale * .045, -scale * .025).applyQuaternion(group.quaternion));
+      entry.shadow.quaternion.copy(group.quaternion); entry.shadow.scale.copy(group.scale);
+    }
     entry.shadow.material.opacity = entry.world ? .5 : .25;
     if (kind !== 'back') entry.element.dataset.sceneCard = String(entry.number);
     if (entry.world && kind !== 'back') {

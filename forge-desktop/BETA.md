@@ -1,10 +1,25 @@
-# Mana Table — beta 0.1.0-beta.29
+# Mana Table — beta 0.1.0-beta.30
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 29 places **the players and battlefield around a physical table**:
+Beta 30 makes **combat direct and the table steadier**:
+
+- To attack, click your creature, then a highlighted opponent, planeswalker,
+  or other legal defender. To block, click your creature, then a highlighted
+  attacker. Repeat the same pair to remove the assignment; Escape cancels a
+  selection. Dragging and the detailed combat inspector remain available.
+- Turn ownership, the exact step, and your response status stay beside the
+  bottom-right controls. Click the step to open its explanation. A brief turn
+  announcement appears once when the active turn changes.
+- Instructions scroll inside a fixed action panel. The main decision button,
+  turn readout, response controls, and hand no longer move as phases change.
+  Unchanged hand cards keep their hover state when other parts of the board update.
+- Lifted 3D cards sit in front of the rest of your hand, including neighboring
+  name and mana badges, so their printed text remains clear.
+
+Beta 29 placed **the players and battlefield around a physical table**:
 
 - Each seat has a playmat, life medallion, deck, discard piles, and command zone
   in the same 3D world. Opponent hands appear as card backs behind their playmats.

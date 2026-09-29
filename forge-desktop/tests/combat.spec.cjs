@@ -57,6 +57,20 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
           const tile = page.locator(`#match-human .battlefield-card[data-table-combat="${physical.cardId}"]`);
           const defender = physical.defenders.find(defender => defender.kind === 'player');
           if (defender) {
+            await tile.click();
+            await expect(tile).toHaveClass(/table-combat-selected/);
+            expect((await read()).prompt.id).toBe(p.id);
+            await expect(page.locator(`.match-life[data-match-player="${defender.id}"]`)).toHaveClass(/combat-target-ready/);
+            await page.keyboard.press('Escape');
+            await expect(tile).not.toHaveClass(/table-combat-selected/);
+            expect((await read()).prompt.id).toBe(p.id);
+            await tile.click();
+            await page.locator(`.match-life[data-match-player="${defender.id}"]`).click();
+            await expect(tile).toHaveClass(/table-attacker/);
+            await tile.click();
+            await page.locator(`.match-life[data-match-player="${defender.id}"]`).click();
+            await expect(tile).not.toHaveClass(/table-attacker/);
+            await tile.hover();
             const origin = await tile.boundingBox();
             const target = await page.locator(`.match-life[data-match-player="${defender.id}"]`).boundingBox();
             await page.mouse.move(origin.x + origin.width / 2, origin.y + origin.height / 2);
@@ -74,6 +88,7 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
             await expect(page.evaluate(values => window.forge.request('matchAction', values),
               { sessionId: state.id, promptId: p.id, action: 'attack', attackerKey: attacker.key, defenderPlayerId: defender.id })).rejects.toThrow('changed');
             await tile.click();
+            await page.locator(`.match-life[data-match-player="${defender.id}"]`).click();
             await expect(tile).not.toHaveClass(/table-attacker/);
             state = await read();
           }
@@ -116,8 +131,11 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
     await expect(panel).toBeHidden();
     const physicalAttacker = page.locator(`.match-arena .battlefield-card[data-table-combat="${attack.cardId}"]`);
     const physicalBlocker = page.locator(`#match-human .battlefield-card[data-table-combat="${blocker.visualId}"]`);
-    await physicalAttacker.click();
     await physicalBlocker.click();
+    await expect(physicalBlocker).toHaveClass(/table-combat-selected/);
+    await expect(physicalAttacker).toHaveClass(/combat-target-ready/);
+    expect((await read()).prompt.id).toBe(state.prompt.id);
+    await physicalAttacker.click();
     await expect(physicalBlocker).toHaveClass(/table-blocker/);
     await expect(page.locator(`.table-combat-lines > [data-table-edge="${attack.cardId}:${blocker.visualId}"]`)).toHaveCount(1);
     if (await page.locator('#match-motion').getAttribute('aria-pressed') === 'true') await page.locator('#match-motion').click();
@@ -125,10 +143,23 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
     await expect(page.locator('#match-ok')).toBeInViewport();
     await expect(physicalAttacker).toBeInViewport();
     await expect(physicalBlocker).toBeInViewport();
-    const boardPng = await application.evaluate(async ({ BrowserWindow }) =>
-      (await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined, { stayHidden: true })).toPNG().toString('base64'));
-    require('node:fs').writeFileSync(test.info().outputPath('battlefield-combat.png'), Buffer.from(boardPng, 'base64'));
+    await expect.poll(() => page.evaluate(({ attacker, blocker }) => {
+      const path = document.querySelector(`.table-combat-lines > [data-table-edge="${attacker}:${blocker}"]`);
+      if (!path) return Infinity;
+      const center = id => {
+        const rect = document.querySelector(`.match-arena .battlefield-card[data-table-combat="${id}"]`).getBoundingClientRect();
+        return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+      };
+      const start = path.getPointAtLength(0).matrixTransform(path.getScreenCTM());
+      const end = path.getPointAtLength(path.getTotalLength()).matrixTransform(path.getScreenCTM());
+      const a = center(blocker), b = center(attacker);
+      return Math.max(Math.hypot(start.x - a.x, start.y - a.y), Math.hypot(end.x - b.x, end.y - b.y));
+    }, { attacker: attack.cardId, blocker: blocker.visualId })).toBeLessThan(2);
+    // CDP capture flushes the resized SVG layer; native capture of a hidden
+    // window can retain an old combat path even after its geometry has updated.
+    if (!executable) await page.screenshot({ path: test.info().outputPath('battlefield-combat.png'), timeout: 10000 });
     await physicalBlocker.click();
+    await physicalAttacker.click();
     await expect(physicalBlocker).not.toHaveClass(/table-blocker/);
     state = await read();
     // The detailed inspector remains available for unusual combat and many blocks.

@@ -5,7 +5,7 @@
 .table-combat-lines marker .attack-line { fill: #efa17f; }
 .table-combat-lines marker .block-line { fill: #82dce4; }
 .match-arena:has(#combat-view:not([hidden])) .table-combat-lines { visibility: hidden; }
-.battlefield-card.table-combat-ready { outline: 2px solid #e8d092; outline-offset: -2px; cursor: grab; touch-action: none; }
+.battlefield-card.table-combat-ready { outline: 2px solid #e8d092; outline-offset: -2px; cursor: pointer; touch-action: none; }
 .battlefield-card.table-attacker .permanent-surface { box-shadow: 0 0 0 2px #e88e66, 0 0 15px #e8785544; }
 .battlefield-card.table-blocker .permanent-surface { box-shadow: 0 0 0 2px #81d7df, 0 0 15px #81d7df44; }
 .battlefield-card.table-combat-selected { outline: 3px solid #f9e5ad; outline-offset: -3px; }
@@ -13,3 +13,7 @@
 .table-blocker .table-combat-badge { background: #163c45ef; color: #d6f9ff; }
 .table-defender-selected, .combat-drop-ready { outline: 3px solid #f3d490 !important; outline-offset: 2px; }
 .battlefield-card.combat-drop-ready { outline-offset: -3px; }
+.combat-target-ready { outline: 3px solid #82dce4 !important; outline-offset: 2px; cursor: pointer !important; }
+.battlefield-card.combat-target-ready { outline-offset: -3px; }
+.table-combat-hint { position: absolute; left: 12px; top: 10px; max-width: calc(100% - 170px); z-index: 10; padding: 7px 12px; border-radius: 6px; background: #14232bef; color: #f3e1b8; font: 12px/1.4 'Segoe UI', sans-serif; pointer-events: none; }
+.match-arena:has(#combat-view:not([hidden])) .table-combat-hint { visibility: hidden; }

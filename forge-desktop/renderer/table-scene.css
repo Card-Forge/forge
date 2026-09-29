@@ -50,7 +50,7 @@ body:has(.scene-active) > .table-return-ghost[data-scene-card] { opacity: 0; }
 .scene-active[data-world-focus-id]:not([data-world-focus-id=""]) .match-command-zone .match-card-name { font-size: 10px; }
 .scene-active[data-world-focus-id]:not([data-world-focus-id=""]) .match-command-zone .match-card-name::before { content: 'CMD · '; }
 .scene-active .rank-page { z-index: 5; font-size: 22px; }
-.scene-active #match-phase { position: absolute; left: 10px; top: 8px; width: auto; height: 22px; padding: 3px 10px; gap: 7px; border: 0; border-radius: 14px; background: #101e29d9; z-index: 8; pointer-events: none; }
+.scene-active #match-phase { display: none; }
 .scene-active .match-life[data-world-box], .scene-active #match-self .match-life[data-world-box] { padding: 0; display: block; background: transparent; border: 0; box-shadow: none; border-radius: 50%; z-index: 7; }
 .scene-active .match-life > span:not(.life-change) { visibility: hidden; }
 .scene-active .match-life > b, .scene-active #match-self .match-life > b { position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%); min-width: 38px; padding: 0 4px; font: 700 28px/30px Georgia; color: #fff3cf; text-align: center; text-shadow: 0 2px 3px #000, 0 0 8px #000; border-radius: 10px; background: #12242bc4; }

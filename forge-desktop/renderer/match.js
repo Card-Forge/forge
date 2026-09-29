@@ -17,6 +17,7 @@
   let pollTimer;
   let refreshRequested = false;
   let boardSignature;
+  const handFaces = new WeakMap();
   let libraryMode = 'eligible';
   let libraryGroups = [];
   const libraryPicker = document.createElement('section');
@@ -210,7 +211,22 @@
       $('match-human').innerHTML = human ? playerLane(human) : '';
       const portrait = $('match-human').querySelector('.match-player');
       $('match-self').replaceChildren(...(portrait ? [portrait] : []));
-      $('match-hand').innerHTML = human ? zone(human, 'Hand').cards.map(card => cardTile(card, 'hand')).join('') : '';
+      // Other players' moves and mana changes must not put down a card being
+      // inspected. Reuse unchanged hand cards, including their loaded artwork.
+      const hand = $('match-hand');
+      const retained = new Map(previous?.id === next.id ? [...hand.children].map(element => [element.dataset.visualCard, element]) : []);
+      const wanted = (human ? zone(human, 'Hand').cards : []).map(card => {
+        const face = JSON.stringify(card, (key, value) => ['key', 'selectable', 'highlighted'].includes(key) ? undefined : value);
+        let element = retained.get(card.visualId);
+        if (element && handFaces.get(element) === face) element.dataset.previewCard = previewCards.push(card) - 1;
+        else {
+          const template = document.createElement('template'); template.innerHTML = cardTile(card, 'hand');
+          element = template.content.firstElementChild; handFaces.set(element, face);
+        }
+        return element;
+      });
+      for (const element of [...hand.children]) if (!wanted.includes(element)) element.remove();
+      wanted.forEach((element, index) => { if (hand.children[index] !== element) hand.insertBefore(element, hand.children[index] || null); });
       $('match-hand').scrollLeft = handScroll;
       document.querySelectorAll('.match-zone').forEach(element => { element.open = opened.has(element.dataset.zone); });
       document.querySelectorAll('[data-field-row]').forEach(element => { element.scrollLeft = scrolls.get(element.dataset.fieldRow) || 0; });
@@ -218,16 +234,16 @@
     }
     // Priority changes replace action handles, not the physical cards. Preserve
     // DOM nodes, artwork, focus and hover previews when the board is unchanged.
-    if (next.prompt && next.players) {
+    if (next.players) {
       const cardsByVisualId = new Map(next.players.flatMap(player => player.zones.flatMap(zone => zone.cards)).filter(card => card.visualId).map(card => [card.visualId, card]));
       document.querySelectorAll('.match-card[data-visual-card]').forEach(element => {
         const card = cardsByVisualId.get(element.dataset.visualCard);
         if (!card) return;
         element.dataset.matchCard = card.key;
-        element.dataset.matchPrompt = next.prompt.id;
+        element.dataset.matchPrompt = next.prompt?.id || '';
         element.dataset.matchSession = next.id;
-        element.classList.toggle('actionable', card.selectable);
-        element.classList.toggle('chosen', card.highlighted);
+        element.classList.toggle('actionable', Boolean(next.prompt && card.selectable));
+        element.classList.toggle('chosen', Boolean(next.prompt && card.highlighted));
         previewCards[Number(element.dataset.previewCard)] = card;
       });
     }
@@ -287,6 +303,8 @@
     for (const child of [...body.children]) {
       if (child.matches('button.button, .match-input-buttons')) actions.append(child);
     }
+    const hint = actions.querySelector('.match-pass-hint');
+    if (hint) body.append(hint);
     actions.hidden = !actions.childElementCount;
   }
 
@@ -315,9 +333,12 @@
       libraryMode = 'eligible';
       selection = prompt.ordered && prompt.min === prompt.choices?.length ? prompt.choices.map(choice => choice.index) : [];
     }
-    // Keep the engine's actual cost, selected combat target, or required choice visible.
-    const engineDetail = status.instruction && prompt.inputType !== 'InputPassPriority' && prompt.message
-      ? `<p class="match-engine-instruction">${esc(prompt.message)}</p>` : '';
+    // Keep actual costs and validation errors visible. Combat has its own
+    // creature-first gestures, so the legacy defender-first help is misleading.
+    const combatInput = ['InputAttack', 'InputBlock'].includes(prompt.inputType);
+    const detailMessage = combatInput ? match.combat?.blockProblem : prompt.message;
+    const engineDetail = status.instruction && prompt.inputType !== 'InputPassPriority' && detailMessage
+      ? `<p class="match-engine-instruction">${esc(detailMessage)}</p>` : '';
     const header = `<div class="eyebrow">${status.decision}</div><h2>${esc(prompt.title || status.title || (prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'))}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>${engineDetail}${context}`;
     if (librarySearch) {
       setPrompt(header + '<p>Use the library panel to inspect these cards and confirm your choice. This spell or ability is still resolving.</p>');
@@ -336,7 +357,7 @@
       const endTurn = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn';
       const response = status.responseText ? `<div class="match-response-detail"><span>WAITING TO RESOLVE</span><p>${esc(status.responseText)}</p></div>` : '';
       const passHint = status.passHint ? `<small class="match-pass-hint">${esc(status.passHint)}</small>` : '';
-      setPrompt(header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}${endTurn ? '' : `<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button>`}</div>`);
+      setPrompt(header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}${endTurn || !prompt.cancelEnabled ? '' : `<button id="match-cancel" class="button secondary">${esc(prompt.cancel || 'Cancel')}</button>`}</div>`);
       $('match-ok').onclick = () => answer({ action: 'ok' });
       if ($('match-cancel')) $('match-cancel').onclick = () => answer({ action: 'cancel' });
       if ($('match-attack-all')) $('match-attack-all').onclick = () => answer({ action: 'attackAll' });

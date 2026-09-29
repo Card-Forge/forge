@@ -36,12 +36,16 @@ test('turn guidance explains each pause, preserves cleanup choices, and passes o
       if (checkStep || cleanup) {
         if (await page.locator('#match-prompt').getAttribute('data-prompt-id') !== p.id) { await page.waitForTimeout(100); continue; }
         await expect(page.locator('.match-step-context strong')).toHaveText(await page.locator('#match-phase-name').textContent());
+        await expect(page.locator('#turn-dock-phase strong')).toHaveText(await page.locator('#match-phase-name').textContent());
+        await expect(page.locator('#turn-dock-number')).toHaveText(`Turn ${state.turn}`);
+        await expect(page.locator('#turn-dock-owner')).toHaveText(state.activePlayerId === human.id ? 'Your turn' : `${state.players.find(player => player.id === state.activePlayerId).name}’s turn`);
         await expect(page.locator('.match-step-context small')).toContainText('Normally next:');
         if (checkStep) {
           await expect(page.locator('#match-ok')).toHaveText(buttons[state.phaseKey]);
           if (state.phaseKey === 'UPKEEP') {
             await expect(page.locator('.match-step-context')).toContainText('There is no upkeep cost unless a card says so.');
-            await page.locator('#match-turn-guide summary').click();
+            await page.locator('#turn-dock-phase').click();
+            await expect(page.locator('#turn-dock-phase')).toHaveAttribute('aria-expanded', 'true');
             await expect(page.locator('#match-turn-guide-list [aria-current="step"]')).toContainText('Upkeep · Now');
             await expect(page.locator('#match-turn-guide-list li')).toHaveCount(13);
             await page.locator('#match-turn-guide summary').click();

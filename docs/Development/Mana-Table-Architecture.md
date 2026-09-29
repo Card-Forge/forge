@@ -29,7 +29,7 @@ flowchart LR
 | Table events | `cast-view.js`, `reveal-view.js` | Pending spell and stack portraits, prompt-scoped revealed cards |
 | Response preferences | `preferences.cjs`, `play-preferences.js`, `response-skip.js` | Remembered Auto/Full control, own-turn stops, temporary holds and engine-authorized passes |
 | Combat | `combat-view.js` | Attackers, defenders, legal block connections and assignment controls |
-| Battlefield combat | `table-combat.js` | Scoped attack/block drags on real cards, defender badges and connection arrows; detailed combat is optional |
+| Battlefield combat | `table-combat.js` | Creature-first click pairs and scoped drags, legal destination highlights, defender badges and connection arrows; detailed combat is optional |
 | Java protocol | `DesktopEngine.java` | Method dispatch, current deck, saved files, practice and one active match |
 | Deck hooks | `CardCatalog`, `DeckEditor`, `DeckImport`, `DeckPresets`, `MatchSetup` | Search, revisioned edits, validation, imports, detached match decks |
 | Game adapter | `MatchSession`, `MatchActivity`, `HeadlessPlatform`, `CombatCardIds` | Human input, AI session, visibility filtering, stable projected state |
@@ -69,7 +69,9 @@ source. The optional rail inspector shows rules and current values. Both consume
 only the visibility-filtered projection, including permitted alternate faces.
 `hand-view.css` reserves the lower-left player controls; `hand-view.js` keeps the
 fan and local gap behavior. `match-feedback.css` fixes response controls at the
-lower right. The prompt's instructions and each upper information panel scroll
+lower right with fixed grid tracks, including the persistent turn/step dock.
+The primary action stays at the bottom of the prompt; explanatory text stays
+inside its scrollport. The prompt's instructions and each upper information panel scroll
 independently; decision buttons remain outside the prompt scrollport. Preferences
 open above the fixed controls. Card inspection occupies the upper information area.
 Game overlays sit above the hand and player controls while selecting combat or
@@ -82,7 +84,8 @@ when that prompt ends. Both views respect hidden identities and reduced motion.
 
 1. The engine publishes a stable, immutable snapshot for the trusted human viewer.
 2. The renderer displays the current prompt and gives actionable cards that
-   prompt's handles. It retains DOM nodes across status-only updates.
+   prompt's handles. It retains DOM nodes across status-only updates and reuses
+   unchanged hand cards when other zones or player information change.
 3. A click/drag records its source element, session, and prompt before submitting.
 4. The host validates those IDs and the answer, then dispatches to the existing
    human controller. Synchronous dialogs complete a response future directly.
@@ -179,9 +182,18 @@ snap directly to the new state. DOM flight clones are disabled for scene cards.
 World objects project their bounds back onto accessible DOM controls each frame.
 The 3D view removes the old scrolling seat lanes; the 2D fallback keeps them.
 Held and casting cards use camera-relative screen anchors and face the camera.
+Their depths are camera-relative too: resting cards follow fan order, and a
+lifted or dragged card sits closer than its neighbors. Ground-plane intersections
+must not determine held-card depth; the camera tilt otherwise lets lower cards
+occlude the enlarged face. Hand badges behind the lifted card are hidden alongside
+covered world labels, because the accessible DOM sits above the WebGL canvas.
 Clicks, keyboard input, legal target highlighting, combat arrows, and scoped
-drags continue through the existing engine answer path. Combat arrows follow the
-projected targets as the camera moves. Life numbers, stats, menus, the detailed
+drags continue through the existing engine answer path. A combat click selects
+your creature locally, then submits one scoped assignment on a legal destination click. Polls
+retain that selection only within the same prompt. Escape, a new prompt, and
+mode changes clear it. The engine supplies all attack and block eligibility.
+Combat arrows follow the projected targets as the camera moves.
+Life numbers, stats, menus, the detailed
 combat inspector and reveal/search galleries remain HTML controls. Projection
 writes and combat SVG updates are excluded from the scene's mutation observer
 so they cannot keep the render loop awake.
