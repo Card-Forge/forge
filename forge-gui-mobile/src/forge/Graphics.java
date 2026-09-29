@@ -27,8 +27,7 @@ import forge.util.ShaderUtil;
 import forge.util.TextBounds;
 import forge.util.Utils;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Arrays;
 
 public class Graphics implements Disposable {
     private static final int GL_BLEND = GL20.GL_BLEND;
@@ -36,8 +35,10 @@ public class Graphics implements Disposable {
 
     private final SpriteBatch batch;
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
-    private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
+    // scratch colors for alpha-composited draws (avoids allocating a Color per draw call)
+    private final Color fadeA = new Color();
+    private final Color fadeB = new Color();
     private float regionHeight;
     private Rectangle bounds = new Rectangle();
     private Rectangle visibleBounds = new Rectangle();
@@ -52,12 +53,14 @@ public class Graphics implements Disposable {
     private static final TextBounds textBounds = new TextBounds();
     private static final Rectangle tmpBounds = new Rectangle();
     private int clipDepth = 0;
-    private static final Rectangle[] clipPool = new Rectangle[16];
-    static {
-        for (int i = 0; i < 16; i++) {
-            clipPool[i] = new Rectangle();
-        }
-    }
+    // per-instance (ScissorStack keeps the Rectangle references, so instances must not share slots); grows on demand
+    private Rectangle[] clipPool = new Rectangle[16];
+    // results of fitText(), shared by the passes of one (outlined) text draw
+    private FSkinFont fitFont;
+    private boolean fitNeedClip;
+    private float fitHeight;
+    private static final Color LINING_DARK = Color.valueOf("#171717");
+    private static final Color LINING_LIGHT = Color.valueOf("#fffffd");
 
     public Graphics(final int spriteCapacity) {
         batch = new SpriteBatch(spriteCapacity);
@@ -130,17 +133,22 @@ public class Graphics implements Disposable {
     public boolean startClip(float x, float y, float w, float h) {
         batch.flush(); // must flush batch to prevent other things not rendering
 
-        // ZERO ALLOCATION APPROACH: Pick a totally isolated memory index slot based on our active
-        // clipping depth instead of transformCount, ensuring parent and child boxes never overlap!
-        final int activePoolIdx = clipDepth & 15;
-        final Rectangle activeClip = clipPool[activePoolIdx];
+        // reusable but different approach
+        final int activePoolIdx = clipDepth;
+        if (activePoolIdx >= clipPool.length) {
+            clipPool = Arrays.copyOf(clipPool, clipPool.length * 2);
+        }
+        Rectangle activeClip = clipPool[activePoolIdx];
+        if (activeClip == null) {
+            activeClip = clipPool[activePoolIdx] = new Rectangle();
+        }
 
         // Advance our depth pointer before processing layout math
         clipDepth++;
 
         activeClip.set(adjustX(x), adjustY(y, h), w, h);
 
-        if (!Dtransforms.isEmpty()) { // transform position if needed
+        if (transformCount != 0) { // transform position if needed
             tmp.set(activeClip.x, activeClip.y, 0);
             tmp.mul(batch.getTransformMatrix());
             float minX = tmp.x;
@@ -192,6 +200,7 @@ public class Graphics implements Disposable {
 
         if (!ScissorStack.pushScissors(activeClip)) {
             failedClipCount++; // tracked failed clips to prevent calling popScissors on endClip
+            clipDepth--; // ScissorStack did not keep this slot, release it so the depth doesn't drift
             return false;
         }
         return true;
@@ -219,7 +228,7 @@ public class Graphics implements Disposable {
         final float oldX = bounds.x, oldY = bounds.y, oldW = bounds.width, oldH = bounds.height;
         bounds.set(oldX + displayObj.getLeft(), oldY + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
 
-        if (!Dtransforms.isEmpty()) {
+        if (transformCount != 0) {
             updateScreenPosForRotation(displayObj);
         } else {
             displayObj.screenPos.set(bounds);
@@ -312,7 +321,7 @@ public class Graphics implements Disposable {
             Gdx.gl.glLineWidth(thickness);
         }
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         boolean needSmoothing = (x1 != x2 && y1 != y2);
         if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
@@ -350,7 +359,7 @@ public class Graphics implements Disposable {
         float lt = thickness / 3;
 
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         boolean needSmoothing = (x1 != x2 && y1 != y2);
         if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
@@ -403,7 +412,7 @@ public class Graphics implements Disposable {
         batch.end(); // must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glEnable(GL_LINE_SMOOTH);
@@ -465,8 +474,8 @@ public class Graphics implements Disposable {
         float lt = thickness / 3;
 
         if (alphaComposite < 1) {
-            fillColor = FSkinColor.alphaColor(fillColor, fillColor.a * alphaComposite);
-            strokeColor = FSkinColor.alphaColor(strokeColor, strokeColor.a * alphaComposite);
+            fillColor = fade(fillColor, fadeA);
+            strokeColor = fade(strokeColor, fadeB);
         }
         boolean needSmoothing = (x1 != x2 && y1 != y2);
         if (fillColor.a < 1 || needSmoothing) {
@@ -483,7 +492,6 @@ public class Graphics implements Disposable {
         shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness / 2);
         if (drawPointer)
             shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
-        endShape();
 
         float dx = x2 - x1, dy = y2 - y1;
         float length = (float) Math.sqrt(dx * dx + dy * dy);
@@ -497,7 +505,6 @@ public class Graphics implements Disposable {
             beforeTipX = x2 - dx * backScale;
             beforeTipY = y2 - dy * backScale;
 
-            startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
             shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
             endShape();
@@ -530,7 +537,6 @@ public class Graphics implements Disposable {
             int segments = 30;
             float prevX = x1, prevY = y1;
 
-            startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
             for (int i = 1; i <= segments; i++) {
                 float t = i / (float) segments;
@@ -630,8 +636,8 @@ public class Graphics implements Disposable {
         float lt = thickness / 3;
 
         if (alphaComposite < 1) {
-            fillColor = FSkinColor.alphaColor(fillColor, fillColor.a * alphaComposite);
-            strokeColor = FSkinColor.alphaColor(strokeColor, strokeColor.a * alphaComposite);
+            fillColor = fade(fillColor, fadeA);
+            strokeColor = fade(strokeColor, fadeB);
         }
         boolean needSmoothing = (x1 != x2 && y1 != y2);
         if (fillColor.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
@@ -644,14 +650,12 @@ public class Graphics implements Disposable {
         shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
         shapeRenderer.setColor(strokeColor);
         shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
-        endShape();
 
         float dx = x2 - x1, dy = y2 - y1;
         float length = (float) Math.sqrt(dx * dx + dy * dy);
 
         if (length < 120f) {
             // Straight line if short
-            startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
             shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
             endShape();
@@ -687,7 +691,6 @@ public class Graphics implements Disposable {
             int segments = 30;
             float prevX = x1, prevY = y1;
 
-            startShape(ShapeType.Filled);
             shapeRenderer.setColor(fillColor);
 
             for (int i = 1; i <= segments; i++) {
@@ -738,8 +741,10 @@ public class Graphics implements Disposable {
     }
 
     public void drawfillBorder(float thickness, Color color, float x, float y, float w, float h, float cornerRadius) {
-        drawRoundRect(thickness, color, x, y, w, h, cornerRadius);
-        fillRoundRect(color, x, y, w, h, cornerRadius);
+        batch.end(); //must pause batch while rendering shapes
+        drawRoundRectShapes(thickness, color, x, y, w, h, cornerRadius);
+        fillRoundRectShapes(color, x, y, w, h, cornerRadius);
+        batch.begin();
     }
 
     public void drawRoundRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
@@ -748,12 +753,17 @@ public class Graphics implements Disposable {
 
     public void drawRoundRect(float thickness, Color color, float x, float y, float w, float h, float cornerRadius) {
         batch.end(); //must pause batch while rendering shapes
+        drawRoundRectShapes(thickness, color, x, y, w, h, cornerRadius);
+        batch.begin();
+    }
 
+    //shape work only: caller must have paused the batch and resumes it afterwards
+    private void drawRoundRectShapes(float thickness, Color color, float x, float y, float w, float h, float cornerRadius) {
         if (thickness > 1) {
             Gdx.gl.glLineWidth(thickness);
         }
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         if (color.a < 1 || cornerRadius > 0) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
@@ -787,8 +797,6 @@ public class Graphics implements Disposable {
         if (thickness > 1) {
             Gdx.gl.glLineWidth(1);
         }
-
-        batch.begin();
     }
 
     public void fillRoundRect(FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
@@ -797,8 +805,14 @@ public class Graphics implements Disposable {
 
     public void fillRoundRect(Color color, float x, float y, float w, float h, float cornerRadius) {
         batch.end(); //must pause batch while rendering shapes
+        fillRoundRectShapes(color, x, y, w, h, cornerRadius);
+        batch.begin();
+    }
+
+    //shape work only: caller must have paused the batch and resumes it afterwards
+    private void fillRoundRectShapes(Color color, float x, float y, float w, float h, float cornerRadius) {
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
@@ -815,7 +829,6 @@ public class Graphics implements Disposable {
         if (color.a < 1) {
             Gdx.gl.glDisable(GL_BLEND);
         }
-        batch.begin();
     }
 
     public void drawRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h) {
@@ -829,7 +842,7 @@ public class Graphics implements Disposable {
             Gdx.gl.glLineWidth(thickness);
         }
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glEnable(GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
@@ -849,10 +862,36 @@ public class Graphics implements Disposable {
     }
 
     public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
-        drawLine(thickness, color, x, y, x + w, y);
-        drawLine(thickness, color, x + thickness / 2f, y + thickness / 2f, x + thickness / 2f, y + h - thickness / 2f);
-        drawLine(thickness, color, x, y + h, x + w, y + h);
-        drawLine(thickness, color, x + w - thickness / 2f, y + thickness / 2f, x + w - thickness / 2f, y + h - thickness / 2f);
+        // all four edges are axis aligned (no smoothing needed) so they share one batch pause and one shape pass
+        batch.end(); //must pause batch while rendering shapes
+
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(thickness);
+        }
+        if (alphaComposite < 1) {
+            color = fade(color, fadeA);
+        }
+        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+
+        float half = thickness / 2f;
+        startShape(ShapeType.Line);
+        shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x), adjustY(y, 0), adjustX(x + w), adjustY(y, 0));
+        shapeRenderer.line(adjustX(x + half), adjustY(y + half, 0), adjustX(x + half), adjustY(y + h - half, 0));
+        shapeRenderer.line(adjustX(x), adjustY(y + h, 0), adjustX(x + w), adjustY(y + h, 0));
+        shapeRenderer.line(adjustX(x + w - half), adjustY(y + half, 0), adjustX(x + w - half), adjustY(y + h - half, 0));
+        endShape();
+
+        if (color.a < 1) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(1);
+        }
+
+        batch.begin();
     }
 
     public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
@@ -863,7 +902,7 @@ public class Graphics implements Disposable {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
@@ -892,7 +931,7 @@ public class Graphics implements Disposable {
             Gdx.gl.glLineWidth(thickness);
         }
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glEnable(GL_LINE_SMOOTH);
@@ -919,7 +958,7 @@ public class Graphics implements Disposable {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
@@ -945,7 +984,7 @@ public class Graphics implements Disposable {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            color = fade(color, fadeA);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
@@ -979,8 +1018,8 @@ public class Graphics implements Disposable {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
-            color1 = FSkinColor.alphaColor(color1, color1.a * alphaComposite);
-            color2 = FSkinColor.alphaColor(color2, color2.a * alphaComposite);
+            color1 = fade(color1, fadeA);
+            color2 = fade(color2, fadeB);
         }
         boolean needBlending = (color1.a < 1 || color2.a < 1);
         if (needBlending) { //enable blending so alpha colored shapes work properly
@@ -1004,7 +1043,7 @@ public class Graphics implements Disposable {
     }
 
     private void startShape(ShapeType shapeType) {
-        if (!Dtransforms.isEmpty()) {
+        if (transformCount != 0) {
             //must copy matrix before starting shape if transformed
             shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         }
@@ -1017,7 +1056,7 @@ public class Graphics implements Disposable {
 
     public void setColorRGBA(float r, float g, float b, float alphaComposite0) {
         alphaComposite = alphaComposite0;
-        batch.setColor(new Color(r, g, b, alphaComposite));
+        batch.setColor(r, g, b, alphaComposite);
     }
 
     public void resetColorRGBA(float alphaComposite0) {
@@ -1027,7 +1066,7 @@ public class Graphics implements Disposable {
 
     public void setAlphaComposite(float alphaComposite0) {
         alphaComposite = alphaComposite0;
-        batch.setColor(new Color(1, 1, 1, alphaComposite));
+        batch.setColor(1f, 1f, 1f, alphaComposite);
     }
 
     public void resetAlphaComposite() {
@@ -1042,8 +1081,10 @@ public class Graphics implements Disposable {
     public void drawBorderImage(FImage image, Color borderColor, Color tintColor, float x, float y, float w, float h, boolean tint) {
         float oldalpha = alphaComposite;
         if (tint && !tintColor.equals(borderColor)) {
-            drawRoundRect(2f, borderLining(borderColor.toString()), x, y, w, h, (h - w) / 12);
-            fillRoundRect(tintColor, x, y, w, h, (h - w) / 12);
+            batch.end(); //must pause batch while rendering shapes
+            drawRoundRectShapes(2f, borderLiningFor(borderColor), x, y, w, h, (h - w) / 12);
+            fillRoundRectShapes(tintColor, x, y, w, h, (h - w) / 12);
+            batch.begin();
         } else {
             if (image != null) {
                 image.draw(this, x, y, w, h);
@@ -1070,34 +1111,26 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (amount > 0) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderWarp().bind();
             ShaderUtil.getInstance().getShaderWarp().setUniformf("u_amount", 0.2f);
             ShaderUtil.getInstance().getShaderWarp().setUniformf("u_speed", 0.2f);
             ShaderUtil.getInstance().getShaderWarp().setUniformf("u_time", amount);
             batch.setShader(ShaderUtil.getInstance().getShaderWarp());
-            batch.begin();
             //draw
             image.draw(this, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else if (!drawGrayscale) {
             image.draw(this, x, y, w, h);
         } else {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderGrayscale().bind();
             ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", 1f);
             ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 1f);
             batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-            batch.begin();
             //draw gray
             image.draw(this, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         }
     }
 
@@ -1109,18 +1142,14 @@ public class Graphics implements Disposable {
             if (damage_overlay != null && damaged)
                 batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
         } else {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderGrayscale().bind();
             ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", 1f);
             ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 0.8f);
             batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-            batch.begin();
             //draw gray
             image.draw(this, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         }
     }
 
@@ -1130,7 +1159,7 @@ public class Graphics implements Disposable {
         if (image != null) {
             if (!drawGrayscale) {
                 if (foilIndex > 0) {
-                    batch.end();
+                    batch.flush();
                     ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
                     shaderProgram.bind();
                     shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
@@ -1139,29 +1168,22 @@ public class Graphics implements Disposable {
                     shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
                     shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
                     batch.setShader(shaderProgram);
-                    batch.begin();
                     batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-                    batch.end();
                     batch.setShader(null);
-                    batch.begin();
                 } else {
                     batch.draw(image, adjustX(x), adjustY(y, h), w, h);
                 }
                 if (damage_overlay != null && damaged)
                     batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
             } else {
-                batch.end();
+                batch.flush();
                 ShaderUtil.getInstance().getShaderGrayscale().bind();
                 ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", 1f);
                 ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 0.8f);
                 batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-                batch.begin();
                 //draw gray
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-                //reset
-                batch.end();
                 batch.setShader(null);
-                batch.begin();
             }
         }
     }
@@ -1170,7 +1192,7 @@ public class Graphics implements Disposable {
         if (image != null) {
             if (!drawGrayscale) {
                 if (foilIndex > 0) {
-                    batch.end();
+                    batch.flush();
                     ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
                     shaderProgram.bind();
                     shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
@@ -1179,29 +1201,22 @@ public class Graphics implements Disposable {
                     shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
                     shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
                     batch.setShader(shaderProgram);
-                    batch.begin();
                     batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-                    batch.end();
                     batch.setShader(null);
-                    batch.begin();
                 } else {
                     batch.draw(image, adjustX(x), adjustY(y, h), w, h);
                 }
                 if (damage_overlay != null && damaged)
                     batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
             } else {
-                batch.end();
+                batch.flush();
                 ShaderUtil.getInstance().getShaderGrayscale().bind();
                 ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", 1f);
                 ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 0.8f);
                 batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-                batch.begin();
                 //draw gray
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-                //reset
-                batch.end();
                 batch.setShader(null);
-                batch.begin();
             }
         }
     }
@@ -1209,57 +1224,45 @@ public class Graphics implements Disposable {
     public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, float percentage) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderGrayscale().bind();
         ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", percentage);
         ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", 0.6f);
         batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-        batch.begin();
         //draw gray
         image.draw(this, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawGrayTransitionImage(Texture image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderGrayscale().bind();
         ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", percentage);
         ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", withDarkOverlay ? 0.5f : 1f);
         batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-        batch.begin();
         //draw gray
         batch.draw(image, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawGrayTransitionImage(TextureRegion image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderGrayscale().bind();
         ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_grayness", percentage);
         ShaderUtil.getInstance().getShaderGrayscale().setUniformf("u_bias", withDarkOverlay ? 0.5f : 1f);
         batch.setShader(ShaderUtil.getInstance().getShaderGrayscale());
-        batch.begin();
         //draw gray
         batch.draw(image, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawCardRoundRect(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGray, boolean damaged, int foilIndex) {
         if (image == null)
             return;
         float radius = ImageCache.getInstance().getRadius(image);
-        batch.end();
+        batch.flush();
         boolean shouldApplyHolo = foilIndex > 0 && !drawGray;
         float edgeRadius = (float)(image.getHeight() / image.getWidth()) * radius;
         ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
@@ -1277,13 +1280,9 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_gray", drawGray ? 0.8f : 0f);
         }
         batch.setShader(shaderProgram);
-        batch.begin();
         //draw
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
         if (damage_overlay != null && damaged)
             batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
     }
@@ -1295,7 +1294,7 @@ public class Graphics implements Disposable {
     public void drawCardRoundRect(TextureRegion image, float x, float y, float w, float h, float originX, float originY, float rotation, float modR, int foilIndex) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         boolean shouldApplyHolo = foilIndex > 0;
         float edgeRadius = ((float)(image.getRegionHeight() / image.getRegionWidth()) * (ImageCache.getInstance().getRadius(image.getTexture()) * modR));
         ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
@@ -1313,19 +1312,15 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_gray", 0f);
         }
         batch.setShader(shaderProgram);
-        batch.begin();
         //draw
         drawRotatedImage(image, x, y, w, h, originX, originY, rotation);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawCardRoundRect(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation, float modR, int foilIndex) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         boolean shouldApplyHolo = foilIndex > 0;
         float edgeRadius = ((float)(image.getHeight() / image.getWidth()) * (ImageCache.getInstance().getRadius(image) * modR));
         ShaderProgram shaderProgram = shouldApplyHolo ? ShaderUtil.getInstance().getShaderCardRoundedHolo() : ShaderUtil.getInstance().getShaderCardRounded();
@@ -1343,30 +1338,22 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_gray", 0f);
         }
         batch.setShader(shaderProgram);
-        batch.begin();
         //draw
         drawRotatedImage(image, x, y, w, h, originX, originY, 0, 0, image.getWidth(), image.getHeight(), rotation);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawNoiseFade(TextureRegion image, float x, float y, float w, float h, Float time) {
         if (image == null)
             return;
         if (time != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderNoiseFade().bind();
             ShaderUtil.getInstance().getShaderNoiseFade().setUniformf("u_time", time);
             batch.setShader(ShaderUtil.getInstance().getShaderNoiseFade());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1376,19 +1363,15 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (time != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderPortal().bind();
             ShaderUtil.getInstance().getShaderPortal().setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
             ShaderUtil.getInstance().getShaderPortal().setUniformf("u_time", time);
             ShaderUtil.getInstance().getShaderPortal().setUniformf("u_opaque", opaque ? 1f : 0f);
             batch.setShader(ShaderUtil.getInstance().getShaderPortal());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1398,17 +1381,13 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (time != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderHueShift().bind();
             ShaderUtil.getInstance().getShaderHueShift().setUniformf("u_time", time);
             batch.setShader(ShaderUtil.getInstance().getShaderHueShift());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1418,17 +1397,13 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (time != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderHueShift().bind();
             ShaderUtil.getInstance().getShaderHueShift().setUniformf("u_time", time);
             batch.setShader(ShaderUtil.getInstance().getShaderHueShift());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1438,17 +1413,13 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (time != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderChromaticAberration().bind();
             ShaderUtil.getInstance().getShaderChromaticAberration().setUniformf("u_time", time);
             batch.setShader(ShaderUtil.getInstance().getShaderChromaticAberration());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1458,18 +1429,14 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (amount != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderRipple().bind();
             ShaderUtil.getInstance().getShaderRipple().setUniformf("u_time", amount);
             ShaderUtil.getInstance().getShaderRipple().setUniformf("u_bias", 0.7f);
             batch.setShader(ShaderUtil.getInstance().getShaderRipple());
-            batch.begin();
             //draw
             image.draw(this, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             drawImage(image, x, y, w, h);
         }
@@ -1478,7 +1445,7 @@ public class Graphics implements Disposable {
     public void drawPix(TextureRegion texture, float x, float y, float w, float h) {
         if (texture == null)
             return;
-        batch.end();
+        batch.flush();
         float mul = 3f;
         float pixelSize = w > h ? (w / h) * mul : (h / w) * mul;
         ShaderUtil.getInstance().getShaderPix().bind();
@@ -1486,30 +1453,23 @@ public class Graphics implements Disposable {
         ShaderUtil.getInstance().getShaderPix().setUniformf("u_pixelSize", pixelSize);
         ShaderUtil.getInstance().getShaderPix().setUniformf("u_bias", 0.8f);
         batch.setShader(ShaderUtil.getInstance().getShaderPix());
-        batch.begin();
         batch.draw(texture, x, y, w, h);
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
     public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount, boolean flipY) {
         if (image == null)
             return;
         if (amount != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderPixelate().bind();
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_resolution", Forge.isLandscapeMode() ? w : h, Forge.isLandscapeMode() ? h : w);
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_cellSize", amount);
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_yflip", flipY ? 1f : 0f);
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_bias", 0.7f);
             batch.setShader(ShaderUtil.getInstance().getShaderPixelate());
-            batch.begin();
             //draw
             image.draw(this, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             drawImage(image, x, y, w, h);
         }
@@ -1519,20 +1479,16 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (amount != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderPixelate().bind();
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_resolution", Forge.isLandscapeMode() ? w : h, Forge.isLandscapeMode() ? h : w);
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_cellSize", amount);
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_yflip", flipY ? 1 : 0);
             ShaderUtil.getInstance().getShaderPixelate().setUniformf("u_bias", 0.6f);
             batch.setShader(ShaderUtil.getInstance().getShaderPixelate());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1542,7 +1498,7 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (amount > 0) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderPixelateWarp().bind();
             ShaderUtil.getInstance().getShaderPixelateWarp().setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
             ShaderUtil.getInstance().getShaderPixelateWarp().setUniformf("u_cellSize", amount);
@@ -1550,13 +1506,9 @@ public class Graphics implements Disposable {
             ShaderUtil.getInstance().getShaderPixelateWarp().setUniformf("u_speed", 0.5f);
             ShaderUtil.getInstance().getShaderPixelateWarp().setUniformf("u_time", 0.8f);
             batch.setShader(ShaderUtil.getInstance().getShaderPixelateWarp());
-            batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1565,112 +1517,88 @@ public class Graphics implements Disposable {
     public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderWarp().bind();
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_amount", 0.2f);
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_speed", 0.5f);
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_time", time);
         batch.setShader(ShaderUtil.getInstance().getShaderWarp());
-        batch.begin();
         //draw
         batch.draw(image, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawWarpImage(TextureRegion image, float x, float y, float w, float h, float time) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderWarp().bind();
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_amount", 0.2f);
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_speed", 0.6f);
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_time", time);
         batch.setShader(ShaderUtil.getInstance().getShaderWarp());
-        batch.begin();
         //draw
         batch.draw(image, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawWarpImage(FImage image, float x, float y, float w, float h, float time) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderWarp().bind();
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_amount", 0.2f);
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_speed", 0.6f);
         ShaderUtil.getInstance().getShaderWarp().setUniformf("u_time", time);
         batch.setShader(ShaderUtil.getInstance().getShaderWarp());
-        batch.begin();
         //draw
         image.draw(this, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawUnderWaterImage(FImage image, float x, float y, float w, float h, float time) {
         if (image == null)
             return;
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderUnderwater().bind();
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_amount", 10f * time);
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_speed", 0.5f * time);
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_time", time);
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_bias", 0.7f);
         batch.setShader(ShaderUtil.getInstance().getShaderUnderwater());
-        batch.begin();
         //draw
         image.draw(this, x, y, w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawNightDay(FImage image, float x, float y, float w, float h, Float timeOfDay, boolean darkOverlay, float rippleAmount) {
         if (image == null)
             return;
         if (timeOfDay != null) {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderNightDay().bind();
             ShaderUtil.getInstance().getShaderNightDay().setUniformf("u_timeOfDay", timeOfDay);
             ShaderUtil.getInstance().getShaderNightDay().setUniformf("u_time", rippleAmount);
             ShaderUtil.getInstance().getShaderNightDay().setUniformf("u_bias",  darkOverlay? 0.7f : 1f);
             batch.setShader(ShaderUtil.getInstance().getShaderNightDay());
-            batch.begin();
             //draw
             image.draw(this, x, y, w, h);
-            //reset
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             drawImage(image, x, y, w, h);
         }
     }
 
     public void drawUnderWaterImage(TextureRegion image, float x, float y, float w, float h, float time) {
-        batch.end();
+        batch.flush();
         ShaderUtil.getInstance().getShaderUnderwater().bind();
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_amount", 10f);
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_speed", 0.5f);
         ShaderUtil.getInstance().getShaderUnderwater().setUniformf("u_time", time);
         batch.setShader(ShaderUtil.getInstance().getShaderUnderwater());
-        batch.begin();
         //draw
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-        //reset
-        batch.end();
         batch.setShader(null);
-        batch.begin();
     }
 
     public void drawImage(Texture image, float x, float y, float w, float h) {
@@ -1688,7 +1616,7 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (foilIndex > 0) {
-            batch.end();
+            batch.flush();
             ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
             shaderProgram.bind();
             shaderProgram.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
@@ -1697,11 +1625,8 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
             batch.setShader(shaderProgram);
-            batch.begin();
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1711,7 +1636,7 @@ public class Graphics implements Disposable {
         if (image == null)
             return;
         if (foilIndex > 0) {
-            batch.end();
+            batch.flush();
             ShaderProgram shaderProgram = ShaderUtil.getInstance().getShaderCardRoundedHolo();
             shaderProgram.bind();
             shaderProgram.setUniformf("u_resolution", image.getWidth(), image.getHeight());
@@ -1720,11 +1645,8 @@ public class Graphics implements Disposable {
             shaderProgram.setUniformf("u_foilTilt", 0, foilIndex);
             shaderProgram.setUniformf("u_cardPosition", foilIndex, 0);
             batch.setShader(shaderProgram);
-            batch.begin();
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
-            batch.end();
             batch.setShader(null);
-            batch.begin();
         } else {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1754,19 +1676,16 @@ public class Graphics implements Disposable {
         if (!selected) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         } else {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderOutline().bind();
-            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_viewportInverse", new Vector2(1f / w, 1f / h));
+            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_viewportInverse", 1f / w, 1f / h);
             ShaderUtil.getInstance().getShaderOutline().setUniformf("u_offset", 3f);
             ShaderUtil.getInstance().getShaderOutline().setUniformf("u_step", Math.min(1f, w / 70f));
-            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_color", new Vector3(glowColor.r, glowColor.g, glowColor.b));
+            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_color", glowColor.r, glowColor.g, glowColor.b);
             batch.setShader(ShaderUtil.getInstance().getShaderOutline());
-            batch.begin();
             //glow
             batch.draw(glowImageReference, adjustX(x), adjustY(y, h), w, h);
-            batch.end();
             batch.setShader(null);
-            batch.begin();
             //img
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
@@ -1780,19 +1699,16 @@ public class Graphics implements Disposable {
             cardArt.draw(this, x + ((w - w * scale) / 2), y + ((h - h * scale) / 3f), w * scale, h * scale / 1.85f);
             batch.draw(image, adjustX(x), adjustY(yBox, h), w, h);
         } else {
-            batch.end();
+            batch.flush();
             ShaderUtil.getInstance().getShaderOutline().bind();
-            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_viewportInverse", new Vector2(1f / w, 1f / h));
+            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_viewportInverse", 1f / w, 1f / h);
             ShaderUtil.getInstance().getShaderOutline().setUniformf("u_offset", 3f);
             ShaderUtil.getInstance().getShaderOutline().setUniformf("u_step", Math.min(1f, w / 70f));
-            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_color", new Vector3(glowColor.r, glowColor.g, glowColor.b));
+            ShaderUtil.getInstance().getShaderOutline().setUniformf("u_color", glowColor.r, glowColor.g, glowColor.b);
             batch.setShader(ShaderUtil.getInstance().getShaderOutline());
-            batch.begin();
             //glow
             batch.draw(glowImageReference, adjustX(x), adjustY(yBox, h), w, h);
-            batch.end();
             batch.setShader(null);
-            batch.begin();
             //cardart
             cardArt.draw(this, x + ((w - w * scale) / 2), y + ((h - h * scale) / 3f), w * scale, h * scale / 1.85f);
             //deckbox
@@ -1836,7 +1752,6 @@ public class Graphics implements Disposable {
 
     public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
-        Dtransforms.addFirst(new Matrix4(batch.getTransformMatrix().idt())); //startshape is using this above as reference
         transformCount++;
         batch.getTransformMatrix().idt().translate(adjustX(originX), adjustY(originY, 0), 0).rotate(Vector3.Z, rotation).translate(-adjustX(originX), -adjustY(originY, 0), 0);
         batch.begin();
@@ -1845,12 +1760,8 @@ public class Graphics implements Disposable {
     public void endTransform() {
         batch.end();
         shapeRenderer.setTransformMatrix(batch.getTransformMatrix().idt());
-        Dtransforms.removeFirst();
-        transformCount--;
-        if (transformCount != Dtransforms.size()) {
-            System.err.printf("Stack count: %d, transformCount: %d%n", Dtransforms.size(), transformCount);
-            transformCount = 0;
-            Dtransforms.clear();
+        if (transformCount > 0) {
+            transformCount--;
         }
         batch.getTransformMatrix().idt(); //reset
         shapeRenderer.getTransformMatrix().idt(); //reset
@@ -1891,16 +1802,16 @@ public class Graphics implements Disposable {
     }
 
     public void drawText(String text, FSkinFont font, Color color, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
-        try {
-            if (text == null)
-                return;
-            if (alphaComposite < 1) {
-                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
-            }
-            if (color.a < 1) { // enable blending so alpha colored shapes work properly
-                Gdx.gl.glEnable(GL_BLEND);
-            }
+        if (text == null)
+            return;
+        if (fitText(text, font, w, h, wrap)) {
+            drawFittedText(text, color, x, y, w, h, wrap, horzAlignment, centerVertically);
+        }
+    }
 
+    //measures the text and shrinks the font until it fits; result is left in fitFont/fitNeedClip/fitHeight
+    private boolean fitText(String text, FSkinFont font, float w, float h, boolean wrap) {
+        try {
             if (wrap) {
                 font.getWrappedBounds(text, w, textBounds);
             } else {
@@ -1922,28 +1833,51 @@ public class Graphics implements Disposable {
                     break;
                 }
             }
-
-            if (needClip) { // prevent text flowing outside region if couldn't shrink it to fit
-                startClip(x, y, w, h);
-            }
-
-            float textHeight = textBounds.height;
-            if (h > textHeight && centerVertically) {
-                y += (h - textHeight) / 2;
-            }
-
-            font.draw(batch, text, color, adjustX(x), adjustY(y, 0), w, wrap, horzAlignment);
-
-            if (needClip) {
-                endClip();
-            }
-
-            if (color.a < 1) {
-                Gdx.gl.glDisable(GL_BLEND);
-            }
+            fitFont = font;
+            fitNeedClip = needClip;
+            fitHeight = textBounds.height;
+            return true;
         } catch (Exception e) {
             // shouldn't be here but force English on CJK Error
             Forge.setForcedEnglishonCJKMissing();
+            return false;
+        }
+    }
+
+    //draws text previously measured by fitText; blend/clip state is always restored, even on failure
+    private void drawFittedText(String text, Color color, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
+        boolean blendEnabled = false;
+        boolean clipStarted = false;
+        try {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            if (color.a < 1) { // enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL_BLEND);
+                blendEnabled = true;
+            }
+
+            if (fitNeedClip) { // prevent text flowing outside region if couldn't shrink it to fit
+                startClip(x, y, w, h);
+                clipStarted = true;
+            }
+
+            float drawY = y;
+            if (h > fitHeight && centerVertically) {
+                drawY += (h - fitHeight) / 2;
+            }
+
+            fitFont.draw(batch, text, color, adjustX(x), adjustY(drawY, 0), w, wrap, horzAlignment);
+        } catch (Exception e) {
+            // shouldn't be here but force English on CJK Error
+            Forge.setForcedEnglishonCJKMissing();
+        } finally {
+            if (clipStarted) {
+                endClip();
+            }
+            if (blendEnabled) {
+                Gdx.gl.glDisable(GL_BLEND);
+            }
         }
     }
 
@@ -1953,22 +1887,32 @@ public class Graphics implements Disposable {
     }
 
     public void drawOutlinedText(String text, FSkinFont skinFont, Color textColor, Color outlineColor, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically, boolean shadow) {
+        // all passes share the same text/font/size, so measure once instead of once per pass
+        if (text == null || !fitText(text, skinFont, w, h, wrap))
+            return;
         if (shadow) {
             float oldAlpha = alphaComposite;
             alphaComposite = 0.4f;
-            drawText(text, skinFont, outlineColor, x - 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
-            drawText(text, skinFont, outlineColor, x + 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
-            drawText(text, skinFont, outlineColor, x + 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
-            drawText(text, skinFont, outlineColor, x - 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
-            alphaComposite = oldAlpha;
+            try {
+                drawFittedText(text, outlineColor, x - 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
+                drawFittedText(text, outlineColor, x + 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
+                drawFittedText(text, outlineColor, x + 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
+                drawFittedText(text, outlineColor, x - 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            } finally {
+                alphaComposite = oldAlpha;
+            }
         }
-        drawText(text, skinFont, outlineColor, x - 1, y, w, h, wrap, horzAlignment, centerVertically);
-        drawText(text, skinFont, outlineColor, x, y - 1, w, h, wrap, horzAlignment, centerVertically);
-        drawText(text, skinFont, outlineColor, x - 1, y - 1, w, h, wrap, horzAlignment, centerVertically);
-        drawText(text, skinFont, outlineColor, x + 1, y, w, h, wrap, horzAlignment, centerVertically);
-        drawText(text, skinFont, outlineColor, x, y + 1, w, h, wrap, horzAlignment, centerVertically);
-        drawText(text, skinFont, outlineColor, x + 1, y + 1, w, h, wrap, horzAlignment, centerVertically);
-        drawText(text, skinFont, textColor, x, y, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, outlineColor, x - 1, y, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, outlineColor, x, y - 1, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, outlineColor, x - 1, y - 1, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, outlineColor, x + 1, y, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, outlineColor, x, y + 1, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, outlineColor, x + 1, y + 1, w, h, wrap, horzAlignment, centerVertically);
+        drawFittedText(text, textColor, x, y, w, h, wrap, horzAlignment, centerVertically);
+    }
+
+    private Color fade(Color c, Color scratch) {
+        return scratch.set(c.r, c.g, c.b, c.a * alphaComposite);
     }
 
     public float adjustX(float x) {
@@ -1981,12 +1925,21 @@ public class Graphics implements Disposable {
 
     public Color borderLining(String c) {
         if (c == null || "".equals(c))
-            return Color.valueOf("#fffffd");
+            return new Color(LINING_LIGHT);
         int c_r = Integer.parseInt(c.substring(0, 2), 16);
         int c_g = Integer.parseInt(c.substring(2, 4), 16);
         int c_b = Integer.parseInt(c.substring(4, 6), 16);
-        int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
-        return brightness > 155 ? Color.valueOf("#171717") : Color.valueOf("#fffffd");
+        return new Color(liningFor(c_r, c_g, c_b));
+    }
+
+    // same result as borderLining(color.toString()) without the String round trip; result is shared, don't modify
+    private static Color borderLiningFor(Color c) {
+        return liningFor((int) (255 * c.r), (int) (255 * c.g), (int) (255 * c.b));
+    }
+
+    private static Color liningFor(int r, int g, int b) {
+        int brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        return brightness > 155 ? LINING_DARK : LINING_LIGHT;
     }
 
     public static void setVideoMode(String videoMode) {
