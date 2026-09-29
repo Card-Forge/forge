@@ -7,7 +7,7 @@ import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
-import forge.gamemodes.net.server.RemoteClientGuiGame;
+import forge.gamemodes.net.ProtocolGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -3791,7 +3791,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isRemoteClient() {
-        return gui instanceof RemoteClientGuiGame;
+        return gui instanceof ProtocolGuiGame;
     }
 
     /** True while the player is auto-passing. Deliberately does not cover a skipped phase or an auto-yielded
