@@ -18,7 +18,6 @@ import forge.util.*;
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private final Localizer localizer = Localizer.getInstance();
     private final GameLog log;
-    private long matchStartMillis = -1;
     public GameLogFormatter(GameLog gameLog) {
         log = gameLog;
     }
@@ -36,9 +35,10 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventGameOutcome ev) {
         // Match Duration
-        long durationMillis = System.currentTimeMillis() - matchStartMillis;
-        log.add(GameLogEntryType.GAME_OUTCOME, localizer.getMessage("lblMatchDuration") + " " + formatDuration(durationMillis));
-        matchStartMillis = -1;
+        if (log.getMatchStartMillis() >= 0) { // defend against it somehow still never being set
+            long durationMillis = System.currentTimeMillis() - log.getMatchStartMillis();
+            log.add(GameLogEntryType.GAME_OUTCOME, localizer.getMessage("lblMatchDuration") + " " + formatDuration(durationMillis));
+        }
 
         // Turn number counted from the starting player
         int lastTurn = (int)Math.ceil((float)ev.lastTurnNumber() / 2.0);
@@ -179,9 +179,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        if (matchStartMillis < 0) {
-            matchStartMillis = System.currentTimeMillis();
-        }
+        log.markMatchStartIfNeeded();
         String message = localizer.getMessage("lblLogTurnNOwnerByPlayer", event.turnNumber(), event.turnOwner());
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
