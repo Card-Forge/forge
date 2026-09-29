@@ -236,7 +236,7 @@ public class RewardScene extends UIScene {
     public void enter() {
         autoSell = false;
         updateDetailButton();
-        if (type == Type.Loot) {
+        if (type == Type.Loot && Forge.lastPreview != null) {
             setUIBackground(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
         } else {
             setUIBackground(origDrawable);
