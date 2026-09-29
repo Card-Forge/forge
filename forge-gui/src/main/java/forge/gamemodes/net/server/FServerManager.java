@@ -12,6 +12,7 @@ import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.match.input.InputSynchronized;
+import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
@@ -68,7 +69,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
-public final class FServerManager implements IHasForgeLog {
+public final class FServerManager implements IHasForgeLog, HostingServer.Server {
 
     static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
 
@@ -278,6 +279,7 @@ public final class FServerManager implements IHasForgeLog {
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
+            HostingServer.set(this);
         } catch (final InterruptedException e) {
             netLog.error(e, "Server start interrupted");
         }
@@ -345,6 +347,7 @@ public final class FServerManager implements IHasForgeLog {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
         isHosting = false;
+        HostingServer.set(null);
         UPnPMapped = false;
         NetworkLogConfig.deactivateNetworkLogging();
     }
@@ -409,12 +412,6 @@ public final class FServerManager implements IHasForgeLog {
 
     private final Set<Integer> afkSlots = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
-    @FunctionalInterface
-    public interface AfkTimeout {
-        AfkTimeout NOOP = () -> {};
-        void cancel();
-    }
-
     /**
      * {@code cancelAll()} is safe here only because this is armed exclusively from
      * {@code InputPassPriority}: the sole replies that can be pending on the channel
@@ -422,6 +419,7 @@ public final class FServerManager implements IHasForgeLog {
      * Extending to other server-side waits (assignCombatDamage, getChoices, order,
      * ...) is blocked on those methods not being null-safe.
      */
+    @Override
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
         if (!isHosting() || localLobby == null) {
             return AfkTimeout.NOOP;
