@@ -41,6 +41,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/jczastkiewicz/crucible/internal/carddb"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
@@ -234,6 +235,12 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 	case name == "FullyUnlocked":
 		// CardProperty.java:1863: both doors of a Room permanent unlocked.
 		return len(c.UnlockedDoors()) == 2
+	case strings.HasPrefix(name, "named"):
+		// CardProperty.java:62-68: the rest of the property is a card name,
+		// with `;` standing for the `,` a valid string cannot hold and `_`
+		// for a space, matched by Card.sharesNameWith(String).
+		want := strings.ReplaceAll(strings.ReplaceAll(name[len("named"):], ";", ","), "_", " ")
+		return sharesName(c, want)
 	case name == "NamedCard":
 		sc, ok := sourceCard(g, source)
 		if !ok || c.Def == nil {
@@ -1025,4 +1032,27 @@ func operatorPrefix(s string) (string, bool) {
 		}
 	}
 	return "", false
+}
+
+// sharesName is Card.sharesNameWith(String) (Card.java:5838-5863): c's name
+// is name, or, off the battlefield, c is a split card one of whose halves is
+// named name. Java's on-the-battlefield branch, a Room's unlocked door
+// names, is not read: a Room permanent's Def already is the view of its
+// unlocked doors (room.go), and no corpus named<Name> property names a door.
+// Not ported: Card.hasNonLegendaryCreatureNames()'s own tail
+// (Card.java:5864-5868, SpyKit's own text-changing ability) -- this port
+// does model HasNonLegendaryCreatureNames (card.go), so this is a real,
+// disclosed gap, not a forced omission; 0 real corpus named<Name> lines
+// reach a SpyKit-shaped card today.
+func sharesName(c *Card, name string) bool {
+	if name == "" || c.Def == nil {
+		return false
+	}
+	if c.Def.Name == name {
+		return true
+	}
+	if c.Zone == Battlefield || c.Def.SplitType != carddb.SplitSplit {
+		return false
+	}
+	return c.Def.Faces[0].Name == name || c.Def.Faces[carddb.FaceAlternate].Name == name
 }

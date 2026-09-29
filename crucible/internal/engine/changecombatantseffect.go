@@ -47,23 +47,35 @@ func (changeCombatantsEffect) Resolve(g *Game, a *Ability, controller PlayerCont
 		if hasParam(a, "Optional") && !controller.ConfirmEffect(g, a.Controller, a.Source) {
 			continue
 		}
-		eligible := g.eligibleAttackTargets()
-		if len(eligible) == 0 {
-			continue
-		}
-		defender := controller.ChooseAttackTarget(g, a.Controller, id, eligible)
-		if err := checkChoice([]EntityID{defender}, eligible, 1, 1); err != nil {
+		if err := g.attackByEffect(controller, a.Controller, id); err != nil {
 			return fmt.Errorf("engine: ChangeCombatants: %w", err)
 		}
-		if g.combat.isAttacking(id) && g.combat.AttackTargets[id] == defender {
-			continue
-		}
-		g.removeFromCombat(id)
-		g.combat.Attackers = append(g.combat.Attackers, id)
-		if g.combat.AttackTargets == nil {
-			g.combat.AttackTargets = make(map[CardID]EntityID)
-		}
-		g.combat.AttackTargets[id] = defender
 	}
+	return nil
+}
+
+// attackByEffect is SpellAbilityEffect.addToCombat's Attacking$ True branch
+// (SpellAbilityEffect.java:767-793, CR 506.3b) once its caller has checked
+// that id is a creature on the battlefield controlled by the attacking
+// player during combat: decider picks among every eligible defender and id
+// attacks it -- or, already attacking another one, is redirected.
+func (g *Game) attackByEffect(controller PlayerController, decider PlayerID, id CardID) error {
+	eligible := g.eligibleAttackTargets()
+	if len(eligible) == 0 {
+		return nil
+	}
+	defender := controller.ChooseAttackTarget(g, decider, id, eligible)
+	if err := checkChoice([]EntityID{defender}, eligible, 1, 1); err != nil {
+		return err
+	}
+	if g.combat.isAttacking(id) && g.combat.AttackTargets[id] == defender {
+		return nil
+	}
+	g.removeFromCombat(id)
+	g.combat.Attackers = append(g.combat.Attackers, id)
+	if g.combat.AttackTargets == nil {
+		g.combat.AttackTargets = make(map[CardID]EntityID)
+	}
+	g.combat.AttackTargets[id] = defender
 	return nil
 }

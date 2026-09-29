@@ -11,6 +11,12 @@ import (
 // intensifyEffect is IntensifyEffect.java: each card -- every card in the
 // game matching AllDefined$, else the Defined$ (default Self) or targeted
 // cards -- has its intensity raised by Amount$ (default 1).
+//
+// AllDefined$'s scan walks every CardID ever allocated, so it must skip a
+// melded secondary (ADR-0032) explicitly by its own Melded flag the same way
+// removeFromMatchEffect does: Java's own scan reads each zone's own
+// getCards(), which already excludes it (removefrommatcheffect.go's own doc
+// comment has the citation).
 type intensifyEffect struct{}
 
 func (intensifyEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
@@ -30,7 +36,7 @@ func (intensifyEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		parsed := valid.Parse(spec)
 		for i := 1; i < len(g.cards); i++ {
 			id := CardID(i)
-			if g.cards[i].Zone == None {
+			if g.cards[i].Zone == None || g.cards[i].Melded {
 				continue
 			}
 			if Matches(g, g.Card(id), parsed, a.Controller, a.Source) {

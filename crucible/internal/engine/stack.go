@@ -92,10 +92,18 @@ func (g *Game) resolveTop(reg *Registry, controller PlayerController) error {
 	g.stack = g.stack[:n]
 
 	if g.targetsStillLegal(&a) {
+		// Captured before Resolve, not read fresh after: EndTurn/
+		// EndCombatPhase (and any future effect touching turn state
+		// mid-resolution) can advance g.activePhase/g.activePlayer/g.turn
+		// inside Resolve, and AbilityResolved must describe the context
+		// the ability actually resolved in, not wherever the state jumped
+		// to afterward (found auditing this call site for RestartGame,
+		// docs/crucible/adr/0033-restartgame-mid-resolution-reset.md).
+		phase, active, turn := g.activePhase, g.activePlayer, g.turn
 		if err := reg.Resolve(g, &a, controller); err != nil {
 			return err
 		}
-		g.sink.Emit(Event{Kind: AbilityResolved, Phase: g.activePhase, Active: g.activePlayer, Actor: a.Controller, Turn: uint16(g.turn), Source: a.Source})
+		g.sink.Emit(Event{Kind: AbilityResolved, Phase: phase, Active: active, Actor: a.Controller, Turn: uint16(turn), Source: a.Source})
 	}
 	g.moveResolvedSpellToGraveyard(a)
 	CheckStateBasedActions(g, controller)

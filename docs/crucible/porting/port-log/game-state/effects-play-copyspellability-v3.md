@@ -77,13 +77,13 @@ Rejected before acting (`playUnresolvedParams`):
 
 Also an error, never a silent empty pool or a guess (GO-7):
 
-| Case                                                                                                                                                            | Where                                 |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `Valid$` property `Matches` has no case for: `ExiledWith…` (23), `TargetedPlayerCtrl` (6), `OwnedBy`/`ControlledBy` (8), `shares…`, `named…`, non-literal `cmc` | `playSpecGap`                         |
-| `ValidSA$` cmc operand not resolvable, or card property with no case                                                                                            | `validSAPropertyMatches`              |
-| chosen split/adventure/omen/modal/prepare card (a choice of spells, `getAbilityToPlay`, no decision here)                                                       | `playCastGap`                         |
-| chosen instant/sorcery with no `A:SP$` line, two of them, or `Cost$` on it (an additional cost `castInstantOrSorcery` does not pay)                             | `playCastGap`                         |
-| a card with nothing to play, or no mana cost to pay, under `AllowRepeats$`                                                                                      | `playRepeatLoop`; Forge defect, below |
+| Case                                                                                                                                                  | Where                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `Valid$` property `Matches` has no case for: `ExiledWith…` (23), `TargetedPlayerCtrl` (6), `OwnedBy`/`ControlledBy` (8), `shares…`, non-literal `cmc` | `playSpecGap`                         |
+| `ValidSA$` cmc operand not resolvable, or card property with no case                                                                                  | `validSAPropertyMatches`              |
+| chosen split/adventure/omen/modal/prepare card (a choice of spells, `getAbilityToPlay`, no decision here)                                             | `playCastGap`                         |
+| chosen instant/sorcery with no `A:SP$` line, two of them, or `Cost$` on it (an additional cost `castInstantOrSorcery` does not pay)                   | `playCastGap`                         |
+| a card with nothing to play, or no mana cost to pay, under `AllowRepeats$`                                                                            | `playRepeatLoop`; Forge defect, below |
 
 The `ValidSA$` pre-filter keeps a card `playCastGap` names (Java would offer it); only choosing it fails.
 

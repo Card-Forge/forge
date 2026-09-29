@@ -351,7 +351,7 @@ func TestPlayRejectsUnbuiltShapes(t *testing.T) {
 		{"DB$ Play | Valid$ Card.ExiledWithSource | ValidZone$ Exile", "ExiledWithSource"},
 		{"DB$ Play | Valid$ Card.cmcLEX | ValidZone$ Exile", "cmcLEX"},
 		{"DB$ Play | Valid$ Card | ValidZone$ Nowhere", "ValidZone$"},
-		{"DB$ Play | Defined$ Remembered | ValidSA$ Spell.namedFoo", "namedFoo"},
+		{"DB$ Play | Defined$ Remembered | ValidSA$ Spell.faceUp", "faceUp"},
 		{"DB$ Play | Defined$ Remembered | ValidSA$ Spell.cmcLEZ", "cmcLEZ"},
 		{"DB$ Play | Defined$ Bogus", "Bogus"},
 		{"DB$ Play | Defined$ Remembered | Controller$ Bogus", "Controller$"},

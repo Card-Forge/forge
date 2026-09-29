@@ -1,0 +1,13 @@
+# Card.getTriggers reads the current state alone: a meld card's front face
+# does not carry its meld face's triggers. Titania, Voice of Gaea enters
+# with a Forest in the graveyard; Titania, Gaea Incarnate's "When NICKNAME
+# enters, return all land cards from your graveyard to the battlefield
+# tapped" is printed on the meld face, so the Forest stays put.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+queue paygeneric G
+castspell human 1
+resolvestack

@@ -578,6 +578,9 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		c.ColorMod.Clear()
 		c.KeywordMod.Clear()
 	}
+	// melded is the other card of a melded permanent leaving the battlefield
+	// (CR 712.4c), split off after this move's own event, below.
+	melded := NoCard
 	switch {
 	case from == Battlefield && kind != Battlefield:
 		snap := *c
@@ -585,6 +588,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		// After the snapshot: last-known information keeps a phased-out
 		// card's own phasing (GameAction.java:977 reads lki.isPhasedOut()).
 		c.phasedOut, c.directlyPhasedOut, c.wontPhaseInNormal = NoPlayer, false, false
+		melded = c.leaveMeld()
 		c.Counters = Counters{}
 		c.Damage.Clear()
 		c.PT.Clear()
@@ -655,6 +659,9 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		To:     kind,
 	})
 	g.effectCardsSeeMove(id, from, kind)
+	if melded != NoCard {
+		g.unmeld(melded, kind, owner, false)
+	}
 }
 
 // MoveToLibraryTop moves id to the top of owner's library -- library index
@@ -683,8 +690,10 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 	g.Zone(c.Zone, c.ZoneOwner).remove(id)
 	g.putFront(id, owner)
 
+	melded := NoCard
 	if from == Battlefield {
 		c.phasedOut, c.directlyPhasedOut, c.wontPhaseInNormal = NoPlayer, false, false
+		melded = c.leaveMeld()
 		c.Counters = Counters{}
 		c.Damage.Clear()
 		c.PT.Clear()
@@ -733,6 +742,55 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 		To:     Library,
 	})
 	g.effectCardsSeeMove(id, from, Library)
+	if melded != NoCard {
+		g.unmeld(melded, Library, owner, true)
+	}
+}
+
+// leaveMeld clears c's side of a meld as c leaves the battlefield and
+// returns the other card its melded permanent represented, NoCard if c was
+// not one. A secondary moved on its own drops its Melded mark here too, so
+// the unmeld that follows its melded permanent finds it gone and leaves it
+// where it is.
+func (c *Card) leaveMeld() CardID {
+	c.Melded = false
+	melded := c.MeldedWith
+	c.MeldedWith = NoCard
+	return melded
+}
+
+// unmeld is GameAction.changeZone's "Spin off Melded card"
+// (GameAction.java:629-642, CR 712.4c): a melded permanent just left the
+// battlefield for kind, so the other card it represented follows it to the
+// same zone, after it -- appended after it, or with top put on the library's
+// top over it, where Java's changeZone(null, zoneTo, unmeld, position, ...)
+// with the melded permanent's own position puts it. Java moves it from no
+// zone at all (zoneFrom null): it never was in the battlefield's card list
+// (PlayerZoneBattlefield.addToMelded), so it gets no leave-the-battlefield
+// cleanup, no last-known information and no effect-card watch -- its state
+// was already cleared when meldeffect.go exiled it -- only the zone change
+// itself and its event.
+func (g *Game) unmeld(secondary CardID, kind ZoneType, owner PlayerID, top bool) {
+	s := g.Card(secondary)
+	if !s.Melded {
+		return
+	}
+	s.Melded = false
+	if top {
+		g.putFront(secondary, owner)
+	} else {
+		g.put(secondary, kind, owner)
+	}
+	g.sink.Emit(Event{
+		Kind:   ZoneChanged,
+		Phase:  g.activePhase,
+		Active: g.activePlayer,
+		Actor:  owner,
+		Turn:   uint16(g.turn),
+		Source: secondary,
+		From:   Battlefield,
+		To:     kind,
+	})
 }
 
 // ceaseCopiedSpell is GameAction.changeZone's copied-spell early return
@@ -770,8 +828,9 @@ func (g *Game) Shuffle(kind ZoneType, owner PlayerID) {
 }
 
 // put appends a card to a zone and records the reverse index on the card. It
-// does not remove the card from wherever it was, so only [Game.Move] and
-// [Game.NewCard] may call it.
+// does not remove the card from wherever it was, so only [Game.Move],
+// [Game.NewCard] and unmeld (a melded pair splitting apart, ADR-0032) may
+// call it.
 func (g *Game) put(id CardID, kind ZoneType, owner PlayerID) {
 	c := &g.cards[id]
 	c.Zone, c.ZoneOwner = kind, owner
@@ -782,7 +841,7 @@ func (g *Game) put(id CardID, kind ZoneType, owner PlayerID) {
 
 // putFront is put's mirror for the library's own top instead of a zone's
 // end: it does not remove the card from wherever it was, so only
-// [Game.MoveToLibraryTop] may call it.
+// [Game.MoveToLibraryTop] and unmeld may call it.
 func (g *Game) putFront(id CardID, owner PlayerID) {
 	c := &g.cards[id]
 	c.Zone, c.ZoneOwner = Library, owner

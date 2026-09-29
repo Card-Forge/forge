@@ -74,10 +74,10 @@ Fix scoped to the cast card: after the `traitHosts` walk, the spell on the Stack
 shared by ~40 scans, is untouched. A trigger with no `TriggerZones$` on a card in hand, library or graveyard watching
 _other_ spells stays unscanned, as before (Java would see it; real scripts name `TriggerZones$ Battlefield` on those).
 
-| Left unfired from the stack                                | Why                                                                                                                                                                                                                                                                    |
-| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Execute$` is an `AB$` with its own `Cost$` (6 of the 102) | No triggered ability's `Cost$` is asked for or paid yet (`game-state.md`, "Not ported yet"); firing would hand out Bearer of Silence's "you may pay {1}{C}" edict, Eldrazi Obligator's steal, Vile Redeemer's Scions, ... free                                         |
-| A trigger on a face other than the one cast                | Not guarded: `triggerFaces` reads every face, Java only the current state. No real case: the 3 multi-face cards (Bruna, the Fading Light; Lae'zel, Githyanki Warrior; Drowner of Truth) print it on the front, and their other faces are melded, specialized or a land |
+| Left unfired from the stack                                | Why                                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Execute$` is an `AB$` with its own `Cost$` (6 of the 102) | No triggered ability's `Cost$` is asked for or paid yet (`game-state.md`, "Not ported yet"); firing would hand out Bearer of Silence's "you may pay {1}{C}" edict, Eldrazi Obligator's steal, Vile Redeemer's Scions, ... free                                                                                      |
+| A trigger on a face other than the one cast                | `triggerFaces` reads only `Faces[0]` of a transforming, flipping, modal, melded, specialize or prepare card (`liveFaces`, `effects-meld.md`); split, adventure and omen cards keep every face. The 3 multi-face cards (Bruna, the Fading Light; Lae'zel, Githyanki Warrior; Drowner of Truth) print it on the front |
 
 ## LosePerpetual lands
 
@@ -95,10 +95,10 @@ affected: effects that evaluate conditions without rejecting `ConditionDefined$`
 `ConditionDefined$ Remembered` lines (`Discard` 14, `SetState` 6, `MakeCard` 6, `Scry` 5, ...) move from silently unmet
 to evaluated. `LosePerpetual` itself rejects `Condition$` and every other `ConditionDefined$` (GO-7).
 
-| Card           | Status                                                                                                                                                                                                          |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Racketeer Boss | End to end: scenario `perpetual-cast-trigger-racketeer-boss-treasure-once` (grant in hand, fires from the stack, Treasure, lost; recast makes none)                                                             |
-| Pass the Torch | Its `Animate` fails closed: `TrigPlay` targets `TgtZone$ Graveyard` and `Card.namedPass the Torch`, and neither graveyard targeting nor the `named` property exists (`playUnportedProperties`, `playeffect.go`) |
+| Card           | Status                                                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Racketeer Boss | End to end: scenario `perpetual-cast-trigger-racketeer-boss-treasure-once` (grant in hand, fires from the stack, Treasure, lost; recast makes none)          |
+| Pass the Torch | Its `Animate` fails closed: `TrigPlay` targets `TgtZone$ Graveyard`, and Play's graveyard targeting does not exist (`playUnresolvedParams`, `playeffect.go`) |
 
 Other `Duration$ Perpetual | Triggers$` lines no longer rejected on the grant itself (whether the trigger then fires is
 the scans' existing zone coverage — a granted "when you draw this card" in hand is as unscanned as a printed one):

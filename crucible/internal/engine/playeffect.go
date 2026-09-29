@@ -63,11 +63,11 @@ var playUnresolvedParams = [...]string{
 // valid strings that Matches (valid.go) has no case for and would read as
 // false for every card, silently emptying the pool (GO-7): ExiledWith[Source]
 // (23 lines), TargetedPlayerCtrl (6), OwnedBy/ControlledBy <Defined> (8),
-// sharesNameWith/sharesCardTypeWith, named<Name>, faceUp, NotedFor...,
-// IsCommander, CanPayManaCost.
+// sharesNameWith/sharesCardTypeWith, faceUp, NotedFor..., IsCommander,
+// CanPayManaCost.
 var playUnportedProperties = [...]string{
 	"ExiledWith", "TargetedPlayerCtrl", "OwnedBy", "ControlledBy", "sharesNameWith", "sharesCardTypeWith",
-	"named", "faceUp", "NotedFor", "IsCommander", "CanPayManaCost",
+	"faceUp", "NotedFor", "IsCommander", "CanPayManaCost",
 }
 
 func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {

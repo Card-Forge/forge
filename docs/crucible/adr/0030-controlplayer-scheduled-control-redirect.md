@@ -70,22 +70,50 @@ or a synthetic `compile.Ability` faked into existence to appease a struct field 
 _gating pattern_, not the _struct_, keeps both readable and keeps `Registry.Resolve` as the only place a
 `compile.Ability` is interpreted (PORT-2).
 
-**Reading the redirect.** Every `PlayerController` call site that currently resolves "whose controller answers this
-decision" from the deciding `PlayerID` directly instead resolves it from `Player.ControlledBy`'s top of stack, falling
-back to the player's own seat when empty. This is additive at each of the ~40 existing call sites, not a signature
-change — `PlayerController` methods keep taking an explicit `PlayerID`; only which `PlayerID`'s answers are asked
-changes, at the one place decisions are dispatched, not at every caller.
+**Reading the redirect: no dispatch point exists to convert.** This port has one shared `PlayerController` for the whole
+game — `Game.Step`/`Game.Run` (`driver.go`) and every effect take the same controller value, and `control.go`'s own doc
+comment already says so: "a single ScriptedController answers for every player." The deciding `PlayerID` passed to a
+`PlayerController` method identifies whose decision it is, not which object answers it; there is no per-seat controller
+map or seam a redirect could route through. This matches Java's own mechanism more closely than the original wording
+here implied: `ControlPlayerEffect.java:27-44` and `Player.addController`/`removeController`/ `getController`
+(`Player.java:2517-2566`) never change who acts, targets, or owns the zones an ability touches — they change which brain
+(`PlayerController`) is _built for the same slave player_ (`LobbyPlayerAi.createMindSlaveController` and
+`LobbyPlayerHuman`, both construct a controller for the slave, not the master). The `PlayerID` passed everywhere in this
+port stays the slave, exactly as Java's own activating player, `Defined$ You`, and hand/library ownership do.
+
+So the redirect is read-only engine state consulted by name at the two real rules readers Java's own engine has, not a
+routed dispatch: `Game.ControllingPlayer(pid) PlayerID` / `Game.IsControlled(pid) bool`, read by Learn
+(`Player.java:3906` excludes Sideboard Lessons for a controlled player) and by Wish-family zone changes
+(`ChangeZoneEffect.java:989` excludes `Sideboard` as an origin for a controlled player, live in this port's
+`changezoneeffect.go` — 24 real `Origin$ Sideboard` corpus lines). A future harness or `PlayerController` implementation
+wanting to route a different AI per seat reads `ControllingPlayer` itself to pick a brain; the engine performs no such
+routing on its behalf.
+
+**Combat$'s own pair of hooks.** Secret of Bloodbending's Combat$ True line needs a grant keyed to begin of combat
+(`PhaseHandler.java:301`) and a revoke keyed to end of combat (`PhaseHandler.endCombat`, `PhaseHandler.java:1262`). This
+is a second pair beyond the cleanup pair `delayedTrigger` already gates on. `scheduledAction` gains these as two more
+gating cases. They are checked at `turn.go`'s own CombatBegin step and at `g.endCombat()` (`turn.go:466`) — the same way
+the cleanup pair is checked at `activateCleanupDelayedTriggers` and `delayedTriggersOnNextTurn`.
+
+**Ordering, both pairs.** Revokes fire before grants at the same boundary (`PhaseHandler.java:515-518`'s own comment,
+"do this first for ControlPlayer") — Cruel Entertainment's mutual pair depends on it. This port's own turn-boundary call
+order already does this (`delayedTriggersOnNextTurn` before `activateCleanupDelayedTriggers`, `turn.go:92-93`); the
+combat pair's own call sites must preserve the identical revoke-before-grant order. A revoke scheduled while the current
+boundary's own actions run must not itself fire at that same boundary (snapshot the list before running it,
+`Phase.excute`'s own precedent). A grant is skipped if its controlling player has already left the game.
 
 ## Consequences
 
 **Good:** unblocks the 11 real `ControlPlayer` lines. The scheduling piece is a genuinely small, additive extension of
 an existing pattern, not a new subsystem. The stack-based redirect state reproduces CR 800.4b's own revert-to-previous
-behavior for free.
+behavior for free. Reading the redirect needs no engine-wide audit: only two rules readers (Learn, Wish-family Sideboard
+origin) consult it, matching how narrow Java's own two readers are.
 
-**Bad:** every future effect that asks "who decides for player X" must remember to resolve `ControlledBy` rather than
-assume `X` decides for itself; a caller that reads `PlayerID` directly and dispatches to that seat's own fixed
-controller bypasses the redirect silently. The implementing commit must audit and convert the dispatch point(s), not
-just add the field.
+**Bad:** every future effect asking "who decides for player X" must remember X stays the acting player throughout — only
+a read that specifically needs to know _whose brain_ answers (today: none inside the engine) would consult
+`ControllingPlayer`/`IsControlled`; a rules reader that should exclude something for a controlled player (a third case
+beyond Learn and Wish, if the corpus ever needs one) and forgets to check `IsControlled` will silently diverge from Java
+the same way Learn and Wish would have without this ADR.
 
 **Neutral:** `scheduledAction` and `delayedTrigger` share gating logic but not a struct; a future third scheduled-thing
 either grows a third parallel list (acceptable at this scale) or motivates unifying the gating logic into a shared

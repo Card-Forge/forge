@@ -1,6 +1,6 @@
 # ADR-0031 — Camouflage: a DeclareBlocker Replacement Event
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-0035
 - **Date:** 2026-09-27
 - **Deciders:** Crucible session (M6 porter round)
 

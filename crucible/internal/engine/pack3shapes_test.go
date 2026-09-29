@@ -241,6 +241,44 @@ func TestEndTurnExilesSpellsOnStack(t *testing.T) {
 	}
 }
 
+// TestAbilityResolvedCarriesThePhaseItResolvedIn proves resolveTop
+// (stack.go) captures Phase/Active/Turn before calling Resolve, not after:
+// EndTurn jumps g.activePhase to Cleanup and calls beginPhase as part of
+// its own resolve, so a read taken after Resolve returns would describe
+// the wrong phase for the ability that just resolved.
+func TestAbilityResolvedCarriesThePhaseItResolvedIn(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	var sink recordingSink
+	g.SetSink(&sink)
+	ender := g.NewCard(creatureDefWithAbility(t, "Test Ender", "AB$ EndTurn | Cost$ T"), p, engine.Battlefield)
+	g.SetTurnState(1, p, engine.Main1)
+	g.Player(p).Life, g.Player(other).Life = 20, 20
+
+	if !g.ActivateAbility(p, ender, 0, engine.NewScriptedController()) {
+		t.Fatal("ActivateAbility(EndTurn) returned false, want true")
+	}
+	if err := g.ResolveStack(engine.NewRegistry(), engine.NewScriptedController()); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+
+	var resolvedPhase engine.PhaseType
+	found := false
+	for _, e := range sink.events {
+		if e.Kind == engine.AbilityResolved && e.Source == ender {
+			resolvedPhase, found = e.Phase, true
+		}
+	}
+	if !found {
+		t.Fatal("no AbilityResolved event for the EndTurn ability")
+	}
+	if resolvedPhase != engine.Main1 {
+		t.Errorf("AbilityResolved.Phase = %v, want Main1 (the phase EndTurn resolved in, not %v it jumped to)",
+			resolvedPhase, g.ActivePhase())
+	}
+}
+
 func TestRemoveFromGameSpellOnStack(t *testing.T) {
 	t.Parallel()
 	g, p, other := newTwoPlayerGame(t)

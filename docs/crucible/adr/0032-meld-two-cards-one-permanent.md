@@ -41,11 +41,11 @@ today.
 
 1. Move the secondary to `Exile` and give it a `MeldedWith CardID` back-pointer, treating its battlefield presence as
    purely notional (only the primary's card object is ever really "on the battlefield").
-2. Keep the secondary's own `Card` object present in the primary's owner's `Battlefield` zone (matching Java's
-   `PlayerZoneBattlefield.addToMelded`, which is a real zone membership, not a fiction), but excluded from the normal
-   battlefield-card enumeration everything else walks, via a `Melded bool`/`MeldedWith CardID` flag those walks already
-   have to skip (the same way `IsDesignationCard` already makes `BecomeMonarch`'s synthetic card invisible to fixture
-   dumps and other scans).
+2. Keep the secondary's own `Card` object's `Zone` field reading `Battlefield` (matching Java's own
+   `PlayerZoneBattlefield.addToMelded`), but hold it out of the zone's card collection entirely — Java's own
+   `addToMelded` never calls the zone's normal `add`, only a separate `meldedCards` list `getCards()` never reads, so
+   nothing needs a `Melded` flag checked at each enumeration site the way `IsDesignationCard` needs one for
+   `BecomeMonarch`'s synthetic card.
 
 **Splitting back apart (CR 712.4c):**
 
@@ -56,22 +56,27 @@ today.
 
 ## Decision
 
-**Secondary's location: Option 2.** The secondary's `Card` stays a real member of the primary's controller's
-`Battlefield` zone (matching Java's own model, not a fiction moved to `Exile`), carrying a new `Melded bool` field.
-Every walk that enumerates "the cards actually on the battlefield" for gameplay purposes (SBAs, combat eligibility,
-targeting, trigger `TriggerZones$ Battlefield` matching) skips a card with `Melded` set, the same
-skip-a-synthetic-marker discipline `IsDesignationCard` already established for `BecomeMonarch`'s synthetic card. The
-primary gets `MeldedWith CardID` (`NoCard` = not melded) naming the secondary.
+**Secondary's location: Option 2, corrected to match Java's actual mechanism.** `PlayerZoneBattlefield.addToMelded`
+(`PlayerZoneBattlefield.java:45-49`) does not add the secondary to the zone's own card collection at all: it removes the
+card from its old zone's collection, points `Card.setZone(this)` at the battlefield zone object directly, and adds it
+only to a separate `meldedCards` list `getCards()`/`contains()`/`size()` never read. So the secondary's `Zone` field
+reads `Battlefield` (matching Java, not a fiction moved to `Exile`), carrying a new `Melded bool` field, but it is a
+member of no `Zone`'s card set at all — not present-and-skipped, simply absent. Every walk that enumerates "the cards
+actually on the battlefield" (`Game.Zone(Battlefield, pid).Cards()` and its ~84 real call sites,
+`CardsIncludingPhasedOut`, the fixture dump) needs no added check at any of them: the secondary was never in the set
+they read, the identical "invisible without a per-site skip" property `IsDesignationCard` reaches only with an explicit
+check at each site. The primary gets `MeldedWith CardID` (`NoCard` = not melded) naming the secondary.
 
 **Face swap: reuses `SetState`'s existing precedent**, no new mechanism. The primary's `Def` swaps to its own `Faces[1]`
 (the meld face), `frontDef` holding the original for the revert.
 
-**Splitting apart: Option 2.** Reverting is not duration-tracked — it is triggered by the same zone-move code path that
-already exists for every other zone change, at the point a melded primary's `Zone` changes away from `Battlefield`. That
-code checks `MeldedWith`; if set, it un-swaps the primary's `Def` (`frontDef` restore) and moves the secondary
-(currently sitting `Melded` in the same zone) to its owner's zone matching wherever the primary is now headed (CR
-712.4c: both components go to the zone the event would have sent a single permanent to — e.g. both to their owners'
-graveyards on a destroy). The secondary's own `Melded` flag clears in the same step.
+**Splitting apart: Option 2.** Reverting is not duration-tracked — it is triggered by the same zone-move code paths that
+already exist for a card leaving `Battlefield` (both `Game.Move` and `Game.MoveToLibraryTop`, not `Move` alone), at the
+point a melded primary's `Zone` changes away from `Battlefield`. That code checks `MeldedWith`; if set, it un-swaps the
+primary's `Def` (`frontDef` restore) and moves the secondary (currently `Melded`, in no zone's own collection) to its
+owner's zone matching wherever the primary is now headed (CR 712.4c: both components go to the zone the event would have
+sent a single permanent to — e.g. both to their owners' graveyards on a destroy, or the secondary follows the primary on
+top of the library). The secondary's own `Melded` flag clears in the same step.
 
 **Corpus scope.** `MeldEffect.java`'s own `Tapped$` param and its exile-then-check-both-still-there gate (tokens and
 copies are explicitly excluded, `c.isToken() || c.getCloneOrigin() != null`) are the dominant real shape; anything past
@@ -84,10 +89,13 @@ corpus lines.
 synthetic-card-skip precedent) rather than inventing a third card-representation mechanism. `compile.Card`'s
 already-compiled meld face means no new compile-time work.
 
-**Bad:** every enumeration of "battlefield cards" gains one more flag to check (`Melded`), the same tax
-`IsDesignationCard` already imposes — a walk that forgets it will double-count a melded permanent as two creatures. The
-zone-move hook touches a shared, heavily-called path (`Game.Move`); the implementing commit must keep the added check
-cheap (an early return for the overwhelmingly common non-melded case) and additive, not restructure the function.
+**Bad:** the secondary being absent from its own zone's card collection is a sharper edge than a checked flag would be —
+any future code that reaches a melded secondary by means other than `MeldedWith`/`Melded` (a raw `CardID` held
+elsewhere, say) will find it reporting `Zone == Battlefield` while nothing that walks `Zone(Battlefield, ...).Cards()`
+ever surfaces it, a real trap for a reader who assumes those two facts agree the way they do for every other card. The
+zone-move hooks touch shared, heavily-called paths (`Game.Move`, `Game.MoveToLibraryTop`); the implementing commit must
+keep the added check cheap (an early return for the overwhelmingly common non-melded case) and additive, not restructure
+either function.
 
 **Neutral:** `Melded`/`MeldedWith` are new `Card` fields, plain values, carried by `Game.Clone` for free like every
 other such field.

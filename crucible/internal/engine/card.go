@@ -258,6 +258,19 @@ type Card struct {
 	frontDef   *compile.Card
 	Transforms int
 
+	// MeldedWith is Card.meldedWith (Card.java:1400) on a melded
+	// permanent (CR 712.4a, meldeffect.go): the other card it represents,
+	// NoCard for anything not melded. Def is then the meld face and frontDef
+	// this card's own front face, turnFrontFaceUp's revert. Leaving the
+	// battlefield splits the pair back apart (Game.unmeld, CR 712.4c).
+	MeldedWith CardID
+	// Melded marks the other card of a melded pair: PlayerZoneBattlefield.
+	// addToMelded (PlayerZoneBattlefield.java:45-49) points its Zone at the
+	// battlefield but adds it to no zone's card list, so no enumeration of
+	// the battlefield (Zone.Cards, CardsIncludingPhasedOut, Len, Contains)
+	// ever sees it; only its melded permanent's MeldedWith reaches it.
+	Melded bool
+
 	// roomDef is a Room's printed split card while it is a permanent or a
 	// spell cast as one of its halves (room.go, CR 709.5): its own
 	// characteristics (Def, or faceUpDef/uncopiedDef under a face-down or

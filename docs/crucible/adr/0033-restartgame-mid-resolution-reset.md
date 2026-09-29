@@ -1,6 +1,6 @@
 # ADR-0033 — RestartGame: Resetting the Running Game Mid-Resolution
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-0034
 - **Date:** 2026-09-27
 - **Deciders:** Crucible session (M6 porter round)
 
