@@ -149,8 +149,9 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     private volatile boolean isHosting = false;
-    private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-    private EventLoopGroup workerGroup = new NioEventLoopGroup();
+    // Created by startServer: an offline game reaches getInstance() but never needs the selectors
+    private EventLoopGroup bossGroup;
+    private EventLoopGroup workerGroup;
     private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
@@ -235,6 +236,8 @@ public final class FServerManager implements IHasForgeLog {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
         netLog.info("Starting Multiplayer Server");
+        bossGroup = new NioEventLoopGroup(1);
+        workerGroup = new NioEventLoopGroup();
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
@@ -322,8 +325,10 @@ public final class FServerManager implements IHasForgeLog {
         afkSlots.clear();
 
         try {
-            bossGroup.shutdownGracefully().sync();
-            workerGroup.shutdownGracefully().sync();
+            if (bossGroup != null) {
+                bossGroup.shutdownGracefully().sync();
+                workerGroup.shutdownGracefully().sync();
+            }
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -342,9 +347,6 @@ public final class FServerManager implements IHasForgeLog {
         isHosting = false;
         UPnPMapped = false;
         NetworkLogConfig.deactivateNetworkLogging();
-        // create new EventLoopGroups for potential restart
-        bossGroup = new NioEventLoopGroup(1);
-        workerGroup = new NioEventLoopGroup();
     }
 
     public boolean isHosting() {
