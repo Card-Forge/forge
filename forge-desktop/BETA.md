@@ -1,10 +1,30 @@
-# Mana Table — beta 0.1.0-beta.23
+# Mana Table — beta 0.1.0-beta.24
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 23 focuses on **finding cards, reviewing your deck, and suggestions**:
+Beta 24 brings an **Arena-inspired card and battlefield presentation**:
+
+- One open board with creatures toward the center and lands behind them, including
+  at smaller window sizes. Compact artwork tiles carry readable names and large
+  power/toughness badges; tapped, new, damage, and counter indicators use engine state.
+- Portrait cards remain in your steady hand fan, command zone, zone browsers, and
+  full-card inspection. Hover or keyboard focus lifts a hand card. Click and drag
+  still use the engine's current legal actions.
+- Your life, available mana, and commander damage sit at the lower left, beside
+  the hand. The decision controls sit at the lower right. The latest action stays
+  visible; expand **Action history** to review the last 120 events.
+- Commander tables keep every player's own battlefield, piles, and targeting
+  controls. Select a seat to bring that opponent into view at larger tables.
+
+The layout takes inspiration from
+[Arena's card presentation](https://magic.wizards.com/en/news/mtg-arena/we-put-battles-on-mtg-arena-what-was-that-like),
+with Mana Table's own interface and CSS board. No Arena backgrounds or interface
+assets are bundled. Battlefield artwork is cropped from the existing cached card
+portrait; unusual frames may crop differently. Hover always shows the full card.
+
+Beta 23's **card discovery, deck review, and suggestions** remain available:
 
 - Library cards show how many copies are in the selected section, plus copies
   elsewhere. Use **+ / −** without losing your place. Imported printings count
@@ -88,8 +108,8 @@ by someone with access; the app does not sign in to Moxfield.
 10. **Deck workshop** returns to your decks while the match waits for your next
     decision. **Play** resumes the table. **Concede** ends the game.
 
-Your life, available mana, and commander damage sit in the match header, outside
-the battlefield. The playmat extends beneath a persistent fan of cards. Hover
+Your life, available mana, and commander damage sit beside the hand at the lower
+left. The battlefield extends beneath a persistent fan of portrait cards. Hover
 or focus one card to lift it; neighboring cards slide aside, and the rest of the
 hand stays in place. Approach an overlapping battlefield card from the table to
 open a local gap in the fan. Canceled drags glide back into the hand. **Esc**
@@ -107,9 +127,9 @@ lets you choose up to two basic lands after sacrificing a land, and the engine
 puts those chosen lands onto the battlefield tapped. The picker closes when
 the choice resolves; hidden library cards are no longer shown afterward.
 
-Battlefield portraits fit their actual row height, including card names, tap
-states and scrollbars. Short windows place the land and battlefield sections
-side by side so each portrait has enough height. Artifacts and creatures that also count as lands carry
+Battlefield artwork tiles fit their actual row height, including card names, tap
+states and scrollbars. Lands stay behind the front rank even in short windows.
+Artifacts and creatures that also count as lands carry
 a **Land** badge; their preview shows their current types. For example, Toph,
 the First Metalbender makes your nontoken artifacts lands while she is on the
 battlefield, so they can be earthbend targets. Land creatures join the creature
@@ -144,9 +164,9 @@ Card previews also work in the library, deck list, and opening-hand practice.
 Keyboard focus shows the same details. Press Esc or move away to dismiss a preview;
 for long rules, scroll while hovering over the card to read the remaining text.
 
-The match table has separate playmats for you and each opponent. Lands sit behind
+The open match table has a battlefield for you and each opponent. Lands sit behind
 other permanents; lands that become creatures move into the main battlefield row.
-Library, graveyard, and exile piles sit beside each playmat. Click a graveyard or
+Library, graveyard, and exile piles sit beside each battlefield. Click a graveyard or
 exile pile to browse its cards, then click it again to close it. Crowded rows and
 large hands scroll sideways. Life totals remain clickable for player targets.
 
@@ -164,10 +184,10 @@ image downloads. The window supports widths down to 1000 pixels; at smaller
 sizes the deck workshop uses two columns with hover previews for card details.
 
 The heading shows whose turn it is, the turn number, and the current step. The
-strip between playmats tracks Beginning, Main 1, Combat, Main 2, and Ending.
+strip between battlefields tracks Beginning, Main 1, Combat, Main 2, and Ending.
 The decision panel says when it is **your action**, including responses during
-the opponent's turn. **Recent actions** retains the last 120 events: plays,
-spell resolutions, combat, and life changes. Scroll back to review what happened.
+the opponent's turn. **Latest action** shows what just happened. Expand **Action
+history** for the last 120 events: plays, spell resolutions, combat, and life changes.
 
 Playing a land updates your hand and battlefield, then waits in the current
 phase. The game does not automatically pass just because you have nothing else

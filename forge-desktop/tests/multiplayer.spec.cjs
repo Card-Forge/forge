@@ -78,9 +78,10 @@ test('four and six player tables stay usable at desktop sizes and acknowledge ac
           const arena = document.querySelector('.match-arena').getBoundingClientRect();
           return [...element.querySelectorAll('.match-life, .match-player-info, .match-commander-damage summary')].every(control => {
             const b = control.getBoundingClientRect(), hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
-            return b.top >= 0 && b.bottom <= arena.top && b.right <= innerWidth && control.contains(hit);
+            const hand = document.querySelector('#match-hand').getBoundingClientRect();
+            return b.top >= arena.top && b.bottom <= arena.bottom && b.right < hand.left && control.contains(hit);
           });
-        }), 'Your life and player controls stay above the table and can be reached').toBe(true);
+        }), 'Your life and player controls stay beside the hand and can be reached').toBe(true);
         const last = state.players.at(-1);
         await page.locator(`[data-focus-player="${last.id}"]`).click();
         const bounds = await page.locator(`#match-opponent [data-player-id="${last.id}"]`).evaluate(element => {

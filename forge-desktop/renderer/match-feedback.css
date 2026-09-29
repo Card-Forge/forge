@@ -5,8 +5,7 @@
 #match-turn { padding: 5px 9px; border: 1px solid #716b4e; border-radius: 14px; }
 .match-heading-actions { gap: 14px; }
 #match-motion { font-size: 10px; color: #acbaa8; }
-.match-lane.turn-active { border-color: #c6b37c8c; box-shadow: inset 0 0 0 2px #d6be8b10, 0 0 18px #d6be8b12; }
-.opponent-lane.turn-active { border-color: #ba92766e; }
+.match-lane.turn-active { background: radial-gradient(ellipse at 50% 50%, #d6be8b08, transparent 75%); }
 .match-phase { gap: 10px; letter-spacing: 0; font-size: 10px; }
 .match-phase::before, .match-phase::after { display: none; }
 .phase-step { color: #849680; padding: 3px 10px; border-radius: 10px; }
@@ -35,10 +34,11 @@
 #match-turn-guide-list p { font-size: 11px; line-height: 1.5; margin-top: 4px; }
 #match-turn-guide-list [aria-current="step"] { background: #dac38a1c; border-radius: 4px; }
 #match-turn-guide-list [aria-current="step"] strong { color: #f2dda7; }
-.match-history { display: flex; flex-direction: column; min-height: 155px; flex: 1; padding: 15px; background: #192620; border-color: #415540; }
-.match-history .eyebrow { font-size: 9px; letter-spacing: 1.5px; }
-#match-latest { font: 13px/1.5 Georgia; color: #e4dfc3; margin: 10px 0; padding: 9px 0; border-bottom: 1px solid #43533d; }
-#match-history-list { list-style: none; padding: 0 5px 0 0; margin: 0; min-height: 0; overflow: auto; flex: 1; }
+.match-recent { order: 0; padding: 12px 14px; background: #111f2ac9; border: 1px solid #94aca333; border-radius: 8px; flex-shrink: 0; }
+.match-recent .eyebrow { font-size: 9px; letter-spacing: 1.5px; color: #bbcbc6; }
+.match-history summary { cursor: pointer; color: #d6c38f; font-size: 11px; }
+#match-latest { font: 13px/1.5 Georgia; color: #e4dfc3; margin: 8px 0 10px; max-height: 80px; overflow: auto; }
+#match-history-list { list-style: none; padding: 0 5px 0 0; margin: 8px 0; max-height: 230px; overflow: auto; }
 #match-history-list li { padding: 8px 0; border-bottom: 1px solid #35473677; }
 #match-history-list li > span { font-size: 8px; letter-spacing: .8px; text-transform: uppercase; color: #98ae8c; }
 #match-history-list p { color: #c0ccb9; font-size: 11px; line-height: 1.5; margin-top: 4px; overflow-wrap: anywhere; }
@@ -47,6 +47,19 @@
 .match-history > small { color: #92a08a; font-size: 8px; padding-top: 8px; }
 .match-notices { flex-shrink: 0; margin-top: 0; }
 .match-notices > summary { color: #9faf97; font-size: 10px; cursor: pointer; }
+/* The decision lives at the lower right; history and help can expand above it.
+   Keep this column scrollable so long engine choices never lose their controls. */
+.match-rail { position: static; min-height: 0; display: flex; flex-direction: column; gap: 8px; padding: 10px 10px 10px 0; overflow-y: auto; }
+.match-rail > * { flex-shrink: 0; }
+.match-turn-guide, .match-notices { order: 1; padding: 8px 12px; background: #15252d99; border: 1px solid #94aca326; border-radius: 7px; }
+.match-stack { order: 2; max-height: 220px; overflow: auto; background: #17232de8; padding: 14px; }
+.match-prompt { order: 3; margin-top: auto; padding: 16px; border-color: #b3a47899; background: linear-gradient(150deg, #263c43f2, #15212bf5); box-shadow: 0 6px 20px #0005; }
+.match-prompt h2 { font-size: 22px; }
+.match-response-settings { order: 4; padding: 10px 12px; background: #15252dcc; border-color: #94aca333; }
+.match-response-settings label { font-size: 11px; }
+.match-response-settings p { margin-top: 5px; font-size: 10px; }
+.match-input-buttons { margin-top: 14px; }
+.match-prompt .button.primary { background: linear-gradient(#f0d495, #c9a86a); color: #18232a; border-color: #ffe4a9; box-shadow: 0 0 18px #eac16e20; }
 .match-flight { position: fixed; z-index: 30; pointer-events: none; margin: 0; transform-origin: top left; }
 body:not(.in-match) .match-flight { display: none; }
 #match-view[data-motion="off"] *, #match-view[data-motion="off"] *::before, #match-view[data-motion="off"] *::after { animation: none !important; transition: none !important; }
@@ -59,5 +72,17 @@ body:not(.in-match) .match-flight { display: none; }
   .match-heading-actions { gap: 10px; }
   .phase-step { padding: 3px 7px; }
   .match-phase { gap: 6px; }
-  .match-history { padding: 12px; }
+  .match-prompt { padding: 13px; }
+}
+@media (max-height: 800px) {
+  .match-rail { gap: 6px; }
+  .match-recent { padding: 10px 12px; }
+  #match-latest { font-size: 12px; line-height: 1.4; margin: 6px 0 8px; }
+  .match-turn-guide, .match-notices { padding: 6px 12px; }
+  .match-prompt { padding: 12px; }
+  .match-prompt h2 { font-size: 20px; margin: 8px 0; }
+  .match-prompt p { line-height: 1.5; }
+  .match-step-context { margin: 8px 0; }
+  .match-input-buttons { margin-top: 10px; }
+  .match-pass-hint { line-height: 1.35; padding-bottom: 0; }
 }

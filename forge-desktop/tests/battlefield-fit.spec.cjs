@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { launchDesktop } = require('./support/desktop.cjs');
 
-test('crowded battlefield portraits, names and stats fit each row at two, four and six seats', async () => {
+test('crowded battlefield tiles keep readable names and stats in front and back rows at two, four and six seats', async () => {
   test.setTimeout(180000);
   const { application, executable } = await launchDesktop('battlefield-fit');
   try {
@@ -44,6 +44,7 @@ test('crowded battlefield portraits, names and stats fit each row at two, four a
           for (let i = 0; i < 18; i++) {
             const copy = (row.classList.contains('lands-row') ? land : creature).cloneNode(true);
             copy.classList.remove('match-hand-card');
+            copy.classList.add('battlefield-card');
             copy.classList.toggle('tapped', i % 2 === 0);
             copy.querySelector('.match-hand-cost')?.remove();
             copy.querySelector('.match-hand-details')?.remove();
@@ -64,12 +65,19 @@ test('crowded battlefield portraits, names and stats fit each row at two, four a
           return [...row.querySelectorAll('.match-card, .card-art, .match-card-name, .match-stats')].flatMap(element => {
             const box = element.getBoundingClientRect();
             return box.top < top - .5 || box.bottom > bottom + .5 || box.height < 1
-              || element.matches('.match-card') && box.width < 28
+              || element.matches('.match-card') && box.width < 70
+              || element.matches('.match-card-name') && parseFloat(getComputedStyle(element).fontSize) < 11
+              || element.matches('.match-stats') && parseFloat(getComputedStyle(element).fontSize) < 17
               ? [{ seat: row.closest('[data-player-id]').dataset.playerId, row: row.className,
                 element: element.className, top: box.top - top, bottom: bottom - box.bottom, height: box.height }] : [];
           });
         }));
-        expect(await check(), `${count} seats at ${size}: full card, name and stats inside scrollport`).toEqual([]);
+        expect(await check(), `${count} seats at ${size}: artwork, name and stats inside scrollport`).toEqual([]);
+        expect(await page.locator('.match-battlefield').evaluateAll(fields => fields.every(field => {
+          const front = field.querySelector('.permanents-row').getBoundingClientRect();
+          const back = field.querySelector('.lands-row').getBoundingClientRect();
+          return field.closest('.human-lane') ? front.bottom <= back.top : back.bottom <= front.top;
+        })), 'Lands stay behind the front row at every window size').toBe(true);
         for (const row of await page.locator('#match-human .battlefield-row').all()) {
           const last = row.locator('.match-card').last();
           await last.focus();
@@ -77,10 +85,10 @@ test('crowded battlefield portraits, names and stats fit each row at two, four a
           await last.hover();
           expect(await check(), `${count} seats at ${size}: hovered/tapped card remains visible`).toEqual([]);
         }
-        if (!executable && size[0] === 1000) {
+        if (!executable && [1540, 1000].includes(size[0])) {
           await page.mouse.move(0, 0);
           await page.keyboard.press('Escape');
-          await page.screenshot({ path: test.info().outputPath(`crowded-${count}-seats.png`) });
+          await page.screenshot({ path: test.info().outputPath(`crowded-${count}-seats-${size[0]}.png`) });
         }
       }
       await page.evaluate(id => window.forge.request('matchConcede', { sessionId: id }), state.id);

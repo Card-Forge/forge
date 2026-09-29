@@ -52,6 +52,18 @@ loader. CSS is layered: base workshop/match styles, battlefield layout, then
 feature-specific styles. Keep feature behavior in its owning file and document
 cross-file assumptions instead of expanding the central `match.js` indefinitely.
 
+Battlefield cards use an explicit `battlefield` presentation in `cardTile`.
+`battlefield.css` crops their cached portrait artwork and lays out names, current
+stats, counters, damage, and tap indicators separately. Hand/command/zone cards
+retain portrait images; `card-preview.js` always inspects the full engine-projected
+card, including its permitted other face. The crop is presentation only and may
+be less accurate for unusual frames. Two battlefield ranks remain vertical at
+every supported size, with per-row horizontal scrolling for crowded boards.
+`hand-view.css` reserves the lower-left player controls; `hand-view.js` keeps the
+fan and local gap behavior. `match-feedback.css` places the action prompt at the
+lower right, with latest activity and expandable history above. Game overlays
+sit above the hand and player controls while selecting combat or library cards.
+
 ## A game action, end to end
 
 1. The engine publishes a stable, immutable snapshot for the trusted human viewer.

@@ -1,7 +1,7 @@
 /* A steady fan of portrait cards, held partly below the edge of the table. */
 .match-hand-card { grid-template-areas: 'cost' 'art' 'name' 'details'; }
-.match-hand { position: absolute; left: 16px; right: 16px; bottom: 4px; height: var(--hand-height); display: block; padding: 0; overflow: visible; z-index: 12; pointer-events: none; }
-.match-hand-label { position: absolute; left: 16px; bottom: calc(var(--hand-height) + 7px); max-width: min(440px, calc(100% - 160px)); z-index: 12; pointer-events: none; justify-content: flex-start; gap: 12px; padding: 3px 8px; border-radius: 4px; background: #14271feb; }
+.match-hand { position: absolute; left: 154px; right: 16px; bottom: 4px; height: var(--hand-height); display: block; padding: 0; overflow: visible; z-index: 12; pointer-events: none; }
+.match-hand-label { position: absolute; left: 154px; bottom: calc(var(--hand-height) + 7px); max-width: min(440px, calc(100% - 190px)); z-index: 12; pointer-events: none; justify-content: flex-start; gap: 12px; padding: 3px 8px; border-radius: 4px; background: #14232bea; }
 .match-hand-label > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .match-hand > .match-hand-card {
   position: absolute; left: var(--hand-x); bottom: -34px;
@@ -13,13 +13,15 @@
 }
 .match-hand.hand-yielding > .match-hand-card { pointer-events: none; }
 .match-hand > [data-hand-visible="false"] { opacity: 0; pointer-events: none; }
-.match-hand-card .match-hand-cost { grid-area: cost; }
-.match-hand-card .match-card-face { grid-area: art; }
-.match-hand-card .match-card-name { grid-area: name; }
-.match-hand-card .match-hand-details { grid-area: details; }
+.match-hand-card .match-hand-cost { position: absolute; left: 5px; right: 5px; top: 5px; z-index: 1; padding: 2px; border-radius: 4px; background: #10202de8; }
+.match-hand-card .match-card-face { position: absolute; inset: 0; }
+.match-hand-card .card-art { border-radius: 7px; }
+.match-hand-card .card-art img { object-fit: contain; object-position: center; }
+.match-hand-card .match-card-name { position: absolute; left: 5px; right: 5px; bottom: 34px; padding: 2px 3px; max-height: 36px; border-radius: 3px; background: #13232deb; }
+.match-hand-card .match-hand-details { position: absolute; left: 5px; right: 5px; bottom: 5px; height: 26px; padding: 0 2px; border-radius: 3px; background: #13232deb; }
 .match-hand > .match-hand-card:not(.hand-raised) { grid-template-rows: auto minmax(0, 1fr) 0 0; }
 .match-hand > .match-hand-card:not(.hand-raised) .match-card-name { position: absolute; grid-area: auto; left: 7px; right: 7px; bottom: 53px; display: block; white-space: nowrap; text-overflow: ellipsis; background: #17251fe6; }
-.match-hand > .match-hand-card:not(.hand-raised) .match-hand-details { position: absolute; grid-area: auto; left: 7px; bottom: 76px; }
+.match-hand > .match-hand-card:not(.hand-raised) .match-hand-details { position: absolute; grid-area: auto; left: 7px; right: auto; bottom: 76px; }
 .match-hand > .match-hand-card:not(.hand-raised) .match-hand-type { display: none; }
 .match-hand > .match-hand-card.hand-raised {
   z-index: 30; transform: translate(0, -44px) rotate(0deg) scale(1.216); border-color: #e5cc8d;
@@ -28,11 +30,14 @@
 #match-view .match-hand[data-can-play="true"] > .match-hand-card.actionable { cursor: grab; }
 .match-hand > .match-hand-card.drag-source { opacity: .35; }
 .hand-page { position: absolute; bottom: 43px; z-index: 13; width: 26px; height: 44px; padding: 0; border: 1px solid #a4ae85; border-radius: 6px; background: #1c3029; color: #f0d8a0; font-size: 28px; box-shadow: 0 3px 9px #0009; }
-.hand-page[data-direction="previous"] { left: 10px; }
+.hand-page[data-direction="previous"] { left: 148px; }
 .hand-page[data-direction="next"] { right: 10px; }
 .match-arena:has(.combat-view[data-mode="attack"]:not([hidden])) .match-hand,
 .match-arena:has(.combat-view[data-mode="block"]:not([hidden])) .match-hand,
 .match-arena:has(.library-picker:not([hidden])) .match-hand { z-index: 1; }
+.match-arena:has(.combat-view[data-mode="attack"]:not([hidden])) #match-self,
+.match-arena:has(.combat-view[data-mode="block"]:not([hidden])) #match-self,
+.match-arena:has(.library-picker:not([hidden])) #match-self { z-index: 1; }
 .match-arena:has(.combat-view[data-mode="attack"]:not([hidden])) .hand-page,
 .match-arena:has(.combat-view[data-mode="block"]:not([hidden])) .hand-page,
 .match-arena:has(.library-picker:not([hidden])) .hand-page { visibility: hidden; }
@@ -49,4 +54,4 @@
 .combat-lane.block-drop-allowed:not(.block-drop-ready) { border-color: #bad494; }
 @media (prefers-reduced-motion: reduce) { .match-hand > .match-hand-card { transition: none; } }
 #match-view[data-motion="off"] .match-hand > .match-hand-card { transition: none; }
-@media (max-width: 1250px) { .match-hand { left: 10px; right: 10px; } .match-hand-label { left: 10px; } }
+@media (max-width: 1250px) { .match-hand { right: 10px; } }
