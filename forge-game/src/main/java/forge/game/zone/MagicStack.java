@@ -269,7 +269,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         recordUndoableActions(sp, activator);
 
-        if (sp.isManaAbility()) { // Mana Abilities go straight through
+        // Mana Abilities go straight through
+        if (sp.isManaAbility()) {
             // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
             game.getAction().checkStaticAbilities();
 
