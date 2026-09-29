@@ -112,6 +112,78 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
+    PauperCommander ( Range.is(99),                       Range.of(0, 10), 1 ) {
+        // Pauper Commander (PDH): the commander is an uncommon creature (the legendary
+        // requirement is relaxed) and the rest of the deck (the 99) is all commons.
+        // Rarity is judged by whether a card has EVER been printed at that rarity in any
+        // set (matching Forge's Pauper format via CardDb.wasPrintedAtRarity), not by the
+        // specific printing chosen for the deck.
+
+        // Official PDH banlist (pdhhomebase.com/rules): two named cards, plus cards Wizards
+        // removed from all constructed formats (ante / dexterity / subgame / offensive) and
+        // Conspiracy-type cards (handled by type below).
+        private final Set<String> BANNED = ImmutableSet.of(
+                "Mystic Remora", "Rhystic Study",
+                "Amulet of Quoz", "Bronze Tablet", "Contract from Below", "Darkpact", "Demonic Attorney",
+                "Jeweled Bird", "Rebirth", "Tempest Efreet", "Timmerian Fiends", "Chaos Orb", "Falling Star",
+                "Shahrazad", "Cleanse", "Crusade", "Imprison", "Invoke Prejudice", "Jihad",
+                "Pradesh Gypsies", "Stone-Throwing Devils");
+
+        // Cards Forge tags "common" only via a special product that isn't a real common printing,
+        // so they slip past the rarity check despite not actually being commons. Sol Ring is
+        // officially uncommon everywhere and is only "common" in Forge via the 30th Anniversary
+        // proxy set. (Arcane Signet, Commander's Sphere, Thought Vessel etc. ARE genuinely printed
+        // at common and are Pauper-legal, so they are NOT listed here.)
+        private final Set<String> NOT_PAUPER_COMMON = ImmutableSet.of(
+                "Sol Ring");
+
+        @Override
+        public boolean isLegalCard(PaperCard card) {
+            if (BANNED.contains(card.getName()) || NOT_PAUPER_COMMON.contains(card.getName())
+                    || card.getRules().getType().isConspiracy()) {
+                return false;
+            }
+            if (card.getRules().getType().isBasicLand()) {
+                return true;
+            }
+            // Pauper legality = the common slot (C) or the land slot (L, e.g. nonbasic lands
+            // printed at "land" rarity), matching Forge's Pauper format (Rarities: L, C).
+            return StaticData.instance().getCommonCards().wasPrintedAtRarity(CardRarity.Common).test(card)
+                    || StaticData.instance().getCommonCards().wasPrintedAtRarity(CardRarity.BasicLand).test(card);
+        }
+
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            // PDH commanders are uncommon creatures, vehicles, or spacecraft (need not be legendary).
+            // Rarity is validated via the PaperCard overload.
+            if (BANNED.contains(rules.getName())) {
+                return false;
+            }
+            CardType type = rules.getType();
+            return type.isCreature() || type.isVehicle() || type.isSpacecraft();
+        }
+
+        @Override
+        public boolean isLegalCommander(PaperCard card) {
+            return isLegalCommander(card.getRules())
+                    && StaticData.instance().getCommonCards().wasPrintedAtRarity(CardRarity.Uncommon).test(card);
+        }
+
+        @Override
+        public String getDeckConformanceProblem(Deck deck) {
+            String problem = super.getDeckConformanceProblem(deck);
+            if (problem != null) {
+                return problem;
+            }
+            // Enforce commons-only for the main deck (the 99).
+            for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+                if (!isLegalCard(cp.getKey())) {
+                    return TextUtil.concatWithSpace("contains a card that is not a common:", cp.getKey().getName());
+                }
+            }
+            return null;
+        }
+    },
     PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
     Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4) {
         @Override
@@ -158,7 +230,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl || this == PauperCommander;
     }
 
     public boolean hasSignatureSpell() {
@@ -324,7 +396,7 @@ public enum DeckFormat {
                 }
 
                 for (PaperCard pc : commanders) {
-                    if (!isLegalCommander(pc.getRules())) {
+                    if (!isLegalCommander(pc)) {
                         return "has an illegal commander";
                     }
                     cmdCI |= pc.getRules().getColorIdentity().getColor();
@@ -627,6 +699,10 @@ public enum DeckFormat {
         return rules.canBeCommander();
     }
 
+    public boolean isLegalCommander(PaperCard card) {
+        return isLegalCommander(card.getRules());
+    }
+
     public Predicate<Deck> isLegalDeckPredicate() {
         return deck -> getDeckConformanceProblem(deck) == null;
     }
@@ -662,7 +738,7 @@ public enum DeckFormat {
     }
 
     public Predicate<PaperCard> isLegalCommanderPredicate() {
-        return card -> isLegalCommander(card.getRules());
+        return card -> isLegalCommander(card);
     }
 
     /**

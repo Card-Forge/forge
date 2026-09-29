@@ -94,7 +94,7 @@ public class VLobby implements ILobbyView {
      */
     private static final ImmutableList<GameType> GAME_FORMATS = ImmutableList.of(
             GameType.Constructed, GameType.Commander, GameType.Oathbreaker,
-            GameType.Brawl, GameType.TinyLeaders,
+            GameType.Brawl, GameType.TinyLeaders, GameType.PauperCommander,
             GameType.MomirBasic, GameType.MoJhoSto);
 
     private final FComboBoxPanel<GameType> cboFormatPanel =
@@ -815,6 +815,7 @@ public class VLobby implements ILobbyView {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
+        case PauperCommander:
             decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
             break;
         case Planechase:
@@ -1226,6 +1227,12 @@ public class VLobby implements ILobbyView {
                 forCommander = true;
                 deckType = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
                 prefKey = FPref.BRAWL_DECK_STATES[iSlot];
+                break;
+            case PauperCommander:
+                forCommander = true;
+                // Human picks from the deck list; AI seats default to a generated (Pauper-aware) deck.
+                deckType = iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_COMMANDER_DECK;
+                prefKey = FPref.PAUPER_COMMANDER_DECK_STATES[iSlot];
                 break;
             default:
                 forCommander = false;

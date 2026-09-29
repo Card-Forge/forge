@@ -129,6 +129,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
                 wantUnique = true;
                 break;
+            case PauperCommander:
+                allSections.add(DeckSection.Commander);
+
+                commanderPool = FModel.getPauperCommanderPool();
+                normalPool = FModel.getPauperCommanderCards();
+
+                wantUnique = true;
+                break;
             default:
         }
 
@@ -175,6 +183,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 break;
             case TinyLeaders:
                 this.controller = new DeckController<>(FModel.getDecks().getTinyLeaders(), this, newCreator);
+                break;
+            case PauperCommander:
+                this.controller = new DeckController<>(FModel.getDecks().getPauperCommander(), this, newCreator);
                 break;
             default:
         }

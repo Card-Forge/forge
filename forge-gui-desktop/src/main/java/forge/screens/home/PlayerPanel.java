@@ -337,7 +337,8 @@ public class PlayerPanel extends FPanel {
     /** The selected game format puts the deck's leader in the command zone. */
     private boolean formatUsesCommandZone() {
         return lobby.hasVariant(GameType.Commander) || lobby.hasVariant(GameType.Oathbreaker)
-                || lobby.hasVariant(GameType.TinyLeaders) || lobby.hasVariant(GameType.Brawl);
+                || lobby.hasVariant(GameType.TinyLeaders) || lobby.hasVariant(GameType.Brawl)
+                || lobby.hasVariant(GameType.PauperCommander);
     }
 
     private void updateVariantControlsVisibility() {
@@ -546,6 +547,7 @@ public class PlayerPanel extends FPanel {
                     lobby.hasVariant(GameType.Oathbreaker) ? GameType.Oathbreaker :
                     lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders :
                     lobby.hasVariant(GameType.Brawl) ? GameType.Brawl :
+                    lobby.hasVariant(GameType.PauperCommander) ? GameType.PauperCommander :
                     GameType.Commander);
             cmdDeckSelectorBtn.requestFocusInWindow();
             lobby.changePlayerFocus(index);

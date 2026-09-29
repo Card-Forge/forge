@@ -327,6 +327,15 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         BRAWL_P7_DECK_STATE(""),
         BRAWL_P8_DECK_STATE(""),
 
+        PAUPER_COMMANDER_P1_DECK_STATE(""),
+        PAUPER_COMMANDER_P2_DECK_STATE(""),
+        PAUPER_COMMANDER_P3_DECK_STATE(""),
+        PAUPER_COMMANDER_P4_DECK_STATE(""),
+        PAUPER_COMMANDER_P5_DECK_STATE(""),
+        PAUPER_COMMANDER_P6_DECK_STATE(""),
+        PAUPER_COMMANDER_P7_DECK_STATE(""),
+        PAUPER_COMMANDER_P8_DECK_STATE(""),
+
         SHORTCUT_SHOWSTACK ("83"),
         SHORTCUT_SHOWCOMBAT ("67"),
         SHORTCUT_SHOWCONSOLE ("76"),
@@ -400,6 +409,12 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
                 BRAWL_P3_DECK_STATE, BRAWL_P4_DECK_STATE,
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
+
+        public static FPref[] PAUPER_COMMANDER_DECK_STATES = {
+                PAUPER_COMMANDER_P1_DECK_STATE, PAUPER_COMMANDER_P2_DECK_STATE,
+                PAUPER_COMMANDER_P3_DECK_STATE, PAUPER_COMMANDER_P4_DECK_STATE,
+                PAUPER_COMMANDER_P5_DECK_STATE, PAUPER_COMMANDER_P6_DECK_STATE,
+                PAUPER_COMMANDER_P7_DECK_STATE, PAUPER_COMMANDER_P8_DECK_STATE };
 
         /** Phase stop prefs in PhaseType order (UPKEEP through CLEANUP, skipping UNTAP). */
         public static FPref[] PHASES_AI = {

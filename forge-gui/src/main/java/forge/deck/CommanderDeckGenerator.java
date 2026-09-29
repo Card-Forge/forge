@@ -24,7 +24,8 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
             return getBrawlDecks(format, isForAi, isCardGen);
         }
         ItemPool<PaperCard> uniqueCards;
-        if (isCardGen){
+        if (isCardGen && !format.equals(DeckFormat.PauperCommander)){
+            // Pauper Commander has no card-relation matrix; list all legal commanders instead of an empty set.
             uniqueCards = new ItemPool<>(PaperCard.class);
             String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
             HashMap<String, List<Map.Entry<PaperCard, Integer>>> matrixPool = CardRelationMatrixGenerator.cardPools.get(matrixKey);
