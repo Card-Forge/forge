@@ -47,15 +47,29 @@
 .match-history > small { color: #92a08a; font-size: 8px; padding-top: 8px; }
 .match-notices { flex-shrink: 0; margin-top: 0; }
 .match-notices > summary { color: #9faf97; font-size: 10px; cursor: pointer; }
-/* The decision lives at the lower right; history and help can expand above it.
-   Keep this column scrollable so long engine choices never lose their controls. */
-.match-rail { position: static; min-height: 0; display: flex; flex-direction: column; gap: 8px; padding: 10px 10px 10px 0; overflow-y: auto; }
-.match-rail > * { flex-shrink: 0; }
+/* The rail never scrolls. Each information section and the prompt body own
+   their overflow; the decision buttons and response controls keep their seat. */
+.match-rail { position: relative; min-height: 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 10px 10px 10px 0; overflow: hidden; }
+.match-rail-info { display: flex; flex-direction: column; gap: 6px; flex: 1 1 0; min-height: min(180px, 30%); overflow: hidden; }
+.match-rail-info > * { flex: 1 1 auto; min-height: 38px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.match-rail-info > details:not([open]) { flex: 0 0 auto; }
+.match-rail-info > details > summary { position: sticky; top: -8px; z-index: 1; background: #172930; padding-block: 4px; }
+.match-rail-info #match-turn-guide-list, .match-rail-info #match-history-list { max-height: none; overflow: visible; }
+.match-rail-info .match-history > summary { padding-block: 5px; }
 .match-turn-guide, .match-notices { order: 1; padding: 8px 12px; background: #15252d99; border: 1px solid #94aca326; border-radius: 7px; }
 .match-stack { order: 2; max-height: 220px; overflow: auto; background: #17232de8; padding: 14px; }
-.match-prompt { order: 3; margin-top: auto; padding: 16px; border-color: #b3a47899; background: linear-gradient(150deg, #263c43f2, #15212bf5); box-shadow: 0 6px 20px #0005; }
+.match-prompt { order: 3; flex: 0 1 auto; display: flex; flex-direction: column; min-height: 160px; max-height: 58%; margin-top: 0; padding: 16px; overflow: hidden; border-color: #b3a47899; background: linear-gradient(150deg, #263c43f2, #15212bf5); box-shadow: 0 6px 20px #0005; }
+.match-prompt-body { min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.match-prompt-body:focus-visible { outline: 1px solid #b3a478; outline-offset: -1px; }
+.match-prompt-body .match-prompt-text, .match-prompt-body .match-response-detail > p,
+.match-prompt-body .match-choices, .match-prompt-body .match-selected { max-height: none; overflow: visible; }
+.match-prompt-actions { flex: 0 0 auto; display: flex; flex-direction: column; gap: 8px; padding-top: 10px; border-top: 1px solid #b3a47833; margin-top: 8px; }
+.match-prompt-actions .match-input-buttons { margin-top: 0; }
+.match-prompt-actions .button { width: 100%; }
 .match-prompt h2 { font-size: 22px; }
-.match-response-settings { order: 4; padding: 10px 12px; background: #15252dcc; border-color: #94aca333; }
+.match-response-settings { order: 4; flex: 0 0 auto; position: relative; z-index: 2; overflow: visible; padding: 10px 12px; background: #15252dcc; border-color: #94aca333; }
+.match-rail .response-stops-body { position: absolute; z-index: 5; bottom: calc(100% + 6px); left: 0; right: 0; max-height: min(300px, 42dvh); overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; padding: 12px; background: #1b3038; border: 1px solid #a39872; border-radius: 7px; box-shadow: 0 -8px 25px #0008; }
+.response-stops[open] > summary { color: #f0d495; }
 .match-response-settings label { font-size: 11px; }
 .match-response-settings p { margin-top: 5px; font-size: 10px; }
 .match-input-buttons { margin-top: 14px; }

@@ -46,7 +46,7 @@
 .zoom-face-hint { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 5px; border-radius: 5px; color: #ffedc6; background: #16242bee; text-align: center; font-size: 11px; }
 .zoom-stats { position: absolute; right: 9px; bottom: 9px; min-width: 44px; padding: 3px 8px; border: 1px solid #c4bda5; border-radius: 7px 2px; background: #f0e7ce; color: #212820; font: 700 21px Georgia; box-shadow: 0 2px 5px #0009; }
 .table-card-zoom:has(.zoom-face-hint) .zoom-stats { bottom: 43px; }
-.table-card-details { order: 1; flex-shrink: 0; min-width: 0; padding: 12px; border-left: 2px solid #bbaa7d; background: #15232ceb; border-radius: 4px; }
+.table-card-details { order: 1; min-width: 0; padding: 12px; border-left: 2px solid #bbaa7d; background: #15232ceb; border-radius: 4px; }
 .table-card-details header { display: flex; align-items: center; justify-content: space-between; }
 .table-card-details .eyebrow { font-size: 8px; }
 .details-close { border: 0; padding: 0 3px; background: transparent; font-size: 20px; color: #aabbb5; }
@@ -59,9 +59,9 @@
 .table-card-details .preview-face-note { display: block; margin-top: 5px; color: #b9c9bd; font-size: 10px; }
 /* Inspection takes the place of secondary rail information, keeping the
    decision controls in reach instead of pushing them below the window. */
-.match-rail:has(.table-card-details:not([hidden])) > .match-recent,
-.match-rail:has(.table-card-details:not([hidden])) > .match-turn-guide,
-.match-rail:has(.table-card-details:not([hidden])) > .match-notices { display: none; }
+.match-rail-info:has(.table-card-details:not([hidden])) > .match-recent,
+.match-rail-info:has(.table-card-details:not([hidden])) > .match-turn-guide,
+.match-rail-info:has(.table-card-details:not([hidden])) > .match-notices { display: none; }
 .table-card-details .preview-cost { margin-bottom: 0; }
 .table-card-details .preview-type { padding-bottom: 5px; }
 .table-card-details .preview-rules { min-height: 0; margin: 7px 0; max-height: 110px; }

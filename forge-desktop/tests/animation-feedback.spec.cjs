@@ -30,6 +30,9 @@ test('a played card animates once; priority refreshes do not replay it and tappi
       await expect.poll(async () => (await page.evaluate(() => window.forge.request('matchState'))).prompt?.id).not.toBe(prompt.id);
     }
     expect(state.phaseKey).toBe('MAIN1');
+    // Retain coverage of the DOM animation fallback; table-scene.spec exercises
+    // object continuity in the default WebGL presentation.
+    if (await page.locator('#match-renderer').getAttribute('aria-pressed') === 'true') await page.locator('#match-renderer').click();
     if (await page.locator('#match-motion').getAttribute('aria-pressed') !== 'true') await page.locator('#match-motion').click();
     await page.evaluate(() => {
       window.cardAnimations = [];

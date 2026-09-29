@@ -22,6 +22,11 @@ for (const file of ['main.cjs', 'preload.cjs', 'engine-client.cjs', 'runtime.cjs
   fs.cpSync(path.join(appSource, file), path.join(stage, file), { recursive: true });
 }
 const metadata = JSON.parse(fs.readFileSync(path.join(appSource, 'package.json'), 'utf8'));
+const three = path.join(appSource, 'node_modules', 'three');
+const sceneVendor = path.join(stage, 'vendor', 'three');
+fs.mkdirSync(sceneVendor, { recursive: true });
+for (const file of ['three.module.js', 'three.core.js']) fs.copyFileSync(path.join(three, 'build', file), path.join(sceneVendor, file));
+fs.copyFileSync(path.join(three, 'LICENSE'), path.join(sceneVendor, 'LICENSE'));
 delete metadata.devDependencies;
 delete metadata.scripts;
 fs.writeFileSync(path.join(stage, 'package.json'), JSON.stringify(metadata, null, 2));

@@ -27,7 +27,11 @@
   document.querySelector('.match-arena').append(libraryPicker);
   const choiceScope = () => ({ sessionId: match?.id, promptId: match?.prompt?.id });
   const combatView = createCombatView(document.querySelector('.match-arena'), answer);
+  const tableCombat = createTableCombat(document.querySelector('.match-arena'), answer);
+  const castView = createCastView(document.querySelector('.match-arena'), answer);
+  const revealView = createRevealView(document.querySelector('.match-arena'));
   const handView = createHandView(document.querySelector('.match-arena'), $('match-hand'), answer);
+  const tableScene = createTableScene(document.querySelector('.match-arena'));
   const responseSkip = createResponseSkip($('match-prompt'), { current: () => match,
     busy: () => inFlight || polling, visible: () => !$('match-view').hidden, answer });
   const scopeAttributes = () => `data-match-session="${esc(match.id)}" data-match-prompt="${esc(match.prompt?.id || '')}"`;
@@ -144,7 +148,7 @@
     const description = ` aria-description="${esc([inHand ? costLabel : '', card.faceDown ? '' : card.type, stats ? `Power ${card.power}, toughness ${card.toughness}` : '', ...marks].filter(Boolean).join('. '))}"`;
     const fieldStatus = onBattlefield ? `<span class="battlefield-status">${card.tapped ? '<span class="field-tapped">Tapped</span>' : ''}${card.sick ? '<span class="field-new">New</span>' : ''}${card.damage ? `<span class="field-damage">${card.damage} damage</span>` : ''}</span>` : '';
     const counters = onBattlefield ? Object.entries(card.counters).map(([name, count]) => `<span title="${esc(name)} counters" aria-label="${count} ${esc(name)} counters">${count} ${esc(name)}</span>`).join('') : '';
-    return `<button class="match-card ${inHand ? 'match-hand-card' : onBattlefield ? 'battlefield-card' : ''} ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"${description} ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}>${handCost}${onBattlefield ? `<span class="permanent-surface"><span class="match-card-face">${art}</span><span class="match-card-name">${esc(card.name)}</span></span>${statsBadge}` : `<span class="match-card-face">${art}${inHand ? '' : statsBadge}</span><span class="match-card-name">${esc(card.name)}</span>`}${inHand ? `<span class="match-hand-details">${handType}${statsBadge}</span>` : ''}${fieldStatus}${counters ? `<span class="battlefield-counters">${counters}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
+    return `<button class="match-card ${inHand ? 'match-hand-card' : onBattlefield ? 'battlefield-card' : ''} ${card.tapped ? 'tapped' : ''} ${card.selectable ? 'actionable' : ''} ${card.highlighted ? 'chosen' : ''} ${card.attacking || card.blocking ? 'in-combat' : ''}" ${scopeAttributes()} data-match-card="${esc(card.key)}" data-visual-card="${esc(card.visualId || '')}" data-table-combat="${esc(card.combatId || card.visualId || '')}" data-preview-card="${previewCards.push(card) - 1}" aria-label="${esc(card.name)}${card.tapped ? ', tapped' : ''}"${description} ${card.attacking && card.defender ? `title="Attacking ${esc(card.defender)}"` : ''}>${handCost}${onBattlefield ? `<span class="permanent-surface"><span class="match-card-face">${art}</span><span class="match-card-name">${esc(card.name)}</span></span>${statsBadge}` : `<span class="match-card-face">${art}${inHand ? '' : statsBadge}</span><span class="match-card-name">${esc(card.name)}</span>`}${inHand ? `<span class="match-hand-details">${handType}${statsBadge}</span>` : ''}${fieldStatus}${counters ? `<span class="battlefield-counters">${counters}</span>` : ''}${marks.length ? `<span class="match-card-marks">${esc(marks.join(' · '))}</span>` : ''}</button>`;
   }
 
   function playerLane(player) {
@@ -237,6 +241,10 @@
     handView.render(next);
     if (boardChanged) battlefieldView.render();
     matchFeedback.render(next, previous, before);
+    tableCombat.render(next);
+    castView.render(next, before);
+    revealView.render(next);
+    tableScene.render(next);
     if (next.playerCount > 2 && previous?.activePlayerId !== next.activePlayerId) focusPlayer(next.activePlayerId);
     const busy = !next.prompt && !['finished', 'error'].includes(next.status);
     $('match-view').dataset.playerInput = String(Boolean(next.prompt?.playerChoices?.length || next.prompt?.inputType?.includes('Target') || next.prompt?.inputType === 'InputAttack'));
@@ -268,6 +276,19 @@
     drawer.style.top = `${Math.max(12, Math.min(top, innerHeight - size.height - 12))}px`;
   }
 
+  // Keep the decision buttons outside the scrolling instructions, for every
+  // input kind. Moving nodes preserves IDs and the handlers bound just below.
+  function setPrompt(markup) {
+    const panel = $('match-prompt');
+    panel.innerHTML = '<div class="match-prompt-body" tabindex="0" aria-label="Current decision"></div><div class="match-prompt-actions"></div>';
+    const body = panel.firstElementChild, actions = panel.lastElementChild;
+    body.innerHTML = markup;
+    for (const child of [...body.children]) {
+      if (child.matches('button.button, .match-input-buttons')) actions.append(child);
+    }
+    actions.hidden = !actions.childElementCount;
+  }
+
   function renderPrompt() {
     const prompt = match?.prompt;
     const status = matchFeedback.describe(match);
@@ -283,7 +304,7 @@
     $('match-prompt').dataset.promptId = prompt?.id || '';
     if (!prompt) {
       const terminal = ['finished', 'error'].includes(match?.status);
-      $('match-prompt').innerHTML = terminal ? `<div class="eyebrow">${match.status === 'error' ? 'MATCH INTERRUPTED' : 'GAME COMPLETE'}</div><h2>${esc(match.result || 'This game stopped.')}</h2><p>${esc(match.error || 'Your deck is saved. Take another seat whenever you’re ready.')}</p><button id="match-again" class="button primary">New game →</button>` : `<div class="eyebrow">${esc(status.owner.toUpperCase())}</div><h2>${esc(status.phase)} in progress…</h2><p>No action needed right now. Any choices will appear here.</p>${context}<div class="match-thinking"><span></span></div>`;
+      setPrompt(terminal ? `<div class="eyebrow">${match.status === 'error' ? 'MATCH INTERRUPTED' : 'GAME COMPLETE'}</div><h2>${esc(match.result || 'This game stopped.')}</h2><p>${esc(match.error || 'Your deck is saved. Take another seat whenever you’re ready.')}</p><button id="match-again" class="button primary">New game →</button>` : `<div class="eyebrow">${esc(status.owner.toUpperCase())}</div><h2>${esc(status.phase)} in progress…</h2><p>No action needed right now. Any choices will appear here.</p>${context}<div class="match-thinking"><span></span></div>`);
       if ($('match-again')) $('match-again').onclick = () => run(setup);
       return;
     }
@@ -298,13 +319,13 @@
       ? `<p class="match-engine-instruction">${esc(prompt.message)}</p>` : '';
     const header = `<div class="eyebrow">${status.decision}</div><h2>${esc(prompt.title || status.title || (prompt.kind === 'input' ? inputTitle(prompt) : prompt.kind === 'reveal' ? 'Take a look.' : 'Make your choice.'))}</h2><p class="match-prompt-text">${esc(status.instruction || prompt.message)}</p>${engineDetail}${context}`;
     if (librarySearch) {
-      $('match-prompt').innerHTML = header + '<p>Use the library panel to inspect these cards and confirm your choice. This spell or ability is still resolving.</p>';
+      setPrompt(header + '<p>Use the library panel to inspect these cards and confirm your choice. This spell or ability is still resolving.</p>');
       renderLibraryPicker();
       return;
     }
     if (prompt.context === 'playAbility') {
       const scope = choiceScope();
-      $('match-prompt').innerHTML = header + `<div class="match-choices">${prompt.choices.map(choice => `<button class="match-choice ability-choice" data-ability-choice="${choice.index}"><strong>${esc(choice.label)}</strong>${choice.detail ? `<small>${esc(choice.detail)}</small>` : ''}</button>`).join('')}</div><button id="match-ability-cancel" class="button secondary">Back to the battlefield</button>`;
+      setPrompt(header + `<div class="match-choices">${prompt.choices.map(choice => `<button class="match-choice ability-choice" data-ability-choice="${choice.index}"><strong>${esc(choice.label)}</strong>${choice.detail ? `<small>${esc(choice.detail)}</small>` : ''}</button>`).join('')}</div><button id="match-ability-cancel" class="button secondary">Back to the battlefield</button>`);
       $('match-prompt').querySelectorAll('[data-ability-choice]').forEach(button => { button.onclick = () => answer({ choices: [Number(button.dataset.abilityChoice)] }, scope); });
       $('match-ability-cancel').onclick = () => answer({ choices: [] }, scope);
       return;
@@ -314,18 +335,18 @@
       const endTurn = prompt.inputType === 'InputPassPriority' && prompt.cancel === 'End Turn';
       const response = status.responseText ? `<div class="match-response-detail"><span>WAITING TO RESOLVE</span><p>${esc(status.responseText)}</p></div>` : '';
       const passHint = status.passHint ? `<small class="match-pass-hint">${esc(status.passHint)}</small>` : '';
-      $('match-prompt').innerHTML = header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}${endTurn ? '' : `<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button>`}</div>`;
+      setPrompt(header + response + (prompt.canAttackAll ? '<button id="match-attack-all" class="button secondary">Attack with all</button>' : '') + `<div class="match-input-buttons"><button id="match-ok" class="button primary" ${prompt.okEnabled ? '' : 'disabled'}>${esc(okLabel || 'Continue')}</button>${passHint}${endTurn ? '' : `<button id="match-cancel" class="button secondary" ${prompt.cancelEnabled ? '' : 'disabled'}>${esc(prompt.cancel || 'Cancel')}</button>`}</div>`);
       $('match-ok').onclick = () => answer({ action: 'ok' });
       if ($('match-cancel')) $('match-cancel').onclick = () => answer({ action: 'cancel' });
       if ($('match-attack-all')) $('match-attack-all').onclick = () => answer({ action: 'attackAll' });
     } else if (prompt.kind === 'choice' || prompt.kind === 'reveal') {
       const range = prompt.kind === 'reveal' ? 'Revealed to you by the engine' : prompt.min === prompt.max ? `Choose ${prompt.min}` : `Choose ${prompt.min}–${prompt.max}`;
-      $('match-prompt').innerHTML = header + `<div class="choice-range">${range}${prompt.ordered ? ' · selection order matters' : ''}</div>${prompt.choices.length > 12 ? '<input id="match-choice-search" type="search" placeholder="Find a choice…" aria-label="Filter choices">' : ''}<div id="match-choices" class="match-choices"></div><div id="match-selected" class="match-selected"></div><button id="match-submit" class="button primary">${prompt.kind === 'reveal' ? 'Continue' : 'Confirm choice'}</button>`;
+      setPrompt(header + `<div class="choice-range">${range}${prompt.ordered ? ' · selection order matters' : ''}</div>${prompt.choices.length > 12 ? '<input id="match-choice-search" type="search" placeholder="Find a choice…" aria-label="Filter choices">' : ''}<div id="match-choices" class="match-choices"></div><div id="match-selected" class="match-selected"></div><button id="match-submit" class="button primary">${prompt.kind === 'reveal' ? 'Continue' : 'Confirm choice'}</button>`);
       if ($('match-choice-search')) $('match-choice-search').oninput = event => { choiceFilter = event.target.value.toLowerCase(); renderChoices(); };
       renderChoices();
       $('match-submit').onclick = () => answer({ choices: selection });
     } else if (prompt.kind === 'number' || prompt.kind === 'text') {
-      $('match-prompt').innerHTML = header + `<input id="match-value" aria-label="Your answer" ${prompt.kind === 'number' ? `type="number" min="${prompt.min}" max="${prompt.max}" step="1" value="${prompt.min}"` : `type="text" maxlength="500" value="${esc(prompt.initial || '')}"`}><button id="match-submit" class="button primary">Confirm</button>`;
+      setPrompt(header + `<input id="match-value" aria-label="Your answer" ${prompt.kind === 'number' ? `type="number" min="${prompt.min}" max="${prompt.max}" step="1" value="${prompt.min}"` : `type="text" maxlength="500" value="${esc(prompt.initial || '')}"`}><button id="match-submit" class="button primary">Confirm</button>`);
       $('match-submit').onclick = () => answer({ value: $('match-value').value });
     } else if (prompt.kind === 'allocate') {
       const minimum = prompt.atLeastOne ? 1 : 0;
@@ -335,7 +356,7 @@
         remaining -= extra;
         return minimum + extra;
       });
-      $('match-prompt').innerHTML = header + `<div class="choice-range">Assign a total of ${prompt.amount}.</div><div class="match-choices">${prompt.choices.map((choice, index) => `<label class="match-allocation"><span>${esc(choice.label)}</span><input type="number" min="${minimum}" max="${prompt.limits?.[index] ?? prompt.amount}" step="1" value="${amounts[index]}" data-amount="${index}" aria-label="Amount for ${esc(choice.label)}"></label>`).join('')}</div><button id="match-submit" class="button primary">Confirm amounts</button>${prompt.maySkip ? '<button id="match-skip" class="button secondary">Assign this creature later</button>' : ''}`;
+      setPrompt(header + `<div class="choice-range">Assign a total of ${prompt.amount}.</div><div class="match-choices">${prompt.choices.map((choice, index) => `<label class="match-allocation"><span>${esc(choice.label)}</span><input type="number" min="${minimum}" max="${prompt.limits?.[index] ?? prompt.amount}" step="1" value="${amounts[index]}" data-amount="${index}" aria-label="Amount for ${esc(choice.label)}"></label>`).join('')}</div><button id="match-submit" class="button primary">Confirm amounts</button>${prompt.maySkip ? '<button id="match-skip" class="button secondary">Assign this creature later</button>' : ''}`);
       $('match-submit').onclick = () => answer({ values: [...document.querySelectorAll('[data-amount]')].map(input => input.value) });
       if ($('match-skip')) $('match-skip').onclick = () => answer({ action: 'skip' });
     }
@@ -438,6 +459,7 @@
     if (prompt.inputType.startsWith('InputPayMana')) return 'Pay for your spell.';
     if (prompt.inputType === 'InputPassPriority') return matchFeedback.describe(match).title;
     if (prompt.inputType.includes('Target')) return 'Choose a target.';
+    if (prompt.sourceCard) return `Choose for ${prompt.sourceCard.name}.`;
     return 'Make your choice.';
   }
 

@@ -1,6 +1,6 @@
 # Mana Table desktop development
 
-Electron hosts the plain HTML/CSS/JavaScript renderer and a Java child process.
+Electron hosts the HTML/CSS/JavaScript UI, a Three.js table, and a Java child process.
 The Java process owns the card catalog, deck operations, persistence, rules, AI,
 and matches. Communication uses private stdin/stdout JSON pipes; there is no HTTP
 server. Read the [architecture](../docs/Development/Mana-Table-Architecture.md)
@@ -33,6 +33,10 @@ npm start
 This produces `forge-api/target/forge-engine.jar` and builds only its required
 Maven modules. Rebuild the JAR after Java changes. Restart Electron after changes
 to `main.cjs`, the preload, or renderer code. No frontend bundle step is required.
+Three.js is pinned and installed by `npm ci`; its modules are served locally.
+The match defaults to a fixed 3D table. **3D table / 2D table** switches presentation
+without restarting the match. A missing/lost WebGL 2 context restores the 2D
+view automatically. Artwork, menus and engine actions keep the same services.
 
 In PowerShell, configure your own installed JDK, for example:
 

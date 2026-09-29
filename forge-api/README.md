@@ -252,6 +252,27 @@ No card-catalog search is needed. A read-only library reveal uses `kind: reveal`
 with no selectable indices. Temporary visibility follows the shared controller;
 these details do not grant later access to hidden library cards.
 
+Input prompts may include `sourceCard` and `sourceZone` for the card associated
+with a target, payment, or other engine instruction. A `playAbility` choice also
+supplies its visible source. These are presentation snapshots with an empty
+action `key`; they never authorize playing the source. They expire with the
+prompt. Clients may retain the presentation across the transient `resolving`
+transport snapshot, then reconcile it against the next published board.
+
+Stack entries include an `id` for the stack instance, an `ability` flag, and a
+viewer-filtered source `card` (or null when unavailable), alongside the existing
+name, text, and controller. The stack instance ID is for presentation only.
+Card-valued `choices` include `card` details using the same visibility filter as
+library choices. In particular, ordinary `kind: reveal` prompts can display card
+portraits without a catalog query. Discard these details after acknowledgement;
+the reveal does not authorize future access to that player's hidden hand.
+
+Color production choices use `context: colorChoice`, a source-specific title,
+and a `mana` symbol on each choice. `sourceCard` remains an explicit snapshot of
+the source even when activation costs have sacrificed it. Answer with the
+original choice index. The shared GUI's default `chooseColor` hook delegates
+to the existing picker for other clients; the API adapter preserves the context.
+
 The match beta supports two-player Constructed and 2–6 player Commander games
 with one local human and AI opponents. `matchSetup.maxPlayers` reports the limit.
 `matchStart.opponents` takes 1–5 opponent deck IDs in seat order; the legacy
@@ -309,12 +330,21 @@ stale keys, non-blocking phases, and illegal pairs before making changes. Confir
 blocks still uses `action: "ok"`, including engine enforcement of menace and other
 requirements. No damage outcome is predicted by the client.
 
+During attacker declaration, `combat.attackOptions` lists each candidate's legal
+defenders. `matchAction {action: "attack", attackerKey, defenderPlayerId, sessionId,
+promptId}` selects a player defender and toggles that attacker as one scoped action.
+For a planeswalker or battle, supply `defenderKey` instead of `defenderPlayerId`.
+The adapter validates the published pair before invoking the normal controller;
+illegal defenders and stale handles fail without changing assignments. Confirming
+attackers still uses `action: "ok"` and the engine's full combat validation.
+
 ## Upstream maintenance
 
 Keep `upstream` pointed at Card-Forge/forge and the integration repository at
 proflayton/Mana-Table. In a contributor's clone, `origin` may point to their own fork.
 Shared changes include `Game.unsubscribeFromEvents`, explicit resource/profile
-path overrides, and reusing initialized `StaticData` from `FModel.getMagicDb`.
+path overrides, reusing initialized `StaticData` from `FModel.getMagicDb`, and a
+default GUI hook that preserves a color choice's source card for API clients.
 The new host, protocol, and renderer live in their own modules. Preserve
 the repository's existing license and attribution. Forge's existing resources
 remain the source of truth for card definitions and rules.

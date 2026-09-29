@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, '..');
 function scripts(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
     const file = path.join(directory, entry.name);
-    return entry.isDirectory() ? scripts(file) : /\.(?:cjs|js)$/.test(entry.name) ? [file] : [];
+    return entry.isDirectory() ? scripts(file) : /\.(?:cjs|mjs|js)$/.test(entry.name) ? [file] : [];
   });
 }
 const files = fs.readdirSync(root).filter(file => file.endsWith('.cjs')).map(file => path.join(root, file))

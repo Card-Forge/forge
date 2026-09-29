@@ -6,11 +6,18 @@ function createResponseSkip(anchor, { current, busy, visible, answer, preference
   panel.innerHTML = '<div class="response-modes" role="group" aria-label="Response control">'
     + '<button data-response-mode="auto" aria-pressed="false">Auto</button><button data-response-mode="manual" aria-pressed="false">Full control</button></div>'
     + '<button class="response-hold" aria-pressed="false">Hold this turn</button>'
-    + '<details class="response-stops"><summary>Preferences</summary><p>Auto continues only when you have no playable response. Your main phases and required choices always wait. This setting is remembered between games.</p><p>Always wait at these steps on your turn:</p>'
+    + '<details class="response-stops"><summary>Preferences</summary><div class="response-stops-body"><p>Auto continues only when you have no playable response. Your main phases and required choices always wait. This setting is remembered between games.</p><p>Always wait at these steps on your turn:</p>'
     + [['UPKEEP', 'Upkeep'], ['DRAW', 'Draw'], ['COMBAT_BEGIN', 'Beginning of combat'], ['END_OF_TURN', 'End step']]
-      .map(([phase, label]) => `<label><input type="checkbox" data-stop="${phase}">${label}</label>`).join('') + '</details>'
+      .map(([phase, label]) => `<label><input type="checkbox" data-stop="${phase}">${label}</label>`).join('') + '</div></details>'
     + '<small id="match-skip-status" role="status" aria-live="polite"></small>';
   anchor.after(panel);
+  panel.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && panel.querySelector('details').open) {
+      panel.querySelector('details').open = false;
+      panel.querySelector('summary').focus();
+      event.stopPropagation();
+    }
+  });
   const hold = panel.querySelector('.response-hold');
   const status = panel.querySelector('[role="status"]');
   let turn, timer, attempted, held = false;

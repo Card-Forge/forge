@@ -49,7 +49,9 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
             copy.querySelector('.match-hand-cost')?.remove();
             copy.querySelector('.match-hand-details')?.remove();
             copy.removeAttribute('data-match-card');
-            copy.removeAttribute('data-visual-card');
+            copy.dataset.visualCard = `layout:${row.dataset.fieldRow}:${i}`;
+            copy.removeAttribute('data-table-combat');
+            copy.removeAttribute('data-scene-card');
             const surface = document.createElement('span'); surface.className = 'permanent-surface';
             const stats = copy.querySelector('.match-stats');
             if (stats) copy.append(stats);
@@ -67,7 +69,9 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
         const check = async () => page.locator('.battlefield-row').evaluateAll(rows => rows.flatMap(row => {
           const bounds = row.getBoundingClientRect();
           const top = bounds.top + row.clientTop, bottom = top + row.clientHeight;
-          return [...row.querySelectorAll('.match-card, .card-art, .match-card-name, .match-stats')].flatMap(element => {
+          const labels = [...row.querySelectorAll('.scene-card-name')].map(element => element.getBoundingClientRect()).sort((a, b) => a.left - b.left);
+          const overlaps = labels.flatMap((box, index) => index && labels[index - 1].right > box.left + .5 ? [{ labelsOverlap: true, row: row.className }] : []);
+          return overlaps.concat([...row.querySelectorAll('.match-card, .card-art, .match-card-name, .match-stats, .scene-card-name')].flatMap(element => {
             const box = element.getBoundingClientRect();
             return box.top < top - .5 || box.bottom > bottom + .5 || box.height < 1
               || element.matches('.match-card') && box.width < 70
@@ -75,7 +79,7 @@ test('crowded battlefield tiles keep readable names and stats in front and back 
               || element.matches('.match-stats') && parseFloat(getComputedStyle(element).fontSize) < 17
               ? [{ seat: row.closest('[data-player-id]').dataset.playerId, row: row.className,
                 element: element.className, top: box.top - top, bottom: bottom - box.bottom, height: box.height }] : [];
-          });
+          }));
         }));
         expect(await check(), `${count} seats at ${size}: artwork, name and stats inside scrollport`).toEqual([]);
         await expect(page.locator('.battlefield-row').first()).toHaveCSS('scrollbar-width', 'none');

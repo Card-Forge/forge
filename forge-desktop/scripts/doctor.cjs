@@ -16,3 +16,4 @@ check(result.status === 0 && Number(version) >= 17, `Java: ${java}; ${version ? 
 check(fs.existsSync(path.join(root, 'forge-api/target/forge-engine.jar')), 'Engine JAR; build from the repository root with mvn -pl forge-api -am verify');
 check(fs.existsSync(path.join(root, 'forge-gui/res/cardsfolder')), 'Checked-in card scripts');
 check(fs.existsSync(path.join(root, 'forge-desktop/node_modules/electron')), 'Desktop dependencies; install with npm ci in forge-desktop');
+check(['three.module.js', 'three.core.js'].every(file => fs.existsSync(path.join(root, 'forge-desktop/node_modules/three/build', file))), 'Local 3D renderer; install with npm ci in forge-desktop');

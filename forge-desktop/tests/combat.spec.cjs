@@ -38,10 +38,38 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
       const field = human.zones.find(zone => zone.name === 'Battlefield').cards;
       if (p.inputType === 'InputBlock') {
         attack = state.combat?.attackers.find(item => item.eligibleBlockerIds.length >= 2);
-        if (attack) { blocker = field.find(card => card.visualId === attack.eligibleBlockerIds[0]); break; }
+        if (attack && sawAttackPicker) { blocker = field.find(card => card.visualId === attack.eligibleBlockerIds[0]); break; }
       }
-      if (p.inputType === 'InputAttack' && !sawAttackPicker) {
+      if (p.inputType === 'InputAttack' && !sawAttackPicker && state.combat.attackOptions?.length) {
         await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', p.id);
+        await expect(page.locator('#combat-view')).toBeHidden();
+        const physical = state.combat.attackOptions?.[0];
+        if (physical) {
+          const tile = page.locator(`#match-human .battlefield-card[data-table-combat="${physical.cardId}"]`);
+          const defender = physical.defenders.find(defender => defender.kind === 'player');
+          if (defender) {
+            const origin = await tile.boundingBox();
+            const target = await page.locator(`.match-life[data-match-player="${defender.id}"]`).boundingBox();
+            await page.mouse.move(origin.x + origin.width / 2, origin.y + origin.height / 2);
+            await page.mouse.down();
+            await page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, { steps: 10 });
+            await expect(page.locator(`.match-life[data-match-player="${defender.id}"]`)).toHaveClass(/combat-drop-ready/);
+            await page.mouse.up();
+            await expect(tile).toHaveClass(/table-attacker/);
+            await expect(tile.locator('.table-combat-badge')).toContainText(defender.name);
+            await expect(page.locator(`.table-combat-lines > [data-table-edge="${physical.cardId}:defender"]`)).toHaveCount(1);
+            const declared = await read();
+            expect(declared.combat.attackers.find(attack => attack.cardId === physical.cardId).defender.id).toBe(defender.id);
+            // Recall the attack in place; the same stale drag cannot act twice.
+            const attacker = state.players.flatMap(player => player.zones.flatMap(zone => zone.cards)).find(card => (card.combatId || card.visualId) === physical.cardId);
+            await expect(page.evaluate(values => window.forge.request('matchAction', values),
+              { sessionId: state.id, promptId: p.id, action: 'attack', attackerKey: attacker.key, defenderPlayerId: defender.id })).rejects.toThrow('changed');
+            await tile.click();
+            await expect(tile).not.toHaveClass(/table-attacker/);
+            state = await read();
+          }
+        }
+        await page.locator('#combat-toggle').click();
         await expect(page.locator('#combat-view h2')).toHaveText('Declare your attacks');
         await expect(page.locator('.combat-defenders [aria-pressed="true"]')).toHaveCount(1);
         const candidate = state.combat.attackerCandidates[0];
@@ -75,6 +103,26 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
     expect(sawAttackPicker).toBe(true);
     await expect(page.locator('#match-prompt')).toHaveAttribute('data-prompt-id', state.prompt.id);
     const panel = page.locator('#combat-view');
+    await expect(panel).toBeHidden();
+    const physicalAttacker = page.locator(`.match-arena .battlefield-card[data-table-combat="${attack.cardId}"]`);
+    const physicalBlocker = page.locator(`#match-human .battlefield-card[data-table-combat="${blocker.visualId}"]`);
+    await physicalAttacker.click();
+    await physicalBlocker.click();
+    await expect(physicalBlocker).toHaveClass(/table-blocker/);
+    await expect(page.locator(`.table-combat-lines > [data-table-edge="${attack.cardId}:${blocker.visualId}"]`)).toHaveCount(1);
+    if (await page.locator('#match-motion').getAttribute('aria-pressed') === 'true') await page.locator('#match-motion').click();
+    await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1000, 740));
+    await expect(page.locator('#match-ok')).toBeInViewport();
+    await expect(physicalAttacker).toBeInViewport();
+    await expect(physicalBlocker).toBeInViewport();
+    const boardPng = await application.evaluate(async ({ BrowserWindow }) =>
+      (await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined, { stayHidden: true })).toPNG().toString('base64'));
+    require('node:fs').writeFileSync(test.info().outputPath('battlefield-combat.png'), Buffer.from(boardPng, 'base64'));
+    await physicalBlocker.click();
+    await expect(physicalBlocker).not.toHaveClass(/table-blocker/);
+    state = await read();
+    // The detailed inspector remains available for unusual combat and many blocks.
+    await page.locator('#combat-toggle').click();
     await expect(panel).toBeVisible();
     const row = panel.locator(`[data-combat-attacker="${attack.cardId}"]`);
     await row.locator('.combat-attacker').click();
@@ -179,6 +227,7 @@ test('combat panel assigns and removes real engine blocks, preserves scope, and 
       window.combatFixture = createCombatView(document.querySelector('.match-arena'), (action, scope) => window.combatFixtureActions.push({ action, scope }));
       window.combatFixture.render(window.combatFixtureState);
     });
+    await page.locator('#combat-toggle').click();
     await expect(panel.locator('.combat-target')).toHaveCount(3);
     await expect(panel).not.toContainText('SECRET');
     await expect(panel.locator('[data-combat-attacker="c"]')).toContainText('Blocked · blocker has left combat');

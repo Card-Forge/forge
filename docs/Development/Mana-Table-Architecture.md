@@ -24,9 +24,12 @@ flowchart LR
 | Workshop | `renderer/app.js`, `presets.js` | Catalog, deck editing, imports, practice, preset browsing |
 | Match coordination | `renderer/match.js` | Setup, scoped answers, polling, stable board rendering, prompt controls |
 | Card interaction | `hand-view.js`, `table-gestures.js`, `card-preview.js`, `table-card-preview.js`, `battlefield-view.js` | Fan layout, cancelable dragging, card enlargement, optional inspector, alternate faces and crowded ranks |
+| 3D presentation | `table-scene.js`, `table-scene-world.mjs`, `table-scene.css` | Local Three.js scene, perspective camera, stable card objects, textures, movement and graphics fallback |
 | Match explanation | `turn-guide.js`, `match-feedback.js` | Phase guidance, activity history, turn indicators and animation |
+| Table events | `cast-view.js`, `reveal-view.js` | Pending spell and stack portraits, prompt-scoped revealed cards |
 | Response preferences | `preferences.cjs`, `play-preferences.js`, `response-skip.js` | Remembered Auto/Full control, own-turn stops, temporary holds and engine-authorized passes |
 | Combat | `combat-view.js` | Attackers, defenders, legal block connections and assignment controls |
+| Battlefield combat | `table-combat.js` | Scoped attack/block drags on real cards, defender badges and connection arrows; detailed combat is optional |
 | Java protocol | `DesktopEngine.java` | Method dispatch, current deck, saved files, practice and one active match |
 | Deck hooks | `CardCatalog`, `DeckEditor`, `DeckImport`, `DeckPresets`, `MatchSetup` | Search, revisioned edits, validation, imports, detached match decks |
 | Game adapter | `MatchSession`, `MatchActivity`, `HeadlessPlatform`, `CombatCardIds` | Human input, AI session, visibility filtering, stable projected state |
@@ -46,14 +49,15 @@ Java classes above live in `forge-api/src/main/java/forge/api`. Renderer files
 are under `forge-desktop/renderer`. The API README is the detailed
 [integration contract](../../forge-api/README.md).
 
-The renderer currently uses classic scripts and shared globals, loaded in the
-order listed by `renderer/index.html`. There is no bundler, framework, or module
-loader. CSS is layered: base workshop/match styles, battlefield layout, then
+Most renderer files use classic scripts and shared globals, loaded in the
+order listed by `renderer/index.html`. The 3D controller lazily imports a native
+ES module and the pinned Three.js build. There is no bundler or UI framework.
+CSS is layered: base workshop/match styles, battlefield layout, then
 feature-specific styles. Keep feature behavior in its owning file and document
 cross-file assumptions instead of expanding the central `match.js` indefinitely.
 
 Battlefield cards use an explicit `battlefield` presentation in `cardTile`.
-`battlefield.css` reserves a square footprint around each portrait surface, which
+The 2D fallback in `battlefield.css` reserves a square footprint around each portrait surface, which
 turns a full 90 degrees when tapped. Current stats, counters and damage remain
 upright. `match-feedback.js` animates that same surface only when the tap state
 changes. Two battlefield ranks remain vertical at every supported size.
@@ -64,9 +68,15 @@ in place; other cards use an image-only, pointer-transparent layer anchored to t
 source. The optional rail inspector shows rules and current values. Both consume
 only the visibility-filtered projection, including permitted alternate faces.
 `hand-view.css` reserves the lower-left player controls; `hand-view.js` keeps the
-fan and local gap behavior. `match-feedback.css` places the action prompt at the
-lower right, with latest activity and expandable history above. Game overlays
-sit above the hand and player controls while selecting combat or library cards.
+fan and local gap behavior. `match-feedback.css` fixes response controls at the
+lower right. The prompt's instructions and each upper information panel scroll
+independently; decision buttons remain outside the prompt scrollport. Preferences
+open above the fixed controls. Card inspection occupies the upper information area.
+Game overlays sit above the hand and player controls while selecting combat or
+library cards. `cast-view.js` reconciles projected sources and stack IDs without
+replaying entrance animations on polls; its portraits do not intercept targets.
+`reveal-view.js` pages through only the current reveal's cards and clears them
+when that prompt ends. Both views respect hidden identities and reduced motion.
 
 ## A game action, end to end
 
@@ -141,7 +151,38 @@ Card scripts live in `forge-gui/res`; core rules and AI stay in their existing
 modules. The adapter reuses the shared human controller without starting Swing
 or LibGDX. Existing integration touchpoints include event unsubscription,
 explicit resource/profile paths, and reusing initialized `StaticData` through
-`FModel.getMagicDb`. Keep further shared changes small and reviewable.
+`FModel.getMagicDb`. `IGuiGame.chooseColor` retains the source card in API color
+prompts while its default delegates to the existing picker for other clients.
+Keep further shared changes small and reviewable.
+
+## 3D scene and interaction boundary
+
+The default table uses a fixed perspective camera over a lit playmat. Hand,
+battlefield, and casting portraits are meshes with card thickness and soft
+projected shadows. `visualId` correlates the same object across zones; a source
+still on the battlefield gets a separate representation for its stack ability.
+Polling updates targets without replaying entrances. Transforms interpolate
+only until settled, then rendering sleeps. Reduced motion and Animations off
+snap directly to the new state. DOM flight clones are disabled for scene cards.
+
+The existing DOM remains the responsive layout and accessible interaction
+layer. Screen anchors are projected onto the table or an elevated plane;
+field cards lie on the table while held and casting cards face the camera.
+Clicks, keyboard input, legal target highlighting, combat arrows, and scoped
+drags continue through the existing engine answer path. This first scene keeps
+life, stats, menus, the detailed combat inspector and reveal/search galleries
+as HTML controls. It is not an orbiting tabletop or a physics simulation.
+
+Textures come only from existing authorized card portraits. Face changes clear
+the previous texture; objects leaving the visible projection are removed and
+disposed immediately. No hidden-zone images are synthesized. Context loss or
+initialization failure restores the complete 2D presentation, and the player
+can switch with **3D table / 2D table** without changing the engine state.
+
+Three.js is pinned in `package-lock.json` and served through two exact protocol
+paths. Packaging copies its two runtime modules and MIT license into the ASAR;
+the scene never downloads executable code. `table-scene.spec.cjs` checks real
+engine card continuity, tapping, idle rendering, sizes, context loss and retry.
 
 This is a local, single-human application with one active match. There is no
 network API, multiplayer service, durable match resume, or full tournament-format

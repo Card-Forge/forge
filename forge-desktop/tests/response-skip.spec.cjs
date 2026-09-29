@@ -87,10 +87,11 @@ test('skip responses protects the main phase, resolves an unanswered stack, and 
     await expect(page.locator('#match-skip-status')).toHaveText('Paused for your action.');
     // The control remains reachable in the compact layout.
     await application.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1000, 740));
-    await auto.scrollIntoViewIfNeeded();
     const bounds = await auto.boundingBox();
     expect(bounds.width).toBeGreaterThan(0);
     expect(bounds.y).toBeGreaterThanOrEqual(0);
+    expect(bounds.y + bounds.height).toBeLessThanOrEqual(await page.evaluate(() => innerHeight));
+    expect(await page.locator('.match-rail').evaluate(element => element.scrollTop)).toBe(0);
     const png = await application.evaluate(async ({ BrowserWindow }) => {
       const capture = await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined, { stayHidden: true });
       return capture.toPNG().toString('base64');

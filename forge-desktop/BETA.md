@@ -1,10 +1,41 @@
-# Mana Table — beta 0.1.0-beta.25
+# Mana Table — beta 0.1.0-beta.27
 
 Double-click **Mana Table.exe**. Keep the executable with its accompanying
 folders. Java and the Forge card library are bundled; no separate installation
 or account is needed. The first launch scans the card library and can take a moment.
 
-Beta 25 focuses on **physical cards and remembered play preferences**:
+Beta 27 introduces the **3D table**:
+
+- A gently tilted perspective camera looks over a lit playmat. Cards have
+  thickness and shadows; your hand lifts toward you and permanents turn
+  sideways when tapped.
+- A card keeps its scene object as it leaves your hand, waits through casting,
+  and lands on the battlefield. Clicks and drags use the same engine decisions.
+- **3D table / 2D table** switches views during a game. If graphics initialization
+  fails or the context is lost, the complete 2D view returns automatically.
+- Life, current stats, decision buttons, and inspection remain readable controls.
+  Reduced motion and **Animations off** apply to the scene as well.
+
+This build also keeps **decisions in reach and game actions on the table**:
+
+- Auto and Full control stay anchored at the bottom right. History, help,
+  stack details and long instructions scroll within their own sections.
+  Continue, Confirm and Cancel stay below the scrolling instructions.
+- Preferences open above the response controls; Escape closes them.
+- The card associated with targeting or mana payment stays visible on the
+  table. Cast spells and abilities appear as a physical stack, with the next
+  item to resolve in front. Cancelling a cast clears its presentation.
+- Revealed cards appear together on the battlefield. Hover or focus to enlarge,
+  page through larger reveals, then Continue in the action panel. The view clears
+  when the reveal ends; hidden cards remain hidden.
+- Mana-color choices name their source and show color buttons beside its card
+  on the table, including after an activation sacrifices that card.
+- Declare combat on the battlefield: click attackers or drag them onto a
+  defender. To block, select an attacking creature and click a highlighted blocker,
+  or drag your blocker onto it. Arrows and badges show assignments. Confirm in
+  the action panel; **Combat details** opens the full assignment inspector.
+
+Beta 25's **physical cards and remembered play preferences** remain available:
 
 - Hover or focus lifts your hand card to a larger, readable size. Cards on the
   table enlarge over their position, without the old floating rules popup.
@@ -26,8 +57,8 @@ Beta 25 focuses on **physical cards and remembered play preferences**:
 - Your life and mana remain beside the steady hand fan. Creatures stay toward the
   center, lands behind them, with separate play areas for every Commander seat.
 
-The presentation uses Mana Table's own interface and CSS board, with existing
-cached card portraits. Match inspection always uses the engine's visible card
+The presentation uses Mana Table's own interface and a locally bundled Three.js
+scene, with existing cached card portraits. Match inspection uses the visible card
 projection; hidden identities and their alternate faces remain hidden.
 
 Beta 23's **card discovery, deck review, and suggestions** remain available:

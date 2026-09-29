@@ -61,6 +61,7 @@ public final class MatchSession {
     private String message = "Preparing the match…", ok = "Continue", cancel = "Cancel";
     private boolean okEnabled, cancelEnabled;
     private Input displayedInput;
+    private CardView promptSource;
 
     private static final class Pending {
         final String id = UUID.randomUUID().toString();
@@ -68,6 +69,7 @@ public final class MatchSession {
         final Input input;
         final Map<String, CardView> cards = new LinkedHashMap<>();
         final Set<String> blockPairs = new HashSet<>();
+        final Set<String> attackPairs = new HashSet<>();
         final CompletableFuture<JsonObject> response = new CompletableFuture<>();
         Map<String, Object> prompt;
         int size, min, max;
@@ -110,6 +112,7 @@ public final class MatchSession {
         game.subscribeToEvents(combatIds);
         game.subscribeToEvents(this);
         gui = (IGuiGame) Proxy.newProxyInstance(IGuiGame.class.getClassLoader(), new Class<?>[]{IGuiGame.class}, (proxy, method, args) -> {
+            if (method.getName().equals("chooseColor")) return chooseColor((String) args[0], (CardView) args[1], (List<MagicColor.Color>) args[2]);
             if (method.isDefault()) return InvocationHandler.invokeDefault(proxy, method, args);
             return invokeGui(method.getName(), args == null ? new Object[0] : args);
         });
@@ -210,6 +213,10 @@ public final class MatchSession {
                     "message", message, "ok", ok, "cancel", cancel, "okEnabled", okEnabled, "cancelEnabled", cancelEnabled,
                     "canAttackAll", current instanceof InputAttack, "playerChoices", playerChoices,
                     "canAutoPass", canAutoPass(current));
+            if (promptSource != null && promptSource.canBeShownTo(viewer)) {
+                next.prompt.put("sourceCard", cardState(promptSource, null));
+                next.prompt.put("sourceZone", promptSource.getZone() == null ? "" : promptSource.getZone().name());
+            }
             pending = next;
             publish(next);
         }
@@ -250,6 +257,21 @@ public final class MatchSession {
                 case "cancel" -> { if (!cancelEnabled) throw new IllegalArgumentException("Cancel is not available"); }
                 case "attackAll" -> { if (!(next.input instanceof InputAttack)) throw new IllegalArgumentException("Not declaring attackers"); }
                 case "card" -> { card = next.cards.get(string(request, "key")); if (card == null) throw new IllegalArgumentException("Card is not visible in this prompt"); }
+                case "attack" -> {
+                    if (!(next.input instanceof InputAttack)) throw new IllegalArgumentException("Not declaring attackers");
+                    attacker = next.cards.get(string(request, "attackerKey"));
+                    String defender;
+                    if (request.has("defenderPlayerId") && !request.has("defenderKey")) {
+                        int playerId = exactInt(string(request, "defenderPlayerId"));
+                        target = game.getView().getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElseThrow();
+                        defender = "player:" + playerId;
+                    } else {
+                        card = next.cards.get(string(request, "defenderKey"));
+                        defender = card == null || request.has("defenderPlayerId") ? "" : "card:" + card.getId();
+                    }
+                    if (attacker == null || !next.attackPairs.contains(attacker.getId() + ":" + defender))
+                        throw new IllegalArgumentException("That creature cannot attack this defender");
+                }
                 case "block" -> {
                     if (!(next.input instanceof InputBlock)) throw new IllegalArgumentException("Not declaring blockers");
                     attacker = next.cards.get(string(request, "attackerKey"));
@@ -281,6 +303,13 @@ public final class MatchSession {
                         // block through the engine's normal input, then publish once.
                         human.selectCard(chosenAttacker, null, CARD_CLICK);
                         human.selectCard(chosenCard, null, CARD_CLICK);
+                    }
+                    case "attack" -> {
+                        // One scoped drag chooses a defender and toggles the
+                        // attacker through the normal engine input, atomically.
+                        if (chosenPlayer != null) human.selectPlayer(chosenPlayer, null);
+                        else human.selectCard(chosenCard, null, CARD_CLICK);
+                        human.selectCard(chosenAttacker, null, CARD_CLICK);
                     }
                     case "player" -> human.selectPlayer(chosenPlayer, null);
                 }
@@ -346,7 +375,9 @@ public final class MatchSession {
         for (var item : view.getStack()) {
             CardView source = item.getSourceCard();
             boolean visible = source != null && source.canBeShownTo(viewer) && !source.isFaceDown();
-            stack.add(map("name", visible ? source.getCurrentState().getName() : "Face-down spell", "text", visible ? item.getText() : "",
+            stack.add(map("id", item.getId(), "name", visible ? source.getCurrentState().getName() : "Face-down spell", "text", visible ? item.getText() : "",
+                    "card", source != null && source.canBeShownTo(viewer) ? cardState(source, null) : null,
+                    "ability", item.isAbility(),
                     "controller", item.getActivatingPlayer() == null ? "" : item.getActivatingPlayer().getName()));
         }
         String result = null;
@@ -376,9 +407,17 @@ public final class MatchSession {
             if (attacking && highlighted.contains(GameEntityView.get(defender))) selectedDefender = defender;
         }
         var candidates = new ArrayList<String>();
+        var attackOptions = new ArrayList<Object>();
         if (attacking) for (Card card : human.getPlayer().getCreaturesInPlay()) {
             if (combat.isAttacking(card) || selectedDefender != null && CombatUtil.canAttack(card, selectedDefender))
                 candidates.add(combatIds.id(card.getView()));
+            var legalDefenders = new ArrayList<Object>();
+            for (GameEntity defender : combat.getDefenders()) {
+                if (!CombatUtil.canAttack(card, defender) && !combat.isAttacking(card, defender)) continue;
+                legalDefenders.add(combatDefender(defender));
+                prompt.attackPairs.add(card.getId() + ":" + (defender instanceof Player ? "player:" : "card:") + defender.getId());
+            }
+            if (!legalDefenders.isEmpty()) attackOptions.add(map("cardId", combatIds.id(card.getView()), "defenders", legalDefenders));
         }
         var blockers = blocking ? human.getPlayer().getCreaturesInPlay() : List.<Card>of();
         var attacks = new ArrayList<Object>();
@@ -401,6 +440,7 @@ public final class MatchSession {
         return map("attackingPlayerId", combat.getAttackingPlayer().getId(), "attackers", attacks,
                 "defenders", defenders, "selectedDefender", selectedDefender == null ? null : combatDefender(selectedDefender),
                 "attackerCandidates", candidates,
+                "attackOptions", attackOptions,
                 "blockerCandidates", blockers.stream().map(card -> combatIds.id(card.getView())).toList(),
                 "blockProblem", blocking ? CombatUtil.validateBlocks(combat, human.getPlayer()) : null);
     }
@@ -484,7 +524,16 @@ public final class MatchSession {
             case "getGameSpeed" -> PlaybackSpeed.NORMAL;
             case "getDayTime" -> null;
             case "isSelecting" -> !selectable.isEmpty();
-            case "showPromptMessage" -> { message = String.valueOf(a[1]); displayedInput = human.getInputProxy().getInput(); yield null; }
+            case "showPromptMessage" -> {
+                message = String.valueOf(a[1]);
+                Input nextInput = human.getInputProxy().getInput();
+                // A target-error message can omit its card. Retain it only for
+                // the same input; priority and subsequent choices must clear it.
+                if (a.length > 2 && a[2] instanceof CardView card) promptSource = card;
+                else if (nextInput != displayedInput) promptSource = null;
+                displayedInput = nextInput;
+                yield null;
+            }
             case "updateButtons" -> { ok = (String)a[1]; cancel = (String)a[2]; okEnabled = (boolean)a[3]; cancelEnabled = (boolean)a[4]; yield null; }
             case "setSelectables" -> { selectable.clear(); ((Iterable<CardView>)a[0]).forEach(selectable::add); yield null; }
             case "clearSelectables" -> { selectable.clear(); yield null; }
@@ -614,6 +663,10 @@ public final class MatchSession {
                 abilities, 0, 1, false, ability -> visible ? String.valueOf(ability) : "Card ability");
         next.prompt.put("context", "playAbility");
         next.prompt.put("title", "Play " + name);
+        if (host != null && host.canBeShownTo(viewer)) {
+            next.prompt.put("sourceCard", cardState(host, null));
+            next.prompt.put("sourceZone", host.getZone() == null ? "" : host.getZone().name());
+        }
         var items = new ArrayList<Object>();
         for (int i = 0; i < abilities.size(); i++) {
             var ability = abilities.get(i);
@@ -632,6 +685,22 @@ public final class MatchSession {
         next.prompt.put("choices", items);
         var chosen = await(next).getAsJsonArray("choices");
         return chosen.isEmpty() ? null : abilities.get(chosen.get(0).getAsInt());
+    }
+
+    private MagicColor.Color chooseColor(String message, CardView source, List<MagicColor.Color> colors) {
+        var next = choicePrompt("choice", message, colors, 1, 1, false, color -> ((MagicColor.Color) color).getTranslatedName());
+        next.prompt.put("context", "colorChoice");
+        boolean visible = source != null && source.canBeShownTo(viewer);
+        String name = visible && !source.isFaceDown() ? source.getCurrentState().getName() : "this card";
+        next.prompt.put("title", "Choose a color for " + name);
+        if (visible) {
+            next.prompt.put("sourceCard", cardState(source, null));
+            next.prompt.put("sourceZone", source.getZone() == null ? "" : source.getZone().name());
+        }
+        next.prompt.put("choices", java.util.stream.IntStream.range(0, colors.size()).mapToObj(i ->
+                map("index", i, "label", colors.get(i).getTranslatedName(), "mana", "{" + colors.get(i).getShortName() + "}")).toList());
+        var answer = await(next);
+        return colors.get(answer.getAsJsonArray("choices").get(0).getAsInt());
     }
 
     private List<?> choose(String title, int min, int max, List<?> choices, boolean ordered, FSerializableFunction<Object, String> display) {
@@ -653,7 +722,9 @@ public final class MatchSession {
         for (int i = 0; i < choices.size(); i++) {
             Object choice = choices.get(i);
             String label = display == null ? label(choice) : display.apply(choice);
-            items.add(map("index", i, "label", label));
+            var item = map("index", i, "label", label);
+            if (choice instanceof CardView card) item.put("card", choiceCard(card, viewer));
+            items.add(item);
         }
         next.prompt = map("id", next.id, "kind", kind, "message", title, "choices", items, "min", min, "max", max, "ordered", ordered);
         return next;

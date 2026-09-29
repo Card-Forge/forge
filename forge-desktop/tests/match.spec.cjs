@@ -9,14 +9,6 @@ test('match table plays cards through engine prompts and resumes after deck brow
     const page = await application.firstWindow();
     page.on('pageerror', error => errors.push(error.message));
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.evaluate(() => {
-      window.matchAnimationTargets = [];
-      const animate = Element.prototype.animate;
-      Element.prototype.animate = function (...args) {
-        if (this.matches('.match-card, .match-card .card-art')) window.matchAnimationTargets.push(this.className);
-        return animate.apply(this, args);
-      };
-    });
     await expect(page.locator('#loading')).toBeHidden({ timeout: 60000 });
     await page.locator('#import-button').click();
     await page.locator('#import-name').fill('Feedback check');
@@ -94,7 +86,9 @@ test('match table plays cards through engine prompts and resumes after deck brow
     expect(mulligan).toBe(true);
     expect(yourTurn).toBe(true);
     expect(opponentTurn, JSON.stringify(diagnostics)).toBe(true);
-    expect(await page.evaluate(() => window.matchAnimationTargets.length)).toBeGreaterThan(0);
+    await expect(page.locator('.match-arena')).toHaveClass(/scene-active/);
+    expect(Number(await page.locator('.table-scene-canvas').getAttribute('data-frames'))).toBeGreaterThan(0);
+    await expect(page.locator('#match-human .battlefield-card[data-scene-card]')).not.toHaveCount(0);
     await expect(page.locator('#match-history-list')).toContainText('You cast');
     await expect(page.locator('#match-history-list')).toContainText('played');
     const history = await page.locator('#match-history-list').textContent();

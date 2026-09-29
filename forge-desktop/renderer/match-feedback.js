@@ -54,6 +54,15 @@ const matchFeedback = (() => {
       positions.delete(id); positions.set(id, result.get(id));
       while (positions.size > 200) positions.delete(positions.keys().next().value);
     });
+    // A spell can leave the hand before it resolves. Its on-table presentation
+    // provides the next flight's origin without treating a poll as a new play.
+    document.querySelectorAll('.cast-card[data-cast-visual]').forEach(element => {
+      const id = element.dataset.castVisual;
+      if (!id || result.has(id) || !element.checkVisibility()) return;
+      result.set(id, { rect: element.querySelector('.cast-portrait').getBoundingClientRect(), transform: 'none', area: 'stack' });
+      positions.delete(id); positions.set(id, result.get(id));
+      while (positions.size > 200) positions.delete(positions.keys().next().value);
+    });
     return result;
   }
 
@@ -74,6 +83,9 @@ const matchFeedback = (() => {
       const id = element.dataset.visualCard, old = before.get(id) || positions.get(id), card = current.get(id), former = prior.get(id);
       if (!id || !card || element.classList.contains('table-drag-ghost') || element.dataset.handVisible === 'false' || !element.checkVisibility()) return;
       const area = element.closest('#match-hand') ? 'hand' : element.closest('.battlefield-row') ? 'field' : 'other';
+      // The scene moves the existing card object across zones and turns it to
+      // tap. A second DOM flight would show two copies of the same card.
+      if (element.closest('.scene-active') && (area === 'field' || area === 'hand')) return;
       // Cached rectangles describe where a flight can start, not whether a
       // play happened. Priority-only snapshots retain DOM nodes and can still
       // have a cached hand rectangle for a card already on the battlefield.
@@ -84,6 +96,7 @@ const matchFeedback = (() => {
         if (source && end.width) {
           const flight = element.cloneNode(true);
           flight.classList.add('match-flight'); flight.removeAttribute('data-match-card'); flight.removeAttribute('data-preview-card');
+          flight.removeAttribute('data-table-combat');
           flight.removeAttribute('data-visual-card'); flight.tabIndex = -1; flight.setAttribute('aria-hidden', 'true');
           Object.assign(flight.style, { left: `${end.left}px`, top: `${end.top}px`, width: `${end.width}px`, height: `${end.height}px` });
           document.body.append(flight); flights.add(flight);

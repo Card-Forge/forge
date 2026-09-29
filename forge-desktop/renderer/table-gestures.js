@@ -44,7 +44,7 @@ function createTableDrag(root, options) {
       document.body.classList.add('table-dragging');
       gesture.ghost = gesture.source.cloneNode(true);
       gesture.ghost.removeAttribute('id');
-      for (const attribute of ['data-match-card', 'data-visual-card', 'data-preview-card']) gesture.ghost.removeAttribute(attribute);
+      for (const attribute of ['data-match-card', 'data-visual-card', 'data-preview-card', 'data-table-combat']) gesture.ghost.removeAttribute(attribute);
       gesture.ghost.className += ' table-drag-ghost';
       gesture.ghost.setAttribute('aria-hidden', 'true');
       gesture.ghost.tabIndex = -1;

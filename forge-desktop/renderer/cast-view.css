@@ -1,0 +1,26 @@
+/* Float over the center seam without intercepting a target or covering the hand. */
+.cast-stage { position: absolute; left: 47%; top: 43%; width: 136px; height: 180px; translate: -50% -50%; z-index: 12; pointer-events: none; }
+.cast-card { position: absolute; inset: 0; width: 116px; height: fit-content; text-align: center; transform: translate(calc(var(--cast-index) * 29px), calc(var(--cast-index) * -7px)) rotate(calc(var(--cast-index) * 5deg)); filter: drop-shadow(0 8px 10px #000c); }
+.cast-portrait { width: 100%; border-radius: 7px; box-shadow: 0 0 0 1px #dfcc9888, 0 0 30px #ebc57233; background: #172a30; }
+.cast-portrait .card-art { width: 100%; aspect-ratio: 488 / 680; border: 2px solid #d6bc82; border-radius: 7px; }
+.cast-portrait .card-art img { object-fit: contain; }
+.cast-label, .cast-name, .cast-step { display: block; background: #14252ef2; color: #f7dfad; border-radius: 4px; padding: 4px 5px; }
+.cast-label { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+.cast-name { font: 12px/1.2 Georgia; margin-top: 4px; overflow-wrap: anywhere; }
+.cast-step { font-size: 10px; line-height: 1.3; color: #deeadf; width: 172px; margin: 4px 0 0 -28px; }
+.cast-card:not(:first-child) .cast-name, .cast-card:not(:first-child) .cast-step, .cast-card:not(:first-child) .cast-label { visibility: hidden; }
+.cast-card.preparing .cast-portrait { box-shadow: 0 0 0 2px #f4d99d, 0 0 30px #ebc57255; }
+.cast-stage.choosing-targets { left: 38%; }
+.cast-stage.updating .cast-step { color: #dbc99f; }
+.cast-stage.updating .cast-color-choices { visibility: hidden; }
+.cast-color-choices { display: flex; justify-content: center; gap: 5px; width: 275px; margin: 8px 0 0 -80px; padding: 8px; background: #14252ef2; border: 1px solid #b9a478; border-radius: 8px; }
+.cast-color-choices button { pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 42px; padding: 5px 3px; background: #31434a; border: 1px solid #8a957e; border-radius: 5px; }
+.cast-color-choices button:hover { background: #566359; border-color: #f5dd98; }
+.cast-color-choices small { font-size: 9px; }
+.cast-color-choices .mana { width: 25px; height: 25px; font-size: 13px; }
+.cast-more { position: absolute; top: -28px; left: -20px; width: 175px; text-align: center; color: #e2d3b2; font-size: 10px; }
+@media (max-height: 800px) {
+  .cast-stage { width: 110px; height: 154px; top: 40%; }
+  .cast-card { width: 94px; }
+  .cast-step { width: 158px; margin-left: -32px; }
+}

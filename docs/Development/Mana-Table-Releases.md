@@ -20,8 +20,9 @@ Other platform packaging is not implemented.
 The script stages files under ignored `.tools/desktop-beta-<timestamp>` and writes
 a new `dist/ManaTable-<version>-<timestamp>/Mana Table-win32-x64` directory.
 Packages include only the explicit host-file list and the renderer, so update
-that list when extracting a new runtime module. Test helpers and development
-dependencies are not shipped.
+that list when extracting a new runtime module. The two pinned Three.js runtime
+modules and their MIT license are copied into `vendor/three`; npm's development
+tree and test helpers are not shipped.
 
 ## Data preservation
 

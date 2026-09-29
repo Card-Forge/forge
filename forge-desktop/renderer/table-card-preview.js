@@ -8,7 +8,7 @@ function createTableCardPreview() {
   const details = document.createElement('aside');
   details.id = 'table-card-details'; details.className = 'table-card-details'; details.hidden = true;
   details.setAttribute('aria-label', 'Card details');
-  document.querySelector('.match-rail').prepend(details);
+  document.querySelector('.match-rail-info').prepend(details);
   const toggle = document.createElement('button');
   toggle.id = 'match-card-details'; toggle.className = 'text-button'; toggle.textContent = 'Card details';
   toggle.title = 'Show rules and current card details in the side rail · I';

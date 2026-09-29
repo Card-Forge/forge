@@ -10,7 +10,7 @@ function createCombatView(arena, send) {
   toggle.className = 'combat-toggle';
   toggle.hidden = true;
   arena.append(panel, toggle);
-  let state, cards = new Map(), focusId, signature, combatId, collapsed = false, lastMode, pressed, lastSuspended = false;
+  let state, cards = new Map(), focusId, signature, combatId, collapsed = true, lastMode, pressed, lastSuspended = false;
   cardPreview.bind(panel, '[data-combat-card]', element => cards.get(element.dataset.combatCard));
   const scope = () => ({ sessionId: state?.id, promptId: state?.prompt?.id });
   const name = card => card?.faceDown ? 'Face-down creature' : card?.name || 'Creature';
@@ -71,14 +71,13 @@ function createCombatView(arena, send) {
     toggle.hidden = !available;
     if (!available) { panel.hidden = true; panel.replaceChildren(); signature = null; combatId = null; lastMode = null; lastSuspended = false; return; }
     const id = `${state.id}:${state.turn}`;
-    if (combatId !== id) { combatId = id; collapsed = false; focusId = null; lastMode = null; }
-    if (mode !== 'view' && mode !== lastMode) collapsed = false;
+    if (combatId !== id) { combatId = id; collapsed = true; focusId = null; lastMode = null; }
     // Paying mana, targeting, and unrelated engine choices need the underlying table.
     const suspended = state.prompt ? !['InputAttack', 'InputBlock', 'InputPassPriority'].includes(state.prompt.inputType) && state.prompt.kind !== 'allocate' : lastSuspended;
     lastSuspended = suspended;
     panel.hidden = collapsed || Boolean(suspended);
     toggle.hidden = !panel.hidden || Boolean(suspended);
-    toggle.textContent = `Combat · ${combat.attackers.length} attacker${combat.attackers.length === 1 ? '' : 's'}`;
+    toggle.textContent = `Combat details · ${combat.attackers.length} attacker${combat.attackers.length === 1 ? '' : 's'}`;
     toggle.setAttribute('aria-expanded', String(!panel.hidden));
     lastMode = mode;
     if (panel.hidden) return;

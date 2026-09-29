@@ -1,0 +1,21 @@
+/* DOM remains the accessible interaction layer. Its art is replaced only after
+   a successful WebGL frame; a failed context immediately restores the flat view. */
+.table-scene-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.scene-active .table-sigil { visibility: hidden; }
+.scene-active [data-scene-card] > .permanent-surface { opacity: 0; }
+.scene-active .match-hand-card[data-scene-card] { background: transparent; border-color: transparent; box-shadow: none; }
+.scene-active .match-hand-card[data-scene-card] > .match-card-face { opacity: 0; }
+.scene-active .cast-card[data-scene-card] .cast-portrait { opacity: 0; }
+.scene-active .battlefield-card { transition: none; }
+.scene-active .battlefield-card:hover, .scene-active .battlefield-card:focus-visible { transform: none; }
+.scene-active .battlefield-card::before, .scene-active .battlefield-card::after { pointer-events: none; }
+.scene-active .battlefield-card > .scene-card-name { position: absolute; left: calc(var(--field-overlap, 0px) / 2); width: calc(100% - var(--field-overlap, 0px)); bottom: -6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #eceddc; text-shadow: 0 1px 3px #000; text-align: center; font-size: 11px; line-height: 13px; pointer-events: none; }
+.scene-active .battlefield-card:has(> .match-stats) > .scene-card-name { left: 0; bottom: 1px; width: calc(100% - max(var(--field-overlap, 0px), 36px)); padding: 1px 2px; background: #14232bea; border-radius: 2px; }
+.scene-card-name { display: none; }
+.scene-active .scene-card-name { display: block; }
+.scene-active .match-hand-card.drag-source { opacity: 1; }
+body:has(.scene-active) > .table-drag-ghost[data-scene-card],
+body:has(.scene-active) > .table-return-ghost[data-scene-card] { opacity: 0; }
+#match-renderer { font-size: 10px; color: #b3c5bd; }
+#match-renderer[aria-pressed="true"] { color: #f4d897; }
+@media (max-width: 1100px) { .match-heading-actions { gap: 8px; } }

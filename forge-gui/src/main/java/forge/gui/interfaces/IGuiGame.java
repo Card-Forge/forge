@@ -1,6 +1,7 @@
 package forge.gui.interfaces;
 
 import forge.LobbyPlayer;
+import forge.card.MagicColor;
 import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
@@ -214,6 +215,11 @@ public interface IGuiGame {
         return one(message, choices, null);
     }
     <T> T one(String message, List<T> choices, FSerializableFunction<T, String> display);
+
+    /** Preserve the source for clients that present color choices on the table. */
+    default MagicColor.Color chooseColor(String message, CardView source, List<MagicColor.Color> colors) {
+        return one(message, colors);
+    }
 
     <T> void reveal(String message, List<T> items);
 

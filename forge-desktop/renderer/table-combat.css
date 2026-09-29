@@ -1,0 +1,15 @@
+.table-combat-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 9; pointer-events: none; overflow: hidden; filter: drop-shadow(0 1px 2px #000); }
+.table-combat-lines > path { fill: none; stroke-width: 2.5; opacity: .82; }
+.table-combat-lines .attack-line { stroke: #efa17f; }
+.table-combat-lines .block-line { stroke: #82dce4; }
+.table-combat-lines marker .attack-line { fill: #efa17f; }
+.table-combat-lines marker .block-line { fill: #82dce4; }
+.match-arena:has(#combat-view:not([hidden])) .table-combat-lines { visibility: hidden; }
+.battlefield-card.table-combat-ready { outline: 2px solid #e8d092; outline-offset: -2px; cursor: grab; touch-action: none; }
+.battlefield-card.table-attacker .permanent-surface { box-shadow: 0 0 0 2px #e88e66, 0 0 15px #e8785544; }
+.battlefield-card.table-blocker .permanent-surface { box-shadow: 0 0 0 2px #81d7df, 0 0 15px #81d7df44; }
+.battlefield-card.table-combat-selected { outline: 3px solid #f9e5ad; outline-offset: -3px; }
+.table-combat-badge { position: absolute; z-index: 5; top: 3px; left: 3px; right: 3px; padding: 3px; border-radius: 4px; background: #461f1de8; color: #ffe4c7; font: 10px/1.2 'Segoe UI', sans-serif; white-space: normal; max-height: 32px; overflow: hidden; pointer-events: none; }
+.table-blocker .table-combat-badge { background: #163c45ef; color: #d6f9ff; }
+.table-defender-selected, .combat-drop-ready { outline: 3px solid #f3d490 !important; outline-offset: 2px; }
+.battlefield-card.combat-drop-ready { outline-offset: -3px; }

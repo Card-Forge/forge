@@ -46,6 +46,10 @@ node --test tests/commander.test.cjs
 | Combat | `combat.spec.cjs`, `match.test.cjs`, `multiplayer.test.cjs` |
 | Card visibility/inspection | `card-preview.spec.cjs`, `card-faces.spec.cjs`, `library-search.spec.cjs` |
 | Animation/event correlation | `animation-feedback.spec.cjs` |
+| 3D continuity, idle rendering and graphics fallback | `table-scene.spec.cjs` (real WebGL and engine); animation-feedback retains the 2D fallback check |
+| Anchored controls and independent panel scrolling | `rail-layout.spec.cjs` |
+| Casting, cancelling, the stack and revealed hand portraits | `casting-reveal.spec.cjs` |
+| Source-aware artifact mana choices | `mana-choice.spec.cjs` |
 
 ## Profiles and artifacts
 

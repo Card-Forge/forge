@@ -2009,7 +2009,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final byte result;
         if (choices.size() > 2) {
-            result = getGui().one(message, choices).getColorMask();
+            result = getGui().chooseColor(message, CardView.get(c), choices).getColorMask();
         } else {
             final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
                     ? 0 : 1;
