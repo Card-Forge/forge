@@ -125,7 +125,16 @@ public class GameRules {
         return appliedVariants.contains(GameType.Commander)
                 || appliedVariants.contains(GameType.Oathbreaker)
                 || appliedVariants.contains(GameType.TinyLeaders)
-                || appliedVariants.contains(GameType.Brawl);
+                || appliedVariants.contains(GameType.Brawl)
+                || appliedVariants.contains(GameType.PauperCommander);
+    }
+
+    /**
+     * @return how much combat damage from a single commander makes a player lose:
+     * 21 in Commander (rule 903.10a), 16 in Pauper Commander.
+     */
+    public int getCommanderDamageToLose() {
+        return appliedVariants.contains(GameType.PauperCommander) ? 16 : 21;
     }
 
     public boolean useGrayText() {

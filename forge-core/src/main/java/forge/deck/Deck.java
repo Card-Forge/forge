@@ -361,7 +361,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             for (Entry<PaperCard, Integer> entry : pool) {
                 PaperCard card = entry.getKey();
                 String normalizedRequest = getPoolRequest(entry);
-                if(deckSection.validate(card))
+                if(deckSection.validateExplicit(card))
                     validatedSection.add(normalizedRequest);
                 else {
                     // Card was in the wrong section. Move it to the right section.

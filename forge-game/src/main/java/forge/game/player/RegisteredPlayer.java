@@ -156,6 +156,10 @@ public class RegisteredPlayer {
             start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
 		                                                         // Modified for layering of variants to life +20
     	}
+        if (appliedVariants.contains(GameType.PauperCommander)) {
+            start.commanders = deck.getCommanders();
+            start.setStartingLife(start.getStartingLife() + 10); // Pauper Commander: each player starts at 30 life
+        }
         if (appliedVariants.contains(GameType.Oathbreaker)) {
             start.commanders = deck.getCommanders();
         }

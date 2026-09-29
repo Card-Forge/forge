@@ -93,7 +93,7 @@ public class VLobby implements ILobbyView {
      * the end because they replace the deck outright rather than constrain it.
      */
     private static final ImmutableList<GameType> GAME_FORMATS = ImmutableList.of(
-            GameType.Constructed, GameType.Commander, GameType.Oathbreaker,
+            GameType.Constructed, GameType.Commander, GameType.PauperCommander, GameType.Oathbreaker,
             GameType.Brawl, GameType.TinyLeaders,
             GameType.MomirBasic, GameType.MoJhoSto);
 
@@ -812,6 +812,7 @@ public class VLobby implements ILobbyView {
             }
             break;
         case Commander:
+        case PauperCommander:
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
@@ -1211,6 +1212,12 @@ public class VLobby implements ILobbyView {
                 forCommander = true;
                 deckType = iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
                 prefKey = FPref.COMMANDER_DECK_STATES[iSlot];
+                break;
+            case PauperCommander:
+                // Pauper Commander decks are kept with the Commander decks
+                forCommander = true;
+                deckType = DeckType.COMMANDER_DECK;
+                prefKey = FPref.PAUPER_COMMANDER_DECK_STATES[iSlot];
                 break;
             case TinyLeaders:
                 forCommander = true;

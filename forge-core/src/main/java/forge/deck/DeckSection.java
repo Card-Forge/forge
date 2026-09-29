@@ -54,6 +54,17 @@ public enum DeckSection {
         return fnValidator.test(card);
     }
 
+    /**
+     * Like {@link #validate(PaperCard)}, for a card the deck explicitly puts in this section
+     * (a deck file's [Commander] section, or a Commander header in an imported list).
+     * An explicit Commander section also keeps Pauper Commander's non-legendary commanders,
+     * which {@link #validate(PaperCard)} doesn't accept when guessing where a card belongs.
+     * Whether the commander is legal is checked by the DeckFormat when the game starts.
+     */
+    public boolean validateExplicit(PaperCard card) {
+        return validate(card) || (this == Commander && card.getRules().canBePauperCommander());
+    }
+
     // Returns the matching section for "special"/supplementary core types.
     public static DeckSection matchingSection(PaperCard card){
         if (DeckSection.Conspiracy.validate(card))

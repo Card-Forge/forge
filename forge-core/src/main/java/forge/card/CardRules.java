@@ -335,6 +335,20 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
+    /**
+     * Pauper Commander (PDH) doesn't require a legendary commander: the front face only has to be
+     * a nonland creature, a vehicle or a spacecraft with printed P/T. The PDH rarity requirement
+     * (printed at uncommon) is checked by {@link forge.deck.DeckFormat#PauperCommander}.
+     */
+    public boolean canBePauperCommander() {
+        if (canBeCommander()) {
+            return true;
+        }
+        CardType type = mainPart.getType();
+        return (canBeCreature() && !type.isLand()) || type.isVehicle()
+                || (type.isSpacecraft() && getPower() != null);
+    }
+
     public boolean canBePartnerCommanders(CardRules b) {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;

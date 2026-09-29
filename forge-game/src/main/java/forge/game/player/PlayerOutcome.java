@@ -10,11 +10,18 @@ public class PlayerOutcome {
     public final String altWinSourceName;
     public final GameLossReason lossState;
     public final String loseConditionSpell;
+    /** Commander damage that made the player lose when it isn't the usual 21 (Pauper Commander uses 16), otherwise 0. */
+    public final int commanderDamageToLose;
 
     private PlayerOutcome(String altWinSourceName, GameLossReason lossState, String loseConditionSpell) {
+        this(altWinSourceName, lossState, loseConditionSpell, 0);
+    }
+
+    private PlayerOutcome(String altWinSourceName, GameLossReason lossState, String loseConditionSpell, int commanderDamageToLose) {
         this.altWinSourceName = altWinSourceName;
         this.loseConditionSpell = loseConditionSpell;
         this.lossState = lossState;
+        this.commanderDamageToLose = commanderDamageToLose;
     }
 
     /**
@@ -41,6 +48,10 @@ public class PlayerOutcome {
      */
     public static PlayerOutcome loss(GameLossReason state, String spellName) {
         return new PlayerOutcome(null, state, spellName);
+    }
+
+    public static PlayerOutcome commanderDamageLoss(int commanderDamageToLose) {
+        return new PlayerOutcome(null, GameLossReason.CommanderDamage, null, commanderDamageToLose == 21 ? 0 : commanderDamageToLose);
     }
 
     /**
@@ -74,7 +85,9 @@ public class PlayerOutcome {
             case Poisoned: return localizer.getMessage("lblLostBecauseOfObtainingTenPoisonCounters");
             case OpponentWon: return localizer.getMessage("lblLostBecauseAnOpponentHasWonBySpell").replace("%s", loseConditionSpell);
             case SpellEffect: return localizer.getMessage("lblLostDueToEffectOfSpell").replace("%s", loseConditionSpell);
-            case CommanderDamage: return localizer.getMessage("lblLostDueToAccumulationOf21DamageFromGenerals");
+            case CommanderDamage: return commanderDamageToLose == 0
+                    ? localizer.getMessage("lblLostDueToAccumulationOf21DamageFromGenerals")
+                    : localizer.getMessage("lblLostDueToAccumulationOfXDamageFromGenerals", commanderDamageToLose);
             case IntentionalDraw: return localizer.getMessage("lblAcceptedThatTheGameIsADraw");
         }
         return localizer.getMessage("lblLostForUnknownReasonBug");

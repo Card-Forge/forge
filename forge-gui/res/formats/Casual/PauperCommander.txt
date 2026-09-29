@@ -1,0 +1,7 @@
+[format]
+Name:Pauper Commander
+Type:Casual
+Subtype:Commander
+Order:139
+Rarities:L, C
+Banned:Mystic Remora; Rhystic Study; Pradesh Gypsies; Stone-Throwing Devils

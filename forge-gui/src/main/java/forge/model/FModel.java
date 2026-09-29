@@ -253,6 +253,10 @@ public final class FModel {
         getMagicDb().setCommanderPredicate(getFormats().get("Commander").getFilterRules());
         getMagicDb().setOathbreakerPredicate(getFormats().get("Oathbreaker").getFilterRules());
         getMagicDb().setBrawlPredicate(getFormats().get("Brawl").getFilterRules());
+        final GameFormat pauperCommanderFormat = getFormats().get("Pauper Commander");
+        if (pauperCommanderFormat != null) {
+            getMagicDb().setPauperCommanderPredicate(pauperCommanderFormat.getFilterRules());
+        }
 
         getMagicDb().setFilteredHandsEnabled(getPreferences().getPrefBoolean(FPref.FILTERED_HANDS));
         try {
