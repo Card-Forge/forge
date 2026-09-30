@@ -102,6 +102,11 @@ public class PlayerPanel extends FPanel {
     private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaCommanderDeck")).build();
     private final FLabel cmdLabel;
 
+    // Picks which card of the chosen commander deck leads it in the next match
+    private final FLabel cmdPickBtn = new FLabel.ButtonBuilder().text("").build();
+    private final FLabel cmdPickLabel;
+    private boolean hasCommanderChoices = false;
+
     private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaPlanarDeck")).build();
     private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text(localizer.getMessage("lblPlanarDeckEditor")).build();
     private final FLabel pchLabel;
@@ -126,6 +131,7 @@ public class PlayerPanel extends FPanel {
         this.deckLabel = lobby.newLabel(localizer.getMessage("lblDeck") + ":");
         this.scmLabel = lobby.newLabel(localizer.getMessage("lblSchemeDeck") + ":");
         this.cmdLabel = lobby.newLabel(localizer.getMessage("lblCommanderDeck") + ":");
+        this.cmdPickLabel = lobby.newLabel(localizer.getMessage("lblCommanderPick") + ":");
         this.pchLabel = lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
         this.vgdLabel = lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
 
@@ -187,6 +193,11 @@ public class PlayerPanel extends FPanel {
 
         this.add(cmdLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
         this.add(cmdDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+
+        // Shares row 3 with the deck button, which is always hidden while a commander deck is selected
+        this.add(cmdPickLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+        this.add(cmdPickBtn, variantBtnConstraints + ", cell 2 3, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+        cmdPickBtn.setToolTipText(localizer.getMessage("lblChooseCommanderHint"));
 
         this.add(scmLabel, variantBtnConstraints + ", cell 0 4, sx 2, ax right");
         this.add(scmDeckSelectorBtn, variantBtnConstraints + ", cell 2 4, growx, pushx");
@@ -363,6 +374,12 @@ public class PlayerPanel extends FPanel {
         cmdDeckSelectorBtn.setVisible(isCommanderApplied);
         cmdLabel.setVisible(isCommanderApplied);
 
+        // The commander can be picked for local humans and AI players alike
+        final boolean isCommanderPickable = mayEdit && lobby.hasVariant(GameType.Commander)
+                && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI) && hasCommanderChoices;
+        cmdPickBtn.setVisible(isCommanderPickable);
+        cmdPickLabel.setVisible(isCommanderPickable);
+
         scmDeckSelectorBtn.setVisible(archenemyVisiblity);
         scmDeckEditor.setVisible(archenemyVisiblity);
         scmLabel.setVisible(archenemyVisiblity);
@@ -467,6 +484,13 @@ public class PlayerPanel extends FPanel {
         cmdDeckSelectorBtn.setText(text);
     }
 
+    /** Shows which commander leads the deck, and whether the player may pick another one. */
+    public void setCommanderPick(final String text, final boolean hasChoices) {
+        cmdPickBtn.setText(text);
+        hasCommanderChoices = hasChoices;
+        updateVariantControlsVisibility();
+    }
+
     public void focusOnAvatar() {
         avatarLabel.requestFocusInWindow();
     }
@@ -551,6 +575,11 @@ public class PlayerPanel extends FPanel {
                     GameType.Commander);
             cmdDeckSelectorBtn.requestFocusInWindow();
             lobby.changePlayerFocus(index);
+        });
+
+        cmdPickBtn.setCommand((Runnable) () -> {
+            lobby.changePlayerFocus(index);
+            lobby.chooseCommander(index);
         });
 
         // Planechase buttons
