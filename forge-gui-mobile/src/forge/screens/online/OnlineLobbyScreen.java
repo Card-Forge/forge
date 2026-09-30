@@ -233,12 +233,17 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             if (!pastEvents.isEmpty()) {
                 String create = Forge.getLocalizer().getMessage("lblNetworkSetUpEventCreate");
                 String loadPast = Forge.getLocalizer().getMessage("lblNetworkSetUpEventLoadPast");
+                String deletePast = Forge.getLocalizer().getMessage("lblNetworkSetUpEventDeletePast");
                 String setupChoice = SGuiChoose.oneOrNone(
                         Forge.getLocalizer().getMessage("lblNetworkSetUpEventPrompt"),
-                        Arrays.asList(create, loadPast));
+                        Arrays.asList(create, loadPast, deletePast));
                 if (setupChoice == null) return;
                 if (setupChoice.equals(loadPast)) {
                     loadPastEvent(pastEvents);
+                    return;
+                }
+                if (setupChoice.equals(deletePast)) {
+                    deletePastEvent(pastEvents);
                     return;
                 }
             }
@@ -370,6 +375,23 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             activeConformance = true;
             cbDeckConformance.setSelected(true);
             broadcastEventSelection();
+            updateDeckListFilter();
+            refreshEventPanel();
+            updateActionButtons();
+            revalidate();
+        });
+    }
+
+    private void deletePastEvent(List<NetworkEvent.EventChoice> pastEvents) {
+        NetworkEvent.EventChoice chosen = SGuiChoose.oneOrNone(
+                Forge.getLocalizer().getMessage("lblNetworkDeletePastEventPrompt"), pastEvents);
+        if (chosen == null || !NetworkEvent.confirmDeleteEvent(chosen)) return;
+        FThreads.invokeInEdtLater(() -> {
+            NetworkEvent.deleteEventDecks(chosen.id());
+            if (chosen.id().equals(activeEventId)) {
+                activeEventId = null;
+                broadcastEventSelection();
+            }
             updateDeckListFilter();
             refreshEventPanel();
             updateActionButtons();

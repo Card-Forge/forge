@@ -6,8 +6,10 @@ import forge.deck.DeckProxy;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
+import forge.gui.util.SOptionPane;
 import forge.model.FModel;
 import forge.util.Localizer;
+import forge.util.storage.IStorage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -202,12 +204,38 @@ public final class NetworkEvent {
 
     /** The pool deck saved for a past event id, or null if none is on disk. */
     private static Deck findEventDeck(String eventId) {
+        List<Deck> decks = findEventDecks(eventId);
+        return decks.isEmpty() ? null : decks.get(0);
+    }
+
+    /** Every deck saved for a past event id: the player's own pool and, on the host, the bot decks. */
+    private static List<Deck> findEventDecks(String eventId) {
+        List<Deck> decks = new ArrayList<>();
         for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
             if (eventId.equals(DeckProxy.getEventTag(d, "eventId"))) {
-                return d;
+                decks.add(d);
             }
         }
-        return null;
+        return decks;
+    }
+
+    /** Ask to delete every deck saved for a past event, listing them. Blocks, so mobile must call it off the EDT. */
+    public static boolean confirmDeleteEvent(EventChoice event) {
+        Localizer localizer = Localizer.getInstance();
+        List<Deck> decks = findEventDecks(event.id());
+        StringBuilder message = new StringBuilder(localizer.getMessage(
+                "lblNetworkDeletePastEventConfirm", event.label(), decks.size())).append('\n');
+        decks.stream().map(Deck::getName).sorted().forEach(name -> message.append('\n').append(name));
+        return SOptionPane.showConfirmDialog(message.toString(),
+                localizer.getMessage("lblNetworkDeletePastEventTitle"),
+                localizer.getMessage("lblDelete"), localizer.getMessage("lblCancel"), false);
+    }
+
+    public static void deleteEventDecks(String eventId) {
+        IStorage<Deck> storage = FModel.getDecks().getNetworkEventDecks();
+        for (Deck d : findEventDecks(eventId)) {
+            storage.delete(d.getName());
+        }
     }
 
     /** Short display label for a past event id, e.g., "Draft — Innistrad — (2026-04-20 10:15)". */
