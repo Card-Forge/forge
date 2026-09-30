@@ -55,32 +55,50 @@ public class AdventureReadPriceList {
         }
     }
 
+    private static PriceData priceDataInstance = null;
+
     /**
      * Load card prices from the current adventure's cardprices.txt.
      * Uses Config.getFile() so each plane can override common prices.
      *
      * @return PriceData with prices and mode, or empty prices if no file exists
      */
+
     public static PriceData loadPrices() {
+        if (priceDataInstance != null) {
+            return priceDataInstance;
+        }
+
         FileHandle handle = Config.instance().getFile(Paths.CARD_PRICES);
         if (handle == null || !handle.exists()) {
-            return new PriceData(new HashMap<>(), PriceMode.OPTIONAL);
+            priceDataInstance = new PriceData(new HashMap<>(), PriceMode.OPTIONAL);
+            return priceDataInstance;
         }
+
         PriceData data = readFile(handle.path());
         // Also load booster prices from the common list (Simisays's booster pricing)
         data.prices.putAll(readPriceEntries(ForgeConstants.ADVENTURE_BOOSTER_PRICE_FILE));
-        return data;
+
+        priceDataInstance = data;
+        return priceDataInstance;
     }
 
     private static PriceData readFile(final String file) {
         final Map<String, Integer> map = new HashMap<>();
-
         final List<String> lines = FileUtil.readFile(file);
+        if (lines == null || lines.isEmpty()) {
+            return new PriceData(map, PriceMode.OPTIONAL);
+        }
 
         // Parse directives from comment lines at the top
         boolean fluctuate = false;
         PriceMode mode = PriceMode.OPTIONAL;
-        for (final String line : lines) {
+
+        int totalLines = lines.size();
+        for (int i = 0; i < totalLines; i++) {
+            String line = lines.get(i);
+            if (line == null) continue;
+
             String trimmed = line.trim().toLowerCase();
             if (trimmed.startsWith(FLUCTUATION_DIRECTIVE)) {
                 fluctuate = trimmed.substring(FLUCTUATION_DIRECTIVE.length()).trim().equals("true");
@@ -95,21 +113,19 @@ public class AdventureReadPriceList {
             }
         }
 
-        for (final String line : lines) {
-            if (line.trim().isEmpty()) {
-                continue;
-            }
-            if (line.startsWith(COMMENT)) {
-                continue;
-            }
-
-            final String[] s = line.split("=");
-            if (s.length < 2) {
+        for (int i = 0; i < totalLines; i++) {
+            String line = lines.get(i);
+            if (line == null || line.trim().isEmpty() || line.startsWith(COMMENT)) {
                 continue;
             }
 
-            final String name = s[0].trim();
-            final String price = s[1].trim();
+            int equalSignIdx = line.indexOf('=');
+            if (equalSignIdx == -1 || equalSignIdx == 0 || equalSignIdx == line.length() - 1) {
+                continue;
+            }
+
+            final String name = line.substring(0, equalSignIdx).trim();
+            final String price = line.substring(equalSignIdx + 1).trim();
 
             try {
                 int val = Integer.parseInt(price);
@@ -148,20 +164,35 @@ public class AdventureReadPriceList {
     private static Map<String, Integer> readPriceEntries(final String file) {
         final Map<String, Integer> map = new HashMap<>();
         final List<String> lines = FileUtil.readFile(file);
-        for (final String line : lines) {
-            if (line.trim().isEmpty() || line.startsWith(COMMENT)) {
+        if (lines == null || lines.isEmpty()) {
+            return map;
+        }
+
+        int totalLines = lines.size();
+        for (int i = 0; i < totalLines; i++) {
+            String line = lines.get(i);
+            if (line == null || line.trim().isEmpty() || line.startsWith(COMMENT)) {
                 continue;
             }
-            final String[] s = line.split("=");
-            if (s.length < 2) {
+
+            int equalSignIdx = line.indexOf('=');
+            if (equalSignIdx == -1 || equalSignIdx == 0 || equalSignIdx == line.length() - 1) {
                 continue;
             }
+
+            final String keyName = line.substring(0, equalSignIdx).trim();
+            final String priceValStr = line.substring(equalSignIdx + 1).trim();
+
             try {
-                map.put(s[0].trim(), Integer.parseInt(s[1].trim()));
+                map.put(keyName, Integer.parseInt(priceValStr));
             } catch (final NumberFormatException nfe) {
-                System.err.println("AdventureReadPriceList: invalid price for '" + s[0].trim() + "': " + nfe.getMessage());
+                System.err.println("AdventureReadPriceList: invalid price for '" + keyName + "': " + nfe.getMessage());
             }
         }
         return map;
+    }
+
+    public static void clearPriceDataInstance() {
+        priceDataInstance = null;
     }
 }

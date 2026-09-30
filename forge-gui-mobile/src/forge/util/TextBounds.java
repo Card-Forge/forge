@@ -5,11 +5,16 @@ public class TextBounds {
     public float height;
 
     public TextBounds() {
-
     }
 
     public TextBounds(float width, float height) {
         this.width = width;
         this.height = height;
+    }
+
+    public TextBounds set(float width, float height) {
+        this.width = width;
+        this.height = height;
+        return this;
     }
 }

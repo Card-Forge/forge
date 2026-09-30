@@ -34,6 +34,22 @@ import java.util.StringTokenizer;
 
 public class CardFaceSymbols {
     public static final float FONT_SIZE_FACTOR = 0.85f;
+    private static final String[] genericDigitStrings = new String[100];
+    private static final StringBuilder stringBuilder = new StringBuilder(64);
+
+    static {
+        for (int i = 0; i < genericDigitStrings.length; i++) {
+            genericDigitStrings[i] = Integer.toString(i);
+        }
+    }
+
+    private static String getCachedDigitString(int value) {
+        int absVal = Math.abs(value);
+        if (absVal < genericDigitStrings.length) {
+            return genericDigitStrings[absVal];
+        }
+        return Integer.toString(absVal);
+    }
 
     public static void loadImages() {
         for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
@@ -101,37 +117,40 @@ public class CardFaceSymbols {
         final float dx = imageSize;
 
         if (hasGeneric) {
-            for (final ManaCostShard s : manaCost) { //render X shards before generic
+            // Render X shards before generic
+            for (final ManaCostShard s : manaCost) {
                 if (s == ManaCostShard.X) {
                     drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
                     x += dx;
                 }
             }
 
-            final String sGeneric = Integer.toString(genericManaCost);
+            final String sGeneric = getCachedDigitString(genericManaCost);
             drawSymbol(sGeneric, g, x, y, imageSize, imageSize);
             x += dx;
-    
-            for (final ManaCostShard s : manaCost) { //render non-X shards after generic
+
+            // Render non-X shards after generic
+            for (final ManaCostShard s : manaCost) {
                 if (s != ManaCostShard.X) {
                     drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
                     x += dx;
                 }
             }
         }
-        else { //if no generic, just render shards in order
+        else { // If no generic, just render shards in order
             for (final ManaCostShard s : manaCost) {
                 drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
                 x += dx;
             }
         }
+
         // Show "negative" mana cost caused by perpetual cost reduction effects
         // This is only relevant for cards with an "X" in the cost
         if (genericManaCost < 0) {
-            final String sGenericAdjust = Integer.toString(Math.abs(genericManaCost));
+            final String sGenericAdjust = getCachedDigitString(genericManaCost);
             drawSymbol(sGenericAdjust, g, x, y, imageSize, imageSize);
             // Give it a yellow border so it doesn't look like the regular generic mana symbol
-            g.drawCircle(3, Color.YELLOW, x + dx / 2, y + dx / 2, imageSize / 2 - 1);
+            g.drawCircle(3, Color.YELLOW, x + dx / 2f, y + dx / 2f, imageSize / 2f - 1f);
             x += dx;
         }
     }
@@ -152,8 +171,15 @@ public class CardFaceSymbols {
     }
 
     public static void drawAttractionLights(Graphics g, Set<Integer> lights, float x, float y, final float imageSize, boolean vertical) {
-        for(int i = 1; i <= 6; i++) {
-            drawSymbol("AL" + i + (lights.contains(i) ? "ON" : "OFF"), g, x, y, imageSize, imageSize);
+        if (lights == null) return;
+
+        for (int i = 1; i <= 6; i++) {
+            // ZERO ALLOCATION APPROACH: Use our shared fluent builder chain instead of standard string concats!
+            stringBuilder.setLength(0);
+            stringBuilder.append("AL").append(i).append(lights.contains(i) ? "ON" : "OFF");
+            String compiledSymbolKey = stringBuilder.toString();
+
+            drawSymbol(compiledSymbolKey, g, x, y, imageSize, imageSize);
             if (!vertical)
                 x += imageSize;
             else

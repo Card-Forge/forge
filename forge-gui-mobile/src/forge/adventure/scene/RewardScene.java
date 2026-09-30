@@ -3,10 +3,13 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
@@ -59,16 +62,21 @@ public class RewardScene extends UIScene {
         Shop,
         Loot,
         QuestReward,
-        RewardChoice
+        RewardChoice,
+        EventReward
     }
 
     Type type;
-    Array<Actor> generated = new Array<>();
+    Array<Actor> generated = new Array<>(32);
+    private final List<RewardActor> rewardList = new ArrayList<>(32);
     static public final float CARD_WIDTH = 550f;
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
     ItemPool<PaperCard> collectionPool = null;
     private int remainingSelections = 0;
+    public Image marketBackgroundImg = null;
+    private Actor cachedCardsContainerActor = null;
+    private Drawable origDrawable = null;
 
     private RewardScene() {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
@@ -77,6 +85,9 @@ public class RewardScene extends UIScene {
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
         headerLabel = ui.findActor("shopName");
         headerLabelOrigPos = new Vector2(headerLabel.getX(), headerLabel.getY());
+        if (ui.findActor("market_background") instanceof Image image)
+            this.marketBackgroundImg = image;
+        this.cachedCardsContainerActor = ui.findActor("cards");
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("detail", this::toggleToolTip);
         ui.onButtonPress("restock", this::restockShop);
@@ -84,6 +95,7 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
+        origDrawable = getBGDrawable();
     }
 
     @Override
@@ -125,8 +137,8 @@ public class RewardScene extends UIScene {
     float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
     public void quitScene() {
-        //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (actor instanceof RewardActor rewardActor) {
                 rewardActor.removeTooltip();
                 actor.remove();
@@ -172,11 +184,12 @@ public class RewardScene extends UIScene {
     }
 
     void clearGenerated() {
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            if (type == Type.Loot)
+            if (type == Type.Loot || type == Type.EventReward)
                 AdventurePlayer.current().addReward(rewardActor.getReward());
             if (type == Type.QuestReward)
                 AdventurePlayer.current().addReward(rewardActor.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
@@ -189,16 +202,18 @@ public class RewardScene extends UIScene {
     }
 
     public List<RewardActor> getGeneratedRewards() {
-        List<RewardActor> rewards = new ArrayList<>();
-        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+        rewardList.clear();
+        for (int i = 0; i < generated.size; i++) {
+            Actor actor = generated.get(i);
             if (!(actor instanceof RewardActor rewardActor)) {
                 continue;
             }
-            if (!rewardActor.frontSideUp())
+            if (!rewardActor.frontSideUp()) {
                 continue;
-            rewards.add(rewardActor);
+            }
+            rewardList.add(rewardActor);
         }
-        return rewards;
+        return rewardList;
     }
 
     @Override
@@ -206,9 +221,9 @@ public class RewardScene extends UIScene {
         stage.act(delta);
         ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
-            if (type == Type.Loot || type == Type.QuestReward) {
-                flipCountDown -= Gdx.graphics.getDeltaTime();
-                exitCountDown += Gdx.graphics.getDeltaTime();
+            if (type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) {
+                flipCountDown -= delta;
+                exitCountDown += delta;
             }
             if (flipCountDown <= 0) {
                 clearGenerated();
@@ -221,6 +236,11 @@ public class RewardScene extends UIScene {
     public void enter() {
         autoSell = false;
         updateDetailButton();
+        if (type == Type.Loot) {
+            setUIBackground(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
+        } else {
+            setUIBackground(origDrawable);
+        }
         super.enter();
     }
 
@@ -237,7 +257,7 @@ public class RewardScene extends UIScene {
         }
         if (exit)
             done(true);
-        else if ((type == Type.Loot || type == Type.QuestReward) && !shown) {
+        else if ((type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) && !shown) {
             shown = true;
             float delay = 0.09f;
             generated.shuffle();
@@ -382,13 +402,13 @@ public class RewardScene extends UIScene {
         addToSelectable(doneButton);
         generated.clear();
 
-        Actor card = ui.findActor("cards");
+        Actor card = this.cachedCardsContainerActor;
         //reset pos
         headerLabel.setPosition(headerLabelOrigPos.x, headerLabelOrigPos.y);
         headerLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (type == Type.Loot || type == Type.QuestReward) {
+                if (type == Type.EventReward || type == Type.Loot || type == Type.QuestReward) {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
@@ -409,15 +429,17 @@ public class RewardScene extends UIScene {
             } else {
                 headerLabel.setVisible(false);
             }
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(true);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(true);
+            }
         } else {
             headerLabel.setVisible(false);
             headerLabel.setText("");
-            Actor background = ui.findActor("market_background");
-            if (background != null)
-                background.setVisible(false);
+
+            if (this.marketBackgroundImg != null) {
+                this.marketBackgroundImg.setVisible(false);
+            }
         }
 
         float targetWidth = card.getWidth();
@@ -451,6 +473,7 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case QuestReward:
+            case EventReward:
             case Loot:
                 headerLabel.setPosition(restockButton.getX(), restockButton.getY());
                 headerLabel.setVisible(true);
@@ -539,7 +562,7 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
+            RewardActor actor = new RewardActor(reward, type == Type.EventReward || type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 

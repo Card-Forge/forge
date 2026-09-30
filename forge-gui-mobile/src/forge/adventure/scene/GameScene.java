@@ -12,6 +12,7 @@ import forge.adventure.util.Current;
 import forge.adventure.world.World;
 import forge.util.TextUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,6 +27,24 @@ public class GameScene extends HudScene {
     private static GameScene object;
     private String location = "";
     private String locationColorID = "[+c]";
+    private static final HashMap<String, String> cachedHeaderNamesMap = new HashMap<>();
+    private static final HashMap<String, String> cachedColorIDsMap = new HashMap<>();
+
+    static {
+        String[] colors = {"white", "red", "green", "blue", "black", "waste"};
+        String[] colorTags = {"[+w]", "[+r]", "[+g]", "[+u]", "[+b]", "[+c]"};
+
+        for (int i = 0; i < colors.length; i++) {
+            String name = colors[i];
+            cachedColorIDsMap.put(name, colorTags[i]);
+
+            if ("waste".equals(name)) {
+                cachedHeaderNamesMap.put(name, "Waste Map");
+            } else {
+                cachedHeaderNamesMap.put(name, name.substring(0, 1).toUpperCase() + name.substring(1) + " Map");
+            }
+        }
+    }
 
     public static GameScene instance() {
         if (object == null)
@@ -56,7 +75,7 @@ public class GameScene extends HudScene {
         Forge.clearTransitionScreen();
         Forge.clearCurrentScreen();
         super.enter();
-        // This causes the inifine load of POI if the two collision point is too close.
+        // This causes the infinite load of POI if the two collision point is too close.
         // IIRC This is used before and the player will start inside the POI.
         // but we don't allow saving inside the POI anymore.
         // WorldStage.getInstance().handlePointsOfInterestCollision();
@@ -66,31 +85,46 @@ public class GameScene extends HudScene {
         return locationColorID;
     }
 
+    // updateBGM is inside act method so this is polled every frame. I wonder how to optimize this further
     public String getAdventurePlayerLocation(boolean forHeader, boolean skipRoads) {
         if (MapStage.getInstance().isInMap()) {
             location = forHeader ? TileMapScene.instance().rootPoint.getDisplayName() : TileMapScene.instance().rootPoint.getData().type;
         } else {
             World world = Current.world();
-            //this gets the name of the layer... this shoud be based on boundaries...
-            int currentBiome = World.highestBiome(world.getBiomeMapXY((int) stage.getPlayerSprite().getX() / world.getTileSize(), (int) stage.getPlayerSprite().getY() / world.getTileSize()));
+            int tileSize = world.getTileSize();
+
+            int playerTileX = (int) stage.getPlayerSprite().getX() / tileSize;
+            int playerTileY = (int) stage.getPlayerSprite().getY() / tileSize;
+
+            // this gets the name of the layer... this shoud be based on boundaries...
+            int currentBiome = World.highestBiome(world.getBiomeMapXY(playerTileX, playerTileY));
             List<BiomeData> biomeData = world.getData().GetBiomes();
-            if (biomeData.size() <= currentBiome) //shouldn't be the case but default to waste
+
+            if (biomeData.size() <= currentBiome) { // shouldn't be the case but default to waste
                 if (skipRoads) {
-                    location = forHeader ? "Waste Map" : "waste";
+                    location = forHeader ? cachedHeaderNamesMap.get("waste") : "waste";
                 } else {
                     location = "";
                 }
-            else {
+                locationColorID = cachedColorIDsMap.get("waste");
+            } else {
                 BiomeData data = biomeData.get(currentBiome);
-                location = forHeader ? TextUtil.capitalize(data.name) + " Map" : data.name;
-                switch (data.name) {
-                    case "white" -> locationColorID = "[+w]";
-                    case "red" -> locationColorID = "[+r]";
-                    case "green" -> locationColorID = "[+g]";
-                    case "blue" -> locationColorID = "[+u]";
-                    case "black" -> locationColorID = "[+b]";
-                    default -> locationColorID = "[+c]";
+                String biomeName = data.name != null ? data.name : "waste";
+
+                if (forHeader) {
+                    String cachedHeader = cachedHeaderNamesMap.get(biomeName);
+                    if (cachedHeader == null) {
+                        // fallback mapping
+                        cachedHeader = TextUtil.capitalize(biomeName) + " Map";
+                        cachedHeaderNamesMap.put(biomeName, cachedHeader);
+                    }
+                    location = cachedHeader;
+                } else {
+                    location = biomeName;
                 }
+
+                String cachedColor = cachedColorIDsMap.get(biomeName);
+                locationColorID = cachedColor != null ? cachedColor : "[+c]";
             }
         }
         return location;

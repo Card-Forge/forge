@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact
 SVar:AttachAITgts:Card.nonCreature
 SVar:AttachAILogic:Animate
-S:Mode$ Continuous | Affected$ Card.AttachedBy+nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value.
+S:Mode$ Continuous | AffectedDefined$ AttachedBy Self | Affected$ Card.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value.
 SVar:AffectedX:Count$CardManaCost
 AI:RemoveDeck:Random
 DeckNeeds:Type$Artifact

@@ -372,54 +372,69 @@ public class ImageCache {
     private Texture loadAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        Texture check = getAsset(file);
-        if (check != null)
+
+        final String fileName = file.getPath();
+        Texture check = Forge.getAssets().manager().get(fileName, Texture.class, false);
+
+        if (check != null) {
+            if (!others) {
+                //update first before clearing
+                getSyncQ().add(fileName);
+                getCardsLoaded().add(fileName);
+                unloadCardTextures(false);
+            }
+
+            if (others) {
+                return check;
+            }
+
+            String textureKey = getTextureKey(check);
+            if (imageRecord.get().get(textureKey) == null) {
+                String setCode = imageKey.split("/")[0].trim().toUpperCase();
+                int radius;
+                if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
+                    radius = 28;
+                else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
+                    radius = 25;
+                else
+                    radius = 22;
+                // Downloaded images from Scryfall (in Documents/cache) are always fullborder; also check path.
+                boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.") || fileName.contains("tokens");
+                // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
+                // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
+                // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
+                updateImageRecord(textureKey, isCloserToWhite(getpixelColor(check)), radius, isFullBorder);
+            }
             return check;
-
-        String fileName = file.getPath();
-
-        if (!others) {
-            //update first before clearing
-            getSyncQ().add(fileName);
-            getCardsLoaded().add(fileName);
-            unloadCardTextures(false);
         }
 
         try {
-            if (Forge.getAssets().manager().get(fileName, Texture.class, false) == null) {
-                Forge.getAssets().manager().load(fileName, Texture.class, cardTextureParameter(fileName));
-                Forge.getAssets().manager().finishLoadingAsset(fileName);
-                counter += 1;
-                // a texture just became available for a card that may already be drawn in text mode:
-                // invalidate cached card art so renderers pick it up
+            if (!Forge.getAssets().manager().isLoaded(fileName, Texture.class)) {
+                if (!Forge.getAssets().manager().contains(fileName)) {
+                    Forge.getAssets().manager().load(fileName, Texture.class, cardTextureParameter(fileName));
+                    counter += 1;
+                }
+
                 CardRenderer.clearcardArtCache();
-                ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
+                Forge.getAssets().manager().update(16);
+                //((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
             }
         } catch (Exception e) {
-            System.err.println("Failed to load image: " + fileName);
-            System.err.println("Error details: " + e.getMessage());
-            e.printStackTrace(System.err);
+            System.err.println("Failed to enqueue asynchronous image: " + fileName);
         }
 
-        Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
-        if (others || cardTexture == null)
-            return cardTexture;
-        //if full bordermasking is enabled, update the border color
-        String setCode = imageKey.split("/")[0].trim().toUpperCase();
-        int radius;
-        if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
-            radius = 28;
-        else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
-            radius = 25;
-        else
-            radius = 22;
-        // Downloaded images from Scryfall (in Documents/cache) are always fullborder; also check path.
-        boolean isFullBorder = isDownloadedCardImage(fileName) || fileName.contains(".fullborder.") || fileName.contains("tokens");
-        // Store under the SAME derivation the lookups use (getTextureKey), so store==lookup by
-        // construction — on iOS both equal fileName, but on the Windows desktop wrapper file.getPath()
-        // uses backslashes while FileTextureData.getFileHandle().path() uses forward slashes.
-        updateImageRecord(getTextureKey(cardTexture), isCloserToWhite(getpixelColor(cardTexture)), radius, isFullBorder);
-        return cardTexture;
+        // Return null instantly so the view layer displays its pre-cached default fallbacks
+        // placeholder cards while the image texture loads in the background.
+        return null;
+    }
+
+    // Force the asset loader to immediately block and finish
+    public void finishLoadingActiveQueue(String filename) {
+        try {
+            Forge.getAssets().manager().finishLoadingAsset(filename);
+        } catch (Exception e) {
+            System.err.println("ImageCache: Safe fallback bypass triggered during lifecycle force-flush step.");
+        }
     }
 
     // iOS downloaded images (Documents/cache) decode via CardTextureData so the AssetManager owns their
@@ -564,8 +579,12 @@ public class ImageCache {
 
     public int getRadius(Texture t) {
         if (t == null)
-            return 20;
-        ImageRecord record = imageRecord.get().get(getTextureKey(t));
+            return 0;
+        String key = getTextureKey(t);
+        if (!key.contains("card") && !key.contains("token")) {
+            return 0;
+        }
+        ImageRecord record = imageRecord.get().get(key);
         if (record == null)
             return 20;
         Integer i = record.cardRadius;

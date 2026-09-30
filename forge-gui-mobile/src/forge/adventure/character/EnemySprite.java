@@ -37,9 +37,9 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * EnemySprite
@@ -88,7 +88,16 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public String questStageID;
     private ProgressableGraphPath<NavigationVertex> navPath;
     public Vector2 fleeTarget;
-
+    private final Vector2 spriteToPlayerVec = new Vector2();
+    private final Vector2 candidateToPlayerVec = new Vector2();
+    private final Vector2 targetVec = new Vector2();
+    private final Vector2 diffVec = new Vector2();
+    private final Array<Reward> rewardCollectionPool = new Array<>(16);
+    private static final HashSet<Object> uniqueRulesCollectorSet = new HashSet<>();
+    private static final ArrayList<PaperCard> flatCardsFilterList = new ArrayList<>(256);
+    private ArrayList<PaperCard> uncommonCards = new ArrayList<>();
+    private ArrayList<PaperCard> commonCards = new ArrayList<>();
+    private ArrayList<PaperCard> rareCards = new ArrayList<>();
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
     }
@@ -129,10 +138,9 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     }
 
     public void moveTo(Actor other, float delta) {
-        Vector2 diff = new Vector2(other.getX(), other.getY()).sub(pos());
-
-        diff.setLength(data.speed*delta);
-        moveBy(diff.x, diff.y,delta);
+        diffVec.set(other.getX(), other.getY()).sub(pos());
+        diffVec.setLength(data.speed * delta);
+        moveBy(diffVec.x, diffVec.y, delta);
     }
 
     public void initializeBaseMovementBehavior() {
@@ -322,30 +330,36 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public Vector2 getTargetVector(PlayerSprite player, ArrayList<NavigationVertex> sortedGraphNodes, float delta) {
         //todo - this can be integrated into overworld movement as well, giving flee behaviors or moving to generated waypoints
         Vector2 target = pos();
-        Vector2 spriteToPlayer = new Vector2(player.pos()).sub(target);
+
+        spriteToPlayerVec.set(player.pos()).sub(target);
 
         if (_freeze){
             //Mob has defeated player in battle, hold still until player has a chance to move away.
             //Without this moving enemies can immediately restart battle.
-            float distance = spriteToPlayer.len();
+            float distance = spriteToPlayerVec.len();
             if (distance < unfreezeRange) {
                 timer += delta;
                 return Vector2.Zero;
             }
             else{
-                _freeze = false; //resume normal behavior
+                _freeze = false; // resume normal behavior
             }
         }
 
         NavigationVertex targetPoint = null;
         if (threatRange > 0 || fleeRange > 0){
-            if (spriteToPlayer.len() <= threatRange || (aggro && spriteToPlayer.len() <= pursueRange))
+            float spriteToPlayerLenSq = spriteToPlayerVec.len2();
+
+            if (spriteToPlayerVec.len() <= threatRange || (aggro && spriteToPlayerVec.len() <= pursueRange))
             {
                 if (sortedGraphNodes != null) {
-                    for (NavigationVertex candidate : sortedGraphNodes) {
-                        Vector2 candidateToPlayer = new Vector2(candidate.pos).sub(player.pos());
-                        if ((candidateToPlayer.x * candidateToPlayer.x) + (candidateToPlayer.y * candidateToPlayer.y) <
-                                (spriteToPlayer.x * spriteToPlayer.x) + (spriteToPlayer.y * spriteToPlayer.y)) {
+                    int nodeCount = sortedGraphNodes.size();
+                    for (int i = 0; i < nodeCount; i++) {
+                        NavigationVertex candidate = sortedGraphNodes.get(i);
+                        if (candidate == null) continue;
+
+                        candidateToPlayerVec.set(candidate.pos).sub(player.pos());
+                        if (candidateToPlayerVec.len2() < spriteToPlayerLenSq) {
                             targetPoint = candidate;
                             break;
                         }
@@ -355,17 +369,19 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                 if (targetPoint != null) {
                     return targetPoint.pos;
                 }
-                return new Vector2(player.pos());
+                targetVec.set(player.pos());
+                return targetVec;
             }
-            if (spriteToPlayer.len() <= fleeRange)
+            if (spriteToPlayerVec.len() <= fleeRange)
             {
                 //todo: replace with inverse A* variant, seeking max total distance from player in X generations
                 // of movement, valuing each node by distance from player divided by closest distance(s) in path
                 // in order to make close passes to escape less appealing than maintaining moderate distance
-                float fleeDistance = fleeRange - spriteToPlayer.len();
-                return new Vector2(pos()).sub(player.pos()).setLength(fleeDistance).add(pos());
+                float fleeDistance = fleeRange - spriteToPlayerVec.len();
+                targetVec.set(pos()).sub(player.pos()).setLength(fleeDistance).add(pos());
+                return targetVec;
             }
-            if (aggro && spriteToPlayer.len() > pursueRange) {
+            if (aggro && spriteToPlayerVec.len() > pursueRange) {
                 aggro = false;
                 if (navPath != null)
                     navPath.clear();
@@ -387,33 +403,39 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 //            }
             //else
             if (peek.getDuration() == 0 && peek.getNextTargetVector(objectId, pos()).dst(pos()) < 2){
-                //this is a location based behavior that has been completed. Move on to the next behavior
-
-                    MovementBehavior current =  movementBehaviors.pop();
-                    current.currentTargetVector = null;
-                    movementBehaviors.addLast(current);
-
+                // this is a location based behavior that has been completed. Move on to the next behavior
+                MovementBehavior current = movementBehaviors.pop();
+                current.currentTargetVector = null;
+                movementBehaviors.addLast(current);
             }
-            else if ( peek.getDuration() > 0)
+            else if (peek.getDuration() > 0)
             {
                 if (timer >= peek.getDuration() + delta)
                 {
-                    //this is a timed behavior that has been completed. Move to the next behavior and restart the timer
-                    MovementBehavior current =  movementBehaviors.pop();
+                    // this is a timed behavior that has been completed. Move to the next behavior and restart the timer
+                    MovementBehavior current = movementBehaviors.pop();
                     current.currentTargetVector = null;
                     movementBehaviors.addLast(current);
                 }
                 else{
-                    timer += delta;//this is a timed behavior that has not been completed, continue this behavior
-                    return new Vector2(pos());
+                    timer += delta;
+                    targetVec.set(pos());
+                    return targetVec;
                 }
             }
             if (peek.getNextTargetVector(objectId, pos()).dst(pos()) > 0.3) {
-                target = new Vector2(peek.getNextTargetVector(objectId, pos()));
+                targetVec.set(peek.getNextTargetVector(objectId, pos()));
+                target = targetVec;
             }
-            else target = new Vector2(pos());
+            else {
+                targetVec.set(pos());
+                target = targetVec;
+            }
         }
-        else target = new Vector2(pos());
+        else {
+            targetVec.set(pos());
+            target = targetVec;
+        }
         return target;
     }
     public void updatePositon()
@@ -449,82 +471,98 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         return data.bossIntro;
     }
     public Array<Reward> getRewards() {
-        Array<Reward> rewards = new Array<>();
-        //Collect custom rewards for chaos battles
+        rewardCollectionPool.clear();
+        // Collect custom rewards for chaos battles
 
         if (data.copyPlayerDeck && Current.latestDeck() != null) {
-            List<PaperCard> paperCardList = Current.latestDeck().getMain().toFlatList().stream()
-                    .filter(paperCard -> !paperCard.isVeryBasicLand())
-                    .collect(Collectors.toList());
+            flatCardsFilterList.clear();
 
-            int uniqueRules = paperCardList.stream().map(PaperCard::getRules).collect(Collectors.toSet()).size();
+            CardPool mainDeckPool = Current.latestDeck().getMain();
+            List<PaperCard> sourceFlatList = mainDeckPool.toFlatList();
+            int cardCount = sourceFlatList.size();
 
-            if (uniqueRules < 4 || paperCardList.size() < 10) {
-                // Player trying to cheese doppleganger and farm cards. Sorry, the fun police have arrived
-                // Static rewards of 199 GP, 9 Shards, and 1 Cheese Stands Alone
-                rewards.add(new Reward(199));
-                rewards.add(new Reward(Reward.Type.Shards, 9));
+            for (int i = 0; i < cardCount; i++) {
+                PaperCard paperCard = sourceFlatList.get(i);
+                if (paperCard != null && !paperCard.isVeryBasicLand()) {
+                    flatCardsFilterList.add(paperCard);
+                }
+            }
+
+            uniqueRulesCollectorSet.clear();
+            for (int i = 0; i < flatCardsFilterList.size(); i++) {
+                uniqueRulesCollectorSet.add(flatCardsFilterList.get(i).getRules());
+                if (uniqueRulesCollectorSet.size() >= 4) { // max limit
+                    break;
+                }
+            }
+            int uniqueRules = uniqueRulesCollectorSet.size();
+
+            if (uniqueRules < 4 || flatCardsFilterList.size() < 10) {
+                rewardCollectionPool.add(new Reward(199));
+                rewardCollectionPool.add(new Reward(Reward.Type.Shards, 9));
 
                 PaperCard cheese = StaticData.instance().fetchCard("The Cheese Stands Alone");
                 if (cheese != null) {
-                    rewards.add(new Reward(cheese));
+                    rewardCollectionPool.add(new Reward(cheese));
                 }
-                return rewards;
+                return rewardCollectionPool;
             }
 
             if (AdventurePlayer.current().isFantasyMode()) {
-                //random uncommons from deck
-                List<PaperCard> uncommonCards = paperCardList.stream()
-                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Uncommon || paperCard.getRarity() == CardRarity.Special)
-                        .collect(Collectors.toList());
+                uncommonCards.clear();
+                commonCards.clear();
+                rareCards.clear();
+
+                for (int i = 0; i < flatCardsFilterList.size(); i++) {
+                    PaperCard card = flatCardsFilterList.get(i);
+                    if (card.getRarity() == CardRarity.Uncommon || card.getRarity() == CardRarity.Special) {
+                        uncommonCards.add(card);
+                    } else if (card.getRarity() == CardRarity.Common) {
+                        commonCards.add(card);
+                    } else if (card.getRarity() == CardRarity.Rare || card.getRarity() == CardRarity.MythicRare) {
+                        rareCards.add(card);
+                    }
+                }
+                // random uncommons from deck
                 if (!uncommonCards.isEmpty()) {
-                    rewards.add(new Reward(Aggregates.random(uncommonCards)));
-                    rewards.add(new Reward(Aggregates.random(uncommonCards)));
+                    rewardCollectionPool.add(new Reward(Aggregates.random(uncommonCards)));
+                    rewardCollectionPool.add(new Reward(Aggregates.random(uncommonCards)));
                 }
-                //random commons from deck
-                List<PaperCard> commmonCards = paperCardList.stream()
-                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Common)
-                        .collect(Collectors.toList());
-                if (!commmonCards.isEmpty()) {
-                    rewards.add(new Reward(Aggregates.random(commmonCards)));
-                    rewards.add(new Reward(Aggregates.random(commmonCards)));
-                    rewards.add(new Reward(Aggregates.random(commmonCards)));
+                // random commons from deck
+                if (!commonCards.isEmpty()) {
+                    rewardCollectionPool.add(new Reward(Aggregates.random(commonCards)));
+                    rewardCollectionPool.add(new Reward(Aggregates.random(commonCards)));
+                    rewardCollectionPool.add(new Reward(Aggregates.random(commonCards)));
                 }
-                //random rare from deck
-                List<PaperCard> rareCards = paperCardList.stream()
-                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Rare || paperCard.getRarity() == CardRarity.MythicRare)
-                        .collect(Collectors.toList());
+                // random rare from deck
                 if (!rareCards.isEmpty()) {
-                    rewards.add(new Reward(Aggregates.random(rareCards)));
-                    rewards.add(new Reward(Aggregates.random(rareCards)));
+                    rewardCollectionPool.add(new Reward(Aggregates.random(rareCards)));
+                    rewardCollectionPool.add(new Reward(Aggregates.random(rareCards)));
                 }
 
-                int val = ((MyRandom.getRandom().nextInt(2)+1)*100)+(MyRandom.getRandom().nextInt(101));
-                rewards.add(new Reward(val));
-                rewards.add(new Reward(Reward.Type.Life, 1));
+                int val = ((MyRandom.getRandom().nextInt(2) + 1) * 100) + (MyRandom.getRandom().nextInt(101));
+                rewardCollectionPool.add(new Reward(val));
+                rewardCollectionPool.add(new Reward(Reward.Type.Life, 1));
 
-                return rewards;
+                return rewardCollectionPool;
             }
         }
 
-        if(data.rewards != null) { //Collect standard rewards.
+        if (data.rewards != null) { // Collect standard rewards.
             Deck enemyDeck = Current.latestDeck();
-            // By popular demand, remove basic lands from the reward pool.
             CardPool deckNoRestrictedEditions = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.onlyPrintedInEditions(Config.instance().getConfigData().restrictedEditions).negate());
             CardPool deckNoBasicLands = deckNoRestrictedEditions.getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
 
             for (RewardData rdata : data.rewards) {
-                rewards.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));
+                rewardCollectionPool.addAll(rdata.generate(false, enemyDeck == null ? null : deckNoBasicLands.toFlatList(), true));
             }
         }
-        if(this.rewards != null) { //Collect additional rewards.
-            for(RewardData rdata : this.rewards) {
-                //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
-
-                rewards.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
+        if (this.rewards != null) { // Collect additional rewards.
+            for (RewardData rdata : this.rewards) {
+                rewardCollectionPool.addAll(rdata.generate(false, (Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
             }
         }
-        return rewards;
+        return rewardCollectionPool;
     }
 
     private void drawColorHints(Batch batch){

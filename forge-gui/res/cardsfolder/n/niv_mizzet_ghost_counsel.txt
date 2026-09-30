@@ -1,0 +1,11 @@
+Name:Niv-Mizzet, Ghost Counsel
+ManaCost:2 W W B B
+Types:Legendary Creature Spirit Dragon
+PT:4/4
+K:Flying
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, you may pay that much life. If you do, draw that many cards.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
+A:AB$ LoseLife | Cost$ T | LifeAmount$ 1 | Defined$ Opponent | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+SVar:X:TriggerCount$LifeAmount
+Oracle:Flying\nWhenever you gain life, you may pay that much life. If you do, draw that many cards.\n{T}: Each opponent loses 1 life and you gain 1 life.
