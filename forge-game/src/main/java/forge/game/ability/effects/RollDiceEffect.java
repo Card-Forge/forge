@@ -314,7 +314,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
             }
         }
-        SpellAbility sourceSA = sa != null ? sa.getRootAbility().copy() : null;
+        SpellAbility sourceSA = sa != null ? sa.getRootAbility() : null;
         int rollNum = 1;
         for (DieRollResult roll : resultsList) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
