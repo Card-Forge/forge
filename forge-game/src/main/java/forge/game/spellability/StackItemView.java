@@ -162,8 +162,10 @@ public class StackItemView extends TrackableObject implements IHasCardView {
     public boolean isOptionalTrigger() {
         return get(TrackableProperty.OptionalTrigger);
     }
-    void updateOptionalTrigger(SpellAbilityStackInstance si) {
-        set(TrackableProperty.OptionalTrigger, si.isOptionalTrigger());
+    // also true for a mandatory trigger whose effect asks a "you may" question, so Always Yes/No is offered
+    public void updateOptionalTrigger(SpellAbilityStackInstance si) {
+        set(TrackableProperty.OptionalTrigger, si.isOptionalTrigger()
+                || (si.isTrigger() && si.getSpellAbility().getTrigger().asksOptionalQuestion()));
     }
 
     public StackItemView getSubInstance() {

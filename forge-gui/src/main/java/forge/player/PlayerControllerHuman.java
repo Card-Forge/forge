@@ -735,6 +735,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return result;
     }
 
+    // one Always Yes/No decision must not answer two different "you may" questions; walks the sub-ability chain only
+    // TODO offer a separate decision for each Optional ability in the chain
+    private static boolean isOnlyOptionalInChain(final SpellAbility sa) {
+        for (SpellAbility s = sa.getRootAbility(); s != null; s = s.getSubAbility()) {
+            if (s != sa && s.hasParam("Optional")) return false;
+        }
+        return true;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -745,6 +754,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
                                  List<String> options, Card cardToShow, Map<String, Object> params) {
+        // the stack's Always Yes/No belongs to a mandatory trigger's controller; optional triggers apply it in confirmTrigger
+        if (sa.getRootAbility().isMandatory() && sa.hasParam("Optional")
+                && player.equals(sa.getActivatingPlayer()) && isOnlyOptionalInChain(sa)) {
+            final Trigger trigger = sa.getTrigger();
+            // marked even when auto-answered, so the stack keeps offering a way to undo the decision
+            if (!trigger.asksOptionalQuestion()) {
+                trigger.setAsksOptionalQuestion();
+                for (final SpellAbilityStackInstance si : getGame().getStack()) {
+                    si.getView().updateOptionalTrigger(si);
+                }
+            }
+            if (!isMacroActive()) {
+                AutoYieldStore.TriggerDecision decision = getTriggerDecision(sa.yieldKey());
+                if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+                if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+            }
+        }
+
         // Another card should be displayed in the prompt on mouse over rather than the SA source
         if (cardToShow != null) {
             tempShowCard(cardToShow);
