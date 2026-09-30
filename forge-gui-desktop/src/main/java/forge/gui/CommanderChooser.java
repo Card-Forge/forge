@@ -55,7 +55,7 @@ public class CommanderChooser<T> extends FDialog {
             final Function<T, String> label, final Function<T, PaperCard> previewCard) {
         this.items = items;
         this.previewCard = previewCard;
-        // let the dialog skin show around the card instead of the default light panel background
+        
         picture.setOpaque(false);
 
         final List<String> labels = new ArrayList<>(items.size());
