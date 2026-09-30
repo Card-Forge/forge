@@ -952,25 +952,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            // Show opponent's hand as a FloatingZone with a minimal OK dialog instead of a names list
-            final boolean useFloatingHandReveal = zone == ZoneType.Hand
+            // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
+            final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
                     && !getGui().isLibgdxPort();
-            if (useFloatingHandReveal) {
-                final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-                zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
-                // Called on the game thread: the GUI marshals its own Swing work, and a remote GUI must
-                // sync state from here while the game is not advancing
-                getGui().updateZones(zonesToUpdate);
-                final Iterable<PlayerZoneUpdate> zonesShown = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
+            if (revealInPrompt) {
+                getGui().showRevealedCards(collection);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                getGui().hideZones(getLocalPlayerView(), zonesShown);
+                getGui().hideRevealedCards();
             } else {
                 getGui().reveal(fm, collection);
             }
@@ -2715,11 +2710,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
             CardUtil.turnToRightFace(cardFace.getName(), instanceForPlayer);
             // TODO need the valid check be done against the CardFace?
-            for (String v : valid.split(",")) {
-                if (instanceForPlayer.isValid(v, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
-                    // it need to return name for card face
-                    return cardFace.getName();
-                }
+            if (instanceForPlayer.isValid(valid.split(","), sa.getHostCard().getController(), sa.getHostCard(), sa)) {
+                // it need to return name for card face
+                return cardFace.getName();
             }
         }
     }

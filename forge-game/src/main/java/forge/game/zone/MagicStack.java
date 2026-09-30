@@ -186,56 +186,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return c.equals(curResolvingCard);
     }
 
-    public int getUndoStackSize() {
-        return undoStack.size();
-    }
-
-    public final boolean canUndo(Player player) {
-        return undoStackOwner == player;
-    }
-    public final boolean undo() {
-        if (undoStack.isEmpty()) { return false; }
-
-        SpellAbility sa = undoStack.peek();
-        if (sa.undo()) {
-            clearUndoStack(sa);
-            new ManaRefundService(sa).refundManaPaid();
-        } else {
-            clearUndoStack(sa);
-            for (Mana pay : sa.getPayingMana()) {
-                clearUndoStack(pay.getManaAbility().getSourceSA());
-            }
-        }
-        return true;
-    }
-    public final void clearUndoStack(SpellAbility sa) {
-        if (sa == null) {
-            return;
-        }
-        clearUndoStack(Lists.newArrayList(sa));
-    }
-    private void clearUndoStack(List<SpellAbility> sas) {
-        for (SpellAbility sa : sas) {
-            // reset in case a trigger stopped it on a previous activation
-            sa.setUndoable(true);
-            int idx = undoStack.lastIndexOf(sa);
-            if (idx != -1) {
-                undoStack.remove(idx);
-            }
-        }
-        if (undoStack.isEmpty()) {
-            undoStackOwner = null;
-        }
-    }
-    public final void clearUndoStack() {
-        if (undoStackOwner == null) { return; }
-        clearUndoStack(Lists.newArrayList(undoStack));
-        undoStackOwner = null;
-    }
-    public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
-        return IterableUtil.filter(undoStack, CardTraitPredicates.isHostCard(c));
-    }
-
     public final void add(SpellAbility sp) {
         add(sp, null, SpellAbilityStackInstance.nextId());
     }
@@ -267,15 +217,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        recordUndoableActions(sp, activator);
+        recordUndoableActions(sp);
 
-        if (sp.isManaAbility()) { // Mana Abilities go straight through
+        // Mana Abilities go straight through
+        if (sp.isManaAbility()) {
             // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
             game.getAction().checkStaticAbilities();
 
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
-                addAbilityActivatedThisTurn(sp, source);
+                addAbilityActivatedThisTurn(sp);
             }
 
             Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -351,7 +302,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
-            addAbilityActivatedThisTurn(sp, source);
+            addAbilityActivatedThisTurn(sp);
         }
 
         // The ability is added to stack HERE
@@ -502,27 +453,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    private void recordUndoableActions(SpellAbility sp, Player activator) {
-        // either push onto or clear undo stack based on whether spell/ability is undoable
-        if (sp.isUndoable()) {
-            if (!canUndo(activator)) {
-                clearUndoStack(); //clear if undo stack owner changes
-                undoStackOwner = activator;
-            }
-            undoStack.push(sp);
-        } else {
-            clearUndoStack();
-        }
-    }
-
-    public final int size() {
-        return stack.size();
-    }
-
-    public final boolean isEmpty() {
-        return stack.isEmpty();
-    }
-
     // Push should only be used by add.
     private void push(final SpellAbility sp, SpellAbilityStackInstance si, int id) {
         if (null == sp.getActivatingPlayer()) {
@@ -562,6 +492,78 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         game.updateStackForView();
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
+    }
+
+    private void recordUndoableActions(SpellAbility sa) {
+        Player activator = sa.getActivatingPlayer();
+        // either push onto or clear undo stack based on whether spell/ability is undoable
+        if (sa.isUndoable()) {
+            if (!canUndo(activator)) {
+                clearUndoStack(); //clear if undo stack owner changes
+                undoStackOwner = activator;
+            }
+            undoStack.push(sa);
+        } else {
+            clearUndoStack();
+        }
+    }
+
+    public int getUndoStackSize() {
+        return undoStack.size();
+    }
+
+    public final boolean canUndo(Player player) {
+        return undoStackOwner == player;
+    }
+    public final boolean undo() {
+        if (undoStack.isEmpty()) { return false; }
+
+        SpellAbility sa = undoStack.peek();
+        if (sa.undo()) {
+            clearUndoStack(sa);
+            new ManaRefundService(sa).refundManaPaid();
+        } else {
+            clearUndoStack(sa);
+            for (Mana pay : sa.getPayingMana()) {
+                clearUndoStack(pay.getManaAbility().getSourceSA());
+            }
+        }
+        return true;
+    }
+    public final void clearUndoStack(SpellAbility sa) {
+        if (sa == null) {
+            return;
+        }
+        clearUndoStack(Lists.newArrayList(sa));
+    }
+    private void clearUndoStack(List<SpellAbility> sas) {
+        for (SpellAbility sa : sas) {
+            // reset in case a trigger stopped it on a previous activation
+            sa.setUndoable(true);
+            int idx = undoStack.lastIndexOf(sa);
+            if (idx != -1) {
+                undoStack.remove(idx);
+            }
+        }
+        if (undoStack.isEmpty()) {
+            undoStackOwner = null;
+        }
+    }
+    public final void clearUndoStack() {
+        if (undoStackOwner == null) { return; }
+        clearUndoStack(Lists.newArrayList(undoStack));
+        undoStackOwner = null;
+    }
+    public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
+        return IterableUtil.filter(undoStack, CardTraitPredicates.isHostCard(c));
+    }
+
+    public final int size() {
+        return stack.size();
+    }
+
+    public final boolean isEmpty() {
+        return stack.isEmpty();
     }
 
     public final void resolveStack() {
@@ -950,11 +952,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.updateStackForView();
     }
 
-    public void addAbilityActivatedThisTurn(SpellAbility sa, final Card source) {
+    public void addAbilityActivatedThisTurn(SpellAbility sa) {
+        Card source = sa.getHostCard();
         source.addAbilityActivated(sa);
         thisTurnActivated.add(sa.copy(CardCopyService.getLKICopy(source), true));
     }
-
     public List<SpellAbility> getAbilityActivatedThisTurn() {
         return thisTurnActivated;
     }

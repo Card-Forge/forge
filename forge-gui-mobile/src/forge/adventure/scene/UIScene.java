@@ -732,6 +732,8 @@ public class UIScene extends Scene {
                 Drawable originalDrawable = image.getDrawable();
                 if (originalDrawable instanceof TextureRegionDrawable textureRegionDrawable) {
                     return textureRegionDrawable.getRegion();
+                } else if (originalDrawable instanceof ShaderDrawable shaderDrawable) {
+                    return shaderDrawable.getRegion();
                 }
             }
         } catch (Exception e) {

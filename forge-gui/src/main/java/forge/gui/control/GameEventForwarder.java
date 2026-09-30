@@ -1,13 +1,16 @@
 package forge.gui.control;
 
 import com.google.common.eventbus.Subscribe;
+import forge.game.card.CardView;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventCardChangeZone;
 import forge.gui.interfaces.IGuiGame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.stream.Collectors;
 
 /**
  * Buffers game events and flushes them to the GUI in batches.
@@ -57,6 +60,25 @@ public class GameEventForwarder implements Observer {
 
     public boolean hasPendingEvents() {
         return !pendingEvents.isEmpty();
+    }
+    public boolean hasPendingZoneChange(Object... args) {
+        List<Integer> zoneChangers = pendingEvents.stream().filter(GameEventCardChangeZone.class::isInstance).map(ev -> ((GameEventCardChangeZone) ev).card().getId()).collect(Collectors.toList());
+        if (zoneChangers.isEmpty()) {
+            return false;
+        }
+        for (Object obj : args) {
+            if (obj instanceof CardView cv && zoneChangers.contains(cv.getId())) {
+                return true;
+            }
+            if (obj instanceof Iterable<?> it) {
+                for (Object e : it) {
+                    if (e instanceof CardView cv && zoneChangers.contains(cv.getId())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
