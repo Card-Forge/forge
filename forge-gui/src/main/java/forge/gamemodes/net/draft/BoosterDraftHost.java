@@ -16,15 +16,19 @@ import forge.gamemodes.net.event.DraftSeatPickedEvent;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.ReceiveEventPoolEvent;
 import forge.gamemodes.net.server.FServerManager;
+import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.IHasForgeLog;
+import forge.util.Lang;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -346,9 +350,8 @@ public final class BoosterDraftHost implements IHasForgeLog {
         List<LimitedPlayer> players = draft.getAllPlayers();
         String eventId = event.getEventId();
 
-        // Queued ahead of the pool sends so the bot decks are on disk before the
-        // host's lobby reloads its event deck list.
-        dispatches.add(this::saveBotDecks);
+        // Deck storage is EDT-owned; queued before the pool sends so the host's deck list sees these
+        dispatches.add(() -> FThreads.invokeInEdtNowOrLater(this::saveBotDecks));
 
         for (int i = 0; i < players.size(); i++) {
             LimitedPlayer player = players.get(i);
@@ -366,18 +369,22 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     /**
-     * Build a deck for each bot and save it to the host's event decks, tagged with
-     * this event, so the host can pick them for AI opponents in the lobby after the
-     * draft. Only the host needs them: AI slots are host-controlled.
+     * Only the host keeps bot decks, because only the host controls AI slots. Bots that
+     * share a name get an ordinal prefix, as duplicate player names do in a game.
      */
     private void saveBotDecks() {
         String landSetCode = IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null;
         String poolName = NetworkEvent.poolNameFor(event);
+        Set<String> usedNames = new HashSet<>();
         List<LimitedPlayer> players = draft.getAllPlayers();
         for (int i = 0; i < players.size(); i++) {
             if (!(players.get(i) instanceof LimitedPlayerAI ai)) continue;
-            EventParticipant participant = EventParticipant.findBySeat(participants, i);
-            String name = participant != null ? participant.getName() : "Seat " + (i + 1);
+            String botName = EventParticipant.resolveName(i, participants, List.of());
+            String name = botName;
+            for (int n = 2; !usedNames.add(name); n++) {
+                name = Lang.getInstance().getOrdinal(n) + " " + botName;
+            }
+            // buildDeck throws when it cannot reach 40 cards; skip that bot and keep the rest
             try {
                 Deck deck = new Deck(ai.buildDeck(landSetCode), poolName + " - " + name);
                 NetworkEvent.setEventTags(deck, event);
