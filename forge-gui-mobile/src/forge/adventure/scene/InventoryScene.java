@@ -292,7 +292,7 @@ public class InventoryScene extends UIScene {
 
         //done();
         setSelected(null);
-        RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null, data.getTags().contains("noSell"));
+        RewardScene.instance().loadRewards(data, RewardScene.Type.EventReward, null, data.getTags().contains("noSell"));
         Forge.switchScene(RewardScene.instance());
         Current.player().getBoostersOwned().removeValue(data, true);
     }

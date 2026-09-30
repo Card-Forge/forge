@@ -112,7 +112,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
     private static boolean shouldReplaceTrackables(Serializable msg) {
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
-            return method != ProtocolMethod.setGameView
+            return event.replaceTrackables() && method != ProtocolMethod.setGameView
                     && method != ProtocolMethod.openView;
         }
         return true;
