@@ -2052,7 +2052,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             final int commanderDamageToLose = game.getRules().getCommanderDamageToLose();
             for (Entry<Card, Integer> entry : getCommanderDamage()) {
                 if (entry.getValue() >= commanderDamageToLose && loseConditionMet(GameLossReason.CommanderDamage, null)) {
-                    // record the amount, so the loss message is right when it isn't the usual 21
+                    // record the amount for the loss message (21, or 16 in Pauper Commander)
                     setOutcome(PlayerOutcome.commanderDamageLoss(commanderDamageToLose));
                     return true;
                 }
