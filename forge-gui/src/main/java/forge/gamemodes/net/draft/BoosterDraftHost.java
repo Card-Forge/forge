@@ -7,6 +7,7 @@ import forge.gamemodes.net.EventParticipant;
 import forge.gamemodes.net.EventPhase;
 import forge.gamemodes.net.NetworkEvent;
 import forge.gamemodes.limited.DraftPack;
+import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.limited.LimitedPlayerAI;
 import forge.gamemodes.net.event.DraftAutoPickedEvent;
@@ -16,6 +17,7 @@ import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.ReceiveEventPoolEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.IHasForgeLog;
 
 import java.util.ArrayList;
@@ -344,6 +346,10 @@ public final class BoosterDraftHost implements IHasForgeLog {
         List<LimitedPlayer> players = draft.getAllPlayers();
         String eventId = event.getEventId();
 
+        // Queued ahead of the pool sends so the bot decks are on disk before the
+        // host's lobby reloads its event deck list.
+        dispatches.add(this::saveBotDecks);
+
         for (int i = 0; i < players.size(); i++) {
             LimitedPlayer player = players.get(i);
             if (player instanceof LimitedPlayerAI) continue;
@@ -356,6 +362,29 @@ public final class BoosterDraftHost implements IHasForgeLog {
             int slot = participant.getLobbySlotIndex();
             dispatches.add(() -> FServerManager.getInstance().sendToSlot(slot,
                     new ReceiveEventPoolEvent(eventId, pool)));
+        }
+    }
+
+    /**
+     * Build a deck for each bot and save it to the host's event decks, tagged with
+     * this event, so the host can pick them for AI opponents in the lobby after the
+     * draft. Only the host needs them: AI slots are host-controlled.
+     */
+    private void saveBotDecks() {
+        String landSetCode = IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null;
+        String poolName = NetworkEvent.poolNameFor(event);
+        List<LimitedPlayer> players = draft.getAllPlayers();
+        for (int i = 0; i < players.size(); i++) {
+            if (!(players.get(i) instanceof LimitedPlayerAI ai)) continue;
+            EventParticipant participant = EventParticipant.findBySeat(participants, i);
+            String name = participant != null ? participant.getName() : "Seat " + (i + 1);
+            try {
+                Deck deck = new Deck(ai.buildDeck(landSetCode), poolName + " - " + name);
+                NetworkEvent.setEventTags(deck, event);
+                FModel.getDecks().getNetworkEventDecks().add(deck);
+            } catch (RuntimeException e) {
+                netLog.warn(e, "Failed to build deck for bot {}", name);
+            }
         }
     }
 
