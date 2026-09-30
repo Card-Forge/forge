@@ -142,6 +142,31 @@ func (g *Game) validateBlocks(defending PlayerID, blocks []Block) error {
 	return nil
 }
 
+// canBlockPlayer is CombatUtil.canBlock(p, combat) (CombatUtil.java:874-889):
+// some creature defender controls can block some attacker, judged by the
+// combat-aware canBlockCombat (lure included) against blocks, the combat so
+// far. Only the DeclareBlocker replacement path asks it
+// (declareBlockersReplaced, replacement.go); DeclareCombatBlockers' own
+// "any untapped creature" skip stays as it is for every other declaration.
+func (g *Game) canBlockPlayer(defender PlayerID, blocks []Block) (bool, error) {
+	army := g.creaturesInPlay(defender)
+	if len(army) == 0 || len(g.combat.Attackers) == 0 {
+		return false, nil
+	}
+	v, err := g.newBlockCheck(blocks, army)
+	if err != nil {
+		return false, err
+	}
+	for _, c := range army {
+		for _, a := range g.combat.Attackers {
+			if v.canBlockCombat(a, c) {
+				return true, nil
+			}
+		}
+	}
+	return false, nil
+}
+
 // greaterPowerAlsoBlocks is validateBlocks' "a creature with greater power
 // also blocks" test. An unresolvable power is an error, not a guess (GO-7).
 func greaterPowerAlsoBlocks(g *Game, blocker CardID, blockers []CardID) (bool, error) {

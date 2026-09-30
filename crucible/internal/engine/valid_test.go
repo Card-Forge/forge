@@ -358,8 +358,10 @@ func TestMatchesPropertyTypeWordFallthrough(t *testing.T) {
 	}
 }
 
-// Spell, Effect, Emblem and Boon are coverage gaps, not matches: nothing
-// this port creates is ever one of them yet.
+// Effect, Emblem and Boon are coverage gaps, not matches; Spell is
+// Card.isSpell, which an Aura on the battlefield is not
+// (TestSpellBaseMatchesInstantsSorceriesAndOffBattlefieldAuras has the
+// cases that match).
 func TestMatchesUnbuiltBasesNeverMatch(t *testing.T) {
 	t.Parallel()
 

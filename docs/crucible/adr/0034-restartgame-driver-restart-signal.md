@@ -84,26 +84,35 @@ resolves normally against the post-reset state in the same stack round, matching
 `Game.Step`, `Game.Run` and `ResolveStack` check `Restarted` immediately after any resolve call and return at once if
 set (`Run` the same way it already returns early when a capped game stops — `Over()` false is not the only reason to
 stop; `Restarted` true is a second one, and the two are mutually exclusive in practice since a restarted game is not
-over). The stack itself is empty after `ReturnFromExile` finishes (nothing else was pushed during the reset), so
-returning does not strand a partially-resolved stack. `priorityRound`'s own loop checks it too, so a still-open priority
-window does not continue asking the old active player for actions in the new game.
+over). The reset empties the stack, so returning does not strand a partially-resolved one: all it can hold afterwards is
+what `ReturnFromExile` itself pushed — a returned permanent's own enters trigger — which belongs to the restarted game
+and resolves at its first priority window, where Java's trigger handler puts its waiting triggers on the stack too.
+`priorityRound`'s own loop checks it too, so a still-open priority window does not continue asking the old active player
+for actions in the new game.
 
-**The caller's contract, documented on `Game.Restarted` itself:** seeing it true means deal opening hands
-(`DealOpeningHands`), run mulligans (`PerformMulligans`), clear the flag, and call `StartTurn` with the activator
-(carried on `Game.RestartedBy PlayerID`, set alongside `Restarted`) before calling `Step`/`Run` again. `NewGame` trigger
-firing is not built — 0 real corpus lines have no other way to fire on a restart specifically today, so it is rejected
-as unresolved rather than silently skipped, the identical PORT-8 discipline as anywhere else a real Java step has no
-Crucible counterpart yet.
+**The caller's contract, documented on `Game.Restarted` itself:** seeing it true means calling `Game.ResumeAfterRestart`
+before calling `Step`/`Run` again. It is Java's own restart loop body (`GameAction.java:2326-2381`): each live player
+draws an opening hand from the library the reset already shuffled, mulligans (`PerformMulligans`) run starting with the
+activator (carried on `Game.RestartedBy`, set alongside `Restarted`), the flag clears, and `StartTurn` begins the
+activator's first turn. `DealOpeningHands` is not the entry point: it flips a coin, asks `ChooseStartingPlayer` and
+shuffles again, three random-stream and controller calls Java's restart never makes, since its loop carries `first` over
+as the activator (`GameAction.java:2380`). `Step`, `Run`, `PassPriority` and `ResolveStack` called while `Restarted` is
+still true return an error. `NewGame` trigger firing is not built: every real `Mode$ NewGame` line sits on a
+Command-zone card (`TriggerZones$ Command`), and the reset rejects any Command-zone card other than an effect or a
+dungeon before acting, so no card that could carry one survives into the restarted game — the identical PORT-8
+discipline as anywhere else a real Java step has no Crucible counterpart yet.
 
-**`ExiledWithSource` lands as part of this same effect, not a separate unit.** A `CardID` field on `Card` (`NoCard` =
-not exiled-with-anything), set at every path this port already has that exiles a card by a named source (the reject-list
-sites in `cloneeffect.go`/`playeffect.go` are the two that need it lifted out of their own unresolved-param list; any
-exile path this port has beyond those gets it too, found during implementation), copied by `Game.Clone`. One new
-`valid.go` property, exact match against the ability's own host, mirroring `CardProperty.java:397-411`'s host-timestamp
-comparison as a plain `CardID` equality (this port's `CardID` is stable across zone moves, so no timestamp is needed the
-way Java's is — verify at implementation time whether Karn moving to the library mid-resolution changes which `CardID`
-`ReturnFromExile` should compare against, since Java compares by game-timestamped object identity and this port's
-stable-ID model may already sidestep the ambiguity the Java porter's own research flagged as needing an oracle check).
+**`ExiledWithSource` lands as part of this same effect, not a separate unit.** A per-card mark on `Card` (zero value =
+not exiled with anything), set at every path this port has that Java calls `handleExiledWith` from (`ChangeZone`,
+`ChangeZoneAll`, `Dig`, `DigUntil`, `Heist`, `Airbend`), cleared on every zone entry, copied by `Game.Clone` with the
+card. The reject-list sites in `cloneeffect.go`/`playeffect.go` lift the exact property. One new `valid.go` property
+mirroring `CardProperty.java:397-411`'s `equalsWithGameTimestamp` comparison: the mark holds the host's `CardID` and the
+host object's `zoneStamp`, and the property compares both against the host object an ability of the host sees. A plain
+`CardID` equality is not enough even though this port's IDs are stable across zone moves: it would match a host that
+left the battlefield and came back, a new object in Java that exiled nothing. The host object an ability sees is the
+current one while the host is on the battlefield, the stack or in Command, and its last battlefield object once it has
+left — Java's ability keeps its old host object, which is exactly what Karn's own `ReturnFromExile` compares against
+after the reset has shuffled Karn into its library mid-resolution.
 
 **What resets, scoped to the real corpus line:** every player's zones (except the
 `RestrictFromZone$ Exile | RestrictFromValid$ Card.!ExiledWithSource,Spell,Card.Aura` carve-out) shuffle into a fresh

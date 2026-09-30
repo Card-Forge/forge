@@ -37,6 +37,14 @@ func (g *Game) Blocks() []Block { return g.combat.Blocks }
 // 2), since a fixture could not tell a legal declaration from a repaired
 // one.
 //
+// Two exceptions, both ADR-0035's, both only for a defender some Event$
+// DeclareBlocker replacement applies to (Camouflage's effect card;
+// declareBlockersReplaced, replacement.go): the controller is not asked --
+// the replacement's ReplaceWith$ declares that defender's blocks in its
+// place -- and those blocks are not checked by either pass above, but
+// repaired by Java's own steady-state loop (repairReplacedBlocks, below),
+// PhaseHandler.java's replaced path, which never validates.
+//
 // "Who is defending" is each attacker's own defender (defenderOf,
 // attack.go) -- the controller of whatever it's attacking, a player,
 // planeswalker or battle. A two-player game, or a multiplayer game where
@@ -91,6 +99,16 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 		if len(eligible) == 0 {
 			continue
 		}
+		replaced, handled, err := g.declareBlockersReplaced(controller, defender, blocks)
+		if err != nil {
+			return nil, err
+		}
+		if handled {
+			if blocks, err = g.repairReplacedBlocks(defender, replaced); err != nil {
+				return nil, err
+			}
+			continue
+		}
 		answer := controller.DeclareCombatBlockers(g, defender, byDefender[defender], eligible)
 		for i, blk := range answer {
 			if err := g.checkBlockPairing(blk, answer[:i], byDefender[defender], eligible); err != nil {
@@ -118,6 +136,65 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 		g.checkAttackerBlockedTriggers(controller, attacker, blockersByAttacker[attacker])
 	}
 	return blocks, nil
+}
+
+// repairReplacedBlocks is PhaseHandler.declareBlockersTurnBasedAction's
+// steady-state loop (PhaseHandler.java:693-723), run on defender's blockers
+// after a DeclareBlocker replacement declared them: each pass drops every
+// blocker breaking a can't-block-alone rule against that pass's snapshot of
+// defender's blockers, until a pass drops none. The if/else-if order is
+// Java's -- a creature that can't block alone but has company is still
+// checked against the greater-power rule. Dropping a blocker drops all its
+// blocks (Combat.undoBlockingAssignment).
+//
+// This is ADR-0035's scoped exception to ADR-0024 Decision 2: on the
+// replaced path Java never calls CombatUtil.validateBlocks, so a MustBlock
+// or lure requirement goes unchecked and a can't-block-alone violation is
+// repaired, not rejected. Every other declaration still goes through
+// validateBlocks. Java runs this loop on the normal path too; there,
+// validateBlocks has already rejected every violation it would repair.
+//
+// PhaseHandler.java:681-691's block-cost pass before it is not ported: this
+// port has no block costs (blockvalidation.go's absent-default list).
+func (g *Game) repairReplacedBlocks(defender PlayerID, blocks []Block) ([]Block, error) {
+	for {
+		var remaining []CardID
+		for _, blk := range blocks {
+			if g.Card(blk.Blocker).Controller() == defender && !containsCard(remaining, blk.Blocker) {
+				remaining = append(remaining, blk.Blocker)
+			}
+		}
+		var drop []CardID
+		for _, id := range remaining {
+			c := g.Card(id)
+			remove := false
+			switch {
+			case len(remaining) < 2 && (c.hasKeywordText("CARDNAME can't attack or block alone.") || c.hasKeywordText("CARDNAME can't block alone.")):
+				remove = true
+			case len(remaining) < 3 && c.hasKeywordText("CARDNAME can't block unless at least two other creatures block."):
+				remove = true
+			case c.hasKeywordText("CARDNAME can't block unless a creature with greater power also blocks."):
+				ok, err := greaterPowerAlsoBlocks(g, id, remaining)
+				if err != nil {
+					return nil, err
+				}
+				remove = !ok
+			}
+			if remove {
+				drop = append(drop, id)
+			}
+		}
+		if len(drop) == 0 {
+			return blocks, nil
+		}
+		kept := blocks[:0:0]
+		for _, blk := range blocks {
+			if !containsCard(drop, blk.Blocker) {
+				kept = append(kept, blk)
+			}
+		}
+		blocks = kept
+	}
 }
 
 // recordBlockedBy is Card.addBlockedByThisTurn for blk: its attacker was

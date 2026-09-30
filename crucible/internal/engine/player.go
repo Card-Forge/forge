@@ -138,6 +138,13 @@ type Player struct {
 	// themselves have ceased to exist, parked in None.
 	completedDungeons []CardID
 
+	// controlledBy is Player.controlledBy (CR 800.4b, ADR-0030): every
+	// control grant in force over this player, oldest first. The newest one
+	// names who makes this player's decisions (Game.ControllingPlayer,
+	// scheduledaction.go); a revoke removes its own grant, so control falls
+	// back to the next-most-recent one. Nil while nobody controls them.
+	controlledBy []controlGrant
+
 	// monarchEffect is this player's "The Monarch" effect card
 	// (Player.monarchEffect), NoCard until they first become the monarch.
 	// One card per player for the whole game, as in Java: losing the
@@ -269,4 +276,19 @@ func (p *Player) LandPlayLimit(base int) (limit int, unlimited bool) {
 		limit += e.AdjustLandPlays
 	}
 	return limit, unlimited
+}
+
+// controlGrant is one entry of Player.controlledBy: Java's
+// controlledBy.put(timestamp, Pair.of(controller, brain)) minus the brain.
+// This port has one shared PlayerController (control.go), so there is no
+// per-grant controller object to build; the grant records only who
+// controls (ADR-0030, "Reading the redirect"; scheduledaction.go).
+type controlGrant struct {
+	// Timestamp is the Game.timestamp value the grant consumed as it was
+	// made (Java's game.getNextTimestamp()), the key its revoke removes it
+	// by.
+	Timestamp uint64
+	// Controller is the player making this player's decisions while the
+	// grant is the newest one in force.
+	Controller PlayerID
 }

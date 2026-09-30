@@ -231,19 +231,81 @@ func TestAnimateTriggerGrantShapesThatFail(t *testing.T) {
 			svars: []string{"Grant", "Mode$ Attacks | ValidCard$ Card.Self | Execute$ Trig"},
 			want:  "regrants itself",
 		},
-		{
-			name: "a granted trigger targeting another zone (Pass the Torch)",
-			line: "DB$ Animate | Defined$ Self | Triggers$ Grant | Duration$ Perpetual",
-			svars: []string{"Grant", "Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay",
-				"TrigPlay", "DB$ Play | TgtZone$ Graveyard | ValidTgts$ Card.YouOwn | Optional$ True"},
-			want: "TgtZone$",
-		},
 	} {
 		g, p, _ := newTwoPlayerGame(t)
 		_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil, tt.line, tt.svars...)
 		if err == nil || !strings.Contains(err.Error(), tt.want) {
 			t.Errorf("%s: err = %v, want one containing %q", tt.name, err, tt.want)
 		}
+	}
+}
+
+// TestGrantedDamageTriggerCastsFromGraveyardThroughTgtZone is Pass the
+// Torch's own real card, its full DamageTrig/TrigPlay/DBLosePerpAbility/
+// DBCleanup chain (pass_the_torch.txt:6-9) verbatim: a creature granted the
+// perpetual DamageTrig deals combat damage to a player, TrigPlay (DB$ Play |
+// TgtZone$ Graveyard | ValidTgts$ Card.namedPass the Torch+YouOwn | ...)
+// finds and casts the real card sitting in the graveyard, and its own
+// DBLosePerpAbility (ConditionDefined$ Remembered, set by RememberPlayed$)
+// strips the granted ability -- targetCandidatesInZones (targeting.go)
+// reading TgtZone$ is what makes the cast possible at all; the shape used
+// to fail closed in animateTriggerGrants (animate.go) before that gap was
+// closed, and TestAnimateTriggerGrantShapesThatFail no longer pins that
+// rejection. A second, separate combat proves the ability really is gone,
+// not just that RememberPlayed$ recorded a card once (recast, above).
+func TestGrantedDamageTriggerCastsFromGraveyardThroughTgtZone(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	target := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Hand)
+	grantTo(t, g, p, perpetualGranterDef(t,
+		"Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken",
+		"DB$ Play | TgtZone$ Graveyard | ValidTgts$ Card.namedPass the Torch+YouOwn | "+
+			"TgtPrompt$ Select target card named Pass the Torch in your graveyard | ValidSA$ Spell | "+
+			"WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | AILogic$ ReplaySpell | "+
+			"SubAbility$ DBLosePerpAbility",
+		"DB$ Cleanup",
+		"DBLosePerpAbility", "DB$ LosePerpetual | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup2",
+		"DBCleanup2", "DB$ Cleanup | ClearRemembered$ True"), target)
+	torch := g.NewCard(gainInstant(t, "Pass the Torch", "R", "1"), p, engine.Graveyard)
+	g.Move(target, engine.Battlefield, p)
+	g.Card(target).SummonSick = false
+
+	attack := func(dc *engine.ScriptedController) {
+		t.Helper()
+		ac := engine.NewScriptedController()
+		ac.QueueAttackers([]engine.CardID{target})
+		declareAttackers(t, g, ac)
+		bc := engine.NewScriptedController()
+		bc.QueueBlocks(nil)
+		declareBlockers(t, g, bc)
+		g.DealCombatDamage(dc)
+		if err := g.ResolveStack(engine.NewRegistry(), dc); err != nil {
+			t.Fatalf("ResolveStack: %v", err)
+		}
+	}
+
+	dc := engine.NewScriptedController()
+	dc.QueueTargets([]engine.EntityID{engine.CardEntity(torch)})
+	dc.QueueConfirmEffect(true)
+	attack(dc)
+
+	if got := g.Player(other).Life; got != 18 {
+		t.Errorf("defender life = %d, want 18 (2 combat damage)", got)
+	}
+	if got := g.Player(p).Life; got != 21 {
+		t.Errorf("attacker life = %d, want 21 (Pass the Torch's own gain-1-life cast from the graveyard)", got)
+	}
+	if z := g.Card(torch).Zone; z != engine.Graveyard {
+		t.Errorf("torch zone %v, want back in the graveyard once its own recast resolved", z)
+	}
+
+	attack(engine.NewScriptedController())
+	if got := g.Player(other).Life; got != 16 {
+		t.Errorf("defender life after a second attack = %d, want 16 (2 more combat damage)", got)
+	}
+	if got := g.Player(p).Life; got != 21 {
+		t.Errorf("attacker life after a second attack = %d, want still 21 -- DBLosePerpAbility should have stripped the granted trigger", got)
 	}
 }
 

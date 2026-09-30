@@ -131,6 +131,9 @@ func (g *Game) PassPriority(reg *Registry, controller PlayerController) error {
 	if err := g.TakePendingError(); err != nil {
 		return err
 	}
+	if g.restarted {
+		return errRestartPending
+	}
 	if !g.givesPriority(g.activePhase, controller) {
 		return nil
 	}
@@ -184,6 +187,11 @@ func (g *Game) priorityRound(reg *Registry, controller PlayerController) error {
 		}
 		if err := g.resolveTop(reg, controller); err != nil {
 			return err
+		}
+		// A RestartGame resolution ends the round (ADR-0034): nobody in
+		// the old game is asked for anything more.
+		if g.restarted {
+			return nil
 		}
 		holder = g.activePlayer
 		if g.Player(holder).Lost {

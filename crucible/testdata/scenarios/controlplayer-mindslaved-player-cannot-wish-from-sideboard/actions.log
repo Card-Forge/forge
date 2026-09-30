@@ -1,0 +1,32 @@
+# CR 800.4b through ControlPlayerEffect.java (ADR-0030): human sacrifices
+# Mindslaver in their turn 1 main phase targeting ai. Nothing changes that
+# turn; control begins as ai's turn 2 begins (PhaseHandler.java:515-518).
+# During that turn ai casts Coax from the Blind Eternities, a Wish over
+# Origin$ Sideboard,Exile: a controlled player cannot search outside the
+# game (ChangeZoneEffect.java:987-991), so only Exile is searched, it holds
+# no Eldrazi, nothing is offered and Emrakul stays in the sideboard. Had
+# Sideboard been searched, the unqueued card choice would fail the run.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue targets ai
+queue action human activate 1 0
+passpriority
+# Main1 -> ai's turn 2 Main1: CombatBegin, DeclareAttackers,
+# DeclareBlockers, FirstStrikeDamage, CombatDamage, CombatEnd, Main2, End,
+# Cleanup, then ai's Untap, Upkeep, Draw (ai draws Id:11), Main1.
+advance 13
+tapformana ai 6 U
+tapformana ai 7 U
+tapformana ai 8 U
+queue paygeneric U
+queue paygeneric U
+castspell ai 9
+resolvestack

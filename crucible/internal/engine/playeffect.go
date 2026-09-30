@@ -49,20 +49,28 @@ type playEffect struct{}
 // (Mindslaver control of the caster), WithTotalCMC$ (a running mana-value
 // budget), ShowCards$ (a second, display-only list), ZoneRegardless$
 // (equalsWithGameTimestamp, which this port cannot tell apart);
-// TgtZone$ (resolveTargets scans the battlefield only, so the targets were
-// chosen from the wrong zone); Condition$/ConditionDefined$, which
-// subAbilityConditionMet reads as "never met" rather than evaluating.
+// Condition$/ConditionDefined$, which subAbilityConditionMet reads as
+// "never met" rather than evaluating.
+//
+// TgtZone$ is not in this list: with ValidTgts$ present, resolveTargets
+// (targeting.go) already read it before Play's own Resolve ever runs, so
+// the ability's targets are already the right zone's cards by the time
+// playCandidates reads them back (targetedOrDefinedCards). TgtZone$ paired
+// with Defined$ instead of ValidTgts$ is still rejected below: Defined$
+// reads straight from its own EntityID list, with no target zone of its
+// own for a bare TgtZone$ to restrict.
 var playUnresolvedParams = [...]string{
 	"ReplaceGraveyard", "ReplaceGraveyardValid", "CopyFromChosenName", "AnySupportedCard", "RandomCopied",
 	"RandomNum", "ChoiceNum", "CastFaceDown", "CastTransformed", "ReplaceIlluMask", "PlayCost", "PlayReduceCost",
 	"PlayRaiseCost", "ManaConversion", "ControlledByPlayer", "WithTotalCMC", "ShowCards", "ZoneRegardless",
-	"TgtZone", "Condition", "ConditionDefined",
+	"Condition", "ConditionDefined",
 }
 
 // playUnportedProperties are card-property prefixes in the corpus's Play
 // valid strings that Matches (valid.go) has no case for and would read as
-// false for every card, silently emptying the pool (GO-7): ExiledWith[Source]
-// (23 lines), TargetedPlayerCtrl (6), OwnedBy/ControlledBy <Defined> (8),
+// false for every card, silently emptying the pool (GO-7): ExiledWith and
+// its ExiledWithSourceLKI/ExiledWithEffectSource forms -- the exact
+// ExiledWithSource is answered (playSpecGap) --, TargetedPlayerCtrl (6), OwnedBy/ControlledBy <Defined> (8),
 // sharesNameWith/sharesCardTypeWith, faceUp, NotedFor..., IsCommander,
 // CanPayManaCost.
 var playUnportedProperties = [...]string{
@@ -73,6 +81,11 @@ var playUnportedProperties = [...]string{
 func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectParams(a, "Play", playUnresolvedParams[:]...); err != nil {
 		return err
+	}
+	if _, hasValidTgts := a.Params.Param("ValidTgts"); !hasValidTgts {
+		if err := rejectParams(a, "Play", "TgtZone"); err != nil {
+			return err
+		}
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
@@ -280,6 +293,9 @@ func playSpecGap(spec string) (string, bool) {
 				if _, err := strconv.Atoi(p.Compare.Operand); err != nil {
 					return p.Name, true
 				}
+				continue
+			}
+			if p.Name == "ExiledWithSource" {
 				continue
 			}
 			for _, prefix := range playUnportedProperties {

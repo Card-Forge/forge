@@ -1,0 +1,11 @@
+turn=2
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humangraveyard=Mindslaver
+humanbattlefield=Mountain|Id:2|Tapped;Mountain|Id:3|Tapped;Mountain|Id:4|Tapped;Mountain|Id:5|Tapped
+ailife=20
+aihand=Island|Id:11
+aigraveyard=Coax from the Blind Eternities
+aibattlefield=Island|Id:6|Tapped;Island|Id:7|Tapped;Island|Id:8|Tapped
+aisideboard=Emrakul, the Aeons Torn|Id:10

@@ -1,0 +1,7 @@
+humanlife=7
+ailife=20
+humanbattlefield=Karn Liberated|Id:1|Counters:LOYALTY=14
+humanhand=Lightning Bolt|Id:2
+humanlibrary=Mountain|Id:6
+aibattlefield=Forest|Id:5
+aiexile=Grizzly Bears|Id:3|ExiledWith:1;Llanowar Elves|Id:4

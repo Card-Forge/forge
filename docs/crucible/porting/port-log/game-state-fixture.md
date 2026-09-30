@@ -45,15 +45,18 @@ structural difference from Java (PORT-1), not a data one: the seating order a fi
 
 ## Two-pass resolution
 
-`AttachedTo:`, `RememberedCards:` and `Imprinting:` can name a card declared later in the same fixture — Rancor
-attaching to a creature written after it in the file has to work. `Load`'s `loader` type collects these as it creates
-cards and resolves them once every card in the fixture exists (`resolveRefs`), the same two-pass shape
+`AttachedTo:`, `RememberedCards:`, `Imprinting:` and `ExiledWith:` can name a card declared later in the same fixture —
+Rancor attaching to a creature written after it in the file has to work. `ExiledWith:` (`GameState.java:1398`, applied
+at `:771-781`) marks the card as exiled with that host's current object through `Game.SetExiledWith`, listed on it
+whatever zone the host is in, as Java's `addExiledCard` is; `Dump` writes it on Exile entries only, ahead of `Counters:`
+(`GameState.java:407-410`). ADR-0034, `game-state/effects-restartgame.md`. `Load`'s `loader` type collects these as it
+creates cards and resolves them once every card in the fixture exists (`resolveRefs`), the same two-pass shape
 `GameState.applyGameOnThread` uses (`idToCard`, `cardToAttachId`, ...).
 
-The three lists are ordered slices, not maps keyed by card, because two auras naming the same host must attach in the
-order the fixture wrote them: that order is what breaks a tie between their continuous effects when both share a
-timestamp (GO-12). `RememberedCards:`/`Imprinting:` have no such cross-card ordering concern — each card's `Memory` is
-independent — but the slices are ordered anyway, once discipline was already needed for attachments.
+The lists are ordered slices, not maps keyed by card, because two auras naming the same host must attach in the order
+the fixture wrote them: that order is what breaks a tie between their continuous effects when both share a timestamp
+(GO-12). `RememberedCards:`/`Imprinting:` have no such cross-card ordering concern — each card's `Memory` is independent
+— but the slices are ordered anyway, once discipline was already needed for attachments.
 
 ## `Id:` is the card's own handle
 
@@ -116,6 +119,7 @@ startturn <player>            Game.StartTurn(player, controller)
 advance [n]                   Game.AdvancePhase(controller), n times (default 1)
 dealopeninghands              DealOpeningHands(game, controller), starting player discarded
 mulligan <firstplayer>        PerformMulligans(game, controller, firstplayer)
+resumerestart                 Game.ResumeAfterRestart(controller), after a RestartGame (ADR-0034)
 declareattackers              Game.DeclareCombatAttackers(controller)
 declareblockers               Game.DeclareCombatBlockers(controller)
 firststrikedamage             Game.DealFirstStrikeDamage(controller)

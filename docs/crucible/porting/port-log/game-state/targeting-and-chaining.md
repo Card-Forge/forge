@@ -39,9 +39,9 @@ rather than a hand-rolled string check: `matchesPlayerSpec` (valid.go, already b
 shape for the whole spec before ever walking a real candidate list. Player-shaped candidates are every player still in
 the game -- a player who has lost is filtered out here the identical way `definedPlayers`'s own `if (!p.isInGame())`
 reading already is, a real correctness gap this chunk caught while writing `targetCandidates` rather than one carried
-over from anywhere else. Card-shaped candidates are every card on any player's battlefield, via the unchanged `Matches`
-(valid.go) -- CR's own implicit "target creature" scope, and the only zone 0 real corpus `TgtZone$` lines across the
-whole vocabulary ever ask this port to look anywhere else than.
+over from anywhere else. Card-shaped candidates are every card in a `TgtZone$` zone, the battlefield when a line names
+none (`Matches`, valid.go) -- CR's own implicit "target creature" scope. `TgtZone$` itself did not land with this chunk;
+see "`TgtZone$` lands (Pass the Torch)," below.
 
 `PlayerController` gained a twenty-fourth method, `ChooseTargets` (control.go), the identical "trust the controller's
 answer" contract every other decision here already has -- the returned slice's own length and membership are not
@@ -118,6 +118,57 @@ to zero legal targets rather than a wrong one, `Radiance$` folding into that sam
 (`id`/`card`/`game`/`player`/`ability`/`control`/`valid`/`amount`/`zone`), `trigger` gaining it as a dependency;
 `land`/`manaability` each gained `control` (and `land` gained nothing else new, `manaability` gained `trigger` too, both
 newly needing to call into groups their own files had not referenced before this chunk).
+
+---
+
+## `TgtZone$` lands (Pass the Torch)
+
+`karn_liberated.txt` aside, Pass the Torch (`pass_the_torch.txt:8`) was M6's other real corpus line naming a card this
+port could not resolve mid-milestone: its `DamageTrig` grants `TrigPlay`,
+`DB$ Play | TgtZone$ Graveyard | ValidTgts$ Card.namedPass the Torch+YouOwn | ...`. `targetCandidates` (above) scanned
+the battlefield only, so the graveyard card was never a legal candidate -- CR 603.3c's own "no legal targets" case,
+indistinguishable from outside `resolveTargets` from a target shape this port genuinely cannot parse. Both
+`playeffect.go`'s own `TgtZone` rejection (`playSpecGap`'s sibling, `playUnresolvedParams`) and `animateTriggerGrants`'s
+own explicit refusal (`animate.go`) existed to fail this shape closed rather than silently drop it (GO-7) -- the second
+doubly so, since a granted trigger's `Execute$` reaching the stack at all depends on `resolveTargets` finding it a legal
+target first.
+
+`targetCandidates` is now `targetCandidatesInZones` (`targeting.go`) scoped to `[]ZoneType{Battlefield}`; the general
+`ValidTgts$` path (`targetChoiceFor`'s own `default` case) reads `TgtZone$` (`parseZoneList`, zonemove.go, the identical
+parse `Play`'s own `ValidZone$` already used) and passes the named zones through instead when a line has one -- **scoped
+to `a.API == APIPlay`, not every API reaching this branch.** ChangeZone, Pump, Effect, PutCounter, MakeCard, Clone,
+RepeatEach and the rest all keep ignoring a `TgtZone$` they may carry: each one's own `Resolve` was written and tested
+against a battlefield target only, and widening the read to all of them at once would make roughly 190 more real corpus
+lines newly reachable with none of that review done (GO-7). Player candidates are still probed once regardless of which
+zones are scanned: `TgtZone$` restricts where a card candidate may sit, never a player-shaped alternative's own scope
+(CR 115's union, "Targeting itself lands," above). `Stack` in a `TgtZone$` list is a deferred `targetChoice.err` rather
+than silently scanned: `Zone(Stack, pid)` is never the real Stack zone (kept under `Zone(Stack, NoPlayer)`), so scanning
+it per player would find nothing and lazily allocate an empty per-player Stack zone as a side effect of what should be a
+read-only probe; no real `DB$ Play` line names it, so this fails closed rather than guessing at `stackSpellCandidates`
+instead. `cardCantBeTargetedBy` (staticability.go) returns `false` for any card whose `Zone != Battlefield`, correct for
+Hexproof/Shroud/Protection (static abilities a card only grants while on the battlefield) but not a full answer:
+`S:Mode$ CantTarget | AffectedZone$ Graveyard` (Ground Seal, Silent Gravestone -- `cardCantBeTargetedBy`'s own doc
+comment already scopes it to those three keywords, no `AffectedZone$` support) is not read at all, so a graveyard
+candidate skips a real refusal Java would apply. Not reachable before this chunk (nothing scanned the graveyard for a
+target); reachable now through Play's own `TgtZone$` path. Logged in `game-state.md`'s "Not ported yet."
+
+`playeffect.go`'s own rejection narrows rather than disappears: `TgtZone$` is only left unresolved when `ValidTgts$` is
+absent (`Defined$ Remembered | TgtZone$ Graveyard`, still pinned by `TestPlayRejectsUnbuiltShapes`) -- with `ValidTgts$`
+present, `resolveTargets` has already consumed `TgtZone$` before `playEffect.Resolve` ever runs, so `playCandidates`'
+own `targetedOrDefinedCards` read of `a.Targets` is already the right zone's cards; Play itself has nothing left to
+reject. `animateTriggerGrants`'s own refusal is removed outright, not narrowed: `pushTriggeredAbilities` calls
+`resolveTargets` uniformly for every pushed ability, granted trigger `Execute$` included, so the shape needs no refusal
+of its own at the grant site.
+
+`TestGrantedDamageTriggerCastsFromGraveyardThroughTgtZone` (perpetualgrants_test.go) runs the real card's own
+`DamageTrig`/`TrigPlay`/`DBLosePerpAbility`/`DBCleanup` chain verbatim, not a cut-down stand-in: a creature granted the
+perpetual `DamageTrig` deals combat damage, `TrigPlay` finds Pass the Torch in the graveyard and casts it without
+paying, the caster's own gain-1-life resolves (proof the cast, not just the target choice, went through), and
+`DBLosePerpAbility`'s `ConditionDefined$ Remembered` (set by `TrigPlay`'s own `RememberPlayed$ True`) strips the granted
+ability. A second, separate attack proves the strip really happened: the same creature deals combat damage again with no
+`TrigPlay` left to fire, the caster's life unchanged. `TestAnimateTriggerGrantShapesThatFail`'s own "a granted trigger
+targeting another zone" case is gone with it: that shape no longer fails. `enginelint` group `targeting` gained
+`zonemove` as a dependency (`parseZoneList`).
 
 ---
 

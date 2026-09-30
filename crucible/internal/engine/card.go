@@ -240,6 +240,22 @@ type Card struct {
 	// is raised by Intensify, read through Count$CardIntensity.
 	Intensity int
 
+	// exiledWith is Card.exiledWith (Card.java:326): which host object
+	// exiled this card, read by the ExiledWithSource valid property
+	// (valid.go). The zero value means exiled with nothing. Every zone
+	// entry but one to the Stack clears it (put's own "kind != Stack"
+	// guard, game.go, Card.cleanupExiledWith's own reset on a move,
+	// GameAction.java:576-579), and markExiledWith (zonemove.go) sets it
+	// after an effect's own exile move, ADR-0034.
+	exiledWith exiledWithMark
+	// battlefieldStamp is the zoneStamp this card had as its most recent
+	// battlefield object, set as it leaves the battlefield (Move,
+	// MoveToLibraryTop, game.go); zero while it never has. It stands in for
+	// the old object an ability of this card keeps once the card has moved
+	// on (hostObjectStamp, game.go) -- Java's own LKI copy keeps that
+	// object's gameTimestamp (CardCopyService.java:375).
+	battlefieldStamp uint64
+
 	// Suspected, Solved, Harnessed and Plotted are Card's designations of
 	// those names (AlterAttribute). suspectedTS is the timestamp of the
 	// menace a suspected card has.
@@ -709,3 +725,21 @@ func (c *Card) Attachments() []CardID {
 	}
 	return c.attachments.All()
 }
+
+// exiledWithMark is one card's Card.exiledWith: the host that exiled it,
+// as the host object it was then. stamp is that host object's zoneStamp
+// (Java compares with equalsWithGameTimestamp, CardProperty.java:410, so a
+// host that has since left and come back is a new object that exiled
+// nothing). listed is whether Java would also have put the card on that
+// host's own exiledCards list, which it does only for a host in play, on
+// the stack or in the Command zone (SpellAbilityEffect.java:1100-1104) --
+// the ExiledWithSource property's other half, source.hasExiledCard.
+type exiledWithMark struct {
+	host   CardID
+	stamp  uint64
+	listed bool
+}
+
+// ExiledWith is the card that exiled c, NoCard if nothing did since c last
+// changed zones (Card.getExiledWith).
+func (c *Card) ExiledWith() CardID { return c.exiledWith.host }

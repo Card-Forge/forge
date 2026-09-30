@@ -185,7 +185,10 @@ type loader struct {
 	attaches  []attachRef
 	remembers []refList
 	imprints  []refList
-	unapplied []string
+	// exiledWith pairs a card with the fixture id of the host it was
+	// exiled with (ExiledWith:), resolved with the rest.
+	exiledWith []attachRef
+	unapplied  []string
 }
 
 type attachRef struct {
@@ -311,6 +314,13 @@ func (ld *loader) card(entry string, kind engine.ZoneType, owner engine.PlayerID
 				return fmt.Errorf("%s: %w", name, err)
 			}
 			remembered = ids
+		case strings.HasPrefix(info, "ExiledWith:"):
+			// GameState.java:1398/771-781: resolved once every card exists.
+			hostID, err := strconv.Atoi(strings.TrimPrefix(info, "ExiledWith:"))
+			if err != nil {
+				return fmt.Errorf("%s: %q: %w", name, info, err)
+			}
+			ld.exiledWith = append(ld.exiledWith, attachRef{id, hostID})
 		case strings.HasPrefix(info, "Imprinting:"):
 			ids, err := parseIDList(strings.TrimPrefix(info, "Imprinting:"))
 			if err != nil {
@@ -389,6 +399,13 @@ func (ld *loader) resolveRefs() error {
 			}
 			ld.game.Card(r.card).Memory.Imprint(target)
 		}
+	}
+	for _, e := range ld.exiledWith {
+		host, ok := ld.idToCard[e.hostID]
+		if !ok {
+			return fmt.Errorf("exiledwith %d: no card has that id", e.hostID)
+		}
+		ld.game.SetExiledWith(e.card, host)
 	}
 	return nil
 }

@@ -98,7 +98,8 @@
       "effecteffect",
       "cloneeffect",
       "registry",
-      "mustblockeffect"
+      "mustblockeffect",
+      "scheduledaction"
     ],
     "phase": [],
     "event": ["id", "zone", "phase", "parts"],
@@ -134,12 +135,13 @@
       "trigger",
       "effecteffect",
       "mustblockeffect",
-      "phasing"
+      "phasing",
+      "scheduledaction"
     ],
     "mulligan": ["id", "zone", "game", "control"],
     "stack": ["id", "ability", "game", "effect", "event", "action", "control", "card", "zone"],
     "priority": ["id", "card", "game", "phase", "control", "effect", "action", "player", "room"],
-    "driver": ["game", "phase", "control", "effect"],
+    "driver": ["id", "game", "phase", "control", "effect", "mulligan"],
     "valid": ["id", "zone", "card", "parts", "game", "combat", "player", "effecthelpers"],
     "attack": [
       "id",
@@ -316,7 +318,8 @@
       "phase",
       "replaceeffect",
       "effecthelpers",
-      "defined"
+      "defined",
+      "combat"
     ],
     "playerstate": ["id", "zone", "card", "game"],
     "defined": ["id", "game", "player", "card", "ability", "parts", "valid"],
@@ -365,7 +368,8 @@
       "zone",
       "action",
       "staticability",
-      "subability"
+      "subability",
+      "zonemove"
     ],
     "subability": ["id", "game", "ability", "control", "effect"],
     "zonemove": ["id", "card", "game", "ability", "control", "amount", "zone", "effecthelpers"],

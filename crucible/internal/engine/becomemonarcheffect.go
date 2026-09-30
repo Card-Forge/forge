@@ -3,7 +3,7 @@
 
 package engine
 
-//enginelint:allow id zone card game player ability defined condition control parts valid trigger effecteffect effecthelpers earthbendeffect
+//enginelint:allow id zone card game player ability defined condition control parts valid trigger effecteffect effecthelpers earthbendeffect scheduledaction
 
 import (
 	"fmt"
@@ -299,6 +299,8 @@ func (g *Game) onPlayersLost(c PlayerController) {
 		if g.initiative == pid {
 			g.takeInitiative(c, g.designationSuccessor(pid))
 		}
+		// Game.java:1014-1017, "free any mindslaves" (ADR-0030).
+		g.releaseControlBy(pid)
 		pl.lossHandled = true
 	}
 }

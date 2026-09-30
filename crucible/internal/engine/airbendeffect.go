@@ -83,7 +83,11 @@ func (airbendEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 		if c.Zone != Battlefield {
 			continue
 		}
-		g.moveByEffect(controller, id, Exile, 0, NoPlayer, false)
+		melded := g.moveByEffect(controller, id, Exile, 0, NoPlayer, false)
+		g.markExiledWith(id, a.Source)
+		if melded != NoCard {
+			g.markExiledWith(melded, a.Source)
+		}
 		if c.Zone != Exile {
 			continue
 		}

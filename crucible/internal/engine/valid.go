@@ -95,10 +95,13 @@ func altMatches(g *Game, c *Card, alt valid.Alternative, sourceController Player
 // through to a type/supertype/subtype check, the same fallthrough
 // `getType().hasStringType(incR[0])` is in Java.
 //
-// Spell, Effect, Emblem and Boon never match: this port has nothing on the
-// stack, no continuous-effect objects, no emblems and no boons yet, so a
-// restriction naming one is a coverage gap, not a wrong answer -- the same
-// as any SBA this port has not reached.
+// Spell is Card.isSpell (Card.java:5500-5502): an instant or sorcery card,
+// or an Aura card anywhere but the battlefield, in any zone -- RestartGame's
+// own RestrictFromValid$ carve-out (restartgameeffect.go) reads it on exiled
+// cards. Effect, Emblem and Boon never match: this port has no emblems or
+// boons, and Java's Effect is its immutable effect card, which no card
+// valid string this port evaluates reaches yet -- a coverage gap, not a
+// wrong answer.
 func baseMatches(c *Card, name string) bool {
 	switch name {
 	case "Permanent":
@@ -113,7 +116,10 @@ func baseMatches(c *Card, name string) bool {
 		// case's own player-side sibling, the two together giving
 		// targetCandidates (targeting.go) every legal "any target" answer.
 		return c.Type().Has(cardtype.Creature) || c.Type().Has(cardtype.Planeswalker) || c.Type().Has(cardtype.Battle)
-	case "Spell", "Effect", "Emblem", "Boon":
+	case "Spell":
+		t := c.Type()
+		return t.Has(cardtype.Instant) || t.Has(cardtype.Sorcery) || (t.HasSubtype("Aura") && c.Zone != Battlefield)
+	case "Effect", "Emblem", "Boon":
 		return false
 	default:
 		return c.Type().HasStringType(name)
@@ -197,6 +203,18 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		// effect card (effecteffect.go's effectLifetime.host).
 		sc, ok := sourceCard(g, source)
 		return ok && sc.IsEffect && sc.effectLife.host != NoCard && sc.effectLife.host == c.ID
+	case name == "ExiledWithSource":
+		// CardProperty.java:397-411: c was exiled with source's own object
+		// -- the same CardID and the same zoneStamp as the host object an
+		// ability of source sees (hostObjectStamp, game.go), and listed on
+		// it. Exact name only: ExiledWithSourceLKI and ExiledWithEffectSource
+		// are different branches Java tests first, not ported.
+		ew := c.exiledWith
+		if source == NoCard || ew.host != source || !ew.listed {
+			return false
+		}
+		stamp, _ := g.hostObjectStamp(source)
+		return ew.stamp == stamp
 	case strings.HasPrefix(name, "ChosenCard"):
 		// ChosenCardStrict collapses to ChosenCard: Java's "Strict" form
 		// additionally checks equalsWithGameTimestamp, telling a chosen card

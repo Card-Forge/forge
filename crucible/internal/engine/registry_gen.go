@@ -7,7 +7,7 @@ package engine
 // Resolve(*Game, *Ability, PlayerController) error, under the API its name
 // gives or the API its //crucible:register lines name (ADR-0017).
 //
-// 186 APIs. Explicit construction, not an init() populating a package-level
+// 189 APIs. Explicit construction, not an init() populating a package-level
 // Registry: a caller that wants fewer APIs builds its own Registry.
 //
 // Regenerate with "go generate -run genregistry ./internal/engine" after adding an effect.
@@ -35,6 +35,7 @@ func NewRegistry() *Registry {
 	r[APIBlight] = blightEffect{}
 	r[APIBlock] = blockEffect{}
 	r[APIBranch] = branchEffect{}
+	r[APICamouflage] = camouflageEffect{}
 	r[APIChangeCombatants] = changeCombatantsEffect{}
 	r[APIChangeSpeed] = changeSpeedEffect{}
 	r[APIChangeTargets] = changeTargetsEffect{}
@@ -58,6 +59,7 @@ func NewRegistry() *Registry {
 	r[APICloak] = manifestEffect{api: "Cloak", cloak: true, remember: "RememberCloaked"}
 	r[APIClone] = cloneEffect{}
 	r[APIConnive] = conniveEffect{}
+	r[APIControlPlayer] = controlPlayerEffect{}
 	r[APIControlSpell] = controlSpellEffect{}
 	r[APICopyPermanent] = copyPermanentEffect{}
 	r[APICopySpellAbility] = copySpellAbilityEffect{}
@@ -162,6 +164,7 @@ func NewRegistry() *Registry {
 	r[APIReplaceMana] = replaceManaEffect{}
 	r[APIReplaceSplitDamage] = replaceSplitDamageEffect{}
 	r[APIReplaceToken] = replaceTokenEffect{}
+	r[APIRestartGame] = restartGameEffect{}
 	r[APIReveal] = revealEffect{}
 	r[APIRevealHand] = revealHandEffect{}
 	r[APIReverseTurnOrder] = reverseTurnOrderEffect{}

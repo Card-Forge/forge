@@ -24,7 +24,7 @@ not hold, found reading `CamouflageEffect.java` and the surrounding `PhaseHandle
 validation") was rejected as "redundant for the one real corpus shape" — but it is not redundant, because Java's own
 declare-blockers-turn-based-action never calls `CombatUtil.validateBlocks` on this path at all
 (`PhaseHandler.java:666-760`): once the `DeclareBlocker` replacement runs, the only step it runs afterward is a
-"steady-state" repair loop (`:694-722`) that silently removes blockers breaking the can't-block-alone rule ("unless at
+"steady-state" repair loop (`:693-723`) that silently removes blockers breaking the can't-block-alone rule ("unless at
 least two other creatures block" / "unless a creature with greater power also blocks"), and it ignores `MustBlock`, lure
 and blocks-each-combat requirements entirely on this path. This port's `g.validateBlocks` (`blockvalidation.go`) would
 return an `error` for exactly the cases Java's steady-state loop silently repairs, and for the ignored requirements
@@ -38,11 +38,13 @@ way.
 declarer defaults to the defending player. Java's actual source: the declarer is
 `getDefinedPlayersOrTargeted(sa).get(0)` reading `Defined$ ReplacedPlayer`, which `ReplaceDeclareBlocker`'s own
 `setReplacingObjects` sets to `AbilityKey.Player` — `whoDeclaresBlockers = p.getDeclaresBlockers() ?: p`
-(`PhaseHandler.java:661`), the same Odric-style "someone else declares blockers for you" redirect this port has no other
-reader for yet. The defending player is a _separate_ value, `Defender$ ReplacedDefendingPlayer` (the replacement's own
-`Affected`) — the real line names both params because they can differ. If `Defined$` is absent (not true for the real
-line, but worth stating since a future card could omit it), Java's own default is `"You"`, the ability's caster, not the
-defender (`SpellAbilityEffect.java:340`).
+(`PhaseHandler.java:662`), the same Odric-style "someone else declares blockers for you" redirect this port's
+`eachReplacement` hook does not read yet (`continuous.go:809` skips any `DeclaresAttackers$`/`DeclaresBlockers$` static;
+`Defined$ ReplacedPlayer` therefore always resolves to the defender in this port today, not because no such redirect
+exists in the corpus, but because nothing sets it). The defending player is a _separate_ value,
+`Defender$ ReplacedDefendingPlayer` (the replacement's own `Affected`) — the real line names both params because they
+can differ. If `Defined$` is absent (not true for the real line, but worth stating since a future card could omit it),
+Java's own default is `"You"`, the ability's caster, not the defender (`SpellAbilityEffect.java:340`).
 
 **3. The min/max branches are reached by board state, not by a param this line carries.** ADR-0031 said to skip
 `CombatUtil.getMinNumBlockersForAttacker`/the max-blocker carve-out "if the corpus line's own shape does not need it."
@@ -88,31 +90,36 @@ Declarer/defender:
 
 ## Decision
 
-**Validation: Option 2.** Port `PhaseHandler.java:694-722`'s own steady-state loop as the replaced path's own
+**Validation: Option 2.** Port `PhaseHandler.java:693-723`'s own steady-state loop as the replaced path's own
 after-step, not `g.validateBlocks`. This is an explicit exception to ADR-0024 Decision 2, scoped to a
 `DeclareBlocker`-replaced declaration only — every other declaration path still validates exactly as before.
 
-**Declarer/defender: Option 2.** `runReplaceWith` (`replacement.go:1564`, extended to dispatch a `DB$`-style API the way
-`runCopyReplacement` already does for `entersascopy.go`) carries two new replacing-object fields (`ReplacedPlayer`,
-`ReplacedDefendingPlayer`) and two new `defined.go` keywords reading them. `Camouflage`'s own `Defined$`/`Defender$`
-read those, not a hard-coded "the defender."
+**Declarer/defender: Option 2.** `runReplaceWithEffect` (`replacement.go`), a sibling of `runReplaceWith` rather than
+that function extended: `runReplaceWith`'s existing callers all branch on `ev.result` to see whether their event
+changed, which an ordinary `DB$`-style API leaves at `NotReplaced` — routing one through `runReplaceWith` itself would
+run the ability and then let the original event happen anyway. `runReplaceWithEffect` dispatches through the `Registry`
+the way `runCopyReplacement` already does for `entersascopy.go`, and the `replacementEvent` it builds carries two new
+replacing-object fields (`player`, `defendingPlayer`) alongside two new `defined.go` keywords (`ReplacedPlayer`,
+`ReplacedDefendingPlayer`) reading them. `Camouflage`'s own `Defined$`/`Defender$` read those, not a hard-coded "the
+defender."
 
 **Piles, shuffle, filter (unchanged from ADR-0031's own correct parts):** one `ChooseCardsForEffect` call per attacker
 (`combat.getAttackers()` — every attacker, not scoped to one defender; diverges from the printed card text in a 3+
 player game, matches it in two-player, the only shape the real line's own reachability needs), a chosen creature removed
 from the pool so it is not offered twice. Attacker order is shuffled with `g.rand` — this needs a `javarand`-family
 equivalent of `Collections.shuffle` if one does not already exist, matching `CardLists.shuffle`
-(`CardLists.java:164-165`). Each pile is filtered by `canBlockAtAll` (this port's own name for
-`CombatUtil.canBlock(blocker)`) before assignment.
+(`CardLists.java:164-165`). Each pile is filtered by `canBlockCombat` (this port's own name for
+`CombatUtil.canBlock(blocker, combat)`, `CamouflageEffect.java:28`) before assignment.
 
 **The crash bug's own fail-closed shape (mitigation only, the bug itself logged at implementation time):** when a
-defender's candidate pool contains a creature `canBlockAtAll` would reject, this port returns an `error` before
+defender's candidate pool contains a creature `canBlockCombat` would reject, this port returns an `error` before
 assigning anything, rather than silently dropping it (which would diverge from Java's own crash-or-skip-neighbor
-behavior in a way no diff could explain) or reproducing a crash (which PORT-8 rules out — Go doesn't have Java's
-mutate-during-iterate hazard to reproduce even if it wanted to). The pool is filtered before offering it to the declarer
-instead, so the unblockable creature is never in the choice the declarer makes in the first place — CR 509.1's own
-"declare legal blockers" contract holds even though Java's crash means this exact game state has likely never been
-exercised upstream.
+behavior in a way no diff could explain), reproducing a crash (which PORT-8 rules out — Go doesn't have Java's
+mutate-during-iterate hazard to reproduce even if it wanted to), or filtering the offending creature out of the pool
+before offering it to the declarer (which would silently hand Java's crash bug a Go-only escape hatch no diff could
+explain either, letting a game continue past a state Java's own algorithm cannot reach). CR 509.1's own "declare legal
+blockers" contract is met by failing the whole declaration closed, not by editing the choice down to one Java itself
+never gets to offer.
 
 ## Consequences
 
@@ -122,9 +129,12 @@ source of truth for every other declaration path — this is a named, narrow exc
 
 **Bad:** `DeclareCombatBlockers`'s own contract grows a second documented exception (after "unless a `DeclareBlocker`
 replacement is active" from ADR-0031): "and when one is active, the result is repaired by Camouflage's own steady-state
-loop, not validated by ADR-0024's check." A reviewer must know both exceptions exist. `runReplaceWith` gaining
-`DB$`-style dispatch is new surface any future `ReplaceWith$` line can reach, not scoped to `Camouflage` alone — a later
-such line inherits both the dispatch mechanism and the burden of getting its own replacing-object reads right.
+loop, not validated by ADR-0024's check." A reviewer must know both exceptions exist. `runReplaceWithEffect` is new
+surface any future `ReplaceWith$` line naming a `DB$`-style API can reach, not scoped to `Camouflage` alone — a later
+such line inherits both the dispatch mechanism and the burden of getting its own replacing-object reads right. Neither
+`Defined$ ReplacedPlayer` nor the normal declaration path honours a `DeclaresAttackers$`/`DeclaresBlockers$` redirect
+(`continuous.go:809` skips it): `ReplacedPlayer` resolves to the defender for every corpus line today only because
+nothing sets one, not because the port has ruled the shape out.
 
 **Neutral:** `ReplacedPlayer`/`ReplacedDefendingPlayer` are two more `defined.go` keywords, the same shape as every
 other `Defined$` reader already has.

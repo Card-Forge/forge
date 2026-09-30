@@ -89,6 +89,10 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 			g.activePlayer = g.nextActivePlayer()
 			g.endDetains(g.activePlayer)
 			g.endGoads(g.activePlayer)
+			// PhaseHandler.java:515-518: the cleanup Phase's until lists,
+			// unkeyed first (ControlPlayer's revokes), then those keyed to
+			// the incoming active player (its grants), ADR-0030.
+			g.runScheduledActions(boundaryCleanup, g.activePlayer)
 			g.delayedTriggersOnNextTurn(g.activePlayer)
 			g.activateCleanupDelayedTriggers()
 			g.endEffectsAtTurnStart(g.activePlayer)
@@ -245,6 +249,9 @@ func (g *Game) beginStep(controller PlayerController, driven bool) (bool, error)
 		g.archenemyMain1(controller)
 	case CombatBegin:
 		g.combatsThisTurn++
+		// PhaseHandler.java:301: getBeginOfCombat().executeUntil(playerTurn),
+		// ControlPlayer's Combat$ grants (ADR-0030).
+		g.runScheduledActions(boundaryBeginCombat, g.activePlayer)
 	case DeclareAttackers:
 		if driven {
 			if _, err := g.DeclareCombatAttackers(controller); err != nil {
@@ -464,6 +471,11 @@ const MaxHandSize = 7
 // `g.combat` on the branch where something is actually declared, and
 // neither returns early by clearing it (game-state.md's "Combat" section).
 func (g *Game) endCombat() {
+	// PhaseHandler.endCombat's own first line (PhaseHandler.java:1262):
+	// getEndOfCombat().executeUntil(), ControlPlayer's Combat$ revokes
+	// (ADR-0030). Here rather than at CombatEnd's step so EndCombatPhase
+	// and EndTurn, which call endCombat directly, revoke too.
+	g.runScheduledActions(boundaryEndCombat, g.activePlayer)
 	g.combat = Combat{}
 	g.endEffectsAtEndOfCombat()
 	g.endMustBlocks(true)

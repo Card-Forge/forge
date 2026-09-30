@@ -6,6 +6,9 @@ One script-driven `ApiType` resolves, 183 of the corpus's 203. Implements
 spin-off in `GameAction.changeZone` (`GameAction.java:629-642`) and `PlayerZoneBattlefield.addToMelded`
 (`PlayerZoneBattlefield.java:45-49`).
 
+Supersedes the `Meld` row of `effects-batch-b.md`'s deferred table; that file is closed, so the row stays as written
+there.
+
 ## Meld lands
 
 **Corpus.** 7 real lines, one per meld pair. 6 resolve, 1 rejected.

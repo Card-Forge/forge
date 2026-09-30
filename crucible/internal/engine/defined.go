@@ -41,7 +41,9 @@ import (
 // "TriggeredActivator", what the trigger that made the ability recorded
 // (Ability.triggered) -- an error, "the trigger recorded no ...",
 // when it recorded no such key, so a trigger mode that never learned to
-// set one fails loudly (GO-7). Any other "Player.<property>" is Java's
+// set one fails loudly (GO-7). "ReplacedPlayer"/"ReplacedDefendingPlayer"
+// are a DeclareBlocker replacement's two replacing objects (ADR-0035), an
+// error the same way outside one. Any other "Player.<property>" is Java's
 // fallthrough: every player matching that one property
 // (matchesPlayerProperty, valid.go) -- "Player.IsRemembered", the players
 // the host remembers, is the corpus's 153 real lines of it. A player no
@@ -114,6 +116,21 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no activator", defined)
 		}
 		candidates = []PlayerID{refs.triggered.activator}
+	case "ReplacedPlayer", "ReplacedDefendingPlayer":
+		// AbilityUtils.getDefinedPlayers' "Replaced" branch
+		// (AbilityUtils.java:1097-1103): the replacing object of that key.
+		// Only a DeclareBlocker replacement (ADR-0035) records either here;
+		// the per-event dispatches in replacement.go that read "the player
+		// who would have drawn/gained" do so on their own, never through
+		// this function. Unset is an error, never an empty answer (GO-7).
+		pid := refs.replacedPlayer
+		if defined == "ReplacedDefendingPlayer" {
+			pid = refs.replacedDefendingPlayer
+		}
+		if pid == NoPlayer {
+			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement that records it", defined)
+		}
+		candidates = []PlayerID{pid}
 	default:
 		// getDefinedPlayers' fallthrough (AbilityUtils.java:1186-1198):
 		// every player, filtered by the dotted restriction. Only a single

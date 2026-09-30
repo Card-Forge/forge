@@ -113,7 +113,13 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	var movedOrigins []ZoneType
 	for _, id := range cards {
 		from := g.Card(id).Zone
-		g.moveByEffect(controller, id, dest, libPos, newController, tapped)
+		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped)
+		if dest == Exile {
+			g.markExiledWith(id, a.Source)
+			if melded != NoCard {
+				g.markExiledWith(melded, a.Source)
+			}
+		}
 		if _, seen := moved[from]; !seen {
 			movedOrigins = append(movedOrigins, from)
 		}

@@ -210,12 +210,21 @@ type abilityRefs struct {
 	// replaced is the card a Moved replacement's ReplaceWith$ ability is
 	// replacing the entry of (Defined$ ReplacedCard); NoCard otherwise.
 	replaced CardID
+	// replacedPlayer and replacedDefendingPlayer are a DeclareBlocker
+	// replacement's Player and DefendingPlayer (Defined$ ReplacedPlayer,
+	// Defined$ ReplacedDefendingPlayer); NoPlayer otherwise.
+	replacedPlayer          PlayerID
+	replacedDefendingPlayer PlayerID
 }
 
 // refs is a's own abilityRefs.
 func (a *Ability) refs() abilityRefs {
-	return abilityRefs{targets: a.Targets, triggerRemembered: a.TriggerRemembered, triggered: a.triggered,
+	r := abilityRefs{targets: a.Targets, triggerRemembered: a.TriggerRemembered, triggered: a.triggered,
 		replaced: a.replacedCard()}
+	if a.replacing != nil {
+		r.replacedPlayer, r.replacedDefendingPlayer = a.replacing.player, a.replacing.defendingPlayer
+	}
+	return r
 }
 
 // replacedCard is the card entering the battlefield when a runs as a Moved

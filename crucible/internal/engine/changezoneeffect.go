@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove
+//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction
 
 import (
 	"fmt"
@@ -27,12 +27,15 @@ var changeZoneUnresolvedParams = [...]string{
 	"ShuffleChangedPile", "Reorder", "Exactly", "Searched", "RememberSearched",
 	"AlreadyRevealed", "ImprintLast", "TargetsWithDefinedController", "Unearth",
 	"Condition", "ConditionDefined", "SorcerySpeed", "PlayerTurn", "Ultimate", "ModeCost", "CheckSVar",
+	// ExiledWithEffectSource$ marks the effect card's own source as the
+	// exiler instead of the host (SpellAbilityEffect.java:1092-1094).
+	"ExiledWithEffectSource",
 }
 
 // changeZoneEffect is ChangeZoneEffect.java, the corpus's single most
 // common API (5,576 real (AB|DB)$ lines). Java splits it on
 // SpellAbility.isHidden -- Hidden$, or an Origin$ naming a hidden zone
-// (Library, Hand) -- into changeHiddenOriginResolve (search a zone, choose,
+// (Library, Hand, Sideboard) -- into changeHiddenOriginResolve (search a zone, choose,
 // move) and changeKnownOriginResolve (move already-identified cards); this
 // port keeps that split.
 type changeZoneEffect struct{}
@@ -65,7 +68,7 @@ func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController
 			if z == Command && dest == Exile {
 				continue
 			}
-			if z != Battlefield && z != Graveyard && z != Hand && z != Library && z != Exile {
+			if z != Battlefield && z != Graveyard && z != Hand && z != Library && z != Exile && z != Sideboard {
 				return fmt.Errorf("engine: ChangeZone: Origin$ %v not resolvable yet", z)
 			}
 		}
@@ -74,8 +77,10 @@ func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if err != nil {
 		return err
 	}
+	// SpellAbility.isHidden: Hidden$, or an Origin$ naming a hidden zone --
+	// Library, Hand, Sideboard (ZoneType.java:15-23).
 	_, hidden := a.Params.Param("Hidden")
-	if hidden || zoneIn(Library, origin) || zoneIn(Hand, origin) {
+	if hidden || zoneIn(Library, origin) || zoneIn(Hand, origin) || zoneIn(Sideboard, origin) {
 		return changeZoneHidden(g, a, controller, source, origin, dest, newController)
 	}
 	return changeZoneKnown(g, a, controller, source, origin, dest, newController)
@@ -182,7 +187,13 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 			continue
 		}
 		from := c.Zone
-		g.moveByEffect(controller, id, dest, libPos, newController, tapped)
+		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped)
+		if dest == Exile {
+			g.markExiledWith(id, a.Source)
+			if melded != NoCard {
+				g.markExiledWith(melded, a.Source)
+			}
+		}
 		if _, seen := moved[from]; !seen {
 			movedOrigins = append(movedOrigins, from)
 		}
@@ -217,7 +228,9 @@ type hiddenChoice struct {
 // changeZoneHidden is changeHiddenOriginResolve: each fetcher (DefinedPlayer$,
 // default You; the first targeted player when ValidTgts$ names one and
 // DefinedPlayer$ is absent) searches the Origin$ zones for up to ChangeNum$
-// (default 1) cards matching ChangeType$ and they move to Destination$.
+// (default 1) cards matching ChangeType$ and they move to Destination$. A
+// fetcher another player controls does not search Sideboard (the Wish rule,
+// ChangeZoneEffect.java:987-991).
 // Defined$ skips the search and takes the named cards in order;
 // ChooseFromDefined$ offers them as the choice instead. A library that was
 // searched is shuffled afterwards unless NoShuffle$ or Shuffle$ False --
@@ -270,6 +283,19 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		if optional && !controller.ConfirmEffect(g, player, a.Source) {
 			continue
 		}
+		// ChangeZoneEffect.java:987-991: a Wish fetcher another player
+		// controls cannot search outside the game (CR 800.4b, ADR-0030).
+		// A copy, so the next fetcher and the shuffle checks below still
+		// see the whole Origin$.
+		searched := origin
+		if g.IsControlled(player) && zoneIn(Sideboard, origin) {
+			searched = nil
+			for _, z := range origin {
+				if z != Sideboard {
+					searched = append(searched, z)
+				}
+			}
+		}
 		changeNum := 1
 		if raw, ok := a.Params.Param("ChangeNum"); ok {
 			n, ok := resolveNamedAmount(g, a.Amounts, source, raw)
@@ -293,14 +319,14 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			if _, ok := a.Params.Param("ChangeNum"); !ok {
 				changeNum = len(fetchList)
 			}
-		case !zoneIn(Library, origin) && !zoneIn(Hand, origin) && !hasDefinedPlayer:
-			for _, z := range origin {
+		case !zoneIn(Library, searched) && !zoneIn(Hand, searched) && !hasDefinedPlayer:
+			for _, z := range searched {
 				for _, pid := range g.Players() {
 					fetchList = append(fetchList, g.Zone(z, pid).Cards()...)
 				}
 			}
 		default:
-			for _, z := range origin {
+			for _, z := range searched {
 				fetchList = append(fetchList, g.Zone(z, player).Cards()...)
 			}
 		}
@@ -345,7 +371,13 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		var movedOrigins []ZoneType
 		for _, id := range pick.chosen {
 			from := g.Card(id).Zone
-			g.moveByEffect(controller, id, dest, libPos, newController, tapped)
+			melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped)
+			if dest == Exile {
+				g.markExiledWith(id, a.Source)
+				if melded != NoCard {
+					g.markExiledWith(melded, a.Source)
+				}
+			}
 			if _, seen := moved[from]; !seen {
 				movedOrigins = append(movedOrigins, from)
 			}

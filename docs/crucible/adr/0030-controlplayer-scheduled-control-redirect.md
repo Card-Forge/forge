@@ -55,7 +55,7 @@ triggers, it is the engine itself toggling a redirect.
 
 ## Decision
 
-**Redirect state: Option 2.** A per-player stack of `(Timestamp int64, Controller PlayerID)`. Costs one slice field on
+**Redirect state: Option 2.** A per-player stack of `(Timestamp uint64, Controller PlayerID)`. Costs one slice field on
 `Player`; nesting is cheap to support now and matches Java's own model (CR 800.4b: control reverts to the
 second-most-recent grant when the most recent one's duration ends, not necessarily to the player themself) rather than
 assuming grants never overlap, which 11 real lines don't prove either way.
@@ -85,7 +85,7 @@ So the redirect is read-only engine state consulted by name at the two real rule
 routed dispatch: `Game.ControllingPlayer(pid) PlayerID` / `Game.IsControlled(pid) bool`, read by Learn
 (`Player.java:3906` excludes Sideboard Lessons for a controlled player) and by Wish-family zone changes
 (`ChangeZoneEffect.java:989` excludes `Sideboard` as an origin for a controlled player, live in this port's
-`changezoneeffect.go` — 24 real `Origin$ Sideboard` corpus lines). A future harness or `PlayerController` implementation
+`changezoneeffect.go` — 26 real `Origin$ Sideboard` corpus lines). A future harness or `PlayerController` implementation
 wanting to route a different AI per seat reads `ControllingPlayer` itself to pick a brain; the engine performs no such
 routing on its behalf.
 
@@ -96,11 +96,12 @@ gating cases. They are checked at `turn.go`'s own CombatBegin step and at `g.end
 the cleanup pair is checked at `activateCleanupDelayedTriggers` and `delayedTriggersOnNextTurn`.
 
 **Ordering, both pairs.** Revokes fire before grants at the same boundary (`PhaseHandler.java:515-518`'s own comment,
-"do this first for ControlPlayer") — Cruel Entertainment's mutual pair depends on it. This port's own turn-boundary call
-order already does this (`delayedTriggersOnNextTurn` before `activateCleanupDelayedTriggers`, `turn.go:92-93`); the
-combat pair's own call sites must preserve the identical revoke-before-grant order. A revoke scheduled while the current
-boundary's own actions run must not itself fire at that same boundary (snapshot the list before running it,
-`Phase.excute`'s own precedent). A grant is skipped if its controlling player has already left the game.
+"do this first for ControlPlayer") — Cruel Entertainment's mutual pair depends on it. The delayed-trigger pair does not
+give this order (`delayedTriggersOnNextTurn`, the keyed list, runs before `activateCleanupDelayedTriggers`, the unkeyed
+one); `scheduledAction`'s own runner does, at every boundary: the unkeyed batch (revokes) first, then the batch keyed to
+the active player (grants). A revoke scheduled while the current boundary's own actions run must not itself fire at that
+same boundary (snapshot the list before running it, `Phase.excute`'s own precedent). A grant is skipped if its
+controlling player has already left the game.
 
 ## Consequences
 

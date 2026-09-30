@@ -65,11 +65,19 @@ func (g *Game) StackTop() (Ability, bool) {
 // A static trigger's error still pending from before the call (a mana
 // ability's tap has no error return, statictrigger.go) is returned first,
 // before anything resolves (ADR-0020 decision 4).
+//
+// A RestartGame resolution stops the loop the way the turn driver stops
+// (Restarted, driver.go): whatever the restart left on the stack belongs to
+// the restarted game, resolved once ResumeAfterRestart has begun it, and
+// calling this again before then is an error (ADR-0034).
 func (g *Game) ResolveStack(reg *Registry, controller PlayerController) error {
 	if err := g.TakePendingError(); err != nil {
 		return err
 	}
-	for len(g.stack) > 0 && !g.over {
+	if g.restarted {
+		return errRestartPending
+	}
+	for len(g.stack) > 0 && !g.over && !g.restarted {
 		if err := g.resolveTop(reg, controller); err != nil {
 			return err
 		}
@@ -104,6 +112,15 @@ func (g *Game) resolveTop(reg *Registry, controller PlayerController) error {
 			return err
 		}
 		g.sink.Emit(Event{Kind: AbilityResolved, Phase: phase, Active: active, Actor: a.Controller, Turn: uint16(turn), Source: a.Source})
+		// A restart (ADR-0034) returns at once: Java's resolveStack is
+		// followed straight by mainLoopStep's RestartedByKarn exit
+		// (PhaseHandler.java:1150-1155), with no state-based action check
+		// before the restarted game's opening hands. RestartGame refuses a
+		// host on the stack (restartgameeffect.go), so there is no spell
+		// card left to move.
+		if g.restarted {
+			return nil
+		}
 	}
 	g.moveResolvedSpellToGraveyard(a)
 	CheckStateBasedActions(g, controller)

@@ -1,0 +1,22 @@
+# CR 727 (restarting the game), ADR-0034, karn_liberated.txt:7. Karn's -14
+# shuffles every card in every player's battlefield, library, graveyard, hand
+# and exile into its owner's library -- except non-Aura permanent cards
+# exiled with Karn, which stay in exile (RestrictFromZone$ Exile |
+# RestrictFromValid$ Card.!ExiledWithSource,Spell,Card.Aura) -- then
+# SubAbility$ ReturnFromExile puts those onto the battlefield under Karn's
+# controller. The ai's Grizzly Bears (ExiledWith:1) come back under human's
+# control; the Llanowar Elves exiled by something else, the Forest, the
+# Bolt and Karn itself all end up in their owners' libraries, and life
+# resets to 20.
+startturn human
+advance 3
+queue action human activate 1 2
+passpriority
+# The priority round returns on the restart (Game.Restarted). The restarted
+# game deals opening hands from the reset libraries with no coin flip or
+# second shuffle, runs mulligans starting with Karn's controller, and begins
+# human's first turn. expect.state's hand order is the harness's seed-1
+# shuffle of each reset library.
+queue keephand true
+queue keephand true
+resumerestart

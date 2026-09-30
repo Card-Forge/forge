@@ -287,8 +287,18 @@ func startSubgame(sub *Game, reg *Registry, c PlayerController) error {
 	// returns at once anyway.
 	PerformMulligans(sub, c, first)
 	sub.StartTurn(first, c)
-	if err := sub.Run(reg, c, subgameTurnCap); err != nil {
-		return err
+	// GameAction.startGame's own do-while(RestartedByKarn): a RestartGame
+	// resolved inside the subgame restarts the subgame (ADR-0034).
+	for {
+		if err := sub.Run(reg, c, subgameTurnCap); err != nil {
+			return err
+		}
+		if !sub.Restarted() {
+			break
+		}
+		if err := sub.ResumeAfterRestart(c); err != nil {
+			return err
+		}
 	}
 	if !sub.Over() {
 		return fmt.Errorf("subgame did not end within %d turns", subgameTurnCap)

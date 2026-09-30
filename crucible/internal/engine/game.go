@@ -15,6 +15,7 @@
 package engine
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -74,6 +75,15 @@ type Game struct {
 	// stays ended (action.go).
 	over bool
 
+	// restarted is Java's GameStage.RestartedByKarn (RestartGameEffect.java:105):
+	// a RestartGame effect has reset the game mid-resolution and the turn
+	// driver has stopped on it (ADR-0034). restartedBy is the activator,
+	// whose first turn the restarted game begins with
+	// (RestartGameEffect.java:107). Both cleared by ResumeAfterRestart
+	// (driver.go), the caller's own obligation.
+	restarted   bool
+	restartedBy PlayerID
+
 	// turn, activePlayer and activePhase are the turn structure: whose turn
 	// it is, what step or phase it is in, and how many turns have passed.
 	// Zero-valued (0, NoPlayer, Untap) until StartTurn, which is also a
@@ -117,6 +127,10 @@ type Game struct {
 	// delayed is every registered delayed trigger (delayedtrigger.go), in
 	// registration order.
 	delayed []delayedTrigger
+	// scheduled is every engine action waiting on a phase boundary
+	// (scheduledaction.go, ADR-0030) -- ControlPlayer's grants and
+	// revokes -- in scheduling order.
+	scheduled []scheduledAction
 	// extraPhases is PhaseHandler.extraPhases: for each phase, the stack of
 	// phases an AddPhase effect queued to follow it instead of the normal
 	// next one (last entry first). Cleared when the turn ends.
@@ -273,6 +287,13 @@ type zoneKey struct {
 	kind  ZoneType
 	owner PlayerID
 }
+
+// errRestartPending is the GO-7 stop for driving a game a RestartGame
+// effect has restarted before its caller ran ResumeAfterRestart
+// (driver.go, ADR-0034): the reset broke every invariant the driver,
+// priority and stack loops read (turn count, opening hands, whose turn it
+// is).
+var errRestartPending = errors.New("engine: game restarted (RestartGame); call ResumeAfterRestart before driving it again")
 
 // NewGame builds an empty game with the given players.
 //
@@ -496,6 +517,46 @@ func (g *Game) traitHosts(pid PlayerID) []CardID {
 	return out
 }
 
+// hostObjectStamp is the zoneStamp of host as the object an ability of
+// it sees, and whether that object counts as in play, on the stack or in
+// the Command zone (SpellAbilityEffect.java:1100-1104's own zone test).
+// While host is on the battlefield, the stack or in Command that is its
+// current object. Once it has left the battlefield it is its last
+// battlefield object (Card.battlefieldStamp): Java's ability keeps the host
+// object it was created on (CardProperty.java:401-407 reads the ability's
+// getHostCard), which for a host that has since moved is the old object --
+// a leaves-the-battlefield trigger's host, and RestartGame's own host once
+// the restart has shuffled it into its library (restartgameeffect.go,
+// ADR-0034). A host that never was on the battlefield is its current
+// object, not in play.
+//
+// An Ability carries no host object of its own, so an ability a moved
+// card's new object activates from its graveyard or hand reads the old
+// battlefield object too, where Java would compare its new one: no real
+// ExiledWithSource line reads the property from such an ability.
+func (g *Game) hostObjectStamp(host CardID) (uint64, bool) {
+	h := g.Card(host)
+	switch h.Zone {
+	case Battlefield, Stack, Command:
+		return h.zoneStamp, true
+	}
+	if h.battlefieldStamp != 0 {
+		return h.battlefieldStamp, true
+	}
+	return h.zoneStamp, false
+}
+
+// SetExiledWith records card as exiled with host's current object, the
+// way GameState's own "ExiledWith:<id>" annotation does
+// (GameState.java:771-781, which also lists card on host whatever zone
+// host is in) -- fixture loading's tool, the same relationship
+// SetTurnState has to real play. Real play sets it through an effect's
+// own exile move (markExiledWith, zonemove.go).
+func (g *Game) SetExiledWith(card, host CardID) {
+	stamp, _ := g.hostObjectStamp(host)
+	g.Card(card).exiledWith = exiledWithMark{host: host, stamp: stamp, listed: true}
+}
+
 // LKI returns id's frozen last-known-information snapshot -- Move's own
 // battlefield-leaving branch, below -- or nil if id has never left the
 // battlefield. checkDiesTriggers/otherDiesTriggerMatches (trigger.go) are its
@@ -541,9 +602,17 @@ func (g *Game) LKI(id CardID) *Card {
 // Every call emits a ZoneChanged event, for the same reason NewCard does
 // not: this is real play, and NewCard is setup nothing downstream should
 // see as something happening.
-func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
+//
+// Returns the melded permanent's other card, NoCard if id was not one --
+// the same card [Game.unmeld] then follows id into kind. A caller that
+// marks id afterward (markExiledWith, zonemove.go) checks this return
+// for the same reason SpellAbilityEffect.handleExiledWith takes an explicit
+// "meld" card alongside its own moved one (SpellAbilityEffect.java:1087):
+// unmeld's own move fires no effect-driven path of its own for the caller
+// to hang a second mark on.
+func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 	if g.ceaseCopiedSpell(id) {
-		return
+		return NoCard
 	}
 	c := g.Card(id)
 	from := c.Zone
@@ -558,6 +627,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 		c.tempControllers = nil
 	}
 	isPermanent := c.Type().IsPermanent()
+	leftStamp := c.zoneStamp
 	g.Zone(c.Zone, c.ZoneOwner).remove(id)
 	g.put(id, kind, owner)
 
@@ -583,6 +653,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 	melded := NoCard
 	switch {
 	case from == Battlefield && kind != Battlefield:
+		c.battlefieldStamp = leftStamp
 		snap := *c
 		g.lki[id] = &snap
 		// After the snapshot: last-known information keeps a phased-out
@@ -662,6 +733,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 	if melded != NoCard {
 		g.unmeld(melded, kind, owner, false)
 	}
+	return melded
 }
 
 // MoveToLibraryTop moves id to the top of owner's library -- library index
@@ -676,10 +748,11 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) {
 // other than the library itself (a tutor effect's own
 // "Destination$ Library | LibraryPosition$ 0" shape, not built yet) gets
 // that cleanup for free rather than a scry-only shortcut that silently
-// skips it.
-func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
+// skips it. Returns the melded partner it unmelds along with id, same as
+// [Game.Move].
+func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 	if g.ceaseCopiedSpell(id) {
-		return
+		return NoCard
 	}
 	c := g.Card(id)
 	from := c.Zone
@@ -687,11 +760,13 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 		c.controller = c.Owner
 		c.tempControllers = nil
 	}
+	leftStamp := c.zoneStamp
 	g.Zone(c.Zone, c.ZoneOwner).remove(id)
 	g.putFront(id, owner)
 
 	melded := NoCard
 	if from == Battlefield {
+		c.battlefieldStamp = leftStamp
 		c.phasedOut, c.directlyPhasedOut, c.wontPhaseInNormal = NoPlayer, false, false
 		melded = c.leaveMeld()
 		c.Counters = Counters{}
@@ -745,6 +820,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) {
 	if melded != NoCard {
 		g.unmeld(melded, Library, owner, true)
 	}
+	return melded
 }
 
 // leaveMeld clears c's side of a meld as c leaves the battlefield and
@@ -830,12 +906,21 @@ func (g *Game) Shuffle(kind ZoneType, owner PlayerID) {
 // put appends a card to a zone and records the reverse index on the card. It
 // does not remove the card from wherever it was, so only [Game.Move],
 // [Game.NewCard] and unmeld (a melded pair splitting apart, ADR-0032) may
-// call it.
+// call it. The ExiledWithSource mark clears on every move but one to the
+// Stack (GameAction.java:576-579's own "if (!zoneTo.is(Stack))" guard on its
+// cleanupExiledWith call) -- a card cast or activated straight out of the
+// exile an ability put it in keeps the mark while its own spell/ability is
+// on the stack, the one zone this port's callers ever move an exiled,
+// marked card into without going through this clearing branch first
+// (castspell.go's own g.Move(card, Stack, pid)).
 func (g *Game) put(id CardID, kind ZoneType, owner PlayerID) {
 	c := &g.cards[id]
 	c.Zone, c.ZoneOwner = kind, owner
 	g.timestamp++
 	c.Timestamp, c.zoneStamp = g.timestamp, g.timestamp
+	if kind != Stack {
+		c.exiledWith = exiledWithMark{}
+	}
 	g.Zone(kind, owner).cards.Add(id)
 }
 
@@ -847,6 +932,7 @@ func (g *Game) putFront(id CardID, owner PlayerID) {
 	c.Zone, c.ZoneOwner = Library, owner
 	g.timestamp++
 	c.Timestamp, c.zoneStamp = g.timestamp, g.timestamp
+	c.exiledWith = exiledWithMark{}
 	g.Zone(Library, owner).cards.Prepend(id)
 }
 
@@ -952,6 +1038,8 @@ func (g *Game) Clone() *Game {
 		pendingErr:   g.pendingErr,
 		timestamp:    g.timestamp,
 		over:         g.over,
+		restarted:    g.restarted,
+		restartedBy:  g.restartedBy,
 		turn:         g.turn,
 		activePlayer: g.activePlayer,
 		activePhase:  g.activePhase,
@@ -967,9 +1055,10 @@ func (g *Game) Clone() *Game {
 		combat:          g.combat.clone(),
 		pumps:           append([]pumpRecord(nil), g.pumps...),
 
-		animates: append([]animateRecord(nil), g.animates...),
-		delayed:  append([]delayedTrigger(nil), g.delayed...),
-		skips:    append([]skipPhase(nil), g.skips...),
+		animates:  append([]animateRecord(nil), g.animates...),
+		delayed:   append([]delayedTrigger(nil), g.delayed...),
+		scheduled: append([]scheduledAction(nil), g.scheduled...),
+		skips:     append([]skipPhase(nil), g.skips...),
 
 		extraTurns:            append([]PlayerID(nil), g.extraTurns...),
 		combatDamagePrevented: g.combatDamagePrevented,
@@ -1004,6 +1093,7 @@ func (g *Game) Clone() *Game {
 		if g.players[i].completedDungeons != nil {
 			out.players[i].completedDungeons = append([]CardID(nil), g.players[i].completedDungeons...)
 		}
+		out.players[i].controlledBy = append([]controlGrant(nil), g.players[i].controlledBy...)
 	}
 
 	copy(out.cards, g.cards)

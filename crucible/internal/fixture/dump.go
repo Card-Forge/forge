@@ -156,6 +156,11 @@ func dumpCard(g *engine.Game, id engine.CardID) string {
 			b.WriteString("|IsRingBearer")
 		}
 	}
+	// GameState.java:407-410: Exile-only, ahead of Counters.
+	if host := c.ExiledWith(); c.Zone == engine.Exile && host != engine.NoCard {
+		b.WriteString("|ExiledWith:")
+		b.WriteString(strconv.FormatUint(uint64(host), 10))
+	}
 	if c.Zone == engine.Battlefield || c.Zone == engine.Exile {
 		if s := dumpCounters(c.Counters); s != "" {
 			b.WriteString("|Counters:")

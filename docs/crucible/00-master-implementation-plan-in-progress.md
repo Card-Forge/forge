@@ -1730,26 +1730,27 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
     `Compare`/SVar one at all — `skulkBlocks` (staticability.go) is a direct `Power()` comparison, the same hardcoded
     shape Menace's own blocker count has. **Block legality's `CantBlockBy` has no remaining gap.** **Combat declarations
     are validated** (ADR-0024, `attackconstraints.go`, `blockvalidation.go`): Java's `AttackConstraints` and
-    `validateBlocks`, an illegal declaration an `*IllegalDeclarationError`. **Mulligans done** (`mulligan.go`) — London,
-    free mulligans, tucking. **Mana payment done** (`mana.go`, `manapay.go`): a `Pool` per player (twelve buckets — six
-    colors/colorless, each split plain/snow), `Pay`/`PayWithSnow` for the plain colored-and-generic case plus snow (a
-    same-color pip or generic unit falls back to the snow bucket once the plain one is empty, CR 106.3a; a snow ({S})
-    symbol spends only the snow bucket, never the plain one), CR 500.4's emptying every phase/step, and `PayManaCost`
-    resolving `{X}` via `ChoosePayX` (asked once per cost regardless of how many `{X}` symbols it carries, CR 107.3f),
-    snow via `ChoosePaySnow` (asked once per `{S}` symbol independently — unlike `{X}`, two can take two different
-    colors), a two-color hybrid shard via `ChooseHybridManaColor`, a monocolored hybrid shard via
-    `ChoosePayMonocoloredHybrid`, a colorless hybrid shard via `ChoosePayColorlessHybrid`, a single-color Phyrexian
-    shard via `ChoosePayPhyrexian`, a hybrid Phyrexian shard via `ChoosePayHybridPhyrexian`, and each unit of a cost's
-    generic amount via `ChoosePayGeneric` — all eight harder shapes this port set out to resolve are resolved. A basic
-    land's own intrinsic mana ability (CR 305.6) is: `TapLandForMana` (`manaability.go`), `Pool.Add`'s first real
-    (non-test) caller, snow-aware (a land carrying the Snow supertype produces snow mana, CR 106.3a) — any other mana
-    ability (a nonbasic land, a creature, an artifact) still needs the M6 effect-dispatch machinery this one
-    deliberately bypasses, since CR 305.6's ability is a fixed rule keyed off the type line, not script text. **Playing
-    a land done** (`land.go`): `Game.PlayLand`, CR 305 — not casting a spell, so no cost and no stack; sorcery-speed
-    timing (CR 305.3) collapsed to active player, a main phase, empty stack; CR 305.2's one-per-turn limit via new
-    `Player.LandsPlayed`/`LandsPlayedLastTurn` fields, reset for every player each turn by `cleanupStep`. The first card
-    this port moves from hand to the battlefield through a real game action rather than `setup.state` placing it there
-    directly.
+    `validateBlocks`, an illegal declaration an `*IllegalDeclarationError` — except a blocker declaration an
+    `Event$ DeclareBlocker` replacement (Camouflage) makes, repaired by Java's steady-state loop instead (ADR-0035).
+    **Mulligans done** (`mulligan.go`) — London, free mulligans, tucking. **Mana payment done** (`mana.go`,
+    `manapay.go`): a `Pool` per player (twelve buckets — six colors/colorless, each split plain/snow),
+    `Pay`/`PayWithSnow` for the plain colored-and-generic case plus snow (a same-color pip or generic unit falls back to
+    the snow bucket once the plain one is empty, CR 106.3a; a snow ({S}) symbol spends only the snow bucket, never the
+    plain one), CR 500.4's emptying every phase/step, and `PayManaCost` resolving `{X}` via `ChoosePayX` (asked once per
+    cost regardless of how many `{X}` symbols it carries, CR 107.3f), snow via `ChoosePaySnow` (asked once per `{S}`
+    symbol independently — unlike `{X}`, two can take two different colors), a two-color hybrid shard via
+    `ChooseHybridManaColor`, a monocolored hybrid shard via `ChoosePayMonocoloredHybrid`, a colorless hybrid shard via
+    `ChoosePayColorlessHybrid`, a single-color Phyrexian shard via `ChoosePayPhyrexian`, a hybrid Phyrexian shard via
+    `ChoosePayHybridPhyrexian`, and each unit of a cost's generic amount via `ChoosePayGeneric` — all eight harder
+    shapes this port set out to resolve are resolved. A basic land's own intrinsic mana ability (CR 305.6) is:
+    `TapLandForMana` (`manaability.go`), `Pool.Add`'s first real (non-test) caller, snow-aware (a land carrying the Snow
+    supertype produces snow mana, CR 106.3a) — any other mana ability (a nonbasic land, a creature, an artifact) still
+    needs the M6 effect-dispatch machinery this one deliberately bypasses, since CR 305.6's ability is a fixed rule
+    keyed off the type line, not script text. **Playing a land done** (`land.go`): `Game.PlayLand`, CR 305 — not casting
+    a spell, so no cost and no stack; sorcery-speed timing (CR 305.3) collapsed to active player, a main phase, empty
+    stack; CR 305.2's one-per-turn limit via new `Player.LandsPlayed`/`LandsPlayedLastTurn` fields, reset for every
+    player each turn by `cleanupStep`. The first card this port moves from hand to the battlefield through a real game
+    action rather than `setup.state` placing it there directly.
 29. Scenario-parity harness (Layer 2) + ≥300 fixtures. **Fixture count met, coverage still bounded by M5 itself** — the
     harness runs (`TestScenarios`, `testdata/scenarios/`), and 342 fixtures exist today, past the ≥300 floor: combat and
     mana-payment breadth across the real corpus (single-block trades, Vigilance/Haste/First Strike/ Deathtouch/Trample
@@ -1767,7 +1768,7 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-**In progress.** 183 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
+**In progress.** 186 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
 `PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`, `Destroy`, `Tap`,
 `Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`, `TapAll`, `UntapAll`,
 `PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`, `Unattach`, `RevealHand`,
@@ -1789,9 +1790,9 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 `BecomeMonarch`, `TakeInitiative`, `Venture`, `OpenAttraction`, `AssembleContraption`, `Regeneration`, `Play`,
 `CopySpellAbility`, `RingTemptsYou`, `Abandon`, `ChangeTargets`, `MustBlock`, `Phases`, `ManaReflected`, `ControlSpell`,
 `Planeswalk`, `ChaosEnsues`, `RollPlanarDice`, `RunChaos`, `ChooseSector`, `SetInMotion`, `Subgame`, `UnlockDoor`,
-`SwitchBlock`, `LosePerpetual`, `Meld`) — see `docs/crucible/porting/port-log/game-state.md` for the per-API landing
-notes; items 30-32 below stay in their original plan-authoring voice (forward-looking, not yet rewritten as a per-item
-retrospective the way M0-M5 are).
+`SwitchBlock`, `LosePerpetual`, `Meld`, `ControlPlayer`, `RestartGame`, `Camouflage`) — see
+`docs/crucible/porting/port-log/game-state.md` for the per-API landing notes; items 30-32 below stay in their original
+plan-authoring voice (forward-looking, not yet rewritten as a per-item retrospective the way M0-M5 are).
 
 30. Implement APIs in corpus-first, then frequency order (Section 1.5). Keywords, triggers, replacements, cost parts
     alongside.

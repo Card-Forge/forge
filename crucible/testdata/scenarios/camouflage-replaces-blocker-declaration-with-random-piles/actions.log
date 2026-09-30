@@ -1,0 +1,31 @@
+# ADR-0035: the real Camouflage, cast in human's declare attackers step,
+# leaves an effect card whose Event$ DeclareBlocker replacement takes ai's
+# blocker declaration's place. No "queue blocks" line: ai is never asked to
+# declare. Instead ai (ReplacedPlayer, the declarer) makes one pile per
+# attacker from its own creatures -- Devoted Hero alone, then Silvercoat Lion
+# alone -- and the piles go to Craw Wurm and Grizzly Bears in the order
+# g.rand's shuffle of the attackers gives (CardLists.shuffle,
+# CamouflageEffect.java:22). With this seed the Hero's pile lands on the
+# Wurm and the Lion's on the Bears: the Hero dies to the Wurm, the Bears and
+# the Lion trade. Nobody is unblocked, so ai stays at 20.
+startturn human
+advance 5
+queue attackers 3,4
+declareattackers
+tapformana human 2 G
+castspell human 1
+resolvestack
+advance
+queue cardchoice 5
+queue cardchoice 6
+declareblockers
+advance
+advance
+combatdamage
+# On through the state-based-action check that moves the lethally damaged
+# creatures to their graveyards, to cleanup, where the "this turn" effect
+# card leaves the Command zone and the Wurm's damage wears off.
+advance
+advance
+advance
+advance

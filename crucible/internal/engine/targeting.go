@@ -192,7 +192,41 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		// ValidTgts$ Instant,Sorcery names spells, not battlefield cards.
 		candidates = g.stackSpellCandidates(a.Controller, a.Source, validTgts)
 	default:
-		candidates = g.targetCandidates(a.Controller, a.Source, validTgts)
+		zones := []ZoneType{Battlefield}
+		if a.API == APIPlay {
+			// Scoped to Play alone (Pass the Torch's own TrigPlay, 27 real
+			// corpus DB$ Play | TgtZone$ Graveyard lines): every other API
+			// reaching this branch (ChangeZone, Pump, Effect, PutCounter,
+			// MakeCard, Clone, RepeatEach, ...) has its own Resolve written
+			// against a battlefield target only, unaudited against a
+			// graveyard/exile one -- widening TgtZone$ reading to all of
+			// them here would make roughly 190 more corpus lines newly
+			// reachable with no review of what each Resolve does with a
+			// non-battlefield target (GO-7). charmeffect.go's own
+			// canOfferMode also stays correct only because of this scoping:
+			// it probes with targetCandidates (battlefield-only) to decide
+			// whether a Charm mode not named Play (e.g. Trystan's Command's
+			// ChangeZone mode) can be offered at all, and that probe must
+			// keep agreeing with what actually resolves the mode's targets.
+			if raw, ok := a.Params.Param("TgtZone"); ok {
+				parsed, err := parseZoneList(raw)
+				if err != nil {
+					return targetChoice{min: targetMin, max: targetMax, err: fmt.Errorf("TgtZone$: %w", err)}, true, true
+				}
+				if zoneIn(Stack, parsed) {
+					// Zone(Stack, pid) is never the real Stack zone (kept
+					// under Zone(Stack, NoPlayer), game.go): scanning it
+					// per player would silently find nothing, and
+					// allocating an empty per-player Stack zone as a side
+					// effect (Game.Zone's own lazy-create) besides. No real
+					// Play line names it -- fail closed rather than guess.
+					return targetChoice{min: targetMin, max: targetMax,
+						err: fmt.Errorf("TgtZone$ %q: Stack not resolvable through this path yet", raw)}, true, true
+				}
+				zones = parsed
+			}
+		}
+		candidates = g.targetCandidatesInZones(a.Controller, a.Source, validTgts, zones)
 	}
 	if targetMin >= 2 && hasSameControllerRestriction(a) {
 		candidates = g.withSameControllerPartner(candidates)
@@ -203,13 +237,28 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	return targetChoice{candidates: candidates, min: targetMin, max: targetMax}, true, true
 }
 
-// targetCandidates is the union of spec evaluated against every player still
-// in the game (matchesPlayerSpec, valid.go; a player who has lost is never a
-// legal target, the identical exclusion definedPlayers's own
-// `if (!p.isInGame())` reading already makes) AND against every card on any
-// player's battlefield (Matches, valid.go) -- CR's own implicit "target
-// creature" scope, and the only zone 0 real corpus TgtZone$ lines ever ask
-// this port to look anywhere else than.
+// targetCandidates is targetCandidatesInZones scoped to the battlefield --
+// CR's own implicit "target creature" scope, and every real corpus
+// ValidTgts$ line's default when it names no TgtZone$ of its own.
+func (g *Game) targetCandidates(controller PlayerID, source CardID, spec string) []EntityID {
+	return g.targetCandidatesInZones(controller, source, spec, []ZoneType{Battlefield})
+}
+
+// targetCandidatesInZones is the union of spec evaluated against every
+// player still in the game (matchesPlayerSpec, valid.go; a player who has
+// lost is never a legal target, the identical exclusion definedPlayers's own
+// `if (!p.isInGame())` reading already makes) AND against every card in any
+// player's zones (Matches, valid.go) -- targetChoiceFor's own TgtZone$ read,
+// scoped to Play alone (27 real DB$ Play | TgtZone$ Graveyard lines, Pass
+// the Torch's TrigPlay among them), Battlefield-only otherwise
+// (targetCandidates, above, and targetChoiceFor's own API check). Rejecting
+// TgtZone$ elsewhere (playeffect.go's own Defined$+TgtZone$ case,
+// airbendeffect.go, animate.go's now-removed Execute$ check) is each of
+// those APIs' own separate targeting shape, not this one; every other API
+// reaching this general path (ChangeZone, Pump, Effect, PutCounter,
+// MakeCard, Clone, RepeatEach, ...) still ignores a TgtZone$ it may carry,
+// unaudited against a non-battlefield target -- widening past Play needs
+// that audit first (targetChoiceFor's own comment has the reasoning).
 //
 // Both pools are always tried, never one or the other picked by a spec's own
 // shape: Java's own TargetRestrictions.getAllCandidates (CR 115's own "any
@@ -224,8 +273,11 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 // card-shaped one -- CR 115's own "Any" (matchesPlayerBase's own "Any" case)
 // is the single-token example, but the corpus also writes it out explicitly
 // (`Player,Planeswalker`, 273 real lines corpus-wide) -- so the union is not
-// an "Any"-only special case, it is the general, correct shape.
-func (g *Game) targetCandidates(controller PlayerID, source CardID, spec string) []EntityID {
+// an "Any"-only special case, it is the general, correct shape. Players are
+// probed once regardless of how many card zones are named: TgtZone$ names
+// where a card candidate may sit, never a player-shaped alternative's own
+// scope, so naming two zones does not double the player half.
+func (g *Game) targetCandidatesInZones(controller PlayerID, source CardID, spec string, zones []ZoneType) []EntityID {
 	var candidates []EntityID
 	for _, pid := range g.Players() {
 		if g.Player(pid).Lost {
@@ -237,11 +289,13 @@ func (g *Game) targetCandidates(controller PlayerID, source CardID, spec string)
 	}
 
 	parsed := valid.Parse(spec)
-	for _, pid := range g.Players() {
-		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			c := g.Card(id)
-			if Matches(g, c, parsed, controller, source) && !cardCantBeTargetedBy(g, c, controller, source) {
-				candidates = append(candidates, CardEntity(id))
+	for _, zone := range zones {
+		for _, pid := range g.Players() {
+			for _, id := range g.Zone(zone, pid).Cards() {
+				c := g.Card(id)
+				if Matches(g, c, parsed, controller, source) && !cardCantBeTargetedBy(g, c, controller, source) {
+					candidates = append(candidates, CardEntity(id))
+				}
 			}
 		}
 	}

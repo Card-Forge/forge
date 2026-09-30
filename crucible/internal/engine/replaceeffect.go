@@ -4,7 +4,7 @@
 
 package engine
 
-//enginelint:allow id card game player ability defined amount control parts effecthelpers effect replacement manaability condition
+//enginelint:allow id card game player ability defined amount control parts effecthelpers effect replacement manaability condition combat
 
 import (
 	"fmt"
@@ -56,6 +56,19 @@ type replacementEvent struct {
 	// Defined$ ReplacedCard names (entersascopy.go). NoCard for every other
 	// event.
 	card CardID
+
+	// player and defendingPlayer are DeclareBlocker's two replacing objects
+	// (ReplaceDeclareBlocker.setReplacingObjects): AbilityKey.Player, who
+	// declares the blocks (Defined$ ReplacedPlayer), and AbilityKey.Affected
+	// re-keyed as DefendingPlayer, whose creatures block (Defined$
+	// ReplacedDefendingPlayer). NoPlayer for every other event, which is how
+	// Camouflage (camouflageeffect.go) tells it is not resolving as one.
+	player          PlayerID
+	defendingPlayer PlayerID
+	// blocks is DeclareBlocker's combat: every Block declared so far this
+	// step, earlier defenders' included, which the ReplaceWith$ ability adds
+	// its own to in place of the normal declaration (ADR-0035).
+	blocks []Block
 }
 
 // producedMana is one production of mana as this port's mana abilities make

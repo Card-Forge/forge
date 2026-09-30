@@ -294,7 +294,9 @@ creature in isolation, so it is checked afterward instead, via `CanBlock`, again
 ([`## Block legality: CantBlockBy`](#block-legality-cantblockby) has the full account). Menace is a per-attacker blocker
 count checked on the whole declaration (`validateBlocks`), not a `CanBlock` one, for the same reason Forge itself does
 not run it through the static-ability engine either. An illegal answer is an `*IllegalDeclarationError`, never a dropped
-pairing ([`effects-mustblock.md`](effects-mustblock.md)).
+pairing ([`effects-mustblock.md`](effects-mustblock.md)). One exception: a defender an `Event$ DeclareBlocker`
+replacement (Camouflage) applies to is not asked at all, and the blocks the replacement declares are repaired by Java's
+steady-state loop, not validated ([`effects-camouflage.md`](effects-camouflage.md), ADR-0035).
 
 **Not wired into `AdvancePhase`'s automatic walk through the phases.** `PerformMulligans` is the standing precedent for
 a real M5 mechanic a scenario calls explicitly (`actions.log`'s own `declareattackers`/`declareblockers` verbs) rather

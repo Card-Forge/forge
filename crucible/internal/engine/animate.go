@@ -322,11 +322,12 @@ func (g *Game) animateCards(template animateRecord, cards []CardID) {
 // turn, Permanent on a card that later leaves play, ...) needs the overlay's
 // removal bookkeeping for continuous effects, the rest of ADR-0023, and is
 // refused. So is a grant compile left unfollowed because the trigger
-// regrants itself (Snarlfang Vermin, compile.go's regrants), and one whose
-// Execute$ targets outside the battlefield (TgtZone$, Pass the Torch's
-// TrigPlay): targetCandidates (targeting.go) scans the battlefield only, so
-// the granted trigger would silently never go on the stack (ADR-0023
-// decision 4: a grant the port cannot apply fails when applied).
+// regrants itself (Snarlfang Vermin, compile.go's regrants). An Execute$
+// naming TgtZone$ (Pass the Torch's own TrigPlay) needs no refusal of its
+// own here: pushTriggeredAbilities calls resolveTargets uniformly for every
+// pushed ability, granted trigger included, and targetChoiceFor
+// (targeting.go) reads TgtZone$ there the same way any other pushed
+// ability's targeting would.
 func animateTriggerGrants(a *Ability, api string) ([]*compile.Ability, error) {
 	raw, ok := a.Params.Param("Triggers")
 	if !ok {
@@ -352,14 +353,6 @@ func animateTriggerGrants(a *Ability, api string) ([]*compile.Ability, error) {
 	}
 	out := make([]*compile.Ability, 0, len(subs))
 	for _, sub := range subs {
-		for _, exec := range sub.Ability.Subs {
-			if !strings.EqualFold(exec.Key, "Execute") {
-				continue
-			}
-			if _, ok := exec.Ability.Param("TgtZone"); ok {
-				return nil, fmt.Errorf("engine: %s: Triggers$ %s: Execute$ %s targets through TgtZone$, not resolvable yet", api, sub.SVar, exec.SVar)
-			}
-		}
 		out = append(out, sub.Ability)
 	}
 	return out, nil

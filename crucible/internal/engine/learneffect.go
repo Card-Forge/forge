@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game ability control effecthelpers card condition defined player id zone discardeffect
+//enginelint:allow game ability control effecthelpers card condition defined player id zone discardeffect scheduledaction
 
 import "fmt"
 
@@ -8,6 +8,7 @@ import "fmt"
 // player (the activator by default) may reveal a Lesson card from their
 // sideboard and put it into their hand, or discard a card to draw a card,
 // or do neither -- one pick among their sideboard Lessons and hand cards.
+// A player another player controls is offered their hand only.
 // A Learn replacement effect is not modeled, so the effect fails while one
 // is out.
 type learnEffect struct{}
@@ -32,9 +33,13 @@ func (learnEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 			continue
 		}
 		var list []CardID
-		for _, id := range g.Zone(Sideboard, p).Cards() {
-			if g.Card(id).Type().HasSubtype("Lesson") {
-				list = append(list, id)
+		// Player.java:3906: a player another player controls cannot reach
+		// outside the game (CR 800.4b, ADR-0030).
+		if !g.IsControlled(p) {
+			for _, id := range g.Zone(Sideboard, p).Cards() {
+				if g.Card(id).Type().HasSubtype("Lesson") {
+					list = append(list, id)
+				}
 			}
 		}
 		list = append(list, g.Zone(Hand, p).Cards()...)

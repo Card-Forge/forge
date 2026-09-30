@@ -37,6 +37,7 @@ import (
 //	run <turns>                   Game.Run(engine.NewRegistry(), controller, turns), ADR-0026
 //	dealopeninghands              DealOpeningHands(game, controller), starting player discarded
 //	mulligan <firstplayer>        PerformMulligans(game, controller, firstplayer)
+//	resumerestart                 Game.ResumeAfterRestart(controller), after a RestartGame (ADR-0034)
 //	declareattackers              Game.DeclareCombatAttackers(controller)
 //	declareblockers               Game.DeclareCombatBlockers(controller)
 //	firststrikedamage             Game.DealFirstStrikeDamage(controller)
@@ -169,6 +170,11 @@ func runAction(line string, l *Loaded, c *engine.ScriptedController) error {
 
 	case "dealopeninghands":
 		engine.DealOpeningHands(l.Game, c)
+
+	case "resumerestart":
+		if err := l.Game.ResumeAfterRestart(c); err != nil {
+			return fmt.Errorf("resumerestart: %w", err)
+		}
 
 	case "mulligan":
 		pid, err := resolveActionPlayer(l, args, 1)

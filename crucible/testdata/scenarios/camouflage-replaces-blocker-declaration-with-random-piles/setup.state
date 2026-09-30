@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Camouflage|Id:1
+humanbattlefield=Forest|Id:2;Craw Wurm|Id:3;Grizzly Bears|Id:4
+aibattlefield=Devoted Hero|Id:5;Silvercoat Lion|Id:6
