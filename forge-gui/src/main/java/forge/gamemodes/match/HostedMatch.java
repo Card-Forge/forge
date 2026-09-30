@@ -429,7 +429,7 @@ public class HostedMatch {
         @Override
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.getGui().updateSingleCard(event.blocker());
+                humanController.getGui().updateCard(event.blocker());
             }
             return null;
         }
@@ -437,7 +437,7 @@ public class HostedMatch {
         @Override
         public Void visit(final UiEventAttackerDeclared event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.getGui().updateSingleCard(event.attacker());
+                humanController.getGui().updateCard(event.attacker());
             }
             return null;
         }

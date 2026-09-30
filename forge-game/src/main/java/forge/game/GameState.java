@@ -40,6 +40,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class GameState {
@@ -249,13 +251,40 @@ public class GameState {
         }
     }
 
+    private static final String TOKEN_PIPE = "%7C";
+    // States written before the escaping existed contain a raw key, e.g. Image:w_1_1_soldier|ONC|7|1 (name|SET|collector[|art]).
+    // The collector part must contain a digit so modifiers such as |Tapped or |Id:5 can never be mistaken for it.
+    private static final Pattern LEGACY_TOKEN_IMAGE = Pattern.compile(
+            "(Image:[^|;,]*)\\|([A-Za-z0-9]{2,5})\\|((?=[A-Za-z0-9]*\\d)[A-Za-z0-9]{1,6})(?:\\|(\\d+))?(?=[|,]|$)");
+
+    // escapes the pipes of a legacy token image key so the '|' split of the element doesn't cut the key apart
+    private static String protectTokenImageKey(String element) {
+        if (!element.startsWith("t:")) {
+            return element;
+        }
+        Matcher m = LEGACY_TOKEN_IMAGE.matcher(element);
+        if (!m.find()) {
+            return element;
+        }
+        StringBuilder sb = new StringBuilder(element.length() + 8);
+        sb.append(element, 0, m.start());
+        sb.append(m.group(1)).append(TOKEN_PIPE).append(m.group(2)).append(TOKEN_PIPE).append(m.group(3));
+        if (m.group(4) != null) {
+            sb.append(TOKEN_PIPE).append(m.group(4));
+        }
+        sb.append(element, m.end(), element.length());
+        return sb.toString();
+    }
+
     private void addCard(ZoneType zoneType, Map<ZoneType, String> cardTexts, Card c) {
         StringBuilder newText = new StringBuilder(cardTexts.get(zoneType));
         if (newText.length() > 0) {
             newText.append(";");
         }
         if (c.isToken()) {
-            newText.append("t:").append(new TokenInfo(c));
+            // the token's image key is name|SET|collector|art, and '|' also separates a card's modifiers in a state file,
+            // so escape it here (restored in processCardsForZone) instead of letting the loader cut the key apart
+            newText.append("t:").append(new TokenInfo(c).toString().replace("|", TOKEN_PIPE));
         } else {
             if (c.getPaperCard() == null) {
                 return;
@@ -1235,7 +1264,7 @@ public class GameState {
     private CardCollectionView processCardsForZone(final String[] data, final Player player) {
         final CardCollection cl = new CardCollection();
         for (final String element : data) {
-            final String[] cardinfo = element.trim().split("\\|");
+            final String[] cardinfo = protectTokenImageKey(element.trim()).split("\\|");
 
             String setCode = null;
             for (final String info : cardinfo) {
@@ -1260,8 +1289,8 @@ public class GameState {
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
-                // TODO Make sure Game State conversion works with new tokens
-                String tokenStr = cardinfo[0].substring(2);
+                // TOKEN_PIPE is used for fixing the imagekey of tokens, restore the format for TokenInfo parser
+                String tokenStr = cardinfo[0].substring(2).replace(TOKEN_PIPE, "|");
                 c = new TokenInfo(tokenStr).makeOneToken(player);
             } else if (cardinfo[0].startsWith("T:")) {
                 String tokenStr = cardinfo[0].substring(2);

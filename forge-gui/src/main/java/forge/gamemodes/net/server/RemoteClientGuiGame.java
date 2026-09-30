@@ -13,7 +13,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
-import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
@@ -27,14 +26,11 @@ import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.Tracker;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -151,8 +147,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
      */
     private void syncAndSend(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
+        // if this gets provided with new object views while more updates got chained (e.g. revealing what got bounced):
+        // the client may not be quick enough to replace it in the EDT before this passes IO lookup, so take the safer route
+        boolean pendingZoneChange = !getForwarder().hasPendingZoneChange(args);
         updateGameView();
-        sender.send(method, args);
+        sender.send(method, pendingZoneChange, args);
     }
 
     /**
@@ -353,7 +352,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void alertUser() { send(ProtocolMethod.alertUser); }
+    public void alertUser() {
+        send(ProtocolMethod.alertUser);
+    }
 
     @Override
     public void enableOverlay() {
@@ -378,22 +379,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void hideManaPool(final PlayerView player) {
         send(ProtocolMethod.hideManaPool, player);
-    }
-
-    @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        return syncAndSendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
-    }
-
-    @Override
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        // Closing a window needs no fresh state: the payload is players the client already has and zone types
-        send(ProtocolMethod.hideZones, controller, zonesToUpdate);
-    }
-
-    @Override
-    public void updateShards(Iterable<PlayerView> shardsUpdate) {
-        //mobile adventure local game only..
     }
 
     @Override
@@ -505,6 +490,17 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
+    public void showRevealedCards(final Iterable<CardView> cards) {
+        // the sync carries the temporary visibility granted by tempShowCards, so the client sees card faces
+        syncAndSend(ProtocolMethod.showRevealedCards, cards);
+    }
+
+    @Override
+    public void hideRevealedCards() {
+        send(ProtocolMethod.hideRevealedCards);
+    }
+
+    @Override
     public void setWeaklySelectable(final Iterable<CardView> cards) {
         updateGameView();
         send(ProtocolMethod.setWeaklySelectable, cards);
@@ -519,16 +515,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
         // TODO Auto-generated method stub
-    }
-
-    @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players, boolean backupLastZones) {
-        return syncAndSendAndWait(ProtocolMethod.openZones, controller, zones, players, backupLastZones);
-    }
-
-    @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        syncAndSend(ProtocolMethod.restoreOldZones, playerView, playerZoneUpdates);
     }
 
     @Override

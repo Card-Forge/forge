@@ -951,6 +951,7 @@ public class Forge implements ApplicationListener {
         // prevent render if isDisposed
         if (isDisposed)
             return;
+        ScreenUtil.getInstance().onRenderFrame();
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
@@ -1121,7 +1122,7 @@ public class Forge implements ApplicationListener {
     public static boolean switchScene(Scene newScene, boolean skipPreview) {
         if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene || newScene instanceof QuestLogScene) {
             if (!(currentScene instanceof ForgeScene || skipPreview)) //prevent overwriting the last preview if last scene is instance of ForgeScene
-                WorldSave.getCurrentSave().header.createPreview();
+                WorldSave.requestPreview();
         }
         if (currentScene != null) {
             if (!currentScene.leave())
@@ -1135,7 +1136,8 @@ public class Forge implements ApplicationListener {
             }
             lastScene.add(currentScene);
         }
-        storeScreen();
+        if (!(newScene instanceof ViewRewardsScene))
+            storeScreen();
         Adventure.getInstance().sceneWasSwapped = true;
         currentScene = newScene;
 
