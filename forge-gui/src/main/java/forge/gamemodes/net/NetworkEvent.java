@@ -6,16 +6,24 @@ import forge.deck.DeckProxy;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
+import forge.gui.FThreads;
+import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.model.FModel;
+import forge.util.IHasForgeLog;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 /**
  * Model and helpers for a network limited event (draft or sealed).
@@ -44,6 +52,7 @@ public final class NetworkEvent {
     private int numRounds = 3;
     private SealedCardPoolGenerator sealedGenerator;
     private BoosterDraft draft;
+    private int sealedPodSize;
 
     public NetworkEvent(EventFormat format) {
         this.eventId = UUID.randomUUID().toString().substring(0, 8);
@@ -76,6 +85,12 @@ public final class NetworkEvent {
     public void setDraft(BoosterDraft draft) { this.draft = draft; }
     public int getNumRounds() { return numRounds; }
     public void setNumRounds(int numRounds) { this.numRounds = numRounds; }
+    public void setSealedPodSize(int podSize) { this.sealedPodSize = podSize; }
+
+    /** Seats in the pod, including AI; a draft owns its own pod size. Zero when not set. */
+    public int getPodSize() {
+        return draft != null ? draft.getPodSize() : sealedPodSize;
+    }
 
     public void addParticipant(EventParticipant participant) {
         participants.add(participant);
@@ -89,8 +104,10 @@ public final class NetworkEvent {
         deck.getTags().add("eventFormat:" + event.getFormat().name());
         deck.getTags().add("eventProduct:" + event.getProductDescription());
         deck.getTags().add("eventDate:" + event.createdAt.format(EVENT_DATE_TAG));
+        if (event.getPodSize() > 0) {
+            deck.getTags().add("eventPodSize:" + event.getPodSize());
+        }
         if (event.draft != null) {
-            deck.getTags().add("eventPodSize:" + event.draft.getPodSize());
             deck.getTags().add("eventPicks:" + event.resolvedDoublePick().name());
         }
     }
@@ -121,7 +138,7 @@ public final class NetworkEvent {
     public NetworkEventView toView() {
         return new NetworkEventView(eventId, format, phase,
                 participants, pickTimerSeconds, productDescription, numRounds,
-                draft == null ? 0 : draft.getPodSize(),
+                getPodSize(),
                 draft == null ? null : resolvedDoublePick());
     }
 
@@ -238,6 +255,49 @@ public final class NetworkEvent {
         }
     }
 
+    /**
+     * Save bot decks to the host's event decks, named after each bot as the draft screens show it.
+     * Only the host keeps them, because only the host controls AI slots. Bots that share a name get
+     * an ordinal prefix, as duplicate player names do in a game.
+     *
+     * @param deckBySeat each bot's seat and the builder for its deck, run on the EDT
+     */
+    public static void saveBotDecks(NetworkEvent event, List<EventParticipant> participants,
+            Map<Integer, Supplier<Deck>> deckBySeat) {
+        String poolName = poolNameFor(event);
+        // Deck storage is EDT-owned; callers queue this before the pool sends so the host's deck list sees these
+        FThreads.invokeInEdtNowOrLater(() -> {
+            Set<String> usedNames = new HashSet<>();
+            for (Map.Entry<Integer, Supplier<Deck>> bot : deckBySeat.entrySet()) {
+                String botName = EventParticipant.resolveName(bot.getKey(), participants, List.of());
+                String name = botName;
+                for (int n = 2; !usedNames.add(name); n++) {
+                    name = Lang.getInstance().getOrdinal(n) + " " + botName;
+                }
+                // The deck builders throw when they cannot reach 40 cards; skip that bot and keep the rest
+                try {
+                    Deck deck = new Deck(bot.getValue().get(), poolName + " - " + name);
+                    setEventTags(deck, event);
+                    FModel.getDecks().getNetworkEventDecks().add(deck);
+                } catch (RuntimeException e) {
+                    IHasForgeLog.netLog.warn(e, "Failed to build deck for bot {}", name);
+                }
+            }
+        });
+    }
+
+    /** Ask the host for a sealed pod size, from the lobby's current slot count up to a full pod. Null if cancelled. */
+    public static Integer chooseSealedPodSize(int lobbySlots) {
+        int floor = Math.max(2, lobbySlots);
+        if (floor > BoosterDraft.N_PLAYERS) return null;
+        List<Integer> podSizes = new ArrayList<>();
+        for (int n = floor; n <= BoosterDraft.N_PLAYERS; n++) {
+            podSizes.add(n);
+        }
+        return SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblNetworkSealedPodSizePrompt"),
+                podSizes, BoosterDraft.N_PLAYERS, NetworkEvent::podSizeLabel);
+    }
+
     /** Short display label for a past event id, e.g., "Draft — Innistrad — (2026-04-20 10:15)". */
     public static String getEventDisplayLabel(String eventId) {
         Deck deck = findEventDeck(eventId);
@@ -311,7 +371,7 @@ public final class NetworkEvent {
             timerSec = currentEvent.getPickTimerSeconds();
             desc = currentEvent.getProductDescription();
             pool = currentEvent.getPoolType();
-            podSize = currentEvent.getDraft() == null ? 0 : currentEvent.getDraft().getPodSize();
+            podSize = currentEvent.getPodSize();
             picks = currentEvent.resolvedDoublePick();
         } else {
             evFormat = lastEventView.getFormat();

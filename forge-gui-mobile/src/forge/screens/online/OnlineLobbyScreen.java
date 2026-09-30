@@ -320,6 +320,9 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
                         parseSecondsOrDefault(pickStr, timerSeconds),
                         parseSecondsOrDefault(graceStr, graceSeconds));
             } else {
+                Integer podSize = NetworkEvent.chooseSealedPodSize(sgl.getNumberOfSlots());
+                if (podSize == null) return;
+                event.setSealedPodSize(podSize);
                 finishConfigureEvent(sgl, poolType, null, timerSeconds, graceSeconds);
             }
         });

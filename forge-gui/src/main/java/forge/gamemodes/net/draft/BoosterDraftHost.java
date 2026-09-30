@@ -16,23 +16,20 @@ import forge.gamemodes.net.event.DraftSeatPickedEvent;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.ReceiveEventPoolEvent;
 import forge.gamemodes.net.server.FServerManager;
-import forge.gui.FThreads;
 import forge.item.PaperCard;
-import forge.model.FModel;
 import forge.util.IHasForgeLog;
-import forge.util.Lang;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 /**
  * Server-side adapter that wraps {@link BoosterDraft} for network play.
@@ -350,8 +347,14 @@ public final class BoosterDraftHost implements IHasForgeLog {
         List<LimitedPlayer> players = draft.getAllPlayers();
         String eventId = event.getEventId();
 
-        // Deck storage is EDT-owned; queued before the pool sends so the host's deck list sees these
-        dispatches.add(() -> FThreads.invokeInEdtNowOrLater(this::saveBotDecks));
+        String landSetCode = IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null;
+        Map<Integer, Supplier<Deck>> botDecks = new LinkedHashMap<>();
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i) instanceof LimitedPlayerAI ai) {
+                botDecks.put(i, () -> ai.buildDeck(landSetCode));
+            }
+        }
+        dispatches.add(() -> NetworkEvent.saveBotDecks(event, participants, botDecks));
 
         for (int i = 0; i < players.size(); i++) {
             LimitedPlayer player = players.get(i);
@@ -365,33 +368,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
             int slot = participant.getLobbySlotIndex();
             dispatches.add(() -> FServerManager.getInstance().sendToSlot(slot,
                     new ReceiveEventPoolEvent(eventId, pool)));
-        }
-    }
-
-    /**
-     * Only the host keeps bot decks, because only the host controls AI slots. Bots that
-     * share a name get an ordinal prefix, as duplicate player names do in a game.
-     */
-    private void saveBotDecks() {
-        String landSetCode = IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null;
-        String poolName = NetworkEvent.poolNameFor(event);
-        Set<String> usedNames = new HashSet<>();
-        List<LimitedPlayer> players = draft.getAllPlayers();
-        for (int i = 0; i < players.size(); i++) {
-            if (!(players.get(i) instanceof LimitedPlayerAI ai)) continue;
-            String botName = EventParticipant.resolveName(i, participants, List.of());
-            String name = botName;
-            for (int n = 2; !usedNames.add(name); n++) {
-                name = Lang.getInstance().getOrdinal(n) + " " + botName;
-            }
-            // buildDeck throws when it cannot reach 40 cards; skip that bot and keep the rest
-            try {
-                Deck deck = new Deck(ai.buildDeck(landSetCode), poolName + " - " + name);
-                NetworkEvent.setEventTags(deck, event);
-                FModel.getDecks().getNetworkEventDecks().add(deck);
-            } catch (RuntimeException e) {
-                netLog.warn(e, "Failed to build deck for bot {}", name);
-            }
         }
     }
 

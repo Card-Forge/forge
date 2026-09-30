@@ -335,7 +335,7 @@ public class CLobby implements IDraftEventHandler {
         NetworkEvent event = serverLobby.getCurrentEvent();
         if (event == null) return;
 
-        // Step 4: Pod size, picks per pack, pick timer and disconnect grace (draft only)
+        // Step 4: Pod size; for draft also picks per pack, pick timer and disconnect grace
         int timerSeconds = event.getPickTimerSeconds();
         int graceSeconds = event.getDisconnectGraceSeconds();
         if (isDraft) {
@@ -424,6 +424,10 @@ public class CLobby implements IDraftEventHandler {
                 int parsed = Integer.parseInt(graceField.getText().trim());
                 if (parsed >= 0) graceSeconds = parsed;
             } catch (NumberFormatException ignored) { }
+        } else {
+            Integer podSize = NetworkEvent.chooseSealedPodSize(serverLobby.getNumberOfSlots());
+            if (podSize == null) return;
+            event.setSealedPodSize(podSize);
         }
 
         if (!serverLobby.configureEvent(chosen, draft, timerSeconds, graceSeconds)) {
