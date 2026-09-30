@@ -1,0 +1,6 @@
+Name:Academic Ascent
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SubAbility$ DBEmpower | SpellDescription$ Target creature gets +2/+2 and gains flying until end of turn.
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 2 | SpellDescription$ Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+Oracle:Target creature gets +2/+2 and gains flying until end of turn.\nEmpower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

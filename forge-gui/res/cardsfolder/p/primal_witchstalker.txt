@@ -1,0 +1,11 @@
+Name:Primal Witchstalker
+ManaCost:1 B G
+Types:Creature Wolf
+PT:2/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill four cards. When you do, return target land card from your graveyard to the battlefield tapped.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger |  ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ4 | Execute$ ReturnLand | SubAbility$ DBCleanup
+SVar:ReturnLand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target land card in your graveyard | ValidTgts$ Land.YouOwn | Tapped$ True | SpellDescription$ Return target land card from your graveyard to the battlefield tapped.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nWhen this creature enters, mill four cards. When you do, return target land card from your graveyard to the battlefield tapped. (To mill four cards, put the top four cards of your library into your graveyard.)

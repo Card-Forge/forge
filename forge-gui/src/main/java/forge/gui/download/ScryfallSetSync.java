@@ -13,6 +13,7 @@ import org.tinylog.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -43,7 +44,7 @@ final class ScryfallSetSync {
      * Fetches every print of {@code setCode} from Scryfall and merges it into the cache.
      * @return true if anything was found and cached
      */
-    static boolean sync(String setCode) {
+    static boolean sync(String setCode) throws UnsupportedEncodingException {
         Map<String, Map<String, String[]>> byCn = new HashMap<>();
         String url = searchUrl(setCode);
         try {
@@ -126,7 +127,7 @@ final class ScryfallSetSync {
         return dot >= 0 ? filename.substring(0, dot) : filename;
     }
 
-    private static String searchUrl(String setCode) {
+    private static String searchUrl(String setCode) throws UnsupportedEncodingException {
         String base = searchBaseUrlOverride != null ? searchBaseUrlOverride : DEFAULT_SEARCH_URL;
         // Always fetch English: CdnUuidCache.getCdnUrl() falls back to it, and virtually every
         // edition's cards are English. "lang:any" fetched ~10x more pages (every printed
@@ -137,7 +138,8 @@ final class ScryfallSetSync {
         String query = (preferredLang != null && !preferredLang.isEmpty() && !"en".equalsIgnoreCase(preferredLang))
                 ? "set:" + setCode + " (lang:en or lang:" + preferredLang + ")"
                 : "set:" + setCode + " lang:en";
-        return base + "?unique=prints&q=" + URLEncoder.encode(query, StandardCharsets.UTF_8);
+        // Fix encode for Android 12 and below
+        return base + "?unique=prints&q=" + URLEncoder.encode(query, "UTF-8");
     }
 
     /** Shared with {@link ScryfallBulkDataSync}. */

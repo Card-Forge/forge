@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAITgts:Card.Green,Card.White
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Green | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Indestructible | Description$ As long as enchanted creature is green, it gets +1/+1 and has indestructible. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ As long as enchanted creature is white, it gets +1/+1 and has flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature.Green | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Indestructible | Description$ As long as enchanted creature is green, it gets +1/+1 and has indestructible. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ As long as enchanted creature is white, it gets +1/+1 and has flying.
 Oracle:Enchant creature\nAs long as enchanted creature is green, it gets +1/+1 and has indestructible. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)\nAs long as enchanted creature is white, it gets +1/+1 and has flying.

@@ -4,7 +4,7 @@ Types:Legendary Creature Angel
 PT:3/3
 K:Flying
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature with flying on the battlefield.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature with flying on the battlefield.
 SVar:X:Count$Valid Creature.Other+withFlying
 SVar:BuffedBy:Creature.withFlying
 Oracle:Flying, vigilance\nRadiant, Archangel gets +1/+1 for each other creature with flying on the battlefield.

@@ -11,6 +11,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.trackable.TrackableProperty;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -208,6 +209,15 @@ public class CardCopyService {
         return getLKICopy(Maps.newHashMap());
     }
 
+    // The copy is built with a view that does not compute ability text, since walking every card in the
+    // game to produce it is the single largest cost of making one. It takes its source's text instead.
+    private static void copyAbilityText(final CardView from, final CardView to) {
+        to.getCurrentState().set(TrackableProperty.AbilityText, from.getCurrentState().getAbilityText());
+        if (from.hasAlternateState() && to.hasAlternateState()) {
+            to.getAlternateState().set(TrackableProperty.AbilityText, from.getAlternateState().getAbilityText());
+        }
+    }
+
     public Card getLKICopy(Map<Integer, Card> cachedMap) {
         if (copyFrom == null) {
             return null;
@@ -228,7 +238,7 @@ public class CardCopyService {
         if(copyFrom instanceof DetachedCardEffect)
             newCopy = new DetachedCardEffect((DetachedCardEffect) copyFrom, false);
         else
-            newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
+            newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null, true);
         cachedMap.put(copyFrom.getId(), newCopy);
         newCopy.setSetCode(copyFrom.getSetCode());
         newCopy.setOwner(copyFrom.getOwner());
@@ -280,6 +290,7 @@ public class CardCopyService {
         }
         // prevent StackDescription from revealing face
         newCopy.updateStateForView();
+        copyAbilityText(copyFrom.getView(), newCopy.getView());
 
         /*
         if (in.isCloned()) {

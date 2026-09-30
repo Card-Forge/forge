@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature,Land,Planeswalker:creature, land, or planeswalker
 SVar:AttachAITgts:Card.cmcGE3
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetColor$ Colorless | AddType$ Land | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddAbility$ ABMana | Description$ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | SetColor$ Colorless | AddType$ Land | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddAbility$ ABMana | Description$ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature, land, or planeswalker\nEnchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.

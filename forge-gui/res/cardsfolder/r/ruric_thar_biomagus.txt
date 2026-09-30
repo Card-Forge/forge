@@ -1,0 +1,10 @@
+Name:Ruric Thar, Biomagus
+ManaCost:4 U U
+Types:Legendary Creature Ogre Crab Wizard
+PT:4/6
+K:Flying
+K:Prowess
+K:Prowess
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME becomes the target of a spell or ability an opponent controls, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Flying\nProwess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.)\nWhenever Ruric Thar becomes the target of a spell or ability an opponent controls, draw a card.

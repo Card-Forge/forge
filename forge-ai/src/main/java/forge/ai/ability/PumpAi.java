@@ -478,8 +478,7 @@ public class PumpAi extends PumpAiBase {
             if (tgt.canTgtCreature()) {
                 list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
             } else {
-                ZoneType zone = tgt.getZone().get(0);
-                list = CardLists.getTargetableCards(game.getCardsIn(zone), sa);
+                list = CardLists.getTargetableCards(game.getCardsIn(tgt.getZone()), sa);
             }
         }
 

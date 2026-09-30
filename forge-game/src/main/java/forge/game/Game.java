@@ -99,7 +99,6 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
     public int AI_TIMEOUT = 5;
-    public boolean AI_CAN_USE_TIMEOUT = true;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
     // While this is false here, its really set by the Match/Preferences
@@ -416,7 +415,11 @@ public class Game {
     }
 
     public final PlayerCollection getPlayersInTurnOrder(Player p) {
-        final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
+        // with at most two players left, either direction gives the same list once rotated to start
+        // at p, so the turn order check, which scans every card for a reversal effect, cannot matter
+        final boolean directionIrrelevant = ingamePlayers.size() <= 2 && ingamePlayers.contains(p);
+        final PlayerCollection players = new PlayerCollection(
+                directionIrrelevant ? ingamePlayers : getPlayersInTurnOrder());
 
         int i = players.indexOf(p);
         Collections.rotate(players, -i);
@@ -605,7 +608,7 @@ public class Game {
         return card == null ? null : card.getLastKnownZone();
     }
 
-    public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
+    public CardCollectionView getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
@@ -627,7 +630,14 @@ public class Game {
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
         CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
-            cards.addAll(getCardsIn(z));
+            if (z == ZoneType.Stack) {
+                cards.addAll(getStackZone().getCards());
+                continue;
+            }
+            // adding each player's zone to the result directly avoids building a collection per zone
+            for (final Player p : getPlayers()) {
+                cards.addAll(p.getCardsIn(z));
+            }
         }
         return cards;
     }
@@ -1427,10 +1437,6 @@ public class Game {
     public int getAITimeout() {
         return AI_TIMEOUT;
     }
-    public boolean canUseTimeout() {
-        return AI_CAN_USE_TIMEOUT;
-    }
-
     public boolean isNoGUIUser() {
         return noGUIUser;
     }

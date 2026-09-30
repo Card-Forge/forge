@@ -4,6 +4,38 @@ Date=2025-09-23
 Name=Through the Omenpaths
 Type=Online
 ScryfallCode=OM1
+DoublePick=WhenPodSizeIs4
+RecommendedPodSize=4
+#https://www.mtgo.com/news/through-the-omenpaths
+BoosterSlots=Common,BonusSheet,Uncommon,RareMythic,Wildcard,Land
+Booster=6 Common, 1 BonusSheet, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 Wildcard+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("OM1 cards")
+
+[BonusSheet]
+Base=Common:fromSheet("OM1 cards")
+Replace=.0416F fromSheet("OMB cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("OM1 cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("OM1 cards")
+
+[Wildcard]
+Base=Common:fromSheet("OM1 cards")
+Replace=.171F Uncommon:fromSheet("OM1 cards")
+Replace=.179F Rare:fromSheet("OM1 cards")
+Replace=.028F Mythic:fromSheet("OM1 cards")
+
+[Land]
+Base=BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
+Replace=.12F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")+
+Replace=.20F fromSheet("OM1 allied lands")
+Replace=.04F fromSheet("OM1 allied lands")+
 
 [cards]
 1 R Ademi of the Silkchutes @Filip Burburan
@@ -194,3 +226,13 @@ ScryfallCode=OM1
 186 C University Campus @Randy Gallegos
 187 R Urban Retreat @Julia Metzger
 188 C Vibrant Cityscape @Julian Kok Joon Wen
+
+[promo]
+117† U Supportive Parents @Elizabeth Peiró
+
+[allied lands]
+1 Ominous Asylum|OM1
+1 Savage Mansion|OM1
+1 Sinister Hideout|OM1
+1 Suburban Sanctuary|OM1
+1 University Campus|OM1

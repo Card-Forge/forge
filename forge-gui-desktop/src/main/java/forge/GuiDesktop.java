@@ -4,7 +4,6 @@ import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.geom.AffineTransform;
@@ -169,7 +168,7 @@ public class GuiDesktop implements IGuiBase {
 
     /**
      * Report a prompt that can't be shown because there's no display, so command line runs get the
-     * text on stderr instead of a {@link HeadlessException} thrown from inside the dialog.
+     * text on stderr instead of a {@link java.awt.HeadlessException} thrown from inside the dialog.
      */
     private static void logSuppressedDialog(final String title, final String message, final String outcome) {
         System.err.printf("[headless] %s: %s (%s)%n", title, message, outcome);

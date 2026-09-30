@@ -8,10 +8,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.util.ThreadUtil;
 import org.tinylog.Logger;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -348,12 +345,18 @@ public final class CdnUuidCache {
     /** Queues {@code setCode} and, unless a test disabled it, submits {@link #syncPendingSets} to the shared pool. */
     private static void queueSync(String setCode) {
         if (pendingSyncs.add(setCode) && autoSyncEnabled) {
-            ThreadUtil.getServicePool().submit(CdnUuidCache::syncPendingSets);
+            ThreadUtil.getServicePool().submit(() -> {
+                try {
+                    syncPendingSets();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
     /** Syncs every queued set from Scryfall. Meant to run off the EDT/render thread. */
-    public static void syncPendingSets() {
+    public static void syncPendingSets() throws UnsupportedEncodingException {
         for (String setCode : pendingSyncs) {
             if (!pendingSyncs.remove(setCode)) continue; // another thread already claimed it
             ScryfallSetSync.sync(setCode);

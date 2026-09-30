@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraLabel;
-import forge.Adventure;
 import forge.Forge;
 import forge.FrameRate;
 import forge.adventure.stage.GameHUD;
@@ -31,6 +30,24 @@ import java.time.LocalTime;
 public class UIScene extends Scene {
     protected UIActor ui;
     private boolean textboxOpen;
+    private static final InputEvent touchDownEvent = new InputEvent();
+    private static final InputEvent touchUpEvent = new InputEvent();
+    private static final InputEvent enterEvent = new InputEvent();
+    private static final InputEvent exitEvent = new InputEvent();
+
+    static {
+        touchDownEvent.setPointer(-1);
+        touchDownEvent.setType(InputEvent.Type.touchDown);
+
+        touchUpEvent.setPointer(-1);
+        touchUpEvent.setType(InputEvent.Type.touchUp);
+
+        enterEvent.setPointer(-1);
+        enterEvent.setType(InputEvent.Type.enter);
+
+        exitEvent.setPointer(-1);
+        exitEvent.setType(InputEvent.Type.exit);
+    }
 
     public static class Selectable<T extends Actor> {
         public T actor;
@@ -95,8 +112,10 @@ public class UIScene extends Scene {
         dialog.getColor().a = 0;
         stage.setKeyboardFocus(dialog);
         stage.setScrollFocus(dialog);
-        for (Dialog otherDialogs : dialogs)
-            otherDialogs.hide();
+        // bypass iterator object gen
+        for (int i = 0; i < dialogs.size; i++) {
+            dialogs.get(i).hide();
+        }
         dialogs.add(dialog);
         selectFirst();
         dialog.show(stage);
@@ -131,32 +150,19 @@ public class UIScene extends Scene {
     String uiFile;
 
     public static InputEvent eventTouchUp() {
-        InputEvent event = new InputEvent();
-        event.setPointer(-1);
-        event.setType(InputEvent.Type.touchUp);
-        return event;
+        return touchUpEvent;
     }
 
     public static InputEvent eventTouchDown() {
-        InputEvent event = new InputEvent();
-        event.setPointer(-1);
-        event.setType(InputEvent.Type.touchDown);
-        return event;
+        return touchDownEvent;
     }
 
     public static InputEvent eventExit() {
-
-        InputEvent event = new InputEvent();
-        event.setPointer(-1);
-        event.setType(InputEvent.Type.exit);
-        return event;
+        return exitEvent;
     }
 
     public static InputEvent eventEnter() {
-        InputEvent event = new InputEvent();
-        event.setPointer(-1);
-        event.setType(InputEvent.Type.enter);
-        return event;
+        return enterEvent;
     }
 
     @Override
@@ -196,7 +202,7 @@ public class UIScene extends Scene {
     public UIScene(String uiFilePath) {
         textboxOpen = false;
         uiFile = uiFilePath;
-        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Adventure.getInstance().getUiBatch()) {
+        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Forge.getGraphics().getBatch()) {
             @Override
             public boolean keyUp(int keycode) {
                 keyReleased(keycode);
@@ -227,11 +233,11 @@ public class UIScene extends Scene {
 
     public void removeDialog() {
         textboxOpen = false;
-        if (!dialogs.isEmpty()) {
+        if (dialogs.size > 0) {
             dialogs.get(dialogs.size - 1).remove();
             dialogs.removeIndex(dialogs.size - 1);
 
-            if (!dialogs.isEmpty())
+            if (dialogs.size > 0)
                 dialogs.get(dialogs.size - 1).show(stage);
         }
         if (possibleSelectionStack.isEmpty()) {
@@ -636,7 +642,6 @@ public class UIScene extends Scene {
     }
 
     Image screenImage;
-    TextureRegion backgroundTexture;
 
     @Override
     public boolean leave() {
@@ -648,11 +653,11 @@ public class UIScene extends Scene {
     @Override
     public void enter() {
         if (screenImage != null) {
-            //create from lastPreview from header...
             try {
-                backgroundTexture = new TextureRegion(Forge.lastPreview);
-                //backgroundTexture.flip(false, true);
-                screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
+                if (Forge.lastPreview != null) {
+                    // set shaderDrawable to screenImage
+                    screenImage.setDrawable(getLastPreviewDrawable(new TextureRegion(Forge.lastPreview)));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -722,15 +727,41 @@ public class UIScene extends Scene {
 
     public TextureRegion getUIBackground() {
         try {
-            Actor a = ui.getChild(0);
-            if (a instanceof Image) {
-                Drawable d = ((Image) a).getDrawable();
-                if (d instanceof TextureRegionDrawable) {
-                    return ((TextureRegionDrawable) d).getRegion();
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                if (originalDrawable instanceof TextureRegionDrawable textureRegionDrawable) {
+                    return textureRegionDrawable.getRegion();
+                } else if (originalDrawable instanceof ShaderDrawable shaderDrawable) {
+                    return shaderDrawable.getRegion();
                 }
             }
         } catch (Exception e) {
             return null;
+        }
+        return null;
+    }
+
+    public void setUIBackground(Drawable drawable) {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                Drawable originalDrawable = image.getDrawable();
+                image.setDrawable(drawable);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Drawable getBGDrawable() {
+        try {
+            Actor actor = ui.getChild(0);
+            if (actor instanceof Image image) {
+                return image.getDrawable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

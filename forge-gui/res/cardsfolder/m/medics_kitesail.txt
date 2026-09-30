@@ -1,0 +1,9 @@
+Name:Medic's Kitesail
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Flying | AddTrigger$ AttackTrig | AddSVar$ AE | Description$ Equipped creature gets +1/+0 and has flying and "Whenever this creature attacks, you gain 1 life."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+K:Equip:2
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Equipped creature gets +1/+0 and has flying and "Whenever this creature attacks, you gain 1 life."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

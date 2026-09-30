@@ -5,6 +5,8 @@ import forge.adventure.data.RewardData;
 import forge.adventure.util.JSONStringLoader;
 import forge.adventure.util.Reward;
 
+import java.util.HashMap;
+
 /**
  * RewardSprite
  * Character sprite that represents reward pickups.
@@ -19,36 +21,59 @@ public class RewardSprite extends CharacterSprite {
             "\t\t}\n" +
             "\t]";
 
+    private static final HashMap<String, RewardData[]> rewardJsonMap = new HashMap<>(256);
+    private final Array<Reward> rewardCollection = new Array<>(8);
+    private boolean isMapPopulated = false;
+
     private int id;
     private RewardData[] rewards = null;
 
     public RewardSprite(String data, String _sprite){
         super(_sprite);
-        if (data != null) {
-            rewards = JSONStringLoader.parse(RewardData[].class, data, default_reward);
-        } else { //Shouldn't happen, but make sure it doesn't fly by.
-            System.err.print("Reward data is null. Using a default reward.");
-            rewards = JSONStringLoader.parse(RewardData[].class, default_reward, default_reward);
+
+        final String cacheKey = (data != null) ? data : default_reward;
+
+        RewardData[] cachedData = rewardJsonMap.get(cacheKey);
+        if (cachedData == null) {
+            if (data != null) {
+                cachedData = JSONStringLoader.parse(RewardData[].class, data, default_reward);
+            } else { // Shouldn't happen, but make sure it doesn't fly by.
+                System.err.print("Reward data is null. Using a default reward.");
+                cachedData = JSONStringLoader.parse(RewardData[].class, default_reward, default_reward);
+            }
+            rewardJsonMap.put(cacheKey, cachedData);
         }
+
+        this.rewards = cachedData;
     }
 
     public RewardSprite(int _id, String data, String _sprite){
         this(data, _sprite);
-        this.id = _id; //The ID is for remembering removals.
+        this.id = _id; // The ID is for remembering removals.
     }
 
     @Override
-    void updateBoundingRect() { //We want rewards to take a full tile.
+    void updateBoundingRect() { // We want rewards to take a full tile.
         boundingRect.set(getX(), getY(), getWidth(), getHeight());
     }
 
-    public Array<Reward> getRewards() { //Get list of rewards.
-        Array<Reward> ret = new Array<Reward>();
-        if(rewards == null) return ret;
-        for(RewardData rdata:rewards) {
-            ret.addAll(rdata.generate(false, true));
+    // act() -> onActing() MapStage call
+    public Array<Reward> getRewards() {
+        // Only assemble the reward data array objects once on the initial request pass
+        if (!isMapPopulated) {
+            isMapPopulated = true;
+            rewardCollection.clear();
+
+            if (rewards != null) {
+                for (int i = 0; i < rewards.length; i++) {
+                    RewardData rdata = rewards[i];
+                    if (rdata != null) {
+                        rewardCollection.addAll(rdata.generate(false, true));
+                    }
+                }
+            }
         }
-        return ret;
+        return rewardCollection;
     }
 
     public int getId() {

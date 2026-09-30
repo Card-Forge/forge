@@ -1,0 +1,9 @@
+Name:Gideon's Memorial
+ManaCost:1 W
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Creature tokens you control get +1/+0 and have vigilance.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Planeswalker | SpellDescription$ Add one mana of any color. Spend this mana only to cast a planeswalker spell.
+A:AB$ DealDamage | Cost$ 1 W Discard<1/CARDNAME/this card> | ActivationZone$ Hand | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | SpellDescription$ It deals 4 damage to target attacking or blocking creature.
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Token
+Oracle:Creature tokens you control get +1/+0 and have vigilance.\n{T}: Add one mana of any color. Spend this mana only to cast a planeswalker spell.\n{1}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature.

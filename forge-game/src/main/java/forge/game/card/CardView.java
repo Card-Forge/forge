@@ -49,6 +49,12 @@ public class CardView extends GameEntityView {
         return stateViewCache;
     }
 
+    @Override
+    public final boolean equals(final Object o) {
+        if (o == null) { return false; }
+        return o.hashCode() == hashCode() && o instanceof CardView;
+    }
+
     public CardView getBackup() {
         if (get(TrackableProperty.PaperCardBackup) == null)
             return null;
@@ -349,39 +355,12 @@ public class CardView extends GameEntityView {
         state.updateDefense(c);
     }
 
-    public int getCrackOverlayInt() {
-        if (get(TrackableProperty.CrackOverlay) == null)
-            return 0;
-        return get(TrackableProperty.CrackOverlay);
-    }
     public int getDamage() {
         return get(TrackableProperty.Damage);
     }
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
-        //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
-        int randCrackLevel = 0;
-        if (c.getDamage() > 0) {
-            switch (c.getDamage()) {
-                case 1:
-                case 2:
-                    randCrackLevel = 0;
-                    break;
-                case 3:
-                case 4:
-                    randCrackLevel = 1;
-                    break;
-                case 5:
-                case 6:
-                    randCrackLevel = 2;
-                    break;
-                default:
-                    randCrackLevel = 3;
-                    break;
-            }
-        }
-        set(TrackableProperty.CrackOverlay, randCrackLevel);
     }
 
     public int getAssignedDamage() {
@@ -983,19 +962,12 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.RightSplitState);
     }
 
-    public boolean hasBackSide() {
-        return get(TrackableProperty.HasBackSide);
-    }
-
     public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 
     public CardStateView getState(final boolean alternate0) {
         return alternate0 ? getAlternateState() : getCurrentState();
-    }
-    void updateBackSide(boolean hasBackSide) {
-        set(TrackableProperty.HasBackSide, hasBackSide);
     }
 
     public boolean wasDestroyed() {
@@ -1058,10 +1030,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Modal, c.isModal());
         set(TrackableProperty.Room, c.isRoom());
         set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
-
-        // hasBackside
-        if (c.getAlternateState() != null)
-            updateBackSide(c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
@@ -1278,6 +1246,12 @@ public class CardView extends GameEntityView {
                 return String.valueOf(getId());
             }
             return StringUtils.EMPTY;
+        }
+
+        @Override
+        public final boolean equals(final Object o) {
+            if (o == null) { return false; }
+            return o.hashCode() == hashCode() && o instanceof CardStateView;
         }
 
         @Override
@@ -1579,6 +1553,10 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.FoilIndex, c.getFoil());
         }
         public void setFoilIndexOverride(int index0) {
+            if (index0 == -2) { // 0 turns off the shader foil switch
+                foilIndexOverride = MyRandom.getRandom().nextInt(50) + 1;
+                return;
+            }
             if (index0 < 0) {
                 index0 = CardEdition.getRandomFoil(getSetCode());
             }

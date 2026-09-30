@@ -1,0 +1,12 @@
+Name:City Hall
+ManaCost:no cost
+Types:Plane Chicago
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When you planeswalk here, you become the Monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigRepeatEach | TriggerDescription$ Whenever Chaos ensues, each player may create two tapped Treasure tokens. Each player who does can't attack you during their next turn.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | ChangeZoneTable$ True | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to create two tapped Treasure tokens? | SubAbility$ DBEffect
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 2 | TokenTapped$ True | TokenOwner$ Player.IsRemembered | RememberTokens$ True
+SVar:DBEffect:DB$ Effect | EffectOwner$ RememberedOwner | RememberObjects$ You | StaticAbilities$ STCantAttack | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered | Description$ You can't attack the remembered player during your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When you planeswalk here, you become the Monarch.\nWhenever Chaos ensues, each player may create two tapped Treasure tokens. Each player who does can't attack you during their next turn.
