@@ -1289,7 +1289,7 @@ public class GameState {
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
-                // TODO Make sure Game State conversion works with new tokens
+                // TOKEN_PIPE is used for fixing the imagekey of tokens, restore the format for TokenInfo parser
                 String tokenStr = cardinfo[0].substring(2).replace(TOKEN_PIPE, "|");
                 c = new TokenInfo(tokenStr).makeOneToken(player);
             } else if (cardinfo[0].startsWith("T:")) {

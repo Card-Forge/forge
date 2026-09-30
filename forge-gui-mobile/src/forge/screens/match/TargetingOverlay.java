@@ -32,9 +32,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TargetingOverlay {
     private static final float BORDER_THICKNESS = Utils.scale(1);
@@ -119,10 +117,46 @@ public class TargetingOverlay {
         pendingCount = 0;
     }
 
+    private static void addBlockPair(final Map<CardView, List<CardView>> pairs, final CardView key, final CardView blocker, final CardView attacker) {
+        final List<CardView> list = pairs.computeIfAbsent(key, k -> new ArrayList<>());
+        list.add(blocker);
+        list.add(attacker);
+    }
+
     public static void assembleArrows(final Graphics g, final Set<CardView> cardsonBattlefield, final Map<Integer, Vector2> endpoints, final CombatView combat, final Set<PlayerView> playerViewSet) {
         if (cardsonBattlefield.isEmpty())
             return;
         try {
+            // Snapshot the combat data ONCE per frame. CombatView.getAttackers() / getAttackersOf(p) build a new collection on every
+            // call, and this used to run for every card on the battlefield (a JFR profile showed it at about a third of the render
+            // thread's Java time). Same arrows come out, same numbers of them.
+            final List<CardView> blockInfoAttackers = new ArrayList<>(); // attackers that have planned-blocker info (old "cards == null -> continue")
+            final Map<CardView, List<CardView>> blockPairs = new HashMap<>(); // card -> blocker, attacker, blocker, attacker, ...
+            final Map<PlayerView, Set<CardView>> attackersOfPlayer = new HashMap<>();
+            if (null != combat) {
+                for (final CardView attackingCard : combat.getAttackers()) {
+                    final Iterable<CardView> blockers = combat.getPlannedBlockers(attackingCard);
+                    if (blockers == null) continue;
+                    blockInfoAttackers.add(attackingCard);
+                    for (final CardView blockingCard : blockers) {
+                        // as before, a blocker arrow is drawn once while visiting the attacker and once while visiting the blocker
+                        addBlockPair(blockPairs, attackingCard, blockingCard, attackingCard);
+                        if (!blockingCard.equals(attackingCard)) {
+                            addBlockPair(blockPairs, blockingCard, blockingCard, attackingCard);
+                        }
+                    }
+                }
+                if (playerViewSet != null) {
+                    for (final PlayerView p : playerViewSet) {
+                        final Set<CardView> attackers = new HashSet<>();
+                        for (final CardView a : combat.getAttackersOf(p)) {
+                            attackers.add(a);
+                        }
+                        attackersOfPlayer.put(p, attackers);
+                    }
+                }
+            }
+
             for (CardView c : cardsonBattlefield) {
                 final CardView attachedTo = c.getAttachedTo();
                 final CardView paired = c.getPairedWith();
@@ -152,24 +186,21 @@ public class TargetingOverlay {
                     for (final CardView pwAttacker : combat.getAttackersOf(c)) {
                         queueArrow(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking, false);
                     }
-                    for (final CardView attackingCard : combat.getAttackers()) {
-                        final Iterable<CardView> cards = combat.getPlannedBlockers(attackingCard);
-                        if (cards == null) continue;
-                        for (final CardView blockingCard : cards) {
-                            if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                            queueArrow(endpoints.get(blockingCard.getId()), endpoints.get(attackingCard.getId()), ArcConnection.FoesBlocking, false);
+                    // blocker -> attacker arrows that involve this card
+                    final List<CardView> pairs = blockPairs.get(c);
+                    if (pairs != null) {
+                        for (int i = 0; i < pairs.size(); i += 2) {
+                            queueArrow(endpoints.get(pairs.get(i).getId()), endpoints.get(pairs.get(i + 1).getId()), ArcConnection.FoesBlocking, false);
                         }
-                        // attacker -> player arrows used to be drawn here, i.e. once for EVERY card on the battlefield.
-                        // They don't depend on c, so they are queued once below instead.
                     }
                 }
             }
 
+            // attacker -> player arrows do not depend on the card being iterated, so they are queued once
             if (null != combat && playerViewSet != null) {
-                for (final CardView attackingCard : combat.getAttackers()) {
-                    if (combat.getPlannedBlockers(attackingCard) == null) continue; // same condition the old inner loop had
+                for (final CardView attackingCard : blockInfoAttackers) {
                     for (final PlayerView p : playerViewSet) {
-                        if (combat.getAttackersOf(p).contains(attackingCard)) {
+                        if (attackersOfPlayer.get(p).contains(attackingCard)) {
                             final Vector2 vPlayer = MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin();
                             // solid = true: the old repeated drawing stacked the translucent 0.8/0.9 alphas up to fully opaque,
                             // so drawing once at full alpha keeps the same look. Pass false for the intended translucent look.
