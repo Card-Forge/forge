@@ -24,6 +24,7 @@ import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
@@ -418,17 +419,33 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) {
             return;
         }
+        final int max = cmb.getItemManager().getItemCount(card);
+        addChangePrintingEntry(cmb, card, 1);
+        if (max == 1) { return; }
+        addChangePrintingEntry(cmb, card, Math.min(FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT), max));
+        if (max == 2) { return; }
+        addChangePrintingEntry(cmb, card, -max);
+    }
+
+    /** A negative quantity prompts the user for a number up to its absolute value. */
+    private static void addChangePrintingEntry(EditorContextMenuBuilder cmb, PaperCard card, int qty) {
+        final Localizer localizer = Localizer.getInstance();
         GuiUtils.addMenuItem(cmb.getMenu(),
-                Localizer.getInstance().getMessage("lblChangePrinting"),
+                localizer.getMessage("lblChangePrintingOf", SItemManagerUtil.getItemDisplayString(card, qty, false)),
                 null,
                 () -> {
+                    Integer quantity = qty;
+                    if (quantity < 0) {
+                        quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
+                        if (quantity == null) { return; }
+                    }
                     PaperCard chosen = ChangePrintingDialog.show(card);
                     if (chosen == null) { return; }
                     PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
                     if (newCard.equals(card)) { return; }
                     CardManager deckManager = (CardManager) cmb.getItemManager();
-                    deckManager.removeItem(card, 1);
-                    deckManager.addItem(newCard, 1);
+                    deckManager.removeItem(card, quantity);
+                    deckManager.addItem(newCard, quantity);
                     CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
                             .getDeckController().notifyModelChanged();
                 },
