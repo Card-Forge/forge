@@ -256,6 +256,7 @@ public final class FModel {
         final GameFormat pauperCommanderFormat = getFormats().get("Pauper Commander");
         if (pauperCommanderFormat != null) {
             getMagicDb().setPauperCommanderPredicate(pauperCommanderFormat.getFilterRules());
+            getMagicDb().setPauperCommanderBannedPredicate(PaperCardPredicates.names(pauperCommanderFormat.getBannedCardNames()));
         }
 
         getMagicDb().setFilteredHandsEnabled(getPreferences().getPrefBoolean(FPref.FILTERED_HANDS));

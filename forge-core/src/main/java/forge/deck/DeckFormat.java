@@ -87,7 +87,20 @@ public enum DeckFormat {
                 return false;
             }
             final PaperCard card = StaticData.instance().getCommonCards().getCard(rules.getName());
-            return card == null || StaticData.instance().getCommonCards().wasPrintedAtRarity(CardRarity.Uncommon).test(card);
+            if (card == null) {
+                return true;
+            }
+            // The ban list in res/formats/Casual/PauperCommander.txt covers the commander too
+            final Predicate<PaperCard> banned = StaticData.instance().getPauperCommanderBannedPredicate();
+            if (banned != null && banned.test(card)) {
+                return false;
+            }
+            return StaticData.instance().getCommonCards().wasPrintedAtRarity(CardRarity.Uncommon).test(card);
+        }
+
+        @Override
+        public boolean isLegalCommanderPartnership(CardRules a, CardRules b) {
+            return a.canBePauperPartnerCommanders(b);
         }
 
         @Override
@@ -497,7 +510,7 @@ public enum DeckFormat {
                 PaperCard a = commanders.get(0);
                 PaperCard b = commanders.get(1);
 
-                if (!a.getRules().canBePartnerCommanders(b.getRules())) {
+                if (!isLegalCommanderPartnership(a.getRules(), b.getRules())) {
                     return "has an illegal commander partnership";
                 }
             }
@@ -699,6 +712,11 @@ public enum DeckFormat {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
+    }
+
+    /** Whether two commanders may lead a deck together (partner, Background, and similar pairings). */
+    public boolean isLegalCommanderPartnership(CardRules a, CardRules b) {
+        return a.canBePartnerCommanders(b);
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {
