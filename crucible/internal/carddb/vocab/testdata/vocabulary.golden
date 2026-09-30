@@ -259,7 +259,6 @@ paramKey	ControllerUntaps
 paramKey	CopyCard
 paramKey	CopyForEachCanTarget
 paramKey	CopyFromChosenName
-paramKey	CopyTriggeringObjects
 paramKey	Cost
 paramKey	CostDesc
 paramKey	CounterAmount
@@ -456,7 +455,6 @@ paramKey	Hellbent
 paramKey	Hidden
 paramKey	HiddenKeywords
 paramKey	Highest
-paramKey	Host
 paramKey	IfDesc
 paramKey	IgnoreEffectCost
 paramKey	IgnoreFreeze
@@ -536,7 +534,6 @@ paramKey	MaxNum
 paramKey	MaxRepeat
 paramKey	MaxRevealed
 paramKey	MaxRollsResults
-paramKey	MaxSpeed
 paramKey	MaxTotalTargetCMC
 paramKey	MaxTotalTargetPower
 paramKey	MayChooseTarget
@@ -672,7 +669,6 @@ paramKey	PlayerTurn
 paramKey	Populate
 paramKey	Power
 paramKey	PowerUp
-paramKey	PreCostDesc
 paramKey	PrecostDesc
 paramKey	PresentCompare
 paramKey	PresentCompare2
@@ -883,7 +879,6 @@ paramKey	SP
 paramKey	ST
 paramKey	SVar
 paramKey	SVarCompare
-paramKey	SVars
 paramKey	SacEachValid
 paramKey	SacMessage
 paramKey	SacValid
@@ -1027,7 +1022,6 @@ paramKey	Trigger
 paramKey	TriggerAmount
 paramKey	TriggerController
 paramKey	TriggerDescription
-paramKey	TriggerZone
 paramKey	TriggerZones
 paramKey	TriggeredCounterMap
 paramKey	TriggeredOwnAbility
@@ -1462,6 +1456,7 @@ mode	Clashed
 mode	ClassLevelGained
 mode	CollectEvidence
 mode	ColorlessDamageSource
+mode	CombatDamageNegatePower
 mode	CombatDamageToughness
 mode	CommitCrime
 mode	ConjureAll
@@ -4046,6 +4041,7 @@ svarProperty	HasPropertywasDealtCombatDamageThisTurnBy Card.Self,Dragon GE1
 svarProperty	HasPropertywasDealtCombatDamageThisTurnBy Creature.Legendary GE1
 svarProperty	HasPropertywasDealtCombatDamageThisTurnBy Zombie GE1
 svarProperty	HasPropertywasDealtDamageThisTurn
+svarProperty	HasPropertywasDealtNonCombatDamageLastTurn
 svarProperty	HasPropertywasDealtNonCombatDamageThisTurn
 svarProperty	HasPropertywithMoreCreaturesThanYou
 svarProperty	HasPropertywithMoreLandsThanYou

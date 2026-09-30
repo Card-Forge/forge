@@ -107,6 +107,8 @@ public enum ZoneType implements ITranslatable {
         return DECK_ZONES.contains(this);
     }
 
+    public boolean isOrdered() { return ORDERED_ZONES.contains(this); }
+
     @Override
     public String getName() {
         return name();

@@ -20,7 +20,7 @@ import (
 type immediateTriggerEffect struct{}
 
 func (immediateTriggerEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "ImmediateTrigger", "RememberSVarAmount", "Static", "CopyTriggeringObjects",
+	if err := rejectParams(a, "ImmediateTrigger", "RememberSVarAmount", "Static",
 		"AfterReplacement", "RememberDiscarded", "Condition", "ConditionDefined"); err != nil {
 		return err
 	}

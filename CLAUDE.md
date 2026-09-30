@@ -188,7 +188,7 @@ M2 done — `internal/carddb`, `internal/deck`, `tools/carddump`, `crucible corp
 dump is byte-identical to Forge's own `CardRules.Reader` across the whole corpus, and no script key is exempt from the
 parser.
 
-M3 done — `internal/carddb/compile` compiles all 33,978 cards with no exemption; `internal/valid`, `expr`, `cost`,
+M3 done — `internal/carddb/compile` compiles all 33,980 cards with no exemption; `internal/valid`, `expr`, `cost`,
 `keyword` port the value grammars; `tools/apiscan` gates the param vocabulary two ways, both at zero; typed param
 structs generated (`compile/params_gen.go`); the valid property vocabulary gate is green
 (`TestEveryPropertyIsAccountedFor`, M3 item 19, `port-log/valid-strings.md`). **P2 exit gate green:** no unknowns,

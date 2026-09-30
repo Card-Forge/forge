@@ -5,7 +5,7 @@ kind	Cost	1884
 kind	Type	1338
 kind	CostAndAmount	32
 kind	CostAndType	136
-kind	Special	3126
+kind	Special	3125
 used	Affinity	Special
 used	Afflict	Amount
 used	Afterlife	Amount

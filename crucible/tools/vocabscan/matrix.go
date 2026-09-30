@@ -102,6 +102,11 @@ someone decided to ship anyway". Every dead param the scan found was fixed inste
 `+"`tools/apiscan -check`"+` proves "some Java code reads this key". `+"`-check -api`"+` proves the stronger claim — "the effect this
 card names reads this key" — by attributing keys per effect class and following each class's superclass chain inside the
 effects directory. Both run in CI and both fail the build.
+
+`+"`-api`"+` also follows one level of static helper calls into another effect class (`+"`addHelperParams`, `scan.go`"+`), reading
+only the called method's body. Reason: `+"`CloneEffect`"+` reads `+"`PumpDuration$`"+` solely through
+`+"`TokenEffectBase.addPumpUntil(sa, ...)`"+` without extending `+"`TokenEffectBase`"+`, so the superclass chain alone reported
+`+"`the_fourteenth_doctor.txt`'s `PumpDuration$`"+` as dead once `+"`compile`"+` began compiling `+"`ETBReplacement:Copy`"+` SVars.
 `)
 	return out.Flush()
 }

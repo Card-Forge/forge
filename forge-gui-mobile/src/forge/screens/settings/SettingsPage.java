@@ -402,9 +402,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     g.drawText(display, font, color, x, y, w, h, false, Align.right, false);
                 }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
+        /*lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
             Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
-            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);
+            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);*/ //
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
             Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
             Forge.getLocalizer().getMessage("nlLoadArchivedFormats")), 3);

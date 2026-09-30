@@ -58,39 +58,28 @@ An edit whose whole purpose is to disappear goes here: the same change open as a
 [Card-Forge/forge](https://github.com/Card-Forge/forge), with the row and the local edit both deleted once upstream
 merges it and a sync brings the identical content back.
 
-| Date       | Path                                                            | Change                                                                                                                                                                                           | Upstream |
-| ---------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| 2026-09-19 | `forge-gui/res/cardsfolder/n/nascent_metamorph.txt`             | `SVar:DBCleanupOne` renamed `DBCleanup` — matches the `SubAbility$ DBCleanup` reference above it and the corpus's own convention (2,771 cards)                                                   | pending  |
-| 2026-09-25 | `forge-gui/res/cardsfolder/d/the_disciple_of_vess.txt`          | Trailing line `(There are currently thirteen. Perhaps look up the list and roll a D20?)\nPERSON` deleted — a stray authoring note, not a script line; `FileSection` rejects it as an unknown key | pending  |
-| 2026-09-25 | `forge-gui/res/cardsfolder/upcoming/ginger_queen_of_sweets.txt` | `TokenOwner$` renamed `Controller$` — `CopyPermanentEffect.java` reads `sa.getParam("Controller")`, never `TokenOwner`; the corpus's own convention (5 other `CopyPermanent` cards)              | pending  |
-| 2026-09-25 | `forge-gui/res/cardsfolder/p/peace_talks.txt`                   | `StaticAbilities$` drops `STCantTargetPlayer` — no such SVar; `EffectEffect.java` skips the null static silently. `STCantTarget` already covers players                                          | pending  |
+| Date | Path | Change    | Upstream |
+| ---- | ---- | --------- | -------- |
+| —    | —    | none open | —        |
 
 Carried edits exist because the corpus gates run against the fork's own tree: a card the parser rejects fails the build
 whoever wrote it, and waiting for a merge would mean disabling a gate in the meantime.
 
-`nascent_metamorph.txt` was found when the 2026-09-19 sync to `db4304cc40d` moved `internal/carddb/compile`'s
-`TestCorpusCompiles` from 33,913 of 33,913 to 33,910 (three cards with a `SubAbility$`/`SVar:` name that does not
-match); four siblings of the same sync (`clash_of_elements.txt`, `dack_fayden_helping_hand.txt`, `living_library.txt`,
-`venser_fervent_forger.txt`) have since retired below. `the_disciple_of_vess.txt` (`a854eef5507`, #11874) ends in a
-leftover note to the card's own author rather than a script line, which `tools/apiscan -check` reads as an unknown key;
-`ginger_queen_of_sweets.txt` writes a param `CopyPermanentEffect.java` never reads, which `tools/apiscan -check -api`
-catches. `sanctum_lurker.txt` was the same shape — a param that never reaches its effect, `Affected$` where
-`StaticAbilityIgnoreZeroLoyalty.java` reads only `ValidCard$` — found by reading the sync's diff to
-`forge-game/src/main/java` directly (`tools/apiscan` scans only `AB$`/`SP$`/`DB$` effect params, not `S:` static-ability
-params, so no gate caught it); filed as [#12035](https://github.com/Card-Forge/forge/pull/12035), merged, and retired
-below.
-
-Peace Talks' row was found when `internal/carddb/compile` began following Effect's `StaticAbilities$` list: its one
-missing name fails `TestCorpusCompiles` the way a dangling `SubAbility$` does.
+`tools/apiscan` scans only `AB$`/`SP$`/`DB$` effect params, not `S:` static-ability params, so a static-ability param
+written under the wrong name (Sanctum Lurker's `Affected$` where `StaticAbilityIgnoreZeroLoyalty.java` reads only
+`ValidCard$`) passes every gate. Only reading a sync's diff to `forge-game/src/main/java` against the port finds one.
 
 PORT-8: a param that never reaches its effect, a sub-ability chain broken by name, or a line that is not a script line
 at all is a Forge bug, reported and fixed here rather than exempted from either gate.
 
-Sixteen rows have retired this way — #11846, #11848, #11850, #11851, #11852, #11854, #11859, #12035, and five more from
-the 2026-09-19 batch (`clash_of_elements.txt` at upstream `913081c68d6`, `dack_fayden_helping_hand.txt` at `#11990`,
-`living_library.txt` at `24546a4a121`, `venser_fervent_forger.txt` at `45baeffbf21`, `sanctum_lurker.txt` at `#12035`)
-merged, and a sync brought the identical content back, which is exactly the condition each row named. None has ever
-graduated into a permanent edit, which is the outcome that would need an ADR. The list works by emptying itself.
+Twenty rows have retired this way — #11846, #11848, #11850, #11851, #11852, #11854, #11859, #12035, #12038
+(`the_disciple_of_vess.txt` and `ginger_queen_of_sweets.txt`, merged with the reviewers' edits: the card's reminder text
+restored, a redundant `Controller$ You` dropped), and the 2026-09-19 batch (`clash_of_elements.txt` at upstream
+`913081c68d6`, `dack_fayden_helping_hand.txt` at `#11990`, `living_library.txt` at `24546a4a121`,
+`venser_fervent_forger.txt` at `45baeffbf21`, `sanctum_lurker.txt` at `#12035`). `nascent_metamorph.txt` and
+`peace_talks.txt` retired without a pull request of ours: `#11958` (Command the Stage) fixed both in passing. In every
+case a sync brought the identical content back, which is exactly the condition each row named. None has ever graduated
+into a permanent edit, which is the outcome that would need an ADR. The list works by emptying itself.
 
 **Conflict rule while one is open: always take upstream.** If upstream applies the identical change, git merges both
 sides silently and there is nothing to resolve. If upstream fixes it differently, upstream's version wins without

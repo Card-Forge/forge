@@ -687,7 +687,7 @@ named `<Type$> Token`. Then `Num$` (default 1) loyalty counters on one such toke
   (GO-2).
 - Counters go on after the token enters and before state-based actions, so a 0-loyalty token survives.
 - `GameEntityCounterTable.replaceCounterEffect` not ported, same gap as `PutCounter`.
-- All 32 corpus lines are `Type$ Jace` under `cardsfolder/upcoming/`.
+- All 32 corpus lines are `Type$ Jace`.
 
 **Researched and deferred.**
 

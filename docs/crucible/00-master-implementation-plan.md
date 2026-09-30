@@ -588,7 +588,7 @@ printed form.
 **Complete.**
 
 17. `internal/carddb/compile`: param maps, SVar resolution + `SubAbility$` recursion, cost strings, valid strings,
-    count/X expressions, keyword strings. **Done**: all 33,978 cards compile with no exemption.
+    count/X expressions, keyword strings. **Done**: all 33,980 cards compile with no exemption.
 18. `go:generate` pipeline for typed param structs + the effect registry (ADR-0008). **Done**: `compile/params_gen.go`
     generates the typed param structs; `internal/engine`'s `Effect`/`Registry` (ADR-0011) is the effect-registry half.
     `permanentEffect`/`attachEffect` (M5's `castspell.go`, item 26) are its first three entries, fixed CR rules, not

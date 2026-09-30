@@ -4,7 +4,7 @@
   `go run ./tools/vocabscan -matrix > ../docs/crucible/porting/parity-matrix.md` and then `prettier --write`, which owns
   the table alignment (DOC-14)
 
-Support status of every card-script vocabulary item in the Go engine, over 33,978 cards.
+Support status of every card-script vocabulary item in the Go engine, over 33,980 cards.
 
 The used column is what the corpus writes. The supported column is what the engine implements, and only the API row can
 answer it: the other vocabularies are consumed by code that has no registry to count yet, and a zero there would read as
@@ -13,17 +13,17 @@ a measurement rather than an absence.
 | Kind                       | Defined in Java | Used in scripts | Supported in Go |
 | -------------------------- | --------------: | --------------: | --------------: |
 | Ability API (`ApiType`)    |             202 |             193 |               0 |
-| Ability param key          |               — |           1,184 |               — |
-| Keyword head               |             203 |             253 |               — |
-| Trigger and static mode    |             153 |             252 |               — |
+| Ability param key          |               — |           1,177 |               — |
+| Keyword head               |             203 |             252 |               — |
+| Trigger and static mode    |             153 |             256 |               — |
 | Replacement event          |              45 |              38 |               — |
 | Cost part                  |             ~45 |              88 |               — |
-| Count head                 |               — |             268 |               — |
+| Count head                 |               — |             271 |               — |
 | Count operator             |               — |              17 |               — |
-| Amount-expression head     |               — |              87 |               — |
-| Amount-expression property |               — |             368 |               — |
-| Valid base                 |               — |             252 |               — |
-| Valid property             |               — |           1,255 |               — |
+| Amount-expression head     |               — |              88 |               — |
+| Amount-expression property |               — |             374 |               — |
+| Valid base                 |               — |             253 |               — |
+| Valid property             |               — |           1,271 |               — |
 | AI hint key                |               — |              29 |               — |
 
 Two rows read higher than their Java definition count because the script vocabulary is not the enum: keyword heads
