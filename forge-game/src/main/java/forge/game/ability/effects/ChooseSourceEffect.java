@@ -126,17 +126,14 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             }
             final CardCollection chosen = new CardCollection();
             for (int i = 0; i < validAmount; i++) {
+                if (!hasSourceLeft(sourcesToChooseFrom)) {
+                    break;
+                }
                 final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
                 Card o = null;
                 do {
-                    if (sourcesToChooseFrom.isEmpty()) {
-                        break;
-                    }
                     o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
                 } while (o == null || o.getName().startsWith("--"));
-                if (o == null) {
-                    continue;
-                }
                 chosen.add(o);
                 sourcesToChooseFrom.remove(o);
             }
@@ -145,5 +142,18 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                 host.addRemembered(chosen);
             }
         }
+    }
+
+    /**
+     * The pool also holds the "--PERMANENTS:--" style section headers, which cannot be picked and are never
+     * removed, so an empty pool is not the same as one with nothing left to choose.
+     */
+    private static boolean hasSourceLeft(final CardCollectionView pool) {
+        for (final Card c : pool) {
+            if (!c.getName().startsWith("--")) {
+                return true;
+            }
+        }
+        return false;
     }
 }
