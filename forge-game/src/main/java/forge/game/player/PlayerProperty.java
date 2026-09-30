@@ -160,7 +160,9 @@ public class PlayerProperty {
                 }
             }
             int result;
-            if (property.contains("BySource")) {
+            if (property.contains("LastTurn")) {
+                result = player.getAssignedDamage(combat, null, true);
+            } else if (property.contains("BySource")) {
                 result = source.getDamageHistory().getDamageDoneThisTurn(combat, false, property.contains("SourceTimes"), null, "You", source, player, spellAbility);
             } else {
                 result = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();

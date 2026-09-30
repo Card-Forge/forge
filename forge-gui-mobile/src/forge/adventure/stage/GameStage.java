@@ -319,7 +319,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()), Forge.getGraphics().getBatch());
         WorldSave.getCurrentSave().onLoad(() -> {
             if (player == null)
                 return;
@@ -488,7 +488,7 @@ public abstract class GameStage extends Stage {
                 noQuicksaveDialog.activate();
             } else {
                 getPlayerSprite().storePos();
-                WorldSave.getCurrentSave().header.createPreview();
+                WorldSave.requestPreview();
                 WorldSave.getCurrentSave().quickSave();
             }
         }
@@ -625,7 +625,7 @@ public abstract class GameStage extends Stage {
     public void openMenu() {
         if (Forge.advFreezePlayerControls)
             return;
-        WorldSave.getCurrentSave().header.createPreview();
+        WorldSave.requestPreview();
         Forge.switchScene(StartScene.instance());
     }
 
