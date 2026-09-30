@@ -317,7 +317,7 @@ public class GameSnapshot {
             ZoneType fromType = fromCard.getZone().getZoneType();
 
             int zonePosition = 0;
-            if (ZoneType.ORDERED_ZONES.contains(fromType)) {
+            if (fromType.isOrdered()) {
                 // If the card is in an ordered zone, we need to find its position in the zone
                 // and set it in the new game.
                 zonePosition = fromCard.getZone().getCards().indexOf(fromCard);
@@ -337,7 +337,7 @@ public class GameSnapshot {
                 }
             }
 
-            if (!ZoneType.ORDERED_ZONES.contains(fromType)) {
+            if (!fromType.isOrdered()) {
                 setCardInCopiedGame(toGame, toPlayer, fromCard, newCard, fromType, zonePosition);
             } else {
                 // stash this info
