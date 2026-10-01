@@ -34,6 +34,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.perpetual.PerpetualInterface;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.Sticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
@@ -72,6 +75,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.Math.max;
 
@@ -601,6 +606,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         currentStateName = state;
         currentState = getState(state);
+        // CR 123.6c - name stickers apply to the name the object has now, face-down included
+        if (isStickered()) {
+            recomputeStickerName();
+        }
 
         updateTypeCache();
         if (updateView) {
@@ -2025,6 +2034,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void addChangedSVars(Map<String, String> map, long timestamp, long staticId) {
+        Map<String, String> existing = this.changedSVars.get(timestamp, staticId);
+        if (existing != null && !existing.isEmpty()) {
+            Map<String, String> merged = Maps.newHashMap(existing);
+            merged.putAll(map);
+            map = merged;
+        }
         this.changedSVars.put(timestamp, staticId, map);
     }
     public final void removeChangedSVars(long timestamp, long staticId) {
@@ -2690,6 +2705,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Chapter")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap") || keyword.startsWith("ETBReplacement")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
+                        || keyword.startsWith("StickerSheet")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Web-slinging")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous") || keyword.startsWith("Firebending")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
@@ -4593,6 +4609,105 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void setIntensity(final int n) { intensity = n; }
     public final boolean hasIntensity() {
         return intensity > 0;
+    }
+
+    private List<AppliedSticker> stickers = new ArrayList<>();
+    private List<Sticker> sheetStickers;
+
+    public final List<Sticker> getSheetStickers() {
+        return sheetStickers;
+    }
+    public final void setSheetStickers(final List<Sticker> read) {
+        sheetStickers = read;
+    }
+
+    // CR 123.4
+    public final boolean isStickered() {
+        return !stickers.isEmpty();
+    }
+    public final List<AppliedSticker> getStickers() {
+        return stickers;
+    }
+    public final void addSticker(final AppliedSticker s) {
+        stickers.add(s);
+        s.applyEffect(this);
+        updateStickersForView();
+    }
+    // CR 123.5
+    public final void setStickers(final Card oldCard) {
+        stickers = new ArrayList<>(oldCard.getStickers());
+        for (AppliedSticker s : stickers) {
+            s.applyEffect(this);
+        }
+        updateStickersForView();
+    }
+    // CR 123.5b/c
+    public final void takeStickersFrom(final Card other) {
+        for (AppliedSticker s : other.getStickers()) {
+            s.removeEffect(other);
+            stickers.add(s);
+            s.applyEffect(this);
+        }
+        other.stickers = new ArrayList<>();
+        other.view.updateStickers(other);
+        updateStickersForView();
+    }
+
+    private void updateStickersForView() {
+        view.updateStickers(this);
+        refreshSheetViews(getOwner());
+    }
+
+    public static void refreshSheetViews(final Player p) {
+        if (p == null) {
+            return;
+        }
+        for (Card sheet : p.getCardsIn(ZoneType.StickerSheets)) {
+            sheet.view.updateStickers(sheet);
+        }
+    }
+
+    /**
+     * CR 123.6c - name stickers apply in timestamp order. Each fills the leftmost blank still
+     * empty (CR 123.6a); with none left it goes after its chosen number of words.
+     */
+    public final void recomputeStickerName() {
+        List<AppliedSticker> nameStickers = new ArrayList<>();
+        for (AppliedSticker s : stickers) {
+            if (s.getKind() == StickerKind.NAME) {
+                nameStickers.add(s);
+            }
+        }
+        if (nameStickers.isEmpty()) {
+            return;
+        }
+        nameStickers.sort(Comparator.comparingLong(AppliedSticker::getTimestamp));
+
+        String name = StringUtils.defaultString(currentState.getName());
+        for (AppliedSticker s : nameStickers) {
+            name = addStickerWord(name, s.getSticker().getWord(), s.getNamePosition());
+        }
+        addChangedName(name, false, nameStickers.get(nameStickers.size() - 1).getTimestamp(), 0);
+    }
+
+    private static final Pattern NAME_BLANK = Pattern.compile("_{2,}");
+
+    public static String addStickerWord(final String name, final String word, final int position) {
+        Matcher blank = NAME_BLANK.matcher(name);
+        if (blank.find()) {
+            return name.substring(0, blank.start()) + word + name.substring(blank.end());
+        }
+        List<String> words = new ArrayList<>();
+        if (StringUtils.isNotBlank(name)) {
+            Collections.addAll(words, name.split(" "));
+        }
+        words.add(Math.min(position, words.size()), word);
+        return String.join(" ", words);
+    }
+
+    public final boolean stickerWouldFillBlank() {
+        String name = getName();
+        return StringUtils.isNotEmpty(name) && NAME_BLANK.matcher(name).find();
     }
 
     private List<PerpetualInterface> perpetual = new ArrayList<>();

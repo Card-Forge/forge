@@ -1,0 +1,18 @@
+Name:Wild Ogre Bupkis
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Wild
+SVar:STK2:Kind$ Name | Word$ Ogre
+SVar:STK3:Kind$ Name | Word$ Bupkis
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever this creature attacks, put a +1/+1 counter on it. | Triggers$ STK7Attacks
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Metalcraft — This permanent has protection from noncreature permanents as long as you control three or more artifacts. | Statics$ STK8Metalcraft
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 5 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 7 | Toughness$ 4
+SVar:STK7Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK7PutCounter | TriggerDescription$ Whenever this creature attacks, put a +1/+1 counter on it.
+SVar:STK7PutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:STK8Metalcraft:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Protection:Permanent.nonCreature:noncreature permanents | Condition$ Metalcraft | Description$ Metalcraft — This permanent has protection from noncreature permanents as long as you control three or more artifacts.
+Oracle:{TK}{TK} — Whenever this creature attacks, put a +1/+1 counter on it.\n{TK}{TK}{TK} — Metalcraft — This permanent has protection from noncreature permanents as long as you control three or more artifacts.\n{TK}{TK} — 5/1\n{TK}{TK}{TK}{TK} — 7/4

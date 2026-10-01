@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * First scene after the splash screen
@@ -168,6 +169,8 @@ public class StartScene extends UIScene {
     private final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yyMMdd_HHmmss");
     private final SelectBox<String> backupSelectBox = Controls.newComboBox();
     private final Array<String> fileNames = new Array<>();
+    private final String prefixPattern = ZipUtil.backupAdvFile.replace(".adv", "");
+    private final Pattern strictBackupRegex = Pattern.compile("^" + Pattern.quote(prefixPattern) + "_\\d{6}_\\d{6}\\.adv$");
     public boolean generateBackup() {
         try {
             File source = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file();
@@ -198,9 +201,7 @@ public class StartScene extends UIScene {
     public boolean restoreBackup() {
         File downloadDir = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
 
-        String prefixPattern = ZipUtil.backupAdvFile.replace(".adv", "");
-
-        File[] files = downloadDir.listFiles((dir, name) -> name.startsWith(prefixPattern) && name.endsWith(".adv"));
+        File[] files = downloadDir.listFiles((dir, name) -> strictBackupRegex.matcher(name).matches());
 
         if (files == null || files.length == 0) {
             zipDialog = createGenericDialog("",
@@ -220,38 +221,36 @@ public class StartScene extends UIScene {
         backupSelectBox.setItems(fileNames);
 
         unzipDialog = createGenericDialog("",
-                Forge.getLocalizer().getMessage("lblDoYouWantToRestoreBackup"),
-                Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"),
-                () -> {
-                    String selectedName = backupSelectBox.getSelected(); // Resolves selected string target layout
-                    File source = new File(downloadDir, selectedName);
-                    File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file().getParentFile();
+            Forge.getLocalizer().getMessage("lblDoYouWantToRestoreBackup"),
+            Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"),
+            () -> {
+                String selectedName = backupSelectBox.getSelected();
+                File source = new File(downloadDir, selectedName);
+                File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file().getParentFile();
+                removeDialog();
 
-                    removeDialog();
+                if (!ZipUtil.isValidZip(source)) {
+                    zipDialog = createGenericDialog("",
+                        Forge.getLocalizer().getMessageorUseDefault("lblCorruptedBackupError", "Corrupted Backup!"),
+                        Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                    showDialog(zipDialog);
+                    return;
+                }
 
-                    if (!ZipUtil.isValidZip(source)) {
-                        zipDialog = createGenericDialog("",
-                            Forge.getLocalizer().getMessageorUseDefault("lblCorruptedBackupError", "Corrupted Backup!"),
-                            Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
-                        showDialog(zipDialog);
-                        return;
-                    }
-
-                    Timer.schedule(new Timer.Task() {
-                        @Override
-                        public void run() {
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
                         try {
                             extract(source, target);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        }
-                    }, 0.1f);
-                },
-                this::removeDialog, false, "", true
+                    }
+                }, 0.1f);
+            },
+            this::removeDialog, false, "", true
         );
 
-        //unzipDialog.getContentTable().row().pad(10);
         unzipDialog.getContentTable().row();
         unzipDialog.getContentTable().add(backupSelectBox).width(150).pad(5).center();
         unzipDialog.pack();
