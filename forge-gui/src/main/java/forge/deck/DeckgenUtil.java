@@ -675,7 +675,7 @@ public class DeckgenUtil {
                     }
                 }
             } else {
-                String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
+                String matrixKey = (format.equals(DeckFormat.TinyLeaders) || format.equals(DeckFormat.DuelCommander) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders and Duel Commander
                 List<Map.Entry<PaperCard, Integer>> potentialCards = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
                 prepareWeightedRandomizedCardPool(potentialCards);
                 for(Map.Entry<PaperCard,Integer> pair:potentialCards){
@@ -691,7 +691,7 @@ public class DeckgenUtil {
                 selectedPartner = getRandomSignatureSpell(preSelectedCards);
             }
             else if (commander.getRules().canBePartnerCommander()) {
-                selectedPartner = getRandomPartnerCommander(preSelectedCards, commander);
+                selectedPartner = getRandomPartnerCommander(preSelectedCards, commander, format);
             }
             if (selectedPartner != null) {
                 preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
@@ -742,7 +742,7 @@ public class DeckgenUtil {
                 break;
             default:
                 if (commander.getRules().canBePartnerCommander()) {
-                    selectedPartner = getRandomPartnerCommander(preSelectedCards, commander);
+                    selectedPartner = getRandomPartnerCommander(preSelectedCards, commander, format);
                 }
                 break;
             }
@@ -810,11 +810,13 @@ public class DeckgenUtil {
     private static PaperCard getRandomSignatureSpell(final Iterable<PaperCard> cards) {
         return Aggregates.random(IterableUtil.filter(cards, c -> c.getRules().canBeSignatureSpell()));
     }
-    private static PaperCard getRandomPartnerCommander(final Iterable<PaperCard> cards, final PaperCard commander) {
+    private static PaperCard getRandomPartnerCommander(final Iterable<PaperCard> cards, final PaperCard commander, final DeckFormat format) {
         final List<PaperCard> partners = new ArrayList<>();
         for (final PaperCard card : cards) {
+            // a card legal in the deck may still be banned as a commander (Duel Commander)
             if (!card.getName().equals(commander.getName())
-                    && card.getRules().canBePartnerCommanders(commander.getRules())) {
+                    && card.getRules().canBePartnerCommanders(commander.getRules())
+                    && format.isLegalCommander(card.getRules())) {
                 partners.add(card);
             }
         }

@@ -26,7 +26,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         ItemPool<PaperCard> uniqueCards;
         if (isCardGen){
             uniqueCards = new ItemPool<>(PaperCard.class);
-            String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
+            String matrixKey = (format.equals(DeckFormat.TinyLeaders) || format.equals(DeckFormat.DuelCommander) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders and Duel Commander
             HashMap<String, List<Map.Entry<PaperCard, Integer>>> matrixPool = CardRelationMatrixGenerator.cardPools.get(matrixKey);
             if (matrixPool != null) {
                 Iterable<String> legendNames = matrixPool.keySet();

@@ -27,6 +27,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
+import forge.deck.DeckFormat;
 import forge.deck.io.DeckPreferences;
 import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
@@ -152,6 +153,7 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> brawlCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(getFormats().get("Brawl").getFilterPrinted().and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER))), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> oathbreakerCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> tinyLeadersCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> duelCommanderCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(DeckFormat.DuelCommander.isLegalCommanderPredicate()), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> commanderPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> avatarPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_VANGUARD)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> conspiracyPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)), PaperCard.class));
@@ -327,6 +329,10 @@ public final class FModel {
 
     public static ItemPool<PaperCard> getTinyLeadersCommander() {
         return tinyLeadersCommander.get();
+    }
+
+    public static ItemPool<PaperCard> getDuelCommanderCommander() {
+        return duelCommanderCommander.get();
     }
 
     public static ItemPool<PaperCard> getCommanderPool() {

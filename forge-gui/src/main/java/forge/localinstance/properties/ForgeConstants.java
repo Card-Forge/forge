@@ -64,6 +64,7 @@ public final class ForgeConstants {
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
     public static final String NET_DECKS_OATHBREAKER_LIST_FILE       = LISTS_DIR + "net-decks-oathbreaker.txt";
     public static final String NET_DECKS_TINYLEADERS_LIST_FILE       = LISTS_DIR + "net-decks-tinyleaders.txt";
+    public static final String NET_DECKS_DUELCOMMANDER_LIST_FILE     = LISTS_DIR + "net-decks-duelcommander.txt";
     public static final String CLASSIC_MODULE_CARD_TO_CROP_FILE      = LISTS_DIR + "classicModuleCardtoCrop.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
     public static final String CJK_FONTS_LIST_FILE                   = LISTS_DIR + "font-list.txt";
@@ -271,6 +272,7 @@ public final class ForgeConstants {
     public static final String QUEST_SAVE_DIR             = USER_QUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String CONQUEST_SAVE_DIR          = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR      = DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
+    public static final String DECK_DUEL_COMMANDER_DIR    = DECK_BASE_DIR + "duel_commander" + PATH_SEPARATOR;
     public static final String DECK_BRAWL_DIR             = DECK_BASE_DIR + "brawl" + PATH_SEPARATOR;
     public static final String MAIN_PREFS_FILE            = USER_PREFS_DIR + "forge.preferences";
     public static final String SERVER_PREFS_FILE          = USER_PREFS_DIR + "server.preferences";
