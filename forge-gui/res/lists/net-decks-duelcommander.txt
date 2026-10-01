@@ -1,1 +1,0 @@
-Current Duel Commander Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentduelcommandermetagame.zip
