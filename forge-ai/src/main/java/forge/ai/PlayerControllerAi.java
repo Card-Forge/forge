@@ -671,6 +671,8 @@ public class PlayerControllerAi extends PlayerController {
             return brains.getCardsToDiscard(min, max, validCards, sa);
         }
 
+        reveal(visibleToChooser, ZoneType.Hand, p);
+
         boolean isTargetFriendly = !p.isOpponentOf(player);
 
         return isTargetFriendly

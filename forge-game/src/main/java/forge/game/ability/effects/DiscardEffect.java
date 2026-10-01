@@ -241,22 +241,25 @@ public class DiscardEffect extends SpellAbilityEffect {
                     chooser = targets.get(0);
                 }
 
-                if (mode.startsWith("Reveal")) {
-                    game.getAction().reveal(dPHand, p);
-                }
-                if (mode.startsWith("Look") && p != chooser) {
-                    game.getAction().revealTo(dPHand, chooser);
-                }
-
-                if (!p.canDiscardBy(sa, true)) {
-                    continue;
-                }
-
                 final String valid = sa.getParamOrDefault("DiscardValid", "Card");
                 CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
 
                 int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                 int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
+
+                // a chooser about to pick is shown dPHand by that choice, so gets no separate reveal
+                final boolean canDiscard = p.canDiscardBy(sa, true);
+                final Player choosing = max > 0 && canDiscard ? chooser : null;
+                if (mode.startsWith("Reveal")) {
+                    game.getAction().revealTo(dPHand, game.getPlayers().filter(other -> other != p && other != choosing));
+                }
+                if (mode.startsWith("Look") && p != chooser && choosing == null) {
+                    game.getAction().revealTo(dPHand, chooser);
+                }
+
+                if (!canDiscard) {
+                    continue;
+                }
 
                 // Reveal/Look modes disclose dPHand to the chooser; non-valid revealed cards should remain visible during the choice.
                 final boolean revealed = mode.startsWith("Reveal") || mode.startsWith("Look");

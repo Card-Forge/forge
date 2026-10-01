@@ -1179,8 +1179,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         boolean optional = min == 0;
 
         if (p != player) {
+            final boolean selectFromDisplay = useSelectCardsInput(valid, sa);
+            if (visibleToChooser != valid) {
+                if (selectFromDisplay) {
+                    yieldController.maybeInterruptOnReveal();
+                } else {
+                    // the list offers only the valid cards, so a revealed hand is shown first
+                    reveal(visibleToChooser, ZoneType.Hand, p);
+                }
+            }
             tempShowCards(visibleToChooser);
-            if (useSelectCardsInput(valid, sa)) {
+            if (selectFromDisplay) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
                 inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
                 inp.setCancelAllowed(optional);

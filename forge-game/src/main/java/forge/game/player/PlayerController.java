@@ -231,7 +231,7 @@ public abstract class PlayerController {
     }
 
     /** visibleToChooser - all cards the chooser is allowed to see during the choice (a superset of validCards
-     *  when an effect has revealed extra cards, e.g. Reveal/Look modes). */
+     *  when an effect has revealed extra cards, e.g. Reveal/Look modes); the controller shows them, no reveal precedes. */
     public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser);
     public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
     public abstract CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard);
