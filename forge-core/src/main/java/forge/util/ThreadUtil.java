@@ -8,7 +8,7 @@ public class ThreadUtil {
     // Idle threads are not kept around: Android's heap/thread budget is small and AI work comes in short bursts.
     // Every pool below that this class owns lets ALL of its threads die after this long, so an idle pool holds zero
     // threads (AITimeoutTest asserts AIExecutor.getPoolSize() == 0 shortly after a burst).
-    private static final long IDLE_KEEPALIVE_SECONDS = 1L;
+    private static final long IDLE_KEEPALIVE_MILLISECONDS = 300L; // 300ms so thread will not aggressively parked
 
     // ART reports "Dalvik" as java.vm.name for historical reasons, and "The Android Project" as vendor.
     private static final boolean IS_ANDROID =
@@ -23,7 +23,8 @@ public class ThreadUtil {
     private static final int AI_THREADS = IS_ANDROID
             ? Math.max(2, Math.min(4, Runtime.getRuntime().availableProcessors() - 1))
             : Math.max(2, Runtime.getRuntime().availableProcessors());
-
+    // Max Capacity for ThreadPool Queue
+    private static final int Q_CAPACITY = IS_ANDROID ? 16 : 32 ;
     /** Marker so code running on the AI pool can detect it and avoid blocking on the same pool. */
     private static final class AIWorkerThread extends Thread {
         AIWorkerThread(Runnable r) {
@@ -40,10 +41,10 @@ public class ThreadUtil {
     // Reusable ThreadPool for AI Timeout.
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
             AI_THREADS, AI_THREADS,
-            IDLE_KEEPALIVE_SECONDS, TimeUnit.SECONDS,
-            new SynchronousQueue<>(),
+            IDLE_KEEPALIVE_MILLISECONDS, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<>(Q_CAPACITY),   // was SynchronousQueue<>() - dropped tasks under load instead of queuing them
             AIWorkerThread::new,
-            new ThreadPoolExecutor.DiscardPolicy()
+            new ThreadPoolExecutor.DiscardOldestPolicy() // drop stale requests if the pool falls behind -> DiscardPolicy replaced
     ) {
         // This hooks into .submit() or .execute() automatically
         @Override
@@ -59,7 +60,13 @@ public class ThreadUtil {
         // Ensure execute() tasks are also cleaned
         @Override
         public void execute(Runnable command) {
-            super.execute(new SafeInterruptWrapper(command));
+            // FutureTasks manage their own internal interrupt lifecycle.
+            if (command instanceof TrackableFutureTask) {
+                super.execute(command);
+            } else {
+                // Direct .execute() commands get the safe wrapper
+                super.execute(new SafeInterruptWrapper(command));
+            }
         }
 
     };
@@ -81,12 +88,21 @@ public class ThreadUtil {
             try {
                 super.run();
             } finally {
-                runnerThread = null;
                 // Clear interrupt flag before returning thread to pool
                 Thread.interrupted();
             }
         }
 
+        @Override
+        protected void done() {
+            // Guaranteed to run exactly once when the task finishes or is canceled.
+            runnerThread = null;
+        }
+
+        /**
+         * Returns the thread currently executing this task,
+         * or null if the task has completed or has not started yet.
+         */
         public Thread getRunnerThread() {
             return runnerThread;
         }
@@ -146,14 +162,14 @@ public class ThreadUtil {
     // Shared pool for executeWithTimeout(). Previously every call built (and never shut down) its own cached pool,
     // leaving one idle thread alive for 60s per call. Same behaviour as a cached pool, but idle threads expire after 1s.
     private final static ExecutorService timeoutPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-            IDLE_KEEPALIVE_SECONDS, TimeUnit.SECONDS, new SynchronousQueue<>(), new WorkerThreadFactory("Timeout"));
+            1L, TimeUnit.SECONDS, new SynchronousQueue<>(), new WorkerThreadFactory("Timeout"));
 
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards, assuming a load factor of 0.5
     // The caller still owns the returned pool, but idle threads now time out so a forgotten shutdown() no longer leaks them.
     public final static ExecutorService getComputingPool(float loadFactor) {
         float lf = Math.max(0f, Math.min(loadFactor, 0.9f)); // 1.0 used to divide by zero -> Integer.MAX_VALUE threads
         int threads = Math.max(1, (int) (Runtime.getRuntime().availableProcessors() / (1 - lf)));
-        ThreadPoolExecutor pool = new ThreadPoolExecutor(threads, threads, IDLE_KEEPALIVE_SECONDS, TimeUnit.SECONDS,
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(threads, threads, 1L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(), r -> {
             Thread t = Executors.defaultThreadFactory().newThread(r);
             t.setDaemon(true);

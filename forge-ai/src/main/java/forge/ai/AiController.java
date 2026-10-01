@@ -1764,8 +1764,27 @@ public class AiController {
         future.cancel(true);
         if (future instanceof ThreadUtil.TrackableFutureTask<?> task) {
             final long end = System.nanoTime() + 100_000_000L; // 100ms
-            while (task.getRunnerThread() != null && System.nanoTime() < end && !Thread.currentThread().isInterrupted()) {
+            Thread runner;
+            while ((runner = task.getRunnerThread()) != null && System.nanoTime() < end && !Thread.currentThread().isInterrupted()) {
                 LockSupport.parkNanos(1_000_000L);
+            }
+            // This isn't necessary but as requested will keep it here
+            runner = task.getRunnerThread();
+            if (runner != null && runner.isAlive()) {
+                try {
+                    runner.join(2000); //2 second wait
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+                if (runner.isAlive()) {
+                    // last resort, see #8302: the eval thread may be stuck inside a single
+                    // evaluation or an infinite loop and never reach the cooperative exit
+                    try {
+                        runner.stop();
+                    } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                        // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
+                    }
+                }
             }
         }
     }
