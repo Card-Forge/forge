@@ -73,6 +73,7 @@ public enum CDeckEditorUI implements ICDoc {
     private final VOathbreakerDecks vOathbreakerDecks;
     private final VBrawlDecks vBrawlDecks;
     private final VTinyLeadersDecks vTinyLeadersDecks;
+    private final VDuelCommanderDecks vDuelCommanderDecks;
     private final VEditorLog vEditorLog;
 
     CDeckEditorUI() {
@@ -88,6 +89,8 @@ public enum CDeckEditorUI implements ICDoc {
         this.vBrawlDecks.setCDetailPicture(cDetailPicture);
         this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;
         this.vTinyLeadersDecks.setCDetailPicture(cDetailPicture);
+        this.vDuelCommanderDecks = VDuelCommanderDecks.SINGLETON_INSTANCE;
+        this.vDuelCommanderDecks.setCDetailPicture(cDetailPicture);
         this.vEditorLog = VEditorLog.SINGLETON_INSTANCE;
     }
 
@@ -170,7 +173,7 @@ public enum CDeckEditorUI implements ICDoc {
     static boolean isFormatDropdownGameType(final GameType gt) {
         return gt == GameType.Constructed || gt == GameType.Commander
                 || gt == GameType.Oathbreaker || gt == GameType.Brawl
-                || gt == GameType.TinyLeaders;
+                || gt == GameType.TinyLeaders || gt == GameType.DuelCommander;
     }
 
     private void syncFormatDropdown() {
@@ -207,6 +210,7 @@ public enum CDeckEditorUI implements ICDoc {
             case Oathbreaker: return "lblOathbreakerDeckEditor";
             case Brawl:       return "lblBrawlDeckEditor";
             case TinyLeaders: return "lblTinyLeadersDeckEditor";
+            case DuelCommander: return "lblDuelCommanderDeckEditor";
             default:          return "lblDeckEditorWithSpaces";
         }
     }

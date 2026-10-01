@@ -106,6 +106,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
                 GameType.Oathbreaker,
                 GameType.Brawl,
                 GameType.TinyLeaders,
+                GameType.DuelCommander,
         });
         cb.setFont(FSkin.getRelativeFont(12));
         return cb;
