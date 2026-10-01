@@ -163,6 +163,11 @@ public class RegisteredPlayer {
             start.commanders = deck.getCommanders();
             start.setStartingLife(start.getStartingLife() + 5);
         }
+        if (appliedVariants.contains(GameType.DuelCommander)) {
+            start.commanders = deck.getCommanders();
+            // Duel Commander 401.1: each player begins with 20 life, the base total, so nothing is added
+            // (unlike Commander's +20 above); other variants still layer on top of it.
+        }
         if (appliedVariants.contains(GameType.Brawl)) {
             start.commanders = deck.getCommanders();
             if (playerCount == 2) {

@@ -112,6 +112,8 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
+    // Duel Commander (duelcommander.org): no sideboard (302.1), but a companion lives there in Forge (302.2).
+    DuelCommander  ( Range.is(99),                         Range.of(0, 1), 1),
     PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
     Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4) {
         @Override
@@ -158,7 +160,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl || this == DuelCommander;
     }
 
     public boolean hasSignatureSpell() {
