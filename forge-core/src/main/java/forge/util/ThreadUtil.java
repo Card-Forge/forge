@@ -23,8 +23,7 @@ public class ThreadUtil {
     private static final int AI_THREADS = IS_ANDROID
             ? Math.max(2, Math.min(4, Runtime.getRuntime().availableProcessors() - 1))
             : Math.max(2, Runtime.getRuntime().availableProcessors());
-    // Max Capacity for ThreadPool Queue
-    private static final int Q_CAPACITY = IS_ANDROID ? 16 : 32 ;
+
     /** Marker so code running on the AI pool can detect it and avoid blocking on the same pool. */
     private static final class AIWorkerThread extends Thread {
         AIWorkerThread(Runnable r) {
@@ -42,9 +41,9 @@ public class ThreadUtil {
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
             AI_THREADS, AI_THREADS,
             IDLE_KEEPALIVE_MILLISECONDS, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>(Q_CAPACITY),   // was SynchronousQueue<>() - dropped tasks under load instead of queuing them
+            new SynchronousQueue<>(), // using LinkedBlockingQueue produces more garbage than intended
             AIWorkerThread::new,
-            new ThreadPoolExecutor.DiscardOldestPolicy() // drop stale requests if the pool falls behind -> DiscardPolicy replaced
+            new ThreadPoolExecutor.DiscardPolicy()
     ) {
         // This hooks into .submit() or .execute() automatically
         @Override
