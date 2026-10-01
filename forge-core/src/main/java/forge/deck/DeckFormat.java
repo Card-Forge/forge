@@ -133,10 +133,10 @@ public enum DeckFormat {
                 for (final Entry<PaperCard, Integer> cp : sideboard) {
                     CardRules rules = cp.getKey().getRules();
                     if (!rules.hasStartOfKeyword("Companion")) {
-                        return "has no sideboard in Duel Commander, only a companion: " + cp.getKey().getName();
+                        return Localizer.getInstance().getMessage("lblDuelCommanderOnlyCompanion", cp.getKey().getName());
                     }
                     if (!StaticData.instance().getDuelCommanderCompanionPredicate().test(rules)) {
-                        return "can't have " + cp.getKey().getName() + " as its companion in Duel Commander";
+                        return Localizer.getInstance().getMessage("lblDuelCommanderBannedAsCompanion", cp.getKey().getName());
                     }
                 }
             }
