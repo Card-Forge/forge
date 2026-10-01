@@ -253,6 +253,12 @@ public final class FModel {
         getMagicDb().setCommanderPredicate(getFormats().get("Commander").getFilterRules());
         getMagicDb().setOathbreakerPredicate(getFormats().get("Oathbreaker").getFilterRules());
         getMagicDb().setBrawlPredicate(getFormats().get("Brawl").getFilterRules());
+        GameFormat duelCommander = getFormats().get("Duel Commander");
+        getMagicDb().setDuelCommanderPredicate(duelCommander.getFilterRules());
+        // isLegalCommander never sees the paper-card filter, so a commander is checked against both lists here
+        getMagicDb().setDuelCommanderCommanderPredicate(rules -> !duelCommander.getBannedCardNames().contains(rules.getName())
+                && !duelCommander.getBannedAsCommanderCardNames().contains(rules.getName()));
+        getMagicDb().setDuelCommanderCompanionPredicate(rules -> !duelCommander.getBannedAsCompanionCardNames().contains(rules.getName()));
 
         getMagicDb().setFilteredHandsEnabled(getPreferences().getPrefBoolean(FPref.FILTERED_HANDS));
         try {

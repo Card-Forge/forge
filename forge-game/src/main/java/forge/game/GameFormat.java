@@ -76,6 +76,8 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final List<CardRarity> allowedRarities;
     protected final List<String> bannedCardNames;
     protected final List<String> restrictedCardNames;
+    protected final List<String> bannedAsCommanderCardNames; // legal in the deck, not as its commander (Duel Commander)
+    protected final List<String> bannedAsCompanionCardNames; // legal in the deck, not as its companion (Duel Commander)
     protected final List<String> additionalCardNames; // for cards that are legal but not reprinted in any of the allowed Sets
     protected boolean restrictedLegendary = false;
     private Date effectiveDate;
@@ -85,6 +87,8 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
     protected final transient List<String> restrictedCardNames_ro;
+    protected final transient List<String> bannedAsCommanderCardNames_ro;
+    protected final transient List<String> bannedAsCompanionCardNames_ro;
     protected final transient List<String> additionalCardNames_ro;
 
     protected final transient Predicate<PaperCard> filterRules;
@@ -102,6 +106,14 @@ public class GameFormat implements Comparable<GameFormat> {
     public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
                       final List<String> restrictedCards, Boolean restrictedLegendary, final List<String> additionalCards,
                       final List<CardRarity> rarities, int compareIdx, FormatType formatType, FormatSubType formatSubType) {
+        this(fName, effectiveDate, sets, bannedCards, restrictedCards, restrictedLegendary, additionalCards, rarities,
+                compareIdx, formatType, formatSubType, null, null);
+    }
+
+    public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
+                      final List<String> restrictedCards, Boolean restrictedLegendary, final List<String> additionalCards,
+                      final List<CardRarity> rarities, int compareIdx, FormatType formatType, FormatSubType formatSubType,
+                      final List<String> bannedAsCommander, final List<String> bannedAsCompanion) {
         this.index = compareIdx;
         this.formatType = formatType;
         this.formatSubType = formatSubType;
@@ -125,6 +137,8 @@ public class GameFormat implements Comparable<GameFormat> {
 
         bannedCardNames = bannedCards == null ? new ArrayList<>() : Lists.newArrayList(bannedCards);
         restrictedCardNames = restrictedCards == null ? new ArrayList<>() : Lists.newArrayList(restrictedCards);
+        bannedAsCommanderCardNames = bannedAsCommander == null ? new ArrayList<>() : Lists.newArrayList(bannedAsCommander);
+        bannedAsCompanionCardNames = bannedAsCompanion == null ? new ArrayList<>() : Lists.newArrayList(bannedAsCompanion);
         allowedRarities = rarities == null ? new ArrayList<>() : rarities;
         this.restrictedLegendary = restrictedLegendary;
         additionalCardNames = additionalCards == null ? new ArrayList<>() : Lists.newArrayList(additionalCards);
@@ -132,6 +146,8 @@ public class GameFormat implements Comparable<GameFormat> {
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
         this.restrictedCardNames_ro = Collections.unmodifiableList(restrictedCardNames);
+        this.bannedAsCommanderCardNames_ro = Collections.unmodifiableList(bannedAsCommanderCardNames);
+        this.bannedAsCompanionCardNames_ro = Collections.unmodifiableList(bannedAsCompanionCardNames);
         this.additionalCardNames_ro = Collections.unmodifiableList(additionalCardNames);
 
         this.filterRules = this.buildFilterRules();
@@ -202,6 +218,14 @@ public class GameFormat implements Comparable<GameFormat> {
 
     public List<String> getBannedCardNames() {
         return this.bannedCardNames_ro;
+    }
+
+    public List<String> getBannedAsCommanderCardNames() {
+        return this.bannedAsCommanderCardNames_ro;
+    }
+
+    public List<String> getBannedAsCompanionCardNames() {
+        return this.bannedAsCompanionCardNames_ro;
     }
 
     public List<String> getRestrictedCards() {
@@ -358,6 +382,7 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Extended.txt");
             coreFormats.add("Brawl.txt");
             coreFormats.add("Oathbreaker.txt");
+            coreFormats.add("DuelCommander.txt");
             coreFormats.add("Premodern.txt");
             coreFormats.add("Pauper.txt");
             coreFormats.add("PreDH.txt");
@@ -377,6 +402,8 @@ public class GameFormat implements Comparable<GameFormat> {
             List<String> sets = null; // default: all sets allowed
             List<String> bannedCards = null; // default: nothing banned
             List<String> restrictedCards = null; // default: nothing restricted
+            List<String> bannedAsCommander = null; // default: every legal card may be a commander
+            List<String> bannedAsCompanion = null; // default: every legal card may be a companion
             Boolean restrictedLegendary = false;
             List<String> additionalCards = null; // default: nothing additional
             List<CardRarity> rarities = null;
@@ -423,6 +450,16 @@ public class GameFormat implements Comparable<GameFormat> {
                 restrictedCards = Arrays.asList(strCars.split("; "));
             }
 
+            strCars = section.get("bannedAsCommander");
+            if (strCars != null) {
+                bannedAsCommander = Arrays.asList(strCars.split("; "));
+            }
+
+            strCars = section.get("bannedAsCompanion");
+            if (strCars != null) {
+                bannedAsCompanion = Arrays.asList(strCars.split("; "));
+            }
+
             Boolean strRestrictedLegendary = section.getBoolean("restrictedlegendary");
             if (strRestrictedLegendary != null) {
                 restrictedLegendary = strRestrictedLegendary;
@@ -445,7 +482,8 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
 
-            GameFormat result = new GameFormat(title, date, sets, bannedCards, restrictedCards, restrictedLegendary, additionalCards, rarities, idx, formatType,formatsubType);
+            GameFormat result = new GameFormat(title, date, sets, bannedCards, restrictedCards, restrictedLegendary, additionalCards, rarities, idx, formatType,formatsubType,
+                    bannedAsCommander, bannedAsCompanion);
             naturallyOrdered.add(result);
             return result;
         }

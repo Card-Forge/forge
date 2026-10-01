@@ -113,7 +113,36 @@ public enum DeckFormat {
         }
     },
     // Duel Commander (duelcommander.org): no sideboard (302.1), but a companion lives there in Forge (302.2).
-    DuelCommander  ( Range.is(99),                         Range.of(0, 1), 1),
+    DuelCommander  ( Range.is(99),                         Range.of(0, 1), 1, null,
+            card -> StaticData.instance().getDuelCommanderPredicate().test(card)
+    ) {
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            // 304.2: some cards are legal in the 99 but banned as commander
+            return super.isLegalCommander(rules) && StaticData.instance().getDuelCommanderCommanderPredicate().test(rules);
+        }
+
+        @Override
+        public String getDeckConformanceProblem(Deck deck) {
+            String problem = super.getDeckConformanceProblem(deck);
+            if (problem != null) {
+                return problem;
+            }
+            CardPool sideboard = deck.get(DeckSection.Sideboard);
+            if (sideboard != null) {
+                for (final Entry<PaperCard, Integer> cp : sideboard) {
+                    CardRules rules = cp.getKey().getRules();
+                    if (!rules.hasStartOfKeyword("Companion")) {
+                        return "has no sideboard in Duel Commander, only a companion: " + cp.getKey().getName();
+                    }
+                    if (!StaticData.instance().getDuelCommanderCompanionPredicate().test(rules)) {
+                        return "can't have " + cp.getKey().getName() + " as its companion in Duel Commander";
+                    }
+                }
+            }
+            return null;
+        }
+    },
     PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
     Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4) {
         @Override
