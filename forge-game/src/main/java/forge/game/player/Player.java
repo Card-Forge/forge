@@ -3250,7 +3250,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
         eff.addReplacementEffect(re);
 
-        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.IsCommander+YouOwn | AffectedZone$ Command";
+        String castableCommander = "Card.IsCommander+YouOwn";
+        if (game.getRules().hasAppliedVariant(GameType.DuelCommander)) {
+            // Duel Commander 404.1-404.4: once one of your commanders has been cast from the command zone, the others
+            // can't be cast from there this game. They can still be cast from any other zone (Command Beacon).
+            castableCommander += "+NoOtherCommanderCastFromCommandZone";
+        }
+        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ " + castableCommander + " | AffectedZone$ Command";
         if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana
             mayBePlayedAbility += " | MayPlayIgnoreColor$ True";
         }
