@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Forge Adventure
+Comment=Forge's single-player adventure mode
+Exec=forge-adventure
+Icon=forge
+Terminal=false
+Categories=Game;CardGame;

@@ -77,11 +77,15 @@
                             <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                             <dontWrapJar>true</dontWrapJar>
                             <errTitle>forge</errTitle>
-                            <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
+                            <downloadUrl>https://adoptium.net/temurin/releases/?os=windows&amp;package=jre&amp;version=17</downloadUrl>
+                            <messages>
+                                <!-- launch4j appends " 17" (the minimum version) to this text. -->
+                                <jreVersionErr>Forge needs Java 17 or newer. Click OK to open the download page. Minimum version:</jreVersionErr>
+                            </messages>
                             <icon>src/main/config/forge-adventure.ico</icon>
                             <jre>
                                 <minVersion>17</minVersion>
-                                <requiresJdk>true</requiresJdk>
+                                <requiresJdk>false</requiresJdk>
                                 <maxHeapSize>4096</maxHeapSize>
                                 <opts>
                                     <opt>${mandatory.java.args}</opt>
