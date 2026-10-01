@@ -109,7 +109,7 @@ public class ZipUtil {
                 }
 
                 if (!isClassic)
-                    val.append(" * "). append(newFile.getName()).append("\n");
+                    val.append(" * ").append(newFile.getParentFile().getName()).append("\\").append(newFile.getName()).append("\n");
                 // write file content
                 try(FileOutputStream fos = new FileOutputStream(newFile)) {
                     int len;

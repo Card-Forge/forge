@@ -141,8 +141,8 @@ public class StartScene extends UIScene {
         }
         if (backupDialog == null) {
             backupDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblData"),
-                    null, Forge.getLocalizer().getMessage("lblBackup"),
-                    Forge.getLocalizer().getMessage("lblRestore"),
+                null, Forge.getLocalizer().getMessage("lblBackup"),
+                Forge.getLocalizer().getMessage("lblRestore"),
                     () -> {
                         removeDialog();
                         Timer.schedule(new Timer.Task() {
@@ -160,7 +160,7 @@ public class StartScene extends UIScene {
                                 restoreBackup();
                             }
                         }, 0.2f);
-                    }, true, Forge.getLocalizer().getMessage("lblCancel"));
+                    }, true, Forge.getLocalizer().getMessage("lblCancel"), false);
         }
         showDialog(backupDialog);
         return true;
@@ -181,15 +181,15 @@ public class StartScene extends UIScene {
 
             if (targetFile.exists() && ZipUtil.isValidZip(targetFile)) {
                 zipDialog = createGenericDialog("",
-                        Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + targetFile.getAbsolutePath(),
-                        Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                    Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + targetFile.getAbsolutePath(),
+                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
             } else {
                 throw new IOException("Backup verification failed. The generated file is corrupted.");
             }
         } catch (IOException e) {
             zipDialog = createGenericDialog("",
-                    Forge.getLocalizer().getMessage("lblErrorSavingFile") + "\n\n" + e.getMessage(),
-                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                Forge.getLocalizer().getMessage("lblErrorSavingFile") + "\n\n" + e.getMessage(),
+                Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
         } finally {
             showDialog(zipDialog);
         }
@@ -204,8 +204,8 @@ public class StartScene extends UIScene {
 
         if (files == null || files.length == 0) {
             zipDialog = createGenericDialog("",
-                    Forge.getLocalizer().getMessageorUseDefault("lblNoBackupsFound", "No backups found!"),
-                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                Forge.getLocalizer().getMessageorUseDefault("lblNoBackupsFound", "No backups found!"),
+                Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
             showDialog(zipDialog);
             return false;
         }
@@ -231,8 +231,8 @@ public class StartScene extends UIScene {
 
                     if (!ZipUtil.isValidZip(source)) {
                         zipDialog = createGenericDialog("",
-                                Forge.getLocalizer().getMessageorUseDefault("lblCorruptedBackupError", "Corrupted Backup!"),
-                                Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                            Forge.getLocalizer().getMessageorUseDefault("lblCorruptedBackupError", "Corrupted Backup!"),
+                            Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
                         showDialog(zipDialog);
                         return;
                     }
@@ -240,19 +240,20 @@ public class StartScene extends UIScene {
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
-                            try {
-                                extract(source, target);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                        try {
+                            extract(source, target);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         }
                     }, 0.1f);
                 },
-                this::removeDialog
+                this::removeDialog, false, "", true
         );
 
-        unzipDialog.getContentTable().row().pad(10);
-        unzipDialog.getContentTable().add(backupSelectBox).width(320).left();
+        //unzipDialog.getContentTable().row().pad(10);
+        unzipDialog.getContentTable().row();
+        unzipDialog.getContentTable().add(backupSelectBox).width(150).pad(5).center();
         unzipDialog.pack();
 
         showDialog(unzipDialog);
@@ -260,14 +261,14 @@ public class StartScene extends UIScene {
     }
     public boolean extract(File source, File target) {
         String title = "", val = "";
-        boolean isError = false;
+        //boolean isError = false;
 
         try {
             val = Forge.getLocalizer().getMessage("lblFiles") + ":\n" + ZipUtil.unzip(source, target);
         } catch (IOException e) {
             title = Forge.getLocalizer().getMessage("lblError");
             val = e.getMessage();
-            isError = true;
+            //isError = true;
         } finally {
             Config.instance().getSettingData().lastActiveSave = null;
             Config.instance().saveSettings();
@@ -287,8 +288,8 @@ public class StartScene extends UIScene {
 
             //resultsDialog.getContentTable().row().pad(10);
 
-            float dialogWidth = isError ? 200f : 250f;
-            float dialogHeight = isError ? 150f : 200f;
+            float dialogWidth = Forge.isLandscapeMode() ? 150f : 100f;
+            float dialogHeight = Forge.isLandscapeMode() ? 100f : 150f;
 
             resultsDialog.getContentTable().add(scrollPane).width(dialogWidth).height(dialogHeight).expand().fill();
             resultsDialog.pack();
