@@ -346,6 +346,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static DeckEditorConfig EditorConfigTinyLeaders = new GameTypeDeckEditorConfig(GameType.TinyLeaders,
             new FileDeckController<>(FModel.getDecks().getTinyLeaders(), Deck::new, DeckPreferences::setTinyLeadersDeck))
             .setCardFilter(DeckFormat.TinyLeaders.isLegalCardPredicate());
+    public static DeckEditorConfig EditorConfigDuelCommander = new GameTypeDeckEditorConfig(GameType.DuelCommander,
+            new FileDeckController<>(FModel.getDecks().getDuelCommander(), Deck::new, DeckPreferences::setDuelCommanderDeck))
+            .setCardFilter(DeckFormat.DuelCommander.isLegalCardPredicate());
 
     public static DeckEditorConfig EditorConfigBrawl = new GameTypeDeckEditorConfig(GameType.Brawl,
             new FileDeckController<>(FModel.getDecks().getBrawl(), Deck::new, DeckPreferences::setBrawlDeck))
