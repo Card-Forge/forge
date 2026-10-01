@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ AttackTrigger | AddSVar$ TrigTapUnTap | Description$ Enchanted creature has "Whenever this creature attacks, you may tap or untap target permanent."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddTrigger$ AttackTrigger | AddSVar$ TrigTapUnTap | Description$ Enchanted creature has "Whenever this creature attacks, you may tap or untap target permanent."
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTapUnTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, you may tap or untap target permanent.
 SVar:TrigTapUnTap:DB$ TapOrUntap | ValidTgts$ Permanent
 AI:RemoveDeck:All

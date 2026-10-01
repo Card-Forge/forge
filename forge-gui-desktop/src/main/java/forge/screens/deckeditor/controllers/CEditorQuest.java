@@ -226,7 +226,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
      */
     @Override
     protected void buildRemoveContextMenu(final EditorContextMenuBuilder cmb) {
-        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode, false);
+        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode, gameType, false);
         AddRatingItem(cmb, 1);
         AddRatingItem(cmb, 2);
         AddRatingItem(cmb, 3);

@@ -1,0 +1,10 @@
+Name:Saheeli, Jewel of Avishkar
+ManaCost:2 U R
+Types:Legendary Creature Human Artificer
+PT:2/4
+S:Mode$ Continuous | Affected$ Thopter.YouCtrl | AddKeyword$ Haste | Description$ Thopters you control have haste.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery|Thopter
+Oracle:Thopters you control have haste.\nWhenever you cast a noncreature spell, create a 1/1 colorless Thopter artifact creature token with flying.

@@ -56,6 +56,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Planeswalker(true, "planeswalkers", "lblPlaneswalker"),
         Scheme(false, "schemes", "lblScheme"),
         Sorcery(false, "sorceries", "lblSorcery"),
+        Stickers(false, "stickers", "lblStickers"),
         Vanguard(false, "vanguards", "lblVanguard");
 
         public final boolean isPermanent;
@@ -90,6 +91,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             case Plane, Phenomenon -> GamePieceType.PLANAR;
             case Scheme -> GamePieceType.SCHEME;
             case Dungeon -> GamePieceType.DUNGEON;
+            case Stickers -> GamePieceType.STICKER_SHEET;
             case Vanguard -> GamePieceType.AVATAR;
             default -> GamePieceType.CARD;
             };
@@ -325,6 +327,19 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
+    public Set<String> getPlaneswalkerTypes() {
+        final Set<String> walkerTypes = Sets.newLinkedHashSet();
+        if (isPlaneswalker()) {
+            for (final String t : subtypes) {
+                if (isAPlaneswalkerType(t)) {
+                    walkerTypes.add(t);
+                }
+            }
+        }
+        return walkerTypes;
+    }
+
+    @Override
     public Set<String> getLandTypes() {
         final Set<String> landTypes = Sets.newLinkedHashSet();
         if (isLand()) {
@@ -539,6 +554,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public boolean isDungeon() {
         return coreTypes.contains(CoreType.Dungeon);
+    }
+
+    @Override
+    public boolean isStickers() {
+        return coreTypes.contains(CoreType.Stickers);
     }
 
     @Override

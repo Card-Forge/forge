@@ -30,8 +30,8 @@ import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.SuggestionType;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
-import forge.gamemodes.net.server.FServerManager;
-import forge.gamemodes.net.server.FServerManager.AfkTimeout;
+import forge.gamemodes.net.server.HostingServer;
+import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.util.collect.FCollectionView;
 import forge.model.FModel;
@@ -72,10 +72,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     public void showAndWait() {
-        final FServerManager server = FServerManager.getInstance();
-        final AfkTimeout timeout = server != null
-                ? server.armAfkTimeout(getController(), this)
-                : AfkTimeout.NOOP;
+        final AfkTimeout timeout = HostingServer.armAfkTimeout(getController(), this);
         try {
             super.showAndWait();
         } finally {
@@ -86,7 +83,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        if (!isAlreadyYielding()) {
+        if (!getController().isMacroActive() && !isAlreadyYielding()) {
             // Suppress one prompt after a yield ends — avoids "yielded → ended → yield again?" loop
             if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_AFTER_END)
                     && getController().getYieldController().didYieldJustEnd()) {

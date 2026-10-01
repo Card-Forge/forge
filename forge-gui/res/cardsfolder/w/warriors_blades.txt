@@ -1,0 +1,10 @@
+Name:Warrior's Blades
+ManaCost:2 R W
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Equipment enters, it deals 3 damage to any target and you gain 3 life.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 2 | AddToughness$ 1 | Description$ Equipped creature gets +2/+1.
+K:Equip:3:::ReduceCost$ X:This ability costs {1} less to activate for each +1/+1 counter on the creature it targets
+SVar:X:Targeted$CardCounters.P1P1
+Oracle:When this Equipment enters, it deals 3 damage to any target and you gain 3 life.\nEquipped creature gets +2/+1.\nEquip {3}. This ability costs {1} less to activate for each +1/+1 counter on the creature it targets.

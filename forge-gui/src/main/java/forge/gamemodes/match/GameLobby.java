@@ -205,20 +205,18 @@ public abstract class GameLobby implements IHasGameType {
         return FModel.getPreferences().getPref(FPref.PLAYER_NAME);
     }
     protected final static int[] localAvatarIndices() {
-        final String[] sAvatars = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        final int[] result = new int[sAvatars.length];
-        for (int i = 0; i < sAvatars.length; i++) {
-            final Integer val = Ints.tryParse(sAvatars[i]);
-            result[i] = val == null ? -1 : val;
-        }
-        return result;
+        return localIndices(FPref.UI_AVATARS);
     }
     protected final static int[] localSleeveIndices() {
-        final String[] sSleeves = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
-        final int[] result = new int[sSleeves.length];
-        for (int i = 0; i < sSleeves.length; i++) {
-            final Integer val = Ints.tryParse(sSleeves[i]);
-            result[i] = val == null ? -1 : val;
+        return localIndices(FPref.UI_SLEEVES);
+    }
+    /** Falls back to the seat's own index, as {@link #addSlot()} does, where a stored value is missing or invalid. */
+    private static int[] localIndices(final FPref pref) {
+        final String[] stored = FModel.getPreferences().getPref(pref).split(",");
+        final int[] result = new int[stored.length];
+        for (int i = 0; i < stored.length; i++) {
+            final Integer val = Ints.tryParse(stored[i]);
+            result[i] = val == null || val < 0 ? i : val;
         }
         return result;
     }

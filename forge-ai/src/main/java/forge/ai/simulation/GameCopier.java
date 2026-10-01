@@ -227,7 +227,6 @@ public class GameCopier {
         newGame.dangerouslySyncCardIdCounters(origGame);
         newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
         newGame.AI_TIMEOUT = origGame.AI_TIMEOUT;
-        newGame.AI_CAN_USE_TIMEOUT = origGame.AI_CAN_USE_TIMEOUT;
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn

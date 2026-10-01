@@ -3,5 +3,5 @@ ManaCost:1 U U
 Types:Enchantment Aura
 K:Enchant:Creature.cmcLE2:creature with mana value 2 or less
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | GainControl$ You | Description$ You control enchanted creature.
 Oracle:Enchant creature with mana value 2 or less\nYou control enchanted creature.

@@ -1,0 +1,8 @@
+Name:Verdant Kraken
+ManaCost:4 G G G
+Types:Creature Plant Kraken
+PT:6/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has "{T}: Add {G}." It's affected by summoning sickness until your next turn.)
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_3_forest_tentacle | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has "{T}: Add {G}." It's affected by summoning sickness until your next turn.)

@@ -3,5 +3,5 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying & First Strike & Vigilance | Description$ Enchanted creature has flying, first strike, and vigilance.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Flying & First Strike & Vigilance | Description$ Enchanted creature has flying, first strike, and vigilance.
 Oracle:Enchant creature\nEnchanted creature has flying, first strike, and vigilance.

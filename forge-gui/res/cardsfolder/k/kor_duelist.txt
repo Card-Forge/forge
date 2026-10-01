@@ -2,6 +2,6 @@ Name:Kor Duelist
 ManaCost:W
 Types:Creature Kor Soldier
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ Double Strike | Description$ As long as CARDNAME is equipped, it has double strike. (It deals both first-strike and regular combat damage.)
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.equipped | AddKeyword$ Double Strike | Description$ As long as CARDNAME is equipped, it has double strike. (It deals both first-strike and regular combat damage.)
 SVar:EquipMe:Once
 Oracle:As long as Kor Duelist is equipped, it has double strike. (It deals both first-strike and regular combat damage.)

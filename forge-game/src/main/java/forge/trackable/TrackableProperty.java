@@ -197,6 +197,8 @@ public enum TrackableProperty {
     AttractionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     ContraptionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Junkyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    StickerSheets(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Stickers(TrackableTypes.StringType),
 
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
 
@@ -213,9 +215,6 @@ public enum TrackableProperty {
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
     SA_IsSpell(TrackableTypes.BooleanType),
-
-    //HasBackSide
-    HasBackSide(TrackableTypes.BooleanType),
 
     //StackItem
     Key(TrackableTypes.StringType),

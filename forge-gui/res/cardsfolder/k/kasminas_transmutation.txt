@@ -3,5 +3,5 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | Description$ Enchanted creature loses all abilities and has base power and toughness 1/1.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | Description$ Enchanted creature loses all abilities and has base power and toughness 1/1.
 Oracle:Enchant creature\nEnchanted creature loses all abilities and has base power and toughness 1/1.

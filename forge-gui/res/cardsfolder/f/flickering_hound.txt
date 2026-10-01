@@ -1,0 +1,9 @@
+Name:Flickering Hound
+ManaCost:3 W
+Types:Creature Dog
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, exile up to one other target creature you control, then return that card to the battlefield under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | TargetMin$ 0 | TargetMax$ 1 | RememberTargets$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you cast a creature spell, exile up to one other target creature you control, then return that card to the battlefield under its owner's control.

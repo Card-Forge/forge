@@ -402,9 +402,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     g.drawText(display, font, color, x, y, w, h, false, Align.right, false);
                 }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
+        /*lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
             Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
-            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);
+            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);*/ //
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
             Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
             Forge.getLocalizer().getMessage("nlLoadArchivedFormats")), 3);
@@ -669,9 +669,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
             Forge.getLocalizer().getMessage("lblShowAbilityIconsOverlays"),
             Forge.getLocalizer().getMessage("nlShowAbilityIconsOverlays")), 5);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-            Forge.getLocalizer().getMessage("lblUseLaserArrows"),
-            Forge.getLocalizer().getMessage("nlUseLaserArrows")), 5);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ARROW_OPTION,
+            Forge.getLocalizer().getMessage("lblLaserArrowsOption"),
+            Forge.getLocalizer().getMessage("nlLaserArrowsOption"),
+            new String[] { "Default", "Point", "Line" }), 5);
 
         // VIBRATION OPTIONS TAB
         Map<String, String> intensityOptions = new LinkedHashMap<>();
