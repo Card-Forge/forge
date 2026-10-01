@@ -3255,6 +3255,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             // Duel Commander 404.1-404.4: once one of your commanders has been cast from the command zone, the others
             // can't be cast from there this game. They can still be cast from any other zone (Command Beacon).
             castableCommander += "+NoOtherCommanderCastFromCommandZone";
+            getView().updateCommandZoneCastLock(true);
         }
         String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ " + castableCommander + " | AffectedZone$ Command";
         if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana

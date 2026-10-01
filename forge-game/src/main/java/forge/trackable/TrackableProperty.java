@@ -180,6 +180,7 @@ public enum TrackableProperty {
     AdditionalVillainousChoices(TrackableTypes.IntegerType),
     Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     CommanderCast(TrackableTypes.IntegerMapType),
+    CommandZoneCastLock(TrackableTypes.BooleanType),
     CommanderDamage(TrackableTypes.IntegerMapType),
     MindSlaveMaster(TrackableTypes.PlayerViewType),
 
