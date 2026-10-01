@@ -1,0 +1,18 @@
+Name:Misunderstood Trapeze Elf
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Misunderstood
+SVar:STK2:Kind$ Name | Word$ Trapeze
+SVar:STK3:Kind$ Name | Word$ Elf
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever you cast a spell, this creature gets +X/+X until end of turn, where X is the amount of generic mana in that spell's mana cost. | Triggers$ STK7Cast
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Hexproof | Keywords$ Hexproof
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 2
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 6 | Toughness$ 6
+SVar:STK7Cast:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ STK7Pump | TriggerDescription$ Whenever you cast a spell, this creature gets +X/+X until end of turn, where X is the amount of generic mana in that spell's mana cost.
+SVar:STK7Pump:DB$ Pump | Defined$ Self | NumAtt$ +STK7X | NumDef$ +STK7X
+SVar:STK7X:Count$TriggeredManaCostGeneric
+Oracle:{TK}{TK} — Whenever you cast a spell, this creature gets +X/+X until end of turn, where X is the amount of generic mana in that spell's mana cost.\n{TK}{TK}{TK} — Hexproof\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK} — 6/6

@@ -1,0 +1,8 @@
+Name:Bioluminary
+ManaCost:2 U
+Types:Creature Merfolk Performer
+PT:1/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTicket | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you get {TK}{TK}, then you may put a sticker on a nonland permanent you own.
+SVar:TrigTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 2 | SubAbility$ DBSticker
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+Oracle:Whenever Bioluminary deals combat damage to a player, you get {TK}{TK}, then you may put a sticker on a nonland permanent you own.

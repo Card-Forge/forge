@@ -265,6 +265,10 @@ public class GameAction {
             if (c.hasPerpetual()) {
                 copied.setPerpetual(c);
             }
+            // CR 123.5
+            if (c.isStickered() && !zoneTo.getZoneType().isHidden()) {
+                copied.setStickers(c);
+            }
         }
 
         // ensure that any leftover keyword/type changes are cleared in the state view
@@ -405,6 +409,15 @@ public class GameAction {
             }
             cards.set(cards.indexOf(copied), c);
             mergedCards = cards;
+            // CR 123.5c
+            if (copied.isStickered()) {
+                CardCollection options = new CardCollection(cards);
+                options.set(options.indexOf(c), copied);
+                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(options);
+                if (keeper != null && keeper != copied) {
+                    keeper.takeStickersFrom(copied);
+                }
+            }
             if (cause != null) {
                 // Replace sa targeting cards
                 final SpellAbility saTargeting = cause.getSATargetingCard();
@@ -578,6 +591,10 @@ public class GameAction {
             c.cleanupExiledWith();
         }
 
+        if (c.isStickered() || copied.isStickered()) {
+            Card.refreshSheetViews(copied.getOwner());
+        }
+
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
@@ -637,7 +654,13 @@ public class GameAction {
                     // Ask controller if it wants to be on top or bottom of other meld.
                     unmeldPosition++;
                 }
+                // CR 123.5c
+                boolean unmeldKeepsStickers = copied.isStickered() && c.getOwner().getController()
+                        .chooseCardToKeepStickers(new CardCollection(List.of(copied, unmeld))) == unmeld;
                 unmeld = changeZone(null, zoneTo, unmeld, position, cause, params);
+                if (unmeldKeepsStickers && unmeld != null) {
+                    unmeld.takeStickersFrom(copied);
+                }
                 storeChangesZoneAll(unmeld, zoneFrom, zoneTo, params);
             }
         } else if (toBattlefield) {
