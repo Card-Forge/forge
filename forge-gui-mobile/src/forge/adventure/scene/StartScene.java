@@ -2,8 +2,12 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
@@ -21,6 +25,9 @@ import forge.util.ZipUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * First scene after the splash screen
@@ -134,8 +141,8 @@ public class StartScene extends UIScene {
         }
         if (backupDialog == null) {
             backupDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblData"),
-                    null, Forge.getLocalizer().getMessage("lblBackup"),
-                    Forge.getLocalizer().getMessage("lblRestore"),
+                null, Forge.getLocalizer().getMessage("lblBackup"),
+                Forge.getLocalizer().getMessage("lblRestore"),
                     () -> {
                         removeDialog();
                         Timer.schedule(new Timer.Task() {
@@ -153,60 +160,141 @@ public class StartScene extends UIScene {
                                 restoreBackup();
                             }
                         }, 0.2f);
-                    }, true, Forge.getLocalizer().getMessage("lblCancel"));
+                    }, true, Forge.getLocalizer().getMessage("lblCancel"), false);
         }
         showDialog(backupDialog);
         return true;
     }
+    private final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yyMMdd_HHmmss");
+    private final SelectBox<String> backupSelectBox = Controls.newComboBox();
+    private final Array<String> fileNames = new Array<>();
     public boolean generateBackup() {
         try {
-            File source = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/Shandalar").file();
-            File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-            ZipUtil.zip(source, target, ZipUtil.backupAdvFile);
-            zipDialog = createGenericDialog("",
-                    Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupAdvFile,
+            File source = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file();
+            File targetDir = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+
+            String baseName = ZipUtil.backupAdvFile.replace(".adv", "");
+            String timestampedFileName = baseName + "_" + TIMESTAMP_FORMAT.format(new Date()) + ".adv";
+            File targetFile = new File(targetDir, timestampedFileName);
+
+            ZipUtil.zip(source, targetDir, timestampedFileName);
+
+            if (targetFile.exists() && ZipUtil.isValidZip(targetFile)) {
+                zipDialog = createGenericDialog("",
+                    Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + targetFile.getAbsolutePath(),
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+            } else {
+                throw new IOException("Backup verification failed. The generated file is corrupted.");
+            }
         } catch (IOException e) {
             zipDialog = createGenericDialog("",
-                    Forge.getLocalizer().getMessage("lblErrorSavingFile") + "\n\n" + e.getMessage(),
-                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                Forge.getLocalizer().getMessage("lblErrorSavingFile") + "\n\n" + e.getMessage(),
+                Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
         } finally {
             showDialog(zipDialog);
         }
         return true;
     }
     public boolean restoreBackup() {
-        File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupAdvFile).file();
-        File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/Shandalar").file().getParentFile();
-        if (unzipDialog == null) {
-            unzipDialog = createGenericDialog("",
-                    Forge.getLocalizer().getMessage("lblDoYouWantToRestoreBackup"),
-                    Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"),
-                    () -> {
-                        removeDialog();
-                        Timer.schedule(new Timer.Task() {
-                            @Override
-                            public void run() {
-                                extract(source, target);
-                            }
-                        }, 0.2f);
-                    }, this::removeDialog);
+        File downloadDir = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+
+        String prefixPattern = ZipUtil.backupAdvFile.replace(".adv", "");
+
+        File[] files = downloadDir.listFiles((dir, name) -> name.startsWith(prefixPattern) && name.endsWith(".adv"));
+
+        if (files == null || files.length == 0) {
+            zipDialog = createGenericDialog("",
+                Forge.getLocalizer().getMessageorUseDefault("lblNoBackupsFound", "No backups found!"),
+                Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+            showDialog(zipDialog);
+            return false;
         }
+
+        Arrays.sort(files, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
+
+        fileNames.clear();
+        for (File file : files) {
+            fileNames.add(file.getName());
+        }
+        backupSelectBox.clearItems();
+        backupSelectBox.setItems(fileNames);
+
+        unzipDialog = createGenericDialog("",
+                Forge.getLocalizer().getMessage("lblDoYouWantToRestoreBackup"),
+                Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"),
+                () -> {
+                    String selectedName = backupSelectBox.getSelected(); // Resolves selected string target layout
+                    File source = new File(downloadDir, selectedName);
+                    File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure").file().getParentFile();
+
+                    removeDialog();
+
+                    if (!ZipUtil.isValidZip(source)) {
+                        zipDialog = createGenericDialog("",
+                            Forge.getLocalizer().getMessageorUseDefault("lblCorruptedBackupError", "Corrupted Backup!"),
+                            Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+                        showDialog(zipDialog);
+                        return;
+                    }
+
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                        try {
+                            extract(source, target);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        }
+                    }, 0.1f);
+                },
+                this::removeDialog, false, "", true
+        );
+
+        //unzipDialog.getContentTable().row().pad(10);
+        unzipDialog.getContentTable().row();
+        unzipDialog.getContentTable().add(backupSelectBox).width(150).pad(5).center();
+        unzipDialog.pack();
+
         showDialog(unzipDialog);
         return true;
     }
     public boolean extract(File source, File target) {
         String title = "", val = "";
+        //boolean isError = false;
+
         try {
             val = Forge.getLocalizer().getMessage("lblFiles") + ":\n" + ZipUtil.unzip(source, target);
         } catch (IOException e) {
             title = Forge.getLocalizer().getMessage("lblError");
             val = e.getMessage();
+            //isError = true;
         } finally {
             Config.instance().getSettingData().lastActiveSave = null;
             Config.instance().saveSettings();
-            showDialog(createGenericDialog(title, val,
-                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
+
+            TextraLabel messageLabel = Controls.newTextraLabel(val);
+            messageLabel.setWrap(true);
+
+            ScrollPane scrollPane = new ScrollPane(messageLabel);
+            scrollPane.setFadeScrollBars(false);
+
+            var resultsDialog = createGenericDialog(title, "",
+                Forge.getLocalizer().getMessage("lblOK"), null, () -> {
+                    messageLabel.remove();
+                    scrollPane.remove();
+                    removeDialog();
+                }, null);
+
+            //resultsDialog.getContentTable().row().pad(10);
+
+            float dialogWidth = Forge.isLandscapeMode() ? 150f : 100f;
+            float dialogHeight = Forge.isLandscapeMode() ? 100f : 150f;
+
+            resultsDialog.getContentTable().add(scrollPane).width(dialogWidth).height(dialogHeight).expand().fill();
+            resultsDialog.pack();
+
+            showDialog(resultsDialog);
         }
         return true;
     }

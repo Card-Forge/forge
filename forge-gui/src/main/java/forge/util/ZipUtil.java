@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
@@ -108,7 +109,7 @@ public class ZipUtil {
                 }
 
                 if (!isClassic)
-                    val.append(" * "). append(newFile.getName()).append("\n");
+                    val.append(" * ").append(newFile.getParentFile().getName()).append("\\").append(newFile.getName()).append("\n");
                 // write file content
                 try(FileOutputStream fos = new FileOutputStream(newFile)) {
                     int len;
@@ -136,5 +137,17 @@ public class ZipUtil {
         }
 
         return destFile;
+    }
+
+    public static boolean isValidZip(File file) {
+        try (ZipFile zipFile = new ZipFile(file)) {
+            var entries = zipFile.entries();
+            while (entries.hasMoreElements()) {
+                entries.nextElement();
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
