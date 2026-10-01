@@ -96,14 +96,14 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
-    // Cards with an AICurseEffect SVar, scanned once per AI decision loop (per thread) instead of once per evaluated SA
-    private final ThreadLocal<CardCollectionView> curseCards = new ThreadLocal<>();
+    private List<SpellAbility> scratchList;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(player);
+        scratchList = new ArrayList<>();
     }
 
     public boolean usesHybridSimulation() {
@@ -182,25 +182,8 @@ public class AiController {
     }
 
     // look for cards on the battlefield that should prevent the AI from using that spellability
-    private CardCollectionView findCurseCards() {
-        return CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("AICurseEffect"));
-    }
-
-    // Runs body with the curse-card scan done once, rather than once per evaluated SpellAbility.
-    private <T> T withCurseCache(final Callable<T> body) throws Exception {
-        curseCards.set(findCurseCards());
-        try {
-            return body.call();
-        } finally {
-            curseCards.remove();
-        }
-    }
-
     private boolean checkCurseEffects(final SpellAbility sa) {
-        CardCollectionView ccvGameBattlefield = curseCards.get();
-        if (ccvGameBattlefield == null) { // not inside a decision loop: scan directly
-            ccvGameBattlefield = findCurseCards();
-        }
+        CardCollectionView ccvGameBattlefield = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("AICurseEffect"));
         for (final Card c : ccvGameBattlefield) {
             final String curse = c.getSVar("AICurseEffect");
             final Card host = sa.getHostCard();
@@ -720,7 +703,7 @@ public class AiController {
             return null;
         }
         // guarded like the normal evaluation path, so a slow counterspell check can't hang the game thread
-        return callWithAITimeout(() -> withCurseCache(() -> {
+        return callWithAITimeout(() -> {
             SpellAbility bestSA = null;
             int bestRestriction = Integer.MIN_VALUE;
 
@@ -744,7 +727,7 @@ public class AiController {
             // TODO - "Look" at Targeted SA and "calculate" the threshold
             // if (bestRestriction < targetedThreshold) return false;
             return bestSA;
-        }));
+        });
     }
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
@@ -1605,13 +1588,13 @@ public class AiController {
             return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
         //removed skipped SA
-        List<SpellAbility> list = new ArrayList<>();
+        scratchList.clear();
         for (SpellAbility spellAbility : saList) {
             if (spellAbility.isSkip()) {
-                list.add(spellAbility);
+                scratchList.add(spellAbility);
             }
         }
-        skipped = list;
+        skipped = scratchList;
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
         //update LivingEndPlayer
@@ -1639,7 +1622,7 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        return callWithAITimeout(() -> withCurseCache(() -> {
+        return callWithAITimeout(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1719,7 +1702,7 @@ public class AiController {
             }
 
             return null;
-        }));
+        });
     }
 
     /**
