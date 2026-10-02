@@ -143,8 +143,12 @@ public class WorldBackground extends Actor {
         // Free chunks that left the keep area (sprites + texture).
         for (int x = keepMinX; x <= keepMaxX; x++) {
             for (int y = keepMinY; y <= keepMaxY; y++) {
-                if (x < nKeepMinX || x > nKeepMaxX || y < nKeepMinY || y > nKeepMaxY)
-                    unLoadChunk(x, y);
+                // Bounds guard against previous track state drift before checking boundaries
+                if (x >= 0 && x <= maxX && y >= 0 && y <= maxY) {
+                    if (x < nKeepMinX || x > nKeepMaxX || y < nKeepMinY || y > nKeepMaxY) {
+                        unLoadChunk(x, y);
+                    }
+                }
             }
         }
 
@@ -245,7 +249,6 @@ public class WorldBackground extends Actor {
         buildsThisFrame++;
         return newChunk;
     }
-
     /** 1x1 gray texture, stretched when drawn. */
     private Texture getPlaceholder() {
         if (loadingTexture == null) {
@@ -257,49 +260,51 @@ public class WorldBackground extends Actor {
         }
         return loadingTexture;
     }
-
     @SuppressWarnings("unchecked")
     public void initialize() {
-        // sizes first, so they are valid even if something below fails
         World world = WorldSave.getCurrentSave().getWorld();
         tileSize = world.getTileSize();
         chunkSize = world.getChunkSize();
-
         if (chunks != null) {
             stage.getSpriteGroup().clear();
             stage.getBackgroundSprites().clear();
             disposeChunkTextures();
         }
-        final int width = world.getWidthInTiles();
-        final int height = world.getHeightInTiles();
-        chunks = new Texture[width][height];
-        chunksSprites = new Array[width][height];
-        chunksSpritesBackground = new Array[width][height];
-        chunkLoaded = new boolean[width][height];
-
+        // Determine array sizes based on Total Chunks instead of Total Tiles to match rendering coordinates
+        final int widthInChunks = (int) Math.ceil((double) world.getWidthInTiles() / chunkSize);
+        final int heightInChunks = (int) Math.ceil((double) world.getHeightInTiles() / chunkSize);
+        chunks = new Texture[widthInChunks][heightInChunks];
+        chunksSprites = new Array[widthInChunks][heightInChunks];
+        chunksSpritesBackground = new Array[widthInChunks][heightInChunks];
+        chunkLoaded = new boolean[widthInChunks][heightInChunks];
         keepMinX = Integer.MAX_VALUE;
         keepMaxX = Integer.MIN_VALUE;
         keepMinY = Integer.MAX_VALUE;
         keepMaxY = Integer.MIN_VALUE;
         buildAll = true;
-
+        // Establish the player's initial grid coordinate position before processing the spawn load rings
+        GridPoint2 playerChunk = translateFromWorldToChunk(playerX, playerY);
+        currentChunkX = playerChunk.x;
+        currentChunkY = playerChunk.y;
+        // Load initialization chunk block with out-of-bounds array safety checks
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
-                loadChunk(currentChunkX + x, currentChunkY + y); // ignores out of range chunks
+                int targetX = currentChunkX + x;
+                int targetY = currentChunkY + y;
+                if (targetX >= 0 && targetX < widthInChunks && targetY >= 0 && targetY < heightInChunks) {
+                    loadChunk(targetX, targetY);
+                }
             }
         }
     }
-
     @Override
     public void clear() {
         super.clear();
         initialize();
     }
-
     int transChunkToWorld(int xy) {
         return xy * tileSize * chunkSize;
     }
-
     GridPoint2 translateFromWorldToChunk(float x, float y) {
         if (chunkSize <= 0 || tileSize <= 0) {
             World world = WorldSave.getCurrentSave().getWorld();
@@ -314,13 +319,10 @@ public class WorldBackground extends Actor {
         playerChunkPos.set((int) worldWidthTiles / chunkSize, (int) worldHeightTiles / chunkSize);
         return playerChunkPos;
     }
-
     public void setPlayerPos(float x, float y) {
-
         playerX = (int) x;
         playerY = (int) y;
     }
-
     private void disposeChunkTextures() {
         if (chunks == null)
             return;
@@ -333,7 +335,6 @@ public class WorldBackground extends Actor {
             }
         }
     }
-
     public void dispose() {
         disposeChunkTextures();
         if (scratch != null) {
