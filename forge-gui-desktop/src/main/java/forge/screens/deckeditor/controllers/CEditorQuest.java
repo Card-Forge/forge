@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import javax.swing.KeyStroke;
 
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
@@ -119,17 +120,8 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
                 break;
         }
 
-        if (FModel.getQuest().getCards().getCardpool()
-                .find(attractionFilter()) != null) {
-            allSections.add(DeckSection.Attractions);
-        }
-
-        if (FModel.getQuest().getCards().getCardpool()
-                .find(contraptionFilter()) != null) {
-            allSections.add(DeckSection.Contraptions);
-        }
-
         this.questData = questData0;
+        createMissingVariantSections();
 
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, true, false);
         final CardManager deckManager = new CardManager(cDetailPicture0, false, true, false);
@@ -273,11 +265,15 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         // remove sideboard cards from the catalog
         cardpool.removeAll(getDeck().getOrCreate(DeckSection.Sideboard));
 
-        if (cardpool.find(attractionFilter()) != null) {
+        if (getDeck().has(DeckSection.Attractions)) {
             cardpool.removeAll(getDeck().getOrCreate(DeckSection.Attractions));
         }
 
-        if (cardpool.find(contraptionFilter()) != null) {
+        if (getDeck().has(DeckSection.Stickers)) {
+            cardpool.removeAll(getDeck().getOrCreate(DeckSection.Stickers));
+        }
+
+        if (getDeck().has(DeckSection.Contraptions)) {
             cardpool.removeAll(getDeck().getOrCreate(DeckSection.Contraptions));
         }
 
@@ -412,12 +408,20 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
                 break;
             case Attractions :
                 this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
-                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(attractionFilter()));
+                this.getCatalogManager().setPool(getRemainingCardPool()
+                        .getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)));
                 this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Attractions));
+                break;
+            case Stickers:
+                this.getCatalogManager().setup(ItemManagerConfig.STICKER_SHEET_POOL);
+                this.getCatalogManager().setPool(getRemainingCardPool()
+                        .getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)));
+                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Stickers));
                 break;
             case Contraptions :
                 this.getCatalogManager().setup(ItemManagerConfig.CONTRAPTION_POOL);
-                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(contraptionFilter()));
+                this.getCatalogManager().setPool(getRemainingCardPool()
+                        .getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)));
                 this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Contraptions));
                 break;
         }
@@ -448,6 +452,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
 
+        createMissingVariantSections();
         this.getCbxSection().removeAllItems();
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
@@ -496,15 +501,24 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         }
     }
 
+    public void createMissingVariantSections() {
+        if (!allSections.contains(DeckSection.Attractions) && questData.getCards().getCardpool()
+                .find(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)) != null) {
+            allSections.add(DeckSection.Attractions);
+        }
+
+        if (!allSections.contains(DeckSection.Stickers) && questData.getCards().getCardpool()
+                .find(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)) != null) {
+            allSections.add(DeckSection.Stickers);
+        }
+
+        if (!allSections.contains(DeckSection.Contraptions) && questData.getCards().getCardpool()
+                .find(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)) != null) {
+            allSections.add(DeckSection.Contraptions);
+        }
+    }
+
     private Predicate<PaperCard> mainCardsFilter() {
-        return c -> !c.getRules().isVariant();
-    }
-
-    private Predicate<PaperCard> attractionFilter() {
-        return c -> c.getRules().getType().isAttraction();
-    }
-
-    private Predicate<PaperCard> contraptionFilter() {
-        return c -> c.getRules().getType().isContraption();
+        return Predicate.not(PaperCardPredicates.fromRules(CardRules::isVariant));
     }
 }

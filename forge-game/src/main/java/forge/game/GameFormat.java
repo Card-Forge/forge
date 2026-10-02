@@ -19,7 +19,6 @@ package forge.game;
 
 import com.google.common.collect.Lists;
 import forge.StaticData;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.EditionEntry;
 import forge.card.CardRarity;

@@ -116,7 +116,8 @@ public final class BoosterUtils {
             filter = filter.and(formatStartingPool.getFilterPrinted());
         }
 
-        final List<PaperCard> cardPool = FModel.getQuest().getAllMainCards()
+        //only use main deck cards
+        final List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().streamAllCards()
                 .filter(filter).collect(Collectors.toList());
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {

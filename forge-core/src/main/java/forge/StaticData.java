@@ -1,6 +1,5 @@
 package forge;
 
-import com.google.common.collect.Iterables;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
