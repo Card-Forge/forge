@@ -85,6 +85,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             .selectable(true).align(Align.center)
             .icon(Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS).iconScaleFactor(0.9f)
             .build();
+    /** A line above the items, for text the player needs while the panel is in use. */
+    private final FLabel lblHint = new FLabel.Builder().font(FSkinFont.get(12)).align(Align.left).build();
 
     private final FComboBox<ItemColumn> cbxSortOptions;
 
@@ -122,6 +124,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(btnSearch);
         add(btnView);
         add(btnAdvancedSearchOptions);
+        lblHint.setVisible(false);
+        add(lblHint);
         btnAdvancedSearchOptions.setSelected(!hideFilters);
         if (allowSortChange()) {
             cbxSortOptions = add(new FComboBox<>(Forge.getLocalizer().getMessage("lblSort") + ": "));
@@ -374,6 +378,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             else
                 drawPortrait(this.filters.get(), helper, width, fieldHeight);
         }
+        if (lblHint.isVisible()) {
+            helper.fillLine(lblHint, fieldHeight);
+        }
         helper.fill(currentView.getScroller());
     }
 
@@ -470,6 +477,25 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void setCaption(String caption0) {
         searchFilter.setCaption(caption0);
+    }
+
+    /** Shows {@code hint} in {@code color} on its own line above the items, or hides the line when it is null or empty. */
+    public void setHint(String hint, FSkinColor color) {
+        lblHint.setText(hint == null ? "" : hint);
+        lblHint.setTextColor(color);
+        lblHint.setVisible(hint != null && !hint.isEmpty());
+        revalidate();
+    }
+
+    private Predicate<? super T> markerPredicate;
+
+    public void setMarkerPredicate(Predicate<? super T> predicate) {
+        this.markerPredicate = predicate;
+        Gdx.graphics.requestRendering();
+    }
+
+    public boolean isMarked(T item) {
+        return markerPredicate != null && markerPredicate.test(item);
     }
 
     public ItemPool<T> getPool() {

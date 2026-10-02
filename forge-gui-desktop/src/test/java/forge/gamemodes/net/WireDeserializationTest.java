@@ -1,5 +1,18 @@
 package forge.gamemodes.net;
 
+import forge.card.CardDb;
+import forge.gamemodes.limited.DraftAction;
+import forge.gamemodes.limited.DraftPrompt;
+import forge.gamemodes.net.event.DraftActivateEvent;
+import forge.gamemodes.net.event.DraftLogEvent;
+import forge.gamemodes.net.event.DraftPickEvent;
+import forge.gamemodes.net.event.DraftPromptEvent;
+import forge.gamemodes.net.event.DraftPromptResponseEvent;
+import forge.gamemodes.net.event.DraftSeatPickedEvent;
+import forge.gamemodes.net.event.DraftSeatStateEvent;
+import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.net.TestUtils;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,6 +27,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * F-01, at the stream rather than at the predicate.
@@ -68,6 +82,34 @@ public class WireDeserializationTest {
 
         final Object decoded = decode(encode(graph));
         Assert.assertEquals(decoded, graph, "Allowlisted traffic must still round-trip");
+    }
+
+    @Test
+    public void testDraftEventsRoundTrip() throws Exception {
+        TestUtils.ensureFModelInitialized();
+        CardDb cards = FModel.getMagicDb().getCommonCards();
+        DraftAction variant = DraftAction.pick(cards.getCard("Noble Banneret"), cards.getCard("Grizzly Bears"));
+        DraftSeatStateEvent state = new DraftSeatStateEvent(2, true, List.of(cards.getCard("Shock")), List.of(),
+                List.of(variant, DraftAction.pool(cards.getCard("Whispergear Sneak"))));
+        DraftSeatStateEvent stateBack = (DraftSeatStateEvent) decode(encode(state));
+        Assert.assertEquals(stateBack.getActions(), state.getActions());
+        Assert.assertEquals(stateBack.getPoolAdded(), state.getPoolAdded());
+
+        DraftPickEvent pickBack = (DraftPickEvent) decode(encode(
+                new DraftPickEvent(2, 7, cards.getCard("Grizzly Bears"), variant)));
+        Assert.assertEquals(pickBack.getVariant(), variant);
+
+        DraftPrompt prompt = DraftPrompt.text(2, "choose", List.of("white", "blue"), false).withPromptId(5);
+        Assert.assertEquals(((DraftPromptEvent) decode(encode(new DraftPromptEvent(prompt)))).getPrompt(), prompt);
+        Assert.assertEquals(((DraftPromptResponseEvent) decode(encode(
+                new DraftPromptResponseEvent(2, 5, List.of(1))))).getChosen(), List.of(1));
+        DraftLogEvent logBack = (DraftLogEvent) decode(encode(new DraftLogEvent(-1, "hello", cards.getCard("Shock"))));
+        Assert.assertEquals(logBack.getMessage(), "hello");
+        Assert.assertEquals(logBack.getCard(), cards.getCard("Shock"));
+        Assert.assertEquals(((DraftActivateEvent) decode(encode(new DraftActivateEvent(2, variant)))).getAction(), variant);
+        List<List<PaperCard>> faceUp = List.of(List.of(cards.getCard("Canal Dredger")));
+        Assert.assertEquals(((DraftSeatPickedEvent) decode(encode(
+                new DraftSeatPickedEvent(0, new int[] {1}, faceUp)))).getFaceUpBySeat(), faceUp);
     }
 
     /**
