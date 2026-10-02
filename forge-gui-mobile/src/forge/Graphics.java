@@ -47,6 +47,25 @@ public class Graphics implements Disposable {
     private int transformCount = 0;
     private boolean isDisposed = false;
     private static final float[] arrowVertices = new float[14];
+    private static final int CURVE_SEGMENTS = 30;
+    // arrow batching (see drawArrowBatch)
+    private boolean arrowBatchActive;
+    private int arrowPhase; // 0 = fills, 1 = primary lines, 2 = secondary lines
+    private boolean arrowNeedPhase2;
+    private boolean lineSmoothOn;
+    private float lineWidthNow = 1;
+    // scratch geometry for the curved arrow/pointer currently being drawn (screen coordinates)
+    private boolean caCurved, caHead;
+    private float caSx1, caSy1, caSx2, caSy2, caLX, caLY, caRX, caRY;
+    // scratch geometry for drawArrow
+    private float arTx1, arTy1, arTx2, arTy2;
+    private final float[] curvePts = new float[(CURVE_SEGMENTS + 1) * 2]; // screen-space bezier points, reused by the fill and stroke passes
+    // arrowhead wing directions never change, so compute them once (same expressions as before => identical values)
+    private static final float WING_SPREAD = (float) Math.toRadians(35);
+    private static final float WING_COS_L = (float) Math.cos(Math.PI - WING_SPREAD);
+    private static final float WING_SIN_L = (float) Math.sin(Math.PI - WING_SPREAD);
+    private static final float WING_COS_R = (float) Math.cos(Math.PI + WING_SPREAD);
+    private static final float WING_SIN_R = (float) Math.sin(Math.PI + WING_SPREAD);
     private static final Vector2 vectorAngleHelper1 = new Vector2();
     private static final Vector2 vectorAngleHelper2 = new Vector2();
     private static final Vector2 vectorAngleHelper3 = new Vector2();
@@ -354,7 +373,38 @@ public class Graphics implements Disposable {
     }
 
     public void drawLinePointer(float thickness, Color color, float x1, float y1, float x2, float y2) {
-        batch.end(); //must pause batch while rendering shapes
+        if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            boolean smooth = (x1 != x2 && y1 != y2);
+            switch (arrowPhase) {
+                case 0:
+                    arrowNeedPhase2 = true;
+                    shapeRenderer.setColor(color);
+                    shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness);
+                    shapeRenderer.setColor(Color.WHITE);
+                    shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
+                    break;
+                case 1:
+                    setLineStateBatched(smooth, thickness);
+                    shapeRenderer.setColor(color);
+                    shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+                    break;
+                default:
+                    // same width the un-batched version ends up with for its white line
+                    float lt = thickness / 3;
+                    setLineStateBatched(smooth, lt > 1 ? lt : thickness);
+                    shapeRenderer.setColor(Color.WHITE);
+                    shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+                    break;
+            }
+            return;
+        }
+        boolean wasDrawing = batch.isDrawing(); // false inside a shape session, where the batch is already paused
+        if (wasDrawing) {
+            batch.end();
+        } //must pause batch while rendering shapes
         float ct = thickness / 2;
         float lt = thickness / 3;
 
@@ -401,7 +451,9 @@ public class Graphics implements Disposable {
             Gdx.gl.glLineWidth(1);
         }
 
-        batch.begin();
+        if (wasDrawing) {
+            batch.begin();
+        }
     }
 
     public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
@@ -409,13 +461,9 @@ public class Graphics implements Disposable {
     }
 
     public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, Color color, float x1, float y1, float x2, float y2) {
-        batch.end(); // must pause batch while rendering shapes
-
         if (alphaComposite < 1) {
             color = fade(color, fadeA);
         }
-        Gdx.gl.glEnable(GL_BLEND);
-        Gdx.gl.glEnable(GL_LINE_SMOOTH);
 
         vectorAngleHelper1.set(x2 - x1, y2 - y1);
         float angle = vectorAngleHelper1.angleRad();
@@ -440,15 +488,32 @@ public class Graphics implements Disposable {
         index = addVertex(x1 + halfThickness * (float) Math.cos(angle + perpRotation), y1 + halfThickness * (float) Math.sin(angle + perpRotation), arrowVertices, index);
         index = addVertex(vectorAngleHelper2.x + arrowCornerLen * (float) Math.cos(angle - perpRotation), vectorAngleHelper2.y + arrowCornerLen * (float) Math.sin(angle - perpRotation), arrowVertices, index);
 
-        // draw arrow tail
-        startShape(ShapeType.Filled);
-        shapeRenderer.setColor(color);
-        shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
-                adjustX(x2 - arrowHeadLen * (float) Math.cos(angle)),
-                adjustY(y2 - arrowHeadLen * (float) Math.sin(angle), 0), arrowThickness);
+        // arrow tail endpoints (screen coordinates)
+        arTx1 = adjustX(x1);
+        arTy1 = adjustY(y1, 0);
+        arTx2 = adjustX(x2 - arrowHeadLen * (float) Math.cos(angle));
+        arTy2 = adjustY(y2 - arrowHeadLen * (float) Math.sin(angle), 0);
 
-        // draw arrow head
-        shapeRenderer.triangle(arrowVertices[0], arrowVertices[1], arrowVertices[2], arrowVertices[3], arrowVertices[4], arrowVertices[5]);
+        if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
+            if (arrowPhase == 0) {
+                arrowFill(color, arrowThickness);
+            } else if (arrowPhase == 1) {
+                setLineStateBatched(true, borderThickness);
+                arrowBorder();
+            }
+            return;
+        }
+
+        boolean wasDrawing = batch.isDrawing(); // false inside a shape session, where the batch is already paused
+        if (wasDrawing) {
+            batch.end(); // must pause batch while rendering shapes
+        }
+        Gdx.gl.glEnable(GL_BLEND);
+        Gdx.gl.glEnable(GL_LINE_SMOOTH);
+
+        // draw arrow tail and head
+        startShape(ShapeType.Filled);
+        arrowFill(color, arrowThickness);
         endShape();
 
         // draw border around arrow
@@ -456,8 +521,7 @@ public class Graphics implements Disposable {
             Gdx.gl.glLineWidth(borderThickness);
         }
         startShape(ShapeType.Line);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.polygon(arrowVertices);
+        arrowBorder();
         endShape();
         if (borderThickness > 1) {
             Gdx.gl.glLineWidth(1);
@@ -466,32 +530,248 @@ public class Graphics implements Disposable {
         Gdx.gl.glDisable(GL_BLEND);
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
 
-        batch.begin();
+        if (wasDrawing) {
+            batch.begin();
+        }
+    }
+
+    private void arrowFill(Color color, float arrowThickness) {
+        shapeRenderer.setColor(color);
+        shapeRenderer.rectLine(arTx1, arTy1, arTx2, arTy2, arrowThickness);
+        shapeRenderer.triangle(arrowVertices[0], arrowVertices[1], arrowVertices[2], arrowVertices[3], arrowVertices[4], arrowVertices[5]);
+    }
+
+    private void arrowBorder() {
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.polygon(arrowVertices);
     }
 
     public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
-        batch.end();
-        float lt = thickness / 3;
-
         if (alphaComposite < 1) {
             fillColor = fade(fillColor, fadeA);
             strokeColor = fade(strokeColor, fadeB);
         }
+        float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        if (fillColor.a < 1 || needSmoothing) {
-            Gdx.gl.glEnable(GL_BLEND);
+        prepCurved(thickness, x1, y1, x2, y2, !drawPointer);
+
+        if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
+            if (arrowPhase == 0) {
+                curvedArrowCircles(fillColor, strokeColor, thickness, drawPointer);
+                curvedBodyFill(fillColor, thickness);
+                if (caHead) curvedHeadFill(fillColor, thickness);
+            } else if (arrowPhase == 1) {
+                setLineStateBatched(needSmoothing, lt);
+                curvedBodyLine(strokeColor);
+                if (caHead) curvedHeadLine(strokeColor);
+            }
+            return;
         }
 
-        float radius = thickness;
+        boolean wasDrawing = batch.isDrawing(); // false inside a shape session, where the batch is already paused
+        if (wasDrawing) {
+            batch.end();
+        }
+        boolean blend = fillColor.a < 1 || needSmoothing;
+        if (blend) {
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        // line smoothing/width only affect the Line passes, so set them once instead of once per stroke pass
+        if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+        if (lt > 1) Gdx.gl.glLineWidth(lt);
+
         startShape(ShapeType.Filled);
-        shapeRenderer.setColor(fillColor);
-        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), radius);
-        if (drawPointer)
-            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
-        shapeRenderer.setColor(strokeColor);
-        shapeRenderer.circle(adjustX(x1), adjustY(y1, 0), thickness / 2);
-        if (drawPointer)
-            shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
+        curvedArrowCircles(fillColor, strokeColor, thickness, drawPointer);
+        curvedBodyFill(fillColor, thickness);
+        endShape();
+
+        startShape(ShapeType.Line);
+        curvedBodyLine(strokeColor);
+        endShape();
+
+        if (caHead) {
+            startShape(ShapeType.Filled);
+            curvedHeadFill(fillColor, thickness);
+            endShape();
+
+            startShape(ShapeType.Line);
+            curvedHeadLine(strokeColor);
+            endShape();
+        }
+
+        if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        if (lt > 1) Gdx.gl.glLineWidth(1);
+        if (blend) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+
+        if (wasDrawing) {
+            batch.begin();
+        }
+    }
+
+    public void drawCurvedLinePointer(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2) {
+        if (alphaComposite < 1) {
+            fillColor = fade(fillColor, fadeA);
+            strokeColor = fade(strokeColor, fadeB);
+        }
+        float lt = thickness / 3;
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        prepCurved(thickness, x1, y1, x2, y2, false);
+
+        if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
+            if (arrowPhase == 0) {
+                curvedPointerCircles(fillColor, strokeColor, thickness);
+                curvedBodyFill(fillColor, thickness);
+            } else if (arrowPhase == 1) {
+                setLineStateBatched(needSmoothing, lt);
+                curvedBodyLine(strokeColor);
+            }
+            return;
+        }
+
+        boolean wasDrawing = batch.isDrawing(); // false inside a shape session, where the batch is already paused
+        if (wasDrawing) {
+            batch.end();
+        }
+        boolean blend = fillColor.a < 1 || needSmoothing;
+        if (blend) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        // line smoothing/width only affect the Line pass, so set them once
+        if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
+        if (lt > 1) Gdx.gl.glLineWidth(lt);
+
+        startShape(ShapeType.Filled);
+        curvedPointerCircles(fillColor, strokeColor, thickness);
+        curvedBodyFill(fillColor, thickness);
+        endShape();
+
+        startShape(ShapeType.Line);
+        curvedBodyLine(strokeColor);
+        endShape();
+
+        if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        if (lt > 1) Gdx.gl.glLineWidth(1);
+        if (blend) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+
+        if (wasDrawing) {
+            batch.begin();
+        }
+    }
+
+    /**
+     * Optional: pauses the sprite batch once so a run of consecutive shape draws (arrows, pointers, lines...) doesn't
+     * pause/resume it for every single call. Nothing that uses the batch (images, text) may be drawn until
+     * endShapeSession() is called. Always pair with try/finally:
+     *   g.beginShapeSession();
+     *   try { ...draw arrows... } finally { g.endShapeSession(); }
+     */
+    public void beginShapeSession() {
+        if (batch.isDrawing()) {
+            batch.end();
+        }
+    }
+
+    public void endShapeSession() {
+        if (!isDisposed && !batch.isDrawing()) {
+            batch.begin();
+        }
+    }
+
+    //quadratic bezier sampled into curvePts as screen coordinates (each point computed exactly once)
+    private void buildCurve(float x1, float y1, float cx, float cy, float x2, float y2) {
+        curvePts[0] = adjustX(x1);
+        curvePts[1] = adjustY(y1, 0);
+        for (int i = 1; i <= CURVE_SEGMENTS; i++) {
+            float t = i / (float) CURVE_SEGMENTS;
+            float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
+            float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
+            curvePts[i * 2] = adjustX(bx);
+            curvePts[i * 2 + 1] = adjustY(by, 0);
+        }
+    }
+
+    /**
+     * Draws a run of arrows/pointers (drawArrow, drawLinePointer, drawCurvedArrow, drawCurvedLinePointer) with only
+     * 2-3 shape passes in total instead of 2-4 passes PER arrow. The runnable is executed once per pass and must only
+     * draw arrows (no images/text, no state changes); it should be cheap and free of side effects because it runs 2-3 times.
+     * Output differs from individual calls only where arrows overlap: all fills are drawn first, then all outlines.
+     */
+    public void drawArrowBatch(Runnable arrows) {
+        if (arrowBatchActive) { // nested: just draw into the running pass
+            arrows.run();
+            return;
+        }
+        boolean wasDrawing = batch.isDrawing();
+        if (wasDrawing) {
+            batch.end(); //must pause batch while rendering shapes
+        }
+        arrowBatchActive = true;
+        arrowNeedPhase2 = false;
+        lineSmoothOn = false;
+        lineWidthNow = 1;
+        Gdx.gl.glEnable(GL_BLEND); // harmless for opaque colors, required for alpha and smoothed lines
+        try {
+            for (int phase = 0; phase <= 2; phase++) {
+                if (phase == 2 && !arrowNeedPhase2) {
+                    break;
+                }
+                arrowPhase = phase;
+                startShape(phase == 0 ? ShapeType.Filled : ShapeType.Line);
+                try {
+                    arrows.run();
+                } finally {
+                    endShape();
+                }
+            }
+        } finally {
+            arrowBatchActive = false;
+            if (lineSmoothOn) {
+                Gdx.gl.glDisable(GL_LINE_SMOOTH);
+                lineSmoothOn = false;
+            }
+            if (lineWidthNow != 1) {
+                Gdx.gl.glLineWidth(1);
+                lineWidthNow = 1;
+            }
+            Gdx.gl.glDisable(GL_BLEND);
+            if (wasDrawing) {
+                batch.begin();
+            }
+        }
+    }
+
+    //line smoothing/width can't change mid-pass, so pending lines are flushed first if the state differs
+    private void setLineStateBatched(boolean smooth, float width) {
+        float w = width > 1 ? width : 1;
+        if (smooth == lineSmoothOn && w == lineWidthNow) {
+            return;
+        }
+        shapeRenderer.flush();
+        if (smooth != lineSmoothOn) {
+            if (smooth) {
+                Gdx.gl.glEnable(GL_LINE_SMOOTH);
+            } else {
+                Gdx.gl.glDisable(GL_LINE_SMOOTH);
+            }
+            lineSmoothOn = smooth;
+        }
+        if (w != lineWidthNow) {
+            Gdx.gl.glLineWidth(w);
+            lineWidthNow = w;
+        }
+    }
+
+    //geometry of a curved arrow/pointer (straight when short), computed once into the ca* fields and curvePts
+    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead) {
+        caSx1 = adjustX(x1);
+        caSy1 = adjustY(y1, 0);
+        caSx2 = adjustX(x2);
+        caSy2 = adjustY(y2, 0);
+        caHead = false;
 
         float dx = x2 - x1, dy = y2 - y1;
         float length = (float) Math.sqrt(dx * dx + dy * dy);
@@ -501,27 +781,13 @@ public class Graphics implements Disposable {
 
         if (length < 120f) {
             // Straight line
+            caCurved = false;
             float backScale = Math.max(0.1f, 10f / length);
             beforeTipX = x2 - dx * backScale;
             beforeTipY = y2 - dy * backScale;
-
-            shapeRenderer.setColor(fillColor);
-            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
-            endShape();
-
-            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
-            if (lt > 1) Gdx.gl.glLineWidth(lt);
-
-            startShape(ShapeType.Line);
-            shapeRenderer.setColor(strokeColor);
-            shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
-            endShape();
-
-            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
-            if (lt > 1) Gdx.gl.glLineWidth(1);
-
         } else {
             // Curved Bezier
+            caCurved = true;
             float midX = (x1 + x2) / 2f;
             float midY = (y1 + y2) / 2f;
             float px = -dy / length, py = dx / length;
@@ -534,45 +800,13 @@ public class Graphics implements Disposable {
             beforeTipX = (1 - tBefore) * (1 - tBefore) * x1 + 2 * (1 - tBefore) * tBefore * cx + tBefore * tBefore * x2;
             beforeTipY = (1 - tBefore) * (1 - tBefore) * y1 + 2 * (1 - tBefore) * tBefore * cy + tBefore * tBefore * y2;
 
-            int segments = 30;
-            float prevX = x1, prevY = y1;
-
-            shapeRenderer.setColor(fillColor);
-            for (int i = 1; i <= segments; i++) {
-                float t = i / (float) segments;
-                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
-                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
-                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0), thickness);
-                prevX = bx;
-                prevY = by;
-            }
-            endShape();
-
-            if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
-            if (lt > 1) Gdx.gl.glLineWidth(lt);
-
-            startShape(ShapeType.Line);
-            shapeRenderer.setColor(strokeColor);
-            prevX = x1;
-            prevY = y1;
-            for (int i = 1; i <= segments; i++) {
-                float t = i / (float) segments;
-                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
-                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
-                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0));
-                prevX = bx;
-                prevY = by;
-            }
-            endShape();
-
-            if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
-            if (lt > 1) Gdx.gl.glLineWidth(1);
+            buildCurve(x1, y1, cx, cy, x2, y2);
         }
 
-        if (!drawPointer) {
+        if (wantHead) {
             // --- Arrowhead at (x2,y2) ---
-            float tipX = adjustX(x2);
-            float tipY = adjustY(y2, 0);
+            float tipX = caSx2;
+            float tipY = caSy2;
             float adjBeforeX = adjustX(beforeTipX);
             float adjBeforeY = adjustY(beforeTipY, 0);
 
@@ -585,153 +819,72 @@ public class Graphics implements Disposable {
                 float ny = headingY / headingLen;
 
                 float arrowLength = thickness * 2.2f;
-                float spreadAngle = (float) Math.toRadians(35);
 
-                // Left wing
-                float cosL = (float) Math.cos(Math.PI - spreadAngle);
-                float sinL = (float) Math.sin(Math.PI - spreadAngle);
-                float leftDirX = nx * cosL - ny * sinL;
-                float leftDirY = nx * sinL + ny * cosL;
+                float leftDirX = nx * WING_COS_L - ny * WING_SIN_L;
+                float leftDirY = nx * WING_SIN_L + ny * WING_COS_L;
+                float rightDirX = nx * WING_COS_R - ny * WING_SIN_R;
+                float rightDirY = nx * WING_SIN_R + ny * WING_COS_R;
 
-                // Right wing
-                float cosR = (float) Math.cos(Math.PI + spreadAngle);
-                float sinR = (float) Math.sin(Math.PI + spreadAngle);
-                float rightDirX = nx * cosR - ny * sinR;
-                float rightDirY = nx * sinR + ny * cosR;
-
-                float baseLeftX = tipX + leftDirX * arrowLength;
-                float baseLeftY = tipY + leftDirY * arrowLength;
-                float baseRightX = tipX + rightDirX * arrowLength;
-                float baseRightY = tipY + rightDirY * arrowLength;
-
-                startShape(ShapeType.Filled);
-                shapeRenderer.setColor(fillColor);
-                shapeRenderer.rectLine(tipX, tipY, baseLeftX, baseLeftY, thickness);
-                shapeRenderer.rectLine(tipX, tipY, baseRightX, baseRightY, thickness);
-                endShape();
-
-                if (needSmoothing) Gdx.gl.glEnable(GL_LINE_SMOOTH);
-                if (lt > 1) Gdx.gl.glLineWidth(lt);
-
-                startShape(ShapeType.Line);
-                shapeRenderer.setColor(strokeColor);
-                shapeRenderer.line(tipX, tipY, baseLeftX, baseLeftY);
-                shapeRenderer.line(tipX, tipY, baseRightX, baseRightY);
-                endShape();
-
-                if (needSmoothing) Gdx.gl.glDisable(GL_LINE_SMOOTH);
-                if (lt > 1) Gdx.gl.glLineWidth(1);
+                caLX = tipX + leftDirX * arrowLength;
+                caLY = tipY + leftDirY * arrowLength;
+                caRX = tipX + rightDirX * arrowLength;
+                caRY = tipY + rightDirY * arrowLength;
+                caHead = true;
             }
         }
-
-        if (fillColor.a < 1 || needSmoothing) {
-            Gdx.gl.glDisable(GL_BLEND);
-        }
-
-        batch.begin();
     }
 
-    public void drawCurvedLinePointer(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2) {
-        batch.end();
-        float lt = thickness / 3;
-
-        if (alphaComposite < 1) {
-            fillColor = fade(fillColor, fadeA);
-            strokeColor = fade(strokeColor, fadeB);
-        }
-        boolean needSmoothing = (x1 != x2 && y1 != y2);
-        if (fillColor.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL_BLEND);
-        }
-
-        float radius = thickness * 1.2f;
-        startShape(ShapeType.Filled);
+    // ---- emitters: each assumes the right shape pass is already open ----
+    private void curvedArrowCircles(Color fillColor, Color strokeColor, float thickness, boolean drawPointer) {
         shapeRenderer.setColor(fillColor);
-        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), radius);
+        shapeRenderer.circle(caSx1, caSy1, thickness);
+        if (drawPointer)
+            shapeRenderer.circle(caSx2, caSy2, thickness);
         shapeRenderer.setColor(strokeColor);
-        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness / 2);
+        shapeRenderer.circle(caSx1, caSy1, thickness / 2);
+        if (drawPointer)
+            shapeRenderer.circle(caSx2, caSy2, thickness / 2);
+    }
 
-        float dx = x2 - x1, dy = y2 - y1;
-        float length = (float) Math.sqrt(dx * dx + dy * dy);
+    private void curvedPointerCircles(Color fillColor, Color strokeColor, float thickness) {
+        shapeRenderer.setColor(fillColor);
+        shapeRenderer.circle(caSx2, caSy2, thickness * 1.2f);
+        shapeRenderer.setColor(strokeColor);
+        shapeRenderer.circle(caSx2, caSy2, thickness / 2);
+    }
 
-        if (length < 120f) {
-            // Straight line if short
-            shapeRenderer.setColor(fillColor);
-            shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
-            endShape();
-
-            if (needSmoothing) {
-                Gdx.gl.glEnable(GL_LINE_SMOOTH);
+    private void curvedBodyFill(Color fillColor, float thickness) {
+        shapeRenderer.setColor(fillColor);
+        if (caCurved) {
+            for (int i = 1; i <= CURVE_SEGMENTS; i++) {
+                shapeRenderer.rectLine(curvePts[i * 2 - 2], curvePts[i * 2 - 1], curvePts[i * 2], curvePts[i * 2 + 1], thickness);
             }
-            if (lt > 1) {
-                Gdx.gl.glLineWidth(lt);
-            }
-
-            startShape(ShapeType.Line);
-            shapeRenderer.setColor(strokeColor);
-            shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
-            endShape();
-
-            if (needSmoothing) {
-                Gdx.gl.glDisable(GL_LINE_SMOOTH);
-            }
-            if (lt > 1) {
-                Gdx.gl.glLineWidth(1);
-            }
-
         } else {
-            // Curved Bezier if long
-            float midX = (x1 + x2) / 2f;
-            float midY = (y1 + y2) / 2f;
-            float px = -dy / length, py = dx / length;
-            float curveStrength = 50f;
-            float cx = midX + px * curveStrength;
-            float cy = midY + py * curveStrength;
-
-            int segments = 30;
-            float prevX = x1, prevY = y1;
-
-            shapeRenderer.setColor(fillColor);
-
-            for (int i = 1; i <= segments; i++) {
-                float t = i / (float) segments;
-                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
-                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
-                shapeRenderer.rectLine(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0), thickness);
-                prevX = bx; prevY = by;
-            }
-            endShape();
-
-            if (needSmoothing) {
-                Gdx.gl.glEnable(GL_LINE_SMOOTH);
-            }
-            if (lt > 1) {
-                Gdx.gl.glLineWidth(lt);
-            }
-            startShape(ShapeType.Line);
-            shapeRenderer.setColor(strokeColor);
-            prevX = x1; prevY = y1;
-            for (int i = 1; i <= segments; i++) {
-                float t = i / (float) segments;
-                float bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2;
-                float by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2;
-                shapeRenderer.line(adjustX(prevX), adjustY(prevY, 0), adjustX(bx), adjustY(by, 0));
-                prevX = bx; prevY = by;
-            }
-            endShape();
-            if (needSmoothing) {
-                Gdx.gl.glDisable(GL_LINE_SMOOTH);
-            }
-            if (lt > 1) {
-                Gdx.gl.glLineWidth(1);
-            }
+            shapeRenderer.rectLine(caSx1, caSy1, caSx2, caSy2, thickness);
         }
+    }
 
-        if (fillColor.a < 1 || needSmoothing) {
-            Gdx.gl.glDisable(GL_BLEND);
+    private void curvedBodyLine(Color strokeColor) {
+        shapeRenderer.setColor(strokeColor);
+        if (caCurved) {
+            for (int i = 1; i <= CURVE_SEGMENTS; i++) {
+                shapeRenderer.line(curvePts[i * 2 - 2], curvePts[i * 2 - 1], curvePts[i * 2], curvePts[i * 2 + 1]);
+            }
+        } else {
+            shapeRenderer.line(caSx1, caSy1, caSx2, caSy2);
         }
+    }
 
-        batch.begin();
+    private void curvedHeadFill(Color fillColor, float thickness) {
+        shapeRenderer.setColor(fillColor);
+        shapeRenderer.rectLine(caSx2, caSy2, caLX, caLY, thickness);
+        shapeRenderer.rectLine(caSx2, caSy2, caRX, caRY, thickness);
+    }
+
+    private void curvedHeadLine(Color strokeColor) {
+        shapeRenderer.setColor(strokeColor);
+        shapeRenderer.line(caSx2, caSy2, caLX, caLY);
+        shapeRenderer.line(caSx2, caSy2, caRX, caRY);
     }
 
     private int addVertex(float x, float y, float[] vertices, int index) {

@@ -2,7 +2,9 @@ package forge.game.ability.effects;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardFacePredicates;
 import forge.card.CardRules;
@@ -93,10 +95,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             } else {
                 // use CardFace because you might name a alternate names
                 Predicate<ICardFace> cpp = x -> true;
-                List<Predicate<ICardFace>> conditions = new ArrayList<>();
                 if (sa.hasParam("ValidCards")) {
-                    StringBuilder newValid = new StringBuilder();
-                    for(String v: valid.split(",")) {
+                    List<String> newValid = Lists.newArrayList();
+                    for (String v: valid.split(",")) {
                         //Calculating/replacing this must happen before running valid in CardFacePredicates
                         if (v.contains("cmcEQ") && !StringUtils.isNumeric(v.split("cmcEQ")[1])) {
                             String s = v.split("cmcEQ")[1];
@@ -111,12 +112,10 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                                 v = v.replace("=Imprinted", s);
                             }
                         }
-                        conditions.add(CardFacePredicates.valid(v));
-                        newValid.append(v);
-                        newValid.append(',');
+                        newValid.add(v);
                     }
-                    valid = newValid.substring(0, newValid.length() -1);
-                    cpp = IterableUtil.or(conditions);
+                    valid = String.join(",", newValid);
+                    cpp = IterableUtil.or(newValid.stream().map(v -> CardFacePredicates.valid(v)).collect(Collectors.toList()));
                     if (sa.hasParam("ExcludeChosen")) {
                         final Predicate<ICardFace> innerCpp = cpp;
                         cpp = face -> innerCpp.test(face) && !host.getNamedCards().contains(face.getName());

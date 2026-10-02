@@ -1404,22 +1404,21 @@ public class AiController {
             return false;
         }
 
-        if (!MyRandom.percentTrue(getIntProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED))) {
-            // check against the chance specified in the profile
-            return false;
-        }
         if (game.getPhaseHandler().getTurn() <= 2) {
             // too obvious when doing it on the very first turn of the game
+            return false;
+        }
+
+        if (!MyRandom.percentTrue(getIntProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED))) {
+            // check against the chance specified in the profile
             return false;
         }
 
         CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
-        if (getBoolProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!otb.anyMatch(CardPredicates.NON_LANDS)) {
-                return false;
-            }
+        if (getBoolProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS) && !otb.anyMatch(CardPredicates.NON_LANDS)) {
+            return false;
         }
 
         // TODO: improve the detection of taplands

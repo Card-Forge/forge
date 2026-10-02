@@ -133,6 +133,7 @@ public class ImageCache {
 
     private Supplier<HashMap<String, ImageRecord>> imageRecord = Suppliers.memoize(() -> new HashMap<>(maxCardCapacity + (maxCardCapacity / 3)));
     private boolean imageLoaded, delayLoadRequested;
+    private long lastLoaderPumpFrame = -1; // frame in which the asset loader was last pumped from loadAsset
 
     public void allowSingleLoad() {
         imageLoaded = false; //reset at the beginning of each render
@@ -415,8 +416,15 @@ public class ImageCache {
                     counter += 1;
                 }
 
-                CardRenderer.clearcardArtCache();
-                Forge.getAssets().manager().update(16);
+                // Every card still waiting for its texture reaches this point on EVERY frame. AssetManager.update(int)
+                // busy-waits up to that many ms while an async decode is pending, so N waiting cards used to cost up to
+                // N x 16ms per frame (and N art-cache clears). Pump the loader and reset the art cache once per frame.
+                final long frame = Gdx.graphics == null ? -1 : Gdx.graphics.getFrameId();
+                if (frame < 0 || frame != lastLoaderPumpFrame) {
+                    lastLoaderPumpFrame = frame;
+                    CardRenderer.clearcardArtCache();
+                    Forge.getAssets().manager().update(16);
+                }
                 //((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
             }
         } catch (Exception e) {
