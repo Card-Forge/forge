@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -89,6 +90,12 @@ public final class CdnUuidCache {
     /** Set codes a lookup couldn't answer locally, waiting for {@link #syncPendingSets}. */
     private static final Set<String> pendingSyncs = ConcurrentHashMap.newKeySet();
 
+    /** Set codes confirmed to have no local index yet. Cleared when an index is written or the cache is cleared. */
+    private static final Set<String> absentSets = ConcurrentHashMap.newKeySet();
+
+    /** Bumped on every invalidation so a read that raced with a write cannot mark the set absent. */
+    private static final AtomicLong absentGeneration = new AtomicLong();
+
     /** Submits {@link #syncPendingSets} to the shared pool; tests disable this. */
     static volatile boolean autoSyncEnabled = true;
 
@@ -98,7 +105,21 @@ public final class CdnUuidCache {
     private CdnUuidCache() {}
 
     /** Test helper */
-    static void clearCacheForTesting() { setCache.clear(); }
+    static void clearCacheForTesting() { setCache.clear(); invalidateAllAbsent(); }
+
+    private static void invalidateAbsent(String setCode) {
+        synchronized (absentSets) {
+            absentGeneration.incrementAndGet();
+            absentSets.remove(setCode);
+        }
+    }
+
+    private static void invalidateAllAbsent() {
+        synchronized (absentSets) {
+            absentGeneration.incrementAndGet();
+            absentSets.clear();
+        }
+    }
 
     /** Local set-cache directory, honoring the test override. */
     public static String cacheDir() {
@@ -138,6 +159,7 @@ public final class CdnUuidCache {
     /** Deletes every local cache file and clears the in-memory cache. */
     public static void clearCache() {
         setCache.clear();
+        invalidateAllAbsent();
         File dir = new File(cacheDir());
         File[] files = dir.listFiles();
         if (files == null) return;
@@ -179,6 +201,7 @@ public final class CdnUuidCache {
 
         writeLocalCache(file, merged.toString());
         setCache.remove(setCode); // force a re-read of the freshly-written file on next lookup
+        invalidateAbsent(setCode);
     }
 
     /** Records {@code (cn, lang)} as missing as of now, so lookups skip retrying until {@link #MISS_RETRY_AFTER} passes. */
@@ -196,6 +219,7 @@ public final class CdnUuidCache {
 
         writeLocalCache(file, setObj.toString());
         setCache.remove(setCode);
+        invalidateAbsent(setCode);
     }
 
     public static boolean isAvailableInLanguage(String scryfallCode, String collectorNum, String lang) {
@@ -243,13 +267,22 @@ public final class CdnUuidCache {
         return cdnUrl(uuid, side, size);
     }
 
-    /** Like {@link #ensureSetLoaded}, but never queues a sync -- an unsynced set stays retryable rather than triggering work or being cached as permanently absent. */
+    /** Like {@link #ensureSetLoaded}, but never queues a sync. A set with no local index is remembered as absent until an index is written for it or the cache is cleared, so repeated lookups skip the filesystem. */
     private static Map<String, Map<String, LangUuids>> ensureSetLoadedReadOnly(String setCode) {
         Map<String, Map<String, LangUuids>> cached = setCache.get(setCode);
         if (cached != null) return cached;
 
+        if (absentSets.contains(setCode)) return MISSING_SET;
+
+        long generation = absentGeneration.get();
         Map<String, Map<String, LangUuids>> onDisk = readSetFromDisk(setCode);
-        if (onDisk == MISSING_SET) return MISSING_SET;
+        if (onDisk == MISSING_SET) {
+            synchronized (absentSets) {
+                if (absentGeneration.get() == generation)
+                    absentSets.add(setCode);
+            }
+            return MISSING_SET;
+        }
 
         Map<String, Map<String, LangUuids>> existing = setCache.putIfAbsent(setCode, onDisk);
         return existing != null ? existing : onDisk;
