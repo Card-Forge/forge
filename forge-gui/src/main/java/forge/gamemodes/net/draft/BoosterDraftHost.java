@@ -7,6 +7,7 @@ import forge.gamemodes.net.EventParticipant;
 import forge.gamemodes.net.EventPhase;
 import forge.gamemodes.net.NetworkEvent;
 import forge.gamemodes.limited.DraftPack;
+import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.limited.LimitedPlayerAI;
 import forge.gamemodes.net.event.DraftAutoPickedEvent;
@@ -21,12 +22,14 @@ import forge.util.IHasForgeLog;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 /**
  * Server-side adapter that wraps {@link BoosterDraft} for network play.
@@ -343,6 +346,15 @@ public final class BoosterDraftHost implements IHasForgeLog {
 
         List<LimitedPlayer> players = draft.getAllPlayers();
         String eventId = event.getEventId();
+
+        String landSetCode = IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null;
+        Map<Integer, Supplier<Deck>> botDecks = new LinkedHashMap<>();
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i) instanceof LimitedPlayerAI ai) {
+                botDecks.put(i, () -> ai.buildDeck(landSetCode));
+            }
+        }
+        dispatches.add(() -> NetworkEvent.saveBotDecks(event, participants, botDecks));
 
         for (int i = 0; i < players.size(); i++) {
             LimitedPlayer player = players.get(i);
