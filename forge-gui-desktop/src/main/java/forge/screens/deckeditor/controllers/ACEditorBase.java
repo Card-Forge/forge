@@ -356,8 +356,14 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     }
 
     /**
-     * Removes the specified tab and returns its parent for later re-adding
+     * Removes the specified tab and returns its parent for later re-adding.
+     *
+     * @deprecated Use {@link forge.gui.framework.SHiddenTabs}. Holding the returned
+     * cell in a field does not survive a second editor being constructed for the same
+     * screen, and the cell is torn down when the removal empties it, so re-adding to it
+     * puts the tab somewhere nothing draws and nothing saves.
      */
+    @Deprecated
     protected DragCell removeTab (final IVDoc<? extends ICDoc> tab) {
         final DragCell parent;
         if (tab.getParentCell() == null) {
