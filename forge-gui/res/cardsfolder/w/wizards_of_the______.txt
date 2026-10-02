@@ -1,0 +1,8 @@
+Name:Wizards of the _____
+ManaCost:2 U U
+Types:Creature Human Wizard Performer
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it, then look at the top X cards of your library, where X is the number of unique vowels on that sticker. Put one of those cards into your hand and the rest on the bottom of your library in any order. (The vowels are A, E, I, O, U, and Y.)
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ StickerUniqueVowels | ChangeNum$ 1 | DestinationZone2$ Library | LibraryPosition2$ -1
+Oracle:When this creature enters, you may put a name sticker on it, then look at the top X cards of your library, where X is the number of unique vowels on that sticker. Put one of those cards into your hand and the rest on the bottom of your library in any order. (The vowels are A, E, I, O, U, and Y.)

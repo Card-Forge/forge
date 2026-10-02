@@ -33,6 +33,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -2418,6 +2420,26 @@ public class ComputerUtil {
 
         final Game game = ai.getGame();
         String chosen = "";
+        if (kindOfType.equals("Letter")) {
+            // _____ _____ Rocketship counts its own name stickers starting with the letter
+            Map<String, Integer> begins = Maps.newHashMap();
+            for (AppliedSticker applied : sa.getHostCard().getStickers()) {
+                String letters = applied.getSticker().getLetters();
+                if (applied.getKind() != StickerKind.NAME || letters.isEmpty()) {
+                    continue;
+                }
+                begins.merge(letters.substring(0, 1).toUpperCase(), 1, Integer::sum);
+            }
+            int best = 0;
+            for (String letter : validTypes) {
+                int n = begins.getOrDefault(letter.toUpperCase(), 0);
+                if (n > best) {
+                    best = n;
+                    chosen = letter;
+                }
+            }
+            return chosen.isEmpty() ? Iterables.getFirst(validTypes, "") : chosen;
+        }
         if (kindOfType.equals("Card")) {
             // TODO
             // computer will need to choose a type based on whether it needs a creature or land,

@@ -29,6 +29,8 @@ import forge.game.StaticEffect;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.game.keyword.Keyword;
@@ -115,6 +117,7 @@ public final class StaticAbilityContinuous {
         Integer setToughness = null;
 
         List<String> addKeywords = null;
+        List<AppliedSticker> stickerAbilities = null;
         List<String> addHiddenKeywords = Lists.newArrayList();
         List<String> removeKeywords = null;
         String[] addAbilities = null;
@@ -307,6 +310,28 @@ public final class StaticAbilityContinuous {
                 }
                 if (!kwToShare.isEmpty()) {
                     addKeywords = kwToShare;
+                }
+            }
+
+            if (params.containsKey("GainsStickerAbilitiesOf") || params.containsKey("GainsStickerAbilitiesOfDefined")) {
+                CardCollection sources = cardsGainedFrom(params.containsKey("GainsStickerAbilitiesOfDefined")
+                        ? "GainsStickerAbilitiesOfDefined" : "GainsStickerAbilitiesOf", params, hostCard, stAb, game);
+                for (Card source : sources) {
+                    for (AppliedSticker applied : source.getStickers()) {
+                        if (applied.getKind() != StickerKind.ABILITY) {
+                            continue;
+                        }
+                        if (stickerAbilities == null) {
+                            stickerAbilities = Lists.newArrayList();
+                        }
+                        stickerAbilities.add(applied);
+                        if (!applied.getGrantedKeywords().isEmpty()) {
+                            if (addKeywords == null) {
+                                addKeywords = Lists.newArrayList();
+                            }
+                            addKeywords.addAll(applied.getGrantedKeywords());
+                        }
+                    }
                 }
             }
 
@@ -773,6 +798,21 @@ public final class StaticAbilityContinuous {
                 List<ReplacementEffect> addedReplacementEffects = Lists.newArrayList();
                 List<Trigger> addedTrigger = Lists.newArrayList();
                 List<StaticAbility> addedStaticAbility = Lists.newArrayList();
+                if (stickerAbilities != null) {
+                    // not cached like the paths below: those would resolve SVars against the
+                    // static instead of the sticker's sheet
+                    for (AppliedSticker applied : stickerAbilities) {
+                        CardTraitChanges granted = applied.getGrantedTraits(affectedCard);
+                        addedAbilities.addAll(granted.getAbilities());
+                        addedTrigger.addAll(granted.getTriggers());
+                        addedStaticAbility.addAll(granted.getStaticAbilities());
+                        if (AppliedSticker.grantsAttackTrigger(granted)) {
+                            affectedCard.addChangedSVars(Map.of("HasAttackEffect", "TRUE"),
+                                    se.getTimestamp(), stAb.getId());
+                        }
+                    }
+                }
+
                 // add abilities
                 if (addAbilities != null) {
                     for (String ability : addAbilities) {

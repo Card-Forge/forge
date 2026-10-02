@@ -1,0 +1,6 @@
+Name:Scared Stiff
+ManaCost:2 B
+Types:Creature Zombie Coward Guest
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Permanent.stickered+YouCtrl | Description$ CARDNAME has menace as long as you control a stickered permanent.
+Oracle:This creature has menace as long as you control a stickered permanent.
