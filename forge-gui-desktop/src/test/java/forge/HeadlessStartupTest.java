@@ -149,6 +149,58 @@ public class HeadlessStartupTest {
                 + explicit.output, explicit.output.contains("java.awt.headless=false"));
     }
 
+    /**
+     * A GUI launch (no arguments) on a headless runtime must fail fast with an explanation and a
+     * non-zero exit, rather than a HeadlessException from the first Swing call — which, before
+     * #11761, was swallowed and left the user with a silent exit (#11573). {@code java.awt.headless}
+     * is forced here since the machine running the suite may well have a display.
+     */
+    public void mainExplainsGuiLaunchOnHeadlessRuntime() throws Exception {
+        ProbeResult result = runInThrowawayHome(Main.class.getName(), List.of("-Djava.awt.headless=true"));
+        assertEquals("a headless GUI launch must exit non-zero, output was:\n" + result.output, 1, result.exitCode);
+        assertTrue("expected the explanation, got:\n" + result.output,
+                result.output.contains("Forge cannot start"));
+        assertTrue("expected the cause to name the property, got:\n" + result.output,
+                result.output.contains("-Djava.awt.headless=true was passed"));
+        assertFalse("must not fall through to a HeadlessException:\n" + result.output,
+                result.output.contains("HeadlessException"));
+    }
+
+    /**
+     * The explanation names the likely cause: the property when it was forced, a missing DISPLAY,
+     * or — the case both reporters of #11573 hit — a distro "headless" package, which the JDK
+     * recognises by the absence of lib/libawt_xawt.so.
+     */
+    public void missingDisplayMessageNamesTheCause() throws Exception {
+        String forced = Main.describeMissingDisplay("Linux", "/usr/lib/jvm/java-21", "OpenJDK 21", "true", ":0");
+        assertTrue(forced, forced.contains("-Djava.awt.headless=true was passed"));
+
+        String noDisplay = Main.describeMissingDisplay("Linux", "/usr/lib/jvm/java-21", "OpenJDK 21", null, null);
+        assertTrue(noDisplay, noDisplay.contains("DISPLAY environment variable is not set"));
+
+        // A fake java.home without lib/libawt_xawt.so, as a headless-only install looks.
+        File headlessHome = Files.createTempDirectory("headless-jre").toFile();
+        try {
+            assertTrue(new File(headlessHome, "lib").mkdir());
+            String headlessPackage = Main.describeMissingDisplay("Linux", headlessHome.getPath(), "OpenJDK 21", null, ":0");
+            assertTrue(headlessPackage, headlessPackage.contains("\"headless\" Java package"));
+            assertTrue(headlessPackage, headlessPackage.contains("openjdk-21-jre"));
+
+            // With the library present, the headless-package diagnosis must not be given.
+            assertTrue(new File(headlessHome, "lib/libawt_xawt.so").createNewFile());
+            String unknown = Main.describeMissingDisplay("Linux", headlessHome.getPath(), "OpenJDK 21", null, ":0");
+            assertFalse(unknown, unknown.contains("\"headless\" Java package"));
+            assertTrue(unknown, unknown.contains("graphical session"));
+        } finally {
+            deleteRecursively(headlessHome);
+        }
+
+        // The Linux-only diagnoses must not be offered on Windows or macOS.
+        String windows = Main.describeMissingDisplay("Windows 11", "C:\\jdk", "Temurin 21", null, null);
+        assertFalse(windows, windows.contains("DISPLAY"));
+        assertFalse(windows, windows.contains("libawt_xawt"));
+    }
+
     /** The console-mode list must stay in sync with the switch in {@code Main.main}. */
     public void commandLineModesAreRecognized() {
         assertTrue("sim must be a console mode", Main.isCommandLineMode("sim"));
