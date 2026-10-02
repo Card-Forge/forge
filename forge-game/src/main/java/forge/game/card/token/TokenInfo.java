@@ -2,18 +2,23 @@ package forge.game.card.token;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
+import forge.card.ITextChanges;
 import forge.card.MagicColor;
+import forge.card.WordChangedType;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -23,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -170,53 +176,32 @@ public class TokenInfo {
 
     static protected void protoTypeApplyTextChange(final Card result, final SpellAbility sa) {
         // update Token with CardTextChanges
-        Map<String, String> colorMap = sa.getChangedTextColors();
-        Map<String, String> typeMap = sa.getChangedTextTypes();
+        ITextChanges changes = sa.getTextChanges();
+        Map<MagicColor.Color, MagicColor.Color> colorMap = changes.colorChanges();
+        Map<String, String> typeMap = changes.typeChanges();
         if (!colorMap.isEmpty()) {
             if (!result.isColorless()) {
                 // change Token Colors
-                byte color = result.getColor().getColor();
-
-                for (final Map.Entry<String, String> e : colorMap.entrySet()) {
-                    byte v = MagicColor.fromName(e.getValue());
-                    // Any used by Swirl the Mists
-                    if ("Any".equals(e.getKey())) {
-                        for (final byte c : MagicColor.WUBRG) {
-                            // try to replace color flips
-                            if ((color & c) != 0) {
-                                color &= ~c;
-                                color |= v;
-                            }
-                        }
-                    } else {
-                        byte c = MagicColor.fromName(e.getKey());
-                        // try to replace color flips
-                        if ((color & c) != 0) {
-                            color &= ~c;
-                            color |= v;
-                        }
-                    }
+                Set<MagicColor.Color> colorResult = Sets.newHashSet();
+                for (MagicColor.Color c : result.getColor()) {
+                    colorResult.add(colorMap.getOrDefault(c, c));
                 }
 
-                result.setColor(ColorSet.fromMask(color));
+                result.setColor(ColorSet.fromEnums(colorResult));
             }
         }
         if (!typeMap.isEmpty()) {
             CardType type = new CardType(result.getType());
             final boolean nameGenerated = result.getName().endsWith(" Token");
-            boolean typeChanged = false;
 
             if (!type.getSubtypes().isEmpty()) {
                 for (final Map.Entry<String, String> e : typeMap.entrySet()) {
-                    if (type.hasSubtype(e.getKey())) {
-                        type.remove(e.getKey());
-                        type.add(e.getValue());
-                        typeChanged = true;
-                    }
+                    WordChangedType word = new WordChangedType(e.getKey(), e.getValue());
+                    word.applyChanges(type);
                 }
             }
 
-            if (typeChanged) {
+            if (result.getType().equals(type)) {
                 result.setType(type);
 
                 // update generated Name
@@ -231,7 +216,12 @@ public class TokenInfo {
         List<String> toAdd = Lists.newArrayList();
         for (final KeywordInterface k : result.getCurrentState().getIntrinsicKeywords()) {
             final String o = k.getOriginal();
-            String r = AbilityUtils.applyKeywordTextChangeEffects(o, colorMap, typeMap);
+
+            // only Modifiable should go there
+            if (!CardUtil.isKeywordModifiable(o)) {
+                continue;
+            }
+            String r = AbilityUtils.applyKeywordTextChangeEffects(o, changes);
             if (!r.equals(o)) {
                 toRemove.add(k);
                 toAdd.add(r);
@@ -242,7 +232,7 @@ public class TokenInfo {
         }
         result.addIntrinsicKeywords(toAdd);
 
-        result.getCurrentState().changeTextIntrinsic(colorMap, typeMap);
+        result.getCurrentState().changeTextIntrinsic(changes);
     }
 
     static public Card getProtoType(final String script, final SpellAbility sa, final Player owner) {

@@ -249,6 +249,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return supertypes.remove(st);
     }
 
+    @Deprecated
     public boolean remove(final String str) {
         boolean changed = false;
 
@@ -706,6 +707,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public int compareTo(final CardType o) {
         return toString().compareTo(o.toString());
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof CardType)) {
+            return false;
+        }
+        return toString().equals(o.toString());
     }
 
     public boolean sharesCreaturetypeWith(final CardTypeView ctOther) {

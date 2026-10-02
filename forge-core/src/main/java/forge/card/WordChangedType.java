@@ -1,6 +1,8 @@
 package forge.card;
 
-public record WordChangedType(String oldWord, String newWord) implements ICardChangedType {
+import java.util.Map;
+
+public record WordChangedType(String oldWord, String newWord) implements ICardChangedType, IChangedText {
 
     @Override
     public CardType applyChanges(CardType newType) {
@@ -9,5 +11,15 @@ public record WordChangedType(String oldWord, String newWord) implements ICardCh
             newType.subtypes.add(newWord);
         }
         return newType;
+    }
+
+    @Override
+    public void applyTypeChanges(Map<String, String> result) {
+        for (Map.Entry<String, String> e : result.entrySet()) {
+            if (e.getValue().equals(oldWord)) {
+                e.setValue(newWord);
+            }
+        }
+        result.put(oldWord, newWord);
     }
 }

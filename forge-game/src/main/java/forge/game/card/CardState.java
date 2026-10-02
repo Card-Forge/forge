@@ -1068,10 +1068,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
     }
 
-    public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
+    public void changeTextIntrinsic(ITextChanges textChanges) {
         for (final CardTraitBase ctb : getTraits()) {
             if (ctb.isIntrinsic()) {
-                ctb.changeTextIntrinsic(colorMap, typeMap);
+                ctb.changeTextIntrinsic(textChanges);
             }
         }
     }
