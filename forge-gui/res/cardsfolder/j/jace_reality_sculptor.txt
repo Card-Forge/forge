@@ -2,7 +2,7 @@ Name:Jace, Reality Sculptor
 ManaCost:3 U U
 Types:Legendary Planeswalker Jace
 Loyalty:5
-A:AB$ Empower | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Type$ Jace | Num$ X | SpellDescription$ Empower Jace X, where X is the number of Islands you control.
+A:AB$ EmpowerJace | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Num$ X | SpellDescription$ Empower Jace X, where X is the number of Islands you control.
 A:AB$ Effect | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | Duration$ UntilYourNextTurn | AILogic$ Main2 | SpellDescription$ Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -5/-0 until end of turn.
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Command | Execute$ DBPump | TriggerDescription$ Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -5/-0 until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ -5
