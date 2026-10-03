@@ -47,8 +47,7 @@ public class TileMapScene extends HudScene {
 
     @Override
     public void dispose() {
-        if (map != null)
-            map.dispose();
+        Forge.safeDispose(map, tiledMapRenderer);
     }
 
     @Override
@@ -137,6 +136,8 @@ public class TileMapScene extends HudScene {
         // There's at least 2 seconds to get away from problematic collision point and player can retry
         // a few times to move to different position if the POI is loaded again from WorldStage
         WorldStage.getInstance().getPlayerSprite().clearCollisionHeight();
+        // Dispose renderer and other maps to release textures and other disposables
+        dispose();
         return super.leave();
     }
 
