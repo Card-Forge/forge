@@ -252,11 +252,8 @@ public class  DamageAllAi extends SpellAbilityAi {
         final String damage = sa.getParam("NumDmg");
         int dmg;
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")
-                && sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
-            // Set PayX here to maximum value.
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && sa.getPayCosts().hasXInAnyCostPart()) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
         }
