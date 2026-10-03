@@ -8,8 +8,10 @@ import forge.game.card.CardView;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.Answer;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.Question;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IGuiGame.OrderResult;
@@ -68,6 +70,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*GameEntityView*/.class, Boolean.TYPE),
     setWeaklySelectable (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearWeaklySelectable(Mode.SERVER, Void.TYPE),
+    setQuestion         (Mode.SERVER, Void.TYPE, PlayerView.class, Question.class),
     // TODO case "setPlayerAvatar":
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
@@ -87,6 +90,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     selectButtonOk            (Mode.CLIENT, Void.TYPE),
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
+    answer                    (Mode.CLIENT, Void.TYPE, Answer.class),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),

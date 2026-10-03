@@ -724,7 +724,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private int waitForInput(final Input input) {
-        // OK accepts a yield suggestion when the priority prompt is showing one; ask for the pass itself
+        // The priority input takes no OK on the host; its answers come from the GUI
         if (input instanceof InputPassPriority priorityInput) {
             priorityInput.passPriority();
         } else {
@@ -869,8 +869,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private boolean activateRecordedManaSource(final Card card, final PlayerAction action) {
-        if (card == null || card.isTapped() || card.getManaAbilities().isEmpty()
-                || !playerControllerHuman.selectCard(card.getView(), null, replayTriggerEvent)) {
+        if (card == null || card.isTapped() || card.getManaAbilities().isEmpty()) {
+            return false;
+        }
+        final boolean activated = playerControllerHuman.getInputProxy().getInput() instanceof InputPassPriority priorityInput
+                ? playAtPriority(priorityInput, card)
+                : playerControllerHuman.selectCard(card.getView(), null, replayTriggerEvent);
+        if (!activated) {
             return false;
         }
         debug("using future mana source " + action.describe());
@@ -1020,21 +1025,24 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         }
 
         if (inp instanceof InputPassPriority passPriorityInput) {
-            if (directCard == null) {
-                return false;
-            }
-            final List<SpellAbility> abilities = directCard.getAllPossibleAbilities(playerControllerHuman.getPlayer(), true);
-            if (abilities.size() == 1) {
-                return passPriorityInput.selectAbility(abilities.get(0));
-            }
-            return playerControllerHuman.selectCard(directCard.getView(), null, replayTriggerEvent)
-                    && passPriorityInput.getChosenSa() != null;
+            return directCard != null && playAtPriority(passPriorityInput, directCard);
         }
         if (directCard != null && playerControllerHuman.selectCard(directCard.getView(), null, replayTriggerEvent)) {
             return true;
         }
 
         return false;
+    }
+
+    /** A recorded card selection carries no ability, so a card with several asks the player as the click would have. */
+    private boolean playAtPriority(final InputPassPriority input, final Card card) {
+        final List<SpellAbility> abilities = card.getAllPossibleAbilities(playerControllerHuman.getPlayer(), true);
+        if (abilities.isEmpty()) {
+            return false;
+        }
+        final SpellAbility ability = abilities.size() == 1 ? abilities.get(0)
+                : playerControllerHuman.getAbilityToPlay(card, abilities, replayTriggerEvent);
+        return ability != null && input.selectAbility(ability);
     }
 
     private Card findListChoice(final CardView recordedChoice, final InputSelectEntitiesFromList<?> selectInput) {
