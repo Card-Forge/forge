@@ -90,6 +90,15 @@ public class CombatUtil {
     }
 
     /**
+     * @return a human readable explanation why the declared attack is invalid, or null if it is valid
+     * @see CombatExplainer#explainInvalidAttack(Combat)
+     */
+    public static String explainInvalidAttack(final Combat combat) {
+        final List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
+        return reasons.isEmpty() ? null : String.join("\n", reasons);
+    }
+
+    /**
      * Check if attacker could attack without violating any constraints.
      */
     public static boolean couldAttackButNotAttacking(Combat combat, final Card attacker) {
