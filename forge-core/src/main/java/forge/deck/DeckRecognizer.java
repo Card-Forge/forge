@@ -871,8 +871,6 @@ public class DeckRecognizer {
         // if matched section is not allowed, try to match the card to main.
         // if that won't work, return matched section as this will potentially be an unsupported card!
         return DeckSection.Main.validate(card) ? DeckSection.Main : matchedSection;
-
-
     }
 
     private boolean hasGameFormatConstraints() {
