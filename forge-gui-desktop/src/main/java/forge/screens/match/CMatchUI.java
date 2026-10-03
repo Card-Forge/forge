@@ -151,7 +151,8 @@ public final class CMatchUI
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
-            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard);
+            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard,
+            ZoneType.StickerSheets);
 
     private final List<PlayerZoneUpdate> selectionZonesShown = Lists.newArrayList();
     private final List<PlayerZoneUpdate> revealZonesShown = Lists.newArrayList();
@@ -635,11 +636,6 @@ public final class CMatchUI
     }
 
     @Override
-    public void updateShards(Iterable<PlayerView> shardsUpdate) {
-        //mobile adventure only..
-    }
-
-    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView c : cards) {
             // Null can flow in from a remote-side event whose IdRef failed to resolve in the tracker.
@@ -765,7 +761,6 @@ public final class CMatchUI
 
     @Override
     public void refreshField() {
-        super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
@@ -1172,16 +1167,6 @@ public final class CMatchUI
 
     public String getPromptMessage() {
         return lastPromptMessage;
-    }
-
-    @Override
-    public void showManaPool(final PlayerView player) {
-        //not needed since mana pool icons are always visible
-    }
-
-    @Override
-    public void hideManaPool(final PlayerView player) {
-        //not needed since mana pool icons are always visible
     }
 
     @Override

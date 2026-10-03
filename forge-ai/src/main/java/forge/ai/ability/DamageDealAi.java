@@ -915,10 +915,12 @@ public class DamageDealAi extends DamageAiBase {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
+        int dmg;
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && sa.getPayCosts().hasXInAnyCostPart()) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
+        } else {
+            dmg = calculateDamageAmount(sa, source, damage);
         }
 
         if (!sa.usesTargeting()) {
@@ -931,29 +933,29 @@ public class DamageDealAi extends DamageAiBase {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
+            // If I can kill my target by paying less mana, do it
+            int actualPay = 0;
+            final boolean noPrevention = sa.hasParam("NoPrevention");
+
+            //target is a player
+            if (!sa.getTargets().isTargetingAnyCard()) {
+                actualPay = dmg;
+            }
+            for (final Card c : sa.getTargets().getTargetCards()) {
+                final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                if (adjDamage > actualPay) {
+                    actualPay = adjDamage;
+                }
             }
 
-            if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
-                // If I can kill my target by paying less mana, do it
-                int actualPay = 0;
-                final boolean noPrevention = sa.hasParam("NoPrevention");
-
-                //target is a player
-                if (!sa.getTargets().isTargetingAnyCard()) {
-                    actualPay = dmg;
-                }
-                for (final Card c : sa.getTargets().getTargetCards()) {
-                    final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                    if (adjDamage > actualPay) {
-                        actualPay = adjDamage;
-                    }
-                }
-
-                sa.setXManaCostPaid(actualPay);
-            }
+            sa.setXManaCostPaid(actualPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

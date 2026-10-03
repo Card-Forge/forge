@@ -20,7 +20,6 @@ import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
-import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -67,26 +66,12 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     @Override public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) { }
     @Override public void flashIncorrectAction() { }
     @Override public void alertUser() { }
-    @Override public void updatePhase(boolean saveState) { }
-    @Override public void updateTurn(PlayerView player) { }
-    @Override public void updatePlayerControl() { }
-    @Override public void enableOverlay() { }
-    @Override public void disableOverlay() { }
-    @Override public void showManaPool(PlayerView player) { }
-    @Override public void hideManaPool(PlayerView player) { }
-    @Override public void updateStack() { }
-
-    @Override public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
-    @Override public void updateCards(Iterable<CardView> cards) { }
 
     @Override
     public GameState getGamestate() {
         return null;
     }
 
-    @Override public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) { }
-    @Override public void updateLives(Iterable<PlayerView> livesUpdate) { }
-    @Override public void updateShards(Iterable<PlayerView> shardsUpdate) { }
     @Override public void setPanelSelection(CardView hostCard) { }
 
     @Override

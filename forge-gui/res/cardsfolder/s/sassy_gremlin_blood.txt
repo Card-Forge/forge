@@ -1,0 +1,18 @@
+Name:Sassy Gremlin Blood
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Sassy
+SVar:STK2:Kind$ Name | Word$ Gremlin
+SVar:STK3:Kind$ Name | Word$ Blood
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever this creature attacks, create a Treasure token. | Triggers$ STK7Attacks
+SVar:STK8:Kind$ Ability | Tickets$ 5 | Text$ {3}: Target creature gains flying until end of turn. | Ability$ STK8Flying
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 2
+SVar:STK10:Kind$ PT | Tickets$ 6 | Power$ 10 | Toughness$ 10
+SVar:STK7Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK7Token | TriggerDescription$ Whenever this creature attacks, create a Treasure token.
+SVar:STK7Token:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:STK8Flying:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+Oracle:{TK}{TK} — Whenever this creature attacks, create a Treasure token.\n{TK}{TK}{TK}{TK}{TK} — {3}: Target creature gains flying until end of turn.\n{TK}{TK} — 3/2\n{TK}{TK}{TK}{TK}{TK}{TK} — 10/10

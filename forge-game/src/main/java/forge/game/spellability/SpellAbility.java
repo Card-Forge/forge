@@ -834,10 +834,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payCosts = abCost;
     }
 
-    public boolean costHasX() {
-        return getPayCosts().hasXInAnyCostPart();
-    }
-
     public boolean costHasManaX() {
         if (getPayCosts().hasNoManaCost()) {
             return false;
@@ -1030,14 +1026,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void resetOnceResolved() {
-        //resetPaidHash(); // FIXME: if uncommented, breaks Dragon Presence, e.g. Orator of Ojutai + revealing a Dragon from hand.
-        // Is it truly necessary at this point? The paid hash seems to be reset on all SA instance operations.
-        // Epic spell keeps original targets
-        if (!this.getHostCard().hasKeyword(Keyword.EPIC)) {
-            resetTargets();
-        }
         resetTriggeringObjects();
-
         if (isActivatedAbility()) {
             setXManaCostPaid(null);
         }

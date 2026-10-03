@@ -59,6 +59,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private final Set<String> aiHints = new TreeSet<>();
     private final List<String> keyCards = new ArrayList<>();
+    // Officially suggested alternate commanders (card names), in the order they should be offered
+    private final List<String> altCommanders = new ArrayList<>();
     private final Map<String, String> draftNotes = new HashMap<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
@@ -271,6 +273,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.tags.addAll(this.tags);
         if(keyCards != null)
             result.keyCards.addAll(this.keyCards);
+        //noinspection ConstantValue
+        if(altCommanders != null) //Can happen deserializing old Decks.
+            result.altCommanders.addAll(this.altCommanders);
         result.sleeveArtKey = this.sleeveArtKey;
         result.sleeveArtOffset = this.sleeveArtOffset;
     }
@@ -624,6 +629,20 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return false;
         }
         return keyCards.contains(cardName.trim());
+    }
+
+    public List<String> getAltCommanders() {
+        //noinspection ConstantValue
+        return altCommanders == null ? new ArrayList<>() : new ArrayList<>(altCommanders);
+    }
+
+    public void addAltCommander(String cardName) {
+        if (cardName != null && !cardName.trim().isEmpty()) {
+            String trimmed = cardName.trim();
+            if (!altCommanders.contains(trimmed)) {
+                altCommanders.add(trimmed);
+            }
+        }
     }
 
     public void setDraftNotes(Map<String, String> draftNotes) {

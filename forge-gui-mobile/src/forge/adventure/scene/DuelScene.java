@@ -256,7 +256,10 @@ public class DuelScene extends ForgeScene {
     }
 
     public void exitDuelScene() {
-        Forge.setTransitionScreen(new TransitionScreen(endRunnable, ScreenUtil.getInstance().takeScreenshot(), false, false));
+        TransitionScreen transitionScreen = new TransitionScreen(endRunnable, ScreenUtil.getInstance().getLastScreenTexture(), false, false);
+        transitionScreen.afterMatch = !isArena;
+        transitionScreen.afterEvent = eventData != null;
+        Forge.setTransitionScreen(transitionScreen);
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
