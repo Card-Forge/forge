@@ -5,5 +5,5 @@ A:SP$ Reveal | Defined$ You | RevealValid$ Card.White | AnyNumber$ True | Rememb
 SVar:DBScentOfJasmineLife:DB$ GainLife | LifeAmount$ ScentOfJasmineX | SubAbility$ DBScentOfJasmineCleanup
 SVar:ScentOfJasmineX:Remembered$Amount/Twice
 SVar:DBScentOfJasmineCleanup:DB$ Cleanup | ClearRemembered$ True
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.

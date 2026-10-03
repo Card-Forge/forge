@@ -114,6 +114,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 c.addPerpetual(new PerpetualTypes(timestamp, addType, removeType, remove));
             }
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
+            if (remove.contains(RemoveType.LandTypes)) {
+                c.updateStateForView();
+            }
         }
 
         if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAllKeywords) {

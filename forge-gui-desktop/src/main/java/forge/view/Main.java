@@ -33,6 +33,35 @@ public final class Main {
      * Main entry point for Forge
      */
     public static void main(final String[] args) {
+        // Command line modes must never touch the display: they run on servers, in CI, and over ssh.
+        // This has to happen before any AWT class loads, so it also has to happen before Sentry.init.
+        final String mode = args.length > 0 ? args[0].toLowerCase() : "";
+        if (isCommandLineMode(mode) && System.getProperty("java.awt.headless") == null) {
+            // Only when the user hasn't decided: setting this here would otherwise beat an explicit
+            // -Djava.awt.headless=false on the command line, since it runs before GraphicsEnvironment
+            // caches its answer.
+            System.setProperty("java.awt.headless", "true");
+        }
+
+        // Sentry chains to whatever default handler is already installed, but if none is, an uncaught
+        // exception is reported and then discarded without ever reaching stderr. Install a printing
+        // handler first so failures during the startup below are visible rather than a bare exit code.
+        //
+        // This cannot just be registerErrorHandling() moved up: that reads ForgeConstants.LOG_FILE,
+        // whose class initializer resolves ASSETS_DIR through GuiBase.getInterface() and so needs the
+        // GUI interface already set. The window we need covered includes setting it, which is where
+        // the headless crash this fix is about used to happen — so the real handler cannot be
+        // installed early enough to see it, and something simpler has to cover the gap.
+        //
+        // Scope: registerErrorHandling() then replaces the default handler outright, so this one
+        // covers only the window up to that call. After it, visibility depends on BugReporter, which
+        // prints before it reports.
+        Thread.setDefaultUncaughtExceptionHandler((t, ex) -> {
+            System.err.println("Uncaught exception in thread " + t.getName() + ":");
+            ex.printStackTrace();
+            System.err.flush();
+        });
+
         Sentry.init(options -> {
             options.setEnableExternalConfiguration(true);
             options.setRelease(BuildInfo.getVersionString());
@@ -70,8 +99,6 @@ public final class Main {
         }
 
         // command line startup here
-        String mode = args[0].toLowerCase();
-
         switch (mode) {
             case "sim":
                 SimulateMatch.simulate(args);
@@ -86,11 +113,21 @@ public final class Main {
                 break;
 
             default:
-                System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
+                System.out.println("Unknown mode.\nKnown modes are 'sim', 'parse', 'server'");
                 break;
         }
 
         System.exit(0);
+    }
+
+    /**
+     * Modes that run to completion on the console and never open a window, and so should force
+     * headless AWT. Keep in sync with the named cases of the switch in {@link #main(String[])}.
+     * The switch's {@code default} arm also stays on the console, but an unrecognised argument is
+     * not a mode and only prints usage, so it is deliberately not listed here.
+     */
+    public static boolean isCommandLineMode(final String mode) {
+        return "sim".equals(mode) || "parse".equals(mode) || "server".equals(mode);
     }
 
     @SuppressWarnings("deprecation")

@@ -24,6 +24,11 @@ import forge.util.TextUtil;
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return zoneParamIsLibrary(sa, "Origin") || zoneParamIsLibrary(sa, "Destination");
+    }
+
+    @Override
     public void buildSpellAbility(SpellAbility sa) {
         super.buildSpellAbility(sa);
         AbilityFactory.adjustChangeZoneTarget(sa.getMapParams(), sa);
@@ -209,4 +214,5 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
     }
+
 }

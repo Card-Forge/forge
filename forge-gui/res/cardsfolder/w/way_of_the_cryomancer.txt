@@ -1,0 +1,10 @@
+Name:Way of the Cryomancer
+ManaCost:2 U
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When CARDNAME enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 5
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWCryomancer | Description$ Planeswalkers you control have "[-3]: When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy."
+SVar:PWCryomancer:AB$ DelayedTrigger | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant or sorcery spell this turn, copy it and you may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Planeswalker
+Oracle:When Way of the Cryomancer enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nPlaneswalkers you control have "[-3]: When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy."

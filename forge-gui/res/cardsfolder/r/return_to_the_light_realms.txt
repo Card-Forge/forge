@@ -1,0 +1,5 @@
+Name:Return to the Light Realms
+ManaCost:7 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand+YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all nonland permanent cards from your graveyard to the battlefield.
+Oracle:Return all nonland permanent cards from your graveyard to the battlefield.

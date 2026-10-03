@@ -1976,7 +1976,7 @@
     "equipmentSlot": "Boots",
     "iconName": "Fblthp'sLostSocks",
     "effect": {
-        "lifeModifier": -10,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Humongulus"
      ]
@@ -2981,6 +2981,18 @@
      ]
     }
   },
+  {
+    "name": "Soothsayer's Hat",
+    "description": "X: Rearrange top X of library. 3UU: Shuffle.",
+    "equipmentSlot": "Neck",
+    "iconName": "Soothsayer'sHat",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Soothsaying"
+      ]
+    }
+  },
     {
     "name": "Bonder's Helm",
     "description": "Pay 2 and sac a creature to shock for 2",
@@ -3663,7 +3675,7 @@
     "equipmentSlot": "Right",
     "iconName": "Fblthp'sLostFishingPole",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Fishing Pole|FDN"
      ]

@@ -3,5 +3,5 @@ ManaCost:3
 Types:Artifact
 A:AB$ Tap | Cost$ X X 1 T | TargetMin$ X | TargetMax$ X | ValidTgts$ Land | TgtPrompt$ Select X target lands | SpellDescription$ Tap X target lands.
 SVar:X:Count$xPaid
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:{X}{X}{1}, {T}: Tap X target lands.

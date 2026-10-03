@@ -7,7 +7,7 @@ import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
-import forge.gamemodes.net.server.RemoteClientGuiGame;
+import forge.gamemodes.net.ProtocolGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -20,6 +20,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.Sticker;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -39,6 +40,7 @@ import forge.game.player.actions.ColorChoiceAction;
 import forge.game.player.actions.ConfirmAction;
 import forge.game.player.actions.ManaComboAction;
 import forge.game.player.actions.ModeChoiceAction;
+import forge.game.player.actions.PassPriorityAction;
 import forge.game.player.actions.PayCostAction;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
@@ -787,9 +789,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
-        if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
-        if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+        if (!isMacroActive()) {
+            AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
+            if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+            if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+        }
 
         // triggers with costs can always be declined by not paying the cost
         if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
@@ -823,9 +827,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = spellAbilityView.getHostCard();
             else
                 cardView = wrapper.getCardView();
-            return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            final boolean result = this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            recordConfirm(cardView, result);
+            return result;
         }
-        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        final boolean result = InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        recordConfirm(wrapper.getCardView(), result);
+        return result;
     }
 
     @Override
@@ -944,26 +952,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            // Show opponent's hand as a FloatingZone with a minimal OK dialog instead of a names list
-            final boolean useFloatingHandReveal = zone == ZoneType.Hand
+            // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
+            final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
                     && !getGui().isLibgdxPort();
-            if (useFloatingHandReveal) {
-                final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-                zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
-                final Iterable<PlayerZoneUpdate>[] zonesShown = new Iterable[1];
-                FThreads.invokeInEdtNowOrLater(() -> {
-                    getGui().updateZones(zonesToUpdate);
-                    zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
-                });
+            if (revealInPrompt) {
+                getGui().showRevealedCards(collection);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
+                getGui().hideRevealedCards();
             } else {
                 getGui().reveal(fm, collection);
             }
@@ -1394,6 +1396,51 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa, boolean isOptional) {
+        String title = localizer.getMessage("lblChooseSticker", CardTranslation.getTranslatedName(target.getName()));
+        final List<String> labels = Lists.newArrayList();
+        final List<Integer> indices = Lists.newArrayList();
+        for (Sticker s : options) {
+            labels.add(s.getTickets() == 0 ? s.getDescription()
+                    : StringUtils.repeat("{TK}", s.getTickets()) + " - " + s.getDescription());
+            indices.add(indices.size());
+        }
+        FSerializableFunction<Integer, String> display = labels::get;
+        Integer chosen;
+        if (isOptional) {
+            List<Integer> picked = getGui().getChoices(title, 0, 1, indices, null, display);
+            chosen = picked.isEmpty() ? null : picked.get(0);
+        } else {
+            chosen = getGui().one(title, indices, display);
+        }
+        return chosen == null ? null : options.get(chosen);
+    }
+
+    @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return chooseSingleEntityForEffect(options, null, null,
+                localizer.getMessage("lblChooseCardToKeepStickers"), false, null, null);
+    }
+
+    @Override
+    public int chooseStickerNamePosition(Sticker sticker, Card target) {
+        // CR 123.6a
+        if (StringUtils.isBlank(target.getName()) || target.stickerWouldFillBlank()) {
+            return 0;
+        }
+        int words = target.getName().split(" ").length;
+        final List<Integer> positions = Lists.newArrayList();
+        final List<String> names = Lists.newArrayList();
+        for (int at = 0; at <= words; at++) {
+            positions.add(at);
+            names.add(Card.addStickerWord(target.getName(), sticker.getWord(), at));
+        }
+        FSerializableFunction<Integer, String> display = names::get;
+        Integer chosen = getGui().one(localizer.getMessage("lblChooseStickerNamePosition"), positions, display);
+        return chosen == null ? 0 : chosen;
+    }
+
+    @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         String prompt;
         if (assignee != null) {
@@ -1509,7 +1556,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // CombatUtil.canAttack ensures we only get here when the player has a legal attacker
         // so APINA must never skip - the invocation itself is the available action. User
         // initiated yields (pass until end of turn) still skip when not-attacking is legal.
-        if (yieldController.shouldAutoYield()) {
+        if (!isMacroActive() && yieldController.shouldAutoYield()) {
             if (CombatUtil.validateAttackers(combat)) {
                 return;
             }
@@ -1653,9 +1700,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
+        // shouldAutoYield, not isYieldActive: it clears yields that have run their course, so an expiring one no longer skips the scan
         // Compute the actionable set when APINA / suggestions / highlights need it.
         boolean highlightsEnabled = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
-        if (!yieldController.isYieldActive() && (needsAvailableActions() || highlightsEnabled)) {
+        if (!yieldController.shouldAutoYield() && (needsAvailableActions() || highlightsEnabled)) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
             if (highlightsEnabled) {
                 // Highlights need the full set; APINA derives its boolean from the same scan.
@@ -1672,10 +1720,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         // yieldJustEndedFlag is read from the EDT (didYieldJustEnd); synchronized writer/reader pair handles visibility.
-        boolean nowMayAutoPass = mayAutoPass();
-        yieldController.noteMayAutoPassResult(nowMayAutoPass);
+        // Only a real yield counts here: this tracks when one ends, and skipped phases happen every turn
+        boolean autoPassing = mayAutoPass();
+        yieldController.noteMayAutoPassResult(autoPassing);
+        boolean nowMayAutoPass = autoPassing || skipsPromptForStackOrPhase();
 
         if (nowMayAutoPass) {
+            // A skipped phase has no priority input to record its implicit pass.
+            if (macros != null && macros.isRecording()) {
+                macros.addRememberedAction(new PassPriorityAction(stack.isEmpty(), getGame().getPhaseHandler().getPhase()));
+            }
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
@@ -1701,28 +1755,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGui().awaitNextInput();
             netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
-        }
-
-        if (stack.isEmpty()) {
-            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(), getGame().getPhaseHandler().getPhase())) {
-                getGui().awaitNextInput();
-                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
-                return null; // avoid prompt for input if stack is empty and
-                // player is set to skip the current phase
-            }
-        } else {
-            final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
-                // avoid prompt for input if top ability of stack is set to auto-yield
-                try {
-                    Thread.sleep(FControlGamePlayback.resolveDelay);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
-                }
-                getGui().awaitNextInput();
-                netLog.trace("Returning null (autoYield) for player {}", player.getName());
-                return null;
-            }
         }
 
         netLog.trace("Creating InputPassPriority for player {}", player.getName());
@@ -2032,11 +2064,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public ICardFace chooseSingleCardFace(final SpellAbility sa, final String message, final Predicate<ICardFace> cpp,
                                           final String name) {
+        FModel.getMagicDb().ensureAllCardsLoaded();
         List<CardFaceView> choices = FModel.getMagicDb().getCommonCards().streamAllFaces()
                 .filter(cpp)
                 .map(CardFaceView::new)
                 .sorted()
                 .collect(Collectors.toList());
+        if (choices.isEmpty())
+            return null;
         CardFaceView cardFaceView = getGui().one(message, choices);
         return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
@@ -2044,6 +2079,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
         Map<CardFaceView, ICardFace> mapped = faces.stream().collect(Collectors.toMap(CardFaceView::new, Function.identity(), (a, b) -> a, TreeMap::new));
+        if (mapped.isEmpty())
+            return null;
         CardFaceView chosen = getGui().one(message, Lists.newArrayList(mapped.keySet()));
         return mapped.get(chosen);
     }
@@ -2666,11 +2703,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                  final String message) {
         while (true) {
             final ICardFace cardFace = chooseSingleCardFace(sa, message, cpp, sa.getHostCard().getName());
+            if (cardFace == null)
+                return "";
             final PaperCard cp = FModel.getMagicDb().getCommonCards().getCard(cardFace.getName());
             // the Card instance for test needs a game to be tested
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
+            CardUtil.turnToRightFace(cardFace.getName(), instanceForPlayer);
             // TODO need the valid check be done against the CardFace?
-            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
+            if (instanceForPlayer.isValid(valid.split(","), sa.getHostCard().getController(), sa.getHostCard(), sa)) {
                 // it need to return name for card face
                 return cardFace.getName();
             }
@@ -2750,14 +2790,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             recordConfirm((CardView) null, false);
         }
         inputProxy.selectButtonCancel();
-    }
-
-    @Override
-    public void passPriority() {
-        final Input inp = inputProxy.getInput();
-        if (inp instanceof InputPassPriority) {
-            inp.selectButtonOK();
-        }
     }
 
     @Override
@@ -3155,7 +3187,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @Override
         public void winGame() {
             final Input input = inputQueue.getInput();
-            if (!(input instanceof InputPassPriority)) {
+            if (!(input instanceof InputPassPriority priorityInput)) {
                 getGui().message(localizer.getMessage("lblYouMustHavePrioritytoUseThisFeature"), localizer.getMessage("lblWinGame"));
                 return;
             }
@@ -3170,7 +3202,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             // pass priority so that causes gui player to win
-            input.selectButtonOK();
+            priorityInput.passPriority();
         }
 
         /*
@@ -3354,6 +3386,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 f = lastAdded;
                 quantity = 1;
             } else {
+                FModel.getMagicDb().ensureAllCardsLoaded();
                 List<CardFaceView> choices = carddb.streamAllFaces().map(CardFaceView::new).collect(Collectors.toList());
                 Collections.sort(choices);
                 f = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
@@ -3376,21 +3409,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
                     if (targetZone == ZoneType.Battlefield) {
-                        if (!forgeCard.getName().equals(f.getName())) {
-                            if (forgeCard.getRules().getSplitType().equals(CardSplitType.Specialize)) {
-                                for (Map.Entry<CardStateName, ICardFace> e : forgeCard.getRules().getSpecializeParts().entrySet()) {
-                                    if (f.getName().equals(e.getValue().getName())) {
-                                        forgeCard.changeToState(e.getKey());
-                                        break;
-                                    }
-                                }
-                            } else {
-                                forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
-                                if (forgeCard.getCurrentStateName().equals(CardStateName.Backside)) {
-                                    forgeCard.setBackSide(true);
-                                }
-                            }
-                        }
+                        CardUtil.turnToRightFace(f.getName(), forgeCard);
 
                         if (noTriggers) {
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
@@ -3420,7 +3439,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 // ensure triggered abilities fire
                                 getGame().getTriggerHandler().runWaitingTriggers();
                             } else {
-                                final FCollectionView<SpellAbility> choices1 = forgeCard.getBasicSpells();
+                                // this is really needed (for rollbacks at least)
+                                getGame().getAction().moveToHand(forgeCard, null);
+                                final List<SpellAbility> choices1 = forgeCard.getAllPossibleAbilities(p, false);
                                 if (choices1.isEmpty()) {
                                     return; // when would it happen?
                                 }
@@ -3429,7 +3450,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 if (choices1.size() == 1) {
                                     sa = choices1.iterator().next();
                                 } else {
-                                    sa = repeatLast ? lastAddedSA : getGui().oneOrNone(localizer.getMessage("lblChoose"), (FCollection<SpellAbility>) choices1);
+                                    sa = repeatLast ? lastAddedSA : getGui().oneOrNone(localizer.getMessage("lblChoose"), choices1);
                                 }
                                 if (sa == null) {
                                     return; // happens if cancelled
@@ -3437,8 +3458,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
                                 lastAddedSA = sa;
 
-                                // this is really needed (for rollbacks at least)
-                                getGame().getAction().moveToHand(forgeCard, null);
                                 // Human player is choosing targets for an ability
                                 // controlled by chosen player.
                                 sa.setActivatingPlayer(p);
@@ -3668,6 +3687,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return macros;
     }
 
+    public boolean isMacroActive() {
+        return macros != null && (macros.isRecording() || macros.isReplaying());
+    }
+
     @Override
     public void concede() {
         if (player != null) {
@@ -3814,12 +3837,28 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isRemoteClient() {
-        return gui instanceof RemoteClientGuiGame;
+        return gui instanceof ProtocolGuiGame;
     }
 
+    /** True while the player is auto-passing. Deliberately does not cover a skipped phase or an auto-yielded
+     *  stack top: {@link #autoPassCancel} runs every cleanup, and cleanup is a skipped phase for most players. */
     public boolean mayAutoPass() {
-        return yieldController.shouldAutoYield()
-                || yieldController.isAutoPassingNoActions(getLocalPlayerView());
+        return !isMacroActive()
+                && (yieldController.shouldAutoYield()
+                || yieldController.isAutoPassingNoActions(getLocalPlayerView()));
+    }
+
+    /** An auto-yielded ability on top of the stack, or a phase set to be skipped with the stack empty.
+     *  Reads the view, not the engine, because this also runs on network threads. */
+    private boolean skipsPromptForStackOrPhase() {
+        if (macros != null && macros.isReplaying()) return false;
+        final GameView gameView = getGui().getGameView();
+        if (gameView == null) return false;
+        final StackItemView top = gameView.peekStack();
+        if (top != null) return !isMacroActive() && top.isAbility() && shouldAutoYield(top.getKey());
+        final PlayerView turnPlayer = gameView.getPlayerTurn();
+        final PhaseType phase = gameView.getPhase();
+        return turnPlayer != null && phase != null && isUiSetToSkipPhase(turnPlayer, phase);
     }
 
     public void autoPassUntilEndOfTurn() {
@@ -3842,17 +3881,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
+        tryAutoPassNow();
     }
 
     @Override
     public void setDisableAutoYields(final boolean disable) {
         yieldController.setDisableAutoYields(disable);
+        tryAutoPassNow();
     }
 
     @Override
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         yieldController.setTriggerDecision(key, decision, isAbilityScope);
 
+        if (isMacroActive()) return;
         if (!(inputQueue.getInput() instanceof InputConfirm)) return;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
         if (top == null || !top.isTrigger()) return;
@@ -3869,6 +3911,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
+        if (macros != null && macros.isReplaying()) {
+            return false;
+        }
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }
@@ -3897,26 +3942,39 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 getGui().updateAutoPassPrompt();
             }
         }
+        if (update instanceof YieldUpdate.SeedFromClient
+                || (update instanceof YieldUpdate.SetYieldPref u
+                        && u.pref() == FPref.YIELD_AUTO_PASS_NO_ACTIONS && Boolean.parseBoolean(u.value()))) {
+            refreshAvailableActionsForPrompt();
+        }
         tryAutoPassNow();
     }
 
     @Override
     public void setYieldPref(final FPref pref, final String value) {
-        // Dialog already wrote to FModel; APINA is the only pref whose toggle can flip mayAutoPass for a sitting prompt
-        if (pref == FPref.YIELD_AUTO_PASS_NO_ACTIONS) tryAutoPassNow();
+        // Dialog already wrote to FModel; switching APINA on is the only change that can flip mayAutoPass
+        // for a sitting prompt, and the budget field saves on every keystroke, so sweeping else is waste
+        if (pref != FPref.YIELD_AUTO_PASS_NO_ACTIONS || !Boolean.parseBoolean(value)) return;
+        refreshAvailableActionsForPrompt();
+        tryAutoPassNow();
     }
 
-    /** Re-evaluate mayAutoPass at the current prompt; click OK if it would now fire.
-     *  Same compute gating as {@link #chooseSpellAbilityToPlay} so the actions field is fresh. */
+    /** Holds the input it tested so a replacement cannot be answered in its place. isFinished narrows that
+     *  window but does not close it: the flag is set on the EDT, after the input has already been removed. */
     private void tryAutoPassNow() {
-        if (!(inputQueue.getInput() instanceof InputPassPriority)) return;
-        if (!yieldController.isYieldActive() && needsAvailableActions()) {
-            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
-            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+        if (inputProxy.getInput() instanceof InputPassPriority inp
+                && (mayAutoPass() || skipsPromptForStackOrPhase())) {
+            inp.passPriority();
         }
-        if (mayAutoPass()) {
-            selectButtonOk();
-        }
+    }
+
+    /** This sweep mutates the game graph, so it runs only when a preference that reads its result changes.
+     *  Otherwise the value computed when the prompt was built still stands. */
+    private void refreshAvailableActionsForPrompt() {
+        if (yieldController.isYieldActive() || !needsAvailableActions()) return;
+        if (!(inputProxy.getInput() instanceof InputPassPriority)) return;
+        long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
+        getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
     }
 
     /** True if yield consumer needs the synced wire field. */

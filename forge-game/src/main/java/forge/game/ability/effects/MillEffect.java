@@ -20,6 +20,11 @@ import java.util.Map;
 public class MillEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
+    @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
@@ -110,4 +115,5 @@ public class MillEffect extends SpellAbilityEffect {
 
         return sb.toString();
     }
+
 }

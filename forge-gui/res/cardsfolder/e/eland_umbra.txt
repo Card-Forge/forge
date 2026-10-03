@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 K:Umbra armor
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 4 | Description$ Enchanted creature gets +0/+4.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddToughness$ 4 | Description$ Enchanted creature gets +0/+4.
 Oracle:Enchant creature\nEnchanted creature gets +0/+4.\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

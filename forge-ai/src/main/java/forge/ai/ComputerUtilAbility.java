@@ -28,11 +28,13 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -73,7 +75,7 @@ public class ComputerUtilAbility {
                 all.add(p.getCardsIn(ZoneType.Library).get(0));
             }
         }
-        all.addAll(game.getCardsIn(ZoneType.Command));
+        all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()));
         all.addAll(game.getCardsIn(ZoneType.Exile));
         all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
@@ -211,13 +213,15 @@ public class ComputerUtilAbility {
             }
         }
         for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
-            SpellAbility ab = si.getSpellAbility();
-            if (ab != null && ab.getApi() == api && si.getTargetChoices() != null) {
-                for (Card c : cardList) {
-                    // TODO: somehow ensure that the detected SA won't be countered
-                    if (si.getTargetChoices().getTargetCards().contains(c)) {
-                        // Was already targeted by a spell ability instance on stack
-                        targeted.add(c);
+            for (SpellAbility ab = si.getSpellAbility(); ab != null; ab = ab.getSubAbility()) {
+                TargetChoices tc = ab == si.getSpellAbility() ? si.getTargetChoices() : ab.getTargets();
+                if (ab.getApi() == api && tc != null) {
+                    for (Card c : cardList) {
+                        // TODO: somehow ensure that the detected SA won't be countered
+                        if (tc.getTargetCards().contains(c)) {
+                            // Was already targeted by a spell ability instance on stack
+                            targeted.add(c);
+                        }
                     }
                 }
             }
@@ -239,7 +243,6 @@ public class ComputerUtilAbility {
 
     public final static saComparator saEvaluator = new saComparator();
 
-    // not sure "playing biggest spell" matters?
     public final static class saComparator implements Comparator<SpellAbility> {
         @Override
         public int compare(final SpellAbility a, final SpellAbility b) {
@@ -357,6 +360,9 @@ public class ComputerUtilAbility {
                 if (source.isCreature()) {
                     p += 1;
                 }
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
+                    p -= 10;
+                }
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
                 }
@@ -364,8 +370,9 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
-                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
-                    p -= 10;
+                // prefer spells from hand when it can lower risk of discarding
+                if (source.isInZone(ZoneType.Hand) && !ai.isUnlimitedHandSize()) {
+                    p += Math.max(0, CardLists.count(ai.getCardsIn(ZoneType.Hand), c -> !c.hasSVar("DiscardMe")) - ai.getMaxHandSize());
                 }
                 // don't play equipment before having any creatures
                 if (source.isEquipment() && noCreatures) {
@@ -429,12 +436,12 @@ public class ComputerUtilAbility {
             if (ApiType.DestroyAll == sa.getApi()) {
                 // check boardwipe earlier
                 p += 4;
-            } else if (ApiType.Mana == sa.getApi()) {
+            } else if (sa.isManaAbility()) {
                 // keep mana abilities for paying
                 p -= 9;
             }
 
-            // try to cast mana ritual spells before casting spells to maximize potential mana
+            // try to use mana ritual before casting spells to maximize potential mana
             if ("ManaRitual".equals(sa.getParam("AILogic"))) {
                 p += 9;
             }

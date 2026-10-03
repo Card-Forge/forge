@@ -50,7 +50,6 @@ public class ScryAi extends SpellAbilityAi {
                 if (xPay == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                sa.getRootAbility().setXManaCostPaid(xPay);
             }
 
             if (mandatory) {

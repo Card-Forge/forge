@@ -80,7 +80,6 @@ public class DrawAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
 
-            // Blood or Clue tokens
             if (hostCard.isToken() && (hostCard.getType().hasSubtype("Clue") || hostCard.getType().hasSubtype("Blood"))) {
                 if (ph.isPlayerTurn(ai)) {
                     if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {

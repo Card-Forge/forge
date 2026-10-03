@@ -63,7 +63,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     @Override
-    public final boolean equals(final Object o) {
+    public boolean equals(final Object o) {
         if (o == null) { return false; }
         return o.hashCode() == hashCode() && o.getClass().equals(getClass());
     }
@@ -88,7 +88,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
             if (key.getFreezeMode() == TrackableProperty.FreezeMode.RespectsFreeze) {
                 respectsFreeze = true;
             } else if (key.getFreezeMode() == TrackableProperty.FreezeMode.IgnoresFreezeIfUnset) {
-                respectsFreeze = (props.get(key) != null);
+                respectsFreeze = props.get(key) != null;
             }
             if (respectsFreeze) {
                 tracker.addDelayedPropChange(this, key, value);

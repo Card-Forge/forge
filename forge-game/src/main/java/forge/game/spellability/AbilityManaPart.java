@@ -582,11 +582,9 @@ public class AbilityManaPart implements java.io.Serializable {
     public boolean isAnyMana() {
         return this.getOrigProduced().contains("Any");
     }
-
     public boolean isComboMana() {
         return this.getOrigProduced().startsWith("Combo");
     }
-
     public boolean isSpecialMana() {
         return this.getOrigProduced().contains("Special");
     }
@@ -644,13 +642,13 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return the color available in combination mana
      */
     public String getComboColors(SpellAbility sa) {
-        String origProduced = getOrigProduced();
-        if (!origProduced.startsWith("Combo")) {
+        if (!isComboMana()) {
             return "";
         }
-        if (origProduced.contains("Any")) {
+        if (isAnyMana()) {
             return "W U B R G";
         }
+        String origProduced = getOrigProduced();
         // replace Chosen for Combo colors
         if (origProduced.contains("Chosen")) {
             origProduced = origProduced.replace("Chosen", getChosenColor(sa));

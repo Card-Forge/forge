@@ -1,0 +1,10 @@
+Name:Fblthp, Knows the Way
+ManaCost:X G G
+Types:Legendary Creature Homunculus Scout
+PT:*/2
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Y | Description$ Domain — NICKNAME's power is equal to the number of basic land types among lands you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, search your library for up to X basic land cards with different names, reveal them, put them into your hand, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ X | DifferentNames$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$Domain
+Oracle:Domain — Fblthp's power is equal to the number of basic land types among lands you control.\nWhen Fblthp enters, search your library for up to X basic land cards with different names, reveal them, put them into your hand, then shuffle.

@@ -544,25 +544,25 @@ public class TriggerHandler {
     }
 
     private void adjustUndoStack(Trigger regtrig, Map<AbilityKey, Object> runParams) {
-        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
+        if (regtrig.getMode() == TriggerType.TapsForMana || regtrig.getMode() == TriggerType.ManaAdded) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
+        else if (regtrig.getMode() == TriggerType.AbilityCast || regtrig instanceof TriggerAbilityResolves) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
+        else if (regtrig.getMode() == TriggerType.Taps || regtrig.getMode() == TriggerType.Untaps) {
             final Card c = (Card) runParams.get(AbilityKey.Card);
             for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
                 sa.setUndoable(false);
             }
         }  
-        else if (regtrig instanceof TriggerTapAll) {
+        else if (regtrig.getMode() == TriggerType.TapAll) {
             final Iterable<Card> cards = (Iterable<Card>) runParams.get(AbilityKey.Cards);
             for (Card c : cards) {
                 for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
@@ -570,7 +570,7 @@ public class TriggerHandler {
                 }
             }
         }
-        else if (regtrig instanceof TriggerUntapAll) {
+        else if (regtrig.getMode() == TriggerType.UntapAll) {
             final Map<Player, CardCollection> map = (Map<Player, CardCollection>) runParams.get(AbilityKey.Map);
             for (Card c : Iterables.concat(map.values())) {
                 for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {

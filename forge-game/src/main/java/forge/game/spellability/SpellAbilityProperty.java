@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -33,6 +34,11 @@ public class SpellAbilityProperty {
             String comparator = property.substring(5, 7);
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
             return Expressions.compare(sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid(), comparator, y);
+        } else if (property.startsWith("CountersRemovedToPay")) {
+            String comparator = property.substring(20, 22);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(22), sa);
+            Integer removed = sa.getSVarInt("CostCountersRemoved");
+            return Expressions.compare(removed == null ? 0 : removed, comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
@@ -153,7 +159,15 @@ public class SpellAbilityProperty {
             if (source.getEffectSourceAbility() == null) {
                 return false;
             }
-            if (!sa.equals(source.getEffectSourceAbility().getRootAbility().getOriginalAbility())) {
+            SpellAbility root = source.getEffectSourceAbility().getRootAbility();
+            if (root instanceof WrappedAbility wa) {
+                root = wa.getWrappedAbility();
+            }
+            sa = sa.getRootAbility();
+            if (sa instanceof WrappedAbility wa) {
+                sa = wa.getWrappedAbility();
+            }
+            if (!sa.equals(root)) {
                 return false;
             }
         } else if (property.equals("LastChapter")) {

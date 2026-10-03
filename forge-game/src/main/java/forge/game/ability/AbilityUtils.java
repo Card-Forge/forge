@@ -14,6 +14,9 @@ import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.Sticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
 import forge.game.keyword.Keyword;
@@ -1732,6 +1735,12 @@ public class AbilityUtils {
                     }
                     return count;
                 }
+                // Count$TriggeredManaCostGeneric
+                if (sq[0].startsWith("TriggeredManaCostGeneric")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    Card triggeringObject = (Card) root.getTriggeringObject(AbilityKey.Card);
+                    return triggeringObject.getManaCost().getGenericCost();
+                }
                 // Count$TriggeredManaCostDevotion.<Color>
                 if (sq[0].startsWith("TriggeredManaCostDevotion")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -2095,6 +2104,11 @@ public class AbilityUtils {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
+        // CardStickers[.<Kind>|.NameMinLetters.N|.NameMaxLetters.N|.NameLetter.x|.NameStartsWith.x]
+        if (sq[0].startsWith("CardStickers")) {
+            return doXMath(countStickers(c, sq), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
@@ -2281,6 +2295,9 @@ public class AbilityUtils {
         if (sq[0].equals("YourStartingLife")) {
             return doXMath(player.getStartingLife(), expr, c, ctb);
         }
+        if (sq[0].equals("YourStartingLibrarySize")) {
+            return doXMath(player.getStartingLibrarySize(), expr, c, ctb);
+        }
 
         if (sq[0].equals("YourLifeTotal")) {
             return doXMath(player.getLife(), expr, c, ctb);
@@ -2306,6 +2323,10 @@ public class AbilityUtils {
         if (sq[0].startsWith("YouRolledThisTurn")) {
             int n = calculateAmount(c, sq[0].substring(17), ctb);
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YouScryThisTurn")) {
+            return doXMath(player.getScryThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("YouSurveilThisTurn")) {
@@ -2873,6 +2894,59 @@ public class AbilityUtils {
         return doXMath(num, expr, c, ctb);
     }
 
+    private static int countStickers(Card c, String[] sq) {
+        String kind = sq.length > 1 ? sq[1] : null;
+        if (kind == null || kind.isEmpty()) {
+            return c.getStickers().size();
+        }
+        String arg = sq.length > 2 ? sq[2] : null;
+        int count = 0;
+        for (AppliedSticker applied : c.getStickers()) {
+            Sticker s = applied.getSticker();
+            if (s.getKind() == StickerKind.NAME && arg != null) {
+                String letters = s.getLetters();
+                switch (kind) {
+                    case "NameStartsWith" -> {
+                        String wanted = "ChosenType".equals(arg) ? c.getChosenType() : arg;
+                        if (!letters.isEmpty() && StringUtils.isNotEmpty(wanted)
+                                && Character.toUpperCase(letters.charAt(0))
+                                        == Character.toUpperCase(wanted.charAt(0))) {
+                            count++;
+                        }
+                        continue;
+                    }
+                    case "NameLetter" -> {
+                        char wanted = Character.toUpperCase(arg.charAt(0));
+                        for (int i = 0; i < letters.length(); i++) {
+                            if (Character.toUpperCase(letters.charAt(i)) == wanted) {
+                                count++;
+                            }
+                        }
+                        continue;
+                    }
+                    case "NameMinLetters" -> {
+                        if (letters.length() >= Integer.parseInt(arg)) {
+                            count++;
+                        }
+                        continue;
+                    }
+                    case "NameMaxLetters" -> {
+                        if (letters.length() <= Integer.parseInt(arg)) {
+                            count++;
+                        }
+                        continue;
+                    }
+                    default -> {
+                    }
+                }
+            }
+            if (s.getKind() == StickerKind.smartValueOf(kind)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
         for (String pair : conversion.split(" ")) {
             // Check if conversion is additive or restrictive and how to split
@@ -2916,6 +2990,9 @@ public class AbilityUtils {
         }
         if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Backside)) {
             collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Backside), controller, withAltCost);
+        }
+        if (tgtCard.hasState(CardStateName.Secondary)) {
+            collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Secondary), controller, withAltCost);
         }
 
         for (SpellAbility s : list) {
@@ -3504,6 +3581,9 @@ public class AbilityUtils {
         if (value.contains("StartingLife")) {
             return doXMath(player.getStartingLife(), m, source, ctb);
         }
+        if (value.contains("StartingLibrarySize")) {
+            return doXMath(player.getStartingLibrarySize(), m, source, ctb);
+        }
 
         if (value.contains("LifeTotal")) {
             return doXMath(player.getLife(), m, source, ctb);
@@ -3701,6 +3781,19 @@ public class AbilityUtils {
             return doXMath(filtered.size(), splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
+        if (def.startsWith("StickerPower") || def.startsWith("StickerToughness")) {
+            final boolean power = def.startsWith("StickerPower");
+            int total = 0;
+            for (Card c : paidList) {
+                for (AppliedSticker applied : c.getStickers()) {
+                    if (applied.getKind() == StickerKind.PT) {
+                        total += power ? applied.getSticker().getPower() : applied.getSticker().getToughness();
+                    }
+                }
+            }
+            return doXMath(total, CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         if (def.startsWith("AllTypes")) {
             return countCardTypesFromList(paidList, false) +
                     countSuperTypesFromList(paidList) +
@@ -3718,6 +3811,15 @@ public class AbilityUtils {
             }
             // filter out fun types?
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
+        if (def.startsWith("PlaneswalkerType")) {
+            final Set<String> walkerTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                walkerTypes.addAll(card.getType().getPlaneswalkerTypes());
+            }
+
+            return doXMath(walkerTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
         //Per request for custom cards.

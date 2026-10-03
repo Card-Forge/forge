@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Split second
 K:Enchant:Permanent
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Permanent | GainControl$ You | Description$ You control enchanted permanent.
 SVar:PlayMain1:TRUE
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nEnchant permanent\nYou control enchanted permanent.

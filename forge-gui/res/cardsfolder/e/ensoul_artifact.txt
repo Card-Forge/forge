@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact
 SVar:AttachAITgts:Card.nonCreature
 SVar:AttachAILogic:Animate
-S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | SetPower$ 5 | SetToughness$ 5 | AddType$ Creature | Description$ Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Artifact | SetPower$ 5 | SetToughness$ 5 | AddType$ Creature | Description$ Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
 AI:RemoveDeck:Random
 DeckNeeds:Type$Artifact
 Oracle:Enchant artifact\nEnchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.

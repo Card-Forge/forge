@@ -125,13 +125,18 @@ public class CloneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean cloneTgtAI(final SpellAbility sa, boolean mandatory) {
-        // Specific logic for cards
-        List<Card> targets = CardUtil.getValidCardsToTarget(sa);
-        if (mandatory && targets.isEmpty()) {
+        CardCollection targets = CardUtil.getValidCardsToTarget(sa);
+        if (targets.isEmpty()) {
             return false;
         }
 
         if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
+            CardCollection viable = ComputerUtilCard.filterOutFatalCopies(targets, sa.getActivatingPlayer());
+            if (!viable.isEmpty()) {
+                targets = viable;
+            } else if (!mandatory) {
+                return false;
+            }
             sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
             return true;
         }

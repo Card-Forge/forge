@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact,Creature:artifact or creature
 SVar:AttachAITgts:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 3 | AddKeyword$ Reach | AddAbility$ ABManaGG | Description$ As long as enchanted permanent is a creature, it gets +1/+3 and has reach and "{T}: Add {G}{G}."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 1 | AddToughness$ 3 | AddKeyword$ Reach | AddAbility$ ABManaGG | Description$ As long as enchanted permanent is a creature, it gets +1/+3 and has reach and "{T}: Add {G}{G}."
 SVar:ABManaGG:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add {G}{G}.
 A:AB$ Token | PrecostDesc$ Channel — | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ g_1_1_human_monk_g | SpellDescription$ Create a 1/1 green Human Monk creature token with "{T}: Add {G}."
 DeckHas:Ability$Token|Discard & Type$Human

@@ -948,8 +948,8 @@
       {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
       {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
       {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
-      {"type": "cardPackShop", "count": 1, "editions": ["CON"] },
-      {"type": "cardPackShop", "count": 1, "editions": ["CON"] }
+      {"type": "cardPackShop", "count": 1, "editions": ["CFX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CFX"] }
     ]
   },
   {

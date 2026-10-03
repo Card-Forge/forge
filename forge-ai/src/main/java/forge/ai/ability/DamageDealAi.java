@@ -40,6 +40,7 @@ import java.util.Map;
 import forge.util.IterableUtil;
 
 public class DamageDealAi extends DamageAiBase {
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final SpellAbility root = sa.getRootAbility();
@@ -324,12 +325,11 @@ public class DamageDealAi extends DamageAiBase {
             final Player pl, final boolean mandatory) {
         // wait until stack is empty (prevents duplicate kills)
         if (!sa.isTrigger() && !ai.getGame().getStack().isEmpty()) {
-            //TODO:all removal APIs require a check to prevent duplicate kill/bounce/exile/etc.
-            //      The original code is a blunt instrument that also blocks all use of removal as interrupts. The issue is
-            //      with the AI not having code to consider what occurred previously in the stack thus it has no memory of
-            //      removing a target already if something else is placed on top of the stack. A better solution is to place
-            //      the checking mechanism after the target is chosen and determine if the topstack invalidates the earlier
-            //      removal (shroud effect, pump against damage) so a new removal can/should be applied if possible.
+            //TODO: The original code is a blunt instrument that also blocks all use of removal as interrupts.
+            //      Destroy, ChangeZone, DealDamage and Fight targeting skip creatures the stack already kills
+            //      (ComputerUtil.filterCreaturesThatWillDieThisTurn), but other removal APIs don't yet (e.g. curse
+            //      pumps, -1/-1 counters, gain control). Also missing: determine if something above the earlier removal
+            //      on the stack invalidates it (shroud effect, pump against damage) so a new removal can/should be applied.
             //return null;
         }
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -351,7 +351,7 @@ public class DamageDealAi extends DamageAiBase {
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
 
         // Try not to target anything which will already be dead by the time the spell resolves
-        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables, sa);
+        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
@@ -912,10 +912,12 @@ public class DamageDealAi extends DamageAiBase {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
+        int dmg;
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && sa.getPayCosts().hasXInAnyCostPart()) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
+        } else {
+            dmg = calculateDamageAmount(sa, source, damage);
         }
 
         if (!sa.usesTargeting()) {
@@ -928,29 +930,29 @@ public class DamageDealAi extends DamageAiBase {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
+            // If I can kill my target by paying less mana, do it
+            int actualPay = 0;
+            final boolean noPrevention = sa.hasParam("NoPrevention");
+
+            //target is a player
+            if (!sa.getTargets().isTargetingAnyCard()) {
+                actualPay = dmg;
+            }
+            for (final Card c : sa.getTargets().getTargetCards()) {
+                final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                if (adjDamage > actualPay) {
+                    actualPay = adjDamage;
+                }
             }
 
-            if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
-                // If I can kill my target by paying less mana, do it
-                int actualPay = 0;
-                final boolean noPrevention = sa.hasParam("NoPrevention");
-
-                //target is a player
-                if (!sa.getTargets().isTargetingAnyCard()) {
-                    actualPay = dmg;
-                }
-                for (final Card c : sa.getTargets().getTargetCards()) {
-                    final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                    if (adjDamage > actualPay) {
-                        actualPay = adjDamage;
-                    }
-                }
-
-                sa.setXManaCostPaid(actualPay);
-            }
+            sa.setXManaCostPaid(actualPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

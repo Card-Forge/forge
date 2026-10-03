@@ -71,7 +71,8 @@ public final class ForgeMatrixWriter {
                 true,
                 false,
                 false,
-                false);
+                false,
+                null);
 
         HashMap<String, List<Map.Entry<PaperCard, Integer>>> matrix = new HashMap<>();
         int rows = 0;
