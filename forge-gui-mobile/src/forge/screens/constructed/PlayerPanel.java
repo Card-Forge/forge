@@ -87,6 +87,7 @@ public class PlayerPanel extends FContainer {
     private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblCommanderDeckRandomGenerated")).build();
     private final FLabel btnOathbreakDeck   = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblOathbreakerDeckRandomGenerated")).build();
     private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblTinyLeadersDeckRandomGenerated")).build();
+    private final FLabel btnDuelCommanderDeck = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblDuelCommanderDeckRandomGenerated")).build();
     private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblBrawlDeckRandomGenerated")).build();
     private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblPlanarDeckRandomGenerated")).build();
     private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblVanguardAvatarRandom")).build();
@@ -99,7 +100,7 @@ public class PlayerPanel extends FContainer {
     private boolean hasCommanderChoices;
     private List<PaperCard> commanderPick;
 
-    private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
+    private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstDuelCommanderDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
     public PlayerPanel(final LobbyScreen screen0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
@@ -184,6 +185,21 @@ public class PlayerPanel extends FContainer {
                     }
                 }else{
                     btnTinyLeadersDeck.setText(Forge.getLocalizer().getMessage("lblTinyLeadersDeck"));
+                }
+            }
+        });
+        lstDuelCommanderDecks = new FDeckChooser(GameType.DuelCommander, isAi, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
+                    btnDuelCommanderDeck.setText(Forge.getLocalizer().getMessage("lblDuelCommanderDeck")
+                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    lstDuelCommanderDecks.saveState();
+                    if (allowNetworking && btnDuelCommanderDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                        screen.updateMyDeck(index);
+                    }
+                }else{
+                    btnDuelCommanderDeck.setText(Forge.getLocalizer().getMessage("lblDuelCommanderDeck"));
                 }
             }
         });
@@ -280,6 +296,11 @@ public class PlayerPanel extends FContainer {
             lstTinyLeadersDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectTinyLeadersDeckFor").replace("%s", txtPlayerName.getText()));
             Forge.openScreen(lstTinyLeadersDecks);
         });
+        add(btnDuelCommanderDeck);
+        btnDuelCommanderDeck.setCommand(e -> {
+            lstDuelCommanderDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectDuelCommanderDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstDuelCommanderDecks);
+        });
         add(btnBrawlDeck);
         btnBrawlDeck.setCommand(e -> {
             lstBrawlDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectBrawlDeckFor").replace("%s", txtPlayerName.getText()));
@@ -310,22 +331,32 @@ public class PlayerPanel extends FContainer {
         setMayControl(mayControl0);
     }
 
-    public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
+    public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingDuelCommander, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
         //order by last variant..
         Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
         if (gameTypes.contains(GameType.Commander)) {
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstDuelCommanderDecks.initialize(savedStateSettingDuelCommander, DeckType.DUEL_COMMANDER_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
         } else if (gameTypes.contains(GameType.Oathbreaker)) {
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstDuelCommanderDecks.initialize(savedStateSettingDuelCommander, DeckType.DUEL_COMMANDER_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
         } else if (gameTypes.contains(GameType.TinyLeaders)) {
+            lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstDuelCommanderDecks.initialize(savedStateSettingDuelCommander, DeckType.DUEL_COMMANDER_DECK);
+            lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+            lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+            lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+            deckChooser.initialize(savedStateSetting, defaultDeckType);
+        } else if (gameTypes.contains(GameType.DuelCommander)) {
+            lstDuelCommanderDecks.initialize(savedStateSettingDuelCommander, DeckType.DUEL_COMMANDER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
@@ -334,6 +365,7 @@ public class PlayerPanel extends FContainer {
         } else if (gameTypes.contains(GameType.Brawl)) {
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstDuelCommanderDecks.initialize(savedStateSettingDuelCommander, DeckType.DUEL_COMMANDER_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
@@ -342,6 +374,7 @@ public class PlayerPanel extends FContainer {
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstDuelCommanderDecks.initialize(savedStateSettingDuelCommander, DeckType.DUEL_COMMANDER_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
         }
         lstPlanarDecks.initialize(null, DeckType.RANDOM_DECK);
@@ -435,6 +468,10 @@ public class PlayerPanel extends FContainer {
             btnTinyLeadersDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
         }
+        else if (btnDuelCommanderDeck.isVisible()) {
+            btnDuelCommanderDeck.setBounds(x, y, w, fieldHeight);
+            y += dy;
+        }
         else if (btnBrawlDeck.isVisible()) {
             btnBrawlDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
@@ -462,7 +499,7 @@ public class PlayerPanel extends FContainer {
             if(Forge.isLandscapeMode())
                 rows--;
         }
-        if (btnCommanderDeck.isVisible() || btnOathbreakDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnBrawlDeck.isVisible()) {
+        if (btnCommanderDeck.isVisible() || btnOathbreakDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnDuelCommanderDeck.isVisible() || btnBrawlDeck.isVisible()) {
             if(Forge.isLandscapeMode())
                 rows++;
         }
@@ -574,6 +611,7 @@ public class PlayerPanel extends FContainer {
         deckChooser.setIsAi(isAi);
         lstCommanderDecks.setIsAi(isAi);
         lstTinyLeadersDecks.setIsAi(isAi);
+        lstDuelCommanderDecks.setIsAi(isAi);
         lstBrawlDecks.setIsAi(isAi);
         lstPlanarDecks.setIsAi(isAi);
         lstSchemeDecks.setIsAi(isAi);
@@ -712,6 +750,9 @@ public class PlayerPanel extends FContainer {
         if (btnTinyLeadersDeck.isVisible())
             btnTinyLeadersDeck.setText(text);
 
+        if (btnDuelCommanderDeck.isVisible())
+            btnDuelCommanderDeck.setText(text);
+
         if (btnBrawlDeck.isVisible())
             btnBrawlDeck.setText(text);
     }
@@ -738,6 +779,7 @@ public class PlayerPanel extends FContainer {
         boolean isCommanderApplied = false;
         boolean isOathbreakerApplied = false;
         boolean isTinyLeadersApplied = false;
+        boolean isDuelCommanderApplied = false;
         boolean isBrawlApplied = false;
         boolean isPlanechaseApplied = false;
         boolean isVanguardApplied = false;
@@ -770,6 +812,11 @@ public class PlayerPanel extends FContainer {
             case TinyLeaders:
                 isTinyLeadersApplied = true;
                 isDeckBuildingAllowed = false; //Tiny Leaders deck replaces basic deck, so hide that
+                replacedbasicdeck = true;
+                break;
+            case DuelCommander:
+                isDuelCommanderApplied = true;
+                isDeckBuildingAllowed = false; //Duel Commander deck replaces basic deck, so hide that
                 replacedbasicdeck = true;
                 break;
             case Brawl:
@@ -817,6 +864,12 @@ public class PlayerPanel extends FContainer {
             } else {
                 btnTinyLeadersDeck.setVisible(false);
             }
+            if (isDuelCommanderApplied) {
+                btnDuelCommanderDeck.setVisible(true);
+                btnDuelCommanderDeck.setEnabled(mayEdit);
+            } else {
+                btnDuelCommanderDeck.setVisible(false);
+            }
             if (isBrawlApplied) {
                 btnBrawlDeck.setVisible(true);
                 btnBrawlDeck.setEnabled(mayEdit);
@@ -855,6 +908,7 @@ public class PlayerPanel extends FContainer {
             btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
             btnOathbreakDeck.setVisible(isOathbreakerApplied && mayEdit);
             btnTinyLeadersDeck.setVisible(isTinyLeadersApplied && mayEdit);
+            btnDuelCommanderDeck.setVisible(isDuelCommanderApplied && mayEdit);
             btnBrawlDeck.setVisible(isBrawlApplied && mayEdit);
 
             btnSchemeDeck.setVisible(archenemyVisiblity && mayEdit);
@@ -1284,6 +1338,7 @@ public class PlayerPanel extends FContainer {
             btnCommanderDeck.setEnabled(mayEdit);
             btnOathbreakDeck.setEnabled(mayEdit);
             btnTinyLeadersDeck.setEnabled(mayEdit);
+            btnDuelCommanderDeck.setEnabled(mayEdit);
             btnBrawlDeck.setEnabled(mayEdit);
             btnSchemeDeck.setEnabled(mayEdit);
             btnPlanarDeck.setEnabled(mayEdit);
@@ -1324,6 +1379,10 @@ public class PlayerPanel extends FContainer {
         return lstTinyLeadersDecks;
     }
 
+    public FDeckChooser getDuelCommanderDeckChooser() {
+        return lstDuelCommanderDecks;
+    }
+
     public FDeckChooser getBrawlDeckChooser() {
         return lstBrawlDecks;
     }
@@ -1340,6 +1399,10 @@ public class PlayerPanel extends FContainer {
 
     public Deck getTinyLeadersDeck() {
         return lstTinyLeadersDecks.getDeck();
+    }
+
+    public Deck getDuelCommanderDeck() {
+        return lstDuelCommanderDecks.getDeck();
     }
 
     public Deck getBrawlDeck() {

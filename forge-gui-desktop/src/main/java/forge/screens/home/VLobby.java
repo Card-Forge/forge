@@ -95,7 +95,7 @@ public class VLobby implements ILobbyView {
      */
     private static final ImmutableList<GameType> GAME_FORMATS = ImmutableList.of(
             GameType.Constructed, GameType.Commander, GameType.Oathbreaker,
-            GameType.Brawl, GameType.TinyLeaders,
+            GameType.Brawl, GameType.TinyLeaders, GameType.DuelCommander,
             GameType.MomirBasic, GameType.MoJhoSto);
 
     private final FComboBoxPanel<GameType> cboFormatPanel =
@@ -919,6 +919,7 @@ public class VLobby implements ILobbyView {
         case Commander:
         case Oathbreaker:
         case TinyLeaders:
+        case DuelCommander:
         case Brawl:
             decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
             break;
@@ -1321,6 +1322,11 @@ public class VLobby implements ILobbyView {
                 forCommander = true;
                 deckType = iSlot == 0 ? DeckType.TINY_LEADERS_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
                 prefKey = FPref.TINY_LEADER_DECK_STATES[iSlot];
+                break;
+            case DuelCommander:
+                forCommander = true;
+                deckType = iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+                prefKey = FPref.DUEL_COMMANDER_DECK_STATES[iSlot];
                 break;
             case Oathbreaker:
                 forCommander = true;

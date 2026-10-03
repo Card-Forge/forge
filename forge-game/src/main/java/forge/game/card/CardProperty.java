@@ -1984,6 +1984,12 @@ public class CardProperty {
             if (!card.isCommander()) {
                 return false;
             }
+        } else if (property.equals("NoOtherCommanderCastFromCommandZone")) {
+            // its owner hasn't cast any of their other commanders from the command zone this game
+            final Player owner = card.getOwner();
+            if (owner.getTotalCommanderCast() > owner.getCommanderCast(card)) {
+                return false;
+            }
         } else if (property.startsWith("NotedFor")) {
             final String key = property.substring("NotedFor".length());
             for (String note : sourceController.getNotesForName(key)) {

@@ -507,6 +507,20 @@ public class DeckProxy implements InventoryItem {
         return result;
     }
 
+    public static Iterable<DeckProxy> getAllDuelCommanderDecks() {
+        return getAllDuelCommanderDecks(null);
+    }
+    public static Iterable<DeckProxy> getAllDuelCommanderDecks(Predicate<Deck> filter) {
+        final List<DeckProxy> result = new ArrayList<>();
+        if (filter == null) {
+            filter = DeckFormat.DuelCommander.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
+        } else {
+            filter = filter.and(DeckFormat.DuelCommander.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)));
+        }
+        addDecksRecursivelly("Duel Commander", GameType.DuelCommander, result, "", FModel.getDecks().getDuelCommander(), filter);
+        return result;
+    }
+
     public static Iterable<DeckProxy> getAllBrawlDecks() {
         return getAllBrawlDecks(null);
     }

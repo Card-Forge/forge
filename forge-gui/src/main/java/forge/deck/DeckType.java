@@ -11,6 +11,7 @@ public enum DeckType {
     RANDOM_CARDGEN_COMMANDER_DECK("lblRandomCommanderCard-basedDecks"),
     OATHBREAKER_DECK("lblOathbreakerDecks"),
     TINY_LEADERS_DECK("lblTinyLeadersDecks"),
+    DUEL_COMMANDER_DECK("lblDuelCommanderDecks"),
     BRAWL_DECK("lblBrawlDecks"),
     SCHEME_DECK("lblSchemeDecks"),
     PLANAR_DECK("lblPlanarDecks"),

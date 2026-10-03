@@ -69,6 +69,10 @@ public class SEditorIO {
                     CTinyLeadersDecks.SINGLETON_INSTANCE.refresh();
                     VTinyLeadersDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
                     break;
+                case DuelCommander:
+                    CDuelCommanderDecks.SINGLETON_INSTANCE.refresh();
+                    VDuelCommanderDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
                 case Oathbreaker:
                     COathbreakerDecks.SINGLETON_INSTANCE.refresh();
                     VOathbreakerDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
