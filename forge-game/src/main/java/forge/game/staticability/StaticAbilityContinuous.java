@@ -939,22 +939,22 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
-                Player mayPlayController = params.containsKey("MayPlayPlayer") ?
-                    AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
-                    controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
+                PlayerCollection mayPlayPlayers = params.containsKey("MayPlayPlayer") ?
+                    AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb) :
+                    new PlayerCollection(controller);
+                affectedCard.setMayPlay(mayPlayPlayers, mayPlayWithoutManaCost,
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
                         mayPlayGrantZonePermissions, stAb);
 
                 if (mayLookAt != null && mayLookAt.isEmpty()) {
-                    mayLookAt.add(mayPlayController);
+                    mayLookAt.addAll(mayPlayPlayers);
                 }
 
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
                 if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
                     for (final Player p : game.getPlayers()) {
-                        if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
-                            affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
+                        if (p.hasKeyword("Shaman's Trance") && !mayPlayPlayers.contains(p)) {
+                            affectedCard.setMayPlay(new PlayerCollection(p), mayPlayWithoutManaCost,
                                     mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
                                     mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
                         }

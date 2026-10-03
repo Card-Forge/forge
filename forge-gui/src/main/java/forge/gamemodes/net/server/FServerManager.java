@@ -149,7 +149,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         }, deadline, TimeUnit.SECONDS);
     }
 
-    private volatile boolean isHosting = false;
     // Created by startServer: an offline game reaches getInstance() but never needs the selectors
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
@@ -157,11 +156,10 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
     private IDraftEventHandler draftHandler;
-    private boolean UPnPMapped = false;
     private int port;
     private static final Localizer localizer = Localizer.getInstance();
     private final Thread shutdownHook = new Thread(() -> {
-        if (isHosting()) {
+        if (HostingServer.isHosting()) {
             stopServer(false);
         }
     });
@@ -278,7 +276,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                 mapNatPort();
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
-            isHosting = true;
             HostingServer.set(this);
         } catch (final InterruptedException e) {
             netLog.error(e, "Server start interrupted");
@@ -311,10 +308,9 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     public void stopServer() {
         stopServer(true);
     }
-
     private synchronized void stopServer(final boolean removeShutdownHook) {
         // The shutdown hook and the channel-close thread both stop the server; only the first does the work
-        if (!isHosting) {
+        if (!HostingServer.isHosting()) {
             return;
         }
         // Cancel all reconnect timers
@@ -346,18 +342,8 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
-        isHosting = false;
         HostingServer.set(null);
-        UPnPMapped = false;
         NetworkLogConfig.deactivateNetworkLogging();
-    }
-
-    public boolean isHosting() {
-        return isHosting;
-    }
-
-    public boolean isUPnPMapped() {
-        return UPnPMapped;
     }
 
     public int getTotalSendErrors() {
@@ -421,7 +407,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
      */
     @Override
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!isHosting() || localLobby == null) {
+        if (!HostingServer.isHosting() || localLobby == null) {
             return AfkTimeout.NOOP;
         }
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
@@ -829,7 +815,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
             super.deviceAdded(registry, device);
             if (!completed && !activePortMappings.isEmpty()) {
                 completed = true;
-                UPnPMapped = true;
                 onUPnPResult(true);
             }
         }

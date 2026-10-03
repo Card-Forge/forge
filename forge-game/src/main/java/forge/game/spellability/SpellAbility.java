@@ -821,10 +821,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payCosts = abCost;
     }
 
-    public boolean costHasX() {
-        return getPayCosts().hasXInAnyCostPart();
-    }
-
     public boolean costHasManaX() {
         if (getPayCosts().hasNoManaCost()) {
             return false;
