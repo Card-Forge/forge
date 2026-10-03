@@ -1295,7 +1295,7 @@ public class AiController {
 
     // declares blockers for given defender in a given combat
     public void declareBlockersFor(Player defender, Combat combat) {
-        AiBlockController block = new AiBlockController(defender, defender != player);
+        AiBlockController block = new AiBlockController(defender, player);
         // When player != defender, AI should declare blockers for its benefit.
         block.assignBlockersForCombat(combat);
     }
@@ -1349,7 +1349,7 @@ public class AiController {
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        AiCache.clear();
+        AiCache.clear(AiCache.Scope.PRIORITY);
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;

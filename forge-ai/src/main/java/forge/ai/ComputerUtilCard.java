@@ -855,7 +855,7 @@ public class ComputerUtilCard {
      * @return list of creatures assigned to block in the simulation
      */
     public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
-        AiBlockController aiBlk = new AiBlockController(ai, false);
+        AiBlockController aiBlk = new AiBlockController(ai, ai);
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
@@ -893,12 +893,13 @@ public class ComputerUtilCard {
     /**
      * Check if an attacker can be blocked profitably (ie. kill attacker)
      *
-     * @param ai       controller of attacking creature
-     * @param attacker attacking creature to evaluate
+     * @param ai            player who would block the attacker
+     * @param attacker      attacking creature to evaluate
+     * @param checkingOther true when an AI is predicting another player's blocks; the attacker's controller is then taken as that AI
      * @return attacker will die
      */
     public static boolean canBeBlockedProfitably(final Player ai, Card attacker, boolean checkingOther) {
-        AiBlockController aiBlk = new AiBlockController(ai, checkingOther);
+        AiBlockController aiBlk = new AiBlockController(ai, checkingOther ? attacker.getController() : ai);
         Combat combat = new Combat(ai);
         // avoid removing original attacker
         attacker.setCombatLKI(null);

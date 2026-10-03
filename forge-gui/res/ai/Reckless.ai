@@ -325,3 +325,7 @@ SIDEBOARDING_CHANCE_ON_WIN=0
 SIDEBOARDING_SHARED_TYPE_ONLY=false
 # Allow replacing a creature with a planeswalker and vice versa when sideboarding
 SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false
+
+# Once this many creatures are on the battlefield, combat evaluations may take approximate shortcuts to save time.
+# Set to -1 to always evaluate exactly
+SHORTCUT_MIN_CREATURES=10
