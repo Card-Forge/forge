@@ -1885,21 +1885,17 @@ public class AiController {
             return Math.max(remaining, min) / 2;
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
-        } else if ("HighestLoseLife".equals(logic) || "HighestCastImprinted".equals(logic)) {
-            int wanted;
-            if ("HighestCastImprinted".equals(logic)) {
-                CardCollection spells = CardLists.filter(source.getImprintedCards(), CardPredicates.NON_LANDS);
-                wanted = spells.isEmpty() ? 0 : Aggregates.max(spells, Card::getCMC);
-            } else {
-                // only worth taking the damage for the cards a new hand would add
-                wanted = 7 - player.getCardsIn(ZoneType.Hand).size();
-            }
-            wanted = Math.min(wanted, player.getLife() / 3);
-            if (wanted <= 0) {
+        } else if ("HighestLoseLife".equals(logic)) {
+            // nobody to outbid
+            if (AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).size() < 2) {
                 return min;
             }
-            int bid = MyRandom.getRandom().nextInt(wanted) + 1;
-            return player.getLife() < bid + 5 ? min : bid;
+            int random = MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, 0) + 1);
+            if (player.getLife() < random + 5) {
+                return min;
+            } else {
+                return random;
+            }
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (sa.hasSVar("EnergyToPay")) {
