@@ -12,6 +12,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -28,12 +29,14 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
+import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -396,8 +399,64 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         weaklySelectableCards.clear();
     }
 
+    private final Map<PlayerView, PriorityPrompt> prompts = new ConcurrentHashMap<>();
+    /** Suggestions arrive just before the priority question they belong to. */
+    private final Map<PlayerView, SuggestionType> suggestions = new ConcurrentHashMap<>();
+
     @Override
     public void setQuestion(final PlayerView player, final Question question) {
+        if (!(question instanceof Question.Priority priority)) {
+            prompts.remove(player);
+            return;
+        }
+        final PriorityPrompt prompt = new PriorityPrompt(this, priority, suggestions.remove(player));
+        prompts.put(player, prompt);
+        prompt.show();
+    }
+
+    private PriorityPrompt pendingPrompt() {
+        final PlayerView player = getCurrentPlayer();
+        return player == null ? null : prompts.get(player);
+    }
+
+    /**
+     * A click on a card. While the priority question is pending, the GUI answers it from the click; otherwise the
+     * click goes to the game controller.
+     */
+    public boolean selectCard(final CardView card, final List<CardView> others, final ITriggerEvent triggerEvent) {
+        final PriorityPrompt prompt = pendingPrompt();
+        if (prompt != null) {
+            return prompt.selectCard(card, others, triggerEvent);
+        }
+        final IGameController controller = getGameController();
+        return controller != null && controller.selectCard(card, others, triggerEvent);
+    }
+
+    public void selectAbility(final SpellAbilityView ability) {
+        final PriorityPrompt prompt = pendingPrompt();
+        if (prompt != null) {
+            prompt.selectAbility(ability);
+        } else if (getGameController() != null) {
+            getGameController().selectAbility(ability);
+        }
+    }
+
+    public void selectButtonOk() {
+        final PriorityPrompt prompt = pendingPrompt();
+        if (prompt != null) {
+            prompt.ok();
+        } else if (getGameController() != null) {
+            getGameController().selectButtonOk();
+        }
+    }
+
+    public void selectButtonCancel() {
+        final PriorityPrompt prompt = pendingPrompt();
+        if (prompt != null) {
+            prompt.cancel();
+        } else if (getGameController() != null) {
+            getGameController().selectButtonCancel();
+        }
     }
 
     public boolean isWeaklySelectable(final CardView card) {
@@ -715,6 +774,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void applyYieldUpdate(YieldUpdate update) {
+        if (update instanceof YieldUpdate.Suggest suggest) {
+            suggestions.put(suggest.player(), suggest.type());
+            return;
+        }
         PlayerView pv;
         if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
         else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
@@ -920,6 +983,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void afterGameEnd() {
+        // A game that ends while the priority question is pending releases the input without withdrawing the question
+        prompts.clear();
+        suggestions.clear();
         if (awaitNextInputTimer != null) {
             awaitNextInputTimer.cancel();
             awaitNextInputTimer = null;

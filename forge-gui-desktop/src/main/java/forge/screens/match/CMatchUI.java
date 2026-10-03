@@ -1077,7 +1077,7 @@ public final class CMatchUI
             }
             GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(s, true),
                     shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
-                    () -> getGameController().selectAbility(ab), enabled);
+                    () -> selectAbility(ab), enabled);
             if (shortcut > 0) {
                 shortcut++;
                 if (shortcut > KeyEvent.VK_9) {
