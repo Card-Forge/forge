@@ -165,7 +165,7 @@ public class KeyboardShortcuts {
                 if (si != null && si.isAbility()) {
                     boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
                     String key = si.getKey();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
+                    if (matchUI.getGameController().getYieldController().offersTriggerDecision(si) && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
                         matchUI.getGameController().setTriggerDecision(key, TriggerDecision.ACCEPT, abilityScope);
                     }
                     matchUI.getGameController().setShouldAutoYield(key, true, abilityScope);
@@ -183,7 +183,7 @@ public class KeyboardShortcuts {
                 if (si != null && si.isAbility()) {
                     boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
                     String key = si.getKey();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
+                    if (matchUI.getGameController().getYieldController().offersTriggerDecision(si) && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
                         matchUI.getGameController().setTriggerDecision(key, TriggerDecision.DECLINE, abilityScope);
                     }
                     matchUI.getGameController().setShouldAutoYield(key, true, abilityScope);

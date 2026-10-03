@@ -736,6 +736,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return result;
     }
 
+    // one Always Yes/No decision must not answer two different "you may" questions; walks the sub-ability chain only
+    // TODO offer a separate decision for each Optional ability in the chain
+    private static boolean isOnlyOptionalInChain(final SpellAbility sa) {
+        for (SpellAbility s = sa.getRootAbility(); s != null; s = s.getSubAbility()) {
+            if (s != sa && s.hasParam("Optional")) return false;
+        }
+        return true;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -746,6 +755,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
                                  List<String> options, Card cardToShow, Map<String, Object> params) {
+        // only the trigger's controller sets Always Yes/No from the stack; optional triggers apply it in confirmTrigger
+        if (sa.getRootAbility().isMandatory() && sa.hasParam("Optional")
+                && player.equals(sa.getActivatingPlayer()) && isOnlyOptionalInChain(sa)) {
+            final String key = sa.yieldKey();
+            // marked even when auto-answered, so the stack keeps offering a way to undo the decision
+            if (yieldController.markOptionalAsked(key) && isRemoteClient()) {
+                getGui().applyYieldUpdate(new YieldUpdate.OptionalAsked(player.getView(), key));
+            }
+            if (!isMacroActive()) {
+                AutoYieldStore.TriggerDecision decision = getTriggerDecision(key);
+                if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+                if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+            }
+        }
+
         // Another card should be displayed in the prompt on mouse over rather than the SA source
         if (cardToShow != null) {
             tempShowCard(cardToShow);

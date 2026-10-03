@@ -1020,11 +1020,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     // key for autoyield - the card description (including number) (if there is a card) plus the effect description
+    // triggers key on the trigger description, so the stack item and its resolving effect share a key
     public String yieldKey() {
+        final String desc = getTrigger() != null ? getTrigger().toString() : toUnsuppressedString();
         if (getHostCard() != null) {
-            return getHostCard().toString() + ": " + toUnsuppressedString();
+            return getHostCard().toString() + ": " + desc;
         }
-        return toUnsuppressedString();
+        return desc;
     }
 
     public String getStackDescription() {

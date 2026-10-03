@@ -306,6 +306,15 @@ public class YieldController {
         return activeStore().getAutoTriggers(activeTier());
     }
 
+    public boolean markOptionalAsked(String key) {
+        return activeStore().markOptionalAsked(key);
+    }
+
+    /** True for an optional trigger, and for a mandatory one whose effect has asked a "you may" question. */
+    public boolean offersTriggerDecision(StackItemView si) {
+        return si.isOptionalTrigger() || activeStore().hasAskedOptional(si.getKey());
+    }
+
     public boolean getDisableAutoTriggers() { return activeStore().isTriggerDecisionsDisabled(); }
     public void setDisableAutoTriggers(boolean disable) { activeStore().setTriggerDecisionsDisabled(disable); }
 
@@ -388,6 +397,8 @@ public class YieldController {
             setPref(u.pref(), u.value());
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             applyClientSeed(u.snapshot());
+        } else if (update instanceof YieldUpdate.OptionalAsked u) {
+            markOptionalAsked(u.key());
         }
         return false;
     }
