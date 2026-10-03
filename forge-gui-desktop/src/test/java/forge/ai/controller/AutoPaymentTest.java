@@ -1,11 +1,14 @@
 package forge.ai.controller;
 
+import forge.ai.ComputerUtilMana;
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.Plan;
 import forge.ai.simulation.SimulationTest;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -142,5 +145,26 @@ public class AutoPaymentTest extends SimulationTest {
         // AI able to cast both creatures
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(2, plan.getDecisions().size());
+    }
+
+    @Test
+    public void useRequiredMultiManaSourceBeforeItOverpays() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Forest", 4, p);
+        addCard("Ancient Tomb", p);
+        Card wurm = addCardToZone("Spined Wurm", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = wurm.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
+
+        // five mana from six: the Tomb is needed either way, so one Forest should be left over
+        AssertJUnit.assertEquals(0, p.getManaPool().totalMana());
+        AssertJUnit.assertEquals(1, CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED));
     }
 }
