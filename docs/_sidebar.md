@@ -53,6 +53,7 @@
   - [Docker Container](docker-setup.md)
   - [Network Testing](Development/Network-Testing.md)
   - [UI Guidelines](Development/UI-Guidelines.md)
+  - [Card-script Linting](Development/Card-Script-Linting.md)
 
 - Customization & Themes
   - [Skins](Skins.md)
