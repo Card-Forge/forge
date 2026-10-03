@@ -165,7 +165,11 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition, int artIndex) {
-        CardEdition realEdition = editions.getEditionByCodeOrThrow(edition);
+        // An edition this machine lacks has no tokens of its own: the fallback below picks one.
+        CardEdition realEdition = editions.get(edition);
+        if (realEdition == null) {
+            realEdition = CardEdition.UNKNOWN;
+        }
         String fullName = String.format("%s_%s", tokenName, realEdition.getCode().toLowerCase());
 
         // Token exists in edition, return token at artIndex or a random one.
