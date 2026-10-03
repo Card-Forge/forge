@@ -64,6 +64,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private DragCell draftLogParent = null;
     private boolean saved = false;
     private final Localizer localizer = Localizer.getInstance();
+    private final DraftPicksSections picksSections;
 
     /**
      * Updates the deck editor UI as necessary draft selection mode.
@@ -84,6 +85,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
+        picksSections = new DraftPicksSections(deckManager);
     }
 
     /**
@@ -94,6 +96,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
+        picksSections.setDraft(inBoosterDraft);
         this.boosterDraft.setLogEntry(this);
         VEditorLog.SINGLETON_INSTANCE.resetNewDraft();
 
@@ -109,8 +112,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) { return; }
-
         // can only draft one at a time, regardless of the requested quantity
         PaperCard card = items.iterator().next().getKey();
 
@@ -124,11 +125,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             card = boosterDraft.getHumanPlayer().pickFromArchdemonCurse(boosterDraft.getHumanPlayer().nextChoice());
         }
 
-        // Verify if card is in the activate pack?
-        this.getDeckManager().addItem(card, 1);
-
         // get next booster pack if we aren't picking again from this pack
-        this.boosterDraft.setChoice(card);
+        DeckSection section = DraftPicksSections.getPickSection(toAlternate);
+        this.boosterDraft.setChoice(card, section);
+        picksSections.refresh();
         showPackToDraft();
     }
 
@@ -155,16 +155,22 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
      */
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (!toAlternate) {
+            picksSections.move(items);
+        }
     }
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
+        cmb.addMoveAlternateItems(localizer.getMessage("lblDraft"), localizer.getMessage("lbltosideboard"));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        // no valid remove options
+        cmb.addMoveItems(localizer.getMessage("lblMove"),
+                localizer.getMessage(picksSections.getDestination() == DeckSection.Main
+                        ? "lblToMainDeck" : "lbltosideboard"));
     }
 
     /**
@@ -196,24 +202,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             pool.add(PaperCard.FAKE_CARD);
         }
         return pool;
-    }
-
-    /**
-     * <p>
-     * getPlayersDeck.
-     * </p>
-     *
-     * @return a {@link forge.deck.Deck} object.
-     */
-    private Deck getPlayersDeck() {
-        final Deck deck = new Deck();
-
-        // add sideboard to deck
-        deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
-
-        return deck;
-        // Why don't we just do?
-        // return player.getDeck()
     }
 
     /**
@@ -265,21 +253,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         final DeckGroup finishedDraft = new DeckGroup(s);
         final LimitedPlayer player = this.boosterDraft.getHumanPlayer();
 
-        // Why is human deck just imported from LimitedPlayer?
-        //Deck humanDeck = player.getDeck().copyTo(s);
-        // If we do the above, we shouldn't need remove from card pool below
-        Deck humanDeck = (Deck) this.getPlayersDeck().copyTo(s);
-
-        for(PaperCard card : player.getRemovedFromCardPool()) {
-            // This is awkward. We are duplicating the deck construction logic
-            // So we need to remove from the deck twice
-            // This may be problematic for trading cards from your card pool
-            humanDeck.get(DeckSection.Sideboard).remove(card);
-
-            // These cards need to be added to a quest deck if there is an associated quest
-            // Although quest Drafting process happened in #CEditorQuestDraftingProcess
-            // Probably need to make these files closer to each other
-        }
+        Deck humanDeck = (Deck) player.getDeck().copyTo(s);
 
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
         finishedDraft.setHumanDeck(humanDeck);
@@ -341,13 +315,13 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         ccAddLabel = this.getBtnAdd().getText();
 
-        if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
+        if (this.getCatalogManager().getPool() == null) { //avoid showing next choice again when switching back to Draft screen
             this.showChoices(this.boosterDraft.nextChoice());
-            this.getDeckManager().setPool((Iterable<PaperCard>) null);
         }
         else {
             this.showChoices(this.getCatalogManager().getPool());
         }
+        picksSections.refresh();
 
         //Remove buttons
         this.getBtnAdd().setVisible(false);
@@ -355,7 +329,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.getBtnRemove().setVisible(false);
         this.getBtnRemove4().setVisible(false);
 
-        this.getCbxSection().setVisible(false);
+        this.getCbxSection().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -392,6 +366,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     public void resetUIChanges() {
         //Re-rename buttons
         this.getBtnAdd().setText(ccAddLabel);
+        this.getCbxSection().setVisible(false);
 
         //Re-add buttons
         this.getBtnAdd4().setVisible(true);

@@ -768,6 +768,9 @@ public class LimitedPlayer {
             addLog(name() + " activated Deal Broker.");
 
             PaperCard exchangeCard = chooseExchangeCard(null);
+            if (exchangeCard == null) {
+                continue;
+            }
             Map<PaperCard, LimitedPlayer> offers = new HashMap<>();
             for(LimitedPlayer player : players) {
                 if (player == this) {
@@ -794,7 +797,7 @@ public class LimitedPlayer {
 
     protected PaperCard chooseExchangeCard(PaperCard offer) {
         // Choose a card in your deck to trade for offer
-        List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
+        List<PaperCard> deckCards = deck.getAllCardsInASinglePool().toFlatList();
 
         if (offer == null) {
             return SGuiChoose.oneOrNone("Choose a card to offer for trade: ", deckCards);
@@ -811,9 +814,9 @@ public class LimitedPlayer {
         addLog(name() + " accepted the offer of " + exchangeCard + " for " + offer + " from " + player.name() + ".");
 
         player.getDeck().removeCardName(offer.getName());
-        player.getDeck().get(DeckSection.Sideboard).add(exchangeCard);
+        player.getDeck().getOrCreate(DeckSection.Sideboard).add(exchangeCard);
         deck.removeCardName(exchangeCard.getName());
-        deck.get(DeckSection.Sideboard).add(offer);
+        deck.getOrCreate(DeckSection.Sideboard).add(offer);
 
         // Exchange noted information
         player.getDraftNotes().getOrDefault(offer.getName(), Lists.newArrayList()).forEach(note -> {
