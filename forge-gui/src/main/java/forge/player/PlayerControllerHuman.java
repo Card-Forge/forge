@@ -754,19 +754,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
                                  List<String> options, Card cardToShow, Map<String, Object> params) {
-        // the stack's Always Yes/No belongs to a mandatory trigger's controller; optional triggers apply it in confirmTrigger
+        // only the trigger's controller sets Always Yes/No from the stack; optional triggers apply it in confirmTrigger
         if (sa.getRootAbility().isMandatory() && sa.hasParam("Optional")
                 && player.equals(sa.getActivatingPlayer()) && isOnlyOptionalInChain(sa)) {
-            final Trigger trigger = sa.getTrigger();
+            final String key = sa.yieldKey();
             // marked even when auto-answered, so the stack keeps offering a way to undo the decision
-            if (!trigger.asksOptionalQuestion()) {
-                trigger.setAsksOptionalQuestion();
-                for (final SpellAbilityStackInstance si : getGame().getStack()) {
-                    si.getView().updateOptionalTrigger(si);
-                }
+            if (yieldController.markOptionalAsked(key) && isRemoteClient()) {
+                getGui().applyYieldUpdate(new YieldUpdate.OptionalAsked(player.getView(), key));
             }
             if (!isMacroActive()) {
-                AutoYieldStore.TriggerDecision decision = getTriggerDecision(sa.yieldKey());
+                AutoYieldStore.TriggerDecision decision = getTriggerDecision(key);
                 if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
                 if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
             }

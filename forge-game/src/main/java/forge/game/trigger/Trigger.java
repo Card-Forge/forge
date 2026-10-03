@@ -75,9 +75,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private SpellAbility spawningAbility;
 
-    // set the first time a human controller is asked this trigger's Optional$ yes/no question
-    private boolean asksOptionalQuestion;
-
     /**
      * <p>
      * Constructor for Trigger.
@@ -594,13 +591,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
     public void setSpawningAbility(SpellAbility ability) {
         spawningAbility = ability;
-    }
-
-    public boolean asksOptionalQuestion() {
-        return asksOptionalQuestion;
-    }
-    public void setAsksOptionalQuestion() {
-        asksOptionalQuestion = true;
     }
 
     public int getActivationsThisTurn() {
