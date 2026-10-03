@@ -227,12 +227,11 @@ public abstract class PlayerController {
 
     /** p = target player, validCards - possible discards, min cards to discard. */
     public CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max) {
-        return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, validCards);
+        return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, null);
     }
 
-    /** visibleToChooser - all cards the chooser is allowed to see during the choice (a superset of validCards
-     *  when an effect has revealed extra cards, e.g. Reveal/Look modes); the controller shows them, no reveal precedes. */
-    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser);
+    /** delayedReveal - cards revealed to the chooser by this effect, e.g. Reveal/Look modes; the controller shows them during the choice or reveals them first. */
+    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, DelayedReveal delayedReveal);
     public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
     public abstract CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 

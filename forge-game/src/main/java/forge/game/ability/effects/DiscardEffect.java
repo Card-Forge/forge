@@ -17,9 +17,11 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
+import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
+import forge.game.player.PlayerView;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -263,8 +265,8 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                 // Reveal/Look modes disclose dPHand to the chooser; non-valid revealed cards should remain visible during the choice.
                 final boolean revealed = mode.startsWith("Reveal") || mode.startsWith("Look");
-                final CardCollectionView visibleToChooser = revealed ? dPHand : validCards;
-                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max, visibleToChooser);
+                final DelayedReveal delayedReveal = revealed ? new DelayedReveal(dPHand, ZoneType.Hand, PlayerView.get(p)) : null;
+                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max, delayedReveal);
 
                 if (toBeDiscarded.isEmpty()) {
                     continue;

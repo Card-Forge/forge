@@ -666,12 +666,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, DelayedReveal delayedReveal) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
         }
 
-        reveal(visibleToChooser, ZoneType.Hand, p);
+        if (delayedReveal != null) {
+            reveal(delayedReveal);
+        }
 
         boolean isTargetFriendly = !p.isOpponentOf(player);
 
