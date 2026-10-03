@@ -788,6 +788,7 @@ Replace=.055F fromSheet("FRA tower")+
 2 ajanis_pridemate @Diego Gisbert
 3 u_3_3_angel_flying @Raluca Marinescu
 4 u_1_1_illusion @Daniel Cotter
+5 u_empower_jace @Manuel Castañón
 6 u_8_8_leviathan_hexproof @Maxime Minard
 7 r_5_5_dragon_flying @Loïc Canavaggia
 8 g_4_4_beast_trample @Simon Dominic
@@ -800,7 +801,6 @@ Replace=.055F fromSheet("FRA tower")+
 15 c_a_treasure_sac @Alayna Danner
 
 [other]
-5 u_empower_jace @Manuel Castañón
 16 emblem_ajani_resolute @Tyler Jacobson
 17 emblem_chandra_chill_of_compliance @Kieran Yanner
 18 emblem_chandra_torch_of_defiance @Kieran Yanner
