@@ -76,6 +76,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean, boolean)
      */
     public final void createTraits(final Card host, final boolean intrinsic, final boolean clear) {
+        host.bumpTraitsVersion();
         this.hostCard = host;
         this.intrinsic = intrinsic;
         if (clear) {
