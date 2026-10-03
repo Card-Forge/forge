@@ -16,6 +16,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Question;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
@@ -270,6 +271,9 @@ public interface IGuiGame {
 
     void setWeaklySelectable(final Iterable<CardView> cards);
     void clearWeaklySelectable();
+
+    /** Asks {@code player} the question, or withdraws the player's pending question when it is null. */
+    void setQuestion(PlayerView player, Question question);
 
     /**
      * Cards revealed to the player for the current prompt, until {@link #hideRevealedCards()}; the GUI chooses how

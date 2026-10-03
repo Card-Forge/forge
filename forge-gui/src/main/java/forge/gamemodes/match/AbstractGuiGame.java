@@ -396,6 +396,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         weaklySelectableCards.clear();
     }
 
+    @Override
+    public void setQuestion(final PlayerView player, final Question question) {
+    }
+
     public boolean isWeaklySelectable(final CardView card) {
         return weaklySelectableCards.contains(card);
     }
