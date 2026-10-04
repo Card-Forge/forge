@@ -443,19 +443,27 @@ public class Assets implements Disposable {
     }
 
     public Texture getWhiteTexture() {
-        return setTexture(whiteTexture, Color.WHITE, 1f);
+        if (whiteTexture == null)
+            whiteTexture = setTexture(whiteTexture, Color.WHITE, 1f);
+        return whiteTexture;
     }
 
     public Texture getBackropTexture() {
-        return setTexture(backdropTexture, Color.BLACK, 0.5f);
+        if (backdropTexture == null)
+            backdropTexture = setTexture(backdropTexture, Color.BLACK, 0.5f);
+        return backdropTexture;
     }
 
     public Texture getGrayTexture() {
-        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+        if (grayTexture == null)
+            grayTexture = setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+        return grayTexture;
     }
 
     private Texture getBlackTexture() {
-        return setTexture(blackTexture, Color.BLACK, 1f);
+        if (blackTexture == null)
+            blackTexture = setTexture(blackTexture, Color.BLACK, 1f);
+        return blackTexture;
     }
 
     public Texture getHolofoil() {
