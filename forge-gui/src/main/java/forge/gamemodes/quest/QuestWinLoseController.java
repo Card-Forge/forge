@@ -571,7 +571,7 @@ public class QuestWinLoseController {
             final CardEdition chooseEd = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseBonusBoosterSet"), options);
 
             if (customBooster) {
-                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.printedInSet(chooseEd.getCode()));
+                List<PaperCard> cards = FModel.getQuest().getAllAllowedCards().filter(PaperCardPredicates.printedInSet(chooseEd.getCode())).toList();
                 final IUnOpenedProduct product = new UnOpenedProduct(getBoosterTemplate(), cards);
                 cardsWon = product.get();
             } else {
