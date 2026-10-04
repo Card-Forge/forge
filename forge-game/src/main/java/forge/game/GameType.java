@@ -34,6 +34,7 @@ public enum GameType {
     DeckManager         (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
     Vanguard            (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
     Commander           (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
+    PauperCommander     (DeckFormat.PauperCommander, false, false, false, "lblPauperCommander", "lblPauperCommanderDesc"),
     Oathbreaker         (DeckFormat.Oathbreaker, false, false, false, "lblOathbreaker", "lblOathbreakerDesc"),
     TinyLeaders         (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
     Brawl               (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),

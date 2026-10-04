@@ -851,11 +851,11 @@ public class DeckRecognizer {
                 case "CM" -> DeckSection.Commander;
                 default -> DeckSection.matchingSection(card);
             };
-            if (cardSection.validate(card))
+            if (cardSection.validateExplicit(card))
                 return cardSection;
         }
         if (currentDeckSection != null){
-            if (currentDeckSection.validate(card))
+            if (currentDeckSection.validateExplicit(card))
                 return currentDeckSection;
             return DeckSection.matchingSection(card);
         }

@@ -145,6 +145,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         DeckFormat deckFormat = lstDecks.getGameType().getDeckFormat();
         switch (deckFormat) {
         case Commander:
+        case PauperCommander: // Pauper Commander decks are kept with the Commander decks
             updateDecks(DeckProxy.getAllCommanderDecks(), ItemManagerConfig.COMMANDER_DECKS);
             break;
         case Oathbreaker:

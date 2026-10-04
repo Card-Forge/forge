@@ -324,22 +324,44 @@ public final class CardRules implements ICardCharacteristics {
         if (mainPart.getOracleText().contains("can be your commander") || canBeBackground()) {
             return true;
         }
+        return mainPart.getType().isLegendary() && hasCommanderCardType();
+    }
+
+    /** A creature, a Vehicle, or a Spacecraft with printed P/T: the card types that can lead a deck. */
+    private boolean hasCommanderCardType() {
         CardType type = mainPart.getType();
-        if (!type.isLegendary()) {
-            return false;
-        }
-        if (canBeCreature() || type.isVehicle() || (
-                type.isSpacecraft() && getPower() != null)) {
-            // Spacecraft need printed PT
-            return true;
-        }
-        return false;
+        // Spacecraft need printed PT
+        return canBeCreature() || type.isVehicle() || (type.isSpacecraft() && getPower() != null);
+    }
+
+    /**
+     * Pauper Commander (PDH) doesn't require a legendary commander: the front face only has to be
+     * a nonland creature, a vehicle or a spacecraft with printed P/T. The PDH rarity requirement
+     * (printed at uncommon) is checked by {@link forge.deck.DeckFormat#PauperCommander}.
+     */
+    public boolean canBePauperCommander() {
+        return canBeCommander() || (hasCommanderCardType() && !mainPart.getType().isLand());
     }
 
     public boolean canBePartnerCommanders(CardRules b) {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;
         }
+        return hasMatchingPartnerAbilities(b);
+    }
+
+    /**
+     * Like {@link #canBePartnerCommanders(CardRules)}, for Pauper Commander, where partners
+     * don't need to be legendary (for example Ley Weaver and Lore Weaver).
+     */
+    public boolean canBePauperPartnerCommanders(CardRules b) {
+        if (!(canBePauperPartnerCommander() && b.canBePauperPartnerCommander())) {
+            return false;
+        }
+        return hasMatchingPartnerAbilities(b);
+    }
+
+    private boolean hasMatchingPartnerAbilities(CardRules b) {
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
             return true; // normal partner commander
         }
@@ -366,9 +388,14 @@ public final class CardRules implements ICardCharacteristics {
         if (canBeBackground()) {
             return true;
         }
-        if (!canBeCommander()) {
-            return false;
-        }
+        return canBeCommander() && hasPartnerAbility();
+    }
+
+    private boolean canBePauperPartnerCommander() {
+        return canBeBackground() || (canBePauperCommander() && hasPartnerAbility());
+    }
+
+    private boolean hasPartnerAbility() {
         return hasKeyword("Partner") || !this.partnerWith.isEmpty() || !this.partnerType.isEmpty() ||
                 hasKeyword("Choose a Background") || hasKeyword("Doctor's companion") || isDoctor();
     }

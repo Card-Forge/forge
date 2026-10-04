@@ -351,6 +351,12 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
+            case PauperCommander:
+                // Pauper Commander decks are kept with the Commander decks, so they open in the Commander deck editor
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+                DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), GameType.Commander);
+                break;
             case Oathbreaker:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
                 DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
@@ -419,6 +425,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         switch(this.gameType) {
             case Brawl:
             case Commander:
+            case PauperCommander:
             case Oathbreaker:
             case TinyLeaders:
             case Constructed:

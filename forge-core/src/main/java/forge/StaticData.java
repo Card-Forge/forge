@@ -53,6 +53,8 @@ public class StaticData {
     private Predicate<PaperCard> modernPredicate;
     private Predicate<PaperCard> commanderPredicate;
     private Predicate<PaperCard> oathbreakerPredicate;
+    private Predicate<PaperCard> pauperCommanderPredicate;
+    private Predicate<PaperCard> pauperCommanderBannedPredicate;
 
     private boolean filteredHandsEnabled = false;
 
@@ -576,6 +578,10 @@ public class StaticData {
 
     public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
+    public void setPauperCommanderPredicate(Predicate<PaperCard> pauperCommanderPredicate) { this.pauperCommanderPredicate = pauperCommanderPredicate; }
+
+    public void setPauperCommanderBannedPredicate(Predicate<PaperCard> pauperCommanderBannedPredicate) { this.pauperCommanderBannedPredicate = pauperCommanderBannedPredicate; }
+
     public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
 
     public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
@@ -587,6 +593,11 @@ public class StaticData {
     public Predicate<PaperCard> getOathbreakerPredicate() { return oathbreakerPredicate; }
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
+
+    public Predicate<PaperCard> getPauperCommanderPredicate() { return pauperCommanderPredicate; }
+
+    /** Matches the cards on the Pauper Commander ban list, which also can't be the commander. */
+    public Predicate<PaperCard> getPauperCommanderBannedPredicate() { return pauperCommanderBannedPredicate; }
 
     /**
      * Get an alternative card print for the given card wrt. the input setReleaseDate.
