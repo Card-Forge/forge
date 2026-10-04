@@ -11776,1069 +11776,1353 @@
 		"storyQuest": true
 	},
 	{
-		"id": 55,
-		"isTemplate": true,
-		"name": "The Tides Give, the Tides Take",
-		"description": "Choose a side in the battle for Svyelunite Temple and defeat the opposing faction.",
-		"offerDialog": {
-			"text": "A strange harmonic melody draws you toward two River Merfolk standing waist-deep in nearby water. They sound large conch horns and call for aid against the Homarids attacking Svyelunite Temple. To show the danger facing their people, one of them raises the severed head of an invader.",
-			"options": [
-				{
-					"name": "(Continue)",
-					"text": "The other River Merfolk speaks while its companion holds the trophy aloft: \"The Homarids have overrun our sacred shore and are tearing Svyelunite Temple apart. Stand with the Vodalians, break their assault, and our priests will reward you from the temple treasury.\"",
-					"options": [
-						{
-							"name": "(Continue)",
-							"text": "A prismatic light flickers in the severed Homarid's black eye. An alien voice rolls into your thoughts: \"A counter-offer... The tides give... The tides take... Their time has passed... Our time has come... Help us wash their bodies away... and their flotsam shall flow to you...\"",
-							"options": [
-								{
-									"name": "(Continue)",
-									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"",
-									"options": [
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Faction",
-													"not": true
-												},
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed",
-													"not": true
-												},
-												{
-													"actorID": 9100,
-													"not": true
-												}
-											],
-											"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
-											"action": [
-												{
-													"setQuestFlag": {
-														"key": "FE_Svyelunite_Faction",
-														"val": 1
-													},
-													"issueQuest": "55"
-												}
-											]
-										},
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Faction",
-													"not": true
-												},
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed",
-													"not": true
-												},
-												{
-													"actorID": 9100,
-													"not": true
-												}
-											],
-											"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
-											"action": [
-												{
-													"setQuestFlag": {
-														"key": "FE_Svyelunite_Faction",
-														"val": 2
-													},
-													"issueQuest": "55"
-												}
-											]
-										},
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Faction",
-													"not": true
-												},
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed",
-													"not": true
-												},
-												{
-													"actorID": 9100
-												}
-											],
-											"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
-											"action": [
-												{
-													"setQuestFlag": {
-														"key": "FE_Svyelunite_Faction",
-														"val": 1
-													},
-													"issueQuest": "55"
-												},
-												{
-													"deleteMapObject": 9100
-												},
-												{
-													"deleteMapObject": 9110
-												},
-												{
-													"deleteMapObject": 9103
-												},
-												{
-													"deleteMapObject": 9104
-												},
-												{
-													"deleteMapObject": 9112
-												},
-												{
-													"deleteMapObject": 9113
-												}
-											]
-										},
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Faction",
-													"not": true
-												},
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed",
-													"not": true
-												},
-												{
-													"actorID": 9100
-												}
-											],
-											"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
-											"action": [
-												{
-													"setQuestFlag": {
-														"key": "FE_Svyelunite_Faction",
-														"val": 2
-													},
-													"issueQuest": "55"
-												},
-												{
-													"deleteMapObject": 9100
-												},
-												{
-													"deleteMapObject": 9110
-												},
-												{
-													"deleteMapObject": 9103
-												},
-												{
-													"deleteMapObject": 9104
-												},
-												{
-													"deleteMapObject": 9112
-												},
-												{
-													"deleteMapObject": 9113
-												}
-											]
-										},
-										{
-											"condition": [
-												{
-													"getQuestFlag": {
-														"key": "FE_Svyelunite_Faction",
-														"op": "=",
-														"val": 1
-													}
-												},
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed",
-													"not": true
-												}
-											],
-											"name": "\"I have not forgotten my promise to the Vodalians.\" (Resume Quest)",
-											"action": [
-												{
-													"issueQuest": "55"
-												}
-											]
-										},
-										{
-											"condition": [
-												{
-													"getQuestFlag": {
-														"key": "FE_Svyelunite_Faction",
-														"op": "=",
-														"val": 2
-													}
-												},
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed",
-													"not": true
-												}
-											],
-											"name": "The alien tide still calls. You will honor your bargain with the Homarids. (Resume Quest)",
-											"action": [
-												{
-													"issueQuest": "55"
-												}
-											]
-										},
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Completed"
-												}
-											],
-											"name": "The battle at Svyelunite Temple has already been decided. (Leave)"
-										},
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Faction",
-													"not": true
-												},
-												{
-													"actorID": 9100
-												}
-											],
-											"name": "\"This fight is not for me.\" (Decline for now)",
-											"text": "The Merfolk lower their blades while the Homarid presence presses coldly against your thoughts. Neither army will let an uncommitted wanderer cross its battle line, and the approach remains blocked. If you change your mind, return tomorrow and they will hear your answer again."
-										},
-										{
-											"condition": [
-												{
-													"checkQuestFlag": "FE_Svyelunite_Faction",
-													"not": true
-												},
-												{
-													"actorID": 9100,
-													"not": true
-												}
-											],
-											"name": "\"Sorry, this fight is not for me. I am allergic to both shellfish and sharp blades.\" (Decline Quest)"
-										}
-									]
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		"prologue": {},
-		"epilogue": {
-			"text": "The battle for Svyelunite Temple is over.",
-			"options": [
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"op": "=",
-								"val": 1
-							}
-						}
-					],
-					"name": "Receive the gratitude of the Vodalians.",
-					"text": "The last Homarids retreat into the ocean. A delegation of Vodalians kneels before you, and two priests lift a great seashell overflowing with gold and mana shards. The melodious voice of a Seasinger rings out: \"Please accept this token of our gratitude, adventurer. We Vodalians are profoundly in your debt.\"",
-					"options": [
-						{
-							"name": "(Accept the reward)",
-							"action": [
-								{
-									"grantRewards": [
-										{
-											"type": "gold",
-											"count": 1000
-										},
-										{
-											"type": "shards",
-											"count": 25
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Svyelunite Temple|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Vodalian Knights|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Seasinger|FEM"
-										}
-									],
-									"setQuestFlag": {
-										"key": "FE_Svyelunite_Completed",
-										"val": 1
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_Svyelunite_Faction",
-								"op": "=",
-								"val": 2
-							}
-						}
-					],
-					"name": "Claim the flotsam promised by the Homarids.",
-					"text": "The last Vodalians flee out to sea as a Deep Spawn topples gem-studded pillars into the waves. The alien voice returns: \"Our deal was clear... only flotsam... if it floats, you take... if it sinks, we get.\" As the tide crosses the battlefield, you salvage useful spells and equipment before they drift away.",
-					"options": [
-						{
-							"name": "\"This is less than a temple's worth, but it will do.\"",
-							"action": [
-								{
-									"grantRewards": [
-										{
-											"type": "gold",
-											"count": 1000
-										},
-										{
-											"type": "shards",
-											"count": 25
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "High Tide|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Tidal Influence|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Homarid Spawning Bed|FEM"
-										}
-									],
-									"addItem": "Coral Helm",
-									"setQuestFlag": {
-										"key": "FE_Svyelunite_Completed",
-										"val": 1
-									}
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		"failureDialog": {
-			"text": "The tide of battle turns without you, and the promise made at Svyelunite Temple remains unfulfilled.",
-			"options": [
-				{
-					"name": "(Quest Failed)"
-				}
-			]
-		},
-		"declinedDialog": {
-			"text": "The River Merfolk lower their conch horns while the alien presence fades from your thoughts.",
-			"options": [
-				{
-					"name": "(Leave)"
-				}
-			]
-		},
-		"reward": {},
-		"rewardDescription": "Faction reward from Svyelunite Temple",
-		"stages": [
-			{
-				"id": 1,
-				"name": "Battle for Svyelunite Temple",
-				"description": "Travel to Svyelunite Temple in the blue biome and defeat every member of the opposing faction.",
-				"POITags": [
-					"SvyeluniteTemple"
-				],
-				"objective": "MapFlag",
-				"prologue": {},
-				"epilogue": {},
-				"failureDialog": {},
-				"POIToken": "",
-				"mapFlag": "FE_Svyelunite_OpponentsDefeated",
-				"mapFlagValue": 18
-			},
-			{
-				"id": 2,
-				"name": "Return to Town",
-				"description": "Return to the town where you accepted the request.",
-				"here": true,
-				"objective": "Travel",
-				"prerequisiteIDs": [
-					1
-				],
-				"prologue": {},
-				"epilogue": {},
-				"failureDialog": {},
-				"POIToken": ""
-			}
-		],
-		"questSourceTags": [
-			"waste_town_generic",
-			"waste_town_identity",
-			"waste_town_tribal",
-			"plains_town_generic",
-			"plains_town_identity",
-			"plains_town_tribal",
-			"plains_capital",
-			"island_town_generic",
-			"island_town_identity",
-			"island_town_tribal",
-			"island_capital",
-			"swamp_town_generic",
-			"swamp_town_identity",
-			"swamp_town_tribal",
-			"swamp_capital",
-			"mountain_town_generic",
-			"mountain_town_identity",
-			"mountain_town_tribal",
-			"mountain_capital",
-			"forest_town_generic",
-			"forest_town_identity",
-			"forest_town_tribal",
-			"forest_capital",
-			"SvyeluniteTempleEntry"
-		]
-	},
+  "id": 55,
+  "isTemplate": true,
+  "name": "The Tides Give, the Tides Take",
+  "description": "Choose a side in the battle for Svyelunite Temple and defeat the opposing faction.",
+  "offerDialog": {
+    "text": "A strange harmonic melody draws you toward two River Merfolk standing waist-deep in nearby water. They sound large conch horns and call for aid against the Homarids attacking Svyelunite Temple. To show the danger facing their people, one of them raises the severed head of an invader.",
+    "options": [
+      {
+        "name": "(Continue)",
+        "text": "The other River Merfolk speaks while its companion holds the trophy aloft: \"The Homarids have overrun our sacred shore and are tearing Svyelunite Temple apart. Stand with the Vodalians, break their assault, and our priests will reward you from the temple treasury.\"",
+        "options": [
+          {
+            "name": "(Continue)",
+            "text": "A prismatic light flickers in the severed Homarid's black eye. An alien voice rolls into your thoughts: \"A counter-offer... The tides give... The tides take... Their time has passed... Our time has come... Help us wash their bodies away... and their flotsam shall flow to you...\"",
+            "options": [
+              {
+                "name": "(Continue)",
+                "text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"",
+                "options": [
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Faction",
+                        "not": true
+                      },
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed",
+                        "not": true
+                      },
+                      {
+                        "actorID": 9100,
+                        "not": true
+                      }
+                    ],
+                    "name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
+                    "action": [
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Accepted",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Faction",
+                          "val": 1
+                        },
+                        "issueQuest": "55"
+                      }
+                    ]
+                  },
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Faction",
+                        "not": true
+                      },
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed",
+                        "not": true
+                      },
+                      {
+                        "actorID": 9100,
+                        "not": true
+                      }
+                    ],
+                    "name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
+                    "action": [
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Accepted",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Faction",
+                          "val": 2
+                        },
+                        "issueQuest": "55"
+                      }
+                    ]
+                  },
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Faction",
+                        "not": true
+                      },
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed",
+                        "not": true
+                      },
+                      {
+                        "actorID": 9100
+                      }
+                    ],
+                    "name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
+                    "action": [
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Accepted",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Faction",
+                          "val": 1
+                        },
+                        "issueQuest": "55"
+                      },
+                      {
+                        "deleteMapObject": 9100
+                      },
+                      {
+                        "deleteMapObject": 9110
+                      },
+                      {
+                        "deleteMapObject": 9103
+                      },
+                      {
+                        "deleteMapObject": 9104
+                      },
+                      {
+                        "deleteMapObject": 9112
+                      },
+                      {
+                        "deleteMapObject": 9113
+                      }
+                    ]
+                  },
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Faction",
+                        "not": true
+                      },
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed",
+                        "not": true
+                      },
+                      {
+                        "actorID": 9100
+                      }
+                    ],
+                    "name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
+                    "action": [
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Accepted",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setQuestFlag": {
+                          "key": "FE_Svyelunite_Faction",
+                          "val": 2
+                        },
+                        "issueQuest": "55"
+                      },
+                      {
+                        "deleteMapObject": 9100
+                      },
+                      {
+                        "deleteMapObject": 9110
+                      },
+                      {
+                        "deleteMapObject": 9103
+                      },
+                      {
+                        "deleteMapObject": 9104
+                      },
+                      {
+                        "deleteMapObject": 9112
+                      },
+                      {
+                        "deleteMapObject": 9113
+                      }
+                    ]
+                  },
+                  {
+                    "condition": [
+                      {
+                        "getQuestFlag": {
+                          "key": "FE_Svyelunite_Faction",
+                          "op": "=",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed",
+                        "not": true
+                      }
+                    ],
+                    "name": "\"I have not forgotten my promise to the Vodalians.\" (Resume Quest)",
+                    "action": []
+                  },
+                  {
+                    "condition": [
+                      {
+                        "getQuestFlag": {
+                          "key": "FE_Svyelunite_Faction",
+                          "op": "=",
+                          "val": 2
+                        }
+                      },
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed",
+                        "not": true
+                      }
+                    ],
+                    "name": "The alien tide still calls. You will honor your bargain with the Homarids. (Resume Quest)",
+                    "action": []
+                  },
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Completed"
+                      }
+                    ],
+                    "name": "The battle at Svyelunite Temple has already been decided. (Leave)"
+                  },
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Faction",
+                        "not": true
+                      },
+                      {
+                        "actorID": 9100
+                      }
+                    ],
+                    "name": "\"This fight is not for me.\" (Decline for now)",
+                    "text": "The Merfolk lower their blades while the Homarid presence presses coldly against your thoughts. Neither army will let an uncommitted wanderer cross its battle line, and the approach remains blocked. If you change your mind, return tomorrow and they will hear your answer again."
+                  },
+                  {
+                    "condition": [
+                      {
+                        "checkQuestFlag": "FE_Svyelunite_Faction",
+                        "not": true
+                      },
+                      {
+                        "actorID": 9100,
+                        "not": true
+                      }
+                    ],
+                    "name": "\"Sorry, this fight is not for me. I am allergic to both shellfish and sharp blades.\" (Decline Quest)"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "prologue": {},
+  "epilogue": {
+    "text": "The battle for Svyelunite Temple is over.",
+    "options": [
+      {
+        "condition": [
+          {
+            "getQuestFlag": {
+              "key": "FE_Svyelunite_Faction",
+              "op": "=",
+              "val": 1
+            }
+          }
+        ],
+        "name": "Receive the gratitude of the Vodalians.",
+        "text": "The last Homarids retreat into the ocean. A delegation of Vodalians kneels before you, and two priests lift a great seashell overflowing with gold and mana shards. The melodious voice of a Seasinger rings out: \"Please accept this token of our gratitude, adventurer. We Vodalians are profoundly in your debt.\"",
+        "options": [
+          {
+            "name": "(Accept the reward)",
+            "action": [
+              {
+                "grantRewards": [
+                  {
+                    "type": "gold",
+                    "count": 1000
+                  },
+                  {
+                    "type": "shards",
+                    "count": 25
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Svyelunite Temple|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Vodalian Knights|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Seasinger|FEM"
+                  }
+                ],
+                "setQuestFlag": {
+                  "key": "FE_Svyelunite_Completed",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "getQuestFlag": {
+              "key": "FE_Svyelunite_Faction",
+              "op": "=",
+              "val": 2
+            }
+          }
+        ],
+        "name": "Claim the flotsam promised by the Homarids.",
+        "text": "The last Vodalians flee out to sea as a Deep Spawn topples gem-studded pillars into the waves. The alien voice returns: \"Our deal was clear... only flotsam... if it floats, you take... if it sinks, we get.\" As the tide crosses the battlefield, you salvage useful spells and equipment before they drift away.",
+        "options": [
+          {
+            "name": "\"This is less than a temple's worth, but it will do.\"",
+            "action": [
+              {
+                "grantRewards": [
+                  {
+                    "type": "gold",
+                    "count": 1000
+                  },
+                  {
+                    "type": "shards",
+                    "count": 25
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "High Tide|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Tidal Influence|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Homarid Spawning Bed|FEM"
+                  }
+                ],
+                "addItem": "Coral Helm",
+                "setQuestFlag": {
+                  "key": "FE_Svyelunite_Completed",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "failureDialog": {
+    "text": "The tide of battle turns without you, and the promise made at Svyelunite Temple remains unfulfilled.",
+    "options": [
+      {
+        "name": "(Quest Failed)"
+      }
+    ]
+  },
+  "declinedDialog": {
+    "text": "The River Merfolk lower their conch horns while the alien presence fades from your thoughts.",
+    "options": [
+      {
+        "name": "(Leave)"
+      }
+    ]
+  },
+  "reward": {},
+  "rewardDescription": "Faction reward from Svyelunite Temple",
+  "stages": [
+    {
+      "id": 1,
+      "name": "Battle for Svyelunite Temple",
+      "description": "Travel to Svyelunite Temple in the blue biome and defeat every member of the opposing faction.",
+      "POITags": [
+        "SvyeluniteTemple"
+      ],
+      "objective": "MapFlag",
+      "prologue": {},
+      "epilogue": {},
+      "failureDialog": {},
+      "POIToken": "",
+      "mapFlag": "FE_Svyelunite_OpponentsDefeated",
+      "mapFlagValue": 18
+    },
+    {
+      "id": 2,
+      "name": "Return to Town",
+      "description": "Return to the town where you accepted the request.",
+      "here": true,
+      "objective": "Travel",
+      "prerequisiteIDs": [
+        1
+      ],
+      "prologue": {},
+      "epilogue": {},
+      "failureDialog": {},
+      "POIToken": ""
+    }
+  ],
+  "questSourceTags": [
+    "waste_town_generic",
+    "waste_town_identity",
+    "waste_town_tribal",
+    "plains_town_generic",
+    "plains_town_identity",
+    "plains_town_tribal",
+    "plains_capital",
+    "island_town_generic",
+    "island_town_identity",
+    "island_town_tribal",
+    "island_capital",
+    "swamp_town_generic",
+    "swamp_town_identity",
+    "swamp_town_tribal",
+    "swamp_capital",
+    "mountain_town_generic",
+    "mountain_town_identity",
+    "mountain_town_tribal",
+    "mountain_capital",
+    "forest_town_generic",
+    "forest_town_identity",
+    "forest_town_tribal",
+    "forest_capital",
+    "SvyeluniteTempleEntry"
+  ]
+},
 	{
-		"id": 56,
-		"isTemplate": true,
-		"name": "Hold the Hold",
-		"description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
-		"offerDialog": {
-			"text": "A stout dwarf leading a heavily laden pony looks you up and down. \"Who are ye? Have ye come here tae aid us in oor hour o' need?\"",
-			"options": [
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9150
-						}
-					],
-					"name": "\"Yep, that's right.\" (Aid the dwarves)",
-					"text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
-					"options": [
-						{
-							"name": "(Take the Dwarven rune stone)",
-							"action": [
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Faction",
-										"val": 1
-									},
-									"issueQuest": "56"
-								},
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Defeated",
-										"val": 0
-									}
-								},
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Victory",
-										"val": 0
-									}
-								},
-								{
-									"addItem": "Dwarven Rune Stone"
-								},
-								{
-									"deleteMapObject": 41004
-								},
-								{
-									"deleteMapObject": 41039
-								},
-								{
-									"activateMapObject": 41002
-								},
-								{
-									"activateMapObject": 41003
-								},
-								{
-									"activateMapObject": 41005
-								},
-								{
-									"activateMapObject": 41006
-								},
-								{
-									"activateMapObject": 41007
-								},
-								{
-									"activateMapObject": 41008
-								},
-								{
-									"activateMapObject": 41009
-								},
-								{
-									"activateMapObject": 41010
-								},
-								{
-									"activateMapObject": 41011
-								},
-								{
-									"activateMapObject": 41012
-								},
-								{
-									"activateMapObject": 41013
-								},
-								{
-									"activateMapObject": 41014
-								},
-								{
-									"activateMapObject": 41015
-								},
-								{
-									"activateMapObject": 41016
-								},
-								{
-									"activateMapObject": 41017
-								},
-								{
-									"activateMapObject": 41018
-								},
-								{
-									"activateMapObject": 41019
-								},
-								{
-									"deleteMapObject": 51002
-								},
-								{
-									"deleteMapObject": 51003
-								},
-								{
-									"deleteMapObject": 51005
-								},
-								{
-									"deleteMapObject": 51006
-								},
-								{
-									"deleteMapObject": 51007
-								},
-								{
-									"deleteMapObject": 51008
-								},
-								{
-									"deleteMapObject": 51009
-								},
-								{
-									"deleteMapObject": 51010
-								},
-								{
-									"deleteMapObject": 51011
-								},
-								{
-									"deleteMapObject": 51012
-								},
-								{
-									"deleteMapObject": 51013
-								},
-								{
-									"deleteMapObject": 51014
-								},
-								{
-									"deleteMapObject": 51015
-								},
-								{
-									"deleteMapObject": 51016
-								},
-								{
-									"deleteMapObject": 51017
-								},
-								{
-									"deleteMapObject": 51018
-								},
-								{
-									"deleteMapObject": 51019
-								},
-								{
-									"deleteMapObject": 51004
-								},
-								{
-									"deleteMapObject": 51039
-								},
-								{
-									"deleteMapObject": 51100
-								},
-								{
-									"deleteMapObject": 9150
-								},
-								{
-									"deleteMapObject": 9151
-								}
-							]
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9150
-						}
-					],
-					"name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
-					"action": [
-						{
-							"setQuestFlag": {
-								"key": "FE_DwarvenHold_Faction",
-								"val": 2
-							},
-							"issueQuest": "56"
-						},
-						{
-							"setQuestFlag": {
-								"key": "FE_DwarvenHold_Defeated",
-								"val": 0
-							}
-						},
-						{
-							"setQuestFlag": {
-								"key": "FE_DwarvenHold_Victory",
-								"val": 0
-							}
-						},
-						{
-							"deleteMapObject": 41002
-						},
-						{
-							"deleteMapObject": 41003
-						},
-						{
-							"deleteMapObject": 41005
-						},
-						{
-							"deleteMapObject": 41006
-						},
-						{
-							"deleteMapObject": 41007
-						},
-						{
-							"deleteMapObject": 41008
-						},
-						{
-							"deleteMapObject": 41009
-						},
-						{
-							"deleteMapObject": 41010
-						},
-						{
-							"deleteMapObject": 41011
-						},
-						{
-							"deleteMapObject": 41012
-						},
-						{
-							"deleteMapObject": 41013
-						},
-						{
-							"deleteMapObject": 41014
-						},
-						{
-							"deleteMapObject": 41015
-						},
-						{
-							"deleteMapObject": 41016
-						},
-						{
-							"deleteMapObject": 41017
-						},
-						{
-							"deleteMapObject": 41018
-						},
-						{
-							"deleteMapObject": 41019
-						},
-						{
-							"activateMapObject": 41004
-						},
-						{
-							"activateMapObject": 41039
-						},
-						{
-							"deleteMapObject": 51004
-						},
-						{
-							"deleteMapObject": 51039
-						},
-						{
-							"deleteMapObject": 9150
-						},
-						{
-							"deleteMapObject": 9151
-						},
-						{
-							"battleWithActorID": 41004
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9150,
-							"not": true
-						}
-					],
-					"name": "\"Yep, that's right.\" (Aid the dwarves)",
-					"text": "The dwarf breathes a sigh of relief. \"Och, that's guid tae hear. Orcs and goblins are besiegin' oor hauld in the Crimson Peaks. Here, tak' this rune stane. It opens a secret latch tae the hauld, just ahint the rocks at the top o' the mountain pass.\"",
-					"options": [
-						{
-							"name": "(Take the Dwarven rune stone)",
-							"action": [
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Faction",
-										"val": 1
-									},
-									"issueQuest": "56"
-								},
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Defeated",
-										"val": 0
-									}
-								},
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Victory",
-										"val": 0
-									}
-								},
-								{
-									"addItem": "Dwarven Rune Stone"
-								}
-							]
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Faction",
-							"not": true
-						},
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed",
-							"not": true
-						},
-						{
-							"actorID": 9150,
-							"not": true
-						}
-					],
-					"name": "\"Actually, I'm with the other team.\" (Aid the orc and goblin horde)",
-					"text": "The dwarf's face darkens. He tugs his pony's lead and backs away. \"Then ye'll find nae welcome at oor hauld in the Crimson Peaks. Nae welcome at a'.\"",
-					"options": [
-						{
-							"name": "(Let him go)",
-							"action": [
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Faction",
-										"val": 2
-									},
-									"issueQuest": "56"
-								},
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Defeated",
-										"val": 0
-									}
-								},
-								{
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Victory",
-										"val": 0
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_DwarvenHold_Faction",
-								"op": "=",
-								"val": 1
-							}
-						},
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed",
-							"not": true
-						}
-					],
-					"name": "\"I have not forgotten my promise to the dwarves.\" (Resume Quest)",
-					"action": [
-						{
-							"issueQuest": "56"
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_DwarvenHold_Faction",
-								"op": "=",
-								"val": 2
-							}
-						},
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed",
-							"not": true
-						}
-					],
-					"name": "The orc and goblin horde still expects you at the hold. (Resume Quest)",
-					"action": [
-						{
-							"issueQuest": "56"
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Completed"
-						}
-					],
-					"name": "The siege of the Dwarven Hold has already been decided. (Leave)"
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Faction",
-							"not": true
-						},
-						{
-							"actorID": 9150
-						}
-					],
-					"name": "\"I'm just passing through.\" (Decline for now)",
-					"text": "The dwarf shakes his head. \"Then turn back, stranger. Naebody gets past this pass till they've picked a side.\" If you change your mind, return tomorrow and he will ask again."
-				},
-				{
-					"condition": [
-						{
-							"checkQuestFlag": "FE_DwarvenHold_Faction",
-							"not": true
-						},
-						{
-							"actorID": 9150,
-							"not": true
-						}
-					],
-					"name": "\"Sorry, I have no quarrel with orcs or dwarves.\" (Decline Quest)"
-				}
-			]
-		},
-		"prologue": {},
-		"epilogue": {
-			"text": "The siege of the Dwarven Hold is over.",
-			"options": [
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_DwarvenHold_Faction",
-								"op": "=",
-								"val": 1
-							}
-						}
-					],
-					"name": "Receive the thanks of the dwarves.",
-					"text": "The last raiders flee down the mountain pass. The dwarves gather in the great hall, raise their tankards in your honor, and open the hold's treasury to you.",
-					"options": [
-						{
-							"name": "(Accept the reward)",
-							"action": [
-								{
-									"grantRewards": [
-										{
-											"type": "gold",
-											"count": 1000
-										},
-										{
-											"type": "shards",
-											"count": 25
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Dwarven Hold|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Dwarven Lieutenant|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Dwarven Armorer|FEM"
-										}
-									],
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Completed",
-										"val": 1
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"condition": [
-						{
-							"getQuestFlag": {
-								"key": "FE_DwarvenHold_Faction",
-								"op": "=",
-								"val": 2
-							}
-						}
-					],
-					"name": "Claim your share of the plunder.",
-					"text": "With the hold's defenders broken, the Orcish Captain flips a coin to decide your share of the plunder. It lands in your favor.",
-					"options": [
-						{
-							"name": "(Accept the reward)",
-							"action": [
-								{
-									"grantRewards": [
-										{
-											"type": "gold",
-											"count": 1000
-										},
-										{
-											"type": "shards",
-											"count": 25
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Orcish Captain|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Goblin Grenade|FEM"
-										},
-										{
-											"type": "card",
-											"count": 1,
-											"cardName": "Goblin War Drums|FEM"
-										}
-									],
-									"setQuestFlag": {
-										"key": "FE_DwarvenHold_Completed",
-										"val": 1
-									}
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		"failureDialog": {
-			"text": "The siege of the Dwarven Hold is decided without you.",
-			"options": [
-				{
-					"name": "(Quest Failed)"
-				}
-			]
-		},
-		"declinedDialog": {
-			"text": "The dwarf shrugs and leads his pony away.",
-			"options": [
-				{
-					"name": "(Leave)"
-				}
-			]
-		},
-		"reward": {},
-		"rewardDescription": "Faction reward from the Dwarven Hold",
-		"stages": [
-			{
-				"id": 1,
-				"name": "Siege of the Dwarven Hold",
-				"description": "Travel to the Dwarven Hold in the red biome and defeat every member of the opposing faction, outside and inside the hold.",
-				"POITags": [
-					"DwarvenHold"
-				],
-				"objective": "QuestFlag",
-				"prologue": {},
-				"epilogue": {},
-				"failureDialog": {},
-				"POIToken": "",
-				"mapFlag": "FE_DwarvenHold_Victory",
-				"mapFlagValue": 1
-			},
-			{
-				"id": 2,
-				"name": "Return to Town",
-				"description": "Return to the town where you accepted the request.",
-				"here": true,
-				"objective": "Travel",
-				"prerequisiteIDs": [
-					1
-				],
-				"prologue": {},
-				"epilogue": {},
-				"failureDialog": {},
-				"POIToken": ""
-			}
-		],
-		"questSourceTags": [
-			"waste_town_generic",
-			"waste_town_identity",
-			"waste_town_tribal",
-			"plains_town_generic",
-			"plains_town_identity",
-			"plains_town_tribal",
-			"plains_capital",
-			"island_town_generic",
-			"island_town_identity",
-			"island_town_tribal",
-			"island_capital",
-			"swamp_town_generic",
-			"swamp_town_identity",
-			"swamp_town_tribal",
-			"swamp_capital",
-			"mountain_town_generic",
-			"mountain_town_identity",
-			"mountain_town_tribal",
-			"mountain_capital",
-			"forest_town_generic",
-			"forest_town_identity",
-			"forest_town_tribal",
-			"forest_capital",
-			"DwarvenHoldEntry"
-		]
-	}
+  "id": 56,
+  "isTemplate": true,
+  "name": "Hold the Hold",
+  "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
+  "offerDialog": {
+    "text": "\"What about this one?\" A squeeky voice comes from the alley beside the inn. A low-pitched grunt sounds in reply, followed by a deep voice asking: \"You like loot?\" A heavy-set Orc steps out from the shade of the building, with a little goblin skipping behind. The Orc continues: \"We have nice Dwarven loot. You just help us crack it.\" The Orc points in the direction of the mountains. \"Over there. We are many, they are few. But they have blocked their gate. Magical stone. You break it for us, we share loot with you. Deal?\"",
+    "options": [
+      {
+        "name": "\"I'll go check it out. No promises, though!\"",
+        "condition": [
+          {
+            "actorID": 9150,
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Accepted",
+            "not": true
+          }
+        ],
+        "action": [
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Accepted",
+              "val": 1
+            }
+          },
+          {
+            "issueQuest": "56"
+          }
+        ]
+      },
+      {
+        "name": "\"I'll go check it out. No promises, though!\"",
+        "condition": [
+          {
+            "actorID": 9150,
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Accepted"
+          }
+        ]
+      },
+      {
+        "name": "\"I don't care. Go find someone else to knock down that gate.\" (Decline quest)",
+        "condition": [
+          {
+            "actorID": 9150,
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Faction",
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          },
+          {
+            "actorID": 9150
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Accepted"
+          }
+        ],
+        "name": "\"Yep, that's right.\" (Aid the dwarves)",
+        "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
+        "options": [
+          {
+            "name": "(Take the Dwarven rune stone)",
+            "action": [
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Faction",
+                  "val": 1
+                }
+              },
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Defeated",
+                  "val": 0
+                }
+              },
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Victory",
+                  "val": 0
+                }
+              },
+              {
+                "addItem": "Dwarven Rune Stone"
+              },
+              {
+                "deleteMapObject": 41004
+              },
+              {
+                "deleteMapObject": 41039
+              },
+              {
+                "activateMapObject": 41002
+              },
+              {
+                "activateMapObject": 41003
+              },
+              {
+                "activateMapObject": 41005
+              },
+              {
+                "activateMapObject": 41006
+              },
+              {
+                "activateMapObject": 41007
+              },
+              {
+                "activateMapObject": 41008
+              },
+              {
+                "activateMapObject": 41009
+              },
+              {
+                "activateMapObject": 41010
+              },
+              {
+                "activateMapObject": 41011
+              },
+              {
+                "activateMapObject": 41012
+              },
+              {
+                "activateMapObject": 41013
+              },
+              {
+                "activateMapObject": 41014
+              },
+              {
+                "activateMapObject": 41015
+              },
+              {
+                "activateMapObject": 41016
+              },
+              {
+                "activateMapObject": 41017
+              },
+              {
+                "activateMapObject": 41018
+              },
+              {
+                "activateMapObject": 41019
+              },
+              {
+                "deleteMapObject": 51002
+              },
+              {
+                "deleteMapObject": 51003
+              },
+              {
+                "deleteMapObject": 51005
+              },
+              {
+                "deleteMapObject": 51006
+              },
+              {
+                "deleteMapObject": 51007
+              },
+              {
+                "deleteMapObject": 51008
+              },
+              {
+                "deleteMapObject": 51009
+              },
+              {
+                "deleteMapObject": 51010
+              },
+              {
+                "deleteMapObject": 51011
+              },
+              {
+                "deleteMapObject": 51012
+              },
+              {
+                "deleteMapObject": 51013
+              },
+              {
+                "deleteMapObject": 51014
+              },
+              {
+                "deleteMapObject": 51015
+              },
+              {
+                "deleteMapObject": 51016
+              },
+              {
+                "deleteMapObject": 51017
+              },
+              {
+                "deleteMapObject": 51018
+              },
+              {
+                "deleteMapObject": 51019
+              },
+              {
+                "deleteMapObject": 51004
+              },
+              {
+                "deleteMapObject": 51100
+              },
+              {
+                "deleteMapObject": 9150
+              },
+              {
+                "deleteMapObject": 9151
+              },
+              {
+                "setMapFlag": {
+                  "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Faction",
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          },
+          {
+            "actorID": 9150
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Accepted",
+            "not": true
+          }
+        ],
+        "name": "\"Yep, that's right.\" (Aid the dwarves)",
+        "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
+        "options": [
+          {
+            "name": "(Take the Dwarven rune stone)",
+            "action": [
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Accepted",
+                  "val": 1
+                }
+              },
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Faction",
+                  "val": 1
+                }
+              },
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Defeated",
+                  "val": 0
+                }
+              },
+              {
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Victory",
+                  "val": 0
+                }
+              },
+              {
+                "addItem": "Dwarven Rune Stone"
+              },
+              {
+                "deleteMapObject": 41004
+              },
+              {
+                "deleteMapObject": 41039
+              },
+              {
+                "activateMapObject": 41002
+              },
+              {
+                "activateMapObject": 41003
+              },
+              {
+                "activateMapObject": 41005
+              },
+              {
+                "activateMapObject": 41006
+              },
+              {
+                "activateMapObject": 41007
+              },
+              {
+                "activateMapObject": 41008
+              },
+              {
+                "activateMapObject": 41009
+              },
+              {
+                "activateMapObject": 41010
+              },
+              {
+                "activateMapObject": 41011
+              },
+              {
+                "activateMapObject": 41012
+              },
+              {
+                "activateMapObject": 41013
+              },
+              {
+                "activateMapObject": 41014
+              },
+              {
+                "activateMapObject": 41015
+              },
+              {
+                "activateMapObject": 41016
+              },
+              {
+                "activateMapObject": 41017
+              },
+              {
+                "activateMapObject": 41018
+              },
+              {
+                "activateMapObject": 41019
+              },
+              {
+                "deleteMapObject": 51002
+              },
+              {
+                "deleteMapObject": 51003
+              },
+              {
+                "deleteMapObject": 51005
+              },
+              {
+                "deleteMapObject": 51006
+              },
+              {
+                "deleteMapObject": 51007
+              },
+              {
+                "deleteMapObject": 51008
+              },
+              {
+                "deleteMapObject": 51009
+              },
+              {
+                "deleteMapObject": 51010
+              },
+              {
+                "deleteMapObject": 51011
+              },
+              {
+                "deleteMapObject": 51012
+              },
+              {
+                "deleteMapObject": 51013
+              },
+              {
+                "deleteMapObject": 51014
+              },
+              {
+                "deleteMapObject": 51015
+              },
+              {
+                "deleteMapObject": 51016
+              },
+              {
+                "deleteMapObject": 51017
+              },
+              {
+                "deleteMapObject": 51018
+              },
+              {
+                "deleteMapObject": 51019
+              },
+              {
+                "deleteMapObject": 51004
+              },
+              {
+                "deleteMapObject": 51100
+              },
+              {
+                "deleteMapObject": 9150
+              },
+              {
+                "deleteMapObject": 9151
+              },
+              {
+                "setMapFlag": {
+                  "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                  "val": 1
+                }
+              },
+              {
+                "issueQuest": "56"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Faction",
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          },
+          {
+            "actorID": 9150
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Accepted"
+          }
+        ],
+        "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
+        "action": [
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Faction",
+              "val": 2
+            }
+          },
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Defeated",
+              "val": 0
+            }
+          },
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Victory",
+              "val": 0
+            }
+          },
+          {
+            "deleteMapObject": 41002
+          },
+          {
+            "deleteMapObject": 41003
+          },
+          {
+            "deleteMapObject": 41005
+          },
+          {
+            "deleteMapObject": 41006
+          },
+          {
+            "deleteMapObject": 41007
+          },
+          {
+            "deleteMapObject": 41008
+          },
+          {
+            "deleteMapObject": 41009
+          },
+          {
+            "deleteMapObject": 41010
+          },
+          {
+            "deleteMapObject": 41011
+          },
+          {
+            "deleteMapObject": 41012
+          },
+          {
+            "deleteMapObject": 41013
+          },
+          {
+            "deleteMapObject": 41014
+          },
+          {
+            "deleteMapObject": 41015
+          },
+          {
+            "deleteMapObject": 41016
+          },
+          {
+            "deleteMapObject": 41017
+          },
+          {
+            "deleteMapObject": 41018
+          },
+          {
+            "deleteMapObject": 41019
+          },
+          {
+            "activateMapObject": 41004
+          },
+          {
+            "activateMapObject": 41039
+          },
+          {
+            "deleteMapObject": 51004
+          },
+          {
+            "deleteMapObject": 51039
+          },
+          {
+            "deleteMapObject": 9150
+          },
+          {
+            "deleteMapObject": 9151
+          },
+          {
+            "battleWithActorID": 41004
+          },
+          {
+            "setMapFlag": {
+              "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+              "val": 1
+            }
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Faction",
+            "not": true
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          },
+          {
+            "actorID": 9150
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Accepted",
+            "not": true
+          }
+        ],
+        "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
+        "action": [
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Accepted",
+              "val": 1
+            }
+          },
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Faction",
+              "val": 2
+            }
+          },
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Defeated",
+              "val": 0
+            }
+          },
+          {
+            "setQuestFlag": {
+              "key": "FE_DwarvenHold_Victory",
+              "val": 0
+            }
+          },
+          {
+            "deleteMapObject": 41002
+          },
+          {
+            "deleteMapObject": 41003
+          },
+          {
+            "deleteMapObject": 41005
+          },
+          {
+            "deleteMapObject": 41006
+          },
+          {
+            "deleteMapObject": 41007
+          },
+          {
+            "deleteMapObject": 41008
+          },
+          {
+            "deleteMapObject": 41009
+          },
+          {
+            "deleteMapObject": 41010
+          },
+          {
+            "deleteMapObject": 41011
+          },
+          {
+            "deleteMapObject": 41012
+          },
+          {
+            "deleteMapObject": 41013
+          },
+          {
+            "deleteMapObject": 41014
+          },
+          {
+            "deleteMapObject": 41015
+          },
+          {
+            "deleteMapObject": 41016
+          },
+          {
+            "deleteMapObject": 41017
+          },
+          {
+            "deleteMapObject": 41018
+          },
+          {
+            "deleteMapObject": 41019
+          },
+          {
+            "activateMapObject": 41004
+          },
+          {
+            "activateMapObject": 41039
+          },
+          {
+            "deleteMapObject": 51004
+          },
+          {
+            "deleteMapObject": 51039
+          },
+          {
+            "deleteMapObject": 9150
+          },
+          {
+            "deleteMapObject": 9151
+          },
+          {
+            "setMapFlag": {
+              "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+              "val": 1
+            }
+          },
+          {
+            "issueQuest": "56"
+          },
+          {
+            "battleWithActorID": 41004
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Faction",
+            "not": true
+          },
+          {
+            "actorID": 9150
+          }
+        ],
+        "name": "\"I'm just passing through.\" (Decline for now)",
+        "text": "The dwarf shakes his head. \"Then turn back, stranger. Naebody gets past this pass till they've picked a side.\" If you change your mind, return tomorrow and he will ask again."
+      },
+      {
+        "condition": [
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed"
+          }
+        ],
+        "name": "The siege of the Dwarven Hold has already been decided. (Leave)"
+      },
+      {
+        "condition": [
+          {
+            "actorID": 9150
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Faction"
+          }
+        ],
+        "name": "(Continue)"
+      }
+    ]
+  },
+  "prologue": {},
+  "epilogue": {
+    "text": "The siege of the Dwarven Hold is over.",
+    "options": [
+      {
+        "condition": [
+          {
+            "getQuestFlag": {
+              "key": "FE_DwarvenHold_Faction",
+              "op": "=",
+              "val": 1
+            }
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          }
+        ],
+        "name": "Receive the thanks of the dwarves.",
+        "text": "The last raiders flee down the mountain pass. The dwarves gather in the great hall, raise their tankards in your honor, and open the hold's treasury to you.",
+        "options": [
+          {
+            "name": "(Accept the reward)",
+            "action": [
+              {
+                "grantRewards": [
+                  {
+                    "type": "gold",
+                    "count": 1000
+                  },
+                  {
+                    "type": "shards",
+                    "count": 25
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Dwarven Hold|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Dwarven Lieutenant|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Dwarven Armorer|FEM"
+                  },
+                  {
+                    "type": "cardPackShop",
+                    "editions": [
+                      "FEM"
+                    ],
+                    "count": 6
+                  }
+                ],
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Completed",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "condition": [
+          {
+            "getQuestFlag": {
+              "key": "FE_DwarvenHold_Faction",
+              "op": "=",
+              "val": 2
+            }
+          },
+          {
+            "checkQuestFlag": "FE_DwarvenHold_Completed",
+            "not": true
+          }
+        ],
+        "name": "Claim your share of the plunder.",
+        "text": "With the hold's defenders broken, the Orcish Captain flips a coin to decide your share of the plunder. It lands in your favor.",
+        "options": [
+          {
+            "name": "(Accept the reward)",
+            "action": [
+              {
+                "grantRewards": [
+                  {
+                    "type": "gold",
+                    "count": 1000
+                  },
+                  {
+                    "type": "shards",
+                    "count": 25
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Orcish Captain|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Goblin Grenade|FEM"
+                  },
+                  {
+                    "type": "card",
+                    "count": 1,
+                    "cardName": "Goblin War Drums|FEM"
+                  },
+                  {
+                    "type": "cardPackShop",
+                    "editions": [
+                      "FEM"
+                    ],
+                    "count": 6
+                  }
+                ],
+                "setQuestFlag": {
+                  "key": "FE_DwarvenHold_Completed",
+                  "val": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "failureDialog": {
+    "text": "The siege of the Dwarven Hold is decided without you.",
+    "options": [
+      {
+        "name": "(Quest Failed)"
+      }
+    ]
+  },
+  "declinedDialog": {
+    "text": "The dwarf shrugs and leads his pony away.",
+    "options": [
+      {
+        "name": "(Leave)"
+      }
+    ]
+  },
+  "reward": {},
+  "rewardDescription": "1000 gold, 25 shards, 3 faction cards, and 6 Fallen Empires boosters",
+  "stages": [
+    {
+      "id": 1,
+      "name": "Siege of the Dwarven Hold",
+      "description": "Travel to the Dwarven Hold in the red biome and defeat every member of the opposing faction, outside and inside the hold.",
+      "POITags": [
+        "DwarvenHold"
+      ],
+      "objective": "QuestFlag",
+      "prologue": {},
+      "epilogue": {},
+      "failureDialog": {},
+      "POIToken": "",
+      "mapFlag": "FE_DwarvenHold_Victory",
+      "mapFlagValue": 1
+    },
+    {
+      "id": 2,
+      "name": "Return to Town",
+      "description": "Return to the town where you accepted the request.",
+      "here": true,
+      "objective": "Travel",
+      "prerequisiteIDs": [
+        1
+      ],
+      "prologue": {},
+      "epilogue": {},
+      "failureDialog": {},
+      "POIToken": ""
+    }
+  ],
+  "questSourceTags": [
+    "waste_town_generic",
+    "waste_town_identity",
+    "waste_town_tribal",
+    "plains_town_generic",
+    "plains_town_identity",
+    "plains_town_tribal",
+    "plains_capital",
+    "island_town_generic",
+    "island_town_identity",
+    "island_town_tribal",
+    "island_capital",
+    "swamp_town_generic",
+    "swamp_town_identity",
+    "swamp_town_tribal",
+    "swamp_capital",
+    "mountain_town_generic",
+    "mountain_town_identity",
+    "mountain_town_tribal",
+    "mountain_capital",
+    "forest_town_generic",
+    "forest_town_identity",
+    "forest_town_tribal",
+    "forest_capital",
+    "DwarvenHoldEntry"
+  ]
+}
 ]

@@ -3,9 +3,6 @@ size: 136, 24
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Avatar
-  xy: 128, 0
-  size: 8, 8
 Idle
   xy: 0, 0
   size: 32, 24
@@ -18,3 +15,12 @@ Idle
 Idle
   xy: 96, 0
   size: 32, 24
+
+seasinger.png
+size: 272,48
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 256, 0
+  size: 16, 16

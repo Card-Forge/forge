@@ -6,90 +6,90 @@ repeat: none
 Avatar
   xy: 400, 0
   size: 16, 16
-Idle
+IdleLeft
   xy: 0,0
   size: 80, 32
-Idle
+IdleLeft
   xy: 80, 0
   size: 80, 32
-Idle
+IdleLeft
   xy: 160, 0
   size: 80, 32
-Idle
+IdleLeft
   xy: 240, 0
   size: 80, 32
-Idle
+IdleLeft
   xy: 320, 0
   size: 80, 32
-Walk
+WalkLeft
   xy: 0, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 80, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 160, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 240, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 320, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 400, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 480, 32
   size: 80, 32
-Walk
+WalkLeft
   xy: 560, 32
   size: 80, 32
-Attack
+AttackLeft
   xy: 0, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 80, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 160, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 240, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 320, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 400, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 480, 64
   size: 80, 48
-Attack
+AttackLeft
   xy: 560, 64
   size: 80, 48
-Death
+DeathLeft
   xy: 0, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 80, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 160, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 240, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 320, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 400, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 480, 112
   size: 80, 48
-Death
+DeathLeft
   xy: 560, 112
   size: 80, 48
