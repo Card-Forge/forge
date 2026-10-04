@@ -84,7 +84,11 @@ public class Sticker {
     }
 
     public int getUniqueVowelCount() {
-        String letters = getLetters().toUpperCase();
+        return countUniqueVowels(getLetters());
+    }
+
+    public static int countUniqueVowels(String name) {
+        String letters = name.toUpperCase();
         int unique = 0;
         for (char v : VOWELS.toCharArray()) {
             if (letters.indexOf(v) >= 0) {

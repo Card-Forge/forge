@@ -2065,6 +2065,9 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2], ctb), expr, c, ctb);
         }
 
+        if (sq[0].equals("CardNameUniqueVowels")) {
+            return doXMath(Sticker.countUniqueVowels(c.getName()), expr, c, ctb);
+        }
         if (sq[0].equals("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);
         }
