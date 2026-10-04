@@ -165,6 +165,9 @@ public class StackItemView extends TrackableObject implements IHasCardView {
     void updateOptionalTrigger(SpellAbilityStackInstance si) {
         set(TrackableProperty.OptionalTrigger, si.isOptionalTrigger());
     }
+    public void setOptionalTrigger(boolean optionalTrigger) {
+        set(TrackableProperty.OptionalTrigger, optionalTrigger);
+    }
 
     public StackItemView getSubInstance() {
         return get(TrackableProperty.SubInstance);

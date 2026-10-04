@@ -356,7 +356,7 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield.setSelected(item0.isAbility()
                     && controller.getMatchUI().getGameController().shouldAutoYield(yieldKey));
 
-            if (controller.getMatchUI().getGameController().getYieldController().offersTriggerDecision(item0) && controller.getMatchUI().isLocalPlayer(item0.getActivatingPlayer()) && !yieldKey.isEmpty()) {
+            if (item0.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item0.getActivatingPlayer()) && !yieldKey.isEmpty()) {
                 TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(yieldKey);
                 jmiAlwaysYes.setSelected(decision == TriggerDecision.ACCEPT);
                 jmiAlwaysNo.setSelected(decision == TriggerDecision.DECLINE);

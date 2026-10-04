@@ -6,7 +6,6 @@ import com.google.common.collect.Sets;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class AutoYieldStore {
     public enum Tier { GAME, MATCH, SESSION }
@@ -16,8 +15,6 @@ public class AutoYieldStore {
     private final EnumMap<Tier, Map<String, TriggerDecision>> triggerDecisionsByTier = new EnumMap<>(Tier.class);
     private boolean disabled;
     private boolean triggerDecisionsDisabled;
-    // written while a game is resolving an effect, read by the UI thread
-    private final Set<String> askedOptionalKeys = ConcurrentHashMap.newKeySet();
 
     public AutoYieldStore() {
         for (Tier t : Tier.values()) {
@@ -55,14 +52,6 @@ public class AutoYieldStore {
         return triggerDecisionsByTier.get(tier).entrySet();
     }
 
-    /** Not a user decision: records that a mandatory trigger asked a "you may" question. Returns true the first time. */
-    public boolean markOptionalAsked(String key) {
-        return askedOptionalKeys.add(abilitySuffix(key));
-    }
-    public boolean hasAskedOptional(String key) {
-        return askedOptionalKeys.contains(abilitySuffix(key));
-    }
-
     public void onGameEnd(boolean matchOver) {
         yieldsByTier.get(Tier.GAME).clear();
         triggerDecisionsByTier.get(Tier.GAME).clear();
@@ -72,11 +61,10 @@ public class AutoYieldStore {
         }
     }
 
-    /** Wipe all yields, trigger decisions, asked marks, and the disabled flags — used to reseed the cache from a client snapshot. */
+    /** Wipe all yields, trigger decisions, and the disabled flags — used to reseed the cache from a client snapshot. */
     public void clear() {
         for (Set<String> set : yieldsByTier.values()) set.clear();
         for (Map<String, TriggerDecision> map : triggerDecisionsByTier.values()) map.clear();
-        askedOptionalKeys.clear();
         disabled = false;
         triggerDecisionsDisabled = false;
     }

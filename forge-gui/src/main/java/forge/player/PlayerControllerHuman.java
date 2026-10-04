@@ -754,18 +754,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
                                  List<String> options, Card cardToShow, Map<String, Object> params) {
-        // only the trigger's controller sets Always Yes/No from the stack; optional triggers apply it in confirmTrigger
-        if (sa.getRootAbility().isMandatory() && sa.hasParam("Optional")
+        // only the trigger's controller sets Always Yes/No from the stack, and it must not also pick which zones to search
+        if (sa.getRootAbility().isMandatory() && sa.hasParam("Optional") && mode != PlayerActionConfirmMode.ChangeZoneFromAltSource
                 && player.equals(sa.getActivatingPlayer()) && isOnlyOptionalInChain(sa)) {
-            final String key = sa.yieldKey();
-            // marked even when auto-answered, so the stack keeps offering a way to undo the decision
-            if (yieldController.markOptionalAsked(key) && isRemoteClient()) {
-                getGui().applyYieldUpdate(new YieldUpdate.OptionalAsked(player.getView(), key));
-            }
             if (!isMacroActive()) {
-                AutoYieldStore.TriggerDecision decision = getTriggerDecision(key);
+                AutoYieldStore.TriggerDecision decision = getTriggerDecision(sa.yieldKey());
                 if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
                 if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+            }
+            // the resolving trigger is still the top stack item; it offers Always Yes/No while this question is open
+            final SpellAbilityStackInstance si = getGame().getStack().peek();
+            if (si != null && si.getSpellAbility() instanceof WrappedAbility wa && wa.getWrappedAbility() == sa.getRootAbility()) {
+                si.getView().setOptionalTrigger(true);
             }
         }
 

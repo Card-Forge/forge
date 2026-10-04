@@ -292,7 +292,7 @@ public class VStack extends FDropDown {
                                         boolean abilityScope = controller.getYieldController().isAbilityScope();
                                         controller.setShouldAutoYield(key, !autoYield, abilityScope);
                                     }));
-                            if (controller.getYieldController().offersTriggerDecision(stackInstance) && stackInstance.getActivatingPlayer().equals(player)) {
+                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 if (!key.isEmpty()) {
                                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
                                     addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),

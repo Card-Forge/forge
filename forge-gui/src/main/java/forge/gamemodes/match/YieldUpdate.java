@@ -25,8 +25,7 @@ public sealed interface YieldUpdate extends Serializable
                 YieldUpdate.SkipPhase,
                 YieldUpdate.SetYieldPref,
                 YieldUpdate.SeedFromClient,
-                YieldUpdate.ClearAbilityOrders,
-                YieldUpdate.OptionalAsked {
+                YieldUpdate.ClearAbilityOrders {
 
     /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
     record SetMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) implements YieldUpdate {}
@@ -57,7 +56,4 @@ public sealed interface YieldUpdate extends Serializable
 
     /** Clears the receiving PCH's saved simultaneous-ability and replacement-effect ordering state. */
     record ClearAbilityOrders() implements YieldUpdate {}
-
-    /** Host to client: a mandatory trigger asked {@code player} a "you may" question, so its stack items offer Always Yes/No. */
-    record OptionalAsked(PlayerView player, String key) implements YieldUpdate {}
 }
