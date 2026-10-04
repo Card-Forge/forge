@@ -3,11 +3,13 @@ package forge;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -43,6 +45,7 @@ public class Graphics implements Disposable {
     private Rectangle bounds = new Rectangle();
     private Rectangle visibleBounds = new Rectangle();
     private int failedClipCount;
+    private boolean clipImbalanceReported;
     private float alphaComposite = 1;
     private int transformCount = 0;
     private boolean isDisposed = false;
@@ -130,6 +133,29 @@ public class Graphics implements Disposable {
         if (shapeRenderer.getCurrentType() != null) {
             shapeRenderer.end();
         }
+        resetClipState();
+    }
+
+    // A frame must not leave a clip behind. If an exception skipped an endClip, whatever is left would otherwise stay on
+    // libGDX's static scissor stack and keep the depth counter (and the pool) growing frame after frame.
+    private void resetClipState() {
+        if (clipDepth == 0 && failedClipCount == 0) {
+            return;
+        }
+        if (!clipImbalanceReported) {
+            clipImbalanceReported = true;
+            System.err.println("Graphics: unbalanced startClip/endClip at the end of a frame (depth=" + clipDepth + ", failed=" + failedClipCount + "), resetting");
+        }
+        while (clipDepth > 0) {
+            try {
+                ScissorStack.popScissors();
+            } catch (RuntimeException e) {
+                break; // nothing left to pop
+            }
+            clipDepth--;
+        }
+        clipDepth = 0;
+        failedClipCount = 0;
     }
 
     @Override
@@ -984,11 +1010,64 @@ public class Graphics implements Disposable {
         }
     }
 
+    // ---- rectangles through the SpriteBatch -------------------------------------------------------------------------
+    // fillRect / fillGradientRect / drawRect / drawRectLines used to go through ShapeRenderer, which has to pause the batch for
+    // every single call (flush, shader switch, shape pass, shader switch). A card frame drawn in code makes around ten of them
+    // per card. They are now solid quads drawn through the batch with a 1x1 white texture: draw order is preserved, nothing
+    // is paused, and consecutive rects merge into one draw call. Fills and gradients cover exactly the same pixels as before.
+    // Outlines used to be GL lines (smoothed, centered on the edge); the quads cover the same footprint with hard edges.
+    // FORCED ON by default. -Dforge.batchedRects=true turns it on; -Dforge.batchedOutlines=false then keeps outlines on ShapeRenderer.
+    private static final boolean BATCHED_RECTS = true;// Boolean.parseBoolean(System.getProperty("forge.batchedRects", "false"));
+    private static final boolean BATCHED_RECT_OUTLINES = true;// BATCHED_RECTS && !"false".equalsIgnoreCase(System.getProperty("forge.batchedOutlines"));
+    // ONE shared 1x1 texture for the whole app instead of one per Graphics instance, so it can never pile up
+    private static Pixmap whitePixmap;
+    private static Texture whiteTexture;
+    private final float[] quadVerts = new float[20];
+
+    private Texture getWhiteTexture() {
+        if (whiteTexture == null) {
+            whitePixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            whitePixmap.setColor(1f, 1f, 1f, 1f);
+            whitePixmap.fill();
+            // managed, so it is restored if the GL context is ever lost
+            whiteTexture = new Texture(new PixmapTextureData(whitePixmap, null, false, false, true));
+            whiteTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        }
+        return whiteTexture;
+    }
+
+    // One solid quad. (l, b) is the bottom-left corner in screen space; colors are packed floats per corner in the order
+    // bottom-left, top-left, top-right, bottom-right. Vertex colors are used as they are (the batch color is not applied).
+    private void batchQuad(float l, float b, float w, float h, float cBL, float cTL, float cTR, float cBR) {
+        final float[] v = quadVerts;
+        final float r = l + w, t = b + h;
+        v[0] = l;  v[1] = b;  v[2] = cBL;  v[3] = 0.5f;  v[4] = 0.5f;
+        v[5] = l;  v[6] = t;  v[7] = cTL;  v[8] = 0.5f;  v[9] = 0.5f;
+        v[10] = r; v[11] = t; v[12] = cTR; v[13] = 0.5f; v[14] = 0.5f;
+        v[15] = r; v[16] = b; v[17] = cBR; v[18] = 0.5f; v[19] = 0.5f;
+        batch.draw(getWhiteTexture(), v, 0, 20);
+    }
+
     public void drawRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h) {
         drawRect(thickness, skinColor.getColor(), x, y, w, h);
     }
 
     public void drawRect(float thickness, Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECT_OUTLINES && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float t = Math.max(thickness, 1f); // GL lines were never thinner than 1
+            final float half = t / 2f;
+            final float c = color.toFloatBits();
+            final float l = adjustX(x), b = adjustY(y, h);
+            // the four edges, each centered on the rectangle's edge like the GL lines were
+            batchQuad(l, b - half, w, t, c, c, c, c);
+            batchQuad(l, b + h - half, w, t, c, c, c, c);
+            batchQuad(l - half, b, t, h, c, c, c, c);
+            batchQuad(l + w - half, b, t, h, c, c, c, c);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (thickness > 1) {
@@ -1015,6 +1094,24 @@ public class Graphics implements Disposable {
     }
 
     public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECT_OUTLINES && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float t = Math.max(thickness, 1f);
+            final float half = thickness / 2f; // the edges were inset by thickness / 2, as in the line version below
+            final float qh = t / 2f;
+            final float c = color.toFloatBits();
+            final float x0 = adjustX(x), x1 = adjustX(x + w);
+            final float yTop = adjustY(y, 0), yBottom = adjustY(y + h, 0);
+            batchQuad(x0, yTop - qh, x1 - x0, t, c, c, c, c);
+            batchQuad(x0, yBottom - qh, x1 - x0, t, c, c, c, c);
+            final float lx = adjustX(x + half), rx = adjustX(x + w - half);
+            final float yv0 = adjustY(y + h - half, 0), yv1 = adjustY(y + half, 0);
+            batchQuad(lx - qh, yv0, t, yv1 - yv0, c, c, c, c);
+            batchQuad(rx - qh, yv0, t, yv1 - yv0, c, c, c, c);
+            return;
+        }
         // all four edges are axis aligned (no smoothing needed) so they share one batch pause and one shape pass
         batch.end(); //must pause batch while rendering shapes
 
@@ -1052,6 +1149,14 @@ public class Graphics implements Disposable {
     }
 
     public void fillRect(Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECTS && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float c = color.toFloatBits();
+            batchQuad(adjustX(x), adjustY(y, h), w, h, c, c, c, c);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -1168,6 +1273,16 @@ public class Graphics implements Disposable {
     }
 
     public void fillGradientRect(Color color1, Color color2, boolean vertical, float x, float y, float w, float h) {
+        if (BATCHED_RECTS && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color1 = fade(color1, fadeA);
+                color2 = fade(color2, fadeB);
+            }
+            final float c1 = color1.toFloatBits(), c2 = color2.toFloatBits();
+            // same corner colors as the ShapeRenderer version below: bottom-left, top-left, top-right, bottom-right
+            batchQuad(adjustX(x), adjustY(y, h), w, h, vertical ? c2 : c1, c1, vertical ? c1 : c2, c2);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
