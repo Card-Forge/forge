@@ -27,8 +27,6 @@ public class TileMapScene extends HudScene {
 
     private TileMapScene() {
         super(MapStage.getInstance());
-        tiledMapRenderer = new PointOfInterestMapRenderer((MapStage) stage);
-
         //set initial camera width and height
         MapStage.getInstance().setDialogStage(hud);
     }
@@ -45,9 +43,19 @@ public class TileMapScene extends HudScene {
         return (MapStage) stage;
     }
 
+    private PointOfInterestMapRenderer getTiledMapRenderer() {
+        if (tiledMapRenderer == null) {
+            tiledMapRenderer = new PointOfInterestMapRenderer((MapStage) stage);
+        }
+        return tiledMapRenderer;
+    }
     @Override
     public void dispose() {
         Forge.safeDispose(map, tiledMapRenderer);
+    }
+
+    private void disposeRenderer() {
+        Forge.safeDispose(tiledMapRenderer);
     }
 
     @Override
@@ -90,12 +98,12 @@ public class TileMapScene extends HudScene {
         float intWidth = Scene.getIntendedWidth();
         float intHeight = Scene.getIntendedHeight();
 
-        tiledMapRenderer.setView(stage.getCamera().combined, camX - intWidth / 2.0f, camY - intHeight / 2.0f, intWidth, intHeight);
+        getTiledMapRenderer().setView(stage.getCamera().combined, camX - intWidth / 2.0f, camY - intHeight / 2.0f, intWidth, intHeight);
         if (!Forge.isLandscapeMode()) {
             stage.getCamera().position.x = stage.getPlayerSprite().getX();
         }
-        tiledMapRenderer.updateCamera();
-        tiledMapRenderer.render();
+        getTiledMapRenderer().updateCamera();
+        getTiledMapRenderer().render();
         hud.draw();
     }
 
@@ -110,17 +118,17 @@ public class TileMapScene extends HudScene {
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
             MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}" +
-                Forge.getLocalizer().getMessage("lblMode") + " " +
-                Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
-                Forge.getLocalizer().getMessage("lblChaosModeDescription"),
-                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                            Forge.getLocalizer().getMessage("lblMode") + " " +
+                            Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
+                            Forge.getLocalizer().getMessage("lblChaosModeDescription"),
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
             WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
             MapStage.getInstance().showDeckAwardDialog("{GRADIENT}" +
-                Forge.getLocalizer().getMessage("lblMode") + " " +
-                Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
-                Forge.getLocalizer().getMessage("lblCustomModeDescription"),
-                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                            Forge.getLocalizer().getMessage("lblMode") + " " +
+                            Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
+                            Forge.getLocalizer().getMessage("lblCustomModeDescription"),
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
         } else {
             initializeDialogs();
         }
@@ -137,7 +145,7 @@ public class TileMapScene extends HudScene {
         // a few times to move to different position if the POI is loaded again from WorldStage
         WorldStage.getInstance().getPlayerSprite().clearCollisionHeight();
         // Dispose renderer and other maps to release textures and other disposables
-        dispose();
+        disposeRenderer();
         return super.leave();
     }
 
@@ -153,7 +161,7 @@ public class TileMapScene extends HudScene {
         ((MapStage) stage).setPointOfInterest(getPointOfInterestChanges());
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
-        tiledMapRenderer.loadMap(map, "", oldMap, 0);
+        getTiledMapRenderer().loadMap(map, "", oldMap, 0);
         stage.getPlayerSprite().stop();
     }
 
@@ -179,7 +187,7 @@ public class TileMapScene extends HudScene {
         ((MapStage) stage).setPointOfInterest(getPointOfInterestChanges(targetMap));
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
-        tiledMapRenderer.loadMap(map, oldMap, targetMap, nextSpawnPoint);
+        getTiledMapRenderer().loadMap(map, oldMap, targetMap, nextSpawnPoint);
         oldMap = targetMap;
         stage.getPlayerSprite().stop();
     }
