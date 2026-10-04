@@ -38,6 +38,11 @@ public class StaticAbilityPanharmonicon {
      * @return how many additional times the trigger triggers for the event
      */
     public static int countPanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
+        // already at its limit (e.g. "triggers only once each turn"), so there's no need to look for any effects
+        if (limitByActivations(t, 1) == 0) {
+            return 0;
+        }
+
         int n = 0;
 
         if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
