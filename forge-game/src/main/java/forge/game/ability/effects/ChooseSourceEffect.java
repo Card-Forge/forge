@@ -81,7 +81,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host, sa);
             commandZoneSources = CardLists.getValidCards(commandZoneSources, sa.getParam("Choices"), host.getController(), host, sa);
         }
-        if (sa.hasParam("TargetControls")) {
+        if (sa.hasParam("TargetControls") && !tgtPlayers.isEmpty()) {
             permanentSources = CardLists.filterControlledBy(permanentSources, tgtPlayers.get(0));
             stackSources = CardLists.filterControlledBy(stackSources, tgtPlayers.get(0));
             referencedSources = CardLists.filterControlledBy(referencedSources, tgtPlayers.get(0));
@@ -126,6 +126,9 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             }
             final CardCollection chosen = new CardCollection();
             for (int i = 0; i < validAmount; i++) {
+                if (!hasSourceLeft(sourcesToChooseFrom)) {
+                    break;
+                }
                 final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
                 Card o = null;
                 do {
@@ -139,5 +142,18 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                 host.addRemembered(chosen);
             }
         }
+    }
+
+    /**
+     * The pool also holds the "--PERMANENTS:--" style section headers, which cannot be picked and are never
+     * removed, so an empty pool is not the same as one with nothing left to choose.
+     */
+    private static boolean hasSourceLeft(final CardCollectionView pool) {
+        for (final Card c : pool) {
+            if (!c.getName().startsWith("--")) {
+                return true;
+            }
+        }
+        return false;
     }
 }
