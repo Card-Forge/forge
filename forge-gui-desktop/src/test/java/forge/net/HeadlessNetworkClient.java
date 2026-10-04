@@ -434,7 +434,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
             if (gameController != null && okEnabled) {
                 netLog.info("Auto-clicking OK for player: {}",
                         owner != null ? owner.getName() : "unknown");
-                scheduleAutoResponse(() -> gameController.selectButtonOk(), 50, "click OK button");
+                scheduleAutoResponse(() -> selectButtonOk(), 50, "click OK button");
             }
         }
 
@@ -448,9 +448,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
                 netLog.info("Auto-clicking '{}' for player: {}",
                         clickTarget, owner != null ? owner.getName() : "unknown");
                 if (enable1) {
-                    scheduleAutoResponse(() -> gameController.selectButtonOk(), 50, "click '" + label1 + "'");
+                    scheduleAutoResponse(() -> selectButtonOk(), 50, "click '" + label1 + "'");
                 } else {
-                    scheduleAutoResponse(() -> gameController.selectButtonCancel(), 50, "click '" + label2 + "'");
+                    scheduleAutoResponse(() -> selectButtonCancel(), 50, "click '" + label2 + "'");
                 }
             } else if (gameController != null && !enable1) {
                 // OK is disabled but we may have more cards to select (multi-selection prompt)
@@ -495,7 +495,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
                     selectableIndex++;
                     netLog.info("Auto-selecting card {}/{}: {}",
                             selectableIndex, pendingSelectables.size(), card.getName());
-                    scheduleAutoResponse(() -> gameController.selectCard(card, null, null),
+                    scheduleAutoResponse(() -> selectCard(card, null, null),
                             100, "select card " + card.getName());
                 }
             }

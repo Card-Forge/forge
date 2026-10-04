@@ -5,6 +5,7 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.Answer;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
@@ -36,6 +37,8 @@ public interface IGameController {
     boolean selectCard(CardView cardView, List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
 
     void selectAbility(SpellAbilityView sa);
+
+    void answer(Answer answer);
 
     void undoLastAction();
 

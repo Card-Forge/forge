@@ -5,6 +5,7 @@ import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AIOption;
 import forge.ai.AvailableActions;
+import forge.ai.ComputerUtilAbility;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.gamemodes.net.ProtocolGuiGame;
@@ -60,6 +61,7 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.Answer;
 import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.DrawOfferCoordinator;
 import forge.gamemodes.match.DrawOfferMessage;
@@ -2759,9 +2761,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (getGame().getStack().undo()) {
             final Input currentInput = inputQueue.getInput();
-            if (currentInput instanceof InputPassPriority) {
-                // ensure prompt updated if needed
-                currentInput.showMessageInitial();
+            if (currentInput instanceof InputPassPriority priority) {
+                priority.refreshAbilities();
+                priority.showMessageInitial();
             }
             if (getGui().isNetGame()) {
                 // Flush events to remote clients — the undo modifies game state
@@ -2815,6 +2817,38 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             macros().addRememberedAction(new SelectCardAction(cardView));
         }
         return selected;
+    }
+
+    @Override
+    public void answer(final Answer answer) {
+        inputProxy.answer(answer);
+    }
+
+    /**
+     * Every ability of every card the player can see and might act on, with its view flagged by {@code canPlay}.
+     * Lists what the engine allows, not what the available-actions heuristic guesses can be completed.
+     */
+    public Map<SpellAbilityView, SpellAbility> collectPriorityAbilities() {
+        // Wider than the engine's activatable-card filter, which misses play-time options such as Harmonize and Plot
+        final CardCollection cards = ComputerUtilAbility.getAvailableCards(getGame(), player);
+        cards.addAll(player.getCardsActivatableInExternalZones(true));
+        final PlayerView viewer = player.getView();
+        final Map<SpellAbilityView, SpellAbility> result = new LinkedHashMap<>();
+        for (final Card card : cards) {
+            if (!card.getView().canBeShownTo(viewer)) {
+                continue;
+            }
+            final boolean own = player.equals(card.getController());
+            for (final SpellAbility sa : card.getAllPossibleAbilities(player, false)) {
+                final SpellAbilityView view = sa.getView();
+                view.updateCanPlay(sa);
+                // Another player's abilities the player cannot use now would only be noise
+                if (own || view.canPlay()) {
+                    result.put(view, sa);
+                }
+            }
+        }
+        return result;
     }
 
     @Override
@@ -3922,6 +3956,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
+        // A GUI reaches a player it controls through the controlling player's controller; send that prompt's yields on
+        if (inputProxy.getInput() instanceof InputPassPriority priority && priority.getController() != this
+                && priority.getOwner().equals(yieldOwner(update))) {
+            priority.getController().applyYieldUpdate(update);
+            return;
+        }
         if (update instanceof YieldUpdate.ClearAbilityOrders) {
             orderedSALookup.clear();
             rememberedKeys.clear();
@@ -3942,12 +3982,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 getGui().updateAutoPassPrompt();
             }
         }
+        if (update instanceof YieldUpdate.DeclineSuggestion && inputProxy.getInput() instanceof InputPassPriority) {
+            // The suggestion held back the highlights; the plain prompt the player returns to shows them
+            pushActionableCards(false);
+        }
         if (update instanceof YieldUpdate.SeedFromClient
                 || (update instanceof YieldUpdate.SetYieldPref u
                         && u.pref() == FPref.YIELD_AUTO_PASS_NO_ACTIONS && Boolean.parseBoolean(u.value()))) {
             refreshAvailableActionsForPrompt();
         }
         tryAutoPassNow();
+    }
+
+    /** The player a prompt's yield update acts for, or null for updates that are not about one player's priority. */
+    private static PlayerView yieldOwner(final YieldUpdate update) {
+        if (update instanceof YieldUpdate.StackYield u) return u.player();
+        if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) return u.player();
+        if (update instanceof YieldUpdate.SetMarker u) return u.phaseOwner();
+        if (update instanceof YieldUpdate.DeclineSuggestion u) return u.player();
+        return null;
     }
 
     @Override

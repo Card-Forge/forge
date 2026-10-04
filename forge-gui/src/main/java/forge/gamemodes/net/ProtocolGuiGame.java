@@ -14,6 +14,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Question;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.util.IHasForgeLog;
@@ -493,6 +494,15 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     public void clearWeaklySelectable() {
         updateGameView();
         send(ProtocolMethod.clearWeaklySelectable);
+    }
+
+    /**
+     * Not stored: the front end at the other end answers the priority question, so this proxy never turns clicks into
+     * answers. A rebuild after an undo arrives off the game thread, so the question goes without a graph walk.
+     */
+    @Override
+    public void setQuestion(final PlayerView player, final Question question) {
+        send(ProtocolMethod.setQuestion, player, question);
     }
 
     @Override

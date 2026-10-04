@@ -9,7 +9,9 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.Answer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.match.Question;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolGuiGame;
@@ -61,6 +63,9 @@ public class ProtocolGuiGameInProcessTest {
         volatile int fullStates, deltasWithState, deltasWithEvents, rawEvents, newObjects, changedObjects;
         volatile int wrappedEvents;
         volatile String lastPrompt = "";
+        volatile Question lastQuestion;
+        /** Every question asked, with null for each withdrawal, in order. */
+        final List<Question> questions = Collections.synchronizedList(new ArrayList<>());
 
         @Override
         public void send(final NetEvent event) {
@@ -85,6 +90,14 @@ public class ProtocolGuiGameInProcessTest {
                     }
                 }
                 case showPromptMessage -> lastPrompt = String.valueOf(args[1]);
+                case setQuestion -> {
+                    lastQuestion = (Question) args[1];
+                    questions.add(lastQuestion);
+                    // The priority question replaces the host's prompt; the remote GUI draws its own text and buttons
+                    if (lastQuestion != null) {
+                        buttonPrompts.offer(ev);
+                    }
+                }
                 case updateButtons -> buttonPrompts.offer(ev);
                 default -> { }
             }
@@ -153,6 +166,30 @@ public class ProtocolGuiGameInProcessTest {
         return loaded;
     }
 
+    /** The card's first playable ability that is not cycling, which for these decks is playing the land. */
+    static SpellAbilityView playableAbility(final Question.Priority question, final CardView card) {
+        for (final SpellAbilityView sa : question.abilities().getOrDefault(card, List.of())) {
+            if (sa.canPlay() && !sa.toString().toLowerCase().contains("cycling")) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    private static boolean askedThenWithdrawn(final List<Question> questions) {
+        boolean asked = false;
+        synchronized (questions) {
+            for (final Question question : questions) {
+                if (question != null) {
+                    asked = true;
+                } else if (asked) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Test(timeOut = 180_000)
     public void humanControllerRunsThroughInProcessRemote() throws Exception {
         TestUtils.ensureFModelInitialized();
@@ -193,17 +230,23 @@ public class ProtocolGuiGameInProcessTest {
             if (myMain && !playedLand && owner.getHand() != null) {
                 for (final CardView c : owner.getHand()) { land = c; break; }
             }
+            // A front end answers the priority question; other prompts still take buttons
+            final Question.Priority question = remote.lastQuestion instanceof Question.Priority q && owner.equals(q.player()) ? q : null;
             answered++;
-            System.out.printf("[in-process] prompt #%d: '%s' buttons=[%s|%s] turn=%d phase=%s%n", answered,
-                    remote.lastPrompt.replace('\n', ' '), ub.getObjects()[1], ub.getObjects()[2], gv.getTurn(), gv.getPhase());
-            if (land != null) {
-                final CardView toPlay = land;
+            System.out.printf("[in-process] prompt #%d: %s turn=%d phase=%s%n", answered,
+                    question != null ? "question " + question.id() + " (" + question.abilities().size() + " cards)"
+                            : "'" + remote.lastPrompt.replace('\n', ' ') + "' buttons=[" + ub.getObjects()[1] + "|" + ub.getObjects()[2] + "]",
+                    gv.getTurn(), gv.getPhase());
+            if (land != null && question != null) {
+                final SpellAbilityView landPlay = playableAbility(question, land);
                 deltasBeforeLand = remote.deltasWithState;
                 playedLand = true;
-                FThreads.invokeInEdtLater(() -> controller.selectCard(toPlay, null, null));
+                FThreads.invokeInEdtLater(() -> controller.answer(new Answer.Play(question.id(), landPlay, null)));
             } else if (playedLand && gv.getTurn() >= 3) {
                 FThreads.invokeInEdtLater(controller::concede);
                 break;
+            } else if (question != null) {
+                FThreads.invokeInEdtLater(() -> controller.answer(new Answer.Pass(question.id())));
             } else {
                 FThreads.invokeInEdtLater(controller::selectButtonOk);
             }
@@ -239,7 +282,7 @@ public class ProtocolGuiGameInProcessTest {
                 "no network or serialization class loaded");
         assertTrue(remote.fullStates >= 1, "full state (setGameView) reached the remote");
         assertTrue(remote.deltasWithState >= 2, "state deltas reached the remote after init");
-        assertTrue(remote.blockingCalls.stream().anyMatch(s -> s.startsWith("getAbilityToPlay")), "a synchronous decision reached sendAndWait");
+        assertTrue(askedThenWithdrawn(remote.questions), "the priority question reached the remote and was withdrawn once answered");
         assertTrue(playedLand, "the human played a land");
         assertTrue(remote.deltasWithState > deltasBeforeLand, "state kept flowing after the answer");
         assertEquals(remote.wrappedEvents, 0, "no Java-serialized event wrappers on the embedded path");

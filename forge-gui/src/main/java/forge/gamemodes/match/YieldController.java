@@ -388,6 +388,8 @@ public class YieldController {
             setPref(u.pref(), u.value());
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             applyClientSeed(u.snapshot());
+        } else if (update instanceof YieldUpdate.DeclineSuggestion u) {
+            declineSuggestion(u.type());
         }
         return false;
     }
