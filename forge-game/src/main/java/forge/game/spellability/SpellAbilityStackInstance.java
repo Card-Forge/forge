@@ -57,6 +57,8 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     private String stackDescription = null;
 
+    private int mandatoryChain = 0;
+
     private final StackItemView view;
 
     public SpellAbilityStackInstance(final SpellAbility sa) {
@@ -119,6 +121,13 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     public final boolean isOptionalTrigger() {
         return ability.isOptionalTrigger();
+    }
+
+    public final int getMandatoryChain() {
+        return mandatoryChain;
+    }
+    public final void setMandatoryChain(final int chain) {
+        mandatoryChain = chain;
     }
 
     public final SpellAbilityStackInstance getSubInstance() {

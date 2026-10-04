@@ -152,6 +152,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         boolean turnEnded = false;
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
+        game.getStack().resetMandatoryChain();
 
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
