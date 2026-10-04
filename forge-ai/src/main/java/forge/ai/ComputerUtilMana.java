@@ -827,7 +827,7 @@ public class ComputerUtilMana {
         return paymentList;
     }
 
-    // a source adding several mana that is needed either way goes first, while the cost can still take all of it
+    // a source adding several mana that is needed either way goes first, so nothing else is tapped beside it for no reason
     private static Collection<SpellAbility> requiredSourcesFirst(final Collection<SpellAbility> saList,
             final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final ManaCostBeingPaid cost, final SpellAbility sa) {
         final int generic = cost.getGenericManaAmount();
@@ -840,7 +840,7 @@ public class ComputerUtilMana {
         List<SpellAbility> required = null;
         for (final SpellAbility ma : saList) {
             final int amount = ma.totalAmountOfManaGenerated(sa, true);
-            if (amount < 2 || amount > generic) {
+            if (amount < 2) {
                 continue;
             }
             if (manaPerCard == null) {

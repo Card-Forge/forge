@@ -7,8 +7,6 @@ import forge.ai.simulation.SimulationTest;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -148,23 +146,22 @@ public class AutoPaymentTest extends SimulationTest {
     }
 
     @Test
-    public void useRequiredMultiManaSourceBeforeItOverpays() {
+    public void useRequiredMultiManaSourceFirst() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCards("Forest", 4, p);
-        addCard("Ancient Tomb", p);
-        Card wurm = addCardToZone("Spined Wurm", p, ZoneType.Hand);
+        Card ring = addCard("Sol Ring", p);
+        addCard("Chromatic Orrery", p);
+        Card golem = addCardToZone("Steel Golem", p, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility sa = wurm.getFirstSpellAbility();
+        SpellAbility sa = golem.getFirstSpellAbility();
         sa.setActivatingPlayer(p);
         AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
 
-        // five mana from six: the Tomb is needed either way, so one Forest should be left over
-        AssertJUnit.assertEquals(0, p.getManaPool().totalMana());
-        AssertJUnit.assertEquals(1, CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED));
+        // the Orrery is needed either way and covers the cost alone, so the Ring stays untapped
+        AssertJUnit.assertTrue(ring.isUntapped());
     }
 }
