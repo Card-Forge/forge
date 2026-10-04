@@ -18,6 +18,8 @@ jobs:
   build:
     if: github.repository_owner == 'Card-Forge'
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
     permissions:
       contents: write
       deployments: write
@@ -142,6 +144,10 @@ jobs:
           removeArtifacts: true
           makeLatest: true
 
+      - name: Expose release tag
+        id: tag
+        run: echo "tag=$GIT_TAG" >> "$GITHUB_OUTPUT"
+
       - name: 🔧 Install XML tools
         run: |
           sudo apt-get update
@@ -188,3 +194,12 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d "{\"content\": \"🔴 Release Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}
+
+  native-installers:
+    needs: build
+    uses: ./.github/workflows/native-installers.yml
+    with:
+      tag: ${{ needs.build.outputs.tag }}
+    secrets: inherit
+    permissions:
+      contents: write

@@ -1,0 +1,15 @@
+Package: forge
+Version: @VERSION@
+Architecture: all
+Maintainer: Forge Developers <noreply@cardforge.org>
+Installed-Size: @SIZE@
+Depends: default-jre (>= 2:1.17) | java17-runtime
+Section: games
+Priority: optional
+Homepage: https://github.com/Card-Forge/forge
+Description: Magic: The Gathering rules engine
+ Forge plays Magic: The Gathering against AI opponents or against other
+ players over a network.
+ .
+ Upgrading or removing the package keeps decks, preferences and saved games
+ in ~/.forge and downloaded card pictures in ~/.cache/forge.
