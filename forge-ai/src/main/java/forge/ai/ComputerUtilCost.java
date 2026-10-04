@@ -482,6 +482,25 @@ public class ComputerUtilCost {
                     return false;
                 }
 
+                // other "tap any number of creatures with total power N or more" costs (e.g. Saddle, Teamwork)
+                // have the amount "Any", so check them the same way AiCostDecision pays them
+                if (type.contains("+withTotalPowerGE")) {
+                    String totalP = type.split("withTotalPowerGE")[1];
+                    type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
+                    CardCollection exclude = new CardCollection();
+                    if (alreadyTapped != null) {
+                        exclude.addAll(alreadyTapped);
+                    }
+                    CardCollection tapChoices = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, !((CostTapType) part).canTapSource, Integer.parseInt(totalP), exclude);
+                    if (tapChoices != null) {
+                        if (alreadyTapped != null) {
+                            alreadyTapped.addAll(tapChoices);
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+
                 // check if we have a valid card to tap (e.g. Jaspera Sentinel)
                 Integer c = part.convertAmount();
                 if (c == null) {
