@@ -13,6 +13,7 @@ import forge.item.PaperToken;
 import forge.util.Aggregates;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public class TokenDb implements ITokenDatabase {
@@ -34,6 +35,8 @@ public class TokenDb implements ITokenDatabase {
 
     private final CardEdition.Collection editions;
     private final Map<String, CardRules> rulesByName;
+    // edition codes already reported as missing, so each is logged once
+    private final Set<String> missingEditions = ConcurrentHashMap.newKeySet();
 
     // null preserves first-alphabetical match; adventure pushes a filter here.
     private Predicate<CardEdition> defaultEditionFilter = null;
@@ -168,6 +171,9 @@ public class TokenDb implements ITokenDatabase {
         // An edition this machine lacks has no tokens of its own: the fallback below picks one.
         CardEdition realEdition = editions.get(edition);
         if (realEdition == null) {
+            if (edition != null && !edition.isEmpty() && !CardEdition.UNKNOWN_CODE.equals(edition) && missingEditions.add(edition)) {
+                System.err.println("TokenDb: no edition with code '" + edition + "', using a fallback printing for its tokens");
+            }
             realEdition = CardEdition.UNKNOWN;
         }
         String fullName = String.format("%s_%s", tokenName, realEdition.getCode().toLowerCase());
