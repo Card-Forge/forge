@@ -231,14 +231,20 @@ public class ComputerUtilMana {
                 manaPref = sa.getHostCard().getSVar("AIManaPref");
             }
 
-            if (!manaPref.isEmpty()) {
-                final String[] prefShardInfo = manaPref.split(":");
+            // the colour with the fewest sources goes last, which leaves it in front
+            final List<SpellAbility> unsorted = sourcesForShards.get(shard);
+            final List<String> prefs = Lists.newArrayList(manaPref.split(","));
+            prefs.sort(Comparator.comparingLong((String pref) -> countSources(unsorted, pref)).reversed());
+
+            for (final String pref : prefs) {
+                final String[] prefShardInfo = pref.split(":");
                 final String preferredShard = prefShardInfo[0];
                 final int preferredShardAmount = prefShardInfo.length > 1 ? Integer.parseInt(prefShardInfo[1]) : 3;
+                final List<SpellAbility> sortedSoFar = sourcesForShards.get(shard);
 
-                if (!preferredShard.isEmpty()) {
-                    final List<SpellAbility> prefSortedAbilities = new ArrayList<>(newAbilities);
-                    final List<SpellAbility> otherSortedAbilities = new ArrayList<>(newAbilities);
+                if (!preferredShard.isEmpty() && countSources(sortedSoFar, pref) >= preferredShardAmount) {
+                    final List<SpellAbility> prefSortedAbilities = new ArrayList<>(sortedSoFar);
+                    final List<SpellAbility> otherSortedAbilities = new ArrayList<>(sortedSoFar);
 
                     prefSortedAbilities.sort((ability1, ability2) -> {
                         if (ability1.getManaPart().mana(ability1).contains(preferredShard))
@@ -270,6 +276,11 @@ public class ComputerUtilMana {
                 }
             }
         }
+    }
+
+    private static long countSources(final List<SpellAbility> abilities, final String pref) {
+        final String shard = pref.split(":")[0];
+        return abilities.stream().filter(ab -> ab.getManaPart().mana(ab).contains(shard)).count();
     }
 
     public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
