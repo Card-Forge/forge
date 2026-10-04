@@ -964,6 +964,12 @@ public class AiController {
             return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
         }
 
+        // abilities skip the checks below, but activating one can still trigger lethal damage (e.g. Burning-Tree Shaman)
+        if (sa.isActivatedAbility() && !usesFullSimulation() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()
+                && ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
+            return AiPlayDecision.CurseEffects;
+        }
+
         if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
             return AiPlayDecision.WillPlay;
         }
