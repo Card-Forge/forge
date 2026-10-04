@@ -42,6 +42,7 @@ public enum ReplacementType {
     Planeswalk(ReplacePlaneswalk.class),
     ProduceMana(ReplaceProduceMana.class),
     Proliferate(ReplaceProliferate.class),
+    PutOnStack(ReplacePutOnStack.class),
     RemoveCounter(ReplaceRemoveCounter.class),
     RollDice(ReplaceRollDice.class),
     RollPlanarDice(ReplaceRollPlanarDice.class),

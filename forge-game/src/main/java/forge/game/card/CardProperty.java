@@ -1708,7 +1708,7 @@ public class CardProperty {
                 return false;
             }
             if (property.equals("kicked")) {
-                if (card.getKickerMagnitude() == 0) {
+                if (card.getKickerMagnitude(spellAbility) == 0) {
                     return false;
                 }
             } else {
