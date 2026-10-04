@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -125,6 +126,7 @@ public class Assets implements Disposable {
             fallback_skins().put("title", getBlackTexture());
             fallback_skins().put("transition", getBlackTexture());
         }
+        preloadCounterFonts();
     }
 
     @Override
@@ -181,6 +183,35 @@ public class Assets implements Disposable {
         if (fonts != null)
             fonts.clear();
         Forge.safeDispose(manager);
+    }
+
+    private void preloadCounterFonts() {
+        try {
+            for (int fontSize = 8; fontSize <= 22; fontSize++) {
+                getOrLoadCounterFont(fontSize);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public BitmapFont getOrLoadCounterFont(int fontSize) {
+        BitmapFont font = counterFonts().get(fontSize);
+        if (font != null) return font;
+
+        FileHandle ttfFile = getFileHandle(ForgeConstants.COMMON_FONTS_DIR + "/Roboto-Bold.ttf");
+        if (!ttfFile.exists()) return null;
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = fontSize;
+        parameter.characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
+
+        font = generator.generateFont(parameter);
+        generator.dispose();
+
+        counterFonts().put(fontSize, font);
+        return font;
     }
 
     public GifAnimation getGifAnimation() {
