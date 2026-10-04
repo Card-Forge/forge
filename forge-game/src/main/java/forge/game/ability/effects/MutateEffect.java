@@ -70,6 +70,11 @@ public class MutateEffect extends SpellAbilityEffect {
 
         target.addCloneState(CardFactory.getMutatedCloneStates(target, sa), ts);
 
+        // CR 123.5b
+        if (host.isStickered()) {
+            target.takeStickersFrom(host);
+        }
+
         // currently used by Tezzeret, Cruel Machinist and Yedora, Grave Gardener
         // when mutating onto the FaceDown, their effect should end, then 721.2e would stop trigger
         if (wasFaceDown && !target.isFaceDown()) {

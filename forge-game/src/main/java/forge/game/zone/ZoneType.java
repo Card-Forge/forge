@@ -28,6 +28,7 @@ public enum ZoneType implements ITranslatable {
     AttractionDeck(true, "lblAttractionDeckZone", TrackableProperty.AttractionDeck),
     Junkyard(false, "lblJunkyardZone", TrackableProperty.Junkyard),
     ContraptionDeck(true, "lblContraptionDeckZone", TrackableProperty.ContraptionDeck),
+    StickerSheets(false, "lblStickerSheetsZone", TrackableProperty.StickerSheets),
     //Scrapyard is like the Junkyard but for contraptions; just going to recycle the Junkyard for this.
     Subgame(true, "lblSubgameZone"),
     // ExtraHand is used for Backup Plan for temporary extra hands
@@ -35,7 +36,7 @@ public enum ZoneType implements ITranslatable {
     None(true, "lblNoneZone");
 
     public static final EnumSet<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = EnumSet.of(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
-    public static final EnumSet<ZoneType> PART_OF_COMMAND_ZONE = EnumSet.of(Command, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck, Junkyard);
+    public static final EnumSet<ZoneType> PART_OF_COMMAND_ZONE = EnumSet.of(Command, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck, Junkyard, StickerSheets);
     public static final EnumSet<ZoneType> DECK_ZONES = EnumSet.of(Library, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck);
     public static final EnumSet<ZoneType> ORDERED_ZONES = EnumSet.of(Library, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck, Hand, Graveyard, Stack);
 
