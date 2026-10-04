@@ -935,7 +935,9 @@ public class CardRenderer {
 
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
         int fontSize = Math.max(11, Math.min(22, (int) (h * 0.08)));
-        BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
+        BitmapFont font = Forge.getAssets().getCounterFont(fontSize);
+        if (font == null)
+            return;
 
         final float additionalXOffset = 3f * ((fontSize - 11) / 11f);
         final float variableWidth = ((fontSize - 11) / 11f) * 44f;
@@ -1073,7 +1075,9 @@ public class CardRenderer {
         }
 
         int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
-        BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
+        BitmapFont font = Forge.getAssets().getCounterFont(fontSize);
+        if (font == null)
+            return;
 
         final float additionalXOffset = 3f * ((fontSize - 8) / 8f);
 
