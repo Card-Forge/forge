@@ -17,7 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import forge.StaticData;
 import forge.card.CardRules;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -36,7 +35,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
@@ -408,42 +406,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromstickersheets"));
             break;
         }
-        addChangePrintingEntryIfApplicable(cmb);
+        cmb.addChangePrintings();
         if (foilAvailable) {
             cmb.addMakeFoils();
         }
         cmb.addKeyCardToggle();
         cmb.addSetColorID();
-    }
-
-    private static void addChangePrintingEntryIfApplicable(EditorContextMenuBuilder cmb) {
-        // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
-        if (!CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().isInfinite()) {
-            return;
-        }
-        PaperCard card = cmb.getItemManager().getSelectedItem();
-        if (card == null) {
-            return;
-        }
-        if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) {
-            return;
-        }
-        GuiUtils.addMenuItem(cmb.getMenu(),
-                Localizer.getInstance().getMessage("lblChangePrinting"),
-                null,
-                () -> {
-                    PaperCard chosen = ChangePrintingDialog.show(card);
-                    if (chosen == null) { return; }
-                    PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
-                    if (newCard.equals(card)) { return; }
-                    CardManager deckManager = (CardManager) cmb.getItemManager();
-                    deckManager.removeItem(card, 1);
-                    deckManager.addItem(newCard, 1);
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
-                            .getDeckController().notifyModelChanged();
-                },
-                true,
-                false);
     }
 
     /* (non-Javadoc)
