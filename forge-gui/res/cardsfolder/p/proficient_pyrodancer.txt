@@ -1,0 +1,8 @@
+Name:Proficient Pyrodancer
+ManaCost:2 R
+Types:Creature Human Performer
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put an art sticker on a nonland permanent you own.
+SVar:TrigSticker:DB$ PutSticker | Kind$ Art | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+A:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature.Other+stickeredWith Art | TgtPrompt$ Select another target creature with an art sticker on it | NumAtt$ +2 | KW$ Menace | SpellDescription$ Another target creature with an art sticker on it gets +2/+0 and gains menace until end of turn.
+Oracle:When this creature enters, you may put an art sticker on a nonland permanent you own.\n{2}{R}: Another target creature with an art sticker on it gets +2/+0 and gains menace until end of turn.

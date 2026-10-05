@@ -1,0 +1,8 @@
+Name:Unlawful Entry
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Flying | SpellDescription$ Target creature gets +1/+0 and gains flying until end of turn.
+T:Mode$ StickerPlaced | ValidPlayer$ You | ValidCard$ Creature | StickerKind$ Art | TriggerZones$ Graveyard | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever you put an art sticker on a creature, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+Oracle:Target creature gets +1/+0 and gains flying until end of turn.\nWhenever you put an art sticker on a creature, you may return this card from your graveyard to your hand.

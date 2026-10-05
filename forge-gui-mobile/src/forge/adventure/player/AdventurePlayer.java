@@ -1473,8 +1473,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return (int) questFlags.getOrDefault(key, (byte) 0);
     }
 
+    /**
+     * Character flags that exist only to stop a quest from being offered twice. Data checks them
+     * with checkCharacterFlag, so they survive a quest wipe unless cleared here: "noQuest" is the
+     * New Game+ "skip the main quest" choice and hides the intro mage's main quest option, and
+     * "dungeonMasterQuestGiven" gates the lair-clearing quest offered in dungeons.
+     */
+    private static final String[] QUEST_GATE_CHARACTER_FLAGS = {"noQuest", "dungeonMasterQuestGiven"};
+
+    /** Forget all global quest progress so every quest can be offered again (New Game+, resetQuests) */
     public void resetQuestFlags() {
         questFlags.clear();
+        for (String flag : QUEST_GATE_CHARACTER_FLAGS) {
+            setCharacterFlag(flag, 0);
+        }
     }
 
     public void addQuest(String questID, boolean isNewGame) {

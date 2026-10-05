@@ -1,0 +1,10 @@
+Name:Lineprancers
+ManaCost:1 G
+Types:Creature Centaur Performer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTicket | TriggerDescription$ When CARDNAME enters, you get {TK}{TK}, then you may put a power and toughness sticker on a creature you own.
+SVar:TrigTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 2 | SubAbility$ DBSticker
+SVar:DBSticker:DB$ PutSticker | Kind$ PT | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a creature you own | Optional$ True
+A:AB$ Pump | Cost$ 3 G | ValidTgts$ Creature.YouCtrl+stickeredWith PT+Other | TgtPrompt$ Select target creature you control with a power and toughness sticker on it | StackDescription$ None | SubAbility$ DBMustBlock | SpellDescription$ Target creature you don't control blocks target creature you control with a power and toughness sticker on it other than CARDNAME this turn if able.
+SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
+Oracle:When Lineprancers enters, you get {TK}{TK}, then you may put a power and toughness sticker on a creature you own.\n{3}{G}: Target creature you don't control blocks target creature you control with a power and toughness sticker on it other than Lineprancers this turn if able.

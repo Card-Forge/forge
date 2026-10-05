@@ -265,6 +265,10 @@ public class GameAction {
             if (c.hasPerpetual()) {
                 copied.setPerpetual(c);
             }
+            // CR 123.5
+            if (c.isStickered() && !zoneTo.getZoneType().isHidden()) {
+                copied.setStickers(c);
+            }
         }
 
         // ensure that any leftover keyword/type changes are cleared in the state view
@@ -394,29 +398,35 @@ public class GameAction {
         // Handle merged permanent here so all replacement effects are already applied.
         CardCollection mergedCards = null;
         if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
-            CardCollection cards = new CardCollection(c.getMergedCards());
-            // replace top card with copied card for correct name for human to choose.
-            cards.set(cards.indexOf(c), copied);
-            // 725.3b
+            mergedCards = new CardCollection(c.getMergedCards());
+            // replace top card with copied card for correct name for human to choose
+            mergedCards.set(mergedCards.indexOf(c), copied);
+            // CR 725.3b
             if (cause != null && zoneTo.getZoneType() == ZoneType.Exile) {
-                cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
+                mergedCards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(mergedCards, zoneTo.getZoneType(), cause);
             } else {
-                cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
+                mergedCards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(mergedCards, zoneTo.getZoneType(), cause);
             }
-            cards.set(cards.indexOf(copied), c);
-            mergedCards = cards;
+            // CR 123.5c
+            if (copied.isStickered()) {
+                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(mergedCards);
+                if (keeper != copied) {
+                    keeper.takeStickersFrom(copied);
+                }
+            }
+            mergedCards.set(mergedCards.indexOf(copied), c);
             if (cause != null) {
                 // Replace sa targeting cards
                 final SpellAbility saTargeting = cause.getSATargetingCard();
                 if (saTargeting != null) {
-                    saTargeting.getTargets().replaceTargetCard(c, cards);
+                    saTargeting.getTargets().replaceTargetCard(c, mergedCards);
                 }
                 // Replace host remembered cards
                 // But not replace RememberLKI, since it wants to refer to the last known info.
                 Card hostCard = cause.getHostCard();
                 if (!cause.hasParam("RememberLKI") && hostCard.isRemembered(c)) {
                     hostCard.removeRemembered(c);
-                    hostCard.addRemembered(cards);
+                    hostCard.addRemembered(mergedCards);
                 }
             }
         }
@@ -578,6 +588,10 @@ public class GameAction {
             c.cleanupExiledWith();
         }
 
+        if (c.isStickered() || copied.isStickered()) {
+            Card.refreshSheetViews(copied.getOwner());
+        }
+
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
@@ -637,7 +651,13 @@ public class GameAction {
                     // Ask controller if it wants to be on top or bottom of other meld.
                     unmeldPosition++;
                 }
+                // CR 123.5c
+                boolean unmeldKeepsStickers = copied.isStickered() && c.getOwner().getController()
+                        .chooseCardToKeepStickers(new CardCollection(List.of(copied, unmeld))) == unmeld;
                 unmeld = changeZone(null, zoneTo, unmeld, position, cause, params);
+                if (unmeldKeepsStickers && unmeld != null) {
+                    unmeld.takeStickersFrom(copied);
+                }
                 storeChangesZoneAll(unmeld, zoneFrom, zoneTo, params);
             }
         } else if (toBattlefield) {

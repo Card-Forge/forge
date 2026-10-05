@@ -88,7 +88,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
             if (key.getFreezeMode() == TrackableProperty.FreezeMode.RespectsFreeze) {
                 respectsFreeze = true;
             } else if (key.getFreezeMode() == TrackableProperty.FreezeMode.IgnoresFreezeIfUnset) {
-                respectsFreeze = (props.get(key) != null);
+                respectsFreeze = props.get(key) != null;
             }
             if (respectsFreeze) {
                 tracker.addDelayedPropChange(this, key, value);

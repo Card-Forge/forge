@@ -83,6 +83,10 @@ public class MeldEffect extends SpellAbilityEffect {
         zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         Card movedCard = game.getAction().moveToPlay(primary, controller, sa, moveParams);
+        // CR 123.5a
+        if (secondary.isStickered() && movedCard.isInPlay()) {
+            movedCard.takeStickersFrom(secondary);
+        }
         if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());

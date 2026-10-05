@@ -44,8 +44,8 @@ public class Current {
 
             stringBuilder.setLength(0);
             return stringBuilder.append(baseMessage)
-                .append("\n{GRADIENT=RED;GRAY;1;1}").append(itemData.name).append(" {ENDGRADIENT}")
-                .append(Forge.getLocalizer().getMessage("lblCracked")).toString();
+                    .append("\n{GRADIENT=RED;GRAY;1;1}").append(itemData.getDisplayName()).append(" {ENDGRADIENT}")
+                    .append(Forge.getLocalizer().getMessage("lblCracked")).toString();
         }
 
         return baseMessage;

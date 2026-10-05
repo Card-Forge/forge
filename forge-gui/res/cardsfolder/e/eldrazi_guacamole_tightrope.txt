@@ -1,0 +1,16 @@
+Name:Eldrazi Guacamole Tightrope
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Eldrazi
+SVar:STK2:Kind$ Name | Word$ Guacamole
+SVar:STK3:Kind$ Name | Word$ Tightrope
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Haste | Keywords$ Haste
+SVar:STK8:Kind$ Ability | Tickets$ 5 | Text$ You may cast this card from your graveyard by paying 2 life in addition to paying its other costs. | Statics$ STK8Play
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 1 | Toughness$ 4
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 5 | Toughness$ 3
+SVar:STK8Play:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | RaiseCost$ PayLife<2> | Description$ You may cast this card from your graveyard by paying 2 life in addition to paying its other costs.
+Oracle:{TK}{TK} — Haste\n{TK}{TK}{TK}{TK}{TK} — You may cast this card from your graveyard by paying 2 life in addition to paying its other costs.\n{TK}{TK} — 1/4\n{TK}{TK}{TK} — 5/3
