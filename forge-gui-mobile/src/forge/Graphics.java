@@ -253,13 +253,12 @@ public class Graphics implements Disposable {
 
     public void endClip() {
         if (failedClipCount == 0) {
+            if (clipDepth == 0) {
+                return; // nothing open (e.g. the frame was reset mid-clip), don't touch ScissorStack
+            }
             batch.flush(); // must flush batch to ensure stuff rendered during clip respects that clip
             ScissorStack.popScissors();
-
-            // Retract depth tracking downward as layout loops exit
-            if (clipDepth > 0) {
-                clipDepth--;
-            }
+            clipDepth--;
         } else {
             failedClipCount--;
         }
