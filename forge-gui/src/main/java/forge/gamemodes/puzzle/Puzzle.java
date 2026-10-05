@@ -29,6 +29,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     String url;
     String difficulty;
     String description;
+    String aiName;
     String targets;
     int targetCount = 1;
     boolean humanControl = false;
@@ -62,6 +63,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 this.difficulty = split[1].trim();
             } else if ("Description".equalsIgnoreCase(split[0])) {
                 this.description = split[1].trim();
+            } else if ("AIName".equalsIgnoreCase(split[0])) {
+                this.aiName = split[1].trim();
             } else if ("Targets".equalsIgnoreCase(split[0])) {
                 this.targets = split[1].trim();
             } else if ("TargetCount".equalsIgnoreCase(split[0])) {
@@ -93,6 +96,11 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         desc.append(goal);
         desc.append("\nTurns Limit: ");
         desc.append(this.turns);
+
+        if (this.aiName != null) {
+            desc.append("\nOpponent: ");
+            desc.append(this.aiName);
+        }
 
         if (this.description != null) {
             desc.append("\n\n");
@@ -246,6 +254,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     }
 
     public boolean getCompleted() { return completed; }
+
+    public String getAIName() { return aiName; }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
