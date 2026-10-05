@@ -534,6 +534,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         boolean firstLost = lifeLostThisTurn == 0;
         lifeLostThisTurn += toLose;
+        // a chain of triggers that costs life ends by itself
+        game.getStack().clearTriggerRepeats();
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, toLose);
