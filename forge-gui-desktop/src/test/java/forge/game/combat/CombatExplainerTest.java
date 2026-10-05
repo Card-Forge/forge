@@ -322,4 +322,29 @@ public class CombatExplainerTest extends SimulationTest {
         combat.addBlocker(other, blocker);
         assertContains(CombatUtil.validateBlocks(combat, defending), blocker + " is blocking " + other, "must block " + required);
     }
+
+    // every creature with a problem is reported, up to three of them
+    @Test
+    public void testSeveralBlockersReported() {
+        setUp();
+        Card piper = addCreature("Talruum Piper", attacking);
+        List<Card> thopters = List.of(addCreature("Ornithopter", defending), addCreature("Ornithopter", defending),
+                addCreature("Ornithopter", defending), addCreature("Ornithopter", defending));
+        Combat combat = startCombat();
+        combat.addAttacker(piper, defending);
+
+        String[] errors = CombatUtil.validateBlocks(combat, defending).split("\n");
+        AssertJUnit.assertEquals(3, errors.length);
+        for (int i = 0; i < errors.length; i++) {
+            assertContains(errors[i], thopters.get(i) + " must block " + piper);
+        }
+
+        // once enough of them block, only the remaining ones are reported
+        combat.addBlocker(piper, thopters.get(0));
+        combat.addBlocker(piper, thopters.get(1));
+        combat.addBlocker(piper, thopters.get(2));
+        assertContains(CombatUtil.validateBlocks(combat, defending), thopters.get(3) + " must block " + piper);
+        combat.addBlocker(piper, thopters.get(3));
+        AssertJUnit.assertNull(CombatUtil.validateBlocks(combat, defending));
+    }
 }
