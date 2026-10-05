@@ -696,7 +696,7 @@ public class ComputerUtilMana {
 
             Collection<SpellAbility> saOrdered = saList;
             if (toPay == ManaCostShard.GENERIC && !hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref")) {
-                saOrdered = requiredSourcesFirst(saList, sourcesForShards, cost, sa);
+                saOrdered = requiredSourcesFirst(saList, cost, sa);
             }
 
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saOrdered, checkPlayable || !test);
@@ -828,8 +828,7 @@ public class ComputerUtilMana {
     }
 
     // a source adding several mana that is needed either way goes first, so nothing else is tapped beside it for no reason
-    private static Collection<SpellAbility> requiredSourcesFirst(final Collection<SpellAbility> saList,
-            final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final ManaCostBeingPaid cost, final SpellAbility sa) {
+    private static Collection<SpellAbility> requiredSourcesFirst(final Collection<SpellAbility> saList, final ManaCostBeingPaid cost, final SpellAbility sa) {
         final int generic = cost.getGenericManaAmount();
         if (generic < 2) {
             return saList;
@@ -839,13 +838,13 @@ public class ComputerUtilMana {
         int manaTotal = 0;
         List<SpellAbility> required = null;
         for (final SpellAbility ma : saList) {
-            final int amount = ma.totalAmountOfManaGenerated(sa, true);
+            final int amount = manaPerCard != null ? manaPerCard.get(ma.getHostCard()) : ma.totalAmountOfManaGenerated(sa, true);
             if (amount < 2) {
                 continue;
             }
             if (manaPerCard == null) {
                 manaPerCard = Maps.newHashMap();
-                for (final SpellAbility source : sourcesForShards.values()) {
+                for (final SpellAbility source : saList) {
                     manaPerCard.merge(source.getHostCard(), source.totalAmountOfManaGenerated(sa, true), Math::max);
                 }
                 for (final int mana : manaPerCard.values()) {
