@@ -58,7 +58,7 @@ import java.util.stream.Collectors;
  * @version $Id$
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
-    private static final int MAX_MANDATORY_CHAIN = 50;
+    private static final int MAX_TRIGGER_REPEATS = 50;
 
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
     private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
@@ -78,8 +78,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> thisTurnActivated = Lists.newArrayList();
 
     private Card curResolvingCard = null;
-    private int resolvedMandatoryChain = 0;
-    private int mandatoryChainProgress = 0;
+    private final Map<Integer, Integer> triggerRepeats = new HashMap<>();
 
     private final Game game;
 
@@ -107,7 +106,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         thisTurnCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
-        resolvedMandatoryChain = 0;
+        triggerRepeats.clear();
         frozenStack.clear();
         clearUndoStack();
         game.updateStackForView();
@@ -214,8 +213,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         Player activator = sp.getActivatingPlayer();
 
         // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
-        // CR 104.4b the same goes for mandatory triggers that keep setting each other off
-        if (game.getStack().size() > 999 || (isLoopingTrigger(sp) && resolvedMandatoryChain >= MAX_MANDATORY_CHAIN)) {
+        // CR 104.4b the same goes for a mandatory trigger that keeps coming back before the stack clears
+        if (game.getStack().size() > 999 || (si == null && isRepeatingTrigger(sp))) {
             for (Player p : game.getPlayers()) {
                 p.intentionalDraw();
             }
@@ -470,9 +469,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             PlayEffect.addReplaceGraveyardEffect(sp.getHostCard(), sp.getMayPlay().getHostCard(), sp, sp, sp.getMayPlay().getParam("ReplaceGraveyard"));
         }
         si = si == null ? new SpellAbilityStackInstance(sp, id) : si;
-        if (isLoopingTrigger(sp)) {
-            si.setMandatoryChain(resolvedMandatoryChain + 1);
-        }
 
         stack.addFirst(si);
         int stackIndex = stack.size() - 1;
@@ -503,21 +499,25 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
     }
 
-    private static boolean isLoopingTrigger(final SpellAbility sp) {
-        return sp.isMandatory() && !sp.usesTargeting();
-    }
-
-    // a chain that costs a player life or library ends by itself
-    private int mandatoryChainProgress() {
-        int progress = 0;
-        for (Player p : game.getPlayers()) {
-            progress = 31 * progress + Objects.hash(p.getLifeLostThisTurn(), p.getPoisonCounters(), p.getZone(ZoneType.Library).size());
+    private boolean isRepeatingTrigger(final SpellAbility sp) {
+        if (!sp.isTrigger()) {
+            // a player did something
+            triggerRepeats.clear();
         }
-        return progress;
+        if (!sp.isMandatory() || sp.usesTargeting()) {
+            return false;
+        }
+        final int id = sp.getSourceTrigger();
+        for (final SpellAbilityStackInstance si : stack) {
+            if (si.isStateTrigger(id)) {
+                return false;
+            }
+        }
+        return triggerRepeats.merge(id, 1, Integer::sum) > MAX_TRIGGER_REPEATS;
     }
 
-    public final void resetMandatoryChain() {
-        resolvedMandatoryChain = 0;
+    public final void clearTriggerRepeats() {
+        triggerRepeats.clear();
     }
 
     private void recordUndoableActions(SpellAbility sa) {
@@ -600,9 +600,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // The SpellAbility isn't removed from the Stack until it finishes resolving
         // temporarily reverted removing SAs after resolution
         final SpellAbility sa = peekAbility();
-        final int progress = mandatoryChainProgress();
-        resolvedMandatoryChain = progress == mandatoryChainProgress ? peek().getMandatoryChain() : 0;
-        mandatoryChainProgress = progress;
 
         // abilities already on stack won't get changed text from host
         if (sa.isSpell()) {

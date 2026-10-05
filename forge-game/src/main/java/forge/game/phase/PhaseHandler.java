@@ -152,7 +152,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         boolean turnEnded = false;
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
-        game.getStack().resetMandatoryChain();
 
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
@@ -1170,6 +1169,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 return true;
             }
         } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
+
+        if (game.getStack().isEmpty()) {
+            game.getStack().clearTriggerRepeats();
+        }
 
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
