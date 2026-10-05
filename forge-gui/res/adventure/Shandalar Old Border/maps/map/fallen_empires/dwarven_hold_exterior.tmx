@@ -277,7 +277,7 @@
     <property name="hidden" type="bool" value="true" />
    </properties>
   </object>
-  <object id="9170" template="../../../../../../common/maps/obj/dialog.tx" name="Secret rune door" x="160" y="32" width="26" height="80">
+  <object id="9170" template="../../../../../../common/maps/obj/dialog.tx" name="Secret rune door" x="176" y="32" width="12" height="32">
    <properties>
     <property name="dialog" value="[{&quot;text&quot;: &quot;Hidden behind the rocks you find a narrow stone slab carved with dwarven runes. It does not budge.&quot;, &quot;options&quot;: [{&quot;condition&quot;: [{&quot;item&quot;: &quot;Dwarven Rune Stone&quot;}], &quot;name&quot;: &quot;(Press the Dwarven rune stone against the slab)&quot;, &quot;text&quot;: &quot;The runes flare a dull red. With a low grinding sound the slab slides aside, revealing a secret passage into the hold.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;removeItem&quot;: &quot;Dwarven Rune Stone&quot;}, {&quot;deleteMapObject&quot;: 9170}, {&quot;deleteMapObject&quot;: 9174}, {&quot;deleteMapObject&quot;: 9175}, {&quot;deleteMapObject&quot;: 9176}]}]}, {&quot;name&quot;: &quot;(Leave it)&quot;}]}]" />
     <property name="hidden" type="bool" value="true" />
@@ -307,7 +307,7 @@
    <properties>
     <property name="Type" value="FEM Orgg vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;The Orgg grunts and points toward the hold. There is little doubt what it wants you to do.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;...Orgg? ...ORGG!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Orgg" />
     <property name="enemy" value="FEM Orgg vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -330,7 +330,7 @@
    <properties>
     <property name="Type" value="FEM Orcish Captain vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Break their gate, take their loot. That is the plan.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_GateBroken&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;My orcs have no luck breaking down this gate. You, mercenary: show them how it's done!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_GateBroken&quot;}], &quot;text&quot;: &quot;\&quot;Ha! - You blew that gate away. What random luck that a powerful ally like you suddenly shows up? Our chance encounter bodes well for me. Now you lead the way inside for us. Here's our fighting chance!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Orcish Captain" />
     <property name="enemy" value="FEM Orcish Captain vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -409,7 +409,7 @@
    <properties>
     <property name="Type" value="FEM Warren Goblins vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;You help us get shiny things. We like you!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;This tunnel will make a nice warren. We can even cook Dwarf stew inside.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Warren Goblins" />
     <property name="enemy" value="FEM Warren Goblins vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -453,7 +453,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Fire fixes everything. Mostly.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;Step one: fire. Step two: ointment.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Pyro Medic" />
     <property name="enemy" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -475,7 +475,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Flotilla vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;We came for loot. No dwarf wall will keep us out.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;You call out to the goblins: \&quot;Wait, are you guys trying to sail UP a mountain creek?\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;text&quot;: &quot;An out-of-breath flotilla goblin wheezes back: \&quot;Is fine - they'll never expect.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]}]" />
     <property name="displayNameOverride" value="Goblin Flotilla" />
     <property name="enemy" value="FEM Goblin Flotilla vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -699,7 +699,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Fire fixes everything. Mostly.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;Step one: fire. Step two: ointment.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Pyro Medic" />
     <property name="enemy" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />

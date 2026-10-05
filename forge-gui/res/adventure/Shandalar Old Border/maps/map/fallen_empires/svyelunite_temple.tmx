@@ -776,7 +776,7 @@
     <property name="Type" value="FEM Floodwater Homarid" />
     <property name="enemy" value="FEM Floodwater Homarid" />
     <property name="displayNameOverride" value="Floodwater Homarid" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The floodwater homarid gurgles a slow greeting, claws opening and closing in a patient rhythm.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="10" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -788,7 +788,7 @@
     <property name="Type" value="FEM Viscerid Drone" />
     <property name="enemy" value="FEM Viscerid Drone" />
     <property name="displayNameOverride" value="Viscerid Drone" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The viscerid drone skitters sideways, mandibles clicking a quick, excited pattern.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -800,7 +800,7 @@
     <property name="Type" value="FEM Viscerid Drone" />
     <property name="enemy" value="FEM Viscerid Drone" />
     <property name="displayNameOverride" value="Viscerid Drone" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The viscerid drone circles you once, clicking softly, then returns to its post.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -824,7 +824,7 @@
     <property name="Type" value="FEM River Merfolk" />
     <property name="enemy" value="FEM River Merfolk" />
     <property name="displayNameOverride" value="River Merfolk" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;The River Merfolk dips its conch-horn in salute. \&quot;The temple endures, mercenary. The tides remember.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -836,7 +836,7 @@
     <property name="Type" value="FEM Ally Vodalian Merchant" />
     <property name="enemy" value="FEM Ally Vodalian Merchant" />
     <property name="displayNameOverride" value="Vodalian Merchant" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Fresh salvage from the deep, mercenary! You will not find a better price this far inland.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -847,7 +847,7 @@
     <property name="Type" value="FEM Vodalian War Machine" />
     <property name="enemy" value="FEM Vodalian War Machine" />
     <property name="displayNameOverride" value="Vodalian War Machine" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*Gears grind as the war machine's crew racks the catapult arm and salutes you from the gunwale.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -858,7 +858,7 @@
     <property name="Type" value="FEM Svyelunite Priest" />
     <property name="enemy" value="FEM Svyelunite Priest" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Deep calls to deep, mercenary. The temple's song keeps the tides - and our foes - in order.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -869,7 +869,7 @@
     <property name="Type" value="FEM Svyelunite Priest" />
     <property name="enemy" value="FEM Svyelunite Priest" />
     <property name="displayNameOverride" value="Svyelunite Priest" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Deep calls to deep, mercenary. Sing with us, and the tide will carry you.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -881,7 +881,7 @@
     <property name="Type" value="FEM Ally Seasinger" />
     <property name="enemy" value="FEM Ally Seasinger" />
     <property name="displayNameOverride" value="Seasinger" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Fight well, mercenary, and the tides will sing your name from shore to shore.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -892,7 +892,7 @@
     <property name="Type" value="FEM Ally Vodalian Mage C" />
     <property name="enemy" value="FEM Ally Vodalian Mage C" />
     <property name="displayNameOverride" value="Vodalian Mage" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Mind your ears when the storm calls, mercenary. My thunder does not pick sides.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -904,7 +904,7 @@
     <property name="Type" value="FEM Ally Vodalian Mage B" />
     <property name="enemy" value="FEM Ally Vodalian Mage B" />
     <property name="displayNameOverride" value="Vodalian Mage" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Stand back when I cast, mercenary. The storms of Svyelunite are choosy, but not careful.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -916,7 +916,7 @@
     <property name="Type" value="FEM Ally Vodalian Mage A" />
     <property name="enemy" value="FEM Ally Vodalian Mage A" />
     <property name="displayNameOverride" value="Vodalian Mage" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;The bubbles tell me you fight well, mercenary. Stay out of my tide, and we will do fine.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -927,7 +927,7 @@
     <property name="Type" value="FEM Homarid Deep Spawn" />
     <property name="enemy" value="FEM Homarid Deep Spawn" />
     <property name="displayNameOverride" value="Homarid Deep Spawn" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The deep spawn pulses and gurgles, several eyes drifting your way before it resumes its slow circuit.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -939,7 +939,7 @@
     <property name="Type" value="FEM Homarid Deep Spawn" />
     <property name="enemy" value="FEM Homarid Deep Spawn" />
     <property name="displayNameOverride" value="Homarid Deep Spawn" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The deep spawn gurgles a slow, rolling greeting, its bulk drifting past like a submerged reef.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -951,7 +951,7 @@
     <property name="Type" value="FEM Vodalian Knight" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="displayNameOverride" value="Vodalian Knight" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Hold the line with us, mercenary. No homarid crosses this floor while we stand.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -963,7 +963,7 @@
     <property name="Type" value="FEM Vodalian Knight" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="displayNameOverride" value="Vodalian Knight" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Stay behind my shield, mercenary, and the temple will hold.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -975,7 +975,7 @@
     <property name="Type" value="FEM Vodalian Knight" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="displayNameOverride" value="Vodalian Knight" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;The priestesses promised the tide would bring help. It brought you. Good enough.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -987,7 +987,7 @@
     <property name="Type" value="FEM Ally Vodalian Soldier A" />
     <property name="enemy" value="FEM Ally Vodalian Soldier A" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Stay sharp, mercenary. The homarids hit hard when the tide turns.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -999,7 +999,7 @@
     <property name="Type" value="FEM Ally Vodalian Soldier D" />
     <property name="enemy" value="FEM Ally Vodalian Soldier D" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Keep your blade wet and your feet dry, mercenary.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1011,7 +1011,7 @@
     <property name="Type" value="FEM Ally Vodalian Soldier C" />
     <property name="enemy" value="FEM Ally Vodalian Soldier C" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;Another mercenary? Good. The last one left with more holes than he came with.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1023,7 +1023,7 @@
     <property name="Type" value="FEM Ally Vodalian Soldier B" />
     <property name="enemy" value="FEM Ally Vodalian Soldier B" />
     <property name="displayNameOverride" value="Vodalian Soldier" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;\&quot;We hold this hall. Watch the water, mercenary - they come from below.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1035,7 +1035,7 @@
     <property name="Type" value="FEM Homarid Green" />
     <property name="enemy" value="FEM Homarid Green" />
     <property name="displayNameOverride" value="Homarid" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*clic-clic-clic* The green homarid waves a claw toward the far shore and resumes its patrol.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1047,7 +1047,7 @@
     <property name="Type" value="FEM Homarid Purple" />
     <property name="enemy" value="FEM Homarid Purple" />
     <property name="displayNameOverride" value="Homarid" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The purple homarid clicks twice and pounds its own carapace, rattling with pride.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1059,7 +1059,7 @@
     <property name="Type" value="FEM Homarid Red" />
     <property name="enemy" value="FEM Homarid Red" />
     <property name="displayNameOverride" value="Homarid" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The red homarid hisses a stream of bubbles and snaps its claws at the water.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1071,7 +1071,7 @@
     <property name="Type" value="FEM Homarid Yellow" />
     <property name="enemy" value="FEM Homarid Yellow" />
     <property name="displayNameOverride" value="Homarid" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*whirr-click* The yellow homarid bobs up and down, then points a claw toward the Vodalian side.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1083,7 +1083,7 @@
     <property name="Type" value="FEM Homarid Warrior A" />
     <property name="enemy" value="FEM Homarid Warrior A" />
     <property name="displayNameOverride" value="Homarid Warrior" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The homarid warrior raps its claw against its shell - clic, clic, clic - and levels it toward the enemy shore.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1095,7 +1095,7 @@
     <property name="Type" value="FEM Homarid Warrior 5ED" />
     <property name="enemy" value="FEM Homarid Warrior 5ED" />
     <property name="displayNameOverride" value="Homarid Warrior" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*clic* The homarid warrior gestures you forward, toward the sound of distant battle.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1107,7 +1107,7 @@
     <property name="Type" value="FEM Homarid Warrior C" />
     <property name="enemy" value="FEM Homarid Warrior C" />
     <property name="displayNameOverride" value="Homarid Warrior" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*whirr* The homarid warrior thumps the ground twice, then returns to pacing its route.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1119,7 +1119,7 @@
     <property name="Type" value="FEM Homarid Warrior B" />
     <property name="enemy" value="FEM Homarid Warrior B" />
     <property name="displayNameOverride" value="Homarid Warrior" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The homarid warrior clicks a slow challenge and sweeps its claw through the water.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1131,7 +1131,7 @@
     <property name="Type" value="FEM Homarid Shaman" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="displayNameOverride" value="Homarid Shaman" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The shaman swirls its staff in the water, humming a low, bubbling refrain.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1143,7 +1143,7 @@
     <property name="Type" value="FEM Homarid Shaman" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="displayNameOverride" value="Homarid Shaman" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The shaman hums a bubbling melody, its eyes never quite settling on you.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1154,7 +1154,7 @@
     <property name="Type" value="FEM Homarid Shaman" />
     <property name="enemy" value="FEM Homarid Shaman" />
     <property name="displayNameOverride" value="Homarid Shaman" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The shaman taps the water with its staff - clic, clic - and points you toward the fight.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1166,7 +1166,7 @@
     <property name="Type" value="FEM Homarid Spawning Bed" />
     <property name="enemy" value="FEM Homarid Spawning Bed" />
     <property name="displayNameOverride" value="Homarid Spawning Bed" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*The spawning bed bubbles lazily. Something down below shifts to watch you pass.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
@@ -1177,7 +1177,7 @@
     <property name="Type" value="FEM Homarid Spawning Bed" />
     <property name="enemy" value="FEM Homarid Spawning Bed" />
     <property name="displayNameOverride" value="Homarid Spawning Bed" />
-    <property name="dialog" value="[{&quot;action&quot;: [{}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;text&quot;: &quot;*Warm bubbles rise from the spawning bed as you pass. The brood is safe.*&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />

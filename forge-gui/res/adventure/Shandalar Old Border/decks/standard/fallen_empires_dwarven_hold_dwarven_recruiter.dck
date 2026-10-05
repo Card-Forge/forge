@@ -10,7 +10,6 @@ Name=Dwarven Recruiter
 1 Dwarven Vigilantes|VIS
 1 Dwarven Weaponsmith|3ED
 1 Dwarven Nomad|MIR
-1 Dwarven Vigilantes|VIS
 1 Dwarven Grunt|ODY
 1 Ball Lightning|DRK
 1 Fireball|3ED
@@ -23,6 +22,7 @@ Name=Dwarven Recruiter
 1 Brothers of Fire|DRK
 1 Anvil of Bogardan|VIS
 1 Millstone|ATQ
+1 Whetstone|USG
 1 Book Burning|JUD
 1 Flint Golem|NMS
 1 Grindstone|TMP
@@ -36,7 +36,6 @@ Name=Dwarven Recruiter
 1 Howling Mine|3ED
 1 Wall of Razors|STH
 1 Wall of Heat|LEG
-1 Wall of Earth|LEG
 4 Dwarven Shrine|ODY
 [StartInBattle_Reference]
 1 Dwarven Hold|FEM

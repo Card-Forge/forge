@@ -6,87 +6,87 @@ repeat: none
 Avatar
   xy: 256, 0
   size: 16, 16
-Idle
+IdleLeft
   xy: 0, 0
   size: 64, 48
-Idle
+IdleLeft
   xy: 64, 0
   size: 64, 48
-Idle
+IdleLeft
   xy: 128, 0
   size: 64, 48
-Idle
+IdleLeft
   xy: 192, 0
   size: 64, 48
-Walk
+WalkLeft
   xy: 0, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 64, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 128, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 192, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 256, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 320, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 384, 48
   size: 64, 48
-Walk
+WalkLeft
   xy: 448, 48
   size: 64, 48
-Attack
+AttackLeft
   xy: 0, 96
   size: 128, 48
-Attack
+AttackLeft
   xy: 128, 96
   size: 128, 48
-Attack
+AttackLeft
   xy: 256, 96
   size: 128, 48
-Attack
+AttackLeft
   xy: 384, 96
   size: 128, 48
-Attack
+AttackLeft
   xy: 0, 144
   size: 128, 48
-Attack
+AttackLeft
   xy: 128, 144
   size: 128, 48
-Attack
+AttackLeft
   xy: 256, 144
   size: 128, 48
-Attack
+AttackLeft
   xy: 384, 144
   size: 128, 48
-Death
+DeathLeft
   xy: 0, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 64, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 128, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 192, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 256, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 320, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 384, 192
   size: 64, 48
-Death
+DeathLeft
   xy: 448, 192
   size: 64, 48

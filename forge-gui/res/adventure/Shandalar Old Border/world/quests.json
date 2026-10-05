@@ -11906,6 +11906,202 @@
                       {
                         "deleteMapObject": 9113
                       }
+,
+                      {
+                        "deleteMapObject": 40011
+                      },
+                      {
+                        "deleteMapObject": 40013
+                      },
+                      {
+                        "deleteMapObject": 40015
+                      },
+                      {
+                        "deleteMapObject": 40016
+                      },
+                      {
+                        "deleteMapObject": 40017
+                      },
+                      {
+                        "deleteMapObject": 40043
+                      },
+                      {
+                        "deleteMapObject": 40018
+                      },
+                      {
+                        "deleteMapObject": 40019
+                      },
+                      {
+                        "deleteMapObject": 40020
+                      },
+                      {
+                        "deleteMapObject": 40041
+                      },
+                      {
+                        "deleteMapObject": 40022
+                      },
+                      {
+                        "deleteMapObject": 40023
+                      },
+                      {
+                        "deleteMapObject": 40042
+                      },
+                      {
+                        "deleteMapObject": 40024
+                      },
+                      {
+                        "deleteMapObject": 40040
+                      },
+                      {
+                        "deleteMapObject": 40039
+                      },
+                      {
+                        "deleteMapObject": 40038
+                      },
+                      {
+                        "activateMapObject": 40003
+                      },
+                      {
+                        "activateMapObject": 40004
+                      },
+                      {
+                        "activateMapObject": 40005
+                      },
+                      {
+                        "activateMapObject": 40021
+                      },
+                      {
+                        "activateMapObject": 40031
+                      },
+                      {
+                        "activateMapObject": 40025
+                      },
+                      {
+                        "activateMapObject": 40033
+                      },
+                      {
+                        "activateMapObject": 40034
+                      },
+                      {
+                        "activateMapObject": 40032
+                      },
+                      {
+                        "activateMapObject": 40026
+                      },
+                      {
+                        "activateMapObject": 40037
+                      },
+                      {
+                        "activateMapObject": 40036
+                      },
+                      {
+                        "activateMapObject": 40035
+                      },
+                      {
+                        "activateMapObject": 40027
+                      },
+                      {
+                        "activateMapObject": 40074
+                      },
+                      {
+                        "activateMapObject": 40030
+                      },
+                      {
+                        "activateMapObject": 40028
+                      },
+                      {
+                        "activateMapObject": 40029
+                      },
+                      {
+                        "deleteMapObject": 50003
+                      },
+                      {
+                        "deleteMapObject": 50004
+                      },
+                      {
+                        "deleteMapObject": 50005
+                      },
+                      {
+                        "deleteMapObject": 50021
+                      },
+                      {
+                        "deleteMapObject": 50031
+                      },
+                      {
+                        "deleteMapObject": 50025
+                      },
+                      {
+                        "deleteMapObject": 50033
+                      },
+                      {
+                        "deleteMapObject": 50034
+                      },
+                      {
+                        "deleteMapObject": 50032
+                      },
+                      {
+                        "deleteMapObject": 50026
+                      },
+                      {
+                        "deleteMapObject": 50037
+                      },
+                      {
+                        "deleteMapObject": 50036
+                      },
+                      {
+                        "deleteMapObject": 50035
+                      },
+                      {
+                        "deleteMapObject": 50027
+                      },
+                      {
+                        "deleteMapObject": 50074
+                      },
+                      {
+                        "deleteMapObject": 50030
+                      },
+                      {
+                        "deleteMapObject": 50028
+                      },
+                      {
+                        "deleteMapObject": 50029
+                      },
+                      {
+                        "deleteMapObject": 9100
+                      },
+                      {
+                        "deleteMapObject": 9110
+                      },
+                      {
+                        "deleteMapObject": 9103
+                      },
+                      {
+                        "deleteMapObject": 9112
+                      },
+                      {
+                        "deleteMapObject": 9104
+                      },
+                      {
+                        "deleteMapObject": 9113
+                      },
+                      {
+                        "setMapFlag": {
+                          "key": "FE_Svyelunite_OpponentsDefeated",
+                          "val": 0
+                        }
+                      },
+                      {
+                        "setMapFlag": {
+                          "key": "FE_Svyelunite_ConfiguredV3",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setMapFlag": {
+                          "key": "FE_Svyelunite_ConfiguredV2",
+                          "val": 1
+                        }
+                      }
                     ]
                   },
                   {
@@ -11954,6 +12150,199 @@
                       },
                       {
                         "deleteMapObject": 9113
+                      }
+,
+                      {
+                        "deleteMapObject": 40003
+                      },
+                      {
+                        "deleteMapObject": 40004
+                      },
+                      {
+                        "deleteMapObject": 40005
+                      },
+                      {
+                        "deleteMapObject": 40021
+                      },
+                      {
+                        "deleteMapObject": 40031
+                      },
+                      {
+                        "deleteMapObject": 40025
+                      },
+                      {
+                        "deleteMapObject": 40033
+                      },
+                      {
+                        "deleteMapObject": 40034
+                      },
+                      {
+                        "deleteMapObject": 40032
+                      },
+                      {
+                        "deleteMapObject": 40026
+                      },
+                      {
+                        "deleteMapObject": 40037
+                      },
+                      {
+                        "deleteMapObject": 40036
+                      },
+                      {
+                        "deleteMapObject": 40035
+                      },
+                      {
+                        "deleteMapObject": 40027
+                      },
+                      {
+                        "deleteMapObject": 40074
+                      },
+                      {
+                        "deleteMapObject": 40030
+                      },
+                      {
+                        "deleteMapObject": 40028
+                      },
+                      {
+                        "deleteMapObject": 40029
+                      },
+                      {
+                        "activateMapObject": 40011
+                      },
+                      {
+                        "activateMapObject": 40013
+                      },
+                      {
+                        "activateMapObject": 40015
+                      },
+                      {
+                        "activateMapObject": 40016
+                      },
+                      {
+                        "activateMapObject": 40017
+                      },
+                      {
+                        "activateMapObject": 40043
+                      },
+                      {
+                        "activateMapObject": 40018
+                      },
+                      {
+                        "activateMapObject": 40019
+                      },
+                      {
+                        "activateMapObject": 40020
+                      },
+                      {
+                        "activateMapObject": 40041
+                      },
+                      {
+                        "activateMapObject": 40022
+                      },
+                      {
+                        "activateMapObject": 40023
+                      },
+                      {
+                        "activateMapObject": 40042
+                      },
+                      {
+                        "activateMapObject": 40024
+                      },
+                      {
+                        "activateMapObject": 40040
+                      },
+                      {
+                        "activateMapObject": 40039
+                      },
+                      {
+                        "activateMapObject": 40038
+                      },
+                      {
+                        "deleteMapObject": 50011
+                      },
+                      {
+                        "deleteMapObject": 50013
+                      },
+                      {
+                        "deleteMapObject": 50015
+                      },
+                      {
+                        "deleteMapObject": 50016
+                      },
+                      {
+                        "deleteMapObject": 50017
+                      },
+                      {
+                        "deleteMapObject": 50043
+                      },
+                      {
+                        "deleteMapObject": 50018
+                      },
+                      {
+                        "deleteMapObject": 50019
+                      },
+                      {
+                        "deleteMapObject": 50020
+                      },
+                      {
+                        "deleteMapObject": 50041
+                      },
+                      {
+                        "deleteMapObject": 50022
+                      },
+                      {
+                        "deleteMapObject": 50023
+                      },
+                      {
+                        "deleteMapObject": 50042
+                      },
+                      {
+                        "deleteMapObject": 50024
+                      },
+                      {
+                        "deleteMapObject": 50040
+                      },
+                      {
+                        "deleteMapObject": 50039
+                      },
+                      {
+                        "deleteMapObject": 50038
+                      },
+                      {
+                        "deleteMapObject": 9100
+                      },
+                      {
+                        "deleteMapObject": 9110
+                      },
+                      {
+                        "deleteMapObject": 9103
+                      },
+                      {
+                        "deleteMapObject": 9112
+                      },
+                      {
+                        "deleteMapObject": 9104
+                      },
+                      {
+                        "deleteMapObject": 9113
+                      },
+                      {
+                        "setMapFlag": {
+                          "key": "FE_Svyelunite_OpponentsDefeated",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setMapFlag": {
+                          "key": "FE_Svyelunite_ConfiguredV3",
+                          "val": 1
+                        }
+                      },
+                      {
+                        "setMapFlag": {
+                          "key": "FE_Svyelunite_ConfiguredV2",
+                          "val": 1
+                        }
                       }
                     ]
                   },
@@ -12077,6 +12466,13 @@
                     "type": "card",
                     "count": 1,
                     "cardName": "Seasinger|FEM"
+                  },
+                  {
+                    "type": "cardPackShop",
+                    "editions": [
+                      "FEM"
+                    ],
+                    "count": 6
                   }
                 ],
                 "setQuestFlag": {
@@ -12128,6 +12524,13 @@
                     "type": "card",
                     "count": 1,
                     "cardName": "Homarid Spawning Bed|FEM"
+                  },
+                  {
+                    "type": "cardPackShop",
+                    "editions": [
+                      "FEM"
+                    ],
+                    "count": 6
                   }
                 ],
                 "addItem": "Coral Helm",
@@ -12159,7 +12562,7 @@
     ]
   },
   "reward": {},
-  "rewardDescription": "Faction reward from Svyelunite Temple",
+  "rewardDescription": "1000 gold, 25 shards, 3 faction cards, and 6 Fallen Empires boosters",
   "stages": [
     {
       "id": 1,
@@ -12282,640 +12685,6 @@
             "not": true
           }
         ]
-      },
-      {
-        "condition": [
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Faction",
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
-          },
-          {
-            "actorID": 9150
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Accepted"
-          }
-        ],
-        "name": "\"Yep, that's right.\" (Aid the dwarves)",
-        "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
-        "options": [
-          {
-            "name": "(Take the Dwarven rune stone)",
-            "action": [
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Faction",
-                  "val": 1
-                }
-              },
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Defeated",
-                  "val": 0
-                }
-              },
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Victory",
-                  "val": 0
-                }
-              },
-              {
-                "addItem": "Dwarven Rune Stone"
-              },
-              {
-                "deleteMapObject": 41004
-              },
-              {
-                "deleteMapObject": 41039
-              },
-              {
-                "activateMapObject": 41002
-              },
-              {
-                "activateMapObject": 41003
-              },
-              {
-                "activateMapObject": 41005
-              },
-              {
-                "activateMapObject": 41006
-              },
-              {
-                "activateMapObject": 41007
-              },
-              {
-                "activateMapObject": 41008
-              },
-              {
-                "activateMapObject": 41009
-              },
-              {
-                "activateMapObject": 41010
-              },
-              {
-                "activateMapObject": 41011
-              },
-              {
-                "activateMapObject": 41012
-              },
-              {
-                "activateMapObject": 41013
-              },
-              {
-                "activateMapObject": 41014
-              },
-              {
-                "activateMapObject": 41015
-              },
-              {
-                "activateMapObject": 41016
-              },
-              {
-                "activateMapObject": 41017
-              },
-              {
-                "activateMapObject": 41018
-              },
-              {
-                "activateMapObject": 41019
-              },
-              {
-                "deleteMapObject": 51002
-              },
-              {
-                "deleteMapObject": 51003
-              },
-              {
-                "deleteMapObject": 51005
-              },
-              {
-                "deleteMapObject": 51006
-              },
-              {
-                "deleteMapObject": 51007
-              },
-              {
-                "deleteMapObject": 51008
-              },
-              {
-                "deleteMapObject": 51009
-              },
-              {
-                "deleteMapObject": 51010
-              },
-              {
-                "deleteMapObject": 51011
-              },
-              {
-                "deleteMapObject": 51012
-              },
-              {
-                "deleteMapObject": 51013
-              },
-              {
-                "deleteMapObject": 51014
-              },
-              {
-                "deleteMapObject": 51015
-              },
-              {
-                "deleteMapObject": 51016
-              },
-              {
-                "deleteMapObject": 51017
-              },
-              {
-                "deleteMapObject": 51018
-              },
-              {
-                "deleteMapObject": 51019
-              },
-              {
-                "deleteMapObject": 51004
-              },
-              {
-                "deleteMapObject": 51100
-              },
-              {
-                "deleteMapObject": 9150
-              },
-              {
-                "deleteMapObject": 9151
-              },
-              {
-                "setMapFlag": {
-                  "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
-                  "val": 1
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "condition": [
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Faction",
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
-          },
-          {
-            "actorID": 9150
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Accepted",
-            "not": true
-          }
-        ],
-        "name": "\"Yep, that's right.\" (Aid the dwarves)",
-        "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
-        "options": [
-          {
-            "name": "(Take the Dwarven rune stone)",
-            "action": [
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Accepted",
-                  "val": 1
-                }
-              },
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Faction",
-                  "val": 1
-                }
-              },
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Defeated",
-                  "val": 0
-                }
-              },
-              {
-                "setQuestFlag": {
-                  "key": "FE_DwarvenHold_Victory",
-                  "val": 0
-                }
-              },
-              {
-                "addItem": "Dwarven Rune Stone"
-              },
-              {
-                "deleteMapObject": 41004
-              },
-              {
-                "deleteMapObject": 41039
-              },
-              {
-                "activateMapObject": 41002
-              },
-              {
-                "activateMapObject": 41003
-              },
-              {
-                "activateMapObject": 41005
-              },
-              {
-                "activateMapObject": 41006
-              },
-              {
-                "activateMapObject": 41007
-              },
-              {
-                "activateMapObject": 41008
-              },
-              {
-                "activateMapObject": 41009
-              },
-              {
-                "activateMapObject": 41010
-              },
-              {
-                "activateMapObject": 41011
-              },
-              {
-                "activateMapObject": 41012
-              },
-              {
-                "activateMapObject": 41013
-              },
-              {
-                "activateMapObject": 41014
-              },
-              {
-                "activateMapObject": 41015
-              },
-              {
-                "activateMapObject": 41016
-              },
-              {
-                "activateMapObject": 41017
-              },
-              {
-                "activateMapObject": 41018
-              },
-              {
-                "activateMapObject": 41019
-              },
-              {
-                "deleteMapObject": 51002
-              },
-              {
-                "deleteMapObject": 51003
-              },
-              {
-                "deleteMapObject": 51005
-              },
-              {
-                "deleteMapObject": 51006
-              },
-              {
-                "deleteMapObject": 51007
-              },
-              {
-                "deleteMapObject": 51008
-              },
-              {
-                "deleteMapObject": 51009
-              },
-              {
-                "deleteMapObject": 51010
-              },
-              {
-                "deleteMapObject": 51011
-              },
-              {
-                "deleteMapObject": 51012
-              },
-              {
-                "deleteMapObject": 51013
-              },
-              {
-                "deleteMapObject": 51014
-              },
-              {
-                "deleteMapObject": 51015
-              },
-              {
-                "deleteMapObject": 51016
-              },
-              {
-                "deleteMapObject": 51017
-              },
-              {
-                "deleteMapObject": 51018
-              },
-              {
-                "deleteMapObject": 51019
-              },
-              {
-                "deleteMapObject": 51004
-              },
-              {
-                "deleteMapObject": 51100
-              },
-              {
-                "deleteMapObject": 9150
-              },
-              {
-                "deleteMapObject": 9151
-              },
-              {
-                "setMapFlag": {
-                  "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
-                  "val": 1
-                }
-              },
-              {
-                "issueQuest": "56"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "condition": [
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Faction",
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
-          },
-          {
-            "actorID": 9150
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Accepted"
-          }
-        ],
-        "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
-        "action": [
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Faction",
-              "val": 2
-            }
-          },
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Defeated",
-              "val": 0
-            }
-          },
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Victory",
-              "val": 0
-            }
-          },
-          {
-            "deleteMapObject": 41002
-          },
-          {
-            "deleteMapObject": 41003
-          },
-          {
-            "deleteMapObject": 41005
-          },
-          {
-            "deleteMapObject": 41006
-          },
-          {
-            "deleteMapObject": 41007
-          },
-          {
-            "deleteMapObject": 41008
-          },
-          {
-            "deleteMapObject": 41009
-          },
-          {
-            "deleteMapObject": 41010
-          },
-          {
-            "deleteMapObject": 41011
-          },
-          {
-            "deleteMapObject": 41012
-          },
-          {
-            "deleteMapObject": 41013
-          },
-          {
-            "deleteMapObject": 41014
-          },
-          {
-            "deleteMapObject": 41015
-          },
-          {
-            "deleteMapObject": 41016
-          },
-          {
-            "deleteMapObject": 41017
-          },
-          {
-            "deleteMapObject": 41018
-          },
-          {
-            "deleteMapObject": 41019
-          },
-          {
-            "activateMapObject": 41004
-          },
-          {
-            "activateMapObject": 41039
-          },
-          {
-            "deleteMapObject": 51004
-          },
-          {
-            "deleteMapObject": 51039
-          },
-          {
-            "deleteMapObject": 9150
-          },
-          {
-            "deleteMapObject": 9151
-          },
-          {
-            "battleWithActorID": 41004
-          },
-          {
-            "setMapFlag": {
-              "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
-              "val": 1
-            }
-          }
-        ]
-      },
-      {
-        "condition": [
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Faction",
-            "not": true
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Completed",
-            "not": true
-          },
-          {
-            "actorID": 9150
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Accepted",
-            "not": true
-          }
-        ],
-        "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
-        "action": [
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Accepted",
-              "val": 1
-            }
-          },
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Faction",
-              "val": 2
-            }
-          },
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Defeated",
-              "val": 0
-            }
-          },
-          {
-            "setQuestFlag": {
-              "key": "FE_DwarvenHold_Victory",
-              "val": 0
-            }
-          },
-          {
-            "deleteMapObject": 41002
-          },
-          {
-            "deleteMapObject": 41003
-          },
-          {
-            "deleteMapObject": 41005
-          },
-          {
-            "deleteMapObject": 41006
-          },
-          {
-            "deleteMapObject": 41007
-          },
-          {
-            "deleteMapObject": 41008
-          },
-          {
-            "deleteMapObject": 41009
-          },
-          {
-            "deleteMapObject": 41010
-          },
-          {
-            "deleteMapObject": 41011
-          },
-          {
-            "deleteMapObject": 41012
-          },
-          {
-            "deleteMapObject": 41013
-          },
-          {
-            "deleteMapObject": 41014
-          },
-          {
-            "deleteMapObject": 41015
-          },
-          {
-            "deleteMapObject": 41016
-          },
-          {
-            "deleteMapObject": 41017
-          },
-          {
-            "deleteMapObject": 41018
-          },
-          {
-            "deleteMapObject": 41019
-          },
-          {
-            "activateMapObject": 41004
-          },
-          {
-            "activateMapObject": 41039
-          },
-          {
-            "deleteMapObject": 51004
-          },
-          {
-            "deleteMapObject": 51039
-          },
-          {
-            "deleteMapObject": 9150
-          },
-          {
-            "deleteMapObject": 9151
-          },
-          {
-            "setMapFlag": {
-              "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
-              "val": 1
-            }
-          },
-          {
-            "issueQuest": "56"
-          },
-          {
-            "battleWithActorID": 41004
-          }
-        ]
-      },
-      {
-        "condition": [
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Faction",
-            "not": true
-          },
-          {
-            "actorID": 9150
-          }
-        ],
-        "name": "\"I'm just passing through.\" (Decline for now)",
-        "text": "The dwarf shakes his head. \"Then turn back, stranger. Naebody gets past this pass till they've picked a side.\" If you change your mind, return tomorrow and he will ask again."
-      },
-      {
-        "condition": [
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Completed"
-          }
-        ],
-        "name": "The siege of the Dwarven Hold has already been decided. (Leave)"
-      },
-      {
-        "condition": [
-          {
-            "actorID": 9150
-          },
-          {
-            "checkQuestFlag": "FE_DwarvenHold_Faction"
-          }
-        ],
-        "name": "(Continue)"
       }
     ]
   },
@@ -13121,8 +12890,657 @@
     "forest_town_generic",
     "forest_town_identity",
     "forest_town_tribal",
-    "forest_capital",
-    "DwarvenHoldEntry"
+    "forest_capital"
   ]
-}
+},
+{
+    "id": 57,
+    "isTemplate": true,
+    "name": "Hold the Hold",
+    "description": "Choose a side in the siege of the Dwarven Hold in the Crimson Peaks and defeat the opposing faction.",
+    "offerDialog": {
+      "text": "A stout dwarf leading a heavily laden pony looks you up and down. \"Who are ye? Have ye come here tae aid us in oor hour o' need?\"",
+      "options": [
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted"
+            }
+          ],
+          "name": "\"Yep, that's right.\" (Aid the dwarves)",
+          "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
+          "options": [
+            {
+              "name": "(Take the Dwarven rune stone)",
+              "action": [
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Faction",
+                    "val": 1
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Defeated",
+                    "val": 0
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Victory",
+                    "val": 0
+                  }
+                },
+                {
+                  "addItem": "Dwarven Rune Stone"
+                },
+                {
+                  "deleteMapObject": 41004
+                },
+                {
+                  "deleteMapObject": 41039
+                },
+                {
+                  "activateMapObject": 41002
+                },
+                {
+                  "activateMapObject": 41003
+                },
+                {
+                  "activateMapObject": 41005
+                },
+                {
+                  "activateMapObject": 41006
+                },
+                {
+                  "activateMapObject": 41007
+                },
+                {
+                  "activateMapObject": 41008
+                },
+                {
+                  "activateMapObject": 41009
+                },
+                {
+                  "activateMapObject": 41010
+                },
+                {
+                  "activateMapObject": 41011
+                },
+                {
+                  "activateMapObject": 41012
+                },
+                {
+                  "activateMapObject": 41013
+                },
+                {
+                  "activateMapObject": 41014
+                },
+                {
+                  "activateMapObject": 41015
+                },
+                {
+                  "activateMapObject": 41016
+                },
+                {
+                  "activateMapObject": 41017
+                },
+                {
+                  "activateMapObject": 41018
+                },
+                {
+                  "activateMapObject": 41019
+                },
+                {
+                  "deleteMapObject": 51002
+                },
+                {
+                  "deleteMapObject": 51003
+                },
+                {
+                  "deleteMapObject": 51005
+                },
+                {
+                  "deleteMapObject": 51006
+                },
+                {
+                  "deleteMapObject": 51007
+                },
+                {
+                  "deleteMapObject": 51008
+                },
+                {
+                  "deleteMapObject": 51009
+                },
+                {
+                  "deleteMapObject": 51010
+                },
+                {
+                  "deleteMapObject": 51011
+                },
+                {
+                  "deleteMapObject": 51012
+                },
+                {
+                  "deleteMapObject": 51013
+                },
+                {
+                  "deleteMapObject": 51014
+                },
+                {
+                  "deleteMapObject": 51015
+                },
+                {
+                  "deleteMapObject": 51016
+                },
+                {
+                  "deleteMapObject": 51017
+                },
+                {
+                  "deleteMapObject": 51018
+                },
+                {
+                  "deleteMapObject": 51019
+                },
+                {
+                  "deleteMapObject": 51004
+                },
+                {
+                  "deleteMapObject": 51100
+                },
+                {
+                  "deleteMapObject": 9150
+                },
+                {
+                  "deleteMapObject": 9151
+                },
+                {
+                  "setMapFlag": {
+                    "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                    "val": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted",
+              "not": true
+            }
+          ],
+          "name": "\"Yep, that's right.\" (Aid the dwarves)",
+          "text": "The Dwarven Pony Trader breathes a sigh of relief. \"Och, that's guid tae hear. Here, tak' this rune stane. It opens a secret latch tae oor hauld, just ahint thae rocks ower there.\"",
+          "options": [
+            {
+              "name": "(Take the Dwarven rune stone)",
+              "action": [
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Accepted",
+                    "val": 1
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Faction",
+                    "val": 1
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Defeated",
+                    "val": 0
+                  }
+                },
+                {
+                  "setQuestFlag": {
+                    "key": "FE_DwarvenHold_Victory",
+                    "val": 0
+                  }
+                },
+                {
+                  "addItem": "Dwarven Rune Stone"
+                },
+                {
+                  "deleteMapObject": 41004
+                },
+                {
+                  "deleteMapObject": 41039
+                },
+                {
+                  "activateMapObject": 41002
+                },
+                {
+                  "activateMapObject": 41003
+                },
+                {
+                  "activateMapObject": 41005
+                },
+                {
+                  "activateMapObject": 41006
+                },
+                {
+                  "activateMapObject": 41007
+                },
+                {
+                  "activateMapObject": 41008
+                },
+                {
+                  "activateMapObject": 41009
+                },
+                {
+                  "activateMapObject": 41010
+                },
+                {
+                  "activateMapObject": 41011
+                },
+                {
+                  "activateMapObject": 41012
+                },
+                {
+                  "activateMapObject": 41013
+                },
+                {
+                  "activateMapObject": 41014
+                },
+                {
+                  "activateMapObject": 41015
+                },
+                {
+                  "activateMapObject": 41016
+                },
+                {
+                  "activateMapObject": 41017
+                },
+                {
+                  "activateMapObject": 41018
+                },
+                {
+                  "activateMapObject": 41019
+                },
+                {
+                  "deleteMapObject": 51002
+                },
+                {
+                  "deleteMapObject": 51003
+                },
+                {
+                  "deleteMapObject": 51005
+                },
+                {
+                  "deleteMapObject": 51006
+                },
+                {
+                  "deleteMapObject": 51007
+                },
+                {
+                  "deleteMapObject": 51008
+                },
+                {
+                  "deleteMapObject": 51009
+                },
+                {
+                  "deleteMapObject": 51010
+                },
+                {
+                  "deleteMapObject": 51011
+                },
+                {
+                  "deleteMapObject": 51012
+                },
+                {
+                  "deleteMapObject": 51013
+                },
+                {
+                  "deleteMapObject": 51014
+                },
+                {
+                  "deleteMapObject": 51015
+                },
+                {
+                  "deleteMapObject": 51016
+                },
+                {
+                  "deleteMapObject": 51017
+                },
+                {
+                  "deleteMapObject": 51018
+                },
+                {
+                  "deleteMapObject": 51019
+                },
+                {
+                  "deleteMapObject": 51004
+                },
+                {
+                  "deleteMapObject": 51100
+                },
+                {
+                  "deleteMapObject": 9150
+                },
+                {
+                  "deleteMapObject": 9151
+                },
+                {
+                  "setMapFlag": {
+                    "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                    "val": 1
+                  }
+                },
+                {
+                  "issueQuest": "56"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted"
+            }
+          ],
+          "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
+          "action": [
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Faction",
+                "val": 2
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Defeated",
+                "val": 0
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Victory",
+                "val": 0
+              }
+            },
+            {
+              "deleteMapObject": 41002
+            },
+            {
+              "deleteMapObject": 41003
+            },
+            {
+              "deleteMapObject": 41005
+            },
+            {
+              "deleteMapObject": 41006
+            },
+            {
+              "deleteMapObject": 41007
+            },
+            {
+              "deleteMapObject": 41008
+            },
+            {
+              "deleteMapObject": 41009
+            },
+            {
+              "deleteMapObject": 41010
+            },
+            {
+              "deleteMapObject": 41011
+            },
+            {
+              "deleteMapObject": 41012
+            },
+            {
+              "deleteMapObject": 41013
+            },
+            {
+              "deleteMapObject": 41014
+            },
+            {
+              "deleteMapObject": 41015
+            },
+            {
+              "deleteMapObject": 41016
+            },
+            {
+              "deleteMapObject": 41017
+            },
+            {
+              "deleteMapObject": 41018
+            },
+            {
+              "deleteMapObject": 41019
+            },
+            {
+              "activateMapObject": 41004
+            },
+            {
+              "activateMapObject": 41039
+            },
+            {
+              "deleteMapObject": 51004
+            },
+            {
+              "deleteMapObject": 51039
+            },
+            {
+              "deleteMapObject": 9150
+            },
+            {
+              "deleteMapObject": 9151
+            },
+            {
+              "battleWithActorID": 41004
+            },
+            {
+              "setMapFlag": {
+                "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                "val": 1
+              }
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Accepted",
+              "not": true
+            }
+          ],
+          "name": "\"Actually, I'm with the other team. Now defend yourself.\" (Aid the orc and goblin horde)",
+          "action": [
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Accepted",
+                "val": 1
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Faction",
+                "val": 2
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Defeated",
+                "val": 0
+              }
+            },
+            {
+              "setQuestFlag": {
+                "key": "FE_DwarvenHold_Victory",
+                "val": 0
+              }
+            },
+            {
+              "deleteMapObject": 41002
+            },
+            {
+              "deleteMapObject": 41003
+            },
+            {
+              "deleteMapObject": 41005
+            },
+            {
+              "deleteMapObject": 41006
+            },
+            {
+              "deleteMapObject": 41007
+            },
+            {
+              "deleteMapObject": 41008
+            },
+            {
+              "deleteMapObject": 41009
+            },
+            {
+              "deleteMapObject": 41010
+            },
+            {
+              "deleteMapObject": 41011
+            },
+            {
+              "deleteMapObject": 41012
+            },
+            {
+              "deleteMapObject": 41013
+            },
+            {
+              "deleteMapObject": 41014
+            },
+            {
+              "deleteMapObject": 41015
+            },
+            {
+              "deleteMapObject": 41016
+            },
+            {
+              "deleteMapObject": 41017
+            },
+            {
+              "deleteMapObject": 41018
+            },
+            {
+              "deleteMapObject": 41019
+            },
+            {
+              "activateMapObject": 41004
+            },
+            {
+              "activateMapObject": 41039
+            },
+            {
+              "deleteMapObject": 51004
+            },
+            {
+              "deleteMapObject": 51039
+            },
+            {
+              "deleteMapObject": 9150
+            },
+            {
+              "deleteMapObject": 9151
+            },
+            {
+              "setMapFlag": {
+                "key": "FE_DwarvenHold_Configured_dwarven_hold_exterior",
+                "val": 1
+              }
+            },
+            {
+              "issueQuest": "56"
+            },
+            {
+              "battleWithActorID": 41004
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction",
+              "not": true
+            },
+            {
+              "actorID": 9150
+            }
+          ],
+          "name": "\"I'm just passing through.\" (Decline for now)",
+          "text": "The dwarf shakes his head. \"Then turn back, stranger. Naebody gets past this pass till they've picked a side.\" If you change your mind, return tomorrow and he will ask again."
+        },
+        {
+          "condition": [
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Completed"
+            }
+          ],
+          "name": "The siege of the Dwarven Hold has already been decided. (Leave)"
+        },
+        {
+          "condition": [
+            {
+              "actorID": 9150
+            },
+            {
+              "checkQuestFlag": "FE_DwarvenHold_Faction"
+            }
+          ],
+          "name": "(Continue)"
+        }
+      ]
+    },
+    "reward": {},
+    "rewardDescription": "1000 gold, 25 shards, 3 faction cards, and 6 Fallen Empires boosters",
+    "questSourceTags": [
+      "DwarvenHoldEntry"
+    ]
+  }
 ]

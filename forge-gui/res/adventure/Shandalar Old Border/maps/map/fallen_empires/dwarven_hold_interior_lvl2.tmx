@@ -312,7 +312,7 @@
    <properties>
     <property name="Type" value="FEM Warren Goblins vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;You help us get shiny things. We like you!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;We put down blanket first. This nook is ours. You, go, go.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Warren Goblins" />
     <property name="enemy" value="FEM Warren Goblins vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -334,7 +334,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Fire fixes everything. Mostly.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;Step one: fire. Step two: ointment.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Pyro Medic" />
     <property name="enemy" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -425,7 +425,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Demolition Team" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Keep clear o' the wall, friend. We're ready tae bring it down if the goblins break through.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}, {&quot;checkMapFlag&quot;: &quot;FE_DwarvenHold_WallBlown&quot;, &quot;not&quot;: true}], &quot;text&quot;: &quot;\&quot;Listen, can ye hear how the goblins are diggin' intae our minin' tunnels? They're real close now, just beyond this wall. If we blow it from this side, we can catch 'em by surprise. Are ye ready?\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;\&quot;Sure, let's do this!\&quot;&quot;, &quot;text&quot;: &quot;BOOM! The wall blockage collapses in a cloud of dust and rubble, opening a path to the goblins on the other side.&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;: 9301}, {&quot;deleteMapObject&quot;: 9302}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_WallBlown&quot;, &quot;val&quot;: 1}}], &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}, {&quot;name&quot;: &quot;\&quot;Wait - I'm not quite ready for that.\&quot;&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Demolition Team" />
     <property name="enemy" value="FEM Dwarven Demolition Team" />
     <property name="pursueRange" type="int" value="0" />
@@ -448,7 +448,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Miner" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;These tunnels are oor livelihood. The goblins willnae take them without a fight.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Ugh, rutabagas fer breakfast, lunch, and dinner. I wish we'd had mair time tae stock the pantry afore these orcs and goblins arrived.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Miner" />
     <property name="enemy" value="FEM Dwarven Miner" />
     <property name="pursueRange" type="int" value="0" />
@@ -471,7 +471,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Digging Team vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Quiet! We dig. You keep dwarves busy.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 2}}], &quot;text&quot;: &quot;\&quot;Dig. Dig. Dig. Dig. Dig. Dig. - Now how goes the second verse?\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Digging Team" />
     <property name="enemy" value="FEM Goblin Digging Team vs Dwarves" />
     <property name="pursueRange" type="int" value="0" />
@@ -605,7 +605,7 @@
   <object id="125" template="../../../../../../common/maps/obj/collision.tx" x="296.193" y="552.239" width="19.4318" height="19.9773" />
   <object id="126" template="../../../../../../common/maps/obj/collision.tx" x="594.102" y="107.239" width="11.1591" height="18.1591" />
   <object id="127" template="../../../../../../common/maps/obj/collision.tx" x="608.708" y="368.542" width="40.9167" height="14.5833" />
-  <object id="128" template="../../../../../../common/maps/obj/collision.tx" x="620.875" y="272.25" width="2" height="34.875" />
+  <object id="128" template="../../../../../../common/maps/obj/collision.tx" x="620.875" y="272.25" width="2.13281" height="34.875" />
   <object id="129" template="../../../../../../common/maps/obj/collision.tx" x="512.739" y="64.2386" width="63.25" height="15.5227" />
   <object id="130" template="../../../../../../common/maps/obj/collision.tx" x="640.193" y="64.3295" width="80.5227" height="15.25" />
   <object id="131" template="../../../../../../common/maps/obj/collision.tx" x="615.83" y="63.5114" width="15.7955" height="9.34091" />
@@ -628,7 +628,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Miner" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;These tunnels are oor livelihood. The goblins willnae take them without a fight.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Ugh, rutabagas fer breakfast, lunch, and dinner. I wish we'd had mair time tae stock the pantry afore these orcs and goblins arrived.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Miner" />
     <property name="enemy" value="FEM Dwarven Miner" />
     <property name="pursueRange" type="int" value="0" />

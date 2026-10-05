@@ -276,7 +276,6 @@
    <properties>
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Soldier" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Soldier" />
@@ -288,7 +287,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Keep yer spells ready, friend. We'll hold this passage together.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Soldier" />
     <property name="enemy" value="FEM Dwarven Soldier" />
     <property name="pursueRange" type="int" value="0" />
@@ -299,7 +298,6 @@
    <properties>
     <property name="Type" value="FEM Dwarven Berserker" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Berserker" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Berserker|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Berserker" />
@@ -311,7 +309,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Berserker" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Let them come! There's plenty o' fight left in this hauld.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Berserker" />
     <property name="enemy" value="FEM Dwarven Berserker" />
     <property name="pursueRange" type="int" value="0" />
@@ -331,7 +329,6 @@
    <properties>
     <property name="Type" value="FEM Dwarven Lieutenant" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;We'll never give up our home here in the Crimson Peaks. Just need tae hold this gate till our reinforcements arrive from Gurn Keep. Any day now.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Lieutenant" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Heartstone|STH&quot;, &quot;Dwarven Lieutenant|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Lieutenant" />
@@ -343,7 +340,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Lieutenant" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Hold yer ground an' watch the flanks. We cannae let the raiders through.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;We'll never give up our home here in the Crimson Peaks. Just need tae hold this gate till our reinforcements arrive from Gurn Keep. Any day now.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Lieutenant" />
     <property name="enemy" value="FEM Dwarven Lieutenant" />
     <property name="pursueRange" type="int" value="0" />
@@ -381,7 +378,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Trader" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Supplies are runnin' low. Best make every spell count, friend.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Welcome, pal. As ye can see, we've got a wee bit o' a situation wi' that orc and goblin raiding party outside. But make yersel' comfortable till help arrives. Or, even better, help us yersel'.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Trader" />
     <property name="enemy" value="FEM Dwarven Trader" />
     <property name="pursueRange" type="int" value="0" />
@@ -404,7 +401,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Armorer" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;A stout coat o' mail is worth its weight in gold when the arrows start flyin'.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Few of us left, now. We'd best hide here with the weapons.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Armorer" />
     <property name="enemy" value="FEM Dwarven Armorer" />
     <property name="pursueRange" type="int" value="0" />
@@ -426,7 +423,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Weaponsmith" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Work with zeal as hammers peal! Melt, anneal, and pound the steel!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Work with zeal as hammers peal! Melt, anneal, and pound the steel!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Weaponsmith" />
     <property name="enemy" value="FEM Dwarven Weaponsmith" />
     <property name="pursueRange" type="int" value="0" />
@@ -495,7 +492,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
-    <property name="dialog" value="[{&quot;text&quot;: &quot;Keep yer spells ready, friend. We'll hold this passage together.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
+    <property name="dialog" value="[{&quot;action&quot;: [{}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Faction&quot;, &quot;op&quot;: &quot;=&quot;, &quot;val&quot;: 1}}], &quot;text&quot;: &quot;\&quot;Let no one say we did not fight until the last...\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Soldier" />
     <property name="enemy" value="FEM Dwarven Soldier" />
     <property name="pursueRange" type="int" value="0" />
