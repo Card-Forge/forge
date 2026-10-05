@@ -1,5 +1,7 @@
 package forge.gamemodes.match.input;
 
+import forge.game.UndoHistory;
+import forge.game.UndoRequestedException;
 import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
@@ -35,8 +37,24 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     }
 
     public void showAndWait() {
+        throwIfUndoAgreed();
         getController().getInputQueue().setInput(this);
         awaitLatchRelease();
+        throwIfUndoAgreed();
+    }
+
+    /**
+     * Whether this prompt is one of the points a player can undo back to (see {@link UndoHistory}).
+     * Only these give way to an agreed undo: elsewhere the game is in the middle of something.
+     */
+    public boolean isUndoPoint() {
+        return false;
+    }
+
+    private void throwIfUndoAgreed() {
+        if (isUndoPoint() && getController().getGame().getUndoHistory().hasPendingUndo()) {
+            throw new UndoRequestedException();
+        }
     }
 
     @Override

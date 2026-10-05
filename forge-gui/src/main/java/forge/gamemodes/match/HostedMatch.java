@@ -161,6 +161,7 @@ public class HostedMatch {
 
         game = match.createGame();
         game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
+        game.getUndoHistory().setEnabled(FModel.getPreferences().getPrefBoolean(FPref.MATCH_ALLOW_UNDO));
         game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));

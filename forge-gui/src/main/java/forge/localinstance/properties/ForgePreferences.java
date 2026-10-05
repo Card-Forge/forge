@@ -204,6 +204,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         MATCH_AI_TIMEOUT("5"),
         UI_ENABLE_AI_CHEATS ("false"),
         MATCH_EXPERIMENTAL_RESTORE("false"),
+        MATCH_ALLOW_UNDO("true"),
 
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),

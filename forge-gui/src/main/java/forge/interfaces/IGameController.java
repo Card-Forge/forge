@@ -39,6 +39,9 @@ public interface IGameController {
 
     void undoLastAction();
 
+    /** Ask to go back to one of this player's earlier decisions; other human players have to agree. */
+    void undoLastDecision();
+
     IDevModeCheats cheat();
 
     IMacroSystem macros();

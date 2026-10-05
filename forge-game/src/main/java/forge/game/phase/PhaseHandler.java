@@ -45,6 +45,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -93,6 +94,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
+    // set after an undo to a point at the start of a step; see mainLoopStep
+    private boolean resumeAtStepStart = false;
+    // whether an UndoRequestedException thrown now would be caught by mainLoopStep
+    private boolean inLoopStep = false;
 
     private final transient Game game;
 
@@ -303,6 +308,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
+                    if (CombatUtil.canAttack(playerTurn)) {
+                        stageUndoPoint(UndoHistory.Kind.DECLARE_ATTACKERS,
+                                List.of(Objects.requireNonNullElse(playerTurn.getDeclaresAttackers(), playerTurn)));
+                    }
                     combat.initConstraints();
                     game.getStack().freezeStack(null);
                     declareAttackersTurnBasedAction();
@@ -312,6 +321,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case COMBAT_DECLARE_BLOCKERS:
+                    stageUndoPoint(UndoHistory.Kind.DECLARE_BLOCKERS, blockDeclarers());
                     combat.removeAbsentCombatants();
                     game.getStack().freezeStack(null);
                     declareBlockersTurnBasedAction();
@@ -1037,6 +1047,79 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     public void mainLoopStep() {
+        inLoopStep = true;
+        try {
+            if (resumeAtStepStart) {
+                // Undone to the start of a step: replay its turn-based actions, as advancing into it did.
+                resumeAtStepStart = false;
+                onPhaseBegin();
+                finishLoopStep();
+            } else {
+                loopStep();
+            }
+        } catch (UndoRequestedException e) {
+            resumeAtStepStart = undoToPendingPoint();
+        } finally {
+            inLoopStep = false;
+        }
+    }
+
+    /** Whether the game loop is running a step, so an undo can unwind to it from here. */
+    public boolean canUnwindForUndo() {
+        return inLoopStep;
+    }
+
+    /**
+     * Puts the game back to the point in {@link UndoHistory} a player asked for.
+     * @return whether the game resumes at the start of the restored step rather than with priority
+     */
+    private boolean undoToPendingPoint() {
+        final UndoHistory history = game.getUndoHistory();
+        final Player by = history.getPendingUndoBy();
+        final UndoHistory.Point point = history.applyPendingUndo();
+        if (point == null) {
+            throw new IllegalStateException("Undo was requested, but its point is gone");
+        }
+        for (final Player p : game.getPlayers()) {
+            p.getController().onGameUndone();
+        }
+        game.getGameLog().add(GameLogEntryType.INFORMATION,
+                Localizer.getInstance().getMessage("lblUndoneTo", by == null ? "" : by.getName(), point.getTurn(),
+                        point.getPhase() == null ? "" : point.getPhase().nameForUi));
+        game.fireEvent(new GameEventUndone(PlayerView.get(by), PlayerView.get(playerTurn), phase,
+                PlayerView.getCollection(game.getPlayers()), CardView.getCollection(game.getCardsInGame())));
+        return point.getKind().resumesAtStepStart();
+    }
+
+    private void stageUndoPoint(final UndoHistory.Kind kind, final List<Player> askedToAct) {
+        final UndoHistory history = game.getUndoHistory();
+        if (!history.isEnabled()) {
+            return;
+        }
+        final List<Player> humans = Lists.newArrayList();
+        for (final Player p : askedToAct) {
+            if (!p.getController().isAI()) {
+                humans.add(p);
+            }
+        }
+        history.stageStepStart(kind, humans);
+    }
+
+    /** Who will be asked to declare blockers, mirroring {@link #declareBlockersTurnBasedAction()}. */
+    private List<Player> blockDeclarers() {
+        final List<Player> result = Lists.newArrayList();
+        if (combat == null) {
+            return result;
+        }
+        for (final Player p : game.getPlayers()) {
+            if (p != playerTurn && combat.isPlayerAttacked(p) && CombatUtil.canBlock(p, combat)) {
+                result.add(Objects.requireNonNullElse(p.getDeclaresBlockers(), p));
+            }
+        }
+        return result;
+    }
+
+    private void loopStep() {
         if (givePriorityToPlayer) {
             if (DEBUG_PHASES) {
                 sw.start();
@@ -1146,6 +1229,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             pPlayerPriority = nextPlayer;
         }
 
+        finishLoopStep();
+    }
+
+    private void finishLoopStep() {
         // If ever the karn's ultimate resolved
         if (game.getAge() == GameStage.RestartedByKarn) {
             setPhase(null);

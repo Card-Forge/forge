@@ -63,6 +63,7 @@ import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.DrawOfferCoordinator;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.UndoRequestCoordinator;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.*;
@@ -1524,15 +1525,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         // This input should not modify combat object itself, but should return user choice
+        final UndoHistory.Point undoPoint = getGame().getUndoHistory().commitStepStart(player, UndoHistory.Kind.DECLARE_ATTACKERS);
         final InputAttack inpAttack = new InputAttack(this, attackingPlayer, combat);
         inpAttack.showAndWait();
+        if (undoPoint != null) {
+            undoPoint.setOutcome(localizer.getMessage("lblUndoOutcomeAttacked", combat.getAttackers().size()));
+        }
     }
 
     @Override
     public void declareBlockers(final Player defender, final Combat combat) {
         // This input should not modify combat object itself, but should return user choice
+        final UndoHistory.Point undoPoint = getGame().getUndoHistory().commitStepStart(player, UndoHistory.Kind.DECLARE_BLOCKERS);
         final InputBlock inpBlock = new InputBlock(this, defender, combat);
         inpBlock.showAndWait();
+        if (undoPoint != null) {
+            undoPoint.setOutcome(localizer.getMessage("lblUndoOutcomeBlocked",
+                    CardLists.filterControlledBy(combat.getAllBlockers(), defender).size()));
+        }
         getGui().updateAutoPassPrompt();
     }
 
@@ -1717,9 +1727,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         netLog.trace("Creating InputPassPriority for player {}", player.getName());
+        final UndoHistory.Point undoPoint = getGame().getUndoHistory().recordPriority(player);
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
         netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
+        if (undoPoint != null) {
+            final List<SpellAbility> chosen = defaultInput.getChosenSa();
+            undoPoint.setOutcome(chosen == null || chosen.isEmpty()
+                    ? localizer.getMessage("lblUndoOutcomePassed")
+                    : localizer.getMessage("lblUndoOutcomePlayed", chosen.get(0).getHostCard().getName()));
+        }
         return defaultInput.getChosenSa();
     }
 
@@ -3669,6 +3686,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
         }
+    }
+
+    @Override
+    public void undoLastDecision() {
+        // Choosing the point and collecting approvals wait on players, so off the UI and game threads
+        FThreads.invokeInBackgroundThread(() -> UndoRequestCoordinator.request(this));
+    }
+
+    @Override
+    public boolean offerUndoInsteadOfLosing() {
+        return UndoRequestCoordinator.requestBeforeLosing(this);
+    }
+
+    @Override
+    public void onGameUndone() {
+        // Whatever yield was set since belongs to the future that was taken back
+        autoPassCancel();
     }
 
     @Override

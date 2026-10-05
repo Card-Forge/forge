@@ -105,6 +105,7 @@ public class Game {
 
     // If this merges with LKI In the future, it will need to change forms
     private GameSnapshot previousGameState = null;
+    private final UndoHistory undoHistory = new UndoHistory(this);
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
@@ -205,6 +206,10 @@ public class Game {
             previousGameState = new GameSnapshot(this);
             previousGameState.makeCopy();
         }
+    }
+
+    public UndoHistory getUndoHistory() {
+        return undoHistory;
     }
 
     public boolean restoreGameState() {
