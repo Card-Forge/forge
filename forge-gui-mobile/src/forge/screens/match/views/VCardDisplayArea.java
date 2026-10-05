@@ -44,6 +44,12 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     private final Supplier<Set<Integer>> infoGhostCardIds = Suppliers.memoize(HashSet::new);
     private boolean rotateCards180;
 
+    // NEW: what the previous refresh showed. The row's cardPanels is already emptied before refreshCardPanels
+    // runs (so it can't be used to find departed cards), which is why we keep our own list.
+    private final List<CardAreaPanel> shownLastRefresh = new ArrayList<>();
+    private int shownGeneration;
+    private static int generation; // bumped on every new game so the old board never counts as "departures"
+
     public Iterable<CardView> getOrderedCards() {
         return orderedCards.get();
     }
@@ -72,12 +78,27 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     protected boolean animateEntry() { return false; }
 
     protected void refreshCardPanels(Iterable<CardView> model) {
+        // NEW: the panels the previous refresh showed, to detect cards that left the row
+        List<CardAreaPanel> oldPanels = null;
+        List<CardAreaPanel> shownNow = null;
+        if (animateEntry()) {
+            if (shownGeneration != generation) { // new game started: forget the old board
+                shownLastRefresh.clear();
+                shownGeneration = generation;
+            }
+            oldPanels = new ArrayList<>(shownLastRefresh);
+            shownNow = new ArrayList<>();
+        }
+
         clear();
         CardAreaPanel newCardPanel = null;
         Set<CardView> known = animateEntry() ? new HashSet<>(orderedCards.get()) : null;
+        Set<CardView> current = animateEntry() ? new HashSet<>() : null; // NEW: every card in this refresh
         if (model != null) {
             for (CardView card : model) {
+                if (current != null) { current.add(card); } // NEW
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                if (shownNow != null) { shownNow.add(cardPanel); } // NEW
                 boolean isNew = known != null ? !known.contains(card)
                         : (newCardPanel == null && !orderedCards.get().contains(card));
                 addCardPanelToDisplayArea(cardPanel, known);   // animation check moved inside
@@ -87,6 +108,18 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 }
             }
         }
+
+        // NEW: cards that were here before but are not in the model any more have left the battlefield
+        if (oldPanels != null) {
+            for (CardAreaPanel p : oldPanels) {
+                if (current.contains(p.getCard())) { continue; }
+                CardAreaPanel.forgetAnimated(p.getCard()); // so it can animate in again if it comes back
+                p.playLeaveAnimation();
+            }
+            shownLastRefresh.clear();          // this refresh becomes the baseline for the next one
+            shownLastRefresh.addAll(shownNow);
+        }
+
         if (isVisible()) { //only revalidate if currently visible
             revalidate();
 
@@ -262,6 +295,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private CardFlightOverlay.Flight flight;
         private final Rectangle lastHandRect = new Rectangle();
         private boolean hasHandRect;
+        // NEW: where this card last was on the battlefield row (used to start the leave animation)
+        private final Rectangle lastFieldRect = new Rectangle();
+        private float lastFieldAngle;
+        private boolean hasFieldRect;
         private static final Set<Integer> animatedIds = ConcurrentHashMap.newKeySet();
         public static Rectangle takeHandStart(CardView card) {
             return handStarts.remove(card.getId());
@@ -283,11 +320,21 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             entryStart = System.currentTimeMillis();
             Gdx.graphics.requestRendering();
         }
+        // NEW: card left the battlefield row (destroyed, exiled, bounced...): animate it leaving from its last spot
+        public void playLeaveAnimation() {
+            if (!hasFieldRect) { return; }
+            hasFieldRect = false;
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_PLAY_ANIMATION)) { return; }
+            if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
+            CardFlightOverlay.startLeave(getCard(), new Rectangle(lastFieldRect), lastFieldAngle);
+        }
         private static boolean isHandShownFor(CardView card) {
             VPlayerPanel pp = MatchScreen.getPlayerPanel(card.getController());
             if (pp == null) { return false; }
             VPlayerPanel.InfoTab tab = pp.getSelectedTab();
-            return tab instanceof VPlayerPanel.InfoTabZone z && z.zoneType == ZoneType.Hand;
+            // CHANGED: plain cast instead of the Java 16+ pattern match, so older Android language levels compile
+            return tab instanceof VPlayerPanel.InfoTabZone
+                    && ((VPlayerPanel.InfoTabZone) tab).zoneType == ZoneType.Hand;
         }
         public static CardAreaPanel get(CardView card0) {
             CardAreaPanel cardPanel = allCardPanels.get(card0.getId());
@@ -315,6 +362,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             handStarts.clear();
             animatedIds.clear();
             CardFlightOverlay.clear();
+            generation++; // NEW: field rows drop their remembered board on their next refresh
         }
 
         private VCardDisplayArea displayArea;
@@ -625,6 +673,12 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public void draw(Graphics g) {
+            // NEW: remember where this card is on the battlefield row, for the leave animation
+            if (displayArea != null && displayArea.animateEntry() && getWidth() > 0 && flight == null) {
+                lastFieldRect.set(screenPos);
+                lastFieldAngle = isTapped() ? getTappedAngle() : 0f;
+                hasFieldRect = true;
+            }
             if (getCard().getZone() == ZoneType.Hand && getWidth() > 0) {
                 lastHandRect.set(screenPos); // remember where we last appeared in a visible hand
                 hasHandRect = true;
