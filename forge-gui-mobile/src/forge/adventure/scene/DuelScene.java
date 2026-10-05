@@ -777,6 +777,9 @@ public class DuelScene extends ForgeScene {
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena, AdventureEventData eventData) {
         this.player = playerSprite;
         this.enemy = enemySprite;
+        //The shared splash avatar buffer caches its frame buffer on first paint, so it must be
+        //cleared per duel to avoid showing the previous opponent's portrait.
+        enemyAvatar.clear();
         this.isArena = isArena;
         this.eventData = eventData;
         if (eventData != null && eventData.eventRules == null)
