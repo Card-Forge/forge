@@ -282,4 +282,44 @@ public class CombatExplainerTest extends SimulationTest {
 
         assertContains(CombatUtil.validateBlocks(combat, defending), brute.toString(), "at least 2", "Menace");
     }
+
+    // Marble Priest: only specific creatures (Walls) are required to block it
+    @Test
+    public void testMustBeBlockedBySpecificCreatures() {
+        setUp();
+        Card priest = addCreature("Marble Priest", attacking);
+        Card other = addCreature("Grizzly Bears", attacking);
+        Card wall = addCreature("Wall of Wood", defending);
+        Card bear = addCreature("Grizzly Bears", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(priest, defending);
+        combat.addAttacker(other, defending);
+
+        assertContains(CombatUtil.validateBlocks(combat, defending), wall + " must block " + priest,
+                "All Walls able to block Marble Priest do so.");
+        // creatures that aren't Walls are free to block something else
+        AssertJUnit.assertNull(CombatExplainer.whyCantBlock(other, bear, combat));
+
+        combat.addBlocker(other, wall);
+        assertContains(CombatUtil.validateBlocks(combat, defending), wall + " is blocking " + other, "must block " + priest);
+    }
+
+    // "target creature blocks target creature this turn if able" (e.g. Hunt Down)
+    @Test
+    public void testMustBlockSpecificAttacker() {
+        setUp();
+        Card required = addCreature("Grizzly Bears", attacking);
+        Card other = addCreature("Runeclaw Bear", attacking);
+        Card blocker = addCreature("Centaur Courser", defending);
+        blocker.addMustBlockCard(game.getNextTimestamp(), required);
+        Combat combat = startCombat();
+        combat.addAttacker(required, defending);
+        combat.addAttacker(other, defending);
+
+        assertContains(CombatUtil.validateBlocks(combat, defending), blocker + " must block " + required + " if able");
+        assertContains(CombatExplainer.whyCantBlock(other, blocker, combat), blocker + " must block " + required);
+
+        combat.addBlocker(other, blocker);
+        assertContains(CombatUtil.validateBlocks(combat, defending), blocker + " is blocking " + other, "must block " + required);
+    }
 }

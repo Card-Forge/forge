@@ -538,7 +538,7 @@ public final class CombatExplainer {
         final Localizer loc = Localizer.getInstance();
         final Set<String> reasons = new LinkedHashSet<>();
         if (blocker.getMustBlockCards().contains(attacker)) {
-            reasons.add(loc.getMessage("lblWhyBlockReqEffect", blocker, attacker));
+            reasons.add(loc.getMessage("lblWhyBlockReqEffect"));
         }
         for (final String keyword : LURE_KEYWORDS) {
             if (!attacker.hasStartOfKeyword(keyword)) {
@@ -562,7 +562,7 @@ public final class CombatExplainer {
             }
         }
         if (reasons.isEmpty()) {
-            reasons.add(loc.getMessage("lblWhyBlockReqEffect", blocker, attacker));
+            reasons.add(loc.getMessage("lblWhyBlockReqEffect"));
         }
         return String.join("; ", reasons);
     }
@@ -576,10 +576,17 @@ public final class CombatExplainer {
     };
 
     private static String describeLureKeyword(final Card attacker, final String keyword) {
+        String text = keyword;
         if (keyword.startsWith("MustBeBlockedBy")) {
-            return Localizer.getInstance().getMessage("lblWhyBlockReqMustBeBlockedBy", attacker);
+            // MustBeBlockedByAll:<valid>:<description>
+            final String[] parts = keyword.split(":", 3);
+            if (parts.length < 3) {
+                return Localizer.getInstance().getMessage("lblWhyBlockReqMustBeBlockedBy", attacker);
+            }
+            text = parts[2];
         }
-        return attacker + ": " + keyword.replace("CARDNAME", attacker.getName());
+        return attacker + ": " + TextUtil.fastReplace(CardTranslation.translateSingleDescriptionText(text, attacker),
+                "CARDNAME", attacker.getName());
     }
 
     private static StaticAbility findStaticAbility(final Card card, final long id) {
