@@ -108,6 +108,10 @@ public class Assets implements Disposable {
     private GifAnimation gifAnimation;
     private boolean isDisposed = false;
     private int miniMapID;
+    private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
+    private static final String COUNTER_FONT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
+
+    private FileHandle counterFontHandle; // cached
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -181,22 +185,39 @@ public class Assets implements Disposable {
     }
 
     public BitmapFont getCounterFont(int fontSize) {
-        String key = "Roboto-Bold-" + fontSize + ".ttf";
-        FileHandle ttfHandle = getFileHandle(ForgeConstants.COMMON_FONTS_DIR + "/Roboto-Bold.ttf");
-        if (ttfHandle == null || !ttfHandle.exists()) {
+        if (fontSize <= 0) {
             return null;
         }
-        if (!manager.isLoaded(key, BitmapFont.class)) {
-            FreetypeFontLoader.FreeTypeFontLoaderParameter param = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-            param.fontFileName = ttfHandle.path();
-            param.fontParameters.size = fontSize;
-            param.fontParameters.characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
-            manager.load(key, BitmapFont.class, param);
-            manager.finishLoadingAsset(key);
+
+        // faux key only for storing different font size params with the same ttf font
+        final String key = "Roboto-Bold-" + fontSize + ".ttf";
+
+        // Fast path: already loaded, no file system lookups
+        if (manager.isLoaded(key, BitmapFont.class)) {
+            return manager.get(key, BitmapFont.class);
         }
+
+        // Resolve the TTF only once
+        if (counterFontHandle == null || !counterFontHandle.exists()) {
+            counterFontHandle = getFileHandle(ForgeConstants.COMMON_FONTS_DIR + "/" + COUNTER_FONT_FILE);
+            if (counterFontHandle == null || !counterFontHandle.exists()) {
+                counterFontHandle = null;
+                return null; // caller should fall back to a default font ideally
+            }
+        }
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter param = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        param.fontFileName = counterFontHandle.path();
+        param.fontParameters.size = fontSize;
+        param.fontParameters.characters = COUNTER_FONT_CHARS;
+        param.fontParameters.minFilter = Texture.TextureFilter.Linear;
+        param.fontParameters.magFilter = Texture.TextureFilter.Linear;
+        param.fontParameters.hinting = FreeTypeFontGenerator.Hinting.AutoMedium;
+
+        manager.load(key, BitmapFont.class, param);
+        manager.finishLoadingAsset(key);
         return manager.get(key, BitmapFont.class);
     }
-
 
     public GifAnimation getGifAnimation() {
         return gifAnimation;
