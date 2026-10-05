@@ -2497,8 +2497,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Sneak") || keyword.startsWith("Squad")
                         || keyword.startsWith("Emerge") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up") || keyword.startsWith("Plot")
-                        || keyword.startsWith("Impending") || keyword.equals("Suspend")
-                        || keyword.startsWith("Sticker Kicker")) {
+                        || keyword.startsWith("Impending") || keyword.equals("Suspend")) {
                     sbLong.append(inst.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
@@ -7483,30 +7482,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean isOptionalCostPaid(OptionalCost cost) { return getCastSA() == null ? false : getCastSA().isOptionalCostPaid(cost); }
 
     public final int getKickerMagnitude(CardTraitBase ctb) {
-        if (this.equals(ctb.getHostCard())) {
-            if (!ctb.isIntrinsic()) {
-                if (ctb.getKeyword() != null && ctb.getKeyword().getKeyword().equals(Keyword.STICKER_KICKER)) {
-                    if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(ctb.getKeyword())) {
-                        return getCastSA().getOptionalKeywordAmount(ctb.getKeyword());
-                    }
-                }
-            } else {
-                for (KeywordInterface ki : this.currentState.getIntrinsicKeywords()) {
-                    switch (ki.getKeyword()) {
-                        case MULTIKICKER:
-                            if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.MULTIKICKER)) {
-                                return getCastSA().getOptionalKeywordAmount(Keyword.MULTIKICKER);
-                            }
-                            break;
-                        case STICKER_KICKER:
-                            if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.STICKER_KICKER)) {
-                                return 1;
-                            }
-                            break;
-                        case KICKER:
-                            boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
-                            return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
-                    }
+        if (this.equals(ctb.getHostCard()) && ctb.isIntrinsic()) {
+            for (KeywordInterface ki : this.currentState.getIntrinsicKeywords()) {
+                switch (ki.getKeyword()) {
+                    case MULTIKICKER:
+                        if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.MULTIKICKER)) {
+                            return getCastSA().getOptionalKeywordAmount(Keyword.MULTIKICKER);
+                        }
+                        break;
+                    case STICKER_KICKER:
+                        if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.STICKER_KICKER)) {
+                            return 1;
+                        }
+                        break;
+                    case KICKER:
+                        boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
+                        return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
                 }
             }
         } else {

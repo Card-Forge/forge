@@ -881,6 +881,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPutSticker cost) {
+        int c = cost.getAbilityAmount(ability);
+        return PaymentDecision.number(c);
+    }
+
+    @Override
     public boolean paysRightAfterDecision() {
         return false;
     }

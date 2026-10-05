@@ -33,7 +33,6 @@ import forge.game.mana.Mana;
 import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -304,10 +303,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
             addAbilityActivatedThisTurn(sp);
-        }
-        if(sp.isSpell()) {
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(sp.getHostCard());
-            game.getReplacementHandler().run(ReplacementType.PutOnStack, runParams);
         }
 
         // The ability is added to stack HERE

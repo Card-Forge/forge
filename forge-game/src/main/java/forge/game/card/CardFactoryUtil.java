@@ -2474,20 +2474,7 @@ public class CardFactoryUtil {
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, hasteSa, false, true, intrinsic, "Card.Self", "");
 
             inst.addReplacement(cardre);
-        } else if (keyword.startsWith("Sticker Kicker")) {
-            String getTicket = "DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1";
-            String putSticker = "DB$ PutSticker | Defined$ ReplacedCard | Optional$ True";
-
-            SpellAbility sa = AbilityFactory.getAbility(getTicket, card);
-            sa.setIntrinsic(intrinsic);
-            final AbilitySub dessub = (AbilitySub) AbilityFactory.getAbility(putSticker, card);
-            sa.setSubAbility(dessub);
-
-            String repeffstr = "Event$ PutOnStack | ValidCard$ Card.Self+kicked | ActiveZones$ Stack | ReplacementResult$ Updated";
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
-            re.setOverridingAbility(sa);
-            inst.addReplacement(re);
-        } else if (keyword.equals("Sunburst")) {
+        }  else if (keyword.equals("Sunburst")) {
             // Rule 702.43a If this object is entering the battlefield as a creature,
             // ignoring any type-changing effects that would affect it
             CounterType t = host.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE;

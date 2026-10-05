@@ -687,7 +687,7 @@ public final class GameActionUtil {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);
                 String str = "Pay for Sticker Kicker? " + cost.toSimpleString();
-
+                cost.add(new Cost("AddCounterYou<1/TICKET> PutSticker", false));;
                 if (pc.addKeywordCost(sa, cost, ki, str)) {
                     if (result == null) {
                         result = sa.copy();
