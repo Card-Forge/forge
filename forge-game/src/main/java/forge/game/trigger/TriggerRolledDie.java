@@ -28,49 +28,66 @@ public class TriggerRolledDie extends Trigger {
             if (!(boolean) runParams.getOrDefault(AbilityKey.RolledToVisitAttractions, false))
                 return false;
         }
-        if (hasParam("ValidResult")) {
-            String[] params = getParam("ValidResult").split(",");
-            int result = (int) runParams.get(AbilityKey.Result);
-            if (hasParam("Natural") && runParams.containsKey(AbilityKey.NaturalResult)) {
-                result = (int) runParams.get(AbilityKey.NaturalResult);
-            }
-            for (String param : params) {
-                if (StringUtils.isNumeric(param)) {
-                    if (param.equals("" + result)) return true;
-                } else if (param.equals("Highest")) {
-                    final int sides = (int) runParams.get(AbilityKey.Sides);
-                    if (result == sides) return true;
-                } else {
-                    final String comp = param.substring(0, 2);
-                    final int rightSide = Integer.parseInt(param.substring(2));
-                    if (Expressions.compare(result, comp, rightSide)) return true;
-                }
-            }
+        if(!isResultValid(runParams)) {
             return false;
         }
         if (hasParam("ValidSides")) {
             final int validSides = Integer.parseInt(getParam("ValidSides"));
             final int sides = (int) runParams.get(AbilityKey.Sides);
-            if (sides == validSides) return true;
+            if (sides != validSides) return false;
         }
 
         if (hasParam("Number")) {
             if (((Integer) runParams.get(AbilityKey.Number)) != Integer.parseInt(getParam("Number"))) {
                 return false;
             }
-        } 
+        }
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.SourceSA))) {
+            return false;
+        }
+
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Result, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Result, AbilityKey.Player, AbilityKey.SourceSA);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         return Localizer.getInstance().getMessage("lblPlayer") + ": " + sa.getTriggeringObject(AbilityKey.Player) + ", " +
                 Localizer.getInstance().getMessage("lblResultIs", sa.getTriggeringObject(AbilityKey.Result));
+    }
+
+    private boolean isResultValid(Map<AbilityKey, Object> runParams) {
+        if (!hasParam("ValidResult")) {
+            return true;
+        }
+        String[] params = getParam("ValidResult").split(",");
+        int result = (int) runParams.get(AbilityKey.Result);
+        if (hasParam("Natural") && runParams.containsKey(AbilityKey.NaturalResult)) {
+            result = (int) runParams.get(AbilityKey.NaturalResult);
+        }
+        for (String param : params) {
+            if (StringUtils.isNumeric(param)) {
+                if (result == Integer.parseInt(param)) {
+                    return true;
+                }
+            } else if (param.equals("Highest")) {
+                final int sides = (int) runParams.get(AbilityKey.Sides);
+                if (result == sides) {
+                    return true;
+                }
+            } else {
+                final String comp = param.substring(0, 2);
+                final int rightSide = Integer.parseInt(param.substring(2));
+                if (Expressions.compare(result, comp, rightSide)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

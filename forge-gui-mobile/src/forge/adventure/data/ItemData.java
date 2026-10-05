@@ -57,8 +57,11 @@ public class ItemData implements Serializable, Cloneable {
 
     public String getDescription() {
         String result = "";
-        if(this.description != null && !this.description.isEmpty())
-            result += description + "\n";
+        String translatedDescription = forge.Forge.getLocalizer().getMessageorUseDefault(
+            "adv.item." + makeKey(name) + ".description", "");
+        String baseDescription = !translatedDescription.isEmpty() ? translatedDescription : this.description;
+        if(baseDescription != null && !baseDescription.isEmpty())
+            result += baseDescription + "\n";
         if(this.equipmentSlot != null && !this.equipmentSlot.isEmpty())
             result += "Slot: " + this.equipmentSlot + "\n";
         if(effect != null)
@@ -70,6 +73,20 @@ public class ItemData implements Serializable, Cloneable {
 
     public String getName() {
         return name;
+    }
+
+    public String getDisplayName() {
+        return forge.Forge.getLocalizer().getMessageorUseDefault(
+            "adv.item." + makeKey(name) + ".displayName", name);
+    }
+
+    //Builds a .properties key from this item's English name by dropping the
+    //characters that would otherwise break a properties key (space, ':'),
+    //keeping everything else (letters, digits, apostrophes, hyphens...) as-is.
+    //e.g. "Silver Challenge Coin" -> "SilverChallengeCoin"
+    private static String makeKey(String text) {
+        if (text == null) return "";
+        return text.replace(":", "").replace(" ", "");
     }
 
     @Override

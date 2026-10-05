@@ -160,6 +160,7 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> dungeonPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> attractionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> contraptionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> stickerSheetPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)), PaperCard.class));
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         ImageKeys.initializeDirs(
@@ -355,6 +356,10 @@ public final class FModel {
 
     public static ItemPool<PaperCard> getContraptionPool() {
         return contraptionPool.get();
+    }
+
+    public static ItemPool<PaperCard> getStickerSheetPool() {
+        return stickerSheetPool.get();
     }
 
     private static boolean keywordsLoaded = false;

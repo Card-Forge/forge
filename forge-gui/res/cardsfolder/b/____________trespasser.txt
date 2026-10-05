@@ -1,0 +1,9 @@
+Name:_____ _____ _____ Trespasser
+ManaCost:1 U
+Types:Creature Human Rogue Guest
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it.
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name
+A:AB$ Pump | Cost$ 3 U | Defined$ Self | NumAtt$ X | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME gets +1/+0 until end of turn for each name sticker on it. It can't be blocked this turn.
+SVar:X:Count$CardStickers.Name
+Oracle:When this creature enters, you may put a name sticker on it.\n{3}{U}: This creature gets +1/+0 until end of turn for each name sticker on it. It can't be blocked this turn.

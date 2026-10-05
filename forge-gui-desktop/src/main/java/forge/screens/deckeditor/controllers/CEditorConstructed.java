@@ -63,7 +63,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool,
-            commanderPool, dungeonPool, attractionPool, contraptionPool;
+            commanderPool, dungeonPool, attractionPool, contraptionPool, stickerSheetPool;
 
     CardManager catalogManager;
     CardManager deckManager;
@@ -154,6 +154,10 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         contraptionPool = FModel.getContraptionPool();
         if(!contraptionPool.isEmpty()) //Hide if un-cards are disabled.
             allSections.add(DeckSection.Contraptions);
+
+        stickerSheetPool = FModel.getStickerSheetPool();
+        if(!stickerSheetPool.isEmpty()) //Hide if un-cards are disabled.
+            allSections.add(DeckSection.Stickers);
 
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false, false);
         deckManager = new CardManager(getCDetailPicture(), false, false, false);
@@ -367,6 +371,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Contraptions:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltocontraptiondeck"));
             break;
+        case Stickers:
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltostickersheets"));
+            break;
         }
     }
 
@@ -407,6 +414,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Contraptions:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromcontraptiondeck"));
+            break;
+        case Stickers:
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromstickersheets"));
             break;
         }
         addChangePrintingEntryIfApplicable(cmb);
@@ -631,6 +641,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 catalogManager.setPool(attractionPool, true);
                 catalogManager.setAllowMultipleSelections(true);
                 deckManager.setPool(this.controller.getModel().getOrCreate(DeckSection.Attractions));
+                break;
+            case Stickers:
+                catalogManager.setup(ItemManagerConfig.STICKER_SHEET_POOL);
+                catalogManager.setPool(stickerSheetPool, true);
+                catalogManager.setAllowMultipleSelections(true);
+                deckManager.setPool(this.controller.getModel().getOrCreate(DeckSection.Stickers));
                 break;
             case Contraptions:
                 catalogManager.setup(ItemManagerConfig.CONTRAPTION_POOL);

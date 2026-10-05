@@ -18,12 +18,13 @@ public enum DeckSection {
     Conspiracy("lblConspiracies", PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)),
     Dungeon("lblDungeons", PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)),
     Attractions("lblAttractions", PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)),
-    Contraptions("lblContraptions", PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION));
+    Contraptions("lblContraptions", PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)),
+    Stickers("lblStickerSheets", PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET));
 
     /**
      * Array of DeckSections that contain nontraditional cards.
      */
-    public static final DeckSection[] NONTRADITIONAL_SECTIONS = new DeckSection[]{Avatar, Planes, Schemes, Conspiracy, Dungeon, Attractions, Contraptions};
+    public static final DeckSection[] NONTRADITIONAL_SECTIONS = new DeckSection[]{Avatar, Planes, Schemes, Conspiracy, Dungeon, Attractions, Contraptions, Stickers};
 
     private final String nameLbl;
     private final Predicate<PaperCard> fnValidator;
@@ -70,6 +71,8 @@ public enum DeckSection {
             return Attractions;
         if (DeckSection.Contraptions.validate(card))
             return Contraptions;
+        if (DeckSection.Stickers.validate(card))
+            return Stickers;
         return Main;  // default
     }
 

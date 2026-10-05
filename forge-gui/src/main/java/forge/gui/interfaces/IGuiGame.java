@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public interface IGuiGame {
 
@@ -305,9 +306,19 @@ public interface IGuiGame {
 
     /**
      * Apply a delta update packet to the local game state.
+     * No-op for offline games - network implementation is in {@link NetworkGuiGame}.
      * @param packet the delta packet containing changes
      */
-    void applyDelta(DeltaPacket packet);
+    default void applyDelta(DeltaPacket packet) {}
+
+    /**
+     * Blocks the game thread until a synchronized input is done. Answers normally arrive on
+     * another thread. A GUI whose peer can only answer on this thread (a single-threaded host)
+     * overrides this to take those answers here until {@code done} opens.
+     */
+    default void awaitInput(final CountDownLatch done) throws InterruptedException {
+        done.await();
+    }
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

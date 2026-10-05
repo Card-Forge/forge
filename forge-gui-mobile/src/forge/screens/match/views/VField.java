@@ -267,6 +267,9 @@ public class VField extends FContainer {
         }
 
         @Override
+        protected boolean animateEntry() { return true; }
+
+        @Override
         protected float getCardWidth(float cardHeight) {
             return cardHeight; //allow cards room to tap
         }

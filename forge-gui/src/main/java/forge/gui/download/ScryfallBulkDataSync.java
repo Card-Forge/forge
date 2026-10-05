@@ -157,7 +157,7 @@ public final class ScryfallBulkDataSync {
         if (status != HttpURLConnection.HTTP_OK) {
             throw new IOException("HTTP " + status + " for " + downloadUrl);
         }
-        final long totalBytes = conn.getContentLengthLong();
+        final long totalBytes = conn.getContentLength();
         final long[] bytesRead = {0};
         final long[] cardsSeen = {0};
 

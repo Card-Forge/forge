@@ -507,7 +507,8 @@ public class DeckRecognizer {
 
     // "?" is part of several card names, e.g. "Continue?", "When Will You Learn?" and
     // "Which of You Burns Brightest?", none of which could be imported before.
-    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\?\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
+    // Underscores are part of a card name in Unfinity, as in "_____ Goblin".
+    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[_a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\?\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
     /**
      * One segment of a collector number: either it contains a digit, or it is uppercase
@@ -876,8 +877,6 @@ public class DeckRecognizer {
         // if matched section is not allowed, try to match the card to main.
         // if that won't work, return matched section as this will potentially be an unsupported card!
         return DeckSection.Main.validate(card) ? DeckSection.Main : matchedSection;
-
-
     }
 
     private boolean hasGameFormatConstraints() {
