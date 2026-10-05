@@ -26,21 +26,34 @@ public class StaticAbilityMustAttack {
                 }
                 if (stAb.matchesValidParam("ValidCreature", attacker)) {
                     if (stAb.hasParam("MustAttack")) {
-                        List<GameEntity> def = AbilityUtils.getDefinedEntities(stAb.getHostCard(), stAb.getParam("MustAttack"), stAb);
-                        for (GameEntity e : def) {
-                            if ((e instanceof Player attackPl && game.getPhaseHandler().isPlayerTurn(attackPl)) ||
-                                    ((e instanceof Card attackPw && game.getPhaseHandler().isPlayerTurn(attackPw.getController())))) {
-                                // CR 506.2
-                                continue;
-                            }
-                            entityList.add(e);
-                        }
+                        entityList.addAll(definedMustAttack(stAb));
                     } else {
                         // if the list is only the attacker, the attacker must attack, but no specific entity
                         entityList.add(attacker);
                     }
                 }
             }
+        }
+        return entityList;
+    }
+
+    /**
+     * @return the entities the MustAttack static ability requires to be attacked,
+     *         empty if it doesn't require a specific entity to be attacked
+     */
+    public static List<GameEntity> definedMustAttack(final StaticAbility stAb) {
+        final List<GameEntity> entityList = new ArrayList<>();
+        if (!stAb.hasParam("MustAttack")) {
+            return entityList;
+        }
+        final Game game = stAb.getHostCard().getGame();
+        for (GameEntity e : AbilityUtils.getDefinedEntities(stAb.getHostCard(), stAb.getParam("MustAttack"), stAb)) {
+            if ((e instanceof Player attackPl && game.getPhaseHandler().isPlayerTurn(attackPl)) ||
+                    ((e instanceof Card attackPw && game.getPhaseHandler().isPlayerTurn(attackPw.getController())))) {
+                // CR 506.2
+                continue;
+            }
+            entityList.add(e);
         }
         return entityList;
     }

@@ -163,7 +163,7 @@ public final class CombatExplainer {
             candidates.add(attack);
         }
         // with one more attacker
-        final Map<Card, GameEntity> additional = getAdditionalAttackers(combat, declared);
+        final Map<Card, GameEntity> additional = getAdditionalAttackers(combat, declared, best.getLeft());
         for (final Map.Entry<Card, GameEntity> e : additional.entrySet()) {
             final Map<Card, GameEntity> attack = new LinkedHashMap<>(declared);
             attack.put(e.getKey(), e.getValue());
@@ -208,15 +208,20 @@ public final class CombatExplainer {
     /**
      * @return the creatures that could additionally attack without paying a cost, mapped to the defender they'd attack
      */
-    private static Map<Card, GameEntity> getAdditionalAttackers(final Combat combat, final Map<Card, GameEntity> declared) {
+    private static Map<Card, GameEntity> getAdditionalAttackers(final Combat combat, final Map<Card, GameEntity> declared,
+            final Map<Card, GameEntity> best) {
         final Map<Card, GameEntity> result = new LinkedHashMap<>();
-        final List<GameEntity> defenders = Lists.newArrayList(declared.values());
-        defenders.addAll(combat.getDefenders());
         for (final Card c : combat.getAttackingPlayer().getCreaturesInPlay()) {
             if (declared.containsKey(c) || !combat.getAttackConstraints().getRestrictions().containsKey(c)) {
                 continue;
             }
-            // prefer a defender already being attacked
+            // prefer the defender it has to attack, then a defender already being attacked
+            final List<GameEntity> defenders = Lists.newArrayList();
+            if (best.containsKey(c)) {
+                defenders.add(best.get(c));
+            }
+            defenders.addAll(declared.values());
+            defenders.addAll(combat.getDefenders());
             for (final GameEntity defender : defenders) {
                 if (CombatUtil.canAttack(c, defender) && CombatUtil.getAttackCost(c.getGame(), c, defender) == null) {
                     result.put(c, defender);
@@ -293,11 +298,20 @@ public final class CombatExplainer {
 
             // requirements for this creature itself to attack
             if (requirement.countOwnViolations(declaredDefender) > requirement.countOwnViolations(bestDefender)) {
-                if (card.isGoaded()) {
+                if (card.isGoaded() && declaredDefender == null) {
                     lines.add(loc.getMessage("lblWhyAttackGoadedMust", card, Lang.joinHomogenous(card.getGoaded())));
                 }
                 for (final StaticAbility stAb : StaticAbilityMustAttack.mustAttackSources(card)) {
-                    lines.add(loc.getMessage("lblWhyAttackMustAttack", card, describeSource(stAb)));
+                    final List<GameEntity> mustAttack = StaticAbilityMustAttack.definedMustAttack(stAb);
+                    if (mustAttack.isEmpty()) {
+                        if (declaredDefender == null) {
+                            lines.add(loc.getMessage("lblWhyAttackMustAttack", card, describeSource(stAb)));
+                        }
+                    } else if (!mustAttack.contains(declaredDefender)) {
+                        // name who has to be attacked, the creature might be attacking someone else
+                        lines.add(loc.getMessage("lblWhyAttackMustAttackEntity", card,
+                                Lang.joinHomogenous(mustAttack, null, loc.getMessage("lblOr")), describeSource(stAb)));
+                    }
                 }
             }
 

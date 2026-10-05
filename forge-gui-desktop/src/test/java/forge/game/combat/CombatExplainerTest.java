@@ -7,9 +7,14 @@ import org.testng.annotations.Test;
 
 import forge.ai.simulation.SimulationTest;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityMustAttack;
+import forge.game.zone.ZoneType;
 
 public class CombatExplainerTest extends SimulationTest {
 
@@ -135,5 +140,41 @@ public class CombatExplainerTest extends SimulationTest {
         // both not attacking and attacking together with another creature are suggested
         assertContains(CombatExplainer.suggestLegalAttacks(combat), "Not attacking at all",
                 mogg + " attacking " + defending + ", " + bear + " attacking " + defending);
+    }
+
+    // Furygale Flocking: each pair of tokens has to attack a specific opponent
+    @Test
+    public void testMustAttackSpecificPlayer() {
+        game = initAndCreateThreePlayerGame();
+        attacking = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, attacking);
+        SpellAbility sa = addCardToZone("Furygale Flocking", attacking, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(attacking);
+        AbilityUtils.resolve(sa);
+        Combat combat = startCombat();
+
+        List<Card> tokens = attacking.getCreaturesInPlay();
+        AssertJUnit.assertEquals(4, tokens.size());
+        Card token = tokens.get(0);
+        GameEntity designated = StaticAbilityMustAttack.entitiesMustAttack(token).get(0);
+        Card otherToken = null;
+        for (Card t : tokens) {
+            if (!StaticAbilityMustAttack.entitiesMustAttack(t).contains(designated)) {
+                otherToken = t;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull(otherToken);
+
+        // every token attacks the same opponent, which is the wrong one for half of them
+        for (Card t : tokens) {
+            combat.addAttacker(t, designated);
+        }
+        AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
+        String explanation = CombatUtil.explainInvalidAttack(combat);
+        GameEntity otherDesignated = StaticAbilityMustAttack.entitiesMustAttack(otherToken).get(0);
+        assertContains(explanation, otherToken + " must attack " + otherDesignated + " if able", "Furygale Flocking");
+        AssertJUnit.assertFalse(explanation, explanation.contains(token + " must attack"));
+        assertContains(CombatExplainer.suggestLegalAttacks(combat), otherToken + " attacking " + otherDesignated);
     }
 }
