@@ -502,6 +502,8 @@ device() {
         -Dmaven.repo.local="$CLONE" -DskipTests 2>&1 | tail -8) || true
     APP="$ROOT/forge-gui-ios/target/robovm.tmp/$APP_EXEC.app"
     [ -f "$APP/$APP_EXEC" ] || { echo "DEVICE BINARY MISSING - build failed"; exit 1; }
+    # iOS 27 UIScene-lifecycle workaround: stamp SDK 26.0 (see assemble_arm64_sim_app)
+    vtool -set-build-version 2 14.0 26.0 -replace -output "$APP/$APP_EXEC.tmp" "$APP/$APP_EXEC" && mv -f "$APP/$APP_EXEC.tmp" "$APP/$APP_EXEC"
 
     echo "=== sign ==="
     cp "$PROFILE" "$APP/embedded.mobileprovision"
