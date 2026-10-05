@@ -28,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.events.UiEventBlockerAssigned;
+import forge.gui.util.SOptionPane;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -113,7 +114,15 @@ public class InputBlock extends InputSyncronizedBase {
             stop();
         } else {
             //must run in game thread to prevent problems for mobile game
-            ThreadUtil.invokeInGameThread(() -> getController().getGui().message(blockErrors));
+            ThreadUtil.invokeInGameThread(() -> {
+                final Localizer localizer = Localizer.getInstance();
+                final String title = localizer.getMessage("lblCombatDeclareBlockersStep");
+                final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalBlocks"));
+                // only suggest legal blocks when asked for, closing the dialog counts as OK
+                if (getController().getGui().showOptionDialog(blockErrors, title, SOptionPane.WARNING_ICON, options, 0) == 1) {
+                    getController().getGui().message(CombatExplainer.suggestLegalBlocks(combat, defender), title);
+                }
+            });
         }
     }
 

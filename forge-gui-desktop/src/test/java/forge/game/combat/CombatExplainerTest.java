@@ -347,4 +347,63 @@ public class CombatExplainerTest extends SimulationTest {
         combat.addBlocker(piper, thopters.get(3));
         AssertJUnit.assertNull(CombatUtil.validateBlocks(combat, defending));
     }
+
+    @Test
+    public void testSuggestLegalBlocksForLure() {
+        setUp();
+        Card lured = addCreature("Grizzly Bears", attacking);
+        Card lure = addCard("Lure", attacking);
+        lure.attachToEntity(lured, null);
+        Card other = addCreature("Runeclaw Bear", attacking);
+        Card blocker = addCreature("Centaur Courser", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(lured, defending);
+        combat.addAttacker(other, defending);
+        combat.addBlocker(other, blocker);
+
+        assertContains(CombatExplainer.suggestLegalBlocks(combat, defending), blocker + " blocking " + lured);
+        // the declared blocks aren't changed by working out the suggestion
+        AssertJUnit.assertTrue(combat.isBlocking(blocker, other));
+        AssertJUnit.assertFalse(combat.isBlocking(blocker, lured));
+    }
+
+    @Test
+    public void testSuggestLegalBlocksForMenace() {
+        setUp();
+        Card brute = addCreature("Boggart Brute", attacking);
+        Card first = addCreature("Grizzly Bears", defending);
+        Card second = addCreature("Runeclaw Bear", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(brute, defending);
+        combat.addBlocker(brute, first);
+
+        // either a second creature blocks as well, or nothing blocks
+        assertContains(CombatExplainer.suggestLegalBlocks(combat, defending),
+                first + " blocking " + brute + ", " + second + " blocking " + brute, "Not blocking at all");
+    }
+
+    @Test
+    public void testSuggestLegalBlocksForSeveralRequiredBlockers() {
+        setUp();
+        Card piper = addCreature("Talruum Piper", attacking);
+        Card first = addCreature("Ornithopter", defending);
+        Card second = addCreature("Ornithopter", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(piper, defending);
+
+        assertContains(CombatExplainer.suggestLegalBlocks(combat, defending),
+                first + " blocking " + piper + ", " + second + " blocking " + piper);
+    }
+
+    @Test
+    public void testSuggestLegalBlocksForCantBlockAlone() {
+        setUp();
+        Card attacker = addCreature("Grizzly Bears", attacking);
+        Card mogg = addCreature("Mogg Flunkies", defending);
+        Combat combat = startCombat();
+        combat.addAttacker(attacker, defending);
+        combat.addBlocker(attacker, mogg);
+
+        assertContains(CombatExplainer.suggestLegalBlocks(combat, defending), "Not blocking at all");
+    }
 }

@@ -19,7 +19,10 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Multimaps;
 
+import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
+import forge.game.IEntityMap;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -601,6 +604,174 @@ public final class CombatExplainer {
             }
         }
         return null;
+    }
+
+    private static final int MAX_REPAIR_STEPS = 50;
+
+    /**
+     * Describe legal blocks close to the declared ones: the declared blocks changed until they are valid,
+     * and only the blocks that are required.
+     * Only meant to be shown when the player asks for it.
+     */
+    public static String suggestLegalBlocks(final Combat combat, final Player defender) {
+        final Localizer loc = Localizer.getInstance();
+        final Set<String> suggestions = new LinkedHashSet<>();
+
+        // work on copies, the declared blocks stay untouched
+        final Combat declared = copyOf(combat);
+        if (makeBlocksLegal(declared, defender)) {
+            suggestions.add(describeBlocks(declared, defender));
+        }
+        final Combat required = copyOf(combat);
+        for (final Card blocker : CardLists.filterControlledBy(required.getAllBlockers(), defender)) {
+            required.undoBlockingAssignment(blocker);
+        }
+        if (makeBlocksLegal(required, defender)) {
+            suggestions.add(describeBlocks(required, defender));
+        }
+
+        if (suggestions.isEmpty()) {
+            return loc.getMessage("lblWhyBlockNoSuggestion");
+        }
+        final StringBuilder sb = new StringBuilder(loc.getMessage("lblWhyBlockLegalOptions"));
+        for (final String suggestion : suggestions) {
+            sb.append("\n- ").append(suggestion);
+        }
+        return sb.toString();
+    }
+
+    private static Combat copyOf(final Combat combat) {
+        final Game game = combat.getAttackingPlayer().getGame();
+        return new Combat(combat, new IEntityMap() {
+            @Override
+            public Game getGame() {
+                return game;
+            }
+
+            @Override
+            public GameObject map(final GameObject o) {
+                return o;
+            }
+        });
+    }
+
+    /**
+     * Change the blocks of the defender one problem at a time until they are valid.
+     *
+     * @return whether valid blocks were found
+     */
+    private static boolean makeBlocksLegal(final Combat combat, final Player defender) {
+        for (int i = 0; i < MAX_REPAIR_STEPS; i++) {
+            if (CombatUtil.validateBlocks(combat, defender) == null) {
+                return true;
+            }
+            if (!fixRequiredBlock(combat, defender) && !fixBlockRestriction(combat, defender)
+                    && !fixBlockerAmount(combat, defender)) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // a creature that doesn't block what it is required to block
+    private static boolean fixRequiredBlock(final Combat combat, final Player defender) {
+        final List<Card> army = defender.getCreaturesInPlay();
+        final List<Card> freeBlockers = CombatUtil.findFreeBlockers(army, combat);
+        for (final Card blocker : army) {
+            final List<Card> wanted = Lists.newArrayList();
+            for (final Card attacker : blocker.getMustBlockCards()) {
+                if (combat.isAttacking(attacker) && !combat.isBlocking(blocker, attacker) && CombatUtil.canBlock(attacker, blocker)) {
+                    wanted.add(attacker);
+                }
+            }
+            if (CombatUtil.mustBlockAnAttacker(blocker, combat, freeBlockers)) {
+                wanted.addAll(CombatUtil.getBlockRequirementAttackers(blocker, combat, freeBlockers));
+            }
+            if (wanted.isEmpty() && !combat.isBlocking(blocker) && StaticAbilityMustBlock.blocksEachCombatIfAble(blocker)) {
+                wanted.addAll(combat.getAttackers());
+            }
+            wanted.removeIf(attacker -> CombatUtil.getBlockCost(blocker.getGame(), blocker, attacker) != null);
+            if (wanted.isEmpty()) {
+                continue;
+            }
+            if (addBlock(combat, blocker, wanted)) {
+                return true;
+            }
+            // free the creature from what it blocks now and try again
+            if (combat.isBlocking(blocker)) {
+                combat.undoBlockingAssignment(blocker);
+                if (addBlock(combat, blocker, wanted)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean addBlock(final Combat combat, final Card blocker, final List<Card> attackers) {
+        for (final Card attacker : attackers) {
+            if (CombatUtil.canBlock(attacker, blocker, combat)) {
+                combat.addBlocker(attacker, blocker);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // a creature that isn't allowed to block the way it does ("can't block alone", ...) stops blocking
+    private static boolean fixBlockRestriction(final Combat combat, final Player defender) {
+        final List<Card> blockers = CardLists.filterControlledBy(combat.getAllBlockers(), defender);
+        for (final Card blocker : blockers) {
+            boolean illegal = false;
+            if (blockers.size() < 2 && (blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone."))) {
+                illegal = true;
+            } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
+                illegal = true;
+            } else if (blocker.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
+                illegal = blockers.stream().noneMatch(other -> other.getNetPower() > blocker.getNetPower());
+            }
+            if (illegal) {
+                combat.undoBlockingAssignment(blocker);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // an attacker blocked by too few or too many creatures (menace, ...)
+    private static boolean fixBlockerAmount(final Combat combat, final Player defender) {
+        for (final Card attacker : combat.getAttackers()) {
+            final CardCollection blockers = combat.getBlockers(attacker);
+            if (blockers.isEmpty() || CombatUtil.canAttackerBeBlockedWithAmount(attacker, blockers.size(), combat)) {
+                continue;
+            }
+            if (blockers.size() < CombatUtil.getMinNumBlockersForAttacker(attacker, defender)) {
+                for (final Card other : defender.getCreaturesInPlay()) {
+                    if (!combat.isBlocking(other) && CombatUtil.canBlock(attacker, other, combat)
+                            && CombatUtil.getBlockCost(other.getGame(), other, attacker) == null) {
+                        combat.addBlocker(attacker, other);
+                        return true;
+                    }
+                }
+                // not enough creatures to block it at all
+                for (final Card blocker : blockers) {
+                    combat.removeBlockAssignment(attacker, blocker);
+                }
+            } else {
+                combat.removeBlockAssignment(attacker, blockers.getLast());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static String describeBlocks(final Combat combat, final Player defender) {
+        final Localizer loc = Localizer.getInstance();
+        final List<String> blocks = Lists.newArrayList();
+        for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), defender)) {
+            blocks.add(loc.getMessage("lblWhyBlockAssignment", blocker, Lang.joinHomogenous(combat.getAttackersBlockedBy(blocker))));
+        }
+        return blocks.isEmpty() ? loc.getMessage("lblWhyBlockNoBlocks") : String.join(", ", blocks);
     }
 
     // ////////////////////////////////////
