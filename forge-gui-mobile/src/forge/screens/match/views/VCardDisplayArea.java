@@ -73,16 +73,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     protected void refreshCardPanels(Iterable<CardView> model) {
         clear();
-
         CardAreaPanel newCardPanel = null;
+        Set<CardView> known = animateEntry() ? new HashSet<>(orderedCards.get()) : null;
         if (model != null) {
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                boolean isNew = !orderedCards.get().contains(card);
-                if (isNew && animateEntry()) {
-                    cardPanel.playEntryAnimation();
-                }
-                addCardPanelToDisplayArea(cardPanel);
+                boolean isNew = known != null ? !known.contains(card)
+                        : (newCardPanel == null && !orderedCards.get().contains(card));
+                addCardPanelToDisplayArea(cardPanel, known);   // animation check moved inside
                 cardPanels.get().add(cardPanel);
                 if (newCardPanel == null && isNew) {
                     newCardPanel = cardPanel;
@@ -113,20 +111,18 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     //support adding card panel and attached panels to display area recursively
-    private void addCardPanelToDisplayArea(CardAreaPanel cardPanel) {
+    private void addCardPanelToDisplayArea(CardAreaPanel cardPanel, Set<CardView> known) {
         do {
             List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
-            if (!attachedPanels.isEmpty()) {
-                for (int i = attachedPanels.size() - 1; i >= 0; i--) {
-                    addCardPanelToDisplayArea(attachedPanels.get(i));
-                }
+            for (int i = attachedPanels.size() - 1; i >= 0; i--) {
+                addCardPanelToDisplayArea(attachedPanels.get(i), known);
             }
-
-            if (isVisible()) { //only set display area for card if area is visible
-                cardPanel.displayArea = this;
+            // ghosts are fresh throwaway panels for exiled/prepared cards, so never animate them
+            if (known != null && !cardPanel.isGhost() && !known.contains(cardPanel.getCard())) {
+                cardPanel.playEntryAnimation();
             }
+            if (isVisible()) { cardPanel.displayArea = this; }
             add(cardPanel);
-
             cardPanel = cardPanel.getNextPanelInStack();
         } while (cardPanel != null);
     }
@@ -318,6 +314,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             matchStartTime = System.currentTimeMillis();
             handStarts.clear();
             animatedIds.clear();
+            CardFlightOverlay.clear();
         }
 
         private VCardDisplayArea displayArea;
@@ -503,7 +500,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
-            if (displayArea != null && getCard().getZone() == ZoneType.Hand) {
+            if (displayArea != null && getCard().getZone() == ZoneType.Hand && screenPos.width > 0) {
                 handStarts.put(getCard().getId(), new Rectangle(screenPos));
             }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
@@ -636,9 +633,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 if (System.currentTimeMillis() - entryStart > 1500) {
                     entryStart = -1; // never became visible (scrolled away), drop it
                 } else if (flight == null) {
-                    // first draw after layout: screenPos is now the real destination
-                    flight = CardFlightOverlay.start(getCard(), takeHandStart(getCard()),
-                            new Rectangle(screenPos), isTapped() ? getTappedAngle() : 0f);
+                    boolean viaStack = !getCard().getCurrentState().isLand();
+                    Rectangle handStart = takeHandStart(getCard()); // always consume
+                    flight = CardFlightOverlay.start(getCard(), handStart,
+                            new Rectangle(screenPos), isTapped() ? getTappedAngle() : 0f, viaStack);
                     entryStart = -1;
                 }
             }
@@ -659,8 +657,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     w = h / ASPECT_RATIO;
                 }
                 g.startRotateTransform(x + w / 2, y + h / 2, 180);
-                super.draw(g);
-                g.endTransform();
+                try {
+                    super.draw(g);
+                } finally {
+                    g.endTransform(); // never leave a transform open if drawing the card throws
+                }
             } else {
                 super.draw(g);
             }
