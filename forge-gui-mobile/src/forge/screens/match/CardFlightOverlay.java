@@ -39,7 +39,10 @@ public final class CardFlightOverlay {
     private static final float GLITCH_FRACTION = 0.3f;            // share of the glitch flight spent shaking in place
     private static final boolean LEAVE_SHAKE = false; // shake in place before a destroyed card flies off
     private static final boolean LEAVE_TINT = false;  // flash a color over a destroyed card (see TINT below)
-    private static final int MAX_FLIGHTS = 4;          // extra simultaneous flights are skipped
+    private static final int MAX_FLIGHTS = 4;          // simultaneous ENTER flights
+    private static final int MAX_LEAVE_FLIGHTS = 12;   // simultaneous LEAVE flights (board wipes); extra cards just disappear
+    private static final long LEAVE_STAGGER_NANOS = 35_000_000L;     // delay between cards of one wipe
+    private static final long LEAVE_BATCH_GAP_NANOS = 150_000_000L;  // departures closer together than this belong to one wipe          // extra simultaneous flights are skipped
     private static final boolean SKIP_TOKENS = true;   // entry only: tokens have no hand/stack origin and are often spawned in bulk
     private static final float ARC_HEIGHT = 40f;
 
@@ -57,6 +60,9 @@ public final class CardFlightOverlay {
     // ids of spells whose flight has launched from the stack view; VStack hides those items
     private static final Set<Integer> launchedFromStack = new HashSet<>();
 
+    private static long lastLeaveStartNanos;
+    private static int leaveBatchIndex;
+
     private CardFlightOverlay() { }
 
     public static final class Flight {
@@ -69,6 +75,7 @@ public final class CardFlightOverlay {
         private final float tappedAngle;
 
         private float durationNanos;
+        private long delayNanos;   // LEAVE: waits this long (holding the card in place) before moving, to stagger a wipe
         private boolean done;      // set by draw() AFTER the final frame was drawn
         private boolean resolved;  // geometry computed (once, on the first draw)
         private boolean jitter;    // LEAVE: shake in place before flying
@@ -126,7 +133,7 @@ public final class CardFlightOverlay {
             from = handFrom;
             exact = false;
         }
-        if (flights.size() >= MAX_FLIGHTS) { return null; }
+        if (countFlights(false) >= MAX_FLIGHTS) { return null; }
         if (SKIP_TOKENS && card.isToken()) { return null; }
 
         Flight f = new Flight(card, from, exact, to, tappedAngle, false);
@@ -144,9 +151,26 @@ public final class CardFlightOverlay {
      * @param tappedAngle the card's tapped angle on the field, or 0
      */
     public static void startLeave(CardView card, Rectangle fromPanel, float tappedAngle) {
-        if (flights.size() >= MAX_FLIGHTS) { return; }
-        flights.add(new Flight(card, fromPanel, false, null, tappedAngle, true));
+        if (countFlights(true) >= MAX_LEAVE_FLIGHTS) { return; }
+
+        // cards that leave within a short time of each other are one wipe: start them one after another
+        long now = TimeUtils.nanoTime();
+        if (now - lastLeaveStartNanos > LEAVE_BATCH_GAP_NANOS) { leaveBatchIndex = 0; }
+        lastLeaveStartNanos = now;
+
+        Flight f = new Flight(card, fromPanel, false, null, tappedAngle, true);
+        f.delayNanos = leaveBatchIndex * LEAVE_STAGGER_NANOS;
+        leaveBatchIndex++;
+        flights.add(f);
         Gdx.graphics.requestRendering();
+    }
+
+    private static int countFlights(boolean leave) {
+        int n = 0;
+        for (int i = 0; i < flights.size(); i++) {
+            if (flights.get(i).leave == leave) { n++; }
+        }
+        return n;
     }
 
     /** Call on new game / leaving the match screen. */
@@ -323,7 +347,8 @@ public final class CardFlightOverlay {
                 continue;
             }
 
-            float t = (now - f.startNanos) / f.durationNanos;
+            float t = (now - f.startNanos - f.delayNanos) / f.durationNanos;
+            if (t < 0f) { t = 0f; } // still waiting for its turn: hold the card at its starting spot
             final boolean last = t >= 1f;
             if (last) { t = 1f; } // still draw the final pose once; the real card takes over next frame
 
