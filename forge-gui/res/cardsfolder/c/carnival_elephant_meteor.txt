@@ -1,0 +1,18 @@
+Name:Carnival Elephant Meteor
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Carnival
+SVar:STK2:Kind$ Name | Word$ Elephant
+SVar:STK3:Kind$ Name | Word$ Meteor
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Sacrifice this permanent: Draw two cards. | Ability$ STK7Draw
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Whenever this creature attacks, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.) | Triggers$ STK8Attacks
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 8 | Toughness$ 7
+SVar:STK7Draw:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:STK8Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK8Proliferate | TriggerDescription$ Whenever this creature attacks, proliferate.
+SVar:STK8Proliferate:DB$ Proliferate
+Oracle:{TK}{TK} — Sacrifice this permanent: Draw two cards.\n{TK}{TK}{TK} — Whenever this creature attacks, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\n{TK}{TK} — 4/1\n{TK}{TK}{TK}{TK}{TK} — 8/7

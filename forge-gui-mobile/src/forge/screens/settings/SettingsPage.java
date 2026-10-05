@@ -323,6 +323,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
                 }
             }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_CARD_PLAY_ANIMATION,
+            Forge.getLocalizer().getMessageorUseDefault("cbCardPlayAnimation", "Card Play Animation"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCardPlayAnimation", "Animate cards flying from the zone to the battlefield when they are played.")),
+            1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
             Forge.getLocalizer().getMessage("cbStackCreatures"),
             Forge.getLocalizer().getMessage("nlStackCreatures")), 1);

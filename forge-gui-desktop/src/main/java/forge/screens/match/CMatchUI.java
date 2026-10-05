@@ -151,7 +151,8 @@ public final class CMatchUI
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
-            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard);
+            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard,
+            ZoneType.StickerSheets);
 
     private final List<PlayerZoneUpdate> selectionZonesShown = Lists.newArrayList();
     private final List<PlayerZoneUpdate> revealZonesShown = Lists.newArrayList();

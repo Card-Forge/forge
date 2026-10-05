@@ -1,0 +1,8 @@
+Name:Prize Wall
+ManaCost:1 U
+Types:Creature Wall
+PT:0/4
+K:Defender
+A:AB$ PutCounter | Cost$ U T | Defined$ You | CounterType$ TICKET | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ You get {TK} (a ticket counter).
+A:AB$ PutSticker | Cost$ 4 U T | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True | SorcerySpeed$ True | SpellDescription$ You may put a sticker on a nonland permanent you own. Activate only as a sorcery.
+Oracle:Defender\n{U}, {T}: You get {TK}.\n{4}{U}, {T}: You may put a sticker on a nonland permanent you own. Activate only as a sorcery.

@@ -7,7 +7,7 @@ import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
-import forge.gamemodes.net.server.RemoteClientGuiGame;
+import forge.gamemodes.net.ProtocolGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -20,6 +20,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.Sticker;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -1395,6 +1396,51 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa, boolean isOptional) {
+        String title = localizer.getMessage("lblChooseSticker", CardTranslation.getTranslatedName(target.getName()));
+        final List<String> labels = Lists.newArrayList();
+        final List<Integer> indices = Lists.newArrayList();
+        for (Sticker s : options) {
+            labels.add(s.getTickets() == 0 ? s.getDescription()
+                    : StringUtils.repeat("{TK}", s.getTickets()) + " - " + s.getDescription());
+            indices.add(indices.size());
+        }
+        FSerializableFunction<Integer, String> display = labels::get;
+        Integer chosen;
+        if (isOptional) {
+            List<Integer> picked = getGui().getChoices(title, 0, 1, indices, null, display);
+            chosen = picked.isEmpty() ? null : picked.get(0);
+        } else {
+            chosen = getGui().one(title, indices, display);
+        }
+        return chosen == null ? null : options.get(chosen);
+    }
+
+    @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return chooseSingleEntityForEffect(options, null, null,
+                localizer.getMessage("lblChooseCardToKeepStickers"), false, null, null);
+    }
+
+    @Override
+    public int chooseStickerNamePosition(Sticker sticker, Card target) {
+        // CR 123.6a
+        if (StringUtils.isBlank(target.getName()) || target.stickerWouldFillBlank()) {
+            return 0;
+        }
+        int words = target.getName().split(" ").length;
+        final List<Integer> positions = Lists.newArrayList();
+        final List<String> names = Lists.newArrayList();
+        for (int at = 0; at <= words; at++) {
+            positions.add(at);
+            names.add(Card.addStickerWord(target.getName(), sticker.getWord(), at));
+        }
+        FSerializableFunction<Integer, String> display = names::get;
+        Integer chosen = getGui().one(localizer.getMessage("lblChooseStickerNamePosition"), positions, display);
+        return chosen == null ? 0 : chosen;
+    }
+
+    @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         String prompt;
         if (assignee != null) {
@@ -2664,11 +2710,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
             CardUtil.turnToRightFace(cardFace.getName(), instanceForPlayer);
             // TODO need the valid check be done against the CardFace?
-            for (String v : valid.split(",")) {
-                if (instanceForPlayer.isValid(v, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
-                    // it need to return name for card face
-                    return cardFace.getName();
-                }
+            if (instanceForPlayer.isValid(valid.split(","), sa.getHostCard().getController(), sa.getHostCard(), sa)) {
+                // it need to return name for card face
+                return cardFace.getName();
             }
         }
     }
@@ -3793,7 +3837,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isRemoteClient() {
-        return gui instanceof RemoteClientGuiGame;
+        return gui instanceof ProtocolGuiGame;
     }
 
     /** True while the player is auto-passing. Deliberately does not cover a skipped phase or an auto-yielded

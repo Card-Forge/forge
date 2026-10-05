@@ -21,6 +21,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -94,7 +97,6 @@ public class Assets implements Disposable {
     private HashMap<Integer, TextureRegion> borders;
     private HashMap<Integer, TextureRegion> deckbox;
     private HashMap<Integer, TextureRegion> cursor;
-    private ObjectMap<Integer, BitmapFont> counterFonts;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, blackTexture;
@@ -106,6 +108,10 @@ public class Assets implements Disposable {
     private GifAnimation gifAnimation;
     private boolean isDisposed = false;
     private int miniMapID;
+    private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
+    private static final String COUNTER_FONT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
+
+    private FileHandle counterFontHandle; // cached
 
     private Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -133,11 +139,6 @@ public class Assets implements Disposable {
             return;
         }
         isDisposed = true;
-        if (counterFonts != null) {
-            for (BitmapFont bitmapFont : counterFonts.values())
-                Forge.safeDispose(bitmapFont);
-            counterFonts.clear();
-        }
         if (fallback_skins != null) {
             for (Texture texture : fallback_skins.values())
                 Forge.safeDispose(texture);
@@ -183,6 +184,41 @@ public class Assets implements Disposable {
         Forge.safeDispose(manager);
     }
 
+    public BitmapFont getCounterFont(int fontSize) {
+        if (fontSize <= 0) {
+            return null;
+        }
+
+        // faux key only for storing different font size params with the same ttf font
+        final String key = "Roboto-Bold-" + fontSize + ".ttf";
+
+        // Fast path: already loaded, no file system lookups
+        if (manager.isLoaded(key, BitmapFont.class)) {
+            return manager.get(key, BitmapFont.class);
+        }
+
+        // Resolve the TTF only once
+        if (counterFontHandle == null || !counterFontHandle.exists()) {
+            counterFontHandle = getFileHandle(ForgeConstants.COMMON_FONTS_DIR + "/" + COUNTER_FONT_FILE);
+            if (counterFontHandle == null || !counterFontHandle.exists()) {
+                counterFontHandle = null;
+                return null; // caller should fall back to a default font ideally
+            }
+        }
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter param = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        param.fontFileName = counterFontHandle.path();
+        param.fontParameters.size = fontSize;
+        param.fontParameters.characters = COUNTER_FONT_CHARS;
+        param.fontParameters.minFilter = Texture.TextureFilter.Linear;
+        param.fontParameters.magFilter = Texture.TextureFilter.Linear;
+        param.fontParameters.hinting = FreeTypeFontGenerator.Hinting.AutoMedium;
+
+        manager.load(key, BitmapFont.class, param);
+        manager.finishLoadingAsset(key);
+        return manager.get(key, BitmapFont.class);
+    }
+
     public GifAnimation getGifAnimation() {
         return gifAnimation;
     }
@@ -217,7 +253,10 @@ public class Assets implements Disposable {
 
     public MemoryTrackingAssetManager manager() {
         if (manager == null) {
-            manager = new MemoryTrackingAssetManager(new HybridFileHandleResolver());
+            HybridFileHandleResolver resolver = new HybridFileHandleResolver();
+            manager = new MemoryTrackingAssetManager(resolver);
+            manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
+            manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         }
         return manager;
     }
@@ -299,12 +338,6 @@ public class Assets implements Disposable {
         if (cursor == null)
             cursor = new HashMap<>();
         return cursor;
-    }
-
-    public ObjectMap<Integer, BitmapFont> counterFonts() {
-        if (counterFonts == null)
-            counterFonts = new ObjectMap<>();
-        return counterFonts;
     }
 
     public ObjectMap<String, Texture> fallback_skins() {
@@ -443,19 +476,27 @@ public class Assets implements Disposable {
     }
 
     public Texture getWhiteTexture() {
-        return setTexture(whiteTexture, Color.WHITE, 1f);
+        if (whiteTexture == null)
+            whiteTexture = setTexture(whiteTexture, Color.WHITE, 1f);
+        return whiteTexture;
     }
 
     public Texture getBackropTexture() {
-        return setTexture(backdropTexture, Color.BLACK, 0.5f);
+        if (backdropTexture == null)
+            backdropTexture = setTexture(backdropTexture, Color.BLACK, 0.5f);
+        return backdropTexture;
     }
 
     public Texture getGrayTexture() {
-        return setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+        if (grayTexture == null)
+            grayTexture = setTexture(grayTexture, Color.DARK_GRAY, 0.5f);
+        return grayTexture;
     }
 
     private Texture getBlackTexture() {
-        return setTexture(blackTexture, Color.BLACK, 1f);
+        if (blackTexture == null)
+            blackTexture = setTexture(blackTexture, Color.BLACK, 1f);
+        return blackTexture;
     }
 
     public Texture getHolofoil() {
@@ -600,8 +641,8 @@ public class Assets implements Disposable {
                 textureSize = textureSize + (textureSize / 3);
             memoryPerFile.put(fileName, calcTextureDataSize(textureSize, textureData.getFormat()));
 
-            return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
-                + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
+            return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() +
+                calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
         }
 
         @SuppressWarnings("unchecked")
@@ -651,21 +692,6 @@ public class Assets implements Disposable {
             }
             cSFVal = val;
             return cSFVal;
-        }
-
-        private int calcCounterFonts() {
-            if (!Forge.showFPS)
-                return 0;
-            if (counterFonts == null || counterFonts.isEmpty())
-                return 0;
-            if (cCF == counterFonts.size)
-                return cCFVal;
-            int val = 0;
-            for (BitmapFont cf : counterFonts.values()) {
-                val += calcBitmapFont(cf);
-            }
-            cCFVal = val;
-            return cCFVal;
         }
 
         private int calcBitmapFont(BitmapFont bitmapFont) {

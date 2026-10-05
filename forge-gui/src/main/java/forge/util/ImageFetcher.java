@@ -424,8 +424,17 @@ public abstract class ImageFetcher {
         // the in-flight set below, so a fetch registered during the cooldown would never be retried
         // once the cooldown lifts. Only when every candidate is Scryfall - otherwise another source
         // may still serve it.
-        if (ScryfallRateLimiter.isCoolingDown() && downloadUrls.stream().allMatch(ScryfallRateLimiter::isApiUrl)) {
-            return;
+        if (ScryfallRateLimiter.isCoolingDown()) {
+            boolean b = true;
+            for (String downloadUrl : downloadUrls) {
+                if (!ScryfallRateLimiter.isApiUrl(downloadUrl)) {
+                    b = false;
+                    break;
+                }
+            }
+            if (b) {
+                return;
+            }
         }
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.

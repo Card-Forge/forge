@@ -400,6 +400,7 @@ public class MatchScreen extends FScreen {
         }
 
         drawArcs(g);
+        CardFlightOverlay.draw(g, bottomPlayerPanel.getPlayer(), getHeight());
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle) {
             if (Forge.isLandscapeMode() && (!GuiBase.isMobile() || Forge.hasGamepad()) && !CardZoom.isOpen() && potentialListener != null) {
                 for (FDisplayObject object : potentialListener) {
@@ -808,6 +809,7 @@ public class MatchScreen extends FScreen {
             pnl.setAttachedToPanel(null);
             pnl.setPrevPanelInStack(null);
             pnl.setNextPanelInStack(null);
+            CardAreaPanel.forgetAnimated(card);
         }
     }
 

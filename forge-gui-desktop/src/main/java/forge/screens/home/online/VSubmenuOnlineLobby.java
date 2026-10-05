@@ -13,6 +13,7 @@ import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.IOnlineLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.HostingServer;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -153,7 +154,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         lobby.getLblTitle().setText(Localizer.getInstance().getMessage("lblOnlineLobbyTitle"));
         pnlTitle.removeAll();
         pnlTitle.setOpaque(false);
-        final boolean hosting = FServerManager.getInstance().isHosting();
+        final boolean hosting = HostingServer.isHosting();
         pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span " + (hosting ? "3" : "2"));
         if (hosting) {
             FButton btnServerUrl = new FButton(Localizer.getInstance().getMessage("lblServerURL"));
@@ -234,7 +235,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     @Override
     public boolean onClosing(final FScreen screen) {
         final FServerManager server = FServerManager.getInstance();
-        if (server.isHosting()) {
+        if (HostingServer.isHosting()) {
             if (SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyDescription"), Localizer.getInstance().getMessage("lblLeave"))) {
                 server.stopServer();
                 FNetOverlay.SINGLETON_INSTANCE.reset();
@@ -261,7 +262,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             client = null;
         }
         FServerManager server = FServerManager.getInstance();
-        if (server.isHosting()) {
+        if (HostingServer.isHosting()) {
             server.stopServer();
         }
         FNetOverlay.SINGLETON_INSTANCE.reset();
