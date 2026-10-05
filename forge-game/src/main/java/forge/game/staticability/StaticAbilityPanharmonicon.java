@@ -30,8 +30,7 @@ public class StaticAbilityPanharmonicon {
             return n;
         }
 
-        // These effects say "abilities of objects trigger an additional time" which excludes Delayed Trigger
-        // 603.2e
+        // CR 603.2d excludes Delayed Trigger
         if (t.getSpawningAbility() != null) {
             return n;
         }
@@ -49,7 +48,6 @@ public class StaticAbilityPanharmonicon {
             cardList = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         }
 
-        // Checks only the battlefield, as those effects only work from there
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.Panharmonicon)) {

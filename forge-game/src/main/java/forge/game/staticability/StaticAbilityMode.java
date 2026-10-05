@@ -53,6 +53,7 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCombatDamageToughness
     CombatDamageToughness,
+    CombatDamageNegatePower,
 
     // StaticAbilityColorlessDamageSource
     ColorlessDamageSource,
@@ -110,6 +111,9 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCantDraw
     CantDraw,
+
+    // StaticAbilityDrawFromBottom
+    DrawFromBottom,
 
     // StaticAbilityCantDiscard
     CantDiscard,

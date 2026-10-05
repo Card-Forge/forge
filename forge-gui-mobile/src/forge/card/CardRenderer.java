@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import forge.ImageKeys;
 import forge.localinstance.properties.ForgeConstants;
@@ -13,20 +12,13 @@ import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Multiset;
 
 import forge.CachedCardImage;
@@ -49,7 +41,6 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
-import forge.gui.FThreads;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.IPaperCard;
@@ -150,15 +141,7 @@ public class CardRenderer {
     public static final float CROP_MULTIPLIER = 0.96f;
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.7f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
-    private static final GlyphLayout layout = new GlyphLayout();
-
-    static {
-        try {
-            for (int fontSize = 8; fontSize <= 22; fontSize++) {
-                generateFontForCounters(fontSize);
-            }
-        } catch (Exception ignored) {}
-    }
+    private static final GlyphLayout glyphLayout = new GlyphLayout();
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -952,7 +935,9 @@ public class CardRenderer {
 
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
         int fontSize = Math.max(11, Math.min(22, (int) (h * 0.08)));
-        BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
+        BitmapFont font = Forge.getAssets().getCounterFont(fontSize);
+        if (font == null)
+            return;
 
         final float additionalXOffset = 3f * ((fontSize - 11) / 11f);
         final float variableWidth = ((fontSize - 11) / 11f) * 44f;
@@ -971,25 +956,17 @@ public class CardRenderer {
             return;
         }
 
-        Set<Multiset.Entry<CounterType>> counterEntries = countersSet.entrySet();
-        Object[] entryArray = counterEntries.toArray();
-        int entryCount = entryArray.length;
-        if (entryCount == 0) {
-            return;
-        }
-
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
             int maxCounters = 0;
-            for (int i = 0; i < entryCount; i++) {
-                Multiset.Entry<CounterType> entry = (Multiset.Entry<CounterType>) entryArray[i];
+            for (Multiset.Entry<CounterType> entry : countersSet.entrySet()) {
                 if (entry != null && entry.getCount() > maxCounters) {
                     maxCounters = entry.getCount();
                 }
             }
 
             if (font != null && !String.valueOf(maxCounters).isEmpty()) {
-                layout.setText(font, String.valueOf(maxCounters));
-                if (counterBoxBaseWidth + layout.width > w) {
+                glyphLayout.setText(font, String.valueOf(maxCounters));
+                if (counterBoxBaseWidth + glyphLayout.width > w) {
                     drawCounterImage(card, g, x, y, w, h);
                     return;
                 }
@@ -999,8 +976,7 @@ public class CardRenderer {
         int currentCounter = 0;
         int verticalLayout = 0;
 
-        for (int i = 0; i < entryCount; i++) {
-            Multiset.Entry<CounterType> counterEntry = (Multiset.Entry<CounterType>) entryArray[i];
+        for (Multiset.Entry<CounterType> counterEntry : countersSet.entrySet()) {
             if (counterEntry == null) continue;
 
             final CounterType counter = counterEntry.getElement();
@@ -1023,9 +999,9 @@ public class CardRenderer {
 
                 String finalDisplayName = stringBuilder.toString();
 
-                layout.setText(font, counterValueStr);
+                glyphLayout.setText(font, counterValueStr);
 
-                final float counterBoxRealWidth = counterBoxBaseWidth + layout.width + 4f;
+                final float counterBoxRealWidth = counterBoxBaseWidth + glyphLayout.width + 4f;
                 final float counterYOffset = spaceFromTopOfCard - (currentCounter * (counterBoxHeight + counterBoxSpacing));
                 currentCounter++;
 
@@ -1049,14 +1025,14 @@ public class CardRenderer {
     private static final int GL_BLEND = GL20.GL_BLEND;
 
     private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, int horizontalAlignment) {
-        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+        if (color.a < 1) { // enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
         }
-        if (font != null && !text.isEmpty()) {
-            layout.setText(font, text);
-            TextBounds textBounds = new TextBounds(layout.width, layout.height);
+        if (font != null && text != null && !text.isEmpty()) {
+            glyphLayout.setText(font, text);
 
-            float textHeight = textBounds.height;
+            float textHeight = glyphLayout.height;
+
             if (h > textHeight) {
                 y += (h - textHeight) / 2;
             }
@@ -1094,8 +1070,14 @@ public class CardRenderer {
     }
 
     private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h, boolean larger) {
+        if (markers == null || markers.isEmpty()) {
+            return;
+        }
+
         int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
-        BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
+        BitmapFont font = Forge.getAssets().getCounterFont(fontSize);
+        if (font == null)
+            return;
 
         final float additionalXOffset = 3f * ((fontSize - 8) / 8f);
 
@@ -1109,11 +1091,13 @@ public class CardRenderer {
         final float spaceFromTopOfCard = y + h - markerBoxHeight - markerBoxSpacing - otherSymbolsSize + ySymbols;
 
         int markerCounter = markers.size() - 1;
+        final int markersCount = markers.size();
 
-        for (String marker : markers) {
-            if (font != null && !marker.isEmpty()) {
-                layout.setText(font, marker);
-                final float markerBoxRealWidth = markerBoxBaseWidth + layout.width + 4;
+        for (int i = 0; i < markersCount; i++) {
+            final String marker = markers.get(i);
+            if (font != null && marker != null && !marker.isEmpty()) {
+                glyphLayout.setText(font, marker);
+                final float markerBoxRealWidth = markerBoxBaseWidth + glyphLayout.width + 4;
 
                 final float markerYOffset = spaceFromTopOfCard - (markerCounter-- * (markerBoxHeight + markerBoxSpacing));
 
@@ -1192,59 +1176,5 @@ public class CardRenderer {
             manaSymbolSize = w / cost.getGlyphCount();
         }
         CardFaceSymbols.drawManaCost(g, cost, x + (w - manaCostWidth) / 2, y + (h - manaSymbolSize) / 2, manaSymbolSize);
-    }
-
-    //TODO Make FSkinFont accept more than one kind of font and merge this with it
-    private static void generateFontForCounters(final int fontSize) {
-        FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.COMMON_FONTS_DIR).child("Roboto-Bold.ttf");
-
-        if (!ttfFile.exists()) {
-            return;
-        }
-
-        final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
-
-        //approximate optimal page size
-        int pageSize = 128;
-
-        //only generate images for characters that could be used by Forge
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
-
-        final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
-        final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.characters = chars;
-        parameter.size = fontSize;
-        parameter.packer = packer;
-        final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(parameter);
-        final Array<PixmapPacker.Page> pages = packer.getPages();
-
-        //TODO Cache this
-        //finish generating font on UI thread
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-
-                //TextureRegion[] textureRegions = new TextureRegion[pages.size];
-                Array<TextureRegion> textureRegions = new Array<>();
-                for (int i = 0; i < pages.size; i++) {
-                    PixmapPacker.Page p = pages.get(i);
-                    Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
-                        @Override
-                        public void dispose() {
-                            super.dispose();
-                            getTextureData().consumePixmap().dispose();
-                        }
-                    };
-                    texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-                    //textureRegions[i] = new TextureRegion(texture);
-                    textureRegions.add(new TextureRegion(texture));
-                }
-
-                Forge.getAssets().counterFonts().put(fontSize, new BitmapFont(fontData, textureRegions, true));
-
-                generator.dispose();
-                packer.dispose();
-            }
-        });
     }
 }

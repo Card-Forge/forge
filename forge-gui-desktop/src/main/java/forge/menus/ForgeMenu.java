@@ -1,6 +1,8 @@
 package forge.menus;
 
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import javax.swing.text.JTextComponent;
 
 import forge.Singletons;
 import forge.gui.GuiUtils;
@@ -116,7 +119,7 @@ public final class ForgeMenu {
     }
     
     public boolean handleKeyEvent(KeyEvent e) {
-        if (popupMenu.isEnabled()) {
+        if (popupMenu.isEnabled() && !isTypingText(e)) {
             JMenuItem item = activeShortcuts.get(KeyStroke.getKeyStrokeForEvent(e));
             if (item != null) {
                 hide(); //ensure menu doesn't stay open if currently open
@@ -125,6 +128,11 @@ public final class ForgeMenu {
             }
         }
         return false;
+    }
+
+    private static boolean isTypingText(KeyEvent e) {
+        return (e.getModifiersEx() & ~InputEvent.SHIFT_DOWN_MASK) == 0
+                && KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() instanceof JTextComponent;
     }
 
     private static JMenuItem getMenuItem_Restart() {

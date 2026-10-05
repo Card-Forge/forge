@@ -131,6 +131,7 @@ ScryfallCode=CMB1
 
 [CreatureTypes]
 Mammoth:Mammoths
+Gorilla:Gorillas
 [ArtifactTypes]
 Key:Keys
 [WalkerTypes]
