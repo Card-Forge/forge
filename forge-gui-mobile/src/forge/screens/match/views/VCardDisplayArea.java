@@ -6,10 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import com.google.common.base.Supplier;
@@ -20,11 +22,14 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
+import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
@@ -64,6 +69,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         return CARD_STACK_OFFSET;
     }
 
+    protected boolean animateEntry() { return false; }
+
     protected void refreshCardPanels(Iterable<CardView> model) {
         clear();
 
@@ -71,9 +78,13 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         if (model != null) {
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                boolean isNew = !orderedCards.get().contains(card);
+                if (isNew && animateEntry()) {
+                    cardPanel.playEntryAnimation();
+                }
                 addCardPanelToDisplayArea(cardPanel);
                 cardPanels.get().add(cardPanel);
-                if (newCardPanel == null && !orderedCards.get().contains(card)) {
+                if (newCardPanel == null && isNew) {
                     newCardPanel = cardPanel;
                 }
             }
@@ -249,7 +260,39 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     public static class CardAreaPanel extends FCardPanel {
         private static Map<Integer, CardAreaPanel> allCardPanels = new HashMap<>();
+        private static final Map<Integer, Rectangle> handStarts = new ConcurrentHashMap<>();
+        private static long matchStartTime = System.currentTimeMillis();
+        private long entryStart = -1;
+        private CardFlightOverlay.Flight flight;
+        private final Rectangle lastHandRect = new Rectangle();
+        private boolean hasHandRect;
+        private static final Set<Integer> animatedIds = ConcurrentHashMap.newKeySet();
+        public static Rectangle takeHandStart(CardView card) {
+            return handStarts.remove(card.getId());
+        }
+        public static void forgetAnimated(CardView card) {
+            animatedIds.remove(card.getId());
+        }
+        public void playEntryAnimation() {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_PLAY_ANIMATION)) { return; }
+            if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
+            if (!animatedIds.add(getCard().getId())) { return; }
 
+            // no tap recorded (AI play, effect): use the card's last spot in the hand if that hand is shown
+            if (hasHandRect && !handStarts.containsKey(getCard().getId()) && isHandShownFor(getCard())) {
+                handStarts.put(getCard().getId(), new Rectangle(lastHandRect));
+            }
+            hasHandRect = false;
+
+            entryStart = System.currentTimeMillis();
+            Gdx.graphics.requestRendering();
+        }
+        private static boolean isHandShownFor(CardView card) {
+            VPlayerPanel pp = MatchScreen.getPlayerPanel(card.getController());
+            if (pp == null) { return false; }
+            VPlayerPanel.InfoTab tab = pp.getSelectedTab();
+            return tab instanceof VPlayerPanel.InfoTabZone z && z.zoneType == ZoneType.Hand;
+        }
         public static CardAreaPanel get(CardView card0) {
             CardAreaPanel cardPanel = allCardPanels.get(card0.getId());
             if (cardPanel == null || cardPanel.getCard() != card0) { //replace card panel if card copied
@@ -272,6 +315,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             } else {
                 allCardPanels = new HashMap<>();
             }
+            matchStartTime = System.currentTimeMillis();
+            handStarts.clear();
+            animatedIds.clear();
         }
 
         private VCardDisplayArea displayArea;
@@ -457,6 +503,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
+            if (displayArea != null && getCard().getZone() == ZoneType.Hand) {
+                handStarts.put(getCard().getId(), new Rectangle(screenPos));
+            }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 Gdx.graphics.requestRendering();
                 return true;
@@ -579,6 +628,27 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public void draw(Graphics g) {
+            if (getCard().getZone() == ZoneType.Hand && getWidth() > 0) {
+                lastHandRect.set(screenPos); // remember where we last appeared in a visible hand
+                hasHandRect = true;
+            }
+            if (entryStart >= 0) {
+                if (System.currentTimeMillis() - entryStart > 1500) {
+                    entryStart = -1; // never became visible (scrolled away), drop it
+                } else if (flight == null) {
+                    // first draw after layout: screenPos is now the real destination
+                    flight = CardFlightOverlay.start(getCard(), takeHandStart(getCard()),
+                            new Rectangle(screenPos), isTapped() ? getTappedAngle() : 0f);
+                    entryStart = -1;
+                }
+            }
+            if (flight != null) {
+                if (!flight.isDone()) {
+                    Gdx.graphics.requestRendering();
+                    return; // hide the real card while the flying copy is on screen
+                }
+                flight = null;
+            }
             if (displayArea != null && displayArea.rotateCards180) {
                 float padding = getPadding();
                 float x = padding;
