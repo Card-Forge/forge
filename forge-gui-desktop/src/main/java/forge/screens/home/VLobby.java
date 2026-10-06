@@ -24,6 +24,7 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
+import forge.gui.CommanderChooser;
 import forge.gui.FThreads;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
@@ -115,6 +116,11 @@ public class VLobby implements ILobbyView {
     private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
     private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final Deck[] decks = new Deck[MAX_PLAYERS];
+    // Commander variant: each deck as picked in the deck chooser, who may lead it, and the
+    // commander(s) the player picked instead of the default. Picks are never saved to the deck.
+    private final Deck[] baseDecks = new Deck[MAX_PLAYERS];
+    private final Map<Integer, List<CommanderOptions.Option>> commanderOptions = new HashMap<>();
+    private final Map<Integer, List<PaperCard>> commanderPicks = new HashMap<>();
 
     // Variants
     private final List<FList<Object>> schemeDeckLists = new ArrayList<>();
@@ -581,7 +587,7 @@ public class VLobby implements ILobbyView {
     }
     private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
         final Deck deck = decks[index];
-        final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
+        final Deck copy = deck == null ? new Deck() : new Deck(deck);
         copy.putSection(section, cards);
         decks[index] = copy;
         if (playerChangeListener != null) {
@@ -673,9 +679,108 @@ public class VLobby implements ILobbyView {
             } else {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
-            fireDeckChangeListener(playerIndex, deck);
+            fireDeckChangeListener(playerIndex, prepareCommanderPick(playerIndex, deck));
         }
         mainChooser.saveState();
+    }
+
+    /**
+     * Records the newly selected deck and works out who may lead it. Returns the deck to use:
+     * the deck itself, or a copy led by the player's earlier pick when a lobby refresh
+     * reselects the same deck.
+     */
+    private Deck prepareCommanderPick(final int index, final Deck deck) {
+        final Deck previousBase = baseDecks[index];
+        final List<PaperCard> previousPick = commanderPicks.remove(index);
+        baseDecks[index] = deck;
+        commanderOptions.remove(index);
+        if (deck == null || !hasVariant(GameType.Commander)) {
+            updateCommanderPickButton(index);
+            return deck;
+        }
+        commanderOptions.put(index, CommanderOptions.getOptions(deck, DeckFormat.Commander));
+
+        Deck result = deck;
+        if (previousPick != null && previousBase != null
+                && deck.getName().equals(previousBase.getName())
+                && CommanderPicks.isValidPick(deck, previousPick, DeckFormat.Commander)) {
+            result = CommanderOptions.withCommanders(deck, previousPick);
+            commanderPicks.put(index, previousPick);
+        }
+        updateCommanderPickButton(index);
+        return result;
+    }
+
+    /** Opens the commander picker for a player and applies their choice to the lobby deck. */
+    void chooseCommander(final int index) {
+        final List<CommanderOptions.Option> options = commanderOptions.get(index);
+        final Deck base = baseDecks[index];
+        if (options == null || options.isEmpty() || base == null || decks[index] == null) {
+            return;
+        }
+
+        final List<PaperCard> current = commanderPicks.getOrDefault(index, base.getCommanders());
+        final String playerName = getPlayerPanel(index).getPlayerName();
+        final CommanderOptions.Option option = CommanderChooser.choose(
+                localizer.getMessage("lblChooseCommanderFor", playerName),
+                localizer.getMessage("lblChooseCommanderHint"),
+                options, CommanderPicks.indexOfCurrent(options, current), CommanderPicks::describe, o -> o.getCommanders().get(0));
+        if (option == null) {
+            return;
+        }
+
+        List<PaperCard> picked = option.getCommanders();
+        if (picked.size() == 1) {
+            final PaperCard commander = picked.get(0);
+            final List<PaperCard> partners = CommanderOptions.getPartnerOptions(base, commander, DeckFormat.Commander);
+            if (!partners.isEmpty()) {
+                // Optional.empty() stands for "No partner"; null means the dialog was cancelled
+                final List<Optional<PaperCard>> partnerChoices = new ArrayList<>();
+                if (CommanderPicks.allowsNoPartner(base, option, DeckFormat.Commander)) {
+                    partnerChoices.add(Optional.empty());
+                }
+                final int currentPartner = CommanderPicks.indexOfCurrentPartner(partners, commander, current);
+                final int selectedPartner = currentPartner < 0 ? 0 : partnerChoices.size() + currentPartner;
+                for (final PaperCard partner : partners) {
+                    partnerChoices.add(Optional.of(partner));
+                }
+                final Optional<PaperCard> partner = CommanderChooser.choose(
+                        localizer.getMessage("lblChoosePartnerFor", CardTranslation.getTranslatedName(commander.getName())),
+                        localizer.getMessage("lblChooseCommanderHint"),
+                        partnerChoices, selectedPartner,
+                        p -> p.map(c -> CardTranslation.getTranslatedName(c.getName())).orElse(localizer.getMessage("lblNoPartner")),
+                        p -> p.orElse(null));
+                if (partner == null) {
+                    return;
+                }
+                if (partner.isPresent()) {
+                    picked = Arrays.asList(commander, partner.get());
+                }
+            }
+        }
+
+        if (CommanderPicks.isSame(picked, base.getCommanders())) {
+            commanderPicks.remove(index);
+        } else {
+            commanderPicks.put(index, picked);
+        }
+        fireDeckChangeListener(index, CommanderOptions.withCommanders(decks[index], picked));
+        updateCommanderPickButton(index);
+    }
+
+    private void updateCommanderPickButton(final int index) {
+        if (index >= playerPanels.size()) {
+            return;
+        }
+        final PlayerPanel panel = getPlayerPanel(index);
+        final List<CommanderOptions.Option> options = commanderOptions.get(index);
+        final Deck base = baseDecks[index];
+        if (options == null || options.isEmpty() || base == null) {
+            panel.setCommanderPick("", false);
+            return;
+        }
+        panel.setCommanderPick(CommanderPicks.describeCurrent(base, commanderPicks.get(index)),
+                CommanderPicks.hasChoices(base, options, DeckFormat.Commander));
     }
 
     private void selectSchemeDeck(final int playerIndex) {
@@ -772,9 +877,9 @@ public class VLobby implements ILobbyView {
             if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
                 vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
             } else { //Only other string is "Random"
-                if (isPlayerAI(playerIndex)) { //AI
+                if (isPlayerAI(playerIndex)) {
                     vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                } else { //Human
+                } else {
                     vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
                 }
             }

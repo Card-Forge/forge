@@ -964,6 +964,12 @@ public class AiController {
             return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
         }
 
+        // abilities skip the checks below, but activating one can still trigger lethal damage (e.g. Burning-Tree Shaman)
+        if (sa.isActivatedAbility() && !usesFullSimulation() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()
+                && ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
+            return AiPlayDecision.CurseEffects;
+        }
+
         if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
             return AiPlayDecision.WillPlay;
         }
@@ -1404,22 +1410,21 @@ public class AiController {
             return false;
         }
 
-        if (!MyRandom.percentTrue(getIntProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED))) {
-            // check against the chance specified in the profile
-            return false;
-        }
         if (game.getPhaseHandler().getTurn() <= 2) {
             // too obvious when doing it on the very first turn of the game
+            return false;
+        }
+
+        if (!MyRandom.percentTrue(getIntProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED))) {
+            // check against the chance specified in the profile
             return false;
         }
 
         CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
-        if (getBoolProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!otb.anyMatch(CardPredicates.NON_LANDS)) {
-                return false;
-            }
+        if (getBoolProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS) && !otb.anyMatch(CardPredicates.NON_LANDS)) {
+            return false;
         }
 
         // TODO: improve the detection of taplands
@@ -1887,7 +1892,16 @@ public class AiController {
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
         } else if ("HighestLoseLife".equals(logic)) {
-            return Math.min(player.getLife() - 1, MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1);
+            // nobody to outbid
+            if (AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).size() < 2) {
+                return min;
+            }
+            int random = MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, 0) + 1);
+            if (player.getLife() < random + 5) {
+                return min;
+            } else {
+                return random;
+            }
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (sa.hasSVar("EnergyToPay")) {

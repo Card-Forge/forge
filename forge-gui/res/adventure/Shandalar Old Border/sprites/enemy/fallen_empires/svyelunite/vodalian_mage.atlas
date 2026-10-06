@@ -1,0 +1,59 @@
+vodalian_mage.png
+size: 768,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 384, 0
+  size: 16, 16
+Idle
+  xy: 0, 0
+  size: 96, 128
+Idle
+  xy: 96, 0
+  size: 96, 128
+Idle
+  xy: 192, 0
+  size: 96, 128
+Idle
+  xy: 288, 0
+  size: 96, 128
+Walk
+  xy: 0, 128
+  size: 96, 128
+Walk
+  xy: 96, 128
+  size: 96, 128
+Walk
+  xy: 192, 128
+  size: 96, 128
+Walk
+  xy: 288, 128
+  size: 96, 128
+Walk
+  xy: 384, 128
+  size: 96, 128
+Walk
+  xy: 480, 128
+  size: 96, 128
+Walk
+  xy: 576, 128
+  size: 96, 128
+Walk
+  xy: 672, 128
+  size: 96, 128
+Attack
+  xy: 0, 256
+  size: 96, 128
+Attack
+  xy: 192, 256
+  size: 96, 128
+Attack
+  xy: 480, 256
+  size: 96, 128
+Attack
+  xy: 672, 256
+  size: 96, 128
+Death
+  xy: 672, 384
+  size: 96, 128

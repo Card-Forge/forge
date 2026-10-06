@@ -4,6 +4,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.net.server.HostingServer;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.server.DeltaSyncManager;
@@ -88,10 +89,10 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
         try {
             server.startServer(port);
-            Assert.assertTrue(server.isHosting(), "Server should be hosting after start");
+            Assert.assertTrue(HostingServer.isHosting(), "Server should be hosting after start");
             netLog.info("Server started on port {}", port);
         } finally {
-            if (server.isHosting()) {
+            if (HostingServer.isHosting()) {
                 server.stopServer();
                 netLog.info("Server stopped");
             }

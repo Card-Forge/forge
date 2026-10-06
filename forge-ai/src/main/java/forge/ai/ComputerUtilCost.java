@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import forge.card.MagicColor;
 import forge.game.GameObject;
+import forge.game.ability.ApiType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -459,24 +460,33 @@ public class ComputerUtilCost {
             if (part instanceof CostTapType) {
                 String type = part.getType();
 
-                /*
-                 * Only crew with creatures weaker than vehicle
-                 *
-                 * Possible improvements:
-                 * - block against evasive (flyers, intimidate, etc.)
-                 * - break board stall by racing with evasive vehicle
-                 */
-                if (sa.isCrew()) {
-                    Card vehicle = AnimateAi.becomeAnimated(source, sa);
-                    final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                // "tap any number of creatures with total power N or more" costs (e.g. Crew, Saddle, Teamwork)
+                // have the amount "Any", so check them the same way AiCostDecision pays them
+                if (type.contains("+withTotalPowerGE")) {
                     String totalP = type.split("withTotalPowerGE")[1];
                     type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
-                    CardCollection exclude = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa);
-                    exclude = CardLists.filter(exclude, c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue); // exclude creatures >= vehicle
-                    exclude.addAll(alreadyTapped);
-                    CardCollection tappedCrew = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true, Integer.parseInt(totalP), exclude);
-                    if (tappedCrew != null) {
-                        alreadyTapped.addAll(tappedCrew);
+                    CardCollection exclude = new CardCollection();
+                    /*
+                     * Only crew with creatures weaker than vehicle
+                     *
+                     * Possible improvements:
+                     * - block against evasive (flyers, intimidate, etc.)
+                     * - break board stall by racing with evasive vehicle
+                     */
+                    if (sa.isCrew()) {
+                        Card vehicle = AnimateAi.becomeAnimated(source, sa);
+                        final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                        exclude.addAll(CardLists.filter(CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa),
+                                c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue)); // exclude creatures >= vehicle
+                    }
+                    if (alreadyTapped != null) {
+                        exclude.addAll(alreadyTapped);
+                    }
+                    CardCollection tapChoices = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, sa.isCrew() || !((CostTapType) part).canTapSource, Integer.parseInt(totalP), exclude);
+                    if (tapChoices != null) {
+                        if (alreadyTapped != null) {
+                            alreadyTapped.addAll(tapChoices);
+                        }
                         return true;
                     }
                     return false;
@@ -676,6 +686,10 @@ public class ComputerUtilCost {
         // check that X is really free choice
         if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
+        }
+        // another mode already decided
+        if (root.getApi() == ApiType.Charm && root.getXManaCostPaid() != null) {
+            return root.getXManaCostPaid();
         }
 
         Integer val = null;

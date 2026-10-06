@@ -23,6 +23,10 @@ import java.util.List;
 public final class JMisc8 {
     private JMisc8() { }
 
+    public static <K, V> java.util.NavigableMap<K, V> emptyNavigableMap() {
+        return new java.util.TreeMap<K, V>();
+    }
+
     public static StringBuilder append(StringBuilder sb, byte b) {
         return sb.append((int) b);
     }

@@ -157,11 +157,12 @@ public enum GameType {
         if(!deckFormat.getPrimaryDeckSections().contains(DeckSection.Main))
             return EnumSet.noneOf(DeckSection.class); //Already an extra deck, like a dedicated Scheme or Planar deck.
         if(deckFormat == DeckFormat.Limited)
-            return EnumSet.of(DeckSection.Conspiracy, DeckSection.Contraptions, DeckSection.Attractions);
+            return EnumSet.of(DeckSection.Conspiracy, DeckSection.Contraptions, DeckSection.Attractions,
+                    DeckSection.Stickers);
         if(this == Constructed || this == Commander)
             return EnumSet.of(DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
-                    DeckSection.Attractions, DeckSection.Contraptions);
-        return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions);
+                    DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
+        return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
     }
 
     public static GameType smartValueOf(String name) {

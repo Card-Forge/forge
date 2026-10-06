@@ -21,6 +21,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.sound.SoundSystem;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -124,7 +125,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (showExileUpdate) {
                 showExileUpdate = false;
-                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets, false);
+                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets);
                 activatingPlayer = null;
                 playersWithValidTargets.clear();
             }
@@ -191,6 +192,29 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             zonesUpdate.add(new PlayerZoneUpdate(p, z));
         }
         return processEvent();
+    }
+
+    @Override
+    public Void visit(final GameEventFlipCoin ev) {
+        if (humanController == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_FLIP_ANIMATION)) {
+            return null;
+        }
+        final PlayerView me = humanController.getLocalPlayerView();
+        final boolean heads;
+        final String msg;
+        if (ev.startingToss()) {
+            if (me == null) { return null; }   // spectators
+            heads = me.equals(ev.flipper());
+            msg = Localizer.getInstance().getMessage(
+                    heads ? "lblYouHaveWonTheCoinToss" : "lblYouLostTheCoinToss", me.getName());
+        } else {
+            heads = ev.heads();
+            msg = Localizer.getInstance().getMessage("lblPlayerFlippedCoin",
+                    ev.flipper().getName(),
+                    Localizer.getInstance().getMessage(heads ? "lblHeads" : "lblTails"));
+        }
+        matchController.showCoinFlip(heads, msg, ev.startingToss());   // tap required only for the opening toss
+        return null;
     }
 
     @Override

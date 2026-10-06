@@ -323,6 +323,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
                 }
             }, 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_PLAY_ANIMATION_STYLE,
+            Forge.getLocalizer().getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCardPlayOption", "How cards animate when entering the battlefield."),
+            new String[] { "Rotate", "Slide", "Popup", "Off" }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COIN_FLIP_ANIMATION,
+            Forge.getLocalizer().getMessageorUseDefault("lblCoinFlipAnimation", "Coin Flip Animation"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCoinFlipAnimation", "Show a coin flip animation at the start of a match.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
             Forge.getLocalizer().getMessage("cbStackCreatures"),
             Forge.getLocalizer().getMessage("nlStackCreatures")), 1);
@@ -402,9 +409,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     g.drawText(display, font, color, x, y, w, h, false, Align.right, false);
                 }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
+        /*lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
             Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
-            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);
+            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);*/ //
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
             Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
             Forge.getLocalizer().getMessage("nlLoadArchivedFormats")), 3);

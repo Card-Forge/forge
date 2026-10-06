@@ -20,9 +20,11 @@
     "description": "A talisman for remotely contacting your employer",
     "iconName": "SirDonovansAmulet",
     "dialogOnUse": {
+      "loctext": "adv.item_sir_donovans_amulet.n0.text",
       "text": "The amulet lies inert until mana is channeled through it.",
       "options": [
         {
+          "locname": "adv.item_sir_donovans_amulet.n1.name",
           "name": "Put the amulet away"
         },
         {
@@ -34,6 +36,7 @@
             },
             { "hasShards": 3 }
           ],
+          "locname": "adv.item_sir_donovans_amulet.n2.name",
           "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
           "action": [
             {
@@ -44,13 +47,17 @@
               "addShards": -3
             }
           ],
+          "loctext": "adv.item_sir_donovans_amulet.n2.text",
           "text": "Unsure exactly what to expect, you channel a bit of energy from your own mana shards into the amulet. It glows an array of colors for the briefest of moments and then fades.",
           "options": [
             {
+              "locname": "adv.shared.continue_paren",
               "name": "(Continue)",
+              "loctext": "adv.item_sir_donovans_amulet.n3.text",
               "text": "A thought enters your mind in response, not so much words as an urge - you should go to a town.",
               "options": [
                 {
+                  "locname": "adv.shared.continue_paren",
                   "name": "(Continue)"
                 }
               ]
@@ -70,6 +77,7 @@
             }
           ],
           "isDisabled": true,
+          "locname": "adv.item_sir_donovans_amulet.n2.name",
           "name": "Contact Sir Donovan (Requires 3 Mana Shards)"
         },
         {
@@ -91,10 +99,13 @@
             },
             { "hasShards": 5 }
           ],
+          "locname": "adv.item_sir_donovans_amulet.n4.name",
           "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
+          "loctext": "adv.item_sir_donovans_amulet.n4.text",
           "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
           "options": [
             {
+              "locname": "adv.shared.continue_paren",
               "name": "(Continue)",
               "action": [
                 {
@@ -131,6 +142,7 @@
             }
           ],
           "isDisabled": true,
+          "locname": "adv.item_sir_donovans_amulet.n4.name",
           "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
         }
       ]
@@ -144,9 +156,11 @@
     "questItem": true,
     "usableInPoi": true,
     "dialogOnUse": {
+      "loctext": "adv.item_landscape_sketchbook.n0.text",
       "text": "You found this sketchbook at the dig site.",
       "options": [
         {
+          "locname": "adv.item_landscape_sketchbook.n1.name",
           "name": "You can't quite make heads nor tails of the sketches inside, but you better hold onto it..."
         }
       ]

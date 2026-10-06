@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 import org.jupnp.UpnpServiceConfiguration;
 
 public interface IGuiBase {
+
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();

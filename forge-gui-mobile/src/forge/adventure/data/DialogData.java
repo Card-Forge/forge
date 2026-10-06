@@ -20,6 +20,8 @@ public class DialogData implements Serializable {
     public String loctext= "";            //References a localized string for the text body.
     public DialogData[] options = new DialogData[0];      //List of sub-dialogs. Show up as options in the current one.
     public boolean isDisabled = false;
+    // Persist quest dialog state here because this class already has a stable cross-platform serialization UID.
+    private boolean displayed = false;
 
     public transient Consumer callback;
 
@@ -41,6 +43,15 @@ public class DialogData implements Serializable {
         this.options = clonedOptions.toArray(new DialogData[0]);
         this.voiceFile = other.voiceFile;
         this.isDisabled = other.isDisabled;
+        this.displayed = other.displayed;
+    }
+
+    public boolean isDisplayed() {
+        return displayed;
+    }
+
+    public void markDisplayed() {
+        displayed = true;
     }
 
     @Override
