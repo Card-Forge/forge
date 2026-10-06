@@ -245,8 +245,6 @@ public abstract class PlayerController {
     public abstract Player chooseStartingPlayer(boolean isFirstGame);
     public abstract PlayerZone chooseStartingHand(List<PlayerZone> zones);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
-    /** Human GUIs play a coin animation. Blocks until it finishes. */
-    public void notifyCoinFlip(final Player flipper, final boolean heads, final String message, final boolean waitForTap) {}
 
     public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional);
     public final String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes) {

@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -283,8 +284,14 @@ public class MatchController extends NetworkGuiGame {
         if (FThreads.isGuiThread()) {
             return;
         }
-        final java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(1);
-        FThreads.invokeInEdtLater(() -> new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show());
+        final CountDownLatch latch = new CountDownLatch(1);
+        FThreads.invokeInEdtLater(() -> {
+            try {
+                new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
+            } catch (RuntimeException e) {
+                latch.countDown();
+            }
+        });
         try {
             latch.await();
         } catch (InterruptedException e) {

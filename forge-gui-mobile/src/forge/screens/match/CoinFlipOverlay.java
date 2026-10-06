@@ -38,6 +38,7 @@ public class CoinFlipOverlay extends FOverlay {
     private float w, h;
 
     private final boolean waitForTap;
+    private boolean released;
 
     public CoinFlipOverlay(final boolean heads, final String caption, final boolean waitForTap, final Runnable onDone) {
         super(FSkinColor.get(Colors.CLR_OVERLAY));
@@ -138,11 +139,23 @@ public class CoinFlipOverlay extends FOverlay {
             return;
         }
         done = true;
-        FThreads.invokeInEdtLater(() -> {
-            hide();
-            if (headsTex != null) headsTex.dispose();
-            if (tailsTex != null) tailsTex.dispose();
-            onDone.run();   // releases the latch so the game thread continues
-        });
+        FThreads.invokeInEdtLater(this::hide);
+    }
+
+    private void release() {
+        if (released) {
+            return;
+        }
+        released = true;
+        done = true; // stop drawing before textures are disposed
+        if (headsTex != null) headsTex.dispose();
+        if (tailsTex != null) tailsTex.dispose();
+        onDone.run();   // releases the latch so the game thread continues
+    }
+
+    // Every dismissal path (tap, Escape/Back, FOverlay.hideAll) goes through hide().
+    @Override public void hide() {
+        super.hide();
+        release();
     }
 }

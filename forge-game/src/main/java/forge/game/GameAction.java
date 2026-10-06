@@ -2453,14 +2453,7 @@ public class GameAction {
 
         if (isFirstGame) {
             final Player winner = goesFirst;
-            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
-            for (Player p : game.getPlayers()) {
-                final boolean won = p == winner;
-                final String msg = Localizer.getInstance().getMessage(
-                        won ? "lblYouHaveWonTheCoinToss" : "lblYouLostTheCoinToss", p.getName());
-                // heads = this player won the toss
-                p.getController().notifyCoinFlip(p, won, msg, true);
-            }
+            game.fireEvent(new GameEventFlipCoin(goesFirst.getView(), true, true));
         }
 
         for (Player p : game.getPlayers()) {
