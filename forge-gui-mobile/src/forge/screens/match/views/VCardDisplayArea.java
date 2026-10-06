@@ -332,9 +332,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             VPlayerPanel pp = MatchScreen.getPlayerPanel(card.getController());
             if (pp == null) { return false; }
             VPlayerPanel.InfoTab tab = pp.getSelectedTab();
-            // CHANGED: plain cast instead of the Java 16+ pattern match, so older Android language levels compile
-            return tab instanceof VPlayerPanel.InfoTabZone
-                    && ((VPlayerPanel.InfoTabZone) tab).zoneType == ZoneType.Hand;
+            return tab instanceof VPlayerPanel.InfoTabZone z && z.zoneType == ZoneType.Hand;
         }
         public static CardAreaPanel get(CardView card0) {
             CardAreaPanel cardPanel = allCardPanels.get(card0.getId());

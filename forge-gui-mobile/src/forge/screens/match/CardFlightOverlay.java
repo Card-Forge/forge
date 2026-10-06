@@ -205,6 +205,17 @@ public final class CardFlightOverlay {
         launchedFromStack.clear();
     }
 
+    // If this zone is the player's currently open zone, its visible area's screen rect, else null
+    private static Rectangle openZoneRect(VPlayerPanel pp, ZoneType zone) {
+        VPlayerPanel.InfoTab tab = pp.getSelectedTab();
+        if (!(tab instanceof VPlayerPanel.InfoTabZone) || ((VPlayerPanel.InfoTabZone) tab).zoneType != zone) {
+            return null;
+        }
+        if (tab.getDisplayArea() == null || !tab.getDisplayArea().isVisible()) { return null; }
+        Rectangle r = tab.getDisplayArea().screenPos;
+        return (r != null && r.width > 0 && r.height > 0) ? r : null;
+    }
+
     // Screen rect of one of a player's zone tab icons, or null if it isn't laid out/visible
     private static Rectangle zoneTabRect(VPlayerPanel pp, ZoneType zone) {
         for (VPlayerPanel.InfoTab tab : pp.getTabs()) {
@@ -327,7 +338,8 @@ public final class CardFlightOverlay {
             PlayerView owner = f.card.getOwner();
             VPlayerPanel pp = owner == null ? null : MatchScreen.getPlayerPanel(owner);
             if (pp != null) {
-                dest = zoneTabRect(pp, zone);
+                dest = openZoneRect(pp, zone);               // zone is open: fly into it
+                if (dest == null) { dest = zoneTabRect(pp, zone); }
                 if (dest == null && pp.getAvatar() != null && pp.getAvatar().screenPos.width > 0) {
                     dest = pp.getAvatar().screenPos;
                 }
