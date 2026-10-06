@@ -54,6 +54,22 @@ public class NameLetterCardsTest extends AITest {
     }
 
     @Test
+    public void aNameBeginsWithItsFirstLetterOrDigit() {
+        newGame();
+        Card champion = addCard("1996 World Champion", me);
+        Card eomer = addCard("\u00c9omer, King of Rohan", me);
+        Card source = addCard("Grizzly Bears", me);
+        String starts = "Creature.NameStartsWithChosenLetter";
+
+        source.setChosenType("W");
+        AssertJUnit.assertFalse(champion.isValid(starts, me, source, null));
+        source.setChosenType("O");
+        AssertJUnit.assertFalse(eomer.isValid(starts, me, source, null));
+        source.setChosenType("\u00c9");
+        AssertJUnit.assertTrue(eomer.isValid(starts, me, source, null));
+    }
+
+    @Test
     public void disemvowelCountsEachVowelOnce() {
         newGame();
         Card bears = addCard("Grizzly Bears", opp);

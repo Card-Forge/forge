@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
@@ -81,6 +83,16 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 for (char letter = 'A'; letter <= 'Z'; letter++) {
                     validTypes.add(String.valueOf(letter));
                 }
+                // letters outside the English alphabet, when a name in this game has one
+                final Set<String> others = new TreeSet<>();
+                for (final Card c : card.getGame().getCardsInGame()) {
+                    for (char letter : c.getName().toUpperCase().toCharArray()) {
+                        if (Character.isLetter(letter) && (letter < 'A' || letter > 'Z')) {
+                            others.add(String.valueOf(letter));
+                        }
+                    }
+                }
+                validTypes.addAll(others);
                 break;
             case "CreatureInTargetedDeck":
                 for (final Player p : tgtPlayers) {
