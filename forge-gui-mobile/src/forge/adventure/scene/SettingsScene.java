@@ -353,13 +353,13 @@ public class SettingsScene extends UIScene {
             String mode = (String) o;
             if (mode == null)
                 mode = "Rotate";
-            if (!mode.equalsIgnoreCase(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_OPTIONS))) {
-                FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_OPTIONS, mode);
+            if (!mode.equalsIgnoreCase(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_STYLE))) {
+                FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_STYLE, mode);
                 FModel.getPreferences().save();
             }
             return null;
         });
-        addLabel(localizer.getMessageorUseDefault("cbCardPlayAnimation", "Card Play Animation"));
+        addLabel(localizer.getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"));
         settingGroup.add(cardPlayAnim).align(Align.right).pad(2);
         if (!GuiBase.isAndroid()) {
             final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};

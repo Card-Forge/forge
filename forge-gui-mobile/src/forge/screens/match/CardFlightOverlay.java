@@ -76,7 +76,7 @@ public final class CardFlightOverlay {
     }
 
     public static Style style() {
-        String v = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_OPTIONS);
+        String v = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_STYLE);
         Parsed p = parsed;                       // one read, so raw and style always match
         if (v == p.raw || (v != null && v.equals(p.raw))) { return p.style; }
         Style s = parse(v);

@@ -162,7 +162,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ZONE_TAB_NEW_COUNT("true"),
         UI_ENABLE_AI_PICKER("false"),
         UI_GROUP_IDENTICAL_CARDS("false"),
-        UI_CARD_PLAY_ANIMATION_OPTIONS("Rotate"),
+        UI_CARD_PLAY_ANIMATION_STYLE("Rotate"),
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
         UI_VOL_SOUNDS ("100"),
