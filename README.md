@@ -35,7 +35,7 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 
 ### 📱 iOS (early stage)
 - Build the **IPA** according to Wiki
-- No jailbreak needed, only developer mode and iOS 16-26
+- No jailbreak needed, only developer mode and iOS 16-27
 - Connect your device to a PC to self-sign and upload the app file, multiple tools exist e.g. [Sideloadly](https://sideloadly.io)
 
 ---
