@@ -20,6 +20,8 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
 import forge.util.collect.FCollectionView;
@@ -43,7 +45,7 @@ public final class CardFlightOverlay {
     private static final int MAX_LEAVE_FLIGHTS = 12;   // simultaneous LEAVE flights (board wipes); extra cards just disappear
     private static final long LEAVE_STAGGER_NANOS = 35_000_000L;     // delay between cards of one wipe
     private static final long LEAVE_BATCH_GAP_NANOS = 150_000_000L;  // departures closer together than this belong to one wipe          // extra simultaneous flights are skipped
-    private static final boolean SKIP_TOKENS = true;   // entry only: tokens have no hand/stack origin and are often spawned in bulk
+    private static final boolean TOKENS_POPUP = true; // tokens always use the popup style (unless animations are off)
     private static final float ARC_HEIGHT = 40f;
 
     // zones a card can be sent to from the battlefield, in the order they are checked
@@ -64,7 +66,18 @@ public final class CardFlightOverlay {
     private static int leaveBatchIndex;
 
     private CardFlightOverlay() { }
+    public enum Style { OFF, ROTATE, SLIDE, POPUP }
 
+    public static Style style() {
+        String v = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_OPTIONS);
+        if (v == null) { return Style.ROTATE; }
+        switch (v.trim().toLowerCase()) {
+            case "off": case "false": return Style.OFF;
+            case "slide": return Style.SLIDE;
+            case "popup": return Style.POPUP;
+            default: return Style.ROTATE;
+        }
+    }
     public static final class Flight {
         private final CardView card;
         private final Rectangle from;    // ENTER: hand/stack origin or null. LEAVE: the card's last panel rect on the field
@@ -82,6 +95,7 @@ public final class CardFlightOverlay {
         private boolean tint;      // LEAVE: color flash over the card
         private boolean cancelled; // LEAVE: turned out not to be a departure (e.g. control change)
         private float fromCx, fromCy, toCx, toCy, fromH, toH;
+        private Style style = Style.ROTATE;
 
         private Flight(CardView card, Rectangle from, boolean fromExact, Rectangle to, float tappedAngle, boolean leave) {
             this.card = card; this.from = from; this.fromExact = fromExact; this.to = to;
@@ -124,19 +138,26 @@ public final class CardFlightOverlay {
      */
     public static Flight start(CardView card, Rectangle handFrom, Rectangle to, float tappedAngle, boolean viaStack) {
         Rectangle stackFrom = stackRects.remove(card.getId()); // always consume so it can't go stale
+        Style s = style();
+        if (s == Style.OFF) { return null; }
+        if (countFlights(false) >= MAX_FLIGHTS) { return null; }
+        if (TOKENS_POPUP && card.isToken()) { s = Style.POPUP; } // tokens have no hand/stack origin
+
         Rectangle from;
         boolean exact;
-        if (viaStack && stackFrom != null) {
+        if (s == Style.POPUP) { // popup doesn't travel, so no origin is needed
+            from = null;
+            exact = false;
+        } else if (viaStack && stackFrom != null) {
             from = stackFrom;
             exact = true;
         } else {
             from = handFrom;
             exact = false;
         }
-        if (countFlights(false) >= MAX_FLIGHTS) { return null; }
-        if (SKIP_TOKENS && card.isToken()) { return null; }
 
         Flight f = new Flight(card, from, exact, to, tappedAngle, false);
+        f.style = s;
         flights.add(f);
         if (exact) { launchedFromStack.add(card.getId()); }
         Gdx.graphics.requestRendering();
@@ -370,18 +391,44 @@ public final class CardFlightOverlay {
     }
 
     private static void drawEnter(Graphics g, Flight f, float t) {
-        float e = Interpolation.fastSlow.apply(t);
-        float h = f.fromH + (f.toH - f.fromH) * e;
-        float w = h / FCardPanel.ASPECT_RATIO;   // always a real card shape
+        float cx, cy, h, angle;
+        float alpha = 1f;
 
-        float cx = f.fromCx + (f.toCx - f.fromCx) * e;
-        float cy = f.fromCy + (f.toCy - f.fromCy) * e - ARC_HEIGHT * MathUtils.sin(MathUtils.PI * t); // little arc
-        float angle = 360f * e + f.tappedAngle * e; // spin, then settle into the tapped pose
+        switch (f.style) {
+            case POPUP: { // appears in place, scales up with a small overshoot and fades in
+                float e = Interpolation.swingOut.apply(t);
+                h = f.toH * (0.3f + 0.7f * e);
+                cx = f.toCx;
+                cy = f.toCy;
+                angle = f.tappedAngle;
+                alpha = Math.min(1f, t * 3f);
+                break;
+            }
+            case SLIDE: { // straight line, no spin, no arc; settles into the tapped pose
+                float e = Interpolation.fastSlow.apply(t);
+                h = f.fromH + (f.toH - f.fromH) * e;
+                cx = f.fromCx + (f.toCx - f.fromCx) * e;
+                cy = f.fromCy + (f.toCy - f.fromCy) * e;
+                angle = f.tappedAngle * e;
+                break;
+            }
+            default: { // ROTATE (the original behaviour)
+                float e = Interpolation.fastSlow.apply(t);
+                h = f.fromH + (f.toH - f.fromH) * e;
+                cx = f.fromCx + (f.toCx - f.fromCx) * e;
+                cy = f.fromCy + (f.toCy - f.fromCy) * e - ARC_HEIGHT * MathUtils.sin(MathUtils.PI * t);
+                angle = 360f * e + f.tappedAngle * e;
+                break;
+            }
+        }
 
+        float w = h / FCardPanel.ASPECT_RATIO;
+        if (alpha < 1f) { g.setAlphaComposite(alpha); }
         g.startRotateTransform(cx, cy, angle);
         CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h,
                 CardStackPosition.Top, false, false, false, true);
         g.endTransform();
+        if (alpha < 1f) { g.resetAlphaComposite(); }
     }
 
     private static void drawLeave(Graphics g, Flight f, float t) {

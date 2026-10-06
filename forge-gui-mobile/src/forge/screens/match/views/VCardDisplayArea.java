@@ -307,7 +307,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             animatedIds.remove(card.getId());
         }
         public void playEntryAnimation() {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_PLAY_ANIMATION)) { return; }
+            if (CardFlightOverlay.style() == CardFlightOverlay.Style.OFF) { return; }
             if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
             if (!animatedIds.add(getCard().getId())) { return; }
 
@@ -324,7 +324,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         public void playLeaveAnimation() {
             if (!hasFieldRect) { return; }
             hasFieldRect = false;
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_PLAY_ANIMATION)) { return; }
+            if (CardFlightOverlay.style() == CardFlightOverlay.Style.OFF) { return; }
             if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
             CardFlightOverlay.startLeave(getCard(), new Rectangle(lastFieldRect), lastFieldAngle);
         }
