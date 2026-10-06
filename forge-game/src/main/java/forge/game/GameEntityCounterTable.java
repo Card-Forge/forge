@@ -89,6 +89,25 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         return result;
     }
 
+    public void replaceRemoveCounterEffect(final Game game) {
+        replaceRemoveCounterEffect(game, null);
+    }
+
+    public void replaceRemoveCounterEffect(final Game game, final SpellAbility cause) {
+        if (isEmpty()) {
+            return;
+        }
+        for (Map.Entry<GameEntity, Map<Optional<Player>, Multiset<CounterType>>> gm : columnMap().entrySet()) {
+            if (gm.getValue().isEmpty()) {
+                continue;
+            }
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Object, gm.getKey());
+            runParams.put(AbilityKey.Cause, cause);
+            game.getTriggerHandler().runTrigger(TriggerType.CounterTypeRemovedAll, runParams, false);
+        }
+    }
+
     public void triggerCountersPutAll(final Game game) {
         if (isEmpty()) {
             return;

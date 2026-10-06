@@ -1884,6 +1884,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final int subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
+        GameEntityCounterTable tempTable = new GameEntityCounterTable();
+        int result = subtractCounter(counterName, n, remover, isDamage, tempTable);
+        tempTable.replaceRemoveCounterEffect(getGame(), null);
+        return result;
+    }
+
+    @Override
+    public final int subtractCounter(final CounterType counterName, final int n, final Player remover, GameEntityCounterTable table) {
+        return subtractCounter(counterName, n, remover, false, table);
+    }
+
+    public final int subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage, GameEntityCounterTable table) {
         int oldValue = getCounters(counterName);
         int newValue = max(oldValue - n, 0);
 
@@ -1943,6 +1955,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         runParams.put(AbilityKey.CounterAmount, delta);
         runParams.put(AbilityKey.NewCounterAmount, newValue);
         getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
+
+        if (table != null) {
+            table.put(remover, this, counterName, delta);
+        }
 
         return delta;
     }
