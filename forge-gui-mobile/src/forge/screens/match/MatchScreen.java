@@ -809,7 +809,6 @@ public class MatchScreen extends FScreen {
             pnl.setAttachedToPanel(null);
             pnl.setPrevPanelInStack(null);
             pnl.setNextPanelInStack(null);
-            CardAreaPanel.forgetAnimated(card);
         }
     }
 
