@@ -694,7 +694,12 @@ public class ComputerUtilMana {
 
             saList.removeAll(saExcludeList);
 
-            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+            Collection<SpellAbility> saOrdered = saList;
+            if (toPay == ManaCostShard.GENERIC && !hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref")) {
+                saOrdered = requiredSourcesFirst(saList, cost, sa);
+            }
+
+            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saOrdered, checkPlayable || !test);
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
                 // not a good idea to sac a card that you're targeting with the SA you're paying for
@@ -820,6 +825,50 @@ public class ComputerUtilMana {
         }
 
         return paymentList;
+    }
+
+    // a source adding several mana that is needed either way goes first, so nothing else is tapped beside it for no reason
+    private static Collection<SpellAbility> requiredSourcesFirst(final Collection<SpellAbility> saList, final ManaCostBeingPaid cost, final SpellAbility sa) {
+        final int generic = cost.getGenericManaAmount();
+        if (generic < 2) {
+            return saList;
+        }
+
+        Map<Card, Integer> manaPerCard = null;
+        int manaTotal = 0;
+        List<SpellAbility> required = null;
+        for (final SpellAbility ma : saList) {
+            final int amount = manaPerCard != null ? manaPerCard.get(ma.getHostCard()) : ma.totalAmountOfManaGenerated(sa, true);
+            if (amount < 2) {
+                continue;
+            }
+            if (manaPerCard == null) {
+                manaPerCard = Maps.newHashMap();
+                for (final SpellAbility source : saList) {
+                    manaPerCard.merge(source.getHostCard(), source.totalAmountOfManaGenerated(sa, true), Math::max);
+                }
+                for (final int mana : manaPerCard.values()) {
+                    manaTotal += mana;
+                }
+            }
+            if (manaTotal - manaPerCard.get(ma.getHostCard()) < cost.getConvertedManaCost()) {
+                if (required == null) {
+                    required = Lists.newArrayList();
+                }
+                required.add(ma);
+            }
+        }
+        if (required == null) {
+            return saList;
+        }
+
+        final List<SpellAbility> ordered = Lists.newArrayList(required);
+        for (final SpellAbility ma : saList) {
+            if (!required.contains(ma)) {
+                ordered.add(ma);
+            }
+        }
+        return ordered;
     }
 
     private static void resetPayment(List<SpellAbility> payments) {
