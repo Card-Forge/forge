@@ -112,12 +112,9 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
             // CR 603.6a newcomers see each other
             if (containsColumn(ZoneType.Battlefield)) {
-                CardCollection entered = new CardCollection(Iterables.concat(column(ZoneType.Battlefield).values()));
-                if (entered.size() > 1) {
-                    for (Card c : entered) {
-                        if (c.isInPlay()) {
-                            c.getZone().updateLKI(c);
-                        }
+                for (Card c : Iterables.concat(column(ZoneType.Battlefield).values())) {
+                    if (c.isInPlay()) {
+                        c.getZone().updateLKI(c);
                     }
                 }
             }
