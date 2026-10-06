@@ -11724,5 +11724,849 @@
 			}
 		],
 		"storyQuest": true
+	},
+	{
+		"id": 55,
+		"isTemplate": true,
+		"name": "The Tides Give, the Tides Take",
+		"description": "Choose a side in the battle for Svyelunite Temple and defeat the opposing faction.",
+		"offerDialog": {
+			"text": "A strange harmonic melody draws you toward two River Merfolk standing waist-deep in nearby water. They sound large conch horns and call for aid against the Homarids attacking Svyelunite Temple. To show the danger facing their people, one of them raises the severed head of an invader.",
+			"options": [
+				{
+					"name": "(Continue)",
+					"text": "The other River Merfolk speaks while its companion holds the trophy aloft: \"The Homarids have overrun our sacred shore and are tearing Svyelunite Temple apart. Stand with the Vodalians, break their assault, and our priests will reward you from the temple treasury.\"",
+					"options": [
+						{
+							"name": "(Continue)",
+							"text": "A prismatic light flickers in the severed Homarid's black eye. An alien voice rolls into your thoughts: \"A counter-offer... The tides give... The tides take... Their time has passed... Our time has come... Help us wash their bodies away... and their flotsam shall flow to you...\"",
+							"options": [
+								{
+									"name": "(Continue)",
+									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"",
+									"options": [
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100,
+													"not": true
+												}
+											],
+											"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Accepted",
+														"val": 1
+													}
+												},
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 1
+													},
+													"issueQuest": "55"
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100,
+													"not": true
+												}
+											],
+											"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Accepted",
+														"val": 1
+													}
+												},
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 2
+													},
+													"issueQuest": "55"
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100
+												}
+											],
+											"name": "\"I will help the Vodalians defend their temple.\" (Aid the Merfolk)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Accepted",
+														"val": 1
+													}
+												},
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 1
+													},
+													"issueQuest": "55"
+												},
+												{
+													"deleteMapObject": 9100
+												},
+												{
+													"deleteMapObject": 9110
+												},
+												{
+													"deleteMapObject": 9103
+												},
+												{
+													"deleteMapObject": 9104
+												},
+												{
+													"deleteMapObject": 9112
+												},
+												{
+													"deleteMapObject": 9113
+												},
+												{
+													"deleteMapObject": 40011
+												},
+												{
+													"deleteMapObject": 40013
+												},
+												{
+													"deleteMapObject": 40015
+												},
+												{
+													"deleteMapObject": 40016
+												},
+												{
+													"deleteMapObject": 40017
+												},
+												{
+													"deleteMapObject": 40043
+												},
+												{
+													"deleteMapObject": 40018
+												},
+												{
+													"deleteMapObject": 40019
+												},
+												{
+													"deleteMapObject": 40020
+												},
+												{
+													"deleteMapObject": 40041
+												},
+												{
+													"deleteMapObject": 40022
+												},
+												{
+													"deleteMapObject": 40023
+												},
+												{
+													"deleteMapObject": 40042
+												},
+												{
+													"deleteMapObject": 40024
+												},
+												{
+													"deleteMapObject": 40040
+												},
+												{
+													"deleteMapObject": 40039
+												},
+												{
+													"deleteMapObject": 40038
+												},
+												{
+													"activateMapObject": 40003
+												},
+												{
+													"activateMapObject": 40004
+												},
+												{
+													"activateMapObject": 40005
+												},
+												{
+													"activateMapObject": 40021
+												},
+												{
+													"activateMapObject": 40031
+												},
+												{
+													"activateMapObject": 40025
+												},
+												{
+													"activateMapObject": 40033
+												},
+												{
+													"activateMapObject": 40034
+												},
+												{
+													"activateMapObject": 40032
+												},
+												{
+													"activateMapObject": 40026
+												},
+												{
+													"activateMapObject": 40037
+												},
+												{
+													"activateMapObject": 40036
+												},
+												{
+													"activateMapObject": 40035
+												},
+												{
+													"activateMapObject": 40027
+												},
+												{
+													"activateMapObject": 40074
+												},
+												{
+													"activateMapObject": 40030
+												},
+												{
+													"activateMapObject": 40028
+												},
+												{
+													"activateMapObject": 40029
+												},
+												{
+													"deleteMapObject": 50003
+												},
+												{
+													"deleteMapObject": 50004
+												},
+												{
+													"deleteMapObject": 50005
+												},
+												{
+													"deleteMapObject": 50021
+												},
+												{
+													"deleteMapObject": 50031
+												},
+												{
+													"deleteMapObject": 50025
+												},
+												{
+													"deleteMapObject": 50033
+												},
+												{
+													"deleteMapObject": 50034
+												},
+												{
+													"deleteMapObject": 50032
+												},
+												{
+													"deleteMapObject": 50026
+												},
+												{
+													"deleteMapObject": 50037
+												},
+												{
+													"deleteMapObject": 50036
+												},
+												{
+													"deleteMapObject": 50035
+												},
+												{
+													"deleteMapObject": 50027
+												},
+												{
+													"deleteMapObject": 50074
+												},
+												{
+													"deleteMapObject": 50030
+												},
+												{
+													"deleteMapObject": 50028
+												},
+												{
+													"deleteMapObject": 50029
+												},
+												{
+													"deleteMapObject": 9100
+												},
+												{
+													"deleteMapObject": 9110
+												},
+												{
+													"deleteMapObject": 9103
+												},
+												{
+													"deleteMapObject": 9112
+												},
+												{
+													"deleteMapObject": 9104
+												},
+												{
+													"deleteMapObject": 9113
+												},
+												{
+													"setMapFlag": {
+														"key": "FE_Svyelunite_OpponentsDefeated",
+														"val": 0
+													}
+												},
+												{
+													"setMapFlag": {
+														"key": "FE_Svyelunite_ConfiguredV3",
+														"val": 1
+													}
+												},
+												{
+													"setMapFlag": {
+														"key": "FE_Svyelunite_ConfiguredV2",
+														"val": 1
+													}
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												},
+												{
+													"actorID": 9100
+												}
+											],
+											"name": "You turn from the heralds and answer the voice in the Homarid head. (Aid the Homarids)",
+											"action": [
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Accepted",
+														"val": 1
+													}
+												},
+												{
+													"setQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"val": 2
+													},
+													"issueQuest": "55"
+												},
+												{
+													"deleteMapObject": 9100
+												},
+												{
+													"deleteMapObject": 9110
+												},
+												{
+													"deleteMapObject": 9103
+												},
+												{
+													"deleteMapObject": 9104
+												},
+												{
+													"deleteMapObject": 9112
+												},
+												{
+													"deleteMapObject": 9113
+												},
+												{
+													"deleteMapObject": 40003
+												},
+												{
+													"deleteMapObject": 40004
+												},
+												{
+													"deleteMapObject": 40005
+												},
+												{
+													"deleteMapObject": 40021
+												},
+												{
+													"deleteMapObject": 40031
+												},
+												{
+													"deleteMapObject": 40025
+												},
+												{
+													"deleteMapObject": 40033
+												},
+												{
+													"deleteMapObject": 40034
+												},
+												{
+													"deleteMapObject": 40032
+												},
+												{
+													"deleteMapObject": 40026
+												},
+												{
+													"deleteMapObject": 40037
+												},
+												{
+													"deleteMapObject": 40036
+												},
+												{
+													"deleteMapObject": 40035
+												},
+												{
+													"deleteMapObject": 40027
+												},
+												{
+													"deleteMapObject": 40074
+												},
+												{
+													"deleteMapObject": 40030
+												},
+												{
+													"deleteMapObject": 40028
+												},
+												{
+													"deleteMapObject": 40029
+												},
+												{
+													"activateMapObject": 40011
+												},
+												{
+													"activateMapObject": 40013
+												},
+												{
+													"activateMapObject": 40015
+												},
+												{
+													"activateMapObject": 40016
+												},
+												{
+													"activateMapObject": 40017
+												},
+												{
+													"activateMapObject": 40043
+												},
+												{
+													"activateMapObject": 40018
+												},
+												{
+													"activateMapObject": 40019
+												},
+												{
+													"activateMapObject": 40020
+												},
+												{
+													"activateMapObject": 40041
+												},
+												{
+													"activateMapObject": 40022
+												},
+												{
+													"activateMapObject": 40023
+												},
+												{
+													"activateMapObject": 40042
+												},
+												{
+													"activateMapObject": 40024
+												},
+												{
+													"activateMapObject": 40040
+												},
+												{
+													"activateMapObject": 40039
+												},
+												{
+													"activateMapObject": 40038
+												},
+												{
+													"deleteMapObject": 50011
+												},
+												{
+													"deleteMapObject": 50013
+												},
+												{
+													"deleteMapObject": 50015
+												},
+												{
+													"deleteMapObject": 50016
+												},
+												{
+													"deleteMapObject": 50017
+												},
+												{
+													"deleteMapObject": 50043
+												},
+												{
+													"deleteMapObject": 50018
+												},
+												{
+													"deleteMapObject": 50019
+												},
+												{
+													"deleteMapObject": 50020
+												},
+												{
+													"deleteMapObject": 50041
+												},
+												{
+													"deleteMapObject": 50022
+												},
+												{
+													"deleteMapObject": 50023
+												},
+												{
+													"deleteMapObject": 50042
+												},
+												{
+													"deleteMapObject": 50024
+												},
+												{
+													"deleteMapObject": 50040
+												},
+												{
+													"deleteMapObject": 50039
+												},
+												{
+													"deleteMapObject": 50038
+												},
+												{
+													"deleteMapObject": 9100
+												},
+												{
+													"deleteMapObject": 9110
+												},
+												{
+													"deleteMapObject": 9103
+												},
+												{
+													"deleteMapObject": 9112
+												},
+												{
+													"deleteMapObject": 9104
+												},
+												{
+													"deleteMapObject": 9113
+												},
+												{
+													"setMapFlag": {
+														"key": "FE_Svyelunite_OpponentsDefeated",
+														"val": 1
+													}
+												},
+												{
+													"setMapFlag": {
+														"key": "FE_Svyelunite_ConfiguredV3",
+														"val": 1
+													}
+												},
+												{
+													"setMapFlag": {
+														"key": "FE_Svyelunite_ConfiguredV2",
+														"val": 1
+													}
+												}
+											]
+										},
+										{
+											"condition": [
+												{
+													"getQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"op": "=",
+														"val": 1
+													}
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												}
+											],
+											"name": "\"I have not forgotten my promise to the Vodalians.\" (Resume Quest)",
+											"action": []
+										},
+										{
+											"condition": [
+												{
+													"getQuestFlag": {
+														"key": "FE_Svyelunite_Faction",
+														"op": "=",
+														"val": 2
+													}
+												},
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed",
+													"not": true
+												}
+											],
+											"name": "The alien tide still calls. You will honor your bargain with the Homarids. (Resume Quest)",
+											"action": []
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Completed"
+												}
+											],
+											"name": "The battle at Svyelunite Temple has already been decided. (Leave)"
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"actorID": 9100
+												}
+											],
+											"name": "\"This fight is not for me.\" (Decline for now)",
+											"text": "The Merfolk lower their blades while the Homarid presence presses coldly against your thoughts. Neither army will let an uncommitted wanderer cross its battle line, and the approach remains blocked. If you change your mind, return tomorrow and they will hear your answer again."
+										},
+										{
+											"condition": [
+												{
+													"checkQuestFlag": "FE_Svyelunite_Faction",
+													"not": true
+												},
+												{
+													"actorID": 9100,
+													"not": true
+												}
+											],
+											"name": "\"Sorry, this fight is not for me. I am allergic to both shellfish and sharp blades.\" (Decline Quest)"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"prologue": {},
+		"epilogue": {
+			"text": "The battle for Svyelunite Temple is over.",
+			"options": [
+				{
+					"condition": [
+						{
+							"getQuestFlag": {
+								"key": "FE_Svyelunite_Faction",
+								"op": "=",
+								"val": 1
+							}
+						}
+					],
+					"name": "Receive the gratitude of the Vodalians.",
+					"text": "The last Homarids retreat into the ocean. A delegation of Vodalians kneels before you, and two priests lift a great seashell overflowing with gold and mana shards. The melodious voice of a Seasinger rings out: \"Please accept this token of our gratitude, adventurer. We Vodalians are profoundly in your debt.\"",
+					"options": [
+						{
+							"name": "(Accept the reward)",
+							"action": [
+								{
+									"grantRewards": [
+										{
+											"type": "gold",
+											"count": 1000
+										},
+										{
+											"type": "shards",
+											"count": 25
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Svyelunite Temple|FEM"
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Vodalian Knights|FEM"
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Seasinger|FEM"
+										},
+										{
+											"type": "cardPackShop",
+											"editions": [
+												"FEM"
+											],
+											"count": 6
+										}
+									],
+									"setQuestFlag": {
+										"key": "FE_Svyelunite_Completed",
+										"val": 1
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"condition": [
+						{
+							"getQuestFlag": {
+								"key": "FE_Svyelunite_Faction",
+								"op": "=",
+								"val": 2
+							}
+						}
+					],
+					"name": "Claim the flotsam promised by the Homarids.",
+					"text": "The last Vodalians flee out to sea as a Deep Spawn topples gem-studded pillars into the waves. The alien voice returns: \"Our deal was clear... only flotsam... if it floats, you take... if it sinks, we get.\" As the tide crosses the battlefield, you salvage useful spells and equipment before they drift away.",
+					"options": [
+						{
+							"name": "\"This is less than a temple's worth, but it will do.\"",
+							"action": [
+								{
+									"grantRewards": [
+										{
+											"type": "gold",
+											"count": 1000
+										},
+										{
+											"type": "shards",
+											"count": 25
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "High Tide|FEM"
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Tidal Influence|FEM"
+										},
+										{
+											"type": "card",
+											"count": 1,
+											"cardName": "Homarid Spawning Bed|FEM"
+										},
+										{
+											"type": "cardPackShop",
+											"editions": [
+												"FEM"
+											],
+											"count": 6
+										}
+									],
+									"addItem": "Coral Helm",
+									"setQuestFlag": {
+										"key": "FE_Svyelunite_Completed",
+										"val": 1
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"failureDialog": {
+			"text": "The tide of battle turns without you, and the promise made at Svyelunite Temple remains unfulfilled.",
+			"options": [
+				{
+					"name": "(Quest Failed)"
+				}
+			]
+		},
+		"declinedDialog": {
+			"text": "The River Merfolk lower their conch horns while the alien presence fades from your thoughts.",
+			"options": [
+				{
+					"name": "(Leave)"
+				}
+			]
+		},
+		"reward": {},
+		"rewardDescription": "1000 gold, 25 shards, 3 faction cards, and 6 Fallen Empires boosters",
+		"stages": [
+			{
+				"id": 1,
+				"name": "Battle for Svyelunite Temple",
+				"description": "Travel to Svyelunite Temple in the blue biome and defeat every member of the opposing faction.",
+				"POITags": [
+					"SvyeluniteTemple"
+				],
+				"objective": "MapFlag",
+				"prologue": {},
+				"epilogue": {},
+				"failureDialog": {},
+				"POIToken": "",
+				"mapFlag": "FE_Svyelunite_OpponentsDefeated",
+				"mapFlagValue": 18
+			},
+			{
+				"id": 2,
+				"name": "Return to Town",
+				"description": "Return to the town where you accepted the request.",
+				"here": true,
+				"objective": "Travel",
+				"prerequisiteIDs": [
+					1
+				],
+				"prologue": {},
+				"epilogue": {},
+				"failureDialog": {},
+				"POIToken": ""
+			}
+		],
+		"questSourceTags": [
+			"waste_town_generic",
+			"waste_town_identity",
+			"waste_town_tribal",
+			"plains_town_generic",
+			"plains_town_identity",
+			"plains_town_tribal",
+			"plains_capital",
+			"island_town_generic",
+			"island_town_identity",
+			"island_town_tribal",
+			"island_capital",
+			"swamp_town_generic",
+			"swamp_town_identity",
+			"swamp_town_tribal",
+			"swamp_capital",
+			"mountain_town_generic",
+			"mountain_town_identity",
+			"mountain_town_tribal",
+			"mountain_capital",
+			"forest_town_generic",
+			"forest_town_identity",
+			"forest_town_tribal",
+			"forest_capital",
+			"SvyeluniteTempleEntry"
+		]
 	}
 ]

@@ -330,6 +330,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"),
             Forge.getLocalizer().getMessageorUseDefault("nlCardPlayOption", "How cards animate when entering the battlefield."),
             new String[] { "Rotate", "Slide", "Popup", "Off" }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COIN_FLIP_ANIMATION,
+            Forge.getLocalizer().getMessageorUseDefault("lblCoinFlipAnimation", "Coin Flip Animation"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCoinFlipAnimation", "Show a coin flip animation at the start of a match.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
             Forge.getLocalizer().getMessage("cbStackCreatures"),
             Forge.getLocalizer().getMessage("nlStackCreatures")), 1);
