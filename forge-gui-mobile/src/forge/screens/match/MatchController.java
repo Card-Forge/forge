@@ -639,6 +639,8 @@ public class MatchController extends NetworkGuiGame {
     }
 
     public static void writeMatchPreferences() {
+        if (Forge.lifecycleClosing)
+            return;
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VPlayerPanel> panels = view.getPlayerPanelsList();
         final PhaseType[] phases = PhaseType.values();
