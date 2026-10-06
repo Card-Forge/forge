@@ -837,6 +837,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void notifyCoinFlip(final Player flipper, final boolean heads, final String message, final boolean waitForTap) {
+        if (getGui() == null || !isGuiPlayer()
+                || !FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_FLIP_ANIMATION)) {
+            return;
+        }
+        getGui().showCoinFlip(heads, message, waitForTap);
+    }
+
+    @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
         String prompt;
         if (isFirstGame) {
