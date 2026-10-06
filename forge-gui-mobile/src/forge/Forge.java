@@ -142,6 +142,7 @@ public class Forge implements ApplicationListener {
     public static boolean isDisposed = false;
     public static boolean invokeWorldSave = false;
     public static Camera camera;
+    public static boolean lifecycleClosing = false;
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -1029,6 +1030,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
+        lifecycleClosing = true;
         setWindowFocus(false);
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().pause();
@@ -1037,6 +1039,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        lifecycleClosing = false;
         setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
@@ -1054,6 +1057,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void dispose() {
+        lifecycleClosing = true;
         isDisposed = true;
         if (currentScreen != null) {
             currentScreen.onClose(null);

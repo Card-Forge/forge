@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZ
 SVar:TrigCharm:DB$ Charm | Choices$ DrainPact,DiscardPact,DrawPact,DeathPact | ChoiceRestriction$ ThisGame
 SVar:DrainPact:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
-SVar:DiscardPact:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+SVar:DiscardPact:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 SVar:DrawPact:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:DeathPact:DB$ LosesGame | Defined$ You | SpellDescription$ You lose the game.
 AI:RemoveDeck:All
