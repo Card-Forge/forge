@@ -1,17 +1,15 @@
 package forge.screens.match;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.IntSet;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import forge.Graphics;
@@ -20,6 +18,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.views.VPlayerPanel;
@@ -41,8 +40,8 @@ public final class CardFlightOverlay {
     private static final float GLITCH_FRACTION = 0.3f;            // share of the glitch flight spent shaking in place
     private static final boolean LEAVE_SHAKE = false; // shake in place before a destroyed card flies off
     private static final boolean LEAVE_TINT = false;  // flash a color over a destroyed card (see TINT below)
-    private static final int MAX_FLIGHTS = 4;          // simultaneous ENTER flights
-    private static final int MAX_LEAVE_FLIGHTS = 12;   // simultaneous LEAVE flights (board wipes); extra cards just disappear
+    private static final int MAX_FLIGHTS = GuiBase.isAndroid() ? 4 : 6;          // simultaneous ENTER flights
+    private static final int MAX_LEAVE_FLIGHTS = GuiBase.isAndroid() ? 6 : 12;   // simultaneous LEAVE flights (board wipes); extra cards just disappear
     private static final long LEAVE_STAGGER_NANOS = 35_000_000L;     // delay between cards of one wipe
     private static final long LEAVE_BATCH_GAP_NANOS = 150_000_000L;  // departures closer together than this belong to one wipe          // extra simultaneous flights are skipped
     private static final boolean TOKENS_POPUP = true; // tokens always use the popup style (unless animations are off)
@@ -57,19 +56,36 @@ public final class CardFlightOverlay {
 
     // last on-screen rect of each spell's thumbnail in the stack view, keyed by card id.
     // Each entry is allocated once and then updated in place by VStack every frame.
-    private static final Map<Integer, Rectangle> stackRects = new HashMap<>();
+    private static final IntMap<Rectangle> stackRects = new IntMap<>();
 
     // ids of spells whose flight has launched from the stack view; VStack hides those items
-    private static final Set<Integer> launchedFromStack = new HashSet<>();
+    private static final IntSet launchedFromStack = new IntSet();
 
     private static long lastLeaveStartNanos;
     private static int leaveBatchIndex;
 
+    private static volatile Parsed parsed = new Parsed(null, Style.ROTATE);
+    private static volatile boolean enabled = true;
+
     private CardFlightOverlay() { }
     public enum Style { OFF, ROTATE, SLIDE, POPUP }
 
+    private static final class Parsed {
+        final String raw; final Style style;
+        Parsed(String raw, Style style) { this.raw = raw; this.style = style; }
+    }
+
     public static Style style() {
         String v = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_OPTIONS);
+        Parsed p = parsed;                       // one read, so raw and style always match
+        if (v == p.raw || (v != null && v.equals(p.raw))) { return p.style; }
+        Style s = parse(v);
+        parsed = new Parsed(v, s);               // allocates only when the setting changes
+        enabled = s != Style.OFF;
+        return s;
+    }
+
+    private static Style parse(String v) {
         if (v == null) { return Style.ROTATE; }
         switch (v.trim().toLowerCase()) {
             case "off": case "false": return Style.OFF;
@@ -78,6 +94,10 @@ public final class CardFlightOverlay {
             default: return Style.ROTATE;
         }
     }
+
+    /** Cheap per-frame check, refreshed once per frame in draw(). */
+    public static boolean isEnabled() { return enabled; }
+
     public static final class Flight {
         private final CardView card;
         private final Rectangle from;    // ENTER: hand/stack origin or null. LEAVE: the card's last panel rect on the field
@@ -124,7 +144,7 @@ public final class CardFlightOverlay {
 
     /** VStack asks this so it can hide an item whose card is already flying to the battlefield. */
     public static boolean isLeavingStack(int cardId) {
-        return !launchedFromStack.isEmpty() && launchedFromStack.contains(cardId);
+        return launchedFromStack.size > 0 && launchedFromStack.contains(cardId);
     }
 
     /**
@@ -365,6 +385,7 @@ public final class CardFlightOverlay {
     }
 
     public static void draw(Graphics g, PlayerView bottomPlayer, float screenH) {
+        style();
         if (flights.isEmpty()) { return; }
 
         final long now = TimeUtils.nanoTime();
