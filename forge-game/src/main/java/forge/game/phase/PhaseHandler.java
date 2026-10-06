@@ -1076,7 +1076,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private boolean undoToPendingPoint() {
         final UndoHistory history = game.getUndoHistory();
         final Player by = history.getPendingUndoBy();
-        final UndoHistory.Point point = history.applyPendingUndo();
+        final UndoHistory.Point point = game.restoreState(history::applyPendingUndo);
         if (point == null) {
             throw new IllegalStateException("Undo was requested, but its point is gone");
         }
@@ -1086,8 +1086,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         game.getGameLog().add(GameLogEntryType.INFORMATION,
                 Localizer.getInstance().getMessage("lblUndoneTo", by == null ? "" : by.getName(), point.getTurn(),
                         point.getPhase() == null ? "" : point.getPhase().nameForUi));
-        game.fireEvent(new GameEventUndone(PlayerView.get(by), PlayerView.get(playerTurn), phase,
-                PlayerView.getCollection(game.getPlayers()), CardView.getCollection(game.getCardsInGame())));
         return point.getKind().resumesAtStepStart();
     }
 

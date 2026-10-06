@@ -60,7 +60,7 @@ public final class GameCheckpoint {
     private static final Set<String> SKIPPED_FIELDS = Set.of(
             "forge.game.Game#cardIdCounter",
             "forge.game.Game#hiddenCardIdCounter",
-            "forge.game.Game#previousGameState",
+            "forge.game.Game#stashedState",
             "forge.game.Game#drawOffer",
             "forge.game.Game#undoHistory",
             "forge.game.phase.PhaseHandler#resumeAtStepStart",

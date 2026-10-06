@@ -35,6 +35,7 @@ import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventSnapshotRestored;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -56,6 +57,7 @@ import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -104,7 +106,7 @@ public class Game {
     // While this is false here, its really set by the Match/Preferences
 
     // If this merges with LKI In the future, it will need to change forms
-    private GameSnapshot previousGameState = null;
+    private GameCheckpoint stashedState = null;
     private final UndoHistory undoHistory = new UndoHistory(this);
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
@@ -201,10 +203,26 @@ public class Game {
     }
 
     public void stashGameState() {
-        // Take a snapshot of the current state to restore to previous state
-        if (EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            previousGameState = new GameSnapshot(this);
-            previousGameState.makeCopy();
+        // Take a checkpoint of the current state to restore to previous state
+        stashedState = EXPERIMENTAL_RESTORE_SNAPSHOT ? GameCheckpoint.capture(this) : null;
+    }
+
+    /** The state stashed for the decision being made now, or null if none was. */
+    public GameCheckpoint getStashedState() {
+        return stashedState;
+    }
+
+    /**
+     * Runs something that puts the game back to an earlier state, telling listeners before and after;
+     * after it, everything shown has to be redrawn.
+     */
+    public <T> T restoreState(final Supplier<T> restore) {
+        fireEvent(new GameEventSnapshotRestored(true, null, null));
+        try {
+            return restore.get();
+        } finally {
+            fireEvent(new GameEventSnapshotRestored(false,
+                    PlayerView.getCollection(getPlayers()), CardView.getCollection(getCardsInGame())));
         }
     }
 
@@ -214,12 +232,14 @@ public class Game {
 
     public boolean restoreGameState() {
         // Restore game state snapshot
-        if (previousGameState == null || !EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (stashedState == null || !EXPERIMENTAL_RESTORE_SNAPSHOT) {
             return false;
         }
 
-        previousGameState.restoreGameState(this);
-        return true;
+        return restoreState(() -> {
+            stashedState.restore();
+            return true;
+        });
     }
 
     public void copyLastState() {

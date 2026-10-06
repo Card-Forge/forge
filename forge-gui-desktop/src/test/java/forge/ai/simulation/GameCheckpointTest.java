@@ -10,7 +10,9 @@ import org.testng.annotations.Test;
 
 import forge.ai.ComputerUtil;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameCheckpoint;
+import forge.game.UndoHistory;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
@@ -154,6 +156,120 @@ public class GameCheckpointTest extends SimulationTest {
         System.out.printf("Large board (%d cards): %s, best capture %.1f ms, restore %.1f ms%n",
                 game.getCardsInGame().size(), checkpoint, best / 1e6, restoreNanos / 1e6);
         AssertJUnit.assertTrue("capture too slow: " + best / 1e6 + " ms", best < 1_000_000_000L);
+    }
+
+    /** With the experimental restore on, cancelling a cast puts back the state stashed before the decision. */
+    @Test
+    public void cancellingACastRestoresTheStashedState() {
+        Game game = newGame();
+        game.EXPERIMENTAL_RESTORE_SNAPSHOT = true;
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard("Runeclaw Bear", p);
+        addCard("Forest", p);
+        Card growth = addCardToZone("Giant Growth", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        game.stashGameState();
+        cast(p, growth, bear);
+        bear.addCounterInternal(CounterEnumType.P1P1, 1, p, false, null, null);
+        AssertJUnit.assertEquals(1, game.getStack().size());
+
+        GameActionUtil.rollbackAbility(game.getStack().peekAbility(), null, 0, null, null);
+
+        List<String> problems = new ArrayList<>();
+        check(problems, "stack empty", true, game.getStack().isEmpty());
+        check(problems, "growth in hand", ZoneType.Hand, game.findById(growth.getId()).getZone().getZoneType());
+        check(problems, "forest untapped", 1, untappedLands(p));
+        check(problems, "bear +1/+1 counters", 0, game.findById(bear.getId()).getCounters(CounterEnumType.P1P1));
+        check(problems, "spells cast this turn", 0, p.getSpellsCastThisTurn());
+        assertNoProblems(problems);
+    }
+
+    @Test
+    public void nothingIsStashedWithTheExperimentalRestoreOff() {
+        Game game = newGame();
+        game.stashGameState();
+        AssertJUnit.assertNull(game.getStashedState());
+        AssertJUnit.assertFalse(game.restoreGameState());
+    }
+
+    /** A priority point takes over the state the game loop stashed for the same decision. */
+    @Test
+    public void undoHistoryUsesTheStashedStateForAPriorityPoint() {
+        Game game = newGame();
+        game.EXPERIMENTAL_RESTORE_SNAPSHOT = true;
+        game.getUndoHistory().setEnabled(true);
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard("Runeclaw Bear", p);
+        addCard("Forest", p);
+        Card growth = addCardToZone("Giant Growth", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        game.stashGameState();
+        GameCheckpoint stashed = game.getStashedState();
+        UndoHistory.Point point = game.getUndoHistory().recordPriority(p);
+        AssertJUnit.assertSame(stashed, point.getCheckpoint());
+        point.setOutcome("played Giant Growth");
+
+        castAndResolve(p, growth, bear);
+        game.stashGameState(); // the next decision's stash must not disturb the point
+        AssertJUnit.assertTrue(game.getUndoHistory().requestUndo(p, point));
+        AssertJUnit.assertSame(point, game.getUndoHistory().applyPendingUndo());
+
+        AssertJUnit.assertEquals(ZoneType.Hand, game.findById(growth.getId()).getZone().getZoneType());
+        AssertJUnit.assertEquals(2, game.findById(bear.getId()).getNetPower());
+        AssertJUnit.assertEquals(1, untappedLands(p));
+    }
+
+    /** GameSnapshot is still what copies a game for the AI when the experimental restore is on. */
+    @Test
+    public void gameSnapshotStillCopiesAGameForSimulation() {
+        Game game = newGame();
+        game.EXPERIMENTAL_RESTORE_SNAPSHOT = true;
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard("Runeclaw Bear", p);
+        addCardToZone("Giant Growth", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+
+        AssertJUnit.assertNotSame(game, copy);
+        AssertJUnit.assertEquals(game.getCardsInGame().size(), copy.getCardsInGame().size());
+        Card bearCopy = (Card) copier.find(bear);
+        AssertJUnit.assertNotSame(bear, bearCopy);
+        AssertJUnit.assertEquals(bear.getId(), bearCopy.getId());
+        AssertJUnit.assertEquals(ZoneType.Battlefield, bearCopy.getZone().getZoneType());
+    }
+
+    /** The stack's own undo (taking back a mana ability) still works on a restored game. */
+    @Test
+    public void manaAbilityCanStillBeUndoneAfterARestore() {
+        Game game = newGame();
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard("Runeclaw Bear", p);
+        Card forest = addCard("Forest", p);
+        Card growth = addCardToZone("Giant Growth", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility tapForMana = forest.getManaAbilities().get(0);
+        tapForMana.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtil.handlePlayingSpellAbility(p, tapForMana, null));
+        AssertJUnit.assertEquals(1, game.getStack().getUndoStackSize());
+        AssertJUnit.assertFalse(p.getManaPool().isEmpty());
+
+        GameCheckpoint checkpoint = GameCheckpoint.capture(game);
+        castAndResolve(p, growth, bear);
+        AssertJUnit.assertTrue(p.getManaPool().isEmpty());
+
+        checkpoint.restore();
+
+        AssertJUnit.assertEquals(1, game.getStack().getUndoStackSize());
+        AssertJUnit.assertTrue(game.getStack().canUndo(p));
+        AssertJUnit.assertTrue(game.getStack().undo());
+        AssertJUnit.assertTrue(p.getManaPool().isEmpty());
+        AssertJUnit.assertFalse(game.findById(forest.getId()).isTapped());
+        AssertJUnit.assertEquals(0, game.getStack().getUndoStackSize());
     }
 
     /**

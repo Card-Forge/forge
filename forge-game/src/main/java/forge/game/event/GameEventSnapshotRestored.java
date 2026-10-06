@@ -1,8 +1,17 @@
 package forge.game.event;
 
+import java.util.Collection;
+
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.util.TextUtil;
 
-public record GameEventSnapshotRestored(boolean start) implements GameEvent {
+/**
+ * The game is being put back to an earlier state: fired with {@code start} before, and without after.
+ * Afterwards anything may differ, so the second one carries everything there is to redraw.
+ */
+public record GameEventSnapshotRestored(boolean start, Collection<PlayerView> players,
+                                        Collection<CardView> cards) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

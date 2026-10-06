@@ -20,6 +20,9 @@ import forge.game.player.Player;
  * in between (auto-passes, AI turns, spells resolving). Only the last few per player are kept: this
  * is for taking back a misplay, not for replaying the game.
  * <p>
+ * This is separate from {@link forge.game.zone.MagicStack#undo()}, which takes back mana abilities one
+ * at a time by refunding them: that is always allowed, needs nobody's agreement and restores nothing.
+ * <p>
  * Undoing is two-step because the game thread is the one that has to do it: {@link #requestUndo}
  * marks the point, the game thread notices at the next human prompt ({@link #hasPendingUndo()}) and
  * unwinds with {@link UndoRequestedException} to the main loop, which calls {@link #applyPendingUndo()}.
@@ -62,6 +65,7 @@ public final class UndoHistory {
         public int getTurn() { return turn; }
         public PhaseType getPhase() { return phase; }
         public boolean isFor(Player p) { return players.contains(p); }
+        public GameCheckpoint getCheckpoint() { return checkpoint; }
 
         /**
          * What the player did when asked here, for listing the points. Whoever recorded the point sets it
@@ -113,8 +117,11 @@ public final class UndoHistory {
             return null;
         }
         staged = null;
+        // The game loop may have stashed this very state already, for cancelling what the player starts
+        final GameCheckpoint stashed = game.getStashedState();
         return add(new Point(nextId++, ImmutableSet.of(player), Kind.PRIORITY,
-                game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), GameCheckpoint.capture(game)));
+                game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(),
+                stashed != null ? stashed : GameCheckpoint.capture(game)));
     }
 
     /**

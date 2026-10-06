@@ -240,7 +240,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             ZoneType.Exile, ZoneType.Command, ZoneType.Ante };
 
     @Override
-    public Void visit(final GameEventUndone event) {
+    public Void visit(final GameEventSnapshotRestored event) {
+        if (event.start()) {
+            return null;
+        }
         // Anything may differ after going back, so redraw all of it
         for (final PlayerView p : event.players()) {
             for (final ZoneType z : ZONES_REDRAWN_ON_UNDO) {
@@ -252,7 +255,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         processCards(event.cards(), cardsRefreshDetails);
         processCards(event.cards(), cardsUpdate);
-        turnUpdate = event.playerTurn();
+        turnUpdate = matchController.getGameView().getPlayerTurn();
         needPhaseUpdate = true;
         needCombatUpdate = true;
         needStackUpdate = true;

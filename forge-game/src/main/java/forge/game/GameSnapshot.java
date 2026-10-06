@@ -7,7 +7,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
-import forge.game.event.GameEventSnapshotRestored;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -16,7 +15,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.Collections;
@@ -24,10 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Copies a game into a new one, keeping card and player ids, for AI simulation (see GameCopier).
+ * Putting a game back to an earlier state in place is {@link GameCheckpoint}'s job.
+ */
 public class GameSnapshot {
     private final Game origGame;
     private Game newGame = null;
-    private boolean restore = false;
 
     private final SnapshotEntityMap gameObjectMap = new SnapshotEntityMap();
 
@@ -53,20 +54,10 @@ public class GameSnapshot {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         newGame = new Game(newPlayers, currentRules, newMatch);
-        restore = false;
         assignGameState(origGame, newGame, includeStack);
         //System.out.println("Storing game state with timestamp of :" + origGame.getTimestamp());
 
         return newGame;
-    }
-
-    public void restoreGameState(Game currentGame) {
-        System.out.println("Restoring game state with timestamp of :" + newGame.getTimestamp());
-        restore = true;
-
-        currentGame.fireEvent(new GameEventSnapshotRestored(true));
-        assignGameState(newGame, currentGame, true);
-        currentGame.fireEvent(new GameEventSnapshotRestored(false));
     }
 
     public void assignGameState(Game fromGame, Game toGame, boolean includeStack) {
@@ -89,12 +80,7 @@ public class GameSnapshot {
         for (Player p : fromGame.getPlayers()) {
             Player toPlayer = findBy(toGame, p);
             p.copyCommandersToSnapshot(toPlayer, c -> findBy(toGame, c));
-            if (!restore) {
-                // Only wire these while storing: an effect card created after the
-                // snapshot was taken has no counterpart to map on the way back, and
-                // blanking the field there would make the lazy getter build a duplicate.
-                p.copyEffectCardsToSnapshot(toPlayer, c -> findBy(toGame, c));
-            }
+            p.copyEffectCardsToSnapshot(toPlayer, c -> findBy(toGame, c));
             ((PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         toGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -155,27 +141,10 @@ public class GameSnapshot {
             copyStack(fromGame, toGame);
         }
 
-        if (restore) {
-            for (Player p : toGame.getPlayers()) {
-                p.updateAllZonesForView();
-            }
-
-            Combat combat = toGame.getPhaseHandler().getCombat();
-            if (combat != null) {
-                //System.out.println(combat.toString());
-                toGame.updateCombatForView();
-            }
-            //System.out.println("RESTORED");
-        }
-
         // TODO update thisTurnCast
     }
 
     public void assignPlayerState(Player origPlayer, Player newPlayer) {
-        if (restore) {
-            // Player controller of the original player isn't associated with the GUI at this point?
-            origPlayer.dangerouslySetController(newPlayer.getController());
-        }
         newPlayer.setLife(origPlayer.getLife(), null);
         newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
         newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
@@ -225,7 +194,6 @@ public class GameSnapshot {
     private void copyStack(Game fromGame, Game toGame) {
         // Try to match the StackInstance ID. If we don't find it, generate a new stack instance that matches
         // If we do find it, we may need to alter the existing stack instance
-        // If we find it and we're restoring, we dont need to do anything
 
         Map<Integer, SpellAbilityStackInstance> stackIds = new HashMap<>();
         for (SpellAbilityStackInstance toEntry : toGame.getStack()) {
@@ -237,10 +205,7 @@ public class GameSnapshot {
             SpellAbilityStackInstance instance = stackIds.getOrDefault(id, null);
 
             if (instance != null) {
-                if (!restore) {
-                    System.out.println("Might need to alter " + origEntry.getSpellAbility() + " on stack");
-                }
-
+                System.out.println("Might need to alter " + origEntry.getSpellAbility() + " on stack");
                 continue;
             }
 
@@ -284,11 +249,9 @@ public class GameSnapshot {
     public void copyGameState(Game fromGame, Game toGame) {
         toGame.setAge(fromGame.getAge());
         toGame.dangerouslySetTimestamp(fromGame.getTimestamp());
-        if (!restore) {
-            // Card copies keep their original ids, so the fresh-id counters have to
-            // move with them or ids handed out later would collide.
-            toGame.dangerouslySyncCardIdCounters(fromGame);
-        }
+        // Card copies keep their original ids, so the fresh-id counters have to
+        // move with them or ids handed out later would collide.
+        toGame.dangerouslySyncCardIdCounters(fromGame);
 
         // TODO countersAddedThisTurn
 
@@ -346,19 +309,6 @@ public class GameSnapshot {
         Collections.sort(unorderedEntities);
         for(UnorderedEntities ue : unorderedEntities) {
             setCardInCopiedGame(toGame, ue.toPlayer, ue.fromCard, ue.newCard, ue.fromType, ue.zonePosition);
-        }
-
-        // Cards that exist in the game being restored but not in the snapshot: tokens,
-        // copies and effect cards created after it was taken. There is no earlier state to
-        // put them back into, so they leave the game. Without this the loop below looks
-        // them up in the snapshot and dereferences the null it gets back.
-        for (Card extraCard : toGame.getCardsInGame()) {
-            if (fromGame.findById(extraCard.getId()) == null) {
-                Zone zone = extraCard.getZone();
-                if (zone != null) {
-                    zone.remove(extraCard);
-                }
-            }
         }
 
         // This loop happens later to make sure all cards are in the correct zone first
@@ -522,9 +472,6 @@ public class GameSnapshot {
     public class SnapshotEntityMap implements IEntityMap {
         @Override
         public Game getGame() {
-            if (restore) {
-                return origGame;
-            }
             return newGame;
         }
 

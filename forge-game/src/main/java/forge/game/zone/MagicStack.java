@@ -193,6 +193,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final boolean canUndo(Player player) {
         return undoStackOwner == player;
     }
+    /**
+     * Takes back the last mana ability activated since the player got priority, by refunding it.
+     * Going back to an earlier decision altogether is {@link forge.game.UndoHistory}.
+     */
     public final boolean undo() {
         if (undoStack.isEmpty()) { return false; }
 
