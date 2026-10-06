@@ -242,33 +242,62 @@ public class AnimateAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    // an effect that only sets P/T can shrink the AI's own creature
+    private static boolean worthAnimating(final Player ai, final SpellAbility sa) {
+        if (sa.getSubAbility() != null) {
+            return true;
+        }
+        if (!sa.hasParam("Power") || !sa.hasParam("Toughness") || sa.hasParam("Types")
+                || sa.hasParam("RemoveTypes") || sa.hasParam("Keywords") || sa.hasParam("HiddenKeywords")
+                || sa.hasParam("Abilities") || sa.hasParam("Triggers") || sa.hasParam("Replacements")
+                || sa.hasParam("staticAbilities") || sa.hasParam("Colors")) {
+            return true;
+        }
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        if (defined.isEmpty()) {
+            return true;
+        }
+        for (final Card c : defined) {
+            if (!c.isCreature() || !c.getController().equals(ai)) {
+                return true;
+            }
+            if (ComputerUtilCard.evaluateCreature(becomeAnimated(c, sa))
+                    > ComputerUtilCard.evaluateCreature(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         AiAbilityDecision decision;
+        if (!mandatory && !sa.usesTargeting() && !worthAnimating(aiPlayer, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
         if (sa.usesTargeting()) {
             decision = animateTgtAI(sa);
             if (decision.willingToPlay()) {
                 return decision;
-            } else if (!mandatory) {
+            } if (!mandatory) {
                 return decision;
-            } else {
-                // fallback if animate is mandatory
-                sa.resetTargets();
-                List<Card> list = CardUtil.getValidCardsToTarget(sa);
-                if (list.isEmpty()) {
-                    return decision;
-                }
-                // don't gift a beneficial effect to an opponent's creature if self-targeting is possible
-                if (!sa.isCurse()) {
-                    List<Card> ownChoices = CardLists.filterControlledBy(list, aiPlayer);
-                    if (!ownChoices.isEmpty()) {
-                        list = ownChoices;
-                    }
-                }
-                Card toAnimate = ComputerUtilCard.getWorstAI(list);
-                rememberAnimatedThisTurn(aiPlayer, toAnimate);
-                sa.getTargets().add(toAnimate);
             }
+            // fallback if animate is mandatory
+            sa.resetTargets();
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
+            if (list.isEmpty()) {
+                return decision;
+            }
+            // don't gift a beneficial effect to an opponent's creature if self-targeting is possible
+            if (!sa.isCurse()) {
+                List<Card> ownChoices = CardLists.filterControlledBy(list, aiPlayer);
+                if (!ownChoices.isEmpty()) {
+                    list = ownChoices;
+                }
+            }
+            Card toAnimate = ComputerUtilCard.getWorstAI(list);
+            rememberAnimatedThisTurn(aiPlayer, toAnimate);
+            sa.getTargets().add(toAnimate);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
@@ -330,17 +359,9 @@ public class AnimateAi extends SpellAbilityAi {
 
                 // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
-                    boolean buffedToughness = false;
                     SpellAbility sub = sa.findSubAbilityByType(ApiType.PutCounter);
-                    if (sub != null) {
-                        if (animatedCopy.canReceiveCounters(CounterEnumType.P1P1)
-                                && "Targeted".equals(sub.getParam("Defined"))
-                                && "P1P1".equals(sub.getParam("CounterType"))) {
-                            buffedToughness = true;
-                        }
-                    }
-
-                    if (!buffedToughness) {
+                    if (sub == null || !"Targeted".equals(sub.getParam("Defined")) || !"P1P1".equals(sub.getParam("CounterType"))
+                            || !animatedCopy.canReceiveCounters(CounterEnumType.P1P1)) {
                         continue;
                     }
                 }

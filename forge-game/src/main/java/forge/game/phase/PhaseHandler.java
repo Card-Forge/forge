@@ -1255,6 +1255,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             }
         } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
 
+        if (game.getStack().isEmpty()) {
+            game.getStack().clearTriggerRepeats();
+        }
+
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
             allAffectedCards.clear();

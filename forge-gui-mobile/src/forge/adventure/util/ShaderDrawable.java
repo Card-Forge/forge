@@ -22,6 +22,10 @@ public class ShaderDrawable implements Drawable {
         this.region = region;
     }
 
+    public TextureRegion getRegion() {
+        return this.region;
+    }
+
     // Register a condition that decides whether to use the shader
     public void setCondition(Supplier<Boolean> condition) {
         this.condition = condition;

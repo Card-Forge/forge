@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import forge.ImageKeys;
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
@@ -245,6 +246,15 @@ public class TokenInfo {
         result.getCurrentState().changeTextIntrinsic(colorMap, typeMap);
     }
 
+    // A card can name an edition this machine lacks (a custom edition in a network game).
+    static public String tokenSetFor(final String setCode, final String script) {
+        final CardEdition edition = StaticData.instance().getCardEdition(setCode);
+        if (edition == null) {
+            return setCode;
+        }
+        return Objects.requireNonNullElse(edition.getTokenSet(script), setCode);
+    }
+
     static public Card getProtoType(final String script, final SpellAbility sa, final Player owner) {
         return getProtoType(script, sa, owner, !sa.hasParam("LockTokenScript"));
     }
@@ -261,7 +271,7 @@ public class TokenInfo {
             editionHost = sa.getKeyword().getStatic().getHostCard();
         }
         String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
-        edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        edition = tokenSetFor(edition, script);
         Map<String, String> pins = getPinsFor(game);
         String pinned = pins.get(script);
         if (pinned != null) edition = pinned;

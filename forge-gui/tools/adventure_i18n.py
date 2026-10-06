@@ -1,5 +1,14 @@
 # adventure_i18n.py
 #
+# NOTE: The internationalization work and the groundwork for supporting
+# other languages in Adventure Mode are still under development and
+# testing. For this reason, I would not recommend starting translations
+# into other languages yet, as the implementation and translation
+# workflow may still change while the Spanish translation is being
+# completed and thoroughly tested. Once the process for one language
+# (Spanish) is complete and stable, it should provide a solid
+# foundation for opening Adventure Mode up to other languages.
+#
 # Tool for managing translation keys (loctext/locname) for Adventure Mode
 # dialog embedded inside .tmx map files.
 #
@@ -31,6 +40,8 @@
 #              English text as the starting value for every key that isn't
 #              translated yet. If the output file already exists, existing
 #              translations are kept as-is and only missing keys are added.
+#              Covers .tmx dialog keys only -- item/shop keys are derived from
+#              English names, see README-adventure_translations.md.
 #
 #   reference  Same data as template, but always in plain English and never
 #              merged with an existing file. Meant as a lookup reference for a

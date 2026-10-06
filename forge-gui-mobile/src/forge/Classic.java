@@ -42,7 +42,7 @@ public class Classic {
             }
             //update here
             if (Forge.needsUpdate) {
-                if (Forge.getAssets().manager().update())
+                if (Forge.getAssets().manager().update(16))
                     Forge.needsUpdate = false;
             }
             //sample batch

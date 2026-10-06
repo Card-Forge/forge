@@ -1,0 +1,17 @@
+Name:Done for the Day
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Employee+YouCtrl,Permanent.Performer+YouCtrl,Permanent.Robot+YouCtrl | Execute$ TrigChoice | TriggerDescription$ At the beginning of your end step, if you control an Employee, a Performer, or a Robot, you may get {TK} or create a Treasure token. If you control all three, you may put a sticker on a nonland permanent you own.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ DBTicket,DBTreasure,DBNeither | SubAbility$ DBEmployee
+SVar:DBTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1 | SpellDescription$ You get {TK}.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
+SVar:DBNeither:DB$ Pump | SpellDescription$ Do neither.
+SVar:DBEmployee:DB$ Branch | BranchConditionSVar$ Employees | TrueSubAbility$ DBPerformer
+SVar:DBPerformer:DB$ Branch | BranchConditionSVar$ Performers | TrueSubAbility$ DBRobot
+SVar:DBRobot:DB$ Branch | BranchConditionSVar$ Robots | TrueSubAbility$ DBSticker
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+SVar:Employees:Count$Valid Permanent.Employee+YouCtrl
+SVar:Performers:Count$Valid Permanent.Performer+YouCtrl
+SVar:Robots:Count$Valid Permanent.Robot+YouCtrl
+DeckHas:Ability$Token|Sacrifice
+Oracle:At the beginning of your end step, if you control an Employee, a Performer, or a Robot, you may get {TK} or create a Treasure token. If you control all three, you may put a sticker on a nonland permanent you own.
