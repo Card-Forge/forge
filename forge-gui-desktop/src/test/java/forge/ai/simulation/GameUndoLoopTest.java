@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
+import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.game.UndoHistory;
 import forge.game.UndoRequestedException;
 import forge.game.card.Card;
@@ -172,6 +174,11 @@ public class GameUndoLoopTest extends SimulationTest {
 
         AssertJUnit.assertEquals(2, blockPrompts[0]);
         AssertJUnit.assertEquals(20, human.getLife());
+        // the undo is in the log, at the verbosity players have by default and at the lowest one
+        for (GameLogVerbosity verbosity : List.of(GameLogVerbosity.MEDIUM, GameLogVerbosity.LOW)) {
+            AssertJUnit.assertEquals(1, game.getGameLog().getLogEntriesForVerbosity(verbosity).stream()
+                    .filter(e -> e.type() == GameLogEntryType.UNDO && e.message().contains(human.getName())).count());
+        }
         AssertJUnit.assertEquals(ZoneType.Graveyard, game.findById(bear.getId()).getZone().getZoneType());
         AssertJUnit.assertEquals(2, game.findById(giant.getId()).getDamage());
         AssertJUnit.assertEquals(opp, game.getPhaseHandler().getPlayerTurn());

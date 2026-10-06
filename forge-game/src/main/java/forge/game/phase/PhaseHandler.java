@@ -1083,7 +1083,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         for (final Player p : game.getPlayers()) {
             p.getController().onGameUndone();
         }
-        game.getGameLog().add(GameLogEntryType.INFORMATION,
+        game.getGameLog().add(GameLogEntryType.UNDO,
                 Localizer.getInstance().getMessage("lblUndoneTo", by == null ? "" : by.getName(), point.getTurn(),
                         point.getPhase() == null ? "" : point.getPhase().nameForUi));
         return point.getKind().resumesAtStepStart();
