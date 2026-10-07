@@ -102,7 +102,6 @@ public class Assets implements Disposable {
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture, coinHead, coinTail;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
-    private SpriteBatch diceBatch;
     private boolean isDisposed = false;
     private int miniMapID;
     private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
@@ -153,7 +152,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, coinHead, coinTail,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture, diceBatch);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -218,12 +217,6 @@ public class Assets implements Disposable {
 
     public GifAnimation getGifAnimation() {
         return gifAnimation;
-    }
-
-    public SpriteBatch getDiceBatch() {
-        if (diceBatch == null)
-            diceBatch = new SpriteBatch(32);
-        return diceBatch;
     }
 
     public void setGifAnimation(FileHandle file, Animation.PlayMode playMode) {

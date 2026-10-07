@@ -10,8 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.google.common.eventbus.Subscribe;
@@ -33,12 +34,12 @@ import forge.model.FModel;
  *
  * Wiring:
  *   1. When the mobile UI first gets hold of the Game for a match:
- *          DiceOverlay.get().attach(game);          // safe to call repeatedly
+ *          DiceOverlay.getInstance().attach(game);          // safe to call repeatedly
  *   2. In Forge.render(), classic path:
- *          DiceOverlay dice = DiceOverlay.get();
+ *          DiceOverlay dice = DiceOverlay.getInstance();
  *          dice.update(delta);                      // BEFORE Classic.getInstance().render(screen)
  *          Classic.getInstance().render(screen);
- *          dice.draw();                             // AFTER it, so the die is on top
+ *          DiceOverlay.getInstance().render();          // AFTER it, so the dice are on top
  *   3. Optional: skipAll() on tap.
  *
  * onRollDie() runs on the GAME thread (the event bus is synchronous) and holds it on a latch until
@@ -77,6 +78,8 @@ public class DiceOverlay implements Disposable {
     private Dice3D.Skin skin;   // shared by all dice of the current roll
     private int cols, rows;
     private float dieSize;      // on-screen size of one die in pixels
+    private final Matrix4 savedProjection = new Matrix4();
+    private final Matrix4 projection = new Matrix4();
 
     private volatile Thread renderThread;
     private WeakReference<Game> attached = new WeakReference<>(null);
@@ -252,40 +255,64 @@ public class DiceOverlay implements Disposable {
                 return;
             }
         }
+        // the dice are rendered into FrameBuffers, which must not happen while Forge's batch is open
+        final Batch fb = Forge.getGraphics().getBatch();
+        final boolean wasDrawing = fb.isDrawing();
+        if (wasDrawing) {
+            fb.end();
+        }
         boolean allDone = true;
         for (Dice3D d : dice) {
             d.update(dt);
             allDone &= d.isDone();
+        }
+        if (wasDrawing) {
+            fb.begin();
         }
         if (allDone) {
             finishCurrent();
         }
     }
 
-    /** Draws the dice in a centred grid with its own SpriteBatch. Call after the normal frame. */
+    /**
+     * Draws the finished dice pictures in a centred grid through Forge's shared batch.
+     * Call after Classic.render(screen). Works whether or not the batch is currently open.
+     */
     public void render() {
         if (dice.isEmpty()) {
             return;
         }
+        final Batch b = Forge.getGraphics().getBatch();
+        final boolean wasDrawing = b.isDrawing();
         float w = Gdx.graphics.getBackBufferWidth();
         float h = Gdx.graphics.getBackBufferHeight();
         int n = dice.size();
         layout(n); // recomputed so a screen rotation mid-roll still looks right
         float size = dieSize;
         float top = (h + size * rows) / 2f - size; // bottom edge of the first row
-        Forge.getAssets().getDiceBatch().getProjectionMatrix().setToOrtho2D(0, 0, w, h);
-        Forge.getAssets().getDiceBatch().begin();
+
+        // borrow the batch: own pixel projection and colour, restored afterwards
+        savedProjection.set(b.getProjectionMatrix());
+        final float oldColor = b.getPackedColor();
+        projection.setToOrtho2D(0, 0, w, h);
+        b.setProjectionMatrix(projection);
+        if (!wasDrawing) {
+            b.begin();
+        }
         for (int i = 0; i < n; i++) {
             Dice3D d = dice.get(i);
             int row = i / cols;
             int inRow = Math.min(cols, n - row * cols);
             float x = (w - size * inRow) / 2f + (i % cols) * size; // short rows are centred
             float y = top - row * size;
-            Forge.getAssets().getDiceBatch().setColor(1f, 1f, 1f, d.getAlpha());
-            Forge.getAssets().getDiceBatch().draw(d.getRegion(), x, y, size, size);
+            b.setColor(1f, 1f, 1f, d.getAlpha());
+            b.draw(d.getRegion(), x, y, size, size);
         }
-        Forge.getAssets().getDiceBatch().setColor(Color.WHITE);
-        Forge.getAssets().getDiceBatch().end();
+        if (!wasDrawing) {
+            b.end();
+        }
+        b.setPackedColor(oldColor);
+        b.setProjectionMatrix(savedProjection);
     }
 
     public boolean isActive() {
