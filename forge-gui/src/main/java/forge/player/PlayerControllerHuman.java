@@ -3729,7 +3729,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void undoLastDecision() {
-        // Choosing the point and collecting approvals wait on players, so off the UI and game threads
+        // Choosing the point waits on the player, so off the UI and game threads
         FThreads.invokeInBackgroundThread(() -> UndoRequestCoordinator.request(this));
     }
 

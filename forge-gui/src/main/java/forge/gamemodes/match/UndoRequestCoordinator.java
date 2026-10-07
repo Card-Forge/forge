@@ -1,35 +1,31 @@
 package forge.gamemodes.match;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.WeakHashMap;
 
+import forge.game.DrawOffer;
 import forge.game.Game;
 import forge.game.UndoHistory;
 import forge.game.player.Player;
 import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputSyncronizedBase;
+import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.Localizer;
 
 /**
  * Takes a player's request to go back to one of their earlier decisions: they pick which, every other
- * human still in the game has to agree, then the game is told to go back (see {@link UndoHistory}).
- * <p>
- * Runs on a background thread, since it waits on players; the prompts it uses work the same for local
- * and network players. AI opponents are never asked.
+ * human still in the game has to agree (a vote run by {@link DrawOfferCoordinator}), then the game is
+ * told to go back (see {@link UndoHistory}).
  */
 public final class UndoRequestCoordinator {
     private UndoRequestCoordinator() {}
 
-    private static final Set<Game> inFlight = Collections.newSetFromMap(new WeakHashMap<>());
-
-    /** The player asked to undo (from the game menu). Background thread. */
+    /** The player asked to undo (from the game menu). Background thread: picking the point waits on them. */
     public static void request(final PlayerControllerHuman requester) {
-        if (agree(requester, false)) {
-            releaseWaitingPrompts(requester.getGame());
+        final UndoHistory.Point target = choosePoint(requester, false);
+        if (target != null) {
+            DrawOfferCoordinator.offerUndo(requester.getGame(), requester.getPlayer(), target);
         }
     }
 
@@ -38,73 +34,53 @@ public final class UndoRequestCoordinator {
      * @return whether going back was agreed
      */
     public static boolean requestBeforeLosing(final PlayerControllerHuman loser) {
-        return agree(loser, true);
+        final UndoHistory.Point target = choosePoint(loser, true);
+        final Game game = loser.getGame();
+        if (target == null || !DrawOfferCoordinator.offerUndo(game, loser.getPlayer(), target)) {
+            return false;
+        }
+        DrawOfferCoordinator.awaitSettled(game);
+        return game.getUndoHistory().hasPendingUndo();
     }
 
-    /** Settles on a point with the requester and every other human, and marks it pending. */
-    private static boolean agree(final PlayerControllerHuman requester, final boolean beforeLosing) {
+    /** Has the requester pick which of their decisions to go back to; null if there is none or they pick none. */
+    private static UndoHistory.Point choosePoint(final PlayerControllerHuman requester, final boolean beforeLosing) {
         final Game game = requester.getGame();
         final Player player = requester.getPlayer();
         final UndoHistory history = game.getUndoHistory();
         if (player == null || game.isGameOver() || !history.isEnabled()) {
-            return false;
+            return null;
         }
-        synchronized (inFlight) {
-            if (!inFlight.add(game)) {
-                return false; // one request at a time
-            }
-        }
-        try {
-            return ask(requester, game, player, history, beforeLosing);
-        } finally {
-            synchronized (inFlight) {
-                inFlight.remove(game);
-            }
-        }
-    }
-
-    private static boolean ask(final PlayerControllerHuman requester, final Game game, final Player player,
-                               final UndoHistory history, final boolean beforeLosing) {
         final Localizer localizer = Localizer.getInstance();
-        final String title = localizer.getMessage("lblUndoLastDecision");
-
         final List<UndoHistory.Point> targets = history.getUndoTargets(player);
         if (targets.isEmpty()) {
             if (!beforeLosing) {
-                requester.getGui().message(localizer.getMessage("lblUndoNothing"), title);
+                requester.getGui().message(localizer.getMessage("lblUndoNothing"), localizer.getMessage("lblUndoLastDecision"));
             }
-            return false;
+            return null;
         }
         if (beforeLosing && !requester.getGui().confirm(null, localizer.getMessage("lblUndoInsteadOfLosing"))) {
-            return false;
+            return null;
         }
         final List<String> labels = new ArrayList<>();
         for (final UndoHistory.Point point : targets) {
             labels.add(localizer.getMessage("lblUndoPointFmt", labels.size() + 1, describe(point)));
         }
         final String chosen = requester.getGui().oneOrNone(localizer.getMessage("lblUndoChoosePoint"), labels);
-        if (chosen == null) {
-            return false;
-        }
-        final UndoHistory.Point target = targets.get(labels.indexOf(chosen));
+        return chosen == null ? null : targets.get(labels.indexOf(chosen));
+    }
 
-        for (final Player other : game.getPlayers()) {
-            if (other == player || !(other.getController() instanceof PlayerControllerHuman pch)) {
-                continue;
-            }
-            final String question = localizer.getMessage("lblUndoApprove", other.getName(), player.getName(), describe(target));
-            if (!pch.getGui().confirm(null, question)) {
-                requester.getGui().message(localizer.getMessage("lblUndoDeclined", other.getName()), title);
-                return false;
-            }
-        }
-
-        if (!history.requestUndo(player, target)) {
+    /** Everyone asked has agreed: tell the game to go back. */
+    static void allowed(final Game game, final DrawOffer offer) {
+        final Player requester = offer.getOfferer();
+        if (game.getUndoHistory().requestUndo(requester, offer.getUndoTarget())) {
+            releaseWaitingPrompts(game);
+        } else if (requester.getController() instanceof PlayerControllerHuman pch) {
             // the game moved on while players were deciding, and that point is gone
-            requester.getGui().message(localizer.getMessage("lblUndoTooLate"), title);
-            return false;
+            final Localizer localizer = Localizer.getInstance();
+            FThreads.invokeInBackgroundThread(() -> pch.getGui().message(
+                    localizer.getMessage("lblUndoTooLate"), localizer.getMessage("lblUndoLastDecision")));
         }
-        return true;
     }
 
     /** Whichever human the game is waiting on gives way; if none is, the next one asked does. */
