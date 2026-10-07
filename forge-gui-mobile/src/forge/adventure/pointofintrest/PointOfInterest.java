@@ -52,7 +52,7 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         data.store("rectangle",rectangle);
         data.store("spriteIndex",spriteIndex);
         data.store("active",active);
-        data.store("displayName",getDisplayName());
+        data.store("displayName",getEnglishDisplayName());
         data.storeObject("questFlagsToActivate", questFlagsToActivate);
 
         return data;
@@ -141,6 +141,11 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     }
 
     public String getDisplayName() {
+        String englishName = getEnglishDisplayName();
+        return forge.Forge.getLocalizer().getMessageorUseDefault(
+            "adv.poi." + englishName.replace(" ", "") + ".displayName", englishName);
+    }
+    private String getEnglishDisplayName() {
         if (displayName == null || displayName.isEmpty())
             displayName = data.getDisplayName();
         return displayName;

@@ -48,7 +48,7 @@
 	{
       "type": "TextButton",
       "name": "status",
-      "text": "Status",
+      "text": "tr(lblStatus)",
       "width": 130,
       "height": 30,
       "x": 5,

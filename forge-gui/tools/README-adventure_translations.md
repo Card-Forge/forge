@@ -59,10 +59,12 @@ Translated by hand — there's no tooling for this part.
    There's no fallback within this file, so translate it fully before
    shipping.
 
-## 3. Items and shop titles
+## 3. Items, shops, enemies and points of interest
 
-Item names/descriptions (`items.json`) and shop titles (`shops.json`) are
-translated through keys in the same `adventure-<lang>.properties` file as
+Item names/descriptions (`items.json`), shop titles (`shops.json`), enemy
+names and boss intros/insults (`enemies.json`), and point-of-interest names
+(`points_of_interest.json`, plus the town names picked at random from
+`town_names_*.txt`) are translated through keys in the same `adventure-<lang>.properties` file as
 NPC dialog — no copy of the JSON files, no tooling needed. Keys are derived
 from the English name, which is never modified (it stays the internal
 identifier the game matches on):
@@ -71,7 +73,20 @@ identifier the game matches on):
 adv.item.SilverChallengeCoin.displayName=...
 adv.item.SilverChallengeCoin.description=...
 adv.shop.Black1.description=...
+adv.enemy.GoblinWarrior.displayName=...
+adv.enemy.Akroma.bossIntro=...
+adv.poi.BarbarianCamp.displayName=...
+adv.poi.Spirit'sVale.displayName=...
 ```
+
+For enemies and points of interest the key is built from the English name
+shown in game (`nameOverride` if set, else `name`; `displayName` for points
+of interest) with the spaces removed. Town names are plain lines in the
+`town_names_*.txt` lists, never combined at runtime, so each possible line
+needs its own key. Languages with grammatical gender will want to generate
+them rather than write ~2200 lines by hand: the same adjective needs a
+different ending depending on the noun it lands on ("Silent Vale" → "Valle
+Silencioso", "Silent Village" → "Aldea Silenciosa").
 
 If a key is missing, the game falls back to the English text embedded in
 the JSON, so partial coverage is safe. To start a new language, copy the
@@ -179,10 +194,8 @@ These are visible in-game but have no translation mechanism yet — they are
 part of the ongoing work, and another reason to wait before starting a new
 language:
 
-- Enemy names, boss intros and insults (`enemies.json`, shown in duels).
-- Point-of-interest display names (`points_of_interest.json`).
-- Hero names on the new-game screen (`heroes.json`).
-- Town names (`town_names_*.txt`, picked from lists at world generation).
+- Some UI strings still hardcoded in Java scenes (event, inn, save/load,
+  spell smith screens).
 
 ## 6. Testing
 

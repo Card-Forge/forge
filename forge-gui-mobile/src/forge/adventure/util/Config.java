@@ -253,9 +253,10 @@ public class Config {
         System.out.print("Looking for resource " + path + "... ");
         String fullPath = (prefix + path).replace("//", "/");
         String langFile = langFilePath(fullPath, prefix);
+        boolean isUI = path.startsWith("ui/");
 
         for (int iter = 1; iter <= 2; iter++) {
-            if (Files.exists(Paths.get(langFile))) {
+            if (!isUI && Files.exists(Paths.get(langFile))) {
                 System.out.println("Found!");
                 Cache.put(path, new FileHandle(langFile));
                 break;

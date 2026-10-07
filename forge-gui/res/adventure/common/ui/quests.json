@@ -49,7 +49,7 @@
 	{
       "type": "TextButton",
       "name": "status",
-      "text": "Status",
+      "text": "tr(lblStatus)",
       "binding": "Status",
       "width": 60,
       "height": 30,
