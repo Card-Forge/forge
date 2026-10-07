@@ -34,6 +34,7 @@ import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.DiceEventBridge;
 import forge.gui.download.CdnUuidCache;
 import forge.gui.error.BugReporter;
 import forge.gui.util.SOptionPane;
@@ -48,6 +49,7 @@ import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
+import forge.screens.match.DiceOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.settings.CardImageBrowserScreen;
@@ -278,6 +280,8 @@ public class Forge implements ApplicationListener {
                 getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPrepareDatabase"));
                 Gdx.app.postRunnable(this::afterDbLoaded);
             };
+            //For Dice listener
+            DiceEventBridge.instance.setListener(DiceOverlay.get()::accept);
             //see if app or assets need updating
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
         }
@@ -983,7 +987,10 @@ public class Forge implements ApplicationListener {
             return;
         }
         // render classic
+        DiceOverlay dice = DiceOverlay.get();
+        dice.update(delta);
         Classic.getInstance().render(screen);
+        dice.draw();
         FrameRate.getInstance().render(showFPS);
     }
 
