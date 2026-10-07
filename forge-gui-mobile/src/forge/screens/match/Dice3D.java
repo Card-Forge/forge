@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
@@ -42,6 +43,19 @@ import forge.localinstance.properties.ForgeConstants;
  */
 public class Dice3D implements Disposable {
     private static final String DICE_MATERIAL = ForgeConstants.RES_DIR + "skins/default/dice_bone.png";
+
+    // ------------------------------------------------------------------ look & lighting (tweak here)
+    // The face turned to the camera gets roughly AMBIENT + 0.73 * KEY_LIGHT; keep that near 1.0-1.1 so the result
+    // face shows the texture at its true colour. This light set is shared by all dice (the coin has its own).
+    private static final float AMBIENT = 0.55f;
+    private static final float KEY_LIGHT = 0.9f;
+    private static final float[] KEY_DIR = { -0.5f, -0.8f, -1f };   // direction the light travels (from upper right)
+    private static final float FILL_LIGHT = 0.2f;                    // 0 = off; soft light from the other side
+    private static final float[] FILL_DIR = { 0.7f, 0.2f, -0.5f };
+    private static final float SPECULAR = 0.15f;                     // 0 = fully matte, ~0.5 = polished
+    private static final float SHININESS = 12f;                      // low = broad sheen, high = tight glint
+    private static final float[] TINT = { 1f, 1f, 1f };              // multiplies the texture, e.g. 0.95, 0.9, 0.8 = warmer
+
     /** d6 value (index 0 = value 1) -> cube face index; opposite faces add up to 7. */
     public static final int[] D6_FACE = { 0, 2, 4, 5, 3, 1 };
 
@@ -51,20 +65,24 @@ public class Dice3D implements Disposable {
     // f=32 top-left, g=64 middle
     private static final int[] SEGMENTS = { 63, 6, 91, 79, 102, 109, 125, 7, 127, 111 };
 
-    // shared GL objects
+    // ------------------------------------------------------------------ shared GL objects
 
-    private static ModelBatch sharedBatch;
+    static ModelBatch sharedBatch;
     private static Environment sharedEnv;
-    private static PerspectiveCamera sharedCam;
+    static PerspectiveCamera sharedCam;
     private static final List<FrameBuffer> POOL = new ArrayList<>();
     private static int poolSize;
 
-    private static void ensureShared() {
+    static void ensureShared() {
         if (sharedBatch == null) {
             sharedBatch = new ModelBatch();
             sharedEnv = new Environment();
-            sharedEnv.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.55f, 0.55f, 0.55f, 1f));
-            sharedEnv.add(new DirectionalLight().set(0.9f, 0.9f, 0.9f, -0.5f, -0.8f, -1f));
+            sharedEnv.set(new ColorAttribute(ColorAttribute.AmbientLight, AMBIENT, AMBIENT, AMBIENT, 1f));
+            sharedEnv.add(new DirectionalLight().set(KEY_LIGHT, KEY_LIGHT, KEY_LIGHT, KEY_DIR[0], KEY_DIR[1], KEY_DIR[2]));
+            if (FILL_LIGHT > 0f) {
+                sharedEnv.add(new DirectionalLight().set(FILL_LIGHT, FILL_LIGHT, FILL_LIGHT * 1.15f,
+                        FILL_DIR[0], FILL_DIR[1], FILL_DIR[2]));
+            }
             sharedCam = new PerspectiveCamera(40, 1, 1);
             sharedCam.position.set(0, 0, 4.2f);
             sharedCam.lookAt(0, 0, 0);
@@ -74,7 +92,7 @@ public class Dice3D implements Disposable {
         }
     }
 
-    private static FrameBuffer acquire(int size) {
+    static FrameBuffer acquire(int size) {
         if (size != poolSize) { // size changed (rotation, different dice count): drop the old ones
             for (FrameBuffer f : POOL) f.dispose();
             POOL.clear();
@@ -86,7 +104,7 @@ public class Dice3D implements Disposable {
         return fb;
     }
 
-    private static void release(FrameBuffer fb, int size) {
+    static void release(FrameBuffer fb, int size) {
         if (size == poolSize) {
             POOL.add(fb);
         } else {
@@ -94,7 +112,25 @@ public class Dice3D implements Disposable {
         }
     }
 
-    /** Frees the shared ModelBatch and pooled FrameBuffers (call when the overlay is disposed). */
+    // The bone texture is decoded once and kept (a Pixmap lives in CPU memory, so it survives GL context loss).
+    private static Pixmap boneCache;
+    private static boolean boneTried;
+
+    private static Pixmap bone() {
+        if (!boneTried) {
+            boneTried = true;
+            try {
+                if (Gdx.files.absolute(DICE_MATERIAL).exists()) {
+                    boneCache = new Pixmap(Gdx.files.absolute(DICE_MATERIAL));
+                }
+            } catch (Exception e) {
+                Gdx.app.error("Dice3D", "Could not load material texture asset from path: " + DICE_MATERIAL, e);
+            }
+        }
+        return boneCache;
+    }
+
+    /** Frees the shared ModelBatch, pooled FrameBuffers and the cached texture (call when the overlay is disposed). */
     public static void releaseShared() {
         if (sharedBatch != null) {
             sharedBatch.dispose();
@@ -104,6 +140,11 @@ public class Dice3D implements Disposable {
         }
         for (FrameBuffer f : POOL) f.dispose();
         POOL.clear();
+        if (boneCache != null) {
+            boneCache.dispose();
+            boneCache = null;
+        }
+        boneTried = false;
     }
 
     // ------------------------------------------------------------------ skin
@@ -139,14 +180,7 @@ public class Dice3D implements Disposable {
             int w = COLS * cell, h = rows * cell;
 
             Pixmap pm = new Pixmap(w, h, Pixmap.Format.RGBA8888);
-            Pixmap boneTexture = null;
-            try {
-                if (Gdx.files.absolute(DICE_MATERIAL).exists()) {
-                    boneTexture = new Pixmap(Gdx.files.absolute(DICE_MATERIAL));
-                }
-            } catch (Exception e) {
-                Gdx.app.error("Dice3D", "Could not load material texture asset from path: " + DICE_MATERIAL, e);
-            }
+            Pixmap boneTexture = bone(); // cached, shared: do not dispose here
 
             if (boneTexture != null) {
                 for (int tx = 0; tx < w; tx += boneTexture.getWidth()) {
@@ -154,7 +188,6 @@ public class Dice3D implements Disposable {
                         pm.drawPixmap(boneTexture, tx, ty);
                     }
                 }
-                boneTexture.dispose();
             } else {
                 // Safe fallback color tint if the .png file is accidentally deleted or missing
                 pm.setColor(0.96f, 0.96f, 0.96f, 1f);
@@ -203,7 +236,10 @@ public class Dice3D implements Disposable {
             // opaque material: no blending needed (the overlay fades the finished picture instead)
             ModelBuilder mb = new ModelBuilder();
             mb.begin();
-            Material mat = new Material(TextureAttribute.createDiffuse(texture));
+            Material mat = new Material(TextureAttribute.createDiffuse(texture),
+                    ColorAttribute.createDiffuse(TINT[0], TINT[1], TINT[2], 1f),
+                    ColorAttribute.createSpecular(SPECULAR, SPECULAR, SPECULAR * 0.9f, 1f),
+                    FloatAttribute.createShininess(SHININESS));
             MeshPartBuilder part = mb.part("die", GL20.GL_TRIANGLES,
                     Usage.Position | Usage.Normal | Usage.TextureCoordinates, mat);
             for (int f = 0; f < faces; f++) {
@@ -273,7 +309,7 @@ public class Dice3D implements Disposable {
         }
     }
 
-    // number drawing
+    // ------------------------------------------------------------------ number drawing
 
     private static void drawNumber(Pixmap pm, int value, float cx, float cy, float h) {
         String s = Integer.toString(value);
@@ -323,7 +359,7 @@ public class Dice3D implements Disposable {
         }
     }
 
-    // the die
+    // ------------------------------------------------------------------ the die
 
     private final Skin skin;
     private final ModelInstance instance;
