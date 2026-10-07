@@ -196,7 +196,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventFlipCoin ev) {
-        if (humanController == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_FLIP_ANIMATION)) {
+        if (humanController == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_DICE_ANIMATION)) {
             return null;
         }
         final PlayerView me = humanController.getLocalPlayerView();
