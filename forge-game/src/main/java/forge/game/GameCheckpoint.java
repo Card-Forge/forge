@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +19,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.mutable.Mutable;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
+
+import com.google.common.base.Suppliers;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 
@@ -32,16 +38,16 @@ import forge.trackable.TrackableProperty;
  * A point the game can be put back to, for undoing a misplay.
  * <p>
  * Rather than copying the game, this records the state of the objects the game is made of, in
- * place: every field of every {@code forge.game} and {@code forge.trackable} object reachable from
- * the {@link Game}, and the contents of every collection, map and table they hold. Restoring
- * writes those values back into the same objects. A card that has since changed zones was
- * replaced by a new object; restoring the zone's contents puts the original object back, so
- * anything still pointing at it (triggers, remembered lists, the stack) stays valid without any
- * id mapping. Objects created after the checkpoint simply stop being reachable.
+ * place: every field of every game and trackable object reachable from the {@link Game}, and the
+ * contents of every collection, map and table they hold. Restoring writes those values back into
+ * the same objects. A card that has since changed zones was replaced by a new object; restoring
+ * the zone's contents puts the original object back, so anything still pointing at it (triggers,
+ * remembered lists, the stack) stays valid without any id mapping. Objects created after the
+ * checkpoint simply stop being reachable.
  * <p>
  * Walking by reflection keeps this complete as the engine grows: a field added to a card or a
  * player is covered without anyone having to remember undo. The cost is that a few things must be
- * kept out on purpose - see {@link #OPAQUE_TYPES} and {@link #SKIPPED_FIELDS}.
+ * kept out on purpose - see {@link #OPAQUE_TYPES} and {@link KeptOnRestore}.
  */
 public final class GameCheckpoint {
 
@@ -51,41 +57,35 @@ public final class GameCheckpoint {
             GameLog.class, GameOutcome.class, GameEvent.class, GameSnapshot.class,
             GameCheckpoint.class, UndoHistory.class, DrawOffer.class);
 
-    /**
-     * Fields left as they are on restore.
-     * Card ids keep counting up, so a card made after the undo can't reuse the id of one the GUI or a
-     * network client last saw as something else. Dirty tracking for network sync is bookkeeping about
-     * what clients have been sent, not game state; a restore marks what changed instead.
-     */
-    private static final Set<String> SKIPPED_FIELDS = Set.of(
-            "forge.game.Game#cardIdCounter",
-            "forge.game.Game#hiddenCardIdCounter",
-            "forge.game.Game#stashedState",
-            "forge.game.Game#drawOffer",
-            "forge.game.Game#undoHistory",
-            "forge.game.phase.PhaseHandler#resumeAtStepStart",
-            "forge.game.phase.PhaseHandler#inLoopStep",
-            "forge.trackable.TrackableObject#version",
-            "forge.trackable.TrackableObject#consumers",
-            "forge.trackable.TrackableObject#copyingProps");
+    /** The engine's own classes are the ones under these packages. */
+    private static final String GAME_PACKAGE = Game.class.getPackageName() + ".";
+    private static final String TRACKABLE_PACKAGE = TrackableObject.class.getPackageName() + ".";
 
+    /**
+     * Types from outside the engine that game objects keep state in, walked like the engine's own:
+     * commons-lang tuples and mutable values. CardType lives in forge-core but is edited in place by
+     * the card states that hold it.
+     */
+    private static final List<Class<?>> HOLDER_TYPES = List.of(
+            CardType.class, Pair.class, Triple.class, Mutable.class);
+
+    private static final Map<Class<?>, Boolean> WALKED = new ConcurrentHashMap<>();
     private static final Map<Class<?>, ClassInfo> CLASS_INFO = new ConcurrentHashMap<>();
 
     private final Game game;
     private final List<ObjectRecord> objects = new ArrayList<>();
     private final List<ContainerRecord> containers = new ArrayList<>();
-    private final long captureNanos;
-    private final Map<String, Integer> unwalked = new java.util.TreeMap<>();
+    // only collected for auditUnwalkedTypes
+    private final Set<Class<?>> unwalked;
 
-    private GameCheckpoint(final Game game) {
+    private GameCheckpoint(final Game game, final boolean audit) {
         this.game = game;
-        long start = System.nanoTime();
+        unwalked = audit ? new HashSet<>() : null;
         walk(game);
-        captureNanos = System.nanoTime() - start;
     }
 
     public static GameCheckpoint capture(final Game game) {
-        return new GameCheckpoint(game);
+        return new GameCheckpoint(game, false);
     }
 
     public Game getGame() {
@@ -106,8 +106,15 @@ public final class GameCheckpoint {
         for (final ObjectRecord r : objects) {
             r.restore();
         }
+        final List<ContainerRecord> readOnly = new ArrayList<>();
         for (final ContainerRecord r : containers) {
-            r.restore();
+            if (!r.isRestored()) {
+                try {
+                    r.write();
+                } catch (final UnsupportedOperationException e) {
+                    readOnly.add(r);
+                }
+            }
         }
 
         for (final Map.Entry<TrackableObject, EnumSet<TrackableProperty>> e : viewProps.entrySet()) {
@@ -115,22 +122,28 @@ public final class GameCheckpoint {
             changed.addAll(propsOf(e.getKey()));
             e.getKey().flagAllAsChanged(changed);
         }
+
+        // A container that can't be written is a view onto one that can, and matches again once
+        // that one is back. One that still differs shows state this checkpoint did not reach.
+        for (final ContainerRecord r : readOnly) {
+            if (!r.isRestored()) {
+                throw new IllegalStateException("Cannot restore read-only " + r.container().getClass().getName());
+            }
+        }
     }
 
     /**
-     * The classes of everything reachable from game objects that a checkpoint neither walks into nor
-     * treats as a plain value, with how often each occurs. Any of them holding mutable game state would
-     * not be restored, so this is for auditing that list.
+     * The classes of everything reachable from game objects that a checkpoint neither walks into, nor
+     * treats as a plain value, nor leaves alone on purpose. Any of them holding mutable game state
+     * would not be restored, so this is for auditing that list.
      */
-    public static Map<String, Integer> auditUnwalkedTypes(final Game game) {
-        final GameCheckpoint checkpoint = new GameCheckpoint(game);
-        return checkpoint.unwalked;
+    public static Set<Class<?>> auditUnwalkedTypes(final Game game) {
+        return new GameCheckpoint(game, true).unwalked;
     }
 
     @Override
     public String toString() {
-        return String.format("GameCheckpoint[%d objects, %d containers, %.1f ms]",
-                objects.size(), containers.size(), captureNanos / 1_000_000.0);
+        return String.format("GameCheckpoint[%d objects, %d containers]", objects.size(), containers.size());
     }
 
     private static EnumSet<TrackableProperty> propsOf(final TrackableObject view) {
@@ -152,8 +165,9 @@ public final class GameCheckpoint {
                     continue;
                 }
                 if (isLeaf(child)) {
-                    if (!isPlainValue(child)) {
-                        unwalked.merge(child.getClass().getName(), 1, Integer::sum);
+                    if (unwalked != null && !isPlainValue(child) && !isOpaque(child.getClass())
+                            && hasFields(child.getClass())) {
+                        unwalked.add(child.getClass());
                     }
                 } else if (seen.put(child, Boolean.TRUE) == null) {
                     work.push(child);
@@ -179,23 +193,13 @@ public final class GameCheckpoint {
         }
         if (o instanceof Collection<?> coll) {
             final List<Object> copy = new ArrayList<>(coll);
-            if (isMutable(c)) {
-                containers.add(new CollectionRecord(coll, copy));
-            }
+            containers.add(new CollectionRecord(coll, copy));
             return copy;
         }
         if (o instanceof Map<?, ?> map) {
-            final List<Map.Entry<Object, Object>> copy = new ArrayList<>(map.size());
-            final List<Object> refs = new ArrayList<>(map.size() * 2);
-            for (final Map.Entry<?, ?> e : map.entrySet()) {
-                copy.add(new AbstractMap.SimpleImmutableEntry<>(e.getKey(), e.getValue()));
-                refs.add(e.getKey());
-                refs.add(e.getValue());
-            }
-            if (isMutable(c)) {
-                containers.add(new MapRecord(map, copy));
-            }
-            return refs;
+            final List<Map.Entry<Object, Object>> copy = copyEntries(map.entrySet());
+            containers.add(new MapRecord(map, copy));
+            return keysAndValues(copy);
         }
         if (o instanceof Table<?, ?, ?> table) {
             final List<Table.Cell<?, ?, ?>> copy = new ArrayList<>(table.cellSet());
@@ -205,23 +209,13 @@ public final class GameCheckpoint {
                 refs.add(cell.getColumnKey());
                 refs.add(cell.getValue());
             }
-            if (isMutable(c)) {
-                containers.add(new TableRecord(table, copy));
-            }
+            containers.add(new TableRecord(table, copy));
             return refs;
         }
         if (o instanceof Multimap<?, ?> multimap) {
-            final List<Map.Entry<Object, Object>> copy = new ArrayList<>(multimap.size());
-            final List<Object> refs = new ArrayList<>(multimap.size() * 2);
-            for (final Map.Entry<?, ?> e : multimap.entries()) {
-                copy.add(new AbstractMap.SimpleImmutableEntry<>(e.getKey(), e.getValue()));
-                refs.add(e.getKey());
-                refs.add(e.getValue());
-            }
-            if (isMutable(c)) {
-                containers.add(new MultimapRecord(multimap, copy));
-            }
-            return refs;
+            final List<Map.Entry<Object, Object>> copy = copyEntries(multimap.entries());
+            containers.add(new MultimapRecord(multimap, copy));
+            return keysAndValues(copy);
         }
 
         final ClassInfo info = classInfo(c);
@@ -246,12 +240,30 @@ public final class GameCheckpoint {
         return copy;
     }
 
-    /** True for values that are not walked into: plain values, and anything outside the game's own classes. */
-    private static boolean isPlainValue(final Object o) {
-        return o instanceof String || o instanceof Number || o instanceof Boolean || o instanceof Character
-                || o instanceof Enum<?> || o instanceof Class<?>;
+    private static List<Map.Entry<Object, Object>> copyEntries(final Collection<? extends Map.Entry<?, ?>> entries) {
+        final List<Map.Entry<Object, Object>> copy = new ArrayList<>(entries.size());
+        for (final Map.Entry<?, ?> e : entries) {
+            copy.add(new AbstractMap.SimpleImmutableEntry<>(e.getKey(), e.getValue()));
+        }
+        return copy;
     }
 
+    private static List<Object> keysAndValues(final List<Map.Entry<Object, Object>> entries) {
+        final List<Object> refs = new ArrayList<>(entries.size() * 2);
+        for (final Map.Entry<Object, Object> e : entries) {
+            refs.add(e.getKey());
+            refs.add(e.getValue());
+        }
+        return refs;
+    }
+
+    /** Values that are what they are: nothing behind them to walk into or restore. */
+    private static boolean isPlainValue(final Object o) {
+        return o instanceof String || o instanceof Boolean || o instanceof Character || o instanceof Enum<?>
+                || o instanceof Class<?> || (o instanceof Number && !(o instanceof Mutable<?>));
+    }
+
+    /** True for what is not walked into: plain values, and anything outside the engine's own classes. */
     private static boolean isLeaf(final Object o) {
         if (isPlainValue(o)) {
             return true;
@@ -261,42 +273,50 @@ public final class GameCheckpoint {
                 || o instanceof Optional) {
             return false;
         }
-        return !isGameClass(c);
+        return !isWalked(c);
     }
 
-    private static boolean isGameClass(final Class<?> c) {
+    private static boolean isOpaque(final Class<?> c) {
         for (final Class<?> opaque : OPAQUE_TYPES) {
             if (opaque.isAssignableFrom(c)) {
-                return false;
+                return true;
             }
         }
-        final String name = c.getName();
-        // CardType lives in forge-core but is edited in place by the card states that hold it.
-        return name.startsWith("forge.game.") || name.startsWith("forge.trackable.") || c == CardType.class
-                || isForeignHolder(name);
+        return false;
     }
 
-    /**
-     * Library types game objects keep state in, walked like game classes: lazily created collections in
-     * Guava's Suppliers.memoize, and commons-lang tuples and mutable values.
-     */
-    private static boolean isForeignHolder(final String className) {
-        return className.startsWith("com.google.common.base.Suppliers$")
-                || className.startsWith("org.apache.commons.lang3.tuple.")
-                || className.startsWith("org.apache.commons.lang3.mutable.");
+    /** An object without fields (a lock, a lambda that captures nothing) has no state to restore. */
+    private static boolean hasFields(final Class<?> type) {
+        for (Class<?> c = type; c != null; c = c.getSuperclass()) {
+            for (final Field f : c.getDeclaredFields()) {
+                if (!Modifier.isStatic(f.getModifiers())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    /** Immutable and read-only containers can't have changed, and would throw if restored. */
-    private static boolean isMutable(final Class<?> c) {
+    /** Whether objects of this class have their fields recorded and what they refer to followed. */
+    private static boolean isWalked(final Class<?> c) {
+        return WALKED.computeIfAbsent(c, GameCheckpoint::isEngineOrHolderClass);
+    }
+
+    private static boolean isEngineOrHolderClass(final Class<?> c) {
+        if (isOpaque(c)) {
+            return false;
+        }
         final String name = c.getName();
-        return !(name.startsWith("com.google.common.collect.Immutable")
-                || name.startsWith("com.google.common.collect.Regular")
-                || name.startsWith("com.google.common.collect.Singleton")
-                || name.startsWith("java.util.ImmutableCollections")
-                || name.startsWith("java.util.Collections$Unmodifiable")
-                || name.startsWith("java.util.Collections$Empty")
-                || name.startsWith("java.util.Collections$Singleton")
-                || name.startsWith("java.util.Arrays$ArrayList"));
+        if (name.startsWith(GAME_PACKAGE) || name.startsWith(TRACKABLE_PACKAGE)) {
+            return true;
+        }
+        for (final Class<?> holder : HOLDER_TYPES) {
+            if (holder.isAssignableFrom(c)) {
+                return true;
+            }
+        }
+        // what Suppliers.memoize returns, which game objects create their collections lazily in
+        return c.getEnclosingClass() == Suppliers.class;
     }
 
     private static ClassInfo classInfo(final Class<?> c) {
@@ -311,12 +331,9 @@ public final class GameCheckpoint {
 
         ClassInfo(final Class<?> type) {
             final List<Field> found = new ArrayList<>();
-            // Captured variables of lambdas and records can't be written; they're only walked.
-            final boolean readOnlyType = type.isHidden() || type.isRecord();
-            for (Class<?> c = type; c != null && c != Object.class
-                    && (c.getName().startsWith("forge.") || isForeignHolder(c.getName())); c = c.getSuperclass()) {
+            for (Class<?> c = type; c != null && isWalked(c); c = c.getSuperclass()) {
                 for (final Field f : c.getDeclaredFields()) {
-                    if (Modifier.isStatic(f.getModifiers()) || SKIPPED_FIELDS.contains(c.getName() + "#" + f.getName())) {
+                    if (Modifier.isStatic(f.getModifiers()) || f.isAnnotationPresent(KeptOnRestore.class)) {
                         continue;
                     }
                     try {
@@ -331,7 +348,7 @@ public final class GameCheckpoint {
             restorable = new boolean[fields.length];
             boolean any = false;
             for (int i = 0; i < fields.length; i++) {
-                restorable[i] = !readOnlyType && !Modifier.isFinal(fields[i].getModifiers());
+                restorable[i] = !Modifier.isFinal(fields[i].getModifiers());
                 any |= restorable[i];
             }
             hasRestorable = any;
@@ -356,99 +373,121 @@ public final class GameCheckpoint {
     }
 
     private interface ContainerRecord {
-        void restore();
+        Object container();
+
+        /** Whether the container holds what it held when the checkpoint was taken. */
+        boolean isRestored();
+
+        /** Puts back what the container held. Immutable ones never get here: they can't have changed. */
+        void write();
     }
 
-    private record ArrayRecord(Object array, Object saved) implements ContainerRecord {
+    private record ArrayRecord(Object container, Object saved) implements ContainerRecord {
         @Override
-        public void restore() {
-            System.arraycopy(saved, 0, array, 0, Array.getLength(saved));
-        }
-    }
-
-    private record CollectionRecord(Collection<?> collection, List<Object> saved) implements ContainerRecord {
-        @Override
-        @SuppressWarnings("unchecked")
-        public void restore() {
-            if (sameElements(collection, saved)) {
-                return;
-            }
-            try {
-                collection.clear();
-                ((Collection<Object>) collection).addAll(saved);
-            } catch (final UnsupportedOperationException e) {
-                // a read-only view onto something restored elsewhere
-            }
-        }
-    }
-
-    private record MapRecord(Map<?, ?> map, List<Map.Entry<Object, Object>> saved) implements ContainerRecord {
-        @Override
-        @SuppressWarnings("unchecked")
-        public void restore() {
-            if (map.size() == saved.size()) {
-                boolean same = true;
-                for (final Map.Entry<Object, Object> e : saved) {
-                    if (map.get(e.getKey()) != e.getValue() || !map.containsKey(e.getKey())) {
-                        same = false;
-                        break;
-                    }
-                }
-                if (same) {
-                    return;
-                }
-            }
-            try {
-                map.clear();
-                for (final Map.Entry<Object, Object> e : saved) {
-                    ((Map<Object, Object>) map).put(e.getKey(), e.getValue());
-                }
-            } catch (final UnsupportedOperationException e) {
-                // a read-only view onto something restored elsewhere
-            }
-        }
-    }
-
-    private record TableRecord(Table<?, ?, ?> table, List<Table.Cell<?, ?, ?>> saved) implements ContainerRecord {
-        @Override
-        @SuppressWarnings("unchecked")
-        public void restore() {
-            try {
-                table.clear();
-                for (final Table.Cell<?, ?, ?> cell : saved) {
-                    ((Table<Object, Object, Object>) table).put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
-                }
-            } catch (final UnsupportedOperationException e) {
-                // a read-only view onto something restored elsewhere
-            }
-        }
-    }
-
-    private record MultimapRecord(Multimap<?, ?> multimap, List<Map.Entry<Object, Object>> saved) implements ContainerRecord {
-        @Override
-        @SuppressWarnings("unchecked")
-        public void restore() {
-            try {
-                multimap.clear();
-                for (final Map.Entry<Object, Object> e : saved) {
-                    ((Multimap<Object, Object>) multimap).put(e.getKey(), e.getValue());
-                }
-            } catch (final UnsupportedOperationException e) {
-                // a read-only view onto something restored elsewhere
-            }
-        }
-    }
-
-    private static boolean sameElements(final Collection<?> current, final List<Object> saved) {
-        if (current.size() != saved.size()) {
+        public boolean isRestored() {
             return false;
         }
-        final Iterator<?> it = current.iterator();
-        for (final Object o : saved) {
-            if (!it.hasNext() || it.next() != o) {
+
+        @Override
+        public void write() {
+            System.arraycopy(saved, 0, container, 0, Array.getLength(saved));
+        }
+    }
+
+    private record CollectionRecord(Collection<?> container, List<Object> saved) implements ContainerRecord {
+        @Override
+        public boolean isRestored() {
+            if (container.size() != saved.size()) {
                 return false;
             }
+            final Iterator<?> it = container.iterator();
+            for (final Object o : saved) {
+                if (!it.hasNext() || it.next() != o) {
+                    return false;
+                }
+            }
+            return true;
         }
-        return true;
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public void write() {
+            container.clear();
+            ((Collection<Object>) container).addAll(saved);
+        }
+    }
+
+    private record MapRecord(Map<?, ?> container, List<Map.Entry<Object, Object>> saved) implements ContainerRecord {
+        @Override
+        public boolean isRestored() {
+            if (container.size() != saved.size()) {
+                return false;
+            }
+            for (final Map.Entry<Object, Object> e : saved) {
+                if (container.get(e.getKey()) != e.getValue() || !container.containsKey(e.getKey())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public void write() {
+            container.clear();
+            for (final Map.Entry<Object, Object> e : saved) {
+                ((Map<Object, Object>) container).put(e.getKey(), e.getValue());
+            }
+        }
+    }
+
+    private record TableRecord(Table<?, ?, ?> container, List<Table.Cell<?, ?, ?>> saved) implements ContainerRecord {
+        @Override
+        public boolean isRestored() {
+            if (container.size() != saved.size()) {
+                return false;
+            }
+            for (final Table.Cell<?, ?, ?> cell : saved) {
+                if (container.get(cell.getRowKey(), cell.getColumnKey()) != cell.getValue()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public void write() {
+            container.clear();
+            for (final Table.Cell<?, ?, ?> cell : saved) {
+                ((Table<Object, Object, Object>) container).put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
+            }
+        }
+    }
+
+    private record MultimapRecord(Multimap<?, ?> container, List<Map.Entry<Object, Object>> saved) implements ContainerRecord {
+        @Override
+        public boolean isRestored() {
+            if (container.size() != saved.size()) {
+                return false;
+            }
+            final Iterator<? extends Map.Entry<?, ?>> it = container.entries().iterator();
+            for (final Map.Entry<Object, Object> e : saved) {
+                final Map.Entry<?, ?> current = it.next();
+                if (current.getKey() != e.getKey() || current.getValue() != e.getValue()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public void write() {
+            container.clear();
+            for (final Map.Entry<Object, Object> e : saved) {
+                ((Multimap<Object, Object>) container).put(e.getKey(), e.getValue());
+            }
+        }
     }
 }

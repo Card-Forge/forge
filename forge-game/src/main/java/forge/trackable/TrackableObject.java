@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.game.IIdentifiable;
+import forge.game.KeptOnRestore;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
@@ -33,9 +34,13 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final int id;
     protected transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
+    // What clients have been sent is not game state: a restore marks what changed instead.
+    @KeptOnRestore
     private int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
+    @KeptOnRestore
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
+    @KeptOnRestore
     private boolean copyingProps;
 
     protected TrackableObject(final int id0, final Tracker tracker) {

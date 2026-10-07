@@ -95,8 +95,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
     // set after an undo to a point at the start of a step; see mainLoopStep
+    @KeptOnRestore
     private boolean resumeAtStepStart = false;
     // whether an UndoRequestedException thrown now would be caught by mainLoopStep
+    @KeptOnRestore
     private boolean inLoopStep = false;
 
     private final transient Game game;

@@ -106,6 +106,7 @@ public class Game {
     // While this is false here, its really set by the Match/Preferences
 
     // If this merges with LKI In the future, it will need to change forms
+    @KeptOnRestore
     private GameCheckpoint stashedState = null;
     private final UndoHistory undoHistory = new UndoHistory(this);
     private CardCollection lastStateBattlefield = new CardCollection();
@@ -141,6 +142,7 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
+    @KeptOnRestore
     private DrawOffer drawOffer;
 
     private final Game maingame;
@@ -1077,6 +1079,9 @@ public class Game {
         age = value;
     }
 
+    // ids keep counting up after an undo, so a new card can't reuse the id of one the GUI or a
+    // network client last saw as something else
+    @KeptOnRestore
     private int cardIdCounter = 0, hiddenCardIdCounter = 0;
     public int nextCardId() {
         return ++cardIdCounter;

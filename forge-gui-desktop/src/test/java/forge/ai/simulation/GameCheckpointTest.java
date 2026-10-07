@@ -1,14 +1,19 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
+import org.apache.commons.lang3.time.StopWatch;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import com.google.common.eventbus.EventBus;
+
 import forge.ai.ComputerUtil;
+import forge.card.ColorSet;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameCheckpoint;
@@ -19,6 +24,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
 
 public class GameCheckpointTest extends SimulationTest {
 
@@ -289,13 +295,12 @@ public class GameCheckpointTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         castAndResolve(p, p.getCardsIn(ZoneType.Hand).get(0), opp);
 
-        Set<String> expected = Set.of(
-                // left alone on purpose
-                "com.google.common.eventbus.EventBus", "forge.ai.PlayerControllerAi", "forge.game.GameLog",
-                "forge.game.GameRules", "forge.game.Match", "org.apache.commons.lang3.time.StopWatch",
+        Set<Class<?>> expected = Set.of(
+                // not game state
+                EventBus.class, StopWatch.class,
                 // immutable
-                "forge.card.mana.ManaCost", "forge.item.PaperCard", "forge.card.ColorSet", "java.lang.Object");
-        Set<String> unexpected = new TreeSet<>(GameCheckpoint.auditUnwalkedTypes(game).keySet());
+                ManaCost.class, PaperCard.class, ColorSet.class);
+        Set<Class<?>> unexpected = new HashSet<>(GameCheckpoint.auditUnwalkedTypes(game));
         unexpected.removeAll(expected);
         AssertJUnit.assertTrue("not walked, check they hold no mutable game state: " + unexpected, unexpected.isEmpty());
     }
