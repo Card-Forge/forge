@@ -224,7 +224,6 @@ public class HostedMatch {
                     game.subscribeToEvents(forwarder);
                 } else {
                     game.subscribeToEvents(new FControlGameEventHandler(humanController));
-                    game.subscribeToEvents(DiceEventBridge.instance);
                 }
                 playersPerGui.put(gui, p.getView());
 
