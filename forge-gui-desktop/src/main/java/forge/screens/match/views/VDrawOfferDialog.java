@@ -13,7 +13,7 @@ import forge.util.Localizer;
 import forge.view.FDialog;
 
 /**
- * Non-modal live-tally dialog for an in-flight draw offer. A single instance is
+ * Non-modal live-tally dialog for an in-flight draw offer or undo request. A single instance is
  * kept by {@link CMatchUI} and {@link #refresh} is called on every broadcast so
  * the tally updates in place; {@link #showResult} renders the terminal outcome
  * and stays open until the player dismisses it.
@@ -32,7 +32,6 @@ public class VDrawOfferDialog extends FDialog {
     public VDrawOfferDialog(final CMatchUI matchUI) {
         super(false, false, "0");
         this.matchUI = matchUI;
-        setTitle(Localizer.getInstance().getMessage("lblOfferDrawTitle"));
     }
 
     /** Rebuild the tally for {@code update}; show Accept/Decline if {@code localResponder} still owes a vote. */
@@ -68,11 +67,21 @@ public class VDrawOfferDialog extends FDialog {
 
     private int addTally(final DrawOfferMessage.Status update, final Localizer localizer, int y) {
         final int w = WIDTH - 2 * PADDING;
+        final boolean undo = update.undoPoint() != null;
+        setTitle(localizer.getMessage(undo ? "lblUndoLastDecision" : "lblOfferDrawTitle"));
         final FLabel header = new FLabel.Builder()
-                .text(localizer.getMessage("lblDrawOfferedBy", update.offerer().getName()))
+                .text(localizer.getMessage(undo ? "lblUndoRequestedBy" : "lblDrawOfferedBy", update.offerer().getName()))
                 .fontAlign(SwingConstants.LEFT).build();
         add(header, PADDING, y, w, ROW_HEIGHT);
-        y += ROW_HEIGHT + 4;
+        y += ROW_HEIGHT;
+        if (undo) {
+            final FLabel point = new FLabel.Builder()
+                    .text(update.undoPoint()).tooltip(update.undoPoint())
+                    .fontSize(12).fontAlign(SwingConstants.LEFT).build();
+            add(point, PADDING, y, w, ROW_HEIGHT);
+            y += ROW_HEIGHT;
+        }
+        y += 4;
         for (final DrawOfferMessage.Entry entry : update.entries()) {
             final FLabel row = new FLabel.Builder()
                     .text(entry.player().getName() + ": " + voteText(entry.vote(), localizer))
@@ -92,9 +101,10 @@ public class VDrawOfferDialog extends FDialog {
         int y = addTally(update, localizer, PADDING);
 
         y += 6;
-        final String msg = update.result() == DrawOfferMessage.Result.ACCEPTED
-                ? localizer.getMessage("lblDrawAccepted")
-                : localizer.getMessage("lblDrawDeclined");
+        final boolean accepted = update.result() == DrawOfferMessage.Result.ACCEPTED;
+        final String msg = update.undoPoint() != null
+                ? localizer.getMessage(accepted ? "lblUndoAllowed" : "lblUndoNotAllowed")
+                : localizer.getMessage(accepted ? "lblDrawAccepted" : "lblDrawDeclined");
         final FLabel result = new FLabel.Builder()
                 .text(msg)
                 .fontAlign(SwingConstants.LEFT).build();
@@ -111,8 +121,10 @@ public class VDrawOfferDialog extends FDialog {
     }
 
     private void respond(final boolean accept) {
-        matchUI.getGameController(localResponder).drawOfferAction(accept ? DrawOfferMessage.Action.ACCEPT : DrawOfferMessage.Action.DECLINE);
+        // Hide first: in a local game the vote is tallied before this returns, and the dialog
+        // may by then be showing again for the next player at this screen.
         setVisible(false);
+        matchUI.getGameController(localResponder).drawOfferAction(accept ? DrawOfferMessage.Action.ACCEPT : DrawOfferMessage.Action.DECLINE);
     }
 
     private String voteText(final DrawOffer.Vote vote, final Localizer localizer) {

@@ -53,8 +53,14 @@ import java.util.List;
  * @version $Id: InputPassPriority.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class InputPassPriority extends InputSyncronizedBase {
+
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
+
+    @Override
+    public boolean isUndoPoint() {
+        return true;
+    }
 
     private List<SpellAbility> chosenSa;
 

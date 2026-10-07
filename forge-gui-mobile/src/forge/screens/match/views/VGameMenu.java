@@ -30,6 +30,10 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblOfferDraw"), FSkinImage.OFFERDRAW, e ->
                 MatchController.instance.getGameController().drawOfferAction(DrawOfferMessage.Action.OFFER)
         ));
+        // Called directly for the same reason: the game thread is parked at the player's prompt
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblUndoLastDecision"), FSkinImage.FLASHBACK, e ->
+                MatchController.instance.getGameController().undoLastDecision()
+        ));
         /*addItem(new FMenuItem("Save Game", FSkinImage.SAVE, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

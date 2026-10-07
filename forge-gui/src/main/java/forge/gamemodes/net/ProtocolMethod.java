@@ -94,7 +94,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
+    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class),
+    undoLastDecision          (Mode.CLIENT, Void.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),

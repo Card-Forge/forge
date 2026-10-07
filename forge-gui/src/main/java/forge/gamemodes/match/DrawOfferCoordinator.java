@@ -8,27 +8,22 @@ import forge.ai.PlayerControllerAi;
 import forge.game.DrawOffer;
 import forge.game.Game;
 import forge.game.GameEndReason;
+import forge.game.UndoHistory;
 import forge.game.player.Player;
 import forge.gui.interfaces.IGuiGame;
 import forge.player.PlayerControllerHuman;
 
-/** Orchestrates an in-flight draw offer: build, broadcast tally, collect votes, resolve. */
+/**
+ * Orchestrates an in-flight draw offer: build, broadcast tally, collect votes, resolve.
+ * A request to undo a decision goes through the same vote.
+ */
 public final class DrawOfferCoordinator {
     private DrawOfferCoordinator() {}
 
     /** Called when a player activates Offer Draw. Ignored if one is already in flight. */
     public static synchronized void offer(final Game game, final Player offerer) {
-        if (game.isGameOver() || offerer == null) {
+        if (!canOffer(game, offerer)) {
             return;
-        }
-        final DrawOffer existing = game.getDrawOffer();
-        if (existing != null) {
-            final boolean offererPresent = game.getPlayers().contains(existing.getOfferer());
-            final boolean anyResponderPresent = existing.getVotes().keySet().stream().anyMatch(game.getPlayers()::contains);
-            if (offererPresent && anyResponderPresent) {
-                return; // a viable offer is already in flight
-            }
-            game.setDrawOffer(null); // stale (offerer/responders left) — supersede it
         }
         final List<Player> responders = new ArrayList<>(game.getPlayers());
         responders.remove(offerer);
@@ -47,6 +42,71 @@ public final class DrawOfferCoordinator {
         broadcast(game, offer);
         if (offer.isSettled()) {
             resolve(game, offer);
+        }
+    }
+
+    /**
+     * Called when a player asks to go back to one of their earlier decisions: the other human players
+     * vote on it as on a draw. AI players are not asked, and with nobody to ask it is allowed at once.
+     * @return false if it was ignored because an offer is already in flight
+     */
+    public static synchronized boolean offerUndo(final Game game, final Player requester, final UndoHistory.Point target) {
+        if (!canOffer(game, requester)) {
+            return false;
+        }
+        final List<Player> responders = new ArrayList<>();
+        for (final Player p : game.getPlayers()) {
+            if (p != requester && p.getController() instanceof PlayerControllerHuman) {
+                responders.add(p);
+            }
+        }
+        final DrawOffer offer = new DrawOffer(requester, responders, target);
+        if (responders.isEmpty()) {
+            UndoRequestCoordinator.allowed(game, offer);
+            return true;
+        }
+        game.setDrawOffer(offer);
+        broadcast(game, offer);
+        return true;
+    }
+
+    /** Whether a new offer can be made now; one that was abandoned is superseded. */
+    private static boolean canOffer(final Game game, final Player offerer) {
+        if (game.isGameOver() || offerer == null) {
+            return false;
+        }
+        final DrawOffer existing = game.getDrawOffer();
+        if (existing != null) {
+            final boolean offererPresent = game.getPlayers().contains(existing.getOfferer());
+            final boolean anyResponderPresent = existing.getVotes().keySet().stream().anyMatch(game.getPlayers()::contains);
+            if (offererPresent && anyResponderPresent) {
+                // a viable offer is already in flight: show it again to whoever still has to answer
+                broadcast(game, existing);
+                return false;
+            }
+            game.setDrawOffer(null); // stale (offerer/responders left) — supersede it
+        }
+        return true;
+    }
+
+    /**
+     * Waits until no offer is in flight. For the game thread, when it can't go on before the players
+     * asked have answered.
+     */
+    public static synchronized void awaitSettled(final Game game) {
+        while (game.getDrawOffer() != null && !game.isGameOver()) {
+            try {
+                DrawOfferCoordinator.class.wait(1000);
+            } catch (final InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+            // a responder who has left the game meanwhile will not answer
+            final DrawOffer offer = game.getDrawOffer();
+            if (offer != null && offer.getVotes().keySet().removeIf(p -> !game.getPlayers().contains(p))
+                    && (offer.getVotes().isEmpty() || offer.isSettled())) {
+                resolve(game, offer);
+            }
         }
     }
 
@@ -74,7 +134,8 @@ public final class DrawOfferCoordinator {
         for (final Map.Entry<Player, DrawOffer.Vote> e : offer.getVotes().entrySet()) {
             entries.add(new DrawOfferMessage.Entry(e.getKey().getView(), e.getValue()));
         }
-        final DrawOfferMessage.Status update = new DrawOfferMessage.Status(offer.getOfferer().getView(), entries, result);
+        final String undoPoint = offer.getUndoTarget() == null ? null : UndoRequestCoordinator.describe(offer.getUndoTarget());
+        final DrawOfferMessage.Status update = new DrawOfferMessage.Status(offer.getOfferer().getView(), entries, result, undoPoint);
         for (final Player p : game.getRegisteredPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman pch) {
                 final IGuiGame gui = pch.getGui();
@@ -86,6 +147,7 @@ public final class DrawOfferCoordinator {
     }
 
     private static void resolve(final Game game, final DrawOffer offer) {
+        DrawOfferCoordinator.class.notifyAll(); // for awaitSettled, which goes on once this is done
         if (game.isGameOver()) {
             game.setDrawOffer(null);
             return;
@@ -94,6 +156,10 @@ public final class DrawOfferCoordinator {
         broadcast(game, offer, accepted ? DrawOfferMessage.Result.ACCEPTED : DrawOfferMessage.Result.DECLINED);
         game.setDrawOffer(null);
         if (!accepted) {
+            return;
+        }
+        if (offer.getUndoTarget() != null) {
+            UndoRequestCoordinator.allowed(game, offer);
             return;
         }
         // Atomic: only now do we touch outcomes. Apply to every alive player, then end directly.

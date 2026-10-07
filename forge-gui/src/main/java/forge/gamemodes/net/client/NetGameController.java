@@ -57,6 +57,11 @@ public class NetGameController implements IGameController {
     }
 
     @Override
+    public void undoLastDecision() {
+        send(ProtocolMethod.undoLastDecision);
+    }
+
+    @Override
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
         send(ProtocolMethod.selectPlayer, playerView, null/*triggerEvent*/); //some platform don't have mousetriggerevent class or it will not allow them to click/tap
     }

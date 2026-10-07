@@ -22,6 +22,7 @@ import forge.player.PlayerZoneUpdates;
 import forge.sound.SoundSystem;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -257,6 +258,39 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         humanController.getGui().reveal("These cards were chosen to ante", options);
         return null;
+    }
+
+    private static final ZoneType[] ZONES_REDRAWN_ON_UNDO = {
+            ZoneType.Battlefield, ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard,
+            ZoneType.Exile, ZoneType.Command, ZoneType.Ante };
+
+    @Override
+    public Void visit(final GameEventSnapshotRestored event) {
+        final GameView gameView = matchController.getGameView();
+        if (event.start() || gameView == null) {
+            return null;
+        }
+        // Anything may differ after going back, so redraw all of it
+        for (final PlayerView p : gameView.getPlayers()) {
+            for (final ZoneType z : ZONES_REDRAWN_ON_UNDO) {
+                updateZone(p, z);
+                final FCollectionView<CardView> cards = p.getCards(z);
+                if (cards != null) {
+                    processCards(cards, cardsRefreshDetails);
+                    processCards(cards, cardsUpdate);
+                }
+            }
+            processPlayer(p, livesUpdate);
+            processPlayer(p, shardsUpdate);
+            processPlayer(p, manaPoolUpdate);
+        }
+        turnUpdate = gameView.getPlayerTurn();
+        needPhaseUpdate = true;
+        needCombatUpdate = true;
+        needStackUpdate = true;
+        needPlayerControlUpdate = true;
+        refreshFieldUpdate = true;
+        return processEvent();
     }
 
     @Override

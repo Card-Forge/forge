@@ -37,6 +37,7 @@ public final class GameMenu {
         final JMenu menu = new JMenu(localizer.getMessage("lblGame"));
         menu.setMnemonic(KeyEvent.VK_G);
         menu.add(getMenuItem_Undo());
+        menu.add(getMenuItem_UndoLastDecision());
         menu.add(getMenuItem_Concede());
         menu.add(getMenuItem_OfferDraw());
         menu.add(getMenuItem_EndTurn());
@@ -71,6 +72,14 @@ public final class GameMenu {
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblUndo"));
         setAcceleratorFromPref(menuItem, FPref.SHORTCUT_UNDO);
         menuItem.addActionListener(e -> matchUI.getGameController().undoLastAction());
+        return menuItem;
+    }
+
+    private SkinnedMenuItem getMenuItem_UndoLastDecision() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblUndoLastDecision"));
+        menuItem.setToolTipText(localizer.getMessage("lblUndoLastDecisionTooltip"));
+        menuItem.addActionListener(e -> matchUI.getGameController().undoLastDecision());
         return menuItem;
     }
 

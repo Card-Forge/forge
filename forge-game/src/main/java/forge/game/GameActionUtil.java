@@ -953,10 +953,12 @@ public final class GameActionUtil {
     public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
+        // read before restoring: the restore also puts the ability itself back to how it was
+        final String rolledBack = ability.getHostCard().getName() + " - " + ability.getActivatingPlayer();
 
         if (game.restoreGameState()) {
             // If we're able to restore the whole game state when rolling back an ability don't try to manually roll back
-            System.out.println("Restored state from snapshot! Rolled back: " + ability.getHostCard().getName() + " - " + ability.getActivatingPlayer());
+            System.out.println("Restored state from snapshot! Rolled back: " + rolledBack);
 
             return;
         }

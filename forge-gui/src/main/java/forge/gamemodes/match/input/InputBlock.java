@@ -43,8 +43,14 @@ import java.util.List;
  * @version $Id: InputBlock.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class InputBlock extends InputSyncronizedBase {
+
     /** Constant <code>serialVersionUID=6120743598368928128L</code>. */
     private static final long serialVersionUID = 6120743598368928128L;
+
+    @Override
+    public boolean isUndoPoint() {
+        return true;
+    }
 
     private Card currentAttacker = null;
     // some cards may block several creatures at a time. (ex:  Two-Headed Dragon, Vanguard's Shield)

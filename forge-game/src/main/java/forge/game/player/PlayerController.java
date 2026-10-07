@@ -376,6 +376,12 @@ public abstract class PlayerController {
 
     public abstract void autoPassCancel();
 
+    /**
+     * The player is about to lose the game. Offer to go back to one of their earlier decisions instead.
+     * @return whether going back was agreed, in which case the loss doesn't happen
+     */
+    public boolean offerUndoInsteadOfLosing() { return false; }
+
     public abstract void awaitNextInput();
     public abstract void cancelAwaitNextInput();
 

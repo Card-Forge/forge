@@ -45,6 +45,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -93,6 +94,12 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
+    // set after an undo to a point at the start of a step; see mainLoopStep
+    @KeptOnRestore
+    private boolean resumeAtStepStart = false;
+    // whether an UndoRequestedException thrown now would be caught by mainLoopStep
+    @KeptOnRestore
+    private boolean inLoopStep = false;
 
     private final transient Game game;
 
@@ -303,6 +310,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
+                    game.getUndoHistory().stageStepStart(UndoHistory.Kind.DECLARE_ATTACKERS);
                     combat.initConstraints();
                     game.getStack().freezeStack(null);
                     declareAttackersTurnBasedAction();
@@ -312,6 +320,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case COMBAT_DECLARE_BLOCKERS:
+                    game.getUndoHistory().stageStepStart(UndoHistory.Kind.DECLARE_BLOCKERS);
                     combat.removeAbsentCombatants();
                     game.getStack().freezeStack(null);
                     declareBlockersTurnBasedAction();
@@ -1037,6 +1046,51 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     public void mainLoopStep() {
+        inLoopStep = true;
+        try {
+            if (resumeAtStepStart) {
+                // Undone to the start of a step: replay its turn-based actions, as advancing into it did.
+                resumeAtStepStart = false;
+                onPhaseBegin();
+                finishLoopStep();
+            } else {
+                loopStep();
+            }
+        } catch (UndoRequestedException e) {
+            resumeAtStepStart = undoToPendingPoint();
+        } finally {
+            inLoopStep = false;
+        }
+    }
+
+    /** Whether the game loop is running a step, so an undo can unwind to it from here. */
+    public boolean canUnwindForUndo() {
+        return inLoopStep;
+    }
+
+    /**
+     * Puts the game back to the point in {@link UndoHistory} a player asked for.
+     * @return whether the game resumes at the start of the restored step rather than with priority
+     */
+    private boolean undoToPendingPoint() {
+        final UndoHistory history = game.getUndoHistory();
+        final Player by = history.getPendingUndoBy();
+        final UndoHistory.Point point = game.restoreState(history::applyPendingUndo);
+        if (point == null) {
+            throw new IllegalStateException("Undo was requested, but its point is gone");
+        }
+        for (final Player p : game.getPlayers()) {
+            // whatever was yielded to or noted since belongs to the future that was taken back
+            p.getController().autoPassCancel();
+            p.getController().resetAtEndOfTurn();
+        }
+        game.getGameLog().add(GameLogEntryType.UNDO,
+                Localizer.getInstance().getMessage("lblUndoneTo", by == null ? "" : by.getName(), point.getTurn(),
+                        point.getPhase() == null ? "" : point.getPhase().nameForUi));
+        return point.getKind().resumesAtStepStart();
+    }
+
+    private void loopStep() {
         if (givePriorityToPlayer) {
             if (DEBUG_PHASES) {
                 sw.start();
@@ -1146,6 +1200,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             pPlayerPriority = nextPlayer;
         }
 
+        finishLoopStep();
+    }
+
+    private void finishLoopStep() {
         // If ever the karn's ultimate resolved
         if (game.getAge() == GameStage.RestartedByKarn) {
             setPhase(null);

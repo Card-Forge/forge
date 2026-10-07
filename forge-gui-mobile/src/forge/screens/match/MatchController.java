@@ -114,7 +114,7 @@ public class MatchController extends NetworkGuiGame {
     public void updateDrawOffer(final DrawOfferMessage.Status update) {
         FThreads.invokeInEdtNowOrLater(() -> {
             if (update.result() != null) {
-                if (drawOfferDialog == null) { drawOfferDialog = new VDrawOfferDialog(); }
+                if (drawOfferDialog == null) { drawOfferDialog = new VDrawOfferDialog(update); }
                 drawOfferDialog.showResult(update);
                 drawOfferDialog = null;
                 return;
@@ -129,13 +129,13 @@ public class MatchController extends NetworkGuiGame {
             if (localTarget != null) {
                 // a local player still owes a vote — always (re)present it, even if previously hidden
                 if (drawOfferDialog == null) {
-                    drawOfferDialog = new VDrawOfferDialog();
+                    drawOfferDialog = new VDrawOfferDialog(update);
                 }
                 drawOfferDialog.refresh(update, localTarget);
             } else {
                 // only watchers locally — show the read-only tally but respect dismissal
                 if (drawOfferDialog == null) {
-                    drawOfferDialog = new VDrawOfferDialog();
+                    drawOfferDialog = new VDrawOfferDialog(update);
                 } else if (!drawOfferDialog.isVisible()) {
                     return;
                 }
