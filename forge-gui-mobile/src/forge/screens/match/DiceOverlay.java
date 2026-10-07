@@ -132,7 +132,7 @@ public class DiceOverlay implements Disposable {
     }
 
     private CountDownLatch accept(int sides, int[] results, PlanarDice planar) {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_DICE_ANIMATION)) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_DICE_ANIMATION)) {
             return null; // setting off = old behaviour
         }
         if (Thread.currentThread() == renderThread) {
