@@ -16,11 +16,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
@@ -106,6 +102,7 @@ public class Assets implements Disposable {
     private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture, coinHead, coinTail;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
+    private SpriteBatch diceBatch;
     private boolean isDisposed = false;
     private int miniMapID;
     private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
@@ -156,7 +153,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, coinHead, coinTail,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture, diceBatch);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -193,8 +190,8 @@ public class Assets implements Disposable {
         final String key = "Roboto-Bold-" + fontSize + ".ttf";
 
         // Fast path: already loaded, no file system lookups
-        if (manager.isLoaded(key, BitmapFont.class)) {
-            return manager.get(key, BitmapFont.class);
+        if (manager().isLoaded(key, BitmapFont.class)) {
+            return manager().get(key, BitmapFont.class);
         }
 
         // Resolve the TTF only once
@@ -214,13 +211,19 @@ public class Assets implements Disposable {
         param.fontParameters.magFilter = Texture.TextureFilter.Linear;
         param.fontParameters.hinting = FreeTypeFontGenerator.Hinting.AutoMedium;
 
-        manager.load(key, BitmapFont.class, param);
-        manager.finishLoadingAsset(key);
-        return manager.get(key, BitmapFont.class);
+        manager().load(key, BitmapFont.class, param);
+        manager().finishLoadingAsset(key);
+        return manager().get(key, BitmapFont.class);
     }
 
     public GifAnimation getGifAnimation() {
         return gifAnimation;
+    }
+
+    public SpriteBatch getDiceBatch() {
+        if (diceBatch == null)
+            diceBatch = new SpriteBatch(32);
+        return diceBatch;
     }
 
     public void setGifAnimation(FileHandle file, Animation.PlayMode playMode) {

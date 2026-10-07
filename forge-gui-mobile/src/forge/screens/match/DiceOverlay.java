@@ -12,8 +12,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Disposable;
 import com.google.common.eventbus.Subscribe;
 
 import forge.Forge;
@@ -48,7 +48,7 @@ import forge.model.FModel;
  * Supported: d4..d20 and the planar die (d4 uses a tetrahedron, d5-d6 a cube, d7-d8 share the octahedron, d9-d10 the trapezohedron,
  * d11-d12 the dodecahedron, d13-d20 the icosahedron). Anything else only plays the sound.
  */
-public class DiceOverlay {
+public class DiceOverlay implements Disposable {
     private static final String PLANAR_WALK = ForgeConstants.RES_DIR + "skins/default/planar_walk.png";
     private static final String PLANAR_CHAOS = ForgeConstants.RES_DIR + "skins/default/planar_chaos.png";
     private static final int MAX_QUEUE = 4;      // extra rolls beyond this are skipped
@@ -74,12 +74,14 @@ public class DiceOverlay {
     private final Queue<Pending> queue = new ArrayDeque<>();
     private Pending current;
     private final List<Dice3D> dice = new ArrayList<>();
-    private SpriteBatch batch;
+    private Dice3D.Skin skin;   // shared by all dice of the current roll
+    private int cols, rows;
+    private float dieSize;      // on-screen size of one die in pixels
 
     private volatile Thread renderThread;
     private WeakReference<Game> attached = new WeakReference<>(null);
 
-    private static DiceOverlay instance;
+    public static DiceOverlay instance;
 
     public static synchronized DiceOverlay getInstance() {
         if (instance == null) {
@@ -170,6 +172,15 @@ public class DiceOverlay {
         return am.get(path, Pixmap.class);
     }
 
+    /** Grid layout + on-screen die size for n dice (render thread). */
+    private void layout(int n) {
+        float w = Gdx.graphics.getBackBufferWidth();
+        float h = Gdx.graphics.getBackBufferHeight();
+        cols = n <= 3 ? n : (n + 1) / 2;
+        rows = (n + cols - 1) / cols;
+        dieSize = Math.min(Math.min(w, h) * 0.5f, Math.min(w * 0.95f / cols, h * 0.45f / rows));
+    }
+
     private void startNext() {
         Pending p = queue.poll();
         if (p == null) {
@@ -177,8 +188,15 @@ public class DiceOverlay {
         }
         current = p;
         try {
+            int n = p.planar != null ? 1 : Math.min(p.results.length, MAX_DICE);
+            layout(n);
+            // render a bit above the on-screen size (smoother edges), but never more than needed
+            int fb = MathUtils.clamp(Math.round(dieSize * 1.3f), 256, 1024);
+            int cell = fb >= 400 ? 256 : 128;
+
             if (p.planar != null) {
-                Dice3D d = Dice3D.planar(pixmap(PLANAR_WALK), pixmap(PLANAR_CHAOS), 1024);
+                skin = Dice3D.Skin.planar(pixmap(PLANAR_WALK), pixmap(PLANAR_CHAOS), cell);
+                Dice3D d = new Dice3D(skin, fb);
                 int face;
                 switch (p.planar) {
                     case Planeswalk: face = 0; break;
@@ -189,11 +207,10 @@ public class DiceOverlay {
                 dice.add(d);
                 return;
             }
-            int n = Math.min(p.results.length, MAX_DICE);
-            int fb = n == 1 ? 1024 : 512;
+            skin = Dice3D.Skin.numbered(p.sides, cell);
             for (int i = 0; i < n; i++) {
                 float time = ROLL_TIME + (n > 1 ? MathUtils.random(0f, 0.3f) : 0f);
-                Dice3D d = Dice3D.numbered(p.sides, fb);
+                Dice3D d = new Dice3D(skin, fb);
                 d.rollValue(p.results[i], time);
                 dice.add(d);
             }
@@ -209,6 +226,10 @@ public class DiceOverlay {
             d.dispose();
         }
         dice.clear();
+        if (skin != null) {
+            skin.dispose();
+            skin = null;
+        }
         if (current != null) {
             current.latch.countDown();
             current = null;
@@ -241,36 +262,30 @@ public class DiceOverlay {
         }
     }
 
-    /** Renders the dice in a centred grid with its own SpriteBatch. Call after the normal frame. */
+    /** Draws the dice in a centred grid with its own SpriteBatch. Call after the normal frame. */
     public void render() {
         if (dice.isEmpty()) {
             return;
         }
-        if (batch == null) {
-            batch = new SpriteBatch();
-        }
         float w = Gdx.graphics.getBackBufferWidth();
         float h = Gdx.graphics.getBackBufferHeight();
         int n = dice.size();
-        int cols = n <= 3 ? n : (n + 1) / 2;
-        int rows = (n + cols - 1) / cols;
-        float size = Math.min(Math.min(w, h) * 0.5f, Math.min(w * 0.95f / cols, h * 0.45f / rows));
-        float x0 = (w - size * cols) / 2f;
-        float y0 = (h + size * rows) / 2f - size; // top row's bottom edge
-        batch.getProjectionMatrix().setToOrtho2D(0, 0, w, h);
-        batch.begin();
+        layout(n); // recomputed so a screen rotation mid-roll still looks right
+        float size = dieSize;
+        float top = (h + size * rows) / 2f - size; // bottom edge of the first row
+        Forge.getAssets().getDiceBatch().getProjectionMatrix().setToOrtho2D(0, 0, w, h);
+        Forge.getAssets().getDiceBatch().begin();
         for (int i = 0; i < n; i++) {
             Dice3D d = dice.get(i);
-            int inRow = Math.min(cols, n - (i / cols) * cols);
-            float rowX = (w - size * inRow) / 2f; // centre a short last row
-            float x = (i / cols == rows - 1) ? rowX : x0;
-            x += (i % cols) * size;
-            float y = y0 - (i / cols) * size;
-            batch.setColor(1f, 1f, 1f, d.getAlpha());
-            batch.draw(d.getRegion(), x, y, size, size);
+            int row = i / cols;
+            int inRow = Math.min(cols, n - row * cols);
+            float x = (w - size * inRow) / 2f + (i % cols) * size; // short rows are centred
+            float y = top - row * size;
+            Forge.getAssets().getDiceBatch().setColor(1f, 1f, 1f, d.getAlpha());
+            Forge.getAssets().getDiceBatch().draw(d.getRegion(), x, y, size, size);
         }
-        batch.setColor(Color.WHITE);
-        batch.end();
+        Forge.getAssets().getDiceBatch().setColor(Color.WHITE);
+        Forge.getAssets().getDiceBatch().end();
     }
 
     public boolean isActive() {
@@ -285,12 +300,10 @@ public class DiceOverlay {
         }
     }
 
+    @Override
     public void dispose() {
         releaseQueue();
         finishCurrent();
-        if (batch != null) {
-            batch.dispose();
-            batch = null;
-        }
+        Dice3D.releaseShared();
     }
 }

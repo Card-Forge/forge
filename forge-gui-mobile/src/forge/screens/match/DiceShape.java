@@ -24,6 +24,13 @@ public final class DiceShape {
     private static final float RADIUS = 0.9f;   // circumradius of the non-cube shapes
     private static final float PHI = (1f + (float) Math.sqrt(5.0)) / 2f;
     private static final float EPS = 1e-3f;
+    /**
+     * Sphere radius that trims the cube's corners. The corners are at 0.866 and the face centres at 0.5:
+     * closer to 0.866 = barely rounded, lower = rounder (below ~0.72 the edges start to curve too).
+     */
+    private static final float CUBE_CORNER_CLIP = 0.85f;
+    /** The raw d10 is very pointy (apex height ~1.8x the equator radius); lower = flatter, 1 = untouched. */
+    private static final float D10_HEIGHT = 0.7f;
 
     public final int faceCount;
     public final Vector3[][] poly;
@@ -32,8 +39,11 @@ public final class DiceShape {
     public final Vector2[][] local;
     public final float[] halfExtent; // max |x| or |y| of the local corners
     public final float[] inRadius;   // distance from face centre to the nearest edge
+    /** > 0 means: clip the corners with a sphere of this radius (cube only, whose corners sit at ~0.866). */
+    public final float cornerRadius;
 
-    private DiceShape(List<Vector3[]> faces, Vector3[] upHint, float scale) {
+    private DiceShape(List<Vector3[]> faces, Vector3[] upHint, float scale, float cornerRadius) {
+        this.cornerRadius = cornerRadius;
         faceCount = faces.size();
         poly = new Vector3[faceCount][];
         normal = new Vector3[faceCount];
@@ -128,7 +138,7 @@ public final class DiceShape {
                     corner(c, u, -0.5f, v[i], -0.5f), corner(c, u, 0.5f, v[i], -0.5f),
                     corner(c, u, 0.5f, v[i], 0.5f), corner(c, u, -0.5f, v[i], 0.5f) });
         }
-        return new DiceShape(faces, v, 1f);
+        return new DiceShape(faces, v, 1f, CUBE_CORNER_CLIP);
     }
 
     public static DiceShape octahedron() {
@@ -165,7 +175,17 @@ public final class DiceShape {
             anti.add(new Vector3[] { t[k], b[k], t[k1] });
             anti.add(new Vector3[] { t[k1], b[k1], b[k] });
         }
-        return normalized(dual(anti));
+        // squash along the axis: scaling is affine, so every kite stays perfectly planar
+        List<Vector3[]> faces = dual(anti);
+        List<Vector3[]> flat = new ArrayList<>();
+        for (Vector3[] f : faces) {
+            Vector3[] g = new Vector3[f.length];
+            for (int i = 0; i < f.length; i++) {
+                g[i] = new Vector3(f[i].x, f[i].y, f[i].z * D10_HEIGHT);
+            }
+            flat.add(g);
+        }
+        return normalized(flat, 0.98f);
     }
 
     // ---------------------------------------------------------------- construction helpers
@@ -186,7 +206,7 @@ public final class DiceShape {
         for (Vector3[] p : faces) {
             for (Vector3 q : p) max = Math.max(max, q.len());
         }
-        return new DiceShape(faces, null, radius / max);
+        return new DiceShape(faces, null, radius / max, 0f);
     }
 
     private static List<Vector3[]> icosaFaces() {
