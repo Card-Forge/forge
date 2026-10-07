@@ -11,4 +11,5 @@ SVar:StartAtZero:DB$ RepeatEach | RepeatSubAbility$ DBCleanup | RepeatPlayers$ P
 SVar:DBCleanup:DB$ StoreSVar | SVar$ EachPlayer | Type$ Number | Expression$ 0
 SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:X:PlayerCountRemembered$SVarAmount
+AI:RemoveDeck:All
 Oracle:As this artifact enters, each player puts a pop! counter on “0.”\nWhenever a player casts a spell, move that player’s pop! counter up one.\nWhenever a player’s pop! counter hits “5,” that player creates a 5/5 pink Giant Teddy Bear creature token and resets all pop! counters to “0."
