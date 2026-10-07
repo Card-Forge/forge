@@ -279,12 +279,19 @@ public final class BoosterUtils {
 
         int usedMulticolor = 0, usedPhyrexian = 0;
 
+        //The otherColors loop below acts as a repetition multiplier keeping the
+        //preferred colors proportionate to the unselected ones the else branch
+        //mixes in. With EVERY color selected it is empty, so no filters were
+        //built at all and generateCards produced an empty starting pool -
+        //silently ("I want everything" gave nothing). Floor it at one pass.
+        final int preferredReps = Math.max(1, otherColors.size());
+
         for (int i = 0; i < MAX_BIAS; i++) {
 
             if (i < colorBias) {
 
                 int index = (int) ((double) i / preferredBias);
-                for (@SuppressWarnings("unused") Byte ignored : otherColors) {
+                for (int rep = 0; rep < preferredReps; rep++) {
 
                     //Add artifacts here if there's no colorless selection
                     if (i % 8 == 0 && !preferredColors.contains(MagicColor.COLORLESS) && includeArtifacts) {
