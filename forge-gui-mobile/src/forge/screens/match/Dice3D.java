@@ -26,6 +26,7 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
+import forge.localinstance.properties.ForgeConstants;
 
 /**
  * Renders one tumbling die into an off-screen FrameBuffer.
@@ -35,6 +36,7 @@ import com.badlogic.gdx.utils.Disposable;
  *   planar(walk, chaos, fbSize)  cube with the two planar symbols from PNGs and four blank faces
  */
 public class Dice3D implements Disposable {
+    private static final String DICE_MATERIAL = ForgeConstants.RES_DIR + "skins/default/dice_bone.png";
     /** d6 value (index 0 = value 1) -> cube face index; opposite faces add up to 7. */
     public static final int[] D6_FACE = { 0, 2, 4, 5, 3, 1 };
 
@@ -92,8 +94,27 @@ public class Dice3D implements Disposable {
         int w = COLS * CELL, h = rows * CELL;
 
         Pixmap pm = new Pixmap(w, h, Pixmap.Format.RGBA8888);
-        pm.setColor(0.96f, 0.96f, 0.96f, 1f);
-        pm.fill();
+        Pixmap boneTexture = null;
+        try {
+            if (Gdx.files.absolute(DICE_MATERIAL).exists()) {
+                boneTexture = new Pixmap(Gdx.files.absolute(DICE_MATERIAL));
+            }
+        } catch (Exception e) {
+            Gdx.app.error("Dice3D", "Could not load material texture asset from path: " + DICE_MATERIAL, e);
+        }
+
+        if (boneTexture != null) {
+            for (int tx = 0; tx < w; tx += boneTexture.getWidth()) {
+                for (int ty = 0; ty < h; ty += boneTexture.getHeight()) {
+                    pm.drawPixmap(boneTexture, tx, ty);
+                }
+            }
+            boneTexture.dispose();
+        } else {
+            // Safe fallback color tint if the .png file is accidentally deleted or missing
+            pm.setColor(0.96f, 0.96f, 0.96f, 1f);
+            pm.fill();
+        }
 
         float[][] uv = new float[faces][];
         for (int f = 0; f < faces; f++) {
