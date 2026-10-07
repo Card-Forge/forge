@@ -9,7 +9,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -90,7 +89,10 @@ public class StaticAbilityAttackBlockRestrict {
         return restrictCommon(StaticAbilityMode.BlockRestrict, card, others);
     }
 
-    static public List<StaticAbility> restrictCommon(StaticAbilityMode mode, final Card card, final Collection<Card> others) {
+    /**
+     * Statics that restrict the card depending on which other creatures attack or block with it.
+     */
+    static public List<StaticAbility> getRestrictions(StaticAbilityMode mode, final Card card) {
         final Game game = card.getGame();
         List<StaticAbility> result = Lists.newArrayList();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
@@ -101,28 +103,77 @@ public class StaticAbilityAttackBlockRestrict {
                 if (!stAb.matchesValidParam("ValidCard", card)) {
                     continue;
                 }
-                if (validRestrictCommon(stAb, card, others)) {
-                    result.add(stAb);
-                }
+                result.add(stAb);
             }
         }
         return result;
     }
-    static public boolean validRestrictCommon(StaticAbility stAb, Card card, Collection<Card> others) {
-        long size;
-        if (stAb.hasParam("ValidOthers")) {
-            size = others.stream().filter(CardPredicates.restriction(stAb.getParam("ValidOthers").split(","), stAb.getHostCard().getController(), stAb.getHostCard(), stAb)).count();
-        } else if (stAb.hasParam("ValidOthersRelative")) {
-            size = others.stream().filter(CardPredicates.restriction(stAb.getParam("ValidOthers").split(","), card.getController(), card, stAb)).count();
-        } else {
-            size = others.size();
+
+    static public List<StaticAbility> restrictCommon(StaticAbilityMode mode, final Card card, final Collection<Card> others) {
+        List<StaticAbility> result = getRestrictions(mode, card);
+        result.removeIf(stAb -> !isViolated(stAb, card, others));
+        return result;
+    }
+
+    /**
+     * Whether a restriction of the card stays unfulfilled even if all of the potential others join in.
+     */
+    static public boolean cantBeFulfilled(StaticAbilityMode mode, final Card card, final Collection<Card> potentialOthers) {
+        for (final StaticAbility stAb : getRestrictions(mode, card)) {
+            if (needsOthers(stAb) && isViolated(stAb, card, potentialOthers)) {
+                return true;
+            }
         }
-        String compare = stAb.getParamOrDefault("OthersCompare", "GE1");
+        return false;
+    }
 
-        String operator = compare.substring(0, 2);
-        String operand = compare.substring(2);
+    static public boolean countsAsOther(StaticAbility stAb, Card card, Card other) {
+        if (other.equals(card)) {
+            return false;
+        }
+        // ValidOthersRelative is seen from the restricted card instead of the host
+        return stAb.matchesValidParam("ValidOthers", other) && stAb.matchesValidParam("ValidOthersRelative", other, card);
+    }
 
-        final int operandValue = AbilityUtils.calculateAmount(card, operand, stAb);
-        return !Expressions.compare((int)size, operator, operandValue);
+    static public int countOthers(StaticAbility stAb, Card card, Collection<Card> others) {
+        int size = 0;
+        for (final Card other : others) {
+            if (countsAsOther(stAb, card, other)) {
+                size++;
+            }
+        }
+        return size;
+    }
+
+    static public boolean isViolated(StaticAbility stAb, Card card, Collection<Card> others) {
+        return isViolated(stAb, card, countOthers(stAb, card, others));
+    }
+
+    static public boolean isViolated(StaticAbility stAb, Card card, int others) {
+        return !Expressions.compare(others, getOthersCompare(stAb), getOthersAmount(stAb, card));
+    }
+
+    private static String getOthersCompare(StaticAbility stAb) {
+        return stAb.getParamOrDefault("OthersCompare", "GE1").substring(0, 2);
+    }
+
+    static public int getOthersAmount(StaticAbility stAb, Card card) {
+        return AbilityUtils.calculateAmount(card, stAb.getParamOrDefault("OthersCompare", "GE1").substring(2), stAb);
+    }
+
+    /**
+     * More others can only help to fulfill this restriction.
+     */
+    static public boolean needsOthers(StaticAbility stAb) {
+        final String compare = getOthersCompare(stAb);
+        return compare.equals("GE") || compare.equals("GT");
+    }
+
+    /**
+     * More others can only break this restriction.
+     */
+    static public boolean limitsOthers(StaticAbility stAb) {
+        final String compare = getOthersCompare(stAb);
+        return compare.equals("LT") || compare.equals("LE");
     }
 }

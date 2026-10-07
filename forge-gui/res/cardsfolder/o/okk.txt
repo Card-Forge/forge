@@ -4,4 +4,5 @@ Types:Creature Goblin
 PT:4/4
 S:Mode$ AttackRestrict | ValidCard$ Card.Self | ValidOthersRelative$ Creature.powerGTX | Description$ CARDNAME can't attack unless a creature with greater power also attacks.
 S:Mode$ BlockRestrict | ValidCard$ Card.Self | ValidOthersRelative$ Creature.powerGTX | Description$ CARDNAME can't block unless a creature with greater power also blocks.
+SVar:X:Count$CardPower
 Oracle:Okk can't attack unless a creature with greater power also attacks.\nOkk can't block unless a creature with greater power also blocks.
