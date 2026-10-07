@@ -777,6 +777,8 @@ public class DuelScene extends ForgeScene {
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena, AdventureEventData eventData) {
         this.player = playerSprite;
         this.enemy = enemySprite;
+        //Discard the previous opponent's cached portrait before the next duel.
+        enemyAvatar.clear();
         this.isArena = isArena;
         this.eventData = eventData;
         if (eventData != null && eventData.eventRules == null)
