@@ -1,6 +1,7 @@
 Name:Water Gun Balloon Game
 ManaCost:2
 Types:Artifact
+K:ETBReplacement:Other:StartAtZero
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ RememberPlayer | TriggerDescription$ Whenever a player casts a spell, move that player’s pop! counter up one.\n\nWhenever a player’s pop! counter hits “5,” that player creates a 5/5 pink Giant Teddy Bear creature token and resets all pop! counters to “0.”
 SVar:RememberPlayer:DB$ Pump | RememberObjects$ TriggeredActivator | SubAbility$ IncreaseBy1
 SVar:IncreaseBy1:DB$ StoreSVar | SVar$ EachPlayer | Type$ AdditiveForEach | Expression$ 1 | SubAbility$ CheckPop
