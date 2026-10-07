@@ -174,8 +174,9 @@ public class ComputerUtilMana {
         // Filter abilities (Signets etc.) need another source to pay for them, so they're the worse pick
         // while ordinary sources can cover the cost on their own. Once they can't, the filters have to be
         // activated first, while there are still sources left to pay for them.
-        final long freeSources = orderedCards.stream().filter(c -> getAIPlayableMana(c).stream().anyMatch(m -> getManaCostToActivate(m) == 0)).count();
-        final boolean filtersFirst = freeSources < cost.getConvertedManaCost();
+        final int freeMana = orderedCards.stream().mapToInt(c -> getAIPlayableMana(c).stream()
+                .filter(m -> getManaCostToActivate(m) == 0).mapToInt(m -> m.amountOfManaGenerated(true)).max().orElse(0)).sum();
+        final boolean filtersFirst = freeMana < cost.getConvertedManaCost();
 
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
             final List<SpellAbility> abilities = sourcesForShards.get(shard);
@@ -612,8 +613,11 @@ public class ComputerUtilMana {
             return null;
         }
 
-        AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
-        AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
+        // A filter's own cost (Signet etc.) is paid in the middle of another payment, which still needs what it has set aside
+        if (!sa.isManaAbility() || getManaCostToActivate(sa) == 0) {
+            AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
+            AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
+        }
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
 
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
