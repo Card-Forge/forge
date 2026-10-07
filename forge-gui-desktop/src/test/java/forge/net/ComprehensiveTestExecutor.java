@@ -17,8 +17,6 @@ import java.util.Random;
  */
 public class ComprehensiveTestExecutor implements IHasForgeLog {
 
-    private static final int BASE_PORT = 58000;
-
     // Default game distribution (small; presets override for comprehensive/quick tests)
     private int twoPlayerGames = 3;
     private int threePlayerGames = 0;
@@ -121,12 +119,11 @@ public class ComprehensiveTestExecutor implements IHasForgeLog {
         netLog.info("Starting {} sequential games", playerCounts.length);
 
         MultiProcessGameExecutor.ExecutionResult result = new MultiProcessGameExecutor.ExecutionResult(playerCounts.length);
-        int port = BASE_PORT;
 
         for (int i = 0; i < playerCounts.length; i++) {
             int players = playerCounts[i];
             boolean commander = commanderFlags != null && i < commanderFlags.length && commanderFlags[i];
-            UnifiedNetworkHarness.GameResult gameResult = runSingleGame(i, port++, players, commander);
+            UnifiedNetworkHarness.GameResult gameResult = runSingleGame(i, players, commander);
 
             if (gameResult.errorMessage != null && !gameResult.success) {
                 result.addError(i, gameResult.errorMessage);
@@ -150,21 +147,20 @@ public class ComprehensiveTestExecutor implements IHasForgeLog {
     /**
      * Run a single game with isolated logging using UnifiedNetworkHarness.
      */
-    private UnifiedNetworkHarness.GameResult runSingleGame(int gameIndex, int port, int playerCount, boolean commander) {
+    private UnifiedNetworkHarness.GameResult runSingleGame(int gameIndex, int playerCount, boolean commander) {
         String formatSuffix = commander ? "-cmdr" : "";
         // Set instance-specific log suffix so this game writes to its own log file
         NetworkLogConfig.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p" + formatSuffix);
 
         try {
             String formatLabel = commander ? "Commander" : "Constructed";
-            netLog.info("Starting game {} ({} players, {}) on port {}", gameIndex, playerCount, formatLabel, port);
+            netLog.info("Starting game {} ({} players, {})", gameIndex, playerCount, formatLabel);
 
             // Use UnifiedNetworkHarness for all player counts
             return new UnifiedNetworkHarness()
                     .playerCount(playerCount)
                     .remoteClients(playerCount - 1)  // All but host are remote
                     .commander(commander)
-                    .port(port)
                     .gameTimeout(gameTimeoutMs)
                     .execute();
         } finally {

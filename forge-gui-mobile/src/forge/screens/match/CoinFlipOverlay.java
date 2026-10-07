@@ -1,9 +1,7 @@
 package forge.screens.match;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
@@ -15,13 +13,13 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FTextureRegionImage;
 import forge.gui.FThreads;
-import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOverlay;
+
 
 public class CoinFlipOverlay extends FOverlay {
     private static final float FLIP_TIME = 1.5f;
     private static final float HOLD_TIME = 0.9f;
-    private static final int   SPINS = 4;
+    private static final int   SPINS = 3;
 
     private static final Color HEADS_FALLBACK = new Color(0.95f, 0.80f, 0.25f, 1f);
     private static final Color TAILS_FALLBACK = new Color(0.75f, 0.75f, 0.80f, 1f);
@@ -29,8 +27,6 @@ public class CoinFlipOverlay extends FOverlay {
     private final boolean heads;
     private final String caption;
     private final Runnable onDone;
-
-    private Texture headsTex, tailsTex;
     private FImage headsImg, tailsImg;
 
     private float elapsed;
@@ -51,18 +47,8 @@ public class CoinFlipOverlay extends FOverlay {
 
     private void loadTextures() {
         try {
-            // adjust the folder to wherever you put the PNGs
-            final String dir = ForgeConstants.RES_DIR + "skins/default/";
-            final FileHandle hf = Gdx.files.absolute(dir + "coin_heads.png");
-            final FileHandle tf = Gdx.files.absolute(dir + "coin_tails.png");
-            if (hf.exists() && tf.exists()) {
-                headsTex = new Texture(hf);
-                tailsTex = new Texture(tf);
-                headsTex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                tailsTex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                headsImg = new FTextureRegionImage(new TextureRegion(headsTex));
-                tailsImg = new FTextureRegionImage(new TextureRegion(tailsTex));
-            }
+            headsImg = new FTextureRegionImage(new TextureRegion(Forge.getAssets().getCoinHead()));
+            tailsImg = new FTextureRegionImage(new TextureRegion(Forge.getAssets().getCoinTail()));
         } catch (Exception e) {
             headsImg = tailsImg = null; // fall back to plain squares
         }
@@ -116,17 +102,15 @@ public class CoinFlipOverlay extends FOverlay {
         }
 
         if (t >= 1f) {
-            final String face = Forge.getLocalizer().getMessage(heads ? "lblHeads" : "lblTails");
             final FSkinFont font = FSkinFont.get(18);
             final FSkinColor text = FSkinColor.get(Colors.CLR_TEXT);
             final float textY = cy + size / 2f + 10f;
-            g.drawText(face, font, text, 0, textY, w, font.getLineHeight() * 1.5f, false, Align.center, true);
             g.drawText(caption, font, text, 0, textY + font.getLineHeight() * 1.6f,
-                    w, font.getLineHeight() * 3f, true, Align.center, false);
+                w, font.getLineHeight() * 3f, true, Align.center, false);
             if (waitForTap) {
                 g.drawText(Forge.getLocalizer().getMessageorUseDefault("lblTapToContinue", "Tap to continue"), FSkinFont.get(12), text,
-                        0, h - FSkinFont.get(12).getLineHeight() * 3f, w, FSkinFont.get(12).getLineHeight() * 2f,
-                        false, Align.center, true);
+                    0, h - FSkinFont.get(12).getLineHeight() * 3f, w, FSkinFont.get(12).getLineHeight() * 2f,
+                    false, Align.center, true);
             } else if (elapsed >= FLIP_TIME + HOLD_TIME) {
                 finish();
             }
@@ -147,9 +131,7 @@ public class CoinFlipOverlay extends FOverlay {
             return;
         }
         released = true;
-        done = true; // stop drawing before textures are disposed
-        if (headsTex != null) headsTex.dispose();
-        if (tailsTex != null) tailsTex.dispose();
+        done = true;
         onDone.run();   // releases the latch so the game thread continues
     }
 

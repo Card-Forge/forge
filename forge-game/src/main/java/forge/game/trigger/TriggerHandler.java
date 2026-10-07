@@ -179,6 +179,13 @@ public class TriggerHandler {
             // TODO we don't seem to handle Static ones from this,
             // so they shouldn't be checked for performance in the first place
             wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
+
+            // how often they trigger has to be determined now as well, not only when they are put on the stack
+            for (final Trigger t : wt.getTriggers()) {
+                if (!t.isStatic()) {
+                    wt.setAdditionalTriggers(t, StaticAbilityPanharmonicon.countPanharmonicon(game, t, wt.getParams()));
+                }
+            }
         }
     }
 
@@ -330,7 +337,9 @@ public class TriggerHandler {
                 if (wasCollected && !t.checkActivationLimit()) {
                     continue;
                 }
-                int trigAmt = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+                // collected ones already know how often they trigger, it can't change until they are put on the stack
+                int additional = wasCollected ? wt.getAdditionalTriggers(t) : StaticAbilityPanharmonicon.countPanharmonicon(game, t, runParams);
+                int trigAmt = 1 + StaticAbilityPanharmonicon.limitByActivations(t, additional);
                 for (int i = 0; i < trigAmt; ++i) {
                     runSingleTrigger(t, runParams, wt.getController(t));
                 }
