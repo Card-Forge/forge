@@ -279,11 +279,7 @@ public final class BoosterUtils {
 
         int usedMulticolor = 0, usedPhyrexian = 0;
 
-        //The otherColors loop below acts as a repetition multiplier keeping the
-        //preferred colors proportionate to the unselected ones the else branch
-        //mixes in. With EVERY color selected it is empty, so no filters were
-        //built at all and generateCards produced an empty starting pool -
-        //silently ("I want everything" gave nothing). Floor it at one pass.
+        // at least one pass even when every color is selected (otherColors empty)
         final int preferredReps = Math.max(1, otherColors.size());
 
         for (int i = 0; i < MAX_BIAS; i++) {
