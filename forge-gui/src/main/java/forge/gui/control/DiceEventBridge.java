@@ -46,7 +46,7 @@ public final class DiceEventBridge {
         if (l == null) {
             return;
         }
-        final CountDownLatch done = l.onDiceRoll(ev.sides, ev.result, ev.planar);
+        final CountDownLatch done = l.onDiceRoll(ev.sides(), ev.result(), ev.planar());
         if (done != null) {
             try {
                 done.await(MAX_WAIT_MS, TimeUnit.MILLISECONDS);
