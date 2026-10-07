@@ -21,7 +21,6 @@ import com.google.common.collect.Multimaps;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAttackRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
@@ -34,7 +33,8 @@ import forge.util.TextUtil;
 /**
  * Human readable explanations of why an attack is not allowed.
  * <p>
- * The checks mirror {@link CombatUtil}; every method returns null (or an empty list) when the action is legal.
+ * {@link CombatUtil} decides what is legal, this only puts its answer into words;
+ * every method returns null (or an empty list) when the action is legal.
  */
 public final class CombatExplainer {
 
@@ -46,61 +46,33 @@ public final class CombatExplainer {
     // ////////////////////////////////////
 
     /**
-     * Explain why the attacker can't attack the defender, mirroring {@link CombatUtil#canAttack(Card, GameEntity)}.
+     * Explain why the attacker can't attack the defender.
      *
      * @return the reason, or null if the attacker can attack the defender
      */
     public static String whyCantAttack(final Card attacker, final GameEntity defender) {
-        if (CombatUtil.canAttack(attacker, defender)) {
+        final CombatUtil.CantAttackReason reason = CombatUtil.getCantAttackReason(attacker, defender);
+        if (reason == null) {
             return null;
         }
         final Localizer loc = Localizer.getInstance();
-
-        if (attacker.isBattle() || !attacker.isCreature()) {
-            return loc.getMessage("lblWhyAttackNotCreature", attacker);
-        }
-        if (attacker.isTapped()) {
-            return loc.getMessage("lblWhyAttackTapped", attacker);
-        }
-        if (attacker.isPhasedOut()) {
-            return loc.getMessage("lblWhyAttackPhasedOut", attacker);
-        }
-        if (CombatUtil.isAttackerSick(attacker, defender)) {
-            return loc.getMessage("lblWhyAttackSick", attacker);
-        }
-
-        if (attacker.isGoaded()) {
-            final boolean goadedByDefender = defender instanceof Player && attacker.isGoadedBy((Player) defender);
-            if (goadedByDefender || !(defender instanceof Player)) {
-                final List<Player> instead = Lists.newArrayList();
-                for (GameEntity ge : CombatUtil.getAllPossibleDefenders(attacker.getController())) {
-                    if (!ge.equals(defender) && ge instanceof Player p && !attacker.isGoadedBy(p) && CombatUtil.canAttack(attacker, ge)) {
-                        instead.add(p);
-                    }
-                }
-                if (!instead.isEmpty()) {
-                    return loc.getMessage("lblWhyAttackGoaded", attacker, defender, Lang.joinHomogenous(instead));
-                }
-            }
-        }
-
-        for (final String keyword : List.of("CARDNAME can't attack.", "CARDNAME can't attack or block.")) {
-            if (attacker.hasKeyword(keyword)) {
-                return describeKeyword(attacker, keyword);
-            }
-        }
-        if (attacker.isDetained()) {
-            return loc.getMessage("lblWhyAttackDetained", attacker);
-        }
-        final StaticAbility stAb = StaticAbilityCantAttackBlock.findCantAttackAbility(attacker, defender);
-        if (stAb != null) {
-            return loc.getMessage("lblWhyAttackBecauseOf", attacker, defender, describeSource(stAb));
-        }
-        return loc.getMessage("lblWhyAttackGeneric", attacker, defender);
+        return switch (reason) {
+            case NOT_CREATURE -> loc.getMessage("lblWhyAttackNotCreature", attacker);
+            case TAPPED -> loc.getMessage("lblWhyAttackTapped", attacker);
+            case PHASED_OUT -> loc.getMessage("lblWhyAttackPhasedOut", attacker);
+            case SUMMONING_SICK -> loc.getMessage("lblWhyAttackSick", attacker);
+            case WRONG_PHASE -> loc.getMessage("lblWhyAttackGeneric", attacker, defender);
+            case GOADED -> loc.getMessage("lblWhyAttackGoaded", attacker, defender,
+                    Lang.joinHomogenous(CombatUtil.getGoadedAlternatives(attacker, defender)));
+            case KEYWORD -> describeKeyword(attacker, StaticAbilityCantAttackBlock.getCantAttackKeyword(attacker));
+            case DETAINED -> loc.getMessage("lblWhyAttackDetained", attacker);
+            case STATIC_ABILITY -> loc.getMessage("lblWhyAttackBecauseOf", attacker, defender,
+                    describeSource(StaticAbilityCantAttackBlock.findCantAttackAbility(attacker, defender)));
+        };
     }
 
     /**
-     * Explain why the declared attack is invalid, mirroring {@link CombatUtil#validateAttackers(Combat)}.
+     * Explain why {@link CombatUtil#validateAttackers(Combat)} rejects the declared attack.
      *
      * @return the reasons, or an empty list if the attack is valid
      */

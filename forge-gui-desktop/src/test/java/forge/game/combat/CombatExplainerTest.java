@@ -81,7 +81,7 @@ public class CombatExplainerTest extends SimulationTest {
         AssertJUnit.assertNull(CombatExplainer.whyCantAttack(bear, defending));
         combat.addAttacker(bear, defending);
         AssertJUnit.assertTrue(CombatUtil.validateAttackers(combat));
-        AssertJUnit.assertNull(CombatUtil.explainInvalidAttack(combat));
+        AssertJUnit.assertTrue(CombatExplainer.explainInvalidAttack(combat).isEmpty());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class CombatExplainerTest extends SimulationTest {
         Combat combat = startCombat();
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        assertContains(CombatUtil.explainInvalidAttack(combat), bear.toString(), "goaded");
+        assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat)), bear.toString(), "goaded");
     }
 
     @Test
@@ -136,7 +136,7 @@ public class CombatExplainerTest extends SimulationTest {
         combat.addAttacker(mogg, defending);
 
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        assertContains(CombatUtil.explainInvalidAttack(combat), mogg.toString(), "can't attack or block alone.");
+        assertContains(String.join("\n", CombatExplainer.explainInvalidAttack(combat)), mogg.toString(), "can't attack or block alone.");
         // both not attacking and attacking together with another creature are suggested
         assertContains(CombatExplainer.suggestLegalAttacks(combat), "Not attacking at all",
                 mogg + " attacking " + defending + ", " + bear + " attacking " + defending);
@@ -171,7 +171,7 @@ public class CombatExplainerTest extends SimulationTest {
             combat.addAttacker(t, designated);
         }
         AssertJUnit.assertFalse(CombatUtil.validateAttackers(combat));
-        String explanation = CombatUtil.explainInvalidAttack(combat);
+        String explanation = String.join("\n", CombatExplainer.explainInvalidAttack(combat));
         GameEntity otherDesignated = StaticAbilityMustAttack.entitiesMustAttack(otherToken).get(0);
         assertContains(explanation, otherToken + " must attack " + otherDesignated + " if able", "Furygale Flocking");
         AssertJUnit.assertFalse(explanation, explanation.contains(token + " must attack"));

@@ -35,18 +35,17 @@ import forge.game.zone.ZoneType;
  */
 public class StaticAbilityCantAttackBlock {
 
-    public static boolean cantAttack(final Card attacker, final GameEntity defender) {
-        // Keywords
-        // replace with Static Ability if able
-        if (attacker.hasKeyword("CARDNAME can't attack.") || attacker.hasKeyword("CARDNAME can't attack or block.")) {
-            return true;
+    /**
+     * @return the keyword text preventing attacker from attacking, or null if it doesn't have one
+     */
+    public static String getCantAttackKeyword(final Card attacker) {
+        if (attacker.hasKeyword("CARDNAME can't attack.")) {
+            return "CARDNAME can't attack.";
         }
-
-        if (attacker.isDetained()) {
-            return true;
+        if (attacker.hasKeyword("CARDNAME can't attack or block.")) {
+            return "CARDNAME can't attack or block.";
         }
-
-        return findCantAttackAbility(attacker, defender) != null;
+        return null;
     }
 
     /**

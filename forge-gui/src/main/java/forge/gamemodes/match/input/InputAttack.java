@@ -108,8 +108,9 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected final void onOk() {
-        final String attackErrors = CombatUtil.explainInvalidAttack(combat);
-        if (attackErrors != null) {
+        final List<String> invalidReasons = CombatExplainer.explainInvalidAttack(combat);
+        if (!invalidReasons.isEmpty()) {
+            final String attackErrors = String.join("\n", invalidReasons);
             //must run in game thread to prevent problems for mobile game
             ThreadUtil.invokeInGameThread(() -> {
                 final Localizer localizer = Localizer.getInstance();
