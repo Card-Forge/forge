@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -24,7 +25,10 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.item.PaperCard;
+import forge.trackable.TrackableProperty;
 
 public class GameCheckpointTest extends SimulationTest {
 
@@ -303,6 +307,39 @@ public class GameCheckpointTest extends SimulationTest {
         Set<Class<?>> unexpected = new HashSet<>(GameCheckpoint.auditUnwalkedTypes(game));
         unexpected.removeAll(expected);
         AssertJUnit.assertTrue("not walked, check they hold no mutable game state: " + unexpected, unexpected.isEmpty());
+    }
+
+    /** A network client is sent what a restore rewrote in the views, with the next delta. */
+    @Test
+    public void aRestoreReachesNetworkClientsWithTheNextDelta() {
+        Game game = newGame();
+        Player p = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+        addCard("Mountain", p);
+        Card shock = addCardToZone("Shock", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        DeltaSyncManager client = new DeltaSyncManager();
+        client.collectDeltas(game.getView());
+        GameCheckpoint checkpoint = GameCheckpoint.capture(game);
+        int oppLife = opp.getLife();
+
+        castAndResolve(p, shock, opp);
+        client.collectDeltas(game.getView()); // the client has seen the Shock resolve
+
+        checkpoint.restore();
+        DeltaPacket delta = client.collectDeltas(game.getView());
+
+        Map<TrackableProperty, Object> oppDelta = delta.getObjectDeltas().get(DeltaPacket.makeDeltaKey(opp.getView()));
+        AssertJUnit.assertNotNull("nothing sent for the opponent", oppDelta);
+        AssertJUnit.assertEquals(oppLife, oppDelta.get(TrackableProperty.Life));
+        Map<TrackableProperty, Object> ownDelta = delta.getObjectDeltas().get(DeltaPacket.makeDeltaKey(p.getView()));
+        AssertJUnit.assertNotNull("nothing sent for the player", ownDelta);
+        AssertJUnit.assertTrue("hand not sent: " + ownDelta.keySet(), ownDelta.containsKey(TrackableProperty.Hand));
+        AssertJUnit.assertTrue("graveyard not sent: " + ownDelta.keySet(), ownDelta.containsKey(TrackableProperty.Graveyard));
+        // the Shock that went to the graveyard was a new object; the one put back in hand is sent in full
+        AssertJUnit.assertTrue("card back in hand not sent",
+                delta.getNewObjects().containsKey(DeltaPacket.makeDeltaKey(game.findById(shock.getId()).getView())));
     }
 
     @Test

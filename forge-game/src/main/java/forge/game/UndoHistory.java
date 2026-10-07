@@ -1,7 +1,6 @@
 package forge.game;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,17 +124,26 @@ public final class UndoHistory {
     }
 
     /**
-     * Takes a checkpoint at the start of a turn-based step some of these players may be asked to act in.
-     * It only becomes a point for a player once they actually are, see {@link #commitStepStart}; a step
-     * they were never asked anything in isn't a decision to take back. Game thread only.
+     * Takes a checkpoint at the start of a turn-based step a human may be asked to act in. It only
+     * becomes a point for a player once they actually are, see {@link #commitStepStart}; a step they
+     * were never asked anything in isn't a decision to take back. Game thread only.
      */
-    public synchronized void stageStepStart(Kind kind, Collection<Player> players) {
+    public synchronized void stageStepStart(Kind kind) {
         staged = null;
-        if (!canRecord() || players.isEmpty()) {
+        if (!canRecord() || !hasHumanPlayer()) {
             return;
         }
-        staged = new Point(-1, ImmutableSet.copyOf(players), kind,
+        staged = new Point(-1, ImmutableSet.of(), kind,
                 game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(), GameCheckpoint.capture(game));
+    }
+
+    private boolean hasHumanPlayer() {
+        for (final Player p : game.getPlayers()) {
+            if (!p.getController().isAI()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -143,7 +151,7 @@ public final class UndoHistory {
      * @return the point, to note what they did with it; null if nothing was recorded
      */
     public synchronized Point commitStepStart(Player player, Kind kind) {
-        if (staged == null || staged.kind != kind || !staged.isFor(player) || !canRecord()) {
+        if (staged == null || staged.kind != kind || !canRecord()) {
             return null;
         }
         return add(new Point(nextId++, ImmutableSet.of(player), kind, staged.turn, staged.phase, staged.checkpoint));

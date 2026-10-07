@@ -310,10 +310,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
-                    if (CombatUtil.canAttack(playerTurn)) {
-                        stageUndoPoint(UndoHistory.Kind.DECLARE_ATTACKERS,
-                                List.of(Objects.requireNonNullElse(playerTurn.getDeclaresAttackers(), playerTurn)));
-                    }
+                    game.getUndoHistory().stageStepStart(UndoHistory.Kind.DECLARE_ATTACKERS);
                     combat.initConstraints();
                     game.getStack().freezeStack(null);
                     declareAttackersTurnBasedAction();
@@ -323,7 +320,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case COMBAT_DECLARE_BLOCKERS:
-                    stageUndoPoint(UndoHistory.Kind.DECLARE_BLOCKERS, blockDeclarers());
+                    game.getUndoHistory().stageStepStart(UndoHistory.Kind.DECLARE_BLOCKERS);
                     combat.removeAbsentCombatants();
                     game.getStack().freezeStack(null);
                     declareBlockersTurnBasedAction();
@@ -1083,40 +1080,14 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             throw new IllegalStateException("Undo was requested, but its point is gone");
         }
         for (final Player p : game.getPlayers()) {
-            p.getController().onGameUndone();
+            // whatever was yielded to or noted since belongs to the future that was taken back
+            p.getController().autoPassCancel();
+            p.getController().resetAtEndOfTurn();
         }
         game.getGameLog().add(GameLogEntryType.UNDO,
                 Localizer.getInstance().getMessage("lblUndoneTo", by == null ? "" : by.getName(), point.getTurn(),
                         point.getPhase() == null ? "" : point.getPhase().nameForUi));
         return point.getKind().resumesAtStepStart();
-    }
-
-    private void stageUndoPoint(final UndoHistory.Kind kind, final List<Player> askedToAct) {
-        final UndoHistory history = game.getUndoHistory();
-        if (!history.isEnabled()) {
-            return;
-        }
-        final List<Player> humans = Lists.newArrayList();
-        for (final Player p : askedToAct) {
-            if (!p.getController().isAI()) {
-                humans.add(p);
-            }
-        }
-        history.stageStepStart(kind, humans);
-    }
-
-    /** Who will be asked to declare blockers, mirroring {@link #declareBlockersTurnBasedAction()}. */
-    private List<Player> blockDeclarers() {
-        final List<Player> result = Lists.newArrayList();
-        if (combat == null) {
-            return result;
-        }
-        for (final Player p : game.getPlayers()) {
-            if (p != playerTurn && combat.isPlayerAttacked(p) && CombatUtil.canBlock(p, combat)) {
-                result.add(Objects.requireNonNullElse(p.getDeclaresBlockers(), p));
-            }
-        }
-        return result;
     }
 
     private void loopStep() {

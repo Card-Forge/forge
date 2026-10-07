@@ -22,6 +22,7 @@ import forge.player.PlayerZoneUpdates;
 import forge.sound.SoundSystem;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -265,21 +266,25 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSnapshotRestored event) {
-        if (event.start()) {
+        final GameView gameView = matchController.getGameView();
+        if (event.start() || gameView == null) {
             return null;
         }
         // Anything may differ after going back, so redraw all of it
-        for (final PlayerView p : event.players()) {
+        for (final PlayerView p : gameView.getPlayers()) {
             for (final ZoneType z : ZONES_REDRAWN_ON_UNDO) {
                 updateZone(p, z);
+                final FCollectionView<CardView> cards = p.getCards(z);
+                if (cards != null) {
+                    processCards(cards, cardsRefreshDetails);
+                    processCards(cards, cardsUpdate);
+                }
             }
             processPlayer(p, livesUpdate);
             processPlayer(p, shardsUpdate);
             processPlayer(p, manaPoolUpdate);
         }
-        processCards(event.cards(), cardsRefreshDetails);
-        processCards(event.cards(), cardsUpdate);
-        turnUpdate = matchController.getGameView().getPlayerTurn();
+        turnUpdate = gameView.getPlayerTurn();
         needPhaseUpdate = true;
         needCombatUpdate = true;
         needStackUpdate = true;

@@ -219,12 +219,11 @@ public class Game {
      * after it, everything shown has to be redrawn.
      */
     public <T> T restoreState(final Supplier<T> restore) {
-        fireEvent(new GameEventSnapshotRestored(true, null, null));
+        fireEvent(new GameEventSnapshotRestored(true));
         try {
             return restore.get();
         } finally {
-            fireEvent(new GameEventSnapshotRestored(false,
-                    PlayerView.getCollection(getPlayers()), CardView.getCollection(getCardsInGame())));
+            fireEvent(new GameEventSnapshotRestored(false));
         }
     }
 

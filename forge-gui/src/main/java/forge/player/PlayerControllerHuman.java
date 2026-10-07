@@ -3739,12 +3739,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void onGameUndone() {
-        // Whatever yield was set since belongs to the future that was taken back
-        autoPassCancel();
-    }
-
-    @Override
     public void drawOfferAction(final DrawOfferMessage.Action action) {
         switch (action) {
             case OFFER -> DrawOfferCoordinator.offer(getGame(), player);

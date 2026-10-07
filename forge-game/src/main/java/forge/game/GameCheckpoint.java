@@ -120,7 +120,9 @@ public final class GameCheckpoint {
         for (final Map.Entry<TrackableObject, EnumSet<TrackableProperty>> e : viewProps.entrySet()) {
             final EnumSet<TrackableProperty> changed = e.getValue();
             changed.addAll(propsOf(e.getKey()));
-            e.getKey().flagAllAsChanged(changed);
+            for (final TrackableProperty key : changed) {
+                e.getKey().flagAsChanged(key);
+            }
         }
 
         // A container that can't be written is a view onto one that can, and matches again once

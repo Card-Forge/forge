@@ -152,21 +152,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         copyingProps = false;
     }
 
-    // use when updating collection type properties without using set (or assigning the same object)
-    protected final void flagAsChanged(final TrackableProperty key) {
+    // use when updating collection type properties without using set (or assigning the same object),
+    // or after a property was rewritten from outside (restoring a game checkpoint)
+    public final void flagAsChanged(final TrackableProperty key) {
         markDirtyForConsumers(key);
         key.updateObjLookup(tracker, props.get(key));
-    }
-
-    /**
-     * Mark properties changed after they were rewritten wholesale, bypassing {@link #set}
-     * (restoring a game checkpoint), so every consumer is sent them again.
-     */
-    public final void flagAllAsChanged(final Iterable<TrackableProperty> keys) {
-        for (final TrackableProperty key : keys) {
-            markDirtyForConsumers(key);
-            key.updateObjLookup(tracker, props.get(key));
-        }
     }
 
     /**
