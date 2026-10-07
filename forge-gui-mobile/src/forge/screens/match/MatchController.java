@@ -33,8 +33,10 @@ import forge.card.CardAvatarImage;
 import forge.card.CardSleeveImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
+import forge.deck.DeckFormat;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -702,7 +704,10 @@ public class MatchController extends NetworkGuiGame {
         return new WaitCallback<List<PaperCard>>() {
             @Override
             public void run() {
-                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this, message);
+                final GameView gameView = getGameView();
+                final boolean allowAddBasicLands = gameView != null && gameView.getGameType() != null
+                        && gameView.getGameType().getDeckFormat() == DeckFormat.Limited;
+                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this, message, allowAddBasicLands);
                 sideboardDialog.show();
             }
         }.invokeAndWait();
