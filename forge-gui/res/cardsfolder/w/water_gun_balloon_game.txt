@@ -1,0 +1,14 @@
+Name:Water Gun Balloon Game
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ RememberPlayer | TriggerDescription$ Whenever a player casts a spell, move that player’s pop! counter up one.\n\nWhenever a player’s pop! counter hits “5,” that player creates a 5/5 pink Giant Teddy Bear creature token and resets all pop! counters to “0.”
+SVar:RememberPlayer:DB$ Pump | RememberObjects$ TriggeredActivator | SubAbility$ IncreaseBy1
+SVar:IncreaseBy1:DB$ StoreSVar | SVar$ EachPlayer | Type$ AdditiveForEach | Expression$ 1 | SubAbility$ CheckPop
+SVar:CheckPop:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE5 | TrueSubAbility$ DBTrigger | FalseSubAbility$ DBClearRemembered
+SVar:DBTrigger:DB$ ImmediateTrigger | CheckSVar$ X | SVarCompare$ GE5 | ResolvingCheck$ CheckSVar | Defined$ Remembered | ConditionDefined$ Remembered | RememberObjects$ Remembered | Execute$ MakeToken | TriggerDescription$ Whenever a player’s pop! counter hits “5,” that player creates a 5/5 pink Giant Teddy Bear creature token and resets all pop! counters to “0.”
+SVar:MakeToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_5_5_giant_teddy_bear | TokenOwner$ DelayTriggerRemembered | SubAbility$ StartAtZero
+SVar:StartAtZero:DB$ RepeatEach | RepeatSubAbility$ DBCleanup | RepeatPlayers$ Player | SubAbility$ DBClearRemembered | SpellDescription$ As this artifact enters, each player puts a pop! counter on “0."
+SVar:DBCleanup:DB$ StoreSVar | SVar$ EachPlayer | Type$ Number | Expression$ 0
+SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountRemembered$SVarAmount
+Oracle:As this artifact enters, each player puts a pop! counter on “0.”\nWhenever a player casts a spell, move that player’s pop! counter up one.\nWhenever a player’s pop! counter hits “5,” that player creates a 5/5 pink Giant Teddy Bear creature token and resets all pop! counters to “0."
