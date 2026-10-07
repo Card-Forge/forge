@@ -22,7 +22,27 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {
 
+    /**
+     * @return how many additional times the trigger triggers for the event, according to the current board and limited by its activation limits
+     */
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
+        return limitByActivations(t, countPanharmonicon(game, t, runParams));
+    }
+
+    /**
+     * 603.2d How many times a trigger triggers is determined when its trigger event happens.
+     * For events that only get run later this therefore has to be counted when they are collected,
+     * since the permanents involved might have changed their controller or left the battlefield by then.
+     * The activation limits depend on how often it triggered by the time it is run, see {@link #limitByActivations}
+     *
+     * @return how many additional times the trigger triggers for the event
+     */
+    public static int countPanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
+        // already at its limit (e.g. "triggers only once each turn"), so there's no need to look for any effects
+        if (limitByActivations(t, 1) == 0) {
+            return 0;
+        }
+
         int n = 0;
 
         if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
@@ -53,15 +73,6 @@ public class StaticAbilityPanharmonicon {
                 if (!stAb.checkConditions(StaticAbilityMode.Panharmonicon)) {
                     continue;
                 }
-                // it can't trigger more times than the limit allows
-                if (t.hasParam("GameActivationLimit") &&
-                        t.getActivationsThisGame() + n + 1 >= Integer.parseInt(t.getParam("GameActivationLimit"))) {
-                    break;
-                }
-                if (t.hasParam("ActivationLimit") &&
-                        t.getActivationsThisTurn() + n + 1 >= Integer.parseInt(t.getParam("ActivationLimit"))) {
-                    break;
-                }
                 if (applyPanharmoniconAbility(stAb, t, runParams)) {
                     n++;
                 }
@@ -69,6 +80,19 @@ public class StaticAbilityPanharmonicon {
         }
 
         return n;
+    }
+
+    /**
+     * It can't trigger more times than the limit allows
+     */
+    public static int limitByActivations(final Trigger t, int additional) {
+        if (t.hasParam("GameActivationLimit")) {
+            additional = Math.min(additional, Integer.parseInt(t.getParam("GameActivationLimit")) - t.getActivationsThisGame() - 1);
+        }
+        if (t.hasParam("ActivationLimit")) {
+            additional = Math.min(additional, Integer.parseInt(t.getParam("ActivationLimit")) - t.getActivationsThisTurn() - 1);
+        }
+        return Math.max(additional, 0);
     }
 
     public static boolean applyPanharmoniconAbility(final StaticAbility stAb, final Trigger trigger, final Map<AbilityKey, Object> runParams) {

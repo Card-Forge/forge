@@ -103,7 +103,7 @@ public class Assets implements Disposable {
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
-    private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture;
+    private Texture whiteTexture, backdropTexture, grayTexture, holofoil, miniMapTexture, coinHead, coinTail;
     private FrameBuffer cardFrameBuffer, itemFrameBuffer;
     private GifAnimation gifAnimation;
     private boolean isDisposed = false;
@@ -155,7 +155,7 @@ public class Assets implements Disposable {
             textrafonts.clear();
         }
         Forge.safeDispose(
-            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture,
+            defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, coinHead, coinTail,
             cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
         if (cardArtCache != null)
             cardArtCache.clear();
@@ -497,6 +497,20 @@ public class Assets implements Disposable {
         if (blackTexture == null)
             blackTexture = setTexture(blackTexture, Color.BLACK, 1f);
         return blackTexture;
+    }
+
+    public Texture getCoinHead() {
+        if (coinHead == null) {
+            coinHead = getTexture(getDefaultSkinFile("coin_heads.png"));
+        }
+        return coinHead;
+    }
+
+    public Texture getCoinTail() {
+        if (coinTail == null) {
+            coinTail = getTexture(getDefaultSkinFile("coin_tails.png"));
+        }
+        return coinTail;
     }
 
     public Texture getHolofoil() {
