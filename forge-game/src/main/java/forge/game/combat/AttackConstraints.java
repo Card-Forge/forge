@@ -93,11 +93,14 @@ public class AttackConstraints {
         // HashSet keyed by attack-config maps whose hashCodes come from Card identity hashes,
         // i.e. per-JVM-random - which made the AI's attack nondeterministic.
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
+        final List<Map<Card, GameEntity>> restricted = Lists.newArrayList();
         for (final Map<Card, GameEntity> attackMap : legalAttackers) {
             final int violations = countViolations(attackMap);
             // only requirements were looked at, a creature might still not be allowed to attack like this
             if (violations != -1) {
                 possible.put(attackMap, violations);
+            } else {
+                restricted.add(attackMap);
             }
         }
         int empty = countViolations(Collections.emptyMap());
@@ -106,6 +109,14 @@ public class AttackConstraints {
         }
 
         if (possibleAttackers.anyMatch(c -> restrictions.get(c).isRestrictedByOthers())) {
+            // what is left of those attacks is a start, the closer it is to the best the less there is to search
+            for (final Map<Card, GameEntity> attackMap : restricted) {
+                final Map<Card, GameEntity> allowed = withoutRestricted(attackMap);
+                final int violations = countViolations(allowed);
+                if (violations != -1) {
+                    possible.put(allowed, violations);
+                }
+            }
             final int fewest = possible.values().stream().mapToInt(Integer::intValue).min().orElse(Integer.MAX_VALUE);
             final AttackSearch search = new AttackSearch(myMax, empty, fewest);
             if (search.best != null) {
@@ -118,6 +129,24 @@ public class AttackConstraints {
                 .min(Comparator.comparingInt(Entry::getValue))
                 .map(e -> Pair.of(e.getKey(), e.getValue()))
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    /**
+     * The attack without the creatures that aren't allowed to attack like this, and without the ones that
+     * aren't allowed to anymore once those are gone.
+     */
+    private Map<Card, GameEntity> withoutRestricted(final Map<Card, GameEntity> attackers) {
+        // in the order of the possible attackers, so that the same creatures are taken out every time
+        final Map<Card, GameEntity> allowed = new LinkedHashMap<>();
+        for (final Card c : possibleAttackers) {
+            if (attackers.containsKey(c)) {
+                allowed.put(c, attackers.get(c));
+            }
+        }
+        while (allowed.entrySet().removeIf(attacker -> !restrictions.get(attacker.getKey()).canAttack(attacker.getValue(), allowed))) {
+            continue;
+        }
+        return allowed;
     }
 
     private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
@@ -198,6 +227,8 @@ public class AttackConstraints {
         // attacks each creature could be declared with, the ones fulfilling the most requirements first
         private final Map<Card, List<Attack>> options = new LinkedHashMap<>();
         private final List<Card> pool = Lists.newArrayList();
+        // creatures that have to attack as well if a certain other one does
+        private final Set<Card> forced = Sets.newHashSet();
         // requirements the creatures from this position of the pool onwards could still fulfill
         private final int[] obtainable;
         private final int unrestrained;
@@ -241,10 +272,14 @@ public class AttackConstraints {
             for (int i = pool.size() - 1; i >= 0; i--) {
                 obtainable[i] = obtainable[i + 1] + options.get(pool.get(i)).get(0).requirements;
             }
-            // violations of an attack that would fulfill everything
+            // requirements of the creatures themselves, the empty attack breaks all of them
             unrestrained = emptyViolations - Sets.newHashSet(playerRequirements.values()).size();
 
             search(0);
+            if (steps > MAX_SEARCH_STEPS) {
+                System.err.println("[COMBAT] Stopped looking for the best attack among " + pool.size() + " creatures after "
+                        + MAX_SEARCH_STEPS + " steps, an attack breaking more requirements than necessary might be accepted");
+            }
         }
 
         private boolean lacksCompany(final Card c) {
@@ -263,7 +298,6 @@ public class AttackConstraints {
          * Only creatures that are required to attack matter, plus the ones that could enable them to.
          */
         private void fillPool() {
-            final Set<Card> forced = Sets.newHashSet();
             final List<Pair<Card, StaticAbility>> restricted = Lists.newArrayList();
             int needed = 1;
             for (final Card c : options.keySet()) {
@@ -365,7 +399,7 @@ public class AttackConstraints {
 
             final Card c = pool.get(index);
             final List<Attack> attacks = options.get(c);
-            final boolean wanted = attacks.get(0).requirements > 0;
+            final boolean wanted = attacks.get(0).requirements > 0 || isForcedAlong(c);
             if (!wanted) {
                 search(index + 1);
             }
@@ -387,6 +421,21 @@ public class AttackConstraints {
             if (wanted) {
                 search(index + 1);
             }
+        }
+
+        /**
+         * Whether one of the attackers chosen until now makes the creature attack as well.
+         */
+        private boolean isForcedAlong(final Card c) {
+            if (!forced.contains(c)) {
+                return false;
+            }
+            for (final Card attacker : attackers.keySet()) {
+                if (requirements.get(attacker).getCausesToAttack().containsKey(c)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private int obtainable(final int index) {
@@ -437,8 +486,7 @@ public class AttackConstraints {
                         }
                     } else if (StaticAbilityAttackBlockRestrict.needsOthers(stAb)) {
                         if (potential == null) {
-                            potential = Lists.newArrayList(attackers.keySet());
-                            potential.addAll(pool.subList(index, pool.size()));
+                            potential = getPotentialAttackers(index);
                         }
                         if (StaticAbilityAttackBlockRestrict.isViolated(stAb, attacker, potential)) {
                             return false;
@@ -447,6 +495,27 @@ public class AttackConstraints {
                 }
             }
             return true;
+        }
+
+        /**
+         * The attackers chosen until now, plus the remaining creatures of the pool that they allow to join.
+         */
+        private List<Card> getPotentialAttackers(final int index) {
+            final List<Card> potential = Lists.newArrayList(attackers.keySet());
+            final List<Card> remaining = pool.subList(index, pool.size());
+            if (!anyLimits) {
+                potential.addAll(remaining);
+                return potential;
+            }
+            final List<Card> joined = Lists.newArrayList(attackers.keySet());
+            for (final Card c : remaining) {
+                joined.add(c);
+                if (!exceedsLimit(joined)) {
+                    potential.add(c);
+                }
+                joined.remove(joined.size() - 1);
+            }
+            return potential;
         }
     }
 

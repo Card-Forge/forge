@@ -369,6 +369,45 @@ public class AttackConstraintsTest extends SimulationTest {
         assertSolverIsOptimal();
     }
 
+    // boards too wide for the brute force, the best attack is known without it
+
+    @Test(timeOut = 30000)
+    public void onlyCompanyCanOnlyAttackAloneOnAWideBoard() {
+        setUp();
+        goaded("Scarred Puma");
+        // the only black or green creature
+        Card master = creature("Master of Cruelties");
+        Card[] lions = new Card[20];
+        for (int i = 0; i < lions.length; i++) {
+            lions[i] = goaded("Savannah Lions");
+        }
+        startCombat();
+
+        assertLegal(lions);
+        assertIllegal();
+        assertIllegal(master);
+        AssertJUnit.assertEquals(1, combat.getAttackConstraints().getLegalAttackers().getRight().intValue());
+    }
+
+    @Test(timeOut = 30000)
+    public void creaturesForcedAlongOnAWideBoard() {
+        setUp();
+        addCard("War's Toll", defending);
+        // can only attack alone, so the others have to attack without it
+        creature("Master of Cruelties");
+        Card[] others = new Card[21];
+        others[0] = goaded("Grizzly Bears");
+        for (int i = 1; i < others.length; i++) {
+            others[i] = creature("Savannah Lions");
+        }
+        startCombat();
+
+        assertLegal(others);
+        assertIllegal();
+        assertIllegal(others[0]);
+        AssertJUnit.assertEquals(0, combat.getAttackConstraints().getLegalAttackers().getRight().intValue());
+    }
+
     @Test(timeOut = 30000)
     public void declareAttackersStepEndsWithALegalAttack() {
         setUp();
