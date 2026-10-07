@@ -1,0 +1,7 @@
+Name:Foolish Fate
+ManaCost:2 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3 | ConditionCheckSVar$ X | SpellDescription$ Infusion — If you gained life this turn, that creature's controller loses 3 life.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Destroy target creature.\nInfusion — If you gained life this turn, that creature's controller loses 3 life.

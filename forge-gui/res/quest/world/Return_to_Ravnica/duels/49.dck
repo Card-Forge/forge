@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Classic_Springfield/Aaron_Travis_-_B-R_Zombies_(Standard,_#51924).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blood Artist
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+2 Hellrider
+4 Knight of Infamy
+2 Thrill-Kill Assassin
+2 Thundermaw Hellkite
+1 Zealous Conscripts
+2 Searing Spear
+3 Tragic Slip
+2 Victim of Night
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+2 Mountain
+9 Swamp
+[Sideboard]
+3 Appetite for Brains
+3 Bonfire of the Damned
+3 Cremate
+2 Dreadbore
+3 Liliana of the Veil

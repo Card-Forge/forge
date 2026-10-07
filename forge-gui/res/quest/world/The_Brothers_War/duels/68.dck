@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Bodingle_-_Orzhov_Scam_(Modern,_#1522757).dck
+Deck Type=constructed
+
+[Main]
+3 Tidehollow Sculler
+3 Phyrexian Fleshgorger
+4 Solitude
+4 Grief
+4 Charming Prince
+1 March of Otherworldly Light
+2 Fatal Push
+3 Vanishing Verse
+4 Malakir Rebirth
+4 Ephemerate
+1 Emeria's Call
+2 Persist
+3 Thoughtseize
+3 Touch the Spirit Realm
+1 Kaya, Orzhov Usurper
+1 Shambling Vent
+1 Urborg, Tomb of Yawgmoth
+1 Plains
+1 Silent Clearing
+1 Plains
+2 Arid Mesa
+2 Swamp
+2 Polluted Delta
+3 Godless Shrine
+4 Marsh Flats
+[Sideboard]
+1 Fracture
+1 Kataki, War's Wage
+2 Loran of the Third Path
+2 Hallowed Moonlight
+2 Engineered Explosives
+2 Necromentia
+2 Unlicensed Hearse
+3 Sanctifier en-Vec

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Admassu_Williams_-_Temur_Ramp_(Standard,_#1066968).dck
+Deck Type=constructed
+
+[Main]
+1 Glasspool Mimic
+3 Brazen Borrower
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Terror of the Peaks
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Beanstalk Giant
+3 The Great Henge
+3 Cultivate
+4 Genesis Ultimatum
+2 Riverglide Pathway
+2 Mountain
+3 Island
+3 Forest
+4 Cragcrown Pathway
+4 Fabled Passage
+4 Ketria Triome
+[Sideboard]
+1 Thrashing Brontodon
+1 Obosh, the Preypiercer
+1 Vivien, Monsters' Advocate
+1 Miscast
+2 Klothys, God of Destiny
+2 Ox of Agonas
+3 The Akroan War
+4 Mystical Dispute

@@ -1,0 +1,6 @@
+Name:Talarian Hook Spider
+ManaCost:1 G
+Types:Creature Spider
+PT:2/2
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

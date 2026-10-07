@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Magic@Outerlimits/Johan_Steyn_-_Infect_(Modern,_#46674).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Blighted Agent
+4 Glistener Elf
+4 Ichorclaw Myr
+3 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+3 Mutagenic Growth
+4 Vines of Vastwood
+2 Distortion Strike
+4 Rancor
+2 Breeding Pool
+4 City of Brass
+4 Forest
+4 Inkmoth Nexus
+2 Pendelhaven
+4 Yavimaya Coast
+[Sideboard]
+4 Giant Growth
+2 Livewire Lash
+4 Nature's Claim
+3 Pithing Needle
+1 Spellskite

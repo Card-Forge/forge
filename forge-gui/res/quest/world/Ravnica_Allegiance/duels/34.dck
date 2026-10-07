@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Abassi
+Title=Abassi
+Icon=Abassi.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Aleksander_Hudson_-_Five-Color_Gates_(Standard,_#785759).dck
+Deck Type=constructed
+
+[Main]
+3 Gate Colossus
+2 Archway Angel
+4 Gatebreaker Ram
+2 Hydroid Krasis
+2 Expansion // Explosion
+4 Growth Spiral
+1 Negate
+4 Circuitous Route
+2 Deafening Clarion
+4 Gates Ablaze
+2 Lava Coil
+4 Guild Summit
+4 Forest
+1 Azorius Guildgate
+2 Breeding Pool
+1 Dimir Guildgate
+1 Gateway Plaza
+4 Gruul Guildgate
+4 Izzet Guildgate
+4 Plaza of Harmony
+1 Selesnya Guildgate
+4 Simic Guildgate
+[Sideboard]
+2 Archway Angel
+2 Hydroid Krasis
+2 Crushing Canopy
+3 Negate
+2 Niv-Mizzet, Parun
+1 Banefire
+1 Mass Manipulation
+2 Unmoored Ego

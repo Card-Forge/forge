@@ -1,11 +1,13 @@
 package forge.screens.constructed;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -19,7 +21,11 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.card.CardSleeveImage;
+import forge.deck.CommanderOptions;
+import forge.deck.CommanderPicks;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
@@ -27,6 +33,7 @@ import forge.deck.FVanguardChooser;
 import forge.game.GameType;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.DeckManager;
@@ -42,8 +49,11 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
+import forge.toolbox.GuiChoose;
 import forge.util.Lang;
 import forge.util.NameGenerator;
+import forge.util.SleeveArt;
+import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -63,6 +73,8 @@ public class PlayerPanel extends FContainer {
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
+    private String sleeveArtKey = "";
+    private int sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
     private final FTextField txtPlayerName = new FTextField(Forge.getLocalizer().getMessage("lblPlayerName"));
     private final FToggleSwitch humanAiSwitch;
     private final FToggleSwitch devModeSwitch;
@@ -78,14 +90,22 @@ public class PlayerPanel extends FContainer {
     private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblBrawlDeckRandomGenerated")).build();
     private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblPlanarDeckRandomGenerated")).build();
     private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblVanguardAvatarRandom")).build();
+    private final FLabel btnCommanderPick   = new FLabel.ButtonBuilder().text("").build();
+
+    // Commander variant: the chosen commander deck, who may lead it, and the commander(s) picked
+    // instead of its default (null = the default). The pick applies to the next match only.
+    private Deck commanderBase;
+    private List<CommanderOptions.Option> commanderOptions = Collections.emptyList();
+    private boolean hasCommanderChoices;
+    private List<PaperCard> commanderPick;
 
     private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
-    public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
+    public PlayerPanel(final LobbyScreen screen0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
         super();
         screen = screen0;
-        allowNetworking = allowNetworking0;
+        allowNetworking = screen.getLobby().isAllowNetworking();
         if (allowNetworking) {
             humanAiSwitch = new FToggleSwitch(Forge.getLocalizer().getMessage("lblNotReady"), Forge.getLocalizer().getMessage("lblReady"));
         }
@@ -123,6 +143,8 @@ public class PlayerPanel extends FContainer {
         lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                final DeckProxy selected = ((DeckManager) e.getSource()).getSelectedItem();
+                refreshCommanderOptions(selected == null ? null : selected.getDeck());
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
                     btnCommanderDeck.setText(Forge.getLocalizer().getMessage("lblCommanderDeck")
                             + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager) e.getSource()).getSelectedItem().getName());
@@ -246,6 +268,8 @@ public class PlayerPanel extends FContainer {
             lstCommanderDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectCommanderDeckFor").replace("%s", txtPlayerName.getText()));
             Forge.openScreen(lstCommanderDecks);
         });
+        add(btnCommanderPick);
+        btnCommanderPick.setCommand(e -> chooseCommander());
         add(btnOathbreakDeck);
         btnOathbreakDeck.setCommand(e -> {
             lstOathbreakerDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectOathbreakerDeckFor").replace("%s", txtPlayerName.getText()));
@@ -373,7 +397,6 @@ public class PlayerPanel extends FContainer {
             humanAiSwitch.setPosition(x, y);
         }
 
-
         if (devModeSwitch.isVisible()) {
             if(Forge.isLandscapeMode())
                 y += dy;
@@ -399,6 +422,10 @@ public class PlayerPanel extends FContainer {
         if (btnCommanderDeck.isVisible()) {
             btnCommanderDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
+            if (btnCommanderPick.isVisible()) {
+                btnCommanderPick.setBounds(x, y, w, fieldHeight);
+                y += dy;
+            }
         }
         else if (btnOathbreakDeck.isVisible()) {
             btnOathbreakDeck.setBounds(x, y, w, fieldHeight);
@@ -439,6 +466,9 @@ public class PlayerPanel extends FContainer {
             if(Forge.isLandscapeMode())
                 rows++;
         }
+        if (btnCommanderPick.isVisible()) {
+            rows++;
+        }
         if (btnSchemeDeck.isVisible()) {
             rows++;
         }
@@ -465,8 +495,25 @@ public class PlayerPanel extends FContainer {
         public void handleEvent(FEvent e) {
             boolean toggled = humanAiSwitch.isToggled();
             if (allowNetworking) {
-                setIsReady(toggled);
-                screen.setReady(index, toggled);
+                if (isOpenAiSlotToggle()) {
+                    LobbySlotType newType = toggled ? LobbySlotType.AI : LobbySlotType.OPEN;
+                    setType(newType);
+
+                    LobbySlot slot = screen.getLobby().getSlot(index);
+                    slot.setType(newType);
+
+                    if (newType == LobbySlotType.AI && getPlayerName().isEmpty()) {
+                        setPlayerName(NameGenerator.getRandomName("Any", "Any", screen.getPlayerNames()));
+                    }
+
+                    screen.update(index, newType);
+
+                    setMayEdit(screen.getLobby().mayEdit(index));
+                    screen.firePlayerChangeListener(index);
+                } else {
+                    setIsReady(toggled);
+                    screen.setReady(index, toggled);
+                }
             }
             else {
                 type = toggled ? LobbySlotType.AI : LobbySlotType.LOCAL;
@@ -479,11 +526,35 @@ public class PlayerPanel extends FContainer {
                 //update may edit in-case it changed as a result of the AI change
                 setMayEdit(screen.getLobby().mayEdit(index));
                 setAvatarIndex(slot.getAvatarIndex());
-                setSleeveIndex(slot.getSleeveIndex());
+                final Deck slotDeck = slot.getDeck();
+                setSleeve(slot.getSleeveIndex(),
+                        slotDeck == null ? "" : slotDeck.getSleeveArtKey(),
+                        slotDeck == null ? Deck.DEFAULT_SLEEVE_OFFSET : slotDeck.getSleeveArtOffset());
                 setPlayerName(slot.getName());
             }
         }
     };
+
+    private boolean isOpenAiSlotToggle() {
+        return allowNetworking && index > 0 && mayControl
+                && (type == LobbySlotType.OPEN || type == LobbySlotType.AI);
+    }
+
+    private void refreshSlotToggle() {
+        if (isOpenAiSlotToggle()) {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblOpen"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblAI"));
+            humanAiSwitch.setEnabled(mayControl);
+        } else if (allowNetworking) {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblNotReady"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblReady"));
+            humanAiSwitch.setEnabled(mayEdit);
+        } else {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblHuman"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblAI"));
+            humanAiSwitch.setEnabled(mayEdit);
+        }
+    }
 
     private final FEventHandler devModeSwitched = new FEventHandler() {
         @Override
@@ -551,19 +622,80 @@ public class PlayerPanel extends FContainer {
     private FEventHandler sleeveCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
-                setSleeveIndex(result);
+            final String builtIn = Forge.getLocalizer().getMessage("lblBuiltInSleeve");
+            final String cardArt = Forge.getLocalizer().getMessage("lblUseCardArtSleeve");
+            GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectSleeveForPlayer", getPlayerName()),
+                    Arrays.asList(builtIn, cardArt), choice -> {
+                if (choice == null) {
+                    return;
+                }
+                if (choice.equals(cardArt)) {
+                    selectCardArtSleeve();
+                    return;
+                }
+                SleeveSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
+                    setSleeveIndex(result);
+                    persistSleeveToDeck("", Deck.DEFAULT_SLEEVE_OFFSET);
 
-                if (index < 2) {
-                    screen.updateSleeve(index, result);
-                    screen.updateSleevePrefs();
-                }
-                if (allowNetworking) {
-                    screen.firePlayerChangeListener(index);
-                }
+                    if (index < 2) {
+                        screen.updateSleeve(index, result);
+                        screen.updateSleevePrefs();
+                    }
+                    if (allowNetworking) {
+                        screen.firePlayerChangeListener(index);
+                    }
+                });
             });
         }
     };
+
+    /** Picks a card then a printing; applies its art as this player's sleeve and saves it. */
+    private void selectCardArtSleeve() {
+        final List<PaperCard> unique = new ArrayList<>(FModel.getMagicDb().getCommonCards().getUniqueCards());
+        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectCardForSleeve"), unique, card -> {
+            if (card == null) {
+                return;
+            }
+            final List<PaperCard> prints = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+            if (prints.size() <= 1) {
+                applyCardArtSleeve(card);
+            } else {
+                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectCardForSleeve"), prints,
+                        print -> applyCardArtSleeve(print == null ? card : print));
+            }
+        });
+    }
+
+    private void applyCardArtSleeve(final PaperCard card) {
+        final String key = card.getImageKey(false);
+        // mobile has no crop-drag UI; reuse any framing already saved for this art, else centre
+        final LinkedHashMap<String, Integer> library = SleeveArt.parseLibrary(
+                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY));
+        final int offset = library.getOrDefault(key, SleeveArt.DEFAULT_OFFSET);
+        setSleeveArtKey(key);
+        sleeveArtOffset = offset;
+        sleeveLabel.setIcon(new CardSleeveImage(key, offset));
+
+        if (!library.containsKey(key)) {
+            library.put(key, offset);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatLibrary(library));
+            FModel.getPreferences().save();
+        }
+        persistSleeveToDeck(key, offset);
+        if (allowNetworking) {
+            screen.firePlayerChangeListener(index);
+        }
+    }
+
+    /** Applies a sleeve from slot data: built-in index, then card-art key (with its icon) if present. */
+    public void setSleeve(final int index, final String artKey, final int artOffset) {
+        setSleeveIndex(index);
+        if (artKey != null && !artKey.isEmpty()) {
+            setSleeveArtKey(artKey);
+            sleeveArtOffset = artOffset;
+            refreshSleeveIcon();
+        }
+    }
 
     public void setDeckSelectorButtonText(String text) {
         if (!Forge.isLandscapeMode())
@@ -733,6 +865,104 @@ public class PlayerPanel extends FContainer {
             btnPlanarDeck.setVisible(isPlanechaseApplied && mayEdit);
             btnVanguardAvatar.setVisible(isVanguardApplied && mayEdit);
         }
+
+        // The commander can be picked for local humans and AI players alike
+        btnCommanderPick.setVisible(isCommanderApplied && mayEdit && hasCommanderChoices
+                && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI));
+    }
+
+    /** Works out who may lead a newly chosen commander deck; an earlier pick is kept only for the same deck. */
+    private void refreshCommanderOptions(final Deck deck) {
+        final boolean sameDeck = deck != null && commanderBase != null && deck.getName().equals(commanderBase.getName());
+        commanderBase = deck;
+        commanderOptions = deck == null ? Collections.emptyList() : CommanderOptions.getOptions(deck, DeckFormat.Commander);
+        hasCommanderChoices = deck != null && !commanderOptions.isEmpty()
+                && CommanderPicks.hasChoices(deck, commanderOptions, DeckFormat.Commander);
+        if (commanderPick != null && !(sameDeck && CommanderPicks.isValidPick(deck, commanderPick, DeckFormat.Commander))) {
+            commanderPick = null;
+        }
+        updateCommanderPickButton();
+    }
+
+    private void updateCommanderPickButton() {
+        btnCommanderPick.setText(commanderBase == null ? "" : Forge.getLocalizer().getMessage("lblCommanderPick")
+                + ":" + (Forge.isLandscapeMode() ? " " : "\n") + CommanderPicks.describeCurrent(commanderBase, commanderPick));
+        final boolean wasVisible = btnCommanderPick.isVisible();
+        updateVariantControlsVisibility();
+        if (wasVisible != btnCommanderPick.isVisible() && getHeight() > 0) {
+            screen.getPlayersScroll().revalidate();
+        }
+    }
+
+    private void chooseCommander() {
+        final Deck base = commanderBase;
+        if (base == null || commanderOptions.isEmpty()) {
+            return;
+        }
+        final List<PaperCard> current = commanderPick != null ? commanderPick : base.getCommanders();
+        final List<CommanderChoice<CommanderOptions.Option>> items = new ArrayList<>();
+        for (final CommanderOptions.Option option : commanderOptions) {
+            items.add(new CommanderChoice<>(option, CommanderPicks.describe(option), option.getCommanders().get(0)));
+        }
+        final CommanderChoice<CommanderOptions.Option> selected = items.get(CommanderPicks.indexOfCurrent(commanderOptions, current));
+        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseCommanderFor", getPlayerName()), 0, 1,
+                items, Collections.singletonList(selected), null, result -> {
+            if (result.isEmpty()) {
+                return;
+            }
+            final CommanderOptions.Option option = result.get(0).getValue();
+            if (option.getCommanders().size() == 1) {
+                final PaperCard commander = option.getCommanders().get(0);
+                final List<PaperCard> partners = CommanderOptions.getPartnerOptions(base, commander, DeckFormat.Commander);
+                if (!partners.isEmpty()) {
+                    choosePartner(base, option, commander, partners, current);
+                    return;
+                }
+            }
+            applyCommanderPick(base, option.getCommanders());
+        });
+    }
+
+    private void choosePartner(final Deck base, final CommanderOptions.Option option, final PaperCard commander,
+            final List<PaperCard> partners, final List<PaperCard> current) {
+        // A null value stands for "No partner", left out when the commander needs a partner to cover the deck's colors
+        final List<CommanderChoice<PaperCard>> items = new ArrayList<>();
+        if (CommanderPicks.allowsNoPartner(base, option, DeckFormat.Commander)) {
+            items.add(new CommanderChoice<>(null, Forge.getLocalizer().getMessage("lblNoPartner"), null));
+        }
+        final int offset = items.size();
+        for (final PaperCard partner : partners) {
+            items.add(new CommanderChoice<>(partner, CardTranslation.getTranslatedName(partner.getName()), partner));
+        }
+        final int currentPartner = CommanderPicks.indexOfCurrentPartner(partners, commander, current);
+        final CommanderChoice<PaperCard> selected = items.get(currentPartner < 0 ? 0 : offset + currentPartner);
+        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChoosePartnerFor", CardTranslation.getTranslatedName(commander.getName())),
+                0, 1, items, Collections.singletonList(selected), null, result -> {
+            if (result.isEmpty()) {
+                return;
+            }
+            final PaperCard partner = result.get(0).getValue();
+            applyCommanderPick(base, partner == null ? Collections.singletonList(commander) : Arrays.asList(commander, partner));
+        });
+    }
+
+    private void applyCommanderPick(final Deck base, final List<PaperCard> picked) {
+        if (base != commanderBase) {
+            return; // another deck was chosen while the picker was open
+        }
+        commanderPick = CommanderPicks.isSame(picked, base.getCommanders()) ? null : picked;
+        updateCommanderPickButton();
+        if (allowNetworking && humanAiSwitch.isToggled()) {
+            screen.updateMyDeck(index);
+        }
+    }
+
+    /** The commander(s) picked for this deck, or null to use the deck's own. */
+    public List<PaperCard> getCommanderPick(final Deck deck) {
+        if (commanderPick == null || deck == null || commanderBase == null || !deck.getName().equals(commanderBase.getName())) {
+            return null;
+        }
+        return deck == commanderBase || CommanderPicks.isValidPick(deck, commanderPick, DeckFormat.Commander) ? commanderPick : null;
     }
 
     public boolean isNetworkHost() {
@@ -760,9 +990,19 @@ public class PlayerPanel extends FContainer {
         cbTeam.setEnabled(mayEdit);
     }
 
+    // FComboBox fires its changed handler for programmatic selection too, so without these guards
+    // every network lobby update that changes a team re-enters this handler on panels the local user
+    // does not own. The wire listener drops the panel index and the server applies updates to the
+    // sender's own slot, so such an echo rewrites the SENDER's team — clients end up stomping their
+    // own seats with other players' choices until the whole lobby converges onto one team.
+    private boolean applyingTeamFromNetwork;
+
     private FEventHandler teamChangedHandler = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
+            if (applyingTeamFromNetwork || !mayEdit) {
+                return; //programmatic sync, or a panel this client may not speak for
+            }
             @SuppressWarnings("unchecked")
             FComboBox<Object> cb = (FComboBox<Object>)e.getSource();
             if (cb.getSelectedIndex() == -1) {
@@ -846,31 +1086,74 @@ public class PlayerPanel extends FContainer {
     private void createSleeve() {
         String[] currentPrefs = prefs.getPref(FPref.UI_SLEEVES).split(",");
         if (index < currentPrefs.length) {
-            setSleeveIndex(Integer.parseInt(currentPrefs[index]));
+            // card-art sleeve, if any, arrives via refreshSleeveFromDeck once a deck is selected
+            setSleeve(Integer.parseInt(currentPrefs[index]), "", Deck.DEFAULT_SLEEVE_OFFSET);
         }
         else {
-            setSleeveIndex(SleevesSelector.getRandomSleeves(screen.getUsedSleeves()));
+            setSleeveIndex(SleeveSelector.getRandomSleeves(screen.getUsedSleeves()));
         }
         sleeveLabel.setCommand(sleeveCommand);
     }
 
+    /** Updates the sleeve display from a deck's stored card-art sleeve, or the built-in sleeve if it has none. */
+    public void refreshSleeveFromDeck(final Deck deck) {
+        final String artKey = deck == null ? "" : deck.getSleeveArtKey();
+        if (artKey != null && !artKey.isEmpty()) {
+            sleeveArtKey = artKey;
+            sleeveArtOffset = deck.getSleeveArtOffset();
+        } else {
+            sleeveArtKey = "";
+            sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
+        }
+        refreshSleeveIcon();
+    }
+
+    // Writes the chosen sleeve onto the currently selected deck and saves it (no-op for read-only decks)
+    private void persistSleeveToDeck(final String key, final int offset) {
+        final DeckProxy proxy = getDeckChooser().getLstDecks().getSelectedItem();
+        if (proxy == null) {
+            return;
+        }
+        final Deck deck = proxy.getDeck();
+        if (deck == null) {
+            return;
+        }
+        deck.setSleeveArtKey(key);
+        deck.setSleeveArtOffset(offset);
+        proxy.saveDeck();
+        if (allowNetworking) {
+            screen.updateDeckSleeve(index, deck);
+        }
+    }
+
     public void setAvatarIndex(int newAvatarIndex) {
         avatarIndex = newAvatarIndex;
-        if (avatarIndex != -1) {
-            avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(newAvatarIndex)));
-        }
-        else {
-            avatarLabel.setIcon(null);
-        }
+        refreshAvatarIcon();
     }
 
     public void setSleeveIndex(int newSleeveIndex) {
         sleeveIndex = newSleeveIndex;
-        if (sleeveIndex != -1) {
-            sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(newSleeveIndex)));
+        sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
+        sleeveArtOffset = Deck.DEFAULT_SLEEVE_OFFSET;
+        refreshSleeveIcon();
+    }
+
+    // An open seat renders no art, though it still holds indices for whoever takes it
+    private void refreshAvatarIcon() {
+        avatarLabel.setIcon(type == LobbySlotType.OPEN || avatarIndex == -1
+                ? null : new FTextureRegionImage(FSkin.getAvatars().get(avatarIndex)));
+    }
+
+    private void refreshSleeveIcon() {
+        if (type == LobbySlotType.OPEN) {
+            sleeveLabel.setIcon(null);
+        }
+        else if (!sleeveArtKey.isEmpty()) {
+            sleeveLabel.setIcon(new CardSleeveImage(sleeveArtKey, sleeveArtOffset));
         }
         else {
-            sleeveLabel.setIcon(null);
+            sleeveLabel.setIcon(sleeveIndex == -1
+                    ? null : new FTextureRegionImage(FSkin.getSleeves().get(sleeveIndex)));
         }
     }
 
@@ -882,7 +1165,14 @@ public class PlayerPanel extends FContainer {
         return sleeveIndex;
     }
 
+    public void setSleeveArtKey(String key) {
+        sleeveArtKey = key == null ? "" : key;
+    }
+
     public void setPlayerName(String string) {
+        if (txtPlayerName.isEditing()) {
+            return; //don't clobber (and cursor-reset) a name mid-typing; the commit re-syncs it
+        }
         txtPlayerName.setText(string);
     }
 
@@ -916,6 +1206,10 @@ public class PlayerPanel extends FContainer {
             break;
         }
 
+        refreshSlotToggle();
+        refreshAvatarIcon();
+        refreshSleeveIcon();
+
         boolean isAi = isAi();
         if (isAi != wasAi && deckChooser != null) {
             onIsAiChanged(isAi);
@@ -924,7 +1218,7 @@ public class PlayerPanel extends FContainer {
 
     public Set<AIOption> getAiOptions() {
         return isSimulatedAi()
-                ? ImmutableSet.of(AIOption.USE_SIMULATION)
+                ? ImmutableSet.of(AIOption.USE_FULL_SIMULATION)
                 : Collections.emptySet();
     }
     private boolean isSimulatedAi() {
@@ -935,17 +1229,29 @@ public class PlayerPanel extends FContainer {
     }
 
     public int getTeam() {
-        return cbTeam.getSelectedIndex();
+        return screen.hasVariant(GameType.Archenemy)
+                ? cbArchenemyTeam.getSelectedIndex()
+                : cbTeam.getSelectedIndex();
     }
     public void setTeam(int team0) {
-        cbTeam.setSelectedIndex(team0);
+        applyingTeamFromNetwork = true;
+        try {
+            cbTeam.setSelectedIndex(team0);
+        } finally {
+            applyingTeamFromNetwork = false;
+        }
     }
 
     public int getArchenemyTeam() {
         return cbTeam.getSelectedIndex();
     }
     public void setArchenemyTeam(int team0) {
-        cbTeam.setSelectedIndex(team0);
+        applyingTeamFromNetwork = true;
+        try {
+            cbTeam.setSelectedIndex(team0);
+        } finally {
+            applyingTeamFromNetwork = false;
+        }
     }
 
     public boolean isReady() {
@@ -954,7 +1260,9 @@ public class PlayerPanel extends FContainer {
     public void setIsReady(boolean isReady0) {
         if (isReady == isReady0) { return; }
         isReady = isReady0;
-        if (allowNetworking) {
+        // humanAiSwitch doubles as the Open/AI selector for host-controlled opponent slots;
+        // only drive it from the ready field when the switch is actually showing Ready/NotReady.
+        if (allowNetworking && !isOpenAiSlotToggle()) {
             humanAiSwitch.setToggled(isReady);
         }
     }
@@ -966,7 +1274,7 @@ public class PlayerPanel extends FContainer {
         sleeveLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
-        humanAiSwitch.setEnabled(mayEdit);
+        refreshSlotToggle();
         cbTeam.setEnabled(mayEdit);
         if (devModeSwitch != null) {
             devModeSwitch.setEnabled(mayEdit);
@@ -992,6 +1300,7 @@ public class PlayerPanel extends FContainer {
     public void setMayControl(boolean mayControl0) {
         if (mayControl == mayControl0) { return; }
         mayControl = mayControl0;
+        refreshSlotToggle();
     }
 
     public void setMayRemove(boolean mayRemove0) {

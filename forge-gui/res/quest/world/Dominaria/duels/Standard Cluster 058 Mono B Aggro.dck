@@ -1,0 +1,35 @@
+[metadata]
+Name=Mono B Aggro
+Deck Type=constructed
+Title=Mono B Aggro
+Description=Mono B Aggro
+Difficulty=Very Hard
+Icon=Tombstone
+[Main]
+3 Aether Hub
+2 Aethersphere Harvester
+3 Bone Picker
+4 Dread Wanderer
+4 Fatal Push
+4 Glint-Sleeve Siphoner
+2 Heart of Kiran
+4 Ifnir Deadlands
+1 Key to the City
+4 Night Market Lookout
+2 Ruin Raider
+4 Scrapheap Scrounger
+3 Supernatural Stamina
+5 Swamp
+5 Swamp
+3 Swamp
+3 Vicious Conquistador
+2 Walk the Plank
+2 Yahenni, Undying Partisan
+[Sideboard]
+4 Duress
+2 Gifted Aetherborn
+2 Harsh Scrutiny
+4 Kitesail Freebooter
+1 Lost Legacy
+1 Moment of Craving
+1 Vraska's Contempt

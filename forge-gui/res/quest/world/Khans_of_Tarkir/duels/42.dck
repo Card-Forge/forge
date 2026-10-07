@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling White
+Title=Dungeon Crawling White
+Icon=Dungeon Crawling White.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/2014_Standard_State_Championships_-_West_Virginia/John_Tatta_-_Mardu_Midrange_(Standard,_#88552).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brimaz, King of Oreskos
+4 Butcher of the Horde
+4 Goblin Rabblemaster
+3 Stormbreath Dragon
+4 Crackling Doom
+3 Hero's Downfall
+3 Lightning Strike
+1 Murderous Cut
+2 Stoke the Flames
+4 Thoughtseize
+2 Sarkhan, the Dragonspeaker
+2 Sorin, Solemn Visitor
+2 Battlefield Forge
+4 Bloodstained Mire
+4 Caves of Koilos
+1 Mana Confluence
+2 Mountain
+4 Nomad Outpost
+2 Swamp
+2 Temple of Malice
+2 Temple of Silence
+2 Temple of Triumph
+[Sideboard]
+3 Anger of the Gods
+2 Despise
+1 Elspeth, Sun's Champion
+1 Empty the Pits
+1 Harness by Force
+2 Magma Spray
+2 Nyx-Fleece Ram
+1 Suspension Field
+1 Utter End
+1 Wingmate Roc

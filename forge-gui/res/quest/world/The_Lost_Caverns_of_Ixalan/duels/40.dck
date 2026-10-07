@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Zeus
+Title=Zeus
+Icon=Zeus.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Ooshiba_Souichirou_-_WUB_Junk_(Standard,_#1980867).dck
+Deck Type=constructed
+
+[Main]
+4 Raffine, Scheming Seer
+4 Sheoldred, the Apocalypse
+2 Gix, Yawgmoth Praetor
+2 Faerie Mastermind
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+2 Subterranean Schooner
+3 Go for the Throat
+2 Make Disappear
+1 Destroy Evil
+2 Cut Down
+4 Virtue of Loyalty
+1 Swamp
+1 Caves of Koilos
+2 Adarkar Wastes
+1 Underground River
+4 Darkslick Shores
+2 Seachrome Coast
+1 Deserted Beach
+2 Shipwreck Marsh
+4 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Raffine's Tower
+2 Plaza of Heroes
+1 Restless Anchorage
+[Sideboard]
+2 Duress
+2 Liliana of the Veil
+1 Seachrome Coast
+3 Dennick, Pious Apprentice
+2 Path of Peril
+1 The Cruelty of Gix
+1 Loran of the Third Path
+2 Faerie Mastermind
+1 Aclazotz, Deepest Betrayal

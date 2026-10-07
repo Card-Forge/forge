@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Kawamura_Atsuto_-_Orzhov_Blink_(Modern,_#2807341).dck
+Deck Type=constructed
+
+[Main]
+3 Flickerwisp
+3 Recruiter of the Guard
+1 Skyclave Apparition
+4 Solitude
+1 Kutzil's Flanker
+1 Aven Interrupter
+4 Phelia, Exuberant Shepherd
+4 White Orchid Phantom
+3 Witch Enchanter
+1 Boggart Trawler
+4 Overlord of the Balemurk
+4 Emptiness
+4 Fatal Push
+2 Ephemerate
+3 Thoughtseize
+3 Plains
+1 Swamp
+2 Godless Shrine
+2 Flooded Strand
+4 Marsh Flats
+3 Flagstones of Trokair
+3 Shadowy Backstreet
+[Sideboard]
+2 Damping Sphere
+2 Vindicate
+1 Liliana of the Veil
+2 Ashiok, Dream Render
+2 Archon of Emeria
+2 Sanctifier en-Vec
+2 Wrath of the Skies
+2 Clarion Conqueror

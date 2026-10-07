@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 020816 - And If You Should Fall
 URL:http://www.gatheringmagic.com/seanuy-020816-and-if-you-should-fall/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description: Win on your turn.
 [state]
 ActivePlayer=AI

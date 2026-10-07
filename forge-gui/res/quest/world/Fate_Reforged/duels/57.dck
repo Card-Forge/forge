@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/PPTQ_Vancouver_@_CK,_Magdeburg/Werner_Derpmann_-_Zoo_(Modern,_#184541).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Birds of Paradise
+4 Geist of Saint Traft
+4 Noble Hierarch
+4 Siege Rhino
+4 Tarmogoyf
+2 Tasigur, the Golden Fang
+4 Wild Nacatl
+3 Abrupt Decay
+2 Bant Charm
+4 Lightning Bolt
+2 Path to Exile
+4 Tribal Flames
+2 Bloodstained Mire
+1 Breeding Pool
+4 Flooded Strand
+1 Forest
+1 Godless Shrine
+1 Plains
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+4 Verdant Catacombs
+1 Watery Grave
+4 Windswept Heath
+[Sideboard]
+1 Ajani Vengeant
+1 Batterskull
+2 Crackling Doom
+2 Creeping Corrosion
+3 Kor Firewalker
+4 Negate
+1 Stony Silence
+1 Thrun, the Last Troll

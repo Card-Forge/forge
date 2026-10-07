@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2010_TCGplayer.com_TCQ_-_Standish,_ME_(12-12)/JakeMiller_-_Valakut_Ramp_(Standard,_#8807).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Inferno Titan
+4 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+3 Summoning Trap
+3 Cultivate
+4 Explore
+2 Pyroclasm
+4 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+1 Khalni Garden
+11 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+3 Acidic Slime
+1 Gaea's Revenge
+2 Obstinate Baloth
+1 Rampaging Baloths
+2 Traitorous Instinct
+3 Tumble Magnet

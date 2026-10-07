@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Medium
+Description=New_Phyrexia/M2012_GameDay_-_Topdecker_Thessaloniki/Sakis_Schoinas_-_Valakut_Ramp_(Standard,_#18505).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Inferno Titan
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+2 Solemn Simulacrum
+2 Wurmcoil Engine
+2 Dismember
+4 Harrow
+1 Nature's Claim
+3 Summoning Trap
+4 Explore
+4 Rampant Growth
+4 Evolving Wilds
+4 Forest
+11 Mountain
+2 Raging Ravine
+1 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+2 Gaea's Revenge
+3 Memoricide
+3 Obstinate Baloth
+3 Pyroclasm
+2 Ricochet Trap
+1 Swamp

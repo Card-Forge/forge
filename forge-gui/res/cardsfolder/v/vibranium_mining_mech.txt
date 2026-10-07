@@ -1,0 +1,12 @@
+Name:Vibranium Mining Mech
+ManaCost:4
+Types:Artifact Vehicle
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this Vehicle enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this Vehicle enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_vibranium | TokenOwner$ You
+A:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | SpellDescription$ This Vehicle gets +1/+0 until end of turn.
+K:Crew:2
+SVar:HasAttackEffect:TRUE
+Oracle:Trample\nWhenever this Vehicle enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\n{2}: This Vehicle gets +1/+0 until end of turn.\nCrew 2

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/SCG_Invitational_Qualifier_Burnsville/Jason_Phimister_-_Burn_(Modern,_#653074).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+3 Rift Bolt
+4 Arid Mesa
+3 Bloodstained Mire
+2 Copperline Gorge
+1 Inspiring Vantage
+2 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+3 Destructive Revelry
+1 Lightning Helix
+4 Path to Exile
+2 Pyrite Spellbomb
+1 Rest in Peace
+1 Satyr Firedancer
+2 Skullcrack

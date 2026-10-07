@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Richardson/Cesar_Collazo_-_Mono-Red_Aggro_(Standard,_#313761).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+2 Chandra, Fire of Kaladesh
+4 Eidolon of the Great Revel
+4 Lightning Berserker
+4 Monastery Swiftspear
+3 Zurgo Bellstriker
+4 Lightning Strike
+3 Searing Blood
+4 Stoke the Flames
+4 Wild Slash
+4 Exquisite Firecraft
+20 Mountain
+[Sideboard]
+2 Fiery Impulse
+1 Molten Vortex
+2 Outpost Siege
+4 Roast
+2 Scab-Clan Berserker
+3 Smash to Smithereens
+1 Thunderbreak Regent

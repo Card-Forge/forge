@@ -19,12 +19,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        final List<String> onlyColors = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+        final List<String> onlyColors = MagicColor.Constant.ONLY_COLORS;
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {
@@ -32,7 +31,6 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         final String protection = "Protection from " + color;
-
         return card.hasKeyword(protection);
     }
 
@@ -233,7 +231,7 @@ public class ProtectAi extends SpellAbilityAi {
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().size() < tgt.getMinTargets(source, sa)) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (mandatory) {
                         if (protectMandatoryTarget(ai, sa)) {
                             return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
@@ -257,11 +255,9 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTgtAI()
 
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getHostCard();
         final List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
-        if (list.size() < tgt.getMinTargets(source, sa)) {
+        if (list.size() < sa.getMinTargets()) {
             sa.resetTargets();
             return false;
         }

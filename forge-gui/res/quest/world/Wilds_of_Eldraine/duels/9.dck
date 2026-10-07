@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Konno_Masato_-_Mono_Black_(Standard,_#1746239).dck
+Deck Type=constructed
+
+[Main]
+4 Graveyard Trespasser
+3 Tenacious Underdog
+4 Evolved Sleeper
+4 Sheoldred, the Apocalypse
+3 Phyrexian Fleshgorger
+4 Go for the Throat
+4 Cut Down
+2 Gix's Command
+2 Back for Seconds
+4 Hopeless Nightmare
+2 Liliana of the Veil
+19 Swamp
+1 Takenuma, Abandoned Mire
+4 Mishra's Foundry
+[Sideboard]
+4 Duress
+4 Phyrexian Obliterator
+2 Razorlash Transmogrant
+1 Archfiend of the Dross
+2 Glistening Deluge
+2 The End

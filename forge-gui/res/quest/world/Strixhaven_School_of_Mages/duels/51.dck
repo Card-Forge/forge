@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Chris_Mathews_-_Ur_Blitz_(Modern,_#1166066)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+2 Vapor Snag
+2 Wild Slash
+2 Mutagenic Growth
+3 Opt
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+4 Expressive Iteration
+2 Fiery Islet
+2 Scalding Tarn
+3 Bloodstained Mire
+3 Steam Vents
+4 Spirebluff Canal
+4 Mountain
+[Sideboard]
+1 Soul-Guide Lantern
+1 Bedlam Reveler
+1 Stern Dismissal
+2 Relic of Progenitus
+2 Kozilek's Return
+2 Cleansing Wildfire
+2 Abrade
+2 Spell Pierce
+2 Dispel

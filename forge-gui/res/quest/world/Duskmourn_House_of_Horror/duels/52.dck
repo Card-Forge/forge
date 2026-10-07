@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Fukutoku_Kazuto_-_UB_Aggro_(Modern,_#2267763).dck
+Deck Type=constructed
+
+[Main]
+2 Graveyard Trespasser
+3 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+4 Fatal Push
+4 Counterspell
+4 Thought Scour
+4 Spell Snare
+2 Force of Negation
+1 Drown in the Loch
+4 Consider
+2 Sink into Stupor
+4 Unearth
+2 Island
+1 Swamp
+3 Watery Grave
+2 Bloodstained Mire
+1 Flooded Strand
+4 Polluted Delta
+2 Scalding Tarn
+1 Otawara, Soaring City
+2 Undercity Sewers
+[Sideboard]
+2 Damping Sphere
+2 Nihil Spellbomb
+1 Force of Negation
+2 Mystical Dispute
+1 Glistening Deluge
+1 Shoot the Sheriff
+4 Consign to Memory
+2 Harbinger of the Seas

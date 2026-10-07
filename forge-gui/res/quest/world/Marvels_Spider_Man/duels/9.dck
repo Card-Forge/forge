@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Mister Fantastic
+Title=Mister Fantastic
+Icon=Mister Fantastic.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/George_Andrews_-_Four-Color_Control_(Standard,_#2684360).dck
+Deck Type=constructed
+
+[Main]
+2 Marang River Regent
+1 Horned Loch-Whale
+4 Consult the Star Charts
+4 Inevitable Defeat
+4 Lightning Helix
+4 No More Lies
+3 Jeskai Revelation
+3 Three Steps Ahead
+2 Get Lost
+2 Mystical Teachings
+1 Final Showdown
+1 Outrageous Robbery
+2 Nowhere to Run
+4 Starting Town
+3 Floodfarm Verge
+3 Riverpyre Verge
+2 Sacred Foundry
+2 Sunbillow Verge
+2 Watery Grave
+1 Fountainport
+1 Godless Shrine
+1 Island
+1 Meticulous Archive
+1 Mistrise Village
+1 Mountain
+1 Restless Reef
+1 Secluded Starforge
+1 Shadowy Backstreet
+1 Thundering Falls
+1 Undercity Sewers
+[Sideboard]
+2 High Noon
+2 Mister Negative
+2 Rest in Peace
+2 Tishana's Tidebinder
+2 Ultima
+1 Annul
+1 Fire Magic
+1 Negate
+1 Ojer Pakpatiq, Deepest Epoch
+1 Sphinx of the Final Word

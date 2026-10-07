@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ikenga
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-__Manila_-_Philippines/Mark_Anthony_Arriola_-_Vampires_(Standard,_#1495).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+2 Kalastria Highborn
+3 Malakir Bloodwitch
+3 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Tendrils of Corruption
+3 Duress
+1 Grim Discovery
+2 Mind Sludge
+3 Sign in Blood
+4 Marsh Flats
+12 Swamp
+4 Tectonic Edge
+4 Verdant Catacombs
+[Sideboard]
+2 Consume the Meek
+4 Consuming Vapors
+2 Inquisition of Kozilek
+2 Sadistic Sacrament

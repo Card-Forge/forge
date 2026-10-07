@@ -22,7 +22,6 @@ public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
 
-    public static Map<String, Map<String,List<List<String>>>> ldaPools = new HashMap<>();
     /**
         To ensure that only cards with at least 14 connections (as 14*4+4=60) are included in the card based deck
         generation pools
@@ -33,19 +32,18 @@ public final class CardRelationMatrixGenerator {
         return initializeFormat(DeckFormat.Commander) && initializeFormat(DeckFormat.Oathbreaker);
     }
 
-    /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
     public static boolean initializeFormat(DeckFormat format){
         String formatName = format.toString();
         HashMap<String,List<Map.Entry<PaperCard,Integer>>> formatMap = CardThemedMatrixIO.loadMatrix(formatName);
         if (formatMap==null) {
             if (CardThemedMatrixIO.getMatrixFolder(formatName).exists()) {
-                if (formatName.equals(FModel.getFormats().getStandard().getName())){
+                if (formatName.equals(FModel.getFormats().getStandard().getName())) {
                     formatMap=initializeFormat(FModel.getFormats().getStandard());
                 }
-                else if (formatName.equals(FModel.getFormats().getModern().getName())){
+                else if (formatName.equals(FModel.getFormats().getModern().getName())) {
                     formatMap=initializeFormat(FModel.getFormats().getModern());
                 }
-                else{
+                else {
                     formatMap=initializeCommanderFormat(format);
                 }
                 CardThemedMatrixIO.saveMatrix(formatName, formatMap);
@@ -192,7 +190,7 @@ public final class CardRelationMatrixGenerator {
         String cardName = legend.getName();
         deck.getMain().toFlatList().stream()
             .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
-            .filter(pairCard -> !pairCard.getName().equals(cardName))
+            .filter(PaperCardPredicates.name(cardName).negate())
             .forEach(pairCard -> {
                 try {
                     int old = matrix[legendIntegerMap.get(cardName)][cardIntegerMap.get(pairCard.getName())];

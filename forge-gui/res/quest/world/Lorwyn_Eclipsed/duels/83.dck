@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Bhardwa_Shyam_-_Mono_u_Goblins_(Modern,_#2796993).dck
+Deck Type=constructed
+
+[Main]
+3 Silvergill Adept
+2 Lord of Atlantis
+4 Master of the Pearl Trident
+2 Glasspool Mimic
+3 Svyelun of Sea and Sky
+4 Tide Shaper
+1 Vodalian Hexcatcher
+3 Tishana's Tidebinder
+3 Harbinger of the Seas
+3 Mindspring Merfolk
+2 Sygg, Wanderwine Wisdom
+4 Aether Vial
+3 Spell Snare
+4 Flare of Denial
+4 Sink into Stupor
+4 Island
+3 Cavern of Souls
+4 Wanderwine Hub
+2 Mutavault
+2 Otawara, Soaring City
+[Sideboard]
+3 Propaganda
+3 Force of Negation
+2 Subtlety
+4 Consign to Memory
+1 Harbinger of the Seas
+2 Champions of the Shoal

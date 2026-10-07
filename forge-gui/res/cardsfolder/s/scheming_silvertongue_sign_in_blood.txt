@@ -1,0 +1,15 @@
+Name:Scheming Silvertongue
+ManaCost:1 B
+Types:Creature Vampire Warlock
+PT:1/3
+K:Flying
+K:Lifelink
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPrepare | CheckSVar$ X | SVarCompare$ GE2 | TriggerDescription$ At the beginning of your second main phase, if you gained 2 or more life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+SVar:X:Count$LifeYouGainedThisTurn
+AlternateMode:Prepare
+Oracle:Flying, lifelink\nAt the beginning of your second main phase, if you gained 2 or more life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+CopyFaceFrom:Sign in Blood

@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.card.MagicColor;
 import forge.game.GameObject;
+import forge.game.ability.ApiType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -385,7 +387,9 @@ public class ComputerUtilCost {
 
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
                 if (differentNames) {
-                    final Set<Card> uniqueNameCards = Sets.newHashSet();
+                    // drives which cards get sacrificed on a scoring tie, so its order must not depend on Card
+                    // identity hashCode (which varies per JVM run)
+                    final Set<Card> uniqueNameCards = Sets.newLinkedHashSet();
                     for (final Card card : typeList) {
                         // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
                         if (!card.hasNoName()) {
@@ -456,24 +460,33 @@ public class ComputerUtilCost {
             if (part instanceof CostTapType) {
                 String type = part.getType();
 
-                /*
-                 * Only crew with creatures weaker than vehicle
-                 *
-                 * Possible improvements:
-                 * - block against evasive (flyers, intimidate, etc.)
-                 * - break board stall by racing with evasive vehicle
-                 */
-                if (sa.isCrew()) {
-                    Card vehicle = AnimateAi.becomeAnimated(source, sa);
-                    final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                // "tap any number of creatures with total power N or more" costs (e.g. Crew, Saddle, Teamwork)
+                // have the amount "Any", so check them the same way AiCostDecision pays them
+                if (type.contains("+withTotalPowerGE")) {
                     String totalP = type.split("withTotalPowerGE")[1];
                     type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
-                    CardCollection exclude = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa);
-                    exclude = CardLists.filter(exclude, c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue); // exclude creatures >= vehicle
-                    exclude.addAll(alreadyTapped);
-                    CardCollection tappedCrew = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true, Integer.parseInt(totalP), exclude);
-                    if (tappedCrew != null) {
-                        alreadyTapped.addAll(tappedCrew);
+                    CardCollection exclude = new CardCollection();
+                    /*
+                     * Only crew with creatures weaker than vehicle
+                     *
+                     * Possible improvements:
+                     * - block against evasive (flyers, intimidate, etc.)
+                     * - break board stall by racing with evasive vehicle
+                     */
+                    if (sa.isCrew()) {
+                        Card vehicle = AnimateAi.becomeAnimated(source, sa);
+                        final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                        exclude.addAll(CardLists.filter(CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa),
+                                c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue)); // exclude creatures >= vehicle
+                    }
+                    if (alreadyTapped != null) {
+                        exclude.addAll(alreadyTapped);
+                    }
+                    CardCollection tapChoices = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, sa.isCrew() || !((CostTapType) part).canTapSource, Integer.parseInt(totalP), exclude);
+                    if (tapChoices != null) {
+                        if (alreadyTapped != null) {
+                            alreadyTapped.addAll(tapChoices);
+                        }
                         return true;
                     }
                     return false;
@@ -645,10 +658,9 @@ public class ComputerUtilCost {
         }
 
         for (Card c : cardsToConsider) {
-            for (SpellAbility sa : c.getManaAbilities()) {
-                if (sa.getManaPart() != null) {
-                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
-                }
+            colorsAvailable.addAll(c.getProducibleColors());
+            if (colorsAvailable.size() == MagicColor.Constant.COLORS_AND_COLORLESS.size()) {
+                break; // nothing left for a further source to add
             }
         }
 
@@ -675,13 +687,18 @@ public class ComputerUtilCost {
         if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
         }
+        // another mode already decided
+        if (root.getApi() == ApiType.Charm && root.getXManaCostPaid() != null) {
+            return root.getXManaCostPaid();
+        }
 
         Integer val = null;
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
+            // TODO find a way to consider lower value due to Ward
             if (sa.hasParam("AIXMax")) {
-                sa.setXManaCostPaid(val);
+                root.setXManaCostPaid(val);
                 int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);
                 val = Math.min(val, calculated);
             }
@@ -691,12 +708,6 @@ public class ComputerUtilCost {
             // if announce is used as min targets, check what the max possible number would be
             if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
                 val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa).size());
-            }
-
-            if (sa.hasParam("AIMaxTgtsCount")) {
-                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
-                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(source, "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
             }
         }
 
@@ -729,8 +740,8 @@ public class ComputerUtilCost {
             }
         }
 
-        int x = ObjectUtils.defaultIfNull(val, 0);
-        sa.setXManaCostPaid(x);
+        int x = ObjectUtils.getIfNull(val, 0);
+        root.setXManaCostPaid(x);
         return x;
     }
 

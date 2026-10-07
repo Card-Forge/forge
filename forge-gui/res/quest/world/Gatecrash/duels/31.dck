@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Shango
+Title=Shango
+Icon=Shango.jpg
+Difficulty=Easy
+Description=Gatecrash/PTQ_Theros_-_Portadown,_Ireland/Alan_Warnock_-_Junk_(Standard,_#48559).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Angel of Serenity
+3 Avacyn's Pilgrim
+2 Craterhoof Behemoth
+1 Deathrite Shaman
+4 Lotleth Troll
+1 Obzedat, Ghost Council
+1 Restoration Angel
+4 Thragtusk
+4 Grisly Salvage
+4 Lingering Souls
+3 Mulch
+1 Sever the Bloodline
+4 Unburial Rites
+1 Cavern of Souls
+2 Forest
+3 Godless Shrine
+3 Isolated Chapel
+4 Overgrown Tomb
+2 Sunpetal Grove
+4 Temple Garden
+1 Vault of the Archangel
+4 Woodland Cemetery
+[Sideboard]
+3 Abrupt Decay
+2 Acidic Slime
+2 Rhox Faithmender
+1 Slayer of the Wicked
+2 Tragic Slip

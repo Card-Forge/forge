@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Modern_Turniers_vom_Dienstag_den_30.04.2013/Obeth_Thomas_-_Red_Deck_Wins_(Modern,_#51772).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+3 Boros Reckoner
+4 Falkenrath Aristocrat
+4 Goblin Guide
+2 Grim Lavamancer
+4 Reckless Waif
+3 Thundermaw Hellkite
+1 Dismember
+3 Electrickery
+4 Lightning Bolt
+3 Bonfire of the Damned
+1 Dreadbore
+4 Blackcleave Cliffs
+4 Blood Crypt
+3 Cavern of Souls
+12 Mountain
+1 Swamp
+[Sideboard]
+3 Molten Rain
+4 Rakdos Charm
+3 Sword of War and Peace
+2 Vampire Nighthawk

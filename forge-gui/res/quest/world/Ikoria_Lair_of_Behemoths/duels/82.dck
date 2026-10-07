@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Doomed_Necromancer_-_Abzan_Midrange_(Modern,_#984604).dck
+Deck Type=constructed
+
+[Main]
+2 Scavenging Ooze
+4 Siege Rhino
+4 Stoneforge Mystic
+4 Voice of Resurgence
+1 Batterskull
+1 Sword of Fire and Ice
+1 Sword of Light and Shadow
+2 Fatal Push
+2 Kaya's Guile
+4 Path to Exile
+4 Assassin's Trophy
+2 Inquisition of Kozilek
+3 Thoughtseize
+4 Lingering Souls
+1 Stirring Wildwood
+1 Gavony Township
+1 Indatha Triome
+1 Swamp
+2 Temple Garden
+2 Plains
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Forest
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Wrath of God
+1 Damnation
+1 Eidolon of Rhetoric
+2 Choke
+2 Fracturing Gust
+2 Gaddock Teeg
+2 Kor Firewalker
+2 Plague Engineer
+2 Rest in Peace

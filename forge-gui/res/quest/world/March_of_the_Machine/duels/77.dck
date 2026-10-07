@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Maskarponeleone_-_Temur_Creativity_(Modern,_#1637893).dck
+Deck Type=constructed
+
+[Main]
+3 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Fire // Ice
+4 Lightning Bolt
+4 Spell Pierce
+4 Indomitable Creativity
+2 Expressive Iteration
+1 Persist
+4 Leyline Binding
+4 Teferi, Time Raveler
+4 Wrenn and Six
+1 Steam Vents
+4 Arid Mesa
+1 Sacred Foundry
+3 Bloodstained Mire
+2 Wooded Foothills
+1 Stomping Ground
+4 Dwarven Mine
+1 Savai Triome
+1 Mountain
+4 Scalding Tarn
+1 Jetmir's Garden
+1 Xander's Lounge
+[Sideboard]
+2 Silence
+3 Wear // Tear
+3 Veil of Summer
+1 Plains
+1 March of Otherworldly Light
+1 Elesh Norn, Mother of Machines
+4 Change the Equation

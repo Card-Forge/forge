@@ -2,7 +2,9 @@ package forge.ai;
 
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.ai.ability.ProtectAi;
+import forge.ai.ability.PutStickerAi;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -17,6 +19,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.Sticker;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -44,6 +47,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -70,10 +74,6 @@ public class PlayerControllerAi extends PlayerController {
 
     public void setupAutoProfile(Deck deck) {
         pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
-    }
-
-    public void setUseSimulation(boolean value) {
-        brains.setUseSimulation(value);
     }
 
     @Override
@@ -340,7 +340,7 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal);
         }
-        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
+        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
@@ -401,6 +401,11 @@ public class PlayerControllerAi extends PlayerController {
         return getAi().confirmStaticApplication(hostCard, logic);
     }
 
+    // TODO: accept based on game state (infinite loop / unwinnable position); always declines for now
+    public boolean acceptsDrawOffer() {
+        return false;
+    }
+
     @Override
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
@@ -451,6 +456,9 @@ public class PlayerControllerAi extends PlayerController {
         Card host = replacementEffect.getHostCard();
         if (host.hasAlternateState()) {
             host = host.getGame().getCardState(host);
+        }
+        if (effectSA != null) {
+            effectSA.setActivatingPlayer(host.getController());
         }
         return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
     }
@@ -643,8 +651,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            if(source == null || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0) {
+            if (orderedMoveToTopOfLibrary(destinationZone, source)) {
                 //Cards going to the top of a deck are returned in reverse order.
                 Collections.reverse(reordered);
             }
@@ -659,7 +666,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
         }
@@ -711,6 +718,21 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
         return ComputerUtil.vote(player, options, sa, votes, forPlayer);
+    }
+
+    @Override
+    public Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa, boolean isOptional) {
+        return PutStickerAi.chooseSticker(options, target, sa, isOptional);
+    }
+
+    @Override
+    public int chooseStickerNamePosition(Sticker sticker, Card target) {
+        return 0;
+    }
+
+    @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return ComputerUtilCard.getBestAI(options);
     }
 
     @Override
@@ -835,7 +857,7 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerRunnable(sa));
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
         }
         return true;
     }
@@ -845,11 +867,10 @@ public class PlayerControllerAi extends PlayerController {
      * defers the human choice from canPlayAI (worker thread with possibly low timeout)
      * to handlePlayingSpellAbility (game thread, no timeout).
      */
-    private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
-        SpellAbility root = sa;
+    private Consumer<SpellAbility> getDeferredTargetingPlayerAction(SpellAbility sa) {
         while (sa != null) {
             if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
-                return () -> {
+                return root -> {
                     SpellAbility cur = root;
                     while (cur != null) {
                         if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
@@ -872,7 +893,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return brains.getCardsToDiscard(numDiscard, null, null);
     }
 
@@ -931,10 +952,9 @@ public class PlayerControllerAi extends PlayerController {
         if (call) {
             // Win if possible
             return true;
-        } else {
-            // heads or tails, AI doesn't know which is better now
-            return MyRandom.getRandom().nextBoolean();
         }
+        // heads or tails, AI doesn't know which is better now
+        return MyRandom.getRandom().nextBoolean();
     }
 
     @Override
@@ -962,6 +982,8 @@ public class PlayerControllerAi extends PlayerController {
                             return true;
                         case "Never":
                             return false;
+                        case "StorageLand":
+                            return shouldUntapStorageLand(source);
                         case "NothingRemembered":
                             if (!source.hasRemembered()) {
                                 return true;
@@ -993,10 +1015,21 @@ public class PlayerControllerAi extends PlayerController {
                 }
                 return defaultVal != null && defaultVal;
             case LeftOrRight: return brains.chooseDirection(sa);
-            case OddsOrEvens: return brains.chooseEvenOdd(sa); // false is Odd, true is Even
+            case OddsOrEvens: return brains.chooseEvenOdd(sa);
+            case HeadsOrTails:
+                // this is the result if AI gets to choose after
+                return true;
             default:
                 return MyRandom.getRandom().nextBoolean();
         }
+    }
+
+    private static boolean shouldUntapStorageLand(Card source) {
+        final int otherManaSources = CardLists.count(source.getController().getLandsInPlay(),
+                land -> land != source && CardPredicates.LANDS_PRODUCING_MANA.test(land));
+        final int availableMana = otherManaSources + source.getCounters(CounterType.getType("STORAGE"));
+        return source.getController().getCardsIn(ZoneType.Hand).anyMatch(
+                card -> card.getCMC() > otherManaSources && card.getCMC() <= availableMana);
     }
 
     /*
@@ -1294,17 +1327,47 @@ public class PlayerControllerAi extends PlayerController {
                     }
 
                     if (sa.isMayChooseNewTargets()) {
-                        TargetChoices tc = sa.getTargets();
-                        if (!sa.setupTargets()) {
-                            // if AI can't choose targets need to keep old one even if illegal
-                            sa.setTargets(tc);
-                        }
+                        chooseNewTargetsForCopy(sa);
                         // FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
                         // sa.setupNewTargets(player);
                     }
                 }
                 // need finally add the new spell to the stack
                 getGame().getStack().add(sa);
+            }
+        }
+    }
+
+    private void chooseNewTargetsForCopy(final SpellAbility copy) {
+        List<TargetChoices> oldTargets = new ArrayList<>();
+        boolean targetingPlayer = false;
+        for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+            oldTargets.add(s.getTargets());
+            targetingPlayer |= s.hasParam("TargetingPlayer");
+        }
+
+        boolean chosen;
+        if (targetingPlayer) {
+            // another player picks the targets, so leave that to setupTargets
+            chosen = copy.setupTargets();
+        } else {
+            for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+                s.clearTargets();
+            }
+            // choosing new targets is optional for a copy of our own spell
+            Card original = copy.getHostCard().getCopiedPermanent();
+            boolean ownSpell = (original != null ? original : copy.getHostCard()).getController().equals(player);
+            chosen = brains.doTrigger(copy, !ownSpell);
+            for (SpellAbility s = copy; chosen && s != null; s = s.getSubAbility()) {
+                chosen = !s.usesTargeting() || s.isTargetNumberValid();
+            }
+        }
+
+        if (!chosen) {
+            // if AI can't choose targets need to keep old one even if illegal
+            int i = 0;
+            for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
+                s.setTargets(oldTargets.get(i++));
             }
         }
     }
@@ -1501,6 +1564,9 @@ public class PlayerControllerAi extends PlayerController {
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard(), sa);
                 name = ComputerUtilCard.getMostProminentCardName(cards);
+            } else if (logic.equals("MakeCard")) {
+                name = chooseCardName(sa, StaticData.instance().getCommonCards()
+                        .streamAllFaces().filter(cpp).sorted().collect(Collectors.toList()),message);
             } else if (logic.equals("CursedScroll")) {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
@@ -1601,6 +1667,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
+        if (sa.hasOptionalKeywordAmount(keyword)) {
+            return Math.min(sa.getOptionalKeywordAmount(keyword), max);
+        }
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         if (keyword.getKeyword() == Keyword.CASUALTY
                 && "true".equalsIgnoreCase(sa.getHostCard().getSVar("AINoCasualtyPayment"))) {

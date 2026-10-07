@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=General Patton
+Title=General Patton
+Icon=General Patton.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Will_Drescher_-_Four-Color_Saheeli_(Standard,_#668069).dck
+Deck Type=constructed
+
+[Main]
+3 Archangel Avacyn
+2 Elder Deep-Fiend
+4 Felidar Guardian
+1 Pilgrim's Eye
+4 Rogue Refiner
+4 Selfless Spirit
+4 Servant of the Conduit
+4 Spell Queller
+4 Harnessed Lightning
+4 Oath of Nissa
+4 Saheeli Rai
+4 Aether Hub
+4 Botanical Sanctum
+1 Evolving Wilds
+3 Forest
+4 Inspiring Vantage
+1 Island
+1 Mountain
+1 Plains
+3 Spirebluff Canal
+[Sideboard]
+4 Galvanic Bombardment
+3 Gideon, Ally of Zendikar
+2 Gisela, the Broken Blade
+2 Kozilek's Return
+2 Negate
+2 Tireless Tracker

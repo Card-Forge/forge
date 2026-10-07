@@ -1,0 +1,9 @@
+Name:Elrond, Lord of Rivendell|Deck:Elrond, Lord of Rivendell.dck|Variant:Commander|Avatar:Elrond, Lord of Rivendell|Desc:
+Name:Saruman the White|Deck:Saruman the White.dck|Variant:Commander|Avatar:Saruman the White|Desc:
+Name:Monstrosity of the Lake|Deck:Monstrosity of the Lake.dck|Variant:Commander|Avatar:Monstrosity of the Lake|Desc:
+Name:Saruman of Many Colors|Deck:Saruman of Many Colors.dck|Variant:Commander|Avatar:Saruman of Many Colors|Desc:
+Name:Blue Planar Portal|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Meneldor, Swift Savior|Deck:Meneldor, Swift Savior.dck|Variant:Commander|Avatar:Meneldor, Swift Savior|Desc:
+Name:Gandalf, Friend of the Shire|Deck:Gandalf, Friend of the Shire.dck|Variant:Commander|Avatar:Gandalf, Friend of the Shire|Desc:
+Name:Galadriel, Elven-Queen|Deck:Galadriel, Elven-Queen.dck|Variant:Commander|Avatar:Galadriel, Elven-Queen|Desc:
+Name:Aragorn, the Uniter|Deck:Aragorn, the Uniter.dck|Variant:Commander|Avatar:Aragorn, the Uniter|Desc:

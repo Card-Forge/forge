@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Michelle_Valois_-_Five-color_Humans_(Modern,_#1593243).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+4 Champion of the Parish
+4 Esper Sentinel
+4 Thalia's Lieutenant
+3 Unsettled Mariner
+3 Thalia, Guardian of Thraben
+3 Meddling Mage
+3 Adeline, Resplendent Cathar
+2 Imperial Recruiter
+4 Reflector Mage
+1 Extraction Specialist
+2 Mayor of Avabruck
+4 Aether Vial
+4 Cavern of Souls
+4 Secluded Courtyard
+4 Unclaimed Territory
+2 Silent Clearing
+2 Horizon Canopy
+1 Plains
+2 Ancient Ziggurat
+[Sideboard]
+3 Containment Priest
+3 Sanctifier en-Vec
+4 Lavinia, Azorius Renegade
+2 Kambal, Consul of Allocation
+2 Loran of the Third Path
+1 Elesh Norn, Mother of Machines

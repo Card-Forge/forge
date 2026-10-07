@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_elemental | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Sacrifice this creature: It deals 1 damage to any target."
+S:Mode$ Continuous | AffectedDefined$ Equipped | AddAbility$ Damage | Description$ Equipped creature has "Sacrifice this creature: It deals 1 damage to any target."
 SVar:Damage:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ It deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
 K:Equip:2

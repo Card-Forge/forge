@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Alexey_Matyzniy_-_Mono_Blue_(Standard,_#771895).dck
+Deck Type=constructed
+
+[Main]
+4 Merfolk Trickster
+4 Mist-Cloaked Herald
+2 Nightveil Sprite
+4 Siren Stormtamer
+4 Tempest Djinn
+4 Dive Down
+1 Essence Scatter
+4 Opt
+2 Spell Pierce
+4 Wizard's Retort
+2 Chart a Course
+1 Sleep
+4 Curious Obsession
+20 Island
+[Sideboard]
+1 Diamond Mare
+3 Disdainful Stroke
+1 Entrancing Melody
+2 Metamorphic Alteration
+1 Mistcaller
+1 Selective Snare
+1 Sentinel Totem
+1 Sleep
+4 Syncopate

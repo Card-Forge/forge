@@ -1,0 +1,9 @@
+Name:Old Thrush
+ManaCost:2
+Types:Creature Bird
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 2 life. You may search your library for a basic land card, reveal it, then shuffle and put that card on top.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBSearch
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | Optional$ True
+Oracle:Flying\nWhen this creature enters, you gain 2 life. You may search your library for a basic land card, reveal it, then shuffle and put that card on top.

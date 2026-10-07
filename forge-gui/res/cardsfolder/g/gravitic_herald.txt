@@ -1,0 +1,11 @@
+Name:Gravitic Herald
+ManaCost:3 B
+Types:Creature Human Soldier
+PT:2/4
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this creature enters, seek a nonland permanent card with mana value 3 or less. That card gains warp {0} until end of turn. You lose 2 life.
+SVar:TrigSeek:DB$ Seek | Type$ Card.Permanent+nonLand+cmcLE3 | RememberFound$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | KW$ Warp:0 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Lifelink\nWhen this creature enters, seek a nonland permanent card with mana value 3 or less. That card gains warp {0} until end of turn. You lose 2 life.

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="35" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="132">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Strixhaven Stadium&quot;, &quot;Contested Game Ball&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="35" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztlDsOhDAMRNG20G7H/c/A8VAKay3LccZhIlgUS9Mlkxf/ju+yHFNTf6gSdzM8URJ3c0y9W/v2E8OHwXHFi/EfjwVhy55nsWj/XnYmS1a9LCNmge0p+qzPYRmVF2avvZ1FB9Inrf5hsLTuFgakj0fWCGXIsKB7Sb+bnWeEJbsjLQMjLxItFu8tqQ1j19n5yNSol+Nqv5T3dPQyIHmRv2ZY0D7xdpOuu/a2eUdY7J1aD9dCPLV0Tlos+nzEYf1RFs8jYonm2RPKEvnUWKJ7maj9D2EZoRMHDeS0
+  </data>
+ </layer>
+ <layer id="7" name="Background2" width="35" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztkmsKxDAIhHuB/tnSM+2VF3q5EkpAhpiOxj4WFAbaRMcvJtOUkZGRkfF0/NZDbwiGpeaMMEd7jHjVumgW6ad5a3Wj52HkzbeyWPtgTw9LK89yBg+rZW7e98DMqeWjzST67JqHxf/K+2A9WYbPHPempTah0kNK4/CwMBytPkWS0cPC3kWvz3c5hHuWO2LfGt4J7hcO/Me1iDe3gWofSz8tr6xr0WNBhhYLk4O5ZyzyW/Nn1ZsHsmDtlRzYR7J4Z25l6eVoHGz9XXoLR+o/tAPAQ3zE
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="35" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzll01OwzAQhZ2yS8qPECU5BTu2sC/corDmKtwgZY9Y9xio63IXPGqGTh/jsZ2kdMGTRqoU2/PNG9tJVzPnVj4WpXN3U+dOKvej1SweMclxOCe0RuEZJtWWpU9Oi8GqS5tDLF/el7dqeP6qdu6h0eO0TmO59yzPZVpvMGT+xyY8bt7xWLVgj1LqlxxWfvRgDj6hWs+wme68CeW1fNDUXO6vg3pXWKQ3xPNU7vqFTOhDTNY48kirm7xZdv5oZ2rR8RHHZ0YfY1or9Uom7hf5w4H3z5D8qSx8702q/cAzP/QO4vzrwHrEQTk3Cgt58lH3z6vVzr7Qb9kD7gP1RvOFWYbk18QsS9ivVsi9cmEwabW/XoXHroGxBR6tT9q+lUy5++bMz73141+ufz/jM01Be7QAJo2F81s+8Tj5mzg0hpCKLn8r+JABdV7rETpzqV7K9yXPa262YSn2TupzF2jfNBZLzns9V/KbhqWxhHKMwSDvXtyvzGHlyPEnxCefa55YHoQ4UuqOzS3EGc7Nn8IROlPaOPzmPCSDtSbvFa1HuXWl5MdxrBhHyrpjnB3ujXbf53jbV7gGsqSe2zGE6+D/gdC9PVb+GJt29/+VsF72xvrOPiQHCt/Rx9SxvAmpUM72sfSf+/QN/PM9CQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="35" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy1mMtu00AUhoc2pamER4pLokBbAUFcVqy4vACoSLBhy2WRXoAWiTXwBrwAFzVtBSVhgWBZdZ8lbwEr4AW4iMI58hnN8fh4PHHqkX6N5ROf8/n3eDyTvaZSeyC3Seew3Y+UWgc9oL6nlZoE7cPxFPSrFFtiv8HjR5HN8bGh1CfQgPS+YWvm1eVtjXJj7b/Q70A/oW39lShh2tJJbED9Fh2/0zbXjVipm6CrpGvxaCzTdP+Yf1sn/vTYObeer32D2t9BX0hfR2BZo7ozoC55bnzYzqn/uSnL10JYNune32jLsCP44Na9NavUMxgLTxp+HvT4YRT+jLrkBY4VyQu3PuooeT8by0yG6x/kPKzDWfo0DjmH5EM7zhcySR4hyyrzJYRH8uFpw/rg4+ByParh/ek0SygP5wit7/OoRvNEmTYuh9GxOMmF88VG4HwgsTQhzy5pXJZNmrfLsiy2rJolWVqxzTFdwpfFdpqD8+zG+V7xWCvO3k+v5DOSWCQ2fv9ubVeTFbIYHv4cfMr7lhS1sx2lzh2wzney80rIPNM9nf1d+0Jat+eUugO6C7o3l42jhlD/8ZHk+qHDUjTn4fUY+3Ey6aX85vxPqP8L9Bv0p4AFxVkkSSzIgcrjMCwv5pV6CXoFej2fnDN1zW/R3zwW/px4u95K60xHZuFMFxeUugS6DLqykGaR5PPFx4LXZcbDccsSR9k4ryvF8ljcJrFkxoPD4sY5ixSTWKQmsWTGg8PixjmLFBuHRRoPXG6cs0gxzLlcsJ5yOQzLhxNpuSxuHGVYpPOYE9cNZi9VNGZ9LCEqYqmz/dY6rcdDWKp4j3Bttx/ZHn0yPJg3j6WK98jsPzdo7zNFe7IilireI/SiTutw5KjT2tPkzWOp4j0y+54JbffmA7YPkniGBd8A6Tvtm//d+aVGfuD7hHvKZc8YLmLBfL7xUsTSJ2+QB9eeh3R5Fuk7PQoL6q22/+lwFpcnhMU3XopYTOsTz4yHZQnWHc9PHaxWIOd/fRniyQ==
+  </data>
+ </layer>
+ <layer id="8" name="Buildings" width="35" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztll1Kw0AUha9aKD6k0Dx1DwNuQ60WuoVaqKhbkG5Em6ptFfqjj6W1RVfj7x7EE5iQGmemrc5NXuaDw0xgwjncO+SGSE3NIzqCTqG6pzlkmTONT69A1IFuoXbh/z6jItE99FDUn7HhY6Ih63rgEx1CFZ/Xr5bo46OI92F976B3ZPiAPqE+ajOAhoYa/ZWW9FuVPeTZh8r+z9y6+8LJCzK8Qm+JfnWZ74tNOqhhVyw/Z4sT9OnYU/frCTmeoYnMM5ZrgLXFkPFGfkeifk0XPJqKfFw5dJwjwxX8rkX8HDJOMUNI1I8Z1rn4XZt6ynlUpF2TLP11M7iaN79X2ollC923e1eo98kcNrOsC2eO6H8pkmk+cdcjQI++4L+FdRPaMMynxQxcvcnB/wK6hLaXzEru+xHOgGCF/8ks76nD4XA4HI5s+Qbm4EBK
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="104" y="559.834" width="67.6667" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="518.417" y="282.666">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Acrobatic Cheerleader&quot;, &quot;Team Pennant&quot;]
+}</property>
+    <property name="enemy" value="Orysa"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="246.667" y="362.5">
+   <properties>
+    <property name="enemy" value="Excava"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="68,69"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="374.834" y="299.666">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Joined Researchers&quot;, &quot;Zephyr Boots&quot;]
+}</property>
+    <property name="enemy" value="Aziza"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="116,117"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="221.333" y="295.833">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Page, Loose Leaf&quot;, &quot;Mage Tower Referee&quot;]
+}</property>
+    <property name="enemy" value="Codie"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="376.167" y="364">
+   <properties>
+    <property name="enemy" value="Muddle"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="106,110"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="247" y="324.167"/>
+  <object id="69" template="../../../../common/maps/obj/waypoint.tx" x="246.5" y="405.333"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="-21.8234" y="-15.832" width="577.767" height="16"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="-17.2209" y="558.915" width="576.779" height="16"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="558.815" y="-17.3137" width="17.9131" height="592.53"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="-15.9565" y="-13.265" width="17.9131" height="586.53"/>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="487.292" y="460.333">
+   <properties>
+    <property name="enemy" value="Gorma"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="109,112"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="373.876" y="523.833">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Leech Collector&quot;, &quot;Arrogant Poet&quot;]
+}</property>
+    <property name="enemy" value="Arnyn"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="114,115"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="247.208" y="458">
+   <properties>
+    <property name="enemy" value="Blech"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="98,99"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="375.542" y="458.167">
+   <properties>
+    <property name="enemy" value="Primo"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="107,113"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="489.833" y="361.667">
+   <properties>
+    <property name="enemy" value="Scriv"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="108,111"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="497.333" y="308" width="54.3333" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An excited merfolk girl is doing a cheer routine up ahead.
+
+'Give me a G! Give me another G! What's that spell? GOOD GAME!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="247" y="503.5"/>
+  <object id="99" template="../../../../common/maps/obj/waypoint.tx" x="246" y="423"/>
+  <object id="106" template="../../../../common/maps/obj/waypoint.tx" x="375.25" y="400.666"/>
+  <object id="107" template="../../../../common/maps/obj/waypoint.tx" x="374.75" y="418.333"/>
+  <object id="108" template="../../../../common/maps/obj/waypoint.tx" x="489.25" y="404.666"/>
+  <object id="109" template="../../../../common/maps/obj/waypoint.tx" x="488.75" y="422.333"/>
+  <object id="110" template="../../../../common/maps/obj/waypoint.tx" x="375.5" y="332"/>
+  <object id="111" template="../../../../common/maps/obj/waypoint.tx" x="490" y="330"/>
+  <object id="112" template="../../../../common/maps/obj/waypoint.tx" x="487" y="491"/>
+  <object id="113" template="../../../../common/maps/obj/waypoint.tx" x="375.5" y="490"/>
+  <object id="114" template="../../../../common/maps/obj/waypoint.tx" x="328" y="523.5"/>
+  <object id="115" template="../../../../common/maps/obj/waypoint.tx" x="424.5" y="524.5"/>
+  <object id="116" template="../../../../common/maps/obj/waypoint.tx" x="423" y="298"/>
+  <object id="117" template="../../../../common/maps/obj/waypoint.tx" x="327" y="297.5"/>
+  <object id="124" template="../../../../common/maps/obj/dialog.tx" x="109.5" y="515.933" width="40.5" height="16.1335" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The roar of the crowd, the excitement of the annoucer and the blur of expert Mage Tower players blares from the stadium field ahead. It seems winter's arrival has done little to slow the Strixhaven student's love of sports.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/dialog.tx" x="196.5" y="295.683" width="16.5" height="16.1335" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The animated codex, Codie is serving as the referee for the pitched game ahead. Talk about throwing the book at 'em.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="126" template="../../../../common/maps/obj/dialog.tx" x="123.75" y="161.933" width="40.5" height="16.1335" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Packs! Snacks! Fresh and hot, you'll like 'em a lot!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/shop.tx" x="135.5" y="151.5">
+   <properties>
+    <property name="commonShopList" value="StrixhavenBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/scroll.tx" x="516.667" y="532.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Strixhaven Stadium&quot;, &quot;editions&quot;: [ &quot;STX&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/scroll.tx" x="51.3333" y="21.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Fabled Passage&quot;, &quot;editions&quot;: [ &quot;SOC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/scroll.tx" x="11.3333" y="202">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Command Tower&quot;, &quot;editions&quot;: [ &quot;SOC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/scroll.tx" x="500.667" y="122">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Joined Researchers&quot;, &quot;editions&quot;: [ &quot;SOS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

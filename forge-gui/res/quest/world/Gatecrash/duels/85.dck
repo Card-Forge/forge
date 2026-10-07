@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/WPN_P.Q._-_Road_to_GP_-_Master_Game/Sciamanna_Andrea_-_ZOO_(Modern,_#67685).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Experiment One
+3 Geist of Saint Traft
+2 Ghor-Clan Rampager
+4 Kird Ape
+4 Loam Lion
+4 Tarmogoyf
+3 Wild Nacatl
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+4 Arid Mesa
+1 Blood Crypt
+1 Breeding Pool
+2 Forest
+1 Hallowed Fountain
+2 Marsh Flats
+1 Mountain
+1 Overgrown Tomb
+1 Plains
+1 Sacred Foundry
+3 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Verdant Catacombs
+[Sideboard]
+2 Delay
+2 Kitchen Finks
+2 Pillar of Flame
+2 Rakdos Charm
+3 Spell Pierce
+2 Stony Silence
+1 Sunlance

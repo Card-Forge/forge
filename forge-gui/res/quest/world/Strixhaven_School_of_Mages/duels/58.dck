@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Predicted_-_Golgari_Evolution_(Modern,_#1204307)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Knight of Autumn
+1 Scurry Oak
+1 Blood Artist
+1 Ivy Lane Denizen
+2 Gilded Goose
+2 Geralf's Messenger
+3 Birds of Paradise
+3 Wall of Roots
+4 Young Wolf
+4 Yawgmoth, Thran Physician
+4 Strangleroot Geist
+4 Aether Vial
+4 Chord of Calling
+4 Eldritch Evolution
+1 Grist, the Hunger Tide
+1 Forest
+1 Khalni Garden
+1 Nurturing Peatland
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Temple Garden
+1 Urborg, Tomb of Yawgmoth
+1 Dryad Arbor
+2 Overgrown Tomb
+3 Blooming Marsh
+4 Twilight Mire
+4 Verdant Catacombs
+[Sideboard]
+1 Culling Ritual
+1 Eidolon of Rhetoric
+1 Fulminator Mage
+1 Grand Abolisher
+1 Plague Engineer
+1 Tocatli Honor Guard
+2 Endurance
+2 Force of Vigor
+2 Leyline of Sanctity
+3 Veil of Summer

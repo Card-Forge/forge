@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Aiden_Van_Loo_-_UR_Aggro_(Standard,_#770138).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+3 Crackling Drake
+4 Enigma Drake
+3 Goblin Electromancer
+4 Opt
+4 Radical Idea
+4 Shock
+1 Beacon Bolt
+4 Chart a Course
+1 Lava Coil
+2 Maximize Velocity
+4 Tormenting Voice
+1 Warlord's Fury
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Beacon Bolt
+3 Dire Fleet Daredevil
+2 Disdainful Stroke
+1 Dive Down
+1 Firemind's Research
+3 Lava Coil
+2 Niv-Mizzet, Parun
+2 Ral, Izzet Viceroy

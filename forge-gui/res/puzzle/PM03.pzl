@@ -3,7 +3,7 @@ Name:Puzzling Magic #03 - Critical to Win
 URL:http://www.gatheringmagic.com/puzzling-magic-3-%E2%80%93-critical-to-win/
 Goal:Win
 Turns:1
-Difficulty:Medium
+Difficulty:Uncommon
 [state]
 ActivePlayer=Human
 ActivePhase=Main1

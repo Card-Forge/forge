@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Medium
+Description=Zendikar/Standard_Trial_-_Winter_Games_Fair_2009/Gennadis_Themis_-_Red_Deck_Wins_(Standard,_#3061).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+4 Earthquake
+4 Quenchable Fire
+23 Mountain
+1 Scalding Tarn
+[Sideboard]
+1 Chandra Nalaar
+4 Mark of Mutiny
+4 Runeflare Trap
+2 Valakut, the Molten Pinnacle
+4 Volcanic Fallout

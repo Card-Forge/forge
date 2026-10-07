@@ -3,6 +3,7 @@ package forge.game.card;
 import forge.util.collect.FCollection;
 
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class CardCollection extends FCollection<Card> implements CardCollectionView {
     private static final long serialVersionUID = -8133537013727100275L;
@@ -115,6 +116,10 @@ public class CardCollection extends FCollection<Card> implements CardCollectionV
      */
     public CardCollection(final Iterable<Card> cards) {
         super(cards);
+    }
+
+    public CardCollection(final Stream<Card> cards) {
+        this(cards::iterator);
     }
 
     /**

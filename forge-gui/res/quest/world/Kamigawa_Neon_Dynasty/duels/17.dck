@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Abe_Corrigan_(4th)_-_Mardu_Midrange_(Standard,_#1353082).dck
+Deck Type=constructed
+
+[Main]
+2 Valki, God of Lies
+4 Luminarch Aspirant
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+4 Vanishing Verse
+1 Rip Apart
+2 Humiliate
+2 Showdown of the Skalds
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Lolth, Spider Queen
+4 The Wandering Emperor
+1 Den of the Bugbear
+1 Hive of the Eye Tyrant
+1 Plains
+3 Haunted Ridge
+3 Sundown Pass
+4 Blightstep Pathway
+4 Shattered Sanctum
+4 Needleverge Pathway
+4 Brightclimb Pathway
+[Sideboard]
+1 Showdown of the Skalds
+1 The Meathook Massacre
+1 Go Blank
+1 Check for Traps
+1 Rip Apart
+2 Curse of Shaken Faith
+2 Humiliate
+2 Duress
+4 Ray of Enfeeblement

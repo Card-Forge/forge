@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/Modern_Festival_Prelim_#8418432/Mandark_-_GW_Aggro_(Modern,_#278554).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+4 Spirit Link
+4 Brushland
+1 Forest
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+3 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Choke
+1 Dismember
+2 Gaddock Teeg
+4 Leyline of Sanctity
+3 Nature's Claim
+3 Stony Silence

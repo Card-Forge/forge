@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Easy
+Description=Innistrad/Mistrzostwa_Lodzi_G_n&deg;2/Marcin_Sza&#322;ek_-_Red_Deck_Wins_(Standard,_#22175).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+1 Grim Lavamancer
+2 Hero of Oxid Ridge
+3 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+4 Brimstone Volley
+2 Gut Shot
+2 Incinerate
+3 Volt Charge
+2 Arc Trail
+3 Koth of the Hammer
+19 Mountain
+4 Rootbound Crag
+[Sideboard]
+3 Ancient Grudge
+2 Perilous Myr
+2 Traitorous Blood
+3 Vulshok Refugee

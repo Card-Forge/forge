@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sus Antigoon
+Title=Sus Antigoon
+Icon=Sus Antigoon.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/A22en_-_Grixis_Delver_(Modern,_#771657).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Thing in the Ice
+2 Abrade
+4 Cryptic Command
+4 Lightning Bolt
+2 Logic Knot
+2 Magma Spray
+4 Opt
+1 Remand
+2 Spell Snare
+2 Anger of the Gods
+4 Serum Visions
+2 Blood Moon
+2 Jace, the Mind Sculptor
+2 Flooded Strand
+7 Island
+1 Mountain
+2 Polluted Delta
+4 Scalding Tarn
+1 Spirebluff Canal
+2 Steam Vents
+2 Sulfur Falls
+[Sideboard]
+1 Abrade
+1 Anger of the Gods
+1 Blood Moon
+2 Ceremonious Rejection
+2 Dispel
+2 Negate
+2 Ral, Izzet Viceroy
+2 Relic of Progenitus
+2 Vendilion Clique

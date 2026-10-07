@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/ElbowSoap_-_Dimir_Crime_(Standard,_#1971805).dck
+Deck Type=constructed
+
+[Main]
+4 Conspiracy Unraveler
+1 Ertai Resurrected
+1 Repository Skaab
+1 Fell Stinger
+4 The Modern Age
+4 Atraxa, Grand Unifier
+4 Collector's Vault
+1 Long Goodbye
+4 Reenact the Crime
+1 Cut Down
+2 Go for the Throat
+1 Push // Pull
+1 Virtue of Persistence
+4 Breach the Multiverse
+1 The Cruelty of Gix
+3 Kaito Shizuki
+2 Island
+2 Meticulous Archive
+2 Hedge Maze
+4 Undercity Sewers
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+4 Underground River
+4 Shipwreck Marsh
+1 Swamp
+2 Darkslick Shores
+[Sideboard]
+4 Spell Pierce
+3 Duress
+3 Path of Peril
+2 Cut Down
+1 Kaito, Dancing Shadow
+1 Jace, the Perfected Mind
+1 Malicious Eclipse

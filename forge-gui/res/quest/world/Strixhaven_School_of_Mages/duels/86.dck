@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/DragonFodder_-_Rakdos_Elementals_(Modern,_#1165568).dck
+Deck Type=constructed
+
+[Main]
+2 Flamekin Harbinger
+2 Wild Cantor
+3 Insolent Neonate
+3 Kroxa, Titan of Death's Hunger
+3 Spitebellows
+4 Lightning Skelemental
+4 Stitcher's Supplier
+4 Thunderkin Awakener
+1 The Underworld Cookbook
+2 Fatal Push
+4 Lightning Bolt
+4 Village Rites
+4 Unearth
+2 Mountain
+3 Swamp
+3 Sunbaked Canyon
+4 Blood Crypt
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+1 Kozilek's Return
+1 Anger of the Gods
+2 Baleful Mastery
+2 Blood Moon
+2 Boil
+2 Dragon's Claw
+2 Feed the Swarm
+3 Rakdos Charm

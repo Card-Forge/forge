@@ -1,0 +1,22 @@
+Name:Super-Adaptoid
+ManaCost:2
+Types:Legendary Artifact Creature Robot Villain
+PT:*/2
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of legendary creatures you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME enters or attacks, choose another target creature. If that creature has haste and CARDNAME doesn't, put a haste counter on CARDNAME. Do the same for flying, first strike, double strike, deathtouch, indestructible, lifelink, menace, reach, trample, and vigilance.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters or attacks, choose another target creature. If that creature has haste and CARDNAME doesn't, put a haste counter on CARDNAME. Do the same for flying, first strike, double strike, deathtouch, indestructible, lifelink, menace, reach, trample, and vigilance.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other | ValidTgtsDesc$ another creature | SubAbility$ DBPutCounterHaste
+SVar:DBPutCounterHaste:DB$ PutCounter | Defined$ Self | CounterType$ Haste | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withHaste | ConditionPresent2$ Card.Self+withoutHaste | SubAbility$ DBPutCounterFlying
+SVar:DBPutCounterFlying:DB$ PutCounter | Defined$ Self | CounterType$ Flying | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withFlying | ConditionPresent2$ Card.Self+withoutFlying | SubAbility$ DBPutCounterFirstStrike
+SVar:DBPutCounterFirstStrike:DB$ PutCounter | Defined$ Self | CounterType$ First Strike | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withFirst Strike | ConditionPresent2$ Card.Self+withoutFirst Strike | SubAbility$ DBPutCounterDoubleStrike
+SVar:DBPutCounterDoubleStrike:DB$ PutCounter | Defined$ Self | CounterType$ Double Strike | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withDouble Strike | ConditionPresent2$ Card.Self+withoutDouble Strike | SubAbility$ DBPutCounterDeathtouch
+SVar:DBPutCounterDeathtouch:DB$ PutCounter | Defined$ Self | CounterType$ Deathtouch | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withDeathtouch | ConditionPresent2$ Card.Self+withoutDeathtouch | SubAbility$ DBPutCounterIndestructible
+SVar:DBPutCounterIndestructible:DB$ PutCounter | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withIndestructible | ConditionPresent2$ Card.Self+withoutIndestructible | SubAbility$ DBPutCounterLifelink
+SVar:DBPutCounterLifelink:DB$ PutCounter | Defined$ Self | CounterType$ Lifelink | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withLifelink | ConditionPresent2$ Card.Self+withoutLifelink | SubAbility$ DBPutCounterMenace
+SVar:DBPutCounterMenace:DB$ PutCounter | Defined$ Self | CounterType$ Menace | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withMenace | ConditionPresent2$ Card.Self+withoutMenace | SubAbility$ DBPutCounterReach
+SVar:DBPutCounterReach:DB$ PutCounter | Defined$ Self | CounterType$ Reach | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withReach | ConditionPresent2$ Card.Self+withoutReach | SubAbility$ DBPutCounterTrample
+SVar:DBPutCounterTrample:DB$ PutCounter | Defined$ Self | CounterType$ Trample | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withTrample | ConditionPresent2$ Card.Self+withoutTrample | SubAbility$ DBPutCounterVigilance
+SVar:DBPutCounterVigilance:DB$ PutCounter | Defined$ Self | CounterType$ Vigilance | CounterNum$ 1 | ConditionPresent$ Creature.targetedBy+withVigilance | ConditionPresent2$ Card.Self+withoutVigilance
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+DeckHints:Type$Legendary
+Oracle:Super-Adaptoid's power is equal to the number of legendary creatures you control.\nWhenever Super-Adaptoid enters or attacks, choose another target creature. If that creature has haste and Super-Adaptoid doesn't, put a haste counter on Super-Adaptoid. Do the same for flying, first strike, double strike, deathtouch, indestructible, lifelink, menace, reach, trample, and vigilance.

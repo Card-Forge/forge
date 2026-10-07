@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Guatemala/Roberto_Herrador_-_Rakdos_(Standard,_#517179).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodsoaked Champion
+3 Drana, Liberator of Malakir
+4 Flamewake Phoenix
+4 Hangarback Walker
+2 Kolaghan, the Storm's Fury
+4 Thunderbreak Regent
+2 Zurgo Bellstriker
+2 Complete Disregard
+2 Kolaghan's Command
+3 Murderous Cut
+4 Roast
+2 Self-Inflicted Wound
+2 Blighted Fen
+2 Bloodfell Caves
+4 Bloodstained Mire
+4 Mountain
+2 Polluted Delta
+4 Smoldering Marsh
+4 Swamp
+2 Wooded Foothills
+[Sideboard]
+4 Duress
+4 Foul-Tongue Invocation
+3 Outpost Siege
+4 Radiant Flames

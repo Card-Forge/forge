@@ -1,0 +1,11 @@
+Name:Emil, Vastlands Roamer
+ManaCost:2 G
+Types:Legendary Creature Elf Druid
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Creatures you control with +1/+1 counters on them have trample.
+A:AB$ Token | Cost$ 4 G T | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SubAbility$ DBPutCounter | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of differently named lands you control.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+DeckHas:Ability$Counters
+Oracle:Creatures you control with +1/+1 counters on them have trample.\n{4}{G}, {T}: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of differently named lands you control.

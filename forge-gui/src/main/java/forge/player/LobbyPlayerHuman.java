@@ -8,6 +8,10 @@ import forge.game.player.PlayerController;
 import forge.util.GuiDisplayUtil;
 
 public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactory {
+    private final AutoYieldStore yieldStore = new AutoYieldStore();
+
+    public AutoYieldStore getYieldStore() { return yieldStore; }
+
     public LobbyPlayerHuman(final String name) {
         this(name, -1, -1);
     }

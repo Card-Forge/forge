@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Kangee
+Title=Kangee
+Icon=Kangee.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/1K(ish)_#_Card_Kingdom/Rolf_Ludviksen_-_Mardu_Tokens_(Modern,_#637340).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Grim Lavamancer
+2 Monastery Mentor
+4 Young Pyromancer
+2 Crackling Doom
+1 Kolaghan's Command
+4 Lightning Bolt
+3 Lightning Helix
+1 Path to Exile
+2 Terminate
+1 Zealous Persecution
+1 Dreadbore
+3 Inquisition of Kozilek
+4 Lingering Souls
+3 Painful Truths
+3 Intangible Virtue
+2 Sorin, Solemn Visitor
+1 Blood Crypt
+4 Bloodstained Mire
+1 Ghost Quarter
+1 Godless Shrine
+1 Isolated Chapel
+2 Lavaclaw Reaches
+2 Mountain
+2 Plains
+2 Sacred Foundry
+1 Smoldering Marsh
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Westvale Abbey
+2 Windswept Heath
+[Sideboard]
+3 Crumble to Dust
+2 Radiant Flames
+3 Rest in Peace
+2 Slaughter Games
+1 Stony Silence
+2 Timely Reinforcements

@@ -1,0 +1,6 @@
+Name:The Fabulous Frog-Man
+ManaCost:2 G
+Types:Legendary Creature Human Hero
+PT:3/3
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

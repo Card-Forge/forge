@@ -1,0 +1,5 @@
+Name:Happy Hogan, Dauntless Driver
+ManaCost:R
+Types:Legendary Creature Human Pilot
+PT:2/1
+Oracle:

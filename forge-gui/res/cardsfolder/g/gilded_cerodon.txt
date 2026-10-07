@@ -2,6 +2,6 @@ Name:Gilded Cerodon
 ManaCost:4 R
 Types:Creature Beast
 PT:4/4
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Desert$ True | TriggerDescription$ Whenever CARDNAME attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | PresentZone$ Battlefield,Graveyard | IsPresent$ Desert | PresentPlayer$ You | TriggerDescription$ Whenever CARDNAME attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 Oracle:Whenever Gilded Cerodon attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.

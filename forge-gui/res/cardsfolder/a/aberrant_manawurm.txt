@@ -1,0 +1,10 @@
+Name:Aberrant Manawurm
+ManaCost:3 G
+Types:Creature Wurm
+PT:2/5
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, this creature gets +X/+0 until end of turn, where X is the amount of mana spent to cast that spell.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:TriggeredCard$CastTotalManaSpent
+DeckHints:Type$Instant|Sorcery
+Oracle:Trample\nWhenever you cast an instant or sorcery spell, this creature gets +X/+0 until end of turn, where X is the amount of mana spent to cast that spell.

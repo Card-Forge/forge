@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/DonNando#95587_-_Goblin_(Standard,_#1323583).dck
+Deck Type=constructed
+
+[Main]
+2 Raging Goblin
+2 Goblin Trashmaster
+2 Hall Monitor
+4 Tin Street Cadet
+4 Battle Cry Goblin
+4 Goblin Javelineer
+4 Fireblade Charger
+2 You See a Pair of Goblins
+4 Shock
+4 Roil Eruption
+4 Raid Bombardment
+2 Chandra, Dressed to Kill
+2 Den of the Bugbear
+20 Mountain
+[Sideboard]

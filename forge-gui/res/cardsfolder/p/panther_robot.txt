@@ -1,0 +1,8 @@
+Name:Panther Robot
+ManaCost:10
+Types:Artifact Creature Cat Robot
+PT:8/8
+K:Affinity:Artifact
+K:Reach
+K:Trample
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nReach, trample

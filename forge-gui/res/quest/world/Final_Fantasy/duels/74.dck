@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Montgomery Burns
+Title=Montgomery Burns
+Icon=Montgomery Burns.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/sumimasen_-_Grixis_Control_(Modern,_#2521728).dck
+Deck Type=constructed
+
+[Main]
+3 Orcish Bowmasters
+4 Psychic Frog
+4 Tamiyo, Inquisitive Student
+3 Snapcaster Mage
+1 Bedlam Reveler
+1 Murktide Regent
+2 Sheoldred's Edict
+3 Flame of Anor
+4 Counterspell
+4 Lightning Bolt
+3 Spell Snare
+3 Fatal Push
+1 Force of Negation
+2 Cling to Dust
+1 Raucous Theater
+1 Thundering Falls
+1 Undercity Sewers
+1 Swamp
+1 Island
+2 Steam Vents
+4 Scalding Tarn
+1 Misty Rainforest
+2 Darkslick Shores
+2 Watery Grave
+1 Flooded Strand
+4 Polluted Delta
+1 Spirebluff Canal
+[Sideboard]
+1 Sheoldred's Edict
+4 Consign to Memory
+2 Fire Magic
+2 Surgical Extraction
+1 Kolaghan's Command
+3 Unmoored Ego
+1 Force of Negation
+1 Mystical Dispute

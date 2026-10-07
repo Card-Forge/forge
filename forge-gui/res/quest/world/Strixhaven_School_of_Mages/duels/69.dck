@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=Radagast
+Title=Radagast
+Icon=Radagast.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Massimo_Frediani_-_4c_(Modern,_#1177040).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+1 Klothys, God of Destiny
+2 Snapcaster Mage
+2 Tourach, Dread Cantor
+3 Ice-Fang Coatl
+4 Ignoble Hierarch
+1 Drown in the Loch
+1 Assassin's Trophy
+2 Lightning Bolt
+2 Kolaghan's Command
+2 Force of Negation
+2 Fatal Push
+2 Abrupt Decay
+3 Opt
+4 Expressive Iteration
+1 Jace, the Mind Sculptor
+3 Liliana of the Veil
+1 Volatile Fjord
+1 Ice Tunnel
+1 Steam Vents
+1 Watery Grave
+1 Breeding Pool
+1 Blood Crypt
+1 Rimewood Falls
+1 Overgrown Tomb
+1 Snow-Covered Forest
+1 Stomping Ground
+2 Wooded Foothills
+2 Misty Rainforest
+2 Verdant Catacombs
+2 Polluted Delta
+2 Scalding Tarn
+2 Snow-Covered Swamp
+2 Snow-Covered Island
+[Sideboard]
+1 Damnation
+1 Ashiok, Dream Render
+1 Weather the Storm
+1 Damping Sphere
+1 Engineered Explosives
+2 Tarmogoyf
+2 Veil of Summer
+2 Plague Engineer
+2 Nihil Spellbomb
+2 Hurkyl's Recall

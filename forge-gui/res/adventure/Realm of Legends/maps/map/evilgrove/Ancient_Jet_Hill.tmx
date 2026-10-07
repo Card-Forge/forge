@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="80">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="82">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -34,7 +34,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYECAel4GqgAOYeqYMxBuuEldZwxaQIk/h0LYCuozMAjp08ZsbP5vgOad9UA7N0Dtdeenjf3IwBdohx8Q+yPZBbKX1na/Bpr/BojfQu3ptmRg6LGkvd2dAgwMXUDcLQDha1oxMGhZQdgwu6llP7Z43mSOXS2y3bjcQKtyEZ+9IDux2UuKWwKAZgYCcRCS2cjhgG4vzGxK/fsOaOZ7IP6AIz5h9qazIuzD5V9SQA8wbfUCcZ8AbntBAGYvuXbjU9uApS7GlabI8TMAPNMhIg==
+   eJxjYECAel4GqgAOYeqYMxBuuEldZ1AFiOswMEjoUNdMYvxpDLTTBIu9QyFsBfUZGIT0aWM2Nv83QPPOeqCdG6D2uvPTxn5k4Au0ww+I/ZHsAtlLa7tfA81/A8RvofZ0WzIw9FjS3u5OAQaGLiDuFoDwNa0YGLSsIGyY3dSyH1s8bzLHrhbZblxuoFW5iM9ekJ3Y7CXFLQFAMwOBOAjJbORwQLcXZjal/n0HNPM9EH/AEZ8we9NZEfbh8i8poAeYtnqBuE8At70gALOXXLvxqW3AUhfjSlPk+BkA72wiaA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -47,6 +47,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Wound Reflection|2xm&quot;, &quot;Grave Betrayal|rtr&quot;]}"/>
     <property name="enemy" value="Ihsan's Shade"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -72,9 +74,26 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
 ]</property>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/scroll.tx" x="248" y="86">
+  <object id="79" template="../../../../common/maps/obj/scroll.tx" x="236.333" y="119.333">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jet Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="191.792" y="88.1323">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Grave Betrayal|rtr&quot;]}"/>
+    <property name="enemy" value="Ihsan's Shade"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/shop.tx" x="241" y="85">
+   <properties>
+    <property name="commonShopList" value="ClassicBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

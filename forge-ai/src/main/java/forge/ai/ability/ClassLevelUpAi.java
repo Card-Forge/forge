@@ -28,6 +28,7 @@ public class ClassLevelUpAi extends SpellAbilityAi {
                     continue;
                 }
                 SpellAbility effect = t.ensureAbility();
+                effect.setActivatingPlayer(aiPlayer);
                 if (!SpellApiToAi.Converter.get(effect).doTrigger(aiPlayer, effect, false)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }

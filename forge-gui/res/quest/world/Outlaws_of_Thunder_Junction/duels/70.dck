@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Andrea_Borrelli_-_Grixis_Control_(Modern,_#2025730).dck
+Deck Type=constructed
+
+[Main]
+1 Murktide Regent
+2 Tishana's Tidebinder
+2 Valki, God of Lies
+4 Snapcaster Mage
+1 Force of Negation
+1 Sheoldred's Edict
+4 Flame of Anor
+4 Fatal Push
+4 Lightning Bolt
+4 Counterspell
+1 Damnation
+3 Expressive Iteration
+4 Ancestral Vision
+4 Jace Reawakened
+1 Otawara, Soaring City
+1 Undercity Sewers
+2 Steam Vents
+2 Watery Grave
+2 Thundering Falls
+2 Island
+4 Polluted Delta
+4 Scalding Tarn
+3 Misty Rainforest
+[Sideboard]
+1 Annul
+2 Subtlety
+2 Stern Scolding
+2 Surgical Extraction
+1 Force of Negation
+1 Damnation
+2 Sheoldred's Edict
+1 Tishana's Tidebinder
+1 Kolaghan's Command
+1 Ashiok, Dream Render
+1 Hurkyl's Recall

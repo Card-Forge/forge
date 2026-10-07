@@ -1,0 +1,15 @@
+Name:Captain Marvel, Shooting Star
+ManaCost:5 W W
+Types:Legendary Creature Human Kree Hero
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME enters or attacks, exile up to one target creature. That creature's controller gains life equal to its power.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, exile up to one target creature. That creature's controller gains life equal to its power.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature.
+SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
+T:Mode$ Exiled | Origin$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature other than NICKNAME is exiled from the battlefield, you gain life equal to its power.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ Y
+SVar:X:Targeted$CardPower
+SVar:Y:TriggeredCard$CardPower
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Captain Marvel enters or attacks, exile up to one target creature. That creature's controller gains life equal to its power.\nWhenever a creature other than Captain Marvel is exiled from the battlefield, you gain life equal to its power.

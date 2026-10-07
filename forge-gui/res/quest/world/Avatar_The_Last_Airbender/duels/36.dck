@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/Abe_Kenshu_-_Izzet_Midrange_(Standard,_#2718033).dck
+Deck Type=constructed
+
+[Main]
+4 Thundertrap Trainer
+4 Quantum Riddler
+2 Astrologian's Planisphere
+3 Opt
+4 Torch the Tower
+3 Into the Flood Maw
+2 Get Out
+2 Obliterating Bolt
+4 Splash Portal
+4 Stock Up
+4 Stormchaser's Talent
+1 Frostcliff Siege
+2 Ral, Crackling Wit
+6 Island
+2 Mountain
+4 Spirebluff Canal
+4 Riverpyre Verge
+4 Multiversal Passage
+1 Agna Qel'a
+[Sideboard]
+2 Spell Pierce
+2 Pyroclasm
+2 Disdainful Stroke
+3 Annul
+2 Soul-Guide Lantern
+2 Enduring Curiosity
+2 Spider-Sense

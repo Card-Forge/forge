@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes
+Title=Sherlock Holmes
+Icon=Sherlock Holmes.jpg
+Difficulty=Easy
+Description=Kaladesh/Grand_Prix_Denver_2016_-_Last_Chance_Trial/Vidianto_Wijaya_-_U-W_Flash_(Standard,_#657147).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+1 Elder Deep-Fiend
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+4 Smuggler's Copter
+1 Negate
+1 Declaration in Stone
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+10 Plains
+4 Port Town
+4 Prairie Stream
+1 Westvale Abbey
+[Sideboard]
+1 Blessed Alliance
+1 Ceremonious Rejection
+1 Declaration in Stone
+2 Fragmentize
+2 Fumigate
+2 Jace, Unraveler of Secrets
+1 Linvala, the Preserver
+1 Skysovereign, Consul Flagship
+3 Spell Shrivel
+1 Void Shatter

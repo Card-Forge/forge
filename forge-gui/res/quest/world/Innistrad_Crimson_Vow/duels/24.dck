@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/AdamAntMTG_-_Dimir_Tempo_(Standard,_#1257612).dck
+Deck Type=constructed
+
+[Main]
+4 Spectral Adversary
+4 Concealing Curtains
+4 Suspicious Stowaway
+4 Graveyard Trespasser
+4 Delver of Secrets
+1 Power Word Kill
+1 Baleful Mastery
+2 Test of Talents
+2 Infernal Grasp
+2 Silundi Vision
+2 Beyeen Veil
+2 Consider
+2 Fading Hope
+3 Behold the Multiverse
+4 Malakir Rebirth
+4 Jwari Disruption
+1 Bloodchief's Thirst
+4 Agadeem's Awakening
+2 Island
+4 Shipwreck Marsh
+4 Clearwater Pathway
+[Sideboard]
+1 Shadows' Verdict
+1 Soul Shatter
+1 Test of Talents
+2 Duress
+2 Go Blank
+2 Tempted by the Oriq
+3 Ray of Enfeeblement
+3 Ray of Frost

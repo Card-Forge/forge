@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/Grand_Prix_trial_Santiago_La_Comarca_store_Arica/David_Munita_-_Goblins_(Modern,_#638202).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+4 Goblin Bushwhacker
+4 Goblin Guide
+3 Goblin Piledriver
+3 Goblin Wardriver
+2 Intimidator Initiate
+4 Mogg War Marshal
+4 Reckless Bushwhacker
+3 Lightning Bolt
+4 Dragon Fodder
+2 Goblin Grenade
+3 Krenko's Command
+2 Blood Moon
+18 Mountain
+[Sideboard]
+2 Flames of the Blood Hand
+1 Goblin Kaboomist
+2 Outpost Siege
+1 Savage Alliance
+3 Scab-Clan Berserker
+2 Skullcrack
+1 Smash to Smithereens

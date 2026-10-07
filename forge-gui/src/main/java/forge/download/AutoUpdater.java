@@ -1,6 +1,5 @@
 package forge.download;
 
-import com.google.common.collect.ImmutableList;
 import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadZipService;
 import forge.gui.util.SOptionPane;
@@ -39,18 +38,16 @@ public class AutoUpdater {
     private String packageUrl;
     private String packagePath;
     private String buildDate = "";
-    private String snapsBuildDate = "";
+    private Date snapsBuildDate;
 
     public AutoUpdater(boolean loading) {
-        // What do I need? Preferences? Splashscreen? UI? Skins?
         isLoading = loading;
         updateChannel = FModel.getPreferences().getPref(ForgePreferences.FPref.AUTO_UPDATE);
         buildVersion = BuildInfo.getVersionString();
     }
 
-    public boolean updateAvailable() {
-        // TODO Check if an update is available, and add a UI element to notify the user.
-        return verifyUpdateable();
+    public Date getSnapsBuildDate() {
+        return snapsBuildDate;
     }
 
     public boolean attemptToUpdate(CompletableFuture<String> cf) {
@@ -61,7 +58,7 @@ public class AutoUpdater {
             if (downloadUpdate(cf)) {
                 extractAndRestart();
             }
-        } catch(IOException | URISyntaxException | ExecutionException | InterruptedException e) {
+        } catch (IOException | URISyntaxException | ExecutionException | InterruptedException e) {
             return false;
         }
         return true;
@@ -72,7 +69,7 @@ public class AutoUpdater {
         restartForge();
     }
 
-    private boolean verifyUpdateable() {
+    public boolean verifyUpdateable() {
         if (buildVersion.contains("GIT")) {
             //return false;
         }
@@ -82,7 +79,7 @@ public class AutoUpdater {
             return false;
         } else if (updateChannel.equals("none")) {
             String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
-            List<String> options = ImmutableList.of(localizer.getMessageorUseDefault("lblCancel", "Cancel"), localizer.getMessageorUseDefault("lblRelease", "Release"), localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"));
+            List<String> options = List.of(localizer.getMessageorUseDefault("lblCancel", "Cancel"), localizer.getMessageorUseDefault("lblRelease", "Release"), localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"));
             int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
             if (option < 1) {
                 return false;
@@ -105,7 +102,6 @@ public class AutoUpdater {
             versionUrlString = RELEASE_URL + "forge/forge-gui-desktop/version.txt";
         }
 
-        // Check the internet connection
         if (!testNetConnection()) {
             return false;
         }
@@ -115,8 +111,16 @@ public class AutoUpdater {
     }
 
     private boolean testNetConnection() {
+        // test against the host updates are actually fetched from;
+        // releases.cardforge.org is no longer reachable and blocked all updates
+        String host;
+        try {
+            host = new URL(versionUrlString).getHost();
+        } catch (MalformedURLException e) {
+            host = "github.com";
+        }
         try (Socket socket = new Socket()) {
-            InetSocketAddress address = new InetSocketAddress("releases.cardforge.org", 443);
+            InetSocketAddress address = new InetSocketAddress(host, 443);
             socket.connect(address, 1000);
             return true;
         } catch (IOException e) {
@@ -130,21 +134,19 @@ public class AutoUpdater {
             if (buildVersion.contains("SNAPSHOT")) {
                 URL url = new URL(GITHUB_SNAPSHOT_URL + "build.txt");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
-                snapsBuildDate = snapsTimestamp.toString();
+                snapsBuildDate = simpleDateFormat.parse(FileUtil.readFileToString(url));
                 buildDate = BuildInfo.getTimestamp().toString();
-                return BuildInfo.verifyTimestamp(snapsTimestamp);
+                return BuildInfo.verifyTimestamp(snapsBuildDate);
             }
             if (StringUtils.isEmpty(version) ) {
                 return false;
             }
-
             if (buildVersion.equals(version)) {
                 return false;
             }
         }
         catch (Exception e) {
-            SOptionPane.showOptionDialog(e.getMessage(), localizer.getMessage("lblError"), null, ImmutableList.of("Ok"));
+            SOptionPane.showOptionDialog(e.getMessage(), localizer.getMessage("lblError"), null, List.of("Ok"));
             return false;
         }
         // If version doesn't match, it's assummably newer.
@@ -184,11 +186,11 @@ public class AutoUpdater {
             // splashScreen.prepareForDialogs();
             return downloadFromBrowser();
         }
-        String logs = snapsBuildDate.isEmpty() ? "" : cf.get();
-        String v = snapsBuildDate.isEmpty() ? version : version + TextUtil.enclosedParen(snapsBuildDate);
+        String logs = snapsBuildDate == null ? "" : cf.get();
+        String v = snapsBuildDate == null ? version : version + TextUtil.enclosedParen(snapsBuildDate.toString());
         String b = buildDate.isEmpty() ? buildVersion : buildVersion + TextUtil.enclosedParen(buildDate);
         String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", v, b) + logs;
-        final List<String> options = ImmutableList.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
+        final List<String> options = List.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
         if (SOptionPane.showOptionDialog(message, localizer.getMessage("lblNewVersionAvailable"), null, options, 0) == 0) {
             return downloadFromForge();
         }
@@ -230,7 +232,7 @@ public class AutoUpdater {
         return false;
     }
     private void restartAndUpdate(String packagePath) {
-        if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, ImmutableList.of(localizer.getMessage("lblOK")), 0) == 0) {
+        if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, List.of(localizer.getMessage("lblOK")), 0) == 0) {
             final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             if (desktop != null) {
                 try {

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Pinky and the Brain
+Title=Pinky and the Brain
+Icon=Pinky and the Brain.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_-_Rockville,_MD/Kimuel_Villanova_-_Mono-Green_Aggro_(Modern,_#640115).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avatar of the Resolute
+4 Boggart Ram-Gang
+4 Dryad Militant
+4 Experiment One
+3 Kessig Prowler
+1 Leatherback Baloth
+2 Scavenging Ooze
+4 Strangleroot Geist
+4 Aspect of Hydra
+3 Dismember
+4 Vines of Vastwood
+4 Rancor
+21 Forest
+[Sideboard]
+1 Choke
+3 Collected Company
+2 Deglamer
+2 Dungrove Elder
+2 Feed the Clan
+2 Guttural Response
+1 Pithing Needle
+2 Relic of Progenitus

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/GabbaAndrewTeam_-_Simic_Ramp_(Modern,_#2287062).dck
+Deck Type=constructed
+
+[Main]
+4 Oracle of Tragedy
+4 Psychic Frog
+1 Valgavoth, Terror Eater
+1 Kiora, the Rising Tide
+1 Griselbrand
+3 The One Ring
+4 Flare of Denial
+2 Spell Snare
+4 Malevolent Rumble
+2 Thoughtseize
+4 Preordain
+3 Traverse the Ulvenwald
+3 Omniscience
+2 Karn, the Great Creator
+2 Island
+1 Forest
+1 Hedge Maze
+1 Underground Mortuary
+3 Shifting Woodland
+1 Cephalid Coliseum
+4 Polluted Delta
+4 Misty Rainforest
+1 Overgrown Tomb
+1 Watery Grave
+1 Breeding Pool
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+[Sideboard]
+2 Haywire Mite
+1 The One Ring
+3 Consign to Memory
+3 Into the Flood Maw
+1 Spell Snare
+1 Pithing Needle
+2 Tormod's Crypt
+1 Ancestral Statue
+1 Aetherflux Reservoir

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/FishyPhysics_-_Izzet_Spellslingers_(Standard,_#2453475).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+2 Drake Hatcher
+4 Cori-Steel Cutter
+2 Spell Pierce
+4 Burst Lightning
+2 Opt
+4 Monstrous Rage
+1 Dreadmaw's Ire
+1 Into the Flood Maw
+4 Sleight of Hand
+4 Stock Up
+4 Stormchaser's Talent
+4 Island
+4 Mountain
+4 Shivan Reef
+4 Spirebluff Canal
+4 Riverpyre Verge
+[Sideboard]
+2 Pyroclasm
+1 Spell Pierce
+2 Abrade
+2 Lithomantic Barrage
+2 Torch the Tower
+1 Into the Flood Maw
+2 Sunspine Lynx
+3 Ghost Vacuum

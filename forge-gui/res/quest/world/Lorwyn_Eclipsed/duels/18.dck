@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Christopher_Medina_-_Izzet_Elementals_(Standard,_#2823702).dck
+Deck Type=constructed
+
+[Main]
+4 Ashling, Rekindled
+4 Roaming Throne
+4 Sunderflock
+4 Vibrance
+4 Wistfulness
+3 Deceit
+2 Flamebraider
+4 Bounce Off
+2 Sear
+4 Winternight Stories
+4 Cavern of Souls
+4 Secluded Courtyard
+4 Starting Town
+4 Steam Vents
+3 Breeding Pool
+1 Cori Mountain Monastery
+1 Eclipsed Realms
+1 Island
+1 Pit of Offerings
+1 Spirebluff Canal
+1 Thundering Falls
+[Sideboard]
+3 Pyroclasm
+3 Spell Snare
+2 Sear
+2 Soul-Guide Lantern
+1 Deceit
+1 Disdainful Stroke
+1 Pit of Offerings
+1 Spider-Sense
+1 The Unagi of Kyoshi Island

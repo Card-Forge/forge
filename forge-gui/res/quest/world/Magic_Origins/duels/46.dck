@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Regionals_Bellevue/Adam_McKibben_-_Jeskai_Combo_(Standard,_#309694).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Jace, Vryn's Prodigy
+3 Soulfire Grand Master
+1 Lightning Strike
+2 Ojutai's Command
+3 Raise the Alarm
+1 Secure the Wastes
+4 Stoke the Flames
+1 Valorous Stance
+4 Wild Slash
+1 Dragon Fodder
+4 Hordeling Outburst
+4 Treasure Cruise
+4 Jeskai Ascendancy
+3 Battlefield Forge
+3 Flooded Strand
+2 Island
+2 Mountain
+4 Mystic Monastery
+1 Plains
+3 Shivan Reef
+2 Temple of Epiphany
+4 Temple of Triumph
+[Sideboard]
+3 Anger of the Gods
+3 Disdainful Stroke
+1 Dragonlord Ojutai
+1 Erase
+2 Negate
+3 Sphinx's Tutelage

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Easy
+Description=Aether_Revolt/BeReborn_-_BG_Constrictor_(Standard,_#668674).dck
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+4 Grim Flayer
+4 Rishkar, Peema Renegade
+1 Tireless Tracker
+4 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+4 Fatal Push
+4 Grasp of Darkness
+2 Murder
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+6 Forest
+3 Hissing Quagmire
+4 Swamp
+[Sideboard]
+1 Harsh Scrutiny
+2 Lifecrafter's Bestiary
+1 Murder
+2 Natural State
+2 Nissa, Vital Force
+1 Ob Nixilis Reignited
+1 Skysovereign, Consul Flagship
+3 Tireless Tracker
+2 Transgress the Mind

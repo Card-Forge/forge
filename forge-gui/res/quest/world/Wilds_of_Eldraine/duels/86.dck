@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Murae_Ryuji_-_Grixis_Shadow_(Modern,_#1744154).dck
+Deck Type=constructed
+
+[Main]
+4 Death's Shadow
+2 Murktide Regent
+4 Grief
+3 Fury
+4 Ragavan, Nimble Pilferer
+2 Orcish Bowmasters
+2 Fatal Push
+1 Terminate
+2 Counterspell
+2 Drown in the Loch
+3 Unholy Heat
+4 Not Dead After All
+4 Thoughtseize
+4 Expressive Iteration
+1 Island
+1 Swamp
+2 Blood Crypt
+2 Watery Grave
+2 Steam Vents
+4 Bloodstained Mire
+4 Polluted Delta
+3 Scalding Tarn
+[Sideboard]
+1 Terminate
+1 Kolaghan's Command
+2 Engineered Explosives
+1 Chalice of the Void
+1 Alpine Moon
+1 Flusterstorm
+1 Dress Down
+3 Fable of the Mirror-Breaker
+1 Stern Scolding
+1 Orcish Bowmasters
+1 Cast into the Fire
+1 Stone of Erech

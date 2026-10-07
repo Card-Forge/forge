@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/AGrizzlyBear_-_Mardu_Angels_(Standard,_#1515162).dck
+Deck Type=constructed
+
+[Main]
+1 Ao, the Dawn Sky
+1 Steel Seraph
+1 Sanctuary Warden
+2 Giada, Font of Hope
+3 Sheoldred, the Apocalypse
+4 Archangel of Wrath
+4 Fable of the Mirror-Breaker
+4 Inspiring Overseer
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+1 Go for the Throat
+3 Go for the Throat
+1 Brotherhood's End
+1 Gix's Command
+1 Soul Transfer
+1 The Wandering Emperor
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+4 Caves of Koilos
+4 Haunted Ridge
+4 Battlefield Forge
+4 Sundown Pass
+4 Sulfurous Springs
+4 Shattered Sanctum
+[Sideboard]
+1 Abrade
+1 Destroy Evil
+1 Giada, Font of Hope
+1 Brotherhood's End
+1 Reckoner Bankbuster
+2 Anointed Peacekeeper
+2 Unlicensed Hearse
+3 Duress
+3 Lantern of the Lost

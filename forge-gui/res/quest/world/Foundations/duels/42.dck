@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Chris_K_-_Dimir_Midrange_(Standard,_#2275763).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+3 Enduring Curiosity
+4 Faerie Mastermind
+1 Gix, Yawgmoth Praetor
+1 Mockingbird
+3 Preacher of the Schism
+1 Sheoldred, the Apocalypse
+4 Spyglass Siren
+2 Anoint with Affliction
+3 Cut Down
+4 Go for the Throat
+1 Phantom Interference
+2 Three Steps Ahead
+2 Kaito, Bane of Nightmares
+4 Darkslick Shores
+2 Fountainport
+4 Gloomlake Verge
+4 Island
+4 Restless Reef
+3 Swamp
+4 Underground River
+[Sideboard]
+1 Cut Down
+1 Disfigure
+3 Duress
+2 Flashfreeze
+1 Ghost Vacuum
+1 Gix's Command
+3 Kaito, Cunning Infiltrator
+2 Malicious Eclipse
+1 Negate

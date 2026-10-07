@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Franco_Allieri_-_Esper_Midrange_(Standard,_#1376800).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+3 Tenacious Underdog
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+2 Infernal Grasp
+2 Vanishing Verse
+3 Void Rend
+1 Emeria's Call
+1 Farewell
+2 Doomskar
+2 The Meathook Massacre
+3 Wedding Announcement
+1 Lolth, Spider Queen
+3 Kaito Shizuki
+3 The Wandering Emperor
+1 Hive of the Eye Tyrant
+1 Eiganjo, Seat of the Empire
+1 Island
+1 Swamp
+2 Plains
+2 Hengegate Pathway
+2 Deserted Beach
+2 Shattered Sanctum
+3 Brightclimb Pathway
+3 Raffine's Tower
+3 Shipwreck Marsh
+4 Clearwater Pathway
+[Sideboard]
+1 The Meathook Massacre
+1 Vanishing Verse
+2 Go Blank
+2 Ray of Enfeeblement
+2 Duress
+2 Archon of Emeria
+2 Negate
+3 Legion Angel

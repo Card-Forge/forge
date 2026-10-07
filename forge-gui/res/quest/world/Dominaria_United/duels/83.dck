@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Itoh_Shinya_-_Green_Food_(Modern,_#1452584).dck
+Deck Type=constructed
+
+[Main]
+4 Ovalchase Daredevil
+4 Gilded Goose
+4 Cauldron Familiar
+4 Street Wraith
+4 Asmoranomardicadaistinaculdacar
+1 Shadowspear
+4 The Underworld Cookbook
+4 Witch's Oven
+4 Finale of Devastation
+4 Trail of Crumbs
+4 Urza's Saga
+1 Grist, the Hunger Tide
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+1 Yavimaya, Cradle of Growth
+1 Swamp
+2 Forest
+4 Blooming Marsh
+4 Verdant Catacombs
+4 Overgrown Tomb
+[Sideboard]
+1 Grist, the Hunger Tide
+1 Wicked Wolf
+1 Nihil Spellbomb
+2 Shriekmaw
+2 Endurance
+2 Necromentia
+3 Tear Asunder
+3 Thoughtseize

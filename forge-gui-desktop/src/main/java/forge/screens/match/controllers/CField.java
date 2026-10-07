@@ -138,6 +138,7 @@ public class CField implements ICDoc {
 
     @Override
     public void update() {
+        view.updateTabLabel();
     }
 
 }

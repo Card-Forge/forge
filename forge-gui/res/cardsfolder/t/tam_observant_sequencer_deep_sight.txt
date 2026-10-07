@@ -1,0 +1,17 @@
+Name:Tam, Observant Sequencer
+ManaCost:2 G U
+Types:Legendary Creature Gorgon Wizard
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPrepare | TriggerDescription$ Landfall — Whenever a land you control enters, NICKNAME becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Landfall — Whenever a land you control enters, Tam becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Deep Sight
+ManaCost:G U
+Types:Sorcery
+A:SP$ Draw | SubAbility$ DBGainLife | SpellDescription$ You draw a card and gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:You draw a card and gain 1 life.

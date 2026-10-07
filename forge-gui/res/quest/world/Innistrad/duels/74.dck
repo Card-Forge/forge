@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Platinum_TCQ_-_Pastimes_-_10-28-12/BryanCostello_-_Red_Deck_Wins_(Modern,_#39990).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Grim Lavamancer
+4 Hellspark Elemental
+4 Keldon Marauders
+3 Flames of the Blood Hand
+4 Lightning Bolt
+3 Searing Blaze
+3 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+8 Mountain
+[Sideboard]
+4 Dragon's Claw
+3 Leyline of Punishment
+1 Rain of Gore
+3 Smash to Smithereens
+3 Volcanic Fallout

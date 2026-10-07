@@ -25,6 +25,8 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.ICardFace;
+import forge.card.CardSplitType;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -40,6 +42,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -126,7 +129,7 @@ public final class CardUtil {
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, controller, src, ctb);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellCardsCastThisTurn(), valid, controller, src, ctb);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
@@ -168,7 +171,7 @@ public final class CardUtil {
             if ((combinedColor & color) == 0) {
                 continue;
             }
-            for (final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
+            for (final Card c : game.getColoredCardsInPlay(color)) {
                 if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, targetSA)) {
                     res.add(c);
                 }
@@ -367,13 +370,13 @@ public final class CardUtil {
     // parameters for target selection.
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
-    public static List<Card> getValidCardsToTarget(final SpellAbility ability) {
+    public static CardCollection getValidCardsToTarget(final SpellAbility ability) {
         final TargetRestrictions tgt = ability.getTargetRestrictions();
         final Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
-        List<Card> choices = CardLists.getTargetableCards(game.getCardsIn(zone), ability);
+        CardCollection choices = CardLists.getTargetableCards(game.getCardsIn(zone), ability);
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
@@ -388,5 +391,23 @@ public final class CardUtil {
         choices.removeAll(targeted);
 
         return choices;
+    }
+
+    public static void turnToRightFace(String faceName, Card forgeCard) {
+        if (!forgeCard.getName().equals(faceName)) {
+            if (forgeCard.getRules().getSplitType().equals(CardSplitType.Specialize)) {
+                for (Map.Entry<CardStateName, ICardFace> e : forgeCard.getRules().getSpecializeParts().entrySet()) {
+                    if (faceName.equals(e.getValue().getName())) {
+                        forgeCard.changeToState(e.getKey());
+                        return;
+                    }
+                }
+            } else {
+                forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
+                if (forgeCard.getCurrentStateName().equals(CardStateName.Backside)) {
+                    forgeCard.setBackSide(true);
+                }
+            }
+        }
     }
 }

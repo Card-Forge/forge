@@ -1,8 +1,10 @@
 package forge.game;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventSnapshotRestored;
@@ -13,7 +15,9 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.Collections;
@@ -86,6 +90,12 @@ public class GameSnapshot {
         for (Player p : fromGame.getPlayers()) {
             Player toPlayer = findBy(toGame, p);
             p.copyCommandersToSnapshot(toPlayer, c -> findBy(toGame, c));
+            if (!restore) {
+                // Only wire these while storing: an effect card created after the
+                // snapshot was taken has no counterpart to map on the way back, and
+                // blanking the field there would make the lazy getter build a duplicate.
+                p.copyEffectCardsToSnapshot(toPlayer, c -> findBy(toGame, c));
+            }
             ((PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         toGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -174,7 +184,7 @@ public class GameSnapshot {
         newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
         newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
         newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-        newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+        newPlayer.setCounters(HashMultiset.create(origPlayer.getCounters()));
         newPlayer.setBlessing(origPlayer.hasBlessing(), null);
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
@@ -196,7 +206,7 @@ public class GameSnapshot {
         Game toGame = toPlayer.getGame();
         toPlayer.getManaPool().resetPool();
         for (Mana m : fromPlayer.getManaPool()) {
-            toPlayer.getManaPool().addMana(copyMana(m, toGame, toPlayer), false);
+            toPlayer.getManaPool().addManaNoEvent(copyMana(m, toGame, toPlayer));
         }
         toPlayer.updateManaForView();
     }
@@ -275,6 +285,11 @@ public class GameSnapshot {
     public void copyGameState(Game fromGame, Game toGame) {
         toGame.setAge(fromGame.getAge());
         toGame.dangerouslySetTimestamp(fromGame.getTimestamp());
+        if (!restore) {
+            // Card copies keep their original ids, so the fresh-id counters have to
+            // move with them or ids handed out later would collide.
+            toGame.dangerouslySyncCardIdCounters(fromGame);
+        }
 
         // TODO countersAddedThisTurn
 
@@ -296,12 +311,13 @@ public class GameSnapshot {
 
         List<UnorderedEntities> unorderedEntities = Lists.newArrayList();
 
-        for(Card fromCard : fromGame.getCardsInGame()) {
-            Card newCard = toGame.findById(fromCard.getId());
+        for(Card fromCard : getCardsToCopy(fromGame)) {
+            Card newCard = findCardById(toGame, fromCard.getId());
             Player toPlayer = findBy(toGame, fromCard.getController());
             ZoneType fromType = fromCard.getZone().getZoneType();
+
             int zonePosition = 0;
-            if (ZoneType.ORDERED_ZONES.contains(fromType)) {
+            if (fromType.isOrdered()) {
                 // If the card is in an ordered zone, we need to find its position in the zone
                 // and set it in the new game.
                 zonePosition = fromCard.getZone().getCards().indexOf(fromCard);
@@ -321,7 +337,7 @@ public class GameSnapshot {
                 }
             }
 
-            if (zonePosition == 0) {
+            if (!fromType.isOrdered()) {
                 setCardInCopiedGame(toGame, toPlayer, fromCard, newCard, fromType, zonePosition);
             } else {
                 // stash this info
@@ -332,6 +348,19 @@ public class GameSnapshot {
         Collections.sort(unorderedEntities);
         for(UnorderedEntities ue : unorderedEntities) {
             setCardInCopiedGame(toGame, ue.toPlayer, ue.fromCard, ue.newCard, ue.fromType, ue.zonePosition);
+        }
+
+        // Cards that exist in the game being restored but not in the snapshot: tokens,
+        // copies and effect cards created after it was taken. There is no earlier state to
+        // put them back into, so they leave the game. Without this the loop below looks
+        // them up in the snapshot and dereferences the null it gets back.
+        for (Card extraCard : toGame.getCardsInGame()) {
+            if (fromGame.findById(extraCard.getId()) == null) {
+                Zone zone = extraCard.getZone();
+                if (zone != null) {
+                    zone.remove(extraCard);
+                }
+            }
         }
 
         // This loop happens later to make sure all cards are in the correct zone first
@@ -346,6 +375,10 @@ public class GameSnapshot {
                     newAttachedTo.addAttachedCard(newCard);
                 }
             }
+            // Melded or not, the front half has to point at what the snapshot had — the two
+            // halves are one permanent, and a stale link outlives the meld otherwise.
+            newCard.setMeldedWith(fromCard.getMeldedWith() == null ? null
+                    : toGame.findById(fromCard.getMeldedWith().getId()));
             if (fromCard.getCloneOrigin() != null) {
                 newCard.setCloneOrigin(toGame.findById(fromCard.getCloneOrigin().getId()));
             }
@@ -361,8 +394,54 @@ public class GameSnapshot {
             if (fromCard.getCopiedPermanent() != null) {
                 newCard.setCopiedPermanent(toGame.findById(fromCard.getCopiedPermanent().getId()));
             }
+            if (fromCard.hasMergedCard()) {
+                // Without this the copied Merged zone cards would sit orphaned, and a
+                // commander mutated under this permanent would look like it left the game.
+                CardCollection mergedCards = new CardCollection();
+                for (Card fromMerged : fromCard.getMergedCards()) {
+                    Card newMerged = findCardById(toGame, fromMerged.getId());
+                    if (newMerged == null) {
+                        continue;
+                    }
+                    if (newMerged != newCard) {
+                        newMerged.setMergedToCard(newCard);
+                    }
+                    mergedCards.add(newMerged);
+                }
+                if (!mergedCards.isEmpty()) {
+                    newCard.setMergedCards(mergedCards);
+                }
+            }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
+    }
+
+    private static CardCollectionView getCardsToCopy(Game game) {
+        CardCollection cards = new CardCollection(game.getCardsInGame());
+        for (Player p : game.getPlayers()) {
+            cards.addAll(p.getZone(ZoneType.Merged).getCards());
+        }
+        return cards;
+    }
+
+    private static Card findCardById(Game game, int id) {
+        Card found = game.findById(id);
+        if (found != null) {
+            return found;
+        }
+        for (Player p : game.getPlayers()) {
+            for (Card c : p.getZone(ZoneType.Merged).getCards()) {
+                if (c.getId() == id) {
+                    return c;
+                }
+            }
+            for (Card c : ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).getMeldedCards()) {
+                if (c.getId() == id) {
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
@@ -372,13 +451,39 @@ public class GameSnapshot {
     }
 
     private void setCardInCopiedGame(Game toGame, Player toPlayer, Card fromCard, Card newCard, ZoneType fromType, int zonePosition) {
-        // Things should be sorted before getting here, so don't try to put it into its zone position
-        //System.out.println("Setting card " + newCard + " at position " + zonePosition + " in " + toPlayer + "'s "+ fromType);
+        // We sorted above, but still need to enforce the order when adding to the zone.
+        // The add() method will put it at the end of the list otherwise
         if (fromType.equals(ZoneType.Stack)) {
             toGame.getStackZone().add(newCard);
             newCard.setZone(toGame.getStackZone());
+        } else if (isMelded(fromCard)) {
+            // The back half of a meld lives in the battlefield zone but in its own
+            // collection rather than the card list. Putting it in the list instead would
+            // leave it on the battlefield as a permanent of its own.
+            PlayerZoneBattlefield battlefield = (PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield);
+            if (newCard.getZone() == null) {
+                newCard.setZone(battlefield);
+            }
+            battlefield.addToMelded(newCard);
         } else {
-            toPlayer.getZone(fromType).add(newCard);
+            // It may have been melded in the state we are leaving behind.
+            if (toPlayer.getZone(ZoneType.Battlefield) instanceof PlayerZoneBattlefield battlefield) {
+                battlefield.removeFromMelded(newCard);
+            }
+
+            if (fromType.isOrdered()) {
+                PlayerZone zone = toPlayer.getZone(fromType);
+                if (zonePosition < 0) {
+                    zonePosition = 0;
+                } else if (zonePosition > zone.size()) {
+                    zonePosition = zone.size();
+                }
+
+                toPlayer.getZone(fromType).add(newCard, zonePosition);
+            } else {
+                toPlayer.getZone(fromType).add(newCard);
+            }
+
             newCard.setZone(toPlayer.getZone(fromType));
         }
 
@@ -391,7 +496,14 @@ public class GameSnapshot {
         newCard.setSickness(fromCard.hasSickness());
         //newCard.setForetold(fromCard.isForetold());
         //newCard.setForetoldCostByEffect(fromCard.isForetoldCostByEffect());
+        newCard.setBackSide(fromCard.isBackSide());
         newCard.setState(fromCard.getCurrentStateName(), false);
+    }
+
+    /** The back half of a meld: on the battlefield, but held apart from its card list. */
+    private static boolean isMelded(Card c) {
+        return c.getZone() instanceof PlayerZoneBattlefield battlefield
+                && battlefield.getMeldedCards().contains(c);
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
@@ -453,7 +565,7 @@ public class GameSnapshot {
     }
 
     private Card findBy(Game toGame, Card fromCard) {
-        return toGame.findById(fromCard.getId());
+        return findCardById(toGame, fromCard.getId());
     }
 
     private Player findBy(Game toGame, Player fromPlayer) {

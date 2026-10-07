@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Standard_Open_Edison/Linda_Wang_-_GR_Aggro_(Standard,_#45179).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Dryad Militant
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Gore-House Chainwalker
+2 Legion Loyalist
+4 Lightning Mauler
+4 Searing Spear
+4 Rancor
+9 Forest
+5 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+3 Mark of Mutiny
+4 Skullcrack
+4 Volcanic Strength
+4 Wasteland Viper

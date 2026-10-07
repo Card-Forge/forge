@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Kyle_Gonzales_-_Dimir_Enchantments_(Standard,_#2381171).dck
+Deck Type=constructed
+
+[Main]
+4 Entity Tracker
+1 Ertai Resurrected
+4 Fear of Isolation
+2 Oildeep Gearhulk
+1 Blot Out
+1 Shoot the Sheriff
+2 Spell Pierce
+4 This Town Ain't Big Enough
+1 Defiled Crypt // Cadaver Lab
+4 Hopeless Nightmare
+2 Momentum Breaker
+4 Nowhere to Run
+4 Stormchaser's Talent
+1 Tinybones Joins Up
+4 Darkslick Shores
+4 Gloomlake Verge
+4 Island
+3 Restless Reef
+4 Swamp
+2 Undercity Sewers
+4 Underground River
+[Sideboard]
+1 Blot Out
+2 Cut Down
+1 Deadly Cover-Up
+1 Defiled Crypt // Cadaver Lab
+2 Duress
+1 Get Out
+2 Intimidation Tactics
+1 Malicious Eclipse
+1 Oildeep Gearhulk
+1 The Witch's Vanity
+2 Tishana's Tidebinder

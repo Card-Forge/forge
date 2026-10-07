@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/Abrupt_Magic/Christopher_Minkov_-_Mardu_Midrange_(Standard,_#163203).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Butcher of the Horde
+4 Goblin Rabblemaster
+4 Seeker of the Way
+2 Wingmate Roc
+4 Crackling Doom
+3 Lightning Strike
+2 Magma Jet
+1 Murderous Cut
+4 Hordeling Outburst
+3 Chained to the Rocks
+2 Sarkhan, the Dragonspeaker
+2 Sorin, Solemn Visitor
+3 Battlefield Forge
+4 Bloodstained Mire
+2 Caves of Koilos
+5 Mountain
+4 Nomad Outpost
+2 Swamp
+2 Temple of Silence
+3 Temple of Triumph
+[Sideboard]
+2 Anger of the Gods
+1 Chandra, Pyromaster
+2 Elspeth, Sun's Champion
+2 End Hostilities
+1 Erase
+1 Glare of Heresy
+1 Hushwing Gryff
+2 Read the Bones
+3 Thoughtseize

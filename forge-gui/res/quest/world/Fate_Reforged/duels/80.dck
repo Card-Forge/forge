@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/Modern_Daily_#8046396/OffHisGame_-_Dredge_(Modern,_#192522).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Birds of Paradise
+4 Gravecrawler
+3 Gurmag Angler
+4 Hedron Crab
+4 Lotleth Troll
+2 Rotting Rats
+1 Skaab Ruinator
+2 Tasigur, the Golden Fang
+4 Vengevine
+2 Abrupt Decay
+4 Grisly Salvage
+1 Murderous Cut
+4 Glimpse the Unthinkable
+1 Tracker's Instincts
+2 Breeding Pool
+2 Forest
+1 Island
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Polluted Delta
+2 Swamp
+4 Verdant Catacombs
+2 Watery Grave
+[Sideboard]
+1 Creeping Corrosion
+1 Damnation
+2 Darkblast
+2 Deglamer
+2 Gnaw to the Bone
+1 Golgari Charm
+1 Stubborn Denial
+3 Thoughtseize

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Alessio_Magris_-_Infect_(Modern,_#1499882).dck
+Deck Type=constructed
+
+[Main]
+4 Phyrexian Crusader
+4 Blighted Agent
+4 Noble Hierarch
+4 Ignoble Hierarch
+4 Glistener Elf
+3 Spell Pierce
+3 Mutagenic Growth
+3 Blossoming Defense
+4 Vines of Vastwood
+4 Might of Old Krosa
+2 Scale Up
+1 Boseiju, Who Endures
+1 Breeding Pool
+1 Misty Rainforest
+1 Ziatora's Proving Ground
+1 Yavimaya, Cradle of Growth
+1 Verdant Catacombs
+1 Pendelhaven
+2 Overgrown Tomb
+2 Forest
+3 Windswept Heath
+3 Wooded Foothills
+4 Inkmoth Nexus
+[Sideboard]
+1 Pithing Needle
+2 Thoughtseize
+2 Surgical Extraction
+2 Leyline of the Void
+2 Force of Vigor
+2 Dismember
+4 Endurance

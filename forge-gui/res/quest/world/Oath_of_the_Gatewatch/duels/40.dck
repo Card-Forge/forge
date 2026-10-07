@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Pop-a-Lot_Event_#3/Henry_Sams_-_Blue_Abzan_(Standard,_#608274).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+2 Den Protector
+4 Reflector Mage
+4 Siege Rhino
+2 Tasigur, the Golden Fang
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+2 Murderous Cut
+2 Stubborn Denial
+3 Oath of Nissa
+2 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+1 Plains
+4 Polluted Delta
+1 Prairie Stream
+1 Smoldering Marsh
+1 Sunken Hollow
+1 Swamp
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Disdainful Stroke
+1 Dispel
+1 Dromoka's Command
+1 Exert Influence
+3 Hallowed Moonlight
+1 Infinite Obliteration
+1 Kalitas, Traitor of Ghet
+1 Ob Nixilis Reignited
+2 Self-Inflicted Wound
+2 Transgress the Mind

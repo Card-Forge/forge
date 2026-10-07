@@ -10,4 +10,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ TriggeredCardOwner | TokenTapped$ True
 SVar:X:TriggeredCard$CardCounters.QUEST
 DeckHas:Ability$Counters|Token & Type$Soldier
+SVar:AICounterOverrideQUEST:Positive
 Oracle:{T}: Target opponent gains control of Yes Man, Personal Securitron. When they do, you draw two cards and put a quest counter on Yes Man. Activate only during your turn.\nWild Card — When Yes Man leaves the battlefield, its owner creates a tapped 1/1 white Soldier creature token for each quest counter on it.

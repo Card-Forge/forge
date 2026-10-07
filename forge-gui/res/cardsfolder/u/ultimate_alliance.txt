@@ -1,0 +1,6 @@
+Name:Ultimate Alliance
+ManaCost:W
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creatures you control to target creature.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Ultimate Alliance deals damage equal to the number of creatures you control to target creature.

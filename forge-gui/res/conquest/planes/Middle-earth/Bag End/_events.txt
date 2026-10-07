@@ -1,0 +1,9 @@
+Name:Frodo Baggins|Deck:Frodo Baggins.dck|Variant:Commander|Avatar:Frodo Baggins|Desc:
+Name:Gandalf the White|Deck:Gandalf the White.dck|Variant:Commander|Avatar:Gandalf the White|Desc:
+Name:Eowyn, Lady of Rohan|Deck:Eowyn, Lady of Rohan.dck|Variant:Commander|Avatar:Eowyn, Lady of Rohan|Desc:
+Name:Beregond of the Guard|Deck:Beregond of the Guard.dck|Variant:Commander|Avatar:Beregond of the Guard|Desc:
+Name:White Planar Portal|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Eomer, King of Rohan|Deck:Eomer, King of Rohan.dck|Variant:Commander|Avatar:Eomer, King of Rohan|Desc:
+Name:Rosie Cotton of South Lane|Deck:Rosie Cotton of South Lane.dck|Variant:Commander|Avatar:Rosie Cotton of South Lane|Desc:
+Name:Boromir, Gondor's Hope|Deck:Boromir, Gondor's Hope.dck|Variant:Commander|Avatar:Boromir, Gondor's Hope|Desc:
+Name:Aragorn, Company Leader|Deck:Aragorn, Company Leader.dck|Variant:Commander|Avatar:Aragorn, Company Leader|Desc:

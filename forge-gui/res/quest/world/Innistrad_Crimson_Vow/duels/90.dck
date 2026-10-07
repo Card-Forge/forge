@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Quest for Ulas Temple
+Title=Quest for Ulas Temple
+Icon=Quest for Ulas Temple.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Michael_Coyne_-_Mono-Red_Prowess_(Modern,_#1296992).dck
+Deck Type=constructed
+
+[Main]
+4 Seasoned Pyromancer
+4 Abbot of Keral Keep
+4 Monastery Swiftspear
+4 Soul-Scar Mage
+4 Pyrite Spellbomb
+4 Lightning Bolt
+4 Lava Dart
+4 Reckless Impulse
+4 Shatterskull Smashing
+4 Light Up the Stage
+4 Firebolt
+1 Sunbaked Canyon
+1 Fiery Islet
+4 Den of the Bugbear
+10 Mountain
+[Sideboard]
+3 Blood Moon
+4 Abrade
+4 Relic of Progenitus
+4 Ratchet Bomb

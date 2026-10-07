@@ -1,0 +1,6 @@
+Name:Fix What's Broken
+ManaCost:2 W B
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 2 W B PayLife<X> | ChangeType$ Artifact.YouOwn+cmcEQX,Creature.YouOwn+cmcEQX | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return each artifact and creature card with mana value X from your graveyard to the battlefield.
+SVar:X:Count$xPaid
+Oracle:As an additional cost to cast this spell, pay X life.\nReturn each artifact and creature card with mana value X from your graveyard to the battlefield.

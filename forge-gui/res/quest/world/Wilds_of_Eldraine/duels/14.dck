@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Laplasjan_-_White_Weenie_(Standard,_#1744075).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+4 Adeline, Resplendent Cathar
+2 Intrepid Adversary
+4 Hopeful Initiate
+4 Extraction Specialist
+4 Recruitment Officer
+2 Skrelv, Defector Mite
+4 Coppercoat Vanguard
+1 Knight-Errant of Eos
+4 Spellbook Vendor
+4 Ossification
+1 Plains
+2 Plains
+2 Plains
+1 Plains
+1 Plains
+1 Plains
+1 Plains
+1 Plains
+1 Plains
+2 Plains
+2 Plains
+1 Plains
+2 Eiganjo, Seat of the Empire
+3 Mishra's Foundry
+2 Plains
+[Sideboard]
+4 Wedding Announcement
+4 Anointed Peacekeeper
+3 Destroy Evil
+4 Lay Down Arms

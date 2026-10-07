@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Easy
+Description=Aether_Revolt/RagingMachismo_-_4_Colors_CopyCat_(Standard,_#666325).dck
+Deck Type=constructed
+
+[Main]
+1 Aether Theorist
+4 Elder Deep-Fiend
+4 Felidar Guardian
+4 Rogue Refiner
+4 Servant of the Conduit
+4 Aetherworks Marvel
+1 Woodweaver's Puzzleknot
+4 Harnessed Lightning
+4 Attune with Aether
+4 Oath of Nissa
+4 Saheeli Rai
+4 Aether Hub
+4 Botanical Sanctum
+2 Evolving Wilds
+6 Forest
+1 Island
+1 Mountain
+1 Plains
+3 Spirebluff Canal
+[Sideboard]
+2 Baral's Expertise
+2 Dispel
+2 Natural State
+2 Negate
+3 Radiant Flames
+1 Shock
+3 Tireless Tracker

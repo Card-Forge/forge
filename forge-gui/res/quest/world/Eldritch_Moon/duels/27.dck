@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/Standard_PTQ_#10057344/sandydogmtg_-_Bant_Company_(Standard,_#637853).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Duskwatch Recruiter
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+3 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+2 Dromoka's Command
+1 Ojutai's Command
+1 Declaration in Stone
+4 Evolving Wilds
+3 Forest
+3 Fortified Village
+1 Island
+2 Lumbering Falls
+6 Plains
+3 Prairie Stream
+4 Yavimaya Coast
+[Sideboard]
+2 Clash of Wills
+1 Elder Deep-Fiend
+2 Jace, Vryn's Prodigy
+1 Negate
+1 Summary Dismissal
+2 Tamiyo, Field Researcher
+2 Tragic Arrogance

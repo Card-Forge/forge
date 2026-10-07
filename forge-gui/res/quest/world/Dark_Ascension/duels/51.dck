@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/PTQ_Barcelona_on_MTGO/Thalai_-_Gift_Junk_(Modern,_#28278).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+1 Elesh Norn, Grand Cenobite
+1 Eternal Witness
+4 Knight of the Reliquary
+2 Noble Hierarch
+1 Terastodon
+2 Wall of Roots
+1 Wurmcoil Engine
+4 Gifts Ungiven
+1 Go for the Throat
+3 Path to Exile
+1 Smother
+3 Inquisition of Kozilek
+1 Life from the Loam
+3 Lingering Souls
+1 Raven's Crime
+2 Thoughtseize
+1 Unburial Rites
+1 Forest
+1 Gavony Township
+1 Ghost Quarter
+1 Godless Shrine
+1 Hallowed Fountain
+2 Marsh Flats
+4 Misty Rainforest
+1 Overgrown Tomb
+1 Plains
+2 Razorverge Thicket
+1 Swamp
+1 Temple Garden
+2 Treetop Village
+1 Urborg, Tomb of Yawgmoth
+3 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+1 Bojuka Bog
+1 Darkblast
+1 Nature's Claim
+2 Obstinate Baloth
+1 Pithing Needle
+1 Spellskite
+3 Stony Silence
+1 Surgical Extraction
+1 Torpor Orb

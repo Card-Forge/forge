@@ -49,7 +49,7 @@ Walk
   xy: 384, 80
   size: 64, 80
 Walk 
-  xy: 428, 80
+  xy: 448, 80
   size: 64, 80            
 Attack 
   xy: 0, 160

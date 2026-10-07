@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Antoine57437_-_Abzan_Company_(Modern,_#796322).dck
+Deck Type=constructed
+
+[Main]
+2 Eternal Witness
+4 Flickerwisp
+4 Knight of the Reliquary
+4 Noble Hierarch
+3 Ramunap Excavator
+2 Scavenging Ooze
+4 Tidehollow Sculler
+4 Wasteland Strangler
+4 Aether Vial
+2 Assassin's Trophy
+4 Collected Company
+2 Path to Exile
+1 Bojuka Bog
+1 Forest
+2 Ghost Quarter
+1 Godless Shrine
+2 Horizon Canopy
+2 Marsh Flats
+1 Mosswort Bridge
+1 Overgrown Tomb
+1 Plains
+1 Selesnya Sanctuary
+1 Swamp
+1 Temple Garden
+2 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+4 Auriok Champion
+2 Eidolon of Rhetoric
+1 Gaddock Teeg
+2 Kambal, Consul of Allocation
+1 Kaya, Orzhov Usurper
+1 Knight of Autumn
+2 Spellskite
+2 Surgical Extraction

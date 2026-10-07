@@ -1,0 +1,8 @@
+Name:Mole Man, Moloid Master
+ManaCost:2 G
+Types:Legendary Creature Human Villain
+PT:1/1
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 1/1 green Minion creature token named Moloid with "Whenever this token attacks, you may mill a card."
+SVar:TrigToken:DB$ Token | TokenScript$ moloid | TokenOwner$ You
+Oracle:You may play lands from your graveyard.\nLandfall — Whenever a land you control enters, create a 1/1 green Minion creature token named Moloid with "Whenever this token attacks, you may mill a card."

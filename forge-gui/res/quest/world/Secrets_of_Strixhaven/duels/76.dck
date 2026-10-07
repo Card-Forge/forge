@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Quarterdragon_-_deck_(Modern,_#2925111).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+3 Abhorrent Oculus
+4 Moonshadow
+4 Exhibition Tidecaller
+4 Hedron Crab
+4 Vengevine
+4 Merfolk Secretkeeper
+2 Subtlety
+4 Flare of Denial
+4 Thought Scour
+3 Unearth
+2 Undercity Sewers
+1 Flooded Strand
+2 Bloodstained Mire
+1 Cephalid Coliseum
+2 Island
+1 Swamp
+2 Misty Rainforest
+1 Verdant Catacombs
+3 Watery Grave
+4 Polluted Delta
+1 Otawara, Soaring City
+[Sideboard]
+3 Consign to Memory
+3 Harbinger of the Seas
+3 Fatal Push
+2 Ashiok, Dream Render
+4 Mystical Dispute

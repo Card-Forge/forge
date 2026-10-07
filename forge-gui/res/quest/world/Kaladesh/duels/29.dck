@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Easy
+Description=Kaladesh/Competitive_Standard_Constructed_League/yellowcow_-_UW_Control_(Standard,_#643806).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Torrential Gearhulk
+3 Blessed Alliance
+1 Ceremonious Rejection
+4 Glimmer of Genius
+2 Horribly Awry
+2 Immolating Glare
+1 Negate
+2 Skywhaler's Shot
+4 Void Shatter
+1 Descend upon the Sinful
+1 Fumigate
+3 Stasis Snare
+2 Dovin Baan
+1 Gideon, Ally of Zendikar
+2 Jace, Unraveler of Secrets
+2 Blighted Cataract
+7 Island
+3 Meandering River
+7 Plains
+4 Port Town
+4 Prairie Stream
+[Sideboard]
+2 Ceremonious Rejection
+1 Descend upon the Sinful
+2 Fragmentize
+1 Metallurgic Summonings
+2 Negate
+1 Quarantine Field
+4 Spell Queller
+2 Summary Dismissal

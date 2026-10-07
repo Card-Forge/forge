@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Rapgod_-_deck_(Modern,_#2780975).dck
+Deck Type=constructed
+
+[Main]
+2 Endurance
+3 Quantum Riddler
+2 Abhorrent Oculus
+1 Disciple of Freyalise
+1 Harbinger of the Seas
+3 Subtlety
+4 Coiling Oracle
+3 Slippery Bogle
+3 Ice-Fang Coatl
+2 Wistfulness
+1 Glasspool Mimic
+4 Flare of Denial
+4 Consign to Memory
+2 Force of Negation
+2 Incubation
+4 Birthing Ritual
+2 Snow-Covered Forest
+2 Snow-Covered Island
+2 Hedge Maze
+1 Otawara, Soaring City
+2 Boseiju, Who Endures
+1 Mistrise Village
+4 Misty Rainforest
+2 Flooded Strand
+2 Windswept Heath
+1 Breeding Pool
+[Sideboard]
+1 Frenzied Baloth
+2 Disruptor Flute
+1 Harbinger of the Seas
+1 Endurance
+2 Mystical Dispute
+1 Collector Ouphe
+1 Ashiok, Dream Render
+2 Damping Sphere
+2 Dismember
+1 Nature's Claim
+1 Hurkyl's Recall

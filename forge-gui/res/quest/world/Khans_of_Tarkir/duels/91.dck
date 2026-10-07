@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/Thanos_Games_Modern_Tournament/Paul_Freedom_-_White_Weenie_(Modern,_#90736).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Aven Mindcensor
+1 Brimaz, King of Oreskos
+1 Ethersworn Canonist
+1 Hero of Bladehold
+1 Linvala, Keeper of Silence
+2 Mirran Crusader
+1 Stonehorn Dignitary
+4 Student of Warfare
+2 Thalia, Guardian of Thraben
+1 Wingmate Roc
+4 AEther Vial
+4 Path to Exile
+4 Spectral Procession
+4 Ghostly Prison
+4 Honor of the Pure
+1 Eiganjo Castle
+2 Flagstones of Trokair
+4 Horizon Canopy
+12 Plains
+4 Tectonic Edge
+[Sideboard]
+3 Burrenton Forge-Tender
+2 Dismember
+2 Kataki, War's Wage
+2 Rest in Peace
+3 Stony Silence
+2 Worship

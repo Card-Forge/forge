@@ -1,0 +1,7 @@
+Name:The Great Mound
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ 3 T | TokenTapped$ True | TokenScript$ c_a_vibranium | SpellDescription$ Create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+A:AB$ Draw | Cost$ 6 T | SpellDescription$ Draw a card.
+Oracle:{T}: Add {C}.\n{3}, {T}: Create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\n{6}, {T}: Draw a card.

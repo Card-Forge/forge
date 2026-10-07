@@ -124,7 +124,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
-            List<Card> list = CardUtil.getValidCardsToTarget(sa);
+            CardCollection list = CardUtil.getValidCardsToTarget(sa);
 
             if (aiLogic.equals("Different")) {
                 // TODO: possibly improve the check, currently only checks if the name is the same
@@ -134,18 +134,21 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 list = CardLists.filter(list, nameEquals.negate());
             }
 
-            //Nothing to target
             if (list.isEmpty()) {
             	return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             CardCollection betterList = CardLists.filter(list, CardPredicates.isRemAIDeck().negate());
-            if (betterList.isEmpty()) {
-                if (!mandatory) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-            } else {
+            if (!betterList.isEmpty()) {
                 list = betterList;
+            } else if (!mandatory) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            betterList = CardLists.filter(list, c -> !c.getType().isLegendary() || canCopyLegendary || !c.getController().equals(aiPlayer));
+            if (!betterList.isEmpty()) {
+                list = betterList;
+            } else if (!mandatory) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             // Saheeli Rai + Felidar Guardian combo support
@@ -172,12 +175,15 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 }
 
-                list = CardLists.filter(list, c -> (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer));
                 Card choice;
                 if (list.stream().anyMatch(CardPredicates.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
+                        if (!sa.hasParam("SetToughness")) {
+                            // the copy would land under our control, where a toughness-setting CDA reads a different board
+                            list = ComputerUtilCard.filterOutFatalCopies(list, aiPlayer);
+                        }
                         choice = ComputerUtilCard.getBestCreatureAI(list);
                     }
                 } else {
@@ -204,9 +210,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
             if (betterChoices.isEmpty()) {
                 if (mandatory) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         }
 

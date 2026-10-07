@@ -1,0 +1,10 @@
+Name:Alicia Masters, Skilled Sculptor
+ManaCost:1 R
+Types:Legendary Creature Human Artificer
+PT:0/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Sense the Good — At the beginning of your end step, each player gains control of all creatures they own.
+SVar:TrigGainControl:DB$ GainControlVariant | AllValid$ Creature | ChangeController$ CardOwner
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+Oracle:At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a Treasure token.\nSense the Good — At the beginning of your end step, each player gains control of all creatures they own.

@@ -3248,7 +3248,7 @@
 	{
 		"name": "Nahiri Encampment",
 		"displayName": "Nahiri's Encampment",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Nahiri",
@@ -3700,6 +3700,21 @@
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "SlimeCave",
 		"map": "../common/maps/map/minibosses/slime_hive.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"SlimeCave"
+		]
+		},
+	{
+		"name": "Camel Cave",
+		"displayName": "Strange Desert",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
+		"sprite": "SlimeCave",
+		"map": "../common/maps/map/minibosses/camelboss/entrance.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -4182,7 +4197,6 @@
 			"BiomeRed",
 			"Boss",
 			"Zedruu",
-			"Sidequest",
 			"Hostile",
 			"City"
 		]

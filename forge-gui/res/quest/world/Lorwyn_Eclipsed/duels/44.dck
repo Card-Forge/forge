@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Kazuki_Honjo_-_Mono_Black_Midrange_(Standard,_#2781044).dck
+Deck Type=constructed
+
+[Main]
+2 Bloodletter of Aclazotz
+4 Deep-Cavern Bat
+3 Preacher of the Schism
+4 Unstoppable Slasher
+1 The Speed Demon
+2 Cecil, Dark Knight
+2 Demon Wall
+2 Elegy Acolyte
+1 Sunset Saboteur
+1 Abigale, Eloquent First-Year
+1 Bitter Triumph
+2 Shoot the Sheriff
+3 Requiting Hex
+4 Intimidation Tactics
+1 Strategic Betrayal
+2 Nowhere to Run
+4 Unholy Annex
+18 Swamp
+1 Fountainport
+2 Soulstone Sanctuary
+[Sideboard]
+4 Duress
+1 Feed the Swarm
+2 Lord Skitter, Sewer King
+1 Withering Torment
+1 Ghost Vacuum
+1 Gonti, Night Minister
+2 Qarsi Revenant
+1 Villainous Wrath

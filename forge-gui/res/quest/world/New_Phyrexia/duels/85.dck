@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Primer_Modern_Ateneo_Comics/Javier_Verdu_Barcelo_-_Boros_landfall_(Modern,_#22119).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+2 Grim Lavamancer
+1 Jotun Grunt
+4 Plated Geopede
+4 Steppe Lynx
+4 Lightning Bolt
+4 Lightning Helix
+3 Path to Exile
+4 Searing Blaze
+3 Shard Volley
+4 Arid Mesa
+4 Flagstones of Trokair
+4 Ghost Quarter
+3 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+2 Dismember
+2 Elspeth, Knight-Errant
+2 Magus of the Moon
+4 Relic of Progenitus
+3 Smash to Smithereens

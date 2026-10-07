@@ -17,10 +17,10 @@
  */
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.GameCommand;
 import forge.card.*;
 import forge.game.CardTraitBase;
@@ -29,6 +29,8 @@ import forge.game.StaticEffect;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.game.keyword.Keyword;
@@ -115,6 +117,7 @@ public final class StaticAbilityContinuous {
         Integer setToughness = null;
 
         List<String> addKeywords = null;
+        List<AppliedSticker> stickerAbilities = null;
         List<String> addHiddenKeywords = Lists.newArrayList();
         List<String> removeKeywords = null;
         String[] addAbilities = null;
@@ -206,7 +209,7 @@ public final class StaticAbilityContinuous {
                     if (input.contains("CommanderColorID")) {
                         if (!hostCard.getController().getCommanders().isEmpty()) {
                             if (input.contains("NotCommanderColorID")) {
-                                for (MagicColor.Color color : hostCard.getController().getNotCommanderColorID()) {
+                                for (MagicColor.Color color : hostCard.getController().getCommanderColorID().inverse()) {
                                     newKeywords.add(input.replace("NotCommanderColorID", color.getName()));
                                 }
                                 return true;
@@ -307,6 +310,28 @@ public final class StaticAbilityContinuous {
                 }
                 if (!kwToShare.isEmpty()) {
                     addKeywords = kwToShare;
+                }
+            }
+
+            if (params.containsKey("GainsStickerAbilitiesOf") || params.containsKey("GainsStickerAbilitiesOfDefined")) {
+                CardCollection sources = cardsGainedFrom(params.containsKey("GainsStickerAbilitiesOfDefined")
+                        ? "GainsStickerAbilitiesOfDefined" : "GainsStickerAbilitiesOf", params, hostCard, stAb, game);
+                for (Card source : sources) {
+                    for (AppliedSticker applied : source.getStickers()) {
+                        if (applied.getKind() != StickerKind.ABILITY) {
+                            continue;
+                        }
+                        if (stickerAbilities == null) {
+                            stickerAbilities = Lists.newArrayList();
+                        }
+                        stickerAbilities.add(applied);
+                        if (!applied.getGrantedKeywords().isEmpty()) {
+                            if (addKeywords == null) {
+                                addKeywords = Lists.newArrayList();
+                            }
+                            addKeywords.addAll(applied.getGrantedKeywords());
+                        }
+                    }
                 }
             }
 
@@ -712,11 +737,13 @@ public final class StaticAbilityContinuous {
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.contains("CardColors") || input.contains("cardColors")) {
-                            for (MagicColor.Color color : affectedCard.getColor()) {
-                                extraKeywords.add(
-                                    input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
-                                        .replaceAll("cardColors", color.getName())
+                            if (!(affectedCard.getColor().isColorless())) {
+                                for (MagicColor.Color color : affectedCard.getColor()) {
+                                    extraKeywords.add(
+                                            input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
+                                                    .replaceAll("cardColors", color.getName())
                                     );
+                                }
                             }
                             return true;
                         }
@@ -771,6 +798,21 @@ public final class StaticAbilityContinuous {
                 List<ReplacementEffect> addedReplacementEffects = Lists.newArrayList();
                 List<Trigger> addedTrigger = Lists.newArrayList();
                 List<StaticAbility> addedStaticAbility = Lists.newArrayList();
+                if (stickerAbilities != null) {
+                    // not cached like the paths below: those would resolve SVars against the
+                    // static instead of the sticker's sheet
+                    for (AppliedSticker applied : stickerAbilities) {
+                        CardTraitChanges granted = applied.getGrantedTraits(affectedCard);
+                        addedAbilities.addAll(granted.getAbilities());
+                        addedTrigger.addAll(granted.getTriggers());
+                        addedStaticAbility.addAll(granted.getStaticAbilities());
+                        if (AppliedSticker.grantsAttackTrigger(granted)) {
+                            affectedCard.addChangedSVars(Map.of("HasAttackEffect", "TRUE"),
+                                    se.getTimestamp(), stAb.getId());
+                        }
+                    }
+                }
+
                 // add abilities
                 if (addAbilities != null) {
                     for (String ability : addAbilities) {
@@ -851,7 +893,7 @@ public final class StaticAbilityContinuous {
                 if (!addedAbilities.isEmpty() || !addedTrigger.isEmpty() || addReplacements != null || addStatics != null
                     || removeAbilities != null) {
                     affectedCard.addChangedCardTraits(
-                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAbilities, se.getTimestamp(), stAb.getId(), false
+                        addedAbilities, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAbilities, se.getTimestamp(), stAb.getId(), false
                     );
                 }
 
@@ -882,6 +924,9 @@ public final class StaticAbilityContinuous {
                     int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
                     affectedCard.addCanBlockAdditional(v, se.getTimestamp());
                 }
+                if (params.containsKey("LethalDamageByPower")) {
+                    affectedCard.addLethalDamageByPower(se.getTimestamp());
+                }
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
@@ -894,22 +939,22 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
-                Player mayPlayController = params.containsKey("MayPlayPlayer") ?
-                    AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
-                    controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
+                PlayerCollection mayPlayPlayers = params.containsKey("MayPlayPlayer") ?
+                    AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb) :
+                    new PlayerCollection(controller);
+                affectedCard.setMayPlay(mayPlayPlayers, mayPlayWithoutManaCost,
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
                         mayPlayGrantZonePermissions, stAb);
 
                 if (mayLookAt != null && mayLookAt.isEmpty()) {
-                    mayLookAt.add(mayPlayController);
+                    mayLookAt.addAll(mayPlayPlayers);
                 }
 
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
                 if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
                     for (final Player p : game.getPlayers()) {
-                        if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
-                            affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
+                        if (p.hasKeyword("Shaman's Trance") && !mayPlayPlayers.contains(p)) {
+                            affectedCard.setMayPlay(new PlayerCollection(p), mayPlayWithoutManaCost,
                                     mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
                                     mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
                         }
@@ -966,7 +1011,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
+        sourceCard.addChangedCardTraits(List.of(addIgnore), null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;
@@ -990,7 +1035,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("GainsAbilitiesOfZones")) {
                 validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
             } else {
-                validZones = ImmutableList.of(ZoneType.Battlefield);
+                validZones = List.of(ZoneType.Battlefield);
             }
             cards.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
         }

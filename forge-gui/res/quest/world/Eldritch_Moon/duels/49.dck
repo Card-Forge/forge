@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/Grand_Prix_Rimini_2016_-_Day_1_Undefeated/JAROSLAV_BOUCEK_-_WUG_Aggro_(Standard,_#635933).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Duskwatch Recruiter
+1 Jace, Vryn's Prodigy
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+4 Evolving Wilds
+3 Forest
+3 Fortified Village
+1 Island
+2 Lumbering Falls
+6 Plains
+3 Prairie Stream
+4 Yavimaya Coast
+[Sideboard]
+2 Clash of Wills
+1 Declaration in Stone
+2 Lambholt Pacifist
+1 Negate
+2 Nissa, Vastwood Seer
+2 Ojutai's Command
+1 Subjugator Angel
+2 Tamiyo, Field Researcher

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Italian_National_Qualifier_-_Piemonte-Valle_d'Aosta/Francesco_Guscione_-_Boros_(Standard,_#15143).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+2 Mirran Crusader
+1 Phyrexian Metamorph
+4 Plated Geopede
+4 Squadron Hawk
+4 Steppe Lynx
+4 Stoneforge Mystic
+1 Batterskull
+1 Sword of Body and Mind
+2 Sword of War and Peace
+4 Dismember
+3 Lightning Bolt
+2 Koth of the Hammer
+4 Arid Mesa
+4 Marsh Flats
+5 Mountain
+5 Plains
+4 Scalding Tarn
+2 Terramorphic Expanse
+[Sideboard]
+3 Arc Trail
+1 Basilisk Collar
+1 Crush
+3 Cunning Sparkmage
+2 Divine Offering
+2 Norn's Annex
+1 Sword of Feast and Famine

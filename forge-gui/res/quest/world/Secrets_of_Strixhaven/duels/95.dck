@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Dbenkendorf_-_W-U-R-G_Ritual_(Modern,_#2936123).dck
+Deck Type=constructed
+
+[Main]
+4 Quantum Riddler
+4 Shardless Agent
+4 Solitude
+3 Emeritus of Truce
+3 Omnath, Locus of Creation
+3 Subtlety
+2 Emeritus of Ideation
+2 Magmatic Hellkite
+2 Witch Enchanter
+1 Elesh Norn, Mother of Machines
+1 Helga, Skittish Seer
+1 Starfield Vocalist
+1 Brotherhood's End
+4 Birthing Ritual
+4 Leyline Binding
+4 Misty Rainforest
+3 Flooded Strand
+3 Wooded Foothills
+1 Boseiju, Who Endures
+1 Breeding Pool
+1 Forest
+1 Hallowed Fountain
+1 Hedge Maze
+1 Indatha Triome
+1 Sacred Foundry
+1 Snow-Covered Plains
+1 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+[Sideboard]
+3 Force of Negation
+2 Brotherhood's End
+2 Clarion Conqueror
+2 Endurance
+2 Force of Vigor
+2 Obsidian Charmaw
+1 Superior Spider-Man
+1 Surgical Extraction

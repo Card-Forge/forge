@@ -1,0 +1,19 @@
+Name:Sanar, Unfinished Genius
+ManaCost:U R
+Types:Legendary Creature Goblin Sorcerer
+PT:0/4
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ NICKNAME enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+A:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | CheckSVar$ X | SpellDescription$ Create a Treasure token. Activate only if you've cast an instant or sorcery spell this turn.
+SVar:X:Count$ThisTurnCast_Card.Instant+YouCtrl,Card.Sorcery+YouCtrl
+AlternateMode:Prepare
+DeckHints:Type$Instant,Sorcery
+Oracle:Sanar enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\n{T}: Create a Treasure token. Activate only if you've cast an instant or sorcery spell this turn.
+
+ALTERNATE
+
+Name:Wild Idea
+ManaCost:3 U R
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | SpellDescription$ Search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.
+Oracle:Search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.

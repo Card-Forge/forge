@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=Kaladesh/Pro_Tour_Kaladesh_-_Top_8_Decklists/Tomoharu_Saito_-_Mardu_Vehicles_(Standard,_#652504).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Depala, Pilot Exemplar
+4 Inventor's Apprentice
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Cultivator's Caravan
+4 Smuggler's Copter
+4 Harnessed Lightning
+2 Unlicensed Disintegration
+2 Gideon, Ally of Zendikar
+4 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Mountain
+3 Plains
+4 Spirebluff Canal
+[Sideboard]
+4 Ceremonious Rejection
+1 Fragmentize
+4 Galvanic Bombardment
+2 Gideon, Ally of Zendikar
+2 Selfless Spirit
+2 Unlicensed Disintegration

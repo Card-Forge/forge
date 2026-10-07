@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Miyatani_Kazuki_-_Domain_Aggro_(Modern,_#1755088).dck
+Deck Type=constructed
+
+[Main]
+4 Territorial Kavu
+4 Scion of Draco
+4 Questing Druid
+4 Shardless Agent
+4 Bonecrusher Giant
+4 Bloodbraid Elf
+2 Fury
+4 Lightning Bolt
+4 Tribal Flames
+4 Leyline Binding
+4 Wooded Foothills
+4 Misty Rainforest
+4 Flooded Strand
+1 Steam Vents
+1 Sacred Foundry
+1 Stomping Ground
+1 Breeding Pool
+1 Temple Garden
+1 Xander's Lounge
+1 Indatha Triome
+1 Plains
+1 Island
+1 Forest
+[Sideboard]
+4 Leyline of Sanctity
+3 Alpine Moon
+2 Force of Vigor
+2 Rest in Peace
+2 Lavinia, Azorius Renegade
+1 Orvar, the All-Form
+1 Sacred Ground

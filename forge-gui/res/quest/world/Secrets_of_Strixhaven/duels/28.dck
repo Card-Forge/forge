@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tom Bombadil
+Title=Tom Bombadil
+Icon=Tom Bombadil.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Ishikawa_Ryota_-_Selesnya_Midrange_(Standard,_#2926419).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+1 Keen-Eyed Curator
+3 Mossborn Hydra
+4 Sazh's Chocobo
+2 Icetill Explorer
+4 Mightform Harmonizer
+2 Dyadrine, Synthesis Amalgam
+4 Badgermole Cub
+1 Lumbering Worldwagon
+4 Erode
+2 Bushwhack
+4 Earthbender Ascension
+2 Plains
+7 Forest
+2 Temple Garden
+4 Fabled Passage
+3 Escape Tunnel
+4 Hushwood Verge
+3 Ba Sing Se
+[Sideboard]
+1 Torpor Orb
+3 Rest in Peace
+2 Snakeskin Veil
+1 Kutzil, Malamet Exemplar
+3 Sheltered by Ghosts
+1 Mossborn Hydra
+1 Voice of Victory
+3 Surrak, Elusive Hunter

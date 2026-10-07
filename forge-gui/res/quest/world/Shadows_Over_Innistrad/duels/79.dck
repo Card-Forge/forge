@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/Grand_Prix_Trial_-_Lille/Victor_Vergnaud_-_Boros_Allies_(Modern,_#628648).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Akoum Battlesinger
+2 Champion of the Parish
+4 Expedition Envoy
+2 Firemantle Mage
+4 Hada Freeblade
+4 Kabira Evangel
+4 Kazandu Blademaster
+3 Thalia's Lieutenant
+3 Thalia, Guardian of Thraben
+4 Lightning Bolt
+2 Path to Exile
+4 Ally Encampment
+4 Battlefield Forge
+1 Cavern of Souls
+1 Mountain
+2 Mutavault
+5 Plains
+3 Sacred Foundry
+[Sideboard]
+2 Boros Charm
+2 Lantern Scout
+2 Ondu Cleric
+3 Rest in Peace
+2 Smash to Smithereens
+2 Stony Silence

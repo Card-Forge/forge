@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Il_Labirinto_Bollate/Lucrezia_Ligabue_-_Goblins_(Modern,_#119067).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+4 Goblin Bushwhacker
+4 Goblin Chieftain
+3 Goblin Wardriver
+3 Legion Loyalist
+4 Mogg Fanatic
+4 Mogg War Marshal
+1 Spikeshot Elder
+4 Lightning Bolt
+4 Goblin Grenade
+4 Krenko's Command
+3 Shared Animosity
+18 Mountain
+[Sideboard]
+3 Blood Moon
+1 Damping Matrix
+2 Ensnaring Bridge
+1 Everlasting Torment
+1 Goblin Charbelcher
+2 Grafdigger's Cage
+2 Mogg Sentry
+1 Pithing Needle
+3 Smash to Smithereens

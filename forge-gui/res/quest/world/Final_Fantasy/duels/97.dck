@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Oya
+Title=Oya
+Icon=Oya.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Igarashi_Yuta_-_Eldrazi_Tron_(Modern,_#2531971).dck
+Deck Type=constructed
+
+[Main]
+1 Ulamog, the Ceaseless Hunger
+1 Kozilek, Butcher of Truth
+4 Devourer of Destiny
+3 Glaring Fleshraker
+4 Sowing Mycospawn
+1 Sire of Seven Deaths
+1 Summon: Bahamut
+1 Ultima, Origin of Oblivion
+4 Expedition Map
+1 Chalice of the Void
+4 Talisman of Resilience
+1 Mystic Forge
+4 Kozilek's Command
+2 All Is Dust
+4 Karn, the Great Creator
+2 Ugin, Eye of the Storms
+2 Forest
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Sanctum of Ugin
+4 Eldrazi Temple
+3 Ugin's Labyrinth
+[Sideboard]
+1 Walking Ballista
+1 Tormod's Crypt
+1 Cursed Totem
+1 Grafdigger's Cage
+1 Sundering Titan
+1 Distorting Lens
+1 Oblivion Stone
+2 Dismember
+1 Liquimetal Coating
+1 Wurmcoil Engine
+1 Mystic Forge
+1 Cityscape Leveler
+1 Soulless Jailer
+1 Disruptor Flute

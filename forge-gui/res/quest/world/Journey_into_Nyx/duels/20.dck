@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/SCG_Super_IQ_Knoxville/Mike_Para_-_Mono_Green_(Standard,_#79678).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Arbor Colossus
+3 Boon Satyr
+4 Burning-Tree Emissary
+4 Courser of Kruphix
+4 Eidolon of Blossoms
+4 Elvish Mystic
+2 Mistcutter Hydra
+1 Nylea, God of the Hunt
+2 Polukranos, World Eater
+4 Sylvan Caryatid
+3 Sylvan Primordial
+3 Garruk, Caller of Beasts
+15 Forest
+4 Nykthos, Shrine to Nyx
+4 Temple of Mystery
+[Sideboard]
+1 Bow of Nylea
+3 Cyclonic Rift
+3 Nylea's Disciple
+1 Pithing Needle
+1 Ruric Thar, the Unbowed
+1 Setessan Tactics
+2 Simic Charm
+2 Unravel the AEther

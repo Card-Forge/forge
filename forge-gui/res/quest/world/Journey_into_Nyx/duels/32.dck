@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/States-Champs_Georgia/Samir_Black_-_Esper_Control_(Standard,_#74383).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Elixir of Immortality
+1 Deicide
+2 Devour Flesh
+3 Dissolve
+2 Hero's Downfall
+4 Sphinx's Revelation
+2 Syncopate
+2 Ultimate Price
+4 Supreme Verdict
+2 Thoughtseize
+1 Banishing Light
+3 Detention Sphere
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+2 Godless Shrine
+4 Hallowed Fountain
+4 Island
+3 Plains
+4 Temple of Deceit
+4 Temple of Enlightenment
+3 Temple of Silence
+2 Watery Grave
+[Sideboard]
+2 Dispel
+2 Doom Blade
+1 Drown in Sorrow
+2 Negate
+4 Nightveil Specter
+1 Notion Thief

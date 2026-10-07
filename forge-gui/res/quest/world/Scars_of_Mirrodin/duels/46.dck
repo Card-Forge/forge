@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/Magic-League_Standard_Trial_11-10-2010/Psycho_sexy_-_Valakut_Ramp_(Standard,_#15).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Inferno Titan
+4 Primeval Titan
+1 Wurmcoil Engine
+2 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Explore
+2 Growth Spasm
+4 Khalni Heart Expedition
+3 Evolving Wilds
+5 Forest
+12 Mountain
+1 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+1 Autumn's Veil
+4 Goblin Ruinblaster
+4 Obstinate Baloth
+3 Pyroclasm

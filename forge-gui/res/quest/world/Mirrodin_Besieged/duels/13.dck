@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Sentinel
+Title=Sentinel
+Icon=Sentinel.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/2011_Australian_Nationals_-_Grinders/John_Lee_Wenyi_-_Valakut_Ramp_(Standard,_#17439).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Oracle of Mul Daya
+4 Primeval Titan
+4 Solemn Simulacrum
+2 Harrow
+4 Summoning Trap
+2 Cultivate
+4 Explore
+4 Rampant Growth
+2 Slagstorm
+4 Khalni Heart Expedition
+2 Evolving Wilds
+4 Forest
+1 Misty Rainforest
+12 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+3 Creeping Corrosion
+4 Nature's Claim
+4 Obstinate Baloth
+2 Pyroclasm
+2 Wurmcoil Engine

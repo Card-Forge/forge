@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/SirSemaj429_-_Esper_Phelia_(Modern,_#2788242).dck
+Deck Type=constructed
+
+[Main]
+1 Boggart Trawler
+4 Phelia, Exuberant Shepherd
+3 Overlord of the Balemurk
+4 Moonshadow
+4 Psychic Frog
+4 Quantum Riddler
+4 Solitude
+4 Emptiness
+4 Abhorrent Oculus
+2 Witch Enchanter
+4 Ephemerate
+2 Fatal Push
+1 Watery Grave
+1 Swamp
+1 Shadowy Backstreet
+2 Polluted Delta
+1 Plains
+2 Meticulous Archive
+4 Marsh Flats
+1 Island
+1 Hallowed Fountain
+2 Godless Shrine
+4 Flooded Strand
+[Sideboard]
+3 Consign to Memory
+2 High Noon
+2 Mystical Dispute
+3 Thoughtseize
+2 Surgical Extraction
+3 Wrath of the Skies

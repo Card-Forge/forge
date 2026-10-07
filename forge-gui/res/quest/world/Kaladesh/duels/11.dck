@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Easy
+Description=Kaladesh/Pro_Tour_Kaladesh_-_Top_8_Decklists/Shota_Takao_-_Sultai_Midrange_(Standard,_#652489).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Catacomb Sifter
+4 Eldrazi Skyspawner
+4 Servant of the Conduit
+3 Sylvan Advocate
+4 Thought-Knot Seer
+4 Verdurous Gearhulk
+2 Skysovereign, Consul Flagship
+4 Smuggler's Copter
+2 Ceremonious Rejection
+4 Spatial Contortion
+1 Nissa, Vital Force
+4 Aether Hub
+3 Blooming Marsh
+4 Botanical Sanctum
+4 Corrupted Crossroads
+3 Crumbling Vestige
+2 Forest
+1 Island
+3 Lumbering Falls
+[Sideboard]
+2 Aether Meltdown
+3 Appetite for the Unnatural
+1 Ceremonious Rejection
+2 Collective Brutality
+2 Negate
+2 Nissa, Vital Force
+3 Tireless Tracker

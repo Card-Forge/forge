@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Andrew_Hillhouse_-_Bant_Spirits_(Modern,_#774447).dck
+Deck Type=constructed
+
+[Main]
+4 Drogskol Captain
+1 Geist of Saint Traft
+4 Mausoleum Wanderer
+4 Noble Hierarch
+3 Phantasmal Image
+1 Rattlechains
+2 Reflector Mage
+2 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+3 Aether Vial
+4 Collected Company
+3 Path to Exile
+2 Botanical Sanctum
+1 Breeding Pool
+2 Flooded Strand
+1 Forest
+2 Hallowed Fountain
+3 Horizon Canopy
+1 Island
+3 Misty Rainforest
+1 Moorland Haunt
+1 Plains
+1 Seachrome Coast
+1 Temple Garden
+2 Windswept Heath
+[Sideboard]
+1 Geist of Saint Traft
+2 Knight of Autumn
+3 Rest in Peace
+4 Stony Silence
+2 Thalia, Guardian of Thraben
+2 Unified Will
+1 Worship

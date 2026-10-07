@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Braiden_-_Humans_(Modern,_#921517).dck
+Deck Type=constructed
+
+[Main]
+2 Haktos the Unscarred
+2 Kessig Malcontents
+2 Tajic, Legion's Edge
+3 Thalia, Guardian of Thraben
+4 Fervent Champion
+4 Mantis Rider
+4 Meddling Mage
+4 Phantasmal Image
+4 Reflector Mage
+4 Thalia's Lieutenant
+4 Champion of the Parish
+4 Aether Vial
+1 Hallowed Fountain
+1 Island
+1 Plains
+1 Steam Vents
+1 Unclaimed Territory
+2 Sacred Foundry
+4 Cavern of Souls
+4 Sunbaked Canyon
+4 Flooded Strand
+[Sideboard]
+2 Chalice of the Void
+2 Damping Sphere
+2 Force of Negation
+2 Path to Exile
+2 Rest in Peace
+2 Stony Silence
+3 Auriok Champion

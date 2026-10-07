@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Constructed_League/Goblingravy_-_Goblins_(Modern,_#601126).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+1 Frenzied Goblin
+4 Goblin Bushwhacker
+2 Goblin Chieftain
+4 Goblin Guide
+3 Goblin Piledriver
+4 Legion Loyalist
+3 Mogg Fanatic
+4 Mogg War Marshal
+4 Reckless Bushwhacker
+4 Lightning Bolt
+4 Goblin Grenade
+19 Mountain
+[Sideboard]
+2 Dragon's Claw
+2 Forked Bolt
+4 Smash to Smithereens
+3 Tormod's Crypt

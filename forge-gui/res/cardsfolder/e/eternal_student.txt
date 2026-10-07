@@ -1,0 +1,7 @@
+Name:Eternal Student
+ManaCost:3 B
+Types:Creature Zombie Warlock
+PT:4/2
+A:AB$ Token | Cost$ 1 B ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | TokenAmount$ 2 | TokenScript$ wb_1_1_inkling_flying | TokenOwner$ You | SpellDescription$ Create two 1/1 white and black Inkling creature tokens with flying.
+DeckHas:Ability$Token
+Oracle:{1}{B}, Exile this card from your graveyard: Create two 1/1 white and black Inkling creature tokens with flying.

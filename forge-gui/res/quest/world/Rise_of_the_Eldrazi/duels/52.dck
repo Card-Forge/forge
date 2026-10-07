@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Amadioha
+Title=Amadioha
+Icon=Amadioha.jpg
+Difficulty=Very Hard
+Description=../Modern/Rise_of_the_Eldrazi/MTGO_Modern_Premier_#2739338/Josthoalemar1322_-_GBR_Control_(Modern,_#19118).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Kavu Predator
+3 Kitchen Finks
+4 Tarmogoyf
+3 Lightning Bolt
+3 Punishing Fire
+2 Terminate
+4 Blightning
+3 Inquisition of Kozilek
+3 Maelstrom Pulse
+4 Thoughtseize
+2 Arid Mesa
+1 Blood Crypt
+1 Forest
+4 Grove of the Burnwillows
+2 Mountain
+2 Overgrown Tomb
+1 Reflecting Pool
+1 Rootbound Crag
+2 Stomping Ground
+2 Swamp
+2 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+3 Ancient Grudge
+3 Chalice of the Void
+3 Deathmark
+3 Leyline of the Void

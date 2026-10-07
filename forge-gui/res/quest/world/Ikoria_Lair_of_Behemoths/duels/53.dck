@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Gods_Shadow_-_Infect_(Modern,_#1021464).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+2 Spellskite
+4 Glistener Elf
+4 Noble Hierarch
+4 Blighted Agent
+2 Vines of Vastwood
+2 Spell Pierce
+2 Groundswell
+4 Blossoming Defense
+4 Might of Old Krosa
+4 Mutagenic Growth
+2 Distortion Strike
+4 Scale Up
+2 Rancor
+1 Pendelhaven
+2 Breeding Pool
+2 Forest
+2 Waterlogged Grove
+4 Wooded Foothills
+4 Windswept Heath
+4 Inkmoth Nexus
+[Sideboard]
+1 Force of Vigor
+2 Wilt
+2 Shapers' Sanctuary
+2 Veil of Summer
+2 Weather the Storm
+3 Uro, Titan of Nature's Wrath
+3 Mystical Dispute

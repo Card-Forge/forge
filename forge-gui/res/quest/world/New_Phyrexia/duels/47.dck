@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=IdiAmin
+Title=IdiAmin
+Icon=IdiAmin.jpg
+Difficulty=Easy
+Description=New_Phyrexia/2011_Magic_Online_Community_Cup_Unified_Standard/Sunie_-_Valakut_Ramp_(Standard,_#16184).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+2 Avenger of Zendikar
+4 Overgrown Battlement
+4 Primeval Titan
+1 Terastodon
+1 Thrun, the Last Troll
+2 Urabrask the Hidden
+4 Summoning Trap
+4 Cultivate
+4 Explore
+2 Green Sun's Zenith
+4 Growth Spasm
+2 Evolving Wilds
+5 Forest
+11 Mountain
+2 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Combust
+2 Nature's Claim
+3 Obstinate Baloth
+2 Pyroclasm
+2 Slagstorm

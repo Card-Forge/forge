@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Uncle Owen
+Title=Uncle Owen
+Icon=Uncle Owen.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/CovertGoBlue_-_W_Aggro_(Standard,_#1456459).dck
+Deck Type=constructed
+
+[Main]
+3 Hotshot Mechanic
+4 Hopeful Initiate
+4 Guardian of New Benalia
+4 Intrepid Adversary
+4 Thalia, Guardian of Thraben
+4 Adeline, Resplendent Cathar
+4 Anointed Peacekeeper
+4 Brutal Cathar
+4 Serra Paragon
+1 Destroy Evil
+1 Valorous Stance
+3 Eiganjo, Seat of the Empire
+20 Plains
+[Sideboard]

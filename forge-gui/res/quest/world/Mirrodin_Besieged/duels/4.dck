@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/2011_TCGplayer.com_TCQ_-_Jacksonville_(3-5)/ScottSeaver_-_Valakut_Ramp_(Standard,_#10970).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+2 Inferno Titan
+4 Overgrown Battlement
+4 Primeval Titan
+4 Viridian Emissary
+1 Wurmcoil Engine
+3 Cultivate
+4 Explore
+3 Green Sun's Zenith
+3 Pyroclasm
+2 Slagstorm
+2 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+11 Mountain
+2 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+1 Creeping Corrosion
+1 Lightning Bolt
+1 Naturalize
+2 Slice in Twain
+4 Summoning Trap
+2 Tumble Magnet
+1 Ulamog, the Infinite Gyre

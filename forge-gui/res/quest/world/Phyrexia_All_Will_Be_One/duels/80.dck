@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Nakamura_Ryoutarou_-_Green_Food_(Modern,_#1585024).dck
+Deck Type=constructed
+
+[Main]
+4 Ovalchase Daredevil
+4 Street Wraith
+1 Stitcher's Supplier
+4 Feasting Troll King
+4 Gilded Goose
+4 Asmoranomardicadaistinaculdacar
+4 Sarinth Steelseeker
+1 Haywire Mite
+1 Pithing Needle
+1 Shadowspear
+4 The Underworld Cookbook
+4 Finale of Devastation
+2 Trail of Crumbs
+4 Urza's Saga
+1 Grist, the Hunger Tide
+1 Swamp
+1 Forest
+4 Blooming Marsh
+1 Windswept Heath
+1 Wooded Foothills
+2 Misty Rainforest
+1 Verdant Catacombs
+3 Overgrown Tomb
+1 Yavimaya, Cradle of Growth
+2 Boseiju, Who Endures
+[Sideboard]
+3 Thoughtseize
+4 Surgical Extraction
+3 Force of Vigor
+1 Endurance
+2 Grist, the Hunger Tide
+2 Sheoldred's Edict

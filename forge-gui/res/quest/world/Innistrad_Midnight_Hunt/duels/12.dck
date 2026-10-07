@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Adachi_Naohiko_-_Mono_White_(Standard,_#1219295).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+1 Skyclave Apparition
+2 Adeline, Resplendent Cathar
+3 Reidane, God of the Worthy
+3 Stonebinder's Familiar
+4 Sungold Sentinel
+4 Elite Spellbinder
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Usher of the Fallen
+2 Portable Hole
+2 Maul of the Skyclaves
+3 Fateful Absence
+1 Cave of the Frost Dragon
+4 Faceless Haven
+18 Snow-Covered Plains
+[Sideboard]
+1 Portable Hole
+2 You're Ambushed on the Road
+2 Curse of Silence
+2 Skyclave Apparition
+2 Brutal Cathar
+3 Guardian of Faith
+3 Legion Angel

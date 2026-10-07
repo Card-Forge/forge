@@ -1,0 +1,13 @@
+Name:Red Hulk
+ManaCost:4 R R
+Types:Legendary Creature Gamma Berserker Villain
+PT:6/7
+K:Reach
+K:Trample
+T:Mode$ DamageDoneOnce | Execute$ TrigPutCounter | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, put a +1/+1 counter on it. When you do, he deals damage equal to the number of +1/+1 counters on him to any other target.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | RememberPut$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDealDamage | SubAbility$ DBCleanup | SpellDescription$ When you do, he deals damage equal to the number of +1/+1 counters on him to any other target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | TgtPrompt$ Select any other target | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardCounters.P1P1
+Oracle:Reach, trample\nEnrage — Whenever Red Hulk is dealt damage, put a +1/+1 counter on him. When you do, he deals damage equal to the number of +1/+1 counters on him to any other target.

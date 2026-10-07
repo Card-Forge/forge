@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/lordchalfont_-_Mill_(Modern,_#2384144).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+4 Hedron Crab
+1 Riverchurn Monument
+1 Crypt Incursion
+4 Archive Trap
+4 Fatal Push
+4 Drown in the Loch
+3 Surgical Extraction
+3 Visions of Beyond
+2 Glimpse the Unthinkable
+4 Fractured Sanity
+3 Tasha's Hideous Laughter
+1 Jace, the Perfected Mind
+1 Oboro, Palace in the Clouds
+1 Undercity Sewers
+1 Otawara, Soaring City
+1 Cephalid Coliseum
+4 Polluted Delta
+3 Flooded Strand
+2 Watery Grave
+3 Field of Ruin
+4 Island
+2 Swamp
+[Sideboard]
+1 Damnation
+1 Go for the Throat
+1 Eliminate
+1 Crypt Incursion
+3 Extirpate
+3 Ensnaring Bridge
+1 Grafdigger's Cage
+2 Soul-Guide Lantern
+1 Tormod's Crypt

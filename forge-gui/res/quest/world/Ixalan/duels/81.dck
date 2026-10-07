@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot81
+Title=Robot81
+Icon=Indiana Jones.jpg
+Difficulty=Medium
+Description=Ramunap Red 
+Deck Type=constructed
+
+[Main]
+4 Ahn-Crop Crasher
+4 Bomat Courier
+2 Captain Lannery Storm
+4 Earthshaker Khenra
+3 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+3 Rigging Runner
+4 Soul-Scar Mage
+2 Abrade
+3 Lightning Strike
+3 Shock
+2 Vance's Blasting Cannons
+14 Mountain
+4 Ramunap Ruins
+1 Scavenger Grounds
+4 Sunscorched Desert
+[Sideboard]
+2 Aethersphere Harvester
+2 Harsh Mentor
+1 Kari Zev's Expertise
+3 Magma Spray
+2 Pia Nalaar
+1 Rampaging Ferocidon
+2 Sand Strangler
+2 Sentinel Totem

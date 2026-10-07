@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/GLAM__-_Red_Deck_Wins_(Standard,_#2038136).dck
+Deck Type=constructed
+
+[Main]
+1 Goddric, Cloaked Reveler
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+1 Two-Headed Hunter
+4 Bloodthirsty Adversary
+3 Urabrask's Forge
+3 Lightning Strike
+4 Monstrous Rage
+4 Play with Fire
+3 Scorching Shot
+2 Obliterating Bolt
+3 Mishra's Foundry
+19 Mountain
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+1 Twisted Fealty
+2 Furnace Punisher
+3 Lithomantic Barrage
+2 Unlicensed Hearse
+1 Urabrask's Forge
+1 Scorching Shot
+1 Chandra, Dressed to Kill
+2 Cemetery Gatekeeper
+2 End the Festivities

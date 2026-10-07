@@ -1,0 +1,42 @@
+[metadata]
+Name=Rakdos
+Deck Type=constructed
+Title=Rakdos
+Description=Rakdos
+Difficulty=Hard
+Icon=Shango
+[Main]
+4 Abrade
+4 Aether Hub
+2 Aethersphere Harvester
+4 Bomat Courier
+2 Canyon Slough
+4 Dragonskull Summit
+4 Dread Wanderer
+3 Fatal Push
+2 Gifted Aetherborn
+4 Glint-Sleeve Siphoner
+3 Hazoret the Fervent
+2 Magma Spray
+2 Mountain
+1 Mountain
+1 Mountain
+2 Pia Nalaar
+2 Rekindling Phoenix
+4 Scrapheap Scrounger
+2 Swamp
+3 Swamp
+1 Swamp
+3 Swamp
+1 Vraska's Contempt
+[Sideboard]
+1 Aethersphere Harvester
+1 Angrath, the Flame-Chained
+2 Bontu's Last Reckoning
+1 Doomfall
+4 Duress
+1 Fatal Push
+1 Magma Spray
+1 Pia Nalaar
+1 Scavenger Grounds
+2 Vraska's Contempt

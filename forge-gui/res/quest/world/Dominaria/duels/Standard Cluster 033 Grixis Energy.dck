@@ -1,0 +1,42 @@
+[metadata]
+Name=Grixis Energy
+Deck Type=constructed
+Title=Grixis Energy
+Description=Grixis Energy
+Difficulty=Easy
+Icon=Blackbeard
+[Main]
+1 Abrade
+4 Aether Hub
+1 Angrath, the Flame-Chained
+3 Canyon Slough
+2 Champion of Wits
+2 Disallow
+2 Dragonskull Summit
+4 Drowned Catacomb
+2 Essence Scatter
+3 Fatal Push
+4 Fetid Pools
+2 Glimmer of Genius
+4 Glint-Sleeve Siphoner
+4 Harnessed Lightning
+2 Island
+2 Magma Spray
+1 Mountain
+1 Search for Azcanta
+4 Spirebluff Canal
+1 Swamp
+2 The Scarab God
+2 Torrential Gearhulk
+3 Vraska's Contempt
+4 Whirler Virtuoso
+[Sideboard]
+1 Abrade
+1 Chandra's Defeat
+1 Confiscation Coup
+3 Duress
+3 Moment of Craving
+3 Negate
+1 Nicol Bolas, God-Pharaoh
+1 Search for Azcanta
+1 Vraska's Contempt

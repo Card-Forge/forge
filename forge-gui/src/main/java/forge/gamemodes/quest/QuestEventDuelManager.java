@@ -84,7 +84,6 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
     }
 
     private void addDuel(List<QuestEventDuel> outList, QuestEventDifficulty targetDifficulty, int toAdd) {
-
         // if there's no way we can satisfy the request, return now
         if (allDuels.size() <= toAdd) {
             return;
@@ -124,7 +123,6 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
      * @return an array of {@link java.lang.String} objects.
      */
     public final List<QuestEventDuel> generateDuels() {
-
         final QuestPreferences questPreferences = FModel.getQuestPreferences();
         boolean moreDuelChoices = questPreferences.getPrefInt(QPref.MORE_DUEL_CHOICES) > 0;
 
@@ -186,7 +184,6 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
         }
 
         return duelOpponents;
-
     }
 
     /** */

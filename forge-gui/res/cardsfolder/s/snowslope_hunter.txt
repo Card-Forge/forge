@@ -1,0 +1,9 @@
+Name:Snowslope Hunter
+ManaCost:2 R
+Types:Creature Goblin Ranger
+PT:2/3
+A:AB$ Dig | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | PlayerTurn$ True | ActivationLimit$ 1 | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it until the end of your next turn. Activate only during your turn and only once each turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Sacrifice another creature or artifact: Exile the top card of your library. You may play it until the end of your next turn. Activate only during your turn and only once each turn.

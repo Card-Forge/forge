@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Dang,_Qi_-_The_Rock_(Modern,_#794287).dck
+Deck Type=constructed
+
+[Main]
+4 Dark Confidant
+2 Kalitas, Traitor of Ghet
+3 Scavenging Ooze
+4 Tarmogoyf
+2 Tireless Tracker
+1 Nihil Spellbomb
+4 Assassin's Trophy
+4 Fatal Push
+1 Collective Brutality
+3 Inquisition of Kozilek
+1 Maelstrom Pulse
+3 Thoughtseize
+3 Liliana of the Veil
+1 Liliana, the Last Hope
+4 Blooming Marsh
+4 Field of Ruin
+2 Forest
+1 Hissing Quagmire
+2 Overgrown Tomb
+4 Swamp
+2 Treetop Village
+4 Verdant Catacombs
+1 Woodland Cemetery
+[Sideboard]
+1 Collective Brutality
+1 Damnation
+1 Engineered Explosives
+1 Fulminator Mage
+1 Grafdigger's Cage
+1 Kitchen Finks
+1 Nihil Spellbomb
+1 Nissa, Vital Force
+1 Profane Command
+1 Surgical Extraction
+1 Unravel the Aether

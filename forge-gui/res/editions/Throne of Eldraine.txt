@@ -48,7 +48,7 @@ ScryfallCode=ELD
 34 C True Love's Kiss @Donato Giancola
 35 U Venerable Knight @Colin Boyer
 36 R Worthy Knight @Yongjae Choi
-37 C Youthful Knight @Heonhwa Choe
+37 C Youthful Knight @Heonhwa
 38 U Animating Faerie @Joseph Meehan
 39 M Brazen Borrower @Eric Deschamps
 40 C Charmed Sleep @Titus Lunter
@@ -154,7 +154,7 @@ ScryfallCode=ELD
 140 C Searing Barrage @Allen Williams
 141 C Seven Dwarves @Jason Rainville
 142 U Skullknocker Ogre @Svetlin Velinov
-143 U Slaying Fire @Heonhwa Choe
+143 U Slaying Fire @Heonhwa
 144 R Sundering Stroke @Stanton Feng
 145 U Syr Carah, the Bold @Wisnu Tan
 146 C Thrill of Possibility @Steve Argyle
@@ -417,7 +417,7 @@ ScryfallCode=ELD
 [promo]
 392 R Piper of the Swarm @Jesper Ejsing
 393 U Glass Casket @Anastasia Ovchinnikova
-394 U Slaying Fire @Heonhwa Choe
+394 U Slaying Fire @Heonhwa
 395 U Kenrith's Transformation @Kimonas Theodossiou
 396 U Improbable Alliance @Zoltan Boros
 397 U Inspiring Veteran @Scott Murphy

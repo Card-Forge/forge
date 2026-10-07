@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Ikuta_Masaya_-_Burn_(Modern,_#665625).dck
+Deck Type=constructed
+
+[Main]
+3 Bedlam Reveler
+4 Goblin Guide
+4 Monastery Swiftspear
+3 Young Pyromancer
+4 Atarka's Command
+4 Lightning Bolt
+4 Needle Drop
+2 Searing Blaze
+2 Skullcrack
+4 Forked Bolt
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+8 Mountain
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Ancient Grudge
+3 Destructive Revelry
+1 Dragon's Claw
+1 Ensnaring Bridge
+1 Grafdigger's Cage
+2 Grim Lavamancer
+1 Reality Hemorrhage
+2 Relic of Progenitus
+2 Searing Blaze

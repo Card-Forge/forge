@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Super_IQ_-_Indian_Trail,_NC/John_Emmrich_-_Mono_Black_(Standard,_#69433).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Nightveil Specter
+4 Pack Rat
+3 Bile Blight
+2 Devour Flesh
+4 Hero's Downfall
+1 Ultimate Price
+1 Duress
+4 Thoughtseize
+4 Underworld Connections
+4 Mutavault
+18 Swamp
+2 Temple of Deceit
+1 Temple of Silence
+[Sideboard]
+2 Dark Betrayal
+1 Doom Blade
+2 Drown in Sorrow
+2 Erebos, God of the Dead
+3 Lifebane Zombie

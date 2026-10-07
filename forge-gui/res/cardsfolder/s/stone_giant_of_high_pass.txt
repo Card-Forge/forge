@@ -1,0 +1,10 @@
+Name:Stone-Giant of High Pass
+ManaCost:5 R R
+Types:Creature Giant
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature enters or attacks, create a 3/1 colorless Wall artifact creature token with defender named Stone Boulder.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature enters or attacks, create a 3/1 colorless Wall artifact creature token with defender named Stone Boulder.
+SVar:TrigToken:DB$ Token | TokenScript$ stone_boulder | TokenOwner$ You
+A:AB$ DealDamage | Cost$ 2 R Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ This creature deals 4 damage to any target.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature enters or attacks, create a 3/1 colorless Wall artifact creature token with defender named Stone Boulder.\n{2}{R}, Sacrifice an artifact: This creature deals 4 damage to any target.

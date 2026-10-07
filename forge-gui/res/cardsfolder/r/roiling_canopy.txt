@@ -1,0 +1,9 @@
+Name:Roiling Canopy
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | ValidCard$ Forest.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | IsPresent$ Forest.YouCtrl | PresentCompare$ GE6 | NoResolvingCheck$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Forest you control enters, if you control at least five other Forests, target creature you control gets +3/+3 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NumAtt$ +3 | NumDef$ +3 | ConditionPresent$ Forest.YouCtrl+!TriggeredCard | ConditionCompare$ GE5
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:This land enters tapped.\nWhenever a Forest you control enters, if you control at least five other Forests, target creature you control gets +3/+3 until end of turn.\n{T}: Add {G}.

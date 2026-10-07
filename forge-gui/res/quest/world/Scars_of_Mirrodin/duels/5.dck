@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_New_Hampshire/Taylor_Connor_-_Eldrazi_Green_(Standard,_#7675).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+4 Joraga Treespeaker
+1 Kozilek, Butcher of Truth
+4 Overgrown Battlement
+4 Primeval Titan
+3 Terastodon
+2 Ulamog, the Infinite Gyre
+1 Wurmcoil Engine
+4 Summoning Trap
+2 All Is Dust
+2 Cultivate
+4 Explore
+2 Garruk Wildspeaker
+4 Eldrazi Temple
+1 Eye of Ugin
+7 Forest
+4 Khalni Garden
+1 Mystifying Maze
+1 Swamp
+4 Tectonic Edge
+4 Verdant Catacombs
+[Sideboard]
+4 Memoricide
+4 Nature's Claim
+3 Obstinate Baloth
+4 Ratchet Bomb

@@ -144,13 +144,14 @@ public class InputProxy implements Observer {
         return false;
     }
 
-    public final void selectAbility(final SpellAbility sa) {
+    public final boolean selectAbility(final SpellAbility sa) {
         final Input inp = getInput();
         if (inp != null) {
             if (sa != null) {
-                inp.selectAbility(sa);
+                return inp.selectAbility(sa);
             }
         }
+        return false;
     }
 
     public final void alphaStrike() {

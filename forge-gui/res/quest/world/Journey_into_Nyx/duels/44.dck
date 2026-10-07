@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Elrond
+Title=Elrond
+Icon=Elrond.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Falls_Church/Ben_Glaubinger_-_RUG_Monsters_(Standard,_#77142).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Elvish Mystic
+1 Nylea, God of the Hunt
+1 Polis Crusher
+3 Polukranos, World Eater
+2 Prime Speaker Zegana
+2 Prophet of Kruphix
+2 Scavenging Ooze
+4 Stormbreath Dragon
+4 Sylvan Caryatid
+1 Xenagos, God of Revels
+3 Cyclonic Rift
+4 Domri Rade
+2 Kiora, the Crashing Wave
+4 Breeding Pool
+4 Forest
+2 Mutavault
+4 Stomping Ground
+4 Temple of Abandon
+1 Temple of Epiphany
+4 Temple of Mystery
+[Sideboard]
+1 Bow of Nylea
+3 Mistcutter Hydra
+3 Nylea's Disciple
+1 Progenitor Mimic
+3 Spell Rupture
+1 Sylvan Primordial

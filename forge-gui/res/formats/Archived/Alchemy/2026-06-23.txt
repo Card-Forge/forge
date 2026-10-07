@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (MSH)
+Type:Archived
+Subtype:Arena
+Effective:2026-06-23
+Sets:ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, SPM, OM1, TLA, ECL, YECL, TMT, SOS, YSOS, MSH
+Banned:Sewer-veillance Cam

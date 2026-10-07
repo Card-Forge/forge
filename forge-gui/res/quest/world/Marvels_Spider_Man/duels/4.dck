@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=He-Man
+Title=He-Man
+Icon=He-Man.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/CarlaQueiroz_-_Rakdos_Aggro_(Standard,_#2690353).dck
+Deck Type=constructed
+
+[Main]
+4 Callous Sell-Sword
+4 Emberheart Challenger
+4 Hired Claw
+4 Slickshot Show-Off
+4 Stadium Headliner
+1 Kellan, Planar Trailblazer
+4 Full Bore
+4 Might of the Meek
+4 Turn Inside Out
+3 Dreadmaw's Ire
+1 Bulk Up
+4 Leyline of Resonance
+18 Mountain
+1 Blazemire Verge
+[Sideboard]
+4 Razorkin Needlehead
+3 Fanatical Firebrand
+2 Ghost Vacuum
+2 Screaming Nemesis
+1 Dreadmaw's Ire
+1 Electro, Assaulting Battery
+1 Ruinous Rampage
+1 Sunspine Lynx

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jesse James
+Title=Jesse James
+Icon=Jesse James.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/SCG_Invitational_Qualifier_Littleton/Russell_Schachterle_-_Eldrazi_(Modern,_#610419).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+3 Endless One
+3 Matter Reshaper
+4 Reality Smasher
+4 Ruination Guide
+2 Shriekmaw
+4 Thought-Knot Seer
+2 Ratchet Bomb
+3 Dismember
+4 Eldrazi Temple
+4 Eye of Ugin
+3 Island
+4 Polluted Delta
+2 Shivan Reef
+1 Tomb of the Spirit Dragon
+4 Underground River
+1 Urborg, Tomb of Yawgmoth
+1 Wastes
+1 Watery Grave
+[Sideboard]
+1 Consuming Vapors
+1 Cyclonic Rift
+1 Doom Blade
+1 Grafdigger's Cage
+1 Hurkyl's Recall
+1 Oblivion Sower
+1 Relic of Progenitus
+1 Spellskite
+3 Stubborn Denial
+1 Thorn of Amethyst
+1 Ulamog, the Ceaseless Hunger

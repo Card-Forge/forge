@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_States_Columbus/Michael_Lee_-_Red_Deck_Wins_(Modern,_#618043).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+1 Thunderous Wrath
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+2 Blackcleave Cliffs
+1 Blood Crypt
+4 Bloodstained Mire
+3 Mountain
+2 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+1 Illness in the Ranks
+2 Molten Rain
+1 Molten Vortex
+1 Rain of Gore
+3 Smash to Smithereens
+2 Wear // Tear

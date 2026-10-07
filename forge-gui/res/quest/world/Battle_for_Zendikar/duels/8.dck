@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_New_Holland/Max_Perlmutter_-_Abzan_(Standard,_#517480).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+3 Den Protector
+4 Heir of the Wilds
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+3 Dromoka's Command
+2 Murderous Cut
+4 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Dragonlord Dromoka
+1 Ob Nixilis Reignited
+3 Painful Truths
+1 Sorin, Solemn Visitor
+2 Tragic Arrogance
+3 Transgress the Mind
+3 Ultimate Price
+1 Utter End

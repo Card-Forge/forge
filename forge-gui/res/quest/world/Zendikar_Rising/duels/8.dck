@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sphinx
+Title=Sphinx
+Icon=Sphinx.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Byers_-_Jund_Midrange_(Standard,_#1085758).dck
+Deck Type=constructed
+
+[Main]
+1 Murderous Rider
+2 Korvold, Fae-Cursed King
+3 Woe Strider
+3 Kroxa, Titan of Death's Hunger
+3 Rankle, Master of Pranks
+3 Skyclave Shade
+4 Bonecrusher Giant
+3 Village Rites
+1 Bloodchief's Thirst
+1 Agadeem's Awakening
+2 Shatterskull Smashing
+3 Claim the Firstborn
+2 Elspeth's Nightmare
+3 The Akroan War
+3 Tymaret Calls the Dead
+1 Forest
+2 Mountain
+2 Savai Triome
+2 Castle Locthwain
+2 Temple of Malice
+4 Cragcrown Pathway
+4 Fabled Passage
+6 Swamp
+[Sideboard]
+1 Feed the Swarm
+1 Skyclave Shade
+1 Claim the Firstborn
+2 Cling to Dust
+2 Embereth Shieldbreaker
+2 Duress
+2 Ox of Agonas
+2 Eliminate
+2 Shredded Sails

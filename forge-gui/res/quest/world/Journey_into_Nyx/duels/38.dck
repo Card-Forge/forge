@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/Grand_Prix_Chicago_2014/Steve_Wise_-_Azorius_Control_(Standard,_#77474).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Elixir of Immortality
+4 Azorius Charm
+1 Celestial Flare
+4 Dissolve
+2 Last Breath
+1 Negate
+4 Sphinx's Revelation
+4 Supreme Verdict
+1 Banishing Light
+4 Detention Sphere
+3 Font of Fortunes
+2 Elspeth, Sun's Champion
+3 Jace, Architect of Thought
+2 Azorius Guildgate
+4 Hallowed Fountain
+6 Island
+4 Mutavault
+6 Plains
+4 Temple of Enlightenment
+[Sideboard]
+2 Archangel of Thune
+1 Deicide
+3 Fiendslayer Paladin
+2 Gainsay
+1 Jace, Memory Adept
+3 Planar Cleansing

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=JuzamGenie
+Title=JuzamGenie
+Icon=JuzamGenie.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Shuangsheng_Wang_-_Mono-White_Control_(Modern,_#2192878).dck
+Deck Type=constructed
+
+[Main]
+2 Witch Enchanter
+3 Recruiter of the Guard
+4 White Orchid Phantom
+4 Solitude
+2 Skyclave Apparition
+3 Phelia, Exuberant Shepherd
+3 Aven Interrupter
+2 The One Ring
+4 Ephemerate
+2 March of Otherworldly Light
+2 Parting Gust
+3 Reprieve
+4 Suppression Field
+2 Ghostly Prison
+4 Flagstones of Trokair
+4 Emeria, the Sky Ruin
+13 Plains
+[Sideboard]
+2 Kor Firewalker
+2 Celestial Purge
+3 Suncleanser
+2 Sanctifier en-Vec
+2 Declaration in Stone
+2 Surge of Salvation
+2 Calamity's Wake

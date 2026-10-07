@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Medium
+Description=Zendikar/Zendikar_Game_Day_-_White_Cap_Comics_-_USA/Harrison_Frede_-_Machine_Head_(Standard,_#3546).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Guul Draz Specter
+4 Hypnotic Specter
+4 Nyxathid
+3 Obsidian Fireheart
+4 Bituminous Blast
+3 Doom Blade
+4 Lightning Bolt
+4 Terminate
+2 Volcanic Fallout
+4 Blightning
+2 Earthquake
+4 Akoum Refuge
+4 Dragonskull Summit
+7 Mountain
+7 Swamp
+[Sideboard]
+3 Duress
+2 Haunting Echoes
+4 Thought Hemorrhage
+2 Vampire Hexmage

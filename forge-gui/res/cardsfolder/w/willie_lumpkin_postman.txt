@@ -1,0 +1,11 @@
+Name:Willie Lumpkin, Postman
+ManaCost:W U
+Types:Legendary Creature Human Citizen
+PT:1/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ NICKNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to an opponent, you draw a card and that player may draw a card. If they do, that player can't attack you or permanents you control during their next turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | UnlessCost$ Draw<1/Player.TriggeredTarget> | UnlessPayer$ TriggeredTarget | UnlessSwitched$ True | EffectOwner$ TriggeredTarget | RememberObjects$ You | StaticAbilities$ STCantAttack | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered,Permanent.RememberedPlayerCtrl | Description$ You can't attack remembered player or permanents they control during your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Willie Lumpkin can't be blocked.\nWhenever Willie Lumpkin deals combat damage to an opponent, you draw a card and that player may draw a card. If they do, that player can't attack you or permanents you control during their next turn.

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/TheDogFish_-_Golgari_Reanimator_(Modern,_#2376858).dck
+Deck Type=constructed
+
+[Main]
+2 Phyrexian Fleshgorger
+3 Troll of Khazad-dûm
+2 Harvester of Misery
+4 Emperor of Bones
+2 Agonasaur Rex
+4 Archon of Cruelty
+2 Bitter Triumph
+2 Revitalizing Repast
+4 Fatal Push
+4 Malevolent Rumble
+4 Thoughtseize
+2 Culling Ritual
+3 Witherbloom Command
+1 Bone Shards
+4 Persist
+2 Underground Mortuary
+4 Shifting Woodland
+2 Wooded Foothills
+1 Forest
+1 Swamp
+4 Verdant Catacombs
+2 Overgrown Tomb
+1 Bloodstained Mire
+[Sideboard]
+1 Toxic Deluge
+3 Endurance
+2 Crime // Punishment
+4 Fulminator Mage
+2 Force of Vigor
+3 Break the Ice

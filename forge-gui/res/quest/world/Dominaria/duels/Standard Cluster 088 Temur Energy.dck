@@ -1,0 +1,34 @@
+[metadata]
+Name=Temur Energy
+Deck Type=constructed
+Title=Temur Energy
+Description=Temur Energy
+Difficulty=Easy
+Icon=Waterlord
+[Main]
+4 Abrade
+4 Aether Hub
+4 Botanical Sanctum
+1 Carnage Tyrant
+2 Forest
+1 Forest
+4 Glorybringer
+3 Harnessed Lightning
+4 Jadelight Ranger
+3 Magma Spray
+1 Mountain
+4 Rekindling Phoenix
+1 Rhonas the Indomitable
+4 Rootbound Crag
+4 Servant of the Conduit
+4 Sheltered Thicket
+4 Spirebluff Canal
+4 Thrashing Brontodon
+4 Voltaic Brawler
+[Sideboard]
+3 Chandra's Defeat
+2 Chandra, Torch of Defiance
+2 Lifecrafter's Bestiary
+4 Negate
+2 Spell Pierce
+2 Struggle // Survive

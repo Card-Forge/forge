@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Invitational_Qualifier_-_Burnsville,_MN/Jason_Kruger_-_G-B_Midrange_(Modern,_#659961).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+2 Duskwatch Recruiter
+2 Elves of Deep Shadow
+2 Eternal Witness
+3 Fulminator Mage
+2 Griselbrand
+3 Kitchen Finks
+3 Phyrexian Obliterator
+2 Scavenging Ooze
+2 Tasigur, the Golden Fang
+1 Thrun, the Last Troll
+2 Abrupt Decay
+2 Doom Blade
+1 Maelstrom Pulse
+3 Thoughtseize
+2 Phyrexian Arena
+4 Forest
+2 Ghost Quarter
+2 Hissing Quagmire
+2 Overgrown Tomb
+4 Swamp
+3 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+3 Woodland Cemetery
+[Sideboard]
+1 Creeping Corrosion
+2 Damnation
+1 Glaring Spotlight
+2 Leyline of the Void
+2 Nature's Claim
+2 Rain of Tears
+2 Shadow of Doubt
+1 Spellskite
+2 Summoning Trap

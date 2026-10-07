@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Daily_#9286373/sokos13_-_sokos13_(3-1)_(Modern,_#519091).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Monastery Swiftspear
+4 Pia and Kiran Nalaar
+4 Thopter Engineer
+3 Zurgo Bellstriker
+4 Atarka's Command
+4 Fiery Impulse
+3 Trumpet Blast
+2 Wild Slash
+4 Dragon Fodder
+2 Hordeling Outburst
+4 Bloodstained Mire
+2 Cinder Glade
+1 Forest
+2 Foundry of the Consuls
+8 Mountain
+1 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Arc Lightning
+1 Goblin Heelcutter
+2 Magmatic Chasm
+2 Outpost Siege
+3 Rending Volley
+4 Roast

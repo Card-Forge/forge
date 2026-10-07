@@ -37,6 +37,7 @@ public class SoundSystem {
     private SoundSystem() {
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
     }
+
     private static boolean isUsingAltSystem() {
         return !GuiBase.getInterface().isLibgdxPort() && FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
     }
@@ -53,10 +54,8 @@ public class SoundSystem {
             if (FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)<1) {
                 return emptySound;
             }
-        } else {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
-                return emptySound;
-            }
+        } else if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            return emptySound;
         }
 
         IAudioClip clip = loadedClips.get(type);
@@ -65,8 +64,8 @@ public class SoundSystem {
             clip = GuiBase.getInterface().createAudioClip(resource);
             if (clip == null) {
                 return emptySound;
-            } else
-                loadedClips.put(type, clip);
+            }
+            loadedClips.put(type, clip);
         }
         return clip;
     }
@@ -82,10 +81,8 @@ public class SoundSystem {
             if (FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)<1) {
                 return emptySound;
             }
-        } else {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
-                return emptySound;
-            }
+        } else if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            return emptySound;
         }
 
         IAudioClip clip = loadedScriptClips.get(fileName);
@@ -93,21 +90,16 @@ public class SoundSystem {
             clip = GuiBase.getInterface().createAudioClip(fileName);
             if (clip == null) {
                 return emptySound;
-            } else
-                loadedScriptClips.put(fileName, clip);
+            }
+            loadedScriptClips.put(fileName, clip);
         }
         return clip;
     }
 
     public boolean hasResource(final SoundEffectType type) {
-        boolean result = true;
-        IAudioClip clip = fetchResource(type);
-        if(clip.equals(emptySound)) {
-            result = false;
-        }
-        return result;
+        return !fetchResource(type).equals(emptySound);
     }
-    
+
     /**
      * Play the sound associated with the resource specified by the file name
      * ("synchronized" with other sounds of the same kind means: only one can play at a time).
@@ -119,9 +111,9 @@ public class SoundSystem {
 
         if (isUsingAltSystem()) {
             File file = getSoundResource(resourceFileName);
-            if(file == null)
-                return;
-            GuiBase.getInterface().startAltSoundSystem(file.getPath(), isSynchronized);
+            if (file != null) {
+                GuiBase.getInterface().startAltSoundSystem(file.getPath(), isSynchronized);
+            }
         }
         else {
             final IAudioClip snd = fetchResource(resourceFileName);
@@ -187,7 +179,6 @@ public class SoundSystem {
     public void setBackgroundMusic(final MusicPlaylist playlist) {
         setBackgroundMusic(playlist, false);
     }
-
     public void setBackgroundMusic(final MusicPlaylist playlist, boolean shelvePrevious) {
         if(playlist == currentPlaylist)
             return;
@@ -292,11 +283,11 @@ public class SoundSystem {
             changeBackgroundTrack();
         }
     }
+
     public void pause() {
         shouldPlayMusic = false;
         updatePlayPause();
     }
-
     public void resume() {
         shouldPlayMusic = true;
         updatePlayPause();
@@ -306,7 +297,8 @@ public class SoundSystem {
     private void updatePlayPause() {
         if(currentTrack == null)
             return;
-        boolean shouldPlay = shouldPlayMusic && hasWindowFocus;
+        boolean shouldPlay = shouldPlayMusic && (hasWindowFocus
+                || !FModel.getPreferences().getPrefBoolean(FPref.UI_PAUSE_MUSIC_ON_FOCUS_LOSS));
         if(shouldPlay && !currentTrack.isPlaying())
             currentTrack.resume();
         else if(!shouldPlay && currentTrack.isPlaying())
@@ -332,6 +324,9 @@ public class SoundSystem {
         invalidateSoundCache();
     }
 
+    public boolean hasWindowFocus() {
+        return hasWindowFocus;
+    }
     public void setWindowFocus(boolean hasWindowFocus) {
         this.hasWindowFocus = hasWindowFocus;
         updatePlayPause();
@@ -388,7 +383,6 @@ public class SoundSystem {
         return out;
     }
 
-
     public void invalidateSoundCache() {
         for (IAudioClip c : loadedClips.values()) {
             c.dispose();
@@ -402,8 +396,7 @@ public class SoundSystem {
         soundResourceAssetCache.clear();
     }
 
-    public String[] getAvailableSoundSets()
-    {
+    public String[] getAvailableSoundSets() {
         List<String> availableSets = collectProfiles(ForgeConstants.SOUND_DIR);
 
         if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET))) {

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Pikeville/Ian_Howard_-_B-R_Zombies_(Standard,_#49886).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+3 Hellrider
+3 Knight of Infamy
+2 Thundermaw Hellkite
+2 Brimstone Volley
+1 Murder
+2 Searing Spear
+2 Tragic Slip
+2 Bonfire of the Damned
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+2 Rakdos Guildgate
+9 Swamp
+[Sideboard]
+2 Dreadbore
+2 Duress
+2 Mark of Mutiny
+2 Mizzium Mortars
+2 Pillar of Flame
+1 Rakdos Charm
+2 Tormod's Crypt
+2 Vampire Nighthawk

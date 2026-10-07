@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=BabaluAye
+Title=BabaluAye
+Icon=BabaluAye.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/MTGMack_-_Izzet_Ramp_(Standard,_#1525544).dck
+Deck Type=constructed
+
+[Main]
+3 Cityscape Leveler
+4 Fable of the Mirror-Breaker
+4 Skitterbeam Battalion
+4 Reckoner Bankbuster
+4 The Mightstone and Weakstone
+1 Negate
+1 Abrade
+1 Essence Scatter
+2 Abrade
+2 Make Disappear
+4 Stern Lesson
+3 Brotherhood's End
+1 Mountain
+1 Mountain
+1 Otawara, Soaring City
+1 Island
+1 Shivan Reef
+1 Sokenzan, Crucible of Defiance
+3 Island
+3 Mountain
+3 Shivan Reef
+4 Stormcarved Coast
+4 Field of Ruin
+4 Xander's Lounge
+[Sideboard]
+1 Brotherhood's End
+1 Voltage Surge
+1 Spell Pierce
+2 Unlicensed Hearse
+2 Saheeli, Filigree Master
+2 Disdainful Stroke
+2 Strangle
+4 Thran Spider

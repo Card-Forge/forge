@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Easy
+Description=New_Phyrexia/Starcitygames_Open_Series__Cincinnati/Ryan_Baker_-_Valakut_Ramp_(Standard,_#17235).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+1 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+4 Solemn Simulacrum
+2 Urabrask the Hidden
+2 Dismember
+1 Harrow
+2 Lightning Bolt
+4 Explore
+3 Green Sun's Zenith
+4 Rampant Growth
+2 Evolving Wilds
+6 Forest
+12 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Act of Aggression
+2 Combust
+2 Gaea's Revenge
+3 Obstinate Baloth
+3 Pyroclasm
+1 Ricochet Trap
+1 Tumble Magnet

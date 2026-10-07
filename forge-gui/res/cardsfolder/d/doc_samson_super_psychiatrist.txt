@@ -1,0 +1,11 @@
+Name:Doc Samson, Super Psychiatrist
+ManaCost:4 G
+Types:Legendary Creature Gamma Doctor Hero
+PT:3/6
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidSource$ You | ValidObject$ Permanent.YouCtrl+inZoneBattlefield | ReplaceWith$ AddOneMoreCounters | Description$ If you would put one or more counters on a permanent you control, put that many plus one of each of those kinds of counters on that permanent instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ Y | SpellDescription$ Add X mana of any one color, where X is NICKNAME's power.
+SVar:X:ReplaceCount$CounterNum/Plus.1
+SVar:Y:Count$CardPower
+DeckNeeds:Ability$Counters
+Oracle:If you would put one or more counters on a permanent you control, put that many plus one of each of those kinds of counters on that permanent instead.\n{T}: Add X mana of any one color, where X is Doc Samson's power.

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Bamm Bamm Rubble
+Title=Bamm Bamm Rubble
+Icon=Bamm Bamm Rubble.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Egeyama_Tomoki_-_Mono_Red_(Standard,_#2281628).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Lightning Strike
+4 Burst Lightning
+4 Monstrous Rage
+3 Witchstalker Frenzy
+17 Mountain
+4 Rockface Village
+[Sideboard]
+3 Urabrask's Forge
+2 Lithomantic Barrage
+4 Torch the Tower
+3 Twisted Fealty
+3 Sunspine Lynx

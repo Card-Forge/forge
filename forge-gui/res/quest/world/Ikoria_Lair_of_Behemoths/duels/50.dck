@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian
+Title=Cohen the Barbarian
+Icon=Cohen the Barbarian.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adrian_Casabo_-_Abzan_Bogles_(Standard,_#952086).dck
+Deck Type=constructed
+
+[Main]
+1 Kogla, the Titan Ape
+3 Gyruda, Doom of Depths
+3 Dream Eater
+4 Paradise Druid
+4 Spark Double
+4 Thassa, Deep-Dwelling
+4 Charming Prince
+4 Growth Spiral
+4 Migration Path
+4 Wolfwillow Haven
+2 Island
+2 Plains
+3 Fabled Passage
+3 Temple of Mystery
+3 Forest
+4 Temple Garden
+4 Hallowed Fountain
+4 Breeding Pool
+[Sideboard]
+1 Gyruda, Doom of Depths
+2 Wilt
+3 Aether Gust
+3 Destiny Spinner
+3 Dovin's Veto
+3 Shark Typhoon

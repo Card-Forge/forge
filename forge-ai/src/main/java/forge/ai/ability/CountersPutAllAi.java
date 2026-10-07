@@ -35,6 +35,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final boolean curse = sa.isCurse();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
+        // TODO support ValidCards2 directly instead
         if ("OwnCreatsAndOtherPWs".equals(logic)) {
             hList = CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
             cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
@@ -139,8 +140,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
 
             for (final Player p : players) {
                 if (sa.canTarget(p)) {
-                    boolean preferred = false;
-                    preferred = (sa.isCurse() && p.isOpponentOf(aiPlayer)) || (!sa.isCurse() && p == aiPlayer);
+                    boolean preferred = (sa.isCurse() && p.isOpponentOf(aiPlayer)) || (!sa.isCurse() && p == aiPlayer);
                     sa.resetTargets();
                     sa.getTargets().add(p);
                     if (preferred) {
@@ -149,9 +149,8 @@ public class CountersPutAllAi extends SpellAbilityAi {
 
                     if (mandatory) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }

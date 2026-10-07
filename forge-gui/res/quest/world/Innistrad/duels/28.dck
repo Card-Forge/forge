@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Medium
+Description=Innistrad/2011_States_Delaware/RichardNguyen_-_Red_Deck_Wins_(Standard,_#20868).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Grim Lavamancer
+3 Hero of Oxid Ridge
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+2 Act of Aggression
+1 Ancient Grudge
+4 Brimstone Volley
+4 Incinerate
+4 Shock
+3 Koth of the Hammer
+4 Blackcleave Cliffs
+4 Dragonskull Summit
+14 Mountain
+[Sideboard]
+2 Arc Trail
+3 Doom Blade
+2 Surgical Extraction
+1 Traitorous Blood
+1 Tribute to Hunger
+3 Vulshok Refugee

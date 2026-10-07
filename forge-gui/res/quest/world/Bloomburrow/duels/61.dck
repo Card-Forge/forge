@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Barney Rubble
+Title=Barney Rubble
+Icon=Barney Rubble.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Martin_Eppelein_-_Ur_Wizards_(Modern,_#2172293).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+3 Snapcaster Mage
+4 Tamiyo, Inquisitive Student
+3 Thundertrap Trainer
+4 Counterspell
+4 Flame of Anor
+2 Flare of Denial
+4 Galvanic Discharge
+2 Invert Polarity
+3 Lightning Bolt
+2 Sink into Stupor
+2 Spell Snare
+1 Expressive Iteration
+4 Preordain
+1 Hall of Storm Giants
+4 Island
+1 Mountain
+1 Otawara, Soaring City
+3 Prismatic Vista
+4 Scalding Tarn
+1 Spirebluff Canal
+3 Steam Vents
+2 Thundering Falls
+[Sideboard]
+3 Consign to Memory
+3 Harbinger of the Seas
+1 Mystical Dispute
+2 Pyroclasm
+1 Spell Snare
+2 Stern Scolding
+1 Surgical Extraction
+2 Unlicensed Hearse

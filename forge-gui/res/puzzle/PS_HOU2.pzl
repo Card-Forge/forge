@@ -3,7 +3,7 @@ Name:Possibility Storm - Hour of Devastation #02
 URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU2.jpg
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn.
 [state]
 humanlife=20

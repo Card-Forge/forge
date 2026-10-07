@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Robin Hood
+Title=Robin Hood
+Icon=Robin Hood.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Alberto_Santos_-_Izzet_Prowess_(Standard,_#2924723).dck
+Deck Type=constructed
+
+[Main]
+4 Elusive Otter
+4 Slickshot Show-Off
+2 Eddymurk Crab
+4 Burst Lightning
+4 Opt
+2 Secret Identity
+2 Unsummon
+4 Boomerang Basics
+4 Flow State
+4 Sleight of Hand
+1 Wild Ride
+4 Stormchaser's Talent
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Multiversal Passage
+1 Willowrush Verge
+[Sideboard]
+2 Colorstorm Stallion
+2 Ral, Crackling Wit
+2 Soul-Guide Lantern
+1 Annul
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Eddymurk Crab
+1 Get Out
+1 Ghost Vacuum
+1 Roaring Furnace
+1 Spell Pierce
+1 Wan Shi Tong, Librarian

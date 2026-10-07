@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Aaron_Elliott_-_Jund_Aggro_(Modern,_#1554485).dck
+Deck Type=constructed
+
+[Main]
+4 Glistener Elf
+4 Ignoble Hierarch
+3 Phyrexian Crusader
+4 Plague Stinger
+2 Venerated Rotpriest
+4 Blossoming Defense
+3 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Ancestral Anger
+2 Reckless Charge
+4 Scale Up
+1 Boseiju, Who Endures
+1 Forest
+1 Grove of the Burnwillows
+4 Inkmoth Nexus
+1 Nurturing Peatland
+2 Overgrown Tomb
+1 Pendelhaven
+1 Stomping Ground
+3 Verdant Catacombs
+3 Wooded Foothills
+[Sideboard]
+2 Alpine Moon
+2 Chalice of the Void
+1 Dismember
+3 Endurance
+2 Force of Vigor
+1 Nature's Claim
+1 Spellskite
+3 Veil of Summer

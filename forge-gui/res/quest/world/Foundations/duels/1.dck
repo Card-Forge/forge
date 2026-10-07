@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/GzusReturned_-_Rakdos_Reanimator_(Standard,_#2274013).dck
+Deck Type=constructed
+
+[Main]
+4 Atraxa, Grand Unifier
+4 Fear of Missing Out
+4 Koma, World-Eater
+1 Valgavoth, Terror Eater
+4 Bitter Triumph
+2 Cut Down
+4 Duress
+1 Push // Pull
+1 Brotherhood's End
+4 Zombify
+4 Bitter Reunion
+3 The Cruelty of Gix
+2 The Elder Dragon War
+4 Blackcleave Cliffs
+4 Swamp
+1 Fountainport
+3 Sulfurous Springs
+4 Raucous Theater
+4 Blazemire Verge
+2 Mountain
+[Sideboard]
+2 Abrade
+1 Brotherhood's End
+1 Valgavoth, Terror Eater
+2 Ghost Vacuum
+2 Molten Collapse
+3 Sheoldred, the Apocalypse
+2 Virtue of Persistence
+2 Pilfer

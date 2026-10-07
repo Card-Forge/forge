@@ -1,0 +1,8 @@
+Name:Arnim Zola, Bio-Fanatic
+ManaCost:2 B
+Types:Legendary Artifact Creature Scientist Villain
+PT:2/3
+A:AB$ Token | Cost$ 3 T | TokenTapped$ True | TokenScript$ b_2_1_villain_menace | CheckSVar$ X | SVarCompare$ GE2 | SpellDescription$ Create a tapped 2/1 black Villain creature token with menace. Activate only if there are two or more creature cards in your graveyard. (It can't be blocked except by two or more creatures.)
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+DeckHas:Ability$Token
+Oracle:{3}, {T}: Create a tapped 2/1 black Villain creature token with menace. Activate only if there are two or more creature cards in your graveyard. (It can't be blocked except by two or more creatures.)

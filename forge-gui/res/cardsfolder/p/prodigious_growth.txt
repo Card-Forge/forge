@@ -3,5 +3,5 @@ ManaCost:4 G G
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 7 | AddToughness$ 7 | AddKeyword$ Trample | Description$ Enchanted creature gets +7/+7 and has trample.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 7 | AddToughness$ 7 | AddKeyword$ Trample | Description$ Enchanted creature gets +7/+7 and has trample.
 Oracle:Enchant creature\nEnchanted creature gets +7/+7 and has trample.

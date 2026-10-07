@@ -1,0 +1,11 @@
+Name:Corpseweaver Prodigy
+ManaCost:2 B
+Types:Creature Treefolk Warlock
+PT:2/4
+K:Deathtouch
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | CheckSVar$ X | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Infusion — At the beginning of your second main phase, if you gained life this turn, conjure a card named Bridge from Below into your graveyard.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Bridge from Below | Zone$ Graveyard
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Deathtouch\nIf a creature an opponent controls would die, exile it instead.\nInfusion — At the beginning of your second main phase, if you gained life this turn, conjure a card named Bridge from Below into your graveyard.

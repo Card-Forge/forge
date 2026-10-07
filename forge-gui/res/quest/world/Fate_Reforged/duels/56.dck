@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/Modern_Constructed_League/Tommycakes_-_Faeries_(Modern,_#505378).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Glen Elendra Archmage
+3 Mistbind Clique
+1 Scion of Oona
+4 Spellstutter Sprite
+1 Tasigur, the Golden Fang
+2 Vendilion Clique
+1 Sword of Feast and Famine
+2 Cryptic Command
+1 Dismember
+1 Dispel
+1 Go for the Throat
+3 Mana Leak
+1 Spell Snare
+2 Ultimate Price
+3 Inquisition of Kozilek
+3 Thoughtseize
+4 Bitterblossom
+3 Creeping Tar Pit
+2 Darkslick Shores
+1 Flooded Strand
+4 Island
+4 Mutavault
+4 Polluted Delta
+4 River of Tears
+2 Secluded Glen
+1 Swamp
+1 Watery Grave
+[Sideboard]
+1 Ashiok, Nightmare Weaver
+1 Batterskull
+2 Countersquall
+2 Damnation
+1 Disfigure
+1 Hurkyl's Recall
+1 Jace, Architect of Thought
+2 Sower of Temptation

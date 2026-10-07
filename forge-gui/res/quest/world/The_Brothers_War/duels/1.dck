@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Lord_Beerus_-_Red_Deck_Wins_(Standard,_#1519243).dck
+Deck Type=constructed
+
+[Main]
+2 Feldon, Ronom Excavator
+4 Kumano Faces Kakkazan
+4 Bloodthirsty Adversary
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Shivan Devastator
+4 Play with Fire
+4 Lightning Strike
+2 Obliterating Bolt
+4 Reckless Impulse
+2 Mechanized Warfare
+1 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+17 Mountain
+[Sideboard]
+1 Reckoner Bankbuster
+2 Torch Breath
+2 Reckoner Bankbuster
+2 Abrade
+2 The Elder Dragon War
+3 End the Festivities
+3 Rending Flame

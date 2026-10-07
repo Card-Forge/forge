@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -30,7 +31,9 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.util.Localizer;
 import forge.util.MyRandom;
+import forge.util.ScreenUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,6 +61,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     private EventScene() {
         super(Forge.isLandscapeMode() ? "ui/event.json" : "ui/event_portrait.json");
+        Localizer localizer = Forge.getLocalizer();
         // TODO: Add translation
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         DialogData introDialog = new DialogData();
@@ -78,7 +82,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         enterWithShards.condition = new DialogData.ConditionData[]{hasShards};
 
         if (currentEvent.eventRules.acceptsChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+ChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemChallengeCoin");
 
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Challenge Coin";
@@ -88,7 +92,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
         } else if (currentEvent.eventRules.acceptsSilverChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+SilverChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemSilverChallengeCoin");
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Silver Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
@@ -97,7 +101,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
         } else if (currentEvent.eventRules.acceptsBronzeChallengeCoin) {
-            enterWithCoin.name = "Redeem a Challenge Coin [+BronzeChallengeCoin]";
+            enterWithCoin.name = localizer.getMessage("advRedeemBronzeChallengeCoin");
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
             hasCoin.item = "Bronze Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
@@ -179,19 +183,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
         });
 
         editDeck = ui.findActor("editDeck");
-        editDeck.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (currentEvent.format == AdventureEventController.EventFormat.Draft
-                        && (currentEvent.eventStatus == Ready || currentEvent.eventStatus == Started)) {
-                    DraftScene.instance().loadEvent(currentEvent);
-                    Forge.switchScene(DraftScene.instance());
-                } else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
-                    DeckEditScene.getInstance().loadEvent(currentEvent);
-                    Forge.switchScene(DeckEditScene.getInstance());
-                }
-            }
-        });
 
         Window window = ui.findActor("scrollWindow");
         root = ui.findActor("enemies");
@@ -217,11 +208,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     private void refresh() {
-        if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
-            // in Sealed events, there is no draft table and no pack selection as such
-            metaDraftTable.setVisible(false);
-        }
-
         if (metaDraftTable.isVisible()) {
             scrollContainer = metaDraftTable;
             headerTable.clear();
@@ -264,8 +250,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 List<AdventureEventData.AdventureEventMatch> matches = currentEvent.getMatches(i + 1);
 
                 if (matches == null) {
-                    //todo: add translation
-                    round.add(Controls.newTextraLabel("Pairings not yet generated"));
+                    round.add(Controls.newTextraLabel(Forge.getLocalizer().getMessage("advPairingsNotGenerated")));
                 } else {
                     Table roundScrollContainer = new Table(Controls.getSkin());
                     for (AdventureEventData.AdventureEventMatch match : matches) {
@@ -429,14 +414,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
         GameHUD.getInstance().updateBGM();
         scrollContainer.clear();
 
-        // TODO: should this be moved elsewhere?
-        if (currentEvent != null &&
-                currentEvent.format == AdventureEventController.EventFormat.Sealed &&
-                currentEvent.eventStatus == AdventureEventController.EventStatus.Entered &&
-                currentEvent.registeredDeck.getMain().countAll() >= 40) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-        }
-
         if (money != null) {
             WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[+Gold] [BLACK]" + AdventurePlayer.current().getGold()));
         }
@@ -453,40 +430,42 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void editDeck() {
-        if (currentEvent.eventStatus == Ready) {
-            DraftScene.instance().loadEvent(currentEvent);
-            Forge.switchScene(DraftScene.instance());
-        }
+        TextureRegion textureRegion = null;
+        if (lastGameScene instanceof UIScene uiScene)
+            textureRegion = uiScene.getUIBackground();
+        DeckEditScene.getInstance(textureRegion).loadEvent(currentEvent);
+        Forge.switchScene(DeckEditScene.getInstance(textureRegion));
     }
 
     public void advance() {
         switch (currentEvent.eventStatus) {
             case Available:
                 activate(entryDialog); //Entry fee pop-up
-
                 break;
             case Entered: //Start draft or select deck
                 //Show progress / wait indicator? Draft can take a while to generate
                 switch (currentEvent.format) {
                     case Draft:
-                        DraftScene.instance().loadEvent(currentEvent);
-                        Forge.switchScene(DraftScene.instance());
+                        editDeck();
                         break;
                     case Sealed:
                         if (currentEvent.registeredDeck.get(DeckSection.Sideboard) == null) {
                             currentEvent.generateSealedPool();
                         }
-                        DeckEditScene.getInstance().loadEvent(currentEvent);
-                        Forge.switchScene(DeckEditScene.getInstance());
+                        currentEvent.eventStatus = Ready;
+                        editDeck();
                         break;
                     case Jumpstart:
                         loadMetaDraft();
                 }
                 break;
             case Ready: //Commit to selected deck
-                //Add confirmation pop-up?
+                if(!validateDeck())
+                    break;
                 currentEvent.startEvent();
             case Started: //Play next round
+                if(!validateDeck())
+                    break;
                 advance.setDisabled(true);
                 startRound();
                 break;
@@ -497,7 +476,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 break;
 
             case Abandoned: //Show results but don't allow any interaction
-
                 break;
         }
         refresh();
@@ -552,11 +530,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
             EnemySprite enemy = humanMatch.p2.getSprite();
             currentEvent.nextOpponent = humanMatch.p2;
             advance.setDisabled(true);
-            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+            TransitionScreen transitionScreen = new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, false, currentEvent);
                 advance.setDisabled(false);
                 Forge.switchScene(duelScene);
-            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord())));
+            }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false,"",
+            Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord());
+            transitionScreen.eventDuel = true;
+            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(transitionScreen));
         } else {
             finishRound();
             advance.setDisabled(false);
@@ -576,13 +557,13 @@ public class EventScene extends MenuScene implements IAfterMatch {
             currentEvent.matchesLost++;
         }
 
-        if (winner) {
-            //AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
-            //AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        } else {
-//            AdventureQuestController.instance().updateQuestsLose(currentMob);
+//        if (winner) {
+//            AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
 //            AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        }
+//        } else {
+//           AdventureQuestController.instance().updateQuestsLose(currentMob);
+//           AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+//        }
 
         finishRound();
     }
@@ -602,6 +583,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void loadMetaDraft() {
+        if(currentEvent.jumpstartBoosters.isEmpty()) {
+            metaDraftTable.setVisible(false);
+            return;
+        }
+
         metaDraftTable.setVisible(true);
 
         metaDraftTable.clear();
@@ -645,6 +631,24 @@ public class EventScene extends MenuScene implements IAfterMatch {
             metaDraftTable.add(selectButton).padLeft(10);
         }
         eventPages[0] = metaDraftTable;
+    }
+
+    private boolean validateDeck() {
+        String deckError = currentEvent.format.getDeckFormat().getDeckConformanceProblem(currentEvent.registeredDeck);
+
+        if(deckError != null) {
+            DialogData warning = new DialogData();
+            warning.locname = "lblInvalidDeck";
+            warning.text = "Deck " + deckError; //Needs localization but so does getDeckConformanceProblem.
+
+            DialogData dismiss = new DialogData();
+            dismiss.locname = "lblOK";
+            warning.options = new DialogData[]{dismiss};
+
+            loadDialog(warning);
+            return false;
+        }
+        return true;
     }
 
     private boolean selectedJumpstartPackIsLast(Deck selectedPack) {

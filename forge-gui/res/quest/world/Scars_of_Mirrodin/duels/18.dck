@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2010_MtG_Worlds__The_Finals_Top_8_Standard/Keiji_Aizawa_-_Valakut_Ramp_(Standard,_#8503).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+3 Inferno Titan
+4 Primeval Titan
+4 Harrow
+4 Lightning Bolt
+2 Summoning Trap
+4 Cultivate
+4 Explore
+4 Khalni Heart Expedition
+4 Evolving Wilds
+4 Forest
+10 Mountain
+1 Raging Ravine
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+3 Gaea's Revenge
+4 Lotus Cobra
+4 Pyroclasm
+2 Tumble Magnet

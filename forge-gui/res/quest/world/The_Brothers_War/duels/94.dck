@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Dr Fate
+Title=Dr Fate
+Icon=Dr Fate.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Aaron_Schwarcz_-_Jund_Control_(Modern,_#1541326).dck
+Deck Type=constructed
+
+[Main]
+1 Haywire Mite
+2 Dragon's Rage Channeler
+4 Tarmogoyf
+4 Ragavan, Nimble Pilferer
+4 Fable of the Mirror-Breaker
+1 Pyrite Spellbomb
+1 Shadowspear
+1 Nihil Spellbomb
+1 Mishra's Research Desk
+1 Unholy Heat
+2 Fatal Push
+2 Terminate
+3 Lightning Bolt
+2 Inquisition of Kozilek
+4 Thoughtseize
+4 Urza's Saga
+4 Wrenn and Six
+1 Stomping Ground
+1 Overgrown Tomb
+1 Swamp
+1 Ziatora's Proving Ground
+1 Blackcleave Cliffs
+1 Forest
+1 Mountain
+2 Blood Crypt
+2 Boseiju, Who Endures
+4 Bloodstained Mire
+4 Verdant Catacombs
+[Sideboard]
+1 Boseiju, Who Endures
+1 Veil of Summer
+1 Pithing Needle
+1 Jegantha, the Wellspring
+1 Soul-Guide Lantern
+2 Unlicensed Hearse
+2 Engineered Explosives
+2 Tourach, Dread Cantor
+2 Necromentia
+2 Alpine Moon

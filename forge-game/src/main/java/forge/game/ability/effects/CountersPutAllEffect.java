@@ -115,7 +115,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
             }
         }
 
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     }
 
 }

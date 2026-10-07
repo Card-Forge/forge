@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Aalborg/Maik_Naujoks_in_PTQ_Philadelphia_-_Valakut_Ramp_(Standard,_#18024).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Birds of Paradise
+3 Inferno Titan
+4 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+2 Urabrask the Hidden
+4 Summoning Trap
+4 Explore
+4 Green Sun's Zenith
+4 Rampant Growth
+2 Evolving Wilds
+5 Forest
+12 Mountain
+1 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+1 Creeping Corrosion
+1 Gaea's Revenge
+3 Memoricide
+3 Nature's Claim
+2 Obstinate Baloth
+4 Pyroclasm
+1 Swamp

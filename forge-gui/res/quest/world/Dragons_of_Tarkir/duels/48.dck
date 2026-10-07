@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Daily_#8324006/Skater_Bruski_-_Abzan_Midrange_(Standard,_#246945).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Den Protector
+4 Fleecemane Lion
+2 Hidden Dragonslayer
+4 Siege Rhino
+4 Abzan Charm
+1 Dromoka's Command
+3 Hero's Downfall
+1 Crux of Fate
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+1 Caves of Koilos
+2 Forest
+4 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+2 Arashin Cleric
+2 Drown in Sorrow
+2 Duress
+1 Empty the Pits
+1 Liliana Vess
+3 Ultimate Price
+1 Utter End

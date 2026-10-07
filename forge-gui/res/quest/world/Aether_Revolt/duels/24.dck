@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Niwa_Toshiharu_-_WB_Aggro_(Standard,_#665912).dck
+Deck Type=constructed
+
+[Main]
+2 Archangel Avacyn
+4 Scrapheap Scrounger
+3 Selfless Spirit
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+3 Heart of Kiran
+4 Anguished Unmaking
+4 Fatal Push
+4 Gideon, Ally of Zendikar
+2 Liliana, the Last Hope
+3 Aether Hub
+4 Concealed Courtyard
+8 Plains
+4 Shambling Vent
+4 Swamp
+1 Westvale Abbey
+[Sideboard]
+2 Authority of the Consuls
+1 Fragmentize
+2 Fumigate
+1 Gisela, the Broken Blade
+2 Herald of Anguish
+2 Kalitas, Traitor of Ghet
+4 Transgress the Mind
+1 Westvale Abbey

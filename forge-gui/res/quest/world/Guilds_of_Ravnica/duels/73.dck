@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Adam_Tellis_-_Grixis_Control_(Modern,_#792677).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+1 Mulldrifter
+2 Nihil Spellbomb
+1 Opt
+2 Lightning Bolt
+4 Cryptic Command
+1 Hero's Downfall
+2 Terminate
+1 Logic Knot
+2 Remand
+1 Mana Leak
+3 Fatal Push
+2 Kolaghan's Command
+2 Inquisition of Kozilek
+1 Thoughtseize
+2 Cruel Ultimatum
+1 Search for Azcanta
+2 Jace, the Mind Sculptor
+3 Island
+2 Watery Grave
+1 Sulfur Falls
+2 Steam Vents
+4 Scalding Tarn
+4 Polluted Delta
+1 Field of Ruin
+2 Drowned Catacomb
+3 Creeping Tar Pit
+1 Blood Crypt
+2 Swamp
+1 Mountain
+[Sideboard]
+1 Thoughtseize
+2 Unmoored Ego
+1 Anger of the Gods
+1 Kalitas, Traitor of Ghet
+1 Shatterstorm
+1 Countersquall
+2 Vendilion Clique
+1 Surgical Extraction
+2 Dispel
+1 Disdainful Stroke
+1 Stone Rain
+1 Damnation

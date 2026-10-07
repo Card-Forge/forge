@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/2012_States_-_British_Columbia/DrewChristensen_-_BR_Zombies_(Standard,_#39106).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Rakdos Cackler
+3 Brimstone Volley
+4 Searing Spear
+4 Bump in the Night
+3 Pillar of Flame
+4 Blood Crypt
+4 Dragonskull Summit
+4 Rakdos Guildgate
+10 Swamp
+[Sideboard]
+3 Dreadbore
+1 Mountain
+2 Olivia Voldaren
+2 Sever the Bloodline
+2 Slaughter Games
+2 Tragic Slip
+2 Underworld Connections

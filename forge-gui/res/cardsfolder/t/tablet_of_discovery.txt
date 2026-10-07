@@ -1,0 +1,11 @@
+Name:Tablet of Discovery
+ManaCost:2 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this artifact enters, mill a card. You may play that card this turn. (To mill a card, put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Graveyard,Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard,Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 2 | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {R}{R}. Spend this mana only to cast instant and sorcery spells.
+Oracle:When this artifact enters, mill a card. You may play that card this turn. (To mill a card, put the top card of your library into your graveyard.)\n{T}: Add {R}.\n{T}: Add {R}{R}. Spend this mana only to cast instant and sorcery spells.

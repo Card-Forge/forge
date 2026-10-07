@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Spiderman
+Title=Spiderman
+Icon=Spiderman.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Valencia_-_Spain/Jose_├üngel_Cantero_-_Vengevine_Naya_(Standard,_#1853).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+4 Bloodbraid Elf
+4 Cunning Sparkmage
+4 Knight of the Reliquary
+4 Noble Hierarch
+3 Ranger of Eos
+1 Scute Mob
+2 Stoneforge Mystic
+4 Vengevine
+3 Wild Nacatl
+1 Basilisk Collar
+1 Behemoth Sledge
+3 Oblivion Ring
+4 Arid Mesa
+5 Forest
+1 Misty Rainforest
+2 Mountain
+2 Plains
+2 Raging Ravine
+1 Sejiri Steppe
+2 Stirring Wildwood
+1 Tectonic Edge
+2 Terramorphic Expanse
+2 Verdant Catacombs
+[Sideboard]
+2 Celestial Purge
+3 Dauntless Escort
+3 Kor Firewalker
+3 Path to Exile
+3 Qasali Pridemage

@@ -1,6 +1,6 @@
 [metadata]
 Code=PLGM
-Date=1995-01-01
+Date=1996-07-01
 Name=DCI Legend Membership
 Type=Promo
 ScryfallCode=PLGM

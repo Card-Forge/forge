@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
@@ -21,7 +20,6 @@ import forge.game.zone.ZoneType;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
@@ -86,7 +84,9 @@ public class CountersRemoveAi extends SpellAbilityAi {
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-        boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+        boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
+
+        CounterType iceType = CounterType.getType("ICE");
 
         if (type.matches("All")) {
             // Logic Part for Vampire Hexmage
@@ -94,7 +94,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             if (maritEmpty) {
                 CardCollectionView depthsList = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
                 depthsList = CardLists.filter(depthsList, CardPredicates.isTargetableBy(sa),
-                        CardPredicates.hasCounter(CounterEnumType.ICE, 3));
+                        CardPredicates.hasCounter(iceType, 3));
                 if (!depthsList.isEmpty()) {
                     sa.getTargets().add(depthsList.getFirst());
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -130,13 +130,13 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // try to remove them from Dark Depths and Planeswalkers too
 
             if (maritEmpty) {
-                CardCollectionView depthsList = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
-                depthsList = CardLists.filter(depthsList, CardPredicates.isTargetableBy(sa),
-                        CardPredicates.hasCounter(CounterEnumType.ICE));
+                CardCollectionView depthsList = CardLists.filter(
+                    ai.getCardsIn(ZoneType.Battlefield, "Dark Depths"),
+                    CardPredicates.isTargetableBy(sa), CardPredicates.hasCounter(iceType));
 
                 if (!depthsList.isEmpty()) {
                     Card depth = depthsList.getFirst();
-                    int ice = depth.getCounters(CounterEnumType.ICE);
+                    int ice = depth.getCounters(iceType);
                     if (amount >= ice) {
                         sa.getTargets().add(depth);
                         if (xPay) {
@@ -207,7 +207,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 if (!oppList.isEmpty()) {
                     final Card best = ComputerUtilCard.getBestAI(oppList);
 
-                    for (final CounterType aType : best.getCounters().keySet()) {
+                    for (final CounterType aType : best.getCounters().elementSet()) {
                         if (!ComputerUtil.isNegativeCounter(aType, best)) {
                             sa.getTargets().add(best);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -360,9 +360,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
         } else if (target instanceof Player targetPlayer) {
             if (targetPlayer.isOpponentOf(player)) {
                 return !type.is(CounterEnumType.POISON) ? max : min;
-            } else {
-                return type.is(CounterEnumType.POISON) ? max : min;
             }
+            return type.is(CounterEnumType.POISON) ? max : min;
         }
 
         return super.chooseNumber(player, sa, min, max, params);
@@ -379,8 +378,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         Player ai = sa.getActivatingPlayer();
         GameEntity target = (GameEntity) params.get("Target");
 
-        if (target instanceof Card) {
-            Card targetCard = (Card) target;
+        if (target instanceof Card targetCard) {
             if (targetCard.getController().isOpponentOf(ai)) {
                 // if its a Planeswalker try to remove Loyality first
                 if (targetCard.isPlaneswalker()) {
@@ -394,7 +392,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
             } else {
                 if (options.contains(CounterEnumType.M1M1) && targetCard.hasKeyword(Keyword.PERSIST)) {
                     return CounterEnumType.M1M1;
-                } else if (options.contains(CounterEnumType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
+                }
+                if (options.contains(CounterEnumType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
                     return CounterEnumType.P1P1;
                 }
                 for (CounterType type : options) {
@@ -403,8 +402,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     }
                 }
             }
-        } else if (target instanceof Player) {
-            Player targetPlayer = (Player) target;
+        } else if (target instanceof Player targetPlayer) {
             if (targetPlayer.isOpponentOf(ai)) {
                 for (CounterType type : options) {
                     if (!type.is(CounterEnumType.POISON)) {

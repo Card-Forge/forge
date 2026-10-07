@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Anthony_Fernandez_-_Mono_Black_(Modern,_#801234).dck
+Deck Type=constructed
+
+[Main]
+3 The Rack
+2 Fatal Push
+1 Funeral Charm
+1 Liliana's Triumph
+1 Surgical Extraction
+1 Collective Brutality
+4 Inquisition of Kozilek
+4 Raven's Crime
+4 Smallpox
+3 Thoughtseize
+2 Wrench Mind
+4 Shrieking Affliction
+3 Davriel, Rogue Shadowmage
+4 Liliana of the Veil
+1 Bloodstained Mire
+2 Field of Ruin
+1 Marsh Flats
+4 Mutavault
+11 Swamp
+4 Urborg, Tomb of Yawgmoth
+[Sideboard]
+3 Asylum Visitor
+2 Bontu's Last Reckoning
+1 Cry of the Carnarium
+1 Flaying Tendrils
+4 Leyline of the Void
+2 Shadow of Doubt
+2 Waste Not

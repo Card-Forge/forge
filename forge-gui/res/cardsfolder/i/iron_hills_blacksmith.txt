@@ -1,0 +1,8 @@
+Name:Iron Hills Blacksmith
+ManaCost:1 W
+Types:Creature Dwarf Artificer
+PT:1/1
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a colorless Equipment artifact token named Axe with "Equipped creature gets +1/+0" and equip {2}.
+SVar:TrigToken:DB$ Token | TokenScript$ axe
+Oracle:Double strike\nWhen this creature enters, create a colorless Equipment artifact token named Axe with "Equipped creature gets +1/+0" and equip {2}.

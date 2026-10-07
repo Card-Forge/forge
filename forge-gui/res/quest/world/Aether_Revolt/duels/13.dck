@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Medium
+Description=Aether_Revolt/CARVALHO,_MARCIO_-_Multi_Color_Vehicle_(Standard,_#667493).dck
+Deck Type=constructed
+
+[Main]
+2 Inventor's Apprentice
+2 Pia Nalaar
+4 Scrapheap Scrounger
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+1 Aethersphere Harvester
+4 Heart of Kiran
+3 Shock
+4 Unlicensed Disintegration
+3 Gideon, Ally of Zendikar
+2 Aether Hub
+4 Concealed Courtyard
+1 Foreboding Ruins
+4 Inspiring Vantage
+3 Mountain
+1 Needle Spires
+4 Plains
+4 Spire of Industry
+[Sideboard]
+1 Archangel Avacyn
+2 Chandra, Torch of Defiance
+1 Fatal Push
+1 Fragmentize
+2 Fumigate
+1 Needle Spires
+2 Release the Gremlins
+2 Selfless Spirit
+1 Shock
+1 Skysovereign, Consul Flagship
+1 Skywhaler's Shot

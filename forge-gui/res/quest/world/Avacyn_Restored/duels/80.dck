@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Very Hard
+Description=../Modern/Avacyn_Restored/Full_Magic_Weekend_Mikami_-_Modern/Alejandro_Gaitan_Barrientos_-_Vampires_(Modern,_#61396).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Blood Artist
+3 Bloodline Keeper
+4 Captivating Vampire
+4 Gatekeeper of Malakir
+3 Kalastria Highborn
+4 Pulse Tracker
+2 Vampire Hexmage
+4 Vampire Nighthawk
+3 Vampire Nocturnus
+2 Disfigure
+2 Go for the Throat
+2 Victim of Night
+2 Feast of Blood
+3 Inquisition of Kozilek
+4 Cavern of Souls
+16 Swamp
+[Sideboard]
+1 Bojuka Bog
+2 Damnation
+3 Extirpate
+3 Ghost Quarter
+1 Ratchet Bomb
+2 Spellskite

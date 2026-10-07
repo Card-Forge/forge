@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Super_IQ_Raleigh/Gregg_Spano_-_Abzan_Aggro_(Standard,_#327058).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+3 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+1 Herald of Torment
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Abzan Charm
+2 Bile Blight
+3 Dromoka's Command
+3 Hero's Downfall
+2 Sorin, Solemn Visitor
+3 Caves of Koilos
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+2 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+2 Arashin Cleric
+2 Drown in Sorrow
+1 Elspeth, Sun's Champion
+1 Glare of Heresy
+2 Self-Inflicted Wound
+3 Thoughtseize
+2 Tragic Arrogance

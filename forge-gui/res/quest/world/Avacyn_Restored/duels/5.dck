@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/PTQ_Seattle_-_Fukuyama,_Hiroshima/Kamei_Kazuhiko_-_Humans_(Standard,_#32153).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+2 Fiend Hunter
+4 Huntmaster of the Fells
+1 Llanowar Elves
+2 Restoration Angel
+4 Strangleroot Geist
+3 Zealous Conscripts
+3 Sword of War and Peace
+3 Green Sun's Zenith
+2 Oblivion Ring
+3 Cavern of Souls
+4 Copperline Gorge
+7 Forest
+3 Gavony Township
+4 Razorverge Thicket
+3 Sunpetal Grove
+[Sideboard]
+2 Act of Aggression
+2 Crushing Vines
+2 Daybreak Ranger
+3 Hero of Bladehold
+2 Ray of Revelation
+2 Sword of Feast and Famine

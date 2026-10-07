@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/Kyle_Mendoza_-_Dimir_Mill_(Modern,_#2713964).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+2 Wan Shi Tong, Librarian
+4 Archive Trap
+4 Drown in the Loch
+4 Fatal Push
+3 Surgical Extraction
+3 Visions of Beyond
+1 Extirpate
+4 Fractured Sanity
+3 Tasha's Hideous Laughter
+1 Preordain
+1 Jace, the Perfected Mind
+4 Polluted Delta
+3 Field of Ruin
+3 Island
+2 Flooded Strand
+2 Undercity Sewers
+2 Watery Grave
+1 Misty Rainforest
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+1 Scalding Tarn
+1 Shelldock Isle
+1 Swamp
+[Sideboard]
+3 Consign to Memory
+2 Crypt Incursion
+2 Mystical Dispute
+2 Spell Snare
+1 Baleful Mastery
+1 Damnation
+1 Extirpate
+1 Long Goodbye
+1 Nihil Spellbomb
+1 Toxic Deluge

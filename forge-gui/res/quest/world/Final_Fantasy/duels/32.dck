@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/Koji_Okada_-_Boros_Monument_(Standard,_#2535445).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Missing Out
+4 Guardian of New Benalia
+4 Joshua, Phoenix's Dominant
+4 Phyrexian Dragon Engine
+4 Screaming Nemesis
+4 Monument to Endurance
+4 Torch the Tower
+1 Abrade
+4 Recommission
+4 Sheltered by Ghosts
+4 Battlefield Forge
+4 Elegant Parlor
+4 Inspiring Vantage
+4 Sunbillow Verge
+4 The Mycosynth Gardens
+2 Mountain
+1 Plains
+[Sideboard]
+4 Magebane Lizard
+3 Destroy Evil
+3 Ghost Vacuum
+2 Abrade
+2 Lithomantic Barrage
+1 Exorcise

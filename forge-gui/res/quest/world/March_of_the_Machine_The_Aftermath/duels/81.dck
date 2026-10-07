@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/munekata_ryo_-_Mono_Green_Aggro_(Modern,_#1686237).dck
+Deck Type=constructed
+
+[Main]
+4 Steel Leaf Champion
+4 Noble Hierarch
+4 Strangleroot Geist
+1 Scavenging Ooze
+4 Old-Growth Troll
+4 Endurance
+4 Ignoble Hierarch
+3 Yavimaya Iconoclast
+4 Aspect of Hydra
+4 Vines of Vastwood
+3 Dismember
+8 Forest
+4 Stomping Ground
+4 Wooded Foothills
+2 Nurturing Peatland
+2 Lair of the Hydra
+1 Boseiju, Who Endures
+[Sideboard]
+2 Damping Sphere
+2 Engineered Explosives
+2 Magus of the Moon
+4 Force of Vigor
+2 Unlicensed Hearse
+3 Tranquil Frillback

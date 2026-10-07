@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Mah_Quintanilha_-_Mardu_Midrange_(Standard,_#1521519).dck
+Deck Type=constructed
+
+[Main]
+2 Serra Paragon
+2 Sanctuary Warden
+3 Graveyard Trespasser
+3 Archangel of Wrath
+3 Steel Seraph
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+2 Abrade
+2 Go for the Throat
+3 Cut Down
+4 Wedding Announcement
+2 The Wandering Emperor
+1 Caves of Koilos
+1 Swamp
+1 Eiganjo, Seat of the Empire
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Caves of Koilos
+2 Sulfurous Springs
+2 Sundown Pass
+2 Battlefield Forge
+2 Roadside Reliquary
+2 Plains
+2 Sundown Pass
+4 Shattered Sanctum
+4 Haunted Ridge
+[Sideboard]
+1 Elspeth Resplendent
+1 Soul Transfer
+1 Destroy Evil
+2 Loran of the Third Path
+2 Rite of Oblivion
+2 Brotherhood's End
+3 Sheoldred, the Apocalypse
+3 Duress

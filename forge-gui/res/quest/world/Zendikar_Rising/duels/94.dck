@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Vic Stone
+Title=Vic Stone
+Icon=Vic Stone.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Bastien_Blandin_-_Rakdos_Midrange_(Modern,_#1063459).dck
+Deck Type=constructed
+
+[Main]
+3 Kroxa, Titan of Death's Hunger
+4 Lightning Skelemental
+4 Seasoned Pyromancer
+4 Dark Confidant
+2 Lightning Bolt
+2 Cling to Dust
+3 Fatal Push
+1 Bloodchief's Thirst
+1 Ransack the Lab
+1 Dreadbore
+3 Thoughtseize
+3 Unearth
+4 Inquisition of Kozilek
+3 Liliana of the Veil
+1 Verdant Catacombs
+1 Marsh Flats
+1 Castle Locthwain
+2 Mountain
+3 Blood Crypt
+3 Polluted Delta
+3 Swamp
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+1 Boil
+2 Feed the Swarm
+2 Cleansing Wildfire
+2 Ashiok, Dream Render
+2 Kolaghan's Command
+2 Blood Moon
+2 Plague Engineer
+2 Nihil Spellbomb

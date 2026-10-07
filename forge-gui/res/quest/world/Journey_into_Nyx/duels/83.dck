@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/SCG_Super_IQ_Littleton/Lynsey_Copeland_-_R-w_Burn_(Modern,_#93941).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Boros Charm
+3 Flames of the Blood Hand
+4 Lightning Bolt
+4 Lightning Helix
+4 Lightning Strike
+4 Magma Jet
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+10 Mountain
+1 Plains
+4 Sacred Foundry
+1 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Blood Moon
+2 Combust
+2 Dismember
+2 Searing Blood
+2 Shattering Spree
+2 Smash to Smithereens
+3 Wear // Tear

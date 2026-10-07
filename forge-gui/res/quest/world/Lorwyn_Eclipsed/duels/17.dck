@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dr Strangelove
+Title=Dr Strangelove
+Icon=Dr Strangelove.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Ben_Bauer_-_Mono-Red_Aggro_(Standard,_#2816363).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Hexing Squelcher
+4 Hired Claw
+4 Nova Hellkite
+4 Sunspine Lynx
+3 Zhao, the Moon Slayer
+2 Tersa Lightshatter
+1 Kellan, Planar Trailblazer
+4 Burst Lightning
+3 Shock
+2 Lightning Strike
+2 Sear
+20 Mountain
+3 Soulstone Sanctuary
+[Sideboard]
+4 Magebane Lizard
+3 Ghost Vacuum
+3 Twisted Fealty
+2 Sear
+2 The Legend of Roku
+1 Cut Propulsion

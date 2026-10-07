@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/Magic-League_Standard_Trial_01-12-2012/Cloudstr_-_Esper_Control_(Standard,_#42314).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Augur of Bolas
+2 Drogskol Reaver
+3 Restoration Angel
+2 Dissipate
+3 Sphinx's Revelation
+2 Syncopate
+3 Think Twice
+4 Tragic Slip
+3 Ultimate Price
+3 Lingering Souls
+2 Supreme Verdict
+2 Detention Sphere
+4 Drowned Catacomb
+2 Evolving Wilds
+4 Glacial Fortress
+4 Hallowed Fountain
+1 Island
+4 Isolated Chapel
+3 Nephalia Drownyard
+1 Plains
+4 Swamp
+[Sideboard]
+2 Duress
+2 Jace, Memory Adept
+2 Negate
+3 Rest in Peace
+2 Rhox Faithmender

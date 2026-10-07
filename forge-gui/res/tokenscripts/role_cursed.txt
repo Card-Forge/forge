@@ -5,4 +5,4 @@ K:Enchant:Creature
 SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | Description$ Enchanted creature is 1/1.
 SVar:SacMe:2
-Oracle:Enchant Creature\nEnchanted creature is 1/1.
+Oracle:Enchant creature\nEnchanted creature is 1/1.

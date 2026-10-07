@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Dilbert
+Title=Dilbert
+Icon=Dilbert.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/Grand_Prix_Tokyo_2016/Satomura_Shunsuke_-_GW_Aggro_(Standard,_#618213).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+4 Hangarback Walker
+4 Sylvan Advocate
+4 Thraben Inspector
+4 Dromoka's Command
+2 Secure the Wastes
+4 Oath of Nissa
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+4 Canopy Vista
+7 Forest
+4 Fortified Village
+8 Plains
+3 Westvale Abbey
+[Sideboard]
+2 Declaration in Stone
+2 Den Protector
+1 Dragonlord Dromoka
+2 Lambholt Pacifist
+2 Quarantine Field
+1 Sigarda, Heron's Grace
+2 Surrak, the Hunt Caller
+3 Tragic Arrogance

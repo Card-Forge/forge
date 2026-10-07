@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adham_Momen_-_Temur_Adventures_(Standard,_#1016586).dck
+Deck Type=constructed
+
+[Main]
+1 Hydroid Krasis
+1 Uro, Titan of Nature's Wrath
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Edgewall Innkeeper
+4 Beanstalk Giant
+4 Fae of Wishes
+4 Lovestruck Beast
+4 Lucky Clover
+2 Aether Gust
+2 Escape to the Wilds
+2 Mountain
+3 Ketria Triome
+3 Steam Vents
+4 Breeding Pool
+4 Stomping Ground
+4 Island
+6 Forest
+[Sideboard]
+1 Jace, Wielder of Mysteries
+1 Shadowspear
+1 Negate
+1 Storm's Wrath
+1 Planewide Celebration
+1 Ugin, the Spirit Dragon
+1 Expansion // Explosion
+1 Escape to the Wilds
+1 Domri's Ambush
+1 Fling
+1 Pulse of Murasa
+1 Mass Manipulation
+1 Tamiyo, Collector of Tales
+1 Return to Nature
+1 Disdainful Stroke

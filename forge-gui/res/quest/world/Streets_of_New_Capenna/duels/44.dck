@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Radagast
+Title=Radagast
+Icon=Radagast.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Mark_Rhodes_-_Bant_Festival_(Standard,_#1367800).dck
+Deck Type=constructed
+
+[Main]
+1 Falco Spara, Pactweaver
+1 Adeline, Resplendent Cathar
+1 Skyclave Apparition
+2 Workshop Warchief
+3 Rootcoil Creeper
+3 Suspicious Stowaway
+4 Prosperous Innkeeper
+4 Brutal Cathar
+4 Storm the Festival
+1 Wedding Announcement
+3 Brokers Ascendancy
+1 Tamiyo, Compleated Sage
+2 Elspeth Resplendent
+2 Wrenn and Seven
+2 The Wandering Emperor
+1 Hall of Storm Giants
+1 Lair of the Hydra
+1 Cave of the Frost Dragon
+1 Boseiju, Who Endures
+1 Island
+1 Branchloft Pathway
+1 Spara's Headquarters
+1 Hengegate Pathway
+2 Barkchannel Pathway
+2 Plains
+2 Forest
+4 Dreamroot Cascade
+4 Overgrown Farmland
+4 Deserted Beach
+[Sideboard]
+1 Yasharn, Implacable Earth
+1 Fateful Absence
+1 Reckoner Bankbuster
+1 Orvar, the All-Form
+1 Unlicensed Hearse
+2 Portable Hole
+2 Malevolent Hermit
+2 Farewell
+2 Mind Flayer
+2 Outland Liberator

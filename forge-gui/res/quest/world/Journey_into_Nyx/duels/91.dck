@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/SCG_Invitational_Qualifier_Overland_Park/James_Bower_-_Burn_(Modern,_#317871).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Hellspark Elemental
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blood Crypt
+4 Bloodstained Mire
+6 Mountain
+2 Stomping Ground
+[Sideboard]
+2 Destructive Revelry
+2 Dismember
+3 Dragon's Claw
+3 Rakdos Charm
+3 Smash to Smithereens
+2 Volcanic Fallout

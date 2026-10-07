@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="108">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="109">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgcoFhloF2ACUbdRD1wkI52PWIkT58udZ0BB+S6h9rgBJTWZiDeTdSMtxNIbhgFuAEsnIjN68SkW0rKDZBeGB6sQHugHTDMQB8bA0M/CViPHbdZGnjsoWXayuDA7z5cZRupblKlgvtICU9qAHLCG+ReWroLW5gTk69PIrmJWnUtcpzC3EVsXagDdE8WB3XcQSwgFE4nqRxvlOZXUsMIn33UKkNICSNC9pHjlhZuytyED5BbRqEDWqVtXO4jpm0DC6PB1AYYbPEGAsS6CV99DQByujLC
+   eJztlk0OwiAQRseNNvEAegBNTIpu9FDGrVdwrWdy117DkwiJmKYKDMOHsuAlpKsyL9/wR1QG59W/DT6pTjjuP6z1mMj+22I13kh90HSvb0t8J2TfuoFDxY3NibvXQ+t2oYiWSu5jPOxAsdc+hwSnMS1uqormOiW6RYzdzD3XxlMnx9qyHBu/n+tsi3VaA/xi8kQgydv45vT6ljlnX/cDJ9RdO+yp9eLehUr7nBqMB5dQTj24b6n7NTYjXz3UGRKTUaiexOUyT3PyIT2jxuRa2y4/zpvcZlTSG6C0vhm4Tr77+gkN6zNx
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -285,6 +285,14 @@
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/shop.tx" x="111.583" y="195.29">
+   <properties>
+    <property name="commonShopList" value="Wolf"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

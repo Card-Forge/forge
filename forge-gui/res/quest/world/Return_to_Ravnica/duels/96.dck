@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Silver_TCQ_-_Standish,_ME/Chet_Norton_-_GW_Aggro_(Modern,_#53817).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+2 Spellskite
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+2 Keen Sense
+4 Rancor
+2 Spider Umbra
+2 Spirit Mantle
+1 Forest
+4 Horizon Canopy
+3 Misty Rainforest
+3 Razorverge Thicket
+4 Temple Garden
+3 Verdant Catacombs
+[Sideboard]
+1 Faith's Reward
+4 Leyline of Sanctity
+3 Ray of Revelation
+3 Stony Silence
+4 Suppression Field

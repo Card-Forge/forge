@@ -22,8 +22,24 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         log = gameLog;
     }
 
+    private String formatDuration(long millis) {
+        long totalSeconds = millis / 1000;
+        long hours = totalSeconds / 3600;
+        long minutes = (totalSeconds % 3600) / 60;
+        long seconds = totalSeconds % 60;
+        return hours > 0
+                ? String.format("%dh : %02dm : %02ds", hours, minutes, seconds)
+                : String.format("%dm : %02ds", minutes, seconds);
+    }
+
     @Override
     public GameLogEntry visit(GameEventGameOutcome ev) {
+        // Match Duration
+        if (log.getMatchStartMillis() >= 0) { // defend against it somehow still never being set
+            long durationMillis = System.currentTimeMillis() - log.getMatchStartMillis();
+            log.add(GameLogEntryType.GAME_OUTCOME, localizer.getMessage("lblMatchDuration") + " " + formatDuration(durationMillis));
+        }
+
         // Turn number counted from the starting player
         int lastTurn = (int)Math.ceil((float)ev.lastTurnNumber() / 2.0);
         log.add(GameLogEntryType.GAME_OUTCOME, localizer.getMessage("lblTurn") + " " + lastTurn);
@@ -163,6 +179,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
+        log.markMatchStartIfNeeded();
         String message = localizer.getMessage("lblLogTurnNOwnerByPlayer", event.turnNumber(), event.turnOwner());
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
@@ -241,7 +258,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             }
 
             String controllerName;
-            if (defender instanceof CardView c) {
+            if (defender instanceof CardView c && c.getController() != null) {
                 controllerName = c.getCurrentState().isBattle() ? c.getProtectingPlayer().getName() : c.getController().getName();
             } else {
                 controllerName = defender.getName();
@@ -290,10 +307,16 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (ev.from() == null || ev.to() == null) {
             return null;
         }
-        // Only log Battlefield → Graveyard/Exile to avoid duplicating entries
-        // already covered by other events (land played, spell cast, discard, etc.)
         final ZoneType from = ev.from().zoneType();
         final ZoneType to = ev.to().zoneType();
+        // Log mid-game ante additions (e.g. Contract from Below, Demonic Attorney)
+        if (to == ZoneType.Ante && from != ZoneType.Ante) {
+            final CardView c = ev.card();
+            return new GameLogEntry(GameLogEntryType.ANTE,
+                    (c != null ? c.getOwner() + " anted " + c : "a card was anted"));
+        }
+        // Only log Battlefield -> Graveyard/Exile to avoid duplicating entries
+        // already covered by other events (land played, spell cast, discard, etc.)
         if (from != ZoneType.Battlefield || (to != ZoneType.Graveyard && to != ZoneType.Exile)) {
             return null;
         }

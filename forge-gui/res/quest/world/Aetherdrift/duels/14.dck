@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/Aaron_Ward_-_Dimir_Bounce_(Standard,_#2384939).dck
+Deck Type=constructed
+
+[Main]
+2 Enduring Curiosity
+4 Fear of Isolation
+4 Floodpits Drowner
+4 Spyglass Siren
+1 Grim Bauble
+1 Go for the Throat
+1 Shoot the Sheriff
+1 Spell Pierce
+4 This Town Ain't Big Enough
+3 Hopeless Nightmare
+3 Nowhere to Run
+4 Stormchaser's Talent
+4 Kaito, Bane of Nightmares
+4 Darkslick Shores
+4 Underground River
+4 Gloomlake Verge
+4 Island
+4 Swamp
+2 Soulstone Sanctuary
+2 Restless Reef
+[Sideboard]
+2 Cut Down
+1 Duress
+1 Get Out
+2 Ghost Vacuum
+1 Gix's Command
+2 Malicious Eclipse
+1 Negate
+1 Oildeep Gearhulk
+1 Spell Pierce
+1 The Witch's Vanity
+2 Tishana's Tidebinder

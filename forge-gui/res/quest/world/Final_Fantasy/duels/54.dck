@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/GuiltyGhost_-_Esper_Oculus_(Modern,_#2537651).dck
+Deck Type=constructed
+
+[Main]
+2 Harbinger of the Seas
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Emet-Selch, Unsundered
+1 Sink into Stupor
+4 Counterspell
+3 Spell Snare
+4 Thought Scour
+4 Fatal Push
+3 Force of Negation
+1 Cling to Dust
+2 Pest Control
+4 Unearth
+3 Thoughtseize
+1 Meticulous Archive
+1 Undercity Sewers
+4 Flooded Strand
+4 Polluted Delta
+1 Island
+1 Swamp
+2 Watery Grave
+1 Hallowed Fountain
+4 Marsh Flats
+[Sideboard]
+2 Stern Scolding
+2 High Noon
+1 Shoot the Sheriff
+1 Pest Control
+3 Consign to Memory
+1 Celestial Purge
+2 Nihil Spellbomb
+1 Teferi, Time Raveler
+1 Break the Ice
+1 Graveyard Trespasser

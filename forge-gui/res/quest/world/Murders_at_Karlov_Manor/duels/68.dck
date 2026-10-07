@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/9slinger_-_Golgari_Scam_(Modern,_#2004333).dck
+Deck Type=constructed
+
+[Main]
+4 Grief
+4 Orcish Bowmasters
+4 Tarmogoyf
+4 Dauthi Voidwalker
+4 Vein Ripper
+2 Fatal Push
+4 Not Dead After All
+3 Maelstrom Pulse
+4 Thoughtseize
+2 Grist, the Hunger Tide
+4 Sorin, Imperious Bloodlord
+1 Boseiju, Who Endures
+1 Castle Locthwain
+3 Swamp
+1 Nurturing Peatland
+4 Overgrown Tomb
+2 Polluted Delta
+1 Takenuma, Abandoned Mire
+1 Underground Mortuary
+1 Forest
+2 Wooded Foothills
+4 Verdant Catacombs
+[Sideboard]
+1 Cursed Totem
+2 Damping Sphere
+4 Endurance
+2 Force of Vigor
+1 Maelstrom Pulse
+3 Pick Your Poison
+2 Sheoldred, the Apocalypse

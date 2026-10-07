@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Hellboy
+Title=Hellboy
+Icon=Hellboy.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/101DeMoNS_-_Mono_Green_(Standard,_#1068646).dck
+Deck Type=constructed
+
+[Main]
+2 Thrashing Brontodon
+2 Scavenging Ooze
+4 Gilded Goose
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Tangled Florahedron
+4 Wicked Wolf
+4 Feasting Troll King
+3 Witch's Oven
+3 The Great Henge
+4 Trail of Crumbs
+2 Bonders' Enclave
+4 Castle Garenbrig
+16 Forest
+[Sideboard]
+1 Wilt
+1 Scavenging Ooze
+1 Cragplate Baloth
+2 Questing Beast
+2 Gemrazer
+2 Ranger's Guile
+2 Chainweb Aracnir
+2 Thrashing Brontodon
+2 Vivien, Monsters' Advocate

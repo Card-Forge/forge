@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adam_Kiyonaga_-_Selesnya_Aggro_(Standard,_#769569).dck
+Deck Type=constructed
+
+[Main]
+4 Carnage Tyrant
+2 Druid of the Cowl
+2 Jadelight Ranger
+1 Knight of Autumn
+4 Llanowar Elves
+2 Trostani Discordant
+2 Vine Mare
+4 March of the Multitudes
+2 Settle the Wreckage
+4 Flower // Flourish
+3 On Serra's Wings
+2 Seal Away
+3 Karn, Scion of Urza
+2 Vivien Reid
+1 Arch of Orazca
+9 Forest
+5 Plains
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Adanto Vanguard
+1 Crushing Canopy
+2 Ixalan's Binding
+1 Karn, Scion of Urza
+1 Lyra Dawnbringer
+1 On Serra's Wings
+1 Seal Away
+1 Settle the Wreckage
+2 Tocatli Honor Guard
+2 Vine Mare
+1 Vivien Reid

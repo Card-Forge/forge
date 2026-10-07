@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Brenton_Drake_-_Azorius_Affinity_(Modern,_#1343905)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Urza, Lord High Artificer
+2 Memnite
+4 Ingenious Smith
+4 Thought Monitor
+4 Stoneforge Mystic
+4 Esper Sentinel
+1 Aether Spellbomb
+1 Shadowspear
+1 Kaldra Compleat
+2 Nettlecyst
+4 Portable Hole
+4 Springleaf Drum
+3 Metallic Rebuke
+4 Thoughtcast
+4 Urza's Saga
+1 Island
+1 Plains
+2 Seachrome Coast
+2 Hallowed Fountain
+3 Darksteel Citadel
+4 Razortide Bridge
+4 Flooded Strand
+[Sideboard]
+1 Chalice of the Void
+1 March of Otherworldly Light
+2 Relic of Progenitus
+2 Pithing Needle
+2 Mystical Dispute
+3 Thieving Skydiver
+4 Spreading Seas

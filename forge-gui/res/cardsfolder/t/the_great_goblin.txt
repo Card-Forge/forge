@@ -1,0 +1,12 @@
+Name:The Great Goblin
+ManaCost:1 BR BR
+Types:Legendary Creature Goblin Noble
+PT:3/2
+T:Mode$ CounterPlayerAddedAll | ValidObject$ Goblin.YouCtrl+inRealZoneBattlefield,Orc.YouCtrl+inRealZoneBattlefield,Army.YouCtrl+inRealZoneBattlefield | ValidSource$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you put one or more counters on a Goblin, Orc, or Army you control, CARDNAME deals 2 damage to target opponent.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other+YouCtrl,Orc.Other+YouCtrl,Army.Other+YouCtrl | Execute$ TrigExile | TriggerDescription$ Whenever another Goblin, Orc, or Army you control dies, exile the top card of your library. You may play it until the end of your next turn.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you put one or more counters on a Goblin, Orc, or Army you control, The Great Goblin deals 2 damage to target opponent.\nWhenever another Goblin, Orc, or Army you control dies, exile the top card of your library. You may play it until the end of your next turn.

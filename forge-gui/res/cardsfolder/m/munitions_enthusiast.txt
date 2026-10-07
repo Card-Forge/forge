@@ -1,0 +1,8 @@
+Name:Munitions Enthusiast
+ManaCost:1 R
+Types:Creature Klingon Warrior
+PT:3/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature dies, it deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Trample\nWhen this creature dies, it deals 1 damage to any target.

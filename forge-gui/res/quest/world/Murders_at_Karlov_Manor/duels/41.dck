@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Erratacorrige_-_Dimir_Midrange_(Standard,_#1983425).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+4 Preacher of the Schism
+1 Lazav, Wearer of Faces
+3 Gix, Yawgmoth Praetor
+2 Sheoldred, the Apocalypse
+3 Faerie Mastermind
+4 Spyglass Siren
+1 Aclazotz, Deepest Betrayal
+3 Cut Down
+4 Make Disappear
+4 Go for the Throat
+3 Shipwreck Marsh
+3 Restless Reef
+1 Otawara, Soaring City
+3 Mirrex
+3 Island
+4 Darkslick Shores
+1 Takenuma, Abandoned Mire
+3 Swamp
+4 Underground River
+[Sideboard]
+1 Blot Out
+1 Cut Down
+1 Negate
+2 Duress
+1 Gix's Command
+2 Glistening Deluge
+1 Graveyard Trespasser
+1 Kaito Shizuki
+1 Liliana of the Veil
+1 Spell Pierce
+1 Disdainful Stroke
+2 Tishana's Tidebinder

@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Hitachi_Kyle_-_Reanimator_(Standard,_#2202626).dck
+Deck Type=constructed
+
+[Main]
+2 Fallaji Archaeologist
+4 Atraxa, Grand Unifier
+4 Picklock Prankster
+3 Harvester of Misery
+3 Lumra, Bellow of the Woods
+3 Ancient Cornucopia
+1 Ephara's Dispersal
+3 Bitter Triumph
+1 Virtue of Persistence
+4 Squirming Emergence
+4 Wail of the Forgotten
+4 Founding the Third Path
+1 The Cruelty of Gix
+2 Jace, the Perfected Mind
+1 Plains
+2 Island
+2 Swamp
+2 Forest
+3 Blooming Marsh
+2 Botanical Sanctum
+2 Llanowar Wastes
+2 Yavimaya Coast
+1 Darkslick Shores
+4 Fabled Passage
+4 Restless Reef
+2 Hedge Maze
+1 Undercity Sewers
+1 Underground Mortuary
+[Sideboard]
+2 Duress
+2 Tear Asunder
+1 Anoint with Affliction
+1 Nissa, Ascended Animist
+2 Tranquil Frillback
+1 Aclazotz, Deepest Betrayal
+2 Malicious Eclipse
+1 Terror Tide
+1 Long Goodbye
+1 Pick Your Poison
+1 Bonny Pall, Clearcutter

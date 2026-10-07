@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Montclair,_California/Alan_Zheng_-_Bant_Control_(Standard,_#38693).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Armada Wurm
+4 Centaur Healer
+3 Restoration Angel
+3 Thragtusk
+4 Azorius Charm
+3 Cyclonic Rift
+1 Sphinx's Revelation
+4 Farseek
+3 Supreme Verdict
+3 Detention Sphere
+1 Garruk Relentless
+3 Jace, Architect of Thought
+2 Tamiyo, the Moon Sage
+2 Forest
+3 Glacial Fortress
+4 Hallowed Fountain
+3 Hinterland Harbor
+2 Island
+2 Plains
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Dissipate
+1 Essence Scatter
+3 Loxodon Smiter
+1 Oblivion Ring
+1 Redirect
+4 Rest in Peace
+1 Syncopate

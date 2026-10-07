@@ -136,7 +136,7 @@ Replace=.04 Mythic:fromSheet("INR cards")
 94 C Wretched Throng @Filip Burburan
 95 U Archghoul of Thraben @Johann Bodin
 96 U Asylum Visitor @Bastien L. Deharme
-97 U Blood Artist @LA Draws
+97 U Blood Artist @L.A. Draws
 98 M Bloodline Keeper @Jason Chan
 99 C Butcher Ghoul @Christopher Moeller
 100 R Captivating Vampire @Eric Deschamps
@@ -265,7 +265,7 @@ Replace=.04 Mythic:fromSheet("INR cards")
 223 R Unnatural Growth @Svetlin Velinov
 224 C Villagers of Estwald @Kev Walker
 225 U Wild Hunger @Karl Kopinski
-226 M Wrenn and Seven @Heonhwa Choe
+226 M Wrenn and Seven @Heonhwa
 227 C Young Wolf @Ryan Pancoast
 228 R Altered Ego @Kev Walker
 229 R Angelfire Ignition @Yeong-Hao Han
@@ -428,7 +428,7 @@ Replace=.04 Mythic:fromSheet("INR cards")
 369 C Think Twice @Anthony Francisco
 370 U Archghoul of Thraben @Johann Bodin
 371 U Asylum Visitor @Bastien L. Deharme
-372 U Blood Artist @LA Draws
+372 U Blood Artist @L.A. Draws
 373 C Butcher Ghoul @Christopher Moeller
 374 R Captivating Vampire @Eric Deschamps
 375 R Collective Brutality @Johann Bodin
@@ -522,7 +522,7 @@ Replace=.04 Mythic:fromSheet("INR cards")
 463 U Restless Bloodseeker @Justyna Dura
 464 U Geier Reach Bandit @Slawomir Maniak
 465 U Smoldering Werewolf @Zack Stella
-466 U Village Messenger @Daarken
+466 C Village Messenger @Daarken
 467 U Duskwatch Recruiter @Craig J Spearing
 468 C Scorned Villager @Cynthia Sheppard
 469 U Shrill Howler @Matt Stewart

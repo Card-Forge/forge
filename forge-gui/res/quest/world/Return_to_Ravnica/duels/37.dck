@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/2012_TCGplayer_Open_5K_-_Brooklyn/JorgeP%2E_-_Azorius_Aggro_(Standard,_#40312).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+2 Fiend Hunter
+4 Geist of Saint Traft
+4 Knight of Glory
+4 Lyev Skyknight
+3 Precinct Captain
+4 Silverblade Paladin
+4 Sublime Archangel
+4 Thalia, Guardian of Thraben
+4 War Falcon
+4 Cavern of Souls
+4 Glacial Fortress
+4 Hallowed Fountain
+9 Island
+2 Moorland Haunt
+[Sideboard]
+1 Ajani, Caller of the Pride
+4 Elite Inquisitor
+2 Feeling of Dread
+3 Nevermore
+2 Purify the Grave
+1 Rest in Peace

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Fred Flintstone
+Title=Fred Flintstone
+Icon=Fred Flintstone.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/4┬║_Torneo_Liga_de_Modern_de_Cantabria_I_-_2014/Jose_Felix_Mahillo_-_Boros_(Modern,_#74828).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ensnaring Bridge
+4 Boros Charm
+3 Pyroclasm
+3 Wrath of God
+4 Ghostly Prison
+4 Journey to Nowhere
+4 Leyline of Sanctity
+4 Oblivion Ring
+3 Ajani Vengeant
+2 Chandra Nalaar
+2 Elspeth, Knight-Errant
+1 Koth of the Hammer
+4 Arid Mesa
+5 Mountain
+5 Plains
+4 Sacred Foundry
+4 Tectonic Edge
+[Sideboard]
+3 Chalice of the Void
+3 Nevermore
+3 Rest in Peace
+3 Runed Halo
+3 Stony Silence

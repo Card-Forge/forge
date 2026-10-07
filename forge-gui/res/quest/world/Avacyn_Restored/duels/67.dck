@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/Avacyn_Restored/SCG_Invitational_Qualifier_Glen_Burnie/Tommy_Chafe_-_Infect_(Modern,_#78567).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+4 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+2 Dismember
+1 Inquisition of Kozilek
+4 Nature's Claim
+2 Ranger's Guile
+2 Spellskite
+2 Thoughtseize
+2 Wild Defiance

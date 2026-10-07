@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Brandon_Dempsey_-_Dredge_(Modern,_#1185454).dck
+Deck Type=constructed
+
+[Main]
+1 Ox of Agonas
+2 Merchant of the Vale
+3 Golgari Thug
+4 Narcomoeba
+4 Stinkweed Imp
+4 Prized Amalgam
+4 Shriekhorn
+2 Conflagrate
+4 Cathartic Reunion
+4 Creeping Chill
+4 Thrilling Discovery
+4 Life from the Loam
+1 Arid Mesa
+1 Forgotten Cave
+1 Mountain
+1 Blood Crypt
+2 Stomping Ground
+2 Sacred Foundry
+2 Gemstone Mine
+3 Wooded Foothills
+3 Copperline Gorge
+4 Bloodstained Mire
+[Sideboard]
+1 Ancient Grudge
+1 Blast Zone
+1 Darkblast
+1 Gnaw to the Bone
+2 Thoughtseize
+2 Abrupt Decay
+3 Lightning Axe
+4 Nature's Claim

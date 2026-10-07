@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Modern_Turniers_vom_Dienstag_dem_22.04.2014/Finkes_Sebastian_-_Zoo_(Modern,_#73061).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+2 Grim Lavamancer
+4 Kird Ape
+4 Stormblood Berserker
+3 Dismember
+4 Lightning Bolt
+4 Rancor
+4 Arid Mesa
+4 Copperline Gorge
+1 Forest
+1 Misty Rainforest
+2 Mountain
+4 Stomping Ground
+3 Verdant Catacombs
+[Sideboard]
+2 Act of Aggression
+1 Ancient Grudge
+3 Molten Rain
+3 Skullcrack
+3 Smash to Smithereens
+3 Vines of Vastwood

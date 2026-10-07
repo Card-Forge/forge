@@ -1,0 +1,13 @@
+Name:Hercules, Olympian Hero
+ManaCost:3 W W
+Types:Legendary Creature Demigod Warrior Hero
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter1 | TriggerDescription$ Whenever NICKNAME attacks, put a +1/+1 counter on him. He gains indestructible until end of turn.
+SVar:TrigPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Indestructible | Defined$ Self
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter2 | FirstTime$ True | TriggerDescription$ Whenever NICKNAME is dealt damage for the first time each turn, put that many +1/+1 counters on him. (He must survive the damage to get the counters.)
+SVar:TrigPutCounter2:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Hercules attacks, put a +1/+1 counter on him. He gains indestructible until end of turn.\nWhenever Hercules is dealt damage for the first time each turn, put that many +1/+1 counters on him. (He must survive the damage to get the counters.)

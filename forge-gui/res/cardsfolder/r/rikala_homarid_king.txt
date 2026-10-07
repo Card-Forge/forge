@@ -1,0 +1,12 @@
+Name:Rikala, Homarid King
+ManaCost:1 G U
+Types:Legendary Creature Lobster Noble
+PT:0/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on NICKNAME. Then if there are four or more tide counters on NICKNAME, remove them.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIDE | CounterNum$ 1 | SubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ TIDE | CounterNum$ All | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | Description$ Creatures you control get +1/+0 for each tide counter on NICKNAME.
+T:Mode$ TapsForMana | Activator$ You | ValidCard$ Island | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | IsPresent$ Card.Self+counters_GE3_TIDE | TriggerDescription$ Whenever you tap an Island for mana, if there are three or more tide counters on NICKNAME, add an additional {U}.
+SVar:TrigMana:DB$ Mana | Produced$ U
+SVar:X:Count$CardCounters.TIDE
+Oracle:At the beginning of your upkeep, put a tide counter on Rikala. Then if there are four or more tide counters on Rikala, remove them.\nCreatures you control get +1/+0 for each tide counter on Rikala.\nWhenever you tap an Island for mana, if there are three or more tide counters on Rikala, add an additional {U}.

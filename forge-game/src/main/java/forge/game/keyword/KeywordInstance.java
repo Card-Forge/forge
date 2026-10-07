@@ -73,14 +73,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
     /*
      * (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean)
-     */
-    public final void createTraits(final Card host, final boolean intrinsic) {
-        createTraits(host, intrinsic, false);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean, boolean)
      */
     public final void createTraits(final Card host, final boolean intrinsic, final boolean clear) {
@@ -126,13 +118,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.player.Player)
-     */
-    @Override
-    public void createTraits(Player player) {
-        createTraits(player, false);
-    }
     /* (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.player.Player, boolean)
      */

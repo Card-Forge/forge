@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Medium
+Description=Gatecrash/Garden_City_Convention_133th_Result/Hosokawa_Daisuke_-_Òé¬Òé«Òé╝Òâ½ÒâûÒâ®Òâ│Òâë_(Standard,_#45605).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+4 Gyre Sage
+4 Loxodon Smiter
+4 Restoration Angel
+4 Thragtusk
+4 Mizzium Mortars
+4 Domri Rade
+2 Clifftop Retreat
+2 Mountain
+4 Rootbound Crag
+4 Sacred Foundry
+4 Stomping Ground
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Bonfire of the Damned
+3 Boros Charm
+4 Pillar of Flame
+3 Ray of Revelation
+2 Rest in Peace

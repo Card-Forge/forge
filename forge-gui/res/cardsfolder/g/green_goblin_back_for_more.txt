@@ -1,0 +1,12 @@
+Name:Green Goblin, Back for More
+ManaCost:3 B B
+Types:Legendary Creature Goblin Human Villain
+PT:4/4
+K:Flying
+K:Menace
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may discard a card. If you do, each opponent discards a card.
+SVar:TrigDiscard:AB$ Discard | Cost$ Discard<1/Card> | Defined$ Opponent | Mode$ TgtChoose
+K:Mayhem:3 B B
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
+Oracle:Flying, menace\nAt the beginning of combat on your turn, you may discard a card. If you do, each opponent discards a card.\nMayhem {3}{B}{B} (You may cast this card from your graveyard for {3}{B}{B} if you discarded it this turn. Timing rules still apply.)

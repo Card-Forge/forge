@@ -320,7 +320,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public Boolean isFemale() {
         return isFemale;
     }
-
+    
     public float getWorldPosX() {
         return worldPosX;
     }
@@ -787,6 +787,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
         }
 
+        RewardData.invalidateCardPool();
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
         onGoldChangeList.emit();
@@ -1003,7 +1004,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     private void refreshEditor() {
-        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance(null).getScreen());
         if (editor != null)
             editor.refresh();
     }
@@ -1275,6 +1276,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         int basePrice = (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor);
 
+        if (card.isFoil()) {
+            basePrice += basePrice * 20 / 100;
+        }
+
         float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
         return (int) (basePrice * (2.0f - townPriceModifier));
     }
@@ -1468,8 +1473,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return (int) questFlags.getOrDefault(key, (byte) 0);
     }
 
+    /**
+     * Character flags that exist only to stop a quest from being offered twice. Data checks them
+     * with checkCharacterFlag, so they survive a quest wipe unless cleared here: "noQuest" is the
+     * New Game+ "skip the main quest" choice and hides the intro mage's main quest option, and
+     * "dungeonMasterQuestGiven" gates the lair-clearing quest offered in dungeons.
+     */
+    private static final String[] QUEST_GATE_CHARACTER_FLAGS = {"noQuest", "dungeonMasterQuestGiven"};
+
+    /** Forget all global quest progress so every quest can be offered again (New Game+, resetQuests) */
     public void resetQuestFlags() {
         questFlags.clear();
+        for (String flag : QUEST_GATE_CHARACTER_FLAGS) {
+            setCharacterFlag(flag, 0);
+        }
     }
 
     public void addQuest(String questID, boolean isNewGame) {

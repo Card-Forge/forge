@@ -1,0 +1,9 @@
+Name:Goblin-town
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
+A:AB$ PutCounter | Cost$ 2 B R T Sac<1/CARDNAME/this land> | ValidTgts$ Goblin.YouCtrl,Orc.YouCtrl | ValidTgtsDesc$ Goblin or Orc you control | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target Goblin or Orc you control. Activate only as a sorcery.
+DeckHints:Type$Goblin|Orc
+Oracle:This land enters tapped.\n{T}: Add {B} or {R}.\n{2}{B}{R}, {T}, Sacrifice this land: Put two +1/+1 counters on target Goblin or Orc you control. Activate only as a sorcery.

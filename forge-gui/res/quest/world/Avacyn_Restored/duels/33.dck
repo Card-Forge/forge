@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/2012_WMC_-_Top_Standard_Decks/Andres_Dolem_-_GWr_Aggro_(Standard,_#36026).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+2 Borderland Ranger
+1 Daybreak Ranger
+1 Elesh Norn, Grand Cenobite
+1 Elvish Visionary
+2 Geist-Honored Monk
+3 Huntmaster of the Fells
+2 Mikaeus, the Lunarch
+4 Restoration Angel
+3 Thalia, Guardian of Thraben
+1 Wurmcoil Engine
+1 Zealous Conscripts
+3 Birthing Pod
+4 Cavern of Souls
+4 Copperline Gorge
+6 Forest
+4 Gavony Township
+1 Mountain
+1 Plains
+4 Razorverge Thicket
+[Sideboard]
+1 Acidic Slime
+2 Bonfire of the Damned
+2 Combust
+2 Hero of Bladehold
+1 Oblivion Ring
+3 Sword of War and Peace
+2 Wolfir Silverheart

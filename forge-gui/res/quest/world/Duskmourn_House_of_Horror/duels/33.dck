@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Anonymous_-_Rakdos_Aggro_(Standard,_#2243073).dck
+Deck Type=constructed
+
+[Main]
+4 Cacophony Scamp
+4 Heartfire Hero
+4 Monastery Swiftspear
+4 Callous Sell-Sword
+3 Slickshot Show-Off
+4 Felonious Rage
+4 Might of the Meek
+4 Monstrous Rage
+3 Shock
+1 Shock
+4 Turn Inside Out
+4 Leyline of Resonance
+17 Mountain
+[Sideboard]

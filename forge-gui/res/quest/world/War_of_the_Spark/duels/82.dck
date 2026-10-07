@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Anthony_Carey_-_Merfolk_(Modern,_#795762).dck
+Deck Type=constructed
+
+[Main]
+2 Harbinger of the Tides
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Master of Waves
+4 Merfolk Trickster
+2 Merrow Reejerey
+4 Phantasmal Image
+4 Silvergill Adept
+4 Aether Vial
+4 Deprive
+4 Spreading Seas
+15 Island
+4 Mutavault
+1 Oboro, Palace in the Clouds
+[Sideboard]
+2 Relic of Progenitus
+2 Tidebinder Mage
+2 Echoing Truth
+2 Spell Pierce
+2 Surgical Extraction
+1 Kira, Great Glass-Spinner
+1 Kopala, Warden of Waves
+2 Venser, Shaper Savant
+1 Ashiok, Dream Render

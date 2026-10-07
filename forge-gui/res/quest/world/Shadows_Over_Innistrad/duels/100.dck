@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/[Argences-14]_Tournoi_moderne_21-08_-_CMN/Tasset_Florent_-_Aura_Hexproof_(Modern,_#637014).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+2 Kor Spiritdancer
+2 Silhana Ledgewalker
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Gryff's Boon
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+2 Spirit Mantle
+3 Brushland
+3 Forest
+1 Horizon Canopy
+1 Misty Rainforest
+1 Plains
+3 Razorverge Thicket
+4 Temple Garden
+2 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+1 Dismember
+4 Leyline of Sanctity
+3 Pithing Needle
+1 Relic of Progenitus
+3 Rest in Peace
+3 Stony Silence

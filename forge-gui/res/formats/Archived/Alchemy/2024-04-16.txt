@@ -3,4 +3,4 @@ Name:Alchemy (OTJ)
 Type:Archived
 Subtype:Arena
 Effective:2024-04-16
-Sets:ANA, ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG
+Sets:ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG

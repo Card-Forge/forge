@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/HIROKI_KOBAYASHI_-_White_Aggro_(Standard,_#1739208).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+4 Adeline, Resplendent Cathar
+4 Brutal Cathar
+3 Intrepid Adversary
+4 Hopeful Initiate
+4 Recruitment Officer
+4 Steel Seraph
+2 Skrelv, Defector Mite
+4 Coppercoat Vanguard
+3 Ossification
+2 Invasion of Gobakhan
+18 Plains
+1 Eiganjo, Seat of the Empire
+3 Mishra's Foundry
+[Sideboard]
+4 Wedding Announcement
+2 The Wandering Emperor
+4 Destroy Evil
+2 Phyrexian Vindicator
+3 Surge of Salvation

@@ -1,0 +1,8 @@
+Name:Silverquill, the Disputant
+ManaCost:2 W B
+Types:Legendary Creature Elder Dragon
+PT:4/4
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | Affected$ Instant.wasCastByYou,Sorcery.wasCastByYou | AffectedZone$ Stack | AddKeyword$ Casualty:1 | Description$ Each instant and sorcery spell you cast has casualty 1. (As you cast that spell, you may sacrifice a creature with power 1 or greater. When you do, copy the spell and you may choose new targets for the copy.)
+Oracle:Flying, vigilance\nEach instant and sorcery spell you cast has casualty 1. (As you cast that spell, you may sacrifice a creature with power 1 or greater. When you do, copy the spell and you may choose new targets for the copy.)

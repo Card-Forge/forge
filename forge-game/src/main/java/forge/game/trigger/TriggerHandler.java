@@ -41,14 +41,14 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 public class TriggerHandler {
-    private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
+    private final Set<TriggerType> suppressedModes = EnumSet.noneOf(TriggerType.class);
     private boolean allSuppressed = false;
-    private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<>());
+    private final List<Trigger> activeTriggers = new ArrayList<>();
 
-    private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<>());
-    private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<>());
-    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
-    private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<>());
+    private final List<Trigger> delayedTriggers = new ArrayList<>();
+    private final List<Trigger> thisTurnDelayedTriggers = new ArrayList<>();
+    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
+    private final List<TriggerWaiting> waitingTriggers = new ArrayList<>();
     private final Game game;
 
     public TriggerHandler(final Game gameState) {
@@ -179,6 +179,13 @@ public class TriggerHandler {
             // TODO we don't seem to handle Static ones from this,
             // so they shouldn't be checked for performance in the first place
             wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
+
+            // how often they trigger has to be determined now as well, not only when they are put on the stack
+            for (final Trigger t : wt.getTriggers()) {
+                if (!t.isStatic()) {
+                    wt.setAdditionalTriggers(t, StaticAbilityPanharmonicon.countPanharmonicon(game, t, wt.getParams()));
+                }
+            }
         }
     }
 
@@ -330,7 +337,9 @@ public class TriggerHandler {
                 if (wasCollected && !t.checkActivationLimit()) {
                     continue;
                 }
-                int trigAmt = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+                // collected ones already know how often they trigger, it can't change until they are put on the stack
+                int additional = wasCollected ? wt.getAdditionalTriggers(t) : StaticAbilityPanharmonicon.countPanharmonicon(game, t, runParams);
+                int trigAmt = 1 + StaticAbilityPanharmonicon.limitByActivations(t, additional);
                 for (int i = 0; i < trigAmt; ++i) {
                     runSingleTrigger(t, runParams, wt.getController(t));
                 }
@@ -544,25 +553,25 @@ public class TriggerHandler {
     }
 
     private void adjustUndoStack(Trigger regtrig, Map<AbilityKey, Object> runParams) {
-        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
+        if (regtrig.getMode() == TriggerType.TapsForMana || regtrig.getMode() == TriggerType.ManaAdded) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
+        else if (regtrig.getMode() == TriggerType.AbilityCast || regtrig instanceof TriggerAbilityResolves) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
+        else if (regtrig.getMode() == TriggerType.Taps || regtrig.getMode() == TriggerType.Untaps) {
             final Card c = (Card) runParams.get(AbilityKey.Card);
             for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
                 sa.setUndoable(false);
             }
         }  
-        else if (regtrig instanceof TriggerTapAll) {
+        else if (regtrig.getMode() == TriggerType.TapAll) {
             final Iterable<Card> cards = (Iterable<Card>) runParams.get(AbilityKey.Cards);
             for (Card c : cards) {
                 for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
@@ -570,7 +579,7 @@ public class TriggerHandler {
                 }
             }
         }
-        else if (regtrig instanceof TriggerUntapAll) {
+        else if (regtrig.getMode() == TriggerType.UntapAll) {
             final Map<Player, CardCollection> map = (Map<Player, CardCollection>) runParams.get(AbilityKey.Map);
             for (Card c : Iterables.concat(map.values())) {
                 for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
@@ -591,13 +600,8 @@ public class TriggerHandler {
     }
 
     public void onPlayerLost(Player p) {
-        List<Trigger> lost = new ArrayList<>(delayedTriggers);
-        for (Trigger t : lost) {
-            // CR 800.4d trigger controller lost game
-            if (p.equals(t.getSpawningAbility().getActivatingPlayer())) {
-                delayedTriggers.remove(t);
-            }
-        }
+        // CR 800.4d trigger controller lost game
+        delayedTriggers.removeIf(t -> p.equals(t.getSpawningAbility().getActivatingPlayer()));
         // run all ChangesZone
         runWaitingTriggers();
     }

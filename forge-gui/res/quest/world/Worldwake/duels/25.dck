@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Medium
+Description=Worldwake/National_Qualifier_2010_-__Manila_-_Philippines/Juan_Pablo_Gernale_-_Blightning_Deck_Wins_(Standard,_#1492).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+3 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Blightning
+3 Earthquake
+2 Quenchable Fire
+4 Arid Mesa
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+7 Mountain
+4 Scalding Tarn
+1 Swamp
+[Sideboard]
+3 Deathmark
+3 Doom Blade
+3 Dragon's Claw
+4 Runeflare Trap

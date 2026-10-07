@@ -1,0 +1,10 @@
+Name:Gollum the Abandoned
+ManaCost:1 B
+Types:Legendary Creature Halfling Horror
+PT:2/2
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ NICKNAME can't block.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, exile up to one target card from an opponent's graveyard. Each opponent loses 2 life.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ card in an opponent's graveyard | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+A:AB$ ChangeZone | Cost$ 2 Sac<1/Artifact;Creature/artifact or creature> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return this card from your graveyard to your hand. Activate only as a sorcery.
+Oracle:Gollum can't block.\nWhen Gollum enters, exile up to one target card from an opponent's graveyard. Each opponent loses 2 life.\n{2}, Sacrifice an artifact or creature: Return this card from your graveyard to your hand. Activate only as a sorcery.

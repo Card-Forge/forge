@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jengu
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Amagai_Masahiro_-_WU_Control_(Standard,_#2265644).dck
+Deck Type=constructed
+
+[Main]
+4 Spyglass Siren
+1 Ezrim, Agency Chief
+2 Beza, the Bounding Spring
+4 Carrot Cake
+2 Destroy Evil
+2 Protect the Negotiators
+3 Elspeth's Smite
+4 Virtue of Loyalty
+1 Season of the Burrow
+4 Caretaker's Talent
+3 Invasion of Segovia
+2 Invasion of New Phyrexia
+2 Archangel Elspeth
+7 Plains
+3 Island
+4 Adarkar Wastes
+2 Restless Anchorage
+3 Meticulous Archive
+3 Fountainport
+4 Floodfarm Verge
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+1 The Eternal Wanderer
+2 Jace, the Perfected Mind
+2 Sunfall
+2 Surge of Salvation
+2 Get Lost
+1 Season of the Burrow
+1 Exorcise

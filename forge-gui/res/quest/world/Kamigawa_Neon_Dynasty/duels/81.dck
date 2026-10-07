@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/MadMaxErnst_-_Temur_Artifacts_(Modern,_#1310928)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Urza, Lord High Artificer
+4 Ragavan, Nimble Pilferer
+4 Ice-Fang Coatl
+4 Gilded Goose
+4 Fury
+1 Soul-Guide Lantern
+1 Shadowspear
+1 Aether Spellbomb
+1 Pyrite Spellbomb
+2 Expedition Map
+2 Springleaf Drum
+3 Lightning Bolt
+4 Counterspell
+4 Unholy Heat
+4 Expressive Iteration
+4 Urza's Saga
+4 Abundant Growth
+4 Wrenn and Six
+1 Ketria Triome
+1 Stomping Ground
+1 Sokenzan, Crucible of Defiance
+1 Snow-Covered Mountain
+1 Breeding Pool
+2 Boseiju, Who Endures
+2 Steam Vents
+2 Snow-Covered Forest
+2 Snow-Covered Island
+4 Scalding Tarn
+4 Prismatic Vista
+4 Misty Rainforest
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Relic of Progenitus
+1 Pithing Needle
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+2 Chalice of the Void
+2 Alpine Moon
+3 Veil of Summer
+3 Force of Negation

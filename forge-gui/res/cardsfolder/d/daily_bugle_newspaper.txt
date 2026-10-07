@@ -1,0 +1,8 @@
+Name:Daily Bugle Newspaper
+ManaCost:2
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Discard|Token
+Oracle:{2}, {T}: Draw a card, then discard a card. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

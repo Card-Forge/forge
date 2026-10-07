@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Zachary_Morton_-_Gruul_Aggro_(Modern,_#1297115).dck
+Deck Type=constructed
+
+[Main]
+2 Nightpack Ambusher
+2 Noble Hierarch
+3 Howlpack Piper
+4 Immerwolf
+4 Tovolar, Dire Overlord
+4 Mayor of Avabruck
+4 Kessig Naturalist
+4 Ignoble Hierarch
+1 Relic of Progenitus
+1 Chromatic Lantern
+4 Lightning Bolt
+2 Blood Moon
+4 Arlinn, the Pack's Hope
+2 Kessig Wolf Run
+2 Mountain
+3 Forest
+3 Stomping Ground
+3 Copperline Gorge
+4 Verdant Catacombs
+4 Wooded Foothills
+[Sideboard]
+1 Cindervines
+2 Torpor Orb
+2 Relic of Progenitus
+2 Veil of Summer
+2 Blood Moon
+2 Chalice of the Void
+2 Abrade
+2 Nature's Claim

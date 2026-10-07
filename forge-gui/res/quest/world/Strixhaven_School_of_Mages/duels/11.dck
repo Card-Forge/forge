@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/ATSUSHI_MORI_-_Rakdos_Sacrifice_(Standard,_#1160103).dck
+Deck Type=constructed
+
+[Main]
+1 Immersturm Predator
+2 Rankle, Master of Pranks
+2 Woe Strider
+2 Bonecrusher Giant
+3 Kroxa, Titan of Death's Hunger
+4 Eyetwitch
+3 Plumb the Forbidden
+4 Village Rites
+1 Shatterskull Smashing
+2 Agadeem's Awakening
+4 Claim the Firstborn
+4 Forbidden Friendship
+4 Hunt for Specimens
+4 Bastion of Remembrance
+1 Temple of Malice
+1 Castle Locthwain
+4 Mountain
+4 Blightstep Pathway
+4 Fabled Passage
+6 Swamp
+[Sideboard]
+1 Introduction to Annihilation
+1 Pest Summoning
+1 Environmental Sciences
+1 Kroxa, Titan of Death's Hunger
+2 Necrotic Fumes
+2 The Akroan War
+2 Redcap Melee
+2 Duress
+3 Roiling Vortex

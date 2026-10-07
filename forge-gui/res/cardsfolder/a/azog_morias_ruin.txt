@@ -1,0 +1,11 @@
+Name:Azog, Moria's Ruin
+ManaCost:2 B
+Types:Legendary Creature Goblin Soldier
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy up to one other target creature. Its controller amasses Goblins X, where X is that creature's power. If you controlled that creature, draw a card. (To amass Goblins X, that player puts X +1/+1 counters on an Army they control. It's also a Goblin. If they don't control an Army, they create a 0/0 black Goblin Army creature token first.)
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | RememberLKI$ True | AlwaysRemember$ True | TgtPrompt$ Select up to one other target creature | SubAbility$ DBAmass
+SVar:DBAmass:DB$ Amass | Type$ Goblin | Num$ X | Defined$ RememberedController | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardPower
+Oracle:When Azog enters, destroy up to one other target creature. Its controller amasses Goblins X, where X is that creature's power. If you controlled that creature, draw a card. (To amass Goblins X, that player puts X +1/+1 counters on an Army they control. It's also a Goblin. If they don't control an Army, they create a 0/0 black Goblin Army creature token first.)

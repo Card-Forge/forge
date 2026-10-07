@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Jean-Baptiste_Paulin_-_Golgari_Midrange_(Modern,_#800675).dck
+Deck Type=constructed
+
+[Main]
+4 Tarmogoyf
+4 Dark Confidant
+3 Tireless Tracker
+3 Scavenging Ooze
+1 Kalitas, Traitor of Ghet
+4 Fatal Push
+3 Assassin's Trophy
+1 Abrupt Decay
+4 Inquisition of Kozilek
+2 Thoughtseize
+2 Collective Brutality
+1 Maelstrom Pulse
+3 Liliana of the Veil
+1 Liliana, the Last Hope
+4 Blooming Marsh
+4 Verdant Catacombs
+4 Swamp
+2 Forest
+4 Field of Ruin
+2 Hissing Quagmire
+2 Treetop Village
+2 Overgrown Tomb
+[Sideboard]
+3 Fulminator Mage
+2 Surgical Extraction
+1 Liliana, the Last Hope
+1 Ashiok, Dream Render
+1 Nissa, Vital Force
+1 Duress
+1 Damnation
+1 Grafdigger's Cage
+2 Nihil Spellbomb
+1 Assassin's Trophy
+1 Engineered Explosives

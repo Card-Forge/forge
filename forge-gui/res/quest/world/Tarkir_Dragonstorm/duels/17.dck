@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Capriccioso_-_Esper_Pixie_(Standard,_#2442841).dck
+Deck Type=constructed
+
+[Main]
+4 Nurturing Pixie
+4 Sunpearl Kirin
+1 Mockingbird
+2 Fear of Isolation
+4 This Town Ain't Big Enough
+1 Destroy Evil
+1 No More Lies
+2 Stock Up
+4 Stormchaser's Talent
+4 Nowhere to Run
+4 Hopeless Nightmare
+1 Roiling Dragonstorm
+2 Momentum Breaker
+2 Kaito, Bane of Nightmares
+3 Caves of Koilos
+4 Concealed Courtyard
+4 Seachrome Coast
+1 Swamp
+4 Underground River
+2 Restless Anchorage
+4 Darkslick Shores
+1 Island
+1 Adarkar Wastes
+[Sideboard]
+2 Ghost Vacuum
+2 Grim Bauble
+1 Invasion of Gobakhan
+1 Loran of the Third Path
+2 Change the Equation
+1 Destroy Evil
+1 No More Lies
+2 Duress
+1 Kaito, Bane of Nightmares
+1 Defiled Crypt // Cadaver Lab
+1 Go for the Throat

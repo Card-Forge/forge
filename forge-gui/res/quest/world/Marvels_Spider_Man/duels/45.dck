@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Aladdin
+Title=Aladdin
+Icon=Aladdin.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/Colin_Jones_-_Dimir_Control_(Standard,_#2676102).dck
+Deck Type=constructed
+
+[Main]
+4 Quantum Riddler
+2 Qarsi Revenant
+2 Scavenger Regent
+2 Interdimensional Web Watch
+1 The Soul Stone
+2 Archenemy's Charm
+2 Bitter Triumph
+2 The End
+4 Cruelclaw's Heist
+4 Deadly Cover-Up
+3 Stock Up
+3 Strategic Betrayal
+2 Intimidation Tactics
+2 Virtue of Persistence
+9 Swamp
+4 Gloomlake Verge
+4 Undercity Sewers
+4 Watery Grave
+3 Restless Reef
+1 Island
+[Sideboard]
+2 Ghost Vacuum
+2 Oildeep Gearhulk
+2 Qarsi Revenant
+2 Spider-Sense
+2 Stab
+1 Ancient Vendetta
+1 Duress
+1 Morlun, Devourer of Spiders
+1 Strategic Betrayal
+1 The End

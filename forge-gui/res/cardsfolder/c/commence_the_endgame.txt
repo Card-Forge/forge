@@ -2,9 +2,9 @@ Name:Commence the Endgame
 ManaCost:4 U U
 Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then amass Zombies X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.) | SubAbility$ DBAmass
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then amass Zombies X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.) | SubAbility$ DBAmass
 SVar:DBAmass:DB$ Amass | Type$ Zombie | Num$ X
 SVar:X:Count$ValidHand Card.YouOwn
 DeckHas:Ability$Amass|Counters|Token
 DeckHints:Ability$Amass & Type$Zombie
-Oracle:This spell can't be countered.\nDraw two cards, then amass Zombies X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+Oracle:This spell can't be countered.\nDraw two cards, then amass Zombies X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)

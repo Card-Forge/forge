@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/AJOCHUM_-_Izzet_Murktide_(Modern,_#1748198).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+1 Jace, Vryn's Prodigy
+4 Dreadhorde Arcanist
+2 Murktide Regent
+1 Ledger Shredder
+1 Frolicking Familiar
+4 Lightning Bolt
+2 Spell Pierce
+4 Counterspell
+2 Force of Negation
+1 Piracy Charm
+4 Consider
+4 Flame of Anor
+1 Flame Slash
+4 Preordain
+3 Expressive Iteration
+2 Flooded Strand
+1 Scalding Tarn
+2 Misty Rainforest
+3 Steam Vents
+2 Polluted Delta
+4 Spirebluff Canal
+3 Island
+1 Otawara, Soaring City
+[Sideboard]
+2 Blood Moon
+1 Chalice of the Void
+1 Spell Pierce
+1 Flame Slash
+1 Narset, Parter of Veils
+2 Engineered Explosives
+2 Dress Down
+1 Subtlety
+2 Ragavan, Nimble Pilferer
+1 Unlicensed Hearse
+1 Stern Scolding

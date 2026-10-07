@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Brian_Braun-Duin_-_Esper_Tempo_(Standard,_#795228).dck
+Deck Type=constructed
+
+[Main]
+4 Hero of Precinct One
+3 Hostage Taker
+4 Thief of Sanity
+2 Despark
+2 Dovin's Veto
+4 Mortify
+2 Enter the God-Eternals
+4 Thought Erasure
+2 Liliana, Dreadhorde General
+1 Sorin, Vengeful Bloodlord
+3 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 Island
+1 Swamp
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+4 Watery Grave
+[Sideboard]
+2 Basilica Bell-Haunt
+2 Deputy of Detention
+2 Dovin's Veto
+2 Moment of Craving
+2 Davriel, Rogue Shadowmage
+2 Duress
+2 Time Wipe
+1 Unmoored Ego

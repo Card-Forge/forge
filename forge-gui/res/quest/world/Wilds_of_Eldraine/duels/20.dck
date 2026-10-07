@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Hexamyn_-_Naya_Adventures_(Standard,_#1739435).dck
+Deck Type=constructed
+
+[Main]
+4 Cheeky House-Mouse
+1 Heartflame Duelist
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Pia Nalaar, Consul of Revival
+3 Pollen-Shield Hare
+4 Questing Druid
+3 Regal Bunnicorn
+4 Play with Fire
+3 Reckless Impulse
+3 Wrenn's Resolve
+4 Battlefield Forge
+1 Boseiju, Who Endures
+4 Copperline Gorge
+1 Eiganjo, Seat of the Empire
+3 Jetmir's Garden
+2 Karplusan Forest
+1 Mountain
+2 Razorverge Thicket
+1 Sokenzan, Crucible of Defiance
+4 Sundown Pass
+[Sideboard]

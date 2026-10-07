@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot6
+Title=Robot6
+Icon=Da Vinci.jpg
+Difficulty=Easy
+Description=UB Midrange 
+Deck Type=constructed
+
+[Main]
+3 Champion of Wits
+4 Gifted Aetherborn
+2 Gonti, Lord of Luxury
+4 Hostage Taker
+3 Kitesail Freebooter
+3 The Scarab God
+4 Fatal Push
+3 Supreme Will
+2 Duress
+4 Harsh Scrutiny
+2 Liliana, Death's Majesty
+4 Drowned Catacomb
+1 Evolving Wilds
+4 Fetid Pools
+2 Field of Ruin
+4 Island
+11 Swamp
+[Sideboard]
+2 Arguel's Blood Fast
+3 Contraband Kingpin
+2 Duress
+2 Lost Legacy
+3 Negate
+1 River's Rebuke
+2 Vraska's Contempt

@@ -48,7 +48,7 @@ public class Phase implements java.io.Serializable {
 
     protected final List<GameCommand> at = Lists.newArrayList();
     private final List<GameCommand> until = Lists.newArrayList();
-    private final Multimap<Player, GameCommand> untilMap = MultimapBuilder.hashKeys().arrayListValues().build();;
+    private final Multimap<Player, GameCommand> untilMap = MultimapBuilder.hashKeys().arrayListValues().build();
     private final Multimap<Player, GameCommand> untilEndMap = MultimapBuilder.hashKeys().arrayListValues().build();
     private final Multimap<Player, GameCommand> registerMap = MultimapBuilder.hashKeys().arrayListValues().build();
 

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Aldo_80_-_Blink_(Modern,_#2286573).dck
+Deck Type=constructed
+
+[Main]
+4 Leonin Arbiter
+3 Thalia, Guardian of Thraben
+2 Flickerwisp
+4 Giver of Runes
+2 Skyclave Apparition
+1 Lion Sash
+3 Serra Paragon
+4 White Orchid Phantom
+4 Witch Enchanter
+2 Recruiter of the Guard
+4 Solitude
+1 Enduring Innocence
+1 Pithing Needle
+1 Shadowspear
+4 Urza's Saga
+2 Touch the Spirit Realm
+4 Plains
+4 Ghost Quarter
+4 Flagstones of Trokair
+2 Eiganjo, Seat of the Empire
+4 Volatile Fault
+[Sideboard]
+1 Phyrexian Revoker
+1 Tormod's Crypt
+1 Aether Vial
+2 Ephemerate
+2 Archon of Emeria
+2 Sanctifier en-Vec
+2 March of Otherworldly Light
+1 Extraction Specialist
+3 Crystal Barricade

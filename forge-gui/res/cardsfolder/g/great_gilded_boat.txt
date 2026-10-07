@@ -1,0 +1,8 @@
+Name:Great Gilded Boat
+ManaCost:2 U
+Types:Artifact Vehicle
+PT:4/4
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigRecruit | TriggerDescription$ Whenever you attack, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+SVar:TrigRecruit:DB$ Recruit
+K:Crew:2
+Oracle:Whenever you attack, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

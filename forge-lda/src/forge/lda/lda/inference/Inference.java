@@ -26,7 +26,7 @@ public interface Inference {
      * Set up for inference.
      * @param lda
      */
-    public void setUp(LDA lda);
+    void setUp(LDA lda);
     
     /**
      * Set up for inference.
@@ -34,12 +34,12 @@ public interface Inference {
      * @param lda
      * @param properties
      */
-    public void setUp(LDA lda, InferenceProperties properties);
+    void setUp(LDA lda, InferenceProperties properties);
     
     /**
      * Run model inference.
      */
-    public void run();
+    void run();
     
     /**
      * Get the value of doc-topic probability \theta_{docID, topicID}.
@@ -47,7 +47,7 @@ public interface Inference {
      * @param topicID
      * @return the value of doc-topic probability
      */
-    public double getTheta(final int docID, final int topicID);
+    double getTheta(final int docID, final int topicID);
     
     /**
      * Get the value of topic-vocab probability \phi_{topicID, vocabID}.
@@ -55,7 +55,7 @@ public interface Inference {
      * @param vocabID
      * @return the value of topic-vocab probability
      */
-    public double getPhi(final int topicID, final int vocabID);
+    double getPhi(final int topicID, final int vocabID);
 
     public List<Pair<String, Double>> getVocabsSortedByPhi(int topicID);
 }

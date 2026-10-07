@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Blood Oath
+Title=Blood Oath
+Icon=Blood Oath.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Ellasar_-_Azorius_Control_(Standard,_#1979856).dck
+Deck Type=constructed
+
+[Main]
+2 Disruption Protocol
+3 Get Lost
+3 March of Otherworldly Light
+4 Memory Deluge
+4 No More Lies
+4 Deduce
+1 Farewell
+4 Sunfall
+2 Temporary Lockdown
+2 Jace, the Perfected Mind
+4 The Wandering Emperor
+4 Restless Anchorage
+3 Plains
+1 Eiganjo, Seat of the Empire
+3 Island
+4 Field of Ruin
+1 Meticulous Archive
+1 Mirrex
+1 Otawara, Soaring City
+4 Deserted Beach
+1 Seachrome Coast
+1 Adarkar Wastes
+1 Demolition Field
+2 Sunken Citadel
+[Sideboard]
+2 Chrome Host Seedshark
+2 Tishana's Tidebinder
+2 The Stone Brain
+2 Elspeth's Smite
+2 Knockout Blow
+1 Negate
+1 Disdainful Stroke
+1 Spell Pierce
+2 Dennick, Pious Apprentice

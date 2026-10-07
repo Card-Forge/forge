@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Easy
+Description=Zendikar/Zendikar_Game_Day_-_401_Games_-_USA/Chris_Allinson_-_Bant_(Standard,_#3510).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Birds of Paradise
+4 Great Sable Stag
+4 Jenara, Asura of War
+4 Jhessian Infiltrator
+4 Noble Hierarch
+4 Rafiq of the Many
+4 Rhox War Monk
+3 Negate
+4 Vines of Vastwood
+3 Finest Hour
+6 Forest
+2 Glacial Fortress
+4 Island
+4 Misty Rainforest
+3 Plains
+4 Sunpetal Grove
+[Sideboard]
+4 Bant Charm
+3 Dauntless Escort
+4 Path to Exile
+4 Stoic Angel

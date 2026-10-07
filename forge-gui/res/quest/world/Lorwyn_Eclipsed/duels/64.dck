@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/CptNixon_-_Dimir_Frog_(Modern,_#2808442).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+4 Abhorrent Oculus
+1 Picklock Prankster
+4 Moonshadow
+2 Orcish Bowmasters
+2 Consider
+4 Counterspell
+3 Force of Negation
+1 Cling to Dust
+4 Fatal Push
+2 Sink into Stupor
+4 Thought Scour
+2 Spell Snare
+1 Strategic Betrayal
+4 Unearth
+4 Polluted Delta
+2 Island
+3 Flooded Strand
+1 Swamp
+2 Undercity Sewers
+3 Watery Grave
+2 Marsh Flats
+1 Darkslick Shores
+[Sideboard]
+3 Consign to Memory
+2 Mystical Dispute
+1 Nihil Spellbomb
+1 Toxic Deluge
+2 Thoughtseize
+1 Spell Snare
+2 Harbinger of the Seas
+1 Kaito, Bane of Nightmares
+1 Cling to Dust
+1 Stern Scolding

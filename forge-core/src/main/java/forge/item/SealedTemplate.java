@@ -50,6 +50,7 @@ public class SealedTemplate {
     public final String getEdition() {
         return name;
     }
+
     public SealedTemplate(Iterable<Pair<String, Integer>> itrSlots) {
         this(null, itrSlots);
     }

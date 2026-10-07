@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dilbert
+Title=Dilbert
+Icon=Dilbert.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2010_MTG_Worlds__Top_Standard_Decks/Simon_Gortzen_-_Valakut_Ramp_-_15_points_(Standard,_#8345).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+3 Lightning Bolt
+4 Summoning Trap
+4 Cultivate
+4 Explore
+4 Growth Spasm
+3 Evolving Wilds
+5 Forest
+1 Khalni Garden
+12 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+4 Gaea's Revenge
+2 Nature's Claim
+4 Pyroclasm
+4 Tunnel Ignus

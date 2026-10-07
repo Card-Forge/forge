@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Medium
+Description=Innistrad/SCG_Invitational_Qualifier_-_Newington,_Connecticut/Joe_Roy_-_White_Weenie_(Standard,_#24264).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Doomed Traveler
+4 Geist of Saint Traft
+4 Gideon's Lawkeeper
+4 Grand Abolisher
+4 Mirran Crusader
+4 Mana Leak
+4 Vapor Snag
+4 Angelic Destiny
+4 Honor of the Pure
+1 Oblivion Ring
+4 Glacial Fortress
+1 Island
+3 Moorland Haunt
+11 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Dismember
+4 Leonin Relic-Warder
+2 Mortarpod
+3 Sword of War and Peace
+4 Timely Reinforcements

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Medium
+Description=Innistrad/Topdecker.gr_-_Topdecker_Win-a-Box_5/Lefteris_Patetsinis_-_RDW_(Standard,_#23615).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+4 Goblin Fireslinger
+4 Grim Lavamancer
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+4 Brimstone Volley
+2 Gut Shot
+4 Incinerate
+3 Volt Charge
+2 Arc Trail
+1 Traitorous Blood
+4 Koth of the Hammer
+17 Mountain
+4 Rootbound Crag
+[Sideboard]
+4 Ancient Grudge
+2 Blasphemous Act
+2 Dismember
+2 Vulshok Refugee

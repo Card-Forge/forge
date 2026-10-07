@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Cable
+Title=Cable
+Icon=Cable.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Kobayashi_Shigeyuki_-_Yawgmoth's_Hospital_(Modern,_#2793163).dck
+Deck Type=constructed
+
+[Main]
+2 Walking Ballista
+1 Strangleroot Geist
+4 Young Wolf
+4 Yawgmoth, Thran Physician
+1 Endurance
+4 Delighted Halfling
+1 Susurian Voidborn
+4 Badgermole Cub
+2 Formidable Speaker
+1 Virulent Emissary
+4 Agatha's Soul Cauldron
+1 Chord of Calling
+4 Green Sun's Zenith
+3 Malevolent Rumble
+2 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Swamp
+2 Forest
+1 Dryad Arbor
+2 Windswept Heath
+2 Misty Rainforest
+4 Verdant Catacombs
+2 Overgrown Tomb
+2 Boseiju, Who Endures
+2 Underground Mortuary
+3 Spymaster's Vault
+[Sideboard]
+3 Fatal Push
+3 Thoughtseize
+1 Scavenging Ooze
+2 Fulminator Mage
+1 Ashiok, Dream Render
+2 Force of Vigor
+1 Endurance
+1 Outland Liberator
+1 Vexing Bauble

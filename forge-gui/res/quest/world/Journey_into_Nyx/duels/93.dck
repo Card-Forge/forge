@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/Modern_Daily_#8164532/kylehl_-_kylehl_(3-1)_(Modern,_#225573).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Ember Hauler
+4 Ember Swallower
+4 Figure of Destiny
+4 Kargan Dragonlord
+4 Spellskite
+4 Mizzium Mortars
+4 Seal of Fire
+4 Koth of the Hammer
+20 Mountain
+4 Nykthos, Shrine to Nyx
+[Sideboard]
+4 Combust
+3 Detritivore
+4 Guttural Response
+4 Shattering Spree

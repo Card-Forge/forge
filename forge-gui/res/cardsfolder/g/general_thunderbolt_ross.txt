@@ -1,0 +1,8 @@
+Name:General Thunderbolt Ross
+ManaCost:W
+Types:Legendary Creature Human Soldier
+PT:1/1
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigPumpAll | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, attacking creatures get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1
+Oracle:First strike\nBattalion — Whenever General Thunderbolt Ross and at least two other creatures attack, attacking creatures get +1/+0 until end of turn.

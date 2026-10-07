@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Marvel Super Heroes #01
+URL:https://www.patreon.com/mtgpuzzles/posts/marvel-super-1-161116090
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Mjölnir, Hammer of Thor;Restorative Technique;Lightning Strike;Heroic Feast;Photon Blast Barrage
+p0battlefield=Thor, Asgard's Avenger;Knight of Wundagore|Counters:P1P1=1;Knight of Wundagore|Counters:P1P1=1;Mountain;Mountain;Mountain;Forest;Forest
+p1life=15
+p1battlefield=Stick, Fearless Mentor;Ares, God of War

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Madame Hydra
+Title=Madame Hydra
+Icon=Madame Hydra.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Atarashi_Kouta_-_RG_Aggro_(Standard,_#801670).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+2 Paradise Druid
+4 Thorn Lieutenant
+3 Legion Warboss
+4 Gruul Spellbreaker
+4 Rekindling Phoenix
+2 God-Eternal Rhonas
+2 Skarrgan Hellkite
+2 Shock
+2 Lightning Strike
+1 Fight with Fire
+3 Domri, Anarch of Bolas
+1 Kiora, Behemoth Beckoner
+1 Nissa, Who Shakes the World
+1 Sarkhan the Masterless
+8 Forest
+5 Mountain
+2 Mobilized District
+4 Rootbound Crag
+4 Stomping Ground
+1 Gruul Guildgate
+[Sideboard]
+2 Thrashing Brontodon
+4 Lava Coil
+2 Tibalt, Rakish Instigator
+1 Fight with Fire
+2 Carnage Tyrant
+2 The Immortal Sun
+1 Nissa, Who Shakes the World
+1 Legion Warboss

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Green Arrow
+Title=Green Arrow
+Icon=Green Arrow.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Motown123_-_Merfolk_(Modern,_#2820178).dck
+Deck Type=constructed
+
+[Main]
+3 Tide Shaper
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+3 Harbinger of the Seas
+4 Mindspring Merfolk
+4 Silvergill Mentor
+2 Vodalian Hexcatcher
+3 Svyelun of Sea and Sky
+2 Merfolk Trickster
+1 Glasspool Mimic
+4 Aether Vial
+4 Sink into Stupor
+4 Flare of Denial
+2 Spreading Seas
+2 Otawara, Soaring City
+9 Island
+3 Cavern of Souls
+2 Mutavault
+[Sideboard]
+2 Force of Negation
+2 Subtlety
+4 Consign to Memory
+2 Unlicensed Hearse
+1 Harbinger of the Seas
+2 Stern Scolding
+2 Tishana's Tidebinder

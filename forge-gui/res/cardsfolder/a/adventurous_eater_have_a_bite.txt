@@ -1,0 +1,18 @@
+Name:Adventurous Eater
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:3/2
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Have a Bite
+ManaCost:B
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on target creature. You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature. You gain 1 life.

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/Grand_Prix_Taipei_2016/Kelvin_Chew_-_Rogue_(Standard,_#628591).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dragonlord Atarka
+4 Duskwatch Recruiter
+4 Eldrazi Displacer
+3 Elvish Visionary
+4 Matter Reshaper
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+4 Collected Company
+2 Declaration in Stone
+3 Nahiri, the Harbinger
+4 Battlefield Forge
+2 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Island
+2 Llanowar Wastes
+1 Mountain
+1 Needle Spires
+1 Plains
+2 Shivan Reef
+4 Yavimaya Coast
+[Sideboard]
+3 Dromoka's Command
+2 Negate
+3 Planar Outburst
+3 Radiant Flames
+4 Reality Smasher

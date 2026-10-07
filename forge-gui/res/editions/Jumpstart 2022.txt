@@ -380,7 +380,7 @@ ScryfallCode=J22
 372 C Weldfast Wingsmith @Dan Murayama Scott
 373 U Windrider Patrol @Svetlin Velinov
 374 C Winter's Rest @Mila Pesic
-375 C Alley Strangler @Efflam Mercier
+375 C Alley Strangler @Enora Mercier
 376 U Ancient Craving @Rob Alexander
 377 C Black Cat @David Palumbo
 378 C Blight Keeper @Ben Wootten

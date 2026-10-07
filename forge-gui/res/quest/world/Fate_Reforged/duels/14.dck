@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Medium
+Description=Fate_Reforged/Standard_Daily_#8068494/FrankChiappa_-_Sultai_Midrange_(Standard,_#203167).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+4 Elvish Mystic
+4 Genesis Hydra
+1 Nylea, God of the Hunt
+3 Polukranos, World Eater
+4 Sylvan Caryatid
+4 Voyaging Satyr
+4 Whisperwood Elemental
+1 Banishing Light
+1 Citadel Siege
+4 Mastery of the Unseen
+5 Forest
+4 Llanowar Wastes
+4 Nykthos, Shrine to Nyx
+2 Plains
+1 Sandsteppe Citadel
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+1 Arbor Colossus
+2 Elspeth, Sun's Champion
+4 Fleecemane Lion
+3 Glare of Heresy
+2 Hornet Nest
+1 Hushwing Gryff
+2 Reclamation Sage

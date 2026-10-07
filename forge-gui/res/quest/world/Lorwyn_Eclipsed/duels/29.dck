@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=PapaLegba
+Title=PapaLegba
+Icon=PapaLegba.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/L_Anselmi_-_W-U-B-G_Aggro_(Standard,_#2780178).dck
+Deck Type=constructed
+
+[Main]
+4 Aang, Swift Savior
+4 Earth Kingdom Protectors
+4 Earth King's Lieutenant
+4 Earthen Ally
+4 Great Divide Guide
+4 South Pole Voyager
+3 Boiling Rock Rioter
+1 Gran-Gran
+1 Hakoda, Selfless Commander
+1 Katara, the Fearless
+4 Allies at Last
+4 Celestial Reunion
+4 Breeding Pool
+4 Cavern of Souls
+4 Jasmine Dragon Tea Shop
+4 Starting Town
+2 Hallowed Fountain
+2 Temple Garden
+1 Hushwood Verge
+1 Plains
+[Sideboard]
+3 Mai, Scornful Striker
+3 Seam Rip
+3 Spider-Sense
+3 Winnowing
+2 Chomping Changeling
+1 Soul-Guide Lantern

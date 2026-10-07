@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Montgomery Burns
+Title=Montgomery Burns
+Icon=Montgomery Burns.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/5quall_-_Mono-Black_Grief_(Modern,_#1978354).dck
+Deck Type=constructed
+
+[Main]
+3 Sheoldred, the Apocalypse
+4 Grief
+4 Dauthi Voidwalker
+4 The One Ring
+1 Cling to Dust
+4 Fatal Push
+4 Sheoldred's Edict
+4 Not Dead After All
+4 Thoughtseize
+3 Liliana of the Veil
+4 Field of Ruin
+8 Swamp
+1 Urborg, Tomb of Yawgmoth
+4 Demolition Field
+4 Sunken Citadel
+1 Takenuma, Abandoned Mire
+2 Castle Locthwain
+1 Forest
+[Sideboard]
+2 Cursed Totem
+1 Damping Sphere
+1 Unlicensed Hearse
+3 Ashiok, Dream Render
+1 Nihil Spellbomb
+2 Tourach, Dread Cantor
+1 Relic of Progenitus
+2 Pick Your Poison
+2 Damnation

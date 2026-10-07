@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Easy
+Description=Kaladesh/Card_Kingdom_PPTQ/James_Pfeiffer_-_UW_Flash_(Standard,_#656763).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+4 Smuggler's Copter
+1 Negate
+1 Declaration in Stone
+1 Always Watching
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+9 Plains
+4 Port Town
+4 Prairie Stream
+2 Westvale Abbey
+[Sideboard]
+1 Blessed Alliance
+1 Ceremonious Rejection
+1 Declaration in Stone
+3 Fragmentize
+2 Fumigate
+2 Jace, Unraveler of Secrets
+1 Linvala, the Preserver
+1 Skysovereign, Consul Flagship
+2 Spell Shrivel
+1 Void Shatter

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Adam_Beyer_-_Dimir_Tempo_(Standard,_#2814783).dck
+Deck Type=constructed
+
+[Main]
+4 Deceit
+4 Superior Spider-Man
+3 Doomsday Excruciator
+2 Harvester of Misery
+4 Requiting Hex
+3 Bitter Triumph
+1 Essence Scatter
+1 Shoot the Sheriff
+1 Spell Pierce
+3 Stock Up
+2 Deadly Cover-Up
+2 Insatiable Avarice
+2 Intimidation Tactics
+2 Winternight Stories
+10 Swamp
+4 Gloomlake Verge
+4 Restless Reef
+4 Watery Grave
+2 Multiversal Passage
+2 Undercity Sewers
+[Sideboard]
+3 Duress
+3 Quantum Riddler
+2 Oildeep Gearhulk
+2 Soul-Guide Lantern
+1 Annul
+1 Deadly Cover-Up
+1 Disdainful Stroke
+1 Flashfreeze
+1 Outrageous Robbery

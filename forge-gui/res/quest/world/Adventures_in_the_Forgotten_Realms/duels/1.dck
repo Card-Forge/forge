@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Inaba_Konan_-_Mono_White_(Standard,_#1190200).dck
+Deck Type=constructed
+
+[Main]
+1 Linden, the Steadfast Queen
+2 Alseid of Life's Bounty
+2 Daxos, Blessed by the Sun
+2 Containment Priest
+3 Heliod, Sun-Crowned
+3 Blade Historian
+3 Elite Spellbinder
+4 Skyclave Apparition
+4 Speaker of the Heavens
+4 Luminarch Aspirant
+4 Selfless Savior
+1 Portable Hole
+2 Maul of the Skyclaves
+2 Glass Casket
+1 Cave of the Frost Dragon
+1 Field of Ruin
+2 Castle Ardenvale
+19 Plains
+[Sideboard]
+1 Spiked Pit Trap
+1 Reidane, God of the Worthy
+1 Guardian of Faith
+1 Glass Casket
+1 Shadowspear
+2 Giant Killer
+2 Drannith Magistrate
+2 Funeral Longboat
+2 Deafening Silence
+2 Soul-Guide Lantern

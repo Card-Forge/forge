@@ -21,7 +21,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
     private final VSubmenuConstructed view = VSubmenuConstructed.SINGLETON_INSTANCE;
-    private final CLobby lobby = new CLobby(view.getLobby());
+    private final CLobby lobby = view.getLobby().getController();
 
     @Override
     public void register() {

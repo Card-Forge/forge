@@ -1,0 +1,9 @@
+Name:Brawn, Amadeus Cho
+ManaCost:1 GU
+Types:Legendary Creature Gamma Scientist Hero
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ PutCounter | Cost$ 4 GU | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | PowerUp$ True | SpellDescription$ Put a +1/+1 counter on NICKNAME for each card in your hand. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:X:Count$ValidHand Card.YouOwn
+Oracle:When Brawn enters, draw a card.\nPower-up — {4}{G/U}: Put a +1/+1 counter on Brawn for each card in your hand. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

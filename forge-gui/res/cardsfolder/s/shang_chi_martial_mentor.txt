@@ -1,0 +1,9 @@
+Name:Shang-Chi, Martial Mentor
+ManaCost:3 G G
+Types:Legendary Creature Human Warrior Hero
+PT:4/4
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ DoubleCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | Amount$ X
+A:AB$ PutCounter | Cost$ 5 G G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | PowerUp$ True | SpellDescription$ Put three +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead.\nPower-up — {5}{G}{G}: Put three +1/+1 counters on Shang-Chi. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

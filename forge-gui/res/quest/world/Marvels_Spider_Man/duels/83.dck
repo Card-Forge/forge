@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Hard
+Description=./Modern/Marvels_Spider_Man/Magicmalle_-_Phyrexian_tribal_(Modern,_#2691352).dck
+Deck Type=constructed
+
+[Main]
+2 Urabrask, Heretic Praetor
+2 Sheoldred, the Apocalypse
+3 Scrawling Crawler
+1 Gixian Puppeteer
+1 Soulless Jailer
+4 Phyrexian Fleshgorger
+2 Phyrexian Censor
+4 Evangel of Synthesis
+4 Cavern of Souls
+4 The Seedcore
+4 Ugin's Labyrinth
+2 Oscorp Industries
+1 Bloodstained Mire
+1 Polluted Delta
+1 Geier Reach Sanitarium
+1 Island
+1 Swamp
+1 Mountain
+[Sideboard]
+1 Sheoldred
+1 Hex Parasite
+1 Phyrexian Revoker

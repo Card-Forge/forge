@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Albert_Cordobés_-_Jeskai_Control_(Standard,_#2914611).dck
+Deck Type=constructed
+
+[Main]
+4 Tablet of Discovery
+4 Consult the Star Charts
+4 Jeskai Revelation
+4 Thunder Magic
+2 Broadside Barrage
+2 Flashback
+2 Sear
+2 Swallowed by Leviathan
+1 Essence Scatter
+1 Into the Flood Maw
+1 Traumatic Critique
+4 Stock Up
+2 Pyroclasm
+1 Impractical Joke
+4 Great Hall of the Biblioplex
+4 Riverpyre Verge
+4 Steam Vents
+3 Island
+3 Mountain
+2 Hallowed Fountain
+2 Petrified Hamlet
+2 Sundown Pass
+1 Mistrise Village
+1 Stormcarved Coast
+[Sideboard]
+3 Emeritus of Ideation
+3 Flashfreeze
+2 Spell Pierce
+1 Annul
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Erode
+1 Impractical Joke
+1 Petrified Hamlet
+1 Slagstorm

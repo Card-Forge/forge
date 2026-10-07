@@ -3,8 +3,8 @@ Code=YONE
 Date=2023-02-28
 Name=Alchemy: Phyrexia
 Type=Online
-Booster=1 UncommonRareMythic, 9 Common:fromsheet("ONE cards"), 3 Uncommon:fromSheet("ONE cards"), 1 RareMythic:fromSheet("ONE cards"), 1 BasicLand:fromSheet("ONE cards")
 ScryfallCode=YONE
+Booster=1 UncommonRareMythic:fromsheet("YONE cards"), 9 Common:fromsheet("ONE cards"), 3 Uncommon:fromSheet("ONE cards"), 1 RareMythic:fromSheet("ONE cards"), 1 BasicLand:fromSheet("ONE cards")
 
 [cards]
 1 M Ghalma the Shaper @PINDURSKI
@@ -30,10 +30,13 @@ ScryfallCode=YONE
 21 R Glistening Extractor @Jonas De Ro
 22 R Gyox, Brutal Carnivora @Daniel Ljunggren
 23 R Ichor Aberration @J.P. Targete
-24 R Innovative Metatect @LA Draws
+24 R Innovative Metatect @L.A. Draws
 25 U Mephidross Slime @Yeong-Hao Han
 26 U Quicksilver Lapidary @Caroline Gariba
 27 U Seething Skitter-Priest @Monztre
 28 U Skullpiercer Gnat @David Sondered
 29 R Vexyr, Ich-Tekik's Heir @Michele Giorgi
 30 R Phyrexian Scrapyard @Piotr Dura
+
+[conjured]
+31 M Soul of New Phyrexia @Daarken

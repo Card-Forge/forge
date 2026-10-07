@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Super_IQ_-_Plano,_TX/Cameron_Struck_-_Orzhov_Midrange_(Standard,_#71239).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Baron of Vizkopa
+3 Desecration Demon
+2 Obzedat, Ghost Council
+4 Pack Rat
+1 Whip of Erebos
+3 Bile Blight
+3 Devour Flesh
+4 Hero's Downfall
+1 Ultimate Price
+2 Read the Bones
+4 Thoughtseize
+2 Underworld Connections
+2 Elspeth, Sun's Champion
+4 Godless Shrine
+4 Mutavault
+1 Orzhov Guildgate
+3 Plains
+9 Swamp
+4 Temple of Silence
+[Sideboard]
+1 Dark Betrayal
+2 Doom Blade
+2 Drown in Sorrow
+4 Duress
+1 Erebos, God of the Dead
+3 Lifebane Zombie
+2 Revoke Existence

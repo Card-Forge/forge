@@ -3,4 +3,4 @@ Name:Alchemy (2023-12-12)
 Type:Archived
 Subtype:Arena
 Effective:2023-12-12
-Sets:ANA, ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE, LCI, YLCI
+Sets:ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE, LCI, YLCI

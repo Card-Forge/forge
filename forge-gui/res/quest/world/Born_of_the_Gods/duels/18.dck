@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Colorado_Springs,_CO/Paul_Bradford_-_Mono_Black_(Standard,_#79911).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+3 Lifebane Zombie
+1 Liliana's Reaver
+4 Pack Rat
+1 Bile Blight
+4 Devour Flesh
+4 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+4 Underworld Connections
+4 Mutavault
+22 Swamp
+[Sideboard]
+2 Dark Betrayal
+3 Doom Blade
+1 Drown in Sorrow
+4 Duress
+2 Erebos, God of the Dead
+1 Read the Bones

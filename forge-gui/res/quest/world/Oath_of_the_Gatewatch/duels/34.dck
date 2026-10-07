@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/Standard_Champs_#9434062/_Marian__-_Jund_Dragons_(Standard,_#603127).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Flamewake Phoenix
+4 Hangarback Walker
+4 Kolaghan, the Storm's Fury
+2 Pia and Kiran Nalaar
+4 Thopter Engineer
+4 Thunderbreak Regent
+4 Draconic Roar
+2 Fiery Impulse
+2 Grasp of Darkness
+3 Murderous Cut
+2 Duress
+4 Bloodstained Mire
+3 Haven of the Spirit Dragon
+4 Mountain
+4 Polluted Delta
+3 Smoldering Marsh
+4 Swamp
+4 Wooded Foothills
+[Sideboard]
+2 Kalitas, Traitor of Ghet
+2 Outpost Siege
+4 Self-Inflicted Wound
+3 Transgress the Mind

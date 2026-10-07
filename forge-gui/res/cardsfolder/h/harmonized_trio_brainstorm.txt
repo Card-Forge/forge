@@ -1,0 +1,11 @@
+Name:Harmonized Trio
+ManaCost:U
+Types:Creature Merfolk Bard Wizard
+PT:1/1
+A:AB$ AlterAttribute | Cost$ T tapXType<2/Creature> | Attributes$ Prepared | SpellDescription$ This creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:{T}, Tap two untapped creatures you control: This creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+CopyFaceFrom:Brainstorm

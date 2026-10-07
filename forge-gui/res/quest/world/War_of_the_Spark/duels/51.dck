@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Avyrian_-_UW_Control_(Modern,_#796722).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+1 Vendilion Clique
+2 Wall of Omens
+2 Cryptic Command
+1 Dovin's Veto
+1 Hieroglyphic Illumination
+2 Logic Knot
+4 Opt
+4 Path to Exile
+1 Spell Snare
+1 Surgical Extraction
+1 Serum Visions
+3 Terminus
+1 Detention Sphere
+1 Search for Azcanta
+2 Jace, the Mind Sculptor
+1 Narset, Parter of Veils
+2 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+3 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+6 Island
+2 Plains
+1 Polluted Delta
+[Sideboard]
+1 Vendilion Clique
+1 Dovin's Veto
+1 Surgical Extraction
+2 Celestial Purge
+2 Disdainful Stroke
+1 Dispel
+1 Lyra Dawnbringer
+1 Rest in Peace
+2 Restoration Angel
+1 Stony Silence
+2 Timely Reinforcements

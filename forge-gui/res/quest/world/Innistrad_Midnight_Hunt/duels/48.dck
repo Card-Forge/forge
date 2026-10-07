@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Platinum-Mythic_Rank_Player_-_Boros_Midrange_(Standard,_#1226712).dck
+Deck Type=constructed
+
+[Main]
+1 Loyal Warhound
+2 Reckless Stormseeker
+4 Luminarch Aspirant
+4 Skyclave Apparition
+4 Moonveil Regent
+4 Intrepid Adversary
+4 Brutal Cathar
+2 Portable Hole
+4 Sacred Fire
+4 Shatterskull Smashing
+2 Paladin Class
+4 Showdown of the Skalds
+1 Cave of the Frost Dragon
+3 Den of the Bugbear
+4 Furycalm Snarl
+4 Needleverge Pathway
+9 Plains
+[Sideboard]
+1 Sungold Sentinel
+1 Burning Hands
+1 Demon Bolt
+2 Reidane, God of the Worthy
+2 Paladin Class
+2 Cathar Commando
+2 Portable Hole
+4 Elite Spellbinder

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/I_AML_Segundo_Torneo_Noviembre_(Azorio)/├ülvaro_Arenas_Gil_-_Red_Deck_Wins_(Modern,_#111605).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+4 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+3 Dragon's Claw
+4 Molten Rain
+2 Relic of Progenitus
+2 Volcanic Fallout
+4 Wear // Tear

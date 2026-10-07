@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Vienna_-_Austria/Mathias_Wosner_-_Mono_Red_(Standard,_#1918).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+3 Burst Lightning
+4 Lightning Bolt
+2 Searing Blaze
+4 Staggershock
+4 Blightning
+3 Earthquake
+3 Dragonskull Summit
+4 Lavaclaw Reaches
+17 Mountain
+[Sideboard]
+4 Deathmark
+2 Doom Blade
+4 Goblin Ruinblaster
+2 Malakir Bloodwitch
+3 Manabarbs

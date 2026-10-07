@@ -1,0 +1,43 @@
+[metadata]
+Name=WUB Control
+Deck Type=constructed
+Title=WUB Control
+Description=WUB Control
+Difficulty=Medium
+Icon=Sakpata
+[Main]
+1 Aether Hub
+2 Approach of the Second Sun
+2 Cast Out
+4 Concealed Courtyard
+3 Disallow
+4 Drowned Catacomb
+3 Essence Scatter
+4 Fatal Push
+4 Fetid Pools
+1 Field of Ruin
+1 Fumigate
+4 Glacial Fortress
+3 Glimmer of Genius
+3 Irrigated Farmland
+1 Island
+1 Island
+2 Moment of Craving
+1 Plains
+2 Search for Azcanta
+2 Settle the Wreckage
+4 Supreme Will
+2 Swamp
+1 The Immortal Sun
+2 Torrential Gearhulk
+3 Vraska's Contempt
+[Sideboard]
+2 Authority of the Consuls
+1 Crook of Condemnation
+1 Doomfall
+2 Duress
+1 Jace's Defeat
+2 Negate
+1 Profane Procession
+3 Regal Caracal
+2 The Scarab God

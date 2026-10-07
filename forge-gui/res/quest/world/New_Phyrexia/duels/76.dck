@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/TCGplayer_Modern_2k/Dan_Musser_-_Domain_Zoo_(Modern,_#18683).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Tribal Flames
+4 Arid Mesa
+1 Forest
+1 Godless Shrine
+3 Misty Rainforest
+1 Mountain
+1 Plains
+1 Sacred Foundry
+2 Scalding Tarn
+1 Steam Vents
+2 Stomping Ground
+1 Temple Garden
+3 Verdant Catacombs
+[Sideboard]
+1 Ancient Grudge
+4 Blood Moon
+2 Gaddock Teeg
+2 Phyrexian Metamorph
+2 Qasali Pridemage
+2 Ranger of Eos
+2 Tormod's Crypt

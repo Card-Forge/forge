@@ -1,0 +1,7 @@
+Name:Impose Hierarchy
+ManaCost:1 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.cmcLE4 | TgtPrompt$ Select target creature with mana value 4 or less | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature with mana value 4 or less. You gain 1 life for each creature card in its controller's hand.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$ValidHand Creature.OwnedBy TargetedController
+Oracle:Destroy target creature with mana value 4 or less. You gain 1 life for each creature card in its controller's hand.

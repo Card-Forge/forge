@@ -1,0 +1,6 @@
+Name:Glamorous Grapplers
+ManaCost:3 B
+Types:Creature Human Performer Villain
+PT:3/3
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

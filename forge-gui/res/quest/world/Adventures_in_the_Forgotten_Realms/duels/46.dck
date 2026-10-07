@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/ARabidNarwhal_-_Sultai_Ultimatum_(Standard,_#1183433).dck
+Deck Type=constructed
+
+[Main]
+1 Vorinclex, Monstrous Raider
+1 Polukranos, Unchained
+1 Valki, God of Lies
+2 Elder Gargaroth
+4 Beanstalk Giant
+1 Eliminate
+2 Power Word Kill
+2 Heartless Act
+2 Soul Shatter
+2 Jwari Disruption
+1 Extinction Event
+1 Sea Gate Restoration
+2 Alrund's Epiphany
+3 Shadows' Verdict
+4 Emergent Ultimatum
+4 Cultivate
+1 Kiora Bests the Sea God
+4 Binding the Old Gods
+4 Omen of the Sea
+4 Wolfwillow Haven
+1 Professor Onyx
+1 Ketria Triome
+2 Swamp
+3 Forest
+3 Island
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Fabled Passage
+4 Temple of Malady
+4 Zagoth Triome
+4 Clearwater Pathway
+[Sideboard]
+1 Extinction Event
+1 Mazemind Tome
+1 Yorion, Sky Nomad
+1 Polukranos, Unchained
+3 Mystical Dispute
+4 Mire Triton
+4 Duress

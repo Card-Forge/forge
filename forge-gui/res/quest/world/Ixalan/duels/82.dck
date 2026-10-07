@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot82
+Title=Robot82
+Icon=Denethor.jpg
+Difficulty=Medium
+Description=GU Energy 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+4 Electrostatic Pummeler
+4 Longtusk Cub
+4 Rogue Refiner
+4 Servant of the Conduit
+1 Trophy Mage
+4 Blossoming Defense
+1 Crash the Ramparts
+2 Dive Down
+4 Attune with Aether
+4 Larger Than Life
+4 One With the Wind
+4 Aether Hub
+4 Botanical Sanctum
+6 Forest
+4 Hashep Oasis
+2 Island
+[Sideboard]
+2 Aether Meltdown
+2 Aethersphere Harvester
+2 Carnage Tyrant
+4 Negate
+2 Perilous Voyage
+1 Rhonas the Indomitable
+1 Spell Pierce
+1 Vizier of Many Faces

@@ -1,0 +1,8 @@
+Name:Visions of Villainy
+ManaCost:2 B
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Villain.YouCtrl | Description$ This spell costs {1} less to cast if you control a Villain.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and you lose 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+DeckHints:Type$Villain
+Oracle:This spell costs {1} less to cast if you control a Villain.\nYou draw two cards and lose 2 life.

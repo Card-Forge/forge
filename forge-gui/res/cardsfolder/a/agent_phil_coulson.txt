@@ -1,0 +1,9 @@
+Name:Agent Phil Coulson
+ManaCost:1 W
+Types:Legendary Creature Human Spy Hero
+PT:2/2
+K:Vigilance
+A:AB$ PutCounterAll | Cost$ T | ValidCards$ Hero.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | SpellDescription$ Put a +1/+1 counter on each other Hero you control.
+DeckHas:Ability$Counters
+DeckHints:Type$Hero
+Oracle:Vigilance\n{T}: Put a +1/+1 counter on each other Hero you control.

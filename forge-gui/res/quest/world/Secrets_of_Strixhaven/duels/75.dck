@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Kenneth_Guimaraes_-_Dimir_Mill_(Modern,_#2942524).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+2 Exhibition Tidecaller
+4 Archive Trap
+4 Drown in the Loch
+4 Visions of Beyond
+3 Surgical Extraction
+2 Fatal Push
+1 Malakir Rebirth
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+2 Glimpse the Unthinkable
+4 Field of Ruin
+4 Island
+4 Polluted Delta
+2 Darkslick Shores
+2 Watery Grave
+1 Fiery Islet
+1 Misty Rainforest
+1 Otawara, Soaring City
+1 Prismatic Vista
+1 Shelldock Isle
+1 Swamp
+[Sideboard]
+2 Dress Down
+2 Ensnaring Bridge
+2 Extirpate
+2 Long Goodbye
+2 Torpor Orb
+1 Baleful Mastery
+1 Dismember
+1 Flusterstorm
+1 Jace, the Perfected Mind
+1 Surgical Extraction

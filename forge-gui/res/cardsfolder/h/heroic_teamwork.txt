@@ -1,0 +1,7 @@
+Name:Heroic Teamwork
+ManaCost:2 W
+Types:Instant
+K:Teamwork:3
+A:SP$ Pump | TargetMin$ 1 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +1 | ValidTgts$ Creature | TgtPrompt$ Select one or two target creatures | SubAbility$ DBDraw | SpellDescription$ One or two target creatures each get +2/+1 until end of turn. If this spell was cast using teamwork, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionZone$ Stack | ConditionPresent$ Card.Self+Teamwork
+Oracle:Teamwork 3 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 3 or more.)\nOne or two target creatures each get +2/+1 until end of turn. If this spell was cast using teamwork, draw a card.

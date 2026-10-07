@@ -1,0 +1,13 @@
+Name:Winter Soldier, Reborn Avenger
+ManaCost:4 W
+Types:Legendary Creature Human Soldier Hero
+PT:3/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever NICKNAME attacks, return target creature card with mana value less than or equal to NICKNAME's power from your graveyard to the battlefield. If a Hero enters this way, it enters with an additional +1/+1 counter on it.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Targeted | ReplacementEffects$ ETBCreat | ExileOnMoved$ Graveyard | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select target creature card with mana value X or less in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+SVar:ETBCreat:Event$ Moved | ValidCard$ Hero.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ If a Hero enters this way, it enters with an additional +1/+1 counter on it.
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 1
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard
+Oracle:Whenever Winter Soldier attacks, return target creature card with mana value less than or equal to Winter Soldier's power from your graveyard to the battlefield. If a Hero enters this way, it enters with an additional +1/+1 counter on it.

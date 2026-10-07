@@ -3,7 +3,6 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -18,17 +17,15 @@ public class GoadAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        // use this part only for targeting
         if (sa.usesTargeting()) {
-            // get all possible targets
-            List<Card> list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+            List<Card> goadable = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
-            if (list.isEmpty())
+            if (goadable.isEmpty())
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
 
             if (game.getPlayers().size() > 2) {
                 // use this part only in multiplayer
-                CardCollection betterList = CardLists.filter(list, c -> {
+                goadable = CardLists.filter(goadable, c -> {
                     // filter only creatures which can attack
                     if (ComputerUtilCard.isUselessCreature(ai, c)) {
                         return false;
@@ -45,16 +42,9 @@ public class GoadAi extends SpellAbilityAi {
                     }
                     return false;
                 });
-
-                // if better list is not empty, use that one instead
-                if (!betterList.isEmpty()) {
-                    list = betterList;
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
             } else {
                 // single Player, goaded creature would attack ai
-                CardCollection betterList = CardLists.filter(list, c -> {
+                goadable = CardLists.filter(goadable, c -> {
                     // filter only creatures which can attack
                     if (ComputerUtilCard.isUselessCreature(ai, c)) {
                         return false;
@@ -66,13 +56,11 @@ public class GoadAi extends SpellAbilityAi {
                     // select only creatures AI can block
                     return ComputerUtilCard.canBeBlockedProfitably(ai, c, false);
                 });
+            }
 
-                // if better list is not empty, use that one instead
-                if (!betterList.isEmpty()) {
-                    list = betterList;
-                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
+            if (!goadable.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(goadable));
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             // AI does not find a good creature to goad.
@@ -93,7 +81,6 @@ public class GoadAi extends SpellAbilityAi {
         if (!mandatory) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        // mandatory play, so we have to play it
         if (sa.usesTargeting()) {
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 for (Player opp : ai.getOpponents()) {

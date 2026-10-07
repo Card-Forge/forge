@@ -1,36 +1,28 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import forge.Adventure;
 import forge.adventure.data.AdventureEventData;
 import forge.screens.FScreen;
 
 /**
  * DeckEditScene
- * scene class that contains the Deck editor
+ * Scene class that contains the Deck editor layout
  */
 public class DeckEditScene extends ForgeScene {
 
-    AdventureDeckEditor screen;
-    Stage stage;
     AdventureEventData currentEvent;
 
-    private DeckEditScene() {
-
-    }
+    private DeckEditScene() {}
 
     private static DeckEditScene object;
+    TextureRegion backDrop;
 
-    public static DeckEditScene getInstance() {
-        if(object==null)
-            object=new DeckEditScene();
+    public static DeckEditScene getInstance(TextureRegion backdrop) {
+        if(object == null)
+            object = new DeckEditScene();
+        object.backDrop = backdrop;
         return object;
-    }
-
-
-    @Override
-    public void dispose() {
-        if (stage != null)
-            stage.dispose();
     }
 
     public void loadEvent(AdventureEventData event){
@@ -38,25 +30,23 @@ public class DeckEditScene extends ForgeScene {
     }
 
     @Override
-    public void enter() {
-        screen = null;
-        getScreen();
-        screen.refresh();
-        super.enter();
+    public boolean leave() {
+        Adventure.getInstance().renderTransitionScreen = true;
+        return super.leave();
+    }
 
+    @Override
+    public void enter() {
+        if (currentEvent == null)
+            ((AdventureDeckEditor) getScreen()).setEvent(null);
+        ((AdventureDeckEditor) getScreen()).refresh();
+        super.enter();
     }
 
     @Override
     public FScreen getScreen() {
-        if (screen==null){
-            if (currentEvent == null){
-                screen = new AdventureDeckEditor(false);
-                screen.setEvent(null);
-            }
-            else {
-                screen = new AdventureDeckEditor(currentEvent);
-            }
-        }
-        return screen;
+        return currentEvent == null
+            ? new AdventureDeckEditor(false, backDrop)
+            :  new AdventureDeckEditor(currentEvent, backDrop);
     }
 }

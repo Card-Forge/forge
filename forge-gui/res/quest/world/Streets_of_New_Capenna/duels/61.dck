@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Brandon_Krussow_-_Mono-Blue_Affinity_(Modern,_#1462725)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Patchwork Automaton
+4 Thought Monitor
+4 Ornithopter
+4 Sojourner's Companion
+4 Frogmite
+4 Memnite
+1 Aether Spellbomb
+1 Shadowspear
+4 Cranial Plating
+4 Springleaf Drum
+4 Welding Jar
+4 Thoughtcast
+4 Urza's Saga
+1 Otawara, Soaring City
+1 Island
+4 Mistvault Bridge
+4 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Jegantha, the Wellspring
+1 Unlicensed Hearse
+1 Pithing Needle
+4 Etched Champion
+4 Damping Sphere
+4 Tormod's Crypt

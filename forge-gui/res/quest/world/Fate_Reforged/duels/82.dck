@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/DZ_Series_2^_Tappa_Camaiore/Fabio_La_Martina_-_Infect_(Modern,_#207543).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+1 Dryad Arbor
+4 Glistener Elf
+1 Ichorclaw Myr
+4 Noble Hierarch
+2 Spellskite
+4 Apostle's Blessing
+3 Become Immense
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+2 Distortion Strike
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+2 Pendelhaven
+4 Verdant Catacombs
+4 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Dismember
+2 Monastery Siege
+2 Nature's Claim
+3 Spell Pierce
+2 Viridian Corrupter
+2 Wild Defiance

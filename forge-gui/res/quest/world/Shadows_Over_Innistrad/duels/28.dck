@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/World_Magic_Cup_Qualifier_2016_-_ÕñºÚÿ¬õ║êÚü©/Nakamichi_Daisuke_-_WBG_Aggro_(Standard,_#627415).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Archangel Avacyn
+3 Deathcap Cultivator
+3 Den Protector
+2 Nissa, Vastwood Seer
+4 Sylvan Advocate
+4 Tireless Tracker
+3 Dromoka's Command
+2 Declaration in Stone
+4 Oath of Nissa
+4 Gideon, Ally of Zendikar
+2 Sorin, Grim Nemesis
+4 Canopy Vista
+3 Evolving Wilds
+4 Forest
+4 Fortified Village
+2 Llanowar Wastes
+4 Plains
+4 Shambling Vent
+1 Swamp
+[Sideboard]
+3 Hallowed Moonlight
+2 Kalitas, Traitor of Ghet
+2 Linvala, the Preserver
+2 Painful Truths
+1 Tragic Arrogance
+3 Transgress the Mind

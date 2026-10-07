@@ -1,0 +1,7 @@
+Name:La Forge, Perceptive Engineer
+ManaCost:1 U
+Types:Legendary Creature Human Artificer
+PT:1/4
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Spell.Artifact | SpellDescription$ Add {U}. Spend this mana only to cast an artifact spell.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\n{T}: Add {U}. Spend this mana only to cast an artifact spell.

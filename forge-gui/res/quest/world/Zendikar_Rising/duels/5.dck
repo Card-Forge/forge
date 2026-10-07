@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Cow
+Title=Cow
+Icon=Cow.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Abel_Jacoby_-_Jeskai_Control_(Standard,_#1045477).dck
+Deck Type=constructed
+
+[Main]
+1 Realm-Cloaked Giant
+2 Bonecrusher Giant
+3 Fae of Wishes
+2 Negate
+2 Mystical Dispute
+2 Opt
+3 Beyeen Veil
+4 Neutralize
+4 Spikefield Hazard
+4 Essence Scatter
+2 Shatterskull Smashing
+3 Storm's Wrath
+2 Banishing Light
+4 Whirlwind of Thought
+1 Narset of the Ancient Way
+1 Elspeth, Sun's Nemesis
+1 Temple of Epiphany
+1 Mountain
+1 Plains
+1 Temple of Triumph
+2 Fabled Passage
+2 Island
+3 Needleverge Pathway
+3 Riverglide Pathway
+3 Raugrin Triome
+3 Temple of Enlightenment
+[Sideboard]
+1 Negate
+1 Shatter the Sky
+1 Rewind
+1 Pacifism
+1 Heliod's Intervention
+1 Ugin, the Spirit Dragon
+1 Sublime Epiphany
+1 Redcap Melee
+1 Revoke Existence
+1 Faith's Fetters
+1 Mystical Dispute
+1 Emeria's Call
+1 Elspeth Conquers Death
+1 Soul Sear
+1 Scorching Dragonfire

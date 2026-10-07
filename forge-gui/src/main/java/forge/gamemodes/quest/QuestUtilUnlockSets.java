@@ -17,7 +17,6 @@
  */
 package forge.gamemodes.quest;
 
-import com.google.common.collect.ImmutableList;
 import forge.card.CardEdition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.ReadPriceList;
@@ -122,7 +121,7 @@ public class QuestUtilUnlockSets {
      * 
      * @return unmodifiable list, assorted sets that are not currently in the format.
      */
-    private static final List<CardEdition> emptyEditions = ImmutableList.of();
+    private static final List<CardEdition> emptyEditions = List.of();
     private static final EnumSet<CardEdition.Type> unlockableSetTypes =
         EnumSet.of(CardEdition.Type.CORE, CardEdition.Type.EXPANSION, CardEdition.Type.REPRINT, CardEdition.Type.STARTER);
 

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Silver Samurai
+Title=Silver Samurai
+Icon=Silver Samurai.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/howlingmines_-_Rakdos_Discard_Aggro_(Modern,_#1197422).dck
+Deck Type=constructed
+
+[Main]
+2 Kroxa, Titan of Death's Hunger
+3 Blazing Rootwalla
+4 Scrapheap Scrounger
+4 Rotting Regisaur
+4 Dreadhorde Butcher
+4 Hazoret the Fervent
+4 Knight of the Ebon Legion
+4 Rakdos Headliner
+4 Fiery Temper
+1 Agadeem's Awakening
+4 Thoughtseize
+1 Mountain
+1 Castle Locthwain
+4 Swamp
+4 Den of the Bugbear
+4 Dragonskull Summit
+4 Blightstep Pathway
+4 Blood Crypt
+[Sideboard]
+1 Cling to Dust
+2 Noxious Grasp
+2 Chandra, Torch of Defiance
+2 Fatal Push
+2 Go Blank
+3 Duress
+3 Abrade

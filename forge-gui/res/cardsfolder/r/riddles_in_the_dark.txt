@@ -1,0 +1,9 @@
+Name:Riddles in the Dark
+ManaCost:2 U
+Types:Instant
+A:SP$ PeekAndReveal | Defined$ You | PeekAmount$ 4 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBTwoPiles | SpellDescription$ Look at the top four cards of your library and separate them into a face-down pile and a face-up pile. An opponent chooses one of the piles. Put that pile into your hand and the other into your graveyard.
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | Separator$ You | Chooser$ Opponent | DefinedCards$ Remembered | ChosenPile$ DBHand | UnchosenPile$ DBGraveyard | Zone$ Library | FaceDown$ One | StackDescription$ None
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
+SVar:DBGraveyard:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard
+DeckHas:Ability$Graveyard
+Oracle:Look at the top four cards of your library and separate them into a face-down pile and a face-up pile. An opponent chooses one of the piles. Put that pile into your hand and the other into your graveyard.

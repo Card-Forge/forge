@@ -1,0 +1,6 @@
+Name:Kolinahr Priest
+ManaCost:2 U
+Types:Creature Vulcan Monk
+PT:3/2
+K:Flash
+Oracle:Flash (You may cast this spell any time you could cast an instant.)

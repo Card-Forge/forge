@@ -6,50 +6,18 @@ import java.util.List;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import com.google.common.collect.Lists;
-
 import forge.ai.AITest;
-import forge.ai.LobbyPlayerAi;
+import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
-import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameRules;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.Match;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 
 public class DamageDealAiTest extends AITest {
-
-    private static boolean initialized = false;
-
-    protected Game initAndCreateThreePlayerGame() {
-        if (!initialized) {
-            // Call parent's initAndCreateGame to trigger initialization
-            initAndCreateGame();
-            initialized = true;
-        }
-        List<RegisteredPlayer> players = Lists.newArrayList();
-        Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("opponent", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ally", null)));
-        GameRules rules = new GameRules(GameType.Constructed);
-        Match match = new Match(rules, players, "Test");
-        Game game = new Game(players, rules, match);
-        Player ai = game.getPlayers().get(1);
-        game.setAge(GameStage.Play);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
-        game.getPhaseHandler().onStackResolved();
-        return game;
-    }
-
     @Test
     public void testChooseSingleEntityPrefersOpponentPlayer() {
         // Test for Comet, Stellar Pup fix: AI should target opponent player
@@ -75,7 +43,7 @@ public class DamageDealAiTest extends AITest {
         options.add(aiCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose opponent player, not its own creature
@@ -107,7 +75,7 @@ public class DamageDealAiTest extends AITest {
         options.add(killableCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose the creature it can kill (Grizzly Bears)
@@ -138,7 +106,7 @@ public class DamageDealAiTest extends AITest {
         options.add(strongCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity (not optional = mandatory)
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose its worst creature (Elvish Mystic)
@@ -176,7 +144,7 @@ public class DamageDealAiTest extends AITest {
         options.add(allyCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose ally's worst creature before its own

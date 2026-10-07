@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=New_Phyrexia/2011_PTQ_Philadelphia_-_Albacete,_Spain/Pablo_Rueda_-_Boros_(Standard,_#16432).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+2 Hero of Oxid Ridge
+4 Mirran Crusader
+4 Spikeshot Elder
+4 Squadron Hawk
+4 Steppe Lynx
+2 Stoneforge Mystic
+1 Batterskull
+2 Sword of War and Peace
+3 Dismember
+4 Lightning Bolt
+4 Koth of the Hammer
+4 Arid Mesa
+4 Marsh Flats
+6 Mountain
+5 Plains
+4 Scalding Tarn
+2 Terramorphic Expanse
+[Sideboard]
+2 Arc Trail
+3 Crush
+4 Kor Firewalker
+2 Pyroclasm
+3 Spellskite
+1 Sword of Feast and Famine

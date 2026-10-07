@@ -228,7 +228,7 @@ Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 174 C Blooming Stinger @Alexandre Honoré
 175 U Broodguard Elite @Paolo Parente
 176 U Close Encounter @Inkognit
-177 C Diplomatic Relations @Néstor Ossandón Leal
+177† C Diplomatic Relations @Néstor Ossandón Leal
 178 C Drix Fatemaker @Anna Pavleeva
 179 U Edge Rover @Francisco Badilla
 180 U Eumidian Terrabotanist @Loïc Canavaggia

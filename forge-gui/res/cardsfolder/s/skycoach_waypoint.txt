@@ -1,0 +1,7 @@
+Name:Skycoach Waypoint
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ AlterAttribute | Cost$ 3 T | ValidTgts$ Creature | Attributes$ Prepared | SpellDescription$ Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}.\n{3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)

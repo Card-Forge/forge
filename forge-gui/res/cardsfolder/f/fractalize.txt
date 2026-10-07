@@ -1,0 +1,8 @@
+Name:Fractalize
+ManaCost:X U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature | Colors$ Green,Blue | OverwriteColors$ True | Types$ Fractal | RemoveCreatureTypes$ True | Power$ Y | Toughness$ Y | SpellDescription$ Until end of turn, target creature becomes a green and blue Fractal with base power and toughness each equal to X plus 1. (It loses all other colors and creature types.)
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Plus.1
+DeckHas:Type$Fractal
+Oracle:Until end of turn, target creature becomes a green and blue Fractal with base power and toughness each equal to X plus 1. (It loses all other colors and creature types.)

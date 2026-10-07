@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Mason_Clark_-_10-Rack_(Modern,_#1670778).dck
+Deck Type=constructed
+
+[Main]
+1 Endurance
+2 Nissa, Resurgent Animist
+4 Omnath, Locus of Creation
+2 Elesh Norn, Mother of Machines
+2 Fury
+4 Solitude
+2 Lightning Bolt
+1 Eladamri's Call
+4 Prismatic Ending
+2 Expressive Iteration
+4 Leyline Binding
+4 Wrenn and Six
+4 Teferi, Time Raveler
+1 Boseiju, Who Endures
+1 Breeding Pool
+3 Flooded Strand
+1 Hallowed Fountain
+1 Indatha Triome
+1 Ketria Triome
+4 Misty Rainforest
+1 Raugrin Triome
+1 Sacred Foundry
+1 Snow-Covered Forest
+1 Snow-Covered Island
+1 Snow-Covered Plains
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Endurance
+2 Orvar, the All-Form
+3 Chalice of the Void
+2 Engineered Explosives
+1 Flusterstorm
+3 Veil of Summer
+2 Force of Vigor

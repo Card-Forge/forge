@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Ivan_Errico_-_Dimir_Midrange_(Standard,_#2380874).dck
+Deck Type=constructed
+
+[Main]
+4 Spyglass Siren
+3 Preacher of the Schism
+3 Enduring Curiosity
+3 Floodpits Drowner
+4 Deep-Cavern Bat
+2 Oildeep Gearhulk
+2 Faerie Mastermind
+1 Tishana's Tidebinder
+3 Cut Down
+1 Go for the Throat
+2 Shoot the Sheriff
+2 Anoint with Affliction
+2 Spell Pierce
+3 Kaito, Bane of Nightmares
+4 Island
+4 Swamp
+4 Darkslick Shores
+4 Restless Reef
+4 Underground River
+4 Gloomlake Verge
+1 Fountainport
+[Sideboard]
+2 Tishana's Tidebinder
+3 Duress
+2 Ghost Vacuum
+1 Gix's Command
+2 Withering Torment
+1 Malicious Eclipse
+2 Negate
+1 Sheoldred, the Apocalypse
+1 Anoint with Affliction

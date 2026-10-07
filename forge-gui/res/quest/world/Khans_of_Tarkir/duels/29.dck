@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_South_Saint_Paul/Jon_Mathison_-_Abzan_Midrange_(Standard,_#173209).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+3 Hornet Queen
+1 Reclamation Sage
+4 Satyr Wayfinder
+4 Siege Rhino
+2 Soul of Theros
+4 Sylvan Caryatid
+3 Whip of Erebos
+3 Hero's Downfall
+3 Murderous Cut
+2 Commune with the Gods
+1 Elspeth, Sun's Champion
+1 Caves of Koilos
+4 Forest
+4 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+1 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Abzan Charm
+2 Anafenza, the Foremost
+3 Drown in Sorrow
+1 End Hostilities
+1 Glare of Heresy
+1 Pharika, God of Affliction
+3 Thoughtseize
+1 Utter End

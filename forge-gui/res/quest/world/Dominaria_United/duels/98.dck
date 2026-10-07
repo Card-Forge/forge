@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/BasementBoy_-_Goblins_(Modern,_#1450592).dck
+Deck Type=constructed
+
+[Main]
+1 Goblin Ringleader
+1 Pashalik Mons
+1 Skirk Prospector
+2 Kiki-Jiki, Mirror Breaker
+2 Sling-Gang Lieutenant
+3 Boggart Harbinger
+3 Mogg Fanatic
+4 Rundvelt Hordemaster
+4 Conspicuous Snoop
+4 Goblin Matron
+4 Mogg War Marshal
+4 Munitions Expert
+4 Aether Vial
+1 Swamp
+1 Sokenzan, Crucible of Defiance
+2 Blood Crypt
+3 Mountain
+4 Secluded Courtyard
+4 Cavern of Souls
+4 Bloodstained Mire
+4 Auntie's Hovel
+[Sideboard]
+1 Shattering Spree
+1 Goblin Trashmaster
+2 Void Mirror
+2 Thoughtseize
+2 Dragon's Claw
+3 Alpine Moon
+4 Leyline of the Void

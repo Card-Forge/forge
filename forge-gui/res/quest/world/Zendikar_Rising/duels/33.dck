@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Abraham_Remillard_-_Azorius_Control_(Standard,_#1048863).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+4 Skyclave Apparition
+4 Baneslayer Angel
+2 Negate
+3 Essence Scatter
+4 Neutralize
+1 Sea Gate Restoration
+1 Ondu Inversion
+1 Emeria's Call
+4 Shatter the Sky
+2 Banishing Light
+4 Elspeth Conquers Death
+4 Omen of the Sea
+1 Raugrin Triome
+1 Temple of Enlightenment
+2 Castle Ardenvale
+4 Fabled Passage
+8 Plains
+8 Island
+[Sideboard]
+1 Essence Scatter
+2 Banishing Light
+2 Archon of Sun's Grace
+2 Shark Typhoon
+2 Negate
+2 Yorion, Sky Nomad
+4 Omen of the Sun

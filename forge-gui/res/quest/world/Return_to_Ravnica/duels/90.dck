@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/Totem_Vic_Modern/Arnau_Sabates_-_GW_Aggro_(Modern,_#51784).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Angel of Jubilation
+3 Avacyn's Pilgrim
+3 Aven Mindcensor
+3 Baneslayer Angel
+4 Birds of Paradise
+2 Loxodon Smiter
+2 Mirran Crusader
+1 Sigarda, Host of Herons
+1 Spellskite
+4 Thalia, Guardian of Thraben
+1 Thrun, the Last Troll
+2 Sword of Fire and Ice
+4 Path to Exile
+1 Eiganjo Castle
+3 Forest
+4 Ghost Quarter
+3 Plains
+1 Stirring Wildwood
+4 Sunpetal Grove
+4 Tectonic Edge
+4 Temple Garden
+[Sideboard]
+1 Gaddock Teeg
+2 Guardian Seraph
+1 Pithing Needle
+2 Qasali Pridemage
+3 Rest in Peace
+3 Stony Silence
+3 Torpor Orb

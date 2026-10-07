@@ -8,9 +8,11 @@ ScryfallCode=PEWK
 [cards]
 2022a R Gush @Sam White
 2022b R Ponder @Julie Dillon
-2023a M Mental Misstep @Kai Carpenter
+2023a R Mental Misstep @Kai Carpenter
 2023b R Dragon's Rage Channeler @Patrik Hell
 2024a M Tinker @Jason Rainville
 2024b R Crop Rotation @Samuele Bandini
 2025a R Tendrils of Agony @Chuck Lukacs
 2025b M Trinisphere @Steven Belledin
+2026a R Treasure Cruise @Ralph Horsley
+2026b R Life from the Loam @Hristo D. Chukov

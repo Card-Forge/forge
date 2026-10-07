@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -13,25 +14,26 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
-import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
-import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
-import forge.player.PlayerZoneUpdates;
+import forge.player.AutoYieldStore.TriggerDecision;
+import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.TargetingOverlay;
@@ -55,7 +57,6 @@ public class VStack extends FDropDown {
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
     private Map<PlayerView, Object> playersWithValidTargets;
-    private PlayerZoneUpdates restorablePlayerZones = null;
 
     private int stackSize;
 
@@ -85,25 +86,14 @@ public class VStack extends FDropDown {
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }
-        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets, true);
+        MatchController.instance.openZones(player, zones, playersWithValidTargets);
     }
 
     //restore old zones when active stack instance changes
     private void restoreOldZones() {
-        if (restorablePlayerZones == null) { return; }
-        PlayerView player = MatchController.instance.getCurrentPlayer();
-        MatchController.instance.restoreOldZones(player, restorablePlayerZones);
-        restorablePlayerZones = null;
-    }
-
-    public void checkEmptyStack() { //sort the bug in client when desynch happens
-        final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
-        if(stack!=null) {
-            if (isVisible() && stack.isEmpty()) { //visible stack but empty already
-                getMenuTab().setText(Forge.getLocalizer().getMessage("lblStack") + " (" + 0 + ")");
-                MatchController.getView().getStack().hide();
-            }
-        }
+        if (playersWithValidTargets == null) { return; }
+        MatchController.instance.restoreOldZones(playersWithValidTargets);
+        playersWithValidTargets = null;
     }
 
     @Override
@@ -247,6 +237,8 @@ public class VStack extends FDropDown {
         private final Color foreColor, backColor;
         private String text;
         private float preferredHeight;
+        private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
+        private boolean launched; // set once this item's card has flown off; stays hidden until the stack is rebuilt
 
         private StackInstanceDisplay(StackItemView stackInstance0, float width) {
             stackInstance = stackInstance0;
@@ -273,6 +265,13 @@ public class VStack extends FDropDown {
             preferredHeight = Math.round(height);
         }
 
+        private void showCardOrMenu(CardView sourceCard, FPopupMenu menu, float x, float y) {
+            if (sourceCard != null && cardBounds.contains(x, y))
+                CardZoom.show(sourceCard);
+            else
+                menu.show(this, x, y);
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             if (activeStackInstance != stackInstance) { //set as active stack instance if not already such
@@ -281,63 +280,48 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            final GameView gameView = MatchController.instance.getGameView();
-            final IGuiGame gui = MatchController.instance;
             final IGameController controller = MatchController.instance.getGameController();
             final PlayerView player = MatchController.instance.getCurrentPlayer();
             if (player != null) { //don't show menu if tapping on art
-                if (stackInstance.isAbility()) {
-                    FPopupMenu menu = new FPopupMenu() {
-                        @Override
-                        protected void buildMenu() {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        if (stackInstance.isAbility()) {
                             final String key = stackInstance.getKey();
-                            final boolean autoYield = gui.shouldAutoYield(key);
+                            final boolean autoYield = controller.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
                                     e -> {
-                                        gui.setShouldAutoYield(key, !autoYield);
-                                        if (!autoYield && stackInstance.equals(gameView.peekStack())) {
-                                            //auto-pass priority if ability is on top of stack
-                                            controller.passPriority();
-                                        }
+                                        boolean abilityScope = controller.getYieldController().isAbilityScope();
+                                        controller.setShouldAutoYield(key, !autoYield, abilityScope);
                                     }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
-                                final int triggerID = stackInstance.getSourceTrigger();
-                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                        gui.shouldAlwaysAcceptTrigger(triggerID),
-                                        e -> {
-                                            if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
-                                                gui.setShouldAlwaysAskTrigger(triggerID);
-                                            }
-                                            else {
-                                                gui.setShouldAlwaysAcceptTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-yes if ability is on top of stack
-                                                    controller.selectButtonOk();
-                                                }
-                                            }
-                                        }));
-                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                        gui.shouldAlwaysDeclineTrigger(triggerID),
-                                        e -> {
-                                            if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
-                                                gui.setShouldAlwaysAskTrigger(triggerID);
-                                            }
-                                            else {
-                                                gui.setShouldAlwaysDeclineTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-no if ability is on top of stack
-                                                    controller.selectButtonCancel();
-                                                }
-                                            }
-                                        }));
+                                if (!key.isEmpty()) {
+                                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                                    addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
+                                            controller.getTriggerDecision(key) == TriggerDecision.ACCEPT,
+                                            e -> controller.setTriggerDecision(key,
+                                                    controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT,
+                                                    abilityScope)));
+                                    addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
+                                            controller.getTriggerDecision(key) == TriggerDecision.DECLINE,
+                                            e -> controller.setTriggerDecision(key,
+                                                    controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE,
+                                                    abilityScope)));
+                                }
                             }
-                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
                         }
-                    };
-
-                    menu.show(this, x, y);
-                    return true;
-                }
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToStack"),
+                                Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
+                                e -> controller.sendYieldUpdate(new YieldUpdate.StackYield(player, true, true))));
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToEntireStack"),
+                                Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
+                                e -> controller.sendYieldUpdate(new YieldUpdate.StackYield(player, true, false))));
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
+                    }
+                };
+                // tapping on small cardView should zoom the card otherwise show menu
+                showCardOrMenu(stackInstance.getSourceCard(), menu, x, y);
+                return true;
             }
             CardZoom.show(stackInstance.getSourceCard());
             return true;
@@ -355,10 +339,17 @@ public class VStack extends FDropDown {
             float y = 0;
             float w = getWidth();
             float h = preferredHeight;
+            float xx = 0;
+            float yy = 0;
             CardView sourceCard = stackInstance.getSourceCard();
 
+            // sticky: once this item's card has flown off, keep the art hidden
+            if (!launched && !stackInstance.isAbility() && CardFlightOverlay.isLeavingStack(sourceCard.getId())) {
+                launched = true;
+            }
+
             boolean needAlpha = (activeStackInstance != stackInstance);
-            if (needAlpha) { //use alpha for non-active items on stack
+            if (needAlpha) {
                 g.setAlphaComposite(ALPHA_COMPOSITE);
             }
 
@@ -374,8 +365,15 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, sourceCard, x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
-
+            cardBounds.set(x, y, CARD_WIDTH, CARD_HEIGHT);
+            xx = x;
+            yy = y;
+            if (!launched && !stackInstance.isAbility()) { // record the rect only while the card is really here
+                CardFlightOverlay.noteStackRect(sourceCard.getId(),
+                    VStack.this.screenPos.x + getLeft() + cardBounds.x,
+                    VStack.this.screenPos.y + getTop() + cardBounds.y,
+                    cardBounds.width, cardBounds.height);
+            }
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
@@ -393,7 +391,7 @@ public class VStack extends FDropDown {
                 newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
                 newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
                 textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""),
-                        FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                    FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
             } else {
                 String modifier = (text.substring(0, index).length() > 0) ? "CARDNAME" : "";
@@ -414,7 +412,9 @@ public class VStack extends FDropDown {
                     textRenderer.drawText(g, name+" "+cId + optionalCostString +newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 }
             }
-
+            if (!launched) { // replaces the early return
+                CardRenderer.drawCardWithOverlays(g, sourceCard, xx, yy, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
+            }
             g.endClip();
 
             if (needAlpha) {

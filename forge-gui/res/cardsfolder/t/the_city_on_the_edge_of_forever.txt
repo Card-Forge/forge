@@ -1,0 +1,12 @@
+Name:The City on the Edge of Forever
+ManaCost:3 W B
+Types:Enchantment Saga
+K:Chapter:3:DBPhaseOut,DBDraw,DBSac
+SVar:DBPhaseOut:DB$ Phases | AllValid$ Artifact,Creature | SubAbility$ DBToken | SpellDescription$ All artifacts and creatures phase out. Create a 0/1 white Human creature token with "Permanents can't phase in." (Treat phased-out permanents and anything attached to them as though they don't exist.)
+SVar:DBToken:DB$ Token | TokenScript$ w_0_1_human_nophasingin | TokenOwner$ You
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and each player loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature.token | RememberSacrificed$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice a creature token. If you do, you gain 5 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — All artifacts and creatures phase out. Create a 0/1 white Human creature token with "Permanents can't phase in." (Treat phased-out permanents and anything attached to them as though they don't exist.)\nII — You draw two cards and each player loses 2 life.\nIII — Sacrifice a creature token. If you do, you gain 5 life.

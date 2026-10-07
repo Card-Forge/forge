@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/2010_MTG_Worlds__Top_Standard_Decks/Matt_Sperling_-_Valakut_Ramp_-_15_points_(Standard,_#8323).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Inferno Titan
+4 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+3 Summoning Trap
+3 Cultivate
+4 Explore
+2 Pyroclasm
+4 Khalni Heart Expedition
+3 Evolving Wilds
+5 Forest
+1 Khalni Garden
+11 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+3 Acidic Slime
+2 Gaea's Revenge
+2 Obstinate Baloth
+2 Traitorous Instinct
+3 Tumble Magnet

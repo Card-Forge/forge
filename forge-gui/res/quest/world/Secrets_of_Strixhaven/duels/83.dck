@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Banano94_-_Esper_Frog_(Modern,_#2914032).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Psychic Frog
+2 Murktide Regent
+2 Subtlety
+1 Sheoldred's Edict
+2 Sink into Stupor
+2 Spell Snare
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+1 Cling to Dust
+1 Spell Pierce
+1 Pest Control
+4 Preordain
+2 Flow State
+4 Thoughtseize
+2 Island
+2 Darkslick Shores
+2 Undercity Sewers
+4 Polluted Delta
+3 Flooded Strand
+2 Marsh Flats
+2 Watery Grave
+1 Hallowed Fountain
+1 Swamp
+[Sideboard]
+1 Stern Scolding
+2 Pest Control
+1 Toxic Deluge
+4 Consign to Memory
+3 Harbinger of the Seas
+1 Kaito, Bane of Nightmares
+2 Mystical Dispute
+1 Extirpate

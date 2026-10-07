@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Medium
+Description=Worldwake/PTQ_Amsterdam_2010_-_N├╝rnberg_-_Germany/Carlo_Mazzurco_-_Vampires_(Standard,_#1700).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+1 Kalastria Highborn
+3 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+2 Doom Blade
+3 Tendrils of Corruption
+3 Duress
+2 Grim Discovery
+2 Mind Sludge
+3 Sign in Blood
+4 Marsh Flats
+14 Swamp
+1 Tectonic Edge
+3 Verdant Catacombs
+[Sideboard]
+2 Black Knight
+4 Deathmark
+1 Liliana Vess
+3 Marsh Casualties

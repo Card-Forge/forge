@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Medium
+Description=Zendikar/StarCityGames.com_$5,000_Standard_Open_-_Nashville/Shane_Giachetti_-_Emeria_Aggro_(Standard,_#3496).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+2 Devout Lightcaster
+4 Kazandu Blademaster
+4 Knight of the White Orchid
+4 Kor Cartographer
+4 Sigiled Paladin
+4 White Knight
+2 Celestial Purge
+4 Path to Exile
+4 Honor of the Pure
+2 Ajani Goldmane
+4 Emeria, the Sky Ruin
+18 Plains
+[Sideboard]
+3 Brave the Elements
+2 Day of Judgment
+1 Iona, Shield of Emeria
+2 Kor Sanctifiers
+2 Martial Coup
+1 World Queller

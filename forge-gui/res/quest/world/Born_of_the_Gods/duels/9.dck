@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Standard_Open_Nashville/Adrian_Sullivan_-_U-W_Control_(Standard,_#65294).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Elixir of Immortality
+3 Azorius Charm
+1 Disperse
+3 Dissolve
+1 Essence Scatter
+2 Last Breath
+4 Sphinx's Revelation
+1 Syncopate
+3 Divination
+4 Supreme Verdict
+4 Detention Sphere
+1 Domestication
+1 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Hallowed Fountain
+5 Island
+3 Mutavault
+7 Plains
+2 Temple of Deceit
+4 Temple of Enlightenment
+1 Temple of Silence
+[Sideboard]
+1 Blind Obedience
+2 Celestial Flare
+1 Debtor's Pulpit
+4 Gainsay
+1 Glare of Heresy
+1 Jace, Memory Adept
+1 Keening Apparition
+1 Negate
+1 Ratchet Bomb

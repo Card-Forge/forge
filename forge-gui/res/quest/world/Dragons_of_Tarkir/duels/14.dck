@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Daily_#8245656/HighwayCorsair_-_GW_Aggro_(Standard,_#234694).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boon Satyr
+4 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+3 Elvish Mystic
+4 Fleecemane Lion
+2 Hidden Dragonslayer
+3 Warden of the First Tree
+4 Collected Company
+2 Dromoka's Command
+2 Valorous Stance
+9 Forest
+1 Mana Confluence
+6 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+1 Ainok Survivalist
+3 Arashin Cleric
+2 Glare of Heresy
+2 Mastery of the Unseen
+2 Plummet
+1 Reclamation Sage

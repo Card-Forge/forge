@@ -21,6 +21,7 @@ import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.Sticker;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -81,8 +82,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
         //TODO: eventually (when the real code is refactored) this should be handled normally...
+        //NOTE: the controller argument used to be ignored on this path, so the harness passed null.
+        //      Since PlaySpellAbility was unified into the game module (#10051) it is dereferenced
+        //      to build the cost decision maker, so we hand it this controller instead.
         if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
-            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(this, player, effectSA, !mayChoseNewTargets);
             return;
         }
         SpellAbilityAi sai = SpellApiToAi.Converter.get(effectSA.getApi());
@@ -93,7 +97,7 @@ public class PlayerControllerForTests extends PlayerController {
                 (effectSA.getHostCard().getName().equals("Near-Death Experience") && sai instanceof  GameWinAi) ||
                 (effectSA.getHostCard().getName().equals("Final Fortune") && sai instanceof GameLossAi)
         ) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
-            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(this, player, effectSA, !mayChoseNewTargets);
             return;
         }
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
@@ -282,7 +286,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max) {
+    public CardCollection chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
         return chooseItems(validCards, min);
     }
 
@@ -433,7 +437,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return chooseItems(player.getZone(ZoneType.Hand).getCards(), numDiscard);
     }
 
@@ -495,6 +499,21 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional) {
         return chooseItem(validTypes);
+    }
+
+    @Override
+    public Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa, boolean isOptional) {
+        return options.isEmpty() ? null : options.get(0);
+    }
+
+    @Override
+    public int chooseStickerNamePosition(Sticker sticker, Card target) {
+        return 0;
+    }
+
+    @Override
+    public Card chooseCardToKeepStickers(CardCollectionView options) {
+        return Iterables.getFirst(options, null);
     }
 
     @Override
@@ -733,11 +752,6 @@ public class PlayerControllerForTests extends PlayerController {
     public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
         // this isn't used
         return null;
-    }
-
-    @Override
-    public void resetAtEndOfTurn() {
-        // Not used by the controller for tests
     }
 
     @Override

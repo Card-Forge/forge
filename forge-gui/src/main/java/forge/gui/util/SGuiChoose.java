@@ -34,7 +34,7 @@ public class SGuiChoose {
         if ((choices == null) || (choices.length == 0)) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected, display);
+        final List<T> choice = getChoices(message, 0, 1, choices, selected, display);
         return choice.isEmpty() ? null : choice.get(0);
     }
     public static <T> T oneOrNone(final String message, final Collection<T> choices) {
@@ -44,7 +44,7 @@ public class SGuiChoose {
         if ((choices == null) || choices.isEmpty()) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected == null ? null : List.of(selected), display);
+        final List<T> choice = getChoices(message, 0, 1, choices, selected == null ? null : List.of(selected), display);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
@@ -60,14 +60,14 @@ public class SGuiChoose {
             return Iterables.getFirst(choices, null);
         }
 
-        final List<T> choice = SGuiChoose.getChoices(message, 1, 1, choices, selected == null ? null : List.of(selected), display);
+        final List<T> choice = getChoices(message, 1, 1, choices, selected == null ? null : List.of(selected), display);
         assert choice.size() == 1;
         return choice.get(0);
     }
 
     // Nothing to choose here. Code uses this to just reveal one or more items
     public static <T> void reveal(final String message, final Collection<T> items) {
-        SGuiChoose.getChoices(message, -1, -1, items);
+        getChoices(message, -1, -1, items);
     }
 
     // Get Integer in range
@@ -98,7 +98,7 @@ public class SGuiChoose {
                 choices[i] = i + min;
             }
         }
-        return SGuiChoose.oneOrNone(message, choices);
+        return oneOrNone(message, choices);
     }
 
     public static Integer getInteger(final String message, final int min, final int max, final int cutoff) {
@@ -114,7 +114,7 @@ public class SGuiChoose {
         }
         choices.add("...");
 
-        final Object choice = SGuiChoose.oneOrNone(message, choices);
+        final Object choice = oneOrNone(message, choices);
         if (choice instanceof Integer || choice == null) {
             return (Integer)choice;
         }

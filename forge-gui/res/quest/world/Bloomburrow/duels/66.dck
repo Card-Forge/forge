@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/AndreaMengucci_-_Jeskai_Energy_Modern_(Modern,_#2150904).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani, Nacatl Pariah
+4 Amped Raptor
+4 Guide of Souls
+4 Ocelot Pride
+4 Mockingbird
+3 Phlage, Titan of Fire's Fury
+3 Ranger-Captain of Eos
+3 Fable of the Mirror-Breaker
+4 Galvanic Discharge
+2 Lightning Bolt
+3 Static Prison
+3 Aether Hub
+1 Arena of Glory
+2 Scalding Tarn
+1 Elegant Parlor
+2 Sacred Foundry
+1 Plains
+1 Meticulous Archive
+1 Mountain
+1 Hallowed Fountain
+4 Flooded Strand
+4 Arid Mesa
+1 Steam Vents
+[Sideboard]
+4 Consign to Memory
+2 Drannith Magistrate
+2 Celestial Purge
+3 Suncleanser
+2 Wear // Tear
+2 Agatha's Soul Cauldron

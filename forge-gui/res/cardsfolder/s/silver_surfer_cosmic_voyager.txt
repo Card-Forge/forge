@@ -1,0 +1,16 @@
+Name:Silver Surfer, Cosmic Voyager
+ManaCost:4 U U
+Types:Legendary Creature Alien Hero
+PT:5/5
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile any number of other target permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step. If a land enters this way, it enters tapped.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | ValidTgtsDesc$ another permanent you control | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigEffect | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | TriggerDescription$ Return the exiled permanents to the battlefield.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | ReplacementEffects$ ETBLand | ForgetOnMoved$ Exile | SubAbility$ DBReturn
+SVar:ETBLand:Event$ Moved | ValidCard$ Land.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBTapped | ReplacementResult$ Updated | Description$ If a land enters this way, it enters tapped.
+SVar:DBTapped:DB$ Tap | Defined$ ReplacedCard | ETB$ True
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Permanent.Other+YouCtrl
+Oracle:Flash\nFlying\nWhen Silver Surfer enters, exile any number of other target permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step. If a land enters this way, it enters tapped.

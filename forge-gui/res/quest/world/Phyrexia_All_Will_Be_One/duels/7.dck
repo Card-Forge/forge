@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Carlos_Fernandez_-_Mono-White_Midrange_(Standard,_#1615648).dck
+Deck Type=constructed
+
+[Main]
+2 Steel Seraph
+2 The Restoration of Eiganjo
+2 Spirited Companion
+1 Sanctuary Warden
+2 Loran of the Third Path
+2 Ambitious Farmhand
+2 Serra Paragon
+3 Reckoner Bankbuster
+4 Lay Down Arms
+1 Farewell
+1 Depopulate
+4 Ossification
+4 Wedding Announcement
+4 The Wandering Emperor
+2 The Eternal Wanderer
+2 Field of Ruin
+4 Roadside Reliquary
+15 Plains
+2 Mirrex
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+2 The Stone Brain
+1 Loran of the Third Path
+1 Farewell
+1 Depopulate
+1 Vanquish the Horde
+2 Destroy Evil
+2 Sunset Revelry
+2 Fateful Absence
+3 Skrelv's Hive

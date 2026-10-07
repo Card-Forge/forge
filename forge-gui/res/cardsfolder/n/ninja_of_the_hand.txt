@@ -1,0 +1,8 @@
+Name:Ninja of the Hand
+ManaCost:2 B
+Types:Creature Human Ninja Villain
+PT:2/2
+K:Deathtouch
+A:AB$ Discard | Cost$ 4 B | Defined$ Opponent | Mode$ TgtChoose | PowerUp$ True | SubAbility$ DBPutCounter | SpellDescription$ Each opponent discards a card. Put a +1/+1 counter on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Deathtouch\nPower-up — {4}{B}: Each opponent discards a card. Put a +1/+1 counter on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)

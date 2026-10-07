@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Easy
+Description=Aether_Revolt/maddogpc_-_BR_Artifacts_(Standard,_#662570).dck
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+4 Chief of the Foundry
+4 Inventor's Apprentice
+4 Ornithopter
+4 Ravenous Intruder
+4 Scrapheap Scrounger
+3 Sweatworks Brawler
+4 Weldfast Engineer
+1 Key to the City
+2 Servo Schematic
+3 Invigorated Rampage
+4 Unlicensed Disintegration
+4 Foreboding Ruins
+7 Mountain
+4 Spire of Industry
+4 Swamp
+[Sideboard]
+2 Collective Brutality
+1 Forerunner of Slaughter
+1 Ghirapur Orrery
+2 Incendiary Flow
+1 Key to the City
+2 Lightning Axe
+2 Reckless Fireweaver
+2 Renegade Freighter
+2 Transgress the Mind

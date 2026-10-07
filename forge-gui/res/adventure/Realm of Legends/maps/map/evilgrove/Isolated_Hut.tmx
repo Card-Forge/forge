@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="102">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Homicidal Seclusion&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <tileset firstgid="20865" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="24961" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyr42RgqBvFo3gUj+JRPIpH8YjAAOMFDQI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlVsOgjAQRYsmvH4N6DpcAG7KD/cCAq7KaNiKj16hYWgYOiA3aSTazqEzc0ellimJlTqqdu308zma3v8I233/CnEM9x6696dx/45jSrrvy2i4uDgSpv2ujf78+PohGMaTcCmbCvE2wTCmfQb8q/69Htkn4UKUC2bRxbsxXCqwTyP52kbtgjzmDub9oapjvjS/FHAl4vJi78lCGXNOb3N5WSLT22t4iwq+wOL6HbXZdzWa4wkXc8pjPw9NnJ2bA3NHMA/WWeMvrGKi/sabJleuOUfnpn1PL+j9hV7PHHmdO1NTpp7ox7dv+ctx57VqDjb1V+7wpETcTOGEmiDneSDz+jPs+60heagEM4Uy0QO1kEn7xv4/M7NMwr5E7fkvt+FC7w==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyNVUtOwzAQ9QGaJSvEKegihdsAEntkNkVR4iSX4Qi0pyitBCwpn3PgUfzIy2RS5UlWJ/Z4Zvzm0ypz/yii3MZVxRXiqpPcGHvYD0mW/VJ9N8lek3xUWe8HqOi8pH2N5sSZRiBd2Kyz8Tn2zhfObdS6WHTnb2T32vB1UN94O+uDr2X6/vHO/frOL+PWd34r462t4tBCkY05LA0uxC9iuInr+azza91h7EheGueoEQF++c5L4lZw5zt5qzjAOywE9b6W5Nrgx6qZ7+j3ahVzs7LtCE7VIQO1URk1xnFIXgXr6PMp+X1VNuZA5x58Pz6MdeFzjh0BYtdcAAfSK7Nh3+INute+fF8He9fPEfjQ+UFc6BsdC2xxfhDXvR/bO/qhXZ1XiftDvZNnB2oc99HbYYKjT8X5qV7lWPYTOvIe3QvMu8bRD/UEc+YG9yhyh/pkXxyz2FvnsZ7z7vvd9f4sX8hpYeSiVHesfGFPuN9En9t8nAfk59KIneWQTc8Jnmuoa/yXgXvEhfNAHGsZb+PZIFxwbe+cPb8YmiOty7I1P7k3RfcPsHmDtQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="193.616" y="270.961" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="98.5129" y="55.8932"/>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="118.937" y="81.2363">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Murderer's Axe|SOI&quot;, &quot;Lake of the Dead|ALL&quot;, &quot;Season of the Witch|DRK&quot;]}"/>
+    <property name="enemy" value="Istvan"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="0.333333" y="-17.3333" width="481" height="16"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="-0.166667" y="272.333" width="481" height="16"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="-16" y="-15.4007" width="16" height="305.468"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="480" y="-10.4007" width="16" height="305.468"/>
+  <object id="92" template="../../../../common/maps/obj/gold.tx" x="142" y="56.5"/>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="178" y="223.25" width="63.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A lonely hut is visible through the swampy haze ahead. An ominous sense of dread falls over you, made worse by the faint scent of blood over the general decay of the swamp and the sight of bones sticking up from the muck.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="96.5" y="103.25" width="59.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;LEAVE YER UNCLE ISTVAN ALONE!!! I'LL KILL YA FOR BOTHERIN' ME!!!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/scroll.tx" x="28.5" y="110.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Lake of the Dead&quot;, &quot;editions&quot;: [ &quot;ALL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="101" template="../../obj/treasure.tx" x="119.667" y="56.6667">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Witch Hunter&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Preacher&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Dance of Many&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Ashes to Ashes&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Season of the Witch&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Uncle Istvan&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Ball Lightning&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Elves of Deep Shadow&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sorrow's Path&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;City of Shadows&quot;,
+  &quot;editions&quot;: [ &quot;DRK&quot; ]
+}
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/PPTQ_L┬┤Antro_della_Sibilla_-_Battipaglia,_Italy/Francesco_Accarino_-_Mono_Green_(Standard,_#608711).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Hedron Crawler
+1 Leaf Gilder
+4 Rattleclaw Mystic
+2 Ulamog, the Ceaseless Hunger
+4 World Breaker
+3 Hedron Archive
+3 Kozilek's Return
+4 Explosive Vegetation
+4 Nissa's Pilgrimage
+4 Oath of Nissa
+3 Chandra, Flamecaller
+3 Ugin, the Spirit Dragon
+1 Cinder Glade
+10 Forest
+2 Mountain
+4 Sanctum of Ugin
+1 Sea Gate Wreckage
+4 Shrine of the Forsaken Gods
+3 Wooded Foothills
+[Sideboard]
+4 Jaddi Offshoot
+1 Kozilek, the Great Distortion
+2 Oblivion Sower
+3 Roast
+2 Winds of Qal Sisma

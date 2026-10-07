@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Jesse James
+Title=Jesse James
+Icon=Jesse James.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/SCG_Invitational_Qualifier_Lexington/Joseph_Riggs_-_Abzan_(Modern,_#659631).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Anafenza, the Foremost
+2 Birds of Paradise
+3 Grim Flayer
+1 Kitchen Finks
+2 Noble Hierarch
+2 Scavenging Ooze
+2 Siege Rhino
+4 Tarmogoyf
+3 Tidehollow Sculler
+3 Abrupt Decay
+4 Path to Exile
+1 Collective Brutality
+4 Lingering Souls
+1 Maelstrom Pulse
+3 Thoughtseize
+3 Blooming Marsh
+2 Forest
+2 Gavony Township
+1 Godless Shrine
+2 Horizon Canopy
+1 Overgrown Tomb
+1 Plains
+1 Shambling Vent
+1 Swamp
+1 Temple Garden
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+1 Abzan Charm
+1 Blessed Alliance
+1 Grafdigger's Cage
+2 Kitchen Finks
+1 Lost Legacy
+1 Melira, Sylvok Outcast
+1 Sigarda, Host of Herons
+2 Stony Silence
+1 Thrun, the Last Troll
+1 Tidehollow Sculler
+1 Worship
+2 Zealous Persecution

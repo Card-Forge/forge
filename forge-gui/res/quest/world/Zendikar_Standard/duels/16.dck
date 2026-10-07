@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Easy
+Description=Zendikar/Zendikar_Game_Day_-_Comic_Chest_-_USA/Brian_Bachman_-_Emeria_Control_(Standard,_#3514).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+2 Iona, Shield of Emeria
+4 Kazandu Blademaster
+4 Knight of the White Orchid
+3 Kor Hookmaster
+4 Wall of Reverence
+4 Celestial Purge
+4 Path to Exile
+3 Day of Judgment
+3 Martial Coup
+2 Ajani Goldmane
+3 Emeria, the Sky Ruin
+20 Plains
+[Sideboard]
+3 Brave the Elements
+3 Devout Lightcaster
+4 Kor Sanctifiers
+4 Oblivion Ring

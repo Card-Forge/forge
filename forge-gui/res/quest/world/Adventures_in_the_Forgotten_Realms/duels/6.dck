@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Eomer
+Title=Eomer
+Icon=Eomer.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Platinum-Mythic_Rank_Player_-_Abzan_Counters_(Standard,_#1179710).dck
+Deck Type=constructed
+
+[Main]
+1 Sylvan Shepherd
+1 Veteran Dungeoneer
+1 Gelatinous Cube
+2 Valentin, Dean of the Vein
+2 Vorinclex, Monstrous Raider
+3 Toski, Bearer of Secrets
+3 Indulging Patrician
+3 Conclave Mentor
+3 Ilysian Caryatid
+4 Eyetwitch
+2 Shadowspear
+2 Invigorating Surge
+1 Cleric Class
+2 Light of Promise
+2 Druid Class
+2 Sparring Regimen
+1 Ellywick Tumblestrum
+2 Temple of Plenty
+3 Temple of Malady
+5 Forest
+7 Plains
+8 Swamp
+[Sideboard]
+1 Introduction to Annihilation
+1 Pest Summoning
+1 Environmental Sciences
+2 Necrotic Fumes
+2 Basic Conjuration

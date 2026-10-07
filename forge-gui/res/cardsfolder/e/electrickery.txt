@@ -3,4 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature you don't control.
 K:Overload:1 R
-Oracle:Electrickery deals 1 damage to target creature you don't control.\nOverload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:Electrickery deals 1 damage to target creature you don't control.\nOverload {1}{R} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

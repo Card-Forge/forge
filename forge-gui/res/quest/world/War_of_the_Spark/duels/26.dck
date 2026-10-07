@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Alex_Bianchi_-_Esper_Midrange_(Standard,_#797516).dck
+Deck Type=constructed
+
+[Main]
+3 Basilica Bell-Haunt
+4 Deputy of Detention
+4 Hero of Precinct One
+1 Hostage Taker
+4 Thief of Sanity
+1 Despark
+2 Mortify
+3 Tyrant's Scorn
+4 Thought Erasure
+1 Oath of Kaya
+2 Sorin, Vengeful Bloodlord
+3 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 Swamp
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+4 Watery Grave
+[Sideboard]
+1 Basilica Bell-Haunt
+1 Despark
+2 Dovin's Veto
+2 Search for Azcanta
+1 Kaya, Orzhov Usurper
+1 Liliana, Dreadhorde General
+3 Narset, Parter of Veils
+1 Ugin, the Ineffable
+1 Cry of the Carnarium
+1 Duress
+1 The Elderspell

@@ -12,8 +12,9 @@ import java.util.List;
 
 public class SimulationController {
     private static boolean DEBUG = false;
-    private static int MAX_DEPTH = 3;
+    private static final int DEFAULT_MAX_DEPTH = 3;
 
+    private final int maxDepth;
     private List<Plan.Decision> currentStack;
     private List<Score> scoreStack;
     private List<GameSimulator> simulatorStack;
@@ -39,6 +40,11 @@ public class SimulationController {
     }
 
     public SimulationController(Score score) {
+        this(score, DEFAULT_MAX_DEPTH);
+    }
+
+    public SimulationController(Score score, int maxDepth) {
+        this.maxDepth = maxDepth;
         bestScore = score;
         scoreStack = new ArrayList<>();
         scoreStack.add(score);
@@ -51,7 +57,7 @@ public class SimulationController {
     }
 
     public boolean shouldRecurse() {
-        return bestScore.value != Integer.MAX_VALUE && getRecursionDepth() < MAX_DEPTH;
+        return !GameStateEvaluator.isWinning(bestScore.value) && getRecursionDepth() < maxDepth;
     }
 
     public Plan.Decision getLastDecision() {
@@ -228,8 +234,7 @@ public class SimulationController {
                     int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2]);
                     if (cardScore == effect.targetScore) {
                         Score currentScore = getCurrentScore();
-                        // TODO: summonSick score?
-                        return new Score(currentScore.value + effect.scoreDelta, currentScore.summonSickValue);
+                        return new Score(currentScore.value + effect.scoreDelta, currentScore.availableValue + effect.scoreDelta);
                     }
                 }
             }
@@ -244,10 +249,11 @@ public class SimulationController {
         if (!currentStack.isEmpty()) {
             Plan.Decision d = currentStack.get(currentStack.size() - 1);
             int scoreDelta = score.value - d.initialScore.value;
+            int availableScoreDelta = score.availableValue - d.initialScore.availableValue;
             // Needed to make sure below is only executed when target decisions are ended.
             // Also, only cache negative effects - so that in those cases we don't need to
             // recurse.
-            if (scoreDelta <= 0 && d.targets != null) {
+            if (scoreDelta <= 0 && scoreDelta == availableScoreDelta && d.targets != null) {
                 // FIXME: Support more than one target in this logic.
                 GameObject[] hostAndTarget = currentHostAndTarget;
                 if (currentHostAndTarget != null) {

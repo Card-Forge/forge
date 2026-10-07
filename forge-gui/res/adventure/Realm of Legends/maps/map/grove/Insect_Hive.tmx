@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="110">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="111">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -28,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALSwCqpoW3+YAcjxf9tMhCM7N/VaH5H59MLNAHdJS8LwU+kB8YNhMALaQgeBUMHDMe8Tamf6BUmQynsh5Jb6QWGa5gMB38NBz+MAtIAADg8EBo=
+   eJxjYBgFo2AUjALSwCqpoW3+YAcjxf9tMhCM7N/VaH5H59MLNAHdJS8LwU+kB8YNhMALaQgeBUMHDGTeFtdhYJDQob65lPoJpt8Y6DYTGrgP3Z6hAIaSW+kFhmuYDAd/DQc/jALSAADH5RFg
   </data>
  </layer>
  <objectgroup id="4" name="Objects" opacity="0.9">
@@ -149,6 +149,14 @@
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swarmyard&quot;, &quot;editions&quot;: [ &quot;TSR&quot; ], &quot;count&quot;: 1 } ]"/>
     <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/shop.tx" x="577" y="278">
+   <properties>
+    <property name="commonShopList" value="Insects"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

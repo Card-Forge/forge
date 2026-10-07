@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/Jesse_Newbold_-_Burn_(Modern,_#668201).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+3 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Bloodstained Mire
+1 Copperline Gorge
+2 Inspiring Vantage
+2 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+3 Kor Firewalker
+3 Path to Exile
+1 Searing Blaze
+2 Skullcrack

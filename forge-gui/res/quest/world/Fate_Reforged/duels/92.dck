@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/SCG_States_Cayce/Nicholas_Sotlar_-_Red_Deck_Wins_(Modern,_#229998).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of the Great Revel
+1 Grim Lavamancer
+4 Monastery Mentor
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Skullcrack
+3 Thunderous Wrath
+4 Lava Spike
+1 Reforge the Soul
+4 Rift Bolt
+4 Arid Mesa
+3 City of Brass
+2 Clifftop Retreat
+2 Mountain
+2 Plains
+4 Sacred Foundry
+1 Stomping Ground
+2 Temple of Triumph
+[Sideboard]
+3 Blood Moon
+2 Deflecting Palm
+2 Destructive Revelry
+4 Leyline of Sanctity
+2 Revoke Existence
+2 Spectral Procession

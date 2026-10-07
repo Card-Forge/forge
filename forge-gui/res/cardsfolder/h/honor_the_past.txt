@@ -1,0 +1,6 @@
+Name:Honor the Past
+ManaCost:2 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target creature card with mana value 6 or less in your graveyard | ValidTgts$ Creature.cmcLE6+YouCtrl | StaticEffect$ Animate | SpellDescription$ Return target creature card with mana value 6 or less from your graveyard to the battlefield. It's an artifact. (It's no longer a creature.)
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact | RemoveCardTypes$ True
+Oracle:Return target creature card with mana value 6 or less from your graveyard to the battlefield. It's an artifact. (It's no longer a creature.)

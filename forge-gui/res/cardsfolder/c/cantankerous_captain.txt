@@ -1,0 +1,10 @@
+Name:Cantankerous Captain
+ManaCost:2 R
+Types:Creature Tellarite Officer
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +1/+0 until end of turn. Then that creature gains menace until end of turn if creatures you control have total power 8 or greater. (It can't be blocked except by two or more creatures.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Menace | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, target creature you control gets +1/+0 until end of turn. Then that creature gains menace until end of turn if creatures you control have total power 8 or greater. (It can't be blocked except by two or more creatures.)

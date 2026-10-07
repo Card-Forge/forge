@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Les_Hordes_de_Maltus_from_Ottersthal/Yannick_HAMMER_-_RW_planeswalker_(Modern,_#23396).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+4 Shrine of Burning Rage
+3 Flame Javelin
+4 Lightning Bolt
+4 Lightning Helix
+3 Path to Exile
+3 Searing Blaze
+1 Devil's Play
+2 Wrath of God
+3 Ajani Vengeant
+3 Chandra, the Firebrand
+2 Koth of the Hammer
+4 Arid Mesa
+12 Mountain
+4 Plains
+4 Sacred Foundry
+1 Scalding Tarn
+[Sideboard]
+2 Ghostly Prison
+1 Gideon Jura
+1 Hellspark Elemental
+3 Kor Firewalker
+2 Mirran Crusader
+2 Pyroclasm
+4 Timely Reinforcements

@@ -1,0 +1,11 @@
+Name:Beckett Mariner, Impetuous Ensign
+ManaCost:1 R
+Types:Legendary Creature Human Officer
+PT:2/1
+K:First Strike
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Reckless Behavior — Whenever NICKNAME becomes tapped, put a promotion counter on her. Then if there are three or more promotion counters on her, remove those counters and she deals 2 damage to each opponent.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PROMOTION | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Count$CardCounters.PROMOTION | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ PROMOTION | CounterNum$ All | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2
+Oracle:First strike\nReckless Behavior — Whenever Beckett Mariner becomes tapped, put a promotion counter on her. Then if there are three or more promotion counters on her, remove those counters and she deals 2 damage to each opponent.

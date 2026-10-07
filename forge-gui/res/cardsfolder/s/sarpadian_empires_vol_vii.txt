@@ -1,6 +1,6 @@
 Name:Sarpadian Empires, Vol. VII
 ManaCost:3
-Types:Artifact
+Types:Artifact Book
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInGame | SpellDescription$ As CARDNAME enters, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
 # Went for MostProminentInGame logic to give the AI a possible out for situations where it might be locked down based on its colors

@@ -489,9 +489,7 @@ public final class SLayoutIO {
         SResizingUtil.resizeWindow();
     }
 
-    private static record LayoutInfo(RectangleOfDouble bounds, EDocID selectedId)
-    {
-    }
+    private record LayoutInfo(RectangleOfDouble bounds, EDocID selectedId) { }
 
     private static ListMultimap<LayoutInfo, EDocID> readLayout(final XMLEventReader reader) throws XMLStreamException
     {

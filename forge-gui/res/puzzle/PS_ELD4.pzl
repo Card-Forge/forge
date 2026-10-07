@@ -8,7 +8,6 @@ Description:Win this turn. You have not played a land yet this turn. You own an 
 [state]
 humanlife=20
 ailife=10
-humanlandsplayed=0
 turn=1
 activeplayer=human
 activephase=MAIN1

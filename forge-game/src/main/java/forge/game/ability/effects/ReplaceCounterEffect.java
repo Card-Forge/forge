@@ -1,13 +1,13 @@
 package forge.game.ability.effects;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -34,7 +34,7 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
         @SuppressWarnings("unchecked")
-        Map<Optional<Player>, Map<CounterType, Integer>> counterTable = (Map<Optional<Player>, Map<CounterType, Integer>>) sa.getReplacingObject(AbilityKey.CounterMap);
+        Map<Optional<Player>, Multiset<CounterType>> counterTable = (Map<Optional<Player>, Multiset<CounterType>>) sa.getReplacingObject(AbilityKey.CounterMap);
 
         if (counterTable.size() > 1 && sa.hasParam("ChooseCounter")) {
             // ChooseCounter is for ones that only adds one counter, when that is coming from multiple sources, the affected player needs to choose
@@ -44,8 +44,8 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
 
             // for some effects, the Player -> CounterType Table needs to be flip into a CounterType -> [Player] list for the player to select
             Multimap<CounterType, Player> playerMap = HashMultimap.create();
-            for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : counterTable.entrySet()) {
-                for (CounterType ct : e.getValue().keySet()) {
+            for (Map.Entry<Optional<Player>, Multiset<CounterType>> e : counterTable.entrySet()) {
+                for (CounterType ct : e.getValue().elementSet()) {
                     playerMap.put(ct, e.getKey().orElse(null));
                 }
             }
@@ -55,43 +55,26 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
             for (Map.Entry<CounterType, Collection<Player>> e : playerMap.asMap().entrySet()) {
                 Optional<Player> p = Optional.ofNullable(chooser.getController().chooseSingleEntityForEffect(new PlayerCollection(e.getValue()), sa, "Choose Player for " + e.getKey().getName(), null));
 
-                sa.setReplacingObject(AbilityKey.CounterNum, counterTable.get(p).get(e.getKey()));
-                int value = AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa);
-                if (value <= 0) {
-                    counterTable.get(p).remove(e.getKey());
-                } else {
-                    counterTable.get(p).put(e.getKey(), value);
-                }
+                sa.setReplacingObject(AbilityKey.CounterNum, counterTable.get(p).count(e.getKey()));
+                counterTable.get(p).setCount(e.getKey(), AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa));
             }
         } else {
-            for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : counterTable.entrySet()) {
+            for (Map.Entry<Optional<Player>, Multiset<CounterType>> e : counterTable.entrySet()) {
                 if (!sa.matchesValidParam("ValidSource", e.getKey().orElse(null))) {
                     continue;
                 }
 
                 if (sa.hasParam("ValidCounterType")) {
                     CounterType ct = CounterType.getType(sa.getParam("ValidCounterType"));
-                    if (e.getValue().containsKey(ct)) {
-                        sa.setReplacingObject(AbilityKey.CounterNum, e.getValue().get(ct));
-                        int value = AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa);
-                        if (value <= 0) {
-                            e.getValue().remove(ct);
-                        } else {
-                            e.getValue().put(ct, value);
-                        }
+                    if (e.getValue().contains(ct)) {
+                        sa.setReplacingObject(AbilityKey.CounterNum, e.getValue().count(ct));
+                        e.getValue().setCount(ct, AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa));
                     }
                 } else {
-                    List<CounterType> toRemove = Lists.newArrayList();
-                    for (Map.Entry<CounterType, Integer> ec : e.getValue().entrySet()) {
-                        sa.setReplacingObject(AbilityKey.CounterNum, ec.getValue());
-                        int value = AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa);
-                        if (value <= 0) {
-                            toRemove.add(ec.getKey());
-                        } else {
-                            ec.setValue(value);
-                        }
+                    for (Multiset.Entry<CounterType> ec : Lists.newArrayList(e.getValue().entrySet())) {
+                        sa.setReplacingObject(AbilityKey.CounterNum, ec.getCount());
+                        e.getValue().setCount(ec.getElement(), AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa));
                     }
-                    e.getValue().keySet().removeAll(toRemove);
                 }
             }
         }

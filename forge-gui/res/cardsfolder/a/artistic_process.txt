@@ -1,0 +1,8 @@
+Name:Artistic Process
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDamage,DBDamageAll,DBToken
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 6 | ValidTgts$ Creature | SpellDescription$ CARDNAME deals 6 damage to target creature.
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.YouDontCtrl | SpellDescription$ CARDNAME deals 2 damage to each creature you don't control.
+SVar:DBToken:DB$ Token | TokenScript$ ur_3_3_elemental_flying | TokenOwner$ You | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a 3/3 blue and red Elemental creature token with flying. It gains haste until end of turn.
+Oracle:Choose one —\n• Artistic Process deals 6 damage to target creature.\n• Artistic Process deals 2 damage to each creature you don't control.\n• Create a 3/3 blue and red Elemental creature token with flying. It gains haste until end of turn.

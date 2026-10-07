@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Cabezadebolo_-_Orzhov_Midrange_(Standard,_#2089696).dck
+Deck Type=constructed
+
+[Main]
+2 Aclazotz, Deepest Betrayal
+4 Graveyard Trespasser
+2 Sheoldred, the Apocalypse
+2 Tenacious Underdog
+4 Caustic Bronco
+4 Go for the Throat
+3 Cut Down
+2 Virtue of Loyalty
+3 Duress
+4 Wedding Announcement
+1 Liliana of the Veil
+4 The Wandering Emperor
+4 Caves of Koilos
+4 Concealed Courtyard
+1 Eiganjo, Seat of the Empire
+2 Mishra's Foundry
+1 Restless Fortress
+4 Shadowy Backstreet
+4 Shattered Sanctum
+3 Swamp
+1 Takenuma, Abandoned Mire
+1 Plains
+[Sideboard]
+2 Liliana of the Veil
+3 Unlicensed Hearse
+2 Path of Peril
+2 Pest Control
+4 Invasion of Gobakhan
+2 Get Lost

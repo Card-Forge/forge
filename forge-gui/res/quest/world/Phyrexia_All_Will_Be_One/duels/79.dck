@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/BigD_1992_-_Reanimator_(Modern,_#1580533).dck
+Deck Type=constructed
+
+[Main]
+2 Emrakul, the Aeons Torn
+2 Emrakul, the Aeons Torn
+3 Ovalchase Daredevil
+4 Asmoranomardicadaistinaculdacar
+4 Atraxa, Grand Unifier
+1 Brainstone
+4 The Underworld Cookbook
+2 Blood Fountain
+4 Goryo's Vengeance
+4 Thoughtseize
+2 Collective Brutality
+1 Bone Shards
+4 Profane Tutor
+1 Inquisition of Kozilek
+4 Urza's Saga
+1 Blood Crypt
+3 Bloodstained Mire
+4 Blooming Marsh
+1 Overgrown Tomb
+2 Swamp
+4 Verdant Catacombs
+1 Swamp
+1 Boseiju, Who Endures
+1 Swamp
+[Sideboard]
+3 Through the Breach
+1 Pithing Needle
+3 Fatal Push
+1 Nihil Spellbomb
+1 Shadowspear
+1 Jegantha, the Wellspring
+1 Expedition Map
+2 Witherbloom Command
+2 Haywire Mite

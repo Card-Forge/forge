@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Demon.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Lord of Torment — Whenever another Demon you control enters, it deals damage equal to its power to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y | DamageSource$ TriggeredCardLKICopy
 SVar:X:Count$Valid Demon.YouCtrl
 SVar:Y:TriggeredCard$CardPower
 SVar:BuffedBy:Demon

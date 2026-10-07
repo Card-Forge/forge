@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Darth Vader
+Title=Darth Vader
+Icon=Darth Vader.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Broshotz_-_Mardu_Midrange_(Standard,_#2275771).dck
+Deck Type=constructed
+
+[Main]
+2 The Jolly Balloon Man
+3 Unstoppable Slasher
+3 Overlord of the Balemurk
+4 Toby, Beastie Befriender
+3 Fear of Missing Out
+4 Enduring Innocence
+2 Leyline Axe
+3 Withering Torment
+4 Helping Hand
+2 Commune with Evil
+3 Sporogenic Infection
+2 Dollmaker's Shop // Porcelain Gallery
+4 Blazemire Verge
+7 Plains
+3 Mountain
+7 Swamp
+4 Neglected Manor
+[Sideboard]
+2 Commune with Evil
+1 Fear of Missing Out
+4 Exorcise
+4 Untimely Malfunction

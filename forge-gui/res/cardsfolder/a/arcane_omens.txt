@@ -1,0 +1,7 @@
+Name:Arcane Omens
+ManaCost:4 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Converge — Target player discards X cards, where X is the number of colors of mana spent to cast this spell.
+SVar:X:Count$Converge
+DeckHas:Ability$Discard
+Oracle:Converge — Target player discards X cards, where X is the number of colors of mana spent to cast this spell.

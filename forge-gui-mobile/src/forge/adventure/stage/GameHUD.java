@@ -5,7 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -18,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -34,6 +39,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import java.util.EnumSet;
 
 import forge.Forge;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
@@ -50,6 +56,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
+import forge.adventure.util.NavArrowActor;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
@@ -69,6 +76,8 @@ public class GameHUD extends Stage {
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
+    private final TypingLabel enemyCounterText;
+    private final Image enemyCounterBackground;
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
@@ -84,15 +93,24 @@ public class GameHUD extends Stage {
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
     private final Array<TextraButton> abilityButtonMap = new Array<>();
+    private final Array<NavArrowActor> hiddenEnemyChevrons = new Array<>();
+    private final Vector2 chevronStageCoordinates = new Vector2();
+    private final Vector2 chevronNavigation = new Vector2();
+    private final Vector3 playerProjectedCoordinates = new Vector3();
     private String lifepointsTextColor = "";
     private final ScrollPane notificationPane;
     private final Group mapGroup = new Group();
     private final Group hudGroup = new Group();
     private final Group menuGroup = new Group();
     private final Group avatarGroup = new Group();
+    private final Vector2 touchDownCoords = new Vector2();
+    private final Vector2 touchDownDirection = new Vector2();
+    private final Vector2 touchDraggedDirection = new Vector2();
+    private int viewWidth = 150;
+    private int viewHeight = 150;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), Forge.getGraphics().getBatch());
         instance = this;
         this.gameStage = gameStage;
 
@@ -128,18 +146,14 @@ public class GameHUD extends Stage {
                 if (MapStage.getInstance().isInMap()) {
                     if (MapStage.getInstance().isPaused())
                         return;
-                    MapStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
-                    MapStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
+                    MapStage.getInstance().setTouchKnobInput(((Touchpad) actor).getKnobPercentX(), ((Touchpad) actor).getKnobPercentY());
                 } else {
                     if (WorldStage.getInstance().isPaused())
                         return;
-                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
-                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
+                    WorldStage.getInstance().setTouchKnobInput(((Touchpad) actor).getKnobPercentX(), ((Touchpad) actor).getKnobPercentY());
                 }
             }
         });
-        if (GuiBase.isAndroid()) //add touchpad for android
-            ui.addActor(touchpad);
 
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", this::menu);
@@ -159,6 +173,14 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards]");
         money.setText("[%95][+Gold]");
         lifePoints.setText("[%95][+Life]");
+        enemyCounterText = Controls.newTypingLabel(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(0)));
+        enemyCounterText.setColor(Color.BLACK);
+        enemyCounterText.skipToTheEnd();
+        enemyCounterText.setVisible(false);
+
+        ScrollPaneStyle paperStyle = Controls.getSkin().get("paper", ScrollPaneStyle.class);
+        enemyCounterBackground = new Image(paperStyle.background);
+        enemyCounterBackground.setVisible(false);
         AdventurePlayer.current().onLifeChange(() -> {
             String effect = "{EMERGE}";
             String effectEnd = "{ENDEMERGE}";
@@ -183,6 +205,8 @@ public class GameHUD extends Stage {
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
         addActor(miniMapPlayer);
+        addActor(enemyCounterBackground);
+        addActor(enemyCounterText);
         console = new Console();
         console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(), getHeight() / 2);
         console.setVisible(false);
@@ -206,6 +230,9 @@ public class GameHUD extends Stage {
         notificationPane.getColor().a = 0f;
 
         ui.addActor(notificationPane);
+        //move touchpad here so z-index is over notificationPane and we can still move the player
+        if (GuiBase.isAndroid()) //add touchpad for android
+            ui.addActor(touchpad);
         //MAP
         mapGroup.addActor(miniMap);
         mapGroup.addActor(mapborder);
@@ -261,6 +288,8 @@ public class GameHUD extends Stage {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         touchpad.setVisible(false);
+        MapStage.getInstance().setTouchKnobInput(0, 0);
+        WorldStage.getInstance().setTouchKnobInput(0, 0);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         return super.touchUp(screenX, screenY, pointer, button);
@@ -268,13 +297,12 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Vector2 c = new Vector2();
-        screenToStageCoordinates(c.set(screenX, screenY));
+        screenToStageCoordinates(touchDraggedDirection.set(screenX, screenY));
 
-        float x = (c.x - miniMap.getX()) / miniMap.getWidth();
-        float y = (c.y - miniMap.getY()) / miniMap.getHeight();
+        float x = (touchDraggedDirection.x - miniMap.getX()) / miniMap.getWidth();
+        float y = (touchDraggedDirection.y - miniMap.getY()) / miniMap.getHeight();
         //map bounds
-        if (Controls.actorContainsVector(miniMap, c)) {
+        if (Controls.actorContainsVector(miniMap, touchDraggedDirection)) {
             touchpad.setVisible(false);
             if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
@@ -289,18 +317,16 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector2 c = new Vector2();
-        Vector2 touch = new Vector2();
-        screenToStageCoordinates(touch.set(screenX, screenY));
-        screenToStageCoordinates(c.set(screenX, screenY));
+        screenToStageCoordinates(touchDownCoords.set(screenX, screenY));
+        screenToStageCoordinates(touchDownDirection.set(screenX, screenY));
 
-        float x = (c.x - miniMap.getX()) / miniMap.getWidth();
-        float y = (c.y - miniMap.getY()) / miniMap.getHeight();
-        if (Controls.actorContainsVector(gamehud, c)) {
+        float x = (touchDownDirection.x - miniMap.getX()) / miniMap.getWidth();
+        float y = (touchDownDirection.y - miniMap.getY()) / miniMap.getHeight();
+        if (Controls.actorContainsVector(gamehud, touchDownDirection)) {
             super.touchDown(screenX, screenY, pointer, button);
             return true;
         }
-        if (Controls.actorContainsVector(miniMap, c)) {
+        if (Controls.actorContainsVector(miniMap, touchDownDirection)) {
             if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             } else if (!mapGroup.isVisible()) {
@@ -311,20 +337,20 @@ public class GameHUD extends Stage {
         }
         //auto follow touchpad
         if (GuiBase.isAndroid() && !MapStage.getInstance().isDialogOnlyInput() && !console.isVisible()) {
-            if (!(Controls.actorContainsVector(avatar, touch)) // not inside avatar bounds
-                    && !(Controls.actorContainsVector(miniMap, touch)) // not inside map bounds
-                    && !(Controls.actorContainsVector(gamehud, touch)) //not inside gamehud bounds
-                    && !(Controls.actorContainsVector(menuActor, touch)) //not inside menu button
-                    && !(Controls.actorContainsVector(deckActor, touch)) //not inside deck button
-                    && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
-                    && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
-                    && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
-                    && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
-                    && !(Controls.actorContainsVector(bookmarkActor, touch)) //not inside bookmark button
-                    && !(Controls.actorContainsVector(abilityButtonMap, touch)) //not inside abilityButtonMap
-                    && (Controls.actorContainsVector(ui, touch)) //inside display bounds
+            if (!(Controls.actorContainsVector(avatar, touchDownCoords)) // not inside avatar bounds
+                    && !(Controls.actorContainsVector(miniMap, touchDownCoords)) // not inside map bounds
+                    && !(Controls.actorContainsVector(gamehud, touchDownCoords)) //not inside gamehud bounds
+                    && !(Controls.actorContainsVector(menuActor, touchDownCoords)) //not inside menu button
+                    && !(Controls.actorContainsVector(deckActor, touchDownCoords)) //not inside deck button
+                    && !(Controls.actorContainsVector(openMapActor, touchDownCoords)) //not inside openmap button
+                    && !(Controls.actorContainsVector(logbookActor, touchDownCoords)) //not inside stats button
+                    && !(Controls.actorContainsVector(inventoryActor, touchDownCoords)) //not inside inventory button
+                    && !(Controls.actorContainsVector(exitToWorldMapActor, touchDownCoords)) //not inside exit button
+                    && !(Controls.actorContainsVector(bookmarkActor, touchDownCoords)) //not inside bookmark button
+                    && !(Controls.actorContainsVector(abilityButtonMap, touchDownCoords)) //not inside abilityButtonMap
+                    && (Controls.actorContainsVector(ui, touchDownCoords)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
-                touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
+                touchpad.setBounds(touchDownCoords.x - TOUCHPAD_SCALE / 2, touchDownCoords.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
                 touchpad.setVisible(true);
                 touchpad.setResetOnTouchUp(true);
                 return super.touchDown(screenX, screenY, pointer, button);
@@ -335,38 +361,22 @@ public class GameHUD extends Stage {
 
     @Override
     public void draw() {
-        int yPos = (int) gameStage.player.getY();
-        int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
+        updateHiddenEnemyChevrons();
         super.draw(); //draw the Hud
-        int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
-        int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
-        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
 
-        miniMapPlayer.setVisible(miniMap.isVisible() &&
-                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
-                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
-                || !console.isVisible())); // prevent drawing on top of console or notifications
     }
 
     Texture miniMapTexture;
-    Texture miniMapToolTipTexture;
-    Pixmap miniMapToolTipPixmap;
+    TextureRegion miniMapRegion;
     public boolean fromWorldMap = false;
 
     public void enter() {
         updateKeys();
-        if (miniMapTexture != null)
-            miniMapTexture.dispose();
-        miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
-        if (miniMapToolTipTexture != null)
-            miniMapToolTipTexture.dispose();
-        if (miniMapToolTipPixmap != null)
-            miniMapToolTipPixmap.dispose();
-        miniMapToolTipPixmap = new Pixmap((int) (miniMap.getWidth() * 3), (int) (miniMap.getHeight() * 3), Pixmap.Format.RGBA8888);
-        miniMapToolTipPixmap.drawPixmap(WorldSave.getCurrentSave().getWorld().getBiomeImage(), 0, 0, WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight(), 0, 0, miniMapToolTipPixmap.getWidth(), miniMapToolTipPixmap.getHeight());
-        miniMapToolTipTexture = new Texture(miniMapToolTipPixmap);
-        miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
+        Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
+        miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
+        miniMapRegion = new TextureRegion(miniMapTexture, 0, 0, viewWidth, viewHeight);
+        miniMap.setDrawable(new TextureRegionDrawable(miniMapRegion));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
 
@@ -375,7 +385,7 @@ public class GameHUD extends Stage {
             case "town":
                 if (MapStage.getInstance().isInMap()) {
                     int rep = TileMapScene.instance().getPointOfInterestChanges().getMapReputation();
-                    String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\nReputation: " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
+                    String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\n" + Forge.getLocalizer().getMessage("advReputation") + ": " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
                     if (fromWorldMap) {
                         addNotification(reputationText);
                         fromWorldMap = false;
@@ -416,6 +426,7 @@ public class GameHUD extends Stage {
         }
         if (MapStage.getInstance().isInMap())
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
+        updateEnemyCounter();
         avatarGroup.setZIndex(ui.getChildren().size);
     }
 
@@ -428,6 +439,100 @@ public class GameHUD extends Stage {
         keys += AdventurePlayer.current().hasItem("White Key") ? "[+WhiteKey]\n" : "[+Dot]\n";
         keys += AdventurePlayer.current().hasItem("Strange Key") ? "[+StrangeKey]" : "[+Dot]";
         keyCollection.setText(keys);
+    }
+
+    public void updateEnemyCounter() {
+        if (MapStage.getInstance().isInMap() && AdventureQuestController.instance().hasClearQuestActive()) {
+            int remaining = MapStage.getInstance().getRemainingEnemyCount();
+            enemyCounterText.setText(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(remaining)));
+            enemyCounterText.setVisible(true);
+            enemyCounterBackground.setVisible(true);
+
+            float paddingX = 4f;
+            float paddingY = 1.5f;
+            float margin = 2f;
+            float textWidth = enemyCounterText.getPrefWidth();
+            float textHeight = Math.max(enemyCounterText.getPrefHeight(), 12f);
+            float bgWidth = textWidth + paddingX * 2f;
+            float bgHeight = textHeight + paddingY * 2f;
+
+            float bgX = getWidth() - bgWidth - margin;
+            float bgY = margin;
+
+            enemyCounterBackground.setBounds(bgX, bgY, bgWidth, bgHeight);
+            enemyCounterText.setBounds(bgX + paddingX, bgY + paddingY, textWidth, textHeight);
+        } else {
+            enemyCounterText.setVisible(false);
+            enemyCounterBackground.setVisible(false);
+        }
+    }
+
+    private void hideHiddenEnemyChevrons() {
+        for (NavArrowActor chevron : hiddenEnemyChevrons) {
+            chevron.setVisible(false);
+        }
+    }
+
+    private NavArrowActor getChevronActor(int index) {
+        while (hiddenEnemyChevrons.size <= index) {
+            NavArrowActor chevron = new NavArrowActor();
+            chevron.setTouchable(Touchable.disabled);
+            chevron.setVisible(false);
+            hiddenEnemyChevrons.add(chevron);
+            addActor(chevron);
+        }
+        return hiddenEnemyChevrons.get(index);
+    }
+
+    private void positionChevron(NavArrowActor chevron, EnemySprite enemy, int index) {
+        playerProjectedCoordinates.set(MapStage.getInstance().player.getX() + MapStage.getInstance().player.getWidth() * 0.5f,
+                MapStage.getInstance().player.getY() + MapStage.getInstance().player.getHeight() * 0.5f, 0f);
+        MapStage.getInstance().getCamera().project(playerProjectedCoordinates, 0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        chevronStageCoordinates.set(playerProjectedCoordinates.x, playerProjectedCoordinates.y);
+        screenToStageCoordinates(chevronStageCoordinates);
+
+        chevronNavigation.set(enemy.pos()).sub(MapStage.getInstance().player.pos());
+        if (chevronNavigation.isZero(0.01f)) {
+            chevronNavigation.set(1f, 0f);
+        } else {
+            chevronNavigation.nor();
+        }
+
+        Vector2 side = new Vector2(-chevronNavigation.y, chevronNavigation.x);
+        int lane = index / 2;
+        float spread = (index % 2 == 0 ? 1f : -1f) * lane * 9f;
+        float offsetFromPlayer = 18f;
+        float pointerX = chevronStageCoordinates.x + chevronNavigation.x * offsetFromPlayer + side.x * spread;
+        float pointerY = chevronStageCoordinates.y + chevronNavigation.y * offsetFromPlayer + side.y * spread;
+
+        chevron.navTargetAngle = chevronNavigation.angleDeg();
+        chevron.setPosition(pointerX, pointerY);
+        chevron.setVisible(true);
+    }
+
+    private void updateHiddenEnemyChevrons() {
+        if (!Config.instance().getSettingData().drawChevronsToHiddenEnemiesInClearQuest
+                || hidden
+                || !MapStage.getInstance().isInMap()
+                || !AdventureQuestController.instance().hasClearQuestActive()
+                || MapStage.getInstance().getRemainingEnemyCount() <= 0) {
+            hideHiddenEnemyChevrons();
+            return;
+        }
+
+        int chevronIndex = 0;
+        for (EnemySprite enemy : MapStage.getInstance().enemies) {
+            if (!enemy.hidden || enemy.getStage() == null || enemy.defeatDialog != null) {
+                continue;
+            }
+            NavArrowActor chevron = getChevronActor(chevronIndex);
+            positionChevron(chevron, enemy, chevronIndex);
+            chevronIndex++;
+        }
+
+        while (chevronIndex < hiddenEnemyChevrons.size) {
+            hiddenEnemyChevrons.get(chevronIndex++).setVisible(false);
+        }
     }
 
     void clearAbility() {
@@ -558,6 +663,40 @@ public class GameHUD extends Stage {
         updateBGM();
 
         updateAudioFades(delta);
+
+        if (!mapGroup.isVisible())
+            return;
+        // player position
+        int yPos = (int) gameStage.player.getY();
+        int xPos = (int) gameStage.player.getX();
+        int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
+        int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
+
+        miniMapPlayer.setVisible(miniMap.isVisible() &&
+                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
+                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
+                || !console.isVisible())); // prevent drawing on top of console or notifications
+
+        if (isDebugMap()) {
+            // Full size map for debugging
+            miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
+            miniMapRegion.setRegion(0, 0, miniMapTexture.getWidth(), miniMapTexture.getHeight());
+            ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+        } else {
+            // Radar Map
+            miniMapPlayer.setPosition(miniMap.getX(1), miniMap.getY(1), 1);
+            float percentX = gameStage.player.getX() / WorldSave.getCurrentSave().getWorld().getWidthInPixels();
+            float percentY = gameStage.player.getY() / WorldSave.getCurrentSave().getWorld().getHeightInPixels();
+            int pixelX = (int) (percentX * miniMapTexture.getWidth());
+            int pixelY = (int) (percentY * miniMapTexture.getHeight());
+            pixelY = miniMapTexture.getHeight() - pixelY;
+            int sourceX = pixelX - (viewWidth / 2);
+            int sourceY = pixelY - (viewHeight / 2);
+            sourceX = MathUtils.clamp(sourceX, 0, miniMapTexture.getWidth() - viewWidth);
+            sourceY = MathUtils.clamp(sourceY, 0, miniMapTexture.getHeight() - viewHeight);
+            miniMapRegion.setRegion(sourceX, sourceY, viewWidth, viewHeight);
+            ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+        }
     }
 
     private void updateAudioFades(float delta) {
@@ -610,7 +749,7 @@ public class GameHUD extends Stage {
             return;
         if (Forge.advFreezePlayerControls)
             return;
-        WorldSave.getCurrentSave().header.createPreview();
+        WorldSave.requestPreview();
         Forge.switchScene(InventoryScene.instance());
     }
 
@@ -1025,4 +1164,14 @@ public class GameHUD extends Stage {
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
     }
+
+    public Batch getBatch() {
+        return gameStage.getBatch();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
+
 }

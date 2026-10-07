@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Very Hard
+Description=../Modern/Avacyn_Restored/Modern_Daily_#8300583/PepperLips_-_Infect_Aggro_(Modern,_#243689).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+2 Relic of Progenitus
+4 Apostle's Blessing
+2 Groundswell
+4 Might of Old Krosa
+4 Spell Pierce
+4 Vines of Vastwood
+3 Sylvan Scrying
+3 Wild Defiance
+2 Breeding Pool
+3 Forest
+4 Inkmoth Nexus
+1 Island
+4 Misty Rainforest
+3 Pendelhaven
+1 Temple Garden
+4 Wooded Foothills
+[Sideboard]
+4 Krosan Grip
+3 Negate
+2 Path to Exile
+4 Spellskite

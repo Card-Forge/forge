@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Jesus_Palacios_-_5c_Birthing_Ritual_(Modern,_#2930000).dck
+Deck Type=constructed
+
+[Main]
+1 Elesh Norn, Mother of Machines
+1 Emeritus of Abundance
+2 Emeritus of Ideation
+4 Emeritus of Truce
+4 Omnath, Locus of Creation
+4 Quantum Riddler
+4 Shardless Agent
+4 Solitude
+4 Subtlety
+2 Witch Enchanter
+4 Birthing Ritual
+4 Leyline Binding
+1 Breeding Pool
+1 Commercial District
+1 Forest
+1 Hedge Maze
+1 Island
+2 Misty Rainforest
+1 Overgrown Tomb
+1 Plains
+1 Raugrin Triome
+1 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+1 Zagoth Triome
+[Sideboard]
+1 Collector Ouphe
+2 Culling Ritual
+3 Force of Vigor
+3 Inevitable Betrayal
+3 Mystical Dispute
+1 Professor Dellian Fel
+2 Rest in Peace

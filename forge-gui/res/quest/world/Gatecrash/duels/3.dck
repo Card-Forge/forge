@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Jarad
+Title=Jarad
+Icon=Jarad.jpg
+Difficulty=Easy
+Description=Gatecrash/Grand_Prix_Trial_Charlotte/Zachary_Kirby_-_Mono-Red_Aggro_(Standard,_#46407).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Hellrider
+2 Lightning Mauler
+4 Rakdos Cackler
+2 Stonewright
+4 Stromkirk Noble
+2 Thundermaw Hellkite
+2 Brimstone Volley
+4 Searing Spear
+1 Flames of the Firebrand
+4 Volcanic Strength
+1 Hellion Crucible
+22 Mountain
+[Sideboard]
+2 Blasphemous Act
+4 Grafdigger's Cage
+1 Mizzium Mortars
+4 Pillar of Flame
+3 Skullcrack

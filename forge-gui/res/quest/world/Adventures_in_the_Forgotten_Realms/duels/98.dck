@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Sebastian_Payne_-_Mono-White_Hammer_(Modern,_#1224979)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Memnite
+4 Ornithopter
+4 Esper Sentinel
+4 Puresteel Paladin
+4 Ingenious Smith
+4 Stoneforge Mystic
+1 Soul-Guide Lantern
+1 Cranial Plating
+1 Shadowspear
+3 Springleaf Drum
+4 Colossus Hammer
+1 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+1 Horizon Canopy
+2 Sunbaked Canyon
+2 Silent Clearing
+4 Inkmoth Nexus
+9 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Pithing Needle
+1 Tormod's Crypt
+2 Path to Exile
+2 Prismatic Ending
+2 Seal of Cleansing
+3 Void Mirror
+3 Sanctifier en-Vec

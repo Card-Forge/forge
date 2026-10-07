@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Alain_Bardini_-_Simic_Elementals_(Standard,_#931377).dck
+Deck Type=constructed
+
+[Main]
+1 End-Raze Forerunners
+1 Thassa, Deep-Dwelling
+2 Agent of Treachery
+2 Voracious Hydra
+4 Cavalier of Thorns
+4 Hydroid Krasis
+4 Leafkin Druid
+4 Risen Reef
+4 Uro, Titan of Nature's Wrath
+4 Growth Spiral
+2 Finale of Devastation
+2 Castle Vantress
+2 Fabled Passage
+2 Castle Garenbrig
+4 Breeding Pool
+4 Temple of Mystery
+5 Island
+9 Forest
+[Sideboard]
+1 Mystical Dispute
+2 Voracious Hydra
+4 Aether Gust
+4 Lovestruck Beast
+4 Questing Beast

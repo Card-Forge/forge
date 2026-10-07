@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wilma Flintstone
+Title=Wilma Flintstone
+Icon=Wilma Flintstone.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Kawaguchi_Mizuki_-_Hexproof_Aura_(Modern,_#1031920).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+4 Kor Spiritdancer
+4 Gladecover Scout
+4 Slippery Bogle
+2 Path to Exile
+1 Cartouche of Solidarity
+2 Spirit Link
+2 Spirit Mantle
+2 All That Glitters
+2 Hyena Umbra
+2 Gryff's Boon
+4 Spider Umbra
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Rancor
+1 Forest
+2 Plains
+3 Temple Garden
+4 Horizon Canopy
+4 Windswept Heath
+4 Razorverge Thicket
+[Sideboard]
+2 Gaddock Teeg
+2 Damping Sphere
+2 Path to Exile
+2 Soul-Guide Lantern
+3 Force of Vigor
+4 Leyline of Sanctity

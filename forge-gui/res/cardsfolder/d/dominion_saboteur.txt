@@ -1,0 +1,10 @@
+Name:Dominion Saboteur
+ManaCost:4 U
+Types:Creature Shapeshifter
+PT:3/3
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Artifact.Other,Creature.Other | NonLegendary$ True | SubAbility$ DBAddCounter | RememberCloneOrigin$ True | SpellDescription$ You may have this creature enter as a copy of any artifact or creature on the battlefield, except it isn't legendary. If you do, it enters with additional counters on it equal to the same number and kinds of counters the copied permanent has on it.
+SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ EachFromSource | EachFromSource$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:You may have this creature enter as a copy of any artifact or creature on the battlefield, except it isn't legendary. If you do, it enters with additional counters on it equal to the same number and kinds of counters the copied permanent has on it.

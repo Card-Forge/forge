@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Arlington,_VI/Paul_White_-_Mono_Blue_(Standard,_#69302).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Cloudfin Raptor
+4 Frostburn Weird
+4 Judge's Familiar
+4 Master of Waves
+4 Nightveil Specter
+4 Thassa, God of the Sea
+4 Tidebinder Mage
+[Sideboard]
+2 Bident of Thassa
+2 Cyclonic Rift
+1 Dispel
+2 Dissolve
+2 Domestication
+3 Gainsay
+20 Island
+2 Jace, Architect of Thought
+4 Mutavault
+1 Negate
+1 Nykthos, Shrine to Nyx
+1 Rapid Hybridization
+1 Thassa's Rebuff

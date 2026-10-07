@@ -1,5 +1,6 @@
 package forge.gui.framework;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -17,6 +18,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
 public final class DragTab extends SkinnedLabel implements ILocalRepaint {
     private boolean selected = false;
     private int priority = 10;
+    private float flashIntensity = 0f;
 
     /**
      * The tab label object in drag layout.
@@ -43,6 +45,11 @@ public final class DragTab extends SkinnedLabel implements ILocalRepaint {
         repaintSelf();
     }
 
+    /** True when this is the active tab in its DragCell. */
+    public boolean isSelected() {
+        return selected;
+    }
+
     /** Decreases display priority of this tab in relation to its siblings in an overflow case. */
     public void priorityDecrease() {
         priority++;
@@ -67,6 +74,12 @@ public final class DragTab extends SkinnedLabel implements ILocalRepaint {
         // Intentionally empty.
     }
 
+    /** Sets the red flash overlay intensity (0..1) and repaints. */
+    public void setFlashIntensity(final float intensity) {
+        flashIntensity = Math.max(0f, Math.min(1f, intensity));
+        repaintSelf();
+    }
+
     @Override
     public void repaintSelf() {
         final Dimension d = DragTab.this.getSize();
@@ -86,6 +99,11 @@ public final class DragTab extends SkinnedLabel implements ILocalRepaint {
             g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
             FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
+        }
+
+        if (flashIntensity > 0f) {
+            g.setColor(new Color(1f, 0f, 0f, flashIntensity));
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
         }
 
         super.paintComponent(g);

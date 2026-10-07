@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Medium
+Description=New_Phyrexia/SCG_Invitational_Qualifier_-_Fort_Collins,_Colorado/Ben_Denardo_-_Eldrazi_Ramp_(Standard,_#16677).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Acidic Slime
+1 Artisan of Kozilek
+1 Emrakul, the Aeons Torn
+4 Joraga Treespeaker
+1 Kozilek, Butcher of Truth
+4 Overgrown Battlement
+4 Primeval Titan
+1 Ulamog, the Infinite Gyre
+4 Wall of Tanglecord
+2 Wurmcoil Engine
+4 Summoning Trap
+3 All Is Dust
+4 Growth Spasm
+4 Eldrazi Temple
+1 Eye of Ugin
+10 Forest
+4 Khalni Garden
+2 Mystifying Maze
+4 Tectonic Edge
+[Sideboard]
+4 Beast Within
+4 Nature's Claim
+4 Obstinate Baloth
+3 Pelakka Wurm

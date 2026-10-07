@@ -26,7 +26,6 @@ import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
-import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -36,6 +35,7 @@ import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CardPool extends ItemPool<PaperCard> {
     private static final long serialVersionUID = -5379091255613968393L;
@@ -458,21 +458,9 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public String toCardList(String separator) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
-        main2sort.sort(ItemPoolSorter.BY_NAME_THEN_SET);
-        StringBuilder sb = new StringBuilder();
+        main2sort.sort(Entry.comparingByKey());
 
-        boolean isFirst = true;
-
-        for (final Entry<PaperCard, Integer> e : main2sort) {
-            if (!isFirst)
-                sb.append(separator);
-            else
-                isFirst = false;
-
-            sb.append(e.getValue()).append(" ");
-            sb.append(CardDb.CardRequest.compose(e.getKey()));
-        }
-        return sb.toString();
+        return main2sort.stream().map(e -> e.getValue() + " " + CardDb.CardRequest.compose(e.getKey())).collect(Collectors.joining(separator));
     }
 
     /**

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Havok
+Title=Havok
+Icon=Havok.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/SCG_Super_IQ_Montclair/Todd_Kotow_-_Red_Deck_Wins_(Modern,_#504106).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+3 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+5 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+3 Deflecting Palm
+3 Destructive Revelry
+2 Grafdigger's Cage
+1 Hallowed Moonlight
+3 Path to Exile
+3 Rending Volley

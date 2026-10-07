@@ -10,3 +10,8 @@ ScryfallCode=PHTR
 1 M Chandra, Gremlin Wrangler @Kari Christensen
 2 M Dungeon Master @Mike Burns
 3 M Nira, Hellkite Duelist @Yoichi Ito
+
+[CreatureTypes]
+Fighter:Fighters
+[WalkerTypes]
+Dungeon Master

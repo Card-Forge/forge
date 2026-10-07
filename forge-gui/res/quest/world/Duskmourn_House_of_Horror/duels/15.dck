@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Edel_-_Jeskai_Convoke_(Standard,_#2277090).dck
+Deck Type=constructed
+
+[Main]
+4 Novice Inspector
+4 Spyglass Siren
+4 Warden of the Inner Sky
+4 Resolute Reinforcements
+2 Clockwork Percussionist
+4 Imodane's Recruiter
+4 Knight-Errant of Eos
+1 Mockingbird
+4 Gleeful Demolition
+3 Sheltered by Ghosts
+4 Case of the Gateway Express
+4 Inspiring Vantage
+4 Battlefield Forge
+3 Adarkar Wastes
+4 Seachrome Coast
+2 Shivan Reef
+4 Spirebluff Canal
+1 Plains
+[Sideboard]
+1 Destroy Evil
+4 Torch the Tower
+4 Protect the Negotiators
+1 Get Lost
+1 Soul Partition
+1 Rest in Peace
+2 Lithomantic Barrage
+1 Disdainful Stroke

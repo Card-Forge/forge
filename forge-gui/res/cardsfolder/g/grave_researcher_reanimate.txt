@@ -1,0 +1,13 @@
+Name:Grave Researcher
+ManaCost:2 B
+Types:Creature Troll Warlock
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1 | SubAbility$ DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | ConditionPresent$ Creature.YouOwn | ConditionCompare$ GE3 | ConditionZone$ Graveyard
+AlternateMode:Prepare
+Oracle:At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+CopyFaceFrom:Reanimate

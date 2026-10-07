@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/MCM93_-_Azorius_Flash_(Standard,_#2377459).dck
+Deck Type=constructed
+
+[Main]
+1 Tishana's Tidebinder
+3 Enduring Curiosity
+4 Floodpits Drowner
+4 Mockingbird
+4 Novice Inspector
+4 Regal Bunnicorn
+4 Spyglass Siren
+1 Steel Seraph
+4 Warden of the Inner Sky
+2 Subterranean Schooner
+1 Voyager Glidecar
+1 Spell Pierce
+1 Raise the Past
+4 Sheltered by Ghosts
+4 Floodfarm Verge
+1 Soulstone Sanctuary
+4 Seachrome Coast
+2 Restless Anchorage
+3 Plains
+4 Island
+4 Adarkar Wastes
+[Sideboard]
+2 Tishana's Tidebinder
+3 Destroy Evil
+3 Protect the Negotiators
+2 Raise the Past
+1 Rest in Peace
+2 Split Up
+1 Ajani, Caller of the Pride
+1 Get Lost

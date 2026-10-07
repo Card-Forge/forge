@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Eugene/Donald_Dietz_-_Mono_Black_(Standard,_#172968).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Brain Maggot
+3 Disciple of Phenax
+3 Erebos, God of the Dead
+4 Gray Merchant of Asphodel
+4 Herald of Torment
+4 Master of the Feast
+3 Whip of Erebos
+3 Bile Blight
+4 Hero's Downfall
+4 Thoughtseize
+24 Swamp
+[Sideboard]
+3 Dark Betrayal
+3 Despise
+4 Drown in Sorrow
+2 Liliana Vess
+3 Sign in Blood

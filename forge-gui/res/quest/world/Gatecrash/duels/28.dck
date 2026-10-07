@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Hulk
+Title=Hulk
+Icon=Hulk.jpg
+Difficulty=Easy
+Description=Gatecrash/Starcitygames_Classic__Birmingham/Matthew_Alston_-_Reanimator_(Standard,_#47979).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Angel of Serenity
+3 Avacyn's Pilgrim
+1 Centaur Healer
+2 Craterhoof Behemoth
+1 Deathrite Shaman
+4 Lotleth Troll
+3 Restoration Angel
+4 Thragtusk
+4 Grisly Salvage
+3 Lingering Souls
+3 Mulch
+1 Sever the Bloodline
+4 Unburial Rites
+1 Cavern of Souls
+2 Forest
+3 Godless Shrine
+2 Isolated Chapel
+4 Overgrown Tomb
+2 Sunpetal Grove
+1 Swamp
+4 Temple Garden
+4 Woodland Cemetery
+[Sideboard]
+2 Abrupt Decay
+2 Acidic Slime
+1 Divine Reckoning
+2 Obzedat, Ghost Council
+2 Rhox Faithmender
+2 Tragic Slip

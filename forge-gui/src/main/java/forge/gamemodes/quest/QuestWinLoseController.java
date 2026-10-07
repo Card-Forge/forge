@@ -1,6 +1,5 @@
 package forge.gamemodes.quest;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.LobbyPlayer;
 import forge.card.CardEdition;
@@ -507,7 +506,6 @@ public class QuestWinLoseController {
 
         String title;
         if (qData.getFormat() == null) {
-
             final List<GameFormat> formats = new ArrayList<>();
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
@@ -528,9 +526,7 @@ public class QuestWinLoseController {
             qData.getCards().addAllCards(cardsWon);
 
             title = Localizer.getInstance().getMessage("lblBonusFormatBoosterPack", selected.getName());
-
         } else {
-
             final List<String> sets = new ArrayList<>();
 
             for (final SealedTemplate bd : FModel.getMagicDb().getBoosters()) {
@@ -593,7 +589,6 @@ public class QuestWinLoseController {
 
             qData.getCards().addAllCards(cardsWon);
             title = Localizer.getInstance().getMessage("lblBonusSetBoosterPack", chooseEd.getName());
-
         }
 
         if (cardsWon != null) {
@@ -603,7 +598,7 @@ public class QuestWinLoseController {
     }
 
     private SealedTemplate getBoosterTemplate() {
-        return new SealedTemplate(ImmutableList.of(
+        return new SealedTemplate(List.of(
                 Pair.of(BoosterSlots.COMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_COMMONS)),
                 Pair.of(BoosterSlots.UNCOMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_UNCOMMONS)),
                 Pair.of(BoosterSlots.RARE_MYTHIC, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_RARES))

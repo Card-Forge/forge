@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dead Girl
+Title=Dead Girl
+Icon=Dead Girl.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/doejurko_-_Mono_Blue_Turns_(Modern,_#2443156).dck
+Deck Type=constructed
+
+[Main]
+3 Tamiyo, Inquisitive Student
+4 Nulldrifter
+4 Devourer of Destiny
+3 Talisman of Creativity
+4 Talisman of Dominance
+3 Brainsurge
+4 Kozilek's Command
+4 Temporal Mastery
+4 Lórien Revealed
+4 Time Warp
+4 Jace, the Mind Sculptor
+1 Ugin, Eye of the Storms
+1 Otawara, Soaring City
+4 Eldrazi Temple
+4 Ugin's Labyrinth
+9 Island
+[Sideboard]
+3 Mystical Dispute
+2 Torpor Orb
+2 Dismember
+4 Consign to Memory
+1 Ashiok, Dream Render
+3 Grafdigger's Cage

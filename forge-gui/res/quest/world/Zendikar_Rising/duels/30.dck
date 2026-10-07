@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Green Arrow
+Title=Green Arrow
+Icon=Green Arrow.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Abel_Meijberg_-_Mono-Green_Midrange_(Standard,_#1048100).dck
+Deck Type=constructed
+
+[Main]
+3 Garruk's Harbinger
+4 Kazandu Mammoth
+4 Feasting Troll King
+4 Wicked Wolf
+4 Gilded Goose
+4 Scavenging Ooze
+2 The Great Henge
+3 Golden Egg
+2 Turntimber Symbiosis
+4 Primal Might
+4 Trail of Crumbs
+4 Gingerbread Cabin
+4 Castle Garenbrig
+14 Forest
+[Sideboard]
+1 Garruk's Harbinger
+2 Soul-Guide Lantern
+2 Witch's Oven
+3 Oakhame Adversary
+3 Chainweb Aracnir
+4 Gemrazer

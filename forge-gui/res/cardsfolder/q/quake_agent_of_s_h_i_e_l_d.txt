@@ -1,0 +1,7 @@
+Name:Quake, Agent of S.H.I.E.L.D.
+ManaCost:2 W
+Types:Legendary Creature Inhuman Spy Hero
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Seismic Takedown — Whenever you cast a noncreature spell, tap target creature or land.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature,Land | ValidTgtsDesc$ creature or land
+Oracle:Seismic Takedown — Whenever you cast a noncreature spell, tap target creature or land.

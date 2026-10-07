@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/II_Torneo_Benefico_AECC_Evolution_Ourense/Jose_Bertolo_-_Infect_(Modern,_#658568).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+4 Noble Hierarch
+3 Phyrexian Crusader
+4 Plague Stinger
+3 Abrupt Decay
+4 Blossoming Defense
+2 Dismember
+4 Groundswell
+4 Vines of Vastwood
+3 Inquisition of Kozilek
+1 Thoughtseize
+3 Rancor
+1 Blooming Marsh
+1 Forest
+4 Inkmoth Nexus
+2 Overgrown Tomb
+2 Pendelhaven
+2 Swamp
+2 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+2 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+1 Abrupt Decay
+4 Duress
+2 Lost Legacy
+2 Pithing Needle
+1 Relic of Progenitus
+3 Surgical Extraction
+1 Thoughtseize
+1 Virulent Plague

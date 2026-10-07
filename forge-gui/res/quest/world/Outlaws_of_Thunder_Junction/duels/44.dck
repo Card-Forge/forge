@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Elrond
+Title=Elrond
+Icon=Elrond.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/AHubbard_-_Orzhov_Blink_(Standard,_#2015732).dck
+Deck Type=constructed
+
+[Main]
+3 Fortune, Loyal Steed
+3 Tinybones, the Pickpocket
+3 Guardian of Ghirapur
+4 Spirited Companion
+4 Deep-Cavern Bat
+4 Phyrexian Fleshgorger
+3 Steel Seraph
+3 Sheoldred, the Apocalypse
+4 Cut Down
+3 Go for the Throat
+1 Bitter Triumph
+4 Caves of Koilos
+4 Shattered Sanctum
+4 Concealed Courtyard
+1 Eiganjo, Seat of the Empire
+2 Mirrex
+2 Restless Fortress
+2 Shadowy Backstreet
+1 Takenuma, Abandoned Mire
+2 Plains
+3 Swamp
+[Sideboard]
+4 Pest Control
+3 Rest in Peace
+3 Knockout Blow
+3 Duress
+2 Destroy Evil

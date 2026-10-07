@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Osaka_-_Japan/Hiroki_Yanagi_-_Tapout_(Standard,_#1902).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Knight of the White Orchid
+4 Wall of Omens
+4 Fieldmist Borderpost
+3 Day of Judgment
+3 Martial Coup
+4 Mind Spring
+4 Oust
+2 Oblivion Ring
+4 Spreading Seas
+2 Jace, the Mind Sculptor
+4 Celestial Colonnade
+4 Glacial Fortress
+6 Island
+7 Plains
+1 Tectonic Edge
+[Sideboard]
+2 Devout Lightcaster
+4 Kor Firewalker
+3 Luminarch Ascension
+1 Mind Control
+3 Negate
+1 Sphinx of Lost Truths

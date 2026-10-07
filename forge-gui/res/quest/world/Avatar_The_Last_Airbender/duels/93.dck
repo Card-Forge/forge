@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/Alessandro_Stella_-_Esper_Control_(Modern,_#2709694).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+3 Tamiyo, Inquisitive Student
+3 Wan Shi Tong, Librarian
+2 Orcish Bowmasters
+1 Brazen Borrower
+1 Snapcaster Mage
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+2 Fading Hope
+2 Sheoldred's Edict
+2 Sink into Stupor
+1 Cling to Dust
+1 Strix Serenade
+4 Thoughtseize
+2 Kaito, Bane of Nightmares
+1 Teferi, Time Raveler
+4 Polluted Delta
+3 Flooded Strand
+2 Darkslick Shores
+2 Scalding Tarn
+2 Undercity Sewers
+2 Watery Grave
+1 Hallowed Fountain
+1 Island
+1 Meticulous Archive
+1 Otawara, Soaring City
+1 Swamp
+[Sideboard]
+3 Consign to Memory
+2 Grafdigger's Cage
+2 Harbinger of the Seas
+2 Mystical Dispute
+2 Pest Control
+2 Toxic Deluge
+1 Rest in Peace
+1 Teferi, Time Raveler

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=BaronSamedi
+Title=BaronSamedi
+Icon=BaronSamedi.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Shimizu_Motohiro_-_Infect_(Modern,_#2263939).dck
+Deck Type=constructed
+
+[Main]
+4 Phyrexian Crusader
+4 Glistener Elf
+4 Plague Stinger
+3 Gemrazer
+4 Ignoble Hierarch
+2 Fatal Push
+2 Blossoming Defense
+3 Vines of Vastwood
+4 Might of Old Krosa
+2 Snakeskin Veil
+3 Thoughtseize
+4 Scale Up
+1 Rancor
+3 Forest
+2 Blooming Marsh
+1 Windswept Heath
+2 Wooded Foothills
+1 Pendelhaven
+3 Verdant Catacombs
+4 Inkmoth Nexus
+4 Overgrown Tomb
+[Sideboard]
+3 Damping Sphere
+3 Cursed Totem
+2 Liliana of the Veil
+2 Pithing Needle
+3 Veil of Summer
+1 Agatha's Soul Cauldron
+1 Ghost Vacuum

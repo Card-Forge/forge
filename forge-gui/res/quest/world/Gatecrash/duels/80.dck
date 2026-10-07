@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Private Domain
+Title=Private Domain
+Icon=Private Domain.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/GP_San_Diego_-_Last_Chance_Trials_Winners/Kane_Lee_-_Zoo_(Modern,_#48070).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Tarmogoyf
+2 Dismember
+4 Lightning Bolt
+4 Searing Blaze
+2 Seal of Fire
+2 Arid Mesa
+1 Forest
+2 Misty Rainforest
+5 Mountain
+4 Scalding Tarn
+4 Stomping Ground
+2 Verdant Catacombs
+[Sideboard]
+3 Deglamer
+2 Faerie Macabre
+3 Molten Rain
+2 Skullcrack
+2 Torpor Orb
+3 Vines of Vastwood

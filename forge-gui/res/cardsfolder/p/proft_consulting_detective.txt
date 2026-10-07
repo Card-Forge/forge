@@ -1,0 +1,9 @@
+Name:Proft, Consulting Detective
+ManaCost:1 U
+Types:Legendary Creature Human Detective
+PT:2/2
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you scry or surveil, you may pay {2}. If you do, put a +1/+1 counter on NICKNAME and draw a card. (Draw after you scry or surveil.)
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you scry or surveil, you may pay {2}. If you do, put a +1/+1 counter on NICKNAME and draw a card. (Draw after you scry or surveil.)
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 2 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Whenever you scry or surveil, you may pay {2}. If you do, put a +1/+1 counter on Proft and draw a card. (Draw after you scry or surveil.)

@@ -27,6 +27,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = source.getGame();
         final String landType = sa.getParam("Clone");
+        StaticData.instance().ensureAllCardsLoaded();
         Stream<PaperCard> cardStream = StaticData.instance().getCommonCards().streamUniqueCards();
         if ("BasicLand".equals(landType)) {
             cardStream = cardStream.filter(PaperCardPredicates.IS_BASIC_LAND);
@@ -60,6 +61,6 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         source.addCloneState(CardFactory.getCloneStates(random, source, sa), game.getNextTimestamp());
         source.updateStateForView();
 
-        activator.playLandNoCheck(source, sa);
+        activator.playLand(source, sa);
     }
 }

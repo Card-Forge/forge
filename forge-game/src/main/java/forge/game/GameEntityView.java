@@ -1,12 +1,17 @@
 package forge.game;
 
-import com.google.common.collect.Iterables;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import com.google.common.collect.Multiset;
+
 import forge.game.card.CardView;
+import forge.game.card.CounterType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.IterableUtil;
 
 public abstract class GameEntityView extends TrackableObject {
     private static final long serialVersionUID = -5129089945124455670L;
@@ -55,30 +60,39 @@ public abstract class GameEntityView extends TrackableObject {
         set(TrackableProperty.PreventNextDamage, e.getPreventNextDamageTotalShields());
     }
 
-    public Iterable<CardView> getAttachedCards() {
-        if (hasAnyCardAttachments()) {
-            Iterable<CardView> active = IterableUtil.filter(get(TrackableProperty.AttachedCards), c -> !c.isPhasedOut());
-            if (!Iterables.isEmpty(active)) {
-                return active;
-            }
-        }
-        return null;
+    public List<CardView> getAttachedCards() {
+        return getAllAttachedCards().stream().filter(c -> !c.isPhasedOut()).collect(Collectors.toList());
     }
     public boolean hasCardAttachments() {
-        return getAttachedCards() != null;
+        return !getAttachedCards().isEmpty();
     }
-    public Iterable<CardView> getAllAttachedCards() {
-        return get(TrackableProperty.AttachedCards);
+    public List<CardView> getAllAttachedCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.AttachedCards), List.of());
     }
     public boolean hasAnyCardAttachments() {
-        return getAllAttachedCards() != null;
+        return getAllAttachedCards().isEmpty();
     }
 
-    protected void updateAttachedCards(GameEntity e) {
-        if (!e.getAllAttachedCards().isEmpty()) {
-            set(TrackableProperty.AttachedCards, CardView.getCollection(e.getAllAttachedCards()));
-        } else {
-            set(TrackableProperty.AttachedCards, null);
+    public Multiset<CounterType> getCounters() {
+        return get(TrackableProperty.Counters);
+    }
+    public int getCounters(CounterType counterType) {
+        final Multiset<CounterType> counters = getCounters();
+        if (counters != null) {
+            return counters.count(counterType);
         }
+        return 0;
+    }
+    public boolean hasSameCounters(GameEntityView other) {
+        Multiset<CounterType> counters = getCounters();
+        if (counters == null) {
+            return other.getCounters() == null;
+        }
+        return counters.equals(other.getCounters());
+    }
+
+    public void updateCounters(GameEntity e) {
+        set(TrackableProperty.Counters, e.getCounters());
+        flagAsChanged(TrackableProperty.Counters);
     }
 }

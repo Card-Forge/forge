@@ -1,0 +1,9 @@
+Name:Mage Tower Referee
+ManaCost:2
+Types:Artifact Creature Construct
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.MultiColor
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a multicolored spell, put a +1/+1 counter on this creature.

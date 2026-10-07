@@ -110,6 +110,15 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                 }
             }
 
+            // CR 603.6a newcomers see each other
+            if (containsColumn(ZoneType.Battlefield)) {
+                for (Card c : Iterables.concat(column(ZoneType.Battlefield).values())) {
+                    if (c.isInPlay()) {
+                        c.getZone().updateLKI(c);
+                    }
+                }
+            }
+
             // this should still refresh for empty battlefield
             if (lastStateBattlefield != CardCollection.EMPTY) {
                 game.getTriggerHandler().resetActiveTriggers(false, lastStateBattlefield);
@@ -161,7 +170,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                             if (row(z).containsKey(zt)) {
                                 for (Card c : row(z).get(zt)) {
                                     if (lkiLookup != CardCollection.EMPTY && !lkiLookup.contains(c)) {
-                                        // this can happen if e. g. a mutated permanent dies
+                                        // this can happen if e.g. a mutated permanent dies
                                         continue;
                                     }
                                     allCards.add(lkiLookup.get(c));

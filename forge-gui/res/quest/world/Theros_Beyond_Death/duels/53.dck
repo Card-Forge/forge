@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Gods_Shadow_-_UW_Control_(Modern,_#927682).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+2 Force of Negation
+2 Dovin's Veto
+2 Archmage's Charm
+2 Censor
+4 Opt
+4 Path to Exile
+4 Cryptic Command
+4 Terminus
+2 Elspeth, Sun's Nemesis
+2 Jace, the Mind Sculptor
+2 Narset, Parter of Veils
+2 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+2 Hallowed Fountain
+2 Mystic Sanctuary
+2 Plains
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+6 Island
+[Sideboard]
+1 Aether Gust
+2 Wrath of God
+2 Ashiok, Dream Render
+2 Celestial Purge
+2 Kor Firewalker
+2 Rest in Peace
+4 Leyline of Sanctity

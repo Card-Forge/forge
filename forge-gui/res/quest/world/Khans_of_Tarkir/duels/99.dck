@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/Modern_Daily_#8088652/GLplum_-_Tokens_(Modern,_#205736).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Go for the Throat
+2 Midnight Haunting
+4 Path to Exile
+4 Raise the Alarm
+3 Zealous Persecution
+3 Inquisition of Kozilek
+4 Lingering Souls
+3 Spectral Procession
+3 Thoughtseize
+2 Timely Reinforcements
+1 Honor of the Pure
+4 Intangible Virtue
+2 Sorin, Solemn Visitor
+3 Arid Mesa
+2 Caves of Koilos
+4 Godless Shrine
+4 Isolated Chapel
+4 Marsh Flats
+2 Plains
+1 Snow-Covered Plains
+2 Swamp
+2 Vault of the Archangel
+[Sideboard]
+2 Disenchant
+1 Dismember
+3 Duress
+2 Hero of Bladehold
+1 Kor Firewalker
+2 Relic of Progenitus
+2 Stony Silence

@@ -1,0 +1,11 @@
+Name:Ant-Man, Elusive Avenger
+ManaCost:1 U R
+Types:Legendary Creature Human Rogue Hero
+PT:1/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Description$ NICKNAME can't be blocked by creatures with greater power.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create that many Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:Count$CardPower
+SVar:Y:TriggerCount$DamageAmount
+DeckHas:Ability$Token
+Oracle:Ant-Man can't be blocked by creatures with greater power.\nWhenever Ant-Man deals combat damage to a player, create that many Treasure tokens.

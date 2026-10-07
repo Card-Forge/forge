@@ -1,0 +1,6 @@
+Name:Hidden Lair
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | IsPresent$ Card.Self+ThisTurnEntered,Land.Basic+YouCtrl | SpellDescription$ Add {U} or {B}. Activate only if this land entered this turn or if your control a basic land.
+Oracle:{T}: Add {C}.\n{T}: Add {U} or {B}. Activate only if this land entered this turn or if your control a basic land.

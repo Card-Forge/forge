@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Martin_A._-_Dimir_Control_(Modern,_#1978281).dck
+Deck Type=constructed
+
+[Main]
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+4 Orcish Bowmasters
+3 Faerie Mastermind
+3 Brazen Borrower
+3 Tishana's Tidebinder
+3 Lose Focus
+4 Counterspell
+3 Fatal Push
+4 Drown in the Loch
+1 Jwari Disruption
+3 Thoughtseize
+2 Island
+3 Darkslick Shores
+4 Castle Locthwain
+3 Misty Rainforest
+1 Swamp
+3 Polluted Delta
+4 Watery Grave
+1 Creeping Tar Pit
+[Sideboard]
+4 Surgical Extraction
+2 Dress Down
+4 Crypt Incursion
+4 Sudden Edict
+1 Mystical Dispute

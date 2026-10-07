@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Gatlinburg/Danny_Mullinax_-_Eldrazi_(Standard,_#518348).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Den Protector
+2 Dragonlord Atarka
+4 Hangarback Walker
+4 Jaddi Offshoot
+2 Oblivion Sower
+4 Ulamog, the Ceaseless Hunger
+4 Explosive Vegetation
+3 Map the Wastes
+4 Nissa's Pilgrimage
+2 Sylvan Scrying
+4 Ugin, the Spirit Dragon
+9 Forest
+1 Haven of the Spirit Dragon
+2 Mountain
+1 Plains
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+4 Wooded Foothills
+[Sideboard]
+1 Desolation Twin
+2 Hallowed Moonlight
+1 Omnath, Locus of Rage
+2 Radiant Flames
+3 Rending Volley
+2 Roast
+1 Void Winnower
+2 Winds of Qal Sisma

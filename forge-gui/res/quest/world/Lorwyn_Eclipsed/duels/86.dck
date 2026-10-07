@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/DB_Nikachu_-_Merfolk_(Modern,_#2784292).dck
+Deck Type=constructed
+
+[Main]
+2 Disruptor of Currents
+4 Silvergill Mentor
+3 Vodalian Hexcatcher
+4 Master of the Pearl Trident
+2 Floodpits Drowner
+3 Silvergill Adept
+4 Mindspring Merfolk
+2 Glasspool Mimic
+2 Champions of the Shoal
+2 Lord of Atlantis
+3 Harbinger of the Seas
+4 Aether Vial
+3 Dismember
+2 Sink into Stupor
+3 Consign to Memory
+3 Cavern of Souls
+5 Island
+2 Otawara, Soaring City
+4 Gloomlake Verge
+3 Mutavault
+[Sideboard]
+2 Counterspell
+2 Force of Negation
+1 Harbinger of the Seas
+2 Mystical Dispute
+2 Tishana's Tidebinder
+3 Mistcaller
+2 Floodpits Drowner
+1 Vodalian Hexcatcher

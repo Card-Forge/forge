@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Starfire
+Title=Starfire
+Icon=Starfire.jpg
+Difficulty=Easy
+Description=Gatecrash/Garden_City_Convention_136th_result/Matsumoto_Yuki_-_ÚØÆþÖ¢Òé│Òâ│_(Standard,_#48061).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Azorius Charm
+3 Dissipate
+2 Feeling of Dread
+4 Sphinx's Revelation
+4 Think Twice
+4 Supreme Verdict
+4 Terminus
+4 Blind Obedience
+3 Detention Sphere
+3 Jace, Architect of Thought
+4 Azorius Guildgate
+3 Ghost Quarter
+4 Glacial Fortress
+4 Hallowed Fountain
+4 Island
+5 Plains
+[Sideboard]
+1 Chalice of Life
+2 Dispel
+2 Jace, Memory Adept
+2 Negate
+1 Psychic Spiral
+3 Rhox Faithmender
+1 Sundering Growth
+1 Tamiyo, the Moon Sage
+1 Tormod's Crypt
+1 Witchbane Orb

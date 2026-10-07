@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Trieste_-_Italy/Rampazzo_Gianmarco_-_Monogreen_Eldrazi_(Standard,_#1345).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Elvish Visionary
+2 Great Sable Stag
+4 Joraga Treespeaker
+3 Kozilek's Predator
+4 Leatherback Baloth
+4 Llanowar Elves
+4 Nest Invader
+2 River Boa
+1 Wolfbriar Elemental
+3 Eldrazi Monument
+2 Bestial Menace
+4 Overrun
+1 Garruk Wildspeaker
+18 Forest
+3 Khalni Garden
+2 Oran-Rief, the Vastwood
+[Sideboard]
+4 Fog
+4 Grazing Gladehart
+3 Naturalize

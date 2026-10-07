@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/MaxPoint_Gold_-_Phantasy_Hobbies/Brian_Hallahan_-_Infect_(Modern,_#83814).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Dark Confidant
+4 Glistener Elf
+4 Phyrexian Crusader
+4 Plague Stinger
+3 Dismember
+4 Groundswell
+1 Might of Old Krosa
+4 Mutagenic Growth
+2 Vines of Vastwood
+4 Inquisition of Kozilek
+2 Tezzeret's Gambit
+4 Rancor
+3 Forest
+4 Inkmoth Nexus
+3 Marsh Flats
+2 Overgrown Tomb
+1 Pendelhaven
+4 Swamp
+4 Verdant Catacombs
+[Sideboard]
+2 Abrupt Decay
+1 Creeping Corrosion
+2 Defense Grid
+3 Liliana of the Veil
+2 Nature's Claim
+2 Pithing Needle
+2 Torpor Orb

@@ -1,0 +1,7 @@
+Name:Stunning Shot
+ManaCost:1 W
+Types:Sorcery
+A:SP$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | SubAbility$ DBTap | SpellDescription$ Put two +1/+1 counters on up to one target creature you control. Tap up to one target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature an opponent controls | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ParentTarget | CounterType$ Stun | CounterNum$ 1
+Oracle:Put two +1/+1 counters on up to one target creature you control. Tap up to one target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

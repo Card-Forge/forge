@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Modern_Event_-_BAC_2013_Charleville_Mezi├¿res/David_Cohen_-_Rogue_(Modern,_#55314).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dark Confidant
+4 Deathrite Shaman
+4 Doran, the Siege Tower
+3 Geist of Saint Traft
+3 Loxodon Smiter
+4 Noble Hierarch
+3 Shadowmage Infiltrator
+4 Thalia, Guardian of Thraben
+3 Thorn of Amethyst
+4 Path to Exile
+4 Thoughtseize
+1 Breeding Pool
+2 Forest
+1 Godless Shrine
+1 Hallowed Fountain
+1 Island
+4 Marsh Flats
+1 Misty Rainforest
+2 Overgrown Tomb
+2 Plains
+1 Swamp
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+3 Abrupt Decay
+1 Leyline of Sanctity
+2 Rest in Peace
+4 Smallpox
+2 Stony Silence

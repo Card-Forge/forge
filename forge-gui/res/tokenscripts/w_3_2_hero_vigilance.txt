@@ -1,0 +1,7 @@
+Name:Hero Token
+ManaCost:no cost
+Colors:white
+Types:Creature Hero
+PT:3/2
+K:Vigilance
+Oracle:Vigilance

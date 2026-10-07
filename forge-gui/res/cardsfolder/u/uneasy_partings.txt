@@ -1,0 +1,6 @@
+Name:Uneasy Partings
+ManaCost:3 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | ValidTarget$ Creature.attacking+!token | EffectZone$ All | Description$ This spell costs {1} less to cast if it targets an attacking nontoken creature.
+A:SP$ ChangeZone | ValidTgts$ Creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Target creature's owner puts it on their choice of the top or bottom of their library.
+Oracle:This spell costs {1} less to cast if it targets an attacking nontoken creature.\nTarget creature's owner puts it on their choice of the top or bottom of their library.

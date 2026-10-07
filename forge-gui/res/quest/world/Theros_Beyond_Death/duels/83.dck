@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Coomback_-_Mill_(Modern,_#1031748).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Mesmeric Orb
+1 Crypt Incursion
+2 Cling to Dust
+2 Into the Story
+3 Fatal Push
+4 Archive Trap
+4 Drown in the Loch
+4 Surgical Extraction
+4 Visions of Beyond
+3 Inquisition of Kozilek
+4 Glimpse the Unthinkable
+1 Oboro, Palace in the Clouds
+1 Watery Grave
+2 Swamp
+2 Shelldock Isle
+2 Prismatic Vista
+2 Darkslick Shores
+3 Island
+4 Field of Ruin
+4 Polluted Delta
+[Sideboard]
+1 Crypt Incursion
+1 Set Adrift
+1 Grafdigger's Cage
+2 Ensnaring Bridge
+2 Echoing Truth
+2 Aether Gust
+2 Mystical Dispute
+2 Narset, Parter of Veils
+2 Dead of Winter

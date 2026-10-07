@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/David_Carson_-_Temur_Control_(Standard,_#1975311).dck
+Deck Type=constructed
+
+[Main]
+4 Aftermath Analyst
+3 Fallaji Archaeologist
+1 Kellan, Inquisitive Prodigy
+4 Nissa, Resurgent Animist
+1 Shigeki, Jukai Visionary
+1 Colossal Skyturtle
+1 Galvanic Iteration
+4 Memory Deluge
+4 Ill-Timed Explosion
+3 Virtue of Strength
+4 Worldsoul's Rage
+4 Brokers Hideout
+4 Cabaretti Courtyard
+1 Echoing Deeps
+4 Mountain
+4 Maestros Theater
+6 Forest
+1 Riveteers Overlook
+5 Island
+1 Plains
+[Sideboard]
+2 Negate
+1 End the Festivities
+2 Fog of War
+2 Lithomantic Barrage
+1 Malevolent Hermit
+1 Turn the Earth
+2 Abrade
+2 Vampires' Vengeance
+2 Elesh Norn, Mother of Machines

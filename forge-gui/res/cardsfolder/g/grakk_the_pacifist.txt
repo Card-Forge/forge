@@ -1,0 +1,9 @@
+Name:Grakk the Pacifist
+ManaCost:1 W
+Types:Legendary Creature Orc
+PT:4/3
+K:CARDNAME can't attack or block.
+T:Mode$ SpellCast | ValidCard$ Aura | Execute$ TrigDraw | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield+OppCtrl | ActivationLimit$ 1 | TriggerDescription$ Whenever you cast an Aura spell that targets a creature an opponent controls, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Aura
+Oracle:Grakk can't attack or block.\nWhenever you cast an Aura spell that targets a creature an opponent controls, draw a card. This ability triggers only once each turn.

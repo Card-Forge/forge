@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/AndreaMengucci_-_Boros_Burn_Modern_(Modern,_#2054070).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Mishra's Bauble
+4 Lightning Bolt
+3 Searing Blaze
+2 Skullcrack
+4 Boros Charm
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+4 Arid Mesa
+2 Bloodstained Mire
+4 Inspiring Vantage
+3 Mountain
+2 Sacred Foundry
+4 Sunbaked Canyon
+[Sideboard]
+2 Exquisite Firecraft
+3 Roiling Vortex
+3 Sanctifier en-Vec
+4 Smash to Smithereens
+3 Path to Exile

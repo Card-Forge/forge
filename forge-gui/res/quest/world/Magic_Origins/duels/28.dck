@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Fort_Walton_Beach/Derrick_Javier_-_Abzan_Aggro_(Standard,_#320891).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+3 Warden of the First Tree
+4 Abzan Charm
+4 Dromoka's Command
+2 Ultimate Price
+2 Sorin, Solemn Visitor
+2 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Elspeth, Sun's Champion
+2 Hero's Downfall
+2 Self-Inflicted Wound
+1 Tasigur, the Golden Fang
+4 Thoughtseize
+2 Tragic Arrogance

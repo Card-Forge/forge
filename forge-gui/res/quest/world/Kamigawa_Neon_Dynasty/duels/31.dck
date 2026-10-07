@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Chris_Huckabee_-_Boros_Aggro_(Standard,_#1417497).dck
+Deck Type=constructed
+
+[Main]
+4 Luminarch Aspirant
+4 Brutal Cathar
+4 Bloodthirsty Adversary
+4 Sunrise Cavalier
+4 Hopeful Initiate
+4 Kumano Faces Kakkazan
+4 Thundering Raiju
+1 Valorous Stance
+4 Play with Fire
+4 Roil Eruption
+1 Sokenzan, Crucible of Defiance
+2 Furycalm Snarl
+4 Needleverge Pathway
+7 Plains
+9 Mountain
+[Sideboard]

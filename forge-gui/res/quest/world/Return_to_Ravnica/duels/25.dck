@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/Grand_Prix_Nagoya/Tatsuya_T_-_BR_Zombies_(Standard,_#42020).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+3 Hellrider
+4 Knight of Infamy
+3 Thundermaw Hellkite
+3 Brimstone Volley
+3 Searing Spear
+4 Pillar of Flame
+4 Blood Crypt
+2 Cavern of Souls
+4 Dragonskull Summit
+1 Mountain
+4 Rakdos Guildgate
+9 Swamp
+[Sideboard]
+2 Bonfire of the Damned
+2 Dreadbore
+1 Electrickery
+3 Mark of Mutiny
+2 Underworld Connections
+3 Vampire Nighthawk
+2 Zealous Conscripts

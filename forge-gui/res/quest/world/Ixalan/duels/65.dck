@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Robot65
+Title=Robot65
+Icon=Eldrazi.jpg
+Difficulty=Easy
+Description=Ramunap Red 
+Deck Type=constructed
+
+[Main]
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+1 Harsh Mentor
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+4 Soul-Scar Mage
+4 Abrade
+4 Lightning Strike
+3 Shock
+1 Chandra, Torch of Defiance
+15 Mountain
+4 Ramunap Ruins
+1 Scavenger Grounds
+4 Sunscorched Desert
+[Sideboard]
+2 Chandra's Defeat
+2 Chandra, Torch of Defiance
+2 Glorybringer
+3 Harsh Mentor
+4 Rampaging Ferocidon
+2 Sorcerous Spyglass

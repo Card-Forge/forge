@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Leprechaun
+Title=Leprechaun
+Icon=Leprechaun.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Austin_Black_-_Domain_Zoo_(Modern,_#2260075).dck
+Deck Type=constructed
+
+[Main]
+3 Phlage, Titan of Fire's Fury
+4 Territorial Kavu
+4 Scion of Draco
+4 Ragavan, Nimble Pilferer
+3 Orcish Bowmasters
+1 Bonecrusher Giant
+1 Screaming Nemesis
+3 Stubborn Denial
+4 Lightning Bolt
+4 Tribal Flames
+4 Leyline of the Guildpact
+4 Leyline Binding
+4 Arid Mesa
+4 Flooded Strand
+4 Wooded Foothills
+1 Blood Crypt
+1 Temple Garden
+1 Steam Vents
+1 Sacred Foundry
+1 Xander's Lounge
+1 Lush Portico
+1 Arena of Glory
+1 Plains
+1 Mountain
+[Sideboard]
+2 Suncleanser
+3 Consign to Memory
+2 Damping Sphere
+1 Jegantha, the Wellspring
+3 Obsidian Charmaw
+2 Pyroclasm
+2 Ghost Vacuum

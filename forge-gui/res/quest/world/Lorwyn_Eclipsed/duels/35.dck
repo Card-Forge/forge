@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes
+Title=Sherlock Holmes
+Icon=Sherlock Holmes.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Gavin_Meagher_-_Izzet_Prowess_(Standard,_#2822769).dck
+Deck Type=constructed
+
+[Main]
+4 Elusive Otter
+4 Slickshot Show-Off
+2 Drake Hatcher
+4 Burst Lightning
+4 Opt
+1 Bounce Off
+1 Into the Flood Maw
+1 Secret Identity
+4 Boomerang Basics
+4 Sleight of Hand
+4 Stock Up
+2 Wild Ride
+4 Stormchaser's Talent
+5 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+3 Multiversal Passage
+1 Willowrush Verge
+[Sideboard]
+3 Ral, Crackling Wit
+2 Sear
+2 Spell Pierce
+2 Torch the Tower
+1 Abrade
+1 Annul
+1 Soul-Guide Lantern
+1 Spell Snare
+1 Torpor Orb
+1 Witchstalker Frenzy

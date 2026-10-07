@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/AFreshOne_-_Azorius_Oculus_(Standard,_#2275276).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Haughty Djinn
+1 Kiora, the Rising Tide
+4 Picklock Prankster
+3 Into the Flood Maw
+2 Three Steps Ahead
+3 Phantom Interference
+3 Soul Partition
+4 Moment of Truth
+4 Sleight of Hand
+4 Helping Hand
+2 Recommission
+2 Chart a Course
+4 Adarkar Wastes
+4 Island
+1 Plains
+3 Floodfarm Verge
+4 Seachrome Coast
+4 Meticulous Archive
+[Sideboard]
+3 Devout Decree
+4 Monastery Mentor
+2 Split Up
+2 Exorcise
+3 Negate
+1 Into the Flood Maw

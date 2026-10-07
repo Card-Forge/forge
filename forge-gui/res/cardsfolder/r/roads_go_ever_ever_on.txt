@@ -1,0 +1,13 @@
+Name:Roads Go Ever, Ever On
+ManaCost:1 W
+Types:Enchantment Saga
+K:Chapter:4:DBExile,DBChangeZone,DBChangeZone,DBEffect
+SVar:DBExile:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Plains.Basic | ChangeNum$ 2 | SubAbility$ DBGainLife | SpellDescription$ Search your library for up to two basic Plains cards, exile them, then shuffle. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBChangeZone:DB$ ChangeZone | Mandatory$ True | Hidden$ True | Origin$ Exile | Destination$ Hand | ChangeType$ Card.ExiledWithSource | ChangeTypeDesc$ card exiled with this Saga | ChangeNum$ 1 | SpellDescription$ Put a card exiled with this Saga into its owner's hand.
+SVar:DBEffect:DB$ Effect | Triggers$ AttackTrigger | SpellDescription$ Whenever you attack this turn, target creature you control gets +1/+1 until end of turn for each Plains you control.
+SVar:AttackTrigger:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack this turn, target creature you control gets +1/+1 until end of turn for each Plains you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Plains.YouCtrl
+SVar:BuffedBy:Plains
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Search your library for up to two basic Plains cards, exile them, then shuffle. You gain 2 life.\nII, III — Put a card exiled with this Saga into its owner's hand.\nIV — Whenever you attack this turn, target creature you control gets +1/+1 until end of turn for each Plains you control.

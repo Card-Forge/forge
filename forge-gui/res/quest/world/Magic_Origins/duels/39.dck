@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Easy
+Description=Magic_Origins/Standard_Champs_#8619053/haiSOOOOdesu_-_Abzan_Control_(Standard,_#317532).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+4 Satyr Wayfinder
+4 Siege Rhino
+4 Abzan Charm
+2 Bile Blight
+2 Hero's Downfall
+2 Languish
+4 Thoughtseize
+2 Elspeth, Sun's Champion
+2 Forest
+4 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+3 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Dromoka's Command
+2 Herald of Torment
+2 Nyx-Fleece Ram
+2 Tragic Arrogance
+3 Ultimate Price
+2 Wingmate Roc

@@ -1,0 +1,9 @@
+Name:Hero in Training
+ManaCost:2 W
+Types:Creature Human Hero
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card. If you control another Hero, you gain 2 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionPresent$ Hero.YouCtrl+StrictlyOther
+DeckHints:Type$Hero
+Oracle:When this creature enters, draw a card. If you control another Hero, you gain 2 life.

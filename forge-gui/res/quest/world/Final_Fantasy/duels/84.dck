@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee
+Title=Crocodile Dundee
+Icon=Crocodile Dundee.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/modorra_-_deck_(Modern,_#2520207).dck
+Deck Type=constructed
+
+[Main]
+2 Fear of Missing Out
+4 Summon: Bahamut
+4 Bloodbraid Marauder
+4 Cache Grab
+2 Cathartic Pyre
+4 Malevolent Rumble
+4 Resurgent Belief
+4 Leyline Binding
+3 Bitter Reunion
+3 Overwhelming Splendor
+4 Omniscience
+1 Commercial District
+2 Lush Portico
+4 Shifting Woodland
+2 Temple Garden
+1 Stomping Ground
+1 Sacred Foundry
+4 Wooded Foothills
+4 Windswept Heath
+1 Plains
+1 Forest
+1 Zagoth Triome
+[Sideboard]
+2 Unlicensed Hearse
+4 Wrath of the Skies
+1 Heritage Reclamation
+3 Dead // Gone
+1 Pyroclasm
+1 Stony Silence
+3 Wear // Tear

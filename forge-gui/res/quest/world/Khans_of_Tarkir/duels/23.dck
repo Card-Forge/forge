@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/MaxPoint_Silver_-_Kings_Landing/Robert_Perriello_-_Sultai_Reanimator_(Standard,_#162025).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+3 Eidolon of Blossoms
+3 Hornet Queen
+1 Pharika, God of Affliction
+1 Reclamation Sage
+4 Satyr Wayfinder
+3 Sidisi, Brood Tyrant
+4 Sylvan Caryatid
+3 Whip of Erebos
+4 Murderous Cut
+3 Sultai Charm
+2 Ashiok, Nightmare Weaver
+4 Forest
+1 Island
+3 Llanowar Wastes
+4 Opulent Palace
+3 Polluted Delta
+2 Swamp
+3 Temple of Malady
+1 Temple of Mystery
+3 Yavimaya Coast
+[Sideboard]
+2 Agent of Erebos
+3 Hero's Downfall
+1 Soul of Innistrad
+4 Thoughtseize

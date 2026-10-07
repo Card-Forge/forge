@@ -1,6 +1,6 @@
 Name:Investigator's Journal
 ManaCost:2
-Types:Artifact Clue
+Types:Artifact Book Clue
 K:etbCounter:SUSPECT:X:no Condition:CARDNAME enters with a number of suspect counters on it equal to the greatest number of creatures a player controls.
 SVar:X:PlayerCountPlayers$HighestValid Creature.YouCtrl
 A:AB$ Draw | Cost$ 2 T SubCounter<1/SUSPECT> | NumCards$ 1 | SpellDescription$ Draw a card.

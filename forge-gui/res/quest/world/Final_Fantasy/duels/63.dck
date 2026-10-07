@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Shango
+Title=Shango
+Icon=Shango.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Nazariog_-_Naya_landfall_(Modern,_#2514383).dck
+Deck Type=constructed
+
+[Main]
+4 Akoum Hellhound
+1 Legion Loyalist
+4 Monastery Swiftspear
+4 Sazh's Chocobo
+3 Steppe Lynx
+2 Traveling Chocobo
+3 Atarka's Command
+3 Groundswell
+4 Lightning Bolt
+3 Lightning Helix
+3 Mutagenic Growth
+2 Searing Blaze
+4 Wrenn and Six
+4 Arid Mesa
+2 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+1 Temple of Abandon
+4 Wooded Foothills
+4 Mountain
+2 Forest
+[Sideboard]
+4 Path to Exile
+2 Rancor

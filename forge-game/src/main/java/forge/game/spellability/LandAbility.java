@@ -63,7 +63,7 @@ public class LandAbility extends AbilityStatic {
     @Override
     public void resolve() {
         getHostCard().setSplitStateToPlayAbility(this);
-        final Card result = getActivatingPlayer().playLandNoCheck(getHostCard(), this);
+        final Card result = getActivatingPlayer().playLand(getHostCard(), this);
 
         // increase mayplay used
         if (getMayPlay() != null) {

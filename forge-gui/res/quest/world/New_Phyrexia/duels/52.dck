@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/µÖ┤ÒéîÒéïÕ▒ïÒâóÒâÇÒâ│µØ»_-_2014-12-23┬á/Nakashima_Tatsuya_-_µäƒµƒô_-_Infect_(Modern,_#144927).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+3 Dismember
+4 Giant Growth
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+1 Inquisition of Kozilek
+1 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+1 Windswept Heath
+[Sideboard]
+4 AEther Vial
+4 Phyrexian Crusader
+3 Thoughtseize
+3 Twisted Image

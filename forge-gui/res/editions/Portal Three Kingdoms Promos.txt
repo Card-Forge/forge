@@ -1,7 +1,7 @@
 [metadata]
 Code=PPTK
-Date=1999-07-01
-Name=Portal: Three Kingdoms Promos
+Date=1999-05-01
+Name=Portal Three Kingdoms Promos
 Type=Promo
 ScryfallCode=PPTK
 

@@ -154,9 +154,8 @@ public class SacrificeAi extends SpellAbilityAi {
 
                     if (c.hasSVar("SacMe") || isLethal) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -217,6 +216,13 @@ public class SacrificeAi extends SpellAbilityAi {
             if (!p.sameTeam(payer)) {
                 return false;
             }
+        }
+
+        // don't keep paying for an "exile until leaves" permanent that no longer exiles anything (e.g. Static Prison)
+        final Card source = sa.getHostCard();
+        if (source.hasSVar("OblivionRing") && "Self".equals(sa.getParamOrDefault("SacValid", "Self"))
+                && source.getUntilLeavesBattlefield().isEmpty()) {
+            return false;
         }
 
         return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);

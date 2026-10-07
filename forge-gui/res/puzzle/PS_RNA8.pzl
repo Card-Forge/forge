@@ -8,7 +8,6 @@ Description:Win this turn. Assume any cards drawn from your library are irreleva
 [state]
 humanlife=20
 ailife=12
-humanlandsplayed=0
 turn=1
 activeplayer=human
 activephase=MAIN1

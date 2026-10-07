@@ -1,0 +1,8 @@
+Name:Uugguu, the Omniplasm
+ManaCost:B G U
+Types:Legendary Creature Ooze
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Ooze.Other+!token+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken Ooze creature you control dies, create two tokens that are copies of that creature, except they're 2/2 and they aren't legendary.
+SVar:TrigCopy:DB$ CopyPermanent | NumCopies$ 2 | Defined$ TriggeredCardLKICopy | SetPower$ 2 | SetToughness$ 2 | NonLegendary$ True
+DeckHints:Type$Ooze
+Oracle:Whenever another nontoken Ooze creature you control dies, create two tokens that are copies of that creature, except they're 2/2 and they aren't legendary.

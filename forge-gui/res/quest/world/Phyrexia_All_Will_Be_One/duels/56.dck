@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Kikuchi_Masaru_-_Library_Destruction_(Modern,_#1581507).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+4 Fatal Push
+4 Visions of Beyond
+4 Archive Trap
+2 Surgical Extraction
+4 Drown in the Loch
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+3 Jace, the Perfected Mind
+4 Island
+1 Swamp
+4 Field of Ruin
+2 Watery Grave
+4 Polluted Delta
+1 Shelldock Isle
+3 Misty Rainforest
+1 Mikokoro, Center of the Sea
+1 Oboro, Palace in the Clouds
+1 Darkslick Shores
+1 Otawara, Soaring City
+[Sideboard]
+1 Echoing Truth
+2 Crypt Incursion
+2 Ensnaring Bridge
+2 Ratchet Bomb
+3 Extirpate
+1 Ulamog, the Infinite Gyre
+2 Mystical Dispute
+2 Soul-Guide Lantern

@@ -1,0 +1,9 @@
+Name:Ultron, Artificial Malevolence
+ManaCost:3
+Types:Legendary Artifact Creature Robot Villain
+PT:2/4
+T:Mode$ ChangesZone | ValidCard$ Artifact.!token+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of it. If the token isn't a creature, it becomes a 2/2 Robot Villain creature in addition to its other types.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 2 | Defined$ TriggeredCardLKICopy | RememberTokens$ True | SubAbility$ DBAnimateAll
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Card.IsRemembered+nonCreature | Types$ Robot,Villain,Creature | Duration$ Permanent | Power$ 2 | Toughness$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of it. If the token isn't a creature, it becomes a 2/2 Robot Villain creature in addition to its other types.

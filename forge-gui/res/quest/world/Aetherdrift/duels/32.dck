@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Daiki_Okamoto_-_Dimir_Midrange_(Standard,_#2367793).dck
+Deck Type=constructed
+
+[Main]
+4 Spyglass Siren
+3 Fear of Isolation
+4 Floodpits Drowner
+3 Preacher of the Schism
+2 Enduring Curiosity
+1 Ertai Resurrected
+1 Sheoldred, the Apocalypse
+3 Phantom Interference
+3 Cut Down
+2 Anoint with Affliction
+3 Go for the Throat
+2 Nowhere to Run
+4 Kaito, Bane of Nightmares
+4 Darkslick Shores
+4 Gloomlake Verge
+5 Island
+2 Restless Reef
+3 Soulstone Sanctuary
+3 Swamp
+1 Undercity Sewers
+3 Underground River
+[Sideboard]
+2 Spell Pierce
+2 Duress
+2 Ghost Vacuum
+2 Caelorna, Coral Tyrant
+1 Disdainful Stroke
+1 Negate
+1 Anoint with Affliction
+2 Tishana's Tidebinder
+1 Sheoldred, the Apocalypse
+1 Gix's Command

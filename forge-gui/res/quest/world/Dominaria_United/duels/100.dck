@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Fukuda_Wataru_-_Jund_(Modern,_#1527753).dck
+Deck Type=constructed
+
+[Main]
+1 Soul of Windgrace
+1 Fable of the Mirror-Breaker
+2 Fury
+2 Dauthi Voidwalker
+2 Seasoned Pyromancer
+4 Ignoble Hierarch
+4 Ragavan, Nimble Pilferer
+4 Tarmogoyf
+1 Riveteers Charm
+1 Assassin's Trophy
+1 Kolaghan's Command
+3 Lightning Bolt
+3 Thoughtseize
+3 Inquisition of Kozilek
+3 Liliana of the Veil
+4 Wrenn and Six
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Forest
+1 Blood Crypt
+1 Stomping Ground
+1 Overgrown Tomb
+2 Wooded Foothills
+2 Bloodstained Mire
+2 Boseiju, Who Endures
+2 Nurturing Peatland
+2 Blackcleave Cliffs
+4 Verdant Catacombs
+[Sideboard]
+1 Tear Asunder
+1 Weather the Storm
+1 Force of Vigor
+1 Ashiok, Dream Render
+1 Damnation
+1 Slaughter Games
+1 Magus of the Moon
+2 Endurance
+2 Obsidian Charmaw
+2 Engineered Explosives
+2 Collective Brutality

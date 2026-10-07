@@ -125,7 +125,7 @@ ScryfallCode=RNA
 112 U Rumbling Ruin @Jakub Kasper
 113 C Scorchmark @Jason Felix
 114 M Skarrgan Hellkite @Svetlin Velinov
-115 C Skewer the Critics @Heonhwa Choe
+115 C Skewer the Critics @Heonhwa
 116 U Smelt-Ward Ignus @Jehan Choo
 117 C Spear Spewer @Carl Critchlow
 118 C Spikewheel Acrobat @Deruchenko Alexander

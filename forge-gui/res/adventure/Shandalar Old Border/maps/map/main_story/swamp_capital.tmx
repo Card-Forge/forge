@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40" opacity="0.9">
   <data encoding="base64" compression="zlib">
    eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
@@ -35,22 +35,22 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="361" y="371"/>
-  <object id="53" template="../../../../../../common/maps/obj/spellsmith.tx" x="376" y="194"/>
-  <object id="55" template="../../../../../../common/maps/obj/shop.tx" x="416" y="402">
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="361" y="371"/>
+  <object id="53" template="../../../../common/maps/obj/spellsmith.tx" x="376" y="194"/>
+  <object id="55" template="../../../../common/maps/obj/shop.tx" x="416" y="402">
    <properties>
     <property name="commonShopList" value="Swamp"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="58" template="../../../../../../common/maps/obj/entry_up.tx" x="258" y="639" width="97" height="20">
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="258" y="639" width="97" height="20">
    <properties>
     <property name="spawn" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="59" template="../../../../../../common/maps/obj/entry_left.tx" x="354" y="635" width="16" height="197.002" rotation="0"/>
-  <object id="60" template="../../../../../../common/maps/obj/entry_right.tx" x="242" y="642" width="16" height="198"/>
-  <object id="61" template="../../../../../../common/maps/obj/arena.tx" x="168" y="178">
+  <object id="59" template="../../../../common/maps/obj/entry_left.tx" x="354" y="635" width="16" height="197.002" rotation="0"/>
+  <object id="60" template="../../../../common/maps/obj/entry_right.tx" x="242" y="642" width="16" height="198"/>
+  <object id="61" template="../../../../common/maps/obj/arena.tx" x="168" y="178">
    <properties>
     <property name="arena">{
 
@@ -94,55 +94,55 @@
 }</property>
    </properties>
   </object>
-  <object id="62" template="../../../../../../common/maps/obj/shop.tx" x="216" y="241">
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="216" y="241">
    <properties>
     <property name="commonShopList" value="BlackItems"/>
     <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="63" template="../../../../../../common/maps/obj/shop.tx" x="115" y="241">
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="115" y="241">
    <properties>
     <property name="commonShopList" value="ColorlessEquipment"/>
     <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/shop.tx" x="376" y="322">
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="376" y="322">
    <properties>
     <property name="commonShopList" value="CityCreatureBlack"/>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/shop.tx" x="424" y="274">
+  <object id="66" template="../../../../common/maps/obj/shop.tx" x="424" y="274">
    <properties>
     <property name="commonShopList" value="CityEnchantmentBlack"/>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/shop.tx" x="424" y="322">
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="424" y="322">
    <properties>
     <property name="commonShopList" value="CitySpellBlack"/>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/shop.tx" x="520" y="274">
+  <object id="70" template="../../../../common/maps/obj/shop.tx" x="520" y="274">
    <properties>
     <property name="commonShopList" value="ColorlessBoosterPackShop"/>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="81" template="../../../../../../common/maps/obj/quest.tx" type="quest" x="248" y="306">
+  <object id="81" template="../../../../common/maps/obj/quest.tx" type="quest" x="248" y="306">
    <properties>
     <property name="questtype" value="swamp_capital"/>
    </properties>
   </object>
-  <object id="93" template="../../../../../../common/maps/obj/shardtrader.tx" x="152" y="339">
+  <object id="93" template="../../../../common/maps/obj/shardtrader.tx" x="152" y="339">
    <properties>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="94" template="../../../../../../common/maps/obj/shop.tx" x="472" y="274">
+  <object id="94" template="../../../../common/maps/obj/shop.tx" x="472" y="274">
    <properties>
     <property name="commonShopList" value="CityLandBlack"/>
     <property name="signYOffset" type="float" value="-8"/>

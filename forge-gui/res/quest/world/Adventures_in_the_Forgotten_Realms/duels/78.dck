@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Tom Bombadil
+Title=Tom Bombadil
+Icon=Tom Bombadil.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Dominic_Morel_-_Puresteel_Paladin_(Modern,_#1222411)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Giver of Runes
+3 Ingenious Smith
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+1 Shadowspear
+1 Cranial Plating
+3 Springleaf Drum
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid
+2 Silent Clearing
+2 Sunbaked Canyon
+4 Inkmoth Nexus
+9 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Pithing Needle
+1 Prismatic Ending
+1 Path to Exile
+2 Hushbringer
+2 Void Mirror
+2 Seal of Cleansing
+2 Soul-Guide Lantern
+3 Sanctifier en-Vec

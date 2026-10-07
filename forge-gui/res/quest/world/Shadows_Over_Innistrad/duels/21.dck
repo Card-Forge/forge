@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/PPTQ_Games_Academy_-_Mantova,_Italy/Claudio_Mineri_-_Bant_(Standard,_#628877).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+4 Duskwatch Recruiter
+4 Eldrazi Displacer
+3 Jace, Vryn's Prodigy
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+4 Forest
+1 Island
+3 Lumbering Falls
+2 Plains
+4 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+2 Declaration in Stone
+1 Dragonlord Dromoka
+1 Gryff's Boon
+4 Lambholt Pacifist
+3 Negate
+3 Tragic Arrogance

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Prince Valiant
+Title=Prince Valiant
+Icon=Prince Valiant.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Kitagawa_Yoshihiko_-_Jund_Heroes_(Modern,_#1554843).dck
+Deck Type=constructed
+
+[Main]
+4 Tarmogoyf
+4 Ragavan, Nimble Pilferer
+4 Fable of the Mirror-Breaker
+1 Soul of Windgrace
+1 Haywire Mite
+1 Pyrite Spellbomb
+1 Nihil Spellbomb
+1 Shadowspear
+4 Fatal Push
+1 Kolaghan's Command
+2 Lightning Bolt
+2 Sheoldred's Edict
+3 Thoughtseize
+3 Inquisition of Kozilek
+4 Urza's Saga
+4 Wrenn and Six
+1 Swamp
+1 Mountain
+1 Forest
+2 Blood Crypt
+1 Stomping Ground
+4 Bloodstained Mire
+2 Wooded Foothills
+4 Verdant Catacombs
+1 Overgrown Tomb
+1 Blackcleave Cliffs
+1 Boseiju, Who Endures
+1 Ziatora's Proving Ground
+[Sideboard]
+1 Kolaghan's Command
+2 Collective Brutality
+3 Engineered Explosives
+2 Alpine Moon
+1 Nihil Spellbomb
+2 Tourach, Dread Cantor
+2 Boseiju, Who Endures
+2 Unlicensed Hearse

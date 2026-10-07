@@ -1,0 +1,14 @@
+Name:Sauron, Dino Devotee
+ManaCost:3 G G
+Types:Legendary Creature Dinosaur Vampire Villain
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBGainLife,DBPutCounter
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SpellDescription$ Cure Cancer — You gain 3 life.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | CounterType$ SAURIAN | CounterNum$ 1 | RememberCards$ True | SubAbility$ DBEffect | SpellDescription$ Turn People into Dinosaurs — Put a saurian counter on another target creature. It's a green Dinosaur with base power and toughness 5/5 for as long as it has a saurian counter on it.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ SauronStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ SAURIAN | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SauronStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ 5 | SetToughness$ 5 | SetColor$ Green | AddType$ Dinosaur | RemoveCreatureTypes$ True | Description$ Remembered permanent is a green Dinosaur with base power and toughness 5/5 for as long as it has a saurian counter on it.
+Oracle:Flying\nWhenever Sauron enters or attacks, choose one —\n• Cure Cancer — You gain 3 life.\n• Turn People into Dinosaurs — Put a saurian counter on another target creature. It's a green Dinosaur with base power and toughness 5/5 for as long as it has a saurian counter on it.

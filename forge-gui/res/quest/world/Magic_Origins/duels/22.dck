@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Fredericton,/Christopher_Hare_-_G-W_Aggro_(Standard,_#317840).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Boon Satyr
+2 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+4 Elvish Mystic
+4 Fleecemane Lion
+2 Hidden Dragonslayer
+3 Nissa, Vastwood Seer
+2 Warden of the First Tree
+1 Wingmate Roc
+3 Dromoka's Command
+3 Valorous Stance
+1 Ajani, Mentor of Heroes
+1 Blossoming Sands
+8 Forest
+1 Mana Confluence
+6 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+2 Arashin Cleric
+2 Evolutionary Leap
+1 Glare of Heresy
+4 Hangarback Walker
+1 Setessan Tactics
+2 Tragic Arrogance
+2 Unravel the AEther

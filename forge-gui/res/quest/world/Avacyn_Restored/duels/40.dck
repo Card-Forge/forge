@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Oya
+Title=Oya
+Icon=Oya.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/Standard_Gold_TCQ_-_Leominster,_MA/BrianEmerald_-_GW_Humans_(Standard,_#37237).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+3 Birds of Paradise
+4 Champion of the Parish
+1 Doomed Traveler
+1 Fiend Hunter
+4 Hero of Bladehold
+2 Loyal Cathar
+4 Mayor of Avabruck
+2 Mirran Crusader
+4 Silverblade Paladin
+2 Revenge of the Hunted
+2 Angelic Destiny
+2 Oblivion Ring
+2 Rancor
+3 Cavern of Souls
+3 Forest
+3 Gavony Township
+6 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+3 Act of Aggression
+2 Dismember
+3 Grafdigger's Cage
+2 Sword of Feast and Famine
+3 Thalia, Guardian of Thraben

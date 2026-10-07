@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Andrea_Cislaghi_-_Rakdos_Sacrifice_(Jegantha)_(Standard,_#1189946).dck
+Deck Type=constructed
+
+[Main]
+2 Valki, God of Lies
+3 Kroxa, Titan of Death's Hunger
+4 Mire Triton
+4 Woe Strider
+4 Bonecrusher Giant
+4 Immersturm Predator
+1 Kazuul's Fury
+1 Baleful Mastery
+2 Heartless Act
+4 Village Rites
+4 Claim the Firstborn
+3 The Akroan War
+1 Castle Locthwain
+1 Den of the Bugbear
+2 Temple of Malice
+2 Hive of the Eye Tyrant
+4 Fabled Passage
+4 Blightstep Pathway
+4 Mountain
+6 Swamp
+[Sideboard]
+1 Elspeth's Nightmare
+1 Jegantha, the Wellspring
+2 Heartless Act
+2 Redcap Melee
+3 Roiling Vortex
+3 Skyclave Shade
+3 Duress

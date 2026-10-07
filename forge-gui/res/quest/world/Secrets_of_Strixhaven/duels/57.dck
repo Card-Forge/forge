@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Fruitkid_-_Mono-Blue_Merfolk_(Modern,_#2941509).dck
+Deck Type=constructed
+
+[Main]
+4 Floodpits Drowner
+4 Glasspool Mimic
+4 Harbinger of the Seas
+4 Master of the Pearl Trident
+3 Subtlety
+3 Svyelun of Sea and Sky
+3 Tide Shaper
+2 Harmonized Trio
+2 Lord of Atlantis
+2 Mindspring Merfolk
+2 Tishana's Tidebinder
+4 Aether Vial
+4 Sink into Stupor
+3 Force of Negation
+2 Counterspell
+2 Lórien Revealed
+6 Island
+2 Cavern of Souls
+2 Mutavault
+1 Otawara, Soaring City
+1 Waterlogged Grove
+[Sideboard]
+4 Consign to Memory
+3 Spell Snare
+2 Champions of the Shoal
+2 Mystical Dispute
+2 Stern Scolding
+1 The Ooze
+1 Unlicensed Hearse

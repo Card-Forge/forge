@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Neith
+Title=Neith
+Icon=Neith.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/ArZeuS24_-_Dimir_Death's_Shadow_(Modern,_#1976936).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Death's Shadow
+1 Brazen Borrower
+3 Murktide Regent
+2 Sauron's Ransom
+1 Dismember
+3 Stubborn Denial
+4 Counterspell
+4 Fatal Push
+3 Drown in the Loch
+3 Consider
+4 Preordain
+4 Thoughtseize
+2 Dress Down
+1 Darkslick Shores
+2 Island
+3 Polluted Delta
+4 Watery Grave
+4 Flooded Strand
+3 Misty Rainforest
+1 Otawara, Soaring City
+[Sideboard]
+2 Sheoldred's Edict
+2 Stern Scolding
+2 Tishana's Tidebinder
+2 Hibernation
+2 Engineered Explosives
+1 Emrakul, the Aeons Torn
+2 Nihil Spellbomb
+2 Break the Ice

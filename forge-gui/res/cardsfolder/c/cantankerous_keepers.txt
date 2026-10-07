@@ -1,0 +1,11 @@
+Name:Cantankerous Keepers
+ManaCost:5 G
+Types:Creature Elf Soldier
+PT:4/3
+K:Affinity:Elf
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill four cards, then put all Elf cards from among them into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Elf.IsRemembered | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Elf
+Oracle:Affinity for Elves (This spell costs {1} less to cast for each Elf you control.)\nWhen this creature enters, mill four cards, then put all Elf cards from among them into your hand.

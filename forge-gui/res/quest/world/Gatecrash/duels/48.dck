@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=PapaLegba
+Title=PapaLegba
+Icon=PapaLegba.jpg
+Difficulty=Easy
+Description=Gatecrash/Grand_Prix_2013_Yokohama_-_Grinders_Winners/Takahashi_Hidekazu_-_Gruul_Aggro_(Standard,_#47175).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Firefist Striker
+4 Flinthoof Boar
+3 Legion Loyalist
+3 Lightning Mauler
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+3 Rancor
+11 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+3 Domri Rade
+4 Forge Devil
+4 Mizzium Mortars
+4 Pillar of Flame

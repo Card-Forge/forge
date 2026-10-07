@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Foo_ZhiJie_-_UB_Control_(Standard,_#2073040).dck
+Deck Type=constructed
+
+[Main]
+2 Tishana's Tidebinder
+1 Aclazotz, Deepest Betrayal
+1 Negate
+3 Go for the Throat
+4 Memory Deluge
+2 Cut Down
+1 Sheoldred's Edict
+4 Deduce
+2 Long Goodbye
+1 Phantom Interference
+3 Three Steps Ahead
+1 Duress
+2 Path of Peril
+4 Deadly Cover-Up
+2 Jace, the Perfected Mind
+3 Island
+3 Swamp
+3 Field of Ruin
+1 Underground River
+3 Darkslick Shores
+4 Shipwreck Marsh
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+1 Raffine's Tower
+1 Demolition Field
+1 Mirrex
+4 Restless Reef
+1 Sunken Citadel
+[Sideboard]
+2 Negate
+1 Duress
+1 Siphon Insight
+1 Hullbreaker Horror
+1 Parasitic Grasp
+1 Path of Peril
+1 March of Wretched Sorrow
+2 Unlicensed Hearse
+2 Sheoldred, the Apocalypse
+1 Chrome Host Seedshark
+1 Tishana's Tidebinder
+1 Outrageous Robbery

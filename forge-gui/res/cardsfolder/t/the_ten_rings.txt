@@ -1,0 +1,9 @@
+Name:The Ten Rings
+ManaCost:8
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 10 | Description$ Your maximum hand size is ten.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT10 | TriggerDescription$ At the beginning of your end step, if you have fewer than ten cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
+SVar:X:Count$ValidHand Card.YouOwn
+SVar:Difference:Number$10/Minus.X
+Oracle:Your maximum hand size is ten.\nAt the beginning of your end step, if you have fewer than ten cards in hand, draw cards equal to the difference.

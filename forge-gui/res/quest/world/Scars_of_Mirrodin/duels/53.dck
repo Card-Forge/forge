@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Hard
+Description=../Modern/Scars_of_Mirrodin/Arcore_(MI)_-_Gran_Modern/Isella_Matteo_-_Zoo_(Modern,_#22582).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Figure of Destiny
+2 Gaddock Teeg
+4 Goblin Guide
+3 Grim Lavamancer
+3 Kird Ape
+3 Knight of the Reliquary
+3 Loam Lion
+1 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+1 Ajani Vengeant
+1 Elspeth, Knight-Errant
+1 Arid Mesa
+1 Forest
+1 Horizon Canopy
+2 Marsh Flats
+1 Misty Rainforest
+1 Mountain
+1 Plains
+1 Razorverge Thicket
+4 Sacred Foundry
+3 Stomping Ground
+2 Temple Garden
+2 Verdant Catacombs
+[Sideboard]
+3 Burning-Tree Shaman
+2 Krosan Grip
+3 Mindbreak Trap
+2 Qasali Pridemage
+2 Shattering Spree
+1 Sword of Body and Mind
+1 Sword of Fire and Ice
+1 Sword of Light and Shadow

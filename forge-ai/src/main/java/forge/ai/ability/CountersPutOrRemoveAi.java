@@ -17,7 +17,6 @@
  */
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -31,7 +30,6 @@ import forge.game.zone.ZoneType;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 /**
  * <p>
@@ -54,9 +52,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (doTgt(ai, sa, false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
         return super.checkApiLogic(ai, sa);
     }
@@ -102,10 +99,10 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
             if (!countersList.isEmpty()) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+                boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
                 if (maritEmpty) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
-                            CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterEnumType.ICE));
+                            CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterType.getType("ICE")));
 
                     if (!depthsList.isEmpty()) {
                         sa.getTargets().add(depthsList.getFirst());
@@ -158,7 +155,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 if (!oppList.isEmpty()) {
                     final Card best = ComputerUtilCard.getBestAI(oppList);
 
-                    for (final CounterType aType : best.getCounters().keySet()) {
+                    for (final CounterType aType : best.getCounters().elementSet()) {
                         if (!ComputerUtil.isNegativeCounter(aType, best)) {
                             sa.getTargets().add(best);
                             return true;
@@ -188,9 +185,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 // if we can target, then we can play it
                 if (sa.isTargetNumberValid()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             } else {
                 // if we can't target, then we can't play it
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -199,10 +195,9 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         if (mandatory) {
             // if mandatory, just play it
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // if not mandatory, check if we can play it
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        // if not mandatory, check if we can play it
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*
@@ -216,6 +211,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         final Player ai = sa.getActivatingPlayer();
 
         Card tgt = (Card) params.get("Target");
+
+        CounterType ice = CounterType.getType("ICE");
 
         // planeswalker has high priority for loyalty counters
         if (tgt.isPlaneswalker() && options.contains(CounterEnumType.LOYALTY)) {
@@ -241,12 +238,12 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             }
         } else {
             // this counters are treat first to be removed
-            if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterEnumType.ICE)) {
+            if ("Dark Depths".equals(tgt.getName()) && options.contains(ice)) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+                boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
 
                 if (maritEmpty) {
-                    return CounterEnumType.ICE;
+                    return ice;
                 }
             } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterEnumType.P1P1)) {
                 return CounterEnumType.P1P1;
@@ -279,6 +276,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
             Card tgt = (Card) params.get("Target");
             CounterType type = (CounterType) params.get("CounterType");
+            CounterType ice = CounterType.getType("ICE");
 
             if (tgt.getController().isOpponentOf(ai)) {
                 if (type.is(CounterEnumType.LOYALTY) && tgt.isPlaneswalker()) {
@@ -286,22 +284,22 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 }
 
                 return ComputerUtil.isNegativeCounter(type, tgt);
-            } else {
-                if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
-                    CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                    boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+            }
 
-                    if (maritEmpty) {
-                        return false;
-                    }
-                } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
-                    return false;
-                } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+            if (type == ice && "Dark Depths".equals(tgt.getName())) {
+                CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
+                boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
+
+                if (maritEmpty) {
                     return false;
                 }
-
-                return !ComputerUtil.isNegativeCounter(type, tgt);
+            } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
+                return false;
+            } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+                return false;
             }
+
+            return !ComputerUtil.isNegativeCounter(type, tgt);
         }
         return super.chooseBinary(kindOfChoice, sa, params);
     }

@@ -1,0 +1,7 @@
+Name:Aerial Doombot
+ManaCost:U
+Types:Artifact Creature Robot Villain
+PT:1/1
+K:Flying
+A:AB$ PutCounter | Cost$ 5 U | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | PowerUp$ True | SpellDescription$ Put three +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)
+Oracle:Flying\nPower-up — {5}{U}: Put three +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)

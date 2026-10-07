@@ -1,0 +1,11 @@
+Name:Snooping Page
+ManaCost:1 W B
+Types:Creature Human Cleric
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigUnblockable | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee —Whenever you cast an instant or sorcery spell that targets a creature, this creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Repartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature can't be blocked this turn.\nWhenever this creature deals combat damage to a player, you draw a card and lose 1 life.

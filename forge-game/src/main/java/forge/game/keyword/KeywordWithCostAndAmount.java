@@ -3,7 +3,8 @@ package forge.game.keyword;
 import forge.game.cost.Cost;
 
 public class KeywordWithCostAndAmount extends KeywordInstance<KeywordWithCostAndAmount>
-    implements KeywordWithCostInterface {
+        implements KeywordWithCostInterface {
+
     private Cost cost;
     protected String costString;
     private boolean withX;

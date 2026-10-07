@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/SCG_Invitational_Qualifier_Springfield/Anthony_Come_-_Burn_(Modern,_#653126).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+1 Blood Crypt
+4 Bloodstained Mire
+4 Inspiring Vantage
+4 Mountain
+1 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+3 Deflecting Palm
+3 Fragmentize
+2 Lightning Helix
+3 Path to Exile
+4 Skullcrack

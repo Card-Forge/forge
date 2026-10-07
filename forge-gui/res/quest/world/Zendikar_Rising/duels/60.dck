@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/CanadianBac0nz_-_Heliod_White_Devotion_(Modern,_#1090585).dck
+Deck Type=constructed
+
+[Main]
+2 Archon of Emeria
+4 Auriok Champion
+4 Giver of Runes
+4 Heliod, Sun-Crowned
+4 Luminarch Aspirant
+4 Ranger-Captain of Eos
+4 Skyclave Apparition
+4 Walking Ballista
+4 Aether Vial
+3 Path to Exile
+1 Idyllic Grange
+1 Mountain
+1 Sacred Foundry
+1 Windswept Heath
+4 Cavern of Souls
+4 Sunbaked Canyon
+4 Arid Mesa
+7 Plains
+[Sideboard]
+1 Path to Exile
+1 Celestial Purge
+1 Damping Sphere
+1 Fragmentize
+1 Giant Killer
+1 Isolate
+1 Oust
+2 Rest in Peace
+3 Magus of the Moon
+3 Boil

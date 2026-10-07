@@ -1,0 +1,9 @@
+Name:Fight for the Throne
+ManaCost:1 G
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Fight | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | AILogic$ Always | SubAbility$ DBDelayedTrigger
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ ParentTarget | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Execute$ TrigMonarch | SpellDescription$ When the creature an opponent controls dies this turn, if you control your commander, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls. When the creature an opponent controls dies this turn, if you control your commander, you become the monarch.

@@ -12,7 +12,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
@@ -43,6 +42,7 @@ import java.util.Map;
  */
 
 public class AnimateAi extends SpellAbilityAi {
+
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Game game = ai.getGame();
@@ -242,26 +242,62 @@ public class AnimateAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    // an effect that only sets P/T can shrink the AI's own creature
+    private static boolean worthAnimating(final Player ai, final SpellAbility sa) {
+        if (sa.getSubAbility() != null) {
+            return true;
+        }
+        if (!sa.hasParam("Power") || !sa.hasParam("Toughness") || sa.hasParam("Types")
+                || sa.hasParam("RemoveTypes") || sa.hasParam("Keywords") || sa.hasParam("HiddenKeywords")
+                || sa.hasParam("Abilities") || sa.hasParam("Triggers") || sa.hasParam("Replacements")
+                || sa.hasParam("staticAbilities") || sa.hasParam("Colors")) {
+            return true;
+        }
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        if (defined.isEmpty()) {
+            return true;
+        }
+        for (final Card c : defined) {
+            if (!c.isCreature() || !c.getController().equals(ai)) {
+                return true;
+            }
+            if (ComputerUtilCard.evaluateCreature(becomeAnimated(c, sa))
+                    > ComputerUtilCard.evaluateCreature(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         AiAbilityDecision decision;
+        if (!mandatory && !sa.usesTargeting() && !worthAnimating(aiPlayer, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
         if (sa.usesTargeting()) {
             decision = animateTgtAI(sa);
             if (decision.willingToPlay()) {
                 return decision;
-            } else if (!mandatory) {
+            } if (!mandatory) {
                 return decision;
-            } else {
-                // fallback if animate is mandatory
-                sa.resetTargets();
-                List<Card> list = CardUtil.getValidCardsToTarget(sa);
-                if (list.isEmpty()) {
-                    return decision;
-                }
-                Card toAnimate = ComputerUtilCard.getWorstAI(list);
-                rememberAnimatedThisTurn(aiPlayer, toAnimate);
-                sa.getTargets().add(toAnimate);
             }
+            // fallback if animate is mandatory
+            sa.resetTargets();
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
+            if (list.isEmpty()) {
+                return decision;
+            }
+            // don't gift a beneficial effect to an opponent's creature if self-targeting is possible
+            if (!sa.isCurse()) {
+                List<Card> ownChoices = CardLists.filterControlledBy(list, aiPlayer);
+                if (!ownChoices.isEmpty()) {
+                    list = ownChoices;
+                }
+            }
+            Card toAnimate = ComputerUtilCard.getWorstAI(list);
+            rememberAnimatedThisTurn(aiPlayer, toAnimate);
+            sa.getTargets().add(toAnimate);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
@@ -282,8 +318,7 @@ public class AnimateAi extends SpellAbilityAi {
         final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
-                && sa.usesTargeting()
-                && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
+                && sa.usesTargeting() && sa.getMinTargets() == 0;
 
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
@@ -324,17 +359,9 @@ public class AnimateAi extends SpellAbilityAi {
 
                 // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
-                    boolean buffedToughness = false;
                     SpellAbility sub = sa.findSubAbilityByType(ApiType.PutCounter);
-                    if (sub != null) {
-                        if (animatedCopy.canReceiveCounters(CounterEnumType.P1P1)
-                                && "Targeted".equals(sub.getParam("Defined"))
-                                && "P1P1".equals(sub.getParam("CounterType"))) {
-                            buffedToughness = true;
-                        }
-                    }
-
-                    if (!buffedToughness) {
+                    if (sub == null || !"Targeted".equals(sub.getParam("Defined")) || !"P1P1".equals(sub.getParam("CounterType"))
+                            || !animatedCopy.canReceiveCounters(CounterEnumType.P1P1)) {
                         continue;
                     }
                 }
@@ -351,10 +378,13 @@ public class AnimateAi extends SpellAbilityAi {
                 // check if its Permanent or that creature would attack
                 if (ph.isPlayerTurn(ai)) {
                     if (!"Permanent".equals(sa.getParam("Duration"))
-                            && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)
-                            && !"UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
+                            && !"UntilHostLeavesPlay".equals(sa.getParam("Duration"))
+                            && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)) {
                         continue;
                     }
+                } else if (ph.inCombat() && game.getCombat().getDefendingPlayers().contains(ai)
+                        && !ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animatedCopy)) {
+                    continue;
                 }
 
                 // store in map
@@ -393,36 +423,38 @@ public class AnimateAi extends SpellAbilityAi {
                 sa.getTargets().add(worst);
             }
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        if (logic.equals("SetPT")) {
-            // TODO: 1. Teach the AI to use this to save the creature from direct damage;
-            //  2. Determine the best target in a smarter way?
-            Card worst = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
-            Card buffed = becomeAnimated(worst, sa);
-
-            if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, buffed)
-                    && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
-                sa.getTargets().add(worst);
-                rememberAnimatedThisTurn(ai, worst);
+        } else if (logic.isEmpty() && sa.hasParam("Power") && sa.hasParam("Toughness")
+                && !sa.hasParam("Keywords") && !sa.hasParam("Abilities")) {
+            // Pure P/T-setting effect without card type or ability changes (e.g. Genemorph Imago):
+            // buff own creatures that actually gain from it, or shrink an opponent's
+            Card best = null;
+            int bestGain = 0;
+            for (final Card c : list) {
+                if (!c.isCreature()) {
+                    continue;
+                }
+                final Card animatedCopy = becomeAnimated(c, sa);
+                int gain = ComputerUtilCard.evaluateCreature(animatedCopy) - ComputerUtilCard.evaluateCreature(c);
+                if (c.getController().isOpponentOf(ai)) {
+                    // making an opponent's creature smaller is worth as much as it loses
+                    gain = -gain;
+                }
+                if (gain > bestGain) {
+                    bestGain = gain;
+                    best = c;
+                }
+            }
+            if (best != null) {
+                rememberAnimatedThisTurn(ai, best);
+                sa.getTargets().add(best);
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-        }
-
-        if (logic.equals("ValuableAttackerOrBlocker")) {
-            final Combat combat = ph.getCombat();
-            for (Card c : list) {
-                Card animated = becomeAnimated(c, sa);
-                boolean isValuableAttacker = ph.is(PhaseType.COMBAT_BEGIN, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
-                boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
-                if (isValuableAttacker || isValuableBlocker)
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (logic.equals("Worst")) {
             Card worst = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
-            if(worst != null) {
+            if (worst != null) {
                 sa.getTargets().add(worst);
                 rememberAnimatedThisTurn(ai, worst);
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

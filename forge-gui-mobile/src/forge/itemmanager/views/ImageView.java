@@ -26,6 +26,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.*;
 import forge.util.ImageFetcher;
@@ -63,8 +64,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float SEL_BORDER_SIZE = Utils.scale(1);
     private static final int MIN_COLUMN_COUNT = Forge.isLandscapeMode() ? 2 : 1;
     private static final int MAX_COLUMN_COUNT = 10;
-
-    private Supplier<List<Integer>> selectedIndices = Suppliers.memoize(ArrayList::new);
+    // pre-size init capacity could be cards or decks to prevent arraylist excessive growth, could prevent OOM
+    private Supplier<List<Integer>> selectedIndices = Suppliers.memoize(() -> new ArrayList<>(512));
     private int columnCount = 4;
     private float scrollHeight = 0;
     private ColumnDef pileBy = null;
@@ -72,9 +73,22 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private boolean updatingLayout;
     private float totalZoomAmount;
-    private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(ArrayList::new);
-    private Supplier<List<Group>> groups = Suppliers.memoize(ArrayList::new);
+    private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(() -> new ArrayList<>(512));
+    private Supplier<List<Group>> groups = Suppliers.memoize(() -> new ArrayList<>(60));
     private Function<Entry<? extends InventoryItem, Integer>, ?> fnIsFavorite = ColumnDef.FAVORITE.fnDisplay, fnPrice = null;
+
+    private long lastRefreshTime = 0;
+    private static final long REFRESH_DEBOUNCE_MS = 50;
+
+    // prevent ui updates too quickly though 50ms maybe a good default
+    // TODO: find a way to refresh the list before drawing consecutively
+    private void scheduleLayout(boolean forRefresh) {
+        long now = System.currentTimeMillis();
+        if (now - lastRefreshTime < REFRESH_DEBOUNCE_MS)
+            return;
+        lastRefreshTime = now;
+        updateLayout(forRefresh);
+    }
 
     private class SafeList<T> {
         private final List<T> internalList;
@@ -414,12 +428,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         updateLayout(false); //need to update layout to adjust wrapping of items
     }
 
+    private boolean isGroupLarger() {
+        if (groupBy == null || groupBy.getGroups() == null)
+            return !groups.get().isEmpty();
+        return groups.get().size() > groupBy.getGroups().length;
+    }
+
     @Override
     protected void onRefresh() {
         Group otherItems = groupBy == null ? groups.get().get(0) : null;
 
         for (Group group : groups.get()) {
             group.items.clear();
+            group.piles.clear();
         }
         clearSelection();
 
@@ -431,14 +452,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                 Group group;
                 if (groupIndex >= 0) {
-                    if (groupIndex >= groups.get().size())
-                        group = groups.get().get(groups.get().size() - 1);
-                    else
-                        group = groups.get().get(groupIndex);
+                    group = groupIndex < groups.get().size()
+                            ? groups.get().get(groupIndex)
+                            : groups.get().get(groups.get().size() - 1);
                 } else {
                     if (otherItems == null) {
                         //reuse existing Other group if possible
-                        if (groups.get().size() > groupBy.getGroups().length) {
+                        if (isGroupLarger()) {
                             otherItems = groups.get().get(groups.get().size() - 1);
                         } else {
                             otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
@@ -450,20 +470,30 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     group = otherItems;
                 }
 
-                for (int i = 0; i < qty; i++) {
-                    group.add(new ItemInfo(item, group));
+                if (showQtyOnCard(item)) {
+                    group.add(new ItemInfo(item, group, qty));
+                } else {
+                    for (int i = 0; i < qty; i++) {
+                        group.add(new ItemInfo(item, group));
+                    }
                 }
             }
         }
 
-        if (otherItems == null && groups.get().size() > groupBy.getGroups().length) {
+        if (otherItems == null && isGroupLarger()) {
             int index = groups.get().size() - 1;
-            if (index < groups.get().size() && index >= 0)
+            if (index >= 0 && index < groups.get().size()) {
                 groups.get().remove(index); //remove Other group if empty
+            }
             btnExpandCollapseAll.updateIsAllCollapsed();
         }
-
         updateLayout(true);
+        // scheduleLayout(true);
+    }
+
+
+    private boolean showQtyOnCard(T item) {
+        return item instanceof PaperCard && itemManager.getAllowGroupIdentical() && FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
     }
 
     @Override
@@ -840,8 +870,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateSelection() {
-        for (Integer i : selectedIndices.get()) {
-            orderedItems.get().get(i).selected = true;
+        List<Integer> indices = selectedIndices.get();
+        List<ItemInfo> items = orderedItems.get();
+
+        if (indices == null || indices.isEmpty() || items == null || items.isEmpty()) {
+            return; // nothing to select
+        }
+
+        for (Integer i : indices) {
+            if (i == null || i < 0 || i >= items.size()) {
+                continue; // skip invalid index
+            }
+            ItemInfo itemInfo = items.get(i);
+            if (itemInfo != null) {
+                itemInfo.selected = true; // safe now
+            }
         }
     }
 
@@ -1094,7 +1137,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final T item;
         private Integer cardPrice;
         private final Group group;
-        private int index, draftRank;
+        private int index, draftRank, qty;
         private FSkinImage draftRankImage = FSkinImage.DRAFTRANK_D;
         private CardStackPosition pos;
         private boolean selected, deckSelectMode, showRanking;
@@ -1106,8 +1149,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         //private TextureRegion tr;
 
         private ItemInfo(T item0, Group group0) {
+            this(item0, group0, 1);
+        }
+
+        private ItemInfo(T item0, Group group0, int qty0) {
             item = item0;
             group = group0;
+            qty = qty0;
+
             if (item instanceof DeckProxy) {
                 deckSelectMode = true;
                 deckProxy = (DeckProxy) item;
@@ -1167,6 +1216,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             textRenderer.drawText(g, message, skinFont, Color.BLACK, x, y + ymod, w, fontHeight, y + ymod, fontHeight, false, Align.center, true);
         }
 
+        private void drawSubLabel(Graphics g, String message, Color bgColor, float x, float y, float w, float h) {
+            FSkinFont skinFont = FSkinFont.forHeight(w / 8);
+            float fontHeight = skinFont.getLineHeight();
+            float ymod = h * 0.8f - fontHeight / 2;
+            float oldAlpha = g.getfloatAlphaComposite();
+            float width = w / 4;
+            float start  = x + w - (width);
+            g.setAlphaComposite(0.6f);
+            g.fillRect(bgColor, start, y + ymod, width, fontHeight);
+            g.setAlphaComposite(oldAlpha);
+            textRenderer.drawText(g, message, skinFont, Color.BLACK, start, y + ymod, width, fontHeight, y + ymod, fontHeight, false, Align.center, true);
+        }
+
         @Override
         public void draw(Graphics g) {
             final float x = getLeft() - group.getScrollLeft();
@@ -1197,6 +1259,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     float x2 = x + rankSize / 2;
                     g.drawImage(draftRankImage, x2, y2 + 1, rankSize, rankSize);
                     g.drawText(String.valueOf(draftRank), FSkinFont.forHeight(rankSize / 4), Color.WHITE, x, y, w, h, true, Align.center, true);
+                }
+
+                if (qty > 1) {
+                    drawSubLabel(g, "x" + qty, Color.TAN, x, y, w, h);
                 }
 
                 if (itemManager.showPriceInfo()) {
@@ -1326,7 +1392,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         String key = item.getImageKey(false);
                         if (key.startsWith(ImageKeys.PRECON_PREFIX) || key.startsWith(ImageKeys.FATPACK_PREFIX)
                                 || key.startsWith(ImageKeys.BOOSTERBOX_PREFIX) || key.startsWith(ImageKeys.BOOSTER_PREFIX) || key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
-                            CardView cv = new CardView(-1, null, item.getDisplayName(), null, item.getImageKey(false));
+                            CardView cv = new CardView(-1, null, item.getDisplayName(), item.getItemType(), null);
                             CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, false, false);
                             return;
                         }

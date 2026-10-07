@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Nakamura_Shuhei_-_Multi_Color_Vehicle_(Standard,_#667508).dck
+Deck Type=constructed
+
+[Main]
+2 Depala, Pilot Exemplar
+4 Scrapheap Scrounger
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Cultivator's Caravan
+4 Heart of Kiran
+2 Fatal Push
+4 Unlicensed Disintegration
+4 Gideon, Ally of Zendikar
+2 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+4 Plains
+1 Shambling Vent
+4 Spire of Industry
+4 Spirebluff Canal
+[Sideboard]
+2 Archangel Avacyn
+2 Chandra, Torch of Defiance
+2 Fatal Push
+2 Fragmentize
+3 Metallic Rebuke
+2 Release the Gremlins
+2 Skysovereign, Consul Flagship

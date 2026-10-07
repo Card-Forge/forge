@@ -1,0 +1,14 @@
+Name:Venser, Visionary Traveler
+ManaCost:3 W U
+Types:Legendary Planeswalker Venser
+Loyalty:4
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.!token+YouCtrl+!wasCastFromYourHand
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Each nontoken creature you control that wasn't cast from your hand enters with two additional +1/+1 counters on it.
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.Other+YouCtrl | ValidTgtsDesc$ another permanent you control | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$ Exile up to one other target permanent you control. At the beginning of the next end step, return that card to the battlefield under its owner's control.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled card to the battlefield. | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | ValidTgtsDesc$ nonland permanent each opponent controls | SpellDescription$ For each opponent, return up to one target nonland permanent that player controls to its owner's hand.
+Text:CARDNAME can be your commander.
+SVar:OneEach:PlayerCountOpponents$Amount
+Oracle:Each nontoken creature you control that wasn't cast from your hand enters with two additional +1/+1 counters on it.\n[+1]: Exile up to one other target permanent you control. At the beginning of the next end step, return that card to the battlefield under its owner's control.\n[-2]: For each opponent, return up to one target nonland permanent that player controls to its owner's hand.\nVenser, Visionary Traveler can be your commander.

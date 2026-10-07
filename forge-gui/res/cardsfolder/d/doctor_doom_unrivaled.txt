@@ -1,0 +1,10 @@
+Name:Doctor Doom, Unrivaled
+ManaCost:2 B B
+Types:Legendary Creature Human Sorcerer Villain
+PT:4/4
+K:Lifelink
+A:AB$ Draw | Cost$ T | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and lose 1 life. Then if your library has no cards in it, you win the game. (You win even if you have 0 life or didn't draw a card.)
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBWinGame
+SVar:DBWinGame:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:Count$ValidLibrary Card.YouOwn
+Oracle:Lifelink\n{T}: You draw a card and lose 1 life. Then if your library has no cards in it, you win the game. (You win even if you have 0 life or didn't draw a card.)

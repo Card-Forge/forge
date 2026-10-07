@@ -37,6 +37,10 @@ public class FPrefsBinder<C, V> implements ModelBinder<ForgePreferences.FPref, C
     this.fromString = fromString;
   }
 
+  public C getComponent() {
+    return component;
+  }
+
   public void load() {
     ForgePreferences prefs = FModel.getPreferences();
     String prefValue = prefs.getPref(prefKey);

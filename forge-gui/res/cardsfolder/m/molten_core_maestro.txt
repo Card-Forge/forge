@@ -1,0 +1,12 @@
+Name:Molten-Core Maestro
+ManaCost:1 R
+Types:Creature Goblin Bard
+PT:2/2
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. If five or more mana was spent to cast that spell, add an amount of {R} equal to this creature's power.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ Y | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:X:TriggeredCard$CastTotalManaSpent
+SVar:Y:Count$CardPower
+DeckHints:Type$Instant|Sorcery
+Oracle:Menace\nOpus — Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. If five or more mana was spent to cast that spell, add an amount of {R} equal to this creature's power.

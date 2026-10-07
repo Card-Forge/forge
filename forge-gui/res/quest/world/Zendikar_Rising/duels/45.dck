@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Niv Mizzet
+Title=Niv Mizzet
+Icon=Niv Mizzet.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Ajita__Shinobu_-_BG_Aggro_(Standard,_#1055916).dck
+Deck Type=constructed
+
+[Main]
+1 Elder Gargaroth
+1 Polukranos, Unchained
+2 Order of Midnight
+2 Scavenging Ooze
+2 Rankle, Master of Pranks
+2 Questing Beast
+3 Murderous Rider
+3 Lovestruck Beast
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+4 Foulmire Knight
+2 The Great Henge
+2 Heartless Act
+1 Bloodchief's Thirst
+2 Agadeem's Awakening
+1 Garruk, Unleashed
+1 Nissa of Shadowed Boughs
+1 Vivien, Monsters' Advocate
+1 Castle Locthwain
+2 Zagoth Triome
+4 Temple of Malady
+4 Fabled Passage
+5 Swamp
+6 Forest
+[Sideboard]
+1 Run Afoul
+1 Heroic Intervention
+2 Bloodchief's Thirst
+2 Garruk's Harbinger
+2 Chainweb Aracnir
+2 Gemrazer
+2 Extinction Event
+3 Agonizing Remorse

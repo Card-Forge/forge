@@ -1,0 +1,7 @@
+Name:Visionary's Dance
+ManaCost:5 U R
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ ur_3_3_elemental_flying | TokenOwner$ You | SpellDescription$ Create two 3/3 blue and red Elemental creature tokens with flying.
+A:AB$ Dig | Cost$ 2 Discard<1/CARDNAME> | ActivationZone$ Hand | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+DeckHas:Ability$Token|Discard
+Oracle:Create two 3/3 blue and red Elemental creature tokens with flying.\n{2}, Discard this card: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.

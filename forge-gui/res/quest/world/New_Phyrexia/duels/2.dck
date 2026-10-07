@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz
+Title=Vanellope von Schweetz
+Icon=Vanellope von Schweetz.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Roskilde/Jacob_Steinaa_in_PTQ_Philadelphia_-_Mono_Black_Control_(Standard,_#17401).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gatekeeper of Malakir
+4 Nantuko Shade
+4 Phyrexian Obliterator
+4 Vampire Nighthawk
+4 Lashwrithe
+2 Dismember
+3 Go for the Throat
+2 Duress
+4 Inquisition of Kozilek
+4 Sign in Blood
+25 Swamp
+[Sideboard]
+3 Black Sun's Zenith
+2 Liliana Vess
+3 Skinrender
+3 Wurmcoil Engine

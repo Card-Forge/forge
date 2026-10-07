@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/Liga_Valenciana_de_Modern_III_-_Torneo_3/Nacho_Barrachina_-_Red_Deck_Wins_(Modern,_#346666).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Kird Ape
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+2 Mutagenic Growth
+2 Searing Blaze
+4 Arid Mesa
+4 Bloodstained Mire
+2 Mountain
+3 Sacred Foundry
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+1 Electrickery
+2 Gaddock Teeg
+1 Gut Shot
+3 Path to Exile
+2 Rending Volley

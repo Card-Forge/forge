@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Medium
+Description=Gatecrash/Game_Day_Dragon's_Maze_Trondheim/Phloenchit_Phummarin_-_Gruul_Deck_Wins_(Standard,_#52727).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+4 Lightning Mauler
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+4 Mugging
+4 Rancor
+2 Volcanic Strength
+10 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+2 Gruul Charm
+2 Hellrider
+2 Legion Loyalist
+2 Madcap Skills
+4 Mizzium Mortars
+3 Skullcrack

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Hunter_Livingstone_-_Gruul_Midrange_(Modern,_#1578829).dck
+Deck Type=constructed
+
+[Main]
+4 Arbor Elf
+3 Armored Scrapgorger
+4 Birds of Paradise
+4 Bloodbraid Elf
+3 Fury
+3 Inferno Titan
+4 Kalonian Hydra
+4 Klothys, God of Destiny
+2 Lightning Bolt
+4 Blood Moon
+4 Rhythm of the Wild
+2 Boseiju, Who Endures
+6 Forest
+4 Stomping Ground
+1 Verdant Catacombs
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Brotherhood's End
+1 Damping Sphere
+3 Engineered Explosives
+2 Force of Vigor
+2 Heroic Intervention
+2 Pithing Needle
+2 Relic of Progenitus
+2 Veil of Summer

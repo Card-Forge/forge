@@ -1,0 +1,9 @@
+Name:Widow's Bite
+ManaCost:1 B
+Types:Instant
+K:Teamwork:3
+A:SP$ Charm | CharmNum$ X | Choices$ DBPump,DBDebuff | AdditionalDescription$ . If this spell was cast using teamwork, choose both instead.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn.
+SVar:DBDebuff:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Target creature gets -2/-2 until end of turn.
+SVar:X:Count$Teamwork.2.1
+Oracle:Teamwork 3 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 3 or more.)\nChoose one. If this spell was cast using teamwork, choose both instead.\n• Target creature gains deathtouch until end of turn.\n• Target creature gets -2/-2 until end of turn.

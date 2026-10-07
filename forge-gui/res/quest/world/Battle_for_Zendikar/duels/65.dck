@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Havok
+Title=Havok
+Icon=Havok.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Constructed_League/fusionhawk_-_fusionhawk_(5-0)_(Modern,_#519512).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Anafenza, Kin-Tree Spirit
+4 Archangel of Tithes
+3 Hangarback Walker
+4 Knight of the White Orchid
+4 Wingmate Roc
+2 Secure the Wastes
+3 Valorous Stance
+2 Mastery of the Unseen
+4 Silkwrap
+4 Stasis Snare
+3 Gideon, Ally of Zendikar
+2 Foundry of the Consuls
+23 Plains
+[Sideboard]
+2 Consul's Lieutenant
+2 End Hostilities
+3 Felidar Cub
+3 Hallowed Moonlight
+4 Surge of Righteousness

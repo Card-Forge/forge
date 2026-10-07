@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Anthony_Nedland_-_Naya_Enchantress_(Modern,_#1650259).dck
+Deck Type=constructed
+
+[Main]
+4 Sanctum Weaver
+4 Sythis, Harvest's Hand
+2 Destiny Spinner
+1 Emrakul, the Aeons Torn
+4 Sterling Grove
+4 On Thin Ice
+4 Enchantress's Presence
+4 Utopia Sprawl
+3 Solitary Confinement
+3 Abundant Growth
+2 Bitter Reunion
+2 Greater Auramancy
+1 Leyline Binding
+1 Jeskai Ascendancy
+2 Blood Moon
+4 Windswept Heath
+1 Wooded Foothills
+1 Prismatic Vista
+1 Hall of Heliod's Generosity
+1 Boseiju, Who Endures
+1 Raugrin Triome
+1 Stomping Ground
+2 Temple Garden
+5 Snow-Covered Forest
+3 Snow-Covered Plains
+[Sideboard]
+4 Leyline of Sanctity
+2 Ossification
+1 Boseiju, Who Endures
+1 Nevermore
+1 Seal of Primordium
+1 Blood Moon
+1 Spark Rupture
+2 Rest in Peace
+2 Stony Silence

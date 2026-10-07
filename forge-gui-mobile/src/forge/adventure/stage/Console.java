@@ -18,11 +18,13 @@ public class Console extends Window {
 
     public void toggle() {
         if (isVisible()) {
+            Forge.advFreezePlayerControls = false;
             setVisible(false);
             getStage().unfocus(input);
             Gdx.input.setOnscreenKeyboardVisible(false);
         } else {
             if (!Forge.advFreezePlayerControls) {
+                Forge.advFreezePlayerControls = true;
                 setVisible(true);
                 getStage().setKeyboardFocus(input);
             }
@@ -49,42 +51,28 @@ public class Console extends Window {
                 public boolean keyUp(InputEvent event, int keycode) {
                     switch (keycode) {
                         case Input.Keys.UP:
-                            if (!textField.getText().isEmpty()) {
-                                index = commands.indexOf(textField.getText(), false) - 1;
+                            if (!commands.isEmpty()) {
+                                index--;
+                                if (index < 0) {
+                                    index = commands.size - 1;
+                                }
                                 if (index >= 0 && index < commands.size) {
                                     textField.setText(commands.get(index));
                                     console.last = textField.getText();
-                                    index = commands.indexOf(console.last, false);
-                                    textField.setCursorPosition(Integer.MAX_VALUE);
-                                } else {
-                                    index = 0;
-                                    textField.setText(commands.get(index));
                                     textField.setCursorPosition(Integer.MAX_VALUE);
                                 }
-                            } else if (!commands.isEmpty()) {
-                                textField.setText(commands.get(commands.size - 1));
-                                console.last = textField.getText();
-                                index = commands.indexOf(console.last, false);
-                                textField.setCursorPosition(Integer.MAX_VALUE);
                             }
                             break;
                         case Input.Keys.DOWN:
-                            if (!textField.getText().isEmpty()) {
-                                index = commands.indexOf(textField.getText(), false) + 1;
-                                if (index >= 0 && index < commands.size) {
+                            if (!commands.isEmpty()) {
+                                index++;
+                                if (index >= commands.size) {
+                                    index = 0;
+                                    textField.setText("");
+                                } else {
                                     textField.setText(commands.get(index));
                                     console.last = textField.getText();
-                                    index = commands.indexOf(console.last, false);
-                                    textField.setCursorPosition(Integer.MAX_VALUE);
-                                } else {
-                                    index = commands.size - 1;
-                                    textField.setText(commands.get(index));
-                                    textField.setCursorPosition(Integer.MAX_VALUE);
                                 }
-                            } else if (!commands.isEmpty()) {
-                                textField.setText(commands.get(0));
-                                console.last = textField.getText();
-                                index = commands.indexOf(console.last, false);
                                 textField.setCursorPosition(Integer.MAX_VALUE);
                             }
                             break;
@@ -129,9 +117,12 @@ public class Console extends Window {
                             break;
                         case NEWLINE:
                         case CARRIAGE_RETURN:
-                            commands.add(textField.getText());
-                            console.command(textField.getText());
+                            String submittedText = textField.getText();
+                            commands.add(submittedText);
+                            console.command(submittedText);
                             textField.setText("");
+                            // reset index
+                            index = commands.size;
                             return false;
                         default:
                             if (character < 32)
@@ -153,13 +144,18 @@ public class Console extends Window {
             toggle();
             return;
         }
-        Cell<Label> newLine = content.add(text);
-        newLine.getActor().setColor(1, 1, 1, 1);
-        newLine.growX().align(Align.left | Align.bottom).row();
-        last = text; //Preserve last command.
-        newLine = content.add(ConsoleCommandInterpreter.getInstance().command(text));
-        newLine.getActor().setColor(0.6f, 0.6f, 0.6f, 1);
-        newLine.growX().align(Align.left | Align.bottom).row();
+
+        Label userLabel = new Label(text, Controls.getSkin());
+        userLabel.setColor(1, 1, 1, 1);
+        content.add(userLabel).growX().align(Align.left | Align.bottom).row();
+
+        last = text; // Preserve last command.
+
+        String responseText = ConsoleCommandInterpreter.getInstance().command(text);
+        Label systemLabel = new Label(responseText, Controls.getSkin());
+        systemLabel.setColor(0.6f, 0.6f, 0.6f, 1);
+        content.add(systemLabel).growX().align(Align.left | Align.bottom).row();
+
         scroll.layout();
         scroll.scrollTo(0, 0, 0, 0);
     }

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_Somerville/James_Eck_-_Red_Deck_Wins_(Modern,_#519624).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Bloodstained Mire
+2 Copperline Gorge
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+[Sideboard]
+1 Deflecting Palm
+3 Destructive Revelry
+3 Kor Firewalker
+3 Molten Vortex
+3 Path to Exile
+1 Rending Volley
+1 Skullcrack

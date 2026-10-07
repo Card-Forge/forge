@@ -3,11 +3,11 @@ package forge.adventure.data;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
-import forge.StaticData;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureOverrides;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
@@ -28,6 +28,7 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.StreamUtil;
 
@@ -55,7 +56,7 @@ public class AdventureEventData implements Serializable {
     public AdventureEventController.EventFormat format;
     private transient Random random = new Random();
     public Deck registeredDeck;
-    public Deck draftedDeck; //Copy of registered before basic lands are added for event reward purposes
+    public Deck rewardDeck; //Copy of registered before basic lands are added for event reward purposes
     public List<Deck> jumpstartBoosters = new ArrayList<>();
     public boolean isDraftComplete = false;
     public String description = "";
@@ -146,7 +147,7 @@ public class AdventureEventData implements Serializable {
 
     public CardBlock getCardBlock() {
         if (cardBlock == null) {
-            cardBlock = FModel.getBlocks().get(cardBlockName);
+            cardBlock = AdventureOverrides.instance().getBlock(cardBlockName);
         }
         return cardBlock;
     }
@@ -249,7 +250,7 @@ public class AdventureEventData implements Serializable {
 
     public static List<CardBlock> getValidDraftBlocks(List<CardEdition> validEditions) {
         List<CardBlock> legalBlocks = new ArrayList<>();
-        for (CardBlock b : FModel.getBlocks()) { // for each block
+        for (CardBlock b : AdventureOverrides.instance().allBlocks()) { // for each block
             if (b.getSets().isEmpty() || (b.getCntBoostersDraft() < 1))
                 continue;
             if (!isValidDraftBlock(b, validEditions))
@@ -265,7 +266,7 @@ public class AdventureEventData implements Serializable {
                 return false;
             if (!c.hasBoosterTemplate())
                 return false;
-            if(c.getBoosterTemplate().getNumberOfCardsExpected() <= 11)
+            if(c.getBoosterTemplate().getNumberOfCardsExpected() <= 7)
                 return false;
             for (PrintSheet ps : c.getPrintSheetsBySection()) {
                 //exclude block with sets containing P9 cards.
@@ -277,7 +278,7 @@ public class AdventureEventData implements Serializable {
     }
 
     private static CardBlock pickJumpstartCardBlock() {
-        Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
+        Iterable<CardBlock> src = AdventureOverrides.instance().allBlocks(); //all blocks
         List<CardBlock> legalBlocks = new ArrayList<>();
         ConfigData configData = Config.instance().getConfigData();
         if (configData.allowedJumpstart != null) {
@@ -332,7 +333,7 @@ public class AdventureEventData implements Serializable {
                 if (isMetaSet) {
                     booster = cardBlock.getBooster(setCode);
                 } else {
-                    SealedTemplate template = StaticData.instance().getBoosters().get(setCode);
+                    SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
                     if (template == null) continue;
                     booster = new UnOpenedProduct(template);
                 }
@@ -347,10 +348,10 @@ public class AdventureEventData implements Serializable {
             registeredDeck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
             registeredDeck.setName("Sealed Pool - " + cardBlockName);
 
-            // Store copy for rewards
-            draftedDeck = new Deck();
-            draftedDeck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
-            draftedDeck.setName("Sealed Pool Cards");
+            // Store the reward deck consisting of every card in the opened sealed boosters
+            rewardDeck = new Deck();
+            rewardDeck.getOrCreate(DeckSection.Main).addAll(humanPool);
+            rewardDeck.setName("Sealed Pool Cards");
 
             // Generate AI opponents' decks
             for (AdventureEventParticipant participant : participants) {
@@ -370,7 +371,7 @@ public class AdventureEventData implements Serializable {
                     if (isMetaSet) {
                         booster = cardBlock.getBooster(setCode);
                     } else {
-                        SealedTemplate template = StaticData.instance().getBoosters().get(setCode);
+                        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
                         if (template == null) continue;
                         booster = new UnOpenedProduct(template);
                     }
@@ -741,15 +742,18 @@ public class AdventureEventData implements Serializable {
             rewards[3] = new AdventureEventReward();
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
-            draftedDeck.setName("Drafted Deck");
-            draftedDeck.setComment("Prize for placing 1st overall in draft event");
-            rewards[3].cardRewards = new Deck[]{draftedDeck};
+            rewardDeck.setName("Drafted Deck");
+            rewardDeck.setComment(Forge.getLocalizer().getMessage("advPrizeDraftFirst"));
+            rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Sealed) {
 
-            if (wins == 3) {
-                rewards[3].cardRewards = new Deck[]{draftedDeck};
-            }
+            rewards[3] = new AdventureEventReward();
+            rewards[3].minWins = 3;
+            rewards[3].maxWins = 3;
+            rewardDeck.setName("Sealed Card Pool");
+            rewardDeck.setComment(Forge.getLocalizer().getMessage("advPrizeSealedFirst"));
+            rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
 
@@ -787,7 +791,7 @@ public class AdventureEventData implements Serializable {
             }
         }
         if (ret.size > 0) {
-            RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
+            RewardScene.instance().loadRewards(ret, RewardScene.Type.EventReward, null);
             Forge.switchScene(RewardScene.instance());
         }
 
@@ -849,9 +853,10 @@ public class AdventureEventData implements Serializable {
     }
 
     public String getDescription(PointOfInterestChanges changes) {
+        Localizer localizer = Forge.getLocalizer();
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         if (format == AdventureEventController.EventFormat.Draft) {
-            description = "Event Type: Booster Draft\n";
+            description = localizer.getMessage("advEventTypeBoosterDraft");
             description += "Block: " + getCardBlock() + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (eventRules.getPairingDescription()) + "\n\n";
@@ -883,8 +888,8 @@ public class AdventureEventData implements Serializable {
             } else {
                 description += "\n";
             }
-            description += "Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n";
-            description += "Participating in this event will award a valueless copy of each card in your Jumpstart deck.";
+            description += localizer.getMessage("advDraftPrizesDesc");
+            description += localizer.getMessage("advJumpstartParticipationPrize");
         } else if (format == AdventureEventController.EventFormat.Sealed) {
             description = "Event Type: Sealed Deck\n";
             description += "Block: " + getCardBlock() + "\n";
@@ -906,7 +911,7 @@ public class AdventureEventData implements Serializable {
             }
 
             description += "Prizes\n";
-            description += "Champion (3 wins): Keep your Sealed pool (all " + packConfiguration.length + " boosters)\n";
+            description += localizer.getMessage("advSealedChampionPrize", packConfiguration.length);
             description += "2+ wins: Silver Challenge Coin\n";
             description += String.format("1+ wins: %s Booster, %s Booster\n", rewardPacks[1].getComment(), rewardPacks[2].getComment());
             description += String.format("0 wins: %s Booster", rewardPacks[0].getComment());

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ikenga
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Alex_Beebe_-_Esper_Midrange_(Standard,_#779519).dck
+Deck Type=constructed
+
+[Main]
+4 Basilica Bell-Haunt
+4 Deputy of Detention
+4 Hero of Precinct One
+2 Hostage Taker
+2 Lyra Dawnbringer
+2 Seraph of the Scales
+2 Thief of Sanity
+2 Depose // Deploy
+4 Mortify
+4 Discovery // Dispersal
+4 Thought Erasure
+2 Dovin, Grand Arbiter
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+3 Hallowed Fountain
+4 Isolated Chapel
+1 Swamp
+4 Watery Grave
+[Sideboard]
+1 Arguel's Blood Fast
+2 Cast Down
+2 Consecrate // Consume
+1 Disdainful Stroke
+3 Duress
+2 Negate
+1 Thief of Sanity
+2 Vraska's Contempt

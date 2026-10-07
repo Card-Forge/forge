@@ -1,0 +1,5 @@
+Name:New Planet
+ManaCost:no cost
+Types:Land Planet
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

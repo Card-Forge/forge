@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/David_Gross_-_Heliod_Company_(Modern,_#924543).dck
+Deck Type=constructed
+
+[Main]
+1 Walking Ballista
+1 Giver of Runes
+1 Tireless Tracker
+2 Aven Mindcensor
+2 Ranger-Captain of Eos
+3 Courser of Kruphix
+4 Heliod, Sun-Crowned
+4 Birds of Paradise
+4 Spike Feeder
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Path to Exile
+4 Collected Company
+1 Bojuka Bog
+1 Gavony Township
+1 Kessig Wolf Run
+1 Stirring Wildwood
+1 Stomping Ground
+1 Snow-Covered Plains
+2 Snow-Covered Forest
+2 Temple Garden
+2 Horizon Canopy
+3 Ghost Quarter
+4 Windswept Heath
+4 Misty Rainforest
+[Sideboard]
+1 Engineered Explosives
+1 Collector Ouphe
+1 Magus of the Moon
+1 Linvala, Keeper of Silence
+1 Nissa, Vital Force
+2 Knight of Autumn
+2 Kor Firewalker
+2 Choke
+2 Rest in Peace
+2 Veil of Summer

@@ -18,14 +18,12 @@
 package forge.player;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
@@ -40,7 +38,6 @@ import forge.util.TextUtil;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -104,7 +101,7 @@ public class TargetSelection {
             return chooseCardFromStack(mandatory, numTargets);
         }
 
-        List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
+        List<GameEntity> candidates = tgt.getAllCandidates(this.ability);
         boolean hasEnoughCandidates = candidates.size() >= minTargets;
         if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             PlayerCollection controllers = new PlayerCollection();
@@ -157,7 +154,7 @@ public class TargetSelection {
             //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
             //note that we don't handle auto-targeting cards this way since it's possible that the result will be undesirable
             if (minTargets != 0) {
-                List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true, true);
+                List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true);
                 if (nonCardTargets.size() == 1) {
                     return ability.getTargets().add(nonCardTargets.get(0));
                 }
@@ -175,19 +172,11 @@ public class TargetSelection {
             }
             return ability.getTargets().add(validTargets.get(0));
         }
-        final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
-        for (Card card : validTargets) {
-            playersWithValidTargets.put(PlayerView.get(card.getController()), null);
-        }
-
-        PlayerView playerView = controller.getLocalPlayerView();
-        PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, validTargets.stream().map(c -> c.getZone().getZoneType()).collect(Collectors.toSet()), playersWithValidTargets, true);
         if (!zones.contains(ZoneType.Stack)) {
             InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, numTargets, divisionValues, filter, mustTargetFiltered);
             inp.showAndWait();
             choiceResult = !inp.hasCancelled();
             bTargetingDone = inp.hasPressedOk();
-            controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
         } else {
             // for every other case an all-purpose GuiChoose
             choiceResult = this.chooseCardFromList(validTargets, true, mandatory);

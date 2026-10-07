@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/StarCityGames.com_Modern_Open_-_Indianapolis,_IN/Alex_Zurawski_-_GB_Infect_(Modern,_#619901).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+4 Noble Hierarch
+4 Phyrexian Crusader
+4 Plague Stinger
+3 Abrupt Decay
+3 Become Immense
+3 Groundswell
+3 Might of Old Krosa
+4 Vines of Vastwood
+4 Inquisition of Kozilek
+3 Rancor
+1 Forest
+4 Inkmoth Nexus
+3 Misty Rainforest
+4 Overgrown Tomb
+2 Pendelhaven
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+[Sideboard]
+1 Carrion Call
+2 Darkblast
+2 Dismember
+4 Duress
+3 Nature's Claim
+2 Pulse of Murasa
+1 Spellskite

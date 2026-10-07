@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Barich_-_Mono_Black_(Standard,_#992313).dck
+Deck Type=constructed
+
+[Main]
+1 Tymaret, Chosen from Death
+1 Order of Midnight
+2 Stonecoil Serpent
+2 Murderous Rider
+2 Rankle, Master of Pranks
+4 Gutterbones
+4 Knight of the Ebon Legion
+4 Rotting Regisaur
+4 Spawn of Mayhem
+4 Blacklance Paragon
+2 Shadowspear
+3 Heartless Act
+3 Duress
+2 Mobilized District
+4 Castle Locthwain
+18 Swamp
+[Sideboard]
+1 Shadowspear
+1 Grafdigger's Cage
+1 Cavalier of Night
+1 Heartless Act
+2 Murderous Rider
+2 Hunted Nightmare
+2 Cry of the Carnarium
+2 Disfigure
+3 Agonizing Remorse

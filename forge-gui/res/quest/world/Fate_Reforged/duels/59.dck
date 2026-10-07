@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/States_Columbus/Grant_Mitchell_-_Mardu_Pyro_(Modern,_#225441).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+1 Grim Lavamancer
+3 Monastery Mentor
+1 Soulfire Grand Master
+4 Young Pyromancer
+3 Crackling Doom
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+1 Terminate
+4 Inquisition of Kozilek
+4 Lingering Souls
+2 Thoughtseize
+1 Arid Mesa
+1 Blood Crypt
+4 Bloodstained Mire
+1 Cavern of Souls
+1 Godless Shrine
+3 Marsh Flats
+2 Mountain
+2 Plains
+3 Sacred Foundry
+2 Swamp
+1 Vault of the Archangel
+[Sideboard]
+1 Ajani Vengeant
+1 Blood Moon
+2 Duress
+2 Kor Firewalker
+2 Rakdos Charm
+2 Slaughter Games
+2 Stony Silence
+2 Zealous Persecution

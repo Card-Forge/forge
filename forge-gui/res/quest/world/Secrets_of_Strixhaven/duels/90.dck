@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Yuda_Kazunari_-_Dimir_Murktide_(Modern,_#2922143).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+2 Subtlety
+2 Orcish Bowmasters
+4 Psychic Frog
+4 Quantum Riddler
+4 Fatal Push
+4 Counterspell
+3 Spell Snare
+2 Force of Negation
+1 Cling to Dust
+2 Consider
+1 Sheoldred's Edict
+1 Sink into Stupor
+4 Thoughtseize
+2 Preordain
+4 Flow State
+2 Island
+1 Swamp
+3 Watery Grave
+2 Flooded Strand
+4 Polluted Delta
+2 Misty Rainforest
+1 Otawara, Soaring City
+2 Undercity Sewers
+1 Gloomlake Verge
+[Sideboard]
+2 Engineered Explosives
+1 Surgical Extraction
+1 Nihil Spellbomb
+1 Toxic Deluge
+1 Ashiok, Dream Render
+3 Mystical Dispute
+1 Subtlety
+2 Consign to Memory
+2 Harbinger of the Seas
+1 Withering Curse

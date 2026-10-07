@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Grand_Prix_Detroit_2016_-_Last_Chance_Trial/DAVID_AESCHBACHER_-_WU_Eldrazi_(Modern,_#606111).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+3 Dismember
+4 Path to Exile
+4 Adarkar Wastes
+2 Cavern of Souls
+2 Caves of Koilos
+4 Eldrazi Temple
+4 Eye of Ugin
+3 Flooded Strand
+2 Hallowed Fountain
+1 Island
+1 Plains
+1 Sea Gate Wreckage
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Disenchant
+2 Gut Shot
+2 Hurkyl's Recall
+2 Relic of Progenitus
+1 Spellskite
+2 Stony Silence
+2 Stubborn Denial
+2 Worship

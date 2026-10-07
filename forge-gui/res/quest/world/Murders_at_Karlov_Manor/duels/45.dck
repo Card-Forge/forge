@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Ej_Farcon_-_Uw_Control_(Standard,_#1967231).dck
+Deck Type=constructed
+
+[Main]
+2 Horned Loch-Whale
+2 The Celestus
+3 Dissipate
+3 Elspeth's Smite
+2 Get Lost
+2 March of Otherworldly Light
+4 Memory Deluge
+2 Negate
+2 No More Lies
+1 Depopulate
+1 Farewell
+3 Sunfall
+4 Jace, the Perfected Mind
+2 The Wandering Emperor
+4 Adarkar Wastes
+2 Demolition Field
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+2 Field of Ruin
+4 Island
+2 Mirrex
+1 Otawara, Soaring City
+3 Plains
+4 Restless Anchorage
+[Sideboard]
+2 Destroy Evil
+1 Disdainful Stroke
+2 Knockout Blow
+1 Negate
+3 Sunset Revelry
+2 Temporary Lockdown
+2 The Stone Brain
+2 Unlicensed Hearse

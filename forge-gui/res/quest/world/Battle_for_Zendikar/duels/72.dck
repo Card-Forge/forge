@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Daily_#9286341/Dafore_-_Dafore_(4-0)_(Modern,_#518975).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+1 Kolaghan, the Storm's Fury
+4 Pia and Kiran Nalaar
+4 Seeker of the Way
+3 Soulfire Grand Master
+4 Crackling Doom
+4 Fiery Impulse
+3 Kolaghan's Command
+2 Murderous Cut
+1 Wild Slash
+3 Painful Truths
+2 Roast
+2 Battlefield Forge
+4 Bloodstained Mire
+1 Canopy Vista
+2 Mountain
+4 Nomad Outpost
+1 Plains
+4 Shambling Vent
+2 Smoldering Marsh
+1 Swamp
+4 Wooded Foothills
+[Sideboard]
+3 Duress
+1 Felidar Cub
+2 Hallowed Moonlight
+1 Mastery of the Unseen
+2 Outpost Siege
+3 Radiant Flames
+1 Silkwrap
+2 Valorous Stance

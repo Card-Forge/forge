@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Isael_Feitosa_-_Izzet_Bounce_(Standard,_#2941617).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Slickshot Show-Off
+1 Colorstorm Stallion
+4 Burst Lightning
+4 Opt
+1 Get Out
+1 Prismari Charm
+1 Spell Pierce
+4 Boomerang Basics
+4 Flow State
+4 Sleight of Hand
+1 Impractical Joke
+1 Stock Up
+4 Stormchaser's Talent
+1 Roaring Furnace
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+1 Great Hall of the Biblioplex
+1 Multiversal Passage
+1 Stormcarved Coast
+[Sideboard]
+2 Colorstorm Stallion
+2 Ral, Crackling Wit
+2 Slagstorm
+2 Spell Pierce
+2 Wan Shi Tong, Librarian
+1 Annul
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Get Out
+1 Sear

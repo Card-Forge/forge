@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_Champs_#8987723/Salvatto_-_Abzan_Aggro_(Standard,_#338445).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+3 Den Protector
+3 Heir of the Wilds
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+1 Murderous Cut
+4 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Arashin Cleric
+3 Duress
+1 Ob Nixilis Reignited
+1 Self-Inflicted Wound
+2 Silkwrap
+1 Sorin, Solemn Visitor
+2 Surge of Righteousness
+2 Transgress the Mind
+1 Ultimate Price

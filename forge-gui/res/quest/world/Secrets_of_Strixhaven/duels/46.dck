@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tolsimir
+Title=Tolsimir
+Icon=Tolsimir.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Hiura_Yuya_-_Mardu_Aggro_(Standard,_#2937734).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodghast
+1 Inti, Seneschal of the Sun
+4 Marauding Mako
+3 Tersa Lightshatter
+1 Carnage, Crimson Chaos
+4 Iron-Shield Elf
+4 Moonshadow
+4 Hardened Academic
+3 Burst Lightning
+1 Bitter Triumph
+1 Requiting Hex
+4 Practiced Offense
+4 Cool but Rude
+1 Mountain
+3 Concealed Courtyard
+3 Inspiring Vantage
+4 Blood Crypt
+1 Godless Shrine
+3 Sacred Foundry
+1 Blazemire Verge
+4 Starting Town
+2 Multiversal Passage
+[Sideboard]
+2 Pyroclasm
+2 Leyline of the Void
+2 Soul-Guide Lantern
+2 Case of the Crimson Pulse
+1 Shoot the Sheriff
+1 Chandra, Spark Hunter
+2 Voice of Victory
+2 Strategic Betrayal
+1 Seam Rip

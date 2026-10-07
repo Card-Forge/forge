@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Arcore_(MB)_-_1┬¬_Tappa_PMC_2012/Longhi_Federico_-_Faeries_(Modern,_#28390).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+1 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+1 Dispel
+2 Lightning Bolt
+3 Mana Leak
+3 Remand
+1 Spell Snare
+4 Banefire
+2 Faerie Conclave
+11 Island
+1 Mountain
+4 Mutavault
+2 Scalding Tarn
+2 Sulfur Falls
+2 Tectonic Edge
+[Sideboard]
+2 Annul
+2 Blasphemous Act
+1 Glen Elendra Archmage
+2 Grafdigger's Cage
+4 Hurkyl's Recall
+2 Ratchet Bomb
+1 Sower of Temptation
+1 Wipe Away

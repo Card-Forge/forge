@@ -1,0 +1,12 @@
+Name:Smaug, Wicked Worm
+ManaCost:3 B R
+Types:Legendary Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBTreasureTokens | TriggerDescription$ When NICKNAME enters, create X tapped Treasure tokens, where X is the number of artifacts your opponents control.
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenTapped$ True
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ValidSA$ Spell.ManaFromTreasure | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$Valid Artifact.OppCtrl
+Oracle:Flying\nWhen Smaug enters, create X tapped Treasure tokens, where X is the number of artifacts your opponents control.\nWhenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and lose 1 life.

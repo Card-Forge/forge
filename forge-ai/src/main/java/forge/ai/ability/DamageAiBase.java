@@ -98,14 +98,13 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return false;
         }
 
-        final CardCollectionView hand = comp.getCardsIn(ZoneType.Hand);
-
         if ((enemy.getLife() - restDamage) < 5) {
             // drop the human to less than 5 life
             return true;
         }
 
         if (sa.isSpell()) {
+            final CardCollectionView hand = comp.getCardsIn(ZoneType.Hand);
             PhaseHandler phase = game.getPhaseHandler();
             // If this is a spell, cast it instead of discarding
             if ((phase.is(PhaseType.END_OF_TURN) || phase.is(PhaseType.MAIN2))

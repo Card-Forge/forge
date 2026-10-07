@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Michael_Ingram_-_Abzan_Aggro_(Standard,_#1615741).dck
+Deck Type=constructed
+
+[Main]
+1 Ao, the Dawn Sky
+3 Sheoldred, the Apocalypse
+1 Ertai Resurrected
+4 Raffine, Scheming Seer
+2 Toluz, Clever Conductor
+3 Adeline, Resplendent Cathar
+1 Loran of the Third Path
+1 Suspicious Stowaway
+4 Thalia, Guardian of Thraben
+4 Dennick, Pious Apprentice
+3 Skrelv, Defector Mite
+3 Go for the Throat
+3 Wedding Announcement
+1 Underground River
+3 Caves of Koilos
+4 Shattered Sanctum
+4 Plaza of Heroes
+1 Plains
+3 Seachrome Coast
+1 Island
+3 Darkslick Shores
+3 Eiganjo, Seat of the Empire
+3 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Razorlash Transmogrant
+1 Loran of the Third Path
+2 Destroy Evil
+1 Gix, Yawgmoth Praetor
+3 Cut Down
+2 Anoint with Affliction
+2 Disdainful Stroke
+2 Negate

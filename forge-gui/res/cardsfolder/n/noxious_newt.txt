@@ -1,0 +1,7 @@
+Name:Noxious Newt
+ManaCost:1 G
+Types:Creature Salamander
+PT:1/2
+K:Deathtouch
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:Deathtouch\n{T}: Add {G}.

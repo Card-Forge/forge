@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=James T Kirk
+Title=James T Kirk
+Icon=James T Kirk.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/DB_GerryT_-_Sultai_Bounce_(Standard,_#2385191).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Isolation
+1 Harvester of Misery
+2 Overlord of the Balemurk
+4 Mosswood Dreadknight
+3 Cut Down
+1 Tear Asunder
+4 This Town Ain't Big Enough
+3 Go for the Throat
+1 Gix's Command
+4 Up the Beanstalk
+2 Nowhere to Run
+4 Stormchaser's Talent
+3 Hopeless Nightmare
+4 Darkslick Shores
+4 Underground Mortuary
+4 Gloomlake Verge
+3 Willowrush Verge
+3 Island
+2 Blooming Marsh
+3 Llanowar Wastes
+1 Yavimaya Coast
+[Sideboard]
+1 Tear Asunder
+1 Gix's Command
+2 Duress
+2 Spell Pierce
+2 Negate
+1 Harvester of Misery
+2 Ghost Vacuum
+1 Maelstrom Pulse
+2 Sheoldred, the Apocalypse
+1 Go for the Throat

@@ -1,0 +1,7 @@
+Name:Hungry Graffalon
+ManaCost:3 G
+Types:Creature Giraffe
+PT:3/4
+K:Reach
+K:Increment
+Oracle:Reach\nIncrement (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)

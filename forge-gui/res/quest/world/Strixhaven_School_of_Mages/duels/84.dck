@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/AstralPlane_-_Izzet_Spells_(Modern,_#1166630)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+1 Vapor Snag
+2 Gut Shot
+3 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+1 Forked Bolt
+3 Serum Visions
+4 Expressive Iteration
+1 Wooded Foothills
+2 Steam Vents
+2 Scalding Tarn
+2 Arid Mesa
+3 Mountain
+4 Spirebluff Canal
+4 Fiery Islet
+[Sideboard]
+1 Shattering Spree
+1 Vapor Snag
+1 Bedlam Reveler
+2 Abrade
+2 Blood Moon
+2 Kozilek's Return
+3 Soul-Guide Lantern
+3 Spell Pierce

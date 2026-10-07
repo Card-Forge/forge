@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Márcio_da_Silva_-_Naya_Runes_(Standard,_#1338060).dck
+Deck Type=constructed
+
+[Main]
+2 Spirited Companion
+2 Michiko's Reign of Truth
+4 Jukai Naturalist
+4 Kami of Transience
+4 Generous Visitor
+4 Runeforge Champion
+3 Showdown of the Skalds
+3 Touch the Spirit Realm
+3 Rune of Speed
+3 Rune of Sustenance
+4 Rune of Might
+1 Rockfall Vale
+1 Plains
+2 Eiganjo, Seat of the Empire
+2 Boseiju, Who Endures
+2 Forest
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Sundown Pass
+4 Branchloft Pathway
+[Sideboard]
+1 Portable Hole
+1 Hallowed Haunting
+2 Circle of Confinement
+2 Valorous Stance
+3 Tamiyo's Safekeeping
+3 Curse of Silence
+3 Fang of Shigeki

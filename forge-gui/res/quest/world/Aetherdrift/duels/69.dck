@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Kitamura_shuhei_-_Dimir_Oculus_(Modern,_#2372998).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+2 Picklock Prankster
+4 Psychic Frog
+1 Boggart Trawler
+4 Abhorrent Oculus
+2 Ketramose, the New Dawn
+4 Fatal Push
+3 Counterspell
+3 Spell Snare
+3 Force of Negation
+4 Consider
+1 Shoot the Sheriff
+1 Thraben Charm
+4 Unearth
+3 Pest Control
+1 Island
+1 Swamp
+2 Hallowed Fountain
+2 Watery Grave
+2 Flooded Strand
+4 Polluted Delta
+2 Marsh Flats
+1 Scalding Tarn
+2 Darkslick Shores
+2 Undercity Sewers
+[Sideboard]
+2 Stony Silence
+2 Thoughtseize
+1 Surgical Extraction
+1 Nihil Spellbomb
+1 Toxic Deluge
+2 Dauthi Voidwalker
+1 Stern Scolding
+3 Consign to Memory
+2 Harbinger of the Seas

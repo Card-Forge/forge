@@ -1,0 +1,8 @@
+Name:Extract Power
+ManaCost:5 U
+Types:Sorcery
+A:SP$ Dig | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | WithMayLook$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Look at the top card of each player's library, then exile those cards face down. You may play them without paying their mana costs for as long as they remain exiled.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayWithoutManaCost$ True | Description$ You may play them without paying their mana costs for as long as they remain exiled.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Look at the top card of each player's library, then exile those cards face down. You may play them without paying their mana costs for as long as they remain exiled.

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/Monthly_Modern_Masters_-_vol.4/Kumeyama_Yuji_-_Burn_(Modern,_#630523).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+2 Tasigur, the Golden Fang
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+2 Searing Blaze
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+3 Rift Bolt
+4 Arid Mesa
+2 Blackcleave Cliffs
+1 Blood Crypt
+2 Bloodstained Mire
+1 Godless Shrine
+2 Mountain
+2 Sacred Foundry
+2 Scalding Tarn
+1 Stomping Ground
+1 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+3 Anger of the Gods
+2 Deflecting Palm
+2 Destructive Revelry
+2 Path to Exile
+2 Rain of Gore
+3 Soulfire Grand Master
+1 Wear // Tear

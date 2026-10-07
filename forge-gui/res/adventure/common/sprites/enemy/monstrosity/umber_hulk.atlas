@@ -1,0 +1,119 @@
+umber_hulk.png
+size: 512,448
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  xy: 0,0
+  size: 64, 64
+Idle
+  xy: 64,0
+  size: 64, 64
+Idle
+  xy: 128,0
+  size: 64, 64
+Idle
+  xy: 192,0
+  size: 64, 64
+Idle
+  xy: 0,64
+  size: 64, 64
+Idle
+  xy: 64,64
+  size: 64, 64
+Idle
+  xy: 128,64
+  size: 64, 64
+Idle
+  xy: 192,64
+  size: 64, 64
+Walk
+  xy: 0,128
+  size: 64, 64
+Walk
+  xy: 64,128
+  size: 64, 64
+Walk
+  xy: 128,128
+  size: 64, 64
+Walk
+  xy: 192,128
+  size: 64, 64
+Walk
+  xy: 256,128
+  size: 64, 64
+Walk
+  xy: 320,128
+  size: 64, 64
+Walk
+  xy: 0,192
+  size: 64, 64
+Walk
+  xy: 64,192
+  size: 64, 64
+Walk
+  xy: 128,192
+  size: 64, 64
+Walk
+  xy: 192,192
+  size: 64, 64
+Walk
+  xy: 256,192
+  size: 64, 64
+Walk
+  xy: 320,192
+  size: 64, 64
+Attack
+  xy: 0,256
+  size: 64, 64
+Attack
+  xy: 64,256
+  size: 64, 64
+Attack
+  xy: 128,256
+  size: 64, 64
+Attack
+  xy: 192,256
+  size: 64, 64
+Attack
+  xy: 256,256
+  size: 64, 64
+Attack
+  xy: 320,256
+  size: 64, 64
+Hurt
+  xy: 0,320
+  size: 64, 64
+Hurt
+  xy: 64,320
+  size: 64, 64
+Hurt
+  xy: 128,320
+  size: 64, 64
+Hurt
+  xy: 192,320
+  size: 64, 64
+Death
+  xy: 0,384
+  size: 64, 64
+Death
+  xy: 64,384
+  size: 64, 64
+Death
+  xy: 128,384
+  size: 64, 64
+Death
+  xy: 192,384
+  size: 64, 64
+Death
+  xy: 256,384
+  size: 64, 64
+Death
+  xy: 320,384
+  size: 64, 64
+Death
+  xy: 384,384
+  size: 64, 64
+Death
+  xy: 448,384
+  size: 64, 64

@@ -36,6 +36,17 @@ public class GameLog extends Observable implements Serializable {
     private final List<GameLogEntry> log = new ArrayList<>();
 
     private final transient GameLogFormatter formatter = new GameLogFormatter(this);
+    private long matchStartMillis = -1;
+
+    public void markMatchStartIfNeeded() {
+        if (matchStartMillis < 0) {
+            matchStartMillis = System.currentTimeMillis();
+        }
+    }
+
+    public long getMatchStartMillis() {
+        return matchStartMillis;
+    }
 
     /** Logging level:
      * 0 - Turn
@@ -56,6 +67,11 @@ public class GameLog extends Observable implements Serializable {
         log.add(entry);
         this.setChanged();
         this.notifyObservers();
+    }
+
+    /** All entries in chronological (insertion) order — note {@link #getLogEntries} returns newest-first. */
+    public List<GameLogEntry> getAllEntries() {
+        return new ArrayList<>(log);
     }
 
     /**

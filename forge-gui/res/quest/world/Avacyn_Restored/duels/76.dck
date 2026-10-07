@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Very Hard
+Description=../Modern/Avacyn_Restored/MTGMulligan_Open_Buenos_Aires/Lucas_Paletta_-_RG_Destroyland_(Modern,_#38112).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Bloodbraid Elf
+2 Grim Lavamancer
+3 Kitchen Finks
+3 Llanowar Elves
+4 Tarmogoyf
+2 Dismember
+4 Lightning Bolt
+2 Boom // Bust
+4 Molten Rain
+3 Pillar of Flame
+4 Stone Rain
+1 Breeding Pool
+2 Copperline Gorge
+2 Forest
+2 Misty Rainforest
+2 Mountain
+4 Scalding Tarn
+4 Stomping Ground
+2 Treetop Village
+2 Verdant Catacombs
+[Sideboard]
+2 Ancient Grudge
+2 Boil
+2 Combust
+1 Huntmaster of the Fells
+2 Krosan Grip
+1 Obstinate Baloth
+1 Shatterstorm
+3 Spell Pierce
+1 Thrun, the Last Troll

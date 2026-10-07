@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/DanielP3_-_Dimir_Faeries_(Standard,_#2070401).dck
+Deck Type=constructed
+
+[Main]
+3 Faerie Dreamthief
+4 Faerie Mastermind
+3 Bloodletter of Aclazotz
+3 Obyra, Dreaming Duelist
+1 Talion's Messenger
+1 Sheoldred, the Apocalypse
+1 Likeness Looter
+3 Graveyard Trespasser
+1 Talion, the Kindly Lord
+3 Mindlink Mech
+4 Spell Stutter
+4 Faerie Fencing
+2 Sheoldred's Edict
+1 Go for the Throat
+1 Virtue of Persistence
+1 Ego Drain
+1 Insatiable Avarice
+4 Darkslick Shores
+4 Shipwreck Marsh
+3 Underground River
+2 Restless Reef
+3 Mirrex
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Swamp
+4 Island
+[Sideboard]
+2 Tishana's Tidebinder
+3 Path of Peril
+2 Unlicensed Hearse
+2 Disdainful Stroke
+2 Sheoldred
+2 Liliana of the Veil
+1 Kaito, Dancing Shadow
+1 Aclazotz, Deepest Betrayal

@@ -1,0 +1,10 @@
+Name:Iron Hills Stalwart
+ManaCost:4 R
+Types:Creature Dwarf Warrior
+PT:4/5
+K:Reach
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, attach target Equipment you control to up to one target creature you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | ValidTgtsDesc$ Equipment you control | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | TargetMin$ 0 | TargetMax$ 1
+Oracle:Reach, trample\nWhen this creature enters, attach target Equipment you control to up to one target creature you control.

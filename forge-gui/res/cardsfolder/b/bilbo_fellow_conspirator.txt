@@ -1,0 +1,7 @@
+Name:Bilbo, Fellow Conspirator
+ManaCost:2 G
+Types:Legendary Creature Halfling Citizen
+PT:2/3
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Food | ReplaceWith$ TokenReplace | Description$ If you would create a Food token, instead create a Food token and a Treasure token.
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ c_a_food_sac,c_a_treasure_sac
+Oracle:If you would create a Food token, instead create a Food token and a Treasure token.

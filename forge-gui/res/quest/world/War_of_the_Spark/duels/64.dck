@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/ajifly_-_UW_Hatebear_(Modern,_#795110).dck
+Deck Type=constructed
+
+[Main]
+3 Deputy of Detention
+3 Drogskol Captain
+1 Geist of Saint Traft
+4 Mausoleum Wanderer
+1 Phantasmal Image
+4 Rattlechains
+3 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+3 Thalia, Guardian of Thraben
+4 Aether Vial
+2 Smuggler's Copter
+3 Path to Exile
+2 Cavern of Souls
+4 Flooded Strand
+1 Ghost Quarter
+2 Hallowed Fountain
+2 Horizon Canopy
+2 Island
+2 Mutavault
+2 Plains
+4 Seachrome Coast
+[Sideboard]
+1 Auriok Champion
+3 Damping Sphere
+1 Ephara, God of the Polis
+2 Grafdigger's Cage
+1 Rest in Peace
+2 Selective Snare
+2 Stony Silence
+1 Teferi, Time Raveler
+2 Unified Will

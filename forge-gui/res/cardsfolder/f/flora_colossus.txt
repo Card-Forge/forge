@@ -1,0 +1,9 @@
+Name:Flora Colossus
+ManaCost:5 G G
+Types:Creature Treefolk
+PT:*/*
+K:Hexproof
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nFlora Colossus's power and toughness are each equal to the number of lands you control.

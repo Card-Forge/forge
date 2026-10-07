@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Bishark_-_Merfolk_(Modern,_#1090598).dck
+Deck Type=constructed
+
+[Main]
+2 Harbinger of the Tides
+3 Unsettled Mariner
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merfolk Trickster
+4 Silvergill Adept
+4 Benthic Biomancer
+2 Smuggler's Copter
+4 Aether Vial
+3 Mana Leak
+3 Dismember
+3 Spreading Seas
+1 Waterlogged Grove
+3 Mutavault
+3 Cavern of Souls
+4 Wanderwine Hub
+4 Seachrome Coast
+5 Island
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Chalice of the Void
+2 Echoing Truth
+3 Pithing Needle
+3 Relic of Progenitus
+4 Force of Negation

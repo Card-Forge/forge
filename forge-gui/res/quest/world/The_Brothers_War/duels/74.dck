@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Acores_-_8-Cast_Affinity_(Modern,_#1533173)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Patchwork Automaton
+4 Ornithopter
+4 Memnite
+4 Thought Monitor
+4 Sojourner's Companion
+4 Frogmite
+1 Nettlecyst
+1 Shadowspear
+1 Aether Spellbomb
+1 Welding Jar
+4 Springleaf Drum
+4 Cranial Plating
+3 Forging the Anchor
+4 Thoughtcast
+4 Urza's Saga
+2 Tanglepool Bridge
+2 Island
+2 Treasure Vault
+4 Mistvault Bridge
+4 Darksteel Citadel
+[Sideboard]
+1 Grafdigger's Cage
+1 Haywire Mite
+1 Pithing Needle
+1 Relic of Progenitus
+2 Tormod's Crypt
+2 Hurkyl's Recall
+3 Damping Sphere
+4 Metallic Rebuke

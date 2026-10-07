@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Garden_City,_Michigan/Jason_Terry_in_PTQ_Barcelona_-_Faeries_(Modern,_#25370).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+3 Mana Leak
+3 Remand
+2 Spell Pierce
+3 Spell Snare
+2 Faerie Conclave
+19 Island
+4 Mutavault
+[Sideboard]
+3 Flashfreeze
+2 Hurkyl's Recall
+1 Mindbreak Trap
+2 Negate
+3 Steel Sabotage
+1 Sword of Feast and Famine
+2 Threads of Disloyalty

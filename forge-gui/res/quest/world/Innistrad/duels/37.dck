@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Easy
+Description=Innistrad/Topdecker.gr_-_Innistrad_GameDay/George_Tsompanidis_-_G-W_Humans_(Standard,_#21866).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Accorder Paladin
+4 Avacyn's Pilgrim
+4 Champion of the Parish
+1 Elite Inquisitor
+4 Elite Vanguard
+4 Fiend Hunter
+4 Hamlet Captain
+4 Mayor of Avabruck
+3 Mentor of the Meek
+4 Mirran Crusader
+4 Oblivion Ring
+4 Forest
+2 Gavony Township
+2 Ghost Quarter
+8 Plains
+4 Sunpetal Grove
+[Sideboard]
+4 Naturalize
+2 Purify the Grave
+1 Ratchet Bomb
+3 Slayer of the Wicked
+2 Stony Silence
+3 Timely Reinforcements

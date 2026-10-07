@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Gonito_-_Orzhov_Pixie_(Standard,_#2190809).dck
+Deck Type=constructed
+
+[Main]
+3 Braids, Arisen Nightmare
+3 Guardian of Ghirapur
+1 Loran of the Third Path
+4 Novice Inspector
+4 Nurturing Pixie
+1 Ruthless Lawbringer
+3 Zoraline, Cosmos Caller
+2 Beza, the Bounding Spring
+4 Carrot Cake
+4 Tithing Blade
+1 Lively Dirge
+2 Hopeless Nightmare
+4 The Witch's Vanity
+4 Caves of Koilos
+4 Concealed Courtyard
+2 Restless Fortress
+2 Demolition Field
+2 Plains
+4 Shadowy Backstreet
+6 Swamp
+[Sideboard]
+2 Bandit's Talent
+2 Hostile Investigator
+2 Loran of the Third Path
+3 Malicious Eclipse
+1 Serra Paragon
+2 Bitter Triumph
+3 Elesh Norn, Mother of Machines

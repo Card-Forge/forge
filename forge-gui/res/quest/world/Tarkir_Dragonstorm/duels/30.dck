@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Hamuda_-_Dimir_Midrange_(Standard,_#2453468).dck
+Deck Type=constructed
+
+[Main]
+3 Qarsi Revenant
+3 Deep-Cavern Bat
+3 Enduring Curiosity
+4 Floodpits Drowner
+3 Preacher of the Schism
+4 Spyglass Siren
+1 Sheoldred, the Apocalypse
+3 Cut Down
+2 Phantom Interference
+3 Go for the Throat
+1 Gix's Command
+1 Intimidation Tactics
+1 Duress
+3 Kaito, Bane of Nightmares
+4 Island
+1 Fountainport
+4 Underground River
+2 Soulstone Sanctuary
+4 Darkslick Shores
+4 Gloomlake Verge
+2 Restless Reef
+4 Swamp
+[Sideboard]
+1 Anoint with Affliction
+3 Tishana's Tidebinder
+1 Gix's Command
+1 Scavenger Regent
+1 Ghost Vacuum
+1 Kaito, Bane of Nightmares
+2 Faerie Mastermind
+1 Sheoldred, the Apocalypse
+1 Duress
+1 Intimidation Tactics
+1 Three Steps Ahead
+1 Spell Pierce

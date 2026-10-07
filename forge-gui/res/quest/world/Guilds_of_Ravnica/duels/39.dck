@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/3HaLeX1_-_Golgari_Midrange_(Standard,_#765799).dck
+Deck Type=constructed
+
+[Main]
+1 District Guide
+4 Doom Whisperer
+2 Golgari Findbroker
+1 Izoni, Thousand-Eyed
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker
+3 Ravenous Chupacabra
+3 Seekers' Squire
+2 Wildgrowth Walker
+2 Assassin's Trophy
+2 Find // Finality
+2 Vraska, Golgari Queen
+3 Vraska, Relic Seeker
+8 Forest
+4 Overgrown Tomb
+7 Swamp
+4 Woodland Cemetery
+[Sideboard]
+1 Arguel's Blood Fast
+1 Assassin's Trophy
+3 Duress
+1 Find // Finality
+1 Izoni, Thousand-Eyed
+2 Moment of Craving
+2 The Eldest Reborn
+1 Vivien Reid
+2 Vraska's Contempt
+1 Wildgrowth Walker

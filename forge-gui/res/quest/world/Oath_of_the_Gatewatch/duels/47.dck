@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/RPTQ_Shadows_Over_Innistrad_-_Jacksonville,_Florida/Justin_R_-_Eldrazi_(Standard,_#605928).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Hedron Crawler
+4 Rattleclaw Mystic
+1 Ulamog, the Ceaseless Hunger
+4 World Breaker
+2 Hedron Archive
+3 Kozilek's Return
+4 Explosive Vegetation
+4 Nissa's Pilgrimage
+4 Oath of Nissa
+4 Chandra, Flamecaller
+3 Ugin, the Spirit Dragon
+1 Blighted Woodland
+2 Cinder Glade
+10 Forest
+2 Mountain
+3 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+3 Wooded Foothills
+[Sideboard]
+2 Cranial Archive
+2 Crumble to Dust
+4 Jaddi Offshoot
+1 Kozilek, the Great Distortion
+2 Roast
+1 Void Winnower

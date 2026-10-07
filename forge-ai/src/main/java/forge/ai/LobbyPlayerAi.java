@@ -13,12 +13,12 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private String aiProfile = "";
     private boolean rotateProfileEachGame;
-    private boolean useSimulation;
+    private AIOption option;
 
     public LobbyPlayerAi(String name, Set<AIOption> options) {
         super(name);
-        if (options != null && options.contains(AIOption.USE_SIMULATION)) {
-            this.useSimulation = true;
+        if (options != null && !options.isEmpty()) {
+            option = options.iterator().next();
         }
     }
 
@@ -36,7 +36,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private PlayerControllerAi createControllerFor(Player ai) {
         PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
-        result.setUseSimulation(useSimulation);
+        result.getAi().setUseSimulation(option);
         return result;
     }
 

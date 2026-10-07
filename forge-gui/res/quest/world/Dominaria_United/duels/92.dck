@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Gods_Shadow_-_White_Weenie_(Modern,_#1532229).dck
+Deck Type=constructed
+
+[Main]
+2 Cathar Commando
+2 Adeline, Resplendent Cathar
+4 Champion of the Parish
+4 Hopeful Initiate
+4 Esper Sentinel
+4 Guardian of New Benalia
+4 Thalia's Lieutenant
+4 Anointed Peacekeeper
+4 Thalia, Guardian of Thraben
+4 Brutal Cathar
+4 Aether Vial
+1 Eiganjo Castle
+2 Eiganjo, Seat of the Empire
+2 Sea Gate Wreckage
+4 Mutavault
+4 Cavern of Souls
+7 Plains
+[Sideboard]
+2 Sanctifier en-Vec
+2 Stony Silence
+2 Rest in Peace
+2 Auriok Champion
+3 Hallowed Moonlight
+4 March of Otherworldly Light

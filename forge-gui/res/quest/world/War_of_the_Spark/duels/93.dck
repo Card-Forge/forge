@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/DDMeelow_-_Infect_(Modern,_#802169).dck
+Deck Type=constructed
+
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+1 Spellskite
+1 Dryad Arbor
+4 Blossoming Defense
+4 Might of Old Krosa
+4 Mutagenic Growth
+2 Spell Pierce
+4 Vines of Vastwood
+2 Distortion Strike
+4 Scale Up
+3 Teferi, Time Raveler
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+2 Pendelhaven
+2 Temple Garden
+1 Verdant Catacombs
+3 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+1 Spellskite
+1 Spell Pierce
+1 Dismember
+1 Grafdigger's Cage
+3 Kitchen Finks
+2 Ravenous Trap
+2 Return to Nature
+3 Shapers' Sanctuary
+1 Surgical Extraction

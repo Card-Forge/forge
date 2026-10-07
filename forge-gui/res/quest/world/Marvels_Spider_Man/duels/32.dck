@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/Luke_Mulcahy_-_Boros_Artifacts_(Standard,_#2684208).dck
+Deck Type=constructed
+
+[Main]
+4 Clockwork Percussionist
+4 Iron Spider, Stark Upgrade
+4 Market Gnome
+4 Nesting Bot
+3 Rust Harvester
+4 Agatha's Soul Cauldron
+2 Dusk Rose Reliquary
+1 Basilisk Collar
+4 Torch the Tower
+3 Case of the Crimson Pulse
+4 Tezzeret, Cruel Captain
+7 Plains
+4 Cori Mountain Monastery
+4 Multiversal Passage
+4 Sacred Foundry
+3 Riverpyre Verge
+1 Scene of the Crime
+[Sideboard]
+4 Cathar Commando
+4 Diversion Unit
+1 Authority of the Consuls
+1 Chandra, Spark Hunter
+1 Crystal Barricade
+1 Ghost Vacuum
+1 Island
+1 Legion Extruder
+1 Soul-Guide Lantern

@@ -1,0 +1,9 @@
+Name:Graviton, Fundamental Force
+ManaCost:2 U
+Types:Legendary Creature Human Villain
+PT:3/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever you draw your second card each turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBTap
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SpellDescription$ Tap target creature.
+Oracle:Whenever you draw your second card each turn, choose one —\n• Target creature gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)\n• Tap target creature.

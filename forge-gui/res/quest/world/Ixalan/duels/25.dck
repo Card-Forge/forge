@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot25
+Title=Robot25
+Icon=Bushwhacked.jpg
+Difficulty=Medium
+Description=R-B Aggro 
+Deck Type=constructed
+
+[Main]
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Bone Picker
+3 Captain Lannery Storm
+4 Earthshaker Khenra
+3 Hazoret the Fervent
+2 Kari Zev, Skyship Raider
+4 Fatal Push
+4 Lightning Strike
+4 Shock
+1 Cut // Ribbons
+4 Canyon Slough
+4 Dragonskull Summit
+2 Ifnir Deadlands
+5 Mountain
+4 Ramunap Ruins
+4 Swamp
+[Sideboard]
+3 Abrade
+1 Chandra's Defeat
+4 Duress
+1 Glorybringer
+2 Harsh Scrutiny
+1 Kari Zev's Expertise
+3 Rampaging Ferocidon

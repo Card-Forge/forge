@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -39,13 +39,13 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="62" template="../../obj/gold.tx" x="193.167" y="39.75"/>
-  <object id="55" template="../../obj/treasure.tx" x="223.101" y="42.1694"/>
+  <object id="62" template="../../obj/gold.tx" x="207.855" y="41.9532"/>
+  <object id="55" template="../../obj/treasure.tx" x="208.78" y="110.468"/>
   <object id="61" template="../../obj/enemy.tx" x="209.675" y="119.464">
    <properties>
     <property name="enemy" value="Cerodon"/>
-    <property name="speedModifier" type="float" value="4"/>
-    <property name="threatRange" type="int" value="70"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="69" template="../../obj/manashards.tx" x="98.7808" y="104.447"/>

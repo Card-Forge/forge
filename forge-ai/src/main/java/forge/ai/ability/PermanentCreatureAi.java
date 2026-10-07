@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -90,7 +89,6 @@ public class PermanentCreatureAi extends PermanentAi {
         Game game = ai.getGame();
         PhaseHandler ph = game.getPhaseHandler();
         Combat combat = game.getCombat();
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
 
         boolean isOppTurn = ph.getPlayerTurn().isOpponentOf(ai);
         boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
@@ -186,8 +184,6 @@ public class PermanentCreatureAi extends PermanentAi {
         }
 
         final Card card = sa.getHostCard();
-        final ManaCost mana = card.getManaCost();
-        final Game game = ai.getGame();
 
         /*
          * Checks if the creature will have non-positive toughness after
@@ -202,18 +198,15 @@ public class PermanentCreatureAi extends PermanentAi {
          * worth it. Not sure what 4. is for. 5. needs to be updated to ensure
          * that the net toughness is still positive after static effects.
          */
-        // AiPlayDecision.WouldBecomeZeroToughnessCreature
-        if (card.hasStartOfKeyword("etbCounter") || mana.countX() != 0
+        if (card.hasStartOfKeyword("etbCounter") || card.getManaCost().countX() != 0
                 || card.hasETBTrigger(false) || card.hasETBReplacement() || card.hasSVar("NoZeroToughnessAI")) {
                 return decision;
         }
 
-        final Card copy = CardCopyService.getLKICopy(card);
-        ComputerUtilCard.applyStaticContPT(game, copy, null);
-        if (copy.getNetToughness() > 0) {
-            return decision;
+        if (ComputerUtilCard.wouldDieToStaticPT(card)) {
+            return new AiAbilityDecision(0, AiPlayDecision.WouldBecomeZeroToughnessCreature);
         }
 
-        return new AiAbilityDecision(0, AiPlayDecision.WouldBecomeZeroToughnessCreature);
+        return decision;
     }
 }

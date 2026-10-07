@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Greenville,,_North_Carolina/Bryan_Butler_-_Bant_Control_(Standard,_#40120).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Angel of Serenity
+4 Thragtusk
+4 Azorius Charm
+2 Dissipate
+3 Sphinx's Revelation
+4 Farseek
+2 Supreme Verdict
+4 Terminus
+3 Detention Sphere
+1 Oblivion Ring
+3 Jace, Architect of Thought
+2 Tamiyo, the Moon Sage
+3 Forest
+1 Ghost Quarter
+4 Glacial Fortress
+2 Hallowed Fountain
+4 Hinterland Harbor
+3 Island
+3 Plains
+2 Sunpetal Grove
+3 Temple Garden
+[Sideboard]
+4 Centaur Healer
+2 Negate
+1 Ray of Revelation
+2 Rest in Peace
+1 Selesnya Charm
+1 Sundering Growth

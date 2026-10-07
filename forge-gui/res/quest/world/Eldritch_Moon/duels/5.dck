@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Spiderman
+Title=Spiderman
+Icon=Spiderman.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/tux_the_penguin_-_tux_the_penguin_(5-0)_(Standard,_#634087).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dragonmaster Outcast
+3 Elder Deep-Fiend
+2 Gnarlwood Dryad
+3 Ishkanah, Grafwidow
+4 Jace, Vryn's Prodigy
+3 Nissa, Vastwood Seer
+4 Sylvan Advocate
+4 Tireless Tracker
+4 Grapple with the Past
+4 Kozilek's Return
+2 Gather the Pack
+4 Traverse the Ulvenwald
+4 Evolving Wilds
+4 Forest
+2 Island
+1 Llanowar Wastes
+4 Lumbering Falls
+1 Mountain
+2 Shivan Reef
+4 Yavimaya Coast
+[Sideboard]
+2 Arlinn Kord
+2 Crush of Tentacles
+1 Den Protector
+1 Emrakul, the Promised End
+3 Fall of the Titans
+1 Lashweed Lurker
+3 Negate

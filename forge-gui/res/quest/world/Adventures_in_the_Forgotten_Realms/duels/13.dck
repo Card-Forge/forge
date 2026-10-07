@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Platinum-Mythic_Rank_Player_-_Abzan_Lifegain_(Standard,_#1193852).dck
+Deck Type=constructed
+
+[Main]
+4 Blex, Vexing Pest
+4 Vito, Thorn of the Dusk Rose
+4 Search for Glory
+4 Doomskar
+4 Cram Session
+4 The Birth of Meletis
+4 Druid Class
+4 Cleric Class
+1 Ugin, the Spirit Dragon
+1 Darkbore Pathway
+2 Snow-Covered Swamp
+2 Snow-Covered Forest
+3 The World Tree
+4 Jungle Hollow
+4 Blossoming Sands
+4 Scoured Barrens
+4 Radiant Fountain
+4 Snow-Covered Plains
+[Sideboard]
+2 Realm-Cloaked Giant
+3 Banishing Light
+3 Introduction to Annihilation
+4 Environmental Sciences

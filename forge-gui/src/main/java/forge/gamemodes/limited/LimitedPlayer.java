@@ -103,6 +103,11 @@ public class LimitedPlayer {
         return deck;
     }
 
+    /** Number of packs waiting in this player's queue. */
+    public int getPackQueueSize() {
+        return packQueue.size();
+    }
+
     public List<PaperCard> getRemovedFromCardPool() {
         return removedFromCardPool;
     }

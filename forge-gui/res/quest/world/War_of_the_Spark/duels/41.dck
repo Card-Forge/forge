@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Brad_Nelson_-_Bant_Ramp_(Standard,_#801277).dck
+Deck Type=constructed
+
+[Main]
+2 Druid of the Cowl
+4 Hydroid Krasis
+4 Incubation Druid
+2 Jadelight Ranger
+4 Llanowar Elves
+4 Paradise Druid
+2 Shalai, Voice of Plenty
+2 Trostani Discordant
+1 The Immortal Sun
+2 Finale of Glory
+2 Prison Realm
+4 Nissa, Who Shakes the World
+1 Teferi, Time Raveler
+4 Breeding Pool
+7 Forest
+2 Glacial Fortress
+4 Hallowed Fountain
+1 Plains
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Baffling End
+2 Deputy of Detention
+1 Forced Landing
+2 Knight of Autumn
+4 Negate
+1 Teferi, Time Raveler
+1 The Immortal Sun
+1 Trostani Discordant

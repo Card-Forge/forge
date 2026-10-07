@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Elina_Yortirev_-_Rakdos_Midrange_(Standard,_#1164737).dck
+Deck Type=constructed
+
+[Main]
+1 Ox of Agonas
+3 Kroxa, Titan of Death's Hunger
+4 Goldspan Dragon
+4 Retriever Phoenix
+4 Eyetwitch
+4 Valki, God of Lies
+2 Village Rites
+2 First Day of Class
+4 Scorching Dragonfire
+2 Duress
+2 Igneous Inspiration
+4 Seize the Spoils
+2 Immersturm Skullcairn
+4 Fabled Passage
+4 Blightstep Pathway
+6 Swamp
+8 Mountain
+[Sideboard]
+1 Kroxa, Titan of Death's Hunger
+1 Cling to Dust
+1 Environmental Sciences
+1 Go Blank
+1 Start from Scratch
+1 Mascot Exhibition
+2 Duress
+3 The Akroan War
+4 Redcap Melee

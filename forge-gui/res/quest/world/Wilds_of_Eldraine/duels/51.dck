@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Pyro
+Title=Pyro
+Icon=Pyro.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Masuda_Masahito_-_Jund_(Modern,_#1747355).dck
+Deck Type=constructed
+
+[Main]
+4 Tarmogoyf
+4 Ragavan, Nimble Pilferer
+1 Haywire Mite
+4 Orcish Bowmasters
+3 Questing Druid
+1 Pyrite Spellbomb
+1 Nihil Spellbomb
+1 Shadowspear
+2 Fatal Push
+2 Go for the Throat
+4 Unholy Heat
+4 Thoughtseize
+2 Inquisition of Kozilek
+4 Urza's Saga
+3 Wrenn and Six
+1 Swamp
+1 Mountain
+1 Forest
+2 Blood Crypt
+1 Stomping Ground
+4 Bloodstained Mire
+4 Wooded Foothills
+4 Verdant Catacombs
+1 Overgrown Tomb
+1 Boseiju, Who Endures
+[Sideboard]
+2 Engineered Explosives
+1 Pithing Needle
+2 Alpine Moon
+3 Nihil Spellbomb
+1 Jegantha, the Wellspring
+2 Boseiju, Who Endures
+3 Haywire Mite
+1 The Filigree Sylex

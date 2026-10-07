@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/StarCityGames.com_Modern_Open_-_Dallas,_TX/Lucas_Kiefer_-_Red_Deck_Wins_(Modern,_#629058).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+4 Bloodstained Mire
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Exquisite Firecraft
+2 Lightning Helix
+3 Path to Exile

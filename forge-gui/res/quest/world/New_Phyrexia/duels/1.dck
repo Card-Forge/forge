@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Italian_National_Qualifier_-_Umbria/Valerio_Passeri_-_Suture_Sisters_(Standard,_#15090).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ajani's Pridemate
+4 Leonin Relic-Warder
+4 Phyrexian Metamorph
+4 Serra Ascendant
+4 Soul's Attendant
+4 Squadron Hawk
+4 Stoneforge Mystic
+4 Suture Priest
+1 Batterskull
+1 Sword of Body and Mind
+1 Sword of War and Peace
+2 Elspeth Tirel
+4 Glimmerpost
+4 Kabira Crossroads
+15 Plains
+[Sideboard]
+3 Brave the Elements
+3 Celestial Purge
+3 Dismember
+2 Divine Offering
+3 Kor Firewalker
+1 Mortarpod

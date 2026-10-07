@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Jason_Loh_-_Grixis_Tezzeret_(Standard,_#1636277).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Chrome Host Seedshark
+4 Reckoner Bankbuster
+4 Go for the Throat
+3 Make Disappear
+4 Cut Down
+4 Tezzeret, Betrayer of Flesh
+2 Shipwreck Marsh
+1 Sulfurous Springs
+4 Stormcarved Coast
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Underground River
+1 Island
+2 Swamp
+4 Blackcleave Cliffs
+3 Darkslick Shores
+2 Xander's Lounge
+1 Otawara, Soaring City
+2 Shivan Reef
+[Sideboard]
+2 Negate
+2 Glistening Deluge
+2 Obliterating Bolt
+2 The Cruelty of Gix
+1 Lithomantic Barrage
+1 Vraska, Betrayal's Sting
+4 Duress
+1 Kotose, the Silent Spider

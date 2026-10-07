@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Gartxot_-_Esper_Reanimator_(Modern,_#2275662).dck
+Deck Type=constructed
+
+[Main]
+4 Koma, World-Eater
+4 Emperor of Bones
+2 Kiora, the Rising Tide
+4 Psychic Frog
+3 Ulamog, the Defiler
+3 Force of Negation
+4 Goryo's Vengeance
+2 Spell Snare
+4 Tainted Indulgence
+3 Fatal Push
+1 Consign to Memory
+3 Thoughtseize
+3 Wail of the Forgotten
+2 Cephalid Coliseum
+2 Flooded Strand
+4 Marsh Flats
+4 Polluted Delta
+1 Island
+2 Watery Grave
+3 Undercity Sewers
+2 Swamp
+[Sideboard]
+3 Consign to Memory
+2 Damping Sphere
+1 Force of Negation
+2 Glistening Deluge
+2 Mystical Dispute
+1 Toxic Deluge
+3 Leyline of the Void
+1 Spell Snare

@@ -1,0 +1,10 @@
+Name:Tinybones, Pocket Nuisance
+ManaCost:2 B
+Types:Legendary Creature Skeleton Rogue
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When NICKNAME enters, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose
+T:Mode$ DiscardedAll | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player discards one or more cards, NICKNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+DeckHints:Ability$Discard
+Oracle:When Tinybones enters, each opponent discards a card.\nWhenever a player discards one or more cards, Tinybones deals 1 damage to each opponent.

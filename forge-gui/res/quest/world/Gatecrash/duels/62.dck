@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Nekusar the Mindrazer
+Title=Nekusar the Mindrazer
+Icon=Nekusar the Mindrazer.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/GPT_Warschau_SR_Wien/Richard_Galambos_-_Red_Deck_Wins_(Modern,_#54455).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Deathrite Shaman
+4 Goblin Guide
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+2 Searing Blaze
+4 Shard Volley
+3 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Blackcleave Cliffs
+2 Blood Crypt
+2 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+3 Ensnaring Bridge
+3 Molten Rain
+4 Rakdos Charm
+3 Torpor Orb
+2 Volcanic Fallout

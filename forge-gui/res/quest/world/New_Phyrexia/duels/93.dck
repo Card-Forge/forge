@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Winnipeg_,_Manitoba/Luthea_Soract_in_PTQ_Barcelona_-_Red_Deck_Wins_(Modern,_#28035).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Grim Lavamancer
+4 Incinerate
+4 Lightning Bolt
+4 Magma Jet
+4 Browbeat
+4 Lava Spike
+4 Rift Bolt
+4 Volcanic Hammer
+4 Arid Mesa
+12 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Blood Moon
+4 Everlasting Torment
+4 Smash to Smithereens
+3 Vulshok Refugee

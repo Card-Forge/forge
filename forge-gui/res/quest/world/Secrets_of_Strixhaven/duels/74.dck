@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Koala40_-_Azorius_Blink_(Modern,_#2935418).dck
+Deck Type=constructed
+
+[Main]
+4 Solitude
+4 Guide of Souls
+1 Flitterwing Nuisance
+1 Mockingbird
+4 Ocelot Pride
+3 Phelia, Exuberant Shepherd
+4 Quantum Riddler
+2 Skycoach Conductor
+4 Starfield Shepherd
+3 Subtlety
+4 Witch Enchanter
+2 Consign to Memory
+2 Ephemerate
+3 Force of Negation
+2 Teferi, Time Raveler
+4 Hallowed Fountain
+4 Flooded Strand
+2 Meticulous Archive
+3 Plains
+4 Arid Mesa
+[Sideboard]
+2 Consign to Memory
+3 Harbinger of the Seas
+2 High Noon
+2 Mystical Dispute
+2 Sanctifier en-Vec
+1 Surgical Extraction
+3 Wrath of the Skies

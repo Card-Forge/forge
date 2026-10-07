@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Hookah-Smoking Caterpillar
+Title=Hookah-Smoking Caterpillar
+Icon=Hookah-Smoking Caterpillar.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/A22en_-_Esper_Control_(Modern,_#789030).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+3 Nihil Spellbomb
+1 Cast Down
+4 Cryptic Command
+2 Esper Charm
+3 Fatal Push
+2 Logic Knot
+1 Negate
+4 Opt
+4 Path to Exile
+2 Supreme Verdict
+2 Jace, the Mind Sculptor
+2 Kaya, Orzhov Usurper
+2 Teferi, Hero of Dominaria
+1 Celestial Colonnade
+1 Creeping Tar Pit
+3 Field of Ruin
+4 Flooded Strand
+1 Glacial Fortress
+1 Godless Shrine
+2 Hallowed Fountain
+3 Island
+1 Plains
+4 Polluted Delta
+1 Swamp
+2 Watery Grave
+[Sideboard]
+1 Celestial Purge
+1 Detention Sphere
+2 Dispel
+1 Engineered Explosives
+2 Surgical Extraction
+2 Thief of Sanity
+2 Thoughtseize
+2 Timely Reinforcements
+2 Unmoored Ego

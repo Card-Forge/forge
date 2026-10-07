@@ -266,6 +266,11 @@ public class AdventureQuestStage implements Serializable {
     }
 
     public AdventureQuestController.QuestStatus handleEvent(AdventureQuestEvent event) {
+        if (objective == Fetch && hasRequiredFetchItems()) {
+            status = COMPLETE;
+            return status;
+        }
+
         if (!checkIfTargetLocation(event.poi))
             return status;
 
@@ -378,5 +383,23 @@ public class AdventureQuestStage implements Serializable {
                 break;
         }
         return status;
+    }
+
+    public boolean hasRequiredFetchItems() {
+        if (objective != Fetch || itemNames == null || itemNames.isEmpty()) {
+            return false;
+        }
+
+        int owned = 0;
+        for (String itemName : itemNames) {
+            if (itemName == null || itemName.isEmpty()) {
+                continue;
+            }
+            owned += Current.player().countItem(itemName);
+            if (owned >= count1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine_The_Aftermath/Asahara_Rui_-_Multi_Color_Control_(Standard,_#1654135).dck
+Deck Type=constructed
+
+[Main]
+2 Atraxa, Grand Unifier
+4 Chrome Host Seedshark
+1 Etali, Primal Conqueror
+2 Reckoner Bankbuster
+1 Memory Deluge
+1 Siphon Insight
+3 Make Disappear
+2 Destroy Evil
+2 Experimental Augury
+3 Volcanic Spite
+4 Herd Migration
+2 Sunfall
+4 Leyline Binding
+4 Invasion of Zendikar
+2 Plains
+3 Island
+1 Swamp
+1 Mountain
+4 Forest
+4 Jetmir's Garden
+4 Raffine's Tower
+3 Spara's Headquarters
+1 Xander's Lounge
+1 Ziatora's Proving Ground
+1 Mirrex
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+1 Siphon Insight
+2 Knockout Blow
+2 Tyrranax Rex
+2 Sunfall
+2 Lithomantic Barrage
+2 Metropolis Reformer

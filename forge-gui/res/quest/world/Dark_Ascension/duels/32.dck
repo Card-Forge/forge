@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Silver Samurai
+Title=Silver Samurai
+Icon=Silver Samurai.jpg
+Difficulty=Easy
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Salem,_Massachusetts/Myles_Pirro_-_Humans_(Standard,_#30293).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+4 Elite Inquisitor
+2 Gideon's Lawkeeper
+3 Grand Abolisher
+2 Hero of Bladehold
+4 Mirran Crusader
+2 Gut Shot
+4 Gather the Townsfolk
+1 Revoke Existence
+4 Angelic Destiny
+4 Honor of the Pure
+2 Oblivion Ring
+20 Plains
+[Sideboard]
+3 Celestial Purge
+2 Corrosive Gale
+2 Phyrexian Metamorph
+2 Surgical Extraction
+2 Sword of War and Peace
+2 Thalia, Guardian of Thraben

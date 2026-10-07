@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Matti_Kuisma_-_UR_Aggro_(Standard,_#2363697).dck
+Deck Type=constructed
+
+[Main]
+4 Spyglass Siren
+4 Inti, Seneschal of the Sun
+2 Kiora, the Rising Tide
+4 Scrounging Skyray
+4 Marauding Mako
+4 Fearless Swashbuckler
+4 Subterranean Schooner
+3 Spell Pierce
+1 Unsummon
+4 Burst Lightning
+4 Obliterating Bolt
+6 Island
+3 Mountain
+4 Spirebluff Canal
+4 Shivan Reef
+1 Restless Spire
+4 Riverpyre Verge
+[Sideboard]

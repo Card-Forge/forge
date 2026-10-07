@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/MJ_23_-_Red_Deck_Wins_(Standard,_#2071861).dck
+Deck Type=constructed
+
+[Main]
+3 Bloodthirsty Adversary
+3 Charming Scoundrel
+3 Fugitive Codebreaker
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+2 Squee, Dubious Monarch
+1 Slickshot Show-Off
+3 Urabrask's Forge
+4 Lightning Strike
+2 Monstrous Rage
+4 Play with Fire
+2 Witchstalker Frenzy
+2 Scorching Shot
+2 Mishra's Foundry
+20 Mountain
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+2 Cemetery Gatekeeper
+2 End the Festivities
+2 Koth, Fire of Resistance
+2 Lithomantic Barrage
+2 Obliterating Bolt
+2 Soul-Guide Lantern

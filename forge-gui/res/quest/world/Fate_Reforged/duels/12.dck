@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=Fate_Reforged/Gpt_Paris_Defantasy_Z/Jose_Robles_-_Boros_(Standard,_#202767).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Rabblemaster
+4 Seeker of the Way
+4 Soulfire Grand Master
+3 Lightning Strike
+4 Stoke the Flames
+1 Valorous Stance
+4 Wild Slash
+4 Hordeling Outburst
+4 Chained to the Rocks
+4 Outpost Siege
+4 Battlefield Forge
+3 Evolving Wilds
+9 Mountain
+4 Plains
+4 Temple of Triumph
+1 Wind-Scarred Crag
+[Sideboard]
+2 Deflecting Palm
+3 Erase
+3 Mastery of the Unseen
+2 Sarkhan, the Dragonspeaker
+3 Wingmate Roc

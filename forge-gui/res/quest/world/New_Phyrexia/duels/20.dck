@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Easy
+Description=New_Phyrexia/2011_PTQ_Philadelphia_-_Rimini,_Italy/Mirco_Villani_-_MonoR_(Standard,_#19287).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ember Hauler
+4 Furnace Scamp
+4 Goblin Guide
+4 Grim Lavamancer
+3 Plated Geopede
+4 Shrine of Burning Rage
+2 Burst Lightning
+4 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+4 Arid Mesa
+11 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Act of Aggression
+3 Combust
+3 Dismember
+2 Vulshok Refugee

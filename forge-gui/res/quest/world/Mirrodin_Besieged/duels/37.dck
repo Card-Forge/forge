@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/Starcitygames_Open_Series__Boston/Kyle_Morison_-_Valakut_Ramp_(Standard,_#13410).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+2 Inferno Titan
+4 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+3 Lightning Bolt
+4 Summoning Trap
+3 Cultivate
+4 Explore
+3 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+11 Mountain
+3 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+1 Obstinate Baloth
+4 Precursor Golem
+4 Slagstorm
+2 Tumble Magnet

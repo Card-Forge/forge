@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/rintms_-_Historic_Orzhov_Humans_(Modern,_#1197438).dck
+Deck Type=constructed
+
+[Main]
+2 Giant Killer
+4 Kitesail Freebooter
+4 Archfiend's Vessel
+4 Dauntless Bodyguard
+4 Thraben Inspector
+4 Thalia's Lieutenant
+4 Esper Sentinel
+4 Silverquill Silencer
+1 Agadeem's Awakening
+1 Emeria's Call
+3 Silverquill Command
+3 Rally the Ranks
+2 Hive of the Eye Tyrant
+2 Swamp
+2 Cave of the Frost Dragon
+4 Brightclimb Pathway
+4 Concealed Courtyard
+4 Godless Shrine
+4 Plains
+[Sideboard]
+2 Giant Killer
+2 Lurrus of the Dream-Den
+2 Apostle of Purifying Light
+3 Containment Priest
+3 Thalia, Guardian of Thraben
+4 Dire Tactics

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Elrond
+Title=Elrond
+Icon=Elrond.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Fujiwara_Koichi_-_Reanimator_(Modern,_#2224790).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+4 Fatal Push
+1 Spell Pierce
+4 Counterspell
+4 Thought Scour
+3 Spell Snare
+3 Force of Negation
+4 Consider
+1 Shoot the Sheriff
+1 Sink into Stupor
+4 Unearth
+2 Island
+1 Swamp
+3 Watery Grave
+2 Flooded Strand
+4 Polluted Delta
+2 Marsh Flats
+3 Darkslick Shores
+2 Undercity Sewers
+[Sideboard]
+2 Thoughtseize
+2 Surgical Extraction
+2 Toxic Deluge
+1 Glistening Deluge
+2 Stern Scolding
+3 Consign to Memory
+3 Harbinger of the Seas

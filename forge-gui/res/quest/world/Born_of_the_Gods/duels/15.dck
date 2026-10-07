@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/MaxPoint_Silver_-_Cards_and_Comics_-_4-19-14/Marc_Rajotte_-_Esper_Control_(Standard,_#71855).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+3 Azorius Charm
+4 Dissolve
+2 Last Breath
+1 Negate
+4 Sphinx's Revelation
+2 Syncopate
+4 Supreme Verdict
+1 Thoughtseize
+4 Detention Sphere
+3 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Hallowed Fountain
+6 Island
+3 Mutavault
+4 Plains
+3 Temple of Deceit
+4 Temple of Enlightenment
+3 Temple of Silence
+[Sideboard]
+2 Archangel of Thune
+2 Blind Obedience
+1 Dispel
+2 Fiendslayer Paladin
+4 Nightveil Specter
+1 Pithing Needle
+1 Revoke Existence

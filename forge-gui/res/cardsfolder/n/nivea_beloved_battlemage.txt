@@ -1,0 +1,9 @@
+Name:Nivea, Beloved Battlemage
+ManaCost:2 W
+Types:Legendary Creature Human Wizard Warrior
+PT:3/1
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | Execute$ TrigUntapRemove | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control becomes blocked, you may untap it and remove it from combat.
+SVar:TrigUntapRemove:DB$ Untap | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBRemoveCombat
+SVar:DBRemoveCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttackerLKICopy
+A:AB$ CopyPermanent | Cost$ 5 W W W Sac<1/CARDNAME/NICKNAME> | DefinedName$ Akroma, Angel of Wrath | SpellDescription$ Create an Akroma, Angel of Wrath token. (She's a {5}{W}{W}{W} legendary 6/6 Angel creature with flying, first strike, vigilance, trample, haste, and protection from black and from red.)
+Oracle:Whenever a creature you control becomes blocked, you may untap it and remove it from combat.\n{5}{W}{W}{W}, Sacrifice Nivea: Create an Akroma, Angel of Wrath token. (She's a {5}{W}{W}{W} legendary 6/6 Angel creature with flying, first strike, vigilance, trample, haste, and protection from black and from red.)

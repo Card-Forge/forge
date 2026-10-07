@@ -42,7 +42,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
             SaveFileData data=new SaveFileData();
             ArrayList<String> keys=new ArrayList<>();
             ArrayList<PointOfInterestChanges> items=new ArrayList<>();
-            for (Map.Entry<String,PointOfInterestChanges>  entry : this.entrySet()) {
+            for (Map.Entry<String,PointOfInterestChanges> entry : this.entrySet()) {
                 keys.add(entry.getKey());
                 items.add(entry.getValue());
             }

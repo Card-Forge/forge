@@ -7,4 +7,4 @@ T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$
 SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHas:Ability$Sacrifice
-Oracle:Exploit \nWhen Stitched Assistant exploits a creature, scry 2, then draw a card.
+Oracle:Exploit\nWhen Stitched Assistant exploits a creature, scry 2, then draw a card.

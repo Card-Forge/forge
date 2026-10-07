@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Akihiro_Nishio_-_Mardu_Midrange_(Standard,_#2928837).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodghast
+4 Marauding Mako
+3 Tersa Lightshatter
+1 Cecil, Dark Knight
+4 Iron-Shield Elf
+4 Moonshadow
+4 Hardened Academic
+3 Burst Lightning
+2 Erode
+4 Practiced Offense
+1 Shardmage's Rescue
+4 Cool but Rude
+1 Mountain
+4 Concealed Courtyard
+2 Inspiring Vantage
+4 Blood Crypt
+1 Godless Shrine
+4 Sacred Foundry
+1 Blazemire Verge
+4 Starting Town
+1 Multiversal Passage
+[Sideboard]
+4 Leyline of the Void
+1 Inti, Seneschal of the Sun
+2 Case of the Crimson Pulse
+1 Shoot the Sheriff
+3 Voice of Victory
+2 Strategic Betrayal
+1 Seam Rip
+1 Erode

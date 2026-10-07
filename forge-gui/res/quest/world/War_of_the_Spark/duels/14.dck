@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/CalebD_-_Jund_Warriors_(Standard,_#801283).dck
+Deck Type=constructed
+
+[Main]
+1 Dire Fleet Daredevil
+4 Dreadhorde Butcher
+4 Goblin Chainwhirler
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+4 Rekindling Phoenix
+4 Lightning Strike
+3 Shock
+2 Status // Statue
+2 Chandra, Fire Artisan
+3 Sarkhan the Masterless
+4 Blood Crypt
+3 Dragonskull Summit
+4 Mountain
+2 Overgrown Tomb
+4 Rootbound Crag
+4 Stomping Ground
+4 Unclaimed Territory
+[Sideboard]
+1 Collision // Colossus
+2 Dire Fleet Daredevil
+1 Fight with Fire
+1 Find // Finality
+4 Lava Coil
+3 Legion Warboss
+1 Status // Statue
+2 Ugin, the Ineffable

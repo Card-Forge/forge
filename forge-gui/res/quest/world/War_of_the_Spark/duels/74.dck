@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Aaron_Goforth_-_Zoo_(Modern,_#799254).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodbraid Elf
+4 Goblin Rabblemaster
+4 Noble Hierarch
+2 Scavenging Ooze
+4 Tarmogoyf
+4 Wild Nacatl
+1 Shalai, Voice of Plenty
+4 Thalia, Guardian of Thraben
+2 Thalia, Heretic Cathar
+1 Dryad Arbor
+4 Lightning Bolt
+1 Lightning Helix
+4 Path to Exile
+1 Domri, Anarch of Bolas
+1 Forest
+1 Plains
+1 Horizon Canopy
+1 Kessig Wolf Run
+1 Misty Rainforest
+1 Raging Ravine
+2 Sacred Foundry
+2 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+4 Damping Sphere
+2 Grafdigger's Cage
+3 Knight of Autumn
+2 Voice of Resurgence
+2 Stony Silence
+2 Gaddock Teeg

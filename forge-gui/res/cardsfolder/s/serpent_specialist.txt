@@ -1,0 +1,7 @@
+Name:Serpent Specialist
+ManaCost:G
+Types:Creature Human Snake Villain
+PT:1/1
+K:Deathtouch
+A:AB$ PutCounter | Cost$ 3 G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SpellDescription$ Put two +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)
+Oracle:Deathtouch\nPower-up — {3}{G}: Put two +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)

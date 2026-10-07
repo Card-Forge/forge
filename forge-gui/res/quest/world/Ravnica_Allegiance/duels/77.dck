@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Andy_Bell_-_Abzan_Midrange_(Modern,_#789428).dck
+Deck Type=constructed
+
+[Main]
+1 Eternal Witness
+2 Knight of Autumn
+4 Noble Hierarch
+1 Restoration Angel
+3 Scavenging Ooze
+1 Siege Rhino
+4 Tarmogoyf
+1 Kalitas, Traitor of Ghet
+1 Abrupt Decay
+1 Assassin's Trophy
+2 Fatal Push
+2 Path to Exile
+3 Inquisition of Kozilek
+3 Lingering Souls
+1 Maelstrom Pulse
+4 Thoughtseize
+1 Kaya, Orzhov Usurper
+4 Liliana of the Veil
+1 Forest
+1 Plains
+2 Swamp
+2 Blooming Marsh
+1 Godless Shrine
+1 Marsh Flats
+2 Overgrown Tomb
+1 Shambling Vent
+1 Stirring Wildwood
+1 Temple Garden
+1 Treetop Village
+4 Verdant Catacombs
+3 Windswept Heath
+[Sideboard]
+2 Nihil Spellbomb
+2 Fulminator Mage
+2 Stony Silence
+1 Fatal Push
+1 Path to Exile
+1 Settle the Wreckage
+2 Gaddock Teeg
+1 Kalitas, Traitor of Ghet
+2 Liliana, the Last Hope
+1 Thoughtseize

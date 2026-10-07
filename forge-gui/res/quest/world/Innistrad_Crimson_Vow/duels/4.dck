@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Daniel_Kovacs_-_Mono-Red_Aggro_(Standard,_#1237103).dck
+Deck Type=constructed
+
+[Main]
+3 Moonveil Regent
+3 Manaform Hellkite
+4 Falkenrath Pit Fighter
+4 Flame Channeler
+4 Thermo-Alchemist
+4 Frost Bite
+4 Play with Fire
+4 Igneous Inspiration
+4 Roil Eruption
+4 Chandra, Dressed to Kill
+2 Den of the Bugbear
+4 Faceless Haven
+16 Snow-Covered Mountain
+[Sideboard]
+1 Mascot Interception
+1 Mascot Exhibition
+1 Introduction to Annihilation
+1 Start from Scratch
+1 Environmental Sciences
+2 Burn Down the House
+2 Reckless Stormseeker
+3 Magic Missile
+3 Bloodthirsty Adversary

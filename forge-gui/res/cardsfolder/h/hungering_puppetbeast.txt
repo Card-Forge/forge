@@ -1,0 +1,9 @@
+Name:Hungering Puppetbeast
+ManaCost:3 G G
+Types:Artifact Creature Beast Construct
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+SVar:TrigToken:DB$ Token | TokenScript$ rg_a_heartwood | TokenOwner$ You
+A:AB$ PutCounter | Cost$ 1 Sac<1/Artifact.Other/another artifact> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on this creature. It gains your choice of trample, hexproof, or haste until end of turn.
+SVar:DBPump:DB$ Pump | KWChoice$ Trample,Hexproof,Haste
+Oracle:When this creature enters, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")\n{1}, Sacrifice another artifact: Put a +1/+1 counter on this creature. It gains your choice of trample, hexproof, or haste until end of turn.

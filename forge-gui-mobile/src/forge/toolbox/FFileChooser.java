@@ -56,6 +56,7 @@ public class FFileChooser extends FDialog {
         }
         txtFilename.setFont(FSkinFont.get(12));
         txtFilename.setText(defaultFilename0);
+        txtFilename.setLiveChangeEvents(true); //narrow the file list as characters are typed
         txtFilename.setChangedHandler(e -> refreshFileList());
 
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> activateSelectedFile(true));

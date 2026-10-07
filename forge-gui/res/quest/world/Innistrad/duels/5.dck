@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Easy
+Description=Innistrad/SCG_Invitational_Qualifier_-_Bay_City,_Michigan/Austin_Davis_-_G-B_Infect_(Standard,_#36122).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+2 Ichorclaw Myr
+4 Phyrexian Crusader
+2 Phyrexian Vatmother
+3 Plague Stinger
+2 Skithiryx, the Blight Dragon
+1 Contagion Clasp
+2 Dismember
+4 Mutagenic Growth
+3 Ranger's Guile
+3 Titanic Growth
+4 Virulent Wound
+4 Rancor
+6 Forest
+4 Inkmoth Nexus
+8 Swamp
+4 Woodland Cemetery
+[Sideboard]
+2 Apostle's Blessing
+2 Beast Within
+1 Doom Blade
+3 Duress
+1 Go for the Throat
+1 Nihil Spellbomb
+2 Spellskite
+2 Viridian Corrupter

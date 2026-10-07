@@ -1,0 +1,9 @@
+Name:Thor Odinson
+ManaCost:3 R W
+Types:Legendary Creature God Warrior Hero
+PT:4/4
+K:Flying
+K:Vigilance
+K:Prowess
+K:Prowess
+Oracle:Flying, vigilance, prowess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.)

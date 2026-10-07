@@ -1,0 +1,8 @@
+Name:Emergency Medical Hologram
+ManaCost:W
+Types:Artifact Creature Illusion Doctor
+PT:0/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature. You gain 1 life.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:When this creature enters, put a +1/+1 counter on target creature. You gain 1 life.

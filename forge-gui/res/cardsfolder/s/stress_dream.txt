@@ -1,0 +1,6 @@
+Name:Stress Dream
+ManaCost:3 U R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 5 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 5 damage to up to one target creature. Look at the top two cards of your library. Put one of those cards into your hand and the other on the bottom of your library.
+SVar:DBDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | NoReveal$ True
+Oracle:Stress Dream deals 5 damage to up to one target creature. Look at the top two cards of your library. Put one of those cards into your hand and the other on the bottom of your library.

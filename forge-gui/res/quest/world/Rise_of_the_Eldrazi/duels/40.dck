@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Hermione Granger
+Title=Hermione Granger
+Icon=Hermione Granger.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Rhode_Island_-_USA/Tom_Strong_-_WW-u_(Standard,_#1784).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Emeria Angel
+3 Knight of the White Orchid
+4 Ranger of Eos
+4 Steppe Lynx
+4 Student of Warfare
+3 Fieldmist Borderpost
+4 Negate
+4 Path to Exile
+2 Oblivion Ring
+1 Jace, the Mind Sculptor
+4 Arid Mesa
+4 Celestial Colonnade
+4 Glacial Fortress
+1 Island
+4 Marsh Flats
+6 Plains
+[Sideboard]
+4 Kor Firewalker
+3 Luminarch Ascension
+4 Meddling Mage
+3 Spell Pierce

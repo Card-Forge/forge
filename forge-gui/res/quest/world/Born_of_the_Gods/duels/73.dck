@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Very Hard
+Description=../Modern/Born_of_the_Gods/Evoliga_Modern_2015_-_Torneo_II/Cristian_Diaz_Ramos_-_Mono_Green_(Modern,_#197509).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+4 Dungrove Elder
+4 Experiment One
+2 Kalonian Tusker
+3 Leatherback Baloth
+2 Scavenging Ooze
+4 Strangleroot Geist
+4 Aspect of Hydra
+2 Dismember
+1 Fog
+2 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+20 Forest
+[Sideboard]
+1 Beast Within
+1 Creeping Corrosion
+2 Guttural Response
+1 Obstinate Baloth
+2 Savage Summoning
+1 Spring Cleaning
+1 Torpor Orb
+2 Unravel the AEther
+2 Windstorm

@@ -6,8 +6,8 @@
  <properties>
   <property name="dungeonEffect">{"startBattleWithCard": ["Shivan Gorge|USG", "Dormant Volcano|VIS", "Wall of Lava|ICE", "Grim Lavamancer|TOR", "Gorilla Shaman|ALL", "Task Mage Assembly|PCY", "Havoc|TMP", "Scald|USG"]}</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
@@ -32,12 +32,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+  <object id="51" template="../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="193.477" y="293.735" width="32" height="32">
+  <object id="52" template="../../../../common/maps/obj/enemy.tx" x="193.477" y="293.735" width="32" height="32">
    <properties>
     <property name="enemy" value="Jaya Ballard" />
     <property name="threatRange" type="int" value="100" />

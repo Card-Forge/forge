@@ -1,7 +1,7 @@
 [metadata]
-Name=Iconic Masters
 Code=IMA
 Date=2017-11-17
+Name=Iconic Masters
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic

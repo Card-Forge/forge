@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Benjamin_Wakefield_-_Temur_Snow_Uro_(Modern,_#1098996).dck
+Deck Type=constructed
+
+[Main]
+4 Ice-Fang Coatl
+4 Uro, Titan of Nature's Wrath
+2 Cryptic Command
+2 Force of Negation
+4 Growth Spiral
+4 Lightning Bolt
+4 Opt
+4 Remand
+4 Time Warp
+4 Wrenn and Six
+1 Steam Vents
+1 Stomping Ground
+1 Lonely Sandbar
+1 Ketria Triome
+1 Snow-Covered Mountain
+2 Snow-Covered Forest
+2 Breeding Pool
+3 Snow-Covered Island
+4 Scalding Tarn
+4 Misty Rainforest
+4 Mystic Sanctuary
+[Sideboard]
+1 Engineered Explosives
+1 Firespout
+1 Elder Gargaroth
+1 Jace, the Mind Sculptor
+2 Collector Ouphe
+2 Anger of the Gods
+2 Veil of Summer
+2 Cleansing Wildfire
+3 Aether Gust

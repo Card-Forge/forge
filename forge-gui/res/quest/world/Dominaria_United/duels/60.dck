@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Danny_Martin_-_Mono-Blue_Merfolk_(Modern,_#1474184).dck
+Deck Type=constructed
+
+[Main]
+1 Subtlety
+1 Kira, Great Glass-Spinner
+2 Rishadan Dockhand
+3 Harbinger of the Tides
+3 Svyelun of Sea and Sky
+4 Tide Shaper
+4 Silvergill Adept
+4 Merfolk Trickster
+4 Vodalian Hexcatcher
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Aether Vial
+3 Force of Negation
+1 Waterlogged Grove
+1 Minamo, School at Water's Edge
+1 Otawara, Soaring City
+3 Cavern of Souls
+3 Mutavault
+10 Island
+[Sideboard]
+1 Hurkyl's Recall
+1 Force of Negation
+2 Dismember
+2 Unlicensed Hearse
+3 Flusterstorm
+3 Chalice of the Void
+3 Subtlety

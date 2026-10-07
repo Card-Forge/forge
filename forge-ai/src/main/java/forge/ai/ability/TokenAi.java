@@ -83,13 +83,12 @@ public class TokenAi extends SpellAbilityAi {
 
         // X-cost spells
         if (tokenHasX) {
-            int x = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
+            int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
             if (source.getSVar("X").equals("Count$Converge")) {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
             }
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
                 if ("RandomPT".equals(sa.getParam("AILogic"))) {
@@ -151,9 +150,8 @@ public class TokenAi extends SpellAbilityAi {
             if (actualToken.getType().hasSubtype("Role")) {
                 if (tgtRoleAura(ai, sa, actualToken, false)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
@@ -256,20 +254,21 @@ public class TokenAi extends SpellAbilityAi {
                 if (tgtRoleAura(ai, sa, actualToken, mandatory)) {
                     // Targeting handled in tgtRoleAura
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (tgt.canOnlyTgtOpponent()) {
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            } else if (mandatory || tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
-                if (mandatory && targetableOpps.isEmpty()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                if (targetableOpps.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
                 Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
                 sa.getTargets().add(opp);
             } else {
-                sa.getTargets().add(ai);
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
 
@@ -301,9 +300,8 @@ public class TokenAi extends SpellAbilityAi {
             if (combat != null && combat.getAttackingPlayer() != null
                     && !combat.getAttackingPlayer().isOpponentOf(ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -361,8 +359,7 @@ public class TokenAi extends SpellAbilityAi {
         result.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
         // Apply static abilities
-        final Game game = ai.getGame();
-        ComputerUtilCard.applyStaticContPT(game, result, null);
+        ComputerUtilCard.applyStaticContPT(ai.getGame(), result, null);
         return result;
     }
 

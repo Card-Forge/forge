@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,24 +7,19 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
- <layer id="7" name="CollisionBis" width="40" height="35">
+ <layer id="7" name="Collision" width="40" height="35">
   <data encoding="base64" compression="zlib">
-   eJzt0ssJgDAQRdE0YAhYkNiUzbgRbMtidGGYEEXED3mEe2D2l8c4BwDAP3pfuuBobOwU+hZvp9CT6wSbUup98/Zn037qFLdsgx1979BXt/QX4+E+9vve2ab5rrXuHobSBdfU+wA8swJKUQ6G
-  </data>
- </layer>
- <layer id="6" name="Collision" width="40" height="35">
-  <data encoding="base64" compression="zlib">
-   eJzd1kFuwjAQBVBvWcTqsmfoDVgEipB6FM5Fy5FYsOEw1YiO+B08mXEc16ZfGkECSV6ceJIQfNnFEK4T9R6dO1owh9X9+1Yc/239e3nszCfT0kefvfq45vg28VZarN//g48/T0MIx5/C8Lqv4XH7GmHTOt6K19F5vr48ni+PQck45PqoWvvOm2kfj+Nl7/dZPZr2leOTRnShE/ugFTLS/SjnC9m8PrZpPlm43+Ogl3SW+jSXFqsHYw/K7dfsSY0dnZfV32r60IM+NLbySY/mw/77qfTaOT6tT1C4h3l82Ce0sczxUeictblYw0fh/iFrl9hmjNM+69rO8eVE+vB4Hpt2b/Tmw2ftM/hOxrOh1Oe1adcX78WSe7KWL2VMjan2rorvrDmWHJ80fqzSxeM6Kv+p6cPw8egdkKsHH86dHsdPzu3c/NX1XcJnLbfyeZdb+Lzp2UaxfKXzYIk8s6+HpGzf4I9ydw==
+   eJzt1kuOwjAMANBuWSRCmg1nmBt0UZgKiaNwLRh6pFnMArgLWMXC48aJM+knRViyUKloXp3EoSh0UduiuHjyyyof1GPsF+1ndR97w8b/LP9eV5n5eLx93QAf5H99a9umFKH7r+DDscF3NG3SwO9Opvv7IQJNpW0TffCeq2X3fbEG5UjrD+d0at/P2u/DOv5u9T7o0d+eeYZnxfi4kbqos1bW5vwwwnrkTrBpfWiTfPwsuz58B/PcD65EEzpTfdQF+497eIR6MO1Bsf0aPa7awXuF+tuQPuqhPmqcysc9kq9xrKNUHzxH6hMQ2MM0vt3imVItY3ywRxoj78UhfLR/8HSdb5X1+0JzG+uLDe6j42ls0trIzUfP2jn4Gs/Z0IdPa5Pml67FlDU5ps9VU1pX19l8MnGWFJ+UWFeolev+ED6fGf4DYubgw73zscyzfnxvx8ZY89uHL3Q9lU97PYVPGznbIEK+1H3QR8zZl0O4bDfnln82
   </data>
  </layer>
  <layer id="1" name="Background" width="40" height="35">
   <data encoding="base64" compression="zlib">
-   eJztlrEOgjAQQLsaF/0FJxATB3AghcnFL/ET+CYFnIDZz/B3vJo0NKVXMNLSmF7yQsIR+nLctVxXhFz/jH1KPsGuIi546XDZjYX3837ezz2/qbGUX0AJOQBRqqe0tAcyn1BAdAuzHpuegeTD+0peu8pwSoN+Nzrs+ShVeOY4LPhzR2reT4bVpcpxytScXyD0Va1x1b3jF7/nTp9/nXt0tZzqN/f/DHdjgflFI2vKszRWw8t6Pj/dXlIiubl7UJwV5ex+iS0/lSdWMxt+bJb3EjUd+um+rUk/cZbFmXbl+6r8+P6oqiur4YP29/hzUWaxfsiZGwMJcFLk7ob8lD2JnLkNOLRAlw1zYW7P74acuTGQACdF7m7RD6MBhxboHHAxxaYgZFss7+HxeOblDcDtevg=
+   eJztlksKgzAQQLMt3bRX6KpqoQt1EaKrbnoSj+CZ/HWlrnuMXqdJIRg0Ey01MZQMPARHzGOcScx2CGV/ho/RJ9hVxAYvFTa7sXB+zs/52em3JLb0uxCEAqym2mgPFN28ZGArT+bD+2q8dp3AVBr9CjLt+QBLPFMYFvy5K9HvN4bVpU5hKqzP7yz0VaNwVb3jF7/nSZ1/3QZUtVzqt/b/DHdjAfkFM2uOZ2muhvf9en6qvaQCcmv3oDgr0tn9ElN+Mk+oZib82Cz7Ixoy9VN9W51+4iyLM23L95X58f1RVldWwwcZ7vHngsRg/YAzN6RElFiSKzX5SXsSOHNb6tBR+mSa81JzfgVw5oaUiBJLcqVBP4iWOnSU3gIXXRxyhI759h4Oh2Nd3v68e8I=
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="35">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="35">
@@ -98,9 +93,10 @@
     <property name="waypoints" value="80,76,78"/>
    </properties>
   </object>
-  <object id="65" template="../../obj/enemy.tx" x="588.674" y="254.561">
+  <object id="65" template="../../obj/enemy.tx" x="606.299" y="179.653">
    <properties>
     <property name="enemy" value="Elephant"/>
+    <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
@@ -149,13 +145,14 @@
 </property>
    </properties>
   </object>
-  <object id="75" template="../../obj/enemy.tx" x="224.849" y="78.7118">
+  <object id="75" template="../../obj/enemy.tx" x="222.401" y="118.859">
    <properties>
     <property name="deckOverride" value="decks/standard/baronlegant.dck"/>
     <property name="displayNameOverride" value="Baron Von Gant"/>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Imposing Sovereign&quot; ] }"/>
     <property name="enemy" value="Human elite"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="76" template="../../obj/waypoint.tx" x="159.966" y="322.475"/>

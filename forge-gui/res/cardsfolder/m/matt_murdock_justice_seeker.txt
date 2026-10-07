@@ -1,0 +1,10 @@
+Name:Matt Murdock, Justice Seeker
+ManaCost:1 W
+Types:Legendary Creature Human Advisor Hero
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may pay {1}. When you do, put a +1/+1 counter on target creature you control.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPutCounter | TriggerDescription$ When you do, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Ward:1 | Description$ Each creature you control with a counter on it has ward {1}. (Whenever it becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, you may pay {1}. When you do, put a +1/+1 counter on target creature you control.\nEach creature you control with a counter on it has ward {1}. (Whenever it becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)

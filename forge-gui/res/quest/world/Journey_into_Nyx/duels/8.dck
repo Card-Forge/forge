@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/States-Champs_S._California/Tom_Hresc_-_R-W_Burn_(Standard,_#74198).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Eidolon of the Great Revel
+2 Spark Trooper
+4 Boros Charm
+4 Lightning Strike
+4 Magma Jet
+3 Searing Blood
+2 Shock
+4 Skullcrack
+4 Warleader's Helix
+2 Banishing Light
+3 Mana Confluence
+9 Mountain
+4 Mutavault
+4 Sacred Foundry
+3 Temple of Triumph
+[Sideboard]
+2 Anger of the Gods
+1 Blind Obedience
+4 Firedrinker Satyr
+4 Peak Eruption
+2 Reprisal
+1 Wild Guess

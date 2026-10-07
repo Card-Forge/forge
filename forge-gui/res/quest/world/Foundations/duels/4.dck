@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Gouda_Reo_-_UB_Midrange_(Standard,_#2283024).dck
+Deck Type=constructed
+
+[Main]
+3 Faerie Mastermind
+3 Spyglass Siren
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+3 Azure Beastbinder
+3 Enduring Curiosity
+3 Go for the Throat
+2 Cut Down
+1 Anoint with Affliction
+1 Bitter Triumph
+2 Phantom Interference
+1 Shoot the Sheriff
+2 Refute
+3 Kaito, Bane of Nightmares
+4 Island
+4 Swamp
+4 Underground River
+4 Darkslick Shores
+2 Drannith Ruins
+3 Restless Reef
+4 Gloomlake Verge
+[Sideboard]
+2 Negate
+2 Duress
+1 Disdainful Stroke
+2 Disfigure
+3 Soul-Guide Lantern
+2 Anoint with Affliction
+1 Nowhere to Run
+2 Withering Torment

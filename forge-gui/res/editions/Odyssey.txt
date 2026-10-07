@@ -77,7 +77,7 @@ ScryfallCode=ODY
 62 U Aura Graft @Ray Lago
 63 C Aven Fisher @Christopher Moeller
 64 U Aven Smokeweaver @Kev Walker
-65 C Aven Windreader @Greg Hildebrandt & Tim Hildebrandt
+65 C Aven Windreader @Greg Hildebrandt
 66 U Balshan Beguiler @Ray Lago
 67 U Balshan Griffin @Wayne England
 68 U Bamboozle @Alan Pollack
@@ -185,7 +185,7 @@ ScryfallCode=ODY
 170 U Zombie Infestation @Thomas M. Baxa
 171 U Zombify @Mark Romanoski
 172 C Acceptable Losses @Mike Ploog
-173 C Anarchist @Greg Hildebrandt & Tim Hildebrandt
+173 C Anarchist @Greg Hildebrandt
 174 R Ashen Firebeast @Mark Tedin
 175 C Barbarian Lunatic @Ron Spears
 176 U Bash to Bits @Matt Cavotta

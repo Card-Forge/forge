@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Nakamura_Hiroto_-_Hammer_Time_(Modern,_#2280617).dck
+Deck Type=constructed
+
+[Main]
+3 Invisible Stalker
+4 Stoneforge Mystic
+4 Fervent Champion
+1 Gingerbrute
+1 Pithing Needle
+4 Colossus Hammer
+1 Shadowspear
+1 Cryptic Coat
+1 Lavaspur Boots
+1 Vexing Bauble
+4 Leyline Axe
+4 Surge of Salvation
+4 Battlefield Improvisation
+4 Sigarda's Aid
+4 Urza's Saga
+2 Plains
+1 Hallowed Fountain
+1 Sacred Foundry
+3 Flooded Strand
+3 Windswept Heath
+3 Arid Mesa
+2 Marsh Flats
+2 Inkmoth Nexus
+1 Elegant Parlor
+1 Meticulous Archive
+[Sideboard]
+2 Surgical Extraction
+3 Mystical Dispute
+3 Drannith Magistrate
+2 Fear, Fire, Foes!
+4 Consign to Memory
+1 Ghost Vacuum

@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
 DeckHints:Ability$Graveyard & Type$Sorcery|Instant
 AlternateMode:Specialize
-Oracle:When Gale, Conduit of the Arcane enters, if you cast it, return target instant or sorcery card from your graveyard to your hand.
+Oracle:Specialize {2}\nWhen Gale, Conduit of the Arcane enters, if you cast it, return target instant or sorcery card from your graveyard to your hand.
 
 SPECIALIZE:WHITE
 

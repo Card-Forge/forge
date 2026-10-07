@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -25,13 +26,15 @@ import forge.card.ColorSet;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
+import java.util.HashMap;
 import java.util.function.Function;
 
 /**
  * Class to create ui elements in the correct style
  */
 public class Controls {
-
+    private static final Rectangle boundingBox = new Rectangle();
+    private static final HashMap<String, String> currencyStringsMap = new HashMap<>(256);
     static public Label.LabelStyle getLabelStyle(String name) {
         return getSkin().get(name, Label.LabelStyle.class);
     }
@@ -131,6 +134,142 @@ public class Controls {
 
     }
 
+    public static class MarqueeButton extends TextButtonFix {
+
+        static protected float MAX_SCROLL_SPEED_DEFAULT = 15f;
+        static protected float MIN_SCROLL_DURATION_DEFAULT = 3f;
+        static protected float SCROLL_START_PAUSE_DEFAULT = 0.7f;
+        static protected float SCROLL_END_PAUSE_DEFAULT = 1f;
+
+        protected Action currentAction;
+        protected float scrollStartPause;
+        protected float scrollEndPause;
+        protected float maxScrollSpeed;
+        protected float minScrollDuration;
+
+        public MarqueeButton(@Null String text) {
+            super(text);
+            scrollStartPause = SCROLL_START_PAUSE_DEFAULT;
+            scrollEndPause = SCROLL_END_PAUSE_DEFAULT;
+            maxScrollSpeed = MAX_SCROLL_SPEED_DEFAULT;
+            minScrollDuration = MIN_SCROLL_DURATION_DEFAULT;
+            this.clip(true);
+            this.getTextraLabel().setWrap(false);
+            this.align(Align.left);
+            this.manageAnimation();
+        }
+
+        // Animation Handling
+        public void manageAnimation() {
+            Cell<TextraLabel> labelCell = this.getTextraLabelCell();
+            TextraLabel label = this.getTextraLabel();
+
+            label.removeAction(this.getCurrentAction());
+            if (this.getClippedLength() > 0) {
+                labelCell.align(Align.left);
+                this.setCurrentAction(this.generateMarqueeAction());
+                label.addAction(this.getCurrentAction());
+            }
+            else {
+                labelCell.align(Align.center);
+            }
+        }
+
+        public Action generateMarqueeAction() {
+            float clippedLength = this.getClippedLength();
+            float scrollDuration = Math.max(clippedLength / maxScrollSpeed, minScrollDuration);
+            return Actions.forever(Actions.sequence(
+                    Actions.delay(scrollStartPause),
+                    Actions.moveBy(-clippedLength, 0, scrollDuration, Interpolation.smooth),
+                    Actions.delay(scrollEndPause),
+                    Actions.moveBy(clippedLength, 0)
+            ));
+        }
+
+        public float getClippedLength() {
+            float cellWidth = this.getWidth() - this.getPadLeft() - this.getPadRight();
+            return Math.max(this.getTextraLabel().getWidth() - cellWidth, 0);
+        }
+
+        // Getters/Setters
+        public Action getCurrentAction(){
+            return this.currentAction;
+        }
+
+        public float getScrollStartPause(){
+            return this.scrollStartPause;
+        }
+
+        public float getScrollEndPause(){
+            return this.scrollEndPause;
+        }
+
+        public float getMaxScrollSpeed(){
+            return this.maxScrollSpeed;
+        }
+
+        public float getMinScrollDuration(){
+            return this.minScrollDuration;
+        }
+
+        public void setScrollStartPause(float pauseSecs) {
+            this.scrollStartPause = pauseSecs;
+            this.manageAnimation();
+        }
+
+        public void setScrollEndPausendPause(float pauseSecs) {
+            this.scrollEndPause = pauseSecs;
+            this.manageAnimation();
+        }
+
+        public void setMaxScrollSpeed(float speed) {
+            this.maxScrollSpeed = speed;
+            this.manageAnimation();
+        }
+
+        public void setMinScrollTime(float scrollSecs) {
+            this.minScrollDuration = scrollSecs;
+            this.manageAnimation();
+        }
+
+        public void setCurrentAction(Action newAction) {
+            if (newAction == null) throw new IllegalArgumentException("action cannot be null.");
+            if (currentAction == newAction) return;
+
+            TextraLabel label = this.getTextraLabel();
+            if (label.getActions().contains(currentAction, true)) {
+                label.removeAction(currentAction);
+                label.addAction(newAction);
+            }
+            currentAction = newAction;
+        }
+
+        // Wrap parent methods to ensure manageAnimation() is called each time the label or layout is changed
+        @Override
+        public void setTextraLabel(TextraLabel label) {
+            super.setTextraLabel(label);
+            this.invalidate();
+        }
+
+        @Override
+        public void setText(@Null String text) {
+            super.setText(text);
+            this.invalidate();
+        }
+
+        @Override
+        public void setStyle(Button.ButtonStyle style, boolean makeGridGlyphs) {
+            super.setStyle(style, makeGridGlyphs);
+            this.invalidate();
+        }
+
+        @Override
+        public void layout() {
+            super.layout();
+            this.manageAnimation();
+        }
+    }
+
     static public TextraButton newTextButton(String text) {
         TextraButton button = new TextButtonFix(text);
         button.getTextraLabel().setWrap(false);
@@ -143,33 +282,49 @@ public class Controls {
         return button;
     }
 
+    static public MarqueeButton newMarqueeButton(String text) {
+        return new MarqueeButton(text);
+    }
+
     static public Rectangle getBoundingRect(Actor actor) {
-        return new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
+        if (actor == null) {
+            boundingBox.set(0, 0, 0, 0);
+            return boundingBox;
+        }
+        boundingBox.set(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
+        return boundingBox;
+    }
+
+    static public boolean actorContainsVector(Actor actor, float stageX, float stageY) {
+        if (actor == null || !actor.isVisible()) {
+            return false;
+        }
+        return getBoundingRect(actor).contains(stageX, stageY);
     }
 
     static public boolean actorContainsVector(Actor actor, Vector2 point) {
-        if (actor == null)
+        if (actor == null || !actor.isVisible() || point == null) {
             return false;
-        if (!actor.isVisible())
-            return false;
+        }
         return getBoundingRect(actor).contains(point);
     }
 
     static public boolean actorContainsVector(Array<TextraButton> buttons, Vector2 point) {
-        boolean value = false;
-        if (buttons == null)
+        if (buttons == null || buttons.isEmpty() || point == null) {
             return false;
-        if (buttons.isEmpty())
-            return false;
-        for (Actor actor : buttons) {
-            if (actor == null)
-                return false;
-            if (!actor.isVisible())
-                return false;
-            if (getBoundingRect(actor).contains(point))
-                value = true;
         }
-        return value;
+
+        int buttonCount = buttons.size;
+        for (int i = 0; i < buttonCount; i++) {
+            Actor actor = buttons.get(i);
+            if (actor == null || !actor.isVisible()) {
+                continue;
+            }
+            if (getBoundingRect(actor).contains(point)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static public SelectBox<String> newComboBox(String[] text, String item, Function<Object, Void> func) {
@@ -625,6 +780,16 @@ public class Controls {
         }
 
         private String getLabelText(int amount, String updateText) {
+            if (updateText == null || updateText.isEmpty()) {
+                String cachedBase = currencyStringsMap.get(amount + currencyIcon);
+                if (cachedBase == null) {
+                    cachedBase = amount + " " + currencyIcon;
+                    currencyStringsMap.put(amount + currencyIcon, cachedBase);
+                }
+                return cachedBase;
+            }
+
+            // This only executes for a brief second while the update or animation started
             return amount + " " + currencyIcon + updateText;
         }
 

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/Ichikawa_Hideyuki_-_Temur_Aggro_(Standard,_#2722150).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+1 Craterhoof Behemoth
+4 Great Divide Guide
+4 Llanowar Elves
+4 Ouroboroid
+4 Quantum Riddler
+4 Spider Manifestation
+2 Into the Flood Maw
+4 Break Out
+3 Iroh's Demonstration
+4 Nature's Rhythm
+2 Botanical Sanctum
+4 Breeding Pool
+1 Island
+1 Mountain
+3 Multiversal Passage
+3 Riverpyre Verge
+4 Starting Town
+4 Stomping Ground
+[Sideboard]
+2 Abrade
+4 Sentinel of the Nameless City
+4 Spider-Sense
+4 Subterranean Schooner
+1 Thunder Magic

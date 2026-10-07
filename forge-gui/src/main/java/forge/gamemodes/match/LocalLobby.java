@@ -9,8 +9,6 @@ public final class LocalLobby extends GameLobby {
 
     private IGuiGame gui = null;
     public LocalLobby() {
-        super(false);
-
         final String humanName = localName();
         final int[] avatarIndices = localAvatarIndices();
         final int[] sleeveIndices = localSleeveIndices();
@@ -20,6 +18,11 @@ public final class LocalLobby extends GameLobby {
 
         final LobbySlot slot1 = new LobbySlot(LobbySlotType.AI, null, avatarIndices[1], sleeveIndices[1],1, false, true, Collections.emptySet());
         addSlot(slot1);
+    }
+
+    @Override
+    public boolean isAllowNetworking() {
+        return false;
     }
 
     @Override public boolean hasControl() {

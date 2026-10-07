@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_VanDorsselaer_-_Jeskai_Winota_(Standard,_#974461).dck
+Deck Type=constructed
+
+[Main]
+1 Haktos the Unscarred
+1 Faerie Vandal
+2 Fblthp, the Lost
+2 Elite Guardmage
+2 Kenrith, the Returned King
+3 Charming Prince
+4 Hanged Executioner
+4 Legion Warboss
+4 Winota, Joiner of Forces
+4 Agent of Treachery
+4 Raise the Alarm
+3 Teferi, Time Raveler
+1 Mountain
+1 Swamp
+2 Island
+2 Plains
+4 Raugrin Triome
+4 Fabled Passage
+4 Hallowed Fountain
+4 Steam Vents
+4 Sacred Foundry
+[Sideboard]
+1 Mythos of Vadrok
+2 Aether Gust
+2 Dovin's Veto
+2 Essence Scatter
+2 Fire Prophecy
+3 Ashiok, Dream Render
+3 Mystical Dispute

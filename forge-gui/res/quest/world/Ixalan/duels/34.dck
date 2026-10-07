@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot34
+Title=Robot34
+Icon=Ratbert.jpg
+Difficulty=Easy
+Description=Deck 
+Deck Type=constructed
+
+[Main]
+2 Bishop of the Bloodstained
+4 Bloodcrazed Paladin
+4 Gifted Aetherborn
+2 Mavren Fein, Dusk Apostle
+2 Sanctum Seeker
+4 Vicious Conquistador
+2 Yahenni, Undying Partisan
+2 Fatal Push
+2 Call to the Feast
+2 Dusk // Dawn
+2 Never // Return
+2 Queen's Commission
+2 Sword-Point Diplomacy
+2 Walk the Plank
+2 Anointed Procession
+4 Legion's Landing
+4 Concealed Courtyard
+4 Plains
+8 Swamp
+4 Unclaimed Territory
+[Sideboard]
+2 Ashes of the Abhorrent
+1 Dusk // Dawn
+2 Fatal Push
+2 Ixalan's Binding
+2 Never // Return
+2 Settle the Wreckage
+2 Vona, Butcher of Magan
+2 Walk the Plank

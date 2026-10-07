@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Franco_Renken_-_Infect_(Modern,_#799973).dck
+Deck Type=constructed
+
+[Main]
+1 Spellskite
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+1 Viridian Corrupter
+1 Dryad Arbor
+2 Become Immense
+4 Blossoming Defense
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+3 Distortion Strike
+1 Wild Defiance
+2 Forest
+3 Breeding Pool
+4 Inkmoth Nexus
+4 Windswept Heath
+4 Wooded Foothills
+2 Pendelhaven
+[Sideboard]
+1 Spellskite
+1 Viridian Corrupter
+1 Wild Defiance
+1 Carrion Call
+1 Corrupted Resolve
+2 Dispel
+2 Nature's Claim
+1 Piracy Charm
+1 Return to Nature
+2 Spell Pierce
+1 Nissa, Voice of Zendikar
+1 Distortion Strike

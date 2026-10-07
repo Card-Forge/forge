@@ -67,7 +67,15 @@
 	"Raven",
 	"Sliver",
 	"Wandering Giant",
-	"Wild Rat"
+	"Wild Rat",
+	"Worm",
+	"Weak Demon",
+	"Wandering Treefolk",
+	"Bloodied Skeleton",
+	"Snail",
+	"Goblin Rager",
+	"Elf Vagabond"
+	
 ],
 	"pointsOfInterest": [
 		"Spawn",

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Hans
+Title=Hans
+Icon=Hans.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/dschidi_-_Jeskai_CopyCat_(Modern,_#665026).dck
+Deck Type=constructed
+
+[Main]
+4 Blade Splicer
+4 Felidar Guardian
+2 Kiki-Jiki, Mirror Breaker
+1 Kitchen Finks
+4 Restoration Angel
+1 Reveillark
+2 Sun Titan
+4 Wall of Omens
+1 Dispel
+3 Lightning Bolt
+1 Lightning Helix
+3 Path to Exile
+1 Impact Tremors
+1 Nahiri, the Harbinger
+4 Saheeli Rai
+4 Arid Mesa
+1 Celestial Colonnade
+1 Flooded Strand
+1 Ghost Quarter
+1 Hallowed Fountain
+3 Inspiring Vantage
+1 Island
+1 Mountain
+3 Plains
+2 Sacred Foundry
+4 Seraph Sanctuary
+1 Steam Vents
+1 Wandering Fumarole
+[Sideboard]
+2 Anger of the Gods
+2 Detention Sphere
+2 Dispel
+2 Geist of Saint Traft
+2 Kitchen Finks
+2 Manic Vandal
+2 Negate
+1 Supreme Verdict

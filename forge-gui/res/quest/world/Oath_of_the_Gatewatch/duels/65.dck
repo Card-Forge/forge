@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/World_Championship_Seattle,_US/Brian_Braun_Duin_-_Bant_Eldrazi_(Modern,_#637999).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Drowner of Hope
+4 Eldrazi Displacer
+2 Eldrazi Skyspawner
+3 Matter Reshaper
+4 Noble Hierarch
+4 Reality Smasher
+1 Spellskite
+3 Brushland
+4 Cavern of Souls
+4 Eldrazi Temple
+2 Forest
+1 Hallowed Fountain
+1 Plains
+1 Temple Garden
+4 Windswept Heath
+3 Yavimaya Coast
+[Sideboard]

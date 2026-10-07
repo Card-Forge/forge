@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Berry_-_Mono-White_Aggro_(Standard,_#1069135).dck
+Deck Type=constructed
+
+[Main]
+1 Heliod, Sun-Crowned
+1 Linden, the Steadfast Queen
+1 Legion Angel
+2 Lurrus of the Dream-Den
+2 Giant Killer
+4 Speaker of the Heavens
+4 Skyclave Apparition
+4 Selfless Savior
+4 Luminarch Aspirant
+4 Daxos, Blessed by the Sun
+4 Alseid of Life's Bounty
+4 Glass Casket
+4 Kabira Takedown
+2 Emeria's Call
+1 Banishing Light
+1 Basri Ket
+1 Castle Ardenvale
+16 Plains
+[Sideboard]
+1 Soul-Guide Lantern
+1 Emeria's Call
+1 Heliod, Sun-Crowned
+1 Shadowspear
+2 Hushbringer
+2 Sejiri Shelter
+3 Banishing Light
+3 Legion Angel

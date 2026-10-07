@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Shantz_-_4-Color_Yorion_(Standard,_#971784).dck
+Deck Type=constructed
+
+[Main]
+4 Agent of Treachery
+4 Growth Spiral
+4 Toll of the Invasion
+4 Casualties of War
+4 Dreadhorde Invasion
+4 Shark Typhoon
+4 Omen of the Sea
+2 Vraska, Golgari Queen
+4 Narset, Parter of Veils
+4 Kasmina, Enigmatic Mentor
+4 Lukka, Coppercoat Outcast
+1 Mountain
+1 Island
+1 Forest
+1 Swamp
+3 Stomping Ground
+3 Breeding Pool
+4 Zagoth Triome
+4 Ketria Triome
+4 Fabled Passage
+4 Blood Crypt
+4 Steam Vents
+4 Watery Grave
+4 Overgrown Tomb
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Commence the Endgame
+4 Shock
+4 Omen of the Forge
+4 Mystical Dispute

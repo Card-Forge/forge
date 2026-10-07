@@ -25,7 +25,6 @@ import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
@@ -43,7 +42,7 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -66,7 +65,12 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.util.IHasForgeLog;
+import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.YieldMarker;
+import forge.gamemodes.net.NetworkGuiGame;
+import forge.gamemodes.net.client.FGameClient;
+import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -94,7 +98,7 @@ import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.screens.match.controllers.CAntes;
+import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.match.controllers.CCombat;
 import forge.screens.match.controllers.CDependencies;
 import forge.screens.match.controllers.CDetailPicture;
@@ -104,6 +108,7 @@ import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
+import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.toolbox.FButton;
@@ -117,7 +122,9 @@ import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -126,6 +133,7 @@ import forge.util.collect.FCollectionView;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+
 import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -138,12 +146,16 @@ import net.miginfocom.swing.MigLayout;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public final class CMatchUI
-    extends AbstractGuiGame
-    implements ICDoc, IMenuProvider {
+    extends NetworkGuiGame
+    implements ICDoc, IMenuProvider, IHasForgeLog {
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
-            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard);
+            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard,
+            ZoneType.StickerSheets);
+
+    private final List<PlayerZoneUpdate> selectionZonesShown = Lists.newArrayList();
+    private final List<PlayerZoneUpdate> revealZonesShown = Lists.newArrayList();
 
     private final FScreen screen;
     private final VMatchUI view;
@@ -156,10 +168,13 @@ public final class CMatchUI
     private boolean allHands;
     private boolean showOverlay = true;
     private JPopupMenu openAbilityMenu;
+    private CardPanel lastClickedCardPanel;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
-    private final CAntes cAntes = new CAntes(this);
+    private ReconnectModals.ReconnectingHandle reconnectingHandle;
+    private boolean userDismissedReconnectDialog;
+
     private final CCombat cCombat = new CCombat();
     private final CDependencies cDependencies = new CDependencies(this);
     private final CDetailPicture cDetailPicture = new CDetailPicture(this);
@@ -169,6 +184,7 @@ public final class CMatchUI
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
     private int nextNotifiableStackIndex = 0;
+    private String lastPromptMessage = "";
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -176,12 +192,6 @@ public final class CMatchUI
         this.myDocs = new EnumMap<>(EDocID.class);
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
-        // only create an ante doc if playing for ante
-        if (isPreferenceEnabled(FPref.UI_ANTE)) {
-            this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
-        } else {
-            this.myDocs.put(EDocID.CARD_ANTES, null);
-        }
         this.myDocs.put(EDocID.REPORT_MESSAGE, getCPrompt().getView());
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
@@ -195,10 +205,6 @@ public final class CMatchUI
         for (final Entry<EDocID, IVDoc<? extends ICDoc>> doc : myDocs.entrySet()) {
             doc.getKey().setDoc(doc.getValue());
         }
-    }
-
-    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
-        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
     FScreen getScreen() {
@@ -224,6 +230,82 @@ public final class CMatchUI
 
         cDetailPicture.setGameView(gameView0);
         screen.setTabCaption(gameView0.getTitle());
+        refreshAllViews();
+    }
+
+    @Override
+    protected void afterDeltaApplied() {
+        refreshAllViews();
+    }
+
+    private VDrawOfferDialog drawOfferDialog;
+
+    @Override
+    public void updateDrawOffer(final DrawOfferMessage.Status update) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (update.result() != null) {
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                }
+                drawOfferDialog.showResult(update);
+                drawOfferDialog = null;
+                return;
+            }
+            PlayerView localTarget = null;
+            for (final PlayerView lp : getLocalPlayers()) {
+                if (update.isPending(lp)) {
+                    localTarget = lp;
+                    break;
+                }
+            }
+            if (localTarget != null) {
+                // a local player still owes a vote — always (re)present it, even if previously hidden
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                }
+                drawOfferDialog.refresh(update, localTarget);
+            } else {
+                // only watchers locally — show the read-only tally but respect dismissal
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                } else if (!drawOfferDialog.isVisible()) {
+                    return;
+                }
+                drawOfferDialog.refresh(update, null);
+            }
+        });
+    }
+
+    @Override
+    public void refreshYieldUi(final PlayerView player) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            // Marker is rendered only on the local player's view of the targeted phase indicator.
+            PlayerView local = getCurrentPlayer();
+            if (!player.equals(local)) {
+                return;
+            }
+            for (final VField f : getFieldViews()) {
+                for (PhaseLabel l : f.getPhaseIndicator().allLabels()) {
+                    l.setYieldMarked(false);
+                }
+            }
+            IGameController controller = getGameController(local);
+            YieldMarker marker = controller != null ? controller.getYieldController().getAutoPassUntilMarker() : null;
+            if (marker == null) {
+                return;
+            }
+            VField markedField = getFieldViewFor(marker.getPhaseOwner());
+            if (markedField == null) {
+                return;
+            }
+            PhaseLabel target = markedField.getPhaseIndicator().getLabelFor(marker.getPhase());
+            if (target != null) {
+                target.setYieldMarked(true);
+            }
+        });
+    }
+
+    private void refreshAllViews() {
         if (sortedPlayers != null) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 for (final VField f : getFieldViews()) {
@@ -231,6 +313,7 @@ public final class CMatchUI
                     f.updateZones();
                     f.updateManaPool();
                     f.getTabletop().update();
+                    f.updateTabLabel();
                 }
                 for (final VHand h : getHandViews()) {
                     h.getLayoutControl().updateHand();
@@ -254,6 +337,10 @@ public final class CMatchUI
     CPrompt getCPrompt() {
         return cPrompt;
     }
+    /** True if either prompt input button (OK/Cancel) is currently enabled. */
+    public boolean isInputButtonEnabled() {
+        return view.getBtnOK().isEnabled() || view.getBtnCancel().isEnabled();
+    }
     public CStack getCStack() {
         return cStack;
     }
@@ -268,7 +355,7 @@ public final class CMatchUI
         if (!isInGame() || getCurrentPlayer() == null) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer());
+        final Deck deck = getDeckForPlayer(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -286,6 +373,14 @@ public final class CMatchUI
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         allHands = sortedPlayers.size() == getLocalPlayerCount();
+
+        if (isNetGame()) {
+            netLog.debug("sortedPlayers count={}", sortedPlayers.size());
+            for (PlayerView p : sortedPlayers) {
+                netLog.debug("  Player ID={}, hash={}, isLocal={}",
+                        p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
+            }
+        }
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
@@ -360,9 +455,12 @@ public final class CMatchUI
         return view.getHands();
     }
     public VHand getHandFor(final PlayerView p) {
-        final int idx = getPlayerIndex(p);
-        final List<VHand> allHands = getHandViews();
-        return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
+        for (final VHand hand : getHandViews()) {
+            if (p.equals(hand.getPlayer())) {
+                return hand;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -404,7 +502,17 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
-    } // showCombat(CombatView)
+
+        // Combat pairings changed — rebuild layout so grouping reflects them
+        if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))
+                || FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS)) {
+            FThreads.invokeInEdtNowOrLater(() -> {
+                for (final VField f : getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        }
+    }
 
     @Override
     public void updateDependencies() {
@@ -426,17 +534,23 @@ public final class CMatchUI
 
     @Override
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        if (!FThreads.isGuiThread()) {
+            FThreads.invokeInEdtLater(() -> updateZones(zonesToUpdate));
+            return;
+        }
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
+
+            if (isNetGame()) {
+                netLog.debug("Processing update for player {}, zones={}, ownerHash={}",
+                        owner.getId(), update.getZones(), System.identityHashCode(owner));
+            }
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
             for (final ZoneType zone : update.getZones()) {
                 switch (zone) {
                 case Battlefield:
                     setupPlayZone = true;
-                    break;
-                case Ante:
-                    updateAnte = true;
                     break;
                 case Hand:
                     updateHand = true;
@@ -450,17 +564,23 @@ public final class CMatchUI
                 }
             }
 
-            if (updateAnte) {
-                cAntes.update();
-            }
             final VField vField = getFieldViewFor(owner);
-            if(vField == null)
+            if (vField == null) {
+                netLog.error("vField is null for player {}, sortedPlayers.indexOf={}",
+                        owner.getId(), sortedPlayers.indexOf(owner));
                 return;
+            }
             if (setupPlayZone) {
                 vField.getTabletop().update();
+                vField.updateTabLabel();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
+                if (isNetGame()) {
+                    netLog.debug("updateHand for player {}, vHand={}, handSize={}",
+                            owner.getId(), (vHand != null ? "exists" : "NULL"),
+                            String.valueOf(owner.getHand().size()));
+                }
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
@@ -473,45 +593,28 @@ public final class CMatchUI
         }
     }
 
-    @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        List<PlayerZoneUpdate> updatedPlayerZones = Lists.newArrayList();
-
+    private List<PlayerZoneUpdate> tempShowZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        final List<PlayerZoneUpdate> shown = Lists.newArrayList();
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView player = update.getPlayer();
-                for (final ZoneType zone : update.getZones()) {
-                    switch (zone) {
-                        case Battlefield: // always shown
-                            break;
-                        case Hand:  // controller hand always shown
-                            if (controller != player) {
-                                if (FloatingZone.show(this,player,zone)) {
-                                    updatedPlayerZones.add(update);
-                                }
-                            }
-                            break;
-                        default:
-                            if(!FLOATING_ZONE_TYPES.contains(zone))
-                                break;
-                            if (FloatingZone.show(this,player,zone)) {
-                                updatedPlayerZones.add(update);
-                            }
-                            break;
-                    }
+            for (final ZoneType zone : update.getZones()) {
+                if (needsFloatingZone(player, zone) && FloatingZone.show(this, player, zone)) {
+                    shown.add(new PlayerZoneUpdate(player, zone));
                 }
             }
-        return updatedPlayerZones;
+        }
+        return shown;
     }
 
-    @Override
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        if (zonesToUpdate != null) {
-            for (final PlayerZoneUpdate update : zonesToUpdate) {
-                final PlayerView player = update.getPlayer();
-                for (final ZoneType zone : update.getZones()) {
-                    if(FLOATING_ZONE_TYPES.contains(zone))
-                        FloatingZone.hide(this,player,zone);
-                }
+    // a hand initHandViews already docked needs no window of its own, whoever controls that player
+    private boolean needsFloatingZone(final PlayerView player, final ZoneType zone) {
+        return FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && getHandFor(player) == null);
+    }
+
+    private void hideZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            for (final ZoneType zone : update.getZones()) {
+                FloatingZone.hide(this, update.getPlayer(), zone);
             }
         }
     }
@@ -533,15 +636,12 @@ public final class CMatchUI
     }
 
     @Override
-    public void updateShards(Iterable<PlayerView> shardsUpdate) {
-        //mobile adventure only..
-    }
-
-    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView c : cards) {
+            // Null can flow in from a remote-side event whose IdRef failed to resolve in the tracker.
+            if (c == null) { continue; }
             final ZoneType zone = c.getZone();
-            if (zone == null) { return; }
+            if (zone == null) { continue; }
 
             switch (zone) {
             case Battlefield:
@@ -559,6 +659,8 @@ public final class CMatchUI
                         cp.repaintOverlays();
                     }
                 }
+                // VHand only covers the local hand; opponent hands shown in a FloatingZone need an explicit refresh.
+                FloatingZone.refresh(c.getController(), zone);
                 break;
             default:
                 FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
@@ -568,17 +670,19 @@ public final class CMatchUI
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards) {
-        super.setSelectables(cards);
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
+        // a maximum of 0 marks display-only highlighting, whose caller shows its own window
+        final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            if (!zones.isEmpty()) {
+                updateZones(zones);
+                selectionZonesShown.addAll(tempShowZones(zones));
             }
             FloatingZone.refreshAll();
         });
@@ -590,12 +694,66 @@ public final class CMatchUI
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            hideZones(selectionZonesShown);
+            selectionZonesShown.clear();
+            FloatingZone.refreshAll();
+            FloatingZone.clearAllHotkeyAffordance();
+        });
+    }
+
+    @Override
+    public void showRevealedCards(final Iterable<CardView> cards) {
+        // the host sends these only for a hand reveal, so other zones of mixed cards stay closed
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerZoneUpdate update : getZonesHolding(cards)) {
+            if (update.getZones().contains(ZoneType.Hand)) {
+                zones.add(new PlayerZoneUpdate(update.getPlayer(), ZoneType.Hand));
+            }
+        }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            updateZones(zones);
+            revealZonesShown.addAll(tempShowZones(zones));
+        });
+    }
+
+    @Override
+    public void hideRevealedCards() {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            hideZones(revealZonesShown);
+            revealZonesShown.clear();
+        });
+    }
+
+    @Override
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+        super.setHighlighted(entities, b);
+        if (isSelecting()) {
+            FThreads.invokeInEdtNowOrLater(FloatingZone::refreshSelectionPrompts);
+        }
+    }
+
+    @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        super.setWeaklySelectable(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        super.clearWeaklySelectable();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
             FloatingZone.refreshAll();
         });
@@ -603,12 +761,9 @@ public final class CMatchUI
 
     @Override
     public void refreshField() {
-        super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
             }
             FloatingZone.refreshAll();
         });
@@ -644,6 +799,9 @@ public final class CMatchUI
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
         FloatingZone.closeAll();
+        // the tracked entries refer to windows closeAll has already disposed
+        selectionZonesShown.clear();
+        revealZonesShown.clear();
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
@@ -679,6 +837,10 @@ public final class CMatchUI
             panels.addAll(f.getTabletop().getCardPanels());
         }
         return panels;
+    }
+
+    public void setLastClickedCardPanel(final CardPanel panel) {
+        lastClickedCardPanel = panel;
     }
 
     /**
@@ -719,10 +881,14 @@ public final class CMatchUI
     @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
         final FButton btn1 = view.getBtnOK(), btn2 = view.getBtnCancel();
-        btn1.setText(label1);
-        btn2.setText(label2);
+        final boolean macroReplaying = getGameController() != null && getGameController().macros().isReplaying();
+        final boolean actualEnable1 = macroReplaying ? false : enable1;
+        final boolean actualEnable2 = macroReplaying ? true : enable2;
+        final boolean actualFocus1 = macroReplaying ? false : focus1;
+        btn1.setText(macroReplaying ? "" : label1);
+        btn2.setText(macroReplaying ? Localizer.getInstance().getMessage("lblCancel") : label2);
 
-        final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
+        final FButton toFocus = actualEnable1 && actualFocus1 ? btn1 : (actualEnable2 ? btn2 : null);
 
         //pfps This seems wrong so I've commented it out for now and put a replacement in the runnable
         // Remove focusable so the right button grabs focus properly
@@ -735,10 +901,10 @@ public final class CMatchUI
             // The only button that is focusable is the enabled default button
             // This prevents the user from somehow focusing on on some other button
             // and then using the keyboard to try to select it
-            btn1.setEnabled(enable1);
-            btn2.setEnabled(enable2);
-            btn1.setFocusable(enable1 && focus1);
-            btn2.setFocusable(enable2 && !focus1);
+            btn1.setEnabled(actualEnable1);
+            btn2.setEnabled(actualEnable2);
+            btn1.setFocusable(actualEnable1 && actualFocus1);
+            btn2.setFocusable(actualEnable2 && !actualFocus1);
             // ensure we don't steal focus from an overlay
             if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
                 toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
@@ -750,6 +916,7 @@ public final class CMatchUI
         } else {
             FThreads.invokeInEdtAndWait(focusRoutine);
         }
+        getCDock().refreshMacroButtons();
     }
 
     @Override
@@ -820,6 +987,8 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+        selectionZonesShown.clear();
+        revealZonesShown.clear();
         if (isNetGame()) {
             writeMatchPreferences();
         }
@@ -923,11 +1092,14 @@ public final class CMatchUI
             // TODO: do we need a user setting for the scrollCount?
             MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
-            final CardPanel panel = findCardPanel(hostCard);
+            // Prefer the panel the user clicked so the menu opens there if the card shows in multiple windows
+            final CardPanel panel = lastClickedCardPanel != null && lastClickedCardPanel.isShowing()
+                    && hostCard.equals(lastClickedCardPanel.getCard())
+                    ? lastClickedCardPanel : findCardPanel(hostCard);
             final Component menuParent;
             final int x, y;
-            if (panel == null) {
-                // Fall back to showing in VPrompt if no panel can be found
+            if (panel == null || !panel.isShowing()) {
+                // Fall back to VPrompt when there's no on-screen anchor — panel missing, or hidden (e.g. a closed Sideboard window)
                 menuParent = getCPrompt().getView().getTarMessage();
                 x = 0;
                 y = 0;
@@ -964,35 +1136,37 @@ public final class CMatchUI
         return null; //delay ability until choice made
     }
 
-    @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message);
-    }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
-        cPrompt.setMessage(message);
+        cPrompt.setMessage(message, null);
+        notePromptMessage(message);
     }
 
     @Override
-    public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
+    public void showPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
+        notePromptMessage(message);
     }
 
-    //  no override for now
-    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message,card);
+    private void notePromptMessage(String message) {
+        if (message != null) {
+            int lastBreak = message.lastIndexOf("\n");
+            if (lastBreak != -1) {
+                // try to only use the specific message of the input
+                // not fully accurate but ok for now
+                message = message.substring(lastBreak + 1);
+            }
+        } else {
+            message = "";
+        }
+        lastPromptMessage = message;
+        if (isSelecting()) {
+            FloatingZone.refreshSelectionPrompts();
+        }
     }
 
-    @Override
-    public void showManaPool(final PlayerView player) {
-        //not needed since mana pool icons are always visible
-    }
-
-    @Override
-    public void hideManaPool(final PlayerView player) {
-        //not needed since mana pool icons are always visible
+    public String getPromptMessage() {
+        return lastPromptMessage;
     }
 
     @Override
@@ -1039,6 +1213,21 @@ public final class CMatchUI
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
+
+        if (isNetGame()) {
+            netLog.info("openView called");
+            netLog.debug("gameView.getPlayers() count={}", players.size());
+            for (PlayerView pv : players) {
+                Tracker t = pv.getTracker();
+                PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
+                netLog.debug("  Player {}: hash={}, tracker={}, inTracker={}, sameInstance={}",
+                        pv.getId(), System.identityHashCode(pv),
+                        t != null ? "exists" : "null",
+                        inTracker != null,
+                        pv == inTracker);
+            }
+        }
+
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
@@ -1145,14 +1334,9 @@ public final class CMatchUI
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        /*if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof GameObject)
-                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof GameObject)) {
-            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
-            Thread.dumpStack();
-        }*/
-        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox, this);
     }
 
     @Override
@@ -1190,10 +1374,10 @@ public final class CMatchUI
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
+    public void openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final PlayerView view : playersWithTargetables.keySet()) {
-            for(final ZoneType zone : zones) {
+            for (final ZoneType zone : zones) {
                 if (zone.equals(ZoneType.Battlefield) || zone.equals(ZoneType.Hand)) {
                     continue;
                 }
@@ -1207,13 +1391,7 @@ public final class CMatchUI
             }
         }
 
-        tempShowZones(controller, zonesToUpdate);
-        return zonesToUpdate;
-    }
-
-    @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        hideZones(playerView, playerZoneUpdates);
+        tempShowZones(zonesToUpdate);
     }
 
     @Override
@@ -1251,13 +1429,24 @@ public final class CMatchUI
         final PhaseType[] phases = PhaseType.values();
 
         for (int i = 0; i < fieldViews.size(); i++) {
-            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+            final PlayerView player = sortedPlayers.get(i);
+            final FPref[] keys = isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabelFor(phases[p]).setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final PhaseLabel label = pi.getLabelFor(phase);
+                label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
+                label.setOnRightClick(() -> handleYieldMarkerToggle(player, phase, () -> {
+                    label.setEnabled(true);
+                    label.repaintOnlyThisLabel();
+                    pushSkipPhaseToControllers(player, phase);
+                }));
             }
         }
+
+        seedYieldStateOnHost();
     }
 
     @Override
@@ -1334,7 +1523,6 @@ public final class CMatchUI
 
                 FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
                 // here the user closed the modal - time to update the next notifiable stack index
-
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
@@ -1342,7 +1530,6 @@ public final class CMatchUI
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = () -> notifyStackAddition(event);
             GuiBase.getInterface().invokeInEdtLater(tryAgainThread);
-
         }
     }
 
@@ -1463,6 +1650,9 @@ public final class CMatchUI
 
     @Override
     public void handleLandPlayed(CardView land) {
+        if (ForgeConstants.LAND_PLAYED_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY))) {
+            return;
+        }
         Runnable createPopupThread = () -> createLandPopupPanel(land);
         GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);
     }
@@ -1543,5 +1733,57 @@ public final class CMatchUI
             }
         });
         menu.add(item);
+    }
+
+    @Override
+    public void onReconnectStateChanged(FGameClient.ReconnectState state, int attemptIndex, int nextDelaySeconds) {
+        FThreads.invokeInEdtLater(() -> dispatchReconnectState(state, attemptIndex, nextDelaySeconds));
+    }
+
+    private void dispatchReconnectState(final FGameClient.ReconnectState state, final int attemptIndex, final int nextDelaySeconds) {
+        final FGameClient client = FNetOverlay.SINGLETON_INSTANCE.getGameClient();
+        switch (state) {
+            case RECONNECTING:
+                if (userDismissedReconnectDialog) break;
+                if (reconnectingHandle == null && client != null) {
+                    reconnectingHandle = ReconnectModals.showReconnecting(client,
+                            () -> {
+                                userDismissedReconnectDialog = true;
+                                reconnectingHandle = null;
+                            },
+                            this::returnToMainMenu);
+                }
+                if (reconnectingHandle != null) {
+                    reconnectingHandle.update(attemptIndex, FGameClient.getTotalReconnectAttempts(), nextDelaySeconds);
+                }
+                break;
+            case CONNECTED:
+                if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                if (userDismissedReconnectDialog) {
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblReconnectedToast"));
+                }
+                userDismissedReconnectDialog = false;
+                break;
+            case FAILED:
+                if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                userDismissedReconnectDialog = false;
+                if (client != null) ReconnectModals.showFailed(client, this::returnToMainMenu);
+                break;
+            case SEAT_LOST:
+                if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                userDismissedReconnectDialog = false;
+                if (client != null) ReconnectModals.showSeatLost(client, this::returnToMainMenu);
+                break;
+        }
+    }
+
+    private void returnToMainMenu() {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            view.armBypassConcedeOnClose();
+            VSubmenuOnlineLobby.SINGLETON_INSTANCE.closeConn("");
+            Singletons.getView().getNavigationBar().closeTab(screen);
+            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+            LinkHandler.clearWeakReferencesNow();
+        });
     }
 }

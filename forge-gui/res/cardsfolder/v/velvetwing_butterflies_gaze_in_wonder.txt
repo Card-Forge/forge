@@ -1,0 +1,15 @@
+Name:Velvetwing Butterflies
+ManaCost:2 W
+Types:Creature Insect
+PT:2/2
+K:Flying
+AlternateMode:Adventure
+Oracle:Flying
+
+ALTERNATE
+
+Name:Gaze in Wonder
+ManaCost:1 W
+Types:Instant Adventure
+A:SP$ Tap | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature | SpellDescription$ Tap one or two target creatures. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Tap one or two target creatures. (Then exile this card. You may cast the creature later from exile.)

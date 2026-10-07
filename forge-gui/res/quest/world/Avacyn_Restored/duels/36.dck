@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Blue Devil
+Title=Blue Devil
+Icon=Blue Devil.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/PTQ_Ravnica_-_Virginia_Beach,_Virginia/Kenny_Mayer_-_Birthing_Pod_(Standard,_#31875).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+1 Borderland Ranger
+1 Elesh Norn, Grand Cenobite
+1 Fiend Hunter
+1 Geist-Honored Monk
+4 Huntmaster of the Fells
+1 Inferno Titan
+1 Phyrexian Metamorph
+4 Strangleroot Geist
+3 Thalia, Guardian of Thraben
+1 Wurmcoil Engine
+1 Zealous Conscripts
+4 Birthing Pod
+4 Copperline Gorge
+6 Forest
+2 Gavony Township
+1 Mountain
+1 Plains
+4 Razorverge Thicket
+3 Rootbound Crag
+3 Sunpetal Grove
+[Sideboard]
+2 Ancient Grudge
+4 Bonfire of the Damned
+2 Combust
+3 Hero of Bladehold
+2 Ray of Revelation

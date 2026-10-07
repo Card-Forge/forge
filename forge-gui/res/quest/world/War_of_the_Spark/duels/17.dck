@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=PapaLegba
+Title=PapaLegba
+Icon=PapaLegba.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Aaron_Barich_-_Sultai_Midrange_(Standard,_#797608).dck
+Deck Type=constructed
+
+[Main]
+2 Hostage Taker
+4 Hydroid Krasis
+4 Jadelight Ranger
+4 Merfolk Branchwalker
+1 Plaguecrafter
+4 Wildgrowth Walker
+1 Ob Nixilis's Cruelty
+1 Tyrant's Scorn
+2 Vraska's Contempt
+3 Find // Finality
+3 Thought Erasure
+1 Liliana, Dreadhorde General
+1 Ugin, the Ineffable
+3 Vivien Reid
+1 Vraska, Golgari Queen
+1 Forest
+4 Breeding Pool
+3 Drowned Catacomb
+4 Hinterland Harbor
+1 Memorial to Folly
+4 Overgrown Tomb
+4 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+2 Frilled Mystic
+1 Hostage Taker
+1 Thrashing Brontodon
+1 Cast Down
+1 Negate
+1 Ob Nixilis's Cruelty
+2 Duress
+1 Finale of Eternity
+2 The Elderspell
+1 Thought Erasure
+2 Unmoored Ego

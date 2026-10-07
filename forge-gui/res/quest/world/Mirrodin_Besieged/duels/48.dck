@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Edward Scissorhands
+Title=Edward Scissorhands
+Icon=Edward Scissorhands.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/The_Magic_Cruise_Championship/Alex_Amato_-_Valakut_(Standard,_#9932).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+4 Overgrown Battlement
+4 Primeval Titan
+1 Wurmcoil Engine
+4 Harrow
+2 Summoning Trap
+4 Cultivate
+4 Explore
+3 Pyroclasm
+4 Khalni Heart Expedition
+3 Evolving Wilds
+5 Forest
+1 Khalni Garden
+11 Mountain
+1 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Acidic Slime
+2 Gaea's Revenge
+2 Lightning Bolt
+2 Obstinate Baloth
+1 Slagstorm
+1 Terastodon
+2 Tumble Magnet

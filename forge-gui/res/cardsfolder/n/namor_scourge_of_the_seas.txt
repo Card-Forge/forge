@@ -1,0 +1,13 @@
+Name:Namor, Scourge of the Seas
+ManaCost:3 U U
+Types:Legendary Creature Mutant Merfolk Villain
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Merfolk+Other+YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each other Merfolk you control with a +1/+1 counter on it has flying.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Merfolk
+DeckHas:Ability$Counters|Discard
+DeckHints:Ability$Counters
+Oracle:Flying\nEach other Merfolk you control with a +1/+1 counter on it has flying.\nAt the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

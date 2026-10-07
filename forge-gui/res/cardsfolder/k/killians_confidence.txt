@@ -1,0 +1,8 @@
+Name:Killian's Confidence
+ManaCost:W B
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBDraw | SpellDescription$ Target creature gets +1/+1 until end of turn. Draw a card.
+SVar:DBDraw:DB$ Draw
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Graveyard | ValidTarget$ Player | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, you may pay {W/B}. If you do, return this card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ WB | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:Target creature gets +1/+1 until end of turn. Draw a card.\nWhenever one or more creatures you control deal combat damage to a player, you may pay {W/B}. If you do, return this card from your graveyard to your hand.

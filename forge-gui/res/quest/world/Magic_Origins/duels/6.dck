@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Invitational_Qualifier_Brooklyn/Mark_Ziskis_-_Abzan_Aggro_(Standard,_#318449).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+2 Ultimate Price
+1 Ajani, Mentor of Heroes
+1 Sorin, Solemn Visitor
+3 Caves of Koilos
+3 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+1 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Arashin Cleric
+2 Elspeth, Sun's Champion
+1 Glare of Heresy
+2 Self-Inflicted Wound
+1 Tasigur, the Golden Fang
+4 Thoughtseize
+2 Tragic Arrogance

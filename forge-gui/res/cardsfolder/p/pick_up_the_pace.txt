@@ -1,0 +1,9 @@
+Name:Pick Up the Pace
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+ThisTurnEntered | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control that entered this turn attacks, exile the top card of your library.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Defined$ You
+S:Mode$ Continuous | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | Condition$ PlayerTurn | MayPlay$ True | CheckSVar$ X | Description$ You may play cards exiled with this enchantment as long as you attacked this turn.
+SVar:X:Count$AttackersDeclared
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control that entered this turn attacks, exile the top card of your library.\nYou may play cards exiled with this enchantment as long as you attacked this turn.

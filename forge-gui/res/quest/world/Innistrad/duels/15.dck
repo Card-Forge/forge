@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Medium
+Description=Innistrad/Worlds_2011_-_4-2_or_Better_Record/Frank_Karsten_ÔÇô_15_points_-_Red_Deck_Wins_(Standard,_#22346).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+1 Goblin Arsonist
+3 Grim Lavamancer
+1 Hero of Oxid Ridge
+1 Reckless Waif
+3 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+1 Brimstone Volley
+2 Gut Shot
+3 Incinerate
+1 Volt Charge
+3 Arc Trail
+2 Koth of the Hammer
+1 Ghost Quarter
+22 Mountain
+[Sideboard]
+1 Contested War Zone
+2 Manic Vandal
+1 Perilous Myr
+4 Vulshok Refugee

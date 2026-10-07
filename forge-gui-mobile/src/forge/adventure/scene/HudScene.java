@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
@@ -124,6 +125,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Forge.setLastInputWasController(false);
         if (hud.touchDown(screenX, screenY, pointer, button))
             return true;
         if (isInHudOnlyMode())
@@ -144,6 +146,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        Forge.setLastInputWasController(false);
         if (hud.touchDragged(screenX, screenY, pointer))
             return true;
         if (isInHudOnlyMode())
@@ -191,5 +194,9 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     public void setFromWorldMap(boolean val) {
         hud.fromWorldMap = val;
+    }
+
+    public Batch getBatch() {
+        return stage.getBatch();
     }
 }

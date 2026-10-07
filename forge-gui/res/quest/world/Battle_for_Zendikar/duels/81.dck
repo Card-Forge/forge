@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=BaronSamedi
+Title=BaronSamedi
+Icon=BaronSamedi.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Constructed_League/Onespin_-_Onespin_(5-0)_(Modern,_#519310).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Den Protector
+1 Dragonlord Silumgar
+4 Jace, Vryn's Prodigy
+4 Mantis Rider
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Crackling Doom
+2 Disdainful Stroke
+3 Fiery Impulse
+3 Kolaghan's Command
+2 Murderous Cut
+2 Utter End
+1 Treasure Cruise
+1 Mastery of the Unseen
+4 Bloodstained Mire
+1 Canopy Vista
+1 Cinder Glade
+4 Flooded Strand
+1 Mountain
+1 Plains
+2 Polluted Delta
+1 Prairie Stream
+1 Smoldering Marsh
+2 Sunken Hollow
+1 Swamp
+3 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+1 Arashin Cleric
+1 Dispel
+2 Duress
+1 Exert Influence
+2 Painful Truths
+2 Radiant Flames
+2 Self-Inflicted Wound
+1 Surge of Righteousness
+1 Valorous Stance

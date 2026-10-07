@@ -1,0 +1,13 @@
+Name:Captain James T. Kirk
+ManaCost:2 R
+Types:Legendary Creature Human Officer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | Choices$ DBDiscard,DBToken,DBPumpAll | CharmNum$ Count$Hellbent.3.1 | AdditionalDescription$ . If you have no cards in hand, choose one or more instead.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBToken:DB$ Token | TokenScript$ r_1_1_officer | SpellDescription$ Create a 1/1 red Officer creature token.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Captain Kirk enters or attacks, choose one. If you have no cards in hand, choose one or more instead.\n• Discard a card, then draw a card.\n• Create a 1/1 red Officer creature token.\n• Creatures you control get +1/+0 until end of turn.

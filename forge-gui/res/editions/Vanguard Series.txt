@@ -1,0 +1,41 @@
+[metadata]
+Code=VAN
+Date=1997-05-01
+Name=Vanguard Series
+ScryfallCode=PVAN
+Type=Other
+Foil=NotSupported
+
+[cards]
+101 R Ertai @Randy Gallegos
+102 R Gerrard @Douglas Shuler
+103 R Karn @Anthony S. Waters
+104 R Maraxus @Matthew D. Wilson
+105 R Mirri @Richard Kane Ferguson
+106 R Sisay @Kaja Foglio
+107 R Squee @Daniel Gelon
+108 R Tahngarth @Pete Venters
+201 R Barrin @Christopher Rush
+202 R Crovax @Ron Spencer
+203 R Greven il-Vec @Mark Tedin
+204 R Hanna @Liz Danforth
+205 R Orim @Rebecca Guay
+206 R Selenia @Quinton Hoover
+207 R Starke @Donato Giancola
+208 R Volrath @Anson Maddocks
+301 R Eladamri @Mark Zug
+302 R Lyna @Adam Rex
+303 R Multani @Brom
+304 R Oracle @Dan Frazier
+305 R Rofellos @Daren Bader
+306 R Sidar Kondo @Kev Walker
+307 R Sliver Queen, Brood Mother @rk post
+308 R Takara @DiTerlizzi
+401 R Ashnod @Ron Spencer
+402 R Gix @Pete Venters
+403 R Mishra @Anson Maddocks
+404 R Serra @Matthew D. Wilson
+405 R Tawnos @Stephen Daniele
+406 R Titania @Rebecca Guay
+407 R Urza @Mark Tedin
+408 R Xantcha @Heather Hudson

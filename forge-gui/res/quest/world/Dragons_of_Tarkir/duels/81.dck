@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/Vernocchi_Massimiliano_-_Zoo_(Modern,_#661254).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Mutagenic Growth
+3 Searing Blaze
+1 Shard Volley
+4 Lava Spike
+3 Rift Bolt
+4 Arid Mesa
+3 Bloodstained Mire
+3 Mountain
+2 Sacred Foundry
+1 Scalding Tarn
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+3 Deflecting Palm
+3 Destructive Revelry
+1 Grim Lavamancer
+2 Lightning Helix
+1 Molten Rain
+3 Path to Exile
+2 Skullcrack

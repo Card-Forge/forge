@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Magic-League_Standard_Master_08-05-10/fenixmatt_-_Grixis_Control_(Standard,_#1876).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Gatekeeper of Malakir
+4 Sedraxis Specter
+3 Siege-Gang Commander
+4 Lightning Bolt
+2 Staggershock
+3 Terminate
+4 Blightning
+2 Consuming Vapors
+2 Cruel Ultimatum
+4 Spreading Seas
+3 Jace, the Mind Sculptor
+3 Creeping Tar Pit
+4 Crumbling Necropolis
+3 Dragonskull Summit
+3 Drowned Catacomb
+2 Island
+2 Lavaclaw Reaches
+2 Mountain
+3 Scalding Tarn
+4 Swamp
+[Sideboard]
+3 Countersquall
+3 Goblin Ruinblaster
+2 Malakir Bloodwitch
+2 Thought Hemorrhage
+4 Vampire Hexmage

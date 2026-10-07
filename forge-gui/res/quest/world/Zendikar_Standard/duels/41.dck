@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Easy
+Description=Zendikar/Standard_Trial_-_Winter_Games_Fair_2009/Fellahides_Nick_-_Saito's_Rampant_Jund_(Standard,_#3062).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Broodmate Dragon
+3 Siege-Gang Commander
+4 Sprouting Thrinax
+4 Bituminous Blast
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+3 Maelstrom Pulse
+3 Rampant Growth
+4 Dragonskull Summit
+3 Forest
+3 Mountain
+4 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Goblin Ruinblaster
+2 Jund Charm
+4 Mind Rot
+2 Pyroclasm

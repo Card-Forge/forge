@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/SCG_Open_Series__Seattle/Andrew_Butterworth_-_Naya_(Standard,_#33289).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+4 Borderland Ranger
+3 Geist-Honored Monk
+4 Huntmaster of the Fells
+4 Restoration Angel
+3 Strangleroot Geist
+3 Thalia, Guardian of Thraben
+4 Bonfire of the Damned
+4 Cavern of Souls
+4 Copperline Gorge
+3 Forest
+4 Gavony Township
+2 Mountain
+2 Plains
+4 Razorverge Thicket
+[Sideboard]
+1 Ancient Grudge
+2 Celestial Purge
+2 Combust
+2 Crushing Vines
+1 Oblivion Ring
+2 Surgical Extraction
+2 Wolfir Silverheart
+3 Zealous Conscripts

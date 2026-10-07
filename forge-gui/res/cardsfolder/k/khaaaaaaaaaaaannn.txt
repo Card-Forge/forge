@@ -1,0 +1,7 @@
+Name:Khaaaaaaaaaaaannn!
+ManaCost:X R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ Y | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals twice X damage to target creature. If that creature would die this turn, exile it instead.
+SVar:Y:SVar$X/Twice
+SVar:X:Count$xPaid
+Oracle:Khaaaaaaaaaaaannn! deals twice X damage to target creature. If that creature would die this turn, exile it instead.

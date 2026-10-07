@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Aaron_Back_-_Dimir_Frog_Eyes_(Modern,_#2246669).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+1 Harbinger of the Seas
+2 Murktide Regent
+3 Orcish Bowmasters
+4 Psychic Frog
+3 Consider
+4 Counterspell
+4 Fatal Push
+2 Force of Negation
+1 Shoot the Sheriff
+1 Sink into Stupor
+1 Spell Pierce
+3 Spell Snare
+4 Thought Scour
+4 Unearth
+3 Gloomlake Verge
+2 Island
+2 Misty Rainforest
+4 Polluted Delta
+2 Scalding Tarn
+1 Swamp
+2 Undercity Sewers
+3 Watery Grave
+[Sideboard]
+4 Consign to Memory
+2 Glistening Deluge
+1 Harbinger of the Seas
+2 Mystical Dispute
+2 Nihil Spellbomb
+2 Stern Scolding
+1 Surgical Extraction
+1 Toxic Deluge

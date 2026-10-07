@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/jutipl_-_Golgari_Yawgmoth_(Modern,_#2381421).dck
+Deck Type=constructed
+
+[Main]
+2 Delighted Halfling
+2 Orcish Bowmasters
+1 Marionette Apprentice
+2 Wall of Roots
+2 Strangleroot Geist
+3 Young Wolf
+2 Walking Ballista
+4 Yawgmoth, Thran Physician
+1 Endurance
+3 Ignoble Hierarch
+4 Agatha's Soul Cauldron
+3 Chord of Calling
+2 Malevolent Rumble
+2 Green Sun's Zenith
+4 Dredger's Insight
+3 Grist, the Hunger Tide
+2 Underground Mortuary
+1 Shifting Woodland
+2 Wastewood Verge
+2 Overgrown Tomb
+1 Dryad Arbor
+3 Misty Rainforest
+4 Verdant Catacombs
+1 Swamp
+2 Forest
+2 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+[Sideboard]
+1 Haywire Mite
+1 Vexing Bauble
+1 Scavenging Ooze
+4 Fulminator Mage
+2 Fatal Push
+1 Reclamation Sage
+2 Force of Vigor
+1 Dismember
+2 Thoughtseize

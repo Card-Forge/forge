@@ -43,9 +43,20 @@ public class VMatchUI implements IVTopLevelUI {
 
     // Other instantiations
     private final CMatchUI control;
+    private boolean bypassConcedeOnClose;
 
     VMatchUI(final CMatchUI control) {
         this.control = control;
+    }
+
+    /**
+     * One-shot flag: when set, the next {@link #onClosing(FScreen)} returns true
+     * without prompting for concession. Used when the client has been permanently
+     * disconnected and is navigating back to the lobby — the game is already lost
+     * from this client's perspective.
+     */
+    public void armBypassConcedeOnClose() {
+        bypassConcedeOnClose = true;
     }
 
     @Override
@@ -164,7 +175,6 @@ public class VMatchUI implements IVTopLevelUI {
         } else if (getBtnCancel().isEnabled()) {
             getBtnCancel().requestFocusInWindow();
         }
-
 
         final boolean sortFieldsEnabled = lstFields.size() > 2
                 && !"OFF".equals(FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
@@ -374,14 +384,16 @@ public class VMatchUI implements IVTopLevelUI {
         return this.control;
     }
 
+    public List<VField> getFieldViews() {
+        return lstFields;
+    }
     public void setFieldViews(final List<VField> lst0) {
         this.lstFields = lst0;
     }
 
-    public List<VField> getFieldViews() {
-        return lstFields;
+    public List<VHand> getHands() {
+        return lstHands;
     }
-
     public void setHandViews(final List<VHand> lst0) {
         this.lstHands = lst0;
     }
@@ -389,13 +401,8 @@ public class VMatchUI implements IVTopLevelUI {
     public FButton getBtnCancel() {
         return getControl().getCPrompt().getView().getBtnCancel();
     }
-
     public FButton getBtnOK() {
         return getControl().getCPrompt().getView().getBtnOK();
-    }
-
-    public List<VHand> getHands() {
-        return lstHands;
     }
 
     @Override
@@ -408,6 +415,12 @@ public class VMatchUI implements IVTopLevelUI {
         if (!Singletons.getControl().getCurrentScreen().equals(screen)) {
             // Switch to this screen if not already showing
             Singletons.getControl().setCurrentScreen(screen);
+        }
+
+        if (bypassConcedeOnClose) {
+            bypassConcedeOnClose = false;
+            SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+            return true;
         }
 
         if (control.concede()) {

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/PPTQ_Nerd_Comics_-_Roma,_Italy/Mirko_Renzi_-_Rg_Ramp_(Standard,_#613591).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Reality Smasher
+3 Sylvan Advocate
+3 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+4 World Breaker
+2 Hedron Archive
+3 Kozilek's Return
+2 Warping Wail
+4 Explosive Vegetation
+3 Nissa's Pilgrimage
+1 Sylvan Scrying
+4 Oath of Nissa
+4 Chandra, Flamecaller
+10 Forest
+3 Mountain
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+2 Wastes
+[Sideboard]
+3 Clip Wings
+1 Crumble to Dust
+3 Jaddi Offshoot
+1 Kozilek, the Great Distortion
+2 Oblivion Sower
+1 Void Winnower

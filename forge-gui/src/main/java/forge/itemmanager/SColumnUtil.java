@@ -105,6 +105,8 @@ public final class SColumnUtil {
 
     public static Map<ColumnDef, ItemColumnConfig> getDeckEditorDefaultColumns() {
         Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.DECK_QUANTITY, false);
+        columns.put(ColumnDef.DECK_KEY_CARD, new ItemColumnConfig(ColumnDef.DECK_KEY_CARD));
+        columns.get(ColumnDef.DECK_KEY_CARD).setIndex(columns.size() - 1);
         columns.get(ColumnDef.CMC).setSortPriority(1);
         columns.get(ColumnDef.TYPE).setSortPriority(2);
         columns.get(ColumnDef.NAME).setSortPriority(3);
@@ -233,7 +235,32 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getNetworkEventDeckColumns(boolean allowEdit) {
+        List<ColumnDef> colDefs = new ArrayList<>();
+        colDefs.add(ColumnDef.DECK_FAVORITE);
+        if (allowEdit) {
+            colDefs.add(ColumnDef.DECK_ACTIONS);
+        }
+        colDefs.add(ColumnDef.NAME);
+        colDefs.add(ColumnDef.DECK_COLOR);
+        colDefs.add(ColumnDef.DECK_EVENT_TYPE);
+        colDefs.add(ColumnDef.DECK_EVENT_PRODUCT);
+        colDefs.add(ColumnDef.DECK_EVENT_DATE);
+        colDefs.add(ColumnDef.DECK_MAIN);
+        colDefs.add(ColumnDef.DECK_SIDE);
+
+        Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
+        columns.get(ColumnDef.DECK_EVENT_DATE).setSortPriority(1);
+        columns.get(ColumnDef.DECK_FAVORITE).setSortPriority(2);
+        columns.get(ColumnDef.NAME).setSortPriority(3);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
+        return getDecksDefaultColumns(allowEdit, includeFolder, false);
+    }
+
+    public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder, boolean includeBracket) {
         List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
         if (allowEdit) {
@@ -246,6 +273,9 @@ public final class SColumnUtil {
         colDefs.add(ColumnDef.DECK_COLOR);
         colDefs.add(ColumnDef.DECK_FORMAT);
         colDefs.add(ColumnDef.DECK_EDITION);
+        if (includeBracket) {
+            colDefs.add(ColumnDef.DECK_BRACKET);
+        }
         colDefs.add(ColumnDef.DECK_MAIN);
         colDefs.add(ColumnDef.DECK_SIDE);
         colDefs.add(ColumnDef.DECK_AI);

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Hando_Shinnosuke_-_Titan_Valakut_(Modern,_#1529151).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Archon of Cruelty
+4 Primeval Titan
+4 Lightning Bolt
+2 Thoughtseize
+4 Indomitable Creativity
+4 Persist
+4 Bitter Reunion
+4 Wrenn and Six
+1 Snow-Covered Swamp
+1 Boseiju, Who Endures
+1 Snow-Covered Mountain
+2 Valakut, the Molten Pinnacle
+2 Stomping Ground
+2 Blood Crypt
+2 Ziatora's Proving Ground
+3 Scalding Tarn
+4 Dwarven Mine
+4 Wooded Foothills
+4 Bloodstained Mire
+[Sideboard]
+1 Brotherhood's End
+1 Boseiju, Who Endures
+1 Terminate
+2 Hidetsugu Consumes All
+2 Necromentia
+2 Collective Brutality
+3 Veil of Summer
+3 Leyline of the Void

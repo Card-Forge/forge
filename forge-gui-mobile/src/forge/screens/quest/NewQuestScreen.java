@@ -266,6 +266,7 @@ public class NewQuestScreen extends FScreen {
         unselectableSets.add("LEB");
         unselectableSets.add("MBP");
         unselectableSets.add("VAN");
+        unselectableSets.add("PMOA");
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 

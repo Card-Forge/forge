@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bep
+Title=Bep
+Icon=Bep.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-__Manila_II_-_Philippines/Hadrian_Go_-_UWr_Planeswalkers_(Standard,_#1485).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Sphinx of Jwar Isle
+1 Sphinx of Lost Truths
+3 Wall of Denial
+4 Wall of Omens
+2 Lightning Bolt
+2 Path to Exile
+2 Earthquake
+2 Oblivion Ring
+4 Spreading Seas
+3 Ajani Vengeant
+2 Elspeth, Knight-Errant
+3 Jace Beleren
+3 Jace, the Mind Sculptor
+4 Arid Mesa
+4 Celestial Colonnade
+4 Glacial Fortress
+5 Island
+2 Mountain
+3 Plains
+3 Scalding Tarn
+1 Sejiri Refuge
+[Sideboard]
+2 Celestial Purge
+3 Flashfreeze
+2 Kor Sanctifiers
+3 Luminarch Ascension
+3 Negate

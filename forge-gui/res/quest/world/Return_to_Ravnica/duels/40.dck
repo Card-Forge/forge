@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Charleston,_West_Virginia,_United_States/Joseph_Deal_-_B-R_Aggro_(Standard,_#40378).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Falkenrath Aristocrat
+4 Knight of Infamy
+4 Rakdos Cackler
+3 Stonewright
+4 Stromkirk Noble
+2 Zealous Conscripts
+3 Brimstone Volley
+4 Searing Spear
+4 Pillar of Flame
+4 Blood Crypt
+4 Dragonskull Summit
+12 Mountain
+1 Rakdos Guildgate
+1 Stensia Bloodhall
+2 Swamp
+[Sideboard]
+2 Dreadbore
+2 Mizzium Mortars
+2 Rakdos Charm
+2 Rakdos's Return
+2 Sever the Bloodline
+2 Slaughter Games
+2 Thundermaw Hellkite
+1 Traitorous Blood

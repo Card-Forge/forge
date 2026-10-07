@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon
+Title=Apu Nahasapeemapetilon
+Icon=Apu Nahasapeemapetilon.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Doriangoueytes#4s5y38_-_Dimir_Froculus_(Modern,_#2931661).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+2 Murktide Regent
+4 Psychic Frog
+1 Subtlety
+1 Cling to Dust
+4 Counterspell
+4 Fatal Push
+2 Force of Negation
+1 Sheoldred's Edict
+2 Sink into Stupor
+2 Spell Snare
+3 Thought Scour
+1 Dreams of Steel and Oil
+3 Flow State
+4 Thoughtseize
+4 Unearth
+2 Darkslick Shores
+2 Flooded Strand
+2 Island
+2 Marsh Flats
+4 Polluted Delta
+1 Scalding Tarn
+1 Swamp
+2 Undercity Sewers
+2 Watery Grave
+[Sideboard]
+3 Consign to Memory
+2 Engineered Explosives
+2 Harbinger of the Seas
+1 Hurkyl's Recall
+2 Mystical Dispute
+2 Nihil Spellbomb
+1 Subtlety
+1 Toxic Deluge
+1 Vexing Bauble

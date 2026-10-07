@@ -2,7 +2,9 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+
 import forge.adventure.util.AdventureQuestController;
+import forge.adventure.util.Current;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -100,20 +102,32 @@ public class BiomeData implements Serializable {
     }
 
     public EnemyData getEnemy(float difficultyFactor) {
-        //todo: implement difficultyFactor
         float totalDistribution = 0.0f;
-        for (EnemyData data : enemyList) {
-            totalDistribution += data.spawnRate;
-        }
-        int i = 0;
-        for (float f = totalDistribution * rand.nextFloat(); i < enemyList.size(); i++)
-        {
-            f -= ( enemyList.get(i).spawnRate);
-            if (f <= 0.0f){
-                return enemyList.get(i);
+        difficultyFactor = Current.player().getStatistic().rank(); // compare difficulty data to how many wins you have on your save
+        List<EnemyData> filteredEnemies = new ArrayList<>();
+        for (EnemyData data : enemyList ){
+            if (data.difficulty <= difficultyFactor) { 
+                filteredEnemies.add(data);
+                totalDistribution += data.spawnRate;
             }
         }
-        return Aggregates.random(enemyList); //fallback, shouldn't reach this point but guarantee that we return something
+        // If no enemies match the criteria, fallback to a random enemy from the original list
+        if (filteredEnemies.isEmpty()) {
+            return Aggregates.random(enemyList);
+        }
+
+        // Perform weighted random selection
+        float f = totalDistribution * rand.nextFloat();
+        int i = 0;
+        for (; i < filteredEnemies.size(); i++) {
+            f -= filteredEnemies.get(i).spawnRate;
+            if (f <= 0.0f) {
+                return filteredEnemies.get(i);
+            }
+        }
+
+        // Fallback, should not normally reach here
+        return Aggregates.random(filteredEnemies);
     }
 
     private ArrayList<String> unusedTownNames;

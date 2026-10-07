@@ -10,8 +10,8 @@ SVar:Choice2:DB$ GenericChoice | Choices$ PayLife,ExchangeOwnership,Concede | De
 SVar:X:PlayerCountRemembered$LifeTotal
 SVar:ExchangeOwnership:DB$ GainOwnership | Defined$ Targeted | DefinedPlayer$ You | SubAbility$ TargetToExile1 | SpellDescription$ Exchange ownership of your card for CARDNAME. (Both cards remain exiled.)
 SVar:TargetToExile1:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destination$ Exile | SubAbility$ BronzeExchange
-SVar:BronzeExchange:DB$ GainOwnership | Defined$ Self | DefinedPlayer$ Remembered | SubAbility$ TabletToExile1
-SVar:TabletToExile1:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ DBCleanup
+SVar:BronzeExchange:DB$ GainOwnership | Defined$ CorrectedSelf | DefinedPlayer$ Remembered | SubAbility$ TabletToExile1
+SVar:TabletToExile1:DB$ ChangeZone | Defined$ CorrectedSelf | Origin$ All | Destination$ Exile | SubAbility$ DBCleanup
 SVar:PayLife:DB$ LoseLife | LifeAmount$ 10 | Defined$ TargetedOwner | SubAbility$ TargetToExile2 | SpellDescription$ Pay 10 life. (Your card remains exiled and CARDNAME goes to its owner's graveyard.)
 SVar:TargetToExile2:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destination$ Exile | SubAbility$ TabletToExile2
 SVar:TabletToExile2:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ TabletToGraveyard

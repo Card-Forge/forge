@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Alex_Barr_-_Mono-Blue_Aggro_(Standard,_#782682).dck
+Deck Type=constructed
+
+[Main]
+4 Merfolk Trickster
+3 Mist-Cloaked Herald
+4 Pteramander
+4 Siren Stormtamer
+4 Tempest Djinn
+3 Dive Down
+1 Essence Capture
+4 Opt
+1 Quench
+3 Spell Pierce
+4 Wizard's Retort
+2 Chart a Course
+4 Curious Obsession
+19 Island
+[Sideboard]
+2 Exclusion Mage
+2 Faerie Duelist
+3 Surge Mare
+2 Deep Freeze
+3 Negate
+1 Search for Azcanta
+2 Entrancing Melody

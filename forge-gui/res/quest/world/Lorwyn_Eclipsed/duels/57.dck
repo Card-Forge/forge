@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Kevin_Keal_-_Merfolk_(Modern,_#2787954).dck
+Deck Type=constructed
+
+[Main]
+2 Champions of the Shoal
+2 Disruptor of Currents
+2 Floodpits Drowner
+2 Glasspool Mimic
+3 Harbinger of the Seas
+2 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Mindspring Merfolk
+3 Silvergill Adept
+4 Silvergill Mentor
+3 Vodalian Hexcatcher
+4 Aether Vial
+3 Consign to Memory
+3 Flare of Denial
+2 Sink into Stupor
+3 Cavern of Souls
+4 Gloomlake Verge
+5 Island
+3 Mutavault
+2 Otawara, Soaring City
+[Sideboard]
+2 Counterspell
+2 Floodpits Drowner
+2 Force of Negation
+1 Harbinger of the Seas
+3 Mistcaller
+2 Mystical Dispute
+2 Tishana's Tidebinder
+1 Vodalian Hexcatcher

@@ -1,0 +1,8 @@
+Name:Soovril, Patient Antiquarian
+ManaCost:R W
+Types:Legendary Creature Orc Cleric
+PT:2/3
+K:Vigilance
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Card.nonLand+YouOwn+ThisTurnEnteredFrom_Graveyard | TgtZone$ Exile | TgtPrompt$ Select target nonland card in exile that was put there from your graveyard this turn | CounterType$ TIME | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two time counters on target nonland card in exile that was put there from your graveyard this turn. If it doesn't have suspend, it gains suspend.
+SVar:DBPump:DB$ Pump | Defined$ ParentTarget | ConditionDefined$ ParentTarget | ConditionPresent$ Card.withoutSuspend | PumpZone$ Exile | KW$ Suspend | Duration$ Permanent
+Oracle:Vigilance\n{T}: Put two time counters on target nonland card in exile that was put there from your graveyard this turn. If it doesn't have suspend, it gains suspend.

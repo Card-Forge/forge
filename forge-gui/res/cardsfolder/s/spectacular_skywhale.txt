@@ -1,0 +1,11 @@
+Name:Spectacular Skywhale
+ManaCost:2 U R
+Types:Creature Elemental Whale
+PT:1/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, this creature gets +3/+0 until end of turn. If five or more mana was spent to cast that spell, put three +1/+1 counters on this creature instead.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:X:TriggeredCard$CastTotalManaSpent
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nOpus — Whenever you cast an instant or sorcery spell, this creature gets +3/+0 until end of turn. If five or more mana was spent to cast that spell, put three +1/+1 counters on this creature instead.

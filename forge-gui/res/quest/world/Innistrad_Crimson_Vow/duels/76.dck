@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/William_Mellon_-_Esper_Affinity_(Modern,_#1362946)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Ethersworn Sphinx
+4 Ornithopter
+4 Esper Sentinel
+4 Sojourner's Companion
+4 Thought Monitor
+4 Memnite
+1 Shadowspear
+1 Welding Jar
+1 Aether Spellbomb
+2 Nettlecyst
+4 Cranial Plating
+4 Springleaf Drum
+4 Blood Fountain
+2 Thoughtcast
+4 Urza's Saga
+1 Spire of Industry
+1 Razortide Bridge
+4 Glimmervoid
+4 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Relic of Progenitus
+1 Tormod's Crypt
+1 Pithing Needle
+1 Etched Champion
+1 Jegantha, the Wellspring
+2 Torpor Orb
+2 Wear // Tear
+2 Alpine Moon
+2 Dispatch
+2 Tezzeret, Agent of Bolas

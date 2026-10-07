@@ -1,0 +1,19 @@
+Name:Galathul Galecaller
+ManaCost:1 U
+Types:Creature Bird Wizard
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ Whenever this creature attacks, it becomes prepared.
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Flash\nFlying\nWhenever this creature attacks, it becomes prepared.
+
+ALTERNATE
+
+Name:Corvid Squall
+ManaCost:1 U
+Types:Sorcery
+K:Storm
+A:SP$ MakeCard | Conjure$ True | Name$ Storm Crow | Zone$ Battlefield | SpellDescription$ Conjure a card named Storm Crow onto the battlefield.
+Oracle:Conjure a card named Storm Crow onto the battlefield.\nStorm

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Dr4ken_-_Golgari_Demons_(Standard,_#2273165).dck
+Deck Type=constructed
+
+[Main]
+4 Archfiend of the Dross
+3 Glissa Sunslayer
+4 Mosswood Dreadknight
+2 Caustic Bronco
+1 Sheoldred, the Apocalypse
+2 Preacher of the Schism
+4 Llanowar Elves
+1 Scavenging Ooze
+2 Anoint with Affliction
+3 Cut Down
+4 Go for the Throat
+1 Duress
+4 Unholy Annex // Ritual Chamber
+4 Blooming Marsh
+2 Restless Cottage
+6 Swamp
+3 Soulstone Sanctuary
+4 Llanowar Wastes
+6 Forest
+[Sideboard]
+2 Torpor Orb
+1 Aclazotz, Deepest Betrayal
+1 Nissa, Ascended Animist
+2 Tranquil Frillback
+1 Gix's Command
+2 Tear Asunder
+2 Choking Miasma
+2 Ghost Vacuum
+2 Duress

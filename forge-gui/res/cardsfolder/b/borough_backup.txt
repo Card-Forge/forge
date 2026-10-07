@@ -1,0 +1,6 @@
+Name:Borough Backup
+ManaCost:4 W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_3_2_hero_vigilance | TokenOwner$ You | SpellDescription$ Create two 3/2 white Hero creature tokens with vigilance.
+K:TypeCycling:Basic:2
+Oracle:Create two 3/2 white Hero creature tokens with vigilance.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

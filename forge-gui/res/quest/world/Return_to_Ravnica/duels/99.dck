@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/SCG_Invitational_Qualifier_-_Glen_Burnie/Darryl_Donaldson_-_GW_Aggro_(Modern,_#50829).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+3 Spider Umbra
+2 Spirit Link
+4 Spirit Mantle
+4 Horizon Canopy
+3 Misty Rainforest
+4 Razorverge Thicket
+3 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+1 Dismember
+4 Leyline of Sanctity
+2 Qasali Pridemage
+4 Relic of Progenitus
+2 Torpor Orb

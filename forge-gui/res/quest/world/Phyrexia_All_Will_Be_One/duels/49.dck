@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/A_yana_-_Grixis_Reanimator_(Standard,_#1624901).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Atraxa, Grand Unifier
+3 Reckoner Bankbuster
+1 Make Disappear
+1 Negate
+3 Abrade
+3 Go for the Throat
+2 Duress
+1 Brotherhood's End
+4 The Cruelty of Gix
+4 Xander's Lounge
+4 Blackcleave Cliffs
+3 Darkslick Shores
+1 Shattered Sanctum
+2 Sundown Pass
+1 Deathcap Glade
+2 Rockfall Vale
+2 Underground River
+1 Sulfurous Springs
+3 Shivan Reef
+1 Stormcarved Coast
+1 Otawara, Soaring City
+1 Swamp
+[Sideboard]
+2 Duress
+1 Disdainful Stroke
+3 Cut Down
+1 Negate
+2 Brotherhood's End
+1 Unlicensed Hearse
+2 Sheoldred, the Apocalypse
+2 Soul Transfer
+1 Siphon Insight

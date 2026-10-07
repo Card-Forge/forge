@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mawu
+Title=Mawu
+Icon=Mawu.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Abe_Kodai_-_Merfolk_(Modern,_#2799769).dck
+Deck Type=constructed
+
+[Main]
+2 Silvergill Adept
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Tide Shaper
+4 Vodalian Hexcatcher
+4 Floodpits Drowner
+2 Adept Watershaper
+2 Wanderbrine Trapper
+4 Silvergill Mentor
+2 Sygg, Wanderwine Wisdom
+2 Deepchannel Duelist
+4 Aether Vial
+2 Flare of Denial
+3 Sink into Stupor
+3 Island
+2 Cavern of Souls
+4 Hallowed Fountain
+4 Wanderwine Hub
+2 Mutavault
+1 Waterlogged Grove
+1 Otawara, Soaring City
+[Sideboard]
+1 Hurkyl's Recall
+2 Dismember
+2 Surgical Extraction
+1 Svyelun of Sea and Sky
+2 Tishana's Tidebinder
+2 Consign to Memory
+2 Harbinger of the Seas
+2 Strix Serenade
+1 Unable to Scream

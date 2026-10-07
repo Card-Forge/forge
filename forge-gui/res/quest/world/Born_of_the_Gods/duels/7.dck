@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Warren,_MI/Karen_Thomas_-_Naya_(Standard,_#69788).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of Countless Battles
+4 Fleecemane Lion
+4 Gladecover Scout
+4 Voice of Resurgence
+4 Witchstalker
+4 Boros Charm
+4 Ethereal Armor
+2 Gift of Orzhova
+4 Madcap Skills
+4 Unflinching Courage
+3 Forest
+4 Sacred Foundry
+4 Stomping Ground
+4 Temple Garden
+4 Temple of Plenty
+4 Temple of Triumph
+[Sideboard]
+2 Celestial Flare
+3 Fiendslayer Paladin
+2 Mending Touch
+2 Selesnya Charm
+2 Skullcrack
+4 Skylasher

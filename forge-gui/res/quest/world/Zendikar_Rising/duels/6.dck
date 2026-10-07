@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ukulunkulu
+Title=Ukulunkulu
+Icon=Ukulunkulu.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/A_AdeptoTerra_-_Sultai_Kicker_(Standard,_#1051373).dck
+Deck Type=constructed
+
+[Main]
+4 Murasa Sproutling
+4 Verazol, the Split Current
+4 Vine Gecko
+4 Coralhelm Chronicler
+4 Into the Roil
+2 Reclaim the Wastes
+3 Inscription of Insight
+3 Vastwood Surge
+4 Bloodchief's Thirst
+2 Bubble Snare
+4 Roost of Drakes
+2 Swamp
+2 Temple of Mystery
+3 Island
+3 Forest
+4 Fabled Passage
+4 Zagoth Triome
+4 Throne of Makindi
+[Sideboard]
+2 Mystical Dispute
+2 Extinction Event
+2 Eliminate
+3 Scavenging Ooze
+3 Chainweb Aracnir
+3 Negate

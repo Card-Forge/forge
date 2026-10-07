@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Modern_Turniers_vom_Dienstag_den_16.04.2013/Bole_Wadim_-_GW_Aggro_(Modern,_#51002).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+3 Kor Spiritdancer
+1 Silhana Ledgewalker
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Keen Sense
+3 Spider Umbra
+2 Forest
+2 Marsh Flats
+2 Misty Rainforest
+11 Plains
+4 Razorverge Thicket
+3 Sunpetal Grove
+3 Temple Garden
+2 Verdant Catacombs
+[Sideboard]
+4 Leyline of Sanctity
+2 Nature's Claim
+2 Rest in Peace
+2 Spirit Link
+3 Stony Silence
+2 Suppression Field

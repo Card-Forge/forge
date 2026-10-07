@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/AmadeusPro_-_Living_End_(Modern,_#2789034).dck
+Deck Type=constructed
+
+[Main]
+4 Curator of Mysteries
+4 Endurance
+4 Subtlety
+4 Generous Ent
+1 Halo Forager
+4 Street Wraith
+3 Steamcore Scholar
+4 Shardless Agent
+4 Overlord of the Balemurk
+1 Wistfulness
+2 Flare of Denial
+4 Force of Negation
+2 Sink into Stupor
+3 Living End
+1 Watery Grave
+2 Underground Mortuary
+1 Hedge Maze
+2 Polluted Delta
+1 Overgrown Tomb
+4 Misty Rainforest
+1 Island
+1 Forest
+1 Undercity Sewers
+1 Breeding Pool
+1 Boseiju, Who Endures
+[Sideboard]
+3 Dismember
+1 Commandeer
+4 Foundation Breaker
+3 Inevitable Betrayal
+4 Mystical Dispute

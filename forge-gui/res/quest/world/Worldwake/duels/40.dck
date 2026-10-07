@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Easy
+Description=Worldwake/JDSEvents.com_$1,000_Event_(Waco,TX)/Gary_Dickerson_-_WUR_Control_(Standard,_#2470).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Sphinx of Jwar Isle
+4 Wall of Denial
+2 Double Negative
+4 Flashfreeze
+4 Lightning Bolt
+2 Mysteries of the Deep
+2 Path to Exile
+2 Earthquake
+2 Mind Spring
+4 Spreading Seas
+3 Ajani Vengeant
+2 Jace Beleren
+4 Arid Mesa
+4 Glacial Fortress
+4 Island
+2 Mountain
+4 Plains
+4 Scalding Tarn
+2 Sejiri Refuge
+2 Terramorphic Expanse
+[Sideboard]
+3 Baneslayer Angel
+1 Cancel
+2 Essence Scatter
+3 Luminarch Ascension
+2 Mind Control
+2 Negate
+1 Oblivion Ring
+1 Pithing Needle

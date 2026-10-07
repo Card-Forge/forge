@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.Set;
 
 import javax.swing.ButtonGroup;
@@ -21,7 +20,6 @@ import forge.control.KeyboardShortcuts;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
-import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
@@ -30,10 +28,12 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.VMatchUI;
+import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.view.arcane.FloatingZone;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
@@ -44,69 +44,54 @@ import forge.view.FFrame;
 import forge.view.FView;
 
 /**
- * Returns a JMenu containing options associated with game screen layout.
- * <p>
- * Replicates options available in Dock tab.
+ * Returns a JMenu containing options associated with screen layout, theming,
+ * and panel/window options. Some entries are only shown on the match screen.
  */
 public final class LayoutMenu {
     public LayoutMenu() {
     }
 
-    private FScreen currentScreen;
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private final boolean showIcons = false;
     private static final Localizer localizer = Localizer.getInstance();
 
     public JMenu getMenu() {
-        currentScreen = Singletons.getControl().getCurrentScreen();
+        final FScreen currentScreen = Singletons.getControl().getCurrentScreen();
+        final boolean isMatch = currentScreen != null && currentScreen.isMatchScreen();
+        final boolean isHome = currentScreen == FScreen.HOME_SCREEN;
 
         final JMenu menu = new JMenu(localizer.getMessage("lblLayout"));
         menu.setMnemonic(KeyEvent.VK_L);
-        if (currentScreen != FScreen.HOME_SCREEN) {
+
+        if (!isHome) {
             menu.add(getMenu_FileOptions());
-            menu.add(getMenu_ViewOptions());
+            menu.add(getMenuItem_RevertLayout());
+            menu.add(getMenuItem_ResetMatchLayout());
+        }
+        if (!isHome) {
+            menu.addSeparator();
         }
         menu.add(getMenu_ThemeOptions());
-        if (currentScreen != null && currentScreen.isMatchScreen()) {
-            menu.addSeparator();
-            menu.add(getMenu_HandOptions());
+        if (isMatch) {
+            menu.add(getMenuItem_ShowBackgroundImage());
         }
-        menu.addSeparator();
+
+        if (menu.getItemCount() > 0) {
+            menu.addSeparator();
+        }
         menu.add(getMenuItem_FullScreen());
         menu.add(getMenuItem_SetWindowSize());
-        if (currentScreen != FScreen.HOME_SCREEN) {
-            menu.add(getMenuItem_RevertLayout());
-        }
-        return menu;
-    }
 
-    private JMenu getMenu_ViewOptions() {
-        final JMenu menu = new JMenu(localizer.getMessage("lblView"));
-        menu.add(getMenuItem_ShowTabs());
-
-        final JCheckBoxMenuItem newCountItem = createStayOpenCheckBox(
-                localizer.getMessage("lblNewCardCountInTab"));
-        newCountItem.setState(prefs.getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT));
-        newCountItem.addActionListener(e -> {
-            prefs.setPref(FPref.UI_ZONE_TAB_NEW_COUNT, newCountItem.getState());
-            prefs.save();
-            FloatingZone.refreshAll();
-            refreshHandCards();
-        });
-        menu.add(newCountItem);
-
-        if (currentScreen != null && currentScreen.isMatchScreen()) {
-            menu.add(getMenuItem_ShowBackgroundImage());
-
-            menu.addSeparator();
+        menu.addSeparator();
+        if (isMatch) {
+            menu.add(getMenu_HandOptions());
             menu.add(getMenu_LogPane());
+        }
+        menu.add(getMenuItem_ShowTabs());
+        menu.add(getMenuItem_NewCardCountInTab());
 
+        if (isMatch) {
             menu.addSeparator();
-            final JMenu layoutMenu = getMenu_MultiplayerFieldLayout();
-            final JMenu panelsMenu = getMenu_MultiplayerFieldPanels();
-            menu.add(getMenuItem_SortMultiplayerFields(layoutMenu, panelsMenu));
-            menu.add(layoutMenu);
-            menu.add(panelsMenu);
+            menu.add(getMenu_SortMultiplayerFields());
         }
         return menu;
     }
@@ -143,7 +128,7 @@ public final class LayoutMenu {
     };
 
     private static JMenuItem getMenuItem_ShowBackgroundImage() {
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblBackgroundImage"));
+        final JCheckBoxMenuItem menuItem = MenuUtil.createStayOpenCheckBox(localizer.getMessage("lblBackgroundImage"));
         menuItem.setState(prefs.getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE));
         menuItem.addActionListener(getShowBackgroundImageAction(menuItem));
         return menuItem;
@@ -163,7 +148,7 @@ public final class LayoutMenu {
                         FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
                 }
             } else {
-                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image) null);
             }
             FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
         };
@@ -173,7 +158,7 @@ public final class LayoutMenu {
         final JMenu menu = new JMenu(localizer.getMessage("lblHandPanel"));
 
         // Order Hand by CMC and Color
-        final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("nlOrderHand"));
+        final JCheckBoxMenuItem orderHandItem = MenuUtil.createStayOpenCheckBox(localizer.getMessage("nlOrderHand"));
         orderHandItem.setState(prefs.getPrefBoolean(FPref.UI_ORDER_HAND));
         orderHandItem.addActionListener(e -> {
             prefs.setPref(FPref.UI_ORDER_HAND, orderHandItem.getState());
@@ -184,7 +169,7 @@ public final class LayoutMenu {
         menu.add(orderHandItem);
 
         // Prevent Card Overlap
-        final JCheckBoxMenuItem noOverlapItem = createStayOpenCheckBox(localizer.getMessage("lblPreventCardOverlap"));
+        final JCheckBoxMenuItem noOverlapItem = MenuUtil.createStayOpenCheckBox(localizer.getMessage("lblPreventCardOverlap"));
         noOverlapItem.setState(prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));
         noOverlapItem.addActionListener(e -> {
             prefs.setPref(FPref.UI_HAND_NO_OVERLAP, noOverlapItem.getState());
@@ -201,7 +186,7 @@ public final class LayoutMenu {
         final JPanel sliderPanel = new JPanel(new java.awt.BorderLayout());
         sliderPanel.setBackground(bg);
 
-        final JCheckBoxMenuItem limitItem = createStayOpenCheckBox(localizer.getMessage("lblLimitCardsPerRow"));
+        final JCheckBoxMenuItem limitItem = MenuUtil.createStayOpenCheckBox(localizer.getMessage("lblLimitCardsPerRow"));
         limitItem.setState(limitEnabled);
 
         final FSkin.SkinnedSlider slider = new FSkin.SkinnedSlider(javax.swing.SwingConstants.HORIZONTAL, 4, 12,
@@ -244,69 +229,49 @@ public final class LayoutMenu {
     }
 
     private static void refreshHandCards() {
-        final FScreen screen = Singletons.getControl().getCurrentScreen();
-        if (screen != null && screen.isMatchScreen()) {
-            final IVTopLevelUI view = screen.getView();
-            if (view instanceof VMatchUI vmu) {
-                for (final VHand h : vmu.getControl().getHandViews()) {
-                    h.getLayoutControl().updateHand();
-                }
+        MenuUtil.withMatchUI(vmu -> {
+            for (final VHand h : vmu.getControl().getHandViews()) {
+                h.getLayoutControl().updateHand();
             }
-        }
+        });
+    }
+
+    private static void refreshFieldTabLabels() {
+        MenuUtil.withMatchUI(vmu -> {
+            for (final VField f : vmu.getControl().getFieldViews()) {
+                f.updateTabLabel();
+            }
+        });
     }
 
     private static void refreshHandLayout() {
-        final FScreen screen = Singletons.getControl().getCurrentScreen();
-        if (screen != null && screen.isMatchScreen()) {
-            final IVTopLevelUI view = screen.getView();
-            if (view instanceof VMatchUI vmu) {
-                int maxCards = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
-                final boolean noOverlap = prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP);
-                for (final VHand h : vmu.getControl().getHandViews()) {
-                    h.getHandArea().setMaxCardsPerRow(maxCards);
-                    h.getHandArea().setNoOverlap(noOverlap);
-                    h.getHandArea().doLayout();
-                    h.getHandArea().repaint();
-                }
+        MenuUtil.withMatchUI(vmu -> {
+            final int maxCards = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
+            final boolean noOverlap = prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP);
+            for (final VHand h : vmu.getControl().getHandViews()) {
+                h.getHandArea().setMaxCardsPerRow(maxCards);
+                h.getHandArea().setNoOverlap(noOverlap);
+                h.getHandArea().doLayout();
+                h.getHandArea().repaint();
             }
-        }
+        });
     }
 
-    /** Creates a JCheckBoxMenuItem that stays open on click. */
-    private static JCheckBoxMenuItem createStayOpenCheckBox(final String text) {
-        return new JCheckBoxMenuItem(text) {
-            @Override
-            protected void processMouseEvent(final MouseEvent e) {
-                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
-                    doClick(0);
-                    setArmed(true);
-                } else {
-                    super.processMouseEvent(e);
-                }
-            }
-        };
+    private static JMenu getMenu_SortMultiplayerFields() {
+        final JMenu menu = new JMenu(localizer.getMessage("lblSortMultiplayerFields"));
+        final JMenu layoutMenu = getMenu_MultiplayerFieldLayout();
+        final JMenu panelsMenu = getMenu_MultiplayerFieldPanels();
+        menu.add(getMenuItem_SortFieldsInTurnOrder(layoutMenu, panelsMenu));
+        menu.add(layoutMenu);
+        menu.add(panelsMenu);
+        return menu;
     }
 
-    /** Creates a JRadioButtonMenuItem that stays open on click. */
-    private static JRadioButtonMenuItem createStayOpenRadioButton(final String text) {
-        return new JRadioButtonMenuItem(text) {
-            @Override
-            protected void processMouseEvent(final MouseEvent e) {
-                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
-                    doClick(0);
-                    setArmed(true);
-                } else {
-                    super.processMouseEvent(e);
-                }
-            }
-        };
-    }
-
-    private static JCheckBoxMenuItem getMenuItem_SortMultiplayerFields(
+    private static JCheckBoxMenuItem getMenuItem_SortFieldsInTurnOrder(
             final JMenu layoutMenu, final JMenu panelsMenu) {
         final boolean enabled = !"OFF".equals(prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
-        final JCheckBoxMenuItem menuItem = createStayOpenCheckBox(
-                localizer.getMessage("lblSortMultiplayerFields"));
+        final JCheckBoxMenuItem menuItem = MenuUtil.createStayOpenCheckBox(
+                localizer.getMessage("lblSortFieldsInTurnOrder"));
         menuItem.setToolTipText(localizer.getMessage("lblSortMultiplayerFieldsTooltip"));
         menuItem.setState(enabled);
         layoutMenu.setEnabled(enabled);
@@ -332,7 +297,7 @@ public final class LayoutMenu {
         final String[] tooltipKeys = {"lblFieldLayoutGridTooltip", "lblFieldLayoutRowsTooltip"};
 
         for (int i = 0; i < values.length; i++) {
-            final JRadioButtonMenuItem item = createStayOpenRadioButton(
+            final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(
                     localizer.getMessage(labelKeys[i]));
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
             item.setSelected(values[i].equals(current));
@@ -358,7 +323,7 @@ public final class LayoutMenu {
         final String[] tooltipKeys = {"lblFieldPanelsTabbedTooltip", "lblFieldPanelsSplitTooltip"};
 
         for (int i = 0; i < values.length; i++) {
-            final JRadioButtonMenuItem item = createStayOpenRadioButton(
+            final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(
                     localizer.getMessage(labelKeys[i]));
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
             item.setSelected(values[i].equals(current));
@@ -375,13 +340,7 @@ public final class LayoutMenu {
     }
 
     private static void relayoutMatchFields() {
-        final FScreen screen = Singletons.getControl().getCurrentScreen();
-        if (screen != null && screen.isMatchScreen()) {
-            final IVTopLevelUI view = screen.getView();
-            if (view instanceof VMatchUI) {
-                ((VMatchUI) view).relayoutMultiplayerFields();
-            }
-        }
+        MenuUtil.withMatchUI(VMatchUI::relayoutMultiplayerFields);
     }
 
     private static JMenu getMenu_LogPane() {
@@ -438,13 +397,7 @@ public final class LayoutMenu {
     }
 
     private static void refreshLog() {
-        final FScreen screen = Singletons.getControl().getCurrentScreen();
-        if (screen != null && screen.isMatchScreen()) {
-            final IVTopLevelUI view = screen.getView();
-            if (view instanceof VMatchUI) {
-                ((VMatchUI) view).getControl().refreshLog();
-            }
-        }
+        MenuUtil.withMatchUI(vmu -> vmu.getControl().refreshLog());
     }
 
     public static void showCustomLogCategoriesDialog() {
@@ -483,7 +436,7 @@ public final class LayoutMenu {
     }
 
     private static JMenuItem getMenuItem_ShowTabs() {
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblPanelTabs"));
+        final JCheckBoxMenuItem menuItem = MenuUtil.createStayOpenCheckBox(localizer.getMessage("lblPanelTabs"));
         final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_PANELTABS);
         if (ks != null) { menuItem.setAccelerator(ks); }
         menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS));
@@ -499,9 +452,23 @@ public final class LayoutMenu {
         };
     }
 
-    private JMenuItem getMenuItem_SaveLayout() {
+    private static JCheckBoxMenuItem getMenuItem_NewCardCountInTab() {
+        final JCheckBoxMenuItem menuItem = MenuUtil.createStayOpenCheckBox(
+                localizer.getMessage("lblNewCardCountInTab"));
+        menuItem.setToolTipText(localizer.getMessage("lblNewCardCountInTabTooltip"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT));
+        menuItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ZONE_TAB_NEW_COUNT, menuItem.getState());
+            prefs.save();
+            FloatingZone.refreshAll();
+            refreshHandCards();
+            refreshFieldTabLabels();
+        });
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_SaveLayout() {
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblSaveCurrentLayout"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SAVELAYOUT) : null));
         menuItem.addActionListener(getSaveLayoutAction());
         return menuItem;
     }
@@ -510,9 +477,8 @@ public final class LayoutMenu {
         return e -> SLayoutIO.saveLayout();
     }
 
-    private JMenuItem getMenuItem_OpenLayout() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblOpen") +"..");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_OPENLAYOUT) : null));
+    private static JMenuItem getMenuItem_OpenLayout() {
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblOpen") + "..");
         menuItem.addActionListener(getOpenLayoutAction());
         return menuItem;
     }
@@ -521,15 +487,28 @@ public final class LayoutMenu {
         return e -> SLayoutIO.openLayout();
     }
 
-    private JMenuItem getMenuItem_RevertLayout() {
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblRefresh"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_REVERTLAYOUT) : null));
+    private static JMenuItem getMenuItem_RevertLayout() {
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblReloadLayout"));
         menuItem.addActionListener(getRevertLayoutAction());
         return menuItem;
     }
 
     private static ActionListener getRevertLayoutAction() {
         return e -> SLayoutIO.revertLayout();
+    }
+
+    private static JMenuItem getMenuItem_ResetMatchLayout() {
+        final JMenuItem menuItem = new JMenuItem(localizer.getMessage("btnDeleteMatchUI"));
+        menuItem.addActionListener(e -> {
+            if (FOptionPane.showConfirmDialog(
+                    localizer.getMessage("AresetMatchScreenLayout"),
+                    localizer.getMessage("TresetMatchScreenLayout"))) {
+                if (FScreen.deleteMatchLayoutFile()) {
+                    SLayoutIO.revertLayout();
+                }
+            }
+        });
+        return menuItem;
     }
 
     private static JMenuItem getMenuItem_SetWindowSize() {

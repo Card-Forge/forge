@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Hard
+Description=../Modern/Zendikar/Magic-League_Modern_Trial/earlskiii_-_Domain_Zoo_(Modern,_#18932).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Dark Confidant
+3 Goblin Guide
+4 Kird Ape
+4 Steppe Lynx
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+3 Lightning Helix
+3 Might of Alara
+3 Path to Exile
+4 Tribal Flames
+4 Arid Mesa
+1 Blood Crypt
+1 Forest
+1 Godless Shrine
+4 Marsh Flats
+1 Mountain
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Verdant Catacombs
+[Sideboard]
+3 Ancient Grudge
+3 Ethersworn Canonist
+3 Kitchen Finks
+2 Ranger of Eos
+3 Sowing Salt

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Easy
+Description=Zendikar/US_States_2009_-_Maine/James_McNamara_-_Rampant_Jund_(Standard,_#3268).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Broodmate Dragon
+3 Siege-Gang Commander
+4 Sprouting Thrinax
+4 Bituminous Blast
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+3 Maelstrom Pulse
+3 Rampant Growth
+4 Dragonskull Summit
+3 Forest
+3 Mountain
+4 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Goblin Ruinblaster
+2 Jund Charm
+2 Mind Rot
+2 Pyroclasm
+2 Unstable Footing

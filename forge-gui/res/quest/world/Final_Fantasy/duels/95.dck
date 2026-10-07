@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Thomas_Svendsen_-_Grixis_Control_(Modern,_#2518871).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+4 Snapcaster Mage
+4 Tamiyo, Inquisitive Student
+3 Orcish Bowmasters
+3 Ragavan, Nimble Pilferer
+4 Counterspell
+4 Flame of Anor
+4 Lightning Bolt
+3 Fatal Push
+3 Spell Snare
+2 Force of Negation
+1 Cling to Dust
+4 Flooded Strand
+4 Polluted Delta
+2 Misty Rainforest
+2 Spirebluff Canal
+2 Steam Vents
+2 Watery Grave
+1 Darkslick Shores
+1 Island
+1 Swamp
+1 Thundering Falls
+1 Undercity Sewers
+[Sideboard]
+4 Consign to Memory
+2 Meltdown
+2 Nihil Spellbomb
+2 Stern Scolding
+2 Thoughtseize
+1 Fatal Push
+1 Fire Magic
+1 Pyroclasm

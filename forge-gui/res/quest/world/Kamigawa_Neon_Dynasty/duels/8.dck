@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Agentbatz_-_Jeskai_Control_(Standard,_#1313810).dck
+Deck Type=constructed
+
+[Main]
+1 Smoldering Egg
+3 Hinata, Dawn-Crowned
+4 Goldspan Dragon
+1 Spikefield Hazard
+1 Lorehold Command
+1 Disdainful Stroke
+1 Prismari Command
+2 Fading Hope
+2 Abrade
+2 Negate
+2 Valorous Stance
+2 Memory Deluge
+2 Dragon's Fire
+3 Jwari Disruption
+4 Magma Opus
+3 Shatterskull Smashing
+4 Expressive Iteration
+1 Hall of Storm Giants
+1 Island
+2 Deserted Beach
+3 Sundown Pass
+3 Stormcarved Coast
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Hengegate Pathway
+[Sideboard]
+1 Lier, Disciple of the Drowned
+1 Burn Down the House
+1 Smoldering Egg
+1 Abrade
+1 Test of Talents
+1 Behold the Multiverse
+1 Disdainful Stroke
+2 Burning Hands
+2 Cinderclasm
+2 Malevolent Hermit
+2 Hullbreaker Horror

@@ -7,5 +7,5 @@ ScryfallCode=RFIN
 CardLang=ja
 
 [cards]
-J1 R Force of Negation @Ittoku
-J2 R Arcane Denial @Mikio Masuda
+J1 R Force of Negation @Ittoku ${"flavorName": "Witch's Foresight"}
+J2 R Arcane Denial @Mikio Masuda ${"flavorName": "Fatalism"}

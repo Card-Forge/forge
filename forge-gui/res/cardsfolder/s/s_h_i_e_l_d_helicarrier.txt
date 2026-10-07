@@ -1,0 +1,9 @@
+Name:S.H.I.E.L.D. Helicarrier
+ManaCost:4
+Types:Artifact Vehicle
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Vehicle enters, create two 1/1 white Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+K:Crew:6
+Oracle:Flying\nWhen this Vehicle enters, create two 1/1 white Soldier creature tokens.\nCrew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)

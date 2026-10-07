@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Hermione Granger
+Title=Hermione Granger
+Icon=Hermione Granger.jpg
+Difficulty=Medium
+Description=Innistrad/Grand_Prix_Hiroshima/Rin_Satou_-_U-W_Aggro_(Standard,_#21453).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+2 Fiend Hunter
+4 Geist of Saint Traft
+4 Gideon's Lawkeeper
+4 Grand Abolisher
+4 Mirran Crusader
+3 Sword of Feast and Famine
+4 Mana Leak
+4 Angelic Destiny
+4 Honor of the Pure
+4 Glacial Fortress
+3 Island
+3 Moorland Haunt
+9 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Celestial Purge
+1 Divine Offering
+2 Shrine of Loyal Legions
+4 Sword of War and Peace
+3 Timely Reinforcements

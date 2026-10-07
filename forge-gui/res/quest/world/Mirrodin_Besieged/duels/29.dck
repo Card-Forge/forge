@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/Fort_Mill/Ryan_Corby_in_StarCityGames_Invitational_Qualifier_-_Valakut_Ramp_(Standard,_#11291).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+1 Emrakul, the Aeons Torn
+1 Inferno Titan
+4 Overgrown Battlement
+4 Primeval Titan
+1 Terastodon
+4 Harrow
+2 Summoning Trap
+4 Cultivate
+4 Explore
+2 Green Sun's Zenith
+2 Pyroclasm
+3 Khalni Heart Expedition
+9 Forest
+13 Mountain
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+2 Lightning Bolt
+2 Obstinate Baloth
+2 Plummet
+2 Shatter

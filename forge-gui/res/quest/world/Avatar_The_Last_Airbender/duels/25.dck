@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/AcquireCardboard_-_Mono_White_Aggro_(Standard,_#2776849).dck
+Deck Type=constructed
+
+[Main]
+4 Aven Interrupter
+4 Dryad Militant
+4 Lightstall Inquisitor
+4 Clarion Conqueror
+4 Suki, Courageous Rescuer
+4 Veteran Survivor
+4 Voice of Victory
+3 Get Lost
+3 Seam Rip
+4 Sheltered by Ghosts
+4 Abandoned Air Temple
+13 Plains
+4 Soulstone Sanctuary
+1 Adagia, Windswept Bastion
+[Sideboard]
+4 Split Up
+4 Valorous Stance
+1 Get Lost
+1 Seam Rip
+4 Rest in Peace
+1 Elspeth, Storm Slayer

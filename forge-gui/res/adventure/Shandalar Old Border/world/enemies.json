@@ -2581,7 +2581,7 @@
   {
     "name": "Ape",
     "nameOverride": "Ape Behemoth",
-    "sprite": "sprites/enemy/beast/behemoth.atlas",
+    "sprite": "sprites/enemy/beast/ape/behemoth.atlas",
     "deck": [
       "decks/standard/ape.dck"
     ],
@@ -3363,7 +3363,7 @@
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 18,
-    "scale": 0.55,
+    "scale": 3,
     "life": 25,
     "rewards": [
       {
@@ -4336,7 +4336,7 @@
   },
   {
     "name": "Armadillo",
-    "sprite": "sprites/enemy/beast/armadillo.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/armadillo.atlas",
     "deck": [
       "decks/standard/armadillo.dck"
     ],
@@ -5467,7 +5467,7 @@
   },
   {
     "name": "Badger",
-    "sprite": "sprites/enemy/beast/badger.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/badger.atlas",
     "deck": [
       "decks/standard/badger.dck"
     ],
@@ -6374,8 +6374,7 @@
     "name": "Bandit Slingshot",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditslingshot.atlas",
     "deck": [
-      "decks/standard/banditslingshot_flyers.dck",
-      "decks/standard/banditslingshot_vehicles.dck"
+      "decks/standard/banditslingshot_flyers.dck"
     ],
     "ai": "reckless",
     "randomizeDeck": true,
@@ -7042,7 +7041,7 @@
   },
   {
     "name": "Bat",
-    "sprite": "sprites/enemy/beast/bat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
     "deck": [
       "decks/standard/bat.dck"
     ],
@@ -7160,7 +7159,7 @@
   {
     "name": "Bear",
     "nameOverride": "Brown Bear",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/standard/bear.dck"
     ],
@@ -8288,7 +8287,7 @@
   },
   {
     "name": "Boar",
-    "sprite": "sprites/enemy/beast/boar.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/boar.atlas",
     "deck": [
       "decks/standard/boar.dck",
       "decks/standard/boar_gruul.dck",
@@ -8577,7 +8576,7 @@
   },
   {
     "name": "Bull",
-    "sprite": "sprites/enemy/beast/bull.atlas",
+    "sprite": "sprites/enemy/beast/barn/bull.atlas",
     "deck": [
       "decks/standard/bull.dck"
     ],
@@ -9116,7 +9115,7 @@
   {
     "name": "Camel",
     "nameOverride": "",
-    "sprite": "sprites/enemy/beast/camel.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/camel.atlas",
     "deck": [
       "decks/standard/camel.dck"
     ],
@@ -9295,7 +9294,7 @@
   },
   {
     "name": "Caracal",
-    "sprite": "sprites/enemy/beast/caracal.atlas",
+    "sprite": "sprites/enemy/beast/cat/caracal.atlas",
     "deck": [
       "decks/standard/caracal.dck"
     ],
@@ -9517,7 +9516,7 @@
   },
   {
     "name": "Cat",
-    "sprite": "sprites/enemy/beast/cat.atlas",
+    "sprite": "sprites/enemy/beast/cat/cat.atlas",
     "deck": [
       "decks/standard/straycat.dck"
     ],
@@ -9895,7 +9894,7 @@
   },
   {
     "name": "Cave Spider",
-    "sprite": "sprites/enemy/beast/spider_cave.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_cave.atlas",
     "deck": [
       "decks/standard/cave_spider.dck"
     ],
@@ -10569,7 +10568,7 @@
   },
   {
     "name": "Cerodon",
-    "sprite": "sprites/enemy/beast/cerodon.atlas",
+    "sprite": "sprites/enemy/monstrosity/cerodon.atlas",
     "deck": [
       "decks/standard/cerodon.dck"
     ],
@@ -11517,7 +11516,7 @@
   },
   {
     "name": "Chicken",
-    "sprite": "sprites/enemy/beast/chicken.atlas",
+    "sprite": "sprites/enemy/beast/barn/chicken.atlas",
     "deck": [
       "decks/elite/chicken.dck"
     ],
@@ -12516,6 +12515,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "War Beast Gauntlet"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -13906,7 +13910,7 @@
   },
   {
     "name": "Crab",
-    "sprite": "sprites/enemy/beast/crab.atlas",
+    "sprite": "sprites/enemy/beast/ocean/crab.atlas",
     "deck": [
       "decks/standard/crab.dck",
       "decks/standard/giant_crab.dck"
@@ -14249,7 +14253,7 @@
   },
   {
     "name": "Crocodile",
-    "sprite": "sprites/enemy/beast/crocodile_water.atlas",
+    "sprite": "sprites/enemy/beast/reptile/crocodile_water.atlas",
     "deck": [
       "decks/standard/crocodile.dck"
     ],
@@ -15010,7 +15014,7 @@
   },
   {
     "name": "Hermit Crab",
-    "sprite": "sprites/enemy/beast/hermitcrab.atlas",
+    "sprite": "sprites/enemy/beast/ocean/hermitcrab.atlas",
     "deck": [
       "decks/standard/hermitcrab.dck"
     ],
@@ -15123,7 +15127,7 @@
   },
   {
     "name": "Hedgehog",
-    "sprite": "sprites/enemy/beast/hedgehog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/hedgehog.atlas",
     "deck": [
       "decks/standard/hedgehog.dck"
     ],
@@ -16014,7 +16018,7 @@
     "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 31,
-    "scale": 0.6,
+    "scale": 1.2,
     "life": 25,
     "rewards": [
       {
@@ -16022,6 +16026,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Eye of Horror"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -16773,7 +16782,7 @@
   },
   {
     "name": "Dinosaur Elite",
-    "sprite": "sprites/enemy/beast/ancient.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient.atlas",
     "deck": [
       "decks/standard/dinosaurelite.dck"
     ],
@@ -16890,7 +16899,7 @@
   {
     "name": "Dinosaur",
     "nameOverride": "Giant Carnosaur",
-    "sprite": "sprites/enemy/beast/ancient_2.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
     "deck": [
       "decks/standard/dinosaur_w_r.dck"
     ],
@@ -17531,6 +17540,11 @@
         "itemName": "Cursed Lamp"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -17739,7 +17753,7 @@
   },
   {
     "name": "Dog",
-    "sprite": "sprites/enemy/beast/dog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
     "deck": [
       "decks/standard/dog.dck",
       "decks/standard/dog_w_beginner.dck"
@@ -18370,7 +18384,7 @@
   },
   {
     "name": "Dragonfly",
-    "sprite": "sprites/enemy/beast/dragonfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/dragonfly.atlas",
     "deck": [
       "decks/standard/insect.dck"
     ],
@@ -18911,6 +18925,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Broodling Egg"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -21032,7 +21051,7 @@
   {
     "name": "Elephant",
     "nameOverride": "War Mammoth",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/elite/elephant.dck"
     ],
@@ -21802,7 +21821,7 @@
   },
   {
     "name": "Elk",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/standard/elk.dck"
     ],
@@ -21975,6 +21994,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Crown of the False God"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "card",
@@ -22833,7 +22857,7 @@
   },
   {
     "name": "Falcon",
-    "sprite": "sprites/enemy/beast/falcon.atlas",
+    "sprite": "sprites/enemy/beast/bird/falcon.atlas",
     "deck": [
       "decks/standard/falcon_w.dck"
     ],
@@ -24927,7 +24951,7 @@
   },
   {
     "name": "Fox",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/standard/fox.dck"
     ],
@@ -25150,7 +25174,7 @@
   },
   {
     "name": "Frog",
-    "sprite": "sprites/enemy/beast/frog.atlas",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
     "deck": [
       "decks/standard/frog.dck"
     ],
@@ -25930,6 +25954,11 @@
         "itemName": "Tome of the Gate"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -26687,7 +26716,7 @@
   {
     "name": "Ghalta",
     "nameOverride": "Queen of Beasts",
-    "sprite": "sprites/enemy/beast/ghalta.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ghalta.atlas",
     "deck": [
       "decks/boss/ghalta.dck"
     ],
@@ -28026,7 +28055,7 @@
   },
   {
     "name": "Giant Fly",
-    "sprite": "sprites/enemy/beast/giantfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/giantfly.atlas",
     "deck": [
       "decks/standard/insect.dck"
     ],
@@ -28217,7 +28246,7 @@
   },
   {
     "name": "Giant Panda",
-    "sprite": "sprites/enemy/beast/giantpanda.atlas",
+    "sprite": "sprites/enemy/beast/bear/giantpanda.atlas",
     "deck": [
       "decks/standard/giantpanda.dck"
     ],
@@ -28336,7 +28365,7 @@
   },
   {
     "name": "Giant Spider",
-    "sprite": "sprites/enemy/beast/spider_purple.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_purple.atlas",
     "deck": [
       "decks/standard/spider_token.dck"
     ],
@@ -28536,6 +28565,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Infiltrator's Knife"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -29715,6 +29749,11 @@
         "itemName": "Belt of Worry Beads"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -30180,7 +30219,7 @@
   {
     "name": "Gorilla",
     "nameOverride": "Savage Chieftain",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/elite/gorilla.dck"
     ],
@@ -34113,7 +34152,7 @@
   },
   {
     "name": "Hidden Snake",
-    "sprite": "sprites/enemy/beast/cobradungeon.atlas",
+    "sprite": "sprites/enemy/beast/reptile/cobradungeon.atlas",
     "deck": [
       "decks/standard/snake.dck"
     ],
@@ -34835,7 +34874,7 @@
   {
     "name": "Hippo",
     "nameOverride": "Giant Bull Hippo",
-    "sprite": "sprites/enemy/beast/hippo.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
     "deck": [
       "decks/elite/hippo.dck"
     ],
@@ -35844,7 +35883,7 @@
   },
   {
     "name": "Horse",
-    "sprite": "sprites/enemy/beast/horseblack.atlas",
+    "sprite": "sprites/enemy/beast/horse/horseblack.atlas",
     "deck": [
       "decks/standard/horse.dck"
     ],
@@ -36029,7 +36068,7 @@
   },
   {
     "name": "Sunmare",
-    "sprite": "sprites/enemy/beast/horsearabian.atlas",
+    "sprite": "sprites/enemy/beast/horse/horsearabian.atlas",
     "deck": [
       "decks/standard/horse.dck"
     ],
@@ -38829,7 +38868,7 @@
   },
   {
     "name": "Jellyfish",
-    "sprite": "sprites/enemy/beast/jellyfish.atlas",
+    "sprite": "sprites/enemy/beast/ocean/jellyfish.atlas",
     "deck": [
       "decks/standard/jellyfish.dck"
     ],
@@ -40732,6 +40771,11 @@
         "itemName": "Kobold King's Blade"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.75,
         "count": 150,
@@ -41103,7 +41147,7 @@
   },
   {
     "name": "Ladybug",
-    "sprite": "sprites/enemy/beast/ladybug.atlas",
+    "sprite": "sprites/enemy/beast/insect/ladybug.atlas",
     "deck": [
       "decks/standard/ladybug.dck"
     ],
@@ -42422,7 +42466,7 @@
   },
   {
     "name": "Lion",
-    "sprite": "sprites/enemy/beast/lion.atlas",
+    "sprite": "sprites/enemy/beast/cat/lion.atlas",
     "deck": [
       "decks/standard/lion.dck"
     ],
@@ -45853,6 +45897,11 @@
     "life": 25,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -47284,7 +47333,7 @@
   },
   {
     "name": "Monkey",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/elite/ragavan.dck"
     ],
@@ -48078,7 +48127,7 @@
     "nameOverride": "Lin Sivvi, Defiant Hero",
     "sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
     "deck": [
-      "decks/boss/nahiri.dck"
+      "decks/miniboss/nahiri.dck"
     ],
     "ai": "",
     "boss": true,
@@ -48092,6 +48141,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Rebel Falconer's Glove"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "life",
@@ -48339,7 +48393,7 @@
   },
   {
     "name": "Naked Mole Rat",
-    "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
     "deck": [
       "decks/standard/shrinemole.dck"
     ],
@@ -49022,7 +49076,8 @@
     "name": "Necromancer",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
-      "decks/standard/reanimator.dck"
+      "decks/standard/reanimator.dck",
+      "decks/standard/reanimator_livingdeath.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -49575,7 +49630,7 @@
   },
   {
     "name": "Octopus",
-    "sprite": "sprites/enemy/beast/octopus.atlas",
+    "sprite": "sprites/enemy/beast/ocean/octopus.atlas",
     "deck": [
       "decks/standard/octopus.dck"
     ],
@@ -50261,7 +50316,7 @@
   },
   {
     "name": "Owl",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/standard/owl.dck"
     ],
@@ -50712,7 +50767,7 @@
   },
   {
     "name": "Penguin",
-    "sprite": "sprites/enemy/beast/penguin.atlas",
+    "sprite": "sprites/enemy/beast/polar/penguin.atlas",
     "deck": [
       "decks/standard/penguin.dck"
     ],
@@ -51881,6 +51936,11 @@
         "itemName": "Djinn's Silks"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -52216,7 +52276,7 @@
   {
     "name": "Poisonous Snake",
     "nameOverride": "",
-    "sprite": "sprites/enemy/beast/snake_cobra.atlas",
+    "sprite": "sprites/enemy/beast/reptile/snake_cobra.atlas",
     "deck": [
       "decks/standard/poisonoussnake.dck"
     ],
@@ -52384,7 +52444,7 @@
   },
   {
     "name": "Polar Bear",
-    "sprite": "sprites/enemy/beast/polarbear.atlas",
+    "sprite": "sprites/enemy/beast/polar/polarbear.atlas",
     "deck": [
       "decks/standard/polarbear.dck"
     ],
@@ -52496,7 +52556,7 @@
   },
   {
     "name": "Porcupine",
-    "sprite": "sprites/enemy/beast/porcupine.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/porcupine.atlas",
     "deck": [
       "decks/standard/porcupine.dck"
     ],
@@ -54398,7 +54458,7 @@
   },
   {
     "name": "Raccoon",
-    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
     "deck": [
       "decks/standard/enchantment_aggro.dck"
     ],
@@ -54618,7 +54678,7 @@
   },
   {
     "name": "Parrot",
-    "sprite": "sprites/enemy/beast/parrot.atlas",
+    "sprite": "sprites/enemy/beast/bird/parrot.atlas",
     "deck": [
       "decks/standard/parrot.dck"
     ],
@@ -55440,7 +55500,7 @@
   },
   {
     "name": "Raven",
-    "sprite": "sprites/enemy/beast/raven.atlas",
+    "sprite": "sprites/enemy/beast/bird/raven.atlas",
     "deck": [
       "decks/standard/raven.dck"
     ],
@@ -55640,6 +55700,11 @@
     "speed": 24,
     "life": 25,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -56157,7 +56222,7 @@
   },
   {
     "name": "Rhino",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/standard/rhino.dck"
     ],
@@ -57452,7 +57517,7 @@
   },
   {
     "name": "Scarab",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/standard/scarab.dck"
     ],
@@ -58117,7 +58182,7 @@
   },
   {
     "name": "Scorpion",
-    "sprite": "sprites/enemy/beast/scorpion.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/scorpion.atlas",
     "deck": [
       "decks/standard/scorpion.dck"
     ],
@@ -61348,7 +61413,7 @@
     "name": "Sliver Queen",
     "sprite": "sprites/enemy/aberration/sliver_queen.atlas",
     "deck": [
-      "decks/boss/sliver_queen.dck"
+      "decks/miniboss/sliver_queen.dck"
     ],
     "ai": "reckless",
     "boss": true,
@@ -61360,6 +61425,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Slivercaller's Gauntlet"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "life",
@@ -61626,7 +61696,7 @@
   },
   {
     "name": "Snake",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/standard/snake.dck"
     ],
@@ -61818,6 +61888,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Winter Cap"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -62261,7 +62336,7 @@
   },
   {
     "name": "Spider",
-    "sprite": "sprites/enemy/beast/spider_black.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_black.atlas",
     "deck": [
       "decks/standard/spider.dck"
     ],
@@ -63224,7 +63299,7 @@
   },
   {
     "name": "Stray Cat",
-    "sprite": "sprites/enemy/beast/cat.atlas",
+    "sprite": "sprites/enemy/beast/cat/cat.atlas",
     "deck": [
       "decks/standard/cat_greenblack.dck",
       "decks/standard/straycat.dck",
@@ -63475,6 +63550,11 @@
         "itemName": "Crown of the Vale"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -63717,6 +63797,11 @@
         "itemName": "Tasty Tome"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -63951,6 +64036,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Shield of Air"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -64200,6 +64290,11 @@
         "count": 1
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -64328,7 +64423,7 @@
   {
     "name": "Squirrel",
     "nameOverride": "Nut Collector",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/elite/squirrel.dck"
     ],
@@ -65109,6 +65204,11 @@
         "itemName": "Imp Tamer's Glove"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "life",
         "probability": 1,
         "count": 1
@@ -65680,7 +65780,7 @@
     "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
-    "scale": 0.5,
+    "scale": 1.2,
     "life": 30,
     "rewards": [
       {
@@ -65926,7 +66026,7 @@
   },
   {
     "name": "Tiger",
-    "sprite": "sprites/enemy/beast/tiger.atlas",
+    "sprite": "sprites/enemy/beast/cat/tiger.atlas",
     "deck": [
       "decks/standard/tiger.dck"
     ],
@@ -66109,6 +66209,11 @@
     "scale": 0.7,
     "life": 30,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -66349,7 +66454,7 @@
   },
   {
     "name": "Turtle",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/standard/turtle.dck"
     ],
@@ -67140,7 +67245,7 @@
     "name": "Valyx the Tormentor",
     "sprite": "sprites/enemy/fiend/valyx.atlas",
     "deck": [
-      "decks/boss/valyx.dck"
+      "decks/miniboss/valyx.dck"
     ],
     "ai": "",
     "boss": true,
@@ -67149,6 +67254,11 @@
     "speed": 31,
     "life": 30,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
       {
         "type": "life",
         "probability": 1,
@@ -67812,7 +67922,7 @@
   },
   {
     "name": "Viper",
-    "sprite": "sprites/enemy/beast/big_snake_2.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake_2.atlas",
     "deck": [
       "decks/standard/snake.dck"
     ],
@@ -68870,7 +68980,7 @@
   },
   {
     "name": "Wasp",
-    "sprite": "sprites/enemy/beast/wasp.atlas",
+    "sprite": "sprites/enemy/beast/insect/wasp.atlas",
     "deck": [
       "decks/standard/wasp.dck"
     ],
@@ -69045,7 +69155,7 @@
   },
   {
     "name": "Werebear",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/miniboss/bearboss.dck"
     ],
@@ -69061,6 +69171,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Grizzly Glaive"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -69563,7 +69678,7 @@
   },
   {
     "name": "Wild Rat",
-    "sprite": "sprites/enemy/beast/wildrat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/wildrat.atlas",
     "deck": [
       "decks/standard/infectrat.dck",
       "decks/standard/rat.dck",
@@ -69866,7 +69981,7 @@
   {
     "name": "Wolf",
     "nameOverride": "Timber Alpha",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/elite/wolfboss.dck"
     ],
@@ -70089,7 +70204,7 @@
   },
   {
     "name": "Wolf Pup",
-    "sprite": "sprites/enemy/beast/wolfcub.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/wolfcub.atlas",
     "deck": [
       "decks/standard/wolf.json"
     ],
@@ -70275,7 +70390,7 @@
   },
   {
     "name": "Vulture",
-    "sprite": "sprites/enemy/beast/vulture.atlas",
+    "sprite": "sprites/enemy/beast/bird/vulture.atlas",
     "deck": [
       "decks/standard/vulture.dck"
     ],
@@ -71584,6 +71699,11 @@
         "itemName": "Storm Gauntlet"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "life",
         "probability": 1,
         "count": 1
@@ -72591,6 +72711,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Rhystic Amulet"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -75175,7 +75300,7 @@
   },
   {
     "name": "Mill Mole",
-    "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
     "deck": [
       "decks/elite/mill_mole.dck"
     ],
@@ -84008,6 +84133,11 @@
         "itemName": "Groundbreaker Mace"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -84144,6 +84274,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "River Waders"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -84396,6 +84531,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Ashnod's Greaves"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -84668,6 +84808,11 @@
         "itemName": "Claws of Gix"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -84895,6 +85040,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Latulla, Keldon Overseer|PCY",
@@ -85124,6 +85274,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Márton Stromgald|ICE",
@@ -85360,6 +85515,11 @@
         "itemName": "Narcissist's Mask"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Jeska, Warrior Adept|JUD",
         "count": 1
@@ -85589,6 +85749,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Eron the Relentless|HML",
@@ -85837,6 +86002,11 @@
         "probability": 1
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Jolrael, Empress of Beasts|PCY",
         "count": 1,
@@ -85962,6 +86132,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Verdeloth the Ancient|INV",
@@ -86192,6 +86367,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Rofellos, Llanowar Emissary|UDS",
         "count": 1
@@ -86420,6 +86600,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Multani, Maro-Sorcerer|ULG",
@@ -86650,6 +86835,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Hazduhr the Abbot|HML",
         "count": 1
@@ -86777,6 +86967,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Selenia, Dark Angel|TMP",
@@ -87013,6 +87208,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Decree of Justice|SCG",
         "count": 1
@@ -87241,6 +87441,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Reya Dawnbringer|INV",
@@ -87472,6 +87677,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Candelabra of Tawnos|ATQ",
         "count": 1
@@ -87586,6 +87796,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Tolarian Academy|USG",
@@ -87815,6 +88030,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Rayne, Academy Chancellor|UDS",
@@ -88055,6 +88275,11 @@
         "itemName": "Shield of Tears",
         "count": 1,
         "probability": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -96331,7 +96556,7 @@
   },
   {
     "name": "Gorilla Chief",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/miniboss/shandalar97_gorilla_chief.dck"
     ],
@@ -96346,6 +96571,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Ley Line Walker Boots"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -96565,6 +96795,11 @@
         "probability": 0.1,
         "count": 1,
         "itemName": "Shield of the Hivelord"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -96789,6 +97024,11 @@
         "type": "item",
         "probability": 1,
         "itemName": "Torturer's Hood",
+        "count": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -97376,7 +97616,7 @@
   },
   {
     "name": "Kogla",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/miniboss/shandalar97_kogla.dck"
     ],
@@ -97391,6 +97631,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Shaman's Staff"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -99283,6 +99528,11 @@
     "life": 30,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 1.0,
         "count": 3000,
@@ -99492,6 +99742,11 @@
     "speed": 15,
     "life": 30,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "gold",
         "probability": 1.0,
@@ -99707,6 +99962,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Time Walker's Trophy"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -100394,6 +100654,11 @@
         "itemName": "Crooked Scales"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -100707,6 +100972,11 @@
         "itemName": "Kry Greaves"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -100934,6 +101204,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Immortal Anklet"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -101165,6 +101440,11 @@
         "itemName": "Marble Mace"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -101392,6 +101672,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Life Matrix"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -101623,6 +101908,11 @@
         "itemName": "Gauntlets of Chaos"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -101829,6 +102119,1365 @@
       "Dragon",
       "Boss",
       "ElderDragon"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Floodwater Homarid",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/floodwater_homarid.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_floodwater_homarid.dck"
+    ],
+    "ai": "cautious",
+    "speed": 14,
+    "life": 30,
+    "colors": "UW",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Miniboss"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 75,
+        "addMaxCount": 75
+      },
+      {
+        "type": "shards",
+        "probability": 0.75,
+        "count": 2,
+        "addMaxCount": 3
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.5
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Deep Spawn",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/deep_spawn.atlas",
+    "scale": 0.75,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_deep_spawn.dck"
+    ],
+    "ai": "reckless",
+    "boss": true,
+    "speed": 12,
+    "life": 40,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Deep Spawn|FEM"
+      },
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 150,
+        "addMaxCount": 150
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 5,
+        "addMaxCount": 5
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Boss"
+    ],
+    "spawnRate": 0,
+    "bossIntro": "The Deep Spawn rises from the flooded ruins, each movement shaking loose another piece of the ancient temple. \"The old stones remember the sea. Soon, so will your bones.\"",
+    "bossInsult": "\"Sink now, shore-walker. The tide keeps everything in the end.\""
+  },
+  {
+    "name": "FEM Homarid Shaman",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_shaman.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_shaman.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Spawning Bed",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_spawning_bed.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_spawning_bed.dck"
+    ],
+    "ai": "cautious",
+    "speed": 0,
+    "life": 30,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Miniboss"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 75,
+        "addMaxCount": 75
+      },
+      {
+        "type": "shards",
+        "probability": 0.75,
+        "count": 2,
+        "addMaxCount": 3
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.5
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Warrior A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_a.dck"
+    ],
+    "ai": "reckless",
+    "speed": 14,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Green",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_green.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_green.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Purple",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_purple.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_purple.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Red",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_red.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_red.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Yellow",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_yellow.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_yellow.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM River Merfolk",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/river_merfolk.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_river_merfolk.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "UR",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Seasinger",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/seasinger.atlas",
+    "scale": 0.75,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_seasinger.dck"
+    ],
+    "ai": "cautious",
+    "boss": true,
+    "speed": 12,
+    "life": 40,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Seasinger|FEM"
+      },
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 150,
+        "addMaxCount": 150
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 5,
+        "addMaxCount": 5
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1
+      }
+    ],
+    "colors": "UB",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Boss"
+    ],
+    "spawnRate": 0,
+    "bossIntro": "The Seasinger lifts her conch scepter and the battlefield falls silent. \"You mistook mercy for weakness. Hear now the song that sent empires beneath the waves.\"",
+    "bossInsult": "\"Even your defiance has a melody. I will remember it when the tide erases your name.\""
+  },
+  {
+    "name": "FEM Svyelunite Priest",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/svyelunite_priest.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_svyelunite_priest.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Viscerid Drone",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/viscerid_drone.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_viscerid_drone.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "colors": "UB",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Knight",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_knights.atlas",
+    "scale": 0.45,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_knight.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Mage C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
+    "scale": 0.1875,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Merchant",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_merchant.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_merchant.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Soldier A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian War Machine",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_war_machine.atlas",
+    "scale": 0.5,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_war_machine.dck"
+    ],
+    "ai": "reckless",
+    "speed": 14,
+    "life": 30,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Miniboss"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 75,
+        "addMaxCount": 75
+      },
+      {
+        "type": "shards",
+        "probability": 0.75,
+        "count": 2,
+        "addMaxCount": 3
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.5
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Warrior B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_b.dck"
+    ],
+    "ai": "reckless",
+    "speed": 14,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Warrior C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_c.dck"
+    ],
+    "ai": "reckless",
+    "speed": 14,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Homarid Warrior 5ED",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/homarid_warrior.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_homarid_warrior_5ed.dck"
+    ],
+    "ai": "reckless",
+    "speed": 14,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Homarid",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Mage A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
+    "scale": 0.1875,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Mage B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
+    "scale": 0.1875,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Elite"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 40,
+        "addMaxCount": 40
+      },
+      {
+        "type": "shards",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Rare"
+        ],
+        "count": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Soldier B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_b.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Soldier C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_c.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Vodalian Soldier D",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.375,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_d.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Standard"
+    ],
+    "spawnRate": 0,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 30
+      },
+      {
+        "type": "shards",
+        "probability": 0.35,
+        "count": 1,
+        "addMaxCount": 2
+      },
+      {
+        "type": "deckCard",
+        "rarity": [
+          "Common",
+          "Uncommon"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "FEM Ally Seasinger",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/seasinger.atlas",
+    "scale": 0.6,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_seasinger.dck"
+    ],
+    "ai": "cautious",
+    "speed": 12,
+    "life": 40,
+    "colors": "UB",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Mage A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
+    "scale": 0.15,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_a.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Mage B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
+    "scale": 0.15,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage_b.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Mage C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_mage.atlas",
+    "scale": 0.15,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_mage.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 25,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Merchant",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_merchant.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_merchant.dck"
+    ],
+    "ai": "cautious",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier A",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier B",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_b.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier C",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_c.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "FEM Ally Vodalian Soldier D",
+    "sprite": "sprites/enemy/fallen_empires/svyelunite/vodalian_soldier.atlas",
+    "scale": 0.3,
+    "deck": [
+      "decks/standard/fallen_empires_svyelunite_vodalian_soldier_d.dck"
+    ],
+    "ai": "reckless",
+    "speed": 20,
+    "life": 20,
+    "colors": "U",
+    "questTags": [
+      "FallenEmpires",
+      "SvyeluniteTemple",
+      "Merfolk",
+      "Ally"
     ],
     "spawnRate": 0
   }

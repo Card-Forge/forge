@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/SCG_Super_IQ_Colorado_Springs/Matt_Deylius_-_G-W_Aggro_(Standard,_#79803).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Boon Satyr
+4 Experiment One
+4 Fleecemane Lion
+4 Loxodon Smiter
+4 Soldier of the Pantheon
+4 Voice of Resurgence
+4 Advent of the Wurm
+4 Selesnya Charm
+4 Unflinching Courage
+3 Ajani, Caller of the Pride
+6 Forest
+4 Mana Confluence
+7 Plains
+4 Temple Garden
+2 Temple of Plenty
+[Sideboard]
+2 Banishing Light
+1 Deicide
+3 Fiendslayer Paladin
+3 Mistcutter Hydra
+4 Skylasher
+2 Wear // Tear

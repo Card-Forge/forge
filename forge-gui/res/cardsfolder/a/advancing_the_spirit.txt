@@ -1,0 +1,9 @@
+Name:Advancing the Spirit
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this enchantment enters, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ AlternativeCost | ValidSA$ Activated.PowerUp | ValidPlayer$ You | Condition$ PlayerTurn | Cost$ 0 | CheckSVar$ X | SVarCompare$ LT1 | Description$ You may pay {0} rather than pay the power-up cost of the first power-up ability you activate during each of your turns.
+SVar:X:Count$ThisTurnActivated_Activated.PowerUp+YouCtrl
+SVar:NonStackingEffect:True
+Oracle:When this enchantment enters, draw a card.\nYou may pay {0} rather than pay the power-up cost of the first power-up ability you activate during each of your turns.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Bellstriker_-_Humans_(Modern,_#1085548).dck
+Deck Type=constructed
+
+[Main]
+2 Reflector Mage
+2 Militia Bugler
+2 General Kudro of Drannith
+3 Thalia, Guardian of Thraben
+4 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+4 Noble Hierarch
+4 Phantasmal Image
+4 Thalia's Lieutenant
+4 Champion of the Parish
+4 Aether Vial
+1 Plains
+1 Island
+1 Silent Clearing
+1 Waterlogged Grove
+3 Horizon Canopy
+4 Unclaimed Territory
+4 Cavern of Souls
+4 Ancient Ziggurat
+[Sideboard]
+2 Chalice of the Void
+2 Damping Sphere
+2 Relic of Progenitus
+2 Skyclave Apparition
+2 Magus of the Moon
+2 Gaddock Teeg
+3 Auriok Champion

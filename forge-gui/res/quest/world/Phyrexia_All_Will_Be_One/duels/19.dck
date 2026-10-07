@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Darkseid
+Title=Darkseid
+Icon=Darkseid.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/27TrueRunes_-_Golgari_Midrange_(Standard,_#1618891).dck
+Deck Type=constructed
+
+[Main]
+4 Armored Scrapgorger
+4 Llanowar Loamspeaker
+4 Shakedown Heavy
+4 Archfiend of the Dross
+4 Phyrexian Obliterator
+4 Tail Swipe
+4 Bushwhack
+4 Invoke Despair
+4 Fight Rigging
+1 Forest
+11 Swamp
+4 Llanowar Wastes
+4 Jungle Hollow
+4 Deathcap Glade
+[Sideboard]

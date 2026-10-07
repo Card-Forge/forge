@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Manacymbal_-_Saheeli_Combo_(Modern,_#1224359).dck
+Deck Type=constructed
+
+[Main]
+4 Felidar Guardian
+4 Fury
+4 Omnath, Locus of Creation
+4 Solitude
+4 Wall of Omens
+2 Coalition Relic
+4 Ephemerate
+4 Explore
+4 Storm the Festival
+3 Fires of Invention
+3 Teferi, Time Raveler
+4 Wrenn and Six
+4 Saheeli Rai
+1 Island
+1 Ketria Triome
+1 Lair of the Hydra
+1 Plains
+1 Raging Ravine
+1 Raugrin Triome
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Forest
+2 Temple Garden
+2 Breeding Pool
+3 Arid Mesa
+3 Wooded Foothills
+4 Windswept Heath
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Alpine Moon
+1 Engineered Explosives
+1 Thragtusk
+1 Wear // Tear
+2 Sunset Revelry
+2 Rest in Peace
+2 Prismatic Ending
+2 Obsidian Charmaw
+2 Chalice of the Void

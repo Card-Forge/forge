@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Easy
+Description=Dark_Ascension/GP_Lille_-__Trials_Winners/Jascha_Kaise_-_UW_Humans_(Standard,_#26989).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Accorder Paladin
+4 Champion of the Parish
+3 Doomed Traveler
+2 Fiend Hunter
+2 Gideon's Lawkeeper
+1 Grand Abolisher
+3 Hero of Bladehold
+2 Loyal Cathar
+2 Mikaeus, the Lunarch
+4 Mirran Crusader
+3 Thalia, Guardian of Thraben
+1 Sword of Feast and Famine
+2 Sword of War and Peace
+4 Honor of the Pure
+2 Oblivion Ring
+3 Glacial Fortress
+3 Moorland Haunt
+13 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Celestial Purge
+2 Corrosive Gale
+2 Grafdigger's Cage
+2 Leonin Relic-Warder
+2 Phyrexian Metamorph
+2 Surgical Extraction

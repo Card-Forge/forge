@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Interrupter_MTG_-_Mono-Blue_Tempo_(Standard,_#1746252).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+2 Horned Loch-Whale
+4 Tolarian Terror
+3 Spell Pierce
+3 Consider
+3 Fading Hope
+2 March of Swirling Mist
+3 Make Disappear
+4 Moment of Truth
+4 Thirst for Discovery
+3 Flow of Knowledge
+3 Sleight of Hand
+20 Island
+2 Otawara, Soaring City
+[Sideboard]
+3 Ledger Shredder
+2 Chrome Host Seedshark
+3 Negate
+2 Disdainful Stroke
+2 Blue Sun's Twilight
+1 Invoke the Winds
+2 Witness Protection

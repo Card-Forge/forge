@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Delthar_-_Infect_(Modern,_#1017274).dck
+Deck Type=constructed
+
+[Main]
+4 Plague Stinger
+4 Phyrexian Crusader
+4 Noble Hierarch
+4 Glistener Elf
+2 Mutagenic Growth
+2 Become Immense
+3 Abrupt Decay
+4 Might of Old Krosa
+4 Vines of Vastwood
+2 Thoughtseize
+3 Inquisition of Kozilek
+3 Scale Up
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Forest
+2 Overgrown Tomb
+2 Misty Rainforest
+2 Wooded Foothills
+3 Nurturing Peatland
+4 Verdant Catacombs
+4 Inkmoth Nexus
+[Sideboard]
+1 Cling to Dust
+2 Choke
+2 Fatal Push
+2 Force of Vigor
+2 Liliana, the Last Hope
+2 Nihil Spellbomb
+2 Shapers' Sanctuary
+2 Veil of Summer

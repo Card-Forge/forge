@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/2137_-_Gates_(Standard,_#779658).dck
+Deck Type=constructed
+
+[Main]
+4 Hydroid Krasis
+2 Chemister's Insight
+2 Expansion // Explosion
+4 Growth Spiral
+4 Nexus of Fate
+4 Circuitous Route
+2 Deafening Clarion
+4 Gates Ablaze
+4 Guild Summit
+4 Wilderness Reclamation
+4 Azorius Guildgate
+1 Forest
+4 Gruul Guildgate
+1 Island
+4 Izzet Guildgate
+4 Plaza of Harmony
+4 Selesnya Guildgate
+4 Simic Guildgate
+[Sideboard]
+3 Archway Angel
+2 Disdainful Stroke
+3 Gate Colossus
+4 Gatebreaker Ram
+3 Negate

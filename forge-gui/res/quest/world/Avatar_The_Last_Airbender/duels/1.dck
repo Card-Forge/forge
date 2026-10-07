@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/Dreaming_in_Aklo_-_Selesnya_Landfall_(Standard,_#2769340).dck
+Deck Type=constructed
+
+[Main]
+4 Icetill Explorer
+4 Llanowar Elves
+4 Mightform Harmonizer
+3 Sazh's Chocobo
+2 Mossborn Hydra
+4 Esper Origins
+3 Lumbering Worldwagon
+2 Snakeskin Veil
+2 Shared Roots
+4 Earthbender Ascension
+2 Seam Rip
+10 Forest
+4 Escape Tunnel
+4 Fabled Passage
+4 Hushwood Verge
+3 Ba Sing Se
+1 Plains
+[Sideboard]
+4 Clarion Conqueror
+3 Origin of Metalbending
+3 Soul-Guide Lantern
+2 Felidar Retreat
+2 Get Lost
+1 Mossborn Hydra

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/Nationals_-_Nationals_2011_-_South_Africa/Scott_Field_-_Valakut_Ramp_(Standard,_#19164).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+3 Inferno Titan
+4 Oracle of Mul Daya
+3 Overgrown Battlement
+4 Primeval Titan
+3 Lightning Bolt
+2 Nature's Claim
+4 Explore
+3 Green Sun's Zenith
+4 Rampant Growth
+2 Khalni Heart Expedition
+2 Evolving Wilds
+4 Forest
+11 Mountain
+1 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+3 Verdant Catacombs
+[Sideboard]
+1 Acidic Slime
+3 Combust
+3 Obstinate Baloth
+4 Pyroclasm
+2 Thrun, the Last Troll

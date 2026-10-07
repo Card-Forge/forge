@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sidisi
+Title=Sidisi
+Icon=Sidisi.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Anthony_Chaves_-_Revolt_Zoo_(Modern,_#799601).dck
+Deck Type=constructed
+
+[Main]
+4 Simian Spirit Guide
+4 Reckless Bushwhacker
+4 Burning-Tree Emissary
+4 Hidden Herbalists
+4 Narnam Renegade
+4 Wild Nacatl
+4 Goblin Guide
+4 Bomat Courier
+4 Atarka's Command
+4 Lightning Bolt
+3 Light Up the Stage
+1 Mountain
+1 Forest
+1 Stomping Ground
+1 Temple Garden
+1 Sacred Foundry
+4 Windswept Heath
+4 Wooded Foothills
+4 Arid Mesa
+[Sideboard]
+1 Dire Fleet Daredevil
+2 Path to Exile
+2 Lightning Helix
+2 Surgical Extraction
+1 Tormod's Crypt
+1 Rest in Peace
+1 Ancient Grudge
+1 Destructive Revelry
+1 Cindervines
+1 Naya Charm
+1 Risk Factor
+1 Experimental Frenzy

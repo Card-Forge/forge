@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Max_Rappaport_-_Dimir_Demons_(Standard,_#2381266).dck
+Deck Type=constructed
+
+[Main]
+4 Oildeep Gearhulk
+3 Archfiend of the Dross
+4 Deep-Cavern Bat
+1 The Speed Demon
+4 Faerie Mastermind
+4 Cut Down
+3 Go for the Throat
+3 Anoint with Affliction
+1 Sheoldred's Edict
+2 Duress
+1 Gix's Command
+4 Unholy Annex // Ritual Chamber
+4 Restless Reef
+1 Undercity Sewers
+4 Gloomlake Verge
+4 Underground River
+4 Darkslick Shores
+6 Swamp
+1 Island
+2 Soulstone Sanctuary
+[Sideboard]
+1 Malicious Eclipse
+2 Withering Torment
+2 Ghost Vacuum
+2 Intimidation Tactics
+3 Preacher of the Schism
+2 Tishana's Tidebinder
+2 Harvester of Misery
+1 Blot Out

@@ -30,7 +30,6 @@ public class CounterAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
-        boolean toReturn = true;
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
@@ -52,7 +51,8 @@ public class CounterAi extends SpellAbilityAi {
             if ((topSA.isSpell() && !topSA.isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
+            }
+            if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
             }
 
@@ -163,6 +163,8 @@ public class CounterAi extends SpellAbilityAi {
         } else if (tgtCMC == 3 && !MyRandom.percentTrue(ctrChanceCMC3)) {
             dontCounter = true;
         }
+
+        // TODO check against game changers
 
         if (tgtSA != null && tgtCMC < AiProfileUtil.getIntProperty(ai, AiProps.MIN_SPELL_CMC_TO_COUNTER)) {
             dontCounter = true;

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Chris_Campbell_-_Boros_Prison_(Modern,_#1173858).dck
+Deck Type=constructed
+
+[Main]
+2 Goblin Dark-Dwellers
+4 God-Pharaoh's Faithful
+4 Mana Tithe
+4 Oust
+4 Boom // Bust
+4 Molten Rain
+4 Stone Rain
+4 Timely Reinforcements
+4 Outlaws' Merriment
+4 Suppression Field
+4 Flagstones of Trokair
+4 Temple of Triumph
+4 Darksteel Citadel
+5 Mountain
+5 Plains
+[Sideboard]
+1 Deafening Silence
+2 Kor Firewalker
+2 Relic of Progenitus
+2 Defense Grid
+2 Anger of the Gods
+2 Devout Decree
+2 Rip Apart
+2 Fragmentize

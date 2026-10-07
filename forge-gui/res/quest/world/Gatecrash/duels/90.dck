@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Horus
+Title=Horus
+Icon=Horus.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/PTQ_Dragon┬┤s_Maze_-_Napoli,_Italy/Cammilluzzi_Marco_-_Zoo_(Modern,_#46629).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avalanche Riders
+1 Aven Mindcensor
+3 Birds of Paradise
+3 Deathrite Shaman
+3 Knight of the Reliquary
+4 Loxodon Smiter
+2 Noble Hierarch
+4 Tarmogoyf
+2 Thrun, the Last Troll
+2 Dismember
+4 Lightning Bolt
+1 Lightning Helix
+4 Blood Moon
+1 Seal of Fire
+1 Domri Rade
+4 Arid Mesa
+1 Blood Crypt
+1 Copperline Gorge
+2 Forest
+1 Gavony Township
+1 Ghost Quarter
+1 Horizon Canopy
+1 Misty Rainforest
+2 Plains
+1 Razorverge Thicket
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+1 Ajani Vengeant
+2 Ancient Grudge
+2 Linvala, Keeper of Silence
+1 Obstinate Baloth
+3 Path to Exile
+1 Skullcrack
+2 Spellskite
+1 Stone Rain

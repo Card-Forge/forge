@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Joseph_D._-_Death's_Shadow_(Modern,_#2533889).dck
+Deck Type=constructed
+
+[Main]
+4 Cecil, Dark Knight
+4 Death's Shadow
+2 Murktide Regent
+4 Psychic Frog
+4 Street Wraith
+4 Counterspell
+1 Dismember
+4 Fatal Push
+2 Force of Negation
+2 Sink into Stupor
+2 Spell Snare
+2 Stubborn Denial
+3 Preordain
+4 Thoughtseize
+4 Bloodstained Mire
+1 Flooded Strand
+1 Island
+1 Marsh Flats
+4 Polluted Delta
+1 Swamp
+2 Undercity Sewers
+1 Verdant Catacombs
+3 Watery Grave
+[Sideboard]
+2 Break the Ice
+4 Consign to Memory
+2 Harbinger of the Seas
+1 Into the Flood Maw
+2 Nihil Spellbomb
+2 Subtlety
+1 The Meathook Massacre
+1 Toxic Deluge

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Adam_Wallace_-_Rakdos_Sacrifice_(Standard,_#1183454).dck
+Deck Type=constructed
+
+[Main]
+3 Extus, Oriq Overlord
+4 Kroxa, Titan of Death's Hunger
+4 Bonecrusher Giant
+4 Mire Triton
+4 Shambling Ghast
+4 Woe Strider
+2 Hagra Mauling
+4 Village Rites
+1 Shatterskull Smashing
+2 Claim the Firstborn
+3 The Akroan War
+4 Tymaret Calls the Dead
+1 Den of the Bugbear
+2 Castle Locthwain
+2 Savai Triome
+3 Mountain
+4 Blightstep Pathway
+4 Fabled Passage
+5 Swamp
+[Sideboard]
+1 The Akroan War
+1 Redcap Melee
+2 Duress
+2 Heartless Act
+2 Claim the Firstborn
+2 Liliana, Waker of the Dead
+2 Power Word Kill
+3 Elspeth's Nightmare

@@ -17,7 +17,6 @@
  */
 package forge.game.combat;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -26,7 +25,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -206,8 +204,8 @@ public class CombatUtil {
         }
 
         // Basic checks (unless is for next turn)
-        if (!forNextTurn && (
-                   !attacker.isCreature()
+        if (!forNextTurn &&
+                (!attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
                 || isAttackerSick(attacker, defender)
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
@@ -272,7 +270,7 @@ public class CombatUtil {
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
-        return getAttackCost(game, attacker, defender, ImmutableList.of());
+        return getAttackCost(game, attacker, defender, List.of());
     }
     /**
      * Get the cost that has to be paid for a creature to attack a certain
@@ -739,11 +737,12 @@ public class CombatUtil {
         final CardCollection requirementCards = new CardCollection();
         final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
-            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
+            // the lure check reads the attacker's own keywords; getBlockCost walks every card in the game
+            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
                 continue;
             }
 
-            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
+            if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
 
@@ -832,7 +831,6 @@ public class CombatUtil {
                 if (blocker.isValid(valid, null, null, null) &&
                         CardLists.getValidCardCount(blockers, valid, null, null, null) == 0) {
                     return false;
-
                 }
             }
             // MustBeBlockedByAll:<valid>
@@ -980,22 +978,6 @@ public class CombatUtil {
             return false;
         }
 
-        // rare case:
-        if (blocker.hasKeyword(Keyword.SHADOW)
-                && blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
-            return false;
-        }
-
-        if (attacker.hasKeyword(Keyword.SHADOW) && !blocker.hasKeyword(Keyword.SHADOW)
-                && !blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
-            return false;
-        }
-
-        if (!attacker.hasKeyword(Keyword.SHADOW) && blocker.hasKeyword(Keyword.SHADOW)) {
-            return false;
-        }
-
-        // CantBlockBy static abilities
         if (StaticAbilityCantAttackBlock.cantBlockBy(attacker, blocker)) {
             return false;
         }

@@ -1,0 +1,40 @@
+[metadata]
+Name=Deck
+Deck Type=constructed
+Title=Deck
+Description=Deck
+Difficulty=Hard
+Icon=Dino
+[Main]
+2 Aether Hub
+4 Bomat Courier
+4 Chief of the Foundry
+3 Fatal Push
+2 Field of Ruin
+1 Inventors' Fair
+1 Island
+4 Merchant's Dockhand
+4 Metallic Mimic
+1 Mountain
+4 Pia's Revolution
+2 Scavenger Grounds
+4 Scrap Trawler
+4 Scrapheap Scrounger
+4 Spire of Industry
+2 Spirebluff Canal
+4 Sunscorched Desert
+1 Swamp
+1 Swamp
+1 Swamp
+3 Unlicensed Disintegration
+4 Walking Ballista
+[Sideboard]
+2 Abrade
+3 Aethersphere Harvester
+1 Dispossess
+1 Hope of Ghirapur
+1 Lost Legacy
+2 Negate
+2 Padeem, Consul of Innovation
+1 Shock
+2 Vraska's Contempt

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/ShutoShotokan_-_Humans_(Modern,_#1224374).dck
+Deck Type=constructed
+
+[Main]
+1 Augur of Autumn
+2 Esper Sentinel
+2 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+3 Imperial Recruiter
+3 Reflector Mage
+4 Champion of the Parish
+4 Kitesail Freebooter
+4 Meddling Mage
+4 Noble Hierarch
+4 Thalia's Lieutenant
+4 Aether Vial
+2 Grist, the Hunger Tide
+1 Silent Clearing
+1 Plains
+2 Pendelhaven
+4 Unclaimed Territory
+4 Horizon Canopy
+4 Ancient Ziggurat
+4 Cavern of Souls
+[Sideboard]
+1 Kataki, War's Wage
+1 Lavinia, Azorius Renegade
+1 Containment Priest
+1 Collector Ouphe
+1 Gaddock Teeg
+2 Dismember
+2 Magus of the Moon
+2 Outland Liberator
+4 Sanctifier en-Vec

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot69
+Title=Robot69
+Icon=Silver Samurai.jpg
+Difficulty=Medium
+Description=Sultai Energy 
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+3 Hostage Taker
+4 Longtusk Cub
+1 Rhonas the Indomitable
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+1 The Scarab God
+4 Walking Ballista
+4 Winding Constrictor
+4 Blossoming Defense
+4 Fatal Push
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+2 Fetid Pools
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+4 Deathgorge Scavenger
+3 Duress
+3 Negate
+1 Spell Pierce
+1 The Scarab God
+2 Vraska's Contempt

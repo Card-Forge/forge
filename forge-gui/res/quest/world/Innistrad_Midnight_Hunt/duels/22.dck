@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Daniele_Pellegrini_-_Temur_Midrange_(Standard,_#1226626).dck
+Deck Type=constructed
+
+[Main]
+2 Moonveil Regent
+4 Goldspan Dragon
+4 Briarbridge Tracker
+4 Magda, Brazen Outlaw
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Burning Hands
+4 Dragon's Fire
+3 Alrund's Epiphany
+4 Shatterskull Smashing
+1 Mountain
+2 Den of the Bugbear
+2 Lair of the Hydra
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+4 Riverglide Pathway
+5 Forest
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+2 Froghemoth
+2 Wrenn and Seven
+2 Test of Talents
+2 Heated Debate
+3 Burning Hands

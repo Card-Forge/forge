@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Secret Squirrel
+Title=Secret Squirrel
+Icon=Secret Squirrel.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/James_Wilks_-_Gruul_Mice_(Standard,_#2381338).dck
+Deck Type=constructed
+
+[Main]
+4 Manifold Mouse
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+1 Questing Druid
+3 Pawpatch Recruit
+4 Screaming Nemesis
+4 Burst Lightning
+4 Monstrous Rage
+2 Witchstalker Frenzy
+4 Innkeeper's Talent
+6 Mountain
+2 Rockface Village
+1 Forest
+4 Copperline Gorge
+4 Thornspire Verge
+1 Restless Ridgeline
+4 Karplusan Forest
+[Sideboard]
+1 Sunspine Lynx
+3 Pawpatch Formation
+2 Torch the Tower
+2 Sentinel of the Nameless City
+1 Snakeskin Veil
+1 Scorching Shot
+2 Questing Druid
+2 Lithomantic Barrage
+1 Defend the Rider

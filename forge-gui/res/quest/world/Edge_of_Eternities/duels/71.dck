@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/Gustavo_Pena_-_W-U-R-G_Midrange_(Modern,_#2628297).dck
+Deck Type=constructed
+
+[Main]
+4 Omnath, Locus of Creation
+4 Quantum Riddler
+4 Shardless Agent
+4 Solitude
+4 Subtlety
+3 Helga, Skittish Seer
+2 Twinshot Sniper
+1 Starfield Vocalist
+2 Shock
+4 Birthing Ritual
+4 Leyline Binding
+4 Flooded Strand
+4 Windswept Heath
+3 Plains
+2 Misty Rainforest
+1 Breeding Pool
+1 Elegant Parlor
+1 Forest
+1 Hallowed Fountain
+1 Island
+1 Lush Portico
+1 Meticulous Archive
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+1 Zagoth Triome
+[Sideboard]
+3 Endurance
+3 Force of Negation
+3 Obsidian Charmaw
+2 Pyroclasm
+2 Test of Talents
+1 Fade from History
+1 Force of Vigor

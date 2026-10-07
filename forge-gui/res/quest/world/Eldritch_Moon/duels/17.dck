@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/SCG_Invitational_Qualifier_-_Dover,_DE/Aiden_Sottile_-_Bant_Company_(Standard,_#639986).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Duskwatch Recruiter
+2 Eldrazi Displacer
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+2 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+2 Thalia, Heretic Cathar
+2 Tireless Tracker
+4 Collected Company
+2 Dromoka's Command
+2 Ojutai's Command
+1 Declaration in Stone
+2 Canopy Vista
+4 Evolving Wilds
+3 Forest
+2 Island
+2 Lumbering Falls
+4 Plains
+4 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+3 Immolating Glare
+3 Negate
+2 Summary Dismissal
+2 Tamiyo, Field Researcher
+2 Tragic Arrogance
+2 Void Grafter

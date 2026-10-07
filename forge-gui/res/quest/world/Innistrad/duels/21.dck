@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Easy
+Description=Innistrad/FNM_CoolStuffGames/Zachary_Textor_-_Mulch_(Standard,_#24601).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Armored Skaab
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Boneyard Wurm
+1 Elesh Norn, Grand Cenobite
+1 Fiend Hunter
+1 Merfolk Looter
+1 Phantasmal Image
+4 Splinterfright
+2 Sun Titan
+4 Dream Twist
+2 Feeling of Dread
+2 Gnaw to the Bone
+4 Mulch
+2 Unburial Rites
+9 Forest
+4 Hinterland Harbor
+4 Seachrome Coast
+3 Woodland Cemetery
+[Sideboard]
+3 Ancient Grudge
+2 Memory's Journey
+1 Oblivion Ring
+2 Silverchase Fox
+2 Skaab Ruinator
+1 Swiftfoot Boots
+1 Wreath of Geists

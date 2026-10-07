@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/LorenzoBellettini_-_Gruul_Delirium_(Standard,_#2528163).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Missing Out
+4 Keen-Eyed Curator
+4 Patchwork Beastie
+4 Wildfire Wickerfolk
+2 Magebane Lizard
+2 Screaming Nemesis
+2 Tersa Lightshatter
+1 Haywire Mite
+1 Inti, Seneschal of the Sun
+3 Seed of Hope
+3 Violent Urge
+2 Overprotect
+4 Break Out
+3 Bushwhack
+6 Forest
+4 Copperline Gorge
+4 Karplusan Forest
+4 Thornspire Verge
+2 Starting Town
+1 Mountain
+[Sideboard]
+3 Heritage Reclamation
+2 Lithomantic Barrage
+2 Magebane Lizard
+2 Sunspine Lynx
+2 Torch the Tower
+1 Chandra, Spark Hunter
+1 Haywire Mite
+1 Obliterating Bolt
+1 The Filigree Sylex

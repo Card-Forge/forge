@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Takano_Shigeki_-_BG_Aggro_(Standard,_#668917).dck
+Deck Type=constructed
+
+[Main]
+4 Gifted Aetherborn
+3 Rishkar, Peema Renegade
+4 Scrapheap Scrounger
+4 Tireless Tracker
+3 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+4 Fatal Push
+3 Grasp of Darkness
+2 Ruinous Path
+4 Blooming Marsh
+4 Evolving Wilds
+4 Forest
+4 Hissing Quagmire
+9 Swamp
+[Sideboard]
+1 Appetite for the Unnatural
+2 Collective Brutality
+1 Grasp of Darkness
+1 Natural Obsolescence
+1 Nissa, Vital Force
+2 Ob Nixilis Reignited
+1 Ruinous Path
+2 To the Slaughter
+4 Transgress the Mind

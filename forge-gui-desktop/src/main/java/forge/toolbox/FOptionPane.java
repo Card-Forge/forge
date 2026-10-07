@@ -32,22 +32,19 @@ public class FOptionPane extends FDialog {
     public static final SkinImage WARNING_ICON = FSkin.getIcon(FSkinProp.ICO_WARNING);
     public static final SkinImage ERROR_ICON = FSkin.getIcon(FSkinProp.ICO_ERROR);
 
-    public static void showMessageDialog(final String message) {
-        showMessageDialog(message, "Forge", INFORMATION_ICON);
-    }
-
-    public static void showMessageDialog(final String message, final String title) {
-        showMessageDialog(message, title, INFORMATION_ICON);
-    }
-
     public static void showErrorDialog(final String message) {
-        showMessageDialog(message, "Forge", ERROR_ICON);
+        showErrorDialog(message, "Forge");
     }
-
     public static void showErrorDialog(final String message, final String title) {
         showMessageDialog(message, title, ERROR_ICON);
     }
 
+    public static void showMessageDialog(final String message) {
+        showMessageDialog(message, "Forge");
+    }
+    public static void showMessageDialog(final String message, final String title) {
+        showMessageDialog(message, title, INFORMATION_ICON);
+    }
     public static void showMessageDialog(final String message, final String title, final SkinImage icon) {
         showOptionDialog(message, title, icon, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0);
     }
@@ -55,19 +52,15 @@ public class FOptionPane extends FDialog {
     public static boolean showConfirmDialog(final String message) {
         return showConfirmDialog(message, "Forge");
     }
-
     public static boolean showConfirmDialog(final String message, final String title) {
         return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true);
     }
-
     public static boolean showConfirmDialog(final String message, final String title, final boolean defaultYes) {
         return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), defaultYes);
     }
-
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText) {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
-
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
         final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
         final int reply = FOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
@@ -77,11 +70,9 @@ public class FOptionPane extends FDialog {
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options) {
         return showOptionDialog(message, title, icon, options, 0);
     }
-
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, Component comp, final List<String> options) {
         return showOptionDialog(message, title, icon, comp, options, 0);
     }
-    
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options, final int defaultOption) {
         // not fully done loading yet, avoid crash when called by colorCheck for random decks (as each item gets selected after another)
         if (FView.SINGLETON_INSTANCE.getSplash() != null) {
@@ -89,7 +80,6 @@ public class FOptionPane extends FDialog {
         }
         return showOptionDialog(message, title, icon, null, options, defaultOption);
     }
-
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
         final Callable<Integer> showChoice = () -> {
             final FOptionPane optionPane = new FOptionPane(message, title, icon, comp, options, defaultOption);
@@ -111,15 +101,12 @@ public class FOptionPane extends FDialog {
     public static String showInputDialog(final String message, final String title) {
         return showInputDialog(message, title, null, "", null);
     }
-
     public static String showInputDialog(final String message, final String title, final SkinImage icon) {
         return showInputDialog(message, title, icon, "", null);
     }
-
     public static String showInputDialog(final String message, final String title, final SkinImage icon, final String initialInput) {
         return showInputDialog(message, title, icon, initialInput, null);
     }
-
     @SuppressWarnings("unchecked")
     public static <T> T showInputDialog(final String message, final String title, final SkinImage icon, final String initialInput, final List<T> inputOptions) {
         final Callable<T> showChoice = () -> {
@@ -169,6 +156,7 @@ public class FOptionPane extends FDialog {
 
     private int result = -1; //default result to -1, indicating dialog closed without choosing option
     private final FButton[] buttons;
+    private FTextPane prompt;
 
     public FOptionPane(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
         FThreads.assertExecutedByEdt(true);
@@ -179,7 +167,6 @@ public class FOptionPane extends FDialog {
         final int gapAboveButtons = padding * 3 / 2;
         final int gapBottom = comp == null ? gapAboveButtons : padding;
         FLabel centeredLabel = null;
-        FTextPane prompt = null;
 
         if (icon != null) {
             if (icon.getWidth() < 100) {
@@ -198,7 +185,7 @@ public class FOptionPane extends FDialog {
             prompt = new FTextPane();
             prompt.setContentType("text/html");
             prompt.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
-            prompt.setText(FSkin.encodeSymbols(message, false));
+            prompt.setText(renderMessageHtml(message));
             prompt.setFont(FSkin.getFont(14));
             if(centeredLabel != null)
                 prompt.setTextAlignment(StyleConstants.ALIGN_CENTER);
@@ -311,6 +298,19 @@ public class FOptionPane extends FDialog {
         this.result = result0;
         //delay hiding so action can finish first
         SwingUtilities.invokeLater(() -> setVisible(false));
+    }
+
+    /** Update the dialog body after it has been shown. Safe to call from any thread. */
+    public void setMessage(final String message) {
+        SwingUtilities.invokeLater(() -> {
+            if (prompt != null) {
+                prompt.setText(renderMessageHtml(message));
+            }
+        });
+    }
+
+    private static String renderMessageHtml(final String message) {
+        return FSkin.encodeSymbols(message, false).replace("\n", "<br>");
     }
 
     public boolean isButtonEnabled(final int index) {

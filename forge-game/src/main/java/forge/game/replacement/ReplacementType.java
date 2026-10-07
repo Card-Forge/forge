@@ -18,6 +18,7 @@ public enum ReplacementType {
     BeginPhase(ReplaceBeginPhase.class),
     BeginTurn(ReplaceBeginTurn.class),
     Cascade(ReplaceCascade.class),
+    Connive(ReplaceConnive.class),
     Counter(ReplaceCounter.class),
     CopySpell(ReplaceCopySpell.class),
     CreateToken(ReplaceToken.class),

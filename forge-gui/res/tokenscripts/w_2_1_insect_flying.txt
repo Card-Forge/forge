@@ -1,7 +1,7 @@
 Name:Insect Token
 ManaCost:no cost
-PT:2/1
 Colors:white
 Types:Creature Insect
+PT:2/1
 K:Flying
 Oracle:Flying

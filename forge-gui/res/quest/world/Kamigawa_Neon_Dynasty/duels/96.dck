@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dead Girl
+Title=Dead Girl
+Icon=Dead Girl.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Jositoshekel_-_GW_Auras_(Modern,_#1425032).dck
+Deck Type=constructed
+
+[Main]
+2 Silhana Ledgewalker
+4 Gladecover Scout
+4 Slippery Bogle
+3 Mana Tithe
+4 Commune with Spirits
+2 Spirit Mantle
+2 Spider Umbra
+4 Hyena Umbra
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Gryff's Boon
+4 Rancor
+1 Wooded Foothills
+1 Plains
+1 Forest
+1 Dryad Arbor
+3 Temple Garden
+4 Razorverge Thicket
+4 Windswept Heath
+4 Horizon Canopy
+[Sideboard]
+2 Path to Exile
+3 Veil of Summer
+3 Silence
+3 Boseiju, Who Endures
+4 Leyline of Sanctity

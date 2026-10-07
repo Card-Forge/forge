@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/Wrinkle22_-_Deck_(Modern,_#662546).dck
+Deck Type=constructed
+
+[Main]
+4 Burning-Tree Emissary
+1 Dryad Arbor
+4 Experiment One
+2 Ghor-Clan Rampager
+4 Goblin Guide
+3 Greenwheel Liberator
+4 Hidden Herbalists
+4 Kird Ape
+4 Reckless Bushwhacker
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+4 Arid Mesa
+1 Forest
+1 Mountain
+1 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]

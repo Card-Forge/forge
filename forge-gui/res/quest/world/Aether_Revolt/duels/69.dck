@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/Nick_Stern_-_Abzan_(Modern,_#668210).dck
+Deck Type=constructed
+
+[Main]
+2 Anafenza, the Foremost
+4 Birds of Paradise
+3 Courser of Kruphix
+3 Loxodon Smiter
+2 Scavenging Ooze
+4 Siege Rhino
+2 Tasigur, the Golden Fang
+3 Abrupt Decay
+3 Path to Exile
+2 Inquisition of Kozilek
+4 Lingering Souls
+2 Maelstrom Pulse
+3 Thoughtseize
+3 Bloodstained Mire
+2 Forest
+1 Gavony Township
+2 Godless Shrine
+2 Overgrown Tomb
+1 Plains
+2 Stirring Wildwood
+2 Swamp
+3 Temple Garden
+4 Windswept Heath
+1 Woodland Cemetery
+[Sideboard]
+1 Celestial Purge
+2 Choke
+2 Duress
+2 Fatal Push
+2 Obstinate Baloth
+1 Pithing Needle
+1 Ratchet Bomb
+2 Rest in Peace
+2 Stony Silence

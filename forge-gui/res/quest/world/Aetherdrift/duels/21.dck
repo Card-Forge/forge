@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/GonTV_-_Gruul_Delirium_(Standard,_#2374409).dck
+Deck Type=constructed
+
+[Main]
+4 Draconautics Engineer
+4 Afterburner Expert
+4 Fear of Missing Out
+4 Keen-Eyed Curator
+4 Patchwork Beastie
+4 Wildfire Wickerfolk
+2 Monstrous Rage
+4 Seed of Hope
+2 Torch the Tower
+2 Beastie Beatdown
+2 Obliterating Bolt
+2 Wrenn and Realmbreaker
+4 Copperline Gorge
+4 Karplusan Forest
+3 Restless Ridgeline
+4 Thornspire Verge
+6 Forest
+1 Mountain
+[Sideboard]
+2 Pawpatch Formation
+1 Haywire Mite
+2 Sunspine Lynx
+3 Pyroclasm
+2 Witchstalker Frenzy
+2 Tranquil Frillback
+2 Lithomantic Barrage
+1 Soul-Guide Lantern

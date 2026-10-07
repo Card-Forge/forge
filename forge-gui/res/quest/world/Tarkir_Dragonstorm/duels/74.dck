@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/Jenser94_-_Dredge_TDM_2025_(Modern,_#2447376).dck
+Deck Type=constructed
+
+[Main]
+4 Stinkweed Imp
+4 Golgari Thug
+2 Lasyd Prowler
+1 Wonder
+4 Narcomoeba
+3 Bloodghast
+4 Prized Amalgam
+3 Psychic Frog
+4 Otherworldly Gaze
+2 Darkblast
+4 Creeping Chill
+4 Tome Scour
+2 Life from the Loam
+2 Watery Grave
+2 Polluted Delta
+2 Scalding Tarn
+1 Hedge Maze
+4 Cephalid Coliseum
+2 Misty Rainforest
+3 Flooded Strand
+2 Breeding Pool
+1 Undercity Sewers
+[Sideboard]
+2 Pick Your Poison
+4 Thoughtseize
+2 Into the Flood Maw
+3 Damping Sphere
+3 Glistening Deluge
+1 Nature's Claim

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Secret Squirrel
+Title=Secret Squirrel
+Icon=Secret Squirrel.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Goto_Shintarou_-_Yawgmoth's_Hospital_(Modern,_#1642888).dck
+Deck Type=constructed
+
+[Main]
+1 Hapatra, Vizier of Poisons
+1 Blood Artist
+3 Birds of Paradise
+4 Strangleroot Geist
+4 Young Wolf
+4 Wall of Roots
+4 Yawgmoth, Thran Physician
+2 Endurance
+4 Ignoble Hierarch
+1 Prosperous Innkeeper
+4 Chord of Calling
+3 Eldritch Evolution
+4 Grist, the Hunger Tide
+1 Swamp
+3 Forest
+3 Blooming Marsh
+1 Twilight Mire
+1 Dryad Arbor
+2 Windswept Heath
+4 Verdant Catacombs
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Boseiju, Who Endures
+[Sideboard]
+1 Fatal Push
+1 Engineered Explosives
+1 Magus of the Moon
+3 Thoughtseize
+3 Leyline of Vitality
+1 Scavenging Ooze
+2 Force of Vigor
+1 Endurance
+1 Haywire Mite
+1 Tranquil Frillback

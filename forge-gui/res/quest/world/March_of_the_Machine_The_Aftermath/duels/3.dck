@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Delmo_-_Mono-Green_Nissa_(Standard,_#1659028).dck
+Deck Type=constructed
+
+[Main]
+4 Armored Scrapgorger
+4 Topiary Stomper
+4 Nissa, Resurgent Animist
+1 Defiler of Vigor
+2 Vorinclex
+2 Titan of Industry
+3 Cosmic Hunger
+4 Awaken the Woods
+4 Invasion of Ixalan
+3 Invasion of Zendikar
+4 Nissa, Ascended Animist
+24 Forest
+1 Boseiju, Who Endures
+[Sideboard]
+3 Kappa Tech-Wrecker
+2 Tranquil Frillback
+2 Sandstalker Moloch
+2 Polukranos Reborn
+2 Thrun, Breaker of Silence
+2 Tamiyo's Safekeeping
+2 Unlicensed Hearse

@@ -4,7 +4,7 @@ Types:Legendary Enchantment Saga
 K:Chapter:4:DBRepeat,DBRepeat,DBRepeat,DBChangeZone
 SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBCleanAndGrind | MaxRepeat$ MaxRepeats | RepeatCheckSVar$ MilledSharesType | RepeatSVarCompare$ GE2 | SubAbility$ DBCleanup | SpellDescription$ Mill two cards. If two cards that share a card type were milled this way, draw a card and repeat this process.
 SVar:DBCleanAndGrind:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBGrind
-SVar:DBGrind:DB$ Mill | NumCards$ 2 | NoReveal$ True | RememberMilled$ True | SubAbility$ DBDraw
+SVar:DBGrind:DB$ Mill | NumCards$ 2 | RememberMilled$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ MilledSharesType | ConditionSVarCompare$ GE2
 SVar:MaxRepeats:Count$ValidLibrary Card.YouOwn
 SVar:MilledSharesType:Remembered$Valid Card.sharesCardTypeWithOther Remembered

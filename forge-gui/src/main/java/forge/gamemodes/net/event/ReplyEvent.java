@@ -1,7 +1,5 @@
 package forge.gamemodes.net.event;
 
-import forge.gamemodes.net.server.RemoteClient;
-
 import java.io.Serializable;
 
 public final class ReplyEvent implements NetEvent {
@@ -19,9 +17,6 @@ public final class ReplyEvent implements NetEvent {
     }
     public Object getReply() {
         return reply;
-    }
-
-    @Override public void updateForClient(final RemoteClient client) {
     }
 
     @Override

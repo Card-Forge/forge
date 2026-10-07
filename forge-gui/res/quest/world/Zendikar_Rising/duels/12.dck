@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Byers_-_Rakdos_Midrange_(Standard,_#1052276).dck
+Deck Type=constructed
+
+[Main]
+2 Ox of Agonas
+2 Rankle, Master of Pranks
+2 Murderous Rider
+4 Mire Triton
+4 Kroxa, Titan of Death's Hunger
+4 Bonecrusher Giant
+2 Spikefield Hazard
+3 Hagra Mauling
+3 Heartless Act
+2 Shatterskull Smashing
+2 Agadeem's Awakening
+2 Agonizing Remorse
+3 Bloodchief's Thirst
+4 Tymaret Calls the Dead
+1 Liliana, Waker of the Dead
+1 Temple of Malice
+1 Castle Locthwain
+3 Bloodfell Caves
+4 Fabled Passage
+5 Mountain
+6 Swamp
+[Sideboard]
+1 Nighthawk Scavenger
+2 Shredded Sails
+2 Duress
+2 Cling to Dust
+2 Skyclave Shade
+2 Terror of the Peaks
+4 Feed the Swarm

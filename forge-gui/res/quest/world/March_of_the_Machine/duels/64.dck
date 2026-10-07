@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz
+Title=Vanellope von Schweetz
+Icon=Vanellope von Schweetz.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Max_Hersch_-_Mono-white_Hammer_(Modern,_#1634405)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Ornithopter
+4 Esper Sentinel
+2 Giver of Runes
+1 Gingerbrute
+4 Puresteel Paladin
+4 Stoneforge Mystic
+2 Solitude
+4 Colossus Hammer
+1 Shadowspear
+1 Nettlecyst
+1 Kaldra Compleat
+2 Springleaf Drum
+1 Paradise Mantle
+3 Surge of Salvation
+4 Emeria's Call
+4 Sigarda's Aid
+4 Urza's Saga
+9 Plains
+3 Inkmoth Nexus
+1 Horizon Canopy
+1 Silent Clearing
+[Sideboard]
+2 Solitude
+1 Surge of Salvation
+2 Blacksmith's Skill
+1 Pithing Needle
+3 Drannith Magistrate
+2 March of Otherworldly Light
+2 Sanctifier en-Vec
+2 Hallowed Moonlight

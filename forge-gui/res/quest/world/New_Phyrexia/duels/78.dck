@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Saddle_Brook,_New_Jersey/Ronald_Konak_in_PTQ_Barcelona_-_Faeries_(Modern,_#27364).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+2 Mana Leak
+4 Remand
+1 Spell Pierce
+4 Spell Snare
+18 Island
+4 Mutavault
+3 Tectonic Edge
+[Sideboard]
+1 Academy Ruins
+1 Dismember
+1 Dispel
+1 Jace Beleren
+3 Ratchet Bomb
+1 Sower of Temptation
+2 Steel Sabotage
+3 Threads of Disloyalty
+1 Wurmcoil Engine

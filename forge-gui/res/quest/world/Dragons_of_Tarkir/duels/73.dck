@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ukulunkulu
+Title=Ukulunkulu
+Icon=Ukulunkulu.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Daily_#8619203/duhaimination_-_Naya_Burn_(Modern,_#317693).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+1 Mutagenic Growth
+3 Searing Blaze
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+3 Kor Firewalker
+3 Molten Rain
+2 Path to Exile

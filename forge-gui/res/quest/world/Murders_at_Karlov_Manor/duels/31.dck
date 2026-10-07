@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Cim_Knutsen_-_Mono_Red_(Standard,_#1964460).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Kumano Faces Kakkazan
+4 Cacophony Scamp
+3 Charming Scoundrel
+1 Feldon, Ronom Excavator
+4 Fugitive Codebreaker
+4 Pyrotechnic Performer
+4 Lightning Strike
+4 Play with Fire
+4 Monstrous Rage
+4 Witchstalker Frenzy
+17 Mountain
+2 Mishra's Foundry
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+3 End the Festivities
+3 Urabrask's Forge
+3 Lithomantic Barrage
+2 Twisted Fealty
+2 Furnace Punisher
+2 Obliterating Bolt

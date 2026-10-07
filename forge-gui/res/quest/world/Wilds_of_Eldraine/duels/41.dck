@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Montgomery Burns
+Title=Montgomery Burns
+Icon=Montgomery Burns.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/INickStrad_-_Esper_Control_(Standard,_#1746789).dck
+Deck Type=constructed
+
+[Main]
+1 The Celestus
+1 Negate
+2 Go for the Throat
+2 Dissipate
+3 Siphon Insight
+3 Make Disappear
+2 Void Rend
+2 Cut Down
+4 Memory Deluge
+3 Sheoldred's Edict
+1 The End
+1 Farewell
+1 Silver Scrutiny
+2 Sunfall
+1 Virtue of Persistence
+4 The Wandering Emperor
+1 Island
+1 Swamp
+4 Darkslick Shores
+4 Deserted Beach
+1 Shipwreck Marsh
+2 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Raffine's Tower
+2 Adarkar Wastes
+2 Underground River
+2 Mirrex
+1 Restless Fortress
+[Sideboard]
+2 Disdainful Stroke
+3 Wedding Announcement
+1 Path of Peril
+2 Cut Down
+2 Sheoldred, the Apocalypse
+1 Sheoldred
+1 Sunfall
+2 Chrome Host Seedshark
+1 The End

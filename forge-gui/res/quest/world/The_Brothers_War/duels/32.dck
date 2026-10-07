@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/AshenFenix_-_Mono-White_Soldiers_(Standard,_#1513633).dck
+Deck Type=constructed
+
+[Main]
+1 Savior of Ollenbock
+2 Guardian of New Benalia
+3 Yotian Frontliner
+3 Ambush Paratrooper
+3 Valiant Veteran
+3 Siege Veteran
+3 Myrel, Shield of Argive
+3 Scrapwork Cohort
+4 Recruitment Officer
+4 Rescue Retriever
+2 Banishing Slash
+3 Captain's Call
+2 In the Trenches
+24 Plains
+[Sideboard]

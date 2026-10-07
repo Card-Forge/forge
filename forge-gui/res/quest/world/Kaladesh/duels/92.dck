@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/blockhouse_-_Red_Deck_Wins_(Modern,_#660989).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+1 Blood Crypt
+4 Bloodstained Mire
+2 Inspiring Vantage
+3 Mountain
+1 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+2 Kor Firewalker
+2 Path to Exile
+2 Rakdos Charm
+2 Searing Blood
+2 Sudden Shock

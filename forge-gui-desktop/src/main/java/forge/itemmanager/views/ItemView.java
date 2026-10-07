@@ -85,13 +85,27 @@ public abstract class ItemView<T extends InventoryItem> {
         this.pnlOptions.setOpaque(false);
         this.pnlOptions.setBorder(new FSkin.MatteSkinBorder(1, 0, 0, 0, BORDER_COLOR));
         this.scroller.setBorder(new FSkin.LineSkinBorder(BORDER_COLOR));
-        this.button = new FLabel.Builder()
+        final String buttonText = getButtonText();
+        final FLabel.Builder buttonBuilder = new FLabel.Builder()
             .hoverable()
             .selectable(true)
-            .icon(getIcon())
-            .iconScaleAuto(false)
             .tooltip(getCaption())
-            .build();
+            .text(buttonText);
+        final SkinImage icon = getIcon();
+        if (icon == null) {
+            buttonBuilder.fontAlign(SwingConstants.CENTER);
+            configureTextButton(buttonBuilder);
+        }
+        else {
+            buttonBuilder.icon(icon).iconScaleAuto(false);
+        }
+        this.button = buttonBuilder.build();
+        if (buttonText != null) {
+            this.button.setHorizontalAlignment(SwingConstants.CENTER);
+            this.button.setVerticalAlignment(SwingConstants.CENTER);
+            this.button.setHorizontalTextPosition(SwingConstants.CENTER);
+            this.button.setVerticalTextPosition(SwingConstants.CENTER);
+        }
 
         this.uniqueCardsOnlyChkBox = new FCheckBox(localizer.getMessage("lblUniqueCardsOnly"),
                                                    this.itemManager.getWantUnique());
@@ -341,6 +355,11 @@ public abstract class ItemView<T extends InventoryItem> {
     public abstract int getSelectionCount();
     public abstract int getIndexAtPoint(Point p);
     protected abstract SkinImage getIcon();
+    protected String getButtonText() {
+        return null;
+    }
+    protected void configureTextButton(final FLabel.Builder buttonBuilder) {
+    }
     protected abstract String getCaption();
     protected abstract void onSetSelectedIndex(int index);
     protected abstract void onSetSelectedIndices(Iterable<Integer> indices);

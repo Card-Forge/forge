@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boros-precon
+Title=Boros-precon
+Icon=Boros-precon.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/WMCQ_#2_-_Berlin,_Germany/Frieder-Michel_Drenger_-_GW_Auras_(Modern,_#631832).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+3 Gryff's Boon
+3 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+2 Unflinching Courage
+1 Forest
+3 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+3 Verdant Catacombs
+4 Wooded Foothills
+[Sideboard]
+2 Gaddock Teeg
+4 Leyline of Sanctity
+2 Nature's Claim
+3 Rest in Peace
+2 Stony Silence
+2 Suppression Field

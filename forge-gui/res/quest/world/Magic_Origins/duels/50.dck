@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Easy
+Description=Magic_Origins/Standard_Daily_#8522407/amat_0_-_Abzan_Control_(Standard,_#305017).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Den Protector
+2 Nissa, Vastwood Seer
+4 Siege Rhino
+4 Abzan Charm
+1 Bile Blight
+4 Hero's Downfall
+1 Ultimate Price
+3 Languish
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+1 Sorin, Solemn Visitor
+2 Caves of Koilos
+3 Forest
+3 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Anafenza, the Foremost
+2 Dromoka's Command
+2 Duress
+2 Revoke Existence
+2 Tragic Arrogance
+1 Ugin, the Spirit Dragon

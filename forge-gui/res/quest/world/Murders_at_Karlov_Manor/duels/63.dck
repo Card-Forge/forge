@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dr Strangelove
+Title=Dr Strangelove
+Icon=Dr Strangelove.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Andrew_Jameson_-_Esper_Reanimator_(Modern,_#1967358).dck
+Deck Type=constructed
+
+[Main]
+4 Fallaji Archaeologist
+4 Grief
+4 Solitude
+4 Atraxa, Grand Unifier
+2 Griselbrand
+4 Ephemerate
+3 Faithful Mending
+4 Tainted Indulgence
+4 Goryo's Vengeance
+4 Force of Negation
+1 Push // Pull
+2 Teferi, Time Raveler
+1 Island
+1 Swamp
+1 Plains
+1 Undercity Sewers
+1 Shadowy Backstreet
+1 Meticulous Archive
+1 Hedge Maze
+1 Otawara, Soaring City
+1 Watery Grave
+1 Godless Shrine
+1 Hallowed Fountain
+2 Marsh Flats
+3 Polluted Delta
+4 Flooded Strand
+[Sideboard]
+1 Cursed Totem
+1 Pithing Needle
+2 Subtlety
+2 Path of Peril
+2 Prismatic Ending
+2 Celestial Purge
+2 Flusterstorm
+2 Teferi, Time Raveler
+1 Emrakul, the Aeons Torn

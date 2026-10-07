@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Ikeda_Takuma_-_Tribal_Zoo_(Modern,_#1554281).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodbraid Elf
+4 Shardless Agent
+2 Seasoned Pyromancer
+4 Territorial Kavu
+4 Scion of Draco
+4 Lightning Bolt
+4 Lightning Helix
+4 Tribal Flames
+4 Leyline Binding
+2 Teferi, Time Raveler
+2 Kaito, Dancing Shadow
+1 Plains
+1 Forest
+1 Sacred Foundry
+1 Stomping Ground
+1 Steam Vents
+4 Windswept Heath
+4 Wooded Foothills
+3 Arid Mesa
+3 Scalding Tarn
+1 Temple Garden
+1 Indatha Triome
+1 Xander's Lounge
+[Sideboard]
+2 Damping Sphere
+3 Meddling Mage
+1 Ratchet Bomb
+2 Alpine Moon
+2 Knight of Autumn
+1 Orvar, the All-Form
+2 Hidetsugu Consumes All
+2 Unlicensed Hearse

@@ -36,7 +36,7 @@ ScryfallCode=DMC
 28 M The Mana Rig @Zoltan Boros
 29 R Ayesha Tanaka, Armorer @Aurore Folny
 30 R The Ever-Changing 'Dane @Campbell White
-31 U General Marhault Elsdragon @Heonhwa Choe
+31 U General Marhault Elsdragon @Heonhwa
 32 R Hazezon, Shaper of Sand @Bryan Sola
 33 U Jasmine Boreal of the Seven @Bastien L. Deharme
 34 M Jedit Ojanen, Mercenary @Ilse Gort
@@ -58,7 +58,7 @@ ScryfallCode=DMC
 50 M Jared Carthalion @Manuel Castañón
 51 R Ayesha Tanaka, Armorer @Aurore Folny
 52 R The Ever-Changing 'Dane @Campbell White
-53 U General Marhault Elsdragon @Heonhwa Choe
+53 U General Marhault Elsdragon @Heonhwa
 54 R Hazezon, Shaper of Sand @Bryan Sola
 55 U Jasmine Boreal of the Seven @Bastien L. Deharme
 56 M Jedit Ojanen, Mercenary @Ilse Gort

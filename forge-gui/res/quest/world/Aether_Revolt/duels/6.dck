@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Christopher_Theriot_-_G-B_Aggro_(Standard,_#668330).dck
+Deck Type=constructed
+
+[Main]
+2 Drana, Liberator of Malakir
+4 Glint-Sleeve Siphoner
+2 Kalitas, Traitor of Ghet
+4 Rishkar, Peema Renegade
+3 Tireless Tracker
+4 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+3 Fatal Push
+3 Grasp of Darkness
+3 Nissa, Voice of Zendikar
+4 Aether Hub
+4 Blooming Marsh
+5 Forest
+4 Hissing Quagmire
+7 Swamp
+[Sideboard]
+2 Aethersphere Harvester
+1 Blossoming Defense
+1 Fatal Push
+1 Grasp of Darkness
+4 Heroic Intervention
+2 Murder
+2 Natural State
+2 To the Slaughter

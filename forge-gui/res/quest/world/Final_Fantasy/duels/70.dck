@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/endur0_-_Mono-White_Lifegain_(Modern,_#2529560).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani's Pridemate
+4 Leonin Vanguard
+4 Hinterland Sanctifier
+4 Ruin-Lurker Bat
+4 Essence Channeler
+3 Linden, the Steadfast Queen
+2 Skrelv, Defector Mite
+2 Rosa, Resolute White Mage
+2 Aerith Gainsborough
+3 Get Lost
+4 Exorcise
+4 Sheltered by Ghosts
+2 Mirrex
+18 Plains
+[Sideboard]
+4 Aven Interrupter

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=RasAlGhul
+Title=RasAlGhul
+Icon=RasAlGhul.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/SATO_KENTARO_-_WUR_Control_(Modern,_#1175771)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+1 Vapor Snag
+2 Wild Slash
+3 Mutagenic Growth
+4 Opt
+4 Manamorphose
+4 Lightning Bolt
+4 Lava Dart
+4 Expressive Iteration
+1 Island
+2 Fiery Islet
+3 Steam Vents
+4 Spirebluff Canal
+4 Scalding Tarn
+4 Mountain
+[Sideboard]
+1 Pithing Needle
+2 Dragon's Claw
+2 Echoing Truth
+2 Surgical Extraction
+2 Abrade
+3 Blood Moon
+3 Spell Pierce

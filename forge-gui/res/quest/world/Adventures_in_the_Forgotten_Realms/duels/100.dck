@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Sergio_Gimenez_-_WB_Hammer_(Modern,_#1227742)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Ingenious Smith
+4 Puresteel Paladin
+4 Esper Sentinel
+4 Giver of Runes
+4 Memnite
+4 Ornithopter
+4 Stoneforge Mystic
+1 Shadowspear
+1 Paradise Mantle
+1 Cranial Plating
+3 Springleaf Drum
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid
+3 Inkmoth Nexus
+4 Concealed Courtyard
+4 Silent Clearing
+5 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Prismatic Ending
+2 Path to Exile
+2 Fracture
+2 Sanctifier en-Vec
+3 Hushbringer
+3 Thoughtseize

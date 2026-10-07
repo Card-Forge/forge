@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Darkseid
+Title=Darkseid
+Icon=Darkseid.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/CrusherBotBG_-_Hammer_Time_(Modern,_#1628152)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Stoneforge Mystic
+4 Memnite
+4 Puresteel Paladin
+4 Ornithopter
+4 Esper Sentinel
+1 Sword of Fire and Ice
+1 Cranial Plating
+2 Paradise Mantle
+1 Springleaf Drum
+4 Colossus Hammer
+1 Shadowspear
+1 Nettlecyst
+3 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+3 Inkmoth Nexus
+4 Silent Clearing
+10 Snow-Covered Plains
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+3 Mana Tithe
+1 Pithing Needle
+1 Relic of Progenitus
+3 Hallowed Moonlight
+2 On Thin Ice
+2 March of Otherworldly Light
+3 Surge of Salvation

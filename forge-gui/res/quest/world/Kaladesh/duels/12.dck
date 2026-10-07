@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Standard_Open_-_Sample_Decks_-_Indianapolis,_IN/Brian_Braun-duin_-_G-W_Aggro_(Standard,_#640942).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Fairgrounds Warden
+4 Servant of the Conduit
+4 Sylvan Advocate
+4 Thraben Inspector
+2 Tireless Tracker
+4 Verdurous Gearhulk
+4 Smuggler's Copter
+3 Blossoming Defense
+2 Always Watching
+4 Gideon, Ally of Zendikar
+2 Aether Hub
+4 Canopy Vista
+6 Forest
+4 Fortified Village
+8 Plains
+1 Westvale Abbey
+[Sideboard]
+3 Declaration in Stone
+2 Fumigate
+2 Linvala, the Preserver
+3 Natural State
+2 Nissa, Vital Force
+2 Quarantine Field
+1 Tireless Tracker

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Daniel_Lebben_-_Death_And_Taxes_(Modern,_#2452448).dck
+Deck Type=constructed
+
+[Main]
+1 Aven Interrupter
+1 Boggart Trawler
+2 Emperor of Bones
+2 Flickerwisp
+2 Orcish Bowmasters
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+3 Recruiter of the Guard
+4 Solitude
+2 White Orchid Phantom
+4 Witch Enchanter
+4 Aether Vial
+4 Ephemerate
+4 Fatal Push
+2 March of Otherworldly Light
+2 Bleachbone Verge
+4 Flooded Strand
+1 Godless Shrine
+4 Marsh Flats
+3 Plains
+2 Shadowy Backstreet
+1 Swamp
+[Sideboard]
+1 Aven Interrupter
+1 Clarion Conqueror
+2 Sheoldred's Edict
+1 Surgical Extraction
+3 Thoughtseize
+3 Vindicate
+2 White Orchid Phantom
+2 Wrath of the Skies

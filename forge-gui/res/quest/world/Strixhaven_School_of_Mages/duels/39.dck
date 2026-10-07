@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Austin_Bursavich_-_UR_Control_(Standard,_#1157245).dck
+Deck Type=constructed
+
+[Main]
+3 Galazeth Prismari
+4 Goldspan Dragon
+4 Brazen Borrower
+4 Bonecrusher Giant
+2 Mazemind Tome
+1 Magma Opus
+3 Mystical Dispute
+3 Saw It Coming
+4 Frost Bite
+3 Alrund's Epiphany
+4 Expressive Iteration
+3 Faceless Haven
+4 Fabled Passage
+4 Riverglide Pathway
+4 Volatile Fjord
+4 Snow-Covered Mountain
+6 Snow-Covered Island
+[Sideboard]
+1 Negate
+1 Cinderclasm
+1 Soul Sear
+1 Shark Typhoon
+2 The Akroan War
+2 Disdainful Stroke
+2 Fire Prophecy
+2 Redcap Melee
+3 Ox of Agonas

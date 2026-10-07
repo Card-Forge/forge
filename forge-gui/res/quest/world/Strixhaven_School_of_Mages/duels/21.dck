@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/David_Sanchez_Sanchez_-_Naya_Adventures_(Jegantha)_(Standard,_#1169648).dck
+Deck Type=constructed
+
+[Main]
+2 Drannith Magistrate
+2 Clarion Spirit
+3 Tangled Florahedron
+4 Edgewall Innkeeper
+4 Elite Spellbinder
+4 Giant Killer
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Bonecrusher Giant
+2 The Akroan War
+4 Showdown of the Skalds
+1 Mountain
+3 Forest
+3 Plains
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Fabled Passage
+[Sideboard]
+1 Run Afoul
+1 Redcap Melee
+1 Jegantha, the Wellspring
+2 Soul-Guide Lantern
+2 Fire Prophecy
+2 Klothys, God of Destiny
+3 Glass Casket
+3 Ox of Agonas

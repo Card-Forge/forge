@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/420PrayIt_-_Eldrazi_Stoneforge_(Modern,_#1047520).dck
+Deck Type=constructed
+
+[Main]
+1 Birds of Paradise
+1 Gilded Goose
+3 Reality Smasher
+4 Matter Reshaper
+4 Noble Hierarch
+4 Stoneforge Mystic
+4 Thought-Knot Seer
+1 Sword of Fire and Ice
+1 Sword of Feast and Famine
+1 Batterskull
+4 Path to Exile
+2 Winds of Abandon
+4 Ancient Stirrings
+3 Karn, the Great Creator
+1 Horizon Canopy
+2 Plains
+2 Forest
+2 Wastes
+4 Prismatic Vista
+4 Brushland
+4 Cavern of Souls
+4 Eldrazi Temple
+[Sideboard]
+1 Walking Ballista
+1 Batterskull
+1 Jegantha, the Wellspring
+1 Liquimetal Coating
+1 Relic of Progenitus
+1 Tormod's Crypt
+2 Celestial Purge
+2 Veil of Summer
+2 Pithing Needle
+3 Knight of Autumn

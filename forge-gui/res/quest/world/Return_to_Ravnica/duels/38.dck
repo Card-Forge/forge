@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/2012_States_-_Iowa/JordanLewman_-_Azorius_Aggro_(Standard,_#38942).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Elite Inquisitor
+3 Geist of Saint Traft
+4 Knight of Glory
+3 Lyev Skyknight
+4 Restoration Angel
+3 Silverblade Paladin
+3 Thalia, Guardian of Thraben
+4 War Falcon
+3 Detention Sphere
+2 Spectral Flight
+1 Ajani, Caller of the Pride
+3 Cavern of Souls
+4 Glacial Fortress
+4 Hallowed Fountain
+1 Island
+1 Moorland Haunt
+9 Plains
+[Sideboard]
+2 Bonds of Faith
+2 Dryad Militant
+2 Grafdigger's Cage
+2 Negate
+2 Oblivion Ring
+2 Rest in Peace
+2 Riders of Gavony

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Standard_Silver_TCQ_-_Buford,_GA_-_2-18-12/PhilipMulkey_-_BW_Tokens_(Standard,_#26491).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blade Splicer
+4 Champion of the Parish
+4 Doomed Traveler
+2 Hero of Bladehold
+4 Loyal Cathar
+4 Gather the Townsfolk
+2 Increasing Devotion
+4 Lingering Souls
+4 Honor of the Pure
+4 Sorin, Lord of Innistrad
+2 Evolving Wilds
+4 Isolated Chapel
+12 Plains
+4 Swamp
+2 Vault of the Archangel
+[Sideboard]
+2 Day of Judgment
+4 Mirran Crusader
+3 Oblivion Ring
+2 Ratchet Bomb
+2 Sword of Feast and Famine
+2 Sword of War and Peace

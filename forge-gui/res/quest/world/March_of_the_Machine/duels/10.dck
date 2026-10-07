@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hermione Granger
+Title=Hermione Granger
+Icon=Hermione Granger.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Greg_Orange_-_Azorius_Control_(Standard,_#1638249).dck
+Deck Type=constructed
+
+[Main]
+2 Ambitious Farmhand
+1 Chrome Host Seedshark
+2 Loran of the Third Path
+3 Atraxa, Grand Unifier
+3 The Restoration of Eiganjo
+3 Reckoner Bankbuster
+2 Negate
+3 Make Disappear
+2 Memory Deluge
+4 Lay Down Arms
+2 Sunfall
+4 Leyline Binding
+4 The Wandering Emperor
+2 Island
+7 Plains
+1 Underground River
+2 Yavimaya Coast
+1 Shipwreck Marsh
+1 Dreamroot Cascade
+4 Spara's Headquarters
+1 Xander's Lounge
+4 Raffine's Tower
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+[Sideboard]
+2 The Eternal Wanderer
+2 Dennick, Pious Apprentice
+2 Chrome Host Seedshark
+1 Loran of the Third Path
+2 Negate
+1 Disdainful Stroke
+2 Knockout Blow
+2 Depopulate
+1 Reckoner Bankbuster

@@ -1,0 +1,8 @@
+Name:Repulsor Bots
+ManaCost:4 U U
+Types:Artifact Creature Robot Hero
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters, return up to two other target artifacts and/or creatures to their owners' hands.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.Other,Creature.Other | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to two other target artifacts and/or creatures
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen this creature enters, return up to two other target artifacts and/or creatures to their owners' hands.

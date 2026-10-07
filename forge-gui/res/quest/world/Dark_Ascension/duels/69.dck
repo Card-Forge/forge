@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Han Solo
+Title=Han Solo
+Icon=Han Solo.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Knoxville,_Tennessee/Ryan_Rolen_in_PTQ_Barcelona_-_Zoo_(Modern,_#28995).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Aven Mindcensor
+3 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Steppe Lynx
+4 Tarmogoyf
+4 Thalia, Guardian of Thraben
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+2 Seal of Fire
+4 Arid Mesa
+4 Marsh Flats
+1 Mountain
+1 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+2 Temple Garden
+1 Verdant Catacombs
+[Sideboard]
+3 Ancient Grudge
+1 Combust
+2 Grafdigger's Cage
+3 Molten Rain
+1 Oblivion Ring
+1 Sulfur Elemental
+2 Thrun, the Last Troll
+1 Timely Reinforcements
+1 Torpor Orb

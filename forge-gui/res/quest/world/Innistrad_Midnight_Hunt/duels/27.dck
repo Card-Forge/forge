@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mawu
+Title=Mawu
+Icon=Mawu.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Platinum-Mythic_Rank_Player_-_Sultai_Midrange_(Standard,_#1229936).dck
+Deck Type=constructed
+
+[Main]
+2 Tovolar's Huntmaster
+3 Briarbridge Tracker
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Jwari Disruption
+1 Disdainful Stroke
+4 Infernal Grasp
+1 Storm the Festival
+2 Binding the Old Gods
+4 The Meathook Massacre
+2 Lolth, Spider Queen
+3 Wrenn and Seven
+1 Snow-Covered Swamp
+1 Snow-Covered Forest
+1 Hall of Storm Giants
+2 Lair of the Hydra
+2 Rimewood Falls
+3 Clearwater Pathway
+3 Woodland Chasm
+4 Barkchannel Pathway
+4 Tangled Florahedron
+4 Shipwreck Marsh
+4 Darkbore Pathway
+[Sideboard]
+1 Soul Shatter
+1 Disdainful Stroke
+1 Feed the Swarm
+2 Ray of Enfeeblement
+2 Shadows' Verdict
+2 Duress
+2 Test of Talents
+4 Malevolent Hermit

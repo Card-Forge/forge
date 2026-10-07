@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/DskBayWolf_-_Mono_Black_Demons_(Standard,_#2270198).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodletter of Aclazotz
+4 Archfiend of the Dross
+4 Unstoppable Slasher
+3 Anoint with Affliction
+4 Go for the Throat
+4 Cut Down
+4 Duress
+2 Dreams of Steel and Oil
+4 Unholy Annex // Ritual Chamber
+1 Phyrexian Arena
+4 Fountainport
+3 Sunken Citadel
+17 Swamp
+1 Conduit Pylons
+1 Hidden Grotto
+[Sideboard]
+2 Cruelclaw's Heist
+1 Malicious Eclipse
+2 Blot Out
+1 Dreams of Steel and Oil
+2 Ghost Vacuum
+1 Outrageous Robbery
+1 Phyrexian Arena
+3 Withering Torment
+1 Harvester of Misery
+1 Anoint with Affliction

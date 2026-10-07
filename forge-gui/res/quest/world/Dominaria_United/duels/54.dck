@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Tirifolix92_-_Merfolk_(Modern,_#1532839).dck
+Deck Type=constructed
+
+[Main]
+2 Cursecatcher
+4 Vodalian Hexcatcher
+4 Lord of Atlantis
+4 Silvergill Adept
+4 Svyelun of Sea and Sky
+4 Merfolk Trickster
+4 Master of the Pearl Trident
+4 Tide Shaper
+4 Aether Vial
+2 Force of Negation
+2 Force of Negation
+3 Dismember
+1 Minamo, School at Water's Edge
+2 Waterlogged Grove
+2 Cavern of Souls
+2 Otawara, Soaring City
+4 Mutavault
+8 Island
+[Sideboard]
+1 Hurkyl's Recall
+1 Hurkyl's Recall
+2 Chalice of the Void
+2 Kira, Great Glass-Spinner
+2 Harbinger of the Tides
+3 Relic of Progenitus
+4 Subtlety

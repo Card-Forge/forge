@@ -1,0 +1,8 @@
+Name:Tam's Resistance
+ManaCost:1 GU
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance | SubAbility$ DBEmpower
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 4 | SpellDescription$ Empower Jace 4. (Put four loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.\nEmpower Jace 4. (Put four loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=General Patton
+Title=General Patton
+Icon=General Patton.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/SCG_Invitational_Qualifier_New_Holland/Dan_Zalewski_III_-_Bogles_(Modern,_#257511).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+3 Keen Sense
+4 Rancor
+3 Spider Umbra
+4 Spirit Mantle
+2 Unflinching Courage
+2 Forest
+2 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+4 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Banishing Light
+1 Glare of Heresy
+2 Gods Willing
+2 Last Breath
+4 Naturalize
+3 Spirit Link

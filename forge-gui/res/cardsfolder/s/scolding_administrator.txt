@@ -1,0 +1,11 @@
+Name:Scolding Administrator
+ManaCost:W B
+Types:Creature Dwarf Cleric
+PT:2/2
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigPutCounter1 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+HasCounters | Execute$ TrigPutCounter2 | TriggerDescription$ When this creature dies, if it had counters on it, put those counters on up to one target creature.
+SVar:TrigPutCounter2:DB$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHas:Ability$Counters
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on this creature.\nWhen this creature dies, if it had counters on it, put those counters on up to one target creature.

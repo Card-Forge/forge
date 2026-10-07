@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/States_Newington/Tom_Strong_-_Jund_Monsters_(Standard,_#89363).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Elvish Mystic
+3 Polukranos, World Eater
+4 Rakshasa Deathdealer
+4 Stormbreath Dragon
+4 Sylvan Caryatid
+4 Hero's Downfall
+1 Murderous Cut
+3 Thoughtseize
+3 Sarkhan, the Dragonspeaker
+4 Bloodstained Mire
+2 Forest
+4 Llanowar Wastes
+1 Mana Confluence
+2 Mountain
+2 Swamp
+2 Temple of Abandon
+3 Temple of Malady
+2 Urborg, Tomb of Yawgmoth
+4 Wooded Foothills
+[Sideboard]
+3 Brain Maggot
+2 Chandra, Pyromaster
+4 Drown in Sorrow
+2 Read the Bones
+3 Reclamation Sage

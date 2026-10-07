@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Leonardo_Zambrano_-_Izzet_Lessons_(Standard,_#2785563).dck
+Deck Type=constructed
+
+[Main]
+4 Gran-Gran
+4 Monument to Endurance
+4 Accumulate Wisdom
+4 Combustion Technique
+4 Firebending Lesson
+3 Abandon Attachments
+2 It'll Quench Ya!
+1 Sear
+3 Boomerang Basics
+4 Artist's Talent
+4 Stormchaser's Talent
+1 Ral, Crackling Wit
+5 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+3 Multiversal Passage
+1 Agna Qel'a
+1 Mountain
+[Sideboard]
+3 Spell Snare
+2 Flashfreeze
+2 Slagstorm
+2 Soul-Guide Lantern
+2 Wan Shi Tong, Librarian
+1 Ral, Crackling Wit
+1 Sear
+1 Spell Pierce
+1 Spider-Sense

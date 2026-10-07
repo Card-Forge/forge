@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/Grand_Prix_Paris_2016_-_Undefeated_Day_1/Ibai_Lithoreau_-_Four-Color_Midrange_(Standard,_#608455).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bounding Krasis
+4 Harbinger of the Tides
+4 Jace, Vryn's Prodigy
+4 Mantis Rider
+4 Reflector Mage
+1 Stratus Dancer
+4 Sylvan Advocate
+4 Collected Company
+2 Jeskai Charm
+1 Roast
+3 Treasure Cruise
+1 Canopy Vista
+1 Cinder Glade
+4 Flooded Strand
+1 Forest
+2 Island
+1 Mountain
+1 Plains
+2 Prairie Stream
+4 Wandering Fumarole
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Arashin Cleric
+3 Disdainful Stroke
+1 Exert Influence
+2 Hallowed Moonlight
+2 Radiant Flames

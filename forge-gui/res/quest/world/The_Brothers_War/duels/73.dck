@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Hasegawa_Kazunari_-_Cascade_Crash_(Modern,_#1552182).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+3 Fury
+4 Shardless Agent
+3 Dead // Gone
+4 Fire // Ice
+4 Violent Outburst
+4 Force of Negation
+4 Crashing Footfalls
+2 Ardent Plea
+4 Leyline Binding
+2 Teferi, Time Raveler
+1 Island
+1 Xander's Lounge
+1 Zagoth Triome
+1 Temple Garden
+1 Steam Vents
+1 Stomping Ground
+1 Hallowed Fountain
+1 Plains
+1 Forest
+1 Breeding Pool
+1 Sacred Foundry
+2 Arid Mesa
+3 Wooded Foothills
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Brotherhood's End
+1 Deafening Clarion
+1 Damping Matrix
+3 Endurance
+3 Inevitable Betrayal
+3 Mystical Dispute
+3 Force of Vigor

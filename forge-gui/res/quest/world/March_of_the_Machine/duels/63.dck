@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Black
+Title=Dungeon Crawling Black
+Icon=Dungeon Crawling Black.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/whiterknight_-_Rakdos_Scam_(Modern,_#1631638).dck
+Deck Type=constructed
+
+[Main]
+3 Dauthi Voidwalker
+4 Grief
+4 Fury
+2 Fable of the Mirror-Breaker
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+3 Terminate
+3 Feign Death
+3 Undying Malice
+3 Lightning Bolt
+3 Thoughtseize
+2 Blood Moon
+2 Invasion of Azgol
+3 Blood Crypt
+4 Marsh Flats
+4 Bloodstained Mire
+1 Castle Locthwain
+3 Swamp
+1 Mountain
+4 Blackcleave Cliffs
+[Sideboard]
+2 Blood Moon
+4 Leyline of the Void
+3 Ratchet Bomb
+1 Thoughtseize
+1 Kolaghan's Command
+2 Collective Brutality
+2 Tourach, Dread Cantor

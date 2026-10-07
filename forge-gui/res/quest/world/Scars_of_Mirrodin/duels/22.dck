@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/2010_SoM_Game_Day_-_Lodz,_Poland/MaciejBaranowski_-_Allies_(Standard,_#7886).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Hada Freeblade
+4 Halimar Excavator
+4 Kabira Evangel
+4 Kazandu Blademaster
+4 Ondu Cleric
+3 Sea Gate Loremaster
+2 Talus Paladin
+4 Umara Raptor
+3 Condemn
+4 Join the Ranks
+1 Rite of Replication
+1 Celestial Colonnade
+2 Glacial Fortress
+6 Island
+11 Plains
+1 Seachrome Coast
+2 Tectonic Edge
+[Sideboard]
+3 Celestial Purge
+3 Emerge Unscathed
+3 Kor Firewalker
+3 Kor Sanctifiers
+3 Negate

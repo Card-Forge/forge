@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Bayley_Madden_-_Esper_Control_(Standard,_#1332394).dck
+Deck Type=constructed
+
+[Main]
+2 Hullbreaker Horror
+2 The Celestus
+1 Infernal Grasp
+1 March of Wretched Sorrow
+1 Siphon Insight
+2 Negate
+2 Memory Deluge
+2 Behold the Multiverse
+3 Wash Away
+4 Consider
+4 Vanishing Verse
+1 Path of Peril
+1 Farewell
+2 Shadows' Verdict
+2 Bloodchief's Thirst
+2 The Meathook Massacre
+3 The Wandering Emperor
+1 Island
+1 Plains
+1 Deserted Beach
+1 Brightclimb Pathway
+2 Swamp
+2 Hall of Storm Giants
+2 Shattered Sanctum
+2 Snowfield Sinkhole
+2 Field of Ruin
+2 Ice Tunnel
+2 Clearwater Pathway
+3 Hengegate Pathway
+4 Shipwreck Marsh
+[Sideboard]
+1 Toxrill, the Corrosive
+1 Lier, Disciple of the Drowned
+1 Soul Shatter
+1 Kotose, the Silent Spider
+1 Iymrith, Desert Doom
+2 Check for Traps
+2 Power Word Kill
+2 Test of Talents
+2 Duress
+2 Go Blank

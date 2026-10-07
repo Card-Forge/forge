@@ -1,0 +1,8 @@
+Name:Root Manipulation
+ManaCost:3 B G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Menace | SubAbility$ DBAnimateAll | SpellDescription$ Until end of turn, creatures you control get +2/+2 and gain menace and "Whenever this creature attacks, you gain 1 life." (A creature with menace can't be blocked except by two or more creatures.)
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ AttackTrig
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Until end of turn, creatures you control get +2/+2 and gain menace and "Whenever this creature attacks, you gain 1 life." (A creature with menace can't be blocked except by two or more creatures.)

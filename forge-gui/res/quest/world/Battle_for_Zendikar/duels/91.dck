@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling White
+Title=Dungeon Crawling White
+Icon=Dungeon Crawling White.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/SCG_Modern_Open_Dallas/David_Houghton_-_Allies_(Modern,_#335762).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Akoum Battlesinger
+4 Expedition Envoy
+1 Firemantle Mage
+4 Hada Freeblade
+4 Kabira Evangel
+4 Kazandu Blademaster
+2 Kor Bladewhirl
+2 Lantern Scout
+4 Oran-Rief Survivalist
+4 AEther Vial
+4 Collected Company
+1 Return to the Ranks
+4 Ally Encampment
+2 Arid Mesa
+4 Cavern of Souls
+1 Forest
+1 Horizon Canopy
+2 Plains
+1 Sacred Foundry
+1 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Chameleon Colossus
+1 Choke
+2 Kataki, War's Wage
+2 Ondu Cleric
+3 Path to Exile
+2 Spellskite
+1 Stony Silence

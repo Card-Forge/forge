@@ -21,5 +21,5 @@ K:Lifelink
 K:Hexproof
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each opponent sacrifices a nonland permanent. Then you may put an exiled creature card used to craft CARDNAME onto the battlefield under your control tapped and attacking.
 SVar:DBSacrifice:DB$ Sacrifice | Amount$ 1 | SacValid$ Permanent.nonLand | Defined$ Opponent | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChooseFromDefined$ ExiledWith | ChangeNum$ 1 | Hidden$ True | Tapped$ True | Attacking$ True | GainControl$ True
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChooseFromDefined$ ExiledWith.Creature | ChangeNum$ 1 | Hidden$ True | Tapped$ True | Attacking$ True | GainControl$ True
 Oracle:Menace, trample, lifelink, hexproof\nWhenever The Grim Captain attacks, each opponent sacrifices a nonland permanent. Then you may put an exiled creature card used to craft The Grim Captain onto the battlefield under your control tapped and attacking.

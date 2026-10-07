@@ -1,0 +1,7 @@
+Name:Resonating Lute
+ManaCost:2 U R
+Types:Artifact
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add two mana of any one color. Spend this mana only to cast instant and sorcery spells."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add two mana of any one color. Spend this mana only to cast instant and sorcery spells.
+A:AB$ Draw | Cost$ T | PresentZone$ Hand | IsPresent$ Card.YouOwn | PresentCompare$ GE7 | SpellDescription$ Draw a card. Activate only if you have seven or more cards in your hand.
+Oracle:Lands you control have "{T}: Add two mana of any one color. Spend this mana only to cast instant and sorcery spells."\n{T}: Draw a card. Activate only if you have seven or more cards in your hand.

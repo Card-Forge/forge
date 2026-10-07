@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Daniel_Cramer_-_Bant_Ramp_(Standard,_#1218509).dck
+Deck Type=constructed
+
+[Main]
+4 Rootcoil Creeper
+4 Briarbridge Tracker
+4 Skyclave Apparition
+4 Esika's Chariot
+2 Alrund's Epiphany
+4 Storm the Festival
+4 Wrenn and Seven
+4 Teferi, Who Slows the Sunset
+1 Island
+1 Forest
+1 Hall of Storm Giants
+1 Lair of the Hydra
+1 Treasure Vault
+1 Cave of the Frost Dragon
+4 Barkchannel Pathway
+4 Overgrown Farmland
+4 Branchloft Pathway
+4 Hengegate Pathway
+4 Tangled Florahedron
+4 Deserted Beach
+[Sideboard]
+2 Brutal Cathar
+2 Fateful Absence
+3 Disdainful Stroke
+4 Malevolent Hermit
+4 Elite Spellbinder

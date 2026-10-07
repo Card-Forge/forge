@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Wonder Woman
+Title=Wonder Woman
+Icon=Wonder Woman.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Eggy216_-_Boros_Aggro_(Modern,_#1204499).dck
+Deck Type=constructed
+
+[Main]
+1 Young Pyromancer
+3 Soul-Scar Mage
+3 Feather, the Redeemed
+4 Monastery Swiftspear
+4 Favored Hoplite
+4 Dreadhorde Arcanist
+1 Spikefield Hazard
+2 Reckless Rage
+4 Mutagenic Growth
+4 Gods Willing
+4 Defiant Strike
+4 Lightning Bolt
+3 Guiding Voice
+1 Mountain
+1 Plains
+1 Arid Mesa
+1 Flooded Strand
+3 Bloodstained Mire
+4 Sacred Foundry
+4 Inspiring Vantage
+4 Needleverge Pathway
+[Sideboard]
+1 Academic Probation
+1 Deafening Clarion
+1 Environmental Sciences
+1 Expanded Anatomy
+2 Rest in Peace
+2 Abrade
+2 Light of Hope
+2 Declaration in Stone
+3 Path to Exile

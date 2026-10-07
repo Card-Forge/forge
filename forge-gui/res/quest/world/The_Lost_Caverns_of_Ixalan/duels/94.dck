@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Edna Krabappel
+Title=Edna Krabappel
+Icon=Edna Krabappel.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Gustav_Mattsson_-_Rakdos_Aggro_(Modern,_#1994526).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Grief
+4 Orcish Bowmasters
+4 Ragavan, Nimble Pilferer
+2 Sheoldred, the Apocalypse
+1 Kroxa, Titan of Death's Hunger
+4 Fable of the Mirror-Breaker
+4 Not Dead After All
+3 Fatal Push
+1 Lightning Bolt
+1 Terminate
+4 Thoughtseize
+2 Molten Collapse
+1 Angrath's Rampage
+1 Blood Moon
+4 Blood Crypt
+4 Bloodstained Mire
+4 Marsh Flats
+3 Blackcleave Cliffs
+3 Swamp
+1 Takenuma, Abandoned Mire
+1 Wooded Foothills
+[Sideboard]
+2 Engineered Explosives
+2 Kolaghan's Command
+2 Relic of Progenitus
+2 Surgical Extraction
+2 Unlicensed Hearse
+1 Angrath's Rampage
+1 Blood Moon
+1 Magus of the Moon
+1 Pithing Needle
+1 Ulamog, the Infinite Gyre

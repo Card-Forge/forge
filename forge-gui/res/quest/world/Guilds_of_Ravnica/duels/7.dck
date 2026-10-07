@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=King Edward
+Title=King Edward
+Icon=King Edward.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Ali_Aintrazi_-_Five-Color_Control_(Standard,_#767495).dck
+Deck Type=constructed
+
+[Main]
+2 Chance for Glory
+1 Chemister's Insight
+1 Expansion // Explosion
+4 Revitalize
+3 Settle the Wreckage
+3 Vraska's Contempt
+2 Cleansing Nova
+4 Discovery // Dispersal
+1 Divination
+2 Mastermind's Acquisition
+4 Gift of Paradise
+3 Lich's Mastery
+1 Search for Azcanta
+3 The Mirari Conjecture
+1 Dragonskull Summit
+1 Drowned Catacomb
+1 Gateway Plaza
+2 Hinterland Harbor
+1 Island
+4 Isolated Chapel
+3 Overgrown Tomb
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Sulfur Falls
+2 Sunpetal Grove
+1 Swamp
+3 Temple Garden
+2 Watery Grave
+1 Woodland Cemetery
+[Sideboard]
+1 Banefire
+3 Carnage Tyrant
+1 Deafening Clarion
+2 Duress
+2 Knight of Autumn
+1 Lyra Dawnbringer
+1 Nature's Spiral
+1 The Immortal Sun
+3 Thief of Sanity

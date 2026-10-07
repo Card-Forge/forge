@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Lisa Simpson
+Title=Lisa Simpson
+Icon=Lisa Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/MRyoma_-_Mono-Red_Aggro_(Standard,_#2367684).dck
+Deck Type=constructed
+
+[Main]
+4 Cacophony Scamp
+4 Burnout Bashtronaut
+3 Greasewrench Goblin
+2 Fanatical Firebrand
+3 Searslicer Goblin
+4 Rundvelt Hordemaster
+4 Draconautics Engineer
+1 Squee, Dubious Monarch
+3 Howlsquad Heavy
+3 Lifecraft Engine
+4 Turn Inside Out
+2 Painter's Studio // Defaced Gallery
+4 Cavern of Souls
+2 Soulstone Sanctuary
+17 Mountain
+[Sideboard]
+2 Sunspine Lynx
+3 Urabrask's Forge
+3 Lithomantic Barrage
+2 Obliterating Bolt
+3 Torch the Tower
+2 Agatha's Soul Cauldron

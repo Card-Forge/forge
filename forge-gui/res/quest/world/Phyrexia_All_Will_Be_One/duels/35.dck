@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Beast2
+Title=Beast2
+Icon=Beast2.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Aaron_Orosz_-_Jund_Midrange_(Standard,_#1615112).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+2 Glissa Sunslayer
+2 Graveyard Trespasser
+3 Sheoldred, the Apocalypse
+3 Reckoner Bankbuster
+3 Cut Down
+3 Go for the Throat
+2 Riveteers Charm
+1 Sheoldred's Edict
+3 Unleash the Inferno
+3 Invoke Despair
+1 Obliterating Bolt
+1 Sorin the Mirthless
+2 Blackcleave Cliffs
+1 Boseiju, Who Endures
+3 Deathcap Glade
+1 Forest
+3 Haunted Ridge
+1 Karplusan Forest
+2 Mountain
+1 Rockfall Vale
+1 Sokenzan, Crucible of Defiance
+2 Sulfurous Springs
+3 Swamp
+1 Takenuma, Abandoned Mire
+4 Ziatora's Proving Ground
+[Sideboard]
+1 Abrade
+2 Brotherhood's End
+2 Duress
+2 Gix's Command
+2 Graveyard Trespasser
+1 Tear Asunder
+1 The Cruelty of Gix
+1 Thrun, Breaker of Silence
+1 Unlicensed Hearse
+2 Nissa, Ascended Animist

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Joshua_Johnston_-_Dimir_Midrange_(Standard,_#2823425).dck
+Deck Type=constructed
+
+[Main]
+4 Enduring Curiosity
+4 Floodpits Drowner
+4 Spyglass Siren
+3 Deep-Cavern Bat
+3 Preacher of the Schism
+3 Tishana's Tidebinder
+2 Cecil, Dark Knight
+3 Requiting Hex
+2 Bitter Triumph
+2 Phantom Interference
+2 Shoot the Sheriff
+3 Kaito, Bane of Nightmares
+4 Gloomlake Verge
+4 Island
+4 Multiversal Passage
+4 Swamp
+4 Watery Grave
+2 Restless Reef
+2 Soulstone Sanctuary
+1 Agna Qel'a
+[Sideboard]
+2 Annul
+2 Soul-Guide Lantern
+2 Strategic Betrayal
+1 Disdainful Stroke
+1 Duress
+1 Entropic Battlecruiser
+1 Essence Scatter
+1 Negate
+1 Requiting Hex
+1 Spider-Sense
+1 The Unagi of Kyoshi Island
+1 Wan Shi Tong, Librarian

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Demon
+Title=Demon
+Icon=Demon.jpg
+Difficulty=Very Hard
+Description=../Modern/Born_of_the_Gods/I_Liga_de_Modern_de_Marbella_-_Final/Jorge_Perez_-_Red_Deck_Wins_(Modern,_#86463).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Grim Lavamancer
+4 Keldon Marauders
+3 Vexing Devil
+4 Lightning Bolt
+3 Magma Jet
+4 Searing Blaze
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Blood Crypt
+8 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Anger of the Gods
+3 Blood Moon
+2 Ensnaring Bridge
+3 Rakdos Charm
+2 Searing Blood
+3 Smash to Smithereens

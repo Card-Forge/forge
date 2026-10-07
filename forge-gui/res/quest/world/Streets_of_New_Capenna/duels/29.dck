@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Ahh_Dean_-_Jund_-_Stream_League_(Standard,_#1362020).dck
+Deck Type=constructed
+
+[Main]
+1 Ziatora, the Incinerator
+1 Titan of Industry
+2 Tenacious Underdog
+3 Goldspan Dragon
+3 Fable of the Mirror-Breaker
+4 Prosperous Innkeeper
+4 Esika's Chariot
+4 Courier's Briefcase
+3 Riveteers Charm
+3 Voltage Surge
+1 Shadows' Verdict
+1 Shatterskull Smashing
+2 Duress
+4 Ob Nixilis, the Adversary
+1 Swamp
+1 Boseiju, Who Endures
+1 Deathcap Glade
+1 Haunted Ridge
+1 Forest
+1 Mountain
+2 Rockfall Vale
+4 Ziatora's Proving Ground
+4 Darkbore Pathway
+4 Cragcrown Pathway
+4 Blightstep Pathway
+[Sideboard]
+1 Urabrask, Heretic Praetor
+1 Burn Down the House
+2 Go Blank
+2 Duress
+2 Unleash the Inferno
+2 The Meathook Massacre
+2 Infernal Grasp
+3 Tamiyo's Safekeeping

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Easy
+Description=Fate_Reforged/Standard_Daily_#8068522/Bertram_-_Jeskai_Aggro_(Standard,_#204157).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Rabblemaster
+4 Mantis Rider
+4 Seeker of the Way
+4 Soulfire Grand Master
+4 Lightning Strike
+4 Stoke the Flames
+3 Valorous Stance
+4 Wild Slash
+2 Treasure Cruise
+3 Outpost Siege
+3 Battlefield Forge
+4 Flooded Strand
+1 Island
+2 Mountain
+4 Mystic Monastery
+2 Plains
+3 Shivan Reef
+1 Temple of Epiphany
+4 Temple of Triumph
+[Sideboard]
+3 Disdainful Stroke
+2 Erase
+1 Glare of Heresy
+3 Magma Spray
+3 Negate
+2 Sarkhan, the Dragonspeaker

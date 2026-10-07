@@ -2,9 +2,9 @@ Name:Nevinyrral, Urborg Tyrant
 ManaCost:3 W U B
 Types:Legendary Creature Zombie Wizard
 PT:3/6
-K:Hexproof:Card.Artifact:artifacts
-K:Hexproof:Card.Creature:creatures
-K:Hexproof:Card.Enchantment:enchantments
+K:Hexproof:Artifact
+K:Hexproof:Creature
+K:Hexproof:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a tapped 2/2 black Zombie creature token for each creature that died this turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenTapped$ True | TokenOwner$ You
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature

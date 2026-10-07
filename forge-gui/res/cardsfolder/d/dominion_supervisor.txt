@@ -1,0 +1,8 @@
+Name:Dominion Supervisor
+ManaCost:2 G
+Types:Creature Vorta Doctor
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Trample | Description$ Creatures you control with counters on them have trample.
+Oracle:When this creature enters, put a +1/+1 counter on target creature.\nCreatures you control with counters on them have trample.

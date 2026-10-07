@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/2jjm_-_Burn_(Modern,_#958221).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Eidolon of the Great Revel
+2 Lightning Helix
+2 Skullcrack
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+1 Fiery Islet
+1 Bloodstained Mire
+2 Arid Mesa
+2 Sacred Foundry
+3 Wooded Foothills
+3 Mountain
+4 Inspiring Vantage
+4 Sunbaked Canyon
+[Sideboard]
+1 Searing Blood
+1 Lurrus of the Dream-Den
+2 Skullcrack
+2 Rest in Peace
+3 Kor Firewalker
+3 Path to Exile
+3 Smash to Smithereens

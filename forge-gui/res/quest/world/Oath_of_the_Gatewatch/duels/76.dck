@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/PPTQ_Dublin_2016_@_Area_52/Wyatt_Taylor_-_Burn_(Modern,_#634154).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+1 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+3 Stomping Ground
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+1 Exquisite Firecraft
+1 Grafdigger's Cage
+2 Kor Firewalker
+2 Path to Exile
+2 Reality Hemorrhage
+2 Stony Silence

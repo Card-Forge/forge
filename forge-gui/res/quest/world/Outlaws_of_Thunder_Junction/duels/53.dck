@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian
+Title=Cohen the Barbarian
+Icon=Cohen the Barbarian.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/AndreaMengucci_-_Golgari_Midrange_Modern_(Modern,_#2066701).dck
+Deck Type=constructed
+
+[Main]
+4 Sheoldred, the Apocalypse
+4 Tarmogoyf
+4 Orcish Bowmasters
+4 Delighted Halfling
+4 The One Ring
+4 Mishra's Bauble
+4 Fatal Push
+2 Pillage the Bog
+4 Thoughtseize
+4 Grist, the Hunger Tide
+2 Boseiju, Who Endures
+3 Blooming Marsh
+2 Forest
+2 Overgrown Tomb
+4 Verdant Catacombs
+2 Bloodstained Mire
+3 Wooded Foothills
+2 Underground Mortuary
+2 Swamp
+[Sideboard]
+2 Veil of Summer
+4 Fulminator Mage
+4 Endurance
+3 Pick Your Poison
+2 Force of Vigor

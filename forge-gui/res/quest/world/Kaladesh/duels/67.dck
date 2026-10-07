@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Akongo
+Title=Akongo
+Icon=Akongo.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/Guf_Brisbane_-_Brisbane_Circuit_Series_Qualifier_#7/Andrew_Taranec_-_Abzan_Midrange_(Modern,_#658017).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Grim Flayer
+4 Scavenging Ooze
+3 Siege Rhino
+3 Tarmogoyf
+1 Tasigur, the Golden Fang
+3 Abrupt Decay
+4 Path to Exile
+3 Inquisition of Kozilek
+4 Lingering Souls
+4 Thoughtseize
+3 Liliana, the Last Hope
+3 Blooming Marsh
+4 Forest
+1 Godless Shrine
+4 Marsh Flats
+2 Overgrown Tomb
+1 Plains
+3 Swamp
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Abrupt Decay
+1 Dismember
+2 Ghost Quarter
+3 Kataki, War's Wage
+4 Leyline of Sanctity
+2 Rest in Peace
+2 Surgical Extraction

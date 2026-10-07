@@ -1,0 +1,6 @@
+Name:Germination Practicum
+ManaCost:3 G G
+Types:Sorcery Lesson
+A:SP$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each creature you control.
+K:Paradigm
+Oracle:Put two +1/+1 counters on each creature you control.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)

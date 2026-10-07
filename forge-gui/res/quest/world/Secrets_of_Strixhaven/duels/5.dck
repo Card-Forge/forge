@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/GregorV_-_Grixis_Midrange_(Standard,_#2910361).dck
+Deck Type=constructed
+
+[Main]
+4 Ashling, Rekindled
+4 Emeritus of Ideation
+4 Kavaero, Mind-Bitten
+4 Deceit
+1 Traumatic Critique
+4 Requiting Hex
+2 Shoot the Sheriff
+1 Bitter Triumph
+4 Stock Up
+2 Day of Black Sun
+1 Deadly Cover-Up
+3 Duress
+4 Steam Vents
+4 Watery Grave
+4 Blood Crypt
+3 Blazemire Verge
+4 Gloomlake Verge
+2 Swamp
+3 Undercity Sewers
+2 Cavern of Souls
+[Sideboard]
+1 Duress
+1 Bitter Triumph
+1 The End
+2 Ghost Vacuum
+1 Negate
+2 Intimidation Tactics
+1 Disdainful Stroke
+2 Oildeep Gearhulk
+2 Pyroclasm
+2 Qarsi Revenant

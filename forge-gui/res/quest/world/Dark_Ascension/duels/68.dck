@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Hookah-Smoking Caterpillar
+Title=Hookah-Smoking Caterpillar
+Icon=Hookah-Smoking Caterpillar.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/PTQ_Barcelona_-_Torrelavega,_Spain/Ander_Perez_-_Zoo_(Modern,_#28284).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Steppe Lynx
+4 Tarmogoyf
+4 Thalia, Guardian of Thraben
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+3 Seal of Fire
+4 Arid Mesa
+4 Marsh Flats
+2 Misty Rainforest
+1 Mountain
+1 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+1 Temple Garden
+[Sideboard]
+3 Ancient Grudge
+4 Leyline of the Void
+2 Oblivion Ring
+2 Sulfur Elemental
+3 Thrun, the Last Troll
+1 Torpor Orb

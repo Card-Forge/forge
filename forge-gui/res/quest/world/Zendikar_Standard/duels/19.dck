@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Easy
+Description=Zendikar/US_States_2009_-_California/Rory_Draxler_-_Eldazri_Elves_(Standard,_#3230).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ant Queen
+4 Elvish Archdruid
+4 Elvish Visionary
+4 Great Sable Stag
+4 Llanowar Elves
+2 Master of the Wild Hunt
+4 Nissa's Chosen
+2 Noble Hierarch
+4 Eldrazi Monument
+3 Garruk Wildspeaker
+4 Nissa Revane
+17 Forest
+2 Gargoyle Castle
+4 Oran-Rief, the Vastwood
+[Sideboard]
+4 Acidic Slime
+4 Fog
+2 Mycoloth
+3 Pithing Needle
+2 Windstorm

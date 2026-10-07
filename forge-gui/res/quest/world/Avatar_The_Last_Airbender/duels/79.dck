@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/JL27_-_Mono-Blue_Merfolk_(Modern,_#2747000).dck
+Deck Type=constructed
+
+[Main]
+4 Floodpits Drowner
+4 Harbinger of the Seas
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merfolk Trickster
+4 Tide Shaper
+3 Mindspring Merfolk
+2 Harbinger of the Tides
+2 Tishana's Tidebinder
+1 Svyelun of Sea and Sky
+4 Aether Vial
+4 Flare of Denial
+3 Sink into Stupor
+12 Island
+3 Mutavault
+1 Agna Qel'a
+1 Otawara, Soaring City
+[Sideboard]
+4 Stern Scolding
+3 Consign to Memory
+3 Surgical Extraction
+2 Hurkyl's Recall
+2 Repeal
+1 Kira, Great Glass-Spinner

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/Giovanni_Costi_-_Izzet_Wizards_(Modern,_#2630341).dck
+Deck Type=constructed
+
+[Main]
+3 Tamiyo, Inquisitive Student
+3 Subtlety
+3 Thundertrap Trainer
+1 Murktide Regent
+3 Snapcaster Mage
+1 Quantum Riddler
+4 Flame of Anor
+4 Galvanic Discharge
+2 Spell Snare
+2 Sink into Stupor
+2 Flare of Denial
+3 Counterspell
+3 Lightning Bolt
+4 Preordain
+2 Blood Moon
+2 Flooded Strand
+3 Thundering Falls
+5 Island
+2 Misty Rainforest
+2 Scalding Tarn
+1 Otawara, Soaring City
+1 Riptide Laboratory
+1 Riverpyre Verge
+2 Steam Vents
+1 Mistrise Village
+[Sideboard]
+1 Subtlety
+1 Force of Negation
+4 Consign to Memory
+1 Blood Moon
+3 Mystical Dispute
+1 Flashfires
+2 Brotherhood's End
+2 Surgical Extraction

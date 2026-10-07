@@ -12,6 +12,7 @@ import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.card.CardView;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.util.FSerializableFunction;
 
 public class GuiChoose {
@@ -237,10 +238,20 @@ public class GuiChoose {
 
     public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final Consumer<List<T>> callback) {
-        // An input box for handling the order of choices.
-        DualListBox<T> dual = new DualListBox<>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, callback);
-        dual.setSecondColumnLabelText(top);
-        dual.show();
+        order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, false, result -> callback.accept(result.ordered()));
+    }
+
+    public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean showRememberCheckbox, final Consumer<OrderResult<T>> callback) {
+        @SuppressWarnings("unchecked")
+        final DualListBox<T>[] holder = new DualListBox[1];
+        holder[0] = new DualListBox<>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, list -> {
+            final boolean remember = showRememberCheckbox && holder[0].isRememberDecisionSelected();
+            callback.accept(new OrderResult<>(list, remember));
+        });
+        holder[0].setSecondColumnLabelText(top);
+        holder[0].setRememberDecisionVisible(showRememberCheckbox);
+        holder[0].show();
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/AJ_Grenke_-_Esper_Reanimator_(Modern,_#1599372).dck
+Deck Type=constructed
+
+[Main]
+1 Priest of Fell Rites
+4 Grief
+4 Solitude
+4 Atraxa, Grand Unifier
+2 Griselbrand
+1 Obzedat, Ghost Council
+4 Ephemerate
+4 Goryo's Vengeance
+4 Faithful Mending
+3 Tainted Indulgence
+2 Shadow Prophecy
+1 Esper Charm
+4 Leyline Binding
+2 Teferi, Time Raveler
+1 Plains
+1 Island
+1 Swamp
+2 Godless Shrine
+2 Hallowed Fountain
+2 Watery Grave
+1 Indatha Triome
+1 Raugrin Triome
+4 Flooded Strand
+3 Marsh Flats
+3 Polluted Delta
+[Sideboard]
+2 Prismatic Ending
+2 March of Otherworldly Light
+4 Leyline of Sanctity
+1 Flusterstorm
+3 Force of Negation
+2 Dauthi Voidwalker
+1 Emrakul, the Aeons Torn

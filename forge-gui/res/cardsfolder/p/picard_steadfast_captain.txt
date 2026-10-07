@@ -1,0 +1,9 @@
+Name:Picard, Steadfast Captain
+ManaCost:4 W W
+Types:Legendary Creature Human Officer
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME enters or attacks, put two +1/+1 counters on another target creature you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, put two +1/+1 counters on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 2
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Picard enters or attacks, put two +1/+1 counters on another target creature you control.

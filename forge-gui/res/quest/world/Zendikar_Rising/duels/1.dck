@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Ramsay_-_Rakdos_Midrange_(Standard,_#1047694).dck
+Deck Type=constructed
+
+[Main]
+2 Ox of Agonas
+3 Bonecrusher Giant
+4 Kroxa, Titan of Death's Hunger
+4 Mire Triton
+2 Shredded Sails
+2 Hagra Mauling
+3 Spikefield Hazard
+4 Heartless Act
+2 Agonizing Remorse
+2 Shatterskull Smashing
+2 Bloodchief's Thirst
+3 Duress
+4 Tymaret Calls the Dead
+2 Liliana, Waker of the Dead
+4 Fabled Passage
+4 Temple of Malice
+5 Mountain
+8 Swamp
+[Sideboard]
+1 Duress
+1 Storm's Wrath
+1 Agonizing Remorse
+1 Shredded Sails
+1 Bloodchief's Thirst
+1 Liliana, Waker of the Dead
+1 Cling to Dust
+2 Embereth Shieldbreaker
+2 Extinction Event
+2 Ox of Agonas
+2 Soul-Guide Lantern

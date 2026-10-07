@@ -5,6 +5,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDread:DB$ ManifestDread | RememberManifested$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Menace | Description$ Equipped creature has menace.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Menace | Description$ Equipped creature has menace.
 K:Equip:2
 Oracle:When Killer's Mask enters, manifest dread, then attach Killer's Mask to that creature. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\nEquipped creature has menace.\nEquip {2}

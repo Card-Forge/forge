@@ -852,7 +852,7 @@ ScryfallCode=CMM
 844 R Deepglow Skate @Jason Kang
 845 U Diffusion Sliver @Campbell White
 846 C Distant Melody @Omar Rayyan
-847 U Flux Channeler @Heonhwa Choe
+847 U Flux Channeler @Heonhwa
 848 U Fog Bank @Howard Lyon
 849 R Galerider Sliver @Campbell White
 850 M Jace Beleren @Aleksi Briclot

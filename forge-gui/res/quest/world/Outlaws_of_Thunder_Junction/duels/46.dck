@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Beast2
+Title=Beast2
+Icon=Beast2.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Allan_Begovic_-_Dimir_Control_(Standard,_#2062289).dck
+Deck Type=constructed
+
+[Main]
+1 The Celestus
+4 Memory Deluge
+2 Long Goodbye
+4 Deduce
+3 Go for the Throat
+2 Cut Down
+1 Negate
+4 Three Steps Ahead
+2 Sheoldred's Edict
+1 Phantom Interference
+2 Path of Peril
+1 Duress
+4 Deadly Cover-Up
+2 Jace, the Perfected Mind
+1 Otawara, Soaring City
+4 Restless Reef
+1 Takenuma, Abandoned Mire
+3 Swamp
+4 Field of Ruin
+1 Demolition Field
+3 Darkslick Shores
+2 Sunken Citadel
+1 Underground River
+3 Island
+4 Shipwreck Marsh
+[Sideboard]
+4 Tishana's Tidebinder
+2 Negate
+2 Duress
+1 Outrageous Robbery
+2 Unlicensed Hearse
+1 Path of Peril
+1 Aclazotz, Deepest Betrayal
+2 Sheoldred, the Apocalypse

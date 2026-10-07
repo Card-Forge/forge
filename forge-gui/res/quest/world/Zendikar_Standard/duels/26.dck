@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Medium
+Description=Zendikar/US_States_2009_-_Nevada/David_Williams_-_UW_Control_(Standard,_#3232).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Baneslayer Angel
+1 Iona, Shield of Emeria
+4 Knight of the White Orchid
+2 Sphinx of Jwar Isle
+4 Fieldmist Borderpost
+3 Essence Scatter
+4 Flashfreeze
+4 Path to Exile
+4 Day of Judgment
+2 Martial Coup
+2 Mind Spring
+2 Elspeth, Knight-Errant
+3 Jace Beleren
+4 Glacial Fortress
+3 Island
+2 Kabira Crossroads
+9 Plains
+4 Sejiri Refuge
+[Sideboard]
+4 Celestial Purge
+3 Quest for Ancient Secrets
+4 Relic of Progenitus
+4 Spreading Seas

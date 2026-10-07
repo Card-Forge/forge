@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Air-Walker
+Title=Air-Walker
+Icon=Air-Walker.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Super_IQ_Plano/Mohammed_Fadel_-_Four-Color_Reanimator_(Standard,_#126629).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Doomwake Giant
+3 Hornet Queen
+4 Satyr Wayfinder
+4 Sidisi, Brood Tyrant
+4 Siege Rhino
+1 Soul of Innistrad
+4 Sylvan Caryatid
+4 Whip of Erebos
+4 Murderous Cut
+2 Forest
+1 Island
+4 Llanowar Wastes
+2 Mana Confluence
+3 Opulent Palace
+1 Plains
+2 Polluted Delta
+3 Sandsteppe Citadel
+1 Swamp
+4 Temple of Malady
+2 Windswept Heath
+[Sideboard]
+2 Ashiok, Nightmare Weaver
+2 Drown in Sorrow
+1 Elspeth, Sun's Champion
+1 Erebos, God of the Dead
+1 Liliana Vess
+2 Negate
+3 Reclamation Sage
+3 Thoughtseize

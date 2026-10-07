@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Ashe_Oathkeeper_-_Big_Red_(Standard,_#795778).dck
+Deck Type=constructed
+
+[Main]
+4 Dire Fleet Daredevil
+4 Goblin Chainwhirler
+4 Legion Warboss
+4 Runaway Steam-Kin
+4 Lightning Strike
+4 Shock
+4 Lava Coil
+4 Experimental Frenzy
+4 Chandra, Fire Artisan
+2 Sarkhan the Masterless
+22 Mountain
+[Sideboard]
+2 Chandra's Pyrohelix
+4 Rekindling Phoenix
+4 Risk Factor
+1 Tibalt, Rakish Instigator
+4 Treasure Map

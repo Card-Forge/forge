@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Jinete_dV_-_Mardu_Vehicles_(Standard,_#668554).dck
+Deck Type=constructed
+
+[Main]
+2 Bomat Courier
+2 Pia Nalaar
+4 Scrapheap Scrounger
+1 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+2 Aethersphere Harvester
+4 Heart of Kiran
+1 Fatal Push
+2 Shock
+4 Unlicensed Disintegration
+3 Gideon, Ally of Zendikar
+2 Aether Hub
+4 Concealed Courtyard
+1 Foreboding Ruins
+4 Inspiring Vantage
+3 Mountain
+1 Needle Spires
+3 Plains
+1 Smoldering Marsh
+4 Spire of Industry
+[Sideboard]
+2 Chandra, Torch of Defiance
+1 Cultivator's Caravan
+2 Fatal Push
+1 Fragmentize
+1 Gideon, Ally of Zendikar
+1 Needle Spires
+1 Painful Truths
+2 Release the Gremlins
+2 Selfless Spirit
+2 Skysovereign, Consul Flagship

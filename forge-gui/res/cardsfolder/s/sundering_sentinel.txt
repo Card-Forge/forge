@@ -1,0 +1,16 @@
+Name:Sundering Sentinel
+ManaCost:2 R R W W
+Types:Artifact Creature Construct
+PT:6/7
+K:Starting intensity:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters, it deals X damage to any target and you gain X life, where X is this creature's intensity. Then it intensifies.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify
+SVar:X:Count$Intensity
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your end step, exile this creature. At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrigEffect
+SVar:DelTrigEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | TriggerDescription$ At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Haste | Duration$ Permanent | Defined$ Remembered
+Oracle:Starting intensity 2\nWhen this creature enters, it deals X damage to any target and you gain X life, where X is this creature's intensity. Then it intensifies.\nAt the beginning of your end step, exile this creature. At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.

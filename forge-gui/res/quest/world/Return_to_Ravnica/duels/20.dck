@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boris Karloff
+Title=Boris Karloff
+Icon=Boris Karloff.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Tallahassee,_Florida/Zachary_Stewart_-_B-R_Zombies_(Standard,_#40100).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Hellhole Flailer
+4 Rakdos Cackler
+4 Brimstone Volley
+2 Searing Spear
+4 Bump in the Night
+4 Pillar of Flame
+4 Blood Crypt
+4 Dragonskull Summit
+4 Rakdos Guildgate
+10 Swamp
+[Sideboard]
+3 Bonfire of the Damned
+3 Dreadbore
+1 Mountain
+2 Rakdos's Return
+2 Rakdos, Lord of Riots
+2 Slaughter Games
+2 Underworld Connections

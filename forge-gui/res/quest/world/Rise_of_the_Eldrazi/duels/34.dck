@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Magic-League_Standard_Trial_16-06-10/manachuel_-_Gr_Aggro_(Standard,_#1472).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Birds of Paradise
+4 Bloodbraid Elf
+4 Elvish Visionary
+2 Great Sable Stag
+4 Joraga Treespeaker
+4 Leatherback Baloth
+2 Noble Hierarch
+4 Vengevine
+2 Lightning Bolt
+2 Bestial Menace
+2 Chandra Nalaar
+3 Garruk Wildspeaker
+2 Sarkhan Vol
+9 Forest
+4 Kazandu Refuge
+1 Mountain
+4 Oran-Rief, the Vastwood
+4 Rootbound Crag
+[Sideboard]
+4 Acidic Slime
+4 Mold Shambler
+4 River Boa

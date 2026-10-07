@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 072115 - Stand Against the Waves
 URL:http://www.gatheringmagic.com/seanuy-072115-stand-against-the-waves/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description:Survive your Opponent's attack and win on your next turn. Opponent cast Joraga Invocation earlier.
 [state]
 ActivePlayer=AI

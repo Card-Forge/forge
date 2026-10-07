@@ -1,0 +1,35 @@
+[metadata]
+Name=Merfolk
+Deck Type=constructed
+Title=Merfolk
+Description=Merfolk
+Difficulty=Very Hard
+Icon=Data
+[Main]
+4 Botanical Sanctum
+4 Deeproot Elite
+2 Essence Scatter
+1 Forest
+3 Forest
+3 Hashep Oasis
+3 Island
+3 Island
+1 Island
+4 Jungleborn Pioneer
+4 Kumena's Speaker
+4 Kumena, Tyrant of Orazca
+4 Merfolk Mistbinder
+4 Metallic Mimic
+4 Mist-Cloaked Herald
+2 Seafloor Oracle
+4 Silvergill Adept
+4 Unclaimed Territory
+2 Unsummon
+[Sideboard]
+2 Admiral's Order
+2 Deathgorge Scavenger
+1 Essence Scatter
+1 Life Goes On
+3 Naturalize
+4 Negate
+2 Tempest Caller

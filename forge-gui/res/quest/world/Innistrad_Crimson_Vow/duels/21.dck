@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Aziza
+Title=Aziza
+Icon=Aziza.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/JimDavisMTG_-_Red_Deck_Wins_(Standard,_#1236211).dck
+Deck Type=constructed
+
+[Main]
+2 Kessig Wolfrider
+4 Cemetery Gatekeeper
+4 Voldaren Epicure
+4 Flame Channeler
+4 Falkenrath Pit Fighter
+4 Bloodthirsty Adversary
+4 Play with Fire
+4 Spikefield Hazard
+4 Reckless Impulse
+4 Roil Eruption
+4 Chandra, Dressed to Kill
+4 Den of the Bugbear
+14 Mountain
+[Sideboard]
+1 Roiling Vortex
+2 Vampires' Vengeance
+2 Moonveil Regent
+2 Roiling Vortex
+2 Relic Robber
+2 Magic Missile
+4 Burning Hands

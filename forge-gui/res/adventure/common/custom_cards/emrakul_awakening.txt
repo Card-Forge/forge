@@ -2,7 +2,7 @@ Name:Emrakul's Awakening
 ManaCost:no cost
 Types:Artifact
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ LT7 | Execute$ TrigFlip | TriggerDescription$ At the beginning of your end step, if you have fewer than seven cards in hand, flip a coin. If you win the flip, draw cards equal to the difference.
-SVar:TrigFlip:DB$ FlipACoin | Defined$ You | WinSubAbility$ TrigDraw
+SVar:TrigFlip:DB$ FlipCoin | Defined$ You | WinSubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
 SVar:X:Count$ValidHand Card.YouOwn
 SVar:Difference:Number$7/Minus.X

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/IanHoff_-_UB_Faeries_(Modern,_#798202).dck
+Deck Type=constructed
+
+[Main]
+2 Ninja of the Deep Hours
+3 Snapcaster Mage
+4 Spellstutter Sprite
+1 Vendilion Clique
+1 Cast Down
+3 Cryptic Command
+4 Fatal Push
+1 Liliana's Triumph
+4 Inquisition of Kozilek
+4 Serum Visions
+1 Thoughtseize
+3 Bitterblossom
+2 Jace, the Mind Sculptor
+2 Liliana of the Veil
+1 Liliana, the Last Hope
+3 Creeping Tar Pit
+4 Darkslick Shores
+3 Field of Ruin
+2 Flooded Strand
+3 Island
+2 Mutavault
+4 Polluted Delta
+1 Swamp
+2 Watery Grave
+[Sideboard]
+1 Vendilion Clique
+1 Thoughtseize
+2 Ceremonious Rejection
+2 Collective Brutality
+1 Countersquall
+1 Damnation
+1 Hurkyl's Recall
+2 Narset, Parter of Veils
+2 Nihil Spellbomb
+2 Thief of Sanity

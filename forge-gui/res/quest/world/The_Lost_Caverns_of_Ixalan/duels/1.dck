@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Albimtg_-_Dimir_Midrange_(Standard,_#2006471).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+3 Gix, Yawgmoth Praetor
+4 Preacher of the Schism
+3 Sheoldred, the Apocalypse
+4 Spyglass Siren
+2 Aclazotz, Deepest Betrayal
+2 Faerie Mastermind
+3 Cut Down
+2 Make Disappear
+4 Go for the Throat
+2 Duress
+2 Kaito Shizuki
+3 Swamp
+3 Mirrex
+1 Otawara, Soaring City
+3 Restless Reef
+3 Shipwreck Marsh
+4 Darkslick Shores
+1 Takenuma, Abandoned Mire
+3 Island
+4 Underground River
+[Sideboard]
+2 Disdainful Stroke
+2 Blot Out
+1 Gix's Command
+3 Path of Peril
+2 Tishana's Tidebinder
+3 Negate
+2 Liliana of the Veil

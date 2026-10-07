@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Atsumu_Kobayashi_-_WUBG_Mill_(Standard,_#2234376).dck
+Deck Type=constructed
+
+[Main]
+2 Doomsday Excruciator
+1 Sheoldred, the Apocalypse
+4 Collector's Vault
+3 Treasure Map
+4 Go for the Throat
+3 Cut Down
+3 Anoint with Affliction
+2 Sheoldred's Edict
+2 Reenact the Crime
+1 Bitter Triumph
+3 Deadly Cover-Up
+4 Demonic Counsel
+4 Jace, the Perfected Mind
+4 Swamp
+2 Cavern of Souls
+3 Underground River
+3 Darkslick Shores
+4 Restless Reef
+4 Gloomlake Verge
+4 Undercity Sewers
+[Sideboard]
+2 Negate
+3 Duress
+1 Cut Down
+2 Malicious Eclipse
+3 Into the Flood Maw
+2 Karn's Sylex
+1 Sheoldred, the Apocalypse
+1 Ghost Vacuum

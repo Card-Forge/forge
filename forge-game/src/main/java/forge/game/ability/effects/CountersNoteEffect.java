@@ -1,7 +1,8 @@
 package forge.game.ability.effects;
 
 import java.util.Map;
-import java.util.Map.Entry;
+
+import com.google.common.collect.Multiset;
 
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -24,16 +25,16 @@ public class CountersNoteEffect extends SpellAbilityEffect {
     }
 
     public static void noteCounters(Card notee, Card source) {
-        for (Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
+        for (Multiset.Entry<CounterType> counter : notee.getCounters().entrySet()) {
             StringBuilder sb = new StringBuilder();
-            sb.append(NOTE_COUNTERS).append(counter.getKey().getName());
-            source.setSVar(sb.toString(), counter.getValue().toString());
+            sb.append(NOTE_COUNTERS).append(counter.getElement().getName());
+            source.setSVar(sb.toString(), String.valueOf(counter.getCount()));
         }
     }
 
     public static void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa, Map<AbilityKey, Object> moveParams) {
         GameEntityCounterTable table = new GameEntityCounterTable();
-        for (Entry<String, String> svar : source.getSVars().entrySet()) {
+        for (Map.Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
                 CounterType cType = CounterType.getType(key.substring(NOTE_COUNTERS.length()));

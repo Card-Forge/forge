@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Olle_Andersson_-_Azorius_mentor_(Standard,_#1964846).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+3 Ledger Shredder
+4 Monastery Mentor
+4 Picklock Prankster
+4 Consider
+2 Get Lost
+3 March of Swirling Mist
+3 Otherworldly Gaze
+2 Spell Pierce
+2 Chart a Course
+4 Helping Hand
+2 Recommission
+4 Sleight of Hand
+4 Adarkar Wastes
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+4 Island
+1 Otawara, Soaring City
+1 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Destroy Evil
+2 Disdainful Stroke
+3 Knockout Blow
+3 Sunset Revelry
+3 Temporary Lockdown
+2 Unlicensed Hearse

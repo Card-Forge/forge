@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/L1X0_-_Mono-Red_Aggro_(Standard,_#2829562).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Hexing Squelcher
+4 Hired Claw
+4 Howlsquad Heavy
+1 Kellan, Planar Trailblazer
+4 Nova Hellkite
+2 Sunspine Lynx
+3 Zhao, the Moon Slayer
+2 Lightning Strike
+2 Sear
+3 Shock
+4 Burst Lightning
+3 Soulstone Sanctuary
+20 Mountain
+[Sideboard]
+2 Sunspine Lynx
+4 Magebane Lizard
+2 Sear
+1 Shock
+2 The Legend of Roku
+2 Twisted Fealty
+2 Ghost Vacuum

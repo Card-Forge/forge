@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Standard_Open_Orlando/Samuel_Williams_-_Experiment_Jund_(Standard,_#48639).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Deathrite Shaman
+4 Dreg Mangler
+3 Experiment One
+1 Falkenrath Aristocrat
+3 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Hellrider
+4 Strangleroot Geist
+1 Thundermaw Hellkite
+2 Abrupt Decay
+3 Searing Spear
+1 Tragic Slip
+2 Appetite for Brains
+4 Blood Crypt
+2 Dragonskull Summit
+3 Forest
+1 Mountain
+4 Overgrown Tomb
+4 Rootbound Crag
+4 Stomping Ground
+2 Woodland Cemetery
+[Sideboard]
+1 Dreadbore
+1 Golgari Charm
+1 Ground Seal
+2 Liliana of the Veil
+2 Rakdos's Return
+1 Skullcrack
+2 Stromkirk Noble
+1 Vampire Nighthawk
+2 Volcanic Strength

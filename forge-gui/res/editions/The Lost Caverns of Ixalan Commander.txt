@@ -187,7 +187,7 @@ ScryfallCode=LCC
 179 R Warkite Marauder @Victor Adame Minguez
 180 U Windfall @Scott Murphy
 181 R Black Market Connections @Lixin Yin
-182 U Blood Artist @LA Draws
+182 U Blood Artist @L.A. Draws
 183 M Blood Money @Inka Schulz
 184 R Bloodghast @Lixin Yin
 185 U Bloodline Necromancer @J.P. Targete
@@ -208,7 +208,7 @@ ScryfallCode=LCC
 200 U Indulgent Aristocrat @Anna Steinbauer
 201 R Lethal Scheme @Tuan Duong Chu
 202 R New Blood @Howard Lyon
-203 R Nighthawk Scavenger @Heonhwa Choe
+203 R Nighthawk Scavenger @Heonhwa
 204 U Oathsworn Vampire @Greg Opalinski
 205 R Olivia's Wrath @Néstor Ossandón Leal
 206 R Pact of the Serpent @Donato Giancola

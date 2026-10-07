@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Hayashi_Shingo_-_Death's_Shadow_(Modern,_#1964371).dck
+Deck Type=constructed
+
+[Main]
+4 Death's Shadow
+1 Brazen Borrower
+3 Murktide Regent
+4 Dauthi Voidwalker
+4 Orcish Bowmasters
+4 Fatal Push
+4 Counterspell
+1 Dismember
+3 Drown in the Loch
+4 Consider
+1 Bitter Triumph
+4 Thoughtseize
+3 Preordain
+2 Island
+2 Swamp
+4 Watery Grave
+4 Polluted Delta
+1 Urborg, Tomb of Yawgmoth
+2 Misty Rainforest
+3 Scalding Tarn
+1 Castle Locthwain
+1 Otawara, Soaring City
+[Sideboard]
+1 Cursed Totem
+2 Engineered Explosives
+2 Chalice of the Void
+1 Nihil Spellbomb
+2 Flusterstorm
+2 Dress Down
+2 Unlicensed Hearse
+1 Sheoldred's Edict
+2 Stern Scolding

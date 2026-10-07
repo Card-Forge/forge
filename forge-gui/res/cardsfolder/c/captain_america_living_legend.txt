@@ -1,0 +1,8 @@
+Name:Captain America, Living Legend
+ManaCost:1 W U
+Types:Legendary Creature Human Soldier Hero
+PT:3/4
+K:Vigilance
+T:Mode$ Taps | ValidCard$ Creature.YouCtrl | FirstTime$ True | PlayerTurn$ True | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control becomes tapped during your turn, if it's the first time that creature has become tapped this turn, untap it.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCardLKICopy
+Oracle:Vigilance\nWhenever a creature you control becomes tapped during your turn, if it's the first time that creature has become tapped this turn, untap it.

@@ -30,7 +30,7 @@ Oracle:Haste
 Let's break our card down:
  - Name - The name as it appears on the card.
  - ManaCost - The card's cost with colorless mana first and spaces between different mana symbols.  
- - Types - The card's type and then any subtypes seperated by spaces. 
+ - Types - The card's type and then any subtypes separated by spaces. 
  - PT - Power and Toughness, which is only used for Creatures (or some cards that turn into creatures like Vehicles)
  - K - A Keyword that gives our creature an ability. 
  - Oracle - The actual text that appears on that card. 

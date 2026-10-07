@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Gold
+Title=Dungeon Crawling Gold
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Constructed_League/Clackerr27_-_Burn_(Modern,_#609985).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Bloodstained Mire
+5 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Atarka's Command
+2 Deflecting Palm
+3 Destructive Revelry
+2 Lightning Helix
+4 Path to Exile
+1 Shattering Spree
+1 Smash to Smithereens

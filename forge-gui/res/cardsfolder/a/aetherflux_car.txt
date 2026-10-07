@@ -1,0 +1,11 @@
+Name:Aetherflux Car
+ManaCost:2
+Types:Artifact Vehicle
+PT:3/2
+K:Flying
+K:Crew:1
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCharge | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, put charge counters equal to four times that spell's mana value on this Vehicle.
+SVar:TrigCharge:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ X
+SVar:X:TriggeredCard$CardManaCost/Times.4
+A:AB$ AddTurn | Cost$ SubCounter<121/CHARGE> | Defined$ You | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+Oracle:Flying\nWhenever you cast a spell, put charge counters equal to four times that spell's mana value on this Vehicle.\nRemove 121 charge counters from this Vehicle: Take an extra turn after this one.\nCrew 1

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Harrison_Fang_-_Orzhov_Hammer_(Modern,_#1224897)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Ornithopter
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Puresteel Paladin
+4 Memnite
+1 Nihil Spellbomb
+1 Shadowspear
+1 Cranial Plating
+1 Mortarpod
+4 Colossus Hammer
+4 Springleaf Drum
+2 Steelshaper's Gift
+4 Urza's Saga
+4 Sigarda's Aid
+1 Flooded Strand
+1 Marsh Flats
+1 Godless Shrine
+3 Inkmoth Nexus
+4 Silent Clearing
+4 Concealed Courtyard
+4 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Hushbringer
+1 Pithing Needle
+1 Rest in Peace
+1 Cathar Commando
+2 Sanctifier en-Vec
+2 Knight of Malice
+2 Prismatic Ending
+4 Thoughtseize

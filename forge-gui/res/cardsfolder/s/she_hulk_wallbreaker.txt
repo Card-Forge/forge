@@ -1,0 +1,11 @@
+Name:She-Hulk, Wallbreaker
+ManaCost:5 R
+Types:Legendary Creature Gamma Hero
+PT:5/5
+K:Trample
+S:Mode$ Continuous | Affected$ Hero.Other+YouCtrl | AddKeyword$ Trample | Description$ Other Heroes you control have trample.
+T:Mode$ AttackerBlocked | ValidCard$ Hero.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Hero you control becomes blocked, put a +1/+1 counter on that Hero for each creature blocking it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$Valid Creature.blockingTriggeredAttacker
+SVar:PlayMain1:TRUE
+Oracle:Trample\nOther Heroes you control have trample.\nWhenever a Hero you control becomes blocked, put a +1/+1 counter on that Hero for each creature blocking it.

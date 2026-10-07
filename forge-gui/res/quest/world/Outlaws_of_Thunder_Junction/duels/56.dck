@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=IdiAmin
+Title=IdiAmin
+Icon=IdiAmin.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/EnderW_-_Mono_Red_Midrange_(Modern,_#2067738).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+3 Inti, Seneschal of the Sun
+4 Ragavan, Nimble Pilferer
+2 Magda, the Hoardmaster
+2 Seasoned Pyromancer
+4 Mishra's Bauble
+3 Mox Amber
+4 Lightning Bolt
+4 Skred
+4 Blood Moon
+3 Chandra, Dressed to Kill
+2 Chandra, Torch of Defiance
+3 Scrying Sheets
+18 Snow-Covered Mountain
+[Sideboard]
+2 Anger of the Gods
+3 Relic of Progenitus
+4 Pillage
+3 Cast into the Fire
+2 Storm's Wrath

@@ -1,0 +1,9 @@
+Name:Repurposed Enforcer
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEmpower | TriggerDescription$ Whenever this creature attacks, empower Jace X, where X is the number of creatures you control. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:TrigEmpower:DB$ Empower | Type$ Jace | Num$ X
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, empower Jace X, where X is the number of creatures you control. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

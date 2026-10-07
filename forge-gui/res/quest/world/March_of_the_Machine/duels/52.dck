@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Green Hornet
+Title=Green Hornet
+Icon=Green Hornet.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Lars_Henrichvark_-_Hammer_Time_(Modern,_#1629966)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Giver of Runes
+4 Esper Sentinel
+4 Stoneforge Mystic
+4 Puresteel Paladin
+4 Ornithopter
+3 Springleaf Drum
+1 Shadowspear
+4 Colossus Hammer
+1 Kaldra Compleat
+1 Nettlecyst
+2 Surge of Salvation
+3 Spell Pierce
+4 Sigarda's Aid
+4 Urza's Saga
+1 Hallowed Fountain
+3 Seachrome Coast
+1 Windswept Heath
+1 Flooded Strand
+2 Arid Mesa
+3 Inkmoth Nexus
+4 Plains
+2 Marsh Flats
+1 Horizon Canopy
+[Sideboard]
+2 Surge of Salvation
+1 Spell Pierce
+2 Lavinia, Azorius Renegade
+1 Pithing Needle
+3 March of Otherworldly Light
+1 Path to Exile
+3 Sanctifier en-Vec
+1 Relic of Progenitus
+1 Drannith Magistrate

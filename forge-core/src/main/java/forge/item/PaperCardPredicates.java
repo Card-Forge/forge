@@ -67,7 +67,7 @@ public abstract class PaperCardPredicates {
     public static Predicate<PaperCard> printedInAnyEditions(final String[] editionCodes) {
         Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
 
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCards(card).stream()
             .map(PaperCard::getEdition).anyMatch(editionCode ->
                 editions.contains(editionCode) &&
                     StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
@@ -80,7 +80,7 @@ public abstract class PaperCardPredicates {
     public static Predicate<PaperCard> onlyPrintedInEditions(final String[] editionCodes) {
         Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
 
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCards(card).stream()
             .map(PaperCard::getEdition).allMatch(editionCode ->
                 editions.contains(editionCode) &&
                     StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
@@ -91,7 +91,7 @@ public abstract class PaperCardPredicates {
      * Filters cards that are obtainable in any edition.
      */
     public static Predicate<PaperCard> isObtainableAnyEdition() {
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCards(card).stream()
             .map(PaperCard::getEdition).anyMatch(editionCode ->
                 StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
             );
@@ -107,7 +107,7 @@ public abstract class PaperCardPredicates {
         Set<String> restrictedEditions = new HashSet<>(Arrays.asList(restrictedEditionCodes));
 
         return card -> StaticData.instance().getCommonCards()
-            .getAllCards(card.getName()).stream()
+            .getAllCards(card).stream()
             .map(PaperCard::getEdition)
             .anyMatch(editionCode ->
                 !restrictedEditions.contains(editionCode) &&
@@ -281,7 +281,7 @@ public abstract class PaperCardPredicates {
     /** Matches any card except Plains, Island, Swamp, Mountain, Forest, or Wastes. */
     public static final Predicate<PaperCard> NOT_BASIC_LAND = fromRules(CardRulesPredicates.NOT_BASIC_LAND);
     /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
-    public static final Predicate<PaperCard> NOT_TRUE_BASIC_LAND = fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND);
+    public static final Predicate<PaperCard> NOT_TRUE_BASIC_LAND = fromRules(Predicate.not(CardRulesPredicates.IS_TRUE_BASIC_LAND));
     public static final Predicate<PaperCard> IS_NONBASIC_LAND = fromRules(CardRulesPredicates.IS_NONBASIC_LAND);
     public static final Predicate<PaperCard> IS_CREATURE = fromRules(CardRulesPredicates.IS_CREATURE);
     public static final Predicate<PaperCard> CAN_BE_COMMANDER = fromRules(CardRulesPredicates.CAN_BE_COMMANDER);

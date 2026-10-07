@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Alex_Barrera_-_Glimpse_Elementals_(Modern,_#1415716).dck
+Deck Type=constructed
+
+[Main]
+4 Omnath, Locus of Creation
+4 Risen Reef
+4 Endurance
+4 Fury
+4 Fable of the Mirror-Breaker
+4 Wavesifter
+4 Shardless Agent
+4 Violent Outburst
+3 Glimpse of Tomorrow
+1 Stomping Ground
+1 Steam Vents
+1 Breeding Pool
+1 Island
+1 Forest
+1 Mountain
+1 Raugrin Triome
+3 Wooded Foothills
+3 Scalding Tarn
+4 Cavern of Souls
+4 Khalni Garden
+4 Misty Rainforest
+[Sideboard]
+1 Bonecrusher Giant
+2 Dead // Gone
+2 Subtlety
+3 Teferi, Time Raveler
+3 Mystical Dispute
+4 Foundation Breaker

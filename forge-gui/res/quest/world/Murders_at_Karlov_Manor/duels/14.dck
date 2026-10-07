@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon
+Title=Apu Nahasapeemapetilon
+Icon=Apu Nahasapeemapetilon.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Arash_Afghahi_-_Azorius_Control_(Standard,_#1981172).dck
+Deck Type=constructed
+
+[Main]
+4 Deduce
+3 Get Lost
+2 Make Disappear
+3 March of Otherworldly Light
+4 Memory Deluge
+4 No More Lies
+1 Depopulate
+1 Farewell
+3 Sunfall
+3 Temporary Lockdown
+2 Jace, the Perfected Mind
+3 The Wandering Emperor
+2 Adarkar Wastes
+2 Deserted Beach
+1 Eiganjo, Seat of the Empire
+4 Field of Ruin
+5 Island
+1 Meticulous Archive
+3 Mirrex
+1 Otawara, Soaring City
+4 Plains
+4 Restless Anchorage
+[Sideboard]
+3 Chrome Host Seedshark
+1 Cryptic Coat
+2 Dennick, Pious Apprentice
+1 Destroy Evil
+1 Elspeth's Smite
+2 Knockout Blow
+3 Negate
+2 Tishana's Tidebinder

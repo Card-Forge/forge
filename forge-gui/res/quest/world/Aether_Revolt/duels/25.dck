@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Radioactive Man
+Title=Radioactive Man
+Icon=Radioactive Man.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Mishina_Ryouta_-_Aetherworks_Marvel_(Standard,_#665801).dck
+Deck Type=constructed
+
+[Main]
+4 Ishkanah, Grafwidow
+4 Ulamog, the Ceaseless Hunger
+4 Aetherworks Marvel
+4 Woodweaver's Puzzleknot
+3 Fatal Push
+4 Harnessed Lightning
+4 Attune with Aether
+3 Live Fast
+4 Vessel of Nascency
+3 Chandra, Torch of Defiance
+4 Aether Hub
+3 Blooming Marsh
+2 Cinder Glade
+4 Evolving Wilds
+4 Forest
+2 Mountain
+2 Smoldering Marsh
+2 Swamp
+[Sideboard]
+4 Hope of Ghirapur
+3 Kozilek's Return
+2 Lost Legacy
+2 To the Slaughter
+4 Transgress the Mind

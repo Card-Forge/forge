@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/NickBolas90_-_Dimir_Midrange_(Standard,_#1989778).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+3 Faerie Mastermind
+4 Preacher of the Schism
+2 Sheoldred, the Apocalypse
+3 Gix, Yawgmoth Praetor
+4 Spyglass Siren
+1 Malcolm, Alluring Scoundrel
+3 Cut Down
+4 Go for the Throat
+4 Make Disappear
+1 Gix's Command
+3 Island
+3 Restless Reef
+4 Darkslick Shores
+2 Mirrex
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Underground River
+3 Shipwreck Marsh
+3 Swamp
+1 Cavern of Souls
+[Sideboard]
+1 Cut Down
+2 Soulless Jailer
+2 Tishana's Tidebinder
+2 Negate
+2 Glistening Deluge
+1 Unlicensed Hearse
+1 Liliana of the Veil
+1 Extract the Truth
+2 Duress
+1 Kaito Shizuki

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Zeus
+Title=Zeus
+Icon=Zeus.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Super_IQ_-_Knoxville,_TN/Rob_Chapman_-_Orzhov_Midrange_(Standard,_#71794).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Baron of Vizkopa
+4 Desecration Demon
+2 Lifebane Zombie
+4 Pack Rat
+1 Whip of Erebos
+3 Bile Blight
+3 Devour Flesh
+4 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+3 Underworld Connections
+2 Elspeth, Sun's Champion
+4 Godless Shrine
+4 Mutavault
+3 Orzhov Guildgate
+1 Plains
+9 Swamp
+4 Temple of Silence
+[Sideboard]
+1 Dark Betrayal
+3 Doom Blade
+1 Duress
+1 Erebos, God of the Dead
+2 Obzedat, Ghost Council
+1 Pithing Needle
+1 Revoke Existence
+2 Sin Collector

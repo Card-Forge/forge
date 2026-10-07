@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boromir
+Title=Boromir
+Icon=Boromir.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-__Baguio_City_-_Philippines/Brian_Galliste_-_Cruel_Control_(Standard,_#1519).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gatekeeper of Malakir
+4 Sedraxis Specter
+2 Siege-Gang Commander
+1 Consume the Meek
+2 Countersquall
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+3 Cruel Ultimatum
+2 Mind Spring
+4 Spreading Seas
+1 Jace Beleren
+2 Jace, the Mind Sculptor
+4 Creeping Tar Pit
+4 Crumbling Necropolis
+1 Dragonskull Summit
+2 Drowned Catacomb
+3 Island
+4 Lavaclaw Reaches
+2 Mountain
+4 Scalding Tarn
+2 Swamp
+[Sideboard]
+1 Chain Reaction
+2 Consuming Vapors
+4 Goblin Ruinblaster
+2 Into the Roil
+2 Ulamog, the Infinite Gyre

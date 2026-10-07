@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 092915 - Push It
 URL:http://www.gatheringmagic.com/seanuy-092915-push-it/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

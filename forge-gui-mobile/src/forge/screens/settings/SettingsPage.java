@@ -12,11 +12,12 @@ import forge.assets.*;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 import forge.gui.GuiBase;
+import forge.gui.download.CdnUuidCache;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.properties.PreferencesStore;
+import forge.localinstance.properties.IPreferences;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
@@ -31,11 +32,14 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextField;
+import forge.util.Lang;
 import forge.util.Utils;
 
 import java.util.*;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
+    private final FTextField txtSearch = add(new FTextField());
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
     private final CustomSelectSetting settingSkins;
     private final CustomSelectSetting settingCJKFonts;
@@ -44,6 +48,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         super(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS);
 
         lstSettings.setListItemRenderer(new SettingRenderer());
+        txtSearch.setFont(FSkinFont.get(12));
+        txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
+        txtSearch.setLiveChangeEvents(true); //filter as characters are typed
+        txtSearch.setChangedHandler(e -> applySearch());
 
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGeneralSettings"));
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGameplayOptions"));
@@ -63,16 +71,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 // if the new locale needs to use CJK font, disallow change if UI_CJK_FONT is not set yet
                 ForgePreferences prefs = FModel.getPreferences();
-                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty() && (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
-                    String message = "Please download CJK font (from \"Files\"), and set it before change language.";
-                    if (newValue.equals("zh-CN")) {
-                        message += "\nChinese please use \"SourceHanSansCN\".";
+                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty()) {
+                    Lang lang = Lang.initInstance(newValue);
+                    if (lang.getFontFile() != null) {
+                        String message = "Please download CJK font (from \"Files\"), and set it before change language.";
+                        message += "\nPlease use \"" + lang.getFontFile() + "\".";
+                        FOptionPane.showMessageDialog(message, "Please set CJK Font");
+                        return;
                     }
-                    if (newValue.equals("ja-JP")) {
-                        message += "\nJapanese please use \"SourceHanSansJP\".";
-                    }
-                    FOptionPane.showMessageDialog(message, "Please set CJK Font");
-                    return;
                 }
 
                 FLanguage.changeLanguage(newValue);
@@ -101,8 +107,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     ForgePreferences prefs = FModel.getPreferences();
                     if (newValue.equals("None")) {
                         // If locale needs to use CJK fonts, disallow change to None
-                        String locale = prefs.getPref(FPref.UI_LANGUAGE);
-                        if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
+                        if (Lang.initInstance(prefs.getPref(FPref.UI_LANGUAGE)).getFontFile() != null) {
                             return;
                         }
                         newValue = "";
@@ -193,13 +198,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_MATCH_RARITY,
             Forge.getLocalizer().getMessage("cbAnteMatchRarity"),
             Forge.getLocalizer().getMessage("nlAnteMatchRarity")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_INCLUDE_BASIC_LANDS,
+            Forge.getLocalizer().getMessage("cbAnteIncludeBasicLands"),
+            Forge.getLocalizer().getMessage("nlAnteIncludeBasicLands")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
             Forge.getLocalizer().getMessage("lblHotSeatMode"),
             Forge.getLocalizer().getMessage("nlHotSeatMode")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
             Forge.getLocalizer().getMessage("cbEnableAICheats"),
             Forge.getLocalizer().getMessage("nlEnableAICheats")), 1);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_MANABURN,
+        lstSettings.addItem(new BooleanSetting(FPref.LEGACY_MANABURN,
             Forge.getLocalizer().getMessage("cbManaBurn"),
             Forge.getLocalizer().getMessage("nlManaBurn")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.LEGACY_ORDER_COMBATANTS,
@@ -248,9 +256,19 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
             Forge.getLocalizer().getMessage("cbShowStormCount"),
             Forge.getLocalizer().getMessage("nlShowStormCount")), 1);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER,
-            Forge.getLocalizer().getMessage("cbPreselectPrevAbOrder"),
-            Forge.getLocalizer().getMessage("nlPreselectPrevAbOrder")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
+            Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
+            Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_AUTOTAP_PREVIEW,
+            Forge.getLocalizer().getMessage("cbShowAutoTapPreview"),
+            Forge.getLocalizer().getMessage("nlShowAutoTapPreview")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_LINKED_EXILE_CARDS,
+            Forge.getLocalizer().getMessage("cbShowLinkedExileCards"),
+            Forge.getLocalizer().getMessage("nlShowLinkedExileCards")), 1);
+        lstSettings.addItem(new HexColorSetting(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR,
+            Forge.getLocalizer().getMessage("lblActionableHighlightColor"),
+            Forge.getLocalizer().getMessage("nlActionableHighlightColor"),
+            "66CCFF"), 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
             Forge.getLocalizer().getMessage("lblOrderGraveyard"),
             Forge.getLocalizer().getMessage("nlOrderGraveyard"),
@@ -258,10 +276,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS
             }), 1);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
-            Forge.getLocalizer().getMessage("lblAutoYields"),
-            Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
-            new String[] { ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD }), 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
+            Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
+            Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
+            new String[] {
+                ForgeConstants.AUTO_DECISION_PER_CARD,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL,
+            }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
             Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
             Forge.getLocalizer().getMessage("nlEscapeEndsTurn")), 1);
@@ -300,6 +323,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
                 }
             }, 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_PLAY_ANIMATION_STYLE,
+            Forge.getLocalizer().getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCardPlayOption", "How cards animate when entering the battlefield."),
+            new String[] { "Rotate", "Slide", "Popup", "Off" }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COIN_FLIP_ANIMATION,
+            Forge.getLocalizer().getMessageorUseDefault("lblCoinFlipAnimation", "Coin Flip Animation"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCoinFlipAnimation", "Show a coin flip animation at the start of a match.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
             Forge.getLocalizer().getMessage("cbStackCreatures"),
             Forge.getLocalizer().getMessage("nlStackCreatures")), 1);
@@ -379,9 +409,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     g.drawText(display, font, color, x, y, w, h, false, Align.right, false);
                 }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
+        /*lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
             Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
-            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);
+            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);*/ //
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
             Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
             Forge.getLocalizer().getMessage("nlLoadArchivedFormats")), 3);
@@ -442,15 +472,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     );
                }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-            Forge.getLocalizer().getMessage("lblExperimentalNetworkCompatibility"),
-            Forge.getLocalizer().getMessage("nlExperimentalNetworkCompatibility")) {
-                @Override
-                public void select() {
-                    super.select();
-                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
-                }
-            }, 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DISPOSE_TEXTURES,
             Forge.getLocalizer().getMessage("lblDisposeTextures"),
             Forge.getLocalizer().getMessage("nlDisposeTextures")) {
@@ -494,6 +515,25 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
             Forge.getLocalizer().getMessage("cbImageFetcher"),
             Forge.getLocalizer().getMessage("nlImageFetcher")), 4);
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_DOWNLOAD_LANG, "Card art language",
+                "Preferred language for downloaded card images",
+                cardLangMapping.values()) {
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                applyPreferredLanguageAvailability();
+            }
+        }, 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS,
+                "Prefer language for unique cards",
+                "When enabled, prioritizes cards available in the selected language for unique art") {
+            @Override
+            public void select() {
+                super.select();
+                applyPreferredLanguageAvailability();
+            }
+        }, 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
             Forge.getLocalizer().getMessage("lblPreferredArt"),
             Forge.getLocalizer().getMessage("nlPreferredArt"),
@@ -636,17 +676,37 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
             Forge.getLocalizer().getMessage("lblShowAbilityIconsOverlays"),
             Forge.getLocalizer().getMessage("nlShowAbilityIconsOverlays")), 5);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-            Forge.getLocalizer().getMessage("lblUseLaserArrows"),
-            Forge.getLocalizer().getMessage("nlUseLaserArrows")), 5);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ARROW_OPTION,
+            Forge.getLocalizer().getMessage("lblLaserArrowsOption"),
+            Forge.getLocalizer().getMessage("nlLaserArrowsOption"),
+            new String[] { "Default", "Point", "Line" }), 5);
 
         // VIBRATION OPTIONS TAB
-        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-            Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
-            Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
+        Map<String, String> intensityOptions = new LinkedHashMap<>();
+        intensityOptions.put("Off (0%)", "0");
+        intensityOptions.put("Low (25%)", "25");
+        intensityOptions.put("Medium (50%)", "50");
+        intensityOptions.put("High (75%)", "75");
+        intensityOptions.put("Full (100%)", "100");
+        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_INTENSITY,
+            Forge.getLocalizer().getMessage("lblVibrationIntensity"),
+            Forge.getLocalizer().getMessage("nlVibrationIntensity"),
+            intensityOptions), 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
             Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"),
             Forge.getLocalizer().getMessage("nlVibrateAfterLongPress")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
+            Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
+            Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER,
+            Forge.getLocalizer().getMessage("lblVibrateOnEnemyEncounter"),
+            Forge.getLocalizer().getMessage("nlVibrateOnEnemyEncounter")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD,
+            Forge.getLocalizer().getMessage("lblVibrateOnAdventureReward"),
+            Forge.getLocalizer().getMessage("nlVibrateOnAdventureReward")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_SHOP_ACTION,
+            Forge.getLocalizer().getMessage("lblVibrateOnShopAction"),
+            Forge.getLocalizer().getMessage("nlVibrateOnShopAction")), 6);
 
         // SOUND OPTIONS TAB
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
@@ -685,6 +745,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     SoundSystem.instance.changeBackgroundTrack();
                 }
             }, 7);
+        if (!GuiBase.isAndroid() && !GuiBase.isIOS()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_PAUSE_MUSIC_ON_FOCUS_LOSS,
+                Forge.getLocalizer().getMessage("cbPauseMusicOnFocusLoss"),
+                Forge.getLocalizer().getMessage("nlPauseMusicOnFocusLoss")), 7);
+        }
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
             "Use Alternate Sound System",
             "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), 7);*/
@@ -697,6 +762,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("lblUPnPTitle"),
             Forge.getLocalizer().getMessage("nlServerUPnPOptions"),
             ForgeConstants.getUPnPPreferenceMapping()), 8);
+        lstSettings.addItem(new IntegerSelectSetting(
+            ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT,
+            Forge.getLocalizer().getMessage("lblAfkTimeout"),
+            Forge.getLocalizer().getMessage("nlAfkTimeout"), 0, 60), 8);
     }
 
     public void refreshSkinsList() {
@@ -707,17 +776,40 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         settingCJKFonts.updateOptions(FSkinFont.getAllCJKFonts());
     }
 
+    private void applyPreferredLanguageAvailability() {
+        String langCode = FModel.getPreferences().getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        boolean preferForUnique = FModel.getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS);
+        if (!preferForUnique || langCode == null || langCode.isEmpty() || "en".equalsIgnoreCase(langCode)) {
+            FModel.getMagicDb().setPreferredLanguageAvailability(null);
+        } else {
+            FModel.getMagicDb().setPreferredLanguageAvailability((setCode, cn) -> CdnUuidCache.isAvailableInLanguage(setCode, cn, langCode));
+        }
+    }
+
+    private void applySearch() {
+        final String query = txtSearch.getText().toLowerCase().trim();
+        if (query.isEmpty()) {
+            lstSettings.setItemFilter(null);
+            return;
+        }
+        lstSettings.setItemFilter(setting ->
+            (setting.label != null && setting.label.toLowerCase().contains(query))
+            || (setting.description != null && setting.description.toLowerCase().contains(query)));
+    }
+
     @Override
     protected void doLayout(float width, float height) {
-        lstSettings.setBounds(0, 0, width, height);
+        float searchHeight = FTextField.getDefaultHeight(txtSearch.getFont());
+        txtSearch.setBounds(0, 0, width, searchHeight);
+        lstSettings.setBounds(0, searchHeight, width, height - searchHeight);
     }
 
     private abstract class Setting {
         protected String label;
         protected String description;
-        protected PreferencesStore.IPref pref;
+        protected IPreferences.IPref pref;
 
-        public Setting(PreferencesStore.IPref pref0, String label0, String description0) {
+        public Setting(IPreferences.IPref pref0, String label0, String description0) {
             label = label0;
             description = description0;
             pref = pref0;
@@ -761,7 +853,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private class CustomSelectSetting extends Setting {
         private final List<String> options = new ArrayList<>();
 
-        public CustomSelectSetting(PreferencesStore.IPref pref0, String label0, String description0, String[] options0) {
+        public CustomSelectSetting(IPreferences.IPref pref0, String label0, String description0, String[] options0) {
             super(pref0, label0 + ":", description0);
 
             options.addAll(Arrays.asList(options0));
@@ -885,7 +977,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         private final Map<String, String> localizedToBackingMap;
         private final Map<String, String> backingToLocalizedMap = new HashMap<>();
 
-        public LocalizedSelectSetting(PreferencesStore.IPref pref0,
+        public LocalizedSelectSetting(IPreferences.IPref pref0,
                                       String label0,
                                       String description0,
                                       Map<String, String> localizationMap) {
@@ -935,7 +1027,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         private final int minValue;
         private final int maxValue;
 
-        public IntegerSelectSetting(PreferencesStore.IPref pref0, String label0, String description0, int minValue, int maxValue) {
+        public IntegerSelectSetting(IPreferences.IPref pref0, String label0, String description0, int minValue, int maxValue) {
             super(pref0, label0 + ":", description0);
             this.minValue = minValue;
             this.maxValue = maxValue;
@@ -997,6 +1089,52 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 value = "";
             }
             g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+        }
+    }
+
+    /** Text input that accepts a 6-char RGB hex and persists the uppercase form. */
+    private class HexColorSetting extends Setting {
+        private final String defaultValue;
+
+        public HexColorSetting(FPref pref0, String label0, String description0, String defaultValue0) {
+            super(pref0, label0 + ":", description0);
+            this.defaultValue = defaultValue0;
+        }
+
+        @Override
+        public void select() {
+            String currentValue = FModel.getPreferences().getPref((FPref) pref);
+            if (currentValue == null || currentValue.isEmpty()) currentValue = defaultValue;
+            FOptionPane.showInputDialog(
+                    label,
+                    description,
+                    currentValue,
+                    null,
+                    input -> {
+                        if (input == null) return;
+                        String normalized = normalizeHexColor(input);
+                        if (normalized == null) {
+                            FOptionPane.showMessageDialog("Please enter a 6-digit RGB hex (e.g. 66CCFF).", "Invalid Color");
+                            return;
+                        }
+                        FModel.getPreferences().setPref((FPref) pref, normalized);
+                        FModel.getPreferences().save();
+                    },
+                    false
+            );
+        }
+
+        @Override
+        public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+            String value = FModel.getPreferences().getPref((FPref) pref);
+            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+        }
+
+        private String normalizeHexColor(String raw) {
+            if (raw == null) return null;
+            String s = raw.trim();
+            if (s.length() != 6 || !s.matches("[0-9A-Fa-f]{6}")) return null;
+            return s.toUpperCase();
         }
     }
 

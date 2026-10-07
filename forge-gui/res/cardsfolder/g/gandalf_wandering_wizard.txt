@@ -1,0 +1,8 @@
+Name:Gandalf, Wandering Wizard
+ManaCost:4 U
+Types:Legendary Creature Avatar Wizard
+PT:4/5
+K:Ward:3
+A:AB$ ChangeZone | Cost$ 6 | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self | SubAbility$ DBDraw | SpellDescription$ NICKNAME's owner shuffles him into their library and draws three cards.
+SVar:DBDraw:DB$ Draw | Defined$ CardOwner | NumCards$ 3
+Oracle:Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)\n{6}: Gandalf's owner shuffles him into their library and draws three cards.

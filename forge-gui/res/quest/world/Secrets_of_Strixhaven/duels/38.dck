@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Lazav
+Title=Lazav
+Icon=Lazav.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Jacob_DuBois_-_Mardu_Discard_(Standard,_#2940292).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodghast
+4 Hardened Academic
+4 Iron-Shield Elf
+4 Marauding Mako
+4 Moonshadow
+3 Tersa Lightshatter
+2 Cecil, Dark Knight
+1 Carnage, Crimson Chaos
+1 Inti, Seneschal of the Sun
+1 Erode
+1 Requiting Hex
+4 Practiced Offense
+4 Cool but Rude
+1 Seam Rip
+4 Blood Crypt
+4 Concealed Courtyard
+4 Godless Shrine
+4 Starting Town
+3 Sacred Foundry
+1 Blazemire Verge
+1 Mountain
+1 Swamp
+[Sideboard]
+3 Case of the Crimson Pulse
+3 Voice of Victory
+2 Duress
+2 Erode
+2 Seam Rip
+1 Ghost Vacuum
+1 Soul-Guide Lantern
+1 Strategic Betrayal
