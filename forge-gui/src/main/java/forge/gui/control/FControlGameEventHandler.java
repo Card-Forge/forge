@@ -259,6 +259,35 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
+    private static final ZoneType[] ZONES_REDRAWN_ON_UNDO = {
+            ZoneType.Battlefield, ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard,
+            ZoneType.Exile, ZoneType.Command, ZoneType.Ante };
+
+    @Override
+    public Void visit(final GameEventSnapshotRestored event) {
+        if (event.start()) {
+            return null;
+        }
+        // Anything may differ after going back, so redraw all of it
+        for (final PlayerView p : event.players()) {
+            for (final ZoneType z : ZONES_REDRAWN_ON_UNDO) {
+                updateZone(p, z);
+            }
+            processPlayer(p, livesUpdate);
+            processPlayer(p, shardsUpdate);
+            processPlayer(p, manaPoolUpdate);
+        }
+        processCards(event.cards(), cardsRefreshDetails);
+        processCards(event.cards(), cardsUpdate);
+        turnUpdate = matchController.getGameView().getPlayerTurn();
+        needPhaseUpdate = true;
+        needCombatUpdate = true;
+        needStackUpdate = true;
+        needPlayerControlUpdate = true;
+        refreshFieldUpdate = true;
+        return processEvent();
+    }
+
     @Override
     public Void visit(final GameEventPlayerControl ev) {
         if (ev.newLobbyPlayerName() == null) {

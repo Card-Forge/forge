@@ -37,6 +37,10 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
+    public void undoLastDecision() {
+    }
+
+    @Override
     public void selectButtonOk() {
         if (inputQueue == null) {
             return;

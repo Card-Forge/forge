@@ -1616,6 +1616,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public void onGameUndone() {
+        // What it remembered this turn may be about cards and plans the undo took back
+        getAi().getCardMemory().clearAllRemembered();
+    }
+
+    @Override
     public void awaitNextInput() {
         // Do nothing
     }

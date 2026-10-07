@@ -154,6 +154,17 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     /**
+     * Mark properties changed after they were rewritten wholesale, bypassing {@link #set}
+     * (restoring a game checkpoint), so every consumer is sent them again.
+     */
+    public final void flagAllAsChanged(final Iterable<TrackableProperty> keys) {
+        for (final TrackableProperty key : keys) {
+            markDirtyForConsumers(key);
+            key.updateObjLookup(tracker, props.get(key));
+        }
+    }
+
+    /**
      * Get the monotonic version counter. Incremented on every actual property change.
      */
     public int getVersion() {

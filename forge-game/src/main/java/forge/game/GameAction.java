@@ -1928,6 +1928,23 @@ public class GameAction {
         return checkAgain;
     }
 
+    /** A misplay that loses the game is the one most worth taking back, and after this it's too late. */
+    private void offerUndoInsteadOfLosing(final List<Player> losers) {
+        final UndoHistory history = game.getUndoHistory();
+        if (!history.isEnabled() || !game.getPhaseHandler().canUnwindForUndo()) {
+            return;
+        }
+        for (final Player p : losers) {
+            final boolean conceded = p.getOutcome() != null && p.getOutcome().lossState == GameLossReason.Conceded;
+            if (conceded || p.getController().isAI() || !history.canUndo(p)) {
+                continue;
+            }
+            if (p.getController().offerUndoInsteadOfLosing()) {
+                throw new UndoRequestedException();
+            }
+        }
+    }
+
     public void checkGameOverCondition() {
         if (game.isGameOver()) {
             return;
@@ -1975,6 +1992,7 @@ public class GameAction {
         }
 
         if (losers != null) {
+            offerUndoInsteadOfLosing(losers);
             for (Player p : losers) {
                 game.onPlayerLost(p);
             }

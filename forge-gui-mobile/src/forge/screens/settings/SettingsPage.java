@@ -235,6 +235,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
             Forge.getLocalizer().getMessage("cbExperimentalRestore"),
             Forge.getLocalizer().getMessage("nlExperimentalRestore")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_ALLOW_UNDO,
+            Forge.getLocalizer().getMessage("cbAllowUndo"),
+            Forge.getLocalizer().getMessage("nlAllowUndo")), 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
             Forge.getLocalizer().getMessage("nlAITimeout"),
             Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")), 1);

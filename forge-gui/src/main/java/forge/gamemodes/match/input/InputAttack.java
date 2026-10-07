@@ -52,6 +52,11 @@ import java.util.Set;
 public class InputAttack extends InputSyncronizedBase {
     private static final long serialVersionUID = 7849903731842214245L;
 
+    @Override
+    public boolean isUndoPoint() {
+        return true;
+    }
+
     private final Combat combat;
     private final FCollectionView<GameEntity> defenders;
     private GameEntity currentDefender;
