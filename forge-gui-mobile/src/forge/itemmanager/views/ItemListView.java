@@ -33,7 +33,9 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.card.HoverPreview;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
@@ -277,6 +279,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         w -= padding;
                     }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
+                    if (value.getKey() instanceof PaperCard pc) {
+                        HoverPreview.report(pc, ItemList.this.screenPos.x + x, ItemList.this.screenPos.y + y, w, h, ItemList.this.screenPos);
+                    }
                     if(itemManager.itemIsFavorite(value)) {
                         float starSize = h * 0.35f;
                         g.drawImage(FSkinImage.HDSTAR_FILLED, x + 1, y, starSize, starSize);

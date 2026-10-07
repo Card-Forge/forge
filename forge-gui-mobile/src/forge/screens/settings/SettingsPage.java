@@ -632,6 +632,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         }
                     }
                 },4);
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_HOVER_PREVIEW,
+                Forge.getLocalizer().getMessage("lblEnableHoverPreview"),
+                Forge.getLocalizer().getMessage("nlEnableHoverPreview")), 4);
         }
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
             Forge.getLocalizer().getMessage("lblShowFPSDisplay"),

@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.HoverPreview;
 import forge.gui.error.BugReporter;
 import forge.toolbox.FContainer;
 import forge.toolbox.FOverlay;
@@ -40,6 +41,7 @@ public class Classic {
                     }
                 }
             }
+            HoverPreview.drawAndClear(Forge.getGraphics());
             //update here
             if (Forge.needsUpdate) {
                 if (Forge.getAssets().manager().update(16))

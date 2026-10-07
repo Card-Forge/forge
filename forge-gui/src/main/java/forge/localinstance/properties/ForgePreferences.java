@@ -54,6 +54,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ENABLE_BORDER_MASKING("Crop"),
         UI_ENABLE_MATCH_SCROLL_INDICATOR("false"),
         UI_ENABLE_MAGNIFIER("true"),
+        UI_ENABLE_HOVER_PREVIEW("true"),
         UI_SHOW_FPS("false"),
         UI_ENABLE_DISPOSE_TEXTURES("false"),
         UI_AUTO_CACHE_SIZE("false"),
