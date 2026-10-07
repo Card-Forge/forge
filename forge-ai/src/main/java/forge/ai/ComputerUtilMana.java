@@ -613,8 +613,10 @@ public class ComputerUtilMana {
             return null;
         }
 
-        // A filter's own cost (Signet etc.) is paid in the middle of another payment, which still needs what it has set aside
-        if (!sa.isManaAbility() || getManaCostToActivate(sa) == 0) {
+        // A filter's own cost (Signet etc.) is paid in the middle of another payment, which still needs what it has set aside.
+        // The filter is among that; if it isn't, the ability is being activated on its own and starts afresh like any other.
+        if (test || !sa.isManaAbility() || getManaCostToActivate(sa) == 0
+                || !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), MemorySet.PAYS_TAP_COST)) {
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
         }
