@@ -32,6 +32,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -487,7 +488,8 @@ public class CombatUtil {
             return false;
         }
 
-        return true;
+        // needs other creatures to block with, e.g. can't block alone
+        return !StaticAbilityAttackBlockRestrict.cantBeFulfilled(StaticAbilityMode.BlockRestrict, blocker, blocker.getController().getCreaturesInPlay());
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
@@ -702,7 +704,7 @@ public class CombatUtil {
             List<StaticAbility> list = StaticAbilityAttackBlockRestrict.blockRestrict(blocker, others);
             if (list.isEmpty())
                 continue;
-            return list.stream().map(StaticAbility::toString).collect(Collectors.joining(", "));
+            return TextUtil.concatWithSpace(blocker.toString(), "can't block like this:", list.stream().map(StaticAbility::toString).collect(Collectors.joining(", ")));
         }
 
         for (final Card attacker : attackers) {

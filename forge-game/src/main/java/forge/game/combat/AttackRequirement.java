@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
@@ -89,7 +88,7 @@ public class AttackRequirement {
         return causesToAttack;
     }
 
-    public int countViolations(final GameEntity defender, final Map<Card, GameEntity> attackers) {
+    public int countViolations(final GameEntity defender, final Map<Card, GameEntity> attackers, final AttackConstraints constraints) {
         if (!hasRequirement()) {
             return 0;
         }
@@ -98,18 +97,12 @@ public class AttackRequirement {
         int violations = defenderSpecific.values().stream().mapToInt(Integer::intValue).sum()
                 - (isAttacking ? defenderSpecific.getOrDefault(defender, 0) : 0);
         if (isAttacking) {
-            final Combat combat = defender.getGame().getCombat();
-
-            // check if a restriction will apply such that the requirement is no longer relevant
-            // TODO REFACTOR?!
-            if (attackers.size() != 1) {
-                for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
-                    int max = Objects.requireNonNullElse(GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax(), Integer.MAX_VALUE);
-
-                    // only count violations if the forced creature can actually attack and has no cost incurred for doing so
-                    if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                        violations += mustAttack.getValue().size();
-                    }
+            for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
+                final Card forced = mustAttack.getKey();
+                // only count violations if the forced creature can actually attack and has no cost incurred for doing so
+                if (!attackers.containsKey(forced) && constraints.canJoin(forced, attackers) && CombatUtil.canAttack(forced)
+                        && CombatUtil.getAttackCost(defender.getGame(), forced, defender) == null) {
+                    violations += mustAttack.getValue().size();
                 }
             }
         }
