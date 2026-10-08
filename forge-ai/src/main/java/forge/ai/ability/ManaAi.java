@@ -151,8 +151,14 @@ public class ManaAi extends SpellAbilityAi {
             numManaSrcs--;
         }
         final boolean highTide = "HighTide".equals(logic);
+        final int untappedIslands = highTide
+                ? CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED.and(CardPredicates.isType("Island")))
+                : 0;
+        if (highTide && untappedIslands == 0) {
+            return false;
+        }
         int manaReceived = highTide
-                ? CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED.and(CardPredicates.isType("Island"))) - 1
+                ? untappedIslands - 1
                 : (sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1)
                         * sa.getParam("Produced").split(" ").length;
 
