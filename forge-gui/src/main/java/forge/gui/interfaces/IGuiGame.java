@@ -88,6 +88,8 @@ public interface IGuiGame {
 
     /** Plays a coin flip animation and blocks until it finishes. No-op by default. */
     default void showCoinFlip(boolean heads, String caption, boolean waitForTap) {}
+    default void showFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, List<CardView> battlefield, int timesFlipped) {}
+    default void endFlipOntoBattlefield(CardView flipped) {}
 
     void flashIncorrectAction();
     void alertUser();
