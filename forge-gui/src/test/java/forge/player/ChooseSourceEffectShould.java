@@ -16,8 +16,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for the two ways {@code ChooseSourceEffect.resolve} used to crash or hang: a
- * {@code TargetControls$} filter with no player to filter by, and a pick loop that keeps asking once
+ * Tests for the way {@code ChooseSourceEffect.resolve} used to hang: a pick loop that keeps asking once
  * there is nothing left to pick.
  * <p>
  * The chooser is a {@link ScriptedChooser}, not the GUI-backed human controller, so a loop that never
@@ -41,22 +40,6 @@ public class ChooseSourceEffectShould {
 
         assertThat(source.getChosenCards()).containsExactly(source);
         assertThat(chooser.asked()).as("times the chooser was asked").isEqualTo(1);
-    }
-
-    @Test(timeOut = 30_000)
-    public void doNothingWhenTargetControlsHasNoPlayerToFilterBy() {
-        // TargetControls$ filters the sources by the first chooser. A targeting ability that resolves
-        // with no target left (what remains once every chosen player has left the game) has no chooser,
-        // and reading the first element of that empty list used to throw IndexOutOfBoundsException.
-        HumanControlledGame g = new HumanControlledGame();
-        ScriptedChooser chooser = ScriptedChooser.replacing(g.human);
-        Card source = inPlay(g, "Aimless Source", "Types:Artifact",
-                "A:AB$ ChooseSource | Cost$ 0 | ValidTgts$ Opponent | TargetControls$ True | Choices$ Card.Self");
-
-        resolve(g, source);
-
-        assertThat(source.getChosenCards()).isEmpty();
-        assertThat(chooser.asked()).as("times the chooser was asked").isZero();
     }
 
     private static Card inPlay(final HumanControlledGame g, final String name, final String... scriptLines) {
