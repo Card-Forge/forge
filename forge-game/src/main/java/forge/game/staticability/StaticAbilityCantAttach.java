@@ -8,6 +8,9 @@ public class StaticAbilityCantAttach {
 
     public static StaticAbility cantAttach(final GameEntity target, final Card card, boolean checkSBA) {
         for (final Card ca : target.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (target.getGame().isEnteringTogether(ca)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantAttach)) {
                     continue;

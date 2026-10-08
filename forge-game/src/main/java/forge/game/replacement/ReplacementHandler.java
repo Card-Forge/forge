@@ -24,7 +24,6 @@ import forge.game.phase.PhaseType;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
@@ -92,14 +91,14 @@ public class ReplacementHandler {
             // need to apply Counters to check its future state on the battlefield
             @SuppressWarnings("unchecked")
             Map<Optional<Player>, Multiset<CounterType>> etbCounters = (Map<Optional<Player>, Multiset<CounterType>>) runParams.get(AbilityKey.CounterMap);
-            affectedLKI.putEtbCounters(etbCounters);
-            preList.add(affectedLKI);
             // CR 614.12 only continuous effects that already exist apply
             Set<Card> entering = null;
             CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.InternalTriggerTable);
-            if (table != null && table.containsColumn(ZoneType.Battlefield)) {
-                entering = Sets.newHashSet(Iterables.concat(table.column(ZoneType.Battlefield).values()));
+            if (table != null) {
+                entering = table.enteredWith(affectedCard);
             }
+            affectedLKI.putEtbCounters(etbCounters);
+            preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList, entering);
 
             runParams.put(AbilityKey.Affected, affectedLKI);

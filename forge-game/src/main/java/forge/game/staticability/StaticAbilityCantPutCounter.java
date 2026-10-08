@@ -11,6 +11,9 @@ public class StaticAbilityCantPutCounter {
     public static boolean anyCantPutCounter(final Card card, final CounterType type) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (game.isEnteringTogether(ca)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPutCounter)) {
                     continue;
@@ -26,6 +29,9 @@ public class StaticAbilityCantPutCounter {
     public static boolean anyCantPutCounter(final Player player, final CounterType type) {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (game.isEnteringTogether(ca)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPutCounter)) {
                     continue;

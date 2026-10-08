@@ -6,6 +6,7 @@ package forge.game.card;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -19,6 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 
 import java.util.Map;
+import java.util.Set;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist
@@ -95,6 +97,16 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     @Override
     protected Table<ZoneType, ZoneType, CardCollection> delegate() {
         return dataMap;
+    }
+
+    // CR 614.12 the other permanents that entered in this event
+    public Set<Card> enteredWith(final Card c) {
+        final Set<Card> entered = Sets.newHashSet();
+        if (containsColumn(ZoneType.Battlefield)) {
+            Iterables.addAll(entered, Iterables.concat(column(ZoneType.Battlefield).values()));
+            entered.remove(c);
+        }
+        return entered;
     }
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
