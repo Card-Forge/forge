@@ -985,11 +985,14 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
         final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
         p.dangerouslySetController(aiCtrl);
+        // The match's later games seat players from here
+        p.getRegisteredPlayer().setPlayer(aiLobbyPlayer);
         netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
 
         // Clear InputQueue to unblock the game thread (waiting on cdlDone)
         pch.getInputQueue().clearInputs();
         netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
+        hostedMatch.tallyNextGameDecisions();
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
