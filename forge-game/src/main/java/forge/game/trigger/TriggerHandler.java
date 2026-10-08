@@ -334,12 +334,9 @@ public class TriggerHandler {
         // the trigger will be ordered later in MagicStack
         for (final Trigger t : triggers) {
             if (!t.isStatic() && (wasCollected || canRunTrigger(t, mode, runParams))) {
-                if (wasCollected && !t.checkActivationLimit()) {
-                    continue;
-                }
                 // collected ones already know how often they trigger, it can't change until they are put on the stack
                 int additional = wasCollected ? wt.getAdditionalTriggers(t) : StaticAbilityPanharmonicon.countPanharmonicon(game, t, runParams);
-                int trigAmt = 1 + StaticAbilityPanharmonicon.limitByActivations(t, additional);
+                int trigAmt = t.limitByActivations(1 + additional);
                 for (int i = 0; i < trigAmt; ++i) {
                     runSingleTrigger(t, runParams, wt.getController(t));
                 }
@@ -400,7 +397,7 @@ public class TriggerHandler {
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (!regtrig.checkActivationLimit()) {
+        if (regtrig.limitByActivations(1) == 0) {
             return false;
         }
 

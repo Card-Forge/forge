@@ -522,10 +522,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private void recordUndoableActions(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        // either push onto or clear undo stack based on whether spell/ability is undoable
+        // either push onto or clear undo stack based on whether SA is undoable
         if (sa.isUndoable()) {
             if (!canUndo(activator)) {
-                clearUndoStack(); //clear if undo stack owner changes
+                //clear if undo stack owner changes
+                clearUndoStack();
                 undoStackOwner = activator;
             }
             undoStack.push(sa);
@@ -542,14 +543,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return undoStackOwner == player;
     }
     public final boolean undo() {
-        if (undoStack.isEmpty()) { return false; }
+        if (undoStack.isEmpty()) {
+            return false;
+        }
 
         SpellAbility sa = undoStack.peek();
+        clearUndoStack(sa);
         if (sa.undo()) {
-            clearUndoStack(sa);
             new ManaRefundService(sa).refundManaPaid();
         } else {
-            clearUndoStack(sa);
             for (Mana pay : sa.getPayingMana()) {
                 clearUndoStack(pay.getManaAbility().getSourceSA());
             }

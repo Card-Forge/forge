@@ -19,7 +19,6 @@ public class InputChooseStartingHand extends InputSyncronizedBase {
     PlayerZone primaryHand = null;
     Game game;
 
-
     public InputChooseStartingHand(final PlayerControllerHuman controller, final Player humanPlayer) {
         super(controller);
 
@@ -66,7 +65,6 @@ public class InputChooseStartingHand extends InputSyncronizedBase {
         nextExtraHand.setCards(currentList);
         hands.add(nextExtraHand);
     }
-
 
     @Override
     public String getActivateAction(Card card) {
