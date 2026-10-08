@@ -86,8 +86,8 @@ public class Dice3D implements Disposable {
             sharedCam = new PerspectiveCamera(40, 1, 1);
             sharedCam.position.set(0, 0, 4.2f);
             sharedCam.lookAt(0, 0, 0);
-            sharedCam.near = 0.1f;
-            sharedCam.far = 20f;
+            sharedCam.near = 1.5f; // was 0.1f;
+            sharedCam.far = 8f; // was 20f;
             sharedCam.update();
         }
     }
