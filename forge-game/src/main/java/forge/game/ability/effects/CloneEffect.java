@@ -78,15 +78,21 @@ public class CloneEffect extends SpellAbilityEffect {
             // if a Clone enters the field as other cards it could clone,
             // the clone should not be able to clone them
             // but do that only for Replacement Effects
+            CardCollectionView lastState = null;
             if (sa.isReplacementAbility()) {
                 if (choiceZone.equals(ZoneType.Battlefield)) {
-                    choices.retainAll(sa.getLastStateBattlefield());
+                    lastState = sa.getLastStateBattlefield();
                 } else if (choiceZone.equals(ZoneType.Graveyard)) {
-                    choices.retainAll(sa.getLastStateGraveyard());
+                    lastState = sa.getLastStateGraveyard();
                 }
             }
 
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
+            if (lastState == null) {
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
+            } else {
+                // CR 614.12a what it can copy is decided by how they looked before the event
+                choices.retainAll(CardLists.getValidCards(lastState, sa.getParam("Choices"), activator, host, sa));
+            }
             boolean choiceOpt = sa.hasParam("ChoiceOptional");
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
