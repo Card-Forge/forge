@@ -81,12 +81,6 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host, sa);
             commandZoneSources = CardLists.getValidCards(commandZoneSources, sa.getParam("Choices"), host.getController(), host, sa);
         }
-        if (sa.hasParam("TargetControls") && !tgtPlayers.isEmpty()) {
-            permanentSources = CardLists.filterControlledBy(permanentSources, tgtPlayers.get(0));
-            stackSources = CardLists.filterControlledBy(stackSources, tgtPlayers.get(0));
-            referencedSources = CardLists.filterControlledBy(referencedSources, tgtPlayers.get(0));
-            commandZoneSources = CardLists.filterControlledBy(commandZoneSources, tgtPlayers.get(0));
-        }
 
         Card divPermanentSources = new Card(-1, game);
         divPermanentSources.setName("--PERMANENTS:--");
