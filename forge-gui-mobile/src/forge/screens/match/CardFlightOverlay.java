@@ -156,12 +156,13 @@ public final class CardFlightOverlay {
      * @param viaStack  true for anything that resolves from the stack (non-land permanents)
      * @return the flight, or null if it was skipped (cap reached / token). The caller should then just show the card.
      */
-    public static Flight start(CardView card, Rectangle handFrom, Rectangle to, float tappedAngle, boolean viaStack) {
+    public static Flight start(CardView card, Rectangle handFrom, Rectangle to, float tappedAngle, boolean viaStack, boolean moved) {
         Rectangle stackFrom = stackRects.remove(card.getId()); // always consume so it can't go stale
         Style s = style();
         if (s == Style.OFF) { return null; }
         if (countFlights(false) >= MAX_FLIGHTS) { return null; }
         if (TOKENS_POPUP && card.isToken()) { s = Style.POPUP; } // tokens have no hand/stack origin
+        if (moved) { s = Style.SLIDE; }
 
         Rectangle from;
         boolean exact;
