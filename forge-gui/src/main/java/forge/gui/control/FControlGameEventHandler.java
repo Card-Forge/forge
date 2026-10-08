@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.PlayerView;
@@ -283,6 +284,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventGameFinished ev) {
         gameFinished = true;
         return processEvent();
+    }
+
+    @Override
+    public Void visit(final GameEventFlipOntoBattlefield ev) {
+        if (ev.finished()) {
+            matchController.endFlipOntoBattlefield(ev.flipped().getView());
+            return null;
+        }
+        final List<CardView> hit = new ArrayList<>();
+        for (Card c : ev.hit()) hit.add(c.getView());
+        final List<CardView> battlefield = new ArrayList<>();
+        for (Card c : ev.flipped().getGame().getCardsIn(ZoneType.Battlefield)) battlefield.add(c.getView());
+        matchController.showFlipOntoBattlefield(ev.flipped().getView(), ev.target().getView(), hit, battlefield, ev.timesFlipped());
+        return null;
     }
 
     @Override

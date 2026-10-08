@@ -18,6 +18,7 @@ import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import forge.Forge;
 import forge.Graphics;
+import forge.animation.FlipOntoBattlefieldAnimation;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
@@ -306,6 +307,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private final Rectangle lastFieldRect = new Rectangle();
         private float lastFieldAngle;
         private boolean hasFieldRect;
+        private boolean leaveOriginLocked;
         private static final Set<Integer> animatedIds = ConcurrentHashMap.newKeySet();
         private static final Set<Integer> movedIds = ConcurrentHashMap.newKeySet();
         public static void markMoved(CardView c) { movedIds.add(c.getId()); }
@@ -315,6 +317,13 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         public static void forgetAnimated(CardView card) {
             animatedIds.remove(card.getId());
         }
+        public void setLeaveOrigin(float x, float y, float w, float h, float angle) {
+            lastFieldRect.set(x, y, w, h);
+            lastFieldAngle = angle;
+            hasFieldRect = true;
+            leaveOriginLocked = true;
+        }
+        public void clearLeaveOrigin() { leaveOriginLocked = false; }
         public void playEntryAnimation() {
             if (CardFlightOverlay.style() == CardFlightOverlay.Style.OFF) { return; }
             if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
@@ -336,9 +345,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         public void playLeaveAnimation() {
             if (!hasFieldRect) { return; }
             hasFieldRect = false;
+            leaveOriginLocked = false;
             if (CardFlightOverlay.style() == CardFlightOverlay.Style.OFF) { return; }
             if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
             CardFlightOverlay.startLeave(getCard(), new Rectangle(lastFieldRect), lastFieldAngle);
+            FlipOntoBattlefieldAnimation.leaveStarted(getCard());
         }
         private static boolean isHandShownFor(CardView card) {
             VPlayerPanel pp = MatchScreen.getPlayerPanel(card.getController());
@@ -684,7 +695,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         @Override
         public void draw(Graphics g) {
             if (CardFlightOverlay.isEnabled() && getWidth() > 0) {
-                if (displayArea != null && flight == null && displayArea.animateEntry()) {
+                if (displayArea != null && flight == null && displayArea.animateEntry() && !leaveOriginLocked) {
                     lastFieldRect.set(screenPos);
                     lastFieldAngle = isTapped() ? getTappedAngle() : 0f;
                     hasFieldRect = true;
