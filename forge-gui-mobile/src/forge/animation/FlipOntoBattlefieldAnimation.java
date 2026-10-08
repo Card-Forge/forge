@@ -1,20 +1,32 @@
 package forge.animation;
 
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.math.Interpolation;
 
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.BufferUtils;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
-import forge.assets.FSkinColor;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FOverlay;
@@ -44,7 +56,15 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
     private float elapsed = 0f;
     private final Overlay overlay = new Overlay();
     private volatile boolean leaveHandedOff = false;
+    private static final Color SHADOW = new Color(0f, 0f, 0f, 0.35f);
+    private final Color flashColor = new Color();
 
+    private Pixmap bakedPixmap;
+    private TextureRegion face;
+    private boolean bakeTried;
+    private final Matrix4 savedProj = new Matrix4(), savedTrans = new Matrix4(), bakeProj = new Matrix4();
+    private final Rectangle savedBounds = new Rectangle(), savedVisible = new Rectangle();
+    private final IntBuffer vp = BufferUtils.newIntBuffer(16);
     public FlipOntoBattlefieldAnimation(CardView flipped, CardView target, List<CardView> hit,
             List<CardView> battlefield, int timesFlipped, Runnable onFinished) {
         this.flipped = flipped;
@@ -58,8 +78,8 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
         // standard card size from the chosen card
         float[] tr = rawRect(target);
         float h = clampHeight(tr != null ? Math.max(tr[2], tr[3]) - 2 * FCardPanel.PADDING : sh * 0.2f);
-        cardH = h;
-        cardW = h / CARD_RATIO;
+        cardH = Math.round(h);
+        cardW = Math.round(h / CARD_RATIO);
         float tcx = tr != null ? tr[0] + tr[2] / 2f : sw / 2f;
         float tcy = tr != null ? tr[1] + tr[3] / 2f : sh / 2f;
 
@@ -84,6 +104,7 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
             }
         }
 
+        final boolean hitButHidden = hitRects.isEmpty() && !hit.isEmpty();
         float lx, ly;
         if (!hitRects.isEmpty()) {
             // land ON the hit card(s); between them if there are two
@@ -95,16 +116,98 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
                 lx += (float) (Math.random() - 0.5) * cardW * 0.2f;
                 ly += (float) (Math.random() - 0.5) * cardH * 0.15f;
             }
+        } else if (hitButHidden) {
+            // it hit something we can't see: settle on the chosen target with a small scatter,
+            // and don't search for free space, since a "clean miss" would contradict the game log
+            lx = tcx + (float) (Math.random() - 0.5) * cardW * 0.3f;
+            ly = tcy + (float) (Math.random() - 0.5) * cardH * 0.2f;
         } else {
-            // miss: find open space near the target that touches no card
+            // real miss: find open space near the target that touches no card
             float[] free = findFreeSpot(tcx, tcy, obstacles);
             lx = free[0];
             ly = free[1];
         }
-        landX = clampX(lx);
-        landY = clampY(ly);
+        landX = Math.round(clampX(lx));
+        landY = Math.round(clampY(ly));
         landAngle = (float) (Math.random() - 0.5) * 50f;
         spinDir = Math.random() < 0.5 ? 1f : -1f;
+    }
+
+    /** Renders the card face once, upright, into a texture. Falls back to direct drawing if anything fails. */
+    private void bakeFace(Graphics g) {
+        bakeTried = true;
+        final SpriteBatch batch = g.getBatch();
+        final float pxScale = Gdx.graphics.getBackBufferWidth() / sw;   // logical units -> pixels
+        final int texW = Math.max(1, Math.round(cardW * pxScale));
+        final int texH = Math.max(1, Math.round(cardH * pxScale));
+
+        final FrameBuffer fb;
+        try {
+            fb = new FrameBuffer(Pixmap.Format.RGBA8888, texW, texH, false);
+        } catch (RuntimeException e) {
+            return;
+        }
+
+        final boolean wasDrawing = batch.isDrawing();
+        if (wasDrawing) { batch.end(); }
+
+        // save everything we're about to change
+        savedProj.set(batch.getProjectionMatrix());
+        savedTrans.set(batch.getTransformMatrix());
+        savedBounds.set(g.getBounds());
+        savedVisible.set(g.getVisibleBounds());
+        final float savedRegionH = g.getRegionHeight();
+        final int srcC = batch.getBlendSrcFunc(), dstC = batch.getBlendDstFunc();
+        final int srcA = batch.getBlendSrcFuncAlpha(), dstA = batch.getBlendDstFuncAlpha();
+        final boolean scissor = Gdx.gl.glIsEnabled(GL20.GL_SCISSOR_TEST);
+        vp.clear();
+        Gdx.gl.glGetIntegerv(GL20.GL_VIEWPORT, vp);
+        final int vx = vp.get(0), vy = vp.get(1), vw = vp.get(2), vh = vp.get(3);
+
+        Pixmap pm = null;
+        boolean began = false;
+        try {
+            if (scissor) { Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); }
+            fb.begin();
+            began = true;
+            Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+            batch.getTransformMatrix().idt();
+            g.setProjectionMatrix(bakeProj.setToOrtho2D(0, 0, cardW, cardH));
+            g.setBounds(cardW, cardH);
+            batch.setBlendFunctionSeparate(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA,
+                    GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            batch.begin();
+            CardRenderer.drawCardWithOverlays(g, flipped, 0, 0, cardW, cardH, CardStackPosition.Top, false, false, false);
+            batch.end();
+
+            pm = Pixmap.createFromFrameBuffer(0, 0, texW, texH);   // read back while the FBO is still bound
+            fb.end(vx, vy, vw, vh);
+            began = false;
+
+            final Texture tex = new Texture(new PixmapTextureData(pm, null, false, false, true)); // managed
+            tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            bakedPixmap = pm;
+            face = new TextureRegion(tex);
+            face.flip(false, true);
+        } catch (RuntimeException e) {
+            if (batch.isDrawing()) { batch.end(); }
+            if (began) { fb.end(vx, vy, vw, vh); }
+            if (pm != null) { pm.dispose(); }
+            face = null;
+            bakedPixmap = null;
+        } finally {
+            fb.dispose();                                          // no longer needed
+            batch.setBlendFunctionSeparate(srcC, dstC, srcA, dstA);
+            batch.getTransformMatrix().set(savedTrans);
+            g.setProjectionMatrix(savedProj);
+            g.setBounds(savedBounds);
+            g.setVisibleBounds(savedVisible);
+            g.setRegionHeight(savedRegionH);
+            if (scissor) { Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST); }
+            if (wasDrawing) { batch.begin(); }
+        }
     }
 
     public static void leaveStarted(CardView cv) {
@@ -121,18 +224,18 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
     public void start() {
         active = this;
         hideSource();
-        try {
-            float pad = FCardPanel.PADDING;
-            CardAreaPanel.get(flipped).setLeaveOrigin(landX - cardW / 2f - pad, landY - cardH / 2f - pad,
-                    cardW + 2 * pad, cardH + 2 * pad, landAngle);
-        } catch (Exception ignored) {}
         overlay.show();
         super.start();
     }
 
+    private static final float HANDOFF_WAIT = 0.3f;
+    private static final float EXIT_FADE = 0.3f;
+    private float exitAlpha = 1f;
+
     @Override
     protected boolean advance(float dt) {
         elapsed += dt;
+        //System.out.println("FlipAnim end: handoff=" + leaveHandedOff + " gone=" + (goneAt >= 0f) + " t=" + elapsed);
         if (leaveHandedOff) { return false; }
         hideSource();   // re-hide every frame: the panel can be rebuilt when the board re-lays out
         if (!released && elapsed >= RELEASE_TIME) { release(); }
@@ -147,7 +250,7 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
                 return elapsed < MAX_LINGER;
             }
         }
-        return elapsed - goneAt < 1.5f;
+        return elapsed - goneAt < HANDOFF_WAIT + EXIT_FADE;   // was 1.5f
     }
 
     @Override
@@ -157,6 +260,13 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
         setSourceVisible(true);   // always: the panel is reused by graveyard/exile views
         try { CardAreaPanel.get(flipped).clearLeaveOrigin(); } catch (Exception ignored) {}
         release();
+        if (face != null) {
+            final Texture t = face.getTexture();
+            final Pixmap pm = bakedPixmap;
+            face = null;
+            bakedPixmap = null;
+            Gdx.app.postRunnable(() -> { t.dispose(); if (pm != null) pm.dispose(); });
+        }
     }
 
     private void release() {
@@ -165,7 +275,25 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
         if (onFinished != null) { onFinished.run(); }
     }
 
-    private void hideSource() { setSourceVisible(false); }
+    private CardAreaPanel lastPanel;
+
+    private void applyLeaveOrigin(CardAreaPanel p) {
+        float pad = FCardPanel.PADDING;
+        p.setLeaveOrigin(landX - cardW / 2f - pad, landY - cardH / 2f - pad,
+                cardW + 2 * pad, cardH + 2 * pad, landAngle);
+    }
+
+    private void hideSource() {
+        try {
+            CardAreaPanel p = CardAreaPanel.get(flipped);
+            if (p == null) { return; }
+            if (p != lastPanel) {            // first call, or the board rebuilt the panel
+                lastPanel = p;
+                applyLeaveOrigin(p);
+            }
+            p.setVisible(false);
+        } catch (Exception ignored) { }
+    }
 
     private void setSourceVisible(boolean visible) {
         try {
@@ -176,6 +304,9 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
 
     // ---- drawing ----
     private void drawAnimation(Graphics g) {
+        exitAlpha = goneAt < 0f ? 1f
+                : 1f - Math.min(1f, Math.max(0f, (elapsed - goneAt - HANDOFF_WAIT) / EXIT_FADE));
+        if (face == null && !bakeTried) { bakeFace(g); }   // must run before any rotate transform starts
         if (elapsed < TOSS_TIME) {
             drawToss(g, elapsed / TOSS_TIME);
         } else {
@@ -206,9 +337,10 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
         if (flash > 0.01f) {
             for (int i = 0; i < hitRects.size(); i++) {
                 float[] r = hitRects.get(i);
-                Color c = hitImmune.get(i) ? Color.CYAN : Color.RED;
-                g.fillRect(FSkinColor.getStandardColor(c).alphaColor(flash), r[0], r[1], r[2], r[3]);
-                g.drawRect(4f, c, r[0], r[1], r[2], r[3]);
+                Color base = hitImmune.get(i) ? Color.CYAN : Color.RED;
+                flashColor.set(base.r, base.g, base.b, flash);
+                g.fillRect(flashColor, r[0], r[1], r[2], r[3]);
+                g.drawRect(4f, base, r[0], r[1], r[2], r[3]);
             }
         }
         float pop = since < SETTLE_TIME ? 0.12f * (float) Math.sin(Math.PI * since / SETTLE_TIME) : 0f;
@@ -216,16 +348,26 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
     }
 
     private void drawCardAt(Graphics g, float cx, float cy, float w, float h, float rotation, float shadow, boolean back) {
+        final float a = exitAlpha;
         g.startRotateTransform(cx, cy, rotation);
         if (shadow > 0.5f) {
-            g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.35f),
-                    cx - w / 2f + shadow, cy - h / 2f + shadow, w, h);
+            g.setAlphaComposite(a);
+            g.fillRect(SHADOW, cx - w / 2f + shadow, cy - h / 2f + shadow, w, h);
         }
         if (back) {
+            g.setAlphaComposite(a);
             drawCardBack(g, cx - w / 2f, cy - h / 2f, w, h);
+        } else if (face != null) {
+            final SpriteBatch b = g.getBatch();
+            b.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            g.setColorRGBA(a, a, a, a);
+            g.drawImage(face, cx - w / 2f, cy - h / 2f, w, h);
+            b.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         } else {
+            g.setAlphaComposite(a);
             CardRenderer.drawCardWithOverlays(g, flipped, cx - w / 2f, cy - h / 2f, w, h, CardStackPosition.Top, false, false, false);
         }
+        g.resetAlphaComposite();
         g.endTransform();
     }
 
@@ -285,10 +427,17 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
     private static float[] rawRect(CardView cv) {
         if (cv == null) { return null; }
         try {
-            CardAreaPanel p = CardAreaPanel.get(cv);
-            if (p != null) {
-                return new float[] { p.localToScreenX(0), p.localToScreenY(0), p.getWidth(), p.getHeight() };
+            CardAreaPanel p = CardAreaPanel.peek(cv);
+            if (p == null || p.getWidth() <= 0) { return null; }
+            VCardDisplayArea area = p.getDisplayArea();        // forge.screens.match.views.VCardDisplayArea
+            if (area == null || !area.isVisible()) { return null; }
+
+            float x = p.localToScreenX(0), y = p.localToScreenY(0);
+            float w = p.getWidth(), h = p.getHeight();
+            if (x + w <= 0 || y + h <= 0 || x >= Forge.getScreenWidth() || y >= Forge.getScreenHeight()) {
+                return null;                                   // scrolled completely off screen
             }
+            return new float[] { x, y, w, h };
         } catch (Exception ignored) { }
         return null;
     }
