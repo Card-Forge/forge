@@ -3871,7 +3871,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (!mayAutoPass()) {
             return;
         }
-        yieldController.setAutoPassUntilEndOfTurn(false);
+        yieldController.clearEndOfTurnYieldAndDispatch();
         PlayerView playerView = getLocalPlayerView();
         getGui().showPromptMessage(playerView, "");
         getGui().updateButtons(playerView, false, false, false);
