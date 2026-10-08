@@ -1,9 +1,9 @@
 package forge.game.event;
 
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
+import forge.game.card.CardView;
+import java.util.List;
 
-public record GameEventFlipOntoBattlefield(Card flipped, Card target, CardCollectionView hit, int timesFlipped, boolean finished) implements GameEvent {
+public record GameEventFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, int timesFlipped, boolean finished) implements GameEvent {
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) { return visitor.visit(this); }
 }

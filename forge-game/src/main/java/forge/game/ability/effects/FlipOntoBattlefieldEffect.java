@@ -3,10 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.event.GameEventFlipOntoBattlefield;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -16,6 +13,7 @@ import forge.util.Localizer;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     @Override
@@ -60,12 +58,17 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
             }
         }
 
+        final CardView hostView = host.getView();
+        final CardView tgtView = tgtLoc.getView();
+        final List<CardView> hitViews = new ArrayList<>();
+        for (Card c : hit) { hitViews.add(c.getView()); }
+
         // first event (animation starts)
-        game.fireEvent(new GameEventFlipOntoBattlefield(host, tgtLoc, hit, flippedTimes, false));
+        game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, flippedTimes, false));
 
         if (!flipped) {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblDidNotFlipOver"), null);
-            game.fireEvent(new GameEventFlipOntoBattlefield(host, tgtLoc, hit, 0, true));
+            game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, 0, true));
             return;
         }
         game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblFlippedOver", flippedTimes), null);
@@ -77,7 +80,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblDidNotLandOnCards"), null);
         }
         host.addRemembered(hit);
-        game.fireEvent(new GameEventFlipOntoBattlefield(host, tgtLoc, hit, flippedTimes, true)); // last line
+        game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, flippedTimes, true));
     }
 
     @Override
