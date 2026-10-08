@@ -307,7 +307,7 @@ public class MatchController extends NetworkGuiGame {
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP)) {
             return;
         }
-        final java.util.concurrent.CountDownLatch done = new java.util.concurrent.CountDownLatch(1);
+        final CountDownLatch done = new CountDownLatch(1);
         Gdx.app.postRunnable(() -> new FlipOntoBattlefieldAnimation(flipped, target, hit, battlefield, timesFlipped, done::countDown).start());
         try {
             done.await(6, java.util.concurrent.TimeUnit.SECONDS);
