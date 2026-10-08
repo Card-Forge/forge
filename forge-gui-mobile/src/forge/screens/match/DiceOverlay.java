@@ -29,9 +29,6 @@ import forge.model.FModel;
 /**
  * Plays queued 3D dice animations on the mobile match screen.
  *
- * This class is its own game-event subscriber (the old DiceEventBridge in forge-gui is gone),
- * so nothing dice related lives outside forge-gui-mobile except the GameEventRollDie record.
- *
  * Wiring:
  *   1. When the mobile UI first gets hold of the Game for a match:
  *          DiceOverlay.getInstance().attach(game);          // safe to call repeatedly
