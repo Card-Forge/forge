@@ -49,11 +49,10 @@ public class ManaRefundService {
         final MagicStack stack = sa.getHostCard().getGame().getStack();
         for (final SpellAbility am : payingAbilities) {
             if (undone.contains(am)) {
-                // Recursively refund abilities that were used.
-                ManaRefundService refundService = new ManaRefundService(am);
-                refundService.refundManaPaid();
+                // Recursively refund abilities that were used
+                new ManaRefundService(am).refundManaPaid();
             } else {
-                // CR 728.1: a mana ability that could not be reversed keeps the mana
+                // CR 733.1: a mana ability that could not be reversed keeps the mana
                 // spent on it, so the abilities that paid for it are not reversed either.
                 for (final Mana pay : am.getPayingMana()) {
                     if (pay.getManaAbility() != null) {

@@ -735,8 +735,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
-                // predict whether something may put a ETBing creature below zero toughness
-                // (e.g. Reassembing Skeleton + Elesh Norn, Grand Cenobite)
                 for (final Card c : retrieval) {
                     if (ComputerUtilCard.wouldDieToStaticPT(c)) {
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -1063,6 +1061,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (destination.equals(ZoneType.Battlefield)) {
                 // don't return creatures that would die right away to static effects
                 // (e.g. Karmic Guide returning itself under Elesh Norn, Grand Cenobite would loop)
+                // TODO If AI thinks it's about to lose it could try to force a Draw this way
                 list = CardLists.filter(list, c -> !ComputerUtilCard.wouldDieToStaticPT(c));
             }
             if (destination.equals(ZoneType.Exile) || destination.equals(ZoneType.Library)) {
