@@ -159,7 +159,7 @@ public final class QuestUtilCards {
      * @return the array list
      */
     public List<PaperCard> generateQuestBooster(final Predicate<PaperCard> fSets) {
-        return new UnOpenedProduct(getBoosterTemplate(), fSets).get();
+        return new UnOpenedProduct(getBoosterTemplate(), questController.getAllAllowedCards().filter(fSets).toList()).get();
     }
 
     /**
@@ -203,7 +203,7 @@ public final class QuestUtilCards {
      * @return a stream of cards that can be rewarded according to the quest format and preferences.
      */
     private Stream<PaperCard> getQuestCardPool() {
-        Stream<PaperCard> pool = FModel.getMagicDb().getCommonCards().streamAllCards();
+        Stream<PaperCard> pool = questController.getAllAllowedCards();
         if(!(questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0))
             pool = pool.filter(CardDb.EDITION_NON_PROMO);
         if(questController.getFormat() != null)
@@ -501,9 +501,35 @@ public final class QuestUtilCards {
 	    } else {
             for (int i = 0; i < quantity; i++) {
                 // Unopened product based on format of the cards?
-                questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate, questController.getFormat().getFilterPrinted()).get());
+                questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate,
+                        questController.getAllAllowedCards().filter(questController.getFormat().getFilterPrinted())
+                                .toList()).get());
             }
         }
+    }
+
+    private void generateAttractionsInShop(final int count) {
+        ItemPool<PaperCard> attractionPool = FModel.getAttractionPool();
+        if (questController.getFormat() != null) {
+            attractionPool = attractionPool.getFilteredPool(questController.getFormat().getFilterPrinted());
+        }
+        questAssets.getShopList().addAllOfTypeFlat(attractionPool.toFlatList().stream().collect(StreamUtil.random(count)));
+    }
+
+    private void generateStickersInShop(final int count) {
+        ItemPool<PaperCard> stickerPool = FModel.getStickerSheetPool();
+        if (questController.getFormat() != null) {
+            stickerPool = stickerPool.getFilteredPool(questController.getFormat().getFilterPrinted());
+        }
+        questAssets.getShopList().addAllOfTypeFlat(stickerPool.toFlatList().stream().collect(StreamUtil.random(count)));
+    }
+
+    private void generateContraptionsInShop(final int count) {
+        ItemPool<PaperCard> contraptionPool = FModel.getContraptionPool();
+        if (questController.getFormat() != null) {
+            contraptionPool = contraptionPool.getFilteredPool(questController.getFormat().getFilterPrinted());
+        }
+        questAssets.getShopList().addAllOfTypeFlat(contraptionPool.toFlatList().stream().collect(StreamUtil.random(count)));
     }
 
     private static int getRandomCardFromBooster(final List<PaperCard> cards, final Predicate<PaperCard> predicate, final List<PaperCard> toAddTo, final int amount) {
@@ -674,6 +700,9 @@ public final class QuestUtilCards {
         generateTournamentsInShop(totalPacks);
         generateFatPacksInShop(totalPacks);
         generateBoosterBoxesInShop(totalPacks);
+        generateAttractionsInShop(4);
+        generateStickersInShop(4);
+        generateContraptionsInShop(4);
 
         if (questController.getFormat() == null || questController.getFormat().hasSnowLands()) {
 	        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
@@ -762,7 +791,7 @@ public final class QuestUtilCards {
 
         // get all cards in the specified edition
         Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition);
-        Iterable<PaperCard> editionCards = IterableUtil.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);
+        Iterable<PaperCard> editionCards = questController.getAllAllowedCards().filter(filter).toList();
 
         // For editions such as MB1 which only contains PLST cards.
         if (!editionCards.iterator().hasNext()) {
