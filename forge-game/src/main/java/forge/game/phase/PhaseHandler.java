@@ -48,6 +48,7 @@ import forge.util.IHasForgeLog;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.time.StopWatch;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -545,6 +546,18 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 combat.removeAbsentCombatants();
 
                 success = CombatUtil.validateAttackers(combat);
+                if (!success) {
+                    final Pair<Map<Card, GameEntity>, Integer> best =
+                            combat.getAttackConstraints().getLegalAttackers();
+
+                    for (Map.Entry<Card, GameEntity> e : best.getLeft().entrySet()) {
+                        if (!combat.isAttacking(e.getKey())) {
+                            combat.addAttacker(e.getKey(), e.getValue());
+                        }
+                    }
+                    success = CombatUtil.validateAttackers(combat);
+                }
+
                 if (!success) {
                     whoDeclares.getController().notifyOfValue(null, null, "Attack declaration invalid");
                     continue;
