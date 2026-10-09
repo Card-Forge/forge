@@ -588,6 +588,19 @@ func runQueue(args []string, l *Loaded, c *engine.ScriptedController) error {
 		}
 		c.QueueAbilityChoice(idx)
 
+	case "modechoice":
+		// The modes a Charm is put on the stack with (ChooseModesForAbility),
+		// as 0-based indices into the modes that can be chosen.
+		var idx []int
+		for _, part := range strings.Split(value, ",") {
+			n, err := strconv.Atoi(strings.TrimSpace(part))
+			if err != nil || n < 0 {
+				return fmt.Errorf("queue modechoice %q: want mode indices", value)
+			}
+			idx = append(idx, n)
+		}
+		c.QueueModeChoice(idx)
+
 	case "colorchoice":
 		// The color an effect's own "choose a color" picks (ChooseColors):
 		// Sanctuary Blade's, as it becomes attached.

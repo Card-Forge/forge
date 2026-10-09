@@ -60,7 +60,7 @@ Scenarios `ironclaw-curse-enchanted-creature-can-still-block-a-smaller-attacker`
 | `ActivationGameTypes$` | refuses: a `Game` has no variant applied (Java's `hasAppliedVariant` is false there) |
 | `ClassLevel$`          | refuses (GO-7): no Class level is tracked; 0 real `A:`/`S:` lines                    |
 | `InstantSpeed$`        | not read: only matters for a mana ability mid-payment, never interleaved here        |
-| Sneak declare-blockers | not ported: no Sneak cast                                                            |
+| Sneak declare-blockers | `sneakAvailable` ([`m5-t-sneak-charm.md`](m5-t-sneak-charm.md))                      |
 
 The instant/sorcery Ascend check at resolution is ported in [`m5-kernel-2.md`](m5-kernel-2.md). A blessing granted makes
 the state-based pass repeat (CR 702.131d). Scenarios `ascend-citys-blessing-lets-arch-of-orazca-draw`,

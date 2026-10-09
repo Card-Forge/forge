@@ -24,6 +24,20 @@ type Combat struct {
 	// (dealsInStep). Cleared when the regular step's damage is dealt, and
 	// with the combat itself.
 	dealtFirstStrike []CardID
+	// blockDecided are the attackers whose AttackingBand.isBlocked is no
+	// longer null: every attacker once blockers are declared
+	// (DeclareCombatBlockers), and a creature a Sneak cast put onto the
+	// battlefield attacking (PermanentEffect.java:59, setBlocked(false)).
+	// Combat.isUnblocked (Combat.java:941-944) is true only for one of them
+	// that is not blocked: before blockers are declared no attacker is
+	// "unblocked".
+	blockDecided []CardID
+}
+
+// isUnblocked is Combat.isUnblocked: an attacker whose blocked status was
+// decided (blockDecided) and that is not blocked.
+func (c *Combat) isUnblocked(attacker CardID) bool {
+	return c.isAttacking(attacker) && containsCard(c.blockDecided, attacker) && !c.isBlocked(attacker)
 }
 
 // IllegalDeclarationError is a declaration of attackers or blockers that
@@ -114,6 +128,9 @@ func (g *Game) removeFromCombat(id CardID) {
 	}
 	g.combat.Blocks = blocks
 	g.combat.ForcedBlocked = withoutCards(g.combat.ForcedBlocked, []CardID{id})
+	// Its band's blocked status goes with it: re-added later, it is
+	// undecided again.
+	g.combat.blockDecided = withoutCards(g.combat.blockDecided, []CardID{id})
 	// CR 509.1h/506.4: an attacker whose last blocker leaves combat remains
 	// blocked. Java keeps its AttackingBand's blocked flag
 	// (Combat.removeFromCombat, Combat.java:611-638, never clears it); here
@@ -144,5 +161,6 @@ func (c Combat) clone() Combat {
 		ForcedBlocked: append([]CardID(nil), c.ForcedBlocked...),
 
 		dealtFirstStrike: append([]CardID(nil), c.dealtFirstStrike...),
+		blockDecided:     append([]CardID(nil), c.blockDecided...),
 	}
 }

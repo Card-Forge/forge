@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=20
+humanhand=Silvercoat Lion
+humanbattlefield=Plains|Tapped;Leonardo, Big Brother|Tapped|SummonSick
+ailife=19

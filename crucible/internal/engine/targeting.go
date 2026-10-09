@@ -806,9 +806,9 @@ func (g *Game) entityMatches(e EntityID, spec string, parsed valid.Spec, control
 
 // stackItemTargets is SpellAbility.getAllTargetChoices for item: an Aura's
 // cast-time Target, its own Targets, then each Charm mode's. A SubAbility$
-// naming its own ValidTgts$ is not targeted separately in this port
-// (resolveSubAbility, subability.go), so Java's count for such an item is
-// unknown here and asking is an error.
+// naming its own ValidTgts$ keeps its targets on Ability.chainTargets
+// (chaintargets.go), which ChangeTargets does not rewrite yet, so asking for
+// such an item is an error.
 func stackItemTargets(item *Ability) ([]EntityID, error) {
 	if subChainTargets(item.Params) {
 		return nil, fmt.Errorf("engine: ChangeTargets: targets of a spell whose SubAbility$ targets not resolvable yet")
@@ -876,29 +876,41 @@ func (g *Game) dropIllegalTargets(a *Ability) bool {
 	chosen, kept := 0, 0
 	cantFizzle := hasCantFizzle(a)
 	a.Targets = g.withoutIllegal(a, a.Targets, &chosen, &kept)
+	cantFizzle = g.dropIllegalChainTargets(a, &chosen, &kept) || cantFizzle
+	// A chosen mode is its own sub-ability chain in Java (CharmEffect's
+	// chainAbilities), links included, so hasFizzled walks into it too. The
+	// slice is copied before it is written: a stack item copied by value
+	// (copySpell, Game.Clone) shares it.
+	if len(a.Modes) > 0 {
+		a.Modes = append([]Ability(nil), a.Modes...)
+	}
 	for i := range a.Modes {
 		m := &a.Modes[i]
 		m.Targets = g.withoutIllegal(m, m.Targets, &chosen, &kept)
-		cantFizzle = cantFizzle || hasCantFizzle(m)
+		cantFizzle = g.dropIllegalChainTargets(m, &chosen, &kept) || hasCantFizzle(m) || cantFizzle
 	}
-	// CR 608.2b over the SubAbility$ chain: hasFizzled recurses into
-	// sa.getSubAbility() with the one running fizzle flag, so a link's legal
-	// target keeps the whole ability from fizzling, and its illegal ones are
-	// removed (MagicStack.java:745-751).
-	if len(a.chainTargets) > 0 {
-		a.chainTargets = append([]chainTarget(nil), a.chainTargets...)
-	}
-	for i := range a.chainTargets {
-		ct := &a.chainTargets[i]
-		link := Ability{Source: a.Source, Controller: a.Controller, Params: ct.Params, targetStamps: ct.Stamps}
+	return chosen == 0 || kept > 0 || cantFizzle
+}
+
+// dropIllegalChainTargets is CR 608.2b over owner's SubAbility$ chain:
+// hasFizzled recurses into sa.getSubAbility() with the one running fizzle
+// flag, so a link's legal target keeps the whole ability from fizzling, and
+// its illegal ones are removed (MagicStack.java:745-751). It reports whether
+// a link carries CantFizzle$.
+func (g *Game) dropIllegalChainTargets(owner *Ability, chosen, kept *int) bool {
+	cantFizzle := false
+	owner.chainTargets = clonedChainTargets(owner.chainTargets)
+	for i := range owner.chainTargets {
+		ct := &owner.chainTargets[i]
+		link := Ability{Source: owner.Source, Controller: owner.Controller, Params: ct.Params, targetStamps: ct.Stamps}
 		if api, ok := APIByName(ct.Params.Name); ok {
 			link.API = api
 		}
 		link.Targets = ct.Targets
-		ct.Targets = g.withoutIllegal(&link, ct.Targets, &chosen, &kept)
+		ct.Targets = g.withoutIllegal(&link, ct.Targets, chosen, kept)
 		cantFizzle = cantFizzle || hasCantFizzle(&link)
 	}
-	return chosen == 0 || kept > 0 || cantFizzle
+	return cantFizzle
 }
 
 // hasCantFizzle reports whether a names CantFizzle$ (Gilded Drake's
@@ -1050,10 +1062,41 @@ func targetSpec(a *Ability) (string, bool) {
 // their gameTimestamp. Only a newly chosen card is stamped as it is now.
 func (g *Game) stampTargets(a *Ability) {
 	a.targetStamps = g.restamp(a.targetStamps, a.Targets, a.Target)
+	g.stampChainTargets(a)
+	// Copied before writing, as dropIllegalTargets does: a's Modes and links
+	// may share their arrays with another stack item (copySpell, Game.Clone).
+	if len(a.Modes) > 0 {
+		a.Modes = append([]Ability(nil), a.Modes...)
+	}
 	for i := range a.Modes {
 		m := &a.Modes[i]
 		m.targetStamps = g.restamp(m.targetStamps, m.Targets, NoCard)
+		g.stampChainTargets(m)
 	}
+}
+
+// clonedChainTargets is cts with its own backing arrays, Targets and Stamps
+// included, so writing one copy's links (stampTargets, dropIllegalTargets,
+// a copy's new targets) never reaches another: a stack item copied by value
+// (copySpell, Game.Clone) shares them otherwise. Nil stays nil.
+func clonedChainTargets(cts []chainTarget) []chainTarget {
+	if len(cts) == 0 {
+		return nil
+	}
+	out := make([]chainTarget, len(cts))
+	for i, ct := range cts {
+		out[i] = chainTarget{
+			Params:  ct.Params,
+			Targets: append([]EntityID(nil), ct.Targets...),
+			Stamps:  append([]targetStamp(nil), ct.Stamps...),
+		}
+	}
+	return out
+}
+
+// stampChainTargets is stampTargets for a's SubAbility$ links.
+func (g *Game) stampChainTargets(a *Ability) {
+	a.chainTargets = clonedChainTargets(a.chainTargets)
 	for i := range a.chainTargets {
 		ct := &a.chainTargets[i]
 		ct.Stamps = g.restamp(ct.Stamps, ct.Targets, NoCard)

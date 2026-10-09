@@ -150,6 +150,7 @@ queue optionname <text>       ScriptedController.QueueOptionNamed, the ChooseOpt
 queue numberchoice <n>        ScriptedController.QueueNumberChoice, ChooseNumber's answer ("pay any amount of life")
 queue cardorder <id>[,...]    ScriptedController.QueueCardOrder, the order cards moving into one zone together go in (CR 613.7m, OrderCardsForZone)
 queue abilitychoice <i>[,...]  ScriptedController.QueueAbilityChoice, ChooseAbilitiesForEffect's 0-based branches (GenericChoice's pick)
+queue modechoice <i>[,...]     ScriptedController.QueueModeChoice, ChooseModesForAbility's 0-based Charm modes, among those that can be chosen
 queue colorchoice <color>     ScriptedController.QueueColorChoice, ChooseColors' pick (Sanctuary Blade's color), a bare color letter
 queue playerchoice <p>        ScriptedController.QueuePlayerChoice, ChoosePlayer's pick (Captive Audience's opponent), a seated player's name
 queue sacrificechoice <id>[,...]  ScriptedController.QueueSacrificeChoice, the permanents a Sac<N/Type> cost or a sacrifice effect picks, ids from Loaded.CardByFixtureID

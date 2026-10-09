@@ -479,6 +479,16 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		// Exact-matched: blockedBySource*, blockedThisTurn and the rest are
 		// distinct Java branches this case must not swallow.
 		return g.combat.isBlocked(c.ID)
+	case name == "unblocked":
+		// CardProperty.java:1677-1680: combat.isUnblocked(card) -- an attacker
+		// whose band was declared unblocked (Combat.isUnblocked). Before
+		// blockers are declared no attacker is (blockDecided). Java's
+		// startsWith also takes a longer name; no corpus line writes one.
+		return g.combat.isUnblocked(c.ID)
+	case name == "sneaked":
+		// CardProperty.java:1799-1806: getCastSA().isSneak(). The
+		// isUnlinkedFromCastSA guard is left out, as for kicked.
+		return c.sneaked
 	case name == "HasCounters":
 		return c.Counters.Any()
 	case strings.HasPrefix(name, "counters_"):

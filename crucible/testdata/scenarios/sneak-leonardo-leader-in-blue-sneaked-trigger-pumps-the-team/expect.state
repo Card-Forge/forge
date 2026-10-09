@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=20
+humanhand=Silvercoat Lion
+humanbattlefield=Grizzly Bears|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Leonardo, Leader in Blue|Tapped|SummonSick
+ailife=12

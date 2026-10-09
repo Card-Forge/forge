@@ -1,0 +1,27 @@
+# Card.sneaked (CardProperty.java:1799-1806): Leonardo, Leader in Blue's ETB
+# trigger is ValidCard$ Card.Self+sneaked -- it fires only when he was cast
+# for his Sneak cost {3}{W}{W}. Silvercoat Lion and Grizzly Bears attack
+# unblocked; the Lion is returned to cast Leonardo, who enters tapped and
+# attacking. The trigger gives creatures you control +2/+0: Leonardo deals 4,
+# the Bears 4.
+startturn human
+advance 5
+queue attackers 1,2
+declareattackers
+advance
+queue blocks none
+declareblockers
+tapformana human 5 W
+tapformana human 6 W
+tapformana human 7 W
+tapformana human 8 W
+tapformana human 9 W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue returnchoice 1
+castspell human 3
+resolvestack
+advance
+advance
+combatdamage

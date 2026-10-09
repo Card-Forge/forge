@@ -563,7 +563,8 @@ func (g *Game) activationLimitsMet(c *Card, index int, ability *compile.Ability)
 //     step was skipped for lack of attackers.
 //
 // None of the keys' values is read, as Java does not read them. Sneak's
-// declare-blockers-only timing is not ported: Crucible has no Sneak cast.
+// declare-blockers-only timing (SpellAbilityRestriction.java:312-316) is
+// checked where the Sneak way to cast is offered (sneakAvailable, sneak.go).
 // InstantSpeed$ is read nowhere either: Java reads it for a mana ability being
 // activated while another cost is paid (SpellAbilityRestriction.java:564) --
 // this port never interleaves a mana ability with a payment -- and as

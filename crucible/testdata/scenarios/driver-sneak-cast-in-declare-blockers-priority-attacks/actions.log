@@ -1,0 +1,16 @@
+# Sneak through the turn driver (ADR-0026): ai has no creature, so the
+# driven declare blockers step declares no block, and every attacker's
+# blocked status is decided (Combat.isUnblocked). In that step's priority
+# round human taps a Plains and casts Leonardo, Big Brother for its Sneak
+# cost {W}, returning the unblocked Silvercoat Lion. Leonardo resolves when
+# both pass, enters tapped and attacking ai, and deals 1 in the combat damage
+# step. Four steps from Untap reach Declare Attackers (turn 1 skips the draw
+# step); three more run Declare Blockers, First Strike Damage, Combat Damage.
+startturn human
+queue attackers 1
+queue attacktarget ai
+step 4
+queue action human tapformana 5 W
+queue action human cast 3
+queue returnchoice 1
+step 3

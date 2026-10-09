@@ -788,6 +788,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 	}
 	if (from == Stack && kind != Battlefield) || (from == Battlefield && kind != Battlefield) {
 		c.kicker, c.castX = 0, 0
+		c.sneaked, c.sneakDefender = false, NoEntity
 	}
 	if from == Stack && kind != Battlefield {
 		// CR 108.4a: only a permanent or a spell has a controller. A spell

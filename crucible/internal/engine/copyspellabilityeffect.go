@@ -254,33 +254,60 @@ func (g *Game) copySpell(controller PlayerController, orig Ability, copier Playe
 	cp.hostTransforms, cp.hasHostTransforms = 0, false
 	cp.damageMap, cp.replacing = nil, nil
 	cp.Targets = append([]EntityID(nil), orig.Targets...)
+	// The copy's SubAbility$ links keep the original's targets too (Java
+	// copies the whole chain, TargetChoices included), on arrays of their own
+	// so stamping or retargeting the copy never writes the original's.
+	cp.chainTargets = clonedChainTargets(orig.chainTargets)
 	if orig.Modes != nil {
 		cp.Modes = make([]Ability, len(orig.Modes))
 		for i, m := range orig.Modes {
 			m.Source, m.Controller = host, copier
 			m.Targets = append([]EntityID(nil), m.Targets...)
+			m.chainTargets = clonedChainTargets(m.chainTargets)
 			cp.Modes[i] = m
 		}
 	}
 	if mayChoose {
-		if err := g.chooseCopyTargets(controller, &cp); err != nil {
+		// setupNewTargets walks the whole chain (SpellAbility.java:2120-2139):
+		// the head, its links, then each mode (chained as sub-abilities by
+		// CharmEffect.chainAbilities) and that mode's links.
+		if err := g.chooseCopyChainTargets(controller, &cp); err != nil {
 			return NoCard, copiedTargets{}, err
 		}
 		for i := range cp.Modes {
-			if err := g.chooseCopyTargets(controller, &cp.Modes[i]); err != nil {
+			if err := g.chooseCopyChainTargets(controller, &cp.Modes[i]); err != nil {
 				return NoCard, copiedTargets{}, err
 			}
 		}
 	}
 	g.PushAbility(cp)
-	targets := append([]EntityID(nil), cp.Targets...)
-	for _, m := range cp.Modes {
-		targets = append(targets, m.Targets...)
-	}
+	targets := allTargetsOf(cp)
 	if cp.Target != NoCard {
 		targets = append(targets, CardEntity(cp.Target))
 	}
 	return host, copiedTargets{targets: targets, aura: cp.API == APIAttach, copier: copier, host: host}, nil
+}
+
+// chooseCopyChainTargets is chooseCopyTargets for m and then each of its
+// SubAbility$ links that chose targets, in chain order. A link is asked about
+// as a part of its own: its ValidTgts$, evaluated for the copier.
+func (g *Game) chooseCopyChainTargets(controller PlayerController, m *Ability) error {
+	if err := g.chooseCopyTargets(controller, m); err != nil {
+		return err
+	}
+	for i := range m.chainTargets {
+		ct := &m.chainTargets[i]
+		link := Ability{Source: m.Source, Controller: m.Controller, Params: ct.Params, Targets: ct.Targets,
+			Amounts: m.Amounts, TriggerRemembered: m.TriggerRemembered, triggered: m.triggered, charmRoot: m.charmRoot}
+		if api, ok := APIByName(ct.Params.Name); ok {
+			link.API = api
+		}
+		if err := g.chooseCopyTargets(controller, &link); err != nil {
+			return err
+		}
+		ct.Targets = link.Targets
+	}
+	return nil
 }
 
 // chooseCopyTargets is SpellAbility.setupNewTargets for one targeting part

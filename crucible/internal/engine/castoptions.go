@@ -40,13 +40,17 @@ type castOption struct {
 	sacAtCleanup bool
 	// limits are the MayPlayLimit$ counters a cast by this option uses up.
 	limits []mayPlayLimitKey
+	// sneak is the Sneak alternative cost (sneak.go): alt is its mana, an
+	// unblocked attacker returns to hand, and the spell has instant speed.
+	sneak bool
 }
 
 // sameWay reports whether two options differ only in flash and limits, which
 // merge: a grant that only adds flash leaves nothing to pick.
 func (o castOption) sameWay(p castOption) bool {
 	return o.withoutMana == p.withoutMana && o.hasAlt == p.hasAlt && o.alt.Equal(p.alt) && o.anyType == p.anyType &&
-		o.anyColor == p.anyColor && o.snowAnyColor == p.snowAnyColor && o.raise == p.raise && o.replaceExile == p.replaceExile && o.sacAtCleanup == p.sacAtCleanup
+		o.anyColor == p.anyColor && o.snowAnyColor == p.snowAnyColor && o.raise == p.raise && o.replaceExile == p.replaceExile && o.sacAtCleanup == p.sacAtCleanup &&
+		o.sneak == p.sneak
 }
 
 // castOptions is every way pid may cast card now from its zone: the normal
@@ -93,6 +97,11 @@ func (g *Game) castOptions(pid PlayerID, card CardID, fromHand bool) []castOptio
 	var out []castOption
 	if fromHand {
 		out = append(out, castOption{})
+		// Sneak's own spell (CardFactoryUtil.java:3441-3467): the alternative
+		// cost, at instant speed (setInstantSpeed(true)).
+		if mc, ok := g.sneakAvailable(pid, c); ok {
+			out = append(out, castOption{hasAlt: true, alt: mc, flash: true, sneak: true})
+		}
 	}
 	for _, o := range grants {
 		merged := false
@@ -120,6 +129,8 @@ func (g *Game) castOptions(pid PlayerID, card CardID, fromHand bool) []castOptio
 func (o castOption) describe(name string) string {
 	base := "Cast " + name
 	switch {
+	case o.sneak:
+		return "Cast " + name + " for its sneak cost " + o.alt.String() + ", returning an unblocked attacker you control to hand"
 	case o.sacAtCleanup:
 		return "Cast " + name + " with flash, sacrificing it at the next cleanup step"
 	case o.withoutMana:

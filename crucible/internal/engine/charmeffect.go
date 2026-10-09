@@ -104,10 +104,16 @@ func (g *Game) chooseCharmModes(controller PlayerController, a *Ability) (bool, 
 	}
 	sort.Ints(chosen)
 
+	// chainAbilities appends each chosen mode, its own SubAbility$ chain with
+	// it, to the Charm's tail (CharmEffect.java:293-317), and setupTargets
+	// then walks the whole chain (SpellAbility.java:2141-2171): each mode's
+	// targets, then its own links', before the next mode's. A link naming its
+	// own ValidTgts$ (Inscription of Abundance's fight) is chosen here, not
+	// handed the mode's targets.
 	a.Modes = nil
 	for _, i := range chosen {
 		mode := options[i]
-		if !g.resolveTargets(controller, &mode) {
+		if !g.resolveTargets(controller, &mode) || !g.resolveChainTargets(controller, &mode) {
 			return false, nil
 		}
 		a.Modes = append(a.Modes, mode)

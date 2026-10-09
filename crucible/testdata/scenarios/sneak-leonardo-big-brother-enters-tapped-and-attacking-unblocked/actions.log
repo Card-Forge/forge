@@ -1,0 +1,19 @@
+# Sneak (K:Sneak:W, CardFactoryUtil.java:3441-3467): during the declare
+# blockers step, Leonardo, Big Brother is cast for {W} at instant speed by
+# returning the unblocked Silvercoat Lion to hand. It enters tapped and
+# attacking the player the Lion attacked, unblocked (PermanentEffect.java:
+# 33-35, 55-63), and deals combat damage: power 1, no other creature.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+tapformana human 5 W
+queue returnchoice 1
+castspell human 3
+resolvestack
+advance
+advance
+combatdamage

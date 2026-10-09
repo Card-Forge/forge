@@ -261,6 +261,26 @@ type chainTarget struct {
 	Stamps []targetStamp
 }
 
+// allTargetsOf is SpellAbility.getAllTargetChoices (MagicStack.java:410):
+// a's own Targets, its SubAbility$ links' (chainTargets), then each chosen
+// Charm mode's and that mode's links', in chain order (CharmEffect's
+// chainAbilities appends the modes to the tail). checkBecomesTargetTriggers
+// and checkWardTriggers read it: a mode's or a link's target is on neither
+// a.Targets nor a.Target.
+func allTargetsOf(a Ability) []EntityID {
+	targets := append([]EntityID(nil), a.Targets...)
+	for _, ct := range a.chainTargets {
+		targets = append(targets, ct.Targets...)
+	}
+	for _, mode := range a.Modes {
+		targets = append(targets, mode.Targets...)
+		for _, ct := range mode.chainTargets {
+			targets = append(targets, ct.Targets...)
+		}
+	}
+	return targets
+}
+
 // abilityRefs is what Defined$ can name beyond the host card: the
 // ability's own chosen targets and, for a delayed or reflexive trigger's
 // ability, what that trigger remembered.

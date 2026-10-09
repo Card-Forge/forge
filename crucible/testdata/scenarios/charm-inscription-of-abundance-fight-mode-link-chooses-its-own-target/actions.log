@@ -1,0 +1,22 @@
+# CR 700.2 + 601.2c: a Charm mode's SubAbility$ that names its own ValidTgts$
+# chooses its own target as the spell is cast. Inscription of Abundance's
+# third mode is "DB$ Pump | ValidTgts$ Creature.YouCtrl | SubAbility$ DBFight"
+# with "DBFight: DB$ Fight | Defined$ ParentTarget | ValidTgts$
+# Creature.YouDontCtrl": the Pump targets Grizzly Bears, the Fight link
+# targets Llanowar Elves (CharmEffect.chainAbilities appends the mode with its
+# chain; setupTargets walks it). The Bears fight the Elves: the Elves die,
+# the Bears keep 1 damage. Were the link handed the mode's target, the Bears
+# would fight themselves.
+startturn human
+advance 3
+tapformana human 5 G
+tapformana human 6 G
+# Kicker {2}{G} declined: one mode (MinCharmNum$/CharmNum$ read Count$Kicked).
+queue confirmpaycost false
+# Modes offered: DBPutCounter, DBGainLife, DBPump -- the third.
+queue modechoice 2
+queue targets 1
+queue targets 2
+queue paygeneric G
+castspell human 3
+resolvestack

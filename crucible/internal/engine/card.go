@@ -69,6 +69,13 @@ type Card struct {
 	// over getCastSA), kept while it is on the stack or the battlefield, 0
 	// for a card cast without an X or never cast; Move clears it with kicker.
 	castX int
+	// sneaked is getCastSA().isSneak(): the card was cast for its Sneak cost
+	// (sneak.go), read as Card.sneaked while it is on the stack or the
+	// battlefield. sneakDefender is what the returned attacker was attacking,
+	// which a sneaked creature attacks as it enters (PermanentEffect.java:55-63).
+	// Move clears both with kicker.
+	sneaked       bool
+	sneakDefender EntityID
 	// cameUnderControl is Card.cameUnderControlSinceLastUpkeep (Echo): true
 	// from entering the battlefield or changing controller until the end of
 	// its controller's next upkeep. enteredTurn is the turn it entered the

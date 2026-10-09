@@ -29,7 +29,11 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		if !ok {
 			return true
 		}
-		link := Ability{API: api, Source: a.Source, Controller: a.Controller, Params: sub.Ability, Amounts: a.Amounts}
+		// The link carries its root's trigger context and casting state, as
+		// Java's sub-ability reads them off getRootAbility: a Charm mode's
+		// link is asked about as its mode is.
+		link := Ability{API: api, Source: a.Source, Controller: a.Controller, Params: sub.Ability, Amounts: a.Amounts,
+			TriggerRemembered: a.TriggerRemembered, triggered: a.triggered, casting: a.casting, charmRoot: a.charmRoot}
 		choice, named, ok := g.targetChoiceFor(&link)
 		if !named {
 			continue
@@ -77,8 +81,9 @@ func (g *Game) chooseAbilityTargets(controller PlayerController, a *Ability) boo
 }
 
 // chainTargetsFor is the targets chosen for the sub-ability link params, and
-// whether any were (an ability that never went through resolveChainTargets,
-// a copy or a Charm mode, has none, and its link keeps its parent's).
+// whether any were. A Charm mode carries its own links' (chooseCharmModes), a
+// copy its original's (copySpell); a link no one chose targets for (one
+// naming no ValidTgts$) keeps its parent's.
 func (a *Ability) chainTargetsFor(link *compile.Ability) ([]EntityID, bool) {
 	for _, c := range a.chainTargets {
 		if c.Params == link {

@@ -99,9 +99,9 @@ A delayed `ChangesZone` watch fires for every destination ([`m5-control-2.md`](m
 `resolveSubAbility` used to give a sub-ability with its own `ValidTgts$` its parent's targets, so Stolen Uniform's
 "target Equipment" was never chosen (891 corpus lines). `resolveChainTargets` now chooses every such link's targets in
 chain order as the head's are, from `castInstantOrSorcery` and `pushTriggeredAbilities`; `resolveSubAbility` hands each
-link its own. A link with no legal target keeps the whole ability off the stack (CR 601.2c). Not done: the CR 608.2b
-legality re-check at resolution for sub-ability targets (`targetStillLegal` covers the head's), `Charm` modes and copies
-(`copySpell`), whose links keep the parent's targets.
+link its own. A link with no legal target keeps the whole ability off the stack (CR 601.2c). The CR 608.2b re-check of
+link targets is in [`m5-control-2.md`](m5-control-2.md); Charm modes' and copies' links in
+[`m5-t-sneak-charm.md`](m5-t-sneak-charm.md).
 
 ### Krovikan Vampire
 

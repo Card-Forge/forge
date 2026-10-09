@@ -21,8 +21,8 @@ regression is `TestActivateAbilityWithNoLegalTargetPaysNothing` (`{T}`, `PayLife
 express it: the harness errors on a refused activation. `activate-legal-target-*` pin the paying side.
 
 The re-check shares one running fizzle flag across the chain, as Java does: a legal target on any link keeps the whole
-ability from fizzling, and every illegal one is removed. Not done: `Charm` modes and copies (`copySpell`), whose links
-keep the parent's targets.
+ability from fizzling, and every illegal one is removed. Charm modes' and copies' links:
+[`m5-t-sneak-charm.md`](m5-t-sneak-charm.md).
 
 ## `LoseControl$` (`controlcommands.go`)
 

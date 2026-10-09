@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humangraveyard=Inscription of Abundance
+humanbattlefield=Grizzly Bears|Damage:1;Forest|Tapped;Forest|Tapped
+ailife=20
+aigraveyard=Llanowar Elves

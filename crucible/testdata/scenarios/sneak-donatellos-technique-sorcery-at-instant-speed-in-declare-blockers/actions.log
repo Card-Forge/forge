@@ -1,0 +1,19 @@
+# Sneak on a sorcery (Donatello's Technique, K:Sneak:U): the Sneak spell has
+# instant speed (CardFactoryUtil.java:3464, setInstantSpeed(true)) and is
+# castable only in the declare blockers step (SpellAbilityRestriction.java:
+# 312-316). Returning the unblocked Silvercoat Lion pays the Return part; the
+# Lion leaves combat, so no combat damage is dealt. Draw two cards.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+tapformana human 5 U
+queue returnchoice 1
+castspell human 3
+resolvestack
+advance
+advance
+combatdamage

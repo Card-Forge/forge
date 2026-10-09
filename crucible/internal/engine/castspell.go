@@ -157,6 +157,7 @@ func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller Player
 		}
 		opts.withoutManaCost, opts.anyType, opts.anyColor = way.withoutMana, way.anyType, way.anyColor
 		opts.snowAnyColor = way.snowAnyColor
+		opts.sneak = way.sneak
 		if way.hasAlt {
 			opts.altCost, opts.hasAltCost = way.alt, true
 		}
@@ -417,6 +418,9 @@ type castOpts struct {
 	// fromKeyword marks a cast from a graveyard or exile through a keyword's
 	// own cost (Flashback, Foretell, Beam me up), exiled as it leaves the stack.
 	fromKeyword bool
+	// sneak is a cast for the Sneak cost (sneak.go): altCost is its mana, and
+	// an unblocked attacker returns to hand once the mana is paid.
+	sneak bool
 }
 
 // castSpell is CastSpell past its timing and hand gates: the three spell
@@ -427,7 +431,7 @@ type castOpts struct {
 // castWithoutPaying) calls it with timing ignored (CR 608.2g). Reports false
 // for every legal-but-declined case the three branches name.
 func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID, opts castOpts) bool {
-	if g.cantBeCast(pid, card) {
+	if g.cantBeCast(pid, card) || (opts.sneak && !g.sneakPayable(pid, card)) {
 		return false
 	}
 	// Kicker is chosen as the spell is announced; the card carries the choice
@@ -437,9 +441,11 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	g.Card(card).wasCast = true
 	opts.kickers = g.chooseKicker(controller, pid, g.Card(card))
 	g.Card(card).kicker = opts.kickers
+	g.Card(card).sneaked = opts.sneak
 	if !g.castSpellChosen(controller, pid, card, opts) {
 		g.Card(card).kicker = 0
 		g.Card(card).wasCast = false
+		g.Card(card).sneaked, g.Card(card).sneakDefender = false, NoEntity
 		return false
 	}
 	return true
@@ -480,6 +486,9 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 	}
 	if hasExtra {
 		g.payUnlessParts(controller, &Ability{Source: card, Controller: pid}, pid, extra)
+	}
+	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
+		return false
 	}
 	g.putSpellOnStack(card, pid)
 	api := APIPermanentNoncreature
@@ -773,6 +782,9 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	if hasExtra {
 		g.payUnlessParts(controller, &a, pid, extra)
 	}
+	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
+		return false
+	}
 	x.setOn(&a)
 	g.putSpellOnStack(card, pid)
 	g.Card(card).castX = x.value
@@ -825,19 +837,6 @@ func (g *Game) castExtraCost(pid PlayerID, c *Card, line *compile.Ability, opts 
 	return opts.extra, true, true
 }
 
-// allTargetsOf gathers a's own top-level Targets plus every one of a
-// Charm's chosen modes' own Targets (Ability.Modes, ability.go) --
-// checkBecomesTargetTriggers/checkWardTriggers otherwise never see a modal
-// spell's own chosen target, since chooseCharmModes stores each mode's
-// targets on Ability.Modes[i], not on a.Targets itself.
-func allTargetsOf(a Ability) []EntityID {
-	targets := append([]EntityID(nil), a.Targets...)
-	for _, mode := range a.Modes {
-		targets = append(targets, mode.Targets...)
-	}
-	return targets
-}
-
 // firstSpellAbility is c's first A:SP$ line (Def.Faces[0].Abilities), or
 // nil when it has none -- the one spell castInstantOrSorcery casts.
 func firstSpellAbility(c *Card) *compile.Ability {
@@ -872,10 +871,11 @@ func (g *Game) enchantTargets(spec valid.Spec, controller PlayerID, self CardID,
 }
 
 // permanentEffect is CR 608.2m/608.3g's own resolution for a permanent
-// spell, trimmed to what this port can support: no Dash/Blitz/Warp/Sneak
-// alternate-cast-mode handling (PermanentEffect.java's own resolve checks
-// host.wasCast()/isDash()/isBlitz()/isWarp()/isSneak(), none of which this
-// port can grant a spell). What is left, ported directly, is the whole of
+// spell, trimmed to what this port can support: Sneak's "enters tapped and
+// attacking" (sneakEntry, sneakJoinsCombat, sneak.go) is ported; no
+// Dash/Blitz/Warp alternate-cast-mode handling (PermanentEffect.java's own
+// resolve checks host.wasCast()/isDash()/isBlitz()/isWarp(), none of which
+// this port can grant a spell). What is left, ported directly, is the whole of
 // what both APIPermanentCreature and APIPermanentNoncreature actually do:
 // the card leaves the stack and becomes a permanent, CR 614.1's replacements
 // of its entry ("enters as a copy", then "enters tapped") run against it
@@ -895,11 +895,23 @@ func (permanentEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 	origin := g.Card(a.Source).Zone
 	door, castRoom := g.Card(a.Source).castRoomDoor()
 	copyBecomesToken(g.Card(a.Source))
+	sneak, err := g.sneakEntry(a.Source)
+	if err != nil {
+		return err
+	}
 	if g.entryReplaced(controller, a.Source, origin, a.Controller) {
 		return nil
 	}
+	if sneak {
+		// PermanentEffect.java:33-35: a sneaked permanent is tapped before it
+		// moves, so it enters tapped.
+		g.Card(a.Source).Tapped = true
+	}
 	g.Move(a.Source, Battlefield, a.Controller)
 	g.enterBattlefieldReplacements(controller, a.Source, origin)
+	if sneak {
+		g.sneakJoinsCombat(a.Source)
+	}
 	if castRoom {
 		// GameAction.java:571: the half the Room was cast as unlocks for
 		// its caster as it enters, firing its "when you unlock this door".

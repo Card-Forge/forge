@@ -706,6 +706,26 @@ func TestRunActionsQueueAbilityChoice(t *testing.T) {
 	}
 }
 
+// queue modechoice answers a Charm's ChooseModesForAbility with mode
+// indices.
+func TestRunActionsQueueModeChoice(t *testing.T) {
+	t.Parallel()
+
+	l := load(t, testDB(t), "humanlife=20\nailife=20\n")
+	c := engine.NewScriptedController()
+
+	if err := runActions(t, l, c, "queue modechoice 2,0\n"); err != nil {
+		t.Fatalf("RunActions: %v", err)
+	}
+	got := c.ChooseModesForAbility(l.Game, l.Game.Players()[0], engine.NoCard, []string{"a", "b", "c"}, 1, 2)
+	if len(got) != 2 || got[0] != 2 || got[1] != 0 {
+		t.Errorf("mode choice %v, want [2 0]", got)
+	}
+	if err := runActions(t, l, c, "queue modechoice x\n"); err == nil {
+		t.Error("a non-numeric index did not error")
+	}
+}
+
 // queue cardchoice none is an empty pick, and queue playerchoice answers a
 // ChoosePlayerForEffect with a seated player.
 func TestRunActionsQueueCardChoiceNoneAndPlayerChoice(t *testing.T) {

@@ -2155,8 +2155,11 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 			}
 			g.PushAbility(matches[i])
 			pushed := g.stack[len(g.stack)-1]
-			batch := g.checkBecomesTargetTriggers(matches[i].Targets, false, matches[i].Controller)
-			batch = append(batch, g.checkWardTriggersForAbility(matches[i].Targets, pushed.ID, pushed.Source, pushed.Controller)...)
+			// Every target of the chain, a Charm mode's and a link's included
+			// (MagicStack.java:410, getAllTargetChoices).
+			tgts := allTargetsOf(matches[i])
+			batch := g.checkBecomesTargetTriggers(tgts, false, matches[i].Controller)
+			batch = append(batch, g.checkWardTriggersForAbility(tgts, pushed.ID, pushed.Source, pushed.Controller)...)
 			g.pushTriggeredAbilities(controller, batch)
 		}
 	}

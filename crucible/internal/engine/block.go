@@ -121,6 +121,10 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 		}
 	}
 	g.combat.Blocks = blocks
+	// declareBlockersTurnBasedAction sets every band's blocked flag
+	// (AttackingBand.setBlocked): from here an attacker is blocked or
+	// unblocked (Combat.isUnblocked).
+	g.combat.blockDecided = append(g.combat.blockDecided, attackers...)
 	blockersByAttacker := map[CardID][]CardID{}
 	var blockedAttackers []CardID
 	for _, blk := range blocks {
