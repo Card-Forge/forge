@@ -386,6 +386,7 @@ Blood
 Bobblehead:Bobbleheads
 Book:Books
 Clue:Clues
+Communicator:Communicators
 Equipment
 Food:Foods
 Fortification
