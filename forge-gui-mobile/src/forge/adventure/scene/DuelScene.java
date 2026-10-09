@@ -47,6 +47,7 @@ import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
@@ -274,6 +275,9 @@ public class DuelScene extends ForgeScene {
                 switch (keyCode) {
                     case Input.Keys.ESCAPE:
                     case Input.Keys.BACK:
+                        FButton button = this.getButton(0);
+                        if (button != null)
+                            button.trigger();
                         return true;
                 }
                 return super.keyDown(keyCode);
