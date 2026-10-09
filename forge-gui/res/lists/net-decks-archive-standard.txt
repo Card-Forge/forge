@@ -3804,7 +3804,6 @@
 2025-02-10 12740974 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-10-12740974-standard-challenge-64.zip
 2025-02-10 8696 Standard League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-10-8696-standard-league.zip
 2025-02-11 8696 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-11-8696-standard-league.zip
-2025-02-11 8949 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-11-8949-standard-league.zip
 2025-02-12 8949 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-12-8949-standard-league.zip
 2025-02-13 12743684 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-13-12743684-standard-challenge-32.zip
 2025-02-13 8949 Standard League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-02-13-8949-standard-league.zip
@@ -3925,7 +3924,6 @@
 2025-04-07 12763203 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-07-12763203-standard-challenge-64.zip
 2025-04-07 8949 Standard League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-07-8949-standard-league.zip
 2025-04-08 8949 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-08-8949-standard-league.zip
-2025-04-08 9097 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-08-9097-standard-league.zip
 2025-04-09 9097 Standard League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-09-9097-standard-league.zip
 2025-04-10 12765740 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-10-12765740-standard-challenge-32.zip
 2025-04-10 9097 Standard League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-04-10-9097-standard-league.zip
@@ -3999,7 +3997,7 @@
 2025-05-13 9097 Standard League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-13-9097-standard-league.zip
 2025-05-14 9097 Standard League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-14-9097-standard-league.zip
 2025-05-15 12780108 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-15-12780108-standard-challenge-64.zip
-2025-05-15 9097 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-15-9097-standard-league.zip
+2025-05-15 9097 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-15-9097-standard-league.zip
 2025-05-16 12782279 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-16-12782279-standard-challenge-32.zip
 2025-05-16 9097 Standard League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-16-9097-standard-league.zip
 2025-05-17 12780145 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-17-12780145-standard-challenge-32.zip
@@ -4020,7 +4018,7 @@
 2025-05-25 12782272 Standard Showcase Challenge (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-25-12782272-standard-showcase-challenge.zip
 2025-05-25 12782334 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-25-12782334-standard-challenge-32.zip
 2025-05-25 12801654 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-25-12801654-standard-challenge-32.zip
-2025-05-25 9097 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-25-9097-standard-league.zip
+2025-05-25 9097 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-25-9097-standard-league.zip
 2025-05-26 12782273 Standard Rc Qualifier (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-26-12782273-standard-rc-qualifier.zip
 2025-05-26 12782345 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-26-12782345-standard-challenge-64.zip
 2025-05-26 9097 Standard League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-05-26-9097-standard-league.zip
@@ -4058,23 +4056,19 @@
 2025-06-10 9097 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-10-9097-standard-league.zip
 2025-06-11 9382 Standard League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-11-9382-standard-league.zip
 2025-06-12 12794561 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-12-12794561-standard-challenge-32.zip
-2025-06-12 9382 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-12-9382-standard-league.zip
 2025-06-13 12794575 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-13-12794575-standard-challenge-32.zip
 2025-06-13 12794585 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-13-12794585-standard-challenge-32.zip
-2025-06-13 9382 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-13-9382-standard-league.zip
 2025-06-14 12794592 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-14-12794592-standard-challenge-32.zip
 2025-06-14 12794597 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-14-12794597-standard-challenge-32.zip
 2025-06-14 9382 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-14-9382-standard-league.zip
 2025-06-15 12794616 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-15-12794616-standard-challenge-32.zip
 2025-06-15 12794673 Standard Rc Super Qualifier (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-15-12794673-standard-rc-super-qualifier.zip
-2025-06-15 9382 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-15-9382-standard-league.zip
 2025-06-16 12794627 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-16-12794627-standard-challenge-64.zip
 2025-06-16 9382 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-16-9382-standard-league.zip
 2025-06-17 12794634 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-17-12794634-standard-challenge-64.zip
 2025-06-17 9382 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-17-9382-standard-league.zip
 2025-06-18 9382 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-18-9382-standard-league.zip
 2025-06-19 12798137 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-19-12798137-standard-challenge-32.zip
-2025-06-19 9382 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-19-9382-standard-league.zip
 2025-06-20 12798151 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-20-12798151-standard-challenge-32.zip
 2025-06-20 12798161 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-20-12798161-standard-challenge-32.zip
 2025-06-20 9382 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-20-9382-standard-league.zip
@@ -4083,22 +4077,17 @@
 2025-06-21 9382 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-21-9382-standard-league.zip
 2025-06-22 12798192 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-22-12798192-standard-challenge-32.zip
 2025-06-22 9382 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-22-9382-standard-league.zip
-2025-06-23 9382 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-23-9382-standard-league.zip
-2025-06-24 9382 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-24-9382-standard-league.zip
 2025-06-25 9382 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-25-9382-standard-league.zip
 2025-06-26 12799964 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-26-12799964-standard-challenge-32.zip
 2025-06-26 9382 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-26-9382-standard-league.zip
 2025-06-27 12799978 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-27-12799978-standard-challenge-32.zip
 2025-06-27 12799988 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-27-12799988-standard-challenge-32.zip
-2025-06-27 9382 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-27-9382-standard-league.zip
 2025-06-28 12799995 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-28-12799995-standard-challenge-32.zip
 2025-06-28 12800000 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-28-12800000-standard-challenge-32.zip
 2025-06-28 9382 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-28-9382-standard-league.zip
 2025-06-29 12799958 Standard Showcase Challenge (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-29-12799958-standard-showcase-challenge.zip
 2025-06-29 12800019 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-29-12800019-standard-challenge-32.zip
-2025-06-29 9382 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-29-9382-standard-league.zip
 2025-06-30 12801189 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-30-12801189-standard-challenge-64.zip
-2025-06-30 9382 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-06-30-9382-standard-league.zip
 2025-07-01 12801190 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-01-12801190-standard-challenge-64.zip
 2025-07-01 9382 Standard League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-01-9382-standard-league.zip
 2025-07-02 9382 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-02-9382-standard-league.zip
@@ -4132,7 +4121,6 @@
 2025-07-13 12814254 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-13-12814254-standard-challenge-32.zip
 2025-07-13 9382 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-13-9382-standard-league.zip
 2025-07-14 12802856 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-14-12802856-standard-challenge-64.zip
-2025-07-14 9382 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-14-9382-standard-league.zip
 2025-07-15 12802868 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-15-12802868-standard-challenge-64.zip
 2025-07-15 12814264 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-15-12814264-standard-challenge-32.zip
 2025-07-15 9382 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-15-9382-standard-league.zip
@@ -4158,14 +4146,9 @@
 2025-07-25 9382 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-25-9382-standard-league.zip
 2025-07-26 12804885 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-26-12804885-standard-challenge-32.zip
 2025-07-26 12804890 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-26-12804890-standard-challenge-32.zip
-2025-07-26 9382 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-26-9382-standard-league.zip
 2025-07-27 12804909 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-27-12804909-standard-challenge-32.zip
-2025-07-27 9382 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-27-9382-standard-league.zip
-2025-07-28 9382 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-28-9382-standard-league.zip
 2025-07-29 12806362 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-29-12806362-standard-challenge-32.zip
 2025-07-29 12815167 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-29-12815167-standard-challenge-32.zip
-2025-07-29 9382 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-29-9382-standard-league.zip
-2025-07-29 9495 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-29-9495-standard-league.zip
 2025-07-30 9495 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-30-9495-standard-league.zip
 2025-07-31 12806273 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-31-12806273-standard-challenge-32.zip
 2025-07-31 9495 Standard League (14 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-07-31-9495-standard-league.zip
@@ -4244,7 +4227,6 @@
 2025-08-31 9495 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-08-31-9495-standard-league.zip
 2025-09-01 12812815 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-01-12812815-standard-challenge-32.zip
 2025-09-01 9495 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-01-9495-standard-league.zip
-2025-09-02 9495 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-02-9495-standard-league.zip
 2025-09-03 9495 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-03-9495-standard-league.zip
 2025-09-04 12813527 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-04-12813527-standard-challenge-32.zip
 2025-09-04 9495 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-04-9495-standard-league.zip
@@ -4268,20 +4250,17 @@
 2025-09-13 12814276 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-13-12814276-standard-challenge-32.zip
 2025-09-13 9495 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-13-9495-standard-league.zip
 2025-09-14 12814295 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-14-12814295-standard-challenge-32.zip
-2025-09-14 9495 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-14-9495-standard-league.zip
 2025-09-15 12814308 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-15-12814308-standard-challenge-32.zip
 2025-09-15 9495 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-15-9495-standard-league.zip
 2025-09-16 12814318 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-16-12814318-standard-challenge-32.zip
 2025-09-16 9495 Standard League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-16-9495-standard-league.zip
 2025-09-17 9495 Standard League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-17-9495-standard-league.zip
 2025-09-18 12815095 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-18-12815095-standard-challenge-32.zip
-2025-09-18 9495 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-18-9495-standard-league.zip
 2025-09-19 12815111 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-19-12815111-standard-challenge-32.zip
 2025-09-19 12815123 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-19-12815123-standard-challenge-32.zip
 2025-09-19 9495 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-19-9495-standard-league.zip
 2025-09-20 12815131 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-20-12815131-standard-challenge-32.zip
 2025-09-20 12815137 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-20-12815137-standard-challenge-32.zip
-2025-09-20 9495 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-20-9495-standard-league.zip
 2025-09-21 12815156 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-21-12815156-standard-challenge-32.zip
 2025-09-21 9495 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-21-9495-standard-league.zip
 2025-09-22 9495 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-22-9495-standard-league.zip
@@ -4295,21 +4274,19 @@
 2025-09-26 9766 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-26-9766-standard-league.zip
 2025-09-27 12816531 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-27-12816531-standard-challenge-32.zip
 2025-09-27 12816536 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-27-12816536-standard-challenge-32.zip
-2025-09-27 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-27-9766-standard-league.zip
 2025-09-28 12816555 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-28-12816555-standard-challenge-32.zip
 2025-09-28 9766 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-28-9766-standard-league.zip
 2025-09-29 12816566 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-29-12816566-standard-challenge-32.zip
-2025-09-29 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-29-9766-standard-league.zip
 2025-09-30 12816590 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-30-12816590-standard-challenge-32.zip
 2025-09-30 9766 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-09-30-9766-standard-league.zip
-2025-10-01 9766 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-01-9766-standard-league.zip
+2025-10-01 9766 Standard League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-01-9766-standard-league.zip
 2025-10-02 12818094 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-02-12818094-standard-challenge-32.zip
 2025-10-02 9766 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-02-9766-standard-league.zip
 2025-10-03 12818086 Standard Rc Super Qualifier (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-03-12818086-standard-rc-super-qualifier.zip
 2025-10-03 12818108 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-03-12818108-standard-challenge-32.zip
 2025-10-03 12818118 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-03-12818118-standard-challenge-32.zip
 2025-10-03 12819563 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-03-12819563-standard-challenge-32.zip
-2025-10-03 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-03-9766-standard-league.zip
+2025-10-03 9766 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-03-9766-standard-league.zip
 2025-10-04 12818125 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-04-12818125-standard-challenge-32.zip
 2025-10-04 12818130 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-04-12818130-standard-challenge-32.zip
 2025-10-04 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-04-9766-standard-league.zip
@@ -4336,7 +4313,6 @@
 2025-10-14 9766 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-14-9766-standard-league.zip
 2025-10-15 9766 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-15-9766-standard-league.zip
 2025-10-16 12820682 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-16-12820682-standard-challenge-32.zip
-2025-10-16 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-16-9766-standard-league.zip
 2025-10-17 12820696 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-17-12820696-standard-challenge-32.zip
 2025-10-17 12820706 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-17-12820706-standard-challenge-32.zip
 2025-10-17 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-17-9766-standard-league.zip
@@ -4350,50 +4326,36 @@
 2025-10-20 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-20-9766-standard-league.zip
 2025-10-21 12820756 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-21-12820756-standard-challenge-32.zip
 2025-10-21 9766 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-21-9766-standard-league.zip
-2025-10-22 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-22-9766-standard-league.zip
 2025-10-23 12821654 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-23-12821654-standard-challenge-32.zip
 2025-10-23 9766 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-23-9766-standard-league.zip
 2025-10-24 12821668 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-24-12821668-standard-challenge-32.zip
 2025-10-24 12821678 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-24-12821678-standard-challenge-32.zip
-2025-10-24 9766 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-24-9766-standard-league.zip
 2025-10-25 12821685 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-25-12821685-standard-challenge-32.zip
 2025-10-25 12821690 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-25-12821690-standard-challenge-32.zip
 2025-10-25 9766 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-25-9766-standard-league.zip
 2025-10-26 12821709 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-26-12821709-standard-challenge-32.zip
 2025-10-26 9766 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-26-9766-standard-league.zip
 2025-10-27 12821720 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-27-12821720-standard-challenge-32.zip
-2025-10-27 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-27-9766-standard-league.zip
 2025-10-28 12821728 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-28-12821728-standard-challenge-32.zip
 2025-10-28 9766 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-28-9766-standard-league.zip
 2025-10-29 9766 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-29-9766-standard-league.zip
 2025-10-30 12822653 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-30-12822653-standard-challenge-32.zip
-2025-10-30 9766 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-30-9766-standard-league.zip
 2025-10-31 12822668 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-31-12822668-standard-challenge-32.zip
 2025-10-31 12822677 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-31-12822677-standard-challenge-32.zip
-2025-10-31 9766 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-10-31-9766-standard-league.zip
 2025-11-01 12822689 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-01-12822689-standard-challenge-32.zip
-2025-11-01 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-01-9766-standard-league.zip
 2025-11-02 12822708 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-02-12822708-standard-challenge-32.zip
-2025-11-02 9766 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-02-9766-standard-league.zip
 2025-11-03 12822719 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-03-12822719-standard-challenge-32.zip
-2025-11-03 9766 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-03-9766-standard-league.zip
 2025-11-04 12822727 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-04-12822727-standard-challenge-32.zip
 2025-11-04 9766 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-04-9766-standard-league.zip
-2025-11-05 9766 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-05-9766-standard-league.zip
 2025-11-06 12823538 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-06-12823538-standard-challenge-32.zip
-2025-11-06 9766 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-06-9766-standard-league.zip
 2025-11-07 12823552 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-07-12823552-standard-challenge-32.zip
 2025-11-07 12823562 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-07-12823562-standard-challenge-32.zip
 2025-11-07 9766 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-07-9766-standard-league.zip
 2025-11-08 12823574 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-08-12823574-standard-challenge-32.zip
-2025-11-08 9766 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-08-9766-standard-league.zip
 2025-11-09 12823593 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-09-12823593-standard-challenge-32.zip
-2025-11-09 9766 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-09-9766-standard-league.zip
 2025-11-10 12824221 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-10-12824221-standard-challenge-32.zip
-2025-11-10 9766 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-10-9766-standard-league.zip
 2025-11-11 12824209 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-11-12824209-standard-challenge-32.zip
 2025-11-11 9766 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-11-9766-standard-league.zip
-2025-11-12 9766 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-12-9766-standard-league.zip
 2025-11-13 12824385 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-13-12824385-standard-challenge-32.zip
 2025-11-13 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-13-9766-standard-league.zip
 2025-11-14 12824401 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-14-12824401-standard-challenge-32.zip
@@ -4403,7 +4365,6 @@
 2025-11-15 12824425 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-15-12824425-standard-challenge-32.zip
 2025-11-15 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-15-9766-standard-league.zip
 2025-11-16 12824442 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-16-12824442-standard-challenge-32.zip
-2025-11-16 9766 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-16-9766-standard-league.zip
 2025-11-17 12824453 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-17-12824453-standard-challenge-32.zip
 2025-11-17 9766 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-17-9766-standard-league.zip
 2025-11-18 12824747 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-11-18-12824747-standard-challenge-32.zip
@@ -4456,7 +4417,6 @@
 2025-12-06 12825808 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-06-12825808-standard-challenge-32.zip
 2025-12-07 10003 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-07-10003-standard-league.zip
 2025-12-07 12825827 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-07-12825827-standard-challenge-32.zip
-2025-12-08 10003 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-08-10003-standard-league.zip
 2025-12-08 12825837 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-08-12825837-standard-challenge-32.zip
 2025-12-09 10003 Standard League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-09-10003-standard-league.zip
 2025-12-09 12825845 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2025-12-09-12825845-standard-challenge-32.zip
@@ -4516,7 +4476,6 @@
 2026-01-03 12828179 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-03-12828179-standard-challenge-32.zip
 2026-01-04 10003 Standard League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-04-10003-standard-league.zip
 2026-01-04 12828200 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-04-12828200-standard-challenge-32.zip
-2026-01-05 10003 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-05-10003-standard-league.zip
 2026-01-05 12828210 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-05-12828210-standard-challenge-64.zip
 2026-01-06 10003 Standard League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-06-10003-standard-league.zip
 2026-01-06 12828220 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-06-12828220-standard-challenge-32.zip
@@ -4532,7 +4491,6 @@
 2026-01-11 10003 Standard League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-11-10003-standard-league.zip
 2026-01-11 12829326 Standard Showcase Challenge (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-11-12829326-standard-showcase-challenge.zip
 2026-01-11 12829387 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-11-12829387-standard-challenge-32.zip
-2026-01-12 10003 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-12-10003-standard-league.zip
 2026-01-12 12829397 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-12-12829397-standard-challenge-64.zip
 2026-01-13 10003 Standard League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-13-10003-standard-league.zip
 2026-01-13 12829407 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-01-13-12829407-standard-challenge-32.zip
@@ -4640,7 +4598,6 @@
 2026-03-02 10220 Standard League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-02-10220-standard-league.zip
 2026-03-02 12834104 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-02-12834104-standard-challenge-64.zip
 2026-03-03 10220 Standard League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-03-10220-standard-league.zip
-2026-03-03 10429 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-03-10429-standard-league.zip
 2026-03-03 12834458 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-03-12834458-standard-challenge-64.zip
 2026-03-04 10429 Standard League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-04-10429-standard-league.zip
 2026-03-05 10429 Standard League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-05-10429-standard-league.zip
@@ -4674,7 +4631,6 @@
 2026-03-18 10429 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-18-10429-standard-league.zip
 2026-03-19 10429 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-19-10429-standard-league.zip
 2026-03-19 12835959 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-19-12835959-standard-challenge-32.zip
-2026-03-20 10429 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-20-10429-standard-league.zip
 2026-03-20 12835972 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-20-12835972-standard-challenge-32.zip
 2026-03-20 12835983 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-20-12835983-standard-challenge-64.zip
 2026-03-21 10429 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-03-21-10429-standard-league.zip
@@ -4712,7 +4668,6 @@
 2026-04-02 12838092 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-02-12838092-standard-challenge-32.zip
 2026-04-03 10429 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-03-10429-standard-league.zip
 2026-04-03 12838115 Standard Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-03-12838115-standard-challenge-64.zip
-2026-04-04 10429 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-04-10429-standard-league.zip
 2026-04-04 12838123 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-04-12838123-standard-challenge-32.zip
 2026-04-04 12838128 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-04-12838128-standard-challenge-32.zip
 2026-04-05 10429 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-05-10429-standard-league.zip
@@ -4740,11 +4695,9 @@
 2026-04-18 10429 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-18-10429-standard-league.zip
 2026-04-18 12839682 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-18-12839682-standard-challenge-32.zip
 2026-04-18 12839687 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-18-12839687-standard-challenge-32.zip
-2026-04-19 10429 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-19-10429-standard-league.zip
 2026-04-19 12839707 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-19-12839707-standard-challenge-32.zip
 2026-04-20 10429 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-20-10429-standard-league.zip
 2026-04-20 12840379 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-20-12840379-standard-challenge-32.zip
-2026-04-21 10429 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-21-10429-standard-league.zip
 2026-04-21 12840625 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-21-12840625-standard-challenge-32.zip
 2026-04-22 10660 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-22-10660-standard-league.zip
 2026-04-23 10660 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-04-23-10660-standard-league.zip
@@ -4826,81 +4779,56 @@
 2026-05-29 10660 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-29-10660-standard-league.zip
 2026-05-29 12843385 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-29-12843385-standard-challenge-32.zip
 2026-05-29 12843495 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-29-12843495-standard-challenge-32.zip
-2026-05-30 10660 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-30-10660-standard-league.zip
 2026-05-30 12843404 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-30-12843404-standard-challenge-32.zip
-2026-05-31 10660 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-31-10660-standard-league.zip
 2026-05-31 12843428 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-05-31-12843428-standard-challenge-32.zip
 2026-06-01 10660 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-01-10660-standard-league.zip
 2026-06-01 12843438 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-01-12843438-standard-challenge-32.zip
 2026-06-02 10660 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-02-10660-standard-league.zip
 2026-06-03 10660 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-03-10660-standard-league.zip
 2026-06-03 12843795 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-03-12843795-standard-challenge-32.zip
-2026-06-04 10660 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-04-10660-standard-league.zip
 2026-06-04 12843764 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-04-12843764-standard-challenge-32.zip
-2026-06-05 10660 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-05-10660-standard-league.zip
 2026-06-05 12843777 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-05-12843777-standard-challenge-32.zip
 2026-06-05 12843787 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-05-12843787-standard-challenge-32.zip
 2026-06-06 10660 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-06-10660-standard-league.zip
 2026-06-06 12843800 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-06-12843800-standard-challenge-32.zip
-2026-06-07 10660 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-07-10660-standard-league.zip
 2026-06-07 12843820 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-07-12843820-standard-challenge-32.zip
-2026-06-08 10660 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-08-10660-standard-league.zip
 2026-06-08 12843830 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-08-12843830-standard-challenge-32.zip
-2026-06-09 10660 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-09-10660-standard-league.zip
 2026-06-09 12843840 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-09-12843840-standard-challenge-32.zip
 2026-06-10 10660 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-10-10660-standard-league.zip
 2026-06-11 10660 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-11-10660-standard-league.zip
 2026-06-11 12844284 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-11-12844284-standard-challenge-32.zip
-2026-06-12 10660 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-12-10660-standard-league.zip
 2026-06-12 12844299 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-12-12844299-standard-challenge-32.zip
 2026-06-12 12844309 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-12-12844309-standard-challenge-32.zip
-2026-06-13 10660 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-13-10660-standard-league.zip
 2026-06-13 12844317 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-13-12844317-standard-challenge-32.zip
 2026-06-13 12844322 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-13-12844322-standard-challenge-32.zip
 2026-06-14 10660 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-14-10660-standard-league.zip
 2026-06-14 12844341 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-14-12844341-standard-challenge-32.zip
-2026-06-15 10660 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-15-10660-standard-league.zip
 2026-06-15 12844351 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-15-12844351-standard-challenge-32.zip
-2026-06-16 10660 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-16-10660-standard-league.zip
 2026-06-16 12844909 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-16-12844909-standard-challenge-32.zip
-2026-06-17 10660 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-17-10660-standard-league.zip
-2026-06-18 10660 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-18-10660-standard-league.zip
 2026-06-18 12844822 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-18-12844822-standard-challenge-32.zip
-2026-06-19 10660 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-19-10660-standard-league.zip
 2026-06-19 12844835 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-19-12844835-standard-challenge-32.zip
 2026-06-19 12844845 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-19-12844845-standard-challenge-32.zip
-2026-06-20 10660 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-20-10660-standard-league.zip
 2026-06-20 12844853 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-20-12844853-standard-challenge-32.zip
 2026-06-20 12844858 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-20-12844858-standard-challenge-32.zip
-2026-06-21 10660 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-21-10660-standard-league.zip
 2026-06-21 12844878 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-21-12844878-standard-challenge-32.zip
 2026-06-22 12844888 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-22-12844888-standard-challenge-32.zip
 2026-06-23 12845616 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-23-12845616-standard-challenge-32.zip
-2026-06-24 10879 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-24-10879-standard-league.zip
-2026-06-25 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-25-10879-standard-league.zip
 2026-06-25 12845634 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-25-12845634-standard-challenge-32.zip
-2026-06-26 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-26-10879-standard-league.zip
 2026-06-26 12845647 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-26-12845647-standard-challenge-32.zip
 2026-06-26 12845657 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-26-12845657-standard-challenge-32.zip
 2026-06-27 10879 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-27-10879-standard-league.zip
 2026-06-27 12845665 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-27-12845665-standard-challenge-32.zip
 2026-06-27 12845670 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-27-12845670-standard-challenge-32.zip
-2026-06-28 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-28-10879-standard-league.zip
 2026-06-28 12845613 Standard Rc Super Qualifier (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-28-12845613-standard-rc-super-qualifier.zip
 2026-06-28 12845690 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-28-12845690-standard-challenge-32.zip
-2026-06-29 10879 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-29-10879-standard-league.zip
 2026-06-29 12845700 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-29-12845700-standard-challenge-32.zip
 2026-06-30 12845710 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-06-30-12845710-standard-challenge-32.zip
-2026-07-01 10879 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-01-10879-standard-league.zip
-2026-07-02 10879 Standard League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-02-10879-standard-league.zip
 2026-07-02 12846451 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-02-12846451-standard-challenge-32.zip
 2026-07-03 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-03-10879-standard-league.zip
 2026-07-03 12846464 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-03-12846464-standard-challenge-32.zip
 2026-07-03 12846474 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-03-12846474-standard-challenge-32.zip
-2026-07-04 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-04-10879-standard-league.zip
 2026-07-04 12846482 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-04-12846482-standard-challenge-32.zip
 2026-07-04 12846487 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-04-12846487-standard-challenge-32.zip
-2026-07-05 10879 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-05-10879-standard-league.zip
 2026-07-05 12846507 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-05-12846507-standard-challenge-32.zip
 2026-07-06 10879 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-06-10879-standard-league.zip
 2026-07-06 12846517 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-06-12846517-standard-challenge-32.zip
@@ -4909,7 +4837,6 @@
 2026-07-08 10879 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-08-10879-standard-league.zip
 2026-07-09 10879 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-09-10879-standard-league.zip
 2026-07-09 12847094 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-09-12847094-standard-challenge-32.zip
-2026-07-10 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-10-10879-standard-league.zip
 2026-07-10 12847107 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-10-12847107-standard-challenge-32.zip
 2026-07-10 12847117 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-10-12847117-standard-challenge-32.zip
 2026-07-11 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-11-10879-standard-league.zip
@@ -4917,54 +4844,40 @@
 2026-07-11 12847125 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-11-12847125-standard-challenge-32.zip
 2026-07-12 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-12-10879-standard-league.zip
 2026-07-12 12847148 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-12-12847148-standard-challenge-32.zip
-2026-07-13 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-13-10879-standard-league.zip
 2026-07-13 12847158 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-13-12847158-standard-challenge-32.zip
-2026-07-14 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-14-10879-standard-league.zip
 2026-07-14 12847168 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-14-12847168-standard-challenge-32.zip
-2026-07-15 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-15-10879-standard-league.zip
 2026-07-16 10879 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-16-10879-standard-league.zip
 2026-07-16 12847673 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-16-12847673-standard-challenge-32.zip
-2026-07-17 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-17-10879-standard-league.zip
 2026-07-17 12847680 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-17-12847680-standard-challenge-32.zip
 2026-07-17 12847684 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-17-12847684-standard-challenge-32.zip
-2026-07-18 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-18-10879-standard-league.zip
 2026-07-18 12847697 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-18-12847697-standard-challenge-32.zip
 2026-07-19 10879 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-19-10879-standard-league.zip
 2026-07-19 12847716 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-19-12847716-standard-challenge-32.zip
-2026-07-20 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-20-10879-standard-league.zip
 2026-07-20 12847718 Standard Last Chance (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-20-12847718-standard-last-chance.zip
 2026-07-20 12847723 Standard Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-20-12847723-standard-last-chance.zip
 2026-07-20 12847725 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-20-12847725-standard-challenge-32.zip
 2026-07-21 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-21-10879-standard-league.zip
 2026-07-21 12847729 Standard Last Chance (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-21-12847729-standard-last-chance.zip
 2026-07-21 12847734 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-21-12847734-standard-challenge-32.zip
-2026-07-22 10879 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-22-10879-standard-league.zip
 2026-07-22 12847740 Standard Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-22-12847740-standard-last-chance.zip
-2026-07-23 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-23-10879-standard-league.zip
 2026-07-23 12848169 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-23-12848169-standard-challenge-32.zip
 2026-07-24 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-24-10879-standard-league.zip
 2026-07-24 12848182 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-24-12848182-standard-challenge-32.zip
 2026-07-24 12848192 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-24-12848192-standard-challenge-32.zip
-2026-07-25 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-25-10879-standard-league.zip
 2026-07-25 12848200 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-25-12848200-standard-challenge-32.zip
 2026-07-25 12848205 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-25-12848205-standard-challenge-32.zip
-2026-07-26 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-26-10879-standard-league.zip
 2026-07-26 12848225 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-26-12848225-standard-challenge-32.zip
 2026-07-27 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-27-10879-standard-league.zip
 2026-07-27 12848235 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-27-12848235-standard-challenge-32.zip
-2026-07-28 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-28-10879-standard-league.zip
 2026-07-28 12848245 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-28-12848245-standard-challenge-32.zip
 2026-07-29 10879 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-29-10879-standard-league.zip
-2026-07-30 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-30-10879-standard-league.zip
 2026-07-30 12849430 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-30-12849430-standard-challenge-32.zip
-2026-07-31 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-31-10879-standard-league.zip
 2026-07-31 12849443 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-31-12849443-standard-challenge-32.zip
 2026-07-31 12849453 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-07-31-12849453-standard-challenge-32.zip
 2026-08-01 10879 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-01-10879-standard-league.zip
 2026-08-01 12849423 Standard Showcase Qualifier (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-01-12849423-standard-showcase-qualifier.zip
 2026-08-01 12849461 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-01-12849461-standard-challenge-32.zip
 2026-08-01 12849466 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-01-12849466-standard-challenge-32.zip
-2026-08-02 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-02-10879-standard-league.zip
 2026-08-02 12849486 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-02-12849486-standard-challenge-32.zip
 2026-08-02 12850805 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-02-12850805-standard-challenge-32.zip
 2026-08-03 10879 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-03-10879-standard-league.zip
@@ -4972,19 +4885,16 @@
 2026-08-04 10879 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-04-10879-standard-league.zip
 2026-08-04 12849506 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-04-12849506-standard-challenge-32.zip
 2026-08-04 12850823 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-04-12850823-standard-challenge-32.zip
-2026-08-05 10879 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-05-10879-standard-league.zip
 2026-08-06 10879 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-06-10879-standard-league.zip
 2026-08-06 12850613 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-06-12850613-standard-challenge-32.zip
 2026-08-07 10879 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-07-10879-standard-league.zip
 2026-08-07 12850815 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-07-12850815-standard-challenge-32.zip
-2026-08-08 10879 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-08-10879-standard-league.zip
 2026-08-08 12851135 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-08-12851135-standard-challenge-32.zip
 2026-08-09 10879 Standard League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-09-10879-standard-league.zip
 2026-08-09 12851116 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-09-12851116-standard-challenge-32.zip
 2026-08-10 10879 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-10-10879-standard-league.zip
 2026-08-10 12851126 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-10-12851126-standard-challenge-32.zip
 2026-08-11 10879 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-11-10879-standard-league.zip
-2026-08-11 11015 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-11-11015-standard-league.zip
 2026-08-11 12851611 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-11-12851611-standard-challenge-32.zip
 2026-08-12 11015 Standard League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-12-11015-standard-league.zip
 2026-08-13 11015 Standard League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-08-13-11015-standard-league.zip
@@ -5069,16 +4979,13 @@
 2026-09-25 11015 Standard League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-25-11015-standard-league.zip
 2026-09-25 12854913 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-25-12854913-standard-challenge-32.zip
 2026-09-26 12854920 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-26-12854920-standard-challenge-32.zip
-2026-09-27 11015 Standard League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-27-11015-standard-league.zip
 2026-09-27 12854938 Standard Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-27-12854938-standard-challenge-16.zip
 2026-09-28 11015 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-28-11015-standard-league.zip
 2026-09-28 12854946 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-28-12854946-standard-challenge-32.zip
-2026-09-29 11015 Standard League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-29-11015-standard-league.zip
 2026-09-29 12855524 Standard Challenge 16 (31 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-29-12855524-standard-challenge-16.zip
 2026-09-30 11129 Standard League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-09-30-11129-standard-league.zip
 2026-10-01 11129 Standard League (7 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-10-01-11129-standard-league.zip
 2026-10-01 12855458 Standard Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-10-01-12855458-standard-challenge-16.zip
-2026-10-02 11129 Standard League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-10-02-11129-standard-league.zip
 2026-10-02 12855466 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-10-02-12855466-standard-challenge-32.zip
 2026-10-02 12855471 Standard Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-10-02-12855471-standard-challenge-32.zip
 2026-10-04 11129 Standard League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/standard/2026-10-04-11129-standard-league.zip

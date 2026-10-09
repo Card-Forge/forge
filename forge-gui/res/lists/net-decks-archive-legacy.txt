@@ -3700,7 +3700,6 @@
 2025-02-09 8672 Legacy League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-09-8672-legacy-league.zip
 2025-02-10 8672 Legacy League (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-10-8672-legacy-league.zip
 2025-02-11 8672 Legacy League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-11-8672-legacy-league.zip
-2025-02-11 8917 Legacy League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-11-8917-legacy-league.zip
 2025-02-12 12743681 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-12-12743681-legacy-challenge-32.zip
 2025-02-12 8917 Legacy League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-12-8917-legacy-league.zip
 2025-02-13 8917 Legacy League (17 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-02-13-8917-legacy-league.zip
@@ -3804,7 +3803,6 @@
 2025-04-06 8917 Legacy League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-06-8917-legacy-league.zip
 2025-04-07 8917 Legacy League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-07-8917-legacy-league.zip
 2025-04-08 8917 Legacy League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-08-8917-legacy-league.zip
-2025-04-08 9057 Legacy League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-08-9057-legacy-league.zip
 2025-04-09 12765737 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-09-12765737-legacy-challenge-32.zip
 2025-04-09 9057 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-09-9057-legacy-league.zip
 2025-04-10 9057 Legacy League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-04-10-9057-legacy-league.zip
@@ -3867,7 +3865,7 @@
 2025-05-13 9057 Legacy League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-13-9057-legacy-league.zip
 2025-05-14 12780105 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-14-12780105-legacy-challenge-32.zip
 2025-05-14 9057 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-14-9057-legacy-league.zip
-2025-05-15 9057 Legacy League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-15-9057-legacy-league.zip
+2025-05-15 9057 Legacy League (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-15-9057-legacy-league.zip
 2025-05-16 9057 Legacy League (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-16-9057-legacy-league.zip
 2025-05-17 12780143 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-17-12780143-legacy-challenge-32.zip
 2025-05-17 12780150 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-05-17-12780150-legacy-challenge-32.zip
@@ -3913,9 +3911,7 @@
 2025-06-08 9057 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-08-9057-legacy-league.zip
 2025-06-09 9057 Legacy League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-09-9057-legacy-league.zip
 2025-06-10 9057 Legacy League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-10-9057-legacy-league.zip
-2025-06-10 9334 Legacy League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-10-9334-legacy-league.zip
 2025-06-11 12794559 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-11-12794559-legacy-challenge-32.zip
-2025-06-11 9334 Legacy League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-11-9334-legacy-league.zip
 2025-06-12 9334 Legacy League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-12-9334-legacy-league.zip
 2025-06-13 9334 Legacy League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-13-9334-legacy-league.zip
 2025-06-14 12794590 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-06-14-12794590-legacy-challenge-32.zip
@@ -3977,7 +3973,7 @@
 2025-07-15 9334 Legacy League (14 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-15-9334-legacy-league.zip
 2025-07-16 12803655 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-16-12803655-legacy-challenge-32.zip
 2025-07-16 9334 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-16-9334-legacy-league.zip
-2025-07-17 9334 Legacy League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-17-9334-legacy-league.zip
+2025-07-17 9334 Legacy League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-17-9334-legacy-league.zip
 2025-07-18 9334 Legacy League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-18-9334-legacy-league.zip
 2025-07-19 12803686 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-19-12803686-legacy-challenge-32.zip
 2025-07-19 12803692 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-07-19-12803692-legacy-challenge-32.zip
@@ -4072,7 +4068,6 @@
 2025-09-05 9503 Legacy League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-05-9503-legacy-league.zip
 2025-09-06 12813556 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-06-12813556-legacy-challenge-32.zip
 2025-09-06 12813562 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-06-12813562-legacy-challenge-32.zip
-2025-09-06 9503 Legacy League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-06-9503-legacy-league.zip
 2025-09-07 12813571 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-07-12813571-legacy-challenge-32.zip
 2025-09-07 12813577 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-07-12813577-legacy-challenge-32.zip
 2025-09-07 9503 Legacy League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-07-9503-legacy-league.zip
@@ -4101,7 +4096,6 @@
 2025-09-21 9503 Legacy League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-21-9503-legacy-league.zip
 2025-09-22 9503 Legacy League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-22-9503-legacy-league.zip
 2025-09-23 9503 Legacy League (17 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-23-9503-legacy-league.zip
-2025-09-23 9718 Legacy League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-23-9718-legacy-league.zip
 2025-09-24 12816498 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-24-12816498-legacy-challenge-32.zip
 2025-09-24 9718 Legacy League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-24-9718-legacy-league.zip
 2025-09-25 9718 Legacy League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-25-9718-legacy-league.zip
@@ -4116,7 +4110,7 @@
 2025-09-30 9718 Legacy League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-09-30-9718-legacy-league.zip
 2025-10-01 12818092 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-01-12818092-legacy-challenge-32.zip
 2025-10-01 9718 Legacy League (17 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-01-9718-legacy-league.zip
-2025-10-02 9718 Legacy League (14 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-02-9718-legacy-league.zip
+2025-10-02 9718 Legacy League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-02-9718-legacy-league.zip
 2025-10-03 9718 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-03-9718-legacy-league.zip
 2025-10-04 12818123 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-04-12818123-legacy-challenge-32.zip
 2025-10-04 12818129 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-04-12818129-legacy-challenge-32.zip
@@ -4129,7 +4123,7 @@
 2025-10-07 9718 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-07-9718-legacy-league.zip
 2025-10-08 12819487 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-08-12819487-legacy-challenge-32.zip
 2025-10-08 9718 Legacy League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-08-9718-legacy-league.zip
-2025-10-09 9718 Legacy League (11 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-09-9718-legacy-league.zip
+2025-10-09 9718 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-09-9718-legacy-league.zip
 2025-10-10 9718 Legacy League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-10-9718-legacy-league.zip
 2025-10-11 12819518 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-11-12819518-legacy-challenge-32.zip
 2025-10-11 12819524 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2025-10-11-12819524-legacy-challenge-32.zip
@@ -4302,7 +4296,6 @@
 2026-01-11 12829376 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-11-12829376-legacy-challenge-32.zip
 2026-01-11 12829382 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-11-12829382-legacy-challenge-32.zip
 2026-01-11 9963 Legacy League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-11-9963-legacy-league.zip
-2026-01-12 9963 Legacy League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-12-9963-legacy-league.zip
 2026-01-13 9963 Legacy League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-13-9963-legacy-league.zip
 2026-01-14 12830012 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-14-12830012-legacy-challenge-32.zip
 2026-01-14 9963 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-01-14-9963-legacy-league.zip
@@ -4390,7 +4383,6 @@
 2026-03-01 12834089 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-01-12834089-legacy-challenge-32.zip
 2026-03-02 10172 Legacy League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-02-10172-legacy-league.zip
 2026-03-03 10172 Legacy League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-03-10172-legacy-league.zip
-2026-03-03 10381 Legacy League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-03-10381-legacy-league.zip
 2026-03-03 12834509 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-03-12834509-legacy-challenge-32.zip
 2026-03-04 10381 Legacy League (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-04-10381-legacy-league.zip
 2026-03-04 12834472 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-03-04-12834472-legacy-challenge-32.zip
@@ -4479,7 +4471,6 @@
 2026-04-19 12839702 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-19-12839702-legacy-challenge-32.zip
 2026-04-20 10381 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-20-10381-legacy-league.zip
 2026-04-21 10381 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-21-10381-legacy-league.zip
-2026-04-21 10612 Legacy League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-21-10612-legacy-league.zip
 2026-04-22 10612 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-22-10612-legacy-league.zip
 2026-04-22 12840517 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-22-12840517-legacy-challenge-32.zip
 2026-04-23 10612 Legacy League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-04-23-10612-legacy-league.zip
@@ -4587,7 +4578,6 @@
 2026-06-21 12844873 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-21-12844873-legacy-challenge-32.zip
 2026-06-22 10612 Legacy League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-22-10612-legacy-league.zip
 2026-06-23 10612 Legacy League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-23-10612-legacy-league.zip
-2026-06-23 10831 Legacy League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-23-10831-legacy-league.zip
 2026-06-24 10831 Legacy League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-24-10831-legacy-league.zip
 2026-06-24 12845632 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-24-12845632-legacy-challenge-32.zip
 2026-06-25 10831 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-06-25-10831-legacy-league.zip
@@ -4673,7 +4663,6 @@
 2026-08-09 12851111 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-09-12851111-legacy-challenge-32.zip
 2026-08-10 10831 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-10-10831-legacy-league.zip
 2026-08-11 10831 Legacy League (13 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-11-10831-legacy-league.zip
-2026-08-11 10967 Legacy League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-11-10967-legacy-league.zip
 2026-08-12 10967 Legacy League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-12-10967-legacy-league.zip
 2026-08-12 12851626 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-12-12851626-legacy-challenge-32.zip
 2026-08-13 10967 Legacy League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-08-13-10967-legacy-league.zip
@@ -4754,7 +4743,6 @@
 2026-09-27 12854934 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-27-12854934-legacy-challenge-32.zip
 2026-09-28 10967 Legacy League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-28-10967-legacy-league.zip
 2026-09-29 10967 Legacy League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-29-10967-legacy-league.zip
-2026-09-29 11169 Legacy League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-29-11169-legacy-league.zip
 2026-09-29 12854952 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-29-12854952-legacy-challenge-32.zip
 2026-09-30 11169 Legacy League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-30-11169-legacy-league.zip
 2026-09-30 12855455 Legacy Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/legacy/2026-09-30-12855455-legacy-challenge-32.zip
