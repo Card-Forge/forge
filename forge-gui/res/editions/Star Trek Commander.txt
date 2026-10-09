@@ -6,8 +6,11 @@ Type=Commander
 ScryfallCode=TRC
 
 [cards]
+20 R Join the Collective @Lordigan
 78 R Christine Chapel, Combat Medic @Pauline Voss
 85 M Captain Kirk, Boldly Going @Josh Newton
+121 R Starfleet Communicator @Wero Gallo
+131 R Borg Queen, One Who Is Many @Erion Makuo
 132 C Evasive Maneuvers @Evan Shipard
 133 C Head of Security @Alexey Kot
 137 U Shuttle Crew @Pierre Raveneau
