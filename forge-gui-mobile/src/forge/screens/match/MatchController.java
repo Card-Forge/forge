@@ -87,6 +87,8 @@ public class MatchController extends NetworkGuiGame {
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
     private static GameState phaseGameState;
+    private static boolean introShowing;      // EDT only
+    private static Runnable deferredCoin;
 
     private GameState getPhaseGameState() {
         return phaseGameState;
@@ -282,6 +284,16 @@ public class MatchController extends NetworkGuiGame {
         btn2.setEnabled(enable2);
     }
 
+    /** EDT only. While true, coin flips wait until it is set back to false. */
+    public static void setIntroShowing(final boolean showing) {
+        introShowing = showing;
+        if (!showing && deferredCoin != null) {
+            final Runnable r = deferredCoin;
+            deferredCoin = null;
+            r.run();
+        }
+    }
+
     @Override
     public void showCoinFlip(final boolean heads, final String caption, final boolean waitForTap) {
         if (FThreads.isGuiThread()) {
@@ -289,17 +301,19 @@ public class MatchController extends NetworkGuiGame {
         }
         final CountDownLatch latch = new CountDownLatch(1);
         FThreads.invokeInEdtLater(() -> {
-            try {
-                new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
-            } catch (RuntimeException e) {
-                latch.countDown();
+            final Runnable show = () -> {
+                try {
+                    new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
+                } catch (RuntimeException e) {
+                    latch.countDown();
+                }
+            };
+            if (introShowing && deferredCoin == null) {
+                deferredCoin = show;      // runs when the boss dialog is dismissed
+            } else {
+                show.run();
             }
         });
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
     }
 
     @Override
