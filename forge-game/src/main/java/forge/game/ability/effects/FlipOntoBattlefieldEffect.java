@@ -9,11 +9,13 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     @Override
@@ -21,7 +23,8 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         // Basic parameters defining the chances
         final float chanceToFlip = 0.85f;
         final int maxFlipTimes = 2;
-        final float chanceToHitTwoCards = 0.20f;
+        final float chanceToHitCorner = 0.06f;    // 3-4 cards: orb lands on the corner where cards meet (needs the mobile board)
+        final float chanceToHitTwoCards = 0.20f;  // cumulative: corner + two cards
 
         final Card host = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
@@ -48,28 +51,51 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         int flippedTimes = flipped ? MyRandom.getRandom().nextInt(maxFlipTimes) + 1 : 0;
         sa.setSVar("TimesFlipped", String.valueOf(flippedTimes));
 
-        CardCollection hit = new CardCollection();
+        // how many cards the orb should hit: 0 (miss), 1, 2, or 3-4 for a corner landing
+        int wanted = 0;
         if (flipped) {
             float outcome = MyRandom.getRandom().nextFloat();
-            if (outcome <= chanceToHitTwoCards) {
-                // two cards: the target plus one neighbour, so the orb always lands across two adjacent cards
-                CardCollection adjacent = new CardCollection();
-                if (lhsNeighbor != null && lhsNeighbor != tgtLoc) adjacent.add(lhsNeighbor);
-                if (rhsNeighbor != null && rhsNeighbor != tgtLoc) adjacent.add(rhsNeighbor);
-                hit.add(tgtLoc);
-                if (!adjacent.isEmpty()) hit.add(Aggregates.random(adjacent));
+            if (outcome <= chanceToHitCorner) {
+                wanted = 3 + MyRandom.getRandom().nextInt(2);
+            } else if (outcome <= chanceToHitTwoCards) {
+                wanted = 2;
             } else if (outcome <= chanceToHit) {
-                hit.add(Aggregates.random(randChoices));
+                wanted = 1;
+            }
+        }
+
+        // Fallback pick, used when no board UI knows the real layout (desktop, headless, netplay client).
+        // The mobile board replaces this list with the cards the orb really touches.
+        CardCollection hit = new CardCollection();
+        if (wanted == 1) {
+            hit.add(Aggregates.random(randChoices));
+        } else if (wanted > 1) {
+            hit.add(tgtLoc);
+            for (Card c : randChoices) {
+                if (hit.size() < wanted && !hit.contains(c)) hit.add(c);
+            }
+            for (Card c : tgtLoc.getController().getCardsIn(ZoneType.Battlefield)) {
+                if (hit.size() < wanted && !hit.contains(c)) hit.add(c);
             }
         }
 
         final CardView hostView = host.getView();
         final CardView tgtView = tgtLoc.getView();
-        final List<CardView> hitViews = new ArrayList<>();
+        // thread-safe: the board UI may rewrite it from the render thread while this thread waits
+        final List<CardView> hitViews = new CopyOnWriteArrayList<>();
         for (Card c : hit) { hitViews.add(c.getView()); }
 
-        // first event (animation starts)
+        // first event (animation starts; with the mobile UI this returns once the orb has landed)
         game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, flippedTimes, false));
+
+        // a board that knows the real layout may have replaced the list with the cards the orb touched
+        if (flipped) {
+            hit = new CardCollection();
+            for (CardView v : hitViews) {
+                Card c = game.findById(v.getId());
+                if (c != null && c.isInPlay()) hit.add(c);
+            }
+        }
 
         if (!flipped) {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblDidNotFlipOver"), null);
@@ -77,7 +103,9 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
             return;
         }
         game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblFlippedOver", flippedTimes), null);
-        if (hit.size() == 2) {
+        if (hit.size() >= 3) {
+            game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnOneCard", Lang.joinHomogenous(hit)), null);
+        } else if (hit.size() == 2) {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnTwoCards", hit.getFirst(), hit.getLast()), null);
         } else if (hit.size() == 1) {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnOneCard", hit.getFirst()), null);

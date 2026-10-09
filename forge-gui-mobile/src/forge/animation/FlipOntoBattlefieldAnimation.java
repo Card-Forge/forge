@@ -66,7 +66,7 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
     private final Rectangle savedBounds = new Rectangle(), savedVisible = new Rectangle();
     private final IntBuffer vp = BufferUtils.newIntBuffer(16);
     public FlipOntoBattlefieldAnimation(CardView flipped, CardView target, List<CardView> hit,
-            List<CardView> battlefield, int timesFlipped, Runnable onFinished) {
+                                        List<CardView> battlefield, int timesFlipped, Runnable onFinished) {
         this.flipped = flipped;
         this.timesFlipped = timesFlipped;
         this.flew = timesFlipped > 0;
@@ -88,49 +88,110 @@ public class FlipOntoBattlefieldAnimation extends ForgeAnimation {
         startX = sr != null ? sr[0] + sr[2] / 2f : sw / 2f;
         startY = sr != null ? sr[1] + sr[3] / 2f : sh * 0.85f;
 
-        // everything on the board except the thrown card = obstacles for a miss
-        List<float[]> obstacles = new ArrayList<>();
+        // real on-screen card rect of every visible permanent except the thrown card
+        final List<float[]> obstacles = new ArrayList<>();
+        final List<CardView> cardViews = new ArrayList<>();
         for (CardView cv : battlefield) {
             if (cv == null || cv.getId() == flipped.getId()) { continue; }
             float[] r = rawRect(cv);
-            if (r != null) { obstacles.add(r); }
+            if (r == null) { continue; }
+            obstacles.add(visibleCard(r, cv.isTapped()));
+            cardViews.add(cv);
         }
 
-        for (CardView cv : hit) {
-            float[] r = rawRect(cv);
-            if (r != null) {
-                hitRects.add(r);
-                hitImmune.add(cv.isToken());   // the script skips tokens
-            }
-        }
-
-        final boolean hitButHidden = hitRects.isEmpty() && !hit.isEmpty();
+        final float ang = (float) (Math.random() - 0.5) * 50f;
+        final int wanted = flew ? hit.size() : 0;   // how many cards the game says the orb hits
         float lx, ly;
-        if (!hitRects.isEmpty()) {
-            // land ON the hit card(s); between them if there are two
-            float sx = 0f, sy = 0f;
-            for (float[] r : hitRects) { sx += r[0] + r[2] / 2f; sy += r[1] + r[3] / 2f; }
-            lx = sx / hitRects.size();
-            ly = sy / hitRects.size();
-            if (hitRects.size() == 1) {
-                lx += (float) (Math.random() - 0.5) * cardW * 0.2f;
-                ly += (float) (Math.random() - 0.5) * cardH * 0.15f;
+        if (wanted > 0 && tr != null && !obstacles.isEmpty()) {
+            // The game rolled how many cards get hit; where the orb really lands decides which ones.
+            // Try landing spots around the target and keep one that touches that many cards.
+            final double rad = Math.toRadians(ang);
+            final float cs = (float) Math.abs(Math.cos(rad)), sn = (float) Math.abs(Math.sin(rad));
+            final float bw = (cardW * cs + cardH * sn) * 0.85f, bh = (cardW * sn + cardH * cs) * 0.85f;
+
+            int bestDiff = Integer.MAX_VALUE;
+            final List<float[]> pool = new ArrayList<>();
+            for (int k = 0; k < 48; k++) {
+                final double a = Math.random() * Math.PI * 2d;
+                final float rr = k == 0 ? 0f : (float) Math.sqrt(Math.random()) * cardH;
+                final float x = Math.round(clampX(tcx + (float) Math.cos(a) * rr));
+                final float y = Math.round(clampY(tcy + (float) Math.sin(a) * rr));
+                final int diff = Math.abs(touching(x, y, bw, bh, obstacles).size() - wanted);
+                if (diff < bestDiff) { bestDiff = diff; pool.clear(); }
+                if (diff == bestDiff) { pool.add(new float[] { x, y }); }
             }
-        } else if (hitButHidden) {
-            // it hit something we can't see: settle on the chosen target with a small scatter,
-            // and don't search for free space, since a "clean miss" would contradict the game log
-            lx = tcx + (float) (Math.random() - 0.5) * cardW * 0.3f;
-            ly = tcy + (float) (Math.random() - 0.5) * cardH * 0.2f;
+            final float[] pick = pool.get((int) (Math.random() * pool.size()));
+            lx = pick[0];
+            ly = pick[1];
+
+            // tell the game which cards the orb really touches
+            final List<Integer> touched = touching(lx, ly, bw, bh, obstacles);
+            try {
+                hit.clear();
+                for (int i : touched) { hit.add(cardViews.get(i)); }
+            } catch (UnsupportedOperationException ignored) { }
+            for (int i : touched) {
+                hitRects.add(obstacles.get(i));
+                hitImmune.add(cardViews.get(i).isToken());   // the script skips tokens
+            }
         } else {
-            // real miss: find open space near the target that touches no card
-            float[] free = findFreeSpot(tcx, tcy, obstacles);
-            lx = free[0];
-            ly = free[1];
+            // no usable layout (target not on screen) or a miss: keep what the game decided
+            for (CardView cv : hit) {
+                float[] r = rawRect(cv);
+                if (r != null) {
+                    hitRects.add(r);
+                    hitImmune.add(cv.isToken());   // the script skips tokens
+                }
+            }
+            final boolean hitButHidden = hitRects.isEmpty() && !hit.isEmpty();
+            if (!hitRects.isEmpty()) {
+                // land ON the hit card(s); between them if there are two
+                float sx = 0f, sy = 0f;
+                for (float[] r : hitRects) { sx += r[0] + r[2] / 2f; sy += r[1] + r[3] / 2f; }
+                lx = sx / hitRects.size();
+                ly = sy / hitRects.size();
+                if (hitRects.size() == 1) {
+                    lx += (float) (Math.random() - 0.5) * cardW * 0.2f;
+                    ly += (float) (Math.random() - 0.5) * cardH * 0.15f;
+                }
+            } else if (hitButHidden) {
+                // it hit something we can't see: settle on the chosen target with a small scatter,
+                // and don't search for free space, since a "clean miss" would contradict the game log
+                lx = tcx + (float) (Math.random() - 0.5) * cardW * 0.3f;
+                ly = tcy + (float) (Math.random() - 0.5) * cardH * 0.2f;
+            } else {
+                // real miss: find open space near the target that touches no card
+                float[] free = findFreeSpot(tcx, tcy, obstacles);
+                lx = free[0];
+                ly = free[1];
+            }
         }
         landX = Math.round(clampX(lx));
         landY = Math.round(clampY(ly));
-        landAngle = (float) (Math.random() - 0.5) * 50f;
+        landAngle = ang;
         spinDir = Math.random() < 0.5 ? 1f : -1f;
+    }
+
+    // the card inside its panel: padded, and a tapped card sits sideways at the bottom of the square panel
+    private static float[] visibleCard(float[] p, boolean tapped) {
+        final float pad = FCardPanel.PADDING;
+        final float h = p[3] - 2 * pad;
+        final float w = h / CARD_RATIO;
+        return tapped ? new float[] { p[0] + pad, p[1] + pad + h - w, h, w }
+                : new float[] { p[0] + pad, p[1] + pad, w, h };
+    }
+
+    // indices of the cards the orb box covers by at least 5% of their area
+    private static List<Integer> touching(float cx, float cy, float bw, float bh, List<float[]> rects) {
+        final List<Integer> out = new ArrayList<>();
+        final float l = cx - bw / 2f, r = cx + bw / 2f, t = cy - bh / 2f, b = cy + bh / 2f;
+        for (int i = 0; i < rects.size(); i++) {
+            final float[] o = rects.get(i);
+            final float ox = Math.min(r, o[0] + o[2]) - Math.max(l, o[0]);
+            final float oy = Math.min(b, o[1] + o[3]) - Math.max(t, o[1]);
+            if (ox > 0f && oy > 0f && ox * oy >= 0.05f * o[2] * o[3]) { out.add(i); }
+        }
+        return out;
     }
 
     /** Renders the card face once, upright, into a texture. Falls back to direct drawing if anything fails. */
