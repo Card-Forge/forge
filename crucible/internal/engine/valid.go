@@ -317,6 +317,12 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 	case name == "IsImprinted":
 		sc, ok := sourceCard(g, source)
 		return ok && containsCard(sc.Memory.Imprinted(), c.ID)
+	case name == "sharesNameWith":
+		// CardProperty.java:819-822: c shares a name with the source itself.
+		sc, ok := sourceCard(g, source)
+		return ok && g.sharesNameWith(c.ID, sc.ID)
+	case strings.HasPrefix(name, "sharesNameWith "):
+		return g.sharesNameWithAny(c, strings.TrimPrefix(name, "sharesNameWith "), sourceController, source)
 	case strings.HasPrefix(name, "AttachedTo "):
 		// CardProperty.java:441: c is attached to something that is itself
 		// valid for the restriction after the space -- a player through
@@ -1418,6 +1424,64 @@ func sharesName(c *Card, name string) bool {
 		return false
 	}
 	return c.Def.Faces[0].Name == name || c.Def.Faces[carddb.FaceAlternate].Name == name
+}
+
+// sharesNameWithAny is CardProperty.java:823-869, `sharesNameWith <restriction>`:
+// c shares a name with some card the restriction names. The zone forms
+// (YourGraveyard, Graveyard, Battlefield, NonToken) scan those zones; any
+// other restriction is a Defined$ card list (AbilityUtils.getDefinedCards),
+// of which only the ones read off the source's own Memory -- Remembered and
+// Imprinted (Doubling Chant, Clarion Ultimatum, Dichotomancy) -- are answered
+// here, since a valid string is matched without the ability that names it.
+// ThisTurnCast, MovedToGrave, TriggeredCard and the other Defined$ forms need
+// that ability and match nothing.
+func (g *Game) sharesNameWithAny(c *Card, restriction string, sourceController PlayerID, source CardID) bool {
+	anyShares := func(ids []CardID) bool {
+		for _, id := range ids {
+			if g.sharesNameWith(id, c.ID) {
+				return true
+			}
+		}
+		return false
+	}
+	inZone := func(z ZoneType, players []PlayerID, keep func(*Card) bool) bool {
+		for _, pid := range players {
+			for _, id := range g.Zone(z, pid).Cards() {
+				if keep(g.Card(id)) && g.sharesNameWith(id, c.ID) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	all := func(*Card) bool { return true }
+	switch restriction {
+	case "YourGraveyard":
+		return sourceController != NoPlayer && inZone(Graveyard, []PlayerID{sourceController}, all)
+	case "Graveyard":
+		return inZone(Graveyard, g.Players(), all)
+	case "Battlefield":
+		return inZone(Battlefield, g.Players(), all)
+	case "NonToken":
+		return inZone(Battlefield, g.Players(), func(o *Card) bool { return !o.IsToken })
+	}
+	sc, ok := sourceCard(g, source)
+	if !ok {
+		return false
+	}
+	switch restriction {
+	case "Remembered":
+		var cards []CardID
+		for _, e := range sc.Memory.Remembered() {
+			if id, isCard := e.AsCard(); isCard {
+				cards = append(cards, id)
+			}
+		}
+		return anyShares(cards)
+	case "Imprinted":
+		return anyShares(sc.Memory.Imprinted())
+	}
+	return false
 }
 
 // targetsPlayer reports whether the ability resolving from source has pid

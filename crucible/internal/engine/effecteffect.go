@@ -224,6 +224,10 @@ const (
 	// effectUntilHostLeavesPlayOrEOT ends at whichever comes first: the host
 	// leaving the battlefield or the next cleanup step.
 	effectUntilHostLeavesPlayOrEOT
+	// effectUntilFacedown ends when the host is turned face down
+	// (Card.addFacedownCommand, run by Card.turnFaceDown). Only a Clone copy
+	// effect takes it (Vesuvan Shapeshifter).
+	effectUntilFacedown
 )
 
 // zoneMask is a set of zones, one bit per ZoneType.

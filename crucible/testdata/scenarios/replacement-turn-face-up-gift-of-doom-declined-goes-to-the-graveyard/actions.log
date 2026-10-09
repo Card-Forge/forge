@@ -1,0 +1,22 @@
+# Gift of Doom turned face up, its controller picks the Bears and then
+# declines the Optional$ attach (AttachEffect.java:144-146). The face-up Aura
+# is attached to nothing, so the state-based check puts it into its owner's
+# graveyard (CR 704.5m).
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue paygeneric W
+castspell human 1
+resolvestack
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+queue paygeneric U
+queue paygeneric U
+queue targets 8
+queue action human activate 7 0
+queue cardchoice 10
+queue confirmeffect false
+passpriority
+resolvestack

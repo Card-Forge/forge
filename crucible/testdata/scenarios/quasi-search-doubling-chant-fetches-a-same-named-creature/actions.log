@@ -1,0 +1,23 @@
+# Doubling Chant: RepeatEach over Creature.YouCtrl remembers each creature in
+# turn; DBSearch is ChooseCard | ChoiceZone$ Library | QuasiLibrarySearch$ You
+# | Choices$ Card.YouOwn+!IsImprinted+sharesNameWith Remembered (ChooseCardEffect.java:243-269,
+# CardProperty.java:823-869), imprinting the pick. DBChangeZone | Defined$
+# Imprinted | Searched$ True | Shuffle$ True puts it onto the battlefield.
+# Only the library Grizzly Bears shares the Bears' name: it is the one card
+# offered, and it enters; Llanowar Elves stays in the library.
+startturn human
+advance 3
+tapformana human 1 G
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+tapformana human 5 G
+tapformana human 6 G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+castspell human 8
+queue cardchoice 10
+resolvestack

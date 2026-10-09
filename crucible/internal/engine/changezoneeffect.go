@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction
+//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ var changeZoneUnresolvedParams = [...]string{
 	"RememberLKI", "Champion", "Foretold", "ForetoldCost", "WithMayLook", "TrackDiscarded",
 	"RandomOrder", "Chooser", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
-	"ShuffleChangedPile", "Reorder", "Exactly", "Searched", "RememberSearched",
+	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",
 	"AlreadyRevealed", "ImprintLast", "TargetsWithDefinedController", "Unearth",
 	"Condition", "SorcerySpeed", "Ultimate", "ModeCost",
 	// ExiledWithEffectSource$ marks the effect card's own source as the
@@ -280,6 +280,12 @@ type hiddenChoice struct {
 	// declared per fetcher): a blocked search turns it to
 	// !ShuffleNonMandatory$.
 	shuffleMandatory bool
+	// found is HiddenOriginChoices.searchedLibrary, the FoundSearchingLibrary
+	// run param every move of this fetcher's cards carries
+	// (ChangeZoneEffect.java:1277, :1308): the library was really searched --
+	// not blocked, not NoLooking$, and not a Searched$ ability, which Java
+	// turns back to false once its grant is made (:1090-1092).
+	found bool
 }
 
 // canSearchLibraryWith is Player.canSearchLibraryWith (Player.java:3749): a
@@ -330,6 +336,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 	_, mandatory := a.Params.Param("Mandatory")
 	_, optional := a.Params.Param("Optional")
 	_, noShuffle := a.Params.Param("NoShuffle")
+	_, searchedParam := a.Params.Param("Searched")
 	shuffleParam, _ := a.Params.Param("Shuffle")
 	shuffleMandatory := !noShuffle && shuffleParam != "False"
 	libPos, err := libraryPosition(g, a, source)
@@ -446,9 +453,10 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			if hi > 0 {
 				// ChangeZoneEffect.java:1070-1076, 1268: a searched library is
 				// searched under the control grant ControlOpponentsSearching-
-				// Library$ gives (ADR-0040), popped after the pick.
+				// Library$ gives (ADR-0040), popped after the pick. Searched$
+				// counts as a search for the grant (:1067-1069).
 				var end func()
-				if searchedLibrary {
+				if searchedLibrary || searchedParam {
 					end = g.beginSearchControl(player)
 				}
 				chosen = controller.ChooseCardsForEffect(g, player, a.Source, fetchList, lo, hi)
@@ -463,7 +471,8 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		if zoneIn(Library, origin) && dest == Library && fetcherShuffle {
 			g.Shuffle(Library, player)
 		}
-		picks = append(picks, hiddenChoice{player: player, chosen: chosen, shuffleMandatory: fetcherShuffle})
+		picks = append(picks, hiddenChoice{player: player, chosen: chosen, shuffleMandatory: fetcherShuffle,
+			found: searchedLibrary && !searchedParam})
 	}
 
 	_, tapped := a.Params.Param("Tapped")
@@ -472,6 +481,18 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		var movedOrigins []ZoneType
 		for _, id := range pick.chosen {
 			from := g.Card(id).Zone
+			if pick.found && g.foundSearchReplaced(controller, id, dest) {
+				// GameAction.changeZone returns the card a Moved replacement
+				// sent elsewhere (GameAction.java:341-368), and Java goes on with
+				// it: ExiledWith for an exiling search, then RememberChanged$ and
+				// Imprint$ (ChangeZoneEffect.java:1416-1507). The replacement's own
+				// move fired its zone-change triggers.
+				if dest == Exile {
+					g.markExiledWith(id, a.Source)
+				}
+				changeZoneMemory(a, source, id)
+				continue
+			}
 			melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 			if dest == Exile {
 				g.markExiledWith(id, a.Source)

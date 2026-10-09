@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game ability control effecthelpers card condition id zone valid defined parts
+//enginelint:allow game ability control effecthelpers card condition id zone valid defined parts effecteffect cloneeffect facedown
 
 import (
 	"fmt"
@@ -25,7 +25,10 @@ import (
 // (faceChangeReplaced, replacementfaces.go). Optional$ asks first;
 // RememberChanged$ remembers each changed card. Mode$ Flip (CR 709) is
 // one-way and gives no timestamp, no Transformed trigger and no replacement
-// (Card.java:716-745, g.flip). TurnFaceDown and Specialize are not resolved.
+// (Card.java:716-745, g.flip). TurnFaceDown turns a face-up permanent face
+// down (Card.java:762-767, turnFaceDown), ending the UntilFacedown copy
+// effects it hosts; it runs no replacement or trigger. Specialize is not
+// resolved.
 type setStateEffect struct{}
 
 func (setStateEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -38,7 +41,7 @@ func (setStateEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 		return nil
 	}
 	mode, _ := a.Params.Param("Mode")
-	if mode != "Transform" && mode != "TurnFaceUp" && mode != "Flip" {
+	if mode != "Transform" && mode != "TurnFaceUp" && mode != "Flip" && mode != "TurnFaceDown" {
 		return fmt.Errorf("engine: SetState: Mode$ %q not resolvable yet", mode)
 	}
 	if mode == "Transform" && battlefieldStaticMode(g, "CantTransform") {
@@ -85,6 +88,13 @@ func (setStateEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 			return fmt.Errorf("engine: SetState: %w", err)
 		}
 	}
+	if mode == "TurnFaceDown" {
+		for _, id := range cards {
+			if err := g.turnFaceDownCheck(id); err != nil {
+				return err
+			}
+		}
+	}
 	for _, id := range cards {
 		c := g.Card(id)
 		if mode == "Transform" && c.Zone != Battlefield {
@@ -102,6 +112,8 @@ func (setStateEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 			changed = g.transform(id)
 		case mode == "Flip":
 			changed = g.flip(id)
+		case mode == "TurnFaceDown":
+			changed = g.turnFaceDown(id)
 		case c.IsFaceDown() && g.canBeTurnedFaceUp(id) && c.faceUpDef.Faces[0].Type.IsPermanent():
 			c.turnFaceUp()
 			// CR 613.7f: a permanent turned face up gets a new timestamp
@@ -127,6 +139,56 @@ func (setStateEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 		}
 	}
 	return nil
+}
+
+// turnFaceDownCheck is whether id can be turned face down by this port, an
+// error naming the shape it cannot: Card.changeCardState("TurnFaceDown")
+// (Card.java:762-767) for a permanent, not a Room, under no copy effect but
+// the UntilFacedown ones it hosts itself -- the face-down state takes the one
+// Def slot those would otherwise have to share.
+func (g *Game) turnFaceDownCheck(id CardID) error {
+	c := g.Card(id)
+	switch {
+	case c.Zone != Battlefield:
+		return fmt.Errorf("engine: SetState: TurnFaceDown outside the battlefield (%v) not resolvable yet", c.Zone)
+	case c.IsRoomPermanent():
+		return fmt.Errorf("engine: SetState: TurnFaceDown of a Room not resolvable yet")
+	}
+	for _, e := range c.copies {
+		if e.permanent || e.life.duration != effectUntilFacedown || e.life.host != id {
+			return fmt.Errorf("engine: SetState: TurnFaceDown of a permanent under another copy effect not resolvable yet")
+		}
+	}
+	return nil
+}
+
+// turnFaceDown is Card.turnFaceDown (Card.java:841-863) for a permanent
+// turnFaceDownCheck accepted: a face-up, single-faced permanent becomes a
+// face-down 2/2 (CR 708.2a) with a new timestamp (CR 613.7f), and its
+// facedown commands run -- the UntilFacedown copy effects it hosts end
+// (endCopiesOnFaceDown), here before the face changes so the face-down state
+// covers the card's own values. A face-down or double-faced permanent does
+// not turn (Java's !isDoubleFaced and oldState checks). Reports whether it
+// turned.
+func (g *Game) turnFaceDown(id CardID) bool {
+	c := g.Card(id)
+	if c.IsFaceDown() || c.frontDef != nil {
+		return false
+	}
+	// Card.isDoubleFaced reads the card's own rules, not a copied state.
+	if own := c.UncopiedDef(); own != nil {
+		switch own.SplitType {
+		case carddb.SplitTransform, carddb.SplitMeld, carddb.SplitModal:
+			return false
+		}
+	}
+	g.endCopiesOnFaceDown(id)
+	c.clearTextChange()
+	c.faceUpDef = c.Def
+	c.Def = faceDownDef(false)
+	g.timestamp++
+	c.Timestamp = g.timestamp
+	return true
 }
 
 // flip is Card.changeCardState("Flip") (Card.java:716-745), CR 709.4: a

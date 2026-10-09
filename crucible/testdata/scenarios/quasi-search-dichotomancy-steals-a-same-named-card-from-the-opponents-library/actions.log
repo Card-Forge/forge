@@ -1,0 +1,30 @@
+# Dichotomancy: RepeatEach over Permanent.nonLand+TargetedPlayerCtrl+tapped
+# -- only the tapped Grizzly Bears, the untapped Elves are skipped. For it,
+# ChooseCard | QuasiLibrarySearch$ TargetedPlayer offers the cards of the
+# opponent's library sharing its name (Choices$ Card.TargetedPlayerOwn+
+# !IsImprinted+sharesNameWith Remembered), the library Bears is picked and
+# imprinted, and DBChangeZone | GainControl$ True | Searched$ True puts it onto
+# the battlefield under the caster's control. DBShuffle shuffles the
+# opponent's library (one card left, so the order is fixed).
+startturn human
+advance 3
+tapformana human 1 U
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+tapformana human 7 U
+tapformana human 8 U
+tapformana human 9 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue targets ai
+castspell human 10
+queue cardchoice 13
+resolvestack

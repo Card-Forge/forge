@@ -127,6 +127,14 @@ func (g *Game) endCopiesOnLeave(id CardID) {
 	})
 }
 
+// endCopiesOnFaceDown runs host's facedown commands (Card.runFacedownCommands,
+// Card.java:3641-3646): every UntilFacedown copy effect it hosts ends.
+func (g *Game) endCopiesOnFaceDown(host CardID) {
+	g.endCopiesWhere(func(e copyEffect) bool {
+		return e.life.duration == effectUntilFacedown && e.life.host == host
+	})
+}
+
 // endCopiesAtCleanup ends every until-end-of-turn copy effect
 // (EndOfTurn.addUntil, run at cleanup).
 func (g *Game) endCopiesAtCleanup() {
@@ -346,8 +354,8 @@ func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 
 // cloneDuration is checkValidDuration plus the copy effect's lifetime: no
 // Duration$ is permanent; the corpus's other Clone durations
-// (UntilUnattached, UntilFacedown, UntilTargetedUntaps, UntilNextEndStep)
-// need an ending this port does not track. ok is false when a host-bound
+// (UntilUnattached, UntilTargetedUntaps, UntilNextEndStep) need an ending
+// this port does not track. ok is false when a host-bound
 // duration's host is neither on the battlefield nor on the stack, which
 // resolves to nothing at all.
 func cloneDuration(a *Ability, source *Card) (copyEffect, bool, error) {
@@ -368,6 +376,10 @@ func cloneDuration(a *Ability, source *Card) (copyEffect, bool, error) {
 		if source.Zone != Battlefield && source.Zone != Stack {
 			return e, false, nil
 		}
+	case "UntilFacedown":
+		// SpellAbilityEffect.java:1029-1030: ends when the host is turned face
+		// down (endCopiesOnFaceDown); checkValidDuration has no zone gate for it.
+		e.life.duration = effectUntilFacedown
 	default:
 		return e, false, fmt.Errorf("engine: Clone: Duration$ %q not resolvable yet", d)
 	}

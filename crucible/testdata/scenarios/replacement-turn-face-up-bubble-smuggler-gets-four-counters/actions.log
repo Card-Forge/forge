@@ -1,0 +1,20 @@
+# Bubble Smuggler: Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$
+# AddCounters (PutCounter | CounterNum$ 4). Disguise casting is not ported, so
+# Soul Summons manifests it and Ixidor turns it face up; the replacement runs
+# once it is face up (Card.java:923-927): four +1/+1 counters.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue paygeneric W
+castspell human 1
+resolvestack
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+queue paygeneric U
+queue paygeneric U
+queue targets 8
+queue action human activate 7 0
+passpriority
+resolvestack

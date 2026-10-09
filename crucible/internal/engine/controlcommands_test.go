@@ -225,10 +225,10 @@ func TestAttachObjectAttachesToTheNamedHost(t *testing.T) {
 	}
 	for _, line := range []string{
 		"DB$ Attach | Object$ Self | ValidTgts$ Creature.OppCtrl",
-		"DB$ Attach | Object$ Self | Choices$ Creature.OppCtrl | ValidTgts$ Creature.OppCtrl",
+		"DB$ Attach | Object$ Self | Chooser$ Opponent | ValidTgts$ Creature.OppCtrl",
 	} {
 		targets := []engine.EntityID{engine.CardEntity(a), engine.CardEntity(b)}
-		if strings.Contains(line, "Choices") {
+		if strings.Contains(line, "Chooser") {
 			targets = targets[:1]
 		}
 		if _, err := resolveNow(t, g, p, engine.NewScriptedController(), targets, line); err == nil {

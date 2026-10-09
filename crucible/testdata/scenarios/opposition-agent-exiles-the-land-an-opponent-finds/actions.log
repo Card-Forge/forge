@@ -1,0 +1,21 @@
+# Opposition Agent: Event$ Moved | ValidCard$ Card.OppOwn |
+# FoundSearchingLibrary$ True | Origin$ Library | ReplaceWith$ RepExile.
+# Rampant Growth's search really searched the library, so the Island it finds
+# carries FoundSearchingLibrary (ChangeZoneEffect.java:1308) and the Agent's
+# line replaces its move to the battlefield (ReplaceMoved.java:92-98): it is
+# exiled instead, and the Agent's controller gets an Effect letting them play
+# it. The search itself is made under the Agent controller's control
+# (ADR-0040); the one scripted controller answers the pick either way.
+startturn human
+advance 3
+tapformana human 1 G
+tapformana human 2 G
+queue paygeneric G
+castspell human 3
+queue cardchoice 5
+resolvestack
+# On the Agent controller's turn the exiled Island is a land they may play
+# (MayPlay$ on Card.IsRemembered, AffectedZone$ Exile). Once it leaves exile
+# the Effect forgets it and exiles itself (ForgetOnMoved$ Exile).
+advance 13
+playland ai 5

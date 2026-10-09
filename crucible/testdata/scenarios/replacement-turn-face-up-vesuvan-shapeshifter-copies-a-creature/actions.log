@@ -1,0 +1,23 @@
+# Vesuvan Shapeshifter: Event$ TurnFaceUp | Optional$ True | ReplaceWith$
+# DBCopy, a Clone | Choices$ Creature.Other | Duration$ UntilFacedown. Soul
+# Summons manifests it, Ixidor turns it face up; its controller applies the
+# "you may" and copies Grizzly Bears, so the 0/0 Shapeshifter is a 2/2 and
+# survives the state-based check.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue paygeneric W
+castspell human 1
+resolvestack
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+queue paygeneric U
+queue paygeneric U
+queue targets 8
+queue action human activate 7 0
+queue confirmreplacement true
+queue cardchoice 10
+passpriority
+resolvestack

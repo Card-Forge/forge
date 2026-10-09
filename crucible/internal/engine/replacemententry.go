@@ -27,6 +27,7 @@
 package engine
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -137,6 +138,12 @@ func (g *Game) entryShape(r *compile.Ability, moved *Card, origin ZoneType, h *C
 	if !strings.EqualFold(r.Name, "Moved") || !replacementZoneMatches(r, "Destination", Battlefield) || !replacementZoneMatches(r, "Origin", origin) {
 		return nil, false, false
 	}
+	// A FoundSearchingLibrary$ line applies only to a card a library search
+	// found (foundSearchReplaced): no entry this function sees carries that run
+	// param (ReplaceMoved.java:92-95).
+	if _, found := r.Param("FoundSearchingLibrary"); found {
+		return nil, false, false
+	}
 	lineLayer, _ := r.Param("Layer")
 	if lineLayer == "" {
 		lineLayer = "Other"
@@ -169,6 +176,64 @@ func (g *Game) entryShape(r *compile.Ability, moved *Card, origin ZoneType, h *C
 		return nil, false, false
 	}
 	return sub, updated, true
+}
+
+// foundSearchReplaced runs the Event$ Moved lines naming FoundSearchingLibrary$
+// for id, a card a library search found, about to move from its zone to dest:
+// changeHiddenOriginResolve passes FoundSearchingLibrary with every such move
+// (ChangeZoneEffect.java:1308) and ReplaceMoved.canReplace admits the line only
+// then (ReplaceMoved.java:92-98). Opposition Agent's "they exile each card they
+// find" is the one corpus line. It reports whether a line replaced the move;
+// its ReplaceWith$ chain moved the card itself (a ChangeZone of Defined$
+// ReplacedCard), and the move it replaced does not happen.
+//
+// The CR 616 walk is the card controller's (ReplacementHandler's decider for a
+// card), over these lines only: every other Moved line applies to whichever
+// move then happens, the chain's own or the original, so the walk order
+// against them is not modelled. A line with a param this port does not read,
+// or a chain that does not move the replaced card, records a pending error
+// and does not apply (GO-7).
+func (g *Game) foundSearchReplaced(controller PlayerController, id CardID, dest ZoneType) bool {
+	card := g.Card(id)
+	return g.runReplacements(controller, card.Controller(), func() []replacementCandidate {
+		var out []replacementCandidate
+		g.eachReplacementRule(func(h *Card, z ZoneType, amounts map[string]expr.Amount, r *compile.Ability) {
+			if !strings.EqualFold(r.Name, "Moved") || !hostInActiveZones(h, r, z) {
+				return
+			}
+			if _, found := r.Param("FoundSearchingLibrary"); !found {
+				return
+			}
+			if !replacementZoneMatches(r, "Origin", card.Zone) || !replacementZoneMatches(r, "Destination", dest) {
+				return
+			}
+			sub := replaceWithSub(r)
+			if layer, _ := r.Param("Layer"); (layer != "" && !strings.EqualFold(layer, "Other")) || sub == nil || !chainMovesReplacedCard(sub) ||
+				!onlyParams(r, "validcard", "foundsearchinglibrary", "origin", "destination", "layer", "optional", "optionaldecider") {
+				g.recordPendingError(fmt.Errorf("engine: %q: Event$ Moved FoundSearchingLibrary$: shape not resolvable yet", h.Def.Name))
+				return
+			}
+			if v, ok := r.Param("ValidCard"); ok && !Matches(g, card, valid.Parse(v), h.Controller(), h.ID) {
+				return
+			}
+			if !replacementRequirementsCheck(g, h, amounts, r) {
+				return
+			}
+			out = append(out, replacementCandidate{host: h, rule: r, apply: func() replacementResult {
+				from := card.Zone
+				if err := g.runReplacementChain(controller, h, amounts, sub, &replacementEvent{result: replacementReplaced, card: id}); err != nil {
+					g.recordPendingError(err)
+					if card.Zone == from {
+						// The chain failed before it moved the card: the search's
+						// own move still happens.
+						return replacementNotReplaced
+					}
+				}
+				return replacementReplaced
+			}})
+		})
+		return out
+	}) == replacementReplaced
 }
 
 // chainMovesReplacedCard reports whether the ReplaceWith$ chain starting at

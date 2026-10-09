@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Plains|Tapped;Plains|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Ixidor, Reality Sculptor;Grizzly Bears;Vesuvan Shapeshifter|SummonSick
+humangraveyard=Soul Summons
+humanlibrary=Mountain
+ailife=20

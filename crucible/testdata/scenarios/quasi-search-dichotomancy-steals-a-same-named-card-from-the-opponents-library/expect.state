@@ -1,0 +1,9 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Grizzly Bears|Owner:ai|SummonSick
+humangraveyard=Dichotomancy
+ailife=20
+aibattlefield=Grizzly Bears|Tapped;Llanowar Elves
+ailibrary=Llanowar Elves

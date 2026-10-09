@@ -1,0 +1,7 @@
+humanlife=20
+ailife=20
+humanbattlefield=Forest|Id:1;Forest|Id:2
+humanhand=Rampant Growth|Id:3
+humanlibrary=Forest|Id:4;Island|Id:5
+aibattlefield=Opposition Agent|Id:6
+ailibrary=Swamp|Id:7

@@ -1,0 +1,20 @@
+# Vesuvan Shapeshifter turned face up with its Optional$ copy declined
+# (ReplacementHandler's optional confirm): it is its own 0/0 and dies to the
+# state-based check (CR 704.5f).
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue paygeneric W
+castspell human 1
+resolvestack
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+queue paygeneric U
+queue paygeneric U
+queue targets 8
+queue action human activate 7 0
+queue confirmreplacement false
+passpriority
+resolvestack

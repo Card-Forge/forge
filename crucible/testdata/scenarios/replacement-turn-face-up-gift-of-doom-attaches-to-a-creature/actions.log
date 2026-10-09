@@ -1,0 +1,23 @@
+# Gift of Doom: Event$ TurnFaceUp | ReplaceWith$ DBAttach, an Attach |
+# Object$ Self | Choices$ Creature | Optional$ True (AttachEffect.java:72-148).
+# Soul Summons manifests it, Ixidor turns it face up; as it turns face up its
+# controller picks a creature it can enchant (the Bears), then confirms the
+# "you may attach". The Aura stays on the battlefield attached.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue paygeneric W
+castspell human 1
+resolvestack
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+queue paygeneric U
+queue paygeneric U
+queue targets 8
+queue action human activate 7 0
+queue cardchoice 10
+queue confirmeffect true
+passpriority
+resolvestack

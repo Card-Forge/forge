@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanbattlefield=Island|Id:1;Island|Id:2;Island|Id:3;Island|Id:4;Island|Id:5;Island|Id:6;Island|Id:7;Island|Id:8;Island|Id:9
+humanhand=Dichotomancy|Id:10
+aibattlefield=Grizzly Bears|Id:11|Tapped;Llanowar Elves|Id:12
+ailibrary=Grizzly Bears|Id:13;Llanowar Elves|Id:14

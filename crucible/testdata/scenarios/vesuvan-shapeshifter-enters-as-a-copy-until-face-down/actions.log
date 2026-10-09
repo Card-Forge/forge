@@ -1,0 +1,18 @@
+# Vesuvan Shapeshifter cast face up: K:ETBReplacement:Copy:DBCopy:Optional
+# runs the same Clone | Duration$ UntilFacedown as its TurnFaceUp line. The
+# "you may" is applied and Grizzly Bears copied, so the 0/0 Shapeshifter
+# survives the state-based check.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+castspell human 1
+queue confirmeffect true
+queue cardchoice 7
+resolvestack

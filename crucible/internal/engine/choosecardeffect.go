@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game ability defined condition control amount parts zone valid effecthelpers
+//enginelint:allow id card game ability defined condition control amount parts zone valid effecthelpers scheduledaction
 
 import (
 	"fmt"
@@ -13,15 +13,16 @@ import (
 // chooseCardUnresolvedParams are ChooseCardEffect.java's params this port
 // cannot honour yet: every alternative selection mode (AtRandom$ needs
 // Aggregates.random's exact RNG draw order, ChooseEach$/EachBasicType$/
-// WithTotalPower$/WithDifferentPowers$/EachDifferentPower$/ControlAndNot$/
-// QuasiLibrarySearch$ are separate loops), the non-default choice pools
+// WithTotalPower$/WithDifferentPowers$/EachDifferentPower$/ControlAndNot$
+// are separate loops), the non-default choice pools
 // (AllCards$, IncludeSpellsOnStack$, TargetControls$), ChosenMap$'s
 // per-player map and Secretly$'s hidden reveal. 399 real (AB|DB)$ lines;
 // the default chooseCardsForEffect shape covers most of them.
+// QuasiLibrarySearch$ resolves (chooseCardQuasiSearch).
 var chooseCardUnresolvedParams = [...]string{
 	"AtRandom", "ChooseEach", "EachBasicType", "WithTotalPower",
 	"WithDifferentPowers", "EachDifferentPower", "ControlAndNot",
-	"QuasiLibrarySearch", "AllCards", "IncludeSpellsOnStack", "TargetControls",
+	"AllCards", "IncludeSpellsOnStack", "TargetControls",
 	"ChosenMap", "Secretly", "ChoiceTitleAppend", "StartingWith", "Optional",
 	"UnlessResolveSubs", "LockInText", "OrString",
 	"Condition", "SorcerySpeed", "ModeCost",
@@ -82,6 +83,11 @@ func (chooseCardEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		minAmount = 0
 	}
 
+	quasi, err := chooseCardQuasiSearch(g, a, choosers)
+	if err != nil {
+		return err
+	}
+
 	var all []CardID
 	for _, pid := range choosers {
 		pChoices := choices
@@ -95,6 +101,29 @@ func (chooseCardEffect) Resolve(g *Game, a *Ability, controller PlayerController
 					pChoices = append(pChoices, cid)
 				}
 			}
+		}
+		if quasi {
+			// ChooseCardEffect.java:260-265: one card, optional unless
+			// Mandatory$; nothing chosen -- an empty pool, which Java's
+			// chooseSingleEntityForEffect answers null without asking, or a
+			// decline -- returns from the whole effect, so the host's chosen,
+			// remembered and imprinted cards stay as they were.
+			if len(pChoices) == 0 {
+				return nil
+			}
+			lo := 0
+			if _, mandatory := a.Params.Param("Mandatory"); mandatory {
+				lo = 1
+			}
+			chosen := controller.ChooseCardsForEffect(g, pid, a.Source, pChoices, lo, 1)
+			if err := checkChoice(chosen, pChoices, lo, 1); err != nil {
+				return fmt.Errorf("engine: ChooseCard: %w", err)
+			}
+			if len(chosen) == 0 {
+				return nil
+			}
+			all = append(all, chosen...)
+			continue
 		}
 		lo, hi := minAmount, maxAmount
 		if hi > len(pChoices) {
@@ -134,6 +163,45 @@ func (chooseCardEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		}
 	}
 	return nil
+}
+
+// chooseCardQuasiSearch reads QuasiLibrarySearch$ (ChooseCardEffect.java:
+// 243-269): the choice is "search <player>'s library" -- Doubling Chant,
+// Clarion Ultimatum, Dichotomancy pick one card from ChoiceZone$ Library --
+// and reports whether the ability names it.
+//
+// The param's player is only the library Java reveals before the pick
+// (DelayedReveal, :253-259), nothing this omniscient engine shows; an empty
+// one is an error where Java's get(0) throws. Java checks neither
+// Player.canSearchLibraryWith (Leonin Arbiter) nor LimitSearchLibrary (Aven
+// Mindcensor: :254-256 shortens only the reveal, never the choices), so
+// neither is read here (forge-java-defects.md).
+//
+// A chooser who is the activator and whose searches another player controls
+// (ControlOpponentsSearchingLibrary$, ADR-0040) is refused: Java pushes the
+// control grant at :245-251 and pops it at :267-269, after the `return` a
+// declined or empty pick takes at :262-264, so a decline leaves the grant on
+// for good. That is a Forge bug (PORT-8); reproducing it would leave another
+// player controlling this one, so the shape is refused before anything is
+// asked.
+func chooseCardQuasiSearch(g *Game, a *Ability, choosers []PlayerID) (bool, error) {
+	spec, ok := a.Params.Param("QuasiLibrarySearch")
+	if !ok {
+		return false, nil
+	}
+	searched, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+	if err != nil {
+		return false, fmt.Errorf("engine: ChooseCard: QuasiLibrarySearch$: %w", err)
+	}
+	if len(searched) == 0 {
+		return false, fmt.Errorf("engine: ChooseCard: QuasiLibrarySearch$ %q names no player", spec)
+	}
+	for _, pid := range choosers {
+		if who, _ := g.SearchController(pid); pid == a.Controller && who != NoPlayer {
+			return false, fmt.Errorf("engine: ChooseCard: QuasiLibrarySearch$ under a ControlOpponentsSearchingLibrary$ redirect not resolvable yet (ChooseCardEffect.java:262-269 never ends the grant on a decline)")
+		}
+	}
+	return true, nil
 }
 
 // chooseCardPool is the candidate list ChooseCardEffect.java builds before

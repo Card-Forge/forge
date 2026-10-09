@@ -110,6 +110,25 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 				candidates = append(candidates, pid)
 			}
 		}
+	case "ParentTarget":
+		// AbilityUtils.java:947-951: the players the nearest ancestor that
+		// targets a player targets (SpellAbility.java:2024-2032,
+		// getParentTargetingPlayer). parentTargetsOf stops at the first
+		// ancestor targeting anything -- the same one whenever it targets a
+		// player (Dichotomancy's DBShuffle). One targeting only cards may hide
+		// a player-targeting grandparent Java would reach, so it is an error,
+		// as is no targeting ancestor at all (definedCards' own ParentTarget).
+		if len(refs.parentTargets) == 0 {
+			return nil, fmt.Errorf("engine: Defined$ %q: no ancestor ability chose targets", defined)
+		}
+		for _, e := range refs.parentTargets {
+			if pid, ok := e.AsPlayer(); ok {
+				candidates = append(candidates, pid)
+			}
+		}
+		if len(candidates) == 0 {
+			return nil, fmt.Errorf("engine: Defined$ %q: the nearest targeting ancestor targets no player, not resolvable yet", defined)
+		}
 	case "EnchantedPlayer":
 		// AbilityUtils.java:1109: the player the host enchants.
 		if pid, ok := g.Card(host).AttachedToPlayer(); ok {

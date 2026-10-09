@@ -1,0 +1,20 @@
+# Doubling Chant's search is a "may" (ChooseCard without Mandatory$): the
+# player declines the one same-named card. ChooseCardEffect.java:262-264
+# returns with nothing imprinted, so DBChangeZone's Defined$ Imprinted moves
+# nothing and the library keeps its Grizzly Bears.
+startturn human
+advance 3
+tapformana human 1 G
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+tapformana human 5 G
+tapformana human 6 G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+castspell human 8
+queue cardchoice none
+resolvestack
