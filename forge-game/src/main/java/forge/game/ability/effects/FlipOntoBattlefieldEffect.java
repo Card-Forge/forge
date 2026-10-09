@@ -52,7 +52,12 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         if (flipped) {
             float outcome = MyRandom.getRandom().nextFloat();
             if (outcome <= chanceToHitTwoCards) {
-                hit.addAll(Aggregates.random(randChoices, randChoices.size() > 1 ? 2 : 1));
+                // two cards: the target plus one neighbour, so the orb always lands across two adjacent cards
+                CardCollection adjacent = new CardCollection();
+                if (lhsNeighbor != null && lhsNeighbor != tgtLoc) adjacent.add(lhsNeighbor);
+                if (rhsNeighbor != null && rhsNeighbor != tgtLoc) adjacent.add(rhsNeighbor);
+                hit.add(tgtLoc);
+                if (!adjacent.isEmpty()) hit.add(Aggregates.random(adjacent));
             } else if (outcome <= chanceToHit) {
                 hit.add(Aggregates.random(randChoices));
             }
