@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.ImmutableList;
@@ -266,7 +267,18 @@ public class DuelScene extends ForgeScene {
         return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, result -> {
             if (runnable != null)
                 runnable.run();
-        });
+        }){
+            // Override FOptionPane keydown so it will not soft lock..
+            @Override
+            public boolean keyDown(final int keyCode) {
+                switch (keyCode) {
+                    case Input.Keys.ESCAPE:
+                    case Input.Keys.BACK:
+                        return true;
+                }
+                return super.keyDown(keyCode);
+            }
+        };
     }
 
     private void showAnteResults(List<PaperCard> wonCards, List<PaperCard> lostCards, Runnable onDone) {
