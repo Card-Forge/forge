@@ -558,21 +558,25 @@ public class DuelScene extends ForgeScene {
         rules.setWarnAboutAICards(false);
 
         //hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
+        final boolean showIntro = chaosBattle || isDeckMissing || enemy.getData().boss
+            || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
+        MatchController.setIntroShowing(showIntro);
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
+            final Runnable introDone = () -> MatchController.setIntroShowing(false);
             String Intro = enemy.getBossIntro();
             if (Intro != null) {
-                bossDialogue = createFOption((Intro), enemy.getName(), fb, null);
+                bossDialogue = createFOption((Intro), enemy.getName(), fb, introDone);
             } else {
                 int randomKey = Aggregates.randomInt(1, 35);
                 String lookupKey = introKeysMap.get(randomKey);
 
                 bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : localizer.getMessage(lookupKey),
-                        enemy.getName(), fb, null);
+                    enemy.getName(), fb, introDone);
             }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
                     bossDialogue.show())), false, true);
