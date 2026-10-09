@@ -18,7 +18,6 @@ import forge.game.spellability.StackItemView;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VReveal;
 import forge.toolbox.FDisplayObject;
-import forge.util.CardRendererUtils;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
@@ -413,15 +412,14 @@ public class MatchScreen extends FScreen {
                                     if (vPlayerPanel == null)
                                         vPlayerPanel = getPlayerPanel(cardView.getOwner());
                                     if (vPlayerPanel != null) {
-                                        boolean rotate = CardRendererUtils.needsRotation(cardView) && !Forge.magnifyShowDetails;
                                         // A ghost's card is in exile, but it sits on the battlefield attached to its
                                         // host, so position its preview like a battlefield card (on the host's side)
                                         boolean inBattlefield = ZoneType.Battlefield.equals(cardView.getZone())
                                                 || (cardPanel instanceof CardAreaPanel cap && cap.isGhost());
                                         float mul = 0.45f;
                                         float div = inBattlefield ? cardPanel.isTapped() ? 2.7f : 2.4f : 1.6f;
-                                        float adjX = rotate ? cardPanel.getWidth() / div : 0f;
-                                        float adjY = rotate ? cardPanel.getHeight() / 2.2f : 0f;
+                                        float adjX = 0f;
+                                        float adjY = 0f;
                                         float cardW = getHeight() * mul;
                                         float cardH = FCardPanel.ASPECT_RATIO * cardW;
                                         float cardX = !inBattlefield ? cardPanel.screenPos.x - (cardW + adjX)
@@ -447,7 +445,7 @@ public class MatchScreen extends FScreen {
                                         if (Forge.magnifyShowDetails)
                                             CardImageRenderer.drawDetails(g, cardView, MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
                                         else
-                                            CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, rotate, false, false, true);
+                                            CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, true);
                                     }
                                 }
                             } catch (Exception e) {
@@ -468,7 +466,7 @@ public class MatchScreen extends FScreen {
                                     if (Forge.magnifyShowDetails)
                                         CardImageRenderer.drawDetails(g, cardView, MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
                                     else
-                                        CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
+                                        CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, true);
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

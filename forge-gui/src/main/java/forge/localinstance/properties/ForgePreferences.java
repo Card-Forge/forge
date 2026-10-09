@@ -46,7 +46,6 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_VIDEO_MODE ("720p"),
         UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
-        UI_ROTATE_PLANE_OR_PHENOMENON("false"),
         UI_ROTATE_SPLIT_CARDS("true"),
         UI_ANIMATED_CARD_TAPUNTAP("true"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),

@@ -596,12 +596,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
                 ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                 ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-            Forge.getLocalizer().getMessage("lblRotateZoomSplit"),
-            Forge.getLocalizer().getMessage("nlRotateZoomSplit")), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-            Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
-            Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")), 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
             Forge.getLocalizer().getMessage("lblDisableCardEffect"),
             Forge.getLocalizer().getMessage("nlDisableCardEffect")), 4);
