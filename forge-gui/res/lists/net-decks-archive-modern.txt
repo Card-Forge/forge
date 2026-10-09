@@ -5817,7 +5817,6 @@
 2025-05-20 9065 Modern League (70 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-20-9065-modern-league.zip
 2025-05-21 12780207 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-21-12780207-modern-challenge-64.zip
 2025-05-21 9065 Modern League (68 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-21-9065-modern-league.zip
-2025-05-21 9200 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-21-9200-modern-gold-league.zip
 2025-05-22 12782283 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-22-12782283-modern-challenge-64.zip
 2025-05-22 9065 Modern League (57 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-22-9065-modern-league.zip
 2025-05-22 9200 Modern Gold League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-05-22-9200-modern-gold-league.zip
@@ -5906,24 +5905,20 @@
 2025-06-14 12794591 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-14-12794591-modern-challenge-32.zip
 2025-06-14 12794593 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-14-12794593-modern-challenge-32.zip
 2025-06-14 12794598 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-14-12794598-modern-challenge-64.zip
-2025-06-14 9350 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-14-9350-modern-gold-league.zip
 2025-06-14 9358 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-14-9358-modern-league.zip
 2025-06-15 12794604 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-15-12794604-modern-challenge-32.zip
 2025-06-15 12794608 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-15-12794608-modern-challenge-32.zip
-2025-06-15 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-15-9350-modern-gold-league.zip
 2025-06-15 9358 Modern League (17 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-15-9358-modern-league.zip
 2025-06-16 12794619 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-16-12794619-modern-challenge-32.zip
 2025-06-16 12794623 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-16-12794623-modern-challenge-64.zip
 2025-06-16 9350 Modern Gold League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-16-9350-modern-gold-league.zip
 2025-06-16 9358 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-16-9358-modern-league.zip
 2025-06-17 12794635 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-17-12794635-modern-challenge-32.zip
-2025-06-17 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-17-9350-modern-gold-league.zip
 2025-06-17 9358 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-17-9358-modern-league.zip
 2025-06-18 12794647 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-18-12794647-modern-challenge-64.zip
 2025-06-18 9350 Modern Gold League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-18-9350-modern-gold-league.zip
 2025-06-18 9358 Modern League (41 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-18-9358-modern-league.zip
 2025-06-19 12798141 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-19-12798141-modern-challenge-64.zip
-2025-06-19 9350 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-19-9350-modern-gold-league.zip
 2025-06-19 9358 Modern League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-19-9358-modern-league.zip
 2025-06-20 12798159 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-20-12798159-modern-challenge-64.zip
 2025-06-20 9350 Modern Gold League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-20-9350-modern-gold-league.zip
@@ -5939,7 +5934,6 @@
 2025-06-22 9358 Modern League (40 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-22-9358-modern-league.zip
 2025-06-23 12798195 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-23-12798195-modern-challenge-32.zip
 2025-06-23 12798199 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-23-12798199-modern-challenge-64.zip
-2025-06-23 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-23-9350-modern-gold-league.zip
 2025-06-23 9358 Modern League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-23-9358-modern-league.zip
 2025-06-24 12798212 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-24-12798212-modern-challenge-32.zip
 2025-06-24 9350 Modern Gold League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-24-9350-modern-gold-league.zip
@@ -5957,11 +5951,9 @@
 2025-06-28 12799994 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-28-12799994-modern-challenge-32.zip
 2025-06-28 12799996 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-28-12799996-modern-challenge-32.zip
 2025-06-28 12800002 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-28-12800002-modern-challenge-32.zip
-2025-06-28 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-28-9350-modern-gold-league.zip
 2025-06-28 9358 Modern League (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-28-9358-modern-league.zip
 2025-06-29 12800007 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-29-12800007-modern-challenge-32.zip
 2025-06-29 12800011 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-29-12800011-modern-challenge-32.zip
-2025-06-29 9350 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-29-9350-modern-gold-league.zip
 2025-06-29 9358 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-29-9358-modern-league.zip
 2025-06-30 12800022 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-30-12800022-modern-challenge-32.zip
 2025-06-30 12800026 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-06-30-12800026-modern-challenge-64.zip
@@ -5971,7 +5963,6 @@
 2025-07-01 9350 Modern Gold League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-01-9350-modern-gold-league.zip
 2025-07-01 9358 Modern League (55 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-01-9358-modern-league.zip
 2025-07-02 12800051 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-02-12800051-modern-challenge-64.zip
-2025-07-02 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-02-9350-modern-gold-league.zip
 2025-07-02 9358 Modern League (54 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-02-9358-modern-league.zip
 2025-07-03 12801627 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-03-12801627-modern-challenge-64.zip
 2025-07-03 9350 Modern Gold League (12 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-03-9350-modern-gold-league.zip
@@ -5986,11 +5977,9 @@
 2025-07-05 9358 Modern League (26 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-05-9358-modern-league.zip
 2025-07-06 12801666 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-06-12801666-modern-challenge-32.zip
 2025-07-06 12801670 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-06-12801670-modern-challenge-32.zip
-2025-07-06 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-06-9350-modern-gold-league.zip
 2025-07-06 9358 Modern League (39 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-06-9358-modern-league.zip
 2025-07-07 12801680 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-07-12801680-modern-challenge-32.zip
 2025-07-07 12801684 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-07-12801684-modern-challenge-64.zip
-2025-07-07 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-07-9350-modern-gold-league.zip
 2025-07-07 9358 Modern League (50 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-07-9358-modern-league.zip
 2025-07-08 12801698 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-08-12801698-modern-challenge-32.zip
 2025-07-08 12813570 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-08-12813570-modern-challenge-32.zip
@@ -6003,13 +5992,11 @@
 2025-07-10 9350 Modern Gold League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-10-9350-modern-gold-league.zip
 2025-07-10 9358 Modern League (46 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-10-9358-modern-league.zip
 2025-07-11 12802799 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-11-12802799-modern-challenge-64.zip
-2025-07-11 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-11-9350-modern-gold-league.zip
 2025-07-11 9358 Modern League (51 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-11-9358-modern-league.zip
 2025-07-12 12802809 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-12-12802809-modern-challenge-32.zip
 2025-07-12 12802812 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-12-12802812-modern-challenge-32.zip
 2025-07-12 12802818 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-12-12802818-modern-challenge-64.zip
 2025-07-12 12803719 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-12-12803719-modern-challenge-64.zip
-2025-07-12 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-12-9350-modern-gold-league.zip
 2025-07-12 9358 Modern League (43 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-12-9358-modern-league.zip
 2025-07-13 12802826 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-13-12802826-modern-challenge-32.zip
 2025-07-13 12802831 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-13-12802831-modern-challenge-32.zip
@@ -6017,30 +6004,24 @@
 2025-07-13 9358 Modern League (39 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-13-9358-modern-league.zip
 2025-07-14 12802845 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-14-12802845-modern-challenge-32.zip
 2025-07-14 12802851 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-14-12802851-modern-challenge-64.zip
-2025-07-14 9350 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-14-9350-modern-gold-league.zip
 2025-07-14 9358 Modern League (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-14-9358-modern-league.zip
 2025-07-15 12802870 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-15-12802870-modern-challenge-32.zip
-2025-07-15 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-15-9350-modern-gold-league.zip
 2025-07-15 9358 Modern League (42 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-15-9358-modern-league.zip
 2025-07-16 12802886 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-16-12802886-modern-challenge-64.zip
-2025-07-16 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-16-9350-modern-gold-league.zip
+2025-07-16 9350 Modern Gold League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-16-9350-modern-gold-league.zip
 2025-07-16 9358 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-16-9358-modern-league.zip
 2025-07-17 12803661 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-17-12803661-modern-challenge-64.zip
-2025-07-17 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-17-9350-modern-gold-league.zip
 2025-07-17 9358 Modern League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-17-9358-modern-league.zip
 2025-07-18 12803679 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-18-12803679-modern-challenge-64.zip
 2025-07-18 12804884 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-18-12804884-modern-challenge-32.zip
 2025-07-18 12814278 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-18-12814278-modern-challenge-32.zip
-2025-07-18 9350 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-18-9350-modern-gold-league.zip
 2025-07-18 9358 Modern League (35 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-18-9358-modern-league.zip
 2025-07-19 12803687 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-19-12803687-modern-challenge-32.zip
 2025-07-19 12803689 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-19-12803689-modern-challenge-32.zip
 2025-07-19 12803694 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-19-12803694-modern-challenge-64.zip
-2025-07-19 9350 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-19-9350-modern-gold-league.zip
 2025-07-19 9358 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-19-9358-modern-league.zip
 2025-07-20 12803700 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-20-12803700-modern-challenge-32.zip
 2025-07-20 12803704 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-20-12803704-modern-challenge-32.zip
-2025-07-20 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-20-9350-modern-gold-league.zip
 2025-07-20 9358 Modern League (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-20-9358-modern-league.zip
 2025-07-21 12803715 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-21-12803715-modern-challenge-32.zip
 2025-07-21 9350 Modern Gold League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-21-9350-modern-gold-league.zip
@@ -6049,69 +6030,50 @@
 2025-07-22 9350 Modern Gold League (8 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-22-9350-modern-gold-league.zip
 2025-07-22 9358 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-22-9358-modern-league.zip
 2025-07-23 12804943 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-23-12804943-modern-challenge-32.zip
-2025-07-23 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-23-9350-modern-gold-league.zip
 2025-07-23 9358 Modern League (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-23-9358-modern-league.zip
 2025-07-24 12804858 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-24-12804858-modern-challenge-64.zip
-2025-07-24 9350 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-24-9350-modern-gold-league.zip
 2025-07-24 9358 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-24-9358-modern-league.zip
 2025-07-25 12804876 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-25-12804876-modern-challenge-64.zip
-2025-07-25 9350 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-25-9350-modern-gold-league.zip
 2025-07-25 9358 Modern League (43 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-25-9358-modern-league.zip
 2025-07-26 12804886 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-26-12804886-modern-challenge-32.zip
 2025-07-26 12804891 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-26-12804891-modern-challenge-64.zip
-2025-07-26 9350 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-26-9350-modern-gold-league.zip
 2025-07-26 9358 Modern League (10 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-26-9358-modern-league.zip
 2025-07-27 12804897 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-27-12804897-modern-challenge-32.zip
 2025-07-27 12804901 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-27-12804901-modern-challenge-32.zip
-2025-07-27 9350 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-27-9350-modern-gold-league.zip
 2025-07-27 9358 Modern League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-27-9358-modern-league.zip
 2025-07-28 12804912 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-28-12804912-modern-challenge-32.zip
 2025-07-28 12804916 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-28-12804916-modern-challenge-64.zip
-2025-07-28 9350 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-28-9350-modern-gold-league.zip
 2025-07-28 9358 Modern League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-28-9358-modern-league.zip
 2025-07-29 12806255 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-29-12806255-modern-challenge-32.zip
-2025-07-29 9350 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-29-9350-modern-gold-league.zip
 2025-07-29 9358 Modern League (36 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-29-9358-modern-league.zip
-2025-07-29 9527 Modern League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-29-9527-modern-league.zip
 2025-07-30 12806267 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-30-12806267-modern-challenge-64.zip
-2025-07-30 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-30-9511-modern-gold-league.zip
 2025-07-30 9527 Modern League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-30-9527-modern-league.zip
 2025-07-31 12806277 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-31-12806277-modern-challenge-64.zip
-2025-07-31 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-31-9511-modern-gold-league.zip
 2025-07-31 9527 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-07-31-9527-modern-league.zip
 2025-08-01 12806295 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-01-12806295-modern-challenge-64.zip
-2025-08-01 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-01-9511-modern-gold-league.zip
 2025-08-01 9527 Modern League (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-01-9527-modern-league.zip
 2025-08-02 12806303 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-02-12806303-modern-challenge-32.zip
 2025-08-02 12806305 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-02-12806305-modern-challenge-32.zip
 2025-08-02 12806311 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-02-12806311-modern-challenge-64.zip
-2025-08-02 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-02-9511-modern-gold-league.zip
 2025-08-02 9527 Modern League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-02-9527-modern-league.zip
 2025-08-03 12806316 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-03-12806316-modern-challenge-32.zip
 2025-08-03 12806320 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-03-12806320-modern-challenge-32.zip
-2025-08-03 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-03-9511-modern-gold-league.zip
 2025-08-03 9527 Modern League (35 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-03-9527-modern-league.zip
 2025-08-04 12806330 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-04-12806330-modern-challenge-32.zip
 2025-08-04 12806334 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-04-12806334-modern-challenge-64.zip
-2025-08-04 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-04-9511-modern-gold-league.zip
 2025-08-04 9527 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-04-9527-modern-league.zip
 2025-08-05 12806347 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-05-12806347-modern-challenge-32.zip
-2025-08-05 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-05-9511-modern-gold-league.zip
 2025-08-05 9527 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-05-9527-modern-league.zip
 2025-08-06 12806359 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-06-12806359-modern-challenge-64.zip
-2025-08-06 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-06-9511-modern-gold-league.zip
 2025-08-06 9527 Modern League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-06-9527-modern-league.zip
 2025-08-07 12807444 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-07-12807444-modern-challenge-64.zip
-2025-08-07 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-07-9511-modern-gold-league.zip
 2025-08-07 9527 Modern League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-07-9527-modern-league.zip
 2025-08-08 12807462 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-08-12807462-modern-challenge-64.zip
-2025-08-08 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-08-9511-modern-gold-league.zip
 2025-08-08 9527 Modern League (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-08-9527-modern-league.zip
 2025-08-09 12807433 Modern Showcase Challenge (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-09-12807433-modern-showcase-challenge.zip
 2025-08-09 12807470 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-09-12807470-modern-challenge-32.zip
 2025-08-09 12807472 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-09-12807472-modern-challenge-32.zip
 2025-08-09 12807478 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-09-12807478-modern-challenge-32.zip
-2025-08-09 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-09-9511-modern-gold-league.zip
 2025-08-09 9527 Modern League (31 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-09-9527-modern-league.zip
 2025-08-10 12807484 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-10-12807484-modern-challenge-32.zip
 2025-08-10 12807488 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-10-12807488-modern-challenge-32.zip
@@ -6119,24 +6081,19 @@
 2025-08-11 12807499 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-11-12807499-modern-challenge-64.zip
 2025-08-11 12807500 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-11-12807500-modern-challenge-32.zip
 2025-08-11 12807508 Modern Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-11-12807508-modern-last-chance.zip
-2025-08-11 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-11-9511-modern-gold-league.zip
 2025-08-11 9527 Modern League (49 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-11-9527-modern-league.zip
 2025-08-12 12807512 Modern Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-12-12807512-modern-last-chance.zip
 2025-08-12 12807515 Modern Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-12-12807515-modern-last-chance.zip
 2025-08-12 12807519 Modern Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-12-12807519-modern-last-chance.zip
 2025-08-12 12807520 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-12-12807520-modern-challenge-32.zip
-2025-08-12 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-12-9511-modern-gold-league.zip
 2025-08-12 9527 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-12-9527-modern-league.zip
 2025-08-13 12807523 Modern Last Chance (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-13-12807523-modern-last-chance.zip
 2025-08-13 12809266 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-13-12809266-modern-challenge-64.zip
-2025-08-13 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-13-9511-modern-gold-league.zip
 2025-08-13 9527 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-13-9527-modern-league.zip
 2025-08-14 12809276 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-14-12809276-modern-challenge-64.zip
-2025-08-14 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-14-9511-modern-gold-league.zip
 2025-08-14 9527 Modern League (37 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-14-9527-modern-league.zip
 2025-08-15 12810040 Modern Rc Qualifier (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-15-12810040-modern-rc-qualifier.zip
 2025-08-15 12810047 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-15-12810047-modern-challenge-64.zip
-2025-08-15 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-15-9511-modern-gold-league.zip
 2025-08-15 9527 Modern League (31 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-15-9527-modern-league.zip
 2025-08-16 12810055 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-16-12810055-modern-challenge-32.zip
 2025-08-16 12810057 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-16-12810057-modern-challenge-32.zip
@@ -6144,17 +6101,13 @@
 2025-08-16 9527 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-16-9527-modern-league.zip
 2025-08-17 12810068 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-17-12810068-modern-challenge-32.zip
 2025-08-17 12810072 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-17-12810072-modern-challenge-32.zip
-2025-08-17 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-17-9511-modern-gold-league.zip
 2025-08-17 9527 Modern League (52 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-17-9527-modern-league.zip
 2025-08-18 12810082 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-18-12810082-modern-challenge-32.zip
 2025-08-18 12810086 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-18-12810086-modern-challenge-64.zip
-2025-08-18 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-18-9511-modern-gold-league.zip
 2025-08-18 9527 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-18-9527-modern-league.zip
 2025-08-19 12810169 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-19-12810169-modern-challenge-32.zip
-2025-08-19 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-19-9511-modern-gold-league.zip
 2025-08-19 9527 Modern League (37 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-19-9527-modern-league.zip
 2025-08-20 12810179 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-20-12810179-modern-challenge-64.zip
-2025-08-20 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-20-9511-modern-gold-league.zip
 2025-08-20 9527 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-20-9527-modern-league.zip
 2025-08-21 12812133 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-21-12812133-modern-challenge-64.zip
 2025-08-21 9527 Modern League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-21-9527-modern-league.zip
@@ -6164,32 +6117,24 @@
 2025-08-23 12812159 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-23-12812159-modern-challenge-32.zip
 2025-08-23 12812161 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-23-12812161-modern-challenge-32.zip
 2025-08-23 12812166 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-23-12812166-modern-challenge-64.zip
-2025-08-23 9511 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-23-9511-modern-gold-league.zip
 2025-08-23 9527 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-23-9527-modern-league.zip
 2025-08-24 12812172 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-24-12812172-modern-challenge-32.zip
 2025-08-24 12812176 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-24-12812176-modern-challenge-32.zip
-2025-08-24 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-24-9511-modern-gold-league.zip
 2025-08-24 9527 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-24-9527-modern-league.zip
 2025-08-25 12812187 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-25-12812187-modern-challenge-32.zip
 2025-08-25 12812843 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-25-12812843-modern-challenge-32.zip
-2025-08-25 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-25-9511-modern-gold-league.zip
 2025-08-25 9527 Modern League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-25-9527-modern-league.zip
 2025-08-26 12812733 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-26-12812733-modern-challenge-32.zip
-2025-08-26 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-26-9511-modern-gold-league.zip
 2025-08-26 9527 Modern League (37 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-26-9527-modern-league.zip
 2025-08-27 12812743 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-27-12812743-modern-challenge-64.zip
-2025-08-27 9511 Modern Gold League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-27-9511-modern-gold-league.zip
 2025-08-27 9527 Modern League (41 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-27-9527-modern-league.zip
 2025-08-28 12812753 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-28-12812753-modern-challenge-64.zip
-2025-08-28 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-28-9511-modern-gold-league.zip
 2025-08-28 9527 Modern League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-28-9527-modern-league.zip
 2025-08-29 12812771 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-29-12812771-modern-challenge-64.zip
-2025-08-29 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-29-9511-modern-gold-league.zip
 2025-08-29 9527 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-29-9527-modern-league.zip
 2025-08-30 12812779 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-30-12812779-modern-challenge-32.zip
 2025-08-30 12812781 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-30-12812781-modern-challenge-32.zip
 2025-08-30 12812786 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-30-12812786-modern-challenge-64.zip
-2025-08-30 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-30-9511-modern-gold-league.zip
 2025-08-30 9527 Modern League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-30-9527-modern-league.zip
 2025-08-31 12812792 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-31-12812792-modern-challenge-32.zip
 2025-08-31 12812796 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-31-12812796-modern-challenge-32.zip
@@ -6197,18 +6142,14 @@
 2025-08-31 9527 Modern League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-08-31-9527-modern-league.zip
 2025-09-01 12812807 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-01-12812807-modern-challenge-32.zip
 2025-09-01 12812839 Modern Rc Super Qualifier (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-01-12812839-modern-rc-super-qualifier.zip
-2025-09-01 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-01-9511-modern-gold-league.zip
 2025-09-01 9527 Modern League (31 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-01-9527-modern-league.zip
 2025-09-02 12812824 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-02-12812824-modern-challenge-32.zip
-2025-09-02 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-02-9511-modern-gold-league.zip
 2025-09-02 9527 Modern League (15 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-02-9527-modern-league.zip
 2025-09-03 12812834 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-03-12812834-modern-challenge-64.zip
 2025-09-03 9527 Modern League (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-03-9527-modern-league.zip
 2025-09-04 12813531 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-04-12813531-modern-challenge-64.zip
-2025-09-04 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-04-9511-modern-gold-league.zip
 2025-09-04 9527 Modern League (35 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-04-9527-modern-league.zip
 2025-09-05 12813549 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-05-12813549-modern-challenge-64.zip
-2025-09-05 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-05-9511-modern-gold-league.zip
 2025-09-05 9527 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-05-9527-modern-league.zip
 2025-09-06 12813557 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-06-12813557-modern-challenge-32.zip
 2025-09-06 12813559 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-06-12813559-modern-challenge-32.zip
@@ -6216,7 +6157,6 @@
 2025-09-06 12814298 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-06-12814298-modern-challenge-32.zip
 2025-09-06 9527 Modern League (14 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-06-9527-modern-league.zip
 2025-09-07 12813574 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-07-12813574-modern-challenge-32.zip
-2025-09-07 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-07-9511-modern-gold-league.zip
 2025-09-07 9527 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-07-9527-modern-league.zip
 2025-09-08 12813585 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-08-12813585-modern-challenge-32.zip
 2025-09-08 12813589 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-08-12813589-modern-challenge-64.zip
@@ -6224,16 +6164,12 @@
 2025-09-08 9527 Modern League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-08-9527-modern-league.zip
 2025-09-09 12813602 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-09-12813602-modern-challenge-32.zip
 2025-09-09 12815101 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-09-12815101-modern-challenge-64.zip
-2025-09-09 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-09-9511-modern-gold-league.zip
 2025-09-09 9527 Modern League (36 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-09-9527-modern-league.zip
 2025-09-10 12813612 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-10-12813612-modern-challenge-64.zip
-2025-09-10 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-10-9511-modern-gold-league.zip
 2025-09-10 9527 Modern League (37 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-10-9527-modern-league.zip
 2025-09-11 12814244 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-11-12814244-modern-challenge-64.zip
-2025-09-11 9511 Modern Gold League (2 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-11-9511-modern-gold-league.zip
 2025-09-11 9527 Modern League (40 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-11-9527-modern-league.zip
 2025-09-12 12814262 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-12-12814262-modern-challenge-64.zip
-2025-09-12 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-12-9511-modern-gold-league.zip
 2025-09-12 9527 Modern League (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-12-9527-modern-league.zip
 2025-09-13 12814270 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-13-12814270-modern-challenge-32.zip
 2025-09-13 12814272 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-13-12814272-modern-challenge-32.zip
@@ -6241,20 +6177,15 @@
 2025-09-14 12814234 Modern Showcase Challenge (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-14-12814234-modern-showcase-challenge.zip
 2025-09-14 12814283 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-14-12814283-modern-challenge-32.zip
 2025-09-14 12814287 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-14-12814287-modern-challenge-32.zip
-2025-09-14 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-14-9511-modern-gold-league.zip
 2025-09-14 9527 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-14-9527-modern-league.zip
 2025-09-15 12814303 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-15-12814303-modern-challenge-64.zip
 2025-09-15 9527 Modern League (45 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-15-9527-modern-league.zip
 2025-09-16 12814320 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-16-12814320-modern-challenge-32.zip
-2025-09-16 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-16-9511-modern-gold-league.zip
 2025-09-16 9527 Modern League (39 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-16-9527-modern-league.zip
-2025-09-17 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-17-9511-modern-gold-league.zip
 2025-09-17 9527 Modern League (33 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-17-9527-modern-league.zip
-2025-09-18 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-18-9511-modern-gold-league.zip
 2025-09-18 9527 Modern League (70 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-18-9527-modern-league.zip
 2025-09-19 12815121 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-19-12815121-modern-challenge-64.zip
 2025-09-19 12816530 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-19-12816530-modern-challenge-32.zip
-2025-09-19 9511 Modern Gold League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-19-9511-modern-gold-league.zip
 2025-09-19 9527 Modern League (49 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-19-9527-modern-league.zip
 2025-09-20 12815130 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-20-12815130-modern-challenge-32.zip
 2025-09-20 12815133 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-20-12815133-modern-challenge-32.zip
@@ -6263,14 +6194,11 @@
 2025-09-20 9527 Modern League (49 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-20-9527-modern-league.zip
 2025-09-21 12815144 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-21-12815144-modern-challenge-32.zip
 2025-09-21 12815148 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-21-12815148-modern-challenge-32.zip
-2025-09-21 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-21-9511-modern-gold-league.zip
 2025-09-21 9527 Modern League (56 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-21-9527-modern-league.zip
 2025-09-22 12815159 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-22-12815159-modern-challenge-32.zip
 2025-09-22 12815163 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-22-12815163-modern-challenge-64.zip
-2025-09-22 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-22-9511-modern-gold-league.zip
 2025-09-22 9527 Modern League (59 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-22-9527-modern-league.zip
 2025-09-23 12816484 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-23-12816484-modern-challenge-32.zip
-2025-09-23 9511 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-23-9511-modern-gold-league.zip
 2025-09-23 9527 Modern League (38 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-23-9527-modern-league.zip
 2025-09-23 9742 Modern League (5 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-23-9742-modern-league.zip
 2025-09-24 12816494 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-24-12816494-modern-challenge-64.zip
@@ -6281,11 +6209,9 @@
 2025-09-26 9742 Modern League (48 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-26-9742-modern-league.zip
 2025-09-27 12816532 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-27-12816532-modern-challenge-32.zip
 2025-09-27 12816537 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-27-12816537-modern-challenge-64.zip
-2025-09-27 9734 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-27-9734-modern-gold-league.zip
 2025-09-27 9742 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-27-9742-modern-league.zip
 2025-09-28 12816543 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-28-12816543-modern-challenge-32.zip
 2025-09-28 12816547 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-28-12816547-modern-challenge-32.zip
-2025-09-28 9734 Modern Gold League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-28-9734-modern-gold-league.zip
 2025-09-28 9742 Modern League (37 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-28-9742-modern-league.zip
 2025-09-29 12816558 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-29-12816558-modern-challenge-32.zip
 2025-09-29 12816562 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-09-29-12816562-modern-challenge-64.zip
@@ -6297,18 +6223,18 @@
 2025-10-02 12818098 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-02-12818098-modern-challenge-64.zip
 2025-10-02 9742 Modern League (39 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-02-9742-modern-league.zip
 2025-10-03 12818116 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-03-12818116-modern-challenge-64.zip
-2025-10-03 9742 Modern League (35 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-03-9742-modern-league.zip
+2025-10-03 9742 Modern League (52 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-03-9742-modern-league.zip
 2025-10-04 12818087 Modern Showcase Challenge (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-04-12818087-modern-showcase-challenge.zip
 2025-10-04 12818124 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-04-12818124-modern-challenge-32.zip
 2025-10-04 12818126 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-04-12818126-modern-challenge-32.zip
 2025-10-04 12818132 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-04-12818132-modern-challenge-32.zip
-2025-10-04 9742 Modern League (35 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-04-9742-modern-league.zip
+2025-10-04 9742 Modern League (52 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-04-9742-modern-league.zip
 2025-10-05 12818137 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-05-12818137-modern-challenge-32.zip
 2025-10-05 12818141 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-05-12818141-modern-challenge-32.zip
 2025-10-05 9742 Modern League (45 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-05-9742-modern-league.zip
 2025-10-06 12818152 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-06-12818152-modern-challenge-32.zip
 2025-10-06 12818156 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-06-12818156-modern-challenge-64.zip
-2025-10-06 9742 Modern League (41 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-06-9742-modern-league.zip
+2025-10-06 9742 Modern League (57 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-06-9742-modern-league.zip
 2025-10-07 12818169 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-07-12818169-modern-challenge-32.zip
 2025-10-07 9742 Modern League (39 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-07-9742-modern-league.zip
 2025-10-08 12818179 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-08-12818179-modern-challenge-64.zip
@@ -6316,7 +6242,7 @@
 2025-10-09 12819493 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-09-12819493-modern-challenge-64.zip
 2025-10-09 9742 Modern League (48 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-09-9742-modern-league.zip
 2025-10-10 12819511 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-10-12819511-modern-challenge-64.zip
-2025-10-10 9742 Modern League (38 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-10-9742-modern-league.zip
+2025-10-10 9742 Modern League (57 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-10-9742-modern-league.zip
 2025-10-11 12819519 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-11-12819519-modern-challenge-32.zip
 2025-10-11 12819521 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-11-12819521-modern-challenge-32.zip
 2025-10-11 12819525 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2025-10-11-12819525-modern-challenge-64.zip
@@ -6537,7 +6463,6 @@
 2026-01-04 9979 Modern League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-04-9979-modern-league.zip
 2026-01-05 12828202 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-05-12828202-modern-challenge-32.zip
 2026-01-05 12828694 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-05-12828694-modern-challenge-32.zip
-2026-01-05 9979 Modern League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-05-9979-modern-league.zip
 2026-01-06 12828221 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-06-12828221-modern-challenge-64.zip
 2026-01-06 9979 Modern League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-06-9979-modern-league.zip
 2026-01-07 12828402 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-07-12828402-modern-challenge-32.zip
@@ -6555,7 +6480,6 @@
 2026-01-11 9979 Modern League (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-11-9979-modern-league.zip
 2026-01-12 12829389 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-12-12829389-modern-challenge-32.zip
 2026-01-12 12829393 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-12-12829393-modern-challenge-32.zip
-2026-01-12 9979 Modern League (3 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-12-9979-modern-league.zip
 2026-01-13 12829408 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-13-12829408-modern-challenge-64.zip
 2026-01-13 9979 Modern League (26 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-13-9979-modern-league.zip
 2026-01-14 12830096 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-14-12830096-modern-challenge-32.zip
@@ -6574,7 +6498,6 @@
 2026-01-19 12830072 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-19-12830072-modern-challenge-32.zip
 2026-01-19 12830076 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-19-12830076-modern-challenge-32.zip
 2026-01-19 9979 Modern League (18 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-19-9979-modern-league.zip
-2026-01-20 10188 Modern League (1 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-20-10188-modern-league.zip
 2026-01-20 12830720 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-20-12830720-modern-challenge-32.zip
 2026-01-20 9979 Modern League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-20-9979-modern-league.zip
 2026-01-21 10188 Modern League (35 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-01-21-10188-modern-league.zip
@@ -6685,7 +6608,6 @@
 2026-03-02 12834096 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-02-12834096-modern-challenge-32.zip
 2026-03-02 12834100 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-02-12834100-modern-challenge-32.zip
 2026-03-03 10188 Modern League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-03-10188-modern-league.zip
-2026-03-03 10397 Modern League (4 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-03-10397-modern-league.zip
 2026-03-03 12834459 Modern Challenge 64 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-03-12834459-modern-challenge-64.zip
 2026-03-04 10397 Modern League (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-04-10397-modern-league.zip
 2026-03-04 12834469 Modern Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/modern/2026-03-04-12834469-modern-challenge-32.zip
