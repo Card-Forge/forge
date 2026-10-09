@@ -4224,6 +4224,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final int getCurrentLoyalty() {
         return getCounters(CounterEnumType.LOYALTY);
     }
+    public final String getBaseLoyalty() { return currentState.getBaseLoyalty(); }
     public final void setBaseLoyalty(final int n) {
         currentState.setBaseLoyalty(Integer.toString(n));
     }
