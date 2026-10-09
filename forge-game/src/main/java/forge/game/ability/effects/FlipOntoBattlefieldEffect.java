@@ -18,12 +18,14 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
+    // true only when a UI that can see the real card positions (the mobile board) decides which cards are touched
+    public static volatile boolean boardDecidesHits = false;
     @Override
     public void resolve(SpellAbility sa) {
         // Basic parameters defining the chances
         final float chanceToFlip = 0.85f;
         final int maxFlipTimes = 2;
-        final float chanceToHitCorner = 0.06f;    // 3-4 cards: orb lands on the corner where cards meet (needs the mobile board)
+        final float chanceToHitCorner = boardDecidesHits ? 0.06f : 0f;    // 3-4 cards: orb lands on the corner where cards meet (needs the mobile board)
         final float chanceToHitTwoCards = 0.20f;  // cumulative: corner + two cards
 
         final Card host = sa.getHostCard();

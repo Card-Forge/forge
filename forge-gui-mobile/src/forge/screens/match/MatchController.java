@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.google.common.collect.Maps;
 import forge.animation.FlipOntoBattlefieldAnimation;
+import forge.game.ability.effects.FlipOntoBattlefieldEffect;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FOverlay;
 import org.apache.commons.lang3.StringUtils;
@@ -85,6 +86,10 @@ import forge.util.collect.FCollectionView;
 
 public class MatchController extends NetworkGuiGame {
     private MatchController() { }
+    static {
+        // the mobile board knows where the cards are, so it can handle 3-4 card corner hits
+        FlipOntoBattlefieldEffect.boardDecidesHits = true;
+    }
     public static final MatchController instance = new MatchController();
 
     private static HostedMatch hostedMatch;
