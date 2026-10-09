@@ -5,6 +5,7 @@ import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventPlayerPriority;
+import forge.game.event.GameEventTurnEnded;
 import forge.gui.interfaces.IGuiGame;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
  *   <li>Priority: a player receives it once the game has settled, so a batch holds whole actions
  *       and what one player did is sent before anyone chooses what to do next. A pass with nothing
  *       but redraw hints since the last batch sends nothing</li>
+ *   <li>End of turn: normally no player receives priority in the cleanup step, so what happened in
+ *       it is sent before the turn ends and never travels with the next turn's start</li>
  *   <li>Input queue change: registered as {@link Observer} on player InputQueues,
  *       ensuring events are delivered before the game thread blocks for input</li>
  *   <li>Sync points: explicit {@link #flush()} from {@code flushPendingEvents()}</li>
@@ -40,6 +43,9 @@ public class GameEventForwarder implements Observer {
 
     @Subscribe
     public void receiveGameEvent(GameEvent ev) {
+        if (ev instanceof GameEventTurnEnded && somethingHappened) {
+            flush();
+        }
         pendingEvents.add(ev);
         if (!(ev instanceof GameEventPlayerPriority)) {
             somethingHappened |= !ev.isRedrawHint();

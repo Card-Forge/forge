@@ -199,6 +199,35 @@ public class GameEventForwarderTest extends AITest {
         AssertJUnit.assertTrue("the resolution is in an earlier batch than the new turn", resolved < turn);
     }
 
+    // Fails if a discard to hand size arrives with the turn after it, so a client shows the card leaving under the new turn
+    @Test
+    public void aDiscardToHandSizeIsSentBeforeTheNextTurn() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        // More than a hand holds, and nothing here can be cast, so the turn ends with a discard
+        final List<Card> hand = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            hand.add(addCardToZone("Craw Wurm", ai, ZoneType.Hand));
+        }
+        moveToMain2(game, ai);
+        final Sent sent = new Sent(game);
+        playUntilNextTurn(game);
+        // The new turn is sent once somebody receives priority in it, which its untap step gives nobody
+        for (int i = 0; i < 10 && sent.indexOf(GameEventTurnBegan.class) < 0; i++) {
+            game.getPhaseHandler().mainLoopStep();
+        }
+        int discard = -1;
+        for (int i = 0; i < sent.batches.size() && discard < 0; i++) {
+            final Batch batch = sent.batches.get(i);
+            if (hand.stream().anyMatch(card -> batch.moves(card.getId()))) {
+                discard = i;
+            }
+        }
+        final int turn = sent.indexOf(GameEventTurnBegan.class);
+        AssertJUnit.assertTrue("a card was discarded and the turn changed", discard >= 0 && turn >= 0);
+        AssertJUnit.assertTrue("the discard is in an earlier batch than the new turn", discard < turn);
+    }
+
     /** Two turns in which lands are played, spells cast, tokens made, cards drawn and a hand discarded down to size. */
     private Sent twoBusyTurns() {
         final Game game = initAndCreateGame();
