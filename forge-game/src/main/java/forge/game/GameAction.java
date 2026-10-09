@@ -1094,6 +1094,9 @@ public class GameAction {
         checkStaticAbilities(runEvents, Sets.newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
+        checkStaticAbilities(runEvents, affectedCards, preList, null);
+    }
+    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList, final Set<Card> enteringWith) {
         if (isCheckingStaticAbilitiesOnHold()) {
             return;
         }
@@ -1156,7 +1159,7 @@ public class GameAction {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
                 if (previouslyAffected == null) {
-                    affectedHere = stAb.applyContinuousAbilityBefore(layer, preList);
+                    affectedHere = stAb.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(stAb.getHostCard()) ? CardCollection.EMPTY : preList);
                     if (affectedHere != null) {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
@@ -1173,7 +1176,7 @@ public class GameAction {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
                                 toAdd.add(st2);
-                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, preList);
+                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(st2.getHostCard()) ? CardCollection.EMPTY : preList);
                                 if (newAffected != null) {
                                     affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(newAffected);
                                 }

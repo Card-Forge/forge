@@ -960,26 +960,11 @@ public class AiController {
     }
 
     private AiPlayDecision saSideEffects(final Card card, final SpellAbility sa) {
-        if (usesHybridSimulation()) {
-            return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
-        }
-
-        // abilities skip the checks below, but activating one can still trigger lethal damage (e.g. Burning-Tree Shaman)
-        if (sa.isActivatedAbility() && !usesFullSimulation() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()
-                && ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
-            return AiPlayDecision.CurseEffects;
-        }
-
-        if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
+        if (usesFullSimulation()) {
             return AiPlayDecision.WillPlay;
         }
-
-        if ("True".equals(card.getSVar("NonStackingEffect")) && ComputerUtilCard.isNonDisabledCardInPlay(player, card.getName())) {
-            return AiPlayDecision.DoesntImpactGame;
-        }
-
-        if (checkCurseEffects(sa)) {
-            return AiPlayDecision.CurseEffects;
+        if (usesHybridSimulation()) {
+            return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
         }
 
         int damage = 0;
@@ -990,6 +975,11 @@ public class AiController {
                 return AiPlayDecision.CurseEffects;
             }
         }
+
+        if (!sa.isSpell() && !sa.isLandAbility()) {
+            return AiPlayDecision.WillPlay;
+        }
+
         if (card.isPermanent() && !sa.isMutate()) {
             damage += ComputerUtil.getDamageFromETB(player, card);
             if (damage >= player.getLife()) {
@@ -998,6 +988,14 @@ public class AiController {
             if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
                 return AiPlayDecision.BadEtbEffects;
             }
+        }
+
+        if ("True".equals(card.getSVar("NonStackingEffect")) && ComputerUtilCard.isNonDisabledCardInPlay(player, card.getName())) {
+            return AiPlayDecision.DoesntImpactGame;
+        }
+
+        if (checkCurseEffects(sa)) {
+            return AiPlayDecision.CurseEffects;
         }
 
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
@@ -1899,9 +1897,8 @@ public class AiController {
             int random = MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, 0) + 1);
             if (player.getLife() < random + 5) {
                 return min;
-            } else {
-                return random;
             }
+            return random;
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (sa.hasSVar("EnergyToPay")) {

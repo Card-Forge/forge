@@ -2126,13 +2126,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     cardView = sa.getCardView();
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
-        } else {
-            final boolean result = InputConfirm.confirm(this, sa, question);
-            if (result) {
-                macros().addRememberedAction(new PayCostAction(sa.getCardView()));
-            }
-            return result;
         }
+        final boolean result = InputConfirm.confirm(this, sa, question);
+        if (result) {
+            macros().addRememberedAction(new PayCostAction(sa.getCardView()));
+        }
+        return result;
     }
 
     // Mutated from game thread on replacement prompts; cleared from Netty thread via YieldUpdate.ClearAbilityOrders.
@@ -3871,7 +3870,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (!mayAutoPass()) {
             return;
         }
-        yieldController.setAutoPassUntilEndOfTurn(false);
+        yieldController.clearEndOfTurnYieldAndDispatch();
         PlayerView playerView = getLocalPlayerView();
         getGui().showPromptMessage(playerView, "");
         getGui().updateButtons(playerView, false, false, false);

@@ -116,6 +116,7 @@ public final class CardFlightOverlay {
         private boolean cancelled; // LEAVE: turned out not to be a departure (e.g. control change)
         private float fromCx, fromCy, toCx, toCy, fromH, toH;
         private Style style = Style.ROTATE;
+        private boolean moved; // ENTER: a card already on the battlefield changing rows
 
         private Flight(CardView card, Rectangle from, boolean fromExact, Rectangle to, float tappedAngle, boolean leave) {
             this.card = card; this.from = from; this.fromExact = fromExact; this.to = to;
@@ -156,12 +157,13 @@ public final class CardFlightOverlay {
      * @param viaStack  true for anything that resolves from the stack (non-land permanents)
      * @return the flight, or null if it was skipped (cap reached / token). The caller should then just show the card.
      */
-    public static Flight start(CardView card, Rectangle handFrom, Rectangle to, float tappedAngle, boolean viaStack) {
+    public static Flight start(CardView card, Rectangle handFrom, Rectangle to, float tappedAngle, boolean viaStack, boolean moved) {
         Rectangle stackFrom = stackRects.remove(card.getId()); // always consume so it can't go stale
         Style s = style();
         if (s == Style.OFF) { return null; }
         if (countFlights(false) >= MAX_FLIGHTS) { return null; }
         if (TOKENS_POPUP && card.isToken()) { s = Style.POPUP; } // tokens have no hand/stack origin
+        if (moved) { s = Style.SLIDE; }
 
         Rectangle from;
         boolean exact;
@@ -178,6 +180,7 @@ public final class CardFlightOverlay {
 
         Flight f = new Flight(card, from, exact, to, tappedAngle, false);
         f.style = s;
+        f.moved = moved;
         flights.add(f);
         if (exact) { launchedFromStack.add(card.getId()); }
         Gdx.graphics.requestRendering();
@@ -299,11 +302,16 @@ public final class CardFlightOverlay {
             fromCx = f.from.x + f.from.width / 2;
             fromCy = f.from.y + f.from.height / 2;
         } else if (f.from != null) {
-            // hand panel rect: strip the panel padding
+            // hand panel rect (or the old field rect for a move): strip the panel padding
             fromH = f.from.height - 2 * pad;
             float fromW = fromH / FCardPanel.ASPECT_RATIO;
-            fromCx = f.from.x + pad + fromW / 2;
-            fromCy = f.from.y + pad + fromH / 2;
+            if (f.moved && f.tappedAngle != 0f) { // a tapped card sits bottom-aligned in the square panel
+                fromCx = f.from.x + pad + fromH / 2;
+                fromCy = f.from.y + pad + fromH - fromW / 2;
+            } else {
+                fromCx = f.from.x + pad + fromW / 2;
+                fromCy = f.from.y + pad + fromH / 2;
+            }
         } else {
             // nothing recorded (stack hidden, effects, AI): launch from the controller's Hand tab, then avatar, then screen edge
             Rectangle src = null;
@@ -442,7 +450,7 @@ public final class CardFlightOverlay {
                 h = f.fromH + (f.toH - f.fromH) * e;
                 cx = f.fromCx + (f.toCx - f.fromCx) * e;
                 cy = f.fromCy + (f.toCy - f.fromCy) * e;
-                angle = f.tappedAngle * e;
+                angle = f.moved ? f.tappedAngle : f.tappedAngle * e;
                 break;
             }
             default: { // ROTATE (the original behaviour)

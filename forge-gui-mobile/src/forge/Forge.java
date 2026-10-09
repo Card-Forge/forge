@@ -48,6 +48,7 @@ import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
+import forge.screens.match.DiceOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.settings.CardImageBrowserScreen;
@@ -170,6 +171,10 @@ public class Forge implements ApplicationListener {
     }
 
     private Forge() {
+    }
+
+    public static TransitionScreen getTransitionScreen() {
+        return transitionScreen;
     }
 
     private ForgePreferences getForgePreferences() {
@@ -982,8 +987,11 @@ public class Forge implements ApplicationListener {
             FrameRate.getInstance().render(showFPS);
             return;
         }
+        // update DiceOverlay
+        DiceOverlay.getInstance().update(delta);
         // render classic
         Classic.getInstance().render(screen);
+        DiceOverlay.getInstance().render();
         FrameRate.getInstance().render(showFPS);
     }
 
@@ -1070,7 +1078,8 @@ public class Forge implements ApplicationListener {
         }
         Dscreens.clear();
         // don't call getInstance() or they will be recreated on dispose
-        safeDispose( // I need to know what line the startup bug occurs when the app is paused...
+        safeDispose(
+            DiceOverlay.instance,
             MapStage.instance,
             ScreenUtil.instance,
             ShaderUtil.instance,

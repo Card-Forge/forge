@@ -196,7 +196,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventFlipCoin ev) {
-        if (humanController == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_FLIP_ANIMATION)) {
+        if (humanController == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_COIN_DICE_ANIMATION)) {
             return null;
         }
         final PlayerView me = humanController.getLocalPlayerView();
@@ -283,6 +283,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventGameFinished ev) {
         gameFinished = true;
         return processEvent();
+    }
+
+    @Override
+    public Void visit(final GameEventFlipOntoBattlefield ev) {
+        if (ev.finished()) {
+            matchController.endFlipOntoBattlefield(ev.flipped());
+            return null;
+        }
+        final List<CardView> battlefield = new ArrayList<>();
+        for (PlayerView pv : matchController.getGameView().getPlayers()) {
+            for (CardView cv : pv.getCards(ZoneType.Battlefield)) { battlefield.add(cv); }
+        }
+        matchController.showFlipOntoBattlefield(ev.flipped(), ev.target(), ev.hit(), battlefield, ev.timesFlipped());
+        return null;
     }
 
     @Override

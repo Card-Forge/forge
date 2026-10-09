@@ -8,7 +8,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Timer;
 import com.google.common.collect.Maps;
+import forge.animation.FlipOntoBattlefieldAnimation;
+import forge.game.ability.effects.FlipOntoBattlefieldEffect;
+import forge.screens.LoadingOverlay;
+import forge.toolbox.FOverlay;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.adventure.scene.DuelScene;
@@ -80,11 +86,16 @@ import forge.util.collect.FCollectionView;
 
 public class MatchController extends NetworkGuiGame {
     private MatchController() { }
+    static {
+        // the mobile board knows where the cards are, so it can handle 3-4 card corner hits
+        FlipOntoBattlefieldEffect.boardDecidesHits = true;
+    }
     public static final MatchController instance = new MatchController();
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
     private static GameState phaseGameState;
+    private static boolean introShowing;      // EDT only
 
     private GameState getPhaseGameState() {
         return phaseGameState;
@@ -231,6 +242,7 @@ public class MatchController extends NetworkGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
+        DiceOverlay.getInstance().attach(getGameView().getGame()); // mobile-only dice animations
         if(GuiBase.isNetPlay(this))
             view.resetFields();
         selectionZonesBackup = null;
@@ -279,24 +291,61 @@ public class MatchController extends NetworkGuiGame {
         btn2.setEnabled(enable2);
     }
 
+    public static void setIntroShowing(final boolean showing) {
+        introShowing = showing;
+    }
+
+    private static boolean coinBlocked() {
+        return introShowing
+                || Forge.getTransitionScreen() != null                 // match-entry transition still running
+                || FOverlay.getTopOverlay() instanceof LoadingOverlay; // loading overlay still up
+    }
+
+    /** EDT only. Re-checks every 0.2s, then gives up after. */
+    private static void runCoinWhenClear(final Runnable show, final int tries) {
+        if (!coinBlocked() || tries <= 0) {
+            show.run();
+            return;
+        }
+        Timer.schedule(new Timer.Task() {
+            @Override public void run() {
+                FThreads.invokeInEdtLater(() -> runCoinWhenClear(show, tries - 1));
+            }
+        }, 0.2f);
+    }
+
     @Override
     public void showCoinFlip(final boolean heads, final String caption, final boolean waitForTap) {
         if (FThreads.isGuiThread()) {
             return;
         }
         final CountDownLatch latch = new CountDownLatch(1);
-        FThreads.invokeInEdtLater(() -> {
+        FThreads.invokeInEdtLater(() -> runCoinWhenClear(() -> {
             try {
                 new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
             } catch (RuntimeException e) {
                 latch.countDown();
             }
-        });
+        }, 300));
+    }
+
+    @Override
+    public void showFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, List<CardView> battlefield, int timesFlipped) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP)) {
+            return;
+        }
+        final CountDownLatch done = new CountDownLatch(1);
+        Gdx.app.postRunnable(() -> new FlipOntoBattlefieldAnimation(flipped, target, hit, battlefield, timesFlipped, done::countDown).start());
         try {
-            latch.await();
-        } catch (InterruptedException e) {
+            done.await(6, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    @Override
+    public void endFlipOntoBattlefield(CardView flipped) {
+        FlipOntoBattlefieldAnimation.markResolved(flipped);
     }
 
     @Override
