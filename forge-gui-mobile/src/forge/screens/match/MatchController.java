@@ -9,8 +9,11 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Timer;
 import com.google.common.collect.Maps;
 import forge.animation.FlipOntoBattlefieldAnimation;
+import forge.screens.LoadingOverlay;
+import forge.toolbox.FOverlay;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.adventure.scene.DuelScene;
@@ -88,7 +91,6 @@ public class MatchController extends NetworkGuiGame {
     private static MatchScreen view;
     private static GameState phaseGameState;
     private static boolean introShowing;      // EDT only
-    private static Runnable deferredCoin;
 
     private GameState getPhaseGameState() {
         return phaseGameState;
@@ -284,14 +286,27 @@ public class MatchController extends NetworkGuiGame {
         btn2.setEnabled(enable2);
     }
 
-    /** EDT only. While true, coin flips wait until it is set back to false. */
     public static void setIntroShowing(final boolean showing) {
         introShowing = showing;
-        if (!showing && deferredCoin != null) {
-            final Runnable r = deferredCoin;
-            deferredCoin = null;
-            r.run();
+    }
+
+    private static boolean coinBlocked() {
+        return introShowing
+                || Forge.getTransitionScreen() != null                 // match-entry transition still running
+                || FOverlay.getTopOverlay() instanceof LoadingOverlay; // loading overlay still up
+    }
+
+    /** EDT only. Re-checks every 0.2s, then gives up after. */
+    private static void runCoinWhenClear(final Runnable show, final int tries) {
+        if (!coinBlocked() || tries <= 0) {
+            show.run();
+            return;
         }
+        Timer.schedule(new Timer.Task() {
+            @Override public void run() {
+                FThreads.invokeInEdtLater(() -> runCoinWhenClear(show, tries - 1));
+            }
+        }, 0.2f);
     }
 
     @Override
@@ -300,20 +315,13 @@ public class MatchController extends NetworkGuiGame {
             return;
         }
         final CountDownLatch latch = new CountDownLatch(1);
-        FThreads.invokeInEdtLater(() -> {
-            final Runnable show = () -> {
-                try {
-                    new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
-                } catch (RuntimeException e) {
-                    latch.countDown();
-                }
-            };
-            if (introShowing && deferredCoin == null) {
-                deferredCoin = show;      // runs when the boss dialog is dismissed
-            } else {
-                show.run();
+        FThreads.invokeInEdtLater(() -> runCoinWhenClear(() -> {
+            try {
+                new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
+            } catch (RuntimeException e) {
+                latch.countDown();
             }
-        });
+        }, 300));
     }
 
     @Override

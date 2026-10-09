@@ -124,7 +124,7 @@ public class CoinFlipOverlay extends FOverlay {
                     w, font.getLineHeight() * 3f, true, Align.center, false);
             if (waitForTap) {
                 g.drawText(Forge.getLocalizer().getMessageorUseDefault("lblTapSpaceToContinue", "Tap/Space to continue"), FSkinFont.get(12), text,
-                        0, h - FSkinFont.get(12).getLineHeight() * 3f, w, FSkinFont.get(12).getLineHeight() * 2f,
+                        0, h - FSkinFont.get(12).getLineHeight() * 6f, w, FSkinFont.get(12).getLineHeight() * 2f,
                         false, Align.center, true);
                 if (Gdx.app.getType() == Application.ApplicationType.Desktop
                         && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

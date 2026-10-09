@@ -173,6 +173,10 @@ public class Forge implements ApplicationListener {
     private Forge() {
     }
 
+    public static TransitionScreen getTransitionScreen() {
+        return transitionScreen;
+    }
+
     private ForgePreferences getForgePreferences() {
         return FModel.getPreferences();
     }
