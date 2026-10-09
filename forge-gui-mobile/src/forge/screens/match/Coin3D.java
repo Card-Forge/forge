@@ -43,10 +43,10 @@ final class Coin3D implements Disposable {
     static final float FRAME = (float) (2.0 * 4.2 * Math.tan(Math.toRadians(20.0)));
 
     private static final float H = 0.055f;         // half thickness
-    private static final float INSET = 0.03f;      // how far the flat face is inset from the rim radius
-    private static final float CHAMFER = 0.025f;   // height of the bevel between rim and face
-    private static final int SEGMENTS = 72;
-    private static final int REEDS = 60;           // ridges around the edge
+    private static final float INSET = 0.008f;      // how far the flat face is inset from the rim radius
+    private static final float CHAMFER = 0.016f;   // height of the bevel between rim and face
+    private static final int SEGMENTS = 128;
+    private static final int REEDS = 120;           // ridges around the edge
     /** Fraction of the face texture (measured from its centre) that maps onto the face disc. Lower it if your PNGs have a transparent margin. */
     private static final float ART_RADIUS = 1.0f;
 
@@ -94,8 +94,8 @@ final class Coin3D implements Disposable {
         Material metal = new Material(ColorAttribute.createDiffuse(METAL),
                 ColorAttribute.createSpecular(0.5f, 0.5f, 0.45f, 1f), FloatAttribute.createShininess(24f));
         MeshPartBuilder base = mb.part("base", GL20.GL_TRIANGLES, attrs, metal);
-        buildDisc(base, H - 0.004f, true, false);
-        buildDisc(base, -(H - 0.004f), false, false);
+        buildDisc(base, H - 0.02f, true, false);
+        buildDisc(base, -(H - 0.02f), false, false);
 
         Material headsMat = faceMaterial(heads);
         buildDisc(mb.part("heads", GL20.GL_TRIANGLES, attrs, headsMat), H, true, true);
@@ -194,16 +194,17 @@ final class Coin3D implements Disposable {
 
     /** Tiny repeating texture of light/dark vertical stripes for the reeded edge. */
     private static Texture reedTexture() {
-        Pixmap pm = new Pixmap(8, 8, Pixmap.Format.RGBA8888);
-        for (int x = 0; x < 8; x++) {
-            float shade = 0.80f + 0.20f * MathUtils.cos(MathUtils.PI2 * x / 8f);
+        final int w = 16;
+        Pixmap pm = new Pixmap(w, 4, Pixmap.Format.RGBA8888);
+        for (int x = 0; x < w; x++) {
+            float shade = 0.88f + 0.12f * MathUtils.cos(MathUtils.PI2 * x / w);
             pm.setColor(METAL.r * shade, METAL.g * shade, METAL.b * shade, 1f);
-            pm.drawLine(x, 0, x, 7);
+            pm.drawLine(x, 0, x, 3);
         }
-        Texture t = new Texture(pm);
+        Texture t = new Texture(pm, true); // mipmaps
         pm.dispose();
         t.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
         return t;
     }
 

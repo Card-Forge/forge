@@ -579,6 +579,17 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         return null;
     }
 
+    /** The client holding a removed slot loses it. The slots above move down, and their clients move with them. */
+    public void slotRemoved(final int index) {
+        for (final RemoteClient client : clients.values()) {
+            if (client.getIndex() == index) {
+                client.setIndex(RemoteClient.UNASSIGNED_SLOT);
+            } else if (client.getIndex() > index) {
+                client.setIndex(client.getIndex() - 1);
+            }
+        }
+    }
+
     public void clearPlayerGuis() {
         for (final RemoteClient client : clients.values()) {
             client.setGui(null);
@@ -985,11 +996,14 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
         final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
         p.dangerouslySetController(aiCtrl);
+        // The match's later games seat players from here
+        p.getRegisteredPlayer().setPlayer(aiLobbyPlayer);
         netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
 
         // Clear InputQueue to unblock the game thread (waiting on cdlDone)
         pch.getInputQueue().clearInputs();
         netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
+        hostedMatch.tallyNextGameDecisions();
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {

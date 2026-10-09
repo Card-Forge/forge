@@ -1,7 +1,10 @@
 package forge.screens.match;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -62,7 +65,7 @@ public class CoinFlipOverlay extends FOverlay {
             }
             final float pxScale = w > 0 ? Gdx.graphics.getBackBufferWidth() / w : 1f;
             final float box = diameter / (2f * Coin3D.R / Coin3D.FRAME);
-            final int fb = MathUtils.clamp(Math.round(box * pxScale), 256, 1024);
+            final int fb = MathUtils.clamp(Math.round(box * pxScale * 1.5f), 256, 1024);
             coin = new Coin3D(headsTex, tailsTex, fb);
         } catch (RuntimeException e) {
             Gdx.app.error("CoinFlipOverlay", "failed to create 3D coin", e);
@@ -120,9 +123,13 @@ public class CoinFlipOverlay extends FOverlay {
             g.drawText(caption, font, text, 0, textY + font.getLineHeight() * 1.6f,
                     w, font.getLineHeight() * 3f, true, Align.center, false);
             if (waitForTap) {
-                g.drawText(Forge.getLocalizer().getMessageorUseDefault("lblTapToContinue", "Tap to continue"), FSkinFont.get(12), text,
+                g.drawText(Forge.getLocalizer().getMessageorUseDefault("lblTapSpaceToContinue", "Tap/Space to continue"), FSkinFont.get(12), text,
                         0, h - FSkinFont.get(12).getLineHeight() * 3f, w, FSkinFont.get(12).getLineHeight() * 2f,
                         false, Align.center, true);
+                if (Gdx.app.getType() == Application.ApplicationType.Desktop
+                        && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                    finish();
+                }
             } else if (elapsed >= FLIP_TIME + HOLD_TIME) {
                 finish();
             }
@@ -161,7 +168,13 @@ public class CoinFlipOverlay extends FOverlay {
             b.begin();
         }
         b.setColor(1f, 1f, 1f, 1f);
+        final int sRGB = b.getBlendSrcFunc(), dRGB = b.getBlendDstFunc();
+        final int sA = b.getBlendSrcFuncAlpha(), dA = b.getBlendDstFuncAlpha();
+        b.setBlendFunctionSeparate(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA,
+                GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        b.setColor(1f, 1f, 1f, 1f);
         b.draw(coin.getRegion(), px, py, pw, ph);
+        b.setBlendFunctionSeparate(sRGB, dRGB, sA, dA); // restore (flushes the draw first)
         if (!wasDrawing) {
             b.end();
         }

@@ -3,10 +3,8 @@ package forge.game.ability.effects;
 import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
+import forge.game.card.*;
+import forge.game.event.GameEventFlipOntoBattlefield;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -15,6 +13,7 @@ import forge.util.Localizer;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     @Override
@@ -22,63 +21,66 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         // Basic parameters defining the chances
         final float chanceToFlip = 0.85f;
         final int maxFlipTimes = 2;
-        final float chanceToHit = 0.70f;
         final float chanceToHitTwoCards = 0.20f;
 
         final Card host = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
         final Game game = host.getGame();
-        boolean flippedOnce = false;
 
         // TODO: allow to make a bounding box of sorts somehow, ideally - upgrade to a full system allowing to actually target by location
         CardCollectionView tgtBox = p.getController().chooseCardsForEffect(game.getCardsIn(ZoneType.Battlefield), sa, Localizer.getInstance().getMessage("lblChooseDesiredLocation"), 1, 1, sa.hasParam("AllowRandom"), null);
 
         Card tgtLoc = tgtBox.getFirst();
 
+        final int rowSize = CardLists.filter(tgtLoc.getController().getCardsIn(ZoneType.Battlefield), c -> c.sharesCardTypeWith(tgtLoc)).size();
+        final float chanceToHit = Math.min(1.0f, 0.45f + 0.07f * rowSize);
+
         Card lhsNeighbor = getNeighboringCard(tgtLoc, -1);
         Card rhsNeighbor = getNeighboringCard(tgtLoc, 1);
 
         CardCollection randChoices = new CardCollection();
         randChoices.add(tgtLoc);
-        if (lhsNeighbor != null) {
-            randChoices.add(lhsNeighbor);
-        } else if (rhsNeighbor != null) {
-            randChoices.add(rhsNeighbor);
-        }
+        if (lhsNeighbor != null && lhsNeighbor != tgtLoc) randChoices.add(lhsNeighbor);
+        if (rhsNeighbor != null && rhsNeighbor != tgtLoc) randChoices.add(rhsNeighbor);
 
         // TODO: would be fun to add a small chance (e.g. 3-5%) to land unpredictably on some random target?
+        boolean flipped = MyRandom.getRandom().nextFloat() <= chanceToFlip;
+        int flippedTimes = flipped ? MyRandom.getRandom().nextInt(maxFlipTimes) + 1 : 0;
+        sa.setSVar("TimesFlipped", String.valueOf(flippedTimes));
 
-        flippedOnce = MyRandom.getRandom().nextFloat() <= chanceToFlip; // 20% chance that the card won't flip even once
-        if (!flippedOnce) {
-            sa.setSVar("TimesFlipped", "0");
-            game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblDidNotFlipOver"), null);
-            return;
-        } else {
-            int flippedTimes = MyRandom.getRandom().nextInt(maxFlipTimes) + 1;
-            sa.setSVar("TimesFlipped", String.valueOf(flippedTimes)); // Currently the exact # of times is unused
-            game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblFlippedOver", flippedTimes), null);
-        }
-
-        // Choose what was hit
         CardCollection hit = new CardCollection();
-        float outcome = MyRandom.getRandom().nextFloat();
-        if (outcome <= chanceToHitTwoCards) {
-            hit.addAll(Aggregates.random(randChoices, randChoices.size() > 1 ? 2 : 1));
-            if (hit.size() == 2) {
-                game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnTwoCards", hit.getFirst(), hit.getLast()), null);
-            } else {
-                game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnOneCard", hit.getFirst()), null);
+        if (flipped) {
+            float outcome = MyRandom.getRandom().nextFloat();
+            if (outcome <= chanceToHitTwoCards) {
+                hit.addAll(Aggregates.random(randChoices, randChoices.size() > 1 ? 2 : 1));
+            } else if (outcome <= chanceToHit) {
+                hit.add(Aggregates.random(randChoices));
             }
         }
-        else if (outcome <= chanceToHit) {
-            hit.add(Aggregates.random(randChoices));
+
+        final CardView hostView = host.getView();
+        final CardView tgtView = tgtLoc.getView();
+        final List<CardView> hitViews = new ArrayList<>();
+        for (Card c : hit) { hitViews.add(c.getView()); }
+
+        // first event (animation starts)
+        game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, flippedTimes, false));
+
+        if (!flipped) {
+            game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblDidNotFlipOver"), null);
+            game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, 0, true));
+            return;
+        }
+        game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblFlippedOver", flippedTimes), null);
+        if (hit.size() == 2) {
+            game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnTwoCards", hit.getFirst(), hit.getLast()), null);
+        } else if (hit.size() == 1) {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblLandedOnOneCard", hit.getFirst()), null);
         } else {
             game.getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblDidNotLandOnCards"), null);
         }
-
-        // Remember whatever was hit
         host.addRemembered(hit);
+        game.fireEvent(new GameEventFlipOntoBattlefield(hostView, tgtView, hitViews, flippedTimes, true));
     }
 
     @Override
@@ -123,12 +125,11 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         }
 
         int loc = cardsOTB.indexOf(c);
-        if (direction < 0 && loc > 0) {
-            return cardsOTB.get(loc - 1);
+        if (direction < 0) {
+            if (loc > 0) return cardsOTB.get(loc - 1);
         } else if (loc < cardsOTB.size() - 1) {
             return cardsOTB.get(loc + 1);
         }
-
         return c;
     }
 }

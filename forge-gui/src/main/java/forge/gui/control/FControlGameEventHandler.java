@@ -286,6 +286,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventFlipOntoBattlefield ev) {
+        if (ev.finished()) {
+            matchController.endFlipOntoBattlefield(ev.flipped());
+            return null;
+        }
+        final List<CardView> battlefield = new ArrayList<>();
+        for (PlayerView pv : matchController.getGameView().getPlayers()) {
+            for (CardView cv : pv.getCards(ZoneType.Battlefield)) { battlefield.add(cv); }
+        }
+        matchController.showFlipOntoBattlefield(ev.flipped(), ev.target(), ev.hit(), battlefield, ev.timesFlipped());
+        return null;
+    }
+
+    @Override
     public Void visit(final GameEventSpellAbilityCast event) {
         evaluateYieldInterruptForSpellCast(event);
 

@@ -171,11 +171,11 @@ public class ComputerUtilMana {
             colorsMostCommon = null;
         }
 
-        // Filter abilities (Signets etc.) need another source to pay for them, so they're the worse pick
+        // Filter abilities need another source to pay for them, so they're the worse pick
         // while ordinary sources can cover the cost on their own. Once they can't, the filters have to be
         // activated first, while there are still sources left to pay for them.
         final int freeMana = orderedCards.stream().mapToInt(c -> getAIPlayableMana(c).stream()
-                .filter(m -> getManaCostToActivate(m) == 0).mapToInt(m -> m.amountOfManaGenerated(true)).max().orElse(0)).sum();
+                .filter(m -> getGenericCostToActivate(m) == 0).mapToInt(m -> m.amountOfManaGenerated(true)).max().orElse(0)).sum();
         final boolean filtersFirst = freeMana < cost.getConvertedManaCost();
 
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
@@ -228,7 +228,7 @@ public class ComputerUtilMana {
 
             // stable partition: filter abilities to the back (or the front when they're needed)
             final List<SpellAbility> filters = new ArrayList<>();
-            newAbilities.removeIf(m -> getManaCostToActivate(m) > 0 && filters.add(m));
+            newAbilities.removeIf(m -> getGenericCostToActivate(m) > 0 && filters.add(m));
             newAbilities.addAll(filtersFirst ? 0 : newAbilities.size(), filters);
 
             if (DEBUG_MANA_PAYMENT) {
@@ -613,8 +613,9 @@ public class ComputerUtilMana {
             return null;
         }
 
-        // A filter's own cost (Signet etc.) is paid in the middle of another payment, which still needs what it has set aside
-        if (!sa.isManaAbility() || getManaCostToActivate(sa) == 0) {
+        // A filter's own cost is paid in the middle of another payment, which still needs what it has set aside.
+        // The filter is among that; if it isn't, the ability is being activated on its own and starts afresh like any other.
+        if (test || !sa.isManaAbility() || !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), MemorySet.PAYS_TAP_COST)) {
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
         }
@@ -660,6 +661,7 @@ public class ComputerUtilMana {
         // Loop over mana needed
         while (!cost.isPaid()) {
             while (!cost.isPaid() && !manapool.isEmpty()) {
+                // would we ever not want to use pool mana?
                 boolean found = false;
                 for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
@@ -709,12 +711,11 @@ public class ComputerUtilMana {
 
             saList.removeAll(saExcludeList);
 
-            Collection<SpellAbility> saOrdered = saList;
             if (toPay == ManaCostShard.GENERIC && !hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref")) {
-                saOrdered = requiredSourcesFirst(saList, cost, sa);
+                saList = requiredSourcesFirst(saList, cost, sa);
             }
 
-            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saOrdered, checkPlayable || !test);
+            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
                 // not a good idea to sac a card that you're targeting with the SA you're paying for
@@ -765,7 +766,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            final int manaCostToActivate = getManaCostToActivate(saPayment);
+            final int manaCostToActivate = getGenericCostToActivate(saPayment);
             if (!test && manaCostToActivate > 0) {
                 // A Signet-like source is about to be activated: float the mana for its own cost first,
                 // from a source the remaining cost can spare, so that its cost payment doesn't grab a
@@ -857,23 +858,23 @@ public class ComputerUtilMana {
     }
 
     // a source adding several mana that is needed either way goes first, so nothing else is tapped beside it for no reason
-    private static Collection<SpellAbility> requiredSourcesFirst(final Collection<SpellAbility> saList, final ManaCostBeingPaid cost, final SpellAbility sa) {
+    private static Collection<SpellAbility> requiredSourcesFirst(final Collection<SpellAbility> shardProducers, final ManaCostBeingPaid cost, final SpellAbility sa) {
         final int generic = cost.getGenericManaAmount();
         if (generic < 2) {
-            return saList;
+            return shardProducers;
         }
 
         Map<Card, Integer> manaPerCard = null;
         int manaTotal = 0;
         List<SpellAbility> required = null;
-        for (final SpellAbility ma : saList) {
+        for (final SpellAbility ma : shardProducers) {
             final int amount = manaPerCard != null ? manaPerCard.get(ma.getHostCard()) : ma.totalAmountOfManaGenerated(sa, true);
             if (amount < 2) {
                 continue;
             }
             if (manaPerCard == null) {
                 manaPerCard = Maps.newHashMap();
-                for (final SpellAbility source : saList) {
+                for (final SpellAbility source : shardProducers) {
                     manaPerCard.merge(source.getHostCard(), source.totalAmountOfManaGenerated(sa, true), Math::max);
                 }
                 for (final int mana : manaPerCard.values()) {
@@ -888,16 +889,15 @@ public class ComputerUtilMana {
             }
         }
         if (required == null) {
-            return saList;
+            return shardProducers;
         }
 
-        final List<SpellAbility> ordered = Lists.newArrayList(required);
-        for (final SpellAbility ma : saList) {
+        for (final SpellAbility ma : shardProducers) {
             if (!required.contains(ma)) {
-                ordered.add(ma);
+                required.add(ma);
             }
         }
-        return ordered;
+        return required;
     }
 
     private static void resetPayment(List<SpellAbility> payments) {
@@ -907,7 +907,7 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Before a filter mana ability (Signet, Odyssey filter land) is activated for real, tap ordinary sources
+     * Before a filter mana ability (e.g. Arcane Signet) is activated for real, tap ordinary sources
      * for the generic mana it costs so that mana is floating when the ability's own cost gets paid.
      * Sources that the rest of the cost still needs for a colored shard are left alone.
      *
@@ -923,13 +923,13 @@ public class ComputerUtilMana {
         final ManaCostBeingPaid remaining = new ManaCostBeingPaid(cost);
         payMultipleMana(remaining, predictMana(filter, ai, toPay), ai);
 
-        int toFloat = getManaCostToActivate(filter) - manapool.totalMana();
+        int toFloat = getGenericCostToActivate(filter) - manapool.totalMana();
         final List<SpellAbility> candidates = new ArrayList<>(sourcesForShards.get(ManaCostShard.GENERIC));
         while (toFloat > 0) {
             SpellAbility chosen = null;
             for (final SpellAbility m : candidates) {
                 final Card host = m.getHostCard();
-                if (host.equals(filterHost) || getManaCostToActivate(m) > 0 || isManaSourceReserved(ai, host)) {
+                if (host.equals(filterHost) || getGenericCostToActivate(m) > 0 || isManaSourceReserved(ai, host)) {
                     continue;
                 }
                 m.setActivatingPlayer(ai);
@@ -960,15 +960,18 @@ public class ComputerUtilMana {
             candidates.remove(chosen);
 
             final int before = manapool.totalMana();
-            final CostPayment pay = new CostPayment(chosen.getPayCosts(), chosen);
-            if (!pay.payComputerCosts(new AiCostDecision(ai, chosen, effect, true))) {
+            if (chosen.getPayCosts().hasTapCost()) {
+                AiCardMemory.rememberCard(ai, chosen.getHostCard(), MemorySet.PAYS_TAP_COST);
+            }
+            if (!new CostPayment(chosen.getPayCosts(), chosen).
+                    payComputerCosts(new AiCostDecision(ai, chosen, effect, true))) {
+                if (chosen.getPayCosts().hasTapCost()) {
+                    AiCardMemory.forgetCard(ai, chosen.getHostCard(), MemorySet.PAYS_TAP_COST);
+                }
                 continue;
             }
             ai.getGame().getStack().addAndUnfreeze(chosen);
             paymentList.add(chosen);
-            if (chosen.getPayCosts().hasTapCost()) {
-                AiCardMemory.rememberCard(ai, chosen.getHostCard(), MemorySet.PAYS_TAP_COST);
-            }
             final SpellAbility used = chosen;
             if (!used.canPlay()) {
                 sourcesForShards.values().removeIf(s -> s == used || (s.getHostCard().equals(used.getHostCard()) && !s.canPlay()));
@@ -1311,8 +1314,8 @@ public class ComputerUtilMana {
         ListMultimap<ManaCostShard, SpellAbility> res =
                 MultimapBuilder.enumKeys(ManaCostShard.class).arrayListValues().build();
 
-        // filter abilities (Signets etc.) add generic mana to the cost when used, so keep generic sources at hand for them
-        final boolean hasFilterSources = manaAbilityMap.get(ManaAtom.GENERIC).stream().anyMatch(m -> getManaCostToActivate(m) > 0);
+        // filter abilities add generic mana to the cost when used, so keep generic sources at hand for them
+        final boolean hasFilterSources = manaAbilityMap.get(ManaAtom.GENERIC).stream().anyMatch(m -> getGenericCostToActivate(m) > 0);
         if ((cost.getGenericManaAmount() > 0 || cost.hasAnyKind(ManaAtom.OR_2_GENERIC) || hasFilterSources) && manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
             res.putAll(ManaCostShard.GENERIC, manaAbilityMap.get(ManaAtom.GENERIC));
         }
@@ -1832,7 +1835,6 @@ public class ComputerUtilMana {
                 continue;
             }
             // a mana ability that itself costs mana is only usable if it's a simple net-positive
-            // "filter" like a Signet or an Odyssey filter land; payManaCost accounts for its cost
             final Cost cost = a.getPayCosts();
             if (cost.hasManaCost() && !isFilterManaAbility(a)) {
                 continue;
@@ -1854,9 +1856,10 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Generic mana that has to be paid to activate a mana ability (e.g. 1 for a Signet), 0 for ordinary sources.
+     * Generic mana that has to be paid to activate a mana ability.
      */
-    public static int getManaCostToActivate(final SpellAbility ma) {
+    public static int getGenericCostToActivate(final SpellAbility ma) {
+        //TODO(correctness) this ignores cost modifiers, but might be too rare for the performance price
         final Cost cost = ma.getPayCosts();
         if (cost == null || !cost.hasManaCost()) {
             return 0;

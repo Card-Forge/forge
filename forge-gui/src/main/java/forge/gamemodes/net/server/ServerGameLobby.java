@@ -116,6 +116,15 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     }
 
     @Override
+    public void removeSlot(final int index) {
+        if (getSlot(index) != null) {
+            // Before the lobby is sent out again, which tells each client the slot it holds
+            FServerManager.getInstance().slotRemoved(index);
+        }
+        super.removeSlot(index);
+    }
+
+    @Override
     public boolean hasControl() {
         return true;
     }
