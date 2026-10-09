@@ -25,7 +25,7 @@ public final class AdventureBackgroundResolver {
         PointOfInterest pointOfInterest = gameScene.getMapPOI();
         String location = gameScene.getAdventurePlayerLocation(false, true);
         FSkinTexture background = getLocationBackground(location);
-        if (!Config.instance().getSettingData().enableExtraBattleBackgrounds) {
+        if (!Config.instance().isExtraBattleBackgroundsEnabled()) {
             return background;
         }
         String biome = pointOfInterest == null ? null

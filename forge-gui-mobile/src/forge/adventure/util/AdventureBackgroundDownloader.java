@@ -47,7 +47,7 @@ public final class AdventureBackgroundDownloader {
 
     public static void start() {
         Config config = Config.instance();
-        if (!config.getSettingData().enableExtraBattleBackgrounds) {
+        if (!config.isExtraBattleBackgroundsEnabled()) {
             return;
         }
 
@@ -305,7 +305,7 @@ public final class AdventureBackgroundDownloader {
 
     private static void checkCancelled(int generation) throws SyncCancelledException {
         if (generation != GENERATION.get()
-                || !Config.instance().getSettingData().enableExtraBattleBackgrounds) {
+                || !Config.instance().isExtraBattleBackgroundsEnabled()) {
             throw new SyncCancelledException();
         }
     }

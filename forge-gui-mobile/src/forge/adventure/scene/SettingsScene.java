@@ -228,13 +228,13 @@ public class SettingsScene extends UIScene {
         backgroundSource.setSelected(useCustomSource ? customSource : planeDefault);
         TextField backgroundSourceUrl = Controls.newTextField(configuredSource == null ? "" : configuredSource);
         CheckBox extraBattleBackgrounds = addSettingField(
-                localizer.getMessage("lblEnableExtraBattleBackgrounds"),
-                Config.instance().getSettingData().enableExtraBattleBackgrounds,
+                localizer.getMessage("lblEnableExtraBattleBackgrounds", Config.instance().getPlane()),
+                Config.instance().isExtraBattleBackgroundsEnabled(),
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         boolean enabled = ((CheckBox) actor).isChecked();
-                        Config.instance().getSettingData().enableExtraBattleBackgrounds = enabled;
+                        Config.instance().setExtraBattleBackgroundsEnabled(enabled);
                         Config.instance().saveSettings();
                         backgroundSource.setDisabled(!enabled);
                         backgroundSourceUrl.setDisabled(!enabled

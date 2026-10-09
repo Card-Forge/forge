@@ -203,6 +203,25 @@ public class Config {
         return Lang;
     }
 
+    public boolean isExtraBattleBackgroundsEnabled() {
+        Boolean enabled = settingsData.extraBattleBackgroundsByPlane == null ? null
+                : settingsData.extraBattleBackgroundsByPlane.get(plane);
+        if (enabled != null) {
+            return enabled;
+        }
+        if (settingsData.enableExtraBattleBackgrounds != null) {
+            return settingsData.enableExtraBattleBackgrounds;
+        }
+        return !GuiBase.isMobile() && configData.enableExtraBattleBackgroundsByDefault;
+    }
+
+    public void setExtraBattleBackgroundsEnabled(boolean enabled) {
+        if (settingsData.extraBattleBackgroundsByPlane == null) {
+            settingsData.extraBattleBackgroundsByPlane = new HashMap<>();
+        }
+        settingsData.extraBattleBackgroundsByPlane.put(plane, enabled);
+    }
+
     public String getCachePrefix() {
         String safePlane = getPlane().replaceAll("[^A-Za-z0-9._-]", "_");
         String planeKey = safePlane + "-" + UUID.nameUUIDFromBytes(
