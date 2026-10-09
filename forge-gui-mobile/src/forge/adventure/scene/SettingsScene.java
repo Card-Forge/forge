@@ -219,38 +219,47 @@ public class SettingsScene extends UIScene {
                 }
             }
         });
+        String off = localizer.getMessage("lblOff");
         String planeDefault = localizer.getMessage("lblPlaneDefault");
         String customSource = localizer.getMessage("lblCustomSource");
         boolean useCustomSource = Config.instance().isUsingCustomBattleBackgroundSource();
         String configuredSource = Config.instance().getCustomBattleBackgroundSource();
         SelectBox<String> backgroundSource = Controls.newComboBox();
-        backgroundSource.setItems(planeDefault, customSource);
-        backgroundSource.setSelected(useCustomSource ? customSource : planeDefault);
+        backgroundSource.setItems(off, planeDefault, customSource);
+        backgroundSource.setSelected(!Config.instance().isExtraBattleBackgroundsEnabled()
+                ? off : useCustomSource ? customSource : planeDefault);
         TextField backgroundSourceUrl = Controls.newTextField(configuredSource == null ? "" : configuredSource);
-        CheckBox extraBattleBackgrounds = addSettingField(
-                localizer.getMessage("lblEnableExtraBattleBackgrounds", Config.instance().getPlane()),
-                Config.instance().isExtraBattleBackgroundsEnabled(),
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        boolean enabled = ((CheckBox) actor).isChecked();
-                        Config.instance().setExtraBattleBackgroundsEnabled(enabled);
-                        Config.instance().saveSettings();
-                        backgroundSource.setDisabled(!enabled);
-                        backgroundSourceUrl.setDisabled(!enabled
-                                || !customSource.equals(backgroundSource.getSelected()));
-                        AdventureBackgroundDownloader.cancel();
-                        FSkinTexture.invalidateAdventureTextures();
-                    }
-                });
+        addLabel(localizer.getMessage("lblBattleBackgrounds", Config.instance().getPlane()));
+        settingGroup.add(backgroundSource).align(Align.right).pad(2);
+        Cell<TextraLabel> backgroundUrlLabelCell = addLabel(localizer.getMessage("lblBattleBackgroundIndexUrl"));
+        TextraLabel backgroundUrlLabel = backgroundUrlLabelCell.getActor();
+        Cell<TextField> backgroundUrlCell = settingGroup.add(backgroundSourceUrl).align(Align.right).pad(2);
+        Runnable updateBackgroundUrlVisibility = () -> {
+            boolean custom = customSource.equals(backgroundSource.getSelected());
+            backgroundUrlLabel.setVisible(custom);
+            backgroundSourceUrl.setVisible(custom);
+            backgroundUrlLabelCell.height(custom ? Value.prefHeight : Value.zero)
+                    .padTop(custom ? 2 : 0).padBottom(custom ? 2 : 0)
+                    .spaceTop(custom ? 5 : 0).spaceBottom(custom ? 5 : 0);
+            backgroundUrlCell.height(custom ? Value.prefHeight : Value.zero)
+                    .padTop(custom ? 2 : 0).padBottom(custom ? 2 : 0)
+                    .spaceTop(custom ? 5 : 0).spaceBottom(custom ? 5 : 0);
+            settingGroup.invalidateHierarchy();
+        };
+        updateBackgroundUrlVisibility.run();
         backgroundSource.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 boolean custom = customSource.equals(((SelectBox<?>) actor).getSelected());
-                backgroundSourceUrl.setDisabled(!extraBattleBackgrounds.isChecked() || !custom);
-                Config.instance().setUseCustomBattleBackgroundSource(custom);
+                boolean enabled = !off.equals(backgroundSource.getSelected());
+                updateBackgroundUrlVisibility.run();
+                Config.instance().setExtraBattleBackgroundsEnabled(enabled);
+                if (enabled) {
+                    Config.instance().setUseCustomBattleBackgroundSource(custom);
+                }
                 Config.instance().saveSettings();
                 AdventureBackgroundDownloader.cancel();
+                FSkinTexture.invalidateAdventureTextures();
             }
         });
         backgroundSourceUrl.addListener(new ChangeListener() {
@@ -263,12 +272,6 @@ public class SettingsScene extends UIScene {
                 }
             }
         });
-        backgroundSource.setDisabled(!extraBattleBackgrounds.isChecked());
-        backgroundSourceUrl.setDisabled(!extraBattleBackgrounds.isChecked() || !useCustomSource);
-        addLabel(localizer.getMessage("lblBattleBackgroundSource"));
-        settingGroup.add(backgroundSource).align(Align.right).pad(2);
-        addLabel(localizer.getMessage("lblBattleBackgroundIndexUrl"));
-        settingGroup.add(backgroundSourceUrl).align(Align.right).pad(2);
         addSettingField(localizer.getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -532,12 +535,12 @@ public class SettingsScene extends UIScene {
         settingGroup.add(text).align(Align.right);
     }
 
-    void addLabel(String name) {
+    Cell<TextraLabel> addLabel(String name) {
         TextraLabel label = Controls.newTextraLabel(name);
         label.setWrap(true);
         settingGroup.row().space(5);
         int w = Forge.isLandscapeMode() ? 160 : 80;
-        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
+        return settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
     }
 
     private void restartForge() {

@@ -139,14 +139,12 @@ public enum FSkinTexture implements FImage {
     }
 
     public static void invalidateAdventureTextures() {
-        for (FSkinTexture texture : ADVENTURE_BACKGROUNDS) {
-            texture.unloadAdventureBackground();
-        }
         invalidateAdventureBackgroundFiles();
     }
 
     public static void invalidateAdventureBackgroundFiles() {
         for (FSkinTexture texture : ADVENTURE_BACKGROUNDS) {
+            texture.unloadAdventureBackground();
             texture.adventureBackgroundFiles = null;
             texture.adventureBackgroundFolderKey = null;
         }
