@@ -92,6 +92,16 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        // CR 603.10a leaves-the-battlefield triggers look back in time: a permanent that was not on the battlefield
+        // before the event can't see it, e.g. a card returned by "exile until this leaves the battlefield"
+        if ("Battlefield".equals(runParams.get(AbilityKey.Origin)) && getActiveZone() != null
+                && getActiveZone().contains(ZoneType.Battlefield) && getHostCard().isInPlay()) {
+            CardCollectionView lastStateBattlefield = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            if (lastStateBattlefield != null && !lastStateBattlefield.contains(getHostCard())) {
+                return false;
+            }
+        }
+
         if (hasParam("ExcludedOrigins")) {
             if (ArrayUtils.contains(
                     getParam("ExcludedOrigins").split(","), runParams.get(AbilityKey.Origin)
