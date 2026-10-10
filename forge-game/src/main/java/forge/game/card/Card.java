@@ -144,6 +144,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
+    // moved by every change to what CardState.getStaticAbilities, getReplacementEffects and getTriggers read
+    private int traitsVersion;
     private final Table<Long, Long, ICardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
 
     // stores the card traits created by static abilities
@@ -1948,7 +1950,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
+    public void setCounters(final CounterType counterType, final Integer num) {
+        traitsVersion++;
+        super.setCounters(counterType, num);
+    }
+
     public final void setCounters(final Multiset<CounterType> allCounters) {
+        traitsVersion++;
         boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().anyMatch(CounterType::isKeywordCounter);
         counters = allCounters;
         view.updateCounters(this);
@@ -1968,6 +1976,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public final void clearCounters() {
         if (counters.isEmpty()) { return; }
+        traitsVersion++;
         boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().anyMatch(CounterType::isKeywordCounter);
 
         counters.clear();
@@ -3432,6 +3441,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return currentState.hasSpellAbility(id);
     }
 
+    public final int getTraitsVersion() {
+        return traitsVersion;
+    }
+    public final void bumpTraitsVersion() {
+        traitsVersion++;
+    }
+
     public boolean hasRemoveIntrinsic() {
         if (changedCardTypes.isEmpty()) {
             return false;
@@ -4161,6 +4177,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void updateTypeCache() {
+        traitsVersion++;
         this.getCurrentState().updateTypes();
     }
 
@@ -4998,6 +5015,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardTraitsByText;
     }
     public final void setChangedCardTraitsByText(Table<Long, Long, CardTraitChanges> changes) {
+        traitsVersion++;
         changedCardTraitsByText.clear();
         for (Table.Cell<Long, Long, CardTraitChanges> e : changes.cellSet()) {
             changedCardTraitsByText.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
@@ -5005,6 +5023,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
+        traitsVersion++;
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
             spells, trigger, replacements, statics, e -> true
         ));
@@ -5029,6 +5048,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return addChangedCardTraits(result, timestamp, staticId, updateView);
     }
     public final ICardTraitChanges addChangedCardTraits(ICardTraitChanges changes, long timestamp, long staticId, boolean updateView) {
+        traitsVersion++;
         changedCardTraits.put(timestamp, staticId, changes);
         if (updateView) {
             updateAbilityTextForView();
@@ -5037,9 +5057,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
+        traitsVersion++;
         return changedCardTraits.remove(timestamp, staticId) != null;
     }
     public final boolean removeChangedCardTraitsByText(long timestamp, long staticId) {
+        traitsVersion++;
         return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
@@ -5059,6 +5081,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void setChangedCardTraits(Table<Long, Long, ICardTraitChanges> changes) {
+        traitsVersion++;
         changedCardTraits.clear();
         for (Table.Cell<Long, Long, ICardTraitChanges> e : changes.cellSet()) {
             changedCardTraits.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
@@ -5066,6 +5089,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean clearChangedCardTraits() {
+        traitsVersion++;
         boolean changed = false;
         if (!changedCardTraitsByText.isEmpty()) {
             changed = true;
@@ -5297,6 +5321,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateKeywordsCache(getCurrentState());
     }
     public final void updateKeywordsCache(final CardState state) {
+        traitsVersion++;
         KeywordCollection keywords = new KeywordCollection();
 
         // Layer 1
@@ -5713,6 +5738,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setPhasedOut(final Player phasedOut0) {
         if (phasedOut == phasedOut0) { return; }
+        // the battlefield getter filters on this
+        if (game != null && getZone() != null) {
+            game.bumpZoneVersion();
+        }
         phasedOut = phasedOut0;
         view.updatePhasedOut(this);
     }
