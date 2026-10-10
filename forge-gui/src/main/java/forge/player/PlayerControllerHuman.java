@@ -1175,12 +1175,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
                                                        final CardCollection valid, final int min, final int max,
-                                                       final CardCollectionView visibleToChooser) {
+                                                       final DelayedReveal delayedReveal) {
         boolean optional = min == 0;
 
         if (p != player) {
-            tempShowCards(visibleToChooser);
-            if (useSelectCardsInput(valid, sa)) {
+            final boolean selectFromDisplay = useSelectCardsInput(valid, sa);
+            if (delayedReveal != null) {
+                if (selectFromDisplay) {
+                    yieldController.maybeInterruptOnReveal();
+                    tempShow(delayedReveal.getCards());
+                } else {
+                    // the list offers only the valid cards, so a revealed hand is shown first
+                    reveal(delayedReveal);
+                }
+            }
+            tempShowCards(valid);
+            if (selectFromDisplay) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
                 inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
                 inp.setCancelAllowed(optional);
