@@ -1,0 +1,7 @@
+Name:Rise from the Nether
+ManaCost:6 R
+Types:Sorcery Arcane
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_3_1_mindless_one | SpellDescription$ Create a 3/1 black Mindless-One creature token for each noncreature, nonland card in your graveyard.
+SVar:X:Count$ValidGraveyard Card.nonCreature+nonLand+YouOwn
+DeckHas:Ability$Token
+Oracle:Create a 3/1 black Mindless-One creature token for each noncreature, nonland card in your graveyard.

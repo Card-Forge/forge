@@ -24,6 +24,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -1586,6 +1587,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 return true;
             });
+            if (!sa.hasParam("FaceDown")) {
+                // an Aura with nothing to enchant would stay where it is
+                final Game game = decider.getGame();
+                fetchList = CardLists.filter(fetchList, c1 -> !c1.isAura()
+                        || game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(c1, null))
+                        || game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.canBeAttached(c1, null))
+                        || game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.canBeAttached(c1, null)));
+            }
             if (player.isOpponentOf(decider) && sa.hasParam("GainControl") && activator.equals(decider)) {
                 fetchList = CardLists.filter(fetchList, c12 -> !ComputerUtilCard.isCardRemAIDeck(c12) && !ComputerUtilCard.isCardRemRandomDeck(c12));
             }

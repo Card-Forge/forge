@@ -91,6 +91,11 @@ public class InputBlock extends InputSyncronizedBase {
     }
 
     @Override
+    protected boolean allowAwaitNextInput() {
+        return true;
+    }
+
+    @Override
     protected void onStop() {
         // Clear so highlights don't survive autopass.
         getController().clearActionableCards();
