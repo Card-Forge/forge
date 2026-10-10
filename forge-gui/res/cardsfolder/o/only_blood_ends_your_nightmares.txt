@@ -6,5 +6,5 @@ SVar:TrigSacEach:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature |
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDiscard | SubAbility$ DBCleanup
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ TgtChoose | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Card.RememberedPlayerCtrl
+SVar:X:RememberedLKI$Valid Card.RememberedPlayerCtrl
 Oracle:When you set this scheme in motion, each opponent sacrifices a creature. Then each opponent who didn't sacrifice a creature discards two cards.

@@ -5,6 +5,6 @@ A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberLKI$ Tr
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ RememberedController | RepeatSubAbility$ DBDraw | SubAbility$ DBCleanup
 SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Card.RememberedPlayerCtrl
+SVar:X:RememberedLKI$Valid Card.RememberedPlayerCtrl
 AI:RemoveDeck:Random
 Oracle:Exile all white creatures. For each creature exiled this way, its controller draws a card.
