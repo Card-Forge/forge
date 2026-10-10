@@ -6,25 +6,26 @@ import java.util.Map;
 
 import forge.deck.DeckBase;
 import forge.game.GameType;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.PaperToken;
 import forge.itemmanager.TokenManager;
 import forge.model.FModel;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VProbabilities;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.Localizer;
 
 public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
 
-    private DragCell allDecksParent = null;
-    private DragCell deckGenParent = null;
-    private DragCell probsParent = null;
 
     private List<PaperToken> fullCatalogCards;
 
@@ -129,9 +130,9 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
         this.getBtnRemove4().setVisible(false);
 
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        probsParent = removeTab(VProbabilities.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE, VProbabilities.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -165,16 +166,7 @@ public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
 
         //TODO: Remove filter for SItemManagerUtil.StatTypes.PACK
 
-        //Re-add tabs
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (probsParent != null) {
-            probsParent.addDoc(VProbabilities.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
     }
 
 }

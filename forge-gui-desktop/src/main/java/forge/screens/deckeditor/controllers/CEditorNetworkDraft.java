@@ -5,8 +5,8 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gamemodes.net.event.DraftPickEvent;
 import forge.gui.FDraftOverlay;
-import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.SHiddenTabs;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -54,12 +54,6 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
     private PendingSelfPick pendingSelfPick;
 
     private String ccAddLabel;
-    private DragCell constructedDecksParent;
-    private DragCell commanderDecksParent;
-    private DragCell oathbreakerDecksParent;
-    private DragCell brawlDecksParent;
-    private DragCell tinyLeadersDecksParent;
-    private DragCell deckGenParent;
 
     /**
      * @param seatIndex   this player's seat in the draft pod
@@ -230,12 +224,9 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
-        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
-        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
-        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
-        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        SHiddenTabs.hide(VDeckgen.SINGLETON_INSTANCE, VAllDecks.SINGLETON_INSTANCE,
+                VCommanderDecks.SINGLETON_INSTANCE, VOathbreakerDecks.SINGLETON_INSTANCE,
+                VBrawlDecks.SINGLETON_INSTANCE, VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         // One pick per click — draft flow doesn't support group-picking
         getCatalogManager().setAllowMultipleSelections(false);
@@ -265,24 +256,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VEditorLog.SINGLETON_INSTANCE.getParentCell().setVisible(true);
 
-        if (deckGenParent != null) {
-            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-        }
-        if (constructedDecksParent != null) {
-            constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (commanderDecksParent != null) {
-            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
-        }
-        if (oathbreakerDecksParent != null) {
-            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
-        }
-        if (brawlDecksParent != null) {
-            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
-        }
-        if (tinyLeadersDecksParent != null) {
-            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
-        }
+        SHiddenTabs.restoreAll();
 
         getCatalogManager().setAllowMultipleSelections(true);
     }
