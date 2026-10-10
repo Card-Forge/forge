@@ -12,6 +12,7 @@ import forge.screens.match.MatchController;
 public class FMenuBar extends Header {
     private final List<FMenuTab> tabs = new ArrayList<>();
     private int selected = -1;
+    private float trailingWidth;
 
     public FMenuTab addTab(String text0, FDropDown dropDown0) {
         return addTab(text0, dropDown0, false);
@@ -28,12 +29,26 @@ public class FMenuBar extends Header {
         return Math.round(FMenuTab.FONT.getLineHeight() * 2f/*fixes touch for tall devices - old value 1.5f*/ + 2 * FMenuTab.PADDING);
     }
 
+    /**
+     * Reserves space at the right end of the bar for a control drawn over it (e.g. by a dialog),
+     * shrinking the tabs to fit. Pass 0 to give the space back.
+     */
+    public void setTrailingWidth(float trailingWidth0) {
+        trailingWidth = trailingWidth0;
+        revalidate();
+    }
+
+    public float getTrailingWidth() {
+        return trailingWidth;
+    }
+
     public int getTabCount() {
         return tabs.size();
     }
 
     @Override
     protected void doLayout(float width, float height) {
+        width -= trailingWidth;
         int visibleTabCount = 0;
         float minWidth = 0;
         int iconOnlyTabCount = 0;
