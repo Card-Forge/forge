@@ -427,6 +427,15 @@ public class YieldController {
         if (anyCleared && gui != null) gui.updateAutoPassPrompt();
     }
 
+    /** Ends the end of turn yield and tells the GUI, because a remote client keeps its own copy for its prompt. */
+    public synchronized void clearEndOfTurnYieldAndDispatch() {
+        if (!autoPassUntilEOT) return;
+        autoPassUntilEOT = false;
+        PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
+        IGuiGame gui = owner != null ? owner.getGui() : null;
+        if (local != null && gui != null) gui.applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+    }
+
     /** Toggle APINA: flip pref, persist, push to controller. Returns new value. */
     public static boolean toggleAutoPassNoActions(IGameController ctrl) {
         if (ctrl == null) return false;

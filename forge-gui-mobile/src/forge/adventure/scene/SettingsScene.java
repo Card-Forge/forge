@@ -16,6 +16,7 @@ import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.screens.match.CardFlightOverlay;
 import forge.sound.SoundSystem;
 import forge.util.Localizer;
 
@@ -341,6 +342,25 @@ public class SettingsScene extends UIScene {
         }
 
         addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        String currentAnim;
+        switch (CardFlightOverlay.style()) { // maps legacy "true"/"false" values too
+            case OFF: currentAnim = "Off"; break;
+            case SLIDE: currentAnim = "Slide"; break;
+            case POPUP: currentAnim = "Popup"; break;
+            default: currentAnim = "Rotate"; break;
+        }
+        SelectBox<String> cardPlayAnim = Controls.newComboBox(new String[]{"Rotate", "Slide", "Popup", "Off"}, currentAnim, o -> {
+            String mode = (String) o;
+            if (mode == null)
+                mode = "Rotate";
+            if (!mode.equalsIgnoreCase(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_STYLE))) {
+                FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_PLAY_ANIMATION_STYLE, mode);
+                FModel.getPreferences().save();
+            }
+            return null;
+        });
+        addLabel(localizer.getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"));
+        settingGroup.add(cardPlayAnim).align(Align.right).pad(2);
         if (!GuiBase.isAndroid()) {
             final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
             SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {

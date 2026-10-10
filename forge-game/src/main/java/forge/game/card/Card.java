@@ -2446,8 +2446,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!mayPlay.isEmpty()) {
             PlayerCollection players = new PlayerCollection();
             for (CardPlayOption o : mayPlay.values()) {
-                if (getController() == o.getPlayer() || o.grantsZonePermissions())
-                    players.add(o.getPlayer());
+                if (o.grantsZonePermissions()) {
+                    players.addAll(o.getPlayers());
+                } else if (o.appliesTo(getController())) {
+                    players.add(getController());
+                }
             }
             if (!players.isEmpty()) {
                 sb.append("May be played by: ");
@@ -3825,14 +3828,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final List<CardPlayOption> mayPlay(final Player player) {
         List<CardPlayOption> result = Lists.newArrayList();
         for (CardPlayOption o : mayPlay.values()) {
-            if (o.getPlayer().equals(player)) {
+            if (o.appliesTo(player)) {
                 result.add(o);
             }
         }
         return result;
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
-        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
+    public final void setMayPlay(final PlayerCollection players, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
+        this.mayPlay.put(sta, new CardPlayOption(players, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);

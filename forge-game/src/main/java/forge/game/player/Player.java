@@ -58,6 +58,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -309,8 +310,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateFlashbackForView() {
+        final FCollectionView<CardView> before = view.getFlashback();
         view.updateFlashback(this);
-        game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
+        if (!before.equals(view.getFlashback())) {
+            game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
+        }
     }
 
     //get single opponent for player if only one, otherwise returns null
@@ -534,6 +538,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         boolean firstLost = lifeLostThisTurn == 0;
         lifeLostThisTurn += toLose;
+        // a chain of triggers that costs life ends by itself
+        game.getStack().clearTriggerRepeats();
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, toLose);

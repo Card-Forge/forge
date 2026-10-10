@@ -735,15 +735,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
-                // predict whether something may put a ETBing creature below zero toughness
-                // (e.g. Reassembing Skeleton + Elesh Norn, Grand Cenobite)
                 for (final Card c : retrieval) {
-                    if (c.isCreature()) {
-                        final Card copy = CardCopyService.getLKICopy(c);
-                        ComputerUtilCard.applyStaticContPT(c.getGame(), copy, null);
-                        if (copy.getNetToughness() <= 0) {
-                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                        }
+                    if (ComputerUtilCard.wouldDieToStaticPT(c)) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
                 // predict Legendary cards already present
@@ -1064,6 +1058,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
         } else if (origin.contains(ZoneType.Graveyard)) {
+            if (destination.equals(ZoneType.Battlefield)) {
+                // don't return creatures that would die right away to static effects
+                // (e.g. Karmic Guide returning itself under Elesh Norn, Grand Cenobite would loop)
+                // TODO If AI thinks it's about to lose it could try to force a Draw this way
+                list = CardLists.filter(list, c -> !ComputerUtilCard.wouldDieToStaticPT(c));
+            }
             if (destination.equals(ZoneType.Exile) || destination.equals(ZoneType.Library)) {
                 // Don't use these abilities before main 2 if possible
                 if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)

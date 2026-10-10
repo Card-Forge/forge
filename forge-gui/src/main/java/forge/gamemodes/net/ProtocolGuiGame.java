@@ -154,7 +154,8 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         if (paused) { return; }
         // if this gets provided with new object views while more updates got chained (e.g. revealing what got bounced):
         // the client may not be quick enough to replace it in the EDT before this passes IO lookup, so take the safer route
-        boolean pendingZoneChange = !getForwarder().hasPendingZoneChange(args);
+        // The forwarder is gone by the time a game's end is announced, and with it anything pending
+        boolean pendingZoneChange = forwarder == null || !forwarder.hasPendingZoneChange(args);
         updateGameView();
         sender.send(method, pendingZoneChange, args);
     }
