@@ -1,0 +1,2 @@
+# Remote index of paths relative to skin/battle_backgrounds/.
+https://oldborder-shandalar.net/adventure-assets/shandalar-old-border/battle-backgrounds/index.txt

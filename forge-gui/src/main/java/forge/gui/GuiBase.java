@@ -10,6 +10,7 @@ public class GuiBase {
     private static boolean isAndroidport = false;
     private static boolean isIOSport = false;
     private static String adventureDirectory = null;
+    private static String adventureCacheDirectory = null;
     private static int androidAPI = 0;
     private static String downloadsDir = "";
     private static boolean usingAppDirectory = false;
@@ -34,6 +35,8 @@ public class GuiBase {
 
     public static void setAdventureDirectory(String directory) { adventureDirectory = directory; }
     public static String getAdventureDirectory() { return adventureDirectory; }
+    public static void setAdventureCacheDirectory(String directory) { adventureCacheDirectory = directory; }
+    public static String getAdventureCacheDirectory() { return adventureCacheDirectory; }
 
     public static void setUsingAppDirectory(boolean value) { usingAppDirectory = value; }
     public static boolean isUsingAppDirectory() { return usingAppDirectory; }
