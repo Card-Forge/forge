@@ -285,6 +285,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Noble Ox
 1. (P) Pinchy McStingbutt
 1. (HTR) Mr. Monopoly, On the Go
+1. Fluros of Myra's Marvels
 
 #### Functional Variants
 1. Sly Spy F
@@ -436,7 +437,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. GO TO JAIL
 1. The Big Idea
 1. Krark's Other Thumb
-1. Fluros of Myra's Marvels
 1. (P) Baneslayer Aspirant
 1. (P) Priority Avenger
 1. (P) Innocuous Insect
