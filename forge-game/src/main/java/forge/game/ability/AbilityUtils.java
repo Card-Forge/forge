@@ -1661,20 +1661,23 @@ public class AbilityUtils {
                         if (TriggerType.ChangesZone.equals(t.getMode()) && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
                            int x = isUnlinkedFromCastSA(ctb, c) ? 0 : c.getXManaCostPaid();
                            return doXMath(x, expr, c, ctb);
-                        } else if (TriggerType.SpellCast.equals(t.getMode())) {
+                        }
+                        if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like Hydroid Krasis
                             SpellAbility castSA = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
                             if (castSA == null || castSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(castSA.getXManaCostPaid(), expr, c, ctb);
-                        } else if (TriggerType.Cycled.equals(t.getMode())) {
+                        }
+                        if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(cycleSA.getXManaCostPaid(), expr, c, ctb);
-                        } else if (TriggerType.TurnFaceUp.equals(t.getMode())) {
+                        }
+                        if (TriggerType.TurnFaceUp.equals(t.getMode())) {
                             SpellAbility turnupSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (turnupSA == null || turnupSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
