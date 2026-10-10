@@ -1,0 +1,13 @@
+#!/bin/sh
+# Resolves Forge.app through Launch Services without launching it.
+forge_app=$(osascript -l JavaScript -e 'ObjC.import("AppKit"); const u = $.NSWorkspace.sharedWorkspace.URLForApplicationWithBundleIdentifier("org.cardforge.forge"); u.isNil() ? "" : u.path.js' 2>/dev/null)
+if [ ! -d "$forge_app" ]; then
+  osascript -e 'display dialog "Forge Adventure needs Forge. Drag both Forge and Forge Adventure into Applications." buttons {"OK"} with icon caution' >/dev/null 2>&1
+  exit 1
+fi
+contents="$forge_app/Contents"
+. "$contents/Resources/find-java.sh"
+forge_require_java
+export JDK_JAVA_OPTIONS="'-Xdock:name=Forge Adventure' '-Xdock:icon=$contents/Resources/Forge.icns'"
+# Run by relative path: the script's own cd breaks when the full path has a space.
+cd "$contents/Resources/forge" && exec ./forge-adventure.command
