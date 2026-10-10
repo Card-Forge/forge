@@ -101,8 +101,9 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
     /**
      * Key test for delta sync validation - uses actual TCP network client.
-     * Uses 10-card basic land decks for fast CI execution.
-     * Games end in ~3 turns as players deck out (no spells to cast).
+     * Uses small basic land decks for fast CI execution, the host's twice the remote seat's so that the
+     * host's library still holds cards when the game ends.
+     * Games last about eight or nine turns as players deck out (no spells to cast).
      * Deck legality is disabled via TestUtils.ensureFModelInitialized().
      *
      * Validates: protocol lifecycle (openView, setGameView), client-side GameView
@@ -112,7 +113,7 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
     public void testTrueNetworkTraffic() {
         netLog.info("Starting true network traffic test...");
 
-        Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 10);
+        Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 20);
         Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 10);
 
         UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
@@ -171,6 +172,32 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
             }
         }
 
+        // Hidden information, mid-game: what a cheat reading the client's tracker would have found. The client counted,
+        // after every applied delta while the game was on, the library cards it held and how many carried a name
+        // although the client may not see them (HeadlessNetworkClient.censusHiddenInfo). None may have.
+        Assert.assertTrue(result.clientMaxLibraryCards > 0, "The client never held a library card mid-game, so nothing was checked");
+        Assert.assertEquals(result.clientMaxNamedLibraryCards, 0,
+                "Mid-game the client held " + result.clientMaxNamedLibraryCards + " named library cards it may not see (of at most "
+                        + result.clientMaxLibraryCards + " held)");
+        netLog.info("Hidden-info check: mid-game the client held at most {} library cards, {} of them named that it may not see",
+                result.clientMaxLibraryCards, result.clientMaxNamedLibraryCards);
+
+        // Hidden information, end of game: nothing is hidden any more (ProtocolGuiGame.deltaViewers), so the library
+        // cards the client held as shells were filled in, in place, over the wire
+        int libraryCardsChecked = 0;
+        for (PlayerView pv : clientGameView.getPlayers()) {
+            for (CardView cv : pv.getCards(ZoneType.Library)) {
+                libraryCardsChecked++;
+                Assert.assertFalse(cv.getName().isEmpty(),
+                        "Library card id=" + cv.getId() + " of " + pv.getName() + " still a shell after the game");
+                String stateName = cv.getCurrentState() == null ? "" : cv.getCurrentState().getName();
+                Assert.assertFalse(stateName.isEmpty(),
+                        "Library card id=" + cv.getId() + " of " + pv.getName() + " has no current-state name after the game");
+            }
+        }
+        Assert.assertTrue(libraryCardsChecked > 0, "No library card reached the client, so none was checked");
+        netLog.info("Hidden-info check: {} library cards on the client", libraryCardsChecked);
+
         // Pipeline error assertions
         Assert.assertEquals(result.sendErrors, 0,
                 "Server encountered " + result.sendErrors + " send error(s) during the game");
@@ -194,6 +221,50 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
         Assert.assertNotNull(result, "Result should not be null");
         Assert.assertEquals(result.remoteClientCount, 0, "Should have no remote clients");
         Assert.assertTrue(result.gameStarted, "Game should have started");
+    }
+
+    /**
+     * A remote client drops mid-game and reconnects. The reconnect's full state carries the whole GameView inline,
+     * library cards included (the full-state path is not filtered yet); the first delta after it re-sends the graph
+     * as new objects, so the library cards the client may not see must be placeholders again from then on.
+     * Stress-gated: the server's disconnect detection and the client's reconnect backoff take about a minute.
+     */
+    @Test(timeOut = 600000, description = "Library placeholders come back after a reconnect")
+    public void testLibraryPlaceholdersSurviveReconnect() {
+        skipUnlessStressTestsEnabled();
+
+        Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 20);
+        Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 20);
+
+        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
+                .playerCount(2)
+                .remoteClients(1)
+                .decks(deck1, deck2)
+                // The remote seat answers its own prompts, so the disconnect stalls the game at the client's next
+                // prompt until the server's heartbeat timeout, the reconnect and the resync have run
+                .useAiForRemotePlayers(false)
+                .disconnectAtTurn(2, forge.gamemodes.net.client.FGameClient.DisconnectMode.OUTBOUND)
+                .gameTimeout(300000)
+                .execute();
+
+        netLog.info("Reconnect check: disconnected at turn {}, reconnected={}, named library cards right after the full state {}, "
+                        + "from the host's re-send on at most {} library cards held, {} of them named that the client may not see",
+                result.clientDisconnectedAtTurn, result.clientReconnected, result.clientNamedLibraryCardsAfterFullState,
+                result.clientMaxLibraryCardsAfterReconnect, result.clientMaxNamedLibraryCardsAfterReconnect);
+
+        Assert.assertTrue(result.gameStarted, "Game should have started: " + result.toSummary());
+        Assert.assertTrue(result.clientDisconnectedAtTurn >= 0, "The scripted disconnect never fired");
+        Assert.assertTrue(result.clientReconnected, "The client did not reconnect: " + result.toSummary());
+        Assert.assertTrue(result.gameCompleted, "Game should have completed after the reconnect: " + result.toSummary());
+        // The full state is not filtered yet, so right after it the client holds the library cards in full. This pins
+        // that the count ran on the reconnect's full state; when the full-state path is scrubbed it becomes 0
+        Assert.assertTrue(result.clientNamedLibraryCardsAfterFullState > 0,
+                "The reconnect's full state carried no named library card, so the count did not see it");
+        Assert.assertTrue(result.clientMaxLibraryCardsAfterReconnect > 0,
+                "The client held no library card after the re-send, so nothing was checked");
+        Assert.assertEquals(result.clientMaxNamedLibraryCardsAfterReconnect, 0,
+                "After the reconnect's re-send the client held " + result.clientMaxNamedLibraryCardsAfterReconnect
+                        + " named library cards it may not see (of at most " + result.clientMaxLibraryCardsAfterReconnect + " held)");
     }
 
     /**

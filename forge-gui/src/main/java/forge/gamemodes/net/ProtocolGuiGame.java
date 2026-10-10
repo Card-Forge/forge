@@ -27,6 +27,7 @@ import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -232,7 +233,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             flushPendingEvents();
             return;
         }
-        DeltaPacket delta = syncManager.collectDeltas(gameView);
+        DeltaPacket delta = syncManager.collectDeltas(gameView, deltaViewers());
         if (!delta.isEmpty()) {
             if (flush) {
                 sender.send(ProtocolMethod.applyDelta, delta);
@@ -241,6 +242,24 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             }
             onDeltaSent(delta, List.of(), gameView);
         }
+    }
+
+    /**
+     * Null (unfiltered) once the game is over, and for a proxy holding the spectator controller with no local players,
+     * which netplay does not create today (HostedMatch.registerSpectator only serves the local watch GUI); otherwise a
+     * copy of the local players taken at the start of each walk by the thread running it; empty before the players are
+     * registered, which withholds every library card.
+     */
+    private Collection<PlayerView> deltaViewers() {
+        if (!hasLocalPlayers() && getGameController((PlayerView) null) != null) {
+            return null;
+        }
+        // Nothing is hidden once the game is over: the mobile port's AbstractGuiGame.mayView then shows every card.
+        // Read live: a game-over set inside a tracker freeze is unfiltered from the first walk after the unfreeze
+        if (getGameView() != null && getGameView().isGameOver()) {
+            return null;
+        }
+        return List.copyOf(getLocalPlayers());
     }
 
     /**
@@ -558,7 +577,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
             if (gameView != null) {
-                DeltaPacket delta = syncManager.collectDeltas(gameView);
+                DeltaPacket delta = syncManager.collectDeltas(gameView, deltaViewers());
                 delta.setEvents(encodeEvents(events, gameView.getTracker()));
                 sender.send(ProtocolMethod.applyDelta, delta);
                 onDeltaSent(delta, events, gameView);

@@ -9,6 +9,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.IRemote;
@@ -25,14 +26,17 @@ import forge.net.TestUtils;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableProperty;
 import forge.util.MyRandom;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -245,5 +249,35 @@ public class ProtocolGuiGameInProcessTest {
         assertEquals(remote.wrappedEvents, 0, "no Java-serialized event wrappers on the embedded path");
         assertTrue(remote.rawEvents > 0, "raw GameEvents reach the remote");
         assertFalse(match.getGameView() != null && !match.getGameView().isGameOver(), "game ended after concede");
+
+        // Mid-game, library cards go to this proxy's player as shells. The first packet carrying new objects is the
+        // initial sync, every card a new object: no library card in it says which card it is or carries a state view
+        DeltaPacket initialSync = null;
+        for (final GuiGameEvent ev : new ArrayList<>(remote.log)) {
+            if (ev.getMethod() == ProtocolMethod.applyDelta && !((DeltaPacket) ev.getObjects()[0]).getNewObjects().isEmpty()) {
+                initialSync = (DeltaPacket) ev.getObjects()[0];
+                break;
+            }
+        }
+        assertNotNull(initialSync, "no applyDelta carried new objects");
+        final Set<Integer> libraryIds = new HashSet<>();
+        for (final Map.Entry<Integer, Map<TrackableProperty, Object>> e : initialSync.getNewObjects().entrySet()) {
+            final Map<TrackableProperty, Object> props = e.getValue();
+            if (DeltaPacket.getTypeFromDeltaKey(e.getKey()) != DeltaPacket.TYPE_CARD_VIEW || props.get(TrackableProperty.Zone) != ZoneType.Library) {
+                continue;
+            }
+            final int id = DeltaPacket.getIdFromDeltaKey(e.getKey());
+            libraryIds.add(id);
+            for (final TrackableProperty withheld : List.of(TrackableProperty.OracleName, TrackableProperty.CurrentState)) {
+                assertFalse(props.containsKey(withheld), "library card " + id + " sent with " + withheld);
+            }
+        }
+        for (final int key : initialSync.getNewObjects().keySet()) {
+            if (DeltaPacket.getTypeFromDeltaKey(key) == DeltaPacket.TYPE_CSV) {
+                final int cardId = DeltaPacket.getIdFromDeltaKey(key) / 16;
+                assertFalse(libraryIds.contains(cardId), "library card " + cardId + " sent with a state view");
+            }
+        }
+        assertFalse(libraryIds.isEmpty(), "no library card in the initial sync, so none was checked");
     }
 }

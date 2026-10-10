@@ -52,6 +52,19 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
     private final AtomicLong fullStateSyncsReceived = new AtomicLong(0);
     private final AtomicLong totalDeltaBytes = new AtomicLong(0);
     private final AtomicLong eventStateMismatches = new AtomicLong(0);
+    // Hidden information held by this client while the game is on: the most library cards the tracker ever held
+    // with a name, and the most it held at all (so a zero cannot come from an empty library)
+    private final AtomicInteger maxNamedLibraryCards = new AtomicInteger(0);
+    private final AtomicInteger maxLibraryCards = new AtomicInteger(0);
+    // After a reconnect (a second full state while the game is on): the same two over the deltas applied after the
+    // reconnect's full state, and the named count right after that full state arrived
+    private final AtomicBoolean afterReconnect = new AtomicBoolean(false);
+    // Set once the first post-reconnect delta carrying new objects has been applied: the host's re-send of the graph,
+    // which is where the library cards the full state carried in full are replaced by placeholders
+    private final AtomicBoolean afterResend = new AtomicBoolean(false);
+    private final AtomicInteger maxNamedLibraryCardsAfterReconnect = new AtomicInteger(0);
+    private final AtomicInteger maxLibraryCardsAfterReconnect = new AtomicInteger(0);
+    private final AtomicInteger namedLibraryCardsAfterFullState = new AtomicInteger(-1);
 
     public HeadlessNetworkClient(String username, String hostname, int port) {
         this.username = username;
@@ -132,6 +145,97 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         return eventStateMismatches.get();
     }
 
+    /** The most library cards this client's tracker held with a name at any point while the game was on. */
+    public int getMaxNamedLibraryCards() {
+        return maxNamedLibraryCards.get();
+    }
+
+    /** The most library cards this client's tracker held at any point while the game was on. */
+    public int getMaxLibraryCards() {
+        return maxLibraryCards.get();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    /** True once the client has come back from a disconnect: a second full state while the game is on, and connected again. */
+    public boolean hasReconnected() {
+        return afterReconnect.get() && client != null
+                && client.getReconnectState() == FGameClient.ReconnectState.CONNECTED;
+    }
+
+    public int getMaxNamedLibraryCardsAfterReconnect() {
+        return maxNamedLibraryCardsAfterReconnect.get();
+    }
+
+    public int getMaxLibraryCardsAfterReconnect() {
+        return maxLibraryCardsAfterReconnect.get();
+    }
+
+    /** Named library cards this client may not see, counted right after the reconnect's full state; -1 without one. */
+    public int getNamedLibraryCardsAfterFullState() {
+        return namedLibraryCardsAfterFullState.get();
+    }
+
+    /**
+     * What a cheat would read: after each applied delta, while the game is on, count the library cards the client
+     * holds and how many of them carry a name (a current state with a name, or an oracle name on the card) although
+     * this client may not see them: not shown to any of its players by the client's own rule (CardView.canBeShownToAny,
+     * so a card revealed to it through PlayerMayLook is not counted) and not in the game's reveal history.
+     */
+    private void censusHiddenInfo(forge.game.GameView gameView) {
+        int[] counts = countHiddenInfo(gameView);
+        if (counts == null) {
+            return;
+        }
+        maxLibraryCards.accumulateAndGet(counts[0], Math::max);
+        maxNamedLibraryCards.accumulateAndGet(counts[1], Math::max);
+        if (afterResend.get()) {
+            maxLibraryCardsAfterReconnect.accumulateAndGet(counts[0], Math::max);
+            maxNamedLibraryCardsAfterReconnect.accumulateAndGet(counts[1], Math::max);
+        }
+    }
+
+    /** The reconnect's full state has just been applied: what the client holds before any delta follows it. */
+    private void censusAfterFullState(forge.game.GameView gameView) {
+        int[] counts = countHiddenInfo(gameView);
+        if (counts != null) {
+            namedLibraryCardsAfterFullState.compareAndSet(-1, counts[1]);
+        }
+    }
+
+    /** {library cards held, library cards named that this client may not see}, or null when there is no game to count. */
+    private int[] countHiddenInfo(forge.game.GameView gameView) {
+        if (gameView == null || gameView.isGameOver() || gameView.getPlayers() == null || guiGame == null) {
+            return null;
+        }
+        java.util.Set<forge.game.player.PlayerView> mine = guiGame.getLocalPlayers();
+        java.util.Set<Integer> revealed = new java.util.HashSet<>();
+        if (gameView.getRevealedCollection() != null) {
+            for (forge.game.card.CardView cv : gameView.getRevealedCollection()) {
+                revealed.add(cv.getId());
+            }
+        }
+        int cards = 0, named = 0;
+        for (forge.game.player.PlayerView pv : gameView.getPlayers()) {
+            forge.util.collect.FCollectionView<forge.game.card.CardView> library = pv.getCards(forge.game.zone.ZoneType.Library);
+            if (library == null) {
+                continue;
+            }
+            for (forge.game.card.CardView cv : library) {
+                cards++;
+                boolean stateNamed = cv.getCurrentState() != null && !cv.getCurrentState().getName().isEmpty();
+                boolean oracleNamed = ((java.util.Map<?, ?>) cv.getProps()).containsKey(forge.trackable.TrackableProperty.OracleName);
+                boolean maySee = cv.canBeShownToAny(mine) || revealed.contains(cv.getId());
+                if ((stateNamed || oracleNamed) && !maySee) {
+                    named++;
+                }
+            }
+        }
+        return new int[] { cards, named };
+    }
+
     public forge.game.GameView getGameView() {
         return guiGame != null ? guiGame.getGameView() : null;
     }
@@ -193,7 +297,11 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
     }
 
     void onFullStateSyncReceived(long sequenceNumber) {
-        fullStateSyncsReceived.incrementAndGet();
+        // A second full state while the game is on is a resync, which is how a reconnect resumes the client
+        if (fullStateSyncsReceived.incrementAndGet() >= 2) {
+            afterReconnect.set(true);
+            connected.set(true);
+        }
         gameInProgress.set(true);
         gameStartedLatch.countDown();
 
@@ -334,6 +442,10 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
 
             // Then notify the client for logging/verification
             client.onDeltaPacketReceived(packet);
+            if (client.afterReconnect.get() && packet.getNewObjects() != null && !packet.getNewObjects().isEmpty()) {
+                client.afterResend.set(true);
+            }
+            client.censusHiddenInfo(getGameView());
         }
 
         @Override
@@ -343,6 +455,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
             // Notify the client when this is a full state sync (sequenceNumber >= 0)
             if (sequenceNumber >= 0) {
                 client.onFullStateSyncReceived(sequenceNumber);
+                if (client.afterReconnect.get()) {
+                    client.censusAfterFullState(getGameView());
+                }
             }
         }
 

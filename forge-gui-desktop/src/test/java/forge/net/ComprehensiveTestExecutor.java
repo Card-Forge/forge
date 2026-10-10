@@ -125,6 +125,17 @@ public class ComprehensiveTestExecutor implements IHasForgeLog {
             boolean commander = commanderFlags != null && i < commanderFlags.length && commanderFlags[i];
             UnifiedNetworkHarness.GameResult gameResult = runSingleGame(i, players, commander);
 
+            // Hidden information on real decks: the first remote client never held, mid-game, a named library card
+            // it may not see (HeadlessNetworkClient.censusHiddenInfo)
+            netLog.info("Game {} hidden-info check: mid-game the client held at most {} library cards, {} of them named that it may not see{}",
+                    i, gameResult.clientMaxLibraryCards, gameResult.clientMaxNamedLibraryCards,
+                    gameResult.clientMaxLibraryCards == 0 ? " (inconclusive: that client held no game view, so nothing was counted)" : "");
+            if (gameResult.success && gameResult.clientMaxNamedLibraryCards > 0) {
+                gameResult.success = false;
+                gameResult.errorMessage = "Mid-game the client held " + gameResult.clientMaxNamedLibraryCards
+                        + " named library cards it may not see (of at most " + gameResult.clientMaxLibraryCards + " held)";
+            }
+
             if (gameResult.errorMessage != null && !gameResult.success) {
                 result.addError(i, gameResult.errorMessage);
             } else {

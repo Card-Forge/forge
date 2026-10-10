@@ -18,7 +18,7 @@ All tests live under `forge-gui-desktop/src/test/java/forge/net/`.
 # How It Works
 Every test game starts a real TCP server and connects one or more headless AI clients to it. The server and clients exchange game state over the network just like a real multiplayer game — the only difference is there's no GUI and the AI makes all decisions. By default this uses delta sync, but you can test the full-state sync path instead with `-Dforge.deltasync=false`.
 
-The vertical slice test uses minimal 10-card basic land decks instead, so games end quickly by decking out.
+The vertical slice test uses minimal basic land decks instead (10 cards, 20 for the host seat so its library is not empty at the end), so games end quickly by decking out.
 
 Batch tests use random preconstructed decks from Forge's built-in quest precons (or commander precons for Commander-format games). Their logs get grouped logs into subdirectories named by timestamp (e.g., `run20260410-143022/`). Each game within a batch gets its own log file.
 
@@ -65,7 +65,7 @@ All entry points accept the same configuration properties:
 | `-Dtest.timeoutMs=N` | 300000 | Per-game timeout in milliseconds (default 5 min) |
 
 ## Entry Points
-**`testTrueNetworkTraffic`** — single 2-player game using minimal 10-card basic land decks (players deck out in a few turns). A fast vertical slice that validates the network pipeline end-to-end, not a real game. Under 60 seconds.
+**`testTrueNetworkTraffic`** — single 2-player game using minimal basic land decks, 10 cards and 20 for the host seat (players deck out in eight or nine turns). A fast vertical slice that validates the network pipeline end-to-end, not a real game. Under 60 seconds.
 
 **`testConfigurableSequential`** — runs games sequentially in one JVM. Defaults to 3 x 2-player if no properties are set.
 
