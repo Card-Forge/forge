@@ -75,6 +75,7 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
+    public static final String NET_ARCHIVE_COMMANDER_DECKS_LIST_FILE = LISTS_DIR + "net-decks-archive-duel-commander.txt";
     public static final String COMMANDER_BRACKET_COMBOS_FILE         = LISTS_DIR + "commander-bracket-combos.txt";
     public static final String COMMANDER_BRACKET_GAMECHANGERS_FILE   = LISTS_DIR + "gamechangers.txt";
     public static final String COMMANDER_BRACKET_MASS_LAND_DENIAL_FILE = LISTS_DIR + "mass-land-denial.txt";
