@@ -2115,17 +2115,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
         if (getGui().isLibgdxPort()) {
-            CardView cardView;
+            CardView cardView = sa.getCardView();
             try {
-                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
+                //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
+                if (cardView != null && cardView.getImprintedCards().size() == 1)
+                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getTrackableImageKey()));
+                else if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
+                    cardView = CardView.get(sa.getTargetCard());
+                else if (cardView.getZone() == null || cardView.getZone().isHidden()) {
+                    if (!cardView.hasAlternateState()) //don't override if it has alternatestate since it maybe showing alternate view
+                        cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getTrackableImageKey()));
+                }
             } catch (Exception e) {
-                SpellAbilityView spellAbilityView = sa.getView();
-                if (spellAbilityView != null) //updated view
-                    cardView = spellAbilityView.getHostCard();
-                else //fallback
-                    cardView = sa.getCardView();
+                //prevent NPE when overriding the cardView, the getPaperCardFromImageKey can return null making the GUI freeze, reset the view if error happens
+                cardView = sa.getCardView();
             }
-            return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
+            return getGui().confirm(cardView, question.replaceAll("\n", " "));
         }
         final boolean result = InputConfirm.confirm(this, sa, question);
         if (result) {
