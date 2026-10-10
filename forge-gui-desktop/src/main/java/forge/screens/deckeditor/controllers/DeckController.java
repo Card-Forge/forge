@@ -44,6 +44,7 @@ public class DeckController<T extends DeckBase> {
     private final IStorage<T> rootFolder;
     private IStorage<T> currentFolder;
     private String modelPath;
+    private boolean hasExplicitSaveTarget;
     private final CDeckEditor<T> view;
     private final Supplier<T> newModelCreator;
 
@@ -80,6 +81,10 @@ public class DeckController<T extends DeckBase> {
 
     public boolean isEmpty() {
         return model == null || model.isEmpty();
+    }
+
+    public boolean isPristine() {
+        return saved && isEmpty() && getModelName().isEmpty();
     }
 
     /**
@@ -228,9 +233,12 @@ public class DeckController<T extends DeckBase> {
             } else {
                 notifyModelChanged();
             }
-        } else { //TODO: Make this smarter
-            currentFolder = rootFolder;
-            modelPath = "";
+        } else {
+            // Keep a Deck Browser save target; other editors retain their root-folder behavior.
+            if (!hasExplicitSaveTarget) {
+                currentFolder = rootFolder;
+                modelPath = "";
+            }
             setSaved(this.model.isEmpty());
         }
     }
@@ -293,12 +301,26 @@ public class DeckController<T extends DeckBase> {
     }
 
     public void load(final String path, final String name) {
+        hasExplicitSaveTarget = false;
         if (StringUtils.isBlank(path)) {
             currentFolder = rootFolder;
         } else {
             currentFolder = rootFolder.tryGetFolder(path);
         }
         modelPath = path;
+        load(name);
+    }
+
+    public void setCurrentFolder(final IStorage<T> folder, final String path) {
+        if (folder == null) {
+            return;
+        }
+        currentFolder = folder;
+        modelPath = StringUtils.defaultString(path);
+        hasExplicitSaveTarget = true;
+    }
+
+    public void loadFromCurrentFolder(final String name) {
         load(name);
     }
 
