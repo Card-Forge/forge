@@ -614,6 +614,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public boolean longPress(float x, float y) {
+            if (VZoneDisplay.isDragGestureActive()) { return true; }
             if (renderedCardContains(x, y)) {
                 showZoom();
                 return true;

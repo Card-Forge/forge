@@ -21,6 +21,12 @@ public class VZoneDisplay extends VCardDisplayArea {
     private static final float SELECTION_BOX_THICKNESS = 3f;
     private FCardPanel revealedPanel;
     private CardAreaPanel dragPanel; //card currently under the finger while touch dragging, null when not dragging
+    private static long lastDragMillis;
+    private static boolean dragging;
+
+    public static boolean isDragGestureActive() {
+        return dragging || System.currentTimeMillis() - lastDragMillis < 250;
+    }
 
     public VZoneDisplay(PlayerView player0, ZoneType zoneType0) {
         player = player0;
@@ -76,6 +82,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             }
         }
         Gdx.graphics.requestRendering();
+        dragging = true;
     }
 
     private void clearDragPanel() {
@@ -83,6 +90,8 @@ public class VZoneDisplay extends VCardDisplayArea {
             dragPanel = null;
             Gdx.graphics.requestRendering();
         }
+        dragging = false;
+        lastDragMillis = System.currentTimeMillis();
     }
 
     @Override

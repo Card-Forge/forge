@@ -392,6 +392,15 @@ public class MatchScreen extends FScreen {
     private static final float PREVIEW_HEIGHT_RATIO = 0.6f; //fraction of screen height
     private static final float PREVIEW_GAP = Utils.scale(4);
 
+    private static VZoneDisplay findDragDisplay(VPlayerPanel panel) {
+        InfoTab tab = panel.getSelectedTab();
+        if (tab != null && tab.getDisplayArea() instanceof VZoneDisplay zone && zone.getDragCard() != null) {
+            return zone;
+        }
+        VZoneDisplay command = panel.getOpenCommandDisplay();
+        return command != null && command.getDragCard() != null ? command : null;
+    }
+
     //hover preview keeps using the existing magnifier setting, drag preview always shows
     private boolean isHoverPreviewEnabled() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle
@@ -409,11 +418,11 @@ public class MatchScreen extends FScreen {
 
             //finger dragging over a zone display
             for (VPlayerPanel panel : playerPanelsList) {
-                InfoTab tab = panel.getSelectedTab();
-                if (tab != null && tab.getDisplayArea() instanceof VZoneDisplay zoneDisplay && zoneDisplay.getDragCard() != null) {
-                    card = zoneDisplay.getDragCard();
-                    anchor = zoneDisplay;
-                    anchorWidth = zoneDisplay.screenPos.width;
+                VZoneDisplay dragDisplay = findDragDisplay(panel);
+                if (dragDisplay != null) {
+                    card = dragDisplay.getDragCard();
+                    anchor = dragDisplay;
+                    anchorWidth = dragDisplay.screenPos.width;
                     dragging = true;
                     break;
                 }
@@ -447,26 +456,37 @@ public class MatchScreen extends FScreen {
             float h = getHeight() * PREVIEW_HEIGHT_RATIO;
             float w = h / FCardPanel.ASPECT_RATIO;
 
-            //horizontal limits: the scroller, minus the right tab column and any open zone display of that player
             float left = scroller.getLeft();
             float right = left + scroller.getWidth();
             VPlayerPanel owner = getPlayerPanel(card.getController());
             if (owner == null) { owner = getPlayerPanel(card.getOwner()); }
-            if (owner != null) {
-                right -= owner.getAvatar().getWidth();
-                InfoTab open = owner.getSelectedTab();
-                if (open != null && open.isVisible()) {
-                    right = Math.min(right, open.getDisplayArea().screenPos.x);
-                }
+
+            //cards in an open zone display or the command zone: put the preview right beside that display
+            VDisplayArea sideDisplay = null;
+            if (dragging && anchor instanceof VDisplayArea displayArea) {
+                sideDisplay = displayArea;
+            } else if (owner != null && anchor instanceof FCardPanel) {
+                sideDisplay = owner.getOpenDisplayAt(anchor.screenPos.x + anchor.screenPos.width / 2,
+                        anchor.screenPos.y + anchor.screenPos.height / 2);
             }
 
             Rectangle a = anchor.screenPos;
-            float x = showLeft ? a.x - w - PREVIEW_GAP : a.x + anchorWidth + PREVIEW_GAP;
-            if (!showLeft && x + w > right) { x = a.x - w - PREVIEW_GAP; }
-            x = Math.max(left, Math.min(x, right - w));
-
-            //centered on the anchor, kept between the top of the field area and the prompt
-            float y = a.y + a.height / 2 - h / 2;
+            float x, y;
+            if (sideDisplay != null) {
+                Rectangle d = sideDisplay.screenPos;
+                x = Math.max(left, d.x - w - PREVIEW_GAP); //may cover other open displays while previewing
+                y = d.y + d.height / 2 - h / 2;            //centered on the display so it doesn't jump while scrubbing
+            } else {
+                //battlefield cards and stack items: keep clear of the open displays and the tab column
+                if (owner != null) {
+                    right -= owner.getAvatar().getWidth();
+                    right = Math.min(right, owner.getOpenDisplayScreenLeft());
+                }
+                x = showLeft ? a.x - w - PREVIEW_GAP : a.x + anchorWidth + PREVIEW_GAP;
+                if (!showLeft && x + w > right) { x = a.x - w - PREVIEW_GAP; }
+                x = Math.max(left, Math.min(x, right - w));
+                y = a.y + a.height / 2 - h / 2;
+            }
             y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
 
             if (Forge.magnifyShowDetails) {

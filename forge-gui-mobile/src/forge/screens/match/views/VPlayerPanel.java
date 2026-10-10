@@ -16,7 +16,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinImageInterface;
-import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -93,6 +92,13 @@ public class VPlayerPanel extends FContainer {
     private boolean slideFieldToo, slideClosing, forceClose;
     private float slideProgress = 1f;
     private TabSlideAnimation slideAnimation;
+    private final CommandZoneDisplay commandZone;
+    private final InfoTabCommand commandTab;
+    private boolean commandOpen;              //landscape only, stays true while empty
+    private float commandProgress = 0f;       //0 hidden, 1 fully slid out
+    private float commandVisibleWidth = 0f;
+    private CommandSlideAnimation commandAnimation;
+    private boolean commandUserClosed; //closed by hand, stays closed until the zone empties
 
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
@@ -115,7 +121,10 @@ public class VPlayerPanel extends FContainer {
         VManaPool manaPool = add(new VManaPool(player));
         tabManaPool = add(new InfoTabSingleDisplay(FSkinImage.HDMANAPOOL, manaPool));
         tabs.add(tabManaPool);
-        addZoneDisplay(ZoneType.Command);
+        commandZone = add(new CommandZoneDisplay(player));
+        commandZone.setVisible(false);
+        commandTab = add(new InfoTabCommand(commandZone));
+        tabs.add(commandTab);
 
         addZoneDisplay(ZoneType.Exile);
         extraTab = add(new InfoTabExtra());
@@ -126,6 +135,16 @@ public class VPlayerPanel extends FContainer {
         }
         // fix z-index
         bringTabsToFront();
+    }
+
+    private void syncCommandZone() {
+        if (!Forge.isLandscapeMode()) { return; }
+        if (commandZone.getCount() == 0) {
+            commandUserClosed = false; //it opens by itself again next time it has cards
+            setCommandOpen(false);
+        } else if (!commandOpen && !commandUserClosed) {
+            setCommandOpen(true);
+        }
     }
 
     public PlayerView getPlayer() {
@@ -276,9 +295,10 @@ public class VPlayerPanel extends FContainer {
                 MatchController.getView().revalidate();
             }
         }
-        if (!change)
+        if (!change) {
             selected++;
-        else
+            if (selected >= 0 && selected < tabs.size() && tabs.get(selected) == commandTab) { selected++; }
+        } else
             hideSelectedTab();
         int numTabs = tabs.size();
         int numExtraTabs = extraTab.displayAreas.size();
@@ -372,32 +392,44 @@ public class VPlayerPanel extends FContainer {
     }
 
     private void onCommandZoneUpdated() {
-        InfoTab cmd = zoneTabs.get(ZoneType.Command);
-        if (cmd == selectedTab && cmd.getDisplayArea().getCount() == 0) {
-            setSelectedTab(null); //last card left, so slide it closed
-        }
+        syncCommandZone();
         if (Forge.isLandscapeMode() && initW > 0) {
-            layoutTabsLandscape();
-            updateTabLayout(initW, initH);
+            layoutTabsLandscape(); //tab appears or disappears as cards come and go
+            updateTabLayout(initW, initH); //width follows the card count
         } else {
             revalidate();
         }
+    }
+
+    public VZoneDisplay getOpenCommandDisplay() {
+        return commandOpen && Forge.isLandscapeMode() ? commandZone : null;
+    }
+
+    /** @return screen x of the left-most open zone display, or Float.MAX_VALUE if none */
+    public float getOpenDisplayScreenLeft() {
+        float left = Float.MAX_VALUE;
+        if (selectedTab != null && selectedTab.isVisible() && selectedTab.getDisplayArea() != null) {
+            left = Math.min(left, selectedTab.getDisplayArea().screenPos.x);
+        }
+        if (commandOpen && commandProgress > 0f && Forge.isLandscapeMode()) {
+            left = Math.min(left, commandZone.screenPos.x);
+        }
+        return left;
     }
 
     @SuppressWarnings("incomplete-switch")
     public void updateZone(ZoneType zoneType) {
         if (zoneType == ZoneType.Battlefield) {
             field.update(true);
+        } else if (zoneType == ZoneType.Command) {
+            commandTab.update();
+            onCommandZoneUpdated();
         } else {
             if (zoneTabs.containsKey(zoneType)) {
                 zoneTabs.get(zoneType).update();
             } else if (EXTRA_ZONES.contains(zoneType)) {
                 extraTab.update(zoneType);
             }
-            if (zoneType == ZoneType.Command) {
-                onCommandZoneUpdated();
-            }
-
             //update flashback zone when graveyard, library, exile, or stack zones updated
             switch (zoneType) {
                 case Graveyard, Library, Exile, Stack -> zoneTabs.get(ZoneType.Flashback).update();
@@ -411,7 +443,12 @@ public class VPlayerPanel extends FContainer {
             doLandscapeLayout(width, height);
             return;
         }
-
+        if (commandOpen) { //landscape open state doesn't carry over
+            stopCommandAnimation();
+            commandOpen = false;
+            commandProgress = 0f;
+            commandZone.setVisible(false);
+        }
         //layout for bottom panel by default
         float x = avatarHeight;
         float w = width - avatarHeight;
@@ -469,8 +506,10 @@ public class VPlayerPanel extends FContainer {
     private float initW, initH;
 
     private void doLandscapeLayout(float width, float height) {
+        if (selectedTab == commandTab) { hideSelectedTab(); } //portrait selection doesn't carry over
         initW = width;
         initH = height;
+        syncCommandZone();
         float x = 0;
         float y = 0;
         avatar.setPosition(x, y);
@@ -515,6 +554,18 @@ public class VPlayerPanel extends FContainer {
         }
     }
 
+    /** @return the open zone display (selected tab or command zone) containing the screen point, or null */
+    public VDisplayArea getOpenDisplayAt(float screenX, float screenY) {
+        if (selectedTab != null && selectedTab.isVisible()) {
+            VDisplayArea d = selectedTab.getDisplayArea();
+            if (d != null && d.isVisible() && d.screenPos.contains(screenX, screenY)) { return d; }
+        }
+        if (commandOpen && commandZone.isVisible() && commandZone.screenPos.contains(screenX, screenY)) {
+            return commandZone;
+        }
+        return null;
+    }
+
     private void updateTabLayout(float width, float height) {
         float x = avatar.getRight();
         phaseIndicator.resetFont();
@@ -526,7 +577,13 @@ public class VPlayerPanel extends FContainer {
         if (selectedTab != null) {
             fieldWidth -= displayAreaWidth * (slideFieldToo ? slideProgress : 1f);
         }
-        field.setCommandZoneWidth(0);
+
+        //command zone: half height strip at the right end of the field, on the outer edge of the panel
+        float cmdHeight = height / 2;
+        float cmdWidth = Math.max(1, Math.min(commandZone.getCount(), 2)) * commandZone.getCardWidth(cmdHeight);
+        commandVisibleWidth = cmdWidth * commandProgress;
+        commandZone.setBounds(x + fieldWidth - commandVisibleWidth, isFlipped() ? 0 : height - cmdHeight, cmdWidth, cmdHeight);
+        field.setCommandZoneWidth(commandVisibleWidth > 0 ? commandVisibleWidth + 1 : 0);
         field.setBounds(x, 0, fieldWidth, height);
 
         float displayLeft = width - commonTabWidth - displayAreaWidth + (1f - slideProgress) * displayAreaWidth;
@@ -585,6 +642,15 @@ public class VPlayerPanel extends FContainer {
                 g.drawLine(1, MatchScreen.getBorderColor(), right, y, w, y);
             }
         }
+        if (Forge.isLandscapeMode() && commandVisibleWidth > 0 && commandZone.isVisible()) {
+            float cx = commandZone.getLeft();
+            float cy = commandZone.getTop();
+            float ch = commandZone.getHeight();
+            g.fillRect(getDisplayAreaBackColor(), cx, cy, commandVisibleWidth, ch);
+            g.drawLine(1, MatchScreen.getBorderColor(), cx, cy, cx, cy + ch);
+            float edgeY = isFlipped() ? cy + ch : cy; //inner edge, away from the panel's outer side
+            g.drawLine(1, MatchScreen.getBorderColor(), cx, edgeY, cx + commandVisibleWidth, edgeY);
+        }
     }
 
     public Iterable<FScrollPane> getAllScrollPanes() {
@@ -592,6 +658,7 @@ public class VPlayerPanel extends FContainer {
         ArrayList<FScrollPane> out = new ArrayList<>();
         out.add(field.getRow1());
         out.add(field.getRow2());
+        out.add(commandZone);
         for (InfoTabZone tab : zoneTabs.values())
             out.add(tab.displayArea);
         out.addAll(extraTab.displayAreas.values());
@@ -908,6 +975,100 @@ public class VPlayerPanel extends FContainer {
         } //Mana Display does not get cleared.
     }
 
+    public class InfoTabCommand extends InfoTabSingleDisplay {
+        private InfoTabCommand(VDisplayArea display) {
+            super(FSkinImage.COMMAND, display);
+        }
+
+        @Override
+        protected boolean isSelected() {
+            return Forge.isLandscapeMode() ? commandOpen : selectedTab == this;
+        }
+
+        @Override
+        protected boolean isTabShown() { //tab only exists while it has cards or is open
+            return isSelected() || displayArea.getCount() > 0;
+        }
+
+        @Override
+        public void setDisplayBounds(float x, float y, float width, float height) {
+            if (!Forge.isLandscapeMode()) { //landscape lays this display out separately
+                super.setDisplayBounds(x, y, width, height);
+            }
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (Forge.isLandscapeMode()) {
+                boolean open = !commandOpen;
+                commandUserClosed = !open;
+                setCommandOpen(open);
+                return true;
+            }
+            return super.tap(x, y, count);
+        }
+
+        @Override
+        public void reset() {
+            displayArea.clear();
+        }
+    }
+
+    private void setCommandOpen(boolean open) {
+        if (commandOpen == open) { return; }
+        commandOpen = open;
+        stopCommandAnimation();
+        if (open) { commandZone.setVisible(true); }
+        if (!Forge.isLandscapeMode() || getWidth() <= 0) {
+            commandProgress = open ? 1f : 0f;
+            commandZone.setVisible(open);
+            return;
+        }
+        commandAnimation = new CommandSlideAnimation(open);
+        commandAnimation.start();
+    }
+
+    private void stopCommandAnimation() {
+        CommandSlideAnimation old = commandAnimation;
+        commandAnimation = null; //so the old animation's onEnd does nothing
+        if (old != null) { old.stop(); }
+    }
+
+    private class CommandSlideAnimation extends ForgeAnimation {
+        private final boolean opening;
+        private final float startProgress;
+        private float elapsed;
+
+        CommandSlideAnimation(boolean opening0) {
+            opening = opening0;
+            startProgress = commandProgress; //so reversing mid-slide doesn't jump
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            elapsed += dt;
+            float t = Math.min(elapsed / SLIDE_DURATION, 1f);
+            float eased = 1f - (1f - t) * (1f - t) * (1f - t);
+            commandProgress = startProgress + ((opening ? 1f : 0f) - startProgress) * eased;
+            if (Forge.isLandscapeMode()) {
+                updateTabLayout(initW, initH);
+            }
+            return t < 1f;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            if (commandAnimation != this) { return; } //replaced by a newer animation
+            commandAnimation = null;
+            commandProgress = opening ? 1f : 0f;
+            if (!opening) { commandZone.setVisible(false); }
+            if (Forge.isLandscapeMode()) {
+                layoutTabsLandscape();
+                updateTabLayout(initW, initH);
+            }
+        }
+    }
+
     /**
      * Player panel tab for a single typical card zone, such as the hand.
      */
@@ -916,11 +1077,6 @@ public class VPlayerPanel extends FContainer {
         @Override
         protected boolean isCommonZone() { return COMMON_ZONES.contains(zoneType); }
 
-        @Override
-        protected boolean isTabShown() { //command tab only exists while it has cards
-            if (zoneType != ZoneType.Command) { return true; }
-            return isSelected() || displayArea.getCount() > 0;
-        }
         private InfoTabZone(VDisplayArea displayArea, ZoneType zoneType) {
             //super(zoneType == ZoneType.Command ? FSkinImage.COMMANDER : iconFromZone(zoneType), displayArea);
             super(iconFromZone(zoneType), displayArea);
@@ -1106,19 +1262,23 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
-        protected void refreshCardPanels(Iterable<CardView> model) {
-            int oldCount = getCount();
-            super.refreshCardPanels(model);
-            int newCount = getCount();
-            if (newCount != oldCount) {
-                setVisible(newCount > 0);
-                VPlayerPanel.this.revalidate(); //need to revalidated entire panel when command zone size changes
-            }
+        protected boolean layoutVerticallyForLandscapeMode() {
+            return false; //single row that scrolls left/right
         }
 
         @Override
-        protected boolean layoutVerticallyForLandscapeMode() {
-            return false;
+        public void draw(Graphics g) {
+            if (commandProgress < 1f && Forge.isLandscapeMode()) {
+                //only the part that has slid out from the field edge is visible
+                g.startClip(0, 0, commandVisibleWidth, getHeight());
+                try {
+                    super.draw(g);
+                } finally {
+                    g.endClip();
+                }
+            } else {
+                super.draw(g);
+            }
         }
     }
 
