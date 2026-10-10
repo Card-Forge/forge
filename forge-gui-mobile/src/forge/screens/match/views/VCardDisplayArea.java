@@ -72,8 +72,6 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     private float getCardStackOffset() {
-        if (Forge.isHorizontalTabLayout())
-            return 0.125f;
         return CARD_STACK_OFFSET;
     }
 

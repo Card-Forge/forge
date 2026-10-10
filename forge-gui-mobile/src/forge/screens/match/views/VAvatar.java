@@ -29,7 +29,6 @@ public class VAvatar extends FDisplayObject {
     private final FImage image;
     private final AvatarAnimation avatarAnimation;
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
-    private static final FSkinFont LIFE_FONT_ALT = FSkinFont.get(22);
 
     public VAvatar(PlayerView player0) {
         player = player0;
@@ -65,7 +64,7 @@ public class VAvatar extends FDisplayObject {
                 drawPlayerIndicator(g, w, h, percentage);
                 g.setAlphaComposite(fade);
                 g.drawRect(w / 12f, Color.WHITE, 0, 0, w, h);
-                g.drawOutlinedText("+"+amount, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.WHITE, Color.SKY, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
+                g.drawOutlinedText("+"+amount, LIFE_FONT,Color.WHITE, Color.SKY, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
                 g.setAlphaComposite(oldAlpha);
             } else if (amount < 0) {
                 if (splatter == null) {
@@ -80,7 +79,7 @@ public class VAvatar extends FDisplayObject {
                 }
                 drawPlayerIndicator(g, w, h, percentage);
                 g.setAlphaComposite(fade);
-                g.drawOutlinedText(String.valueOf(amount), Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.RED, Color.ORANGE, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
+                g.drawOutlinedText(String.valueOf(amount), LIFE_FONT,Color.RED, Color.ORANGE, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
                 g.setAlphaComposite(oldAlpha);
             }
         }
@@ -136,7 +135,7 @@ public class VAvatar extends FDisplayObject {
             g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost(), 0);
         }
 
-        if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode())
+        if (Forge.altPlayerLayout && Forge.isLandscapeMode())
             return;
 
         //display XP in lower right corner of avatar

@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -34,7 +35,6 @@ import org.apache.commons.text.WordUtils;
 
 public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
-    private static final FSkinFont LIFE_FONT_ALT = FSkinFont.get(22);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinFont INFO2_FONT = FSkinFont.get(14);
 
@@ -50,12 +50,6 @@ public class VPlayerPanel extends FContainer {
         return FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
     }
 
-    private static FSkinColor getAltDisplayAreaBackColor() {
-        if (Forge.isMobileAdventureMode)
-            return FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED).alphaColor(0.3f);
-        return FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED).alphaColor(0.3f);
-    }
-
     private static FSkinColor getDeliriumHighlight() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
@@ -64,6 +58,9 @@ public class VPlayerPanel extends FContainer {
 
     private static final float INFO_TAB_PADDING_X = Utils.scale(2);
     private static final float INFO_TAB_PADDING_Y = Utils.scale(2);
+
+    //how long the zone display takes to slide in when a zone tab is tapped in landscape mode
+    private static final float SLIDE_DURATION = 0.2f;
 
     /**
      * Zones to include in the extra zones dropdown.
@@ -76,7 +73,6 @@ public class VPlayerPanel extends FContainer {
     private final VPhaseIndicator phaseIndicator;
     private final VField field;
     private final VAvatar avatar;
-    private final VZoneDisplay commandZone;
     private final LifeLabel lblLife;
     private final InfoTab tabManaPool;
     private final Map<ZoneType, InfoTabZone> zoneTabs = new HashMap<>();
@@ -90,6 +86,13 @@ public class VPlayerPanel extends FContainer {
     public int adjustHeight = 1;
     private int selected = 0;
     private boolean isBottomPlayer = false;
+    private static final EnumSet<ZoneType> COMMON_ZONES =
+            EnumSet.of(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile);
+
+    private float tabColTop, tabColHeight, commonTabWidth;
+    private boolean slideFieldToo, slideClosing, forceClose;
+    private float slideProgress = 1f;
+    private TabSlideAnimation slideAnimation;
 
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
@@ -112,16 +115,17 @@ public class VPlayerPanel extends FContainer {
         VManaPool manaPool = add(new VManaPool(player));
         tabManaPool = add(new InfoTabSingleDisplay(FSkinImage.HDMANAPOOL, manaPool));
         tabs.add(tabManaPool);
+        addZoneDisplay(ZoneType.Command);
 
         addZoneDisplay(ZoneType.Exile);
         extraTab = add(new InfoTabExtra());
         tabs.add(extraTab);
 
-        commandZone = add(new CommandZoneDisplay(player));
-
         if (showHand) {
             setSelectedZone(ZoneType.Hand);
         }
+        // fix z-index
+        bringTabsToFront();
     }
 
     public PlayerView getPlayer() {
@@ -177,6 +181,10 @@ public class VPlayerPanel extends FContainer {
             return;
         }
 
+        final boolean wasClosed = this.selectedTab == null;
+        if (tab == null && !wasClosed && !forceClose && startSlideOut()) {
+            return; //animation calls back here with forceClose when it finishes
+        }
         hideSelectedTab();
 
         this.selectedTab = tab;
@@ -184,10 +192,77 @@ public class VPlayerPanel extends FContainer {
 
         if (this.selectedTab != null) {
             this.selectedTab.setDisplayVisible(true);
+            startSlideAnimation(wasClosed);
         }
 
-        if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
+        if (MatchController.getView() != null) {
             MatchController.getView().revalidate();
+        }
+    }
+
+    private void startSlideAnimation(boolean fieldToo) {
+        stopSlideAnimation();
+        if (!Forge.isLandscapeMode() || getWidth() <= 0) {
+            slideProgress = 1f;
+            slideFieldToo = false;
+            return;
+        }
+        slideFieldToo = fieldToo;
+        slideProgress = 0f; //must be set before the revalidate that follows
+        slideAnimation = new TabSlideAnimation(false);
+        slideAnimation.start();
+    }
+
+    private boolean startSlideOut() {
+        if (!Forge.isLandscapeMode() || getWidth() <= 0) { return false; }
+        if (slideClosing) { return true; }
+        stopSlideAnimation();
+        slideClosing = true;
+        slideFieldToo = true; //field widens back as the display leaves
+        slideProgress = 1f;
+        slideAnimation = new TabSlideAnimation(true);
+        slideAnimation.start();
+        return true;
+    }
+
+    private void stopSlideAnimation() {
+        TabSlideAnimation old = slideAnimation;
+        slideAnimation = null; //so the old animation's onEnd does nothing
+        slideClosing = false;
+        if (old != null) { old.stop(); }
+    }
+
+    private class TabSlideAnimation extends ForgeAnimation {
+        private final boolean closing;
+        private float elapsed;
+
+        TabSlideAnimation(boolean closing0) { closing = closing0; }
+
+        @Override
+        protected boolean advance(float dt) {
+            elapsed += dt;
+            float t = Math.min(elapsed / SLIDE_DURATION, 1f);
+            float eased = 1f - (1f - t) * (1f - t) * (1f - t);
+            slideProgress = closing ? 1f - eased : eased;
+            if (selectedTab != null && Forge.isLandscapeMode()) {
+                updateTabLayout(initW, initH);
+            }
+            return t < 1f;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            if (slideAnimation != this) { return; } //replaced by a newer animation
+            slideAnimation = null;
+            slideProgress = 1f;
+            slideFieldToo = false;
+            if (closing) {
+                slideClosing = false;
+                forceClose = true;
+                try { setSelectedTab(null); } finally { forceClose = false; }
+            } else if (!endingAll && selectedTab != null && Forge.isLandscapeMode()) {
+                updateTabLayout(initW, initH);
+            }
         }
     }
 
@@ -241,6 +316,13 @@ public class VPlayerPanel extends FContainer {
         field.setFlipped(flipped0);
     }
 
+    private void bringTabsToFront() {
+        for (InfoTab tab : tabs) {
+            remove(tab);
+            add(tab);
+        }
+    }
+
     @Override
     public void setRotate180(boolean b0) {
         //only rotate certain parts of panel
@@ -277,10 +359,6 @@ public class VPlayerPanel extends FContainer {
         return avatar;
     }
 
-    public VZoneDisplay getCommandZone() {
-        return commandZone;
-    }
-
     public void updateLife() {
         lblLife.update();
     }
@@ -293,19 +371,31 @@ public class VPlayerPanel extends FContainer {
         tabManaPool.update();
     }
 
+    private void onCommandZoneUpdated() {
+        InfoTab cmd = zoneTabs.get(ZoneType.Command);
+        if (cmd == selectedTab && cmd.getDisplayArea().getCount() == 0) {
+            setSelectedTab(null); //last card left, so slide it closed
+        }
+        if (Forge.isLandscapeMode() && initW > 0) {
+            layoutTabsLandscape();
+            updateTabLayout(initW, initH);
+        } else {
+            revalidate();
+        }
+    }
+
     @SuppressWarnings("incomplete-switch")
     public void updateZone(ZoneType zoneType) {
         if (zoneType == ZoneType.Battlefield) {
             field.update(true);
-        } else if (zoneType == ZoneType.Command) {
-            commandZone.update();
-            if (selectedTab != null && Forge.isHorizontalTabLayout())
-                updateTabLayout(initW, initH);
         } else {
-            if (zoneTabs.containsKey(zoneType))
+            if (zoneTabs.containsKey(zoneType)) {
                 zoneTabs.get(zoneType).update();
-            else if (EXTRA_ZONES.contains(zoneType)) {
+            } else if (EXTRA_ZONES.contains(zoneType)) {
                 extraTab.update(zoneType);
+            }
+            if (zoneType == ZoneType.Command) {
+                onCommandZoneUpdated();
             }
 
             //update flashback zone when graveyard, library, exile, or stack zones updated
@@ -347,8 +437,14 @@ public class VPlayerPanel extends FContainer {
         lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
         x += lifeLabelWidth;
 
-        float infoTabWidth = (getWidth() - x) / tabs.size();
+        List<InfoTab> shown = new ArrayList<>();
         for (InfoTab tab : tabs) {
+            boolean show = tab.isTabShown();
+            tab.setVisible(show);
+            if (show) { shown.add(tab); }
+        }
+        float infoTabWidth = (getWidth() - x) / shown.size();
+        for (InfoTab tab : shown) {
             tab.setBounds(x, y, infoTabWidth, infoLabelHeight);
             x += infoTabWidth;
         }
@@ -357,18 +453,7 @@ public class VPlayerPanel extends FContainer {
             y -= displayAreaHeight;
         }
 
-        //account for command zone if needed
-        int commandZoneCount = commandZone.getCount();
-        if (commandZoneCount > 0) {
-            float commandZoneHeight = y / 2;
-            float commandZoneWidth = Math.min(commandZoneCount, 2) * commandZone.getCardWidth(commandZoneHeight);
-            commandZone.setBounds(width - commandZoneWidth, y - commandZoneHeight, commandZoneWidth, commandZoneHeight);
-
-            field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
-        } else {
-            field.setCommandZoneWidth(0);
-        }
-
+        field.setCommandZoneWidth(0);
         field.setBounds(0, 0, width, y);
 
         if (isFlipped()) { //flip all positions across x-axis if needed
@@ -381,46 +466,53 @@ public class VPlayerPanel extends FContainer {
         field.setFieldModifier(0);
     }
 
-    private float initW, initH, commandZoneWidth, commandZoneCount, avatarWidth, prefWidth;
-    private final float mod = 2.4f;
+    private float initW, initH;
 
     private void doLandscapeLayout(float width, float height) {
         initW = width;
         initH = height;
         float x = 0;
         float y = 0;
-        float yAlt = 0;
-        avatarWidth = Forge.altZoneTabs ? avatar.getWidth() : 0;
         avatar.setPosition(x, y);
         y += avatar.getHeight();
 
-        lblLife.setBounds(x, (Forge.altPlayerLayout && !Forge.altZoneTabs) ? 0 : y, avatar.getWidth(), (Forge.altPlayerLayout && !Forge.altZoneTabs) ? INFO_FONT.getLineHeight() : Forge.altZoneTabs ? LIFE_FONT_ALT.getLineHeight() : LIFE_FONT.getLineHeight());
-        if (Forge.altPlayerLayout && !Forge.altZoneTabs) {
+        lblLife.setBounds(x, Forge.altPlayerLayout ? 0 : y, avatar.getWidth(), Forge.altPlayerLayout ? INFO_FONT.getLineHeight() : LIFE_FONT.getLineHeight());
+        if (Forge.altPlayerLayout) {
             if (adjustHeight > 2)
                 y += INFO_FONT.getLineHeight() / 2;
         } else
             y += lblLife.getHeight();
 
-        float infoTabWidth = avatar.getWidth();
-        int tabSize = !Forge.altZoneTabs ? tabs.size() : tabs.size() - 4;
-        float infoTabHeight = (height - y) / tabSize;
-        float infoTabHeightAlt = (height - yAlt) / 4;
-
-        for (InfoTab tab : tabs) {
-            if (!Forge.altZoneTabs) {
-                tab.setBounds(x, y, infoTabWidth, infoTabHeight);
-                y += infoTabHeight;
-            } else {
-                if (!tab.isAlignedRightForAltDisplay()) {
-                    tab.setBounds(x, y, infoTabWidth, infoTabHeight);
-                    y += infoTabHeight;
-                } else {
-                    tab.setBounds(x + width - avatarWidth, yAlt, avatarWidth, infoTabHeightAlt);
-                    yAlt += infoTabHeightAlt;
-                }
-            }
-        }
+        tabColTop = y;
+        tabColHeight = height - y;
+        layoutTabsLandscape();
         updateTabLayout(width, height);
+    }
+
+    //position the zone tabs in a column, offset by the current tab scroll position
+    private void layoutTabsLandscape() {
+        if (tabs.isEmpty()) { return; }
+        float tabWidth = avatar.getWidth();
+        List<InfoTab> left = new ArrayList<>(), right = new ArrayList<>();
+        for (InfoTab tab : tabs) {
+            boolean show = tab.isTabShown();
+            tab.setVisible(show);
+            if (!show) { continue; }
+            (tab.isCommonZone() ? right : left).add(tab);
+        }
+        commonTabWidth = right.isEmpty() ? 0 : tabWidth;
+        layoutColumn(left, 0, tabColTop, tabWidth, tabColHeight);
+        layoutColumn(right, initW - tabWidth, 0, tabWidth, initH);
+    }
+
+    private void layoutColumn(List<InfoTab> column, float x, float top, float w, float h) {
+        if (column.isEmpty()) { return; }
+        float tabHeight = h / column.size();
+        float y = top;
+        for (InfoTab tab : column) {
+            tab.setBounds(x, y, w, tabHeight);
+            y += tabHeight;
+        }
     }
 
     private void updateTabLayout(float width, float height) {
@@ -429,84 +521,49 @@ public class VPlayerPanel extends FContainer {
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
 
-        float fieldWidth = width - x - avatarWidth;
+        float fieldWidth = width - x - commonTabWidth;
         float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
         if (selectedTab != null) {
-            fieldWidth -= displayAreaWidth;
+            fieldWidth -= displayAreaWidth * (slideFieldToo ? slideProgress : 1f);
         }
+        field.setCommandZoneWidth(0);
+        field.setBounds(x, 0, fieldWidth, height);
 
-        //account for command zone if needed
-        commandZoneWidth = 0f;
-        commandZoneCount = commandZone.getCount();
-        if (commandZoneCount > 0) {
-            float commandZoneHeight = height / 2;
-            float minCommandCards = Forge.isHorizontalTabLayout() ? 5 : 2;
-            commandZoneWidth = Math.min(commandZoneCount, minCommandCards) * commandZone.getCardWidth(commandZoneHeight);
-            float x2 = x + fieldWidth - commandZoneWidth;
-            float y2 = height - commandZoneHeight;
-            if (Forge.isHorizontalTabLayout()) {
-                x2 = width - avatarWidth - commandZoneWidth;
-                y2 = 0;
-            }
-            commandZone.setBounds(x2, y2, commandZoneWidth, commandZoneHeight);
-            if (isFlipped()) { //flip across x-axis if needed
-                commandZone.setTop(height - commandZone.getBottom());
-            }
-
-            field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
-        } else {
-            field.setCommandZoneWidth(0);
-        }
-        prefWidth = width / mod;
-        if (Forge.isHorizontalTabLayout()) {
-            field.setBounds(x, 0, width - avatarWidth, height);
-            field.getRow1().setWidth(width - (commandZoneCount > 0 ? commandZone.getWidth() + (avatarWidth * commandZoneCount) : avatarWidth));
-            field.getRow2().setWidth(width - (avatarWidth / 4f) - (selectedTab == null ? 0 : selectedTab.getIdealWidth(prefWidth) + 1) - avatarWidth * mod);
-        } else
-            field.setBounds(x, 0, fieldWidth, height);
-
-        x = width - displayAreaWidth - avatarWidth;
+        float displayLeft = width - commonTabWidth - displayAreaWidth + (1f - slideProgress) * displayAreaWidth;
         for (InfoTab tab : tabs) {
-            if (Forge.isHorizontalTabLayout()) {
-                float w = tab.getIdealWidth(prefWidth);
-                float h = height / 2f;
-                tab.setDisplayBounds(width - w - avatarWidth, isBottomPlayer ? h : 0, w, h);
-            } else {
-                tab.setDisplayBounds(x, 0, displayAreaWidth, height);
-            }
+            tab.setDisplayBounds(displayLeft, 0, displayAreaWidth, height);
         }
+        field.setFieldModifier(0);
+    }
 
-        if (!Forge.altZoneTabs) {
-            field.setFieldModifier(0);
+    @Override
+    public void draw(Graphics g) {
+        if (slideProgress < 1f && Forge.isLandscapeMode()) {
+            //keep the zone display from drawing outside this panel while it slides in
+            g.startClip(0, 0, getWidth(), getHeight());
+            try {
+                super.draw(g);
+            } finally {
+                g.endClip();
+            }
         } else {
-            if (!"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))
-                field.setFieldModifier(avatarWidth / 16);
+            super.draw(g);
         }
     }
 
     @Override
     protected void drawOverlay(Graphics g) {
-        if (Forge.isHorizontalTabLayout()) {
-            InfoTab infoTab = selectedTab;
-            if (infoTab != null) {
-                VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
-                if (selectedDisplayArea != null && selectedDisplayArea.getCount() > 0) {
-                    float scale = avatarWidth / 2f;
-                    float x = selectedDisplayArea.getLeft();
-                    float y = selectedDisplayArea.getBottom() - scale;
-                    g.fillRect(getAltDisplayAreaBackColor(), x, y, scale, scale);
-                    infoTab.icon.draw(g, x, y, scale, scale);
-                }
-            }
-        }
         super.drawOverlay(g);
     }
 
     @Override
     public void drawBackground(Graphics g) {
+        if (Forge.isLandscapeMode() && commonTabWidth > 0) {
+            g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2),
+                    getWidth() - commonTabWidth, 0, commonTabWidth, getHeight());
+        }
         float y;
         InfoTab infoTab = selectedTab;
-        float pad = Forge.isHorizontalTabLayout() ? avatarWidth / 16f : 0f;
         if (infoTab != null) { //draw background and border for selected zone if needed
             VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
             float x = selectedDisplayArea == null ? 0 : selectedDisplayArea.getLeft();
@@ -514,9 +571,7 @@ public class VPlayerPanel extends FContainer {
             float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
             float h = selectedDisplayArea == null ? 0 : selectedDisplayArea.getHeight();
             float bottom = selectedDisplayArea == null ? 0 : selectedDisplayArea.getBottom();
-            g.fillRect(Forge.isHorizontalTabLayout() ? getAltDisplayAreaBackColor() : getDisplayAreaBackColor(), x - pad, top, w + pad, h + pad);
-            if (Forge.isHorizontalTabLayout())
-                g.drawLine(1, MatchScreen.getBorderColor(), x, isFlipped() ? bottom : top, x + w, isFlipped() ? bottom : top);
+            g.fillRect(getDisplayAreaBackColor(), x, top, w, h);
 
             if (Forge.isLandscapeMode()) {
                 g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
@@ -530,17 +585,6 @@ public class VPlayerPanel extends FContainer {
                 g.drawLine(1, MatchScreen.getBorderColor(), right, y, w, y);
             }
         }
-        if (commandZone != null && commandZone.isVisible()) { //draw border for command zone if needed
-            float x = commandZone.getLeft();
-            y = commandZone.getTop();
-            g.drawLine(1, MatchScreen.getBorderColor(), x, y, x, y + commandZone.getHeight());
-            /*if (Forge.isHorizontalTabLayout())
-                g.fillRect(getAltDisplayAreaBackColor(), x - pad, y, commandZoneWidth + pad, commandZone.getHeight() + pad);*/
-            if (isFlipped()) {
-                y += commandZone.getHeight();
-            }
-            g.drawLine(1, MatchScreen.getBorderColor(), x, y, x + commandZone.getWidth(), y);
-        }
     }
 
     public Iterable<FScrollPane> getAllScrollPanes() {
@@ -550,7 +594,6 @@ public class VPlayerPanel extends FContainer {
         out.add(field.getRow2());
         for (InfoTabZone tab : zoneTabs.values())
             out.add(tab.displayArea);
-        out.add(commandZone);
         out.addAll(extraTab.displayAreas.values());
         return out;
     }
@@ -603,7 +646,7 @@ public class VPlayerPanel extends FContainer {
         public void draw(Graphics g) {
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
-            if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
+            if (Forge.altPlayerLayout && Forge.isLandscapeMode()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters == 0 && radCounters == 0 && manaShards == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width + 1, INFO2_FONT.getBounds(lifeStr).height + 1);
                     g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
@@ -655,7 +698,7 @@ public class VPlayerPanel extends FContainer {
                 }
             } else {
                 if (poisonCounters == 0 && energyCounters == 0 && manaShards == 0) {
-                    g.drawText(lifeStr, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, getInfoForeColor(), 0, 0, getWidth(), getHeight(), false, Align.center, true);
+                    g.drawText(lifeStr, LIFE_FONT, getInfoForeColor(), 0, 0, getWidth(), getHeight(), false, Align.center, true);
                 } else {
                     float halfHeight = getHeight() / 2;
                     float textStart = halfHeight + Utils.scale(1);
@@ -683,6 +726,8 @@ public class VPlayerPanel extends FContainer {
     public abstract class InfoTab extends FDisplayObject {
         protected String value = "0";
         protected FSkinImageInterface icon;
+        protected boolean isCommonZone() { return false; }
+        protected boolean isTabShown() { return true; }
 
         protected InfoTab(FSkinImageInterface icon) {
             this.icon = icon;
@@ -704,8 +749,6 @@ public class VPlayerPanel extends FContainer {
 
         public abstract void reset();
 
-        public abstract float getIdealWidth(float pref);
-
         protected boolean isSelected() {
             return selectedTab == this;
         }
@@ -714,23 +757,13 @@ public class VPlayerPanel extends FContainer {
             return getDisplayAreaBackColor();
         }
 
-        protected boolean isAlignedRightForAltDisplay() {
-            return false;
-        }
-
         @Override
         public void draw(Graphics g) {
+            if (Forge.isLandscapeMode() && isCommonZone()) {
+                g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
+            }
             float x, y, w, h;
             boolean drawOverlay = MatchController.getView().selectedPlayerPanel().getPlayer() == player && Forge.hasGamepad();
-            if (Forge.altZoneTabs && this.isAlignedRightForAltDisplay()) {
-                //draw extra
-                g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
-                if (isSelected()) {
-                    if (drawOverlay)
-                        g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
-                    g.fillRect(getDisplayAreaBackColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
-                }
-            }
             if (isSelected()) {
                 y = 0;
                 w = getWidth();
@@ -873,11 +906,6 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void reset() {
         } //Mana Display does not get cleared.
-
-        @Override
-        public float getIdealWidth(float pref) {
-            return pref;
-        }
     }
 
     /**
@@ -885,16 +913,18 @@ public class VPlayerPanel extends FContainer {
      */
     public class InfoTabZone extends InfoTabSingleDisplay {
         public final ZoneType zoneType;
+        @Override
+        protected boolean isCommonZone() { return COMMON_ZONES.contains(zoneType); }
 
+        @Override
+        protected boolean isTabShown() { //command tab only exists while it has cards
+            if (zoneType != ZoneType.Command) { return true; }
+            return isSelected() || displayArea.getCount() > 0;
+        }
         private InfoTabZone(VDisplayArea displayArea, ZoneType zoneType) {
+            //super(zoneType == ZoneType.Command ? FSkinImage.COMMANDER : iconFromZone(zoneType), displayArea);
             super(iconFromZone(zoneType), displayArea);
             this.zoneType = zoneType;
-        }
-
-        private final EnumSet<ZoneType> altDisplayZones = EnumSet.of(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile);
-
-        public boolean isAlignedRightForAltDisplay() {
-            return altDisplayZones.contains(this.zoneType);
         }
 
         @Override
@@ -907,23 +937,6 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void reset() {
             displayArea.clear();
-        }
-
-        @Override
-        public float getIdealWidth(float pref) {
-            if (displayArea instanceof VCardDisplayArea vCardDisplayArea) {
-                float cardWidth = vCardDisplayArea.getCardWidth(vCardDisplayArea.getHeight());
-                float size = vCardDisplayArea.getCount();
-                return Math.min(cardWidth * size, pref);
-            }
-            return pref;
-        }
-
-        @Override
-        public void update() {
-            super.update();
-            if (selectedTab != null && Forge.isHorizontalTabLayout())
-                updateTabLayout(initW, initH);
         }
     }
 
@@ -957,6 +970,7 @@ public class VPlayerPanel extends FContainer {
             if (this.displayAreas.containsKey(zone))
                 return;
             VZoneDisplay display = VPlayerPanel.this.add(new VZoneDisplay(player, zone));
+            bringTabsToFront();
             this.displayAreas.put(zone, display);
             this.hasCardsInExtraZone = true;
             if (zone == ZoneType.AttractionDeck || zone == ZoneType.ContraptionDeck)
@@ -1053,16 +1067,6 @@ public class VPlayerPanel extends FContainer {
                 //iterator.remove();
             }
             activeZone = ZoneType.Sideboard;
-        }
-
-        @Override
-        public float getIdealWidth(float pref) {
-            if (getDisplayArea() instanceof VCardDisplayArea vCardDisplayArea) {
-                float cardWidth = vCardDisplayArea.getCardWidth(vCardDisplayArea.getHeight());
-                float size = vCardDisplayArea.getCount();
-                return Math.min(cardWidth * size, pref);
-            }
-            return pref;
         }
 
         @Override
