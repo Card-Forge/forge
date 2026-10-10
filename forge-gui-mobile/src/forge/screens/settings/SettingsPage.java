@@ -24,6 +24,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.screens.match.views.VPhaseIndicator;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -300,19 +301,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         MatchController.instance.resetPlayerPanels();
                 }
             }, 1);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALT_PLAYERZONETABS,
-            Forge.getLocalizer().getMessage("lblAltZoneTabs"),
-            Forge.getLocalizer().getMessage("nlAltZoneTabs"),
-            Lists.newArrayList("Off", "Vertical", "Horizontal")) {
-                @Override
-                public void valueChanged(String newValue) {
-                    super.valueChanged(newValue);
-                    //update
-                    Forge.setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
-                    if (MatchController.instance != null)
-                        MatchController.instance.resetPlayerPanels();
-                }
-            }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
+            Forge.getLocalizer().getMessageorUseDefault("lblHidePhaseStop", "Hide Phase stop (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlHidePhaseStop", "When enabled, Phase stop is covered by Phase name label. Tap the label to access Phase stop.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPhaseIndicator.HIDE_PHASESTOP = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_PHASESTOP);
+            }
+        }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
             Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"),
             Forge.getLocalizer().getMessage("nlAnimatedCardTapUntap")) {
@@ -596,12 +593,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
                 ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                 ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-            Forge.getLocalizer().getMessage("lblRotateZoomSplit"),
-            Forge.getLocalizer().getMessage("nlRotateZoomSplit")), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-            Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
-            Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")), 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
             Forge.getLocalizer().getMessage("lblDisableCardEffect"),
             Forge.getLocalizer().getMessage("nlDisableCardEffect")), 4);

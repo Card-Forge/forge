@@ -1,0 +1,11 @@
+sprite_transform.png
+size:1024,512
+repeat:none
+flip
+bounds:2,2,256,256
+mutate
+bounds:518,2,256,256
+rotate
+bounds:260,2,256,256
+specialize
+bounds:2,260,256,256

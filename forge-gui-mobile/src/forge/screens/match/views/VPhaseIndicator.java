@@ -8,16 +8,23 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.game.GameView;
 import forge.game.phase.PhaseType;
+import forge.game.player.PlayerView;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
 import forge.util.Utils;
 
 public class VPhaseIndicator extends FContainer {
+    public static boolean HIDE_PHASESTOP = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_HIDE_PHASESTOP);
     public static final FSkinFont BASE_FONT = FSkinFont.get(11);
     public static final float PADDING_X = Utils.scale(1);
     public static final float PADDING_Y = Utils.scale(2);
@@ -26,8 +33,21 @@ public class VPhaseIndicator extends FContainer {
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<>();
     private FSkinFont font;
+    private static final FSkinFont NAME_FONT = FSkinFont.get(14);
+    private static final Color IDLE_NAME_COLOR = new Color(0.65f, 0.65f, 0.65f, 1f);
+    private static final float NAME_PADDING = Utils.scale(2);
+    private static final float EXPAND_DURATION = 0.18f;
+    private static final float IDLE_SECONDS = 5.5f; //stops stay up this long after the last tap
 
-    public VPhaseIndicator() {
+    private final PlayerView player;
+    private float expand; //landscape only: 0 = phase name, 1 = phase stops
+    private boolean expandTarget;
+    private float idleTime;
+    private ExpandAnimation expandAnimation;
+    private Color scratchColor = new Color();
+
+    public VPhaseIndicator(PlayerView player0) {
+        player = player0;
         addPhaseLabel("UP", PhaseType.UPKEEP);
         addPhaseLabel("DR", PhaseType.DRAW);
         addPhaseLabel("M1", PhaseType.MAIN1);
@@ -40,6 +60,152 @@ public class VPhaseIndicator extends FContainer {
         addPhaseLabel("M2", PhaseType.MAIN2);
         addPhaseLabel("ET", PhaseType.END_OF_TURN);
         addPhaseLabel("CL", PhaseType.CLEANUP);
+    }
+
+    private boolean isCollapsedMode() { return Forge.isLandscapeMode() && !expandTarget; }
+
+    private void setExpanded(boolean open) {
+        expandTarget = open;
+        idleTime = 0;
+        if (expandAnimation == null) {
+            expandAnimation = new ExpandAnimation();
+            expandAnimation.start();
+        }
+    }
+
+    private void keepExpanded() { idleTime = 0; }
+
+    @Override
+    public boolean tap(float x, float y, int count) { //only reached when no stop label took the tap
+        if (!Forge.isLandscapeMode()) { return false; }
+        setExpanded(!expandTarget);
+        return true;
+    }
+
+    //upright letters, one per line, reading downward and centered in the column
+    private void drawStacked(Graphics g, String text, Color color) {
+        final float maxW = getWidth() - 2 * NAME_PADDING;
+        final float maxH = getHeight() - 2 * NAME_PADDING;
+
+        float units = 0; //a space counts as half a line
+        for (int i = 0; i < text.length(); i++) {
+            units += text.charAt(i) == ' ' ? 0.5f : 1f;
+        }
+
+        FSkinFont font = NAME_FONT;
+        while (font.canShrink() && (font.getLineHeight() * 0.9f * units > maxH || font.getBounds("W").width > maxW)) {
+            font = font.shrink();
+        }
+
+        final float lineH = font.getLineHeight();
+        final float step = lineH * 0.9f;
+        float y = (getHeight() - step * units) / 2;
+        for (int i = 0; i < text.length(); i++) {
+            final char ch = text.charAt(i);
+            if (ch == ' ') {
+                y += step * 0.5f;
+                continue;
+            }
+            //box is a full line tall so drawText doesn't shrink the glyph further
+            g.drawText(String.valueOf(ch), font, color, 0, y - (lineH - step) / 2, getWidth(), lineH + 2, false, Align.center, true);
+            y += step;
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if (!Forge.isLandscapeMode() || !HIDE_PHASESTOP) { // TODO: Add better design or recreate a new widget
+            super.draw(g);
+            return;
+        }
+
+        final float w = getWidth(), h = getHeight();
+        //g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, w, h);
+
+        final GameView gv = MatchController.instance == null ? null : MatchController.instance.getGameView();
+        final PhaseType phase = gv == null ? null : gv.getPhase();
+        final FSkinColor active = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_PHASE_INACTIVE_ENABLED : Colors.CLR_PHASE_INACTIVE_ENABLED);
+        final FSkinColor inactive = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_PHASE_INACTIVE_DISABLED : Colors.CLR_PHASE_INACTIVE_DISABLED);
+
+        if (expand < 1f && phase != null) {
+            final float a = 1f - expand;
+            final boolean myTurn = gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+            String text = null;
+            Color base;
+            if (myTurn) {
+                g.fillRect(active.alphaColor(0.4f * a), 0, 0, w, h);
+                base = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_TEXT : Colors.CLR_TEXT).getColor();
+                if (phase != null) { text = phase.nameForScripts; }
+            } else {
+                g.fillRect(inactive.alphaColor(0.4f * a), 0, 0, w, h);
+                base = player.getHasPriority() ? active.getColor() : IDLE_NAME_COLOR;
+                text = "--";//Forge.getLocalizer().getMessage("lblPriority");
+            }
+            if (text != null) {
+                scratchColor.set(base.r, base.g, base.b, a);
+                final float cx = w / 2, cy = h / 2;
+                final float len = h - 2 * NAME_PADDING, thick = w - 2 * NAME_PADDING;
+                g.startRotateTransform(cx, cy, 90); //use -90 to read top-to-bottom
+                try {
+                    g.drawText(text, NAME_FONT, scratchColor, cx - len / 2, cy - thick / 2, len, thick, false, Align.center, true);
+                } finally {
+                    g.endTransform();
+                }
+            }
+        }
+        /*if (expand < 1f && gv != null) {
+            final float a = 1f - expand;
+            final boolean myTurn = gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+            String text = null;
+            Color base;
+            if (myTurn) {
+                g.fillRect(active.alphaColor(0.35f * a), 0, 0, w, h); //turn owner tint
+                base = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_TEXT : Colors.CLR_TEXT).getColor();
+                if (phase != null) { text = phase.nameForScripts; }
+            } else {
+                g.fillRect(inactive.alphaColor(0.35f * a), 0, 0, w, h); //turn owner tint
+                base = player.getHasPriority() ? active.getColor() : IDLE_NAME_COLOR;
+                text = "|";//Forge.getLocalizer().getMessage("lblPriority");
+            }
+            if (text != null) {
+                drawStacked(g, text.toUpperCase(), new Color(base.r, base.g, base.b, a));
+            }
+        }*/
+
+        if (expand >= 1f) {
+            super.draw(g);
+        } else if (expand > 0f) { //unfold from the middle
+            final float revealH = h * expand;
+            g.startClip(0, (h - revealH) / 2, w, revealH);
+            try {
+                super.draw(g);
+            } finally {
+                g.endClip();
+            }
+        }
+    }
+
+    private class ExpandAnimation extends ForgeAnimation {
+        @Override
+        protected boolean advance(float dt) {
+            final float step = dt / EXPAND_DURATION;
+            if (expandTarget) {
+                expand = Math.min(1f, expand + step);
+                if (expand >= 1f) {
+                    idleTime += dt;
+                    if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
+                }
+                return true;
+            }
+            expand = Math.max(0f, expand - step);
+            return expand > 0f;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            if (endingAll) { expand = expandTarget ? 1f : 0f; }
+            expandAnimation = null;
+        }
     }
 
     private void addPhaseLabel(String caption, PhaseType phaseType) {
@@ -156,16 +322,19 @@ public class VPhaseIndicator extends FContainer {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (isCollapsedMode()) { return false; } //let the indicator expand instead
             stopAtPhase = !stopAtPhase;
             if (onToggled != null) onToggled.run();
+            keepExpanded();
             return true;
         }
 
         @Override
         public boolean longPress(float x, float y) {
-            if (onLongPress == null) {
+            if (onLongPress == null || isCollapsedMode()) {
                 return false;
             }
+            keepExpanded();
             onLongPress.run();
             return true;
         }

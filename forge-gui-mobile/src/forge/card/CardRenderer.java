@@ -660,10 +660,10 @@ public class CardRenderer {
         };
     }
 
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        drawCard(g, card, x, y, w, h, pos, rotate, false, false, false);
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+        drawCard(g, card, x, y, w, h, pos, false, false, false);
     }
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList, boolean magnify) {
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean showAltState, boolean isChoiceList, boolean magnify) {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage(showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
@@ -672,7 +672,6 @@ public class CardRenderer {
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
         float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
-        boolean needsRotation = rotate && !Forge.enableUIMask.equals("Art") && CardRendererUtils.needsRotation(card, showAltState);
         if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
             croppedArea = 0.975f;
             minusxy = 0.135f * radius;
@@ -686,7 +685,7 @@ public class CardRenderer {
                 else
                     g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.getFoilIndex(card));
             } else {
-                if (card.isFlipped() || needsRotation) {
+                if (card.isFlipped()) {
                     float rotation = card.isFlipped() ? 180 
                         : CardRendererUtils.hasAftermath(card) ? 90 : -90;
                     if (Forge.enableUIMask.equals("Full")) {
@@ -729,7 +728,7 @@ public class CardRenderer {
         cy = y;
         cw = w;
         ch = h;
-        drawCard(g, card, x, y, w, h, pos, false, showAltState, isChoiceList, false);
+        drawCard(g, card, x, y, w, h, pos, showAltState, isChoiceList, false);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;

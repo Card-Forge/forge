@@ -467,7 +467,7 @@ public final class CardFlightOverlay {
         if (alpha < 1f) { g.setAlphaComposite(alpha); }
         g.startRotateTransform(cx, cy, angle);
         CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h,
-                CardStackPosition.Top, false, false, false, true);
+                CardStackPosition.Top, false, false, true);
         g.endTransform();
         if (alpha < 1f) { g.resetAlphaComposite(); }
     }
@@ -504,7 +504,7 @@ public final class CardFlightOverlay {
         if (angle != 0f) { g.startRotateTransform(cx, cy, angle); }
 
         CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h,
-                CardStackPosition.Top, false, false, false, true);
+                CardStackPosition.Top, false, false, true);
         if (redAlpha > 0f) {
             RED.a = redAlpha;
             g.fillRect(RED, cx - w / 2, cy - h / 2, w, h);
