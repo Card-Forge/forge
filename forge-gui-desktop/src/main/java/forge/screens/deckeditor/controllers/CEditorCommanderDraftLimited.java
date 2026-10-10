@@ -68,6 +68,7 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup
             final String freeCommanderName) {
         super(deckMap0, DeckGroup::new, screen0, cDetailPicture0);
         this.freeCommanderName = freeCommanderName;
+        sectionMode = DeckSection.Commander;
 
         // Insert the Commander section at position 0 so it appears first
         allSections.add(0, DeckSection.Commander);

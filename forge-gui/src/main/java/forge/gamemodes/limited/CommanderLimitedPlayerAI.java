@@ -262,10 +262,9 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
 
 
         if (impliedPartner != null) {
-
+            // For MBC, we can use fake color mana identities. FIgure out how that works
         }
 
-        // For MBC, we can use fake color mana identities. FIgure out how that works
         return null;
     }
 
