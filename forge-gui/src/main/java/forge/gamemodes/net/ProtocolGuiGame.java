@@ -507,9 +507,16 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         return false;
     }
 
+    // Client draws the waiting prompt. send, not syncAndSend, because the game thread may be live
     @Override
-    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
-        send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+    public void awaitNextInput() {
+        send(ProtocolMethod.awaitNextInput);
+    }
+
+    @Override
+    public void updateAutoPassPrompt() {
+        // Client's waiting prompt includes the yield line, so the same notice covers it
+        if (currentYieldMessage() != null) awaitNextInput();
     }
 
     @Override

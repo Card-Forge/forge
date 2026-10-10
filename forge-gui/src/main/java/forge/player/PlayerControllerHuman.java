@@ -3881,6 +3881,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public void autoPassUntilEndOfTurn() {
         yieldController.setAutoPassUntilEndOfTurn(true);
+        if (isRemoteClient()) getGui().applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(getLocalPlayerView(), true));
         getGui().updateAutoPassPrompt();
     }
 
