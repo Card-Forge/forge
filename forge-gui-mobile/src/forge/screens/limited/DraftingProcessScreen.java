@@ -118,17 +118,26 @@ public class DraftingProcessScreen extends FDeckEditor {
             FDeckEditor.DECK_CONTROLLER_DRAFT.load("", name);
             DeckPreferences.setDraftDeck(name);
 
-            LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
-            LoadGameScreen.BoosterDraft.open();
+            //show header for main deck and sideboard when finished drafting
+            deckHeader.setVisible(true);
+            revalidate();
+
+            if (draft.isCommanderDraft()) {
+                // Open commander-draft-aware editor so player picks commanders first
+                Forge.openScreen(new FDeckEditor(FDeckEditor.EditorConfigCommanderDraft, finishedDraft));
+            } else {
+                LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
+                LoadGameScreen.BoosterDraft.open();
+            }
         }
         else {
             FModel.getQuest().getDraftDecks().add(finishedDraft);
             FDeckEditor.DECK_CONTROLLER_QUEST_DRAFT.load("", name);
-        }
 
-        //show header for main deck and sideboard when finished drafting
-        deckHeader.setVisible(true);
-        revalidate();
+            //show header for main deck and sideboard when finished drafting
+            deckHeader.setVisible(true);
+            revalidate();
+        }
     }
 
     @Override

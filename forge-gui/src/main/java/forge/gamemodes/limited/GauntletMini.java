@@ -19,6 +19,7 @@ package forge.gamemodes.limited;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -102,16 +103,20 @@ public class GauntletMini {
         humanDeck = humanDeck0;
         gauntletType = gauntletType0;
         List<Deck> aiDecks;
-        if (gauntletType == GameType.Sealed) {
-            aiDecks = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
+
+        switch (gauntletType) {
+            case Draft:
+            case CommanderDraft:
+                gauntletDraft = true;
+                aiDecks = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
+                break;
+            case Sealed:
+                aiDecks = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
+                break;
+            default:
+                throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
         }
-        else if (gauntletType == GameType.Draft) {
-            gauntletDraft = true;
-            aiDecks = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
-        }
-        else {
-            throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
-        }
+
         aiOpponents.clear();
 
         if (rounds == 1) { //play random opponent if only playing one round
@@ -144,7 +149,13 @@ public class GauntletMini {
         }
 
         hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(gauntletType, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+
+        Set<GameType> gameTypes = null;
+        if (gauntletType == GameType.CommanderDraft) {
+            gameTypes = java.util.EnumSet.of(GameType.Commander);
+        }
+
+        hostedMatch.startMatch(gauntletType, gameTypes, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     /**
