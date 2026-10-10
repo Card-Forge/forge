@@ -327,6 +327,11 @@ public class MatchController extends NetworkGuiGame {
                 latch.countDown();
             }
         }, 300));
+        try {
+            latch.await();   // block the game thread until the overlay is dismissed
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     @Override
