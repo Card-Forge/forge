@@ -1,0 +1,10 @@
+Name:Hela's Arcanum
+ManaCost:3 B B
+Types:Instant Arcane
+A:SP$ Charm | Choices$ DBPump,DBAnimate,DBDestroyAll | CharmNum$ 5 | MinCharmNum$ 0 | CanRepeatModes$ True | Pawprint$ 5
+SVar:DBPump:DB$ Pump | Pawprint$ 1 | ValidTgts$ Creature | NumAtt$ +1 | KW$ Deathtouch | SpellDescription$ Target creature gets +1/+0 and gains deathtouch until end of turn.
+SVar:DBAnimate:DB$ Animate | Pawprint$ 2 | Triggers$ DiesTrigger | ValidTgts$ Creature | SpellDescription$ Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy
+SVar:DBDestroyAll:DB$ DestroyAll | Pawprint$ 3 | ValidCards$ Creature.nonZombie+powerLE3 | SpellDescription$ Destroy each non-Zombie creature with power 3 or less.
+Oracle:Choose up to five {Ar} worth of modes. You may choose the same mode more than once.\n{Ar} — Target creature gets +1/+0 and gains deathtouch until end of turn.\n{Ar}{Ar} — Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."\n{Ar}{Ar}{Ar} — Destroy each non-Zombie creature with power 3 or less.
