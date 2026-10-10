@@ -401,6 +401,10 @@ public class MatchScreen extends FScreen {
         return command != null && command.getDragCard() != null ? command : null;
     }
 
+    private static CardAreaPanel findFieldDragPanel(VPlayerPanel panel) {
+        CardAreaPanel dragged = panel.getField().getRow1().getDragPanel();
+        return dragged != null ? dragged : panel.getField().getRow2().getDragPanel();
+    }
     //hover preview keeps using the existing magnifier setting, drag preview always shows
     private boolean isHoverPreviewEnabled() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle
@@ -416,7 +420,7 @@ public class MatchScreen extends FScreen {
             boolean showLeft = true; //zone cards and stack items sit on the right, so the preview goes left
             float anchorWidth = 0;
 
-            //finger dragging over a zone display
+            //finger dragging over a zone display or a battlefield row
             for (VPlayerPanel panel : playerPanelsList) {
                 VZoneDisplay dragDisplay = findDragDisplay(panel);
                 if (dragDisplay != null) {
@@ -424,6 +428,14 @@ public class MatchScreen extends FScreen {
                     anchor = dragDisplay;
                     anchorWidth = dragDisplay.screenPos.width;
                     dragging = true;
+                    break;
+                }
+                CardAreaPanel fieldDrag = findFieldDragPanel(panel);
+                if (fieldDrag != null) {
+                    card = fieldDrag.getCard();
+                    anchor = fieldDrag; //the card itself, so the preview lands beside it like a hovered field card
+                    anchorWidth = fieldDrag.isTapped() ? fieldDrag.screenPos.width : fieldDrag.screenPos.width / 1.4f;
+                    showLeft = false;
                     break;
                 }
             }

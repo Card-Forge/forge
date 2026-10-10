@@ -2,9 +2,6 @@ package forge.screens.match.views;
 
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.game.card.CardView;
@@ -18,16 +15,7 @@ import forge.util.collect.FCollectionView;
 public class VZoneDisplay extends VCardDisplayArea {
     private final PlayerView player;
     private final ZoneType zoneType;
-    private static final float SELECTION_BOX_THICKNESS = 3f;
     private FCardPanel revealedPanel;
-    private CardAreaPanel dragPanel; //card currently under the finger while touch dragging, null when not dragging
-    private static long lastDragMillis;
-    private static boolean dragging;
-
-    public static boolean isDragGestureActive() {
-        return dragging || System.currentTimeMillis() - lastDragMillis < 250;
-    }
-
     public VZoneDisplay(PlayerView player0, ZoneType zoneType0) {
         player = player0;
         zoneType = zoneType0;
@@ -64,78 +52,13 @@ public class VZoneDisplay extends VCardDisplayArea {
         }
     }
 
-    /**
-     * @return the card under the finger while touch dragging over this zone in landscape mode, or null if not dragging.
-     * The player panel uses this to show a larger card display next to the zone.
-     */
-    public CardView getDragCard() {
-        return dragPanel == null ? null : dragPanel.getCard();
-    }
-
-    private void updateDragPanel(float x, float y) {
-        final List<CardAreaPanel> panels = cardPanels.get();
-        for (int i = panels.size() - 1; i >= 0; i--) { //later panels are drawn on top, so check them first
-            final CardAreaPanel panel = panels.get(i);
-            if (panel.contains(x, y)) {
-                dragPanel = panel; //if finger crosses a gap between cards, keep the last card selected
-                break;
-            }
-        }
-        Gdx.graphics.requestRendering();
-        dragging = true;
-    }
-
-    private void clearDragPanel() {
-        if (dragPanel != null) {
-            dragPanel = null;
-            Gdx.graphics.requestRendering();
-        }
-        dragging = false;
-        lastDragMillis = System.currentTimeMillis();
-    }
-
-    @Override
-    public boolean panStop(float x, float y) {
-        clearDragPanel();
-        return false; //let any other listeners finish handling the pan
-    }
-
-    @Override
-    public boolean release(float x, float y) {
-        clearDragPanel();
-        return false;
-    }
-
-    @Override
-    public void setVisible(boolean b0) {
-        if (!b0) {
-            dragPanel = null;
-        }
-        super.setVisible(b0);
-    }
-
-    @Override
-    protected void drawOverlay(Graphics g) {
-        super.drawOverlay(g);
-        if (dragPanel == null || !Forge.isLandscapeMode()) { return; }
-
-        //surround the selected card with a box
-        final float padding = FCardPanel.PADDING;
-        float w = dragPanel.getWidth() - 2 * padding;
-        final float h = dragPanel.getHeight() - 2 * padding;
-        if (w == h) { //adjust width if needed to match how the card itself is drawn
-            w = h / FCardPanel.ASPECT_RATIO;
-        }
-        g.drawRect(SELECTION_BOX_THICKNESS, Color.LIME, dragPanel.getLeft() + padding, dragPanel.getTop() + padding, w, h);
-    }
-
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
+            return super.pan(x, y, deltaX, deltaY, moreVertical); //base class tracks the card under the finger
+        }
         if (Forge.isLandscapeMode()) {
             updateDragPanel(x, y);
-        }
-        if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
-            return super.pan(x, y, deltaX, deltaY, moreVertical);
         }
         int idx = cardPanels.get().size() - 1;
         for (int i = idx - 1; i >= 0; i--) {

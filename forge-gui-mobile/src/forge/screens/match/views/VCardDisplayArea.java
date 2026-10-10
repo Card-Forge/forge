@@ -51,7 +51,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     private final Set<CardView> currentScratch = new HashSet<>();
     private int shownGeneration;
     private static int generation; // bumped on every new game so the old board never counts as "departures"
+    private static final float SELECTION_BOX_THICKNESS = 3f;
+    private CardAreaPanel dragPanel; //card currently under the finger while touch dragging, null when not dragging
+    private static long lastDragMillis;
+    private static boolean dragging;
 
+    public static boolean isDragGestureActive() {
+        return dragging || System.currentTimeMillis() - lastDragMillis < 250;
+    }
     public Iterable<CardView> getOrderedCards() {
         return orderedCards.get();
     }
@@ -59,7 +66,78 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     public Iterable<CardAreaPanel> getCardPanels() {
         return cardPanels.get();
     }
+    /** @return the card under the finger while touch dragging over this area in landscape mode, or null */
+    public CardView getDragCard() {
+        return dragPanel == null ? null : dragPanel.getCard();
+    }
 
+    public CardAreaPanel getDragPanel() {
+        return dragPanel;
+    }
+
+    protected void updateDragPanel(float x, float y) {
+        //children also include attached and stacked cards, which cardPanels doesn't
+        for (int i = getChildCount() - 1; i >= 0; i--) { //later children are drawn on top, so check them first
+            final FDisplayObject child = getChildAt(i);
+            if (child instanceof CardAreaPanel panel && child.contains(x, y)) {
+                dragPanel = panel; //if the finger crosses a gap between cards, keep the last card selected
+                break;
+            }
+        }
+        Gdx.graphics.requestRendering();
+        dragging = true;
+    }
+
+    private void clearDragPanel() {
+        if (dragPanel != null) {
+            dragPanel = null;
+            Gdx.graphics.requestRendering();
+        }
+        dragging = false;
+        lastDragMillis = System.currentTimeMillis();
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        if (Forge.isLandscapeMode()) {
+            updateDragPanel(x, y);
+        }
+        return super.pan(x, y, deltaX, deltaY, moreVertical);
+    }
+
+    @Override
+    public boolean panStop(float x, float y) {
+        clearDragPanel();
+        return super.panStop(x, y);
+    }
+
+    @Override
+    public boolean release(float x, float y) {
+        clearDragPanel();
+        return super.release(x, y);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        if (dragPanel == null || !Forge.isLandscapeMode()) { return; }
+
+        //surround the selected card with a box, matching how the card is drawn (tapped cards are turned sideways)
+        final float padding = FCardPanel.PADDING;
+        float w = dragPanel.getWidth() - 2 * padding;
+        float h = dragPanel.getHeight() - 2 * padding;
+        if (w == h) { //adjust width if needed to match how the card itself is drawn
+            w = h / FCardPanel.ASPECT_RATIO;
+        }
+        float top = dragPanel.getTop() + padding;
+        if (dragPanel.isTapped()) {
+            top += h - w;
+            float temp = w;
+            w = h;
+            h = temp;
+        }
+        g.drawRect(SELECTION_BOX_THICKNESS, Color.LIME, dragPanel.getLeft() + padding, top, w, h);
+    }
     @Override
     public int getCount() {
         return cardPanels.get().size();
@@ -142,6 +220,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     @Override
     public void setVisible(boolean b0) {
         if (isVisible() == b0) {
+            if (!b0) { dragPanel = null; }
             return;
         }
         super.setVisible(b0);
@@ -614,7 +693,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public boolean longPress(float x, float y) {
-            if (VZoneDisplay.isDragGestureActive()) { return true; }
+            if (VCardDisplayArea.isDragGestureActive()) { return true; }
             if (renderedCardContains(x, y)) {
                 showZoom();
                 return true;
