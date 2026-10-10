@@ -917,6 +917,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void afterGameEnd() {
+        cancelWaitingTimer();
         if (awaitNextInputTimer != null) {
             awaitNextInputTimer.cancel();
             awaitNextInputTimer = null;
