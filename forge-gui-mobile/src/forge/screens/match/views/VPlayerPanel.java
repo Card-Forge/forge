@@ -100,6 +100,12 @@ public class VPlayerPanel extends FContainer {
     private float commandVisibleWidth = 0f;
     private CommandSlideAnimation commandAnimation;
     private boolean commandUserClosed; //closed by hand, stays closed until the zone empties
+    private static final float TAB_ICON_RATIO = 0.6f;        //icon box as a fraction of tab height, the rest is top/bottom padding
+    private static final float TAB_COLUMN_PAD = Utils.scale(4);
+    private float tabIconSize;
+    private static final float TAB_MAX_HEIGHT_RATIO = 0.9f; //tab height as a fraction of tab width
+    private static final float TAB_MIN_ICON = Utils.scale(16);
+    private float tabColWidth;
 
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
@@ -522,12 +528,15 @@ public class VPlayerPanel extends FContainer {
         initW = width;
         initH = height;
         syncCommandZone();
+        //tab columns keep a minimum width so the icon and a 2-digit count always fit, even with the half size avatars of 3-4 player games
+        tabColWidth = Math.max(avatar.getWidth(), TAB_MIN_ICON + INFO_FONT.getBounds("00").width + 3 * INFO_TAB_PADDING_X);
+
         float x = 0;
         float y = 0;
-        avatar.setPosition(x, y);
+        avatar.setPosition((tabColWidth - avatar.getWidth()) / 2, y);
         y += avatar.getHeight();
 
-        lblLife.setBounds(x, Forge.altPlayerLayout ? 0 : y, avatar.getWidth(), Forge.altPlayerLayout ? INFO_FONT.getLineHeight() : LIFE_FONT.getLineHeight());
+        lblLife.setBounds(x, Forge.altPlayerLayout ? 0 : y, tabColWidth, Forge.altPlayerLayout ? INFO_FONT.getLineHeight() : LIFE_FONT.getLineHeight());
         if (Forge.altPlayerLayout) {
             if (adjustHeight > 2)
                 y += INFO_FONT.getLineHeight() / 2;
@@ -540,10 +549,9 @@ public class VPlayerPanel extends FContainer {
         updateTabLayout(width, height);
     }
 
-    //position the zone tabs in a column, offset by the current tab scroll position
     private void layoutTabsLandscape() {
         if (tabs.isEmpty()) { return; }
-        float tabWidth = avatar.getWidth();
+        float tabWidth = tabColWidth;
         List<InfoTab> left = new ArrayList<>(), right = new ArrayList<>();
         for (InfoTab tab : tabs) {
             boolean show = tab.isTabShown();
@@ -552,17 +560,28 @@ public class VPlayerPanel extends FContainer {
             (tab.isCommonZone() ? right : left).add(tab);
         }
         commonTabWidth = right.isEmpty() ? 0 : tabWidth;
-        layoutColumn(left, 0, tabColTop, tabWidth, tabColHeight);
-        layoutColumn(right, initW - tabWidth, 0, tabWidth, initH);
+
+        //one tab height for both columns so every tab and icon matches
+        float valueW = INFO_FONT.getBounds("00").width;
+        float cell = tabWidth * TAB_MAX_HEIGHT_RATIO;
+        if (!left.isEmpty()) { cell = Math.min(cell, (tabColHeight - 2 * TAB_COLUMN_PAD) / left.size()); }
+        if (!right.isEmpty()) { cell = Math.min(cell, (initH - 2 * TAB_COLUMN_PAD) / right.size()); }
+        cell = Math.max(cell, 1f);
+        tabIconSize = Math.max(1f, Math.min(cell * TAB_ICON_RATIO, tabWidth - valueW - 3 * INFO_TAB_PADDING_X));
+
+        layoutColumn(left, 0, tabColTop, tabWidth, tabColHeight, cell);
+        layoutColumn(right, initW - tabWidth, 0, tabWidth, initH, cell);
     }
 
-    private void layoutColumn(List<InfoTab> column, float x, float top, float w, float h) {
+    private void layoutColumn(List<InfoTab> column, float x, float top, float w, float h, float cell) {
         if (column.isEmpty()) { return; }
-        float tabHeight = h / column.size();
-        float y = top;
+        int n = column.size();
+        //equal gap above, between and below the tabs, capped so tall panels don't spread them too far apart
+        float gap = Math.min((h - cell * n) / (n + 1), cell * 0.35f);
+        float y = top + (h - (cell * n + gap * (n - 1))) / 2;
         for (InfoTab tab : column) {
-            tab.setBounds(x, y, w, tabHeight);
-            y += tabHeight;
+            tab.setBounds(x, Math.round(y), w, cell);
+            y += cell + gap;
         }
     }
 
@@ -579,7 +598,7 @@ public class VPlayerPanel extends FContainer {
     }
 
     private void updateTabLayout(float width, float height) {
-        float x = avatar.getRight();
+        float x = tabColWidth;
         phaseIndicator.resetFont();
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
@@ -604,6 +623,8 @@ public class VPlayerPanel extends FContainer {
         }
         field.setFieldModifier(0);
     }
+
+    public float getCommonTabWidth() { return commonTabWidth; }
 
     @Override
     public void draw(Graphics g) {
@@ -632,8 +653,7 @@ public class VPlayerPanel extends FContainer {
             if (commonTabWidth > 0) {
                 g.fillRect(tabBg, getWidth() - commonTabWidth, 0, commonTabWidth, getHeight());
             }
-            float colTop = avatar.getHeight();
-            g.fillRect(tabBg, 0, colTop, avatar.getWidth(), getHeight() - colTop);
+            g.fillRect(tabBg, 0, 0, tabColWidth, getHeight());
         } else {
             g.fillRect(Color.BLACK, 0, avatar.getTop(), getWidth(), avatarHeight);
         }
@@ -842,6 +862,39 @@ public class VPlayerPanel extends FContainer {
             return getDisplayAreaBackColor();
         }
 
+        //landscape: every icon is fitted into the same square box at the same x, so tabs line up
+        private void drawLandscapeContent(Graphics g) {
+            FSkinImageInterface icon = getIcon();
+            boolean rotated = lblLife.getRotate180();
+            float box = tabIconSize > 0 ? tabIconSize : Math.min(getWidth(), getHeight()) * 0.6f;
+            float gap = INFO_TAB_PADDING_X * 2;
+            float valueW = INFO_FONT.getBounds("00").width;
+            float x0 = Math.max(INFO_TAB_PADDING_X, (getWidth() - (box + gap + valueW)) / 2);
+            float cy = getHeight() / 2;
+
+            //fit the icon inside the box, keeping its proportions
+            float iw = box, ih = box;
+            float ratio = (float) icon.getWidth() / icon.getHeight();
+            if (ratio > 1) { ih = box / ratio; } else { iw = box * ratio; }
+            float ix = x0 + (box - iw) / 2;
+            float iy = cy - ih / 2;
+            float grow = isHovered() ? box / 8f : 0;
+
+            if (rotated) { g.startRotateTransform(ix + iw / 2, cy, 180); }
+            g.drawImage(icon, ix - grow / 2, iy - grow / 2, iw + grow, ih + grow);
+            if (rotated) { g.endTransform(); }
+
+            float tx = x0 + box + gap;
+            float tw = getWidth() - tx + 1;
+            int align = Align.left;
+            if (rotated) {
+                g.startRotateTransform(tx + tw / 2, cy, 180);
+                align = Align.right;
+            }
+            g.drawText(value, INFO_FONT, getInfoForeColor(), tx, 0, tw, getHeight(), false, align, true);
+            if (rotated) { g.endTransform(); }
+        }
+
         @Override
         public void draw(Graphics g) {
             if (Forge.isLandscapeMode() && isCommonZone()) {
@@ -865,10 +918,12 @@ public class VPlayerPanel extends FContainer {
                     y--;
                     h += 2;
                 }
+                float fillY = Forge.isLandscapeMode() ? 0 : (isFlipped() ? INFO_TAB_PADDING_Y : 0);
+                float fillH = Forge.isLandscapeMode() ? getHeight() : getHeight() - INFO_TAB_PADDING_Y;
                 if (drawOverlay)
-                    g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                    g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, fillY, w, fillH);
                 //change the graveyard tab selection color to active phase color to indicate the player has delirium
-                g.fillRect(this.getSelectedBackgroundColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                g.fillRect(this.getSelectedBackgroundColor(), 0, fillY, w, fillH);
                 if (!Forge.isLandscapeMode()) {
                     if (isFlipped()) { //use clip to ensure all corners connect
                         g.startClip(-1, y, w + 2, h);
@@ -883,7 +938,10 @@ public class VPlayerPanel extends FContainer {
                     g.endClip();
                 }
             }
-
+            if (Forge.isLandscapeMode()) {
+                drawLandscapeContent(g);
+                return;
+            }
             FSkinImageInterface icon = this.getIcon();
 
             //show image left of text if wider than tall

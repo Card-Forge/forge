@@ -479,7 +479,7 @@ public class MatchScreen extends FScreen {
             } else {
                 //battlefield cards and stack items: keep clear of the open displays and the tab column
                 if (owner != null) {
-                    right -= owner.getAvatar().getWidth();
+                    right -= owner.getCommonTabWidth();
                     right = Math.min(right, owner.getOpenDisplayScreenLeft());
                 }
                 x = showLeft ? a.x - w - PREVIEW_GAP : a.x + anchorWidth + PREVIEW_GAP;
