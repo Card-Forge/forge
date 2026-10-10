@@ -32,6 +32,11 @@ public record GameEventCardStatsChanged(Collection<CardView> cards, boolean tran
      * @see forge.game.event.GameEvent#visit(forge.game.event.IGameEventVisitor)
      */
     @Override
+    public boolean isRedrawHint() {
+        return true;
+    }
+
+    @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }

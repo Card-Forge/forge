@@ -23,6 +23,11 @@ public record GameEventPlayerStatsChanged(FCollection<PlayerView> players) imple
      * @see forge.game.event.GameEvent#visit(forge.game.event.IGameEventVisitor)
      */
     @Override
+    public boolean isRedrawHint() {
+        return true;
+    }
+
+    @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }

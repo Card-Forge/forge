@@ -3,6 +3,7 @@ package forge.util;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardSplitType;
 import forge.gui.FThreads;
 import forge.gui.download.CdnUuidCache;
 import forge.item.IPaperCard;
@@ -78,15 +79,19 @@ public abstract class ImageFetcher {
         String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
         String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, setCode, card.getCollectorNumber(), edition.getCardsLangCode());
 
-        // Prefer CDN (no rate limit) if this set was already synced; read-only, see getCdnUrlIfCached().
-        if (!StringUtils.isBlank(setCode)) {
+        // Specialize variants are separate Scryfall cards (16w, 16u, ...). The CDN cache is
+        // keyed by the base collector number, so it would return the base card's image.
+        boolean specVariant = card.getRules().getSplitType() == CardSplitType.Specialize
+                && face != null && !face.isEmpty() && !"back".equals(face);
+
+        if (!specVariant && !StringUtils.isBlank(setCode)) {
             String size = useArtCrop ? "art_crop" : "normal";
-            String cdnUrl = forge.gui.download.CdnUuidCache.getCdnUrlIfCached(
-                    setCode, card.getCollectorNumber(), langCode, face, size);
+            String cdnUrl = CdnUuidCache.getCdnUrlIfCached(setCode, card.getCollectorNumber(), langCode, face, size);
             if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
         }
 
-        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
+        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD
+                + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
         if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
     }
 
