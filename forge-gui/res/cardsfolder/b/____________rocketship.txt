@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSticker:DB$ PutSticker | Kind$ Name | Defined$ Self | Optional$ True | SubAbility$ DBSticker2
 SVar:DBSticker2:DB$ PutSticker | Kind$ Name | Defined$ Self | Optional$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever this Vehicle attacks, choose a letter. This Vehicle gets +1/+1 until end of turn for each name sticker on it that begins with the chosen letter.
-SVar:TrigChoose:DB$ ChooseType | Type$ Letter | ValidTypes$ A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z | Defined$ You | SubAbility$ DBPump
+SVar:TrigChoose:DB$ ChooseType | Type$ Letter | Defined$ You | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$CardStickers.NameStartsWith.ChosenType
 SVar:HasAttackEffect:TRUE
