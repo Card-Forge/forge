@@ -64,7 +64,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Forge
  * @version $Id$
  */
-public class AiAttackController {
+public class AiAttackController implements IHasForgeLog {
 
     // possible attackers and blockers
     private List<Card> attackers;
@@ -795,8 +795,6 @@ public class AiAttackController {
         return prefDefender;
     }
 
-    final boolean LOG_AI_ATTACKS = false;
-
     /**
      * <p>
      * Getter for the field <code>attackers</code>.
@@ -983,8 +981,7 @@ public class AiAttackController {
         }
 
         if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
-            if (LOG_AI_ATTACKS)
-                System.out.println("Assault");
+            aiLog.trace("Assault");
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
             for (Card attacker : left) {
@@ -1029,8 +1026,7 @@ public class AiAttackController {
             }
             if (exalted) {
                 CardLists.sortByPowerDesc(this.attackers);
-                if (LOG_AI_ATTACKS)
-                    System.out.println("Exalted");
+                aiLog.trace("Exalted");
                 aiAggression = 6;
                 for (Card attacker : this.attackers) {
                     if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
@@ -1272,22 +1268,21 @@ public class AiAttackController {
             aiAggression = 0;
         } // stay at home to block
 
-        if ( LOG_AI_ATTACKS )
-            System.out.println(aiAggression + " = ai aggression");
+        aiLog.debug("{} aggression {}", ai, aiAggression);
 
         // ****************
         // Evaluation the end
         // ****************
 
-        if ( LOG_AI_ATTACKS )
-            System.out.println("Normal attack");
+        aiLog.trace("Normal attack");
 
         List<Card> left = new ArrayList<>(attackersLeft);
         left = notNeededAsBlockers(combat.getAttackers(), left);
         left = sortAttackers(left);
 
-        if ( LOG_AI_ATTACKS )
-            System.out.println("attackersLeft = " + left);
+        if (aiLog.isTraceEnabled()) {
+            aiLog.trace("attackersLeft = {}", left);
+        }
 
         FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
         possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
@@ -1503,13 +1498,15 @@ public class AiAttackController {
         // if the creature cannot block and can kill all opponents they might as
         // well attack, they do nothing staying back
         if (saf.canKillAll && saf.isWorthLessThanAllKillers && !CombatUtil.canBlock(attacker)) {
-            if (LOG_AI_ATTACKS)
-                System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
+            if (aiLog.isTraceEnabled()) {
+                aiLog.trace("{} = attacking because they can't block, expecting to kill or damage player", attacker.getName());
+            }
             return true;
         }
         if (!saf.canBeKilled && !saf.dangerousBlockersPresent && saf.canTrampleOverDefenders) {
-            if (LOG_AI_ATTACKS)
-                System.out.println(attacker.getName() + " = expecting to survive and get some Trample damage through");
+            if (aiLog.isTraceEnabled()) {
+                aiLog.trace("{} = expecting to survive and get some Trample damage through", attacker.getName());
+            }
             return true;
         }
 
@@ -1517,20 +1514,23 @@ public class AiAttackController {
         switch (aiAggression) {
             case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
                 if ((saf.canKillAll && saf.isWorthLessThanAllKillers) || !saf.canBeBlocked()) {
-                    if (LOG_AI_ATTACKS)
-                        System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
+                    if (aiLog.isTraceEnabled()) {
+                        aiLog.trace("{} = attacking expecting to kill creature, or is unblockable", attacker.getName());
+                    }
                     return true;
                 }
                 break;
             case 5: // all out attacking
-                if (LOG_AI_ATTACKS)
-                    System.out.println(attacker.getName() + " = all out attacking");
+                if (aiLog.isTraceEnabled()) {
+                    aiLog.trace("{} = all out attacking", attacker.getName());
+                }
                 return true;
             case 4: // expecting to at least trade with something, or can attack "for free", expecting no counterattack
                 if (saf.canKillAll || (saf.dangerousBlockersPresent && saf.canKillAllDangerous && !saf.canBeKilledByOne) || !saf.canBeBlocked()
                         || saf.defPower == 0) {
-                    if (LOG_AI_ATTACKS)
-                        System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
+                    if (aiLog.isTraceEnabled()) {
+                        aiLog.trace("{} = attacking expecting to at least trade with something", attacker.getName());
+                    }
                     return true;
                 }
                 break;
@@ -1538,23 +1538,26 @@ public class AiAttackController {
                 if ((saf.canKillAll && saf.isWorthLessThanAllKillers)
                         || (((saf.dangerousBlockersPresent && saf.canKillAllDangerous) || saf.hasAttackEffect || saf.hasCombatEffect) && !saf.canBeKilledByOne)
                         || !saf.canBeBlocked()) {
-                    if (LOG_AI_ATTACKS)
-                        System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
+                    if (aiLog.isTraceEnabled()) {
+                        aiLog.trace("{} = attacking expecting to kill creature or cause damage, or is unblockable", attacker.getName());
+                    }
                     return true;
                 }
                 break;
             case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
                 if (!saf.canBeBlocked() || ((saf.canKillAll || saf.hasAttackEffect || saf.hasCombatEffect) && !saf.canBeKilledByOne &&
                         ((saf.dangerousBlockersPresent && saf.canKillAllDangerous) || !saf.canBeKilled))) {
-                    if (LOG_AI_ATTACKS)
-                        System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
+                    if (aiLog.isTraceEnabled()) {
+                        aiLog.trace("{} = attacking expecting to survive or attract group block", attacker.getName());
+                    }
                     return true;
                 }
                 break;
             case 1: // unblockable creatures only
                 if (!saf.canBeBlocked() || (saf.numberOfPossibleBlockers == 1 && saf.canKillAll && !saf.canBeKilledByOne)) {
-                    if (LOG_AI_ATTACKS)
-                        System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
+                    if (aiLog.isTraceEnabled()) {
+                        aiLog.trace("{} = attacking expecting not to be blocked", attacker.getName());
+                    }
                     return true;
                 }
                 break;
