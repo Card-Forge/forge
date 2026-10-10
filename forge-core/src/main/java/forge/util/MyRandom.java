@@ -30,15 +30,27 @@ import java.util.Random;
  * @version $Id$
  */
 public class MyRandom {
-    /** Constant <code>random</code>. */
-    private static Random random = new SecureRandom();
+    /**
+     * Per-thread random source. Thread-local so concurrent games in one JVM
+     * (headless simulation workers, parallel AI harnesses) that seed their
+     * stream via {@link #setRandom(Random)} cannot contaminate each other's
+     * sequences. Inheritable so threads spawned from a seeded thread (AI
+     * evaluation helpers) continue the parent's stream instead of silently
+     * falling back to an unseeded one. Single-threaded behavior is unchanged.
+     */
+    private static final ThreadLocal<Random> random = new InheritableThreadLocal<Random>() {
+        @Override
+        protected Random initialValue() {
+            return new SecureRandom();
+        }
+    };
 
     /**
      * <p>
      * percentTrue.<br>
      * If percent is like 30, then 30% of the time it will be true.
      * </p>
-     * 
+     *
      * @param percent an int.
      * @return a boolean.
      */
@@ -48,26 +60,27 @@ public class MyRandom {
 
     /**
      * Gets the random.
-     * 
-     * @return the random
+     *
+     * @return the random for the current thread
      */
     public static Random getRandom() {
-        return MyRandom.random;
+        return random.get();
     }
 
     /**
-     * Sets the random provider. Used for deterministic simulation.
+     * Sets the random provider for the current thread (and threads it spawns
+     * afterwards). Used for deterministic simulation.
      * @param random the random
      */
     public static void setRandom(Random random) {
-        MyRandom.random = random;
+        MyRandom.random.set(random);
     }
 
     public static int[] splitIntoRandomGroups(final int value, final int numGroups) {
         int[] groups = new int[numGroups];
 
         for (int i = 0; i < value; i++) {
-            groups[random.nextInt(numGroups)]++;
+            groups[getRandom().nextInt(numGroups)]++;
         }
 
         return groups;
