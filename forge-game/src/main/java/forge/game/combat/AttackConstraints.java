@@ -64,6 +64,9 @@ public class AttackConstraints {
     public Map<Card, AttackRequirement> getRequirements() {
         return requirements;
     }
+    public Multimap<GameEntity, StaticAbility> getPlayerRequirements() {
+        return playerRequirements;
+    }
 
     /**
      * Get a set of legal attackers.
