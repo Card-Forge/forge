@@ -1,0 +1,12 @@
+Name:Summitfest Closing Ceremony
+ManaCost:3 U R
+Types:Instant
+K:Starting intensity:3
+T:Mode$ SpellCast | ValidCard$ Instant.Other,Sorcery.Other | ValidActivatingPlayer$ You | TriggerZones$ Hand,Library,Graveyard,Exile,Stack | Static$ True | Execute$ TrigIntensify | TriggerDescription$ Covercast — Whenever you cast another instant or sorcery spell, if five or more mana was spent to cast it, this card intensifies.
+SVar:TrigIntensify:DB$ Intensify | Defined$ Self | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE5
+SVar:Y:TriggeredCard$CastTotalManaSpent
+A:SP$ Mana | Produced$ U R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SubAbility$ DBDraw | SpellDescription$ Add X {U} and X {R}, where X is this spell's intensity.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+SVar:X:Count$Intensity
+DeckHints:Type$Instant|Sorcery
+Oracle:Starting intensity 3\nCovercast — Whenever you cast another instant or sorcery spell, if five or more mana was spent to cast it, this card intensifies.\nAdd X {U} and X {R}, where X is this spell's intensity.\nDraw a card.
