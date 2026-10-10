@@ -2067,7 +2067,7 @@
     "equipmentSlot": "Left",
     "iconName": "Fblthp'sLostBauble",
     "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Wayfarer's Bauble|PF26"
      ]
@@ -4337,7 +4337,7 @@
     "description": "Grants a token in a special slot with 2, sac: Draw a card.",
     "equipmentSlot": "Token",
     "iconName": "TokenofInvestigation",
-    "cost": 70000,
+    "cost": 50000,
     "effect": {
       "startBattleWithCard": [
         "c_a_clue_draw"
@@ -4349,7 +4349,7 @@
     "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
     "equipmentSlot": "Token",
     "iconName": "TokenofBlood",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
       "startBattleWithCard": [
         "c_a_blood_draw"
@@ -4373,7 +4373,7 @@
     "description": "Grants a token in a special slot with 1, T, sac: Explore.",
     "equipmentSlot": "Token",
     "iconName": "TokenofExploration",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
       "startBattleWithCard": [
         "c_a_map_sac_explore"
@@ -5380,7 +5380,7 @@
     "description": "Grants a token in a special slot with 2, sac: Scry 1 then draw.",
     "equipmentSlot": "Token",
     "iconName": "TokenofInsight",
-    "cost": 90000,
+    "cost": 70000,
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -5405,8 +5405,9 @@
     "description": "Grants a token in a special slot with 2, T, sac: get a tapped basic.",
     "equipmentSlot": "Token",
     "iconName": "TokenofLanding",
-    "cost": 50000,
+    "cost": 70000,
     "effect": {
+      "lifeModifier": -3,
       "changeStartCards": -1,
       "startBattleWithCard": [
         "c_a_lander_sac_search"
@@ -5430,7 +5431,7 @@
     "description": "Grants a 1/1 white/black spirit token with flying in a special slot.",
     "equipmentSlot": "Token",
     "iconName": "TokenofSoaringSpirit",
-    "cost": 80000,
+    "cost": 75000,
     "effect": {
       "startBattleWithCard": [
         "wb_1_1_spirit_flying"
