@@ -70,7 +70,7 @@ public class CardZoom extends FOverlay {
     private static float aspectRatioMultiplier = -1f;
     private static String lastEvaluatedString = "";
     // ---- landscape fan / animation ----
-    private static final float FAN_SPACING = 0.52f; // first neighbour offset, in card widths
+    private static final float FAN_SPACING = 0.6f; // first neighbour offset, in card widths
     private static final float SNAP_SPEED = 14f; // higher = snappier settle
     private static final float ROTATE_SPEED = 12f;
     private static final int FAN_REACH = 2;
@@ -91,8 +91,8 @@ public class CardZoom extends FOverlay {
     private static final int ARC_SEGS = 14;
     private static final float[] arcCos = new float[ARC_SEGS + 1], arcSin = new float[ARC_SEGS + 1];
     private static final float[] headX = new float[2], headY = new float[2];
-    //private static Texture rotateTex;
     private static final boolean FLIP_IF_AFTERMATH = false;
+    private static final float LANDSCAPE_CARD_SCALE = 0.96f;
     // --- Portrait ---
     private static final float PORTRAIT_PEEK_WIDTH = 0.80f; // centre card width as a fraction of the screen
     private static final float PORTRAIT_PEEK_STEP = 0.62f; // neighbour offset as a fraction of screen width (~10% sliver)
@@ -845,8 +845,8 @@ public class CardZoom extends FOverlay {
                 Gdx.graphics.requestRendering();
                 return true;
             }
-            int hit = hitTestFan(x, y); // tap a neighbouring card to bring it to the centre
-            if (hit >= 0 && hit != currentIndex) {
+            int hit = hitTestFan(x, y); // with larger view on landscape we cant tap the cards to close zoom
+            if (hit >= 0 && hit != currentIndex && !Forge.isLandscapeMode()) {
                 targetPos = hit;
                 resetAltState();
                 Gdx.graphics.requestRendering();
@@ -993,11 +993,11 @@ public class CardZoom extends FOverlay {
         final float cardCy = h / 2 + (1f - ease) * h * 0.04f; // rises into place when opening, sinks when closing
         final float btnCy = h - messageHeight - pad - btnD / 2;
         final float maxCardHeight = h - aspectRatioMultiplier * messageHeight;
-        final float areaH = maxCardHeight;
+        final float areaH = Forge.isLandscapeMode() ? maxCardHeight * LANDSCAPE_CARD_SCALE : maxCardHeight;
 
         float cardWidth, cardHeight, step;
         if (Forge.isLandscapeMode()) {
-            cardHeight = maxCardHeight;
+            cardHeight = maxCardHeight * LANDSCAPE_CARD_SCALE;
             cardWidth = cardHeight / FCardPanel.ASPECT_RATIO;
             step = cardWidth * FAN_SPACING;
         } else {
