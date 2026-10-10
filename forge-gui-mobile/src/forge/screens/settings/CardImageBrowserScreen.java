@@ -45,8 +45,8 @@ public class CardImageBrowserScreen extends FScreen {
     private final FButton           btnDownload;
     private final FButton           btnSyncBulkData;
     private final FComboBox<String> cbxIndexLang;
-    private final FButton           btnSyncBulkDataLang;
     private final FCheckBox         cbPreferLangForUnique;
+    private final Map<String, String> cardLangMapping;
     private final FProgressBar      bulkSyncProgress;
     private final FButton           btnClearCdnCache;
 
@@ -87,13 +87,10 @@ public class CardImageBrowserScreen extends FScreen {
                 btnDownload.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
                 y += BTN_HEIGHT + PADDING;
 
-                btnSyncBulkData.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
-                y += BTN_HEIGHT + PADDING;
-
                 cbxIndexLang.setBounds(x, y, w, FIELD_HEIGHT);
                 y += FIELD_HEIGHT + PADDING;
 
-                btnSyncBulkDataLang.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
+                btnSyncBulkData.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
                 y += BTN_HEIGHT + PADDING;
 
                 float checkboxHeight = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
@@ -178,15 +175,13 @@ public class CardImageBrowserScreen extends FScreen {
 
         // ── Bulk data sync buttons ───────────────────────────────────────────
         btnSyncBulkData = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnSyncBulkCardData")));
-        btnSyncBulkData.setCommand(e -> startBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English"));
+        btnSyncBulkData.setCommand(e -> startBulkSync());
 
-        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
         cbxIndexLang = scroller.add(new FComboBox<>());
         cbxIndexLang.setFont(FSkinFont.get(12));
         for (Map.Entry<String, String> entry : cardLangMapping.entrySet()) {
-            if (!"en".equalsIgnoreCase(entry.getValue())) {
-                cbxIndexLang.addItem(entry.getKey());
-            }
+            cbxIndexLang.addItem(entry.getKey());
         }
         final String savedLangCode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
         cardLangMapping.entrySet().stream()
@@ -198,17 +193,6 @@ public class CardImageBrowserScreen extends FScreen {
         cbPreferLangForUnique = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("cbPreferLangForUniqueCards"),
                 FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)));
 
-        btnSyncBulkDataLang = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnSyncBulkCardDataLang")));
-        btnSyncBulkDataLang.setCommand(e -> {
-            String selectedLangName = cbxIndexLang.getSelectedItem();
-            String selectedLangCode = cardLangMapping.get(selectedLangName);
-            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG, selectedLangCode);
-            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS,
-                    String.valueOf(cbPreferLangForUnique.isSelected()));
-            FModel.getPreferences().save();
-            applyPreferredLanguageAvailability(selectedLangCode);
-            startBulkSync(ScryfallBulkDataSync.BULK_TYPE_ALL_CARDS, new HashSet<>(Arrays.asList("en", selectedLangCode)), selectedLangName);
-        });
         bulkSyncProgress = scroller.add(new FProgressBar());
 
         // ── Clear CDN cache button ─────────────────────────────────────────────
@@ -275,7 +259,7 @@ public class CardImageBrowserScreen extends FScreen {
         FThreads.invokeInEdtLater(() -> {
             CardImageBrowserScreen screen = new CardImageBrowserScreen();
             Forge.openScreen(screen);
-            screen.runBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English");
+            screen.runBulkSync(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS, null, "English", "en");
         });
     }
 
@@ -288,25 +272,34 @@ public class CardImageBrowserScreen extends FScreen {
         }
     }
 
-    private void startBulkSync(String bulkDataType, Set<String> allowedLangs, String langLabel) {
+    private void startBulkSync() {
+        final String langLabel = cbxIndexLang.getSelectedItem();
+        final String langCode = cardLangMapping.get(langLabel);
+        final boolean english = langCode == null || "en".equalsIgnoreCase(langCode);
+        final String bulkDataType = english ? ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS : ScryfallBulkDataSync.BULK_TYPE_ALL_CARDS;
+        final Set<String> allowedLangs = english ? null : new HashSet<>(Arrays.asList("en", langCode));
+        final String message = english
+                ? Forge.getLocalizer().getMessage("lblSyncBulkCardDataConfirm", ScryfallBulkDataSync.approxSizeLabel(bulkDataType))
+                : Forge.getLocalizer().getMessage("lblSyncBulkCardDataLangConfirm", langLabel,
+                        ScryfallBulkDataSync.approxSizeLabel(bulkDataType),
+                        ScryfallBulkDataSync.approxSizeLabel(ScryfallBulkDataSync.BULK_TYPE_DEFAULT_CARDS));
         // SOptionPane.showConfirmDialog() blocks its caller while the dialog renders on the EDT,
         // so it must never be called directly from a tap handler (which runs on the EDT itself)
         // -- that throws immediately and the whole method aborts before any UI update happens.
         FThreads.invokeInBackgroundThread(() -> {
-            if (!SOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSyncBulkCardDataConfirm", ScryfallBulkDataSync.approxSizeLabel(bulkDataType)))) {
+            if (!SOptionPane.showConfirmDialog(message)) {
                 return;
             }
-            runBulkSync(bulkDataType, allowedLangs, langLabel);
+            runBulkSync(bulkDataType, allowedLangs, langLabel, english ? "en" : langCode);
         });
     }
 
     /** Runs the sync itself; always hops onto its own background thread, so it's safe to call from the EDT or not. */
-    private void runBulkSync(String bulkDataType, Set<String> allowedLangs, String langLabel) {
+    private void runBulkSync(String bulkDataType, Set<String> allowedLangs, String langLabel, String langCode) {
         FThreads.invokeInBackgroundThread(() -> {
             FThreads.invokeInEdtLater(() -> {
                 btnDownload.setEnabled(false);
                 btnSyncBulkData.setEnabled(false);
-                btnSyncBulkDataLang.setEnabled(false);
                 btnClearCdnCache.setEnabled(false);
                 bulkSyncProgress.reset();
                 bulkSyncProgress.setMaximum(100);
@@ -330,10 +323,14 @@ public class CardImageBrowserScreen extends FScreen {
             FThreads.invokeInEdtLater(() -> {
                 btnDownload.setEnabled(true);
                 btnSyncBulkData.setEnabled(true);
-                btnSyncBulkDataLang.setEnabled(true);
                 btnClearCdnCache.setEnabled(true);
                 bulkSyncProgress.setShowProgressTrail(false);
                 if (setCount >= 0) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG, langCode);
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS,
+                            String.valueOf(cbPreferLangForUnique.isSelected()));
+                    FModel.getPreferences().save();
+                    applyPreferredLanguageAvailability(langCode);
                     bulkSyncProgress.setValue(100);
                     bulkSyncProgress.setDescription(Forge.getLocalizer().getMessage("lblBulkCardDataSynced") + " (" + setCount + " sets) - " + langLabel);
                     scheduleStatsUpdate();
