@@ -16,6 +16,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinImageInterface;
+import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -490,13 +491,24 @@ public class VPlayerPanel extends FContainer {
             y -= displayAreaHeight;
         }
 
-        field.setCommandZoneWidth(0);
-        field.setBounds(0, 0, width, y);
+        //command zone size first, so the field's second row leaves room for it
+        int cmdCount = commandZone.getCount();
+        float cmdHeight = y / 2;
+        float cmdWidth = Math.min(cmdCount, 2) * commandZone.getCardWidth(cmdHeight);
+        field.setCommandZoneWidth(cmdCount > 0 ? cmdWidth + 1 : 0);
+        field.setBounds(0, 0, width, y); //the only field.setBounds, and it must be before the flip
 
         if (isFlipped()) { //flip all positions across x-axis if needed
             for (FDisplayObject child : getChildren()) {
                 child.setTop(height - child.getBottom());
             }
+        }
+
+        //command zone is positioned after the flip, so it gets its flipped position directly
+        commandZone.setVisible(cmdCount > 0);
+        if (cmdCount > 0) {
+            float top = isFlipped() ? height - y : y - cmdHeight;
+            commandZone.setBounds(width - cmdWidth, top, cmdWidth, cmdHeight);
         }
 
         //this is used for landscape so set this to 0
@@ -615,9 +627,15 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
-        if (Forge.isLandscapeMode() && commonTabWidth > 0) {
-            g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2),
-                    getWidth() - commonTabWidth, 0, commonTabWidth, getHeight());
+        if (Forge.isLandscapeMode()) {
+            FSkinColor tabBg = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2);
+            if (commonTabWidth > 0) {
+                g.fillRect(tabBg, getWidth() - commonTabWidth, 0, commonTabWidth, getHeight());
+            }
+            float colTop = avatar.getHeight();
+            g.fillRect(tabBg, 0, colTop, avatar.getWidth(), getHeight() - colTop);
+        } else {
+            g.fillRect(Color.BLACK, 0, avatar.getTop(), getWidth(), avatarHeight);
         }
         float y;
         InfoTab infoTab = selectedTab;
@@ -986,8 +1004,8 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
-        protected boolean isTabShown() { //tab only exists while it has cards or is open
-            return isSelected() || displayArea.getCount() > 0;
+        protected boolean isTabShown() {
+            return Forge.isLandscapeMode() && (isSelected() || displayArea.getCount() > 0 || commandProgress > 0f);
         }
 
         @Override
@@ -1262,12 +1280,25 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
+        protected void refreshCardPanels(Iterable<CardView> model) {
+            int oldCount = getCount();
+            super.refreshCardPanels(model);
+            if (!Forge.isLandscapeMode() && getCount() != oldCount) {
+                setVisible(getCount() > 0);
+                VPlayerPanel.this.revalidate();
+            }
+        }
+
+        @Override
         protected boolean layoutVerticallyForLandscapeMode() {
             return false; //single row that scrolls left/right
         }
 
         @Override
         public void draw(Graphics g) {
+            if (Forge.isLandscapeMode() && commandVisibleWidth < 1f) {
+                return;
+            }
             if (commandProgress < 1f && Forge.isLandscapeMode()) {
                 //only the part that has slid out from the field edge is visible
                 g.startClip(0, 0, commandVisibleWidth, getHeight());
