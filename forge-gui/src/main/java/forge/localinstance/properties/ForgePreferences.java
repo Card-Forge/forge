@@ -85,6 +85,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_REVERSE_PROMPT_BUTTON ("false"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
+        UI_HIDE_PHASESTOP("false"),
         UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT ("true"),
         UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT ("true"),
         UI_OPEN_PACKS_INDIV ("false"),

@@ -24,6 +24,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.screens.match.views.VPhaseIndicator;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -300,6 +301,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         MatchController.instance.resetPlayerPanels();
                 }
             }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
+            Forge.getLocalizer().getMessageorUseDefault("lblHidePhaseStop", "Hide Phase stop (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlHidePhaseStop", "When enabled, Phase stop is covered by Phase name label. Tap the label to access Phase stop.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPhaseIndicator.HIDE_PHASESTOP = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_PHASESTOP);
+            }
+        }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
             Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"),
             Forge.getLocalizer().getMessage("nlAnimatedCardTapUntap")) {
