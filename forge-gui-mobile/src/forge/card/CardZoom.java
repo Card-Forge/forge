@@ -1,9 +1,6 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
@@ -73,18 +70,15 @@ public class CardZoom extends FOverlay {
     private static float aspectRatioMultiplier = -1f;
     private static String lastEvaluatedString = "";
     // ---- landscape fan / animation ----
-    //private static final float FAN_DEGREES = 6f;     // tilt per card step; flip the sign if the fan curls the wrong way
-    //private static final float FAN_DROP = 0.04f;      // how far outer cards sink (in card heights); gives the ∩ arc
-    //private static final float FAN_TILT_SIGN = -1f;   // if the cards lean inward instead of outward, change to 1f
-    private static final float FAN_SPACING = 0.52f;  // first neighbour offset, in card widths
-    private static final float SNAP_SPEED = 14f;     // higher = snappier settle
+    private static final float FAN_SPACING = 0.52f; // first neighbour offset, in card widths
+    private static final float SNAP_SPEED = 14f; // higher = snappier settle
     private static final float ROTATE_SPEED = 12f;
     private static final int FAN_REACH = 2;
     private static final int MAX_FAN = 2 * FAN_REACH + 3;
     private static float scrollPos, targetPos, fanCardWidth = 1f;
     private static boolean dragging, panIgnored, fanActive;
     private static boolean cardRotated;
-    private static float rotAnim;                    // 0..1, animated version of cardRotated
+    private static float rotAnim; // 0..1, animated version of cardRotated
     private static final HashMap<Integer, CardView> viewCache = new HashMap<>();
     private static final int[] fanOrder = new int[MAX_FAN];
     private static final int[] hitIdx = new int[MAX_FAN];
@@ -94,24 +88,21 @@ public class CardZoom extends FOverlay {
     private static final Rectangle leftArrow = new Rectangle(), rightArrow = new Rectangle();
     private static boolean leftArrowVisible, rightArrowVisible;
     private static boolean showRotateBtn;
-    //private static final Rectangle rotateHit = new Rectangle();
-    //private static final Color BTN_ON = Color.valueOf("#3A7BD5");
-    //private static final Color BTN_OFF = Color.valueOf("#303030");
     private static final int ARC_SEGS = 14;
     private static final float[] arcCos = new float[ARC_SEGS + 1], arcSin = new float[ARC_SEGS + 1];
     private static final float[] headX = new float[2], headY = new float[2];
     //private static Texture rotateTex;
     private static final boolean FLIP_IF_AFTERMATH = false;
     // --- Portrait ---
-    private static final float PORTRAIT_PEEK_WIDTH = 0.80f;  // centre card width as a fraction of the screen
-    private static final float PORTRAIT_PEEK_STEP = 0.62f;   // neighbour offset as a fraction of screen width (~10% sliver)
-    private static float fanStep = 1f;                        // pixels between neighbouring cards, set every frame
+    private static final float PORTRAIT_PEEK_WIDTH = 0.80f; // centre card width as a fraction of the screen
+    private static final float PORTRAIT_PEEK_STEP = 0.62f; // neighbour offset as a fraction of screen width (~10% sliver)
+    private static float fanStep = 1f; // pixels between neighbouring cards, set every frame
     // --- buttons ---
     private static TextureAtlas transformAtlas;
     private static boolean transformLoadFailed;
     private static FImage imgFlip, imgMutate, imgRotate, imgRotateMirror;
     private static final float OFFSCREEN = -100000f;
-    private static final int BTN_MUTATE = 0, BTN_SPECIALIZE = 1, BTN_ROTATE = 2, BTN_FLIP = 3;   // left-to-right order
+    private static final int BTN_MUTATE = 0, BTN_SPECIALIZE = 1, BTN_ROTATE = 2, BTN_FLIP = 3; // left-to-right order
     private static final int BTN_COUNT = 4;
     private static final boolean[] btnOn = new boolean[BTN_COUNT];
     private static final float[] btnAlpha = new float[BTN_COUNT];
@@ -120,8 +111,8 @@ public class CardZoom extends FOverlay {
 
     private static FImage imgSpecialize;
     private static boolean showSpecializeBtn, showSpecialized;
-    private static boolean spreadNext;                 // set right before show() to fan the new cards out of a stack
-    private static float spreadT = 1f;                 // 0 = stacked on the centre card, 1 = fully fanned
+    private static boolean spreadNext; // set right before show() to fan the new cards out of a stack
+    private static float spreadT = 1f; // 0 = stacked on the centre card, 1 = fully fanned
     private static final float SPREAD_SECONDS = 0.45f;
 
     private static final float OPEN_SECONDS = 0.22f, CLOSE_SECONDS = 0.16f;
@@ -131,6 +122,12 @@ public class CardZoom extends FOverlay {
     private static boolean flipping, flipToggled;
     private static float flipT;
     private static Runnable flipAction;
+    private static boolean backAfterClose;
+    private static float rowShow, stillTime; // rowShow: 0 = whole row hidden, 1 = shown; stillTime: how long the cards have been still
+    // --- previous ---
+    private record Saved(List<?> items, int index, int initial, ActivateHandler handler, boolean advBack, boolean merged, boolean specialized) {}
+    private static final ArrayDeque<Saved> backStack = new ArrayDeque<>();
+    private static boolean nestedShow; // set right before show() when opening a list from inside the zoom
 
     static {
         for (int i = 0; i < MAX_FAN; i++)
@@ -149,6 +146,20 @@ public class CardZoom extends FOverlay {
             headY[s] = (float) Math.sin(ha);
         }
         for (int i = 0; i < BTN_COUNT; i++) btnHit[i] = new Rectangle(OFFSCREEN, OFFSCREEN, 0, 0);
+    }
+
+    private static void pushState() {
+        backStack.push(new Saved(items, currentIndex, initialIndex, activateHandler, isAdvBack, showMerged, showSpecialized));
+    }
+
+    private static void popState() {
+        Saved s = backStack.pop();
+        nestedShow = true;
+        spreadNext = true;
+        show(s.items(), s.index(), s.handler(), s.advBack());
+        showMerged = s.merged();
+        showSpecialized = s.specialized();
+        initialIndex = s.initial(); // keeps "selected index on close" behaving as it did originally
     }
 
     public static void show(Object item) {
@@ -171,6 +182,9 @@ public class CardZoom extends FOverlay {
     }
 
     public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0, boolean advBack) {
+        final boolean nested = nestedShow;
+        nestedShow = false;
+        if (!nested) backStack.clear(); // a fresh open starts a new history
         items = items0;
         isAdvBack = advBack;
         if (items == null) { return; }
@@ -190,7 +204,7 @@ public class CardZoom extends FOverlay {
         spreadNext = false;
         final boolean wasOpen = cardZoom.isVisible() && !closing;
         closing = false;
-        if (!wasOpen) openT = 0f;                    // fresh open: play the open animation
+        if (!wasOpen) openT = 0f; // fresh open: play the open animation
         cardZoom.show();
     }
 
@@ -200,7 +214,7 @@ public class CardZoom extends FOverlay {
 
     public static void hideZoom() {
         if (isAdvBack) {
-            Forge.back();
+            requestClose();
             return;
         }
         if (activateHandler != null)
@@ -262,7 +276,7 @@ public class CardZoom extends FOverlay {
         float oldColor = b.getPackedColor();
         float a = g.getfloatAlphaComposite() * alpha;
         if (tint)
-            b.setColor(0.45f, 0.7f, 1f, a);        // blue tint (multiplies the image colours)
+            b.setColor(0.45f, 0.7f, 1f, a); // blue tint (multiplies the image colours)
         else
             b.setColor(1f, 1f, 1f, a);
         g.drawImage(img, cx - d / 2, cy - d / 2, d, d);
@@ -285,16 +299,34 @@ public class CardZoom extends FOverlay {
         btnOn[BTN_ROTATE] = showRotateBtn;
         btnOn[BTN_FLIP] = flipIconBounds != null;
 
+        // the row only shows once the cards have stopped moving
+        boolean still = !dragging && spreadT >= 1f && Math.abs(scrollPos - currentIndex) < 0.02f && Math.abs(targetPos - scrollPos) < 0.02f;
+        stillTime = still ? stillTime + dt : 0f;
+        float rowTarget = stillTime > 0.06f ? 1f : 0f;
+        boolean moving = false;
+        if (Math.abs(rowTarget - rowShow) > 0.01f) {
+            float rate = rowTarget > rowShow ? 12f : 30f;                   // fade in gently, fade out fast
+            rowShow += (rowTarget - rowShow) * (1f - (float) Math.exp(-rate * dt));
+            moving = true;
+        } else {
+            rowShow = rowTarget;
+        }
+        final boolean hidden = rowShow < 0.02f;
+
         int n = 0;
         for (boolean on : btnOn) if (on) n++;
 
         float f = 1f - (float) Math.exp(-16f * dt);
-        boolean moving = false;
         int k = 0;
         for (int i = 0; i < BTN_COUNT; i++) {
             float targetAlpha = btnOn[i] ? 1f : 0f;
-            if (btnOn[i]) {
-                float tx = k++ - (n - 1) / 2f;
+            float tx = btnOn[i] ? k++ - (n - 1) / 2f : btnSlot[i];
+            if (hidden) {                                                   // not visible: jump straight to the final layout
+                btnAlpha[i] = targetAlpha;
+                btnSlot[i] = tx;
+                continue;
+            }
+            if (btnOn[i]) {                                                 // visible: changes (rotate appears, etc.) animate
                 if (btnAlpha[i] < 0.02f) {
                     btnSlot[i] = tx;
                 } else if (Math.abs(tx - btnSlot[i]) > 0.002f) {
@@ -318,7 +350,8 @@ public class CardZoom extends FOverlay {
         loadTransformIcons();
         float step = actionStep(d);
         float hit = step * 0.94f;
-        float settle = (fanActive ? clamp01(1f - Math.abs(scrollPos - currentIndex) * 3f) : 1f) * spreadT;
+        float settle = rowShow;
+        //float settle = (fanActive ? clamp01(1f - Math.abs(scrollPos - currentIndex) * 3f) : 1f) * spreadT;
 
         for (int i = 0; i < BTN_COUNT; i++) {
             float a = btnAlpha[i] * settle;
@@ -356,8 +389,10 @@ public class CardZoom extends FOverlay {
             }
         }
         if (!specializedCardsList.isEmpty()) {
+            pushState();
             showSpecialized = true;
-            spreadNext = true;                       // fan the five colour versions out of the card
+            spreadNext = true; // fan the five colour versions out of the card
+            nestedShow = true;
             show(specializedCardsList, 0, null);
         }
     }
@@ -368,7 +403,7 @@ public class CardZoom extends FOverlay {
     }
 
     private static void startFlip(Runnable toggle) {
-        if (!zoomMode) {                       // text view: no animation (the font would re-wrap every frame)
+        if (!zoomMode) { // text view: no animation (the font would re-wrap every frame)
             toggle.run();
             updateRotateButton();
             return;
@@ -397,9 +432,7 @@ public class CardZoom extends FOverlay {
     }
 
     private void closeZoom() {
-        hide();
-        if (isAdvBack)
-            Forge.back();
+        requestClose();
     }
 
     private void tapButton(int i) {
@@ -552,7 +585,7 @@ public class CardZoom extends FOverlay {
         boolean can = zoomMode && canRotate(currentCard);
         showRotateBtn = can;
         if (!can && cardRotated)
-            cardRotated = false;        // card changed into something that can't rotate: swing it back upright
+            cardRotated = false; // card changed into something that can't rotate: swing it back upright
     }
 
     private static void toggleRotate() {
@@ -624,9 +657,9 @@ public class CardZoom extends FOverlay {
             moving = true;
             if (closeT >= 1f && !hidePosted) {
                 hidePosted = true;
-                Gdx.app.postRunnable(() -> {         // never hide from inside the draw call
+                Gdx.app.postRunnable(() -> {
                     hidePosted = false;
-                    if (closing) cardZoom.finishHide();
+                    if (closing) cardZoom.completeClose();
                 });
             }
         } else if (openT < 1f) {
@@ -665,7 +698,7 @@ public class CardZoom extends FOverlay {
         }
         float x = cx - cw / 2, y = cy - ch / 2;
         if (Math.abs(tilt) > 0.05f) {
-            g.startRotateTransform(cx, cy, tilt);          // rotate around the card's own centre
+            g.startRotateTransform(cx, cy, tilt); // rotate around the card's own centre
             drawFace(g, cv, gv, alt, current, x, y, cw, ch, screenW, screenH);
             g.endTransform();
         } else {
@@ -703,13 +736,13 @@ public class CardZoom extends FOverlay {
             boolean current = idx == currentIndex;
             float alpha = clamp01(1f - Math.max(0f, ad - 1.5f));
             if (!current) alpha *= 1f - rotAnim;
-            if (!current) alpha *= clamp01(sp * 1.5f);                           // neighbours appear as they leave the stack
+            if (!current) alpha *= clamp01(sp * 1.5f);
             if (alpha <= 0.02f) continue;
 
-            float scale = ((!zoomMode && current) ? 1f : 1f - 0.12f * Math.min(ad, 3f)) * (current ? 1f : 0.9f + 0.1f * sp);
+            float scale = (!zoomMode && current) ? 1f : 1f - 0.12f * Math.min(ad, 3f);
             float dist = (ad <= 1f ? step * ad : step + 0.38f * cw * (ad - 1f)) * sp;
             float cx = w / 2 + Math.signum(d) * dist;
-            if (Math.abs(cx - w / 2) - cw * scale / 2 > w / 2) continue;   // completely off screen: don't draw it
+            if (Math.abs(cx - w / 2) - cw * scale / 2 > w / 2) continue; // completely off screen: don't draw it
 
             g.setAlphaComposite(oldAlpha * alpha);
             drawCard(g, gv, cv, current, cx, cy, cw * scale * (current ? flipScaleX() : 1f), ch * scale, 0f, w, h, maxVisH, tmpBounds);
@@ -721,7 +754,7 @@ public class CardZoom extends FOverlay {
     }
 
     private static int hitTestFan(float x, float y) {
-        for (int i = hitCount - 1; i >= 0; i--) {   // nearest first
+        for (int i = hitCount - 1; i >= 0; i--) { // nearest first
             if (hitRects[i].contains(x, y)) return hitIdx[i];
         }
         return -1;
@@ -729,17 +762,17 @@ public class CardZoom extends FOverlay {
 
     private static void drawScrollArrows(Graphics g, float w, float cy) {
         leftArrowVisible = rightArrowVisible = false;
-        if (!fanActive || !Forge.isLandscapeMode() || spreadT < 1f || items == null || items.size() < 2 || rotAnim > 0.01f) return;
-
-        float s = Math.max(FDialog.MSG_HEIGHT * 0.45f, Utils.AVG_FINGER_WIDTH * 0.3f);   // arrow half-height
+        if (!fanActive || !Forge.isLandscapeMode() || spreadT < 1f || items == null || items.size() < 2 || rotAnim > 0.01f)
+            return;
+        float s = Math.max(FDialog.MSG_HEIGHT * 0.45f, Utils.AVG_FINGER_WIDTH * 0.3f); // arrow half-height
         float pad = Utils.scale(10);
-        float t = Utils.scale(3);                                                          // line thickness
+        float t = Utils.scale(3); // line thickness
         float hitW = Math.max(s * 2.5f + pad, Utils.AVG_FINGER_WIDTH);
         float hitH = Math.max(s * 4, Utils.AVG_FINGER_WIDTH * 1.5f);
         float oldAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(0.85f);
 
-        if (scrollPos > 0.5f) {                    // there is a card to the left
+        if (scrollPos > 0.5f) { // there is a card to the left
             float x0 = pad;
             g.drawLine(t + 2, Color.BLACK, x0 + s * 0.5f, cy - s, x0, cy);
             g.drawLine(t + 2, Color.BLACK, x0, cy, x0 + s * 0.5f, cy + s);
@@ -748,7 +781,7 @@ public class CardZoom extends FOverlay {
             leftArrow.set(0, cy - hitH / 2, hitW, hitH);
             leftArrowVisible = true;
         }
-        if (scrollPos < items.size() - 1.5f) {     // there is a card to the right
+        if (scrollPos < items.size() - 1.5f) { // there is a card to the right
             float x1 = w - pad;
             g.drawLine(t + 2, Color.BLACK, x1 - s * 0.5f, cy - s, x1, cy);
             g.drawLine(t + 2, Color.BLACK, x1, cy, x1 - s * 0.5f, cy + s);
@@ -775,19 +808,24 @@ public class CardZoom extends FOverlay {
         }
         if (btnHit[BTN_MUTATE].contains(x, y)) {
             if (showMerged) {
-                closeZoom();
+                if (!backStack.isEmpty()) popState(); // back to the list you came from
+                else closeZoom();
             } else if (currentCard != null && !currentCard.getMergedCardsCollection().isEmpty()) {
+                pushState();
                 showMerged = true;
-                spreadNext = true;                   // fan the merged cards out of the stack
+                spreadNext = true;
+                nestedShow = true;
                 show(currentCard.getMergedCardsCollection(), 0, null);
             }
             return true;
         }
         if (btnHit[BTN_SPECIALIZE].contains(x, y)) {
-            if (showSpecialized)
-                closeZoom();
-            else
+            if (showSpecialized) {
+                if (!backStack.isEmpty()) popState();
+                else closeZoom();
+            } else {
                 openSpecialized();
+            }
             return true;
         }
         if (btnHit[BTN_FLIP].contains(x, y)) {
@@ -807,7 +845,7 @@ public class CardZoom extends FOverlay {
                 Gdx.graphics.requestRendering();
                 return true;
             }
-            int hit = hitTestFan(x, y);            // tap a neighbouring card to bring it to the centre
+            int hit = hitTestFan(x, y); // tap a neighbouring card to bring it to the centre
             if (hit >= 0 && hit != currentIndex) {
                 targetPos = hit;
                 resetAltState();
@@ -824,7 +862,7 @@ public class CardZoom extends FOverlay {
         if (closing) return true;
         if (!fanActive || items == null || panIgnored) return false;
         if (!dragging) {
-            if (moreVertical) {                // vertical swipes (details / activate) stay with fling()
+            if (moreVertical) { // vertical swipes (details / activate) stay with fling()
                 panIgnored = true;
                 return false;
             }
@@ -834,7 +872,7 @@ public class CardZoom extends FOverlay {
         float step = Math.max(1f, fanStep);
         float delta = -deltaX / step;
         float next = scrollPos + delta;
-        if (next < 0 || next > items.size() - 1) {   // rubber band at the ends
+        if (next < 0 || next > items.size() - 1) { // rubber band at the ends
             delta *= 0.35f;
             next = scrollPos + delta;
         }
@@ -861,7 +899,10 @@ public class CardZoom extends FOverlay {
                 int base = dir > 0 ? (int) Math.floor(scrollPos + 0.001f) : (int) Math.ceil(scrollPos - 0.001f);
                 int t = base + dir;
                 if (t < 0 || t >= items.size()) {
-                    if (isAdvBack) Forge.back();
+                    if (isAdvBack) {
+                        requestClose();
+                        return true;
+                    }
                     targetPos = Math.max(0, Math.min(items.size() - 1, Math.round(scrollPos)));
                 } else {
                     targetPos = t;
@@ -934,25 +975,26 @@ public class CardZoom extends FOverlay {
             }
         }
 
-        final float btnD = rotateBtnSize(messageHeight);
-        final float pad = Utils.scale(6);
-        final float cardCy = h / 2;
-        final float btnCy = h - messageHeight - pad - btnD / 2;
-        final float maxCardHeight = h - aspectRatioMultiplier * messageHeight;
-        final float areaH = maxCardHeight;
-
-        if (!fanActive) {                       // first frame after show()
+        if (!fanActive) { // first frame after show()
             scrollPos = targetPos = currentIndex;
             fanActive = true;
         }
         advanceAnimation(true);
-        final float ease = closing ? 1f - clamp01(closeT) * clamp01(closeT)
-                : 1f - (float) Math.pow(1f - openT, 3);     // ease-out when opening
-        final float os = 0.88f + 0.12f * ease;                                  // content scales 88% -> 100%
+
+        // open/close = fade + small slide only. Never resize the cards: that re-lays-out card text every frame.
+        final float c = clamp01(closeT);
+        final float ease = closing ? 1f - c * c * (3f - 2f * c)
+                : 1f - (float) Math.pow(1f - openT, 3);
         final float baseAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(baseAlpha * ease);
 
-        // card size and spacing: landscape fan, or portrait peek / full-width pager
+        final float btnD = rotateBtnSize(messageHeight);
+        final float pad = Utils.scale(6);
+        final float cardCy = h / 2 + (1f - ease) * h * 0.04f; // rises into place when opening, sinks when closing
+        final float btnCy = h - messageHeight - pad - btnD / 2;
+        final float maxCardHeight = h - aspectRatioMultiplier * messageHeight;
+        final float areaH = maxCardHeight;
+
         float cardWidth, cardHeight, step;
         if (Forge.isLandscapeMode()) {
             cardHeight = maxCardHeight;
@@ -967,9 +1009,6 @@ public class CardZoom extends FOverlay {
             }
             step = oneCardView ? w * 1.04f : w * PORTRAIT_PEEK_STEP;
         }
-        cardWidth *= os;
-        cardHeight *= os;
-        step *= os;
         drawFan(g, gameView, w, h, cardCy, cardWidth, cardHeight, step, areaH);
 
         float y = cardCy - cardHeight / 2;
@@ -980,13 +1019,13 @@ public class CardZoom extends FOverlay {
         if (isAdvBack) {
             String message;
             if (items.size() > 1) {
-                message = "Swipe Left/Right to navigate Zoom";
+                message = "Swipe Left/Right/Tap to navigate";
                 if (currentIndex == 0)
-                    message = "Swipe Right to close Zoom";
+                    message = "Swipe Right/Tap to close";
                 else if (currentIndex == items.size() - 1)
-                    message = "Swipe Left to close Zoom";
+                    message = "Swipe Left/Tap to close";
             } else
-                message = "Swipe Left/Right to close Zoom";
+                message = "Swipe Left/Right/Tap to close";
 
             g.fillRect(FDialog.getMsgBackColor(), 0, 0, w, messageHeight);
             g.drawText(message, FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, 0, w, messageHeight, false, Align.center, true);
@@ -997,7 +1036,7 @@ public class CardZoom extends FOverlay {
         g.fillRect(FDialog.getMsgBackColor(), 0, h - messageHeight, w, messageHeight);
         g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
-        drawActionRow(g, w / 2, rowCy, btnD);   // buttons last so nothing draws over them
+        drawActionRow(g, w / 2, rowCy, btnD); // buttons last so nothing draws over them
         g.setAlphaComposite(baseAlpha);
         interrupt(false);
     }
@@ -1034,14 +1073,32 @@ public class CardZoom extends FOverlay {
 
     @Override
     public void hide() {
-        if (closing) { finishHide(); return; }
-        if (isVisible() && fanActive && !isAdvBack) {
+        if (closing) { // a second hide request finishes the close immediately
+            finishHide();
+            return;
+        }
+        if (isVisible() && fanActive) {
             closing = true;
             closeT = 0f;
             Gdx.graphics.requestRendering();
             return;
         }
         finishHide();
+    }
+
+    private void completeClose() {
+        final boolean back = backAfterClose;
+        finishHide();
+        if (back) Forge.back();
+    }
+
+    /** The one way to close the zoom: fades out, then (adventure) goes back. */
+    private static void requestClose() {
+        final boolean back = isAdvBack;
+        backAfterClose = back;
+        cardZoom.hide();
+        if (back && !closing) // it had to close immediately instead of animating
+            Forge.back();
     }
 
     private void finishHide() {
@@ -1063,7 +1120,11 @@ public class CardZoom extends FOverlay {
         showMerged = false;
         showSpecialized = false;
         spreadT = 1f;
+        rowShow = 0f;
+        stillTime = 0f;
         Arrays.fill(btnAlpha, 0f);
+        backAfterClose = false;
+        backStack.clear();
         super.hide();
     }
 
@@ -1073,8 +1134,7 @@ public class CardZoom extends FOverlay {
         if (isAdvBack) {
             if (keyCode == Input.Keys.ESCAPE || keyCode == Input.Keys.BACK) {
                 if (Forge.endKeyInput()) { return true; }
-
-                Forge.back();
+                requestClose();
                 return true;
             }
         }
