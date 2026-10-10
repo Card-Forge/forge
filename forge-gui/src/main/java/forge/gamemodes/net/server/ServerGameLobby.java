@@ -6,6 +6,7 @@ import forge.deck.DeckSection;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
+import forge.gamemodes.limited.SealedDeckBuilder;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
@@ -23,8 +24,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     /** Returned by {@link #startDraftEvent} with the info the UI needs for overlay/log setup. */
@@ -47,17 +51,20 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     }
 
     /**
-     * A configured draft caps the lobby at its pod size, so the seats can never
-     * outnumber the pod. The cap lifts once the draft is over and the lobby is
-     * only being used to set up the match.
+     * A configured event caps the lobby at its pod size, so the seats can never
+     * outnumber the pod. The cap lifts once the draft is over or the sealed pools
+     * are out, and the lobby is only being used to set up the match.
      */
     @Override
     public int getSlotLimit() {
-        BoosterDraft draft = currentEvent == null ? null : currentEvent.getDraft();
-        if (draft != null && (draftHost == null || !draftHost.isFinished())) {
-            return Math.min(super.getSlotLimit(), draft.getPodSize());
+        NetworkEvent event = currentEvent;
+        if (event == null || event.getPodSize() <= 0) {
+            return super.getSlotLimit();
         }
-        return super.getSlotLimit();
+        boolean podInUse = event.getDraft() != null
+                ? draftHost == null || !draftHost.isFinished()
+                : event.getPhase() == EventPhase.LOBBY_GATHER;
+        return podInUse ? Math.min(super.getSlotLimit(), event.getPodSize()) : super.getSlotLimit();
     }
 
     /** Set the lobby's declared mode (Constructed / Limited) and broadcast to clients. */
@@ -256,10 +263,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         }
     }
 
-    /**
-     * Fill remaining seats up to targetSize with AI participants.
-     * AI seats are for draft pick selection only — they are not match opponents.
-     */
+    /** Fill remaining seats up to targetSize with AI participants. */
     public synchronized void fillRemainingWithAI(int targetSize) {
         NetworkEvent event = getCurrentEvent();
         int currentSize = event.getParticipants().size();
@@ -360,6 +364,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         if (event == null) return;
         netLog.info("Starting sealed — product={}", event.getProductDescription());
         populateParticipants();
+        fillRemainingWithAI(event.getPodSize());
         event.setPhase(EventPhase.POOL_DISTRIBUTION);
         // Broadcast the now-populated event so clients see the phase change.
         updateView(true);
@@ -367,8 +372,9 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     }
 
     /**
-     * Generate sealed pools and send one to each human participant.
-     * Each pool is 6 boosters opened into a CardPool, wrapped in a Deck.
+     * Generate sealed pools, send one to each human participant and save a deck
+     * built from one for each AI participant. Each pool is 6 boosters opened into
+     * a CardPool, wrapped in a Deck.
      */
     public synchronized void generateAndDistributeSealedPools() {
         NetworkEvent event = getCurrentEvent();
@@ -389,8 +395,11 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
 
         String eventId = event.getEventId();
         FServerManager server = FServerManager.getInstance();
+        List<EventParticipant> participants = event.getParticipants();
 
-        for (EventParticipant participant : event.getParticipants()) {
+        // Humans draw their pools first, so a product that runs out of cards only costs AI decks
+        Map<EventParticipant, Deck> humanPools = new LinkedHashMap<>();
+        for (EventParticipant participant : participants) {
             if (participant.isAI()) {
                 continue;
             }
@@ -404,10 +413,34 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
             Deck deck = new Deck(NetworkEvent.poolNameFor(event));
             deck.getOrCreate(DeckSection.Sideboard).addAll(pool);
             NetworkEvent.setEventTags(deck, event);
+            humanPools.put(participant, deck);
+        }
 
-            server.sendToSlot(participant.getLobbySlotIndex(),
-                    new ReceiveEventPoolEvent(eventId, deck));
-            netLog.info("Sent sealed pool to {} ({} cards)", participant.getName(), pool.countAll());
+        Map<Integer, Supplier<Deck>> botDecks = new LinkedHashMap<>();
+        for (EventParticipant participant : participants) {
+            if (!participant.isAI()) {
+                continue;
+            }
+            CardPool pool;
+            try {
+                pool = gen.getCardPool(false);
+            } catch (IllegalStateException e) {
+                netLog.warn(e, "Product ran out of cards; no more AI pools");
+                break;
+            }
+            if (pool == null) {
+                continue;
+            }
+            botDecks.put(participant.getSeatIndex(),
+                    () -> new SealedDeckBuilder(pool.toFlatList()).buildDeck(gen.getLandSetCode()));
+        }
+        NetworkEvent.saveBotDecks(event, participants, botDecks);
+
+        for (Map.Entry<EventParticipant, Deck> entry : humanPools.entrySet()) {
+            EventParticipant participant = entry.getKey();
+            server.sendToSlot(participant.getLobbySlotIndex(), new ReceiveEventPoolEvent(eventId, entry.getValue()));
+            netLog.info("Sent sealed pool to {} ({} cards)", participant.getName(),
+                    entry.getValue().get(DeckSection.Sideboard).countAll());
         }
     }
 
