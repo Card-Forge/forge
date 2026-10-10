@@ -518,31 +518,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {
         localLobby.applyToSlot(index, event);
-
-        if (event.getReady() != null) {
-            broadcastReadyState(localLobby.getSlot(index).getName(), event.getReady());
-        }
-    }
-
-    private void broadcastReadyState(String playerName, boolean isReady) {
-        int readyCount = 0;
-        int totalPlayers = 0;
-        for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
-            LobbySlot slot = localLobby.getSlot(i);
-            if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
-                totalPlayers++;
-                if (slot.isReady()) {
-                    readyCount++;
-                }
-            }
-        }
-        if (isReady) {
-            broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
-                playerName, readyCount, totalPlayers)));
-        } else {
-            broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
-                playerName, readyCount, totalPlayers)));
-        }
     }
 
     public IGuiGame getGui(final int index) {
@@ -1184,7 +1159,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                 }
                 // Clean the name before it reaches the slot, not just before it
                 // reaches our own record of the client: the slot name is what
-                // every peer renders and what broadcastReadyState echoes.
+                // every peer renders.
                 final String newName = LogSafe.forDisplay(event.getName(), maxNameLength());
                 event.setName(newName);
                 localLobby.applyToSlot(client.getIndex(), event);
@@ -1194,9 +1169,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                         client.setUsername(newName);
                         broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
                     }
-                }
-                if (event.getReady() != null) {
-                    broadcastReadyState(client.getUsername(), event.getReady());
                 }
                 return;
             } else if (msg instanceof DraftPickEvent pickEvent) {
