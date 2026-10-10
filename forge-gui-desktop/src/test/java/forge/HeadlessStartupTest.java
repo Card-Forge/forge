@@ -1,5 +1,8 @@
 package forge;
 
+import forge.error.ExceptionHandler;
+import forge.gui.GuiBase;
+import forge.gui.error.BugReporter;
 import forge.view.Main;
 import org.testng.annotations.Test;
 
@@ -69,6 +72,23 @@ public class HeadlessStartupTest {
                 result.output.contains("inputDialogNullInitial="));
         assertFalse("showInputDialog must never return null headless:\n" + result.output,
                 result.output.contains("inputDialogNullInitial=null"));
+    }
+
+    /**
+     * Uncaught exceptions and crash reporting must not attempt to display GUI dialogs or
+     * throw HeadlessException in a headless environment.
+     */
+    public void exceptionHandlerDegradesHeadless() throws Exception {
+        ProbeResult result = runHeadless(ExceptionHandlerProbe.class.getName(), true);
+        assertEquals("probe failed, output was:\n" + result.output, 0, result.exitCode);
+        assertTrue("expected uncaught exception banner in output, got:\n" + result.output,
+                result.output.contains("=== UNCAUGHT EXCEPTION IN THREAD"));
+        assertTrue("expected exception message in output, got:\n" + result.output,
+                result.output.contains("Test uncaught headless exception"));
+        assertTrue("expected probe completion marker, got:\n" + result.output,
+                result.output.contains("exceptionHandlerProbeCompleted"));
+        assertFalse("must not throw HeadlessException, got:\n" + result.output,
+                result.output.contains("HeadlessException"));
     }
 
     /**
@@ -277,6 +297,18 @@ public class HeadlessStartupTest {
                     + gui.showInputDialog("msg", "title", null, "keep-me", null, false));
             System.out.println("inputDialogNullInitial="
                     + gui.showInputDialog("msg", "title", null, null, null, false));
+        }
+    }
+
+    /** Runs in the forked JVM: exercises ExceptionHandler and BugReporter headless. */
+    public static final class ExceptionHandlerProbe {
+        public static void main(final String[] args) {
+            GuiBase.setInterface(new GuiDesktop());
+            ExceptionHandler handler = new ExceptionHandler();
+            handler.uncaughtException(Thread.currentThread(), new RuntimeException("Test uncaught headless exception"));
+            BugReporter.reportException(new RuntimeException("Test direct reportException headless"));
+            BugReporter.reportBug("Test direct reportBug headless");
+            System.out.println("exceptionHandlerProbeCompleted");
         }
     }
 }
