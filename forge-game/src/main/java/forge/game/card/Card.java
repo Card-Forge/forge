@@ -3392,7 +3392,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final SpellAbility getFirstSpellAbility() {
-        return Iterables.getFirst(currentState.getNonManaAbilities(), null);
+        return currentState.getFirstSpellAbility();
     }
 
     public final SpellPermanent getSpellPermanent() {
