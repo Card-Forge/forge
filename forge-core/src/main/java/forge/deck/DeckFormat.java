@@ -82,6 +82,63 @@ public enum DeckFormat {
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
+    // Pauper Commander (PDH): an uncommon commander (doesn't need to be legendary) and 99 commons.
+    // The card pool and ban list come from res/formats/Casual/PauperCommander.txt.
+    PauperCommander ( Range.is(99),                     Range.of(0, 10), 1, null,
+            card -> {
+                final Predicate<PaperCard> pdhPredicate = StaticData.instance().getPauperCommanderPredicate();
+                return pdhPredicate == null || pdhPredicate.test(card);
+            }
+    ) {
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            if (!rules.canBePauperCommander()) {
+                return false;
+            }
+            final PaperCard card = StaticData.instance().getCommonCards().getCard(rules.getName());
+            if (card == null) {
+                return true;
+            }
+            // The ban list in res/formats/Casual/PauperCommander.txt covers the commander too
+            final Predicate<PaperCard> banned = StaticData.instance().getPauperCommanderBannedPredicate();
+            if (banned != null && banned.test(card)) {
+                return false;
+            }
+            return StaticData.instance().getCommonCards().wasPrintedAtRarity(CardRarity.Uncommon).test(card);
+        }
+
+        @Override
+        public boolean isLegalCommanderPartnership(CardRules a, CardRules b) {
+            return a.canBePauperPartnerCommanders(b);
+        }
+
+        @Override
+        public String getDeckConformanceProblem(Deck deck) {
+            final String problem = super.getDeckConformanceProblem(deck);
+            if (problem != null) {
+                return problem;
+            }
+            // Commander decks only check the CardRules-based pool filter above, so check PDH's
+            // printing-based card pool (commons only, minus the ban list) here.
+            final Set<String> illegalCards = new TreeSet<>();
+            for (final Entry<PaperCard, Integer> cp : deck.getMain()) {
+                if (!isLegalCard(cp.getKey())) {
+                    illegalCards.add(cp.getKey().getName());
+                }
+            }
+            if (deck.has(DeckSection.Sideboard)) {
+                for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                    if (!isLegalCard(cp.getKey())) {
+                        illegalCards.add(cp.getKey().getName());
+                    }
+                }
+            }
+            if (!illegalCards.isEmpty()) {
+                return "contains cards that are not legal in Pauper Commander (not common, or banned):\n" + String.join("\n", illegalCards);
+            }
+            return null;
+        }
+    },
     Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
@@ -170,7 +227,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl || this == PauperCommander;
     }
 
     public boolean hasSignatureSpell() {
@@ -471,7 +528,7 @@ public enum DeckFormat {
                 PaperCard a = commanders.get(0);
                 PaperCard b = commanders.get(1);
 
-                if (!a.getRules().canBePartnerCommanders(b.getRules())) {
+                if (!isLegalCommanderPartnership(a.getRules(), b.getRules())) {
                     return "has an illegal commander partnership";
                 }
             }
@@ -686,6 +743,11 @@ public enum DeckFormat {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
+    }
+
+    /** Whether two commanders may lead a deck together (partner, Background, and similar pairings). */
+    public boolean isLegalCommanderPartnership(CardRules a, CardRules b) {
+        return a.canBePartnerCommanders(b);
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {

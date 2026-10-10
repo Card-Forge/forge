@@ -359,6 +359,7 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Premodern.txt");
             coreFormats.add("Pauper.txt");
             coreFormats.add("PreDH.txt");
+            coreFormats.add("PauperCommander.txt");
         }
         
         public Reader(File forgeFormats, File customFormats, boolean includeArchived) {

@@ -2056,9 +2056,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        if (game.getRules().hasAppliedVariant(GameType.Commander)) {
+        if (game.getRules().hasAppliedVariant(GameType.Commander) || game.getRules().hasAppliedVariant(GameType.PauperCommander)) {
+            final int commanderDamageToLose = game.getRules().getCommanderDamageToLose();
             for (Entry<Card, Integer> entry : getCommanderDamage()) {
-                if (entry.getValue() >= 21 && loseConditionMet(GameLossReason.CommanderDamage, null)) {
+                if (entry.getValue() >= commanderDamageToLose && loseConditionMet(GameLossReason.CommanderDamage, null)) {
+                    // record the amount for the loss message (21, or 16 in Pauper Commander)
+                    setOutcome(PlayerOutcome.commanderDamageLoss(commanderDamageToLose));
                     return true;
                 }
             }
