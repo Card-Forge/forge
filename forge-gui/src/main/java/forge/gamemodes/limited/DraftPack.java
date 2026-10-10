@@ -13,6 +13,8 @@ public class DraftPack extends ForwardingList<PaperCard> {
     private final int id;
     private LimitedPlayer passedFrom;
     private Map.Entry<LimitedPlayer, PaperCard> awaitingGuess;
+    private LimitedPlayer spyWatcher;
+    private LimitedPlayer destination;
 
     public DraftPack(List<PaperCard> cards, int id) {
         this.cards = cards;
@@ -41,6 +43,23 @@ public class DraftPack extends ForwardingList<PaperCard> {
 
     public void resetAwaitingGuess() {
         this.awaitingGuess = null;
+    }
+
+    public LimitedPlayer getSpyWatcher() {
+        return spyWatcher;
+    }
+
+    public void setSpyWatcher(LimitedPlayer spyWatcher) {
+        this.spyWatcher = spyWatcher;
+    }
+
+    /** A Canal Dredger recipient chosen before the pack is passed; null passes normally. */
+    public LimitedPlayer getDestination() {
+        return destination;
+    }
+
+    public void setDestination(LimitedPlayer destination) {
+        this.destination = destination;
     }
 
     @Override

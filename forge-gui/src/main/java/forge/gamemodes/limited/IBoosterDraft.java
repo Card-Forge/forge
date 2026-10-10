@@ -41,10 +41,10 @@ public interface IBoosterDraft {
     CardPool nextChoice();
 
     default boolean setChoice(PaperCard c) {
-        return setChoice(c, DeckSection.Sideboard);
+        return setChoice(c, DeckSection.Sideboard, null);
     }
 
-    boolean setChoice(PaperCard c, DeckSection section);
+    boolean setChoice(PaperCard c, DeckSection section, DraftAction variant);
     void skipChoice();
     boolean hasNextChoice();
     boolean isRoundOver();
@@ -73,7 +73,8 @@ public interface IBoosterDraft {
     void setLogEntry(IDraftLog draftingProcess);
     IDraftLog getDraftLog();
     boolean shouldShowDraftLog();
-    void addLog(String message);
+    void addLog(String message, PaperCard card);
+    void addPrivateLog(LimitedPlayer seat, String message, PaperCard card);
     void postDraftActions();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
     LimitedPlayer getPlayer(int i);

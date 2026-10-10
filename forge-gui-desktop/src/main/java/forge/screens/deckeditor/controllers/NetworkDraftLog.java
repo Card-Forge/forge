@@ -1,6 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.gamemodes.net.EventParticipant;
+import forge.item.PaperCard;
 import forge.util.Localizer;
 
 import java.awt.Color;
@@ -17,6 +18,7 @@ public final class NetworkDraftLog {
     private static final Color COLOR_MY_PICK = new Color(50, 200, 50);      // green
     private static final Color COLOR_MY_PICK_AUTO = new Color(225, 90, 90); // red
     private static final Color COLOR_OTHER_PICK = new Color(180, 180, 180); // light gray
+    private static final Color COLOR_DRAFT_EVENT = new Color(215, 185, 110); // light amber
 
     private static final String BANNER = "======================================";
 
@@ -66,6 +68,10 @@ public final class NetworkDraftLog {
         String key = auto ? "lblDraftLogMyAutoPick" : "lblDraftLogMyPick";
         String base = localizer.getMessage(key, cardName, String.valueOf(packNumber), String.valueOf(pickInPack));
         log(base + waitingSuffix(queueDepth), auto ? COLOR_MY_PICK_AUTO : COLOR_MY_PICK);
+    }
+
+    public static void logDraftEvent(String message, PaperCard card) {
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message, COLOR_DRAFT_EVENT, card);
     }
 
     private static String waitingSuffix(int queueDepth) {
