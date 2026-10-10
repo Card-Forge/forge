@@ -23,6 +23,7 @@ import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
+import forge.deck.DeckType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
@@ -106,7 +107,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         Map<ColumnDef, ItemTableColumn> colOverrides = null;
         if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
             colOverrides = new HashMap<>();
-            final ItemTableColumn column = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS)));
+            final ItemColumnConfig actionsConfig = config0.getCols().get(ColumnDef.DECK_ACTIONS);
+            if (getReadOnlyDeckType(config0) != null) {
+                actionsConfig.setPreferredWidth(DeckActionsRenderer.imgSize);
+            }
+            final ItemTableColumn column = new ItemTableColumn(new ItemColumn(actionsConfig));
             column.setCellRenderer(new DeckActionsRenderer());
             colOverrides.put(ColumnDef.DECK_ACTIONS, column);
         }
@@ -326,13 +331,38 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public void editDeck(final DeckProxy deck) {
+        final DeckType readOnlyType = deck == null ? null : getReadOnlyDeckType(getConfig());
+        if (readOnlyType == null) {
+            editDeck(deck, null);
+            return;
+        }
+
+        final Localizer localizer = Localizer.getInstance();
+        if (FOptionPane.showConfirmDialog(readOnlyType + " " + localizer.getMessage("lblCannotEditDuplicateCustomDeck").replace("%s", deck.getName()),
+                localizer.getMessage("lblDuplicateDeck"), localizer.getMessage("lblDuplicate"), localizer.getMessage("lblCancel"))) {
+            editDeck(null, deck.getDeck());
+        }
+    }
+
+    private static DeckType getReadOnlyDeckType(final ItemManagerConfig config) {
+        switch (config) {
+            case PRECON_DECKS:
+                return DeckType.PRECONSTRUCTED_DECK;
+            case COMMANDER_PRECON_DECKS:
+                return DeckType.PRECON_COMMANDER_DECK;
+            default:
+                return null;
+        }
+    }
+
+    private void editDeck(final DeckProxy deck, final Deck copyOf) {
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
         if (deck != null && DeckProxy.getEventTag(deck.getDeck(), "eventFormat") != null) {
             screen = CEditorLimited.networkEventEditorScreen(deck.getDeck());
             editorCtrl = new CEditorLimited<>(FModel.getDecks().getNetworkEventDecks(), Deck::new, screen, getCDetailPicture());
-            openEditor(deck, screen, editorCtrl);
+            openEditor(deck, null, screen, editorCtrl);
             return;
         }
 
@@ -383,10 +413,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 return;
         }
 
-        openEditor(deck, screen, editorCtrl);
+        openEditor(deck, copyOf, screen, editorCtrl);
     }
 
-    private void openEditor(final DeckProxy deck, final FScreen screen, final ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl) {
+    private void openEditor(final DeckProxy deck, final Deck copyOf, final FScreen screen, final ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl) {
         if (!Singletons.getControl().ensureScreenActive(screen)) {
             return;
         }
@@ -401,6 +431,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         if (deck != null) {
             CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        } else if (copyOf != null) {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadCopy(copyOf);
         } else {
             CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
         }
@@ -473,7 +505,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
                 final DeckProxy deck = (DeckProxy) value;
 
-                if (x >= 0 && x < imgSize) { //delete button
+                if (getReadOnlyDeckType(getConfig()) != null) { //edit button only
+                    DeckManager.this.editDeck(deck);
+                }
+                else if (x >= 0 && x < imgSize) { //delete button
                     if (DeckManager.this.deleteDeck(deck)) {
                         e.consume();
                         return;
@@ -522,6 +557,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             }
 
+            if (getReadOnlyDeckType(getConfig()) != null) {
+                FSkin.drawImage(g, icoEdit, 0, -1, imgSize, imgSize);
+                return;
+            }
             FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoDelete, 0, 0, imgSize, imgSize);
             FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoEdit, imgSize - 1, -1, imgSize, imgSize);
         }
