@@ -213,7 +213,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                     ev.flipper().getName(),
                     Localizer.getInstance().getMessage(heads ? "lblHeads" : "lblTails"));
         }
-        matchController.showCoinFlip(heads, msg, ev.startingToss());   // tap required only for the opening toss
+        matchController.showCoinFlip(heads, msg, false);   // always auto-close after the coin lands
         return null;
     }
 
