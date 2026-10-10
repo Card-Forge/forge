@@ -579,17 +579,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Which basic land is least available from hand and play, that I still
         // have in my deck
         int minSize = Integer.MAX_VALUE;
+        int minMissing = 0;
         String minType = null;
 
         for (String b : basics) {
             // average between well rounded mana base and shards that were missing
-            int num = CardLists.getType(combined, b).size();
-            if (!basicTypes.isEmpty()) {
-                num /= basicTypes.getOrDefault(b, 0) + 1;
-            }
-            if (num < minSize) {
+            int missing = basicTypes.getOrDefault(b, 0);
+            int num = CardLists.getType(combined, b).size() / (missing + 1);
+            if (num < minSize || (num == minSize && missing > minMissing)) {
                 minType = b;
                 minSize = num;
+                minMissing = missing;
             }
         }
 
@@ -602,7 +602,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             list = CardLists.filter(list, CardPredicates.NONBASIC_LANDS);
         }
 
-        return list.get(0);
+        // of those the one that also has the types of the missing shards
+        return Aggregates.itemWithMax(list, c -> basicTypes.entrySet().stream()
+                .filter(e -> c.getType().hasSubtype(e.getKey())).mapToInt(Entry::getValue).sum());
     }
 
     /**
