@@ -197,6 +197,13 @@ public class AnimateAi extends SpellAbilityAi {
                         bFlag = true;
                     }
                 }
+                if (!bFlag && "Permanent".equals(sa.getParam("Duration"))) {
+                    // Account for improvements represented by other animation changes, such as
+                    // removing defender or adding an unblockable static ability.
+                    final Card animatedCopy = becomeAnimated(c, sa);
+                    bFlag = ComputerUtilCard.evaluateCreature(animatedCopy)
+                            > ComputerUtilCard.evaluateCreature(c);
+                }
             }
 
             if (!isSorcerySpeed(sa, aiPlayer) && !"Permanent".equals(sa.getParam("Duration"))) {
