@@ -1094,14 +1094,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (!defined && !changeType.isEmpty() && !changeType.startsWith("EACH")) {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
-            if (destination == ZoneType.Battlefield && !sa.hasParam("FaceDown")
-                    && !sa.hasParam("AttachedTo") && !sa.hasParam("AttachedToPlayer") && !sa.hasParam("AttachAfter")) {
-                // CR 303.4g an Aura with nothing to enchant would stay where it is
-                fetchList.removeIf(c -> c.isAura() && !c.isBestowed()
-                        && game.getPlayers().stream().noneMatch(PlayerPredicates.canBeAttached(c, null))
-                        && !game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.canBeAttached(c, null))
-                        && !game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.canBeAttached(c, null)));
-            }
             fetchList.sort();
 
             if (sa.hasParam("NoShuffle") || "False".equals(sa.getParam("Shuffle"))) {
