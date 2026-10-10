@@ -107,6 +107,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private ReplacementEffect sagaRep;
     private ReplacementEffect adventureRep;
     private ReplacementEffect omenRep;
+    private ReplacementEffect vengeanceRep;
 
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
@@ -764,6 +765,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             result.add(omenRep);
         }
+        if (type.hasSubtype("Vengeance")) {
+            if (this.vengeanceRep == null) {
+                vengeanceRep = CardFactoryUtil.setupVengeanceAbility(this);
+            }
+            result.add(vengeanceRep);
+        }
 
         return result;
     }
@@ -957,6 +964,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             if (source.omenRep != null) {
                 omenRep = source.omenRep.copy(card, true);
+            }
+            if (source.vengeanceRep != null) {
+                vengeanceRep = source.vengeanceRep.copy(card, true);
             }
 
             for (Map.Entry<MagicColor.Color, SpellAbility> e : source.landManaAbilities.entrySet()) {
