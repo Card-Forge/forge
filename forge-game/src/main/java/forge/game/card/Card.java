@@ -5363,6 +5363,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateKeywords();
     }
 
+    /**
+     * @return the ids of the static abilities granting a hidden keyword starting with keywordStart,
+     *         0 for keywords granted by effects without static ability
+     */
+    public final List<Long> getHiddenExtrinsicKeywordStaticIds(final String keywordStart) {
+        final List<Long> result = Lists.newArrayList();
+        for (Table.Cell<Long, Long, List<String>> cell : hiddenExtrinsicKeywords.cellSet()) {
+            if (cell.getValue().stream().anyMatch(k -> k.startsWith(keywordStart))) {
+                result.add(cell.getColumnKey());
+            }
+        }
+        return result;
+    }
+
     public final void removeHiddenExtrinsicKeywords(long timestamp, long staticId) {
         if (hiddenExtrinsicKeywords.remove(timestamp, staticId) != null) {
             updateNonAbilityTextForView();

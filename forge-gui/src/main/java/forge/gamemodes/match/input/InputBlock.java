@@ -20,6 +20,7 @@ package forge.gamemodes.match.input;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatExplainer;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventCombatUpdate;
@@ -27,11 +28,13 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.events.UiEventBlockerAssigned;
+import forge.gui.util.SOptionPane;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +53,8 @@ public class InputBlock extends InputSyncronizedBase {
     // some cards may block several creatures at a time. (ex:  Two-Headed Dragon, Vanguard's Shield)
     private final Combat combat;
     private final Player defender;
+    // why the last selected creature(s) couldn't be declared as blocker, shown with the prompt
+    private String rejectionReason = null;
 
     public InputBlock(final PlayerControllerHuman controller, final Player defender0, final Combat combat0) {
         super(controller);
@@ -81,6 +86,9 @@ public class InputBlock extends InputSyncronizedBase {
         } else {
             String attackerName = currentAttacker.isFaceDown() ? localizer.getMessage("lblMorph") : currentAttacker.getDisplayName() + " (" + currentAttacker.getId() + ")";
             String message = localizer.getMessage("lblSelectBlocker") + attackerName + " " + localizer.getMessage("lblOrSelectBlockTarget");
+            if (rejectionReason != null) {
+                message += "\n\n" + rejectionReason;
+            }
             showMessage(message);
         }
 
@@ -111,7 +119,15 @@ public class InputBlock extends InputSyncronizedBase {
             stop();
         } else {
             //must run in game thread to prevent problems for mobile game
-            ThreadUtil.invokeInGameThread(() -> getController().getGui().message(blockErrors));
+            ThreadUtil.invokeInGameThread(() -> {
+                final Localizer localizer = Localizer.getInstance();
+                final String title = localizer.getMessage("lblCombatDeclareBlockersStep");
+                final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalBlocks"));
+                // only suggest legal blocks when asked for, closing the dialog counts as OK
+                if (getController().getGui().showOptionDialog(blockErrors, title, SOptionPane.WARNING_ICON, options, 0) == 1) {
+                    getController().getGui().message(CombatExplainer.suggestLegalBlocks(combat, defender), title);
+                }
+            });
         }
     }
 
@@ -119,6 +135,7 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     public final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         boolean isCorrectAction = false;
+        rejectionReason = null;
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
@@ -155,15 +172,22 @@ public class InputBlock extends InputSyncronizedBase {
                     combat.addBlocker(currentAttacker, card);
                     card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
                             CardView.get(card), CardView.get(currentAttacker)));
+                    final List<String> reasons = new ArrayList<>();
                     if (otherCardsToSelect != null) {
                         for (Card c : otherCardsToSelect) {
                             if (CombatUtil.canBlock(currentAttacker, c, combat)) {
                                 combat.addBlocker(currentAttacker, c);
                                 c.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
                                         CardView.get(c), CardView.get(currentAttacker)));
+                            } else if (c.isCreature() && defender.getZone(ZoneType.Battlefield).contains(c)
+                                    && !combat.isBlocking(c, currentAttacker)) {
+                                reasons.add(CombatExplainer.whyCantBlock(currentAttacker, c, combat));
                             }
                         }
                     }
+                    rejectionReason = reasons.isEmpty() ? null : String.join("\n", reasons);
+                } else {
+                    rejectionReason = CombatExplainer.whyCantBlock(currentAttacker, card, combat);
                 }
             }
         }
