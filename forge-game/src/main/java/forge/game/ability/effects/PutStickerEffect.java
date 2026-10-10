@@ -102,42 +102,49 @@ public class PutStickerEffect extends SpellAbilityEffect {
         int placed = 0;
 
         for (final Card target : chooseObjects(sa, game)) {
-            // CR 123.3b
-            final Player owner = target.getOwner();
-            if (owner == null || !owner.equals(sa.getActivatingPlayer())) {
-                continue;
+            if (chooseAndPlaceSticker(sa, target, optional)) {
+                sa.setSVar(PLACED, Integer.toString(++placed));
             }
-            if (!game.getCardState(target, null).equalsWithGameTimestamp(target)) {
-                continue;
-            }
-
-            final List<Sticker> options = availableStickers(sa, owner);
-            if (options.isEmpty()) {
-                continue;
-            }
-
-            Sticker chosen = owner.getController().chooseSticker(options, target, sa, optional);
-            if (chosen == null) {
-                continue;
-            }
-
-            if (chosen.getTickets() > 0 && !sa.hasParam("NoTicketCost")) {
-                owner.subtractCounter(CounterEnumType.TICKET, chosen.getTickets(), owner);
-            }
-
-            int position = 0;
-            if (chosen.getKind() == StickerKind.NAME) {
-                position = owner.getController().chooseStickerNamePosition(chosen, target);
-                sa.setSVar(VOWELS, Integer.toString(chosen.getUniqueVowelCount()));
-            }
-            target.addSticker(new AppliedSticker(chosen, game.getNextTimestamp(), position));
-            sa.setSVar(PLACED, Integer.toString(++placed));
-
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Card, target);
-            runParams.put(AbilityKey.Player, owner);
-            runParams.put(AbilityKey.StickerKind, chosen.getKind());
-            game.getTriggerHandler().runTrigger(TriggerType.StickerPlaced, runParams, false);
         }
+    }
+
+    public static boolean chooseAndPlaceSticker(SpellAbility sa, Card target, boolean optional) {
+        final Game game = sa.getActivatingPlayer().getGame();
+        final Player owner = target.getOwner();
+        // CR 123.3b
+        if (owner == null || !owner.equals(sa.getActivatingPlayer())) {
+            return false;
+        }
+        if (!game.getCardState(target, null).equalsWithGameTimestamp(target)) {
+            return false;
+        }
+
+        final List<Sticker> options = availableStickers(sa, owner);
+        if (options.isEmpty()) {
+            return false;
+        }
+        Sticker chosen = owner.getController().chooseSticker(options, target, sa, optional);
+        if (chosen == null) {
+            return false;
+        }
+
+        if (chosen.getTickets() > 0 && !sa.hasParam("NoTicketCost")) {
+            owner.subtractCounter(CounterEnumType.TICKET, chosen.getTickets(), owner);
+        }
+
+        int position = 0;
+        if (chosen.getKind() == StickerKind.NAME) {
+            position = owner.getController().chooseStickerNamePosition(chosen, target);
+            sa.setSVar(VOWELS, Integer.toString(chosen.getUniqueVowelCount()));
+        }
+        target.addSticker(new AppliedSticker(chosen, game.getNextTimestamp(), position));
+
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Card, target);
+        runParams.put(AbilityKey.Player, owner);
+        runParams.put(AbilityKey.StickerKind, chosen.getKind());
+        game.getTriggerHandler().runTrigger(TriggerType.StickerPlaced, runParams, false);
+        return true;
     }
 }

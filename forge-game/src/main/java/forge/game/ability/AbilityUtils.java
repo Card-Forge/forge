@@ -1693,7 +1693,7 @@ public class AbilityUtils {
 
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
-                    boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0);
+                    boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude(ctb) > 0);
                     return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
@@ -2047,7 +2047,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("Kicked")) { // fallback for not spellAbility
-            return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude(ctb) > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("PromisedGift")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isGiftPromised() ? 1 : 2], ctb), expr, c, ctb);
@@ -2121,7 +2121,7 @@ public class AbilityUtils {
             return doXMath(c.getKeywordMagnitude(Keyword.smartValueOf(l[0].split(" ")[1])), expr, c, ctb);
         }
         if (sq[0].contains("TimesKicked")) {
-            return doXMath(isUnlinkedFromCastSA(ctb, c) ? 0 : c.getKickerMagnitude(), expr, c, ctb);
+            return doXMath(isUnlinkedFromCastSA(ctb, c) ? 0 : c.getKickerMagnitude(ctb), expr, c, ctb);
         }
         if (sq[0].contains("TimesMutated")) {
             return doXMath(c.getTimesMutated(), expr, c, ctb);

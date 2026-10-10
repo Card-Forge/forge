@@ -683,6 +683,19 @@ public final class GameActionUtil {
                 if (result != null) {
                     result.setOptionalKeywordAmount(ki, v);
                 }
+            } else if (o.startsWith("Sticker Kicker")) {
+                String[] k = o.split(":");
+                final Cost cost = new Cost(k[1], false);
+                String str = "Pay for Sticker Kicker? " + cost.toSimpleString();
+                cost.add(new Cost("AddCounterYou<1/TICKET> PutSticker", false));;
+                if (pc.addKeywordCost(sa, cost, ki, str)) {
+                    if (result == null) {
+                        result = sa.copy();
+                    }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                    result.setOptionalKeywordAmount(ki, 1);
+                }
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);

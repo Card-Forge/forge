@@ -648,7 +648,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isKicked() {
         return isOptionalCostPaid(OptionalCost.Kicker1) || isOptionalCostPaid(OptionalCost.Kicker2) ||
-                getRootAbility().getOptionalKeywordAmount(Keyword.MULTIKICKER) > 0;
+                getRootAbility().getOptionalKeywordAmount(Keyword.MULTIKICKER) > 0 ||
+                getRootAbility().getOptionalKeywordAmount(Keyword.STICKER_KICKER) > 0;
     }
 
     public boolean isEntwine() {

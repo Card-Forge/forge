@@ -3224,6 +3224,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     final String[] n = keyword.split(":");
                     final Cost cost = new Cost(n[1], false);
                     sbBefore.append("Multikicker ").append(cost.toSimpleString()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
+                }  else if (keyword.startsWith("Sticker Kicker")) {
+                        final String[] n = keyword.split(":");
+                        final Cost cost = new Cost(n[1], false);
+                        sbBefore.append("Sticker Kicker ").append(cost.toSimpleString()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Kicker")) {
                     sbBefore.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
@@ -7480,12 +7484,36 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public boolean isOptionalCostPaid(OptionalCost cost) { return getCastSA() == null ? false : getCastSA().isOptionalCostPaid(cost); }
 
-    public final int getKickerMagnitude() {
-        if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.MULTIKICKER)) {
-            return getCastSA().getOptionalKeywordAmount(Keyword.MULTIKICKER);
+    public final int getKickerMagnitude(CardTraitBase ctb) {
+        if (this.equals(ctb.getHostCard()) && ctb.isIntrinsic()) {
+            for (KeywordInterface ki : this.currentState.getIntrinsicKeywords()) {
+                switch (ki.getKeyword()) {
+                    case MULTIKICKER:
+                        if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.MULTIKICKER)) {
+                            return getCastSA().getOptionalKeywordAmount(Keyword.MULTIKICKER);
+                        }
+                        break;
+                    case STICKER_KICKER:
+                        if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.STICKER_KICKER)) {
+                            return 1;
+                        }
+                        break;
+                    case KICKER:
+                        boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
+                        return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
+                }
+            }
+        } else {
+            if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.MULTIKICKER)) {
+                return getCastSA().getOptionalKeywordAmount(Keyword.MULTIKICKER);
+            }
+            if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.STICKER_KICKER)) {
+                return 1;
+            }
+            boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
+            return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
         }
-        boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
-        return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
+        return 0;
     }
 
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
