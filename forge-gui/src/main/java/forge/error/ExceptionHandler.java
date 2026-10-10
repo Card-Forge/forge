@@ -227,7 +227,16 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     /** {@inheritDoc} */
     @Override
     public final void uncaughtException(final Thread t, final Throwable ex) {
-        BugReporter.reportException(ex);
+        System.err.println("=== UNCAUGHT EXCEPTION IN THREAD " + t.getName() + " ===");
+        if (ex != null) {
+            ex.printStackTrace(System.err);
+        }
+        System.err.flush();
+        try {
+            if (!java.awt.GraphicsEnvironment.isHeadless()) {
+                BugReporter.reportException(ex);
+            }
+        } catch (Throwable ignored) {}
     }
 
     /**
@@ -238,6 +247,10 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      *            a {@link java.lang.Throwable} object.
      */
     public final void handle(final Throwable ex) {
-        BugReporter.reportException(ex);
+        try {
+            if (!java.awt.GraphicsEnvironment.isHeadless()) {
+                BugReporter.reportException(ex);
+            }
+        } catch (Throwable ignored) {}
     }
 }
