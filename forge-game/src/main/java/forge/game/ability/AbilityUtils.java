@@ -1370,7 +1370,7 @@ public class AbilityUtils {
             for (Card lki : sa.getRootAbility().getLastStateBattlefield()) {
                 game.getTriggerHandler().registerActiveLTBTrigger(lki);
             }
-            game.getTriggerHandler().collectTriggerForWaiting();
+            game.getTriggerHandler().collectTriggerForWaiting(true);
         } else {
             game.getTriggerHandler().resetActiveTriggers();
         }
