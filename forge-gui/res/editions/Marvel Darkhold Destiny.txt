@@ -1,0 +1,20 @@
+[metadata]
+Code=MDD
+Date=2027-04-09
+Name=Marvel: Darkhold Destiny
+Type=Expansion
+ScryfallCode=MDD
+
+[cards]
+28 U Penance Stare @Tulio Brito
+92 M The Darkhold @Yohann Schepacz
+106 M Hela, Mistress of Darkness @Bastien L. Deharme
+107 R Hela's Arcanum @Nadia Hurianova
+161 U Rise from the Nether @Tuan Duong Chu
+242 M Magik, Illyana Rasputin @Fariba Khamseh
+288 C Temple of Khonshu @Jonas De Ro
+292 L Plains @Shahab Alizadeh
+294 L Island @Eren Arik
+296 L Swamp @Maojin Lee
+298 L Mountain @VEN
+301 L Forest @Samuele Bandini
