@@ -367,6 +367,7 @@ Chorus
 Lesson
 Omen
 Trap
+Vengeance
 [EnchantmentTypes]
 Aura:Auras
 Background
