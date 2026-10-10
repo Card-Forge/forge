@@ -151,6 +151,8 @@ public abstract class AbstractPreferences<T extends Enum<T> & IPreferences.IPref
             result.add(GameType.TinyLeaders);
         else if (gameType.equals("Brawl"))
             result.add(GameType.Brawl);
+        else if (gameType.equals("Pauper Commander"))
+            result.add(GameType.PauperCommander);
         else if (gameType.equals("Planechase"))
             result.add(GameType.Planechase);
         else if (gameType.equals("Archenemy"))

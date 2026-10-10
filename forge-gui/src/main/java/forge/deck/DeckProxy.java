@@ -475,6 +475,15 @@ public class DeckProxy implements InventoryItem {
         return result;
     }
 
+    public static Iterable<DeckProxy> getAllPauperCommanderDecks() {
+        return getAllPauperCommanderDecks(null);
+    }
+    public static Iterable<DeckProxy> getAllPauperCommanderDecks(final Predicate<Deck> filter) {
+        final List<DeckProxy> result = new ArrayList<>();
+        addDecksRecursivelly("Pauper Commander", GameType.PauperCommander, result, "", FModel.getDecks().getPauperCommander(), filter);
+        return result;
+    }
+
     public static Iterable<DeckProxy> getAllOathbreakerDecks() {
         return getAllOathbreakerDecks(null);
     }
