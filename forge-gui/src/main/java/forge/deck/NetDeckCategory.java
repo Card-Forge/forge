@@ -36,6 +36,7 @@ public class NetDeckCategory extends NetDeckStorageBase {
             categories = constructed;
             break;
         case Commander:
+        case DuelCommander: // the Commander list already holds the Duel Commander metagame
             if (commander == null) {
                 commander = loadCategories(ForgeConstants.NET_DECKS_COMMANDER_LIST_FILE);
             }

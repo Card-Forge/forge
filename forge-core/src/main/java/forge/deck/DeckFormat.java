@@ -121,6 +121,37 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
+    // Duel Commander (duelcommander.org): no sideboard (302.1), but a companion lives there in Forge (302.2).
+    DuelCommander  ( Range.is(99),                         Range.of(0, 1), 1, null,
+            card -> StaticData.instance().getDuelCommanderPredicate().test(card)
+    ) {
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            // 304.2: some cards are legal in the 99 but banned as commander
+            return super.isLegalCommander(rules) && StaticData.instance().getDuelCommanderCommanderPredicate().test(rules);
+        }
+
+        @Override
+        public String getDeckConformanceProblem(Deck deck) {
+            String problem = super.getDeckConformanceProblem(deck);
+            if (problem != null) {
+                return problem;
+            }
+            CardPool sideboard = deck.get(DeckSection.Sideboard);
+            if (sideboard != null) {
+                for (final Entry<PaperCard, Integer> cp : sideboard) {
+                    CardRules rules = cp.getKey().getRules();
+                    if (!rules.hasStartOfKeyword("Companion")) {
+                        return Localizer.getInstance().getMessage("lblDuelCommanderOnlyCompanion", cp.getKey().getName());
+                    }
+                    if (!StaticData.instance().getDuelCommanderCompanionPredicate().test(rules)) {
+                        return Localizer.getInstance().getMessage("lblDuelCommanderBannedAsCompanion", cp.getKey().getName());
+                    }
+                }
+            }
+            return null;
+        }
+    },
     PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
     Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4) {
         @Override
@@ -170,7 +201,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl || this == DuelCommander;
     }
 
     public boolean hasSignatureSpell() {

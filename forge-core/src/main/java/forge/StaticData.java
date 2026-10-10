@@ -49,6 +49,9 @@ public class StaticData {
 
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
+    private Predicate<PaperCard> duelCommanderPredicate;
+    private Predicate<CardRules> duelCommanderCommanderPredicate;
+    private Predicate<CardRules> duelCommanderCompanionPredicate;
     private Predicate<PaperCard> pioneerPredicate;
     private Predicate<PaperCard> modernPredicate;
     private Predicate<PaperCard> commanderPredicate;
@@ -604,6 +607,12 @@ public class StaticData {
 
     public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
+    public void setDuelCommanderPredicate(Predicate<PaperCard> duelCommanderPredicate) { this.duelCommanderPredicate = duelCommanderPredicate; }
+
+    public void setDuelCommanderCommanderPredicate(Predicate<CardRules> duelCommanderCommanderPredicate) { this.duelCommanderCommanderPredicate = duelCommanderCommanderPredicate; }
+
+    public void setDuelCommanderCompanionPredicate(Predicate<CardRules> duelCommanderCompanionPredicate) { this.duelCommanderCompanionPredicate = duelCommanderCompanionPredicate; }
+
     public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
 
     public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
@@ -615,6 +624,14 @@ public class StaticData {
     public Predicate<PaperCard> getOathbreakerPredicate() { return oathbreakerPredicate; }
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
+
+    public Predicate<PaperCard> getDuelCommanderPredicate() { return duelCommanderPredicate; }
+
+    /** Whether a card that is legal in a Duel Commander deck may also be its commander. */
+    public Predicate<CardRules> getDuelCommanderCommanderPredicate() { return duelCommanderCommanderPredicate; }
+
+    /** Whether a card that is legal in a Duel Commander deck may also be its companion. */
+    public Predicate<CardRules> getDuelCommanderCompanionPredicate() { return duelCommanderCompanionPredicate; }
 
     /**
      * Get an alternative card print for the given card wrt. the input setReleaseDate.

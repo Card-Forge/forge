@@ -684,11 +684,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             addPoisonCounters(poisonCounters, source.getController(), counterTable);
         }
 
-        //Oathbreaker, Tiny Leaders, and Brawl ignore commander damage rule
+        //Oathbreaker, Tiny Leaders, Brawl and Duel Commander ignore commander damage rule
         if (source.isCommander() && isCombat
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)
                 && !this.getGame().getRules().hasAppliedVariant(GameType.TinyLeaders)
-                && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
+                && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)
+                && !this.getGame().getRules().hasAppliedVariant(GameType.DuelCommander)) {
             // In case that commander is merged permanent, get the real commander card
             final Card realCommander = source.getRealCommander();
             addCommanderDamage(realCommander, amount);
@@ -3270,7 +3271,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
         eff.addReplacementEffect(re);
 
-        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.IsCommander+YouOwn | AffectedZone$ Command";
+        String castableCommander = "Card.IsCommander+YouOwn";
+        if (game.getRules().hasAppliedVariant(GameType.DuelCommander)) {
+            // Duel Commander 404.1-404.4: once one of your commanders has been cast from the command zone, the others
+            // can't be cast from there this game. They can still be cast from any other zone (Command Beacon).
+            castableCommander += "+NoOtherCommanderCastFromCommandZone";
+            getView().updateCommandZoneCastLock(true);
+        }
+        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ " + castableCommander + " | AffectedZone$ Command";
         if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana
             mayBePlayedAbility += " | MayPlayIgnoreColor$ True";
         }

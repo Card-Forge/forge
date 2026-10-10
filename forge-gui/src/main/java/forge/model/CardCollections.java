@@ -45,6 +45,7 @@ public class CardCollections {
     private IStorage<Deck> commanderPrecons;
     private IStorage<Deck> oathbreaker;
     private IStorage<Deck> tinyLeaders;
+    private IStorage<Deck> duelCommander;
     private IStorage<Deck> brawl;
     private IStorage<Deck> genetic;
     private IStorage<Deck> customStarter;
@@ -142,6 +143,14 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return tinyLeaders;
+    }
+
+    public IStorage<Deck> getDuelCommander() {
+        if (duelCommander == null) {
+            duelCommander = new StorageImmediatelySerialized<>("Duel Commander decks",
+                    new DeckStorage(new File(ForgeConstants.DECK_DUEL_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
+        }
+        return duelCommander;
     }
 
     public IStorage<Deck> getBrawl() {

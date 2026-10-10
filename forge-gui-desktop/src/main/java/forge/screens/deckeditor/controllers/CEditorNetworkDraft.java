@@ -18,6 +18,7 @@ import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VDuelCommanderDecks;
 import forge.screens.deckeditor.views.VEditorLog;
 import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
@@ -59,6 +60,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
     private DragCell oathbreakerDecksParent;
     private DragCell brawlDecksParent;
     private DragCell tinyLeadersDecksParent;
+    private DragCell duelCommanderDecksParent;
     private DragCell deckGenParent;
 
     /**
@@ -236,6 +238,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
         oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        duelCommanderDecksParent = removeTab(VDuelCommanderDecks.SINGLETON_INSTANCE);
 
         // One pick per click — draft flow doesn't support group-picking
         getCatalogManager().setAllowMultipleSelections(false);
@@ -282,6 +285,9 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        }
+        if (duelCommanderDecksParent != null) {
+            duelCommanderDecksParent.addDoc(VDuelCommanderDecks.SINGLETON_INSTANCE);
         }
 
         getCatalogManager().setAllowMultipleSelections(true);

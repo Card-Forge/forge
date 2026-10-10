@@ -132,6 +132,10 @@ public class PlayerView extends GameEntityView {
 
         sb.append(Localizer.getInstance().getMessage("lblCommanderCastCard", getCommanderCast(v)));
         sb.append("\n");
+        if (isCommanderLockedInCommandZone(v)) {
+            sb.append(Localizer.getInstance().getMessage("lblDuelCommanderLockedInCommandZone"));
+            sb.append("\n");
+        }
 
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), getOpponents())) {
             final int damage = p.getCommanderDamage(v);
@@ -364,6 +368,26 @@ public class PlayerView extends GameEntityView {
             Integer damage = map.get(commander.getId());
             map.put(card.getId(), damage);
         }
+    }
+
+    /** Duel Commander 404: another of this player's commanders was cast from the command zone first. */
+    public boolean isCommanderLockedInCommandZone(CardView commander) {
+        Boolean lock = get(TrackableProperty.CommandZoneCastLock);
+        if (lock == null || !lock) {
+            return false;
+        }
+        Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
+        if (map == null) {
+            return false;
+        }
+        int total = 0;
+        for (Integer casts : map.values()) {
+            total += casts;
+        }
+        return total > getCommanderCast(commander);
+    }
+    void updateCommandZoneCastLock(boolean lock) {
+        set(TrackableProperty.CommandZoneCastLock, lock);
     }
 
     public int getCommanderCast(CardView commander) {

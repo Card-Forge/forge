@@ -319,6 +319,14 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         TINY_LEADER_P6_DECK_STATE(""),
         TINY_LEADER_P7_DECK_STATE(""),
         TINY_LEADER_P8_DECK_STATE(""),
+        DUEL_COMMANDER_P1_DECK_STATE(""),
+        DUEL_COMMANDER_P2_DECK_STATE(""),
+        DUEL_COMMANDER_P3_DECK_STATE(""),
+        DUEL_COMMANDER_P4_DECK_STATE(""),
+        DUEL_COMMANDER_P5_DECK_STATE(""),
+        DUEL_COMMANDER_P6_DECK_STATE(""),
+        DUEL_COMMANDER_P7_DECK_STATE(""),
+        DUEL_COMMANDER_P8_DECK_STATE(""),
         BRAWL_P1_DECK_STATE(""),
         BRAWL_P2_DECK_STATE(""),
         BRAWL_P3_DECK_STATE(""),
@@ -395,6 +403,12 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
                 TINY_LEADER_P3_DECK_STATE, TINY_LEADER_P4_DECK_STATE,
                 TINY_LEADER_P5_DECK_STATE, TINY_LEADER_P6_DECK_STATE,
                 TINY_LEADER_P7_DECK_STATE, TINY_LEADER_P8_DECK_STATE };
+
+        public static FPref[] DUEL_COMMANDER_DECK_STATES = {
+                DUEL_COMMANDER_P1_DECK_STATE, DUEL_COMMANDER_P2_DECK_STATE,
+                DUEL_COMMANDER_P3_DECK_STATE, DUEL_COMMANDER_P4_DECK_STATE,
+                DUEL_COMMANDER_P5_DECK_STATE, DUEL_COMMANDER_P6_DECK_STATE,
+                DUEL_COMMANDER_P7_DECK_STATE, DUEL_COMMANDER_P8_DECK_STATE };
 
         public static FPref[] BRAWL_DECK_STATES = {
                 BRAWL_P1_DECK_STATE, BRAWL_P2_DECK_STATE,
