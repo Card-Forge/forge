@@ -59,8 +59,9 @@ Tests: `optionalcost_test.go`. Fixtures: `optional-cost-cinder-strike-blight-pai
   at compile time by `compile.addInlineChecks`, over every trait and the sub-abilities it reaches, keyed by the folded
   text like `addInlineAmounts` (PORT-2). Before, the engine found no SVar of that name and read the condition as unmet.
   `TestInlineConditionCheckSVarReadsAControlledDragon` pins it on Foul-Tongue Invocation. Draconic Roar's condition now
-  passes too, and its second `DealDamage` stops at `Defined$ ParentTargetedController`, which targeting does not
-  resolve.
+  passes too, and its second `DealDamage` reads `Defined$ ParentTargetedController` (`AbilityUtils.java:987-993`,
+  `definedPlayers`: the controller of each card the nearest targeting ancestor targets;
+  `TestParentTargetedControllerIsTheTargetsController`).
 - A Teamwork answer that is not a subset of the candidates, repeats a creature or falls short of the power fails the
   cast with a pending error (`payOptionalParts` returns false), as Sneak's return does; it no longer taps every
   candidate in its place (`TestTeamworkInvalidAnswerFailsTheCast`).

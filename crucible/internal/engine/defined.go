@@ -104,6 +104,20 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 				candidates = append(candidates, g.Card(id).Controller())
 			}
 		}
+	case "ParentTargetedController":
+		// AbilityUtils.java:987-993: the controller of each card the nearest
+		// targeting ancestor targets (definedCards' ParentTarget), plus the
+		// activators of targeted stack items, which the engine reads off
+		// the card targets of a spell. An ancestor that targets only players
+		// names no card, so Java's list is empty and so is this one.
+		if len(refs.parentTargets) == 0 {
+			return nil, fmt.Errorf("engine: Defined$ %q: no ancestor ability chose targets", defined)
+		}
+		for _, e := range refs.parentTargets {
+			if id, ok := e.AsCard(); ok {
+				candidates = append(candidates, g.Card(id).Controller())
+			}
+		}
 	case "TargetedPlayer", "Targeted", "ThisTargetedPlayer":
 		for _, e := range refs.targets {
 			if pid, ok := e.AsPlayer(); ok {
