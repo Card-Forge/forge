@@ -1695,8 +1695,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
-                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
@@ -1753,11 +1751,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
             getGui().awaitNextInput();
-            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
 
-        netLog.trace("Creating InputPassPriority for player {}", player.getName());
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
         netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
