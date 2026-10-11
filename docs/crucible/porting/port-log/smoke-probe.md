@@ -11,16 +11,21 @@
 ADR-0011 defines "done" for M6 as a command that exits zero over the gauntlet. `corpus-coverage` only answered "does the
 database have the card". `card-smoke` answers "does the engine play it": for each card it builds a fixed board, puts the
 card in hand, casts it (or plays it as a land), resolves the stack, activates each activated ability once and runs three
-turns, with `smoke.Controller` answering every decision. A card that cannot be cast is retried with a spell on the
-stack.
+turns, with `smoke.Controller` answering every decision. A card that cannot be cast is retried on up to six more board
+variants, in order: an opposing instant on the stack, an opposing creature spell on the stack, a rich board (an
+artifact, an enchantment, an equipment, a flier, a planeswalker, one land of each basic type, a tapped creature, a
+graveyard of seven cards, a card in exile, a hand of three), the rich board with each of the two spells, and the rich
+board in the declare blockers step with an attacking and a blocking creature. The first variant that casts the card
+decides the outcome.
 
-| Outcome        | Meaning                                                                                               |
-| -------------- | ----------------------------------------------------------------------------------------------------- |
-| `plays`        | No error surfaced on that path                                                                        |
-| `refused`      | The engine returned an error or left a pending one (GO-7): the loud half, and the M6 backlog          |
-| `panicked`     | An engine invariant breach, recovered at the probe boundary. Always a bug                             |
-| `hung`         | No result within `-timeout` (default 20 s). The engine loops on this card. Always a bug               |
-| `inconclusive` | The card could not be cast on the fixed board even with a spell on the stack (a cost the board lacks) |
+| Outcome        | Meaning                                                                                                                                                                                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `plays`        | No error surfaced on that path                                                                                                                                                                                                                                  |
+| `refused`      | The engine returned an error or left a pending one (GO-7): the loud half, and the M6 backlog                                                                                                                                                                    |
+| `panicked`     | An engine invariant breach, recovered at the probe boundary. Always a bug                                                                                                                                                                                       |
+| `hung`         | No result within `-timeout` (default 20 s). The engine loops on this card. Always a bug                                                                                                                                                                         |
+| `placed`       | A Command-zone type (plane, scheme, Vanguard, conspiracy, phenomenon): put in the zone, three turns run, statics and triggers live. Abilities that need the game mode (set in motion, chaos, planeswalk) are not exercised, so it is counted apart from `plays` |
+| `inconclusive` | The card could not be cast on any board variant (an extra cost, an X or a target the variants lack)                                                                                                                                                             |
 
 The refusal causes are grouped by the first line of the error with card names, numbers and ids blanked, so one missing
 param counts once however many cards carry it. That table, ordered by cards blocked, is the backlog.
@@ -29,8 +34,8 @@ param counts once however many cards carry it. That table, ordered by cards bloc
 
 **An upper bound.** "Plays" is the absence of a loud refusal. The probe cannot see what the engine does silently wrong
 (the silent GO-7 gaps listed in `game-state.md`), what a card does on a board other than the fixed one, or a card whose
-ability needs a situation (a combat, a graveyard of a given shape) the three turns never create. 1,393 cards are
-inconclusive for the last reason and are left out of the percentage.
+ability needs a situation (a combat, a graveyard of a given shape) the three turns never create. 401 cards are
+inconclusive and are left out of the percentage, as are the `placed` ones.
 
 Controller policy is part of the measure: the first legal option, the smallest sensible count, attack with everything,
 never block, and "yes" to at most 40 optional questions. The cap exists because a "you may repeat" effect (Ad Nauseam,
@@ -42,15 +47,16 @@ Measured at the commit that added the probe, on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 28,214 |
-| refused      |  4,471 |
+| plays        | 28,667 |
+| refused      |  4,654 |
 | panicked     |      0 |
 | hung         |      0 |
-| inconclusive |  1,393 |
+| placed       |    356 |
+| inconclusive |    401 |
 
-86.3% of the 32,685 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+86.0% of the 33,321 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.8% of 8,438 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.7% of 8,596 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
@@ -84,9 +90,11 @@ not set `staticTrigger` when a line carries `Static$ True`.
 
 - The gauntlet itself: no decklists, so no "cards of the gauntlet that play" figure. `-decks gauntlets/modern` takes the
   real list when it exists.
-- A card that needs a spell on the stack is retried with an opposing Lightning Bolt, then with a creature spell on the
-  stack (Counterspell, Essence Scatter). Targets the board still lacks (a card in exile, a planeswalker, a specific
-  type) leave the card inconclusive.
+- The 401 inconclusive cards each need something the variants lack: an additional cost the board cannot pay, an X spell
+  whose targets scale with X, an Aura enchanting a card in a graveyard (Animate Dead), a creature dealt damage this
+  turn. Another variant per group costs more than it measures.
+- Command-zone cards are counted as `placed`, which proves nothing about their one-shot abilities. A sticker sheet is
+  refused by the probe itself (open plan R15), not by the engine, and that line goes when stickers are ported.
 - The replay-parity harness (ADR-0010 L3): `RecordingPlayerController` over the 110 `PlayerController` methods in
   `oracle-java` and a `ReplayController` here. Separate work; see `00-master-implementation-plan-in-progress.md`
   item 32.

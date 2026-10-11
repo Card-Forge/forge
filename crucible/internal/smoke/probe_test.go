@@ -57,6 +57,14 @@ func TestProbeClassifiesCards(t *testing.T) {
 		// Needs a spell on the stack to target: the probe retries with one.
 		{"Counterspell", smoke.Plays},
 		{"Essence Scatter", smoke.Plays},
+		// Needs a tapped creature, an attacking creature, or the rich board.
+		{"Assassinate", smoke.Plays},
+		{"Armed Response", smoke.Plays},
+		{"Abhorrent Oculus", smoke.Plays},
+		// Command-zone types are placed, not cast; a sticker sheet is refused.
+		{"Akoum", smoke.Placed},
+		{"Backup Plan", smoke.Placed},
+		{"Ancestral Hot Dog Minotaur", smoke.Refused},
 	} {
 		t.Run(tc.card, func(t *testing.T) {
 			t.Parallel()
@@ -100,7 +108,7 @@ func TestOutcomeStrings(t *testing.T) {
 
 	for o, want := range map[smoke.Outcome]string{
 		smoke.Plays: "plays", smoke.Refused: "refused", smoke.Panicked: "panicked",
-		smoke.Inconclusive: "inconclusive", smoke.Hung: "hung",
+		smoke.Inconclusive: "inconclusive", smoke.Hung: "hung", smoke.Placed: "placed",
 	} {
 		if o.String() != want {
 			t.Errorf("Outcome(%d).String() = %q, want %q", o, o.String(), want)

@@ -11,16 +11,14 @@ milestones (M0-M4): [00-master-implementation-plan.md](00-master-implementation-
 Sizes: **S** under a day, one sitting. **M** one porter batch, 1-3 days. **L** 1-2 weeks, a design call or several
 batches. **XL** multi-week. Within a size the order is by value per effort. `R` numbers are this list's own; milestone
 items keep their numbers (24-41). The refusal figures come from `crucible card-smoke -all`
-([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.3% of the 32,685 judged corpus cards play, an upper bound,
+([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.0% of the 33,321 judged corpus cards play, an upper bound,
 since silent misses are invisible. Re-rank with the command before starting any M item, because the counts move with
 every port.
 
 | #   | Work                                                                                                                                                                                                                                                                                                                            | Milestone | Size | Needs                                  |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---- | -------------------------------------- |
-| R1  | Push local `master` and open the PR; first CI run on golangci-lint v2.14.0                                                                                                                                                                                                                                                      | tooling   | S    | you (no push by Claude)                |
 | R2  | Retitle and redescribe Card-Forge/forge#12083: `TargetControls$` is removed, not guarded                                                                                                                                                                                                                                        | M5        | S    | you                                    |
 | R3  | File upstream the Forge bugs marked "Not filed" in [`forge-java-defects.md`](porting/forge-java-defects.md) (about 30 rows, one PR each) and the `doubling_chant.txt:5` `Choices$` without `Creature`                                                                                                                           | M5        | S/PR | you; tests per PR                      |
-| R4  | Probe board variants for the 1,393 inconclusive cards: a card in exile, a planeswalker, typed targets                                                                                                                                                                                                                           | M6        | S    | —                                      |
 | R5  | `Mode$ DrawFromBottom` (Lantern of Undersight, River Song): the draw reads the static                                                                                                                                                                                                                                           | M5        | S    | —                                      |
 | R6  | `Defined$ ParentTargetedController` (Draconic Roar's second `DealDamage`)                                                                                                                                                                                                                                                       | M6        | S    | —                                      |
 | R7  | `playeffect.go` still lists `sharesNameWith` as unresolved: resolve the forms `valid.go` answers, keep refusing the rest                                                                                                                                                                                                        | M5        | S    | —                                      |
@@ -42,8 +40,8 @@ every port.
 | R23 | M8 simulation runner and telemetry (items 36-38), P7 gate                                                                                                                                                                                                                                                                       | M8        | XL   | R22                                    |
 | R24 | M9 reporting and the A/B swap optimizer (items 39-41), P8 gate                                                                                                                                                                                                                                                                  | M9        | XL   | R23                                    |
 
-The rows are independent within a size unless `Needs` says otherwise. R1-R3 need you, because they publish. R20 is the
-only row whose input Claude must not invent: a fabricated metagame yields confident, wrong recommendations
+The rows are independent within a size unless `Needs` says otherwise. R2 and R3 need you, because they publish. R20 is
+the only row whose input Claude must not invent: a fabricated metagame yields confident, wrong recommendations
 ([`meta-gauntlet.md`](research/meta-gauntlet.md)).
 
 ---

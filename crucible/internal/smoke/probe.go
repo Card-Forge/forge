@@ -35,10 +35,16 @@ const (
 	// Hung means the probe did not return within the time limit, so the engine
 	// loops on this card. Always a bug.
 	Hung
+	// Placed means the card is a Command-zone type (a plane, a scheme, a
+	// Vanguard avatar, a conspiracy, a phenomenon) with no spell to cast: it
+	// was put where the game keeps it and three turns ran with its statics and
+	// triggers live. The abilities that need the game mode (set in motion,
+	// chaos, planeswalk) are not exercised, so it is counted apart from Plays.
+	Placed
 )
 
 func (o Outcome) String() string {
-	return [...]string{"plays", "refused", "panicked", "inconclusive", "hung"}[o]
+	return [...]string{"plays", "refused", "panicked", "inconclusive", "hung", "placed"}[o]
 }
 
 // Result is one card's probe.
@@ -71,6 +77,40 @@ const (
 	bolt  = "Lightning Bolt"
 )
 
+// richBoard is what the richer variant adds for each player, by card name, so
+// that a spell asking for an artifact, an enchantment, a flier, a planeswalker,
+// a creature card in a graveyard or six cards to exile finds one. A name the
+// database lacks is skipped.
+var richBoard = struct{ battlefield, graveyard, exile, hand []string }{
+	battlefield: []string{"Serra Angel", "Glorious Anthem", "Sol Ring", "Bonesplitter", "Jace Beleren", "Island", "Mountain", "Plains", "Swamp", "Grizzly Bears"},
+	graveyard:   []string{"Lightning Bolt", "Divination", "Sol Ring", "Glorious Anthem", "Serra Angel", "Island", "Grizzly Bears"},
+	exile:       []string{"Grizzly Bears"},
+	hand:        []string{"Forest", "Forest", "Grizzly Bears"},
+}
+
+// variant is one way to set up the board for a probe.
+type variant struct {
+	// rich adds richBoard to both sides.
+	rich bool
+	// opposing is a spell left on the stack ("" for none).
+	opposing string
+	// combat sends the probe player's creatures into an attack that the
+	// opponent blocks, and casts the card in the declare blockers step.
+	combat bool
+}
+
+// variants is tried in order for a card the previous ones could not cast: the
+// plain board, a spell on the stack, the rich board, then combat.
+var variants = [...]variant{
+	{},
+	{opposing: bolt},
+	{opposing: bears},
+	{rich: true},
+	{rich: true, opposing: bolt},
+	{rich: true, opposing: bears},
+	{rich: true, combat: true},
+}
+
 // ProbeWithin is Probe with a time limit. A probe that outlives it is reported
 // Hung and its goroutine is left running: the engine has no cancellation (a
 // loop in it is the bug being reported), so the caller should expect the
@@ -99,24 +139,24 @@ func (p *Prober) Probe(name string) Result {
 
 // probe is Probe, publishing the stage it is in to where, so a caller that
 // gives up on it can say where it was stuck. A card that cannot be cast on the
-// empty-stack board (a counterspell has nothing to counter) gets a second try on
-// a board where the opponent has an instant on the stack, then a creature spell.
+// plain board (a counterspell has nothing to counter, a Reanimate no creature
+// card to return, an instant no attacker to target) is retried on each of the
+// other variants until one casts it.
 func (p *Prober) probe(name string, where *atomic.Value) Result {
-	res := p.run(name, where, "")
-	if res.Outcome != Inconclusive {
-		return res
-	}
-	for _, spell := range [...]string{bolt, bears} {
-		if again := p.run(name, where, spell); again.Outcome != Inconclusive {
+	res := p.run(name, where, variants[0])
+	for _, v := range variants[1:] {
+		if res.Outcome != Inconclusive {
+			break
+		}
+		if again := p.run(name, where, v); again.Outcome != Inconclusive {
 			return again
 		}
 	}
 	return res
 }
 
-// run is one probe on a board with, or without, the named opposing spell left
-// on the stack.
-func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Result) {
+// run is one probe on the board v describes.
+func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 	res = Result{Card: name}
 	stage := "setup"
 	defer func() {
@@ -149,6 +189,9 @@ func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Res
 		g.NewCard(bearsDef, who, engine.Battlefield)
 		g.NewCard(landDef, who, engine.Battlefield)
 		g.NewCard(bearsDef, who, engine.Graveyard)
+		if v.rich {
+			p.addRich(g, who)
+		}
 	}
 	fill := func() {
 		pool := &g.Player(pid).ManaPool
@@ -160,8 +203,8 @@ func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Res
 	fill()
 
 	ctl := &Controller{}
-	if opposing != "" {
-		spellDef, ok := p.db.Card(opposing)
+	if v.opposing != "" {
+		spellDef, ok := p.db.Card(v.opposing)
 		if !ok {
 			res.Outcome, res.Detail = Inconclusive, "no spell to put on the stack"
 			return res
@@ -169,7 +212,7 @@ func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Res
 		// The opponent can only cast an instant on the probe's turn; a
 		// creature spell is the probe player's own.
 		caster := opp
-		if opposing == bears {
+		if v.opposing == bears {
 			caster = pid
 		}
 		g.Player(caster).ManaPool.Add(mana.Red, 2)
@@ -179,7 +222,10 @@ func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Res
 			return res
 		}
 	}
-	card := g.NewCard(def, pid, engine.Hand)
+	if v.combat && !p.startCombat(g, ctl, pid) {
+		res.Outcome, res.Detail = Inconclusive, "no combat could be set up"
+		return res
+	}
 	fail := func(o Outcome, st string, err error) Result {
 		res.Outcome, res.Stage, res.Detail = o, st, err.Error()
 		return res
@@ -192,6 +238,27 @@ func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Res
 		}
 		return g.TakePendingError()
 	}
+
+	face := def.Faces[0].Type
+	if face.Has(cardtype.Stickers) {
+		res.Outcome, res.Stage = Refused, "setup"
+		res.Detail = "engine: sticker sheets are not ported (open plan R15)"
+		return res
+	}
+	if isCommandType(face) {
+		stage = "turns"
+		where.Store(stage)
+		id := g.NewCard(def, pid, engine.Command)
+		if face.Has(cardtype.Plane) {
+			g.SetActivePlane(id)
+		}
+		if err := settle(g.Run(p.registry, ctl, 3)); err != nil {
+			return fail(Refused, stage, err)
+		}
+		res.Outcome = Placed
+		return res
+	}
+	card := g.NewCard(def, pid, engine.Hand)
 
 	stage = "cast"
 	where.Store(stage)
@@ -268,4 +335,51 @@ func Reason(detail string) string {
 	first = ids.ReplaceAllString(first, "_")
 	first = digits.ReplaceAllString(first, "N")
 	return strings.TrimSpace(first)
+}
+
+// isCommandType reports whether the card lives in the Command zone and has no
+// spell to cast: a plane, phenomenon, scheme, Vanguard avatar or conspiracy.
+func isCommandType(t cardtype.Line) bool {
+	for _, c := range [...]cardtype.CoreType{cardtype.Plane, cardtype.Phenomenon, cardtype.Scheme, cardtype.Vanguard, cardtype.Conspiracy} {
+		if t.Has(c) {
+			return true
+		}
+	}
+	return false
+}
+
+// addRich puts richBoard on who's side.
+func (p *Prober) addRich(g *engine.Game, who engine.PlayerID) {
+	add := func(names []string, zone engine.ZoneType) {
+		for _, n := range names {
+			if def, ok := p.db.Card(n); ok {
+				g.NewCard(def, who, zone)
+			}
+		}
+	}
+	add(richBoard.battlefield, engine.Battlefield)
+	// A tapped creature, for "target tapped creature".
+	if def, ok := p.db.Card(bears); ok {
+		g.Card(g.NewCard(def, who, engine.Battlefield)).Tapped = true
+	}
+	add(richBoard.graveyard, engine.Graveyard)
+	add(richBoard.exile, engine.Exile)
+	add(richBoard.hand, engine.Hand)
+}
+
+// startCombat declares pid's creatures as attackers and the opponent's as
+// blockers (the Controller blocks when it is the defender), leaving the game in
+// the declare blockers step with priority, so that "target attacking creature"
+// and "target blocking creature" have a target. It reports whether any attacker
+// was declared.
+func (p *Prober) startCombat(g *engine.Game, ctl *Controller, pid engine.PlayerID) bool {
+	ctl.blockAll = true
+	g.SetTurnState(1, pid, engine.DeclareAttackers)
+	attackers, err := g.DeclareCombatAttackers(ctl)
+	if err != nil || len(attackers) == 0 {
+		return false
+	}
+	g.SetTurnState(1, pid, engine.DeclareBlockers)
+	_, err = g.DeclareCombatBlockers(ctl)
+	return err == nil
 }

@@ -31,7 +31,12 @@ import (
 // Reward) answered yes forever would loop in the engine, which is the
 // controller's fault and not the engine's. After maxYes affirmative answers
 // every optional question is answered no.
-type Controller struct{ yes int }
+type Controller struct {
+	yes int
+	// blockAll makes the controller block each attacker with a creature of its
+	// own, which a combat variant of the probe needs (a blocking creature to target).
+	blockAll bool
+}
 
 // maxYes is how many optional questions a Controller answers yes to.
 const maxYes = 40
@@ -108,9 +113,19 @@ func (*Controller) ChooseAttackTarget(_ *engine.Game, _ engine.PlayerID, _ engin
 	return eligible[0]
 }
 
-// DeclareCombatBlockers never blocks.
-func (*Controller) DeclareCombatBlockers(*engine.Game, engine.PlayerID, []engine.CardID, []engine.CardID) []engine.Block {
-	return nil
+// DeclareCombatBlockers never blocks, unless the probe set blockAll: then each
+// attacker is blocked by the next eligible creature.
+func (c *Controller) DeclareCombatBlockers(_ *engine.Game, _ engine.PlayerID, attackers []engine.CardID, eligible []engine.CardID) []engine.Block {
+	if !c.blockAll {
+		return nil
+	}
+	var out []engine.Block
+	for i, a := range attackers {
+		if i < len(eligible) {
+			out = append(out, engine.Block{Blocker: eligible[i], Attacker: a})
+		}
+	}
+	return out
 }
 
 // AssignCombatDamage assigns one damage to each blocker.

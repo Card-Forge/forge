@@ -147,7 +147,7 @@ func probeAll(p *smoke.Prober, names []string, workers int, limit time.Duration)
 // report renders the summary, the refusal causes by weight, and every panic.
 func report(source string, results []smoke.Result, top int, list bool) string {
 	var out strings.Builder
-	var count [5]int
+	var count [6]int
 	causes := map[string][]string{}
 	var panics []smoke.Result
 	for _, r := range results {
@@ -165,8 +165,8 @@ func report(source string, results []smoke.Result, top int, list bool) string {
 	}
 	judged := count[smoke.Plays] + count[smoke.Refused] + count[smoke.Panicked] + count[smoke.Hung]
 	fmt.Fprintf(&out, "\nsmoke probe of %s: %d cards\n", source, len(results))
-	fmt.Fprintf(&out, "  plays        %6d\n  refused      %6d\n  panicked     %6d\n  hung         %6d\n  inconclusive %6d\n",
-		count[smoke.Plays], count[smoke.Refused], count[smoke.Panicked], count[smoke.Hung], count[smoke.Inconclusive])
+	fmt.Fprintf(&out, "  plays        %6d\n  refused      %6d\n  panicked     %6d\n  hung         %6d\n  placed       %6d  (Command-zone cards: statics and triggers only)\n  inconclusive %6d\n",
+		count[smoke.Plays], count[smoke.Refused], count[smoke.Panicked], count[smoke.Hung], count[smoke.Placed], count[smoke.Inconclusive])
 	if judged > 0 {
 		fmt.Fprintf(&out, "  %.1f%% of the %d judged cards play (an upper bound: silent misses are invisible)\n",
 			100*float64(count[smoke.Plays])/float64(judged), judged)
