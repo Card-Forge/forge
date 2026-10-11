@@ -13,7 +13,6 @@ import forge.assets.FSkinFont;
 import forge.card.CardFaceSymbols;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 /**
