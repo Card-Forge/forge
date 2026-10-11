@@ -1301,7 +1301,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private final FDeckStatsView statsView = add(new FDeckStatsView());
 
         protected DeckStatsPage() {
-            super(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.MENU_STATS);
+            super(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.DECKSTATS);
         }
 
         @Override
