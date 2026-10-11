@@ -17,8 +17,10 @@ import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +32,7 @@ import java.util.Set;
  * - DeltaPacket - size calculation formula
  * - NetworkByteTracker - enable/disable behavior
  * - DeltaSyncManager - library cards sent to a filtered client as shells
+ * - HeadlessNetworkClient.countHiddenInfo - the hidden-info count the network tests assert on
  *
  * These are fast unit tests that don't involve actual network I/O.
  * For integration tests with real network traffic, see NetworkPlayIntegrationTest.
@@ -128,14 +131,9 @@ public class DeltaSyncUnitTest {
     // Library cards reach a filtered consumer as shells. Hand-built graph: players A and B, a card in B's library
     // with an alternate state, a card on B's battlefield. Only the root GameView needs a Game, mocked.
 
-    // Kept apart from DeltaSyncManager's own set on purpose, as an oracle: a key added there and not here fails a test
+    // A separate copy of DeltaSyncManager's shell keys: a key added there and not here fails the key-set assertions
     private static final Set<TrackableProperty> SHELL_KEYS = EnumSet.of(
-            TrackableProperty.Owner, TrackableProperty.Controller, TrackableProperty.Zone,
-            TrackableProperty.Tapped, TrackableProperty.Sickness, TrackableProperty.PhasedOut,
-            TrackableProperty.Attacking, TrackableProperty.Blocking, TrackableProperty.Counters,
-            TrackableProperty.Damage, TrackableProperty.AssignedDamage, TrackableProperty.LethalDamage,
-            TrackableProperty.ShieldCount, TrackableProperty.AttachedCards, TrackableProperty.EntityAttachedTo,
-            TrackableProperty.Token, TrackableProperty.HiddenId, TrackableProperty.Facedown, TrackableProperty.Foretold);
+            TrackableProperty.Owner, TrackableProperty.Controller, TrackableProperty.Zone);
     private static final int LIBRARY_CARD = 10;
     private static final int BATTLEFIELD_CARD = 20;
 
@@ -196,9 +194,7 @@ public class DeltaSyncUnitTest {
     private static void assertShell(DeltaPacket packet, String what) {
         Map<TrackableProperty, Object> sent = packet.getNewObjects().get(cardKey(LIBRARY_CARD));
         Assert.assertNotNull(sent, what + ": card not sent");
-        Assert.assertTrue(SHELL_KEYS.containsAll(sent.keySet()), what + ": non-shell keys sent: " + sent.keySet());
-        Assert.assertTrue(sent.keySet().containsAll(Set.of(TrackableProperty.Owner, TrackableProperty.Controller, TrackableProperty.Zone)),
-                what + ": shell keys missing: " + sent.keySet());
+        Assert.assertEquals(sent.keySet(), SHELL_KEYS, what + ": the shell's keys");
         Assert.assertEquals(sent.get(TrackableProperty.Zone), ZoneType.Library, what);
         Assert.assertTrue(stateViewsOf(packet.getNewObjects(), LIBRARY_CARD).isEmpty(), what + ": a shell's state views were sent");
     }
@@ -210,13 +206,14 @@ public class DeltaSyncUnitTest {
         // The shell's state views were never sent, so nothing holds this consumer on them
         Assert.assertFalse(opponent.libraryCard.getCurrentState().hasConsumer(opponent.manager.getConsumerId()),
                 "a shell's state view holds the consumer");
-        // A withheld property that changes on a held shell stays withheld
+        // On a held shell a withheld property that changes stays withheld, and a shell property goes out
         opponent.libraryCard.set(TrackableProperty.Name, "Giant Growth");
         opponent.libraryCard.set(TrackableProperty.Tapped, true);
+        opponent.libraryCard.set(TrackableProperty.Controller, opponent.a);
         Map<TrackableProperty, Object> changed = opponent.manager.collectDeltas(opponent.gameView, List.of(opponent.a))
                 .getObjectDeltas().get(cardKey(LIBRARY_CARD));
         Assert.assertNotNull(changed, "the shell's change not sent");
-        Assert.assertEquals(changed.keySet(), Set.of(TrackableProperty.Tapped));
+        Assert.assertEquals(changed.keySet(), Set.of(TrackableProperty.Controller));
 
         // A library is hidden from its owner too
         Board owner = new Board();
@@ -231,7 +228,7 @@ public class DeltaSyncUnitTest {
     }
 
     @Test
-    public void testRevealFillsInTheShellAndItsEndClearsIt() {
+    public void testRevealFillsInTheShellAndTheCardStaysFull() {
         Board board = new Board();
         List<PlayerView> viewers = List.of(board.a);
         board.manager.collectDeltas(board.gameView, viewers);
@@ -241,32 +238,32 @@ public class DeltaSyncUnitTest {
         Assert.assertFalse(revealed.getNewObjects().containsKey(cardKey(LIBRARY_CARD)), "same instance, so no replacement");
         Map<TrackableProperty, Object> filled = revealed.getObjectDeltas().get(cardKey(LIBRARY_CARD));
         Assert.assertNotNull(filled, "revealed card not sent");
+        Map<TrackableProperty, Object> held = board.libraryCard.getProps();
+        Assert.assertEquals(filled.keySet(), held.keySet(), "the full map");
         Assert.assertEquals(filled.get(TrackableProperty.Name), "Grizzly Bears");
-        Assert.assertEquals(filled.get(TrackableProperty.OracleName), "Grizzly Bears");
         Assert.assertEquals(stateViewsOf(revealed.getNewObjects(), LIBRARY_CARD).size(), 2, "state views arrive as new objects");
 
-        // The reveal ends
+        // The reveal ends and the card stays FULL: the change to PlayerMayLook goes out, nothing clears the card
         board.libraryCard.set(TrackableProperty.PlayerMayLook, null);
-        DeltaPacket hidden = board.manager.collectDeltas(board.gameView, viewers);
+        DeltaPacket ended = board.manager.collectDeltas(board.gameView, viewers);
+        Map<TrackableProperty, Object> change = ended.getObjectDeltas().get(cardKey(LIBRARY_CARD));
+        Assert.assertNotNull(change, "the end of the reveal not sent");
+        Assert.assertEquals(change.keySet(), Set.of(TrackableProperty.PlayerMayLook), "more than the reveal's end sent");
+        Assert.assertTrue(stateViewsOf(ended.getObjectDeltas(), LIBRARY_CARD).isEmpty(), "state views changed");
+        Assert.assertTrue(stateViewsOf(ended.getNewObjects(), LIBRARY_CARD).isEmpty(), "state views sent again");
 
-        Map<TrackableProperty, Object> cleared = hidden.getObjectDeltas().get(cardKey(LIBRARY_CARD));
-        Assert.assertNotNull(cleared, "hidden-again card not sent");
-        for (TrackableProperty withheld : List.of(TrackableProperty.Name, TrackableProperty.OracleName, TrackableProperty.PlayerMayLook)) {
-            Assert.assertTrue(cleared.containsKey(withheld) && cleared.get(withheld) == null, withheld + " not cleared: " + cleared);
-        }
-        Assert.assertFalse(cleared.containsKey(TrackableProperty.CurrentState), "the client keeps its state objects");
-        Assert.assertFalse(cleared.containsKey(TrackableProperty.AlternateState), "the client keeps its state objects");
-        Map<Integer, Map<TrackableProperty, Object>> views = stateViewsOf(hidden.getObjectDeltas(), LIBRARY_CARD);
-        Assert.assertEquals(views.size(), 2, "both state views cleared");
-        for (Map<TrackableProperty, Object> view : views.values()) {
-            Assert.assertTrue(view.containsKey(TrackableProperty.Name) && view.get(TrackableProperty.Name) == null, "state view not cleared: " + view);
-        }
+        // The next clean walk sends nothing for the card or its state views
+        DeltaPacket clean = board.manager.collectDeltas(board.gameView, viewers);
+        Assert.assertFalse(clean.getObjectDeltas().containsKey(cardKey(LIBRARY_CARD)), "card sent on a clean walk");
+        Assert.assertFalse(clean.getNewObjects().containsKey(cardKey(LIBRARY_CARD)), "card sent on a clean walk");
+        Assert.assertTrue(stateViewsOf(clean.getObjectDeltas(), LIBRARY_CARD).isEmpty(), "state views sent on a clean walk");
+        Assert.assertTrue(stateViewsOf(clean.getNewObjects(), LIBRARY_CARD).isEmpty(), "state views sent on a clean walk");
     }
 
     @Test
     public void testRevealHistoryCardGoesInFull() {
         Board board = new Board();
-        // A card in the game's reveal history goes in full to every consumer, as on master
+        // A card in the game's reveal history goes in full to every consumer
         board.gameView.updateRevealedCards(new TrackableCollection<>(board.libraryCard));
         DeltaPacket packet = board.manager.collectDeltas(board.gameView, List.of(board.a));
 
@@ -289,8 +286,8 @@ public class DeltaSyncUnitTest {
         Assert.assertFalse(again.getObjectDeltas().containsKey(cardKey(LIBRARY_CARD)), "clean shell sent again");
         Assert.assertFalse(again.getNewObjects().containsKey(cardKey(LIBRARY_CARD)), "clean shell sent again");
 
-        // A masters B and becomes this proxy's viewer, so A may see what B may see. MindSlaveMaster lives on B's view
-        // and the card stays clean: levelOf reads the master through the controller, and the level comparison sends it
+        // A becomes B's MindSlaveMaster and this proxy's viewer. MindSlaveMaster is on B's view, so the card is dirty on
+        // nothing: the level change alone sends it
         board.b.set(TrackableProperty.MindSlaveMaster, board.a);
         DeltaPacket mastered = board.manager.collectDeltas(board.gameView, List.of(board.a));
         Map<TrackableProperty, Object> delta = mastered.getObjectDeltas().get(cardKey(LIBRARY_CARD));
@@ -314,6 +311,41 @@ public class DeltaSyncUnitTest {
         Assert.assertNotNull(delta, "card not sent");
         Assert.assertEquals(delta.get(TrackableProperty.Zone), ZoneType.Battlefield);
         Assert.assertEquals(delta.get(TrackableProperty.Name), "Grizzly Bears", "shipped to the battlefield as a shell");
+    }
+
+    @Test
+    public void testReplacementOfAFullCardIsClassifiedAfresh() {
+        Board board = new Board();
+        List<PlayerView> viewers = List.of(board.a);
+        board.libraryCard.set(TrackableProperty.PlayerMayLook, new TrackableCollection<>(board.a));
+        board.manager.collectDeltas(board.gameView, viewers);
+        // Another instance of the card at the same key, the copy a zone change makes, with no look on it
+        CardView copy = board.card(LIBRARY_CARD, ZoneType.Library, "Grizzly Bears");
+        board.b.set(TrackableProperty.Library, new TrackableCollection<>(copy));
+        assertShell(board.manager.collectDeltas(board.gameView, viewers), "a new instance of a card sent in full");
+    }
+
+    private static void assertCensus(Board board, Set<CardView> shown, int named, String what) {
+        int[] counts = HeadlessNetworkClient.countHiddenInfo(board.gameView, List.of(board.a), shown);
+        Assert.assertNotNull(counts, what + ": nothing counted");
+        Assert.assertEquals(counts[0], 1, what + ": library cards held");
+        Assert.assertEquals(counts[1], named, what + ": named library cards A may not see");
+    }
+
+    @Test
+    public void testHiddenInfoCensusExemptsOnlyTheInstancesShown() {
+        // The count the network tests assert on, for viewer A and B's named library card. An instance A may see joins
+        // the shown set and is not counted after the look ends; another set, or another instance, does not exempt it
+        Board board = new Board();
+        Set<CardView> shown = Collections.newSetFromMap(new IdentityHashMap<>());
+        board.libraryCard.set(TrackableProperty.PlayerMayLook, new TrackableCollection<>(board.a));
+        assertCensus(board, shown, 0, "while A may look");
+        board.libraryCard.set(TrackableProperty.PlayerMayLook, null);
+        assertCensus(board, shown, 0, "after the look, with the set that saw it");
+        assertCensus(board, Collections.newSetFromMap(new IdentityHashMap<>()), 1, "after the look, with a set that did not");
+        CardView copy = board.card(LIBRARY_CARD, ZoneType.Library, "Grizzly Bears");
+        board.b.set(TrackableProperty.Library, new TrackableCollection<>(copy));
+        assertCensus(board, shown, 1, "another instance of the card, with the set that saw the first");
     }
 
 }

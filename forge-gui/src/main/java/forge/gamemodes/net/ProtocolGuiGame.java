@@ -245,18 +245,19 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     }
 
     /**
-     * Null (unfiltered) once the game is over, and for a proxy holding the spectator controller with no local players,
-     * which netplay does not create today (HostedMatch.registerSpectator only serves the local watch GUI); otherwise a
-     * copy of the local players taken at the start of each walk by the thread running it; empty before the players are
-     * registered, which withholds every library card.
+     * Null (unfiltered) for a proxy holding the spectator controller with no local players, and for a mobile client
+     * once the game is over; otherwise a copy of the local players taken at the start of each walk by the thread
+     * running it; empty before the players are registered, which withholds every library card.
      */
     private Collection<PlayerView> deltaViewers() {
         if (!hasLocalPlayers() && getGameController((PlayerView) null) != null) {
             return null;
         }
-        // Nothing is hidden once the game is over: the mobile port's AbstractGuiGame.mayView then shows every card.
-        // Read live: a game-over set inside a tracker freeze is unfiltered from the first walk after the unfreeze
-        if (getGameView() != null && getGameView().isGameOver()) {
+        // The mobile port's post-game overlay browses every zone through AbstractGuiGame.mayView, which is open to
+        // every card once a mobile game is over, so a mobile client is sent its library cards in full then. The
+        // desktop mayView has no game-over case, so a desktop client keeps its placeholders.
+        // Read live: a game-over set inside a tracker freeze takes effect from the first walk after the unfreeze
+        if (isLibgdxPort() && getGameView() != null && getGameView().isGameOver()) {
             return null;
         }
         return List.copyOf(getLocalPlayers());

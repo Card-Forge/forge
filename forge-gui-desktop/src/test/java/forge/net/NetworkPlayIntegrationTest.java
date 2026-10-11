@@ -174,7 +174,7 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
         // Hidden information, mid-game: what a cheat reading the client's tracker would have found. The client counted,
         // after every applied delta while the game was on, the library cards it held and how many carried a name
-        // although the client may not see them (HeadlessNetworkClient.censusHiddenInfo). None may have.
+        // although it may not see them and was never allowed to (HeadlessNetworkClient.censusHiddenInfo). None may have.
         Assert.assertTrue(result.clientMaxLibraryCards > 0, "The client never held a library card mid-game, so nothing was checked");
         Assert.assertEquals(result.clientMaxNamedLibraryCards, 0,
                 "Mid-game the client held " + result.clientMaxNamedLibraryCards + " named library cards it may not see (of at most "
@@ -182,21 +182,25 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
         netLog.info("Hidden-info check: mid-game the client held at most {} library cards, {} of them named that it may not see",
                 result.clientMaxLibraryCards, result.clientMaxNamedLibraryCards);
 
-        // Hidden information, end of game: nothing is hidden any more (ProtocolGuiGame.deltaViewers), so the library
-        // cards the client held as shells were filled in, in place, over the wire
-        int libraryCardsChecked = 0;
+        // Hidden information, end of game: the same count once more, on the client's final view. No card is exempt as
+        // seen before: this count passes no shown set, so a library card the client was shown and kept named is counted.
+        // This is a desktop client, which keeps its placeholders after the game (ProtocolGuiGame.deltaViewers). Its own
+        // seat is found by name, as HeadlessNetworkClient finds it; the literal is the harness's PLAYER_NAMES[1]
+        Assert.assertTrue(clientGameView.isGameOver(), "The client's final view is not over, so this would not be the end-of-game count");
+        PlayerView remoteSeat = null;
         for (PlayerView pv : clientGameView.getPlayers()) {
-            for (CardView cv : pv.getCards(ZoneType.Library)) {
-                libraryCardsChecked++;
-                Assert.assertFalse(cv.getName().isEmpty(),
-                        "Library card id=" + cv.getId() + " of " + pv.getName() + " still a shell after the game");
-                String stateName = cv.getCurrentState() == null ? "" : cv.getCurrentState().getName();
-                Assert.assertFalse(stateName.isEmpty(),
-                        "Library card id=" + cv.getId() + " of " + pv.getName() + " has no current-state name after the game");
+            if ("Bob (Remote)".equals(pv.getName())) {
+                remoteSeat = pv;
             }
         }
-        Assert.assertTrue(libraryCardsChecked > 0, "No library card reached the client, so none was checked");
-        netLog.info("Hidden-info check: {} library cards on the client", libraryCardsChecked);
+        Assert.assertNotNull(remoteSeat, "Client GameView has no player for the remote seat");
+        int[] atGameOver = HeadlessNetworkClient.countHiddenInfo(clientGameView, List.of(remoteSeat), null);
+        Assert.assertNotNull(atGameOver, "The client's final view has no players to count");
+        Assert.assertTrue(atGameOver[0] > 0, "The client held no library card at game over, so nothing was checked");
+        Assert.assertEquals(atGameOver[1], 0,
+                "At game over the client held " + atGameOver[1] + " named library cards it may not see (of " + atGameOver[0] + " held)");
+        netLog.info("Hidden-info check: at game over the client held {} library cards, {} of them named that it may not see",
+                atGameOver[0], atGameOver[1]);
 
         // Pipeline error assertions
         Assert.assertEquals(result.sendErrors, 0,
@@ -225,8 +229,8 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
     /**
      * A remote client drops mid-game and reconnects. The reconnect's full state carries the whole GameView inline,
-     * library cards included (the full-state path is not filtered yet); the first delta after it re-sends the graph
-     * as new objects, so the library cards the client may not see must be placeholders again from then on.
+     * library cards included; the first delta after it re-sends the graph as new objects, so the library cards the
+     * client may not see must be placeholders again from then on.
      * Stress-gated: the server's disconnect detection and the client's reconnect backoff take about a minute.
      */
     @Test(timeOut = 600000, description = "Library placeholders come back after a reconnect")
@@ -256,8 +260,8 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
         Assert.assertTrue(result.clientDisconnectedAtTurn >= 0, "The scripted disconnect never fired");
         Assert.assertTrue(result.clientReconnected, "The client did not reconnect: " + result.toSummary());
         Assert.assertTrue(result.gameCompleted, "Game should have completed after the reconnect: " + result.toSummary());
-        // The full state is not filtered yet, so right after it the client holds the library cards in full. This pins
-        // that the count ran on the reconnect's full state; when the full-state path is scrubbed it becomes 0
+        // The full state carries the library cards in full, so right after it the client holds them named. This pins
+        // that the count ran on the reconnect's full state
         Assert.assertTrue(result.clientNamedLibraryCardsAfterFullState > 0,
                 "The reconnect's full state carried no named library card, so the count did not see it");
         Assert.assertTrue(result.clientMaxLibraryCardsAfterReconnect > 0,

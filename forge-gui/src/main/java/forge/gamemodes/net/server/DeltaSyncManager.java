@@ -1,6 +1,5 @@
 package forge.gamemodes.net.server;
 
-import forge.card.CardStateName;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -71,21 +70,10 @@ public class DeltaSyncManager implements IHasForgeLog {
         }
     }
 
-    // What a SHELL card is sent: where it is and what anyone at the table sees of it, nothing that says which card it is.
-    // FacedownImageKey and the CurrentState slot join conditionally, see shellKeysFor.
+    // A SHELL card's properties: what a card in a library carries that a client uses, whose it is and where.
+    // Everything else names the card or belongs to another zone
     private static final EnumSet<TrackableProperty> SHELL_PROPS = EnumSet.of(
-            TrackableProperty.Owner, TrackableProperty.Controller, TrackableProperty.Zone,
-            TrackableProperty.Tapped, TrackableProperty.Sickness, TrackableProperty.PhasedOut,
-            TrackableProperty.Attacking, TrackableProperty.Blocking, TrackableProperty.Counters,
-            TrackableProperty.Damage, TrackableProperty.AssignedDamage, TrackableProperty.LethalDamage,
-            TrackableProperty.ShieldCount, TrackableProperty.AttachedCards, TrackableProperty.EntityAttachedTo,
-            TrackableProperty.Token, TrackableProperty.HiddenId, TrackableProperty.Facedown, TrackableProperty.Foretold);
-
-    // A card's state-view slots. Not nulled when a card drops to SHELL: the client keeps its state objects,
-    // and GUI code dereferences CurrentState without a null check
-    private static final EnumSet<TrackableProperty> STATE_SLOTS = EnumSet.of(
-            TrackableProperty.CurrentState, TrackableProperty.AlternateState,
-            TrackableProperty.LeftSplitState, TrackableProperty.RightSplitState);
+            TrackableProperty.Owner, TrackableProperty.Controller, TrackableProperty.Zone);
 
     /** How much of a card this consumer is sent. SHELL: the shell properties and no state views. FULL: everything. */
     private enum Level { SHELL, FULL }
@@ -100,8 +88,7 @@ public class DeltaSyncManager implements IHasForgeLog {
     private record Classifier(Collection<PlayerView> viewers, Map<CardView, Level> levels, Set<Integer> revealed) {
         Level levelFor(TrackableObject obj) {
             // Unfiltered, every card is FULL: nothing to classify or cache. A card in the reveal history is FULL
-            // for every consumer: the collection is one list shared by every proxy, as on master, so this adds no
-            // exposure; per-viewer history is a later change
+            // for every consumer: the history is one list on the GameView, sent to every proxy alike
             return viewers != null && obj instanceof CardView cv
                     ? levels.computeIfAbsent(cv, c -> revealed.contains(c.getId()) ? Level.FULL : levelOf(c, viewers))
                     : Level.FULL;
@@ -141,22 +128,14 @@ public class DeltaSyncManager implements IHasForgeLog {
     private List<String> lastChecksumDetail;
 
     /**
-     * Unfiltered: every card goes out in full. No production caller; ProtocolGuiGame passes its local players to
-     * {@link #collectDeltas(GameView, Collection)}. Kept because open #12147's GameCheckpointTest calls it.
-     */
-    public DeltaPacket collectDeltas(GameView gameView) {
-        return collectDeltas(gameView, null);
-    }
-
-    /**
      * Collect all changes from the GameView hierarchy and build a delta packet.
      * New objects are registered with this consumer and sent in full.
      * Existing objects only send properties dirty for THIS consumer.
      *
-     * <p>A library card none of {@code viewers} may see goes out as a shell (no state views, nothing identifying),
-     * and is filled in on the instance the client already holds once one of them may see it; a card in the game's
-     * reveal history goes out in full, as on master. {@code null} viewers means unfiltered; an empty collection
-     * sees nothing.
+     * <p>A library card none of {@code viewers} may see goes out as a shell (whose it is and where, no state views)
+     * and is filled in on the instance the client holds once one of them may see it; an instance sent in full is
+     * never sent as a shell again. A card in the game's reveal history goes out in full. {@code null} viewers means
+     * unfiltered; an empty collection sees nothing.
      *
      * <p>Another thread can change the graph while this runs, so a walk that throws is tried
      * again. If none of the attempts get through, the packet ships with whatever was collected
@@ -273,14 +252,16 @@ public class DeltaSyncManager implements IHasForgeLog {
         TrackableObject auth = authoritativeInstances.get(deltaKey);
         if (auth != null && auth != obj) return;
 
+        Sent held = registeredByKey.get(deltaKey);
         // Dedup: skip if same instance already processed this pass
         if (!currentObjectIds.add(deltaKey)) {
-            Sent held = registeredByKey.get(deltaKey);
             if (held != null && held.obj() == obj) return;
             // Different instance at same key — replacement (zone change)
         }
 
-        Level level = collectObjectDelta(obj, classifier.levelFor(obj), objectDeltas, newObjects);
+        // An instance sent in full stays FULL; another instance at this key, a zone-change copy, is classified afresh
+        Level level = held != null && held.obj() == obj && held.level() == Level.FULL ? Level.FULL : classifier.levelFor(obj);
+        collectObjectDelta(obj, level, objectDeltas, newObjects);
 
         boolean parentIsGameEntityView = obj instanceof GameEntityView;
         for (Map.Entry<TrackableProperty, Object> entry : ((Map<TrackableProperty, Object>) obj.getProps()).entrySet()) {
@@ -313,13 +294,13 @@ public class DeltaSyncManager implements IHasForgeLog {
      * filtered by the authoritative check in walkAndCollect.
      *
      * @param level the level this walk classified the object at, FULL for anything but a card
-     * @return the level the consumer now holds the object at
      */
-    private Level collectObjectDelta(TrackableObject obj, Level level,
-                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                     Map<Integer, Map<TrackableProperty, Object>> newObjects) {
+    private void collectObjectDelta(TrackableObject obj, Level level,
+                                    Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
+                                    Map<Integer, Map<TrackableProperty, Object>> newObjects) {
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
         Sent old = registeredByKey.get(deltaKey);
+        Set<TrackableProperty> allowed = level == Level.SHELL ? SHELL_PROPS : null;
 
         if (old != null && old.obj() == obj) {
             // Existing object — dirty props only
@@ -329,17 +310,17 @@ public class DeltaSyncManager implements IHasForgeLog {
             // A level change sends a clean card too: the viewers and the controller's MindSlaveMaster dirty nothing on it
             Tracker tracker = obj.getTracker();
             if (dirtyProps.isEmpty() && (tracker == null || !tracker.isFrozen()) && level == old.level()) {
-                return old.level();
+                return;
             }
             Map<TrackableProperty, Object> delta;
             if (level == old.level()) {
-                delta = level == Level.SHELL ? buildShellMap((CardView) obj, dirtyProps) : buildPropertyMap(obj, dirtyProps);
-            } else if (level == Level.FULL) {
-                delta = buildUpgradeMap((CardView) obj, dirtyProps);
+                delta = buildPropertyMap(obj, dirtyProps, allowed);
             } else {
-                delta = buildDowngradeMap((CardView) obj, dirtyProps, objectDeltas);
-            }
-            if (level != old.level()) {
+                // SHELL to FULL, the only change a held instance makes: everything the card holds, applied to the
+                // instance the client has, plus any dirty key it no longer holds. The walk then reaches its state
+                // views, which go out as new objects
+                dirtyProps.addAll(((Map<TrackableProperty, Object>) obj.getProps()).keySet());
+                delta = buildPropertyMap(obj, dirtyProps);
                 registeredByKey.put(deltaKey, new Sent(obj, level));
                 netLog.trace("[DeltaSync] Level {} -> {}: id={}", old.level(), level, obj.getId());
             }
@@ -353,22 +334,18 @@ public class DeltaSyncManager implements IHasForgeLog {
                 }
                 walkTrace.append(String.format(" 0x%08X", deltaKey)).append(delta.keySet());
             }
-            return level;
+            return;
         }
 
         // New or replacement — send full state via newObjects so the client
         // clears stale properties before applying
         // Built before registering: if this throws, the object stays unregistered and a later
         // walk retries it, instead of being on the books as sent when it never was
-        Map<TrackableProperty, Object> allProps = level == Level.SHELL
-                ? buildShellMap((CardView) obj, null)
-                : buildPropertyMap(obj, null);
+        Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null, allowed);
         if (old != null) {
             old.obj().unregisterConsumer(consumerId);
+            objectDeltas.remove(deltaKey);
         }
-        // An earlier attempt of this call may have left a delta here (a downgrade's nulls for a state view an
-        // upgrade has since taken off the books); the client applies deltas after new objects, so drop it
-        objectDeltas.remove(deltaKey);
         obj.registerConsumer(consumerId);
         obj.getAndClearDirtyProps(consumerId);
         registeredByKey.put(deltaKey, new Sent(obj, level));
@@ -377,12 +354,11 @@ public class DeltaSyncManager implements IHasForgeLog {
             walkTrace.append(String.format(" %s0x%08X(%d%s)", old != null ? "~" : "+", deltaKey, allProps.size(),
                     level == Level.SHELL ? " shell" : ""));
         }
-        return level;
     }
 
     /**
      * The ids of the cards in the game's reveal history; empty when it has none. By id, not instance: a revealed card
-     * that changes instance on its way back into a library stays listed, as it does on master.
+     * that changes instance on its way back into a library stays listed.
      */
     private static Set<Integer> revealedCards(GameView gameView) {
         Set<Integer> revealed = new HashSet<>();
@@ -396,32 +372,27 @@ public class DeltaSyncManager implements IHasForgeLog {
     }
 
     /**
-     * The level {@code cv} goes out at for {@code viewers}: FULL when unfiltered or outside the library, otherwise
-     * SHELL unless at least one viewer may see it. Zone, Controller, Facedown and the controller's MindSlaveMaster
-     * are read as the packet will carry them (the delayed values under a freeze, as buildPropertyMap does), so the
-     * zone a packet ships and the level it ships at agree; PlayerMayLook ignores freezes and is read live.
-     *
-     * <p>No checksum change follows from this: library cards are not gathered by collectChecksumObjects, and the
-     * Library collection property, when sampled, hashes sorted ids, which a shell keeps, so both ends still agree.
+     * The level {@code cv} goes out at for {@code viewers}: FULL outside the library; in it, FULL when a viewer is in
+     * PlayerMayLook or is the controller's MindSlaveMaster while the controller is, otherwise SHELL. Zone, Controller
+     * and MindSlaveMaster are read as the packet carries them, delayed under a freeze; PlayerMayLook ignores freezes.
      */
     private static Level levelOf(CardView cv, Collection<PlayerView> viewers) {
-        if (viewers == null) {
+        Map<TrackableProperty, Object> delayed = delayedPropsFor(cv);
+        if (effectiveValue(cv, delayed, TrackableProperty.Zone) != ZoneType.Library) {
             return Level.FULL;
         }
-        Map<TrackableProperty, Object> delayed = delayedPropsFor(cv);
-        ZoneType zone = (ZoneType) effectiveValue(cv, delayed, TrackableProperty.Zone);
-        // Only library cards are filtered. A card in no zone stays FULL, as the client's own rule shows it to everyone
-        if (zone != ZoneType.Library) {
-            return Level.FULL;
+        // CardView.canBeShownTo restricted to the Library zone
+        @SuppressWarnings("unchecked")
+        TrackableCollection<PlayerView> mayLook = (TrackableCollection<PlayerView>) ((Map<TrackableProperty, Object>) cv.getProps()).get(TrackableProperty.PlayerMayLook);
+        if (mayLook == null) {
+            return Level.SHELL;
         }
         PlayerView controller = (PlayerView) effectiveValue(cv, delayed, TrackableProperty.Controller);
-        boolean faceDown = Boolean.TRUE.equals(effectiveValue(cv, delayed, TrackableProperty.Facedown));
-        @SuppressWarnings("unchecked")
-        Iterable<PlayerView> mayLook = (Iterable<PlayerView>) ((Map<TrackableProperty, Object>) cv.getProps()).get(TrackableProperty.PlayerMayLook);
         PlayerView master = controller == null ? null
                 : (PlayerView) effectiveValue(controller, delayedPropsFor(controller), TrackableProperty.MindSlaveMaster);
         for (PlayerView viewer : viewers) {
-            if (CardView.canBeShownTo(viewer, zone, controller, faceDown, mayLook, master)) {
+            if (mayLook.indexOf(viewer) != -1
+                    || master != null && master != controller && master == viewer && mayLook.indexOf(controller) != -1) {
                 return Level.FULL;
             }
         }
@@ -444,104 +415,6 @@ public class DeltaSyncManager implements IHasForgeLog {
     private static Object effectiveValue(TrackableObject obj, Map<TrackableProperty, Object> delayed, TrackableProperty prop) {
         Object value = delayed.containsKey(prop) ? delayed.get(prop) : ((Map<TrackableProperty, Object>) obj.getProps()).get(prop);
         return value != null ? value : prop.getDefaultValue();
-    }
-
-    /** Every key {@code obj} holds as a packet built now sees it, delayed ones included. */
-    private static EnumSet<TrackableProperty> heldKeys(TrackableObject obj, Map<TrackableProperty, Object> delayed) {
-        EnumSet<TrackableProperty> keys = EnumSet.noneOf(TrackableProperty.class);
-        keys.addAll(((Map<TrackableProperty, Object>) obj.getProps()).keySet());
-        keys.addAll(delayed.keySet());
-        return keys;
-    }
-
-    /** The keys a SHELL card may carry: the shell set, plus two that are only safe in some states. */
-    private static EnumSet<TrackableProperty> shellKeysFor(CardView cv, Map<TrackableProperty, Object> delayed) {
-        EnumSet<TrackableProperty> keys = EnumSet.copyOf(SHELL_PROPS);
-        if (Boolean.TRUE.equals(effectiveValue(cv, delayed, TrackableProperty.Facedown))) {
-            keys.add(TrackableProperty.FacedownImageKey);
-        }
-        // Any state other than FaceDown says which card this is. The slot ignores freezes, so it is read live
-        CardStateView current = cv.getCurrentState();
-        if (current != null && current.getState() == CardStateName.FaceDown) {
-            keys.add(TrackableProperty.CurrentState);
-        }
-        return keys;
-    }
-
-    private static int stateViewKey(CardView cv, CardStateName state) {
-        return DeltaPacket.makeDeltaKey(DeltaPacket.TYPE_CSV, cv.getId() * 16 + state.ordinal());
-    }
-
-    /**
-     * A SHELL card's property map. Only shell keys can reach it, delayed ones included; {@code dirtyProps} null
-     * means every shell key the card holds.
-     */
-    private Map<TrackableProperty, Object> buildShellMap(CardView cv, Set<TrackableProperty> dirtyProps) {
-        Map<TrackableProperty, Object> delayed = delayedPropsFor(cv);
-        EnumSet<TrackableProperty> shellKeys = shellKeysFor(cv, delayed);
-        Set<TrackableProperty> keys = dirtyProps;
-        if (keys == null) {
-            keys = heldKeys(cv, delayed);
-            keys.retainAll(shellKeys);
-        }
-        return buildPropertyMap(cv, keys, shellKeys);
-    }
-
-    /**
-     * A card the consumer holds as a SHELL and may now see: its full map, applied to the instance the client already
-     * has. The walk then recurses into its state views, which take the new-object branch; any still on the books
-     * from an earlier FULL stretch are dropped first so they do too.
-     */
-    private Map<TrackableProperty, Object> buildUpgradeMap(CardView cv, EnumSet<TrackableProperty> dirtyProps) {
-        for (CardStateName state : CardStateName.values()) {
-            Sent view = registeredByKey.remove(stateViewKey(cv, state));
-            if (view != null) {
-                view.obj().unregisterConsumer(consumerId);
-            }
-        }
-        // Everything the card holds (delayed props join in buildPropertyMap), plus any dirty key it no longer holds:
-        // the client may still have a shell value for it
-        EnumSet<TrackableProperty> keys = EnumSet.copyOf(dirtyProps);
-        keys.addAll(((Map<TrackableProperty, Object>) cv.getProps()).keySet());
-        return buildPropertyMap(cv, keys);
-    }
-
-    /**
-     * A card the consumer holds FULL and may no longer see: the shell values, and null for every other key it holds
-     * except the state-view slots. Each of its registered state views gets a delta setting everything it holds to
-     * null; the walk does not reach a shell's state views, so the prune unregisters them at the end of this walk.
-     */
-    private Map<TrackableProperty, Object> buildDowngradeMap(CardView cv, EnumSet<TrackableProperty> dirtyProps,
-                                                             Map<Integer, Map<TrackableProperty, Object>> objectDeltas) {
-        Map<TrackableProperty, Object> delayed = delayedPropsFor(cv);
-        EnumSet<TrackableProperty> shellKeys = shellKeysFor(cv, delayed);
-        EnumSet<TrackableProperty> held = heldKeys(cv, delayed);
-        held.addAll(dirtyProps);
-        EnumSet<TrackableProperty> keys = EnumSet.copyOf(held);
-        keys.retainAll(shellKeys);
-        Map<TrackableProperty, Object> delta = buildPropertyMap(cv, keys, shellKeys);
-        for (TrackableProperty prop : held) {
-            if (!shellKeys.contains(prop) && !STATE_SLOTS.contains(prop)) {
-                delta.put(prop, null);
-            }
-        }
-        for (CardStateName state : CardStateName.values()) {
-            int viewKey = stateViewKey(cv, state);
-            Sent view = registeredByKey.get(viewKey);
-            if (view == null) {
-                continue;
-            }
-            EnumSet<TrackableProperty> viewHeld = heldKeys(view.obj(), delayedPropsFor(view.obj()));
-            viewHeld.addAll(view.obj().getAndClearDirtyProps(consumerId));
-            if (viewHeld.isEmpty()) {
-                continue;
-            }
-            Map<TrackableProperty, Object> cleared = objectDeltas.computeIfAbsent(viewKey, k -> new EnumMap<>(TrackableProperty.class));
-            for (TrackableProperty prop : viewHeld) {
-                cleared.put(prop, null);
-            }
-        }
-        return delta;
     }
 
     /**
@@ -756,9 +629,8 @@ public class DeltaSyncManager implements IHasForgeLog {
         if (type < 0) return;
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
         if (!visited.add(deltaKey)) return;
-        // No state view is registered here, only by the collectDeltas walk that sends it. For a shell's that matters:
-        // it is never sent, so a consumer registered here would stay on it with no prune or reset() to remove it.
-        // A state view holds no TrackableObject, so returning here skips nothing below it
+        // A state view is registered by the collectDeltas walk that sends it: a shell's is never sent, and a
+        // registration made here would never be pruned or reset. It holds no TrackableObject: nothing below is skipped
         if (obj instanceof CardStateView) return;
 
         // Only register consumer if not already tracked — don't add to

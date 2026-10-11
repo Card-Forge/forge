@@ -607,8 +607,9 @@ public class CardView extends GameEntityView {
     }
 
     public boolean mayPlayerLook(PlayerView pv) {
+        TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
-        return pv != null && includesViewer(get(TrackableProperty.PlayerMayLook), pv);
+        return col != null && col.indexOf(pv) != -1;
     }
     void setPlayerMayLook(Iterable<Player> list) {
         if (Iterables.isEmpty(list)) {
@@ -624,29 +625,13 @@ public class CardView extends GameEntityView {
         return IterableUtil.any(viewers, this::canBeShownTo);
     }
 
-    /**
-     * The static overload over this card's live values. A card with no controller that gets past the zone switch
-     * answers false.
-     */
     public boolean canBeShownTo(final PlayerView viewer) {
-        final PlayerView controller = getController();
-        return canBeShownTo(viewer, getZone(), controller, isFaceDown(), get(TrackableProperty.PlayerMayLook),
-                controller == null ? null : controller.getMindSlaveMaster());
-    }
-
-    /**
-     * The rule behind {@link #canBeShownTo(PlayerView)}, over explicit values instead of the card's getters, so a
-     * caller can classify a card from the values it is about to send: under a tracker freeze those are the delayed
-     * ones, while the getters still answer for the zone the card is leaving. {@code mayLook} is the card's
-     * {@code PlayerMayLook}, {@code controllerMindSlaveMaster} the controller's {@code MindSlaveMaster}, null when
-     * there is no controller, so a card with none that gets past the zone switch answers false.
-     */
-    public static boolean canBeShownTo(final PlayerView viewer, final ZoneType zone, final PlayerView controller,
-            final boolean faceDown, final Iterable<PlayerView> mayLook, final PlayerView controllerMindSlaveMaster) {
         if (viewer == null) { return false; }
 
+        ZoneType zone = getZone();
         if (zone == null) { return true; } //cards outside any zone are visible to all
 
+        final PlayerView controller = getController();
         switch (zone) {
         case Ante:
         case Command:
@@ -660,7 +645,7 @@ public class CardView extends GameEntityView {
         case Exile:
         case Merged:
             //in exile, only face up cards and face down cards you can look at should be shown (since "exile face down" is a thing)
-            if (!faceDown) {
+            if (!isFaceDown()) {
                 return true;
             }
             break;
@@ -671,7 +656,7 @@ public class CardView extends GameEntityView {
             break;
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
-            if (controller.isOpponentOf(viewer) && !includesViewer(mayLook, viewer)) {
+            if (controller.isOpponentOf(viewer) && !mayPlayerLook(viewer)) {
                 break;
             }
             return true;
@@ -692,21 +677,14 @@ public class CardView extends GameEntityView {
         }
 
         // special viewing permissions for viewer
-        if (includesViewer(mayLook, viewer)) {
+        if (mayPlayerLook(viewer)) {
             return true;
         }
 
         //if viewer is controlled by another player, also check if card can be shown to that player
-        if (controllerMindSlaveMaster != null && controllerMindSlaveMaster != controller && controllerMindSlaveMaster == viewer) {
-            return canBeShownTo(controller, zone, controller, faceDown, mayLook, controllerMindSlaveMaster);
-        }
-        return false;
-    }
-
-    private static boolean includesViewer(final Iterable<PlayerView> mayLook, final PlayerView viewer) {
-        if (mayLook == null) { return false; }
-        for (final PlayerView pv : mayLook) {
-            if (viewer.equals(pv)) { return true; }
+        PlayerView mindSlaveMaster = controller.getMindSlaveMaster();
+        if (mindSlaveMaster != null && mindSlaveMaster != controller && mindSlaveMaster == viewer) {
+            return canBeShownTo(controller);
         }
         return false;
     }

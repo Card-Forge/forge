@@ -56,6 +56,10 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
     // with a name, and the most it held at all (so a zero cannot come from an empty library)
     private final AtomicInteger maxNamedLibraryCards = new AtomicInteger(0);
     private final AtomicInteger maxLibraryCards = new AtomicInteger(0);
+    // Library card instances this client was allowed to see. DeltaSyncManager keeps sending an instance it sent in full
+    // in full, so the client keeps its name after the look ends; the census does not count those
+    private final java.util.Set<forge.game.card.CardView> shownLibraryCards =
+            java.util.Collections.synchronizedSet(java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>()));
     // After a reconnect (a second full state while the game is on): the same two over the deltas applied after the
     // reconnect's full state, and the named count right after that full state arrived
     private final AtomicBoolean afterReconnect = new AtomicBoolean(false);
@@ -181,8 +185,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
     /**
      * What a cheat would read: after each applied delta, while the game is on, count the library cards the client
      * holds and how many of them carry a name (a current state with a name, or an oracle name on the card) although
-     * this client may not see them: not shown to any of its players by the client's own rule (CardView.canBeShownToAny,
-     * so a card revealed to it through PlayerMayLook is not counted) and not in the game's reveal history.
+     * this client may not see them: not shown to any of its players by the client's own rule (CardView.canBeShownToAny),
+     * not in the game's reveal history, and not an instance it was allowed to see before (DeltaSyncManager keeps that
+     * one in full, so its name stays after the look ends).
      */
     private void censusHiddenInfo(forge.game.GameView gameView) {
         int[] counts = countHiddenInfo(gameView);
@@ -207,10 +212,24 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
 
     /** {library cards held, library cards named that this client may not see}, or null when there is no game to count. */
     private int[] countHiddenInfo(forge.game.GameView gameView) {
-        if (gameView == null || gameView.isGameOver() || gameView.getPlayers() == null || guiGame == null) {
+        if (gameView == null || gameView.isGameOver() || guiGame == null) {
             return null;
         }
-        java.util.Set<forge.game.player.PlayerView> mine = guiGame.getLocalPlayers();
+        return countHiddenInfo(gameView, guiGame.getLocalPlayers(), shownLibraryCards);
+    }
+
+    /**
+     * {library cards held, library cards named that none of {@code mine} may see}, or null when the view has no
+     * players or {@code mine} is empty (CardView.canBeShownToAny shows every card to an empty set, so the count would
+     * be zero by construction). {@code shown}, when not null, collects the instances {@code mine} may see and does not
+     * count them from then on; null counts every named card {@code mine} may not see now. Also run by
+     * NetworkPlayIntegrationTest on the client's final view.
+     */
+    static int[] countHiddenInfo(forge.game.GameView gameView, Iterable<forge.game.player.PlayerView> mine,
+                                 java.util.Set<forge.game.card.CardView> shown) {
+        if (gameView.getPlayers() == null || !mine.iterator().hasNext()) {
+            return null;
+        }
         java.util.Set<Integer> revealed = new java.util.HashSet<>();
         if (gameView.getRevealedCollection() != null) {
             for (forge.game.card.CardView cv : gameView.getRevealedCollection()) {
@@ -228,7 +247,10 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
                 boolean stateNamed = cv.getCurrentState() != null && !cv.getCurrentState().getName().isEmpty();
                 boolean oracleNamed = ((java.util.Map<?, ?>) cv.getProps()).containsKey(forge.trackable.TrackableProperty.OracleName);
                 boolean maySee = cv.canBeShownToAny(mine) || revealed.contains(cv.getId());
-                if ((stateNamed || oracleNamed) && !maySee) {
+                if (maySee && shown != null) {
+                    shown.add(cv);
+                }
+                if ((stateNamed || oracleNamed) && !maySee && (shown == null || !shown.contains(cv))) {
                     named++;
                 }
             }
