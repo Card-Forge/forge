@@ -338,9 +338,8 @@ public abstract class GameLobby implements IHasGameType {
 
     private boolean isEnoughTeams() {
         int lastTeam = -1;
-        final boolean useArchenemyTeams = data.appliedVariants.contains(GameType.Archenemy);
         for (final LobbySlot slot : data.slots) {
-            final int team = useArchenemyTeams ? (slot.isArchenemy() ? 0 : 1) : slot.getTeam();
+            final int team = teamOf(slot);
             if (lastTeam == -1) {
                 lastTeam = team;
             } else if (lastTeam != team) {
@@ -348,6 +347,14 @@ public abstract class GameLobby implements IHasGameType {
             }
         }
         return false;
+    }
+
+    /** Under Archenemy the archenemy flag decides sides, whatever team the seat holds. */
+    private int teamOf(final LobbySlot slot) {
+        if (data.appliedVariants.contains(GameType.Archenemy)) {
+            return slot.isArchenemy() ? 0 : 1;
+        }
+        return slot.getTeam();
     }
 
     protected void updateView(final boolean fullUpdate) {
@@ -451,7 +458,7 @@ public abstract class GameLobby implements IHasGameType {
             final int avatar = slot.getAvatarIndex();
             final int sleeve = slot.getSleeveIndex();
             final boolean isArchenemy = slot.isArchenemy();
-            final int team = slot.getTeam();
+            final int team = teamOf(slot);
             final Set<AIOption> aiOptions = slot.getAiOptions(); // TODO: could AiOptions carry the choice of which AI is selected to play against?
 
             final boolean isAI = slot.getType() == LobbySlotType.AI;
