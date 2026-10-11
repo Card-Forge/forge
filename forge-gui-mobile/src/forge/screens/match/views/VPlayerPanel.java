@@ -106,6 +106,8 @@ public class VPlayerPanel extends FContainer {
     private static final float TAB_MAX_HEIGHT_RATIO = 0.9f; //tab height as a fraction of tab width
     private static final float TAB_MIN_ICON = Utils.scale(16);
     private float tabColWidth;
+    private float tabValueWidth;
+    private final List<InfoTab> leftTabs = new ArrayList<>(), rightTabs = new ArrayList<>(), shownTabs = new ArrayList<>();
 
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
@@ -271,7 +273,7 @@ public class VPlayerPanel extends FContainer {
             float eased = 1f - (1f - t) * (1f - t) * (1f - t);
             slideProgress = closing ? 1f - eased : eased;
             if (selectedTab != null && Forge.isLandscapeMode()) {
-                updateTabLayout(initW, initH);
+                updateAnimatedLayout(initW, initH);
             }
             return t < 1f;
         }
@@ -287,7 +289,7 @@ public class VPlayerPanel extends FContainer {
                 forceClose = true;
                 try { setSelectedTab(null); } finally { forceClose = false; }
             } else if (!endingAll && selectedTab != null && Forge.isLandscapeMode()) {
-                updateTabLayout(initW, initH);
+                updateAnimatedLayout(initW, initH);
             }
         }
     }
@@ -402,7 +404,7 @@ public class VPlayerPanel extends FContainer {
         syncCommandZone();
         if (Forge.isLandscapeMode() && initW > 0) {
             layoutTabsLandscape(); //tab appears or disappears as cards come and go
-            updateTabLayout(initW, initH); //width follows the card count
+            updateAnimatedLayout(initW, initH); //width follows the card count
         } else {
             revalidate();
         }
@@ -481,7 +483,8 @@ public class VPlayerPanel extends FContainer {
         lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
         x += lifeLabelWidth;
 
-        List<InfoTab> shown = new ArrayList<>();
+        List<InfoTab> shown = shownTabs;
+        shown.clear();
         for (InfoTab tab : tabs) {
             boolean show = tab.isTabShown();
             tab.setVisible(show);
@@ -529,7 +532,8 @@ public class VPlayerPanel extends FContainer {
         initH = height;
         syncCommandZone();
         //tab columns keep a minimum width so the icon and a 2-digit count always fit, even with the half size avatars of 3-4 player games
-        tabColWidth = Math.max(avatar.getWidth(), TAB_MIN_ICON + INFO_FONT.getBounds("00").width + 3 * INFO_TAB_PADDING_X);
+        tabValueWidth = INFO_FONT.getBounds("00").width;
+        tabColWidth = Math.max(avatar.getWidth(), TAB_MIN_ICON + tabValueWidth + 3 * INFO_TAB_PADDING_X);
 
         float x = 0;
         float y = 0;
@@ -552,7 +556,9 @@ public class VPlayerPanel extends FContainer {
     private void layoutTabsLandscape() {
         if (tabs.isEmpty()) { return; }
         float tabWidth = tabColWidth;
-        List<InfoTab> left = new ArrayList<>(), right = new ArrayList<>();
+        List<InfoTab> left = leftTabs, right = rightTabs;
+        left.clear();
+        right.clear();
         for (InfoTab tab : tabs) {
             boolean show = tab.isTabShown();
             tab.setVisible(show);
@@ -562,7 +568,8 @@ public class VPlayerPanel extends FContainer {
         commonTabWidth = right.isEmpty() ? 0 : tabWidth;
 
         //one tab height for both columns so every tab and icon matches
-        float valueW = INFO_FONT.getBounds("00").width;
+        if (tabValueWidth <= 0) { tabValueWidth = INFO_FONT.getBounds("00").width; }
+        float valueW = tabValueWidth;
         float cell = tabWidth * TAB_MAX_HEIGHT_RATIO;
         if (!left.isEmpty()) { cell = Math.min(cell, (tabColHeight - 2 * TAB_COLUMN_PAD) / left.size()); }
         if (!right.isEmpty()) { cell = Math.min(cell, (initH - 2 * TAB_COLUMN_PAD) / right.size()); }
@@ -598,10 +605,14 @@ public class VPlayerPanel extends FContainer {
     }
 
     private void updateTabLayout(float width, float height) {
-        float x = tabColWidth;
         phaseIndicator.resetFont();
-        phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
-        x += phaseIndicator.getWidth();
+        phaseIndicator.setBounds(tabColWidth, 0, avatar.getWidth() * 0.6f, height);
+        updateAnimatedLayout(width, height);
+    }
+
+    //only what moves during slide animations: field, command zone and zone displays
+    private void updateAnimatedLayout(float width, float height) {
+        float x = tabColWidth + avatar.getWidth() * 0.6f; //where the phase indicator ends
 
         float fieldWidth = width - x - commonTabWidth;
         float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
@@ -868,7 +879,7 @@ public class VPlayerPanel extends FContainer {
             boolean rotated = lblLife.getRotate180();
             float box = tabIconSize > 0 ? tabIconSize : Math.min(getWidth(), getHeight()) * 0.6f;
             float gap = INFO_TAB_PADDING_X * 2;
-            float valueW = INFO_FONT.getBounds("00").width;
+            float valueW = tabValueWidth;
             float x0 = Math.max(INFO_TAB_PADDING_X, (getWidth() - (box + gap + valueW)) / 2);
             float cy = getHeight() / 2;
 
@@ -1127,7 +1138,7 @@ public class VPlayerPanel extends FContainer {
             float eased = 1f - (1f - t) * (1f - t) * (1f - t);
             commandProgress = startProgress + ((opening ? 1f : 0f) - startProgress) * eased;
             if (Forge.isLandscapeMode()) {
-                updateTabLayout(initW, initH);
+                updateAnimatedLayout(initW, initH);
             }
             return t < 1f;
         }
@@ -1140,7 +1151,7 @@ public class VPlayerPanel extends FContainer {
             if (!opening) { commandZone.setVisible(false); }
             if (Forge.isLandscapeMode()) {
                 layoutTabsLandscape();
-                updateTabLayout(initW, initH);
+                updateAnimatedLayout(initW, initH);
             }
         }
     }

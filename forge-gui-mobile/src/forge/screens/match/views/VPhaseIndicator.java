@@ -45,6 +45,7 @@ public class VPhaseIndicator extends FContainer {
     private float idleTime;
     private ExpandAnimation expandAnimation;
     private Color scratchColor = new Color();
+    private final Color scratchFill = new Color();
 
     public VPhaseIndicator(PlayerView player0) {
         player = player0;
@@ -63,6 +64,12 @@ public class VPhaseIndicator extends FContainer {
     }
 
     private boolean isCollapsedMode() { return Forge.isLandscapeMode() && !expandTarget; }
+
+    //reused colour so the tint doesn't allocate a new FSkinColor every frame
+    private Color tint(FSkinColor color, float alpha) {
+        final Color c = color.getColor();
+        return scratchFill.set(c.r, c.g, c.b, alpha);
+    }
 
     private void setExpanded(boolean open) {
         expandTarget = open;
@@ -133,11 +140,11 @@ public class VPhaseIndicator extends FContainer {
             String text = null;
             Color base;
             if (myTurn) {
-                g.fillRect(active.alphaColor(0.4f * a), 0, 0, w, h);
+                g.fillRect(tint(active, 0.4f * a), 0, 0, w, h);
                 base = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_TEXT : Colors.CLR_TEXT).getColor();
                 if (phase != null) { text = phase.nameForScripts; }
             } else {
-                g.fillRect(inactive.alphaColor(0.4f * a), 0, 0, w, h);
+                g.fillRect(tint(inactive, 0.4f * a), 0, 0, w, h);
                 base = player.getHasPriority() ? active.getColor() : IDLE_NAME_COLOR;
                 text = "--";//Forge.getLocalizer().getMessage("lblPriority");
             }

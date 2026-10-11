@@ -407,8 +407,10 @@ public class MatchScreen extends FScreen {
     }
     //hover preview keeps using the existing magnifier setting, drag preview always shows
     private boolean isHoverPreviewEnabled() {
-        return FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle
-                && (!GuiBase.isMobile() || Forge.hasGamepad());
+        //cheap checks first, the preference lookup last
+        return Forge.magnify && Forge.magnifyToggle
+                && (!GuiBase.isMobile() || Forge.hasGamepad())
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER);
     }
 
     private void drawCardPreview(Graphics g) {
@@ -441,7 +443,7 @@ public class MatchScreen extends FScreen {
             }
 
             //mouse or gamepad hover over any card or stack item
-            if (card == null && isHoverPreviewEnabled() && potentialListener != null) {
+            if (card == null && potentialListener != null && isHoverPreviewEnabled()) {
                 for (FDisplayObject object : potentialListener) {
                     if (object == null || !object.isHovered()) { continue; }
                     if (object instanceof FCardPanel cardPanel) {
@@ -516,42 +518,70 @@ public class MatchScreen extends FScreen {
 
     void drawArcs(Graphics g) {
         final GameView game = MatchController.instance.getGameView();
-        if (game == null)
+        if (game == null) {
             return;
+        }
         //get all card targeting arrow origins on the battlefield
         endpoints.clear();
         cardsonBattlefield.clear();
         playerViewSet.clear();
+        final boolean inCombat = game.getCombat() != null;
+        final boolean netGame = MatchController.instance.isNetGame();
+
         try {
-            for (PlayerView p : game.getPlayers()) {
-                if (p == null)
-                    continue;
-                VPlayerPanel playerPanel = getPlayerPanel(p);
-                if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
-                    playerViewSet.add(p);
-                    FCollectionView<CardView> battlefield = p.getBattlefield();
-                    if (!battlefield.isEmpty()) {
-                        Iterable<CardView> bfIter = MatchController.instance.isNetGame()
-                                ? battlefield.threadSafeIterable() : battlefield;
-                        for (CardView c : bfIter) {
-                            CardAreaPanel panel = CardAreaPanel.get(c);
-                            Vector2 origin = panel.getTargetingArrowOrigin();
-                            //outside left bounds
-                            if (origin.x < playerPanel.getField().getLeft())
-                                continue;
-                            //outside right bounds
-                            if (origin.x > playerPanel.getField().getRight())
-                                continue;
-                            endpoints.put(c.getId(), origin);
-                            cardsonBattlefield.add(c);
-                        }
+            final FCollectionView<PlayerView> playersList = game.getPlayers();
+            final int playersCount = playersList.size();
+
+            for (int i = 0; i < playersCount; i++) {
+                final PlayerView p = playersList.get(i);
+                if (p == null) continue;
+
+                final VPlayerPanel playerPanel = getPlayerPanel(p);
+                if (playerPanel == null || !playerPanelsList.contains(playerPanel)) continue;
+                playerViewSet.add(p);
+
+                final FCollectionView<CardView> battlefield = p.getBattlefield();
+                if (battlefield.isEmpty()) continue;
+
+                final float left = playerPanel.getField().getLeft();
+                final float right = playerPanel.getField().getRight();
+
+                if (netGame) {
+                    // network games need the thread-safe iterator
+                    for (CardView c : battlefield.threadSafeIterable()) {
+                        collectEndpoint(c, inCombat, left, right);
+                    }
+                } else {
+                    // standard O(1) index
+                    final int bfSize = battlefield.size();
+                    for (int j = 0; j < bfSize; j++) {
+                        collectEndpoint(battlefield.get(j), inCombat, left, right);
                     }
                 }
             }
-            if (endpoints.isEmpty())
+            if (endpoints.isEmpty()) {
                 return;
+            }
             TargetingOverlay.assembleArrows(g, cardsonBattlefield, endpoints, game.getCombat(), playerViewSet);
         } catch (Exception ignored) {}
+    }
+
+    private void collectEndpoint(CardView c, boolean inCombat, float left, float right) {
+        if (c == null) return;
+        if (!inCombat && !hasArrowRelation(c)) return;
+        final CardAreaPanel panel = CardAreaPanel.get(c);
+        if (panel == null) return;
+        final Vector2 origin = panel.getTargetingArrowOrigin();
+        if (origin == null || origin.x < left || origin.x > right) return;
+        endpoints.put(c.getId(), origin);
+        cardsonBattlefield.add(c);
+    }
+
+    //outside combat the only arrows are attachments across controllers and paired creatures (see TargetingOverlay)
+    private static boolean hasArrowRelation(CardView c) {
+        if (c.getAttachedTo() != null || c.getPairedWith() != null) { return true; }
+        final Iterable<CardView> attached = c.getAttachedCards();
+        return attached != null && attached.iterator().hasNext();
     }
 
     @Override
