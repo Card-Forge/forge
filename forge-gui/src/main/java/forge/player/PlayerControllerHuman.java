@@ -7,6 +7,7 @@ import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
+import forge.game.undo.UndoManager;
 import forge.gamemodes.net.ProtocolGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -939,6 +940,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        getGame().getUndoManager().barrier("Information revealed");
         yieldController.maybeInterruptOnReveal();
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
@@ -998,6 +1000,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForScry(final CardCollection topN) {
+        getGame().getUndoManager().barrier("Scry");
         final ImmutablePair<CardCollection, CardCollection> remembered = macros().consumeRememberedScry(topN);
         if (remembered != null) {
             return remembered;
@@ -1047,6 +1050,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(final CardCollection topN) {
+        getGame().getUndoManager().barrier("Surveil");
         CardCollection toGrave = null;
         CardCollection toTop = null;
 
@@ -1753,10 +1757,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGui().awaitNextInput();
             return null;
         }
-
+        final UndoManager undo = getGame().getUndoManager();
+        if (!isMacroActive() && !getGui().isNetGame()) {
+            if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
+                undo.barrier("Opponent's turn");
+            } else {
+                undo.checkpoint(getGame());      // must come BEFORE the prompt is built
+            }
+        }
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
         netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
+        if (undo.consumeRequest()) {            // restore on the GAME thread, not the EDT
+            undo.undo(getGame());
+            return Collections.emptyList();     // mainLoopStep just prompts again
+        }
         return defaultInput.getChosenSa();
     }
 
@@ -1915,6 +1930,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void notifyOfValue(final SpellAbility sa, final GameObject realtedTarget, final String value) {
+        getGame().getUndoManager().barrier("Information revealed");
         yieldController.maybeInterruptOnReveal();
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
@@ -2740,11 +2756,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean canUndoLastAction() {
-        if (!getGame().stack.canUndo(player)) {
-            return false;
-        }
-        final Player priorityPlayer = getGame().getPhaseHandler().getPriorityPlayer();
-        return priorityPlayer != null && priorityPlayer == player;
+        if (getGame().getPhaseHandler().getPriorityPlayer() != player) return false;
+        return getGame().getUndoManager().canUndo() && inputQueue.getInput() instanceof InputPassPriority;
     }
 
     @Override
@@ -2752,21 +2765,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tryUndoLastAction();
     }
 
+    /** Asks the game thread to rewind to the previous priority prompt; the actual restore happens in chooseSpellAbilityToPlay. */
     public boolean tryUndoLastAction() {
-        if (!canUndoLastAction()) {
-            return false;
-        }
-
-        if (getGame().getStack().undo()) {
-            final Input currentInput = inputQueue.getInput();
-            if (currentInput instanceof InputPassPriority) {
-                // ensure prompt updated if needed
-                currentInput.showMessageInitial();
-            }
-            sendToRemoteClients();
-            return true;
-        }
-        return false;
+        if (!canUndoLastAction()) return false;
+        if (!(inputQueue.getInput() instanceof InputPassPriority inp)) return false;
+        getGame().getUndoManager().requestUndo();
+        inp.restartPrompt();
+        return true;
     }
 
     @Override
@@ -2944,17 +2949,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
             final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
             invokeThenSend(() -> abMana.produceMana(null));
-        }
-
-        @Override
-        public void rollbackPhase() {
-            final Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
-            if (pPriority == null) {
-                getGui().message(localizer.getMessage("lblNoPlayerPriorityGameStateCannotBeSetup"));
-                return;
-            }
-            if (getGui().getGamestate() != null)
-                getGui().getGamestate().applyToGame(getGame());
         }
 
         private GameState createGameStateObject() {

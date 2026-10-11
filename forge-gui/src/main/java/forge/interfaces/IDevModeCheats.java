@@ -8,8 +8,6 @@ public interface IDevModeCheats {
 
     void generateMana();
 
-    void rollbackPhase();
-
     void dumpGameState();
 
     void setupGameState();
@@ -100,10 +98,6 @@ public interface IDevModeCheats {
         }
         @Override
         public void generateMana() {
-        }
-
-        @Override
-        public void rollbackPhase() {
         }
 
         @Override
