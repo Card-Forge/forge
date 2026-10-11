@@ -54,8 +54,8 @@ State option 1, window option 1. `rulesEffect` reads `ControlOpponentsSearchingL
 after the fetch list is built (so `isControlled`'s Wish exclusion, read before, is unaffected, `:987-991`) and pops it
 after the choice, only when the library was searched: `Library` in `Origin$`, no `NoLooking$`, the decider passes
 `canSearchLibraryWith`, or `Searched$`. The grant is inserted in timestamp order, not appended, so `controlledBy[len-1]`
-stays the newest grant and a later Mindslaver grant outranks it. `ChooseCard`'s `QuasiLibrarySearch$` is not ported and
-stays refused.
+stays the newest grant and a later Mindslaver grant outranks it. `ChooseCard`'s `QuasiLibrarySearch$` takes the same
+grant (`m5-t-replace-search.md`).
 
 ## Consequences
 
@@ -63,7 +63,8 @@ stays refused.
 timestamp exactly as Java's `TreeMap.lastEntry` does; no interface break. **Bad:** a harness that wants the Agent's
 controller to choose must read `Game.ControllingPlayer` inside `ChooseCardsForEffect`; the engine does not reroute for
 it. The Agent's `FoundSearchingLibrary$` replacement (exile what the opponent finds) is a separate Moved replacement and
-is not part of this decision. **Neutral:** the grant consumes no `Game.timestamp`; it borrows the static's.
+is not part of this decision (`m5-t-replace-search.md`). **Neutral:** the grant consumes no `Game.timestamp`; it borrows
+the static's.
 
 ## Related
 

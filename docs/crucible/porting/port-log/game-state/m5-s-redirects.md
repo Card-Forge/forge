@@ -10,12 +10,11 @@
 
 `InternalIgnoreEffect` is a registered effect now (190 of 203 script-driven APIs).
 
-Not ported: Opposition Agent's `FoundSearchingLibrary$` replacement (exile what the opponent finds, you may play it): no
-Moved replacement from the library is checked outside the battlefield and graveyard destinations, and the replacement is
-skipped silently, not refused. `QuasiLibrarySearch$` on `ChooseCard` (refused). `IgnoreEffectCost$` on a static whose
-`Mode$` is not `Continuous` (Lost in Thought's `Continuous,CantAttack,CantBlock,CantBeActivated`, Damping Engine): the
-ability is built but only Continuous statics read the ignore set. The cards of an affected card's controller (Java adds
-them to the valid activators) are not modelled.
+Opposition Agent's `FoundSearchingLibrary$` replacement and `QuasiLibrarySearch$` on `ChooseCard` are ported
+([`m5-t-replace-search.md`](m5-t-replace-search.md)). Not ported: `IgnoreEffectCost$` on a static whose `Mode$` is not
+`Continuous` (Lost in Thought's `Continuous,CantAttack,CantBlock,CantBeActivated`, Damping Engine): the ability is built
+but only Continuous statics read the ignore set. The cards of an affected card's controller (Java adds them to the valid
+activators) are not modelled.
 
 Tests: `searchcontrol_test.go` (the redirect inside the choice, own and hand searches untouched, a newer Mindslaver
 grant wins), `ignoreeffect_test.go`. Fixtures: `leonin-arbiter-blocks-library-search`,

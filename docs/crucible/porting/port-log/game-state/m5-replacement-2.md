@@ -62,9 +62,9 @@ Transform replacement is in play. The valid properties `faceDown`/`faceUp` were 
 | `TestTurnFaceUpCantHappenHoldsOnlyDuringTheHostControllersTurn`        | Karlov Watchdog shape (Go: a face-down card can't be named in `expect.state`) |
 
 Not done: Transform has no scenario (the four real lines need Zenos, Sephiroth, Curse of Leeches or Ludevic on the
-battlefield and a transform source), `Attached` (3) and `RollDice` (4) have no dispatch site, `TurnFaceUp` lines whose
-ability needs a choice (Gift of Doom's Attach, Aquamorph Entity, Vesuvan Shapeshifter) run through the Registry and
-record a pending error if the effect refuses.
+battlefield and a transform source), `Attached` (3) and `RollDice` (4) have no dispatch site, `TurnFaceUp` lines run
+through the Registry and record a pending error if the effect refuses; Gift of Doom and Vesuvan Shapeshifter resolve
+([`m5-t-replace-search.md`](m5-t-replace-search.md)).
 
 ## Scry, Mill, DrawCards
 

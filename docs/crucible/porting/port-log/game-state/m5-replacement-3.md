@@ -114,9 +114,7 @@ Not done:
 - Sephiroth, Fabled SOLDIER transforms ([`m5-q-attached.md`](m5-q-attached.md), `Count$ResolvedThisTurn`). Curse of
   Leeches transforms through day/night, which fixtures cannot set; Ludevic needs `XMin1 ... ExileFromGrave<X>` and a
   `Clone` with `Choices$ Creature.ExiledWithSource`.
-- Gift of Doom: `DB$ Attach | Choices$ Creature | Optional$ True` is refused by `attachActivated`
-  (`Choices$ ... not resolvable yet`); Vesuvan Shapeshifter:
-  `Clone | Choices$ Creature.Other | Duration$ UntilFacedown`, the Layer 1 duration work in batch M.
+- Gift of Doom and Vesuvan Shapeshifter resolve ([`m5-t-replace-search.md`](m5-t-replace-search.md)).
 
 ## Draw, GainLife, DamageDone remainder
 
