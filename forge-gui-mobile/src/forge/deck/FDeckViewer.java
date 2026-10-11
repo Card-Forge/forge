@@ -39,6 +39,7 @@ public class FDeckViewer extends FScreen {
                 }
                 addItem(item);
             }
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.MENU_STATS, e -> FDeckStatsScreen.show(deckViewer.deck)));
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> copyDeckToClipboard(deckViewer.deck)));
         }
     };
