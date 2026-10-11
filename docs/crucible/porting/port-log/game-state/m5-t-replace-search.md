@@ -94,3 +94,12 @@ Tests: `turnfaceupremainder_test.go` (copy ends on turning face down, TurnFaceDo
   (`RollDiceEffect.java:233-262`) asks `chooseRollToSwap` and `chooseRollSwapValue`, two decisions `PlayerController`
   does not have, and writes a new base P/T. Still fails closed (`rollReplacementResolvable`).
 - `incLibrarySearched` and the `SearchedLibrary` trigger mode, for any search.
+
+## Play and `sharesNameWith`
+
+`playSpecGap` (`playeffect.go`) no longer refuses every `sharesNameWith` in a Play `Valid$`: the bare form and the
+restrictions `valid.go` answers alone (`YourGraveyard`, `Graveyard`, `Battlefield`, `NonToken`, `Remembered`,
+`Imprinted`) pass; any other one (`ThisTurnCast` in Twinning Glass, `TriggeredCard` in Spellweaver Helix, the only forms
+a real Play line writes) is still refused by name, since matching it against nothing would empty the pool silently
+(GO-7). No corpus Play line uses an answerable form, so no card changes; `TestPlayValidSharesNameWithAZone` pins both
+sides.

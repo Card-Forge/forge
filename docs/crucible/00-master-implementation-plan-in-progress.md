@@ -11,7 +11,7 @@ everything still to do, easiest first: [00-master-implementation-plan-open.md](0
 ### M5 — Rules kernel — 6–10 wks _(the largest single risk)_
 
 **In progress.** The test-port matrix is green. What is left (P4's qualitative half, attack costs, graveyard watchers,
-the granted-static layers, the rest of `PlayerController`) is rows R7-R19 of the open plan's "Remaining work".
+the granted-static layers, the rest of `PlayerController`) is rows R8-R19 of the open plan's "Remaining work".
 
 24. Turn/phase/step loop + priority (`PhaseHandler` port). **Done** — `turn.go`, `phase.go`, including CR 511.3's end of
     combat cleanup (`endCombat`); `PassPriority` (ADR-0019) and the turn driver `Game.Step`/`Game.Run` (`driver.go`,
@@ -1777,7 +1777,7 @@ the granted-static layers, the rest of `PlayerController`) is rows R7-R19 of the
 
 **In progress.** Measured with `crucible card-smoke -all` ([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.3%
 of the 33,321 judged corpus cards play, an upper bound (silent misses are invisible); the remaining work, easiest first,
-is rows R7-R25 of the open plan. 190 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`,
+is rows R8-R25 of the open plan. 190 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`,
 `GainLife`, `Pump`, `PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`,
 `Destroy`, `Tap`, `Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`,
 `TapAll`, `UntapAll`, `PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`,

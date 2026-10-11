@@ -4,6 +4,7 @@ package engine
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -70,12 +71,19 @@ var playUnresolvedParams = [...]string{
 // false for every card, silently emptying the pool (GO-7): ExiledWith and
 // its ExiledWithSourceLKI/ExiledWithEffectSource forms -- the exact
 // ExiledWithSource is answered (playSpecGap) --, TargetedPlayerCtrl (6), OwnedBy/ControlledBy <Defined> (8),
-// sharesNameWith/sharesCardTypeWith, faceUp, NotedFor..., IsCommander,
-// CanPayManaCost.
+// sharesCardTypeWith, faceUp, NotedFor..., IsCommander, CanPayManaCost.
+// sharesNameWith is answered in the forms Matches evaluates without the
+// ability that names them (playSharesNameWithForms); the corpus's Play lines
+// use only ThisTurnCast and TriggeredCard, which stay refused.
 var playUnportedProperties = [...]string{
-	"ExiledWith", "TargetedPlayerCtrl", "OwnedBy", "ControlledBy", "sharesNameWith", "sharesCardTypeWith",
+	"ExiledWith", "TargetedPlayerCtrl", "OwnedBy", "ControlledBy", "sharesCardTypeWith",
 	"faceUp", "NotedFor", "IsCommander", "CanPayManaCost",
 }
+
+// playSharesNameWithForms are the `sharesNameWith <restriction>` restrictions
+// valid.go answers from the game and the source's memory alone (CardProperty.java:
+// 823-869): the zone forms, and the cards the host remembered or imprinted.
+var playSharesNameWithForms = [...]string{"YourGraveyard", "Graveyard", "Battlefield", "NonToken", "Remembered", "Imprinted"}
 
 func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectParams(a, "Play", playUnresolvedParams[:]...); err != nil {
@@ -296,6 +304,12 @@ func playSpecGap(spec string) (string, bool) {
 			}
 			if p.Name == "ExiledWithSource" {
 				continue
+			}
+			if rest, ok := strings.CutPrefix(p.Name, "sharesNameWith"); ok {
+				if rest == "" || slices.Contains(playSharesNameWithForms[:], strings.TrimSpace(rest)) {
+					continue
+				}
+				return p.Name, true
 			}
 			for _, prefix := range playUnportedProperties {
 				if strings.HasPrefix(p.Name, prefix) {

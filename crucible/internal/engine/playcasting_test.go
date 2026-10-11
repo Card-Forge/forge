@@ -504,3 +504,35 @@ func TestPlayPaysAndSkipsUnpayable(t *testing.T) {
 		t.Errorf("remembered = %v, want cleared by ForgetRemembered$", rem)
 	}
 }
+
+// Valid$ ... sharesNameWith <zone> keeps the cards that share a name with a
+// permanent (CardProperty.java:823-869): Play offers only the instant named
+// like a battlefield card. The forms that need the ability naming them
+// (ThisTurnCast, TriggeredCard) stay refused, not matched against nothing.
+func TestPlayValidSharesNameWithAZone(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	same := g.NewCard(gainInstant(t, "Twin", "R", "1"), p, engine.Hand)
+	g.NewCard(gainInstant(t, "Other", "R", "2"), p, engine.Hand)
+	g.NewCard(etbChainDef(t, "Twin", "DB$ BlankLine"), p, engine.Battlefield)
+	g.Player(p).ManaPool.Add(mana.Red, 1)
+	// One card qualifies, so Play only asks to confirm it.
+	rec := &offerRecorder{ScriptedController: engine.NewScriptedController()}
+	rec.QueueConfirmEffect(true)
+	pushPlayLine(t, g, p, nil, "DB$ Play | Valid$ Card.nonLand+sharesNameWith Battlefield | ValidZone$ Hand | ValidSA$ Spell | Optional$ True")
+	if err := g.ResolveStack(engine.NewRegistry(), rec); err != nil {
+		t.Fatal(err)
+	}
+	if g.Player(p).Life != 21 || g.Card(same).Zone == engine.Hand {
+		t.Errorf("life = %d, Twin in zone %v: want the Twin cast and 21 life", g.Player(p).Life, g.Card(same).Zone)
+	}
+
+	g, p, _ = newTwoPlayerGame(t)
+	g.NewCard(gainInstant(t, "Twin", "R", "1"), p, engine.Hand)
+	host := pushPlayLine(t, g, p, nil, "DB$ Play | Valid$ Card.nonLand+sharesNameWith ThisTurnCast | ValidZone$ Hand | ValidSA$ Spell")
+	err := resolvePlay(t, g, host, engine.NewScriptedController())
+	if err == nil || !strings.Contains(err.Error(), "sharesNameWith ThisTurnCast") {
+		t.Errorf("err = %v, want a refusal naming sharesNameWith ThisTurnCast", err)
+	}
+}
