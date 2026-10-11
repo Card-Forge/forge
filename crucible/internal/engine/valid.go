@@ -38,6 +38,7 @@
 package engine
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -1434,7 +1435,7 @@ func sharesName(c *Card, name string) bool {
 // Imprinted (Doubling Chant, Clarion Ultimatum, Dichotomancy) -- are answered
 // here, since a valid string is matched without the ability that names it.
 // ThisTurnCast, MovedToGrave, TriggeredCard and the other Defined$ forms need
-// that ability and match nothing.
+// that ability: they match nothing and leave a pending error.
 func (g *Game) sharesNameWithAny(c *Card, restriction string, sourceController PlayerID, source CardID) bool {
 	anyShares := func(ids []CardID) bool {
 		for _, id := range ids {
@@ -1481,6 +1482,9 @@ func (g *Game) sharesNameWithAny(c *Card, restriction string, sourceController P
 	case "Imprinted":
 		return anyShares(sc.Memory.Imprinted())
 	}
+	// A Defined$ form this matcher cannot answer: matching nothing would hide
+	// the card's filter being ignored (GO-7).
+	g.recordPendingError(fmt.Errorf("engine: sharesNameWith %s: restriction not evaluable in a valid string", restriction))
 	return false
 }
 

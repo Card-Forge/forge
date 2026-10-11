@@ -314,6 +314,7 @@ func compileFace(face *carddb.Face) (Face, error) {
 		return Face{}, err
 	}
 	out.Amounts = addInlineAmounts(out.Amounts, out.Statics)
+	out.Amounts = addInlineChecks(out.Amounts, out.Abilities, out.Triggers, out.Statics, out.Replacements)
 	return out, nil
 }
 
@@ -406,6 +407,48 @@ func addInlineAmounts(amounts map[string]expr.Amount, statics []*Ability) map[st
 				amounts = map[string]expr.Amount{}
 			}
 			amounts[strings.ToLower(v)] = amt
+		}
+	}
+	return amounts
+}
+
+// addInlineChecks does for CheckSVar$, ConditionCheckSVar$ and CheckSecondSVar$
+// what addInlineAmounts does for the Layer 7 keys: a value written inline as an
+// expression (`CheckSVar$ Count$Presence_Dragon.1.0`, `CastSA>Count$...`) rather
+// than as an SVar name. Java's calculateAmount reads such a value as a raw
+// expression because `amount.indexOf('$') > 0`; the engine looks the param value
+// up in amounts by its folded text, so without an entry the condition read as
+// unmet and the trait silently never fired (PORT-2). It walks every trait and
+// every sub-ability they reach, once each.
+func addInlineChecks(amounts map[string]expr.Amount, roots ...[]*Ability) map[string]expr.Amount {
+	seen := map[*Ability]bool{}
+	var walk func(a *Ability)
+	walk = func(a *Ability) {
+		if a == nil || seen[a] {
+			return
+		}
+		seen[a] = true
+		for _, key := range [...]string{"CheckSVar", "ConditionCheckSVar", "CheckSecondSVar"} {
+			v, ok := a.Param(key)
+			if !ok || strings.Index(v, "$") <= 0 {
+				continue
+			}
+			amt := expr.Parse(v)
+			if amt.Kind != expr.Expression {
+				continue
+			}
+			if amounts == nil {
+				amounts = map[string]expr.Amount{}
+			}
+			amounts[strings.ToLower(v)] = amt
+		}
+		for _, sub := range a.Subs {
+			walk(sub.Ability)
+		}
+	}
+	for _, list := range roots {
+		for _, a := range list {
+			walk(a)
 		}
 	}
 	return amounts

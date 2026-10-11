@@ -51,3 +51,19 @@ Not ported:
 
 Tests: `optionalcost_test.go`. Fixtures: `optional-cost-cinder-strike-blight-paid-deals-four`,
 `optional-cost-cinder-strike-declined-deals-two`.
+
+## Review follow-ups
+
+- `CheckSVar$`, `ConditionCheckSVar$` and `CheckSecondSVar$` written inline as an expression (draconic_roar,
+  foul_tongue_invocation, orator_of_ojutai, scaleguard_sentinels, dragonlords_prerogative, graven_archfiend) are parsed
+  at compile time by `compile.addInlineChecks`, over every trait and the sub-abilities it reaches, keyed by the folded
+  text like `addInlineAmounts` (PORT-2). Before, the engine found no SVar of that name and read the condition as unmet.
+  `TestInlineConditionCheckSVarReadsAControlledDragon` pins it on Foul-Tongue Invocation. Draconic Roar's condition now
+  passes too, and its second `DealDamage` stops at `Defined$ ParentTargetedController`, which targeting does not
+  resolve.
+- A Teamwork answer that is not a subset of the candidates, repeats a creature or falls short of the power fails the
+  cast with a pending error (`payOptionalParts` returns false), as Sneak's return does; it no longer taps every
+  candidate in its place (`TestTeamworkInvalidAnswerFailsTheCast`).
+- `sharesNameWith <restriction>` with a `Defined$` form a valid string cannot answer (`Targeted`, `TriggeredCard`,
+  `ChosenCard`, `Equipped`, `ExiledWith`, ...) still matches nothing and now leaves a pending error
+  (`TestSharesNameWithUnevaluableRestrictionLeavesAPendingError`).

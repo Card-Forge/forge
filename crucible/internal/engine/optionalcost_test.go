@@ -454,3 +454,77 @@ func TestOptionalCostUnportedShapesRefuseTheCast(t *testing.T) {
 		})
 	}
 }
+
+// A Teamwork answer that cannot pay the cost (here a creature the caster does
+// not control) fails the cast with a pending error and taps nothing, instead of
+// tapping every candidate in its place.
+func TestTeamworkInvalidAnswerFailsTheCast(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
+	bears := g.NewCard(corpusCard(t, "Grizzly Bears"), p, engine.Battlefield)
+	theirs := g.NewCard(corpusCard(t, "Colossal Dreadmaw"), other, engine.Battlefield)
+	blast := g.NewCard(corpusCard(t, "Repulsor Blast"), p, engine.Hand)
+	g.Player(p).ManaPool.Add(mana.Red, 4)
+	c := engine.NewScriptedController()
+	c.QueueConfirmPayCost(true)
+	c.QueueCardChoice([]engine.CardID{theirs})
+	for range 3 {
+		c.QueuePayGeneric(mana.ShardR)
+	}
+	c.QueueTargets([]engine.EntityID{engine.CardEntity(theirs)})
+
+	if g.CastSpell(p, blast, c) {
+		t.Fatal("CastSpell succeeded with an answer that cannot pay Teamwork")
+	}
+	if err := g.TakePendingError(); err == nil || !strings.Contains(err.Error(), "Teamwork") {
+		t.Errorf("pending error = %v, want one naming Teamwork", err)
+	}
+	if g.Card(bears).Tapped || g.Card(theirs).Tapped {
+		t.Error("a creature was tapped for the rejected answer")
+	}
+}
+
+// Foul-Tongue Invocation writes its condition inline, ConditionCheckSVar$
+// Count$Presence_Dragon.1.0, not as an SVar name. The compiler parses the
+// expression, so a controlled Dragon makes the GainLife sub-ability run; before,
+// the condition read as unmet and it never did, without any error.
+func TestInlineConditionCheckSVarReadsAControlledDragon(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		name   string
+		dragon bool
+		life   int
+	}{
+		{"controlled Dragon", true, 24},
+		{"no Dragon", false, 20},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
+			g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
+			victim := g.NewCard(corpusCard(t, "Grizzly Bears"), other, engine.Battlefield)
+			if tc.dragon {
+				g.NewCard(corpusCard(t, "Shivan Dragon"), p, engine.Battlefield)
+			}
+			spell := g.NewCard(corpusCard(t, "Foul-Tongue Invocation"), p, engine.Hand)
+			g.Player(p).ManaPool.Add(mana.Black, 3)
+			c := engine.NewScriptedController()
+			c.QueueConfirmPayCost(false)
+			c.QueuePayGeneric(mana.ShardB)
+			c.QueuePayGeneric(mana.ShardB)
+			c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
+			c.QueueSacrificeChoice([]engine.CardID{victim})
+			if !g.CastSpell(p, spell, c) {
+				t.Fatalf("CastSpell failed: %v", g.TakePendingError())
+			}
+			if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+				t.Fatalf("ResolveStack: %v", err)
+			}
+			if got := g.Player(p).Life; got != tc.life {
+				t.Errorf("caster's life = %d, want %d", got, tc.life)
+			}
+		})
+	}
+}

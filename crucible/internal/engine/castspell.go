@@ -512,7 +512,9 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
 		return false
 	}
-	g.payOptionalParts(controller, pid, card, opts.optional)
+	if !g.payOptionalParts(controller, pid, card, opts.optional) {
+		return false
+	}
 	g.putSpellOnStack(card, pid)
 	api := APIPermanentNoncreature
 	if c.Type().Has(cardtype.Creature) {
@@ -688,7 +690,9 @@ func (g *Game) castAura(pid PlayerID, card CardID, c *Card, controller PlayerCon
 	if !paid {
 		return false
 	}
-	g.payOptionalParts(controller, pid, card, opts.optional)
+	if !g.payOptionalParts(controller, pid, card, opts.optional) {
+		return false
+	}
 	g.putSpellOnStack(card, pid)
 	cast := Ability{API: APIAttach, Source: card, Controller: pid, Target: target, spell: true}
 	x.setOn(&cast)
@@ -749,7 +753,9 @@ func (g *Game) castPlayerAura(pid PlayerID, card CardID, c *Card, controller Pla
 	if !paid {
 		return false
 	}
-	g.payOptionalParts(controller, pid, card, opts.optional)
+	if !g.payOptionalParts(controller, pid, card, opts.optional) {
+		return false
+	}
 	g.putSpellOnStack(card, pid)
 	cast := Ability{API: APIAttach, Source: card, Controller: pid, Targets: []EntityID{target}, spell: true}
 	x.setOn(&cast)
@@ -830,7 +836,9 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
 		return false
 	}
-	g.payOptionalParts(controller, pid, card, opts.optional)
+	if !g.payOptionalParts(controller, pid, card, opts.optional) {
+		return false
+	}
 	x.setOn(&a)
 	g.putSpellOnStack(card, pid)
 	g.Card(card).castX = x.value

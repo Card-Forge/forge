@@ -306,8 +306,10 @@ func (g *Game) optionalPartsPayable(pid PlayerID, card CardID, choice optionalCh
 // the order they were chosen, and records what the cast SpellAbility's paid
 // lists hold on the card: the cards collected as evidence ("Collected") and
 // the cards revealed or beheld ("Revealed", which Count$Presence_ and
-// Revealed$ read). Teamwork taps creatures with the total power it names.
-func (g *Game) payOptionalParts(controller PlayerController, pid PlayerID, card CardID, choice optionalChoice) {
+// Revealed$ read). Teamwork taps creatures with the total power it names; an
+// answer that is not a subset of the candidates, repeats one, or falls short
+// fails the cast with a pending error, as Sneak's return does.
+func (g *Game) payOptionalParts(controller PlayerController, pid PlayerID, card CardID, choice optionalChoice) bool {
 	a := &Ability{Source: card, Controller: pid, spell: true}
 	for _, uc := range choice.parts {
 		if uc.revealN > 0 {
@@ -326,10 +328,12 @@ func (g *Game) payOptionalParts(controller PlayerController, pid PlayerID, card 
 		candidates := g.teamworkCandidates(pid)
 		picks := controller.ChooseCardsForEffect(g, pid, card, candidates, 1, len(candidates))
 		if !isSubset(picks, candidates) || hasDuplicate(picks) || totalPower(g, picks) < choice.teamworkN {
-			picks = candidates
+			g.recordPendingError(fmt.Errorf("engine: Teamwork: tapped creatures %v cannot pay %d power", picks, choice.teamworkN))
+			return false
 		}
 		tapChosenPermanents(g, controller, picks)
 	}
+	return true
 }
 
 // revealCandidates is the cards a Reveal or Behold part may show: pid's hand,
