@@ -8,24 +8,30 @@
 
 package engine
 
-// exileFromGraveyard moves id from the graveyard to exile as a paid cost.
-// Unlike exileCards (exile.go), this fires no trigger check at all: CR
-// 603.6d's own "leaves the battlefield" family (checkExiledTriggers) is
-// specifically about a permanent leaving the battlefield, which a graveyard
-// card never was for this move, and no general "leaves the graveyard"
-// trigger family exists in this port at all yet (56 real corpus T:Mode$
-// ChangesZone | Origin$ Graveyard lines, an unrelated, unbuilt gap --
-// game-state.md's own "Not ported yet"). g.LKI is not frozen either, the
-// identical reason: that snapshot exists for a battlefield departure's own
-// dying-state lookback, which nothing here needs.
-func exileFromGraveyard(g *Game, id CardID) {
+// exileFromGraveyard moves id from the graveyard to exile as a paid cost and
+// fires the graveyard-origin ChangesZone triggers the move meets
+// (checkLeftGraveyardTriggers; GameAction.changeZone runs ChangesZone for a
+// cost's move as for any other, GameAction.java:601-613). Paying for a spell
+// being cast, the triggers wait for its SpellCast batch (noteGraveyardExit),
+// as Java holds them until the cast is done (TriggerHandler.java:264).
+// Paying for an activated ability, they go on the stack as the cost is paid,
+// under the ability: the order every cost-paid trigger of an activation
+// already has here (a sacrificed creature's dies trigger, a discarded card's
+// Discarded trigger). No last-known information is frozen: that snapshot
+// exists for a battlefield departure.
+func exileFromGraveyard(g *Game, controller PlayerController, id CardID) {
 	c := g.Card(id)
+	from := c.Zone
 	g.Move(id, Exile, c.Owner)
+	if !g.noteGraveyardExit(id, from) && from == Graveyard {
+		g.checkLeftGraveyardTriggers(controller, id, g.Card(id).Zone)
+	}
 }
 
 // exileFromHand is exileFromGraveyard's own sibling for ExileFromHand<1/
-// CARDNAME|NICKNAME> -- the identical no-trigger, no-LKI move, a card
-// leaving the hand rather than the graveyard.
+// CARDNAME|NICKNAME>: a card leaving the hand. This port has no walk for a
+// hand-origin ChangesZone trigger to a zone other than the battlefield, so
+// none fires (m5-t-triggers-animate.md's audit table).
 func exileFromHand(g *Game, id CardID) {
 	c := g.Card(id)
 	g.Move(id, Exile, c.Owner)

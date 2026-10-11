@@ -45,6 +45,13 @@ type animateRecord struct {
 
 	Power, Toughness       int
 	HasPower, HasToughness bool
+
+	// abilities are the activated abilities Abilities$ grants (Layer 6,
+	// AnimateEffectBase.java:159-168), compiled at load (ADR-0023 decision
+	// 1), and abilityAmounts the granting face's SVars they read. Shared,
+	// never edited: Clone copies the record by value.
+	abilities      []*compile.Ability
+	abilityAmounts map[string]expr.Amount
 }
 
 // changesTypes reports whether r carries any Layer 4 change.
@@ -68,6 +75,7 @@ func applyAnimateEffects(g *Game) {
 	animateTypes(g)
 	animateColors(g)
 	animateKeywords(g)
+	animateAbilities(g)
 	animatePT(g)
 }
 
@@ -112,6 +120,20 @@ func animateKeywords(g *Game) {
 				Timestamp: r.Timestamp, AddKeywords: r.AddKeywords,
 				RemoveKeywords: r.RemoveKeywords, RemoveAll: r.RemoveAllKW,
 			})
+		}
+	})
+}
+
+// animateAbilities is applyAnimateEffects' Layer 6 trait half: each record's
+// Abilities$ grant becomes one traitGrant row on its card, the overlay
+// abilityAt reads after the printed lines (ADR-0023 decision 2: a one-shot
+// grant carries its own duration, the record's, and is re-added every pass
+// like the continuous ones). It runs where animateKeywords does, before the
+// statics' own Layer 6 grants and removals, which then apply over it.
+func animateAbilities(g *Game) {
+	liveAnimates(g, func(c *Card, r *animateRecord) {
+		if len(r.abilities) > 0 {
+			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), traitGrant{abilities: r.abilities, amounts: r.abilityAmounts})
 		}
 	})
 }
@@ -187,16 +209,16 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 }
 
 // animateUnresolvedParams are the doAnimate/AnimateEffect params this port
-// does not model: granted abilities, replacements, statics and SVars (none is
-// compiled at load yet, PORT-2 -- Triggers$ and Replacements$ are,
-// animateTriggerGrants),
-// hidden keywords,
+// does not model: granted statics and SVars (neither is compiled at load
+// yet, PORT-2 -- Triggers$, Replacements$ and Abilities$ are,
+// animateTriggerGrants and animateAbilityGrants), TransferActivator$'s
+// "only you may activate" on a granted ability (Martyrdom), hidden keywords,
 // "can't have" keywords, removing abilities, all creature types, a
 // renaming, mana-cost changes, a revert cost, a leave-the-battlefield
 // replacement, what the animated card remembers or imprints, an Optional$
 // confirmation, and the end-of-turn delayed trigger (AtEOT$).
 var animateUnresolvedParams = [...]string{
-	"Abilities", "staticAbilities", "sVars", "HiddenKeywords",
+	"staticAbilities", "sVars", "HiddenKeywords", "TransferActivator",
 	"CantHaveKeyword", "RemoveAllAbilities", "RemoveNonManaAbilities", "RemoveThisAbility",
 	"AddAllCreatureTypes", "Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
 	"RememberObjects", "ImprintCards", "Optional", "OptionQuestion", "AtEOT", "TgtZone",
@@ -249,6 +271,10 @@ func buildAnimate(g *Game, a *Ability, api string) (animateRecord, []*compile.Ab
 	if err != nil {
 		return r, nil, err
 	}
+	if r.abilities, err = animateAbilityGrants(a, api); err != nil {
+		return r, nil, err
+	}
+	r.abilityAmounts = a.Amounts
 	if grants != nil && !r.empty() {
 		// PerpetualPTBoost/PerpetualTypes/... (AnimateEffectBase.java:51-235)
 		// each need a zone-surviving store of their own; an ordinary record
@@ -341,7 +367,7 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 // empty reports whether r changes nothing at all.
 func (r *animateRecord) empty() bool {
 	return !r.changesTypes() && !r.HasColors && len(r.AddKeywords) == 0 && len(r.RemoveKeywords) == 0 &&
-		!r.RemoveAllKW && !r.HasPower && !r.HasToughness
+		!r.RemoveAllKW && !r.HasPower && !r.HasToughness && len(r.abilities) == 0
 }
 
 // animateCards applies template to each card on the battlefield under one
@@ -409,6 +435,39 @@ func animateTriggerGrants(a *Ability, api string) ([]*compile.Ability, error) {
 			}
 			out = append(out, sub.Ability)
 		}
+	}
+	return out, nil
+}
+
+// animateAbilityGrants reads Abilities$: the compiled activated abilities the
+// resolution grants (AnimateEffect.java:116-118, AnimateEffectBase.java:
+// 161-163), nil when it names none. They ride the animateRecord, so they last
+// as its characteristic changes do -- until end of turn, Duration$ Permanent,
+// or a host-bound AsLongAsControl/UntilHostLeavesPlay ending (Quicksmith
+// Rebel's "for as long as you control Quicksmith Rebel"). A Perpetual grant
+// never reaches here: animateDuration and the Perpetual characteristic check
+// refuse it, its zone-surviving store holding triggers only. A name compile
+// left unfollowed (a grant that regrants itself) is refused, as
+// animateTriggerGrants does.
+func animateAbilityGrants(a *Ability, api string) ([]*compile.Ability, error) {
+	raw, ok := a.Params.Param("Abilities")
+	if !ok {
+		return nil, nil
+	}
+	var out []*compile.Ability
+	for _, sub := range a.Params.Subs {
+		if sub.Key == "Abilities" {
+			out = append(out, sub.Ability)
+		}
+	}
+	names := 0
+	for _, name := range strings.Split(raw, ",") {
+		if strings.TrimSpace(name) != "" {
+			names++
+		}
+	}
+	if len(out) != names {
+		return nil, fmt.Errorf("engine: %s: Abilities$ %q grants an ability that regrants itself, not resolvable yet", api, raw)
 	}
 	return out, nil
 }

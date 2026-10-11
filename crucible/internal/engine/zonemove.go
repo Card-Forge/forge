@@ -70,8 +70,10 @@ func (g *Game) moveByEffect(controller PlayerController, id CardID, dest ZoneTyp
 	default:
 		melded = g.Move(id, dest, c.Owner)
 	}
-	if origin == Graveyard && dest != Battlefield && dest != Graveyard {
-		g.checkLeftGraveyardTriggers(controller, id, dest)
+	if origin == Graveyard && dest != Battlefield {
+		// Where the card ended up, a Moved replacement included; the
+		// graveyard itself fires nothing here.
+		g.checkLeftGraveyardTriggers(controller, id, g.Card(id).Zone)
 	}
 	if origin != Battlefield {
 		return melded

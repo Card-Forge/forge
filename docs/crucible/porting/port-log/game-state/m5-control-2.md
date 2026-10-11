@@ -44,8 +44,9 @@ TEST-2 row 3).
 cards; `validHostDuration` is `checkValidDuration`. New command kinds `commandEndPump`, `commandEndAnimate`,
 `commandEndGoad` end the record by `(card, timestamp)`. Pump and Animate check validity first (`PumpEffect.java:271`,
 `AnimateEffect.java:34`); `GoadEffect` never does, so a host that already left leaves the goad in place (Java quirk,
-reproduced). `goad.Timestamp` is new. Corpus: Pump 6 lines, Goad 1 (Vislor Turlough). Animate's 3 lines stay blocked by
-other params: Quicksmith Rebel/Spy need `Abilities$`, Welcome to Jurassic Park needs `TargetsForEachPlayer$`.
+reproduced). `goad.Timestamp` is new. Corpus: Pump 6 lines, Goad 1 (Vislor Turlough), Animate 3 (Quicksmith Rebel/Spy's
+`Abilities$` and Welcome to . . .'s `TargetMax$ OneEach`, both in
+[`m5-t-triggers-animate.md`](m5-t-triggers-animate.md)).
 
 ## Delayed and static `ChangesZone` (`leftto.go`, `turnbegin.go`, `statictrigger.go`)
 
@@ -62,10 +63,9 @@ Krovikan Vampire's chain is now whole: static dies trigger remembers, static `Or
 clears, `TurnBegin` clears, `CheckSVar$ X` over `Remembered$Amount` (already read by `contextValue`), and
 `ChangeZoneAll`'s `ForgetOtherRemembered$` (already ported). Fixtures `control-krovikan-vampire-*` (2).
 
-Only the modes that set `staticTrigger` run inline; other modes still push a `Static$ True` line on the stack. A card's
-own `Origin$ Graveyard` triggers are not walked (the zone it left). Graveyard exits outside `moveByEffect` (cost exile,
-cast) fire no `Origin$ Graveyard` trigger; battlefield departures to library outside `moveByEffect` (`ChangeZoneAll`
-goes through it, other paths do not) fire no library trigger.
+Only the modes that set `staticTrigger` run inline; other modes still push a `Static$ True` line on the stack. The moved
+card's own `Origin$ Graveyard` triggers, graveyard exits outside `moveByEffect` and battlefield-to-library redirects:
+[`m5-t-triggers-animate.md`](m5-t-triggers-animate.md).
 
 ## Fixtures and tests
 

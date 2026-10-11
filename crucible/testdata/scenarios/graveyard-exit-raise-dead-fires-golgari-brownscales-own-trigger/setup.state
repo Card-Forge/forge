@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Raise Dead|Id:1
+humangraveyard=Golgari Brownscale|Id:2
+humanbattlefield=Swamp|Id:3

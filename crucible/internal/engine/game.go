@@ -98,6 +98,16 @@ type Game struct {
 	// announceX), waiting for payManaCostX.
 	preX    int
 	hasPreX bool
+	// holdingCastExits is set while a spell is being cast, and castExits
+	// collects the cards that left a graveyard meanwhile -- the spell itself
+	// cast from there, a Delve or ExileFromGrave cost -- so their
+	// graveyard-origin ChangesZone triggers go on the stack with the spell's
+	// SpellCast batch, above the spell, as Java holds them until the cast is
+	// done (TriggerHandler.java:264, the stack frozen). Both are transient,
+	// empty outside castSpellChosen, so Clone does not carry them (castPending
+	// and preX neither).
+	holdingCastExits bool
+	castExits        []CardID
 	// pendingErr is a static trigger's error from a site with no error
 	// return (resolveStaticTriggers, statictrigger.go), waiting for the
 	// nearest boundary that has one -- Registry.Resolve, ResolveStack,
@@ -984,6 +994,11 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 	melded := NoCard
 	if from == Battlefield {
 		c.battlefieldStamp = leftStamp
+		// Last-known information, as Move freezes it: a leaves trigger
+		// (checkLeftToTriggers) reads the state the permanent left in, never
+		// an earlier departure's snapshot.
+		snap := *c
+		g.lki[id] = &snap
 		c.phasedOut, c.directlyPhasedOut, c.wontPhaseInNormal = NoPlayer, false, false
 		melded = c.leaveMeld()
 		c.Counters = Counters{}

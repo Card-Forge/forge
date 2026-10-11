@@ -417,7 +417,7 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 		emitCounterChanged(g, card, CardEntity(card), ct, -shape.SubCounterN)
 	}
 	if shape.SelfExileFromGrave {
-		exileFromGraveyard(g, card)
+		exileFromGraveyard(g, controller, card)
 	}
 	if shape.SelfExileFromHand {
 		exileFromHand(g, card)

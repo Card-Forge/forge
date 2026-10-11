@@ -117,7 +117,7 @@ func (g *Game) payCostCards(controller PlayerController, pid PlayerID, chosen ch
 		a.paid.exiled = append(a.paid.exiled, exile...)
 	}
 	for _, id := range in(Graveyard, chosen.exileGrave) {
-		exileFromGraveyard(g, id)
+		exileFromGraveyard(g, controller, id)
 		a.paid.exiled = append(a.paid.exiled, id)
 	}
 	if discard := in(Hand, chosen.discard); len(discard) > 0 {

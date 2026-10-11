@@ -470,7 +470,13 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 // castSpellChosen is castSpell once the kicker choice is made.
 func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card CardID, opts castOpts) bool {
 	g.castPending = card
-	defer func() { g.castPending, g.preX, g.hasPreX = NoCard, 0, false }()
+	g.holdingCastExits = true
+	defer func() {
+		g.castPending, g.preX, g.hasPreX = NoCard, 0, false
+		// Every graveyard exit a cast makes comes after its payment succeeded,
+		// so checkSpellCastTriggers has always taken castExits by now.
+		g.holdingCastExits, g.castExits = false, nil
+	}()
 	c := g.Card(card)
 	if c.Type().HasSubtype("Aura") {
 		return g.castAura(pid, card, c, controller, opts)
@@ -518,7 +524,7 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 	g.PushAbility(cast)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.recordSpellCast(pid, card)
-	g.checkSpellCastTriggers(controller, card, pid)
+	g.checkSpellCastTriggers(controller, card, pid, g.castExitMatches())
 	return true
 }
 
@@ -620,10 +626,14 @@ func (x xAnnounced) setOn(a *Ability) {
 // controller: CR 110.2's "the player who cast it", MagicStack.add's
 // source.setController(activator). Move alone keeps whatever controller the
 // card had, which for an opponent's card cast by an effect (Play's
-// Controller$ You over an opponent's exiled card) is the opponent.
+// Controller$ You over an opponent's exiled card) is the opponent. A spell
+// cast from a graveyard (flashback, escape, a Play grant) leaves it: its
+// graveyard-origin triggers wait in castExits for the SpellCast batch.
 func (g *Game) putSpellOnStack(card CardID, pid PlayerID) {
+	from := g.Card(card).Zone
 	g.Move(card, Stack, pid)
 	g.Card(card).controller = pid
+	g.noteGraveyardExit(card, from)
 }
 
 // castAura is CastSpell's own Aura branch (CardState.java's getAuraSpell,
@@ -686,7 +696,7 @@ func (g *Game) castAura(pid PlayerID, card CardID, c *Card, controller PlayerCon
 	g.PushAbility(cast)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.recordSpellCast(pid, card)
-	g.checkSpellCastTriggers(controller, card, pid)
+	g.checkSpellCastTriggers(controller, card, pid, g.castExitMatches())
 	tgts := []EntityID{CardEntity(target)}
 	matches := g.checkBecomesTargetTriggers(tgts, true, pid)
 	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
@@ -747,7 +757,7 @@ func (g *Game) castPlayerAura(pid PlayerID, card CardID, c *Card, controller Pla
 	g.PushAbility(cast)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.recordSpellCast(pid, card)
-	g.checkSpellCastTriggers(controller, card, pid)
+	g.checkSpellCastTriggers(controller, card, pid, g.castExitMatches())
 	tgts := []EntityID{target}
 	matches := g.checkBecomesTargetTriggers(tgts, true, pid)
 	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
@@ -827,7 +837,7 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	g.PushAbility(a)
 	g.sink.Emit(Event{Kind: SpellCast, Phase: g.activePhase, Active: g.activePlayer, Actor: pid, Turn: uint16(g.turn), Source: card})
 	g.recordSpellCast(pid, card)
-	g.checkSpellCastTriggers(controller, card, pid)
+	g.checkSpellCastTriggers(controller, card, pid, g.castExitMatches())
 	tgts := allTargetsOf(a)
 	matches := g.checkBecomesTargetTriggers(tgts, false, pid)
 	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)

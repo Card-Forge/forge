@@ -568,7 +568,7 @@ func (g *Game) payUnlessParts(controller PlayerController, a *Ability, pid Playe
 	}
 	if uc.exileGraveN > 0 {
 		for _, id := range g.chosenUnlessCards(controller, pid, a.Source, g.costCandidates(pid, a.Source, false, Graveyard, uc.exileGraveSpec), uc.exileGraveN, uc.exileGraveN) {
-			exileFromGraveyard(g, id)
+			exileFromGraveyard(g, controller, id)
 		}
 	}
 	if uc.libN > 0 {
@@ -627,7 +627,7 @@ func (g *Game) collectEvidence(controller PlayerController, pid PlayerID, source
 	}
 	picks = append([]CardID(nil), picks...)
 	for _, id := range picks {
-		exileFromGraveyard(g, id)
+		exileFromGraveyard(g, controller, id)
 	}
 	g.checkCollectEvidenceTriggers(controller, pid)
 	return picks

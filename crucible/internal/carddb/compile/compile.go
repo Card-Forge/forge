@@ -682,10 +682,11 @@ func (e *cycleError) Error() string {
 
 func (e *cycleError) Unwrap() error { return ErrCycle }
 
-// isAnimateGrant reports whether p is an Animate/AnimateAll `Triggers$` or
-// `Replacements$`: the traits it grants (animateAPIs).
+// isAnimateGrant reports whether p is an Animate/AnimateAll `Triggers$`,
+// `Replacements$` or `Abilities$`: the traits it grants (animateAPIs).
 func isAnimateGrant(a *Ability, p vocab.Param) bool {
-	return (strings.EqualFold(p.Key, "Triggers") || strings.EqualFold(p.Key, "Replacements")) && animateAPIs[a.Name]
+	return (strings.EqualFold(p.Key, "Triggers") || strings.EqualFold(p.Key, "Replacements") ||
+		p.Key == "Abilities") && animateAPIs[a.Name]
 }
 
 // regrants reports whether err, from following grant, is a granted trigger
@@ -711,8 +712,8 @@ func (c *faceCompiler) regrants(err error, grant string) bool {
 //   - `SubAbility$ X` and the additional-ability keys name one SVar.
 //   - `Choices$ A,B,C` names a list, and only for the five APIs that read it.
 //   - `StaticAbilities$`/`Triggers$`/`ReplacementEffects$ A,B` name a list,
-//     and only for Effect (EffectEffect.java). `Triggers$` and
-//     `Replacements$` also name one on Animate/AnimateAll
+//     and only for Effect (EffectEffect.java). `Triggers$`,
+//     `Replacements$` and `Abilities$` also name one on Animate/AnimateAll
 //     (AnimateEffectBase.doAnimate), and nothing else of theirs is followed
 //     yet (ADR-0023).
 //   - `ResultSubAbilities$ 1:A,2:B` names `key:svar` pairs, and only for
@@ -875,8 +876,11 @@ var continuousGrantKeys = map[string]bool{
 // (AnimateEffect.java:128-130, AnimateAllEffect.java:109-110,
 // AnimateEffectBase.java:170-174). Compiled here so a granted trigger is a
 // compiled ability, never script text parsed at resolution (PORT-2, ADR-0023
-// decision 1). Their Abilities$/staticAbilities$/Replacements$ stay
-// unfollowed until the engine can apply them (animate.go rejects each).
+// decision 1). Replacements$ is followed the same way, and so is Abilities$:
+// the activated abilities AnimateEffect.java:116-118 splits on "," and
+// AnimateEffectBase.java:161-163 builds with AbilityFactory.getAbility. Their
+// staticAbilities$ stays unfollowed until the engine can apply it (animate.go
+// rejects it).
 var animateAPIs = map[string]bool{
 	"Animate":    true,
 	"AnimateAll": true,

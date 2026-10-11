@@ -1,0 +1,21 @@
+# CR 702.66a: Delve exiles cards from the caster's graveyard while the spell
+# is cast. Each exiled card leaves the graveyard (GameAction.java:601-613), so
+# Murktide Regent's "Whenever an instant or sorcery card leaves your
+# graveyard" triggers twice. The triggers wait for the cast to finish and go
+# on the stack above Treasure Cruise (TriggerHandler.java:264).
+startturn human
+advance 3
+tapformana human 7 U
+tapformana human 8 U
+tapformana human 9 U
+tapformana human 10 U
+tapformana human 11 U
+tapformana human 12 U
+queue cardchoice 2,3
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+castspell human 1
+resolvestack

@@ -1,0 +1,17 @@
+# GameAction.changeZone runs ChangesZone for the move to the stack
+# (GameAction.java:601-613): casting Geistflame for its flashback cost takes an
+# instant card out of human's graveyard, so Murktide Regent's "Origin$
+# Graveyard | Destination$ Any | ValidCard$ Instant.YouOwn" trigger puts a
+# +1/+1 counter on it. The trigger goes on the stack above the spell.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue targets ai
+castspell human 1
+resolvestack

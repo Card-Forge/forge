@@ -1,0 +1,11 @@
+# Raise Dead returns Golgari Brownscale from human's graveyard to hand. The
+# moved card's own graveyard-origin ChangesZone trigger fires
+# (TriggerChangesZone.performTest): "When CARDNAME is put into your hand from
+# your graveyard, you gain 2 life". It names no TriggerZones$, so it is active
+# in the hand the card went to (TriggerReplacementBase.java:61-65).
+startturn human
+advance 3
+tapformana human 3 B
+queue targets 2
+castspell human 1
+resolvestack

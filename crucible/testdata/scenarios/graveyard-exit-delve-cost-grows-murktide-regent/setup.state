@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Treasure Cruise|Id:1
+humangraveyard=Opt|Id:2;Opt|Id:3
+humanlibrary=Forest|Id:4;Forest|Id:5;Forest|Id:6
+humanbattlefield=Island|Id:7;Island|Id:8;Island|Id:9;Island|Id:10;Island|Id:11;Island|Id:12;Murktide Regent|Id:13

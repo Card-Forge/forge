@@ -1,0 +1,21 @@
+# Quicksmith Rebel's ETB: DB$ Animate | Abilities$ ABDealDamage | Duration$
+# AsLongAsControl. The targeted artifact gains the activated ability "{T}:
+# This artifact deals 2 damage to any target" (AnimateEffectBase.java:159-168,
+# Layer 6) for as long as human controls the Rebel (SpellAbilityEffect.java:
+# 1010-1013). Ornithopter has no printed ability, so the granted one is its
+# ability 0: it taps and deals 2 damage to ai.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+castspell human 1
+queue targets 6
+resolvestack
+queue targets ai
+queue action human activate 6 0
+passpriority

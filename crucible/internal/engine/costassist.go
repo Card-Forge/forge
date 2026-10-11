@@ -4,7 +4,7 @@
 // here the controller picks the permanents or cards, the reduced cost is paid,
 // and the taps or exiles happen only once the mana was.
 
-//enginelint:allow id zone card game control manapay taptype parts
+//enginelint:allow id zone card game control manapay taptype parts leftto
 
 package engine
 
@@ -103,10 +103,16 @@ func convokePay(g *Game, picks, candidates []CardID, generic int, shards []mana.
 	return generic, shards, true
 }
 
-// settle taps and exiles what the paid cost used.
+// settle taps and exiles what the paid cost used. A delved card leaves its
+// graveyard: its graveyard-origin triggers wait for the spell's SpellCast
+// batch (noteGraveyardExit): settle runs only inside castSpellChosen, which
+// holds them.
 func (a costAssist) settle(g *Game, controller PlayerController) {
 	tapChosenPermanents(g, controller, a.tap)
 	for _, id := range a.exile {
-		g.Move(id, Exile, g.Card(id).Owner)
+		c := g.Card(id)
+		from := c.Zone
+		g.Move(id, Exile, c.Owner)
+		g.noteGraveyardExit(id, from)
 	}
 }

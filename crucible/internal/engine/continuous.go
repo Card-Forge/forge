@@ -465,6 +465,7 @@ func applyContinuousKeyword(g *Game) {
 	}
 	forEachOffBattlefieldCard(g, func(c *Card) { c.KeywordMod.Clear() })
 	animateKeywords(g)
+	animateAbilities(g)
 	pumpLayerKeywords(g)
 	applyInDependencyOrder(g, staticsWithAny(continuousStaticsAllZones(g), keywordLayerKeys...), abilitiesLayerOps(g))
 }

@@ -704,6 +704,12 @@ func playerCountValue(g *Game, sourceController PlayerID, source CardID, hType, 
 		}
 		players = append(players, pid)
 	}
+	// PlayerCount<hType>$Amount: how many players there are
+	// (AbilityUtils.java:3431-3434), Welcome to . . .'s "for each opponent"
+	// TargetMax$.
+	if body == "Amount" {
+		return len(players), true
+	}
 	// PlayerCount<hType>$HasProperty<property>: how many of those players have
 	// the player property (playerXCount's own "HasProperty" branch). A property
 	// matchesPlayerProperty does not know makes the whole amount unresolved.

@@ -133,7 +133,13 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 			}
 		}
 	} else {
-		defined, _ := a.Params.Param("Defined")
+		// No Defined$ is the host (AbilityUtils.getDefinedEntities' "default
+		// to Self", AbilityUtils.java:1220): Murktide Regent's "put a +1/+1
+		// counter on CARDNAME".
+		defined, ok := a.Params.Param("Defined")
+		if !ok {
+			defined = "Self"
+		}
 		cards, players, err = definedCounterTargets(g, a.Controller, source, defined, a.refs())
 		if err != nil {
 			return fmt.Errorf("engine: PutCounter: %w", err)

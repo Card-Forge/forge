@@ -330,7 +330,8 @@
       "amount",
       "playerstate",
       "castoptions",
-      "delayedtrigger"
+      "delayedtrigger",
+      "leftto"
     ],
     "trigger": [
       "daytimeeffect",
@@ -457,7 +458,7 @@
       "exploit"
     ],
     "exile": ["id", "zone", "card", "game", "control", "valid", "trigger", "ability", "statictrigger"],
-    "exilefromgrave": ["id", "zone", "card", "game"],
+    "exilefromgrave": ["id", "zone", "card", "game", "control", "leftto"],
     "taptype": ["id", "zone", "card", "game", "control", "valid", "trigger"],
     "returncost": ["id", "zone", "card", "game", "control", "valid", "trigger", "ability"],
     "exertcost": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger"],

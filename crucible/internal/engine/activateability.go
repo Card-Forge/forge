@@ -430,7 +430,7 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	}
 	if shape.SelfExileFromGrave {
 		activated.paid.exiled = append(activated.paid.exiled, card)
-		exileFromGraveyard(g, card)
+		exileFromGraveyard(g, controller, card)
 	}
 	if shape.SelfDiscard {
 		activated.paid.discarded = append(activated.paid.discarded, card)

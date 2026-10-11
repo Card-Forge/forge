@@ -195,11 +195,17 @@ func evolveCheck(g *Game, host *Card, t *compile.Ability, moved CardID) (tracked
 // g.LKI (game.go) is exactly the frozen copy CR 603.6d asks for, taken the
 // instant before Move reset any of it.
 func (g *Game) checkDiesTriggers(controller PlayerController, left CardID) {
-	// A Moved replacement (Rest in Peace) sent the card elsewhere: it did not
-	// die, it was exiled, which is what its leave triggers see.
+	// A Moved replacement sent the card elsewhere: it did not die. Its leave
+	// triggers see where it went -- exile (Rest in Peace), or its owner's
+	// library or hand (Progenitus' and Darksteel Colossus' "shuffle it into
+	// its owner's library instead"), CR 603.6d's leaves-the-battlefield at
+	// that destination.
 	if z := g.Card(left).Zone; z != Graveyard {
-		if z == Exile {
+		switch z {
+		case Exile:
 			g.checkExiledTriggers(controller, left)
+		case Library, Hand:
+			g.checkLeftToTriggers(controller, left, z)
 		}
 		return
 	}
@@ -465,8 +471,13 @@ func attacksMultiplePlayers(g *Game, attacked EntityID) bool {
 // announced, so a spell cast without paying its mana cost still fires it.
 // The activated-ability branch never arises here: this walk only ever runs
 // for a cast spell.
-func (g *Game) checkSpellCastTriggers(controller PlayerController, cast CardID, activator PlayerID) {
-	var matches []Ability
+//
+// held is the cast's own held ChangesZone matches (castExitMatches,
+// leftto.go): they come first, their runs having gone into TriggerHandler's
+// waiting list before MagicStack.add ran the cast modes (TriggerHandler.java:
+// 264, MagicStack.java:331-400), and the whole list is ordered as one batch.
+func (g *Game) checkSpellCastTriggers(controller PlayerController, cast CardID, activator PlayerID, held []Ability) {
+	matches := held
 	c := g.Card(cast)
 	// AbilityKey.SpellAbility: the spell just pushed, read before any
 	// trigger goes on top of it (Defined$ TriggeredSpellAbility).
