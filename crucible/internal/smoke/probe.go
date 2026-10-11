@@ -68,6 +68,7 @@ func NewProber(db *compile.DB) *Prober {
 const (
 	bears = "Grizzly Bears"
 	land  = "Forest"
+	bolt  = "Lightning Bolt"
 )
 
 // ProbeWithin is Probe with a time limit. A probe that outlives it is reported
@@ -97,8 +98,25 @@ func (p *Prober) Probe(name string) Result {
 }
 
 // probe is Probe, publishing the stage it is in to where, so a caller that
-// gives up on it can say where it was stuck.
-func (p *Prober) probe(name string, where *atomic.Value) (res Result) {
+// gives up on it can say where it was stuck. A card that cannot be cast on the
+// empty-stack board (a counterspell has nothing to counter) gets a second try on
+// a board where the opponent has an instant on the stack, then a creature spell.
+func (p *Prober) probe(name string, where *atomic.Value) Result {
+	res := p.run(name, where, "")
+	if res.Outcome != Inconclusive {
+		return res
+	}
+	for _, spell := range [...]string{bolt, bears} {
+		if again := p.run(name, where, spell); again.Outcome != Inconclusive {
+			return again
+		}
+	}
+	return res
+}
+
+// run is one probe on a board with, or without, the named opposing spell left
+// on the stack.
+func (p *Prober) run(name string, where *atomic.Value, opposing string) (res Result) {
 	res = Result{Card: name}
 	stage := "setup"
 	defer func() {
@@ -142,6 +160,25 @@ func (p *Prober) probe(name string, where *atomic.Value) (res Result) {
 	fill()
 
 	ctl := &Controller{}
+	if opposing != "" {
+		spellDef, ok := p.db.Card(opposing)
+		if !ok {
+			res.Outcome, res.Detail = Inconclusive, "no spell to put on the stack"
+			return res
+		}
+		// The opponent can only cast an instant on the probe's turn; a
+		// creature spell is the probe player's own.
+		caster := opp
+		if opposing == bears {
+			caster = pid
+		}
+		g.Player(caster).ManaPool.Add(mana.Red, 2)
+		g.Player(caster).ManaPool.Add(mana.Green, 2)
+		if !g.CastSpell(caster, g.NewCard(spellDef, caster, engine.Hand), ctl) {
+			res.Outcome, res.Detail = Inconclusive, "the opposing spell could not be cast"
+			return res
+		}
+	}
 	card := g.NewCard(def, pid, engine.Hand)
 	fail := func(o Outcome, st string, err error) Result {
 		res.Outcome, res.Stage, res.Detail = o, st, err.Error()

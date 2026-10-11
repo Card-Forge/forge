@@ -54,8 +54,9 @@ func TestProbeClassifiesCards(t *testing.T) {
 		{"Not A Real Card", smoke.Refused},
 		// An activated ability the probe exercises after the card resolves.
 		{"Prodigal Sorcerer", smoke.Plays},
-		// Needs a spell on the stack to target, which the fixed board lacks.
-		{"Counterspell", smoke.Inconclusive},
+		// Needs a spell on the stack to target: the probe retries with one.
+		{"Counterspell", smoke.Plays},
+		{"Essence Scatter", smoke.Plays},
 	} {
 		t.Run(tc.card, func(t *testing.T) {
 			t.Parallel()
