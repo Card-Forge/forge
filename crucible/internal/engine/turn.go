@@ -497,7 +497,12 @@ func (g *Game) drawOneCard(controller PlayerController, pid PlayerID) bool {
 		g.Player(pid).DrewFromEmptyLibrary = true
 		return false
 	}
+	// Mode$ DrawFromBottom (Lantern of Undersight, River Song) draws the last
+	// card instead of the first (Player.java:1204, StaticAbilityDrawFromBottom).
 	id := lib.Cards()[0]
+	if g.playerStatic(pid, "DrawFromBottom", nil) {
+		id = lib.Cards()[lib.Len()-1]
+	}
 	g.Move(id, Hand, pid)
 	// CardDrawn alongside the ZoneChanged Move already emitted: ZoneChanged
 	// says a card moved, CardDrawn says why, which is what makes a draw

@@ -744,3 +744,10 @@ trigger at all). `fixture/actions.go` gains `queue confirmpaycost <bool>` (`Scri
 this port's first fixture-reachable `UnlessCost$` pay-or-not prompt. `TestCastSpellWardEachInstanceFiresIndependently`/
 `TestCastSpellWardDoesNotFireForANonManaCost` (`ward_test.go`) prove CR 702.21g and the mana-only scope directly through
 `Game.StackLen()`, since two Ward triggers and a skipped one both dump identically otherwise.
+
+## Draw from the bottom
+
+`drawOneCard` takes the last card of the library instead of the first when a `Mode$ DrawFromBottom` static names the
+drawer (`playerStatic`, ValidPlayer$ You: Lantern of Undersight, River Song), as `Player.drawCards` does
+(`Player.java:1204`, `StaticAbilityDrawFromBottom.java`). Upstream sync 7e3b22b44f5 replaced the keyword text with the
+static. Mulligan draws take the top, as in Java. `TestDrawFromBottomDrawsTheLastCard` pins it.
