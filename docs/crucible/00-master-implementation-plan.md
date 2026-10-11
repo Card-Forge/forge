@@ -605,9 +605,9 @@ printed form.
 **Complete.**
 
 21. `internal/engine/{game,card,player,zone,event,control}`; the ~110-method `PlayerController` interface with
-    `ScriptedController`. **Done**: the interface has eleven decision methods so far (combat declaration, mulligans, the
-    legend rule, cleanup discard, Battle protector) — nowhere near the ~110 estimate, because most of what drives a
-    `PlayerController` call is M5/M6 rules and effects that have not landed yet to ask the question.
+    `ScriptedController`. **Done**: the interface has 52 decision methods so far (combat, mulligans, targeting, payment,
+    effect choices, replacement ordering, priority), about half the ~110 estimate; the rest wait on rules and effects
+    that have not landed to ask the question.
 22. `GameState` fixture load/dump in Go (byte-identical to Java's). **Done** — `internal/fixture`.
 23. Event schema implemented per ADR-0013 (`SchemaVersion` 2 since ADR-0021's `Phased`). **Done. Exit gate:** P3 gate —
     fixture round-trip parity. **Green.**
@@ -616,8 +616,10 @@ printed form.
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-**Both in progress.** Item-by-item detail (24-32), full Java citations:
-[00-master-implementation-plan-in-progress.md](00-master-implementation-plan-in-progress.md).
+**Both in progress.** M5's test-port matrix is green and 190 of the 203 script-driven effect APIs resolve; 86.3% of the
+corpus's judged cards play (`crucible card-smoke -all`, an upper bound). Item-by-item detail (24-32), full Java
+citations: [00-master-implementation-plan-in-progress.md](00-master-implementation-plan-in-progress.md). What is left,
+easiest first: [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md), "Remaining work".
 
 ### M7 — AI port — 5–8 wks
 
@@ -625,7 +627,7 @@ printed form.
 
 ### M9 — Reporting & the optimization loop — 2–4 wks
 
-**Not started.** Item-by-item detail (33-41):
+**Not started.** Item-by-item detail (33-41), and the whole remaining-work list:
 [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md).
 
 ### Continuous, from M0 onward

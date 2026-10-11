@@ -1,8 +1,8 @@
 # Crucible — Implementation Plan: In Progress
 
 Milestones M5-M6, currently underway. Roadmap overview and completed milestones (M0-M4):
-[00-master-implementation-plan.md](00-master-implementation-plan.md). Not-yet-started milestones (M7-M9):
-[00-master-implementation-plan-open.md](00-master-implementation-plan-open.md).
+[00-master-implementation-plan.md](00-master-implementation-plan.md). Not-yet-started milestones (M7-M9) and the list of
+everything still to do, easiest first: [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md).
 
 ---
 
@@ -10,7 +10,8 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 
 ### M5 — Rules kernel — 6–10 wks _(the largest single risk)_
 
-**In progress.**
+**In progress.** The test-port matrix is green. What is left (P4's qualitative half, attack costs, graveyard watchers,
+the granted-static layers, the rest of `PlayerController`) is rows R5-R19 of the open plan's "Remaining work".
 
 24. Turn/phase/step loop + priority (`PhaseHandler` port). **Done** — `turn.go`, `phase.go`, including CR 511.3's end of
     combat cleanup (`endCombat`); `PassPriority` (ADR-0019) and the turn driver `Game.Step`/`Game.Run` (`driver.go`,
@@ -1774,26 +1775,28 @@ Milestones M5-M6, currently underway. Roadmap overview and completed milestones 
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-**In progress.** 190 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`, `GainLife`, `Pump`,
-`PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`, `Destroy`, `Tap`,
-`Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`, `TapAll`, `UntapAll`,
-`PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`, `Unattach`, `RevealHand`,
-`LosesGame`, `WinsGame`, `Radiation`, `RemoveFromCombat`, `Connive`, `Cleanup`, `DestroyAll`, `ChooseCard`,
-`ChoosePlayer`, `ChooseColor`, `ChooseNumber`, `Reveal`, `PeekAndReveal`, `TapOrUntap`, `Proliferate`, `ChangeZone`,
-`ChangeZoneAll`, `Dig`, `DigUntil`, `RearrangeTopOfLibrary`, `Explore`, `LookAt`, `Branch`, `GenericChoice`, `Repeat`,
-`RepeatEach`, `Regenerate`, `Fog`, `AddTurn`, `SkipTurn`, `GainControl`, `ExchangeControl`, `HealDamage`, `EachDamage`,
-`DrainMana`, `Token`, `Investigate`, `Amass`, `Incubate`, `Animate`, `AnimateAll`, `Debuff`, `Protection`,
-`ProtectionAll`, `DelayedTrigger`, `ImmediateTrigger`, `Charm`, `FlipCoin`, `RollDice`, `Clash`, `Seek`, `StoreSVar`,
-`Balance`, `AddPhase`, `SkipPhase`, `BlankLine`, `GameDrawn`, `RemoveFromGame`, `ReverseTurnOrder`, `ChangeSpeed`,
-`GainOwnership`, `ReorderZone`, `EndTurn`, `EndCombatPhase`, `ChooseEvenOdd`, `ChooseDirection`, `ExchangeLifeVariant`,
-`ExchangePower`, `TapOrUntapAll`, `AddOrRemoveCounter`, `BecomesBlocked`, `Block`, `ChangeCombatants`,
-`GainControlVariant`, `Detain`, `Intensify`, `Blight`, `TimeTravel`, `Endure`, `AssignGroup`, `VillainousChoice`,
-`TwoPiles`, `ChooseType`, `NameCard`, `PreventDamage`, `DigMultiple`, `Recruit`, `BidLife`, `ExchangeControlVariant`,
-`DayTime`, `AlterAttribute`, `Vote`, `MakeCard`, `Learn`, `CopyPermanent`, `Counter`, `Manifest`, `Cloak`,
-`ManifestDread`, `SetState`, `Goad`, `RemoveFromMatch`, `ActivateAbility`, `MultiplePiles`, `DamageResolve`,
-`ChooseSource`, `Empower`, `Earthbend`, `Airbend`, `Discover`, `Draft`, `Heist`, `ExchangeZone`, `Effect`,
-`ReplaceEffect`, `ReplaceDamage`, `ReplaceSplitDamage`, `ReplaceToken`, `ReplaceCounter`, `ReplaceMana`, `Clone`,
-`BecomeMonarch`, `TakeInitiative`, `Venture`, `OpenAttraction`, `AssembleContraption`, `Regeneration`, `Play`,
+**In progress.** Measured with `crucible card-smoke -all` ([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.3%
+of the 32,685 judged corpus cards play, an upper bound (silent misses are invisible); the remaining work, easiest first,
+is rows R4-R24 of the open plan. 190 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`,
+`GainLife`, `Pump`, `PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`,
+`Destroy`, `Tap`, `Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`,
+`TapAll`, `UntapAll`, `PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`,
+`Unattach`, `RevealHand`, `LosesGame`, `WinsGame`, `Radiation`, `RemoveFromCombat`, `Connive`, `Cleanup`, `DestroyAll`,
+`ChooseCard`, `ChoosePlayer`, `ChooseColor`, `ChooseNumber`, `Reveal`, `PeekAndReveal`, `TapOrUntap`, `Proliferate`,
+`ChangeZone`, `ChangeZoneAll`, `Dig`, `DigUntil`, `RearrangeTopOfLibrary`, `Explore`, `LookAt`, `Branch`,
+`GenericChoice`, `Repeat`, `RepeatEach`, `Regenerate`, `Fog`, `AddTurn`, `SkipTurn`, `GainControl`, `ExchangeControl`,
+`HealDamage`, `EachDamage`, `DrainMana`, `Token`, `Investigate`, `Amass`, `Incubate`, `Animate`, `AnimateAll`, `Debuff`,
+`Protection`, `ProtectionAll`, `DelayedTrigger`, `ImmediateTrigger`, `Charm`, `FlipCoin`, `RollDice`, `Clash`, `Seek`,
+`StoreSVar`, `Balance`, `AddPhase`, `SkipPhase`, `BlankLine`, `GameDrawn`, `RemoveFromGame`, `ReverseTurnOrder`,
+`ChangeSpeed`, `GainOwnership`, `ReorderZone`, `EndTurn`, `EndCombatPhase`, `ChooseEvenOdd`, `ChooseDirection`,
+`ExchangeLifeVariant`, `ExchangePower`, `TapOrUntapAll`, `AddOrRemoveCounter`, `BecomesBlocked`, `Block`,
+`ChangeCombatants`, `GainControlVariant`, `Detain`, `Intensify`, `Blight`, `TimeTravel`, `Endure`, `AssignGroup`,
+`VillainousChoice`, `TwoPiles`, `ChooseType`, `NameCard`, `PreventDamage`, `DigMultiple`, `Recruit`, `BidLife`,
+`ExchangeControlVariant`, `DayTime`, `AlterAttribute`, `Vote`, `MakeCard`, `Learn`, `CopyPermanent`, `Counter`,
+`Manifest`, `Cloak`, `ManifestDread`, `SetState`, `Goad`, `RemoveFromMatch`, `ActivateAbility`, `MultiplePiles`,
+`DamageResolve`, `ChooseSource`, `Empower`, `Earthbend`, `Airbend`, `Discover`, `Draft`, `Heist`, `ExchangeZone`,
+`Effect`, `ReplaceEffect`, `ReplaceDamage`, `ReplaceSplitDamage`, `ReplaceToken`, `ReplaceCounter`, `ReplaceMana`,
+`Clone`, `BecomeMonarch`, `TakeInitiative`, `Venture`, `OpenAttraction`, `AssembleContraption`, `Regeneration`, `Play`,
 `CopySpellAbility`, `RingTemptsYou`, `Abandon`, `ChangeTargets`, `MustBlock`, `Phases`, `ManaReflected`, `ControlSpell`,
 `Planeswalk`, `ChaosEnsues`, `RollPlanarDice`, `RunChaos`, `ChooseSector`, `SetInMotion`, `Subgame`, `UnlockDoor`,
 `SwitchBlock`, `LosePerpetual`, `Meld`, `ControlPlayer`, `RestartGame`, `Camouflage`) — see
