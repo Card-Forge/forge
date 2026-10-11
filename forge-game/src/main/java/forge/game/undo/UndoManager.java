@@ -11,6 +11,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public final class UndoManager {
+    private final GameMemento.Recorder recorder = new GameMemento.Recorder();
     private static final int MAX = 4;
     /** Tunable: false = unlimited undos; true = limited to UNDOS_PER_PHASE each phase. */
     public static final boolean LIMITED = false;
@@ -30,17 +31,26 @@ public final class UndoManager {
     public synchronized int depth() { return Math.max(0, stack.size() - 1); }
 
     /** Game thread, right before the human is shown a priority prompt. */
-    public synchronized void checkpoint(Game game) {
-        requested = false;
-        if (justRestored) { justRestored = false; return; }      // state == top of stack already
-        long r = MyRandom.callCount();
-        if (r != randomMark) { barrier("randomness used"); randomMark = r; }
-        var ph = game.getPhaseHandler();
-        long phaseKey = ph.getTurn() * 100L + (ph.getPhase() == null ? 0 : ph.getPhase().ordinal());
-        if (phaseKey > budgetPhase) { budgetPhase = phaseKey; undosLeft = UNDOS_PER_PHASE; }   // only refills going forward, so undoing back across a phase can't farm it
-        stack.push(new Entry(GameMemento.capture(game), game.getGameLog().size()));
-        while (stack.size() > MAX) stack.removeLast();
-        if (stack.size() >= 2) barrierReason = null;   // reason only matters while undo is unavailable
+    public void checkpoint(Game game) {
+        synchronized (this) {
+            requested = false;
+            if (justRestored) { justRestored = false; return; }
+            long r = MyRandom.callCount();
+            if (r != randomMark) { barrier("randomness used"); randomMark = r; }
+            var ph = game.getPhaseHandler();
+            long phaseKey = ph.getTurn() * 100L + (ph.getPhase() == null ? 0 : ph.getPhase().ordinal());
+            if (phaseKey > budgetPhase) { budgetPhase = phaseKey; undosLeft = UNDOS_PER_PHASE; }
+            final int cap = SINGLE_STEP ? 2 : MAX;
+            while (stack.size() >= cap) stack.removeLast();
+        }
+
+        final Entry entry = new Entry(recorder.capture(game), game.getGameLog().size());   // slow part, no lock held
+
+        synchronized (this) {
+            stack.push(entry);
+            //System.out.println("[undo] objects=" + entry.memento().objectCount() + " new=" + recorder.lastAllocated + " reused=" + recorder.lastReused);
+            if (stack.size() >= 2) barrierReason = null;
+        }
     }
 
     /** Anything that reveals hidden info or makes the opponent act. */
