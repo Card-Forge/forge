@@ -334,6 +334,31 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
     }
 
+    /** Undo rewinds the game in place without emitting the individual events the GUI normally reacts to; resync everything. */
+    @Override
+    public Void visit(final GameEventSnapshotRestored event) {
+        if (event.start()) { return null; }
+        final GameView gv = matchController.getGameView();
+        if (gv != null) {
+            for (final PlayerView p : gv.getPlayers()) {
+                synchronized (livesUpdate) { livesUpdate.add(p); }
+                synchronized (shardsUpdate) { shardsUpdate.add(p); }
+                synchronized (manaPoolUpdate) { manaPoolUpdate.add(p); }
+                for (final ZoneType z : ZoneType.values()) {
+                    synchronized (zonesUpdate) { zonesUpdate.add(new PlayerZoneUpdate(p, z)); }
+                }
+            }
+        }
+        if (gv != null && gv.getPlayerTurn() != null) { turnUpdate = gv.getPlayerTurn(); }
+        needPhaseUpdate = true;
+        needSaveState = false;
+        needCombatUpdate = true;
+        needStackUpdate = true;
+        needPlayerControlUpdate = true;
+        refreshFieldUpdate = true;
+        return processEvent();
+    }
+
     @Override
     public Void visit(final GameEventSpellResolved event) {
         needStackUpdate = true;
