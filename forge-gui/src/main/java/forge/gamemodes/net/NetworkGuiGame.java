@@ -424,7 +424,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                 // when the ability went on the stack).
                 CardView replacement = new CardView(objectId, tracker);
                 tracker.putObj(TrackableTypes.CardViewType, objectId, replacement);
-                netLog.trace("[DeltaSync] CardView ID={} replaced with new instance", objectId);
                 return replacement;
             }
             // Non-CardView types: clear and reuse (PlayerView identity must be preserved
@@ -444,7 +443,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
             case DeltaPacket.TYPE_CARD_VIEW:
                 obj = new CardView(objectId, tracker);
                 tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
-                netLog.trace("[DeltaSync] Created CardView ID={}, registered in tracker", objectId);
                 break;
             case DeltaPacket.TYPE_PLAYER_VIEW:
                 obj = new PlayerView(objectId, tracker);
