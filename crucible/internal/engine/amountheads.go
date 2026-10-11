@@ -150,6 +150,16 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 			return 0, false
 		}
 		return g.Card(source).kickerMagnitude(), true
+	case "OptionalGenericCostPaid", "Teamwork":
+		// Count$OptionalGenericCostPaid.<paid>.<not> and Count$Teamwork.<paid>.<not>
+		// (AbilityUtils.java:1700-1706): the ability's own cast record, which
+		// only a spell has (spellOptional).
+		return optionalBranch(g.spellOptional(source), count)
+	}
+	if typ, ok := strings.CutPrefix(count.Head, "Presence_"); ok {
+		return g.presenceCount(sourceController, source, typ, count)
+	}
+	switch count.Head {
 	case "ChosenNumber":
 		if source == NoCard {
 			return 0, false

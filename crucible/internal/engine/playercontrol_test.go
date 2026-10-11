@@ -319,16 +319,15 @@ func TestControlPlayerSurvivesCloneIndependently(t *testing.T) {
 }
 
 // TestControlPlayerRejectsUnportedShapes proves the corpus params this
-// port cannot resolve fail loudly rather than being skipped: Secret of
-// Bloodbending's Condition$ OptionalCost pair and Cruel Entertainment's
+// port cannot resolve fail loudly rather than being skipped: a Condition$
+// value subAbilityConditionMet does not read, Cruel Entertainment's
 // TargetUnique$ and Controller$ ParentTarget/Player.Chosen, plus a
 // Controller$ naming nobody (Java's .get(0) on an empty list).
 func TestControlPlayerRejectsUnportedShapes(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ line, want string }{
-		{"DB$ ControlPlayer | ValidTgts$ Opponent | Condition$ OptionalCost | ConditionOptionalPaid$ False | Combat$ True", "Condition$ not resolvable yet"},
-		{"DB$ ControlPlayer | Defined$ Opponent | ConditionOptionalPaid$ True", "ConditionOptionalPaid$ not resolvable yet"},
+		{"DB$ ControlPlayer | ValidTgts$ Opponent | Condition$ Threshold | Combat$ True", "Condition$ \"Threshold\" not resolvable yet"},
 		{"DB$ ControlPlayer | ValidTgts$ Player | TargetUnique$ True | Controller$ Player.Chosen", "TargetUnique$ not resolvable yet"},
 		{"DB$ ControlPlayer | Defined$ Opponent | Controller$ ParentTarget", "Controller$"},
 		{"DB$ ControlPlayer | Defined$ Opponent | Controller$ Player.Chosen", "Controller$"},

@@ -23,11 +23,14 @@ type controlPlayerEffect struct{}
 
 func (controlPlayerEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	// Condition$ OptionalCost/ConditionOptionalPaid$ (Secret of
-	// Bloodbending) needs the optional-cost record this port does not keep;
-	// subAbilityConditionMet would skip the line silently. TargetUnique$
-	// (Cruel Entertainment) is a target-set rule targeting.go does not
-	// enforce. Both fail loudly instead (PORT-8, GO-7).
-	if err := rejectParams(a, "ControlPlayer", "Condition", "ConditionOptionalPaid", "TargetUnique"); err != nil {
+	// Bloodbending) reads the optional-cost record (optionalcost.go) in
+	// subAbilityConditionMet; any other Condition$ value is refused.
+	// TargetUnique$ (Cruel Entertainment) is a target-set rule targeting.go
+	// does not enforce, and fails loudly (PORT-8, GO-7).
+	if err := rejectParams(a, "ControlPlayer", "TargetUnique"); err != nil {
+		return err
+	}
+	if err := rejectUnreadCondition(a, "ControlPlayer"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

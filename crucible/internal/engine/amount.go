@@ -39,9 +39,11 @@ const maxAmountDepth = 6
 // leading `-` applied after, in calculateAmount's own order (the multiplier
 // last, `val * multiplier`).
 //
-// Every other shape -- a context-prefixed head (`CastSA>`, `Spawner>`,
-// `TriggeredSpellAbility>`: adjustTriggerContext switches which ability the
-// measurement is taken against, which a static ability has none of), one of
+// A `CastSA>` head reads the host card's cast record for the heads that record
+// holds (castSAValue). Every other shape -- another context-prefixed head
+// (`Spawner>`, `TriggeredSpellAbility>`: adjustTriggerContext switches which
+// ability the measurement is taken against, which a static ability has none
+// of), one of
 // the eighty-some other heads calculateAmount/xCount dispatch on, or an SVar
 // operand that itself does not resolve -- reports false rather than a wrong
 // number (GO-7): every caller already treats an unresolved amount as "skip
@@ -73,10 +75,20 @@ func resolveAmountDepth(g *Game, amounts map[string]expr.Amount, sourceControlle
 		return n, true
 
 	case expr.Expression:
-		if amt.Context != "" {
-			return 0, false
+		var n int
+		var ok bool
+		switch amt.Context {
+		case "":
+			n, ok = expressionValue(g, amounts, sourceController, source, amt, depth)
+		case "CastSA>":
+			var cast bool
+			n, ok, cast = g.castSAValue(source, amt)
+			if ok && !cast {
+				// No cast SpellAbility: Java leaves the context unswitched and the
+				// whole amount reads 0 (AbilityUtils.java:4036-4040, :729).
+				return 0, true
+			}
 		}
-		n, ok := expressionValue(g, amounts, sourceController, source, amt, depth)
 		if !ok {
 			return 0, false
 		}

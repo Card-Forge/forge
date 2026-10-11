@@ -491,6 +491,33 @@ func (g *Game) recordPendingError(err error) {
 	}
 }
 
+// spellOptional is the optional-cost record a measurement taken for source
+// reads without a CastSA> context: SpellAbility.isOptionalCostPaid on the
+// root of the ability evaluating, which is the cast SpellAbility only while
+// source is that spell -- being cast (castPending) or on the stack. A
+// permanent's own abilities are never its cast SpellAbility and read nothing;
+// CastSA> reaches the record there (castSARecord).
+func (g *Game) spellOptional(source CardID) castOptional {
+	if source == NoCard {
+		return castOptional{}
+	}
+	if c := g.Card(source); source == g.castPending || c.Zone == Stack {
+		return c.castOpt
+	}
+	return castOptional{}
+}
+
+// castSARecord is Card.getCastSA's optional-cost record for a CastSA>
+// context (AbilityUtils.adjustTriggerContext): ok is false for a card that
+// was not cast, whose context Java leaves unswitched, and the whole amount
+// then reads 0 (AbilityUtils.java:4036-4040, :729).
+func (g *Game) castSARecord(source CardID) (castOptional, bool) {
+	if source == NoCard || !g.Card(source).wasCast {
+		return castOptional{}, false
+	}
+	return g.Card(source).castOpt, true
+}
+
 // Card resolves a handle. It panics on an out-of-range or absent handle,
 // because that is an engine invariant breach rather than anything a card
 // script can cause -- the game boundary recovers it so one bad card cannot
@@ -787,7 +814,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		}
 	}
 	if (from == Stack && kind != Battlefield) || (from == Battlefield && kind != Battlefield) {
-		c.kicker, c.castX = 0, 0
+		c.kicker, c.castX, c.castOpt = 0, 0, castOptional{}
 		c.sneaked, c.sneakDefender = false, NoEntity
 	}
 	if from == Stack && kind != Battlefield {
@@ -1372,6 +1399,7 @@ func (g *Game) Clone() *Game {
 		c.staticCmds = append([]staticCheck(nil), g.cards[i].staticCmds...)
 		c.copies = append([]copyEffect(nil), g.cards[i].copies...)
 		c.grants = append([]grantedTriggers(nil), g.cards[i].grants...)
+		c.castOpt = g.cards[i].castOpt.clone()
 		if g.cards[i].svars != nil {
 			c.svars = make(map[string]int, len(g.cards[i].svars))
 			for k, v := range g.cards[i].svars {

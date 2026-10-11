@@ -76,6 +76,10 @@ type Card struct {
 	// Move clears both with kicker.
 	sneaked       bool
 	sneakDefender EntityID
+	// castOpt is what the card's cast paid of its optional costs beyond Kicker
+	// (optionalcost.go): the OptionalCost kinds and the paid lists its effects
+	// read back. Kept and cleared with kicker.
+	castOpt castOptional
 	// cameUnderControl is Card.cameUnderControlSinceLastUpkeep (Echo): true
 	// from entering the battlefield or changing controller until the end of
 	// its controller's next upkeep. enteredTurn is the turn it entered the
@@ -1133,6 +1137,47 @@ const (
 	kicker1 uint8 = 1 << iota
 	kicker2
 )
+
+// optionalKinds is the slice of Java's OptionalCost enum a cast records past
+// Kicker1/Kicker2 (SpellAbility.optionalCosts, an EnumSet): Generic for a
+// Mode$ OptionalCost static without ReduceColor$, Teamwork for the keyword.
+// A set, so two Generic costs paid read the same as one.
+type optionalKinds uint8
+
+const (
+	optGeneric optionalKinds = 1 << iota
+	optTeamwork
+)
+
+// castOptional is a card's record of its cast's optional costs: Java keeps
+// them on Card.getCastSA, read by isOptionalCostPaid and the paid lists
+// (SpellAbility.getPaidList). collected is "Collected" (CostCollectEvidence),
+// revealed is "Revealed" (CostReveal and CostBehold). The lists are replaced,
+// never appended to in place, so a copied Card may share them.
+type castOptional struct {
+	kinds     optionalKinds
+	collected []CardID
+	revealed  []CardID
+}
+
+// has reports whether the cast paid an optional cost of kind k.
+func (o castOptional) has(k optionalKinds) bool { return o.kinds&k != 0 }
+
+// spellCollected is the evidence c's cast collected while c is that spell on
+// the stack, nil anywhere else (Defined$ Collected).
+func (c *Card) spellCollected() []CardID {
+	if c.Zone != Stack {
+		return nil
+	}
+	return c.castOpt.collected
+}
+
+// clone is o with its own lists, for Game.Clone.
+func (o castOptional) clone() castOptional {
+	o.collected = append([]CardID(nil), o.collected...)
+	o.revealed = append([]CardID(nil), o.revealed...)
+	return o
+}
 
 // kickerMagnitude is Card.getKickerMagnitude for a kicker (not multikicker)
 // card: how many kicker costs were paid, 0 to 2 -- one when exactly one of the

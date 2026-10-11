@@ -23,12 +23,13 @@ import (
 // Boon one-shot (Boon$, TriggerHandler removes the effect after its first
 // trigger), the delayed end-of-turn trigger (AtEOT$), imprinting the effect
 // on its host (ImprintOnHost$), the Adventure name, and the
-// SpellAbilityCondition shapes subAbilityConditionMet does not cover.
+// SpellAbilityCondition shapes subAbilityConditionMet does not cover
+// (ConditionZone$, and a Condition$ value rejectUnreadCondition refuses).
 var effectUnresolvedParams = [...]string{
 	"Abilities", "RememberSpell", "RememberLKI", "RememberKeywords", "SharedKeywordsZone", "SharedRestrictions",
 	"ForgetCounter", "ExileOnCounter", "NoteCounterDefined", "ExileOnLost",
 	"Boon", "AtEOT", "ImprintOnHost", "Adventure",
-	"Condition", "ConditionZone",
+	"ConditionZone",
 }
 
 // effectEffect is EffectEffect.java: for each EffectOwner$ player (default
@@ -54,6 +55,9 @@ type effectEffect struct{}
 
 func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if err := rejectParams(a, "Effect", effectUnresolvedParams[:]...); err != nil {
+		return err
+	}
+	if err := rejectUnreadCondition(a, "Effect"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

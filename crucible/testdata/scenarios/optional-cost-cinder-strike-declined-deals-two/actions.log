@@ -1,0 +1,10 @@
+# Mode$ OptionalCost declined: Cinder Strike is cast without blighting, so no
+# -1/-1 counter goes on Grizzly Bears and Count$OptionalGenericCostPaid.4.2
+# reads its unpaid branch -- the 3/3 Hill Giant takes 2 and survives.
+startturn human
+advance 3
+tapformana human 2 R
+queue confirmpaycost false
+queue targets 4
+castspell human 1
+resolvestack

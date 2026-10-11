@@ -40,10 +40,9 @@ import "fmt"
 // dealPlayerDamage already emits for a life LOSS, reused here for a gain.
 //
 // Not ported (every one fails loudly rather than granting the wrong amount
-// to the wrong player, PORT-8/GO-7): Condition$ itself and ConditionDefined$/ConditionZone$/
-// ConditionOptionalPaid$ (SpellAbilityCondition's own separate flag switch
-// and shapes subAbilityConditionMet does not cover, the identical
-// DealDamage-shaped gap).
+// to the wrong player, PORT-8/GO-7): a Condition$ value subAbilityConditionMet
+// does not read (rejectUnreadCondition; Kicked and OptionalCost with its
+// ConditionOptionalPaid$ resolve) and ConditionZone$.
 //
 // UnlessCost$/UnlessPayer$ no longer block either: resolveUnlessCost
 // (effect.go) gates the whole ability before Registry.Resolve ever reaches
@@ -68,7 +67,7 @@ import "fmt"
 type gainLifeEffect struct{}
 
 var gainLifeUnresolvedParams = [...]string{
-	"Condition", "ConditionZone", "ConditionOptionalPaid",
+	"ConditionZone",
 }
 
 func (gainLifeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -76,6 +75,9 @@ func (gainLifeEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: GainLife: %s$ not resolvable yet", key)
 		}
+	}
+	if err := rejectUnreadCondition(a, "GainLife"); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

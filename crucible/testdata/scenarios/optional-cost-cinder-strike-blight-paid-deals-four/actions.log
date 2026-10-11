@@ -1,0 +1,12 @@
+# Mode$ OptionalCost (GameActionUtil.getOptionalCostValues): Cinder Strike may
+# be cast with "blight 1" as an additional cost. The caster pays it, putting a
+# -1/-1 counter on Grizzly Bears, and Count$OptionalGenericCostPaid.4.2 makes
+# the spell deal 4 damage, enough to kill the 3/3 Hill Giant.
+startturn human
+advance 3
+tapformana human 2 R
+queue confirmpaycost true
+queue targets 4
+queue cardchoice 3
+castspell human 1
+resolvestack

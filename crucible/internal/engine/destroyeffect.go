@@ -33,9 +33,8 @@ import (
 // destroyUnresolvedParams names DestroyEffect's own params this port does
 // not evaluate. Every one fails the whole line loudly rather than destroying
 // the wrong permanent or silently dropping half of what it asked for
-// (PORT-8/GO-7): Condition$/ConditionDefined$ (0/16) -- condition.go's own
-// subAbilityConditionMet would otherwise silently no-op a card naming
-// either, dealDamageEffect's own identical reasoning; SorcerySpeed$ (9) -- a cost-restriction flag with
+// (PORT-8/GO-7): a Condition$ value subAbilityConditionMet does not read
+// (rejectUnreadCondition; Kicked and OptionalCost resolve); SorcerySpeed$ (9) -- a cost-restriction flag with
 // no cost-payment site to attach to, sacrificeEffect's own identical
 // reasoning; Ultimate$ (11) -- a planeswalker-ultimate-specific flag, its
 // own further mechanic; ModeCost$ (7) -- Charm's own per-mode cost linkage,
@@ -51,7 +50,7 @@ import (
 // resolveUnlessCost (effect.go) gates the whole ability before Registry.
 // Resolve ever reaches it.
 var destroyUnresolvedParams = [...]string{
-	"Condition", "SorcerySpeed", "Ultimate",
+	"SorcerySpeed", "Ultimate",
 	"ModeCost", "RememberLKI",
 }
 
@@ -66,6 +65,9 @@ func (destroyEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Destroy: %s$ not resolvable yet", key)
 		}
+	}
+	if err := rejectUnreadCondition(a, "Destroy"); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

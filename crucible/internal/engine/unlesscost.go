@@ -618,16 +618,19 @@ func (g *Game) chosenUnlessCards(controller PlayerController, pid PlayerID, sour
 // collectEvidence is CostCollectEvidence.payAsDecided: the payer exiles cards
 // from their graveyard with total mana value at least n. A pick short of n is
 // replaced by the whole graveyard, which unlessCardsPayable said is enough.
-func (g *Game) collectEvidence(controller PlayerController, pid PlayerID, source CardID, n int) {
+// It returns the cards exiled, the cost's "Collected" paid list.
+func (g *Game) collectEvidence(controller PlayerController, pid PlayerID, source CardID, n int) []CardID {
 	grave := g.Zone(Graveyard, pid).Cards()
 	picks := controller.ChooseCardsForEffect(g, pid, source, grave, 1, len(grave))
 	if !isSubset(picks, grave) || hasDuplicate(picks) || graveyardManaValue(g, picks) < n {
 		picks = grave
 	}
-	for _, id := range append([]CardID(nil), picks...) {
+	picks = append([]CardID(nil), picks...)
+	for _, id := range picks {
 		exileFromGraveyard(g, id)
 	}
 	g.checkCollectEvidenceTriggers(controller, pid)
+	return picks
 }
 
 // handWithout is hand less source: a spell being cast cannot be discarded to pay

@@ -302,6 +302,7 @@
       "discardeffect",
       "unlesscost",
       "kicker",
+      "optionalcost",
       "id",
       "zone",
       "parts",

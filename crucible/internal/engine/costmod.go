@@ -16,13 +16,14 @@ import (
 )
 
 // costModParams are the params a RaiseCost/ReduceCost line may carry that this
-// port evaluates; any other (ValidTarget$, Color$, Relative$, UpTo$,
+// port evaluates (Relative$ on the spell's own line only, costModStatus); any
+// other (ValidTarget$, Color$, UpTo$,
 // OnlyFirstSpell$, ValidSpell$, ForEachShard$, a keyword Amount$ ...) makes the
 // line unresolvable and it is not applied (GO-7).
 var costModParams = map[string]bool{
 	"mode": true, "validcard": true, "activator": true, "type": true, "affectedzone": true,
 	"amount": true, "cost": true, "minmana": true, "effectzone": true,
-	"condition": true, "phases": true, "playerturn": true,
+	"condition": true, "phases": true, "playerturn": true, "relative": true,
 	"description": true, "secondary": true, "spelldescription": true, "stackdescription": true,
 }
 
@@ -151,6 +152,13 @@ func (g *Game) costModStatus(pid PlayerID, c, host *Card, s *compile.Ability) co
 		if err != nil || !zoneIn(c.Zone, zones) {
 			return costModSkips
 		}
+	}
+	// Relative$ reads Amount$ against the spell being cast rather than the
+	// static (CostAdjustment.java:155-157). On the spell's own line the host
+	// is that spell, which is what the amount is read against here (Bite Down
+	// on Crime's Count$OptionalGenericCostPaid); another host's is not read.
+	if _, relative := s.Param("Relative"); relative && host.ID != c.ID {
+		return costModUnresolvable
 	}
 	if !paramsResolvable(s, costModParams) {
 		return costModUnresolvable

@@ -380,6 +380,17 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q: no cost recorded what it sacrificed", defined)
 		}
 		return append([]CardID(nil), refs.paid.sacrificed...), nil
+	case "Collected":
+		// The evidence the spell's own cast collected (CostCollectEvidence's
+		// paid list): only a spell is its cast SpellAbility (spellOptional).
+		return append([]CardID(nil), host.spellCollected()...), nil
+	case "CastSA>Collected":
+		// The same list read off the permanent's cast SpellAbility
+		// (AbilityUtils.adjustTriggerContext); none for a card not cast.
+		if !host.wasCast {
+			return nil, nil
+		}
+		return append([]CardID(nil), host.castOpt.collected...), nil
 	case "Remembered", "RememberedCard", "RememberedLKI":
 		var cards []CardID
 		for _, e := range host.Memory.Remembered() {

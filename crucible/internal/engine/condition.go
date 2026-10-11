@@ -19,6 +19,9 @@
 package engine
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/expr"
 )
@@ -74,7 +77,7 @@ var subAbilityUnresolvedParams = [...]string{
 func subAbilityConditionMet(g *Game, host *Card, amounts map[string]expr.Amount, a *compile.Ability) bool {
 	for _, key := range subAbilityUnresolvedParams {
 		if v, ok := a.Param(key); ok {
-			if key == "Condition" && kickedConditionMet(host, v) {
+			if key == "Condition" && conditionValueMet(g, host, a, v) {
 				continue
 			}
 			return false
@@ -99,6 +102,42 @@ func subAbilityConditionMet(g *Game, host *Card, amounts map[string]expr.Amount,
 		return false
 	}
 	return checkSVarMatches(g, host, amounts, a, "ConditionCheckSVar", "ConditionSVarCompare", "OrOtherConditionSVarCompare")
+}
+
+// conditionValueMet is SpellAbilityCondition's Condition$ for the values this
+// port reads (conditionValueRead): the Kicked family, and OptionalCost --
+// the spell was cast with a Mode$ OptionalCost static's Generic cost paid,
+// or with ConditionOptionalPaid$ False was not (SpellAbilityCondition.java:
+// 118-128, :283-284; the flag defaults to true and parses as
+// Boolean.parseBoolean). Any other value is false here (GO-7).
+func conditionValueMet(g *Game, host *Card, a *compile.Ability, value string) bool {
+	if value == "OptionalCost" {
+		want := true
+		if v, ok := a.Param("ConditionOptionalPaid"); ok {
+			want = strings.EqualFold(v, "true")
+		}
+		return g.spellOptional(host.ID).has(optGeneric) == want
+	}
+	return kickedConditionMet(host, value)
+}
+
+// conditionValueRead reports whether conditionValueMet evaluates value.
+func conditionValueRead(value string) bool {
+	switch value {
+	case "Kicked", "Kicked 1", "Kicked 2", "OptionalCost":
+		return true
+	}
+	return false
+}
+
+// rejectUnreadCondition is the error an effect returns for a Condition$ it
+// would otherwise skip silently: nil when the param is absent or names a value
+// subAbilityConditionMet evaluates, which the effect then gates on.
+func rejectUnreadCondition(a *Ability, api string) error {
+	if v, ok := a.Params.Param("Condition"); ok && !conditionValueRead(v) {
+		return fmt.Errorf("engine: %s: Condition$ %q not resolvable yet", api, v)
+	}
+	return nil
 }
 
 // kickedConditionMet is SpellAbilityCondition's Condition$ Kicked / Kicked 1 /

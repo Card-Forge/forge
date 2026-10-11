@@ -10,7 +10,7 @@ var changeZoneAllUnresolvedParams = [...]string{
 	"Duration", "ExileFaceDown", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
 	"WithCountersType", "StaticEffect", "RememberLKI", "TypeLimit", "AtEOT", "OptionQuestion",
 	"Hidden", "ChangeNum", "PowerUp", "Pawprint", "Random",
-	"Condition", "SorcerySpeed", "Ultimate",
+	"SorcerySpeed", "Ultimate",
 }
 
 // changeZoneAllEffect is ChangeZoneAllEffect.java: every card in the
@@ -28,6 +28,11 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ChangeZoneAll: %s$ not resolvable yet", key)
 		}
+	}
+	// A Condition$ subAbilityConditionMet reads (Kicked, OptionalCost) gates
+	// the line there; any other value is refused.
+	if err := rejectUnreadCondition(a, "ChangeZoneAll"); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

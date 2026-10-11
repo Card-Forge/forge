@@ -17,8 +17,10 @@
 package engine
 
 import (
+	"strconv"
 	"strings"
 
+	"github.com/jczastkiewicz/crucible/internal/expr"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -26,6 +28,7 @@ import (
 var contextHeads = map[string]bool{
 	"Targeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
 	"Remembered": true, "Imprinted": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
+	"Collected": true, "Revealed": true,
 }
 
 // contextCards is the cards head names for the ability resolving now. A card
@@ -48,6 +51,13 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 			return nil, false
 		}
 		ids = g.Card(source).Memory.Imprinted()
+	case "Collected", "Revealed":
+		// The cast spell's paid lists (CostCollectEvidence, CostReveal), read
+		// while source is that spell (spellOptional).
+		if source == NoCard {
+			return nil, false
+		}
+		ids = optionalList(g.spellOptional(source), head)
 	default:
 		var ok bool
 		if ids, ok = g.abilityListIDs(source, head); !ok {
@@ -125,6 +135,11 @@ func (g *Game) contextValue(source CardID, head, body string) (int, bool) {
 	if !ok {
 		return 0, false
 	}
+	return g.measureCards(source, cards, body)
+}
+
+// measureCards is handlePaid over cards for an amount evaluated for source.
+func (g *Game) measureCards(source CardID, cards []*Card, body string) (int, bool) {
 	switch {
 	case strings.HasPrefix(body, "Amount"):
 		return len(cards), true
@@ -197,4 +212,96 @@ func (g *Game) triggerCount(source CardID, key string) (int, bool) {
 		return 0, false
 	}
 	return a.triggered.counts.count(key)
+}
+
+// optionalList is the paid list head names in rec: "Collected" or "Revealed".
+func optionalList(rec castOptional, head string) []CardID {
+	if head == "Collected" {
+		return rec.collected
+	}
+	return rec.revealed
+}
+
+// optionalBranch is Count$OptionalGenericCostPaid.<paid>.<not> and
+// Count$Teamwork.<paid>.<not> read against rec (AbilityUtils.java:1700-1706).
+// A branch that is not a plain number (an SVar name) is unresolved.
+func optionalBranch(rec castOptional, count expr.Count) (int, bool) {
+	if len(count.Parameters) != 2 {
+		return 0, false
+	}
+	kind := optGeneric
+	if count.Head == "Teamwork" {
+		kind = optTeamwork
+	}
+	branch := count.Parameters[1]
+	if rec.has(kind) {
+		branch = count.Parameters[0]
+	}
+	n, err := strconv.Atoi(branch)
+	return n, err == nil
+}
+
+// castSAValue is an amount under a CastSA> context: the head measured against
+// the host's cast record (Card.getCastSA) -- the optional-cost branches and the
+// Collected/Revealed paid lists, the heads that record holds. cast is false
+// for a host that was not cast; ok is false for any other head.
+func (g *Game) castSAValue(source CardID, amt expr.Amount) (n int, ok, cast bool) {
+	switch {
+	case amt.Count != nil && (amt.Count.Head == "OptionalGenericCostPaid" || amt.Count.Head == "Teamwork"):
+	case amt.Head == "Collected" || amt.Head == "Revealed":
+	default:
+		return 0, false, false
+	}
+	rec, cast := g.castSARecord(source)
+	if !cast {
+		return 0, true, false
+	}
+	if amt.Count != nil {
+		n, ok = optionalBranch(rec, *amt.Count)
+		return n, ok, true
+	}
+	ids := optionalList(rec, amt.Head)
+	cards := make([]*Card, 0, len(ids))
+	for _, id := range ids {
+		cards = append(cards, g.Card(id))
+	}
+	n, ok = g.measureCards(source, cards, amt.Body)
+	return n, ok, true
+}
+
+// presenceCount is Count$Presence_<Type>.<found>.<not>
+// (AbilityUtils.java:2180-2192): found when the card was cast and its cast
+// revealed (or beheld) a card of the type, or its controller controls a
+// permanent of the type. Java reads the battlefield as the measurement is
+// taken (Count$LastStateBattlefield, :2186), not as the spell was cast,
+// which the Oracle text ("as you cast this spell") asks; reproduced, a Forge
+// defect (PORT-8, forge-java-defects.md).
+func (g *Game) presenceCount(sourceController PlayerID, source CardID, typ string, count expr.Count) (int, bool) {
+	if source == NoCard || len(count.Parameters) != 2 {
+		return 0, false
+	}
+	yes, errYes := strconv.Atoi(count.Parameters[0])
+	no, errNo := strconv.Atoi(count.Parameters[1])
+	if errYes != nil || errNo != nil {
+		return 0, false
+	}
+	c := g.Card(source)
+	if !c.wasCast {
+		return no, true
+	}
+	spec := valid.Parse(typ)
+	for _, id := range c.castOpt.revealed {
+		if Matches(g, g.Card(id), spec, sourceController, source) {
+			return yes, true
+		}
+	}
+	controlled := valid.Parse(typ + ".YouCtrl")
+	for _, pid := range g.Players() {
+		for _, id := range g.Zone(Battlefield, pid).Cards() {
+			if Matches(g, g.Card(id), controlled, sourceController, source) {
+				return yes, true
+			}
+		}
+	}
+	return no, true
 }

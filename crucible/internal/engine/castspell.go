@@ -391,6 +391,10 @@ type castOpts struct {
 	// kickers are the kicker costs chosen (kicker1, kicker2 bits), paid on top
 	// of the cost (CR 601.2b, 702.33a).
 	kickers uint8
+	// optional are the Mode$ OptionalCost and Teamwork costs chosen
+	// (optionalcost.go): their mana joins the cost, their other parts are paid
+	// once it is.
+	optional optionalChoice
 	// extra, when hasExtra, is a cost the way the spell is cast adds to the
 	// printed one: Beam me up's returned creature.
 	extra    unlessCost
@@ -439,11 +443,23 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	// forgets it.
 	g.Card(card).castFrom = g.Card(card).Zone
 	g.Card(card).wasCast = true
+	// The OptionalCost statics come first in Java's list, the keyword costs
+	// after (GameActionUtil.java:442-523); Teamwork is one of those, Kicker is
+	// chooseKicker's.
+	optional, err := g.chooseOptionalCosts(controller, pid, card)
+	if err != nil {
+		g.recordPendingError(err)
+		g.Card(card).wasCast = false
+		return false
+	}
+	opts.optional = optional
+	g.Card(card).castOpt = castOptional{kinds: optional.kinds}
 	opts.kickers = g.chooseKicker(controller, pid, g.Card(card))
 	g.Card(card).kicker = opts.kickers
 	g.Card(card).sneaked = opts.sneak
 	if !g.castSpellChosen(controller, pid, card, opts) {
 		g.Card(card).kicker = 0
+		g.Card(card).castOpt = castOptional{}
 		g.Card(card).wasCast = false
 		g.Card(card).sneaked, g.Card(card).sneakDefender = false, NoEntity
 		return false
@@ -470,7 +486,7 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 		return false
 	}
 	extra, hasExtra, ok := g.castExtraCost(pid, c, firstSpellAbility(c), opts)
-	if !ok {
+	if !ok || !g.optionalPartsPayable(pid, card, opts.optional) {
 		return false
 	}
 	room := isRoomDef(c.Def)
@@ -490,6 +506,7 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
 		return false
 	}
+	g.payOptionalParts(controller, pid, card, opts.optional)
 	g.putSpellOnStack(card, pid)
 	api := APIPermanentNoncreature
 	if c.Type().Has(cardtype.Creature) {
@@ -518,6 +535,7 @@ func (g *Game) castCost(pid PlayerID, c *Card, opts castOpts) (mana.Cost, bool) 
 		base = opts.altCost
 	}
 	base = withKicker(c, opts.kickers, base)
+	base = opts.optional.withMana(base)
 	if opts.hasFlashCost {
 		base = withExtraMana(base, opts.flashCost)
 	}
@@ -525,6 +543,7 @@ func (g *Game) castCost(pid PlayerID, c *Card, opts castOpts) (mana.Cost, bool) 
 		base = withExtraMana(base, opts.raiseMana)
 	}
 	total, ok := g.spellCost(pid, c.ID, base)
+	total = opts.optional.reduced(total)
 	switch {
 	case opts.anyType:
 		total = anyTypeCost(total)
@@ -534,12 +553,18 @@ func (g *Game) castCost(pid PlayerID, c *Card, opts castOpts) (mana.Cost, bool) 
 	return total, ok
 }
 
+// paysNoMana reports a free cast (WithoutManaCost$) that adds no mana either:
+// no kicker, MayFlashCost, RaiseCost$ or optional cost with mana (CR 118.9d).
+func (opts castOpts) paysNoMana() bool {
+	return opts.withoutManaCost && opts.kickers == 0 && !opts.hasFlashCost && !opts.hasRaiseMana && !opts.optional.hasMana
+}
+
 // announceX is CR 601.2b: a spell with {X} in its cost has its X announced
 // before its targets are chosen, so a restriction on them can name it
 // (Repeal's cmcEQX). payManaCostX takes the announced value instead of asking
 // again. False when the caster declines to announce one.
 func (g *Game) announceX(pid PlayerID, c *Card, controller PlayerController, opts castOpts) bool {
-	if opts.withoutManaCost && opts.kickers == 0 && !opts.hasFlashCost && !opts.hasRaiseMana {
+	if opts.paysNoMana() {
 		return true
 	}
 	total, ok := g.castCost(pid, c, opts)
@@ -563,7 +588,7 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 	// The X is announced here, so from the return on Count$xPaid reads it.
 	defer func() { g.castPending = NoCard }()
 	c.castManaSpent = 0
-	if opts.withoutManaCost && opts.kickers == 0 && !opts.hasFlashCost && !opts.hasRaiseMana {
+	if opts.paysNoMana() {
 		return xAnnounced{}, true
 	}
 	total, ok := g.castCost(pid, c, opts)
@@ -571,11 +596,13 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 		return xAnnounced{}, false
 	}
 	total, assist := g.assistCost(controller, pid, c, total)
+	total, waterbent := g.waterbendCast(controller, pid, c.ID, total, opts.optional.waterbendN)
 	g.snowAnyColor = opts.snowAnyColor
 	x, paid := g.payManaCostX(pid, total, controller)
 	g.snowAnyColor = false
 	if paid {
 		assist.settle(g, controller)
+		tapChosenPermanents(g, controller, waterbent)
 		// SpellAbility.getTotalManaSpent: one per mana paid. Phyrexian shards
 		// paid with life are counted too, a small overcount no card reads.
 		c.castManaSpent = len(total.Shards()) + total.Generic() + x.value*total.CountX()
@@ -644,10 +671,14 @@ func (g *Game) castAura(pid PlayerID, card CardID, c *Card, controller PlayerCon
 		!g.flashDecided(pid, card, opts, Ability{Source: card, Controller: pid, Target: target, spell: true})) {
 		return false
 	}
+	if !g.optionalPartsPayable(pid, card, opts.optional) {
+		return false
+	}
 	x, paid := g.payCastCost(pid, c, controller, opts)
 	if !paid {
 		return false
 	}
+	g.payOptionalParts(controller, pid, card, opts.optional)
 	g.putSpellOnStack(card, pid)
 	cast := Ability{API: APIAttach, Source: card, Controller: pid, Target: target, spell: true}
 	x.setOn(&cast)
@@ -701,10 +732,14 @@ func (g *Game) castPlayerAura(pid PlayerID, card CardID, c *Card, controller Pla
 		!g.flashDecided(pid, card, opts, Ability{Source: card, Controller: pid, Targets: []EntityID{target}, spell: true})) {
 		return false
 	}
+	if !g.optionalPartsPayable(pid, card, opts.optional) {
+		return false
+	}
 	x, paid := g.payCastCost(pid, c, controller, opts)
 	if !paid {
 		return false
 	}
+	g.payOptionalParts(controller, pid, card, opts.optional)
 	g.putSpellOnStack(card, pid)
 	cast := Ability{API: APIAttach, Source: card, Controller: pid, Targets: []EntityID{target}, spell: true}
 	x.setOn(&cast)
@@ -772,7 +807,7 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 		return false
 	}
 	extra, hasExtra, ok := g.castExtraCost(pid, c, spellAbility, opts)
-	if !ok {
+	if !ok || !g.optionalPartsPayable(pid, card, opts.optional) {
 		return false
 	}
 	x, paid := g.payCastCost(pid, c, controller, opts)
@@ -785,6 +820,7 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
 		return false
 	}
+	g.payOptionalParts(controller, pid, card, opts.optional)
 	x.setOn(&a)
 	g.putSpellOnStack(card, pid)
 	g.Card(card).castX = x.value
