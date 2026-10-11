@@ -1,5 +1,6 @@
 package forge.gamemodes.net.event;
 
+import forge.util.LogSafe;
 import java.util.Objects;
 
 import forge.deck.Deck;
@@ -20,4 +21,9 @@ public final class ReceiveEventPoolEvent implements NetEvent {
 
     @Override
     public void updateForClient(RemoteClient client) { }
+
+    @Override
+    public String toString() {
+        return String.format("ReceiveEventPool: event %s, %d cards", LogSafe.forLog(eventId), pool.getAllCardsInASinglePool().countAll());
+    }
 }
