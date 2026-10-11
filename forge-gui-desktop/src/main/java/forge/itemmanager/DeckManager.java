@@ -44,6 +44,7 @@ import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.screens.deckeditor.controllers.CEditorQuest;
+import forge.screens.deckeditor.controllers.DeckController;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
@@ -400,7 +401,16 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         } //ensure previous deck on screen is saved if needed
 
         if (deck != null) {
-            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+            final DeckController<?> loaded =
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
+            loaded.load(deck.getPath(), deck.getName());
+            // Deckbox (and other non-constructed) decks are not in constructed storage.
+            if (loaded.getModel() == null || !deck.getName().equals(loaded.getModel().getName())) {
+                final Deck source = deck.getDeck();
+                if (source != null) {
+                    loaded.loadDeck(source);
+                }
+            }
         } else {
             CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
         }

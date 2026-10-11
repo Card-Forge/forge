@@ -19,6 +19,8 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FButton;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
@@ -28,6 +30,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +63,19 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private JPanel pnlDeckUrl;
     private FTextField txtDeckUrl;
     private FLabel btnReloadUrl;
+    private JPanel pnlDeckbox;
+    private FComboBox<String> cmbDeckLibraryProvider;
+    private FComboBox<String> cmbDeckboxUser;
+    private FTextField txtDeckboxUsername;
+    private FLabel lblDeckboxFolder;
+    private FComboBox<String> cmbDeckboxFolder;
+    private FLabel lblDeckboxSync;
+    private FLabel lblDeckboxNote;
+    private FLabel lblDeckboxOverwrite;
+    private FButton btnDeckboxSync;
+    private boolean applyingDeckboxSettings;
+    private boolean deckboxSyncInProgress;
+    private int deckboxRemoteCheckSeq;
     private String lastLoadedUrlDeckName;
     private UiCommand deckSelectionCommand;
     private boolean updatingDeckPool;
@@ -361,6 +378,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             decksComboBox = new DecksComboBox();
             lstDecksContainer = new ItemManagerContainer(lstDecks);
             initializeDeckUrlPanel();
+            initializeDeckboxPanel();
             decksComboBox.addListener(this);
             restoreSavedState();
         } else {
@@ -369,10 +387,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 3"));
         decksComboBox.addTo(this, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");
         this.add(pnlDeckUrl, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");
+        this.add(pnlDeckbox, "w 100%, h 150px!, gapbottom 5px, spanx 2, wrap");
         this.add(lstDecksContainer, "w 100%, growy, pushy, spanx 2, wrap");
         this.add(btnViewDeck, "w 50%-3px, h 30px!, gaptop 5px, gapright 6px");
         this.add(btnRandom, "w 50%-3px, h 30px!, gaptop 5px");
-        updateDeckUrlPanelVisibility();
+        updateExtraPanelVisibility();
         if (isShowing()) {
             revalidate();
             repaint();
@@ -392,10 +411,407 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         pnlDeckUrl.add(btnReloadUrl, "h " + FTextField.HEIGHT + "px!, w pref!");
     }
 
-    private void updateDeckUrlPanelVisibility() {
+    private void initializeDeckboxPanel() {
+        pnlDeckbox = new JPanel(new MigLayout("insets 0, gap 0, hidemode 3"));
+        pnlDeckbox.setOpaque(false);
+
+        pnlDeckbox.add(new FLabel.Builder().text(localizer.getMessage("lblOnlineDeckLibraryProvider")).fontSize(12).fontStyle(Font.BOLD).build(),
+                "h " + FTextField.HEIGHT + "px!, gapright 6px");
+        cmbDeckLibraryProvider = new FComboBox<>();
+        cmbDeckLibraryProvider.setEditable(false);
+        for (final String provider : DeckUrlLoader.getSupportedProviderNames()) {
+            cmbDeckLibraryProvider.addItem(provider);
+        }
+        cmbDeckLibraryProvider.setSelectedItem(DeckboxUtil.SYNC_PROVIDER_NAME);
+        cmbDeckLibraryProvider.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index,
+                    final boolean isSelected, final boolean cellHasFocus) {
+                final Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                final boolean enabled = value instanceof String
+                        && DeckUrlLoader.supportsBulkLibrarySync((String) value);
+                c.setEnabled(enabled);
+                if (!isSelected) {
+                    c.setForeground(enabled ? list.getForeground() : Color.GRAY);
+                }
+                return c;
+            }
+        });
+        pnlDeckbox.add(cmbDeckLibraryProvider, "growx, pushx, h " + FTextField.HEIGHT + "px!, spanx 5, wrap");
+
+        pnlDeckbox.add(new FLabel.Builder().text(localizer.getMessage("lblDeckboxUsername")).fontSize(12).fontStyle(Font.BOLD).build(),
+                "h " + FTextField.HEIGHT + "px!, gapright 6px");
+        cmbDeckboxUser = new FComboBox<>();
+        cmbDeckboxUser.setEditable(false);
+        pnlDeckbox.add(cmbDeckboxUser, "growx, pushx, h " + FTextField.HEIGHT + "px!, gapright 6px");
+        txtDeckboxUsername = new FTextField.Builder().build();
+        pnlDeckbox.add(txtDeckboxUsername, "growx, pushx, h " + FTextField.HEIGHT + "px!, gapright 12px");
+        lblDeckboxFolder = new FLabel.Builder().text(localizer.getMessage("lblDeckboxFolder")).fontSize(12).fontStyle(Font.BOLD).build();
+        pnlDeckbox.add(lblDeckboxFolder, "h " + FTextField.HEIGHT + "px!, gapright 6px");
+        cmbDeckboxFolder = new FComboBox<>();
+        cmbDeckboxFolder.setEditable(false);
+        pnlDeckbox.add(cmbDeckboxFolder, "growx, pushx, h " + FTextField.HEIGHT + "px!, gapright 6px");
+        btnDeckboxSync = new FButton(localizer.getMessage("lblDeckboxSyncButton", getSelectedLibraryProvider()));
+        btnDeckboxSync.setCommand(this::syncDeckboxDecks);
+        pnlDeckbox.add(btnDeckboxSync, "h " + FTextField.HEIGHT + "px!, w pref!, wrap");
+
+        lblDeckboxSync = new FLabel.Builder()
+                .text("●  " + localizer.getMessage("lblOutOfSyncWithDeckbox", getSelectedLibraryProvider()))
+                .fontSize(12)
+                .useSkinColors(false)
+                .build();
+        pnlDeckbox.add(lblDeckboxSync, "spanx 6, h 20px!, gaptop 4px, wrap");
+
+        lblDeckboxNote = new FLabel.Builder()
+                .text(localizer.getMessage("lblDeckboxReadOnlyNote", getSelectedLibraryProvider()))
+                .fontSize(11)
+                .fontStyle(Font.ITALIC)
+                .build();
+        pnlDeckbox.add(lblDeckboxNote, "spanx 6, h 18px!, wrap");
+
+        lblDeckboxOverwrite = new FLabel.Builder()
+                .text(localizer.getMessage("lblDeckboxSyncOverwriteWarning"))
+                .fontSize(11)
+                .fontStyle(Font.ITALIC)
+                .useSkinColors(false)
+                .build();
+        lblDeckboxOverwrite.setForeground(new Color(180, 90, 40));
+        pnlDeckbox.add(lblDeckboxOverwrite, "spanx 6, h 18px!");
+
+        cmbDeckLibraryProvider.addActionListener(e -> {
+            if (applyingDeckboxSettings) {
+                return;
+            }
+            final String selected = cmbDeckLibraryProvider.getSelectedItem();
+            if (!DeckUrlLoader.supportsBulkLibrarySync(selected)) {
+                applyingDeckboxSettings = true;
+                try {
+                    cmbDeckLibraryProvider.setSelectedItem(DeckboxUtil.SYNC_PROVIDER_NAME);
+                } finally {
+                    applyingDeckboxSettings = false;
+                }
+                return;
+            }
+            updateDeckLibraryProviderLabels();
+        });
+        txtDeckboxUsername.addActionListener(e -> syncDeckboxDecks());
+        txtDeckboxUsername.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(final FocusEvent e) {
+                if (isDeckboxNewUserSelected()) {
+                    refreshDeckboxFolderCombo(getSelectedDeckboxFolder());
+                    saveDeckboxSettings();
+                    refreshDeckboxRemoteSyncIndicator();
+                }
+            }
+        });
+        cmbDeckboxUser.addActionListener(e -> {
+            if (applyingDeckboxSettings) {
+                return;
+            }
+            updateDeckboxNewUserFieldVisibility();
+            refreshDeckboxFolderCombo(getSelectedDeckboxFolder());
+            saveDeckboxSettings();
+            refreshDeckboxRemoteSyncIndicator();
+        });
+        cmbDeckboxFolder.addActionListener(e -> {
+            if (applyingDeckboxSettings) {
+                return;
+            }
+            saveDeckboxSettings();
+        });
+
+        applyingDeckboxSettings = true;
+        try {
+            refreshDeckboxUserCombo(DeckboxUtil.getSavedUsername());
+            refreshDeckboxFolderCombo(DeckboxUtil.getSavedFolder());
+        } finally {
+            applyingDeckboxSettings = false;
+        }
+        updateDeckboxNewUserFieldVisibility();
+        updateDeckLibraryProviderLabels();
+    }
+
+    private String getSelectedLibraryProvider() {
+        if (cmbDeckLibraryProvider != null && cmbDeckLibraryProvider.getSelectedItem() != null
+                && DeckUrlLoader.supportsBulkLibrarySync(cmbDeckLibraryProvider.getSelectedItem())) {
+            return cmbDeckLibraryProvider.getSelectedItem();
+        }
+        return DeckboxUtil.SYNC_PROVIDER_NAME;
+    }
+
+    private void updateDeckLibraryProviderLabels() {
+        final String provider = getSelectedLibraryProvider();
+        if (btnDeckboxSync != null && !deckboxSyncInProgress) {
+            btnDeckboxSync.setText(localizer.getMessage("lblDeckboxSyncButton", provider));
+        }
+        if (lblDeckboxNote != null) {
+            lblDeckboxNote.setText(localizer.getMessage("lblDeckboxReadOnlyNote", provider));
+        }
+        refreshDeckboxRemoteSyncIndicator();
+    }
+
+    private String getDeckboxNewUserLabel() {
+        return localizer.getMessage("lblDeckboxSyncNewUser");
+    }
+
+    private boolean isDeckboxNewUserSelected() {
+        if (cmbDeckboxUser == null || cmbDeckboxUser.getSelectedItem() == null) {
+            return true;
+        }
+        return getDeckboxNewUserLabel().equals(cmbDeckboxUser.getSelectedItem());
+    }
+
+    private String getActiveDeckboxUsername() {
+        if (isDeckboxNewUserSelected()) {
+            return txtDeckboxUsername != null ? txtDeckboxUsername.getText().trim() : "";
+        }
+        return cmbDeckboxUser.getSelectedItem();
+    }
+
+    private void updateDeckboxNewUserFieldVisibility() {
+        if (txtDeckboxUsername != null) {
+            txtDeckboxUsername.setVisible(isDeckboxNewUserSelected());
+        }
+        if (pnlDeckbox != null) {
+            pnlDeckbox.revalidate();
+            pnlDeckbox.repaint();
+        }
+    }
+
+    private void refreshDeckboxUserCombo(final String preferredUser) {
+        if (cmbDeckboxUser == null) {
+            return;
+        }
+        final String newUserLabel = getDeckboxNewUserLabel();
+        final List<String> users = DeckboxUtil.listSyncedUsernames();
+        applyingDeckboxSettings = true;
+        try {
+            cmbDeckboxUser.removeAllItems();
+            cmbDeckboxUser.addItem(newUserLabel);
+            for (final String user : users) {
+                cmbDeckboxUser.addItem(user);
+            }
+            String selected = newUserLabel;
+            if (preferredUser != null && !preferredUser.isBlank()) {
+                for (int i = 0; i < cmbDeckboxUser.getItemCount(); i++) {
+                    final String item = cmbDeckboxUser.getItemAt(i);
+                    if (preferredUser.equalsIgnoreCase(item)) {
+                        selected = item;
+                        break;
+                    }
+                }
+            }
+            cmbDeckboxUser.setSelectedItem(selected);
+            if (txtDeckboxUsername != null) {
+                if (newUserLabel.equals(selected) && preferredUser != null
+                        && users.stream().noneMatch(preferredUser::equalsIgnoreCase)) {
+                    txtDeckboxUsername.setText(preferredUser);
+                } else {
+                    txtDeckboxUsername.setText("");
+                }
+            }
+        } finally {
+            applyingDeckboxSettings = false;
+            updateDeckboxNewUserFieldVisibility();
+        }
+    }
+
+    private void refreshDeckboxFolderCombo(final String preferredFolder) {
+        if (cmbDeckboxFolder == null) {
+            return;
+        }
+        final String username = getActiveDeckboxUsername();
+        final List<String> folders = DeckboxUtil.listLocalFolders(username);
+        applyingDeckboxSettings = true;
+        try {
+            cmbDeckboxFolder.removeAllItems();
+            for (final String folder : folders) {
+                cmbDeckboxFolder.addItem(folder);
+            }
+            boolean selected = false;
+            if (preferredFolder != null && !preferredFolder.isBlank()) {
+                for (int i = 0; i < cmbDeckboxFolder.getItemCount(); i++) {
+                    final String item = cmbDeckboxFolder.getItemAt(i);
+                    if (preferredFolder.equalsIgnoreCase(item)) {
+                        cmbDeckboxFolder.setSelectedIndex(i);
+                        selected = true;
+                        break;
+                    }
+                }
+            }
+            if (!selected && cmbDeckboxFolder.getItemCount() > 0) {
+                cmbDeckboxFolder.setSelectedIndex(0);
+            }
+        } finally {
+            applyingDeckboxSettings = false;
+            updateDeckboxFolderEnabled();
+        }
+    }
+
+    private void updateDeckboxFolderEnabled() {
+        final boolean enable = !deckboxSyncInProgress && cmbDeckboxFolder != null && cmbDeckboxFolder.getItemCount() > 0;
+        if (cmbDeckboxFolder != null) {
+            cmbDeckboxFolder.setEnabled(enable);
+        }
+        if (lblDeckboxFolder != null) {
+            lblDeckboxFolder.setEnabled(enable);
+        }
+    }
+
+    private String getSelectedDeckboxFolder() {
+        if (cmbDeckboxFolder == null || cmbDeckboxFolder.getSelectedItem() == null) {
+            return DeckboxUtil.getSavedFolder();
+        }
+        return cmbDeckboxFolder.getSelectedItem();
+    }
+
+    private void saveDeckboxSettings() {
+        if (applyingDeckboxSettings) {
+            return;
+        }
+        final String username = getActiveDeckboxUsername();
+        final String folder = getSelectedDeckboxFolder();
+        DeckboxUtil.saveSettings(username, folder);
+        if (selectedDeckType == DeckType.DECKBOX_DECK) {
+            updateDeckboxDecks();
+        }
+    }
+
+    private void syncDeckboxDecks() {
+        if (deckboxSyncInProgress) {
+            return;
+        }
+        final String username = getActiveDeckboxUsername();
+        final String previousFolder = getSelectedDeckboxFolder();
+        DeckboxUtil.saveSettings(username, previousFolder);
+        if (!DeckboxUtil.hasUsername(username)) {
+            FOptionPane.showMessageDialog(localizer.getMessage("lblDeckboxUsernameRequired"));
+            return;
+        }
+        final String provider = getSelectedLibraryProvider();
+        if (DeckboxUtil.hasLocalDecks(username)
+                && !FOptionPane.showConfirmDialog(
+                        localizer.getMessage("lblDeckboxSyncConfirm", provider),
+                        localizer.getMessage("lblDeckboxSyncConfirmTitle"),
+                        localizer.getMessage("lblDeckboxSyncButton", provider),
+                        localizer.getMessage("lblCancel"),
+                        false)) {
+            return;
+        }
+
+        deckboxSyncInProgress = true;
+        setDeckboxSyncLoading(true);
+        FThreads.invokeInBackgroundThread(() -> {
+            int written = 0;
+            Exception error = null;
+            try {
+                written = DeckboxSync.sync(username);
+            } catch (final Exception ex) {
+                error = ex;
+            }
+            final int writtenCount = written;
+            final Exception syncError = error;
+            FThreads.invokeInEdtLater(() -> {
+                deckboxSyncInProgress = false;
+                setDeckboxSyncLoading(false);
+                if (syncError != null) {
+                    refreshDeckboxRemoteSyncIndicator();
+                    FOptionPane.showErrorDialog(syncError.getMessage(),
+                            localizer.getMessage("lblDeckboxSyncFailed", username));
+                    return;
+                }
+                refreshDeckboxUserCombo(username);
+                refreshDeckboxFolderCombo(previousFolder);
+                DeckboxUtil.saveSettings(username, getSelectedDeckboxFolder());
+                updateDeckboxDecks();
+                refreshDeckboxRemoteSyncIndicator();
+                FOptionPane.showMessageDialog(localizer.getMessage("lblDeckboxSyncComplete", writtenCount,
+                        getSelectedLibraryProvider()));
+            });
+        });
+    }
+
+    private void setDeckboxSyncLoading(final boolean loading) {
+        if (cmbDeckLibraryProvider != null) {
+            cmbDeckLibraryProvider.setEnabled(!loading);
+        }
+        if (cmbDeckboxUser != null) {
+            cmbDeckboxUser.setEnabled(!loading);
+        }
+        if (txtDeckboxUsername != null) {
+            txtDeckboxUsername.setEnabled(!loading);
+        }
+        if (btnDeckboxSync != null) {
+            btnDeckboxSync.setEnabled(!loading);
+            btnDeckboxSync.setText(localizer.getMessage(loading ? "lblDeckboxSyncing" : "lblDeckboxSyncButton",
+                    getSelectedLibraryProvider()));
+        }
+        updateDeckboxFolderEnabled();
+    }
+
+    private void updateDeckboxDecks() {
+        final String username = getActiveDeckboxUsername();
+        final String folder = getSelectedDeckboxFolder();
+        updateDecks(DeckboxUtil.getDecks(username, folder), ItemManagerConfig.CONSTRUCTED_DECKS);
+    }
+
+    private void refreshDeckboxRemoteSyncIndicator() {
+        if (lblDeckboxSync == null) {
+            return;
+        }
+        final String username = getActiveDeckboxUsername();
+        if (!DeckboxUtil.hasUsername(username) || isDeckboxNewUserSelected()) {
+            setDeckboxSyncedDisplay(false);
+            return;
+        }
+        final int seq = ++deckboxRemoteCheckSeq;
+        lblDeckboxSync.setForeground(Color.GRAY);
+        lblDeckboxSync.setText("●  " + localizer.getMessage("lblDeckboxCheckingRemote", getSelectedLibraryProvider()));
+        FThreads.invokeInBackgroundThread(() -> {
+            boolean inSync = false;
+            try {
+                inSync = DeckboxUtil.isInSyncWithRemote(username);
+            } catch (final Exception ignored) {
+                inSync = false;
+            }
+            final boolean result = inSync;
+            FThreads.invokeInEdtLater(() -> {
+                if (seq != deckboxRemoteCheckSeq) {
+                    return;
+                }
+                setDeckboxSyncedDisplay(result);
+            });
+        });
+    }
+
+    private void setDeckboxSyncedDisplay(final boolean synced) {
+        if (lblDeckboxSync == null) {
+            return;
+        }
+        lblDeckboxSync.setForeground(synced ? new Color(40, 170, 40) : new Color(200, 50, 50));
+        lblDeckboxSync.setText("●  " + localizer.getMessage(
+                synced ? "lblSyncedToDeckbox" : "lblOutOfSyncWithDeckbox",
+                getSelectedLibraryProvider()));
+    }
+
+    private void updateExtraPanelVisibility() {
         final boolean isProvidedDeckUrl = selectedDeckType == DeckType.PROVIDED_DECK_URL;
+        final boolean isDeckbox = selectedDeckType == DeckType.DECKBOX_DECK;
         if (pnlDeckUrl != null) {
             pnlDeckUrl.setVisible(isProvidedDeckUrl);
+        }
+        if (pnlDeckbox != null) {
+            pnlDeckbox.setVisible(isDeckbox);
+            if (isDeckbox) {
+                refreshDeckboxUserCombo(getActiveDeckboxUsername());
+                refreshDeckboxFolderCombo(getSelectedDeckboxFolder());
+                refreshDeckboxRemoteSyncIndicator();
+            }
+        }
+        if (isShowing()) {
+            revalidate();
+            repaint();
         }
     }
 
@@ -737,6 +1153,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             case QUEST_OPPONENT_DECK:
                 updateQuestEvents();
                 break;
+            case DECKBOX_DECK:
+                updateDeckboxDecks();
+                break;
             case PRECONSTRUCTED_DECK:
                 updatePrecons();
                 break;
@@ -782,7 +1201,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             default:
                 break; //other deck types not currently supported here
         }
-        updateDeckUrlPanelVisibility();
+        updateExtraPanelVisibility();
     }
 
     private final String SELECTED_DECK_DELIMITER = "::";
