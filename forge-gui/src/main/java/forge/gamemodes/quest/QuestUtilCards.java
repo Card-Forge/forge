@@ -22,7 +22,6 @@ import com.google.common.collect.Lists;
 import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.deck.DeckgenUtil;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.bazaar.QuestItemType;
 import forge.gamemodes.quest.data.GameFormatQuest;

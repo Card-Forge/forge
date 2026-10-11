@@ -563,32 +563,11 @@ public final class BoosterUtils {
     }
 
     public static List<PaperCard> generatePlanarDeck() {
-        List<PaperCard> planarDeck = new ArrayList<>();
-        List<PaperCard> allPlanars = FModel.getPlanechaseCards().toFlatList();
-        int phenoms = 0;
-        int targetsize = 10;
-        while (true) {
-            PaperCard rndPlane = Aggregates.random(allPlanars);
-            allPlanars.remove(rndPlane);
-
-            if (rndPlane.getRules().getType().isPhenomenon() && phenoms < 2) {
-                planarDeck.add(rndPlane);
-                phenoms++;
-            }
-            else if (rndPlane.getRules().getType().isPlane()) {
-                planarDeck.add(rndPlane);
-            }
-
-            if (allPlanars.isEmpty() || planarDeck.size() == targetsize) {
-                break;
-            }
-        }
-
-        return planarDeck;
+        return DeckgenUtil.generatePlanarPool(10).toFlatList();
     }
 
     public static List<PaperCard> generateSchemeDeck() {
-        return DeckgenUtil.generateSchemePool().toFlatList();
+        return Aggregates.random(FModel.getArchenemyCards().toFlatList(), 20);
     }
 
     public static void sort(List<PaperCard> cards) {
