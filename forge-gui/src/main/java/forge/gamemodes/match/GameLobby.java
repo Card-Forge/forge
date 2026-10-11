@@ -582,6 +582,12 @@ public abstract class GameLobby implements IHasGameType {
         private boolean activeConformance;
         private int maximumCommanderBracket = 5; // mirrors DECKGEN_MAXIMUM_COMMANDER_BRACKET default (off)
 
+        @Override
+        public String toString() {
+            final long ready = slots.stream().filter(LobbySlot::isReady).count();
+            return slots.size() + " slots, " + ready + " ready" + (appliedVariants.isEmpty() ? "" : ", " + appliedVariants);
+        }
+
         public GameLobbyData() {
         }
 

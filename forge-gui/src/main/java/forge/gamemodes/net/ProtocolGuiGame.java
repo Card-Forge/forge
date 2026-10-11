@@ -27,6 +27,7 @@ import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -532,8 +533,11 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
                 syncControlledPlayer(pc);
             }
         }
+        // Repeated event types are counted: [GameEventManaPool x6, GameEventAddLog x3]
         netLog.info("Sending batch of {}: [{}]", events.size(),
-                events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+                events.stream().collect(Collectors.groupingBy(e -> e.getClass().getSimpleName(), LinkedHashMap::new, Collectors.counting()))
+                        .entrySet().stream().map(e -> e.getValue() == 1 ? e.getKey() : e.getKey() + " x" + e.getValue())
+                        .collect(Collectors.joining(", ")));
         // When GameEventGameStarted arrives, prepareAllZones has completed —
         // commanders are placed and zones are populated. Register consumers on
         // any objects not yet tracked (without clearing dirty bits).
