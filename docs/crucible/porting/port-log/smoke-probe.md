@@ -92,7 +92,7 @@ not set `staticTrigger` when a line carries `Static$ True`.
   real list when it exists.
 - The 401 inconclusive cards each need something the variants lack: an additional cost the board cannot pay, an X spell
   whose targets scale with X, an Aura enchanting a card in a graveyard (Animate Dead), a creature dealt damage this
-  turn. Another variant per group costs more than it measures.
+  turn. Another variant per group costs more than it measures; the groups are open plan R25.
 - Command-zone cards are counted as `placed`, which proves nothing about their one-shot abilities. A sticker sheet is
   refused by the probe itself (open plan R15), not by the engine, and that line goes when stickers are ported.
 - The replay-parity harness (ADR-0010 L3): `RecordingPlayerController` over the 110 `PlayerController` methods in
