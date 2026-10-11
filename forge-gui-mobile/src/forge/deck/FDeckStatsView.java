@@ -21,15 +21,15 @@ import forge.util.Utils;
  * Portrait: all three cards stacked vertically (mana identity as a 3x2 grid), scrollable.
  */
 public class FDeckStatsView extends FScrollPane {
-    private static final Color PERMANENT = rgb(5, 150, 105);
-    private static final Color SPELL = rgb(59, 130, 246);
+    private static final Color PERMANENT = accent(5, 150, 105);
+    private static final Color SPELL = accent(59, 130, 246);
 
     //demand (bright) and lands (muted) colours in WUBRGC order
     private static final Color[] DEMAND_COLORS = {
-            rgb(255, 250, 205), rgb(59, 130, 246), rgb(120, 120, 140), rgb(239, 68, 68), rgb(16, 185, 129), rgb(156, 163, 175)
+            accent(255, 250, 205), accent(59, 130, 246), accent(120, 120, 140), accent(239, 68, 68), accent(16, 185, 129), accent(156, 163, 175)
     };
     private static final Color[] LAND_COLORS = {
-            rgb(150, 146, 125), rgb(34, 82, 160), rgb(80, 80, 98), rgb(158, 40, 60), rgb(20, 120, 90), rgb(90, 92, 105)
+            accent(150, 146, 125), accent(34, 82, 160), accent(80, 80, 98), accent(158, 40, 60), accent(20, 120, 90), accent(90, 92, 105)
     };
 
     private DeckStatistics stats = new DeckStatistics();
@@ -43,16 +43,33 @@ public class FDeckStatsView extends FScrollPane {
         return new Color(r / 255f, g / 255f, b / 255f, 1f);
     }
 
+    private static final float ACCENT_SATURATION = 0.8f; //1 = original colours, lower = more muted
+
+    /** Chart accent colour, desaturated a little so the fixed colours sit better with the skin themes. */
+    private static Color accent(int r, int g, int b) {
+        float luma = (0.299f * r + 0.587f * g + 0.114f * b) / 255f;
+        float rf = luma + (r / 255f - luma) * ACCENT_SATURATION;
+        float gf = luma + (g / 255f - luma) * ACCENT_SATURATION;
+        float bf = luma + (b / 255f - luma) * ACCENT_SATURATION;
+        return new Color(rf, gf, bf, 1f);
+    }
+
     //Neutral colours follow the active skin theme (and adventure mode theme); accent colours below stay fixed.
     private static FSkinColor skin(FSkinColor.Colors normal, FSkinColor.Colors adventure) {
         return FSkinColor.get(Forge.isMobileAdventureMode ? adventure : normal);
     }
-    private static Color panel() { return skin(FSkinColor.Colors.CLR_THEME, FSkinColor.Colors.ADV_CLR_THEME).getContrastColor(12).getColor(); }
-    private static Color border() { return skin(FSkinColor.Colors.CLR_BORDERS, FSkinColor.Colors.ADV_CLR_BORDERS).getColor(); }
-    private static Color track() { return skin(FSkinColor.Colors.CLR_THEME, FSkinColor.Colors.ADV_CLR_THEME).getContrastColor(32).getColor(); }
+    //Adventure screens show their textured backdrop through their windows, so the panel is slightly translucent there.
+    //Classic stays fully solid (translucent fills need the piecewise path in Card.fillRounded, see below).
+    private static final float ADVENTURE_PANEL_ALPHA = 0.75f;
+    private static Color panel() {
+        Color c = skin(FSkinColor.Colors.CLR_THEME, FSkinColor.Colors.ADV_CLR_THEME).getColor();
+        return new Color(c.r, c.g, c.b, Forge.isMobileAdventureMode ? ADVENTURE_PANEL_ALPHA : 1f);
+    }
+    private static Color border() { return skin(FSkinColor.Colors.CLR_BORDERS, FSkinColor.Colors.ADV_CLR_OVERLAY).getColor(); }
+    private static Color track() { return skin(FSkinColor.Colors.CLR_THEME, FSkinColor.Colors.ADV_CLR_THEME).getContrastColor(44).getColor(); }
     private static Color textMain() { return skin(FSkinColor.Colors.CLR_TEXT, FSkinColor.Colors.ADV_CLR_TEXT).getColor(); }
     private static Color textDim() { return skin(FSkinColor.Colors.CLR_TEXT, FSkinColor.Colors.ADV_CLR_TEXT).alphaColor(0.8f).getColor(); }
-    private static Color textMuted() { return skin(FSkinColor.Colors.CLR_TEXT, FSkinColor.Colors.ADV_CLR_TEXT).alphaColor(0.55f).getColor(); }
+    private static Color textMuted() { return skin(FSkinColor.Colors.CLR_TEXT, FSkinColor.Colors.ADV_CLR_TEXT).alphaColor(0.7f).getColor(); }
 
     private static float titleHeight() { return Utils.scale(26); }
     private static float innerPad() { return Utils.scale(12); }
@@ -116,15 +133,63 @@ public class FDeckStatsView extends FScrollPane {
         protected abstract String title();
         protected abstract void drawContent(Graphics g, float x, float y, float w, float h);
 
+        /**
+         * Rounded fill that stays correct with translucent colours. Graphics.fillRoundRect overlaps its inner rects, which
+         * would double-blend a translucent colour, so translucent fills are built from non-overlapping rects plus four
+         * circles clipped to the corner squares.
+         */
+        private void fillRounded(Graphics g, Color c, float x, float y, float w, float h, float r) {
+            r = Math.min(r, Math.min(w, h) / 2);
+            if (c.a >= 1f) {
+                g.fillRoundRect(c, x, y, w, h, r);
+                return;
+            }
+            x = Math.round(x); y = Math.round(y); w = Math.round(w); h = Math.round(h); r = Math.round(r);
+            g.fillRect(c, x + r, y, w - 2 * r, h);
+            g.fillRect(c, x, y + r, r, h - 2 * r);
+            g.fillRect(c, x + w - r, y + r, r, h - 2 * r);
+            fillCorner(g, c, x, y, x + r, y + r, r);
+            fillCorner(g, c, x + w - r, y, x + w - r, y + r, r);
+            fillCorner(g, c, x, y + h - r, x + r, y + h - r, r);
+            fillCorner(g, c, x + w - r, y + h - r, x + w - r, y + h - r, r);
+        }
+
+        private void fillCorner(Graphics g, Color c, float boxX, float boxY, float cx, float cy, float r) {
+            if (g.startClip(boxX, boxY, r, r)) {
+                g.fillCircle(c, cx, cy, r);
+            }
+            g.endClip(); //always paired with startClip, it also handles a clip that could not be applied
+        }
+
+        /** Thin rounded outline: straight edges as rects plus four clipped circle arcs (no stray inner lines). */
+        private void drawBorder(Graphics g, Color c, float x, float y, float w, float h, float r) {
+            r = Math.min(r, Math.min(w, h) / 2);
+            float bw = Math.max(1, Math.round(Utils.scale(1)));
+            x = Math.round(x); y = Math.round(y); w = Math.round(w); h = Math.round(h); r = Math.round(r);
+            g.fillRect(c, x + r, y, w - 2 * r, bw);
+            g.fillRect(c, x + r, y + h - bw, w - 2 * r, bw);
+            g.fillRect(c, x, y + r, bw, h - 2 * r);
+            g.fillRect(c, x + w - bw, y + r, bw, h - 2 * r);
+            float ar = r - bw / 2;
+            drawCorner(g, c, bw, x, y, x + r, y + r, r, ar);
+            drawCorner(g, c, bw, x + w - r, y, x + w - r, y + r, r, ar);
+            drawCorner(g, c, bw, x, y + h - r, x + r, y + h - r, r, ar);
+            drawCorner(g, c, bw, x + w - r, y + h - r, x + w - r, y + h - r, r, ar);
+        }
+
+        private void drawCorner(Graphics g, Color c, float thickness, float boxX, float boxY, float cx, float cy, float r, float arcRadius) {
+            if (g.startClip(boxX, boxY, r, r)) {
+                g.drawCircle(thickness, c, cx, cy, arcRadius);
+            }
+            g.endClip();
+        }
+
         @Override
         public void draw(Graphics g) {
             float w = getWidth(), h = getHeight();
-            float radius = Utils.scale(10);
-            //Graphics.drawRoundRect outlines its two overlapping inner rects as well as the arcs, which leaves stray lines
-            //across the card; build the border from two filled round rects instead (border colour underneath, panel on top).
-            float bw = Math.max(1, Utils.scale(1.5f));
-            g.fillRoundRect(border(), 0, 0, w, h, radius);
-            g.fillRoundRect(panel(), bw, bw, w - 2 * bw, h - 2 * bw, Math.max(0, radius - bw));
+            float radius = Math.round(Utils.scale(10));
+            fillRounded(g, panel(), 0, 0, w, h, radius);
+            drawBorder(g, border(), 0, 0, w, h, radius);
 
             float inner = innerPad();
             g.drawText(title().toUpperCase(), FSkinFont.get(12), textMuted(), inner, inner, w - 2 * inner, titleHeight(), false, Align.left, true);
@@ -206,21 +271,21 @@ public class FDeckStatsView extends FScrollPane {
     private class TypesCard extends Card {
         List<TypeRow> rows() {
             List<TypeRow> rows = new ArrayList<>();
-            rows.add(new TypeRow(msg("lblCreature"), stats.creatures, rgb(16, 185, 129)));
-            rows.add(new TypeRow(msg("lblInstant"), stats.instants, rgb(59, 130, 246)));
-            rows.add(new TypeRow(msg("lblSorcery"), stats.sorceries, rgb(168, 85, 247)));
-            rows.add(new TypeRow(msg("lblArtifact"), stats.artifacts, rgb(156, 163, 175)));
-            rows.add(new TypeRow(msg("lblEnchantment"), stats.enchantments, rgb(245, 158, 11)));
+            rows.add(new TypeRow(msg("lblCreature"), stats.creatures, accent(16, 185, 129)));
+            rows.add(new TypeRow(msg("lblInstant"), stats.instants, accent(59, 130, 246)));
+            rows.add(new TypeRow(msg("lblSorcery"), stats.sorceries, accent(168, 85, 247)));
+            rows.add(new TypeRow(msg("lblArtifact"), stats.artifacts, accent(156, 163, 175)));
+            rows.add(new TypeRow(msg("lblEnchantment"), stats.enchantments, accent(245, 158, 11)));
             if (stats.planeswalkers > 0) {
-                rows.add(new TypeRow(msg("lblPlaneswalker"), stats.planeswalkers, rgb(236, 72, 153)));
+                rows.add(new TypeRow(msg("lblPlaneswalker"), stats.planeswalkers, accent(236, 72, 153)));
             }
             if (stats.battles > 0) {
-                rows.add(new TypeRow(msg("lblBattle"), stats.battles, rgb(239, 68, 68)));
+                rows.add(new TypeRow(msg("lblBattle"), stats.battles, accent(239, 68, 68)));
             }
             if (stats.otherTypes > 0) {
-                rows.add(new TypeRow(msg("lblOther"), stats.otherTypes, rgb(100, 116, 139)));
+                rows.add(new TypeRow(msg("lblOther"), stats.otherTypes, accent(100, 116, 139)));
             }
-            rows.add(new TypeRow(msg("lblLand"), stats.landCount, rgb(180, 83, 9)));
+            rows.add(new TypeRow(msg("lblLand"), stats.landCount, accent(180, 83, 9)));
             return rows;
         }
 
