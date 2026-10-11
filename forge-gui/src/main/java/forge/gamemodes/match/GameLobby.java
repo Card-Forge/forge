@@ -233,7 +233,7 @@ public abstract class GameLobby implements IHasGameType {
             lastArchenemy = 0;
         } else if (lastArchenemy == index) {
             lastArchenemy = 0;
-        } else {
+        } else if (index < lastArchenemy) {
             lastArchenemy--;
         }
         data.slots.remove(index);
