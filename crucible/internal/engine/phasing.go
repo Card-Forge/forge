@@ -4,7 +4,7 @@
 
 package engine
 
-//enginelint:allow id zone card game player event combat valid trigger control parts effecteffect ability presentcheck
+//enginelint:allow id zone card game player event combat valid trigger control parts effecteffect ability presentcheck statictrigger
 
 import (
 	"strings"
@@ -173,7 +173,7 @@ func (g *Game) phaseTriggerMatches(hosts []CardID, mode string, cards []CardID) 
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
+					matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
 				}
 			}
 		}

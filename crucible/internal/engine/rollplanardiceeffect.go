@@ -223,7 +223,7 @@ func (g *Game) planarDiceTriggerMatches(roller PlayerID, face planarDieFace, sta
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, cardFace.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: cardFace.Amounts, Optional: optional, triggered: cardFace.objects(objects)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: cardFace.Amounts, Optional: optional, triggered: cardFace.objects(objects), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}

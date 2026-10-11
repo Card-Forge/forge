@@ -83,8 +83,9 @@ Four cards hung the engine (Vodalian War Machine, Herald of Vengeance, Summoning
 Phyrexia and its Alchemy twin hung with them): a `Mode$ Phase | Phase$ Cleanup | Static$ True` trigger.
 `checkPhaseTriggers` did not mark the match `staticTrigger`, so it went on the stack, CR 514.3a gave priority and began
 another Cleanup, which fired the trigger again, forever. It now resolves inline like the ChangesZone and TapsForMana
-static triggers (ADR-0020). `TestStaticCleanupTriggerDoesNotRepeatTheCleanupStep` pins it. Other trigger modes still do
-not set `staticTrigger` when a line carries `Static$ True`.
+static triggers (ADR-0020). `TestStaticCleanupTriggerDoesNotRepeatTheCleanupStep` pins it. Every other trigger mode sets
+`staticTrigger` too now (`TestStaticTriggerResolvesInlineForEveryMode`; the skips in BecomeMonarch, Abandoned and
+LandPlayed are gone).
 
 ## Not done
 

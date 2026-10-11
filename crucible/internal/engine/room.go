@@ -10,7 +10,7 @@
 
 package engine
 
-//enginelint:allow id zone card game parts ability control trigger valid manapay
+//enginelint:allow id zone card game parts ability control trigger valid manapay statictrigger
 
 import (
 	"strings"
@@ -360,7 +360,7 @@ func (g *Game) doorTriggerMatches(mode string, room CardID, p PlayerID, d Door) 
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub,
-								Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: room, player: p})})
+								Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: room, player: p}), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}

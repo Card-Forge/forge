@@ -245,13 +245,9 @@ func noPlayerStatic(g *Game, p PlayerID, mode string) (bool, error) {
 // checkBecomeMonarchTriggers runs Mode$ BecomeMonarch (TriggerBecomeMonarch)
 // for p: ValidPlayer$ against p, BeginTurn$ against who was the monarch as
 // the turn began (nobody matches nothing, as Java's matchesValid on null).
-// Static$ True lines -- resolved at once, off the stack -- are skipped: no
-// trigger mode here runs one that way.
+// Static$ True lines resolve at once, off the stack (pushTriggeredAbilities).
 func (g *Game) checkBecomeMonarchTriggers(c PlayerController, p PlayerID) {
 	g.pushPlayerTriggers(c, p, g.playerActionTriggerMatches(p, func(h *Card, t *compile.Ability) bool {
-		if hasAnyParam(t, "Static") {
-			return false
-		}
 		spec, ok := t.Param("BeginTurn")
 		if !ok {
 			return true

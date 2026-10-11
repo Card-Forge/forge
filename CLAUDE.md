@@ -213,10 +213,9 @@ exact name and never surface in `unported-apis.sh`'s corpus-driven listing at al
 resolve through Layer 3 word substitution (ADR-0039). `crucible card-smoke -all` measures how many cards play: 86.0% of
 33,321 judged, an upper bound; the refusal causes it groups are the backlog.
 
-Thin or missing: a granted static's Layer 4/5 effects; `Static$ True` triggers outside `ChangesZone`, `TapsForMana` and
-`Phase`; attack costs; stickers; graveyard-zone ETB and dies watchers; `RollDice`'s `DicePTExchanges`; the long tail of
-single-card shapes. Everything left, easiest first: `00-master-implementation-plan-open.md`. Full per-gap list:
-`port-log/game-state.md`, "Not ported yet".
+Thin or missing: a granted static's Layer 4/5 effects; attack costs; stickers; graveyard-zone ETB and dies watchers;
+`RollDice`'s `DicePTExchanges`; the long tail of single-card shapes. Everything left, easiest first:
+`00-master-implementation-plan-open.md`. Full per-gap list: `port-log/game-state.md`, "Not ported yet".
 
 **M5 exit gate:** the test-port matrix is green (every `M5? yes` row `ported` or `superseded`,
 `porting/test-port-matrix.md`). **P4 exit gate:** fixture-count half met (≥300 scenarios, `testdata/scenarios/`);

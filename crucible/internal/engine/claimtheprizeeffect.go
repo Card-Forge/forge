@@ -8,7 +8,7 @@
 
 package engine
 
-//enginelint:allow ability card condition control defined effecthelpers game id parts trigger valid zone
+//enginelint:allow ability card condition control defined effecthelpers game id parts trigger valid zone statictrigger
 
 import (
 	"strings"
@@ -74,7 +74,7 @@ func (g *Game) checkClaimPrizeTriggers(controller PlayerController, claimed Card
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{})})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}

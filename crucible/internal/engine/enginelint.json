@@ -395,7 +395,8 @@
       "condition",
       "staticability",
       "zone",
-      "control"
+      "control",
+      "statictrigger"
     ],
     "amount": ["id", "zone", "card", "game", "valid", "parts", "player", "ability"],
     "replacement": [
@@ -461,8 +462,8 @@
     "exilefromgrave": ["id", "zone", "card", "game", "control", "leftto"],
     "taptype": ["id", "zone", "card", "game", "control", "valid", "trigger"],
     "returncost": ["id", "zone", "card", "game", "control", "valid", "trigger", "ability"],
-    "exertcost": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger"],
-    "exploit": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger"],
+    "exertcost": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger", "statictrigger"],
+    "exploit": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger", "statictrigger"],
     "gameloss": ["id", "zone", "card", "game", "player", "valid", "replacement", "parts", "effecthelpers"],
     "castoptions": ["id", "zone", "card", "game", "control", "parts", "airbendeffect", "rulesmod"],
     "castrecord": ["id", "zone", "card", "game", "valid", "parts"],
@@ -478,7 +479,8 @@
       "trigger",
       "valid",
       "parts",
-      "playerstate"
+      "playerstate",
+      "statictrigger"
     ],
     "targeting": [
       "id",

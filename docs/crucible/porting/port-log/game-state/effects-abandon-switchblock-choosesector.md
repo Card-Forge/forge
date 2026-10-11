@@ -54,10 +54,8 @@ Consequence: as things stand, abandoning Bow to My Command never fires either of
 `CantAttackEffect` (the effect granting "creatures the chosen player controls can't attack you") is never removed — once
 Archenemy schemes are playable at all, this is a real gap to close alongside the two reasons below, not a solved case.
 
-**`Static$ True` is skipped**, not fired: `TriggerHandler.runTrigger` runs a Java `Static` trigger inline, ahead of the
-stack (`TriggerHandler.java:301-307`), rather than queuing it — BecomeMonarch's identical treatment (`monarch_test.go`'s
-"a Static$ True line skipped rather than put on the stack"), since no mode this port has built resolves a trigger any
-way but through `pushTriggeredAbilities`'s own stack push. `TestAbandonEffectSkipsStaticTrigger`.
+**`Static$ True` runs inline**, ahead of the stack (`TriggerHandler.java:301-307`), as `pushTriggeredAbilities` does for
+every match carrying `staticTrigger`. `TestAbandonEffectRunsStaticTriggerInline`.
 
 **Not reachable yet: a scheme's own printed `Mode$ Abandoned` trigger**, on the scheme card itself rather than a
 synthetic Effect wrapper. `traitHosts` (`game.go:341`) only walks the battlefield and `IsEffect` Command-zone cards, not

@@ -144,7 +144,7 @@ func TestAbandonEffectHostNotInCommandIsNoOp(t *testing.T) {
 // remembered the scheme -- the shape a Command-zone Effect card built by
 // DB$ Effect (RememberObjects$ Self, effecteffect.go) would use, minus its
 // own Static$ True: bow_to_my_command.txt's own real TrigAbandoned line
-// carries Static$ True and is skipped instead (TestAbandonEffectSkipsStaticTrigger),
+// carries Static$ True and runs inline instead (TestAbandonEffectRunsStaticTriggerInline),
 // so this synthetic non-static watcher is what exercises the walk itself.
 func TestAbandonEffectFiresWatchingAbandonedTrigger(t *testing.T) {
 	t.Parallel()
@@ -191,10 +191,10 @@ func TestAbandonEffectFiresWatchingAbandonedTrigger(t *testing.T) {
 	}
 }
 
-// TestAbandonEffectSkipsStaticTrigger proves Static$ True is skipped rather
-// than pushed onto the stack -- bow_to_my_command.txt's own TrigAbandoned
-// shape, BecomeMonarch's identical treatment (monarch_test.go).
-func TestAbandonEffectSkipsStaticTrigger(t *testing.T) {
+// TestAbandonEffectRunsStaticTriggerInline proves Static$ True resolves at
+// once, off the stack -- bow_to_my_command.txt's own TrigAbandoned shape
+// (TriggerHandler.java:301-307).
+func TestAbandonEffectRunsStaticTriggerInline(t *testing.T) {
 	t.Parallel()
 
 	g, p, _ := newTwoPlayerGame(t)
@@ -225,8 +225,11 @@ func TestAbandonEffectSkipsStaticTrigger(t *testing.T) {
 	if got := g.Card(scheme).Zone; got != engine.SchemeDeck {
 		t.Errorf("scheme zone = %v, want SchemeDeck", got)
 	}
-	if got := g.Player(p).Life; got != 20 {
-		t.Errorf("p's life = %d, want 20 -- a Static$ True trigger must be skipped, not pushed", got)
+	if got := g.Player(p).Life; got != 21 {
+		t.Errorf("p's life = %d, want 21 -- a Static$ True trigger resolves inline", got)
+	}
+	if got := g.StackLen(); got != 0 {
+		t.Errorf("stack holds %d items, want none: the trigger never used the stack", got)
 	}
 }
 

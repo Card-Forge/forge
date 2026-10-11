@@ -63,7 +63,7 @@ func (g *Game) noteLifeLost(controller PlayerController, pid PlayerID, amount in
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-								triggered: face.objects(triggeredObjects{player: pid, counts: triggerCounts{life: amount, set: countLife}})})
+								triggered: face.objects(triggeredObjects{player: pid, counts: triggerCounts{life: amount, set: countLife}}), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}

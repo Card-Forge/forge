@@ -63,9 +63,9 @@ Krovikan Vampire's chain is now whole: static dies trigger remembers, static `Or
 clears, `TurnBegin` clears, `CheckSVar$ X` over `Remembered$Amount` (already read by `contextValue`), and
 `ChangeZoneAll`'s `ForgetOtherRemembered$` (already ported). Fixtures `control-krovikan-vampire-*` (2).
 
-Only the modes that set `staticTrigger` run inline; other modes still push a `Static$ True` line on the stack. The moved
-card's own `Origin$ Graveyard` triggers, graveyard exits outside `moveByEffect` and battlefield-to-library redirects:
-[`m5-t-triggers-animate.md`](m5-t-triggers-animate.md).
+Every trigger mode sets `staticTrigger` for a `Static$ True` line, so it runs inline
+([`smoke-probe.md`](../smoke-probe.md)). The moved card's own `Origin$ Graveyard` triggers, graveyard exits outside
+`moveByEffect` and battlefield-to-library redirects: [`m5-t-triggers-animate.md`](m5-t-triggers-animate.md).
 
 ## Fixtures and tests
 

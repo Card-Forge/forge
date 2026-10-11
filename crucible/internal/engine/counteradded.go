@@ -3,7 +3,7 @@
 // counters on a card goes through addCardCounters, so a Saga's chapters, "whenever
 // one or more +1/+1 counters are put on" and the rest see every placement.
 
-//enginelint:allow id zone card game valid ability control event amount parts trigger
+//enginelint:allow id zone card game valid ability control event amount parts trigger statictrigger
 
 package engine
 
@@ -78,7 +78,7 @@ func (g *Game) counterAddedMatches(matches []Ability, mode string, source, id Ca
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
 						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional,
-							triggered: face.objects(objects)})
+							triggered: face.objects(objects), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}

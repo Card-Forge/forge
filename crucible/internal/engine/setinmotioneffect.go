@@ -187,7 +187,7 @@ func (g *Game) setInMotionTriggerMatches(scheme CardID, static bool) []Ability {
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objects)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objects), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}

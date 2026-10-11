@@ -181,8 +181,7 @@ func TestCantBecomeMonarchStaticStopsIt(t *testing.T) {
 
 // TestBecomeMonarchTriggerMode proves Mode$ BecomeMonarch: ValidPlayer$
 // against the new monarch, BeginTurn$ against who was the monarch as the
-// turn began, Defined$ TriggeredPlayer naming the new monarch, and a
-// Static$ True line skipped rather than put on the stack.
+// turn began, and Defined$ TriggeredPlayer naming the new monarch.
 func TestBecomeMonarchTriggerMode(t *testing.T) {
 	t.Parallel()
 
@@ -194,9 +193,6 @@ func TestBecomeMonarchTriggerMode(t *testing.T) {
 	g.NewCard(triggerWatcherDef(t, "Drain",
 		"Mode$ BecomeMonarch | ValidPlayer$ Opponent | BeginTurn$ You | TriggerZones$ Battlefield | Execute$ TrigDrain",
 		"TrigDrain", "DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2"), p, engine.Battlefield)
-	g.NewCard(triggerWatcherDef(t, "Static",
-		"Mode$ BecomeMonarch | ValidPlayer$ Player | Static$ True | Execute$ TrigGain",
-		"TrigGain", "DB$ GainLife | Defined$ You | LifeAmount$ 100"), other, engine.Battlefield)
 
 	resolveLine(t, g, p, c, "DB$ BecomeMonarch")
 	if got := g.Player(p).Life; got != 21 {
