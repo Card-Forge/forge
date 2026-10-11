@@ -1804,5 +1804,6 @@ plan-authoring voice (forward-looking, not yet rewritten as a per-item retrospec
     alongside.
 31. Three scenarios minimum per API. Parity matrix updated continuously.
 32. Replay-parity harness (Layer 3) stood up as soon as full games run at all — do not defer this to the end. Full games
-    run now (`Game.Run`, ADR-0026) with a scripted controller; the harness itself is not started. **Exit gate:** P5 gate
-    — 100% corpus coverage for the active gauntlet; replay parity green over the nightly log corpus.
+    run now (`Game.Run`, ADR-0026) with a scripted controller; the harness itself is not started. `crucible card-smoke`
+    measures how many cards the engine plays today ([`smoke-probe.md`](porting/port-log/smoke-probe.md)). **Exit gate:**
+    P5 gate — 100% corpus coverage for the active gauntlet; replay parity green over the nightly log corpus.

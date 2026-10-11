@@ -130,6 +130,9 @@ The order formats are added is a scheduling decision, made with that report in h
   this repository are quest, adventure and AI-generated decks, not a competitive metagame. What they gate is M6's
   backlog — `crucible corpus-coverage --decks gauntlets/modern/` is what defines "done" for card support — not M1-M5,
   which need no gauntlet.
+- `crucible card-smoke -decks gauntlets/modern/` then gives the share of the gauntlet's cards the engine plays
+  ([`smoke-probe.md`](../porting/port-log/smoke-probe.md)); until the lists exist it was measured on the quest precons,
+  a proxy.
 - Weights need a source too, and an unweighted first gauntlet is acceptable provided reports say so.
 - Whether sideboards are simulated at all in M6, or deferred. Sideboarding needs `PlayerController` support for
   between-game decisions and is not in the plan's milestone list.

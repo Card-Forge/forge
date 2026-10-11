@@ -23,6 +23,8 @@ func main() {
 	switch os.Args[1] {
 	case "corpus-coverage":
 		err = corpusCoverage(os.Args[2:])
+	case "card-smoke":
+		err = cardSmoke(os.Args[2:])
 	case "-h", "--help", "help":
 		usage()
 		return

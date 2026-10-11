@@ -155,6 +155,9 @@ crucible/scripts/gates.sh fast|full
 # What to port next: unregistered APIs by corpus line count, deferred ones marked (port-effect step 0)
 crucible/scripts/unported-apis.sh 30
 
+# How many cards the engine plays, and why the rest are refused (smoke-probe.md); ~2 min for the whole corpus
+cd crucible && go run ./cmd/crucible card-smoke -all -workers 8     # or -decks <dir> / -cards "A,B"
+
 # Parallel porters (port-batch skill): list agent worktrees, merge their branches, remove merged ones
 crucible/scripts/merge-porters.sh list|merge|cleanup [BRANCH...]
 
