@@ -68,24 +68,24 @@ public class ConvergePredictionTest extends AITest {
         final Random previous = MyRandom.getRandom();
         MyRandom.setRandom(new Random(1));
         try {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
+            Game game = initAndCreateGame();
+            Player ai = game.getPlayers().get(1);
 
-        for (String l : new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"}) {
-            addCard(l, ai);
-        }
-        addCard("Island", ai);
-        addCard("Island", ai);
-        fillLibrary(ai, 15);
-        // X U U, and TokenAmount reads Count$Converge off a different SVar than X does
-        addCardToZone("Sweep the Skies", ai, ZoneType.Hand);
+            for (String l : new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"}) {
+                addCard(l, ai);
+            }
+            addCard("Island", ai);
+            addCard("Island", ai);
+            fillLibrary(ai, 15);
+            // X U U, and TokenAmount reads Count$Converge off a different SVar than X does
+            addCardToZone("Sweep the Skies", ai, ZoneType.Hand);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
-        game.getAction().checkStateEffects(true);
-        gameLoopUntilNextPhase(game);
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+            game.getAction().checkStateEffects(true);
+            gameLoopUntilNextPhase(game);
 
-        assertEquals("one thopter per colour spent", 5,
-                countCardsWithName(game, "Thopter Token", ZoneType.Battlefield));
+            assertEquals("one thopter per colour spent", 5,
+                    countCardsWithName(game, "Thopter Token", ZoneType.Battlefield));
         } finally {
             MyRandom.setRandom(previous);
         }
