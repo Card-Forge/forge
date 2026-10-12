@@ -7,11 +7,13 @@ package engine
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/carddb/vocab"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/cost"
+	"github.com/jczastkiewicz/crucible/internal/expr"
 	"github.com/jczastkiewicz/crucible/internal/keyword"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
@@ -572,19 +574,50 @@ func (opts castOpts) paysNoMana() bool {
 // (Repeal's cmcEQX). payManaCostX takes the announced value instead of asking
 // again. False when the caster declines to announce one.
 func (g *Game) announceX(pid PlayerID, c *Card, controller PlayerController, opts castOpts) bool {
+	return g.announceXFor(pid, c, controller, opts, nil)
+}
+
+// announceXFor is announceX for the spell line, whose own Cost$ may name X in
+// a part past mana (`Discard<X/Card>`, `PayLife<X>`): PlaySpellAbility.
+// announceValuesLikeX (PlaySpellAbility.java:766-782) asks once when the raw
+// cost has an X anywhere and the card's SVar X is Count$xPaid (or absent).
+// The controller's answer is held to what the non-mana parts can pay, as
+// PlayerControllerHuman.announceRequirements bounds it (:376-381); the mana X,
+// if there is one, shares the value.
+func (g *Game) announceXFor(pid PlayerID, c *Card, controller PlayerController, opts castOpts, line *compile.Ability) bool {
 	if opts.paysNoMana() {
 		return true
 	}
 	total, ok := g.castCost(pid, c, opts)
-	if !ok || total.CountX() == 0 {
+	if !ok {
+		return true
+	}
+	partsText := ""
+	if line != nil {
+		if text, has := line.Param("Cost"); has && costNamesX(text) && xIsPaid(c) {
+			partsText = text
+		}
+	}
+	if total.CountX() == 0 && partsText == "" {
 		return true
 	}
 	n := controller.ChoosePayX(g, pid, total)
 	if n < 0 {
 		return false
 	}
+	if partsText != "" {
+		n = min(n, g.nonManaXMax(pid, c.ID, partsText))
+	}
 	g.preX, g.hasPreX = n, true
 	return true
+}
+
+// xIsPaid reports whether c's SVar X is Count$xPaid or absent: the only X that
+// is announced (PlaySpellAbility.java:768-771). Any other X (a count of
+// targets, of lands) is computed, never asked.
+func xIsPaid(c *Card) bool {
+	amt, ok := c.Def.Faces[0].Amounts["x"]
+	return !ok || (amt.Kind == expr.Expression && amt.Head == "Count" && strings.EqualFold(amt.Body, "xPaid"))
 }
 
 // payCastCost pays c's printed mana cost for pid (CR 601.2g-h), or nothing
@@ -799,7 +832,7 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 		return false
 	}
 	a := Ability{API: apiType, Source: card, Controller: pid, Params: spellAbility, Amounts: c.Def.Faces[0].Amounts, spell: true, casting: true}
-	if !g.announceX(pid, c, controller, opts) {
+	if !g.announceXFor(pid, c, controller, opts, spellAbility) {
 		return false
 	}
 	if a.API == APICharm {
@@ -829,6 +862,11 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	x, paid := g.payCastCost(pid, c, controller, opts)
 	if !paid {
 		return false
+	}
+	if !x.announced && g.hasPreX {
+		// An X announced for a cost part past mana (announceXFor) has no mana
+		// shard to carry it; the spell still records it for Count$xPaid.
+		x = xAnnounced{value: g.preX, announced: true}
 	}
 	if hasExtra {
 		g.payUnlessParts(controller, &a, pid, extra)
@@ -865,7 +903,7 @@ func (g *Game) spellAdditionalCost(pid PlayerID, c *Card, line *compile.Ability)
 	if !hasCost {
 		return unlessCost{}, false, true
 	}
-	uc, parsed := parseUnlessCost(costText)
+	uc, parsed := parseUnlessCostX(costText, g.preX, g.hasPreX)
 	if !parsed || !g.unlessPayable(pid, c.ID, uc) || (uc.hasMana && !uc.mana.Equal(c.Def.Faces[0].ManaCost)) {
 		return unlessCost{}, false, false
 	}

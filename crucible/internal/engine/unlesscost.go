@@ -110,15 +110,33 @@ type unlessCost struct {
 // AddCounter<N/Type> on the source and one Sac, Return or Reveal part (Tap, an
 // X, ...), each its own further mechanic (GO-7).
 func parseUnlessCost(text string) (unlessCost, bool) {
+	return parseUnlessCostX(text, 0, false)
+}
+
+// parseUnlessCostX is parseUnlessCost for a cost whose parts may name the
+// announced X (`Discard<X/Card>`, `Sac<X/Creature>`, `PayLife<X>`): hasX says
+// X was announced as x, and a part of amount X then costs x. An X of 0 drops
+// the part (CostPart.getAbilityAmount is 0, which pays nothing), and an X mana
+// shard is kept: it is paid from the card's printed cost.
+func parseUnlessCostX(text string, x int, hasX bool) (unlessCost, bool) {
 	parsed := cost.Parse(text)
 	if parsed.Tap || parsed.Untap || parsed.XMin != "" {
 		return unlessCost{}, false
 	}
 	uc := unlessCost{parsed: parsed, mandatory: parsed.Mandatory}
 	for _, p := range parsed.Parts {
-		n, err := strconv.Atoi(p.Field(0))
-		if err != nil || n <= 0 {
-			return unlessCost{}, false
+		var n int
+		if hasX && p.Field(0) == "X" {
+			if x <= 0 {
+				continue
+			}
+			n = x
+		} else {
+			var err error
+			n, err = strconv.Atoi(p.Field(0))
+			if err != nil || n <= 0 {
+				return unlessCost{}, false
+			}
 		}
 		switch {
 		case p.Name == "PayLife":
@@ -175,7 +193,7 @@ func parseUnlessCost(text string) (unlessCost, bool) {
 	uc.manaTokens = parsed.Mana
 	if len(parsed.Mana) > 0 {
 		mc, err := mana.Parse(strings.Join(parsed.Mana, " "))
-		if err != nil || mc.CountX() > 0 {
+		if err != nil || (mc.CountX() > 0 && !hasX) {
 			return unlessCost{}, false
 		}
 		uc.mana, uc.hasMana = mc, true
@@ -215,7 +233,7 @@ func (g *Game) unlessSacCandidates(pid PlayerID, source CardID, uc unlessCost) [
 		}
 		return nil
 	}
-	spec := valid.Parse(uc.sacSpec)
+	spec := valid.Parse(strings.ReplaceAll(uc.sacSpec, ";", ","))
 	var out []CardID
 	for _, id := range g.Zone(Battlefield, pid).Cards() {
 		if Matches(g, g.Card(id), spec, g.Card(source).Controller(), source) {
@@ -906,4 +924,40 @@ func unlessManaOf(n int, color string) (string, error) {
 		return "0", nil
 	}
 	return strings.TrimSpace(strings.Repeat(symbol+" ", n)), nil
+}
+
+// costNamesX reports whether a Cost$ text has a non-mana part whose amount is
+// X (Cost.hasXInAnyCostPart, Cost.java:1101-1111, for the parts past mana).
+func costNamesX(text string) bool {
+	for _, p := range cost.Parse(text).Parts {
+		if p.Field(0) == "X" {
+			return true
+		}
+	}
+	return false
+}
+
+// nonManaXMax is the largest X the Cost$ text's non-mana parts can pay for
+// pid: Cost.getMaxForNonManaX (Cost.java:1118-1131), the minimum over the
+// parts of what each can still supply (hand size for Discard<X>, creatures to
+// sacrifice for Sac<X>, life for PayLife<X>). It asks unlessPayable for X = 1,
+// 2, ... until the cost cannot be paid, so each part's own availability rules
+// (a card in hand other than the source, a legal sacrifice) apply unchanged.
+// Mana is left out: Java's cap does not count it either. A text with a part
+// the cost model does not know has no maximum (0).
+func (g *Game) nonManaXMax(pid PlayerID, source CardID, text string) int {
+	const bound = 200
+	best := 0
+	for n := 1; n <= bound; n++ {
+		uc, ok := parseUnlessCostX(text, n, true)
+		if !ok {
+			return 0
+		}
+		uc.hasMana = false
+		if !g.unlessPayable(pid, source, uc) {
+			break
+		}
+		best = n
+	}
+	return best
 }

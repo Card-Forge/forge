@@ -1775,8 +1775,8 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
 **In progress.** Measured with `crucible card-smoke -all` ([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.0%
-of the 33,446 judged corpus cards play, an upper bound (silent misses are invisible); the remaining work, easiest first,
-is rows R9-R25g of the open plan. 191 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`,
+of the 33,497 judged corpus cards play, an upper bound (silent misses are invisible); the remaining work, easiest first,
+is rows R9-R25i of the open plan. 191 of the corpus's 203 script-driven `Effect` APIs resolve (`Draw`, `DealDamage`,
 `GainLife`, `Pump`, `PumpAll`, `LoseLife`, `PutCounter`, `Discard`, `Scry`, `Surveil`, `Sacrifice`, `SacrificeAll`,
 `Destroy`, `Tap`, `Untap`, `Fight`, `Mill`, `RemoveCounter`, `DamageAll`, `SetLife`, `Shuffle`, `ExchangeLife`,
 `TapAll`, `UntapAll`, `PutCounterAll`, `RemoveCounterAll`, `MultiplyCounter`, `Mana`, `MoveCounter`, `Poison`,
