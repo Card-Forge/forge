@@ -1,0 +1,19 @@
+# OriginAlternative$ Graveyard (ChangeZoneEffect.java:939-970): the "search
+# your library?" prompt is declined, which leaves the graveyard as the only
+# zone, searched without a second question and before Optional$ is asked.
+# Ajani comes from the graveyard; no library was searched, so it is not
+# shuffled ("If you search your library this way, shuffle", :1522).
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 W
+tapformana human 5 W
+queue paygeneric G
+queue paygeneric W
+queue optionaltrigger true
+queue confirmeffect false
+queue confirmeffect true
+queue cardchoice 6
+castspell human 1
+resolvestack

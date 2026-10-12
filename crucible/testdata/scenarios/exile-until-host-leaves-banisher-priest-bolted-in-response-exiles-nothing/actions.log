@@ -1,0 +1,19 @@
+# checkValidDuration (ChangeZoneEffect.java:450, SpellAbilityEffect.java:
+# 1044-1048): Banisher Priest resolves and its enter trigger targets the
+# Bears; human Bolts the Priest in response. When the trigger resolves its
+# host is in the graveyard, so a Duration$ UntilHostLeavesPlay exile does
+# nothing at all and the Bears stay -- still tapped, the same object (an
+# exile and return would have untapped them).
+startturn human
+advance 3
+tapformana human 3 W
+tapformana human 4 W
+tapformana human 5 W
+tapformana human 6 R
+queue paygeneric W
+queue targets 7
+queue targets 1
+queue action human cast 1
+queue action human pass
+queue action human cast 2
+passpriority

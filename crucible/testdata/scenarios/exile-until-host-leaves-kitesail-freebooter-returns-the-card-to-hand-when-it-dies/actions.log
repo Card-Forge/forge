@@ -1,0 +1,17 @@
+# Chooser$ You (ChangeZoneEffect.java:911-923): the targeted opponent is the
+# fetcher, human picks the noncreature, nonland Disenchant from their hand
+# (only it matches ChangeType$). Duration$ UntilHostLeavesPlay: when the
+# Bolted Freebooter dies the card goes back to its owner's hand.
+startturn human
+advance 3
+tapformana human 3 B
+tapformana human 4 B
+queue paygeneric B
+queue targets ai
+queue cardchoice 7
+castspell human 1
+resolvestack
+tapformana human 5 R
+queue targets 1
+castspell human 2
+resolvestack

@@ -211,6 +211,10 @@ func checkStateBasedActionsPass(g *Game, controller PlayerController) (over, per
 	}
 
 	performed = removeTokensOffBattlefield(g)
+	// Duration$ UntilHostLeavesPlay returns a host's leaving queued with no
+	// controller at hand -- a death by damage, a sacrifice as a cost -- are
+	// carried out here, before any player gets priority (returnUntilCards).
+	performed = g.returnUntilCards(controller) || performed
 	g.completeFinishedDungeons(controller)
 	g.returnFinishedSchemes()
 

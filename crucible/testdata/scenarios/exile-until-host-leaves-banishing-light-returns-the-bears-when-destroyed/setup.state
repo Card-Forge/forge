@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Banishing Light|Id:1;Disenchant|Id:2
+humanbattlefield=Plains|Id:3;Plains|Id:4;Plains|Id:5;Plains|Id:6;Plains|Id:7
+aibattlefield=Grizzly Bears|Id:8|Tapped

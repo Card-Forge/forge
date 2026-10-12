@@ -199,6 +199,10 @@ type Game struct {
 	// EndOfTurn.addUntilEnd/registerUntilEnd hold (controlcommands.go).
 	endOfTurnCmds, endOfCombatCmds []cardCommand
 	endOfNextTurnCmds              []playerCommand
+	// pendingReturns are the Duration$ UntilHostLeavesPlay returns a host's
+	// leaving has run but no controller has carried out yet
+	// (returnUntilCards, controlcommands.go). Empty between steps.
+	pendingReturns []cardCommand
 	// layerAffected is CR 613.6's carried set for the layer pass in progress:
 	// the cards each continuous static applied to in the first layer it did,
 	// which later layers reuse (affectedPerAbility, GameAction.java:1119). A
@@ -1334,6 +1338,7 @@ func (g *Game) Clone() *Game {
 		endOfTurnCmds:     append([]cardCommand(nil), g.endOfTurnCmds...),
 		endOfCombatCmds:   append([]cardCommand(nil), g.endOfCombatCmds...),
 		endOfNextTurnCmds: append([]playerCommand(nil), g.endOfNextTurnCmds...),
+		pendingReturns:    append([]cardCommand(nil), g.pendingReturns...),
 
 		animates:  append([]animateRecord(nil), g.animates...),
 		textWords: append([]textWordRecord(nil), g.textWords...),

@@ -39,15 +39,24 @@ const (
 	commandEndPump
 	commandEndAnimate
 	commandEndGoad
+	// commandReturnExiled is changeZoneUntilCommand's closure for one card
+	// (SpellAbilityEffect.java:853-907, Duration$ UntilHostLeavesPlay): Target,
+	// still the object it became at zone stamp Timestamp, goes back to Zone.
+	// Running it only queues it on Game.pendingReturns: the move needs a
+	// controller, which a leaves-play hook inside Game.Move does not have
+	// (returnUntilCards).
+	commandReturnExiled
 )
 
 // cardCommand is one pending GameCommand. Host is the card whose command
-// list or phase list it sits on (ControlGainEffect's source).
+// list or phase list it sits on (ControlGainEffect's source). Zone is the
+// zone a commandReturnExiled card returns to.
 type cardCommand struct {
 	Kind      cardCommandKind
 	Target    CardID
 	Timestamp uint64
 	Host      CardID
+	Zone      ZoneType
 }
 
 // playerCommand is a command that waits for a player's next turn to end
@@ -120,7 +129,62 @@ func (g *Game) runCommand(controller PlayerController, cmd cardCommand) {
 			}
 		}
 		c.goadedBy = kept
+	case commandReturnExiled:
+		g.pendingReturns = append(g.pendingReturns, cmd)
 	}
+}
+
+// returnUntilCards runs the commandReturnExiled records waiting on
+// Game.pendingReturns: each card still the object it was exiled as (Java's
+// equalsWithGameTimestamp, SpellAbilityEffect.java:874-877) moves back to the
+// zone it came from -- the battlefield under its owner's control, a hand to
+// its owner's hand -- with no cause (:901), and the cards moved together fire
+// one ChangesZoneAll per zone pair (Game.untilHostLeavesPlayTriggerList,
+// CardZoneTable.java:136-140). It reports whether a card moved.
+//
+// Java runs the move inside the host's own zone change. Here a leaves-play
+// hook has no controller (effectCardsSeeMove, inside Game.Move), so the
+// records wait for the first caller holding one: the end of moveByEffect --
+// the same effect's next step already sees the card back, as in Java -- or
+// the next state-based pass, before any player gets priority. Between the
+// two nothing a player can do happens; only the order of the host's own
+// leaves trigger against the returned card's enter trigger on the stack can
+// differ.
+func (g *Game) returnUntilCards(controller PlayerController) bool {
+	if controller == nil || len(g.pendingReturns) == 0 {
+		return false
+	}
+	due := g.pendingReturns
+	g.pendingReturns = nil
+	type batch struct {
+		from, to ZoneType
+		cards    []CardID
+	}
+	var batches []batch
+	for _, cmd := range due {
+		c := g.Card(cmd.Target)
+		if c.zoneStamp != cmd.Timestamp {
+			continue
+		}
+		from := c.Zone
+		g.moveByEffect(controller, cmd.Target, cmd.Zone, 0, NoPlayer, false)
+		to := g.Card(cmd.Target).Zone
+		if to == from {
+			continue
+		}
+		i := 0
+		for i < len(batches) && (batches[i].from != from || batches[i].to != to) {
+			i++
+		}
+		if i == len(batches) {
+			batches = append(batches, batch{from: from, to: to})
+		}
+		batches[i].cards = append(batches[i].cards, cmd.Target)
+	}
+	for _, b := range batches {
+		g.checkChangesZoneAllTriggers(controller, b.cards, b.from, b.to)
+	}
+	return len(batches) > 0
 }
 
 // runCommands runs cmds in order, the loop shared by every run*Commands.

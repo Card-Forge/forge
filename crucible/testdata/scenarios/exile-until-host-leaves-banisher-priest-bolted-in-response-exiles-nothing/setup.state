@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Banisher Priest|Id:1;Lightning Bolt|Id:2
+humanbattlefield=Plains|Id:3;Plains|Id:4;Plains|Id:5;Mountain|Id:6
+aibattlefield=Grizzly Bears|Id:7|Tapped

@@ -1,0 +1,20 @@
+# Duration$ UntilHostLeavesPlay (SpellAbilityEffect.java:833-915, CR 610.3):
+# Banishing Light exiles the tapped Bears until it leaves the battlefield.
+# Disenchant destroys it; its leaves-play command returns the Bears under
+# their owner's control as a new object -- untapped and summoning sick.
+startturn human
+advance 3
+tapformana human 3 W
+tapformana human 4 W
+tapformana human 5 W
+queue paygeneric W
+queue paygeneric W
+queue targets 8
+castspell human 1
+resolvestack
+tapformana human 6 W
+tapformana human 7 W
+queue paygeneric W
+queue targets 1
+castspell human 2
+resolvestack

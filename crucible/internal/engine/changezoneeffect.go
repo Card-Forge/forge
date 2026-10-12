@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement
+//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement controlcommands
 
 import (
 	"fmt"
@@ -11,22 +11,26 @@ import (
 // cannot honour yet, grouped by the mechanism each needs: an entering-state
 // modifier (Transformed$, FaceDown$, AttachedTo$ ...; WithCountersType$ and
 // WithCountersAmount$ resolve, changeZoneEnter),
-// combat insertion (Attacking$/Blocking$), a delayed or duration-scoped
-// follow-up (AtEOT$, Duration$, LeaveBattlefield$, StaticEffect$), an
-// alternative zone prompt (DestinationAlternative$, OriginAlternative$), a
+// combat insertion (Attacking$/Blocking$), a delayed follow-up (AtEOT$,
+// LeaveBattlefield$, StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
+// changeZoneDuration, but not its ReturnAbility$/ReturnValid$ delayed
+// trigger), an alternative destination prompt (DestinationAlternative$), a
 // non-default search loop (AtRandom$, Different*$, WithTotal*$, Exactly$,
-// Reorder$), a different chooser (Chooser$), or an LKI copy in Memory
-// (RememberLKI$).
+// Reorder$), or an LKI copy in Memory (RememberLKI$). Chooser$ and
+// OriginAlternative$ resolve (changeZoneHidden, changeZoneKnown).
+// AlreadyRevealed$ is read only to skip the DelayedReveal the decider is shown
+// while choosing (ChangeZoneEffect.java:1044), a display this port never
+// makes, so it is accepted and changes nothing.
 var changeZoneUnresolvedParams = [...]string{
-	"Duration", "Transformed", "WithNotedCounters",
+	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
 	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown", "ExileFaceDown",
 	"Attacking", "Blocking", "LeaveBattlefield", "AtEOT", "StaticEffect",
-	"DestinationAlternative", "LibraryPositionAlternative", "OriginAlternative",
+	"DestinationAlternative", "LibraryPositionAlternative",
 	"RememberLKI", "Champion", "Foretold", "ForetoldCost", "WithMayLook", "TrackDiscarded",
-	"RandomOrder", "Chooser", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
+	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
 	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",
-	"AlreadyRevealed", "ImprintLast", "Unearth",
+	"ImprintLast", "Unearth",
 	"Condition", "SorcerySpeed", "Ultimate", "ModeCost",
 	// ExiledWithEffectSource$ marks the effect card's own source as the
 	// exiler instead of the host (SpellAbilityEffect.java:1092-1094).
@@ -54,6 +58,17 @@ func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
+		return nil
+	}
+	until, err := changeZoneDuration(a)
+	if err != nil {
+		return err
+	}
+	// checkValidDuration (ChangeZoneEffect.java:450,
+	// SpellAbilityEffect.java:1044-1048): a host that is neither in play nor
+	// on the stack any more -- a Banisher Priest killed in response to its own
+	// trigger -- makes the whole effect do nothing.
+	if until && source.Zone != Battlefield && source.Zone != Stack {
 		return nil
 	}
 	destName, _ := a.Params.Param("Destination")
@@ -95,9 +110,157 @@ func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	// Library, Hand, Sideboard (ZoneType.java:15-23).
 	_, hidden := a.Params.Param("Hidden")
 	if hidden || (!anyOrigin && (zoneIn(Library, origin) || zoneIn(Hand, origin) || zoneIn(Sideboard, origin))) {
-		return changeZoneHidden(g, a, controller, source, origin, dest, newController)
+		return changeZoneHidden(g, a, controller, source, origin, dest, newController, until)
 	}
-	return changeZoneKnown(g, a, controller, source, origin, dest, newController)
+	// OriginAlternative$ is read by changeHiddenOriginResolve only
+	// (ChangeZoneEffect.java:939); every corpus line names Origin$ Library, so
+	// a known-origin one would be a script the Java ignores it on.
+	if raw, ok := a.Params.Param("OriginAlternative"); ok {
+		return fmt.Errorf("engine: ChangeZone: OriginAlternative$ %q on a known-origin move not resolvable", raw)
+	}
+	return changeZoneKnown(g, a, controller, source, origin, dest, newController, until)
+}
+
+// changeZoneDuration reads Duration$. UntilHostLeavesPlay, the only value
+// the corpus's ChangeZone lines name (112 of 112), is changeZoneUntilCommand
+// (SpellAbilityEffect.java:833-915): the moved cards come back when the host
+// leaves the battlefield. Any other value is not resolvable yet (GO-7).
+func changeZoneDuration(a *Ability) (bool, error) {
+	d, ok := a.Params.Param("Duration")
+	if !ok {
+		return false, nil
+	}
+	if d != "UntilHostLeavesPlay" {
+		return false, fmt.Errorf("engine: ChangeZone: Duration$ %q not resolvable yet", d)
+	}
+	return true, nil
+}
+
+// untilReturns builds changeZoneUntilCommand's records for the cards moved
+// out of from: one commandReturnExiled per card that really changed zones,
+// stamped with the object it became (equalsWithGameTimestamp,
+// SpellAbilityEffect.java:875). A token is left out: it ceases to exist once
+// exiled and never returns (SpellAbilityEffect.java:840-841). Cards are kept
+// wherever the move put them, the way Java's CardZoneTable holds them: a
+// redirected one is recorded at its actual zone, not filtered.
+func (g *Game) untilReturns(cmds []cardCommand, host CardID, from ZoneType, ids []CardID) []cardCommand {
+	for _, id := range ids {
+		c := g.Card(id)
+		if c.IsToken || c.Zone == from {
+			continue
+		}
+		cmds = append(cmds, cardCommand{Kind: commandReturnExiled, Target: id, Timestamp: c.zoneStamp, Host: host, Zone: from})
+	}
+	return cmds
+}
+
+// armUntilHostLeaves is the end of changeZoneUntilCommand
+// (SpellAbilityEffect.java:909-914): the return goes on the host's
+// leaves-play list (addUntilCommand's UntilHostLeavesPlay branch, :999-1000),
+// or, when the host is no longer in play -- it exiled itself, or it is a
+// spell still on the stack -- runs at once.
+func (g *Game) armUntilHostLeaves(controller PlayerController, host CardID, cmds []cardCommand) {
+	if len(cmds) == 0 {
+		return
+	}
+	h := g.Card(host)
+	if h.Zone != Battlefield {
+		g.pendingReturns = append(g.pendingReturns, cmds...)
+		g.returnUntilCards(controller)
+		return
+	}
+	h.leavesPlayCmds = append(h.leavesPlayCmds, cmds...)
+}
+
+// changeZoneChooser reads Chooser$ for a known-origin move
+// (ChangeZoneEffect.java:530-533): the first player it names, else the
+// activator. Java's get(0) throws on an empty list; here that is an error.
+func changeZoneChooser(g *Game, a *Ability) (PlayerID, bool, error) {
+	spec, ok := a.Params.Param("Chooser")
+	if !ok {
+		return a.Controller, false, nil
+	}
+	players, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+	if err != nil {
+		return NoPlayer, false, fmt.Errorf("engine: ChangeZone: Chooser$: %w", err)
+	}
+	if len(players) == 0 {
+		return NoPlayer, false, fmt.Errorf("engine: ChangeZone: Chooser$ %q names no player", spec)
+	}
+	return players[0], true, nil
+}
+
+// hiddenChooser reads Chooser$ for a search (ChangeZoneEffect.java:911-917):
+// the activator picks one of the players it names when it names several, and
+// NoPlayer -- each fetcher decides for themselves -- when it names none.
+func hiddenChooser(g *Game, a *Ability, controller PlayerController) (PlayerID, error) {
+	spec, ok := a.Params.Param("Chooser")
+	if !ok {
+		return NoPlayer, nil
+	}
+	players, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+	if err != nil {
+		return NoPlayer, fmt.Errorf("engine: ChangeZone: Chooser$: %w", err)
+	}
+	switch len(players) {
+	case 0:
+		return NoPlayer, nil
+	case 1:
+		return players[0], nil
+	}
+	pick := controller.ChoosePlayerForEffect(g, a.Controller, a.Source, players)
+	for _, p := range players {
+		if p == pick {
+			return pick, nil
+		}
+	}
+	return NoPlayer, fmt.Errorf("engine: ChangeZone: Chooser$ answer %v is not one of %v", pick, players)
+}
+
+// alternativeOrigin is the OriginAlternative$ prompt (ChangeZoneEffect.java:
+// 939-970) for one fetcher: decider is asked whether to search Origin$ (no
+// clears it), then about each alternative zone in turn while more than one
+// zone is still in play; an empty result searches the alternatives left. A
+// zone that is not hidden (CR 400.2, the graveyard) holding a ChangeType$
+// match of player's makes the pick mandatory.
+func alternativeOrigin(g *Game, a *Ability, controller PlayerController, decider, player PlayerID, origin []ZoneType, changeType string) ([]ZoneType, bool, error) {
+	raw, _ := a.Params.Param("OriginAlternative")
+	alt, err := parseZoneList(raw)
+	if err != nil {
+		return nil, false, fmt.Errorf("engine: ChangeZone: OriginAlternative$: %w", err)
+	}
+	var altFetch []CardID
+	for _, z := range alt {
+		altFetch = append(altFetch, g.Zone(z, player).Cards()...)
+	}
+	if changeType != "" {
+		altFetch = filterValid(g, altFetch, changeType, a.Controller, a.Source)
+	}
+	out := append([]ZoneType(nil), origin...)
+	if !controller.ConfirmEffect(g, decider, a.Source) {
+		out = nil
+	}
+	for len(alt) > 0 && len(out)+len(alt) != 1 {
+		if controller.ConfirmEffect(g, decider, a.Source) {
+			out = append(out, alt[0])
+		}
+		alt = alt[1:]
+	}
+	if len(out) == 0 {
+		out = alt
+	}
+	mandatory := false
+	for _, z := range out {
+		if z == Hand || z == Library || z == Sideboard {
+			continue
+		}
+		for _, id := range altFetch {
+			if g.Card(id).Zone == z {
+				mandatory = true
+			}
+		}
+	}
+	return out, mandatory, nil
 }
 
 // changeZoneEnter reads WithCountersType$ (a comma list, each kind added) and
@@ -181,9 +344,16 @@ func changeZonePreMemory(a *Ability, source *Card) {
 // cards (default Self) still in an Origin$ zone move to Destination$.
 // Optional$ asks per card; ShuffleNonMandatory$ asks once up front; several
 // cards heading into a library are ordered by their owners first (CR
-// 401.4) unless Shuffle$ True will shuffle them anyway.
-func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID) error {
+// 401.4) unless Shuffle$ True will shuffle them anyway. A Chooser$ answers
+// Optional$ and orders those cards itself (ChangeZoneEffect.java:530-546,
+// 566). With until (Duration$ UntilHostLeavesPlay) the moved cards return
+// when the host leaves the battlefield (changeZoneUntilCommand, :865).
+func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
 	enter, err := changeZoneEnter(g, a, dest)
+	if err != nil {
+		return err
+	}
+	chooser, hasChooser, err := changeZoneChooser(g, a)
 	if err != nil {
 		return err
 	}
@@ -202,8 +372,13 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		return nil
 	}
 	if dest == Library && len(cards) > 1 && !shuffle {
-		cards, err = g.orderCardsByTheirOwners(controller, cards, dest)
-		if err != nil {
+		if hasChooser {
+			ordered := controller.OrderCardsForZone(g, chooser, cards, dest)
+			if err := checkChoice(ordered, cards, len(cards), len(cards)); err != nil {
+				return fmt.Errorf("engine: ChangeZone: ordering cards into %v: %w", dest, err)
+			}
+			cards = ordered
+		} else if cards, err = g.orderCardsByTheirOwners(controller, cards, dest); err != nil {
 			return fmt.Errorf("engine: ChangeZone: %w", err)
 		}
 	}
@@ -236,7 +411,7 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		if c.IsPhasedOut() {
 			continue
 		}
-		if optional && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+		if optional && !controller.ConfirmEffect(g, chooser, a.Source) {
 			continue
 		}
 		from := c.Zone
@@ -255,6 +430,13 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 	}
 	for _, from := range movedOrigins {
 		g.checkChangesZoneAllTriggers(controller, moved[from], from, dest)
+	}
+	if until {
+		var cmds []cardCommand
+		for _, from := range movedOrigins {
+			cmds = g.untilReturns(cmds, a.Source, from, moved[from])
+		}
+		g.armUntilHostLeaves(controller, a.Source, cmds)
 	}
 	if dest == Library && shuffle {
 		owners, err := changeZoneShufflers(g, a, cards)
@@ -314,6 +496,10 @@ type hiddenChoice struct {
 	// not blocked, not NoLooking$, and not a Searched$ ability, which Java
 	// turns back to false once its grant is made (:1090-1092).
 	found bool
+	// origin is HiddenOriginChoices.origin: the zones this fetcher searched,
+	// which OriginAlternative$ can narrow or widen from Origin$ -- "if you
+	// search your library this way, shuffle" reads it (:1522).
+	origin []ZoneType
 }
 
 // canSearchLibraryWith is Player.canSearchLibraryWith (Player.java:3749): a
@@ -340,11 +526,25 @@ func (g *Game) canSearchLibraryWith(decider, target, activator PlayerID) bool {
 // searched is shuffled afterwards unless NoShuffle$ or Shuffle$ False --
 // before the move when the destination is the library itself, so a fetched
 // card placed on top stays there.
-func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID) error {
+//
+// The decider is the Chooser$ player, else the fetcher as DefinedPlayer$
+// names it (ChangeZoneEffect.java:919-923) -- taken before a ValidTgts$
+// fetcher is swapped for the targeted player, so a targeted search with
+// neither DefinedPlayer$ nor Chooser$ is decided by the activator. The
+// decider answers Optional$ and the OriginAlternative$ prompts, makes the
+// pick, and is the one CantSearchLibrary is checked on; the
+// ControlOpponentsSearchingLibrary$ grant applies only to a fetcher deciding
+// their own search (:1071).
+func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
 	enter, err := changeZoneEnter(g, a, dest)
 	if err != nil {
 		return err
 	}
+	chooser, err := hiddenChooser(g, a, controller)
+	if err != nil {
+		return err
+	}
+	_, hasAlt := a.Params.Param("OriginAlternative")
 	fetchSpec, hasDefinedPlayer := a.Params.Param("DefinedPlayer")
 	if !hasDefinedPlayer {
 		fetchSpec = "You"
@@ -373,7 +573,12 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 	}
 
 	var picks []hiddenChoice
-	for _, player := range fetchers {
+	for _, fetcher := range fetchers {
+		decider := chooser
+		if decider == NoPlayer {
+			decider = fetcher
+		}
+		player := fetcher
 		if usesTargeting && !hasDefinedPlayer {
 			player = NoPlayer
 			for _, e := range a.Targets {
@@ -389,17 +594,27 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		if g.Player(player).Lost {
 			continue
 		}
-		if optional && !controller.ConfirmEffect(g, player, a.Source) {
+		fetchOrigin := origin
+		if hasAlt {
+			var altMandatory bool
+			fetchOrigin, altMandatory, err = alternativeOrigin(g, a, controller, decider, player, origin, changeType)
+			if err != nil {
+				return err
+			}
+			// Java's mandatory is the method's own flag: once an
+			// alternative zone makes it so, later fetchers keep it.
+			mandatory = mandatory || altMandatory
+		}
+		if optional && !controller.ConfirmEffect(g, decider, a.Source) {
 			continue
 		}
 		// ChangeZoneEffect.java:987-991: a Wish fetcher another player
 		// controls cannot search outside the game (CR 800.4b, ADR-0030).
-		// A copy, so the next fetcher and the shuffle checks below still
-		// see the whole Origin$.
-		searched := origin
-		if g.IsControlled(player) && zoneIn(Sideboard, origin) {
+		// A copy, so the next fetcher still sees the whole Origin$.
+		searched := fetchOrigin
+		if g.IsControlled(player) && zoneIn(Sideboard, fetchOrigin) {
 			searched = nil
-			for _, z := range origin {
+			for _, z := range fetchOrigin {
 				if z != Sideboard {
 					searched = append(searched, z)
 				}
@@ -442,7 +657,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			_, noLooking := a.Params.Param("NoLooking")
 			if zoneIn(Library, searched) && !noLooking {
 				searchedLibrary = true
-				if !g.canSearchLibraryWith(player, player, a.Controller) {
+				if !g.canSearchLibraryWith(decider, player, a.Controller) {
 					blocked = true
 					searchedLibrary = false
 					_, nonMandatory := a.Params.Param("ShuffleNonMandatory")
@@ -484,10 +699,10 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				// Library$ gives (ADR-0040), popped after the pick. Searched$
 				// counts as a search for the grant (:1067-1069).
 				var end func()
-				if searchedLibrary || searchedParam {
+				if (searchedLibrary || searchedParam) && decider == player {
 					end = g.beginSearchControl(player)
 				}
-				chosen = controller.ChooseCardsForEffect(g, player, a.Source, fetchList, lo, hi)
+				chosen = controller.ChooseCardsForEffect(g, decider, a.Source, fetchList, lo, hi)
 				if end != nil {
 					end()
 				}
@@ -496,14 +711,17 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				}
 			}
 		}
-		if zoneIn(Library, origin) && dest == Library && fetcherShuffle {
+		if zoneIn(Library, searched) && dest == Library && fetcherShuffle {
 			g.Shuffle(Library, player)
 		}
 		picks = append(picks, hiddenChoice{player: player, chosen: chosen, shuffleMandatory: fetcherShuffle,
-			found: searchedLibrary && !searchedParam})
+			found: searchedLibrary && !searchedParam, origin: searched})
 	}
 
 	_, tapped := a.Params.Param("Tapped")
+	// returns is changeZoneUntilCommand's table across every fetcher's
+	// moves (ChangeZoneEffect.java:1538), armed once they are all done.
+	var returns []cardCommand
 	for _, pick := range picks {
 		moved := map[ZoneType][]CardID{}
 		var movedOrigins []ZoneType
@@ -519,6 +737,9 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 					g.markExiledWith(id, a.Source)
 				}
 				changeZoneMemory(a, source, id)
+				if until {
+					returns = g.untilReturns(returns, a.Source, from, []CardID{id})
+				}
 				continue
 			}
 			melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
@@ -536,11 +757,15 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		}
 		for _, from := range movedOrigins {
 			g.checkChangesZoneAllTriggers(controller, moved[from], from, dest)
+			if until {
+				returns = g.untilReturns(returns, a.Source, from, moved[from])
+			}
 		}
-		if (zoneIn(Library, origin) && dest != Library && !defined && pick.shuffleMandatory) || shuffleParam == "True" {
+		if (zoneIn(Library, pick.origin) && dest != Library && !defined && pick.shuffleMandatory) || shuffleParam == "True" {
 			g.Shuffle(Library, pick.player)
 		}
 	}
+	g.armUntilHostLeaves(controller, a.Source, returns)
 	return nil
 }
 

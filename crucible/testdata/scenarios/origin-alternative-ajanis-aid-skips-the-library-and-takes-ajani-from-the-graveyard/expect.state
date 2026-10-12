@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanhand=Ajani, Valiant Protector|Id:6
+humanbattlefield=Forest|Id:2|Tapped;Forest|Id:3|Tapped;Plains|Id:4|Tapped;Plains|Id:5|Tapped;Ajani's Aid|Id:1|SummonSick
+humanlibrary=Grizzly Bears|Id:7;Forest|Id:8;Plains|Id:9;Island|Id:10;Swamp|Id:11
+ailife=20

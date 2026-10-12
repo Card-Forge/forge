@@ -32,7 +32,19 @@ type enterCounters struct {
 // marking id with markExiledWith on a dest == Exile move checks this to
 // mark the partner too (ChangeZoneEffect.java's own handleExiledWith(meld,
 // sa) call alongside its primary one).
+//
+// A host whose leaving runs Duration$ UntilHostLeavesPlay returns gets them
+// carried out before this returns (returnUntilCards, controlcommands.go), so
+// the rest of the effect sees those cards back, as Java's synchronous
+// leaves-play command does.
 func (g *Game) moveByEffect(controller PlayerController, id CardID, dest ZoneType, libPos int, newController PlayerID, tapped bool, enter ...enterCounters) CardID {
+	melded := g.moveByEffectOnly(controller, id, dest, libPos, newController, tapped, enter...)
+	g.returnUntilCards(controller)
+	return melded
+}
+
+// moveByEffectOnly is moveByEffect without the until-host-leaves returns.
+func (g *Game) moveByEffectOnly(controller PlayerController, id CardID, dest ZoneType, libPos int, newController PlayerID, tapped bool, enter ...enterCounters) CardID {
 	c := g.Card(id)
 	origin := c.Zone
 	var melded CardID

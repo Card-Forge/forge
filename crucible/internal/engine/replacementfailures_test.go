@@ -32,7 +32,7 @@ func TestReplacementChoiceOutOfRangeIsARecordedControllerError(t *testing.T) {
 }
 
 // TestReplacementAbilityErrorsAreRecorded proves a ReplaceWith$ ability the
-// Registry refuses (ChangeZone's Duration$ is unresolved) records a pending
+// Registry refuses (ChangeZone's Duration$ UntilYourNextTurn is unresolved) records a pending
 // error for the face-change, Destroy and Counter dispatches instead of
 // applying half of it.
 func TestReplacementAbilityErrorsAreRecorded(t *testing.T) {
@@ -40,7 +40,7 @@ func TestReplacementAbilityErrorsAreRecorded(t *testing.T) {
 
 	g, p, _ := newTwoPlayerGame(t)
 	g.NewCard(replacementEnchantmentDefWithSVar(t, "Test Refused Destroy",
-		"Event$ Destroy | ActiveZones$ Battlefield | ReplaceWith$ Rm", "Rm", "DB$ ChangeZone | Defined$ ReplacedCard | Destination$ Exile | Duration$ UntilHostLeavesPlay"), p, engine.Battlefield)
+		"Event$ Destroy | ActiveZones$ Battlefield | ReplaceWith$ Rm", "Rm", "DB$ ChangeZone | Defined$ ReplacedCard | Destination$ Exile | Duration$ UntilYourNextTurn"), p, engine.Battlefield)
 	victim := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
 	def := etbChainDef(t, "Destroyer", "DB$ Destroy | Defined$ Targeted | ValidTgts$ Creature")
 	host := g.NewCard(def, p, engine.Battlefield)

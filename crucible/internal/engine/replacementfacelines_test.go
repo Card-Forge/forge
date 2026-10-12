@@ -23,7 +23,7 @@ func TestTurnFaceUpReplaceWithLines(t *testing.T) {
 		"updated":            {"ReplacementResult$ Updated | ", counter, 1, false},
 		"ValidCard mismatch": {"ValidCard$ Card.Token | ", counter, 0, false},
 		"requirements fail":  {"IsPresent$ Card.Nonexistent | PresentCompare$ GE1 | ", counter, 0, false},
-		"refused ability":    {"", "DB$ ChangeZone | Defined$ ReplacedCard | Destination$ Exile | Duration$ UntilHostLeavesPlay", 0, true},
+		"refused ability":    {"", "DB$ ChangeZone | Defined$ ReplacedCard | Destination$ Exile | Duration$ UntilYourNextTurn", 0, true},
 	} {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()

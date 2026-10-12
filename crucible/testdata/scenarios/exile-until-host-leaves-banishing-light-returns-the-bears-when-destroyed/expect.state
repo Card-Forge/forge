@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humangraveyard=Banishing Light;Disenchant
+humanbattlefield=Plains|Id:3|Tapped;Plains|Id:4|Tapped;Plains|Id:5|Tapped;Plains|Id:6|Tapped;Plains|Id:7|Tapped
+ailife=20
+aibattlefield=Grizzly Bears|Id:8|SummonSick
