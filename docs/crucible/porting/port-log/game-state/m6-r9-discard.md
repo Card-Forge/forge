@@ -87,9 +87,8 @@ branch does. 50 `Discard` lines read it (Abyssal Specter, Hypnotic Specter, Barb
 `TriggeredTarget` now also answers a damaged creature.
 
 A DamageDone trigger whose target restriction is `TargetsWithDefinedController$ TriggeredTarget` (`targeting.go`) now
-finds its candidates and goes on the stack. Six such cards (Ink-Eyes, Zombie Cannibal, Skullsnatcher, ...) then fail
-loudly in `ChangeZone`, whose effect-side list still rejects `TargetsWithDefinedController$` although `resolveTargets`
-already applies it; Mana Skimmer fails in `Pump` `KW$`, Somnophore in `Effect` `Duration$`.
+finds its candidates and goes on the stack. Ink-Eyes, Zombie Cannibal, Skullsnatcher and the other `ChangeZone` cards
+play ([`m6-r9-pump-kw.md`](m6-r9-pump-kw.md)); Somnophore fails in `Effect` `Duration$`.
 
 ## Not ported
 
