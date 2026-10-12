@@ -1,0 +1,18 @@
+# frost_breath.txt: SP$ Tap (up to two target creatures), then DB$ Pump |
+# Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next
+# untap step. | Duration$ Permanent. Card.canUntap reads the hidden line
+# (Card.java:4817), so the Bears stay tapped through ai's next untap step;
+# Hill Giant, tapped but not targeted, untaps. Untap.doUntap then removes the
+# line (Untap.java:157-161), which the module tests cover.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+queue paygeneric U
+queue paygeneric U
+queue targets 5
+castspell human 1
+resolvestack
+# Main1 -> ... -> Cleanup -> ai's Untap.
+advance 10

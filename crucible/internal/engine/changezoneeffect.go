@@ -26,7 +26,7 @@ var changeZoneUnresolvedParams = [...]string{
 	"RandomOrder", "Chooser", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
 	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",
-	"AlreadyRevealed", "ImprintLast", "TargetsWithDefinedController", "Unearth",
+	"AlreadyRevealed", "ImprintLast", "Unearth",
 	"Condition", "SorcerySpeed", "Ultimate", "ModeCost",
 	// ExiledWithEffectSource$ marks the effect card's own source as the
 	// exiler instead of the host (SpellAbilityEffect.java:1092-1094).
@@ -257,18 +257,46 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		g.checkChangesZoneAllTriggers(controller, moved[from], from, dest)
 	}
 	if dest == Library && shuffle {
-		var owners []PlayerID
-		for _, id := range cards {
-			owners = appendUniquePlayer(owners, g.Card(id).Owner)
-		}
-		if len(owners) == 0 {
-			owners = []PlayerID{a.Controller}
+		owners, err := changeZoneShufflers(g, a, cards)
+		if err != nil {
+			return err
 		}
 		for _, pid := range owners {
 			g.Shuffle(Library, pid)
 		}
 	}
 	return nil
+}
+
+// changeZoneShufflers is whose library a Shuffle$ True move into a library
+// shuffles (ChangeZoneEffect.java:873-890): the players
+// TargetsWithDefinedController$ names when present -- "it does need to work
+// even without Targets" (Gaea's Blessing's ParentTarget with no card chosen),
+// no fallback when it names nobody -- else every targeted card's owner, else
+// the activator. TargetsWithDefinedController$'s other reading, the targeting
+// restriction (SpellAbility.canTarget, SpellAbility.java:1405-1416), is
+// targeting.go's.
+func changeZoneShufflers(g *Game, a *Ability, cards []CardID) ([]PlayerID, error) {
+	if spec, ok := a.Params.Param("TargetsWithDefinedController"); ok {
+		players, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+		if err != nil {
+			return nil, fmt.Errorf("engine: ChangeZone: TargetsWithDefinedController$: %w", err)
+		}
+		// PlayerCollection: each player once, first-seen order.
+		var unique []PlayerID
+		for _, p := range players {
+			unique = appendUniquePlayer(unique, p)
+		}
+		return unique, nil
+	}
+	var owners []PlayerID
+	for _, id := range cards {
+		owners = appendUniquePlayer(owners, g.Card(id).Owner)
+	}
+	if len(owners) == 0 {
+		owners = []PlayerID{a.Controller}
+	}
+	return owners, nil
 }
 
 // hiddenChoice is one fetcher's pick, held until every fetcher has chosen --

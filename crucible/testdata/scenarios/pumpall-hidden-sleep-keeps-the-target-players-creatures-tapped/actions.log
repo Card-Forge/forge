@@ -1,0 +1,19 @@
+# sleep.txt: SP$ TapAll (creatures target player controls), then DB$ PumpAll |
+# Defined$ Targeted | ValidCards$ Creature | KW$ HIDDEN This card doesn't
+# untap during your next untap step. | Duration$ Permanent.
+# PumpAllEffect.applyPumpAll (PumpAllEffect.java:34-70) gives the hidden line
+# to every creature ai controls and none of human's: both of ai's creatures
+# stay tapped through ai's untap step, its Forest untaps.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+queue paygeneric U
+queue paygeneric U
+queue targets ai
+castspell human 1
+resolvestack
+# Main1 -> ... -> Cleanup -> ai's Untap.
+advance 10

@@ -342,7 +342,7 @@ func (g *Game) chooseCopyTargets(controller PlayerController, m *Ability) error 
 	if choice.err != nil {
 		return choice.err
 	}
-	if !named || !ok || !controller.ConfirmEffect(g, m.Controller, m.Source) {
+	if !named || !ok || len(choice.candidates) == 0 || !controller.ConfirmEffect(g, m.Controller, m.Source) {
 		return nil
 	}
 	decider, err := g.targetingPlayerOf(m)

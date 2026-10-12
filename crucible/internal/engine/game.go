@@ -340,8 +340,12 @@ type pumpRecord struct {
 	Timestamp        uint64
 	Power, Toughness int
 	Keywords         []string
-	Switched         bool // KW$ HIDDEN switchPTKeyword: a Layer 7d switch
-	Permanent        bool
+	// Hidden is KW$'s "HIDDEN " lines, prefix stripped
+	// (Card.addHiddenExtrinsicKeywords), put on the card every rules pass
+	// (pumpHiddenKeywords). Never edited in place: Clone shares it.
+	Hidden    []string
+	Switched  bool // KW$ HIDDEN switchPTKeyword: a Layer 7d switch
+	Permanent bool
 	// OnPlayer marks a keyword pump of a player (PumpEffect.applyPump(player),
 	// Player.addChangedKeywords): Player holds the keywords, Card is NoCard.
 	OnPlayer bool

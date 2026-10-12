@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Sleep|Id:1
+humanbattlefield=Island|Id:2;Island|Id:3;Island|Id:4;Island|Id:5;Llanowar Elves|Id:6
+aibattlefield=Grizzly Bears|Id:7;Hill Giant|Id:8;Forest|Id:9|Tapped
+ailibrary=Island|Id:10

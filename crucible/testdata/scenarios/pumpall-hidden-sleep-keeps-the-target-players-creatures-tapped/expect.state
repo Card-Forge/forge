@@ -1,0 +1,9 @@
+turn=2
+activeplayer=ai
+activephase=Untap
+humanlife=20
+humanbattlefield=Island|Id:2|Tapped;Island|Id:3|Tapped;Island|Id:4|Tapped;Island|Id:5|Tapped;Llanowar Elves|Id:6
+humangraveyard=Sleep
+ailife=20
+ailibrary=Island|Id:10
+aibattlefield=Grizzly Bears|Id:7|Tapped;Hill Giant|Id:8|Tapped;Forest|Id:9

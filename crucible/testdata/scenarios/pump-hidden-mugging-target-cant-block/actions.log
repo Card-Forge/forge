@@ -1,0 +1,23 @@
+# mugging.txt: SP$ DealDamage (2 to target creature), then DB$ Pump | Defined$
+# Targeted | KW$ HIDDEN CARDNAME can't block. PumpEffect.applyPump
+# (PumpEffect.java:48-73) puts the line on Hill Giant as a hidden extrinsic
+# keyword until end of turn; CombatUtil.canBlock reads it (CR 509.1b).
+startturn human
+advance 3
+tapformana human 2 R
+queue targets 4
+castspell human 1
+resolvestack
+advance 2
+queue attackers 3
+declareattackers
+advance
+# The damaged Hill Giant (3/3 with 2 damage) may not block the Bears.
+queue blocks 4=3
+expecterror 509.1b declareblockers
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage
+advance

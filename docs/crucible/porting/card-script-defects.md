@@ -31,11 +31,13 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `tooth_claw_and_tail`                      | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port                | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
 | `your_will_is_not_your_own`                | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port                | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
 | `loose_in_the_park`                        | `Clone` with `PumpKeywords$ Haste` but no `PumpDuration$`: Haste outlasts the turn                             | Clone port                      | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `____________trespasser` (line 7)          | `KW$ HIDDEN Unblockable`: no Java code reads `Unblockable`, so the Oracle's "can't be blocked" never applies   | Pump `KW$` hidden lines (R9)    | Not filed                                                        |
 
-Every row but `peace_talks` and the two `ListTitle$` rows is merged upstream; the seven of
-[#12193](https://github.com/Card-Forge/forge/pull/12193) arrived with a sync. The `ListTitle$` rows are latent: both
-SVars are named only by `K:ETBReplacement:Other`, which `compile` does not expand yet, so no gate reads them; expanding
-that layer makes `tools/apiscan -check -api` fail on both
+Every row but `peace_talks`, the two `ListTitle$` rows and `____________trespasser` is merged upstream. The Trespasser
+line fails closed: `pumpKeywords` (`pumpeffect.go`) refuses a hidden line nothing reads, so the card is refused rather
+than played without its evasion. The seven of [#12193](https://github.com/Card-Forge/forge/pull/12193) arrived with a
+sync. The `ListTitle$` rows are latent: both SVars are named only by `K:ETBReplacement:Other`, which `compile` does not
+expand yet, so no gate reads them; expanding that layer makes `tools/apiscan -check -api` fail on both
 ([`layer1-enters-as-copy.md`](port-log/game-state/layer1-enters-as-copy.md)). `peace_talks` is carried as a pending fix,
 logged in [upstream-patches.md](upstream-patches.md), until upstream merges it. `internal/carddb/compile` compiles the
 whole corpus with no exemption of any kind, and `internal/valid` parses all 49,615 valid strings with no padded base.

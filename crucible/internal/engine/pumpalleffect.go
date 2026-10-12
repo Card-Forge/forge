@@ -101,11 +101,11 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if err != nil {
 		return err
 	}
-	keywords, switched, err := pumpKeywords("PumpAll", a.Params)
+	grant, err := pumpKeywords("PumpAll", a.Params)
 	if err != nil {
 		return err
 	}
-	if power == 0 && toughness == 0 && len(keywords) == 0 && !switched {
+	if power == 0 && toughness == 0 && grant.empty() {
 		return nil
 	}
 
@@ -135,7 +135,7 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 				}
 				g.pumps = append(g.pumps, pumpRecord{
 					Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
-					Keywords: keywords, Switched: switched, Permanent: permanent,
+					Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
 				})
 			}
 		}

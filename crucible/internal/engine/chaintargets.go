@@ -55,7 +55,11 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		if err != nil {
 			return false
 		}
-		chosen := controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
+		var chosen []EntityID
+		if len(choice.candidates) > 0 {
+			// TargetMin$ 0 with no candidate asks nothing (resolveTargets).
+			chosen = controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
+		}
 		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen})
 		if len(chosen) > 0 {
 			parents = chosen

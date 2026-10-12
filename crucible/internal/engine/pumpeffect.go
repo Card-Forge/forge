@@ -158,16 +158,21 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return err
 	}
 
-	keywords, switched, err := pumpKeywords("Pump", a.Params)
+	grant, err := pumpKeywords("Pump", a.Params)
 	if err != nil {
 		return err
 	}
-	keywords, proceed, err := g.pumpDefinedKeywords(a, source, keywords)
+	keywords, proceed, err := g.pumpDefinedKeywords(a, source, grant.keywords)
 	if err != nil {
 		return err
 	}
 	if !proceed {
 		return nil
+	}
+	grant.keywords = keywords
+	players, err := g.pumpPlayers(a, grant)
+	if err != nil {
+		return err
 	}
 
 	// PumpEffect.java:401-402 and :427-428: RememberObjects$ then
@@ -187,7 +192,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return err
 	}
 
-	if power == 0 && toughness == 0 && len(keywords) == 0 && !switched {
+	if power == 0 && toughness == 0 && grant.empty() {
 		return nil
 	}
 
@@ -204,24 +209,6 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	// Radiance$ (PumpEffect.java:489): the permanents sharing a color with a
 	// target are pumped with it.
 	cards = append(cards, g.radianceCards(a)...)
-	// PumpEffect.java's tgtPlayers loop (:498-504) gives a player keywords only
-	// (a player has no power or toughness): getTargetPlayers is the targeted
-	// players, or the players Defined$ names ("You"; a card-only spec names
-	// none).
-	var players []PlayerID
-	if len(keywords) > 0 {
-		if _, ok := a.Params.Param("ValidTgts"); ok {
-			for _, e := range a.Targets {
-				if p, ok := e.AsPlayer(); ok {
-					players = append(players, p)
-				}
-			}
-		} else if spec, ok := a.Params.Param("Defined"); ok {
-			if ps, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs()); err == nil {
-				players = ps
-			}
-		}
-	}
 
 	g.timestamp++
 	timestamp := g.timestamp
@@ -230,7 +217,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			continue
 		}
 		g.pumps = append(g.pumps, pumpRecord{
-			Timestamp: timestamp, Keywords: keywords, OnPlayer: true, Player: p,
+			Timestamp: timestamp, Keywords: grant.keywords, OnPlayer: true, Player: p,
 			Permanent: permanent, HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
 		})
 	}
@@ -242,7 +229,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		}
 		g.pumps = append(g.pumps, pumpRecord{
 			Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
-			Keywords: keywords, Switched: switched, Permanent: permanent,
+			Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
 			HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
 		})
 		if hostBound != "" {
@@ -250,6 +237,35 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		}
 	}
 	return nil
+}
+
+// pumpPlayers is the players a keyword pump reaches: PumpEffect.java's
+// tgtPlayers loop (:498-504) gives a player keywords only (a player has no
+// power or toughness). getTargetPlayers is the targeted players, or the
+// players Defined$ names ("You"; a card-only spec names none). A hidden line
+// for a player is an error, checked before the effect changes anything: Java
+// hands the player the "HIDDEN ..." string itself as a keyword
+// (applyPump(player), PumpEffect.java:131-132), which nothing reads.
+func (g *Game) pumpPlayers(a *Ability, grant pumpGrant) ([]PlayerID, error) {
+	if len(grant.keywords) == 0 && len(grant.hidden) == 0 {
+		return nil, nil
+	}
+	var players []PlayerID
+	if _, ok := a.Params.Param("ValidTgts"); ok {
+		for _, e := range a.Targets {
+			if p, ok := e.AsPlayer(); ok {
+				players = append(players, p)
+			}
+		}
+	} else if spec, ok := a.Params.Param("Defined"); ok {
+		if ps, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs()); err == nil {
+			players = ps
+		}
+	}
+	if len(players) > 0 && len(grant.hidden) > 0 {
+		return nil, fmt.Errorf("engine: Pump: KW$ hidden keyword %q on a player not resolvable yet", grant.hidden[0])
+	}
+	return players, nil
 }
 
 // pumpDefinedKeywords is PumpEffect.java:318-371, DefinedKW$: the placeholder a
@@ -388,44 +404,58 @@ func pumpZoneMatches(a *compile.Ability, zone ZoneType) bool {
 // PumpEffect.java:51): Layer 7d (CR 613.4d) has no layer of its own there.
 const switchPTKeyword = "CARDNAME's power and toughness are switched"
 
+// pumpGrant is what KW$ grants, split the way PumpEffect.applyPump
+// (PumpEffect.java:48-55) and PumpAllEffect.applyPumpAll (PumpAllEffect.java:34-40)
+// split it: plain keywords go to Layer 6 (addChangedCardKeywords), "HIDDEN "
+// lines lose that prefix and become hidden extrinsic keywords
+// (addHiddenExtrinsicKeywords), and switchPTKeyword is the Layer 7d switch.
+type pumpGrant struct {
+	keywords []string
+	hidden   []string
+	switched bool
+}
+
+// empty reports whether the grant changes nothing.
+func (k pumpGrant) empty() bool {
+	return len(k.keywords) == 0 && len(k.hidden) == 0 && !k.switched
+}
+
 // pumpKeywords reads KW$ -- shared between pumpEffect and pumpAllEffect,
 // PumpEffect.java/PumpAllEffect.java's own identical two-line KW$ handling
 // (split on " & "). effect names the caller (Pump/PumpAll) for the error
-// message. The one HIDDEN token resolved is switchPTKeyword (Layer 7d),
-// reported as switched rather than a keyword: every other HIDDEN token
-// (gameCard.addHiddenExtrinsicKeywords -- its own separate mechanic) fails
-// loudly rather than granting a normal keyword named literally
-// "HIDDEN ...". Absent KW$ (a NumAtt$/NumDef$-only line) returns nil, false,
-// nil -- no keywords granted, not an error.
-func pumpKeywords(effect string, a *compile.Ability) (keywords []string, switched bool, err error) {
+// message. A "HIDDEN " token is accepted when something in this port reads
+// its line (hiddenKeywordRead, continuous.go): Java stores it on the card and
+// Card.hasKeyword's exact-text shortcut (Card.java:4981) is the only reader,
+// so a line nothing reads would be granted and then ignored, and fails loudly
+// instead (GO-7) -- naming the token. Absent KW$ (a NumAtt$/NumDef$-only line)
+// grants nothing, not an error.
+func pumpKeywords(effect string, a *compile.Ability) (pumpGrant, error) {
+	var grant pumpGrant
 	raw, ok := a.Param("KW")
 	if !ok {
-		return nil, false, nil
+		return grant, nil
 	}
-	if strings.Contains(raw, "HIDDEN") {
-		var plain []string
-		for _, tok := range strings.Split(raw, " & ") {
+	_, definedKW := a.Param("DefinedKW")
+	for _, tok := range strings.Split(raw, " & ") {
+		if line, isHidden := strings.CutPrefix(tok, "HIDDEN "); isHidden {
 			switch {
-			case tok == "HIDDEN "+switchPTKeyword:
-				switched = !switched
-			case strings.Contains(tok, "HIDDEN"):
-				return nil, false, fmt.Errorf("engine: %s: KW$ %q not resolvable yet", effect, raw)
+			case line == switchPTKeyword:
+				grant.switched = !grant.switched
+			case hiddenKeywordRead(line):
+				grant.hidden = append(grant.hidden, line)
 			default:
-				plain = append(plain, tok)
+				return pumpGrant{}, fmt.Errorf("engine: %s: KW$ hidden keyword %q not resolvable yet", effect, line)
 			}
+			continue
 		}
-		if len(plain) > 0 {
-			return nil, false, fmt.Errorf("engine: %s: KW$ %q not resolvable yet", effect, raw)
+		// pumpDefinedKeywords substitutes the placeholders a DefinedKW$ line
+		// names; anything else carrying one is a dynamic value this port
+		// does not compute.
+		substituted := definedKW && effect == "Pump"
+		if !substituted && keywordTokenDynamic(tok) {
+			return pumpGrant{}, fmt.Errorf("engine: %s: KW$ %q not resolvable yet", effect, tok)
 		}
-		return nil, switched, nil
+		grant.keywords = append(grant.keywords, tok)
 	}
-	if _, defined := a.Param("DefinedKW"); defined && effect == "Pump" {
-		// pumpDefinedKeywords substitutes the placeholders this line names.
-		return strings.Split(raw, " & "), false, nil
-	}
-	tokens, ok := keywordTokens(a, "KW")
-	if !ok {
-		return nil, false, fmt.Errorf("engine: %s: KW$ %q not resolvable yet", effect, raw)
-	}
-	return tokens, false, nil
+	return grant, nil
 }

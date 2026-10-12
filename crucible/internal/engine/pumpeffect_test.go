@@ -206,11 +206,10 @@ func TestPumpEffectRejectsDoubleNumAtt(t *testing.T) {
 	}
 }
 
-// TestPumpEffectRejectsHiddenKeyword proves a KW$ token starting with
-// "HIDDEN" (a hidden-keyword phrase, e.g. Delayed untap prevention -- its own
-// separate mechanic, not built) fails loudly rather than granting a normal
-// keyword named literally "HIDDEN ...".
-func TestPumpEffectRejectsHiddenKeyword(t *testing.T) {
+// TestPumpEffectRejectsUnreadHiddenKeyword proves a KW$ "HIDDEN" line nothing
+// in this port reads (Whippoorwill's no-redirection line, ReplaceDamage.java:100)
+// fails loudly, naming the line, rather than being granted and ignored.
+func TestPumpEffectRejectsUnreadHiddenKeyword(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -219,13 +218,16 @@ func TestPumpEffectRejectsHiddenKeyword(t *testing.T) {
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 
 	def := etbPumpTriggerDefParams(t, "Test Hidden Keyword",
-		`Defined$ Self | KW$ HIDDEN This card doesn't untap during your next untap step.`, nil)
-	_, err := castETBPump(t, g, p, def)
+		`Defined$ Self | KW$ Flying & HIDDEN Damage that would be dealt to CARDNAME can't be redirected.`, nil)
+	creature, err := castETBPump(t, g, p, def)
 	if err == nil {
 		t.Fatal("ResolveStack: got nil error, want one naming KW")
 	}
-	if !strings.Contains(err.Error(), "KW") {
-		t.Errorf("ResolveStack error = %q, want it to name KW$", err.Error())
+	if !strings.Contains(err.Error(), "KW$ hidden keyword") || !strings.Contains(err.Error(), "can't be redirected") {
+		t.Errorf("ResolveStack error = %q, want it to name the hidden KW$ line", err.Error())
+	}
+	if g.Card(creature).HasKeyword("Flying") {
+		t.Error("creature has Flying: a rejected line must grant nothing")
 	}
 }
 

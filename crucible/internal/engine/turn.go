@@ -402,6 +402,7 @@ func (g *Game) untapStep(controller PlayerController) {
 		}
 		c.SummonSick = false
 	}
+	g.endNextUntapStepKeyword()
 }
 
 // drawStep draws one card for the active player, ported from

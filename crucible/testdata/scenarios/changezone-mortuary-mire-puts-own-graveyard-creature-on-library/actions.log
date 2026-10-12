@@ -1,0 +1,11 @@
+# mortuary_mire.txt: the ETB trigger's DB$ ChangeZone | ValidTgts$ Creature |
+# TargetsWithDefinedController$ TriggeredCardController | Origin$ Graveyard |
+# Destination$ Library. SpellAbility.canTarget (SpellAbility.java:1405-1416)
+# keeps only human's own graveyard creature as a target (ai's Hill Giant is
+# not one), and the resolved move puts the Bears on top of human's library.
+startturn human
+advance 3
+queue targets 2
+queue optionaltrigger true
+playland human 1
+resolvestack

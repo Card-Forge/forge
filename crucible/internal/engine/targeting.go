@@ -37,7 +37,8 @@ import (
 // resolveTargets is CR 601.2c/603.3b's own "choose targets," and reports
 // whether a is still eligible to be pushed onto the stack at all. true with
 // a.Targets left nil means there was nothing to target in the first place --
-// no ValidTgts$ named. false means CR 603.3c's own real rule ("if the
+// no ValidTgts$ named, or TargetMin$ 0 with no candidate (asked nothing).
+// false means CR 603.3c's own real rule ("if the
 // ability requires a target and there are no legal targets, it doesn't go on
 // the stack") or a target shape this port cannot offer (TargetType$ other
 // than Spell, an unresolvable TargetMin$) -- the two are folded into the same
@@ -74,6 +75,10 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 		return false
 	}
 	a.targeter = decider
+	if len(choice.candidates) == 0 {
+		// TargetMin$ 0 and no candidate: nothing to ask (TargetSelection.java:117-120).
+		return true
+	}
 	chosen := controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
 	a.Targets = g.trimTargetSet(a, chosen)
 	a.recordForEachControllers(g)
@@ -351,8 +356,9 @@ type targetChoice struct {
 // TargetMin$/TargetMax$, the scan resolveTargets asks the controller over
 // and a copy's new targets are chosen from (CR 707.10c, copySpell,
 // copyspellabilityeffect.go). named is false when a names no ValidTgts$ at
-// all; ok is false when it does but has no legal candidate or a shape this
-// port cannot offer -- resolveTargets' own two outcomes.
+// all; ok is false when it does but has no legal candidate while TargetMin$
+// is above 0, or a shape this port cannot offer -- resolveTargets' own two
+// outcomes. TargetMin$ 0 with no candidate is ok with an empty pool.
 func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool) {
 	validTgts, named := a.Params.Param("ValidTgts")
 	if !named && a.API == APIEarthbend {
@@ -504,9 +510,13 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	if targetMin >= 2 && hasSameControllerRestriction(a) {
 		candidates = g.withSameControllerPartner(candidates)
 	}
-	if len(candidates) == 0 {
+	if len(candidates) == 0 && targetMin > 0 {
 		return targetChoice{}, true, false
 	}
+	// An "up to N" choice (TargetMin$ 0) with nothing to choose still goes on:
+	// TargetSelection.chooseTargets cancels only when there are neither enough
+	// candidates nor enough targets (TargetSelection.java:82, 113-120), and a
+	// minimum of 0 is always enough (Gaea's Blessing over an empty graveyard).
 	return targetChoice{candidates: candidates, min: targetMin, max: targetMax}, true, true
 }
 

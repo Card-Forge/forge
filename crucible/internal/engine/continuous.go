@@ -17,6 +17,7 @@
 package engine
 
 import (
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -845,7 +846,49 @@ func pumpPT(g *Game) {
 	})
 }
 
-// keywordTokens reads key (Pump's KW$, pumpKeywords -- its one caller; a static
+// pumpHiddenKeywords puts every live pump record's hidden lines
+// (Card.addHiddenExtrinsicKeywords, PumpEffect.java:71-73) back on its card.
+// The record is the state; c.hiddenKeywords is rebuilt from scratch every pass
+// (clearHiddenKeywords), so a line written there directly would vanish on the
+// next one. Called from applyContinuousRules.
+func pumpHiddenKeywords(g *Game) {
+	livePumps(g, func(c *Card, p *pumpRecord) {
+		c.hiddenKeywords = append(c.hiddenKeywords, p.Hidden...)
+	})
+}
+
+// endNextUntapStepKeyword is Untap.doUntap's cleanup (Untap.java:157-161):
+// once the active player's permanents have untapped, "This card doesn't untap
+// during your next untap step." comes off every pump record on a permanent
+// that player controls -- tapped or not, whoever made the record. A record
+// left granting nothing is dropped. The record's Hidden slice is replaced,
+// never edited in place: Game.Clone copies g.pumps shallowly, so a clone
+// shares it.
+func (g *Game) endNextUntapStepKeyword() {
+	kept := g.pumps[:0]
+	for _, r := range g.pumps {
+		if !r.OnPlayer && slices.Contains(r.Hidden, untapNextStepKeyword) {
+			c := g.Card(r.Card)
+			if c.Zone == Battlefield && !c.IsPhasedOut() && c.Controller() == g.activePlayer {
+				var hidden []string
+				for _, l := range r.Hidden {
+					if l != untapNextStepKeyword {
+						hidden = append(hidden, l)
+					}
+				}
+				r.Hidden = hidden
+				if r.Power == 0 && r.Toughness == 0 && len(r.Keywords) == 0 && len(r.Hidden) == 0 && !r.Switched {
+					continue
+				}
+			}
+		}
+		kept = append(kept, r)
+	}
+	g.pumps = kept
+}
+
+// keywordTokens reads key (GainControl's AddKWs$; Pump's KW$ checks each token
+// with keywordTokenDynamic instead; a static
 // AddKeyword$ goes through layerKeywordChange) as its " & "-separated list of
 // literal keyword lines, returned verbatim -- each token is exactly what a
 // K: line would carry, HasKeyword's own job to parse further at query time,
@@ -865,17 +908,26 @@ func keywordTokens(s *compile.Ability, key string) ([]string, bool) {
 	}
 	tokens := strings.Split(v, " & ")
 	for _, tok := range tokens {
-		for _, marker := range [...]string{
-			"ChosenColor", "ChosenType", "ChosenNumber", "ChosenPlayer", "ChosenName",
-			"ChosenEvenOdd", "chosenEvenOdd", "AllColors", "allColors", "CommanderColorID",
-			"ColorsYouCtrl", "colorsYouCtrl", "YourBasic",
-		} {
-			if strings.Contains(tok, marker) {
-				return nil, false
-			}
+		if keywordTokenDynamic(tok) {
+			return nil, false
 		}
 	}
 	return tokens, true
+}
+
+// keywordTokenDynamic reports whether one keyword token carries a
+// dynamic-value marker (keywordTokens' list).
+func keywordTokenDynamic(tok string) bool {
+	for _, marker := range [...]string{
+		"ChosenColor", "ChosenType", "ChosenNumber", "ChosenPlayer", "ChosenName",
+		"ChosenEvenOdd", "chosenEvenOdd", "AllColors", "allColors", "CommanderColorID",
+		"ColorsYouCtrl", "colorsYouCtrl", "YourBasic",
+	} {
+		if strings.Contains(tok, marker) {
+			return true
+		}
+	}
+	return false
 }
 
 // ptParam reads key, then resolves it the same way resolveNamedAmount
@@ -901,12 +953,14 @@ func ptParam(g *Game, amounts map[string]expr.Amount, host *Card, s *compile.Abi
 // player rather than a card: SetMaxHandSize$/RaiseMaxHandSize$/
 // AdjustLandPlays$ Read Player.HandSizeLimit/LandPlayLimit (player.go). The
 // same walk recomputes every card's own AddHiddenKeyword$ grants
-// (applyOneContinuousHiddenKeyword), Java's own RULES-layer param.
+// (applyOneContinuousHiddenKeyword), Java's own RULES-layer param, after
+// the hidden lines a live Pump/PumpAll record holds (pumpHiddenKeywords).
 func applyContinuousRules(g *Game) {
 	for _, pid := range g.Players() {
 		g.Player(pid).Rules.Clear()
 	}
 	clearHiddenKeywords(g)
+	pumpHiddenKeywords(g)
 	g.mayPlay = nil
 	for _, ls := range continuousStaticsAllZones(g) {
 		if !g.staticLive(g.Card(ls.host), ls.s) {
@@ -1085,15 +1139,16 @@ func clearHiddenKeywords(g *Game) {
 	}
 }
 
-// hiddenKeywordRead reports whether line is an AddHiddenKeyword$ line
-// something in this port reads (hasKeywordText/hasKeywordTextPrefix: block
-// legality, block requirements, canAttackAtAll).
+// hiddenKeywordRead reports whether line is an AddHiddenKeyword$ line (or a
+// Pump/PumpAll KW$ "HIDDEN " line, pumpKeywords) something in this port reads
+// (hasKeywordText/hasKeywordTextPrefix: block legality, block requirements,
+// canAttackAtAll, untapBlocked).
 func hiddenKeywordRead(line string) bool {
 	switch line {
-	case "CARDNAME can't block.", "CARDNAME can't attack or block.",
+	case "CARDNAME can't block.", "CARDNAME can't attack.", "CARDNAME can't attack or block.",
 		"All creatures able to block CARDNAME do so.", "CARDNAME must be blocked if able.",
 		"CARDNAME can't attack alone.", "CARDNAME can only attack alone.",
-		"This card doesn't untap during your next untap step.":
+		untapNextStepKeyword:
 		return true
 	}
 	// "CARDNAME count as <name>." is read by a valid string's hasKeyword

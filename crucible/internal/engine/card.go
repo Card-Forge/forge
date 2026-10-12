@@ -25,6 +25,10 @@ type castSnapshot struct {
 	battlefield, graveyard []CardID
 }
 
+// untapNextStepKeyword is the hidden line Card.canUntap reads
+// (Card.java:4817) and Untap.doUntap removes once read (Untap.java:160).
+const untapNextStepKeyword = "This card doesn't untap during your next untap step."
+
 // Card is one card in one game.
 //
 // It holds no back-reference: no *Game, no *Player. Its controller is a
@@ -327,7 +331,8 @@ type Card struct {
 
 	// hiddenKeywords is Card.hiddenExtrinsicKeywords (Card.java:103): whole
 	// keyword lines a Mode$ Continuous AddHiddenKeyword$ static grants this
-	// pass (applyOneContinuousHiddenKeyword, continuous.go). Unlike
+	// pass (applyOneContinuousHiddenKeyword, continuous.go), and a Pump/PumpAll
+	// KW$ "HIDDEN " line while its record lives (pumpHiddenKeywords). Unlike
 	// KeywordMod's AddKeyword$ grants they are not part of the card's
 	// keyword list, so nothing that removes or counts keywords sees them;
 	// only Card.hasKeyword's exact-text and hasStartOfKeyword's prefix reads

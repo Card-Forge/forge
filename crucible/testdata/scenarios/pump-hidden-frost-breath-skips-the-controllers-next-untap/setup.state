@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Frost Breath|Id:1
+humanbattlefield=Island|Id:2;Island|Id:3;Island|Id:4
+aibattlefield=Grizzly Bears|Id:5;Hill Giant|Id:6|Tapped
+ailibrary=Island|Id:7

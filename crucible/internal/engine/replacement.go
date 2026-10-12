@@ -607,7 +607,7 @@ func (g *Game) untapBlocked(card *Card) bool {
 	// grants, printed or hidden. The grant is rebuilt from the live static each
 	// pass, so it holds exactly as long as the static (an Effect card exiled by
 	// its own untap-step trigger, or an Aura that stays).
-	if card.hasKeywordText("This card doesn't untap during your next untap step.") {
+	if card.hasKeywordText(untapNextStepKeyword) {
 		return true
 	}
 	for _, pid := range g.Players() {
