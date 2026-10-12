@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Swamp|Tapped;Swamp|Tapped;Dance of the Dead|SummonSick|AttachedTo:4;Grizzly Bears|Id:4|Tapped|SummonSick
+ailife=20

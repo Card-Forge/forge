@@ -405,11 +405,25 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, nil
 		}
 		return append([]CardID(nil), host.castOpt.collected...), nil
-	case "Remembered", "RememberedCard", "RememberedLKI":
+	case "Remembered", "RememberedCard", "RememberedLKI", "DirectRemembered":
+		// DirectRemembered (AbilityUtils.java:231-246) is the host's remembered
+		// cards plus those of its current state; a card here has one Memory.
 		var cards []CardID
 		for _, e := range host.Memory.Remembered() {
 			if id, ok := e.AsCard(); ok {
 				cards = append(cards, id)
+			}
+		}
+		if defined == "DirectRemembered" && len(cards) == 0 {
+			// A delayed trigger whose host already left and cleared its Memory
+			// (Dance of the Dead's "leaves the battlefield" sacrifice): Java reads
+			// the host's last-known remembered list, which this port does not
+			// keep; the delayed trigger's own RememberObjects$ is that list for
+			// every real DirectRemembered user that registers one.
+			for _, e := range refs.triggerRemembered {
+				if id, ok := e.AsCard(); ok {
+					cards = append(cards, id)
+				}
 			}
 		}
 		return cards, nil

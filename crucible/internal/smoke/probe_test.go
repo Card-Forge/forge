@@ -70,6 +70,12 @@ func TestProbeClassifiesCards(t *testing.T) {
 		{"Clear a Path", smoke.Plays},
 		{"Celestial Purge", smoke.Plays},
 		{"Annul", smoke.Plays},
+		// An Aura's host is its Enchant spec: a card in a graveyard, a black
+		// creature the tailor places, a creature that already wears an Aura.
+		{"Animate Dead", smoke.Plays},
+		{"Decomposition", smoke.Plays},
+		{"Daybreak Coronet", smoke.Plays},
+		{"Lion Umbra", smoke.Plays},
 		// Command-zone types are placed, not cast; a sticker sheet is refused.
 		{"Akoum", smoke.Placed},
 		{"Backup Plan", smoke.Placed},

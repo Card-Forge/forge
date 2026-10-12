@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Animate Dead|Id:1;Disenchant|Id:6
+humanbattlefield=Swamp|Id:2;Swamp|Id:3;Plains|Id:4;Plains|Id:5
+humangraveyard=Grizzly Bears|Id:7

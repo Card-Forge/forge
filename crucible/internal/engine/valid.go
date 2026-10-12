@@ -354,6 +354,22 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 			return c.Controller() == pid
 		}
 		return c.Owner == pid
+	case strings.HasPrefix(name, "EnchantedBy "):
+		// CardProperty.java:466-488: "EnchantedBy Aura.Other" holds when one of
+		// c's Auras matches the nested spec, tested with source as the source
+		// (Daybreak Coronet: "Creature.EnchantedBy Aura.Other"). The nested
+		// "Imprinted" and "Targeted" forms stay unrecognized: false.
+		rest := strings.TrimPrefix(name, "EnchantedBy ")
+		if rest == "Imprinted" || rest == "Targeted" {
+			return false
+		}
+		nested := valid.Parse(rest)
+		for _, att := range c.Attachments() {
+			if Matches(g, g.Card(att), nested, sourceController, source) {
+				return true
+			}
+		}
+		return false
 	case name == "EnchantedBy", name == "EquippedBy", name == "AttachedBy", name == "FortifiedBy":
 		// All four are one check in Java too: GameEntity.isEnchantedBy,
 		// isEquippedBy and isFortifiedBy each just call hasCardAttachment,

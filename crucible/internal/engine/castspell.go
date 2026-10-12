@@ -902,8 +902,9 @@ func firstSpellAbility(c *Card) *compile.Ability {
 	return nil
 }
 
-// enchantTargets is every battlefield permanent, across every player, that
-// spec (self's own Enchant restriction, enchantSpec) matches, and that does
+// enchantTargets is every battlefield permanent -- and, when the Enchant type
+// names a zone (enchantsOutsidePlay), every graveyard card -- across every
+// player, that spec (self's own Enchant restriction, enchantSpec) matches, and that does
 // not refuse self outright (cardCantBeTargetedBy, staticability.go -- CR
 // 702.11b/702.16e/702.18a's own Hexproof/Protection/Shroud gate, a separate
 // question from the card-type restriction spec itself checks) -- CR
@@ -917,6 +918,20 @@ func (g *Game) enchantTargets(spec valid.Spec, controller PlayerID, self CardID,
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
 			if Matches(g, g.Card(id), spec, controller, self) && !cardCantBeTargetedBy(g, g.Card(id), controller, self, ask) {
+				eligible = append(eligible, id)
+			}
+		}
+	}
+	if !enchantsOutsidePlay(spec) {
+		return eligible
+	}
+	// The Aura spell is "TgtZone$ Battlefield,Graveyard" (CardState.java:665)
+	// and a host outside play is legal only when the Enchant type names a zone
+	// (Card.java:6986): Animate Dead's "Creature.inZoneGraveyard". A spec
+	// naming any other zone matches nothing in either searched zone.
+	for _, pid := range g.Players() {
+		for _, id := range g.Zone(Graveyard, pid).Cards() {
+			if id != self && Matches(g, g.Card(id), spec, controller, self) && !cardCantBeTargetedBy(g, g.Card(id), controller, self, ask) {
 				eligible = append(eligible, id)
 			}
 		}
@@ -1037,6 +1052,11 @@ func firstPlayerTarget(targets []EntityID) (PlayerID, bool) {
 func (g *Game) attachActivated(a *Ability, controller PlayerController) error {
 	if _, ok := a.Params.Param("Object"); ok {
 		return g.attachObject(a, controller)
+	}
+	if _, targeted := a.Params.Param("ValidTgts"); !targeted {
+		if _, ok := a.Params.Param("Defined"); ok {
+			return g.attachDefined(a, controller)
+		}
 	}
 	for _, key := range [...]string{"Choices", "Defined", "PlayerChoices", "Optional", "Chooser", "Move"} {
 		if _, ok := a.Params.Param(key); ok {

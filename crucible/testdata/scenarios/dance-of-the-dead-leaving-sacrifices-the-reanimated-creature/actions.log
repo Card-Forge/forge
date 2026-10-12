@@ -1,0 +1,16 @@
+# Dance of the Dead's "When CARDNAME leaves the battlefield, that creature's
+# controller sacrifices it": the same delayed trigger as Animate Dead, reading
+# the creature through Defined$ DirectRemembered. Disenchant destroys the Aura.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+castspell human 1
+resolvestack
+tapformana human 4 W
+tapformana human 5 W
+queue paygeneric W
+queue targets 1
+castspell human 6
+resolvestack

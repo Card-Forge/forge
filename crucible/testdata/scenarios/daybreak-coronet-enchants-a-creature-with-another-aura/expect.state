@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Plains|Tapped;Plains|Tapped;Grizzly Bears|Id:4;Pacifism|AttachedTo:4;Daybreak Coronet|SummonSick|AttachedTo:4
+ailife=20

@@ -1,0 +1,9 @@
+# K:Enchant:Creature.EnchantedBy Aura.Other: the only legal host is a creature
+# that already wears a different Aura. Grizzly Bears wearing Pacifism is
+# assigned without a queued choice; a bare creature would not qualify.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+castspell human 1
+resolvestack

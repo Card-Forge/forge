@@ -67,6 +67,48 @@ func (g *Game) attachObject(a *Ability, controller PlayerController) error {
 	return nil
 }
 
+// attachDefined is AttachEffect.resolve for an Attach with neither Object$ nor
+// ValidTgts$: the source itself attaches to the one host Defined$ names
+// (Animate Dead's "DB$ Attach | Defined$ Remembered", re-attaching the Aura to
+// the creature it just returned, AttachEffect.java:111-119, 133-152). Java
+// asks the chooser to pick among several hosts; with one that is no decision,
+// and several are refused rather than guessed (GO-7), as attachObject does. The
+// attachment goes through Card.attachToEntity's canBeAttached gate (canBeAttached,
+// below) and is skipped when the source has left the battlefield.
+func (g *Game) attachDefined(a *Ability, controller PlayerController) error {
+	for _, key := range [...]string{"Choices", "PlayerChoices", "Optional", "Chooser", "Move"} {
+		if _, ok := a.Params.Param(key); ok {
+			return fmt.Errorf("engine: Attach: %s$ with Defined$ not resolvable yet", key)
+		}
+	}
+	source := g.Card(a.Source)
+	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
+		return nil
+	}
+	targets, err := targetedOrDefinedEntities(g, a)
+	if err != nil {
+		return err
+	}
+	if len(targets) == 0 {
+		return nil
+	}
+	if len(targets) > 1 {
+		return fmt.Errorf("engine: Attach: choosing among %d Defined$ hosts not resolvable yet", len(targets))
+	}
+	host, ok := targets[0].AsCard()
+	if !ok {
+		return fmt.Errorf("engine: Attach: a player host via Defined$ not resolvable yet")
+	}
+	if source.Zone != Battlefield || !g.canBeAttached(source, host) {
+		return nil
+	}
+	g.attachTo(controller, a.Source, host)
+	if cur, ok := source.AttachedTo(); ok && cur == host && hasParam(a, "RememberAttached") {
+		source.Memory.Remember(CardEntity(a.Source))
+	}
+	return nil
+}
+
 // attachObjectToChoice is AttachEffect.java:72-152 for Object$ with Choices$:
 // the activator picks one battlefield permanent matching Choices$ that every
 // attachment can be attached to (CardPredicates.canBeAttached), a pick that
@@ -147,6 +189,11 @@ func (g *Game) canBeAttached(attachment *Card, host CardID) bool {
 		}
 		spec, ok := enchantSpec(attachment)
 		if !ok || !Matches(g, h, spec, attachment.Controller(), attachment.ID) {
+			return false
+		}
+		// Card.java:6986: a host outside play only when the Enchant type names
+		// a zone.
+		if h.Zone != Battlefield && !enchantsOutsidePlay(spec) {
 			return false
 		}
 	}

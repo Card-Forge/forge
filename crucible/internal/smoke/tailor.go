@@ -7,6 +7,7 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/engine"
+	"github.com/jczastkiewicz/crucible/internal/keyword"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 	"github.com/jczastkiewicz/crucible/pkg/javarand"
 )
@@ -72,6 +73,23 @@ func targetSpecs(def *compile.Card) []targetSpec {
 	for _, a := range def.Faces[0].Abilities {
 		walk(a)
 	}
+	// An Aura's host is an Enchant keyword spec the generic board may not
+	// satisfy ("Creature.Black"). A spec naming a zone is searched there, and
+	// the fixed board already has a creature card in each graveyard.
+	for _, line := range def.Faces[0].Keywords {
+		k := keyword.Parse(line)
+		if k.Name != "Enchant" {
+			continue
+		}
+		spec, _, _ := strings.Cut(k.Details, ":")
+		if spec == "" || spec == "Player" || spec == "Opponent" || strings.Contains(spec, "inZone") {
+			continue
+		}
+		if ts := (targetSpec{alt: spec, zone: engine.Battlefield}); !seen[ts] {
+			seen[ts] = true
+			out = append(out, ts)
+		}
+	}
 	return out
 }
 
@@ -96,6 +114,7 @@ func targetZone(a *compile.Ability) engine.ZoneType {
 // addTailored puts, for each target spec of def, a card the spec accepts on
 // each side that has one, in the zone the spec targets.
 func (p *Prober) addTailored(g *engine.Game, pid, opp engine.PlayerID, def *compile.Card) {
+	p.addWornAura(g, pid, opp, def)
 	for _, ts := range targetSpecs(def) {
 		if ts.spell {
 			continue
@@ -113,6 +132,33 @@ func (p *Prober) addTailored(g *engine.Game, pid, opp engine.PlayerID, def *comp
 				g.NewCard(d, owner, ts.zone)
 			}
 		}
+	}
+}
+
+// wornAura is the Aura addWornAura attaches to a creature on each side.
+const wornAura = "Pacifism"
+
+// addWornAura gives each side a creature wearing an Aura when def's Enchant
+// spec asks for one ("Creature.EnchantedBy Aura.Other", Daybreak Coronet; or
+// "Creature.modified", Lion Umbra): the
+// tailor judges candidates in hand, where no card is enchanted, so it cannot
+// find such a host.
+func (p *Prober) addWornAura(g *engine.Game, pid, opp engine.PlayerID, def *compile.Card) {
+	wanted := false
+	for _, line := range def.Faces[0].Keywords {
+		k := keyword.Parse(line)
+		// "Creature.modified" (Lion Umbra) is also satisfied by a worn Aura.
+		wanted = wanted || (k.Name == "Enchant" &&
+			(strings.Contains(k.Details, "EnchantedBy") || strings.Contains(k.Details, "modified")))
+	}
+	auraDef, ok1 := p.db.Card(wornAura)
+	bearsDef, ok2 := p.db.Card(bears)
+	if !wanted || !ok1 || !ok2 {
+		return
+	}
+	for _, who := range [...]engine.PlayerID{pid, opp} {
+		host := g.NewCard(bearsDef, who, engine.Battlefield)
+		g.Attach(g.NewCard(auraDef, who, engine.Battlefield), host)
 	}
 }
 

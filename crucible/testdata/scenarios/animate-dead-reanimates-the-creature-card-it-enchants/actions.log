@@ -1,0 +1,15 @@
+# CR 303.4a, 601.2c: Animate Dead is "Enchant creature card in a graveyard", so
+# its legal hosts are cards in graveyards, not permanents (CardState.java:665
+# TgtZone$ Battlefield,Graveyard; Card.java:6986 allows a host outside play
+# when the Enchant type contains inZone). Grizzly Bears is the only creature
+# card there, so it is assigned without a `queue enchanttarget`. On resolution
+# the Aura enters attached to the graveyard card; its enters trigger returns
+# the creature under the Aura controller's control, swaps the Aura's Enchant
+# keyword for "Creature.IsRemembered" and re-attaches it.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+castspell human 1
+resolvestack

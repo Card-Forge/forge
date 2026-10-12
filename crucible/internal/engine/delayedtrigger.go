@@ -252,8 +252,11 @@ func (g *Game) delayedWatchesLeaving(d delayedTrigger, left CardID, dest ZoneTyp
 			return false
 		}
 	case strings.EqualFold(mode, "ChangesZone"):
-		want, _ := t.Param("Destination")
-		if !strings.EqualFold(want, "Any") {
+		// An absent Destination$ accepts every destination
+		// (TriggerChangesZone.java:85): Animate Dead's delayed "leaves the
+		// battlefield" names an Origin$ only.
+		want, has := t.Param("Destination")
+		if has && !strings.EqualFold(want, "Any") {
 			if z, ok := ZoneByName(want); !ok || z != dest {
 				return false
 			}

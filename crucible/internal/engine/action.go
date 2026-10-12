@@ -896,7 +896,7 @@ func cleanupDanglingAttachments(g *Game, controller PlayerController) bool {
 				continue
 			}
 			host, attached := c.AttachedTo()
-			legal := attached && g.Card(host).Zone == Battlefield
+			legal := attached && g.attachmentHostInPlay(c, host)
 			// CR 704.5n/704.5p: an Equipment attached to anything but a creature,
 			// a Fortification to anything but a land, or a creature or battle
 			// attached to anything at all, becomes unattached
@@ -1044,8 +1044,42 @@ func resolveRoleRule(g *Game, controller PlayerController) bool {
 // permanent, not a card-type restriction valid.Parse can express: they report
 // no spec here and are read by enchantPlayerSpec instead, rather than being
 // misread as a card-type restriction no permanent could ever match.
+//
+// The line read is the card's current one (KeywordLines), not the printed
+// face's: Animate Dead's "Animate ... RemoveKeywords$ Enchant:Creature.
+// inZoneGraveyard | Keywords$ Enchant:Creature.IsRemembered" swaps the
+// restriction as it enters, and Java reads aura.getKeywords(Keyword.ENCHANT),
+// the current list (Card.cantBeEnchantedByMsg, Card.java:6982).
 func enchantSpec(c *Card) (valid.Spec, bool) {
-	return enchantSpecOf(c.Def)
+	if c.Def == nil {
+		return valid.Spec{}, false
+	}
+	return enchantSpecFromLines(c.KeywordLines())
+}
+
+// attachmentHostInPlay reports whether host is somewhere attachment c may stay
+// attached: the battlefield, or -- for an Aura whose current Enchant type names
+// a zone (Animate Dead's "Creature.inZoneGraveyard") -- the graveyard it was
+// cast onto. The Aura's own Enchant check (enchantSpec Matches) then decides
+// whether the host still qualifies there.
+func (g *Game) attachmentHostInPlay(c *Card, host CardID) bool {
+	z := g.Card(host).Zone
+	if z == Battlefield {
+		return true
+	}
+	if z != Graveyard || !c.Type().HasSubtype("Aura") {
+		return false
+	}
+	spec, ok := enchantSpec(c)
+	return ok && enchantsOutsidePlay(spec)
+}
+
+// enchantsOutsidePlay reports whether spec names a zone ("inZone..."), the
+// one case where a card outside the battlefield can be enchanted: Java's
+// Card.cantBeEnchantedByMsg accepts a host that is not in play only when the
+// Enchant type contains "inZone" (Card.java:6986).
+func enchantsOutsidePlay(spec valid.Spec) bool {
+	return strings.Contains(spec.String(), "inZone")
 }
 
 // enchantPlayerSpec is the player restriction of an Aura's `Enchant`
@@ -1056,7 +1090,7 @@ func enchantPlayerSpec(c *Card) (string, bool) {
 	if c.Def == nil {
 		return "", false
 	}
-	for _, line := range c.Def.Faces[0].Keywords {
+	for _, line := range c.KeywordLines() {
 		k := keyword.Parse(line)
 		if k.Name != "Enchant" {
 			continue
@@ -1072,7 +1106,12 @@ func enchantSpecOf(def *compile.Card) (valid.Spec, bool) {
 	if def == nil {
 		return valid.Spec{}, false
 	}
-	for _, line := range def.Faces[0].Keywords {
+	return enchantSpecFromLines(def.Faces[0].Keywords)
+}
+
+// enchantSpecFromLines is the first Enchant line's card restriction.
+func enchantSpecFromLines(lines []string) (valid.Spec, bool) {
+	for _, line := range lines {
 		k := keyword.Parse(line)
 		if k.Name != "Enchant" {
 			continue

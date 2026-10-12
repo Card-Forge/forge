@@ -1,0 +1,12 @@
+# Same host-zone rule as Animate Dead (CardState.java:665, Card.java:6986), here
+# with an opponent's graveyard card: "creature card in a graveyard" is any
+# graveyard. The enters trigger puts the creature onto the battlefield tapped
+# under the Aura controller's control (GainControl$ True, Tapped$ True) and
+# re-attaches the Aura.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+castspell human 1
+resolvestack

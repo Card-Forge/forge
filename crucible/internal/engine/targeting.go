@@ -1123,7 +1123,7 @@ func (g *Game) auraTargetStillLegal(a *Ability) bool {
 	target := g.Card(a.Target)
 	// A phased-out host cannot be targeted (Card.canBeTargetedBy,
 	// Card.java:6829-6831).
-	if target.Zone != Battlefield || target.IsPhasedOut() {
+	if target.IsPhasedOut() {
 		return false
 	}
 	// CR 400.7: a host that left and came back is a new object.
@@ -1131,6 +1131,11 @@ func (g *Game) auraTargetStillLegal(a *Ability) bool {
 		return false
 	}
 	spec, ok := enchantSpec(c)
+	// The graveyard is a legal host zone only for an Enchant type naming a zone
+	// (enchantTargets).
+	if target.Zone != Battlefield && (target.Zone != Graveyard || !ok || !enchantsOutsidePlay(spec)) {
+		return false
+	}
 	ask := targetAsk{kind: causeSpell}
 	if ok {
 		ask.enchant = spec.String()

@@ -1,0 +1,17 @@
+# Animate Dead's second half: "When Animate Dead leaves the battlefield, that
+# creature's controller sacrifices it". The enters trigger sets up a delayed
+# trigger remembering the reanimated creature (RememberObjects$ RememberedLKI);
+# Disenchant destroys the Aura and the delayed trigger sacrifices the creature.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+castspell human 1
+resolvestack
+tapformana human 4 W
+tapformana human 5 W
+queue paygeneric W
+queue targets 1
+castspell human 6
+resolvestack
