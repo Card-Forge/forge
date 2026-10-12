@@ -1,0 +1,9 @@
+Name:Hive Mind Coprocessor
+ManaCost:4 B
+Types:Artifact Creature Borg
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddTrigger$ HMCTrig | Description$ Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card."
+SVar:HMCTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<1>
+SVar:PlayMain1:TRUE
+Oracle:Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card."

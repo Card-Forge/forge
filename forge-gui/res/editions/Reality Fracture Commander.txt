@@ -6,5 +6,127 @@ Type=Commander
 ScryfallCode=FRC
 
 [cards]
+1 M Jace, Multiverse Architect @Volkan Baǵa
+2 M Nissa, Leyline Tamer @Justyna Dura
+3 R Omnath, Locus of the Void @Arif Wijaya
+4 R Dack Fayden, Helping Hand @Josiah "Jo" Cameron
+5 R Ob Nixilis, the Ascended @Caroline Gariba
+6 R Teferi's Reproach @Chris Rallis
+7 R Avacyn, Angel of Horror @Pauline Voss
+8 R Jhoira, Weatherlight Corsair @Wayne Wu
+9 R Venser, Fervent Forger @Borja Pindado
+10 R Niv-Mizzet, Ghost Counsel @Brian Valeza
+11 R Tamiyo, Upriser Crowned @Johannes Voss
+12 R The Ur-Sphinx @Alexandre Honoré
 13 R Darksteel Angel @Chippy
+14 R Ginger, Queen of Sweets @Arif Wijaya
+15 R Memnarch, the Warden @Gaboleps
+16 R Turbulent Crater @Piotr Dura
+17 R Turbulent Shore @Piotr Dura
+18 R Turbulent Wetlands @Piotr Dura
+19 M Akroma, Angel of Fury @Slawomir Maniak
+20 U Arcane Signet @Josu Solano
+21 U Sol Ring @Titus Lunter
+22 C Command Tower @Josu Solano
+23 R Reflecting Pool @Marco Gorlei
+24 M Elspeth, Sun's Champion @Eric Deschamps
+25 R Flawless Maneuver @Zoltan Boros
+26 R Grand Crescendo @Raluca Marinescu
+27 U Lingering Souls @John Stanko
+28 R Martial Coup @Greg Staples
+29 M Overlord of the Mistmoors @Steven Belledin
+30 U Path to Exile @Todd Lockwood
+31 R Secure the Wastes @Scott Murphy
+32 M Serra's Emissary @Nils Hamm
+33 R Skrelv's Hive @Heonhwa
+34 R Staff of the Storyteller @Dan Murayama Scott
+35 U Stroke of Midnight @Julia Metzger
+36 R Sunfall @Kasia 'Kafis' Zielińska
+37 U Swords to Plowshares @Jesper Ejsing
+38 R White Sun's Twilight @Julian Kok Joon Wen
+39 C Brainstorm @Daarken
+40 U Brainsurge @Liiga Smilshkalne
+41 U Fact or Fiction @Matt Cavotta
+42 R Mass Polymorph @Christopher Moeller
+43 R Occult Epiphany @Jason Rainville
+44 R Shark Typhoon @Caio Monteiro
+45 R Synthetic Destiny @Dave Kendall
+46 M Archfiend of Despair @Josh Hass
+47 M Archon of Cruelty @Andrew Mar
+48 R Dreadhorde Invasion @Stanton Feng
+49 R Cursed Mirror @David Gaillet
+50 U Despark @Slawomir Maniak
+51 R Whirlwind of Thought @Bram Sels
+52 R Windcrag Siege @Néstor Ossandón Leal
+53 U Azorius Signet @Raoul Vitale
+54 R Chromatic Lantern @Jung Park
+55 R Currency Converter @Sean Murray
+56 U Dimir Signet @Raoul Vitale
+57 U Fellwar Stone @John Avon
+58 U Izzet Signet @Raoul Vitale
+59 R Proteus Staff @Trevor Hairsine
+60 U Rakdos Signet @Martina Pilcerova
+61 U Talisman of Creativity @Lindsey Look
+62 U Talisman of Dominance @Mike Dringenberg
+63 U Talisman of Indulgence @Mike Dringenberg
+64 U Talisman of Progress @Mike Dringenberg
+65 R Battlefield Forge @Thomas Stoop
+66 R Caves of Koilos @Julian Kok Joon Wen
+67 R Clifftop Retreat @Christine Choi
+68 C Contaminated Landscape @Donato Giancola
+69 R Drowned Catacomb @Jung Park
+70 R Exotic Orchard @Steven Belledin
+71 R Fabled Passage @Adam Paquette
+72 R Fetid Heath @Daarken
+73 R Glacial Fortress @James Paick
+74 R Isolated Chapel @Richard Wright
+75 R Kher Keep @Paolo Parente
+76 R Mystic Gate @Fred Fields
+77 C Path of Ancestry @Alayna Danner
+78 C Perilous Landscape @Alayna Danner
+79 R Prairie Stream @Adam Paquette
+80 R Radiant Summit @Marco Gorlei
+81 R Restless Anchorage @Leon Tukker
+82 R Restless Spire @Sergey Glushakov
+83 R Shivan Reef @Andrew Mar
+84 R Sulfur Falls @Cliff Childs
+85 R Sulfurous Springs @Bruce Brenneise
+86 R Sunken Ruins @Warren Mahy
+87 R Underground River @Volkan Baǵa
+88 R Omnath, Locus of the Void @Arif Wijaya
+89 R Dack Fayden, Helping Hand @Josiah "Jo" Cameron
+90 R Ob Nixilis, the Ascended @Caroline Gariba
+91 R Teferi's Reproach @Chris Rallis
+92 R Avacyn, Angel of Horror @Pauline Voss
+93 R Jhoira, Weatherlight Corsair @Wayne Wu
+94 R Venser, Fervent Forger @Borja Pindado
+95 R Niv-Mizzet, Ghost Counsel @Brian Valeza
+96 R Tamiyo, Upriser Crowned @Johannes Voss
+97 R The Ur-Sphinx @Alexandre Honoré
 98 R Darksteel Angel @Chippy
+99 R Ginger, Queen of Sweets @Arif Wijaya
+100 R Memnarch, the Warden @Gaboleps
+101 R Turbulent Crater @Piotr Dura
+102 R Turbulent Shore @Piotr Dura
+103 R Turbulent Wetlands @Piotr Dura
+
+[tokens]
+1 w_4_4_angel_flying @Harkalé Linaï
+2 w_2_1_insect_flying @Michele Giorgi
+3 w_1_1_soldier @Magali Villeneuve
+4 w_1_1_spirit_flying @Kim Sokol
+5 w_1_1_warrior @Ryan Barger
+6 u_x_x_shark_flying @Caio Monteiro
+7 b_2_2_rogue @Maria Poliakova
+8 b_0_0_zombie_army @David Astruga
+9 r_1_1_goblin @Paolo Parente
+10 kobolds_of_kher_keep @Paolo Parente
+11 gw_1_1_citizen @Maria Poliakova
+12 gingerbrute @Alexandre Honoré
+13 incubator_c_0_0_a_phyrexian @Johann Bodin
+14 c_a_map_sac_explore @Francesca Baerald
+15 c_1_1_a_myr @Michele Giorgi
+16 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez
+
+[other]
+17 monarch @Luaren Ayrey

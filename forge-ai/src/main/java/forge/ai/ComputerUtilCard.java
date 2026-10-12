@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.StaticData;
 import forge.ai.simulation.GameStateEvaluator;
@@ -221,6 +223,34 @@ public class ComputerUtilCard {
      * @param list
      * @return a {@link forge.game.card.Card} object.
      */
+
+    /**
+     * Drops creatures whose copy would arrive dead under {@code newController}. A toughness-setting
+     * characteristic-defining ability reads its controller's board, so an opponent's 8/8 can be a
+     * 0/0 for us. Only cards with such an ability are priced, the rest are kept untouched.
+     */
+    public static CardCollection filterOutFatalCopies(final Iterable<Card> list, final Player newController) {
+        final Game game = newController.getGame();
+        final MutableBoolean reset = new MutableBoolean(false);
+        final CardCollection kept = CardLists.filter(list, c -> {
+            if (!c.isCreature() || c.getController().equals(newController)) {
+                return true;
+            }
+            if (c.getStaticAbilities().stream().anyMatch(st -> st.isCharacteristicDefining() && st.hasParam("SetToughness"))) {
+                final Card copy = CardCopyService.getLKICopy(c);
+                copy.setController(newController, game.getNextTimestamp());
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), new CardCollection(copy));
+                reset.setTrue();
+                return copy.getNetToughness() > 0;
+            }
+            return true;
+        });
+        if (reset.isTrue()) {
+            game.getAction().checkStaticAbilities(false);
+        }
+        return kept;
+    }
+
     public static Card getBestLandAI(final Iterable<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.LANDS);
         if (land.isEmpty()) {
@@ -293,7 +323,6 @@ public class ComputerUtilCard {
     public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
         return evaluateLandRemovalPriority(ai, land, removal, true);
     }
-
     private static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal,
             final boolean includeLandDestruction) {
         if (land == null || !land.isLand()) {
@@ -322,11 +351,12 @@ public class ComputerUtilCard {
                 }
                 continue;
             }
-            if (isHomewardPathAbility(ability)) {
+            if (ability.getApi() == ApiType.GainControlVariant
+                    && "GainControlOwns".equals(ability.getParam("AILogic"))) {
                 // Usually low priority: Homeward Path matters if the AI has
                 // stolen creatures that it could lose, but otherwise it is
                 // mostly just a colorless land with a narrow political button.
-                if (aiControlsStolenCreature(ai)) {
+                if (ai.getCreaturesInPlay().anyMatch(c -> c.getOwner() != ai)) {
                     score += 100;
                 } else {
                     score = Math.max(0, score - 50);
@@ -421,20 +451,6 @@ public class ComputerUtilCard {
             valid = ability.getParamOrDefault("ValidCards", "");
         }
         return valid.contains("Land");
-    }
-
-    private static boolean isHomewardPathAbility(final SpellAbility ability) {
-        return ability.getApi() == ApiType.GainControlVariant
-                && "GainControlOwns".equals(ability.getParam("AILogic"));
-    }
-
-    private static boolean aiControlsStolenCreature(final Player ai) {
-        for (Card creature : ai.getCreaturesInPlay()) {
-            if (!creature.getOwner().equals(ai)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static boolean isLandAnimationAbility(final SpellAbility ability) {
@@ -1492,7 +1508,7 @@ public class ComputerUtilCard {
 
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesSimulation();
+            simAI = aic.usesFullSimulation();
             if (!simAI) {
                 holdCombatTricks = aic.getBoolProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
                 chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
@@ -1852,7 +1868,6 @@ public class ComputerUtilCard {
                     reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
                     // Only proceed with this if we could actually reserve mana
                     if (reserved) {
-                        AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
                         AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
                         return false;
                     }
@@ -1946,6 +1961,19 @@ public class ComputerUtilCard {
     }
 
     /**
+     * Predicts whether a creature card would have 0 or less toughness after static continuous P/T effects
+     * if it entered the battlefield now (e.g. under Elesh Norn, Grand Cenobite).
+     */
+    public static boolean wouldDieToStaticPT(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        final Card copy = CardCopyService.getLKICopy(c);
+        applyStaticContPT(c.getGame(), copy, null);
+        return copy.getNetToughness() <= 0;
+    }
+
+    /**
      * Applies static continuous Power/Toughness effects to a (virtual) creature.
      *
      * @param game    game instance to work with
@@ -1969,10 +1997,14 @@ public class ComputerUtilCard {
                 if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                     continue;
                 }
-                if (!stAb.hasParam("Affected")) {
+                if (!stAb.hasParam("Affected") && !stAb.hasParam("AffectedDefined")) {
                     continue;
                 }
                 if (!stAb.hasParam("AddPower") && !stAb.hasParam("AddToughness")) {
+                    continue;
+                }
+                if (stAb.hasParam("AffectedDefined")
+                        && !AbilityUtils.getDefinedCards(c, stAb.getParam("AffectedDefined"), stAb).contains(vCard)) {
                     continue;
                 }
                 if (!stAb.matchesValidParam("Affected", vCard)) {

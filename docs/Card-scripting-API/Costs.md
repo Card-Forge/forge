@@ -82,6 +82,12 @@ Examples:
 
 Remember the countertype should appear all in caps.
 
+How many counters were actually removed is kept on the paying ability as the `CostCountersRemoved` SVar,
+totalled across its counter costs rather than split by type.
+Another ability can gate on it with `ValidSA$ ...+CountersRemovedToPayGE2`. Prefer either over the printed
+cost when a card cares about the amount, since cost modification can change it (*Carth the Lion* raises
+every loyalty cost by [+1]).
+
 # Tap / Untap
 `Cost$ T`
 

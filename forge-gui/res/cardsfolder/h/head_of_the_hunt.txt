@@ -1,0 +1,11 @@
+Name:Head of the Hunt
+ManaCost:2 B B
+Types:Creature Wolf
+PT:4/3
+K:Flash
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Card.Creature+OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, exile it instead. When you do, create a 2/2 green Wolf creature token.  
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigToken | TriggerDescription$ If a creature an opponent controls would die, exile it instead. When you do, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Flash\nIf a creature an opponent controls would die, exile it instead. When you do, create a 2/2 green Wolf creature token.

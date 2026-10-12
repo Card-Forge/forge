@@ -1,0 +1,8 @@
+Name:Omenpath Instability
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you encounter CARDNAME, each player creates an Entropy enchantment token with "Sacrifice this enchantment: Chaos ensues. Activate only as a sorcery." and an Omenpath enchantment token with "Sacrifice this enchantment: Planeswalk. Activate only as a sorcery." (Then planeswalk away from this phenomenon.)
+SVar:TrigToken:DB$ Token | TokenScript$ c_e_entropy_sac_chaos | TokenOwner$ Player | SubAbility$ TrigToken2
+SVar:TrigToken2:DB$ Token | TokenScript$ c_e_omenpath_sac_planeswalk | TokenOwner$ Player | SubAbility$ PWAway
+SVar:PWAway:DB$ Planeswalk
+Oracle:When you encounter Omenpath Instability, each player creates an Entropy enchantment token with "Sacrifice this enchantment: Chaos ensues. Activate only as a sorcery." and an Omenpath enchantment token with "Sacrifice this enchantment: Planeswalk. Activate only as a sorcery." (Then planeswalk away from this phenomenon.)

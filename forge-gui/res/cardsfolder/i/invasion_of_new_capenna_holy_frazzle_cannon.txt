@@ -18,7 +18,7 @@ Types:Artifact Equipment
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigPutCounters | TriggerDescription$ Whenever equipped creature attacks, put a +1/+1 counter on that creature and each other creature you control that shares a creature type with it.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.TriggeredAttacker,Creature.YouCtrl+sharesCreatureTypeWith TriggeredAttackerLKICopy | CounterType$ P1P1
 DeckHas:Ability$Counters
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 K:Equip:1
 Oracle:Whenever equipped creature attacks, put a +1/+1 counter on that creature and each other creature you control that shares a creature type with it.\nEquip {1}

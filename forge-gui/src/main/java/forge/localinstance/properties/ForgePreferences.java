@@ -38,6 +38,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_SCREENREADER_OPTIMIZE("false"),
         UI_TOUCHSCREEN_OPTIMIZE("false"),
         UI_DOCK_LAYOUT (""),
+        UI_IMAGE_CACHE_MAXIMUM("400"),
 
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
@@ -45,8 +46,6 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_VIDEO_MODE ("720p"),
         UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
-        UI_ROTATE_PLANE_OR_PHENOMENON("false"),
-        UI_ROTATE_SPLIT_CARDS("true"),
         UI_ANIMATED_CARD_TAPUNTAP("true"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ENABLE_PRELOAD_EXTENDED_ART("false"),
@@ -56,7 +55,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_SHOW_FPS("false"),
         UI_ENABLE_DISPOSE_TEXTURES("false"),
         UI_AUTO_CACHE_SIZE("false"),
-        UI_USE_LASER_ARROWS("true"),
+        UI_ARROW_OPTION("Default"),
         UI_LOAD_UNKNOWN_CARDS("true"),
         UI_SINGLE_CARD_ZOOM("false"),
         UI_LIBGDX_TEXTURE_FILTERING("true"),
@@ -77,14 +76,16 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_OVERLAY_ABILITY_ICONS("true"),
         UI_OVERLAY_DRAFT_RANKING("true"),
         UI_ENABLE_ONLINE_IMAGE_FETCHER ("true"),
+        UI_CARD_DOWNLOAD_LANG ("en"),
+        UI_PREFER_LANG_FOR_UNIQUE_CARDS ("false"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),
         UI_SMART_CARD_ART("false"),
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
         UI_REVERSE_PROMPT_BUTTON ("false"),
-        UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
+        UI_HIDE_PHASESTOP("false"),
         UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT ("true"),
         UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT ("true"),
         UI_OPEN_PACKS_INDIV ("false"),
@@ -160,11 +161,13 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ZONE_TAB_NEW_COUNT("true"),
         UI_ENABLE_AI_PICKER("false"),
         UI_GROUP_IDENTICAL_CARDS("false"),
-
+        UI_CARD_PLAY_ANIMATION_STYLE("Rotate"),
+        UI_COIN_DICE_ANIMATION("true"),
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
         UI_VOL_SOUNDS ("100"),
         UI_VOL_MUSIC ("100"),
+        UI_PAUSE_MUSIC_ON_FOCUS_LOSS ("true"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_SOUND_SET("Default"),
         UI_CURRENT_MUSIC_SET("Default"),
@@ -200,7 +203,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         MATCH_AI_SIDEBOARDING_MODE("Human For AI"),
         MATCH_AI_TIMEOUT("5"),
         UI_ENABLE_AI_CHEATS ("false"),
-        MATCH_EXPERIMENTAL_RESTORE("false"),
+        //MATCH_EXPERIMENTAL_RESTORE("false"),
 
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
@@ -345,7 +348,9 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
 
-        LAST_IMPORTED_CUBE_ID("");
+        LAST_IMPORTED_CUBE_ID(""),
+
+        ADV_DISPLAY_PRICE_IN_REWARD_SCREEN("true");
 
         private final String strDefaultVal;
 

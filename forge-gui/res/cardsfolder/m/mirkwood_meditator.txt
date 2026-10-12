@@ -1,0 +1,7 @@
+Name:Mirkwood Meditator
+ManaCost:2 U
+Types:Creature Elf Druid
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAnimate | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land you control enters, you may have this creature's base power and toughness become 4/2 until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 2
+Oracle:Landfall — Whenever a land you control enters, you may have this creature's base power and toughness become 4/2 until end of turn.

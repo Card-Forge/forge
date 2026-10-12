@@ -10,11 +10,9 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
-import forge.gamemodes.net.DeltaPacket;
+import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -26,6 +24,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -83,7 +82,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public String getDayTime() {
         return daytime;
     }
-
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
@@ -246,11 +244,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final void updateSingleCard(final CardView card) {
-        updateCards(Collections.singleton(card));
-    }
-
-    @Override
     public void updateRevealedCards(TrackableCollection<CardView> collection) {
         if (gameView != null) {
             TrackableCollection<CardView> existing = gameView.getRevealedCollection();
@@ -258,16 +251,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 collection.addAll(existing);
             gameView.updateRevealedCards(collection);
         }
-    }
-
-    @Override
-    public void refreshCardDetails(final Iterable<CardView> cards) {
-        //not needed for base game implementation
-    }
-
-    @Override
-    public void refreshField() {
-        //not needed for base game implementation
     }
 
     @Override
@@ -306,11 +289,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Backside:
                 return true;
             case Secondary:
-            case PreparedSpell:
                 if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
                 }
                 return false;
+            case PreparedSpell:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return cv.useCardArt();
             default:
                 return false;
         }
@@ -320,17 +307,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
-        for (final GameEntityView gv : entities) {
-            final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
-            if (!hasChanged) continue;
-            if (gv instanceof PlayerView pv) {
-                updateLives(Collections.singleton(pv));
+        // updateSingleCard reaches the widgets directly, and callers include the game thread
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final GameEntityView gv : entities) {
+                final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+                if (!hasChanged) continue;
+                if (gv instanceof PlayerView pv) {
+                    updateLives(Collections.singleton(pv));
+                }
+                if (gv instanceof CardView cv) {
+                    updateCard(cv);
+                }
             }
-            if (gv instanceof CardView cv) {
-                // since we are in UI thread, may redraw the card right now
-                updateSingleCard(cv);
-            }
-        }
+        });
     }
 
     public boolean isHighlighted(final GameEntityView ge) {
@@ -353,6 +342,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectableCards.clear();
         selectionMin = 0;
         selectionMax = 0;
+    }
+
+    protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final CardView c : cards) {
+            // an IdRef the tracker cannot resolve arrives as a null view, and PlayerZoneUpdate rejects a null player
+            if (c == null || c.getOwner() == null) { continue; }
+            final ZoneType zone = c.getZone();
+            if (zone != null && zone != ZoneType.Battlefield) {
+                zones.add(new PlayerZoneUpdate(c.getOwner(), zone));
+            }
+        }
+        return zones;
     }
 
     public boolean isSelectable(final CardView card) {
@@ -528,7 +530,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private TimerTask awaitNextInputTask;
 
     @Override
-    public final void awaitNextInput() {
+    public void awaitNextInput() {
         checkAwaitNextInputTimer();
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
@@ -556,7 +558,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             String name = "?";
             if (this.currentPlayer != null)
                 name = this.currentPlayer.getLobbyPlayerName();
-            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name, true);
         }
     }
 
@@ -579,7 +581,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return waitingForName;
     }
 
-    private String currentYieldMessage() {
+    protected String currentYieldMessage() {
         YieldController yielding = null;
         for (IGameController c : gameControllers.values()) {
             YieldController yc = c.getYieldController();
@@ -603,8 +605,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return null;
     }
 
-    @Override
-    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+    private void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
         cancelWaitingTimer();
         if (waitingForPlayerName == null) {
             return;
@@ -680,6 +681,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void cancelAwaitNextInput() {
+        cancelWaitingTimer();
         if (awaitNextInputTimer == null) {
             return;
         }
@@ -692,11 +694,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 awaitNextInputTask = null;
             }
         }
-        cancelWaitingTimer();
     }
 
     @Override
-    public final void updateAutoPassPrompt() {
+    public void updateAutoPassPrompt() {
         String message = currentYieldMessage();
         if (message == null) return;
         cancelAwaitNextInput();
@@ -713,6 +714,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
         else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
         else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) pv = u.player();
+        // SetMarker carries the phase owner, not who is yielding. It only reaches a client, for its own player
+        else if (update instanceof YieldUpdate.SetMarker) pv = getCurrentPlayer();
         else return;
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
@@ -734,10 +737,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (clickedSameLabel) {
             controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
         } else {
-            markLabelStopsAtPhase.run();
+            // Read the phase before un-skipping: that push can pass priority and move the game on
             boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            markLabelStopsAtPhase.run();
             controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
-            controller.selectButtonOk();   // Pass current priority so the marker takes effect immediately.
         }
         refreshYieldUi(local);
     }
@@ -913,57 +916,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void notifyStackAddition(GameEventSpellAbilityCast event) {
-    }
-
-    @Override
-    public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
-    }
-
-    @Override
-    public void handleLandPlayed(CardView land) {
-    }
-
-    @Override
-    public void updateStack() { }
-
-    @Override
-    public void updatePhase(boolean saveState) { }
-
-    @Override
-    public void updateTurn(PlayerView player) { }
-
-    @Override
-    public void updatePlayerControl() { }
-
-    @Override
-    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
-
-    @Override
-    public void updateCards(Iterable<CardView> cards) { }
-
-    @Override
-    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) { }
-
-    @Override
-    public void updateLives(Iterable<PlayerView> livesUpdate) { }
-
-    @Override
     public void afterGameEnd() {
+        cancelWaitingTimer();
         if (awaitNextInputTimer != null) {
             awaitNextInputTimer.cancel();
             awaitNextInputTimer = null;
         }
         daytime = null;
-    }
-
-    @Override
-    public void updateDependencies() {
-    }
-
-    @Override
-    public void applyDelta(DeltaPacket packet) {
-        // No-op for local games - network implementation is in NetworkGuiGame
     }
 
 }

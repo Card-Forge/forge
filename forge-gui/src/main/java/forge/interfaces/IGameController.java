@@ -55,8 +55,6 @@ public interface IGameController {
      */
     void requestResync();
 
-    void passPriority();
-
     // Auto-yield preferences
     default boolean shouldAutoYield(String key) {
         return getYieldController().shouldAutoYield(key);

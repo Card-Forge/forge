@@ -1,0 +1,8 @@
+Name:Afterthought Sentry
+ManaCost:2
+Types:Artifact Creature Gargoyle
+PT:2/2
+A:AB$ Pump | Cost$ 2 | KW$ Flying | Defined$ Self | SpellDescription$ This creature gains flying until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever this creature attacks, exile up to one target card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card
+Oracle:{2}: This creature gains flying until end of turn.\nWhenever this creature attacks, exile up to one target card from a graveyard.

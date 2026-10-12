@@ -58,6 +58,8 @@ import java.util.stream.Collectors;
  * @version $Id$
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
+    private static final int MAX_TRIGGER_REPEATS = 50;
+
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
     private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
 
@@ -76,6 +78,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> thisTurnActivated = Lists.newArrayList();
 
     private Card curResolvingCard = null;
+    private final Map<Integer, Integer> triggerRepeats = new HashMap<>();
 
     private final Game game;
 
@@ -103,6 +106,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         thisTurnCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
+        triggerRepeats.clear();
         frozenStack.clear();
         clearUndoStack();
         game.updateStackForView();
@@ -186,56 +190,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return c.equals(curResolvingCard);
     }
 
-    public int getUndoStackSize() {
-        return undoStack.size();
-    }
-
-    public final boolean canUndo(Player player) {
-        return undoStackOwner == player;
-    }
-    public final boolean undo() {
-        if (undoStack.isEmpty()) { return false; }
-
-        SpellAbility sa = undoStack.peek();
-        if (sa.undo()) {
-            clearUndoStack(sa);
-            new ManaRefundService(sa).refundManaPaid();
-        } else {
-            clearUndoStack(sa);
-            for (Mana pay : sa.getPayingMana()) {
-                clearUndoStack(pay.getManaAbility().getSourceSA());
-            }
-        }
-        return true;
-    }
-    public final void clearUndoStack(SpellAbility sa) {
-        if (sa == null) {
-            return;
-        }
-        clearUndoStack(Lists.newArrayList(sa));
-    }
-    private void clearUndoStack(List<SpellAbility> sas) {
-        for (SpellAbility sa : sas) {
-            // reset in case a trigger stopped it on a previous activation
-            sa.setUndoable(true);
-            int idx = undoStack.lastIndexOf(sa);
-            if (idx != -1) {
-                undoStack.remove(idx);
-            }
-        }
-        if (undoStack.isEmpty()) {
-            undoStackOwner = null;
-        }
-    }
-    public final void clearUndoStack() {
-        if (undoStackOwner == null) { return; }
-        clearUndoStack(Lists.newArrayList(undoStack));
-        undoStackOwner = null;
-    }
-    public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
-        return IterableUtil.filter(undoStack, CardTraitPredicates.isHostCard(c));
-    }
-
     public final void add(SpellAbility sp) {
         add(sp, null, SpellAbilityStackInstance.nextId());
     }
@@ -259,7 +213,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         Player activator = sp.getActivatingPlayer();
 
         // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
-        if (game.getStack().size() > 999) {
+        // CR 104.4b the same goes for a mandatory trigger that keeps coming back before the stack clears
+        if (game.getStack().size() > 999 || (si == null && isRepeatingTrigger(sp))) {
             for (Player p : game.getPlayers()) {
                 p.intentionalDraw();
             }
@@ -267,15 +222,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        recordUndoableActions(sp, activator);
+        recordUndoableActions(sp);
 
-        if (sp.isManaAbility()) { // Mana Abilities go straight through
+        // Mana Abilities go straight through
+        if (sp.isManaAbility()) {
             // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
             game.getAction().checkStaticAbilities();
 
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
-                addAbilityActivatedThisTurn(sp, source);
+                addAbilityActivatedThisTurn(sp);
             }
 
             Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -351,7 +307,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
-            addAbilityActivatedThisTurn(sp, source);
+            addAbilityActivatedThisTurn(sp);
         }
 
         // The ability is added to stack HERE
@@ -481,6 +437,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.SourceSA, sp);
             runParams.put(AbilityKey.Targets, distinctObjects);
             runParams.put(AbilityKey.Cause, sp.getHostCard());
+            for (SpellAbility saWalk = sp; saWalk != null; saWalk = saWalk.getSubAbility()) {
+                if (saWalk.usesTargeting() && saWalk.getTargetRestrictions().isRandomTarget() && !saWalk.getTargets().isEmpty()) {
+                    runParams.put(AbilityKey.Random, true);
+                    break;
+                }
+            }
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
 
@@ -494,27 +456,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // This is a bit of a hack that forces the update of externally activatable cards in flashback zone (e.g. Lightning Storm).
             game.getPlayers().forEach(Player::updateFlashbackForView);
         }
-    }
-
-    private void recordUndoableActions(SpellAbility sp, Player activator) {
-        // either push onto or clear undo stack based on whether spell/ability is undoable
-        if (sp.isUndoable()) {
-            if (!canUndo(activator)) {
-                clearUndoStack(); //clear if undo stack owner changes
-                undoStackOwner = activator;
-            }
-            undoStack.push(sp);
-        } else {
-            clearUndoStack();
-        }
-    }
-
-    public final int size() {
-        return stack.size();
-    }
-
-    public final boolean isEmpty() {
-        return stack.isEmpty();
     }
 
     // Push should only be used by add.
@@ -556,6 +497,101 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         game.updateStackForView();
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
+    }
+
+    private boolean isRepeatingTrigger(final SpellAbility sp) {
+        if (!sp.isTrigger()) {
+            // a player did something
+            triggerRepeats.clear();
+        }
+        if (!sp.isMandatory() || sp.usesTargeting()) {
+            return false;
+        }
+        final int id = sp.getSourceTrigger();
+        for (final SpellAbilityStackInstance si : stack) {
+            if (si.isStateTrigger(id)) {
+                return false;
+            }
+        }
+        return triggerRepeats.merge(id, 1, Integer::sum) > MAX_TRIGGER_REPEATS;
+    }
+
+    public final void clearTriggerRepeats() {
+        triggerRepeats.clear();
+    }
+
+    private void recordUndoableActions(SpellAbility sa) {
+        Player activator = sa.getActivatingPlayer();
+        // either push onto or clear undo stack based on whether SA is undoable
+        if (sa.isUndoable()) {
+            if (!canUndo(activator)) {
+                //clear if undo stack owner changes
+                clearUndoStack();
+                undoStackOwner = activator;
+            }
+            undoStack.push(sa);
+        } else {
+            clearUndoStack();
+        }
+    }
+
+    public int getUndoStackSize() {
+        return undoStack.size();
+    }
+
+    public final boolean canUndo(Player player) {
+        return undoStackOwner == player;
+    }
+    public final boolean undo() {
+        if (undoStack.isEmpty()) {
+            return false;
+        }
+
+        SpellAbility sa = undoStack.peek();
+        clearUndoStack(sa);
+        if (sa.undo()) {
+            new ManaRefundService(sa).refundManaPaid();
+        } else {
+            for (Mana pay : sa.getPayingMana()) {
+                clearUndoStack(pay.getManaAbility().getSourceSA());
+            }
+        }
+        return true;
+    }
+    public final void clearUndoStack(SpellAbility sa) {
+        if (sa == null) {
+            return;
+        }
+        clearUndoStack(Lists.newArrayList(sa));
+    }
+    private void clearUndoStack(List<SpellAbility> sas) {
+        for (SpellAbility sa : sas) {
+            // reset in case a trigger stopped it on a previous activation
+            sa.setUndoable(true);
+            int idx = undoStack.lastIndexOf(sa);
+            if (idx != -1) {
+                undoStack.remove(idx);
+            }
+        }
+        if (undoStack.isEmpty()) {
+            undoStackOwner = null;
+        }
+    }
+    public final void clearUndoStack() {
+        if (undoStackOwner == null) { return; }
+        clearUndoStack(Lists.newArrayList(undoStack));
+        undoStackOwner = null;
+    }
+    public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
+        return IterableUtil.filter(undoStack, CardTraitPredicates.isHostCard(c));
+    }
+
+    public final int size() {
+        return stack.size();
+    }
+
+    public final boolean isEmpty() {
+        return stack.isEmpty();
     }
 
     public final void resolveStack() {
@@ -944,11 +980,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.updateStackForView();
     }
 
-    public void addAbilityActivatedThisTurn(SpellAbility sa, final Card source) {
+    public void addAbilityActivatedThisTurn(SpellAbility sa) {
+        Card source = sa.getHostCard();
         source.addAbilityActivated(sa);
         thisTurnActivated.add(sa.copy(CardCopyService.getLKICopy(source), true));
     }
-
     public List<SpellAbility> getAbilityActivatedThisTurn() {
         return thisTurnActivated;
     }

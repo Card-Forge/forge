@@ -4,7 +4,7 @@ Types:Creature Vedalken Mutant
 PT:0/5
 K:Flying
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each transformed permanent you control.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each transformed permanent you control.
 SVar:X:Count$Valid Permanent.Transformed+YouCtrl
 AI:RemoveDeck:Random
 Oracle:Flying, vigilance\nMutagen Connoisseur gets +1/+0 for each transformed permanent you control.

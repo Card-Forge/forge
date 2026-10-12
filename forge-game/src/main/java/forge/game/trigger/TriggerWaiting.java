@@ -16,6 +16,8 @@ public class TriggerWaiting {
     private TriggerType mode;
     private Map<AbilityKey, Object> params;
     private Map<Trigger, Player> triggers;
+    // only the ones that trigger additional times
+    private Map<Trigger, Integer> additionalTriggers;
 
     public TriggerWaiting(TriggerType m, Map<AbilityKey, Object> p) {
         mode = m;
@@ -50,6 +52,27 @@ public class TriggerWaiting {
             return null;
         }
         return triggers.get(t);
+    }
+
+    /**
+     * How many additional times the trigger triggers (e.g. because of Panharmonicon).
+     * Like the controller this is determined when the triggers are collected,
+     * because it must not be affected by anything that happens before they are put on the stack
+     */
+    public int getAdditionalTriggers(Trigger t) {
+        if (additionalTriggers == null) {
+            return 0;
+        }
+        return additionalTriggers.getOrDefault(t, 0);
+    }
+
+    public void setAdditionalTriggers(Trigger t, int amount) {
+        if (amount > 0) {
+            if (additionalTriggers == null) {
+                additionalTriggers = Maps.newHashMap();
+            }
+            additionalTriggers.put(t, amount);
+        }
     }
 
     @Override

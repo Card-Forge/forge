@@ -1,0 +1,10 @@
+Name:Tether Technician
+ManaCost:4 R
+Types:Creature Minotaur Artificer
+PT:4/5
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature enters, you may discard a card. When you do, this creature deals 2 damage to any target.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Discard<1/Card> | Execute$ TrigDamage | TriggerDescription$ When you do, this creature deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+DeckHas:Ability$Discard
+Oracle:Reach\nWhen this creature enters, you may discard a card. When you do, this creature deals 2 damage to any target.

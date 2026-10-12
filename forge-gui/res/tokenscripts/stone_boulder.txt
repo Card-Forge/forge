@@ -1,0 +1,6 @@
+Name:Stone Boulder
+ManaCost:no cost
+Types:Artifact Creature Wall
+PT:3/1
+K:Defender
+Oracle:Defender

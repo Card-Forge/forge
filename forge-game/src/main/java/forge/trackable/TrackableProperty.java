@@ -87,7 +87,6 @@ public enum TrackableProperty {
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringListType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
-    MayPlayPlayers(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
     EntityAttachedTo(TrackableTypes.GameEntityViewType),
     EncodedCards(TrackableTypes.CardViewCollectionType),
     UntilLeavesBattlefield(TrackableTypes.CardViewCollectionType),
@@ -96,7 +95,6 @@ public enum TrackableProperty {
     ExiledWith(TrackableTypes.CardViewType),
     PreparedSpell(TrackableTypes.CardViewType),
     WasDestroyed(TrackableTypes.BooleanType),
-    CrackOverlay(TrackableTypes.IntegerType),
     NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
@@ -199,6 +197,8 @@ public enum TrackableProperty {
     AttractionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     ContraptionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Junkyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    StickerSheets(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Stickers(TrackableTypes.StringType),
 
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
 
@@ -215,10 +215,6 @@ public enum TrackableProperty {
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
     SA_IsSpell(TrackableTypes.BooleanType),
-
-    //HasBackSide
-    BackSideName(TrackableTypes.StringType),
-    HasBackSide(TrackableTypes.BooleanType),
 
     //StackItem
     Key(TrackableTypes.StringType),
@@ -258,6 +254,7 @@ public enum TrackableProperty {
     PoisonCountersToLose(TrackableTypes.IntegerType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
     Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
+    Object(TrackableTypes.ObjectType, FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);
 
     public enum FreezeMode {

@@ -37,6 +37,7 @@ public enum StaticAbilityMode {
     CantBlockBy,
     CanAttackIfHaste,
     CanBlockIfReach,
+    CanBlockIfShadow,
     MinMaxBlocker,
     BlockTapped,
     AttackVigilance,
@@ -52,6 +53,7 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCombatDamageToughness
     CombatDamageToughness,
+    CombatDamageNegatePower,
 
     // StaticAbilityColorlessDamageSource
     ColorlessDamageSource,
@@ -89,11 +91,17 @@ public enum StaticAbilityMode {
     // StaticAbilityCantBeCopied
     CantBeCopied,
 
+    // StaticAbilityCantBeBeamedUp
+    CantBeBeamedUp,
+
     // StaticAbilityCantBeSuspected
     CantBeSuspected,
 
     // StaticAbilityCantBecomeMonarch
     CantBecomeMonarch,
+
+    // StaticAbilityCantGainControl
+    CantGainControl,
 
     // StaticAbilityCantAttach
     CantAttach,
@@ -103,6 +111,9 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCantDraw
     CantDraw,
+
+    // StaticAbilityDrawFromBottom
+    DrawFromBottom,
 
     // StaticAbilityCantDiscard
     CantDiscard,
@@ -148,6 +159,7 @@ public enum StaticAbilityMode {
     IgnoreLandwalk,
     // StaticAbilityIgnoreLegendRule
     IgnoreLegendRule,
+    IgnorePlaneswalkerZeroLoyaltyRule,
 
     // StaticAbilityMaxCounter
     MaxCounter,
@@ -200,6 +212,9 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCountersRemain
     CountersRemain,
+
+    // StaticAbilityManaRestriction
+    ManaRestriction,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

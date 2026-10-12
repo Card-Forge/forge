@@ -3,7 +3,7 @@ ManaCost:RW G
 Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted land has shroud. (It can't be the target of spells or abilities.)
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Land | AddKeyword$ Shroud | Description$ Enchanted land has shroud. (It can't be the target of spells or abilities.)
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Any | Defined$ TriggeredCardController
 AI:RemoveDeck:All

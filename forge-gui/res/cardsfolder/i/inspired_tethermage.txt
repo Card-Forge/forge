@@ -1,0 +1,8 @@
+Name:Inspired Tethermage
+ManaCost:2 G
+Types:Creature Elf Warrior
+PT:3/2
+T:Mode$ CounterAddedOnce | ValidCard$ Planeswalker | ValidSource$ You | CounterType$ LOYALTY | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Empower | Cost$ 6 | Type$ Jace | Num$ 2 | SpellDescription$ Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+Oracle:Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature.\n{6}: Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

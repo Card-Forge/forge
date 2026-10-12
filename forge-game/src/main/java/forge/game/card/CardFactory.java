@@ -144,7 +144,7 @@ public class CardFactory {
         }
 
         copySA.setCopied(true);
-        // 707.10b
+        // CR 707.10b
         if (targetSA.isAbility()) {
             copySA.setOriginalAbility(targetSA);
         }

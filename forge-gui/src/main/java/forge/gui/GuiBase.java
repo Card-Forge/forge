@@ -29,6 +29,9 @@ public class GuiBase {
     public static void setIsIOS(boolean value) { isIOSport = value; }
     public static boolean isIOS() { return isIOSport; }
 
+    /** @return true on mobile ports (Android or iOS), false on desktop. */
+    public static boolean isMobile() { return isAndroidport || isIOSport; }
+
     public static void setAdventureDirectory(String directory) { adventureDirectory = directory; }
     public static String getAdventureDirectory() { return adventureDirectory; }
 

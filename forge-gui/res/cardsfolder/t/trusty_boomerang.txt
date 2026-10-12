@@ -1,7 +1,7 @@
 Name:Trusty Boomerang
 ManaCost:1
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ BoomerangTap | Description$ Equipped creature has "{1}, {T}: Tap target creature. Return CARDNAME to its owner's hand."
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddAbility$ BoomerangTap | Description$ Equipped creature has "{1}, {T}: Tap target creature. Return CARDNAME to its owner's hand."
 SVar:BoomerangTap:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature | SubAbility$ DBChangeZone | SpellDescription$ Tap target creature. Return ORIGINALHOST to its owner's hand.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ OriginalHost | Origin$ Battlefield | Destination$ Hand
 K:Equip:1

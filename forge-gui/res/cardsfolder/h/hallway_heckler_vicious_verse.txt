@@ -1,0 +1,17 @@
+Name:Hallway Heckler
+ManaCost:2 R
+Types:Creature Elemental Sorcerer
+PT:2/3
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+A:AB$ Draw | Cost$ T Discard<1/Card> | SpellDescription$ Draw a card.
+AlternateMode:Prepare
+Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\n{T}, Discard a card: Draw a card.
+
+ALTERNATE
+
+Name:Vicious Verse
+ManaCost:BR
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent.
+Oracle:Vicious Verse deals 1 damage to target opponent.

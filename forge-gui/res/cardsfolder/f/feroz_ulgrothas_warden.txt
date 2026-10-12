@@ -1,0 +1,11 @@
+Name:Feroz, Ulgrotha's Warden
+ManaCost:3 G W U
+Types:Legendary Planeswalker Feroz
+Loyalty:5
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ u_1_1_bird_flying | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 1/1 blue Bird creature tokens with flying.
+A:AB$ Draw | Cost$ SubCounter<0/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card. You may put a permanent card with mana value 4 or less from your hand onto the battlefield.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.cmcLE4 | ChangeNum$ 1
+A:AB$ CopyPermanent | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | DefinedName$ Feroz's Ban | SpellDescription$ Create a Feroz's Ban token. (It's a {6} artifact with "Creature spells cost {2} more to cast.")
+Text:CARDNAME can be your commander.
+DeckHas:Ability$Token
+Oracle:[+2]: Create two 1/1 blue Bird creature tokens with flying.\n[0]: Draw a card. You may put a permanent card with mana value 4 or less from your hand onto the battlefield.\n[-7]: Create a Feroz's Ban token. (It's a {6} artifact with "Creature spells cost {2} more to cast.")\nFeroz, Ulgrotha's Warden can be your commander.

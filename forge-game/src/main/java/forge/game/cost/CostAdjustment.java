@@ -352,6 +352,10 @@ public class CostAdjustment {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.CREATURES);
         }
 
+        if (untappedCards.isEmpty()) {
+            return;
+        }
+
         Map<Card, ManaCostShard> convokedCards = payer.getController().chooseCardsForConvokeOrImprovise(sa,
                 cost.toManaCost(), untappedCards, artifacts, creatures, maxReduction);
 

@@ -1,0 +1,17 @@
+Name:Raiders' Allegiance
+ManaCost:no cost
+Types:Plane Ixalan
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigRaid | TriggerDescription$ Raid — At the beginning of your second main phase, for each player dealt combat damage this turn, you get a point counter and create a 2/2 black Pirate creature token with menace.
+SVar:TrigRaid:DB$ PutCounter | Defined$ You | CounterType$ POINT | CounterNum$ X | SubAbility$ DBRaidToken
+SVar:DBRaidToken:DB$ Token | TokenScript$ b_2_2_pirate_menace | TokenOwner$ You | TokenAmount$ X
+SVar:X:PlayerCountPlayers$HasPropertywasDealtCombatDamageThisTurn
+T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ TrigPayout | TriggerDescription$ Whenever you planeswalk away from CARDNAME, each player with the most point counters or tied for the most point counters creates three Treasure tokens and draws three cards. Then remove all point counters from each player.
+SVar:TrigPayout:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ Player.ConditionGEMaxPoints Counters.POINT | TokenAmount$ 3 | SubAbility$ DBPayoutDraw
+SVar:DBPayoutDraw:DB$ Draw | Defined$ Player.ConditionGEMaxPoints Counters.POINT | NumCards$ 3 | SubAbility$ DBRemoveAllPoints
+SVar:DBRemoveAllPoints:DB$ RemoveCounter | Defined$ Player | CounterType$ POINT | CounterNum$ All
+SVar:MaxPoints:PlayerCountPlayers$HighestCounters.POINT
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigProliferate | TriggerDescription$ Whenever Chaos ensues, proliferate for each Pirate you control.
+SVar:TrigProliferate:DB$ Proliferate | Amount$ NumPirates
+SVar:NumPirates:Count$Valid Pirate.YouCtrl
+SVar:AIRollPlanarDieParams:Mode$ Always
+Oracle:Raid — At the beginning of your second main phase, for each player dealt combat damage this turn, you get a point counter and create a 2/2 black Pirate creature token with menace.\nWhenever you planeswalk away from Raiders' Allegiance, each player with the most point counters or tied for the most point counters creates three Treasure tokens and draws three cards. Then remove all point counters from each player.\nWhenever Chaos ensues, proliferate for each Pirate you control.

@@ -1,0 +1,10 @@
+Name:Dwalin, Weaponmaster
+ManaCost:1 RW
+Types:Legendary Creature Dwarf Warrior
+PT:2/1
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME enters or attacks, put a hone counter on each Equipment you control. (Each hone counter on an Equipment grants +1/+0 to equipped creature.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, put a hone counter on each Equipment you control. (Each hone counter on an Equipment grants +1/+0 to equipped creature.)
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Equipment.YouCtrl | CounterType$ HONE | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:First strike\nWhenever Dwalin enters or attacks, put a hone counter on each Equipment you control. (Each hone counter on an Equipment grants +1/+0 to equipped creature.)

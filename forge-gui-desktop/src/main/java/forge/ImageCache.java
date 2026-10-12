@@ -81,7 +81,7 @@ public class ImageCache {
 
     private static final Set<String> _missingIconKeys = new HashSet<>();
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder()
-            .maximumSize(FModel.getPreferences().getPrefInt((FPref.UI_IMAGE_CACHE_MAXIMUM)))
+            .maximumSize(FModel.getPreferences().getPrefInt(FPref.UI_IMAGE_CACHE_MAXIMUM))
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .build(new ImageLoader());
     private static final BufferedImage _defaultImage;

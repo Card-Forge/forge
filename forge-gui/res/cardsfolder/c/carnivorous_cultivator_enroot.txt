@@ -1,0 +1,20 @@
+Name:Carnivorous Cultivator
+ManaCost:1 G
+Types:Creature Elf Warlock
+PT:2/3
+K:Deathtouch
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigReturn | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, return target land card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Land.YouOwn | ValidTgtsDesc$ land card in your graveyard | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Graveyard
+AlternateMode:Prepare
+Oracle:Deathtouch\nThis creature enters prepared.\nWhenever this creature deals combat damage to a player, return target land card from your graveyard to your hand.
+
+ALTERNATE
+
+Name:Enroot
+ManaCost:G
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put it into your graveyard, then shuffle.
+Oracle:Search your library for a land card, put it into your graveyard, then shuffle.

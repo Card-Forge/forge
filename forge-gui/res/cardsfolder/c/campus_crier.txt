@@ -1,0 +1,6 @@
+Name:Campus Crier
+ManaCost:1 W
+Types:Creature Human Advisor
+PT:3/1
+A:AB$ Empower | Cost$ 1 ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | Type$ Jace | Num$ 2
+Oracle:{1}, Exile this card from your graveyard: Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and ["-3]: Draw a card.")

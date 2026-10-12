@@ -56,3 +56,6 @@ ScryfallCode=SCH
 48 R Unearth @Ron Spencer
 49 R Psychic Frog @Gaboleps
 50 R Abhorrent Oculus @Diana Franco
+51 R Thought Scour @Eli Minaya
+52 R Mastermind's Acquisition @Sam Guay
+53 M Jace Reawakened @Billy Christian

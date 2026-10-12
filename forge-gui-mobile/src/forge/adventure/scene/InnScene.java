@@ -145,8 +145,9 @@ public class InnScene extends UIScene {
     }
 
     private void sell() {
-        ShopScene.instance().loadChanges(changes);
-        Forge.switchScene(ShopScene.instance());
+        ShopScene scene = ShopScene.instance(getUIBackground());
+        scene.loadChanges(changes);
+        Forge.switchScene(scene);
     }
 
     private static void initLocalEvent() {

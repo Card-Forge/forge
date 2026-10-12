@@ -23,6 +23,11 @@ import java.util.stream.Collectors;
 
 public class ConniveEffect extends SpellAbilityEffect {
 
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      * returns the automatically generated stack description string
@@ -91,7 +96,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                     // if the card is not in the game anymore, this might still return true, but it's no problem
                     if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
                         int numCntrs = CardLists.count(toBeDiscarded, CardPredicates.NON_LANDS);
-                        conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
+                        gamec.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                     }
 
                     moveParams = AbilityKey.newMap();

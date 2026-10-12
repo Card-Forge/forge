@@ -1,0 +1,10 @@
+Name:Hapatra, the Desert Frost
+ManaCost:3 U
+Types:Legendary Creature Human Wizard
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When NICKNAME enters, for each opponent, tap up to one target creature that player controls. Put a stun counter on each of those creatures. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ STUN | CounterNum$ 1
+A:AB$ Untap | Cost$ 2 U | ValidTgts$ Creature | SpellDescription$ Untap target creature.
+SVar:OneEach:PlayerCountOpponents$Amount
+Oracle:When Hapatra enters, for each opponent, tap up to one target creature that player controls. Put a stun counter on each of those creatures. (If a permanent with a stun counter would become untapped, remove one from it instead.)\n{2}{U}: Untap target creature.

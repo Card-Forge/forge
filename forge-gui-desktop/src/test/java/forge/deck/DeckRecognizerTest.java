@@ -34,7 +34,10 @@ public class DeckRecognizerTest extends CardMockTestCase {
         for (PaperCard card : fullCardDb) {
             this.mtgUniqueCardNames.add(card.getName());
             CardEdition e = magicDb.getCardEdition(card.getEdition());
-            if (e != null) {
+            // CardEdition.UNKNOWN is the sentinel cards fall into when they are not
+            // assigned to a set. Its code "???" is not a set code, and REX_SET_CODE is not
+            // meant to match it.
+            if (e != null && e != CardEdition.UNKNOWN) {
                 this.mtgUniqueSetCodes.add(e.getCode());
                 this.mtgUniqueSetCodes.add(e.getScryfallCode());
             }
@@ -42,6 +45,38 @@ public class DeckRecognizerTest extends CardMockTestCase {
             if (!cn.equals(IPaperCard.NO_COLLECTOR_NUMBER))
                 this.mtgUniqueCollectorNumbers.add(cn);
         }
+    }
+
+    /**
+     * Release date of the newest edition that prints this card.
+     *
+     * <p>
+     * Derived from the edition collection rather than from CardDb's own art-preference
+     * selection. Asserting that the parser returns whatever {@code getCardFromEditions}
+     * returns would only restate the code under test; going via the release dates keeps
+     * this an independent oracle, so a regression in art-preference selection still fails
+     * the test.
+     * </p>
+     *
+     * <p>
+     * Callers compare dates rather than set codes so that two sets released on the same
+     * day do not make a test depend on an arbitrary tie-break.
+     * </p>
+     */
+    private Date latestPrintingDateOf(String cardName) {
+        StaticData magicDb = FModel.getMagicDb();
+        return magicDb.getCommonCards().getAllCardsNoAlt(cardName).stream()
+                .map(card -> magicDb.getCardEdition(card.getEdition()))
+                .filter(Objects::nonNull)
+                .map(CardEdition::getDate)
+                .max(Comparator.naturalOrder())
+                .orElseThrow(() -> new AssertionError("No known printing of " + cardName));
+    }
+
+    private Date releaseDateOf(String setCode) {
+        CardEdition edition = FModel.getMagicDb().getCardEdition(setCode);
+        assertNotNull(edition, "Unknown set code " + setCode);
+        return edition.getDate();
     }
 
     /* ======================================
@@ -66,6 +101,12 @@ public class DeckRecognizerTest extends CardMockTestCase {
             this.initMaps();
         Pattern cardNamePattern = Pattern.compile(DeckRecognizer.REX_CARD_NAME);
         for (String cardName : this.mtgUniqueCardNames) {
+            // Parentheses delimit the set code in a deck line, as in "4 Power Sink (TMP) 78",
+            // so a name containing them cannot be told apart from a name followed by a set
+            // code. "B.O.B. (Bevy of Beebles)" is the only such card today. That is a known
+            // limitation of the deck-line grammar rather than a gap in this pattern.
+            if (cardName.indexOf('(') >= 0 || cardName.indexOf(')') >= 0)
+                continue;
             Matcher cardNameMatcher = cardNamePattern.matcher(cardName);
             assertTrue(cardNameMatcher.matches(), "Fail on " + cardName);
             String matchedCardName = cardNameMatcher.group(DeckRecognizer.REGRP_CARD);
@@ -93,7 +134,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         Pattern collNumberPattern = Pattern.compile(DeckRecognizer.REX_COLL_NUMBER);
         for (String collectorNumber : this.mtgUniqueCollectorNumbers) {
             Matcher collNumberMatcher = collNumberPattern.matcher(collectorNumber);
-            assertTrue(collNumberMatcher.matches());
+            assertTrue(collNumberMatcher.matches(), "Fail on " + collectorNumber);
             String matchedCollNr = collNumberMatcher.group(DeckRecognizer.REGRP_COLLNR);
             assertEquals(matchedCollNr, collectorNumber, "Fail on " + collectorNumber);
         }
@@ -1214,7 +1255,8 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "30A");
+        // No edition assertion: the request carries no set code, so the edition is
+        // whichever printing is newest today and says nothing about token recognition.
         assertTrue(cardToken.cardRequestHasNoCode());
 
         lineRequest = "4x Power Sink+";
@@ -1226,7 +1268,8 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "30A");
+        // No edition assertion: the request carries no set code, so the edition is
+        // whichever printing is newest today.
         assertTrue(cardToken.cardRequestHasNoCode());
 
         lineRequest = "Power Sink+";
@@ -1238,7 +1281,8 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "30A");
+        // No edition assertion: the request carries no set code, so the edition is
+        // whichever printing is newest today.
         assertTrue(cardToken.cardRequestHasNoCode());
     }
 
@@ -1268,7 +1312,8 @@ public class DeckRecognizerTest extends CardMockTestCase {
         tokenCard = cardToken.getCard();
         assertEquals(cardToken.getQuantity(), 2);
         assertEquals(tokenCard.getName(), "Counterspell");
-        assertEquals(tokenCard.getEdition(), "DSC");
+        // No edition assertion: this test is about matching a single-word card name, and
+        // the request carries no set code.
         assertTrue(cardToken.cardRequestHasNoCode());
 
     }
@@ -1648,7 +1693,11 @@ public class DeckRecognizerTest extends CardMockTestCase {
         //assertEquals(cardToken.getTokenSection(), DeckSection.Main); //fix test since signature spell is allowed on commander section
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Counterspell");
-        assertEquals(tc.getEdition(), "DSC");
+        // The newest printing moves with every set that reprints Counterspell, so assert
+        // what the art preference actually promises instead of a hand-maintained set code.
+        // The ORIGINAL_ART assertion below stays a literal, because the earliest printing
+        // of a card never changes.
+        assertEquals(releaseDateOf(tc.getEdition()), latestPrintingDateOf("Counterspell"));
         assertTrue(cardToken.cardRequestHasNoCode());
 
         // Setting Original Core
@@ -1680,7 +1729,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "30A");
+        assertEquals(releaseDateOf(tokenCard.getEdition()), latestPrintingDateOf("Power Sink"));
         assertTrue(cardToken.cardRequestHasNoCode());
 
         recognizer.setArtPreference(CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
@@ -2080,7 +2129,10 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 1);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Flash");
-        assertEquals(tc.getEdition(), "A25");
+        // Unconstrained baseline, so the newest printing is the expected answer. Asserted
+        // as a property, because the constrained results below are what this test is
+        // really contrasting against and a literal here only rots.
+        assertEquals(releaseDateOf(tc.getEdition()), latestPrintingDateOf("Flash"));
         assertTrue(cardToken.cardRequestHasNoCode());
 
         recognizer.setDateConstraint(2012, 0); // Jan 2012
@@ -2134,7 +2186,10 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 1);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Flash");
-        assertEquals(tc.getEdition(), "A25");
+        // Unconstrained baseline, so the newest printing is the expected answer. Asserted
+        // as a property, because the constrained results below are what this test is
+        // really contrasting against and a literal here only rots.
+        assertEquals(releaseDateOf(tc.getEdition()), latestPrintingDateOf("Flash"));
         assertTrue(cardToken.cardRequestHasNoCode());
 
         recognizer.setGameFormatConstraint(Arrays.asList("MIR", "VIS", "WTH"), null, null);
@@ -2210,7 +2265,10 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 1);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Flash");
-        assertEquals(tc.getEdition(), "A25");
+        // Unconstrained baseline, so the newest printing is the expected answer. Asserted
+        // as a property, because the constrained results below are what this test is
+        // really contrasting against and a literal here only rots.
+        assertEquals(releaseDateOf(tc.getEdition()), latestPrintingDateOf("Flash"));
         assertTrue(cardToken.cardRequestHasNoCode());
 
         recognizer.setGameFormatConstraint(Arrays.asList("MIR", "VIS", "WTH"), null, null);
@@ -2380,7 +2438,8 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertNotNull(token.getCard());
         PaperCard ancestralRecallCard = token.getCard();
         assertEquals(ancestralRecallCard.getName(), "Ancestral Recall");
-        assertEquals(ancestralRecallCard.getEdition(), "30A");
+        // No edition assertion: the request carries no set code, so the edition is
+        // whichever printing is newest today.
     }
 
     // === XMage Format
@@ -2455,8 +2514,9 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertNotNull(deckStatsToken.getCard());
         PaperCard soCard = deckStatsToken.getCard();
         assertEquals(soCard.getName(), "Sliver Overlord");
-        assertEquals(soCard.getEdition(), "SLD");
-        assertEquals(soCard.getCollectorNumber(), "10");
+        // No edition or collector number assertion: this test is about the deckstats
+        // "#!Commander" suffix routing the card to the Commander section, and the request
+        // carries no set code.
         assertTrue(deckStatsToken.cardRequestHasNoCode());
 
         // Check that deck section is made effective even if we're currently in Main

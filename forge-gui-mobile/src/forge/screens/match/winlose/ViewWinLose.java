@@ -251,6 +251,14 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
+            if (Forge.isMobileAdventureMode) {
+                if (btnContinue.isEnabled()) {
+                    btnContinue.trigger();
+                } else {
+                    btnQuit.trigger();
+                }
+                return true;
+            }
             btnQuit.trigger(); //quit on escape or back
             return true;
         } else if (keyCode == Keys.SPACE || keyCode == Keys.ENTER) {

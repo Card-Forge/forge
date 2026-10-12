@@ -1,0 +1,10 @@
+Name:Teyo, Lightshield Expert
+ManaCost:1 W
+Types:Legendary Creature Human Cleric
+PT:1/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When NICKNAME enters, target permanent you control gains hexproof until end of turn. Put a +1/+1 counter on it if it's a creature. Put a loyalty counter on it if it's a planeswalker.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.YouCtrl | ValidTgtsDesc$ permanent you control | KW$ Hexproof | SubAbility$ DBPutCounterP1P1
+SVar:DBPutCounterP1P1:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature | SubAbility$ DBPutCounterLoyalty
+SVar:DBPutCounterLoyalty:DB$ PutCounter | Defined$ Targeted | CounterType$ LOYALTY | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker
+Oracle:Flash\nWhen Teyo enters, target permanent you control gains hexproof until end of turn. Put a +1/+1 counter on it if it's a creature. Put a loyalty counter on it if it's a planeswalker.

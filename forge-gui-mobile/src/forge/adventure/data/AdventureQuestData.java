@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.GameScene;
@@ -35,8 +36,6 @@ public class AdventureQuestData implements Serializable {
     public String synopsis =""; //Intended for Dev Mode only at most
     public transient boolean completed = false;
     public transient boolean failed = false;
-    private transient boolean prologueDisplayed = false;
-    private transient boolean epilogueDisplayed = false;
 
     public DialogData offerDialog;
     public DialogData prologue;
@@ -107,7 +106,7 @@ public class AdventureQuestData implements Serializable {
     public AdventureQuestData()
     {
         declinedDialog = new DialogData();
-        declinedDialog.text = "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.";
+        declinedDialog.text = Forge.getLocalizer().getMessage("advDefaultDeclinedDialog");
         DialogData dismiss = new DialogData();
         dismiss.name = "(Catching the not so subtle hint, you leave.)";
         declinedDialog.options = new DialogData[1];
@@ -412,16 +411,16 @@ public class AdventureQuestData implements Serializable {
     }
 
     public DialogData getPrologue() {
-        if (!prologueDisplayed) {
-            prologueDisplayed = true;
+        if (prologue != null && !prologue.isDisplayed()) {
+            prologue.markDisplayed();
             return prologue;
         }
         return null;
     }
 
     public DialogData getEpilogue() {
-        if (!epilogueDisplayed) {
-            epilogueDisplayed = true;
+        if (epilogue != null && !epilogue.isDisplayed()) {
+            epilogue.markDisplayed();
             return epilogue;
         }
         return null;

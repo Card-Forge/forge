@@ -6,7 +6,7 @@ K:Menace
 K:Toxic:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create three 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."
 SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ NICKNAME gets +1/+1 for each poison counter your opponents have.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ NICKNAME gets +1/+1 for each poison counter your opponents have.
 SVar:X:Count$TotalOppPoisonCounters
 AI:RemoveDeck:Random
 DeckHas:Ability$Token & Type$Mite|Artifact
