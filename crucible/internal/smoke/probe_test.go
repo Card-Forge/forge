@@ -61,6 +61,15 @@ func TestProbeClassifiesCards(t *testing.T) {
 		{"Assassinate", smoke.Plays},
 		{"Armed Response", smoke.Plays},
 		{"Abhorrent Oculus", smoke.Plays},
+		// 12 generic exceeds the old pool of ten of one colour; Autochthon
+		// Wurm needs the pool to hold enough for convoke-sized costs too.
+		{"Blightsteel Colossus", smoke.Plays},
+		{"Autochthon Wurm", smoke.Plays},
+		// ValidTgts$ no generic board satisfies: the probe places a card that
+		// the spec accepts, or casts one for a TargetType$ Spell target.
+		{"Clear a Path", smoke.Plays},
+		{"Celestial Purge", smoke.Plays},
+		{"Annul", smoke.Plays},
 		// Command-zone types are placed, not cast; a sticker sheet is refused.
 		{"Akoum", smoke.Placed},
 		{"Backup Plan", smoke.Placed},
@@ -123,5 +132,27 @@ func TestProbeOnNoDatabaseRefuses(t *testing.T) {
 
 	if got := smoke.NewProber(nil).Probe("Lightning Bolt"); got.Outcome != smoke.Refused {
 		t.Errorf("Probe on a nil database = %v, want refused", got.Outcome)
+	}
+}
+
+// The tailored board places a target in the zone the spell names (exile, hand,
+// graveyard), not only on the battlefield. The engine's own answer for these
+// cards is not what is tested: whatever it is, the probe must reach it without
+// a panic or a hang.
+func TestProbeTailorsTargetsInEveryZone(t *testing.T) {
+	t.Parallel()
+
+	p := smoke.NewProber(corpusDB(t))
+	for _, card := range []string{
+		"Runic Repetition", "Pull from Eternity", "Ruthless Negotiation", "Never Happened", "Regenesis", "Release to Memory",
+	} {
+		t.Run(card, func(t *testing.T) {
+			t.Parallel()
+
+			got := p.Probe(card)
+			if got.Outcome == smoke.Panicked || got.Outcome == smoke.Hung {
+				t.Errorf("Probe(%q) = %v (%s: %s)", card, got.Outcome, got.Stage, got.Detail)
+			}
+		})
 	}
 }

@@ -34,7 +34,7 @@ param counts once however many cards carry it. That table, ordered by cards bloc
 
 **An upper bound.** "Plays" is the absence of a loud refusal. The probe cannot see what the engine does silently wrong
 (the silent GO-7 gaps listed in `game-state.md`), what a card does on a board other than the fixed one, or a card whose
-ability needs a situation (a combat, a graveyard of a given shape) the three turns never create. 401 cards are
+ability needs a situation (a combat, a graveyard of a given shape) the three turns never create. 303 cards are
 inconclusive and are left out of the percentage, as are the `placed` ones.
 
 Controller policy is part of the measure: the first legal option, the smallest sensible count, attack with everything,
@@ -43,20 +43,20 @@ Pain's Reward, Dance with Calamity) answered yes forever loops by the controller
 
 ## Results
 
-Measured at the commit that added the probe, on the full corpus (34,078 cards):
+Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 28,667 |
-| refused      |  4,654 |
+| plays        | 28,739 |
+| refused      |  4,680 |
 | panicked     |      0 |
 | hung         |      0 |
 | placed       |    356 |
-| inconclusive |    401 |
+| inconclusive |    303 |
 
-86.0% of the 33,321 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+86.0% of the 33,419 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.7% of 8,596 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.7% of 8,616 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
@@ -91,9 +91,12 @@ LandPlayed are gone).
 
 - The gauntlet itself: no decklists, so no "cards of the gauntlet that play" figure. `-decks gauntlets/modern` takes the
   real list when it exists.
-- The 401 inconclusive cards each need something the variants lack: an additional cost the board cannot pay, an X spell
-  whose targets scale with X, an Aura enchanting a card in a graveyard (Animate Dead), a creature dealt damage this
-  turn. Another variant per group costs more than it measures; the groups are open plan R25.
+- The 303 inconclusive cards. Past the variants (plain board, a spell on the stack, the rich board, combat) the probe
+  builds a tailored one: for each `ValidTgts$` alternative the card names it places a corpus card the spec accepts
+  (`internal/smoke/tailor.go`, fewest abilities first; judged with the card in hand, so a spec that reads game state
+  finds none), or casts one for `TargetType$ Spell`. What remains is engine work that fails silently today, grouped in
+  open plan R25. The probe's mana pool holds 20 of each colour: the controller pays generic mana with the colour
+  floating most, so a cost of twelve generic needs twelve of one.
 - Command-zone cards are counted as `placed`, which proves nothing about their one-shot abilities. A sticker sheet is
   refused by the probe itself (open plan R15), not by the engine, and that line goes when stickers are ported.
 - The replay-parity harness (ADR-0010 L3): `RecordingPlayerController` over the 110 `PlayerController` methods in

@@ -61,6 +61,7 @@ type Result struct {
 type Prober struct {
 	db       *compile.DB
 	registry *engine.Registry
+	tailor   tailor
 }
 
 // NewProber returns a Prober over db, which must also hold the token
@@ -97,6 +98,9 @@ type variant struct {
 	// combat sends the probe player's creatures into an attack that the
 	// opponent blocks, and casts the card in the declare blockers step.
 	combat bool
+	// tailor adds, for each ValidTgts$ the card names, a corpus card that
+	// accepts it (tailor.go).
+	tailor bool
 }
 
 // variants is tried in order for a card the previous ones could not cast: the
@@ -109,6 +113,8 @@ var variants = [...]variant{
 	{rich: true, opposing: bolt},
 	{rich: true, opposing: bears},
 	{rich: true, combat: true},
+	{tailor: true},
+	{rich: true, tailor: true},
 }
 
 // ProbeWithin is Probe with a time limit. A probe that outlives it is reported
@@ -193,12 +199,15 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 			p.addRich(g, who)
 		}
 	}
+	if v.tailor {
+		p.addTailored(g, pid, opp, def)
+	}
 	fill := func() {
 		pool := &g.Player(pid).ManaPool
 		for _, c := range [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green} {
-			pool.Add(c, 10)
+			pool.Add(c, 20)
 		}
-		pool.AddColorless(10)
+		pool.AddColorless(20)
 	}
 	fill()
 
@@ -221,6 +230,9 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 			res.Outcome, res.Detail = Inconclusive, "the opposing spell could not be cast"
 			return res
 		}
+	}
+	if v.tailor {
+		p.stackTailored(g, pid, def, ctl)
 	}
 	if v.combat && !p.startCombat(g, ctl, pid) {
 		res.Outcome, res.Detail = Inconclusive, "no combat could be set up"

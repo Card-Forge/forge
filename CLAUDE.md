@@ -211,7 +211,7 @@ M6 in progress: 190 of the corpus's 203 script-driven `Effect` APIs resolve (`Ne
 `Bond`, `Encode`, `InternalLegendaryRule`/`InternalRadiation`, ... have zero real `AB$`/`SP$`/`DB$` lines under that
 exact name and never surface in `unported-apis.sh`'s corpus-driven listing at all. `ChangeText` and `ExchangeTextBox`
 resolve through Layer 3 word substitution (ADR-0039). `crucible card-smoke -all` measures how many cards play: 86.0% of
-33,321 judged, an upper bound; the refusal causes it groups are the backlog.
+33,419 judged, an upper bound; the refusal causes it groups are the backlog.
 
 Thin or missing: a granted static's Layer 4/5 effects; attack costs; stickers; graveyard-zone ETB and dies watchers;
 `RollDice`'s `DicePTExchanges`; the long tail of single-card shapes. Everything left, easiest first:

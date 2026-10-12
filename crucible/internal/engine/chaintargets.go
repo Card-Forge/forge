@@ -19,6 +19,10 @@ import "github.com/jczastkiewicz/crucible/internal/carddb/compile"
 // to fail the ability when it resolves, as resolveTargets does.
 func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool {
 	cur := a.Params
+	// What Defined$ ParentTarget and TargetsWithDefinedController$ name for a
+	// link: the targets of the nearest ancestor that chose some
+	// (SpellAbility.getParentTargetingCard), a's own first.
+	parents := parentTargetsOf(a)
 	for cur != nil {
 		sub, ok := findSubAbility(cur)
 		if !ok {
@@ -33,7 +37,8 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		// Java's sub-ability reads them off getRootAbility: a Charm mode's
 		// link is asked about as its mode is.
 		link := Ability{API: api, Source: a.Source, Controller: a.Controller, Params: sub.Ability, Amounts: a.Amounts,
-			TriggerRemembered: a.TriggerRemembered, triggered: a.triggered, casting: a.casting, charmRoot: a.charmRoot}
+			TriggerRemembered: a.TriggerRemembered, triggered: a.triggered, casting: a.casting, charmRoot: a.charmRoot,
+			parentTargets: parents}
 		choice, named, ok := g.targetChoiceFor(&link)
 		if !named {
 			continue
@@ -50,10 +55,11 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		if err != nil {
 			return false
 		}
-		a.chainTargets = append(a.chainTargets, chainTarget{
-			Params:  sub.Ability,
-			Targets: controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max),
-		})
+		chosen := controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
+		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen})
+		if len(chosen) > 0 {
+			parents = chosen
+		}
 	}
 	return true
 }
