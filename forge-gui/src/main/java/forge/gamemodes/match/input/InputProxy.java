@@ -22,7 +22,6 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -153,11 +152,6 @@ public class InputProxy implements Observer {
             }
         }
         return false;
-    }
-
-    public final boolean selectStackItem(final SpellAbilityStackInstance si) {
-        final Input inp = getInput();
-        return inp != null && si != null && inp.selectStackItem(si);
     }
 
     public final void alphaStrike() {

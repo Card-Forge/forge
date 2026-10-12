@@ -2,6 +2,7 @@ package forge.gamemodes.match.input;
 
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.StackItemView;
 import forge.player.PlayerControllerHuman;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Picks items on the stack (spells, triggered and activated abilities) as targets, by tapping them in the stack view.
  * Items are told apart by stack instance, not by their source card, so two abilities of one permanent stay distinct.
+ * A tap in the stack view reaches this input as the entry's ability, through the existing {@link Input#selectAbility}.
  */
 public class InputSelectStackItems extends InputSyncronizedBase {
     private static final long serialVersionUID = 4617306523381946321L;
@@ -30,11 +32,11 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         this.min = Math.min(min, choices.size());
         this.max = Math.min(max, choices.size());
         this.sa = sa;
-        final List<forge.game.spellability.StackItemView> views = new ArrayList<>();
+        final List<StackItemView> views = new ArrayList<>();
         for (final SpellAbilityStackInstance si : choices) {
             views.add(si.getView());
         }
-        getController().getGui().setSelectableStackItems(views);
+        getController().getGui().setSelectableTargets(views);
         // also what earlier steps of this spell (other modes) already chose
         TargetingProgress.showChosen(getController().getGui(), sa);
     }
@@ -52,21 +54,38 @@ public class InputSelectStackItems extends InputSyncronizedBase {
     }
 
     @Override
-    public boolean selectStackItem(final SpellAbilityStackInstance si) {
-        if (isFinished() || !choices.contains(si)) {
+    public boolean selectAbility(final SpellAbility ab) {
+        if (isFinished()) {
             return false;
         }
+        for (final SpellAbilityStackInstance si : choices) {
+            if (si.getSpellAbility().equals(ab)) {
+                return toggle(si);
+            }
+        }
+        return false;
+    }
+
+    private boolean toggle(final SpellAbilityStackInstance si) {
         final boolean wasSelected = selected.remove(si);
         if (!wasSelected) {
             selected.add(si);
         }
-        getController().getGui().setStackItemPicked(si.getView(), !wasSelected);
+        getController().getGui().setHighlightedStackItems(List.of(si.getView()), !wasSelected);
         if (selected.size() >= max) {
             selectButtonOK();
         } else {
             showMessage();
         }
         return true;
+    }
+
+    private void unmarkSelected() {
+        final List<StackItemView> views = new ArrayList<>();
+        for (final SpellAbilityStackInstance si : selected) {
+            views.add(si.getView());
+        }
+        getController().getGui().setHighlightedStackItems(views, false);
     }
 
     @Override
@@ -77,19 +96,18 @@ public class InputSelectStackItems extends InputSyncronizedBase {
     @Override
     protected void onCancel() {
         cancelled = true;
+        unmarkSelected();
         selected.clear();
         stop();
     }
 
     @Override
     protected void onStop() {
-        getController().getGui().clearSelectableStackItems();
-        if (!cancelled && sa != null && TargetingProgress.hasLaterTargetingStep(sa)) {
-            // more steps follow: keep this step's picks (not yet stored on the ability) marked as chosen
-            TargetingProgress.showChosen(getController().getGui(), sa);
-            for (final SpellAbilityStackInstance si : selected) {
-                getController().getGui().setStackItemPicked(si.getView(), true);
-            }
+        getController().getGui().clearSelectables();
+        // the picks stay marked while later steps follow or the spell's cost is still to be paid; otherwise they go with the prompt
+        if (cancelled || sa == null
+                || !(TargetingProgress.hasLaterTargetingStep(sa) || getController().isKeepingTargetsMarked())) {
+            unmarkSelected();
         }
     }
 

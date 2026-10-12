@@ -64,14 +64,12 @@ public final class TargetingProgress {
     /** Marks everything already chosen for {@code sa}'s chain as chosen in the GUI. */
     public static void showChosen(final IGuiGame gui, final SpellAbility sa) {
         gui.setHighlighted(chosenEntities(sa), true);
-        for (final StackItemView item : chosenStackItems(sa)) {
-            gui.setStackItemPicked(item, true);
-        }
+        gui.setHighlightedStackItems(chosenStackItems(sa), true);
     }
 
     /** Removes every "chosen" mark that belongs to {@code sa}'s chain. */
     public static void clearChosen(final IGuiGame gui, final SpellAbility sa) {
         gui.setHighlighted(chosenEntities(sa), false);
-        gui.clearSelectableStackItems(); // also forgets the picked items
+        gui.setHighlightedStackItems(chosenStackItems(sa), false);
     }
 }

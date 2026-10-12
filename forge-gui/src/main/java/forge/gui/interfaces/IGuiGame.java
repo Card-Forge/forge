@@ -27,6 +27,7 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -274,13 +275,14 @@ public interface IGuiGame {
      * select-min hotkeys). A maximum of {@code 0} marks display-only highlighting, for which the GUI opens no zones.
      */
     void setSelectables(Iterable<CardView> cards, int min, int max);
-    /** Marks stack items as pickable (targets of a counterspell etc.). Local GUI state only, network games use a dialog instead. */
-    default void setSelectableStackItems(Iterable<StackItemView> items) {}
-    default void setStackItemPicked(StackItemView item, boolean picked) {}
-    default void clearSelectableStackItems() {}
-    /** Marks players as valid targets of the active prompt so the GUI can highlight them. Local GUI state only. */
-    default void setSelectablePlayers(Iterable<PlayerView> players) {}
-    default void clearSelectablePlayers() {}
+    /**
+     * Marks players and stack items as valid targets of the active prompt, replacing earlier marks (cards go through
+     * {@link #setSelectables}); {@link #clearSelectables()} removes them. Local GUI state only: network games pick
+     * stack targets in a dialog.
+     */
+    default void setSelectableTargets(Iterable<? extends TrackableObject> targets) {}
+    /** What {@link #setHighlighted} does for cards and players: marks stack items already chosen as targets. Local GUI state only. */
+    default void setHighlightedStackItems(Iterable<StackItemView> items, boolean highlighted) {}
     void clearSelectables();
     boolean isSelecting();
 

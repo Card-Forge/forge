@@ -295,7 +295,7 @@ public class VStack extends FDropDown {
 
         // an item the current prompt allows picking, e.g. the target of a counterspell or Stifle
         private boolean isSelectableTarget() {
-            return MatchController.instance.isStackItemSelectable(stackInstance);
+            return MatchController.instance.isSelectable(stackInstance);
         }
 
         private void showCardOrMenu(CardView sourceCard, FPopupMenu menu, float x, float y) {
@@ -311,7 +311,7 @@ public class VStack extends FDropDown {
                 activeStackInstance = stackInstance;
                 //must invoke in game thread in case a dialog needs to be shown
                 ThreadUtil.invokeInGameThread(() -> {
-                    MatchController.instance.getGameController().selectStackItem(stackInstance);
+                    MatchController.instance.pickStackItem(stackInstance);
                     Gdx.graphics.requestRendering();
                 });
                 return true;
@@ -392,7 +392,7 @@ public class VStack extends FDropDown {
 
             // entries keep their usual look (the active one bright, the rest faded); only a chosen target is shown bright
             final boolean pickable = isSelectableTarget();
-            final boolean picked = MatchController.instance.isStackItemPicked(stackInstance);
+            final boolean picked = MatchController.instance.isHighlighted(stackInstance);
             boolean needAlpha = (activeStackInstance != stackInstance) && !picked;
             if (needAlpha) {
                 g.setAlphaComposite(ALPHA_COMPOSITE);

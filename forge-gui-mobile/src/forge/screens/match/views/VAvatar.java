@@ -172,7 +172,7 @@ public class VAvatar extends FDisplayObject {
         //highlighted (chosen) or valid to choose
         if (MatchController.instance.isHighlighted(player)) {
             FSelectionBox.drawChosen(g, w / 16f, 0, 0, w, h);
-        } else if (MatchController.instance.isSelectablePlayer(player)) {
+        } else if (MatchController.instance.isSelectable(player)) {
             FSelectionBox.draw(g, Math.max(Utils.scale(2), w / 20f), 0, 0, w, h);
         }
         //selector

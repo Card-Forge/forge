@@ -22,7 +22,7 @@ import forge.util.Utils;
  */
 public final class FSelectionBox {
     /** Solid outline of things already chosen in the current prompt (cards, players and stack entries alike). */
-    public static final Color CHOSEN_COLOR = Color.MAGENTA;
+    public static final Color CHOSEN_COLOR = Color.YELLOW;
 
     private static final float DASH = Utils.scale(5);
     private static final long CYCLE_MS = 700; // time for the dashes to slide by one full pattern
@@ -38,7 +38,7 @@ public final class FSelectionBox {
 
     /** Colour of the box around things that can be picked. */
     public static Color validColor() {
-        return (Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_ACTIVE) : FSkinColor.get(Colors.CLR_ACTIVE)).getColor();
+        return (Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_THEME) : FSkinColor.get(Colors.CLR_THEME)).getColor();
     }
 
     /** Box around something that can be picked, in the theme's active colour. */
@@ -56,7 +56,7 @@ public final class FSelectionBox {
         final float period = 2 * DASH;
         final float phase = (System.currentTimeMillis() % CYCLE_MS) / (float) CYCLE_MS * period; // seamless when the cycle wraps
         g.drawDashedRect(thickness, color, x, y, w, h, DASH, DASH, phase);
-        g.drawDashedRect(thickness, Color.WHITE, x, y, w, h, DASH, DASH, phase + DASH);
+        g.drawDashedRect(thickness, CHOSEN_COLOR, x, y, w, h, DASH, DASH, phase + DASH);
         Gdx.graphics.requestRendering(); // next frame, so the dashes keep moving
     }
 }

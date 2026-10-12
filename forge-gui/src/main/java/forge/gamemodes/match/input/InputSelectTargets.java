@@ -79,7 +79,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 valid.add(p);
             }
         }
-        getController().getGui().setSelectablePlayers(PlayerView.getCollection(valid));
+        getController().getGui().setSelectableTargets(PlayerView.getCollection(valid));
     }
 
     @Override
@@ -440,8 +440,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private void done() {
-        // while later steps still have to choose, what is chosen stays marked; the last step (or a cancel) clears it
-        if (bCancel || !TargetingProgress.hasLaterTargetingStep(sa)) {
+        // what is chosen stays marked while later steps still have to choose and, for a spell being cast, while its cost
+        // is paid; otherwise the last step (or a cancel) clears it
+        if (bCancel || !(TargetingProgress.hasLaterTargetingStep(sa) || getController().isKeepingTargetsMarked())) {
             final List<GameEntityView> views = new ArrayList<>(targets.size());
             for (final GameEntity ge : targets) views.add(GameEntityView.get(ge));
             getController().getGui().setHighlighted(views, false);
@@ -458,7 +459,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     @Override
     protected void onStop() {
         getController().getGui().clearSelectables();
-        getController().getGui().clearSelectablePlayers();
         super.onStop();
     }
 

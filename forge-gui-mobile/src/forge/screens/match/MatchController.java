@@ -43,6 +43,8 @@ import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.spellability.StackItemView;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.trackable.TrackableObject;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
@@ -444,37 +446,36 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void setSelectableStackItems(final Iterable<StackItemView> items) {
-        super.setSelectableStackItems(items);
-        // stack items are picked in the stack view, so bring it up
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        super.setSelectableTargets(targets);
         FThreads.invokeInEdtLater(() -> {
-            if (!view.getStack().isVisible()) { view.getStack().show(); }
-            view.getStack().update();
+            if (isSelectingStackItems()) { // stack items are picked in the stack view, so bring it up
+                if (!view.getStack().isVisible()) { view.getStack().show(); }
+                view.getStack().update();
+            }
+            Gdx.graphics.requestRendering();
         });
     }
 
     @Override
-    public void setStackItemPicked(final StackItemView item, final boolean picked) {
-        super.setStackItemPicked(item, picked);
+    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
+        super.setHighlightedStackItems(items, highlighted);
         Gdx.graphics.requestRendering();
     }
 
-    @Override
-    public void clearSelectableStackItems() {
-        super.clearSelectableStackItems();
-        Gdx.graphics.requestRendering();
-    }
-
-    @Override
-    public void setSelectablePlayers(final Iterable<PlayerView> players) {
-        super.setSelectablePlayers(players);
-        Gdx.graphics.requestRendering();
-    }
-
-    @Override
-    public void clearSelectablePlayers() {
-        super.clearSelectablePlayers();
-        Gdx.graphics.requestRendering();
+    /**
+     * A tap on a stack entry while stack targets are being chosen. It reaches the game as the entry's ability through
+     * the existing selectAbility, so no protocol method is added. Local games only; call from the game thread.
+     */
+    public void pickStackItem(final StackItemView item) {
+        final forge.game.Game game = getGameView() == null ? null : getGameView().getGame();
+        if (game == null || item == null) { return; }
+        for (final SpellAbilityStackInstance si : game.getStack()) {
+            if (si.getId() == item.getId()) {
+                getGameController().selectAbility(si.getSpellAbility().getView());
+                return;
+            }
+        }
     }
 
     @Override

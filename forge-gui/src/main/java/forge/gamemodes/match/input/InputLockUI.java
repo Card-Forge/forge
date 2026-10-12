@@ -4,7 +4,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -80,11 +79,6 @@ public class InputLockUI implements Input {
     public boolean selectCard(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         return false;
     }
-    @Override
-    public boolean selectStackItem(final SpellAbilityStackInstance si) {
-        return false;
-    }
-
     @Override
     public boolean selectAbility(final SpellAbility ab) {
         return false;

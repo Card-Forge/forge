@@ -1777,7 +1777,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playChosenSpellAbility(final SpellAbility chosenSa) {
-        return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
+        // what targeting marks as chosen stays marked until the cost is paid or the cast is cancelled
+        keepTargetsMarked = true;
+        try {
+            return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
+        } finally {
+            keepTargetsMarked = false;
+            // copies: the GUI applies the change later, and these lists are reused
+            getGui().setHighlighted(new ArrayList<>(keptMarks), false);
+            getGui().setHighlightedStackItems(new ArrayList<>(keptStackMarks), false);
+            keptMarks.clear();
+            keptStackMarks.clear();
+        }
     }
 
     @Override
@@ -2477,11 +2488,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
         final boolean result = chooseTargetsForStep(currentAbility);
-        // what was chosen stays marked while later targeting steps follow, and goes away after the last one or a failure
-        if (!result || !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
+        // what was chosen stays marked while later targeting steps follow, and goes away after the last one or a failure;
+        // for a spell being cast it stays up through paying the cost instead (see playChosenSpellAbility)
+        if (result && keepTargetsMarked) {
+            if (!TargetingProgress.hasLaterTargetingStep(currentAbility)) {
+                keptMarks.addAll(TargetingProgress.chosenEntities(currentAbility));
+                keptStackMarks.addAll(TargetingProgress.chosenStackItems(currentAbility));
+            }
+        } else if (!result || !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
             TargetingProgress.clearChosen(getGui(), currentAbility);
         }
         return result;
+    }
+
+    /** True while a spell is being cast: what targeting marks as chosen then stays marked until its cost is paid. */
+    private boolean keepTargetsMarked;
+    private final List<GameEntityView> keptMarks = new ArrayList<>();
+    private final List<StackItemView> keptStackMarks = new ArrayList<>();
+
+    public boolean isKeepingTargetsMarked() {
+        return keepTargetsMarked;
     }
 
     private boolean chooseTargetsForStep(final SpellAbility currentAbility) {
@@ -2827,18 +2853,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void selectStackItem(final StackItemView item) {
-        if (item == null) { return; }
-        for (final SpellAbilityStackInstance si : getGame().getStack()) {
-            if (si.getId() == item.getId()) {
-                inputProxy.selectStackItem(si);
-                return;
-            }
-        }
-    }
-
-    @Override
     public void selectAbility(final SpellAbilityView sa) {
+        if (sa != null && inputProxy.getInput() instanceof InputSelectStackItems) {
+            // a stack entry was tapped while stack targets are chosen; it is identified by its ability, so the
+            // existing protocol method is enough
+            for (final SpellAbilityStackInstance si : getGame().getStack()) {
+                if (sa.equals(si.getSpellAbility().getView())) {
+                    inputProxy.selectAbility(si.getSpellAbility());
+                    return;
+                }
+            }
+            return;
+        }
         if (spellViewCache == null || spellViewCache.isEmpty()) {
             return;
         }

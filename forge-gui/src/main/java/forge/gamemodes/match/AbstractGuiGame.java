@@ -27,6 +27,7 @@ import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.Localizer;
@@ -242,6 +243,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         originalGameControllers.clear();
         spectator = null;
         currentPlayer = null;
+        selectablePlayers.clear();
+        selectableStackItems.clear();
+        highlightedStackItems.clear();
     }
 
     @Override
@@ -339,62 +343,56 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectionMax = max;
     }
 
+    private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
     private final Set<Integer> selectableStackItems = Sets.newConcurrentHashSet();
-    private final Set<Integer> pickedStackItems = Sets.newConcurrentHashSet();
+    private final Set<Integer> highlightedStackItems = Sets.newConcurrentHashSet();
 
+    /**
+     * Marks the players and stack items the active prompt can pick (cards go through {@link #setSelectables}), replacing
+     * earlier marks. {@link #clearSelectables()} removes them.
+     */
     @Override
-    public void setSelectableStackItems(final Iterable<StackItemView> items) {
-        pickedStackItems.clear();
-        for (final StackItemView si : items) {
-            selectableStackItems.add(si.getId());
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        selectablePlayers.clear();
+        selectableStackItems.clear();
+        for (final TrackableObject t : targets) {
+            if (t instanceof PlayerView pv) {
+                selectablePlayers.add(pv);
+            } else if (t instanceof StackItemView si) {
+                selectableStackItems.add(si.getId());
+            }
         }
     }
 
-    @Override
-    public void setStackItemPicked(final StackItemView item, final boolean picked) {
-        if (picked) { pickedStackItems.add(item.getId()); } else { pickedStackItems.remove(item.getId()); }
+    public boolean isSelectable(final PlayerView player) {
+        return player != null && selectablePlayers.contains(player);
     }
 
-    @Override
-    public void clearSelectableStackItems() {
-        selectableStackItems.clear();
-        pickedStackItems.clear();
-    }
-
-    public boolean isStackItemSelectable(final StackItemView item) {
+    public boolean isSelectable(final StackItemView item) {
         return item != null && selectableStackItems.contains(item.getId());
-    }
-
-    public boolean isStackItemPicked(final StackItemView item) {
-        return item != null && pickedStackItems.contains(item.getId());
     }
 
     public boolean isSelectingStackItems() {
         return !selectableStackItems.isEmpty();
     }
 
-    private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
-
+    /** Stack items chosen so far as targets of the spell being cast: what {@link #setHighlighted} does for cards and players. */
     @Override
-    public void setSelectablePlayers(final Iterable<PlayerView> players) {
-        selectablePlayers.clear();
-        for (final PlayerView pv : players) {
-            selectablePlayers.add(pv);
+    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
+        for (final StackItemView si : items) {
+            if (highlighted) { highlightedStackItems.add(si.getId()); } else { highlightedStackItems.remove(si.getId()); }
         }
     }
 
-    @Override
-    public void clearSelectablePlayers() {
-        selectablePlayers.clear();
-    }
-
-    public boolean isSelectablePlayer(final PlayerView player) {
-        return player != null && selectablePlayers.contains(player);
+    public boolean isHighlighted(final StackItemView item) {
+        return item != null && highlightedStackItems.contains(item.getId());
     }
 
     @Override
     public void clearSelectables() {
         selectableCards.clear();
+        selectablePlayers.clear();
+        selectableStackItems.clear();
         selectionMin = 0;
         selectionMax = 0;
     }

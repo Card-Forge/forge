@@ -4,7 +4,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.ITriggerEvent;
 
 import java.util.List;
@@ -19,9 +18,6 @@ public interface Input {
     String getActivateAction(Card card);
 
     boolean selectAbility(SpellAbility ab);
-
-    /** A stack item was picked (e.g. as the target of a counterspell or Stifle). */
-    boolean selectStackItem(SpellAbilityStackInstance si);
 
     void selectPlayer(Player player, ITriggerEvent triggerEvent);
 
