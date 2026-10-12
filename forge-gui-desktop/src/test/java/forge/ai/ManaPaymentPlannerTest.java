@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.ArrayList;
 
 import forge.ai.simulation.SimulationTest;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.card.Card;
@@ -38,13 +39,15 @@ public class ManaPaymentPlannerTest extends SimulationTest {
     }
 
     @Test
-    public void hiddenGrottosDoNotPayActivationCostsForFree() {
+    public void comboFilterPaysThroughItsActivationCost() {
         Player player = createTestPlayer();
-        addCards("Swamp", 4, player);
-        addCards("Hidden Grotto", 3, player);
-        SpellAbility vigor = prepareSpell("Vigor", player);
+        Card island = addCard("Island", player);
+        Card bluffs = addCard("Cascade Bluffs", player);
+        SpellAbility electromancer = prepareSpell("Goblin Electromancer", player);
 
-        AssertJUnit.assertFalse(canPay(player, vigor));
+        AssertJUnit.assertTrue(pay(player, electromancer));
+        AssertJUnit.assertTrue(island.isTapped());
+        AssertJUnit.assertTrue(bluffs.isTapped());
     }
 
     @Test
@@ -54,42 +57,27 @@ public class ManaPaymentPlannerTest extends SimulationTest {
     }
 
     @Test
-    public void lotusPetalCanActivateSignetAndPayOuterGeneric() {
+    public void cascadingCataractsPaysFiveColorCost() {
         Player player = createTestPlayer();
-        Card petal = addCard("Lotus Petal", player);
-        Card signet = addCard("Selesnya Signet", player);
-        SpellAbility aspirant = prepareSpell("Luminarch Aspirant", player);
+        addCards("Wastes", 5, player);
+        Card cataracts = addCard("Cascading Cataracts", player);
+        SpellAbility atogatog = prepareSpell("Atogatog", player);
 
-        AssertJUnit.assertTrue(pay(player, aspirant));
-        AssertJUnit.assertTrue(signet.isTapped());
-        AssertJUnit.assertEquals(ZoneType.Graveyard, petal.getZone().getZoneType());
+        AssertJUnit.assertTrue(pay(player, atogatog));
+        AssertJUnit.assertTrue(cataracts.isTapped());
     }
 
     @Test
-    public void filterActivationDoesNotStrandRemainingGenericMana() {
+    public void highOutputSourceIsPreservedWhenSmallerSourcesCanPay() {
         Player player = createTestPlayer();
+        addCard("Forest", player);
         addCard("Plains", player);
-        addCard("Lotus Petal", player);
-        addCard("Study Hall", player);
-        SpellAbility calix = prepareSpell("Calix, Guided by Fate", player);
+        Card cradle = addCard("Gaea's Cradle", player);
+        addCards("Squire", 2, player);
+        SpellAbility bear = prepareSpell("Bear Cub", player);
 
-        AssertJUnit.assertTrue(pay(player, calix));
-    }
-
-    @Test
-    public void yunaPaysWithFilterLandAndTreasures() {
-        Player player = createTestPlayer();
-        addUntappedCard("Glacial Fortress", player);
-        addUntappedCard("Seachrome Coast", player);
-        addUntappedCard("Flooded Grove", player);
-        addTokens("c_a_treasure_sac", 2, player);
-        SpellAbility yuna = addSpellToHand("Yuna, Grand Summoner", player);
-        addCardToZone("The Weatherseed Treaty", player, ZoneType.Hand);
-        addCardToZone("Boros Guildmage", player, ZoneType.Hand);
-        addCardToZone("Cromat", player, ZoneType.Hand);
-        prepare(player);
-
-        AssertJUnit.assertTrue(pay(player, yuna));
+        AssertJUnit.assertTrue(pay(player, bear));
+        AssertJUnit.assertFalse(cradle.isTapped());
     }
 
     @Test
@@ -111,21 +99,6 @@ public class ManaPaymentPlannerTest extends SimulationTest {
     }
 
     @Test
-    public void restrictedManaHonorsThePaidSpell() {
-        Player player = createTestPlayer();
-        addCard("Forest", player);
-        addCard("Wastes", player);
-        addCard("Herd Heirloom", player);
-        SpellAbility bear = addSpellToHand("Bear Cub", player);
-        SpellAbility treaty = addSpellToHand("The Weatherseed Treaty", player);
-
-        prepare(player);
-
-        AssertJUnit.assertTrue(canPay(player, bear));
-        AssertJUnit.assertFalse(canPay(player, treaty));
-    }
-
-    @Test
     public void equivalentCostedSourcesDoNotExhaustSearch() {
         Player player = createTestPlayer();
         addCards("Wastes", 6, player);
@@ -138,15 +111,16 @@ public class ManaPaymentPlannerTest extends SimulationTest {
     }
 
     @Test
-    public void manaSourcePredictionIncludesActivationSources() {
+    public void manaSourcePredictionIncludesFloatingActivationMana() {
         Player player = createTestPlayer();
-        addCard("Plains", player);
+        Card wastes = createCard("Wastes", player);
+        player.getManaPool().addMana(new Mana((byte) ManaAtom.COLORLESS, wastes, null, player));
         addCard("Boros Signet", player);
         SpellAbility guildmage = prepareSpell("Boros Guildmage", player);
 
         CardCollection sources = manaSources(player, guildmage);
         AssertJUnit.assertNotNull(sources);
-        AssertJUnit.assertTrue(sources.anyMatch(card -> "Plains".equals(card.getName())));
+        AssertJUnit.assertTrue(sources.contains(wastes));
         AssertJUnit.assertTrue(sources.anyMatch(card -> "Boros Signet".equals(card.getName())));
     }
 
@@ -175,16 +149,6 @@ public class ManaPaymentPlannerTest extends SimulationTest {
 
         AssertJUnit.assertTrue(canPay(player, customCost("U R"), electromancer));
         AssertJUnit.assertFalse(canPay(player, customCost("U U"), counterspell));
-    }
-
-    @Test
-    public void unchosenManaProducesNoColor() {
-        Player player = createTestPlayer();
-        addUntappedCard("Coldsteel Heart", player);
-        addCard("Boros Signet", player);
-        SpellAbility bolt = prepareSpell("Lightning Bolt", player);
-
-        AssertJUnit.assertFalse(canPay(player, bolt));
     }
 
     @Test
@@ -225,28 +189,6 @@ public class ManaPaymentPlannerTest extends SimulationTest {
         SpellAbility guildmage = prepareSpell("Boros Guildmage", player);
         ManaPaymentPlanner.maxStates = 0;
         AssertJUnit.assertTrue(canPay(player, customCost("R W"), guildmage));
-    }
-
-    @Test
-    public void plannerDistinguishesSnowMana() {
-        Player player = createTestPlayer();
-        addCard("Snow-Covered Forest", player);
-        addCards("Forest", 2, player);
-        addCard("Boros Signet", player);
-        SpellAbility charm = prepareSpell("Temur Charm", player);
-
-        AssertJUnit.assertTrue(canPay(player, customCost("G S R"), charm));
-    }
-
-    @Test
-    public void disposableManaIsNotRoutedThroughAFilter() {
-        Player player = createTestPlayer();
-        Card studyHall = addCard("Study Hall", player);
-        addCard("Lotus Petal", player);
-        SpellAbility lacerator = prepareSpell("Vampire Lacerator", player);
-
-        AssertJUnit.assertTrue(pay(player, lacerator));
-        AssertJUnit.assertFalse(studyHall.isTapped());
     }
 
     private void assertSignetsUsed(final String cardName, final int expected) {

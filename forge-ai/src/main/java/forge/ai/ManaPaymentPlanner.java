@@ -157,8 +157,16 @@ final class ManaPaymentPlanner {
         boolean hasConsolidatingSource = manaAbilities.stream().anyMatch(ma ->
                 ma.totalAmountOfManaGenerated(paidFor, true) == cost.getConvertedManaCost()
                 && Integer.bitCount(getManaAbilityColorMask(ma, paidFor) & MagicColor.ALL_COLORS) > 1);
-        return hasConsolidatingSource && Arrays.stream(futureColorPips(ai, paidFor), 0, 5)
+        return hasConsolidatingSource && Arrays.stream(ManaResourceEvaluator.futureColorPips(ai, paidFor), 0, 5)
                 .filter(pip -> pip > 0).count() > 1;
+    }
+
+    static boolean requiresValidation(final ManaCostBeingPaid cost, final Set<Card> greedySources,
+            final Set<Card> costedSources, final boolean reportingSources) {
+        // Only the minimal one-filter, one-feeder payment is safe to accept without checking its
+        // activation sequence; previews also need the planner's complete source accounting.
+        return !costedSources.isEmpty() && (reportingSources || costedSources.size() > 1
+                || greedySources.size() != 2 || cost.getConvertedManaCost() > 2);
     }
 
     static Plan findPlan(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
@@ -206,34 +214,24 @@ final class ManaPaymentPlanner {
             return null;
         }
 
-        int bestPotential = remainingManaPotential(greedySourceIds);
-        int[] desiredPips = futureColorPips(ai, sa);
-        int bestColors = remainingColorOptions(greedySourceIds, desiredPips);
-        int bestScore = paymentScore(greedySourceIds);
+        int[] desiredPips = ManaResourceEvaluator.futureColorPips(ai, sa);
+        PaymentQuality bestQuality = paymentQuality(greedySourceIds, desiredPips);
         State best = null;
         for (State candidate : candidates) {
-            int potential = remainingManaPotential(candidate.usedSourceIds);
-            int colors = remainingColorOptions(candidate.usedSourceIds, desiredPips);
+            PaymentQuality quality = paymentQuality(candidate.usedSourceIds, desiredPips);
             // Replay an equally cheap disposable payment so the real greedy pass cannot reroute it.
-            boolean better = spendsDisposableMana
-                    ? candidate.score < bestScore || candidate.score == bestScore && best == null
-                    : colors > bestColors || colors == bestColors && (potential > bestPotential
-                    || potential == bestPotential && (candidate.score < bestScore
-                    || candidate.score == bestScore && best == null));
-            if (better) {
-                bestColors = colors;
-                bestPotential = potential;
-                bestScore = candidate.score;
+            int comparison = quality.compareTo(bestQuality, spendsDisposableMana);
+            if (comparison > 0 || comparison == 0 && best == null) {
+                bestQuality = quality;
                 best = candidate;
             }
         }
         return best == null ? null : new Plan(best.actions, usedPoolSources(best));
     }
 
-    private static int[] futureColorPips(final Player ai, final SpellAbility paidFor) {
-        CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
-        hand.remove(paidFor.getHostCard());
-        return AiDeckStatistics.fromCards(hand).maxPips;
+    private PaymentQuality paymentQuality(final Set<Integer> usedSources, final int[] desiredPips) {
+        return new PaymentQuality(remainingColorOptions(usedSources, desiredPips),
+                remainingManaPotential(usedSources), paymentScore(usedSources));
     }
 
     private int remainingColorOptions(final Set<Integer> usedSources, final int[] desiredPips) {
@@ -785,7 +783,7 @@ final class ManaPaymentPlanner {
             int colors = Integer.bitCount(colorMask & MagicColor.ALL_COLORS);
             sourceColorMasks.merge(source.getId(), colorMask, (a, b) -> a | b);
             int score = 10 * sourceScores.computeIfAbsent(source.getId(), id ->
-                    ComputerUtilMana.scoreManaProducingCard(source)) + 25 * amount * amount + colors;
+                    ManaResourceEvaluator.scoreManaProducingCard(source)) + 25 * amount * amount + colors;
             String abilityKey = manaAbilitySourceKey(ma, amount, score);
             abilityInfo.put(ma.getId(), new AbilityInfo(abilityKey, score));
             sourcePaymentScores.merge(source.getId(), score, Math::min);
@@ -1039,6 +1037,21 @@ final class ManaPaymentPlanner {
     }
 
     private record AbilityInfo(String key, int score) {
+    }
+
+    private record PaymentQuality(int colors, int potential, int cost) {
+        private int compareTo(final PaymentQuality other, final boolean costOnly) {
+            if (!costOnly) {
+                int result = Integer.compare(colors, other.colors);
+                if (result == 0) {
+                    result = Integer.compare(potential, other.potential);
+                }
+                if (result != 0) {
+                    return result;
+                }
+            }
+            return Integer.compare(other.cost, cost);
+        }
     }
 
     private record ManaPaymentContext(ManaCostBeingPaid cost, Player ai) {

@@ -22,7 +22,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
@@ -97,35 +96,8 @@ public class ComputerUtilMana {
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
         Set<Card> sources = new LinkedHashSet<>();
-        return payManaCost(cost, sa, ai, true, true, effect, false, sources) == null
+        return payManaCost(cost, sa, ai, true, true, effect, false, sources, null) == null
                 ? null : new CardCollection(sources);
-    }
-
-    static Integer scoreManaProducingCard(final Card card) {
-        int score = 0;
-
-        for (SpellAbility ability : card.getSpellAbilities()) {
-            ability.setActivatingPlayer(card.getController());
-            if (ability.isManaAbility()) {
-                score += ability.calculateScoreForManaAbility();
-                // TODO check TriggersWhenSpent: decrease score depending on context
-            }
-            else if (!ability.isTrigger() && ability.isPossible()) {
-                score += 13; //add 13 for any non-mana activated abilities
-            }
-        }
-
-        if (card.isCreature()) {
-            // treat attacking and blocking as though they're non-mana abilities
-            if (CombatUtil.canAttack(card)) {
-                score += 13;
-            }
-            if (CombatUtil.canBlock(card)) {
-                score += 13;
-            }
-        }
-
-        return score;
     }
 
     private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final ListMultimap<Integer, SpellAbility> manaAbilityMap, final SpellAbility sa, final ManaCostBeingPaid cost) {
@@ -137,7 +109,7 @@ public class ComputerUtilMana {
                 final Card hostCard = ability.getHostCard();
                 if (!manaCardMap.containsKey(hostCard)) {
                     // TODO +1 when reserved
-                    manaCardMap.put(hostCard, scoreManaProducingCard(hostCard));
+                    manaCardMap.put(hostCard, ManaResourceEvaluator.scoreManaProducingCard(hostCard));
                     orderedCards.add(hostCard);
                 }
             }
@@ -634,11 +606,11 @@ public class ComputerUtilMana {
 
     // returns null if unpayable
     private static List<Mana> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
-        return payManaCost(cost, sa, ai, test, checkPlayable, effect, false, null);
+        return payManaCost(cost, sa, ai, test, checkPlayable, effect, false, null, null);
     }
 
     private static List<Mana> payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable,
-            boolean effect, boolean greedyProbe, final Set<Card> sources) {
+            boolean effect, boolean greedyProbe, final Set<Card> sources, final Set<Card> costedSources) {
         if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return null;
@@ -677,8 +649,10 @@ public class ComputerUtilMana {
                 && ManaPaymentPlanner.shouldUsePlanner(cost, sa, ai, checkPlayable);
         List<Mana> greedyPayment = null;
         Set<Card> greedySources = shouldUsePlanner ? new HashSet<>() : null;
+        Set<Card> greedyCostedSources = shouldUsePlanner ? new HashSet<>() : null;
         if (shouldUsePlanner) {
-            greedyPayment = payManaCost(new ManaCostBeingPaid(cost), sa, ai, true, checkPlayable, effect, true, greedySources);
+            greedyPayment = payManaCost(new ManaCostBeingPaid(cost), sa, ai, true, checkPlayable, effect,
+                    true, greedySources, greedyCostedSources);
             if (greedyPayment != null) {
                 greedySources.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
                 greedySources.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST));
@@ -686,12 +660,16 @@ public class ComputerUtilMana {
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
             AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
         }
-        if (greedyPayment != null && test && sources == null) {
+        boolean validateGreedy = greedyPayment != null && ManaPaymentPlanner.requiresValidation(
+                cost, greedySources, greedyCostedSources, sources != null);
+        if (greedyPayment != null && !validateGreedy && test && sources == null) {
             CostPayment.handleOfferings(sa, true, true);
             return greedyPayment;
         }
         ManaPaymentPlanner.Plan plan = null;
-        if (greedyPayment != null) {
+        if (validateGreedy) {
+            plan = ManaPaymentPlanner.findPlan(cost, sa, ai, checkPlayable);
+        } else if (greedyPayment != null) {
             plan = ManaPaymentPlanner.findBetterConsolidatingPlan(cost, sa, ai, checkPlayable, greedySources);
         } else if (shouldUsePlanner) {
             plan = ManaPaymentPlanner.findPlan(cost, sa, ai, checkPlayable);
@@ -717,7 +695,7 @@ public class ComputerUtilMana {
 
         // A completed planner miss is authoritative because the legacy payer cannot prove costed
         // mana abilities payable. Exhaustion remains unknown and may use legacy fallback.
-        if (greedyPayment == null && shouldUsePlanner && !plannerExhausted) {
+        if (shouldUsePlanner && !plannerExhausted && (greedyPayment == null || validateGreedy)) {
             CostPayment.handleOfferings(sa, test, false);
             return null;
         }
@@ -737,8 +715,8 @@ public class ComputerUtilMana {
         int phyLifeToPay = 2;
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
-        Multimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable,
-                hasConverge, !greedyProbe);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(
+                cost, sa, ai, test, checkPlayable, hasConverge);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         ManaCostShard toPay = null;
@@ -867,6 +845,9 @@ public class ComputerUtilMana {
             }
 
             paymentList.add(saPayment);
+            if (costedSources != null && saPayment.getPayCosts().hasManaCost()) {
+                costedSources.add(saPayment.getHostCard());
+            }
             if (saPayment.getPayCosts().hasTapCost()) {
                 AiCardMemory.rememberCard(ai, saPayment.getHostCard(), MemorySet.PAYS_TAP_COST);
             }
@@ -1202,7 +1183,7 @@ public class ComputerUtilMana {
      */
     private static Multimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
-            final boolean hasConverge, final boolean allowManaCostedManaAbilities) {
+            final boolean hasConverge) {
         // arrange all mana abilities by color produced.
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
@@ -1215,9 +1196,6 @@ public class ComputerUtilMana {
 
         // select which abilities may be used for each shard
         Multimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
-        if (!allowManaCostedManaAbilities) {
-            sourcesForShards.values().removeIf(ma -> ma.getPayCosts().hasManaCost());
-        }
         if (hasConverge) {
             // add extra colors for paying converge
             final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
