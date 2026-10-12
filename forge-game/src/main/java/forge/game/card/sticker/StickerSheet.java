@@ -22,7 +22,7 @@ public final class StickerSheet {
     private static final String KEYWORD = "StickerSheet:";
     // CR 123.5 - the same test GameAction.changeZone keeps stickers by
     private static final EnumSet<ZoneType> PUBLIC_ZONES = EnumSet.copyOf(
-            Arrays.stream(ZoneType.values()).filter(z -> !z.isHidden()).toList());
+            Arrays.stream(ZoneType.values()).filter(z -> !z.isHidden()).collect(Collectors.toList()));
 
     private StickerSheet() {
     }
