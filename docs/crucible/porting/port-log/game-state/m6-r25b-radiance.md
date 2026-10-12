@@ -47,8 +47,11 @@ Scenarios `radiance-cleansing-beam-damages-every-creature-sharing-a-color`,
 Protection, PreventDamage, player target). `TestLoseLifeEffectValidTgtsRadianceIgnoresPlayerTargets` replaces the old
 "skips silently" test.
 
-## Still refused
+## Brightflame's life gain
 
-Brightflame: its `DBGainLife` reads `Count$TotalDamageDoneByThisTurn` (`AbilityUtils.java:2400`,
-`Card.getTotalDamageDoneBy`), an unported count. `card-smoke` shows `GainLife: LifeAmount$ "_" is not resolvable`, a
-loud refusal after the damage resolves.
+`Count$TotalDamageDoneByThisTurn` (`AbilityUtils.java:2400`, `Card.getTotalDamageDoneBy`) is what the host dealt this
+turn after prevention and replacement (`CardDamageHistory.getDamageDoneThisTurn`). `Card.damageDealtThisTurn` is added
+to in `dealPermanentDamage` and `dealPlayerDamage` once the amount is final and cleared with every card's turn counters
+at cleanup. `TestTotalDamageDoneByThisTurnCountsEveryRecipient` casts Brightflame for X = 2 over two green Bears: 2
+damage to each, 4 life gained. Java filters the history by source and target only for other callers; this count takes
+none.

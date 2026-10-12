@@ -179,6 +179,12 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return manaPoolCount(g.Player(sourceController), which)
 	}
 	switch count.Head {
+	case "TotalDamageDoneByThisTurn":
+		// Card.getTotalDamageDoneBy: what the host dealt this turn.
+		if source == NoCard {
+			return 0, false
+		}
+		return g.Card(source).damageDealtThisTurn, true
 	case "LifeYouGainedThisTurn":
 		return g.Player(sourceController).LifeGainedThisTurn, true
 	case "CreaturesAttackedThisTurn":

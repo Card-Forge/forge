@@ -54,8 +54,12 @@ type Card struct {
 	// that failed clears it; Game.Move clears it on every other zone change
 	// (CR 400.7: the card is a new object). castManaSpent is the mana paid for
 	// that cast (SpellAbility.getTotalManaSpent), 0 for a free one.
-	wasCast       bool
-	castManaSpent int
+	wasCast bool
+	// damageDealtThisTurn is the damage this card dealt this turn after
+	// prevention and replacement (CardDamageHistory.getDamageDoneThisTurn, read
+	// by Count$TotalDamageDoneByThisTurn); cleared with every card's turn counters.
+	damageDealtThisTurn int
+	castManaSpent       int
 	// foretold marks a card exiled by the Foretell special action, and
 	// foretoldTurn the turn it happened (foretell.go).
 	foretold     bool

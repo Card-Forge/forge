@@ -593,6 +593,7 @@ func (g *Game) cleanupStep(controller PlayerController) {
 		g.cards[i].activations.resetTurn()
 		g.cards[i].trigActs.resetTurn()
 		g.cards[i].trigResolved.resetTurn()
+		g.cards[i].damageDealtThisTurn = 0
 	}
 	// Phased-out permanents too: CR 514.2's damage removal and
 	// Card.onCleanupPhase's resets walk getCardsIncludePhasingIn

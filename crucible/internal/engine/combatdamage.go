@@ -318,6 +318,7 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 	if amount <= 0 {
 		return
 	}
+	g.Card(source).damageDealtThisTurn += amount
 	c := g.Card(target)
 	t := c.Type()
 	c.Damage.Sources = append(c.Damage.Sources, source)
@@ -394,6 +395,7 @@ func (g *Game) dealPlayerDamage(controller PlayerController, source CardID, targ
 	if amount <= 0 {
 		return
 	}
+	g.Card(source).damageDealtThisTurn += amount
 	g.Player(target).DamageReceivedThisTurn += amount
 	kind := 0
 	if isCombat {
