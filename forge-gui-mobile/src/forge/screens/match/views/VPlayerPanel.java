@@ -5,6 +5,7 @@ import java.util.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -89,6 +90,7 @@ public class VPlayerPanel extends FContainer {
     private static final EnumSet<ZoneType> COMMON_ZONES =
             EnumSet.of(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile);
 
+    private final Rectangle flightArea = new Rectangle();
     private float tabColTop, tabColHeight, commonTabWidth;
     private boolean slideFieldToo, slideClosing, forceClose;
     private float slideProgress = 1f;
@@ -637,10 +639,32 @@ public class VPlayerPanel extends FContainer {
 
     public float getCommonTabWidth() { return commonTabWidth; }
 
+    /**
+     * @return the screen rect cards can visibly fly through in landscape mode, which is the panel without its two tab
+     * columns, or null in portrait mode or before the first layout
+     */
+    public Rectangle getFlightArea() {
+        if (!Forge.isLandscapeMode() || screenPos.width <= 0 || tabColWidth <= 0) { return null; }
+        float left = screenPos.x + tabColWidth;
+        float right = screenPos.x + screenPos.width - commonTabWidth;
+        if (right <= left) { return null; }
+        flightArea.set(left, screenPos.y, right - left, screenPos.height);
+        return flightArea;
+    }
+
     @Override
     public void draw(Graphics g) {
-        if (slideProgress < 1f && Forge.isLandscapeMode()) {
-            //keep the zone display from drawing outside this panel while it slides in
+        if (Forge.isLandscapeMode() && commonTabWidth > 0 && slideProgress < 1f) {
+            //zone displays slide in and out from behind the right tab column, so don't let them draw over it
+            g.startClip(0, 0, getWidth() - commonTabWidth, getHeight());
+            try {
+                super.draw(g);
+            } finally {
+                g.endClip();
+            }
+            drawCommonTabColumn(g);
+        } else if (slideProgress < 1f && Forge.isLandscapeMode()) {
+            //keep the zone display from drawing outside this panel while it slides
             g.startClip(0, 0, getWidth(), getHeight());
             try {
                 super.draw(g);
@@ -649,6 +673,17 @@ public class VPlayerPanel extends FContainer {
             }
         } else {
             super.draw(g);
+        }
+    }
+
+    //the right tab column and its tabs, drawn again on top after the clipped pass leaves them out
+    private void drawCommonTabColumn(Graphics g) {
+        FSkinColor tabBg = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2);
+        g.fillRect(tabBg, getWidth() - commonTabWidth, 0, commonTabWidth, getHeight());
+        for (InfoTab tab : tabs) {
+            if (tab.isVisible() && tab.isCommonZone()) {
+                g.draw(tab);
+            }
         }
     }
 

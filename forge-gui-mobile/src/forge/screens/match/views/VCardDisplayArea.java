@@ -463,6 +463,27 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             return cardPanel;
         }
 
+        /**
+         * Undo rewinds the game in place: cards that were copied to a new zone after the checkpoint no longer exist,
+         * and the restored originals come back with no events. Everything remembered about the old timeline
+         * (who already animated, who "moved rows", where a card was in hand/field) would misfire, so start clean.
+         */
+        public static void resetForUndo() {
+            movedIds.clear();
+            handStarts.clear();
+            animatedIds.clear();
+            CardFlightOverlay.clear();
+            for (CardAreaPanel p : allCardPanels.values()) {
+                p.flight = null;
+                p.entryStart = -1;
+                p.hasHandRect = false;
+                p.hasFieldRect = false;
+                p.leaveOriginLocked = false;
+                p.lastFieldRow = null;
+            }
+            generation++; // field rows drop their remembered board, so nothing counts as a departure
+        }
+
         public static void resetForNewGame() {
             if (allCardPanels != null) {
                 for (CardAreaPanel cardPanel : allCardPanels.values()) {

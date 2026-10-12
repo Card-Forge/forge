@@ -8,9 +8,11 @@ import forge.game.GameView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputSynchronized;
 import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.gamemodes.net.ChatMessage;
@@ -957,6 +959,13 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
         if (pch != null) {
+            // openView gives the client new controllers with empty yield caches, so resend the active yields
+            final PlayerView local = pch.getLocalPlayerView();
+            if (local != null) {
+                for (final YieldUpdate u : pch.getYieldController().activeYieldUpdates(local)) {
+                    netGui.applyYieldUpdate(u);
+                }
+            }
             pch.getInputQueue().updateObservers();
             netLog.info("[Reconnect] Replayed current prompt for slot {}", slotIndex);
         }
