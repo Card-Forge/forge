@@ -47,28 +47,26 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 28,837 |
-| refused      |  4,674 |
+| plays        | 29,190 |
+| refused      |  4,319 |
 | panicked     |      0 |
 | hung         |      0 |
-| placed       |    356 |
+| placed       |    358 |
 | inconclusive |    211 |
 
-86.1% of the 33,511 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+87.1% of the 33,509 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.7% of 8,638 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 89.8% of 8,638 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
 | Cards | Refusal                                           |
 | ----: | ------------------------------------------------- |
-|   169 | `Discard`: `ValidTgts$` not resolvable            |
 |    94 | `Pump`: `KW$` value not resolvable                |
 |    91 | `ChangeZone`: `Duration$` not resolvable          |
 |    85 | `ChangeZone`: `Chooser$` not resolvable           |
 |    82 | `DealDamage`: `DamageSource$` not resolvable      |
 |    72 | `PutCounter`: `TargetMin$` not resolvable         |
-|    56 | `Discard`: `Mode$` value not resolvable           |
 |    54 | `DealDamage`: `NumDmg$` amount not resolvable     |
 |    50 | `Draw`: `NumCards$` amount not resolvable         |
 |    44 | `Token`: `TokenAmount$` amount not resolvable     |

@@ -29,8 +29,7 @@ Goldens regenerated: `compile/testdata/ast.golden` (exactly the 10 Haunt cards c
 `ChangesZone` `Fizzle`, and raise the counts of the SVars now compiled), hence `compile/params_gen.go` (new
 `HauntParams`).
 
-`card-smoke -cards` over the 10 cards: 9 play, 1 is refused: Cry of Contrition,
-`engine: Discard: ValidTgts$ not resolvable yet` (`discardeffect.go`'s targeted-player gap, not Haunt's).
+`card-smoke -cards` over the 10 cards: all 10 play.
 
 Tests: `haunting_test.go` (cast, haunt and re-trigger for Benediction of Moons, Seize the Soul and Blind Hunter; death
 by lethal damage through the state-based check; fizzle, no creature, exiled creature, haunter leaving exile, host
@@ -40,8 +39,6 @@ reaches the exile watcher through `checkDiesTriggers`, `compile/hauntexpansion_t
 
 Not ported:
 
-- `Discard` with `ValidTgts$` (Cry of Contrition's spell and haunt trigger): refused by `discardEffect`, as on about 270
-  other corpus cards (Mind Rot, Thoughtseize, Duress, Hymn to Tourach, ...).
 - The untargeted `DB$ Haunt` (unhaunt): no corpus line reaches it once the static triggers are not synthesized; refused.
 - A haunt trigger whose controller answers no target is still pushed and fails at resolution with
   `engine: Haunt: no creature target chosen`, rather than leaving the stack silently.

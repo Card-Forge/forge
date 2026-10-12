@@ -410,7 +410,7 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     `(AB|DB)$ Discard` lines that name `Mode$ TgtChoose` and `Defined$ You`/`Opponent`/`Player`/`Player.Opponent`,
     carrying no other unresolved param. `DiscardEffect.java` itself has eight further `Mode$` values (`Hand`, `Random`,
     `YouChoose`, `LookYouChoose`, `RevealYouChoose`, `RevealTgtChoose`, `RevealDiscardAll`, `Defined`) each its own
-    further shape; this port keeps only `TgtChoose`, the corpus's largest at 728 of 942 real lines on its own.
+    further shape; this chunk kept only `TgtChoose`, the corpus's largest at 728 of 942 real lines on its own.
     `TgtChoose`'s own resolution — the discarding player picks their own count of cards out of their own hand — is the
     identical decision shape `DiscardToHandSize` (control.go, CR 514.1's own cleanup discard) already has, but Java
     itself keeps the two as separate `PlayerController` methods (`chooseCardsToDiscardFrom` vs.
@@ -428,21 +428,12 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     `"Player.Opponent"`, which is Java's dotted-suffix filter applied to that same fallthrough set, the identical
     opponents-only result `"Opponent"` gets directly (so both are one case here, as they already were before this
     chunk). `SubAbility$` no longer blocks ("SubAbility chaining itself landed," below): 11 of 254 real SVar-defined
-    `Discard` lines naming it chain to an already-built leaf ability and resolve end to end. Not resolved, each failing
-    loudly by name rather than discarding the wrong cards from the wrong player (PORT-8/GO-7): every `Mode$` other than
-    `TgtChoose` (each its own further shape, above); `ValidTgts$`/`TargetMin$`/`TargetMax$` (98/3/3) — a real target;
-    targeting itself now exists (targeting's own paragraph, below), `Discard` just has not been extended to read
-    `Targeted` back yet; `Optional$` (38) — an interactive confirm this port's own `PlayerController` has no hook for;
-    `AnyNumber$` (16) — a variable count, a different shape from `ChooseCardsToDiscard`'s own exact-count contract;
-    `DiscardValid$`/`DiscardValidDesc$` (18) — a filtered choice set, the identical gap `PutCounter`'s own `Choices$`
-    family already documents; `UnlessType$` (14) — a different sub-flow (`chooseCardsToDiscardUnlessType`, Java's own
-    separate controller method); `RevealNumber$` — a reveal-then-choose-a-subset step ahead of the discard itself;
-    `UnlessCost$`/`UnlessPayer$`/`UnlessSwitched$`/`UnlessResolveSubs$` (10/10/5/0) — "discard unless you pay a cost,"
-    each its own further mechanic; `RememberDiscarded$`/`RememberDiscardingPlayers$`/`RememberDiscardingPlayer$` (88
-    combined) — no `Defined$ Remembered` resolver exists to ever read the value back (chaining itself existing does not
-    help here: `Discard` still blocks `SubAbility$` outright, and even unblocked, `defined.go` has no `"Remembered"`
-    case), the identical "blocked outright rather than silently no-op'd" choice `PutCounter`'s own `RememberCards$`
-    already made.
+    `Discard` lines naming it chain to an already-built leaf ability and resolve end to end. Later work ported the other
+    eight `Mode$` values, `ValidTgts$`/`TargetMin$`/`TargetMax$`, `Optional$`, `AnyNumber$`, `DiscardValid$`,
+    `RevealNumber$` and `RememberDiscardingPlayers$`
+    ([`m6-r9-discard.md`](porting/port-log/game-state/m6-r9-discard.md)). Still refused loudly (PORT-8/GO-7):
+    `UnlessType$` (15), `UnlessCost$`/`UnlessPayer$`/`UnlessSwitched$`, and the suffixed `SharesColorWith` in
+    `DiscardValid$`.
 
     **`scryEffect` (`scryeffect.go`) is M6's ninth script-driven effect, and the first that asks the resolving player to
     reorder a set of cards rather than choose a subset of them.** 332 of the corpus's 415 real `(AB|DB)$ Scry` lines
