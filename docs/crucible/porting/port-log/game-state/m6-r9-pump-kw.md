@@ -83,7 +83,7 @@ candidates nor enough targets (`TargetSelection.java:82`, `:113-120`), and a min
 
 `TestUpToTargetsWithNoCandidateStillResolves` pins the last row. Every smoke card that went plays→refused with this
 change names `TargetMin$ 0`: the ability used to vanish silently, and now reaches its effect, which refuses a param it
-does not resolve (`PutCounter: TargetMin$`, `ChangeZone: Duration$`, ...). Three refuse in `Attach`'s `Object$` with
+does not resolve (`PutCounter: TargetMin$`, `Animate: Duration$`, ...). Three refuse in `Attach`'s `Object$` with
 `Defined$ ... no ancestor ability chose targets`: `definedCards`/`definedPlayers` fail closed on an empty
 `parentTargets`, since they cannot tell "the ancestor chose zero" from "no ancestor targets"; Java's `ParentTarget` is
 an empty list there.
