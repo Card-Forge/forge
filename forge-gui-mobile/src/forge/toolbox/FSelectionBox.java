@@ -22,11 +22,17 @@ import forge.util.Utils;
  */
 public final class FSelectionBox {
     /** Solid outline of things already chosen in the current prompt (cards, players and stack entries alike). */
-    public static final Color CHOSEN_COLOR = Color.YELLOW;
+    public static final Color CHOSEN_COLOR = Color.GOLD;
 
     private static final float DASH = Utils.scale(5);
     private static final long CYCLE_MS = 700; // time for the dashes to slide by one full pattern
     private static final float DEFAULT_THICKNESS = Utils.scale(2);
+
+    // one phase and one theme colour per rendered frame: every box of the frame moves in step, and the clock, the skin
+    // lookup and the render request are done once per frame instead of once per box
+    private static long frameId = -1;
+    private static float framePhase;
+    private static Color frameColor;
 
     private FSelectionBox() {
     }
@@ -38,7 +44,8 @@ public final class FSelectionBox {
 
     /** Colour of the box around things that can be picked. */
     public static Color validColor() {
-        return (Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_THEME) : FSkinColor.get(Colors.CLR_THEME)).getColor();
+        syncFrame();
+        return frameColor;
     }
 
     /** Box around something that can be picked, in the theme's active colour. */
@@ -51,12 +58,20 @@ public final class FSelectionBox {
         draw(g, validColor(), thickness, x, y, w, h);
     }
 
-    /** Same box in another colour (cursor boxes). The dashes alternate between {@code color} and white. */
+    /** Same box in another colour (cursor boxes). The dashes alternate between {@code color} and {@link #CHOSEN_COLOR}. */
     public static void draw(final Graphics g, final Color color, final float thickness, final float x, final float y, final float w, final float h) {
-        final float period = 2 * DASH;
-        final float phase = (System.currentTimeMillis() % CYCLE_MS) / (float) CYCLE_MS * period; // seamless when the cycle wraps
-        g.drawDashedRect(thickness, color, x, y, w, h, DASH, DASH, phase);
-        g.drawDashedRect(thickness, CHOSEN_COLOR, x, y, w, h, DASH, DASH, phase + DASH);
+        syncFrame();
+        g.drawAlternatingDashedRect(thickness, color, CHOSEN_COLOR, x, y, w, h, DASH, framePhase);
+    }
+
+    private static void syncFrame() {
+        final long frame = Gdx.graphics.getFrameId();
+        if (frame == frameId) {
+            return;
+        }
+        frameId = frame;
+        framePhase = (System.currentTimeMillis() % CYCLE_MS) / (float) CYCLE_MS * 2 * DASH; // seamless when the cycle wraps
+        frameColor = (Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_THEME) : FSkinColor.get(Colors.CLR_THEME)).getColor();
         Gdx.graphics.requestRendering(); // next frame, so the dashes keep moving
     }
 }

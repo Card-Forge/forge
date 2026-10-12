@@ -157,11 +157,15 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         set(TrackableProperty.TargetPlayers, PlayerView.getCollection(si.getTargetChoices().getTargetPlayers()));
     }
 
-    /** Other stack items (e.g. a spell a counterspell is aimed at) this item targets. Never null for a populated view. */
+    /** Other stack items (e.g. a spell a counterspell is aimed at) this item targets; null when it targets none. */
     public FCollectionView<StackItemView> getTargetStackItems() {
         return get(TrackableProperty.TargetStackItems);
     }
     void updateTargetStackItems(SpellAbilityStackInstance si) {
+        if (!si.getTargetChoices().isTargetingAnySpell()) {
+            set(TrackableProperty.TargetStackItems, null); // nearly every item: nothing to look up, nothing to sync
+            return;
+        }
         final MagicStack stack = si.getSourceCard().getGame().getStack();
         final List<SpellAbilityStackInstance> targeted = new ArrayList<>();
         for (final SpellAbility sa : si.getTargetChoices().getTargetSpells()) {

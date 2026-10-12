@@ -223,7 +223,8 @@ public class VStack extends FDropDown {
             PlayerView activator = activeStackInstance == null ? null : activeStackInstance.getActivatingPlayer();
             arrowOrigin = arrowOrigin.add(screenPos.x, screenPos.y);
 
-            final Set<Integer> drawnStackTargets = new HashSet<>(); // one arrow per targeted stack entry, however many modes aim at it
+            // one arrow per targeted stack entry, however many modes aim at it; created on first use, as this runs every frame
+            Set<Integer> drawnStackTargets = null;
             StackItemView instance = activeStackInstance;
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
@@ -240,6 +241,7 @@ public class VStack extends FDropDown {
                 // chosen mode's targets on its own sub-instance, the head instance itself has none.
                 final FCollectionView<StackItemView> targetedItems = instance.getTargetStackItems();
                 if (targetedItems != null && !targetedItems.isEmpty()) {
+                    if (drawnStackTargets == null) { drawnStackTargets = new HashSet<>(); }
                     final float edge = screenPos.x + BORDER_THICKNESS;
                     final Vector2 from = new Vector2(edge + activeItem.getLeft(),
                             arrowOrigin.y); // same height as the arrows to cards and players

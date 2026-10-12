@@ -369,7 +369,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     public boolean isSelectable(final StackItemView item) {
-        return item != null && selectableStackItems.contains(item.getId());
+        return item != null && !selectableStackItems.isEmpty() && selectableStackItems.contains(item.getId());
     }
 
     public boolean isSelectingStackItems() {
@@ -385,7 +385,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     public boolean isHighlighted(final StackItemView item) {
-        return item != null && highlightedStackItems.contains(item.getId());
+        return item != null && !highlightedStackItems.isEmpty() && highlightedStackItems.contains(item.getId());
     }
 
     @Override

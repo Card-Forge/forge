@@ -1122,10 +1122,36 @@ public class Graphics implements Disposable {
         }
     }
 
+    /**
+     * Outline of equal dashes that alternate between two colours: the same picture as two {@link #drawDashedRect} calls
+     * half a pattern apart. When opaque, the first colour is drawn as one solid frame and only the second colour's dashes
+     * go over it, which halves the rects drawn (this runs for every selectable card, every frame). Translucent drawing
+     * keeps the two passes so the colours do not blend where they would overlap.
+     */
+    public void drawAlternatingDashedRect(float thickness, Color colorA, Color colorB, float x, float y, float w, float h, float dash, float phase) {
+        if (alphaComposite < 1) {
+            drawDashedRect(thickness, colorA, x, y, w, h, dash, dash, phase);
+            drawDashedRect(thickness, colorB, x, y, w, h, dash, dash, phase + dash);
+            return;
+        }
+        if (dash <= 0 || w <= 0 || h <= 0) {
+            return;
+        }
+        final float t = Math.min(Math.max(thickness, 1f), Math.min(w, h) / 2f);
+        fillRect(colorA, x, y, w, t); // top
+        fillRect(colorA, x, y + h - t, w, t); // bottom
+        fillRect(colorA, x, y + t, t, h - 2 * t); // left
+        fillRect(colorA, x + w - t, y + t, t, h - 2 * t); // right
+        drawDashedRect(thickness, colorB, x, y, w, h, dash, dash, phase + dash);
+    }
+
     // draws the part of an outline (clockwise from the top left corner) between distances a and b, split per edge
     private void dashSegment(Color color, float t, float x, float y, float w, float h, float a, float b) {
         float edgeStart = 0;
         for (int edge = 0; edge < 4; edge++) {
+            if (edgeStart >= b) {
+                break; // the rest of the outline lies beyond this dash
+            }
             final float len = edge % 2 == 0 ? w : h;
             final float lo = Math.max(a, edgeStart), hi = Math.min(b, edgeStart + len);
             if (hi > lo) {
