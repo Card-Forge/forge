@@ -37,7 +37,8 @@ matched nothing and 22 spells with such a part could not be cast. `unlessSacCand
   the cast otherwise): Aether Tide (`Discard<X/Creature>`), Crashing Wave, Foggy Swamp Visions and Waterbender's
   Restoration (`Waterbend<X>` with `Announce$ X`), Tectonic Split, Liesa, Soul Immolation, and the Behold family
   (Champion of the Clachan and four more, Benevolent River Spirit). Java never announces an X that only a RaiseCost part
-  names (`PlaySpellAbility.java:766-782` reads the raw cost), a probable Forge bug to confirm by running it (PORT-8).
+  names (`PlaySpellAbility.java:766-782` reads the raw cost), a suspected Forge bug, see
+  [`forge-java-defects.md`](../../forge-java-defects.md).
 - `Announce$ X` (32 corpus lines) is not read; only the cost decides.
 - Part shapes `parseUnlessCost` does not know: `Discard<N/Random>`, typed `Discard<N/Creature>`, `tapXType` with a
   non-listed type, `Reveal<N/Creature.Colorless>`, `Exile<N/...>`, `Sac<All/...>`.
