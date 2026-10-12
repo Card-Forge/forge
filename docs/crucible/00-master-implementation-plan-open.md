@@ -11,7 +11,7 @@ milestones (M0-M4): [00-master-implementation-plan.md](00-master-implementation-
 Sizes: **S** under a day, one sitting. **M** one porter batch, 1-3 days. **L** 1-2 weeks, a design call or several
 batches. No row is larger. Within a size the order is by value per effort. `R` numbers are this list's own; milestone
 items keep their numbers (24-41). The refusal figures come from `crucible card-smoke -all`
-([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.0% of the 33,419 judged corpus cards play, an upper bound,
+([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 86.1% of the 33,446 judged corpus cards play, an upper bound,
 since silent misses are invisible. Re-rank with the command before starting any M item, because the counts move with
 every port.
 

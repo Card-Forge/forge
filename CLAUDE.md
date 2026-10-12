@@ -207,11 +207,11 @@ Instants/Sorceries through the stack (ADR-0018), trigger firing, replacement eff
 across all eight layers (partial), targeting, SubAbility chaining, last-known information, activated abilities.
 
 M6 in progress: 191 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
-`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 12, none has a real corpus line: `Mutate`,
-`Bond`, `Encode`, `InternalLegendaryRule`/`InternalRadiation`, ... have zero real `AB$`/`SP$`/`DB$` lines under that
-exact name and never surface in `unported-apis.sh`'s corpus-driven listing at all. `ChangeText` and `ExchangeTextBox`
-resolve through Layer 3 word substitution (ADR-0039). `crucible card-smoke -all` measures how many cards play: 86.0% of
-33,419 judged, an upper bound; the refusal causes it groups are the backlog.
+`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 12, none has a real corpus line: `Mutate`, `Bond`,
+`Encode`, `InternalLegendaryRule`/`InternalRadiation`, ... have zero real `AB$`/`SP$`/`DB$` lines under that exact name
+and never surface in `unported-apis.sh`'s corpus-driven listing at all. `ChangeText` and `ExchangeTextBox` resolve
+through Layer 3 word substitution (ADR-0039). `crucible card-smoke -all` measures how many cards play: 86.1% of 33,446
+judged, an upper bound; the refusal causes it groups are the backlog.
 
 Thin or missing: a granted static's Layer 4/5 effects; attack costs; stickers; graveyard-zone ETB and dies watchers;
 `RollDice`'s `DicePTExchanges`; the long tail of single-card shapes. Everything left, easiest first:
