@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 10 | Description$ Enchanted creature gets +0/+10.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddToughness$ 10 | Description$ Enchanted creature gets +0/+10.
 Oracle:Flash\nEnchant creature\nEnchanted creature gets +0/+10.

@@ -1,0 +1,19 @@
+Name:Giant Mana Cake
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Giant
+SVar:STK2:Kind$ Name | Word$ Mana
+SVar:STK3:Kind$ Name | Word$ Cake
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ When this permanent leaves the battlefield, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.") | Triggers$ STK7Leaves
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ When this permanent dies, destroy target nonland permanent. | Triggers$ STK8Dies
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 6 | Toughness$ 2
+SVar:STK7Leaves:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ STK7Token | TriggerDescription$ When this permanent leaves the battlefield, create two Food tokens.
+SVar:STK7Token:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | TokenAmount$ 2
+SVar:STK8Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ STK8Destroy | TriggerDescription$ When this permanent dies, destroy target nonland permanent.
+SVar:STK8Destroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+Oracle:{TK}{TK} — When this permanent leaves the battlefield, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{TK}{TK}{TK}{TK} — When this permanent dies, destroy target nonland permanent.\n{TK}{TK} — 3/3\n{TK}{TK}{TK} — 6/2

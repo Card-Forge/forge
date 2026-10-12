@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target Knight you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Knight.YouCtrl | TgtPrompt$ Select target Knight you control
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+2 and has vigilance.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+2 and has vigilance.
 K:Equip:3
 SVar:BuffedBy:Knight
 DeckHints:Type$Knight

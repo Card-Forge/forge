@@ -1,0 +1,13 @@
+Name:Kwia Vigorbloom
+ManaCost:3 G W W
+Types:Legendary Creature Elder Sphinx
+PT:6/6
+K:Flying
+K:Vigilance
+K:Lifelink
+K:Ward:2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you gain life, create a colorless artifact token named Lotus with "{T}, Sacrifice this token: Add three mana of any one color." This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ lotus | TokenOwner$ You
+DeckHas:Ability$Tokens
+DeckHints:Ability$LifeGain
+Oracle:Flying, vigilance, lifelink, ward {2}\nWhenever you gain life, create a colorless artifact token named Lotus with "{T}, Sacrifice this token: Add three mana of any one color." This ability triggers only once each turn.

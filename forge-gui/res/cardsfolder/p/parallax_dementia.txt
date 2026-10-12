@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 K:Fading:1
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | Description$ Enchanted creature gets +3/+2.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 3 | AddToughness$ 2 | Description$ Enchanted creature gets +3/+2.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME leaves the battlefield, destroy enchanted creature. That creature can't be regenerated.
 SVar:TrigSac:DB$ Destroy | Defined$ AttachedBy TriggeredCardLKICopy | NoRegen$ True
 AI:RemoveDeck:All

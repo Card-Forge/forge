@@ -5,26 +5,29 @@ public class DraftOptions {
         NEVER,
         FIRST_PICK, // only first pick each pack
         WHEN_POD_SIZE_IS_4, // only when pod size is 4, so you can pick two cards each time
-        ALWAYS // each time you receive a pack, you can pick two cards
+        ALWAYS; // each time you receive a pack, you can pick two cards
+
+        /** Resolve the pod-size-conditional rule against an actual pod size. */
+        public DoublePick resolve(int podSize) {
+            return this == WHEN_POD_SIZE_IS_4 ? (podSize == 4 ? ALWAYS : NEVER) : this;
+        }
     };
-    public enum DeckType {
-        Normal, // Standard deck, usually 40 cards
-        Commander // Special deck type for Commander format. Important for selection/construction
-    }
 
     private DoublePick doublePick = DoublePick.NEVER;
     private final int maxPodSize; // Usually 8, but could be smaller for cubes. I guess it could be larger too
     private final int recommendedPodSize; // Usually 8, but is 4 for new double pick
     private final int maxMatchPlayers; // Usually 2, but 4 for things like Commander or Conspiracy
-    private final DeckType deckType; // Normal or Commander
+    private final CardEdition.DraftType deckType; // Normal or Commander
     private final String freeCommander;
+    private final String impliedPartner;
 
-    public DraftOptions(String doublePickOption, int maxPodSize, int recommendedPodSize, int maxMatchPlayers, String deckType, String freeCommander) {
+    public DraftOptions(String doublePickOption, int maxPodSize, int recommendedPodSize, int maxMatchPlayers, CardEdition.DraftType deckType, String freeCommander, String impliedPartner) {
         this.maxPodSize = maxPodSize;
         this.recommendedPodSize = recommendedPodSize;
         this.maxMatchPlayers = maxMatchPlayers;
-        this.deckType = DeckType.valueOf(deckType);
+        this.deckType = deckType;
         this.freeCommander = freeCommander;
+        this.impliedPartner = impliedPartner;
         if (doublePickOption != null) {
             switch (doublePickOption.toLowerCase()) {
                 case "firstpick":
@@ -51,25 +54,20 @@ public class DraftOptions {
     }
 
     public DoublePick isDoublePick(int podSize) {
-        if (doublePick == DoublePick.WHEN_POD_SIZE_IS_4) {
-            if (podSize != 4) {
-                return DoublePick.NEVER;
-            }
-            // only when pod size is 4, so you can pick two cards each time
-            return DoublePick.ALWAYS;
-        }
-
-        return doublePick;
+        return doublePick.resolve(podSize);
     }
 
 
     public int getMaxMatchPlayers() {
         return maxMatchPlayers;
     }
-    public DeckType getDeckType() {
+    public CardEdition.DraftType getDeckType() {
         return deckType;
     }
     public String getFreeCommander() {
         return freeCommander;
+    }
+    public String getImpliedPartner() {
+        return impliedPartner;
     }
 }

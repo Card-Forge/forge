@@ -269,7 +269,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                     data.addAll(arenaData.rewards[i][j].generate(false, null, true));
                 }
             }
-            RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null);
+            RewardScene.instance().loadRewards(data, RewardScene.Type.EventReward, null);
             Forge.switchScene(RewardScene.instance());
         }
         return true;

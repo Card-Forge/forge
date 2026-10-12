@@ -1,0 +1,29 @@
+Name:Magik, Illyana Rasputin
+ManaCost:3 B R
+Types:Legendary Creature Mutant Sorcerer Hero
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+SVar:TrigDig:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE2 | OptionalDecider$ You | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you've sacrificed two or more permanents this turn, you may transform NICKNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent
+AlternateMode:Modal
+Oracle:At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.\nAt the beginning of your end step, if you've sacrificed two or more permanents this turn, you may transform Magik.
+
+ALTERNATE
+
+Name:Darkchild, Demon Uncaged
+ManaCost:3 B R
+Types:Legendary Creature Mutant Demon Sorcerer
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDigUntil | TriggerDescription$ At the beginning of your upkeep, exile cards from the top of your library until you exile a nonland card. You may play those cards this turn.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Pump | Cost$ PayLife<4> | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ NICKNAME gains indestructible until end of turn. Tap her.
+SVar:DBTap:DB$ Tap
+Oracle:At the beginning of your upkeep, exile cards from the top of your library until you exile a nonland card. You may play those cards this turn.\nPay 4 life: Darkchild gains indestructible until end of turn. Tap her.

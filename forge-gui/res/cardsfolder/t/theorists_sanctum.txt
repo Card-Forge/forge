@@ -1,0 +1,7 @@
+Name:Theorist's Sanctum
+ManaCost:no cost
+Types:Land Island
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As this land enters, you may behold a Jace. If you don't, this land enters tapped. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.)
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Behold<1/Jace> | UnlessPayer$ You | StackDescription$ enters tapped.
+A:AB$ Empower | Cost$ 2 U T | Type$ Jace | Num$ 2 | SpellDescription$ Empower Jace 2.
+Oracle:({T}: Add {U}.)\nAs this land enters, you may behold a Jace. If you don't, this land enters tapped. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.)\n{2}{U}, {T}: Empower Jace 2.

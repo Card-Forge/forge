@@ -34,6 +34,7 @@ import forge.game.GameType;
 import forge.game.card.CardUtil;
 import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
+import forge.gui.GuiBase;
 import forge.gui.download.CdnUuidCache;
 import forge.gamemodes.limited.GauntletMini;
 import forge.gamemodes.limited.ThemedChaosDraft;
@@ -157,6 +158,7 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> dungeonPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> attractionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> contraptionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> stickerSheetPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)), PaperCard.class));
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         ImageKeys.initializeDirs(
@@ -210,7 +212,8 @@ public final class FModel {
         // Load card database
         // Custom cards and tokens always load eagerly: StaticData.attemptToLoadCard only
         // consults the main card reader, so a lazy custom reader would never be read.
-        final boolean loadCardsLazily = getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY);
+        // NOTE: UNLESS PROVEN to work on mobile version with no hitches or bugs, don't remove this check.
+        final boolean loadCardsLazily = GuiBase.isMobile() ? false : getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY);
         reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
                 loadCardsLazily);
         tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
@@ -343,6 +346,10 @@ public final class FModel {
 
     public static ItemPool<PaperCard> getContraptionPool() {
         return contraptionPool.get();
+    }
+
+    public static ItemPool<PaperCard> getStickerSheetPool() {
+        return stickerSheetPool.get();
     }
 
     private static boolean keywordsLoaded = false;

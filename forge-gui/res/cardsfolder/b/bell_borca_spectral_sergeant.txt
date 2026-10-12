@@ -9,7 +9,7 @@ SVar:ExiledCMC:Number$0
 SVar:X:TriggeredCard$CardManaCost
 T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ StoreSVar | SVar$ ExiledCMC | Type$ Number | Expression$ 0
-S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | SetPower$ ExiledCMC | Description$ CARDNAME's power is equal to the greatest number noted for it this turn.
+S:Mode$ Continuous | EffectZone$ Battlefield | AffectedDefined$ Self | SetPower$ ExiledCMC | Description$ CARDNAME's power is equal to the greatest number noted for it this turn.
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ PseudoDraw | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
 SVar:PseudoDraw:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile

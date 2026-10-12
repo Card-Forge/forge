@@ -1,0 +1,20 @@
+Name:Unhinged Beast Hunt
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Unhinged
+SVar:STK2:Kind$ Name | Word$ Beast
+SVar:STK3:Kind$ Name | Word$ Hunt
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {T}: You gain 1 life. | Ability$ STK7GainLife
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Whenever this creature attacks, tap each creature an opponent controls with the same power and/or same toughness as this creature. | Triggers$ STK8Attacks
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 2 | Toughness$ 6
+SVar:STK7GainLife:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+SVar:STK8Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK8TapAll | TriggerDescription$ Whenever this creature attacks, tap each creature an opponent controls with the same power and/or same toughness as this creature.
+SVar:STK8TapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl+powerEQSTK8P,Creature.OppCtrl+toughnessEQSTK8T
+SVar:STK8P:Count$CardPower
+SVar:STK8T:Count$CardToughness
+Oracle:{TK}{TK} — {T}: You gain 1 life.\n{TK}{TK}{TK}{TK} — Whenever this creature attacks, tap each creature an opponent controls with the same power and/or same toughness as this creature.\n{TK}{TK} — 4/1\n{TK}{TK}{TK} — 2/6

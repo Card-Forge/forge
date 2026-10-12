@@ -764,6 +764,14 @@ public class ComputerUtilCombat {
             }
         }
 
+        TriggerType mode = trigger.getMode();
+        // every other mode ends in false below; the requirements check runs a
+        // valid-card filter per trigger on the battlefield per attacker-blocker pair
+        if (mode != TriggerType.Attacks && mode != TriggerType.AttackerUnblocked && mode != TriggerType.Blocks
+                && mode != TriggerType.AttackerBlocked && mode != TriggerType.AttackerBlockedByCreature
+                && mode != TriggerType.DamageDone) {
+            return false;
+        }
         if (!trigger.zonesCheck(game.getZoneOf(trigger.getHostCard()))) {
             return false;
         }
@@ -771,7 +779,6 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        TriggerType mode = trigger.getMode();
         if (mode == TriggerType.Attacks) {
             willTrigger = true;
             if (combat.isAttacking(attacker)) {
@@ -2237,7 +2244,18 @@ public class ComputerUtilCombat {
 	                continue;
 	            }
 	
-	            if (!ability.hasParam("KW") || !ComputerUtilCost.canPayCost(ability, controller, false)) {
+	            if (!ability.hasParam("KW")) {
+	                continue;
+	            }
+	            // keyword match first, canPayCost last
+	            boolean grants = false;
+	            for (String keyword : keywords) {
+	            	if (ability.getParam("KW").contains(keyword)) {
+	            		grants = true;
+	            		break;
+	            	}
+	            }
+	            if (!grants) {
 	                continue;
 	            }
 	            if (c != combatant) {
@@ -2252,10 +2270,8 @@ public class ComputerUtilCombat {
 	            	}
 
 	            }
-	            for (String keyword : keywords) {
-	            	if (ability.getParam("KW").contains(keyword)) {
-	            		return true;
-	            	}
+	            if (ComputerUtilCost.canPayCost(ability, controller, false)) {
+	                return true;
 	            }
 	        }
     	}

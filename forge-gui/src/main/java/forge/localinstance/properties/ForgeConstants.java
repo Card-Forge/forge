@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.Map;
 
 public final class ForgeConstants {
+
     private static final Localizer localizer = Localizer.getInstance();
     public static final String GITHUB_FORGE_URL                 = "https://github.com/Card-Forge/forge/";
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
@@ -87,7 +88,6 @@ public final class ForgeConstants {
     public static final String HOWTO_FILE                   = RES_DIR + "howto.txt";
 
     public static final String DRAFT_DIR                    = RES_DIR + "draft" + PATH_SEPARATOR;
-    public static final String DRAFT_RANKINGS_FILE          = DRAFT_DIR + "rankings.txt";
     public static final String DRAFT_RANKINGS_FOLDER          = DRAFT_DIR + "rankings/";
     public static final String SEALED_DIR                   = RES_DIR + "sealed" + PATH_SEPARATOR;
     public static final String CARD_DATA_DIR                = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
@@ -279,6 +279,7 @@ public final class ForgeConstants {
     public static final String QUEST_PREFS_FILE           = USER_PREFS_DIR + "quest.preferences";
     public static final String CONQUEST_PREFS_FILE        = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE       = USER_PREFS_DIR + "item_view.preferences";
+
     public static final String CLOSE_CONN_COMMAND         = "<<_EM_ESOLC_<<";
     public static final String INVALID_HOST_COMMAND       = "<<_TSOH_DILAVNI_<<";
     public static final String CONN_ERROR_PREFIX          = "<<_CONN_ERROR_>>:";

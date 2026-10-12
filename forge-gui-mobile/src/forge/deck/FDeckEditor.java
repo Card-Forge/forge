@@ -1,5 +1,6 @@
 package forge.deck;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -34,6 +35,7 @@ import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.match.views.VChat;
 import forge.screens.match.views.VLog;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
@@ -53,7 +55,7 @@ import java.util.stream.Collectors;
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
     public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
-    private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     //Toggle that suppresses most conformity logic in the editor.
     public static final String DECK_TAG_SUPPRESS_CONFORMITY = "noEditorConformity";
@@ -98,7 +100,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public DeckSection[] getExtraSections() {
             if(getGameType() != null)
                 return getGameType().getSupplimentalDeckSections().toArray(new DeckSection[0]);
-            return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions};
+            return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers};
         }
 
         private IDeckController initDeckController(String editDeckName, String editDeckPath) {
@@ -328,8 +330,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckGroup::new, DeckPreferences::setDraftDeck);
     public static DeckEditorConfig EditorConfigDraft = new GameTypeDeckEditorConfig(GameType.Draft, DECK_CONTROLLER_DRAFT);
 
+    public static DeckEditorConfig EditorConfigCommanderDraft = new GameTypeDeckEditorConfig(GameType.CommanderDraft, DECK_CONTROLLER_DRAFT);
+
     public static DeckEditorConfig EditorConfigSealed = new GameTypeDeckEditorConfig(GameType.Sealed,
             new FileDeckGroupController(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
+            .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
+    /** Editor for network-event sealed/draft pools stored in {@code getNetworkEventDecks()}. */
+    public static DeckEditorConfig EditorConfigNetworkEventPool = new GameTypeDeckEditorConfig(GameType.Sealed,
+            new FileDeckController<>(FModel.getDecks().getNetworkEventDecks(), Deck::new, null))
             .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
     public static DeckEditorConfig EditorConfigWinston = new GameTypeDeckEditorConfig(GameType.Winston,
             new FileDeckGroupController(FModel.getDecks().getWinston(), DeckGroup::new, null));
@@ -401,6 +409,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
                 yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
             }
+            case Stickers -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.STICKER_SHEET_DECK_EDITOR);
             default -> {
                 System.out.printf("Editor (%s) added an unsupported extra deck section - %s%n", deckSection, editorConfig.getGameType());
                 yield new DeckSectionPage(cm, deckSection);
@@ -482,6 +491,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 this.createExtraSectionPage(section).hideTab();
             }
         }
+        //Statistics tab (mana curve, card types, mana identity) always goes last.
+        this.addTabPage(new DeckStatsPage());
+
         //Update the card pool if we now need to mix variant cards into it.
         if(!this.getVariantCardPools().isEmpty() && editorConfig.hasInfiniteCardPool())
             getCatalogPage().scheduleRefresh();
@@ -762,7 +774,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public Deck getDeck() {
         return deck;
     }
-    private void setDeck(Deck deck) {
+    public void setDeck(Deck deck) {
         if (this.deck == deck) { return; }
         this.deck = deck;
         setHeaderText(getDeckController().getDeckDisplayName());
@@ -770,7 +782,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         //reinitialize tab pages when deck changes
         for (TabPage<FDeckEditor> tabPage : tabPages) {
-            ((CardManagerPage) tabPage).onDeckChanged(deck);
+            if (tabPage instanceof CardManagerPage cmp) {
+                cmp.onDeckChanged(deck);
+            }
+            else if (tabPage instanceof DeckStatsPage statsPage) {
+                statsPage.onDeckChanged(deck);
+            }
         }
     }
 
@@ -937,6 +954,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         "CARD_TYPE CONTAINS_ALL Artifact",
                         "CARD_SUB_TYPE CONTAINS_ALL Contraption"
                 }, true);
+                break;
+            case Stickers:
+                cardManager.applyAdvancedSearchFilter("CARD_TYPE CONTAINS_ALL Stickers");
                 break;
             default:
                 cardManager.resetFilters();
@@ -1138,6 +1158,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected final FLabel btnSave;
         protected final FLabel btnMoreOptions;
         protected FDisplayObject btnDraftLog;
+        protected ChatHeaderButton btnChat;
 
         protected DeckHeader() {
             setHeight(HEADER_HEIGHT);
@@ -1186,13 +1207,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
                 btnDraftLog.setSize(width, height);
                 out.add(btnDraftLog);
+                remainingWidth -= width;
+            }
+            if(btnChat != null) {
+                float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
+                btnChat.setSize(width, height);
+                out.add(btnChat);
             }
             return out;
         }
 
         public void initDraftLog(GameLog draftLog, FContainer parentScreen) {
-            VLog draftLogContainer = new VLog(() -> draftLog);
+            VLog draftLogContainer = new VLog(() -> draftLog, true);
             draftLogContainer.setDropDownContainer(parentScreen);
+            // Live-refresh the open dropdown so a remote player's pick shows without local interaction
+            draftLog.addObserver((o, arg) -> FThreads.invokeInEdtNowOrLater(draftLogContainer::refresh));
             this.btnDraftLog = new FLabel.ButtonBuilder()
                     .text(Localizer.getInstance().getMessage("lblEditorLog"))
                     .pressedColor(Header.getBtnPressedColor())
@@ -1201,6 +1230,47 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     .build();
             draftLogContainer.setDropdownOwner(btnDraftLog);
             this.add(btnDraftLog);
+        }
+
+        public VChat initChat(FContainer parentScreen) {
+            VChat chat = new VChat();
+            chat.setDropDownContainer(parentScreen);
+            this.btnChat = new ChatHeaderButton(new FLabel.ButtonBuilder()
+                    .text(Localizer.getInstance().getMessage("lblChat"))
+                    .pressedColor(Header.getBtnPressedColor())
+                    .command((e) -> chat.show())
+                    .font(FSkinFont.get(20)));
+            chat.setDropdownOwner(btnChat);
+            this.add(btnChat);
+            return chat;
+        }
+    }
+
+    /** Header chat button that renders the unread-message badge shared with the in-match chat tab. */
+    protected static class ChatHeaderButton extends FLabel implements IUnreadIndicator {
+        private int unreadCount;
+
+        protected ChatHeaderButton(Builder builder) {
+            super(builder);
+        }
+
+        @Override
+        public void incrementUnread() {
+            unreadCount++;
+            Gdx.graphics.requestRendering();
+        }
+
+        @Override
+        public void clearUnread() {
+            if (unreadCount == 0) { return; }
+            unreadCount = 0;
+            Gdx.graphics.requestRendering();
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            super.draw(g);
+            FMenuTab.drawUnreadBadge(g, unreadCount, getWidth());
         }
     }
 
@@ -1225,6 +1295,34 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         public boolean fling(float velocityX, float velocityY) {
             return false; //prevent left/right swipe to change tabs since it doesn't play nice with item managers
+        }
+    }
+
+    /** Read-only tab showing statistics for the deck currently being edited. */
+    protected static class DeckStatsPage extends DeckEditorPage {
+        private final FDeckStatsView statsView = add(new FDeckStatsView());
+
+        protected DeckStatsPage() {
+            super(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.DECKSTATS);
+        }
+
+        @Override
+        protected void initialize() {
+        }
+
+        protected void onDeckChanged(Deck newDeck) {
+            statsView.setDeck(newDeck);
+        }
+
+        @Override
+        protected void onActivate() {
+            super.onActivate();
+            statsView.setDeck(parentScreen.getDeck()); //recalculate every time the tab is shown
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            statsView.setBounds(0, 0, width, height);
         }
     }
 
@@ -1349,6 +1447,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
          * Moves a pool of `cards` from here to `destination`. Cannot move more copies of a card than are available here.
          */
         public void moveCards(Iterable<Entry<PaperCard, Integer>> cards, CardManagerPage destination) {
+            if(destination == null || destination.cardManager == null) { //TODO: find cause why this is NULL
+                showErrorDialog(Forge.getLocalizer().getMessage("lblError"));
+                return;
+            }
             if(cardManager.isInfinite()) {
                 destination.addCards(cards);
                 return;
@@ -1513,6 +1615,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Dungeon: return from ? "lblfromdungeondeck" : "lbltodungeondeck";
                 case Attractions: return from ? "lblfromattractiondeck" : "lbltoattractiondeck";
                 case Contraptions: return from ? "lblfromcontraptiondeck" : "lbltocontraptiondeck";
+                case Stickers: return from ? "lblfromstickersheets" : "lbltostickersheets";
                 case Avatar: return "lblasavatar";
                 case Commander:
                     if (parentScreen.editorConfig.getGameType() == GameType.Oathbreaker) {
@@ -1583,7 +1686,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //Needs support for tracking whose signature spell is whose, here and elsewhere.
                 return false;
             }
-            List<PaperCard> commanders = parentScreen.getDeck().get(DeckSection.Commander).toFlatList();
+            CardPool commanderPool = parentScreen.getDeck().get(DeckSection.Commander);
+            if (commanderPool == null)
+                return false;
+            List<PaperCard> commanders = commanderPool.toFlatList();
             commanders.removeIf((c) -> c.getRules().canBeSignatureSpell());
             if(commanders.size() != 1)
                 return false;
@@ -1791,6 +1897,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         case Dungeon: cardPool.addAll(FModel.getDungeonPool()); break;
                         case Attractions: cardPool.addAll(FModel.getAttractionPool()); break;
                         case Contraptions: cardPool.addAll(FModel.getContraptionPool()); break;
+                        case Stickers: cardPool.addAll(FModel.getStickerSheetPool()); break;
                     }
                 }
             }
@@ -1963,14 +2070,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    protected static class DeckSectionPage extends CardManagerPage {
+    public static class DeckSectionPage extends CardManagerPage {
         private final String captionPrefix;
-        protected final DeckSection deckSection;
+        public final DeckSection deckSection;
 
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection) {
             this(cardManager, deckSection, ItemManagerConfig.DECK_EDITOR);
         }
-        protected DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config) {
+        public DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config) {
             this(cardManager, deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
         }
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config, String caption, FImage icon) {
@@ -2039,6 +2146,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Schemes:
                 case Attractions:
                 case Contraptions:
+                case Stickers:
                 case Sideboard:
                     ejectCard(card);
                     break;
@@ -2731,5 +2839,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.setModel(deckGroup);
             this.setDeck(deckGroup.getHumanDeck());
         }
+    }
+
+    private static void showErrorDialog(String message) {
+        FOptionPane.showErrorDialog(message);
     }
 }

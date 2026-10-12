@@ -1,7 +1,7 @@
 Name:Bilbo's Ring
 ManaCost:3
 Types:Legendary Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ During your turn, equipped creature has hexproof and can't be blocked.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ During your turn, equipped creature has hexproof and can't be blocked.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Secondary$ True | Condition$ PlayerTurn | Description$ During your turn, equipped creature has hexproof and can't be blocked.
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks alone, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife

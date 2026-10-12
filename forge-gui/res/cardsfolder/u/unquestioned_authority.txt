@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Creature | Description$ Enchanted creature has protection from creatures.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Protection:Creature | Description$ Enchanted creature has protection from creatures.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Enchant creature\nWhen Unquestioned Authority enters, draw a card.\nEnchanted creature has protection from creatures.

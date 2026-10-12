@@ -15,8 +15,10 @@ public class CardImage implements FImage {
     private final PaperCard card;
     private Texture image;
 
+    private CardView cachedCardViewInstance = null;
+
     public CardImage(PaperCard card0) {
-        card = card0;
+        this.card = card0;
     }
 
     @Override
@@ -34,32 +36,41 @@ public class CardImage implements FImage {
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
-        CardView cv = CardView.getCardForUi(card);
-        if (image == null) { //attempt to retrieve card image if needed
+        if (cachedCardViewInstance == null && card != null) {
+            cachedCardViewInstance = CardView.getCardForUi(card);
+        }
+
+        final CardView cv = cachedCardViewInstance;
+        if (cv == null) return; // Safeguard branch
+
+        final String currentUiMask = Forge.enableUIMask != null ? Forge.enableUIMask : "Off";
+        final boolean isOffMask = currentUiMask.equals("Off");
+        final boolean isArtMask = currentUiMask.equals("Art");
+
+        if (image == null) { // attempt to retrieve card image if needed
             image = ImageCache.getInstance().getImage(card);
             if (image == null) {
-                if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
-                    CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, (Forge.enableUIMask.equals("Art") || cv.useCardArt()), true);
-
-                return; //can't draw anything if can't be loaded yet
+                if (!isOffMask) { // render this if mask is still loading
+                    CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, (isArtMask || cv.useCardArt()), true);
+                }
+                return; // can't draw anything if can't be loaded yet
             }
         }
 
-        if (image == ImageCache.getInstance().getDefaultImage() || (Forge.enableUIMask.equals("Art") || cv.useCardArt())) {
+        if (image == ImageCache.getInstance().getDefaultImage() || (isArtMask || cv.useCardArt())) {
             CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
-            if (Forge.enableUIMask.equals("Full")) {
-                if (ImageCache.getInstance().isFullBorder(image))
-                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, false);
-                else {
-                    float radius = (h - w) / 8;
-                    g.drawborderImage(ImageCache.getInstance().borderColor(image), x, y, w, h);
-                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x + radius / 2.2f, y + radius / 2, w * 0.96f, h * 0.96f);
-                }
-            } else if (Forge.enableUIMask.equals("Crop")) {
-                g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h);
-            } else
-                g.drawImage(image, x, y, w, h);
+            switch (currentUiMask) {
+                case "Full":
+                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, 0);
+                    break;
+                case "Crop":
+                    g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x, y, w, h);
+                    break;
+                default:
+                    g.drawImage(image, x, y, w, h);
+                    break;
+            }
         }
     }
 }

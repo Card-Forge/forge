@@ -21,6 +21,8 @@ import forge.util.TextBounds;
 import forge.util.Utils;
 public class FLabel extends FDisplayObject implements IButton {
     public static final float DEFAULT_INSETS = Utils.scale(3);
+    private static final TextBounds textBounds = new TextBounds();
+    private static final TextBounds autoSizeBounds = new TextBounds();
 
     public static class Builder {
         //========== Default values for FLabel are set here.
@@ -279,23 +281,25 @@ public class FLabel extends FDisplayObject implements IButton {
     }
 
     public TextBounds getAutoSizeBounds() {
-        TextBounds bounds;
+        autoSizeBounds.width = 0f;
+        autoSizeBounds.height = 0f;
+
         if (text.isEmpty()) {
-            bounds = new TextBounds();
-            bounds.height += font.getLineHeight();
+            autoSizeBounds.height += font.getLineHeight();
+        } else {
+            font.getMultiLineBounds(text, textBounds);
+            autoSizeBounds.width = textBounds.width;
+            autoSizeBounds.height = textBounds.height + font.getLineHeight() - font.getCapHeight();
         }
-        else {
-            bounds = font.getMultiLineBounds(text);
-            bounds.height += font.getLineHeight() - font.getCapHeight(); //account for height below baseline of final line
-        }
-        bounds.width += 2 * insets.x;
-        bounds.height += 2 * insets.y;
+
+        autoSizeBounds.width += 2 * insets.x;
+        autoSizeBounds.height += 2 * insets.y;
 
         if (icon != null) {
-            bounds.width += icon.getWidth() + insets.x + getExtraGapBetweenIconAndText();
+            autoSizeBounds.width += icon.getWidth() + insets.x + getExtraGapBetweenIconAndText();
         }
 
-        return bounds;
+        return autoSizeBounds;
     }
 
     @Override
@@ -455,6 +459,9 @@ public class FLabel extends FDisplayObject implements IButton {
     }
 
     private float getTextWidth() {
+        if (text.isEmpty()) {
+            return 0f;
+        }
         if (textRenderer == null) {
             return font.getMultiLineBounds(text).width;
         }

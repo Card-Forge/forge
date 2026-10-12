@@ -34,6 +34,9 @@ public class AbandonEffect extends SpellAbilityEffect {
         controller.getZone(ZoneType.Command).remove(source);
         controller.getZone(ZoneType.SchemeDeck).add(source);
 
+        controller.getGame().getTriggerHandler().clearActiveTriggers(source, null);
+        controller.getGame().getTriggerHandler().registerActiveTrigger(source, false);
+
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Scheme, source);
         controller.getGame().getTriggerHandler().runTrigger(TriggerType.Abandoned, runParams, false);

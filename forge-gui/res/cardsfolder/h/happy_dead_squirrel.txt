@@ -1,0 +1,16 @@
+Name:Happy Dead Squirrel
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Happy
+SVar:STK2:Kind$ Name | Word$ Dead
+SVar:STK3:Kind$ Name | Word$ Squirrel
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {T}: Add {C}{C}. Spend this mana only to cast noncreature spells. | Ability$ STK7Mana
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Infect (This permanent deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.) | Keywords$ Infect
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 2
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 4 | Toughness$ 7
+SVar:STK7Mana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Spell.nonCreature | SpellDescription$ Add {C}{C}. Spend this mana only to cast noncreature spells.
+Oracle:{TK}{TK} — {T}: Add {C}{C}. Spend this mana only to cast noncreature spells.\n{TK}{TK}{TK} — Infect (This permanent deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{TK}{TK} — 3/2\n{TK}{TK}{TK}{TK} — 4/7

@@ -185,8 +185,10 @@
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;One of the few sounds in the area, the water wheel on this old mill creaks as it spins gradually in the slowly moving and oddly colored water.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.76.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>
@@ -197,8 +199,10 @@
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;These shops are as lifeless as the rest of the town, but it looks as though there might be some items left behind, suspiciously untouched after however long.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.77.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>
@@ -209,8 +213,10 @@
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;The inn is locked up tightly. The town hall in contrast is missing its front door, but you find nothing out of the ordinary inside, just well organized crumbling papers coveered in illegibly smeared ink.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.78.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>
@@ -221,8 +227,10 @@
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;The vines covering these houses look sickly, as if they are searching for sustenance not found in the soil here.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.79.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>
@@ -243,8 +251,10 @@
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;'Deathly still' seems a fitting description for the graveyard. You find yourself almost wishing for the dead to rise just to have something happen.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.82.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>
@@ -259,9 +269,11 @@
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;introShown&quot;, &quot;not&quot;: true}],
    &quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;introShown&quot;}],
    &quot;text&quot;: &quot;Just as the merchant described, an empty town lies behind these gates. Even the wind seems more still here as if afraid to disturb anything.&quot;,
-   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.83.d.n0.text&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
       &quot;text&quot;: &quot;As you move closer, it becomes obvious that most of the buildings are intact but in a state of disrepair or are outright overgrown. It is doubtful that anyone has resided here in quite some time.&quot;,
-      &quot;options&quot;: [{&quot;name&quot;: &quot;Time to go portal hunting. I don't guess I can ask anyone for directions...&quot;}]
+      &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.83.d.n1.text&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Time to go portal hunting. I don't guess I can ask anyone for directions...&quot;, &quot;locname&quot;: &quot;adv.main_story_defend_waste_town_abandoned.83.d.n3.name&quot;}]
    }]
 }]
 </property>
@@ -322,8 +334,10 @@
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;Perhaps just a trick of the mind, you can't shake the feeling that you're being watched as you explore the area.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_defend_waste_town_abandoned.94.d.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
    </properties>

@@ -4,7 +4,6 @@ import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.geom.AffineTransform;
@@ -32,7 +31,6 @@ import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListChooser;
-import forge.gui.CardListViewer;
 import forge.gui.FThreads;
 import forge.gui.GuiChoose;
 import forge.gui.download.GuiDownloadService;
@@ -169,7 +167,7 @@ public class GuiDesktop implements IGuiBase {
 
     /**
      * Report a prompt that can't be shown because there's no display, so command line runs get the
-     * text on stderr instead of a {@link HeadlessException} thrown from inside the dialog.
+     * text on stderr instead of a {@link java.awt.HeadlessException} thrown from inside the dialog.
      */
     private static void logSuppressedDialog(final String title, final String message, final String outcome) {
         System.err.printf("[headless] %s: %s (%s)%n", title, message, outcome);
@@ -233,7 +231,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void showCardList(final String title, final String message, final List<PaperCard> list) {
-        final CardListViewer cardView = new CardListViewer(title, message, list);
+        final CardListChooser cardView = new CardListChooser(title, message, list, false);
         cardView.setVisible(true);
         cardView.dispose();
     }
@@ -248,7 +246,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public PaperCard chooseCard(String title, String message, List<PaperCard> list) {
-        final CardListChooser cardListChooser = new CardListChooser(title, message, list);
+        final CardListChooser cardListChooser = new CardListChooser(title, message, list, true);
         cardListChooser.setVisible(true);
         cardListChooser.dispose();
         return cardListChooser.getSelectedCard();

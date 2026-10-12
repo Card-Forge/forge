@@ -79,7 +79,7 @@ public class DrawEffect extends SpellAbilityEffect {
             int actualNum = numCards * Collections.frequency(tgts, p);
 
             // it is optional, not upto and player can't choose to draw that many cards
-            if (optional && !upto && !p.canDrawAmount(actualNum)) {
+            if (optional && !upto && !p.canDraw(actualNum)) {
                 continue;
             }
 
