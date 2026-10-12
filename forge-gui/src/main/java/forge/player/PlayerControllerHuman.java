@@ -1758,11 +1758,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
         final UndoManager undo = getGame().getUndoManager();
-        if (!isMacroActive() && !getGui().isNetGame()) {
+        undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
+        if (!isMacroActive()) {
             if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
                 undo.barrier("Opponent's turn");
             } else {
-                undo.checkpoint(getGame());      // must come BEFORE the prompt is built
+                undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
             }
         }
         final InputPassPriority defaultInput = new InputPassPriority(this);
@@ -2790,9 +2791,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         AchievementCollection.updateAll(this);
     }
 
+    private static UndoManager.Mode undoModeFromPrefs() {
+        final String v = FModel.getPreferences().getPref(FPref.UI_UNDO_MODE);
+        if (ForgeConstants.UNDO_MODE_OFF.equals(v)) { return UndoManager.Mode.OFF; }
+        if (ForgeConstants.UNDO_MODE_SINGLE.equals(v)) { return UndoManager.Mode.SINGLE_STEP; }
+        return UndoManager.Mode.FREE;
+    }
+
     public boolean canUndoLastAction() {
         if (getGame().getPhaseHandler().getPriorityPlayer() != player) return false;
-        return getGame().getUndoManager().canUndo() && inputQueue.getInput() instanceof InputPassPriority;
+        return getGame().getUndoManager().canUndo(player) && inputQueue.getInput() instanceof InputPassPriority;
     }
 
     @Override

@@ -553,6 +553,13 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
                 }
             }
         }
+        // Undo rewinds the game in place and writes fields directly, bypassing the dirty tracking the delta
+        // sync relies on, so the client would never hear about most of the changes. Re-send the whole view
+        // (the same thing a checksum resync does) before the events that tell the client's GUI to rebuild.
+        if (useDeltaSync && initialSyncSent && objectsRegistered && events.stream()
+                .anyMatch(e -> e instanceof forge.game.event.GameEventSnapshotRestored r && !r.start())) {
+            sendFullState();
+        }
         if (useDeltaSync && initialSyncSent && objectsRegistered) {
             // Bundle events with delta so they're applied atomically:
             // delta properties first, then events forwarded.
