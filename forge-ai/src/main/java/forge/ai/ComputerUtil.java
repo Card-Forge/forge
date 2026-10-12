@@ -3200,6 +3200,19 @@ public class ComputerUtil {
         return targetables;
     }
 
+    // Check if removing these cards would take away an attacker from a next combat with opp that the AI doesn't survive
+    public static boolean stopsLethalAttack(Player ai, Player opp, Iterable<Card> removed) {
+        boolean containsAttacker = false;
+        for (Card c : removed) {
+            if (c.isCreature() && c.getController().equals(opp) && ComputerUtilCombat.canAttackNextTurn(c, ai)) {
+                containsAttacker = true;
+                break;
+            }
+        }
+        return containsAttacker
+                && predictNextCombatsRemainingLife(ai, true, false, 0, null, List.of(opp)) == Integer.MIN_VALUE;
+    }
+
     // Check if AI life is in danger/serious danger based on next expected combat
     // assuming a loss of "payment" life
     // call this to determine if it's safe to use a life payment spell
