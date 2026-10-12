@@ -1,0 +1,7 @@
+Name:Cryogenic Stasis
+ManaCost:1 U
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | SpellDescription$ Tap target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Tap target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nDraw a card.

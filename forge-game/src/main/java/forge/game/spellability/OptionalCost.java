@@ -14,6 +14,7 @@ public enum OptionalCost {
     Retrace("Retrace", ""),
     Jumpstart("Jump-start", ""),
     Offering("Offering", ""),
+    Teamwork("Teamwork", ""),
     ReduceW("(to reduce white mana)", "W"),
     ReduceU("(to reduce blue mana)", "U"),
     ReduceB("(to reduce black mana)", "B"),

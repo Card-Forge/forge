@@ -1,0 +1,8 @@
+Name:Jarvis, Earth's Mightiest Butler
+ManaCost:2 U
+Types:Legendary Creature Human Advisor
+PT:1/4
+T:Mode$ SpellCast | ValidCard$ Hero | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a Hero spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast a Hero spell, draw a card.

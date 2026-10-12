@@ -105,6 +105,15 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      * static initializer has run.
      */
     public static void registerErrorHandling() {
+        if (logChannel != null) {
+            // Already holding our slot lock in this JVM (e.g. Forge.create() re-entered
+            // after Android recreates the GL surface/context). Re-running the logic below
+            // would tryLock() our own activeLogFile via a second channel, which throws
+            // OverlappingFileLockException (not an IOException, so it wouldn't be caught
+            // by the archive-probe loop) and would also claim a second log slot.
+            return;
+        }
+
         File parent = new File(ForgeConstants.LOG_FILE).getParentFile();
         parent.mkdirs();
 

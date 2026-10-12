@@ -1,0 +1,7 @@
+Name:Fíli and Kíli, Joyous
+ManaCost:2 R
+Types:Legendary Creature Dwarf Bard
+PT:3/3
+K:Haste
+A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 2 | RestrictValid$ Spell.Dwarf,Spell.Equipment,Spell.Saga | SpellDescription$ Add {R}{R}. Spend this mana only to cast Dwarf, Equipment, and Saga spells.
+Oracle:Haste\n{T}: Add {R}{R}. Spend this mana only to cast Dwarf, Equipment, and Saga spells.

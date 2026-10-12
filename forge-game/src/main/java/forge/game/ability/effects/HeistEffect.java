@@ -20,6 +20,11 @@ import forge.util.Localizer;
 public class HeistEffect extends SpellAbilityEffect {
 
     @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
+    @Override
     public void resolve(SpellAbility sa) {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());

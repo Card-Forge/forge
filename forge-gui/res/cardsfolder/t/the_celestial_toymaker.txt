@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 3 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ ExileDown
 SVar:ExileDown:DB$ ChangeZone | ChooseFromDefined$ Remembered | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | ChangeNum$ 3 | Imprint$ True | ForgetChanged$ True | SubAbility$ ExileRest
 SVar:ExileRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | ChangeType$ Card.IsRemembered | SubAbility$ Separate
-SVar:Separate:DB$ TwoPiles | Defined$ You | DefinedPiles$ Imprinted,Remembered | Chooser$ TriggeredDefendingPlayer | ChosenPile$ DBHand | SubAbility$ DBCleanup
+SVar:Separate:DB$ TwoPiles | Defined$ You | DefinedPiles$ Imprinted,Remembered | Chooser$ TriggeredDefendingPlayer | ChosenPile$ DBHand | FaceDown$ One | SubAbility$ DBCleanup
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigLife | TriggerDescription$ At the beginning of each end step, each opponent loses 2 life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn.

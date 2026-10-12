@@ -1,0 +1,5 @@
+Name:Cadet
+ManaCost:no cost
+Types:Creature Wizard Soldier
+PT:2/2
+Oracle:

@@ -1,0 +1,6 @@
+Name:Scarlet Witch, Wanda Maximoff
+ManaCost:2 R
+Types:Legendary Creature Mutant Warlock Hero
+PT:2/3
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

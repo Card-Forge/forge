@@ -1,0 +1,7 @@
+Name:Sound the Trumpets
+ManaCost:1 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBRecruit | SpellDescription$ Counter target spell. If that spell's mana value was 2 or less, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+SVar:DBRecruit:DB$ Recruit | ConditionCheckSVar$ X | ConditionSVarCompare$ LE2
+SVar:X:SpellTargeted$CardManaCostLKI
+Oracle:Counter target spell. If that spell's mana value was 2 or less, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)

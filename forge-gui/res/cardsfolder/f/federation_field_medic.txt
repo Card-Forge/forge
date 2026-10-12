@@ -1,0 +1,12 @@
+Name:Federation Field Medic
+ManaCost:3 W
+Types:Creature Human Doctor
+PT:3/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBDraw
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains vigilance until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
+SVar:DBDraw:DB$ Draw | ConditionPresent$ Permanent.YouCtrl+HasCounters | SpellDescription$ Draw a card if you control a permanent with a counter on it.
+DeckHas:Ability$Counters
+Oracle:Vigilance\nWhen this creature enters, choose one —\n• Put a +1/+1 counter on target creature. It gains vigilance until end of turn.\n• Draw a card if you control a permanent with a counter on it.

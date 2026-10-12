@@ -233,7 +233,6 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 List<PaperCard> toRemove = tDeck.toFlatList().stream()
                         .filter(PaperCardPredicates.NOT_BASIC_LAND)
@@ -282,10 +281,7 @@ public abstract class DeckGeneratorBase {
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
-        Predicate<CardRules> canUseInFormat = c -> {
-            // FIXME: should this be limited to AI only (!forAi) or should it be generally applied to all random generated decks?
-            return !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
-        };
+        Predicate<CardRules> canUseInFormat = c -> !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
 
         if (useArtifacts) {
             hasColor = hasColor.or(COLORLESS_CARDS);

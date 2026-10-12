@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
@@ -13,6 +12,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -22,6 +22,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConniveEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
 
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
@@ -59,47 +64,49 @@ public class ConniveEffect extends SpellAbilityEffect {
         for (final Player p : controllers) {
             final CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
             while (!connivers.isEmpty()) {
-                final Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
                 final GameEntityCounterTable counterPlacements = new GameEntityCounterTable();
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
                 connivers.remove(conniver);
 
-                if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(conniver))
+                if (game.getReplacementHandler().run(ReplacementType.Connive, AbilityKey.mapFromAffected(conniver))
                         != ReplacementResult.NotReplaced) {
                     continue;
                 }
 
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
                 p.drawCards(num, sa, moveParams);
+                zoneMovements.triggerChangesZoneAll(game, sa);
 
                 // in case anything triggers from drawing that happened before discard, e.g. Sneaky Snacker
                 game.getTriggerHandler().collectTriggerForWaiting();
 
                 CardCollection hand = new CardCollection(p.getCardsIn(ZoneType.Hand));
-                if (hand.isEmpty() || !p.canDiscardBy(sa, true)) {
-                    continue;
+                if (!hand.isEmpty() && p.canDiscardBy(sa, true)) {
+                    int amt = Math.min(hand.size(), num);
+                    CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
+                            p.getController().chooseCardsToDiscardFrom(p, sa, hand, amt, amt);
+
+                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
+
+                    // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
+                    Card gamec = game.getCardState(conniver);
+                    // if the card is not in the game anymore, this might still return true, but it's no problem
+                    if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
+                        int numCntrs = CardLists.count(toBeDiscarded, CardPredicates.NON_LANDS);
+                        gamec.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
+                    }
+
+                    moveParams = AbilityKey.newMap();
+                    zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+                    discard(sa, true, Map.of(p, CardCollection.getView(toBeDiscarded)), moveParams);
+                    counterPlacements.replaceCounterEffect(game, sa);
+                    zoneMovements.triggerChangesZoneAll(game, sa);
                 }
 
-                int amt = Math.min(hand.size(), num);
-                CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                        p.getController().chooseCardsToDiscardFrom(p, sa, hand, amt, amt);
-
-                toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-
-                // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
-                Card gamec = game.getCardState(conniver);
-                // if the card is not in the game anymore, this might still return true, but it's no problem
-                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
-                    int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
-                    conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
-                }
-                final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
-                discardedMap.put(p, CardCollection.getView(toBeDiscarded));
-                discard(sa, true, discardedMap, moveParams);
-                counterPlacements.replaceCounterEffect(game, sa);
-                zoneMovements.triggerChangesZoneAll(game, sa);
+                game.getTriggerHandler().runTrigger(TriggerType.Connives, AbilityKey.mapFromCard(conniver), false);
             }
         }
     }

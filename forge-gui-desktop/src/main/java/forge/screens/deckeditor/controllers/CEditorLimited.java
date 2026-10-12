@@ -62,7 +62,7 @@ import forge.util.storage.IStorage;
  * @author Forge
  * @version $Id: DeckEditorCommon.java 12850 2011-12-26 14:55:09Z slapshot5 $
  */
-public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
+public class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
 
     private final DeckController<T> controller;
     private DragCell constructedDecksParent = null;
@@ -71,7 +71,7 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
-    private final List<DeckSection> allSections = new ArrayList<>();
+    protected final List<DeckSection> allSections = new ArrayList<>();
 
     /** Picks the editor screen for a network event deck from its eventFormat tag. */
     public static FScreen networkEventEditorScreen(Deck deck) {
@@ -116,10 +116,13 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
+
         this.getCbxSection().addActionListener(actionEvent -> {
             FComboBox cb = (FComboBox)actionEvent.getSource();
             DeckSection ds = (DeckSection)cb.getSelectedItem();
-            setEditorMode(ds);
+            if (ds != null) {
+                setEditorMode(ds);
+            }
         });
     }
 

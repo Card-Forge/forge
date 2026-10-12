@@ -156,7 +156,7 @@ public class GuiMobile implements IGuiBase {
                 } else if (paperCard != null) {
                     Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
                     if (cardImage != null)
-                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, paperCard.isFoil());
+                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, 0);
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away
@@ -294,11 +294,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void refreshSkin() {
-        //todo refresh skin selector
-    }
-
-    @Override
     public void copyToClipboard(final String text) {
         Forge.getClipboard().setContents(text);
     }
@@ -346,6 +341,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IGuiGame getNewGuiGame() {
+        MatchController.instance.resetForNewMatch();
         return MatchController.instance;
     }
 

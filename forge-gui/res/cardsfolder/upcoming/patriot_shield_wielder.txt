@@ -1,6 +1,0 @@
-Name:Patriot, Shield Wielder
-ManaCost:1 W
-Types:Legendary Creature Human Hero
-PT:2/2
-A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature.Other+YouCtrl | ValidTgtDesc$ another creature you control | NumAtt$ +2 | KW$ Hexproof | SpellDescription$ Another target creature you control gets +2/+0 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
-Oracle:{2}, {T}: Another target creature you control gets +2/+0 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

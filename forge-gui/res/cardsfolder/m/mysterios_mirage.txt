@@ -1,0 +1,7 @@
+Name:Mysterio's Mirage
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you discarded a card this turn, create a 3/3 blue Illusion Villain creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ u_3_3_illusion_villain | TokenOwner$ You
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+Oracle:At the beginning of your end step, if you discarded a card this turn, create a 3/3 blue Illusion Villain creature token.

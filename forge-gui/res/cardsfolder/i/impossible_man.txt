@@ -1,0 +1,7 @@
+Name:Impossible Man
+ManaCost:2 U
+Types:Legendary Creature Alien Shapeshifter
+PT:1/4
+K:Flying
+A:AB$ Clone | Cost$ 2 U | ValidTgts$ Permanent.Other | ValidTgtsDesc$ another permanent | NewName$ Impossible Man | Duration$ UntilEndOfTurn | SpellDescription$ CARDNAME becomes a copy of another target permanent until end of turn, except his name is Impossible Man.
+Oracle:Flying\n{2}{U}: Impossible Man becomes a copy of another target permanent until end of turn, except his name is Impossible Man.

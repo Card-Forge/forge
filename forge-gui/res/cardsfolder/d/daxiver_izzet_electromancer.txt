@@ -1,0 +1,7 @@
+Name:Daxiver, Izzet Electromancer
+ManaCost:1 U R
+Types:Legendary Creature Goblin Wizard
+PT:2/4
+DeckRule:ColorIdentity:Exempt$ Instant,Sorcery | ActiveSection$ Commander | Description$ Rulebreaker — If CARDNAME is your commander, you may include instant and sorcery cards of any color in your deck regardless of color identity.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add one mana of any color. Spend this mana only to cast instant and sorcery spells.
+Oracle:Rulebreaker — If Daxiver, Izzet Electromancer is your commander, you may include instant and sorcery cards of any color in your deck regardless of color identity.\n{T}: Add one mana of any color. Spend this mana only to cast instant and sorcery spells.

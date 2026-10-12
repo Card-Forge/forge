@@ -1,0 +1,6 @@
+Name:Sadistic Slash
+ManaCost:3 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SpellDescription$ Target creature gets -5/-5 until end of turn.
+K:Mayhem:1 B
+Oracle:Target creature gets -5/-5 until end of turn.\nMayhem {1}{B} (You may cast this card from your graveyard for {1}{B} if you discarded it this turn.)

@@ -1,0 +1,9 @@
+Name:Katara, Waterbending Master|Deck:Katara, Waterbending Master.dck|Variant:Commander|Avatar:Katara, Waterbending Master|Desc:
+Name:Wan Shi Tong, Librarian|Deck:Wan Shi Tong, Librarian.dck|Variant:Commander|Avatar:Wan Shi Tong, Librarian|Desc:
+Name:Master Pakku|Deck:Master Pakku.dck|Variant:Commander|Avatar:Master Pakku|Desc:
+Name:Ty Lee, Chi Blocker|Deck:Ty Lee, Chi Blocker.dck|Variant:Commander|Avatar:Ty Lee, Chi Blocker|Desc:
+Name:Stonehewer Giant Avatar|Deck:Stonehewer Giant Avatar.dck|Variant:Vanguard|Avatar:Stonehewer Giant Avatar|Desc:
+Name:Sokka, Bold Boomeranger|Deck:Sokka, Bold Boomeranger.dck|Variant:Commander|Avatar:Sokka, Bold Boomeranger|Desc:
+Name:Guru Pathik|Deck:Guru Pathik.dck|Variant:Commander|Avatar:Guru Pathik|Desc:
+Name:Katara, Seeking Revenge|Deck:Katara, Seeking Revenge.dck|Variant:Commander|Avatar:Katara, Seeking Revenge|Desc:
+Name:Teo, Spirited Glider|Deck:Teo, Spirited Glider.dck|Variant:Commander|Avatar:Teo, Spirited Glider|Desc:

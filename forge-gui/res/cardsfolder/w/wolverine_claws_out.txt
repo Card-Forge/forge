@@ -1,0 +1,10 @@
+Name:Wolverine, Claws Out
+ManaCost:3 G
+Types:Legendary Creature Mutant Berserker Hero
+PT:2/5
+S:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Card.Self | Optional$ True | Description$ You may have NICKNAME assign his combat damage as though he weren't blocked.
+T:Mode$ Attacks | ValidCard$ Mutant.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Mutant you control attacks, double its power until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ Double
+SVar:PlayMain1:TRUE
+DeckHints:Type$Mutant
+Oracle:You may have Wolverine assign his combat damage as though he weren't blocked.\nWhenever a Mutant you control attacks, double its power until end of turn.

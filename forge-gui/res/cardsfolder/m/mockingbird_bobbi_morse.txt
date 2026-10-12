@@ -1,0 +1,9 @@
+Name:Mockingbird, Bobbi Morse
+ManaCost:3 W
+Types:Legendary Creature Human Hero
+PT:3/3
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME is dealt damage, put a +1/+1 counter on her. (She must survive the damage to get the counter.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasCombatEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Whenever Mockingbird is dealt damage, put a +1/+1 counter on her. (She must survive the damage to get the counter.)

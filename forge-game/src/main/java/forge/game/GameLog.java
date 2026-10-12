@@ -36,6 +36,17 @@ public class GameLog extends Observable implements Serializable {
     private final List<GameLogEntry> log = new ArrayList<>();
 
     private final transient GameLogFormatter formatter = new GameLogFormatter(this);
+    private long matchStartMillis = -1;
+
+    public void markMatchStartIfNeeded() {
+        if (matchStartMillis < 0) {
+            matchStartMillis = System.currentTimeMillis();
+        }
+    }
+
+    public long getMatchStartMillis() {
+        return matchStartMillis;
+    }
 
     /** Logging level:
      * 0 - Turn
@@ -53,14 +64,40 @@ public class GameLog extends Observable implements Serializable {
     }
 
     void add(GameLogEntry entry) {
-        log.add(entry);
+        synchronized (log) {
+            log.add(entry);
+        }
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    private List<GameLogEntry> snapshot() {
+        synchronized (log) {
+            return new ArrayList<>(log);
+        }
+    }
+
+    public int size() {
+        synchronized (log) {
+            return log.size();
+        }
+    }
+
+    /** Undo support: drops every entry added after the log had {@code size} entries. */
+    public void truncateTo(final int size) {
+        synchronized (log) {
+            if (size < 0 || size >= log.size()) {
+                return;
+            }
+            log.subList(size, log.size()).clear();
+        }
         this.setChanged();
         this.notifyObservers();
     }
 
     /** All entries in chronological (insertion) order — note {@link #getLogEntries} returns newest-first. */
     public List<GameLogEntry> getAllEntries() {
-        return new ArrayList<>(log);
+        return snapshot();
     }
 
     /**
@@ -70,10 +107,11 @@ public class GameLog extends Observable implements Serializable {
      * @return the log text
      */
     public List<GameLogEntry> getLogEntries(final GameLogEntryType logLevel) { // null to fetch all
+        final List<GameLogEntry> all = snapshot();
         final List<GameLogEntry> result = new ArrayList<>();
     
-        for (int i = log.size() - 1; i >= 0; i--) {
-            GameLogEntry le = log.get(i);
+        for (int i = all.size() - 1; i >= 0; i--) {
+            GameLogEntry le = all.get(i);
             if (logLevel == null || le.type().compareTo(logLevel) <= 0) {
                 result.add(le);
             }
@@ -86,9 +124,10 @@ public class GameLog extends Observable implements Serializable {
     }
 
     public List<GameLogEntry> getLogEntriesForTypes(final Set<GameLogEntryType> types) {
+        final List<GameLogEntry> all = snapshot();
         final List<GameLogEntry> result = new ArrayList<>();
-        for (int i = log.size() - 1; i >= 0; i--) {
-            GameLogEntry le = log.get(i);
+        for (int i = all.size() - 1; i >= 0; i--) {
+            GameLogEntry le = all.get(i);
             if (types.contains(le.type())) {
                 result.add(le);
             }
@@ -97,10 +136,11 @@ public class GameLog extends Observable implements Serializable {
     }
 
     public List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel) { // null to fetch all
+        final List<GameLogEntry> all = snapshot();
         final List<GameLogEntry> result = new ArrayList<>();
     
-        for (int i = log.size() - 1; i >= 0; i--) {
-            GameLogEntry le = log.get(i);
+        for (int i = all.size() - 1; i >= 0; i--) {
+            GameLogEntry le = all.get(i);
             if (logLevel == null || le.type().compareTo(logLevel) == 0) {
                 result.add(le);
             }

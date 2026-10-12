@@ -2,7 +2,7 @@ Name:Zephyr Boots
 ManaCost:1
 Types:Artifact Equipment
 K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Flying | Description$ Equipped creature has flying.
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoot | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, draw a card, then discard a card.
 SVar:TrigLoot:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1

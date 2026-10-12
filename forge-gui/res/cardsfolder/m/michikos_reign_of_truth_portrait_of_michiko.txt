@@ -19,6 +19,6 @@ ManaCost:no cost
 Colors:white
 Types:Enchantment Creature Human Noble
 PT:0/0
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each artifact and/or enchantment you control.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each artifact and/or enchantment you control.
 SVar:X:Count$Valid Artifact.YouCtrl,Enchantment.YouCtrl
 Oracle:Portrait of Michiko gets +1/+1 for each artifact and/or enchantment you control.

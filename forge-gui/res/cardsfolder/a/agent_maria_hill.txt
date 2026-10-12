@@ -1,0 +1,8 @@
+Name:Agent Maria Hill
+ManaCost:W
+Types:Legendary Creature Human Spy Hero
+PT:2/1
+T:Mode$ Taps | ValidCard$ Card.Self | Teamwork$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME becomes tapped to pay a teamwork cost, put a +1/+1 counter on her and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Whenever Agent Maria Hill becomes tapped to pay a teamwork cost, put a +1/+1 counter on her and draw a card.

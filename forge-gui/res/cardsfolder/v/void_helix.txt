@@ -1,0 +1,6 @@
+Name:Void Helix
+ManaCost:4 B B
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 5 damage to any target and you gain 5 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5
+Oracle:Void Helix deals 5 damage to any target and you gain 5 life.

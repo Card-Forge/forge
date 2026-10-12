@@ -1,0 +1,14 @@
+Name:Roxi, Publicist to the Stars
+ManaCost:2 U R
+Types:Legendary Creature Human Employee
+PT:*/4
+K:Flying
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of permanents you control with an art sticker plus the number of cards in your graveyard with an art sticker.
+SVar:X:Count$Valid Permanent.YouCtrl+stickeredWith Art/Plus.Y
+SVar:Y:Count$ValidGraveyard Card.YouOwn+stickeredWith Art
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, distribute up to two art stickers among one or two nonland permanents you own.
+SVar:TrigSticker:DB$ PutSticker | Kind$ Art | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True | SubAbility$ DBSticker2
+SVar:DBSticker2:DB$ PutSticker | Kind$ Art | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own for the second art sticker | Optional$ True
+SVar:NoZeroToughnessAI:True
+DeckHas:Ability$Graveyard
+Oracle:Flying\nRoxi's power is equal to the number of permanents you control with an art sticker plus the number of cards in your graveyard with an art sticker.\nWhen Roxi enters, distribute up to two art stickers among one or two nonland permanents you own.

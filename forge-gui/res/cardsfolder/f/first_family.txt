@@ -1,0 +1,30 @@
+Name:First Family
+ManaCost:2 G U
+Types:Instant
+A:SP$ Draw | NumCards$ X | LockInText$ True | SubAbility$ DBGainLife | SpellDescription$ You draw X cards and gain X life, where X is the number of colors among permanents you control and spells you've cast this turn.
+SVar:DBGainLife:DB$ GainLife | LockInText$ True | LifeAmount$ X
+SVar:X:SVar$WUBR/Plus.G
+SVar:WUBR:SVar$WU/Plus.BR
+SVar:WU:SVar$W/Plus.U
+SVar:BR:SVar$B/Plus.R
+SVar:W:SVar$W2/LimitMax.1
+SVar:U:SVar$U2/LimitMax.1
+SVar:B:SVar$B2/LimitMax.1
+SVar:R:SVar$R2/LimitMax.1
+SVar:G:SVar$G2/LimitMax.1
+SVar:W2:SVar$WP/Plus.WS
+SVar:U2:SVar$UP/Plus.US
+SVar:B2:SVar$BP/Plus.BS
+SVar:R2:SVar$RP/Plus.RS
+SVar:G2:SVar$GP/Plus.GS
+SVar:WP:Count$Valid Permanent.White+YouCtrl
+SVar:UP:Count$Valid Permanent.Blue+YouCtrl
+SVar:BP:Count$Valid Permanent.Black+YouCtrl
+SVar:RP:Count$Valid Permanent.Red+YouCtrl
+SVar:GP:Count$Valid Permanent.Green+YouCtrl
+SVar:WS:Count$ThisTurnCast_Card.White+YouCtrl
+SVar:US:Count$ThisTurnCast_Card.Blue+YouCtrl
+SVar:BS:Count$ThisTurnCast_Card.Black+YouCtrl
+SVar:RS:Count$ThisTurnCast_Card.Red+YouCtrl
+SVar:GS:Count$ThisTurnCast_Card.Green+YouCtrl
+Oracle:You draw X cards and gain X life, where X is the number of colors among permanents you control and spells you've cast this turn.

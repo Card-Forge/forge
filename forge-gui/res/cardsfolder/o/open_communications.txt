@@ -1,0 +1,6 @@
+Name:Open Communications
+ManaCost:U
+Types:Sorcery
+K:Beam me up:2 U
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Draw a card.\nBeam me up {2}{U} (You may cast this card from your graveyard for {2}{U} if you also return a creature you control to its owner's hand. Then exile this spell.)

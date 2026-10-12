@@ -273,9 +273,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
                 }
             }
             return desc;
-        } else {
-            return "";
         }
+        return "";
     }
 
     /**

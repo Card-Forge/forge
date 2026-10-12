@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | Description$ Enchanted creature gets -1/-1.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ -1 | AddToughness$ -1 | Description$ Enchanted creature gets -1/-1.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return CARDNAME from your graveyard to the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self.YouOwn
 Oracle:Enchant creature\nEnchanted creature gets -1/-1.\nWhen enchanted creature dies, return Screams from Within from your graveyard to the battlefield.

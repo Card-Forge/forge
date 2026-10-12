@@ -1,0 +1,12 @@
+Name:Galactus, Devourer of Worlds
+ManaCost:10
+Types:Legendary Creature Elder Alien
+PT:12/12
+K:Flying
+K:Trample
+K:Indestructible
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, exile target permanent.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Exile
+S:Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Opponent.lifeEQX | IsPresent$ Creature.YouCtrl+namedSilver Surfer; Galactus's Herald | PresentCompare$ EQ0 | Description$ Insatiable Hunger — NICKNAME attacks an opponent with the most life among your opponents each combat if able unless you control a creature named Silver Surfer, Galactus's Herald.
+SVar:X:Count$OppGreatestLifeTotal
+Oracle:Flying, trample, indestructible\nWhen Galactus enters, exile target permanent.\nInsatiable Hunger — Galactus attacks an opponent with the most life among your opponents each combat if able unless you control a creature named Silver Surfer, Galactus's Herald.

@@ -1,0 +1,9 @@
+Name:Virtual Assistant
+ManaCost:1 U
+Types:Artifact Creature Illusion Advisor
+PT:3/3
+K:Defender
+T:Mode$ SpellCast | ValidSA$ Spell.Teamwork | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell using teamwork, create a 1/1 colorless Robot Hero artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ c_1_1_a_robot_hero_flying | SpellDescription$ Create a 1/1 colorless Robot Hero artifact creature token with flying.
+DeckHas:Ability$Token
+Oracle:Defender\nWhenever you cast a spell using teamwork, create a 1/1 colorless Robot Hero artifact creature token with flying.

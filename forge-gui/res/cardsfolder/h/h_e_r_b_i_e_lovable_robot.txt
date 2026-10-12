@@ -1,0 +1,12 @@
+Name:H.E.R.B.I.E., Lovable Robot
+ManaCost:2
+Types:Legendary Artifact Creature Robot Scout
+PT:1/1
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigSurveil | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:Flying\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, surveil 1.\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color.

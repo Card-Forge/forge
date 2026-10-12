@@ -6,7 +6,7 @@ K:Flying
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME enters or attacks, create a white Aura enchantment token named Contract attached to target creature an opponent controls. The token has enchant creature and "Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life."
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, create a white Aura enchantment token named Contract attached to target creature an opponent controls. The token has enchant creature and "Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life."
-SVar:TrigToken:DB$ Token | TokenScript$ contract | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.OppCtrl | ValidTgtDesc$ creature an opponent controls
+SVar:TrigToken:DB$ Token | TokenScript$ contract | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
 Oracle:Flying, deathtouch\nWhenever Scriv enters or attacks, create a white Aura enchantment token named Contract attached to target creature an opponent controls. The token has enchant creature and "Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life."

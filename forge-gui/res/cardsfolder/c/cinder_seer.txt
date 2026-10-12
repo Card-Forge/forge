@@ -6,5 +6,5 @@ A:AB$ Reveal | Cost$ 2 R T | Defined$ You | RevealValid$ Card.Red | AnyNumber$ T
 SVar:DBCinderDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBCinderCleanup
 SVar:X:Remembered$Amount
 SVar:DBCinderCleanup:DB$ Cleanup | ClearRemembered$ True
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:{2}{R}, {T}: Reveal any number of red cards in your hand. Cinder Seer deals X damage to any target, where X is the number of cards revealed this way.

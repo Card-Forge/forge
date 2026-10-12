@@ -24,7 +24,6 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
-import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
@@ -101,6 +100,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility auraAbility;
     private SpellAbility permanentAbility;
 
+    private Map<MagicColor.Color, SpellAbility> landManaAbilities = Maps.newEnumMap(MagicColor.Color.class);
+
     private ReplacementEffect loyaltyRep;
     private ReplacementEffect defenseRep;
     private ReplacementEffect sagaRep;
@@ -110,7 +111,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
-    private LandTraitChanges landTraitChanges = new LandTraitChanges(this);
+    // wrapped in a List so it can be reused directly
+    private List<LandTraitChanges> landTraitChanges = List.of(new LandTraitChanges(this));
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -538,14 +540,20 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
     }
 
-    public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
+    public SpellAbility getLandManaForColor(MagicColor.Color c) {
+        return landManaAbilities.computeIfAbsent(c, a -> {
+            String abString  = "AB$ Mana | Cost$ T | Produced$ " + a.getShortName() +
+                    " | Secondary$ True | SpellDescription$ Add " + a.getSymbol() + ".";
+            SpellAbility sa = AbilityFactory.getAbility(abString, this);
+            sa.setIntrinsic(true); // always intrinsic
+            return sa;
+        });
+    }
 
-    record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges, IKeywordsChange
+    public List<LandTraitChanges> getLandTraitChanges() { return this.landTraitChanges; }
+
+    record LandTraitChanges(CardState state) implements ICardTraitChanges, IKeywordsChange
     {
-        LandTraitChanges(CardState state) {
-            this(state, Maps.newEnumMap(MagicColor.Color.class));
-        }
-
         public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
             if (state.getCard().hasRemoveIntrinsic()) {
                 list.clear();
@@ -559,13 +567,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                    continue;
                }
                if (type.hasSubtype(c.getBasicLandType())) {
-                   list.add(map.computeIfAbsent(c, a -> {
-                       String abString  = "AB$ Mana | Cost$ T | Produced$ " + a.getShortName() +
-                               " | Secondary$ True | SpellDescription$ Add " + a.getSymbol() + ".";
-                       SpellAbility sa = AbilityFactory.getAbility(abString, state);
-                       sa.setIntrinsic(true); // always intrinsic
-                       return sa;
-                   }));
+                   list.add(state.getLandManaForColor(c));
                }
             }
             return list;
@@ -579,6 +581,17 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
             if (state.getCard().hasRemoveIntrinsic()) {
                 list.clear();
+            }
+
+            CardTypeView type = state.getTypeWithChanges();
+            if (type.isPlaneswalker()) {
+                list.add(state.getLoyaltyRep());
+            }
+            if (type.isBattle()) {
+                list.add(state.getDefenseRep());
+            }
+            if (type.isSaga() && !state.hasKeyword(Keyword.READ_AHEAD)) {
+                list.add(state.getSagaRep());
             }
             return list;
         }
@@ -731,25 +744,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             if (getCard().hasState(CardStateName.RightSplit))
                 result.addAll(getCard().getState(CardStateName.RightSplit).replacementEffects);
         }
-        CardTypeView type = getTypeWithChanges();
-        if (type.isPlaneswalker()) {
-            if (loyaltyRep == null) {
-                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
-            }
-            result.add(loyaltyRep);
-        }
-        if (type.isBattle()) {
-            if (defenseRep == null) {
-                defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
-            }
-            result.add(defenseRep);
-        }
-        if (type.isSaga() && !hasKeyword(Keyword.READ_AHEAD)) {
-            if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
-            }
-            result.add(sagaRep);
-        }
 
         card.updateReplacementEffects(result, this, rulesHost);
 
@@ -791,6 +785,25 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
         return null;
+    }
+
+    public ReplacementEffect getLoyaltyRep() {
+        if (loyaltyRep == null) {
+            loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
+        }
+        return loyaltyRep;
+    }
+    public ReplacementEffect getDefenseRep() {
+        if (defenseRep == null) {
+            defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
+        }
+        return defenseRep;
+    }
+    public ReplacementEffect getSagaRep() {
+        if (sagaRep == null) {
+            sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+        }
+        return sagaRep;
     }
 
     @Override
@@ -853,6 +866,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setFunctionalVariantName(source.getFunctionalVariantName());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setBasePowerString(source.getBasePowerString());
+        setBaseToughnessString(source.getBaseToughnessString());
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
@@ -943,6 +958,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             if (source.omenRep != null) {
                 omenRep = source.omenRep.copy(card, true);
             }
+
+            for (Map.Entry<MagicColor.Color, SpellAbility> e : source.landManaAbilities.entrySet()) {
+                this.landManaAbilities.put(e.getKey(), e.getValue().copy(card, true));
+            }
         }
     }
 
@@ -1020,7 +1039,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      */
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
+        return CardStateProperty.hasProperty(this, sourceController, source, property, spellAbility);
     }
 
     public ImmutableList<CardTraitBase> getTraits() {

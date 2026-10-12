@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.google.common.collect.Sets;
 
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameType;
@@ -19,10 +19,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.localinstance.properties.ForgeConstants;
-import forge.model.FModel;
 
 public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzle> {
     String name;
@@ -106,10 +104,6 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     
     private void loadGameState(List<String> stateLines) {
         this.parse(stateLines);
-    }
-
-    public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
-        return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
     }
 
     public void setupMaxPlayerHandSize(Game game, int maxHandSize) {

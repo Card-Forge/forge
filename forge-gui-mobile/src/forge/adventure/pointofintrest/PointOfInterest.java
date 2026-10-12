@@ -20,7 +20,6 @@ public class PointOfInterest implements Serializable, SaveFileContent {
 
     @Override
     public void load(SaveFileData saveFileData) {
-
         position.set(saveFileData.readVector2("position"));
         data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"));
         rectangle.set(saveFileData.readRectangle("rectangle"));
@@ -47,7 +46,6 @@ public class PointOfInterest implements Serializable, SaveFileContent {
 
     @Override
     public SaveFileData save() {
-
         SaveFileData data=new SaveFileData();
         data.store("name",this.data.name);
         data.store("position",position);
@@ -108,6 +106,10 @@ public class PointOfInterest implements Serializable, SaveFileContent {
 
     public Rectangle getBoundingRectangle() {
         return rectangle;
+    }
+
+    public Vector2 getCenter() {
+        return rectangle.getCenter(new Vector2());
     }
 
     public PointOfInterestData getData() {

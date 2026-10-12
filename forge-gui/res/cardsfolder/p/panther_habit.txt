@@ -1,0 +1,8 @@
+Name:Panther Habit
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:2
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.EquippedBy | ReplaceWith$ DBPutCounter | PreventionEffect$ True | AlwaysReplace$ True | Description$ If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ X
+SVar:X:ReplaceCount$DamageAmount
+Oracle:If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it.\nEquip {2}

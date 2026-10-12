@@ -14,8 +14,11 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.gui.FThreads;
 import forge.toolbox.FOverlay;
+import forge.util.ScreenUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+
+import java.util.function.Consumer;
 
 public class LoadingOverlay extends FOverlay {
     private static final float INSETS = Utils.scale(10);
@@ -53,10 +56,15 @@ public class LoadingOverlay extends FOverlay {
     }
 
     public static void runBackgroundTask(String caption0, final Runnable task) {
+        runBackgroundTask(caption0, false, loader -> task.run());
+    }
+
+    public static void runBackgroundTask(String caption0, boolean blockInput, final Consumer<LoadingOverlay> task) {
         final LoadingOverlay loader = new LoadingOverlay(caption0, true);
+        loader.blockInput = blockInput;
         loader.show();
         FThreads.invokeInBackgroundThread(() -> {
-            task.run();
+            task.accept(loader);
             FThreads.invokeInEdtLater(loader::hide);
         });
     }
@@ -76,7 +84,7 @@ public class LoadingOverlay extends FOverlay {
     public LoadingOverlay(Runnable toRun, boolean aftermatch, boolean otherTransition) {
         caption = "";
         textMode = true;
-        textureRegion = Forge.takeScreenshot();
+        textureRegion = ScreenUtil.getInstance().takeScreenshot();
         match = true;
         bgAnimation = new BGAnimation();
         runnable = toRun;
@@ -139,11 +147,19 @@ public class LoadingOverlay extends FOverlay {
         }
     }
 
+    private boolean blockInput = false; // true while an uncancelable background task is running
+
     @Override
     public boolean keyDown(int keyCode) {
-        if (match)
+        if (match || blockInput)
             return true;
         return super.keyDown(keyCode);
+    }
+
+    @Override
+    public void hide() {
+        blockInput = false;
+        super.hide();
     }
 
     private class BGAnimation extends ForgeAnimation {

@@ -1,0 +1,9 @@
+Name:Colossal Collision
+ManaCost:3 G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | SubAbility$ DBDamage | AILogic$ PowerDmg | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg
+K:TypeCycling:Basic:2
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature an opponent controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

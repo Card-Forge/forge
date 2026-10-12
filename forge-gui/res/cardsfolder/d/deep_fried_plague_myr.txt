@@ -1,0 +1,19 @@
+Name:Deep-Fried Plague Myr
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Deep-Fried
+SVar:STK2:Kind$ Name | Word$ Plague
+SVar:STK3:Kind$ Name | Word$ Myr
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever this creature attacks, scry 1. | Triggers$ STK7Attacks
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Whenever this permanent leaves the battlefield, you may destroy target artifact or enchantment. | Triggers$ STK8Leaves
+SVar:STK9:Kind$ PT | Tickets$ 3 | Power$ 4 | Toughness$ 5
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 8 | Toughness$ 4
+SVar:STK7Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK7Scry | TriggerDescription$ Whenever this creature attacks, scry 1.
+SVar:STK7Scry:DB$ Scry | ScryNum$ 1
+SVar:STK8Leaves:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ STK8Destroy | TriggerDescription$ Whenever this permanent leaves the battlefield, you may destroy target artifact or enchantment.
+SVar:STK8Destroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+Oracle:{TK}{TK} — Whenever this creature attacks, scry 1.\n{TK}{TK}{TK} — Whenever this permanent leaves the battlefield, you may destroy target artifact or enchantment.\n{TK}{TK}{TK} — 4/5\n{TK}{TK}{TK}{TK} — 8/4

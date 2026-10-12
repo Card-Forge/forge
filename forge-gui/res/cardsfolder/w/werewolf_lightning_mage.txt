@@ -1,0 +1,19 @@
+Name:Werewolf Lightning Mage
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Werewolf
+SVar:STK2:Kind$ Name | Word$ Lightning
+SVar:STK3:Kind$ Name | Word$ Mage
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Landfall — Whenever a land enters under your control, put a +1/+1 counter on this permanent. | Triggers$ STK7Landfall
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Whenever a creature blocks this creature, that creature gets -4/-4 until end of turn. | Triggers$ STK8Blocked
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 3 | Toughness$ 5
+SVar:STK7Landfall:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ STK7PutCounter | TriggerDescription$ Landfall — Whenever a land enters under your control, put a +1/+1 counter on this permanent.
+SVar:STK7PutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:STK8Blocked:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ STK8Pump | TriggerDescription$ Whenever a creature blocks this creature, that creature gets -4/-4 until end of turn.
+SVar:STK8Pump:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True
+Oracle:{TK}{TK} — Landfall — Whenever a land enters under your control, put a +1/+1 counter on this permanent.\n{TK}{TK}{TK}{TK} — Whenever a creature blocks this creature, that creature gets -4/-4 until end of turn.\n{TK}{TK} — 4/1\n{TK}{TK}{TK} — 3/5

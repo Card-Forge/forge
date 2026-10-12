@@ -1,0 +1,8 @@
+Name:Vision, Spectral Synthezoid
+ManaCost:6 U U
+Types:Legendary Artifact Creature Robot Hero
+PT:2/5
+K:Flying
+S:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | Affected$ Card.nonCreature+YouOwn,Card.Robot+YouOwn | AffectedZone$ Hand | Condition$ PlayerTurn | Description$ Once during each of your turns, you may cast a noncreature or Robot spell from your hand without paying its mana cost.
+DeckHints:Type$Robot
+Oracle:Flying\nOnce during each of your turns, you may cast a noncreature or Robot spell from your hand without paying its mana cost.

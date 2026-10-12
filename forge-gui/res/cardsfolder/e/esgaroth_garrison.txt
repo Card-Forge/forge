@@ -1,0 +1,9 @@
+Name:Esgaroth Garrison
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:*/5
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRecruit | TriggerDescription$ When this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+SVar:TrigRecruit:DB$ Recruit
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Esgaroth Garrison's power is equal to the number of creatures you control.\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)

@@ -26,12 +26,13 @@ import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.StackItemView;
+import forge.game.undo.UndoManager;
 import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.SuggestionType;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
-import forge.gamemodes.net.server.FServerManager;
-import forge.gamemodes.net.server.FServerManager.AfkTimeout;
+import forge.gamemodes.net.server.HostingServer;
+import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.util.collect.FCollectionView;
 import forge.model.FModel;
@@ -72,10 +73,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     public void showAndWait() {
-        final FServerManager server = FServerManager.getInstance();
-        final AfkTimeout timeout = server != null
-                ? server.armAfkTimeout(getController(), this)
-                : AfkTimeout.NOOP;
+        final AfkTimeout timeout = HostingServer.armAfkTimeout(getController(), this);
         try {
             super.showAndWait();
         } finally {
@@ -86,7 +84,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        if (!isAlreadyYielding()) {
+        if (!getController().isMacroActive() && !isAlreadyYielding()) {
             // Suppress one prompt after a yield ends — avoids "yielded → ended → yield again?" loop
             if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_AFTER_END)
                     && getController().getYieldController().didYieldJustEnd()) {
@@ -133,6 +131,13 @@ public class InputPassPriority extends InputSyncronizedBase {
         showNormalPrompt();
     }
 
+    /** Ends this prompt without an action; the game thread then performs a pending undo. */
+    public void restartPrompt() {
+        if (isFinished()) return;
+        chosenSa = new ArrayList<>();   // non-null: no end-turn auto-pass, no awaitNextInput
+        stop();
+    }
+
     private void showYieldSuggestionPrompt() {
         // State may have flipped between the initial check and now (e.g. async multiplayer click).
         if (isAlreadyYielding()) {
@@ -167,8 +172,14 @@ public class InputPassPriority extends InputSyncronizedBase {
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
-        if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
+        /*if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
             getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblUndo") + " (" + getController().getGame().getStack().getUndoStackSize() + ")", true, true, true);
+        }*/
+        if (getController().canUndoLastAction()) {
+            final UndoManager um = getController().getGame().getUndoManager();
+            final int n = um.undosLeft();
+            final String undoLabel = localizer.getMessage("lblUndo") + (n > 0 ? " (" + n + ")" : "");
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), undoLabel, true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
             getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true, true, true);
@@ -250,7 +261,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                     boolean atOrPast = YieldController.isPriorityAtOrPastMarker(
                             getGameView(), self, PhaseType.UPKEEP);
                     yc.setMarker(self, PhaseType.UPKEEP, atOrPast);
-                    getController().getGui().applyYieldUpdate(
+                    if (getController().isRemoteClient()) getController().getGui().applyYieldUpdate(
                             new YieldUpdate.SetMarker(self, PhaseType.UPKEEP, atOrPast));
                 }
             }
@@ -262,6 +273,12 @@ public class InputPassPriority extends InputSyncronizedBase {
             return;
         }
 
+        passPriority();
+    }
+
+    /** Distinct from clicking OK, which accepts a yield suggestion when one is on screen. */
+    public void passPriority() {
+        if (isFinished()) return;
         passPriority(() -> {
             getController().macros().addRememberedAction(new PassPriorityAction(
                     getController().getGame().getStack().isEmpty(),

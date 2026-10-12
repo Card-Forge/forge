@@ -1,0 +1,9 @@
+Name:Quicksilver, Speedster
+ManaCost:3 U R
+Types:Legendary Creature Mutant Hero
+PT:3/4
+K:Flash
+K:Double Strike
+K:Haste
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ You | IsPresent$ Card.Self+tapped | Description$ As long as NICKNAME is tapped, you may cast spells as though they had flash.
+Oracle:Flash\nDouble strike, haste\nAs long as Quicksilver is tapped, you may cast spells as though they had flash.

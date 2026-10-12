@@ -35,6 +35,8 @@ public class FButton extends FDisplayObject implements IButton {
     private boolean toggled = false;
     private boolean pressed = false;
     private FEventHandler command;
+    private static final TextBounds textBounds = new TextBounds();
+    private static final TextBounds autoSizeBounds = new TextBounds();
 
     public enum Corner {
         None,
@@ -192,10 +194,19 @@ public class FButton extends FDisplayObject implements IButton {
     }
 
     public TextBounds getAutoSizeBounds() {
-        TextBounds bounds = new TextBounds();
-        bounds.width = font.getBounds(text).width + 2 * PADDING;
-        bounds.height = 3 * font.getCapHeight();
-        return bounds;
+        autoSizeBounds.width = 0f;
+        autoSizeBounds.height = 0f;
+
+        if (text == null || text.isEmpty()) {
+            autoSizeBounds.width = 2 * PADDING;
+        } else {
+            font.getBounds(text, 0, text.length(), textBounds);
+            autoSizeBounds.width = textBounds.width + 2 * PADDING;
+        }
+
+        autoSizeBounds.height = 3 * font.getCapHeight();
+
+        return autoSizeBounds;
     }
 
     @Override

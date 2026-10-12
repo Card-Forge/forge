@@ -1,0 +1,10 @@
+Name:Avenge
+ManaCost:4 W W
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | Description$ This spell costs {2} less to cast if a player attacked you during their last turn.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all creatures. You gain 1 life for each creature destroyed this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | SubAbility$ DBCleanup | LifeAmount$ Y
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountPlayers$HasPropertyattackedYouTheirLastTurn
+SVar:Y:Remembered$Amount
+Oracle:This spell costs {2} less to cast if a player attacked you during their last turn.\nDestroy all creatures. You gain 1 life for each creature destroyed this way.

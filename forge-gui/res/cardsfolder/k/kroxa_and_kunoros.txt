@@ -8,7 +8,7 @@ K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME enters or attacks, you may exile five cards from your graveyard. When you do, return target creature card from your graveyard to the battlefield.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, you may exile five cards from your graveyard. When you do, return target creature card from your graveyard to the battlefield.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileFromGrave<5/Card> | Execute$ TrigReturn | SpellDescription$ When you do, return target creature card from your graveyard to the battlefield.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature to return from your graveyard
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard
 SVar:NeedsToPlayVar:Z EQ6
 SVar:X:Count$ValidGraveyard Card.YouOwn/LimitMax.6
 SVar:Y:Count$ValidGraveyard Creature.YouOwn/LimitMax.1

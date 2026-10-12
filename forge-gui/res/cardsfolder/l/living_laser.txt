@@ -1,0 +1,10 @@
+Name:Living Laser
+ManaCost:4 R
+Types:Legendary Creature Elemental Villain
+PT:4/4
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, for each card you've discarded this turn, create a token that's a copy of CARDNAME, except the token isn't legendary. The tokens enter tapped and attacking. Exile the tokens at the beginning of the next end step.
+SVar:TrigCopy:DB$ CopyPermanent | NumCopies$ X | Defined$ Self | NonLegendary$ True | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Exile
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nWhenever Living Laser attacks, for each card you've discarded this turn, create a token that's a copy of Living Laser, except the token isn't legendary. The tokens enter tapped and attacking. Exile the tokens at the beginning of the next end step.

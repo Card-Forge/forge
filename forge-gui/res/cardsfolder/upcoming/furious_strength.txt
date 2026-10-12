@@ -1,7 +1,0 @@
-Name:Frantic Strength
-ManaCost:2 R
-Types:Enchantment Aura
-K:Enchant:Creature
-SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Enchanted creature gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)
-Oracle:Enchanted creature gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)

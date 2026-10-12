@@ -1,0 +1,9 @@
+Name:Yume, Chronicler of Valor
+ManaCost:1 W
+Types:Legendary Creature Human Druid
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.YouCtrl | Condition$ PlayerTurn | AffectedZone$ Stack | AddKeyword$ Assist | CheckSVar$ X | SVarCompare$ EQ0 | Description$ The first spell you cast during each of your turns has assist. When you cast that spell, if another player spent mana to cast it, you and that player each draw a card. (As you cast a spell with assist, you may choose another player. They may pay some or all of the generic mana in the spell's cost.)
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | ValidSA$ Spell.ManaSpentBy Player.Other | PlayerTurn$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ The first spell you cast during each of your turns has assist. When you cast that spell, if another player spent mana to cast it, you and that player each draw a card. (As you cast a spell with assist, you may choose another player. They may pay some or all of the generic mana in the spell's cost.)
+SVar:TrigDraw:DB$ Draw | Defined$ You & TriggeredSpellAbility>ManaSpender.Other
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:The first spell you cast during each of your turns has assist. When you cast that spell, if another player spent mana to cast it, you and that player each draw a card. (As you cast a spell with assist, you may choose another player. They may pay some or all of the generic mana in the spell's cost.)

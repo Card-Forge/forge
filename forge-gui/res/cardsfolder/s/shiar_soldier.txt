@@ -1,0 +1,7 @@
+Name:Shi'ar Soldier
+ManaCost:1 U
+Types:Creature Shi'ar Soldier
+PT:1/3
+K:Flying
+A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Permanent.YouCtrl+Other | ValidTgtsDesc$ another target permanent you control | Origin$ Battlefield | Destination$ Hand | PlayerTurn$ True | SpellDescription$ Return another target permanent you control to its owner's hand. Activate only during your turn.
+Oracle:Flying\n{U}, {T}: Return another target permanent you control to its owner's hand. Activate only during your turn.

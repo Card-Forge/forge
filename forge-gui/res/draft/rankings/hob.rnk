@@ -1,0 +1,189 @@
+//Rank|Name|Rarity|Set
+#1|Beorn the Fierce|M|HOB
+#2|Smaug the Magnificent|M|HOB
+#3|The Arkenstone|M|HOB
+#4|Tom, Bert, and William|R|HOB
+#5|Fíli the Pathfinder|R|HOB
+#6|Thranduil's Company|R|HOB
+#7|An Unexpected Party|R|HOB
+#8|Chief Warg's Company|R|HOB
+#9|Dáin Ironfoot|R|HOB
+#10|Thorin, Mountain-king|M|HOB
+#11|Dancing from Dark to Dawn|M|HOB
+#12|Kíli the Resourceful|R|HOB
+#13|Smaug, Wicked Worm|R|HOB
+#14|Great Gilded Boat|R|HOB
+#15|The Mountain-king's Return|U|HOB
+#16|Bothersome Noisemaker|U|HOB
+#17|Gandalf, Goblins' Bane|M|HOB
+#18|Bilbo, Luckwearer|U|HOB
+#19|Crude Bent Blade|C|HOB
+#20|The Eagles Are Coming!|R|HOB
+#21|Bard's Company|R|HOB
+#22|Belladonna Took|R|HOB
+#23|Dáin's Company|R|HOB
+#24|Desolation Prowler|U|HOB
+#25|Down in the Valley|R|HOB
+#26|Dwalin, Weaponmaster|R|HOB
+#27|Elven Passage|R|HOB
+#28|Head of the Hunt|R|HOB
+#29|Plunder the Trollshaws|C|HOB
+#30|Radagast of Rhosgobel|R|HOB
+#31|Bilbo, Thief in the Night|M|HOB
+#32|Burn, Burn, Tree and Fern|U|HOB
+#33|Celebrate the Mountain-king|U|HOB
+#34|Gollum, Riddle Master|M|HOB
+#35|Gollum, Silent Slinker|C|HOB
+#36|Roads Go Ever, Ever On|R|HOB
+#37|The Sackville-Bagginses|R|HOB
+#38|Bejeweled Warg|R|HOB
+#39|Down, Down to Goblin-town|U|HOB
+#40|Settle the Wreckage|R|HOB
+#41|Stone by Sunlight|U|HOB
+#42|The Lonely Mountain|R|HOB
+#43|Along the Crooked Way|R|HOB
+#44|Azog, Moria's Ruin|R|HOB
+#45|Cantankerous Keepers|R|HOB
+#46|Elrond, Moon-Reader|M|HOB
+#47|Gandalf, Spark Starter|U|HOB
+#48|Gigantic Big Bear|R|HOB
+#49|Master's Councillors|U|HOB
+#50|Mirkwood Pathmaker|U|HOB
+#51|The Master of Lake-town|R|HOB
+#52|The Notary Hobbits|R|HOB
+#53|Thranduil, Sindarin Liege|U|HOB
+#54|Long Lake Nuisance|C|HOB
+#55|Patient Instructor|C|HOB
+#56|Pinecone Strike|C|HOB
+#57|Riddles in the Dark|R|HOB
+#58|Bilbo Baggins, Burglar|C|HOB
+#59|Bolg's Company|R|HOB
+#60|Elven Raft-Steerer|U|HOB
+#61|Iron Hills Blacksmith|U|HOB
+#62|Misty Mountains Raider|U|HOB
+#63|The Black Arrow|U|HOB
+#64|Thranduil's Decree|U|HOB
+#65|Esgaroth Garrison|C|HOB
+#66|Lakeshore Apothecary|C|HOB
+#67|Mirkwood Nurturer|C|HOB
+#68|Most Decrepit Old Bird|R|HOB
+#69|My Precious|R|HOB
+#70|Nighthowl Pursuer|U|HOB
+#71|Ravening Warg|C|HOB
+#72|Bilbo's Deadly Slice|C|HOB
+#73|Eagle's Rescue|U|HOB
+#74|Large Bear|U|HOB
+#75|Nasty Little Rabbit|U|HOB
+#76|Rhovanion Rampager|R|HOB
+#77|Smaug, the Great Calamity|C|HOB
+#78|Sound the Trumpets|U|HOB
+#79|Thorin Oakenshield|U|HOB
+#80|Thrór's Map|U|HOB
+#81|Uneasy Partings|C|HOB
+#82|Bard the Bowman|U|HOB
+#83|Dwarven Mauler|U|HOB
+#84|Goblin Plate Mail|C|HOB
+#85|Great Ugly-Looking Goblin|U|HOB
+#86|Lake-town Mariners|U|HOB
+#87|Old Thrush|C|HOB
+#88|Orcrist, Goblin-cleaver|M|HOB
+#89|Tidings of War|C|HOB
+#90|Dori, Bearer of Friends|C|HOB
+#91|Enchanted River's Grasp|C|HOB
+#92|Fearsome Goblin Pair|U|HOB
+#93|Glóin the Mighty|U|HOB
+#94|Gnashing of Teeth|U|HOB
+#95|Gollum the Abandoned|U|HOB
+#96|Lake-town|C|HOB
+#97|Magnificent End|C|HOB
+#98|Stir Up Trouble|C|HOB
+#99|Beorn's Hospitality|U|HOB
+#100|Desert Were-Worm|R|HOB
+#101|Duskwatch Hunter|C|HOB
+#102|Front Porch Sentries|C|HOB
+#103|Goblin-town|C|HOB
+#104|Óin the Brave|C|HOB
+#105|Roll-Roll-Roll-Roll|R|HOB
+#106|Stony-Voiced Goblins|C|HOB
+#107|The Lord of the Eagles|R|HOB
+#108|The Misty Mountains Cold|R|HOB
+#109|Bofur, Reliable Guardian|U|HOB
+#110|Desolation of Smaug|R|HOB
+#111|Guardian of the Halls|C|HOB
+#112|Gundabad Opportunist|C|HOB
+#113|Inside Information|M|HOB
+#114|Nori, Teller of Tales|C|HOB
+#115|Ori, Keeper of Songs|C|HOB
+#116|Quarrel|C|HOB
+#117|Rage into the Valley|C|HOB
+#118|The Queen of Dale|M|HOB
+#119|Attercop|C|HOB
+#120|Bombur, Gentle Dreamer|U|HOB
+#121|Dwarven Provisioner|C|HOB
+#122|Gandalf, Wandering Wizard|C|HOB
+#123|Hobbit Hole|C|HOB
+#124|Ragged Short Spear|C|HOB
+#125|Stone-Giant of High Pass|R|HOB
+#126|Velvetwing Butterflies|C|HOB
+#127|Wargling|C|HOB
+#128|Bard, King of Dale|M|HOB
+#129|Bifur, Melodic Rider|U|HOB
+#130|Dreaded Bat-Cloud|U|HOB
+#131|Silvan Reveler|U|HOB
+#132|Thranduil, the Elvenking|R|HOB
+#133|Troll Negotiations|U|HOB
+#134|Warg Tactics|C|HOB
+#135|Elvenking's Harper|C|HOB
+#136|Gathering of Darkness|U|HOB
+#137|Lake-town Toymaker|U|HOB
+#138|Little Bear|C|HOB
+#139|Mirkwood|C|HOB
+#140|The Chief Warg|U|HOB
+#141|Bolg of the North|U|HOB
+#142|Boughside Wanderers|C|HOB
+#143|Confusticate and Bebother|C|HOB
+#144|Iron Hills|C|HOB
+#145|Moment of Glory|C|HOB
+#146|Ordinary Bear|C|HOB
+#147|The Great Goblin|R|HOB
+#148|Thorin's Last Stand|C|HOB
+#149|Uncover the Moon-Letters|R|HOB
+#150|Wood Elves|C|HOB
+#151|Balin, Loremaster|R|HOB
+#152|Dáin, Lord of the Iron Hills|U|HOB
+#153|Dwarven Shortsword|C|HOB
+#154|Goblin-town Flunkies|C|HOB
+#155|Great Fierce Bee|C|HOB
+#156|Snowslope Hunter|U|HOB
+#157|Sting, Bilbo's Sword|R|HOB
+#158|Wilderland Scrounger|U|HOB
+#159|Old Fat Spider|U|HOB
+#160|Dwarven Mattock|U|HOB
+#161|Long-Bodied Grey Dog|C|HOB
+#162|Mirkwood Meditator|C|HOB
+#163|Old Fat Spider Can't See Me|U|HOB
+#164|Ravenhill Flock|U|HOB
+#165|Beorn, Reluctant Host|C|HOB
+#166|Elvenking's Halls|C|HOB
+#167|Galion, Elvenking's Butler|U|HOB
+#168|Reverent Howl|C|HOB
+#169|Smaug's Fury|C|HOB
+#170|Troop of Ponies|U|HOB
+#171|Woodland Weavemaster|U|HOB
+#172|Bilbo's Gambit|R|HOB
+#173|Eagle of the Great Shelf|U|HOB
+#174|Fateful Discovery|M|HOB
+#175|Giant's Boulder|C|HOB
+#176|Glamdring, Foe-hammer|R|HOB
+#177|Gleaming Splendor|M|HOB
+#178|Iron Hills Stalwart|C|HOB
+#179|Key to the Side-Door|U|HOB
+#180|Lake-town Lookout|C|HOB
+#181|Last Light of Durin's Day|R|HOB
+#182|Part in Friendship|R|HOB
+#183|Vow to Erebor|C|HOB
+#184|Well-Worn Spatula|C|HOB
+#185|Wizard's Staff|R|HOB
+#186|Getaway Barrel|R|HOB
+#187|Supper for Spiders|R|HOB
+#188|Through the Forest Gate|R|HOB

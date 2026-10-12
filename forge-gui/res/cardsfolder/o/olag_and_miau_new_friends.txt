@@ -1,0 +1,14 @@
+Name:Olag and Miau, New Friends
+ManaCost:W B G
+Types:Legendary Creature Zombie Cat
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Zombie.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterCat | TriggerDescription$ Whenever another Zombie you control enters, put a +1/+1 counter on target Cat you control.
+SVar:TrigPutCounterCat:DB$ PutCounter | ValidTgts$ Cat.YouCtrl | ValidTgtsDesc$ Cat you control | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Cat.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterZombie | TriggerDescription$ Whenever another Cat you control enters, put a +1/+1 counter on target Zombie you control.
+SVar:TrigPutCounterZombie:DB$ PutCounter | ValidTgts$ Zombie.YouCtrl | ValidTgtsDesc$ Zombie you control | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, each opponent loses life equal to the number of tapped Cats and/or Zombies you control.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.Opponent
+SVar:X:Count$Valid Cat.YouCtrl+tapped,Zombie.YouCtrl+tapped
+DeckHas:Ability$Counters
+DeckHints:Type$Cat|Zombie
+Oracle:Whenever another Zombie you control enters, put a +1/+1 counter on target Cat you control.\nWhenever another Cat you control enters, put a +1/+1 counter on target Zombie you control.\nAt the beginning of your end step, each opponent loses life equal to the number of tapped Cats and/or Zombies you control.

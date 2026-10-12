@@ -1,7 +1,7 @@
 Name:Oura, the Imitator
 ManaCost:1 U B
 Types:Legendary Creature Faerie Noble
-PT:2/2
+PT:2/3
 K:Flash
 K:Flying
 K:Lifelink

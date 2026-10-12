@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 import org.jupnp.UpnpServiceConfiguration;
 
 public interface IGuiBase {
+
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();
@@ -39,7 +40,6 @@ public interface IGuiBase {
     ISkinImage createLayeredImage(PaperCard card, FSkinProp background, String overlayFilename, float opacity);
 
     void clearImageCache();
-    void refreshSkin();
     String encodeSymbols(String str, boolean formatReminderText);
 
     int getAvatarCount();

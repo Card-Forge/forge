@@ -1,0 +1,7 @@
+Name:Plunder the Trollshaws
+ManaCost:1 U
+Types:Instant
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card. If this spell was cast from a graveyard, draw two cards instead.
+K:Flashback:3 U
+SVar:X:Count$wasCastFromGraveyard.2.1
+Oracle:Draw a card. If this spell was cast from a graveyard, draw two cards instead.\nFlashback {3}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

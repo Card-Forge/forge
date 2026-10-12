@@ -1,0 +1,7 @@
+Name:Team Tactics
+ManaCost:1 R
+Types:Instant
+K:Teamwork:1
+A:SP$ Pump | ValidTgts$ Creature | KW$ Double Strike | SubAbility$ DBPump | SpellDescription$ Target creature gains double strike until end of turn. If this spell was cast using teamwork, that creature also gains trample until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample | ConditionZone$ Stack | ConditionPresent$ Card.Self+Teamwork
+Oracle:Teamwork 1 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 1 or more.)\nTarget creature gains double strike until end of turn. If this spell was cast using teamwork, that creature also gains trample until end of turn.

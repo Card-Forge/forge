@@ -12,7 +12,7 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 
 | Command Example | Description |
 | -- | -- |
-| clearnosell | Removes all 'no sell value' cards you own, that are not used in a deck, from your inventory |
+| clearnosell | Removes all 'no sell value' cards you own from your inventory |
 | crack | Cracks a random item you have equipped |
 | fly &lt;duration&gt; | Allows you to walk over obstacles in the overworld or POI map for a number of seconds (currently useless in POIs, in which there will only be a visual effect on the player sprite) |
 | give boosters &lt;edition code&gt; \[amount\] | Adds a booster of a set (case-insensitive; for example, the edition code for "Limited Edition Beta" is LEB) |

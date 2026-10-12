@@ -1,0 +1,6 @@
+Name:Quicksilver, Pietro Maximoff
+ManaCost:2 R
+Types:Legendary Creature Mutant Hero
+PT:3/2
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as he comes under your control.)

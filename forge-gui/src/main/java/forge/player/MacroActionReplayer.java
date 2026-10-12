@@ -73,8 +73,11 @@ class MacroActionReplayer {
     }
 
     private boolean replayPassPriority(final Input input, final PassPriorityAction action) {
-        return selectOkIf(input, (input instanceof InputPassPriority && action.canReplay(isStackEmpty(), getCurrentPhase()))
-                || (input instanceof InputAttack && action.canReplayDuringAttack(getCurrentPhase())));
+        if (input instanceof InputPassPriority priorityInput && action.canReplay(isStackEmpty(), getCurrentPhase())) {
+            priorityInput.passPriority();
+            return true;
+        }
+        return selectOkIf(input, input instanceof InputAttack && action.canReplayDuringAttack(getCurrentPhase()));
     }
 
     private boolean replayConfirm(final Input input, final ConfirmAction action) {

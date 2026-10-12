@@ -1,0 +1,9 @@
+Name:Elanor Gardner|Deck:Elanor Gardner.dck|Variant:Commander|Avatar:Elanor Gardner|Desc:
+Name:Celeborn the Wise|Deck:Celeborn the Wise.dck|Variant:Commander|Avatar:Celeborn the Wise|Desc:
+Name:Fangorn, Tree Shepherd|Deck:Fangorn, Tree Shepherd.dck|Variant:Commander|Avatar:Fangorn, Tree Shepherd|Desc:
+Name:Bilbo, Birthday Celebrant|Deck:Bilbo, Birthday Celebrant.dck|Variant:Commander|Avatar:Bilbo, Birthday Celebrant|Desc:
+Name:Green Planar Portal|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Legolas, Master Archer|Deck:Legolas, Master Archer.dck|Variant:Commander|Avatar:Legolas, Master Archer|Desc:
+Name:Smeagol, Helpful Guide|Deck:Smeagol, Helpful Guide.dck|Variant:Commander|Avatar:Smeagol, Helpful Guide|Desc:
+Name:Elrond, Master of Healing|Deck:Elrond, Master of Healing.dck|Variant:Commander|Avatar:Elrond, Master of Healing|Desc:
+Name:Haldir, Lorien Lieutenant|Deck:Haldir, Lorien Lieutenant.dck|Variant:Commander|Avatar:Haldir, Lorien Lieutenant|Desc:

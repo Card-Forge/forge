@@ -1,0 +1,10 @@
+Name:Speed, Young Avenger
+ManaCost:1 R
+Types:Legendary Creature Mutant Hero
+PT:2/2
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {1}. When you do, target creature with haste can't be blocked this turn except by creatures with haste.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigEffect | SpellDescription$ When you do, target creature with haste can't be blocked this turn except by creatures with haste.
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature.withHaste | ValidTgtsDesc$ creature with haste | StaticAbilities$ KWPump | RememberObjects$ Targeted
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutHaste | Description$ This creature can't be blocked this turn except by creatures with haste.
+Oracle:Haste\nWhenever you cast a noncreature spell, you may pay {1}. When you do, target creature with haste can't be blocked this turn except by creatures with haste.

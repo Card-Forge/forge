@@ -1,0 +1,9 @@
+Name:Hawkeye, Avenging Archer
+ManaCost:2 U R
+Types:Legendary Creature Human Archer Hero
+PT:3/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+DamagedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature an opponent controls dies, if NICKNAME dealt damage to it this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ NICKNAME deals 1 damage to any target.
+Oracle:Reach\nWhenever a creature an opponent controls dies, if Hawkeye dealt damage to it this turn, draw a card.\n{T}: Hawkeye deals 1 damage to any target.

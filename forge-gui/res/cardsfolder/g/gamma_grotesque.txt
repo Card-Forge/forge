@@ -1,0 +1,9 @@
+Name:Gamma Grotesque
+ManaCost:2 G
+Types:Creature Gamma Horror Villain
+PT:3/3
+K:Vigilance
+A:AB$ PutCounter | Cost$ 4 G G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | PowerUp$ True | SubAbility$ DBDraw | SpellDescription$ Put three +1/+1 counters on this creature. Then draw a card for each creature you control with a counter on it. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Creature.YouCtrl+HasCounters
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nPower-up — {4}{G}{G}: Put three +1/+1 counters on this creature. Then draw a card for each creature you control with a counter on it. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)

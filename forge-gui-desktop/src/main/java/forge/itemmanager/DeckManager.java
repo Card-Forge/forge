@@ -40,7 +40,9 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
+import forge.deck.DeckSection;
 import forge.screens.deckeditor.controllers.ACEditorBase;
+import forge.screens.deckeditor.controllers.CEditorCommanderDraftLimited;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.screens.deckeditor.controllers.CEditorQuest;
@@ -372,7 +374,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Draft:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, screen, getCDetailPicture());
+                if (deck != null && (deck.getDeck().getTags().contains("CommanderDraft")
+                        || deck.getDeck().has(DeckSection.Commander))) {
+                    editorCtrl = new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
+                            screen, getCDetailPicture(), null);
+                } else {
+                    editorCtrl = new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, screen, getCDetailPicture());
+                }
                 break;
             case Winston:
                 screen = FScreen.DECK_EDITOR_DRAFT;
@@ -409,7 +417,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public boolean deleteDeck(final DeckProxy deck) {
         if (deck == null) { return false; }
 
-        if (!FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmDelete") + "'" + deck.getName() + "'?",
+        if (!FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmDelete") + " '" + deck.getName() + "'?",
                 Localizer.getInstance().getMessage("lblDeleteDeck"), Localizer.getInstance().getMessage("lblDelete"),
                 Localizer.getInstance().getMessage("lblCancel"), false)) {
             return false;

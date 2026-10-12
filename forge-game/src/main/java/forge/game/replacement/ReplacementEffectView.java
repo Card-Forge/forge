@@ -42,6 +42,6 @@ public class ReplacementEffectView extends TrackableObject implements IHasCardVi
     }
 
     void updateDescription(ReplacementEffect re) {
-        set(TrackableProperty.Description, re.getDescription());
+        set(TrackableProperty.Description, re.toString());
     }
 }

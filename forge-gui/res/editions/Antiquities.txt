@@ -38,7 +38,7 @@ ScryfallCode=ATQ
 25 U Dwarven Weaponsmith @Mark Poole
 26 U Goblin Artisans @Julie Baroh
 27 C Orcish Mechanics @Pete Venters
-28 R Shatterstorm @Mark Poole
+28 R Shatterstorm @Dan Frazier
 29 C Argothian Pixies @Amy Weber
 30 C Argothian Treefolk @Amy Weber
 31 U Citanul Druid @Jeff A. Menges

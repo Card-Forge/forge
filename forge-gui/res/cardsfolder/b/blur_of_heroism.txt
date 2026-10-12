@@ -1,0 +1,7 @@
+Name:Blur of Heroism
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this enchantment enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell.Hero | Caster$ You | Description$ You may cast Hero spells as though they had flash.
+Oracle:When this enchantment enters, draw a card.\nYou may cast Hero spells as though they had flash.

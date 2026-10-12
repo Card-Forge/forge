@@ -1,0 +1,10 @@
+Name:Iceman and Firestar
+ManaCost:2 UR UR
+Types:Legendary Creature Mutant Hero
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a blue spell, tap up to one target creature.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a red spell, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+Oracle:Flying\nWhenever you cast a blue spell, tap up to one target creature.\nWhenever you cast a red spell, you may discard a card. If you do, draw a card.

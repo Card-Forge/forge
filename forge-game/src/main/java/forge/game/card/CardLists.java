@@ -262,6 +262,7 @@ public class CardLists {
     }
 
     public static CardCollection canSubsequentlyTarget(CardCollection list, SpellAbility source) {
+        // TODO should check first that there's a dependent restriction
         if (source.getTargets().isEmpty()) {
             return list;
         }

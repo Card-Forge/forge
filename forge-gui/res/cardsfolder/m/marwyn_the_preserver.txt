@@ -1,0 +1,8 @@
+Name:Marwyn, the Preserver
+ManaCost:1 G
+Types:Legendary Creature Elf Druid
+PT:3/2
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddKeyword$ Hexproof | Description$ Lands you control have hexproof.
+A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target land card in your graveyard | ValidTgts$ Land.YouCtrl | SpellDescription$ Return target land card from your graveyard to your hand.
+DeckHints:Ability$Graveyard
+Oracle:Lands you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)\n{2}: Return target land card from your graveyard to your hand.

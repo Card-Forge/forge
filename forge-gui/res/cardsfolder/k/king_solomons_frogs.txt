@@ -1,0 +1,11 @@
+Name:King Solomon's Frogs
+ManaCost:3 W
+Types:Legendary Artifact
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ ExileOneEach | TriggerDescription$ When CARDNAME enters, if you cast it, for each opponent, exile up to one target permanent that player controls with mana value 3 or greater. For each permanent exiled this way, its controller draws a card.
+SVar:ExileOneEach:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.OppCtrl+cmcGE3 | ValidTgtsDesc$ permanent each opponent controls with mana value 3 or greater | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | RememberLKI$ True | SubAbility$ DrawEach
+SVar:DrawEach:DB$ Draw | Defined$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:OneEach:PlayerCountOpponents$Amount
+A:AB$ BecomeMonarch | Cost$ 3 T Exile<1/CARDNAME> | Defined$ You | SpellDescription$ You become the monarch.
+Oracle:When King Solomon's Frogs enters, if you cast it, for each opponent, exile up to one target permanent that player controls with mana value 3 or greater. For each permanent exiled this way, its controller draws a card.\n{3}, {T}, Exile King Solomon's Frogs: You become the monarch.

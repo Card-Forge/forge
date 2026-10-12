@@ -10,7 +10,7 @@
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="13" name="BackgroundBis" width="32" height="20">
   <data encoding="base64" compression="zlib">
-   eJzNlcENwjAMRTsCqCpnluHcETgyXzdikUo0gi++LNux05Zi6UtpEvnZTuLO566bP3r03/ER+hd+Jo5p2I7PvkoMW9WD/cJqeZa1iBXf3hrEZp039nKcv+bLOq3hw6fc6913xPtUdD29VdZxP7x6sT/Jt+4X9t+X8W3QaziJea1mPG/xuRZSWi5eza34ZG7MjPIlr/ZtWaZX1PxA4yXGbuVHczuCn8m9he+x8X724mt9a61l+Zyr5S8TZ2v+2nuIvEGrj2TOv6Y9+RnT/nGaSc4LNbFpuQ==
+   eJzNlT0OwjAMhbuygVCZuUxZOQIj5+uNuEilEoHFw/JvGmgtPSlNIn+2E6fToeumt+7Hz3gNbYWfiWPs2/HRV4mhVT3QL5mXZ1mLWPFtrZHQtPOmvRjnv/m8Tkv45JPvte47xfsQdN6/VNbpflj1Qn+cr90v2n97joderuHI5qWa4bzGx1pwSblYNdfi47khM8rnPO9bs8xb4fkhXU8xdi0/mtsa/EzuNXyLTf3zK770bi21LB9z1fxZcV5236rNX+qHSA8imyx7/p48PrcW/S+Z9I+L8GecAWpk
   </data>
  </layer>
  <layer id="11" name="Background" width="32" height="20">
@@ -44,7 +44,7 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="114" template="../../../../common/maps/obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/Mountains/Tarnation_1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/barbariancamp/Tarnation_1.tmx"/>
     <property name="teleportObjectId" value="108"/>
    </properties>
   </object>

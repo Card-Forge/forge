@@ -1,0 +1,11 @@
+Name:Down in the Valley
+ManaCost:2 G
+Types:Enchantment Saga
+K:Chapter:4:DBSearch,DBAnimate,DBPumpAll,DBPumpAll
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Triggers$ LandfallTrigger | Duration$ Permanent | SpellDescription$ This Saga gains "Landfall — Whenever a land you control enters, create a 1/1 green Elf creature token."
+SVar:LandfallTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 1/1 green Elf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_elf | TokenOwner$ You
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Elf.YouCtrl | NumAtt$ +1 | KW$ Vigilance | SpellDescription$ Elves you control get +1/+0 and gain vigilance until end of turn.
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nII — This Saga gains "Landfall — Whenever a land you control enters, create a 1/1 green Elf creature token."\nIII, IV — Elves you control get +1/+0 and gain vigilance until end of turn.

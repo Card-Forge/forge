@@ -1,0 +1,8 @@
+Name:Bucky Barnes, Eager Ally
+ManaCost:1 W
+Types:Legendary Creature Human Soldier Hero
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ When NICKNAME dies, look at the top four cards of your library. You may reveal an Equipment, Hero, or Soldier card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Equipment,Hero,Soldier | RestRandomOrder$ True | ForceRevealToController$ True
+Oracle:Vigilance\nWhen Bucky Barnes dies, look at the top four cards of your library. You may reveal an Equipment, Hero, or Soldier card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

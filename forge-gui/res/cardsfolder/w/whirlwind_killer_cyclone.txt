@@ -1,0 +1,8 @@
+Name:Whirlwind, Killer Cyclone
+ManaCost:2 R
+Types:Legendary Creature Mutant Villain
+PT:2/3
+K:Haste
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Creature.YouCtrl+ThisTurnEntered | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever one or more creatures you control that entered this turn attack a player, target creature that player controls can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredAttackedTarget | TgtPrompt$ Select target creature that player controls | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True
+Oracle:Haste\nWhenever one or more creatures you control that entered this turn attack a player, target creature that player controls can't block this turn.

@@ -1,0 +1,12 @@
+Name:Ambassador Blorpityblorpboop
+ManaCost:3 G U
+Types:Legendary Creature Alien Advisor Guest
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTicket | TriggerDescription$ When CARDNAME enters, you get {TK}{TK}{TK}, then you may put a sticker on a nonland permanent you own.
+SVar:TrigTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 3 | SubAbility$ DBSticker
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimate | TriggerDescription$ At the beginning of each combat, you may have CARDNAME's base power become equal to the total power of all stickers on permanents you control and its base toughness become equal to those stickers' total toughness.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ X | Toughness$ Y | Duration$ Permanent
+SVar:X:Count$Valid Permanent.YouCtrl$StickerPower
+SVar:Y:Count$Valid Permanent.YouCtrl$StickerToughness
+Oracle:When Ambassador Blorpityblorpboop enters, you get {TK}{TK}{TK}, then you may put a sticker on a nonland permanent you own.\nAt the beginning of each combat, you may have Ambassador Blorpityblorpboop's base power become equal to the total power of all stickers on permanents you control and its base toughness become equal to those stickers' total toughness.

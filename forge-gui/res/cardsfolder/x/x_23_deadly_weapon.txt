@@ -1,0 +1,8 @@
+Name:X-23, Deadly Weapon
+ManaCost:2 G
+Types:Legendary Creature Mutant Berserker Hero
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Mutant.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Mutant you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy & Self | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Whenever another Mutant you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on X-23.

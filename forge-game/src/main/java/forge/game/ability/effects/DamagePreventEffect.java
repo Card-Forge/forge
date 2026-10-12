@@ -168,7 +168,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
 
         o.getView().updatePreventNextDamage(o);
         if (o instanceof Player) {
-            game.fireEvent(new GameEventPlayerStatsChanged((Player) o, false));
+            game.fireEvent(new GameEventPlayerStatsChanged((Player) o));
         }
 
         game.getEndOfTurn().addUntil(new GameCommand() {
@@ -179,7 +179,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                 game.getAction().exileEffect(eff);
                 o.getView().updatePreventNextDamage(o);
                 if (o instanceof Player) {
-                    game.fireEvent(new GameEventPlayerStatsChanged((Player) o, false));
+                    game.fireEvent(new GameEventPlayerStatsChanged((Player) o));
                 }
             }
         });

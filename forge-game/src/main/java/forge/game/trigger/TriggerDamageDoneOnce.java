@@ -44,6 +44,12 @@ public class TriggerDamageDoneOnce extends Trigger {
             if (!Expressions.compare(damageAmount, operator, operand)) return false;
         }
 
+        if (hasParam("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

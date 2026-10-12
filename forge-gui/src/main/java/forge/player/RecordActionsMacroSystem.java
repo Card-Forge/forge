@@ -886,7 +886,12 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private int waitForInput(final Input input) {
-        input.selectButtonOK();
+        // OK accepts a yield suggestion when the priority prompt is showing one; ask for the pass itself
+        if (input instanceof InputPassPriority priorityInput) {
+            priorityInput.passPriority();
+        } else {
+            input.selectButtonOK();
+        }
         return WAIT_FOR_NEXT_INPUT;
     }
 

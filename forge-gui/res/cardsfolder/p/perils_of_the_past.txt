@@ -1,0 +1,7 @@
+Name:Perils of the Past
+ManaCost:1 R
+Types:Instant
+A:SP$ Charm | Choices$ DBUseTheRelic,DBDestroyTheRelic
+SVar:DBUseTheRelic:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +2 | SpellDescription$ Use the Relic — Target creature gets +3/+2 until end of turn.
+SVar:DBDestroyTheRelic:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy the Relic — Destroy target artifact.
+Oracle:Choose one —\n• Use the Relic — Target creature gets +3/+2 until end of turn.\n• Destroy the Relic — Destroy target artifact.

@@ -1,0 +1,8 @@
+Name:Zarda, the Power Princess
+ManaCost:3 W
+Types:Legendary Creature Human Warrior Hero
+PT:2/4
+K:Flying
+S:Mode$ Continuous | Affected$ Hero.Other+YouCtrl | AddKeyword$ Exalted | Description$ Other Heroes you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
+DeckHints:Type$Vampire
+Oracle:Flying\nOther Heroes you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)

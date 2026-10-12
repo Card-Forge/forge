@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventCardModeChosen;
@@ -54,8 +54,8 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final boolean damageMap = sa.hasParam("DamageMap");
 
         if (damageMap) {
-            sa.setDamageMap(new CardDamageMap());
-            sa.setPreventMap(new CardDamageMap());
+            sa.setDamageMap(new CardDamageTable());
+            sa.setPreventMap(new CardDamageTable());
             sa.setCounterTable(new GameEntityCounterTable());
         }
         if (changeZoneTable) sa.setChangeZoneTable(new CardZoneTable());

@@ -20,6 +20,15 @@ urllib.request.urlretrieve(scryfalldburl, 'cards.json')
 # Sort file and remove duplicates
 
 
+FIX_FUSED_SYMBOLS_RE = re.compile(r'\{([0-9]+)([A-Z]+)\}')
+
+
+def fix_fused_mana_symbols(value):
+    return FIX_FUSED_SYMBOLS_RE.sub(
+        lambda m: '{' + m.group(1) + '}' + ''.join('{' + c + '}' for c in m.group(2)),
+        value)
+
+
 def cleanfile(filename, extension1, extension2):
     names_seen = set()
     outfile = open(filename + extension2, "w", encoding='utf8')
@@ -132,6 +141,7 @@ with open('cards.json', mode='r', encoding='utf8') as json_file:
                     toracle = toracle.replace('（','(')
                     toracle = toracle.replace('）',')')
                     toracle = toracle.replace('|', 'VERT')
+                    toracle = fix_fused_mana_symbols(toracle)
                 except:
                     pass
 
@@ -185,6 +195,7 @@ with open('cards.json', mode='r', encoding='utf8') as json_file:
                     #make zh-CN reminder text work
                     toracle0 = toracle0.replace('（','(')
                     toracle0 = toracle0.replace('）',')')
+                    toracle0 = fix_fused_mana_symbols(toracle0)
                 except:
                     pass
 
@@ -193,6 +204,7 @@ with open('cards.json', mode='r', encoding='utf8') as json_file:
                     #make zh-CN reminder text work
                     toracle1 = toracle1.replace('（','(')
                     toracle1 = toracle1.replace('）',')')
+                    toracle1 = fix_fused_mana_symbols(toracle1)
                 except:
                     pass
 

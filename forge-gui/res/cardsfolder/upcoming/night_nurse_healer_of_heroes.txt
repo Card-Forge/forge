@@ -1,9 +1,0 @@
-Name:Night Nurse, Healer of Heroes
-ManaCost:1 W
-Types:Legendary Creature Human Doctor Hero
-PT:2/1
-K:Flash
-K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, choose target permanent card in your graveyard that was put there from anywhere this turn. Return it to your hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn+ThisTurnEntered
-Oracle:Flash\nLifelink\nWhen Night Nurse enters, choose target permanent card in your graveyard that was put there from anywhere this turn. Return it to your hand.

@@ -12,17 +12,19 @@ import forge.assets.*;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 import forge.gui.GuiBase;
+import forge.gui.download.CdnUuidCache;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.properties.PreferencesStore;
+import forge.localinstance.properties.IPreferences;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.screens.match.views.VPhaseIndicator;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -49,6 +51,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.setListItemRenderer(new SettingRenderer());
         txtSearch.setFont(FSkinFont.get(12));
         txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
+        txtSearch.setLiveChangeEvents(true); //filter as characters are typed
         txtSearch.setChangedHandler(e -> applySearch());
 
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGeneralSettings"));
@@ -230,9 +233,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(newValue));
                 }
             }, 1);
-        lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
+        /*lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
             Forge.getLocalizer().getMessage("cbExperimentalRestore"),
-            Forge.getLocalizer().getMessage("nlExperimentalRestore")), 1);
+            Forge.getLocalizer().getMessage("nlExperimentalRestore")), 1);*/
         lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
             Forge.getLocalizer().getMessage("nlAITimeout"),
             Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")), 1);
@@ -257,6 +260,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_AUTOTAP_PREVIEW,
+            Forge.getLocalizer().getMessage("cbShowAutoTapPreview"),
+            Forge.getLocalizer().getMessage("nlShowAutoTapPreview")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_LINKED_EXILE_CARDS,
             Forge.getLocalizer().getMessage("cbShowLinkedExileCards"),
             Forge.getLocalizer().getMessage("nlShowLinkedExileCards")), 1);
@@ -295,19 +301,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         MatchController.instance.resetPlayerPanels();
                 }
             }, 1);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALT_PLAYERZONETABS,
-            Forge.getLocalizer().getMessage("lblAltZoneTabs"),
-            Forge.getLocalizer().getMessage("nlAltZoneTabs"),
-            Lists.newArrayList("Off", "Vertical", "Horizontal")) {
-                @Override
-                public void valueChanged(String newValue) {
-                    super.valueChanged(newValue);
-                    //update
-                    Forge.setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
-                    if (MatchController.instance != null)
-                        MatchController.instance.resetPlayerPanels();
-                }
-            }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
+            Forge.getLocalizer().getMessageorUseDefault("lblHidePhaseStop", "Hide Phase stop (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlHidePhaseStop", "When enabled, Phase stop is covered by Phase name label. Tap the label to access Phase stop.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPhaseIndicator.HIDE_PHASESTOP = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_PHASESTOP);
+            }
+        }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
             Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"),
             Forge.getLocalizer().getMessage("nlAnimatedCardTapUntap")) {
@@ -318,6 +320,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
                 }
             }, 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_PLAY_ANIMATION_STYLE,
+            Forge.getLocalizer().getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCardPlayOption", "How cards animate when entering the battlefield."),
+            new String[] { "Rotate", "Slide", "Popup", "Off" }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COIN_DICE_ANIMATION,
+            Forge.getLocalizer().getMessageorUseDefault("lblCoinDiceAnimation", "Coin/Dice Animation"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCoinDiceAnimation", "Enables Coin and Dice Animation.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
             Forge.getLocalizer().getMessage("cbStackCreatures"),
             Forge.getLocalizer().getMessage("nlStackCreatures")), 1);
@@ -397,9 +406,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     g.drawText(display, font, color, x, y, w, h, false, Align.right, false);
                 }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
+        /*lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
             Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
-            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);
+            Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);*/ //
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
             Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
             Forge.getLocalizer().getMessage("nlLoadArchivedFormats")), 3);
@@ -503,6 +512,25 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
             Forge.getLocalizer().getMessage("cbImageFetcher"),
             Forge.getLocalizer().getMessage("nlImageFetcher")), 4);
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_DOWNLOAD_LANG, "Card art language",
+                "Preferred language for downloaded card images",
+                cardLangMapping.values()) {
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                applyPreferredLanguageAvailability();
+            }
+        }, 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS,
+                "Prefer language for unique cards",
+                "When enabled, prioritizes cards available in the selected language for unique art") {
+            @Override
+            public void select() {
+                super.select();
+                applyPreferredLanguageAvailability();
+            }
+        }, 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
             Forge.getLocalizer().getMessage("lblPreferredArt"),
             Forge.getLocalizer().getMessage("nlPreferredArt"),
@@ -565,12 +593,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
                 ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                 ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-            Forge.getLocalizer().getMessage("lblRotateZoomSplit"),
-            Forge.getLocalizer().getMessage("nlRotateZoomSplit")), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-            Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
-            Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")), 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
             Forge.getLocalizer().getMessage("lblDisableCardEffect"),
             Forge.getLocalizer().getMessage("nlDisableCardEffect")), 4);
@@ -645,9 +667,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
             Forge.getLocalizer().getMessage("lblShowAbilityIconsOverlays"),
             Forge.getLocalizer().getMessage("nlShowAbilityIconsOverlays")), 5);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-            Forge.getLocalizer().getMessage("lblUseLaserArrows"),
-            Forge.getLocalizer().getMessage("nlUseLaserArrows")), 5);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ARROW_OPTION,
+            Forge.getLocalizer().getMessage("lblLaserArrowsOption"),
+            Forge.getLocalizer().getMessage("nlLaserArrowsOption"),
+            new String[] { "Default", "Point", "Line" }), 5);
 
         // VIBRATION OPTIONS TAB
         Map<String, String> intensityOptions = new LinkedHashMap<>();
@@ -713,6 +736,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     SoundSystem.instance.changeBackgroundTrack();
                 }
             }, 7);
+        if (!GuiBase.isAndroid() && !GuiBase.isIOS()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_PAUSE_MUSIC_ON_FOCUS_LOSS,
+                Forge.getLocalizer().getMessage("cbPauseMusicOnFocusLoss"),
+                Forge.getLocalizer().getMessage("nlPauseMusicOnFocusLoss")), 7);
+        }
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
             "Use Alternate Sound System",
             "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), 7);*/
@@ -739,6 +767,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         settingCJKFonts.updateOptions(FSkinFont.getAllCJKFonts());
     }
 
+    private void applyPreferredLanguageAvailability() {
+        String langCode = FModel.getPreferences().getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        boolean preferForUnique = FModel.getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS);
+        if (!preferForUnique || langCode == null || langCode.isEmpty() || "en".equalsIgnoreCase(langCode)) {
+            FModel.getMagicDb().setPreferredLanguageAvailability(null);
+        } else {
+            FModel.getMagicDb().setPreferredLanguageAvailability((setCode, cn) -> CdnUuidCache.isAvailableInLanguage(setCode, cn, langCode));
+        }
+    }
+
     private void applySearch() {
         final String query = txtSearch.getText().toLowerCase().trim();
         if (query.isEmpty()) {
@@ -760,9 +798,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private abstract class Setting {
         protected String label;
         protected String description;
-        protected PreferencesStore.IPref pref;
+        protected IPreferences.IPref pref;
 
-        public Setting(PreferencesStore.IPref pref0, String label0, String description0) {
+        public Setting(IPreferences.IPref pref0, String label0, String description0) {
             label = label0;
             description = description0;
             pref = pref0;
@@ -806,7 +844,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private class CustomSelectSetting extends Setting {
         private final List<String> options = new ArrayList<>();
 
-        public CustomSelectSetting(PreferencesStore.IPref pref0, String label0, String description0, String[] options0) {
+        public CustomSelectSetting(IPreferences.IPref pref0, String label0, String description0, String[] options0) {
             super(pref0, label0 + ":", description0);
 
             options.addAll(Arrays.asList(options0));
@@ -930,7 +968,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         private final Map<String, String> localizedToBackingMap;
         private final Map<String, String> backingToLocalizedMap = new HashMap<>();
 
-        public LocalizedSelectSetting(PreferencesStore.IPref pref0,
+        public LocalizedSelectSetting(IPreferences.IPref pref0,
                                       String label0,
                                       String description0,
                                       Map<String, String> localizationMap) {
@@ -980,7 +1018,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         private final int minValue;
         private final int maxValue;
 
-        public IntegerSelectSetting(PreferencesStore.IPref pref0, String label0, String description0, int minValue, int maxValue) {
+        public IntegerSelectSetting(IPreferences.IPref pref0, String label0, String description0, int minValue, int maxValue) {
             super(pref0, label0 + ":", description0);
             this.minValue = minValue;
             this.maxValue = maxValue;

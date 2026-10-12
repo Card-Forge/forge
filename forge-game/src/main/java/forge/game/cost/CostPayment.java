@@ -146,21 +146,23 @@ public class CostPayment extends ManaConversionMatrix {
 
         for (final CostPart part : costParts) {
             // Wrap the cost and push onto the cost stack
-            game.costPaymentStack.push(part, this);
+            try {
+                game.costPaymentStack.push(part, this);
 
-            PaymentDecision pd = part.accept(decisionMaker);
+                PaymentDecision pd = part.accept(decisionMaker);
 
-            // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
-            if (pd != null) {
-                pd.matrix = this;
-            }
+                // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
+                if (pd != null) {
+                    pd.matrix = this;
+                }
 
-            if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
+                if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
+                    return false;
+                }
+                this.paidCostParts.add(part);
+            } finally {
                 game.costPaymentStack.pop(); // cost is resolved
-                return false;
             }
-            this.paidCostParts.add(part);
-            game.costPaymentStack.pop(); // cost is resolved
         }
 
         // clear lists used for undo
@@ -192,31 +194,33 @@ public class CostPayment extends ManaConversionMatrix {
             PaymentDecision decision = part.accept(decisionMaker);
             if (null == decision) return false;
 
-            // wrap the payment and push onto the cost stack
-            game.costPaymentStack.push(part, this);
-            if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
-                game.costPaymentStack.pop(); // cost is resolved
-                return false;
+            try {
+                // wrap the payment and push onto the cost stack
+                game.costPaymentStack.push(part, this);
+                if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
+                    return false;
+                }
+            } finally {
+                game.costPaymentStack.pop(); // cost is either paid or deferred
             }
-
-            game.costPaymentStack.pop(); // cost is either paid or deferred
             decisions.put(part, decision);
         }
 
         for (final CostPart part : parts) {
             // wrap the payment and push onto the cost stack
-            game.costPaymentStack.push(part, this);
+            try {
+                game.costPaymentStack.push(part, this);
 
-            if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability, decisionMaker.isEffect())) {
+                if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability, decisionMaker.isEffect())) {
+                    return false;
+                }
+                // abilities care what was used to pay for them
+                if (part instanceof CostPartWithList) {
+                    ((CostPartWithList) part).resetLists();
+                }
+            } finally {
                 game.costPaymentStack.pop(); // cost is resolved
-                return false;
             }
-            // abilities care what was used to pay for them
-            if (part instanceof CostPartWithList) {
-                ((CostPartWithList) part).resetLists();
-            }
-
-            game.costPaymentStack.pop(); // cost is resolved
         }
         return true;
     }

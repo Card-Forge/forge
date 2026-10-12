@@ -1,0 +1,9 @@
+Name:Marvel Boy, Noh-Varr
+ManaCost:1 RW
+Types:Legendary Creature Kree Soldier Hero
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control enters and whenever you activate a power-up ability, put a +1/+1 counter on NICKNAME.
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.PowerUp | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever another creature you control enters and whenever you activate a power-up ability, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Creature
+Oracle:Whenever another creature you control enters and whenever you activate a power-up ability, put a +1/+1 counter on Marvel Boy.

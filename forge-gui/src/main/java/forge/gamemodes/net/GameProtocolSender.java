@@ -13,6 +13,10 @@ public final class GameProtocolSender {
         method.checkArgs(args);
         remote.send(new GuiGameEvent(method, args));
     }
+    public void send(final ProtocolMethod method, boolean replace, final Object... args) {
+        method.checkArgs(args);
+        remote.send(new GuiGameEvent(method, replace, args));
+    }
 
     public void write(final ProtocolMethod method, final Object... args) {
         method.checkArgs(args);

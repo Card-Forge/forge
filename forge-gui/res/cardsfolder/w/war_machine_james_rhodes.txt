@@ -1,0 +1,8 @@
+Name:War Machine, James Rhodes
+ManaCost:3 WU
+Types:Legendary Artifact Creature Human Hero
+PT:3/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever NICKNAME attacks, tap up to one target creature.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever War Machine attacks, tap up to one target creature.
