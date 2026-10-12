@@ -1097,6 +1097,12 @@ func matchesPlayerProperty(g *Game, candidate, host PlayerID, source CardID, pro
 		return g.Player(candidate).DescendedThisTurn, true
 	case "VenturedThisTurn":
 		return g.Player(candidate).VenturedThisTurn > 0, true
+	case "IsPoisoned":
+		// PlayerProperty.java:273: at least one poison counter.
+		return g.Player(candidate).Counters.Count(Poison) > 0, true
+	case "IsCorrupted":
+		// PlayerProperty.java:277 (CR 702.xxx "corrupted"): three or more.
+		return g.Player(candidate).Counters.Count(Poison) >= 3, true
 	case "IsRemembered":
 		// PlayerProperty.java:209-212: source.isRemembered(player). No
 		// source recognizes the property and matches nobody.

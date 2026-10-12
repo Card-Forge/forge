@@ -137,6 +137,18 @@ func namedAmount(g *Game, amounts map[string]expr.Amount, sourceController Playe
 // names into another.
 func expressionValue(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, amt expr.Amount, depth int) (int, bool) {
 	switch {
+	case amt.Count != nil && amt.Count.Head == "Kicked" && len(amt.Count.Parameters) == 2 && source != NoCard:
+		// Count$Kicked.<kicked>.<not>: each branch is itself calculateAmount's
+		// input (AbilityUtils.java:1697), a number or an SVar name (Divine
+		// Resilience's Z).
+		branch := amt.Count.Parameters[1]
+		if g.Card(source).kickerMagnitude() > 0 {
+			branch = amt.Count.Parameters[0]
+		}
+		if n, err := strconv.Atoi(branch); err == nil {
+			return n, true
+		}
+		return namedAmount(g, amounts, sourceController, source, branch, depth)
 	case amt.Count != nil:
 		return countValue(g, sourceController, source, *amt.Count)
 	case amt.Head == "Number":
@@ -160,8 +172,10 @@ func expressionValue(g *Game, amounts map[string]expr.Amount, sourceController P
 		// "HighestX/Op" string down to playerXProperty, which applies the
 		// operator per player, then applies it again to the result -- a
 		// double application no corpus line exercises. Refused rather than
-		// guessed at either way (GO-7).
-		if amt.Op != nil {
+		// guessed at either way (GO-7). Amount and HasProperty take the
+		// operator once, as every other head does (Aurelia's Fury's
+		// Amount/Plus.MaxPermanents).
+		if amt.Op != nil && (strings.HasPrefix(amt.Body, "Highest") || strings.HasPrefix(amt.Body, "Lowest")) {
 			return 0, false
 		}
 		return playerCountValue(g, sourceController, source, strings.TrimPrefix(amt.Head, "PlayerCount"), amt.Body)

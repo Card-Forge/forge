@@ -34,7 +34,7 @@ param counts once however many cards carry it. That table, ordered by cards bloc
 
 **An upper bound.** "Plays" is the absence of a loud refusal. The probe cannot see what the engine does silently wrong
 (the silent GO-7 gaps listed in `game-state.md`), what a card does on a board other than the fixed one, or a card whose
-ability needs a situation (a combat, a graveyard of a given shape) the three turns never create. 225 cards are
+ability needs a situation (a combat, a graveyard of a given shape) the three turns never create. 211 cards are
 inconclusive and are left out of the percentage, as are the `placed` ones.
 
 Controller policy is part of the measure: the first legal option, the smallest sensible count, attack with everything,
@@ -47,16 +47,16 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 28,825 |
-| refused      |  4,672 |
+| plays        | 28,837 |
+| refused      |  4,674 |
 | panicked     |      0 |
 | hung         |      0 |
 | placed       |    356 |
-| inconclusive |    225 |
+| inconclusive |    211 |
 
-86.1% of the 33,497 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+86.1% of the 33,511 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.7% of 8,634 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 88.7% of 8,638 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
@@ -91,7 +91,7 @@ LandPlayed are gone).
 
 - The gauntlet itself: no decklists, so no "cards of the gauntlet that play" figure. `-decks gauntlets/modern` takes the
   real list when it exists.
-- The 225 inconclusive cards. Past the variants (plain board, a spell on the stack, the rich board, combat) the probe
+- The 211 inconclusive cards. Past the variants (plain board, a spell on the stack, the rich board, combat) the probe
   builds a tailored one: for each `ValidTgts$` alternative the card names it places a corpus card the spec accepts
   (`internal/smoke/tailor.go`, fewest abilities first; judged with the card in hand, so a spec that reads game state
   finds none), or casts one for `TargetType$ Spell`. What remains is engine work that fails silently today, grouped in

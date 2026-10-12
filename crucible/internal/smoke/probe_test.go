@@ -76,6 +76,15 @@ func TestProbeClassifiesCards(t *testing.T) {
 		{"Decomposition", smoke.Plays},
 		{"Daybreak Coronet", smoke.Plays},
 		{"Lion Umbra", smoke.Plays},
+		// Amounts read before targets are chosen: Count$LastState...WithFallback
+		// (Aether Burst, Reap), a Kicked branch naming an SVar (Divine
+		// Resilience), PlayerCountPropertyYou (Black Hole) and
+		// Count$TotalDamageDoneByThisTurn (Brightflame).
+		{"Aether Burst", smoke.Plays},
+		{"Reap", smoke.Plays},
+		{"Divine Resilience", smoke.Plays},
+		{"Black Hole", smoke.Plays},
+		{"Brightflame", smoke.Plays},
 		// Command-zone types are placed, not cast; a sticker sheet is refused.
 		{"Akoum", smoke.Placed},
 		{"Backup Plan", smoke.Placed},

@@ -18,6 +18,13 @@ import (
 	"github.com/jczastkiewicz/crucible/pkg/collect"
 )
 
+// castSnapshot is the card IDs on the battlefield and in the graveyards at the
+// moment a spell was cast.
+type castSnapshot struct {
+	set                    bool
+	battlefield, graveyard []CardID
+}
+
 // Card is one card in one game.
 //
 // It holds no back-reference: no *Game, no *Player. Its controller is a
@@ -55,6 +62,11 @@ type Card struct {
 	// (CR 400.7: the card is a new object). castManaSpent is the mana paid for
 	// that cast (SpellAbility.getTotalManaSpent), 0 for a free one.
 	wasCast bool
+	// castLast is the battlefield and graveyards as the spell was put on the
+	// stack (SpellAbility.getLastStateBattlefield/Graveyard of its cast
+	// ability), what Count$LastState...WithFallback counts. The slices are
+	// never changed once set.
+	castLast castSnapshot
 	// damageDealtThisTurn is the damage this card dealt this turn after
 	// prevention and replacement (CardDamageHistory.getDamageDoneThisTurn, read
 	// by Count$TotalDamageDoneByThisTurn); cleared with every card's turn counters.

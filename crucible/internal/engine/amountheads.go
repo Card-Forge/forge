@@ -179,6 +179,8 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return manaPoolCount(g.Player(sourceController), which)
 	}
 	switch count.Head {
+	case "LastStateBattlefieldWithFallback", "LastStateGraveyardWithFallback":
+		return g.lastStateCount(sourceController, source, count)
 	case "TotalDamageDoneByThisTurn":
 		// Card.getTotalDamageDoneBy: what the host dealt this turn.
 		if source == NoCard {
@@ -694,6 +696,12 @@ func playerCountValue(g *Game, sourceController PlayerID, source CardID, hType, 
 	if hType == "Remembered" {
 		return rememberedPlayersLife(g, source, body)
 	}
+	if hType == "PropertyYou" && body == "AttractionsVisitedThisTurn" {
+		// AbilityUtils.java:3683: Player.getAttractionsVisitedThisTurn. The
+		// engine never visits Attractions (RollDice's ToVisitYourAttractions
+		// is refused), so no visit has been counted: always 0.
+		return 0, true
+	}
 	var players []PlayerID
 	for _, pid := range g.Players() {
 		if g.Player(pid).Lost {
@@ -766,6 +774,39 @@ func playerCountValue(g *Game, sourceController PlayerID, source CardID, hType, 
 		v := value(pid)
 		if highest && v > n || !highest && v < n {
 			n = v
+		}
+	}
+	return n, true
+}
+
+// lastStateCount is Count$LastStateBattlefieldWithFallback <valid> and
+// Count$LastStateGraveyardWithFallback <valid> (AbilityUtils.java:1804-1846):
+// the cards of the spell's cast-time battlefield (graveyards) that match,
+// every card now in the zone when that snapshot is empty, and 0 for a source
+// that was not cast. The snapshot holds IDs, so a card is judged as it is now.
+func (g *Game) lastStateCount(sourceController PlayerID, source CardID, count expr.Count) (int, bool) {
+	if source == NoCard || count.Argument == "" {
+		return 0, false
+	}
+	c := g.Card(source)
+	if !c.wasCast {
+		return 0, true
+	}
+	zone, snapshot := Battlefield, c.castLast.battlefield
+	if count.Head == "LastStateGraveyardWithFallback" {
+		zone, snapshot = Graveyard, c.castLast.graveyard
+	}
+	if len(snapshot) == 0 {
+		snapshot = nil
+		for _, pid := range g.Players() {
+			snapshot = append(snapshot, g.Zone(zone, pid).Cards()...)
+		}
+	}
+	spec := valid.Parse(count.Argument)
+	n := 0
+	for _, id := range snapshot {
+		if Matches(g, g.Card(id), spec, sourceController, source) {
+			n++
 		}
 	}
 	return n, true

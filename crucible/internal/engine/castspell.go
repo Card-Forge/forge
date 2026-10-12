@@ -665,6 +665,7 @@ func (x xAnnounced) setOn(a *Ability) {
 // cast from a graveyard (flashback, escape, a Play grant) leaves it: its
 // graveyard-origin triggers wait in castExits for the SpellCast batch.
 func (g *Game) putSpellOnStack(card CardID, pid PlayerID) {
+	g.Card(card).castLast = g.castSnapshotNow()
 	from := g.Card(card).Zone
 	g.Move(card, Stack, pid)
 	g.Card(card).controller = pid
@@ -1128,4 +1129,14 @@ func copyBecomesToken(c *Card) {
 	if c.IsCopiedSpell && c.Zone == Stack {
 		c.IsCopiedSpell, c.IsToken = false, true
 	}
+}
+
+// castSnapshotNow records the battlefield and the graveyards, in seating order.
+func (g *Game) castSnapshotNow() castSnapshot {
+	snap := castSnapshot{set: true}
+	for _, pid := range g.Players() {
+		snap.battlefield = append(snap.battlefield, g.Zone(Battlefield, pid).Cards()...)
+		snap.graveyard = append(snap.graveyard, g.Zone(Graveyard, pid).Cards()...)
+	}
+	return snap
 }
