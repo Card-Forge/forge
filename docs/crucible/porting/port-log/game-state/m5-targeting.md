@@ -21,7 +21,7 @@ Corpus counts for the other `canTarget` params (root `A:`/`SP$` lines and `DB$` 
 
 - `TargetUnique$` removed from `targetUnresolvedParams`: `SpellAbility.getUniqueTargets` collects only ancestors'
   targets (`SpellAbility.java:2040-2050`), so on a root or Charm mode it excludes nothing. Its lines on `SubAbility$`
-  links stay inert because sub-abilities are never targeted separately (`subability.go`).
+  links are enforced by `resolveChainTargets` ([`m6-r9-damagesource.md`](m6-r9-damagesource.md)).
 - `TargetsWithDefinedController$` is a candidate filter in `targetChoiceFor` (card targets whose controller is among
   `definedPlayers`). `ParentTarget` forms are sub-ability only and stay unreachable.
 - `trimTargetSet` drops answers breaking `TargetsWithDifferentControllers`, `DifferentCMC`, `DifferentNames`,

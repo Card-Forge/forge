@@ -217,8 +217,8 @@ targets.
 Per entity, never by recomputing the candidate scan and intersecting it: `TestRemoveFromGameSpellOnStack`
 (`pack3shapes_test.go`) targets a spell on the stack through a plain `ValidTgts$ Card` that `targetCandidates`'
 battlefield scan would never list. The check is held to what choosing a target checks, no more: Hexproof, Shroud and
-Protection are checked at both points now (below); Ward is not, and `canTarget`'s multi-target params (`TargetUnique`,
-`SameController`, ...) are not resolvable in this port yet (`game-state.md`, `Not ported yet`).
+Protection are checked at both points now (below); Ward is not, and `canTarget`'s multi-target params (`SameController`,
+...; `TargetUnique` is enforced on chain links) are not resolvable in this port yet (`game-state.md`, `Not ported yet`).
 
 Fixtures: `fizzle-helix-countered-on-resolution-gains-no-life`; `fizzle_test.go` for zone change, partial targets,
 `ValidTgts$` no longer matching, and a player who lost.
