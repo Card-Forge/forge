@@ -33,7 +33,7 @@ import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
 import forge.player.AutoYieldStore.TriggerDecision;
-import forge.player.PlayerZoneUpdates;
+import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.TargetingOverlay;
@@ -57,7 +57,6 @@ public class VStack extends FDropDown {
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
     private Map<PlayerView, Object> playersWithValidTargets;
-    private PlayerZoneUpdates restorablePlayerZones = null;
 
     private int stackSize;
 
@@ -87,15 +86,14 @@ public class VStack extends FDropDown {
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }
-        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets, true);
+        MatchController.instance.openZones(player, zones, playersWithValidTargets);
     }
 
     //restore old zones when active stack instance changes
     private void restoreOldZones() {
-        if (restorablePlayerZones == null) { return; }
-        PlayerView player = MatchController.instance.getCurrentPlayer();
-        MatchController.instance.restoreOldZones(player, restorablePlayerZones);
-        restorablePlayerZones = null;
+        if (playersWithValidTargets == null) { return; }
+        MatchController.instance.restoreOldZones(playersWithValidTargets);
+        playersWithValidTargets = null;
     }
 
     @Override
@@ -240,6 +238,7 @@ public class VStack extends FDropDown {
         private String text;
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
+        private boolean launched; // set once this item's card has flown off; stays hidden until the stack is rebuilt
 
         private StackInstanceDisplay(StackItemView stackInstance0, float width) {
             stackInstance = stackInstance0;
@@ -340,10 +339,17 @@ public class VStack extends FDropDown {
             float y = 0;
             float w = getWidth();
             float h = preferredHeight;
+            float xx = 0;
+            float yy = 0;
             CardView sourceCard = stackInstance.getSourceCard();
 
+            // sticky: once this item's card has flown off, keep the art hidden
+            if (!launched && !stackInstance.isAbility() && CardFlightOverlay.isLeavingStack(sourceCard.getId())) {
+                launched = true;
+            }
+
             boolean needAlpha = (activeStackInstance != stackInstance);
-            if (needAlpha) { //use alpha for non-active items on stack
+            if (needAlpha) {
                 g.setAlphaComposite(ALPHA_COMPOSITE);
             }
 
@@ -360,8 +366,14 @@ public class VStack extends FDropDown {
             x += PADDING;
             y += PADDING;
             cardBounds.set(x, y, CARD_WIDTH, CARD_HEIGHT);
-            CardRenderer.drawCardWithOverlays(g, sourceCard, x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
-
+            xx = x;
+            yy = y;
+            if (!launched && !stackInstance.isAbility()) { // record the rect only while the card is really here
+                CardFlightOverlay.noteStackRect(sourceCard.getId(),
+                    VStack.this.screenPos.x + getLeft() + cardBounds.x,
+                    VStack.this.screenPos.y + getTop() + cardBounds.y,
+                    cardBounds.width, cardBounds.height);
+            }
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
@@ -379,7 +391,7 @@ public class VStack extends FDropDown {
                 newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
                 newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
                 textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""),
-                        FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                    FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
             } else {
                 String modifier = (text.substring(0, index).length() > 0) ? "CARDNAME" : "";
@@ -400,7 +412,9 @@ public class VStack extends FDropDown {
                     textRenderer.drawText(g, name+" "+cId + optionalCostString +newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 }
             }
-
+            if (!launched) { // replaces the early return
+                CardRenderer.drawCardWithOverlays(g, sourceCard, xx, yy, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
+            }
             g.endClip();
 
             if (needAlpha) {

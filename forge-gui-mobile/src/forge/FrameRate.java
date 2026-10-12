@@ -2,8 +2,10 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+//import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import forge.assets.FSkinFont;
@@ -27,46 +29,108 @@ public class FrameRate {
     private int historicalClassicMaxSprites = 0;
     private int maxAdventureSpritesThisFrame = 0;
     private int historicalAdventureMaxSprites = 0;
-
+    private final StringBuilder displayBuilder;
+    private String cachedDisplayString;
+    private final Color hudColor;
+    private int lastAllocT = 0;
+    private float gcFlashTimer = 0f;
+    public static volatile int hideFPSCountdown = 0;
+    //private GLProfiler glProfiler;
+    //private long lastGlFrame;
     public static FrameRate getInstance() {
         return instance == null ? instance = new FrameRate() : instance;
     }
 
     private FrameRate() {
-        font = FSkinFont.get(10);
-        lastTimeCounted = TimeUtils.millis();
-        sinceChange = 0;
-        frameRate = Gdx.graphics.getFramesPerSecond();
+        float size = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 64 : Forge.getScreenHeight() / 64;
+        this.font = FSkinFont.forHeight(size);
+        this.lastTimeCounted = TimeUtils.millis();
+        this.sinceChange = 0;
+        this.frameRate = Gdx.graphics.getFramesPerSecond();
+        this.displayBuilder = new StringBuilder(128);
+        this.cachedDisplayString = "";
+        this.hudColor = new Color(Color.WHITE);
+        //this.glProfiler = new GLProfiler(Gdx.graphics);
+        //this.glProfiler.enable();
     }
 
     public void update(int loadedCardSize, float toAlloc) {
         allocT = (int) toAlloc;
         cardsLoaded = loadedCardSize;
+
+        if (allocT < lastAllocT - 2) {
+            gcFlashTimer = 0.5f;
+        }
+        lastAllocT = allocT;
+
         long delta = TimeUtils.timeSinceMillis(lastTimeCounted);
         lastTimeCounted = TimeUtils.millis();
         sinceChange += delta;
-        if(sinceChange >= 1000) {
+
+        if (sinceChange >= 1000) {
             sinceChange = 0;
             frameRate = Gdx.graphics.getFramesPerSecond();
+            composeDisplay();
         }
     }
 
     public void render(boolean showFPS) {
+        if (hideFPSCountdown > 0) {
+            hideFPSCountdown--;
+            return;
+        }
+
         if (!showFPS || font == null)
             return;
+
+        if (gcFlashTimer > 0) {
+            gcFlashTimer -= Gdx.graphics.getDeltaTime();
+            hudColor.set(Color.ORANGE);
+        } else if (frameRate >= 55f) {
+            hudColor.set(Color.GREEN);
+        } else if (frameRate >= 30f) {
+            hudColor.set(Color.YELLOW);
+        } else {
+            hudColor.set(Color.RED);
+        }
+
         Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
         Forge.getGraphics().getBatch().begin();
-        font.draw(Forge.getGraphics().getBatch(), composeDisplay(), Color.WHITE, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), true, Align.left);
+
+        font.draw(Forge.getGraphics().getBatch(), cachedDisplayString, hudColor, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), true, Align.left);
+
         Forge.getGraphics().getBatch().end();
     }
 
-    private String composeDisplay() {
-        // TODO: make the display better..
-        return (int)frameRate + " FPS | "
-            + cardsLoaded + " cards re/loaded | "
-            + allocT + " MB | "
-            + maxClassicSpritesThisFrame + " Classic Sprites | "
-            + maxAdventureSpritesThisFrame + " Adventure Sprites ";
+    private void composeDisplay() {
+        displayBuilder.setLength(0);
+
+        displayBuilder.append((int) frameRate).append(" FPS | ")
+            .append(cardsLoaded).append(" cards re/loaded | ")
+            .append(allocT).append(" MB");
+
+        if (gcFlashTimer > 0) {
+            displayBuilder.append(" [GC]");
+        }
+
+        displayBuilder.append(" | ")
+            .append(maxClassicSpritesThisFrame).append(" Classic Sprites | ")
+            .append(maxAdventureSpritesThisFrame).append(" Adventure Sprites ");
+
+        /*if (glProfiler == null) {
+            glProfiler = new GLProfiler(Gdx.graphics);
+            glProfiler.enable();
+            lastGlFrame = Gdx.graphics.getFrameId();
+        }
+        long frames = Math.max(1, Gdx.graphics.getFrameId() - lastGlFrame);
+        displayBuilder.append("| GL ").append(glProfiler.getDrawCalls() / frames).append(" draws ")
+            .append(glProfiler.getTextureBindings() / frames).append(" tex ")
+            .append(glProfiler.getShaderSwitches() / frames).append(" shaders ");
+        displayBuilder.append(" | ").append(Texture.getNumManagedTextures()).append(" textures");
+        glProfiler.reset();
+        lastGlFrame = Gdx.graphics.getFrameId();*/
+
+        cachedDisplayString = displayBuilder.toString();
     }
 
     public void sampleClassic(boolean showFPS) {
@@ -75,6 +139,7 @@ public class FrameRate {
         int batchMax = Forge.getGraphics().getBatch().maxSpritesInBatch;
         if (batchMax > maxClassicSpritesThisFrame) {
             maxClassicSpritesThisFrame = batchMax;
+            composeDisplay();
         }
     }
 
@@ -84,6 +149,7 @@ public class FrameRate {
         int batchMax = ((SpriteBatch) batch).maxSpritesInBatch;
         if (batchMax > maxAdventureSpritesThisFrame) {
             maxAdventureSpritesThisFrame = batchMax;
+            composeDisplay();
         }
     }
 
@@ -99,6 +165,7 @@ public class FrameRate {
             historicalClassicMaxSprites = maxClassicSpritesThisFrame;
         }
         maxClassicSpritesThisFrame = 0;
+        composeDisplay();
     }
 
     public int getHistoricalMaxSprites(boolean isAdventure) {

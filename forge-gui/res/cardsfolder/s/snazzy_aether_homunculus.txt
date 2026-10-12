@@ -1,0 +1,18 @@
+Name:Snazzy Aether Homunculus
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Snazzy
+SVar:STK2:Kind$ Name | Word$ Aether
+SVar:STK3:Kind$ Name | Word$ Homunculus
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {1}: Target creature gains all creature types until end of turn. | Ability$ STK7Animate
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card. | Triggers$ STK8Magecraft
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 2 | Toughness$ 4
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 8 | Toughness$ 7
+SVar:STK7Animate:AB$ Animate | Cost$ 1 | ValidTgts$ Creature | AddAllCreatureTypes$ True | SpellDescription$ Target creature gains all creature types until end of turn.
+SVar:STK8Magecraft:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ STK8Draw | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
+SVar:STK8Draw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:{TK}{TK} — {1}: Target creature gains all creature types until end of turn.\n{TK}{TK}{TK} — Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.\n{TK}{TK} — 2/4\n{TK}{TK}{TK}{TK}{TK} — 8/7

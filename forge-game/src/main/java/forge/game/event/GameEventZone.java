@@ -26,6 +26,11 @@ public record GameEventZone(ZoneType zoneType, PlayerView player, EventValueChan
     }
 
     @Override
+    public boolean isRedrawHint() {
+        return true;
+    }
+
+    @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }

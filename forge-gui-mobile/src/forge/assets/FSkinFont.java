@@ -38,7 +38,13 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static HashMap<String, String> langUniqueCharacterSet = new HashMap<>();
-    private static final GlyphLayout GLYPH_LAYOUT = new GlyphLayout();
+    private static final ThreadLocal<GlyphLayout> glyphLayoutThreadLocal =
+            new ThreadLocal<GlyphLayout>() {
+                @Override
+                protected GlyphLayout initialValue() {
+                    return new GlyphLayout();
+                }
+            };
     private static final TextBounds TEXT_BOUNDS = new TextBounds();
 
     static {
@@ -178,16 +184,26 @@ public class FSkinFont {
     }
     public void getBounds(CharSequence str, int start, int end, TextBounds outBounds) {
         if (outBounds == null) return;
-        if (font == null) {
-            outBounds.width = 0f;
-            outBounds.height = 0f;
+        if (font == null || str == null || start >= end || str.length() == 0 || start < 0 || end > str.length()) {
+            outBounds.set(0f, 0f);
+            return;
+        }
+        if (end - start == 1 && (str.charAt(start) == '\r' || str.charAt(start) == '\n')) {
+            outBounds.set(0f, 0f);
             return;
         }
         updateScale();
 
-        GLYPH_LAYOUT.setText(font, str, start, end, font.getColor(), 0, Align.left, false, null);
+        try {
+            GlyphLayout layout = glyphLayoutThreadLocal.get();
+            layout.setText(font, str, start, end, font.getColor(), 0, Align.left, false, null);
 
-        outBounds.set(GLYPH_LAYOUT.width, font.getData().capHeight);
+            outBounds.set(layout.width, font.getData().capHeight);
+        } catch (Exception ignored) {
+            // shouldn't be but lets have fallback approximation
+            outBounds.set((end - start) * (font.getData().capHeight * 0.6f), font.getData().capHeight);
+        }
+
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
         getMultiLineBounds(str, TEXT_BOUNDS);
@@ -195,16 +211,24 @@ public class FSkinFont {
     }
     public void getMultiLineBounds(CharSequence str, TextBounds outBounds) {
         if (outBounds == null) return;
-        if (font == null) {
-            outBounds.width = 0f;
-            outBounds.height = 0f;
+        if (font == null || str == null || str.length() == 0) {
+            outBounds.set(0f, 0f);
             return;
         }
         updateScale();
 
-        GLYPH_LAYOUT.setText(font, str, 0, str.length(), font.getColor(), 0, Align.left, false, null);
+        try {
+            GlyphLayout layout = glyphLayoutThreadLocal.get();
+            layout.setText(font, str, 0, str.length(), font.getColor(), 0, Align.left, false, null);
 
-        outBounds.set(GLYPH_LAYOUT.width, GLYPH_LAYOUT.height);
+            outBounds.set(layout.width, layout.height);
+        } catch (Exception ignored) {
+            // shouldn't be but lets have fallback approximation
+            outBounds.set(font.getData().capHeight * 10f, font.getData().capHeight);
+        }
+
+
+
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
         getWrappedBounds(str, wrapWidth, TEXT_BOUNDS);
@@ -212,17 +236,22 @@ public class FSkinFont {
     }
     public void getWrappedBounds(CharSequence str, float wrapWidth, TextBounds outBounds) {
         if (outBounds == null) return;
-        if (font == null) {
-            outBounds.width = 0f;
-            outBounds.height = 0f;
+        if (font == null || str == null || str.length() == 0) {
+            outBounds.set(0f, 0f);
             return;
         }
         updateScale();
         if (wrapWidth <= 0) wrapWidth = Integer.MAX_VALUE;
 
-        GLYPH_LAYOUT.setText(font, str, 0, str.length(), font.getColor(), wrapWidth, Align.left, true, null);
+        try {
+            GlyphLayout layout = glyphLayoutThreadLocal.get();
+            layout.setText(font, str, 0, str.length(), font.getColor(), wrapWidth, Align.left, true, null);
 
-        outBounds.set(GLYPH_LAYOUT.width, GLYPH_LAYOUT.height);
+            outBounds.set(layout.width, layout.height);
+        } catch (Exception ignored) {
+            // shouldn't be but lets have fallback approximation
+            outBounds.set(Math.min(wrapWidth, font.getData().capHeight * 10f), font.getData().capHeight * 2f);
+        }
     }
     public float getAscent() {
         if (font == null)
@@ -397,45 +426,51 @@ public class FSkinFont {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                Array<TextureRegion> textureRegions = new Array<>();
-                for (int i = 0; i < pages.size; i++) {
-                    PixmapPacker.Page p = pages.get(i);
-                    Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
-                        @Override
-                        public void dispose() {
-                            super.dispose();
-                            getTextureData().consumePixmap().dispose();
-                        }
-                    };
-                    if (GuiBase.isIOS()) {
-                        // Linear filtering renders smoother text on Retina displays; other
-                        // platforms keep the original crisp Nearest filtering.
-                        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    } else {
-                        texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+                try {
+                    if (Forge.isDisposed || Forge.getAssets() == null || Forge.getAssets().manager() == null) {
+                        return;
                     }
-                    textureRegions.addAll(new TextureRegion(texture));
+
+                    Array<TextureRegion> textureRegions = new Array<>();
+                    for (int i = 0; i < pages.size; i++) {
+                        PixmapPacker.Page p = pages.get(i);
+                        Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
+                            @Override
+                            public void dispose() {
+                                super.dispose();
+                                getTextureData().consumePixmap().dispose();
+                            }
+                        };
+                        if (GuiBase.isIOS()) {
+                            // Linear filtering renders smoother text on Retina displays; other
+                            // platforms keep the original crisp Nearest filtering.
+                            texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        } else {
+                            texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+                        }
+                        textureRegions.addAll(new TextureRegion(texture));
+                    }
+
+                    BitmapFont temp = new BitmapFont(fontData, textureRegions, true);
+
+                    //create .fnt and .png files for font
+                    FileHandle pixmapDir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
+                    if (pixmapDir != null) {
+                        FileHandle fontFile = pixmapDir.child(fontName + ".fnt");
+                        BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
+
+                        String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, fontName);
+                        BitmapFontWriter.writeFont(temp.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo(fontName, fontSize), 1, 1);
+                        //load to assetManager
+                        Forge.getAssets().manager().load(fontFile.path(), BitmapFont.class);
+                        Forge.getAssets().manager().finishLoadingAsset(fontFile.path());
+                        font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class);
+                    }
+
+                    Forge.safeDispose(generator, packer, temp);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                BitmapFont temp = new BitmapFont(fontData, textureRegions, true);
-
-                //create .fnt and .png files for font
-                FileHandle pixmapDir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
-                if (pixmapDir != null) {
-                    FileHandle fontFile = pixmapDir.child(fontName + ".fnt");
-                    BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
-
-                    String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, fontName);
-                    BitmapFontWriter.writeFont(temp.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo(fontName, fontSize), 1, 1);
-                    //load to assetManager
-                    Forge.getAssets().manager().load(fontFile.path(), BitmapFont.class);
-                    Forge.getAssets().manager().finishLoadingAsset(fontFile.path());
-                    font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class);
-                }
-
-                generator.dispose();
-                packer.dispose();
-                temp.dispose();
             }
         });
     }

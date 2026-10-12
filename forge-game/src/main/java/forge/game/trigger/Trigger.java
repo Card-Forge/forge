@@ -359,16 +359,17 @@ public abstract class Trigger extends TriggerReplacementBase {
         return true;
     }
 
-    public boolean checkActivationLimit() {
-        if (hasParam("ActivationLimit") &&
-                getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
-            return false;
+    /**
+     * It can't trigger more times than the limit allows
+     */
+    public int limitByActivations(int activations) {
+        if (hasParam("GameActivationLimit")) {
+            activations = Math.min(activations, Integer.parseInt(getParam("GameActivationLimit")) - getActivationsThisGame());
         }
-        if (hasParam("GameActivationLimit") && 
-            getActivationsThisGame() >= Integer.parseInt(getParam("GameActivationLimit"))) {
-                return false;
+        if (hasParam("ActivationLimit")) {
+            activations = Math.min(activations, Integer.parseInt(getParam("ActivationLimit")) - getActivationsThisTurn());
         }
-        return true;
+        return Math.max(activations, 0);
     }
 
     public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {

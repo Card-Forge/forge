@@ -11,11 +11,7 @@ import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.Zone;
-import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
-import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -31,7 +27,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     private final FCollectionView<T> validChoices;
     protected final FCollection<T> selected = new FCollection<>();
-    protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
     protected MassSelectMode massSelectMode = null;
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
@@ -55,17 +50,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             }
         }
         getController().getGui().setSelectables(vCards, this.min, this.max);
-        final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-        for (final GameEntity ge : validChoices) {
-            final Zone cz = ge instanceof Card c ? c.getLastKnownZone() : null;
-            if (cz != null) {
-                zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
-            }
-        }
-        FThreads.invokeInEdtNowOrLater(() -> {
-            getController().getGui().updateZones(zonesToUpdate);
-            zonesShown = getController().getGui().tempShowZones(controller.getPlayer().getView(), zonesToUpdate);
-        });
     }
 
     @Override
@@ -167,7 +151,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     @Override
     protected void onStop() {
-        getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
         getController().getGui().clearSelectables();
         super.onStop();
     }

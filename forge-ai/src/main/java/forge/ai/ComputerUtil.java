@@ -33,6 +33,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -2418,6 +2420,26 @@ public class ComputerUtil {
 
         final Game game = ai.getGame();
         String chosen = "";
+        if (kindOfType.equals("Letter")) {
+            // _____ _____ Rocketship counts its own name stickers starting with the letter
+            Map<String, Integer> begins = Maps.newHashMap();
+            for (AppliedSticker applied : sa.getHostCard().getStickers()) {
+                String letters = applied.getSticker().getLetters();
+                if (applied.getKind() != StickerKind.NAME || letters.isEmpty()) {
+                    continue;
+                }
+                begins.merge(letters.substring(0, 1).toUpperCase(), 1, Integer::sum);
+            }
+            int best = 0;
+            for (String letter : validTypes) {
+                int n = begins.getOrDefault(letter.toUpperCase(), 0);
+                if (n > best) {
+                    best = n;
+                    chosen = letter;
+                }
+            }
+            return chosen.isEmpty() ? Iterables.getFirst(validTypes, "") : chosen;
+        }
         if (kindOfType.equals("Card")) {
             // TODO
             // computer will need to choose a type based on whether it needs a creature or land,
@@ -2791,11 +2813,12 @@ public class ComputerUtil {
     }
 
     public static int getDamageForPlaying(final Player player, final SpellAbility sa) {
-        // check for bad spell cast triggers
+        // check for bad spell cast or ability activation triggers (e.g. Burning-Tree Shaman)
         int damage = 0;
         final Game game = player.getGame();
         final Card card = sa.getHostCard();
         final FCollection<Trigger> theTriggers = new FCollection<>();
+        final TriggerType mode = sa.isActivatedAbility() ? TriggerType.AbilityCast : TriggerType.SpellCast;
 
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(c.getTriggers());
@@ -2803,7 +2826,10 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (trigger.getMode() != TriggerType.SpellCast) {
+            if (trigger.getMode() != mode) {
+                continue;
+            }
+            if (mode == TriggerType.AbilityCast && !trigger.matchesValidParam("ValidSA", sa)) {
                 continue;
             }
             if (!trigger.zonesCheck(game.getZoneOf(source))) {

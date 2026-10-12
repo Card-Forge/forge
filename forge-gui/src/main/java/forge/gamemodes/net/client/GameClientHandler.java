@@ -17,8 +17,6 @@ import forge.gui.interfaces.IGuiGame;
 import forge.util.BuildInfo;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
@@ -169,19 +167,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
         for (Object obj: objs) {
             if (obj instanceof PlayerView pv) {
                 replicatePlayerView(pv);
-            }
-            else if (obj instanceof PlayerZoneUpdate pzu) {
-                replicatePlayerView(pzu.getPlayer());
-            }
-            else if (obj instanceof PlayerZoneUpdates pzu) {
-                Iterator itrPlayerZoneUpdates = pzu.iterator();
-                while (itrPlayerZoneUpdates.hasNext()) {
-                    PlayerView newPlayerView = ((PlayerZoneUpdate)itrPlayerZoneUpdates.next()).getPlayer();
-                    // PlayerZoneUpdates aren't a TrackableCollection, so updateTrackers
-                    // doesn't reach them automatically
-                    updateTrackers(new Object[]{newPlayerView});
-                    replicatePlayerView(newPlayerView);
-                }
             }
         }
     }

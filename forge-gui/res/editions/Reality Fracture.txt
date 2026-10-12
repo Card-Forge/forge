@@ -556,7 +556,7 @@ Replace=.055F fromSheet("FRA tower")+
 1 Sphinx of False Conclusions|FRA|[338]
 1 Theorist's Proxy|FRA|[339]
 1 Dark Matter Manipulator|FRA|[340]
-1 Overwrite the Multivers|FRA|[341]
+1 Overwrite the Multiverse|FRA|[341]
 1 Sanctum Lurker|FRA|[342]
 1 Vraska's Final Mercy|FRA|[343]
 1 Master of Barbs|FRA|[344]
@@ -611,13 +611,13 @@ Replace=.055F fromSheet("FRA tower")+
 1 Fblthp, Impossibly Lost|FRA|[298]
 1 Geist of Saint Thalia|FRA|[299]
 1 Jace, Reality Sculptor|FRA|[300]
-1 Lyla, Tolarian Archangel|FRA|[301]
+1 Lyra, Tolarian Archangel|FRA|[301]
 1 Samut, Tyrant of Naktamun|FRA|[302]
 1 Garruk, Veiled Butcher|FRA|[303]
 1 Gideon the Oathless|FRA|[304]
 1 Liliana the Repentant|FRA|[305]
 1 Teyo, Diamondblade Mage|FRA|[306]
-1 Winter, Tormented Lover|FRA|[307]
+1 Winter, Tormented Loner|FRA|[307]
 1 Ajani Unrelenting|FRA|[308]
 1 Chandra, Torch of Defiance|FRA|[309]
 1 Marwyn, the Clearcutter|FRA|[310]
@@ -788,6 +788,7 @@ Replace=.055F fromSheet("FRA tower")+
 2 ajanis_pridemate @Diego Gisbert
 3 u_3_3_angel_flying @Raluca Marinescu
 4 u_1_1_illusion @Daniel Cotter
+5 u_empower_jace @Manuel Castañón
 6 u_8_8_leviathan_hexproof @Maxime Minard
 7 r_5_5_dragon_flying @Loïc Canavaggia
 8 g_4_4_beast_trample @Simon Dominic
@@ -800,7 +801,6 @@ Replace=.055F fromSheet("FRA tower")+
 15 c_a_treasure_sac @Alayna Danner
 
 [other]
-5 u_empower_jace @Manuel Castañón
 16 emblem_ajani_resolute @Tyler Jacobson
 17 emblem_chandra_chill_of_compliance @Kieran Yanner
 18 emblem_chandra_torch_of_defiance @Kieran Yanner

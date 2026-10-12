@@ -248,15 +248,15 @@ public class UIScene extends Scene {
     }
 
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
-        return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "");
+        return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "", false);
     }
 
-    public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
+    public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel, boolean wrap) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         textboxOpen = true;
 
         if (label != null)
-            dialog.getContentTable().add(Controls.newTextraLabel(label));
+            dialog.getContentTable().add(Controls.newTextraLabel(label).setWrap(wrap)).center().fill();
 
         dialog.button(Controls.newTextButton(stringYes, runnableYes));
 
@@ -732,6 +732,8 @@ public class UIScene extends Scene {
                 Drawable originalDrawable = image.getDrawable();
                 if (originalDrawable instanceof TextureRegionDrawable textureRegionDrawable) {
                     return textureRegionDrawable.getRegion();
+                } else if (originalDrawable instanceof ShaderDrawable shaderDrawable) {
+                    return shaderDrawable.getRegion();
                 }
             }
         } catch (Exception e) {

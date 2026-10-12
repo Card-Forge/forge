@@ -1,5 +1,6 @@
 package forge.adventure.world;
 
+import com.badlogic.gdx.utils.TimeUtils;
 import forge.Forge;
 import com.badlogic.gdx.Gdx;
 import forge.OverlayText;
@@ -39,6 +40,9 @@ public class WorldSave {
 
 
     private final SignalList onLoadList = new SignalList();
+    private static long lastPreviewTimestamp = 0L;
+    private static final long COOLDOWN_WINDOW_MS = 800L;
+    private static boolean firstCapture = true;
 
     public final World getWorld() {
         return world;
@@ -280,6 +284,32 @@ public class WorldSave {
             p.save();
         }
         MapViewScene.instance().clearBookMarks();
+    }
+
+    // prevent spam of preview if user repeatedly/accidentally reopen scene that request previews
+    public static void requestPreview() {
+        final long currentTimestamp = TimeUtils.millis();
+
+        if (firstCapture) {
+            firstCapture = false;
+            // init once
+            currentSave.header.createPreview();
+            return;
+        }
+
+        // If 800ms has not passed since the last successful generation, skip
+        if (currentTimestamp - lastPreviewTimestamp < COOLDOWN_WINDOW_MS) {
+            return;
+        }
+
+        // Update the timestamp immediately to lock out parallel thread spam on the spot
+        lastPreviewTimestamp = currentTimestamp;
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                currentSave.header.createPreview();
+            }
+        });
     }
 
     public static void dispose() {

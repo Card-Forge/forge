@@ -48,6 +48,7 @@ import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
+import forge.screens.match.DiceOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.settings.CardImageBrowserScreen;
@@ -109,8 +110,6 @@ public class Forge implements ApplicationListener {
     public static boolean showFPS = false;
     public static boolean allowCardBG = false;
     public static boolean altPlayerLayout = false;
-    public static boolean altZoneTabs = false;
-    public static String altZoneTabMode = "Off";
     public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
     public static String selector = "Default";
@@ -139,9 +138,10 @@ public class Forge implements ApplicationListener {
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
     public static final int HIGH_SPRITES_CAP = 1500; // Adventure and Classic sprites capacity
-    private static boolean isDisposed = false;
+    public static boolean isDisposed = false;
     public static boolean invokeWorldSave = false;
     public static Camera camera;
+    public static boolean lifecycleClosing = false;
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -169,6 +169,10 @@ public class Forge implements ApplicationListener {
     }
 
     private Forge() {
+    }
+
+    public static TransitionScreen getTransitionScreen() {
+        return transitionScreen;
     }
 
     private ForgePreferences getForgePreferences() {
@@ -243,7 +247,6 @@ public class Forge implements ApplicationListener {
         reversedPrompt = getForgePreferences().getPrefBoolean(FPref.UI_REVERSE_PROMPT_BUTTON);
         autoAIDeckSelection = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
-        setAltZoneTabMode(getForgePreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
         animatedCardTapUntap = getForgePreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
@@ -280,19 +283,6 @@ public class Forge implements ApplicationListener {
             //see if app or assets need updating
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
         }
-    }
-
-    public static void setAltZoneTabMode(String mode) {
-        Forge.altZoneTabMode = mode;
-        switch (Forge.altZoneTabMode) {
-            case "Vertical", "Horizontal" -> Forge.altZoneTabs = true;
-            case "Off" -> Forge.altZoneTabs = false;
-            default -> Forge.altZoneTabs = false;
-        }
-    }
-
-    public static boolean isHorizontalTabLayout() {
-        return Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
     }
 
     public static boolean hasGamepad() {
@@ -426,11 +416,6 @@ public class Forge implements ApplicationListener {
         GuiBase.setAdventureDirectory(ForgeConstants.ADVENTURE_COMMON_DIR);
         advStartup = false;
         isMobileAdventureMode = true;
-        //force it for adventure mode if the prefs is not updated from boolean value to string value
-        if ("true".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS)) ||
-            "false".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS))) {
-            setAltZoneTabMode("Vertical");
-        }
         //pixl cursor for adventure
         setCursor(null, "0");
         if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
@@ -872,7 +857,6 @@ public class Forge implements ApplicationListener {
             FSkinTexture.invalidateAdventureTextures();
             GuiBase.setAdventureDirectory(null);
             setCursor(FSkin.getCursor().get(0), "0");
-            setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
             Gdx.input.setInputProcessor(getInputProcessor());
             clearTransitionScreen();
             openHomeDefault();
@@ -951,6 +935,7 @@ public class Forge implements ApplicationListener {
         // prevent render if isDisposed
         if (isDisposed)
             return;
+        ScreenUtil.getInstance().onRenderFrame();
         if (showFPS)
             FrameRate.getInstance().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
@@ -980,8 +965,11 @@ public class Forge implements ApplicationListener {
             FrameRate.getInstance().render(showFPS);
             return;
         }
+        // update DiceOverlay
+        DiceOverlay.getInstance().update(delta);
         // render classic
         Classic.getInstance().render(screen);
+        DiceOverlay.getInstance().render();
         FrameRate.getInstance().render(showFPS);
     }
 
@@ -1028,6 +1016,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
+        lifecycleClosing = true;
         setWindowFocus(false);
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().pause();
@@ -1036,6 +1025,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        lifecycleClosing = false;
         setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
@@ -1053,6 +1043,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void dispose() {
+        lifecycleClosing = true;
         isDisposed = true;
         if (currentScreen != null) {
             currentScreen.onClose(null);
@@ -1065,7 +1056,8 @@ public class Forge implements ApplicationListener {
         }
         Dscreens.clear();
         // don't call getInstance() or they will be recreated on dispose
-        safeDispose( // I need to know what line the startup bug occurs when the app is paused...
+        safeDispose(
+            DiceOverlay.instance,
             MapStage.instance,
             ScreenUtil.instance,
             ShaderUtil.instance,
@@ -1121,7 +1113,7 @@ public class Forge implements ApplicationListener {
     public static boolean switchScene(Scene newScene, boolean skipPreview) {
         if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene || newScene instanceof QuestLogScene) {
             if (!(currentScene instanceof ForgeScene || skipPreview)) //prevent overwriting the last preview if last scene is instance of ForgeScene
-                WorldSave.getCurrentSave().header.createPreview();
+                WorldSave.requestPreview();
         }
         if (currentScene != null) {
             if (!currentScene.leave())
@@ -1135,7 +1127,8 @@ public class Forge implements ApplicationListener {
             }
             lastScene.add(currentScene);
         }
-        storeScreen();
+        if (!(newScene instanceof ViewRewardsScene))
+            storeScreen();
         Adventure.getInstance().sceneWasSwapped = true;
         currentScene = newScene;
 

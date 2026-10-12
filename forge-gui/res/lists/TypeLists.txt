@@ -76,6 +76,7 @@ Coward:Cowards
 Coyote:Coyotes
 Crab:Crabs
 Crocodile:Crocodiles
+Custodes:Custodes
 Cyberman:Cybermen
 Cyclops:Cyclopes
 Dalek:Daleks
@@ -190,6 +191,7 @@ Masticore:Masticores
 Mercenary:Mercenaries
 Merfolk:Merfolk
 Metathran:Metathrans
+Mindless-One:Mindless-Ones
 Minion:Minions
 Minotaur:Minotaurs
 Mite:Mites
@@ -340,6 +342,7 @@ Volver:Volvers
 Vorta:Vorta
 Vulcan:Vulcans
 Wall:Walls
+Walrus:Walruses
 Warlock:Warlocks
 Warrior:Warriors
 Weasel:Weasels
@@ -384,6 +387,7 @@ Blood
 Bobblehead:Bobbleheads
 Book:Books
 Clue:Clues
+Communicator:Communicators
 Equipment
 Food:Foods
 Fortification
@@ -464,6 +468,7 @@ Samut
 Sarkhan
 Serra
 Sifa
+Sivitri
 Sorin
 Szat
 Tamiyo
@@ -568,6 +573,7 @@ Theros
 Time
 Trenzalore
 Ulgrotha
+Unknown Planet
 Valla
 Vryn
 Wildfire

@@ -21,6 +21,7 @@ MG01 M Minnea, Planar Tourist @
 ML01 M The Waffle Restaurant @
 MR01 M Polis the Planeshifter @
 MZ01 M The Unknown Wizard @
+MZ01a M The Flavormancer @
 RA01 R Cinnamon, Seasoned Steed @
 RB01 R Noyd, Keeper of the Void @
 RC01a R Banned Eldraine Card @
@@ -152,6 +153,7 @@ RB03b R Dan, Shrewd Trader @
 RB03c R Incubation Triformer @
 RB03d R Old Way Phyrexian @
 RB03e R The Juzam Master @
+RG03 R The Local Guides @
 RG03a R Maître Tree @
 RG03b R Mr. Wiggles, Helpful Butterfly @
 RG03c R Pulse of the Hunter Maze @
@@ -167,6 +169,7 @@ RU03b R Wrath of Oko @
 RU03c R The Covert Blue Mage @
 RU03d R Second Stage of Magic Design @
 RU03e R Yeah Nah // Nah Yeah @
+RU03f R Split into Three Parts @
 RW03a R Azorius Traffic Enforcement @
 RW03b R Fioran Reformist @
 RW03c R Ratatwotwo @
@@ -197,6 +200,7 @@ RZ03r R The Wizardly Barge @
 RZ03s R Evy, Fang Keeper @
 RZ03t R The Ice Dancer @
 RZ03u R The Sad Creaturez @
+RZ03v R Tarelily, Lovestruck Archer @
 UA03 U Twenty Lessons @
 UA03a U Bag of Stroopwafels @
 UA03b U Famous Museum @
@@ -215,6 +219,7 @@ UU03a U Team Mage @
 UU03b U Ulgrotha Charm @
 UU03c U Xerex Squire @
 UU03d U Higher Level Zone Monster @
+UU03e U Mysterious Hero @
 UW03 U Tax Hounds @
 UW03a U Rideable Mantis @
 UZ03 U Your Favorite Missing Character @
@@ -237,6 +242,7 @@ RB04e R Rankle, Master of Pranksters @
 RB04f R The Magic Bandit @
 RB04g R Yet Another Night in Vegas @
 RB04h R A Chaotic Night in Vegas @
+RB04i R The Swamp Kitten @
 RG04 R Phyrexian Cytoshaper @
 RR04 R Need for Speed (Not the Odyssey One) @
 RR04a R Mzed, Mercenary Leader @
@@ -258,6 +264,8 @@ RW04c R Draw Team Lines @
 RW04d R The Miniaturizer @
 RW04e R Theopholos, Order Acolyte @
 RW04f R Try-My-Deck Elemental @
+RW04g R Robby, Another Dwarf @
+RW04h R Bobby, Another Dwarf @
 RZ04 R The River Warlock @
 RZ04a R Forestfolk @
 RZ04b R Hadran, Naya Sunseeder @
@@ -297,6 +305,7 @@ UW04 U Brave Falconhawk @
 CB05 C Shedding Snake @
 CG05a C Underdog Racer @
 CW05 C Catch-Up Mechanic @
+MG05 M The Generational Historian @
 MZ05 M The Horizon Seeker @
 MZ05a M The Convincing General @
 RA05 R The Mysterious Sphere @
@@ -344,6 +353,8 @@ RZ05k R Tarkiran Towelsbane @
 RZ05l R The Convention Enthusiast @
 RZ05m R Saga of Krark Losing His Thumb @
 RZ05n R Drop Bear @
+RZ05o R Wheel of Not Ideal @
+RZ05p R Niv-Mizzet's Diary @
 UA05a U Compleated Clone Shell @
 UA05b U Guilded Lotus @
 UA05c U Power Level Analyzer @
@@ -387,6 +398,8 @@ RZ06f R Blue Screen of Death @
 RZ06g R Monet, Sensei of the Sewers @
 RZ06h R The Snapstone Wielder @
 RZ06i R The Bird Champion @
+RZ06j C Emerin, Shivan Angel @
+RZ06k R The Meld Hound @
 UA06a U Gingerbehemoth @
 UA06b U Sawtooth Avenger @
 UB06 U Soul Drainer @
@@ -417,7 +430,7 @@ RZ08b R Koma and Toski, Compleated @
 RZ08c R Riven Turnbull and Princess Lucrezia @
 RZ08d R Simic, Value Engine @
 RA09 R Wurmcoil Broodmother @
-RC09 R Everyone's an Imposter @
+RC09 R Everyone's an Impostor @
 RZ09 R Daxiver, Izzet Electromancer @
 RG10 R Emrakul and Chatterfang @
 RR10 R The Crimson Avenger @
@@ -429,6 +442,7 @@ CB11a C Life at Stake @
 CR11a C Establishing Shot @
 CU11 C Point to the Scoreboard @
 CW11 C Drive to Work @
+CW11a C I'm Going On An Adventure! @
 RA11a R Mindslaver Toolkit @
 RA11b R Mox Poison @
 RG11 R Occupation of Llanowar @
@@ -439,6 +453,7 @@ RZ11c R The Mystery Raceway @
 UA11 U Original Skullclamp @
 UB11 U Delve too Deep @
 UB11a U Would You Have Done the Same? @
+UR11 U CGI Fight Sequence @
 UR11a U Nevermind @
 UR11b U Tax Bolt @
 UU11 U Where We're Going . . . @
@@ -523,3 +538,4 @@ MZ99 M The Collector @
 Glass:Glasses
 Stained:Stained
 Judge:Judges
+Chef:Chefs

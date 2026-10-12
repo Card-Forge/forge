@@ -232,7 +232,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 final CardPlayOption o = sa.getMayPlayOption();
                 if (o == null || sa.isCastFromPlayEffect()) {
                     return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
-                } else if (o.getPlayer() == activator) {
+                } else if (o.appliesTo(activator)) {
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
@@ -337,7 +337,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (sa.isSpell()) {
             // Spells should always default to "controller" but use mayPlay check.
             final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-            if (o != null && o.getPlayer() == activator) {
+            if (o != null && o.appliesTo(activator)) {
                 return true;
             }
         }

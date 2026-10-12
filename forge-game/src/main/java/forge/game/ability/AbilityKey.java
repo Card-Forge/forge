@@ -130,6 +130,7 @@ public enum AbilityKey {
     SpellAbility("SpellAbility"),
     SpellAbilityTargets("SpellAbilityTargets"),
     StackSa("StackSa"),
+    StickerKind("StickerKind"),
     SurveilNum("SurveilNum"),
     Target("Target"),
     Targets("Targets"),

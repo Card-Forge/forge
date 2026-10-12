@@ -6,3 +6,5 @@ Type=Online
 ScryfallCode=YFRA
 
 [cards]
+0 M Enter the Eternities @Julie Dillon
+0 R Salvaged Imitations @Michele Giorgi

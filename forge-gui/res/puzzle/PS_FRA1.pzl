@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Reality Fracture #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/09/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your Diviner of Victory is prepared. The puzzle starts with your graveyard empty. Your library contains additional copies of all cards under your control and in your hand (but you don't know if/when you'll draw them.) Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=No Admittance;Torch the Tower;Violent Urge;Way of the Warlord;Boulder Dash;Fountainport Bell
+p0library=No Admittance;Torch the Tower;Violent Urge;Way of the Warlord;Boulder Dash;Fountainport Bell;Diviner of Victory;Syr Ginger, the Meal Ender;Island;Island;Mountain;Mountain
+p0battlefield=Diviner of Victory;Syr Ginger, the Meal Ender;Island;Island;Mountain;Mountain;T:c_a_treasure_sac|Set:FRA
+p1life=19
+p1battlefield=Vraska, the Cutting Glare
+p0precast=Countersculpt:CustomScript:DB$ Empower|Type$ Jace|Num$ 2;Ancestral Knowledge:TrigShuffle

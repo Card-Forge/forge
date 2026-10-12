@@ -1,0 +1,16 @@
+Name:Spooky Clown Mox
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Spooky
+SVar:STK2:Kind$ Name | Word$ Clown
+SVar:STK3:Kind$ Name | Word$ Mox
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Vigilance | Keywords$ Vigilance
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ {1}, {T}: Tap target creature. | Ability$ STK8Tap
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 1 | Toughness$ 5
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 5 | Toughness$ 4
+SVar:STK8Tap:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+Oracle:{TK}{TK} — Vigilance\n{TK}{TK}{TK}{TK} — {1}, {T}: Tap target creature.\n{TK}{TK} — 1/5\n{TK}{TK}{TK} — 5/4

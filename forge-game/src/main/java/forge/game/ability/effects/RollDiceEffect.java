@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.event.GameEventRollDice;
 import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -314,7 +315,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
             }
         }
-
+        SpellAbility sourceSA = sa != null ? sa.getRootAbility() : null;
         int rollNum = 1;
         for (DieRollResult roll : resultsList) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
@@ -323,6 +324,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.NaturalResult, roll.getNaturalValue());
             runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
             runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
+            runParams.put(AbilityKey.SourceSA, sourceSA);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
             rollNum++;
         }
@@ -330,6 +332,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Sides, sides);
         runParams.put(AbilityKey.Result, getFinalResults(resultsList));
         runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
+        runParams.put(AbilityKey.SourceSA, sourceSA);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
         return getFinalResults(resultsList).stream().reduce(0, Integer::sum);
@@ -421,14 +424,16 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
+        List<Integer> rolled = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
-            // Play the die roll sound
-            player.getGame().fireEvent(new GameEventRollDie());
+            player.getGame().fireEvent(new GameEventRollDie(sides, roll));
             player.roll();
             naturalRolls.add(roll);
+            rolled.add(roll);
         }
+        player.getGame().fireEvent(new GameEventRollDice(sides, rolled));
 
         naturalRolls.sort(null);
 

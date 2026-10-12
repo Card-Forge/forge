@@ -122,7 +122,7 @@ public abstract class Scene implements Disposable {
 
     }
 
-    private ShaderDrawable lastPreviewDrawable;
+    private ShaderDrawable lastPreviewDrawable, lastScreenshotDrawable;
     private float uniformWidth = 0;
     private float uniformHeight = 0;
     private float uniformPixelSize = 0;

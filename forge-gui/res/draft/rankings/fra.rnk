@@ -8,7 +8,7 @@
 #7|The Theorist, Jace Beleren|M|FRA
 #8|Verdant Kraken|R|FRA
 #9|Kwia Vigorbloom|M|FRA
-#10|Sublime Epiphany|R|FRA
+#10|Sublime Epiphany|M|SPG
 #11|Garruk, Veiled Butcher|M|FRA
 #12|Draconic Visitor|R|FRA
 #13|Guiding Hydra|R|FRA
@@ -18,8 +18,8 @@
 #17|Aerid Konstrari|M|FRA
 #18|Avatar of Burgeoning Echoes|M|FRA
 #19|Hungering Puppetbeast|R|FRA
-#20|Mind Twist|M|FRA
-#21|Austere Command|R|FRA
+#20|Mind Twist|M|SPG
+#21|Austere Command|M|SPG
 #22|Curse-Marred Demon|R|FRA
 #23|Lyra, Archangel of Dawn|R|FRA
 #24|Sphinx of False Conclusions|R|FRA
@@ -29,7 +29,7 @@
 #28|Stingcaster Mage|M|FRA
 #29|Tenured Tethermage|R|FRA
 #30|Vraska, the Cutting Glare|R|FRA
-#31|Flesh Duplicate|R|FRA
+#31|Flesh Duplicate|M|SPG
 #32|Hapatra, the Desert Fang|U|FRA
 #33|Lich's Relic|R|FRA
 #34|Liliana the Faultless|R|FRA
@@ -56,7 +56,7 @@
 #55|Fblthp, Knows the Way|U|FRA
 #56|Kiora of Fire and Ashes|U|FRA
 #57|Liliana the Repentant|R|FRA
-#58|Splinter Twin|R|FRA
+#58|Splinter Twin|M|SPG
 #59|The Echoverse Fulcrum|M|FRA
 #60|Twisted Fates|U|FRA
 #61|Vraska, Soul of Stone|R|FRA
@@ -149,133 +149,143 @@
 #148|Stingerquill Annex|C|FRA
 #149|Theorix Annex|C|FRA
 #150|Transformative Commons|C|FRA
-#151|Vigorbloom Annex|C|FRA
-#152|Arcane Amphisbaena|C|FRA
-#153|Consider|C|FRA
-#154|Dedicated Commons|C|FRA
-#155|Extended Absence|C|FRA
-#156|Fatehold Chronologist|C|FRA
-#157|Gallia, the Merrymaker|U|FRA
-#158|Koth of the Homestead|U|FRA
-#159|Mabel, Bitter Recluse|U|FRA
-#160|Mabel, Valley Hero|U|FRA
-#161|Pia, Aether Ascetic|U|FRA
-#162|Proft, Sinister Mastermind|U|FRA
-#163|Prudent Fateseer|U|FRA
-#164|Theorist's Proxy|R|FRA
-#165|Theorix Charm|U|FRA
-#166|Awaken the Inferno|C|FRA
-#167|Danitha, Spear of Agony|U|FRA
-#168|Danitha, Sword of Hope|U|FRA
-#169|Fblthp, Impossibly Lost|U|FRA
-#170|Konstrari Improviser|C|FRA
-#171|Koth, the Geomancer|U|FRA
-#172|Pyre Rhymer|R|FRA
-#173|Restore with Empathy|U|FRA
-#174|Semester Foreseer|C|FRA
-#175|Silence the Echo|C|FRA
-#176|Skilled Battlecarver|C|FRA
-#177|Something Worth Saving|C|FRA
-#178|Surgical Precision|C|FRA
-#179|Unflinching Hortimancer|C|FRA
-#180|Unsummon|C|FRA
-#181|Void Extrapolator|C|FRA
-#182|Way of the Paradox|U|FRA
-#183|Winter, Team Player|U|FRA
-#184|Yoshimaru, Beloved Companion|U|FRA
-#185|Yuriko, Hope from the Shadows|U|FRA
-#186|Bestial Incursion|C|FRA
-#187|Codie, Ravenous Codex|R|FRA
-#188|Countersculpt|U|FRA
-#189|Heartstring Puller|C|FRA
-#190|Hunter's Axe|U|FRA
-#191|Icy Reception|C|FRA
-#192|Marwyn, the Clearcutter|U|FRA
-#193|Rank Rat|C|FRA
-#194|Theoretical Necromancer|C|FRA
-#195|Traxos, Scourge Eternal|U|FRA
-#196|Way of the Cryomancer|U|FRA
-#197|Yuriko, Blade of the Mighty|U|FRA
-#198|Archive Arbiter|U|FRA
-#199|Emergency Phytomedic|C|FRA
-#200|Karn, Gilded Guardian|U|FRA
-#201|Pompous Battlemage|R|FRA
-#202|Protege's Awakening|C|FRA
-#203|Teyo, Diamondblade Mage|U|FRA
-#204|Vigorbloom Vanguard|U|FRA
-#205|Way of the Deathbringer|U|FRA
-#206|Apex Witchstalker|C|FRA
-#207|Blazing Crescendo|C|FRA
-#208|Campus Crier|C|FRA
-#209|Murmuring Volume|C|FRA
-#210|Rewrite Regrets|U|FRA
-#211|Screeching Soulbreaker|C|FRA
-#212|Sureshot Sower|C|FRA
-#213|Tether Technician|C|FRA
-#214|Thalia, the Survivor|U|FRA
-#215|Twinned Vision|C|FRA
-#216|Vinelasher Adept|C|FRA
-#217|Divining Duelist|C|FRA
-#218|Emrakul, the Exigent Doom|M|FRA
-#219|Fateshaper Aspirant|C|FRA
-#220|Precise Redaction|U|FRA
-#221|Shatterwing Pegasus|C|FRA
-#222|Undulating Witness|C|FRA
-#223|Arni, Renowned Champion|U|FRA
-#224|Artifist Acumen|C|FRA
-#225|Blessed Ghoul|C|FRA
-#226|Blossom-Blessed Angel|C|FRA
-#227|Cryotheory Adept|C|FRA
-#228|Eardrum Rattler|C|FRA
-#229|Graft Surgeon|C|FRA
-#230|Jiang Yanggu, Alone|U|FRA
-#231|Predictive Preparations|C|FRA
-#232|Room of Refuge|C|FRA
-#233|Solve for Disappointment|C|FRA
-#234|Theorix Metamage|C|FRA
-#235|Ajani Resolute|M|FRA
-#236|Bloodline Recollector|M|FRA
-#237|Essence Burn|U|FRA
-#238|Flourishing Grapple|U|FRA
-#239|Konstrari Charm|U|FRA
-#240|Rampart Hunter|C|FRA
-#241|Tam's Resistance|C|FRA
-#242|Whiplash Wordsmith|C|FRA
-#243|Academic Ascent|C|FRA
-#244|Budding Insurgent|C|FRA
-#245|Cast Away Doubt|C|FRA
-#246|Chandra's Emberling|C|FRA
-#247|Generous Revival|U|FRA
-#248|Hallway Heckler|C|FRA
-#249|Inspired Tethermage|C|FRA
-#250|Medic's Kitesail|C|FRA
-#251|Samut, Hazoret's Champion|R|FRA
-#252|Tetsuko Umezawa, Pursuer|U|FRA
-#253|Tomik, Izzet Sparkmage|U|FRA
-#254|Way of the Pyromancer|U|FRA
-#255|Way of the Warlord|U|FRA
-#256|Winter, Team Player|U|FRA
-#257|Edgar, Moonlit Sovereign|U|FRA
-#258|Fblthp, Knows the Way|U|FRA
-#259|Garruk, Curse Breaker|M|FRA
-#260|Ghalta the Unstoppable|U|FRA
-#261|Jiang Yanggu, Never Alone|U|FRA
-#262|Loot, the Nexus|U|FRA
-#263|Marwyn, the Preserver|U|FRA
-#264|Pia, Aether Ascetic|U|FRA
-#265|Ruric Thar, Magecrusher|U|FRA
-#266|Titanbones, Towering Heart|U|FRA
-#267|Way of the Paradox|U|FRA
-#268|Way of the Wildspeaker|U|FRA
-#269|Yoshimaru, Scrappy Stray|U|FRA
-#270|Edgar, Ancient Bloodlord|U|FRA
-#271|Hapatra, the Desert Fang|U|FRA
-#272|Karn, Gilded Guardian|R|FRA
-#273|Kiora of Salt and Sand|U|FRA
-#274|Mabel, Valley Hero|U|FRA
-#275|Saheeli, Jewel of Avishkar|U|FRA
-#276|Tam, the Possibility|R|FRA
-#277|Vraska, Soul of Stone|R|FRA
-#278|Vraska, the Cutting Glare|R|FRA
-#279|Karn, Argent Defender|R|FRA
-#280|Traxos, Scourge Eternal|U|FRA
+#151|Variable Chaser|R|FRA
+#152|Vigorbloom Annex|C|FRA
+#153|Arcane Amphisbaena|C|FRA
+#154|Consider|M|SPG
+#155|Dedicated Commons|C|FRA
+#156|Extended Absence|C|FRA
+#157|Fatehold Chronologist|C|FRA
+#158|Gallia, the Merrymaker|U|FRA
+#159|Koth of the Homestead|U|FRA
+#160|Mabel, Bitter Recluse|U|FRA
+#161|Mabel, Valley Hero|U|FRA
+#162|Pia, Aether Ascetic|U|FRA
+#163|Proft, Sinister Mastermind|U|FRA
+#164|Prudent Fateseer|U|FRA
+#165|Theorist's Proxy|R|FRA
+#166|Theorix Charm|U|FRA
+#167|Awaken the Inferno|C|FRA
+#168|Danitha, Spear of Agony|U|FRA
+#169|Danitha, Sword of Hope|U|FRA
+#170|Fblthp, Impossibly Lost|U|FRA
+#171|Konstrari Improviser|C|FRA
+#172|Koth, the Geomancer|U|FRA
+#173|Pyre Rhymer|R|FRA
+#174|Restore with Empathy|U|FRA
+#175|Semester Foreseer|C|FRA
+#176|Silence the Echo|C|FRA
+#177|Skilled Battlecarver|C|FRA
+#178|Something Worth Saving|C|FRA
+#179|Surgical Precision|C|FRA
+#180|Unflinching Hortimancer|C|FRA
+#181|Unsummon|C|FRA
+#182|Void Extrapolator|C|FRA
+#183|Way of the Paradox|U|FRA
+#184|Winter, Team Player|U|FRA
+#185|Yoshimaru, Beloved Companion|U|FRA
+#186|Yuriko, Hope from the Shadows|U|FRA
+#187|Bestial Incursion|C|FRA
+#188|Codie, Ravenous Codex|R|FRA
+#189|Countersculpt|U|FRA
+#190|Heartstring Puller|C|FRA
+#191|Hunter's Axe|U|FRA
+#192|Icy Reception|C|FRA
+#193|Marwyn, the Clearcutter|U|FRA
+#194|Rank Rat|C|FRA
+#195|Theoretical Necromancer|C|FRA
+#196|Traxos, Scourge Eternal|U|FRA
+#197|Way of the Cryomancer|U|FRA
+#198|Yuriko, Blade of the Mighty|U|FRA
+#199|Archive Arbiter|U|FRA
+#200|Emergency Phytomedic|C|FRA
+#201|Karn, Gilded Guardian|R|FRA
+#202|Pompous Battlemage|R|FRA
+#203|Protege's Awakening|C|FRA
+#204|Teyo, Diamondblade Mage|U|FRA
+#205|Vigorbloom Vanguard|U|FRA
+#206|Way of the Deathbringer|U|FRA
+#207|Apex Witchstalker|C|FRA
+#208|Blazing Crescendo|C|FRA
+#209|Campus Crier|C|FRA
+#210|Murmuring Volume|C|FRA
+#211|Rewrite Regrets|U|FRA
+#212|Screeching Soulbreaker|C|FRA
+#213|Sureshot Sower|C|FRA
+#214|Tether Technician|C|FRA
+#215|Thalia, the Survivor|U|FRA
+#216|Twinned Vision|C|FRA
+#217|Vinelasher Adept|C|FRA
+#218|Divining Duelist|C|FRA
+#219|Emrakul, the Exigent Doom|M|FRA
+#220|Fateshaper Aspirant|C|FRA
+#221|Precise Redaction|U|FRA
+#222|Shatterwing Pegasus|C|FRA
+#223|Undulating Witness|C|FRA
+#224|Arni, Renowned Champion|U|FRA
+#225|Artifist Acumen|C|FRA
+#226|Blessed Ghoul|C|FRA
+#227|Blossom-Blessed Angel|C|FRA
+#228|Cryotheory Adept|C|FRA
+#229|Eardrum Rattler|C|FRA
+#230|Graft Surgeon|C|FRA
+#231|Jiang Yanggu, Alone|U|FRA
+#232|Predictive Preparations|C|FRA
+#233|Room of Refuge|C|FRA
+#234|Solve for Disappointment|C|FRA
+#235|Theorix Metamage|C|FRA
+#236|Ajani Resolute|M|FRA
+#237|Bloodline Recollector|M|FRA
+#238|Essence Burn|U|FRA
+#239|Flourishing Grapple|U|FRA
+#240|Konstrari Charm|U|FRA
+#241|Rampart Hunter|C|FRA
+#242|Tam's Resistance|C|FRA
+#243|Whiplash Wordsmith|C|FRA
+#244|Academic Ascent|C|FRA
+#245|Budding Insurgent|C|FRA
+#246|Cast Away Doubt|C|FRA
+#247|Chandra's Emberling|C|FRA
+#248|Generous Revival|U|FRA
+#249|Hallway Heckler|C|FRA
+#250|Inspired Tethermage|C|FRA
+#251|Medic's Kitesail|C|FRA
+#252|Sphinx's Approach|C|FRA
+#253|Afterthought Sentry|C|FRA
+#254|Ghalta the Immovable|U|FRA
+#255|Hall of Echoes|R|FRA
+#256|Living Library|C|FRA
+#257|Rescue Girl, First Responder|U|FRA
+#258|Surveillance Phantasm|C|FRA
+#259|Charge the Sanctum|C|FRA
+#260|Frostbite Pyromental|R|FRA
+#261|Germinate Recruits|R|FRA
+#262|Hexhaven Invigorator|M|FRA
+#263|Keeper of the Quiet Hour|C|FRA
+#264|Way of the Mind Sculptor|U|FRA
+#265|Wrecking Gecko|C|FRA
+#266|Ferocity of the Hunt|C|FRA
+#267|Samut, Tyrant of Naktamun|R|FRA
+#268|Tam, the Possibility|R|FRA
+#269|Tethermage's Advantage|C|FRA
+#270|Way of the Necromancer|U|FRA
+#271|Yargle, Glutton of Urborg|U|FRA
+#272|Yargle, Goliath of Otaria|U|FRA
+#273|Consign to Memory|M|SPG
+#274|Eye of Jace|U|FRA
+#275|Hexhaven Dueling Arena|U|FRA
+#276|Karn, Argent Defender|R|FRA
+#277|Perfected Theory|U|FRA
+#278|Way of the Mentor|U|FRA
+#279|Entrust the Spark|R|FRA
+#280|Eye of Ugin|M|SPG
+#281|Face Yourself|R|FRA
+#282|Gardenize|R|FRA
+#283|Loyal Tutor|R|FRA
+#284|Necrodominance|M|SPG
+#285|Return to the Light Realms|M|FRA
+#286|Roiling Canopy|R|FRA
+#287|Identity Echo|R|FRA
+#288|Omnipresence|M|FRA
+#289|Root Maze|M|SPG
+#290|Extrapolate the Impossible|R|FRA

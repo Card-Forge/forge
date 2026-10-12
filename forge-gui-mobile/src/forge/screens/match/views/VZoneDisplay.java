@@ -16,7 +16,6 @@ public class VZoneDisplay extends VCardDisplayArea {
     private final PlayerView player;
     private final ZoneType zoneType;
     private FCardPanel revealedPanel;
-
     public VZoneDisplay(PlayerView player0, ZoneType zoneType0) {
         player = player0;
         zoneType = zoneType0;
@@ -56,7 +55,10 @@ public class VZoneDisplay extends VCardDisplayArea {
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
         if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
-            return super.pan(x, y, deltaX, deltaY, moreVertical);
+            return super.pan(x, y, deltaX, deltaY, moreVertical); //base class tracks the card under the finger
+        }
+        if (Forge.isLandscapeMode()) {
+            updateDragPanel(x, y);
         }
         int idx = cardPanels.get().size() - 1;
         for (int i = idx - 1; i >= 0; i--) {
@@ -117,7 +119,7 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     protected boolean layoutVerticallyForLandscapeMode() {
-        return !Forge.altZoneTabs || !"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
+        return true;
     }
 
     @Override

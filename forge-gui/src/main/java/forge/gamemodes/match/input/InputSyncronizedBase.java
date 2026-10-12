@@ -22,7 +22,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         FThreads.assertExecutedByEdt(false);
         netLog.trace("awaitLatchRelease() starting on {}, thread = {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
         try {
-            cdlDone.await();
+            getController().getGui().awaitInput(cdlDone);
         } catch (final InterruptedException e) {
             BugReporter.reportException(e);
         }
@@ -41,7 +41,6 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
 
     @Override
     public final void stop() {
-        netLog.trace("stop() called on {}, latch count before = {}", this.getClass().getSimpleName(), cdlDone.getCount());
         onStop();
 
         // ensure input won't accept any user actions.
@@ -52,7 +51,6 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
             getController().getInputQueue().removeInput(InputSyncronizedBase.this);
         }
         cdlDone.countDown();
-        netLog.trace("stop() done, latch count after = {}", cdlDone.getCount());
     }
 
     protected void onStop() { }
