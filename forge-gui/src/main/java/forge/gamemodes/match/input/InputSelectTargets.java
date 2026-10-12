@@ -10,6 +10,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.localinstance.properties.ForgeConstants;
@@ -63,15 +64,27 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         final int initialMin = numTargets != null ? numTargets : sa.getMinTargets();
         final int initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
         controller.getGui().setSelectables(CardView.getCollection(choices), initialMin, initialMax);
-        final List<GameEntityView> views = new ArrayList<>();
-        for (final GameEntity c : targets) {
-            if (c instanceof Card) views.add(GameEntityView.get(c));
+        // also what earlier steps of this spell (other modes) already chose
+        TargetingProgress.showChosen(controller.getGui(), sa);
+    }
+
+    /** Tells the GUI which players can still be picked, so they get the same highlight as the valid cards. */
+    private void refreshSelectablePlayers() {
+        final List<Player> valid = new ArrayList<>();
+        if (!mustTargetFiltered) { // same checks as onPlayerSelected
+            for (final Player p : getController().getGame().getPlayers()) {
+                if (targets.contains(p) || p.hasLost() || !sa.canTarget(p)) { continue; }
+                if (sa.isSpell() && sa.getHostCard().isAura() && !p.canBeAttached(sa.getHostCard(), sa)) { continue; }
+                if (filter != null && !filter.test(p)) { continue; }
+                valid.add(p);
+            }
         }
-        controller.getGui().setHighlighted(views, true);
+        getController().getGui().setSelectablePlayers(PlayerView.getCollection(valid));
     }
 
     @Override
     public void showMessage() {
+        refreshSelectablePlayers();
         // Display targeting card in cardDetailPane in case it's not obviously visible.
         getController().getGui().setCard(CardView.get(sa.getHostCard()));
         final StringBuilder sb = new StringBuilder();
@@ -427,9 +440,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private void done() {
-        final List<GameEntityView> views = new ArrayList<>(targets.size());
-        for (final GameEntity ge : targets) views.add(GameEntityView.get(ge));
-        getController().getGui().setHighlighted(views, false);
+        // while later steps still have to choose, what is chosen stays marked; the last step (or a cancel) clears it
+        if (bCancel || !TargetingProgress.hasLaterTargetingStep(sa)) {
+            final List<GameEntityView> views = new ArrayList<>(targets.size());
+            for (final GameEntity ge : targets) views.add(GameEntityView.get(ge));
+            getController().getGui().setHighlighted(views, false);
+        }
 
         this.stop();
     }
@@ -442,6 +458,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     @Override
     protected void onStop() {
         getController().getGui().clearSelectables();
+        getController().getGui().clearSelectablePlayers();
         super.onStop();
     }
 

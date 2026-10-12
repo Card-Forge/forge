@@ -2476,6 +2476,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
+        final boolean result = chooseTargetsForStep(currentAbility);
+        // what was chosen stays marked while later targeting steps follow, and goes away after the last one or a failure
+        if (!result || !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
+            TargetingProgress.clearChosen(getGui(), currentAbility);
+        }
+        return result;
+    }
+
+    private boolean chooseTargetsForStep(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
         boolean canFilterMustTarget = true;
 
@@ -2815,6 +2824,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             macros().addRememberedAction(new SelectCardAction(cardView));
         }
         return selected;
+    }
+
+    @Override
+    public void selectStackItem(final StackItemView item) {
+        if (item == null) { return; }
+        for (final SpellAbilityStackInstance si : getGame().getStack()) {
+            if (si.getId() == item.getId()) {
+                inputProxy.selectStackItem(si);
+                return;
+            }
+        }
     }
 
     @Override

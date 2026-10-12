@@ -33,6 +33,7 @@ import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FSelectionBox;
 import forge.util.ThreadUtil;
 import io.sentry.Sentry;
 
@@ -136,7 +137,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             w = h;
             h = temp;
         }
-        g.drawRect(SELECTION_BOX_THICKNESS, Color.LIME, dragPanel.getLeft() + padding, top, w, h);
+        FSelectionBox.draw(g, Color.LIME, SELECTION_BOX_THICKNESS, dragPanel.getLeft() + padding, top, w, h);
     }
     @Override
     public int getCount() {

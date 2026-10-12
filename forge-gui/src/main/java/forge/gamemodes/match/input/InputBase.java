@@ -24,6 +24,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -89,6 +90,11 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     @Override
     public boolean selectAbility(final SpellAbility ab) {
+        return false;
+    }
+
+    @Override
+    public boolean selectStackItem(final SpellAbilityStackInstance si) {
         return false;
     }
 

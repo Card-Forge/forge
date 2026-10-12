@@ -1,0 +1,62 @@
+package forge.toolbox;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+
+import forge.Forge;
+import forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
+import forge.util.Utils;
+
+/**
+ * The one selection box of the match screen: a dashed outline whose dashes slide around the edge ("marching ants").
+ * Anything the player can pick (cards in any zone, players, stack entries) and the cursor boxes use it, so they all
+ * read the same. The two colours of the dashes alternate, which keeps the box visible on light and dark backgrounds.
+ * <p>
+ * Chosen things are not drawn with this box: they keep a solid {@link #CHOSEN_COLOR} outline, so "can be picked"
+ * and "is picked" never look alike.
+ * <p>
+ * Drawing a box asks for the next frame, so the animation keeps itself going while a box is on screen and stops
+ * (with no continuous rendering to switch off) once nothing draws one any more.
+ */
+public final class FSelectionBox {
+    /** Solid outline of things already chosen in the current prompt (cards, players and stack entries alike). */
+    public static final Color CHOSEN_COLOR = Color.MAGENTA;
+
+    private static final float DASH = Utils.scale(5);
+    private static final long CYCLE_MS = 700; // time for the dashes to slide by one full pattern
+    private static final float DEFAULT_THICKNESS = Utils.scale(2);
+
+    private FSelectionBox() {
+    }
+
+    /** Solid outline of something already chosen; never thinner than the dashed box so the two read as a pair. */
+    public static void drawChosen(final Graphics g, final float thickness, final float x, final float y, final float w, final float h) {
+        g.drawRect(Math.max(thickness, DEFAULT_THICKNESS), CHOSEN_COLOR, x, y, w, h);
+    }
+
+    /** Colour of the box around things that can be picked. */
+    public static Color validColor() {
+        return (Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_ACTIVE) : FSkinColor.get(Colors.CLR_ACTIVE)).getColor();
+    }
+
+    /** Box around something that can be picked, in the theme's active colour. */
+    public static void draw(final Graphics g, final float x, final float y, final float w, final float h) {
+        draw(g, validColor(), DEFAULT_THICKNESS, x, y, w, h);
+    }
+
+    /** Same box with its own line thickness, for things drawn at a very different size (avatars). */
+    public static void draw(final Graphics g, final float thickness, final float x, final float y, final float w, final float h) {
+        draw(g, validColor(), thickness, x, y, w, h);
+    }
+
+    /** Same box in another colour (cursor boxes). The dashes alternate between {@code color} and white. */
+    public static void draw(final Graphics g, final Color color, final float thickness, final float x, final float y, final float w, final float h) {
+        final float period = 2 * DASH;
+        final float phase = (System.currentTimeMillis() % CYCLE_MS) / (float) CYCLE_MS * period; // seamless when the cycle wraps
+        g.drawDashedRect(thickness, color, x, y, w, h, DASH, DASH, phase);
+        g.drawDashedRect(thickness, Color.WHITE, x, y, w, h, DASH, DASH, phase + DASH);
+        Gdx.graphics.requestRendering(); // next frame, so the dashes keep moving
+    }
+}

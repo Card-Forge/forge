@@ -8,6 +8,7 @@ import forge.game.GameEndReason;
 import forge.game.GameLog;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.spellability.StackItemView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.phase.PhaseType;
@@ -338,6 +339,60 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectionMax = max;
     }
 
+    private final Set<Integer> selectableStackItems = Sets.newConcurrentHashSet();
+    private final Set<Integer> pickedStackItems = Sets.newConcurrentHashSet();
+
+    @Override
+    public void setSelectableStackItems(final Iterable<StackItemView> items) {
+        pickedStackItems.clear();
+        for (final StackItemView si : items) {
+            selectableStackItems.add(si.getId());
+        }
+    }
+
+    @Override
+    public void setStackItemPicked(final StackItemView item, final boolean picked) {
+        if (picked) { pickedStackItems.add(item.getId()); } else { pickedStackItems.remove(item.getId()); }
+    }
+
+    @Override
+    public void clearSelectableStackItems() {
+        selectableStackItems.clear();
+        pickedStackItems.clear();
+    }
+
+    public boolean isStackItemSelectable(final StackItemView item) {
+        return item != null && selectableStackItems.contains(item.getId());
+    }
+
+    public boolean isStackItemPicked(final StackItemView item) {
+        return item != null && pickedStackItems.contains(item.getId());
+    }
+
+    public boolean isSelectingStackItems() {
+        return !selectableStackItems.isEmpty();
+    }
+
+    private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
+
+    @Override
+    public void setSelectablePlayers(final Iterable<PlayerView> players) {
+        selectablePlayers.clear();
+        for (final PlayerView pv : players) {
+            selectablePlayers.add(pv);
+        }
+    }
+
+    @Override
+    public void clearSelectablePlayers() {
+        selectablePlayers.clear();
+    }
+
+    public boolean isSelectablePlayer(final PlayerView player) {
+        return player != null && selectablePlayers.contains(player);
+    }
+
+    @Override
     public void clearSelectables() {
         selectableCards.clear();
         selectionMin = 0;

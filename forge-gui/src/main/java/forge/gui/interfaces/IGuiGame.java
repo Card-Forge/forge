@@ -6,6 +6,7 @@ import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.spellability.StackItemView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
@@ -273,6 +274,13 @@ public interface IGuiGame {
      * select-min hotkeys). A maximum of {@code 0} marks display-only highlighting, for which the GUI opens no zones.
      */
     void setSelectables(Iterable<CardView> cards, int min, int max);
+    /** Marks stack items as pickable (targets of a counterspell etc.). Local GUI state only, network games use a dialog instead. */
+    default void setSelectableStackItems(Iterable<StackItemView> items) {}
+    default void setStackItemPicked(StackItemView item, boolean picked) {}
+    default void clearSelectableStackItems() {}
+    /** Marks players as valid targets of the active prompt so the GUI can highlight them. Local GUI state only. */
+    default void setSelectablePlayers(Iterable<PlayerView> players) {}
+    default void clearSelectablePlayers() {}
     void clearSelectables();
     boolean isSelecting();
 

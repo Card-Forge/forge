@@ -16,6 +16,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FSelectionBox;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -168,15 +169,17 @@ public class VAvatar extends FDisplayObject {
         if (displayPriority && player.getHasPriority() && alphaModifier == 1) {
             g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.LIME).alphaColor(0.6f), 0, 0, w, h);
         }
-        //highlighted
+        //highlighted (chosen) or valid to choose
         if (MatchController.instance.isHighlighted(player)) {
-            g.drawRect(w / 16f, Color.MAGENTA, 0, 0, w, h);
+            FSelectionBox.drawChosen(g, w / 16f, 0, 0, w, h);
+        } else if (MatchController.instance.isSelectablePlayer(player)) {
+            FSelectionBox.draw(g, Math.max(Utils.scale(2), w / 20f), 0, 0, w, h);
         }
         //selector
         if (Forge.hasGamepad()) {
             if (MatchController.getView().selectedPlayerPanel() != null) {
                 if (MatchController.getView().selectedPlayerPanel().getPlayer() == player) {
-                    g.drawRect(w / 16f, Color.ORANGE, 0, 0, w, h);
+                    FSelectionBox.draw(g, Color.ORANGE, w / 16f, 0, 0, w, h);
                 }
             }
         }

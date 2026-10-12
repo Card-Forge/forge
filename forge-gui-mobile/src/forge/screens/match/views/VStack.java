@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -40,7 +41,9 @@ import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
+import forge.toolbox.FSelectionBox;
 import forge.util.TextUtil;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -59,6 +62,7 @@ public class VStack extends FDropDown {
     private Map<PlayerView, Object> playersWithValidTargets;
 
     private int stackSize;
+    private final Map<Integer, StackInstanceDisplay> displayById = new HashMap<>(); // rebuilt on every layout
 
     public VStack() {
     }
@@ -127,6 +131,7 @@ public class VStack extends FDropDown {
     @Override
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
+        displayById.clear();
 
         float x = MARGINS;
         float y = MARGINS;
@@ -155,6 +160,7 @@ public class VStack extends FDropDown {
             for (int i = stack.size() - 1; i >= 0; i--) {
                 stackInstance = stack.get(i);
                 display = new StackInstanceDisplay(stackInstance, width);
+                displayById.put(stackInstance.getId(), display);
                 if (activeStackInstance == stackInstance) {
                     activeItem = display;
                 }
@@ -217,6 +223,7 @@ public class VStack extends FDropDown {
             PlayerView activator = activeStackInstance == null ? null : activeStackInstance.getActivatingPlayer();
             arrowOrigin = arrowOrigin.add(screenPos.x, screenPos.y);
 
+            final Set<Integer> drawnStackTargets = new HashSet<>(); // one arrow per targeted stack entry, however many modes aim at it
             StackItemView instance = activeStackInstance;
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
@@ -226,6 +233,27 @@ public class VStack extends FDropDown {
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
                     TargetingOverlay.drawArrow(g, arrowOrigin, MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
+                }
+
+                // Stack items aimed at other stack items (counterspells and the like) point at that item's entry in this view.
+                // Walked per sub-instance like the targets above: a modal spell (Sublime Epiphany, Charm effects) keeps each
+                // chosen mode's targets on its own sub-instance, the head instance itself has none.
+                final FCollectionView<StackItemView> targetedItems = instance.getTargetStackItems();
+                if (targetedItems != null && !targetedItems.isEmpty()) {
+                    final float edge = screenPos.x + BORDER_THICKNESS;
+                    final Vector2 from = new Vector2(edge + activeItem.getLeft(),
+                            arrowOrigin.y); // same height as the arrows to cards and players
+                    for (StackItemView targeted : targetedItems) {
+                        final StackInstanceDisplay td = displayById.get(targeted.getId());
+                        if (td == null || td == activeItem || !drawnStackTargets.add(targeted.getId())) { continue; }
+                        // aim at the visible top part of the entry, the lower part is covered by the next item
+                        final Vector2 to = new Vector2(edge + td.getLeft(),
+                                screenPos.y + td.getTop() + BORDER_THICKNESS + PADDING + CARD_HEIGHT * 0.25f);
+                        final PlayerView owner = targeted.getActivatingPlayer();
+                        final TargetingOverlay.ArcConnection conn = activator != null && owner != null && activator.isOpponentOf(owner)
+                                ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
+                        TargetingOverlay.drawStackArrow(g, from, to, conn);
+                    }
                 }
                 instance = instance.getSubInstance();
             }
@@ -265,6 +293,11 @@ public class VStack extends FDropDown {
             preferredHeight = Math.round(height);
         }
 
+        // an item the current prompt allows picking, e.g. the target of a counterspell or Stifle
+        private boolean isSelectableTarget() {
+            return MatchController.instance.isStackItemSelectable(stackInstance);
+        }
+
         private void showCardOrMenu(CardView sourceCard, FPopupMenu menu, float x, float y) {
             if (sourceCard != null && cardBounds.contains(x, y))
                 CardZoom.show(sourceCard);
@@ -274,6 +307,15 @@ public class VStack extends FDropDown {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (isSelectableTarget()) { // a stack target is being chosen: tapping the entry picks (or unpicks) it
+                activeStackInstance = stackInstance;
+                //must invoke in game thread in case a dialog needs to be shown
+                ThreadUtil.invokeInGameThread(() -> {
+                    MatchController.instance.getGameController().selectStackItem(stackInstance);
+                    Gdx.graphics.requestRendering();
+                });
+                return true;
+            }
             if (activeStackInstance != stackInstance) { //set as active stack instance if not already such
                 activeStackInstance = stackInstance;
                 restoreOldZones(); //restore old zones before changing active stack instance
@@ -348,20 +390,30 @@ public class VStack extends FDropDown {
                 launched = true;
             }
 
-            boolean needAlpha = (activeStackInstance != stackInstance);
+            // entries keep their usual look (the active one bright, the rest faded); only a chosen target is shown bright
+            final boolean pickable = isSelectableTarget();
+            final boolean picked = MatchController.instance.isStackItemPicked(stackInstance);
+            boolean needAlpha = (activeStackInstance != stackInstance) && !picked;
             if (needAlpha) {
                 g.setAlphaComposite(ALPHA_COMPOSITE);
             }
 
             g.startClip(0, 0, w, getHeight()); //clip based on actual height
 
-            g.fillRect(isHovered() ? Color.GRAY : Color.BLACK, x, y, w, h); //draw rectangle for border
+            final Color borderColor = picked ? FSelectionBox.CHOSEN_COLOR : isHovered() ? Color.GRAY : Color.BLACK;
+            g.fillRect(borderColor, x, y, w, h); //draw rectangle for border
+            if (pickable && !picked) { // same moving dashes as every other valid target, over the border ring
+                FSelectionBox.draw(g, BORDER_THICKNESS, x, y, w, h);
+            }
 
             x += BORDER_THICKNESS;
             y += BORDER_THICKNESS;
             w -= 2 * BORDER_THICKNESS;
             h -= 2 * BORDER_THICKNESS;
             g.fillRect(backColor, x, y, w, h);
+            if (picked) { // chosen: a second solid frame inside the border so it is easy to see
+                FSelectionBox.drawChosen(g, BORDER_THICKNESS, x, y, w, h);
+            }
 
             x += PADDING;
             y += PADDING;

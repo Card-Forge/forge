@@ -42,6 +42,7 @@ import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
+import forge.game.spellability.StackItemView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
@@ -440,6 +441,40 @@ public class MatchController extends NetworkGuiGame {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);
         }
+    }
+
+    @Override
+    public void setSelectableStackItems(final Iterable<StackItemView> items) {
+        super.setSelectableStackItems(items);
+        // stack items are picked in the stack view, so bring it up
+        FThreads.invokeInEdtLater(() -> {
+            if (!view.getStack().isVisible()) { view.getStack().show(); }
+            view.getStack().update();
+        });
+    }
+
+    @Override
+    public void setStackItemPicked(final StackItemView item, final boolean picked) {
+        super.setStackItemPicked(item, picked);
+        Gdx.graphics.requestRendering();
+    }
+
+    @Override
+    public void clearSelectableStackItems() {
+        super.clearSelectableStackItems();
+        Gdx.graphics.requestRendering();
+    }
+
+    @Override
+    public void setSelectablePlayers(final Iterable<PlayerView> players) {
+        super.setSelectablePlayers(players);
+        Gdx.graphics.requestRendering();
+    }
+
+    @Override
+    public void clearSelectablePlayers() {
+        super.clearSelectablePlayers();
+        Gdx.graphics.requestRendering();
     }
 
     @Override

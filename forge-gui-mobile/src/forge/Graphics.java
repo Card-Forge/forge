@@ -572,13 +572,21 @@ public class Graphics implements Disposable {
     }
 
     public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
+        drawCurvedArrow(thickness, fillColor, strokeColor, x1, y1, x2, y2, drawPointer, 0f);
+    }
+
+    /**
+     * @param bulge if non-zero, always draws a curve (even between close points) whose control point sits this far
+     *              to the side of the midpoint; positive bulges to the left of the direction of travel on screen
+     */
+    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer, float bulge) {
         if (alphaComposite < 1) {
             fillColor = fade(fillColor, fadeA);
             strokeColor = fade(strokeColor, fadeB);
         }
         float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        prepCurved(thickness, x1, y1, x2, y2, !drawPointer);
+        prepCurved(thickness, x1, y1, x2, y2, !drawPointer, bulge);
 
         if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
             if (arrowPhase == 0) {
@@ -642,7 +650,7 @@ public class Graphics implements Disposable {
         }
         float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        prepCurved(thickness, x1, y1, x2, y2, false);
+        prepCurved(thickness, x1, y1, x2, y2, false, 0f);
 
         if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
             if (arrowPhase == 0) {
@@ -791,7 +799,7 @@ public class Graphics implements Disposable {
     }
 
     //geometry of a curved arrow/pointer (straight when short), computed once into the ca* fields and curvePts
-    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead) {
+    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead, float bulge) {
         caSx1 = adjustX(x1);
         caSy1 = adjustY(y1, 0);
         caSx2 = adjustX(x2);
@@ -804,7 +812,7 @@ public class Graphics implements Disposable {
         // Point just before the tip for direction
         float beforeTipX = x1, beforeTipY = y1;
 
-        if (length < 120f) {
+        if (length < 120f && bulge == 0f) {
             // Straight line
             caCurved = false;
             float backScale = Math.max(0.1f, 10f / length);
@@ -816,7 +824,7 @@ public class Graphics implements Disposable {
             float midX = (x1 + x2) / 2f;
             float midY = (y1 + y2) / 2f;
             float px = -dy / length, py = dx / length;
-            float curveStrength = 50f;
+            float curveStrength = bulge != 0f ? bulge : 50f;
             float cx = midX + px * curveStrength;
             float cy = midY + py * curveStrength;
 
@@ -1090,6 +1098,47 @@ public class Graphics implements Disposable {
         }
 
         batch.begin();
+    }
+
+    /**
+     * Rectangle outline made of dashes, drawn inside the given rectangle. Changing {@code phase} (same units as the
+     * other lengths) slides the dashes along the outline, which gives "marching ants" when it grows over time.
+     * Built from filled rects, so it batches like every other rect and follows active transforms.
+     */
+    public void drawDashedRect(float thickness, Color color, float x, float y, float w, float h, float dash, float gap, float phase) {
+        final float period = dash + gap;
+        if (dash <= 0 || period <= 0 || w <= 0 || h <= 0) {
+            return;
+        }
+        final float t = Math.min(Math.max(thickness, 1f), Math.min(w, h) / 2f);
+        final float perimeter = 2 * (w + h);
+        // start one period early so a dash that straddles the starting corner is still drawn
+        final float offset = ((phase % period) + period) % period;
+        for (float s = offset - period; s < perimeter; s += period) {
+            final float a = Math.max(s, 0f), b = Math.min(s + dash, perimeter);
+            if (b > a) {
+                dashSegment(color, t, x, y, w, h, a, b);
+            }
+        }
+    }
+
+    // draws the part of an outline (clockwise from the top left corner) between distances a and b, split per edge
+    private void dashSegment(Color color, float t, float x, float y, float w, float h, float a, float b) {
+        float edgeStart = 0;
+        for (int edge = 0; edge < 4; edge++) {
+            final float len = edge % 2 == 0 ? w : h;
+            final float lo = Math.max(a, edgeStart), hi = Math.min(b, edgeStart + len);
+            if (hi > lo) {
+                final float u0 = lo - edgeStart, u1 = hi - edgeStart;
+                switch (edge) {
+                    case 0 -> fillRect(color, x + u0, y, u1 - u0, t); // top, left to right
+                    case 1 -> fillRect(color, x + w - t, y + u0, t, u1 - u0); // right, downwards
+                    case 2 -> fillRect(color, x + w - u1, y + h - t, u1 - u0, t); // bottom, right to left
+                    default -> fillRect(color, x, y + h - u1, t, u1 - u0); // left, upwards
+                }
+            }
+            edgeStart += len;
+        }
     }
 
     public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
