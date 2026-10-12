@@ -244,10 +244,10 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     already resolves; `AtEOT$` (9) — `registerDelayedTrigger`, a new trigger this effect would silently fail to create;
     `CanBlockAmount$`/`CanBlockAny$`, `DefinedKW$`/`KWChoice$`/`RandomKeyword$`,
     `SharedKeywordsZone$`/`SharedRestrictions$`, `DefinedLandwalk$`, `ImprintCards$`, `NoteCards$`/`NoteCardsFor$`
-    /`ClearNotedCardsFor$`/`NoteNumber$`, `IsPresent$`, `Optional$`/`OptionQuestion$`, `Radiance$` (34 combined) — each
-    its own further mechanic or an unclear shape not worth guessing at from a handful of real lines. `SubAbility$` no
-    longer blocks ("SubAbility chaining itself landed," below): 17 of 571 real SVar-defined `Pump` lines naming it chain
-    to an already-built leaf ability and resolve end to end.
+    /`ClearNotedCardsFor$`/`NoteNumber$`, `IsPresent$`, `Optional$`/`OptionQuestion$` (34 combined) — each its own
+    further mechanic or an unclear shape not worth guessing at from a handful of real lines. `SubAbility$` no longer
+    blocks ("SubAbility chaining itself landed," below): 17 of 571 real SVar-defined `Pump` lines naming it chain to an
+    already-built leaf ability and resolve end to end.
 
     **`PumpAll` (`pumpalleffect.go`) is M6's fifth script-driven effect, `Pump`'s own blanket sibling** — a
     `ValidCards$`-matched set across every player's own battlefield (or, with `Defined$ You`/`Player.Opponent`, only the
@@ -309,12 +309,11 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     player candidates in one `ValidTgts$` string. `TargetMin$`/`TargetMax$` (1/1 when neither is named,
     `TargetRestrictions.java`'s own default) resolve through `resolveNamedAmount` exactly as every other numeric param
     already does, then a new `PlayerController` method, `ChooseTargets` (its twenty-fourth), gets asked for that many. A
-    structural shape this port does not parse — `Radiance$` (4 real lines, "and each other permanent that shares a color
-    with it," a second, derived candidate set no single `ValidTgts$` evaluation produces),
-    `TargetsForEachPlayer$`/`TargetsWithDefinedController$`/`TargetUnique$` (0 each) — folds into CR 603.3c's own "no
-    legal targets, doesn't go on the stack" outcome rather than an error: the two are observationally identical from
-    outside (the ability does nothing), and GO-7's "fail one game, not the batch" reasoning does not distinguish a card
-    the game declined to put on the stack from one this port cannot parse the targeting for.
+    structural shape this port does not parse — `TargetsForEachPlayer$`/`TargetsWithDefinedController$`/`TargetUnique$`
+    (0 each) — folds into CR 603.3c's own "no legal targets, doesn't go on the stack" outcome rather than an error: the
+    two are observationally identical from outside (the ability does nothing), and GO-7's "fail one game, not the batch"
+    reasoning does not distinguish a card the game declined to put on the stack from one this port cannot parse the
+    targeting for.
 
     Threading a `PlayerController` down to `pushTriggeredAbilities` touched all sixteen of its own callers across
     `trigger.go`, and each of those touched its own external caller in turn — `action.go`'s five state-based-action
