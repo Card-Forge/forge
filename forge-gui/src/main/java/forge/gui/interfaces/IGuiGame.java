@@ -109,6 +109,9 @@ public interface IGuiGame {
 
     default void updateStack() {}
 
+    /** The game was rewound in place by undo: drop any animation/transient UI state tied to the old timeline. Called on the EDT before the refresh. */
+    default void onSnapshotRestored() {}
+
     default void notifyStackAddition(final GameEventSpellAbilityCast event) {}
     default void notifyStackRemoval(final GameEventSpellRemovedFromStack event) {}
 

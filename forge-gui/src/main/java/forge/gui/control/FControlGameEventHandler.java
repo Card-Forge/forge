@@ -38,7 +38,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
 
     private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate, showExileUpdate;
-    private boolean gameOver, gameFinished;
+    private boolean gameOver, gameFinished, undoRestored;
     private boolean needSaveState = false;
     private PlayerView turnUpdate, activatingPlayer;
 
@@ -56,6 +56,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             processEventsQueued = false;
+            if (undoRestored) { // before any refresh below, so rows rebuild from a clean slate
+                undoRestored = false;
+                matchController.onSnapshotRestored();
+            }
 
             synchronized (cardsUpdate) {
                 if (!cardsUpdate.isEmpty()) {
@@ -350,6 +354,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         if (gv != null && gv.getPlayerTurn() != null) { turnUpdate = gv.getPlayerTurn(); }
+        undoRestored = true;
         needPhaseUpdate = true;
         needSaveState = false;
         needCombatUpdate = true;
