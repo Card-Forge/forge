@@ -273,10 +273,10 @@ func TestDealDamageEffectChainsIntoSubAbility(t *testing.T) {
 	}
 }
 
-// TestDealDamageEffectRejectsDamageSource proves DamageSource$ (a source
-// other than the ability's own host) skips the whole line rather than
-// guessing the wrong source (PORT-8/GO-7).
-func TestDealDamageEffectRejectsDamageSource(t *testing.T) {
+// TestDealDamageEffectRejectsUnresolvableDamageSource proves a DamageSource$
+// reference this port does not carry fails the whole line by name rather
+// than guessing a source (PORT-8/GO-7).
+func TestDealDamageEffectRejectsUnresolvableDamageSource(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -284,13 +284,16 @@ func TestDealDamageEffectRejectsDamageSource(t *testing.T) {
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(other).Life = 20, 20
 
-	def := etbDealDamageTriggerDefParams(t, "Test DamageSource", "Defined$ You | NumDmg$ 1 | DamageSource$ Targeted", nil)
+	def := etbDealDamageTriggerDefParams(t, "Test DamageSource", "Defined$ You | NumDmg$ 1 | DamageSource$ OriginalHost", nil)
 	err := castETBDealDamage(t, g, p, def)
 	if err == nil {
 		t.Fatal("ResolveStack: got nil error, want one naming DamageSource")
 	}
-	if !strings.Contains(err.Error(), "DamageSource") {
-		t.Errorf("ResolveStack error = %q, want it to name DamageSource$", err.Error())
+	if !strings.Contains(err.Error(), "DamageSource$") || !strings.Contains(err.Error(), "OriginalHost") {
+		t.Errorf("ResolveStack error = %q, want it to name DamageSource$ and its value", err.Error())
+	}
+	if g.Player(p).Life != 20 {
+		t.Errorf("p's life = %d, want 20 -- a rejected line deals nothing", g.Player(p).Life)
 	}
 }
 

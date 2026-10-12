@@ -1,0 +1,12 @@
+# DamageSource$ Targeted (DamageDealEffect.java:135): Justice Strike's
+# "target creature deals damage to itself equal to its power" is dealt by the
+# target. Deadly Recluse (1/2) deals 1 damage to itself, and that damage has
+# its deathtouch, so the state-based check destroys it (CR 702.2b, 704.5h).
+# A spell-sourced 1 damage would have left the 2-toughness Recluse alive.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 W
+queue targets 4
+queue action human cast 1
+passpriority

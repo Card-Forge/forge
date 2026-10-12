@@ -101,8 +101,11 @@ func TestRadianceProtectionGrantsToUntargetedCreature(t *testing.T) {
 }
 
 // TestRadiancePreventDamageShieldsUntargetedCreature proves the shield lands
-// on the host (never targeted): the self-inflicted damage that would kill the
-// 1/1 host is prevented.
+// on the host (never targeted). DBHit inherits the parent's Radiance$ the way
+// DamageDealEffect's getRadiance(sa) walks up to the targeting ancestor
+// (CardUtil.java:149-153), so its 1 damage to the controller also reaches the
+// host and the target -- the damage that would kill the 1/1 host is
+// prevented.
 func TestRadiancePreventDamageShieldsUntargetedCreature(t *testing.T) {
 	t.Parallel()
 
@@ -111,9 +114,12 @@ func TestRadiancePreventDamageShieldsUntargetedCreature(t *testing.T) {
 	c.QueueTargets([]engine.EntityID{engine.CardEntity(target)})
 	host := resolveLine(t, g, p, c,
 		"DB$ PreventDamage | ValidTgts$ Creature | Radiance$ True | Amount$ 1 | SubAbility$ DBHit",
-		"DBHit", "DB$ DealDamage | Defined$ Self | NumDmg$ 1")
+		"DBHit", "DB$ DealDamage | Defined$ You | NumDmg$ 1")
 	if z := g.Card(host).Zone; z != engine.Battlefield {
 		t.Errorf("host in %v, want the battlefield (its shield prevents the damage)", z)
+	}
+	if got := g.Player(p).Life; got != 19 {
+		t.Errorf("controller life = %d, want 19", got)
 	}
 }
 

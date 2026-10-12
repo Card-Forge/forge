@@ -1,0 +1,16 @@
+# DamageSource$ ParentTarget (DamageDealEffect.java:135, :217-268): Rabid
+# Bite's "target creature you control deals damage equal to its power to
+# target creature you don't control" is dealt by Vampire Nighthawk, not by
+# the spell. The Nighthawk's 2 deathtouch damage destroys the 6/4 Craw Wurm
+# (CR 702.2b, 704.5h) and its lifelink gains human 2 life (CR 702.15b).
+# The first queued target is the Pump root's, the second the DealDamage
+# link's (CR 601.2c chooses both as the spell is cast).
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 5 G
+queue paygeneric G
+queue targets 3
+queue targets 4
+queue action human cast 1
+passpriority

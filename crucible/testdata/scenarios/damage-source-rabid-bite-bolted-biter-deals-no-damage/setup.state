@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Rabid Bite|Id:1
+humanbattlefield=Forest|Id:2;Grizzly Bears|Id:3;Forest|Id:7
+aihand=Lightning Bolt|Id:5
+aibattlefield=Hill Giant|Id:4;Mountain|Id:6

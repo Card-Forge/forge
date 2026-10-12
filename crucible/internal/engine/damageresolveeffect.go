@@ -18,6 +18,16 @@ func (damageResolveEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	}
 	entries := a.damageMap.entries
 	a.damageMap.entries = nil
+	table := g.dealPendingDamage(controller, entries)
+	g.checkDamageTableTriggers(controller, table, false)
+	return nil
+}
+
+// dealPendingDamage deals each recorded entry in order -- the loop of
+// GameAction.dealDamage over a CardDamageTable (GameAction.java:2742-2764),
+// noncombat -- and returns what was actually dealt. Deathtouch is read off
+// each entry's own source; a card no longer on the battlefield takes none.
+func (g *Game) dealPendingDamage(controller PlayerController, entries []pendingDamageEntry) damageTable {
 	var table damageTable
 	for _, e := range entries {
 		src := g.Card(e.source)
@@ -33,8 +43,7 @@ func (damageResolveEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 			g.dealPlayerDamage(controller, e.source, p, e.amount, false, &table)
 		}
 	}
-	g.checkDamageTableTriggers(controller, table, false)
-	return nil
+	return table
 }
 
 // pendingDamage is a CardDamageTable waiting to be dealt: each entry one

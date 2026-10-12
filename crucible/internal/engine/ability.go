@@ -127,6 +127,17 @@ type Ability struct {
 	// some (Defined$ ParentTarget); a sub-ability that chooses its own keeps
 	// the parent's here while Targets holds its own.
 	parentTargets []EntityID
+	// ancestorTargeting is SpellAbility.usesTargeting on some ancestor of this
+	// sub-ability: one of them names ValidTgts$. An empty parentTargets then
+	// is Java's empty getParentTargetingCard answer -- the targets were
+	// dropped as illegal (CR 608.2b) or TargetMin$ 0 chose none -- rather than
+	// a reference this port does not carry (definedCards' ParentTarget).
+	ancestorTargeting bool
+	// uniqueTargets is SpellAbility.getUniqueTargets: every target the
+	// ancestors of a sub-ability link chose, which a TargetUnique$ link may
+	// not choose again (targetChoiceFor). Set only on the link
+	// resolveChainTargets asks about.
+	uniqueTargets []EntityID
 	// radiance is the ValidTgts$ of the nearest ancestor that targets a card
 	// and names Radiance$, "" when none does (radianceSpec).
 	radiance string
@@ -290,6 +301,7 @@ func allTargetsOf(a Ability) []EntityID {
 type abilityRefs struct {
 	targets           []EntityID
 	parentTargets     []EntityID
+	ancestorTargeting bool
 	triggerRemembered []EntityID
 	triggered         triggeredObjects
 	paid              paidLists
@@ -305,8 +317,8 @@ type abilityRefs struct {
 
 // refs is a's own abilityRefs.
 func (a *Ability) refs() abilityRefs {
-	r := abilityRefs{targets: a.Targets, parentTargets: a.parentTargets, triggerRemembered: a.TriggerRemembered,
-		triggered: a.triggered, paid: a.paid, replaced: a.replacedCard()}
+	r := abilityRefs{targets: a.Targets, parentTargets: a.parentTargets, ancestorTargeting: a.ancestorTargeting,
+		triggerRemembered: a.TriggerRemembered, triggered: a.triggered, paid: a.paid, replaced: a.replacedCard()}
 	if a.replacing != nil {
 		r.replacedPlayer, r.replacedDefendingPlayer = a.replacing.player, a.replacing.defendingPlayer
 	}

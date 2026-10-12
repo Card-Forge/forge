@@ -1,0 +1,18 @@
+# CR 608.2b: human casts Rabid Bite (Grizzly Bears bites Hill Giant); ai
+# responds by bolting the Bears. When Rabid Bite resolves its first target is
+# illegal and removed (MagicStack.hasFizzled), but the Hill Giant target is
+# still legal, so the spell resolves -- and DamageSource$ ParentTarget names
+# no card (getParentTargetingCard finds no ancestor still targeting one), so
+# no damage is dealt (DamageDealEffect.java:135-138). Not an error.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 7 G
+tapformana ai 6 R
+queue paygeneric G
+queue targets 3
+queue targets 4
+queue targets 3
+queue action human cast 1
+queue action ai cast 5
+passpriority

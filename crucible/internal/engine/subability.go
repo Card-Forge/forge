@@ -76,6 +76,7 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		Target:            parent.Target,
 		Targets:           parent.Targets,
 		parentTargets:     parentTargetsOf(parent),
+		ancestorTargeting: parent.ancestorTargeting || linkUsesTargeting(parent.Params),
 		radiance:          parent.radianceSpec(),
 		Params:            sub.Ability,
 		Amounts:           parent.Amounts,
@@ -115,6 +116,16 @@ func findSubAbility(a *compile.Ability) (compile.SubRef, bool) {
 		}
 	}
 	return compile.SubRef{}, false
+}
+
+// linkUsesTargeting is SpellAbility.usesTargeting for a compiled link: it names
+// ValidTgts$.
+func linkUsesTargeting(p *compile.Ability) bool {
+	if p == nil {
+		return false
+	}
+	_, ok := p.Param("ValidTgts")
+	return ok
 }
 
 // parentTargetsOf is what Defined$ ParentTarget names for a child of parent:

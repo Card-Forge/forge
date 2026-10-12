@@ -175,8 +175,7 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     returns `nil` rather than an error, `SpellAbilityCondition.areMet`'s own "the ability does nothing" contract.
 
     Not resolved, each failing loudly by name rather than guessing (PORT-8/GO-7):
-    - `DamageSource$` (17 of 822 real `Defined$` lines) — a source other than the ability's own host, needing a
-      reference vocabulary this port does not have.
+    - `DamageSource$` resolves now (`port-log/game-state/m6-r9-damagesource.md`); an unresolvable value still errors.
     - `SubAbility$` no longer blocks (`subability.go`, this item's own paragraph below, "SubAbility chaining itself
       landed"): 9 of 316 real SVar-defined `DealDamage` lines naming it chain to an already-built leaf ability and
       resolve end to end.

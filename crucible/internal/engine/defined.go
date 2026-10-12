@@ -98,7 +98,10 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 				candidates = append(candidates, pid)
 			}
 		}
-	case "TargetedController":
+	case "TargetedController", "ThisTargetedController":
+		// ThisTargetedController (AbilityUtils.java:976-982) reads
+		// ThisTargetedCard, which definedCards answers from the same
+		// targets as Targeted.
 		for _, e := range refs.targets {
 			if id, ok := e.AsCard(); ok {
 				candidates = append(candidates, g.Card(id).Controller())
@@ -175,6 +178,14 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		}
 	case "Remembered", "RememberedController", "RememberedOwner":
 		candidates = rememberedPlayers(g, defined, g.Card(host).Memory.Remembered(), true)
+	case "ImprintedController", "ImprintedOwner":
+		// AbilityUtils.java:996-997: addPlayer over the imprinted cards, the
+		// Remembered branch's own reading of each card.
+		var imprinted []EntityID
+		for _, id := range g.Card(host).Memory.Imprinted() {
+			imprinted = append(imprinted, CardEntity(id))
+		}
+		candidates = rememberedPlayers(g, "Remembered"+strings.TrimPrefix(defined, "Imprinted"), imprinted, false)
 	case "DelayTriggerRemembered":
 		candidates = rememberedPlayers(g, "", refs.triggerRemembered, false)
 	case "DelayTriggerRememberedController":
@@ -367,7 +378,9 @@ func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse b
 // and "TriggeredBlocker"/"TriggeredBlockerLKICopy", what Mode$
 // AttackerBlockedByCreature recorded, and "TriggeredAttacker"/
 // "TriggeredAttackerLKICopy", what Mode$ Attacks recorded (an error when
-// the trigger recorded none), and "ReplacedCard", the card whose entry a
+// the trigger recorded none), "TriggeredSource"/"TriggeredSourceLKICopy",
+// a DamageDone trigger's card source (none for a player source), and
+// "ReplacedCard", the card whose entry a
 // Moved replacement is replacing (an error anywhere else). A CardID is stable across zone changes, so each pair of spellings
 // names the same card; Java's LKI form differs only in which snapshot it
 // reads.
@@ -395,7 +408,12 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 				cards = append(cards, id)
 			}
 		}
-		if len(refs.parentTargets) == 0 {
+		// An ancestor that names ValidTgts$ but holds no target now -- its
+		// targets dropped as illegal (CR 608.2b), or TargetMin$ 0 chose none --
+		// is Java's null getParentTargetingCard: no cards
+		// (AbilityUtils.java:162-166). No targeting ancestor at all is a
+		// reference this port does not carry, an error.
+		if len(refs.parentTargets) == 0 && !refs.ancestorTargeting {
 			return nil, fmt.Errorf("engine: Defined$ %q: no ancestor ability chose targets", defined)
 		}
 		return cards, nil
@@ -481,6 +499,16 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
 		}
 		return []CardID{refs.triggered.card}, nil
+	case "TriggeredSource", "TriggeredSourceLKICopy":
+		// AbilityKey.Source as a card (AbilityUtils.java:167-199): a player
+		// source names no card. Unset is an error, as for the other keys.
+		if refs.triggered.source == NoEntity {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no source", defined)
+		}
+		if id, ok := refs.triggered.source.AsCard(); ok {
+			return []CardID{id}, nil
+		}
+		return nil, nil
 	case "ReplacedCard":
 		if refs.replaced == NoCard {
 			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement of a card's entry", defined)

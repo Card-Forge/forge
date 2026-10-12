@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Forest|Tapped;Forest|Tapped;Colossal Dreadmaw
+humangraveyard=Ram Through
+ailife=16
+aigraveyard=Grizzly Bears

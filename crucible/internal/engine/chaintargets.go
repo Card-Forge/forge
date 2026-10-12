@@ -23,6 +23,12 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 	// link: the targets of the nearest ancestor that chose some
 	// (SpellAbility.getParentTargetingCard), a's own first.
 	parents := parentTargetsOf(a)
+	// What TargetUnique$ excludes for a link: every target its ancestors
+	// chose (SpellAbility.getUniqueTargets walks every parent that
+	// usesTargeting), a's own first. Rebuilt, never appended in place: a's
+	// Targets may be shared with a clone.
+	unique := append([]EntityID(nil), a.Targets...)
+	ancestorTargeting := a.ancestorTargeting || linkUsesTargeting(a.Params)
 	for cur != nil {
 		sub, ok := findSubAbility(cur)
 		if !ok {
@@ -38,7 +44,8 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		// link is asked about as its mode is.
 		link := Ability{API: api, Source: a.Source, Controller: a.Controller, Params: sub.Ability, Amounts: a.Amounts,
 			TriggerRemembered: a.TriggerRemembered, triggered: a.triggered, casting: a.casting, charmRoot: a.charmRoot,
-			parentTargets: parents}
+			parentTargets: parents, ancestorTargeting: ancestorTargeting, uniqueTargets: unique}
+		ancestorTargeting = ancestorTargeting || linkUsesTargeting(sub.Ability)
 		choice, named, ok := g.targetChoiceFor(&link)
 		if !named {
 			continue
@@ -63,6 +70,7 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen})
 		if len(chosen) > 0 {
 			parents = chosen
+			unique = append(append([]EntityID(nil), unique...), chosen...)
 		}
 	}
 	return true

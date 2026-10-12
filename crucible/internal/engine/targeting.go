@@ -28,11 +28,10 @@ import (
 // TargetsForEachPlayer$ (one target per player) reads as
 // TargetsWithDifferentControllers$ plus a fizzle-time check that no target
 // changed controller (trimTargetSet, recordForEachControllers).
-// TargetUnique$ is not parsed: SpellAbility.getUniqueTargets collects only the
-// ancestors' targets (SpellAbility.java:2040-2050), and a root or Charm mode
-// has none, so on the lines this port targets it excludes nothing; its 131
-// real lines mostly sit on SubAbility$ lines this port never targets
-// separately.
+// TargetUnique$ excludes what the ancestors of a SubAbility$ link targeted
+// (SpellAbility.getUniqueTargets, SpellAbility.java:2034-2044): the link
+// resolveChainTargets asks about carries that list (Ability.uniqueTargets).
+// A root or Charm mode has no ancestors, so there it excludes nothing.
 
 // resolveTargets is CR 601.2c/603.3b's own "choose targets," and reports
 // whether a is still eligible to be pushed onto the stack at all. true with
@@ -484,6 +483,18 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 				continue
 			}
 			kept = append(kept, e)
+		}
+		candidates = kept
+	}
+	if _, ok := a.Params.Param("TargetUnique"); ok && len(a.uniqueTargets) > 0 {
+		// SpellAbility.canTarget (SpellAbility.java:1401): a TargetUnique$
+		// link may not choose what an ancestor already targets
+		// (getUniqueTargets, SpellAbility.java:2034-2044).
+		kept := candidates[:0:0]
+		for _, e := range candidates {
+			if !slices.Contains(a.uniqueTargets, e) {
+				kept = append(kept, e)
+			}
 		}
 		candidates = kept
 	}

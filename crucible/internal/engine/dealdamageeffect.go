@@ -1,112 +1,111 @@
-// DealDamage: CR 119/120.1, M6's second script-driven effect. Two shapes:
-// a plain-or-named-SVar NumDmg$ dealt to a Defined$ player or the ability's
-// own host, and CR 115's own "any target" (or a narrower ValidTgts$)
-// resolved at cast/activation time (Ability.Targets, resolveTargets,
-// targeting.go). 2,068 real corpus lines combine DealDamage with ValidTgts$
-// (`grep -c`, forge-gui/res/cardsfolder) -- the single largest unresolved
-// DealDamage shape until now (`ValidTgts$ Any` alone: 615, the dominant one
-// -- Lightning Bolt, Shock); 234 of the 2,068 also name a param still in
-// dealDamageUnresolvedParams below and stay unresolved, leaving roughly
-// 1,834 newly resolvable. Sourced from the ability's own host either way.
-// 3 of the Defined$ shape's own real lines also name UnlessCost$ --
-// resolveUnlessCost's own gate (effect.go) runs ahead of this file entirely
-// now, below.
+// DealDamage: CR 119/120.1, M6's second script-driven effect. The damage is
+// dealt to CR 115's own "any target" (or a narrower ValidTgts$) chosen at
+// cast/activation time (Ability.Targets, resolveTargets, targeting.go), or
+// to what Defined$ names, by each card DamageSource$ names -- the ability's
+// own host when it names none.
 //
 // Ported from
 // forge-game/src/main/java/forge/game/ability/effects/DamageDealEffect.java's
-// resolve.
+// resolve and internalDamageDeal, and the RememberDamaged$ half of
+// GameAction.dealDamage (GameAction.java:2787-2794).
 
 package engine
 
-//enginelint:allow id card game player ability combatdamage defined amount condition control trigger effecthelpers damageresolveeffect zone
+//enginelint:allow id card game player ability combatdamage defined amount condition control trigger effecthelpers damageresolveeffect zone valid parts
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+	"strings"
 
-// dealDamageEffect resolves Mode$/DB$/AB$ DealDamage. Reuses the exact
-// damage machinery combat already built: dealPermanentDamage/
-// dealPlayerDamage (combatdamage.go) mark the damage, check CR 614's own
-// "prevent all of this damage" replacement effects and CR 603's own "deals
-// damage" trigger identically whether the source is a blocker or a script --
-// isCombat threaded through as false is the one thing that tells the two
-// apart (FlagCombat's own doc comment, event.go). A local damageTable
-// accumulates every dealPlayerDamage/dealPermanentDamage call this one
-// resolution makes (more than one when Defined$ names several players at
-// once, or ValidTgts$'s own TargetMax$ lets more than one be chosen),
-// consumed by checkDamageDoneOnceTriggers (trigger.go) once the whole
-// resolution's own damage is dealt -- combatdamage.go's own doc comment on
-// damageTable has the reason a single script-driven ability's own damage is
-// one batch too, not just a combat damage step's.
+	"github.com/jczastkiewicz/crucible/internal/cardtype"
+	"github.com/jczastkiewicz/crucible/internal/valid"
+)
+
+// dealDamageEffect resolves Mode$/DB$/AB$ DealDamage the way
+// DamageDealEffect.resolve does: the sources first (DamageSource$,
+// DamageDealEffect.java:135-138 -- none left, no damage), then the targets,
+// then every source's damage to every target recorded into one
+// CardDamageTable (:217-268) and dealt as one batch (GameAction.dealDamage,
+// :269-271). The batch is a pendingDamage (damageresolveeffect.go): the one a
+// DamageMap$ chain shares, dealt later by DamageResolve, or a local one dealt
+// here by dealPendingDamage. Dealing reuses combat's machinery
+// (dealPermanentDamage/dealPlayerDamage, combatdamage.go), which reads the
+// source's own lifelink, infect, wither and protection-relevant qualities off
+// the source CardID it is given -- so a "target creature you control deals
+// damage equal to its power" bite has that creature's deathtouch and
+// lifelink, not the spell's. checkDamageTableTriggers then checks the whole
+// batch's damage-done-once triggers (combatdamage.go's damageTable doc).
 //
-// Not ported (every one fails loudly rather than dealing the wrong amount to
-// the wrong thing, PORT-8/GO-7): DamageSource$ (a source other than the
-// ability's own host, needing a reference vocabulary this file does not
-// have); TriggeredSpellAbility$/CounterNum$/Optional$ (each its own further
-// mechanic); DividedAsYouChoose$ (CR 601.2c's own Forked Bolt shape --
-// forked_bolt.txt -- splits one NumDmg$ unevenly across several targets, an
-// allocation Java records at target-choosing time, `SpellAbility
-// .addDividedAllocation`, that this port's own resolveTargets/ChooseTargets
-// has nowhere to carry; every target would otherwise wrongly take the
-// ability's own full NumDmg$); NoPrevention$ (this port's own
-// damagePrevented/damagePreventedPlayer would otherwise apply where Java's
-// own AbilityKey.NoPreventDamage says not to, a wrong answer rather than a
-// missing one). TgtPrompt$ is display prose, not gated here the same as
-// Destroy's own identical param is not (destroyeffect.go). SubAbility$ no
-// longer blocks: resolveSubAbility
-// (subability.go) chains it through Registry.Resolve (effect.go) once this
-// effect's own body finishes, whether or not subAbilityConditionMet below
-// let it run at all -- sword_of_fire_and_ice_and_war_and_peace.txt's own
-// real DealDamage-chaining-into-GainLife shape is why. 9 of the corpus's
-// own 316 real SVar-defined DealDamage lines naming SubAbility$ chain to an
-// already-built leaf ability and resolve end to end. UnlessPayer$/
-// UnlessCost$/UnlessResolveSubs$ no longer block either: resolveUnlessCost
-// (effect.go) gates the whole ability, this effect's own body included,
-// before Registry.Resolve ever reaches it -- force_of_nature.txt's own real
-// "deals 8 damage to you unless you pay {G}{G}{G}{G}" is the shape.
+// DamageSource$ resolves through definedCards (ParentTarget -- Rabid Bite's
+// "target creature you control", 88 of the corpus's 190 real lines --
+// Targeted, Enchanted, Remembered, Imprinted, ChosenCard, Self, the
+// Triggered* card keys, ...) and "Valid <spec>", every battlefield card
+// matching spec (AbilityUtils.java:287-303). The source is read as it is
+// now, not as a last-known copy (sourceLKI, :218): a source still on the
+// battlefield is the same either way, and a ParentTarget or Targeted source
+// that left was dropped as an illegal target already (CR 608.2b,
+// dropIllegalTargets).
 //
-// ConditionPresent$/ConditionCompare$/ConditionCheckSVar$/
-// ConditionSVarCompare$ -- SpellAbilityCondition's own gate on the ability
-// itself, distinct from CardTraitBase's own meetsCommonRequirements a
-// trigger already has -- are resolved now too (subAbilityConditionMet,
-// condition.go), 5 more of the 822 real Defined$ lines: a met condition lets
-// this run as normal, an unmet one is not an error, the ability simply does
-// nothing (SpellAbilityCondition.areMet's own contract), the identical
-// "declined by the rules" outcome PlayLand/PayManaCost already report as a
-// plain false/nil rather than an error. Condition$ itself (SpellAbilityCondition's
-// own separate Threshold/Metalcraft/... flag switch) and ConditionDefined$
-// (an arbitrary reference this port has no Defined$-to-objects resolver for)
-// stay in dealDamageUnresolvedParams below, failing loudly the identical way
-// DamageSource$ already does -- condition.go's own generic
-// subAbilityConditionMet would otherwise silently no-op a card naming either,
-// which this file's own established contract (every unresolvable param fails
-// loudly by name, never silently) does not allow.
+// A card target no longer on the battlefield, or phased out, is skipped
+// (:253-256); Java's equalsWithGameTimestamp half of that check is not made
+// for a Defined$ card, which this port does not stamp.
 //
-// ValidTgts$ (dealDamageTargets, below) reads Ability.Targets directly --
-// resolveTargets (targeting.go) already resolved it at cast/activation time,
-// the identical answer Destroy/Tap already read the same way. Unlike those,
-// this file adds its own per-target liveness check right before applying
-// damage: DamageDealEffect.java's own resolve loop skips a card target that
-// is no longer on the battlefield, still damaging every other target, on
-// top of the shared CR 608.2b re-check resolveTop already ran
-// (targetsStillLegal, targeting.go). It matters for a target the shared
-// check keeps -- one chosen outside the battlefield, such as a spell on the
-// stack (`TestRemoveFromGameSpellOnStack`'s shape). No such check exists for a player
-// target in Java's own loop, so none is added here either -- a player who
-// has since lost the game is not filtered out.
+// Not ported (each fails loudly by name rather than dealing the wrong amount
+// to the wrong thing, PORT-8/GO-7): see dealDamageUnresolvedParams.
 type dealDamageEffect struct{}
 
+// dealDamageUnresolvedParams are DamageDealEffect params this port does not
+// evaluate:
+//
+//   - Condition$ (SpellAbilityCondition's flag switch; subAbilityConditionMet
+//     would otherwise silently no-op it), TriggeredSpellAbility$, CounterNum$,
+//     Optional$ -- each its own further mechanic;
+//   - NoPrevention$/NoRedirection$ -- damagePrevented would apply where
+//     AbilityKey.NoPreventDamage says not to;
+//   - DividedAsYouChoose$/DivideEvenly$/DividerOnResolution$ -- an allocation
+//     chosen at targeting (SpellAbility.addDividedAllocation) or resolution
+//     (assignCombatDamage) this port has nowhere to carry;
+//   - CardChoices$/PlayerChoices$/Random$ -- a choice outside Defined$/
+//     targets (:150-176);
+//   - RelativeTarget$ -- Defined$ re-read relative to each source (:243-245);
+//   - ReplaceDyingDefined$/ReplaceDyingCondition$ -- replaceDying's "if it
+//     would die this turn, exile it instead" effect card
+//     (SpellAbilityEffect.java:691-756);
+//   - ExcessSVar$/ExcessSVarCondition$ -- the excess stored as an SVar for a
+//     later link (CardDamageTable.java:136-155);
+//   - RememberAmount$/RememberRedirectedExcess$ -- the dealt total or the
+//     redirected excess remembered on the host.
 var dealDamageUnresolvedParams = [...]string{
-	"DamageSource", "Condition", "TriggeredSpellAbility", "CounterNum",
-	"NoPrevention", "Optional", "DividedAsYouChoose",
+	"Condition", "TriggeredSpellAbility", "CounterNum", "Optional",
+	"NoPrevention", "NoRedirection",
+	"DividedAsYouChoose", "DivideEvenly", "DividerOnResolution",
+	"CardChoices", "PlayerChoices", "Random",
+	"RelativeTarget",
+	"ReplaceDyingDefined", "ReplaceDyingCondition",
+	"ExcessSVar", "ExcessSVarCondition",
+	"RememberAmount", "RememberRedirectedExcess",
 }
 
 func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	for _, key := range dealDamageUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: DealDamage: %s$ not resolvable yet", key)
-		}
+	if err := rejectParams(a, "DealDamage", dealDamageUnresolvedParams[:]...); err != nil {
+		return err
+	}
+	if tgts, ok := a.Params.Param("ValidTgts"); ok && strings.Contains(tgts, "NotDefined") {
+		// CardProperty's NotDefined<Defined> (CardProperty.java:2064-2068)
+		// needs the targeting ability's own references, which Matches has
+		// no access to: it would read false for every card (GO-7).
+		return fmt.Errorf("engine: DealDamage: ValidTgts$ %q: NotDefined property not resolvable yet", tgts)
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
+		return nil
+	}
+	sources, err := damageSources(g, a)
+	if err != nil {
+		return err
+	}
+	if len(sources) == 0 {
 		return nil
 	}
 	numDmg, ok := a.Params.Param("NumDmg")
@@ -117,102 +116,215 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if !ok {
 		return fmt.Errorf("engine: DealDamage: NumDmg$ %q is not resolvable", numDmg)
 	}
-	deathtouch := source.HasKeyword("Deathtouch")
 	if hasParam(a, "DamageMap") && a.damageMap == nil {
 		a.damageMap = &pendingDamage{}
 	}
-
-	if _, ok := a.Params.Param("ValidTgts"); ok {
-		return dealDamageTargets(g, controller, a, dmg, deathtouch)
+	if a.damageMap != nil && hasParam(a, "RememberDamaged") {
+		// GameAction.dealDamage remembers for the ability that deals the
+		// batch, the later DamageResolve, not this one.
+		return fmt.Errorf("engine: DealDamage: RememberDamaged$ under DamageMap$ not resolvable yet")
 	}
-
-	defined, _ := a.Params.Param("Defined")
-	if a.damageMap != nil {
-		// DamageMap$: the damage is recorded, and dealt all at once by a
-		// later DamageResolve (DamageDealEffect's usedDamageMap).
-		if defined == "Self" {
-			a.damageMap.add(a.Source, CardEntity(a.Source), dmg)
+	targets, err := dealDamageTargets(g, a)
+	if err != nil {
+		return err
+	}
+	if spec, ok := a.Params.Param("OptionalDecider"); ok {
+		// DamageDealEffect.java:180-185: the first player OptionalDecider$
+		// names may decline the whole damage; nobody named, nobody asked.
+		deciders, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+		if err != nil {
+			return fmt.Errorf("engine: DealDamage: OptionalDecider$: %w", err)
+		}
+		if len(deciders) > 0 && !controller.ConfirmEffect(g, deciders[0], a.Source) {
 			return nil
 		}
-		players, err := definedPlayers(g, a.Controller, a.Source, defined, a.refs())
-		if err != nil {
-			return fmt.Errorf("engine: DealDamage: %w", err)
+	}
+	radiant := g.radianceCards(a)
+
+	batch := a.damageMap
+	if batch == nil {
+		batch = &pendingDamage{}
+	}
+	for _, src := range sources {
+		deathtouch := g.Card(src).HasKeyword("Deathtouch")
+		for _, e := range targets {
+			if cid, ok := e.AsCard(); ok {
+				if !damageTargetInPlay(g.Card(cid)) {
+					continue
+				}
+				if err := recordCardDamage(g, a, batch, src, cid, dmg, deathtouch); err != nil {
+					return err
+				}
+				continue
+			}
+			if _, ok := e.AsPlayer(); ok {
+				batch.add(src, e, dmg)
+			}
 		}
-		for _, pid := range players {
-			a.damageMap.add(a.Source, PlayerEntity(pid), dmg)
+		// Radiance$: the permanents sharing a color with a target take the
+		// same damage (DamageDealEffect.java:195, :263-267).
+		for _, cid := range radiant {
+			if g.Card(cid).Zone != Battlefield {
+				continue
+			}
+			if err := recordCardDamage(g, a, batch, src, cid, dmg, deathtouch); err != nil {
+				return err
+			}
 		}
+	}
+	if a.damageMap != nil {
+		// DamageMap$: dealt all at once by a later DamageResolve.
 		return nil
 	}
-	if defined == "Self" {
-		var table damageTable
-		g.dealPermanentDamage(controller, a.Source, a.Source, dmg, deathtouch, false, &table)
-		g.checkDamageTableTriggers(controller, table, false)
-		return nil
-	}
-	players, err := definedPlayers(g, a.Controller, a.Source, defined, a.refs())
-	if err != nil {
-		return fmt.Errorf("engine: DealDamage: %w", err)
-	}
-	var table damageTable
-	for _, pid := range players {
-		g.dealPlayerDamage(controller, a.Source, pid, dmg, false, &table)
+	table := g.dealPendingDamage(controller, batch.entries)
+	if hasParam(a, "RememberDamaged") {
+		rememberDamaged(g, a.Source, table)
 	}
 	g.checkDamageTableTriggers(controller, table, false)
 	return nil
 }
 
-// dealDamageTargets is dealDamageEffect's own ValidTgts$ shape -- CR 115's
-// own "any target" (or a narrower spec), dmg to each already-chosen target
-// (a.Targets, resolveTargets, targeting.go). DamageDealEffect.java's own
-// resolve reads its own already-resolved target list once, a single loop
-// with an instanceof check (DamageDealEffect.java) rather than separate
-// card/player passes -- ported the same shape here rather than through
-// targetedOrDefinedCards/targetedOrDefinedPlayers (defined.go), which exist
-// for the Defined$ shape's own different resolution and would need to be
-// called twice for no reason once a.Targets already holds the mixed answer.
-func dealDamageTargets(g *Game, controller PlayerController, a *Ability, dmg int, deathtouch bool) error {
-	var table damageTable
-	radiant := g.radianceCards(a)
-	for _, e := range a.Targets {
-		if cid, ok := e.AsCard(); ok {
-			// CR 608.2b-adjacent, DealDamage's own (DamageDealEffect.java):
-			// a target that left the battlefield between targeting and
-			// resolution is skipped, the rest of the targets still take
-			// their damage.
-			if g.Card(cid).Zone != Battlefield {
-				continue
-			}
-			if a.damageMap != nil {
-				a.damageMap.add(a.Source, e, dmg)
-				continue
-			}
-			g.dealPermanentDamage(controller, a.Source, cid, dmg, deathtouch, false, &table)
-			continue
-		}
-		pid, ok := e.AsPlayer()
-		if !ok {
-			continue
-		}
-		if a.damageMap != nil {
-			a.damageMap.add(a.Source, e, dmg)
-			continue
-		}
-		g.dealPlayerDamage(controller, a.Source, pid, dmg, false, &table)
+// damageTargetInPlay is DamageDealEffect's per-card check (:253-256): on the
+// battlefield and not phased out.
+func damageTargetInPlay(c *Card) bool {
+	return c.Zone == Battlefield && !c.IsPhasedOut()
+}
+
+// damageSources is DamageSource$ (DamageDealEffect.java:135):
+// AbilityUtils.getDefinedCards, "Self" when absent. "Valid <spec>" is every
+// battlefield card matching spec for the ability's controller (AbilityUtils
+// .java:287-303); every other spelling goes through definedCards.
+func damageSources(g *Game, a *Ability) ([]CardID, error) {
+	spec, ok := a.Params.Param("DamageSource")
+	if !ok {
+		return []CardID{a.Source}, nil
 	}
-	// Radiance$: the permanents sharing a color with a target take the same
-	// damage (DamageDealEffect.java:195, :263-267).
-	for _, cid := range radiant {
-		if g.Card(cid).Zone != Battlefield {
-			continue
+	if rest, ok := strings.CutPrefix(spec, "Valid "); ok {
+		if strings.Contains(rest, "IsCommander") {
+			// Matches has no IsCommander case and would read false for
+			// every card, a silent no-op (GO-7): no commander is modeled.
+			return nil, fmt.Errorf("engine: DealDamage: DamageSource$ %q: IsCommander not resolvable yet", spec)
 		}
-		if a.damageMap != nil {
-			a.damageMap.add(a.Source, CardEntity(cid), dmg)
-			continue
+		parsed := valid.Parse(rest)
+		var out []CardID
+		for _, pid := range g.Players() {
+			for _, cid := range g.Zone(Battlefield, pid).Cards() {
+				if Matches(g, g.Card(cid), parsed, a.Controller, a.Source) {
+					out = append(out, cid)
+				}
+			}
 		}
-		g.dealPermanentDamage(controller, a.Source, cid, dmg, deathtouch, false, &table)
+		return out, nil
 	}
-	if a.damageMap == nil {
-		g.checkDamageTableTriggers(controller, table, false)
+	cards, err := definedCards(g.Card(a.Source), spec, a.refs())
+	if err != nil {
+		return nil, fmt.Errorf("engine: DealDamage: DamageSource$: %w", err)
+	}
+	return cards, nil
+}
+
+// dealDamageTargets is SpellAbilityEffect.getTargetEntities
+// (SpellAbilityEffect.java:374-383): the chosen targets when the ability
+// names ValidTgts$ (already re-checked under CR 608.2b by resolveTop), else
+// AbilityUtils.getDefinedEntities over each " & " part of Defined$ --
+// players, then cards -- defaulting to "Self".
+func dealDamageTargets(g *Game, a *Ability) ([]EntityID, error) {
+	if _, ok := a.Params.Param("ValidTgts"); ok {
+		return a.Targets, nil
+	}
+	defined, ok := a.Params.Param("Defined")
+	if !ok {
+		defined = "Self"
+	}
+	var out []EntityID
+	for _, part := range strings.Split(defined, " & ") {
+		part = strings.TrimSpace(part)
+		players, perr := definedPlayers(g, a.Controller, a.Source, part, a.refs())
+		cards, cerr := definedCards(g.Card(a.Source), part, a.refs())
+		if perr != nil && cerr != nil {
+			// Neither reader knows it. The player reader's reason is the
+			// one this effect reported before it read cards too, and the
+			// more specific one for a Triggered* player key.
+			return nil, fmt.Errorf("engine: DealDamage: %w", perr)
+		}
+		for _, p := range players {
+			out = append(out, PlayerEntity(p))
+		}
+		for _, c := range cards {
+			out = append(out, CardEntity(c))
+		}
+	}
+	return out, nil
+}
+
+// recordCardDamage is internalDamageDeal (DamageDealEffect.java:275-302):
+// dmg from src to card cid into batch. Under ExcessDamage$ -- when the source
+// meets ExcessDamageCondition$, if named -- only what is lethal goes to cid
+// (Card.getExcessDamageValue) and the rest to the first entity ExcessDamage$
+// names: Flame Spill's "excess damage is dealt to that creature's controller
+// instead".
+func recordCardDamage(g *Game, a *Ability, batch *pendingDamage, src, cid CardID, dmg int, deathtouch bool) error {
+	spec, ok := a.Params.Param("ExcessDamage")
+	if ok {
+		if cond, has := a.Params.Param("ExcessDamageCondition"); has && !Matches(g, g.Card(src), valid.Parse(cond), a.Controller, a.Source) {
+			ok = false
+		}
+	}
+	if !ok {
+		batch.add(src, CardEntity(cid), dmg)
+		return nil
+	}
+	toTarget := min(excessDamageValue(g.Card(cid), deathtouch), dmg)
+	batch.add(src, CardEntity(cid), toTarget)
+	rest, err := definedEntities(g, a.Controller, g.Card(a.Source), spec, a.refs())
+	if err != nil {
+		return fmt.Errorf("engine: DealDamage: ExcessDamage$: %w", err)
+	}
+	if len(rest) > 0 {
+		batch.add(src, rest[0], dmg-toTarget)
 	}
 	return nil
+}
+
+// excessDamageValue is Card.getExcessDamageValue (Card.java:6127-6151, CR
+// 120.10): the least of what is lethal to c as a creature (1 from a
+// deathtouch source while any is lethal), its loyalty as a planeswalker and
+// its defense as a battle; 0 for none of the three.
+func excessDamageValue(c *Card, deathtouch bool) int {
+	values := make([]int, 0, 3)
+	t := c.Type()
+	if t.Has(cardtype.Creature) {
+		lethal := 0
+		if tough, ok := c.Toughness(); ok {
+			lethal = tough - c.Damage.Marked
+		}
+		if deathtouch && lethal > 0 {
+			lethal = 1
+		}
+		values = append(values, max(0, lethal))
+	}
+	if t.Has(cardtype.Planeswalker) {
+		values = append(values, c.Counters.Count(Loyalty))
+	}
+	if t.Has(cardtype.Battle) {
+		values = append(values, c.Counters.Count(Defense))
+	}
+	if len(values) == 0 {
+		return 0
+	}
+	return slices.Min(values)
+}
+
+// rememberDamaged is GameAction.dealDamage's RememberDamaged$
+// (GameAction.java:2790-2794): the host remembers every entity its own
+// damage reached in the batch, in the order dealt. A recorded entry is
+// damage actually dealt, so an entity whose damage was prevented in full is
+// not remembered, as Java's runReplaceDamage removes it from the table
+// (ReplacementHandler.java:526-527).
+func rememberDamaged(g *Game, host CardID, table damageTable) {
+	for _, e := range table {
+		if e.Source == host && e.Amount > 0 {
+			g.Card(host).Memory.Remember(e.Target)
+		}
+	}
 }

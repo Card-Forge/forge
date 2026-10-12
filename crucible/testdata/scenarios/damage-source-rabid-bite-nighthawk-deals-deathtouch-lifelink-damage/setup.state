@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Rabid Bite|Id:1
+humanbattlefield=Forest|Id:2;Vampire Nighthawk|Id:3;Forest|Id:5
+aibattlefield=Craw Wurm|Id:4

@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Justice Strike|Id:1
+humanbattlefield=Mountain|Id:2;Plains|Id:3
+aibattlefield=Deadly Recluse|Id:4;Hill Giant|Id:5

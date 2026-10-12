@@ -26,7 +26,7 @@ import (
 
 // contextHeads are the amount heads that name a list of cards.
 var contextHeads = map[string]bool{
-	"Targeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
+	"Targeted": true, "ParentTargeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
 	"Remembered": true, "Imprinted": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
 	"Collected": true, "Revealed": true,
 }
@@ -91,6 +91,20 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 	switch head {
 	case "Targeted":
 		for _, e := range a.Targets {
+			if id, ok := e.AsCard(); ok {
+				ids = append(ids, id)
+			}
+		}
+	case "ParentTargeted":
+		// AbilityUtils.java:688-693: the cards the nearest ancestor that
+		// targets a card targets (getParentTargetingCard). A targeting
+		// ancestor left with none is Java's null list, which reads 0; no
+		// targeting ancestor at all is a reference this port does not carry
+		// (definedCards' ParentTarget), unresolved.
+		if len(a.parentTargets) == 0 && !a.ancestorTargeting {
+			return nil, false
+		}
+		for _, e := range a.parentTargets {
 			if id, ok := e.AsCard(); ok {
 				ids = append(ids, id)
 			}
