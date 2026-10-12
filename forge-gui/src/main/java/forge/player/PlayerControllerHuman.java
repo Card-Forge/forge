@@ -1758,6 +1758,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
         final UndoManager undo = getGame().getUndoManager();
+        undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
         if (!isMacroActive()) {
             if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
                 undo.barrier("Opponent's turn");
@@ -2753,6 +2754,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public void updateAchievements() {
         AchievementCollection.updateAll(this);
+    }
+
+    private static UndoManager.Mode undoModeFromPrefs() {
+        final String v = FModel.getPreferences().getPref(FPref.UI_UNDO_MODE);
+        if (ForgeConstants.UNDO_MODE_OFF.equals(v)) { return UndoManager.Mode.OFF; }
+        if (ForgeConstants.UNDO_MODE_SINGLE.equals(v)) { return UndoManager.Mode.SINGLE_STEP; }
+        return UndoManager.Mode.FREE;
     }
 
     public boolean canUndoLastAction() {
