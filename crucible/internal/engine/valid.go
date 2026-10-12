@@ -216,6 +216,11 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		}
 		stamp, _ := g.hostObjectStamp(source)
 		return ew.stamp == stamp
+	case name == "HauntedBy":
+		// CardProperty.java:553: c is haunted by source (Card.haunts). Only
+		// the Haunt keyword's own trigger writes it (compile/haunt.go).
+		sc, ok := sourceCard(g, source)
+		return ok && sc.haunts(c)
 	case strings.HasPrefix(name, "ChosenCard"):
 		// ChosenCardStrict collapses to ChosenCard: Java's "Strict" form
 		// additionally checks equalsWithGameTimestamp, telling a chosen card

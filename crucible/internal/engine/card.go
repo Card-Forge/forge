@@ -342,6 +342,10 @@ type Card struct {
 	// GameAction.java:576-579), and markExiledWith (zonemove.go) sets it
 	// after an effect's own exile move, ADR-0034.
 	exiledWith exiledWithMark
+	// haunting is Card.haunting (Card.java:1392, CR 702.55): the creature
+	// this exiled card haunts, set by Haunt (haunteffect.go) and read by the
+	// HauntedBy valid property. The zero value haunts nothing.
+	haunting hauntMark
 	// battlefieldStamp is the zoneStamp this card had as its most recent
 	// battlefield object, set as it leaves the battlefield (Move,
 	// MoveToLibraryTop, game.go); zero while it never has. It stands in for
@@ -1130,6 +1134,36 @@ type exiledWithMark struct {
 // ExiledWith is the card that exiled c, NoCard if nothing did since c last
 // changed zones (Card.getExiledWith).
 func (c *Card) ExiledWith() CardID { return c.exiledWith.host }
+
+// hauntMark is one card's Card.haunting with both objects pinned: self is the
+// haunter's own exile zoneStamp, card the haunted creature and stamp that
+// creature's battlefield zoneStamp, all as Haunt exiled the haunter. Java
+// keeps the link right with two Static$ triggers that undo it when the haunter
+// leaves exile or the creature leaves the battlefield (CardFactoryUtil.java:
+// 1213-1237); the stamps answer the same question by object identity (CR
+// 400.7), so a moved card stops matching without a trigger.
+type hauntMark struct {
+	self  uint64
+	card  CardID
+	stamp uint64
+}
+
+// haunts reports whether c, still the exiled object Haunt made it, haunts
+// target -- CardProperty.java:553's HauntedBy, from the haunter's side. A
+// target on the battlefield must be the object that was haunted; one that
+// has left it is matched by its last battlefield object (battlefieldStamp),
+// which is how a dies trigger's last-known information still sees the
+// creature the haunter haunted as it died.
+func (c *Card) haunts(target *Card) bool {
+	m := c.haunting
+	if m.card == NoCard || m.card != target.ID || c.Zone != Exile || c.zoneStamp != m.self {
+		return false
+	}
+	if target.Zone == Battlefield {
+		return target.zoneStamp == m.stamp
+	}
+	return target.battlefieldStamp == m.stamp
+}
 
 // Kicker1 and Kicker2 are the bits Card.kicker records: which of a card's two
 // kicker costs were paid (Java's OptionalCost.Kicker1/Kicker2).

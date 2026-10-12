@@ -1,0 +1,18 @@
+# CR 702.55: Benediction of Moons has no A:SP$ line; its Haunt SVar is the
+# spell (CardFactoryUtil.java:3069-3083). It resolves (two players: gain 2),
+# then goes to the graveyard after resolving (Fizzle$ False), which triggers
+# its haunt: exile it haunting target creature, the Bears.
+startturn human
+advance 3
+tapformana human 3 W
+castspell human 1
+queue targets 6
+resolvestack
+# Terror destroys the haunted Bears: Benediction, watching from exile
+# (TriggerZones$ Exile, ValidCard$ Creature.HauntedBy), gains 2 again.
+tapformana human 4 B
+tapformana human 5 B
+queue paygeneric B
+queue targets 6
+castspell human 2
+resolvestack

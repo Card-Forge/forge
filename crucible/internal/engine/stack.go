@@ -99,7 +99,8 @@ func (g *Game) resolveTop(reg *Registry, controller PlayerController) error {
 	g.stack[n] = Ability{}
 	g.stack = g.stack[:n]
 
-	if g.targetsStillLegal(&a) {
+	fizzled := !g.targetsStillLegal(&a)
+	if !fizzled {
 		// Captured before Resolve, not read fresh after: EndTurn/
 		// EndCombatPhase (and any future effect touching turn state
 		// mid-resolution) can advance g.activePhase/g.activePlayer/g.turn
@@ -123,7 +124,7 @@ func (g *Game) resolveTop(reg *Registry, controller PlayerController) error {
 			return nil
 		}
 	}
-	g.moveResolvedSpellToGraveyard(controller, a)
+	g.moveResolvedSpellToGraveyard(controller, a, fizzled)
 	CheckStateBasedActions(g, controller)
 	return nil
 }
@@ -165,7 +166,11 @@ func (g *Game) ascendAtResolution(a *Ability) {
 // (Card.IsCopiedSpell) ceases to exist instead, inside Move itself
 // (ceaseCopiedSpell, game.go; MagicStack.removeCardFromStack's
 // ceaseToExist, MagicStack.java:680-683).
-func (g *Game) moveResolvedSpellToGraveyard(controller PlayerController, a Ability) {
+//
+// fizzled is the AbilityKey.Fizzle this move carries (MagicStack.java:715-
+// 721): a card that reached its graveyard this way fires its own Fizzle$
+// triggers (checkSpellToGraveyardTriggers, haunteffect.go).
+func (g *Game) moveResolvedSpellToGraveyard(controller PlayerController, a Ability, fizzled bool) {
 	if a.Source == NoCard || int(a.Source) >= len(g.cards) {
 		return
 	}
@@ -174,6 +179,9 @@ func (g *Game) moveResolvedSpellToGraveyard(controller PlayerController, a Abili
 		return
 	}
 	g.moveToGraveyard(controller, a.Source)
+	if a.spell {
+		g.checkSpellToGraveyardTriggers(controller, a.Source, fizzled)
+	}
 }
 
 // stackItem is the item on the stack whose ID is id, and whether one is --

@@ -204,8 +204,9 @@ type Face struct {
 	// stands for is a different job entirely (keyword.go's own doc
 	// comment), done here for `Dungeon` (its rooms, added to Triggers) and
 	// `ETBReplacement` (its replacement, added to Replacements), each
-	// because it names an SVar nothing else would compile, and by
-	// keyword.Expand for the rest (ADR-0038). The keyword line itself
+	// because it names an SVar nothing else would compile, `Haunt` (its
+	// spell and triggers, haunt.go, because it reads the face's type and the
+	// SVar's text), and by keyword.Expand for the rest (ADR-0038). The keyword line itself
 	// stays here too.
 	Keywords []string
 
@@ -324,11 +325,18 @@ func compileFace(face *carddb.Face) (Face, error) {
 // abilities. Every synthesized ability records its keyword line.
 func (c *faceCompiler) expandKeywords(out *Face) error {
 	for i, line := range c.face.Keywords {
+		slot := strconv.Itoa(i)
+		// Haunt reads the face's type and its SVar's text (haunt.go).
+		if keyword.Parse(line).Name == "Haunt" {
+			if err := c.expandHaunt(out, line, slot); err != nil {
+				return err
+			}
+			continue
+		}
 		exp, ok := keyword.Expand(keyword.Parse(line))
 		if !ok {
 			continue
 		}
-		slot := strconv.Itoa(i)
 		for _, sv := range exp.Amounts {
 			if out.Amounts == nil {
 				out.Amounts = map[string]expr.Amount{}

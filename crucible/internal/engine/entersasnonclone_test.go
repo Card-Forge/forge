@@ -84,7 +84,7 @@ func TestEntersAsCopyUnimplementedReplaceWithIsAnError(t *testing.T) {
 	g, p, _ := newTwoPlayerGame(t)
 	card := g.NewCard(copyTestDef(t, "Test Mimeo", "Creature Shapeshifter", "0", "0", "Cost:G",
 		"K:ETBReplacement:Copy:DBText:Optional",
-		"SVar:DBText:DB$ Haunt | Defined$ Self"), p, engine.Hand)
+		"SVar:DBText:DB$ Encode | Defined$ Self"), p, engine.Hand)
 	sc := engine.NewScriptedController()
 	sc.QueueConfirmEffect(true)
 	err := castAndResolve(t, g, p, sc, card)

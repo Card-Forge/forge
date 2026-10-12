@@ -240,7 +240,7 @@ func TestEntersAsCopyRejectsWhatItCannotRun(t *testing.T) {
 			setup: func(t *testing.T, _ *engine.Game, _ engine.PlayerID) *compile.Card {
 				return copyTestDef(t, "Test Mimeo", "Creature Shapeshifter", "0", "0", "Cost:G",
 					"K:ETBReplacement:Copy:DBText",
-					"SVar:DBText:DB$ Haunt | Defined$ Self")
+					"SVar:DBText:DB$ Encode | Defined$ Self")
 			},
 			want: "copy replacement",
 		},

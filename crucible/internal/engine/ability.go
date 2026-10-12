@@ -368,6 +368,11 @@ type triggeredObjects struct {
 	// discarded, TriggerDiscarded.java:72-74), read by Defined$
 	// TriggeredCardController. NoCard when unset.
 	card CardID
+	// cardStamp is card's zoneStamp as a "this card is put into a graveyard"
+	// trigger fired (checkDiesTriggers' own card, checkHaunterSpellTriggers):
+	// the graveyard object AbilityKey.NewCard names. Haunt reads it for
+	// HauntEffect.java:25's equalsWithGameTimestamp. Zero when unset.
+	cardStamp uint64
 	// activator is AbilityKey.Activator for Mode$ TapsForMana: the player
 	// who activated the mana ability, read by Defined$ TriggeredActivator.
 	// NoPlayer when unset.

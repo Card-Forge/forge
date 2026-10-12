@@ -7,7 +7,7 @@ package engine
 // Resolve(*Game, *Ability, PlayerController) error, under the API its name
 // gives or the API its //crucible:register lines name (ADR-0017).
 //
-// 193 APIs. Explicit construction, not an init() populating a package-level
+// 194 APIs. Explicit construction, not an init() populating a package-level
 // Registry: a caller that wants fewer APIs builds its own Registry.
 //
 // Regenerate with "go generate -run genregistry ./internal/engine" after adding an effect.
@@ -109,6 +109,7 @@ func NewRegistry() *Registry {
 	r[APIGameDrawn] = gameDrawnEffect{}
 	r[APIGenericChoice] = genericChoiceEffect{}
 	r[APIGoad] = goadEffect{}
+	r[APIHaunt] = hauntEffect{}
 	r[APIHealDamage] = healDamageEffect{}
 	r[APIHeist] = heistEffect{}
 	r[APIImmediateTrigger] = immediateTriggerEffect{}

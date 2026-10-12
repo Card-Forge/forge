@@ -228,7 +228,7 @@ func (g *Game) checkDiesTriggers(controller PlayerController, left CardID) {
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: left}), staticTrigger: isStaticTrigger(t)})
+					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: left, cardStamp: g.Card(left).zoneStamp}), staticTrigger: isStaticTrigger(t)})
 				}
 			}
 		}
@@ -266,14 +266,22 @@ func (g *Game) otherDiesTriggerMatches(left CardID) []Ability {
 		dying = snap
 	}
 	for _, pid := range g.Players() {
-		for _, watcher := range g.traitHosts(pid) {
+		// An exiled card watches too when its trigger names TriggerZones$
+		// Exile: the Haunt keyword's "when the creature it haunts dies"
+		// (CardFactoryUtil.java:1207) and suspended Nihilith's Origin$ Any
+		// line, the corpus's two such dies-shaped lines. A graveyard watcher
+		// is a separate gap (game-state.md).
+		hosts := g.traitHosts(pid)
+		inPlay := len(hosts)
+		hosts = append(hosts[:inPlay:inPlay], g.Zone(Exile, pid).Cards()...)
+		for i, watcher := range hosts {
 			w := g.Card(watcher)
 			if w.Def == nil {
 				continue
 			}
 			for face := range w.triggerFaces {
 				for _, t := range face.Triggers {
-					if !isDiesTrigger(t) {
+					if !isDiesTrigger(t) || (i >= inPlay && (w.IsEffect || !hasZone(t, "TriggerZones", "Exile"))) {
 						continue
 					}
 					validCard, ok := t.Param("ValidCard")
@@ -2301,8 +2309,9 @@ func hasZoneOrAny(t *compile.Ability, key string, zone ZoneType) bool {
 // needing a reference vocabulary this predicate does not have);
 // ExcludedOrigins$/ExcludedDestinations$ (2, 1 -- 0 real lines combine one
 // with an Origin$/Destination$ this predicate already resolves, so skipping
-// the line outright costs nothing today). Fizzle$ carries 0 real lines,
-// dormant.
+// the line outright costs nothing today). Fizzle$ is only on the Haunt
+// keyword's synthesized stack-to-graveyard line, which
+// checkSpellToGraveyardTriggers (haunteffect.go) reads instead.
 var changesZoneUnresolvedParams = [...]string{
 	"ValidCause", "NotThisAbility", "ConditionYouCastThisTurn",
 	"CheckOnTriggeredCard", "ExcludedOrigins", "ExcludedDestinations", "Fizzle",
