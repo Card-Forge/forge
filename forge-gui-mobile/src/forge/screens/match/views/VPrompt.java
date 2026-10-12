@@ -22,10 +22,16 @@ import forge.util.TextBounds;
 import forge.util.Utils;
 
 public class VPrompt extends FContainer {
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
-    public static final float BTN_WIDTH = HEIGHT * 1.5f;
-    public static final float PADDING = Utils.scale(2);
+    public static float HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    public static float BTN_WIDTH = HEIGHT * 1.5f;
+    public static float PADDING = Utils.scale(2);
     public static final FSkinFont FONT = FSkinFont.get(14);
+
+    public static void updateDimensions() {
+        HEIGHT = Utils.AVG_FINGER_HEIGHT;
+        BTN_WIDTH = HEIGHT * 1.5f;
+        PADDING = Utils.scale(2);
+    }
     public static FSkinColor getBackColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_THEME2);

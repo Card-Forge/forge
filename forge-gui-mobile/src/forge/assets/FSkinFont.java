@@ -50,8 +50,15 @@ public class FSkinFont {
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
     }
+    private static final HashMap<Integer, FSkinFont> unscaledFonts = new HashMap<>();
+
     public static FSkinFont get(final int unscaledSize) {
-        return _get((int)Utils.scale(unscaledSize));
+        FSkinFont skinFont = unscaledFonts.get(unscaledSize);
+        if (skinFont == null) {
+            skinFont = new FSkinFont(unscaledSize, true);
+            unscaledFonts.put(unscaledSize, skinFont);
+        }
+        return skinFont;
     }
     public static FSkinFont _get(final int scaledSize) {
         FSkinFont skinFont = Forge.getAssets().fonts().get(scaledSize);
@@ -97,11 +104,29 @@ public class FSkinFont {
         for (FSkinFont skinFont : Forge.getAssets().fonts().values()) {
             skinFont.updateFont();
         }
+        for (FSkinFont skinFont : unscaledFonts.values()) {
+            skinFont.syncUnscaled();
+        }
     }
 
-    private final int fontSize;
-    private final float scale;
+    private int unscaledSize = -1;
+    private int fontSize;
+    private float scale;
     BitmapFont font;
+
+    private FSkinFont(int unscaledSize0, boolean isUnscaled) {
+        this.unscaledSize = unscaledSize0;
+        int scaledSize = (int) Utils.scale(unscaledSize0);
+        if (scaledSize > MAX_FONT_SIZE) {
+            scale = (float)scaledSize / MAX_FONT_SIZE;
+        } else if (scaledSize < MIN_FONT_SIZE) {
+            scale = (float)scaledSize / MIN_FONT_SIZE;
+        } else {
+            scale = 1;
+        }
+        fontSize = scaledSize;
+        syncUnscaled();
+    }
 
     private FSkinFont(int fontSize0) {
         if (fontSize0 > MAX_FONT_SIZE) {
@@ -116,6 +141,24 @@ public class FSkinFont {
         fontSize = fontSize0;
         updateFont();
     }
+
+    public void syncUnscaled() {
+        if (unscaledSize > 0) {
+            try {
+                if (Forge.getAssets() == null || Forge.getAssets().fonts() == null) {
+                    return;
+                }
+                int newScaledSize = (int) Utils.scale(unscaledSize);
+                FSkinFont base = _get(newScaledSize);
+                if (base != null) {
+                    this.fontSize = base.fontSize;
+                    this.scale = base.scale;
+                    this.font = base.font;
+                }
+            } catch (Exception ignored) {
+            }
+        }
+    }
     static int indexOf (CharSequence text, char ch, int start) {
         final int n = text.length();
         for (; start < n; start++)
@@ -124,6 +167,7 @@ public class FSkinFont {
 
     }
     public int computeVisibleGlyphs (CharSequence str, int start, int end, float availableWidth) {
+        updateScale();
         if (font == null)
             return 0;
         BitmapFontData data = font.getData();
@@ -280,8 +324,9 @@ public class FSkinFont {
 
     //update scale of font if needed
     private void updateScale() {
+        syncUnscaled();
         try {
-            if (font.getScaleX() != scale) {
+            if (font != null && font.getScaleX() != scale) {
                 font.getData().setScale(scale);
             }
         } catch (Exception e) {
@@ -290,18 +335,22 @@ public class FSkinFont {
     }
 
     public boolean canShrink() {
+        syncUnscaled();
         return fontSize > MIN_FONT_SIZE;
     }
 
     public boolean canIncrease() {
+        syncUnscaled();
         return MAX_FONT_SIZE - fontSize > 2;
     }
 
     public FSkinFont shrink() {
+        syncUnscaled();
         return _get(fontSize - 1);
     }
 
     public FSkinFont increase() {
+        syncUnscaled();
         return _get(fontSize + 3);
     }
 

@@ -63,6 +63,39 @@ public class SplashScreen extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        layoutButtons();
+    }
+
+    private void layoutButtons() {
+        if (!init || btnHome == null || btnAdventure == null || splashTexture == null) {
+            return;
+        }
+        float x, y, w, h;
+        float backgroundRatio = (float) splashTexture.getRegionWidth() / splashTexture.getRegionHeight();
+        float screenRatio = getWidth() / getHeight();
+        if (backgroundRatio > screenRatio) {
+            x = 0;
+            w = getWidth();
+            h = getWidth() / backgroundRatio;
+            y = (getHeight() - h) / 2;
+        } else {
+            y = 0;
+            h = getHeight();
+            w = getHeight() * backgroundRatio;
+            x = (getWidth() - w) / 2;
+        }
+        y += h * 295f / 450f;
+        float padding = 20f / 450f * w;
+        float height = 57f / 450f * h;
+        float btn_w = Math.min(w - 2 * padding, 600f);
+        float btn_x = (getWidth() - btn_w) / 2;
+        float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
+        float btn_y = (y + padding) * multiplier;
+        if (btn_y + 2 * height + padding / 2 > getHeight() - 20) {
+            btn_y = getHeight() - (2 * height + padding / 2) - 20;
+        }
+        btnHome.setBounds(btn_x, btn_y, btn_w, height);
+        btnAdventure.setBounds(btn_x, btn_y + height + padding / 2, btn_w, height);
     }
 
     //prepare for showing dialogs on top of splash screen if needed
@@ -128,12 +161,12 @@ public class SplashScreen extends FContainer {
             if (backgroundRatio > screenRatio) {
                 x = 0;
                 w = getWidth();
-                h = getWidth() * backgroundRatio;
+                h = getWidth() / backgroundRatio;
                 y = (getHeight() - h) / 2;
             } else {
                 y = 0;
                 h = getHeight();
-                w = getHeight() / backgroundRatio;
+                w = getHeight() * backgroundRatio;
                 x = (getWidth() - w) / 2;
             }
             float hmod = Forge.isLandscapeMode() ? 1f : 1.3f;
@@ -270,12 +303,12 @@ public class SplashScreen extends FContainer {
         if (backgroundRatio > screenRatio) {
             x = 0;
             w = getWidth();
-            h = getWidth() * backgroundRatio;
+            h = getWidth() / backgroundRatio;
             y = (getHeight() - h) / 2;
         } else {
             y = 0;
             h = getHeight();
-            w = getHeight() / backgroundRatio;
+            w = getHeight() * backgroundRatio;
             x = (getWidth() - w) / 2;
         }
         if (FSkin.getLogo() != null) {
@@ -284,9 +317,6 @@ public class SplashScreen extends FContainer {
         } else {
             g.drawImage(FSkinImage.LOGO, getWidth() / 2 - (FSkinImage.LOGO.getWidth() * 2f) / 2, getHeight() / 2 - (FSkinImage.LOGO.getHeight() * 2f) / 1.3f, FSkinImage.LOGO.getWidth() * 2f, FSkinImage.LOGO.getHeight() * 2f);
         }
-        y += h * 295f / 450f;
-        float padding = 20f / 450f * w;
-        float height = 57f / 450f * h;
 
         if (!init) {
             init = true;
@@ -318,16 +348,11 @@ public class SplashScreen extends FContainer {
                     bgAnimation.openAdventure = false;
                 }
             });
-            float btn_w = (w - 2 * padding);
-            float btn_x = x + padding;
-            float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
-            float btn_y = (y + padding) * multiplier;
             btnHome.setFont(FSkinFont.get(22));
             btnAdventure.setFont(FSkinFont.get(22));
-            btnHome.setBounds(btn_x, btn_y, btn_w, height);
             add(btnHome);
-            btnAdventure.setBounds(btn_x, btn_y + height + padding / 2, btn_w, height);
             add(btnAdventure);
+            layoutButtons();
         }
     }
 
@@ -351,12 +376,12 @@ public class SplashScreen extends FContainer {
         if (backgroundRatio > screenRatio) {
             x = 0;
             w = getWidth();
-            h = getWidth() * backgroundRatio;
+            h = getWidth() / backgroundRatio;
             y = (getHeight() - h) / 2;
         } else {
             y = 0;
             h = getHeight();
-            w = getHeight() / backgroundRatio;
+            w = getHeight() * backgroundRatio;
             x = (getWidth() - w) / 2;
         }
         g.drawImage(splashTexture, x, y, w, h);

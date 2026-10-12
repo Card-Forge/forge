@@ -22,8 +22,13 @@ import forge.util.Utils;
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class VAvatar extends FDisplayObject {
-    public static final float WIDTH = Utils.AVG_FINGER_WIDTH;
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    public static float WIDTH = Utils.AVG_FINGER_WIDTH;
+    public static float HEIGHT = Utils.AVG_FINGER_HEIGHT;
+
+    public static void updateDimensions() {
+        WIDTH = Utils.AVG_FINGER_WIDTH;
+        HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    }
 
     private final PlayerView player;
     private final FImage image;
