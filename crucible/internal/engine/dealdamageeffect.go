@@ -172,6 +172,7 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 // called twice for no reason once a.Targets already holds the mixed answer.
 func dealDamageTargets(g *Game, controller PlayerController, a *Ability, dmg int, deathtouch bool) error {
 	var table damageTable
+	radiant := g.radianceCards(a)
 	for _, e := range a.Targets {
 		if cid, ok := e.AsCard(); ok {
 			// CR 608.2b-adjacent, DealDamage's own (DamageDealEffect.java):
@@ -197,6 +198,18 @@ func dealDamageTargets(g *Game, controller PlayerController, a *Ability, dmg int
 			continue
 		}
 		g.dealPlayerDamage(controller, a.Source, pid, dmg, false, &table)
+	}
+	// Radiance$: the permanents sharing a color with a target take the same
+	// damage (DamageDealEffect.java:195, :263-267).
+	for _, cid := range radiant {
+		if g.Card(cid).Zone != Battlefield {
+			continue
+		}
+		if a.damageMap != nil {
+			a.damageMap.add(a.Source, CardEntity(cid), dmg)
+			continue
+		}
+		g.dealPermanentDamage(controller, a.Source, cid, dmg, deathtouch, false, &table)
 	}
 	if a.damageMap == nil {
 		g.checkDamageTableTriggers(controller, table, false)

@@ -60,6 +60,8 @@ func (untapEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 	if err != nil {
 		return fmt.Errorf("engine: Untap: %w", err)
 	}
+	// Radiance$ (UntapEffect.java:53).
+	cards = append(cards, g.radianceCards(a)...)
 	for _, id := range cards {
 		c := g.Card(id)
 		// A phased-out permanent is skipped (UntapEffect.java:57).

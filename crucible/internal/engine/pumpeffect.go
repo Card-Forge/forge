@@ -45,8 +45,7 @@ import (
 // NoteNumber$ (0/0/0/0) -- Player.noteNumberForName's own tracking, nothing
 // downstream reads yet;
 // Optional$/OptionQuestion$ (0/0) -- a "may" confirmation this port's own
-// PlayerController has no hook for; Radiance$ (0) -- CardUtil.getRadiance's
-// own "and everything else that shares a color" fan-out.
+// PlayerController has no hook for.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
 // through Registry.Resolve (effect.go) once this effect's own body
@@ -80,7 +79,7 @@ var pumpUnresolvedParams = [...]string{
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions", "AtEOT",
 	"DefinedLandwalk", "RememberPumped", "LeaveBattlefield",
 	"NoteCards", "NoteCardsFor", "ClearNotedCardsFor",
-	"NoteNumber", "Optional", "OptionQuestion", "Radiance",
+	"NoteNumber", "Optional", "OptionQuestion",
 }
 
 // pumpImprint is PumpEffect.java:431-437: ImprintCards$ adds the defined
@@ -202,6 +201,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		}
 		cards = nil
 	}
+	// Radiance$ (PumpEffect.java:489): the permanents sharing a color with a
+	// target are pumped with it.
+	cards = append(cards, g.radianceCards(a)...)
 	// PumpEffect.java's tgtPlayers loop (:498-504) gives a player keywords only
 	// (a player has no power or toughness): getTargetPlayers is the targeted
 	// players, or the players Defined$ names ("You"; a card-only spec names

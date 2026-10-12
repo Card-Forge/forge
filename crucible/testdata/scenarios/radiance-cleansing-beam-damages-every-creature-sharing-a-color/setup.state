@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Cleansing Beam|Id:1
+humanbattlefield=Mountain|Id:2;Mountain|Id:3;Mountain|Id:4;Mountain|Id:5;Mountain|Id:6;Llanowar Elves|Id:7
+aibattlefield=Grizzly Bears|Id:8;Savannah Lions|Id:9

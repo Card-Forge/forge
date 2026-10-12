@@ -17,43 +17,33 @@ import (
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
-// targetUnresolvedParams names ValidTgts$'s own structural siblings this
-// port does not parse: Radiance$ (4 real corpus lines -- "and each other
-// permanent that shares a color with it," a second, derived candidate set
-// no single ValidTgts$ evaluation produces), its own further mechanic.
+// Radiance$ ("and each other permanent that shares a color with it") is not
+// a targeting shape: the extra permanents are never announced, so choosing
+// targets treats a Radiance$ line like any other ValidTgts$ line. The
+// derived set is computed when the effect resolves (radianceCards, below).
 // TargetsForEachPlayer$ (one target per player) reads as
 // TargetsWithDifferentControllers$ plus a fizzle-time check that no target
 // changed controller (trimTargetSet, recordForEachControllers).
-// TargetUnique$ is not here: SpellAbility.getUniqueTargets collects only the
+// TargetUnique$ is not parsed: SpellAbility.getUniqueTargets collects only the
 // ancestors' targets (SpellAbility.java:2040-2050), and a root or Charm mode
 // has none, so on the lines this port targets it excludes nothing; its 131
 // real lines mostly sit on SubAbility$ lines this port never targets
-// separately. A line naming any of these is treated the
-// same as CR 603.3c's own "no legal targets" case (below) rather than
-// erroring: both mean the ability does not do anything, and this port has
-// no way to tell the difference from outside without building the shape
-// (PORT-8/GO-7's "skip rather than guess," folded into the identical bucket
-// a genuinely empty candidate set already uses since the two are
-// observationally identical).
-var targetUnresolvedParams = [...]string{
-	"Radiance",
-}
+// separately.
 
 // resolveTargets is CR 601.2c/603.3b's own "choose targets," and reports
 // whether a is still eligible to be pushed onto the stack at all. true with
 // a.Targets left nil means there was nothing to target in the first place --
-// no ValidTgts$ named. false means either CR 603.3c's own real rule ("if
-// the ability requires a target and there are no legal targets, it doesn't
-// go on the stack") or a target shape targetUnresolvedParams names above --
-// the two are folded into the same outcome rather than given an error
-// return, because a caller cannot act on "an ability the game decided not
-// to put on the stack" any differently than "an ability this port cannot
-// parse the targeting for": either way, nothing happens, and GO-7's own
-// "fail one game, not the batch" reasoning does not apply to a card that
-// was never going to do anything this port can tell.
+// no ValidTgts$ named. false means CR 603.3c's own real rule ("if the
+// ability requires a target and there are no legal targets, it doesn't go on
+// the stack") or a target shape this port cannot offer (TargetType$ other
+// than Spell, an unresolvable TargetMin$) -- the two are folded into the same
+// outcome rather than given an error return, because a caller cannot act on
+// "an ability the game decided not to put on the stack" any differently than
+// "an ability this port cannot parse the targeting for."
 //
 // TargetMin$/TargetMax$ (1/1 when neither is named, TargetRestrictions.
 // java's own getOrDefault) resolve through resolveNamedAmount exactly as
@@ -361,8 +351,8 @@ type targetChoice struct {
 // TargetMin$/TargetMax$, the scan resolveTargets asks the controller over
 // and a copy's new targets are chosen from (CR 707.10c, copySpell,
 // copyspellabilityeffect.go). named is false when a names no ValidTgts$ at
-// all; ok is false when it does but has no legal candidate or a shape
-// targetUnresolvedParams names -- resolveTargets' own two outcomes.
+// all; ok is false when it does but has no legal candidate or a shape this
+// port cannot offer -- resolveTargets' own two outcomes.
 func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool) {
 	validTgts, named := a.Params.Param("ValidTgts")
 	if !named && a.API == APIEarthbend {
@@ -373,12 +363,6 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	if !named {
 		return targetChoice{}, false, true
 	}
-	for _, key := range targetUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return targetChoice{}, true, false
-		}
-	}
-
 	source := g.Card(a.Source)
 	minStr, ok := a.Params.Param("TargetMin")
 	if !ok {
@@ -1158,4 +1142,73 @@ func (g *Game) auraTargetStillLegal(a *Ability) bool {
 		return true
 	}
 	return Matches(g, target, spec, a.Controller, a.Source)
+}
+
+// radianceSpec is the ValidTgts$ of the ability whose targets Radiance$
+// fans out from, or "" when none does: CardUtil.getRadiance reads
+// SpellAbility.getSATargetingCard, a itself when it targets a card, else the
+// nearest ancestor that does (CardUtil.java:149-153), and only a Radiance$
+// line there counts -- a sub-ability needs no Radiance$ of its own. radiance
+// carries the ancestor's answer (resolveSubAbility).
+func (a *Ability) radianceSpec() string {
+	if spec, ok := a.Params.Param("ValidTgts"); ok {
+		for _, e := range a.Targets {
+			if _, isCard := e.AsCard(); isCard {
+				if _, rad := a.Params.Param("Radiance"); rad {
+					return spec
+				}
+				return ""
+			}
+		}
+	}
+	return a.radiance
+}
+
+// radianceCards is CardUtil.getRadiance (CardUtil.java:149-182): every
+// battlefield permanent, other than a target, that shares a color with some
+// target and is valid for the targeting ability's ValidTgts$ -- evaluated for
+// the host's controller, so hexproof and the like do not matter, the cards
+// were never targeted. Colors are visited in WUBRG order, then each color's
+// permanents in battlefield order (Game.getColoredCardsInPlay); a permanent
+// of two shared colors appears once. Computed at resolution from the
+// targets' current colors.
+func (g *Game) radianceCards(a *Ability) []CardID {
+	specStr := a.radianceSpec()
+	if specStr == "" {
+		return nil
+	}
+	targets := a.Targets
+	if _, own := a.Params.Param("ValidTgts"); !own && len(targets) == 0 {
+		targets = a.parentTargets
+	}
+	var shared mana.Colors
+	isTarget := make(map[CardID]bool, len(targets))
+	for _, e := range targets {
+		if id, ok := e.AsCard(); ok {
+			isTarget[id] = true
+			shared |= g.Card(id).Colors()
+		}
+	}
+	spec := valid.Parse(specStr)
+	controller := g.Card(a.Source).Controller()
+	var out []CardID
+	seen := map[CardID]bool{}
+	for _, color := range [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green} {
+		if !shared.Has(color) {
+			continue
+		}
+		for _, pid := range g.Players() {
+			for _, cid := range g.Zone(Battlefield, pid).Cards() {
+				c := g.Card(cid)
+				// A phased-out permanent is not on the battlefield for
+				// getCards (PlayerZoneBattlefield.java:75).
+				if seen[cid] || isTarget[cid] || c.IsPhasedOut() || !c.Colors().Has(color) || !Matches(g, c, spec, controller, a.Source) {
+					continue
+				}
+				seen[cid] = true
+				out = append(out, cid)
+			}
+		}
+	}
+	return out
 }

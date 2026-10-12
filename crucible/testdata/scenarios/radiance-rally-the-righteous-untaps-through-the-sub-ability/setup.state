@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Rally the Righteous|Id:1
+humanbattlefield=Mountain|Id:2;Plains|Id:3;Plains|Id:4;Savannah Lions|Id:5|Tapped;Elite Vanguard|Id:6|Tapped
+aibattlefield=Grizzly Bears|Id:7|Tapped

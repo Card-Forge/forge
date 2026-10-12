@@ -16,12 +16,12 @@ import (
 // "Protection:<type>" for a card type (CardType.isACardType). Gains$ is a
 // comma list, ChosenColor (the host's chosen colors), or Choice: the
 // activator picks one of Choices$ (AnyColor expands to the five colors,
-// CardType to every card type). Choser$, Gains$ Defined... and the
-// Radiance$ fan-out fail closed.
+// CardType to every card type). Choser$ and Gains$ Defined... fail
+// closed. Radiance$ adds the permanents sharing a color with a target.
 type protectionEffect struct{}
 
 func (protectionEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Protection", "Choser", "Radiance", "Condition"); err != nil {
+	if err := rejectParams(a, "Protection", "Choser", "Condition"); err != nil {
 		return err
 	}
 	permanent, err := animateDuration(a, "Protection")
@@ -40,6 +40,8 @@ func (protectionEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if err != nil {
 		return fmt.Errorf("engine: Protection: %w", err)
 	}
+	// Radiance$ (ProtectEffect.java:141).
+	cards = append(cards, g.radianceCards(a)...)
 	g.animateCards(animateRecord{Permanent: permanent, AddKeywords: protectionKeywords(gains, true)}, cards)
 	return nil
 }

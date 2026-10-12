@@ -395,14 +395,11 @@ func TestLoseLifeEffectValidTgtsUnrecognizedPropertySkipsSilently(t *testing.T) 
 	}
 }
 
-// TestLoseLifeEffectValidTgtsRadianceSkipsSilently proves resolveTargets'
-// own structural blocklist (targeting.go): Radiance$ (0 real LoseLife
-// lines combine it, a constructed case proving the general mechanism
-// rather than a real corpus shape) is folded into the identical
-// "no legal targets" outcome a genuinely empty candidate set already gets,
-// rather than an error -- no controller call at all (an unconsumed queue
-// slot proves it).
-func TestLoseLifeEffectValidTgtsRadianceSkipsSilently(t *testing.T) {
+// TestLoseLifeEffectValidTgtsRadianceIgnoresPlayerTargets proves Radiance$
+// (0 real LoseLife lines combine it, a constructed case) fans out from card
+// targets only (CardUtil.getRadiance): a player target is chosen and loses
+// life as for any ValidTgts$ line, with nothing added.
+func TestLoseLifeEffectValidTgtsRadianceIgnoresPlayerTargets(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -411,14 +408,13 @@ func TestLoseLifeEffectValidTgtsRadianceSkipsSilently(t *testing.T) {
 	g.Player(p).Life, g.Player(opp).Life = 20, 20
 
 	c := engine.NewScriptedController()
-	// No QueueTargets call: Radiance$ must never reach the controller, or
-	// this panics on an exhausted queue.
+	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(opp)})
 	def := etbLoseLifeTriggerDefParams(t, "Test Radiance", "ValidTgts$ Opponent | Radiance$ True | LifeAmount$ 3", nil)
 	if err := castETBLoseLifeOnController(t, g, p, def, c); err != nil {
 		t.Fatalf("ResolveStack: %v", err)
 	}
-	if got := g.Player(opp).Life; got != 20 {
-		t.Errorf("opponent life = %d, want unchanged 20", got)
+	if got := g.Player(opp).Life; got != 17 {
+		t.Errorf("opponent life = %d, want 17", got)
 	}
 }
 

@@ -1,0 +1,11 @@
+# Radiance on Destroy (DestroyEffect.java:54): Leave No Trace targets the
+# human's white Glorious Anthem; the ai's white Crusade is destroyed with it
+# although never targeted. The green Gaea's Anthem shares no color and stays.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue targets 4
+queue paygeneric W
+queue action human cast 1
+passpriority

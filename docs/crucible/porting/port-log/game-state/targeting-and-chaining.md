@@ -24,11 +24,8 @@ ability stays eligible to be pushed at all -- `bool`, not `(bool, error)` -- for
 and "a target shape this port cannot parse" are indistinguishable from the caller's own vantage point. Both mean the
 ability does nothing. Giving the second case a loud error and the first a quiet `false` would draw a distinction nothing
 outside `resolveTargets` itself could act on differently, and GO-7's own "fail one game, not the batch" reasoning has
-nothing to grab onto for a card that was never going to resolve either way. A small blocklist (`targetUnresolvedParams`:
-`Radiance$`, 4 real corpus lines -- "and each other permanent that shares a color with it," a second, derived candidate
-set no single `ValidTgts$` evaluation produces on its own; `TargetsForEachPlayer$`/
-`TargetsWithDefinedController$`/`TargetUnique$`, 0 real lines each) folds into that same `false` rather than being
-checked by every future consumer separately.
+nothing to grab onto for a card that was never going to resolve either way. `Radiance$` is not such a shape: it adds
+permanents at resolution, never at targeting ([m6-r25b-radiance.md](m6-r25b-radiance.md)).
 
 `TargetMin$`/`TargetMax$` resolve through `resolveNamedAmount` exactly as every other numeric param already does,
 defaulting to `1`/`1` when neither is named -- `TargetRestrictions.java`'s own `getOrDefault`. Candidate computation
@@ -111,8 +108,8 @@ genuinely unsupported.
 draining the chosen opponent and leaving the caster untouched, `ValidTgts$ Player` legally choosing the caster
 themselves, `ValidTgts$` winning over a `Defined$` present on the identical line (0 real lines combine them, but the
 dispatch itself should not silently prefer the wrong one if it ever happened), the unrecognized-property line resolving
-to zero legal targets rather than a wrong one, `Radiance$` folding into that same "no legal targets" bucket, and
-`TargetMax$ 2` reaching `ChooseTargets` for two opponents at once. `control_test.go`'s own
+to zero legal targets rather than a wrong one, `Radiance$` with a player target changing nothing, and `TargetMax$ 2`
+reaching `ChooseTargets` for two opponents at once. `control_test.go`'s own
 `TestScriptedControllerEachQueuePanicsWhenExhausted` table gained a `"targets"` row, and `mulligan_test.go`'s
 `scriptedMulliganController` gained a panicking `ChooseTargets` stub. New `enginelint` group `targeting`
 (`id`/`card`/`game`/`player`/`ability`/`control`/`valid`/`amount`/`zone`), `trigger` gaining it as a dependency;

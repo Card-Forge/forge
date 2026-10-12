@@ -1,0 +1,14 @@
+# Radiance on an Untap whose pump rides a SubAbility$ with Defined$ ParentTarget
+# (Rally the Righteous): getRadiance walks up to the ancestor that targets
+# (SpellAbility.getSATargetingCard), so the white Elite Vanguard untaps with the
+# targeted Savannah Lions. The tapped green Grizzly Bears shares no color and
+# stays tapped.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 W
+tapformana human 4 W
+queue targets 5
+queue paygeneric W
+queue action human cast 1
+passpriority

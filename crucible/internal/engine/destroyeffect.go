@@ -77,6 +77,9 @@ func (destroyEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 	if err != nil {
 		return fmt.Errorf("engine: Destroy: %w", err)
 	}
+	// Radiance$ (DestroyEffect.java:54): the untargeted permanents are
+	// destroyed after the targets.
+	cards = append(cards, g.radianceCards(a)...)
 	_, remember := a.Params.Param("RememberDestroyed")
 	_, noRegen := a.Params.Param("NoRegen")
 	var destroyed []CardID

@@ -76,6 +76,7 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		Target:            parent.Target,
 		Targets:           parent.Targets,
 		parentTargets:     parentTargetsOf(parent),
+		radiance:          parent.radianceSpec(),
 		Params:            sub.Ability,
 		Amounts:           parent.Amounts,
 		TriggerRemembered: parent.TriggerRemembered,

@@ -127,6 +127,9 @@ type Ability struct {
 	// some (Defined$ ParentTarget); a sub-ability that chooses its own keeps
 	// the parent's here while Targets holds its own.
 	parentTargets []EntityID
+	// radiance is the ValidTgts$ of the nearest ancestor that targets a card
+	// and names Radiance$, "" when none does (radianceSpec).
+	radiance string
 	// chainTargets are the targets chosen for the sub-abilities of this
 	// ability that name their own ValidTgts$ (resolveChainTargets).
 	chainTargets []chainTarget

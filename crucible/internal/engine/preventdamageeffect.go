@@ -11,12 +11,12 @@ import "fmt"
 // replacement with PreventionEffect$ NextN, which drops away at end of turn
 // and, for a card, when it leaves the battlefield; this port keeps the same
 // shield as a preventShield record (applyPreventShields). Divided amounts,
-// Radiance$, CardChoices$/PlayerChoices$ and PreventionSubAbility$ are not
+// CardChoices$/PlayerChoices$ and PreventionSubAbility$ are not
 // resolved.
 type preventDamageEffect struct{}
 
 func (preventDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "PreventDamage", "Condition", "DividedAsYouChoose", "Radiance",
+	if err := rejectParams(a, "PreventDamage", "Condition", "DividedAsYouChoose",
 		"CardChoices", "PlayerChoices", "PreventionSubAbility", "ShieldEffectTarget"); err != nil {
 		return err
 	}
@@ -51,6 +51,10 @@ func (preventDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 			continue
 		}
 		g.preventShields = append(g.preventShields, preventShield{Target: t, Remaining: n})
+	}
+	// Radiance$ (DamagePreventEffect.java:102, :115-119).
+	for _, id := range g.radianceCards(a) {
+		g.preventShields = append(g.preventShields, preventShield{Target: CardEntity(id), Remaining: n})
 	}
 	return nil
 }

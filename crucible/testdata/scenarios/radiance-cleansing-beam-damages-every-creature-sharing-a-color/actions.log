@@ -1,0 +1,19 @@
+# Radiance (CardUtil.getRadiance, CardUtil.java:149): human casts Cleansing Beam
+# targeting only the ai's Grizzly Bears. Only the Bears are announced as a
+# target, yet the 2 damage also reaches Llanowar Elves, the other green
+# creature (on the caster's own side: any controller counts). The white
+# Savannah Lions shares no color with the target and is untouched.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+tapformana human 6 R
+queue targets 8
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue action human cast 1
+passpriority

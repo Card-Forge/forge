@@ -179,7 +179,7 @@ func TestFiftyPackFailsClosed(t *testing.T) {
 		"DB$ NameCard | Defined$ You | ChooseFromDefinedCards$ Self",
 		"DB$ NameCard | Defined$ You | AtRandom$ True",
 		"DB$ NameCard | Defined$ You",
-		"DB$ PreventDamage | Defined$ You | Amount$ 1 | Radiance$ True",
+		"DB$ PreventDamage | Defined$ You | Amount$ 1 | DividedAsYouChoose$ True",
 		"DB$ PreventDamage | Defined$ You",
 		"DB$ PreventDamage | Defined$ You | Amount$ Bogus",
 		"DB$ DigMultiple | DigNum$ 2 | ChangeValid$ Card | ChooseAmount$ 1",

@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Plains|Tapped;Plains|Tapped;Gaea's Anthem
+humangraveyard=Glorious Anthem;Leave No Trace
+ailife=20
+aigraveyard=Crusade
