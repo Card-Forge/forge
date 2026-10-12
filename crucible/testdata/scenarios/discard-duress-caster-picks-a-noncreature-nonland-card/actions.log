@@ -1,0 +1,12 @@
+# CR 701.8, 115.1: Duress targets an opponent; Mode$ RevealYouChoose makes the
+# caster, not the target, choose among the target's DiscardValid$
+# Card.nonCreature+nonLand cards (DiscardEffect.java:226-264). The caster
+# picks Lightning Bolt; the target discards it. Grizzly Bears and Mountain
+# are never offered, and Counterspell stays because NumCards$ is 1.
+startturn human
+advance 3
+tapformana human 2 B
+queue targets ai
+queue cardchoice 3
+castspell human 1
+resolvestack

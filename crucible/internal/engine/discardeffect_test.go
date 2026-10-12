@@ -229,6 +229,7 @@ func TestDiscardEffectResolvesNamedNumCardsSVar(t *testing.T) {
 
 	c := engine.NewScriptedController()
 	c.QueueDiscardChoice([]engine.CardID{toss1, toss2})
+	c.QueueCardOrder([]engine.CardID{toss1, toss2})
 
 	def := etbDiscardTriggerDefParams(t, "Test Named NumCards", "Mode$ TgtChoose | Defined$ You | NumCards$ X", map[string]string{"X": "2"})
 	if _, err := castETBDiscard(t, g, p, def, c); err != nil {
@@ -260,10 +261,9 @@ func TestDiscardEffectRejectsMissingMode(t *testing.T) {
 	}
 }
 
-// TestDiscardEffectRejectsUnsupportedMode proves a Mode$ other than
-// TgtChoose (each its own further shape -- discardeffect.go's own doc
-// comment) fails loudly by name rather than falling through to TgtChoose's
-// own behavior.
+// TestDiscardEffectRejectsUnsupportedMode proves a Mode$ DiscardEffect.java
+// does not know fails loudly by name rather than falling through to
+// TgtChoose's own behavior.
 func TestDiscardEffectRejectsUnsupportedMode(t *testing.T) {
 	t.Parallel()
 
@@ -273,7 +273,7 @@ func TestDiscardEffectRejectsUnsupportedMode(t *testing.T) {
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 
 	c := engine.NewScriptedController()
-	_, err := castETBDiscard(t, g, p, etbDiscardTriggerDefParams(t, "Test Random Mode", "Mode$ Random | Defined$ You | NumCards$ 1", nil), c)
+	_, err := castETBDiscard(t, g, p, etbDiscardTriggerDefParams(t, "Test Bogus Mode", "Mode$ Bogus | Defined$ You | NumCards$ 1", nil), c)
 	if err == nil {
 		t.Fatal("ResolveStack: got nil error, want one naming Mode")
 	}
@@ -282,9 +282,6 @@ func TestDiscardEffectRejectsUnsupportedMode(t *testing.T) {
 	}
 }
 
-// TestDiscardEffectRejectsSubAbilityChain proves SubAbility$ (no chaining
-// mechanism exists yet) is a real error rather than silently dropping the
-// chained ability (PORT-8/GO-7).
 // TestDiscardEffectChainsIntoSubAbility proves SubAbility$ no longer
 // blocks Discard's own resolution now that resolveSubAbility (subability.go)
 // exists: the chained GainLife runs too, not just Discard's own body.
@@ -313,29 +310,27 @@ func TestDiscardEffectChainsIntoSubAbility(t *testing.T) {
 	}
 }
 
-// TestDiscardEffectRejectsValidTgts proves discardEffect itself still
-// rejects a real target: resolveTargets (targeting.go) now resolves
-// ValidTgts$ generically before this ability is even pushed, so the target
-// is chosen without issue, but discardEffect has not been extended to
-// consume Targeted (defined.go) yet -- its own blocked-param list still
-// names ValidTgts$, and this proves that check still fires.
-func TestDiscardEffectRejectsValidTgts(t *testing.T) {
+// TestDiscardEffectTargetedPlayerDiscards proves a ValidTgts$ trigger, its
+// target chosen by resolveTargets (targeting.go) when it goes on the stack,
+// makes the target player discard -- getTargetPlayers, not the controller.
+func TestDiscardEffectTargetedPlayerDiscards(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
-	p := g.Players()[0]
+	p, opp := g.Players()[0], g.Players()[1]
 	g.SetTurnState(1, p, engine.Main1)
-	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
+	g.Player(p).Life, g.Player(opp).Life = 20, 20
+	oppCard := g.NewCard(nil, opp, engine.Hand)
 
-	def := etbDiscardTriggerDefParams(t, "Test ValidTgts", "Mode$ TgtChoose | NumCards$ 1 | ValidTgts$ Player", nil)
+	def := etbDiscardTriggerDefParams(t, "Test ValidTgts", "Mode$ TgtChoose | NumCards$ 1 | ValidTgts$ Opponent", nil)
 	c := engine.NewScriptedController()
-	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(p)})
-	_, err := castETBDiscard(t, g, p, def, c)
-	if err == nil {
-		t.Fatal("ResolveStack: got nil error, want one naming ValidTgts")
+	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(opp)})
+	c.QueueDiscardChoice([]engine.CardID{oppCard})
+	if _, err := castETBDiscard(t, g, p, def, c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
 	}
-	if !strings.Contains(err.Error(), "ValidTgts") {
-		t.Errorf("ResolveStack error = %q, want it to name ValidTgts$", err.Error())
+	if g.Card(oppCard).Zone != engine.Graveyard {
+		t.Errorf("target's card zone = %v, want Graveyard", g.Card(oppCard).Zone)
 	}
 }
 

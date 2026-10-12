@@ -1,0 +1,17 @@
+# CR 510.2, 603.2: Hypnotic Specter deals combat damage to the opponent, so
+# its Mode$ DamageDone trigger fires. Defined$ TriggeredTarget is the damaged
+# player (AbilityKey.Target, TriggerDamageDone.java:115), not the Specter's
+# controller, so the opponent discards at random (Mode$ Random,
+# DiscardEffect.java:183-198): the only card in their hand. The controller's
+# own hand is untouched.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage
+resolvestack

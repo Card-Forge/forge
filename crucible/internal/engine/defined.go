@@ -184,6 +184,16 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no player", defined)
 		}
 		candidates = []PlayerID{refs.triggered.player}
+	case "TriggeredTarget":
+		// AbilityUtils.getDefinedPlayers' "Triggered" branch over
+		// AbilityKey.Target: a player target is itself; a card target names
+		// no player (Java adds only a Player object here). Unset is an error.
+		if refs.triggered.target == NoEntity {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no target", defined)
+		}
+		if pid, ok := refs.triggered.target.AsPlayer(); ok {
+			candidates = []PlayerID{pid}
+		}
 	case "TriggeredSource", "TriggeredSourceController":
 		// AbilityUtils.getDefinedPlayers' "Triggered" branch over
 		// AbilityKey.Source: a player source is itself, a card source

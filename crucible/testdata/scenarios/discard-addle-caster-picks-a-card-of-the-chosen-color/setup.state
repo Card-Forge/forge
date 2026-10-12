@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Addle|Id:1
+humanbattlefield=Swamp|Id:2;Swamp|Id:3
+aihand=Lightning Bolt|Id:4;Shock|Id:5;Giant Growth|Id:6;Mountain|Id:7

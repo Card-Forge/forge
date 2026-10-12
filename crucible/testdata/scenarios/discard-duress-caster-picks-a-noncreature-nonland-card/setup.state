@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Duress|Id:1
+humanbattlefield=Swamp|Id:2
+aihand=Lightning Bolt|Id:3;Grizzly Bears|Id:4;Mountain|Id:5;Counterspell|Id:6

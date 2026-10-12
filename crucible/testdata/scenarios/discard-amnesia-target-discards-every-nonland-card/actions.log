@@ -1,0 +1,20 @@
+# CR 701.8: Amnesia's Mode$ RevealDiscardAll discards every hand card matching
+# DiscardValid$ Card.nonLand (DiscardEffect.java:209-225); the land stays. The
+# two cards go to the graveyard together, so their owner orders them
+# (GameActionUtil.orderCardsByTheirOwners, CR 613.7m): Grizzly Bears first,
+# then Lightning Bolt on top.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+tapformana human 7 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue targets ai
+queue cardorder 10,8
+castspell human 1
+resolvestack

@@ -10,7 +10,7 @@
 // this covers. CardProperty, CardStateProperty, PlayerProperty and
 // SpellAbilityProperty together answer 928 residual property names
 // (docs/crucible/porting/port-log/valid-strings.md); this is:
-// ChosenCard/ChosenCardStrict/nonChosenCard, IsRemembered and IsImprinted --
+// ChosenCard/ChosenCardStrict/nonChosenCard, ChosenColor, IsRemembered and IsImprinted --
 // membership in source's own Memory lists (sourceCard's own doc comment) --
 // EnchantedBy/EquippedBy/AttachedBy/FortifiedBy, bare form only (one check
 // in Java too, before it ever reaches CardProperty), inZone/inRealZone (c's
@@ -250,6 +250,16 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 			return !c.Type().HasStringType(strings.ToUpper(rest[:1]) + rest[1:])
 		}
 		return c.Type().HasStringType(chosen)
+	case strings.HasPrefix(name, "ChosenColor"):
+		// CardStateProperty.java:58-59: c has the color source chose
+		// (getChosenColor, the first of its chosen colors); no choice matches
+		// nothing. Memory keeps the chosen colors as a set, so "the first" is
+		// exact only for a single chosen color: none of the 56 corpus cards
+		// reading the property also carries a TwoColors$/OrColors$ choice, and
+		// Discard refuses a set of more (discardValidResolvable,
+		// discardeffect.go).
+		sc, ok := sourceCard(g, source)
+		return ok && c.Colors().HasAny(sc.Memory.ChosenColors())
 	case name == "ChosenSector":
 		// CardProperty.java:119: c is in the sector the source's controller
 		// chose (ChooseSector). Java NPEs on a source that chose none; no

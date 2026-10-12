@@ -1,0 +1,15 @@
+# CR 701.8: Addle chooses a color, then its sub-ability's target player
+# discards a card of that color the caster picks (Mode$ RevealYouChoose,
+# DiscardValid$ Card.ChosenColor -- CardStateProperty.java:58-59). The
+# target is chosen when the spell is cast; red is chosen on resolution, so
+# only Lightning Bolt and Shock are offered, and the caster takes Shock.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+queue targets ai
+queue colorchoice R
+queue cardchoice 5
+castspell human 1
+resolvestack

@@ -217,6 +217,7 @@ func TestDiscardedAllFiresOncePerBatchWithItsAmount(t *testing.T) {
 	c := engine.NewScriptedController()
 	hand := g.Zone(engine.Hand, p).Cards()
 	c.QueueDiscardChoice([]engine.CardID{hand[0], hand[1]})
+	c.QueueCardOrder([]engine.CardID{hand[0], hand[1]})
 	if err := resolveWith(t, g, p, c, "DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose"); err != nil {
 		t.Fatalf("resolve: %v", err)
 	}

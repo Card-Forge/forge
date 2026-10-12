@@ -862,7 +862,7 @@ func (g *Game) checkDamageDoneTriggersToCard(controller PlayerController, source
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageSourceObjects(g, source, amount)), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageSourceObjects(g, source, CardEntity(target), amount)), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -891,7 +891,7 @@ func (g *Game) checkDamageDoneTriggersToPlayer(controller PlayerController, sour
 						}
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageSourceObjects(g, source, amount)), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageSourceObjects(g, source, PlayerEntity(target), amount)), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -978,9 +978,11 @@ func damageAmountMatches(param string, amount, toughness int, hasToughness bool)
 // the damage source, with its controller read now -- Java stores an LKI
 // copy of the source -- so Defined$ TriggeredSourceController answers the
 // controller at damage time (The Monarch's "its controller becomes the
-// monarch").
-func damageSourceObjects(g *Game, source CardID, amount int) triggeredObjects {
-	return triggeredObjects{source: CardEntity(source), sourceController: g.Card(source).Controller(),
+// monarch"). target is AbilityKey.Target, the damaged card or player
+// (TriggerDamageDone.java:115), read by Defined$ TriggeredTarget (Abyssal
+// Specter's "that player discards a card").
+func damageSourceObjects(g *Game, source CardID, target EntityID, amount int) triggeredObjects {
+	return triggeredObjects{source: CardEntity(source), sourceController: g.Card(source).Controller(), target: target,
 		counts: triggerCounts{damage: amount, set: countDamage}}
 }
 
