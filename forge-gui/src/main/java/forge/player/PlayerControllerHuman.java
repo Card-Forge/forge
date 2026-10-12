@@ -1758,11 +1758,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
         final UndoManager undo = getGame().getUndoManager();
-        if (!isMacroActive() && !getGui().isNetGame()) {
+        if (!isMacroActive()) {
             if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
                 undo.barrier("Opponent's turn");
             } else {
-                undo.checkpoint(getGame());      // must come BEFORE the prompt is built
+                undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
             }
         }
         final InputPassPriority defaultInput = new InputPassPriority(this);
@@ -2757,7 +2757,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public boolean canUndoLastAction() {
         if (getGame().getPhaseHandler().getPriorityPlayer() != player) return false;
-        return getGame().getUndoManager().canUndo() && inputQueue.getInput() instanceof InputPassPriority;
+        return getGame().getUndoManager().canUndo(player) && inputQueue.getInput() instanceof InputPassPriority;
     }
 
     @Override

@@ -543,7 +543,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     return;
                 }
 
-                if (!whoDeclares.getController().isGuiPlayer()) {
+                if (!game.getUndoManager().isOwner(whoDeclares)) {
                     game.getUndoManager().barrier("Opponent declared attackers");
                 }
                 whoDeclares.getController().declareAttackers(playerTurn, combat);
@@ -672,7 +672,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     repRunParams.put(AbilityKey.Player, whoDeclaresBlockers);
                     ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
                     if (repres == ReplacementResult.NotReplaced) {
-                        if (!whoDeclaresBlockers.getController().isGuiPlayer()) {
+                        if (!game.getUndoManager().isOwner(whoDeclaresBlockers)) {
                             game.getUndoManager().barrier("Opponent declared blockers");
                         }
                         // If not replaced, run normal declare blockers
@@ -1077,7 +1077,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 }
 
                 // An opponent (AI or remote human) acted: the player now knows something, so no undo past this point
-                if (!pPlayerPriority.getController().isGuiPlayer()) {
+                if (!game.getUndoManager().isOwner(pPlayerPriority)) {
                     game.getUndoManager().barrier("Opponent acted");
                 }
 
