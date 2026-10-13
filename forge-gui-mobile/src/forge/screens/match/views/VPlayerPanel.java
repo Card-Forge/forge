@@ -25,6 +25,8 @@ import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
@@ -62,6 +64,33 @@ public class VPlayerPanel extends FContainer {
 
     //how long the zone display takes to slide in when a zone tab is tapped in landscape mode
     private static final float SLIDE_DURATION = 0.2f;
+
+    //alternate landscape layout: the open card zone is a box in the panel's outer corner with the command zone above it
+    private static final float ALT_ZONE_HEIGHT_RATIO = 0.5f;  //box height as a fraction of panel height
+    private static final float ALT_MANA_LABEL_RATIO = 0.6f;     //width of one mana icon in the alternate layout, as a fraction of the box height
+    private static final float ALT_ZONE_MAX_WIDTH_RATIO = 0.6f; //the box grows with its cards up to this fraction of the space between the tab columns
+    private static int altZoneLayoutCache = -1;
+
+    public static boolean isAltZoneLayout() {
+        if (!Forge.isLandscapeMode()) { return false; }
+        if (altZoneLayoutCache < 0) { reloadAltZoneLayout(); }
+        return altZoneLayoutCache == 1;
+    }
+
+    /** Call when the setting changes. */
+    public static void reloadAltZoneLayout() {
+        altZoneLayoutCache = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS) ? 1 : 0;
+    }
+
+    /** @return true if this display is the card zone box of the alternate layout (the command zone never is) */
+    public boolean isStripDisplay(VDisplayArea display) {
+        return isAltZoneLayout() && isBoxDisplay(display) && display != commandZone;
+    }
+
+    //displays that live in the corner box of the alternate layout: card zones and the mana pool
+    private static boolean isBoxDisplay(VDisplayArea display) {
+        return display instanceof VCardDisplayArea || display instanceof VManaPool;
+    }
 
     /**
      * Zones to include in the extra zones dropdown.
@@ -232,6 +261,7 @@ public class VPlayerPanel extends FContainer {
 
     private void startSlideAnimation(boolean fieldToo) {
         stopSlideAnimation();
+        boxWidthCur = -1f; //the card zone box snaps to the size of the newly selected zone
         if (!Forge.isLandscapeMode() || getWidth() <= 0) {
             slideProgress = 1f;
             slideFieldToo = false;
@@ -445,6 +475,7 @@ public class VPlayerPanel extends FContainer {
             switch (zoneType) {
                 case Graveyard, Library, Exile, Stack -> zoneTabs.get(ZoneType.Flashback).update();
             }
+            refreshAltBox();
         }
     }
 
@@ -614,6 +645,10 @@ public class VPlayerPanel extends FContainer {
 
     //only what moves during slide animations: field, command zone and zone displays
     private void updateAnimatedLayout(float width, float height) {
+        if (isAltZoneLayout()) {
+            updateAltAnimatedLayout(width, height);
+            return;
+        }
         float x = tabColWidth + avatar.getWidth() * 0.6f; //where the phase indicator ends
 
         float fieldWidth = width - x - commonTabWidth;
@@ -635,6 +670,97 @@ public class VPlayerPanel extends FContainer {
             tab.setDisplayBounds(displayLeft, 0, displayAreaWidth, height);
         }
         field.setFieldModifier(0);
+    }
+
+    //alternate landscape layout: the card zone is a box in the outer corner (half the panel high, right aligned),
+    //the command zone sits above it (below it for the flipped player) and the field keeps the rest
+    private void updateAltAnimatedLayout(float width, float height) {
+        final float x = tabColWidth + avatar.getWidth() * 0.6f; //where the phase indicator ends
+        final float regionWidth = width - x - commonTabWidth;   //space between the phase indicator and the common tabs
+        final boolean box = selectedTab != null && isBoxDisplay(selectedTab.getDisplayArea());
+        final float shown = selectedTab == null ? 0f : (slideFieldToo ? slideProgress : 1f);
+        final float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
+
+        final float boxHeight = Math.round(height * ALT_ZONE_HEIGHT_RATIO);
+        final float boxWidth = getBoxWidth(regionWidth, boxHeight);
+        final float boxVisible = box ? boxWidth * shown : 0f;
+        //anything else (the mana pool) keeps the full height side column
+        final float sideWidth = selectedTab == null || box ? 0f : displayAreaWidth * shown;
+
+        float cmdWidth = Math.max(1, Math.min(commandZone.getCount(), 2)) * commandZone.getCardWidth(boxHeight);
+        commandVisibleWidth = cmdWidth * commandProgress;
+        final float fieldRight = x + regionWidth - sideWidth;
+        commandZone.setBounds(fieldRight - commandVisibleWidth, isFlipped() ? height - boxHeight : 0, cmdWidth, boxHeight);
+        final float cmdReserve = commandVisibleWidth > 0 ? commandVisibleWidth + 1 : 0;
+        field.setBounds(x, 0, fieldRight - x - cmdReserve, height);
+        field.setCommandZoneWidth(Math.max(0f, boxVisible - cmdReserve)); //only the outer row is shortened by the box
+
+        final float boxTop = isFlipped() ? 0 : height - boxHeight;
+        final float boxLeft = x + regionWidth - boxWidth * slideProgress;
+        final float sideLeft = width - commonTabWidth - displayAreaWidth + (1f - slideProgress) * displayAreaWidth;
+        for (InfoTab tab : tabs) {
+            if (isBoxDisplay(tab.getDisplayArea())) {
+                tab.setDisplayBounds(boxLeft, boxTop, boxWidth, boxHeight);
+            } else {
+                tab.setDisplayBounds(sideLeft, 0, displayAreaWidth, height);
+            }
+        }
+        field.setFieldModifier(0);
+    }
+
+    private float boxWidthCur = -1f, boxWidthTarget = -1f; //animated width of the alternate layout's card zone box
+    private BoxWidthAnimation boxWidthAnimation;
+
+    //the box is one card wide while empty and grows with its cards, up to a share of the panel width
+    private float getBoxWidth(float regionWidth, float boxHeight) {
+        float cardWidth = commandZone.getCardWidth(boxHeight);
+        float target = cardWidth;
+        VDisplayArea display = selectedTab == null ? null : selectedTab.getDisplayArea();
+        if (display instanceof VManaPool pool) { //a fixed row of mana icons
+            target = pool.getLabelCount() * Math.round(boxHeight * ALT_MANA_LABEL_RATIO);
+        } else if (display instanceof VCardDisplayArea) {
+            target = Math.max(cardWidth, display.getCount() * cardWidth);
+        }
+        target = (float) Math.ceil(Math.min(target, Math.max(cardWidth, regionWidth * ALT_ZONE_MAX_WIDTH_RATIO)));
+        if (boxWidthCur < 0 || selectedTab == null) { //a newly opened zone snaps to its size
+            boxWidthCur = boxWidthTarget = target;
+        } else if (target != boxWidthTarget) {
+            boxWidthTarget = target;
+            if (boxWidthAnimation == null) {
+                boxWidthAnimation = new BoxWidthAnimation();
+                boxWidthAnimation.start();
+            }
+        }
+        return Math.round(boxWidthCur);
+    }
+
+    //zone contents changed: the box follows the card count
+    private void refreshAltBox() {
+        if (selectedTab != null && Forge.isLandscapeMode() && initW > 0 && isAltZoneLayout()) {
+            updateAnimatedLayout(initW, initH);
+        }
+    }
+
+    private class BoxWidthAnimation extends ForgeAnimation {
+        @Override
+        protected boolean advance(float dt) {
+            float diff = boxWidthTarget - boxWidthCur;
+            if (Math.abs(diff) < 1f) {
+                boxWidthCur = boxWidthTarget;
+            } else {
+                boxWidthCur += diff * Math.min(1f, dt * 16f);
+            }
+            if (selectedTab != null && Forge.isLandscapeMode() && initW > 0) {
+                updateAnimatedLayout(initW, initH);
+            }
+            return boxWidthCur != boxWidthTarget;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            if (boxWidthAnimation == this) { boxWidthAnimation = null; }
+            boxWidthCur = boxWidthTarget;
+        }
     }
 
     public float getCommonTabWidth() { return commonTabWidth; }
@@ -715,7 +841,13 @@ public class VPlayerPanel extends FContainer {
             g.fillRect(getDisplayAreaBackColor(), x, top, w, h);
 
             if (Forge.isLandscapeMode()) {
-                g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
+                if (isStripDisplay(selectedDisplayArea)) { //corner box: border on its left and field facing edges
+                    float edgeY = isFlipped() ? bottom : top;
+                    g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
+                    g.drawLine(1, MatchScreen.getBorderColor(), x, edgeY, x + w, edgeY);
+                } else {
+                    g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
+                }
             } else {
                 y = isFlipped() ? top + 1 : bottom;
                 //don't know why infotab gets null here, either way don't crash the gui..
@@ -732,7 +864,7 @@ public class VPlayerPanel extends FContainer {
             float ch = commandZone.getHeight();
             g.fillRect(getDisplayAreaBackColor(), cx, cy, commandVisibleWidth, ch);
             g.drawLine(1, MatchScreen.getBorderColor(), cx, cy, cx, cy + ch);
-            float edgeY = isFlipped() ? cy + ch : cy; //inner edge, away from the panel's outer side
+            float edgeY = isFlipped() != isAltZoneLayout() ? cy + ch : cy; //edge facing the field (the alternate layout puts the command zone on the inner side)
             g.drawLine(1, MatchScreen.getBorderColor(), cx, edgeY, cx + commandVisibleWidth, edgeY);
         }
     }

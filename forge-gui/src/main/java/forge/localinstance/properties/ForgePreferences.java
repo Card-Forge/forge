@@ -152,6 +152,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_UNDO_MODE (ForgeConstants.UNDO_MODE_FREE),
+        UI_SEPARATE_UNDO_BUTTON ("true"),
         UI_DEFAULT_FONT_SIZE("12"),
         UI_CARD_ART_FORMAT("Full"),
         UI_SELECT_FROM_CARD_DISPLAYS("true"),

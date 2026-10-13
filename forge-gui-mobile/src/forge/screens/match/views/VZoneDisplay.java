@@ -78,7 +78,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             return;
 
         clearChildren();
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && layoutVerticallyForLandscapeMode()) {
             //for landscape mode, just show revealed card on top
             for (CardAreaPanel cardPanel : cardPanels.get()) {
                 if (cardPanel != revealedPanel) {
@@ -119,7 +119,12 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     protected boolean layoutVerticallyForLandscapeMode() {
-        return true;
+        return !VPlayerPanel.isAltZoneLayout();
+    }
+
+    @Override
+    protected boolean isHorizontalStrip() {
+        return Forge.isLandscapeMode() && !layoutVerticallyForLandscapeMode();
     }
 
     @Override
