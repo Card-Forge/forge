@@ -4,7 +4,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.net.EventParticipant;
-import forge.gamemodes.net.EventPhase;
 import forge.gamemodes.net.NetworkEvent;
 import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.LimitedPlayer;
@@ -105,7 +104,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
             long humans = participants.stream().filter(EventParticipant::isHuman).count();
             netLog.info("Draft started — {} humans, {} seats total, timer={}s, product={}",
                     humans, participants.size(), event.getPickTimerSeconds(), event.getProductDescription());
-            event.setPhase(EventPhase.DRAFTING);
             captureInitialPackSize();
             dispatches = new ArrayList<>();
             advanceDraft(dispatches);
