@@ -1,0 +1,11 @@
+Name:The Bloodbile Swarm
+ManaCost:3 B R
+Types:Legendary Creature Elemental Insect
+PT:6/6
+K:Ward:Sac<1/Artifact.Blood/blood artifact>
+S:Mode$ Continuous | Affected$ Creature.Other | AffectedZone$ Battlefield | AddType$ Artifact & Blood | AddAbility$ BloodSac | Description$ Other creatures are Blood artifacts in addition to their other types and have "{1}, {T}, Discard a card, Sacrifice this creature: Draw a card."
+SVar:BloodSac:AB$ Draw | Cost$ 1 T Discard<1/Card> Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
+T:Mode$ Sacrificed | ValidCard$ Creature.nonToken | Execute$ TrigExile | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a player sacrifices a nontoken creature or discards a creature card, exile it. It perpetually gains prismatic. You may cast it until the end of your next turn.
+T:Mode$ Discarded | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever a player sacrifices a nontoken creature or discards a creature card, exile it. It perpetually gains prismatic. You may cast it until the end of your next turn.
+
+Oracle:Ward—Sacrifice a Blood artifact.\nOther creatures are Blood artifacts in addition to their other types and have "{1}, {T}, Discard a card, Sacrifice this creature: Draw a card."\Whenever a player sacrifices a nontoken creature or discards a creature card, exile it. It perpetually gains prismatic. You may cast it until the end of your next turn.
