@@ -307,7 +307,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<TrackableObject> highlighted = Sets.newHashSet();
+    private final Set<TrackableObject> highlighted = Sets.newConcurrentHashSet();
 
     @Override
     public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
@@ -329,7 +329,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return highlighted.contains(object);
     }
 
-    private final Set<CardView> selectableCards = Sets.newHashSet();
+    private final Set<CardView> selectableCards = Sets.newConcurrentHashSet();
     private int selectionMin = 0;
     private int selectionMax = 0;
 
@@ -388,6 +388,27 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectableStackItems.clear();
         selectionMin = 0;
         selectionMax = 0;
+    }
+
+    /** Sets the current selection marks and highlights again, for a GUI that passes them on to a view that has lost them. */
+    protected void reapplyMarks() {
+        if (!selectableCards.isEmpty()) {
+            setSelectables(new ArrayList<>(selectableCards), selectionMin, selectionMax);
+        }
+        final List<TrackableObject> targets = new ArrayList<>(selectablePlayers);
+        if (!selectableStackItems.isEmpty()) {
+            for (final StackItemView si : getGameView().getStack()) {
+                if (selectableStackItems.contains(si.getId())) {
+                    targets.add(si);
+                }
+            }
+        }
+        if (!targets.isEmpty()) {
+            setSelectableTargets(targets);
+        }
+        if (!highlighted.isEmpty()) {
+            setHighlighted(new ArrayList<>(highlighted), true);
+        }
     }
 
     protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {

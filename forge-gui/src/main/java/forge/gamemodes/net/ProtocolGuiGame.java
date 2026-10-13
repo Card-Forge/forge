@@ -293,6 +293,8 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         updateGameView();
         // Initialize delta sync by sending the initial full state
         sendFullState();
+        // a peer that opens its view during a prompt has none of the marks sent before
+        reapplyMarks();
     }
 
     @Override
@@ -466,6 +468,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
         syncAndSend(ProtocolMethod.setSelectables, cards, min, max);
     }
 
@@ -476,11 +479,13 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     @Override
     public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        super.setSelectableTargets(targets);
         syncAndSend(ProtocolMethod.setSelectableTargets, targets);
     }
 
     @Override
     public void clearSelectables() {
+        super.clearSelectables();
         syncAndSend(ProtocolMethod.clearSelectables);
     }
 
