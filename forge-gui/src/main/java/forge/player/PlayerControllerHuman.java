@@ -89,6 +89,7 @@ import forge.model.FModel;
 import forge.trackable.TrackableCollection;
 import forge.util.*;
 import forge.util.collect.FCollection;
+import forge.trackable.TrackableObject;
 import forge.util.collect.FCollectionView;
 
 import io.sentry.Sentry;
@@ -1784,11 +1785,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
         } finally {
             keepTargetsMarked = false;
-            // copies: the GUI applies the change later, and these lists are reused
-            getGui().setHighlighted(new ArrayList<>(keptMarks), false);
-            getGui().setHighlightedStackItems(new ArrayList<>(keptStackMarks), false);
+            // Copies: the GUI applies the change later, and this list is reused.
+            if (!keptMarks.isEmpty()) {
+                getGui().setHighlighted(new ArrayList<>(keptMarks), false);
+            }
             keptMarks.clear();
-            keptStackMarks.clear();
         }
     }
 
@@ -2493,8 +2494,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // for a spell being cast it stays up through paying the cost instead (see playChosenSpellAbility)
         if (result && keepTargetsMarked) {
             if (!TargetingProgress.hasLaterTargetingStep(currentAbility)) {
-                keptMarks.addAll(TargetingProgress.chosenEntities(currentAbility));
-                keptStackMarks.addAll(TargetingProgress.chosenStackItems(currentAbility));
+                keptMarks.addAll(TargetingProgress.chosenTargets(currentAbility));
             }
         } else if (!result || !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
             TargetingProgress.clearChosen(getGui(), currentAbility);
@@ -2504,8 +2504,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     /** True while a spell is being cast: what targeting marks as chosen then stays marked until its cost is paid. */
     private boolean keepTargetsMarked;
-    private final List<GameEntityView> keptMarks = new ArrayList<>();
-    private final List<StackItemView> keptStackMarks = new ArrayList<>();
+    private final List<TrackableObject> keptMarks = new ArrayList<>();
 
     public boolean isKeepingTargetsMarked() {
         return keepTargetsMarked;

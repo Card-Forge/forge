@@ -22,7 +22,7 @@ import forge.util.Utils;
  */
 public final class FSelectionBox {
     /** Solid outline of things already chosen in the current prompt (cards, players and stack entries alike). */
-    public static final Color CHOSEN_COLOR = Color.GOLD;
+    public static final Color CHOSEN_COLOR = Color.MAGENTA; // some card have gold or yelllow so make this distinct
 
     private static final float DASH = Utils.scale(5);
     private static final long CYCLE_MS = 700; // time for the dashes to slide by one full pattern

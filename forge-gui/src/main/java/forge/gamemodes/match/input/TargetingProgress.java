@@ -6,6 +6,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
 import forge.gui.interfaces.IGuiGame;
+import forge.trackable.TrackableObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,46 +31,34 @@ public final class TargetingProgress {
         return false;
     }
 
-    /** Cards and players chosen so far by any step of {@code sa}'s whole ability chain. */
-    public static List<GameEntityView> chosenEntities(final SpellAbility sa) {
-        final List<GameEntityView> views = new ArrayList<>();
+    /** Entities and stack items chosen so far by any step of {@code sa}'s whole ability chain. */
+    public static List<TrackableObject> chosenTargets(final SpellAbility sa) {
+        final List<TrackableObject> targets = new ArrayList<>();
         for (SpellAbility step = sa.getRootAbility(); step != null; step = step.getSubAbility()) {
             if (!step.usesTargeting()) {
                 continue;
             }
             for (final GameEntity ge : step.getTargets().getTargetEntities()) {
-                views.add(GameEntityView.get(ge));
-            }
-        }
-        return views;
-    }
-
-    /** Stack items chosen so far by any step of {@code sa}'s whole ability chain. */
-    public static List<StackItemView> chosenStackItems(final SpellAbility sa) {
-        final List<StackItemView> views = new ArrayList<>();
-        for (SpellAbility step = sa.getRootAbility(); step != null; step = step.getSubAbility()) {
-            if (!step.usesTargeting()) {
-                continue;
+                targets.add(GameEntityView.get(ge));
             }
             for (final SpellAbility spell : step.getTargets().getTargetSpells()) {
-                final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceMatchingSpellAbilityID(spell);
+                final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack()
+                        .getInstanceMatchingSpellAbilityID(spell);
                 if (si != null) {
-                    views.add(si.getView());
+                    targets.add(si.getView());
                 }
             }
         }
-        return views;
+        return targets;
     }
 
     /** Marks everything already chosen for {@code sa}'s chain as chosen in the GUI. */
     public static void showChosen(final IGuiGame gui, final SpellAbility sa) {
-        gui.setHighlighted(chosenEntities(sa), true);
-        gui.setHighlightedStackItems(chosenStackItems(sa), true);
+        gui.setHighlighted(chosenTargets(sa), true);
     }
 
     /** Removes every "chosen" mark that belongs to {@code sa}'s chain. */
     public static void clearChosen(final IGuiGame gui, final SpellAbility sa) {
-        gui.setHighlighted(chosenEntities(sa), false);
-        gui.setHighlightedStackItems(chosenStackItems(sa), false);
+        gui.setHighlighted(chosenTargets(sa), false);
     }
 }

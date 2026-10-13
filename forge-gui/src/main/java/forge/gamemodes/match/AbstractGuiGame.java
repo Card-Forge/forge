@@ -245,7 +245,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         currentPlayer = null;
         selectablePlayers.clear();
         selectableStackItems.clear();
-        highlightedStackItems.clear();
+        highlighted.clear();
     }
 
     @Override
@@ -308,27 +308,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<GameEntityView> highlighted = Sets.newHashSet();
+    private final Set<TrackableObject> highlighted = Sets.newHashSet();
 
     @Override
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
         // updateSingleCard reaches the widgets directly, and callers include the game thread
         FThreads.invokeInEdtNowOrLater(() -> {
-            for (final GameEntityView gv : entities) {
-                final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+            for (final TrackableObject object : objects) {
+                final boolean hasChanged = b ? highlighted.add(object) : highlighted.remove(object);
                 if (!hasChanged) continue;
-                if (gv instanceof PlayerView pv) {
+                if (object instanceof PlayerView pv) {
                     updateLives(Collections.singleton(pv));
-                }
-                if (gv instanceof CardView cv) {
+                } else if (object instanceof CardView cv) {
                     updateCard(cv);
                 }
             }
         });
     }
 
-    public boolean isHighlighted(final GameEntityView ge) {
-        return highlighted.contains(ge);
+    public boolean isHighlighted(final TrackableObject object) {
+        return highlighted.contains(object);
     }
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
@@ -345,7 +344,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
     private final Set<Integer> selectableStackItems = Sets.newConcurrentHashSet();
-    private final Set<Integer> highlightedStackItems = Sets.newConcurrentHashSet();
 
     /**
      * Marks the players and stack items the active prompt can pick (cards go through {@link #setSelectables}), replacing
@@ -374,18 +372,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     public boolean isSelectingStackItems() {
         return !selectableStackItems.isEmpty();
-    }
-
-    /** Stack items chosen so far as targets of the spell being cast: what {@link #setHighlighted} does for cards and players. */
-    @Override
-    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
-        for (final StackItemView si : items) {
-            if (highlighted) { highlightedStackItems.add(si.getId()); } else { highlightedStackItems.remove(si.getId()); }
-        }
-    }
-
-    public boolean isHighlighted(final StackItemView item) {
-        return item != null && !highlightedStackItems.isEmpty() && highlightedStackItems.contains(item.getId());
     }
 
     /** A stack entry was picked in this GUI's stack view while stack targets are being chosen. */

@@ -490,7 +490,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
             // stack targets (counterspells and the like): pick the first one offered, as setSelectables does for cards
             if (gameController != null && targets != null) {
                 for (forge.trackable.TrackableObject target : targets) {
-                    if (target instanceof forge.game.spellability.StackItemView item) {
+                    if (target instanceof forge.game.spellability.StackItemView item && !isHighlighted(item)) {
                         scheduleAutoResponse(() -> gameController.selectStackItem(item), 100, "select stack item " + item);
                         break;
                     }

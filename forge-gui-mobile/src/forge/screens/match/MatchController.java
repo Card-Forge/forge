@@ -42,7 +42,6 @@ import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
-import forge.game.spellability.StackItemView;
 import forge.trackable.TrackableObject;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -445,6 +444,12 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean highlighted) {
+        super.setHighlighted(objects, highlighted);
+        Gdx.graphics.requestRendering();
+    }
+
+    @Override
     public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
         super.setSelectableTargets(targets);
         FThreads.invokeInEdtLater(() -> {
@@ -454,12 +459,6 @@ public class MatchController extends NetworkGuiGame {
             }
             Gdx.graphics.requestRendering();
         });
-    }
-
-    @Override
-    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
-        super.setHighlightedStackItems(items, highlighted);
-        Gdx.graphics.requestRendering();
     }
 
     @Override

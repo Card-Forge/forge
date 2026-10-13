@@ -730,11 +730,14 @@ public final class CMatchUI
     }
 
     @Override
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
-        super.setHighlighted(entities, b);
-        if (isSelecting()) {
-            FThreads.invokeInEdtNowOrLater(FloatingZone::refreshSelectionPrompts);
-        }
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
+        super.setHighlighted(objects, b);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            refreshStackTargetMarks();
+            if (isSelecting()) {
+                FloatingZone.refreshSelectionPrompts();
+            }
+        });
     }
 
     @Override
@@ -751,12 +754,6 @@ public final class CMatchUI
             }
             refreshStackTargetMarks();
         });
-    }
-
-    @Override
-    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
-        super.setHighlightedStackItems(items, highlighted);
-        FThreads.invokeInEdtNowOrLater(this::refreshStackTargetMarks);
     }
 
     /** Repaints what shows the marks of players and stack entries: the avatar borders and the stack panel. */

@@ -13,7 +13,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
-import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.server.DeltaSyncManager;
@@ -456,9 +455,9 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         return syncAndSendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean value) {
-        super.setHighlighted(entities, value);
-        syncAndSend(ProtocolMethod.setHighlighted, entities, value);
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean value) {
+        super.setHighlighted(objects, value);
+        syncAndSend(ProtocolMethod.setHighlighted, objects, value);
     }
 
     @Override
@@ -479,11 +478,6 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     @Override
     public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
         syncAndSend(ProtocolMethod.setSelectableTargets, targets);
-    }
-
-    @Override
-    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
-        syncAndSend(ProtocolMethod.setHighlightedStackItems, items, highlighted);
     }
 
     @Override

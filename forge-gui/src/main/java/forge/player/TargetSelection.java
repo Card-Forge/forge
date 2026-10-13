@@ -63,9 +63,6 @@ public class TargetSelection {
 
     private boolean bTargetingDone = false;
 
-    /** Target stack items by tapping them in the stack view instead of a dialog, for GUIs that can (see IGuiGame#canPickStackTargets). */
-    private static final boolean SELECT_STACK_IN_VIEW = true;
-
     private boolean isMandatory() {
         // even if its an optionalTrigger, the targeting is still mandatory
         return ability.isTrigger() || getTgt().getMandatory();
@@ -102,7 +99,7 @@ public class TargetSelection {
         if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
-            if (SELECT_STACK_IN_VIEW && controller.getGui().canPickStackTargets()) {
+            if (controller.getGui().canPickStackTargets()) {
                 // stack items can be picked by tapping them in the stack view, like any other target
                 return chooseStackItemsInView(mandatory, numTargets);
             }

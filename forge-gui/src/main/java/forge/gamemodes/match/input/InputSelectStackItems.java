@@ -38,7 +38,6 @@ public class InputSelectStackItems extends InputSyncronizedBase {
             views.add(si.getView());
         }
         getController().getGui().setSelectableTargets(views);
-        // also what earlier steps of this spell (other modes) already chose
         TargetingProgress.showChosen(getController().getGui(), sa);
     }
 
@@ -49,6 +48,12 @@ public class InputSelectStackItems extends InputSyncronizedBase {
 
     @Override
     protected void showMessage() {
+        // Refreshing the offered stack items also lets headless clients respond to each step of a multi-target prompt.
+        final List<StackItemView> selectable = new ArrayList<>();
+        for (final SpellAbilityStackInstance si : choices) {
+            selectable.add(si.getView());
+        }
+        getController().getGui().setSelectableTargets(selectable);
         final String text = message.contains("%d") ? String.format(message, max - selected.size()) : message;
         showMessage(text, sa == null ? (forge.game.card.CardView) null : sa.getView().getHostCard());
         getController().getGui().updateButtons(getOwner(), selected.size() >= min, allowCancel, true);
@@ -72,7 +77,7 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         if (!wasSelected) {
             selected.add(si);
         }
-        getController().getGui().setHighlightedStackItems(Collections.singletonList(si.getView()), !wasSelected);
+        getController().getGui().setHighlighted(Collections.singletonList(si.getView()), !wasSelected);
         if (selected.size() >= max) {
             selectButtonOK();
         } else {
@@ -86,7 +91,7 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         for (final SpellAbilityStackInstance si : selected) {
             views.add(si.getView());
         }
-        getController().getGui().setHighlightedStackItems(views, false);
+        getController().getGui().setHighlighted(views, false);
     }
 
     @Override
@@ -105,7 +110,6 @@ public class InputSelectStackItems extends InputSyncronizedBase {
     @Override
     protected void onStop() {
         getController().getGui().clearSelectables();
-        // the picks stay marked while later steps follow or the spell's cost is still to be paid; otherwise they go with the prompt
         if (cancelled || sa == null
                 || !(TargetingProgress.hasLaterTargetingStep(sa) || getController().isKeepingTargetsMarked())) {
             unmarkSelected();

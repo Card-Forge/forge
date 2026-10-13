@@ -6,7 +6,6 @@ import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.spellability.StackItemView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
@@ -267,7 +266,7 @@ public interface IGuiGame {
 
     default void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players) {}
 
-    void setHighlighted(Iterable<GameEntityView> entities, boolean b);
+    void setHighlighted(Iterable<? extends TrackableObject> objects, boolean b);
 
     /**
      * Mark {@code cards} as selectable and publish the active selection's
@@ -280,8 +279,6 @@ public interface IGuiGame {
      * {@link #setSelectables}); {@link #clearSelectables()} removes them.
      */
     default void setSelectableTargets(Iterable<? extends TrackableObject> targets) {}
-    /** What {@link #setHighlighted} does for cards and players: marks stack items already chosen as targets. */
-    default void setHighlightedStackItems(Iterable<StackItemView> items, boolean highlighted) {}
     /**
      * Whether this GUI lets the player pick stack items as targets by tapping or clicking them in its stack view (and
      * implements the two methods above). Otherwise targets on the stack are chosen in a dialog. A GUI that forwards
