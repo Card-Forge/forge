@@ -21,6 +21,8 @@ public final class LobbySlot implements Serializable {
     private int team;
     private boolean isArchenemy;
     private boolean isReady;
+    /** This seat is left out of the next match. Its player stays in the lobby. */
+    private boolean sittingOut;
     private boolean isDevMode;
     private Deck deck;
     private ImmutableSet<AIOption> aiOptions;
@@ -139,6 +141,13 @@ public final class LobbySlot implements Serializable {
     }
     public void setIsReady(final boolean isReady) {
         this.isReady = isReady;
+    }
+
+    public boolean isSittingOut() {
+        return sittingOut;
+    }
+    public void setSittingOut(final boolean sittingOut) {
+        this.sittingOut = sittingOut;
     }
 
     public boolean isDevMode() {

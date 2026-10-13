@@ -3,6 +3,7 @@ package forge.gamemodes.net.server;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
@@ -63,6 +64,12 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     /** Set the lobby's declared mode (Constructed / Limited) and broadcast to clients. */
     public void setLimitedMode(boolean limited) {
         getData().setLimitedMode(limited);
+        updateView(true);
+    }
+
+    /** Sets the game type a Limited match starts with. The default is Draft. */
+    public void setLimitedType(GameType type) {
+        getData().setLimitedType(type);
         updateView(true);
     }
 

@@ -107,7 +107,7 @@ public abstract class GameLobby implements IHasGameType {
     public LobbySlot findFirstUnreadySlot() {
         for (int i = 0; i < getNumberOfSlots(); i++) {
             LobbySlot slot = getSlot(i);
-            if (slot == null || slot.getType() == LobbySlotType.OPEN) continue;
+            if (slot == null || slot.getType() == LobbySlotType.OPEN || slot.isSittingOut()) continue;
             if (!slot.isReady()) return slot;
         }
         return null;
@@ -339,9 +339,9 @@ public abstract class GameLobby implements IHasGameType {
         return data.appliedVariants;
     }
 
-    private boolean isEnoughTeams() {
+    private static boolean isEnoughTeams(final List<LobbySlot> slots) {
         int lastTeam = -1;
-        for (final LobbySlot slot : data.slots) {
+        for (final LobbySlot slot : slots) {
             final int team = slot.getTeam();
             if (lastTeam == -1) {
                 lastTeam = team;
@@ -389,7 +389,7 @@ public abstract class GameLobby implements IHasGameType {
     public Runnable startGame() {
         final List<LobbySlot> activeSlots = Lists.newArrayListWithCapacity(getNumberOfSlots());
         for (final LobbySlot slot : data.slots) {
-            if (slot.getType() != LobbySlotType.OPEN) {
+            if (slot.getType() != LobbySlotType.OPEN && !slot.isSittingOut()) {
                 activeSlots.add(slot);
             }
         }
@@ -399,7 +399,7 @@ public abstract class GameLobby implements IHasGameType {
             return null;
         }
 
-        if (!isEnoughTeams()) {
+        if (!isEnoughTeams(activeSlots)) {
             SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotEnoughTeams"));
             return null;
         }
@@ -566,7 +566,7 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
-        final GameType baseGameType = data.isLimitedMode() ? GameType.Draft : GameType.Constructed;
+        final GameType baseGameType = data.isLimitedMode() ? data.getLimitedType() : GameType.Constructed;
         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.setOnMatchOver(this::onMatchOver);
@@ -598,6 +598,7 @@ public abstract class GameLobby implements IHasGameType {
         private final List<LobbySlot> slots = Lists.newArrayList();
         private NetworkEventView eventView;
         private boolean limitedMode;
+        private GameType limitedType = GameType.Draft;
         private String activeEventId;
         private boolean activeConformance;
         private int maximumCommanderBracket = 5; // mirrors DECKGEN_MAXIMUM_COMMANDER_BRACKET default (off)
@@ -622,6 +623,12 @@ public abstract class GameLobby implements IHasGameType {
         }
         public void setLimitedMode(final boolean limited) {
             this.limitedMode = limited;
+        }
+        public GameType getLimitedType() {
+            return limitedType;
+        }
+        public void setLimitedType(final GameType type) {
+            this.limitedType = type;
         }
         public String getActiveEventId() {
             return activeEventId;
