@@ -19,6 +19,9 @@ package forge.ai;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import com.google.common.collect.Table;
 
 import com.google.common.collect.Lists;
 import forge.card.CardStateName;
@@ -36,7 +39,10 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
@@ -72,20 +78,172 @@ public class AiBlockController {
     private boolean lifeInDanger = false;
 
     // set to true when AI is predicting a blocking for another player so it doesn't use hidden information
-    private boolean checkingOther = false;
+    private final boolean checkingOther;
 
-    public AiBlockController(Player p, boolean checkingOther) {
-        this.checkingOther = checkingOther;
+    // the AI whose profile decides whether this assignment may take shortcuts
+    private final Player decider;
+
+    public AiBlockController(Player p, Player decider) {
+        this.checkingOther = decider != p;
+        this.decider = decider;
         ai = p;
     }
 
+    /**
+     * Blockers that give the same answers to the combat predicates are interchangeable to them,
+     * so the expensive ones are evaluated once per class rather than once per card. Built once
+     * per assignment, covering every candidate. Null when the deciding AI is not taking
+     * shortcuts, and every predicate is then evaluated per card.
+     */
+    private Map<Card, Integer> blockerClass;
+
+    /**
+     * Damage prevention lives on whatever card grants it, not on the creature it protects, so two
+     * otherwise identical blockers can take different damage. Collected once per assignment; the
+     * signature then asks whether a blocker is named by any of it.
+     */
+    private List<ReplacementEffect> preventionEffects;
+    private Set<Integer> preventionDefined;
+
+    private void collectPrevention() {
+        preventionEffects = null;
+        preventionDefined = null;
+        for (final Card ca : ai.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+                if (!ReplacementType.DamageDone.equals(re.getMode())
+                        || (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
+                    continue;
+                }
+                if (preventionEffects == null) {
+                    preventionEffects = new ArrayList<>();
+                }
+                preventionEffects.add(re);
+            }
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getApi() != ApiType.PreventDamage || !sa.hasParam("Defined")) {
+                    continue;
+                }
+                for (final Card named : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa)) {
+                    if (preventionDefined == null) {
+                        preventionDefined = new HashSet<>();
+                    }
+                    preventionDefined.add(named.getId());
+                }
+            }
+        }
+    }
+
+    private boolean namedByPrevention(final Card c) {
+        if (preventionDefined != null && preventionDefined.contains(c.getId())) {
+            return true;
+        }
+        if (preventionEffects != null) {
+            for (final ReplacementEffect re : preventionEffects) {
+                if (re.matchesValidParam("ValidTarget", c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private Map<Card, Integer> buildBlockerClasses(final List<Card> possibleBlockers) {
+        collectPrevention();
+        final Map<String, Integer> ids = new HashMap<>();
+        final Map<Card, Integer> classes = new IdentityHashMap<>();
+        for (final Card b : possibleBlockers) {
+            classes.put(b, ids.computeIfAbsent(signature(b), k -> ids.size()));
+        }
+        return classes;
+    }
+
+    /**
+     * Everything the block predicates read that does not change during one assignment. The
+     * engine's own legality answers cover evasion and restrictions; the rest is state the
+     * combat arithmetic reads but no legality answer reflects, such as marked damage.
+     */
+    private String signature(final Card c) {
+        // anything carrying its own attachments, hidden identity or damage prevention stands on its own
+        if (!c.getAttachedCards().isEmpty() || c.isFaceDown() || c.hasPerpetual() || namedByPrevention(c)) {
+            return "self" + c.getId();
+        }
+        final StringBuilder sb = new StringBuilder();
+        sb.append(c.getName()).append('|').append(c.getNetPower()).append('/').append(c.getNetToughness());
+        sb.append('|').append(c.getNetCombatDamage());
+        sb.append('|').append(ComputerUtilCombat.combatantCantBeDestroyed(ai, c) ? 1 : 0);
+        sb.append('|').append(c.getDamage()).append('+').append(c.getTotalAssignedDamage());
+        sb.append('|').append(c.getCounters());
+        sb.append('|').append(c.getType());
+        sb.append('|').append(c.canBlockAny() ? 1 : 0).append('/').append(c.canBlockAdditional());
+        for (final Card m : c.getMustBlockCards()) {
+            sb.append('|').append(m.getId());
+        }
+        final List<KeywordInterface> kws = c.getKeywords();
+        final String[] text = new String[kws.size()];
+        for (int i = 0; i < kws.size(); i++) {
+            text[i] = kws.get(i).getOriginal();
+        }
+        Arrays.sort(text);
+        sb.append('|').append(Arrays.toString(text));
+        final List<String> hidden = new ArrayList<>();
+        for (final String h : c.getHiddenExtrinsicKeywords()) {
+            hidden.add(h);
+        }
+        Collections.sort(hidden);
+        sb.append('|').append(hidden);
+        // granted triggers and abilities are keyed by the effect granting them, which every card it affects shares
+        for (final Table<Long, Long, ?> traits : List.<Table<Long, Long, ?>>of(c.getChangedCardTraitsByText(), c.getChangedCardTraits())) {
+            for (final Table.Cell<Long, Long, ?> t : traits.cellSet()) {
+                sb.append('|').append(t.getRowKey()).append(':').append(t.getColumnKey());
+            }
+            sb.append('/');
+        }
+        for (final Card a : attackers) {
+            sb.append(CombatUtil.canBlock(a, c) ? '1' : '0');
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Class plus the part of the blocker's state that moves as blockers are assigned: which
+     * attackers it is already committed to.
+     */
+    private String memoKey(final Combat combat, final Card blocker) {
+        List<Integer> committed = Collections.emptyList();
+        if (combat != null) {
+            final CardCollection blocked = combat.getAttackersBlockedBy(blocker);
+            if (!blocked.isEmpty()) {
+                committed = new ArrayList<>(blocked.size());
+                for (final Card a : blocked) {
+                    committed.add(a.getId());
+                }
+                Collections.sort(committed);
+            }
+        }
+        return blockerClass.get(blocker) + "#" + committed;
+    }
+
+    private boolean memo(final String predicate, final Combat combat, final Card blocker, final Supplier<Boolean> exact) {
+        if (blockerClass == null) {
+            return exact.get();
+        }
+        return AiCache.memo(AiCache.Scope.CALL, predicate, memoKey(combat, blocker), exact);
+    }
+
     // finds the creatures able to block the attacker
-    private static List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
+    private List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
         final List<Card> blockers = new ArrayList<>();
+        AiCache.clear(AiCache.Scope.CALL);
 
         for (final Card blocker : blockersLeft) {
             // if the blocker can block a creature with lure it can't block a creature without
-            if (CombatUtil.canBlock(attacker, blocker, combat)) {
+            // canBlock with a combat also reads how far the blocker is already committed, so
+            // that goes in the key while the class covers everything stable about the card
+            final boolean answer = memo("canBlock", combat, blocker,
+                    () -> CombatUtil.canBlock(attacker, blocker, combat));
+            if (answer) {
                 boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
                 if (solo && cantBlockAlone) {
                     continue;
@@ -103,8 +261,11 @@ public class AiBlockController {
 
         // Usually don't check attacker static abilities at this point since the attackers have already attacked and, thus,
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
+        AiCache.clear(AiCache.Scope.CALL);
         for (final Card b : blockersLeft) {
-            if (!ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat())) {
+            final boolean answer = memo("blockerSurvives", combat, b,
+                    () -> !ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
+            if (answer) {
                 blockers.add(b);
             }
         }
@@ -117,8 +278,11 @@ public class AiBlockController {
 
         // Usually don't check attacker static abilities at this point since the attackers have already attacked and, thus,
         // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness unless we're simulating an outcome outside of real combat
+        AiCache.clear(AiCache.Scope.CALL);
         for (final Card b : blockersLeft) {
-            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat())) {
+            final boolean answer = memo("blockerKills", combat, b,
+                    () -> ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, attacker.getGame().getPhaseHandler().inCombat()));
+            if (answer) {
                 blockers.add(b);
             }
         }
@@ -1036,6 +1200,8 @@ public class AiBlockController {
         if (attackers.isEmpty()) {
             return;
         }
+        blockerClass = decider.getController() instanceof PlayerControllerAi aic && aic.takesShortcuts()
+                ? buildBlockerClasses(possibleBlockers) : null;
 
         clearBlockers(combat, possibleBlockers);
 

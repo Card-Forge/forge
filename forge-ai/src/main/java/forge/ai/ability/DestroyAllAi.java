@@ -135,7 +135,7 @@ public class DestroyAllAi extends SpellAbilityAi {
                 if (!containsAttacker) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                AiBlockController block = new AiBlockController(ai, false);
+                AiBlockController block = new AiBlockController(ai, ai);
                 block.assignBlockersForCombat(combat);
 
                 if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
