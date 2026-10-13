@@ -8,6 +8,7 @@ import forge.card.mana.ManaCost;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.cost.Cost;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
@@ -72,7 +73,12 @@ public class ManaAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if (logic.startsWith("ManaRitual")) {
-             return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
+            if (ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai)) {
+                return true;
+            }
+            // Storage lands are tapped without removing counters at the end of the opponent's turn
+            // so the next upkeep trigger can put a storage counter on them.
+            return isStorageArmWindow(ai, sa, ph) && !sa.getHostCard().isTapped();
         }
         if ("AtOppEOT".equals(logic)) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
@@ -131,6 +137,15 @@ public class ManaAi extends SpellAbilityAi {
     public static boolean doManaRitualLogic(Player ai, SpellAbility sa, boolean fromTrigger) {
         final Card host = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
+
+        if (isStorageArmWindow(ai, sa, ai.getGame().getPhaseHandler())) {
+            if (host.isTapped()) {
+                return false;
+            }
+            // Arm tap: remove no counters and add no mana, just tap before the AI's upkeep.
+            sa.setXManaCostPaid(0);
+            return true;
+        }
 
         if (sa.usesTargeting()) { // Rousing Refrain
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -251,6 +266,26 @@ public class ManaAi extends SpellAbilityAi {
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
         return castableSpells.size() > 0;
+    }
+
+    // The end of the opponent's turn, where a storage land (AIUntapPreference$ StorageLand)
+    // should be tapped so it can accrue a storage counter on the AI's next upkeep.
+    private static boolean isStorageArmWindow(Player ai, SpellAbility sa, PhaseHandler ph) {
+        return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
+                && "StorageLand".equals(sa.getHostCard().getSVar("AIUntapPreference"))
+                && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class);
+    }
+
+    @Override
+    protected boolean willPayCosts(final Player payer, final SpellAbility sa, final Cost cost, final Card source) {
+        if (isStorageArmWindow(payer, sa, payer.getGame().getPhaseHandler())) {
+            // The arm tap removes zero storage counters on purpose, which the generic AI cost
+            // check refuses. Its cost is only the tap, so verify the remaining cost parts as usual.
+            return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                    && ComputerUtilCost.checkDiscardCost(payer, cost, source, sa)
+                    && ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa);
+        }
+        return super.willPayCosts(payer, sa, cost, source);
     }
 
     private boolean improvesPosition(Player ai, SpellAbility sa) {
