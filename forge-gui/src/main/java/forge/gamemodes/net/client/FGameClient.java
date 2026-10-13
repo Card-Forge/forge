@@ -7,6 +7,7 @@ import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
+import forge.gamemodes.net.WebSocketTunnel;
 import forge.gamemodes.net.event.*;
 import forge.gamemodes.net.server.HostingServer;
 import forge.gui.interfaces.IDraftEventHandler;
@@ -62,6 +63,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private static final int RESUME_WATCH_SECONDS = 5;
     private final IGuiGame clientGui;
     private final SocketAddress address;
+    private final WebSocketTunnel tunnel;
     private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private IDraftEventHandler draftHandler;
@@ -90,6 +92,15 @@ public class FGameClient implements IToServer, IHasForgeLog {
         this.username = username;
         this.clientGui = clientGui;
         this.address = address;
+        this.tunnel = null;
+    }
+
+    /** Connects through a WebSocket on a web server's port. */
+    public FGameClient(String username, IGuiGame clientGui, WebSocketTunnel tunnel) {
+        this.username = username;
+        this.clientGui = clientGui;
+        this.address = tunnel.address();
+        this.tunnel = tunnel;
     }
 
     public String getUsername() {
@@ -124,6 +135,9 @@ public class FGameClient implements IToServer, IHasForgeLog {
                 @Override
                 public void initChannel(final Channel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
+                    if (tunnel != null) {
+                        tunnel.addHandlers(ch);
+                    }
                     pipeline.addLast(
                             new LoggingHandler(LogLevel.INFO),
                             new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
@@ -137,6 +151,9 @@ public class FGameClient implements IToServer, IHasForgeLog {
 
             // Start the connection attempt.
             final Channel newChannel = b.connect(address).sync().channel();
+            if (tunnel != null) {
+                tunnel.awaitOpen(newChannel);
+            }
             synchronized (reconnectLock) {
                 if (shuttingDown) {
                     newChannel.close();
