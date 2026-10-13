@@ -131,6 +131,8 @@ public enum TrackableProperty {
     OracleName(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
     Toughness(TrackableTypes.IntegerType),
+    BasePower(TrackableTypes.IntegerType),
+    BaseToughness(TrackableTypes.IntegerType),
     Loyalty(TrackableTypes.StringType),
     Defense(TrackableTypes.StringType),
     AttractionLights(TrackableTypes.IntegerSetType),
