@@ -343,12 +343,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         if (!HostingServer.isHosting()) {
             return;
         }
-        // Cancel all reconnect timers
-        for (final Timer timer : reconnectTimers.values()) {
-            timer.cancel();
-        }
-        reconnectTimers.clear();
-        disconnectedClients.clear();
+        forgetDisconnectedClients();
         clients.clear();
         afkSlots.clear();
         // Adopted channels run on another server's threads, so shutting down this server's threads does not close them
@@ -513,7 +508,17 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     }
 
     public void setLobby(final ServerGameLobby lobby) {
+        // Seats held for a reconnect belong to the old lobby
+        forgetDisconnectedClients();
         this.localLobby = lobby;
+    }
+
+    private void forgetDisconnectedClients() {
+        for (final Timer timer : reconnectTimers.values()) {
+            timer.cancel();
+        }
+        reconnectTimers.clear();
+        disconnectedClients.clear();
     }
 
     public void unsetReady() {
