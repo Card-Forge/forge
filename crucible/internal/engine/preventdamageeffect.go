@@ -10,19 +10,27 @@ import "fmt"
 // turn. Java builds a command-zone effect per target holding a DamageDone
 // replacement with PreventionEffect$ NextN, which drops away at end of turn
 // and, for a card, when it leaves the battlefield; this port keeps the same
-// shield as a preventShield record (applyPreventShields). Divided amounts,
-// CardChoices$/PlayerChoices$ and PreventionSubAbility$ are not
-// resolved.
+// shield as a preventShield record (applyPreventShields). A
+// DividedAsYouChoose$ target gets a shield of its own share, announced with
+// the targets (DamagePreventEffect.java:105, perTargetAmounts):
+// Remedy's "prevent the next 5 damage ... to any number of targets, divided
+// as you choose". CardChoices$/PlayerChoices$ and PreventionSubAbility$ are
+// not resolved.
 type preventDamageEffect struct{}
 
 func (preventDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "PreventDamage", "Condition", "DividedAsYouChoose",
+	if err := rejectParams(a, "PreventDamage", "Condition",
 		"CardChoices", "PlayerChoices", "PreventionSubAbility", "ShieldEffectTarget"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
+	}
+	if a.targetsErr != nil {
+		// The targets, or their division, could not be asked for as the
+		// ability went on the stack (resolveTargets).
+		return fmt.Errorf("engine: PreventDamage: %w", a.targetsErr)
 	}
 	raw, ok := a.Params.Param("Amount")
 	if !ok {
@@ -46,11 +54,15 @@ func (preventDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 			return fmt.Errorf("engine: PreventDamage: %w", err)
 		}
 	}
-	for _, t := range targets {
+	amounts, err := a.perTargetAmounts("PreventDamage", targets, n)
+	if err != nil {
+		return err
+	}
+	for i, t := range targets {
 		if id, isCard := t.AsCard(); isCard && g.Card(id).Zone != Battlefield {
 			continue
 		}
-		g.preventShields = append(g.preventShields, preventShield{Target: t, Remaining: n})
+		g.preventShields = append(g.preventShields, preventShield{Target: t, Remaining: amounts[i]})
 	}
 	// Radiance$ (DamagePreventEffect.java:102, :115-119).
 	for _, id := range g.radianceCards(a) {

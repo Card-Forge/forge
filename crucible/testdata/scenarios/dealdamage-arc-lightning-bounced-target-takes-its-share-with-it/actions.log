@@ -1,0 +1,19 @@
+# The ai's Arc Lightning divides 3 damage: 2 to Grizzly Bears, 1 to Hill
+# Giant (CR 601.2d). The human Unsummons the Bears in response. CR 608.2b:
+# the Bears are no longer a legal target and their share goes with them
+# (TargetChoices.java:71-82) -- Hill Giant is dealt only its own 1, not the
+# whole 3, and survives.
+startturn ai
+advance 3
+tapformana ai 2 R
+tapformana ai 3 R
+tapformana ai 4 R
+tapformana human 10 U
+queue targets 5,6
+queue divide 2,1
+queue targets 5
+queue paygeneric R
+queue paygeneric R
+queue action ai cast 1
+queue action human cast 9
+passpriority

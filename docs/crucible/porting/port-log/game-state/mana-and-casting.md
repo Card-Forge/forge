@@ -366,19 +366,16 @@ between targeting and resolution -- `DamageDealEffect.java`'s own per-target liv
 effect on top of the shared CR 608.2b check -- while every other target in the same resolution still takes its damage.
 No such check exists for a player target in Java's own loop, so none was added here.
 
-`DividedAsYouChoose$` (Forked Bolt's own uneven-split shape, 74 real lines) is not ported for `DealDamage`: Java records
-the allocation at target-choosing time (`SpellAbility.addDividedAllocation`); `resolveTargets` now announces and carries
-it (`divideAmongTargets`, [`m6-r9-putcounter-targetmin.md`](m6-r9-putcounter-targetmin.md)), but `DealDamage` does not
-read the shares yet, so a line naming it fails loudly rather than dealing the ability's own full `NumDmg$` to every
-target chosen.
+`DividedAsYouChoose$` (Forked Bolt's own uneven-split shape): `resolveTargets` announces the allocation with the targets
+(`divideAmongTargets`, [`m6-r9-putcounter-targetmin.md`](m6-r9-putcounter-targetmin.md)) and `DealDamage` deals each
+target its own share ([`m6-r9-dealdamage-divided.md`](m6-r9-dealdamage-divided.md)).
 
 `fixture/actions.go`'s own `queue targets` verb gained player-name support (`resolveTargetEntities`,
 `resolveAttackTarget`'s own comma-separated-list sibling) -- a real target list can now name a seated player, not just a
 card's `Loaded.CardByFixtureID`. `deal-damage-any-target-lightning-bolt-at-a-planeswalker` is the fixture: a real
 Lightning Bolt cast at an opponent's Narset, Parter of Veils, `Counters:LOYALTY` dropping from 5 to 2. Module tests
 (`dealdamagetargets_test.go`) cover a creature, a planeswalker (loyalty, and dying at zero to the state-based action), a
-Battle, a player, the identical path through `ActivateAbility`, the already-left-the-battlefield skip, and
-`DividedAsYouChoose$` failing loudly.
+Battle, a player, the identical path through `ActivateAbility`, and the already-left-the-battlefield skip.
 
 Closes the M5 "Not ported yet" row for non-combat damage to a planeswalker or a Battle
 (`docs/crucible/porting/port-log/game-state.md`).

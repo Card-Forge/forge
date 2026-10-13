@@ -127,6 +127,55 @@ func checkDivision(amounts []int, n, total int) error {
 	return nil
 }
 
+// perTargetAmounts is the amount a damage effect gives each of targets, the
+// line DamageDealEffect.java:248 and DamagePreventEffect.java:105 share:
+// `sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(o)
+// : amount`. Every share is read before anything is dealt or prevented, so a
+// target with none fails the line before it acts (GO-7): Java's Integer
+// unboxing there would throw. api names the effect in the errors.
+//
+// Refused by name, each with no real corpus line:
+//
+//   - a divided line without ValidTgts$: Java's usesTargeting is false and
+//     every entity takes the whole amount, not a division -- a reading this
+//     port does not guess at;
+//   - a divided line with Radiance$: Java's loop variable keeps the last
+//     target's share and the radiant cards take that
+//     (DamageDealEffect.java:248 then :263-267, DamagePreventEffect.java:105
+//     then :115-119), a quirk of statement order no rule backs.
+func (a *Ability) perTargetAmounts(api string, targets []EntityID, amount int) ([]int, error) {
+	out := make([]int, len(targets))
+	if !a.isDivided() {
+		for i := range out {
+			out[i] = amount
+		}
+		return out, nil
+	}
+	if _, ok := a.Params.Param("ValidTgts"); !ok {
+		return nil, fmt.Errorf("engine: %s: DividedAsYouChoose$ without its own targets not resolvable yet", api)
+	}
+	if _, ok := a.Params.Param("Radiance"); ok || a.radiance != "" {
+		return nil, fmt.Errorf("engine: %s: DividedAsYouChoose$ with Radiance$ not resolvable yet", api)
+	}
+	for i, e := range targets {
+		share, ok := a.dividedShareOf(e)
+		if !ok {
+			return nil, fmt.Errorf("engine: %s: DividedAsYouChoose$: no division was announced for %s", api, describeEntity(e))
+		}
+		out[i] = share
+	}
+	return out, nil
+}
+
+// describeEntity names e for an error: "card N" or "player N".
+func describeEntity(e EntityID) string {
+	if id, ok := e.AsCard(); ok {
+		return fmt.Sprintf("card %d", id)
+	}
+	id, _ := e.AsPlayer()
+	return fmt.Sprintf("player %d", id)
+}
+
 // dividedShareOf is SpellAbility.getDividedValue(target): what target was
 // allocated as a's targets were chosen. false when nothing was allocated to
 // it -- it was not a target then.

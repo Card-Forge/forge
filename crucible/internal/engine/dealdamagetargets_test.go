@@ -3,9 +3,6 @@ package engine_test
 import (
 	"testing"
 
-	"github.com/jczastkiewicz/crucible/internal/carddb"
-	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
-	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/engine"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 )
@@ -195,39 +192,5 @@ func TestDealDamageValidTgtsAnySkipsTargetThatLeftBattlefield(t *testing.T) {
 	}
 	if got := g.Card(target).Damage.Marked; got != 0 {
 		t.Errorf("damage marked on a card that already left the battlefield = %d, want 0", got)
-	}
-}
-
-// DividedAsYouChoose$ (Forked Bolt's own shape) is not ported -- allocating
-// an uneven split across several targets needs a decision at target-choosing
-// time this port has nowhere to carry, so it fails loudly rather than
-// dealing the ability's own full NumDmg$ to every target.
-func TestDealDamageDividedAsYouChooseFailsLoudly(t *testing.T) {
-	t.Parallel()
-
-	g := newGame(t, "a")
-	p := g.Players()[0]
-	g.SetTurnState(1, p, engine.Main1)
-	g.Player(p).ManaPool.Add(mana.Red, 1)
-	target := g.NewCard(creatureDefPT(t, "4", "4"), p, engine.Battlefield)
-	raw := &carddb.Card{Filename: "Forked Bolt"}
-	raw.Faces[0].Present = true
-	raw.Faces[0].Name = "Forked Bolt"
-	raw.Faces[0].Type = cardtype.Parse(attachmentTypeRegistry(t), "Instant")
-	raw.Faces[0].ManaCost = mana.MustParse("R")
-	raw.Faces[0].Abilities = []string{"SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2"}
-	def, cerr := compile.Compile(raw)
-	if cerr != nil {
-		t.Fatalf("compile: %v", cerr)
-	}
-	bolt := g.NewCard(def, p, engine.Hand)
-	c := engine.NewScriptedController()
-	c.QueueTargets([]engine.EntityID{engine.CardEntity(target)})
-
-	if !g.CastSpell(p, bolt, c) {
-		t.Fatal("CastSpell failed casting Forked Bolt")
-	}
-	if err := g.ResolveStack(engine.NewRegistry(), c); err == nil {
-		t.Fatal("ResolveStack succeeded on a DividedAsYouChoose$ line, want an error")
 	}
 }

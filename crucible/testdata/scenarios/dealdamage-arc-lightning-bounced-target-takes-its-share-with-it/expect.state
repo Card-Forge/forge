@@ -1,0 +1,10 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humanhand=Grizzly Bears
+humanbattlefield=Hill Giant|Damage:1;Island|Tapped
+humangraveyard=Unsummon
+ailife=20
+aibattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped
+aigraveyard=Arc Lightning

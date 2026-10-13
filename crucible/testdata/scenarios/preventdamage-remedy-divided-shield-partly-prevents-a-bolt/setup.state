@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Remedy|Id:1
+humanbattlefield=Plains|Id:2;Plains|Id:3;Hill Giant|Id:4
+aihand=Lightning Bolt|Id:9
+aibattlefield=Mountain|Id:10

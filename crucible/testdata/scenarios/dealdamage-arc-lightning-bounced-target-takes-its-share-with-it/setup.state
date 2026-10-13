@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Unsummon|Id:9
+humanbattlefield=Grizzly Bears|Id:5;Hill Giant|Id:6;Island|Id:10
+aihand=Arc Lightning|Id:1
+aibattlefield=Mountain|Id:2;Mountain|Id:3;Mountain|Id:4

@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Electrolyze|Id:1
+humanlibrary=Island|Id:7
+humanbattlefield=Island|Id:2;Mountain|Id:3;Mountain|Id:4
+aibattlefield=Llanowar Elves|Id:5

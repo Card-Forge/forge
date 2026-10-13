@@ -1,0 +1,15 @@
+# Arc Lightning divides 3 damage: 2 to Grizzly Bears, 1 to the ai player.
+# CR 601.2d: the division is announced right after the targets, each target
+# getting at least one; DamageDealEffect.java:248 deals each target its own
+# share, NumDmg$ unread. The Bears die (CR 704.5g), the ai goes to 19.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+queue targets 5,ai
+queue divide 2,1
+queue paygeneric R
+queue paygeneric R
+castspell human 1
+resolvestack

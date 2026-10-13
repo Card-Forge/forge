@@ -1,0 +1,18 @@
+# Remedy divides its 5 prevention: 2 to Hill Giant, 3 to the human player
+# (CR 601.2d; DamagePreventEffect.java:105 gives each target a shield of its
+# own share). The ai's Lightning Bolt then deals 3 to the Giant: its 2-point
+# shield prevents 2 and 1 is marked -- not the whole 5, which would have
+# prevented all of it.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+queue targets 4,human
+queue divide 2,3
+queue paygeneric W
+castspell human 1
+resolvestack
+tapformana ai 10 R
+queue targets 4
+castspell ai 9
+resolvestack

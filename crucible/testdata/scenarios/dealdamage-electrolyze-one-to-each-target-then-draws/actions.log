@@ -1,0 +1,13 @@
+# Electrolyze: 2 damage divided among two targets is the forced division,
+# one each (PlayerControllerHuman.java:2498-2500): no division is queued, so
+# asking for one would fail the run. Llanowar Elves dies, the ai goes to 19,
+# and the SubAbility$ Draw still runs.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 R
+tapformana human 4 R
+queue targets 5,ai
+queue paygeneric R
+castspell human 1
+resolvestack

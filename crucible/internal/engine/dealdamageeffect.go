@@ -51,6 +51,13 @@ import (
 // (:253-256); Java's equalsWithGameTimestamp half of that check is not made
 // for a Defined$ card, which this port does not stamp.
 //
+// DividedAsYouChoose$ (Arc Lightning's "3 damage divided as you choose among
+// one, two, or three targets"): the division was announced with the targets
+// (CR 601.2d, divideAmongTargets) and each target takes its own share from
+// each source (:248), NumDmg$ unread for it. A target dropped under CR 608.2b
+// or gone from the battlefield takes its share with it; the others keep
+// theirs.
+//
 // Not ported (each fails loudly by name rather than dealing the wrong amount
 // to the wrong thing, PORT-8/GO-7): see dealDamageUnresolvedParams.
 type dealDamageEffect struct{}
@@ -63,9 +70,10 @@ type dealDamageEffect struct{}
 //     Optional$ -- each its own further mechanic;
 //   - NoPrevention$/NoRedirection$ -- damagePrevented would apply where
 //     AbilityKey.NoPreventDamage says not to;
-//   - DividedAsYouChoose$/DivideEvenly$/DividerOnResolution$ -- an allocation
-//     chosen at targeting (SpellAbility.addDividedAllocation) or resolution
-//     (assignCombatDamage) this port has nowhere to carry;
+//   - DivideEvenly$/DividerOnResolution$ -- Fireball's even split and
+//     Master of the Wild Hunt's assignCombatDamage at resolution
+//     (:188-193, :220-241). DividedAsYouChoose$ resolves: each target takes
+//     the share announced with it (perTargetAmounts, dividedtargets.go);
 //   - CardChoices$/PlayerChoices$/Random$ -- a choice outside Defined$/
 //     targets (:150-176);
 //   - RelativeTarget$ -- Defined$ re-read relative to each source (:243-245);
@@ -79,7 +87,7 @@ type dealDamageEffect struct{}
 var dealDamageUnresolvedParams = [...]string{
 	"Condition", "TriggeredSpellAbility", "CounterNum", "Optional",
 	"NoPrevention", "NoRedirection",
-	"DividedAsYouChoose", "DivideEvenly", "DividerOnResolution",
+	"DivideEvenly", "DividerOnResolution",
 	"CardChoices", "PlayerChoices", "Random",
 	"RelativeTarget",
 	"ReplaceDyingDefined", "ReplaceDyingCondition",
@@ -100,6 +108,12 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
+	}
+	if a.targetsErr != nil {
+		// The targets, or their DividedAsYouChoose$ division, could not be
+		// asked for as the ability went on the stack (resolveTargets): it
+		// would otherwise deal its damage to no target, silently.
+		return fmt.Errorf("engine: DealDamage: %w", a.targetsErr)
 	}
 	sources, err := damageSources(g, a)
 	if err != nil {
@@ -128,6 +142,12 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if err != nil {
 		return err
 	}
+	// DamageDealEffect.java:248: a DividedAsYouChoose$ target takes its own
+	// share, every other target NumDmg$.
+	amounts, err := a.perTargetAmounts("DealDamage", targets, dmg)
+	if err != nil {
+		return err
+	}
 	if spec, ok := a.Params.Param("OptionalDecider"); ok {
 		// DamageDealEffect.java:180-185: the first player OptionalDecider$
 		// names may decline the whole damage; nobody named, nobody asked.
@@ -147,18 +167,18 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	}
 	for _, src := range sources {
 		deathtouch := g.Card(src).HasKeyword("Deathtouch")
-		for _, e := range targets {
+		for i, e := range targets {
 			if cid, ok := e.AsCard(); ok {
 				if !damageTargetInPlay(g.Card(cid)) {
 					continue
 				}
-				if err := recordCardDamage(g, a, batch, src, cid, dmg, deathtouch); err != nil {
+				if err := recordCardDamage(g, a, batch, src, cid, amounts[i], deathtouch); err != nil {
 					return err
 				}
 				continue
 			}
 			if _, ok := e.AsPlayer(); ok {
-				batch.add(src, e, dmg)
+				batch.add(src, e, amounts[i])
 			}
 		}
 		// Radiance$: the permanents sharing a color with a target take the
