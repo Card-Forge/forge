@@ -6,10 +6,12 @@ import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.combat.CombatUtil;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
 import forge.game.cost.Cost;
@@ -469,11 +471,78 @@ public class AnimateAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
+        // Pure land-type-granting animations (e.g. Tidal Warrior): turning one of the
+        // defending player's lands into a basic type can unlock landwalk attackers or
+        // attackers that need the defender to control that type.
+        String grantedType = null;
+        for (final String basic : MagicColor.Constant.BASIC_LANDS) {
+            if (types.hasSubtype(basic)) {
+                grantedType = basic;
+                break;
+            }
+        }
+        if (grantedType != null && !types.isCreature()
+                && (ph.is(PhaseType.MAIN1, ai) || ph.is(PhaseType.COMBAT_BEGIN))) {
+            final Card land = chooseLandUnlockTarget(ai, grantedType, list);
+            if (land != null) {
+                rememberAnimatedThisTurn(ai, land);
+                sa.getTargets().add(land);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
         // this can do a reasonably good job of picking a good target
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
+     * A land of a defending player that becomes the given basic type to unlock an AI attacker:
+     * landwalk creatures become unblockable, and creatures that can only attack if the
+     * defending player controls that type become able to attack.
+     */
+    private Card chooseLandUnlockTarget(final Player ai, final String landType, final CardCollection targetable) {
+        final Player defender = ai.getWeakestOpponent();
+        if (defender.getLandsInPlay().anyMatch(l -> l.getType().hasSubtype(landType))) {
+            // landwalk attackers are already unblockable and type-restricted attackers already attack
+            return null;
+        }
+        final CardCollection lands = CardLists.filter(targetable,
+                l -> l.getController().equals(defender) && !l.getType().hasSubtype(landType));
+        if (lands.isEmpty()) {
+            return null;
+        }
+        for (final Card c : ai.getCreaturesInPlay()) {
+            if (c.isTapped()) {
+                continue;
+            }
+            boolean unlocked = false;
+            if (c.hasKeyword("Landwalk:" + landType)) {
+                unlocked = ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, c);
+            } else if (hasAttacksOnlyWithType(c, landType) && !CombatUtil.canAttack(c, defender)
+                    && !c.hasSickness() && c.getNetPower() >= 2) {
+                // type-restricted attackers fail the attack mock because of the very lock
+                // being unlocked here, so gate them on basic attack fitness instead
+                unlocked = true;
+            }
+            if (unlocked) {
+                return ComputerUtilCard.getWorstAI(lands);
+            }
+        }
+        return null;
+    }
+
+    private boolean hasAttacksOnlyWithType(final Card c, final String landType) {
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if ("CantAttack".equals(st.getParamOrDefault("Mode", ""))
+                    && ("controls" + landType).equals(st.getParam("UnlessDefender"))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Card becomeAnimated(final Card card, final SpellAbility sa) {
