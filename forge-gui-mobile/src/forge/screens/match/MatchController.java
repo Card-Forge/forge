@@ -68,6 +68,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VPhaseIndicator;
@@ -277,7 +278,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
-        cancelWaitingTimer();
+        cancelAwaitNextInput();
         view.getPrompt(player).setMessage(message, card);
     }
 
@@ -439,6 +440,11 @@ public class MatchController extends NetworkGuiGame {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);
         }
+    }
+
+    @Override
+    public void onSnapshotRestored() {
+        VCardDisplayArea.CardAreaPanel.resetForUndo();
     }
 
     @Override

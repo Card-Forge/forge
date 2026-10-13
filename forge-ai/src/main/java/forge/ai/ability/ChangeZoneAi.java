@@ -1026,14 +1026,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         // prefer post-combat unless targeting opponent's stuff or part of another ability
                         if (immediately || sa.getParent() != null || sa.isTrigger() || !opponentBlinkTargets.isEmpty() || !game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
                             while (!blinkTargets.isEmpty() && sa.canAddMoreTarget()) {
-                                Card choice = null;
+                                Card choice;
                                 // first prefer targeting opponents stuff
-                                if (!opponentBlinkTargets.isEmpty()) {
+                                if (opponentBlinkTargets.isEmpty()) {
+                                    choice = ComputerUtilCard.getBestAI(blinkTargets);
+                                } else {
                                     choice = ComputerUtilCard.getBestAI(opponentBlinkTargets);
                                     opponentBlinkTargets.remove(choice);
-                                }
-                                else {
-                                    choice = ComputerUtilCard.getBestAI(blinkTargets);
                                 }
                                 sa.getTargets().add(choice);
                                 blinkTargets.remove(choice);
@@ -1082,12 +1081,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.filterControlledBy(list, ai);
             } else if (sa.hasParam("AttachedTo")) {
                 list = CardLists.filter(list, c -> {
-                    for (SpellAbility attach : c.getSpellAbilities()) {
-                        if ("Pump".equals(attach.getParam("AILogic"))) {
-                            return true; //only use good auras
-                        }
-                    }
-                    return false;
+                    // only use good auras
+                    return !c.isAura() || "Pump".equals(c.getSVar("AttachAILogic"));
                 });
             }
         }
@@ -1483,13 +1478,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
-                    if (!attachedTo.getController().isOpponentOf(ai)) {
-                        // If the AI is not the controller of the attachedTo card, then it is not a valid target.
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        // If the AI is the controller of the attachedTo card, then it is a valid target.
+                    if (attachedTo.getController().isOpponentOf(ai)) {
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         } else if (isPreferredTarget(ai, sa, mandatory, true)) {
@@ -1577,16 +1569,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Player activator = sa.getActivatingPlayer();
 
         CardLists.shuffle(fetchList);
-        // Save a card as a default, in case we can't find anything suitable.
+        // Save a card as a default, in case we can't find anything suitable
         Card first = fetchList.get(0);
 
         if (ZoneType.Battlefield.equals(destination)) {
-            fetchList = CardLists.filter(fetchList, c1 -> {
-                if (c1.getType().isLegendary()) {
-                    return !decider.isCardInPlay(c1.getName());
-                }
-                return true;
-            });
+            fetchList = CardLists.filter(fetchList, c1 -> !c1.getType().isLegendary() || !decider.isCardInPlay(c1.getName()));
             if (!sa.hasParam("FaceDown")) {
                 // an Aura with nothing to enchant would stay where it is
                 final Game game = decider.getGame();
@@ -1596,12 +1583,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         || game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.canBeAttached(c1, null)));
             }
             if (player.isOpponentOf(decider) && sa.hasParam("GainControl") && activator.equals(decider)) {
-                fetchList = CardLists.filter(fetchList, c12 -> !ComputerUtilCard.isCardRemAIDeck(c12) && !ComputerUtilCard.isCardRemRandomDeck(c12));
+                fetchList = CardLists.filter(fetchList, c1 -> !ComputerUtilCard.isCardRemAIDeck(c1) && !ComputerUtilCard.isCardRemRandomDeck(c1));
             }
         }
         if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)
                 || (ZoneType.Library.equals(destination) && origin.contains(ZoneType.Hand))) {
-            // Exiling or bouncing stuff
+            // Exiling or bouncing
             if (player.isOpponentOf(decider)) {
                 c = ComputerUtilCard.getBestAI(fetchList);
             } else {

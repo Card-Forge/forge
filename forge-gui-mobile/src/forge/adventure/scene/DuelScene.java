@@ -114,7 +114,7 @@ public class DuelScene extends ForgeScene {
             float h = getHeight();
             float w = h / FCardPanel.ASPECT_RATIO;
             float xPos = (getWidth() - w) / 2;
-            CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top, true);
+            CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top);
         }
     }
 

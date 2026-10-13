@@ -83,6 +83,8 @@ public class DeltaSyncManager implements IHasForgeLog {
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
     // Used to block stale cross-reference replacements
     private final Map<Integer, CardView> authoritativeInstances = new HashMap<>();
+    // Per-object detail of the current collectDeltas call, logged as one line
+    private final StringBuilder walkTrace = new StringBuilder();
 
     // Not atomic: only accessed from game thread
     // Defer the first checksum until the game state stabilizes — seq=1 races
@@ -113,6 +115,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         // need parent-before-child insertion order
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();
         Set<Integer> currentObjectIds = null;
+        walkTrace.setLength(0);
 
         // A fresh visited set per attempt: reusing it would make walkAndCollect return at the
         // root and collect nothing. Deltas already gathered are kept, because the dirty flags
@@ -154,6 +157,10 @@ public class DeltaSyncManager implements IHasForgeLog {
 
         if (!newObjects.isEmpty()) {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
+        }
+        if (walkTrace.length() > 0) {
+            // e.g. 0x30000001[Phase] +0x20000007(8) ~0x00000046(14): changed props, new object (+), replaced instance (~)
+            netLog.trace("[DeltaSync] Collected:{}", walkTrace);
         }
 
         sequenceNumber++;
@@ -266,8 +273,7 @@ public class DeltaSyncManager implements IHasForgeLog {
                 } else {
                     objectDeltas.put(deltaKey, delta);
                 }
-                netLog.trace("[DeltaSync] Delta: key={} id={}, props={}",
-                        String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
+                walkTrace.append(String.format(" 0x%08X", deltaKey)).append(delta.keySet());
             }
             return;
         }
@@ -286,9 +292,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         registeredByKey.put(deltaKey, obj);
         if (!allProps.isEmpty()) {
             newObjects.put(deltaKey, allProps);
-            netLog.trace("[DeltaSync] {}: key={} id={}, {} props",
-                    old != null ? "Replaced instance" : "New object",
-                    String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
+            walkTrace.append(String.format(" %s0x%08X(%d)", old != null ? "~" : "+", deltaKey, allProps.size()));
         }
     }
 

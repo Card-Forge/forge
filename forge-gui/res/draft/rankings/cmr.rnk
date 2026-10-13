@@ -1,0 +1,362 @@
+//Rank|Name|Rarity|Set
+#1|Akroma, Vision of Ixidor|M|cmr
+#2|Archon of Coronation|M|cmr
+#3|Sweet-Gum Recluse|R|cmr
+#4|Aurora Phoenix|R|cmr
+#5|Court of Ire|R|cmr
+#6|Tevesh Szat, Doom of Fools|M|cmr
+#7|Jeweled Lotus|M|cmr
+#8|Court of Grace|R|cmr
+#9|Amareth, the Lustrous|R|cmr
+#10|Necrotic Hex|R|cmr
+#11|Rakshasa Debaser|R|cmr
+#12|Yurlok of Scorch Thrash|R|cmr
+#13|Colfenor, the Last Yew|R|cmr
+#14|Eligeth, Crossroads Augur|R|cmr
+#15|Liesa, Shroud of Dusk|R|cmr
+#16|Nevinyrral, Urborg Tyrant|R|cmr
+#17|Austere Command|R|cmr
+#18|Sphinx of the Second Sun|M|cmr
+#19|Hellkite Courser|M|cmr
+#20|Kamahl, Heart of Krosa|M|cmr
+#21|Jeska, Thrice Reborn|M|cmr
+#22|Keeper of the Accord|R|cmr
+#23|Emberwilde Captain|R|cmr
+#24|Court of Ambition|R|cmr
+#25|Zara, Renegade Recruiter|R|cmr
+#26|Plague Reaver|R|cmr
+#27|Staff of Domination|R|cmr
+#28|Slash the Ranks|R|cmr
+#29|Dawnglade Regent|R|cmr
+#30|Sengir, the Dark Baron|R|cmr
+#31|Belbe, Corrupted Observer|R|cmr
+#32|Court of Cunning|R|cmr
+#33|Sakashima's Protege|R|cmr
+#34|Biowaste Blob|R|cmr
+#35|Halana, Kessig Ranger|U|cmr
+#36|Bell Borca, Spectral Sergeant|R|cmr
+#37|Blasphemous Act|R|cmr
+#38|Kamahl's Will|R|cmr
+#39|Amphin Mutineer|R|cmr
+#40|Akroma's Will|R|cmr
+#41|Elvish Dreadlord|R|cmr
+#42|Blim, Comedic Genius|R|cmr
+#43|Kodama of the East Tree|R|cmr
+#44|Armored Skyhunter|R|cmr
+#45|Imperious Perfect|U|cmr
+#46|Phyrexian Triniform|M|cmr
+#47|Szat's Will|R|cmr
+#48|Coercive Recruiter|R|cmr
+#49|Commander's Plate|M|cmr
+#50|Hans Eriksson|R|cmr
+#51|Immaculate Magistrate|R|cmr
+#52|Sakashima's Will|R|cmr
+#53|Mana Drain|M|cmr
+#54|Nevinyrral's Disk|R|cmr
+#55|Obeka, Brute Chronologist|R|cmr
+#56|Archelos, Lagoon Mystic|R|cmr
+#57|Seraphic Greatsword|M|cmr
+#58|Confiscate|U|cmr
+#59|Faith's Fetters|U|cmr
+#60|Gilt-Leaf Winnower|U|cmr
+#61|Gnostro, Voice of the Crags|R|cmr
+#62|Patron of the Valiant|U|cmr
+#63|Merchant Raiders|U|cmr
+#64|Feast of Succession|U|cmr
+#65|Murder|C|cmr
+#66|Dreamstone Hedron|U|cmr
+#67|Anara, Wolvid Familiar|U|cmr
+#68|Prava of the Steel Legion|U|cmr
+#69|Kangee, Sky Warden|U|cmr
+#70|Livio, Oathsworn Sentinel|R|cmr
+#71|Lathiel, the Bounteous Dawn|R|cmr
+#72|Reclamation Sage|U|cmr
+#73|Skywhaler's Shot|C|cmr
+#74|Monstrous Onslaught|U|cmr
+#75|Alharu, Solemn Ritualist|U|cmr
+#76|Nymris, Oona's Trickster|R|cmr
+#77|Gor Muldrak, Amphinologist|R|cmr
+#78|Ancient Animus|C|cmr
+#79|Soul's Fire|C|cmr
+#80|Fyndhorn Elves|C|cmr
+#81|Cage of Hands|C|cmr
+#82|Arcane Signet|U|cmr
+#83|Cast Down|U|cmr
+#84|Port Razer|M|cmr
+#85|Sifter Wurm|U|cmr
+#86|Meteor Golem|U|cmr
+#87|Welding Sparks|C|cmr
+#88|Frenzied Saddlebrute|U|cmr
+#89|Alena, Kessig Trapper|U|cmr
+#90|Thalisse, Reverent Medium|U|cmr
+#91|Tuya Bearclaw|U|cmr
+#92|Numa, Joraga Chieftain|U|cmr
+#93|Reyav, Master Smith|U|cmr
+#94|Imoti, Celebrant of Bounty|U|cmr
+#95|Ghen, Arcanum Weaver|R|cmr
+#96|Averna, the Chaos Bloom|R|cmr
+#97|Court of Bounty|R|cmr
+#98|Rings of Brighthearth|R|cmr
+#99|Kinsbaile Courier|C|cmr
+#100|Spark Harvest|C|cmr
+#101|Scholar of the Ages|U|cmr
+#102|Iona's Judgment|C|cmr
+#103|Body of Knowledge|R|cmr
+#104|Volcanic Torrent|U|cmr
+#105|Toggo, Goblin Weaponsmith|U|cmr
+#106|Command Tower|C|cmr
+#107|Soulfire Eruption|M|cmr
+#108|Furnace Celebration|U|cmr
+#109|War Room|R|cmr
+#110|Fall from Favor|C|cmr
+#111|Laboratory Drudge|R|cmr
+#112|Vampiric Tutor|M|cmr
+#113|Horizon Scholar|U|cmr
+#114|Hullbreacher|R|cmr
+#115|Nightshade Harvester|R|cmr
+#116|Soul of Eternity|R|cmr
+#117|Aven Surveyor|C|cmr
+#118|Thirst for Knowledge|U|cmr
+#119|Burning Anger|U|cmr
+#120|Stonefury|C|cmr
+#121|Tormod, the Desecrator|U|cmr
+#122|Armix, Filigree Thrasher|U|cmr
+#123|Breeches, Brazen Plunderer|U|cmr
+#124|Ich-Tekik, Salvage Splicer|U|cmr
+#125|Sakashima of a Thousand Faces|M|cmr
+#126|Vault of Champions|R|cmr
+#127|Undergrowth Stadium|R|cmr
+#128|Training Center|R|cmr
+#129|Spectator Seating|R|cmr
+#130|Rejuvenating Springs|R|cmr
+#131|Commander's Sphere|C|cmr
+#132|Cuombajj Witches|U|cmr
+#133|Magus of the Order|R|cmr
+#134|Phyrexian Rager|C|cmr
+#135|Guildless Commons|U|cmr
+#136|Ingenuity Engine|U|cmr
+#137|Flamekin Herald|R|cmr
+#138|Noxious Dragon|U|cmr
+#139|Elvish Visionary|C|cmr
+#140|Slaughter the Strong|U|cmr
+#141|Daring Saboteur|U|cmr
+#142|Scaled Behemoth|U|cmr
+#143|Stingerfling Spider|U|cmr
+#144|Brass Herald|U|cmr
+#145|Grafted Wargear|U|cmr
+#146|Pilgrim's Eye|C|cmr
+#147|Ardenn, Intrepid Archaeologist|U|cmr
+#148|Keleth, Sunmane Familiar|U|cmr
+#149|Malcolm, Keen-Eyed Navigator|U|cmr
+#150|Rebbec, Architect of Ascension|U|cmr
+#151|Gilanra, Caller of Wirewood|U|cmr
+#152|Falthis, Shadowcat Familiar|U|cmr
+#153|Nadier, Agent of the Duskenel|U|cmr
+#154|Miara, Thorn of the Glade|U|cmr
+#155|Captain Vargus Wrath|U|cmr
+#156|Hamza, Guardian of Arashin|R|cmr
+#157|Victimize|U|cmr
+#158|Apex Devastator|M|cmr
+#159|Null Caller|U|cmr
+#160|Captain's Call|C|cmr
+#161|Doomed Traveler|C|cmr
+#162|Ancestral Blade|C|cmr
+#163|Jeska's Will|R|cmr
+#164|Farhaven Elf|C|cmr
+#165|Kitesail Skirmisher|C|cmr
+#166|Sandstone Oracle|U|cmr
+#167|Opposition Agent|R|cmr
+#168|Bladegriff Prototype|R|cmr
+#169|Galestrike|C|cmr
+#170|Annoyed Altisaur|C|cmr
+#171|Filigree Familiar|C|cmr
+#172|Angel of the Dawn|C|cmr
+#173|Seraph of Dawn|C|cmr
+#174|Azure Fleet Admiral|C|cmr
+#175|Prosperous Pirates|C|cmr
+#176|Volcanic Dragon|U|cmr
+#177|Sentinel Spider|C|cmr
+#178|Sunset Pyramid|U|cmr
+#179|Keskit, the Flesh Sculptor|U|cmr
+#180|Ghost of Ramirez DePietro|U|cmr
+#181|Dargo, the Shipwrecker|U|cmr
+#182|Radiant, Serra Archangel|U|cmr
+#183|Siani, Eye of the Storm|U|cmr
+#184|Glacian, Powerstone Engineer|U|cmr
+#185|Abomination of Llanowar|U|cmr
+#186|Juri, Master of the Revue|U|cmr
+#187|Slurrk, All-Ingesting|U|cmr
+#188|Jared Carthalion, True Heir|R|cmr
+#189|Kwain, Itinerant Meddler|R|cmr
+#190|Wrong Turn|R|cmr
+#191|Vow of Flight|U|cmr
+#192|Intangible Virtue|U|cmr
+#193|Promise of Tomorrow|R|cmr
+#194|Command Beacon|R|cmr
+#195|Preordain|C|cmr
+#196|First Response|U|cmr
+#197|Sky Diamond|C|cmr
+#198|Fleshbag Marauder|C|cmr
+#199|Wheel of Misfortune|R|cmr
+#200|Hunter's Insight|U|cmr
+#201|Kor Cartographer|C|cmr
+#202|Run Away Together|C|cmr
+#203|Meteoric Mace|U|cmr
+#204|Kitesail Corsair|C|cmr
+#205|Three Visits|U|cmr
+#206|Coastline Marauders|U|cmr
+#207|Prophetic Prism|C|cmr
+#208|Charcoal Diamond|C|cmr
+#209|Raise the Alarm|C|cmr
+#210|Marble Diamond|C|cmr
+#211|Mask of Memory|U|cmr
+#212|Thorn of the Black Rose|C|cmr
+#213|Warden of Evos Isle|U|cmr
+#214|Supreme Will|U|cmr
+#215|Interpret the Signs|U|cmr
+#216|Sisay's Ring|C|cmr
+#217|Humble Defector|U|cmr
+#218|Kangee's Lieutenant|U|cmr
+#219|Deranged Assistant|C|cmr
+#220|Ghastly Demise|C|cmr
+#221|Fire Diamond|C|cmr
+#222|Thought Vessel|U|cmr
+#223|Moss Diamond|C|cmr
+#224|Golem Artisan|U|cmr
+#225|Fencing Ace|U|cmr
+#226|Sailor of Means|C|cmr
+#227|Skaab Goliath|C|cmr
+#228|Skilled Animator|U|cmr
+#229|Trove Tracker|C|cmr
+#230|Crimson Fleet Commodore|C|cmr
+#231|Fathom Fleet Swordjack|U|cmr
+#232|Lightning-Rig Crew|U|cmr
+#233|Silverback Shaman|C|cmr
+#234|Strength of the Pack|U|cmr
+#235|Burnished Hart|U|cmr
+#236|Shimmer Myr|U|cmr
+#237|Rograkh, Son of Rohgahh|U|cmr
+#238|Kediss, Emberclaw Familiar|U|cmr
+#239|Brinelin, the Moon Kraken|U|cmr
+#240|Araumi of the Dead Tide|U|cmr
+#241|Sanitarium Skeleton|C|cmr
+#242|Rootweaver Druid|R|cmr
+#243|Staunch Throneguard|C|cmr
+#244|Bitter Revelation|C|cmr
+#245|Perilous Myr|C|cmr
+#246|Vow of Wildness|U|cmr
+#247|Vow of Lightning|U|cmr
+#248|Vow of Duty|U|cmr
+#249|Vow of Torment|U|cmr
+#250|Horizon Stone|R|cmr
+#251|Gift of Paradise|C|cmr
+#252|Omenspeaker|C|cmr
+#253|Path of Ancestry|C|cmr
+#254|Ninth Bridge Patrol|C|cmr
+#255|Dragon Mantle|C|cmr
+#256|Demonic Lore|U|cmr
+#257|Makeshift Munitions|C|cmr
+#258|Natural Reclamation|C|cmr
+#259|Valakut Invoker|C|cmr
+#260|Forceful Denial|C|cmr
+#261|Eyeblight Cullers|C|cmr
+#262|Exquisite Huntmaster|C|cmr
+#263|Entourage of Trest|C|cmr
+#264|Briarblade Adept|C|cmr
+#265|Maelstrom Colossus|C|cmr
+#266|Siren Stormtamer|U|cmr
+#267|Mnemonic Deluge|M|cmr
+#268|Wildheart Invoker|C|cmr
+#269|Fertilid|C|cmr
+#270|Armorcraft Judge|U|cmr
+#271|Terramorphic Expanse|C|cmr
+#272|Palace Sentinels|C|cmr
+#273|Slith Ascendant|C|cmr
+#274|Trusty Packbeast|C|cmr
+#275|Scholar of Stars|C|cmr
+#276|Spontaneous Mutation|C|cmr
+#277|Defiant Salvager|C|cmr
+#278|Pride of the Perfect|U|cmr
+#279|Revenant|U|cmr
+#280|Viscera Seer|C|cmr
+#281|Boarding Party|C|cmr
+#282|Rummaging Goblin|C|cmr
+#283|Sparktongue Dragon|C|cmr
+#284|Ambush Viper|C|cmr
+#285|Fin-Clade Fugitives|C|cmr
+#286|Ivy Lane Denizen|C|cmr
+#287|Ordeal of Nylea|U|cmr
+#288|Scrounging Bandar|C|cmr
+#289|Foundry Inspector|C|cmr
+#290|Hero's Blade|U|cmr
+#291|Loreseeker's Stone|U|cmr
+#292|Pennon Blade|U|cmr
+#293|Pirate's Cutlass|C|cmr
+#294|Esior, Wardwing Familiar|U|cmr
+#295|Krark, the Thumbless|R|cmr
+#296|Flood of Recollection|C|cmr
+#297|Inspiring Roar|C|cmr
+#298|Court Street Denizen|C|cmr
+#299|Scroll Rack|M|cmr
+#300|Brazen Freebooter|C|cmr
+#301|Mindless Automaton|U|cmr
+#302|Crow of Dark Tidings|C|cmr
+#303|Nadier's Nightblade|U|cmr
+#304|Anointer of Valor|C|cmr
+#305|Orzhov Advokist|U|cmr
+#306|Squad Captain|C|cmr
+#307|Triumphant Reckoning|M|cmr
+#308|Corpse Churn|C|cmr
+#309|Dhund Operative|C|cmr
+#310|Elvish Doomsayer|C|cmr
+#311|Eyeblight Assassin|C|cmr
+#312|Maalfeld Twins|C|cmr
+#313|Fiery Cannonade|C|cmr
+#314|Goblin Trailblazer|C|cmr
+#315|Ripscale Predator|C|cmr
+#316|Skyraker Giant|C|cmr
+#317|Lifecrafter's Gift|C|cmr
+#318|Lys Alana Bowmaster|C|cmr
+#319|Molder Beast|C|cmr
+#320|Wildsize|C|cmr
+#321|Angelic Armaments|U|cmr
+#322|Jalum Tome|C|cmr
+#323|Lumengrid Gargoyle|C|cmr
+#324|Seer's Lantern|C|cmr
+#325|Workshop Assistant|C|cmr
+#326|Wild Celebrants|C|cmr
+#327|Armillary Sphere|C|cmr
+#328|Soul's Might|C|cmr
+#329|Prying Eyes|C|cmr
+#330|Armory of Iroas|C|cmr
+#331|Angelic Gift|C|cmr
+#332|Benevolent Blessing|C|cmr
+#333|Make a Stand|U|cmr
+#334|Scrapdiver Serpent|C|cmr
+#335|Strategic Planning|C|cmr
+#336|Bladebrand|C|cmr
+#337|Supernatural Stamina|C|cmr
+#338|Champion of the Flame|C|cmr
+#339|Dragon Egg|C|cmr
+#340|Impulsive Pilferer|C|cmr
+#341|Portent of Betrayal|C|cmr
+#342|Amorphous Axe|C|cmr
+#343|Howling Golem|C|cmr
+#344|Spectral Searchlight|C|cmr
+#345|Opal Palace|C|cmr
+#346|Return to Dust|U|cmr
+#347|Universal Solvent|C|cmr
+#348|Eyeblight Massacre|C|cmr
+#349|Dispeller's Capsule|C|cmr
+#350|Aqueous Form|C|cmr
+#351|Explosion of Riches|U|cmr
+#352|Renegade Tactics|C|cmr
+#353|Undying Rage|C|cmr
+#354|Crushing Vines|C|cmr
+#355|Codex Shredder|U|cmr
+#356|Haunted Cloak|C|cmr
+#357|Rupture Spire|C|cmr
+#358|Reshape the Earth|M|cmr
+#359|Open the Armory|U|cmr
+#360|Profane Transfusion|M|cmr
+#361|The Prismatic Piper|C|cmr

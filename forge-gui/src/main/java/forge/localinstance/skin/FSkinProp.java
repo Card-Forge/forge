@@ -350,6 +350,7 @@ public enum FSkinProp {
     ICO_MENU_SEALED       (new int[] {320, 1520, 80, 80}, PropType.ICON),
     ICO_MENU_DRAFT        (new int[] {400, 1520, 80, 80}, PropType.ICON),
     ICO_MENU_CONSTRUCTED  (new int[] {480, 1520, 80, 80}, PropType.ICON),
+    ICO_DECKSTATS         (new int[] {408, 1850, 70, 70}, PropType.ICON),
 
     //interface icons
     ICO_QUESTION        (new int[] {560, 800, 32, 32}, PropType.ICON),

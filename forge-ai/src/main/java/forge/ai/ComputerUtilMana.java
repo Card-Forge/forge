@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
+import com.google.common.collect.SetMultimap;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
@@ -129,7 +130,7 @@ public class ComputerUtilMana {
         return score;
     }
 
-    private static void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards, final ListMultimap<Integer, SpellAbility> manaAbilityMap, final SpellAbility sa, final ManaCostBeingPaid cost) {
+    private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final ListMultimap<Integer, SpellAbility> manaAbilityMap, final SpellAbility sa, final ManaCostBeingPaid cost) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
 
@@ -179,7 +180,7 @@ public class ComputerUtilMana {
         final boolean filtersFirst = freeMana < cost.getConvertedManaCost();
 
         for (final ManaCostShard shard : sourcesForShards.keySet()) {
-            final List<SpellAbility> abilities = sourcesForShards.get(shard);
+            final Collection<SpellAbility> abilities = sourcesForShards.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
 
             if (DEBUG_MANA_PAYMENT) {
@@ -188,6 +189,7 @@ public class ComputerUtilMana {
 
             newAbilities.sort((ability1, ability2) -> {
                 int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
+                boolean checkFurther = false;
 
                 if (preOrder != 0) {
                     // on identical score (most likely basics) try keep access to more colors longer
@@ -202,25 +204,29 @@ public class ComputerUtilMana {
                                 return -1;
                             }
                         }
+                        // prefer to spend color
+                        checkFurther = shard.isOr2Generic();
                     }
-
-                    // sources were previously sorted, so add their index to connect those values to some degree
-                    // This has been disabled because it makes the AI more likely to sacrifice lands than use creatures for mana
-                    // preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
-
-                    return preOrder;
+                    if (!checkFurther) {
+                        // sources were previously sorted, so add their index to connect those values to some degree
+                        // This has been disabled because it makes the AI more likely to sacrifice lands than use creatures for mana
+                        // preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
+                        return preOrder;
+                    }
                 }
 
                 // Mana abilities on the same card
                 String shardMana = shard.toShortString();
 
-                boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
-                boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);
+                boolean payWithAb1 = shardMana.contains(ability1.getManaPart().mana(ability1));
+                boolean payWithAb2 = shardMana.contains(ability2.getManaPart().mana(ability2));
 
                 if (payWithAb1 && !payWithAb2) {
                     return -1;
                 } else if (payWithAb2 && !payWithAb1) {
                     return 1;
+                } else if (checkFurther) {
+                    return preOrder;
                 }
 
                 return ability1.compareTo(ability2);
@@ -652,7 +658,7 @@ public class ComputerUtilMana {
         int phyLifeToPay = 2;
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         ManaCostShard toPay = null;
@@ -914,7 +920,7 @@ public class ComputerUtilMana {
      * @return false if no suitable source could be found for (the rest of) that mana.
      */
     private static boolean prepayFilterManaAbility(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
-            final SpellAbility filter, final ManaCostShard toPay, final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards,
+            final SpellAbility filter, final ManaCostShard toPay, final Multimap<ManaCostShard, SpellAbility> sourcesForShards,
             final List<SpellAbility> paymentList, final boolean effect) {
         final Card filterHost = filter.getHostCard();
         final ManaPool manapool = ai.getManaPool();
@@ -984,7 +990,7 @@ public class ComputerUtilMana {
     /**
      * Creates a mapping between the required mana shards and the available spell abilities to pay for them
      */
-    private static ListMultimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
+    private static Multimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
             final boolean hasConverge) {
         // arrange all mana abilities by color produced.
@@ -998,7 +1004,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         if (hasConverge) {
             // add extra colors for paying converge
             final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
@@ -1305,14 +1311,14 @@ public class ComputerUtilMana {
      * @param manaAbilityMap The map of SpellAbilities that produce mana.
      * @return Were all mana sources found?
      */
-    private static ListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ListMultimap<Integer, SpellAbility> manaAbilityMap,
+    private static Multimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ListMultimap<Integer, SpellAbility> manaAbilityMap,
             final ManaCostBeingPaid cost) {
         // EnumMap-backed so keySet()/entries() iterate in ManaCostShard declaration order rather
         // than the enum's identity-hash order (which varies per JVM run). sortManaAbilities and
         // getNextShardToPay walk this keySet, so a nondeterministic order there made the AI's
         // choice of which source to tap - and thus its whole line of play - nondeterministic.
-        ListMultimap<ManaCostShard, SpellAbility> res =
-                MultimapBuilder.enumKeys(ManaCostShard.class).arrayListValues().build();
+        SetMultimap<ManaCostShard, SpellAbility> res =
+                MultimapBuilder.enumKeys(ManaCostShard.class).linkedHashSetValues().build();
 
         // filter abilities add generic mana to the cost when used, so keep generic sources at hand for them
         final boolean hasFilterSources = manaAbilityMap.get(ManaAtom.GENERIC).stream().anyMatch(m -> getGenericCostToActivate(m) > 0);
@@ -1332,10 +1338,12 @@ public class ComputerUtilMana {
 
             if (shard.isOr2Generic()) {
                 Integer colorKey = (int) shard.getColorMask();
-                if (manaAbilityMap.containsKey(colorKey))
+                if (manaAbilityMap.containsKey(colorKey)) {
                     res.putAll(shard, manaAbilityMap.get(colorKey));
-                if (manaAbilityMap.containsKey(ManaAtom.GENERIC))
+                }
+                if (manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
                     res.putAll(shard, manaAbilityMap.get(ManaAtom.GENERIC));
+                }
                 continue;
             }
 

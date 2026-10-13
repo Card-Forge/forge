@@ -3,6 +3,10 @@ Code=MBC
 Date=2026-11-09
 Name=Mystery Booster Commander Edition
 Type=Draft
+DraftType=Commander
+DoublePick=Always
+DraftImpliedPartnership=MissingIdentity
+MaxMatchPlayers=4
 ScryfallCode=MBC
 
 [cards]

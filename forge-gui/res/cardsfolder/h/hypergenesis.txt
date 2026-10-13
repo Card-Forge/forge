@@ -7,7 +7,7 @@ A:SP$ Repeat | RepeatSubAbility$ DBForget | RepeatCheckSVar$ PutCount | SubAbili
 SVar:DBForget:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBRepeatChoice
 SVar:DBRepeatChoice:DB$ RepeatEach | StartingWith$ You | RepeatSubAbility$ DBChoose | RepeatPlayers$ Player
 SVar:DBChoose:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Creature,Enchantment,Land | ChangeNum$ 1 | Imprint$ True
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:PutCount:Count$Valid Card.IsImprinted
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Y GE1
