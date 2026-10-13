@@ -3,7 +3,6 @@ package forge.gamemodes.match;
 import com.google.common.collect.*;
 
 import forge.deck.Deck;
-import forge.game.GameEntityView;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
 import forge.game.GameView;

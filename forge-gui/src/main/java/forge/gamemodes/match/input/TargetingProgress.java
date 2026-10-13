@@ -4,7 +4,6 @@ import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.StackItemView;
 import forge.gui.interfaces.IGuiGame;
 import forge.trackable.TrackableObject;
 
