@@ -43,7 +43,6 @@ import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.spellability.StackItemView;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.trackable.TrackableObject;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -463,19 +462,9 @@ public class MatchController extends NetworkGuiGame {
         Gdx.graphics.requestRendering();
     }
 
-    /**
-     * A tap on a stack entry while stack targets are being chosen. It reaches the game as the entry's ability through
-     * the existing selectAbility, so no protocol method is added. Local games only; call from the game thread.
-     */
-    public void pickStackItem(final StackItemView item) {
-        final forge.game.Game game = getGameView() == null ? null : getGameView().getGame();
-        if (game == null || item == null) { return; }
-        for (final SpellAbilityStackInstance si : game.getStack()) {
-            if (si.getId() == item.getId()) {
-                getGameController().selectAbility(si.getSpellAbility().getView());
-                return;
-            }
-        }
+    @Override
+    public boolean canPickStackTargets() {
+        return true; // stack entries are tapped in the stack view (VStack)
     }
 
     @Override

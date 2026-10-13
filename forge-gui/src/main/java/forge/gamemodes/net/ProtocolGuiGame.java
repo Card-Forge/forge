@@ -13,9 +13,11 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.server.DeltaSyncManager;
+import forge.trackable.TrackableObject;
 import forge.util.IHasForgeLog;
 import forge.gui.control.GameEventForwarder;
 import forge.gui.interfaces.IGuiGame;
@@ -467,6 +469,21 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         syncAndSend(ProtocolMethod.setSelectables, cards, min, max);
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true;
+    }
+
+    @Override
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        syncAndSend(ProtocolMethod.setSelectableTargets, targets);
+    }
+
+    @Override
+    public void setHighlightedStackItems(final Iterable<StackItemView> items, final boolean highlighted) {
+        syncAndSend(ProtocolMethod.setHighlightedStackItems, items, highlighted);
     }
 
     @Override

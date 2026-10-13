@@ -388,6 +388,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return item != null && !highlightedStackItems.isEmpty() && highlightedStackItems.contains(item.getId());
     }
 
+    /** A stack entry was picked in this GUI's stack view while stack targets are being chosen. */
+    public void pickStackItem(final StackItemView item) {
+        final IGameController controller = getGameController();
+        if (controller != null && item != null) {
+            controller.selectStackItem(item);
+        }
+    }
+
     @Override
     public void clearSelectables() {
         selectableCards.clear();

@@ -2861,18 +2861,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void selectAbility(final SpellAbilityView sa) {
-        if (sa != null && inputProxy.getInput() instanceof InputSelectStackItems) {
-            // a stack entry was tapped while stack targets are chosen; it is identified by its ability, so the
-            // existing protocol method is enough
-            for (final SpellAbilityStackInstance si : getGame().getStack()) {
-                if (sa.equals(si.getSpellAbility().getView())) {
-                    inputProxy.selectAbility(si.getSpellAbility());
-                    return;
-                }
-            }
+    public void selectStackItem(final StackItemView item) {
+        if (item == null || !(inputProxy.getInput() instanceof InputSelectStackItems)) {
             return;
         }
+        // a stack entry was picked while stack targets are chosen; it is identified by its stack instance, and the
+        // input takes it as that instance's ability
+        for (final SpellAbilityStackInstance si : getGame().getStack()) {
+            if (si.getId() == item.getId()) {
+                inputProxy.selectAbility(si.getSpellAbility());
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void selectAbility(final SpellAbilityView sa) {
         if (spellViewCache == null || spellViewCache.isEmpty()) {
             return;
         }

@@ -6,6 +6,7 @@ import forge.game.spellability.StackItemView;
 import forge.player.PlayerControllerHuman;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -71,7 +72,7 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         if (!wasSelected) {
             selected.add(si);
         }
-        getController().getGui().setHighlightedStackItems(List.of(si.getView()), !wasSelected);
+        getController().getGui().setHighlightedStackItems(Collections.singletonList(si.getView()), !wasSelected);
         if (selected.size() >= max) {
             selectButtonOK();
         } else {
