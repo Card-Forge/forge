@@ -68,7 +68,7 @@ public class VPlayerPanel extends FContainer {
     //alternate landscape layout: the open card zone is a box in the panel's outer corner with the command zone above it
     private static final float ALT_ZONE_HEIGHT_RATIO = 0.5f;  //box height as a fraction of panel height
     private static final float ALT_MANA_LABEL_RATIO = 0.6f;     //width of one mana icon in the alternate layout, as a fraction of the box height
-    private static final float ALT_ZONE_MAX_WIDTH_RATIO = 0.6f; //the box grows with its cards up to this fraction of the space between the tab columns
+    private static final float ALT_ZONE_MAX_WIDTH_RATIO = 0.45f; //the box grows with its cards up to this fraction of the space between the tab columns
     private static int altZoneLayoutCache = -1;
 
     public static boolean isAltZoneLayout() {
