@@ -106,7 +106,6 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
      */
     public void resetForReconnect() {
         initialSyncSent = false;
-        objectsRegistered = false;
         fallbackLogged = false;
         syncManager.reset();
     }

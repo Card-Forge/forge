@@ -232,7 +232,8 @@ public class DeckgenUtil {
         PaperCard card = null;
         for(Pair<String, Double> pair : preSelectedCardNames){
             card = StaticData.instance().getCommonCards().getUniqueByName(pair.getLeft());
-            if(card != null &&!card.getRules().getType().isLand()){
+            // The archetype data can predate a ban, so a key card the format no longer allows is passed over
+            if(card != null &&!card.getRules().getType().isLand() && format.getFilterRules().test(card)){
                 break;
             }
         }
