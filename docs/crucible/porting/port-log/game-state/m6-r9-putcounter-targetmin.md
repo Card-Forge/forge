@@ -61,8 +61,8 @@ A target removed under CR 608.2b takes its share with it (`TargetChoices.java:71
 not the whole amount. Charm modes go through `resolveTargets` too (Abzan Charm).
 
 The mechanism is not `PutCounter`'s own: any ability naming `DividedAsYouChoose$` now announces its division.
-`DealDamage` and `PreventDamage` still refuse the param at resolution, so their lines fail as before (48 `DealDamage`
-cards, unchanged in the whole-corpus diff); porting them is reading `dividedShareOf` per target.
+`DealDamage` and `PreventDamage` read `dividedShareOf` per target
+([`m6-r9-dealdamage-divided.md`](m6-r9-dealdamage-divided.md)).
 
 ### New controller decision
 

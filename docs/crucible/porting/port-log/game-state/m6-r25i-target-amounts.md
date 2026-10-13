@@ -34,4 +34,5 @@ engine could not resolve made the cast fail without a word. Each shape below now
   a flag for "layers are being applied".
 - Open plan R25j, Wildfire Howl: `Count$PromisedGift.1.0` (gift is not ported).
 - Open plan R25k, Geth's Summons: still not castable, for a reason other than its amount (`IsCorrupted` resolves).
-- The spells above that now cast are refused later by `DealDamage: DividedAsYouChoose$` (open plan R9).
+- The spells above that now cast divide their damage per target
+  ([`m6-r9-dealdamage-divided.md`](m6-r9-dealdamage-divided.md)).
