@@ -47,25 +47,28 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 29,786 |
-| refused      |  3,734 |
+| plays        | 30,313 |
+| refused      |  3,203 |
 | panicked     |      0 |
 | hung         |      0 |
-| placed       |    360 |
-| inconclusive |    198 |
+| placed       |    367 |
+| inconclusive |    195 |
 
-88.9% of the 33,520 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+90.4% of the 33,516 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 91.4% of 8,639 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 92.8% of 8,640 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
-| Cards | Refusal                                       |
-| ----: | --------------------------------------------- |
-|    54 | `DealDamage`: `NumDmg$` amount not resolvable |
-|    50 | `Draw`: `NumCards$` amount not resolvable     |
-|    44 | `Token`: `TokenAmount$` amount not resolvable |
-|    44 | triggered `AB$`: `Cost$` not resolvable       |
+| Cards | Refusal                                                       |
+| ----: | ------------------------------------------------------------- |
+|    49 | triggered `AB$`: `Cost$` not resolvable                       |
+|    48 | sticker sheets are not ported                                 |
+|    40 | `Animate`: `Triggers$` not resolvable                         |
+|    39 | `DealDamage`: `ReplaceDyingDefined$` not resolvable           |
+|    38 | `DealDamage`: `Defined$` where the trigger recorded no player |
+|    36 | `ChangeZone`: `DestinationAlternative$` not resolvable        |
+|    36 | `Token`: `TokenAttacking$` not resolvable                     |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 
